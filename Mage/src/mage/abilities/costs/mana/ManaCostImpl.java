@@ -31,10 +31,12 @@ package mage.abilities.costs.mana;
 import java.util.UUID;
 
 import mage.Constants.ColoredManaSymbol;
+import mage.Constants.ManaType;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.mana.ManaOptions;
+import mage.filter.Filter;
 import mage.game.Game;
 import mage.players.ManaPool;
 import mage.players.Player;
@@ -44,6 +46,7 @@ public abstract class ManaCostImpl<T extends ManaCostImpl<T>> extends CostImpl<T
     protected Mana payment;
     protected Mana cost;
     protected ManaOptions options;
+    protected Filter sourceFilter;
 
     @Override
     public abstract T copy();
@@ -58,6 +61,8 @@ public abstract class ManaCostImpl<T extends ManaCostImpl<T>> extends CostImpl<T
         this.payment = manaCost.payment.copy();
         this.cost = manaCost.cost.copy();
         this.options = manaCost.options.copy();
+        if (manaCost.sourceFilter != null)
+            this.sourceFilter = manaCost.sourceFilter.copy();
     }
 
     @Override
@@ -81,103 +86,48 @@ public abstract class ManaCostImpl<T extends ManaCostImpl<T>> extends CostImpl<T
         super.clearPaid();
     }
 
+    @Override
+    public Filter getSourceFilter() {
+        return this.sourceFilter;
+    }
+    
+    @Override
+    public void setSourceFilter(Filter filter) {
+        this.sourceFilter = filter;
+    }
+    
     protected boolean assignColored(Ability ability, Game game, ManaPool pool, ColoredManaSymbol mana) {
         // first check special mana
         switch (mana) {
             case B:
-                if (payConditionalBlack(ability, game, pool)) return true;
-                if (pool.getBlack() > 0) {
+                if (pool.pay(ManaType.BLACK, ability, sourceFilter, game)) {
                     this.payment.addBlack();
-                    pool.removeBlack();
                     return true;
                 }
                 break;
             case U:
-                if (payConditionalBlue(ability, game, pool)) return true;
-                if (pool.getBlue() > 0) {
+                if (pool.pay(ManaType.BLUE, ability, sourceFilter, game)) {
                     this.payment.addBlue();
-                    pool.removeBlue();
                     return true;
                 }
                 break;
             case W:
-                if (payConditionalWhite(ability, game, pool)) return true;
-                if (pool.getWhite() > 0) {
+                if (pool.pay(ManaType.WHITE, ability, sourceFilter, game)) {
                     this.payment.addWhite();
-                    pool.removeWhite();
                     return true;
                 }
-                break;
             case G:
-                if (payConditionalGreen(ability, game, pool)) return true;
-                if (pool.getGreen() > 0) {
+                if (pool.pay(ManaType.GREEN, ability, sourceFilter, game)) {
                     this.payment.addGreen();
-                    pool.removeGreen();
                     return true;
                 }
                 break;
             case R:
-                if (payConditionalRed(ability, game, pool)) return true;
-                if (pool.getRed() > 0) {
+                if (pool.pay(ManaType.RED, ability, sourceFilter, game)) {
                     this.payment.addRed();
-                    pool.removeRed();
                     return true;
                 }
                 break;
-        }
-        return false;
-    }
-
-    private boolean payConditionalRed(Ability ability, Game game, ManaPool pool) {
-        if (pool.getConditionalRed(ability, game) > 0) {
-            this.payment.addRed();
-            pool.removeConditionalRed(ability, game);
-            return true;
-        }
-        return false;
-    }
-
-    private boolean payConditionalGreen(Ability ability, Game game, ManaPool pool) {
-        if (pool.getConditionalGreen(ability, game) > 0) {
-            this.payment.addGreen();
-            pool.removeConditionalGreen(ability, game);
-            return true;
-        }
-        return false;
-    }
-
-    private boolean payConditionalWhite(Ability ability, Game game, ManaPool pool) {
-        if (pool.getConditionalWhite(ability, game) > 0) {
-            this.payment.addWhite();
-            pool.removeConditionalWhite(ability, game);
-            return true;
-        }
-        return false;
-    }
-
-    private boolean payConditionalBlue(Ability ability, Game game, ManaPool pool) {
-        if (pool.getConditionalBlue(ability, game) > 0) {
-            this.payment.addBlue();
-            pool.removeConditionalBlue(ability, game);
-            return true;
-        }
-        return false;
-    }
-
-    private boolean payConditionalBlack(Ability ability, Game game, ManaPool pool) {
-        if (pool.getConditionalBlack(ability, game) > 0) {
-            this.payment.addBlack();
-            pool.removeConditionalBlack(ability, game);
-            return true;
-        }
-        return false;
-    }
-
-    private boolean payConditionalColorless(Ability ability, Game game, ManaPool pool) {
-        if (pool.getConditionalColorless(ability, game) > 0) {
-            this.payment.addColorless();
-            pool.removeConditionalColorless(ability, game);
-            return true;
         }
         return false;
     }
@@ -185,41 +135,28 @@ public abstract class ManaCostImpl<T extends ManaCostImpl<T>> extends CostImpl<T
     protected boolean assignColorless(Ability ability, Game game, ManaPool pool, int mana) {
         int conditionalCount = pool.getConditionalCount(ability, game, null);
         while (mana > payment.count() && (pool.count() > 0 || conditionalCount > 0)) {
-            if (payConditionalColorless(ability, game, pool)) continue;
-            if (payConditionalBlack(ability, game, pool)) continue;
-            if (payConditionalBlue(ability, game, pool)) continue;
-            if (payConditionalWhite(ability, game, pool)) continue;
-            if (payConditionalGreen(ability, game, pool)) continue;
-            if (payConditionalRed(ability, game, pool)) continue;
-
-            if (pool.getColorless() > 0) {
+            if (pool.pay(ManaType.COLORLESS, ability, sourceFilter, game)) {
                 this.payment.addColorless();
-                pool.removeColorless();
                 continue;
             }
-            if (pool.getBlack() > 0) {
+            if (pool.pay(ManaType.BLACK, ability, sourceFilter, game)) {
                 this.payment.addBlack();
-                pool.removeBlack();
                 continue;
             }
-            if (pool.getBlue() > 0) {
+            if (pool.pay(ManaType.BLUE, ability, sourceFilter, game)) {
                 this.payment.addBlue();
-                pool.removeBlue();
                 continue;
             }
-            if (pool.getWhite() > 0) {
+            if (pool.pay(ManaType.WHITE, ability, sourceFilter, game)) {
                 this.payment.addWhite();
-                pool.removeWhite();
                 continue;
             }
-            if (pool.getGreen() > 0) {
+            if (pool.pay(ManaType.GREEN, ability, sourceFilter, game)) {
                 this.payment.addGreen();
-                pool.removeGreen();
                 continue;
             }
-            if (pool.getRed() > 0) {
+            if (pool.pay(ManaType.RED, ability, sourceFilter, game)) {
                 this.payment.addRed();
-                pool.removeRed();
                 continue;
             }
             break;

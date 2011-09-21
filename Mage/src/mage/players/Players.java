@@ -30,6 +30,7 @@ package mage.players;
 
 import java.util.LinkedHashMap;
 import java.util.UUID;
+import java.util.Map.Entry;
 
 /**
  *
@@ -40,8 +41,8 @@ public class Players extends LinkedHashMap<UUID, Player> {
 	public Players() {}
 
 	public Players(final Players players) {
-		for (UUID id: players.keySet()) {
-			this.put(id, players.get(id).copy());
+		for (Entry<UUID, Player> entry: players.entrySet()) {
+			this.put(entry.getKey(), entry.getValue().copy());
 		}
 	}
 

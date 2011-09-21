@@ -33,6 +33,7 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.mana.ManaOptions;
+import mage.filter.Filter;
 import mage.game.Game;
 import mage.players.ManaPool;
 import mage.players.Player;
@@ -350,6 +351,18 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     @Override
     public ManaCosts<T> copy() {
         return new ManaCostsImpl(this);
+    }
+
+    @Override
+    public Filter getSourceFilter() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void setSourceFilter(Filter filter) {
+        for (T cost : this) {
+            cost.setSourceFilter(filter);
+        }
     }
 
 }

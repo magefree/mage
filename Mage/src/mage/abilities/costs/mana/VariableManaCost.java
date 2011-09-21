@@ -69,7 +69,7 @@ public class VariableManaCost extends ManaCostImpl<VariableManaCost> implements 
 	public void assignPayment(Game game, Ability ability, ManaPool pool) {
 		payment.add(pool.getMana(filter));
 		payment.add(pool.getAllConditionalMana(ability, game, filter));
-		pool.emptyPoolConditional(ability, game, filter);
+		pool.payX(ability, game, filter);
 	}
 
 	@Override

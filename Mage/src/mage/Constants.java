@@ -65,6 +65,10 @@ public final class Constants {
 
 	}
 
+    public enum ManaType {
+        BLACK, BLUE, GREEN, RED, WHITE, COLORLESS
+    }
+    
 	public enum CardType {
 		ARTIFACT ("Artifact"),
 		CREATURE ("Creature"),

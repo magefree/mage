@@ -59,23 +59,23 @@ public class AddManaOfAnyColorEffect extends ManaEffect<AddManaOfAnyColorEffect>
 		ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
 		Player player = game.getPlayer(source.getControllerId());
 		if (choice.getColor().isBlack()) {
-			player.getManaPool().changeMana(Mana.BlackMana, game, source);
+			player.getManaPool().addMana(Mana.BlackMana, game, source);
 			return true;
 		}
 		else if (choice.getColor().isBlue()) {
-			player.getManaPool().changeMana(Mana.BlueMana, game, source);
+			player.getManaPool().addMana(Mana.BlueMana, game, source);
 			return true;
 		}
 		else if (choice.getColor().isRed()) {
-			player.getManaPool().changeMana(Mana.RedMana, game, source);
+			player.getManaPool().addMana(Mana.RedMana, game, source);
 			return true;
 		}
 		else if (choice.getColor().isGreen()) {
-			player.getManaPool().changeMana(Mana.GreenMana, game, source);
+			player.getManaPool().addMana(Mana.GreenMana, game, source);
 			return true;
 		}
 		else if (choice.getColor().isWhite()) {
-			player.getManaPool().changeMana(Mana.WhiteMana, game, source);
+			player.getManaPool().addMana(Mana.WhiteMana, game, source);
 			return true;
 		}
 		return false;

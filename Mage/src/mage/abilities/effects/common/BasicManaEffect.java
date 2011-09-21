@@ -33,7 +33,7 @@ public class BasicManaEffect extends ManaEffect<BasicManaEffect> {
 
     @Override
 	public boolean apply(Game game, Ability source) {
-		game.getPlayer(source.getControllerId()).getManaPool().changeMana(mana, game, source);
+		game.getPlayer(source.getControllerId()).getManaPool().addMana(mana, game, source);
 		return true;
 	}
 

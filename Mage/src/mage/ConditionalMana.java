@@ -27,9 +27,11 @@
 */
 package mage;
 
+import mage.Constants.ManaType;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.filter.Filter;
+import mage.filter.FilterMana;
 import mage.game.Game;
 
 import java.io.Serializable;
@@ -109,4 +111,17 @@ public class ConditionalMana extends Mana implements Serializable {
 	public String getDescription() {
 		return staticText;
 	}
+
+    public void removeAll(FilterMana filter) {
+		if (filter == null) {
+			return;
+		}
+		if (filter.isBlack()) black = 0;
+		if (filter.isBlue()) blue = 0;
+		if (filter.isWhite()) white = 0;
+		if (filter.isGreen()) green = 0;
+		if (filter.isRed()) red = 0;
+		if (filter.isColorless()) colorless = 0;
+    }
+
 }

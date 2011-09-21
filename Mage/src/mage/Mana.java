@@ -31,6 +31,7 @@ package mage;
 import java.io.Serializable;
 
 import mage.Constants.ColoredManaSymbol;
+import mage.Constants.ManaType;
 import mage.filter.FilterMana;
 import mage.util.Copyable;
 
@@ -40,13 +41,13 @@ import mage.util.Copyable;
  */
 public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
 
-	private int red;
-	private int green;
-	private int blue;
-	private int white;
-	private int black;
-	private int colorless;
-	private int any;
+	protected int red;
+	protected int green;
+	protected int blue;
+	protected int white;
+	protected int black;
+	protected int colorless;
+	protected int any;
 
 	public static final Mana RedMana = RedMana(1);
 	public static final Mana GreenMana = GreenMana(1);
@@ -417,5 +418,46 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
 		}
 		return 0;
 	}
+
+    public int get(ManaType manaType) {
+        switch(manaType) {
+            case BLACK:
+                return black;
+            case BLUE:
+                return blue;
+            case GREEN:
+                return green;
+            case RED:
+                return red;
+            case WHITE:
+                return white;
+            case COLORLESS:
+                return colorless;
+        }
+        return 0;
+    }
+
+    public void set(ManaType manaType, int amount) {
+        switch(manaType) {
+            case BLACK:
+                black = amount;
+                break;
+            case BLUE:
+                blue = amount;
+                break;
+            case GREEN:
+                green = amount;
+                break;
+            case RED:
+                red = amount;
+                break;
+            case WHITE:
+                white = amount;
+                break;
+            case COLORLESS:
+                colorless = amount;
+                break;
+        }
+    }
 
 }

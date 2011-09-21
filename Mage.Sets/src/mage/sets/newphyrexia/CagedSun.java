@@ -206,15 +206,15 @@ class CagedSunEffect extends ManaEffect<CagedSunEffect> {
         if (player != null) {
             ObjectColor color = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
             if (color.isBlack())
-                player.getManaPool().changeMana(Mana.BlackMana, game, source);
+                player.getManaPool().addMana(Mana.BlackMana, game, source);
             else if (color.isBlue())
-                player.getManaPool().changeMana(Mana.BlueMana, game, source);
+                player.getManaPool().addMana(Mana.BlueMana, game, source);
             else if (color.isRed())
-                player.getManaPool().changeMana(Mana.RedMana, game, source);
+                player.getManaPool().addMana(Mana.RedMana, game, source);
             else if (color.isGreen())
-                player.getManaPool().changeMana(Mana.GreenMana, game, source);
+                player.getManaPool().addMana(Mana.GreenMana, game, source);
             else if (color.isWhite())
-                player.getManaPool().changeMana(Mana.WhiteMana, game, source);
+                player.getManaPool().addMana(Mana.WhiteMana, game, source);
         }
         return true;
     }

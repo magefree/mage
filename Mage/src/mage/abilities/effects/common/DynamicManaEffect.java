@@ -63,7 +63,7 @@ public class DynamicManaEffect extends BasicManaEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         computeMana(game, source);
-        game.getPlayer(source.getControllerId()).getManaPool().changeMana(computedMana, game, source);
+        game.getPlayer(source.getControllerId()).getManaPool().addMana(computedMana, game, source);
         return true;
     }
 

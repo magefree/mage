@@ -32,6 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.costs.*;
 import mage.Mana;
 import mage.abilities.mana.ManaOptions;
+import mage.filter.Filter;
 import mage.game.Game;
 import mage.players.ManaPool;
 
@@ -47,6 +48,8 @@ public interface ManaCost extends Cost {
 	public ManaCost getUnpaid();
 	public ManaOptions getOptions();
 	public boolean testPay(Mana testMana);
+    public Filter getSourceFilter();
+    public void setSourceFilter(Filter filter);
 
 	@Override
 	public ManaCost copy();

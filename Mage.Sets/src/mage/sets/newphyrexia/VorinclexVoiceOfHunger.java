@@ -165,27 +165,27 @@ class VorinclexEffect extends ManaEffect<VorinclexEffect> {
             else
                 player.choose(outcome, choice, game);
             if (choice.getChoice().equals("Black")) {
-                player.getManaPool().changeMana(Mana.BlackMana, game, source);
+                player.getManaPool().addMana(Mana.BlackMana, game, source);
                 return true;
             }
             else if (choice.getChoice().equals("Blue")) {
-                player.getManaPool().changeMana(Mana.BlueMana, game, source);
+                player.getManaPool().addMana(Mana.BlueMana, game, source);
                 return true;
             }
             else if (choice.getChoice().equals("Red")) {
-                player.getManaPool().changeMana(Mana.RedMana, game, source);
+                player.getManaPool().addMana(Mana.RedMana, game, source);
                 return true;
             }
             else if (choice.getChoice().equals("Green")) {
-                player.getManaPool().changeMana(Mana.GreenMana, game, source);
+                player.getManaPool().addMana(Mana.GreenMana, game, source);
                 return true;
             }
             else if (choice.getChoice().equals("White")) {
-                player.getManaPool().changeMana(Mana.WhiteMana, game, source);
+                player.getManaPool().addMana(Mana.WhiteMana, game, source);
                 return true;
             }
             else if (choice.getChoice().equals("Colorless")) {
-                player.getManaPool().changeMana(Mana.ColorlessMana, game, source);
+                player.getManaPool().addMana(Mana.ColorlessMana, game, source);
                 return true;
             }
         }
