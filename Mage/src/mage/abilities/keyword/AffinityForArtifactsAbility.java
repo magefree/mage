@@ -41,7 +41,7 @@ import mage.game.Game;
  * Affinity for artifacts
  */
 public class AffinityForArtifactsAbility extends SimpleStaticAbility implements AdjustingSourceCosts {
-    private static FilterControlledPermanent filter = new FilterControlledPermanent();
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent();
 
     static {
         filter.getCardType().add(Constants.CardType.ARTIFACT);
