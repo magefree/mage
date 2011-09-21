@@ -30,6 +30,7 @@ package mage.abilities.effects.common.continious;
 
 import mage.Constants;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -37,47 +38,39 @@ import mage.game.permanent.Permanent;
 /**
  * @author nantuko
  */
-public class AddCardSubtypeAttachedEffect extends ContinuousEffectImpl<AddCardSubtypeAttachedEffect> {
-    private String addedSubtype;
-    private Constants.AttachmentType attachmentType;
+public class AddCardSubTypeTargetEffect extends ContinuousEffectImpl<AddCardSubTypeTargetEffect> {
+    private String addedSubType;
 
-    public AddCardSubtypeAttachedEffect(String addedSubtype, Constants.Duration duration, Constants.AttachmentType attachmentType) {
+    public AddCardSubTypeTargetEffect(String addedSubType, Constants.Duration duration) {
         super(duration, Constants.Layer.TypeChangingEffects_4, Constants.SubLayer.NA, Constants.Outcome.Benefit);
-        this.addedSubtype = addedSubtype;
-        this.attachmentType = attachmentType;
-		setText();
+        this.addedSubType = addedSubType;
     }
 
-    public AddCardSubtypeAttachedEffect(final AddCardSubtypeAttachedEffect effect) {
+    public AddCardSubTypeTargetEffect(final AddCardSubTypeTargetEffect effect) {
         super(effect);
-        this.addedSubtype = effect.addedSubtype;
-        this.attachmentType = effect.attachmentType;
+        this.addedSubType = effect.addedSubType;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent equipment = game.getPermanent(source.getSourceId());
-        if (equipment != null && equipment.getAttachedTo() != null) {
-            Permanent target = game.getPermanent(equipment.getAttachedTo());
-            if (target != null && !target.getSubtype().contains(addedSubtype))
-                target.getSubtype().add(addedSubtype);
+        Permanent target = game.getPermanent(targetPointer.getFirst(source));
+        if (target != null) {
+            if (!target.hasSubtype(addedSubType)) {
+                target.getSubtype().add(addedSubType);
+            }
         }
-        return true;
+        return false;
     }
 
     @Override
-    public AddCardSubtypeAttachedEffect copy() {
-        return new AddCardSubtypeAttachedEffect(this);
+    public AddCardSubTypeTargetEffect copy() {
+        return new AddCardSubTypeTargetEffect(this);
     }
 
-    private void setText() {
+    @Override
+    public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
-        if (attachmentType == Constants.AttachmentType.AURA)
-            sb.append("Enchanted");
-        else if (attachmentType == Constants.AttachmentType.EQUIPMENT)
-            sb.append("Equipped");
-
-        sb.append(" creature becomes ").append(addedSubtype).append(" in addition to its other types"); //TODO add attacked card type detection
-        staticText = sb.toString();
+        sb.append("Target ").append(mode.getTargets().get(0).getTargetName()).append(" becomes ").append(addedSubType).append(" in addition to its other types ").append(duration.toString());
+        return sb.toString();
     }
 }
