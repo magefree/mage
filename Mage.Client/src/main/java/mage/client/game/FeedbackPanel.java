@@ -44,6 +44,7 @@ import java.util.UUID;
 import javax.swing.*;
 
 import mage.client.MageFrame;
+import mage.client.chat.ChatPanel;
 import mage.client.components.MageTextArea;
 import mage.client.dialog.MageDialog;
 import mage.remote.Session;
@@ -67,6 +68,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
 	private Session session;
 	private FeedbackMode mode;
 	private MageDialog connectedDialog;
+	private ChatPanel connectedChatPanel;
 
 	/** Creates new form FeedbackPanel */
 	public FeedbackPanel() {
@@ -125,14 +127,16 @@ public class FeedbackPanel extends javax.swing.JPanel {
 		}
 		this.btnSpecial.setVisible(special);
 		this.btnSpecial.setText("Special");
-		this.btnRight.requestFocus();
 		this.helper.setSpecial("Special", special);
 		if (message.contains("P}")) {
 			this.btnSpecial.setVisible(true);
 			this.btnSpecial.setText("Pay 2 life");
 			this.helper.setSpecial("Pay 2 life", true);
 		}
+
+		requestFocusIfPossible();
 		handleOptions(options);
+
 		this.revalidate();
 		this.repaint();
 		this.helper.setLinks(btnLeft, btnRight, btnSpecial);
@@ -153,6 +157,19 @@ public class FeedbackPanel extends javax.swing.JPanel {
 			if (options.containsKey("dialog")) {
 				connectedDialog = (MageDialog) options.get("dialog");
 			}
+		}
+	}
+
+	// Issue 256: Chat+Feedback panel: request focus prevents players from chatting
+	private void requestFocusIfPossible() {
+		boolean requestFocusAllowed = true;
+		if (connectedChatPanel != null && connectedChatPanel.getTxtMessageInputComponent() != null) {
+			if (connectedChatPanel.getTxtMessageInputComponent().hasFocus()) {
+				requestFocusAllowed = false;
+			}
+		}
+		if (requestFocusAllowed) {
+			this.btnRight.requestFocus();
 		}
 	}
 
@@ -380,6 +397,10 @@ public class FeedbackPanel extends javax.swing.JPanel {
 
 	public FeedbackMode getMode() {
 		return this.mode;
+	}
+
+	public void setConnectedChatPanel(ChatPanel chatPanel) {
+		this.connectedChatPanel = chatPanel;
 	}
 
     private javax.swing.JButton btnLeft;

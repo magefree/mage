@@ -112,6 +112,8 @@ public class GamePanel extends javax.swing.JPanel {
         combat.hideDialog();
         MageFrame.getDesktop().add(pickNumber, JLayeredPane.POPUP_LAYER);
 
+		this.feedbackPanel.setConnectedChatPanel(this.gameChatPanel);
+
         //FIXME: remove from here
 		try {
 	        // Override layout (I can't edit generated code)

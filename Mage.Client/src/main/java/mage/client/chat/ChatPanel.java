@@ -43,6 +43,7 @@ import mage.client.components.ColorPane;
 import mage.remote.Session;
 import mage.view.ChatMessage.MessageColor;
 
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.AbstractTableModel;
 
@@ -180,6 +181,10 @@ public class ChatPanel extends javax.swing.JPanel {
 
 	public void disableInput() {
 		this.txtMessage.setVisible(false);
+	}
+
+	public JTextField getTxtMessageInputComponent() {
+		return this.txtMessage;
 	}
 
 	public void useExtendedView(VIEW_MODE extendedViewMode) {
