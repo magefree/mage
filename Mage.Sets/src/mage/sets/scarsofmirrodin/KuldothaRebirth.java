@@ -30,14 +30,12 @@ package mage.sets.scarsofmirrodin;
 
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.GoblinToken;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
@@ -47,7 +45,7 @@ import java.util.UUID;
  * @author Loki
  */
 public class KuldothaRebirth extends CardImpl<KuldothaRebirth> {
-    private static FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
 
     static {
         filter.getCardType().add(CardType.ARTIFACT);
@@ -71,15 +69,4 @@ public class KuldothaRebirth extends CardImpl<KuldothaRebirth> {
         return new KuldothaRebirth(this);
     }
 
-}
-
-class GoblinToken extends Token {
-    public GoblinToken() {
-        super("Goblin", "1/1 red Goblin creature token");
-		cardType.add(CardType.CREATURE);
-		color = ObjectColor.RED;
-		subtype.add("Goblin");
-		power = new MageInt(1);
-		toughness = new MageInt(1);
-    }
 }

@@ -43,7 +43,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.GoblinToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -82,15 +82,4 @@ public class SiegeGangCommander extends CardImpl<SiegeGangCommander> {
     public SiegeGangCommander copy() {
         return new SiegeGangCommander(this);
     }
-}
-
-class GoblinToken extends Token {
-	public GoblinToken() {
-		super("Goblin", "1/1 red Goblin creature token");
-		cardType.add(CardType.CREATURE);
-        color.setRed(true);
-		subtype.add("Goblin");
-		power = new MageInt(1);
-		toughness = new MageInt(1);
-	}
 }
