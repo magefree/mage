@@ -89,10 +89,12 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect<SearchLibraryPutI
 						}
 					}
 				}
-				player.shuffleLibrary(game);
+                player.shuffleLibrary(game);
 				return true;
 			}
 		}
+        // shuffle anyway
+        player.shuffleLibrary(game);
 		return false;
 	}
 

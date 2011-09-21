@@ -35,6 +35,8 @@ import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.SearchEffect;
 import mage.cards.Card;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -45,13 +47,21 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class SearchLibraryPutInHandEffect extends SearchEffect<SearchLibraryPutInHandEffect> {
 
+    private boolean revealCards = false;
+
     public SearchLibraryPutInHandEffect(TargetCardInLibrary target) {
+        this(target, false);
+    }
+
+    public SearchLibraryPutInHandEffect(TargetCardInLibrary target, boolean revealCards) {
 		super(target, Outcome.DrawCard);
+        this.revealCards = revealCards;
 		setText();
     }
 
 	public SearchLibraryPutInHandEffect(final SearchLibraryPutInHandEffect effect) {
 		super(effect);
+        this.revealCards = effect.revealCards;
 	}
 
 	@Override
@@ -64,14 +74,27 @@ public class SearchLibraryPutInHandEffect extends SearchEffect<SearchLibraryPutI
         Player player = game.getPlayer(source.getControllerId());
 		player.searchLibrary(target, game);
         if (target.getTargets().size() > 0) {
+            Cards cards = new CardsImpl();
             for (UUID cardId: (List<UUID>)target.getTargets()) {
                 Card card = player.getLibrary().remove(cardId, game);
                 if (card != null){
 					card.moveToZone(Zone.HAND, source.getId(), game, false);
+                    if (revealCards) {
+                        cards.add(card);
+                    }
                 }
             }
-            player.shuffleLibrary(game);
+            if (revealCards) {
+                String name = "Reveal";
+                Card sourceCard = game.getCard(source.getSourceId());
+                if (sourceCard != null) {
+                    name = sourceCard.getName();
+                }
+                player.revealCards(name, cards, game);
+            }
         }
+        // shuffle anyway
+        player.shuffleLibrary(game);
         return true;
     }
 
@@ -80,10 +103,10 @@ public class SearchLibraryPutInHandEffect extends SearchEffect<SearchLibraryPutI
         sb.append("Search your library for ");
         if (target.getNumberOfTargets() == 0 && target.getMaxNumberOfTargets() > 0) {
 			sb.append("up to ").append(target.getMaxNumberOfTargets()).append(" ");
-			sb.append(target.getTargetName()).append(" and put them into your hand");
+			sb.append(target.getTargetName()).append(revealCards ? ", reveal them, " : "").append(" and put them into your hand");
 		}
 		else {
-			sb.append("a ").append(target.getTargetName()).append(" and put that card into your hand");
+			sb.append("a ").append(target.getTargetName()).append(revealCards ? ", reveal it, " : "").append(" and put that card into your hand");
 		}
 		sb.append(". Then shuffle your library");
 
