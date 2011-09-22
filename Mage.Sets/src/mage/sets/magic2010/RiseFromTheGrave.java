@@ -74,7 +74,7 @@ public class RiseFromTheGrave extends CardImpl<RiseFromTheGrave> {
 class RiseFromTheGraveEffect extends ContinuousEffectImpl<RiseFromTheGraveEffect> {
 
 	public RiseFromTheGraveEffect() {
-		super(Duration.WhileOnBattlefield, Outcome.Neutral);
+		super(Duration.Custom, Outcome.Neutral);
 		staticText = "That creature is a black Zombie in addition to its other colors and types";
 	}
 
@@ -104,7 +104,9 @@ class RiseFromTheGraveEffect extends ContinuousEffectImpl<RiseFromTheGraveEffect
 					break;
 			}
 			return true;
-		}
+		} else {
+            this.used = true;
+        }
 		return false;
 	}
 

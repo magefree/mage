@@ -36,14 +36,14 @@ import mage.cards.CardImpl;
 
 /**
  *
- * @author Loki
+ * @author Loki, nantuko
  */
 public class Watchwolf extends CardImpl<Watchwolf> {
 
     public Watchwolf (UUID ownerId) {
         super(ownerId, 239, "Watchwolf", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}{W}");
         this.expansionSetCode = "RAV";
-        this.subtype.add("");
+        this.subtype.add("Wolf");
         this.color.setGreen(true);
         this.color.setWhite(true);
         this.power = new MageInt(3);
