@@ -46,6 +46,7 @@ public class MatchOptions implements Serializable {
 	protected int winsNeeded;
 	protected String gameType;
 	protected String deckType;
+    protected boolean limited;
 	protected List<String> playerTypes = new ArrayList<String>();
 
 	public MatchOptions(String name, String gameType) {
@@ -100,5 +101,12 @@ public class MatchOptions implements Serializable {
 	public List<String> getPlayerTypes() {
 		return playerTypes;
 	}
+    
+    public boolean isLimited() {
+        return limited;
+    }
 
+    public void setLimited(boolean limited) {
+        this.limited = limited;
+    }
 }

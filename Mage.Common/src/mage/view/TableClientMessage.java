@@ -46,7 +46,7 @@ public class TableClientMessage implements Serializable {
 	private UUID gameId;
 	private UUID playerId;
 	private int time;
-    private boolean flag;
+    private boolean flag = false;
 
 	public TableClientMessage(Deck deck, UUID tableId, int time) {
 		this.deck = new DeckView(deck);
@@ -54,6 +54,13 @@ public class TableClientMessage implements Serializable {
 		this.time = time;
 	}
 
+	public TableClientMessage(Deck deck, UUID tableId, int time, boolean flag) {
+		this.deck = new DeckView(deck);
+		this.tableId = tableId;
+		this.time = time;
+        this.flag = flag;
+	}
+    
 	public TableClientMessage(UUID gameId, UUID playerId) {
 		this.gameId = gameId;
 		this.playerId = playerId;

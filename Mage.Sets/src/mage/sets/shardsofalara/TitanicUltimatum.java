@@ -25,48 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.scarsofmirrodin;
-
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledPermanent;
-import mage.game.permanent.token.GoblinToken;
-import mage.target.common.TargetControlledPermanent;
+package mage.sets.shardsofalara;
 
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Rarity;
+import mage.abilities.effects.common.continious.BoostControlledEffect;
+import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
+import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.LifelinkAbility;
+import mage.abilities.keyword.TrampleAbility;
+import mage.cards.CardImpl;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class KuldothaRebirth extends CardImpl<KuldothaRebirth> {
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
+public class TitanicUltimatum extends CardImpl<TitanicUltimatum> {
 
-    static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+    public TitanicUltimatum(UUID ownerId) {
+        super(ownerId, 204, "Titanic Ultimatum", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{R}{R}{G}{G}{G}{W}{W}");
+        this.expansionSetCode = "ALA";
+
+        this.color.setRed(true);
+        this.color.setGreen(true);
+        this.color.setWhite(true);
+
+        // Until end of turn, creatures you control get +5/+5 and gain first strike, lifelink, and trample.
+        this.getSpellAbility().addEffect(new BoostControlledEffect(5, 5, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
     }
 
-    public KuldothaRebirth (UUID ownerId) {
-        super(ownerId, 96, "Kuldotha Rebirth", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");
-        this.expansionSetCode = "SOM";
-		this.color.setRed(true);
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new GoblinToken(), 3));
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
-    }
-
-    public KuldothaRebirth (final KuldothaRebirth card) {
+    public TitanicUltimatum(final TitanicUltimatum card) {
         super(card);
     }
 
     @Override
-    public KuldothaRebirth copy() {
-        return new KuldothaRebirth(this);
+    public TitanicUltimatum copy() {
+        return new TitanicUltimatum(this);
     }
-
 }

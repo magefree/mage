@@ -514,7 +514,7 @@ public class TablesPanel extends javax.swing.JPanel {
                 options.setWinsNeeded(1);
                 table = session.createTable(roomId,	options);
                 session.joinTable(roomId, table.getTableId(), "Human", "Human", 1, Sets.loadDeck("test.dck"));
-                session.joinTable(roomId, table.getTableId(), "Computer", "Computer - minimax", 1, Sets.loadDeck("test.dck"));
+                session.joinTable(roomId, table.getTableId(), "Computer", "Computer - minimax", 5, Sets.loadDeck("test.dck"));
                 session.startGame(roomId, table.getTableId());
             } catch (Exception ex) {
                 handleError(ex);

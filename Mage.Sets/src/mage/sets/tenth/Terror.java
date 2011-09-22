@@ -1,5 +1,5 @@
 /*
- *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
+ *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
@@ -25,49 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.keyword;
+package mage.sets.tenth;
 
-import mage.Constants;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.AdjustingSourceCosts;
-import mage.abilities.effects.CostModificationEffect;
-import mage.abilities.effects.common.AffinityEffect;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledPermanent;
-import mage.game.Game;
+import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.cards.CardImpl;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
- * Affinity for artifacts
+ *
+ * @author North
  */
-public class AffinityForArtifactsAbility extends SimpleStaticAbility implements AdjustingSourceCosts {
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent();
+public class Terror extends CardImpl<Terror> {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonartifact, nonblack creature");
 
     static {
-        filter.getCardType().add(Constants.CardType.ARTIFACT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.getNotCardType().add(CardType.ARTIFACT);
+        filter.setNotCardType(true);
+        filter.getColor().setBlack(true);
+        filter.setNotColor(true);
     }
 
-    public AffinityForArtifactsAbility() {
-        super(Constants.Zone.OUTSIDE, new AffinityEffect(filter));
+    public Terror(UUID ownerId) {
+        super(ownerId, 182, "Terror", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{B}");
+        this.expansionSetCode = "10E";
+
+        this.color.setBlack(true);
+
+        // Destroy target nonartifact, nonblack creature. It can't be regenerated.
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
     }
 
-    public AffinityForArtifactsAbility(final AffinityForArtifactsAbility ability) {
-        super(ability);
+    public Terror(final Terror card) {
+        super(card);
     }
 
     @Override
-    public SimpleStaticAbility copy() {
-        return new AffinityForArtifactsAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "Affinity for artifacts";
-    }
-
-    @Override
-    public void adjustCosts(Ability ability, Game game) {
-        ((CostModificationEffect)getEffects().get(0)).apply(game, this, ability);
+    public Terror copy() {
+        return new Terror(this);
     }
 }

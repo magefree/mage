@@ -35,7 +35,7 @@ import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -60,9 +60,7 @@ public class ExaltedAbility extends TriggeredAbilityImpl<ExaltedAbility> {
 	public boolean checkTrigger(GameEvent event, Game game) {
 		if (event.getType() == EventType.DECLARED_ATTACKERS && game.getActivePlayerId().equals(this.controllerId) ) {
 			if (game.getCombat().attacksAlone()) {
-				TargetCreaturePermanent target = new TargetCreaturePermanent();
-				this.addTarget(target);
-				this.getTargets().get(0).add(game.getCombat().getAttackers().get(0),game);
+				this.getEffects().get(0).setTargetPointer(new FixedTarget(game.getCombat().getAttackers().get(0)));
 				return true;
 			}
 		}

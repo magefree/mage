@@ -1,5 +1,5 @@
 /*
- *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
+ *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
@@ -25,49 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.keyword;
+package mage.sets.shardsofalara;
 
-import mage.Constants;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.AdjustingSourceCosts;
-import mage.abilities.effects.CostModificationEffect;
-import mage.abilities.effects.common.AffinityEffect;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledPermanent;
-import mage.game.Game;
+import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.abilities.effects.common.DrawCardTargetEffect;
+import mage.abilities.effects.common.GainLifeTargetEffect;
+import mage.cards.CardImpl;
+import mage.target.TargetPlayer;
 
 /**
- * Affinity for artifacts
+ *
+ * @author North
  */
-public class AffinityForArtifactsAbility extends SimpleStaticAbility implements AdjustingSourceCosts {
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent();
+public class KissOfTheAmesha extends CardImpl<KissOfTheAmesha> {
 
-    static {
-        filter.getCardType().add(Constants.CardType.ARTIFACT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+    public KissOfTheAmesha(UUID ownerId) {
+        super(ownerId, 177, "Kiss of the Amesha", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{W}{U}");
+        this.expansionSetCode = "ALA";
+
+        this.color.setBlue(true);
+        this.color.setWhite(true);
+
+        // Target player gains 7 life and draws two cards.
+        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addEffect(new GainLifeTargetEffect(7));
+        this.getSpellAbility().addEffect(new DrawCardTargetEffect(2));
     }
 
-    public AffinityForArtifactsAbility() {
-        super(Constants.Zone.OUTSIDE, new AffinityEffect(filter));
-    }
-
-    public AffinityForArtifactsAbility(final AffinityForArtifactsAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public SimpleStaticAbility copy() {
-        return new AffinityForArtifactsAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "Affinity for artifacts";
+    public KissOfTheAmesha(final KissOfTheAmesha card) {
+        super(card);
     }
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
-        ((CostModificationEffect)getEffects().get(0)).apply(game, this, ability);
+    public KissOfTheAmesha copy() {
+        return new KissOfTheAmesha(this);
     }
 }

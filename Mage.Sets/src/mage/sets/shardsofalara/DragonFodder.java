@@ -25,61 +25,37 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.sets.shardsofalara;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.permanent.token.GoblinToken;
-import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class SiegeGangCommander extends CardImpl<SiegeGangCommander> {
+public class DragonFodder extends CardImpl<DragonFodder> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Goblin");
+    public DragonFodder(UUID ownerId) {
+        super(ownerId, 97, "Dragon Fodder", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
+        this.expansionSetCode = "ALA";
 
-    static {
-        filter.getSubtype().add("Goblin");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
-    }
-
-    public SiegeGangCommander(UUID ownerId) {
-        super(ownerId, 157, "Siege-Gang Commander", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
-        this.expansionSetCode = "M10";
-        this.subtype.add("Goblin");
         this.color.setRed(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GoblinToken(), 3), false));
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{1}{R}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
-        ability.addTarget(new TargetCreatureOrPlayer());
-        this.addAbility(ability);
+
+        // Put two 1/1 red Goblin creature tokens onto the battlefield.
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new GoblinToken(), 2));
     }
 
-    public SiegeGangCommander(final SiegeGangCommander card) {
+    public DragonFodder(final DragonFodder card) {
         super(card);
     }
 
     @Override
-    public SiegeGangCommander copy() {
-        return new SiegeGangCommander(this);
+    public DragonFodder copy() {
+        return new DragonFodder(this);
     }
 }

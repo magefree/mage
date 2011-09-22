@@ -209,7 +209,10 @@ public class CallbackClientImpl implements CallbackClient {
 						TableClientMessage message = (TableClientMessage) callback.getData();
 						DeckView deckView = message.getDeck();
 						Deck deck = DeckUtil.construct(deckView);
-						sideboard(deck, message.getTableId(), message.getTime());
+                        if (message.getFlag())
+                            construct(deck, message.getTableId(), message.getTime());
+                        else 
+                            sideboard(deck, message.getTableId(), message.getTime());
 					}
 					else if (callback.getMethod().equals("construct")) {
 						TableClientMessage message = (TableClientMessage) callback.getData();
