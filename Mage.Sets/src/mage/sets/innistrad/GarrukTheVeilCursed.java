@@ -86,6 +86,8 @@ public class GarrukTheVeilCursed extends CardImpl<GarrukTheVeilCursed> {
         // -3 : Creatures you control gain trample and get +X/+X until end of turn, where X is the number of creature cards in your graveyard.
         Effects effects1 = new Effects();
         BoostControlledEffect effect = new BoostControlledEffect(new GarrukTheVeilCursedValue(), new GarrukTheVeilCursedValue(), Constants.Duration.EndOfTurn);
+        // +X/+X should be counted only once
+        effect.setLockedIn(true);
         effect.setRule("Creatures you control get +X/+X until end of turn, where X is the number of creature cards in your graveyard");
         effects1.add(effect);
         effects1.add(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Constants.Duration.EndOfTurn, FilterCreaturePermanent.getDefault()));
@@ -178,7 +180,7 @@ class GarrukTheVeilCursedEffect extends OneShotEffect<GarrukTheVeilCursedEffect>
             TargetCardInLibrary targetInLibrary = new TargetCardInLibrary(filter);
             Cards cards = new CardsImpl();
             if (player.searchLibrary(targetInLibrary, game)) {
-                for (UUID cardId : target.getTargets()) {
+                for (UUID cardId : targetInLibrary.getTargets()) {
                     Card card = player.getLibrary().remove(cardId, game);
                     if (card != null) {
                         card.moveToZone(Constants.Zone.HAND, source.getId(), game, false);
