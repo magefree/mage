@@ -45,11 +45,15 @@ import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author Loki, nantuko
  */
 public class FiresOfYavimaya extends CardImpl<FiresOfYavimaya> {
 
     private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Creatures you control");
+
+    static {
+        filter.setTargetController(Constants.TargetController.YOU);
+    }
 
     public FiresOfYavimaya(UUID ownerId) {
         super(ownerId, 87, "Fires of Yavimaya", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{G}");
