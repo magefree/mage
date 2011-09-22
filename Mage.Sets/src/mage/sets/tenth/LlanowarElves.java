@@ -49,7 +49,6 @@ public class LlanowarElves extends CardImpl<LlanowarElves> {
 		this.color.setGreen(true);
 		this.power = new MageInt(1);
 		this.toughness = new MageInt(1);
-
 		this.addAbility(new GreenManaAbility());
 	}
 
