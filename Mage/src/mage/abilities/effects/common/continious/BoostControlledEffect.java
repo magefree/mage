@@ -50,6 +50,8 @@ public class BoostControlledEffect extends ContinuousEffectImpl<BoostControlledE
     private DynamicValue toughness;
 	protected boolean excludeSource;
 	protected FilterCreaturePermanent filter;
+    // if true, all dynamic values should be calculated once
+    protected boolean isLockedIn = false;
 
 	public BoostControlledEffect(int power, int toughness, Duration duration) {
 		this(power, toughness, duration, FilterCreaturePermanent.getDefault(), false);
@@ -86,6 +88,7 @@ public class BoostControlledEffect extends ContinuousEffectImpl<BoostControlledE
 		this.toughness = effect.toughness;
 		this.filter = effect.filter.copy();
 		this.excludeSource = effect.excludeSource;
+        this.isLockedIn = effect.isLockedIn;
 	}
 
 	@Override
@@ -103,6 +106,10 @@ public class BoostControlledEffect extends ContinuousEffectImpl<BoostControlledE
 				}
 			}
 		}
+        if (this.isLockedIn) {
+            power = new StaticValue(power.calculate(game, source));
+            toughness = new StaticValue(toughness.calculate(game, source));
+        }
 	}
 
 	@Override
@@ -146,6 +153,10 @@ public class BoostControlledEffect extends ContinuousEffectImpl<BoostControlledE
 
     public void setRule(String rule) {
         staticText = rule;
+    }
+
+    public void setLockedIn(boolean isLockedIn) {
+        this.isLockedIn =isLockedIn;
     }
 
 }
