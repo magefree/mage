@@ -86,6 +86,7 @@ public class FilterCreaturePermanent<T extends FilterCreaturePermanent<T>> exten
 					return notFilter;
 				}
 			}
+            return !notFilter;
         }
 
 		if (useBlocking && (permanent.getBlocking() > 0) != blocking)
