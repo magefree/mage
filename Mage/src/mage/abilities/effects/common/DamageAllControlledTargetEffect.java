@@ -49,8 +49,7 @@ public class DamageAllControlledTargetEffect extends OneShotEffect<DamageAllCont
 		super(Outcome.Damage);
 		this.amount = amount;
 		this.filter = filter;
-		String message = "'{'source'}' deals {1} damage to each {2} controlled by target player";
-		staticText = MessageFormat.format(message, Integer.toString(amount), filter.getMessage());
+		getText();
 	}
 
 	public DamageAllControlledTargetEffect(final DamageAllControlledTargetEffect effect) {
@@ -72,4 +71,9 @@ public class DamageAllControlledTargetEffect extends OneShotEffect<DamageAllCont
 		return true;
 	}
 
+    private void getText() {
+        StringBuilder sb = new StringBuilder("{this} deals ");
+        sb.append(amount).append(" damage to each ").append(filter.getMessage()).append(" controlled by target player");
+        staticText = sb.toString();
+    }
 }

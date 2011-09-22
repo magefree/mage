@@ -28,26 +28,30 @@
 
 package mage.sets.magic2010;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.common.PayVariableLoyaltyCost;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.DamageAllControlledTargetEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.DamageXTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.game.Game;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, nantuko
  */
 public class ChandraNalaar extends CardImpl<ChandraNalaar> {
 
@@ -63,7 +67,7 @@ public class ChandraNalaar extends CardImpl<ChandraNalaar> {
 		ability1.addTarget(new TargetPlayer());
 		this.addAbility(ability1);
 
-		LoyaltyAbility ability2 = new LoyaltyAbility(new DamageXTargetEffect());
+		LoyaltyAbility ability2 = new LoyaltyAbility(new DamageTargetEffect(ChandraNalaarXValue.getDefault()));
 		ability2.addTarget(new TargetCreaturePermanent());
 		this.addAbility(ability2);
 
@@ -83,5 +87,39 @@ public class ChandraNalaar extends CardImpl<ChandraNalaar> {
 	public ChandraNalaar copy() {
 		return new ChandraNalaar(this);
 	}
+}
+
+class ChandraNalaarXValue implements DynamicValue {
+
+    private static final ChandraNalaarXValue defaultValue = new ChandraNalaarXValue();
+
+    @Override
+    public int calculate(Game game, Ability sourceAbility) {
+        for (Cost cost : sourceAbility.getCosts()) {
+            if (cost instanceof PayVariableLoyaltyCost) {
+                return ((PayVariableLoyaltyCost)cost).getAmount();
+            }
+        }
+        return 0;
+    }
+
+    @Override
+    public DynamicValue clone() {
+        return defaultValue;
+    }
+
+    @Override
+    public String getMessage() {
+        return "";
+    }
+
+    @Override
+    public String toString() {
+        return "X";
+    }
+
+    public static ChandraNalaarXValue getDefault() {
+        return defaultValue;
+    }
 }
 
