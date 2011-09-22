@@ -396,7 +396,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 	public TriggeredAbility chooseTriggeredAbility(TriggeredAbilities abilities, Game game) {
 		game.getState().setPriorityPlayerId(getId());
 		while (!abort) {
-			game.fireSelectTargetEvent(playerId, "Pick triggered ability", abilities, true);
+			game.fireSelectTargetEvent(playerId, "Pick triggered ability (goes to the stack first)", abilities, true);
 			waitForResponse();
 			if (response.getUUID() != null) {
 				for (TriggeredAbility ability: abilities) {
