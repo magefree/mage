@@ -139,8 +139,8 @@ public class User {
 		fireCallback(new ClientCallback("startTournament", tournamentId, new TableClientMessage(tournamentId, playerId)));
 	}
 
-	public void sideboard(final Deck deck, final UUID tableId, final int time) {
-		fireCallback(new ClientCallback("sideboard", tableId, new TableClientMessage(deck, tableId, time)));
+	public void sideboard(final Deck deck, final UUID tableId, final int time, boolean limited) {
+		fireCallback(new ClientCallback("sideboard", tableId, new TableClientMessage(deck, tableId, time, limited)));
         sideboarding.put(tableId, deck);
 	}
 
@@ -203,8 +203,8 @@ public class User {
             entry.getValue().construct(0);
         }
         for (Entry<UUID, Deck> entry: sideboarding.entrySet()) {
-            int remaining = TableManager.getInstance().getController(entry.getKey()).getRemainingTime();
-            sideboard(entry.getValue(), entry.getKey(), remaining);
+            TableController controller = TableManager.getInstance().getController(entry.getKey());
+            sideboard(entry.getValue(), entry.getKey(), controller.getRemainingTime(), controller.getOptions().isLimited());
         }
 	}
 

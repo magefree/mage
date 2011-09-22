@@ -381,7 +381,7 @@ public class TableController {
 				User user = UserManager.getInstance().getUser(entry.getKey());
                 int remaining = (int) futureTimeout.getDelay(TimeUnit.SECONDS);
                 if (user != null)
-					user.sideboard(deck, table.getId(), remaining);
+					user.sideboard(deck, table.getId(), remaining, options.isLimited());
 				break;
 			}
 		}
@@ -394,6 +394,10 @@ public class TableController {
 	public void construct() {
 		table.construct();
 	}
+    
+    public MatchOptions getOptions() {
+        return options;
+    }
 
 	public void endGame() {
 		UUID choosingPlayerId = match.getChooser();

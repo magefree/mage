@@ -306,6 +306,7 @@ public class NewTournamentDialog extends MageDialog {
 		tOptions.getMatchOptions().setWinsNeeded(2);
 		tOptions.getMatchOptions().setAttackOption(MultiplayerAttackOption.LEFT);
 		tOptions.getMatchOptions().setRange(RangeOfInfluence.ALL);
+        tOptions.getMatchOptions().setLimited(true);
 		table = session.createTournamentTable(roomId, tOptions);
 		if (table == null) {
 			JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error creating table.", "Error", JOptionPane.ERROR_MESSAGE);

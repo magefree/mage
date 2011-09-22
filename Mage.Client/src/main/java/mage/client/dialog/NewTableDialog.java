@@ -312,6 +312,7 @@ public class NewTableDialog extends MageDialog {
 			options.getPlayerTypes().add(player.getPlayerType());
 		}
 		options.setDeckType((String) this.cbDeckType.getSelectedItem());
+        options.setLimited(false);
 		options.setAttackOption((MultiplayerAttackOption) this.cbAttackOption.getSelectedItem());
 		options.setRange((RangeOfInfluence) this.cbRange.getSelectedItem());
 		options.setWinsNeeded((Integer)this.spnNumWins.getValue());
