@@ -50,15 +50,20 @@ public class MagicCardsImageSource implements CardImageSource {
     }
 
     @Override
-    public String generateURL(Integer collectorId, String cardName, String cardSet) throws Exception {
+    public String generateURL(Integer collectorId, String cardName, String cardSet, boolean twoFacedCard, boolean secondSide) throws Exception {
         if (collectorId == null || cardSet == null) {
             throw new Exception("Wrong parameters for image: collector id: " + collectorId + ",card set: " + cardSet);
         }
         String set = CardImageUtils.updateSet(cardSet, true);
-        String url = "http://magiccards.info/scans/en/";
-        url += set.toLowerCase() + "/" + collectorId + ".jpg";
+        StringBuilder url = new StringBuilder("http://magiccards.info/scans/en/");
+        url.append(set.toLowerCase()).append("/").append(collectorId);
 
-        return url;
+        if (twoFacedCard) {
+            url.append(secondSide ? "b" : "a");
+        }
+        url.append(".jpg");
+
+        return url.toString();
     }
 
     @Override

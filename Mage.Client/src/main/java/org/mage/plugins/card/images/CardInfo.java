@@ -10,6 +10,8 @@ public class CardInfo {
     private String set;
     private Integer collectorId;
     private boolean token;
+    private boolean twoFacedCard;
+    private boolean secondSide;
 
     public CardInfo(String name, String set, Integer collectorId) {
         this.name = name;
@@ -25,11 +27,22 @@ public class CardInfo {
         this.token = token;
     }
 
+    public CardInfo(String name, String set, Integer collectorId, boolean token, boolean twoFacedCard, boolean secondSide) {
+        this.name = name;
+        this.set = set;
+        this.collectorId = collectorId;
+        this.token = token;
+        this.twoFacedCard = twoFacedCard;
+        this.secondSide = secondSide;
+    }
+
     public CardInfo(final CardInfo card) {
         this.name = card.name;
         this.set = card.set;
         this.collectorId = card.collectorId;
         this.token = card.token;
+        this.twoFacedCard = card.twoFacedCard;
+        this.secondSide = card.secondSide;
     }
 
     @Override
@@ -53,6 +66,12 @@ public class CardInfo {
         if (this.token != other.token) {
             return false;
         }
+        if (this.twoFacedCard != other.twoFacedCard) {
+            return false;
+        }
+        if (this.secondSide != other.secondSide) {
+            return false;
+        }
         return true;
     }
 
@@ -63,6 +82,8 @@ public class CardInfo {
         hash = 47 * hash + (this.set != null ? this.set.hashCode() : 0);
         hash = 47 * hash + (this.collectorId != null ? this.collectorId.hashCode() : 0);
         hash = 47 * hash + (this.token ? 1 : 0);
+        hash = 47 * hash + (this.twoFacedCard ? 1 : 0);
+        hash = 47 * hash + (this.secondSide ? 1 : 0);
         return hash;
     }
 
@@ -96,5 +117,13 @@ public class CardInfo {
 
     public void setToken(boolean token) {
         this.token = token;
+    }
+
+    public boolean isTwoFacedCard() {
+        return twoFacedCard;
+    }
+
+    public boolean isSecondSide() {
+        return secondSide;
     }
 }
