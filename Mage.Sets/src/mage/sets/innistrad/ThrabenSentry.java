@@ -101,20 +101,19 @@ class ThrabenSentryTriggeredAbility extends TriggeredAbilityImpl<ThrabenSentryTr
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
 
-            UUID sourceId = getSourceId();
-            if (game.getPermanent(sourceId) == null) {
-                if (game.getLastKnownInformation(sourceId, Constants.Zone.BATTLEFIELD) == null) {
-                    return false;
-                }
+            Permanent source = game.getPermanent(this.sourceId);
+            if (source == null) {
+                return false;
             }
 
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             Permanent permanent = zEvent.getTarget();
 
-            if (permanent != null &&
+            if (permanent != null && permanent.getCardType().contains(CardType.CREATURE) &&
                     zEvent.getToZone() == Constants.Zone.GRAVEYARD &&
                     zEvent.getFromZone() == Constants.Zone.BATTLEFIELD &&
-                    permanent.getControllerId().equals(this.getControllerId())) {
+                    permanent.getControllerId().equals(this.getControllerId()) &&
+                    !source.isTransformed()) {
                 return true;
             }
         }
