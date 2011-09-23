@@ -510,41 +510,43 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	}
 
 	protected boolean playManaAbility(ManaAbility ability, Game game) {
-		int bookmark = game.bookmarkState();
-		if (ability.activate(game, false)) {
-			ability.resolve(game);
-			game.removeBookmark(bookmark);
-			return true;
-		}
-		game.restoreState(bookmark);
+    	if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATE_ABILITY, ability.getId(), ability.getSourceId(), playerId))) {
+            int bookmark = game.bookmarkState();
+            if (ability.activate(game, false)) {
+                ability.resolve(game);
+                game.removeBookmark(bookmark);
+                return true;
+            }
+            game.restoreState(bookmark);
+        }
 		return false;
 	}
 
 	protected boolean playAbility(ActivatedAbility ability, Game game) {
-		//20091005 - 602.2a
-		if (ability.isUsesStack()) {
-			if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATE_ABILITY, ability.getId(), ability.getSourceId(), playerId))) {
-				int bookmark = game.bookmarkState();
-				ability.newId();
-				game.getStack().push(new StackAbility(ability, playerId));
-				String message = ability.getActivatedMessage(game);
-				if (ability.activate(game, false)) {
-					game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATED_ABILITY, ability.getId(), ability.getSourceId(), playerId));
-					game.fireInformEvent(name + message);
-					game.removeBookmark(bookmark);
-					return true;
-				}
-				game.restoreState(bookmark);
-			}
-		} else {
-			int bookmark = game.bookmarkState();
-			if (ability.activate(game, false)) {
-				ability.resolve(game);
-				game.removeBookmark(bookmark);
-				return true;
-			}
-			game.restoreState(bookmark);
-		}
+        //20091005 - 602.2a
+        if (ability.isUsesStack()) {
+            if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATE_ABILITY, ability.getId(), ability.getSourceId(), playerId))) {
+                int bookmark = game.bookmarkState();
+                ability.newId();
+                game.getStack().push(new StackAbility(ability, playerId));
+                String message = ability.getActivatedMessage(game);
+                if (ability.activate(game, false)) {
+                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATED_ABILITY, ability.getId(), ability.getSourceId(), playerId));
+                    game.fireInformEvent(name + message);
+                    game.removeBookmark(bookmark);
+                    return true;
+                }
+                game.restoreState(bookmark);
+            }
+        } else {
+            int bookmark = game.bookmarkState();
+            if (ability.activate(game, false)) {
+                ability.resolve(game);
+                game.removeBookmark(bookmark);
+                return true;
+            }
+            game.restoreState(bookmark);
+        }
 		return false;
 	}
 
