@@ -25,21 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.game.permanent.token;
+package mage.sets.innistrad;
 
 import mage.Constants;
-import mage.MageInt;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.keyword.LifelinkAbility;
+import mage.cards.CardImpl;
+import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
- * @author Loki
+ * @author nantuko
  */
-public class SpiritToken extends Token {
-    public SpiritToken() {
-        super("Spirit", "1/1 colorless Spirit creature token");
-        cardType.add(Constants.CardType.CREATURE);
-        subtype.add("Spirit");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
+public class MomentOfHeroism extends CardImpl<MomentOfHeroism> {
+
+    public MomentOfHeroism(UUID ownerId) {
+        super(ownerId, 24, "Moment of Heroism", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
+        this.expansionSetCode = "ISD";
+
+        this.color.setWhite(true);
+
+        // Target creature gets +2/+2 and gains lifelink until end of turn.
+        this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
+    public MomentOfHeroism(final MomentOfHeroism card) {
+        super(card);
+    }
+
+    @Override
+    public MomentOfHeroism copy() {
+        return new MomentOfHeroism(this);
+    }
 }

@@ -70,13 +70,22 @@ public class UntapTargetEffect extends OneShotEffect<UntapTargetEffect> {
 		return true;
 	}
 
-	@Override
-	public String getText(Mode mode) {
-		Target target = mode.getTargets().get(0);
-		if (target.getNumberOfTargets() > 1)
-			return "untap " + target.getNumberOfTargets() + " target " + mode.getTargets().get(0).getTargetName() + "s";
-		else
-			return "untap target " + mode.getTargets().get(0).getTargetName();
-	}
+    @Override
+    public String getText(Mode mode) {
+        Target target = mode.getTargets().get(0);
 
+        StringBuilder sb = new StringBuilder();
+        sb.append("Untap ");
+        if (target.getNumberOfTargets() == 0) {
+            sb.append("up to ");
+        }
+
+        if (target.getMaxNumberOfTargets() > 1 || target.getNumberOfTargets() == 0) {
+            sb.append(target.getMaxNumberOfTargets()).append(" target ").append(target.getTargetName()).append("s");
+        } else {
+            sb.append("target ").append(target.getTargetName());
+        }
+
+        return sb.toString();
+    }
 }

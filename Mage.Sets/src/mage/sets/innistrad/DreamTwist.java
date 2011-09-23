@@ -25,21 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.game.permanent.token;
+package mage.sets.innistrad;
 
 import mage.Constants;
-import mage.MageInt;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.keyword.FlashbackAbility;
+import mage.cards.CardImpl;
+import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
- * @author Loki
+ * @author nantuko
  */
-public class SpiritToken extends Token {
-    public SpiritToken() {
-        super("Spirit", "1/1 colorless Spirit creature token");
-        cardType.add(Constants.CardType.CREATURE);
-        subtype.add("Spirit");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
+public class DreamTwist extends CardImpl<DreamTwist> {
+
+    public DreamTwist(UUID ownerId) {
+        super(ownerId, 54, "Dream Twist", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
+        this.expansionSetCode = "ISD";
+
+        this.color.setBlue(true);
+
+        // Target player puts the top three cards of his or her library into his or her graveyard.
+        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(3));
+
+        // Flashback {1}{U}
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{1}{U}"), Constants.TimingRule.INSTANT));
     }
 
+    public DreamTwist(final DreamTwist card) {
+        super(card);
+    }
+
+    @Override
+    public DreamTwist copy() {
+        return new DreamTwist(this);
+    }
 }

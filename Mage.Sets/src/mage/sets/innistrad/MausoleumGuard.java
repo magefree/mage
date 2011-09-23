@@ -25,21 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.game.permanent.token;
+package mage.sets.innistrad;
 
-import mage.Constants;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.effects.common.CreateTokenEffect;
+import mage.cards.CardImpl;
+import mage.game.permanent.token.SpiritWhiteToken;
+
+import java.util.UUID;
 
 /**
- * @author Loki
+ * @author nantuko
  */
-public class SpiritToken extends Token {
-    public SpiritToken() {
-        super("Spirit", "1/1 colorless Spirit creature token");
-        cardType.add(Constants.CardType.CREATURE);
-        subtype.add("Spirit");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
+public class MausoleumGuard extends CardImpl<MausoleumGuard> {
+
+    public MausoleumGuard(UUID ownerId) {
+        super(ownerId, 20, "Mausoleum Guard", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
+        this.expansionSetCode = "ISD";
+        this.subtype.add("Human");
+        this.subtype.add("Scout");
+
+        this.color.setWhite(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // When Mausoleum Guard dies, put two 1/1 white Spirit creature tokens with flying onto the battlefield.
+        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken(), 2)));
     }
 
+    public MausoleumGuard(final MausoleumGuard card) {
+        super(card);
+    }
+
+    @Override
+    public MausoleumGuard copy() {
+        return new MausoleumGuard(this);
+    }
 }

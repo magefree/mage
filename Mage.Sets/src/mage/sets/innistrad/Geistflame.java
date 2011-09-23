@@ -25,21 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.game.permanent.token;
+package mage.sets.innistrad;
 
 import mage.Constants;
-import mage.MageInt;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.keyword.FlashbackAbility;
+import mage.cards.CardImpl;
+import mage.target.common.TargetCreatureOrPlayer;
+
+import java.util.UUID;
 
 /**
- * @author Loki
+ * @author nantuko
  */
-public class SpiritToken extends Token {
-    public SpiritToken() {
-        super("Spirit", "1/1 colorless Spirit creature token");
-        cardType.add(Constants.CardType.CREATURE);
-        subtype.add("Spirit");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
+public class Geistflame extends CardImpl<Geistflame> {
+
+    public Geistflame(UUID ownerId) {
+        super(ownerId, 144, "Geistflame", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
+        this.expansionSetCode = "ISD";
+
+        this.color.setRed(true);
+
+        // Geistflame deals 1 damage to target creature or player.
+        this.getSpellAbility().addEffect(new DamageTargetEffect(1));
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+
+        // Flashback {3}{R}
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{R}"), Constants.TimingRule.INSTANT));
     }
 
+    public Geistflame(final Geistflame card) {
+        super(card);
+    }
+
+    @Override
+    public Geistflame copy() {
+        return new Geistflame(this);
+    }
 }

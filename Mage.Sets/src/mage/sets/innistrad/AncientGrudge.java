@@ -25,21 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.game.permanent.token;
+package mage.sets.innistrad;
 
 import mage.Constants;
-import mage.MageInt;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.keyword.FlashbackAbility;
+import mage.cards.CardImpl;
+import mage.filter.Filter;
+import mage.filter.FilterPermanent;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- * @author Loki
+ * @author nantuko
  */
-public class SpiritToken extends Token {
-    public SpiritToken() {
-        super("Spirit", "1/1 colorless Spirit creature token");
-        cardType.add(Constants.CardType.CREATURE);
-        subtype.add("Spirit");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
+public class AncientGrudge extends CardImpl<AncientGrudge> {
+
+    private final static FilterPermanent filter = new FilterPermanent("artifact");
+
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
     }
 
+    public AncientGrudge(UUID ownerId) {
+        super(ownerId, 127, "Ancient Grudge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
+        this.expansionSetCode = "ISD";
+
+        this.color.setRed(true);
+
+        // Destroy target artifact.
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+
+        // Flashback {G}
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{G}"), Constants.TimingRule.INSTANT));
+    }
+
+    public AncientGrudge(final AncientGrudge card) {
+        super(card);
+    }
+
+    @Override
+    public AncientGrudge copy() {
+        return new AncientGrudge(this);
+    }
 }

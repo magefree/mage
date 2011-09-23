@@ -25,64 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.sets.innistrad;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.ControlsPermanentCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
-import mage.abilities.decorator.ConditionalStaticAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.LifelinkAbility;
+import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.common.FilterLandPermanent;
+import mage.game.permanent.token.SpiritToken;
+import mage.game.permanent.token.SpiritWhiteToken;
 
 /**
  *
- * @author North, nantuko
+ * @author nantuko
  */
-public class SejiriMerfolk extends CardImpl<SejiriMerfolk> {
+public class DoomedTraveler extends CardImpl<DoomedTraveler> {
 
-    private static final String rule = "As long as you control a Plains, {this} has first strike and lifelink.";
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Plains");
-
-    static {
-        filter.getCardType().add(CardType.LAND);
-        filter.getSubtype().add("Plains");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
-    }
-
-    public SejiriMerfolk(UUID ownerId) {
-        super(ownerId, 36, "Sejiri Merfolk", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "WWK";
-        this.subtype.add("Merfolk");
+    public DoomedTraveler(UUID ownerId) {
+        super(ownerId, 11, "Doomed Traveler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
+        this.expansionSetCode = "ISD";
+        this.subtype.add("Human");
         this.subtype.add("Soldier");
 
-        this.color.setBlue(true);
-        this.power = new MageInt(2);
+        this.color.setWhite(true);
+        this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        Ability ability = new ConditionalStaticAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(LifelinkAbility.getInstance()), new ControlsPermanentCondition(filter), rule);
-        ability.addEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()));
-        this.addAbility(ability);
+        // When Doomed Traveler dies, put a 1/1 white Spirit creature token with flying onto the battlefield.
+        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken())));
     }
 
-    public SejiriMerfolk(final SejiriMerfolk card) {
+    public DoomedTraveler(final DoomedTraveler card) {
         super(card);
     }
 
     @Override
-    public SejiriMerfolk copy() {
-        return new SejiriMerfolk(this);
+    public DoomedTraveler copy() {
+        return new DoomedTraveler(this);
     }
 }

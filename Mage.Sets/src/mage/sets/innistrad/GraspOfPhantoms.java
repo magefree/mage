@@ -25,21 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.game.permanent.token;
+package mage.sets.innistrad;
+
+import java.util.UUID;
 
 import mage.Constants;
-import mage.MageInt;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.PutOnLibraryTargetEffect;
+import mage.abilities.keyword.FlashbackAbility;
+import mage.cards.CardImpl;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
- * @author Loki
+ *
+ * @author nantuko
  */
-public class SpiritToken extends Token {
-    public SpiritToken() {
-        super("Spirit", "1/1 colorless Spirit creature token");
-        cardType.add(Constants.CardType.CREATURE);
-        subtype.add("Spirit");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
+public class GraspOfPhantoms extends CardImpl<GraspOfPhantoms> {
+
+    public GraspOfPhantoms(UUID ownerId) {
+        super(ownerId, 58, "Grasp of Phantoms", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");
+        this.expansionSetCode = "ISD";
+
+        this.color.setBlue(true);
+
+        // Put target creature on top of its owner's library.
+        this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+
+        // Flashback {7}{U}
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{7}{U}"), Constants.TimingRule.SORCERY));
     }
 
+    public GraspOfPhantoms(final GraspOfPhantoms card) {
+        super(card);
+    }
+
+    @Override
+    public GraspOfPhantoms copy() {
+        return new GraspOfPhantoms(this);
+    }
 }

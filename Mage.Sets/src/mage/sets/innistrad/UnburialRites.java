@@ -25,21 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.game.permanent.token;
+package mage.sets.innistrad;
 
 import mage.Constants;
-import mage.MageInt;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
+import mage.abilities.keyword.FlashbackAbility;
+import mage.cards.CardImpl;
+import mage.filter.common.FilterCreatureCard;
+import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
- * @author Loki
+ * @author nantuko
  */
-public class SpiritToken extends Token {
-    public SpiritToken() {
-        super("Spirit", "1/1 colorless Spirit creature token");
-        cardType.add(Constants.CardType.CREATURE);
-        subtype.add("Spirit");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
+public class UnburialRites extends CardImpl<UnburialRites> {
+
+    public UnburialRites(UUID ownerId) {
+        super(ownerId, 122, "Unburial Rites", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");
+        this.expansionSetCode = "ISD";
+
+        this.color.setBlack(true);
+
+        // Return target creature card from your graveyard to the battlefield.
+        this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard()));
+
+        // Flashback {3}{W}
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{W}"), Constants.TimingRule.SORCERY));
     }
 
+    public UnburialRites(final UnburialRites card) {
+        super(card);
+    }
+
+    @Override
+    public UnburialRites copy() {
+        return new UnburialRites(this);
+    }
 }

@@ -33,7 +33,10 @@ import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.common.KickedCondition;
+import mage.abilities.costs.mana.KickerManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.keyword.KickerAbility;
@@ -65,12 +68,13 @@ public class GatekeeperOfMalakir extends CardImpl<GatekeeperOfMalakir> {
 		this.power = new MageInt(2);
 		this.toughness = new MageInt(2);
 
-		EntersBattlefieldTriggeredAbility sacAbility =
+        this.getSpellAbility().addOptionalCost(new KickerManaCost("{B}"));
+
+		EntersBattlefieldTriggeredAbility ability =
 				new EntersBattlefieldTriggeredAbility(new SacrificeEffect(filter, 1, "target player"));
-		sacAbility.addTarget(new TargetPlayer());
-		KickerAbility ability = new KickerAbility(new GainAbilitySourceEffect(sacAbility, Duration.OneUse), false);
-		ability.addCost(new ManaCostsImpl("{B}"));
-		this.addAbility(ability);
+		ability.addTarget(new TargetPlayer());
+
+		this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.getInstance(), "When {this} enters the battlefield, if it was kicked, target player sacrifices a creature"));
 	}
 
 	public GatekeeperOfMalakir(final GatekeeperOfMalakir card) {

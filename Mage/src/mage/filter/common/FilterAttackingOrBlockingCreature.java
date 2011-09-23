@@ -28,11 +28,15 @@
 
 package mage.filter.common;
 
+import mage.filter.Filter;
+
 /**
  *
  * @author nantuko
  */
 public class FilterAttackingOrBlockingCreature extends FilterCreaturePermanent<FilterAttackingOrBlockingCreature> {
+
+    private static final FilterAttackingOrBlockingCreature defaultFilter = new FilterAttackingOrBlockingCreature();
 
 	public FilterAttackingOrBlockingCreature() {
 		this("attacking or blocking creature");
@@ -54,4 +58,8 @@ public class FilterAttackingOrBlockingCreature extends FilterCreaturePermanent<F
 	public FilterAttackingOrBlockingCreature copy() {
 		return new FilterAttackingOrBlockingCreature(this);
 	}
+
+    public static FilterAttackingOrBlockingCreature getDefault() {
+        return defaultFilter;
+    }
 }

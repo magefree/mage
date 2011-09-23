@@ -25,21 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.game.permanent.token;
+package mage.sets.innistrad;
 
-import mage.Constants;
+import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.abilities.common.DiesAnotherCreatureYouControlTriggeredAbility;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.cards.CardImpl;
+import mage.counters.CounterType;
 
 /**
- * @author Loki
+ *
+ * @author nantuko
  */
-public class SpiritToken extends Token {
-    public SpiritToken() {
-        super("Spirit", "1/1 colorless Spirit creature token");
-        cardType.add(Constants.CardType.CREATURE);
-        subtype.add("Spirit");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
+public class UnrulyMob extends CardImpl<UnrulyMob> {
+
+    public UnrulyMob(UUID ownerId) {
+        super(ownerId, 39, "Unruly Mob", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        this.expansionSetCode = "ISD";
+        this.subtype.add("Human");
+
+        this.color.setWhite(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        // Whenever another creature you control dies, put a +1/+1 counter on Unruly Mob.
+        this.addAbility(new DiesAnotherCreatureYouControlTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
     }
 
+    public UnrulyMob(final UnrulyMob card) {
+        super(card);
+    }
+
+    @Override
+    public UnrulyMob copy() {
+        return new UnrulyMob(this);
+    }
 }

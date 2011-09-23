@@ -25,21 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.game.permanent.token;
+package mage.sets.innistrad;
 
 import mage.Constants;
-import mage.MageInt;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
+import mage.abilities.keyword.FlashbackAbility;
+import mage.cards.CardImpl;
+import mage.target.TargetPlayer;
+import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
- * @author Loki
+ * @author nantuko
  */
-public class SpiritToken extends Token {
-    public SpiritToken() {
-        super("Spirit", "1/1 colorless Spirit creature token");
-        cardType.add(Constants.CardType.CREATURE);
-        subtype.add("Spirit");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
+public class BumpInTheNight extends CardImpl<BumpInTheNight> {
+
+    public BumpInTheNight(UUID ownerId) {
+        super(ownerId, 92, "Bump in the Night", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
+        this.expansionSetCode = "ISD";
+
+        this.color.setBlack(true);
+
+        // Target opponent loses 3 life.
+        this.getSpellAbility().addEffect(new LoseLifeTargetEffect(3));
+        this.getSpellAbility().addTarget(new TargetOpponent());
+
+        // Flashback {5}{R}
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{R}"), Constants.TimingRule.SORCERY));
     }
 
+    public BumpInTheNight(final BumpInTheNight card) {
+        super(card);
+    }
+
+    @Override
+    public BumpInTheNight copy() {
+        return new BumpInTheNight(this);
+    }
 }

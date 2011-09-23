@@ -25,21 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.game.permanent.token;
+package mage.sets.alarareborn;
+
+import java.util.UUID;
 
 import mage.Constants;
-import mage.MageInt;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
+import mage.abilities.keyword.CascadeAbility;
+import mage.abilities.keyword.FlyingAbility;
+import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
+ *
  * @author Loki
  */
-public class SpiritToken extends Token {
-    public SpiritToken() {
-        super("Spirit", "1/1 colorless Spirit creature token");
-        cardType.add(Constants.CardType.CREATURE);
-        subtype.add("Spirit");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
+public class StormcallersBoon extends CardImpl<StormcallersBoon> {
+
+    public StormcallersBoon(UUID ownerId) {
+        super(ownerId, 13, "Stormcaller's Boon", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{U}");
+        this.expansionSetCode = "ARB";
+
+        this.color.setBlue(true);
+        this.color.setWhite(true);
+
+        // Sacrifice Stormcaller's Boon: Creatures you control gain flying until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(FlyingAbility.getInstance(), Constants.Duration.EndOfTurn, new FilterControlledCreaturePermanent("Creatures")), new SacrificeSourceCost()));
+        this.addAbility(new CascadeAbility());
     }
 
+    public StormcallersBoon(final StormcallersBoon card) {
+        super(card);
+    }
+
+    @Override
+    public StormcallersBoon copy() {
+        return new StormcallersBoon(this);
+    }
 }

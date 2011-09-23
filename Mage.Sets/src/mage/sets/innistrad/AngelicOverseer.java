@@ -25,23 +25,19 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.sets.innistrad;
 
 import java.util.UUID;
+
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.ControlsPermanentCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.decorator.ConditionalStaticAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.LifelinkAbility;
+import mage.abilities.keyword.*;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
@@ -49,40 +45,41 @@ import mage.filter.common.FilterLandPermanent;
 
 /**
  *
- * @author North, nantuko
+ * @author nantuko
  */
-public class SejiriMerfolk extends CardImpl<SejiriMerfolk> {
+public class AngelicOverseer extends CardImpl<AngelicOverseer> {
 
-    private static final String rule = "As long as you control a Plains, {this} has first strike and lifelink.";
+    private static final String rule = "As long as you control a Human, Angelic Overseer has hexproof and is indestructible.";
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Plains");
 
     static {
-        filter.getCardType().add(CardType.LAND);
-        filter.getSubtype().add("Plains");
+        filter.getSubtype().add("Human");
         filter.setScopeSubtype(Filter.ComparisonScope.Any);
     }
 
-    public SejiriMerfolk(UUID ownerId) {
-        super(ownerId, 36, "Sejiri Merfolk", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "WWK";
-        this.subtype.add("Merfolk");
-        this.subtype.add("Soldier");
+    public AngelicOverseer(UUID ownerId) {
+        super(ownerId, 3, "Angelic Overseer", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
+        this.expansionSetCode = "ISD";
+        this.subtype.add("Angel");
 
-        this.color.setBlue(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
+        this.color.setWhite(true);
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(3);
 
-        Ability ability = new ConditionalStaticAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(LifelinkAbility.getInstance()), new ControlsPermanentCondition(filter), rule);
-        ability.addEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()));
+        this.addAbility(FlyingAbility.getInstance());
+
+        // As long as you control a Human, Angelic Overseer has hexproof and is indestructible.
+        Ability ability = new ConditionalStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilitySourceEffect(new HexproofAbility()), new ControlsPermanentCondition(filter), rule);
+        ability.addEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance()));
         this.addAbility(ability);
     }
 
-    public SejiriMerfolk(final SejiriMerfolk card) {
+    public AngelicOverseer(final AngelicOverseer card) {
         super(card);
     }
 
     @Override
-    public SejiriMerfolk copy() {
-        return new SejiriMerfolk(this);
+    public AngelicOverseer copy() {
+        return new AngelicOverseer(this);
     }
 }

@@ -25,21 +25,37 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.game.permanent.token;
+package mage.sets.innistrad;
 
-import mage.Constants;
-import mage.MageInt;
+import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.abilities.effects.common.CreateTokenEffect;
+import mage.cards.CardImpl;
+import mage.game.permanent.token.SpiritWhiteToken;
 
 /**
- * @author Loki
+ *
+ * @author nantuko
  */
-public class SpiritToken extends Token {
-    public SpiritToken() {
-        super("Spirit", "1/1 colorless Spirit creature token");
-        cardType.add(Constants.CardType.CREATURE);
-        subtype.add("Spirit");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
+public class MidnightHaunting extends CardImpl<MidnightHaunting> {
+
+    public MidnightHaunting(UUID ownerId) {
+        super(ownerId, 22, "Midnight Haunting", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
+        this.expansionSetCode = "ISD";
+
+        this.color.setWhite(true);
+
+        // Put two 1/1 white Spirit creature tokens with flying onto the battlefield.
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new SpiritWhiteToken(), 2));
     }
 
+    public MidnightHaunting(final MidnightHaunting card) {
+        super(card);
+    }
+
+    @Override
+    public MidnightHaunting copy() {
+        return new MidnightHaunting(this);
+    }
 }

@@ -25,21 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.game.permanent.token;
+package mage.sets.innistrad;
+
+import java.util.UUID;
 
 import mage.Constants;
-import mage.MageInt;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.keyword.FlashbackAbility;
+import mage.cards.CardImpl;
+import mage.filter.common.FilterCreatureCard;
 
 /**
- * @author Loki
+ *
+ * @author nantuko
  */
-public class SpiritToken extends Token {
-    public SpiritToken() {
-        super("Spirit", "1/1 colorless Spirit creature token");
-        cardType.add(Constants.CardType.CREATURE);
-        subtype.add("Spirit");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
+public class GnawToTheBone extends CardImpl<GnawToTheBone> {
+
+    public GnawToTheBone(UUID ownerId) {
+        super(ownerId, 183, "Gnaw to the Bone", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
+        this.expansionSetCode = "ISD";
+
+        this.color.setGreen(true);
+
+        // You gain 2 life for each creature card in your graveyard.
+        DynamicValue value = new CardsInControllerGraveyardCount(new FilterCreatureCard(), 2);
+        this.getSpellAbility().addEffect(new GainLifeEffect(value));
+
+        // Flashback {2}{G}
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{2}{G}"), Constants.TimingRule.INSTANT));
     }
 
+    public GnawToTheBone(final GnawToTheBone card) {
+        super(card);
+    }
+
+    @Override
+    public GnawToTheBone copy() {
+        return new GnawToTheBone(this);
+    }
 }

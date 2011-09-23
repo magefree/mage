@@ -1,3 +1,15 @@
+|Generate|TOK:DDH|Griffin|
+|Generate|TOK:DDH|Saproling|
+
+|Generate|TOK:M12|Bird|
+|Generate|TOK:M12|Soldier|
+|Generate|TOK:M12|Zombie|
+|Generate|TOK:M12|Beast|
+|Generate|TOK:M12|Saproling|
+|Generate|TOK:M12|Wurm|
+|Generate|TOK:M12|Pentavite|
+
+|Generate|TOK:NPH|Beast|
 |Generate|TOK:NPH|Beast|
 |Generate|TOK:NPH|Goblin|
 |Generate|TOK:NPH|Golem|

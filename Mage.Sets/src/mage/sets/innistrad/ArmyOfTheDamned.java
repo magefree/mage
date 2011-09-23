@@ -25,21 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.game.permanent.token;
+package mage.sets.innistrad;
 
 import mage.Constants;
-import mage.MageInt;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.keyword.FlashbackAbility;
+import mage.cards.CardImpl;
+import mage.game.permanent.token.ZombieToken;
+
+import java.util.UUID;
 
 /**
- * @author Loki
+ * @author nantuko
  */
-public class SpiritToken extends Token {
-    public SpiritToken() {
-        super("Spirit", "1/1 colorless Spirit creature token");
-        cardType.add(Constants.CardType.CREATURE);
-        subtype.add("Spirit");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
+public class ArmyOfTheDamned extends CardImpl<ArmyOfTheDamned> {
+
+    public ArmyOfTheDamned(UUID ownerId) {
+        super(ownerId, 87, "Army of the Damned", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{5}{B}{B}{B}");
+        this.expansionSetCode = "ISD";
+
+        this.color.setBlack(true);
+
+        // Put thirteen 2/2 black Zombie creature tokens onto the battlefield tapped.
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken(), 13));
+
+        // Flashback {7}{B}{B}{B}
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{7}{B}{B}{B}"), Constants.TimingRule.SORCERY));
     }
 
+    public ArmyOfTheDamned(final ArmyOfTheDamned card) {
+        super(card);
+    }
+
+    @Override
+    public ArmyOfTheDamned copy() {
+        return new ArmyOfTheDamned(this);
+    }
 }

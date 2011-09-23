@@ -25,21 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.game.permanent.token;
+package mage.sets.innistrad;
+
+import java.util.UUID;
 
 import mage.Constants;
-import mage.MageInt;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.keyword.FlashbackAbility;
+import mage.cards.CardImpl;
 
 /**
- * @author Loki
+ *
+ * @author nantuko
  */
-public class SpiritToken extends Token {
-    public SpiritToken() {
-        super("Spirit", "1/1 colorless Spirit creature token");
-        cardType.add(Constants.CardType.CREATURE);
-        subtype.add("Spirit");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
+public class ThinkTwice extends CardImpl<ThinkTwice> {
+
+    public ThinkTwice(UUID ownerId) {
+        super(ownerId, 83, "Think Twice", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
+        this.expansionSetCode = "ISD";
+
+        this.color.setBlue(true);
+
+        // Draw a card.
+        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+
+        // Flashback {2}{U}
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{2}{U}"), Constants.TimingRule.INSTANT));
     }
 
+    public ThinkTwice(final ThinkTwice card) {
+        super(card);
+    }
+
+    @Override
+    public ThinkTwice copy() {
+        return new ThinkTwice(this);
+    }
 }

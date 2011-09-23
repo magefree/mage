@@ -25,21 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.game.permanent.token;
+package mage.sets.elspethvstezzeret;
 
-import mage.Constants;
-import mage.MageInt;
+import java.util.UUID;
 
 /**
- * @author Loki
+ *
+ * @author North
  */
-public class SpiritToken extends Token {
-    public SpiritToken() {
-        super("Spirit", "1/1 colorless Spirit creature token");
-        cardType.add(Constants.CardType.CREATURE);
-        subtype.add("Spirit");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
+public class TezzeretTheSeeker extends mage.sets.shardsofalara.TezzeretTheSeeker {
+
+    public TezzeretTheSeeker(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 39;
+        this.expansionSetCode = "DDF";
     }
 
+    public TezzeretTheSeeker(final TezzeretTheSeeker card) {
+        super(card);
+    }
+
+    @Override
+    public TezzeretTheSeeker copy() {
+        return new TezzeretTheSeeker(this);
+    }
 }

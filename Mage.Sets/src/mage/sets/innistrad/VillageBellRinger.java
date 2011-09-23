@@ -25,21 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.game.permanent.token;
+package mage.sets.innistrad;
 
-import mage.Constants;
+import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.SimpleTriggeredAbility;
+import mage.abilities.effects.common.UntapAllControllerEffect;
+import mage.abilities.keyword.FlashAbility;
+import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
- * @author Loki
+ *
+ * @author nantuko
  */
-public class SpiritToken extends Token {
-    public SpiritToken() {
-        super("Spirit", "1/1 colorless Spirit creature token");
-        cardType.add(Constants.CardType.CREATURE);
-        subtype.add("Spirit");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
+public class VillageBellRinger extends CardImpl<VillageBellRinger> {
+
+    private static final String rule = "untap all creatures you control";
+
+    public VillageBellRinger(UUID ownerId) {
+        super(ownerId, 41, "Village Bell-Ringer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
+        this.expansionSetCode = "ISD";
+        this.subtype.add("Human");
+        this.subtype.add("Scout");
+
+        this.color.setWhite(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(4);
+
+        this.addAbility(FlashAbility.getInstance());
+
+        // When Village Bell-Ringer enters the battlefield, untap all creatures you control.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new UntapAllControllerEffect(new FilterControlledCreaturePermanent(), rule), false));
     }
 
+    public VillageBellRinger(final VillageBellRinger card) {
+        super(card);
+    }
+
+    @Override
+    public VillageBellRinger copy() {
+        return new VillageBellRinger(this);
+    }
 }

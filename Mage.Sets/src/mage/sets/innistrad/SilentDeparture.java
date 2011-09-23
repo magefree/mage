@@ -25,21 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.game.permanent.token;
+package mage.sets.innistrad;
+
+import java.util.UUID;
 
 import mage.Constants;
-import mage.MageInt;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.keyword.FlashbackAbility;
+import mage.cards.CardImpl;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
- * @author Loki
+ *
+ * @author nantuko
  */
-public class SpiritToken extends Token {
-    public SpiritToken() {
-        super("Spirit", "1/1 colorless Spirit creature token");
-        cardType.add(Constants.CardType.CREATURE);
-        subtype.add("Spirit");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
+public class SilentDeparture extends CardImpl<SilentDeparture> {
+
+    public SilentDeparture(UUID ownerId) {
+        super(ownerId, 75, "Silent Departure", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}");
+        this.expansionSetCode = "ISD";
+
+        this.color.setBlue(true);
+
+        // Return target creature to its owner's hand.
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+		this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+
+        // Flashback {4}{U}
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{4}{U}"), Constants.TimingRule.SORCERY));
     }
 
+    public SilentDeparture(final SilentDeparture card) {
+        super(card);
+    }
+
+    @Override
+    public SilentDeparture copy() {
+        return new SilentDeparture(this);
+    }
 }

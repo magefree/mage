@@ -71,7 +71,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 	
     private static CardImageSource cardImageSource;
     
-	private Proxy p;
+	private Proxy p = Proxy.NO_PROXY;;
 	
 	private ExecutorService executor = Executors.newFixedThreadPool(10);
 
@@ -234,7 +234,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 		File file;
         for (Card card : allCards) {
             if (card.getCardNumber() > 0 && !card.getExpansionSetCode().isEmpty()) {
-                CardInfo url = new CardInfo(card.getName(), card.getExpansionSetCode(), card.getCardNumber(), false);
+                CardInfo url = new CardInfo(card.getName(), card.getExpansionSetCode(), card.getCardNumber(), false, card.canTransform(), card.isNightCard());
                 boolean withCollectorId = false;
                 if (card.getName().equals("Forest") || card.getName().equals("Mountain") || card.getName().equals("Swamp") || card.getName().equals("Island") || card.getName().equals("Plains")) {
                     withCollectorId = true;
@@ -265,8 +265,16 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                     if (cardName.equals("Forest") || cardName.equals("Swamp") || cardName.equals("Mountain") || cardName.equals("Island") || cardName.equals("Plains")) {
                         cardName = card.getClass().getName().replace(card.getClass().getPackage().getName() + ".", "");
                     }
-                    CardInfo url = new CardInfo(cardName, card.getExpansionSetCode(), card.getCardNumber(), false);
+                    CardInfo url = new CardInfo(cardName, card.getExpansionSetCode(), card.getCardNumber(), false, card.canTransform(), card.isNightCard());
                     allCardsUrls.add(url);
+                    if (card.canTransform()) {
+                        // add second side for downloading
+                        // it has the same expansion set code and card number as original one
+                        // second side = true;
+                        Card secondSide = card.getSecondCardFace();
+                        url = new CardInfo(secondSide.getName(), card.getExpansionSetCode(), card.getCardNumber(), false, card.canTransform(), true);
+                        allCardsUrls.add(url);
+                    }
                 } else {
                     if (card.getCardNumber() < 1) {
                         System.err.println("There was a critical error!");
@@ -439,7 +447,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 						}
 						url = cardImageSource.generateTokenUrl(card.getName(), card.getSet());
 					} else {
-                        url = cardImageSource.generateURL(card.getCollectorId(), card.getName(), card.getSet());
+                        url = cardImageSource.generateURL(card.getCollectorId(), card.getName(), card.getSet(), card.isTwoFacedCard(), card.isSecondSide());
                     }
 
                     if (url != null) {

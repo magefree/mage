@@ -25,64 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.sets.alarareborn;
 
 import java.util.UUID;
+
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.MageInt;
-import mage.abilities.Ability;
+import mage.abilities.common.DealsCombatDamageToAPlayerAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.ControlsPermanentCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
-import mage.abilities.decorator.ConditionalStaticAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.LifelinkAbility;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
+import mage.abilities.keyword.EquipAbility;
+import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.common.FilterLandPermanent;
 
 /**
  *
- * @author North, nantuko
+ * @author Loki
  */
-public class SejiriMerfolk extends CardImpl<SejiriMerfolk> {
+public class MaskOfRiddles extends CardImpl<MaskOfRiddles> {
 
-    private static final String rule = "As long as you control a Plains, {this} has first strike and lifelink.";
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Plains");
-
-    static {
-        filter.getCardType().add(CardType.LAND);
-        filter.getSubtype().add("Plains");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
-    }
-
-    public SejiriMerfolk(UUID ownerId) {
-        super(ownerId, 36, "Sejiri Merfolk", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "WWK";
-        this.subtype.add("Merfolk");
-        this.subtype.add("Soldier");
+    public MaskOfRiddles(UUID ownerId) {
+        super(ownerId, 25, "Mask of Riddles", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{U}{B}");
+        this.expansionSetCode = "ARB";
+        this.subtype.add("Equipment");
 
         this.color.setBlue(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
+        this.color.setBlack(true);
 
-        Ability ability = new ConditionalStaticAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(LifelinkAbility.getInstance()), new ControlsPermanentCondition(filter), rule);
-        ability.addEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()));
-        this.addAbility(ability);
+        // Equipped creature has fear.
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FearAbility.getInstance(), Constants.AttachmentType.EQUIPMENT)));
+        // Whenever equipped creature deals combat damage to a player, you may draw a card.
+        this.addAbility(new DealsCombatDamageToAPlayerAttachedTriggeredAbility(new DrawCardControllerEffect(1), "equipped", true));
+        // Equip {2}
+        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public SejiriMerfolk(final SejiriMerfolk card) {
+    public MaskOfRiddles(final MaskOfRiddles card) {
         super(card);
     }
 
     @Override
-    public SejiriMerfolk copy() {
-        return new SejiriMerfolk(this);
+    public MaskOfRiddles copy() {
+        return new MaskOfRiddles(this);
     }
 }

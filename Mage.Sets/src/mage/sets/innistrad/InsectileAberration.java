@@ -41,10 +41,14 @@ import mage.cards.CardImpl;
 public class InsectileAberration extends CardImpl<InsectileAberration> {
 
     public InsectileAberration(UUID ownerId) {
-        super(ownerId, 51, "Insectile Aberration", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "");
+        super(ownerId, 1051, "Insectile Aberration", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "");
         this.expansionSetCode = "ISD";
         this.subtype.add("Human");
         this.subtype.add("Insect");
+
+        // this card is the second face of double-faced card
+        this.nightCard = true;
+        this.canTransform = true;
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
