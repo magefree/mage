@@ -52,7 +52,7 @@ public class SharpenedPitchfork extends CardImpl<SharpenedPitchfork> {
     private static final String staticText = "As long as equipped creature is a Human, it gets +1/+1";
 
     public SharpenedPitchfork(UUID ownerId) {
-        super(ownerId, 233, "Sharpened Pitchfork", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
+        super(ownerId, 232, "Sharpened Pitchfork", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "ISD";
         this.subtype.add("Equipment");
 
