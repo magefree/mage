@@ -43,19 +43,23 @@ import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterLandPermanent;
 
 /**
  *
- * @author North
+ * @author North, nantuko
  */
 public class SejiriMerfolk extends CardImpl<SejiriMerfolk> {
 
     private static final String rule = "As long as you control a Plains, {this} has first strike and lifelink.";
-    private static final FilterLandPermanent filter = new FilterLandPermanent("Plains");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Plains");
 
     static {
+        filter.getCardType().add(CardType.LAND);
         filter.getSubtype().add("Plains");
+        filter.setScopeSubtype(Filter.ComparisonScope.Any);
     }
 
     public SejiriMerfolk(UUID ownerId) {

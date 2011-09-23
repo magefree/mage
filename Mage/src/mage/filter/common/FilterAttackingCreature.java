@@ -34,6 +34,8 @@ package mage.filter.common;
  */
 public class FilterAttackingCreature extends FilterCreaturePermanent<FilterAttackingCreature> {
 
+    private static final FilterAttackingCreature defaultFilter = new FilterAttackingCreature();
+
 	public FilterAttackingCreature() {
 		this("attacking creature");
 	}
@@ -52,4 +54,8 @@ public class FilterAttackingCreature extends FilterCreaturePermanent<FilterAttac
 	public FilterAttackingCreature copy() {
 		return new FilterAttackingCreature(this);
 	}
+
+    public static FilterAttackingCreature getDefault() {
+        return defaultFilter;
+    }
 }

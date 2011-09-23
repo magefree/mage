@@ -32,6 +32,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterAttackingOrBlockingCreature;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -56,7 +57,7 @@ public class DivineVerdict extends CardImpl<DivineVerdict> {
 
         this.color.setWhite(true);
 
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(FilterAttackingOrBlockingCreature.getDefault()));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 

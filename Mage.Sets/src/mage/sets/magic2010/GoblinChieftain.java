@@ -39,6 +39,7 @@ import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -51,6 +52,7 @@ public class GoblinChieftain extends CardImpl<GoblinChieftain> {
 
 	static {
 		filter.getSubtype().add("Goblin");
+        filter.setScopeSupertype(Filter.ComparisonScope.Any);
 	}
 
 	public GoblinChieftain(UUID ownerId) {
