@@ -32,7 +32,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
+import mage.Constants;
 import mage.MageObject;
 import mage.Constants.PhaseStep;
 import mage.Constants.TurnPhase;
@@ -41,6 +43,7 @@ import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.GameState;
 import mage.game.combat.CombatGroup;
+import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
@@ -77,11 +80,15 @@ public class GameView implements Serializable {
 				MageObject object = game.getObject(stackObject.getSourceId());
 				Card card = game.getCard(stackObject.getSourceId());
 				if (card != null) {
-					if (object != null)
+					if (object != null) {
 						stack.put(stackObject.getId(), new StackAbilityView((StackAbility)stackObject, object.getName(), new CardView(card)));
-					else
+                    } else {
 						stack.put(stackObject.getId(), new StackAbilityView((StackAbility)stackObject, "", new CardView(card)));
-				} else if (object != null) {
+                    }
+                    if (card.canTransform()) {
+                        updateLatestCardView(game, card, stackObject.getId());
+                    }
+                } else if (object != null) {
 					stack.put(stackObject.getId(), new CardView(object));
 				}
 			}
@@ -111,6 +118,22 @@ public class GameView implements Serializable {
 		}
 		this.special = state.getSpecialActions().getControlledBy(state.getPriorityPlayerId()).size() > 0;
 	}
+
+    private void updateLatestCardView(Game game, Card card, UUID stackId) {
+        if (!card.canTransform()) {
+            return;
+        }
+        Permanent permanent = game.getPermanent(card.getId());
+        if (permanent == null) {
+            permanent = (Permanent)game.getLastKnownInformation(card.getId(), Constants.Zone.BATTLEFIELD);
+        }
+        if (permanent != null) {
+            if (permanent.isTransformed()) {
+                StackAbilityView stackAbilityView = (StackAbilityView) stack.get(stackId);
+                stackAbilityView.getSourceCard().setTransformed(true);
+            }
+        }
+    }
 
 	public List<PlayerView> getPlayers() {
 		return players;

@@ -197,6 +197,9 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 						setImage(srcImage);
 						setFoil(foil);
 					}
+                    if (gameCard.isTransformed()) {
+                        toggleTransformed();
+                    }
 				} catch (Exception e) {
 					e.printStackTrace();
 				} catch (Error err) {

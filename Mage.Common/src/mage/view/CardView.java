@@ -345,6 +345,10 @@ public class CardView extends SimpleCardView {
         return this.secondCardFace;
     }
 
+    public void setTransformed(boolean transformed) {
+        this.transformed = transformed;
+    }
+
     public boolean isTransformed() {
         return this.transformed;
     }
