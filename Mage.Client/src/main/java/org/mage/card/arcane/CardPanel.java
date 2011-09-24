@@ -40,21 +40,17 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 	static public final double FLIPPED_ANGLE = Math.PI;
 	static public final float ASPECT_RATIO = 3.5f / 2.5f;
 	static public final int POPUP_X_GAP = 1; // prevent popup window from blinking
-	//static public final float ASPECT_RATIO = 1.0f;
 
 	static public CardPanel dragAnimationPanel;
 
 	public static final Rectangle CARD_SIZE_FULL = new Rectangle(101, 149);
 
 	static private final float ROUNDED_CORNER_SIZE = 0.1f;
-	//static private final float SELECTED_BORDER_SIZE = 0.01f;
 	static private final float BLACK_BORDER_SIZE = 0.03f;
 	static private final int TEXT_GLOW_SIZE = 6;
 	static private final float TEXT_GLOW_INTENSITY = 3f;
-	static private final float rotCenterToTopCorner = 1.0295630140987000315797369464196f;
-	static private final float rotCenterToBottomCorner = 0.7071067811865475244008443621048f;
-
-	static private final int DEFAULT_DELAY_PERIOD = 300;
+	static private final float ROT_CENTER_TO_TOP_CORNER = 1.0295630140987000315797369464196f;
+	static private final float ROT_CENTER_TO_BOTTOM_CORNER = 0.7071067811865475244008443621048f;
 
 	public CardView gameCard;
 
@@ -185,6 +181,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 		popupText.setText(getText(cardType, newGameCard));
 
 		Util.threadPool.submit(new Runnable() {
+            @Override
 			public void run() {
 				try {
 					tappedAngle = isTapped() ? CardPanel.TAPPED_ANGLE : 0;
@@ -233,6 +230,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 		}
 	}
 
+    @Override
 	public boolean isFoil() {
 		return this.isFoil;
 	}
@@ -329,6 +327,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 		this.showCastingCost = showCastingCost;
 	}
 
+    @Override
 	public void paint(Graphics g) {
 		if (!displayEnabled) return;
 		if (!isValid()) super.validate();
@@ -346,6 +345,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 		super.paint(g2d);
 	}
 
+    @Override
 	protected void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -403,6 +403,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 				  */
 	}
 
+    @Override
 	protected void paintChildren(Graphics g) {
 		super.paintChildren(g);
 
@@ -417,6 +418,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 		}
 	}
 
+    @Override
 	public void layout() {
 		int borderSize = Math.round(cardWidth * BLACK_BORDER_SIZE);
 		imagePanel.setLocation(cardXOffset + borderSize, cardYOffset + borderSize);
@@ -457,6 +459,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 			imagePanel.setScalingType(ScalingType.bilinear);
 	}
 
+    @Override
 	public String toString() {
 		return gameCard.toString();
 	}
@@ -467,8 +470,8 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 		cardHeight = height;
 		int rotCenterX = Math.round(width / 2f);
 		int rotCenterY = height - rotCenterX;
-		int rotCenterToTopCorner = Math.round(width * CardPanel.rotCenterToTopCorner);
-		int rotCenterToBottomCorner = Math.round(width * CardPanel.rotCenterToBottomCorner);
+		int rotCenterToTopCorner = Math.round(width * CardPanel.ROT_CENTER_TO_TOP_CORNER);
+		int rotCenterToBottomCorner = Math.round(width * CardPanel.ROT_CENTER_TO_BOTTOM_CORNER);
 		int xOffset = rotCenterX - rotCenterToBottomCorner;
 		int yOffset = rotCenterY - rotCenterToTopCorner;
 		cardXOffset = -xOffset;
@@ -478,6 +481,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 		setBounds(x + xOffset, y + yOffset, width, height);
 	}
 
+    @Override
 	public void repaint() {
 		Rectangle b = getBounds();
 		JRootPane rootPane = SwingUtilities.getRootPane(this);
@@ -525,6 +529,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 		}
 	}
 
+    @Override
 	public float getAlpha() {
 		return alpha;
 	}
@@ -537,8 +542,10 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 		return cardYOffset;
 	}
 
+    @Override
 	public void updateImage() {
 		Util.threadPool.submit(new Runnable() {
+            @Override
 			public void run() {
 				try {
 					tappedAngle = isTapped() ? CardPanel.TAPPED_ANGLE : 0;
@@ -762,7 +769,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 		return data;
 	}
 
-	protected String getType(CardView card) {
+	final protected String getType(CardView card) {
 		StringBuilder sbType = new StringBuilder();
 
 		for (String superType : card.getSuperTypes()) {
@@ -783,7 +790,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 		return sbType.toString();
 	}
 
-	protected String getText(String cardType, CardView card) {
+	final protected String getText(String cardType, CardView card) {
 		StringBuilder sb = new StringBuilder();
 		if (card instanceof StackAbilityView || card instanceof AbilityView) {
 			for (String rule : card.getRules()) {

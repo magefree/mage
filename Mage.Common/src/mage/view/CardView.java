@@ -280,14 +280,17 @@ public class CardView extends SimpleCardView {
         return rarity;
     }
 
+    @Override
     public String getExpansionSetCode() {
         return expansionSetCode;
     }
 
+    @Override
     public UUID getId() {
         return id;
     }
 
+    @Override
     public int getCardNumber() {
         return cardNumber;
     }
@@ -333,6 +336,7 @@ public class CardView extends SimpleCardView {
         return getName() + " [" + getId() + "]";
     }
 
+    @Override
     public boolean isFaceDown() {
         return faceDown;
     }

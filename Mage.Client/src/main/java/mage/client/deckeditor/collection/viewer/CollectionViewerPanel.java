@@ -27,19 +27,21 @@
 */
 package mage.client.deckeditor.collection.viewer;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.GridBagLayout;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import mage.client.cards.BigCard;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 
 /**
  * Pane with big card and mage book.
  *
  * @author nantuko
  */
-public class CollectionViewerPanel extends JPanel {
+public final class CollectionViewerPanel extends JPanel {
     public CollectionViewerPanel() {
         initComponents();
     }
@@ -77,6 +79,7 @@ public class CollectionViewerPanel extends JPanel {
 
         btnExit.setText("Exit");
         btnExit.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitActionPerformed(evt);
             }
@@ -93,7 +96,7 @@ public class CollectionViewerPanel extends JPanel {
 			c.setVisible(false);
 	}
 
-    private class MageBookContainer extends JPanel {
+    private final class MageBookContainer extends JPanel {
         public MageBookContainer() {
             super();
             initComponents();

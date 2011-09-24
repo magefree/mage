@@ -82,6 +82,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 	private int recentSortedColumn;
 	private boolean recentAscending;
 
+    @Override
 	public void loadCards(CardsView showCards, SortBy sortBy, boolean piles, BigCard bigCard, UUID gameId) {
 		this.bigCard = bigCard;
 		this.gameId = gameId;
@@ -162,18 +163,22 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 		cards.clear();
 	}
 
+    @Override
 	public int getRowCount() {
 		return view.size();
 	}
 
+    @Override
 	public int getColumnCount() {
 		return column.length;
 	}
 
+    @Override
 	public String getColumnName(int n) {
 		return column[n];
 	}
 
+    @Override
 	public Object getValueAt(int row, int column) {
 		return getColumn(view.get(row), column);
 	}
@@ -237,6 +242,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 		}
 	}
 
+    @Override
 	public void drawCards(SortBy sortBy, boolean piles) {
 		fireTableDataChanged();
 	}
@@ -251,10 +257,12 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 		}
 	}
 
+    @Override
 	public void addCardEventListener(Listener<Event> listener) {
 		cardEventSource.addListener(listener);
 	}
 
+    @Override
 	public void clearCardEventListeners() {
 		cardEventSource.clearListeners();
 	}
@@ -273,9 +281,11 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 		// updates card detail, listens to any key strokes
 
 		table.addKeyListener(new KeyListener() {
+            @Override
 			public void keyPressed(KeyEvent ev) {}
+            @Override
 			public void keyTyped(KeyEvent ev) {}
-
+            @Override
 			public void keyReleased(KeyEvent ev) {
 				int row = table.getSelectedRow();
 				if (row != -1) {
@@ -286,6 +296,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 
 		// updates card detail, listens to any mouse clicks
 		table.addMouseListener(new MouseAdapter() {
+            @Override
 			public void mousePressed(MouseEvent e) {
 				int row = table.getSelectedRow();
 				if (row != -1) {
@@ -296,6 +307,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 
 		// sorts
 		MouseListener mouse = new MouseAdapter() {
+            @Override
 			public void mousePressed(MouseEvent e) {
 				TableColumnModel columnModel = table.getColumnModel();
 				int viewColumn = columnModel.getColumnIndexAtX(e.getX());

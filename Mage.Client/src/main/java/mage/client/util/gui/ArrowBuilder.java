@@ -1,10 +1,6 @@
 package mage.client.util.gui;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-
-import javax.swing.BorderFactory;
-import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 
 /**
@@ -62,7 +58,6 @@ public class ArrowBuilder {
 		arrow.setColor(color);
 		arrow.setArrowLocation(startX, startY, endX, endY);
 		arrow.setBounds(0, 0, Math.max(startX, endX) + 30, Math.max(startY, endY) + 30); // 30 is offset for arrow heads (being cut otherwise)
-		//System.out.println("	Adding arrow (startX=" + startX + ", startY=" + startY +", endX=" + endX + ", endY=" + endY + ")");
 		p.add(arrow);
 		p.revalidate();
 		p.repaint();

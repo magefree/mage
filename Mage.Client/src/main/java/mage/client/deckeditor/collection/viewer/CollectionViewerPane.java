@@ -27,16 +27,12 @@
 */
 package mage.client.deckeditor.collection.viewer;
 
-import mage.client.MagePane;
-import mage.client.plugins.impl.Plugins;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
+import java.awt.Component;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.JComponent;
+import mage.client.MagePane;
+import mage.client.plugins.impl.Plugins;
 
 /**
  * Collection viewer pane.
