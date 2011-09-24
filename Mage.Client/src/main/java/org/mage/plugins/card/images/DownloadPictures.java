@@ -43,8 +43,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 import mage.cards.Card;
 
@@ -61,8 +59,6 @@ import org.mage.plugins.card.utils.CardImageUtils;
 
 public class DownloadPictures extends DefaultBoundedRangeModel implements Runnable {
 
-	private int type;
-	//private JTextField addr, port;
 	private JProgressBar bar;
 	private JOptionPane dlg;
 	private boolean cancel;
@@ -270,10 +266,10 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             for (Card card : allCards) {
                 if (card.getCardNumber() > 0 && !card.getExpansionSetCode().isEmpty()) {
                     String cardName = card.getName();
-                    if (cardName.equals("Forest") || cardName.equals("Swamp") || cardName.equals("Mountain") || cardName.equals("Island") || cardName.equals("Plains")) {
-                        cardName = card.getClass().getName().replace(card.getClass().getPackage().getName() + ".", "");
-                    }
                     CardInfo url = new CardInfo(cardName, card.getExpansionSetCode(), card.getCardNumber(), false, card.canTransform(), card.isNightCard());
+                    if (cardName.equals("Forest") || cardName.equals("Swamp") || cardName.equals("Mountain") || cardName.equals("Island") || cardName.equals("Plains")) {
+                        url.setDownloadName(card.getClass().getName().replace(card.getClass().getPackage().getName() + ".", ""));
+                    }
                     allCardsUrls.add(url);
                     if (card.canTransform()) {
                         // add second side for downloading
@@ -392,23 +388,6 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 		}
 	}
 
-	private class ProxyHandler implements ChangeListener {
-		private int type;
-
-		public ProxyHandler(int type) {
-			this.type = type;
-		}
-
-        @Override
-		public void stateChanged(ChangeEvent e) {
-			/*if (((AbstractButton) e.getSource()).isSelected()) {
-				DownloadPictures.this.type = type;
-				addr.setEnabled(type != 0);
-				port.setEnabled(type != 0);
-			}*/
-		}
-	}
-
     @Override
 	public void run() {
 
@@ -455,7 +434,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 						}
 						url = cardImageSource.generateTokenUrl(card.getName(), card.getSet());
 					} else {
-                        url = cardImageSource.generateURL(card.getCollectorId(), card.getName(), card.getSet(), card.isTwoFacedCard(), card.isSecondSide());
+                        url = cardImageSource.generateURL(card.getCollectorId(), card.getDownloadName(), card.getSet(), card.isTwoFacedCard(), card.isSecondSide());
                     }
 
                     if (url != null) {
@@ -525,18 +504,20 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 out.flush();
                 out.close();
 
-                BufferedImage image = ImageIO.read(fileOut);
-                if (image.getHeight() == 470) {
-                    BufferedImage renderedImage = new BufferedImage(265, 370, BufferedImage.TYPE_INT_RGB);
-                    renderedImage.getGraphics();
-                    Graphics2D graphics2D = renderedImage.createGraphics();
-                    if (card.isTwoFacedCard() && card.isSecondSide()) {
-                        graphics2D.drawImage(image, 0, 0, 265, 370, 313, 62, 578, 432, null);
-                    } else {
-                        graphics2D.drawImage(image, 0, 0, 265, 370, 41, 62, 306, 432, null);
+                if (card.isTwoFacedCard()) {
+                    BufferedImage image = ImageIO.read(fileOut);
+                    if (image.getHeight() == 470) {
+                        BufferedImage renderedImage = new BufferedImage(265, 370, BufferedImage.TYPE_INT_RGB);
+                        renderedImage.getGraphics();
+                        Graphics2D graphics2D = renderedImage.createGraphics();
+                        if (card.isTwoFacedCard() && card.isSecondSide()) {
+                            graphics2D.drawImage(image, 0, 0, 265, 370, 313, 62, 578, 432, null);
+                        } else {
+                            graphics2D.drawImage(image, 0, 0, 265, 370, 41, 62, 306, 432, null);
+                        }
+                        graphics2D.dispose();
+                        writeImageToFile(renderedImage, fileOut);
                     }
-                    graphics2D.dispose();
-                    writeImageToFile(renderedImage, fileOut);
                 }
 
                 synchronized (sync) {

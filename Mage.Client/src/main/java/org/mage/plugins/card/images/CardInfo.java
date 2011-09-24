@@ -7,6 +7,7 @@ package org.mage.plugins.card.images;
 public class CardInfo {
 
     private String name;
+    private String downloadName;
     private String set;
     private Integer collectorId;
     private boolean token;
@@ -125,5 +126,13 @@ public class CardInfo {
 
     public boolean isSecondSide() {
         return secondSide;
+    }
+
+    public String getDownloadName() {
+        return downloadName == null ? name : downloadName;
+    }
+
+    public void setDownloadName(String downloadName) {
+        this.downloadName = downloadName;
     }
 }
