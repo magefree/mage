@@ -63,6 +63,20 @@ public class WizardCardsImageSource implements CardImageSource {
                     setLinks.put(Integer.toString(i), cardsImages.get(i).attr("src"));
                 }
             }
+
+            cardsImages = doc.select("img[height$=470]");
+            for (int i = 0; i < cardsImages.size(); i++) {
+                String cardName = cardsImages.get(i).attr("title").replace("\u00C6", "AE").replace("\u2019", "'");
+
+                if (cardName != null && !cardName.isEmpty()) {
+                    String[] cardNames = cardName.replace(")", "").split(" \\(");
+                    for (String name : cardNames) {
+                        setLinks.put(name, cardsImages.get(i).attr("src"));
+                    }
+                } else {
+                    setLinks.put(Integer.toString(i), cardsImages.get(i).attr("src"));
+                }
+            }
         } catch (IOException ex) {
             System.out.println("Exception when parsing the wizards page: " + ex.getMessage());
         }

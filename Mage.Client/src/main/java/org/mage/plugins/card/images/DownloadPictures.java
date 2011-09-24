@@ -2,13 +2,16 @@ package org.mage.plugins.card.images;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.InetSocketAddress;
@@ -21,6 +24,11 @@ import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import javax.imageio.IIOImage;
+import javax.imageio.ImageIO;
+import javax.imageio.ImageWriteParam;
+import javax.imageio.ImageWriter;
+import javax.imageio.stream.FileImageOutputStream;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ComboBoxModel;
@@ -471,61 +479,90 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 		}
 		closeButton.setText("Close");
 	}
-	
-	private final class DownloadTask implements Runnable {
-		private CardInfo card;
-		private URL url;
+
+    private final class DownloadTask implements Runnable {
+
+        private CardInfo card;
+        private URL url;
         private String imagesPath;
-		
-		public DownloadTask(CardInfo card, URL url, String imagesPath) {
-			this.card = card;
-			this.url = url;
+
+        public DownloadTask(CardInfo card, URL url, String imagesPath) {
+            this.card = card;
+            this.url = url;
             this.imagesPath = imagesPath;
-		}
-		
+        }
+
         @Override
-		public void run() {
-			try {
-				BufferedInputStream in = new BufferedInputStream(url.openConnection(p).getInputStream());
-	
-				createDirForCard(card, imagesPath);
-	
-				boolean withCollectorId = false;
-				if (card.getName().equals("Forest") || card.getName().equals("Mountain") || card.getName().equals("Swamp")
-						|| card.getName().equals("Island") || card.getName().equals("Plains")) {
-					withCollectorId = true;
-				}
-				File fileOut = new File(CardImageUtils.getImagePath(card, withCollectorId));
-	
-				BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(fileOut));
-	
-				byte[] buf = new byte[1024];
-				int len = 0;
-				while ((len = in.read(buf)) != -1) {
-					// user cancelled
-					if (cancel) {
-						in.close();
-						out.flush();
-						out.close();
-						// delete what was written so far
-						fileOut.delete();
-					}
-					out.write(buf, 0, len);
-				}
-	
-				in.close();
-				out.flush();
-				out.close();
-				
-				synchronized (sync) {
-					update(cardIndex + 1);
-				}
-			} catch (Exception e) {
-				log.error(e, e);
-			}
-		
-		}
-	}
+        public void run() {
+            try {
+                createDirForCard(card, imagesPath);
+
+                boolean withCollectorId = false;
+                if (card.getName().equals("Forest") || card.getName().equals("Mountain") || card.getName().equals("Swamp")
+                        || card.getName().equals("Island") || card.getName().equals("Plains")) {
+                    withCollectorId = true;
+                }
+                File fileOut = new File(CardImageUtils.getImagePath(card, withCollectorId));
+
+                BufferedInputStream in = new BufferedInputStream(url.openConnection(p).getInputStream());
+                BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(fileOut));
+
+                byte[] buf = new byte[1024];
+                int len = 0;
+                while ((len = in.read(buf)) != -1) {
+                    // user cancelled
+                    if (cancel) {
+                        in.close();
+                        out.flush();
+                        out.close();
+                        // delete what was written so far
+                        fileOut.delete();
+                    }
+                    out.write(buf, 0, len);
+                }
+
+                in.close();
+                out.flush();
+                out.close();
+
+                BufferedImage image = ImageIO.read(fileOut);
+                if (image.getHeight() == 470) {
+                    BufferedImage renderedImage = new BufferedImage(265, 370, BufferedImage.TYPE_INT_RGB);
+                    renderedImage.getGraphics();
+                    Graphics2D graphics2D = renderedImage.createGraphics();
+                    if (card.isTwoFacedCard() && card.isSecondSide()) {
+                        graphics2D.drawImage(image, 0, 0, 265, 370, 313, 62, 578, 432, null);
+                    } else {
+                        graphics2D.drawImage(image, 0, 0, 265, 370, 41, 62, 306, 432, null);
+                    }
+                    graphics2D.dispose();
+                    writeImageToFile(renderedImage, fileOut);
+                }
+
+                synchronized (sync) {
+                    update(cardIndex + 1);
+                }
+            } catch (Exception e) {
+                log.error(e, e);
+            }
+
+        }
+
+        private void writeImageToFile(BufferedImage image, File file) throws IOException {
+            Iterator iter = ImageIO.getImageWritersByFormatName("jpg");
+
+            ImageWriter writer = (ImageWriter) iter.next();
+            ImageWriteParam iwp = writer.getDefaultWriteParam();
+            iwp.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
+            iwp.setCompressionQuality(0.96f);
+
+            FileImageOutputStream output = new FileImageOutputStream(file);
+            writer.setOutput(output);
+            IIOImage image2 = new IIOImage(image, null, null);
+            writer.write(null, image2, iwp);
+            writer.dispose();
+        }
+    }
 
 	private static File createDirForCard(CardInfo card, String imagesPath) throws Exception {
 		File setDir = new File(CardImageUtils.getImageDir(card, imagesPath));
