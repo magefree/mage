@@ -41,12 +41,27 @@ public class CardParser extends Thread {
         }
 
         try {
-            Elements select = doc.select("#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_nameRow .value");
+            Elements select = doc.select("#ctl00_ctl00_ctl00_MainContent_SubContent_SubContentHeader_subtitleDisplay");
+            String cardName = "";
+            String selectorModifier = "";
             if (!select.isEmpty()) {
-                card.setName(select.get(0).text().trim());
+                cardName = select.get(0).text().trim();
             }
 
-            select = doc.select("#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_manaRow .value img");
+            select = doc.select("#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_nameRow .value");
+            if (!select.isEmpty()) {
+                card.setName(select.get(0).text().trim());
+            } else {
+                card.setName(cardName);
+                select = doc.select("#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl05_nameRow .value");
+                if (!select.isEmpty() && select.get(0).text().trim().equals(cardName)) {
+                    selectorModifier = "_ctl05";
+                } else {
+                    selectorModifier = "_ctl06";
+                }
+            }
+
+            select = doc.select("#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent" + selectorModifier + "_manaRow .value img");
             List<String> manaCost = new ArrayList<String>();
             if (!select.isEmpty()) {
                 for (Element element : select) {
@@ -55,17 +70,17 @@ public class CardParser extends Thread {
             }
             card.setManaCost(manaCost);
 
-            select = doc.select("#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_cmcRow .value");
+            select = doc.select("#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent" + selectorModifier + "_cmcRow .value");
             if (!select.isEmpty()) {
                 card.setConvertedManaCost(Integer.parseInt(select.get(0).text().trim()));
             }
 
-            select = doc.select("#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_typeRow .value");
+            select = doc.select("#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent" + selectorModifier + "_typeRow .value");
             if (!select.isEmpty()) {
                 card.setTypes(select.get(0).text().trim());
             }
 
-            select = doc.select("#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_textRow .value .cardtextbox");
+            select = doc.select("#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent" + selectorModifier + "_textRow .value .cardtextbox");
             List<String> cardText = new ArrayList<String>();
             if (!select.isEmpty()) {
                 for (Element element : select) {
@@ -74,7 +89,7 @@ public class CardParser extends Thread {
             }
             card.setCardText(cardText);
 
-            select = doc.select("#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_FlavorText .cardtextbox");
+            select = doc.select("#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent" + selectorModifier + "_FlavorText .cardtextbox");
             List<String> flavorText = new ArrayList<String>();
             if (!select.isEmpty()) {
                 for (Element element : select) {
@@ -83,22 +98,22 @@ public class CardParser extends Thread {
             }
             card.setFlavorText(flavorText);
 
-            select = doc.select("#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ptRow .value");
+            select = doc.select("#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent" + selectorModifier + "_ptRow .value");
             if (!select.isEmpty()) {
                 card.setPowerToughness(select.get(0).text().trim());
             }
 
-            select = doc.select("#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_currentSetSymbol a");
+            select = doc.select("#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent" + selectorModifier + "_currentSetSymbol a");
             if (!select.isEmpty()) {
                 card.setExpansion(select.get(1).text().trim());
             }
 
-            select = doc.select("#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_rarityRow .value span");
+            select = doc.select("#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent" + selectorModifier + "_rarityRow .value span");
             if (!select.isEmpty()) {
                 card.setRarity(select.get(0).text().trim());
             }
 
-            select = doc.select("#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_otherSetsValue a");
+            select = doc.select("#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent" + selectorModifier + "_otherSetsValue a");
             List<Integer> otherSets = new ArrayList<Integer>();
             if (!select.isEmpty()) {
                 for (Element element : select) {
@@ -112,12 +127,12 @@ public class CardParser extends Thread {
                 }
             }
 
-            select = doc.select("#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_numberRow .value");
+            select = doc.select("#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent" + selectorModifier + "_numberRow .value");
             if (!select.isEmpty()) {
                 card.setCardNumber(select.get(0).text().trim());
             }
 
-            select = doc.select("#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ArtistCredit a");
+            select = doc.select("#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent" + selectorModifier + "_ArtistCredit a");
             if (!select.isEmpty()) {
                 card.setArtist(select.get(0).text().trim());
             }

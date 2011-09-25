@@ -89,7 +89,7 @@ public class ThreadStarter extends Thread {
                 }
                 sb.append("|");
 
-                out.write(sb.toString());
+                out.write(sb.toString().replace("\u00C6", "AE"));
                 out.newLine();
             }
             out.close();
