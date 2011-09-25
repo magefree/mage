@@ -2,6 +2,7 @@ package mage.client.cards;
 
 import mage.Constants;
 import mage.cards.Card;
+import mage.cards.CardImpl;
 import mage.cards.ExpansionSet;
 import mage.sets.Sets;
 import mage.utils.CardUtil;
@@ -178,9 +179,7 @@ public class CardsStorage {
 			readUnimplemented("ZEN", "/zen.txt", names, cards);
 			readUnimplemented("WWK", "/wwk.txt", names, cards);
 			readUnimplemented("ROE", "/roe.txt", names, cards);
-			readUnimplemented("MBS", "/mbs.txt", names, cards);
-			readUnimplemented("NPH", "/nph.txt", names, cards);
-			readUnimplemented("M12", "/m12.txt", names, cards);
+			readUnimplemented("ISD", "/isd.txt", names, cards);
 
 			names.clear();
 			names = null;
@@ -188,36 +187,84 @@ public class CardsStorage {
 		return cards;
 	}
 
-	private static void readUnimplemented(String set, String filename, Set<String> names, List<Card> cards) {
-		try {
-			Card tmp = allCards.get(0);
-			InputStream is = CardsStorage.class.getResourceAsStream(filename);
-			if (is == null) {
-				log.error("Couldn't find: " + filename);
-				return;
-			}
-			Scanner scanner = new Scanner(is);
-			while (scanner.hasNextLine()) {
-				String line = scanner.nextLine();
-				String[] s = line.split("\\|");
-				if (s.length == 2) {
-					String name = s[1].trim();
-					if (!names.contains(set + name)) {
-						Integer cid = Integer.parseInt(s[0]);
-						Card card = tmp.copy();
-						card.setName(name);
-						card.setExpansionSetCode(set);
-						card.setCardNumber(cid);
-						card.setRarity(Constants.Rarity.NA); // mark as not implemented
-						card.getCardType().clear();
-						cards.add(card);
-					}
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+    private static final class UnimplementedCardImpl extends CardImpl {
+
+        public UnimplementedCardImpl(CardImpl card) {
+            super(card);
+        }
+
+        @Override
+        public UnimplementedCardImpl copy() {
+            return new UnimplementedCardImpl(this);
+        }
+
+        public void setCanTransform(boolean canTransform) {
+            this.canTransform = canTransform;
+        }
+
+        public void setNightCard(boolean nightCard) {
+            this.nightCard = nightCard;
+        }
+
+        public void setSecondSideCard(Card secondSideCard) {
+            this.secondSideCard = secondSideCard;
+        }
+    }
+
+    private static void readUnimplemented(String set, String filename, Set<String> names, List<Card> cards) {
+        try {
+            CardImpl tmp = (CardImpl) allCards.get(0);
+            InputStream is = CardsStorage.class.getResourceAsStream(filename);
+            if (is == null) {
+                log.error("Couldn't find: " + filename);
+                return;
+            }
+            Scanner scanner = new Scanner(is);
+            UnimplementedCardImpl cardToAdd = new UnimplementedCardImpl(tmp);
+            boolean addCard = false;
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] s = line.split("\\|");
+                UnimplementedCardImpl card = new UnimplementedCardImpl(tmp);
+                if (s.length == 2) {
+                    String name = s[1].trim();
+                    if (!names.contains(set + name)) {
+                        Integer cid;
+                        boolean secondFace = false;
+                        if (s[0].endsWith("a")) {
+                            cid = Integer.parseInt(s[0].replace("a", ""));
+                        } else if (s[0].endsWith("b")) {
+                            cid = Integer.parseInt(s[0].replace("b", ""));
+                            secondFace = true;
+                            addCard = true;
+                        } else {
+                            cid = Integer.parseInt(s[0]);
+                            addCard = true;
+                        }
+                        card.setName(name);
+                        card.setExpansionSetCode(set);
+                        card.setCardNumber(cid);
+                        card.setRarity(Constants.Rarity.NA); // mark as not implemented
+                        card.getCardType().clear();
+                        if (secondFace) {
+                            cardToAdd.setCanTransform(true);
+                            cardToAdd.setSecondSideCard(card);
+                            card.setCanTransform(true);
+                            card.setNightCard(true);
+                        } else {
+                            cardToAdd = card;
+                        }
+                    }
+                }
+                if (addCard) {
+                    cards.add(cardToAdd);
+                    addCard = false;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 	public static void main(String[] argv) {
 		for (Card card : getAllCards()) {
