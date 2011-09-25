@@ -60,6 +60,10 @@ public class MagicCardsImageSource implements CardImageSource {
         StringBuilder url = new StringBuilder("http://magiccards.info/scans/en/");
         url.append(set.toLowerCase()).append("/").append(collectorId);
 
+        if (cardSet.equals("ISD")) {
+            throw new Exception("ISD is not downloadable from magiccards.info. The ISD images have too bad quality.");
+        }
+
         if (twoFacedCard) {
             url.append(secondSide ? "b" : "a");
         }

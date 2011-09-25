@@ -75,7 +75,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 	
     private static CardImageSource cardImageSource;
     
-	private Proxy p = Proxy.NO_PROXY;;
+	private Proxy p = Proxy.NO_PROXY;
 	
 	private ExecutorService executor = Executors.newFixedThreadPool(10);
 
