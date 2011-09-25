@@ -36,12 +36,12 @@ import mage.Constants.Duration;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
-import mage.abilities.common.AttacksEachTurnStaticAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continious.BoostEnchantedEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -65,7 +65,7 @@ public class NimbusWings extends CardImpl<NimbusWings> {
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
         // Enchanted creature gets +1/+2 and has flying.
         SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 2, Duration.WhileOnBattlefield));
-        ability.addEffect(new GainAbilityAttachedEffect(new AttacksEachTurnStaticAbility(), AttachmentType.AURA));
+        ability.addEffect(new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA));
         this.addAbility(ability);
     }
 
