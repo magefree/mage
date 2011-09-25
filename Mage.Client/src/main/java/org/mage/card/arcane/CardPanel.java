@@ -481,14 +481,14 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 		setBounds(x + xOffset, y + yOffset, width, height);
 	}
 
-    @Override
+    /*@Override
 	public void repaint() {
 		Rectangle b = getBounds();
 		JRootPane rootPane = SwingUtilities.getRootPane(this);
 		if (rootPane == null) return;
 		Point p = SwingUtilities.convertPoint(getParent(), b.x, b.y, rootPane);
 		rootPane.repaint(p.x, p.y, b.width, b.height);
-	}
+	}*/
 
 	public int getCardX() {
 		return getX() + cardXOffset;
