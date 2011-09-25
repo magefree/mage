@@ -25,9 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planechase;
+package mage.sets.dissension;
 
 import java.util.UUID;
+
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -40,39 +41,45 @@ import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
 
 /**
+ *
  * @author Loki
  */
-public class GruulTurf extends CardImpl<GruulTurf> {
-
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("land");
+public class SimicGrowthChamber extends CardImpl<SimicGrowthChamber> {
+    private final static FilterControlledPermanent filter = new FilterControlledPermanent("land you control");
 
     static {
-        filter.getCardType().add(Constants.CardType.LAND);
+        filter.getCardType().add(CardType.LAND);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
     }
 
-    public GruulTurf(UUID ownerId) {
-        super(ownerId, 134, "Gruul Turf", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "HOP";
+    public SimicGrowthChamber(UUID ownerId) {
+        super(ownerId, 180, "Simic Growth Chamber", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
+        this.expansionSetCode = "DIS";
+
+        // Simic Growth Chamber enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false);
+        // When Simic Growth Chamber enters the battlefield, return a land you control to its owner's hand.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect());
         Target target = new TargetControlledPermanent(filter);
         target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
-        this.addAbility(new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new BasicManaEffect(new Mana(1, 1, 0, 0, 0, 0, 0)), new TapSourceCost()));
+        // {tap}: Add {G}{U} to your mana pool.
+        this.addAbility(new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 1, 1, 0, 0, 0, 0)), new TapSourceCost()));
     }
 
-    public GruulTurf(final GruulTurf card) {
+    public SimicGrowthChamber(final SimicGrowthChamber card) {
         super(card);
     }
 
     @Override
-    public GruulTurf copy() {
-        return new GruulTurf(this);
+    public SimicGrowthChamber copy() {
+        return new SimicGrowthChamber(this);
     }
 }

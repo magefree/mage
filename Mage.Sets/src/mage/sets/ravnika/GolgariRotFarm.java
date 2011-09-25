@@ -43,6 +43,7 @@ import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -65,7 +66,9 @@ public class GolgariRotFarm extends CardImpl<GolgariRotFarm> {
         this.addAbility(new EntersBattlefieldTappedAbility());
         // When Golgari Rot Farm enters the battlefield, return a land you control to its owner's hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect());
-        ability.addTarget(new TargetControlledPermanent(filter));
+        Target target = new TargetControlledPermanent(filter);
+        target.setRequired(true);
+        ability.addTarget(target);
         this.addAbility(ability);
         // {tap}: Add {B}{G} to your mana pool.
         this.addAbility(new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 1, 0, 0, 1, 0, 0)), new TapSourceCost()));

@@ -41,6 +41,7 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
+import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -59,7 +60,9 @@ public class IzzetBoilerworks extends CardImpl<IzzetBoilerworks> {
         this.expansionSetCode = "GPT";
         this.addAbility(new EntersBattlefieldTappedAbility());
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false);
-        ability.addTarget(new TargetControlledPermanent(filter));
+        Target target = new TargetControlledPermanent(filter);
+        target.setRequired(true);
+        ability.addTarget(target);
         this.addAbility(ability);
         this.addAbility(new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new BasicManaEffect(new Mana(1, 0, 1, 0, 0, 0, 0)), new TapSourceCost()));
     }
