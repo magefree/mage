@@ -80,7 +80,6 @@ public class BorosGarrison extends CardImpl<BorosGarrison> {
 class BorosGarrisonAbility extends BasicManaAbility<BorosGarrisonAbility> {
     public BorosGarrisonAbility() {
         super(new BasicManaEffect(new Mana(1, 0, 0, 1, 0, 0, 0)));
-        this.addCost(new TapSourceCost());
         this.netMana.setRed(1);
         this.netMana.setWhite(1);
     }
