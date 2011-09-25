@@ -45,7 +45,7 @@ import mage.counters.CounterType;
 public class FalkenrathMarauders extends CardImpl<FalkenrathMarauders> {
 
     public FalkenrathMarauders(UUID ownerId) {
-        super(ownerId, 147, "Falkenrath Marauders", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
+        super(ownerId, 141, "Falkenrath Marauders", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
         this.expansionSetCode = "ISD";
         this.subtype.add("Vampire");
         this.subtype.add("Warrior");
