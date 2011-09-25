@@ -220,15 +220,15 @@ public class CardsStorage {
                 return;
             }
             Scanner scanner = new Scanner(is);
-            UnimplementedCardImpl cardToAdd = new UnimplementedCardImpl(tmp);
+            UnimplementedCardImpl cardToAdd = null;
             boolean addCard = false;
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 String[] s = line.split("\\|");
-                UnimplementedCardImpl card = new UnimplementedCardImpl(tmp);
                 if (s.length == 2) {
                     String name = s[1].trim();
                     if (!names.contains(set + name)) {
+                        UnimplementedCardImpl card = new UnimplementedCardImpl(tmp);
                         Integer cid;
                         boolean secondFace = false;
                         if (s[0].endsWith("a")) {
@@ -236,7 +236,9 @@ public class CardsStorage {
                         } else if (s[0].endsWith("b")) {
                             cid = Integer.parseInt(s[0].replace("b", ""));
                             secondFace = true;
-                            addCard = true;
+                            if (cardToAdd != null) {
+                                addCard = true;
+                            }
                         } else {
                             cid = Integer.parseInt(s[0]);
                             addCard = true;
@@ -247,18 +249,21 @@ public class CardsStorage {
                         card.setRarity(Constants.Rarity.NA); // mark as not implemented
                         card.getCardType().clear();
                         if (secondFace) {
-                            cardToAdd.setCanTransform(true);
-                            cardToAdd.setSecondSideCard(card);
-                            card.setCanTransform(true);
-                            card.setNightCard(true);
+                            if (cardToAdd != null) {
+                                cardToAdd.setCanTransform(true);
+                                cardToAdd.setSecondSideCard(card);
+                                card.setCanTransform(true);
+                                card.setNightCard(true);
+                            }
                         } else {
                             cardToAdd = card;
                         }
+                        if (addCard) {
+                            cards.add(cardToAdd);
+                            cardToAdd = null;
+                            addCard = false;
+                        }
                     }
-                }
-                if (addCard) {
-                    cards.add(cardToAdd);
-                    addCard = false;
                 }
             }
         } catch (Exception e) {
