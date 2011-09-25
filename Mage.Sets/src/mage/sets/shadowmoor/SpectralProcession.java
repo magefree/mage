@@ -30,11 +30,9 @@ package mage.sets.shadowmoor;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.SpiritWhiteToken;
 
 /**
  *
@@ -49,7 +47,7 @@ public class SpectralProcession extends CardImpl<SpectralProcession> {
         this.color.setWhite(true);
 
         // Put three 1/1 white Spirit creature tokens with flying onto the battlefield.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new SpiritToken(), 3));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new SpiritWhiteToken(), 3));
     }
 
     public SpectralProcession(final SpectralProcession card) {
@@ -59,20 +57,5 @@ public class SpectralProcession extends CardImpl<SpectralProcession> {
     @Override
     public SpectralProcession copy() {
         return new SpectralProcession(this);
-    }
-}
-
-class SpiritToken extends Token {
-
-    public SpiritToken() {
-        super("Spirit", "a 1/1 white Spirit creature token with flying");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Spirit");
-
-        color.setWhite(true);
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-
-        this.addAbility(FlyingAbility.getInstance());
     }
 }

@@ -30,20 +30,19 @@ package mage.sets.zendikar;
 
 import java.util.UUID;
 
-import mage.Constants;
+import mage.Constants.AttachmentType;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
-import mage.abilities.Ability;
+import mage.abilities.common.AttacksEachTurnStaticAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.continious.BoostEnchantedEffect;
+import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -59,12 +58,15 @@ public class NimbusWings extends CardImpl<NimbusWings> {
         this.subtype.add("Aura");
         this.color.setWhite(true);
 
+        // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        // Enchanted creature gets +1/+2 and has flying.
+        SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 2, Duration.WhileOnBattlefield));
+        ability.addEffect(new GainAbilityAttachedEffect(new AttacksEachTurnStaticAbility(), AttachmentType.AURA));
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NimbusWingsEffect()));
     }
 
     public NimbusWings (final NimbusWings card) {
@@ -75,57 +77,4 @@ public class NimbusWings extends CardImpl<NimbusWings> {
     public NimbusWings copy() {
         return new NimbusWings(this);
     }
-}
-
-class NimbusWingsEffect extends ContinuousEffectImpl<NimbusWingsEffect> {
-
-    public NimbusWingsEffect() {
-        super(Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
-		staticText = "Enchanted creature gets +1/+2 and has flying";
-    }
-
-    public NimbusWingsEffect(final NimbusWingsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-	public boolean apply(Constants.Layer layer, Constants.SubLayer sublayer, Ability source, Game game) {
-		Permanent enchantment = game.getPermanent(source.getSourceId());
-		if (enchantment != null && enchantment.getAttachedTo() != null) {
-			Permanent creature = game.getPermanent(enchantment.getAttachedTo());
-			if (creature != null) {
-				switch (layer) {
-					case PTChangingEffects_7:
-						if (sublayer == Constants.SubLayer.ModifyPT_7c) {
-							creature.addPower(1);
-							creature.addToughness(2);
-						}
-						break;
-					case AbilityAddingRemovingEffects_6:
-						if (sublayer == Constants.SubLayer.NA) {
-							creature.addAbility(FlyingAbility.getInstance());
-						}
-						break;
-				}
-				return true;
-			}
-		}
-		return false;
-	}
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-	public boolean hasLayer(Constants.Layer layer) {
-		return layer == Constants.Layer.AbilityAddingRemovingEffects_6 || layer == layer.PTChangingEffects_7;
-	}
-
-    @Override
-    public NimbusWingsEffect copy() {
-        return new NimbusWingsEffect(this);
-    }
-
 }

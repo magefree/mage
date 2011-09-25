@@ -101,6 +101,7 @@ class DistressEffect extends OneShotEffect<DistressEffect> {
 					}
 				}
 			}
+			return true;
 		}
 		return false;
 	}

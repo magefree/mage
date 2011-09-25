@@ -37,7 +37,7 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.SpiritWhiteToken;
 
 /**
  *
@@ -53,7 +53,7 @@ public class LuminousAngel extends CardImpl<LuminousAngel> {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new SpiritToken(), 1), Constants.TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken(), 1), Constants.TargetController.YOU, true));
     }
 
     public LuminousAngel(final LuminousAngel card) {
@@ -63,17 +63,5 @@ public class LuminousAngel extends CardImpl<LuminousAngel> {
     @Override
     public LuminousAngel copy() {
         return new LuminousAngel(this);
-    }
-}
-
-class SpiritToken extends Token {
-    public SpiritToken() {
-        super("Spirit", "a 1/1 white Spirit creature token with flying");
-        cardType.add(CardType.CREATURE);
-        color.setWhite(true);
-        subtype.add("Spirit");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        this.addAbility(FlyingAbility.getInstance());
     }
 }

@@ -38,7 +38,7 @@ import mage.filter.FilterCard;
 public class FilterNonlandCard extends FilterCard<FilterNonlandCard> {
 
 	public FilterNonlandCard() {
-		this("non-land card");
+		this("nonland card");
 	}
 
 	public FilterNonlandCard(String name) {
