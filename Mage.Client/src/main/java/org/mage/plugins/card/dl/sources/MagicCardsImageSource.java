@@ -61,7 +61,7 @@ public class MagicCardsImageSource implements CardImageSource {
         url.append(set.toLowerCase()).append("/").append(collectorId);
 
         if (cardSet.equals("ISD")) {
-            throw new Exception("ISD is not downloadable from magiccards.info. The ISD images have too bad quality.");
+            return null;
         }
 
         if (twoFacedCard) {
