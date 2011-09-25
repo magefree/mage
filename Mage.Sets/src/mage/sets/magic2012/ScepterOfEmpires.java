@@ -94,11 +94,7 @@ class ScepterOfEmpiresEffect extends OneShotEffect<ScepterOfEmpiresEffect> {
 		}
 
 		int amount = throne && crown ? 3 : 1;
-		Permanent permanent = game.getPermanent(targetPointer.getFirst(source));
-		if (permanent != null) {
-			permanent.damage(amount, source.getSourceId(), game, true, false);
-			return true;
-		}
+
 		Player player = game.getPlayer(targetPointer.getFirst(source));
 		if (player != null) {
 			player.damage(amount, source.getSourceId(), game, false, true);
