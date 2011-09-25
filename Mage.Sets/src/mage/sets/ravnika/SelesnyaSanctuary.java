@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planechase;
+package mage.sets.ravnika;
 
 import java.util.UUID;
 
@@ -37,10 +37,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.abilities.mana.BasicManaAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
@@ -51,8 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Loki
  */
-public class BorosGarrison extends CardImpl<BorosGarrison> {
-
+public class SelesnyaSanctuary extends CardImpl<SelesnyaSanctuary> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("land you control");
 
     static {
@@ -60,22 +57,26 @@ public class BorosGarrison extends CardImpl<BorosGarrison> {
         filter.setScopeCardType(Filter.ComparisonScope.Any);
     }
 
-    public BorosGarrison(UUID ownerId) {
-        super(ownerId, 131, "Boros Garrison", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "HOP";
+    public SelesnyaSanctuary(UUID ownerId) {
+        super(ownerId, 281, "Selesnya Sanctuary", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
+        this.expansionSetCode = "RAV";
+
+        // Selesnya Sanctuary enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
+        // When Selesnya Sanctuary enters the battlefield, return a land you control to its owner's hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect());
         ability.addTarget(new TargetControlledPermanent(filter));
         this.addAbility(ability);
-        this.addAbility(new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new BasicManaEffect(new Mana(1, 0, 0, 1, 0, 0, 0)), new TapSourceCost()));
+        // {tap}: Add {G}{W} to your mana pool.
+        this.addAbility(new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 1, 0, 1, 0, 0, 0)), new TapSourceCost()));
     }
 
-    public BorosGarrison(final BorosGarrison card) {
+    public SelesnyaSanctuary(final SelesnyaSanctuary card) {
         super(card);
     }
 
     @Override
-    public BorosGarrison copy() {
-        return new BorosGarrison(this);
+    public SelesnyaSanctuary copy() {
+        return new SelesnyaSanctuary(this);
     }
 }

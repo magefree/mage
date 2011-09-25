@@ -25,57 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planechase;
+package mage.sets.ravnika;
 
 import java.util.UUID;
 
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTappedAbility;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.BasicManaEffect;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.abilities.mana.BasicManaAbility;
-import mage.abilities.mana.SimpleManaAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledPermanent;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.TargetPlayer;
 
 /**
  *
  * @author Loki
  */
-public class BorosGarrison extends CardImpl<BorosGarrison> {
+public class DuskmantleHouseOfShadow extends CardImpl<DuskmantleHouseOfShadow> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("land you control");
+    public DuskmantleHouseOfShadow(UUID ownerId) {
+        super(ownerId, 277, "Duskmantle, House of Shadow", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);
+        this.expansionSetCode = "RAV";
 
-    static {
-        filter.getCardType().add(CardType.LAND);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
-    }
-
-    public BorosGarrison(UUID ownerId) {
-        super(ownerId, 131, "Boros Garrison", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "HOP";
-        this.addAbility(new EntersBattlefieldTappedAbility());
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect());
-        ability.addTarget(new TargetControlledPermanent(filter));
+        // {tap}: Add {1} to your mana pool.
+        this.addAbility(new ColorlessManaAbility());
+        // {U}{B}, {tap}: Target player puts the top card of his or her library into his or her graveyard.
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(1), new ManaCostsImpl("{U}{B}"));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
-        this.addAbility(new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new BasicManaEffect(new Mana(1, 0, 0, 1, 0, 0, 0)), new TapSourceCost()));
     }
 
-    public BorosGarrison(final BorosGarrison card) {
+    public DuskmantleHouseOfShadow(final DuskmantleHouseOfShadow card) {
         super(card);
     }
 
     @Override
-    public BorosGarrison copy() {
-        return new BorosGarrison(this);
+    public DuskmantleHouseOfShadow copy() {
+        return new DuskmantleHouseOfShadow(this);
     }
 }
