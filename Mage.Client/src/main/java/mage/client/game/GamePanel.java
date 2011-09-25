@@ -454,7 +454,7 @@ public class GamePanel extends javax.swing.JPanel {
 
 	public void ask(String question, GameView gameView) {
 		updateGame(gameView);
-		this.feedbackPanel.getFeedback(FeedbackMode.QUESTION, question, true, false, null);
+		this.feedbackPanel.getFeedback(FeedbackMode.QUESTION, question, false, null);
 	}
 
 	public void pickTarget(String message, CardsView cardView, GameView gameView, Set<UUID> targets, boolean required, Map<String, Serializable> options) {
@@ -464,17 +464,17 @@ public class GamePanel extends javax.swing.JPanel {
 			ShowCardsDialog dialog = showCards(message, cardView, required);
 			options0.put("dialog", dialog);
 		}
-		this.feedbackPanel.getFeedback(required?FeedbackMode.INFORM:FeedbackMode.CANCEL, message, false, gameView.getSpecial(), options0);
+		this.feedbackPanel.getFeedback(required?FeedbackMode.INFORM:FeedbackMode.CANCEL, message, gameView.getSpecial(), options0);
 
 	}
 
 	public void inform(String information, GameView gameView) {
 		updateGame(gameView);
-		this.feedbackPanel.getFeedback(FeedbackMode.INFORM, information, false, gameView.getSpecial(), null);
+		this.feedbackPanel.getFeedback(FeedbackMode.INFORM, information, gameView.getSpecial(), null);
 	}
 
     public void endMessage(String message) {
-		this.feedbackPanel.getFeedback(FeedbackMode.END, message, false, false, null);
+		this.feedbackPanel.getFeedback(FeedbackMode.END, message, false, null);
     }
     
 	public int modalQuestion(String message, String title) {
@@ -487,7 +487,7 @@ public class GamePanel extends javax.swing.JPanel {
 
 	public void select(String message, GameView gameView) {
 		updateGame(gameView);
-		this.feedbackPanel.getFeedback(FeedbackMode.SELECT, message, false, gameView.getSpecial(), null);
+		this.feedbackPanel.getFeedback(FeedbackMode.SELECT, message, gameView.getSpecial(), null);
         if (PhaseManager.getInstance().isSkip(gameView, message)) {
             this.feedbackPanel.doClick();
         }
@@ -495,12 +495,12 @@ public class GamePanel extends javax.swing.JPanel {
 
 	public void playMana(String message, GameView gameView) {
 		updateGame(gameView);
-		this.feedbackPanel.getFeedback(FeedbackMode.CANCEL, message, false, gameView.getSpecial(), null);
+		this.feedbackPanel.getFeedback(FeedbackMode.CANCEL, message, gameView.getSpecial(), null);
 	}
 
 	public void playXMana(String message, GameView gameView) {
 		updateGame(gameView);
-		this.feedbackPanel.getFeedback(FeedbackMode.CONFIRM, message, false, gameView.getSpecial(), null);
+		this.feedbackPanel.getFeedback(FeedbackMode.CONFIRM, message, gameView.getSpecial(), null);
 	}
 
 	public void replayMessage(String message) {

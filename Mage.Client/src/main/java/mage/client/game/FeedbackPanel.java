@@ -81,7 +81,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
 		session = MageFrame.getSession();
 	}
 
-	public void getFeedback(FeedbackMode mode, String message, boolean modal, boolean special, Map<String, Serializable> options) {
+	public void getFeedback(FeedbackMode mode, String message, boolean special, Map<String, Serializable> options) {
 		logger.info("text: " + message);
 		this.lblMessage.setText(message);
 		this.selected = false;
@@ -140,12 +140,12 @@ public class FeedbackPanel extends javax.swing.JPanel {
 		this.revalidate();
 		this.repaint();
 		this.helper.setLinks(btnLeft, btnRight, btnSpecial);
-		if (modal) {
-			this.helper.setVisible(false);
-			startModal();
-		} else {
+//		if (modal) {
+//			this.helper.setVisible(false);
+//			startModal();
+//		} else {
 			this.helper.setVisible(true);
-		}
+//		}
 	}
 
 	private void handleOptions(Map<String, Serializable> options) {
@@ -178,7 +178,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
     }
 
 	public void clear() {
-		stopModal();
+//		stopModal();
 		this.btnLeft.setVisible(false);
 		this.btnRight.setVisible(false);
 		this.btnSpecial.setVisible(false);
@@ -186,53 +186,53 @@ public class FeedbackPanel extends javax.swing.JPanel {
 		logger.debug("feedback - clear");
 	}
 
-	public void clear0() {
-		stopModal();
-	}
+//	public void clear0() {
+//		stopModal();
+//	}
 
-	private synchronized void startModal() {
-
-        try {
-            if (SwingUtilities.isEventDispatchThread()) {
-                EventQueue theQueue = getToolkit().getSystemEventQueue();
-                while (!selected) {
-                    AWTEvent event = theQueue.getNextEvent();
-                    Object source = event.getSource();
-                    boolean dispatch = true;
-
-                    if (event instanceof MouseEvent) {
-                        MouseEvent e = (MouseEvent) event;
-                        MouseEvent m = SwingUtilities.convertMouseEvent((Component) e.getSource(), e, this);
-                        if (!this.contains(m.getPoint()) && e.getID() != MouseEvent.MOUSE_DRAGGED) {
-                            dispatch = false;
-                        }
-                    }
-
-                    if (dispatch) {
-                        if (event instanceof ActiveEvent) {
-                            ((ActiveEvent) event).dispatch();
-                        } else if (source instanceof Component) {
-                            ((Component) source).dispatchEvent(event);
-                        } else if (source instanceof MenuComponent) {
-                            ((MenuComponent) source).dispatchEvent(event);
-                        } else {
-							logger.warn("Unable to dispatch: " + event);
-                        }
-                    }
-                }
-            } else {
-                while (!selected) {
-                    wait();
-                }
-            }
-        } catch (InterruptedException ignored) {
-        }
-
-    }
-
-    private synchronized void stopModal() {
-        notifyAll();
-    }
+//	private synchronized void startModal() {
+//
+//        try {
+//            if (SwingUtilities.isEventDispatchThread()) {
+//                EventQueue theQueue = getToolkit().getSystemEventQueue();
+//                while (!selected) {
+//                    AWTEvent event = theQueue.getNextEvent();
+//                    Object source = event.getSource();
+//                    boolean dispatch = true;
+//
+//                    if (event instanceof MouseEvent) {
+//                        MouseEvent e = (MouseEvent) event;
+//                        MouseEvent m = SwingUtilities.convertMouseEvent((Component) e.getSource(), e, this);
+//                        if (!this.contains(m.getPoint()) && e.getID() != MouseEvent.MOUSE_DRAGGED) {
+//                            dispatch = false;
+//                        }
+//                    }
+//
+//                    if (dispatch) {
+//                        if (event instanceof ActiveEvent) {
+//                            ((ActiveEvent) event).dispatch();
+//                        } else if (source instanceof Component) {
+//                            ((Component) source).dispatchEvent(event);
+//                        } else if (source instanceof MenuComponent) {
+//                            ((MenuComponent) source).dispatchEvent(event);
+//                        } else {
+//							logger.warn("Unable to dispatch: " + event);
+//                        }
+//                    }
+//                }
+//            } else {
+//                while (!selected) {
+//                    wait();
+//                }
+//            }
+//        } catch (InterruptedException ignored) {
+//        }
+//
+//    }
+//
+//    private synchronized void stopModal() {
+//        notifyAll();
+//    }
 	
     /** This method is called from within the constructor to
      * initialize the form.
@@ -368,7 +368,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
 
 	private void btnRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRightActionPerformed
 		this.selected = true;
-		clear0();
+//		clear0();
 		if (connectedDialog != null) {
 			connectedDialog.hideDialog();
 		}
@@ -383,7 +383,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
 
 	private void btnLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeftActionPerformed
 		this.selected = true;
-		clear0();
+//		clear0();
 		session.sendPlayerBoolean(gameId, true);
 	}//GEN-LAST:event_btnLeftActionPerformed
 
