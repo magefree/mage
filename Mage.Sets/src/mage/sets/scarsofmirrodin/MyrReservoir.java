@@ -53,7 +53,7 @@ import java.util.UUID;
  */
 public class MyrReservoir extends CardImpl<MyrReservoir> {
 
-	private static final FilterCard myrCardFilter = new FilterCard();
+	private static final FilterCard myrCardFilter = new FilterCard("Myr card from your graveyard");
 
 	static {
 		myrCardFilter.getSubtype().add("Myr");

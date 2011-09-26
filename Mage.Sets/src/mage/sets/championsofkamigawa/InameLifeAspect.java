@@ -38,7 +38,6 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
-import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -47,7 +46,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class InameLifeAspect extends CardImpl<InameLifeAspect> {
 
-    private final static FilterCard filter = new FilterCard("Spirit cards");
+    private final static FilterCard filter = new FilterCard("Spirit cards from your graveyard");
 
     static {
         filter.getSubtype().add("Spirit");

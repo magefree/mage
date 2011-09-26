@@ -35,18 +35,16 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCardInGraveyard;
+import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
 
@@ -90,55 +88,49 @@ public class SuturedGhoul extends CardImpl<SuturedGhoul> {
 
 class SuturedGhoulEffect extends OneShotEffect<SuturedGhoulEffect> {
 
-	private static FilterCard filter = new FilterCreatureCard();
+    public SuturedGhoulEffect() {
+        super(Constants.Outcome.Benefit);
+        staticText = "exile any number of creature cards from your graveyard";
+    }
 
-	public SuturedGhoulEffect() {
-		super(Constants.Outcome.Benefit);
-		staticText = "exile any number of creature cards from your graveyard";
-	}
+    public SuturedGhoulEffect(SuturedGhoulEffect effect) {
+        super(effect);
+    }
 
-	public SuturedGhoulEffect(SuturedGhoulEffect effect) {
-		super(effect);
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (player.getGraveyard().size() > 0) {
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-		Permanent permanent = game.getPermanent(source.getSourceId());
-		if (player.getGraveyard().size() > 0) {
+            TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, new FilterCreatureCard("creature cards from your graveyard"));
+            if (player.chooseTarget(Constants.Outcome.Benefit, target, source, game)) {
+                int count = 0;
+                for (UUID uuid : target.getTargets()) {
+                    Card card = player.getGraveyard().get(uuid, game);
+                    if (card != null) {
+                        card.moveToExile(getId(), "Sutured Ghoul", source.getSourceId(), game);
+                        if (permanent != null) {
+                            permanent.imprint(card.getId(), game);
+                            count++;
+                        }
+                    }
+                }
 
-			TargetCardInGraveyard target = new TargetCardInGraveyard(0, Integer.MAX_VALUE, filter);
-			while (player.chooseTarget(Constants.Outcome.Benefit, target, source, game)) {
+                String msg = count == 1 ? "1 card" : count + "cards";
+                game.informPlayers("Sutured Ghoul: " + player.getName() + " exiled " + msg);
+            }
 
-			}
+        } else {
+            game.informPlayers("Sutured Ghoul: No cards in graveyard.");
+        }
+        return true;
+    }
 
-			int count = 0;
-			for (UUID uuid : target.getTargets()) {
-				Card card = player.getGraveyard().get(uuid, game);
-				if (card != null) {
-					card.moveToExile(getId(), "Sutured Ghoul", source.getSourceId(), game);
-					if (permanent != null) {
-						permanent.imprint(card.getId(), game);
-						count++;
-					}
-				}
-			}
-
-			String msg = count == 1 ? "1 card" : count + "cards";
-			game.informPlayers("Sutured Ghoul: " + player.getName() + " exiled " + msg);
-
-		    return true;
-		} else {
-			game.informPlayers("Sutured Ghoul: No cards in graveyard.");
-		}
-		return true;
-	}
-
-	@Override
-	public SuturedGhoulEffect copy() {
-		return new SuturedGhoulEffect(this);
-	}
-
+    @Override
+    public SuturedGhoulEffect copy() {
+        return new SuturedGhoulEffect(this);
+    }
 }
 
 class SuturedGhoulPowerCount implements DynamicValue {

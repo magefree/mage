@@ -58,18 +58,16 @@ public class RazorHippogriff extends CardImpl<RazorHippogriff> {
         super(ownerId, 17, "Razor Hippogriff", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Hippogriff");
+
 		this.color.setWhite(true);
         this.power = new MageInt(3);
       	this.toughness = new MageInt(3);
+
 		this.addAbility(FlyingAbility.getInstance());
 
-
-
 		Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect());
-		//TargetCard target = new TargetCard(Zone.GRAVEYARD, FilterArtifactCard.getDefault());
-		TargetCard target = new TargetCardInYourGraveyard(FilterArtifactCard.getDefault());
+		TargetCard target = new TargetCardInYourGraveyard(new FilterArtifactCard("artifact card from your graveyard"));
 		target.setRequired(true);
-		target.setTargetName("artifact card in your graveyard");
 		ability.addTarget(target);
 		ability.addEffect(new RazorHippogriffGainLifeEffect());
 

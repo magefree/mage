@@ -64,7 +64,7 @@ public class GolgariGuildmage extends CardImpl<GolgariGuildmage> {
         this.toughness = new MageInt(2);
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{4}{B}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
-        ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard()));
+        ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
         this.addAbility(ability);
         ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl("{4}{G}"));
         ability.addTarget(new TargetCreaturePermanent());

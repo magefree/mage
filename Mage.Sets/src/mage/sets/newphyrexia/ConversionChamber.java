@@ -45,7 +45,6 @@ import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.common.FilterArtifactCard;
 import mage.game.permanent.token.GolemToken;
-import mage.game.permanent.token.Token;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -59,7 +58,7 @@ public class ConversionChamber extends CardImpl<ConversionChamber> {
         this.expansionSetCode = "NPH";
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(new FilterArtifactCard())));
+        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(new FilterArtifactCard("artifact card from a graveyard"))));
         this.addAbility(ability);
         ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CreateTokenEffect(new GolemToken()), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());

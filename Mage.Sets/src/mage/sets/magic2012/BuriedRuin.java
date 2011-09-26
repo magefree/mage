@@ -41,21 +41,13 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.FilterCard;
+import mage.filter.common.FilterArtifactCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  * @author Loki
  */
 public class BuriedRuin extends CardImpl<BuriedRuin> {
-
-    private final static FilterCard filter = new FilterCard("artifact card");
-
-    static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
-    }
 
     public BuriedRuin(UUID ownerId) {
         super(ownerId, 224, "Buried Ruin", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
@@ -64,7 +56,7 @@ public class BuriedRuin extends CardImpl<BuriedRuin> {
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetCardInYourGraveyard(filter));
+        ability.addTarget(new TargetCardInYourGraveyard(new FilterArtifactCard("artifact card from your graveyard")));
         this.addAbility(ability);
 
     }

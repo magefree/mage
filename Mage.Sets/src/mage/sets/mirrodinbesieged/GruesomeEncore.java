@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class GruesomeEncore extends CardImpl<GruesomeEncore> {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard();
+    private static final FilterCreatureCard filter = new FilterCreatureCard("creature card from an opponent's graveyard");
 
     public GruesomeEncore(UUID ownerId) {
         super(ownerId, 44, "Gruesome Encore", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");

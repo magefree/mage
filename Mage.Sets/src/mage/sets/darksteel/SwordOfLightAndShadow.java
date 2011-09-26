@@ -91,12 +91,10 @@ public class SwordOfLightAndShadow extends CardImpl<SwordOfLightAndShadow> {
 
 class SwordOfLightAndShadowAbility extends TriggeredAbilityImpl<SwordOfLightAndShadowAbility> {
 
-    private static FilterCreatureCard filter = new FilterCreatureCard("creature");
-
     public SwordOfLightAndShadowAbility() {
         super(Zone.BATTLEFIELD, new ReturnToHandTargetEffect());
         this.addEffect(new GainLifeEffect(3));
-        this.addTarget(new TargetCardInYourGraveyard(filter));
+        this.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
     }
 
     public SwordOfLightAndShadowAbility(final SwordOfLightAndShadowAbility ability) {

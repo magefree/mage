@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class HanaKami extends CardImpl<HanaKami> {
 
-    private final static FilterCard filter = new FilterCard("Arcane card");
+    private final static FilterCard filter = new FilterCard("Arcane card from your graveyard");
 
     static {
         filter.getSubtype().add("Arcane");

@@ -65,7 +65,7 @@ public class EntomberExarch extends CardImpl<EntomberExarch> {
 
         // When Entomber Exarch enters the battlefield, choose one - Return target creature card from your graveyard to your hand; or target opponent reveals his or her hand, you choose a noncreature card from it, then that player discards that card.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false);
-        ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard()));
+        ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
         Mode mode = new Mode();
         mode.getEffects().add(new EntomberExarchEffect());
         mode.getTargets().add(new TargetOpponent());

@@ -46,7 +46,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
- * @author anonymous
+ * @author Loki
  */
 public class GrimLavamancer extends CardImpl<GrimLavamancer> {
 
@@ -62,7 +62,7 @@ public class GrimLavamancer extends CardImpl<GrimLavamancer> {
 
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(2), new ColoredManaCost(Constants.ColoredManaSymbol.R));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(2, new FilterCard("cards"))));
+        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(2, new FilterCard("cards from your graveyard"))));
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }

@@ -59,7 +59,7 @@ public class SalvageScout extends CardImpl<SalvageScout> {
 		this.toughness = new MageInt(1);
 
 		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{W}"));
-		ability.addTarget(new TargetCardInYourGraveyard(FilterArtifactCard.getDefault()));
+		ability.addTarget(new TargetCardInYourGraveyard(new FilterArtifactCard("artifact card from your graveyard")));
 		ability.addCost(new SacrificeSourceCost());
 		this.addAbility(ability);
 	}

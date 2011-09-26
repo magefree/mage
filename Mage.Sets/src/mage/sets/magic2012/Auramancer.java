@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class Auramancer extends CardImpl<Auramancer> {
 
-    private final static FilterCard filter = new FilterCard("enchantment card");
+    private final static FilterCard filter = new FilterCard("enchantment card from your graveyard");
 
     static {
         filter.getCardType().add(CardType.ENCHANTMENT);

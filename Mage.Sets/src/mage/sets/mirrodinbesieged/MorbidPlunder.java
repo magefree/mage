@@ -27,7 +27,6 @@
  */
 package mage.sets.mirrodinbesieged;
 
-import java.util.List;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
@@ -47,8 +46,6 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class MorbidPlunder extends CardImpl<MorbidPlunder> {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard();
-
     public MorbidPlunder(UUID ownerId) {
         super(ownerId, 47, "Morbid Plunder", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
         this.expansionSetCode = "MBS";
@@ -56,7 +53,7 @@ public class MorbidPlunder extends CardImpl<MorbidPlunder> {
         this.color.setBlack(true);
 
         this.getSpellAbility().addEffect(new MorbidPlunderEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 2, filter));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 2, new FilterCreatureCard("creature cards from your graveyard")));
     }
 
     public MorbidPlunder(final MorbidPlunder card) {

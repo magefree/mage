@@ -51,8 +51,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class RememberTheFallen extends CardImpl<RememberTheFallen> {
 
-    private static final FilterCreatureCard filterCreature = new FilterCreatureCard();
-    private static final FilterArtifactCard filterArtifact = new FilterArtifactCard();
+    private static final FilterCreatureCard filterCreature = new FilterCreatureCard("creature card from your graveyard");
+    private static final FilterArtifactCard filterArtifact = new FilterArtifactCard("artifact card from your graveyard");
 
     public RememberTheFallen(UUID ownerId) {
         super(ownerId, 21, "Remember the Fallen", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");

@@ -79,7 +79,7 @@ public class GlissaTheTraitor extends CardImpl<GlissaTheTraitor> {
 }
 
 class GlissaTheTraitorTriggeredAbility extends TriggeredAbilityImpl<GlissaTheTraitorTriggeredAbility> {
-    private static final FilterCard filter = new FilterCard("artifact card");
+    private static final FilterCard filter = new FilterCard("artifact card from your graveyard");
 
     static {
         filter.getCardType().add(CardType.ARTIFACT);

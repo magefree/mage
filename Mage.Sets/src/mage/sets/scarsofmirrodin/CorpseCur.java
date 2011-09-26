@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class CorpseCur extends CardImpl<CorpseCur> {
 
-    private static FilterCard filter = new FilterCard("creature card with infect");
+    private static final FilterCard filter = new FilterCard("creature card with infect from your graveyard");
 
 	static {
 		filter.getAbilities().add(InfectAbility.getInstance());

@@ -43,7 +43,7 @@ import mage.target.TargetCard;
 public class TargetCardInYourGraveyard extends TargetCard<TargetCardInYourGraveyard> {
 
 	public TargetCardInYourGraveyard() {
-		this(1, 1, new FilterCard());
+		this(1, 1, new FilterCard("card from your graveyard"));
 	}
 
 	public TargetCardInYourGraveyard(FilterCard filter) {
@@ -56,7 +56,7 @@ public class TargetCardInYourGraveyard extends TargetCard<TargetCardInYourGravey
 
 	public TargetCardInYourGraveyard(int minNumTargets, int maxNumTargets, FilterCard filter) {
 		super(minNumTargets, maxNumTargets, Zone.GRAVEYARD, filter);
-		this.targetName = filter.getMessage() + " in your graveyard";
+		this.targetName = filter.getMessage();
 	}
 
 	public TargetCardInYourGraveyard(final TargetCardInYourGraveyard target) {

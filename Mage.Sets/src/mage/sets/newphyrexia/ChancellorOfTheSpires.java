@@ -57,7 +57,7 @@ public class ChancellorOfTheSpires extends CardImpl<ChancellorOfTheSpires> {
 
     private static final String abilityText = "at the beginning of the first upkeep, each opponent puts the top seven cards of his or her library into his or her graveyard";
     
-    private static final FilterCard filter = new FilterCard("instant or sorcery card");
+    private static final FilterCard filter = new FilterCard("instant or sorcery card from an opponent's graveyard");
     
     static {
         filter.getCardType().add(CardType.INSTANT);

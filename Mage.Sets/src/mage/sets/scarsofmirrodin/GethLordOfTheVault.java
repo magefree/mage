@@ -58,7 +58,7 @@ import mage.target.common.TargetCardInOpponentsGraveyard;
  */
 public class GethLordOfTheVault extends CardImpl<GethLordOfTheVault> {
 
-	private static final FilterCard filter = new FilterCard("artifact or creature card");
+	private static final FilterCard filter = new FilterCard("artifact or creature card from an opponent's graveyard");
 
 	static {
 		filter.getCardType().add(CardType.CREATURE);

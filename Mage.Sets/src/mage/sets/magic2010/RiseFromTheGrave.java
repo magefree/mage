@@ -50,13 +50,11 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class RiseFromTheGrave extends CardImpl<RiseFromTheGrave> {
 
-	private static final FilterCreatureCard filter = new FilterCreatureCard();
-
 	public RiseFromTheGrave(UUID ownerId) {
 		super(ownerId, 109, "Rise from the Grave", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");
 		this.expansionSetCode = "M10";
 		this.color.setBlack(true);
-		this.getSpellAbility().addTarget(new TargetCardInGraveyard(filter));
+		this.getSpellAbility().addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
 		this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
 		this.getSpellAbility().addEffect(new RiseFromTheGraveEffect());
 	}
@@ -117,7 +115,7 @@ class RiseFromTheGraveEffect extends ContinuousEffectImpl<RiseFromTheGraveEffect
 
 	@Override
 	public boolean hasLayer(Layer layer) {
-		return layer == Layer.ColorChangingEffects_5 || layer == layer.TypeChangingEffects_4;
+		return layer == Layer.ColorChangingEffects_5 || layer == Layer.TypeChangingEffects_4;
 	}
 
 }

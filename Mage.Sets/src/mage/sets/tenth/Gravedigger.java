@@ -54,7 +54,7 @@ public class Gravedigger extends CardImpl<Gravedigger> {
 		this.toughness = new MageInt(2);
 
 		Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true);
-		ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard()));
+		ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
 		this.addAbility(ability);
 	}
 

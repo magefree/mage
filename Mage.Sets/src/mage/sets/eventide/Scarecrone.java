@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class Scarecrone extends CardImpl<Scarecrone> {
 
-    private final static FilterCard filter = new FilterCard("artifact creature");
+    private final static FilterCard filter = new FilterCard("artifact creature card from your graveyard");
 
     static {
         filter.getCardType().add(CardType.ARTIFACT);

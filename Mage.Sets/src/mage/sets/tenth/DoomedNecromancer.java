@@ -61,7 +61,7 @@ public class DoomedNecromancer extends CardImpl<DoomedNecromancer> {
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new ColoredManaCost(Constants.ColoredManaSymbol.B));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard()));
+        ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
         this.addAbility(ability);
         // {B}, {tap}, Sacrifice Doomed Necromancer: Return target creature card from your graveyard to the battlefield.
     }

@@ -67,7 +67,7 @@ public class CruelUltimatum extends CardImpl<CruelUltimatum> {
         this.getSpellAbility().addEffect(new DiscardTargetEffect(3));
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(5));
 
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard()));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
         this.getSpellAbility().addEffect(new CruelUltimatumEffect());
         this.getSpellAbility().addEffect(new DrawCardEffect(3));
         this.getSpellAbility().addEffect(new GainLifeEffect(5));

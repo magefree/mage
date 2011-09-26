@@ -45,8 +45,6 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class SharuumTheHegemon extends CardImpl<SharuumTheHegemon> {
 
-    private static final FilterArtifactCard filter = new FilterArtifactCard();
-
     public SharuumTheHegemon(UUID ownerId) {
         super(ownerId, 194, "Sharuum the Hegemon", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{W}{U}{B}");
         this.expansionSetCode = "ALA";
@@ -61,7 +59,7 @@ public class SharuumTheHegemon extends CardImpl<SharuumTheHegemon> {
 
         this.addAbility(FlyingAbility.getInstance());
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), true);
-        ability.addTarget(new TargetCardInYourGraveyard(filter));
+        ability.addTarget(new TargetCardInYourGraveyard(new FilterArtifactCard("artifact card from your graveyard")));
         this.addAbility(ability);
     }
 

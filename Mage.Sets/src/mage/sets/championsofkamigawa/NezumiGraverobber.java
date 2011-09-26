@@ -37,7 +37,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.FlippedCondition;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -67,7 +66,7 @@ public class NezumiGraverobber extends CardImpl<NezumiGraverobber> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{1}{B}"));
-        ability.addTarget(new TargetCardInOpponentsGraveyard(new FilterCard()));
+        ability.addTarget(new TargetCardInOpponentsGraveyard(new FilterCard("card from an opponent's graveyard")));
         ability.addEffect(new NezumiGraverobberFlipEffect());
         this.addAbility(ability);
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new NighteyesTheDesecratorToken()), FlippedCondition.getInstance(), "")));
@@ -129,7 +128,7 @@ class NighteyesTheDesecratorToken extends Token {
         power = new MageInt(4);
         toughness = new MageInt(2);
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl("{4}{B}"));
-        ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard()));
+        ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
         this.addAbility(ability);
     }
 }

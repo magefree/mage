@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ScarbladeElite extends CardImpl<ScarbladeElite> {
 
-    private final static FilterCard filter = new FilterCard("Assassin");
+    private final static FilterCard filter = new FilterCard("Assassin card from your graveyard");
 
     static {
         filter.getSubtype().add("Assassin");

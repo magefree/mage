@@ -62,7 +62,7 @@ public class PostmortemLunge extends CardImpl<PostmortemLunge> {
         this.color.setBlack(true);
 
         this.getSpellAbility().addEffect(new PostmortemLungeEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard()));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
     }
 
     public PostmortemLunge(final PostmortemLunge card) {

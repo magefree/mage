@@ -15,12 +15,11 @@ import mage.target.common.TargetCardInYourGraveyard;
 import java.util.UUID;
 
 public class AngelOfFlightAlabaster extends CardImpl<AngelOfFlightAlabaster> {
-    private static final FilterCard filter = new FilterCard("Spirit card");
+    private static final FilterCard filter = new FilterCard("Spirit card from your graveyard");
 
     static {
         filter.getSubtype().add("Spirit");
         filter.setScopeSubtype(Filter.ComparisonScope.Any);
-
     }
 
     public AngelOfFlightAlabaster(UUID ownerId) {

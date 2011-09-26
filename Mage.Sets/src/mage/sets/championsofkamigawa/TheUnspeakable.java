@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class TheUnspeakable extends CardImpl<TheUnspeakable> {
 
-    private final static FilterCard filter = new FilterCard("Arcane card");
+    private final static FilterCard filter = new FilterCard("Arcane card from your graveyard");
 
     static {
         filter.getSubtype().add("Arcane");

@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class NaturesSpiral extends CardImpl<NaturesSpiral> {
 
-	private static final FilterCard filter = new FilterCard("permanent card");
+	private static final FilterCard filter = new FilterCard("permanent card from your graveyard");
 
 	static {
 		filter.getCardType().add(CardType.ARTIFACT);

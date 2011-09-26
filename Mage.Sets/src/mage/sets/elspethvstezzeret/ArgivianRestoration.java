@@ -32,7 +32,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.common.FilterArtifactCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -40,12 +40,6 @@ import mage.target.common.TargetCardInYourGraveyard;
  * @author North
  */
 public class ArgivianRestoration extends CardImpl<ArgivianRestoration> {
-
-    private static final FilterCreatureCard filter = new FilterCreatureCard("artifact");
-
-    static {
-        filter.getCardType().add(CardType.ARTIFACT);
-    }
 
     public ArgivianRestoration(UUID ownerId) {
         super(ownerId, 69, "Argivian Restoration", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");
@@ -55,7 +49,7 @@ public class ArgivianRestoration extends CardImpl<ArgivianRestoration> {
 
         // Return target artifact card from your graveyard to the battlefield.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterArtifactCard("artifact card from your graveyard")));
     }
 
     public ArgivianRestoration(final ArgivianRestoration card) {

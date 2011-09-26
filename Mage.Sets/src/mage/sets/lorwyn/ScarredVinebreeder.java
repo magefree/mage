@@ -48,7 +48,7 @@ import java.util.UUID;
  */
 public class ScarredVinebreeder extends CardImpl<ScarredVinebreeder> {
 
-    private static final FilterCard filter = new FilterCard("Elf card");
+    private static final FilterCard filter = new FilterCard("Elf card from your graveyard");
 
     static {
         filter.getSubtype().add("Elf");

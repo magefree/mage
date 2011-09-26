@@ -54,12 +54,10 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class CemeteryReaper extends CardImpl<CemeteryReaper> {
 
-    private final static FilterCreaturePermanent zombieFilter = new FilterCreaturePermanent("Zombie creatures");
-    private final static FilterCreatureCard filter = new FilterCreatureCard("creature card");
-
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Zombie creatures");
     static {
-        zombieFilter.getSubtype().add("Zombie");
-        zombieFilter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.getSubtype().add("Zombie");
+        filter.setScopeSubtype(Filter.ComparisonScope.Any);
     }
 
     public CemeteryReaper(UUID ownerId) {
@@ -69,11 +67,11 @@ public class CemeteryReaper extends CardImpl<CemeteryReaper> {
         this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Constants.Duration.WhileOnBattlefield, zombieFilter, true)));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Constants.Duration.WhileOnBattlefield, filter, true)));
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{2}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new CreateTokenEffect(new ZombieToken()));
-        ability.addTarget(new TargetCardInGraveyard(filter));
+        ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
         this.addAbility(ability);
     }
 

@@ -40,7 +40,7 @@ import mage.target.TargetCard;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TargetCardInExile extends TargetCard<TargetCardInGraveyard> {
+public class TargetCardInExile extends TargetCard<TargetCardInExile> {
 
     private UUID zoneId;
     

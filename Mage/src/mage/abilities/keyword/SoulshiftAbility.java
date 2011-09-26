@@ -11,7 +11,7 @@ public class SoulshiftAbility extends DiesTriggeredAbility {
 
     public SoulshiftAbility(int amount) {
         super(new ReturnToHandTargetEffect());
-        FilterCard filter = new FilterCard();
+        FilterCard filter = new FilterCard("Spirit card with converted mana cost " + amount + " or less from your graveyard");
         filter.setConvertedManaCost(amount + 1);
         filter.setConvertedManaCostComparison(Filter.ComparisonType.LessThan);
         filter.getSubtype().add("Spirit");

@@ -18,7 +18,7 @@ public class TargetCardInOpponentsGraveyard extends TargetCard<TargetCardInOppon
 
     public TargetCardInOpponentsGraveyard(int minNumTargets, int maxNumTargets, FilterCard filter) {
         super(minNumTargets, maxNumTargets, Constants.Zone.GRAVEYARD, filter);
-        this.targetName = filter.getMessage() + " from an opponent's graveyard";
+        this.targetName = filter.getMessage();
     }
 
     public TargetCardInOpponentsGraveyard(final TargetCardInOpponentsGraveyard target) {

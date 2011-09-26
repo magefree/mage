@@ -35,8 +35,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.FilterCard;
+import mage.filter.common.FilterArtifactCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -44,13 +43,6 @@ import mage.target.common.TargetCardInYourGraveyard;
  * @author Loki
  */
 public class TreasureHunter extends CardImpl<TreasureHunter> {
-
-    private final static FilterCard filter = new FilterCard("artifact card");
-
-    static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
-    }
 
     public TreasureHunter(UUID ownerId) {
         super(ownerId, 52, "Treasure Hunter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
@@ -60,7 +52,7 @@ public class TreasureHunter extends CardImpl<TreasureHunter> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true);
-        ability.addTarget(new TargetCardInYourGraveyard(filter));
+        ability.addTarget(new TargetCardInYourGraveyard(new FilterArtifactCard("artifact card from your graveyard")));
         this.addAbility(ability);
     }
 

@@ -52,7 +52,7 @@ public class UnburialRites extends CardImpl<UnburialRites> {
 
         // Return target creature card from your graveyard to the battlefield.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard()));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
 
         // Flashback {3}{W}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{W}"), Constants.TimingRule.SORCERY));

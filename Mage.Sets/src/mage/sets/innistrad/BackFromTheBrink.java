@@ -35,16 +35,12 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
-import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.sets.tokens.EmptyToken;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -111,7 +107,7 @@ class BackFromTheBrinkEffect extends OneShotEffect<BackFromTheBrinkEffect> {
 class BackFromTheBrinkCost extends CostImpl<BackFromTheBrinkCost> {
 
     public BackFromTheBrinkCost() {
-        this.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard()));
+        this.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
         this.text = "Exile a creature card from your graveyard and pay its mana cost";
     }
     

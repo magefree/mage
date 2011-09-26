@@ -53,7 +53,7 @@ public class ArtisanOfKozilek extends CardImpl<ArtisanOfKozilek> {
         this.power = new MageInt(10);
         this.toughness = new MageInt(9);
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect());
-        ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard()));
+        ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
         this.addAbility(ability);
         this.addAbility(new AnnihilatorAbility(2));
     }

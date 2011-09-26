@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class Disentomb extends CardImpl<Disentomb> {
 
-	private static FilterCreatureCard filter = new FilterCreatureCard();
+	private static FilterCreatureCard filter = new FilterCreatureCard("creature card from your graveyard");
 
 	public Disentomb(UUID ownerId) {
 		super(ownerId, 92, "Disentomb", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");

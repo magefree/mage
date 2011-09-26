@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class CallToMind extends CardImpl<CallToMind> {
 
-	private static final FilterCard filter = new FilterCard("instant or sorcery card");
+	private static final FilterCard filter = new FilterCard("instant or sorcery card from your graveyard");
 
 	static {
 		filter.getCardType().add(CardType.INSTANT);
