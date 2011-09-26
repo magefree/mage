@@ -58,7 +58,7 @@ import mage.players.Player;
  * @author Loki
  */
 public class GarrukPrimalHunter extends CardImpl<GarrukPrimalHunter> {
-    private static FilterControlledPermanent filter = new FilterControlledPermanent("land your control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("land your control");
 
     static {
         filter.getCardType().add(CardType.LAND);
