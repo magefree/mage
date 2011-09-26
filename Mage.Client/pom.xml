@@ -135,7 +135,6 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <classpathPrefix>lib/</classpathPrefix>
                             <mainClass>mage.client.MageFrame</mainClass>
                         </manifest>
                     </archive>
