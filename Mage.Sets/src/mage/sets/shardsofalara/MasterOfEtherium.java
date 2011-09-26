@@ -55,7 +55,8 @@ public class MasterOfEtherium extends CardImpl<MasterOfEtherium> {
         filterCounted.getCardType().add(CardType.ARTIFACT);
         filterCounted.setScopeCardType(Filter.ComparisonScope.Any);
         filterBoosted.getCardType().add(CardType.ARTIFACT);
-        filterBoosted.setScopeCardType(Filter.ComparisonScope.Any);
+        filterBoosted.setScopeCardType(Filter.ComparisonScope.All);
+        filterBoosted.setTargetController(Constants.TargetController.YOU);
     }
 
     public MasterOfEtherium(UUID ownerId) {
