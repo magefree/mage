@@ -590,7 +590,8 @@ public class GamePanel extends javax.swing.JPanel {
 		userChatPanel.useExtendedView(ChatPanel.VIEW_MODE.CHAT);
 		gameChatPanel.setConnectedChat(userChatPanel);
 		gameChatPanel.disableInput();
-		jTabbedPane1 = new JTabbedPane();
+//		jTabbedPane1 = new JTabbedPane();
+        jSplitPane2 = new javax.swing.JSplitPane();
 
 		hand.setCardDimension(getHandCardDimension());
 		handCards = new HashMap<String, SimpleCardsView>();
@@ -859,10 +860,15 @@ public class GamePanel extends javax.swing.JPanel {
         hand.setZone(Constants.Zone.HAND.toString());
 		HandContainer handContainer = new HandContainer(hand);
 
-		jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
-		jTabbedPane1.addTab("Game", gameChatPanel);
-		jTabbedPane1.addTab("Chat", userChatPanel);
-		jTabbedPane1.setSelectedIndex(1);
+        jSplitPane2.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+        jSplitPane2.setResizeWeight(0.5);
+        jSplitPane2.setLeftComponent(userChatPanel);
+        jSplitPane2.setBottomComponent(gameChatPanel);
+        
+//		jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
+//		jTabbedPane1.addTab("Game", gameChatPanel);
+//		jTabbedPane1.addTab("Chat", userChatPanel);
+//		jTabbedPane1.setSelectedIndex(1);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -891,7 +897,7 @@ public class GamePanel extends javax.swing.JPanel {
         jSplitPane1.setLeftComponent(jPanel3);
 
         gameChatPanel.setMinimumSize(new java.awt.Dimension(100, 48));
-        jSplitPane1.setRightComponent(jTabbedPane1);
+        jSplitPane1.setRightComponent(jSplitPane2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -1070,7 +1076,8 @@ public class GamePanel extends javax.swing.JPanel {
 	private Map<String, SimpleCardsView> handCards;
     private mage.client.cards.Cards stack;
 
-	private JTabbedPane jTabbedPane1;
+//	private JTabbedPane jTabbedPane1;
+    private javax.swing.JSplitPane jSplitPane2;
 	private Border emptyBorder = new EmptyBorder(0,0,0,0);
 	private Color prevBGColor;
 	private final static Color DEFAULT_FOREGROUND_COLOR = Color.BLACK;

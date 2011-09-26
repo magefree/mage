@@ -257,11 +257,9 @@ class TableModel extends AbstractTableModel {
     private void initComponents() {
 
         txtMessage = new javax.swing.JTextField();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPane1 = new javax.swing.JScrollPane();
-		//txtConversation = new JTextArea();
         txtConversation = new ColorPane();
-		//txtConversation = new JTextPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -271,45 +269,43 @@ class TableModel extends AbstractTableModel {
             }
         });
 
-        jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
+        jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+        jSplitPane1.setResizeWeight(0.25);
 
-        //txtConversation.setColumns(20);
+//        txtConversation.setColumns(20);
 		txtConversation.setOpaque(false);
-        //txtConversation.setEditable(false);
-        txtConversation.setFont(new java.awt.Font("Arial", 0, 14));
-		//txtConversation.enableInputMethods(false);
-        //txtConversation.setLineWrap(true);
-        //txtConversation.setRows(5);
-        //txtConversation.setWrapStyleWord(true);
-
+//        txtConversation.setEditable(false);
+        txtConversation.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+//        txtConversation.setLineWrap(true);
+//        txtConversation.setRows(5);
+//        txtConversation.setWrapStyleWord(true);
         jScrollPane1.setViewportView(txtConversation);
 		jScrollPane1.setBorder(new EmptyBorder(0,0,0,0));
 
-        jTabbedPane1.addTab("chat", jScrollPane1);
+        jSplitPane1.setLeftComponent(jScrollPane2);
 
         jTable1.setModel(this.tableModel);
         jTable1.setToolTipText("Connected players");
         jTable1.setGridColor(new java.awt.Color(255, 255, 255));
         jScrollPane2.setViewportView(jTable1);
 
-        jTabbedPane1.addTab("players", jScrollPane2);
+        jSplitPane1.setBottomComponent(jScrollPane1);
+		jSplitPane1.setDividerLocation(150 + jSplitPane1.getInsets().bottom);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtMessage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+            .addComponent(txtMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-
-        jTabbedPane1.getAccessibleContext().setAccessibleName("chat");
     }// </editor-fold>//GEN-END:initComponents
 
 	private void simplifyComponents() {
@@ -327,7 +323,7 @@ class TableModel extends AbstractTableModel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-		jTabbedPane1 = null;
+
 		jTable1 = null;
 		jScrollPane2 = null;
 	}
@@ -376,10 +372,9 @@ class TableModel extends AbstractTableModel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTable jTable1;
-    //private javax.swing.JTextArea txtConversation;
-	private ColorPane txtConversation;
+    private ColorPane txtConversation;
     private javax.swing.JTextField txtMessage;
     // End of variables declaration//GEN-END:variables
 
