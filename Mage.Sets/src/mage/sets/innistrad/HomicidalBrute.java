@@ -34,7 +34,6 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
-import mage.abilities.effects.common.UntapSourceEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -106,7 +105,7 @@ public class HomicidalBrute extends CardImpl<HomicidalBrute> {
 class HomicidalBruteTriggeredAbility extends TriggeredAbilityImpl<HomicidalBruteTriggeredAbility> {
 
     public HomicidalBruteTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new UntapSourceEffect(), false);
+        super(Constants.Zone.BATTLEFIELD, new TapSourceEffect(), false);
         addEffect(new TransformSourceEffect());
     }
 
