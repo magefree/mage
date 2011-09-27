@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.sets.lorwyn;
 
 import java.util.UUID;
 import mage.Constants.CardType;
@@ -37,6 +37,7 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.SkipEnchantedUntapEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -44,17 +45,23 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class ParalyzingGrasp extends CardImpl<ParalyzingGrasp> {
+public class GlimmerdustNap extends CardImpl<GlimmerdustNap> {
 
-    public ParalyzingGrasp(UUID ownerId) {
-        super(ownerId, 58, "Paralyzing Grasp", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
-        this.expansionSetCode = "ZEN";
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
+
+    static {
+        filter.setTapped(true);
+    }
+
+    public GlimmerdustNap(UUID ownerId) {
+        super(ownerId, 68, "Glimmerdust Nap", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
+        this.expansionSetCode = "LRW";
         this.subtype.add("Aura");
 
         this.color.setBlue(true);
 
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        // Enchant tapped creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
@@ -62,12 +69,12 @@ public class ParalyzingGrasp extends CardImpl<ParalyzingGrasp> {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipEnchantedUntapEffect()));
     }
 
-    public ParalyzingGrasp(final ParalyzingGrasp card) {
+    public GlimmerdustNap(final GlimmerdustNap card) {
         super(card);
     }
 
     @Override
-    public ParalyzingGrasp copy() {
-        return new ParalyzingGrasp(this);
+    public GlimmerdustNap copy() {
+        return new GlimmerdustNap(this);
     }
 }

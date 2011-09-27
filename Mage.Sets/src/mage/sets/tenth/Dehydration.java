@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.sets.tenth;
 
 import java.util.UUID;
 import mage.Constants.CardType;
@@ -44,11 +44,11 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class ParalyzingGrasp extends CardImpl<ParalyzingGrasp> {
+public class Dehydration extends CardImpl<Dehydration> {
 
-    public ParalyzingGrasp(UUID ownerId) {
-        super(ownerId, 58, "Paralyzing Grasp", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
-        this.expansionSetCode = "ZEN";
+    public Dehydration(UUID ownerId) {
+        super(ownerId, 78, "Dehydration", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
+        this.expansionSetCode = "10E";
         this.subtype.add("Aura");
 
         this.color.setBlue(true);
@@ -62,12 +62,12 @@ public class ParalyzingGrasp extends CardImpl<ParalyzingGrasp> {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipEnchantedUntapEffect()));
     }
 
-    public ParalyzingGrasp(final ParalyzingGrasp card) {
+    public Dehydration(final Dehydration card) {
         super(card);
     }
 
     @Override
-    public ParalyzingGrasp copy() {
-        return new ParalyzingGrasp(this);
+    public Dehydration copy() {
+        return new Dehydration(this);
     }
 }

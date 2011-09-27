@@ -28,82 +28,79 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.SkipEnchantedUntapEffect;
-import mage.abilities.keyword.EnchantAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.game.permanent.token.ZombieToken;
+import mage.players.Player;
+import mage.target.TargetPlayer;
 
 /**
- * @author Loki
+ *
+ * @author North
  */
-public class Claustrophobia extends CardImpl<Claustrophobia> {
+public class CellarDoor extends CardImpl<CellarDoor> {
 
-    public Claustrophobia(UUID ownerId) {
-        super(ownerId, 48, "Claustrophobia", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}{U}");
+    public CellarDoor(UUID ownerId) {
+        super(ownerId, 218, "Cellar Door", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "ISD";
-        this.subtype.add("Aura");
 
-        this.color.setBlue(true);
-
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
-        // When Claustrophobia enters the battlefield, tap enchanted creature.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ClaustrophobiaEffect()));
-        // Enchanted creature doesn't untap during its controller's untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipEnchantedUntapEffect()));
+        // {3}, {tap}: Target player puts the bottom card of his or her library into his or her graveyard. If it's a creature card, you put a 2/2 black Zombie creature token onto the battlefield.
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CellarDoorEffect(), new GenericManaCost(3));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetPlayer());
+        this.addAbility(ability);
     }
 
-    public Claustrophobia(final Claustrophobia card) {
+    public CellarDoor(final CellarDoor card) {
         super(card);
     }
 
     @Override
-    public Claustrophobia copy() {
-        return new Claustrophobia(this);
+    public CellarDoor copy() {
+        return new CellarDoor(this);
     }
 }
 
-class ClaustrophobiaEffect extends OneShotEffect<ClaustrophobiaEffect> {
-    ClaustrophobiaEffect() {
-        super(Constants.Outcome.Tap);
-        staticText = "tap enchanted creature";
+class CellarDoorEffect extends OneShotEffect<CellarDoorEffect> {
+
+    public CellarDoorEffect() {
+        super(Outcome.PutCreatureInPlay);
+        this.staticText = "Target player puts the bottom card of his or her library into his or her graveyard. If it's a creature card, you put a 2/2 black Zombie creature token onto the battlefield";
     }
 
-    ClaustrophobiaEffect(final ClaustrophobiaEffect effect) {
+    public CellarDoorEffect(final CellarDoorEffect effect) {
         super(effect);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment != null && enchantment.getAttachedTo() != null) {
-            Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
-            if (permanent != null) {
-                return permanent.tap(game);
-            }
-        }
-        return false;
+    public CellarDoorEffect copy() {
+        return new CellarDoorEffect(this);
     }
 
     @Override
-    public ClaustrophobiaEffect copy() {
-        return new ClaustrophobiaEffect();
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getFirstTarget());
+        if (player != null && player.getLibrary().size() > 0) {
+            Card card = player.getLibrary().removeFromBottom(game);
+            if (card != null) {
+                card.moveToZone(Zone.GRAVEYARD, source.getId(), game, true);
+                if (card.getCardType().contains(CardType.CREATURE)) {
+                    ZombieToken token = new ZombieToken();
+                    token.putOntoBattlefield(game, source.getSourceId(), source.getControllerId());
+                }
+            }
+            return true;
+        }
+        return false;
     }
 }

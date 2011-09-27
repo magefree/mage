@@ -25,49 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.sets.planechase;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.SkipEnchantedUntapEffect;
-import mage.abilities.keyword.EnchantAbility;
-import mage.cards.CardImpl;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author North
  */
-public class ParalyzingGrasp extends CardImpl<ParalyzingGrasp> {
+public class RockslideElemental extends mage.sets.shardsofalara.RockslideElemental {
 
-    public ParalyzingGrasp(UUID ownerId) {
-        super(ownerId, 58, "Paralyzing Grasp", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
-        this.expansionSetCode = "ZEN";
-        this.subtype.add("Aura");
-
-        this.color.setBlue(true);
-
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
-        // Enchanted creature doesn't untap during its controller's untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipEnchantedUntapEffect()));
+    public RockslideElemental(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 63;
+        this.expansionSetCode = "HOP";
     }
 
-    public ParalyzingGrasp(final ParalyzingGrasp card) {
+    public RockslideElemental(final RockslideElemental card) {
         super(card);
     }
 
     @Override
-    public ParalyzingGrasp copy() {
-        return new ParalyzingGrasp(this);
+    public RockslideElemental copy() {
+        return new RockslideElemental(this);
     }
 }

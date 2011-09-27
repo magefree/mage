@@ -25,49 +25,76 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.sets.innistrad;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.SkipEnchantedUntapEffect;
-import mage.abilities.keyword.EnchantAbility;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.CreatureDiesTriggeredAbility;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
  * @author North
  */
-public class ParalyzingGrasp extends CardImpl<ParalyzingGrasp> {
+public class MurderOfCrows extends CardImpl<MurderOfCrows> {
 
-    public ParalyzingGrasp(UUID ownerId) {
-        super(ownerId, 58, "Paralyzing Grasp", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
-        this.expansionSetCode = "ZEN";
-        this.subtype.add("Aura");
+    public MurderOfCrows(UUID ownerId) {
+        super(ownerId, 70, "Murder of Crows", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
+        this.expansionSetCode = "ISD";
+        this.subtype.add("Bird");
 
         this.color.setBlue(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
-        // Enchanted creature doesn't untap during its controller's untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipEnchantedUntapEffect()));
+        this.addAbility(FlyingAbility.getInstance());
+        // Whenever another creature dies, you may draw a card. If you do, discard a card.
+        this.addAbility(new CreatureDiesTriggeredAbility(new MurderOfCrowsEffect(), false, true));
     }
 
-    public ParalyzingGrasp(final ParalyzingGrasp card) {
+    public MurderOfCrows(final MurderOfCrows card) {
         super(card);
     }
 
     @Override
-    public ParalyzingGrasp copy() {
-        return new ParalyzingGrasp(this);
+    public MurderOfCrows copy() {
+        return new MurderOfCrows(this);
+    }
+}
+
+class MurderOfCrowsEffect extends OneShotEffect<MurderOfCrowsEffect> {
+
+    public MurderOfCrowsEffect() {
+        super(Outcome.DrawCard);
+        this.staticText = "you may draw a card. If you do, discard a card";
+    }
+
+    public MurderOfCrowsEffect(final MurderOfCrowsEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public MurderOfCrowsEffect copy() {
+        return new MurderOfCrowsEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null && player.chooseUse(Outcome.DrawCard, "Do you wish to draw a card? If you do, discard a card.", game)) {
+            if (player.drawCards(1, game) > 0) {
+                player.discard(1, source, game);
+            }
+            return true;
+        }
+        return false;
     }
 }

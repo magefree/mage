@@ -25,49 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.sets.innistrad;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.SkipEnchantedUntapEffect;
-import mage.abilities.keyword.EnchantAbility;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.RegenerateSourceEffect;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author North
  */
-public class ParalyzingGrasp extends CardImpl<ParalyzingGrasp> {
+public class ManorSkeleton extends CardImpl<ManorSkeleton> {
 
-    public ParalyzingGrasp(UUID ownerId) {
-        super(ownerId, 58, "Paralyzing Grasp", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
-        this.expansionSetCode = "ZEN";
-        this.subtype.add("Aura");
+    public ManorSkeleton(UUID ownerId) {
+        super(ownerId, 106, "Manor Skeleton", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
+        this.expansionSetCode = "ISD";
+        this.subtype.add("Skeleton");
 
-        this.color.setBlue(true);
+        this.color.setBlack(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
-        // Enchanted creature doesn't untap during its controller's untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipEnchantedUntapEffect()));
+        this.addAbility(HasteAbility.getInstance());
+        // {1}{B}: Regenerate Manor Skeleton.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{B}")));
     }
 
-    public ParalyzingGrasp(final ParalyzingGrasp card) {
+    public ManorSkeleton(final ManorSkeleton card) {
         super(card);
     }
 
     @Override
-    public ParalyzingGrasp copy() {
-        return new ParalyzingGrasp(this);
+    public ManorSkeleton copy() {
+        return new ManorSkeleton(this);
     }
 }

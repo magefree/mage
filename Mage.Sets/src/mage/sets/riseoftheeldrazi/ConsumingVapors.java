@@ -40,7 +40,6 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledPermanent;
 
@@ -74,14 +73,6 @@ public class ConsumingVapors extends CardImpl<ConsumingVapors> {
 
 class ConsumingVaporsEffect extends OneShotEffect<ConsumingVaporsEffect> {
 
-	protected static final FilterControlledPermanent filter;
-
-	static {
-		filter = new FilterControlledPermanent();
-		filter.getCardType().add(CardType.CREATURE);
-		filter.setMessage(" a creature");
-	}
-
 	ConsumingVaporsEffect ( ) {
 		super(Outcome.Sacrifice);
 		staticText = "Target player sacrifices a creature. You gain life equal to that creature's toughness";
@@ -95,22 +86,23 @@ class ConsumingVaporsEffect extends OneShotEffect<ConsumingVaporsEffect> {
 	public boolean apply(Game game, Ability source) {
 		Player player = game.getPlayer(source.getTargets().getFirstTarget());
 		Player controller = game.getPlayer(source.getControllerId());
+
+		FilterControlledPermanent filter = new FilterControlledPermanent("creature");
+		filter.getCardType().add(CardType.CREATURE);
 		filter.setTargetController(TargetController.YOU);
 		TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, false);
 
 		//A spell or ability could have removed the only legal target this player
 		//had, if thats the case this ability should fizzle.
 		if (target.canChoose(player.getId(), game)) {
-			while (!target.isChosen()) {
-				player.choose(Outcome.Sacrifice, target, game);
-			}
+			player.choose(Outcome.Sacrifice, target, game);
 
 			Permanent permanent = game.getPermanent(target.getFirstTarget());
-
 			if ( permanent != null ) {
 				controller.gainLife(permanent.getToughness().getValue(), game);
 				return permanent.sacrifice(source.getId(), game);
 			}
+			return true;
 		}
 		return false;
 	}

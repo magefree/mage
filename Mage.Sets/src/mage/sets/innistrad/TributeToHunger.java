@@ -28,82 +28,83 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.Constants.TargetController;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.SkipEnchantedUntapEffect;
-import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.players.Player;
+import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetOpponent;
 
 /**
- * @author Loki
+ *
+ * @author North
  */
-public class Claustrophobia extends CardImpl<Claustrophobia> {
+public class TributeToHunger extends CardImpl<TributeToHunger> {
 
-    public Claustrophobia(UUID ownerId) {
-        super(ownerId, 48, "Claustrophobia", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}{U}");
+    public TributeToHunger(UUID ownerId) {
+        super(ownerId, 119, "Tribute to Hunger", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
         this.expansionSetCode = "ISD";
-        this.subtype.add("Aura");
 
-        this.color.setBlue(true);
+        this.color.setBlack(true);
 
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
-        // When Claustrophobia enters the battlefield, tap enchanted creature.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ClaustrophobiaEffect()));
-        // Enchanted creature doesn't untap during its controller's untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipEnchantedUntapEffect()));
+        // Target opponent sacrifices a creature. You gain life equal to that creature's toughness.
+        this.getSpellAbility().addTarget(new TargetOpponent());
+        this.getSpellAbility().addEffect(new TributeToHungerEffect());
     }
 
-    public Claustrophobia(final Claustrophobia card) {
+    public TributeToHunger(final TributeToHunger card) {
         super(card);
     }
 
     @Override
-    public Claustrophobia copy() {
-        return new Claustrophobia(this);
+    public TributeToHunger copy() {
+        return new TributeToHunger(this);
     }
 }
 
-class ClaustrophobiaEffect extends OneShotEffect<ClaustrophobiaEffect> {
-    ClaustrophobiaEffect() {
-        super(Constants.Outcome.Tap);
-        staticText = "tap enchanted creature";
+class TributeToHungerEffect extends OneShotEffect<TributeToHungerEffect> {
+
+    TributeToHungerEffect() {
+        super(Outcome.Sacrifice);
+        staticText = "Target opponent sacrifices a creature. You gain life equal to that creature's toughness";
     }
 
-    ClaustrophobiaEffect(final ClaustrophobiaEffect effect) {
+    TributeToHungerEffect(TributeToHungerEffect effect) {
         super(effect);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment != null && enchantment.getAttachedTo() != null) {
-            Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
-            if (permanent != null) {
-                return permanent.tap(game);
-            }
-        }
-        return false;
+    public TributeToHungerEffect copy() {
+        return new TributeToHungerEffect(this);
     }
 
     @Override
-    public ClaustrophobiaEffect copy() {
-        return new ClaustrophobiaEffect();
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getTargets().getFirstTarget());
+        Player controller = game.getPlayer(source.getControllerId());
+
+        FilterControlledPermanent filter = new FilterControlledPermanent("creature");
+        filter.getCardType().add(CardType.CREATURE);
+        filter.setTargetController(TargetController.YOU);
+        TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, false);
+
+        if (target.canChoose(player.getId(), game)) {
+            player.choose(Outcome.Sacrifice, target, game);
+
+            Permanent permanent = game.getPermanent(target.getFirstTarget());
+            if (permanent != null) {
+                controller.gainLife(permanent.getToughness().getValue(), game);
+                return permanent.sacrifice(source.getId(), game);
+            }
+            return true;
+        }
+        return false;
     }
 }

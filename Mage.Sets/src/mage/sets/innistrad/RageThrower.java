@@ -25,49 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.sets.innistrad;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.SkipEnchantedUntapEffect;
-import mage.abilities.keyword.EnchantAbility;
+import mage.MageInt;
+import mage.abilities.common.CreatureDiesTriggeredAbility;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPlayer;
 
 /**
  *
  * @author North
  */
-public class ParalyzingGrasp extends CardImpl<ParalyzingGrasp> {
+public class RageThrower extends CardImpl<RageThrower> {
 
-    public ParalyzingGrasp(UUID ownerId) {
-        super(ownerId, 58, "Paralyzing Grasp", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
-        this.expansionSetCode = "ZEN";
-        this.subtype.add("Aura");
+    public RageThrower(UUID ownerId) {
+        super(ownerId, 157, "Rage Thrower", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{R}");
+        this.expansionSetCode = "ISD";
+        this.subtype.add("Human");
+        this.subtype.add("Shaman");
 
-        this.color.setBlue(true);
+        this.color.setRed(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(2);
 
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
-        // Enchanted creature doesn't untap during its controller's untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipEnchantedUntapEffect()));
+        // Whenever another creature dies, Rage Thrower deals 2 damage to target player.
+        CreatureDiesTriggeredAbility ability = new CreatureDiesTriggeredAbility(new DamageTargetEffect(2), false, true);
+        ability.addTarget(new TargetPlayer());
+        this.addAbility(ability);
     }
 
-    public ParalyzingGrasp(final ParalyzingGrasp card) {
+    public RageThrower(final RageThrower card) {
         super(card);
     }
 
     @Override
-    public ParalyzingGrasp copy() {
-        return new ParalyzingGrasp(this);
+    public RageThrower copy() {
+        return new RageThrower(this);
     }
 }

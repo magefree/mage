@@ -25,49 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.sets.innistrad;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.SkipEnchantedUntapEffect;
-import mage.abilities.keyword.EnchantAbility;
+import mage.MageInt;
+import mage.abilities.common.CreatureDiesTriggeredAbility;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.counters.CounterType;
 
 /**
  *
  * @author North
  */
-public class ParalyzingGrasp extends CardImpl<ParalyzingGrasp> {
+public class Lumberknot extends CardImpl<Lumberknot> {
 
-    public ParalyzingGrasp(UUID ownerId) {
-        super(ownerId, 58, "Paralyzing Grasp", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
-        this.expansionSetCode = "ZEN";
-        this.subtype.add("Aura");
+    public Lumberknot(UUID ownerId) {
+        super(ownerId, 191, "Lumberknot", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
+        this.expansionSetCode = "ISD";
+        this.subtype.add("Treefolk");
 
-        this.color.setBlue(true);
+        this.color.setGreen(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
-        // Enchanted creature doesn't untap during its controller's untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipEnchantedUntapEffect()));
+        this.addAbility(new HexproofAbility());
+        // Whenever a creature dies, put a +1/+1 counter on Lumberknot.
+        this.addAbility(new CreatureDiesTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
     }
 
-    public ParalyzingGrasp(final ParalyzingGrasp card) {
+    public Lumberknot(final Lumberknot card) {
         super(card);
     }
 
     @Override
-    public ParalyzingGrasp copy() {
-        return new ParalyzingGrasp(this);
+    public Lumberknot copy() {
+        return new Lumberknot(this);
     }
 }

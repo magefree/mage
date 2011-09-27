@@ -25,49 +25,74 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.sets.innistrad;
 
+import java.util.Collection;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.SkipEnchantedUntapEffect;
-import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
  * @author North
  */
-public class ParalyzingGrasp extends CardImpl<ParalyzingGrasp> {
+public class GhoulcallersBell extends CardImpl<GhoulcallersBell> {
 
-    public ParalyzingGrasp(UUID ownerId) {
-        super(ownerId, 58, "Paralyzing Grasp", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
-        this.expansionSetCode = "ZEN";
-        this.subtype.add("Aura");
+    public GhoulcallersBell(UUID ownerId) {
+        super(ownerId, 224, "Ghoulcaller's Bell", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
+        this.expansionSetCode = "ISD";
 
-        this.color.setBlue(true);
-
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
-        // Enchanted creature doesn't untap during its controller's untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipEnchantedUntapEffect()));
+        // {tap}: Each player puts the top card of his or her library into his or her graveyard.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GhoulcallersBellEffect(), new TapSourceCost()));
     }
 
-    public ParalyzingGrasp(final ParalyzingGrasp card) {
+    public GhoulcallersBell(final GhoulcallersBell card) {
         super(card);
     }
 
     @Override
-    public ParalyzingGrasp copy() {
-        return new ParalyzingGrasp(this);
+    public GhoulcallersBell copy() {
+        return new GhoulcallersBell(this);
+    }
+}
+
+class GhoulcallersBellEffect extends OneShotEffect<GhoulcallersBellEffect> {
+
+    public GhoulcallersBellEffect() {
+        super(Outcome.Discard);
+        this.staticText = "Each player puts the top card of his or her library into his or her graveyard";
+    }
+
+    public GhoulcallersBellEffect(final GhoulcallersBellEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public GhoulcallersBellEffect copy() {
+        return new GhoulcallersBellEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Collection<Player> players = game.getPlayers().values();
+        for (Player player : players) {
+            if (player.getLibrary().size() > 0) {
+                Card card = player.getLibrary().removeFromTop(game);
+                if (card != null) {
+                    card.moveToZone(Zone.GRAVEYARD, source.getId(), game, true);
+                }
+            }
+        }
+        return true;
     }
 }

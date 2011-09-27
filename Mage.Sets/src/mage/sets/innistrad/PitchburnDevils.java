@@ -25,49 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.sets.innistrad;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.SkipEnchantedUntapEffect;
-import mage.abilities.keyword.EnchantAbility;
+import mage.MageInt;
+import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
  * @author North
  */
-public class ParalyzingGrasp extends CardImpl<ParalyzingGrasp> {
+public class PitchburnDevils extends CardImpl<PitchburnDevils> {
 
-    public ParalyzingGrasp(UUID ownerId) {
-        super(ownerId, 58, "Paralyzing Grasp", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
-        this.expansionSetCode = "ZEN";
-        this.subtype.add("Aura");
+    public PitchburnDevils(UUID ownerId) {
+        super(ownerId, 156, "Pitchburn Devils", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
+        this.expansionSetCode = "ISD";
+        this.subtype.add("Devil");
 
-        this.color.setBlue(true);
+        this.color.setRed(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
-        // Enchanted creature doesn't untap during its controller's untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipEnchantedUntapEffect()));
+        // When Pitchburn Devils dies, it deals 3 damage to target creature or player.
+        DiesTriggeredAbility ability = new DiesTriggeredAbility(new DamageTargetEffect(3));
+        ability.addTarget(new TargetCreatureOrPlayer());
+        this.addAbility(ability);
     }
 
-    public ParalyzingGrasp(final ParalyzingGrasp card) {
+    public PitchburnDevils(final PitchburnDevils card) {
         super(card);
     }
 
     @Override
-    public ParalyzingGrasp copy() {
-        return new ParalyzingGrasp(this);
+    public PitchburnDevils copy() {
+        return new PitchburnDevils(this);
     }
 }

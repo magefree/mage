@@ -99,6 +99,22 @@ public class Library implements Serializable {
 	}
 
 	/**
+	 * Removes the bottom card of the Library and returns it
+	 *
+	 * @param game
+	 * @return Card
+	 * @see Card
+	 */
+	public Card removeFromBottom(Game game) {
+		UUID cardId = library.pollLast();
+		Card card = game.getCard(cardId);
+		if (card == null) {
+			emptyDraw = true;
+		}
+		return card;
+	}
+
+	/**
 	 * Returns the top card of the Library without removing it
 	 *
 	 * @param game

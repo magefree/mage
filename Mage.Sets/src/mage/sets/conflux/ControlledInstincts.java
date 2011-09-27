@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.sets.conflux;
 
 import java.util.UUID;
 import mage.Constants.CardType;
@@ -37,6 +37,8 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.SkipEnchantedUntapEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.filter.Filter.ComparisonScope;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -44,17 +46,26 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class ParalyzingGrasp extends CardImpl<ParalyzingGrasp> {
+public class ControlledInstincts extends CardImpl<ControlledInstincts> {
 
-    public ParalyzingGrasp(UUID ownerId) {
-        super(ownerId, 58, "Paralyzing Grasp", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
-        this.expansionSetCode = "ZEN";
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("red or green creature");
+
+    static {
+        filter.getColor().setRed(true);
+        filter.getColor().setGreen(true);
+        filter.setUseColor(true);
+        filter.setScopeColor(ComparisonScope.Any);
+    }
+
+    public ControlledInstincts(UUID ownerId) {
+        super(ownerId, 23, "Controlled Instincts", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");
+        this.expansionSetCode = "CON";
         this.subtype.add("Aura");
 
         this.color.setBlue(true);
 
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        // Enchant red or green creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
@@ -62,12 +73,12 @@ public class ParalyzingGrasp extends CardImpl<ParalyzingGrasp> {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipEnchantedUntapEffect()));
     }
 
-    public ParalyzingGrasp(final ParalyzingGrasp card) {
+    public ControlledInstincts(final ControlledInstincts card) {
         super(card);
     }
 
     @Override
-    public ParalyzingGrasp copy() {
-        return new ParalyzingGrasp(this);
+    public ControlledInstincts copy() {
+        return new ControlledInstincts(this);
     }
 }

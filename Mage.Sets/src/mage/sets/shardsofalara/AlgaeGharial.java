@@ -25,49 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.sets.shardsofalara;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.SkipEnchantedUntapEffect;
-import mage.abilities.keyword.EnchantAbility;
+import mage.MageInt;
+import mage.abilities.common.CreatureDiesTriggeredAbility;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.counters.CounterType;
 
 /**
  *
  * @author North
  */
-public class ParalyzingGrasp extends CardImpl<ParalyzingGrasp> {
+public class AlgaeGharial extends CardImpl<AlgaeGharial> {
 
-    public ParalyzingGrasp(UUID ownerId) {
-        super(ownerId, 58, "Paralyzing Grasp", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
-        this.expansionSetCode = "ZEN";
-        this.subtype.add("Aura");
+    public AlgaeGharial(UUID ownerId) {
+        super(ownerId, 123, "Algae Gharial", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
+        this.expansionSetCode = "ALA";
+        this.subtype.add("Crocodile");
 
-        this.color.setBlue(true);
+        this.color.setGreen(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
-        // Enchanted creature doesn't untap during its controller's untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipEnchantedUntapEffect()));
+        this.addAbility(ShroudAbility.getInstance());
+        // Whenever another creature dies, you may put a +1/+1 counter on Algae Gharial.
+        this.addAbility(new CreatureDiesTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true, true));
     }
 
-    public ParalyzingGrasp(final ParalyzingGrasp card) {
+    public AlgaeGharial(final AlgaeGharial card) {
         super(card);
     }
 
     @Override
-    public ParalyzingGrasp copy() {
-        return new ParalyzingGrasp(this);
+    public AlgaeGharial copy() {
+        return new AlgaeGharial(this);
     }
 }
