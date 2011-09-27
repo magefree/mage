@@ -80,7 +80,7 @@ public class BirthingPod extends CardImpl<BirthingPod> {
 class BirthingPodEffect extends OneShotEffect<BirthingPodEffect> {
     BirthingPodEffect() {
         super(Constants.Outcome.Benefit);
-        staticText = "Search your library for a creature card with converted mana cost equal to 1 plus the sacrificed creature's converted mana cost, put that card onto the battlefield, then shuffle your library. Activate this ability only any time you could cast a sorcery";
+        staticText = "Search your library for a creature card with converted mana cost equal to 1 plus the sacrificed creature's converted mana cost, put that card onto the battlefield, then shuffle your library";
     }
 
     BirthingPodEffect(final BirthingPodEffect effect) {

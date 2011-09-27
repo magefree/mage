@@ -19,4 +19,9 @@ public class ActivateAsSorceryActivatedAbility extends ActivatedAbilityImpl<Acti
     public ActivateAsSorceryActivatedAbility copy() {
         return new ActivateAsSorceryActivatedAbility(this);
     }
+
+    @Override
+    public String getRule() {
+        return super.getRule() + " Activate this ability only any time you could cast a sorcery.";
+    }
 }
