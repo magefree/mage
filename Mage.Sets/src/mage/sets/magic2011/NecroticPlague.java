@@ -161,8 +161,8 @@ class NecroticPlagueEffect2 extends OneShotEffect<NecroticPlagueEffect2> {
 		Player controller = game.getPlayer(source.getControllerId());
 		if (controller != null) {
 			TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
-            if (target.canChoose(source.getControllerId(), game)) {
-                if (controller.choose(Outcome.Detriment, target, game)) {
+            if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
+                if (controller.chooseTarget(Outcome.Detriment, target, source, game)) {
                     Card card = game.getCard(cardId);
                     if (card != null) {
                         card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), source.getControllerId());
