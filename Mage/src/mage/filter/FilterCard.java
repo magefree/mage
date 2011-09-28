@@ -97,6 +97,16 @@ public class FilterCard<T extends FilterCard<T>> extends FilterObject<Card, Filt
 						break;
 					}
 				}
+
+                if (filterOut) {
+				    for (String subType : card.getSubtype()) {
+                        if (subType.equalsIgnoreCase(text)) {
+                            filterOut = false;
+                            break;
+                        }
+                    }
+                }
+
 				if (filterOut)
 					return notFilter;
 			}
