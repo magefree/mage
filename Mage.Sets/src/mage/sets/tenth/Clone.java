@@ -33,10 +33,10 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.CopyPermanentEffect;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.common.CopyEffect;
+import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.cards.CardImpl;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -52,8 +52,7 @@ public class Clone extends CardImpl<Clone> {
 		this.power = new MageInt(0);
 		this.toughness = new MageInt(0);
 
-		Ability ability = new EntersBattlefieldAbility(new CopyEffect(), "You may have {this} enter the battlefield as a copy of any creature on the battlefield");
-		ability.addTarget(new TargetCreaturePermanent());
+		Ability ability = new EntersBattlefieldAbility(new EntersBattlefieldEffect(new CopyPermanentEffect()), "You may have {this} enter the battlefield as a copy of any creature on the battlefield");
 		this.addAbility(ability);
 	}
 

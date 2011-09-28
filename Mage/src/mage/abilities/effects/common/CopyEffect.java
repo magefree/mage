@@ -33,10 +33,9 @@ import mage.Constants.Duration;
 import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
+import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.cards.Card;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -46,55 +45,50 @@ import mage.game.permanent.Permanent;
  */
 public class CopyEffect extends ContinuousEffectImpl<CopyEffect> {
 
-	public CopyEffect() {
+    private MageObject target;
+    
+	public CopyEffect(MageObject target) {
 		super(Duration.WhileOnBattlefield, Layer.CopyEffects_1, SubLayer.NA, Outcome.BecomeCreature);
+        this.target = target;
 	}
 
 	public CopyEffect(final CopyEffect effect) {
 		super(effect);
+        this.target = effect.target.copy();
 	}
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Card card = game.getCard(source.getFirstTarget());
-		Permanent permanent = game.getPermanent(source.getSourceId());
-		permanent.setName(card.getName());
-		permanent.getColor().setColor(card.getColor());
-		permanent.getManaCost().clear();
-		permanent.getManaCost().add(card.getManaCost());
-		permanent.getCardType().clear();
-		for (CardType type: card.getCardType()) {
-			permanent.getCardType().add(type);
-		}
-		permanent.getSubtype().clear();
-		for (String type: card.getSubtype()) {
-			permanent.getSubtype().add(type);
-		}
-		permanent.getSupertype().clear();
-		for (String type: card.getSupertype()) {
-			permanent.getSupertype().add(type);
-		}
-		permanent.setExpansionSetCode(card.getExpansionSetCode());
-		permanent.getAbilities().clear();
-		for (Ability ability: card.getAbilities()) {
-			permanent.addAbility(ability);
-		}
-		permanent.getPower().setValue(card.getPower().getValue());
-		permanent.getToughness().setValue(card.getToughness().getValue());
-		//permanent.getLoyalty().setValue(card.getLoyalty().getValue());
-		
-		return true;
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        permanent.setName(target.getName());
+        permanent.getColor().setColor(target.getColor());
+        permanent.getManaCost().clear();
+        permanent.getManaCost().add(target.getManaCost());
+        permanent.getCardType().clear();
+        for (CardType type: target.getCardType()) {
+            permanent.getCardType().add(type);
+        }
+        permanent.getSubtype().clear();
+        for (String type: target.getSubtype()) {
+            permanent.getSubtype().add(type);
+        }
+        permanent.getSupertype().clear();
+        for (String type: target.getSupertype()) {
+            permanent.getSupertype().add(type);
+        }
+        permanent.getAbilities().clear();
+        for (Ability ability: target.getAbilities()) {
+             permanent.addAbility(ability);
+        }
+        permanent.getPower().setValue(target.getPower().getValue());
+        permanent.getToughness().setValue(target.getToughness().getValue());
 
+        return true;
 	}
 
 	@Override
 	public CopyEffect copy() {
 		return new CopyEffect(this);
-	}
-
-	@Override
-	public String getText(Mode mode) {
-		return "You may have {this} enter the battlefield as a copy of any " + mode.getTargets().get(0).getTargetName() + " on the battlefield";
 	}
 
 }
