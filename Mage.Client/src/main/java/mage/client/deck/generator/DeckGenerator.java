@@ -182,7 +182,7 @@ public class DeckGenerator {
             symbol = symbol.replace("{", "").replace("}", "");
             if (isColoredMana(symbol)) {
                 for (ColoredManaSymbol allowed : allowedColors) {
-                    if (allowed.toString().equals(symbol)) {
+                    if (symbol.contains(allowed.toString())) {
                         found = true;
                         break;
                     }
@@ -279,6 +279,33 @@ public class DeckGenerator {
     }
 
     protected static boolean isColoredMana(String symbol) {
-        return symbol.equals("W") || symbol.equals("G") || symbol.equals("U") || symbol.equals("B") || symbol.equals("R");
+        return symbol.equals("W") || symbol.equals("G") || symbol.equals("U") || symbol.equals("B") || symbol.equals("R") || symbol.contains("/");
+    }
+
+    public static void main(String[] args) {
+        Card selesnyaGuildMage = null;
+        for (Card card : CardsStorage.getAllCards()) {
+            if (card.getName().equals("Selesnya Guildmage")) {
+                selesnyaGuildMage = card;
+                break;
+            }
+        }
+        if (selesnyaGuildMage == null) {
+            throw new RuntimeException("Couldn't find card: Selesnya Guildmage");
+        }
+        List<ColoredManaSymbol> allowedColors = new ArrayList<ColoredManaSymbol>();
+        allowedColors.add(ColoredManaSymbol.lookup('B'));
+        allowedColors.add(ColoredManaSymbol.lookup('R'));
+        System.out.println(DeckGenerator.cardFitsChosenColors(selesnyaGuildMage, allowedColors));
+
+        allowedColors.clear();
+        allowedColors = new ArrayList<ColoredManaSymbol>();
+        allowedColors.add(ColoredManaSymbol.lookup('G'));
+        System.out.println(DeckGenerator.cardFitsChosenColors(selesnyaGuildMage, allowedColors));
+
+        allowedColors.clear();
+        allowedColors = new ArrayList<ColoredManaSymbol>();
+        allowedColors.add(ColoredManaSymbol.lookup('W'));
+        System.out.println(DeckGenerator.cardFitsChosenColors(selesnyaGuildMage, allowedColors));
     }
 }
