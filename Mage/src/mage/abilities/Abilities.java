@@ -190,6 +190,11 @@ public interface Abilities<T extends Ability> extends List<T>, Serializable {
 	public void newId();
 	
 	/**
+	 * Assigns a new {@link java.util.UUID}
+	 */
+	public void newOriginalId();
+
+    /**
 	 * Searches this set of abilities to see if the ability represented by the abilityId
 	 * is contained within.  Can be used to find usages of singleton abilities.
 	 * 

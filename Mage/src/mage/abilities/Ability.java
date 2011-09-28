@@ -71,6 +71,15 @@ public interface Ability extends Serializable {
 	public void newId();
 	
 	/**
+	 * Assigns a new {@link java.util.UUID}
+	 * 
+	 * @see mage.players.PlayerImpl#playAbility(mage.abilities.ActivatedAbility, mage.game.Game)
+	 * @see mage.game.GameImpl#addTriggeredAbility(mage.abilities.TriggeredAbility)
+	 * @see mage.game.GameImpl#addDelayedTriggeredAbility(mage.abilities.DelayedTriggeredAbility)
+	 */
+	public void newOriginalId();
+
+    /**
 	 * Gets the {@link AbilityType} of this ability.
 	 * 
 	 * @return The {@link AbilityType type} of this ability.

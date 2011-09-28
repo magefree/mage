@@ -305,6 +305,9 @@ public class StackAbility implements StackObject, Ability {
 	@Override
 	public void newId() {}
 
+	@Override
+	public void newOriginalId() {}
+
     @Override
 	public Ability getStackAbility() {
 		return ability;
