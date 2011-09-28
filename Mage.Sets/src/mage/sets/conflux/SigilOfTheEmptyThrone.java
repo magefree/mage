@@ -31,14 +31,11 @@ package mage.sets.conflux;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.AngelToken;
 
 /**
  *
@@ -69,16 +66,4 @@ public class SigilOfTheEmptyThrone extends CardImpl<SigilOfTheEmptyThrone> {
         return new SigilOfTheEmptyThrone(this);
     }
 
-}
-
-class AngelToken extends Token {
-    public AngelToken() {
-        super("Angel", "4/4 white Angel creature token with flying");
-        cardType.add(CardType.CREATURE);
-        color = ObjectColor.WHITE;
-        subtype.add("Angel");
-        power = new MageInt(4);
-        toughness = new MageInt(4);
-        addAbility(FlyingAbility.getInstance());
-    }
 }
