@@ -34,6 +34,7 @@ import mage.MageInt;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 
@@ -47,6 +48,7 @@ public class GraveBramble extends CardImpl<GraveBramble> {
 
     static {
         filter.getSubtype().add("Zombie");
+        filter.setScopeSubtype(ComparisonScope.Any);
     }
 
     public GraveBramble(UUID ownerId) {
