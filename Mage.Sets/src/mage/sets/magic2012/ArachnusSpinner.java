@@ -135,6 +135,7 @@ class ArachnusSpinnerEffect extends OneShotEffect<ArachnusSpinnerEffect> {
                 card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     player.removeFromLibrary(card, game);
+                    player.shuffleLibrary(game);
                     zone = Zone.LIBRARY;
                 }
             }
