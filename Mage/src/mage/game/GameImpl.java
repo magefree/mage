@@ -64,6 +64,8 @@ import mage.abilities.common.ChancellorAbility;
 
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.CardsImpl;
+import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.watchers.common.MorbidWatcher;
 import org.apache.log4j.Logger;
 
@@ -741,19 +743,35 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 					somethingHappened = true;
 			}
 			else {
-				//TODO: handle player auras
-				Permanent attachedTo = getPermanent(perm.getAttachedTo());
-				if (attachedTo == null) {
-					if (perm.moveToZone(Zone.GRAVEYARD, null, this, false))
-						somethingHappened = true;
-				}
-				else {
-					Filter auraFilter = perm.getSpellAbility().getTargets().get(0).getFilter();
-					if (!auraFilter.match(attachedTo) || attachedTo.hasProtectionFrom(perm)) {
-						if (perm.moveToZone(Zone.GRAVEYARD, null, this, false))
-							somethingHappened = true;
-					}
-				}
+                Target target = perm.getSpellAbility().getTargets().get(0);
+                if (target instanceof TargetPermanent) {
+                    Permanent attachedTo = getPermanent(perm.getAttachedTo());
+                    if (attachedTo == null) {
+                        if (perm.moveToZone(Zone.GRAVEYARD, null, this, false))
+                            somethingHappened = true;
+                    }
+                    else {
+                        Filter auraFilter = perm.getSpellAbility().getTargets().get(0).getFilter();
+                        if (!auraFilter.match(attachedTo) || attachedTo.hasProtectionFrom(perm)) {
+                            if (perm.moveToZone(Zone.GRAVEYARD, null, this, false))
+                                somethingHappened = true;
+                        }
+                    }
+                }
+                else if (target instanceof TargetPlayer) {
+                    Player attachedTo = getPlayer(perm.getAttachedTo());
+                    if (attachedTo == null) {
+                        if (perm.moveToZone(Zone.GRAVEYARD, null, this, false))
+                            somethingHappened = true;
+                    }
+                    else {
+                        Filter auraFilter = perm.getSpellAbility().getTargets().get(0).getFilter();
+                        if (!auraFilter.match(attachedTo) || attachedTo.hasProtectionFrom(perm)) {
+                            if (perm.moveToZone(Zone.GRAVEYARD, null, this, false))
+                                somethingHappened = true;
+                        }
+                    }
+                }
 			}
 		}
 		//20091005 - 704.5k, 801.12

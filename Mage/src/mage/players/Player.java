@@ -239,5 +239,7 @@ public interface Player extends MageItem, Copyable<Player> {
 	public List<Ability> getPlayableOptions(Ability ability, Game game);
 	
 	public void addCounters(Counter counter, Game game);
-
+    public List<UUID> getAttachments();
+    public boolean addAttachment(UUID permanentId, Game game);
+    public boolean removeAttachment(UUID permanentId, Game game);
 }

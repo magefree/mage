@@ -108,6 +108,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	protected boolean isGameUnderControl = true;
 	protected UUID turnController;
 	protected Set<UUID> playersUnderYourControl = new HashSet<UUID>();
+    protected List<UUID> attachments = new ArrayList<UUID>();
 
 	protected boolean topCardRevealed = false;
 
@@ -424,6 +425,43 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	}
 
 	@Override
+	public List<UUID> getAttachments() {
+		return attachments;
+	}
+
+	@Override
+	public boolean addAttachment(UUID permanentId, Game game) {
+		if (!this.attachments.contains(permanentId)) {
+            Permanent aura = game.getPermanent(permanentId);
+			if (aura != null) {
+                if (!game.replaceEvent(new GameEvent(GameEvent.EventType.ENCHANT_PLAYER, playerId, permanentId, aura.getControllerId()))) {
+                    this.attachments.add(permanentId);
+					aura.attachTo(playerId, game);
+					game.fireEvent(new GameEvent(GameEvent.EventType.ENCHANTED_PLAYER, playerId, permanentId, aura.getControllerId()));
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public boolean removeAttachment(UUID permanentId, Game game) {
+		if (this.attachments.contains(permanentId)) {
+			Permanent aura = game.getPermanent(permanentId);
+			if (aura != null) {
+    			if (!game.replaceEvent(new GameEvent(GameEvent.EventType.UNATTACH, playerId, permanentId, aura.getControllerId()))) {
+        			this.attachments.remove(permanentId);
+					aura.attachTo(null, game);
+				}
+				game.fireEvent(new GameEvent(GameEvent.EventType.UNATTACHED, playerId, permanentId, aura.getControllerId()));
+				return true;
+			}
+		}
+		return false;
+	}
+    
+    @Override
 	public boolean removeFromBattlefield(Permanent permanent, Game game) {
 		permanent.removeFromCombat(game);
 		game.getBattlefield().removePermanent(permanent.getId());
