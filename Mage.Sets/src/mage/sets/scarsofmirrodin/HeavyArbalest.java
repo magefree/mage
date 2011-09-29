@@ -48,7 +48,6 @@ import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -62,7 +61,7 @@ public class HeavyArbalest extends CardImpl<HeavyArbalest> {
         this.expansionSetCode = "SOM";
         this.subtype.add("Equipment");
 
-        SimpleStaticAbility ability1 = new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipUntapSourceEffect());
+        SimpleStaticAbility ability1 = new SimpleStaticAbility(Zone.BATTLEFIELD, new HeavyArbalestEffect());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability1, AttachmentType.EQUIPMENT)));
 
         SimpleActivatedAbility ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());
@@ -81,20 +80,20 @@ public class HeavyArbalest extends CardImpl<HeavyArbalest> {
     }
 }
 
-class SkipUntapSourceEffect extends ReplacementEffectImpl<SkipUntapSourceEffect> {
+class HeavyArbalestEffect extends ReplacementEffectImpl<HeavyArbalestEffect> {
 
-    public SkipUntapSourceEffect() {
+    public HeavyArbalestEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Equipped creature doesn't untap during its controller's untap step.";
+        staticText = "Equipped creature doesn't untap during its controller's untap step";
     }
 
-    public SkipUntapSourceEffect(final SkipUntapSourceEffect effect) {
+    public HeavyArbalestEffect(final HeavyArbalestEffect effect) {
         super(effect);
     }
 
     @Override
-    public SkipUntapSourceEffect copy() {
-        return new SkipUntapSourceEffect(this);
+    public HeavyArbalestEffect copy() {
+        return new HeavyArbalestEffect(this);
     }
 
     @Override
