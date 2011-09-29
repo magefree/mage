@@ -97,14 +97,14 @@ class MyrPropagatorCreateTokenEffect extends OneShotEffect<MyrPropagatorCreateTo
 		if (thisCard != null) {
 			EmptyToken token = new EmptyToken();
 			CardUtil.copyTo(token).from(thisCard);
-			token.putOntoBattlefield(game, source.getSourceId(), source.getControllerId());
+			token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
 			return true;
 		} else { // maybe it's token
 			Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
 			if (permanent != null) {
 				EmptyToken token = new EmptyToken();
 				CardUtil.copyTo(token).from(permanent);
-				token.putOntoBattlefield(game, source.getSourceId(), source.getControllerId());
+				token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
 				return true;
 			}
 		}

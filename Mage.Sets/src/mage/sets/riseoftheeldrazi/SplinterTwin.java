@@ -113,7 +113,7 @@ class SplinterTwinEffect extends OneShotEffect<SplinterTwinEffect> {
             CardUtil.copyTo(token).from(card);
 
             token.addAbility(HasteAbility.getInstance());
-            token.putOntoBattlefield(game, source.getSourceId(), source.getControllerId());
+            token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
 
             ExileTargetEffect exileEffect = new ExileTargetEffect();
             exileEffect.setTargetPointer(new FixedTarget(token.getLastAddedToken()));

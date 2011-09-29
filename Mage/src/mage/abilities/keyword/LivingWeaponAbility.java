@@ -42,7 +42,7 @@ class LivingWeaponEffect extends OneShotEffect<LivingWeaponEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         GermToken token = new GermToken();
-        token.putOntoBattlefield(game, source.getId(), source.getControllerId());
+        token.putOntoBattlefield(1, game, source.getId(), source.getControllerId());
         Permanent p = game.getPermanent(token.getLastAddedToken());
         if (p != null) {
              p.addAttachment(source.getSourceId(), game);

@@ -132,9 +132,7 @@ class FreshMeatEffect extends OneShotEffect<FreshMeatEffect> {
         FreshMeatWatcher watcher = (FreshMeatWatcher) game.getState().getWatchers().get(source.getControllerId(), "CreaturesDiedFreshMeat");
         int count = watcher.getCreaturesCount();
         BeastToken token = new BeastToken();
-        for (int i = 0; i < count; i++) {
-            token.putOntoBattlefield(game, source.getSourceId(), source.getControllerId());
-        }
+        token.putOntoBattlefield(count, game, source.getSourceId(), source.getControllerId());
         return true;
     }
 }

@@ -146,7 +146,7 @@ class SarkhanTheMadSacEffect extends OneShotEffect<SarkhanTheMadSacEffect> {
 			Player player = game.getPlayer(permanent.getControllerId());
 			permanent.sacrifice(this.getId(), game);
 			Token dragonToken = new DragonToken();
-			dragonToken.putOntoBattlefield(game, this.getId(), player.getId());
+			dragonToken.putOntoBattlefield(1, game, this.getId(), player.getId());
 		}
 		return false;
 	}

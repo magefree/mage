@@ -92,7 +92,7 @@ class GeistOfSaintTraftEffect extends OneShotEffect<GeistOfSaintTraftEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         AngelToken token = new AngelToken();
-        if (token.putOntoBattlefield(game, source.getSourceId(), source.getControllerId())) {
+        if (token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId())) {
             Permanent p = game.getPermanent(token.getLastAddedToken());
             game.getCombat().declareAttacker(p.getId(), game.getCombat().getDefendingPlayer(source.getSourceId()), game);
             Effect effect = new ExileTargetEffect();

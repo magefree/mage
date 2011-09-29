@@ -90,7 +90,7 @@ class BeastWithinEffect extends OneShotEffect<BeastWithinEffect> {
         Permanent permanent = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(source), Constants.Zone.BATTLEFIELD);
         if (permanent != null) {
             BeastToken token = new BeastToken();
-            token.putOntoBattlefield(game, source.getId(), permanent.getControllerId());
+            token.putOntoBattlefield(1, game, source.getId(), permanent.getControllerId());
         }
         return true;
     }

@@ -38,6 +38,8 @@ import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.PermanentToken;
 
@@ -86,16 +88,23 @@ public class Token extends MageObjectImpl<Token> {
 		return new Token(this);
 	}
 
-	public boolean putOntoBattlefield(Game game, UUID sourceId, UUID controllerId) {
+	public boolean putOntoBattlefield(int amount, Game game, UUID sourceId, UUID controllerId) {
 		Card source = game.getCard(sourceId);
 		String setCode = source != null ? source.getExpansionSetCode() : null;
-		PermanentToken permanent = new PermanentToken(this, controllerId, setCode);
-		game.getBattlefield().addPermanent(permanent);
-		this.lastAddedTokenId = permanent.getId();
-		permanent.entersBattlefield(sourceId, game);
-		game.applyEffects();
-		game.fireEvent(new ZoneChangeEvent(permanent, controllerId, Zone.OUTSIDE, Zone.BATTLEFIELD));
-		return true;
+		GameEvent event = GameEvent.getEvent(EventType.CREATE_TOKEN, null, sourceId, controllerId, amount);
+        if (!game.replaceEvent(event)) {
+            amount = event.getAmount();
+            for (int i = 0; i < amount; i++) {
+                PermanentToken permanent = new PermanentToken(this, controllerId, setCode);
+                game.getBattlefield().addPermanent(permanent);
+                this.lastAddedTokenId = permanent.getId();
+                permanent.entersBattlefield(sourceId, game);
+                game.applyEffects();
+                game.fireEvent(new ZoneChangeEvent(permanent, controllerId, Zone.OUTSIDE, Zone.BATTLEFIELD));
+            }
+            return true;
+        }
+        return false;
 	}
 
 }

@@ -91,7 +91,7 @@ class BackFromTheBrinkEffect extends OneShotEffect<BackFromTheBrinkEffect> {
         if (card != null) {
             EmptyToken token = new EmptyToken();
             CardUtil.copyTo(token).from(card);
-            token.putOntoBattlefield(game, source.getSourceId(), source.getControllerId());
+            token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
             return true;
         }
         return false;

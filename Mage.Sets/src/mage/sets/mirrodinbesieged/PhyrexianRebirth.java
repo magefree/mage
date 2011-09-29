@@ -84,7 +84,7 @@ public class PhyrexianRebirth extends CardImpl<PhyrexianRebirth> {
 			HorrorToken horrorToken = new HorrorToken();
 			horrorToken.getPower().setValue(count);
 			horrorToken.getToughness().setValue(count);
-			horrorToken.putOntoBattlefield(game, source.getId(), source.getControllerId());
+			horrorToken.putOntoBattlefield(1, game, source.getId(), source.getControllerId());
 			return true;
 		}
 

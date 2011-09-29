@@ -138,7 +138,7 @@ class MirrorworksEffect extends OneShotEffect<MirrorworksEffect> {
 						if (target != null) {
 							EmptyToken token = new EmptyToken();
 							CardUtil.copyTo(token).from(target);
-							token.putOntoBattlefield(game, source.getSourceId(), source.getControllerId());
+							token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
 							return true;
 						}
 					}
