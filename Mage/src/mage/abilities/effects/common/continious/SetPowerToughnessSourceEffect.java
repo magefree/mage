@@ -45,6 +45,8 @@ import mage.game.permanent.Permanent;
 public class SetPowerToughnessSourceEffect extends ContinuousEffectImpl<SetPowerToughnessSourceEffect> {
 
 	private DynamicValue amount;
+    private int power;
+    private int toughness;
 
     public SetPowerToughnessSourceEffect(DynamicValue amount, Duration duration) {
         super(duration, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
@@ -52,9 +54,18 @@ public class SetPowerToughnessSourceEffect extends ContinuousEffectImpl<SetPower
 		staticText = "{this}'s power and toughness are each equal to the number of " + amount.getMessage();
     }
 
-	public SetPowerToughnessSourceEffect(final SetPowerToughnessSourceEffect effect) {
+    public SetPowerToughnessSourceEffect(int power, int toughness, Duration duration) {
+        super(duration, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
+        this.power = power;
+        this.toughness = toughness;
+		staticText = "{this}'s power and toughness is " + power + "/" + toughness;
+    }
+
+    public SetPowerToughnessSourceEffect(final SetPowerToughnessSourceEffect effect) {
 		super(effect);
 		this.amount = effect.amount;
+        this.power = effect.power;
+        this.toughness = effect.toughness;
 	}
 
 	@Override
@@ -66,10 +77,18 @@ public class SetPowerToughnessSourceEffect extends ContinuousEffectImpl<SetPower
 	public boolean apply(Game game, Ability source) {
 		Permanent target = game.getPermanent(source.getSourceId());
 		if (target != null) {
-            int value = amount.calculate(game, source);
-			target.getPower().setValue(value);
-			target.getToughness().setValue(value);
-			return true;
+            if (amount != null) {
+                int value = amount.calculate(game, source);
+                target.getPower().setValue(value);
+                target.getToughness().setValue(value);
+                return true;
+            }
+            else {
+                if (power != Integer.MIN_VALUE)
+                    target.getPower().setValue(power);
+                if (toughness != Integer.MIN_VALUE)
+                    target.getToughness().setValue(toughness);
+            }
 		}
 		return false;
 	}
