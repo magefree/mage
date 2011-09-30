@@ -64,7 +64,7 @@ public class CivilizedScholar extends CardImpl<CivilizedScholar> {
         this.toughness = new MageInt(1);
 
         // {tap}: Draw a card, then discard a card. If a creature card is discarded this way, untap Civilized Scholar, then transform it.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CivilizedScholarEffect(), new TapSourceCost()));
         this.addAbility(new TransformAbility());
 
         this.addWatcher(new HomicidalBrute.HomicidalBruteWatcher());
@@ -80,20 +80,20 @@ public class CivilizedScholar extends CardImpl<CivilizedScholar> {
     }
 }
 
-class DrawDiscardControllerEffect extends OneShotEffect<DrawDiscardControllerEffect> {
+class CivilizedScholarEffect extends OneShotEffect<CivilizedScholarEffect> {
 
-    public DrawDiscardControllerEffect() {
+    public CivilizedScholarEffect() {
         super(Constants.Outcome.DrawCard);
         staticText = "Draw a card, then discard a card";
     }
 
-    public DrawDiscardControllerEffect(final DrawDiscardControllerEffect effect) {
+    public CivilizedScholarEffect(final CivilizedScholarEffect effect) {
         super(effect);
     }
 
     @Override
-    public DrawDiscardControllerEffect copy() {
-        return new DrawDiscardControllerEffect(this);
+    public CivilizedScholarEffect copy() {
+        return new CivilizedScholarEffect(this);
     }
 
     @Override
@@ -120,4 +120,3 @@ class DrawDiscardControllerEffect extends OneShotEffect<DrawDiscardControllerEff
         return false;
     }
 }
-

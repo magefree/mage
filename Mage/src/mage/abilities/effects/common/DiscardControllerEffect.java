@@ -39,28 +39,28 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DiscardSourceEffect extends OneShotEffect<DiscardSourceEffect> {
+public class DiscardControllerEffect extends OneShotEffect<DiscardControllerEffect> {
 
     protected DynamicValue amount;
 
-    public DiscardSourceEffect(DynamicValue amount) {
+    public DiscardControllerEffect(DynamicValue amount) {
         super(Outcome.Discard);
         this.amount = amount;
 		setText();
     }
 
-    public DiscardSourceEffect(int amount) {
+    public DiscardControllerEffect(int amount) {
         this(new StaticValue(amount));
     }
 
-    public DiscardSourceEffect(final DiscardSourceEffect effect) {
+    public DiscardControllerEffect(final DiscardControllerEffect effect) {
         super(effect);
         this.amount = effect.amount.clone();
     }
 
     @Override
-    public DiscardSourceEffect copy() {
-        return new DiscardSourceEffect(this);
+    public DiscardControllerEffect copy() {
+        return new DiscardControllerEffect(this);
     }
 
     @Override

@@ -30,7 +30,7 @@ package mage.sets.tenth;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.effects.common.DiscardSourceEffect;
+import mage.abilities.effects.common.DiscardControllerEffect;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
 
@@ -48,7 +48,7 @@ public class Sift extends CardImpl<Sift> {
 
         // Draw three cards, then discard a card.
         this.getSpellAbility().addEffect(new DrawCardControllerEffect(3));
-        this.getSpellAbility().addEffect(new DiscardSourceEffect(1));
+        this.getSpellAbility().addEffect(new DiscardControllerEffect(1));
     }
 
     public Sift(final Sift card) {
