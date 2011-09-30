@@ -102,7 +102,6 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	protected RangeOfInfluence range;
 	protected Set<UUID> inRange = new HashSet<UUID>();
 	protected boolean isTestMode = false;
-	protected boolean lifeTotalCanChange = true;
 	protected boolean canGainLife = true;
 	protected boolean canLoseLife = true;
 	protected boolean isGameUnderControl = true;
@@ -154,7 +153,8 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		this.passedTurn = player.passedTurn;
 		this.left = player.left;
 		this.range = player.range;
-		this.lifeTotalCanChange = player.lifeTotalCanChange;
+        this.canGainLife = player.canGainLife;
+        this.canLoseLife = player.canLoseLife;
 		for (UUID id: player.inRange) {
 			this.inRange.add(id);
 		}
@@ -186,6 +186,8 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		this.left = false;
 		this.passed = false;
 		this.passedTurn = false;
+        this.canGainLife = true;
+        this.canLoseLife = true;
         Watcher bloodthirst = new BloodthirstWatcher();
         bloodthirst.setControllerId(playerId);
         game.getState().getWatchers().add(bloodthirst);
@@ -196,7 +198,8 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		this.abilities.clear();
 		this.landsPerTurn = 1;
 		this.maxHandSize = 7;
-		this.lifeTotalCanChange = true;
+        this.canGainLife = true;
+        this.canLoseLife = true;
 		this.topCardRevealed = false;
 	}
 
@@ -808,17 +811,28 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
 	@Override
 	public void setLifeTotalCanChange(boolean lifeTotalCanChange) {
-		this.lifeTotalCanChange = lifeTotalCanChange;
+		this.canGainLife = lifeTotalCanChange;
+        this.canLoseLife = lifeTotalCanChange;
 	}
 
 	@Override
 	public boolean isLifeTotalCanChange() {
-		return this.lifeTotalCanChange;
+		return canGainLife | canLoseLife;
 	}
 
+    @Override
+    public boolean isCanLoseLife() {
+        return canLoseLife;
+    }
+    
+    @Override
+    public void setCanLoseLife(boolean canLoseLife) {
+        this.canLoseLife = canLoseLife;
+    }
+    
 	@Override
 	public int loseLife(int amount, Game game) {
-		if (!lifeTotalCanChange) return 0;
+		if (!canLoseLife) return 0;
 		GameEvent event = new GameEvent(GameEvent.EventType.LOSE_LIFE, playerId, playerId, playerId, amount, false);
 		if (!game.replaceEvent(event)) {
 			this.life -= amount;
@@ -827,15 +841,27 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		}
 		return 0;
 	}
+    
+    @Override
+    public boolean isCanGainLife() {
+        return canGainLife;
+    }
 
+    @Override
+    public void setCanGainLife(boolean canGainLife) {
+        this.canGainLife = canGainLife;
+    }
+        
 	@Override
-	public void gainLife(int amount, Game game) {
-		if (!lifeTotalCanChange) return;
+	public int gainLife(int amount, Game game) {
+		if (!canGainLife) return 0;
 		GameEvent event = new GameEvent(GameEvent.EventType.GAIN_LIFE, playerId, playerId, playerId, amount, false);
 		if (!game.replaceEvent(event)) {
 			this.life += amount;
 			game.fireEvent(GameEvent.getEvent(GameEvent.EventType.GAINED_LIFE, playerId, playerId, playerId, amount));
+            return amount;
 		}
+        return 0;
 	}
 
 	@Override

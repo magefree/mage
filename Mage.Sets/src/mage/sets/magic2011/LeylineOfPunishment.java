@@ -31,17 +31,21 @@ package mage.sets.magic2011;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
+import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.SubLayer;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.LeylineAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.players.Player;
 
 /**
  *
@@ -69,10 +73,10 @@ public class LeylineOfPunishment extends CardImpl<LeylineOfPunishment> {
 
 }
 
-class LeylineOfPunishmentEffect1 extends ReplacementEffectImpl<LeylineOfPunishmentEffect1> {
+class LeylineOfPunishmentEffect1 extends ContinuousEffectImpl<LeylineOfPunishmentEffect1> {
 
 	public LeylineOfPunishmentEffect1() {
-		super(Duration.WhileOnBattlefield, Outcome.Benefit);
+		super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
 		staticText = "Players can't gain life";
 	}
 
@@ -87,19 +91,15 @@ class LeylineOfPunishmentEffect1 extends ReplacementEffectImpl<LeylineOfPunishme
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		return true;
-	}
-
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		return true;
-	}
-
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (event.getType() == EventType.GAIN_LIFE) {
-			return true;
-		}
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            for (UUID playerId: controller.getInRange()) {
+                Player player = game.getPlayer(playerId);
+                if (player != null)
+                    player.setCanGainLife(false);
+            }
+            return true;
+        }
 		return false;
 	}
 

@@ -94,8 +94,22 @@ class SoulConduitEffect extends OneShotEffect<SoulConduitEffect> {
             int lifePlayer1 = player1.getLife();
             int lifePlayer2 = player2.getLife();
 
+            if (lifePlayer1 == lifePlayer2)
+                return false;
+            
+            if (!player1.isLifeTotalCanChange() || !player2.isLifeTotalCanChange())
+                return false;
+            
+            // 20110930 - 118.7, 118.8
+            if (lifePlayer1 < lifePlayer2 && (!player1.isCanGainLife() || !player2.isCanLoseLife()))
+                return false;
+
+            if (lifePlayer1 > lifePlayer2 && (!player1.isCanLoseLife() || !player2.isCanGainLife()))
+                return false;
+                        
             player1.setLife(lifePlayer2, game);
             player2.setLife(lifePlayer1, game);
+            return true;
         }
         return false;
     }
