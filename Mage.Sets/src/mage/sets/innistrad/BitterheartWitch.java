@@ -28,6 +28,7 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
+
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
@@ -39,7 +40,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
