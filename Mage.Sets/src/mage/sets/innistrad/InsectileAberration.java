@@ -27,12 +27,23 @@
  */
 package mage.sets.innistrad;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
+
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.players.Player;
+import mage.watchers.WatcherImpl;
 
 /**
  *
@@ -63,5 +74,41 @@ public class InsectileAberration extends CardImpl<InsectileAberration> {
     @Override
     public InsectileAberration copy() {
         return new InsectileAberration(this);
+    }
+    
+    public static class InsectileAberrationWatcher extends WatcherImpl<InsectileAberrationWatcher> {
+
+        public Map<UUID, Set<UUID>> blockedCreatures = new HashMap<UUID, Set<UUID>>();
+
+        public InsectileAberrationWatcher() {
+            super("InsectileAberrationWatcher");
+        }
+
+        public InsectileAberrationWatcher(final InsectileAberrationWatcher watcher) {
+            super(watcher);
+        }
+
+        @Override
+        public InsectileAberrationWatcher copy() {
+            return new InsectileAberrationWatcher(this);
+        }
+
+        @Override
+        public void watch(GameEvent event, Game game) {
+            if (event.getType() == GameEvent.EventType.DRAW_STEP_PRE && event.getSourceId().equals(sourceId)) {
+            	Player player = game.getPlayer(event.getPlayerId());
+                if (player != null && player.getLibrary().size() > 0) {
+                    Card card = player.getLibrary().getFromTop(game);
+                    Cards cards = new CardsImpl();
+                    cards.add(card);
+                    player.lookAtCards("Insectile Aberration", cards, game);
+
+                    if (card.getCardType().contains(CardType.INSTANT) || card.getCardType().contains(CardType.SORCERY)) {
+                    	player.revealCards("This card", cards, game);
+                        condition = true;
+                    }
+                }
+            }
+        }
     }
 }
