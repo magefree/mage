@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author anonymous
+ * @author Alvin
  */
 public class Curiosity extends CardImpl<Curiosity> {
 

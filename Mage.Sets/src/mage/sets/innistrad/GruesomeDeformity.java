@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author anonymous
+ * @author Alvin
  */
 public class GruesomeDeformity extends CardImpl<GruesomeDeformity> {
 

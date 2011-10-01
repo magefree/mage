@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author anonymous
+ * @author Alvin
  */
 public class CurseOfTheBloodyTome extends CardImpl<CurseOfTheBloodyTome> {
 

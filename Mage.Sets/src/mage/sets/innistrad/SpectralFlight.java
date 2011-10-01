@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author anonymous
+ * @author Alvin
  */
 public class SpectralFlight extends CardImpl<SpectralFlight> {
 

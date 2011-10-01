@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
 
 /**
  *
- * @author anonymous
+ * @author Alvin
  */
 public class DelverOfSecrets extends CardImpl<DelverOfSecrets> {
 

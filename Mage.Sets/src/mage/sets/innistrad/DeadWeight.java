@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author anonymous
+ * @author Alvin
  */
 public class DeadWeight extends CardImpl<DeadWeight> {
 

@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
 
 /**
  *
- * @author anonymous
+ * @author Alvin
  */
 public class SkaabRuinator extends CardImpl<SkaabRuinator> {
 

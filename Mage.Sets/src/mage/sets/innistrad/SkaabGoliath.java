@@ -39,7 +39,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
- * @author anonymous
+ * @author Alvin
  */
 public class SkaabGoliath extends CardImpl<SkaabGoliath> {
 
