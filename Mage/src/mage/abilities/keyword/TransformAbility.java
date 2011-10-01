@@ -41,6 +41,9 @@ import mage.game.permanent.Permanent;
  */
 public class TransformAbility extends SimpleStaticAbility {
 
+    public static final String NO_SPELLS_TRANSFORM_RULE = "At the beginning of each upkeep, if no spells were cast last turn, transform {this}";
+    public static final String TWO_OR_MORE_SPELLS_TRANSFORM_RULE = "At the beginning of each upkeep, if a player cast two or more spells last turn, transform {this}";
+
     public TransformAbility() {
         super(Constants.Zone.BATTLEFIELD, new TransformEffect());
     }

@@ -66,6 +66,7 @@ import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.CardsImpl;
 import mage.target.Target;
 import mage.target.TargetPermanent;
+import mage.watchers.common.CastSpellLastTurnWatcher;
 import mage.watchers.common.MorbidWatcher;
 import org.apache.log4j.Logger;
 
@@ -435,6 +436,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		}
 
         state.getWatchers().add(new MorbidWatcher());
+        state.getWatchers().add(new CastSpellLastTurnWatcher());
         
 		//20100716 - 103.5
 		for (UUID playerId: state.getPlayerList(startingPlayerId)) {
