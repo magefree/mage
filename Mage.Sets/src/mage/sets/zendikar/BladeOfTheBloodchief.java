@@ -55,6 +55,7 @@ public class BladeOfTheBloodchief extends CardImpl<BladeOfTheBloodchief> {
 	public BladeOfTheBloodchief ( UUID ownerId ) {
 		super(ownerId, 196, "Blade of the Bloodchief", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}");
         this.expansionSetCode = "ZEN";
+		this.getSubtype().add("Equipment");
 		
 		this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(1)));
 		this.addAbility(new BladeOfTheBloodChiefTriggeredAbility());
