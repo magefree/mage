@@ -27,27 +27,17 @@
  */
 package mage.sets.innistrad;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.players.Player;
-import mage.watchers.WatcherImpl;
 
 /**
  *
- * @author North
+ * @author Alvin
  */
 public class InsectileAberration extends CardImpl<InsectileAberration> {
 

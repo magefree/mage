@@ -28,8 +28,8 @@
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -57,7 +57,7 @@ public class SignalPest extends CardImpl<SignalPest> {
         this.toughness = new MageInt(1);
 
         this.addAbility(new BattleCryAbility());
-        this.addAbility(new SignalPestAbility());
+        this.addAbility(SignalPestAbility.getInstance());
     }
 
     public SignalPest(final SignalPest card) {
@@ -81,7 +81,7 @@ class SignalPestAbility extends EvasionAbility<SignalPestAbility> {
         return instance;
     }
 
-    public SignalPestAbility() {
+    private SignalPestAbility() {
         this.addEffect(new SignalPestEffect());
     }
 
@@ -99,7 +99,7 @@ class SignalPestAbility extends EvasionAbility<SignalPestAbility> {
 class SignalPestEffect extends RestrictionEffect<SignalPestEffect> {
 
     public SignalPestEffect() {
-        super(Constants.Duration.WhileOnBattlefield);
+        super(Duration.WhileOnBattlefield);
     }
 
     public SignalPestEffect(final SignalPestEffect effect) {

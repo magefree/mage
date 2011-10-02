@@ -41,7 +41,6 @@ import mage.abilities.keyword.*;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.common.FilterLandPermanent;
 
 /**
  *
@@ -49,7 +48,7 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class AngelicOverseer extends CardImpl<AngelicOverseer> {
 
-    private static final String rule = "As long as you control a Human, Angelic Overseer has hexproof and is indestructible.";
+    private static final String rule = "As long as you control a Human, {this} has hexproof and is indestructible.";
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Plains");
 
     static {
