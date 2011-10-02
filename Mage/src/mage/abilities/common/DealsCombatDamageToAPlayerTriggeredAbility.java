@@ -70,6 +70,7 @@ public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
             if (setTargetPointer) {
                 for (Effect effect : this.getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+                        effect.setValue("damage", event.getAmount());
                 }
             }
 			return true;
