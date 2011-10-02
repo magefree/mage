@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
 
 /**
  *
- * @author North
+ * @author North, Loki
  */
 public class AshmouthHound extends CardImpl<AshmouthHound> {
 
@@ -52,7 +52,7 @@ public class AshmouthHound extends CardImpl<AshmouthHound> {
         this.toughness = new MageInt(1);
 
         // Whenever Ashmouth Hound blocks or becomes blocked by a creature, Ashmouth Hound deals 1 damage to that creature.
-        this.addAbility(new BlocksOrBecomesBlockedTriggeredAbility(new DamageTargetEffect(1), false));
+        this.addAbility(new BlocksOrBecomesBlockedTriggeredAbility(new DamageTargetEffect(1, true, "that creature"), false));
     }
 
     public AshmouthHound(final AshmouthHound card) {
