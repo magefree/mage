@@ -30,7 +30,7 @@ package mage.sets.newphyrexia;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.effects.common.AddPoisonCounterTargetEffect;
+import mage.abilities.effects.common.counter.AddPoisonCounterTargetEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;

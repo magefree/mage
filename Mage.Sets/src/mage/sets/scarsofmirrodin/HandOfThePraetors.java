@@ -35,6 +35,7 @@ import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
+import mage.abilities.effects.common.counter.AddPoisonCounterTargetEffect;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
 import mage.target.TargetPlayer;
@@ -42,7 +43,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.common.SpellCastTriggeredAbility;
-import mage.abilities.effects.common.AddPoisonCounterTargetEffect;
 import mage.filter.common.FilterCreatureCard;
 
 /**
