@@ -37,13 +37,10 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.MayTapOrUntapTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -63,7 +60,7 @@ public class VedalkenAnatomist extends CardImpl<VedalkenAnatomist> {
         this.toughness = new MageInt(2);
 
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.M1M1.createInstance()), new ManaCostsImpl("{2}{U}"));
-        ability.addEffect(new VedalkenAnatomistEffect());
+        ability.addEffect(new MayTapOrUntapTargetEffect());
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -76,40 +73,5 @@ public class VedalkenAnatomist extends CardImpl<VedalkenAnatomist> {
     @Override
     public VedalkenAnatomist copy() {
         return new VedalkenAnatomist(this);
-    }
-}
-
-class VedalkenAnatomistEffect extends OneShotEffect<VedalkenAnatomistEffect> {
-    VedalkenAnatomistEffect() {
-        super(Constants.Outcome.Benefit);
-        staticText = "You may tap or untap that creature";
-    }
-
-    VedalkenAnatomistEffect(final VedalkenAnatomistEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent target = game.getPermanent(targetPointer.getFirst(source));
-        Player player = game.getPlayer(source.getControllerId());
-        if (target != null && player != null) {
-            if (target.isTapped()) {
-                if (player.chooseUse(Constants.Outcome.Untap, "Untap that creature?", game)) {
-                    target.untap(game);
-                }
-            } else {
-                if (player.chooseUse(Constants.Outcome.Tap, "Tap that creature?", game)) {
-                    target.tap(game);
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public VedalkenAnatomistEffect copy() {
-        return new VedalkenAnatomistEffect(this);
     }
 }
