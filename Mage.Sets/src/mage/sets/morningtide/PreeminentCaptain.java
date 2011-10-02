@@ -27,7 +27,6 @@
  */
 package mage.sets.morningtide;
 
-import java.util.List;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
@@ -41,13 +40,10 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
-import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
-import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetDefender;
 
 /**
@@ -87,21 +83,19 @@ public class PreeminentCaptain extends CardImpl<PreeminentCaptain> {
 
 class PreeminentCaptainEffect extends OneShotEffect<PreeminentCaptainEffect> {
 
-	protected TargetCardInHand target;
-
 	public PreeminentCaptainEffect() {
 		super(Outcome.PutCreatureInPlay);
-		target = new TargetCardInHand(new FilterSoldierCard());
+		this.staticText = "put a Soldier creature card from your hand onto the battlefield tapped and attacking.";
 	}
 
 	public PreeminentCaptainEffect(final PreeminentCaptainEffect effect) {
 		super(effect);
-		target = effect.target;
 	}
 
 	@Override
 	public boolean apply(Game game, Ability source) {
 		Player player = game.getPlayer(source.getControllerId());
+		TargetCardInHand target = new TargetCardInHand(new FilterSoldierCard());
 		if (target.choose(getOutcome(), player.getId(), game)) {
 			if (target.getTargets().size() > 0) {
 				UUID cardId = target.getFirstTarget();
@@ -112,12 +106,15 @@ class PreeminentCaptainEffect extends OneShotEffect<PreeminentCaptainEffect> {
 							source.getId(), source.getControllerId())) {
 						Permanent permanent = game.getPermanent(card.getId());
 						permanent.setTapped(true);
-						TargetDefender target = new TargetDefender(game
+						TargetDefender def = new TargetDefender(game
 								.getCombat().getDefenders(), player.getId());
-						if (target.choose(getOutcome(), player.getId(), game)) {
-							if (target.getTargets().size() > 0) {
-								game.getCombat().declareAttacker(permanent.getId(),
-										target.getFirstTarget(), game);
+						if (def.choose(getOutcome(), player.getId(), game)) {
+							// TODO -> If only one option, don't ask, as for
+							// normal attacking.
+							if (def.getTargets().size() > 0) {
+								game.getCombat().declareAttacker(
+										permanent.getId(),
+										def.getFirstTarget(), game);
 							}
 						}
 					}

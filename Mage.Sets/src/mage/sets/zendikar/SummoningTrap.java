@@ -28,6 +28,9 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
+import java.util.logging.Logger;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
@@ -41,6 +44,7 @@ import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.filter.FilterCard;
+import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -67,13 +71,13 @@ public class SummoningTrap extends CardImpl<SummoningTrap> {
 		// If a creature spell you cast this turn was countered by a spell or
 		// ability an opponent controlled, you may pay {0} rather than pay
 		// Summoning Trap's mana cost.
+		this.getSpellAbility().addAlternativeCost(
+				new SummoningTrapAlternativeCost());
+		this.addWatcher(new SummoningTrapWatcher());
 		// Look at the top seven cards of your library. You may put a creature
 		// card from among them onto the battlefield. Put the rest on the bottom
 		// of your library in any order.
 		this.getSpellAbility().addEffect(new SummoningTrapEffect());
-		this.getSpellAbility().addAlternativeCost(
-				new SummoningTrapAlternativeCost());
-		this.addWatcher(new SummoningTrapWatcher());
 	}
 
 	public SummoningTrap(final SummoningTrap card) {
@@ -106,12 +110,14 @@ class SummoningTrapWatcher extends WatcherImpl<SummoningTrapWatcher> {
 		if (condition == true) // no need to check - condition has already
 								// occured
 			return;
-		if (event.getType() == EventType.COUNTER
-				&& game.getCard(event.getTargetId()).getCardType()
-						.contains(CardType.CREATURE)
+		if (event.getType() == EventType.COUNTERED
+				&& game.getStack().getStackObject(event.getTargetId())
+						.getCardType().contains(CardType.CREATURE)
 				&& game.getOpponents(controllerId)
 						.contains(event.getPlayerId()))
-			condition = true;
+			Logger.getAnonymousLogger().info(
+					game.getCard(event.getTargetId()).toString());
+		condition = true;
 	}
 }
 
@@ -156,6 +162,7 @@ class SummoningTrapEffect extends OneShotEffect<SummoningTrapEffect> {
 
 	public SummoningTrapEffect() {
 		super(Outcome.PutCreatureInPlay);
+		this.staticText = "Look at the top seven cards of your library. You may put a creature card from among them onto the battlefield. Put the rest on the bottom of your library in any order.";
 	}
 
 	@Override
@@ -170,14 +177,11 @@ class SummoningTrapEffect extends OneShotEffect<SummoningTrapEffect> {
 				cards.add(card);
 			}
 		}
-		player.lookAtCards("Summoning Trap", cards, game);
 
-		if (!cards.isEmpty()
-				&& player.chooseUse(Outcome.PutCreatureInPlay,
-						"Do you wish to put a creature on the battlefield?",
-						game)) {
-			TargetCard target = new TargetCard(Zone.PICK, new FilterCard(
-					"card to put on the battlefield"));
+		if (!cards.isEmpty()) {
+			TargetCard target = new TargetCard(Zone.PICK,
+					new FilterCreatureCard(
+							"creature card to put on the battlefield"));
 			if (player.choose(Outcome.PutCreatureInPlay, cards, target, game)) {
 				Card card = cards.get(target.getFirstTarget(), game);
 				if (card != null) {
@@ -185,6 +189,25 @@ class SummoningTrapEffect extends OneShotEffect<SummoningTrapEffect> {
 					card.putOntoBattlefield(game, Zone.PICK,
 							source.getSourceId(), source.getControllerId());
 				}
+			}
+			if (cards.size() > 0) {
+				TargetCard target2 = new TargetCard(Constants.Zone.PICK,
+						new FilterCard(
+								"card to put on the bottom of your library"));
+				target2.setRequired(true);
+				while (cards.size() > 1) {
+					player.choose(Constants.Outcome.Benefit, cards, target2,
+							game);
+					Card card = cards.get(target2.getFirstTarget(), game);
+					if (card != null) {
+						cards.remove(card);
+						player.getLibrary().putOnBottom(card, game);
+					}
+					target2.clearChosen();
+				}
+				Card card = cards.get(cards.iterator().next(), game);
+				cards.remove(card);
+				player.getLibrary().putOnBottom(card, game);
 			}
 		}
 
