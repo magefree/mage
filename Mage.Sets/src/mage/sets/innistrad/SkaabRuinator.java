@@ -33,6 +33,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.TimingRule;
 import mage.Constants;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
@@ -51,6 +52,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.common.TargetAttackingOrBlockingCreature;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
 
@@ -146,7 +148,8 @@ class SkaabRuinatorEffect extends OneShotEffect<SkaabRuinatorEffect> {
 		if (target != null) {
 			Player controller = game.getPlayer(target.getOwnerId());
 			if (controller != null) {
-				return controller.cast(target.getSpellAbility(), game, true);
+				//return controller.cast(target.getSpellAbility(), game, true);
+				return target.cast(game, Zone.GRAVEYARD, target.getSpellAbility(), controller.getId());
 			}
 		}
 		return false;
