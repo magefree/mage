@@ -29,8 +29,17 @@ package mage.sets.innistrad;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.abilities.Ability;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.game.Game;
+import mage.game.stack.StackObject;
+import mage.players.Player;
+import mage.target.TargetSpell;
 
 /**
  * 
@@ -47,7 +56,6 @@ public class FrightfulDelusion extends CardImpl<FrightfulDelusion> {
         // Counter target spell unless its controller pays {1}. That player discards a card.
         this.getSpellAbility().addTarget(new TargetSpell());
 		this.getSpellAbility().addEffect(new FrightfulDelusionEffect());
-		new dis
     }
 
 	public FrightfulDelusion(final FrightfulDelusion card) {
@@ -62,9 +70,9 @@ public class FrightfulDelusion extends CardImpl<FrightfulDelusion> {
 
 class FrightfulDelusionEffect extends OneShotEffect<FrightfulDelusionEffect> {
 
-	public FrightfulDelusionEffect(Cost cost) {
+	public FrightfulDelusionEffect() {
 		super(Outcome.Detriment);
-		this.staticText = "Counter target spell unless its controller pays {1}. That player discards a card."
+		this.staticText = "Counter target spell unless its controller pays {1}. That player discards a card.";
 	}
 
 	public FrightfulDelusionEffect(final FrightfulDelusionEffect effect) {
@@ -87,10 +95,10 @@ class FrightfulDelusionEffect extends OneShotEffect<FrightfulDelusionEffect> {
 				cost.clearPaid();
 				if (!cost.pay(source, game, spell.getControllerId(),
 						spell.getControllerId(), false)) {
+					game.getPlayer(spell.getControllerId()).discard(
+							1, source, game);
 					return game.getStack().counter(source.getFirstTarget(),
-							source.getSourceId(), game)
-							|| game.getPlayer(spell.getControllerId()).discard(
-									1, source, game);
+							source.getSourceId(), game);
 				}
 			}
 		}
