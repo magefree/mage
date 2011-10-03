@@ -689,6 +689,12 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                 }
             }
 		}
+        Abilities<ActivatedAbility> otherAbilities = game.getState().getOtherAbilities(object.getId(), zone);
+        if (otherAbilities != null) {
+            for (ActivatedAbility ability: otherAbilities) {
+                useable.put(ability.getId(), ability);
+            }
+        }
 		return useable;
 	}
 

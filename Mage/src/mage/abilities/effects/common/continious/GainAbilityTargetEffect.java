@@ -45,7 +45,7 @@ import mage.target.Target;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GainAbilityTargetEffect extends ContinuousEffectImpl {
+public class GainAbilityTargetEffect extends ContinuousEffectImpl<GainAbilityTargetEffect> {
 
 	protected Ability ability;
 

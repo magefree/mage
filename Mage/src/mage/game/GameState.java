@@ -33,10 +33,14 @@ import mage.game.events.GameEvent;
 import mage.game.stack.SpellStack;
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import mage.Constants.Zone;
+import mage.abilities.Abilities;
+import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
 import mage.abilities.DelayedTriggeredAbilities;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.SpecialActions;
@@ -89,6 +93,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 	private TriggeredAbilities triggers;
 	private DelayedTriggeredAbilities delayed;
 	private SpecialActions specialActions;
+    private Map<UUID, Abilities<ActivatedAbility>> otherAbilities = new HashMap<UUID, Abilities<ActivatedAbility>>();
 	private Combat combat;
 	private TurnMods turnMods;
 	private Watchers watchers;
@@ -143,6 +148,9 @@ public class GameState implements Serializable, Copyable<GameState> {
 		}
 		for (Map.Entry<UUID, Zone> entry: state.zones.entrySet()) {
 			zones.put(entry.getKey(), entry.getValue());
+		}
+		for (Map.Entry<UUID, Abilities<ActivatedAbility>> entry: state.otherAbilities.entrySet()) {
+			otherAbilities.put(entry.getKey(), entry.getValue().copy());
 		}
 	}
 
@@ -274,6 +282,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 			player.reset();
 		}
 		battlefield.reset(game);
+        resetOtherAbilities();
 		effects.apply(game);
 		battlefield.fireControlChangeEvents(game);
 	}
@@ -409,6 +418,26 @@ public class GameState implements Serializable, Copyable<GameState> {
 		values.put(valueId, value);
 	}
 
+    public Abilities<ActivatedAbility> getOtherAbilities(UUID objectId, Zone zone) {
+        if (otherAbilities.containsKey(objectId)) {
+            return otherAbilities.get(objectId).getActivatedAbilities(zone);
+        }
+        return null;
+    }
+    
+    public void addOtherAbility(UUID objectId, ActivatedAbility ability) {
+        if (!otherAbilities.containsKey(objectId)) {
+            otherAbilities.put(objectId, new AbilitiesImpl());
+        }
+        otherAbilities.get(objectId).add(ability);
+    }
+    
+    private void resetOtherAbilities() {
+        for (Abilities<ActivatedAbility> abilities: otherAbilities.values()) {
+            abilities.clear();
+        }
+    }
+    
     public void clear() {
         battlefield.clear();
         effects.clear();
@@ -422,6 +451,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         turnNum = 0;
         gameOver = false;
     	specialActions.clear();
+        otherAbilities.clear();
         combat.clear();
         turnMods.clear();
         watchers.clear();
