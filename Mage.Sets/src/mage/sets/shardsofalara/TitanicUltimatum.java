@@ -37,12 +37,14 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
- * @author North
+ * @author North, Eugen
  */
 public class TitanicUltimatum extends CardImpl<TitanicUltimatum> {
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures");
 
     public TitanicUltimatum(UUID ownerId) {
         super(ownerId, 204, "Titanic Ultimatum", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{R}{R}{G}{G}{G}{W}{W}");
@@ -53,10 +55,10 @@ public class TitanicUltimatum extends CardImpl<TitanicUltimatum> {
         this.color.setWhite(true);
 
         // Until end of turn, creatures you control get +5/+5 and gain first strike, lifelink, and trample.
-        this.getSpellAbility().addEffect(new BoostControlledEffect(5, 5, Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostControlledEffect(5, 5, Duration.EndOfTurn, filter));
+        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, filter));
+        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn, filter));
+        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, filter));
     }
 
     public TitanicUltimatum(final TitanicUltimatum card) {
