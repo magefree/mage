@@ -27,9 +27,11 @@
  */
 package mage.sets.innistrad;
 
-import mage.Constants;
+import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.TimingRule;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -37,13 +39,9 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.sets.tokens.EmptyToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.util.CardUtil;
-import mage.watchers.WatcherImpl;
-
-import java.util.*;
 
 /**
  * @author nantuko
@@ -61,7 +59,7 @@ public class CacklingCounterpart extends CardImpl<CacklingCounterpart> {
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
 
         // Flashback {5}{U}{U}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{U}{U}"), Constants.TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{U}{U}"), TimingRule.INSTANT));
     }
 
     public CacklingCounterpart(final CacklingCounterpart card) {
@@ -77,7 +75,7 @@ public class CacklingCounterpart extends CardImpl<CacklingCounterpart> {
 class CacklingCounterpartEffect extends OneShotEffect<CacklingCounterpartEffect> {
 
     public CacklingCounterpartEffect() {
-        super(Constants.Outcome.PutCreatureInPlay);
+        super(Outcome.PutCreatureInPlay);
         staticText = "Put a token onto the battlefield that's a copy of target creature you control";
     }
 
