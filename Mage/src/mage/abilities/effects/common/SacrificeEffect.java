@@ -74,7 +74,8 @@ public class SacrificeEffect extends OneShotEffect<SacrificeEffect>{
 	public boolean apply(Game game, Ability source) {
 		Player player = game.getPlayer(targetPointer.getFirst(source));
 		filter.setTargetController(TargetController.YOU);
-		Target target = new TargetControlledPermanent(count.calculate(game, source), count.calculate(game, source), filter, false);
+		int amount = count.calculate(game, source);
+		Target target = new TargetControlledPermanent(amount, amount, filter, false);
 
 		//A spell or ability could have removed the only legal target this player
 		//had, if thats the case this ability should fizzle.
