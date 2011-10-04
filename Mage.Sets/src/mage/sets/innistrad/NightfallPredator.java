@@ -65,6 +65,10 @@ public class NightfallPredator extends CardImpl<NightfallPredator> {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
+        // this card is the second face of double-faced card
+        this.nightCard = true;
+        this.canTransform = true;
+
         // {R}, {tap}: Nightfall Predator fights target creature.
         Ability activatedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new NightfallPredatorEffect(), new ManaCostsImpl("{R}"));
         activatedAbility.addCost(new TapSourceCost());
