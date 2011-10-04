@@ -845,29 +845,30 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 		this.transformed = transformed;
 	}
 
-	@Override
-	public void toggleTransformed() {
-		this.transformed = !this.transformed;
-		if (transformed) {
-			BufferedImage night = ImageManagerImpl.getInstance().getNightImage();
-			dayNightButton.setIcon(new ImageIcon(night));
-            this.temporary = this.gameCard;
+    @Override
+    public void toggleTransformed() {
+        this.transformed = !this.transformed;
+        if (transformed) {
+            BufferedImage night = ImageManagerImpl.getInstance().getNightImage();
+            dayNightButton.setIcon(new ImageIcon(night));
             if (this.gameCard.getSecondCardFace() == null) {
+                log.error("no second side for card to transform!");
                 return;
             }
-            if (!isPermanent) {
+            if (!isPermanent) { // use only for custom transformation (when pressing day-night button)
+                this.temporary = this.gameCard;
                 update(this.gameCard.getSecondCardFace());
             }
             updateImage();
-		} else {
-			BufferedImage day = ImageManagerImpl.getInstance().getDayImage();
-			dayNightButton.setIcon(new ImageIcon(day));
-            this.gameCard = this.temporary;
-            this.temporary = null;
-            if (!isPermanent) {
+        } else {
+            BufferedImage day = ImageManagerImpl.getInstance().getDayImage();
+            dayNightButton.setIcon(new ImageIcon(day));
+            if (!isPermanent) { // use only for custom transformation (when pressing day-night button)
+                this.gameCard = this.temporary;
+                this.temporary = null;
                 update(this.gameCard);
             }
             updateImage();
-		}
-	}
+        }
+    }
 }
