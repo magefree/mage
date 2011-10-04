@@ -42,9 +42,10 @@ import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.target.TargetPermanent;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -61,7 +62,7 @@ public class CurseOfTheBloodyTome extends CardImpl<CurseOfTheBloodyTome> {
         this.color.setBlue(true);
 
         // Enchant player
-        TargetPermanent target = new TargetCreaturePermanent();
+        TargetPlayer target = new TargetPlayer();
 		this.getSpellAbility().addTarget(target);
 		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.AddAbility));
 		Ability ability = new EnchantAbility(target.getTargetName());
@@ -98,17 +99,22 @@ class CurseOfTheBloodyTomeAbility extends TriggeredAbilityImpl<CurseOfTheBloodyT
 
 	@Override
 	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.DRAW_STEP_PRE && event.getPlayerId().equals(this.controllerId)) {
-			this.addTarget(new TargetPlayer());
-			getTargets().get(0).add(event.getPlayerId(), game);
-			return true;
+		if (event.getType() == EventType.DRAW_STEP_PRE) {
+            Permanent enchantment = game.getPermanent(this.sourceId);
+            if (enchantment != null && enchantment.getAttachedTo() != null) {
+                Player player = game.getPlayer(enchantment.getAttachedTo());
+                if (player != null && game.getActivePlayerId().equals(player.getId())) {
+                    this.getEffects().get(0).setTargetPointer(new FixedTarget(player.getId()));
+        			return true;
+                }
+            }
 		}
 		return false;
 	}
 
 	@Override
 	public String getRule() {
-		return "At the beginning of each player's upkeep, that player reveals a card at random from his or her hand. If it's a land card, the player puts it onto the battlefield. Otherwise, the player casts it without paying its mana cost if able.";
+		return "At the beginning of enchanted player's upkeep, that player puts the top two cards of his or her library into his or her graveyard.";
 	}
 
 }
