@@ -86,8 +86,8 @@ class JinGitaxiasCoreAugurEffect extends ContinuousEffectImpl<JinGitaxiasCoreAug
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID id : game.getOpponents(source.getControllerId())) {
-            Player player = game.getPlayer(id);
+        for (UUID opponentId : game.getOpponents(source.getControllerId())) {
+            Player player = game.getPlayer(opponentId);
             if (player != null) {
                 player.setMaxHandSize(player.getMaxHandSize() - 7);
             }
