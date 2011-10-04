@@ -36,6 +36,7 @@ import mage.Constants.Rarity;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -83,7 +84,10 @@ class ViridianRevelTriggeredAbility extends TriggeredAbilityImpl<ViridianRevelTr
 		if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
 			ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
 			if (zEvent.getFromZone() == Constants.Zone.BATTLEFIELD && zEvent.getToZone() == Constants.Zone.GRAVEYARD && game.getOpponents(this.getControllerId()).contains(zEvent.getPlayerId())) {
-				return true;
+                Card card = game.getCard(event.getTargetId());
+                if (card != null && card.getCardType().contains(CardType.ARTIFACT)) {
+    				return true;
+                }
 			}
 		}
 		return false;
