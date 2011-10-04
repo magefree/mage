@@ -38,7 +38,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.PreventionEffectImpl;
-import mage.abilities.effects.common.PreventAllCombatDamageEffect;
 import mage.abilities.effects.common.PreventDamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
@@ -94,7 +93,7 @@ class KitsuneHealerEffect extends PreventionEffectImpl<KitsuneHealerEffect> {
 		staticText = "Prevent all damage that would be dealt to target legendary creature this turn";
 	}
 
-	public KitsuneHealerEffect(final PreventAllCombatDamageEffect effect) {
+	public KitsuneHealerEffect(final KitsuneHealerEffect effect) {
 		super(effect);
 	}
 

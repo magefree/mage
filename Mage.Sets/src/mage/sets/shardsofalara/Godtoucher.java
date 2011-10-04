@@ -38,7 +38,6 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.PreventionEffectImpl;
-import mage.abilities.effects.common.PreventAllCombatDamageEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.common.FilterCreaturePermanent;
@@ -94,7 +93,7 @@ class GodtoucherEffect extends PreventionEffectImpl<GodtoucherEffect> {
 		staticText = "Prevent all damage that would be dealt to target creature with power 5 or greater this turn";
     }
 
-    public GodtoucherEffect(final PreventAllCombatDamageEffect effect) {
+    public GodtoucherEffect(final GodtoucherEffect effect) {
         super(effect);
     }
 

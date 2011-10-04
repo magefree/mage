@@ -5,7 +5,7 @@ import mage.counters.Counter;
 /**
  * @author Loki
  */
-public class HoofprintCounter extends Counter<FeatherCounter> {
+public class HoofprintCounter extends Counter<HoofprintCounter> {
 
     public HoofprintCounter() {
         super("Hoofprint");
