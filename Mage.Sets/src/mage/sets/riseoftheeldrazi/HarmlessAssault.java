@@ -31,12 +31,9 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.PreventionEffectImpl;
+import mage.abilities.effects.common.PreventAllCombatDamageEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.DamageEvent;
-import mage.game.events.GameEvent;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  * 
@@ -44,6 +41,13 @@ import mage.game.events.GameEvent;
  */
 public class HarmlessAssault extends CardImpl<HarmlessAssault> {
 
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking creatures");
+    
+    static {
+        filter.setAttacking(true);
+        filter.setUseAttacking(true);
+    }
+    
 	public HarmlessAssault(UUID ownerId) {
 		super(ownerId, 24, "Harmless Assault", Rarity.COMMON,
 				new CardType[] { CardType.INSTANT }, "{2}{W}{W}");
@@ -54,8 +58,7 @@ public class HarmlessAssault extends CardImpl<HarmlessAssault> {
 		// Prevent all combat damage that would be dealt this turn by attacking
 		// creatures.
 		this.getSpellAbility().addEffect(
-				new PreventAllCombatDamageFromAttackingCreaturesEffect(
-						Duration.EndOfTurn));
+				new PreventAllCombatDamageEffect(filter, Duration.EndOfTurn));
 	}
 
 	public HarmlessAssault(final HarmlessAssault card) {
@@ -66,61 +69,4 @@ public class HarmlessAssault extends CardImpl<HarmlessAssault> {
 	public HarmlessAssault copy() {
 		return new HarmlessAssault(this);
 	}
-}
-
-class PreventAllCombatDamageFromAttackingCreaturesEffect
-		extends
-		PreventionEffectImpl<PreventAllCombatDamageFromAttackingCreaturesEffect> {
-
-	public PreventAllCombatDamageFromAttackingCreaturesEffect(Duration duration) {
-		super(duration);
-		staticText = "Prevent all combat damage from attacking creatures "
-				+ duration.toString();
-	}
-
-	public PreventAllCombatDamageFromAttackingCreaturesEffect(
-			final PreventAllCombatDamageFromAttackingCreaturesEffect effect) {
-		super(effect);
-	}
-
-	@Override
-	public PreventAllCombatDamageFromAttackingCreaturesEffect copy() {
-		return new PreventAllCombatDamageFromAttackingCreaturesEffect(this);
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
-
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		GameEvent preventEvent = new GameEvent(
-				GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(),
-				source.getId(), source.getControllerId(), event.getAmount(),
-				false);
-		if (!game.replaceEvent(preventEvent)) {
-			int damage = event.getAmount();
-			event.setAmount(0);
-			game.informPlayers("Damage has been prevented: " + damage);
-			game.fireEvent(GameEvent.getEvent(
-					GameEvent.EventType.PREVENTED_DAMAGE,
-					source.getFirstTarget(), source.getId(),
-					source.getControllerId(), damage));
-		}
-		return false;
-	}
-
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (super.applies(event, source, game) && event instanceof DamageEvent) {
-			DamageEvent damageEvent = (DamageEvent) event;
-			return damageEvent.isCombatDamage()
-					&& game.getPermanent(damageEvent.getSourceId()) != null
-					&& game.getPermanent(damageEvent.getSourceId())
-							.isAttacking();
-		}
-		return false;
-	}
-
 }
