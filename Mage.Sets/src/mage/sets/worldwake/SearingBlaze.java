@@ -35,6 +35,7 @@ import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -44,6 +45,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
@@ -167,7 +169,7 @@ class SearingBlazeTarget<T extends TargetCreaturePermanent<T>> extends TargetPer
     public boolean canTarget(UUID id, Ability source, Game game) {
         UUID firstTarget = source.getFirstTarget();
         Permanent permanent = game.getPermanent(id);
-        if (firstTarget != null && permanent != null && !permanent.getControllerId().equals(firstTarget)) {
+        if (firstTarget != null && permanent != null && permanent.getControllerId().equals(firstTarget)) {
             return super.canTarget(id, source, game);
         }
         return false;
@@ -177,12 +179,14 @@ class SearingBlazeTarget<T extends TargetCreaturePermanent<T>> extends TargetPer
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         Set<UUID> availablePossibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
         Set<UUID> possibleTargets = new HashSet<UUID>();
-        // TODO: sourceId is the Id of an Ability; at the time this is passed the first target is selected but the call below return null
-        UUID playerId = game.getObject(sourceId).getAbilities().get(0).getFirstTarget();
-        for (UUID targetId : availablePossibleTargets) {
-            Permanent permanent = game.getPermanent(targetId);
-            if(permanent != null && permanent.getControllerId().equals(playerId)){
-                possibleTargets.add(targetId);
+        MageObject object = game.getObject(sourceId);
+        if (object instanceof StackObject) {
+            UUID playerId = ((StackObject)object).getStackAbility().getFirstTarget();
+            for (UUID targetId : availablePossibleTargets) {
+                Permanent permanent = game.getPermanent(targetId);
+                if(permanent != null && permanent.getControllerId().equals(playerId)){
+                    possibleTargets.add(targetId);
+                }
             }
         }
         return possibleTargets;
