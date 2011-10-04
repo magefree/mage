@@ -95,6 +95,7 @@ class GeistOfSaintTraftEffect extends OneShotEffect<GeistOfSaintTraftEffect> {
         if (token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId())) {
             Permanent p = game.getPermanent(token.getLastAddedToken());
             game.getCombat().declareAttacker(p.getId(), game.getCombat().getDefendingPlayer(source.getSourceId()), game);
+            p.setTapped(true);
             Effect effect = new ExileTargetEffect();
             effect.setTargetPointer(new FixedTarget(token.getLastAddedToken()));
             CreateDelayedTriggeredAbilityEffect createEffect = new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(effect));
