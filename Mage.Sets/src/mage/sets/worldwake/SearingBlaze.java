@@ -28,6 +28,8 @@
 
 package mage.sets.worldwake;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
@@ -36,12 +38,14 @@ import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.Watcher;
@@ -50,6 +54,7 @@ import mage.watchers.WatcherImpl;
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @author North
  */
 public class SearingBlaze extends CardImpl<SearingBlaze> {
 
@@ -57,9 +62,11 @@ public class SearingBlaze extends CardImpl<SearingBlaze> {
 		super(ownerId, 90, "Searing Blaze", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}{R}");
 		this.expansionSetCode = "WWK";
 		this.color.setRed(true);
+
+		// Searing Blaze deals 1 damage to target player and 1 damage to target creature that player controls.
+		// Landfall - If you had a land enter the battlefield under your control this turn, Searing Blaze deals 3 damage to that player and 3 damage to that creature instead.
 		this.getSpellAbility().addTarget(new TargetPlayer());
-		//TODO: change this to only allow creatures controlled by first target
-		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+		this.getSpellAbility().addTarget(new SearingBlazeTarget());
 		this.getSpellAbility().addEffect(new SearingBlazeEffect());
 		this.addWatcher(new SearingBlazeWatcher());
 	}
@@ -144,4 +151,45 @@ class SearingBlazeEffect extends OneShotEffect<SearingBlazeEffect> {
 		return true;
 	}
 
+}
+
+class SearingBlazeTarget<T extends TargetCreaturePermanent<T>> extends TargetPermanent<TargetCreaturePermanent<T>> {
+
+    public SearingBlazeTarget() {
+        super(1, 1, FilterCreaturePermanent.getDefault(), false);
+    }
+
+    public SearingBlazeTarget(final SearingBlazeTarget target) {
+        super(target);
+    }
+
+    @Override
+    public boolean canTarget(UUID id, Ability source, Game game) {
+        UUID firstTarget = source.getFirstTarget();
+        Permanent permanent = game.getPermanent(id);
+        if (firstTarget != null && permanent != null && !permanent.getControllerId().equals(firstTarget)) {
+            return super.canTarget(id, source, game);
+        }
+        return false;
+    }
+
+    @Override
+    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+        Set<UUID> availablePossibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
+        Set<UUID> possibleTargets = new HashSet<UUID>();
+        // TODO: sourceId is the Id of an Ability; at the time this is passed the first target is selected but the call below return null
+        UUID playerId = game.getObject(sourceId).getAbilities().get(0).getFirstTarget();
+        for (UUID targetId : availablePossibleTargets) {
+            Permanent permanent = game.getPermanent(targetId);
+            if(permanent != null && permanent.getControllerId().equals(playerId)){
+                possibleTargets.add(targetId);
+            }
+        }
+        return possibleTargets;
+    }
+
+    @Override
+    public SearingBlazeTarget copy() {
+        return new SearingBlazeTarget(this);
+    }
 }
