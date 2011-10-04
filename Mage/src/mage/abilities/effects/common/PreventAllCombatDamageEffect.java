@@ -32,9 +32,11 @@ import mage.Constants.Duration;
 import mage.Constants.PhaseStep;
 import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectImpl;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 
 /**
  *
@@ -42,13 +44,22 @@ import mage.game.events.GameEvent;
  */
 public class PreventAllCombatDamageEffect extends PreventionEffectImpl<PreventAllCombatDamageEffect> {
 
-	public PreventAllCombatDamageEffect(Duration duration) {
+    private FilterCreaturePermanent filter;
+    
+    public PreventAllCombatDamageEffect(FilterCreaturePermanent filter, Duration duration) {
+		super(duration);
+        this.filter = filter;
+		staticText = "Prevent all combat damage " + duration.toString() + " dealt by " + filter.getMessage();
+	}
+
+    public PreventAllCombatDamageEffect(Duration duration) {
 		super(duration);
 		staticText = "Prevent all combat damage " + duration.toString();
 	}
 
 	public PreventAllCombatDamageEffect(final PreventAllCombatDamageEffect effect) {
 		super(effect);
+        this.filter = effect.filter.copy();
 	}
 
 	@Override
@@ -77,7 +88,13 @@ public class PreventAllCombatDamageEffect extends PreventionEffectImpl<PreventAl
 	public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game) && event instanceof DamageEvent) {
             DamageEvent damageEvent = (DamageEvent) event;
-            return damageEvent.isCombatDamage();
+            if (damageEvent.isCombatDamage()) {
+                if (filter == null)
+                    return true;
+                Permanent permanent = game.getPermanent(damageEvent.getSourceId());
+                if (permanent != null && filter.match(permanent))
+                    return true;
+            }
         }
 		return false;
 	}
