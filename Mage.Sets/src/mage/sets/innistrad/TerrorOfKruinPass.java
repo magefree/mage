@@ -70,6 +70,7 @@ public class TerrorOfKruinPass extends CardImpl<TerrorOfKruinPass> {
         this.nightCard = true;
         this.canTransform = true;
 
+        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

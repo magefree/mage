@@ -72,6 +72,7 @@ public class HowlpackAlpha extends CardImpl<HowlpackAlpha> {
         this.nightCard = true;
         this.canTransform = true;
 
+        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
