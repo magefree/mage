@@ -27,15 +27,15 @@
  */
 package mage.sets.innistrad;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 
+import java.util.UUID;
+
 /**
- *
  * @author nantuko
  */
 public class ThrabenMilitia extends CardImpl<ThrabenMilitia> {
@@ -45,6 +45,7 @@ public class ThrabenMilitia extends CardImpl<ThrabenMilitia> {
         this.expansionSetCode = "ISD";
         this.subtype.add("Human");
         this.subtype.add("Soldier");
+        this.color.setWhite(true);
 
         // this card is the second face of double-faced card
         this.nightCard = true;

@@ -55,7 +55,7 @@ public class FesterhideBoar extends CardImpl<FesterhideBoar> {
         this.toughness = new MageInt(3);
 
         this.addAbility(TrampleAbility.getInstance());
-        // Morbid — Festerhide Boar enters the battlefield with two +1/+1 counters on it if a creature died this turn.
+        // Morbid - Festerhide Boar enters the battlefield with two +1/+1 counters on it if a creature died this turn.
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)),
                 MorbidCondition.getInstance(), ""), "with two +1/+1 counters on it if a creature died this turn"));
     }
