@@ -93,7 +93,7 @@ class CreepyDollTriggeredAbility extends TriggeredAbilityImpl<CreepyDollTriggere
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event instanceof DamagedCreatureEvent) {
-            if (((DamagedCreatureEvent) event).isCombatDamage()) {
+            if (((DamagedCreatureEvent) event).isCombatDamage() && event.getSourceId().equals(sourceId)) {
                 getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));
                 return true;
             }
