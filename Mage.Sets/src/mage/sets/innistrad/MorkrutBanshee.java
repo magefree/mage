@@ -27,26 +27,26 @@
  */
 package mage.sets.innistrad;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.watchers.Watcher;
 
 import java.util.UUID;
+import mage.Constants.Duration;
+import mage.abilities.TriggeredAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.common.MorbidCondition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 
 /**
  * @author nantuko
  */
 public class MorkrutBanshee extends CardImpl<MorkrutBanshee> {
+
+    private final static String staticText = "Morbid - When {this} enters the battlefield, if a creature died this turn, target creature gets -4/-4 until end of turn.";
 
 	public MorkrutBanshee(UUID ownerId) {
 		super(ownerId, 110, "Morkrut Banshee", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
@@ -58,7 +58,8 @@ public class MorkrutBanshee extends CardImpl<MorkrutBanshee> {
 		this.toughness = new MageInt(4);
 
 		// Morbid - When Morkut Banshee enters the battlefield, if a creature died this turn, target creature gets -4/-4 until end of turn.
-		Ability ability = new MorkrutBansheeAbility();
+        TriggeredAbility triggeredAbility = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(-4, -4, Duration.EndOfTurn));
+		TriggeredAbility ability = new ConditionalTriggeredAbility(triggeredAbility, MorbidCondition.getInstance(), staticText);
 		ability.addTarget(new TargetCreaturePermanent());
 		this.addAbility(ability);
 	}
@@ -70,39 +71,5 @@ public class MorkrutBanshee extends CardImpl<MorkrutBanshee> {
 	@Override
 	public MorkrutBanshee copy() {
 		return new MorkrutBanshee(this);
-	}
-}
-
-class MorkrutBansheeAbility extends TriggeredAbilityImpl<MorkrutBansheeAbility> {
-
-	public MorkrutBansheeAbility() {
-		super(Constants.Zone.BATTLEFIELD, new BoostTargetEffect(-4, -4, Constants.Duration.EndOfTurn), false);
-	}
-
-	public MorkrutBansheeAbility(final MorkrutBansheeAbility ability) {
-		super(ability);
-	}
-
-	@Override
-	public MorkrutBansheeAbility copy() {
-		return new MorkrutBansheeAbility(this);
-	}
-
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId())) {
-			ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-			if (zEvent.getToZone().equals(Constants.Zone.BATTLEFIELD)) {
-				Watcher watcher = game.getState().getWatchers().get(controllerId, "Morbid");
-				return watcher.conditionMet();
-			}
-		}
-		return false;
-
-	}
-
-	@Override
-	public String getRule() {
-		return "Morbid - When Morkut Banshee enters the battlefield, if a creature died this turn, target creature gets -4/-4 until end of turn.";
 	}
 }

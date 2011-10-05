@@ -4,7 +4,6 @@ import mage.ConditionalMana;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 
 public class BasicManaEffect extends ManaEffect<BasicManaEffect> {
     protected Mana mana;

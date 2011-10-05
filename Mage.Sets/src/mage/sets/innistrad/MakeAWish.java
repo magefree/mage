@@ -92,6 +92,7 @@ class MakeAWishEffect extends OneShotEffect<MakeAWishEffect> {
                 if (card != null) {
                     card.moveToZone(Zone.HAND, source.getId(), game, true);
                     cards.remove(card);
+                    game.informPlayers(card.getName() + "returned to the hand of" + player.getName());
                 }
             }
             return true;
