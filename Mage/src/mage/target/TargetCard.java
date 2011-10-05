@@ -104,17 +104,21 @@ public class TargetCard<T extends TargetCard<T>> extends TargetObject<TargetCard
 				if (player != null) {
 					switch (zone) {
 						case HAND:
-							if (player.getHand().count(filter, game) >= this.minNumberOfTargets)
+							if (player.getHand().count(filter, player.getId(), game) >= this.minNumberOfTargets)
 								return true;
 							break;
 						case GRAVEYARD:
-							if (player.getGraveyard().count(filter, game) >= this.minNumberOfTargets)
+							if (player.getGraveyard().count(filter, player.getId(), game) >= this.minNumberOfTargets)
 								return true;
 							break;
 						case LIBRARY:
 							if (player.getLibrary().count(filter, game) >= this.minNumberOfTargets)
 								return true;
 							break;
+                        case EXILED:
+                            if (game.getExile().getPermanentExile().count(filter, player.getId(), game) >= this.minNumberOfTargets)
+                                return true;
+                            break;
 					}
 				}
 			}
@@ -149,6 +153,12 @@ public class TargetCard<T extends TargetCard<T>> extends TargetObject<TargetCard
 							possibleTargets.add(card.getId());
 					}
 					break;
+                case EXILED:
+                    for (Card card: game.getExile().getPermanentExile().getUniqueCards(game)) {
+                        if (filter.match(card, player.getId(), game))
+                            possibleTargets.add(card.getId());
+                    }
+                    break;
 			}
 		}
 		return possibleTargets;

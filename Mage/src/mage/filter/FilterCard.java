@@ -33,7 +33,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import mage.Constants.TargetController;
 import mage.cards.Card;
+import mage.game.Game;
 
 /**
  *
@@ -47,6 +49,7 @@ public class FilterCard<T extends FilterCard<T>> extends FilterObject<Card, Filt
 	protected boolean notOwner;
 	protected List<String> expansionSetCode = new ArrayList<String>();
 	protected boolean notExpansionSetCode;
+    protected TargetController owner = TargetController.ANY;
 
 	/**
 	 * Text that appears on card.
@@ -72,6 +75,7 @@ public class FilterCard<T extends FilterCard<T>> extends FilterObject<Card, Filt
 			this.expansionSetCode.add(code);
 		}
 		this.notExpansionSetCode = filter.notExpansionSetCode;
+        this.owner = filter.owner;
 	}
 
 	@Override
@@ -115,6 +119,30 @@ public class FilterCard<T extends FilterCard<T>> extends FilterObject<Card, Filt
 		
 		return !notFilter;
 	}
+    
+	public boolean match(Card card, UUID playerId, Game game) {
+		if (!this.match(card))
+			return notFilter;
+
+		if (owner != TargetController.ANY && playerId != null) {
+			switch(owner) {
+				case YOU:
+					if (!card.getOwnerId().equals(playerId))
+						return notFilter;
+					break;
+				case OPPONENT:
+					if (!game.getOpponents(playerId).contains(card.getOwnerId()))
+						return notFilter;
+					break;
+				case NOT_YOU:
+					if (card.getOwnerId().equals(playerId))
+						return notFilter;
+					break;
+			}
+		}
+
+		return !notFilter;
+	}
 
 	public List<UUID> getOwnerId() {
 		return ownerId;
@@ -134,6 +162,10 @@ public class FilterCard<T extends FilterCard<T>> extends FilterObject<Card, Filt
 
 	public void setText(String text) {
 		this.text = text;
+	}
+
+    public void setTargetOwner(TargetController owner) {
+		this.owner = owner;
 	}
 
 	public boolean matchOwner(UUID testOwnerId) {

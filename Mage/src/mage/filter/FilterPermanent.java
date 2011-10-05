@@ -53,6 +53,7 @@ public class FilterPermanent<T extends FilterPermanent<T>> extends FilterObject<
 	protected boolean usePhased;
 	protected boolean phasedIn;
 	protected TargetController controller = TargetController.ANY;
+    protected TargetController owner = TargetController.ANY;
 
 	public FilterPermanent() {
 		super("permanent");
@@ -77,6 +78,7 @@ public class FilterPermanent<T extends FilterPermanent<T>> extends FilterObject<
 		this.usePhased = filter.usePhased;
 		this.phasedIn = filter.phasedIn;
 		this.controller = filter.controller;
+        this.owner = filter.owner;
 	}
 
 	public FilterPermanent(String name) {
@@ -130,7 +132,24 @@ public class FilterPermanent<T extends FilterPermanent<T>> extends FilterObject<
 			}
 		}
 
-		if (another) {
+		if (owner != TargetController.ANY && playerId != null) {
+			switch(owner) {
+				case YOU:
+					if (!permanent.getOwnerId().equals(playerId))
+						return notFilter;
+					break;
+				case OPPONENT:
+					if (!game.getOpponents(playerId).contains(permanent.getOwnerId()))
+						return notFilter;
+					break;
+				case NOT_YOU:
+					if (permanent.getOwnerId().equals(playerId))
+						return notFilter;
+					break;
+			}
+		}
+
+        if (another) {
 			// filter out itself
 			if (permanent.getId().equals(sourceId)) {
 				return notFilter;
@@ -184,25 +203,9 @@ public class FilterPermanent<T extends FilterPermanent<T>> extends FilterObject<
 		this.controller = controller;
 	}
 
-//	public void setController(UUID playerId, Game game) {
-//		controllerId.clear();
-//		switch (controller) {
-//			case ANY:
-//				break;
-//			case YOU:
-//				controllerId.add(playerId);
-//				notController = false;
-//				break;
-//			case NOT_YOU:
-//				controllerId.add(playerId);
-//				notController = true;
-//				break;
-//			case OPPONENT:
-//				controllerId.addAll(game.getOpponents(playerId));
-//				notController = false;
-//				break;
-//		}
-//	}
+    public void setTargetOwner(TargetController owner) {
+		this.owner = owner;
+	}
 
 	public boolean matchOwner(UUID testOwnerId) {
 		if (ownerId.size() > 0 && ownerId.contains(testOwnerId) == notOwner)

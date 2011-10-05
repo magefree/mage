@@ -30,6 +30,7 @@ package mage.filter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import mage.Constants.CardType;
 import mage.MageObject;
 import mage.ObjectColor;
@@ -180,8 +181,18 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
 				return notFilter;
 		}
 
-		if (abilities.size() > 0 && object.getAbilities().containsAll(abilities) == notAbilities) {
-			return notFilter;
+		if (abilities.size() > 0) {
+            List<Ability> test = new ArrayList<Ability>(abilities);
+            for (Ability ability: object.getAbilities()) {
+                for (Ability abilityTest: test) {
+                    if (ability == abilityTest || ability.getClass().equals(abilityTest.getClass())) {
+                        test.remove(abilityTest);
+                        break;
+                    }
+                }
+            }
+            if (test.isEmpty() == notAbilities)
+                return notFilter;
 		}
 
 		if (convertedManaCostComparison != null) {

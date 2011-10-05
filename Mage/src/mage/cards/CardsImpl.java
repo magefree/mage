@@ -123,6 +123,16 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
 		return result;
 	}
 
+   	@Override
+	public int count(FilterCard filter, UUID playerId, Game game) {
+		int result = 0;
+		for (UUID card: this) {
+			if (filter.match(game.getCard(card), playerId, game))
+				result++;
+		}
+		return result;
+	}
+
 	@Override
 	public void checkTriggers(GameEvent event, Game game) {
 		for (UUID card: this) {
