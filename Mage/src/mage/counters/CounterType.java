@@ -57,7 +57,8 @@ public enum CounterType {
     HOOFPRINT(new HoofprintCounter().name),
     HATCHLING(new HatchlingCounter().name),
     KI(new KiCounter().name),
-    SLIME(new SlimeCounter().name);
+    SLIME(new SlimeCounter().name),
+    STUDY(new StudyCounter().name);
 
     private String name;
 
@@ -135,6 +136,8 @@ public enum CounterType {
                 return new KiCounter(amount);
             case SLIME:
                 return new SlimeCounter(amount);
+            case STUDY:
+                return new StudyCounter(amount);
         }
         return null;
     }
