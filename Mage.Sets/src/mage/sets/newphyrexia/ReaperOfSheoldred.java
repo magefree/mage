@@ -99,6 +99,6 @@ class ReaperOfSheoldredTriggeredAbility extends TriggeredAbilityImpl<ReaperOfShe
 
     @Override
     public String getRule() {
-        return "Whenever a source deals damage to Reaper of Sheoldred, that source's controller gets a poison counter.";
+        return "Whenever a source deals damage to {this}, that source's controller gets a poison counter.";
     }
 }

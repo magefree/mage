@@ -105,6 +105,6 @@ class BelltowerSphinxEffect extends TriggeredAbilityImpl<BelltowerSphinxEffect> 
 
 	@Override
 	public String getRule() {
-		return "Whenever a source deals damage to Belltower Sphinx, that source's controller puts that many cards from the top of his or her library into his or her graveyard.";
+		return "Whenever a source deals damage to {this}, that source's controller puts that many cards from the top of his or her library into his or her graveyard.";
 	}
 }
