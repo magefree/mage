@@ -74,6 +74,12 @@ public class ReturnToHandTargetEffect extends OneShotEffect<ReturnToHandTargetEf
                         result |= card.moveToZone(Zone.HAND, source.getId(), game, true);
                     }
                     break;
+                case EXILED:
+                    card = game.getCard(id);
+                    if (card != null) {
+                        result |= card.moveToZone(Zone.HAND, source.getId(), game, true);
+                    }
+                    break;
             }
         }
         return result;
