@@ -28,20 +28,22 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.TargetController;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.ControllerWinsEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
@@ -62,8 +64,8 @@ public class FelidarSovereign extends CardImpl<FelidarSovereign> {
         this.addAbility(VigilanceAbility.getInstance());
         this.addAbility(LifelinkAbility.getInstance());
         // At the beginning of your upkeep, if you have 40 or more life, you win the game.
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new ControllerWinsEffect(), Constants.TargetController.YOU, false);
-        this.addAbility(new ConditionalTriggeredAbility(ability, new FortyOrMoreLifeCondition(FortyOrMoreLifeCondition.CheckType.CONTROLLER), "At the beginning of your upkeep, if you have 40 or more life, you win the game."));
+        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new FelidarSovereignEffect(), TargetController.YOU, false);
+        this.addAbility(new ConditionalTriggeredAbility(ability, new FortyOrMoreLifeCondition(), "At the beginning of your upkeep, if you have 40 or more life, you win the game."));
 
     }
 
@@ -79,34 +81,35 @@ public class FelidarSovereign extends CardImpl<FelidarSovereign> {
 
 class FortyOrMoreLifeCondition implements Condition {
 
-    public static enum CheckType {
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return game.getPlayer(source.getControllerId()).getLife() >= 40;
+    }
+}
 
-        AN_OPPONENT, CONTROLLER, TARGET_OPPONENT
-    };
-    private CheckType type;
+class FelidarSovereignEffect extends OneShotEffect<FelidarSovereignEffect> {
 
-    public FortyOrMoreLifeCondition(CheckType type) {
-        this.type = type;
+    public FelidarSovereignEffect() {
+        super(Outcome.Win);
+        this.staticText = "you win the game";
+    }
+
+    public FelidarSovereignEffect(final FelidarSovereignEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public FelidarSovereignEffect copy() {
+        return new FelidarSovereignEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        boolean conditionApplies = false;
-
-        switch (this.type) {
-            case AN_OPPONENT:
-                for (UUID opponentUUID : game.getOpponents(source.getControllerId())) {
-                    conditionApplies |= game.getPlayer(opponentUUID).getLife() >= 40;
-                }
-                break;
-            case CONTROLLER:
-                conditionApplies |= game.getPlayer(source.getControllerId()).getLife() >= 40;
-                break;
-            case TARGET_OPPONENT:
-                //TODO: Implement this.
-                break;
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+            player.won(game);
+            return true;
         }
-
-        return conditionApplies;
+        return false;
     }
 }
