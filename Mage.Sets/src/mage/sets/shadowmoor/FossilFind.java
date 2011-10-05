@@ -53,6 +53,7 @@ public class FossilFind extends CardImpl<FossilFind> {
         this.color.setGreen(true);
 
         // Return a card at random from your graveyard to your hand, then reorder your graveyard as you choose.
+        this.getSpellAbility().addEffect(new FossilFindEffect());
     }
 
     public FossilFind(final FossilFind card) {
