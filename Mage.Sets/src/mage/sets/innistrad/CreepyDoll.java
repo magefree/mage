@@ -135,6 +135,6 @@ class CreepyDollEffect extends OneShotEffect<CreepyDollEffect> {
 
     @Override
     public CreepyDollEffect copy() {
-        return new CreepyDollEffect();
+        return new CreepyDollEffect(this);
     }
 }
