@@ -61,7 +61,7 @@ public class StromkirkNoble extends CardImpl<StromkirkNoble> {
         this.toughness = new MageInt(1);
 
         // Stromkirk Noble can't be blocked by Humans.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(2)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new StromkirkEffect()));
         // Whenever Stromkirk Noble deals combat damage to a player, put a +1/+1 counter on it.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
         
