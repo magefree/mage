@@ -36,9 +36,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continious.BoostEnchantedEffect;
-import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.TotemArmorAbility;
 import mage.cards.CardImpl;
 import mage.target.TargetPermanent;
@@ -48,34 +47,33 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class HyenaUmbra extends CardImpl<HyenaUmbra> {
+public class EelUmbra extends CardImpl<EelUmbra> {
 
-    public HyenaUmbra(UUID ownerId) {
-        super(ownerId, 26, "Hyena Umbra", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");
+    public EelUmbra(UUID ownerId) {
+        super(ownerId, 65, "Eel Umbra", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
         this.expansionSetCode = "ROE";
         this.subtype.add("Aura");
 
-        this.color.setWhite(true);
+        this.color.setBlue(true);
 
+        this.addAbility(FlashAbility.getInstance());
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
 		this.getSpellAbility().addTarget(auraTarget);
 		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
 		Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        // Enchanted creature gets +1/+1 and has first strike.
+        // Enchanted creature gets +1/+1.
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Constants.Duration.WhileOnBattlefield)));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), Constants.AttachmentType.AURA)));
-        // Totem armor
         this.addAbility(new TotemArmorAbility());
     }
 
-    public HyenaUmbra(final HyenaUmbra card) {
+    public EelUmbra(final EelUmbra card) {
         super(card);
     }
 
     @Override
-    public HyenaUmbra copy() {
-        return new HyenaUmbra(this);
+    public EelUmbra copy() {
+        return new EelUmbra(this);
     }
 }

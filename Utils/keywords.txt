@@ -33,6 +33,7 @@ Phasing|instance|
 Reach|instance|
 Shroud|instance|
 Trample|instance|
+Totem armor|new|
 Unblockable|instance|
 Vigilance|instance|
 Wither|instance|

@@ -33,14 +33,15 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continious.BoostEnchantedEffect;
-import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.TotemArmorAbility;
 import mage.cards.CardImpl;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -48,14 +49,14 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class HyenaUmbra extends CardImpl<HyenaUmbra> {
+public class CrabUmbra extends CardImpl<CrabUmbra> {
 
-    public HyenaUmbra(UUID ownerId) {
-        super(ownerId, 26, "Hyena Umbra", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");
+    public CrabUmbra(UUID ownerId) {
+        super(ownerId, 58, "Crab Umbra", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");
         this.expansionSetCode = "ROE";
         this.subtype.add("Aura");
 
-        this.color.setWhite(true);
+        this.color.setBlue(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -63,19 +64,47 @@ public class HyenaUmbra extends CardImpl<HyenaUmbra> {
 		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
 		Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        // Enchanted creature gets +1/+1 and has first strike.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Constants.Duration.WhileOnBattlefield)));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), Constants.AttachmentType.AURA)));
-        // Totem armor
+        // {2}{U}: Untap enchanted creature.
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CrabUmbraEffect(), new ManaCostsImpl("{2}{U}")));
         this.addAbility(new TotemArmorAbility());
     }
 
-    public HyenaUmbra(final HyenaUmbra card) {
+    public CrabUmbra(final CrabUmbra card) {
         super(card);
     }
 
     @Override
-    public HyenaUmbra copy() {
-        return new HyenaUmbra(this);
+    public CrabUmbra copy() {
+        return new CrabUmbra(this);
     }
+}
+
+class CrabUmbraEffect extends OneShotEffect<CrabUmbraEffect> {
+    CrabUmbraEffect() {
+        super(Constants.Outcome.Untap);
+        staticText = "untap enchanted creature";
+    }
+
+    CrabUmbraEffect(final CrabUmbraEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            Permanent attach = game.getPermanent(permanent.getAttachedTo());
+            if (attach != null) {
+                attach.untap(game);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public CrabUmbraEffect copy() {
+        return new CrabUmbraEffect(this);
+    }
+
 }

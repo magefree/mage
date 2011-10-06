@@ -38,8 +38,8 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continious.BoostEnchantedEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.TotemArmorAbility;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -48,10 +48,10 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class HyenaUmbra extends CardImpl<HyenaUmbra> {
+public class MammothUmbra extends CardImpl<MammothUmbra> {
 
-    public HyenaUmbra(UUID ownerId) {
-        super(ownerId, 26, "Hyena Umbra", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");
+    public MammothUmbra(UUID ownerId) {
+        super(ownerId, 37, "Mammoth Umbra", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}");
         this.expansionSetCode = "ROE";
         this.subtype.add("Aura");
 
@@ -63,19 +63,18 @@ public class HyenaUmbra extends CardImpl<HyenaUmbra> {
 		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
 		Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        // Enchanted creature gets +1/+1 and has first strike.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Constants.Duration.WhileOnBattlefield)));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), Constants.AttachmentType.AURA)));
-        // Totem armor
+        // Enchanted creature gets +3/+3 and has vigilance.
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3, Constants.Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), Constants.AttachmentType.AURA)));
         this.addAbility(new TotemArmorAbility());
     }
 
-    public HyenaUmbra(final HyenaUmbra card) {
+    public MammothUmbra(final MammothUmbra card) {
         super(card);
     }
 
     @Override
-    public HyenaUmbra copy() {
-        return new HyenaUmbra(this);
+    public MammothUmbra copy() {
+        return new MammothUmbra(this);
     }
 }

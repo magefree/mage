@@ -38,7 +38,7 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continious.BoostEnchantedEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TotemArmorAbility;
 import mage.cards.CardImpl;
 import mage.target.TargetPermanent;
@@ -48,14 +48,14 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class HyenaUmbra extends CardImpl<HyenaUmbra> {
+public class DrakeUmbra extends CardImpl<DrakeUmbra> {
 
-    public HyenaUmbra(UUID ownerId) {
-        super(ownerId, 26, "Hyena Umbra", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");
+    public DrakeUmbra(UUID ownerId) {
+        super(ownerId, 63, "Drake Umbra", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}");
         this.expansionSetCode = "ROE";
         this.subtype.add("Aura");
 
-        this.color.setWhite(true);
+        this.color.setBlue(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -63,19 +63,18 @@ public class HyenaUmbra extends CardImpl<HyenaUmbra> {
 		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
 		Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        // Enchanted creature gets +1/+1 and has first strike.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Constants.Duration.WhileOnBattlefield)));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), Constants.AttachmentType.AURA)));
-        // Totem armor
+        // Enchanted creature gets +3/+3 and has flying.
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3, Constants.Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), Constants.AttachmentType.AURA)));
         this.addAbility(new TotemArmorAbility());
     }
 
-    public HyenaUmbra(final HyenaUmbra card) {
+    public DrakeUmbra(final DrakeUmbra card) {
         super(card);
     }
 
     @Override
-    public HyenaUmbra copy() {
-        return new HyenaUmbra(this);
+    public DrakeUmbra copy() {
+        return new DrakeUmbra(this);
     }
 }
