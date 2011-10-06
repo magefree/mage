@@ -49,7 +49,6 @@ public class InsectileAberration extends CardImpl<InsectileAberration> {
 
         // this card is the second face of double-faced card
         this.nightCard = true;
-        this.canTransform = true;
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
