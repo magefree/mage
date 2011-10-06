@@ -17,6 +17,7 @@ Saviors of Kamigawa|saviorsofkamigawa|
 Ravnica: City of Guilds|ravnika|
 Guildpact|guildpact|
 Dissension|dissension|
+Time Spiral|timespiral|
 Lorwyn|lorwyn|
 Morningtide|morningtide|
 Shadowmoor|shadowmoor|
