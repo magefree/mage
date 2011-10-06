@@ -50,13 +50,19 @@ public class ExileFromZoneTargetEffect extends OneShotEffect<ExileFromZoneTarget
     private FilterCard filter;
     private UUID exileId;
     private String exileName;
+    private int amount;
     
     public ExileFromZoneTargetEffect(Zone zone, UUID exileId, String exileName, FilterCard filter) {
+        this(zone, exileId, exileName, filter, 1);
+    }
+    
+    public ExileFromZoneTargetEffect(Zone zone, UUID exileId, String exileName, FilterCard filter, int amount) {
         super(Outcome.Exile);
         this.zone = zone;
         this.filter = filter;
         this.exileId = exileId;
         this.exileName = exileName;
+        this.amount = amount;
         setText();
     }
     
@@ -66,32 +72,33 @@ public class ExileFromZoneTargetEffect extends OneShotEffect<ExileFromZoneTarget
         this.filter = effect.filter.copy();
         this.exileId = effect.exileId;
         this.exileName = effect.exileName;
+        this.amount = effect.amount;
     }
     
 	@Override
 	public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(source));
         if (player != null) {
-            Target target;
-            Card card = null;
+            Target target = null;
             switch (zone) {
                 case HAND:
-                    target = new TargetCardInHand(filter);
-                    player.choose(Outcome.Exile, target, game);
-                    card = player.getHand().get(target.getFirstTarget(), game);
+                    target = new TargetCardInHand(Math.min(player.getHand().count(filter, game), amount), filter);                    
                     break;
                 case GRAVEYARD:
-                    target = new TargetCardInGraveyard(filter);
-                    player.choose(Outcome.Exile, target, game);
-                    card = player.getGraveyard().get(target.getFirstTarget(), game);
+                    target = new TargetCardInGraveyard(Math.min(player.getGraveyard().count(filter, game), amount), filter);
                     break;
                 default:
-                    
             }
-			if (card != null) {
-                card.moveToExile(exileId, exileName, source.getSourceId(), game);
-				return true;
-			}
+            if (target != null && target.canChoose(player.getId(), game)) {
+                if (target.choose(Outcome.Exile, player.getId(), game)) {
+                    for (UUID cardId: target.getTargets()) {
+                        Card card = game.getCard(cardId);
+                        if (card != null)
+                            card.moveToExile(exileId, exileName, source.getSourceId(), game);
+                    }
+                    return true;
+                }
+            }
         }
         return false;
 	}
@@ -102,7 +109,10 @@ public class ExileFromZoneTargetEffect extends OneShotEffect<ExileFromZoneTarget
     }
     
 	private void setText() {
-        staticText = "Target player exiles a " + filter.getMessage() + " from his or her " + zone.toString();
+        if (amount == 1)
+            staticText = "Target player exiles a " + filter.getMessage() + " from his or her " + zone.toString();
+        else
+            staticText = "Target player exiles " + amount + " " + filter.getMessage() + " from his or her " + zone.toString();
     }
     
 }

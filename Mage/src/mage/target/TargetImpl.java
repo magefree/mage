@@ -140,6 +140,8 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 
 	@Override
 	public boolean isChosen() {
+        if (maxNumberOfTargets == 0 && minNumberOfTargets == 0)
+            return true;
 		if (maxNumberOfTargets != 0 && targets.size() == maxNumberOfTargets)
 			return true;
 		return chosen;
