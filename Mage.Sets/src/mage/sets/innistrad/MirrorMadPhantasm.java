@@ -81,7 +81,7 @@ class MirrorMadPhantasmEffect extends OneShotEffect<MirrorMadPhantasmEffect> {
     
     public MirrorMadPhantasmEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Mirror-Mad Phantasm's owner shuffles it into his or her library. If that player does, he or she reveals cards from the top of that library until a card named Mirror-Mad Phantasm is revealed. That player puts that card onto the battlefield and all other cards revealed this way into his or her graveyard";
+        this.staticText = "{this}'s owner shuffles it into his or her library. If that player does, he or she reveals cards from the top of that library until a card named Mirror-Mad Phantasm is revealed. That player puts that card onto the battlefield and all other cards revealed this way into his or her graveyard";
     }
     
     public MirrorMadPhantasmEffect(final MirrorMadPhantasmEffect effect) {

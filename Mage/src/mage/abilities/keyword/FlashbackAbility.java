@@ -31,6 +31,8 @@ import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
@@ -111,6 +113,10 @@ class FlashbackEffect extends OneShotEffect<FlashbackEffect> {
 		if (target != null) {
 			Player controller = game.getPlayer(target.getOwnerId());
 			if (controller != null) {
+                target.getSpellAbility().getManaCostsToPay().clear();
+                for (Cost cost: source.getManaCostsToPay()) {
+                    target.getSpellAbility().getManaCostsToPay().add((ManaCost) cost.copy());
+                }
 				return controller.cast(target.getSpellAbility(), game, true);
 			}
 		}
