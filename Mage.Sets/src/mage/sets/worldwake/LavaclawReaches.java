@@ -37,8 +37,10 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
-import mage.abilities.effects.common.continious.BoostPowerXSourceEffect;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
@@ -80,7 +82,7 @@ class LavaclawReachesToken extends Token {
 		color.setBlack(true);
 		power = new MageInt(2);
 		toughness = new MageInt(2);
-		addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostPowerXSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{X}")));
+		addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new ManacostVariableValue(), new StaticValue(0), Duration.EndOfTurn), new ManaCostsImpl("{X}")));
 	}
 
 }
