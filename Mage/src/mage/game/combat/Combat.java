@@ -338,7 +338,7 @@ public class Combat implements Serializable, Copyable<Combat> {
 	}
 
 	public boolean noAttackers() {
-		if (groups.size() == 0 || getAttackers().size() == 0)
+		if (groups.isEmpty() || getAttackers().isEmpty())
 			return true;
 		return false;
 	}
