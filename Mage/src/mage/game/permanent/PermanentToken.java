@@ -28,12 +28,14 @@
 
 package mage.game.permanent;
 
-import mage.game.permanent.token.Token;
-import java.util.UUID;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
+import mage.cards.Card;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.token.Token;
+
+import java.util.UUID;
 
 /**
  *
@@ -103,6 +105,8 @@ public class PermanentToken extends PermanentImpl<PermanentToken> {
 	public Token getToken() {
 		return token;
 	}
+
+
 
 	@Override
 	public PermanentToken copy() {

@@ -386,4 +386,14 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
     public boolean isNightCard() {
         return this.nightCard;
     }
+
+    @Override
+    public void setCanTransform(boolean canTransform) {
+        this.canTransform = canTransform;
+    }
+
+    @Override
+    public void setSecondCardFace(Card card) {
+        this.secondSideCard = card;
+    }
 }

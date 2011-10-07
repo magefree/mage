@@ -30,6 +30,7 @@ package mage.util.functions;
 import mage.Constants;
 import mage.abilities.Ability;
 import mage.cards.Card;
+import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Token;
 
 /**
@@ -78,6 +79,11 @@ public class CopyTokenFunction implements Function<Token, Card> {
 
 		target.getPower().setValue(source.getPower().getValue());
 		target.getToughness().setValue(source.getToughness().getValue());
+
+        if (source.canTransform()) {
+            target.setCanTransform(true);
+            target.setSecondCardFace(source.getSecondCardFace());
+        }
 
 		return target;
 	}
