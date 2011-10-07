@@ -47,8 +47,6 @@ public class Token extends MageObjectImpl<Token> {
 
 	protected String description;
     private UUID lastAddedTokenId;
-    private boolean canTransform;
-    private Card secondCardFace;
 
 	public Token(String name, String description) {
 		this.name = name;
@@ -70,7 +68,6 @@ public class Token extends MageObjectImpl<Token> {
 	public Token(final Token token) {
 		super(token);
 		this.description = token.description;
-        this.canTransform = token.canTransform;
 	}
 
 	public String getDescription() {
@@ -99,10 +96,6 @@ public class Token extends MageObjectImpl<Token> {
             amount = event.getAmount();
             for (int i = 0; i < amount; i++) {
                 PermanentToken permanent = new PermanentToken(this, controllerId, setCode);
-                if (this.canTransform) {
-                    permanent.setCanTransform(this.canTransform);
-                    permanent.setSecondCardFace(this.secondCardFace);
-                }
                 game.getBattlefield().addPermanent(permanent);
                 this.lastAddedTokenId = permanent.getId();
                 permanent.entersBattlefield(sourceId, game);
@@ -113,12 +106,4 @@ public class Token extends MageObjectImpl<Token> {
         }
         return false;
 	}
-
-    public void setCanTransform(boolean canTransform) {
-        this.canTransform = canTransform;
-    }
-
-    public void setSecondCardFace(Card card) {
-        this.secondCardFace = card;
-    }
 }

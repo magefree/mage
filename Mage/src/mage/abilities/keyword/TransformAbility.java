@@ -84,6 +84,10 @@ class TransformEffect extends ContinuousEffectImpl<TransformEffect> {
 
         Card card = permanent.getSecondCardFace();
 
+        if (card == null) {
+            return false;
+        }
+
         permanent.setName(card.getName());
         permanent.getColor().setColor(card.getColor());
         permanent.getManaCost().clear();

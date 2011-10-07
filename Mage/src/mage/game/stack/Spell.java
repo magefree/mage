@@ -352,10 +352,6 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
     }
 
     @Override
-    public void setCanTransform(boolean value) {
-    }
-
-    @Override
     public Card getSecondCardFace() {
         return null;
     }
@@ -440,9 +436,5 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 	public void setCopiedSpell(boolean isCopied) {
 		this.copiedSpell = isCopied;
 	}
-
-    @Override
-    public void setSecondCardFace(Card card) {
-    }
 }
 

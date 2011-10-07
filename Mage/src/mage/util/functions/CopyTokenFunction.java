@@ -80,11 +80,6 @@ public class CopyTokenFunction implements Function<Token, Card> {
 		target.getPower().setValue(source.getPower().getValue());
 		target.getToughness().setValue(source.getToughness().getValue());
 
-        if (source.canTransform()) {
-            target.setCanTransform(true);
-            target.setSecondCardFace(source.getSecondCardFace());
-        }
-
 		return target;
 	}
 
