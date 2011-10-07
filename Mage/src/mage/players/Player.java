@@ -80,6 +80,7 @@ public interface Player extends MageItem, Copyable<Player> {
 	public Library getLibrary();
 	public Cards getGraveyard();
 	public Abilities<Ability> getAbilities();
+    public void addAbility(Ability ability);
 	public Counters getCounters();
 	public int getLife();
 	public void setLife(int life, Game game);

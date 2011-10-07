@@ -329,6 +329,25 @@ public class ContinuousEffects implements Serializable {
 				}
 			}
 		}
+        //get all applicable Replacement effects on players
+        for (Player player: game.getPlayers().values()) {
+			for (Ability ability: player.getAbilities().getStaticAbilities(Zone.BATTLEFIELD)) {
+				for (Effect effect: ability.getEffects(game, EffectType.REPLACEMENT)) {
+					ReplacementEffect rEffect = (ReplacementEffect) effect;
+					if (rEffect.applies(event, ability, game)) {
+						replaceEffects.add(rEffect);
+						abilityMap.put(rEffect.getId(), ability);
+					}
+				}
+				for (Effect effect: ability.getEffects(game, EffectType.PREVENTION)) {
+					ReplacementEffect rEffect = (ReplacementEffect) effect;
+					if (rEffect.applies(event, ability, game)) {
+						replaceEffects.add(rEffect);
+						abilityMap.put(rEffect.getId(), ability);
+					}
+				}
+			}
+        }
 		//get all applicable transient Replacement effects
 		for (ReplacementEffect effect: replacementEffects) {
 			if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {

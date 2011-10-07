@@ -420,11 +420,14 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	@Override
 	public boolean discard(Card card, Ability source, Game game) {
 		//20100716 - 701.7
-		removeFromHand(card, game);
-		card.moveToZone(Zone.GRAVEYARD, source==null?null:source.getId(), game, false);
-		
-		game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DISCARDED_CARD, card.getId(), source==null?null:source.getId(), playerId));
-		return true;
+        if (card != null) {
+            removeFromHand(card, game);
+            card.moveToZone(Zone.GRAVEYARD, source==null?null:source.getId(), game, false);
+
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DISCARDED_CARD, card.getId(), source==null?null:source.getId(), playerId));
+            return true;
+        }
+        return false;
 	}
 
 	@Override
@@ -917,6 +920,12 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	public Abilities getAbilities() {
 		return this.abilities;
 	}
+    
+    @Override
+    public void addAbility(Ability ability) {
+        ability.setSourceId(playerId);
+        this.abilities.add(ability);
+    }
 
 	@Override
 	public int getLandsPerTurn() {
@@ -955,7 +964,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		this.library = player.getLibrary();
 		this.hand = player.getHand();
 		this.graveyard = player.getGraveyard();
-		this.abilities = player.getAbilities();
+//		this.abilities = player.getAbilities();
 		this.manaPool = player.getManaPool();
 		this.life = player.getLife();
 		this.counters = player.getCounters();

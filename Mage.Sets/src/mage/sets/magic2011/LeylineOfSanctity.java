@@ -30,12 +30,12 @@ package mage.sets.magic2011;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.TargetController;
 import mage.Constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.CantTargetControllerEffect;
+import mage.abilities.effects.common.continious.GainAbilityControllerEffect;
+import mage.abilities.keyword.HexproofAbility;
 import mage.abilities.keyword.LeylineAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterStackObject;
@@ -57,7 +57,7 @@ public class LeylineOfSanctity extends CardImpl<LeylineOfSanctity> {
 		this.expansionSetCode = "M11";
 		this.color.setWhite(true);
 		this.addAbility(LeylineAbility.getInstance());
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantTargetControllerEffect(filter, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControllerEffect(HexproofAbility.getInstance())));
 	}
 
 	public LeylineOfSanctity(final LeylineOfSanctity card) {

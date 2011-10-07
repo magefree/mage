@@ -26,69 +26,57 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.effects.common;
+package mage.abilities.effects.common.continious;
 
 import mage.Constants.Duration;
+import mage.Constants.Layer;
 import mage.Constants.Outcome;
+import mage.Constants.SubLayer;
 import mage.abilities.Ability;
-import mage.abilities.effects.ReplacementEffectImpl;
-import mage.filter.FilterStackObject;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.stack.StackObject;
+import mage.players.Player;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CantTargetControllerEffect extends ReplacementEffectImpl<CantTargetControllerEffect> {
+public class GainAbilityControllerEffect extends ContinuousEffectImpl<GainAbilityControllerEffect> {
 
-	private FilterStackObject filterSource;
+	protected Ability ability;
 
-	public CantTargetControllerEffect(FilterStackObject filterSource, Duration duration) {
-		super(duration, Outcome.Benefit);
-		this.filterSource = filterSource;
-		setText();
+	/**
+	 * Add ability with Duration.WhileOnBattlefield
+	 * @param ability
+	 */
+	public GainAbilityControllerEffect(Ability ability) {
+		this(ability, Duration.WhileOnBattlefield);
 	}
 
-	public CantTargetControllerEffect(final CantTargetControllerEffect effect) {
+	public GainAbilityControllerEffect(Ability ability, Duration duration) {
+		super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+		this.ability = ability;
+		staticText = "You have " + ability.getRule() + " " + duration.toString();
+	}
+
+	public GainAbilityControllerEffect(final GainAbilityControllerEffect effect) {
 		super(effect);
-		this.filterSource = effect.filterSource.copy();
+		this.ability = effect.ability.copy();
 	}
 
 	@Override
-	public CantTargetControllerEffect copy() {
-		return new CantTargetControllerEffect(this);
+	public GainAbilityControllerEffect copy() {
+		return new GainAbilityControllerEffect(this);
 	}
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		return true;
-	}
-
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		return true;
-	}
-
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (event.getType() == EventType.TARGET && event.getTargetId().equals(source.getControllerId())) {
-			StackObject sourceObject = game.getStack().getStackObject(event.getSourceId());
-			if (sourceObject != null && filterSource.match(sourceObject)) {
-				return true;
-			}
+		Player player = game.getPlayer(source.getControllerId());
+		if (player != null) {
+			player.addAbility(ability);
+			return true;
 		}
 		return false;
-	}
-
-	private void setText() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("You can't be the targets of ");
-		sb.append(filterSource.getMessage());
-		sb.append(" ").append(duration.toString());
-		staticText = sb.toString();
 	}
 
 }
