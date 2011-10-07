@@ -49,7 +49,7 @@ public class PlatedSlagwurm extends CardImpl<PlatedSlagwurm> {
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
 
-        this.addAbility(new HexproofAbility());
+        this.addAbility(HexproofAbility.getInstance());
     }
 
     public PlatedSlagwurm(final PlatedSlagwurm card) {

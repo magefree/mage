@@ -64,7 +64,7 @@ public class GeistOfSaintTraft extends CardImpl<GeistOfSaintTraft> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        this.addAbility(new HexproofAbility());
+        this.addAbility(HexproofAbility.getInstance());
         // Whenever Geist of Saint Traft attacks, put a 4/4 white Angel creature token with flying onto the battlefield tapped and attacking. Exile that token at end of combat.
         this.addAbility(new AttacksTriggeredAbility(new GeistOfSaintTraftEffect(), false));
     }

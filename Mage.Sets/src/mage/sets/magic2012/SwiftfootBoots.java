@@ -52,7 +52,7 @@ public class SwiftfootBoots extends CardImpl<SwiftfootBoots> {
         super(ownerId, 219, "Swiftfoot Boots", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "M12";
         this.subtype.add("Equipment");
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new HexproofAbility(), Constants.AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HexproofAbility.getInstance(), Constants.AttachmentType.EQUIPMENT)));
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HasteAbility.getInstance(), Constants.AttachmentType.EQUIPMENT)));
         this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(1)));
         

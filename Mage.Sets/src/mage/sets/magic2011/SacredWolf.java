@@ -30,16 +30,10 @@ package mage.sets.magic2011;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.Constants.TargetController;
-import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.CantTargetSourceEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterStackObject;
 
 /**
  *
@@ -53,7 +47,7 @@ public class SacredWolf extends CardImpl<SacredWolf> {
 		this.color.setGreen(true);
 		this.power = new MageInt(3);
 		this.toughness = new MageInt(1);
-		this.addAbility(new HexproofAbility());
+		this.addAbility(HexproofAbility.getInstance());
 	}
 
 	public SacredWolf(final SacredWolf card) {

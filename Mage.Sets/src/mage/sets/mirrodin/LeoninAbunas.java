@@ -58,7 +58,7 @@ public class LeoninAbunas extends CardImpl<LeoninAbunas> {
         this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(new HexproofAbility(), Constants.Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(HexproofAbility.getInstance(), Constants.Duration.WhileOnBattlefield, filter, false)));
     }
 
     public LeoninAbunas(final LeoninAbunas card) {

@@ -56,7 +56,7 @@ public class TrollAscetic extends CardImpl<TrollAscetic> {
 		this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
-		this.addAbility(new HexproofAbility());
+		this.addAbility(HexproofAbility.getInstance());
 		this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{G}")));
     }
 

@@ -54,7 +54,7 @@ public class MaskOfAvacyn extends CardImpl<MaskOfAvacyn> {
         this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(3)));
 
         // Equipped creature gets +1/+2 and has hexproof.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new HexproofAbility(), Constants.AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HexproofAbility.getInstance(), Constants.AttachmentType.EQUIPMENT)));
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEquippedEffect(1, 2)));
     }
 

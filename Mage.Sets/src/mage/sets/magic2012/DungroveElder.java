@@ -63,7 +63,7 @@ public class DungroveElder extends CardImpl<DungroveElder> {
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
-        this.addAbility(new HexproofAbility());
+        this.addAbility(HexproofAbility.getInstance());
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filterLands), Duration.EndOfGame)));
     }
 

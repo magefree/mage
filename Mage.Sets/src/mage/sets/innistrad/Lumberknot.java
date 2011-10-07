@@ -52,7 +52,7 @@ public class Lumberknot extends CardImpl<Lumberknot> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        this.addAbility(new HexproofAbility());
+        this.addAbility(HexproofAbility.getInstance());
         // Whenever a creature dies, put a +1/+1 counter on Lumberknot.
         this.addAbility(new CreatureDiesTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
     }

@@ -51,7 +51,7 @@ public class AvenFleetwing extends CardImpl<AvenFleetwing> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new HexproofAbility());
+        this.addAbility(HexproofAbility.getInstance());
     }
 
     public AvenFleetwing(final AvenFleetwing card) {

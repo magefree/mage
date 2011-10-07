@@ -50,7 +50,7 @@ public class SlipperyBogle extends CardImpl<SlipperyBogle> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        this.addAbility(new HexproofAbility());
+        this.addAbility(HexproofAbility.getInstance());
     }
 
     public SlipperyBogle(final SlipperyBogle card) {

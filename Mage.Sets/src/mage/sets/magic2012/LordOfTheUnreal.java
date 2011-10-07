@@ -64,7 +64,7 @@ public class LordOfTheUnreal extends CardImpl<LordOfTheUnreal> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Constants.Duration.WhileOnBattlefield, filter, false));
-        ability.addEffect(new GainAbilityControlledEffect(new HexproofAbility(), Constants.Duration.WhileOnBattlefield, filter, false));
+        ability.addEffect(new GainAbilityControlledEffect(HexproofAbility.getInstance(), Constants.Duration.WhileOnBattlefield, filter, false));
         this.addAbility(ability);
     }
 

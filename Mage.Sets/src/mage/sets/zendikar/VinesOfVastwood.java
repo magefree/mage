@@ -55,7 +55,7 @@ public class VinesOfVastwood extends CardImpl<VinesOfVastwood> {
         this.color.setGreen(true);
         TargetCreaturePermanent target = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(target);
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(new HexproofAbility(), Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HexproofAbility.getInstance(), Duration.EndOfTurn));
 
         this.getSpellAbility().addOptionalCost(new KickerManaCost("{G}"));
         this.getSpellAbility().addEffect(new ConditionalContinousEffect(new BoostTargetEffect(4, 4, Duration.EndOfTurn),

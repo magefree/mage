@@ -51,7 +51,7 @@ public class InvisibleStalker extends CardImpl<InvisibleStalker> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        this.addAbility(new HexproofAbility());
+        this.addAbility(HexproofAbility.getInstance());
         // Invisible Stalker is unblockable.
         this.addAbility(UnblockableAbility.getInstance());
     }

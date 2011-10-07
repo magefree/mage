@@ -59,7 +59,7 @@ public class ThrunTheLastTroll extends CardImpl<ThrunTheLastTroll> {
         this.toughness = new MageInt(4);
 
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new CantCounterSourceEffect()));
-        this.addAbility(new HexproofAbility());
+        this.addAbility(HexproofAbility.getInstance());
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{G}")));
     }
 
