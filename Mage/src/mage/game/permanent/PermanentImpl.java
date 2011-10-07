@@ -135,6 +135,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 		}
 		this.attachedTo = permanent.attachedTo;
 		this.minBlockedBy = permanent.minBlockedBy;
+		this.transformed = permanent.transformed;
 	}
 
 	@Override
