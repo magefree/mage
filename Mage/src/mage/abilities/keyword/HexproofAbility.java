@@ -14,7 +14,14 @@ import mage.filter.FilterStackObject;
  */
 public class HexproofAbility extends SimpleStaticAbility {
 
-	private static final HexproofAbility fINSTANCE =  new HexproofAbility();
+	private static final HexproofAbility fINSTANCE;
+    private static final FilterStackObject filter;
+ 
+    static {
+        filter = new FilterStackObject("spells or abilities your opponents control");
+        filter.setTargetController(Constants.TargetController.OPPONENT);
+        fINSTANCE = new HexproofAbility();
+    }
  
 	private Object readResolve() throws ObjectStreamException {
 		return fINSTANCE;
@@ -24,8 +31,8 @@ public class HexproofAbility extends SimpleStaticAbility {
 		return fINSTANCE;
 	}
 
-   private HexproofAbility() {
-        super(Constants.Zone.BATTLEFIELD, new CantTargetSourceEffect(new FilterStackObject("spells or abilities your opponents control"), Constants.Duration.WhileOnBattlefield));
+    private HexproofAbility() {
+        super(Constants.Zone.BATTLEFIELD, new CantTargetSourceEffect(filter, Constants.Duration.WhileOnBattlefield));
     }
 
     @Override
