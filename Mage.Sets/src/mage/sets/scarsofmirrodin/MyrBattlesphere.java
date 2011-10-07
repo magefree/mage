@@ -39,9 +39,12 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.TapVariableTargetCost;
+import mage.abilities.dynamicvalue.common.GetXValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.BoostPowerXSourceEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
@@ -91,7 +94,7 @@ class MyrBattlesphereAbility extends TriggeredAbilityImpl<MyrBattlesphereAbility
 	}
 
 	public MyrBattlesphereAbility() {
-		super(Zone.BATTLEFIELD, new BoostPowerXSourceEffect(Duration.EndOfTurn), true);
+		super(Zone.BATTLEFIELD, new BoostSourceEffect(new GetXValue(), new StaticValue(0), Duration.EndOfTurn), true);
 		this.addEffect(new MyrBattlesphereEffect());
 		this.addCost(new TapVariableTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
 	}
@@ -130,12 +133,15 @@ class MyrBattlesphereAbility extends TriggeredAbilityImpl<MyrBattlesphereAbility
 
 class MyrBattlesphereEffect extends OneShotEffect<MyrBattlesphereEffect> {
 
+    private GetXValue amount = new GetXValue();
+    
 	public MyrBattlesphereEffect() {
 		super(Outcome.Damage);
 	}
 
 	public MyrBattlesphereEffect(final MyrBattlesphereEffect effect) {
 		super(effect);
+        this.amount = effect.amount.clone();
 	}
 
 	@Override
@@ -143,7 +149,7 @@ class MyrBattlesphereEffect extends OneShotEffect<MyrBattlesphereEffect> {
 		UUID defenderId = game.getCombat().getDefendingPlayer(source.getSourceId());
 		Player defender = game.getPlayer(defenderId);
 		if (defender != null) {
-			defender.damage(source.getManaCostsToPay().getX(), source.getSourceId(), game, false, false);
+			defender.damage(amount.calculate(game, source), source.getSourceId(), game, false, false);
 			return true;
 		}
 		return false;
