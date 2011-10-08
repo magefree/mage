@@ -212,11 +212,11 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 	}
 
 	@Override
-	public boolean choose(Outcome outcome, UUID playerId, Game game) {
+	public boolean choose(Outcome outcome, UUID playerId, UUID sourceId, Game game) {
 		Player player = game.getPlayer(playerId);
 		while (!isChosen() && !doneChosing()) {
 			chosen = targets.size() >= minNumberOfTargets;
-			if (!player.choose(outcome, this, game)) {
+			if (!player.choose(outcome, this, sourceId, game)) {
 				return chosen;
 			}
 			chosen = targets.size() >= minNumberOfTargets;

@@ -54,7 +54,7 @@ public class DiscardTargetCost extends CostImpl<DiscardTargetCost> {
 
 	@Override
 	public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-		if (targets.choose(Outcome.Discard, controllerId, game)) {
+		if (targets.choose(Outcome.Discard, controllerId, sourceId, game)) {
 			Player player = game.getPlayer(controllerId);
 			for (UUID targetId: targets.get(0).getTargets()) {
 				Card card = player.getHand().get(targetId, game);

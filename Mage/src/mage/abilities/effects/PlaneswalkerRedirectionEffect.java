@@ -79,7 +79,7 @@ public class PlaneswalkerRedirectionEffect extends RedirectionEffect<Planeswalke
 							redirectTarget.add(game.getBattlefield().getAllActivePermanents(filter, target.getId()).get(0).getId(), game);
 						}
 						else {
-							player.choose(Outcome.Damage, redirectTarget, game);
+							player.choose(Outcome.Damage, redirectTarget, source.getSourceId(), game);
 						}
 						return true;
 					}

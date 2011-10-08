@@ -68,7 +68,7 @@ public class ProliferateEffect extends OneShotEffect<ProliferateEffect> {
 			Map<String, Serializable> options = new HashMap<String, Serializable>();
 			options.put("UI.right.btn.text", "Done");
 			while (target.canChoose(controller.getId(), game)) {
-				if (!controller.choose(Outcome.Benefit, target, game, options)) {
+				if (!controller.choose(Outcome.Benefit, target, source.getSourceId(), game, options)) {
 					break;
 				}
 			}

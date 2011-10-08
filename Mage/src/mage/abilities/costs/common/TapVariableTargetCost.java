@@ -68,7 +68,7 @@ public class TapVariableTargetCost extends CostImpl<TapVariableTargetCost> imple
 		amountPaid = 0;
 		while (true) {
 			target.clearChosen();
-			if (target.choose(Outcome.Tap, controllerId, game)) {
+			if (target.choose(Outcome.Tap, controllerId, sourceId, game)) {
 				Permanent permanent = game.getPermanent(target.getFirstTarget());
 				if (permanent != null && permanent.tap(game)) {
 					amountPaid++;

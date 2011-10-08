@@ -60,7 +60,7 @@ public class SacrificeTargetCost extends CostImpl<SacrificeTargetCost> {
 
 	@Override
 	public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-		if (targets.choose(Outcome.Sacrifice, controllerId, game)) {
+		if (targets.choose(Outcome.Sacrifice, controllerId, sourceId, game)) {
 			for (UUID targetId: targets.get(0).getTargets()) {
 				Permanent permanent = game.getPermanent(targetId);
 				if (permanent == null)
@@ -74,7 +74,7 @@ public class SacrificeTargetCost extends CostImpl<SacrificeTargetCost> {
 
 	@Override
 	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-		return targets.canChoose(controllerId, game);
+		return targets.canChoose(sourceId, controllerId, game);
 	}
 
 	@Override

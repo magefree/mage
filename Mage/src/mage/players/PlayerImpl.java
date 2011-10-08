@@ -408,7 +408,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
             if (hand.size() == 0)
                 break;
 			TargetDiscard target = new TargetDiscard(playerId);
-			choose(Outcome.Discard, target, game);
+			choose(Outcome.Discard, target, source.getSourceId(), game);
             Card card = hand.get(target.getFirstTarget(), game);
             if (card != null && discard(card, source, game)) {
                 numDiscarded++;
@@ -1093,7 +1093,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 				newTarget = new TargetCardInLibrary(library.count(target.getFilter(), game), target.getMaxNumberOfTargets(), target.getFilter());
 			else
 				newTarget = target;
-			if (newTarget.choose(Outcome.Neutral, playerId, game)) {
+			if (newTarget.choose(Outcome.Neutral, playerId, null, game)) {
 				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LIBRARY_SEARCHED, playerId, playerId));
 				return true;
 			}

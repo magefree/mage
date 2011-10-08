@@ -102,7 +102,7 @@ class CivilizedScholarEffect extends OneShotEffect<CivilizedScholarEffect> {
         if (player != null) {
             player.drawCards(1, game);
             TargetDiscard target = new TargetDiscard(player.getId());
-            player.choose(Constants.Outcome.Discard, target, game);
+            player.choose(Constants.Outcome.Discard, target, source.getSourceId(), game);
             Card card = player.getHand().get(target.getFirstTarget(), game);
             if (card != null) {
                 player.discard(card, source, game);

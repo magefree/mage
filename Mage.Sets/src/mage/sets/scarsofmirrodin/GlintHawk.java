@@ -100,7 +100,7 @@ class GlintHawkEffect extends OneShotEffect<GlintHawkEffect> {
 		TargetPermanent target = new TargetPermanent(1, 1, filter, false);
 
 		if (target.canChoose(player.getId(), game)) {
-			player.choose(Outcome.Sacrifice, target, game);
+			player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
 			Permanent permanent = game.getPermanent(target.getFirstTarget());
 
 			if ( permanent != null ) {

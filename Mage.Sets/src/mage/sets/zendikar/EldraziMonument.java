@@ -99,7 +99,7 @@ class EldraziMonumentEffect extends OneShotEffect<EldraziMonumentEffect> {
 		target.setRequired(true);
 		Player player = game.getPlayer(source.getControllerId());
 		if (target.canChoose(source.getControllerId(), game)) {
-			player.choose(this.outcome, target, game);
+			player.choose(this.outcome, target, source.getSourceId(), game);
 			Permanent permanent = game.getPermanent(target.getFirstTarget());
 			if (permanent != null) {
 				return permanent.sacrifice(source.getSourceId(), game);

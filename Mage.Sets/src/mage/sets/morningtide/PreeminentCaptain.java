@@ -96,7 +96,7 @@ class PreeminentCaptainEffect extends OneShotEffect<PreeminentCaptainEffect> {
 	public boolean apply(Game game, Ability source) {
 		Player player = game.getPlayer(source.getControllerId());
 		TargetCardInHand target = new TargetCardInHand(new FilterSoldierCard());
-		if (target.choose(getOutcome(), player.getId(), game)) {
+		if (target.choose(getOutcome(), player.getId(), source.getSourceId(), game)) {
 			if (target.getTargets().size() > 0) {
 				UUID cardId = target.getFirstTarget();
 				Card card = player.getHand().get(cardId, game);
@@ -108,7 +108,7 @@ class PreeminentCaptainEffect extends OneShotEffect<PreeminentCaptainEffect> {
 						permanent.setTapped(true);
 						TargetDefender def = new TargetDefender(game
 								.getCombat().getDefenders(), player.getId());
-						if (def.choose(getOutcome(), player.getId(), game)) {
+						if (def.choose(getOutcome(), player.getId(), source.getSourceId(), game)) {
 							// TODO -> If only one option, don't ask, as for
 							// normal attacking.
 							if (def.getTargets().size() > 0) {

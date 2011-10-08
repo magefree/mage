@@ -207,19 +207,19 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 	}
 
 	@Override
-	public boolean choose(Outcome outcome, Target target, Game game) {
-		 return choose(outcome, target, game, null);
+	public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game) {
+		 return choose(outcome, target, sourceId, game, null);
 	}
 
 	@Override
-	public boolean choose(Outcome outcome, Target target, Game game, Map<String, Serializable> options) {
+	public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game, Map<String, Serializable> options) {
 		game.getState().setPriorityPlayerId(getId());
 		while (!abort) {
 			game.fireSelectTargetEvent(playerId, target.getMessage(), target.possibleTargets(null, playerId, game), target.isRequired(), options);
 			waitForResponse();
 			if (response.getUUID() != null) {
 				if (target instanceof TargetPermanent) {
-					if (((TargetPermanent)target).canTarget(playerId, response.getUUID(), null, game)) {
+					if (((TargetPermanent)target).canTarget(playerId, response.getUUID(), sourceId, game, false)) {
 						target.add(response.getUUID(), game);
 						if(target.doneChosing()){
 							return true;
@@ -575,7 +575,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 		while (remainingDamage > 0) {
 			Target target = new TargetCreatureOrPlayer();
 			if (singleTargetName != null) target.setTargetName(singleTargetName);
-			choose(Outcome.Damage, target, game);
+			choose(Outcome.Damage, target, sourceId, game);
 			if (targets.isEmpty() || targets.contains(target.getFirstTarget())) {
 				int damageAmount = getAmount(0, remainingDamage, "Select amount", game);
 				Permanent permanent = game.getPermanent(target.getFirstTarget());

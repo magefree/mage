@@ -82,7 +82,7 @@ public class SacrificeEffect extends OneShotEffect<SacrificeEffect>{
 		if (target.canChoose(player.getId(), game)) {
 			boolean abilityApplied = false;
 			while (!target.isChosen() && target.canChoose(player.getId(), game)) {
-				player.choose(Outcome.Sacrifice, target, game);
+				player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
 			}
 
 			for ( int idx = 0; idx < target.getTargets().size(); idx++) {

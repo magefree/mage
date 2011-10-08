@@ -138,12 +138,12 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 	}
 
 	@Override
-	public boolean choose(Outcome outcome, Target target, Game game) {
-		return choose(outcome, target, game, null);
+	public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game) {
+		return choose(outcome, target, sourceId, game, null);
 	}
 
 	@Override
-	public boolean choose(Outcome outcome, Target target, Game game, Map<String, Serializable> options) {
+	public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game, Map<String, Serializable> options) {
 		if (log.isDebugEnabled())
 			log.debug("chooseTarget: " + outcome.toString() + ":" + target.toString());
 		UUID opponentId = game.getOpponents(playerId).iterator().next();

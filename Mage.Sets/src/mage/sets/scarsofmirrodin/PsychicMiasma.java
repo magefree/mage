@@ -85,7 +85,7 @@ class PsychicMiasmaEffect1 extends OneShotEffect<PsychicMiasmaEffect1> {
         Player player = game.getPlayer(targetPointer.getFirst(source));
         if (player != null) {
 			TargetDiscard target = new TargetDiscard(player.getId());
-			player.choose(Outcome.Discard, target, game);
+			player.choose(Outcome.Discard, target, source.getSourceId(), game);
 			Card card = player.getHand().get(target.getFirstTarget(), game);
 			if (card != null) {
 				player.discard(card, source, game);

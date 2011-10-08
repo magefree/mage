@@ -404,7 +404,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		else {
 			choosingPlayer = this.getPlayer(choosingPlayerId);
 		}
-		if (choosingPlayer.choose(Outcome.Benefit, targetPlayer, this)) {
+		if (choosingPlayer.choose(Outcome.Benefit, targetPlayer, null, this)) {
 			startingPlayerId = ((List<UUID>)targetPlayer.getTargets()).get(0);
 			fireInformEvent(state.getPlayer(startingPlayerId).getName() + " will start");
 		}

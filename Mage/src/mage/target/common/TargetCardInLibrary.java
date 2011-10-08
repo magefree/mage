@@ -66,7 +66,7 @@ public class TargetCardInLibrary extends TargetCard<TargetCardInLibrary> {
 	}
 
 	@Override
-	public boolean choose(Outcome outcome, UUID playerId, Game game) {
+	public boolean choose(Outcome outcome, UUID playerId, UUID sourceId, Game game) {
 		Player player = game.getPlayer(playerId);
 		while (!isChosen() && !doneChosing()) {
 			chosen = targets.size() >= minNumberOfTargets;

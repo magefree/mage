@@ -131,7 +131,7 @@ class WarrenInstigatorEffect extends OneShotEffect<WarrenInstigatorEffect> {
         FilterCreatureCard filter = new FilterCreatureCard("Goblin creature card from your hand");
         filter.getSubtype().add("Goblin");
         TargetCardInHand target = new TargetCardInHand(filter);
-        if (player.choose(Outcome.PutCreatureInPlay, target, game)) {
+        if (player.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 player.removeFromHand(card, game);

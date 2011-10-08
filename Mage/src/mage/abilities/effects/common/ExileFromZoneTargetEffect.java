@@ -90,7 +90,7 @@ public class ExileFromZoneTargetEffect extends OneShotEffect<ExileFromZoneTarget
                 default:
             }
             if (target != null && target.canChoose(player.getId(), game)) {
-                if (target.choose(Outcome.Exile, player.getId(), game)) {
+                if (target.choose(Outcome.Exile, player.getId(), source.getSourceId(), game)) {
                     for (UUID cardId: target.getTargets()) {
                         Card card = game.getCard(cardId);
                         if (card != null)

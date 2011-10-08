@@ -163,7 +163,7 @@ class GarrukTheVeilCursedEffect extends OneShotEffect<GarrukTheVeilCursedEffect>
         boolean sacrificed = false;
         if (target.canChoose(player.getId(), game)) {
             while (!target.isChosen() && target.canChoose(player.getId(), game)) {
-                player.choose(Constants.Outcome.Sacrifice, target, game);
+                player.choose(Constants.Outcome.Sacrifice, target, source.getSourceId(), game);
             }
 
             for (int idx = 0; idx < target.getTargets().size(); idx++) {

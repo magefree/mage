@@ -57,7 +57,7 @@ public class TapTargetCost extends CostImpl<TapTargetCost> {
 
 	@Override
 	public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-		if (target.choose(Outcome.Tap, controllerId, game)) {
+		if (target.choose(Outcome.Tap, controllerId, sourceId, game)) {
 			for (UUID targetId: (List<UUID>)target.getTargets()) {
 				Permanent permanent = game.getPermanent(targetId);
 				if (permanent == null)

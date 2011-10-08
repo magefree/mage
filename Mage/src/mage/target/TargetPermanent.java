@@ -94,6 +94,14 @@ public class TargetPermanent<T extends TargetPermanent<T>> extends TargetObject<
 		return false;
 	}
 
+    public boolean canTarget(UUID controllerId, UUID id, UUID sourceId, Game game, boolean flag) {
+		Permanent permanent = game.getPermanent(id);
+		if (permanent != null) {
+	        return filter.match(permanent, sourceId, controllerId, game);
+		}
+		return false;
+	}
+
 	@Override
 	public FilterPermanent getFilter() {
 		return this.filter;
@@ -115,7 +123,7 @@ public class TargetPermanent<T extends TargetPermanent<T>> extends TargetObject<
 			return true;
 		int count = 0;
 		MageObject targetSource = game.getObject(sourceId);
-		for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, sourceControllerId, game)) {
+		for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
 			if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource)) {
 				count++;
 				if (count >= remainingTargets)
@@ -155,7 +163,7 @@ public class TargetPermanent<T extends TargetPermanent<T>> extends TargetObject<
 	public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
 		Set<UUID> possibleTargets = new HashSet<UUID>();
 		MageObject targetSource = game.getObject(sourceId);
-		for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, sourceControllerId, game)) {
+		for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
 			if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource)) {
 				possibleTargets.add(permanent.getId());
 			}

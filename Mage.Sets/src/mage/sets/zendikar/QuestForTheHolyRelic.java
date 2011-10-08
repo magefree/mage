@@ -116,7 +116,7 @@ class QuestForTheHolyRelicEffect extends OneShotEffect<QuestForTheHolyRelicEffec
                 Permanent equipment = game.getPermanent(card.getId());
 
                 Target targetCreature = new TargetControlledCreaturePermanent();
-                if (equipment != null && player.choose(Outcome.BoostCreature, targetCreature, game)) {
+                if (equipment != null && player.choose(Outcome.BoostCreature, targetCreature, source.getSourceId(), game)) {
                     Permanent permanent = game.getPermanent(targetCreature.getFirstTarget());
                     permanent.addAttachment(equipment.getId(), game);
                 }

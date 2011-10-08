@@ -98,7 +98,7 @@ class PutCreatureOnBattlefieldEffect extends OneShotEffect<PutCreatureOnBattlefi
         }
 
         TargetCardInHand target = new TargetCardInHand(new FilterCreatureCard());
-        if (player.choose(Outcome.PutCreatureInPlay, target, game)) {
+        if (player.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 player.removeFromHand(card, game);
