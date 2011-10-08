@@ -964,7 +964,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		this.library = player.getLibrary();
 		this.hand = player.getHand();
 		this.graveyard = player.getGraveyard();
-//		this.abilities = player.getAbilities();
+		this.abilities = player.getAbilities();
 		this.manaPool = player.getManaPool();
 		this.life = player.getLife();
 		this.counters = player.getCounters();
