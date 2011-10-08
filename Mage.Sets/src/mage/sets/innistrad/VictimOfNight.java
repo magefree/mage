@@ -38,18 +38,18 @@ import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author North
+ * @author North, Loki
  */
 public class VictimOfNight extends CardImpl<VictimOfNight> {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Vampire, non-Werewolf, non-Zombie creature");
 
     static {
-        filter.getNotCardType().add("Vampire");
-        filter.getNotCardType().add("Werewolf");
-        filter.getNotCardType().add("Zombie");
-        filter.setNotCardType(true);
-        filter.setNotScopeCardType(ComparisonScope.All);
+        filter.getSubtype().add("Vampire");
+        filter.getSubtype().add("Werewolf");
+        filter.getSubtype().add("Zombie");
+        filter.setNotSubtype(true);
+        filter.setScopeSubtype(ComparisonScope.Any);
     }
 
     public VictimOfNight(UUID ownerId) {
