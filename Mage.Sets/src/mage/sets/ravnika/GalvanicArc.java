@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.ravnika;
 
 import java.util.UUID;
@@ -33,36 +32,52 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.BasicManaEffect;
-import mage.abilities.mana.BasicManaAbility;
-import mage.abilities.mana.SimpleManaAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
+import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class GolgariSignet extends CardImpl<GolgariSignet> {
+public class GalvanicArc extends CardImpl<GalvanicArc> {
 
-    public GolgariSignet (UUID ownerId) {
-        super(ownerId, 262, "Golgari Signet", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
+    public GalvanicArc(UUID ownerId) {
+        super(ownerId, 126, "Galvanic Arc", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
         this.expansionSetCode = "RAV";
-        Ability ability = new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 1, 0, 0, 1, 0, 0)), new GenericManaCost(1));
-        ability.addCost(new TapSourceCost());
-        this.addAbility(ability);
+        this.subtype.add("Aura");
+
+        this.color.setRed(true);
+
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+		this.getSpellAbility().addTarget(auraTarget);
+		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
+		Ability ability = new EnchantAbility(auraTarget.getTargetName());
+		this.addAbility(ability);
+		// When Galvanic Arc enters the battlefield, it deals 3 damage to target creature or player.
+        Ability triggeredAbility = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(3));
+        triggeredAbility.addTarget(new TargetCreatureOrPlayer());
+        this.addAbility(triggeredAbility);
+        // Enchanted creature has first strike.
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), Constants.AttachmentType.AURA)));
     }
 
-    public GolgariSignet (final GolgariSignet card) {
+    public GalvanicArc(final GalvanicArc card) {
         super(card);
     }
 
     @Override
-    public GolgariSignet copy() {
-        return new GolgariSignet(this);
+    public GalvanicArc copy() {
+        return new GalvanicArc(this);
     }
 }

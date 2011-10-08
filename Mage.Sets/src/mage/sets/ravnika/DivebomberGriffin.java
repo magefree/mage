@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.ravnika;
 
 import java.util.UUID;
@@ -33,36 +32,46 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Mana;
+import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.BasicManaEffect;
-import mage.abilities.mana.BasicManaAbility;
-import mage.abilities.mana.SimpleManaAbility;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterAttackingOrBlockingCreature;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class GolgariSignet extends CardImpl<GolgariSignet> {
+public class DivebomberGriffin extends CardImpl<DivebomberGriffin> {
 
-    public GolgariSignet (UUID ownerId) {
-        super(ownerId, 262, "Golgari Signet", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
+    public DivebomberGriffin(UUID ownerId) {
+        super(ownerId, 14, "Divebomber Griffin", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
         this.expansionSetCode = "RAV";
-        Ability ability = new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 1, 0, 0, 1, 0, 0)), new GenericManaCost(1));
-        ability.addCost(new TapSourceCost());
+        this.subtype.add("Griffin");
+
+        this.color.setWhite(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(2);
+
+        this.addAbility(FlyingAbility.getInstance());
+        // {tap}, Sacrifice Divebomber Griffin: Divebomber Griffin deals 3 damage to target attacking or blocking creature.
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(3), new TapSourceCost());
+        ability.addCost(new SacrificeSourceCost());
+        ability.addTarget(new TargetCreaturePermanent(new FilterAttackingOrBlockingCreature()));
         this.addAbility(ability);
     }
 
-    public GolgariSignet (final GolgariSignet card) {
+    public DivebomberGriffin(final DivebomberGriffin card) {
         super(card);
     }
 
     @Override
-    public GolgariSignet copy() {
-        return new GolgariSignet(this);
+    public DivebomberGriffin copy() {
+        return new DivebomberGriffin(this);
     }
 }

@@ -25,44 +25,38 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.ravnika;
+package mage.sets.tenth;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Mana;
-import mage.abilities.Ability;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.BasicManaEffect;
-import mage.abilities.mana.BasicManaAbility;
-import mage.abilities.mana.SimpleManaAbility;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
  * @author Loki
  */
-public class GolgariSignet extends CardImpl<GolgariSignet> {
+public class Recollect extends CardImpl<Recollect> {
 
-    public GolgariSignet (UUID ownerId) {
-        super(ownerId, 262, "Golgari Signet", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "RAV";
-        Ability ability = new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 1, 0, 0, 1, 0, 0)), new GenericManaCost(1));
-        ability.addCost(new TapSourceCost());
-        this.addAbility(ability);
+    public Recollect(UUID ownerId) {
+        super(ownerId, 289, "Recollect", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
+        this.expansionSetCode = "10E";
+
+        this.color.setGreen(true);
+
+        // Return target card from your graveyard to your hand.
+        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard());
     }
 
-    public GolgariSignet (final GolgariSignet card) {
+    public Recollect(final Recollect card) {
         super(card);
     }
 
     @Override
-    public GolgariSignet copy() {
-        return new GolgariSignet(this);
+    public Recollect copy() {
+        return new Recollect(this);
     }
 }

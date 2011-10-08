@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.ravnika;
 
 import java.util.UUID;
@@ -33,36 +32,57 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Mana;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.BasicManaEffect;
-import mage.abilities.mana.BasicManaAbility;
-import mage.abilities.mana.SimpleManaAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapTargetCost;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class GolgariSignet extends CardImpl<GolgariSignet> {
+public class NullmageShepherd extends CardImpl<NullmageShepherd> {
 
-    public GolgariSignet (UUID ownerId) {
-        super(ownerId, 262, "Golgari Signet", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
+    private final static FilterControlledCreaturePermanent filterCost = new FilterControlledCreaturePermanent("untapped creatures you control");
+    private final static FilterPermanent filterTarget = new FilterPermanent("artifact or enchantment");
+
+    static {
+        filterCost.setTapped(false);
+        filterCost.setUseTapped(true);
+        filterTarget.getCardType().add(CardType.ARTIFACT);
+        filterTarget.getCardType().add(CardType.ENCHANTMENT);
+        filterTarget.setScopeCardType(Filter.ComparisonScope.Any);
+    }
+
+    public NullmageShepherd(UUID ownerId) {
+        super(ownerId, 174, "Nullmage Shepherd", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.expansionSetCode = "RAV";
-        Ability ability = new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 1, 0, 0, 1, 0, 0)), new GenericManaCost(1));
-        ability.addCost(new TapSourceCost());
+        this.subtype.add("Elf");
+        this.subtype.add("Shaman");
+
+        this.color.setGreen(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(4);
+
+        // Tap four untapped creatures you control: Destroy target artifact or enchantment.
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapTargetCost(new TargetControlledCreaturePermanent(4, 4, filterCost, true)));
+        ability.addTarget(new TargetPermanent(filterTarget));
         this.addAbility(ability);
     }
 
-    public GolgariSignet (final GolgariSignet card) {
+    public NullmageShepherd(final NullmageShepherd card) {
         super(card);
     }
 
     @Override
-    public GolgariSignet copy() {
-        return new GolgariSignet(this);
+    public NullmageShepherd copy() {
+        return new NullmageShepherd(this);
     }
 }

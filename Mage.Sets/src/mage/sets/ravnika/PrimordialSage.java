@@ -25,44 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.ravnika;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Mana;
-import mage.abilities.Ability;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.BasicManaEffect;
-import mage.abilities.mana.BasicManaAbility;
-import mage.abilities.mana.SimpleManaAbility;
+import mage.MageInt;
+import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterCreatureCard;
 
 /**
  *
  * @author Loki
  */
-public class GolgariSignet extends CardImpl<GolgariSignet> {
+public class PrimordialSage extends CardImpl<PrimordialSage> {
 
-    public GolgariSignet (UUID ownerId) {
-        super(ownerId, 262, "Golgari Signet", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
+    public PrimordialSage(UUID ownerId) {
+        super(ownerId, 177, "Primordial Sage", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
         this.expansionSetCode = "RAV";
-        Ability ability = new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 1, 0, 0, 1, 0, 0)), new GenericManaCost(1));
-        ability.addCost(new TapSourceCost());
-        this.addAbility(ability);
+        this.subtype.add("Spirit");
+
+        this.color.setGreen(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(5);
+
+        // Whenever you cast a creature spell, you may draw a card.
+        this.addAbility(new SpellCastTriggeredAbility(new DrawCardControllerEffect(1), FilterCreatureCard.getDefault(), true));
     }
 
-    public GolgariSignet (final GolgariSignet card) {
+    public PrimordialSage(final PrimordialSage card) {
         super(card);
     }
 
     @Override
-    public GolgariSignet copy() {
-        return new GolgariSignet(this);
+    public PrimordialSage copy() {
+        return new PrimordialSage(this);
     }
 }

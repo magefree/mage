@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.ravnika;
 
 import java.util.UUID;
@@ -33,36 +32,44 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Mana;
-import mage.abilities.Ability;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.BasicManaEffect;
-import mage.abilities.mana.BasicManaAbility;
-import mage.abilities.mana.SimpleManaAbility;
+import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
+import mage.filter.FilterCard;
+import mage.target.common.TargetCardInLibrary;
 
 /**
  *
  * @author Loki
  */
-public class GolgariSignet extends CardImpl<GolgariSignet> {
+public class Farseek extends CardImpl<Farseek> {
 
-    public GolgariSignet (UUID ownerId) {
-        super(ownerId, 262, "Golgari Signet", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "RAV";
-        Ability ability = new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 1, 0, 0, 1, 0, 0)), new GenericManaCost(1));
-        ability.addCost(new TapSourceCost());
-        this.addAbility(ability);
+    private final static FilterCard filter = new FilterCard("Plains, Island, Swamp, or Mountain card");
+
+    static {
+        filter.getSubtype().add("Plains");
+        filter.getSubtype().add("Island");
+        filter.getSubtype().add("Swamp");
+        filter.getSubtype().add("Mountain");
+        filter.setScopeSubtype(Filter.ComparisonScope.Any);
     }
 
-    public GolgariSignet (final GolgariSignet card) {
+    public Farseek(UUID ownerId) {
+        super(ownerId, 163, "Farseek", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
+        this.expansionSetCode = "RAV";
+
+        this.color.setGreen(true);
+
+        // Search your library for a Plains, Island, Swamp, or Mountain card and put it onto the battlefield tapped. Then shuffle your library.
+        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true, Constants.Outcome.PutLandInPlay));
+    }
+
+    public Farseek(final Farseek card) {
         super(card);
     }
 
     @Override
-    public GolgariSignet copy() {
-        return new GolgariSignet(this);
+    public Farseek copy() {
+        return new Farseek(this);
     }
 }

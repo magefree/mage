@@ -25,44 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.ravnika;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Mana;
-import mage.abilities.Ability;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.BasicManaEffect;
-import mage.abilities.mana.BasicManaAbility;
-import mage.abilities.mana.SimpleManaAbility;
+import mage.abilities.Mode;
+import mage.abilities.effects.common.DiscardTargetEffect;
+import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.cards.CardImpl;
+import mage.target.TargetPlayer;
 
 /**
  *
- * @author Loki
+ * @author anonymous
  */
-public class GolgariSignet extends CardImpl<GolgariSignet> {
+public class ConsultTheNecrosages extends CardImpl<ConsultTheNecrosages> {
 
-    public GolgariSignet (UUID ownerId) {
-        super(ownerId, 262, "Golgari Signet", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
+    public ConsultTheNecrosages(UUID ownerId) {
+        super(ownerId, 199, "Consult the Necrosages", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{U}{B}");
         this.expansionSetCode = "RAV";
-        Ability ability = new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 1, 0, 0, 1, 0, 0)), new GenericManaCost(1));
-        ability.addCost(new TapSourceCost());
-        this.addAbility(ability);
+
+        this.color.setBlue(true);
+        this.color.setBlack(true);
+
+        // Choose one - Target player draws two cards; or target player discards two cards.
+        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addEffect(new DrawCardTargetEffect(2));
+        Mode mode = new Mode();
+        mode.getTargets().add(new TargetPlayer());
+        mode.getEffects().add(new DiscardTargetEffect(2));
+        this.getSpellAbility().addMode(mode);
     }
 
-    public GolgariSignet (final GolgariSignet card) {
+    public ConsultTheNecrosages(final ConsultTheNecrosages card) {
         super(card);
     }
 
     @Override
-    public GolgariSignet copy() {
-        return new GolgariSignet(this);
+    public ConsultTheNecrosages copy() {
+        return new ConsultTheNecrosages(this);
     }
 }

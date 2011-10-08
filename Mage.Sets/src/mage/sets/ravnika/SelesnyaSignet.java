@@ -30,13 +30,17 @@ package mage.sets.ravnika;
 
 import java.util.UUID;
 
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.BasicManaAbility;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 
 /**
@@ -48,8 +52,8 @@ public class SelesnyaSignet extends CardImpl<SelesnyaSignet> {
     public SelesnyaSignet (UUID ownerId) {
         super(ownerId, 270, "Selesnya Signet", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "RAV";
-        Ability ability = new SelesnyaSignetAbility();
-        ability.addCost(new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 1, 0, 1, 0, 0, 0)), new GenericManaCost(1));
+        ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
 
@@ -60,23 +64,5 @@ public class SelesnyaSignet extends CardImpl<SelesnyaSignet> {
     @Override
     public SelesnyaSignet copy() {
         return new SelesnyaSignet(this);
-    }
-}
-
-class SelesnyaSignetAbility extends BasicManaAbility<SelesnyaSignetAbility> {
-
-    public SelesnyaSignetAbility() {
-        super(new BasicManaEffect(new Mana(0, 1, 0, 1, 0, 0, 0)));
-        this.netMana.setGreen(1);
-        this.netMana.setWhite(1);
-    }
-
-    public SelesnyaSignetAbility(final SelesnyaSignetAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public SelesnyaSignetAbility copy() {
-        return new SelesnyaSignetAbility(this);
     }
 }

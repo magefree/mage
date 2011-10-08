@@ -35,10 +35,14 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ColoredManaCost;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.BasicManaAbility;
 import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 
 /**
@@ -50,8 +54,8 @@ public class DimirSignet extends CardImpl<DimirSignet> {
     public DimirSignet (UUID ownerId) {
         super(ownerId, 260, "Dimir Signet", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "RAV";
-        Ability ability = new DimirSignetAbility();
-        ability.addCost(new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 0, 1, 0, 1, 0, 0)), new GenericManaCost(1));
+        ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
 
@@ -62,22 +66,5 @@ public class DimirSignet extends CardImpl<DimirSignet> {
     @Override
     public DimirSignet copy() {
         return new DimirSignet(this);
-    }
-}
-
-class DimirSignetAbility extends BasicManaAbility<DimirSignetAbility> {
-    public DimirSignetAbility() {
-        super(new BasicManaEffect(new Mana(0, 0, 1, 0, 1, 0, 0)));
-        this.netMana.setBlue(1);
-        this.netMana.setBlack(1);
-    }
-
-    public DimirSignetAbility(final DimirSignetAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public DimirSignetAbility copy() {
-        return new DimirSignetAbility(this);
     }
 }

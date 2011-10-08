@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.ravnika;
 
 import java.util.UUID;
@@ -33,36 +32,44 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Mana;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.BasicManaEffect;
-import mage.abilities.mana.BasicManaAbility;
-import mage.abilities.mana.SimpleManaAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.continious.BoostControlledEffect;
+import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class GolgariSignet extends CardImpl<GolgariSignet> {
+public class FlameKinZealot extends CardImpl<FlameKinZealot> {
 
-    public GolgariSignet (UUID ownerId) {
-        super(ownerId, 262, "Golgari Signet", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
+    public FlameKinZealot(UUID ownerId) {
+        super(ownerId, 206, "Flame-Kin Zealot", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{R}{W}");
         this.expansionSetCode = "RAV";
-        Ability ability = new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 1, 0, 0, 1, 0, 0)), new GenericManaCost(1));
-        ability.addCost(new TapSourceCost());
+        this.subtype.add("Elemental");
+        this.subtype.add("Berserker");
+
+        this.color.setRed(true);
+        this.color.setWhite(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // When Flame-Kin Zealot enters the battlefield, creatures you control get +1/+1 and gain haste until end of turn.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new BoostControlledEffect(1, 1, Constants.Duration.EndOfTurn));
+        ability.addEffect(new GainAbilityControlledEffect(HasteAbility.getInstance(), Constants.Duration.EndOfTurn, FilterCreaturePermanent.getDefault()));
         this.addAbility(ability);
     }
 
-    public GolgariSignet (final GolgariSignet card) {
+    public FlameKinZealot(final FlameKinZealot card) {
         super(card);
     }
 
     @Override
-    public GolgariSignet copy() {
-        return new GolgariSignet(this);
+    public FlameKinZealot copy() {
+        return new FlameKinZealot(this);
     }
 }
