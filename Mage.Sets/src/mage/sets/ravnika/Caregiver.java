@@ -25,50 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.championsofkamigawa;
+package mage.sets.ravnika;
 
 import java.util.UUID;
 
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DestroyAllEffect;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.costs.mana.ColoredManaCost;
+import mage.abilities.effects.common.PreventDamageTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.FilterPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
+ *
  * @author Loki
  */
-public class Cleanfall extends CardImpl<Cleanfall> {
+public class Caregiver extends CardImpl<Caregiver> {
 
-    private final static FilterPermanent filter = new FilterPermanent("enchantments");
+    public Caregiver(UUID ownerId) {
+        super(ownerId, 6, "Caregiver", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
+        this.expansionSetCode = "RAV";
+        this.subtype.add("Human");
+        this.subtype.add("Cleric");
 
-    static {
-        filter.getCardType().add(CardType.ENCHANTMENT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
-    }
-
-    public Cleanfall(UUID ownerId) {
-        super(ownerId, 6, "Cleanfall", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");
-        this.expansionSetCode = "CHK";
-        this.subtype.add("Arcane");
         this.color.setWhite(true);
-        this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        // {W}, Sacrifice a creature: Prevent the next 1 damage that would be dealt to target creature or player this turn.
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new PreventDamageTargetEffect(Constants.Duration.EndOfTurn, 1), new ColoredManaCost(Constants.ColoredManaSymbol.W));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        ability.addTarget(new TargetCreatureOrPlayer());
+        this.addAbility(ability);
     }
 
-    public Cleanfall(final Cleanfall card) {
+    public Caregiver(final Caregiver card) {
         super(card);
     }
 
     @Override
-    public Cleanfall copy() {
-        return new Cleanfall(this);
+    public Caregiver copy() {
+        return new Caregiver(this);
     }
-
 }

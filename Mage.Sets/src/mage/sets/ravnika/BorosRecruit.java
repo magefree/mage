@@ -25,50 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.championsofkamigawa;
+package mage.sets.ravnika;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DestroyAllEffect;
+import mage.MageInt;
+import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.FilterPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
+ *
  * @author Loki
  */
-public class Cleanfall extends CardImpl<Cleanfall> {
+public class BorosRecruit extends CardImpl<BorosRecruit> {
 
-    private final static FilterPermanent filter = new FilterPermanent("enchantments");
+    public BorosRecruit(UUID ownerId) {
+        super(ownerId, 243, "Boros Recruit", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R/W}");
+        this.expansionSetCode = "RAV";
+        this.subtype.add("Goblin");
+        this.subtype.add("Soldier");
 
-    static {
-        filter.getCardType().add(CardType.ENCHANTMENT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
-    }
-
-    public Cleanfall(UUID ownerId) {
-        super(ownerId, 6, "Cleanfall", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");
-        this.expansionSetCode = "CHK";
-        this.subtype.add("Arcane");
+        this.color.setRed(true);
         this.color.setWhite(true);
-        this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public Cleanfall(final Cleanfall card) {
+    public BorosRecruit(final BorosRecruit card) {
         super(card);
     }
 
     @Override
-    public Cleanfall copy() {
-        return new Cleanfall(this);
+    public BorosRecruit copy() {
+        return new BorosRecruit(this);
     }
-
 }

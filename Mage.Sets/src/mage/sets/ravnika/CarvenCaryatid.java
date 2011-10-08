@@ -25,50 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.championsofkamigawa;
+package mage.sets.ravnika;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DestroyAllEffect;
+import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.FilterPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
+ *
  * @author Loki
  */
-public class Cleanfall extends CardImpl<Cleanfall> {
+public class CarvenCaryatid extends CardImpl<CarvenCaryatid> {
 
-    private final static FilterPermanent filter = new FilterPermanent("enchantments");
+    public CarvenCaryatid(UUID ownerId) {
+        super(ownerId, 155, "Carven Caryatid", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
+        this.expansionSetCode = "RAV";
+        this.subtype.add("Spirit");
 
-    static {
-        filter.getCardType().add(CardType.ENCHANTMENT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        this.color.setGreen(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(5);
+
+        this.addAbility(DefenderAbility.getInstance());
+        // When Carven Caryatid enters the battlefield, draw a card.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(1), false));
     }
 
-    public Cleanfall(UUID ownerId) {
-        super(ownerId, 6, "Cleanfall", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");
-        this.expansionSetCode = "CHK";
-        this.subtype.add("Arcane");
-        this.color.setWhite(true);
-        this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
-    }
-
-    public Cleanfall(final Cleanfall card) {
+    public CarvenCaryatid(final CarvenCaryatid card) {
         super(card);
     }
 
     @Override
-    public Cleanfall copy() {
-        return new Cleanfall(this);
+    public CarvenCaryatid copy() {
+        return new CarvenCaryatid(this);
     }
-
 }

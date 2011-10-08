@@ -25,50 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.championsofkamigawa;
+package mage.sets.ravnika;
 
 import java.util.UUID;
 
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DestroyAllEffect;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.mana.ColoredManaCost;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.FilterPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.target.common.TargetLandPermanent;
 
 /**
+ *
  * @author Loki
  */
-public class Cleanfall extends CardImpl<Cleanfall> {
+public class BarbarianRiftcutter extends CardImpl<BarbarianRiftcutter> {
 
-    private final static FilterPermanent filter = new FilterPermanent("enchantments");
-
-    static {
-        filter.getCardType().add(CardType.ENCHANTMENT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+    public BarbarianRiftcutter(UUID ownerId) {
+        super(ownerId, 114, "Barbarian Riftcutter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
+        this.expansionSetCode = "RAV";
+        this.subtype.add("Human");
+        this.subtype.add("Barbarian");
+        this.color.setRed(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+        // {R}, Sacrifice Barbarian Riftcutter: Destroy target land.
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DestroyTargetEffect(), new ColoredManaCost(Constants.ColoredManaSymbol.R));
+        ability.addCost(new SacrificeSourceCost());
+        ability.addTarget(new TargetLandPermanent());
+        this.addAbility(ability);
     }
 
-    public Cleanfall(UUID ownerId) {
-        super(ownerId, 6, "Cleanfall", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");
-        this.expansionSetCode = "CHK";
-        this.subtype.add("Arcane");
-        this.color.setWhite(true);
-        this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
-    }
-
-    public Cleanfall(final Cleanfall card) {
+    public BarbarianRiftcutter(final BarbarianRiftcutter card) {
         super(card);
     }
 
     @Override
-    public Cleanfall copy() {
-        return new Cleanfall(this);
+    public BarbarianRiftcutter copy() {
+        return new BarbarianRiftcutter(this);
     }
-
 }

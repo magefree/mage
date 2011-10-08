@@ -25,50 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.championsofkamigawa;
+package mage.sets.ravnika;
 
 import java.util.UUID;
 
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DestroyAllEffect;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.PayLifeCost;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.FilterPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
+ *
  * @author Loki
  */
-public class Cleanfall extends CardImpl<Cleanfall> {
+public class CarrionHowler extends CardImpl<CarrionHowler> {
 
-    private final static FilterPermanent filter = new FilterPermanent("enchantments");
+    public CarrionHowler(UUID ownerId) {
+        super(ownerId, 79, "Carrion Howler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
+        this.expansionSetCode = "RAV";
+        this.subtype.add("Zombie");
+        this.subtype.add("Wolf");
 
-    static {
-        filter.getCardType().add(CardType.ENCHANTMENT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        this.color.setBlack(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // Pay 1 life: Carrion Howler gets +2/-1 until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(2, -1, Constants.Duration.EndOfTurn), new PayLifeCost(1)));
     }
 
-    public Cleanfall(UUID ownerId) {
-        super(ownerId, 6, "Cleanfall", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");
-        this.expansionSetCode = "CHK";
-        this.subtype.add("Arcane");
-        this.color.setWhite(true);
-        this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
-    }
-
-    public Cleanfall(final Cleanfall card) {
+    public CarrionHowler(final CarrionHowler card) {
         super(card);
     }
 
     @Override
-    public Cleanfall copy() {
-        return new Cleanfall(this);
+    public CarrionHowler copy() {
+        return new CarrionHowler(this);
     }
-
 }

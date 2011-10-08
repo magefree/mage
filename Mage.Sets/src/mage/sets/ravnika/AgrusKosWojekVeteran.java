@@ -25,50 +25,59 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.ravnika;
 
-package mage.sets.championsofkamigawa;
-
+import java.awt.*;
 import java.util.UUID;
 
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DestroyAllEffect;
+import mage.MageInt;
+import mage.ObjectColor;
+import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.FilterPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.filter.common.FilterAttackingCreature;
 
 /**
+ *
  * @author Loki
  */
-public class Cleanfall extends CardImpl<Cleanfall> {
+public class AgrusKosWojekVeteran extends CardImpl<AgrusKosWojekVeteran> {
 
-    private final static FilterPermanent filter = new FilterPermanent("enchantments");
+    private final static FilterAttackingCreature filterRed = new FilterAttackingCreature("attacking red creatures");
+    private final static FilterAttackingCreature filterWhite = new FilterAttackingCreature("attacking white creatures");
 
     static {
-        filter.getCardType().add(CardType.ENCHANTMENT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filterRed.setUseColor(true);
+        filterRed.setColor(ObjectColor.RED);
+        filterWhite.setUseColor(true);
+        filterWhite.setColor(ObjectColor.WHITE);
+
     }
 
-    public Cleanfall(UUID ownerId) {
-        super(ownerId, 6, "Cleanfall", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");
-        this.expansionSetCode = "CHK";
-        this.subtype.add("Arcane");
+    public AgrusKosWojekVeteran(UUID ownerId) {
+        super(ownerId, 190, "Agrus Kos, Wojek Veteran", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{W}");
+        this.expansionSetCode = "RAV";
+        this.supertype.add("Legendary");
+        this.subtype.add("Human");
+        this.subtype.add("Soldier");
+        this.color.setRed(true);
         this.color.setWhite(true);
-        this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+        // Whenever Agrus Kos, Wojek Veteran attacks, attacking red creatures get +2/+0 and attacking white creatures get +0/+2 until end of turn.
+        this.addAbility(new AttacksTriggeredAbility(new BoostAllEffect(2, 0, Constants.Duration.EndOfTurn, filterRed, false), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostAllEffect(0, 2, Constants.Duration.EndOfTurn, filterWhite, false), false));
     }
 
-    public Cleanfall(final Cleanfall card) {
+    public AgrusKosWojekVeteran(final AgrusKosWojekVeteran card) {
         super(card);
     }
 
     @Override
-    public Cleanfall copy() {
-        return new Cleanfall(this);
+    public AgrusKosWojekVeteran copy() {
+        return new AgrusKosWojekVeteran(this);
     }
-
 }
