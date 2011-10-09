@@ -132,6 +132,25 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         return true;
     }
 
+    /**
+     * bookmarks the current state and restores it if player doesn't pay the mana cost
+     * 
+     * @param ability
+     * @param game
+     * @param sourceId
+     * @param controllerId
+     * @return true if the cost was paid
+     */
+    public boolean payOrRollback(Ability ability, Game game, UUID sourceId, UUID controllerId) {
+        int bookmark = game.bookmarkState();
+        if (pay(ability, game, sourceId, controllerId, false)) {
+            game.removeBookmark(bookmark);
+            return true;
+        }
+        game.restoreState(bookmark);
+        return false;
+    }
+    
     @Override
     public ManaCosts<T> getUnpaid() {
         ManaCosts<T> unpaid = new ManaCostsImpl<T>();

@@ -98,9 +98,7 @@ class WindbornMuseReplacementEffect extends ReplacementEffectImpl<WindbornMuseRe
 				if ( propagandaTax.canPay(source.getSourceId(), event.getPlayerId(), game) &&
 					 player.chooseUse(Constants.Outcome.Benefit, "Pay {2} to declare attacker?", game) )
 				{
-					propagandaTax.pay(source, game, this.getId(), event.getPlayerId(), false);
-
-					if ( propagandaTax.isPaid() ) {
+					if (propagandaTax.payOrRollback(source, game, this.getId(), event.getPlayerId())) {
 						return false;
 					}
 				}
