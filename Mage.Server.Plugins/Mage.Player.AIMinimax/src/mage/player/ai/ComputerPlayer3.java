@@ -52,6 +52,7 @@ import mage.game.turn.DrawStep;
 import mage.game.turn.EndOfCombatStep;
 import mage.game.turn.EndPhase;
 import mage.game.turn.EndStep;
+import mage.game.turn.FirstCombatDamageStep;
 import mage.game.turn.PostCombatMainPhase;
 import mage.game.turn.PostCombatMainStep;
 import mage.game.turn.Step;
@@ -129,6 +130,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
 					pass();
 				break;
 			case DECLARE_BLOCKERS:
+            case FIRST_COMBAT_DAMAGE:
 			case COMBAT_DAMAGE:
 			case END_COMBAT:
 				pass();
@@ -516,8 +518,8 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
 			logger.debug("interrupted");
 			return;
 		}
-		simulateStep(game, new CombatDamageStep(true));
-		simulateStep(game, new CombatDamageStep(false));
+		simulateStep(game, new FirstCombatDamageStep());
+		simulateStep(game, new CombatDamageStep());
 		simulateStep(game, new EndOfCombatStep());
 	}
 

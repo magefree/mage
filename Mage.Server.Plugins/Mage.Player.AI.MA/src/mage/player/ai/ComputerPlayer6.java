@@ -134,6 +134,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 				}
 				break;
 			case BEGIN_COMBAT:
+            case FIRST_COMBAT_DAMAGE:
 			case COMBAT_DAMAGE:
 			case END_COMBAT:
 				pass();
@@ -643,13 +644,13 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 					game.getPhase().setStep(new DeclareBlockersStep());
 					break;
 				case DECLARE_BLOCKERS:
-					game.getPhase().setStep(new CombatDamageStep(true));
+					game.getPhase().setStep(new FirstCombatDamageStep());
 					break;
+                case FIRST_COMBAT_DAMAGE:
+                    game.getPhase().setStep(new CombatDamageStep());
+                    break;
 				case COMBAT_DAMAGE:
-					if (((CombatDamageStep)currentPhase.getStep()).getFirst())
-						game.getPhase().setStep(new CombatDamageStep(false));
-					else
-						game.getPhase().setStep(new EndOfCombatStep());
+					game.getPhase().setStep(new EndOfCombatStep());
 					break;
 				case END_COMBAT:
 					game.getTurn().setPhase(new PostCombatMainPhase());

@@ -119,6 +119,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
 					pass();
 				break;
 			case DECLARE_BLOCKERS:
+            case FIRST_COMBAT_DAMAGE:
 			case COMBAT_DAMAGE:
 			case END_COMBAT:
 				pass();
@@ -502,8 +503,8 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
 			logger.debug("interrupted");
 			return;
 		}
-		simulateStep(game, new CombatDamageStep(true));
-		simulateStep(game, new CombatDamageStep(false));
+		simulateStep(game, new FirstCombatDamageStep());
+		simulateStep(game, new CombatDamageStep());
 		simulateStep(game, new EndOfCombatStep());
 	}
 

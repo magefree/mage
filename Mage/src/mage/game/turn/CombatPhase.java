@@ -45,8 +45,8 @@ public class CombatPhase extends Phase<CombatPhase> {
 		this.steps.add(new BeginCombatStep());
 		this.steps.add(new DeclareAttackersStep());
 		this.steps.add(new DeclareBlockersStep());
-		this.steps.add(new CombatDamageStep(true));
-		this.steps.add(new CombatDamageStep(false));
+		this.steps.add(new FirstCombatDamageStep());
+		this.steps.add(new CombatDamageStep());
 		this.steps.add(new EndOfCombatStep());
 	}
 

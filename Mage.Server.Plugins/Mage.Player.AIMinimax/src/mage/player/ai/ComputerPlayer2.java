@@ -73,6 +73,7 @@ import mage.game.turn.DrawStep;
 import mage.game.turn.EndOfCombatStep;
 import mage.game.turn.EndPhase;
 import mage.game.turn.EndStep;
+import mage.game.turn.FirstCombatDamageStep;
 import mage.game.turn.Phase;
 import mage.game.turn.PostCombatMainPhase;
 import mage.game.turn.PostCombatMainStep;
@@ -148,6 +149,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 			case BEGIN_COMBAT:
 			case DECLARE_ATTACKERS:
 			case DECLARE_BLOCKERS:
+            case FIRST_COMBAT_DAMAGE:
 			case COMBAT_DAMAGE:
 			case END_COMBAT:
 			case POSTCOMBAT_MAIN:
@@ -599,13 +601,13 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 					game.getPhase().setStep(new DeclareBlockersStep());
 					break;
 				case DECLARE_BLOCKERS:
-					game.getPhase().setStep(new CombatDamageStep(true));
+					game.getPhase().setStep(new FirstCombatDamageStep());
 					break;
+                case FIRST_COMBAT_DAMAGE:
+                    game.getPhase().setStep(new CombatDamageStep());
+                    break;
 				case COMBAT_DAMAGE:
-					if (((CombatDamageStep)currentPhase.getStep()).getFirst())
-						game.getPhase().setStep(new CombatDamageStep(false));
-					else
-						game.getPhase().setStep(new EndOfCombatStep());
+					game.getPhase().setStep(new EndOfCombatStep());
 					break;
 				case END_COMBAT:
 					game.getTurn().setPhase(new PostCombatMainPhase());
