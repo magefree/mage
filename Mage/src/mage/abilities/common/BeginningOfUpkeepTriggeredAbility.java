@@ -11,7 +11,11 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl<Begi
     private Constants.TargetController targetController;
 
     public BeginningOfUpkeepTriggeredAbility(Effect effect, Constants.TargetController targetController, boolean isOptional) {
-        super(Constants.Zone.BATTLEFIELD, effect, isOptional);
+        this(Constants.Zone.BATTLEFIELD, effect, targetController, isOptional);
+    }
+
+    public BeginningOfUpkeepTriggeredAbility(Constants.Zone zone, Effect effect, Constants.TargetController targetController, boolean isOptional) {
+        super(zone, effect, isOptional);
         this.targetController = targetController;
     }
 
@@ -53,11 +57,19 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl<Begi
     public String getRule() {
         switch (targetController) {
             case YOU:
-                return "At the beginning of your upkeep, " + getEffects().getText(modes.getMode());
+                return "At the beginning of your upkeep, " + generateZoneString() + getEffects().getText(modes.getMode());
             case OPPONENT:
-                return "At the beginning of each opponent's upkeep, " + getEffects().getText(modes.getMode());
+                return "At the beginning of each opponent's upkeep, " + generateZoneString() + getEffects().getText(modes.getMode());
             case ANY:
-                return "At the beginning of each player's upkeep, " + getEffects().getText(modes.getMode());
+                return "At the beginning of each player's upkeep, " + generateZoneString() + getEffects().getText(modes.getMode());
+        }
+        return "";
+    }
+
+    private String generateZoneString() {
+        switch (getZone()) {
+            case GRAVEYARD:
+                return "if {this} is in your graveyard, ";
         }
         return "";
     }
