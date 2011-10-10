@@ -88,7 +88,7 @@ class OrchardSpiritAbility extends EvasionAbility<OrchardSpiritAbility> {
 
     @Override
     public String getRule() {
-        return "{this} can't be blocked except by creatures with flying or reach";
+        return "{this} can't be blocked except by creatures with flying or reach.";
     }
 
     @Override

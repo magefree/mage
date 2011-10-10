@@ -159,7 +159,7 @@ public class Battlefield implements Serializable {
 	}
 
 	/**
-	 * Returns true if the battlefield contains at least 1 {@link Permanent}
+	 * Returns true if the battlefield contains num {@link Permanent}
 	 * that matches the filter and is controlled by controllerId.
 	 * This method ignores the range of influence.
 	 *
@@ -180,7 +180,7 @@ public class Battlefield implements Serializable {
 	}
 
 	/**
-	 * Returns true if the battlefield contains at least 1 {@link Permanent}
+	 * Returns true if the battlefield contains num {@link Permanent}
 	 * that is within the range of influence of the specified player id
 	 * and that matches the supplied filter.
 	 *
