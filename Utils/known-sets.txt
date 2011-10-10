@@ -18,6 +18,9 @@ Ravnica: City of Guilds|ravnika|
 Guildpact|guildpact|
 Dissension|dissension|
 Time Spiral|timespiral|
+Time Spiral "Timeshifted"|timeshifted|
+Planar Chaos|planarchaos|
+Future Sight|futuresight|
 Lorwyn|lorwyn|
 Morningtide|morningtide|
 Shadowmoor|shadowmoor|

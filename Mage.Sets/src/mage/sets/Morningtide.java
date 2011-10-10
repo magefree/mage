@@ -45,7 +45,7 @@ public class Morningtide extends ExpansionSet {
 
     private Morningtide() {
         super("Morningtide", "MOR", "", "mage.sets.morningtide", new GregorianCalendar(2008, 1, 1).getTime(), SetType.EXPANSION);
-        this.blockName = "Morningtide";
+        this.blockName = "Lorwyn";
         this.hasBoosters = true;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;

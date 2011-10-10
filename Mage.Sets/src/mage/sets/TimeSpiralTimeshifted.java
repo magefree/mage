@@ -35,22 +35,16 @@ import mage.cards.ExpansionSet;
  *
  * @author North
  */
-public class SaviorsOfKamigawa extends ExpansionSet {
+public class TimeSpiralTimeshifted extends ExpansionSet {
 
-    private static final SaviorsOfKamigawa fINSTANCE = new SaviorsOfKamigawa();
+    private static final TimeSpiralTimeshifted fINSTANCE = new TimeSpiralTimeshifted();
 
-    public static SaviorsOfKamigawa getInstance() {
+    public static TimeSpiralTimeshifted getInstance() {
         return fINSTANCE;
     }
 
-    private SaviorsOfKamigawa() {
-        super("Saviors of Kamigawa", "SOK", "", "mage.sets.saviorsofkamigawa", new GregorianCalendar(2005, 5, 3).getTime(), SetType.EXPANSION);
-        this.blockName = "Kamigawa";
-        this.hasBoosters = true;
-        this.numBoosterLands = 0;
-        this.numBoosterCommon = 11;
-        this.numBoosterUncommon = 3;
-        this.numBoosterRare = 1;
-        this.ratioBoosterMythic = 8;
+    private TimeSpiralTimeshifted() {
+        super("Time Spiral \"Timeshifted\"", "TSB", "", "mage.sets.timeshifted", new GregorianCalendar(2006, 9, 9).getTime(), SetType.EXPANSION);
+        this.blockName = "Time Spiral";
     }
 }

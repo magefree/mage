@@ -45,6 +45,7 @@ public class FifthDawn extends ExpansionSet {
 
     private FifthDawn() {
         super("Fifth Dawn", "5DN", "", "mage.sets.fifthdawn", new GregorianCalendar(2004, 5, 4).getTime(), SetType.EXPANSION);
+        this.blockName = "Mirrodin";
         this.hasBoosters = true;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;

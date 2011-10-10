@@ -45,6 +45,7 @@ public class BetrayersOfKamigawa extends ExpansionSet {
 
     private BetrayersOfKamigawa() {
         super("Betrayers of Kamigawa", "BOK", "", "mage.sets.betrayersofkamigawa", new GregorianCalendar(2005, 1, 4).getTime(), SetType.EXPANSION);
+        this.blockName = "Kamigawa";
         this.hasBoosters = true;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;

@@ -45,7 +45,7 @@ public class Planeshift extends ExpansionSet {
 
     private Planeshift() {
         super("Planeshift", "PLS", "", "mage.sets.planeshift", new GregorianCalendar(2001, 1, 5).getTime(), SetType.EXPANSION);
-        this.blockName = "Planeshift";
+        this.blockName = "Invasion";
         this.hasBoosters = true;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;

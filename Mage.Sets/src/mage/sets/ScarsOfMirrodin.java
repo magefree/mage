@@ -47,7 +47,7 @@ public class ScarsOfMirrodin extends ExpansionSet {
 
 	private ScarsOfMirrodin() {
 		super("Scars of Mirrodin", "SOM", "seticon_mtgsom", "mage.sets.scarsofmirrodin", new GregorianCalendar(2010, 10, 1).getTime(), SetType.EXPANSION);
-		this.blockName = "Scars of Mirrodin";
+		this.blockName = "Mirrodin Besieged";
 		this.hasBoosters = true;
 		this.numBoosterLands = 1;
 		this.numBoosterCommon = 10;

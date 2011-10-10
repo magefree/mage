@@ -35,22 +35,22 @@ import mage.cards.ExpansionSet;
  *
  * @author North
  */
-public class SaviorsOfKamigawa extends ExpansionSet {
+public class FutureSight extends ExpansionSet {
 
-    private static final SaviorsOfKamigawa fINSTANCE = new SaviorsOfKamigawa();
+    private static final FutureSight fINSTANCE = new FutureSight();
 
-    public static SaviorsOfKamigawa getInstance() {
+    public static FutureSight getInstance() {
         return fINSTANCE;
     }
 
-    private SaviorsOfKamigawa() {
-        super("Saviors of Kamigawa", "SOK", "", "mage.sets.saviorsofkamigawa", new GregorianCalendar(2005, 5, 3).getTime(), SetType.EXPANSION);
-        this.blockName = "Kamigawa";
+    private FutureSight() {
+        super("Future Sight", "FUT", "", "mage.sets.futuresight", new GregorianCalendar(2007, 4, 4).getTime(), SetType.EXPANSION);
+        this.blockName = "Time Spiral";
         this.hasBoosters = true;
-        this.numBoosterLands = 0;
-        this.numBoosterCommon = 11;
+        this.numBoosterLands = 1;
+        this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
-        this.ratioBoosterMythic = 8;
+        this.ratioBoosterMythic = 0;
     }
 }
