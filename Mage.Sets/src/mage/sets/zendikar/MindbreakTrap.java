@@ -160,7 +160,7 @@ class MindbreakEffect extends OneShotEffect<MindbreakEffect>{
     @Override
     public boolean apply(Game game, Ability source) {
         TargetSpell target = new TargetSpell(new FilterSpell("spell to exile"));
-        while(game.getPlayer(source.getControllerId()).choose(Outcome.Exile, target, game)){
+        while(game.getPlayer(source.getControllerId()).choose(Outcome.Exile, target, source.getSourceId(), game)){
             game.getStack().getSpell(target.getFirstTarget()).moveToExile(null, null, source.getId(), game);
             target.clearChosen();
         }
