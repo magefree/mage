@@ -33,7 +33,6 @@ import mage.game.events.GameEvent;
 import mage.game.stack.SpellStack;
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import mage.Constants.Zone;
