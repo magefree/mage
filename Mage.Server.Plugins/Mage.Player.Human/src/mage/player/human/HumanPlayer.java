@@ -252,32 +252,32 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 		game.getState().setPriorityPlayerId(getId());
 		while (!abort) {
             Set<UUID> possibleTargets = target.possibleTargets(source==null?null:source.getId(), playerId, game);
-			game.fireSelectTargetEvent(playerId, target.getMessage(), possibleTargets, target.isRequired(), getOptions(target));
+            boolean required = possibleTargets.size() == 0 ? false : target.isRequired();
+			game.fireSelectTargetEvent(playerId, target.getMessage(), possibleTargets, required, getOptions(target));
 			waitForResponse();
-			if (response.getUUID() != null && possibleTargets.contains(response.getUUID())) {
-				if (target instanceof TargetPermanent) {
-					if (((TargetPermanent)target).canTarget(playerId, response.getUUID(), source, game)) {
-						target.addTarget(response.getUUID(), source, game);
-						if(target.doneChosing()){
-							return true;
-						}
-					}
-				} else if (target.canTarget(response.getUUID(), source, game)) {
-					target.addTarget(response.getUUID(), source, game);
-					if(target.doneChosing()){
-						return true;
-					}
-				}
+			if (response.getUUID() != null) {
+                if (possibleTargets.contains(response.getUUID())) {
+                    if (target instanceof TargetPermanent) {
+                        if (((TargetPermanent)target).canTarget(playerId, response.getUUID(), source, game)) {
+                            target.addTarget(response.getUUID(), source, game);
+                            if(target.doneChosing()){
+                                return true;
+                            }
+                        }
+                    } else if (target.canTarget(response.getUUID(), source, game)) {
+                        target.addTarget(response.getUUID(), source, game);
+                        if(target.doneChosing()){
+                            return true;
+                        }
+                    }
+                } // else do nothing - allow to pick another target
 			} else {
 				if (target.getTargets().size() >= target.getNumberOfTargets()) {
 					return true;
 				}
-				if (!target.isRequired()) {
+				if (!required) {
 					return false;
 				}
-                if (possibleTargets.size() == 0) {
-                    return false;
-                }
 			}
 		}
 		return false;
