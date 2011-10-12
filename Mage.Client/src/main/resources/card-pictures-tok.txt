@@ -1,3 +1,16 @@
+|Generate|TOK:ISD|Angel|
+|Generate|TOK:ISD|Spirit|
+|Generate|TOK:ISD|Homunculus|
+|Generate|TOK:ISD|Demon|
+|Generate|TOK:ISD|Vampire|
+|Generate|TOK:ISD|Wolf 1|
+|Generate|TOK:ISD|Zombie 1|
+|Generate|TOK:ISD|Zombie 2|
+|Generate|TOK:ISD|Zombie 3|
+|Generate|TOK:ISD|Ooze|
+|Generate|TOK:ISD|Spider|
+|Generate|TOK:ISD|Wolf 2|
+
 |Generate|TOK:DDH|Griffin|
 |Generate|TOK:DDH|Saproling|
 
