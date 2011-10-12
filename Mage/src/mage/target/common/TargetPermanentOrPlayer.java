@@ -173,7 +173,7 @@ public class TargetPermanentOrPlayer extends TargetImpl<TargetPermanentOrPlayer>
 			}
 		}
 		for (Permanent permanent: game.getBattlefield().getActivePermanents(filterPermanent, sourceControllerId, game)) {
-			if (filter.match(permanent, null, sourceControllerId, game)) {
+			if (filter.match(permanent, null, sourceControllerId, game) && filter.match(permanent)) {
 				count++;
 				if (count >= this.minNumberOfTargets)
 					return true;
