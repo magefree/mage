@@ -215,7 +215,8 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 	public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game, Map<String, Serializable> options) {
 		game.getState().setPriorityPlayerId(getId());
 		while (!abort) {
-			game.fireSelectTargetEvent(playerId, target.getMessage(), target.possibleTargets(null, playerId, game), target.isRequired(), options);
+            Set<UUID> cards = target.possibleTargets(null, playerId, game);
+			game.fireSelectTargetEvent(playerId, target.getMessage(), cards, target.isRequired(), options);
 			waitForResponse();
 			if (response.getUUID() != null) {
 				if (target instanceof TargetPermanent) {
@@ -238,6 +239,9 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 				if (!target.isRequired()) {
 					return false;
 				}
+                if (cards == null || cards.isEmpty()) {
+                    return false;
+                }
 			}
 		}
 		return false;
@@ -271,6 +275,9 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 				if (!target.isRequired()) {
 					return false;
 				}
+                if (possibleTargets.size() == 0) {
+                    return false;
+                }
 			}
 		}
 		return false;
@@ -286,7 +293,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 		while (!abort) {
 			boolean required = target.isRequired();
 			// if there is no cards to select from, then add possibility to cancel choosing action
-			if (cards == null) {
+            if (cards == null) {
 				required = false;
 			} else {
 				int count = cards.count(target.getFilter(), game);
@@ -305,7 +312,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 				if (target.getTargets().size() >= target.getNumberOfTargets()) {
 					return true;
 				}
-				if (!target.isRequired()) {
+				if (!required) {
 					return false;
 				}
 			}
@@ -317,6 +324,14 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 	public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
 		game.getState().setPriorityPlayerId(getId());
 		while (!abort) {
+            boolean required = target.isRequired();
+			// if there is no cards to select from, then add possibility to cancel choosing action
+            if (cards == null) {
+				required = false;
+			} else {
+				int count = cards.count(target.getFilter(), game);
+				if (count == 0) required = false;
+			}
 			game.fireSelectTargetEvent(playerId, target.getMessage(), cards, target.isRequired(), null);
 			waitForResponse();
 			if (response.getUUID() != null) {
@@ -330,7 +345,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 				if (target.getTargets().size() >= target.getNumberOfTargets()) {
 					return true;
 				}
-				if (!target.isRequired()) {
+				if (!required) {
 					return false;
 				}
 			}
