@@ -98,7 +98,7 @@ class LudevicsTestSubjectEffect extends OneShotEffect<LudevicsTestSubjectEffect>
         if (p != null) {
             if (p.getCounters().getCount(CounterType.HATCHLING) >= 5) {
                 p.getCounters().removeCounter(CounterType.HATCHLING, p.getCounters().getCount(CounterType.HATCHLING));
-                TransformSourceEffect effect = new TransformSourceEffect();
+                TransformSourceEffect effect = new TransformSourceEffect(true);
                 return effect.apply(game, source);
             }
         }

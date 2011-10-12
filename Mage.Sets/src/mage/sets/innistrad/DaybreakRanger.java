@@ -80,7 +80,7 @@ public class DaybreakRanger extends CardImpl<DaybreakRanger> {
         this.addAbility(activatedAbility);
         // At the beginning of each upkeep, if no spells were cast last turn, transform Daybreak Ranger.
         this.addAbility(new TransformAbility());
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(), TargetController.ANY, false);
+        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(true), TargetController.ANY, false);
         this.addAbility(new ConditionalTriggeredAbility(ability, NoSpellsWereCastLastTurnCondition.getInstance(), TransformAbility.NO_SPELLS_TRANSFORM_RULE));
     }
 

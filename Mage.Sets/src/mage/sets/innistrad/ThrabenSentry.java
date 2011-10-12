@@ -85,7 +85,7 @@ public class ThrabenSentry extends CardImpl<ThrabenSentry> {
 class ThrabenSentryTriggeredAbility extends TriggeredAbilityImpl<ThrabenSentryTriggeredAbility> {
 
     public ThrabenSentryTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new TransformSourceEffect(), true);
+        super(Constants.Zone.BATTLEFIELD, new TransformSourceEffect(true), true);
     }
 
     public ThrabenSentryTriggeredAbility(ThrabenSentryTriggeredAbility ability) {

@@ -81,7 +81,7 @@ public class DelverOfSecrets extends CardImpl<DelverOfSecrets> {
 class DelverOfSecretsAbility extends TriggeredAbilityImpl<DelverOfSecretsAbility> {
 
     public DelverOfSecretsAbility() {
-        super(Constants.Zone.BATTLEFIELD, new TransformSourceEffect(), false);
+        super(Constants.Zone.BATTLEFIELD, new TransformSourceEffect(true), false);
     }
 
     public DelverOfSecretsAbility(DelverOfSecretsAbility ability) {

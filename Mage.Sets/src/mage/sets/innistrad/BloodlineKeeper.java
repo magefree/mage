@@ -71,7 +71,7 @@ public class BloodlineKeeper extends CardImpl<BloodlineKeeper> {
         this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CreateTokenEffect(new VampireToken()), new TapSourceCost()));
         // {B}: Transform Bloodline Keeper. Activate this ability only if you control five or more Vampires.
         this.addAbility(new TransformAbility());
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new TransformSourceEffect(), new ColoredManaCost(Constants.ColoredManaSymbol.B));
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new TransformSourceEffect(true), new ColoredManaCost(Constants.ColoredManaSymbol.B));
         ability.addCost(new ControlFiveVampiresCost());
         this.addAbility(ability);
     }

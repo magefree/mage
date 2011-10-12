@@ -93,7 +93,7 @@ public class GarrukRelentless extends CardImpl<GarrukRelentless> {
 class GarrukRelentlessTriggeredAbility extends TriggeredAbilityImpl<GarrukRelentlessTriggeredAbility> {
 
     public GarrukRelentlessTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new TransformSourceEffect(), false);
+        super(Constants.Zone.BATTLEFIELD, new TransformSourceEffect(true), false);
     }
 
     public GarrukRelentlessTriggeredAbility(GarrukRelentlessTriggeredAbility ability) {

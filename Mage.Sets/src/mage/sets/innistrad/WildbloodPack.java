@@ -69,7 +69,7 @@ public class WildbloodPack extends CardImpl<WildbloodPack> {
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(3, 0, Constants.Duration.WhileOnBattlefield, FilterAttackingCreature.getDefault(), false)));
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Wildblood Pack.
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(), Constants.TargetController.ANY, false);
+        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), Constants.TargetController.ANY, false);
         this.addAbility(new ConditionalTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.getInstance(), TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
 
     }

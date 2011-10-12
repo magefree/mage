@@ -41,20 +41,26 @@ import mage.game.permanent.Permanent;
 public class TransformSourceEffect extends OneShotEffect<TransformSourceEffect> {
 
     private boolean withoutTrigger;
+    private boolean fromDayToNight;
 
-    public TransformSourceEffect() {
-        this(false);
+    /**
+     * @param fromDayToNight Defines whether we transform from "day" side to "night" or vice versa.
+     */
+    public TransformSourceEffect(boolean fromDayToNight) {
+        this(fromDayToNight, false);
     }
 
-	public TransformSourceEffect(boolean withoutTrigger) {
+	private TransformSourceEffect(boolean fromDayToNight, boolean withoutTrigger) {
 		super(Outcome.Transform);
         this.withoutTrigger = withoutTrigger;
+        this.fromDayToNight = fromDayToNight;
 		staticText = "transform {this}";
 	}
 
 	public TransformSourceEffect(final TransformSourceEffect effect) {
 		super(effect);
         this.withoutTrigger = effect.withoutTrigger;
+        this.fromDayToNight = effect.fromDayToNight;
 	}
 
 	@Override
@@ -66,12 +72,15 @@ public class TransformSourceEffect extends OneShotEffect<TransformSourceEffect> 
 	public boolean apply(Game game, Ability source) {
 		Permanent permanent = game.getPermanent(source.getSourceId());
 		if (permanent != null) {
-            if (withoutTrigger) {
-                if (permanent.canTransform()) {
-                    permanent.setTransformed(!permanent.isTransformed());
+            if (permanent.canTransform()) {
+                // check not to transform twice the same side
+                if (permanent.isTransformed() != fromDayToNight) {
+                    if (withoutTrigger) {
+                        permanent.setTransformed(fromDayToNight);
+                    } else {
+                        permanent.transform(game);
+                    }
                 }
-            } else {
-			    permanent.transform(game);
             }
 			return true;
 		}

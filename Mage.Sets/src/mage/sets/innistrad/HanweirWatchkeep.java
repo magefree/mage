@@ -64,7 +64,7 @@ public class HanweirWatchkeep extends CardImpl<HanweirWatchkeep> {
         this.addAbility(DefenderAbility.getInstance());
         // At the beginning of each upkeep, if no spells were cast last turn, transform Hanweir Watchkeep.
         this.addAbility(new TransformAbility());
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(), Constants.TargetController.ANY, false);
+        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(true), Constants.TargetController.ANY, false);
         this.addAbility(new ConditionalTriggeredAbility(ability, NoSpellsWereCastLastTurnCondition.getInstance(), TransformAbility.NO_SPELLS_TRANSFORM_RULE));
     }
 
