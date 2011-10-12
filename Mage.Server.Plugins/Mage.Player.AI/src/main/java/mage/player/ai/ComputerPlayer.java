@@ -228,6 +228,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 			}
 			if (!target.isRequired())
 				return false;
+            return false;
 		}
 		if (target instanceof TargetDiscard || target instanceof TargetCardInHand) {
 			if (outcome.isGood()) {
@@ -258,6 +259,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 			}
 			if (!target.isRequired())
 				return false;
+            return false;
 		}
 		if (target instanceof TargetControlledPermanent) {
 			List<Permanent> targets;
@@ -272,6 +274,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 			}
 			if (!target.isRequired())
 				return false;
+            return false;
 		}
 		if (target instanceof TargetPermanent) {
 			List<Permanent> targets;
@@ -289,6 +292,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 			}
 			if (!target.isRequired())
 				return false;
+            return false;
 		}
 		if (target instanceof TargetCreatureOrPlayer) {
 			List<Permanent> targets;
@@ -322,6 +326,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 			}
 			if (!target.isRequired())
 				return false;
+            return false;
 		}
 		if (target instanceof TargetCardInGraveyard) {
 			List<Card> cards = new ArrayList<Card>();
@@ -345,6 +350,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 			}
 			if (!target.isRequired())
 				return false;
+            return false;
 		}
 		if (target instanceof TargetCardInYourGraveyard) {
 			List<Card> cards = new ArrayList<Card>(game.getPlayer(playerId).getGraveyard().getCards(game));
@@ -355,6 +361,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 			}
 			if (!target.isRequired())
 				return false;
+            return false;
 		}
 		throw new IllegalStateException("Target wasn't handled. class:" + target.getClass().toString());
 	}
