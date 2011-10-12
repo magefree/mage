@@ -28,15 +28,16 @@
 
 package mage.target;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -76,14 +77,18 @@ public class TargetSpell extends TargetObject<TargetSpell> {
 		return filter;
 	}
 
-	@Override
-	public boolean canTarget(UUID id, Ability source, Game game) {
-		Spell spell = game.getStack().getSpell(id);
-		if (spell != null) {
-			return filter.match(spell);
-		}
-		return false;
-	}
+    @Override
+    public boolean canTarget(UUID id, Ability source, Game game) {
+        // rule 114.4. A spell or ability on the stack is an illegal target for itself.
+        if (source != null && source.getId().equals(id)) {
+            return false;
+        }
+        Spell spell = game.getStack().getSpell(id);
+        if (spell != null) {
+            return filter.match(spell);
+        }
+        return false;
+    }
 
 	@Override
 	public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
