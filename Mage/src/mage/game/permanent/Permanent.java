@@ -93,6 +93,7 @@ public interface Permanent extends Card {
 	public void reset(Game game);
 	public boolean destroy(UUID sourceId, Game game, boolean noRegen);
 	public boolean sacrifice(UUID sourceId, Game game);
+    public boolean regenerate(UUID sourceId, Game game);
 	public void entersBattlefield(UUID sourceId, Game game);
 	public String getValue();
 

@@ -56,10 +56,7 @@ public class RegenerateTargetEffect  extends ReplacementEffectImpl<RegenerateTar
 	public boolean apply(Game game, Ability source) {
 		//20110204 - 701.11
 		Permanent permanent = game.getPermanent(targetPointer.getFirst(source));
-		if (permanent != null) {
-			permanent.tap(game);
-			permanent.removeFromCombat(game);
-			permanent.removeAllDamage(game);
+		if (permanent != null && permanent.regenerate(this.getId(), game)) {
 			this.used = true;
 			return true;
 		}

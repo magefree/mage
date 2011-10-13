@@ -29,10 +29,18 @@ package mage.sets.tenth;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.abilities.Ability;
+import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetCreatureOrPlayer;
+import mage.watchers.common.DamagedByWatcher;
 
 /**
  *
@@ -46,8 +54,10 @@ public class Incinerate extends CardImpl<Incinerate> {
 
         this.color.setRed(true);
 
-        this.getSpellAbility().addEffect(new DamageTargetEffect(3, false));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+		this.getSpellAbility().addEffect(new IncinerateEffect());
+        this.addWatcher(new DamagedByWatcher());
     }
 
     public Incinerate(final Incinerate card) {
@@ -58,4 +68,42 @@ public class Incinerate extends CardImpl<Incinerate> {
     public Incinerate copy() {
         return new Incinerate(this);
     }
+}
+
+class IncinerateEffect extends ReplacementEffectImpl<IncinerateEffect> {
+
+	public IncinerateEffect() {
+		super(Duration.EndOfTurn, Outcome.Detriment);
+		staticText = "A creature dealt damage this way can't be regenerated this turn";
+	}
+
+	public IncinerateEffect(final IncinerateEffect effect) {
+		super(effect);
+	}
+
+	@Override
+	public IncinerateEffect copy() {
+		return new IncinerateEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		return true;
+	}
+
+	@Override
+	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        return true;
+	}
+
+	@Override
+	public boolean applies(GameEvent event, Ability source, Game game) {
+		if (event.getType() == EventType.REGENERATE) {
+            DamagedByWatcher watcher = (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", source.getSourceId());
+            if (watcher != null)
+                return watcher.damagedCreatures.contains(event.getTargetId());
+		}
+		return false;
+	}
+
 }
