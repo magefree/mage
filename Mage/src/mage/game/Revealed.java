@@ -47,8 +47,8 @@ public class Revealed extends HashMap<String, Cards> implements Serializable, Co
 	public Revealed() {	}
 
 	public Revealed(final Revealed revealed) {
-		for (String key: revealed.keySet()) {
-			this.put(key, revealed.get(key).copy());
+        for (Map.Entry<String, Cards> entry: revealed.entrySet()) {
+            this.put(entry.getKey(), entry.getValue().copy());
 		}
 	}
 

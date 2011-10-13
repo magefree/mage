@@ -33,6 +33,7 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.WatcherScope;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
@@ -43,7 +44,6 @@ import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.watchers.Watcher;
 import mage.watchers.WatcherImpl;
 
 /**
@@ -59,8 +59,8 @@ public class FloatingDreamZubera extends CardImpl<FloatingDreamZubera> {
         this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
-        this.addAbility(new DiesTriggeredAbility(new DrawCardControllerEffect(new FloatingDreamZuberaDynamicValue())));
-        this.addWatcher(new FloatingDreamZuberaWatcher());
+        this.addAbility(new DiesTriggeredAbility(new DrawCardControllerEffect(new ZuberasDiedDynamicValue())));
+        this.addWatcher(new ZuberasDiedWatcher());
     }
 
     public FloatingDreamZubera(final FloatingDreamZubera card) {
@@ -75,32 +75,30 @@ public class FloatingDreamZubera extends CardImpl<FloatingDreamZubera> {
 }
 
 
-class FloatingDreamZuberaWatcher extends WatcherImpl<FloatingDreamZuberaWatcher> {
+class ZuberasDiedWatcher extends WatcherImpl<ZuberasDiedWatcher> {
 
     public int zuberasDiedThisTurn = 0;
 
-    public FloatingDreamZuberaWatcher() {
-        super("ZuberasDiedFloatingDreamZubera");
+    public ZuberasDiedWatcher() {
+        super("ZuberasDied", WatcherScope.GAME);
     }
 
-    public FloatingDreamZuberaWatcher(final FloatingDreamZuberaWatcher watcher) {
+    public ZuberasDiedWatcher(final ZuberasDiedWatcher watcher) {
         super(watcher);
+        this.zuberasDiedThisTurn = watcher.zuberasDiedThisTurn;
     }
 
     @Override
-    public FloatingDreamZuberaWatcher copy() {
-        return new FloatingDreamZuberaWatcher(this);
+    public ZuberasDiedWatcher copy() {
+        return new ZuberasDiedWatcher(this);
     }
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
-            if (((ZoneChangeEvent) event).getFromZone() == Constants.Zone.BATTLEFIELD &&
-                    ((ZoneChangeEvent) event).getToZone() == Constants.Zone.GRAVEYARD) {
-                Card card = game.getLastKnownInformation(event.getTargetId(), Constants.Zone.BATTLEFIELD);
-                if (card != null && card.hasSubtype("Zubera")) {
-                    zuberasDiedThisTurn++;
-                }
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).isDiesEvent()) {
+            Card card = game.getLastKnownInformation(event.getTargetId(), Constants.Zone.BATTLEFIELD);
+            if (card != null && card.hasSubtype("Zubera")) {
+                zuberasDiedThisTurn++;
             }
         }
     }
@@ -113,17 +111,17 @@ class FloatingDreamZuberaWatcher extends WatcherImpl<FloatingDreamZuberaWatcher>
 
 }
 
-class FloatingDreamZuberaDynamicValue implements DynamicValue {
+class ZuberasDiedDynamicValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility) {
-        Watcher watcher = game.getState().getWatchers().get(sourceAbility.getControllerId(), "ZuberasDiedFloatingDreamZubera");
-        return ((FloatingDreamZuberaWatcher) watcher).zuberasDiedThisTurn;
+        ZuberasDiedWatcher watcher = (ZuberasDiedWatcher) game.getState().getWatchers().get("ZuberasDied");
+        return watcher.zuberasDiedThisTurn;
     }
 
     @Override
-    public DynamicValue clone() {
-        return new FloatingDreamZuberaDynamicValue();
+    public ZuberasDiedDynamicValue clone() {
+        return new ZuberasDiedDynamicValue();
     }
 
     @Override
@@ -133,6 +131,6 @@ class FloatingDreamZuberaDynamicValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "for each Zubera put into a graveyard from play this turn";
+        return "for each Zubera that died this turn";
     }
 }

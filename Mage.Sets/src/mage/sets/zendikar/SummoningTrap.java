@@ -34,6 +34,7 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.WatcherScope;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostImpl;
@@ -93,7 +94,7 @@ public class SummoningTrap extends CardImpl<SummoningTrap> {
 class SummoningTrapWatcher extends WatcherImpl<SummoningTrapWatcher> {
 
     public SummoningTrapWatcher() {
-        super("CreatureSpellCountered");
+        super("CreatureSpellCountered", WatcherScope.PLAYER);
     }
 
     public SummoningTrapWatcher(final SummoningTrapWatcher watcher) {
@@ -107,11 +108,7 @@ class SummoningTrapWatcher extends WatcherImpl<SummoningTrapWatcher> {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == EventType.END_TURN_STEP_POST) {
-            condition = false;
-        }
-        if (condition == true) // no need to check - condition has already occured
-        {
+        if (condition == true) {// no need to check - condition has already occured
             return;
         }
         if (event.getType() == EventType.COUNTERED
@@ -140,7 +137,7 @@ class SummoningTrapAlternativeCost extends AlternativeCostImpl<SummoningTrapAlte
 
     @Override
     public boolean isAvailable(Game game, Ability source) {
-        Watcher watcher = game.getState().getWatchers().get(source.getControllerId(), "CreatureSpellCountered");
+        Watcher watcher = game.getState().getWatchers().get("CreatureSpellCountered", source.getControllerId());
         if (watcher != null && watcher.conditionMet()) {
             return true;
         }

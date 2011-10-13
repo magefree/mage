@@ -60,6 +60,7 @@ import mage.watchers.Watcher;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
+import java.util.Map.Entry;
 import mage.abilities.common.ChancellorAbility;
 
 import mage.abilities.mana.TriggeredManaAbility;
@@ -159,7 +160,8 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 			gameCards.put(card.getId(), card);
 			state.setZone(card.getId(), Zone.OUTSIDE);
 			for (Watcher watcher: card.getWatchers()) {
-				watcher.setControllerId(ownerId);
+                watcher.setControllerId(ownerId);
+                watcher.setSourceId(card.getId());
 				state.getWatchers().add(watcher);
 			}
 		}

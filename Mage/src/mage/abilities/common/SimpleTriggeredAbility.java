@@ -41,22 +41,34 @@ import mage.game.events.GameEvent.EventType;
  */
 public class SimpleTriggeredAbility extends TriggeredAbilityImpl<SimpleTriggeredAbility> {
 
-	EventType eventType;
+	private EventType eventType;
+    private boolean onlyController;
+    private String prefix;
 
-	public SimpleTriggeredAbility(Zone zone, EventType eventType, Effect effect) {
-		super(zone, effect);
-		this.eventType = eventType;
+	public SimpleTriggeredAbility(Zone zone, EventType eventType, Effect effect, String prefix) {
+		this(zone, eventType, effect, prefix, false);
 	}
+
+    public SimpleTriggeredAbility(Zone zone, EventType eventType, Effect effect, String prefix, boolean onlyController) {
+        super(zone, effect);
+		this.eventType = eventType;
+        this.onlyController = onlyController;
+        this.prefix = prefix;
+    }
 
 	public SimpleTriggeredAbility(SimpleTriggeredAbility ability) {
 		super(ability);
 		this.eventType = ability.eventType;
+        this.onlyController = ability.onlyController;
+        this.prefix = ability.prefix;
 	}
 
 	@Override
 	public boolean checkTrigger(GameEvent event, Game game) {
 		if (event.getType() == eventType) {
-			return true;
+            if (!onlyController || event.getPlayerId().equals(this.controllerId)) {
+               return true;
+            }
 		}
 		return false;
 	}
@@ -65,4 +77,9 @@ public class SimpleTriggeredAbility extends TriggeredAbilityImpl<SimpleTriggered
 	public SimpleTriggeredAbility copy() {
 		return new SimpleTriggeredAbility(this);
 	}
+
+    @Override
+    public String getRule() {
+        return prefix + super.getRule();
+    }
 }

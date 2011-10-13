@@ -84,7 +84,7 @@ class BrimstoneVolleyEffect extends OneShotEffect<BrimstoneVolleyEffect> {
 	@Override
 	public boolean apply(Game game, Ability source) {
 		int damage = 3;
-		Watcher watcher = game.getState().getWatchers().get(source.getControllerId(), "Morbid");
+		Watcher watcher = game.getState().getWatchers().get("Morbid");
 		if (watcher.conditionMet()) {
 		  	damage = 5;
 		}

@@ -47,6 +47,7 @@ import mage.game.permanent.Permanent;
 import mage.watchers.WatcherImpl;
 
 import java.util.*;
+import mage.Constants.WatcherScope;
 
 /**
  * @author nantuko
@@ -98,32 +99,34 @@ class SteelHellkiteDestroyEffect extends OneShotEffect {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		SteelHellkiteWatcher watcher = (SteelHellkiteWatcher) game.getState().getWatchers().get(source.getControllerId(), "SteelHellkiteWatcher");
-		if (watcher != null && watcher.damagedPlayers.containsKey(source.getSourceId())) {
-			Set<UUID> players = watcher.damagedPlayers.get(source.getSourceId());
-			int xValue = source.getManaCostsToPay().getX();
-			for (UUID uuid : players) {
-				for (Permanent permanent: game.getBattlefield().getAllActivePermanents()) {
-					if (permanent.getControllerId().equals(uuid) && permanent.getManaCost().convertedManaCost() == xValue) {
-						permanent.destroy(source.getId(), game, false);
-					}
-				}
-			}
-		}
-		return true;
+        SteelHellkiteWatcher watcher = (SteelHellkiteWatcher) game.getState().getWatchers().get("SteelHellkiteWatcher", source.getSourceId());
+        if (watcher != null) {
+            int xValue = source.getManaCostsToPay().getX();
+            for (UUID uuid : watcher.damagedPlayers) {
+                for (Permanent permanent: game.getBattlefield().getAllActivePermanents()) {
+                    if (permanent.getControllerId().equals(uuid) && permanent.getManaCost().convertedManaCost() == xValue) {
+                        permanent.destroy(source.getId(), game, false);
+                    }
+                }
+            }
+        }
+        return true;
 	}
 }
 
 class SteelHellkiteWatcher extends WatcherImpl<SteelHellkiteWatcher> {
 
-	public Map<UUID, Set<UUID>> damagedPlayers = new HashMap<UUID, Set<UUID>>();
+	public List<UUID> damagedPlayers = new ArrayList<UUID>();
 
 	public SteelHellkiteWatcher() {
-		super("SteelHellkiteWatcher");
+		super("SteelHellkiteWatcher", WatcherScope.CARD);
 	}
 
 	public SteelHellkiteWatcher(final SteelHellkiteWatcher watcher) {
 		super(watcher);
+        for (UUID playerId: watcher.damagedPlayers) {
+            damagedPlayers.add(playerId);
+        }
 	}
 
 	@Override
@@ -138,14 +141,9 @@ class SteelHellkiteWatcher extends WatcherImpl<SteelHellkiteWatcher> {
 			UUID sourceId = damageEvent.getSourceId();
 			Permanent permanent = game.getPermanent(sourceId);
 			if (sourceId != null && permanent != null && permanent.getName().equals("Steel Hellkite")) {
-				Set<UUID> players = damagedPlayers.get(sourceId);
-				if (players != null) {
-					players.add(damageEvent.getPlayerId());
-				} else {
-					players = new HashSet<UUID>();
-					players.add(damageEvent.getPlayerId());
-					damagedPlayers.put(sourceId, players);
-				}
+                if (!damagedPlayers.contains(event.getTargetId())) {
+                    damagedPlayers.add(event.getTargetId());
+                }
 			}
         }
 	}

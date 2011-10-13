@@ -1,5 +1,7 @@
 package mage.watchers.common;
 
+import java.util.UUID;
+import mage.Constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
@@ -10,8 +12,9 @@ import mage.watchers.WatcherImpl;
  * @author Loki
  */
 public class BloodthirstWatcher extends WatcherImpl<BloodthirstWatcher> {
-    public BloodthirstWatcher() {
-        super("DamagedOpponents");
+    public BloodthirstWatcher(UUID controllerId) {
+        super("DamagedOpponents", WatcherScope.PLAYER);
+        this.controllerId = controllerId;
     }
 
     public BloodthirstWatcher(final BloodthirstWatcher watcher) {

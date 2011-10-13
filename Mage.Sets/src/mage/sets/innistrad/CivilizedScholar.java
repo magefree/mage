@@ -67,7 +67,7 @@ public class CivilizedScholar extends CardImpl<CivilizedScholar> {
         this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CivilizedScholarEffect(), new TapSourceCost()));
         this.addAbility(new TransformAbility());
 
-        this.addWatcher(new HomicidalBrute.HomicidalBruteWatcher());
+//        this.addWatcher(new HomicidalBrute.HomicidalBruteWatcher());
     }
 
     public CivilizedScholar(final CivilizedScholar card) {

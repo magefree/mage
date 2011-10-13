@@ -29,10 +29,12 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.WatcherScope;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.effects.OneShotEffect;
@@ -91,9 +93,9 @@ class MoltenPsycheEffect extends OneShotEffect<MoltenPsycheEffect> {
 				player.getHand().clear();
 				player.drawCards(count, game);
 				if (MetalcraftCondition.getInstance().apply(game, source) && !playerId.equals(source.getControllerId())) {
-					MoltenPsycheWatcher watcher = (MoltenPsycheWatcher) game.getState().getWatchers().get(source.getControllerId(), "CardsDrawnMoltenPsyche");
-					player.damage(watcher.getDraws(playerId), source.getId(), game, false, true);
-				}
+                    MoltenPsycheWatcher watcher = (MoltenPsycheWatcher) game.getState().getWatchers().get("CardsDrawn");
+                    player.damage(watcher.getDraws(playerId), source.getId(), game, false, true);
+                }
 			}
 		}
 		return true;
@@ -111,11 +113,14 @@ class MoltenPsycheWatcher extends WatcherImpl<MoltenPsycheWatcher> {
 	private Map<UUID, Integer> draws = new HashMap<UUID, Integer>();
 	
 	public MoltenPsycheWatcher() {
-        super("CardsDrawnMoltenPsyche");
+        super("CardsDrawn", WatcherScope.GAME);
 	}
 	
 	public MoltenPsycheWatcher(final MoltenPsycheWatcher watcher) {
 		super(watcher);
+        for (Entry<UUID, Integer> entry: watcher.draws.entrySet()) {
+            draws.put(entry.getKey(), entry.getValue());
+        }
 	}
 	
 	@Override

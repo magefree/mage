@@ -43,10 +43,13 @@ import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
+import mage.filter.Filter;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -98,34 +101,25 @@ public class GrimgrinCorpseBorn extends CardImpl<GrimgrinCorpseBorn> {
 
 class GrimgrinCorpseBornAbility extends TriggeredAbilityImpl<GrimgrinCorpseBornAbility> {
 
-    private FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
-
     public GrimgrinCorpseBornAbility() {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect());
         this.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
-        this.addTarget(new TargetCreaturePermanent(filter));
     }
 
     public GrimgrinCorpseBornAbility(final GrimgrinCorpseBornAbility ability) {
         super(ability);
-        this.filter = ability.filter;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean activate(Game game, boolean noMana) {
-        UUID defenderId = game.getCombat().getDefendingPlayer(sourceId);
-        if (defenderId != null) {
-            filter.getControllerId().clear();
+            FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
+            UUID defenderId = game.getCombat().getDefendingPlayer(sourceId);
             filter.getControllerId().add(defenderId);
-            return super.activate(game, noMana);
+            TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
+            target.setRequired(true);
+            this.addTarget(target);
+            return true;
         }
         return false;
     }

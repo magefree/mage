@@ -32,13 +32,11 @@ import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.DamageXTargetEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ShuffleSpellEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -46,8 +44,7 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreatureOrPlayer;
-import mage.watchers.Watcher;
-import mage.watchers.WatcherImpl;
+import mage.watchers.common.DamagedByWatcher;
 
 /**
  *
@@ -60,10 +57,10 @@ public class RedSunsZenith extends CardImpl<RedSunsZenith> {
 		this.expansionSetCode = "MBS";
 		this.color.setRed(true);
 		this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
-		this.getSpellAbility().addEffect(new DamageXTargetEffect());
+		this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
 		this.getSpellAbility().addEffect(new RedSunsZenithEffect());
 		this.getSpellAbility().addEffect(ShuffleSpellEffect.getInstance());
-        this.addWatcher(new RedSunsZenithWatcher());
+        this.addWatcher(new DamagedByWatcher());
 	}
 
 	public RedSunsZenith(final RedSunsZenith card) {
@@ -109,42 +106,12 @@ class RedSunsZenithEffect extends ReplacementEffectImpl<RedSunsZenithEffect> {
 
 	@Override
 	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (event.getType() == EventType.ZONE_CHANGE && 
-                ((ZoneChangeEvent)event).getToZone() == Zone.GRAVEYARD &&
-                ((ZoneChangeEvent)event).getFromZone() == Zone.BATTLEFIELD) {
-   			Watcher watcher = game.getState().getWatchers().get(source.getControllerId(), "RedSunsZenithDamagedCreature");
-			if (watcher != null)
-				return watcher.conditionMet();
+		if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
+            DamagedByWatcher watcher = (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", source.getSourceId());
+            if (watcher != null)
+                return watcher.damagedCreatures.contains(event.getTargetId());
 		}
 		return false;
-	}
-
-}
-
-class RedSunsZenithWatcher extends WatcherImpl<RedSunsZenithWatcher> {
-
-	public RedSunsZenithWatcher() {
-		super("RedSunsZenithDamagedCreature");
-	}
-
-	public RedSunsZenithWatcher(final RedSunsZenithWatcher watcher) {
-		super(watcher);
-	}
-
-	@Override
-	public RedSunsZenithWatcher copy() {
-		return new RedSunsZenithWatcher(this);
-	}
-
-	@Override
-	public void watch(GameEvent event, Game game) {
-        if (condition == true) //no need to check - condition has already occured
-            return;
-		if (event.getType() == EventType.DAMAGED_CREATURE) {
-            Card card = game.getCard(sourceId);
-            if (card != null && card.getSpellAbility().getId().equals(event.getSourceId()))
-                condition = true;
-        }
 	}
 
 }

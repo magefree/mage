@@ -28,6 +28,7 @@
 
 package mage.watchers.common;
 
+import mage.Constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.watchers.WatcherImpl;
@@ -42,7 +43,7 @@ public class CastSpellLastTurnWatcher extends WatcherImpl<CastSpellLastTurnWatch
     private int amountOfSpellsCastOnCurrentTurn;
 
     public CastSpellLastTurnWatcher() {
-        super("CastSpellLastTurnWatcher");
+        super("CastSpellLastTurnWatcher", WatcherScope.GAME);
     }
 
     public CastSpellLastTurnWatcher(final CastSpellLastTurnWatcher watcher) {

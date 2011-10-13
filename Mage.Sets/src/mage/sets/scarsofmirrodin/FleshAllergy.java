@@ -33,6 +33,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.WatcherScope;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -83,7 +84,7 @@ class FleshAllergyWatcher extends WatcherImpl<FleshAllergyWatcher> {
 	public int creaturesDiedThisTurn = 0;
 
 	public FleshAllergyWatcher() {
-		super("CreaturesDiedFleshAllergy");
+		super("CreaturesDied", WatcherScope.GAME);
 	}
 
 	public FleshAllergyWatcher(final FleshAllergyWatcher watcher) {
@@ -97,14 +98,11 @@ class FleshAllergyWatcher extends WatcherImpl<FleshAllergyWatcher> {
 
 	@Override
 	public void watch(GameEvent event, Game game) {
-		if (event.getType() == EventType.ZONE_CHANGE) {
-			if (((ZoneChangeEvent)event).getFromZone() == Zone.BATTLEFIELD &&
-					 ((ZoneChangeEvent)event).getToZone() == Zone.GRAVEYARD) {
-				Card card = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-				if (card != null && card.getCardType().contains(CardType.CREATURE)) {
-					creaturesDiedThisTurn++;
-				}
-			}
+		if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
+            Card card = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
+            if (card != null && card.getCardType().contains(CardType.CREATURE)) {
+                creaturesDiedThisTurn++;
+            }
 		}
 	}
 
@@ -120,7 +118,7 @@ class FleshAllergyEffect extends OneShotEffect<FleshAllergyEffect> {
 
 	public FleshAllergyEffect() {
 		super(Outcome.DestroyPermanent);
-		staticText = "Destroy target creature. Its controller loses life equal to the number of creatures that died this turn";
+		staticText = "Its controller loses life equal to the number of creatures that died this turn";
 	}
 
 	public FleshAllergyEffect(final FleshAllergyEffect effect) {
@@ -134,18 +132,18 @@ class FleshAllergyEffect extends OneShotEffect<FleshAllergyEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Watcher watcher = game.getState().getWatchers().get(source.getControllerId(), "CreaturesDiedFleshAllergy");
-		Card card = game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
-		if (card != null && watcher != null) {
-			Player player = game.getPlayer(((Permanent)card).getControllerId());
-			if (player != null) {
-				int amount = ((FleshAllergyWatcher)watcher).creaturesDiedThisTurn;
-				if (amount > 0) {
-					player.loseLife(amount, game);
-					return true;
-				}
-			}
-		}
+        FleshAllergyWatcher watcher = (FleshAllergyWatcher) game.getState().getWatchers().get("CreaturesDied");
+        Card card = game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
+        if (card != null && watcher != null) {
+            Player player = game.getPlayer(((Permanent)card).getControllerId());
+            if (player != null) {
+                int amount = watcher.creaturesDiedThisTurn;
+                if (amount > 0) {
+                    player.loseLife(amount, game);
+                    return true;
+                }
+            }
+        }
 		return false;
 	}
 

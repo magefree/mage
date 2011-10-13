@@ -28,13 +28,15 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-import java.util.logging.Logger;
 import mage.Constants.CardType;
+import mage.Constants.ColoredManaSymbol;
 import mage.Constants.Rarity;
+import mage.Constants.WatcherScope;
 import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostImpl;
-import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -77,7 +79,7 @@ public class CobraTrap extends CardImpl<CobraTrap> {
 class CobraTrapWatcher extends WatcherImpl<CobraTrapWatcher> {
 
     public CobraTrapWatcher() {
-        super("noncreature permanent destroyed");
+        super("noncreature permanent destroyed", WatcherScope.PLAYER);
     }
 
     public CobraTrapWatcher(final CobraTrapWatcher watcher) {
@@ -91,11 +93,7 @@ class CobraTrapWatcher extends WatcherImpl<CobraTrapWatcher> {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == EventType.END_TURN_STEP_POST) {
-            condition = false;
-        }
-        if (condition == true) // no need to check - condition has already occured
-        {
+        if (condition == true) { // no need to check - condition has already occured
             return;
         }
         if (event.getType() == EventType.DESTROYED_PERMANENT
@@ -110,8 +108,8 @@ class CobraTrapWatcher extends WatcherImpl<CobraTrapWatcher> {
 class CobraTrapAlternativeCost extends AlternativeCostImpl<CobraTrapAlternativeCost> {
 
     public CobraTrapAlternativeCost() {
-        super("you may pay {0} rather than pay Cobra Trap's mana cost");
-        this.add(new GenericManaCost(0));
+        super("you may pay {G} rather than pay Cobra Trap's mana cost");
+        this.add(new ColoredManaCost(ColoredManaSymbol.G));
     }
 
     public CobraTrapAlternativeCost(final CobraTrapAlternativeCost cost) {
@@ -125,7 +123,7 @@ class CobraTrapAlternativeCost extends AlternativeCostImpl<CobraTrapAlternativeC
 
     @Override
     public boolean isAvailable(Game game, Ability source) {
-        Watcher watcher = game.getState().getWatchers().get(source.getControllerId(), "noncreature permanent destroyed");
+        Watcher watcher = game.getState().getWatchers().get("noncreature permanent destroyed", source.getControllerId());
         if (watcher != null && watcher.conditionMet()) {
             return true;
         }
@@ -134,6 +132,6 @@ class CobraTrapAlternativeCost extends AlternativeCostImpl<CobraTrapAlternativeC
 
     @Override
     public String getText() {
-        return "If a creature spell you cast this turn was countered by a spell or ability an opponent controlled, you may pay {0} rather than pay Cobra Trap's mana cost.";
+        return "If a noncreature permanent under your control was destroyed this turn by a spell or ability an opponent controlled, you may pay {G} rather than pay Cobra Trap's mana cost.";
     }
 }

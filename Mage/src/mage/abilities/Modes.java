@@ -28,6 +28,7 @@
 package mage.abilities;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import mage.game.Game;
 import mage.players.Player;
@@ -48,8 +49,8 @@ public class Modes extends HashMap<UUID, Mode> {
 	
 	public Modes(Modes modes) {
 		this.modeId = modes.modeId;
-		for (Mode mode: modes.values()) {
-			this.put(mode.getId(), mode.copy());
+        for (Map.Entry<UUID, Mode> entry: modes.entrySet()) {
+            this.put(entry.getKey(), entry.getValue().copy());
 		}
 	}
 	

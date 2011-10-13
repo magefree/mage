@@ -28,7 +28,8 @@
 
 package mage.watchers;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -37,46 +38,59 @@ import mage.game.events.GameEvent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Watchers extends ArrayList<Watcher> {
-
-	public Watchers copy() {
-		Watchers newCopy = new Watchers();
-		for (Watcher watcher: this) {
-			newCopy.add(watcher.copy());
+public class Watchers extends HashMap<String, Watcher> {
+    
+    public Watchers() {}
+    
+    public Watchers(final Watchers watchers) {
+		for (Map.Entry<String, Watcher> entry: watchers.entrySet()) {
+			this.put(entry.getKey(), entry.getValue().copy());
 		}
-		return newCopy;
+    }
+    
+	public Watchers copy() {
+		return new Watchers(this);
 	}
-
+    
+    public void add(Watcher watcher) {
+        if (!this.containsKey(watcher.getKey()))
+            this.put(watcher.getKey(), watcher);
+    }
+    
 	public void watch(GameEvent event, Game game) {
-		for (Watcher watcher: this) {
+		for (Watcher watcher: this.values()) {
 			watcher.watch(event, game);
 		}
 	}
 
 	public void reset() {
-		for (Watcher watcher: this) {
+		for (Watcher watcher: this.values()) {
 			watcher.reset();
 		}
 	}
 
-    public void setSourceId(UUID sourceId) {
-		for (Watcher watcher: this) {
-			watcher.setSourceId(sourceId);
-		}
+//    public void setSourceId(UUID sourceId) {
+//		for (Watcher watcher: this.values()) {
+//			watcher.setSourceId(sourceId);
+//		}
+//    }
+//    
+//    public void setControllerId(UUID controllerId) {
+//		for (Watcher watcher: this.values()) {
+//			watcher.setControllerId(controllerId);
+//		}
+//    }
+    
+    public Watcher get(String key, UUID id) {
+        return this.get(id + key);
     }
     
-    public void setControllerId(UUID controllerId) {
-		for (Watcher watcher: this) {
-			watcher.setControllerId(controllerId);
-		}
-    }
-    
-	public Watcher get(UUID controllerId, String key) {
-		for (Watcher watcher: this) {
-			if ((watcher.getControllerId() == null || watcher.getControllerId().equals(controllerId)) && watcher.getKey().equals(key))
-				return watcher;
-		}
-		return null;
-	}
+//	public Watcher get(UUID controllerId, UUID sourceId, String key) {
+//		for (Watcher watcher: this) {
+//			if ((watcher.getControllerId() == null || watcher.getControllerId().equals(controllerId)) && watcher.getKey().equals(key) && watcher.getSourceId().equals(sourceId))
+//				return watcher;
+//		}
+//		return null;
+//	}
 
 }

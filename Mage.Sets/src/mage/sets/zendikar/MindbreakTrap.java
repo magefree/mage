@@ -27,11 +27,14 @@
  */
 package mage.sets.zendikar;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.UUID;
-import java.util.logging.Logger;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.WatcherScope;
 import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostImpl;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -41,6 +44,7 @@ import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.stack.Spell;
 import mage.target.TargetSpell;
 import mage.watchers.Watcher;
 import mage.watchers.WatcherImpl;
@@ -51,6 +55,8 @@ import mage.watchers.WatcherImpl;
  */
 public class MindbreakTrap extends CardImpl<MindbreakTrap> {
 
+    private static final FilterSpell filter = new FilterSpell("spell to exile");
+    
     public MindbreakTrap(UUID ownerId) {
         super(ownerId, 57, "Mindbreak Trap", Rarity.MYTHIC, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
         this.expansionSetCode = "ZEN";
@@ -63,6 +69,7 @@ public class MindbreakTrap extends CardImpl<MindbreakTrap> {
                 new MindbreakTrapAlternativeCost());
         this.addWatcher(new MindbreakTrapWatcher());
         // Exile any number of target spells.
+        this.getSpellAbility().addTarget(new TargetSpell(0, Integer.MAX_VALUE, filter));
         this.getSpellAbility().addEffect(new MindbreakEffect());
     }
 
@@ -78,16 +85,17 @@ public class MindbreakTrap extends CardImpl<MindbreakTrap> {
 
 class MindbreakTrapWatcher extends WatcherImpl<MindbreakTrapWatcher> {
 
-    protected int spellCast;
+    private Map<UUID, Integer> counts = new HashMap<UUID, Integer>();
 
     public MindbreakTrapWatcher() {
-        super("opponent cast three or more spells");
-        spellCast = 0;
+        super("opponent cast three or more spells", WatcherScope.PLAYER);
     }
 
     public MindbreakTrapWatcher(final MindbreakTrapWatcher watcher) {
         super(watcher);
-        this.spellCast = watcher.spellCast;
+        for (Entry<UUID, Integer> entry: watcher.counts.entrySet()) {
+            counts.put(entry.getKey(), entry.getValue());
+        }
     }
 
     @Override
@@ -97,24 +105,27 @@ class MindbreakTrapWatcher extends WatcherImpl<MindbreakTrapWatcher> {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == EventType.END_TURN_STEP_POST) {
-            condition = false;
-            spellCast = 0;
+        if (condition == true) { // no need to check - condition has already occured
             return;
         }
-        if (condition == true) // no need to check - condition has already occured
-        {
-            return;
-        }
-        Logger.getAnonymousLogger().info(((Integer) spellCast).toString());
         if (event.getType() == EventType.SPELL_CAST
                 && game.getOpponents(controllerId).contains(event.getPlayerId())) {
-            spellCast++;
-            if (spellCast >= 3) {
-                condition = true;
+            int count = 1;
+            if (counts.containsKey(event.getPlayerId())) {
+                count += counts.get(event.getPlayerId());
+                if (count >= 3)
+                    condition = true;
             }
+            counts.put(event.getPlayerId(), count);
         }
     }
+
+    @Override
+    public void reset() {
+        super.reset();
+        counts.clear();
+    }
+
 }
 
 class MindbreakTrapAlternativeCost extends AlternativeCostImpl<MindbreakTrapAlternativeCost> {
@@ -135,7 +146,7 @@ class MindbreakTrapAlternativeCost extends AlternativeCostImpl<MindbreakTrapAlte
 
     @Override
     public boolean isAvailable(Game game, Ability source) {
-        Watcher watcher = game.getState().getWatchers().get(source.getControllerId(), "opponent cast three or more spells");
+        Watcher watcher = game.getState().getWatchers().get("opponent cast three or more spells", source.getControllerId());
         if (watcher != null && watcher.conditionMet()) {
             return true;
         }
@@ -144,9 +155,10 @@ class MindbreakTrapAlternativeCost extends AlternativeCostImpl<MindbreakTrapAlte
 
     @Override
     public String getText() {
-        return "If a creature spell you cast this turn was countered by a spell or ability an opponent controlled, you may pay {0} rather than pay Mindbreak Trap's mana cost.";
+        return "If an opponent cast three or more spells this turn, you may pay {0} rather than pay Mindbreak Trap's mana cost.";
     }
 }
+
 class MindbreakEffect extends OneShotEffect<MindbreakEffect>{
 
     MindbreakEffect(MindbreakEffect effect) {
@@ -159,12 +171,17 @@ class MindbreakEffect extends OneShotEffect<MindbreakEffect>{
 
     @Override
     public boolean apply(Game game, Ability source) {
-        TargetSpell target = new TargetSpell(new FilterSpell("spell to exile"));
-        while(game.getPlayer(source.getControllerId()).choose(Outcome.Exile, target, source.getSourceId(), game)){
-            game.getStack().getSpell(target.getFirstTarget()).moveToExile(null, null, source.getId(), game);
-            target.clearChosen();
-        }
-        return true;
+        int affectedTargets = 0;
+		if (targetPointer.getTargets(source).size() > 0) {
+			for (UUID spellId : targetPointer.getTargets(source)) {
+				Spell spell = game.getStack().getSpell(spellId);
+				if (spell != null) {
+					spell.moveToExile(null, null, source.getId(), game);
+					affectedTargets++;
+				}
+			}
+		}
+		return affectedTargets > 0;
     }
 
     @Override

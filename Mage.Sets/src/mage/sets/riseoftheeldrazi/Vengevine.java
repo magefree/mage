@@ -31,6 +31,7 @@ package mage.sets.riseoftheeldrazi;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.WatcherScope;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
@@ -92,10 +93,10 @@ class VengevineAbility extends TriggeredAbilityImpl<VengevineAbility> {
 	@Override
 	public boolean checkTrigger(GameEvent event, Game game) {
 		if (event.getType() == EventType.SPELL_CAST && event.getPlayerId().equals(controllerId)) {
-			Watcher watcher = game.getState().getWatchers().get(controllerId, "CreatureCast");
-			if (watcher != null && watcher.conditionMet()) {
-				return true;
-			}
+            Watcher watcher = game.getState().getWatchers().get("CreatureCast", controllerId);
+            if (watcher != null && watcher.conditionMet()) {
+                return true;
+            }
 		}
 		return false;
 	}
@@ -113,11 +114,12 @@ class VengevineWatcher extends WatcherImpl<VengevineWatcher> {
 	int creatureSpellCount = 0;
 
 	public VengevineWatcher() {
-		super("CreatureCast");
+		super("CreatureCast", WatcherScope.PLAYER);
 	}
 
 	public VengevineWatcher(final VengevineWatcher watcher) {
 		super(watcher);
+        this.creatureSpellCount = watcher.creatureSpellCount;
 	}
 
 	@Override

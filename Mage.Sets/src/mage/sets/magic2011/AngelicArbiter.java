@@ -33,12 +33,14 @@ import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.WatcherScope;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -81,7 +83,7 @@ public class AngelicArbiter extends CardImpl<AngelicArbiter> {
 class AngelicArbiterWatcher1 extends WatcherImpl<AngelicArbiterWatcher1> {
 
 	public AngelicArbiterWatcher1() {
-		super("CastSpell");
+		super("OpponentCastSpell", WatcherScope.PLAYER);
 	}
 
 	public AngelicArbiterWatcher1(final AngelicArbiterWatcher1 watcher) {
@@ -106,7 +108,7 @@ class AngelicArbiterWatcher1 extends WatcherImpl<AngelicArbiterWatcher1> {
 class AngelicArbiterWatcher2 extends WatcherImpl<AngelicArbiterWatcher2> {
 
 	public AngelicArbiterWatcher2() {
-		super("Attacked");
+		super("OpponentAttacked", WatcherScope.PLAYER);
 	}
 
 	public AngelicArbiterWatcher2(final AngelicArbiterWatcher2 watcher) {
@@ -155,9 +157,9 @@ class AngelicArbiterEffect1 extends ReplacementEffectImpl<AngelicArbiterEffect1>
 	@Override
 	public boolean applies(GameEvent event, Ability source, Game game) {
 		if (event.getType() == EventType.DECLARE_ATTACKER && game.getActivePlayerId().equals(event.getPlayerId()) && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
-			Watcher watcher = game.getState().getWatchers().get(source.getControllerId(), "CastSpell");
-			if (watcher != null && watcher.conditionMet())
-				return true;
+            Watcher watcher = game.getState().getWatchers().get("OpponentCastSpell", source.getControllerId());
+            if (watcher != null && watcher.conditionMet())
+                return true;
 		}
 		return false;
 	}
@@ -193,9 +195,9 @@ class AngelicArbiterEffect2 extends ReplacementEffectImpl<AngelicArbiterEffect2>
 	@Override
 	public boolean applies(GameEvent event, Ability source, Game game) {
 		if (event.getType() == EventType.CAST_SPELL && game.getActivePlayerId().equals(event.getPlayerId()) && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
-			Watcher watcher = game.getState().getWatchers().get(source.getControllerId(), "Attacked");
-			if (watcher != null && watcher.conditionMet())
-				return true;
+            Watcher watcher = game.getState().getWatchers().get("OpponentAttacked", source.getControllerId());
+            if (watcher != null && watcher.conditionMet())
+                return true;
 		}
 		return false;
 	}

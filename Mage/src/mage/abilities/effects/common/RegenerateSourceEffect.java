@@ -56,10 +56,7 @@ public class RegenerateSourceEffect extends ReplacementEffectImpl<RegenerateSour
 	public boolean apply(Game game, Ability source) {
 		//20110204 - 701.11
 		Permanent permanent = game.getPermanent(source.getSourceId());
-		if (permanent != null) {
-			permanent.tap(game);
-			permanent.removeFromCombat(game);
-			permanent.removeAllDamage(game);
+		if (permanent != null && permanent.regenerate(this.getId(), game)) {
 			this.used = true;
 			return true;
 		}

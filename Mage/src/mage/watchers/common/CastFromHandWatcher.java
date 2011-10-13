@@ -1,6 +1,7 @@
 package mage.watchers.common;
 
 import mage.Constants;
+import mage.Constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -8,7 +9,7 @@ import mage.watchers.WatcherImpl;
 
 public class CastFromHandWatcher extends WatcherImpl<CastFromHandWatcher> {
     public CastFromHandWatcher() {
-        super("CastFromHand");
+        super("CastFromHand", WatcherScope.CARD);
     }
 
     public CastFromHandWatcher(final CastFromHandWatcher watcher) {

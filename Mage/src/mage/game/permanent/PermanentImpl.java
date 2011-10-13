@@ -697,7 +697,19 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 		return false;
 	}
 
-
+ 	@Override
+	public boolean regenerate(UUID sourceId, Game game) {
+        //20110930 - 701.12
+		if (!game.replaceEvent(GameEvent.getEvent(EventType.REGENERATE, objectId, sourceId, controllerId))) {
+			this.tap(game);
+			this.removeFromCombat(game);
+			this.removeAllDamage(game);
+            game.fireEvent(GameEvent.getEvent(EventType.REGENERATED, objectId, sourceId, controllerId));
+            return true;
+		}
+		return false;
+    }
+    
 	@Override
 	public void addPower(int power) {
 		this.power.boostValue(power);

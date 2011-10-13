@@ -31,7 +31,10 @@ package mage.sets.zendikar;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.mana.KickerManaCost;
+import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
@@ -47,12 +50,10 @@ public class BurstLightning extends CardImpl<BurstLightning> {
 		super(ownerId, 119, "Burst Lightning", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
 		this.expansionSetCode = "ZEN";
 		this.color.setRed(true);
-		this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
-		this.getSpellAbility().addEffect(new DamageTargetEffect(2));
-		KickerAbility ability = new KickerAbility(new DamageTargetEffect(4), true);
-		ability.addTarget(this.getSpellAbility().getTargets().get(0));
-		ability.addManaCost(new GenericManaCost(4));
-		this.addAbility(ability);
+        this.getSpellAbility().addOptionalCost(new KickerManaCost("{4}"));
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DamageTargetEffect(4),
+                new DamageTargetEffect(2), KickedCondition.getInstance(), "{this} deals 2 damage to target creature or player. If {this} was kicked, it deals 4 damage to that creature or player instead"));
 	}
 
 	public BurstLightning(final BurstLightning card) {

@@ -35,8 +35,6 @@ import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.Mode;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
@@ -45,7 +43,6 @@ import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.TargetPlayer;
 
 /**
@@ -75,7 +72,7 @@ public class JaceMemoryAdept extends CardImpl<JaceMemoryAdept> {
 
 		// -7: Any number of target players each draw twenty cards.
 		LoyaltyAbility ability3 = new LoyaltyAbility(new JaceMemoryAdeptEffect(20), -7);
-		ability3.addTarget(new TargetPlayer(0)); //any number
+		ability3.addTarget(new TargetPlayer(0, Integer.MAX_VALUE, false)); //any number
 		this.addAbility(ability3);
 	}
 

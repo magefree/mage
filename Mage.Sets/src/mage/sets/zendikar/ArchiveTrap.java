@@ -43,6 +43,7 @@ import mage.watchers.Watcher;
 import mage.watchers.WatcherImpl;
 
 import java.util.UUID;
+import mage.Constants.WatcherScope;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -73,7 +74,7 @@ public class ArchiveTrap extends CardImpl<ArchiveTrap> {
 class ArchiveTrapWatcher extends WatcherImpl<ArchiveTrapWatcher> {
 
     public ArchiveTrapWatcher() {
-        super("LibrarySearched");
+        super("LibrarySearched", WatcherScope.PLAYER);
     }
 
     public ArchiveTrapWatcher(final ArchiveTrapWatcher watcher) {
@@ -113,7 +114,7 @@ class ArchiveTrapAlternativeCost extends AlternativeCostImpl<ArchiveTrapAlternat
 
     @Override
     public boolean isAvailable(Game game, Ability source) {
-        Watcher watcher = game.getState().getWatchers().get(source.getControllerId(), "LibrarySearched");
+        Watcher watcher = game.getState().getWatchers().get("LibrarySearched", source.getControllerId());
         if (watcher != null && watcher.conditionMet())
             return true;
         return false;

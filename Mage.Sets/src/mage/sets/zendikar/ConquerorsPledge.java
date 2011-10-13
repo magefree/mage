@@ -54,7 +54,7 @@ public class ConquerorsPledge extends CardImpl<ConquerorsPledge> {
         this.getSpellAbility().addOptionalCost(new KickerManaCost("{6}"));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new CreateTokenEffect(new KorSoldierToken(), 12),
                 new CreateTokenEffect(new KorSoldierToken(), 6), KickedCondition.getInstance(),
-                "Put six 1/1 white Kor Soldier creature tokens onto the battlefield. If Conqueror's Pledge was kicked, put twelve of those tokens onto the battlefield instead"));
+                "Put six 1/1 white Kor Soldier creature tokens onto the battlefield. If {this} was kicked, put twelve of those tokens onto the battlefield instead"));
 	}
 
 	public ConquerorsPledge(final ConquerorsPledge card) {

@@ -29,6 +29,7 @@
 package mage.watchers;
 
 import java.util.UUID;
+import mage.Constants.WatcherScope;
 
 /**
  *
@@ -42,9 +43,11 @@ public abstract class WatcherImpl<T extends WatcherImpl<T>> implements Watcher<T
     protected UUID sourceId;
 	protected String key;
 	protected boolean condition;
+    protected WatcherScope scope;
 
-	public WatcherImpl(String key) {
+    public WatcherImpl(String key, WatcherScope scope) {
 		this.key = key;
+        this.scope = scope;
 	}
 
 	public WatcherImpl(final WatcherImpl watcher) {
@@ -52,6 +55,7 @@ public abstract class WatcherImpl<T extends WatcherImpl<T>> implements Watcher<T
 		this.key = watcher.key;
 		this.controllerId = watcher.controllerId;
         this.sourceId = watcher.sourceId;
+        this.scope = watcher.scope;
 	}
 
 	@Override
@@ -76,6 +80,14 @@ public abstract class WatcherImpl<T extends WatcherImpl<T>> implements Watcher<T
     
 	@Override
 	public String getKey() {
+        switch (scope) {
+            case GAME:
+                return key;
+            case PLAYER:
+                return controllerId + key;
+            case CARD:
+                return sourceId + key;
+        }
 		return key;
 	}
 

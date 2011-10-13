@@ -34,6 +34,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.WatcherScope;
 import mage.Constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -70,7 +71,7 @@ public class SearingBlaze extends CardImpl<SearingBlaze> {
 		this.getSpellAbility().addTarget(new TargetPlayer());
 		this.getSpellAbility().addTarget(new SearingBlazeTarget());
 		this.getSpellAbility().addEffect(new SearingBlazeEffect());
-		this.addWatcher(new SearingBlazeWatcher());
+		this.addWatcher(new LandfallWatcher());
 	}
 
 	public SearingBlaze(final SearingBlaze card) {
@@ -84,19 +85,19 @@ public class SearingBlaze extends CardImpl<SearingBlaze> {
 
 }
 
-class SearingBlazeWatcher extends WatcherImpl<SearingBlazeWatcher> {
+class LandfallWatcher extends WatcherImpl<LandfallWatcher> {
 
-	public SearingBlazeWatcher() {
-		super("LandPlayed");
+	public LandfallWatcher() {
+		super("LandPlayed", WatcherScope.PLAYER);
 	}
 
-	public SearingBlazeWatcher(final SearingBlazeWatcher watcher) {
+	public LandfallWatcher(final LandfallWatcher watcher) {
 		super(watcher);
 	}
 
 	@Override
-	public SearingBlazeWatcher copy() {
-		return new SearingBlazeWatcher(this);
+	public LandfallWatcher copy() {
+		return new LandfallWatcher(this);
 	}
 
 	@Override
@@ -131,26 +132,26 @@ class SearingBlazeEffect extends OneShotEffect<SearingBlazeEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Watcher watcher = game.getState().getWatchers().get(source.getControllerId(), "LandPlayed");
-		Player player = game.getPlayer(source.getTargets().get(0).getFirstTarget());
-		Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-		if (watcher != null && watcher.conditionMet()) {
-			if (player != null) {
-				player.damage(3, source.getSourceId(), game, false, true);
-			}
-			if (creature != null) {
-				creature.damage(3, source.getSourceId(), game, true, false);
-			}
-		}
-		else {
-			if (player != null) {
-				player.damage(1, source.getSourceId(), game, false, true);
-			}
-			if (creature != null) {
-				creature.damage(1, source.getSourceId(), game, true, false);
-			}
-		}
-		return true;
+        Watcher watcher = game.getState().getWatchers().get("LandPlayed", source.getControllerId());
+        Player player = game.getPlayer(source.getTargets().get(0).getFirstTarget());
+        Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
+        if (watcher != null && watcher.conditionMet()) {
+            if (player != null) {
+                player.damage(3, source.getSourceId(), game, false, true);
+            }
+            if (creature != null) {
+                creature.damage(3, source.getSourceId(), game, true, false);
+            }
+        }
+        else {
+            if (player != null) {
+                player.damage(1, source.getSourceId(), game, false, true);
+            }
+            if (creature != null) {
+                creature.damage(1, source.getSourceId(), game, true, false);
+            }
+        }
+        return true;
 	}
 
 }

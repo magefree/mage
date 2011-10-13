@@ -92,8 +92,10 @@ class HalimarDepthsEffect extends OneShotEffect<HalimarDepthsEffect> {
 		int count = Math.min(player.getLibrary().size(), 3);
 		for (int i = 0; i < count; i++) {
 			Card card = player.getLibrary().removeFromTop(game);
-			cards.add(card);
-			game.setZone(card.getId(), Zone.PICK);
+            if (card != null) {
+			    cards.add(card);
+			    game.setZone(card.getId(), Zone.PICK);
+            }
 		}
 		if (cards.size() > 1) {
 			TargetCard target2 = new TargetCard(Zone.PICK, filter2);
@@ -101,14 +103,18 @@ class HalimarDepthsEffect extends OneShotEffect<HalimarDepthsEffect> {
 			while (cards.size() > 1) {
 				player.choose(Outcome.Detriment, cards, target2, game);
 				Card card = cards.get(target2.getFirstTarget(), game);
-				cards.remove(card);
-				card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
-				target2.clearChosen();
-			}
+                if (card != null) {
+				    cards.remove(card);
+				    card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+			    }
+                target2.clearChosen();
+            }
 		}
 		if (cards.size() == 1) {
 			Card card = cards.get(cards.iterator().next(), game);
-			card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+            if (card != null) {
+			    card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+            }
 		}
 		return true;
 	}

@@ -45,7 +45,7 @@ public class MorbidCondition implements Condition {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Watcher watcher = game.getState().getWatchers().get(source.getControllerId(), "Morbid");
+		Watcher watcher = game.getState().getWatchers().get("Morbid");
 		return watcher.conditionMet();
 	}
 }

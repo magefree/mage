@@ -35,6 +35,7 @@ import mage.util.Copyable;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -46,8 +47,8 @@ public class LookedAt extends HashMap<String, Cards> implements Serializable, Co
 	public LookedAt() {	}
 
 	public LookedAt(final LookedAt lookedAt) {
-		for (String key: lookedAt.keySet()) {
-			this.put(key, lookedAt.get(key).copy());
+        for (Map.Entry<String, Cards> entry: lookedAt.entrySet()) {
+            this.put(entry.getKey(), entry.getValue().copy());
 		}
 	}
 

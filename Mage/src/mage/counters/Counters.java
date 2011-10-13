@@ -32,6 +32,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -42,9 +43,9 @@ public class Counters extends HashMap<String, Counter> implements Serializable {
 	public Counters() {}
 	
 	public Counters(final Counters counters) {
-		for (String key: counters.keySet()) {
-			this.put(key, counters.get(key).copy());
-		}
+        for (Map.Entry<String, Counter> entry: counters.entrySet()) {
+            this.put(entry.getKey(), entry.getValue().copy());
+        }
 	}
 
 	public Counters copy() {

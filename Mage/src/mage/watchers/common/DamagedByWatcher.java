@@ -1,5 +1,5 @@
 /*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
  * 
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
@@ -25,55 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.watchers.common;
 
-package mage.abilities.effects.common;
-
-import mage.Constants.Outcome;
-import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.effects.OneShotEffect;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import mage.Constants.WatcherScope;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
+import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
+import mage.watchers.WatcherImpl;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DamageXTargetEffect extends OneShotEffect<DamageXTargetEffect> {
+public class DamagedByWatcher extends WatcherImpl<DamagedByWatcher> {
 
-	public DamageXTargetEffect() {
-		super(Outcome.Damage);
+    public List<UUID> damagedCreatures = new ArrayList<UUID>();
+    
+    public DamagedByWatcher() {
+		super("DamagedByWatcher", WatcherScope.CARD);
 	}
 
-	public DamageXTargetEffect(final DamageXTargetEffect effect) {
-		super(effect);
-	}
-
-	@Override
-	public DamageXTargetEffect copy() {
-		return new DamageXTargetEffect(this);
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-        int amount = source.getManaCostsToPay().getX();
-		Permanent permanent = game.getPermanent(source.getFirstTarget());
-		if (permanent != null) {
-			permanent.damage(amount, source.getId(), game, true, false);
-			return true;
-		}
-		Player player = game.getPlayer(source.getFirstTarget());
-		if (player != null) {
-			player.damage(amount, source.getId(), game, false, true);
-			return true;
-		}
-		return false;
+	public DamagedByWatcher(final DamagedByWatcher watcher) {
+		super(watcher);
+        this.damagedCreatures = watcher.damagedCreatures;
 	}
 
 	@Override
-	public String getText(Mode mode) {
-		return "{source} deals X damage to target " + mode.getTargets().get(0).getTargetName();
+	public DamagedByWatcher copy() {
+		return new DamagedByWatcher(this);
+	}
+
+	@Override
+	public void watch(GameEvent event, Game game) {
+		if (event.getType() == EventType.DAMAGED_CREATURE) {
+            if (sourceId.equals(event.getSourceId()) && !damagedCreatures.contains(event.getTargetId())) {
+                damagedCreatures.add(event.getTargetId());
+            }
+        }
+	}
+    
+	@Override
+	public void reset() {
+		super.reset();
+		damagedCreatures.clear();
 	}
 
 }
