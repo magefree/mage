@@ -28,27 +28,14 @@
 
 package mage.sets.scarsofmirrodin;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.condition.common.MetalcraftCondition;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.CostModificationEffectImpl;
 import mage.abilities.effects.common.CounterTargetEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
 import mage.target.TargetSpell;
-import mage.watchers.WatcherImpl;
 
 import java.util.UUID;
 
