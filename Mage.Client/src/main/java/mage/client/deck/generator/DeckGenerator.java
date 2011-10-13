@@ -14,13 +14,12 @@ import mage.utils.CardUtil;
 import mage.utils.DeckBuilder;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Random;
-import java.util.UUID;
 
 /**
  * Generates random card pool and builds a deck.
@@ -43,6 +42,8 @@ public class DeckGenerator {
     private static Deck deck = new Deck();
     private static final int ADDITIONAL_CARDS_FOR_3_COLOR_DECKS = 20;
 
+    private static String colors = "GWUBR";
+
 	/**
 	 * Opens color chooser dialog. Generates deck.
 	 * Saves generated deck and use it as selected deck to play.
@@ -58,6 +59,10 @@ public class DeckGenerator {
 	    String chosen = MageFrame.getPreferences().get("genDeckColor", "u");
         final ColorsChooser colorsChooser = new ColorsChooser(chosen);
         p0.add(colorsChooser);
+
+        p0.add(Box.createVerticalStrut(5));
+        JLabel text2 = new JLabel("(X - random color)");
+        p0.add(text2);
 
         final JButton btnGenerate = new JButton("Ok");
         btnGenerate.addActionListener(new ActionListener() {
@@ -106,6 +111,11 @@ public class DeckGenerator {
     protected static void buildDeck() {
         List<ColoredManaSymbol> allowedColors = new ArrayList<ColoredManaSymbol>();
         selectedColors = selectedColors.toUpperCase();
+
+        if (selectedColors.contains("X")) {
+            selectedColors = getRandomColors(selectedColors);
+        }
+
         for (int i = 0; i < selectedColors.length(); i++) {
             char c = selectedColors.charAt(i);
             allowedColors.add(ColoredManaSymbol.lookup(c));
@@ -130,6 +140,28 @@ public class DeckGenerator {
 			    return DeckGenerator.getBestBasicLand(color);
 		    }
 	    });
+    }
+
+    private static String getRandomColors(String _selectedColors) {
+        StringBuilder generatedColors = new StringBuilder();
+        Set<String> colors = new HashSet<String>();
+        for (int i = 0; i < _selectedColors.length(); i++) {
+            String color = getRandomColor() + "";
+            int retry = 100;
+            while (colors.contains(color)) {
+                color = getRandomColor() + "";
+                retry--;
+                if (retry <= 0) break;
+            }
+            generatedColors.append(color);
+            colors.add(color);
+        }
+        return generatedColors.toString();
+    }
+
+    private static char getRandomColor() {
+        Random r = new Random();
+        return colors.charAt(r.nextInt(colors.length()));
     }
 
     /**

@@ -33,6 +33,7 @@ public class ColorsChooser extends JComboBox implements ListCellRenderer {
 		model.addElement("b");
 		model.addElement("g");
 		model.addElement("w");
+        model.addElement("x");
 
 		model.addElement("bu");
 		model.addElement("bg");
@@ -44,6 +45,7 @@ public class ColorsChooser extends JComboBox implements ListCellRenderer {
 		model.addElement("gr");
 		model.addElement("gw");
 		model.addElement("rw");
+        model.addElement("xx");
 
 		model.addElement("bur");
         model.addElement("buw");
@@ -55,6 +57,7 @@ public class ColorsChooser extends JComboBox implements ListCellRenderer {
         model.addElement("wug");
         model.addElement("wrg");
         model.addElement("rgu");
+        model.addElement("xxx");
 
 		setModel(model);
 		setSelectedItem(colors);
@@ -97,7 +100,7 @@ public class ColorsChooser extends JComboBox implements ListCellRenderer {
 				dx += 13;
 			}
 		} else {
-			String s = value.replace("B", "{B}").replace("R", "{R}").replace("G", "{G}").replace("W", "{W}").replace("U", "{U}");
+			String s = value.replace("B", "{B}").replace("R", "{R}").replace("G", "{G}").replace("W", "{W}").replace("U", "{U}").replace("X", "{X}");
 			panel.add(new JLabel(s));	
 		}
 	}
