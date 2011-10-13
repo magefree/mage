@@ -34,11 +34,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
@@ -50,107 +50,133 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  */
 public class ServerMessagesUtil {
 
-	private static final ServerMessagesUtil instance = new ServerMessagesUtil();
+    private static final ServerMessagesUtil instance = new ServerMessagesUtil();
 
-	private static final Logger log = Logger.getLogger(ServerMessagesUtil.class);
-	private static final String SERVER_MSG_TXT_FILE = "server.msg.txt";
+    private static final Logger log = Logger.getLogger(ServerMessagesUtil.class);
+    private static final String SERVER_MSG_TXT_FILE = "server.msg.txt";
 
-	private List<String> messages = new ArrayList<String>();
-	private ReadWriteLock lock = new ReentrantReadWriteLock();
+    private List<String> messages = new ArrayList<String>();
+    private ReadWriteLock lock = new ReentrantReadWriteLock();
 
-	private static String pathToExternalMessages = null;
+    private static String pathToExternalMessages = null;
 
-	private static boolean ignore = false;
+    private static boolean ignore = false;
 
-	static {
-		pathToExternalMessages = System.getProperty("messagesPath");
-	}
+    private static long startDate;
+    private static AtomicInteger gamesStarted = new AtomicInteger(0);
 
-	public ServerMessagesUtil() {
-		timer.setInitialDelay(5000);
-		timer.start();
-	}
+    static {
+        pathToExternalMessages = System.getProperty("messagesPath");
+    }
 
-	public static ServerMessagesUtil getInstance() {
-		return instance;
-	}
+    public ServerMessagesUtil() {
+        timer.setInitialDelay(5000);
+        timer.start();
+    }
 
-	public List<String> getMessages() {
-		lock.readLock().lock();
-		try {
-			return messages;
-		} finally {
-			lock.readLock().unlock();
-		}
-	}
+    public static ServerMessagesUtil getInstance() {
+        return instance;
+    }
 
-	private void reloadMessages() {
-		log.debug("Reading server messages...");
-		List<String> newMessages = readFromFile();
-		if (newMessages != null && !newMessages.isEmpty()) {
-			lock.writeLock().lock();
-			try {
-				messages.clear();
-				messages.addAll(newMessages);
-			} finally {
-				lock.writeLock().unlock();
-			}
-		}
-	}
+    public List<String> getMessages() {
+        lock.readLock().lock();
+        try {
+            return messages;
+        } finally {
+            lock.readLock().unlock();
+        }
+    }
 
-	private List<String> readFromFile() {
-		if (ignore) {
-			return null;
-		}
-		File externalFile = null;
-		if (pathToExternalMessages != null) {
-			externalFile = new File(pathToExternalMessages);
-			if (!externalFile.exists()) {
-				log.warn("Couldn't find server.msg.txt using external path: " + pathToExternalMessages);
-				pathToExternalMessages = null; // not to repeat error action again
-			} else if (!externalFile.canRead()) {
-				log.warn("Couldn't read (no access) server.msg.txt using external path: " + pathToExternalMessages);
-				pathToExternalMessages = null; // not to repeat error action again
-			}
-		}
-		InputStream is = null;
-		if (externalFile != null) {
-			try {
-				is = new FileInputStream(externalFile);
-			} catch (Exception  f) {
-				log.error(f, f);
-				pathToExternalMessages = null; // not to repeat error action again
-			}
-		} else {
-			File file = new File(SERVER_MSG_TXT_FILE);
-			if (!file.exists() || !file.canRead()) {
-				log.warn("Couldn't find server.msg.txt using path: " + SERVER_MSG_TXT_FILE);
-			}
-			try {
-				is = new FileInputStream(file);
-			} catch (Exception  f) {
-				log.error(f, f);
-				ignore = true;
-			}
-		}
-		if (is == null) {
-			log.warn("Couldn't find server.msg");
-			return null;
-		}
-		Scanner scanner = new Scanner(is);
-		List<String> messages = new ArrayList<String>();
-		while (scanner.hasNextLine()) {
-			String message = scanner.nextLine();
-			if (!message.trim().isEmpty()) {
-				messages.add(message.trim());
-			}
-		}
-		return messages;
-	}
+    private void reloadMessages() {
+        log.debug("Reading server messages...");
+        List<String> motdMessages = readFromFile();
+        List<String> newMessages = new ArrayList<String>();
+        newMessages.add(getServerStatistics());
+        newMessages.addAll(motdMessages);
 
-	private Timer timer = new Timer(1000 * 60, new ActionListener() {
+        lock.writeLock().lock();
+        try {
+            messages.clear();
+            messages.addAll(newMessages);
+        } finally {
+            lock.writeLock().unlock();
+        }
+    }
+
+    private List<String> readFromFile() {
+        if (ignore) {
+            return null;
+        }
+        File externalFile = null;
+        if (pathToExternalMessages != null) {
+            externalFile = new File(pathToExternalMessages);
+            if (!externalFile.exists()) {
+                log.warn("Couldn't find server.msg.txt using external path: " + pathToExternalMessages);
+                pathToExternalMessages = null; // not to repeat error action again
+            } else if (!externalFile.canRead()) {
+                log.warn("Couldn't read (no access) server.msg.txt using external path: " + pathToExternalMessages);
+                pathToExternalMessages = null; // not to repeat error action again
+            }
+        }
+        InputStream is = null;
+        if (externalFile != null) {
+            try {
+                is = new FileInputStream(externalFile);
+            } catch (Exception f) {
+                log.error(f, f);
+                pathToExternalMessages = null; // not to repeat error action again
+            }
+        } else {
+            File file = new File(SERVER_MSG_TXT_FILE);
+            if (!file.exists() || !file.canRead()) {
+                log.warn("Couldn't find server.msg.txt using path: " + SERVER_MSG_TXT_FILE);
+            }
+            try {
+                is = new FileInputStream(file);
+            } catch (Exception f) {
+                log.error(f, f);
+                ignore = true;
+            }
+        }
+        if (is == null) {
+            log.warn("Couldn't find server.msg");
+            return null;
+        }
+        Scanner scanner = new Scanner(is);
+        List<String> messages = new ArrayList<String>();
+        while (scanner.hasNextLine()) {
+            String message = scanner.nextLine();
+            if (!message.trim().isEmpty()) {
+                messages.add(message.trim());
+            }
+        }
+        return messages;
+    }
+
+    private String getServerStatistics() {
+        long current = System.currentTimeMillis();
+        long hours = ((current - startDate)/(1000*60*60));
+        StringBuilder statistics = new StringBuilder("Server uptime: ");
+        statistics.append(hours);
+        statistics.append(" hour(s), games played: ");
+        statistics.append(gamesStarted.get());
+        return statistics.toString();
+    }
+
+    private Timer timer = new Timer(1000 * 60, new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-			reloadMessages();
+            reloadMessages();
         }
     });
+
+    public void setStartDate(long milliseconds) {
+        this.startDate = milliseconds;
+    }
+
+    public void incGamesStarted() {
+        int value;
+        do {
+            value = gamesStarted.get();
+        } while (!gamesStarted.compareAndSet(value, value + 1));
+    }
 }

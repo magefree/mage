@@ -45,6 +45,7 @@ import mage.server.game.PlayerFactory;
 import mage.server.tournament.TournamentFactory;
 import mage.server.util.PluginClassLoader;
 import mage.server.util.ConfigSettings;
+import mage.server.util.ServerMessagesUtil;
 import mage.server.util.config.Plugin;
 import mage.server.util.config.GamePlugin;
 import mage.utils.MageVersion;
@@ -122,6 +123,7 @@ public class Main {
                 logger.info("Started MAGE server - listening on " + connection.toString());
                 if (testMode)
                     logger.info("MAGE server running in test mode");
+                initStatistics();
             }
             else {
                 logger.fatal("Unable to start MAGE server - another server is already started");
@@ -132,6 +134,10 @@ public class Main {
 			logger.fatal("Failed to start server - " + connection.toString(), ex);
 		}
 
+    }
+
+    static void initStatistics() {
+        ServerMessagesUtil.getInstance().setStartDate(System.currentTimeMillis());
     }
 
     static boolean isAlreadyRunning(InvokerLocator serverLocator) {

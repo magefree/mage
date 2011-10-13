@@ -51,6 +51,7 @@ import mage.server.draft.DraftManager;
 import mage.server.game.*;
 import mage.server.tournament.TournamentFactory;
 import mage.server.tournament.TournamentManager;
+import mage.server.util.ServerMessagesUtil;
 import org.apache.log4j.Logger;
 
 import java.util.Map.Entry;
@@ -342,6 +343,7 @@ public class TableController {
 					break;
 				}
 			}
+            ServerMessagesUtil.getInstance().incGamesStarted();
 		}
 		catch (Exception ex) {
 			logger.fatal("Error starting game", ex);
