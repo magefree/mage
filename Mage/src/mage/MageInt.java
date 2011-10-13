@@ -65,8 +65,6 @@ public class MageInt implements Serializable, Copyable<MageInt> {
 	
 	public void boostValue(int amount) {
 		this.baseValue += amount;
-		if (this.baseValue < 0)
-			this.baseValue = 0;
 	}
 
 	@Override
