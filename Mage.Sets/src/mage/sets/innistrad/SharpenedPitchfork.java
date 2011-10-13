@@ -30,8 +30,10 @@ package mage.sets.innistrad;
 import java.util.UUID;
 
 import mage.Constants;
+import mage.Constants.AttachmentType;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.EquippedHasSubtypeCondition;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -40,7 +42,6 @@ import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 
 /**
@@ -60,10 +61,10 @@ public class SharpenedPitchfork extends CardImpl<SharpenedPitchfork> {
         this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(1)));
 
         // Equipped creature has first strike.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), Constants.AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT)));
 
         // As long as equipped creature is a Human, it gets +1/+1.
-        this.addAbility(new ConditionalStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1), new EquippedHasSubtypeCondition("Human"), staticText));
+        this.addAbility(new ConditionalStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1), new EquippedHasSubtypeCondition("Human"), staticText));
     }
 
     public SharpenedPitchfork(final SharpenedPitchfork card) {

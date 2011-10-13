@@ -131,7 +131,7 @@ class SpreadingSeasEffect extends ContinuousEffectImpl<SpreadingSeasEffect> {
 
 	@Override
 	public boolean hasLayer(Layer layer) {
-		return layer == Layer.AbilityAddingRemovingEffects_6 || layer == layer.TypeChangingEffects_4;
+		return layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.TypeChangingEffects_4;
 	}
 
 }
