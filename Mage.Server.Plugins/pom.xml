@@ -25,7 +25,6 @@
 		<module>Mage.Player.Human</module>
 		<module>Mage.Tournament.BoosterDraft</module>
 		<module>Mage.Tournament.Sealed</module>
-		<module>Mage.Player.AI.Standard</module>
   </modules>
 	
 </project>
