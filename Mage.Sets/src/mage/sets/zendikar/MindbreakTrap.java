@@ -31,7 +31,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
-import java.util.logging.Logger;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
@@ -40,12 +39,12 @@ import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostImpl;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.stack.Spell;
 import mage.target.TargetSpell;
 import mage.watchers.Watcher;
 import mage.watchers.WatcherImpl;
@@ -56,6 +55,8 @@ import mage.watchers.WatcherImpl;
  */
 public class MindbreakTrap extends CardImpl<MindbreakTrap> {
 
+    private static final FilterSpell filter = new FilterSpell("spell to exile");
+    
     public MindbreakTrap(UUID ownerId) {
         super(ownerId, 57, "Mindbreak Trap", Rarity.MYTHIC, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
         this.expansionSetCode = "ZEN";
@@ -68,6 +69,7 @@ public class MindbreakTrap extends CardImpl<MindbreakTrap> {
                 new MindbreakTrapAlternativeCost());
         this.addWatcher(new MindbreakTrapWatcher());
         // Exile any number of target spells.
+        this.getSpellAbility().addTarget(new TargetSpell(0, Integer.MAX_VALUE, filter));
         this.getSpellAbility().addEffect(new MindbreakEffect());
     }
 
@@ -169,12 +171,17 @@ class MindbreakEffect extends OneShotEffect<MindbreakEffect>{
 
     @Override
     public boolean apply(Game game, Ability source) {
-        TargetSpell target = new TargetSpell(new FilterSpell("spell to exile"));
-        while(game.getPlayer(source.getControllerId()).choose(Outcome.Exile, target, source.getSourceId(), game)){
-            game.getStack().getSpell(target.getFirstTarget()).moveToExile(null, null, source.getId(), game);
-            target.clearChosen();
-        }
-        return true;
+        int affectedTargets = 0;
+		if (targetPointer.getTargets(source).size() > 0) {
+			for (UUID spellId : targetPointer.getTargets(source)) {
+				Spell spell = game.getStack().getSpell(spellId);
+				if (spell != null) {
+					spell.moveToExile(null, null, source.getId(), game);
+					affectedTargets++;
+				}
+			}
+		}
+		return affectedTargets > 0;
     }
 
     @Override

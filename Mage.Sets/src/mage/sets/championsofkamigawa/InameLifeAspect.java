@@ -63,7 +63,7 @@ public class InameLifeAspect extends CardImpl<InameLifeAspect> {
         this.toughness = new MageInt(4);
         Ability ability = new DiesTriggeredAbility(new ExileSourceEffect(), true);
         ability.addEffect(new ReturnToHandTargetEffect());
-        ability.addTarget(new TargetCardInYourGraveyard(0, 0, filter));
+        ability.addTarget(new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, filter));
         this.addAbility(ability);
     }
 
