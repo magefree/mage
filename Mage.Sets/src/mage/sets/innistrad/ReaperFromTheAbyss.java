@@ -101,7 +101,7 @@ class ReaperFromTheAbyssAbility extends TriggeredAbilityImpl<ReaperFromTheAbyssA
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.END_TURN_STEP_PRE) {
-            Watcher watcher = game.getState().getWatchers().get(controllerId, "Morbid");
+            Watcher watcher = game.getState().getWatchers().get("Morbid");
             return watcher.conditionMet();
 		}
 		return false;

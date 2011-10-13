@@ -94,7 +94,7 @@ class SkirsdagHighPriestCost extends CostImpl<SkirsdagHighPriestCost> {
 
     @Override
     public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-        return game.getState().getWatchers().get(controllerId, "Morbid").conditionMet();
+        return game.getState().getWatchers().get("Morbid").conditionMet();
     }
 
     @Override

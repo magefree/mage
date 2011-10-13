@@ -44,6 +44,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
@@ -105,10 +106,10 @@ class MyojinOfCleansingFireEntersBattlefieldEffect extends OneShotEffect<MyojinO
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Watcher watcher = game.getState().getWatchers().get(source.getControllerId(), "CastFromHand");
-        if (watcher != null && watcher.conditionMet()) {
-            Permanent p = game.getPermanent(source.getSourceId());
-            if (p != null) {
+        Permanent p = game.getPermanent(source.getSourceId());
+        if (p != null) {
+            Watcher watcher = game.getState().getWatchers().get("CastFromHand", source.getSourceId());
+            if (watcher != null && watcher.conditionMet()) {
                 p.addCounters(CounterType.DIVINITY.createInstance(), game);
             }
         }

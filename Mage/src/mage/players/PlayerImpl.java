@@ -73,7 +73,6 @@ import mage.game.stack.StackAbility;
 import mage.players.net.UserData;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetDiscard;
-import mage.watchers.Watcher;
 import mage.watchers.common.BloodthirstWatcher;
 
 public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Serializable {
@@ -188,9 +187,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		this.passedTurn = false;
         this.canGainLife = true;
         this.canLoseLife = true;
-        Watcher bloodthirst = new BloodthirstWatcher();
-        bloodthirst.setControllerId(playerId);
-        game.getState().getWatchers().add(bloodthirst);
+        game.getState().getWatchers().add(new BloodthirstWatcher(playerId));
 	}
 
 	@Override

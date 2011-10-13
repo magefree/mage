@@ -39,6 +39,7 @@ import mage.Constants.SubLayer;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -63,7 +64,7 @@ public class Groundswell extends CardImpl<Groundswell> {
 		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 		this.getSpellAbility().addEffect(new GroundswellEffect(Duration.EndOfTurn));
 		
-		this.addWatcher(new GroundswellWatcher());
+		this.addWatcher(new LandfallWatcher());
 	}
 
 	public Groundswell(final Groundswell card) {
@@ -73,34 +74,6 @@ public class Groundswell extends CardImpl<Groundswell> {
 	@Override
 	public Groundswell copy() {
 		return new Groundswell(this);
-	}
-}
-
-class GroundswellWatcher extends WatcherImpl<GroundswellWatcher> {
-
-	public GroundswellWatcher() {
-		super("LandPlayed");
-	}
-
-	public GroundswellWatcher(final GroundswellWatcher watcher) {
-		super(watcher);
-	}
-
-	@Override
-	public GroundswellWatcher copy() {
-		return new GroundswellWatcher(this);
-	}
-
-	@Override
-	public void watch(GameEvent event, Game game) {
-        if (condition == true) //no need to check - condition has already occured
-            return;
-		if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone() == Zone.BATTLEFIELD) {
-			Permanent permanent = game.getPermanent(event.getTargetId());
-			if (permanent.getCardType().contains(CardType.LAND) && permanent.getControllerId().equals(this.controllerId)) {
-				condition = true;
-			}
-		}
 	}
 }
 
@@ -122,19 +95,19 @@ class GroundswellEffect extends ContinuousEffectImpl<GroundswellEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Watcher watcher = game.getState().getWatchers().get(source.getControllerId(), "LandPlayed");
-		Permanent target = (Permanent) game.getPermanent(source.getFirstTarget());
-		if (target != null) {
-			if (watcher != null && watcher.conditionMet()) {
-				target.addPower(4);
-				target.addToughness(4);
-			}
-			else{
-				target.addPower(2);
-				target.addToughness(2);
-			}
-			return true;
-		}
+        Watcher watcher = game.getState().getWatchers().get("LandPlayed", source.getControllerId());
+        Permanent target = (Permanent) game.getPermanent(source.getFirstTarget());
+        if (target != null) {
+            if (watcher != null && watcher.conditionMet()) {
+                target.addPower(4);
+                target.addToughness(4);
+            }
+            else{
+                target.addPower(2);
+                target.addToughness(2);
+            }
+            return true;
+        }
 		return false;
 	}
 

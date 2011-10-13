@@ -30,6 +30,7 @@ package mage.watchers.common;
 
 import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -43,7 +44,7 @@ import mage.watchers.WatcherImpl;
 public class MorbidWatcher extends WatcherImpl<MorbidWatcher> {
 
     public MorbidWatcher() {
-        super("Morbid");
+        super("Morbid", WatcherScope.GAME);
     }
 
     public MorbidWatcher(final MorbidWatcher watcher) {

@@ -1,5 +1,5 @@
 /*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
  * 
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
@@ -25,53 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.watchers.common;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.Constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.watchers.WatcherImpl;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CastSpellLastTurnWatcher extends WatcherImpl<CastSpellLastTurnWatcher> {
+public class DamagedByWatcher extends WatcherImpl<DamagedByWatcher> {
 
-    private int amountOfSpellsCastOnPrevTurn;
-    private int amountOfSpellsCastOnCurrentTurn;
-
-    public CastSpellLastTurnWatcher() {
-        super("CastSpellLastTurnWatcher", WatcherScope.GAME);
-    }
-
-    public CastSpellLastTurnWatcher(final CastSpellLastTurnWatcher watcher) {
-        super(watcher);
-        this.amountOfSpellsCastOnCurrentTurn = watcher.amountOfSpellsCastOnCurrentTurn;
-        this.amountOfSpellsCastOnPrevTurn = watcher.amountOfSpellsCastOnPrevTurn;
-    }
+    public List<UUID> damagedCreatures = new ArrayList<UUID>();
     
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-            amountOfSpellsCastOnCurrentTurn++;
-        }
-    }
-
-    @Override
-	public void reset() {
-        amountOfSpellsCastOnPrevTurn = amountOfSpellsCastOnCurrentTurn;
-        amountOfSpellsCastOnCurrentTurn = 0;
+    public DamagedByWatcher() {
+		super("DamagedByWatcher", WatcherScope.CARD);
 	}
 
-    public int getAmountOfSpellsCastOnPrevTurn() {
-        return amountOfSpellsCastOnPrevTurn;
-    }
+	public DamagedByWatcher(final DamagedByWatcher watcher) {
+		super(watcher);
+        this.damagedCreatures = watcher.damagedCreatures;
+	}
 
-    @Override
-    public CastSpellLastTurnWatcher copy() {
-        return new CastSpellLastTurnWatcher(this);
-    }
+	@Override
+	public DamagedByWatcher copy() {
+		return new DamagedByWatcher(this);
+	}
+
+	@Override
+	public void watch(GameEvent event, Game game) {
+		if (event.getType() == EventType.DAMAGED_CREATURE) {
+            if (sourceId.equals(event.getSourceId()) && !damagedCreatures.contains(event.getTargetId())) {
+                damagedCreatures.add(event.getTargetId());
+            }
+        }
+	}
     
+	@Override
+	public void reset() {
+		super.reset();
+		damagedCreatures.clear();
+	}
+
 }

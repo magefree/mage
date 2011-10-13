@@ -54,7 +54,7 @@ public interface Card extends MageObject {
 	public void addWatcher(Watcher watcher);
 	public SpellAbility getSpellAbility();
 	public List<String> getRules();
-	public Watchers getWatchers();
+	public List<Watcher> getWatchers();
 	public String getExpansionSetCode();
 	public void setExpansionSetCode(String expansionSetCode);
 	public void setFaceDown(boolean value);

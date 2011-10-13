@@ -29,11 +29,12 @@ package mage.sets.newphyrexia;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.WatcherScope;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -56,7 +57,7 @@ public class FreshMeat extends CardImpl<FreshMeat> {
         this.color.setGreen(true);
 
         this.addWatcher(new FreshMeatWatcher());
-        this.getSpellAbility().addEffect(new FreshMeatEffect());
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new BeastToken(), new FreshMeatDynamicValue()));
     }
 
     public FreshMeat(final FreshMeat card) {
@@ -74,7 +75,7 @@ class FreshMeatWatcher extends WatcherImpl<FreshMeatWatcher> {
     private int creaturesCount = 0;
 
     public FreshMeatWatcher() {
-        super("CreaturesDiedFreshMeat");
+        super("YourCreaturesDied", WatcherScope.PLAYER);
         condition = true;
     }
 
@@ -94,9 +95,7 @@ class FreshMeatWatcher extends WatcherImpl<FreshMeatWatcher> {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE
-                && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD
-                && ((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD) {
+        if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).isDiesEvent()) {
             Card card = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             if (card != null && card.getOwnerId().equals(this.controllerId) && card.getCardType().contains(CardType.CREATURE)) {
                 creaturesCount++;
@@ -111,28 +110,28 @@ class FreshMeatWatcher extends WatcherImpl<FreshMeatWatcher> {
     }
 }
 
-class FreshMeatEffect extends OneShotEffect<FreshMeatEffect> {
+class FreshMeatDynamicValue implements DynamicValue {
 
-    public FreshMeatEffect() {
-        super(Outcome.PutCreatureInPlay);
-        this.staticText = "Put a 3/3 green Beast creature token onto the battlefield for each creature put into your graveyard from the battlefield this turn";
-    }
-
-    public FreshMeatEffect(final FreshMeatEffect effect) {
-        super(effect);
+    @Override
+    public int calculate(Game game, Ability sourceAbility) {
+        FreshMeatWatcher watcher = (FreshMeatWatcher) game.getState().getWatchers().get("YourCreaturesDied", sourceAbility.getControllerId());
+        if (watcher != null)
+            return watcher.getCreaturesCount();
+        return 0;
     }
 
     @Override
-    public FreshMeatEffect copy() {
-        return new FreshMeatEffect(this);
+    public FreshMeatDynamicValue clone() {
+        return new FreshMeatDynamicValue();
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        FreshMeatWatcher watcher = (FreshMeatWatcher) game.getState().getWatchers().get(source.getControllerId(), "CreaturesDiedFreshMeat");
-        int count = watcher.getCreaturesCount();
-        BeastToken token = new BeastToken();
-        token.putOntoBattlefield(count, game, source.getSourceId(), source.getControllerId());
-        return true;
+    public String toString() {
+        return "1";
+    }
+
+    @Override
+    public String getMessage() {
+        return "for each creature put into your graveyard from the battlefield this turn";
     }
 }

@@ -7,7 +7,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.watchers.Watcher;
+import mage.watchers.common.BloodthirstWatcher;
 
 /**
  * 
@@ -53,11 +55,14 @@ class BloodthirstEffect extends OneShotEffect<BloodthirstEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Watcher watcher = game.getState().getWatchers().get(source.getControllerId(), "DamagedOpponents");
-        if (watcher.conditionMet()) {
-            Permanent p = game.getPermanent(source.getSourceId());
-            if (p != null) {
-                p.addCounters(CounterType.P1P1.createInstance(amount), game);
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+            BloodthirstWatcher watcher = (BloodthirstWatcher) game.getState().getWatchers().get("DamagedOpponents", source.getControllerId());
+            if (watcher.conditionMet()) {
+                Permanent p = game.getPermanent(source.getSourceId());
+                if (p != null) {
+                    p.addCounters(CounterType.P1P1.createInstance(amount), game);
+                }
             }
         }
         return false;

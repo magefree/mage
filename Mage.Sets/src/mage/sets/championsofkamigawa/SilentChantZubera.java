@@ -62,7 +62,7 @@ public class SilentChantZubera extends CardImpl<SilentChantZubera> {
         this.toughness = new MageInt(2);
         Ability ability = new DiesTriggeredAbility(new GainLifeEffect(new SilentChantZuberaDynamicValue()));
         this.addAbility(ability);
-        this.addWatcher(new AshenSkinZuberaWatcher());
+        this.addWatcher(new ZuberasDiedWatcher());
     }
 
     public SilentChantZubera (final SilentChantZubera card) {
@@ -76,54 +76,16 @@ public class SilentChantZubera extends CardImpl<SilentChantZubera> {
 
 }
 
-class SilentChantZuberaWatcher extends WatcherImpl<SilentChantZuberaWatcher> {
-
-    public int zuberasDiedThisTurn = 0;
-
-    public SilentChantZuberaWatcher() {
-        super("ZuberasDiedSilentChantZubera");
-    }
-
-    public SilentChantZuberaWatcher(final SilentChantZuberaWatcher watcher) {
-        super(watcher);
-    }
-
-    @Override
-    public SilentChantZuberaWatcher copy() {
-        return new SilentChantZuberaWatcher(this);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
-            if (((ZoneChangeEvent) event).getFromZone() == Constants.Zone.BATTLEFIELD &&
-                    ((ZoneChangeEvent) event).getToZone() == Constants.Zone.GRAVEYARD) {
-                Card card = game.getLastKnownInformation(event.getTargetId(), Constants.Zone.BATTLEFIELD);
-                if (card != null && card.hasSubtype("Zubera")) {
-                    zuberasDiedThisTurn++;
-                }
-            }
-        }
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        zuberasDiedThisTurn = 0;
-    }
-
-}
-
 class SilentChantZuberaDynamicValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility) {
-        Watcher watcher = game.getState().getWatchers().get(sourceAbility.getControllerId(), "ZuberasDiedSilentChantZubera");
-        return ((SilentChantZuberaWatcher) watcher).zuberasDiedThisTurn;
+        ZuberasDiedWatcher watcher = (ZuberasDiedWatcher) game.getState().getWatchers().get("ZuberasDied");
+        return watcher.zuberasDiedThisTurn * 2;
     }
 
     @Override
-    public DynamicValue clone() {
+    public SilentChantZuberaDynamicValue clone() {
         return new SilentChantZuberaDynamicValue();
     }
 
@@ -134,6 +96,6 @@ class SilentChantZuberaDynamicValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "Zubera put into a graveyard from play this turn";
+        return "for each Zubera that died this turn";
     }
 }

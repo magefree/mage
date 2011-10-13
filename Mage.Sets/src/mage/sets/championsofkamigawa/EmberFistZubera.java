@@ -30,22 +30,14 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.target.common.TargetCreatureOrPlayer;
-import mage.watchers.Watcher;
-import mage.watchers.WatcherImpl;
 
 /**
  *
@@ -61,10 +53,10 @@ public class EmberFistZubera extends CardImpl<EmberFistZubera> {
 		this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
-        Ability ability = new DiesTriggeredAbility(new DamageTargetEffect(new EmberFistZuberaDynamicValue()));
+        Ability ability = new DiesTriggeredAbility(new DamageTargetEffect(new ZuberasDiedDynamicValue()));
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
-        this.addWatcher(new EmberFistZuberaWatcher());
+        this.addWatcher(new ZuberasDiedWatcher());
     }
 
     public EmberFistZubera (final EmberFistZubera card) {
@@ -76,67 +68,5 @@ public class EmberFistZubera extends CardImpl<EmberFistZubera> {
         return new EmberFistZubera(this);
     }
 
-}
-
-class EmberFistZuberaWatcher extends WatcherImpl<EmberFistZuberaWatcher> {
-
-    public int zuberasDiedThisTurn = 0;
-
-    public EmberFistZuberaWatcher() {
-        super("ZuberasDiedEmberFistZubera");
-    }
-
-    public EmberFistZuberaWatcher(final EmberFistZuberaWatcher watcher) {
-        super(watcher);
-    }
-
-    @Override
-    public EmberFistZuberaWatcher copy() {
-        return new EmberFistZuberaWatcher(this);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
-            if (((ZoneChangeEvent) event).getFromZone() == Constants.Zone.BATTLEFIELD &&
-                    ((ZoneChangeEvent) event).getToZone() == Constants.Zone.GRAVEYARD) {
-                Card card = game.getLastKnownInformation(event.getTargetId(), Constants.Zone.BATTLEFIELD);
-                if (card != null && card.hasSubtype("Zubera")) {
-                    zuberasDiedThisTurn++;
-                }
-            }
-        }
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        zuberasDiedThisTurn = 0;
-    }
-
-}
-
-class EmberFistZuberaDynamicValue implements DynamicValue {
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility) {
-        Watcher watcher = game.getState().getWatchers().get(sourceAbility.getControllerId(), "ZuberasDiedEmberFistZubera");
-        return ((EmberFistZuberaWatcher) watcher).zuberasDiedThisTurn;
-    }
-
-    @Override
-    public DynamicValue clone() {
-        return new EmberFistZuberaDynamicValue();
-    }
-
-    @Override
-    public String toString() {
-        return "1";
-    }
-
-    @Override
-    public String getMessage() {
-        return "Zubera put into all graveyards from play this turn";
-    }
 }
 

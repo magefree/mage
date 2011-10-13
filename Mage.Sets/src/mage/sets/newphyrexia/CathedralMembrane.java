@@ -27,8 +27,10 @@
  */
 package mage.sets.newphyrexia;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -36,12 +38,14 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.TurnPhase;
+import mage.Constants.WatcherScope;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.DefenderAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -127,10 +131,9 @@ class CathedralMembraneEffect extends OneShotEffect<CathedralMembraneEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		CathedralMembraneWatcher watcher = (CathedralMembraneWatcher) game.getState().getWatchers().get(source.getControllerId(), "CathedralMembraneWatcher");
-		if (watcher != null && watcher.blockedCreatures.containsKey(source.getSourceId())) {
-			Set<UUID> creatures = watcher.blockedCreatures.get(source.getSourceId());
-			for (UUID uuid : creatures) {
+		CathedralMembraneWatcher watcher = (CathedralMembraneWatcher) game.getState().getWatchers().get("CathedralMembraneWatcher", source.getSourceId());
+		if (watcher != null) {
+			for (UUID uuid : watcher.blockedCreatures) {
 				Permanent permanent = game.getPermanent(uuid);
                 if (permanent != null) {
                     permanent.damage(6, source.getSourceId(), game, true, false);
@@ -143,14 +146,15 @@ class CathedralMembraneEffect extends OneShotEffect<CathedralMembraneEffect> {
 
 class CathedralMembraneWatcher extends WatcherImpl<CathedralMembraneWatcher> {
 
-	public Map<UUID, Set<UUID>> blockedCreatures = new HashMap<UUID, Set<UUID>>();
+	public List<UUID> blockedCreatures = new ArrayList<UUID>();
 
 	public CathedralMembraneWatcher() {
-		super("CathedralMembraneWatcher");
+		super("CathedralMembraneWatcher", WatcherScope.CARD);
 	}
 
 	public CathedralMembraneWatcher(final CathedralMembraneWatcher watcher) {
 		super(watcher);
+        this.blockedCreatures = watcher.blockedCreatures;
 	}
 
 	@Override
@@ -161,13 +165,8 @@ class CathedralMembraneWatcher extends WatcherImpl<CathedralMembraneWatcher> {
 	@Override
 	public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.BLOCKER_DECLARED && event.getSourceId().equals(sourceId)) {
-            Set<UUID> creatures = blockedCreatures.get(sourceId);
-            if (creatures != null) {
-                creatures.add(event.getTargetId());
-            } else {
-                creatures = new HashSet<UUID>();
-                creatures.add(event.getTargetId());
-                blockedCreatures.put(sourceId, creatures);
+            if (!blockedCreatures.contains(event.getTargetId())) {
+                blockedCreatures.add(event.getTargetId());
             }
         }
 	}

@@ -323,8 +323,8 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 		return card.getRules();
 	}
 
-	@Override
-	public Watchers getWatchers() {
+    @Override
+	public List<Watcher> getWatchers() {
 		return card.getWatchers();
 	}
 

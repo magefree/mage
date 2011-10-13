@@ -40,7 +40,9 @@ import mage.abilities.effects.RestrictionEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.watchers.Watcher;
+import mage.watchers.common.BloodthirstWatcher;
 
 /**
  *
@@ -95,10 +97,7 @@ class BloodcrazedGoblinEffect extends RestrictionEffect<BloodcrazedGoblinEffect>
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        Watcher watcher = game.getState().getWatchers().get(source.getControllerId(), "DamagedOpponents");
-        if (watcher != null) {
-            return !watcher.conditionMet();
-        }
-        return false;
+        BloodthirstWatcher watcher = (BloodthirstWatcher) game.getState().getWatchers().get("DamagedOpponents", source.getControllerId());
+        return !watcher.conditionMet();
     }
 }

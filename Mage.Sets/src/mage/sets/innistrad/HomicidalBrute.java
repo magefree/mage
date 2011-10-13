@@ -39,10 +39,10 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.watchers.WatcherImpl;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
+import mage.Constants.WatcherScope;
+import mage.cards.Card;
+import mage.watchers.Watcher;
 
 /**
  * @author nantuko
@@ -65,6 +65,7 @@ public class HomicidalBrute extends CardImpl<HomicidalBrute> {
 
         // At the beginning of your end step, if Homicidal Brute didn't attack this turn, tap Homicidal Brute, then transform it.
         this.addAbility(new HomicidalBruteTriggeredAbility());
+        this.addWatcher(new HomicidalBruteWatcher());
     }
 
     public HomicidalBrute(final HomicidalBrute card) {
@@ -76,28 +77,29 @@ public class HomicidalBrute extends CardImpl<HomicidalBrute> {
         return new HomicidalBrute(this);
     }
 
-    public static class HomicidalBruteWatcher extends WatcherImpl<HomicidalBruteWatcher> {
+}
 
-        public Map<UUID, Set<UUID>> blockedCreatures = new HashMap<UUID, Set<UUID>>();
+class HomicidalBruteWatcher extends WatcherImpl<HomicidalBruteWatcher> {
 
-        public HomicidalBruteWatcher() {
-            super("HomicidalBruteWatcher");
-        }
+    public HomicidalBruteWatcher() {
+        super("HomicidalBruteAttacked", WatcherScope.CARD);
+    }
 
-        public HomicidalBruteWatcher(final HomicidalBruteWatcher watcher) {
-            super(watcher);
-        }
+    public HomicidalBruteWatcher(final HomicidalBruteWatcher watcher) {
+        super(watcher);
+    }
 
-        @Override
-        public HomicidalBruteWatcher copy() {
-            return new HomicidalBruteWatcher(this);
-        }
+    @Override
+    public HomicidalBruteWatcher copy() {
+        return new HomicidalBruteWatcher(this);
+    }
 
-        @Override
-        public void watch(GameEvent event, Game game) {
-            if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED && event.getSourceId().equals(sourceId)) {
-                condition = true;
-            }
+    @Override
+    public void watch(GameEvent event, Game game) {
+        if (condition == true)
+            return;
+        if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED && event.getSourceId().equals(sourceId)) {
+            condition = true;
         }
     }
 }
@@ -121,7 +123,7 @@ class HomicidalBruteTriggeredAbility extends TriggeredAbilityImpl<HomicidalBrute
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.END_PHASE_PRE && event.getPlayerId().equals(this.controllerId)) {
-            HomicidalBrute.HomicidalBruteWatcher watcher = (HomicidalBrute.HomicidalBruteWatcher) game.getState().getWatchers().get(this.controllerId, "HomicidalBruteWatcher");
+            Watcher watcher = game.getState().getWatchers().get("HomicidalBruteAttacked", sourceId);
             if (watcher != null && !watcher.conditionMet()) {
                 return true;
             }

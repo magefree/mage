@@ -35,6 +35,7 @@ import java.util.List;
 import java.util.UUID;
 
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageObjectImpl;
@@ -50,7 +51,7 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.PermanentCard;
 import mage.game.stack.Spell;
 import mage.watchers.Watcher;
-import mage.watchers.Watchers;
+import mage.watchers.WatcherImpl;
 import org.apache.log4j.Logger;
 
 public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> implements Card {
@@ -60,7 +61,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 
     protected UUID ownerId;
     protected int cardNumber;
-    protected Watchers watchers = new Watchers();
+    protected List<Watcher> watchers = new ArrayList<Watcher>();
     protected String expansionSetCode;
     protected Rarity rarity;
     protected boolean faceDown;
@@ -97,7 +98,9 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
         cardNumber = card.cardNumber;
         expansionSetCode = card.expansionSetCode;
         rarity = card.rarity;
-        watchers = card.watchers.copy();
+        for (Watcher watcher: (List<Watcher>)card.watchers) {
+            this.watchers.add(watcher.copy());
+        }
         faceDown = card.faceDown;
 
         canTransform = card.canTransform;
@@ -112,7 +115,6 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
         this.objectId = UUID.randomUUID();
         this.abilities.newOriginalId();
         this.abilities.setSourceId(objectId);
-        this.watchers.setSourceId(objectId);
     }
 
     public static Card createCard(String name) {
@@ -190,10 +192,10 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
     }
 
     @Override
-    public Watchers getWatchers() {
+    public List<Watcher> getWatchers() {
         return watchers;
     }
-
+    
     @Override
     public void checkTriggers(Zone zone, GameEvent event, Game game) {
         for (TriggeredAbility ability : abilities.getTriggeredAbilities(zone)) {

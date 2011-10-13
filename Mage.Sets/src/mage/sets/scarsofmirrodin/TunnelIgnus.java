@@ -28,6 +28,9 @@
 
 package mage.sets.scarsofmirrodin;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -41,10 +44,10 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
-import mage.watchers.Watcher;
 import mage.watchers.WatcherImpl;
 
 import java.util.UUID;
+import mage.Constants.WatcherScope;
 
 /**
  * @author Loki
@@ -74,15 +77,17 @@ public class TunnelIgnus extends CardImpl<TunnelIgnus> {
 }
 
 class TunnelIgnusWatcher extends WatcherImpl {
-    int count = 0;
+    protected Map<UUID, Integer> counts = new HashMap<UUID, Integer>();
 
     public TunnelIgnusWatcher() {
-        super("LandPlayedCount");
+        super("LandPlayedCount", WatcherScope.PLAYER);
     }
 
     public TunnelIgnusWatcher(final TunnelIgnusWatcher watcher) {
         super(watcher);
-        this.count = watcher.count;
+        for (Entry<UUID, Integer> entry: watcher.counts.entrySet()) {
+            counts.put(entry.getKey(), entry.getValue());
+        }
     }
 
     @Override
@@ -92,15 +97,14 @@ class TunnelIgnusWatcher extends WatcherImpl {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (condition == true) //no need to check - condition has already occured
-            return;
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).getToZone() == Constants.Zone.BATTLEFIELD) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent.getCardType().contains(CardType.LAND) && game.getOpponents(this.controllerId).contains(permanent.getControllerId())) {
-                count++;
-                if (count > 1) {
-                    condition = true;
+                int count = 1;
+                if (counts.containsKey(permanent.getControllerId())) {
+                    count += counts.get(permanent.getControllerId());
                 }
+                counts.put(permanent.getControllerId(), count);
             }
         }
     }
@@ -108,7 +112,7 @@ class TunnelIgnusWatcher extends WatcherImpl {
     @Override
     public void reset() {
         super.reset();
-        count = 0;
+        counts.clear();
     }
 }
 
@@ -128,18 +132,18 @@ class TunnelIgnusTriggeredAbility extends TriggeredAbilityImpl<TunnelIgnusTrigge
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Watcher watcher = game.getState().getWatchers().get(this.getControllerId(), "LandPlayedCount");
-        if (watcher != null && watcher.conditionMet()) {
-            if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).getToZone() == Constants.Zone.BATTLEFIELD) {
-                Permanent permanent = game.getPermanent(event.getTargetId());
-                if (permanent != null && permanent.getCardType().contains(CardType.LAND) && game.getOpponents(this.controllerId).contains(permanent.getControllerId())) {
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).getToZone() == Constants.Zone.BATTLEFIELD) {
+            Permanent permanent = game.getPermanent(event.getTargetId());
+            if (permanent != null && permanent.getCardType().contains(CardType.LAND) && game.getOpponents(this.controllerId).contains(permanent.getControllerId())) {
+                TunnelIgnusWatcher watcher = (TunnelIgnusWatcher) game.getState().getWatchers().get("LandPlayedCount", this.controllerId);
+                if (watcher != null && watcher.counts.get(permanent.getControllerId()) > 1) {
                     for (Effect effect : this.getEffects()) {
                         effect.setTargetPointer(new FixedTarget(permanent.getControllerId()));
                     }
                     return true;
                 }
+                return false;
             }
-            return false;
         }
         return false;
     }

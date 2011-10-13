@@ -30,7 +30,6 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
@@ -38,14 +37,10 @@ import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.token.SpiritToken;
 import mage.watchers.Watcher;
-import mage.watchers.WatcherImpl;
 
 /**
  *
@@ -61,8 +56,8 @@ public class DrippingTongueZubera extends CardImpl<DrippingTongueZubera> {
 		this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new SpiritToken(), new DrippingTongueZuberaDynamicValue()), false));
-        this.addWatcher(new DrippingTongueZuberaWatcher());
+        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new SpiritToken(), new ZuberasDiedDynamicValue()), false));
+        this.addWatcher(new ZuberasDiedWatcher());
     }
 
     public DrippingTongueZubera (final DrippingTongueZubera card) {
@@ -74,66 +69,4 @@ public class DrippingTongueZubera extends CardImpl<DrippingTongueZubera> {
         return new DrippingTongueZubera(this);
     }
 
-}
-
-class DrippingTongueZuberaWatcher extends WatcherImpl<DrippingTongueZuberaWatcher> {
-
-    public int zuberasDiedThisTurn = 0;
-
-    public DrippingTongueZuberaWatcher() {
-        super("ZuberasDiedDrippingTongueZubera");
-    }
-
-    public DrippingTongueZuberaWatcher(final DrippingTongueZuberaWatcher watcher) {
-        super(watcher);
-    }
-
-    @Override
-    public DrippingTongueZuberaWatcher copy() {
-        return new DrippingTongueZuberaWatcher(this);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
-            if (((ZoneChangeEvent) event).getFromZone() == Constants.Zone.BATTLEFIELD &&
-                    ((ZoneChangeEvent) event).getToZone() == Constants.Zone.GRAVEYARD) {
-                Card card = game.getLastKnownInformation(event.getTargetId(), Constants.Zone.BATTLEFIELD);
-                if (card != null && card.hasSubtype("Zubera")) {
-                    zuberasDiedThisTurn++;
-                }
-            }
-        }
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        zuberasDiedThisTurn = 0;
-    }
-
-}
-
-class DrippingTongueZuberaDynamicValue implements DynamicValue {
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility) {
-        Watcher watcher = game.getState().getWatchers().get(sourceAbility.getControllerId(), "ZuberasDiedDrippingTongueZubera");
-        return ((DrippingTongueZuberaWatcher) watcher).zuberasDiedThisTurn;
-    }
-
-    @Override
-    public DynamicValue clone() {
-        return new DrippingTongueZuberaDynamicValue();
-    }
-
-    @Override
-    public String toString() {
-        return "1";
-    }
-
-    @Override
-    public String getMessage() {
-        return "Zubera put into a graveyard from play this turn";
-    }
 }
