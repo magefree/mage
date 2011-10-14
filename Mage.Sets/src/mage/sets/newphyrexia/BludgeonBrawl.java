@@ -39,19 +39,14 @@ import mage.Constants.SubLayer;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 
 /**
@@ -66,8 +61,8 @@ public class BludgeonBrawl extends CardImpl<BludgeonBrawl> {
 
         this.color.setRed(true);
 
+        // Each noncreature, non-Equipment artifact is an Equipment with equip {X} and "Equipped creature gets +X/+0," where X is that artifact's converted mana cost.
         this.addAbility(new BludgeonBrawlAbility());
-        this.addAbility(new BludgeonBrawlTriggeredAbility());
     }
 
     public BludgeonBrawl(final BludgeonBrawl card) {
@@ -168,60 +163,5 @@ class BludgeonBrawlGainAbilityEffect extends ContinuousEffectImpl<BludgeonBrawlG
         }
 
         return false;
-    }
-}
-
-class BludgeonBrawlTriggeredAbility<T extends BludgeonBrawlTriggeredAbility<T>> extends TriggeredAbilityImpl<T> {
-
-    public BludgeonBrawlTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new BludgeonBrawlExitEffect(), false);
-    }
-
-    public BludgeonBrawlTriggeredAbility(BludgeonBrawlTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public T copy() {
-        return (T) new BludgeonBrawlTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId())
-                && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
-            return true;
-        }
-        return false;
-    }
-}
-
-class BludgeonBrawlExitEffect extends OneShotEffect<BludgeonBrawlExitEffect> {
-
-    public BludgeonBrawlExitEffect() {
-        super(Outcome.Neutral);
-    }
-
-    public BludgeonBrawlExitEffect(final BludgeonBrawlExitEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public BludgeonBrawlExitEffect copy() {
-        return new BludgeonBrawlExitEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        List<Permanent> permanents = game.getBattlefield().getActivePermanents(source.getControllerId(), game);
-        for (Permanent permanent : permanents) {
-            if (permanent != null && permanent.getAttachedTo() != null) {
-                Permanent other = game.getPermanent(permanent.getAttachedTo());
-                if (other != null && !other.hasSubtype("Equipment") && !other.hasSubtype("Aura")) {
-                    other.getAttachments().remove(permanent.getId());
-                }
-            }
-        }
-        return true;
     }
 }

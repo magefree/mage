@@ -33,11 +33,9 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.KickerManaCost;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.game.permanent.token.Token;
 
@@ -74,6 +72,7 @@ class KorSoldierToken extends Token {
 		super("Kor Soldier", "1/1 white Kor Soldier creature token");
 		cardType.add(CardType.CREATURE);
 		color.setWhite(true);
+		subtype.add("Kor");
 		subtype.add("Soldier");
 		power = new MageInt(1);
 		toughness = new MageInt(1);

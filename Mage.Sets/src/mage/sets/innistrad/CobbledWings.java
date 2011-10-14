@@ -29,15 +29,16 @@ package mage.sets.innistrad;
 
 import java.util.UUID;
 
-import mage.Constants;
+import mage.Constants.AttachmentType;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.UnblockableAbility;
 import mage.cards.CardImpl;
 
 /**
@@ -51,11 +52,11 @@ public class CobbledWings extends CardImpl<CobbledWings> {
         this.expansionSetCode = "ISD";
         this.subtype.add("Equipment");
 
-        // Equip {1}
-        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(1)));
-
         // Equipped creature has flying.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), Constants.AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.EQUIPMENT)));
+
+        // Equip {1}
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
     }
 
     public CobbledWings(final CobbledWings card) {

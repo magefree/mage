@@ -75,11 +75,12 @@ public class SacrificeEffect extends OneShotEffect<SacrificeEffect>{
 		Player player = game.getPlayer(targetPointer.getFirst(source));
 		filter.setTargetController(TargetController.YOU);
 		int amount = count.calculate(game, source);
+		amount = Math.min(amount, game.getBattlefield().countAll(filter, source.getControllerId()));
 		Target target = new TargetControlledPermanent(amount, amount, filter, false);
 
 		//A spell or ability could have removed the only legal target this player
 		//had, if thats the case this ability should fizzle.
-		if (target.canChoose(player.getId(), game)) {
+		if (amount > 0 && target.canChoose(player.getId(), game)) {
 			boolean abilityApplied = false;
 			while (!target.isChosen() && target.canChoose(player.getId(), game)) {
 				player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
@@ -109,9 +110,7 @@ public class SacrificeEffect extends OneShotEffect<SacrificeEffect>{
 
 	private void setText() {
 		StringBuilder sb = new StringBuilder();
-		sb.append(preText)
-		  .append(" sacrifices ")
-		  .append(filter.getMessage());
+		sb.append(preText).append(" sacrifices ").append(count).append(" ").append(filter.getMessage());
 		staticText = sb.toString();
 	}
 }
