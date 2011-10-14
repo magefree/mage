@@ -25,47 +25,39 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.newphyrexia;
+package mage.sets.conflux;
 
 import java.util.UUID;
 
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.effects.common.continious.BoostOpponentsEffect;
-import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class EleshNornGrandCenobite extends CardImpl<EleshNornGrandCenobite> {
-    public EleshNornGrandCenobite (UUID ownerId) {
-        super(ownerId, 9, "Elesh Norn, Grand Cenobite", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
-        this.expansionSetCode = "NPH";
-        this.supertype.add("Legendary");
-        this.subtype.add("Praetor");
-		this.color.setWhite(true);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(7);
-        this.addAbility(VigilanceAbility.getInstance());
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Constants.Duration.WhileOnBattlefield, true)));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostOpponentsEffect(-2, -2, Constants.Duration.WhileOnBattlefield)));
+public class CumberStone extends CardImpl<CumberStone> {
+
+    public CumberStone(UUID ownerId) {
+        super(ownerId, 24, "Cumber Stone", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}{U}");
+        this.expansionSetCode = "CON";
+
+        this.color.setBlue(true);
+
+        // Creatures your opponents control get -1/-0.
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostOpponentsEffect(-1, 0, Constants.Duration.WhileOnBattlefield)));
     }
 
-    public EleshNornGrandCenobite (final EleshNornGrandCenobite card) {
+    public CumberStone(final CumberStone card) {
         super(card);
     }
 
     @Override
-    public EleshNornGrandCenobite copy() {
-        return new EleshNornGrandCenobite(this);
+    public CumberStone copy() {
+        return new CumberStone(this);
     }
-
 }

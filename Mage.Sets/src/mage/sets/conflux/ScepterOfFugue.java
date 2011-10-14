@@ -25,47 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.newphyrexia;
+package mage.sets.conflux;
 
 import java.util.UUID;
 
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.BoostControlledEffect;
-import mage.abilities.effects.common.continious.BoostOpponentsEffect;
-import mage.abilities.keyword.VigilanceAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.DiscardTargetCost;
+import mage.abilities.costs.common.OnlyDuringYourTurnCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DiscardTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class EleshNornGrandCenobite extends CardImpl<EleshNornGrandCenobite> {
-    public EleshNornGrandCenobite (UUID ownerId) {
-        super(ownerId, 9, "Elesh Norn, Grand Cenobite", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
-        this.expansionSetCode = "NPH";
-        this.supertype.add("Legendary");
-        this.subtype.add("Praetor");
-		this.color.setWhite(true);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(7);
-        this.addAbility(VigilanceAbility.getInstance());
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Constants.Duration.WhileOnBattlefield, true)));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostOpponentsEffect(-2, -2, Constants.Duration.WhileOnBattlefield)));
+public class ScepterOfFugue extends CardImpl<ScepterOfFugue> {
+
+    public ScepterOfFugue(UUID ownerId) {
+        super(ownerId, 53, "Scepter of Fugue", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{B}{B}");
+        this.expansionSetCode = "CON";
+
+        this.color.setBlack(true);
+
+        // {1}{B}, {tap}: Target player discards a card. Activate this ability only during your turn.
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DiscardTargetEffect(1), new ManaCostsImpl("{1}{B}"));
+        ability.addCost(new TapSourceCost());
+        ability.addCost(new OnlyDuringYourTurnCost());
+        this.addAbility(ability);
     }
 
-    public EleshNornGrandCenobite (final EleshNornGrandCenobite card) {
+    public ScepterOfFugue(final ScepterOfFugue card) {
         super(card);
     }
 
     @Override
-    public EleshNornGrandCenobite copy() {
-        return new EleshNornGrandCenobite(this);
+    public ScepterOfFugue copy() {
+        return new ScepterOfFugue(this);
     }
-
 }

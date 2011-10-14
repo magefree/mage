@@ -25,8 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.newphyrexia;
+package mage.sets.invasion;
 
 import java.util.UUID;
 
@@ -35,37 +34,37 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.BoostControlledEffect;
-import mage.abilities.effects.common.continious.BoostOpponentsEffect;
-import mage.abilities.keyword.VigilanceAbility;
+import mage.abilities.dynamicvalue.common.DomainValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class EleshNornGrandCenobite extends CardImpl<EleshNornGrandCenobite> {
-    public EleshNornGrandCenobite (UUID ownerId) {
-        super(ownerId, 9, "Elesh Norn, Grand Cenobite", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
-        this.expansionSetCode = "NPH";
-        this.supertype.add("Legendary");
-        this.subtype.add("Praetor");
-		this.color.setWhite(true);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(7);
-        this.addAbility(VigilanceAbility.getInstance());
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Constants.Duration.WhileOnBattlefield, true)));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostOpponentsEffect(-2, -2, Constants.Duration.WhileOnBattlefield)));
+public class KavuScout extends CardImpl<KavuScout> {
+
+    public KavuScout(UUID ownerId) {
+        super(ownerId, 151, "Kavu Scout", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        this.expansionSetCode = "INV";
+        this.subtype.add("Kavu");
+        this.subtype.add("Scout");
+
+        this.color.setRed(true);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(2);
+
+        // Domain - Kavu Scout gets +1/+0 for each basic land type among lands you control.
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(new DomainValue(), new StaticValue(0), Constants.Duration.WhileOnBattlefield)));
     }
 
-    public EleshNornGrandCenobite (final EleshNornGrandCenobite card) {
+    public KavuScout(final KavuScout card) {
         super(card);
     }
 
     @Override
-    public EleshNornGrandCenobite copy() {
-        return new EleshNornGrandCenobite(this);
+    public KavuScout copy() {
+        return new KavuScout(this);
     }
-
 }

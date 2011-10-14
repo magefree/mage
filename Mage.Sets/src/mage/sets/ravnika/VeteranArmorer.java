@@ -25,8 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.newphyrexia;
+package mage.sets.ravnika;
 
 import java.util.UUID;
 
@@ -36,36 +35,34 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
-import mage.abilities.effects.common.continious.BoostOpponentsEffect;
-import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class EleshNornGrandCenobite extends CardImpl<EleshNornGrandCenobite> {
-    public EleshNornGrandCenobite (UUID ownerId) {
-        super(ownerId, 9, "Elesh Norn, Grand Cenobite", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
-        this.expansionSetCode = "NPH";
-        this.supertype.add("Legendary");
-        this.subtype.add("Praetor");
-		this.color.setWhite(true);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(7);
-        this.addAbility(VigilanceAbility.getInstance());
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Constants.Duration.WhileOnBattlefield, true)));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostOpponentsEffect(-2, -2, Constants.Duration.WhileOnBattlefield)));
+public class VeteranArmorer extends CardImpl<VeteranArmorer> {
+
+    public VeteranArmorer(UUID ownerId) {
+        super(ownerId, 34, "Veteran Armorer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        this.expansionSetCode = "RAV";
+        this.subtype.add("Human");
+        this.subtype.add("Soldier");
+
+        this.color.setWhite(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // Other creatures you control get +0/+1.
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(0, 1, Constants.Duration.WhileOnBattlefield, true)));
     }
 
-    public EleshNornGrandCenobite (final EleshNornGrandCenobite card) {
+    public VeteranArmorer(final VeteranArmorer card) {
         super(card);
     }
 
     @Override
-    public EleshNornGrandCenobite copy() {
-        return new EleshNornGrandCenobite(this);
+    public VeteranArmorer copy() {
+        return new VeteranArmorer(this);
     }
-
 }

@@ -16,7 +16,7 @@ public class BoostOpponentsEffect extends ContinuousEffectImpl<BoostOpponentsEff
 	protected FilterCreaturePermanent filter;
 
 	public BoostOpponentsEffect(int power, int toughness, Constants.Duration duration) {
-		this(power, toughness, duration, FilterCreaturePermanent.getDefault());
+		this(power, toughness, duration, new FilterCreaturePermanent("Creatures"));
 	}
 
 	public BoostOpponentsEffect(int power, int toughness, Constants.Duration duration, FilterCreaturePermanent filter) {
