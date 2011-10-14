@@ -61,7 +61,6 @@ public class HorizonSpellbomb extends CardImpl<HorizonSpellbomb> {
                 new ManaCostsImpl("{2}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         this.addAbility(new DiesTriggeredAbility(new DoIfCostPaid(new DrawCardControllerEffect(1), new ManaCostsImpl("{G}")), false));
     }
