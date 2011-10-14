@@ -824,7 +824,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 					if (attachment != null && !(attachment.getSubtype().contains("Aura") ||
 							attachment.getSubtype().contains("Equipment") ||
 							attachment.getSubtype().contains("Fortification"))) {
-						if (perm.removeAttachment(id, this))
+						if (perm.removeAttachment(attachment.getId(), this))
 							return true;
 					}
 				}
