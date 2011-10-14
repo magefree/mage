@@ -81,14 +81,11 @@ class ViridianRevelTriggeredAbility extends TriggeredAbilityImpl<ViridianRevelTr
 
 	@Override
 	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
-			ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-			if (zEvent.getFromZone() == Constants.Zone.BATTLEFIELD && zEvent.getToZone() == Constants.Zone.GRAVEYARD && game.getOpponents(this.getControllerId()).contains(zEvent.getPlayerId())) {
-                Card card = game.getCard(event.getTargetId());
-                if (card != null && card.getCardType().contains(CardType.ARTIFACT)) {
-    				return true;
-                }
-			}
+		if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
+            Card card = game.getCard(event.getTargetId());
+            if (card != null && card.getCardType().contains(CardType.ARTIFACT)) {
+                return true;
+            }
 		}
 		return false;
 	}

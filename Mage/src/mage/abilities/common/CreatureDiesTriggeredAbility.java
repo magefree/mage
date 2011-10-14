@@ -65,14 +65,11 @@ public class CreatureDiesTriggeredAbility extends TriggeredAbilityImpl<CreatureD
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
-                Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-                if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)
-                        && (!another || !permanent.getId().equals(this.getSourceId()))) {
-                    return true;
-                }
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
+            Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
+            if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)
+                    && (!another || !permanent.getId().equals(this.getSourceId()))) {
+                return true;
             }
         }
         return false;

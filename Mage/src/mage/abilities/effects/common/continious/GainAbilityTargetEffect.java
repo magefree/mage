@@ -50,7 +50,8 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl<GainAbilityTar
 	protected Ability ability;
 
 	public GainAbilityTargetEffect(Ability ability, Duration duration) {
-		super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+		super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, 
+                ability.getEffects().size() > 0 ? ability.getEffects().get(0).getOutcome() : Outcome.AddAbility);
 		this.ability = ability;
 	}
 

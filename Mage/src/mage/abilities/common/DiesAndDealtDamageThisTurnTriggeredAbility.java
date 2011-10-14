@@ -30,14 +30,11 @@ public class DiesAndDealtDamageThisTurnTriggeredAbility extends TriggeredAbility
 
 	@Override
 	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
-			ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-			if (zEvent.getFromZone() == Constants.Zone.BATTLEFIELD && zEvent.getToZone() == Constants.Zone.GRAVEYARD) {
-				Card card = game.getLastKnownInformation(event.getTargetId(), Constants.Zone.BATTLEFIELD);
-				if (card instanceof Permanent && ((Permanent)card).getDealtDamageByThisTurn().contains(this.sourceId)) {
-					return true;
-				}
-			}
+		if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
+            Card card = game.getLastKnownInformation(event.getTargetId(), Constants.Zone.BATTLEFIELD);
+            if (card instanceof Permanent && ((Permanent)card).getDealtDamageByThisTurn().contains(this.sourceId)) {
+                return true;
+            }
 		}
 		return false;
 	}

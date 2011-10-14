@@ -40,8 +40,7 @@ public class DiesAnotherCreatureYouControlTriggeredAbility extends TriggeredAbil
             Permanent permanent = zEvent.getTarget();
 
             if (permanent != null && permanent.getCardType().contains(Constants.CardType.CREATURE) &&
-                    zEvent.getToZone() == Constants.Zone.GRAVEYARD &&
-                    zEvent.getFromZone() == Constants.Zone.BATTLEFIELD &&
+                    zEvent.isDiesEvent() &&
                     permanent.getControllerId().equals(this.getControllerId())) {
                 return true;
             }
