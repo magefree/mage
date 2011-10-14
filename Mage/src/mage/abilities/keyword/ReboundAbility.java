@@ -47,7 +47,6 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
-import org.apache.log4j.Logger;
 
 /**
  * This ability has no effect by default and will always return false on the call
@@ -104,7 +103,7 @@ public class ReboundAbility extends TriggeredAbilityImpl<ReboundAbility> {
 		if ( event.getType() == EventType.SPELL_CAST && this.installReboundEffect ) {
 			Spell spell = game.getStack().getSpell(event.getTargetId());
 			if (spell != null && spell.getSourceId().equals(this.getSourceId())) {
-				spell.getSpellAbility().addEffect(new ReboundEffect(spell.getId()));
+				spell.getSpellAbility().addEffect(new ReboundEffect());
 				this.installReboundEffect = false;
 			}
 		}
@@ -132,34 +131,31 @@ public class ReboundAbility extends TriggeredAbilityImpl<ReboundAbility> {
  */
 class ReboundEffect extends OneShotEffect<ReboundEffect> {
 
-	private Logger log = Logger.getLogger(ReboundEffect.class);
-
 	private UUID originalId;
 
-	public ReboundEffect(UUID originalId) {
+	public ReboundEffect() {
 		super(Outcome.Benefit);
-		this.originalId = originalId;
 	}
 
 	public ReboundEffect ( ReboundEffect effect ) {
 		super(effect);
-		this.originalId = effect.originalId;
 	}
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		if (!originalId.equals(source.getId())) {
-			log.warn("rebound was ignored. was it copied spell?");
+		Spell sourceSpell = (Spell)game.getObject(source.getId());
+		if ( sourceSpell.isCopiedSpell() ) {
 			return false;
 		}
+		else {
+			Card sourceCard = (Card)game.getObject(source.getSourceId());
+			ReboundEffectCastFromExileDelayedTrigger trigger = new ReboundEffectCastFromExileDelayedTrigger(sourceCard.getId(), sourceCard.getId());
+			trigger.setControllerId(source.getControllerId());
+			game.addDelayedTriggeredAbility(trigger);
 
-		Card sourceCard = (Card)game.getObject(source.getSourceId());
-		ReboundEffectCastFromExileDelayedTrigger trigger = new ReboundEffectCastFromExileDelayedTrigger(sourceCard.getId(), sourceCard.getId());
-		trigger.setControllerId(source.getControllerId());
-		game.addDelayedTriggeredAbility(trigger);
-
-		game.getContinuousEffects().addEffect(new ReboundCastFromHandReplacementEffect(sourceCard.getId()), source);
-		return true;
+			game.getContinuousEffects().addEffect(new ReboundCastFromHandReplacementEffect(sourceCard.getId()), source);
+			return true;
+		}
 	}
 
 	@Override
@@ -204,13 +200,19 @@ class ReboundCastFromHandReplacementEffect extends ReplacementEffectImpl<Rebound
 
 	@Override
 	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		Card sourceCard = (Card)game.getObject(source.getSourceId());
-		Player player = game.getPlayer(sourceCard.getOwnerId());
+		Spell sourceSpell = (Spell)game.getObject(source.getId());
+		if ( sourceSpell.isCopiedSpell() ) {
+			return false;
+		}
+		else {
+			Card sourceCard = (Card)game.getObject(source.getSourceId());
+			Player player = game.getPlayer(sourceCard.getOwnerId());
 
-		sourceCard.moveToExile(source.getSourceId(), player.getName() + " Rebound Exile", source.getId(), game);
-		this.used = true;
+			sourceCard.moveToExile(source.getSourceId(), player.getName() + " Rebound Exile", source.getId(), game);
+			this.used = true;
 
-		return true;
+			return true;
+		}
 	}
 
 	@Override

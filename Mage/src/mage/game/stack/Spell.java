@@ -436,5 +436,9 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 	public void setCopiedSpell(boolean isCopied) {
 		this.copiedSpell = isCopied;
 	}
+	
+	public boolean isCopiedSpell ( ) {
+		return this.copiedSpell;
+	}
 }
 
