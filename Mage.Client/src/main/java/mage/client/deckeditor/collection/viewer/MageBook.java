@@ -31,7 +31,6 @@ package mage.client.deckeditor.collection.viewer;
 import mage.cards.Card;
 import mage.cards.CardDimensions;
 import mage.cards.MageCard;
-import mage.cards.decks.Constructed;
 import mage.client.cards.BigCard;
 import mage.client.cards.CardsStorage;
 import mage.client.components.HoverButton;
@@ -67,14 +66,15 @@ public class MageBook extends JComponent {
         super();
         this.bigCard = bigCard;
         this.setsToDisplay = ConstructedFormats.getSetsByFormat(ConstructedFormats.getDefault());
+        this.conf = new _3x3Configuration();
         initComponents();
     }
 
     private void initComponents() {
         setOpaque(false);
-        setSize(WIDTH, HEIGHT);
-        setPreferredSize(new Dimension(WIDTH, HEIGHT));
-        setMinimumSize(new Dimension(WIDTH, HEIGHT));
+        setSize(conf.WIDTH, conf.HEIGHT);
+        setPreferredSize(new Dimension(conf.WIDTH, conf.HEIGHT));
+        setMinimumSize(new Dimension(conf.WIDTH, conf.HEIGHT));
         //setBorder(BorderFactory.createLineBorder(Color.green));
 
         jPanelLeft = getImagePanel(LEFT_PANEL_IMAGE_PATH, ImagePanel.TILED);
@@ -108,7 +108,7 @@ public class MageBook extends JComponent {
 
         image = ImageHelper.loadImage(RIGHT_PAGE_BUTTON_IMAGE_PATH);
         pageRight = new HoverButton(null, image, image, image, new Rectangle(64, 64));
-        pageRight.setBounds(WIDTH - 2 * LEFT_RIGHT_PAGES_WIDTH - 64, 0, 64, 64);
+        pageRight.setBounds(conf.WIDTH - 2 * LEFT_RIGHT_PAGES_WIDTH - 64, 0, 64, 64);
         pageRight.setVisible(false);
         pageRight.setObserver(new Command() {
             @Override
@@ -151,7 +151,7 @@ public class MageBook extends JComponent {
         int y = 0;
         int dy = 0;
         if (this.setsToDisplay.size() > 1) {
-            dy = (HEIGHT - 120) / (this.setsToDisplay.size() - 1) + 1;
+            dy = (conf.HEIGHT - 120) / (this.setsToDisplay.size() - 1) + 1;
         }
         int count = 0;
         JPanel currentPanel = jPanelLeft;
@@ -208,19 +208,19 @@ public class MageBook extends JComponent {
 
         Rectangle rectangle = new Rectangle();
         rectangle.translate(OFFSET_X, OFFSET_Y);
-        for (int i = 0; i < Math.min(CARDS_PER_PAGE / 2, size); i++) {
+        for (int i = 0; i < Math.min(conf.CARDS_PER_PAGE / 2, size); i++) {
             addCard(new CardView(cards.get(i)), bigCard, null, rectangle);
-            rectangle = CardPosition.translatePosition(i, rectangle);
+            rectangle = CardPosition.translatePosition(i, rectangle, conf);
         }
 
         // calculate the x offset of the second (right) page
-        int second_page_x = (WIDTH - 2 * LEFT_RIGHT_PAGES_WIDTH) -
-                (cardDimensions.frameWidth + CardPosition.GAP_X) * 3 + CardPosition.GAP_X - OFFSET_X;
+        int second_page_x = (conf.WIDTH - 2 * LEFT_RIGHT_PAGES_WIDTH) -
+                (cardDimensions.frameWidth + CardPosition.GAP_X) * conf.CARD_COLUMNS + CardPosition.GAP_X - OFFSET_X;
 
         rectangle.setLocation(second_page_x, OFFSET_Y);
-        for (int i = CARDS_PER_PAGE / 2; i < Math.min(CARDS_PER_PAGE, size); i++) {
+        for (int i = conf.CARDS_PER_PAGE / 2; i < Math.min(conf.CARDS_PER_PAGE, size); i++) {
             addCard(new CardView(cards.get(i)), bigCard, null, rectangle);
-            rectangle = CardPosition.translatePosition(i - CARDS_PER_PAGE / 2, rectangle);
+            rectangle = CardPosition.translatePosition(i - conf.CARDS_PER_PAGE / 2, rectangle, conf);
         }
 
         jLayeredPane.repaint();
@@ -247,10 +247,10 @@ public class MageBook extends JComponent {
     }
 
     private java.util.List<Card> getCards(int page, String set) {
-        int start = page * CARDS_PER_PAGE;
-        int end = (page + 1) * CARDS_PER_PAGE;
+        int start = page * conf.CARDS_PER_PAGE;
+        int end = (page + 1) * conf.CARDS_PER_PAGE;
         java.util.List<Card> cards = CardsStorage.getAllCards(start, end, currentSet, false);
-        if (cards.size() > CARDS_PER_PAGE) {
+        if (cards.size() > conf.CARDS_PER_PAGE) {
             pageRight.setVisible(true);
         }
         return cards;
@@ -287,6 +287,23 @@ public class MageBook extends JComponent {
         addSetTabs();
     }
 
+    public void updateSize(String size) {
+        if (size.equals("small")) {
+            this.conf = new _3x3Configuration();
+
+        } else if (size.equals("big")) {
+            this.conf = new _4x4Configuration();
+        } else {
+            return;
+        }
+        setSize(conf.WIDTH, conf.HEIGHT);
+        setPreferredSize(new Dimension(conf.WIDTH, conf.HEIGHT));
+        setMinimumSize(new Dimension(conf.WIDTH, conf.HEIGHT));
+        pageRight.setBounds(conf.WIDTH - 2 * LEFT_RIGHT_PAGES_WIDTH - 64, 0, 64, 64);
+        addSetTabs();
+        showCards();
+    }
+
     /**
      * Defines the position of the next card on the mage book
      */
@@ -294,19 +311,50 @@ public class MageBook extends JComponent {
         private CardPosition() {
         }
 
-        public static Rectangle translatePosition(int index, Rectangle r) {
+        public static Rectangle translatePosition(int index, Rectangle r, Configuration conf) {
             Rectangle rect = new Rectangle(r);
-            rect.translate((cardDimensions.frameWidth + GAP_X) * dx[index],
-                    (cardDimensions.frameHeight + GAP_Y) * dy[index]);
+            rect.translate((cardDimensions.frameWidth + GAP_X) * conf.dx[index],
+                    (cardDimensions.frameHeight + GAP_Y) * conf.dy[index]);
             return rect;
         }
 
-        private static final int[] dx = {1, 1, -2, 1, 1, -2, 1, 1, 2, 1, -2, 1, 1, -2, 1, 1};
-        private static final int[] dy = {0, 0, 1, 0, 0, 1, 0, 0, -2, 0, 1, 0, 0, 1, 0, 0};
         public static final int GAP_X = 17;
         public static final int GAP_Y = 45;
-        private static int cardWidth;
-        private static int cardHeight;
+    }
+
+    abstract class Configuration {
+        public int CARDS_PER_PAGE;
+        public int CARD_ROWS;
+        public int CARD_COLUMNS;
+        public int WIDTH;
+        public int HEIGHT;
+
+        public int[] dx;
+        public int[] dy;
+    }
+
+    class _3x3Configuration extends Configuration {
+        _3x3Configuration() {
+            this.WIDTH = 950;
+            this.HEIGHT = 650;
+            CARD_ROWS = 3;
+            CARD_COLUMNS = 3;
+            this.CARDS_PER_PAGE = 18;
+            this.dx = new int[]{1, 1, -2, 1, 1, -2, 1, 1, 2, 1, -2, 1, 1, -2, 1, 1};
+            this.dy = new int[]{0, 0, 1, 0, 0, 1, 0, 0, -2, 0, 1, 0, 0, 1, 0, 0};
+        }
+    }
+
+    class _4x4Configuration extends Configuration {
+        _4x4Configuration() {
+            this.WIDTH = 1250;
+            this.HEIGHT = 850;
+            CARD_ROWS = 4;
+            CARD_COLUMNS = 4;
+            this.CARDS_PER_PAGE = 32;
+            this.dx = new int[]{1, 1, 1, -3, 1, 1, 1, -3, 1, 1, 1, -3, 1, 1, 1, -3};
+            this.dy = new int[]{0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1};
+        }
     }
 
     private JPanel jPanelLeft;
@@ -332,11 +380,10 @@ public class MageBook extends JComponent {
     static private final String RIGHT_PAGE_BUTTON_IMAGE_PATH = "/book_pager_right.png";
     static private final String LEFT_TAB_IMAGE_PATH = "/tab_left.png";
     static private final String RIGHT_TAB_IMAGE_PATH = "/tab_right.png";
-    static private final int CARDS_PER_PAGE = 18;
-    static private final int WIDTH = 950;
-    static private final int HEIGHT = 650;
     static private final int OFFSET_X = 25;
     static private final int OFFSET_Y = 20;
     static private final int LEFT_RIGHT_PAGES_WIDTH = 40;
     static private final Color NOT_IMPLEMENTED = new Color(220, 220, 220, 150);
+
+    private Configuration conf;
 }

@@ -59,7 +59,7 @@ public final class CollectionViewerPanel extends JPanel {
         btnExit.setAlignmentX(Component.LEFT_ALIGNMENT);
         jPanel1.add(btnExit);
 
-        JLabel label1 = new JLabel("Choose sets to display:");
+        JLabel label1 = new JLabel("Choose format:");
         label1.setAlignmentX(Component.LEFT_ALIGNMENT);
         jPanel1.add(label1);
 
@@ -69,6 +69,31 @@ public final class CollectionViewerPanel extends JPanel {
         formats.setMaximumSize(new Dimension(100, 25));
         formats.setAlignmentX(Component.LEFT_ALIGNMENT);
         jPanel1.add(formats);
+
+        JLabel label2 = new JLabel("Choose size:");
+        label2.setAlignmentX(Component.LEFT_ALIGNMENT);
+        jPanel1.add(label2);
+
+        small3x3 = new JRadioButton("3x3");
+        small3x3.setSelected(true);
+        small3x3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                big4x4.setSelected(false);
+                mageBook.updateSize("small");
+            }
+        });
+        jPanel1.add(small3x3);
+
+        big4x4 = new JRadioButton("4x4");
+        big4x4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                small3x3.setSelected(false);
+                mageBook.updateSize("big");
+            }
+        });
+        jPanel1.add(big4x4);
 
         formats.addActionListener(new ActionListener() {
             @Override
@@ -154,5 +179,7 @@ public final class CollectionViewerPanel extends JPanel {
 	private javax.swing.JButton btnExit;
     private JComboBox formats;
     private MageBook mageBook;
+    private JRadioButton small3x3;
+    private JRadioButton big4x4;
 
 }
