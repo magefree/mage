@@ -121,7 +121,6 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 		this.tableId = tableId;
 		this.mode = mode;
 		this.btnAddLand.setVisible(false);
-		//this.cardTableSelector.setMode(mode);
 		switch (mode) {
 			case Limited:
 				this.btnAddLand.setVisible(true);
@@ -129,7 +128,6 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 			case Sideboard:
 				this.btnSubmit.setVisible(true);
 				this.cardSelector.loadCards(new ArrayList<Card>(deck.getSideboard()), this.bigCard, mode == DeckEditorMode.Limited);
-				//this.cardTableSelector.loadCards(new ArrayList<Card>(deck.getSideboard()), this.bigCard, mode == DeckEditorMode.Limited);
 				this.btnExit.setVisible(false);
 				this.btnImport.setVisible(false);
 				if (!MageFrame.getSession().isTestMode())
@@ -163,9 +161,6 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
 	private void init() {
 		this.cardSelector.setVisible(true);
-		//this.cardTableSelector.setVisible(false);
-		//this.jRadioButtonFullCards.setSelected(true);
-		//this.jRadioButtonListTable.setSelected(false);
 		this.jPanel1.setVisible(true);
 		for (ICardGrid component : this.cardSelector.getCardGridComponents()) {
 			component.clearCardEventListeners();
@@ -240,13 +235,10 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 				@Override
 				public void event(Event event) {
 					if (event.getEventName().equals("double-click")) {
-						//boolean isListView = cardSelector.getCardsList() instanceof TableModel;
 						for (Card card: deck.getSideboard()) {
 							if (card.getId().equals(event.getSource())) {
 								deck.getSideboard().remove(card);
-								//if (!isListView) {
 								deck.getCards().add(card);
-								//}
 								break;
 							}
 						}
@@ -299,7 +291,6 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
         jSplitPane1 = new javax.swing.JSplitPane();
         cardSelector = new mage.client.deckeditor.CardSelector();
-		//cardTableSelector = new mage.client.deckeditor.table.CardTableSelector();
 		deckArea = new mage.client.deckeditor.DeckArea();
         jPanel1 = new javax.swing.JPanel();
         bigCard = new mage.client.cards.BigCard();
@@ -314,52 +305,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 		btnAddLand = new javax.swing.JButton();
 		txtTimeRemaining = new javax.swing.JTextField();
 
-		/*
-		jLayeredPane1 = new javax.swing.JLayeredPane();
-        jRadioButtonFullCards = new javax.swing.JRadioButton();
-        jRadioButtonListTable = new javax.swing.JRadioButton();
-
-		jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "View", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", Font.BOLD, 13), new java.awt.Color(0, 0, 0))); // NOI18N
-
-        jRadioButtonFullCards.setLabel("Full cards");
-        jRadioButtonFullCards.setBounds(50, 27, 80, 23);
-        jLayeredPane1.add(jRadioButtonFullCards, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jRadioButtonFullCards.getAccessibleContext().setAccessibleName("Full cards");
-		jRadioButtonFullCards.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (jRadioButtonListTable.isSelected()) {
-					jRadioButtonListTable.setSelected(false);
-					//cardTableSelector.setVisible(false);
-					cardSelector.setVisible(true);
-					jSplitPane1.setTopComponent(cardSelector);
-					jSplitPane1.setDividerLocation(0.6);
-					jSplitPane1.revalidate();
-					jSplitPane1.repaint();
-				}
-			}
-		});
-
-		jRadioButtonListTable.setActionCommand("List");
-        jRadioButtonListTable.setText("List");
-        jRadioButtonListTable.setBounds(140, 27, 70, 23);
-        jLayeredPane1.add(jRadioButtonListTable, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		jRadioButtonListTable.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (jRadioButtonFullCards.isSelected()) {
-					jRadioButtonFullCards.setSelected(false);
-					cardTableSelector.setVisible(true);
-					cardSelector.setVisible(false);
-					jSplitPane1.setTopComponent(cardTableSelector);
-					jSplitPane1.setDividerLocation(0.6);
-					jSplitPane1.revalidate();
-					jSplitPane1.repaint();
-				}
-			}
-		});*/
-
-        jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+		jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         jSplitPane1.setResizeWeight(0.5);
         jSplitPane1.setTopComponent(cardSelector);
         jSplitPane1.setBottomComponent(deckArea);
@@ -584,8 +530,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 			}
 			deck.getCards().clear();
 			cardSelector.loadCards(new ArrayList<Card>(deck.getSideboard()), this.bigCard, mode == DeckEditorMode.Limited);
-			//cardTableSelector.loadCards(new ArrayList<Card>(deck.getSideboard()), this.bigCard, mode == DeckEditorMode.Limited);
-		}
+	    }
 		else {
 			deck = new Deck();
 		}
@@ -659,16 +604,12 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnLoad;
     private javax.swing.JButton btnNew;
     private javax.swing.JButton btnSave;
-    //private mage.client.deckeditor.table.CardTableSelector cardTableSelector;
     private mage.client.deckeditor.CardSelector cardSelector;
     private mage.client.deckeditor.DeckArea deckArea;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JLabel lblDeckName;
     private javax.swing.JTextField txtDeckName;
-	//private javax.swing.JRadioButton jRadioButtonFullCards;
-	//private javax.swing.JRadioButton jRadioButtonListTable;
-	//private javax.swing.JLayeredPane jLayeredPane1;
     // End of variables declaration//GEN-END:variables
 
     private JComponent cardInfoPane;

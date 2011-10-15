@@ -27,14 +27,15 @@
 */
 package mage.client.deckeditor.collection.viewer;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.GridBagLayout;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import mage.cards.decks.Constructed;
 import mage.client.cards.BigCard;
+import mage.client.util.sets.ConstructedFormats;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.Console;
 
 /**
  * Pane with big card and mage book.
@@ -42,6 +43,8 @@ import mage.client.cards.BigCard;
  * @author nantuko
  */
 public final class CollectionViewerPanel extends JPanel {
+
+
     public CollectionViewerPanel() {
         initComponents();
     }
@@ -50,13 +53,38 @@ public final class CollectionViewerPanel extends JPanel {
         jPanel1 = new javax.swing.JPanel();
         jPanel1.setOpaque(false);
         bigCard = new BigCard();
-        BoxLayout boxlayout = new BoxLayout(jPanel1, BoxLayout.Y_AXIS);
+        BoxLayout boxlayout = new BoxLayout(jPanel1, BoxLayout.PAGE_AXIS);
         jPanel1.setLayout(boxlayout);
         btnExit = new javax.swing.JButton();
+        btnExit.setAlignmentX(Component.LEFT_ALIGNMENT);
         jPanel1.add(btnExit);
+
+        JLabel label1 = new JLabel("Choose sets to display:");
+        label1.setAlignmentX(Component.LEFT_ALIGNMENT);
+        jPanel1.add(label1);
+
+        formats = new JComboBox(ConstructedFormats.getTypes());
+        formats.setSelectedItem(ConstructedFormats.getDefault());
+        formats.setPreferredSize(new Dimension(100, 25));
+        formats.setMaximumSize(new Dimension(100, 25));
+        formats.setAlignmentX(Component.LEFT_ALIGNMENT);
+        jPanel1.add(formats);
+
+        formats.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (mageBook != null) {
+                    String format = (String)formats.getSelectedItem();
+                    mageBook.updateDispayedSets(format);
+                }
+            }
+        });
+
 		jPanel1.add(Box.createVerticalGlue());
-        bigCard.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+
         bigCard.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        bigCard.setAlignmentX(Component.LEFT_ALIGNMENT);
+        bigCard.setAlignmentY(Component.BOTTOM_ALIGNMENT);
         jPanel1.add(bigCard);
 
         jPanel2 = new MageBookContainer();
@@ -108,8 +136,9 @@ public final class CollectionViewerPanel extends JPanel {
             jScrollPane1.getViewport().setBackground(new Color(0,0,0,0));
 
             jPanel.setLayout(new GridBagLayout()); // centers mage book
-            jPanel.setBackground(new Color(0,0,0,0));
-            jPanel.add(new MageBook(bigCard));
+            jPanel.setBackground(new Color(0, 0, 0, 0));
+            mageBook = new MageBook(bigCard);
+            jPanel.add(mageBook);
 
             setLayout(new java.awt.BorderLayout());
             add(jScrollPane1, java.awt.BorderLayout.CENTER);
@@ -123,5 +152,7 @@ public final class CollectionViewerPanel extends JPanel {
     private javax.swing.JPanel jPanel2;
     private mage.client.cards.BigCard bigCard;
 	private javax.swing.JButton btnExit;
+    private JComboBox formats;
+    private MageBook mageBook;
 
 }
