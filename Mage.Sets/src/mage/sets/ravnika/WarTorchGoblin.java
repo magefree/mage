@@ -33,43 +33,44 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.effects.common.MustBlockSourceEffect;
-import mage.abilities.effects.common.continious.BoostSourceEffect;
-import mage.abilities.keyword.HasteAbility;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterBlockingCreature;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class GoblinFireFiend extends CardImpl<GoblinFireFiend> {
+public class WarTorchGoblin extends CardImpl<WarTorchGoblin> {
 
-    public GoblinFireFiend(UUID ownerId) {
-        super(ownerId, 127, "Goblin Fire Fiend", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
+    public WarTorchGoblin(UUID ownerId) {
+        super(ownerId, 151, "War-Torch Goblin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
         this.expansionSetCode = "RAV";
         this.subtype.add("Goblin");
-        this.subtype.add("Berserker");
+        this.subtype.add("Warrior");
 
         this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        this.addAbility(HasteAbility.getInstance());
-        // Goblin Fire Fiend must be blocked if able.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new MustBlockSourceEffect()));
-        // {R}: Goblin Fire Fiend gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Constants.Duration.EndOfTurn), new ColoredManaCost(Constants.ColoredManaSymbol.R)));
+        // {R}, Sacrifice War-Torch Goblin: War-Torch Goblin deals 2 damage to target blocking creature.
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(2), new ColoredManaCost(Constants.ColoredManaSymbol.R));
+        ability.addCost(new SacrificeSourceCost());
+        ability.addTarget(new TargetCreaturePermanent(new FilterBlockingCreature()));
+        this.addAbility(ability);
     }
 
-    public GoblinFireFiend(final GoblinFireFiend card) {
+    public WarTorchGoblin(final WarTorchGoblin card) {
         super(card);
     }
 
     @Override
-    public GoblinFireFiend copy() {
-        return new GoblinFireFiend(this);
+    public WarTorchGoblin copy() {
+        return new WarTorchGoblin(this);
     }
 }
