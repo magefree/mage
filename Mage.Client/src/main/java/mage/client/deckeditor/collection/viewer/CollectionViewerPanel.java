@@ -27,7 +27,6 @@
 */
 package mage.client.deckeditor.collection.viewer;
 
-import mage.cards.decks.Constructed;
 import mage.client.cards.BigCard;
 import mage.client.util.sets.ConstructedFormats;
 
@@ -35,7 +34,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.Console;
 
 /**
  * Pane with big card and mage book.
@@ -94,6 +92,35 @@ public final class CollectionViewerPanel extends JPanel {
             }
         });
         jPanel1.add(big4x4);
+
+        JLabel label3 = new JLabel("Switch tabs:");
+        label3.setAlignmentX(Component.LEFT_ALIGNMENT);
+        jPanel1.add(label3);
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setPreferredSize(new Dimension(200, 100));
+        buttonPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 100));
+        //buttonPanel.setBorder(BorderFactory.createLineBorder(Color.RED));
+        buttonPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        jPanel1.add(buttonPanel);
+
+        JButton prev = new JButton("Prev");
+        prev.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mageBook.prev();
+            }
+        });
+        buttonPanel.add(prev);
+
+        JButton next = new JButton("Next");
+        next.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mageBook.next();
+            }
+        });
+        buttonPanel.add(next);
 
         formats.addActionListener(new ActionListener() {
             @Override

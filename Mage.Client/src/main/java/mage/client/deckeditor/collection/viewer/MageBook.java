@@ -52,7 +52,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.UUID;
 
 /**
@@ -167,11 +169,15 @@ public class MageBook extends JComponent {
             tab.setSet(set);
             tab.setBounds(0, y, 39, 120);
             final String _set = set;
+            final int _index = count;
             tab.setObserver(new Command() {
                 @Override
                 public void execute() {
                     if (!currentSet.equals(_set) || currentPage != 0) {
                         AudioManager.playAnotherTab();
+                        synchronized (this) {
+                            selectedTab = _index;
+                        }
                         currentPage = 0;
                         currentSet = _set;
                         pageLeft.setVisible(false);
@@ -181,12 +187,14 @@ public class MageBook extends JComponent {
                     }
                 }
             });
+            tabs.add(tab);
             currentPanel.add(tab, JLayeredPane.DEFAULT_LAYER + count++, 0);
             y += dy;
             if (set.equals(currentSet)) {
                 currentPanel = jPanelRight;
                 image = imageRight;
                 currentTab = tab;
+                selectedTab = count-1;
             }
         }
         jPanelLeft.revalidate();
@@ -287,6 +295,26 @@ public class MageBook extends JComponent {
         addSetTabs();
     }
 
+    public void next() {
+        synchronized (this) {
+            selectedTab++;
+            if (selectedTab >= tabs.size()) {
+                selectedTab = 0;
+            }
+            tabs.get(selectedTab).execute();
+        }
+    }
+
+    public void prev() {
+        synchronized (this) {
+            selectedTab--;
+            if (selectedTab < 0) {
+                selectedTab = tabs.size() - 1;
+            }
+            tabs.get(selectedTab).execute();
+        }
+    }
+
     public void updateSize(String size) {
         if (size.equals("small")) {
             this.conf = new _3x3Configuration();
@@ -372,6 +400,8 @@ public class MageBook extends JComponent {
     private static final Logger log = Logger.getLogger(MageBook.class);
     private Dimension cardDimension;
     private java.util.List<String> setsToDisplay = new ArrayList<String>();
+    private java.util.List<HoverButton> tabs = new ArrayList<HoverButton>();
+    private int selectedTab;
 
     static private final String CENTER_PANEL_IMAGE_PATH = "/book_bg.jpg";
     static private final String RIGHT_PANEL_IMAGE_PATH = "/book_right.jpg";

@@ -219,4 +219,10 @@ public class HoverButton extends JPanel implements MouseListener {
 		this.text = text;
 		repaint();
 	}
+
+    public void execute() {
+        if (isEnabled() && observer != null) {
+			observer.execute();
+		}
+    }
 }
