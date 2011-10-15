@@ -33,50 +33,42 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.OnlyDuringUpkeepCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.effects.common.RegenerateSourceEffect;
+import mage.abilities.keyword.FearAbility;
+import mage.abilities.keyword.TransmuteAbility;
 import mage.cards.CardImpl;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class FiremaneAngel extends CardImpl<FiremaneAngel> {
+public class DimirHouseGuard extends CardImpl<DimirHouseGuard> {
 
-    public FiremaneAngel(UUID ownerId) {
-        super(ownerId, 205, "Firemane Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{W}{W}");
+    public DimirHouseGuard(UUID ownerId) {
+        super(ownerId, 83, "Dimir House Guard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.expansionSetCode = "RAV";
-        this.subtype.add("Angel");
+        this.subtype.add("Skeleton");
 
-        this.color.setRed(true);
-        this.color.setWhite(true);
-        this.power = new MageInt(4);
+        this.color.setBlack(true);
+        this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(FirstStrikeAbility.getInstance());
-        // At the beginning of your upkeep, if Firemane Angel is in your graveyard or on the battlefield, you may gain 1 life.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(1), Constants.TargetController.YOU, true));
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Constants.Zone.GRAVEYARD, new GainLifeEffect(1), Constants.TargetController.YOU, true));
-        // {6}{R}{R}{W}{W}: Return Firemane Angel from your graveyard to the battlefield. Activate this ability only during your upkeep.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), new ManaCostsImpl("{6}{R}{R}{W}{W}"));
-        ability.addCost(new OnlyDuringUpkeepCost());
-        this.addAbility(ability);
+        this.addAbility(FearAbility.getInstance());
+        // Sacrifice a creature: Regenerate Dimir House Guard.
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new RegenerateSourceEffect(), new SacrificeTargetCost(new TargetControlledCreaturePermanent())));
+        // Transmute {1}{B}{B}
+        this.addAbility(new TransmuteAbility("{1}{B}{B}"));
     }
 
-    public FiremaneAngel(final FiremaneAngel card) {
+    public DimirHouseGuard(final DimirHouseGuard card) {
         super(card);
     }
 
     @Override
-    public FiremaneAngel copy() {
-        return new FiremaneAngel(this);
+    public DimirHouseGuard copy() {
+        return new DimirHouseGuard(this);
     }
 }

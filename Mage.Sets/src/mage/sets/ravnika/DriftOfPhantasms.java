@@ -28,55 +28,41 @@
 package mage.sets.ravnika;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.OnlyDuringUpkeepCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
+import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.TransmuteAbility;
 import mage.cards.CardImpl;
 
 /**
  *
  * @author Loki
  */
-public class FiremaneAngel extends CardImpl<FiremaneAngel> {
+public class DriftOfPhantasms extends CardImpl<DriftOfPhantasms> {
 
-    public FiremaneAngel(UUID ownerId) {
-        super(ownerId, 205, "Firemane Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{W}{W}");
+    public DriftOfPhantasms(UUID ownerId) {
+        super(ownerId, 46, "Drift of Phantasms", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.expansionSetCode = "RAV";
-        this.subtype.add("Angel");
+        this.subtype.add("Spirit");
 
-        this.color.setRed(true);
-        this.color.setWhite(true);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(3);
+        this.color.setBlue(true);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(5);
 
+        this.addAbility(DefenderAbility.getInstance());
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(FirstStrikeAbility.getInstance());
-        // At the beginning of your upkeep, if Firemane Angel is in your graveyard or on the battlefield, you may gain 1 life.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(1), Constants.TargetController.YOU, true));
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Constants.Zone.GRAVEYARD, new GainLifeEffect(1), Constants.TargetController.YOU, true));
-        // {6}{R}{R}{W}{W}: Return Firemane Angel from your graveyard to the battlefield. Activate this ability only during your upkeep.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), new ManaCostsImpl("{6}{R}{R}{W}{W}"));
-        ability.addCost(new OnlyDuringUpkeepCost());
-        this.addAbility(ability);
+        // Transmute {1}{U}{U}
+        this.addAbility(new TransmuteAbility("{1}{U}{U}"));
     }
 
-    public FiremaneAngel(final FiremaneAngel card) {
+    public DriftOfPhantasms(final DriftOfPhantasms card) {
         super(card);
     }
 
     @Override
-    public FiremaneAngel copy() {
-        return new FiremaneAngel(this);
+    public DriftOfPhantasms copy() {
+        return new DriftOfPhantasms(this);
     }
 }

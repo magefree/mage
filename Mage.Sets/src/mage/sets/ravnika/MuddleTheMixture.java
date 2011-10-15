@@ -28,55 +28,48 @@
 package mage.sets.ravnika;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.OnlyDuringUpkeepCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.effects.common.CounterTargetEffect;
+import mage.abilities.keyword.TransmuteAbility;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
+import mage.filter.FilterSpell;
+import mage.target.TargetSpell;
 
 /**
  *
  * @author Loki
  */
-public class FiremaneAngel extends CardImpl<FiremaneAngel> {
+public class MuddleTheMixture extends CardImpl<MuddleTheMixture> {
+    private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
 
-    public FiremaneAngel(UUID ownerId) {
-        super(ownerId, 205, "Firemane Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{W}{W}");
-        this.expansionSetCode = "RAV";
-        this.subtype.add("Angel");
-
-        this.color.setRed(true);
-        this.color.setWhite(true);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(3);
-
-        this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(FirstStrikeAbility.getInstance());
-        // At the beginning of your upkeep, if Firemane Angel is in your graveyard or on the battlefield, you may gain 1 life.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(1), Constants.TargetController.YOU, true));
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Constants.Zone.GRAVEYARD, new GainLifeEffect(1), Constants.TargetController.YOU, true));
-        // {6}{R}{R}{W}{W}: Return Firemane Angel from your graveyard to the battlefield. Activate this ability only during your upkeep.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), new ManaCostsImpl("{6}{R}{R}{W}{W}"));
-        ability.addCost(new OnlyDuringUpkeepCost());
-        this.addAbility(ability);
+    static {
+        filter.getCardType().add(CardType.INSTANT);
+        filter.getCardType().add(CardType.SORCERY);
+        filter.setNotScopeCardType(Filter.ComparisonScope.Any);
     }
 
-    public FiremaneAngel(final FiremaneAngel card) {
+    public MuddleTheMixture(UUID ownerId) {
+        super(ownerId, 60, "Muddle the Mixture", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}{U}");
+        this.expansionSetCode = "RAV";
+
+        this.color.setBlue(true);
+
+        // Counter target instant or sorcery spell.
+        this.getSpellAbility().addTarget(new TargetSpell(filter));
+		this.getSpellAbility().addEffect(new CounterTargetEffect());
+        // Transmute {1}{U}{U}
+        this.addAbility(new TransmuteAbility("{1}{U}{U}"));
+    }
+
+    public MuddleTheMixture(final MuddleTheMixture card) {
         super(card);
     }
 
     @Override
-    public FiremaneAngel copy() {
-        return new FiremaneAngel(this);
+    public MuddleTheMixture copy() {
+        return new MuddleTheMixture(this);
     }
 }
