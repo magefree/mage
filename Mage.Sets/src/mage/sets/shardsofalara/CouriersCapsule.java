@@ -49,6 +49,8 @@ public class CouriersCapsule extends CardImpl<CouriersCapsule> {
     public CouriersCapsule (UUID ownerId) {
         super(ownerId, 37, "Courier's Capsule", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}{U}");
         this.expansionSetCode = "ALA";
+        this.color.setBlue(true);
+
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardControllerEffect(2), new ManaCostsImpl("{1}{U}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

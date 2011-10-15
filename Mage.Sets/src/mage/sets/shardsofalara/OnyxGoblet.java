@@ -50,6 +50,8 @@ public class OnyxGoblet extends CardImpl<OnyxGoblet> {
     public OnyxGoblet (UUID ownerId) {
         super(ownerId, 81, "Onyx Goblet", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}{B}");
         this.expansionSetCode = "ALA";
+        this.color.setBlack(true);
+
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
