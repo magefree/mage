@@ -112,7 +112,7 @@ public class GamePanel extends javax.swing.JPanel {
         combat.hideDialog();
         MageFrame.getDesktop().add(pickNumber, JLayeredPane.POPUP_LAYER);
 
-		this.feedbackPanel.setConnectedChatPanel(this.gameChatPanel);
+		this.feedbackPanel.setConnectedChatPanel(this.userChatPanel);
 
         //FIXME: remove from here
 		try {
