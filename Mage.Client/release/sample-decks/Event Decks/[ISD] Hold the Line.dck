@@ -1,0 +1,31 @@
+//Created with Mage - www.magefree.com
+NAME:Hold the Line
+AUTHOR:WotC
+
+# Creature
+4 [MBS:1] Accorder Paladin
+2 [MBS:14] Mirran Crusader
+2 [M12:15] Elite Vanguard
+4 [M12:18] Gideon's Lawkeeper
+1 [ISD:6] Champion of the Parish
+4 [ISD:11] Doomed Traveler
+1 [ISD:13] Elite Inquisitor
+4 [ISD:15] Fiend Hunter
+# Artifact
+2 [ISD:217] Butcher's Cleaver
+2 [ISD:233] Silver-Inlaid Dagger
+# Enchantment
+2 [M12:23] Honor of the Pure
+4 [M12:27] Oblivion Ring
+4 [ISD:5] Bonds of Faith
+# Land
+8 [ISD:251] Plains
+8 [ISD:252] Plains
+8 [ISD:250] Plains
+
+# Sideboard
+SB: 3 [SOM:187] Nihil Spellbomb
+SB: 4 [MBS:10] Leonin Relic-Warder
+SB: 3 [NPH:25] Suture Priest
+SB: 4 [M12:11] Celestial Purge
+SB: 1 [ISD:25] Nevermore
