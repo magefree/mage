@@ -30,10 +30,8 @@ package mage.sets.ravnika;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.abilities.effects.common.DestroyNoRegenTargetEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterPermanent;
@@ -58,7 +56,7 @@ public class Putrefy extends CardImpl<Putrefy> {
         this.color.setBlack(true);
         this.color.setGreen(true);
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
-        this.getSpellAbility().addEffect(new DestroyNoRegenTargetEffect());
+        this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
     }
 
     public Putrefy (final Putrefy card) {

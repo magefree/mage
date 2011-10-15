@@ -81,12 +81,16 @@ public class DestroyTargetEffect extends OneShotEffect<DestroyTargetEffect> {
 
 	@Override
 	public String getText(Mode mode) {
+        StringBuffer sb = new StringBuffer();
         if (mode.getTargets().size() == 0) {
-            return "destroy that creature"; //TODO add possibility to specify text with targetPointer usage
+            sb.append("destroy that creature"); //TODO add possibility to specify text with targetPointer usage
         } else if (mode.getTargets().get(0).getNumberOfTargets() == 1)
-		    return "Destroy target " + mode.getTargets().get(0).getTargetName();
+            sb.append("Destroy target ").append(mode.getTargets().get(0).getTargetName());
         else
-            return "Destroy " + mode.getTargets().get(0).getNumberOfTargets() + " target " + mode.getTargets().get(0).getTargetName();
+            sb.append("Destroy ").append(mode.getTargets().get(0).getNumberOfTargets()).append(" target ").append(mode.getTargets().get(0).getTargetName());
+        if (noRegen)
+            sb.append(". It can't be regenerated");
+        return sb.toString();
 	}
 
 }

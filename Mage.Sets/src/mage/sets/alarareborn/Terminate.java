@@ -31,7 +31,7 @@ package mage.sets.alarareborn;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.effects.common.DestroyNoRegenTargetEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 
 import mage.target.common.TargetCreaturePermanent;
@@ -48,7 +48,7 @@ public class Terminate extends CardImpl<Terminate> {
 		this.color.setBlack(true);
 		this.color.setRed(true);
 		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-		this.getSpellAbility().addEffect(new DestroyNoRegenTargetEffect());
+		this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
 	}
 
 	public Terminate(final Terminate card) {

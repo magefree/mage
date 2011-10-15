@@ -28,13 +28,15 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DestroyNoRegenTargetEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -44,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author North
+ * @author North, Loki
  */
 public class Vendetta extends CardImpl<Vendetta> {
 
@@ -62,7 +64,7 @@ public class Vendetta extends CardImpl<Vendetta> {
         this.color.setBlack(true);
 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-        this.getSpellAbility().addEffect(new DestroyNoRegenTargetEffect());
+        this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
         this.getSpellAbility().addEffect(new VendettaEffect());
     }
 
@@ -95,7 +97,7 @@ class VendettaEffect extends OneShotEffect<VendettaEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent target = game.getPermanent(source.getFirstTarget());
+        Permanent target = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Constants.Zone.BATTLEFIELD);
         if (player != null && target != null) {
             player.loseLife(target.getToughness().getValue(), game);
             return true;

@@ -30,7 +30,7 @@ package mage.sets.worldwake;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.effects.common.DestroyNoRegenTargetEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.common.FilterCreaturePermanent;
@@ -56,7 +56,7 @@ public class Smother extends CardImpl<Smother> {
         this.color.setBlack(true);
 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-        this.getSpellAbility().addEffect(new DestroyNoRegenTargetEffect());
+        this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
     }
 
     public Smother(final Smother card) {

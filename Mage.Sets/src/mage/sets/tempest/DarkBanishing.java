@@ -30,7 +30,7 @@ package mage.sets.tempest;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.effects.common.DestroyNoRegenTargetEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -53,7 +53,7 @@ public class DarkBanishing extends CardImpl<DarkBanishing> {
         super(ownerId, 11, "Dark Banishing", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
         this.expansionSetCode = "TMP";
         this.color.setBlack(true);
-        this.getSpellAbility().addEffect(new DestroyNoRegenTargetEffect());
+        this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
