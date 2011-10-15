@@ -148,6 +148,7 @@ public class MageBook extends JComponent {
     private void addSetTabs() {
         jPanelLeft.removeAll();
         jPanelRight.removeAll();
+        tabs.clear();
         Image image = ImageHelper.loadImage(LEFT_TAB_IMAGE_PATH);
         Image imageRight = ImageHelper.loadImage(RIGHT_TAB_IMAGE_PATH);
         int y = 0;
