@@ -38,6 +38,7 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -62,7 +63,7 @@ public class HuntedLammasu extends CardImpl<HuntedLammasu> {
 
         this.addAbility(FlyingAbility.getInstance());
         // When Hunted Lammasu enters the battlefield, put a 4/4 black Horror creature token onto the battlefield under target opponent's control.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new HuntedLammasuEffect(), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenTargetEffect(new HorrorToken()), false);
         Target target = new TargetOpponent();
         target.setRequired(true);
         ability.addTarget(target);
@@ -76,27 +77,6 @@ public class HuntedLammasu extends CardImpl<HuntedLammasu> {
     @Override
     public HuntedLammasu copy() {
         return new HuntedLammasu(this);
-    }
-}
-
-class HuntedLammasuEffect extends OneShotEffect<HuntedLammasuEffect> {
-    HuntedLammasuEffect() {
-        super(Constants.Outcome.PutCreatureInPlay);
-        staticText = "put a 4/4 black Horror creature token onto the battlefield under target opponent's control";
-    }
-
-    HuntedLammasuEffect(final HuntedLammasuEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return new HorrorToken().putOntoBattlefield(1, game, source.getSourceId(), targetPointer.getFirst(source));
-    }
-
-    @Override
-    public HuntedLammasuEffect copy() {
-        return new HuntedLammasuEffect();
     }
 }
 
