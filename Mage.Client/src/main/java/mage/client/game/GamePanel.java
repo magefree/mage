@@ -141,6 +141,13 @@ public class GamePanel extends javax.swing.JPanel {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
+
+        SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				bigCard.setDefaultImage();
+			}
+		});
     }
 
     private Map<String, JComponent> getUIComponents(JLayeredPane jLayeredPane) {
@@ -909,13 +916,6 @@ public class GamePanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 798, Short.MAX_VALUE)
         );
-
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				bigCard.setDefaultImage();
-			}
-		});
     }
 
 	private void btnConcedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConcedeActionPerformed
