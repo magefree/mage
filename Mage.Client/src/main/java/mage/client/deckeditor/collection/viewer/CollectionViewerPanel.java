@@ -100,7 +100,7 @@ public final class CollectionViewerPanel extends JPanel {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setPreferredSize(new Dimension(200, 100));
         buttonPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 100));
-        //buttonPanel.setBorder(BorderFactory.createLineBorder(Color.RED));
+        buttonPanel.setOpaque(false);
         buttonPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
         jPanel1.add(buttonPanel);
 
