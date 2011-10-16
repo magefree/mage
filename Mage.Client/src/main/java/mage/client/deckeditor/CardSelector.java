@@ -66,7 +66,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 	private final List<Card> cards = new ArrayList<Card>();
 	private final FilterCard filter = new FilterCard();
 	private BigCard bigCard;
-	private boolean construct = false;
+	private boolean limited = false;
 	
     /** Creates new form CardSelector */
     public CardSelector() {
@@ -122,12 +122,12 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 		});
 	}
 
-	public void loadCards(List<Card> sideboard, BigCard bigCard, boolean construct) {
+	public void loadSideboard(List<Card> sideboard, BigCard bigCard) {
 		this.bigCard = bigCard;
 		this.btnBooster.setVisible(false);
 		this.btnClear.setVisible(false);
 		this.cbExpansionSet.setVisible(false);
-		this.construct = construct;
+		this.limited = true;
 		this.cards.clear();
 		for (Card card: sideboard) {
 			this.cards.add(card);
@@ -183,7 +183,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 		try {
 			List<Card> filteredCards = new ArrayList<Card>();
 			setCursor(new Cursor(Cursor.WAIT_CURSOR));
-			if (!cards.isEmpty()) {
+			if (limited) {
 				for (Card card: cards) {
 					if (filter.match(card))
 						filteredCards.add(card);
@@ -761,7 +761,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 				mainModel.doubleClick(index);
 			}
 			//if (!mode.equals(Constants.DeckEditorMode.Constructed))
-			if (construct)
+			if (limited)
 				mainModel.fireTableDataChanged();
 		}
 	}//GEN-LAST:event_jButtonAddToMainActionPerformed
@@ -775,7 +775,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 				mainModel.shiftDoubleClick(index);
 			}
 			//if (!mode.equals(Constants.DeckEditorMode.Constructed))
-			if (construct)
+			if (limited)
 				mainModel.fireTableDataChanged();
 		}
 	}//GEN-LAST:event_jButtonAddToSideboardActionPerformed

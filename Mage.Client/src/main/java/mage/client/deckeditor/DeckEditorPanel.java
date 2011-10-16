@@ -127,7 +127,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 				this.txtTimeRemaining.setVisible(true);
 			case Sideboard:
 				this.btnSubmit.setVisible(true);
-				this.cardSelector.loadCards(new ArrayList<Card>(deck.getSideboard()), this.bigCard, mode == DeckEditorMode.Limited);
+				this.cardSelector.loadSideboard(new ArrayList<Card>(deck.getSideboard()), this.bigCard);
 				this.btnExit.setVisible(false);
 				this.btnImport.setVisible(false);
 				if (!MageFrame.getSession().isTestMode())
@@ -208,7 +208,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 								deck.getCards().remove(card);
 								if (mode == DeckEditorMode.Limited || mode == DeckEditorMode.Sideboard) {
 									deck.getSideboard().add(card);
-									cardSelector.loadCards(new ArrayList<Card>(deck.getSideboard()), getBigCard(), mode == DeckEditorMode.Limited);
+									cardSelector.loadSideboard(new ArrayList<Card>(deck.getSideboard()), getBigCard());
 								}
 								break;
 							}
@@ -529,7 +529,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 				deck.getSideboard().add(card);
 			}
 			deck.getCards().clear();
-			cardSelector.loadCards(new ArrayList<Card>(deck.getSideboard()), this.bigCard, mode == DeckEditorMode.Limited);
+			cardSelector.loadSideboard(new ArrayList<Card>(deck.getSideboard()), this.bigCard);
 	    }
 		else {
 			deck = new Deck();
