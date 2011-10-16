@@ -453,10 +453,12 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 		if (activeFrame != null)
 			activeFrame.deactivated();
 		activeFrame = frame;
+        activeFrame.setVisible(true);
 		activeFrame.toFront();
 		try {
 			activeFrame.setSelected(true);
 		} catch (PropertyVetoException ex) {
+            logger.error("Error setting " + frame.getTitle() + " active");
 		}
 		activeFrame.activated();
 	}
@@ -860,13 +862,13 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 name = "Deck Editor - " + deck.getName();
             else
                 name = "Deck Editor";
-        }
-        JInternalFrame[] windows = desktopPane.getAllFramesInLayer(JLayeredPane.DEFAULT_LAYER);
-        for (JInternalFrame window : windows) {
-            if (window instanceof DeckEditorPane) {
-                if (window.getTitle().equals(name)) {
-                    setActive((MagePane)window);
-                    return;
+            JInternalFrame[] windows = desktopPane.getAllFramesInLayer(JLayeredPane.DEFAULT_LAYER);
+            for (JInternalFrame window : windows) {
+                if (window instanceof DeckEditorPane) {
+                    if (window.getTitle().equals(name)) {
+                        setActive((MagePane)window);
+                        return;
+                    }
                 }
             }
         }
