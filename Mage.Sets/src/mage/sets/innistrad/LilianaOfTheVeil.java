@@ -135,7 +135,7 @@ class LilianaOfTheVeilEffect extends OneShotEffect<LilianaOfTheVeilEffect> {
             player.revealCards("Pile 2 (Liliana of the Veil)", cards, game);
 
             Choice choice = createChoice(pile1, cards, game);
-            if (player.choose(Outcome.Neutral, choice, game)) {
+            if (targetPlayer.choose(Outcome.Neutral, choice, game)) {
                 if (choice.getChoice().startsWith("Pile 1")) {
                     sacrificePermanents(pile1, game, source);
                 } else {
