@@ -59,7 +59,8 @@ public class PreventAllCombatDamageEffect extends PreventionEffectImpl<PreventAl
 
 	public PreventAllCombatDamageEffect(final PreventAllCombatDamageEffect effect) {
 		super(effect);
-        this.filter = effect.filter.copy();
+        if (filter != null)
+            this.filter = effect.filter.copy();
 	}
 
 	@Override
