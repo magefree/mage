@@ -25,7 +25,7 @@ update_version_in_java("../Mage.Server/src/main/java/mage/server/Main.java");
 update_version_in_java("../Mage.Server.Console/src/main/java/mage/server/console/ConsoleFrame.java");
 
 sub finded {
-    if (/pom\.xml/) {
+    if (/pom\.xml$/) {
         update_version($_);
     }
 }
