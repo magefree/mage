@@ -199,11 +199,11 @@
                                 </opts>
                             </jre>
                             <versionInfo>
-                                <fileVersion>${project.version}.0</fileVersion>
+                                <fileVersion>0.8.0.0</fileVersion>
                                 <txtFileVersion>MAGE Server</txtFileVersion>
                                 <fileDescription>Mage Server</fileDescription>
                                 <copyright>(C) Mage Development Team</copyright>
-                                <productVersion>${project.version}.0</productVersion>
+                                <productVersion>0.8.0.0</productVersion>
                                 <txtProductVersion>MAGE Server</txtProductVersion>
                                 <productName>MAGE</productName>
                                 <internalName>Mage-Server</internalName>

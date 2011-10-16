@@ -180,11 +180,11 @@
                                 </opts>
                             </jre>
                             <versionInfo>
-                                <fileVersion>${project.version}.0</fileVersion>
+                                <fileVersion>0.8.0.0</fileVersion>
                                 <txtFileVersion>MAGE Client</txtFileVersion>
                                 <fileDescription>Mage Client</fileDescription>
                                 <copyright>(C) Mage Development Team</copyright>
-                                <productVersion>${project.version}.0</productVersion>
+                                <productVersion>0.8.0.0</productVersion>
                                 <txtProductVersion>MAGE Client</txtProductVersion>
                                 <productName>MAGE</productName>
                                 <internalName>Mage-Client</internalName>
