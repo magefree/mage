@@ -9,7 +9,7 @@ hg status --rev 1494 -a --exclude "*\Island[0-9].java" --exclude "*\Mountain[0-9
 For cards added since r1494 till r1550:
 just use --rev 1494:1550 instead
 
-3. Copy result.bat to trunk\Utils folder
+3. Copy added_cards.txt to trunk\Utils folder
 4. Run script:
 > perl extract_in_wiki_format.perl
 5. Open added_cards_in_wiki_format.txt
