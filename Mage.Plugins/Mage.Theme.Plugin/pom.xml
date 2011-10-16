@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.mage</groupId>
 		<artifactId>Mage-Plugins</artifactId>
-		<version>0.7.6</version>
+		<version>0.8</version>
 	</parent>
 	
 	<artifactId>Mage-Theme-Plugin</artifactId>
