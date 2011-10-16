@@ -113,6 +113,7 @@ public class ServerMessagesUtil {
             if (!externalFile.exists()) {
                 log.warn("Couldn't find server.msg.txt using external path: " + pathToExternalMessages);
                 pathToExternalMessages = null; // not to repeat error action again
+                externalFile = null;
             } else if (!externalFile.canRead()) {
                 log.warn("Couldn't read (no access) server.msg.txt using external path: " + pathToExternalMessages);
                 pathToExternalMessages = null; // not to repeat error action again
@@ -130,12 +131,13 @@ public class ServerMessagesUtil {
             File file = new File(SERVER_MSG_TXT_FILE);
             if (!file.exists() || !file.canRead()) {
                 log.warn("Couldn't find server.msg.txt using path: " + SERVER_MSG_TXT_FILE);
-            }
-            try {
-                is = new FileInputStream(file);
-            } catch (Exception f) {
-                log.error(f, f);
-                ignore = true;
+            } else {
+                try {
+                    is = new FileInputStream(file);
+                } catch (Exception f) {
+                    log.error(f, f);
+                    ignore = true;
+                }
             }
         }
         if (is == null) {
