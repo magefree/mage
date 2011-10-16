@@ -19,7 +19,7 @@ print "Enter new version: ";
 my $version = <STDIN>;
 chomp $version;
 
-#find(\&finded, "..");
+find(\&finded, "..");
 update_version_in_java("../Mage.CLient/src/main/java/mage/client/MageFrame.java");
 update_version_in_java("../Mage.Server/src/main/java/mage/server/Main.java");
 update_version_in_java("../Mage.Server.Console/src/main/java/mage/server/console/ConsoleFrame.java");
