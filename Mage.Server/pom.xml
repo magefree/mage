@@ -189,6 +189,7 @@
                                 <mainClass>mage.server.Main</mainClass>
                                 <addDependencies>true</addDependencies>
                                 <preCp>anything</preCp>
+                                <jarLocation>lib/</jarLocation>
                             </classPath>
                             <jre>
                                 <minVersion>1.5.0</minVersion>
