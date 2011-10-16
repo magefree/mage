@@ -108,6 +108,7 @@ public class TournamentPlayerPanel extends javax.swing.JPanel {
         jLabel3.setText("Skill:");
 
         cbLevel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        cbLevel.setSelectedIndex(9);
 
         javax.swing.GroupLayout pnlPlayerNameLayout = new javax.swing.GroupLayout(pnlPlayerName);
         pnlPlayerName.setLayout(pnlPlayerNameLayout);
@@ -116,11 +117,11 @@ public class TournamentPlayerPanel extends javax.swing.JPanel {
             .addGroup(pnlPlayerNameLayout.createSequentialGroup()
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtPlayerName, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE))
+                .addComponent(txtPlayerName, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
         );
         pnlPlayerNameLayout.setVerticalGroup(
             pnlPlayerNameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

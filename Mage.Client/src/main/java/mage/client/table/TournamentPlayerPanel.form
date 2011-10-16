@@ -78,11 +78,11 @@
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="cbLevel" min="-2" pref="45" max="-2" attributes="0"/>
+                  <Component id="cbLevel" min="-2" pref="54" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="txtPlayerName" pref="199" max="32767" attributes="0"/>
+                  <Component id="txtPlayerName" pref="190" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -126,6 +126,7 @@
                 <StringItem index="9" value="10"/>
               </StringArray>
             </Property>
+            <Property name="selectedIndex" type="int" value="9"/>
           </Properties>
         </Component>
       </SubComponents>
