@@ -167,9 +167,11 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 	@Override
 	public void addAbility(Ability ability) {
 		Ability copy = ability.copy();
-		copy.setControllerId(controllerId);
-		copy.setSourceId(objectId);
-		abilities.add(copy);
+        if (!abilities.containsKey(copy.getId())) {
+            copy.setControllerId(controllerId);
+            copy.setSourceId(objectId);
+            abilities.add(copy);
+        }
 	}
 
 	@Override
