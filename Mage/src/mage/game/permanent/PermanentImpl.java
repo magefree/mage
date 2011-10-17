@@ -647,11 +647,13 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 	}
 
 	@Override
-	public boolean canBeTargetedBy(MageObject source) {
+	public boolean canBeTargetedBy(MageObject source, UUID sourceControllerId, Game game) {
 		if (source != null) {
 			if (abilities.containsKey(ShroudAbility.getInstance().getId()))
 				return false;
-
+            if (abilities.containsKey(HexproofAbility.getInstance().getId()))
+                if (game.getOpponents(controllerId).contains(sourceControllerId))
+                    return false;
 			if (hasProtectionFrom(source))
 				return false;
 		}

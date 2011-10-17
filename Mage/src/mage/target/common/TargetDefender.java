@@ -92,7 +92,7 @@ public class TargetDefender extends TargetImpl<TargetDefender> {
 			}
 		}
 		for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterPlaneswalkerPermanent(), sourceControllerId, game)) {
-			if (permanent.canBeTargetedBy(targetSource) && filter.match(permanent)) {
+			if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game) && filter.match(permanent)) {
 				count++;
 				if (count >= this.minNumberOfTargets)
 					return true;
@@ -133,7 +133,7 @@ public class TargetDefender extends TargetImpl<TargetDefender> {
 			}
 		}
 		for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterPlaneswalkerPermanent(), sourceControllerId, game)) {
-			if (permanent.canBeTargetedBy(targetSource) && filter.match(permanent)) {
+			if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game) && filter.match(permanent)) {
 				possibleTargets.add(permanent.getId());
 			}
 		}
@@ -195,7 +195,7 @@ public class TargetDefender extends TargetImpl<TargetDefender> {
 		}
 		Permanent permanent = game.getPermanent(id);
 		if (permanent != null) {
-			return permanent.canBeTargetedBy(targetSource) && filter.match(permanent);
+			return permanent.canBeTargetedBy(targetSource, source.getControllerId(), game) && filter.match(permanent);
 		}
 		return false;
 	}

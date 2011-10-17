@@ -99,7 +99,7 @@ public class TargetCreatureOrPlayer extends TargetImpl<TargetCreatureOrPlayer> {
 		if (permanent != null) {
 			if (source != null)
 				//TODO: check for replacement effects
-				return permanent.canBeTargetedBy(game.getObject(source.getSourceId())) && filter.match(permanent, source.getSourceId(), controllerId, game);
+				return permanent.canBeTargetedBy(game.getObject(source.getSourceId()), controllerId, game) && filter.match(permanent, source.getSourceId(), controllerId, game);
 			else
 				return filter.match(permanent, source.getSourceId(), controllerId, game);
 		}
@@ -134,7 +134,7 @@ public class TargetCreatureOrPlayer extends TargetImpl<TargetCreatureOrPlayer> {
 			}
 		}
 		for (Permanent permanent: game.getBattlefield().getActivePermanents(FilterCreaturePermanent.getDefault(), sourceControllerId, game)) {
-			if (permanent.canBeTargetedBy(targetSource) && filter.match(permanent, sourceId, sourceControllerId, game)) {
+			if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game) && filter.match(permanent, sourceId, sourceControllerId, game)) {
 				count++;
 				if (count >= this.minNumberOfTargets)
 					return true;
@@ -183,7 +183,7 @@ public class TargetCreatureOrPlayer extends TargetImpl<TargetCreatureOrPlayer> {
 			}
 		}
 		for (Permanent permanent: game.getBattlefield().getActivePermanents(FilterCreaturePermanent.getDefault(), sourceControllerId, game)) {
-			if (permanent.canBeTargetedBy(targetSource) && filter.match(permanent, sourceId, sourceControllerId, game)) {
+			if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game) && filter.match(permanent, sourceId, sourceControllerId, game)) {
 				possibleTargets.add(permanent.getId());
 			}
 		}

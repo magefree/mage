@@ -85,8 +85,8 @@ public class TargetPermanent<T extends TargetPermanent<T>> extends TargetObject<
 				//2. We need to check both source.getId() and source.getSourceId()
 			    // first for protection from spells or abilities (e.g. protection from colored spells, r1753)
 			    // second for protection from sources (e.g. protection from artifacts + equip ability)
-				return permanent.canBeTargetedBy(game.getObject(source.getId()))
-						&& permanent.canBeTargetedBy(game.getObject(source.getSourceId()))
+				return permanent.canBeTargetedBy(game.getObject(source.getId()), controllerId, game)
+						&& permanent.canBeTargetedBy(game.getObject(source.getSourceId()), controllerId, game)
 						&& filter.match(permanent, source.getSourceId(), controllerId, game);
 			else
 				return filter.match(permanent, null, controllerId, game);
@@ -124,7 +124,7 @@ public class TargetPermanent<T extends TargetPermanent<T>> extends TargetObject<
 		int count = 0;
 		MageObject targetSource = game.getObject(sourceId);
 		for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
-			if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource)) {
+			if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
 				count++;
 				if (count >= remainingTargets)
 					return true;
@@ -164,7 +164,7 @@ public class TargetPermanent<T extends TargetPermanent<T>> extends TargetObject<
 		Set<UUID> possibleTargets = new HashSet<UUID>();
 		MageObject targetSource = game.getObject(sourceId);
 		for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
-			if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource)) {
+			if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
 				possibleTargets.add(permanent.getId());
 			}
 		}
