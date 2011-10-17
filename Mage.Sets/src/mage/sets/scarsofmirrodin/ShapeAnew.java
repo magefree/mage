@@ -42,6 +42,7 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 
@@ -79,6 +80,7 @@ public class ShapeAnew extends CardImpl<ShapeAnew> {
 
 		public ShapeAnewEffect() {
 			super(Constants.Outcome.PutCardInPlay);
+            staticText = "Then reveals cards from the top of his or her library until he or she reveals an artifact card. That player puts that card onto the battlefield, then shuffles all other cards revealed this way into his or her library";
 		}
 
 		public ShapeAnewEffect(ShapeAnewEffect effect) {
@@ -87,6 +89,10 @@ public class ShapeAnew extends CardImpl<ShapeAnew> {
 
 		@Override
 		public boolean apply(Game game, Ability source) {
+            Permanent sourcePermanent = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(source), Constants.Zone.BATTLEFIELD);
+            if (sourcePermanent == null) {
+                return false;
+            }
 			Player controller = game.getPlayer(source.getControllerId());
 			if (controller == null) {
 				return false;
@@ -94,7 +100,7 @@ public class ShapeAnew extends CardImpl<ShapeAnew> {
 			Cards revealed = new CardsImpl();
 			Card artifactCard = null;
 			Cards nonArtifactCards = new CardsImpl();
-			Player player = game.getPlayer(source.getControllerId());
+			Player player = game.getPlayer(sourcePermanent.getControllerId());
 			while (artifactCard == null && player.getLibrary().size() > 0) {
 				Card card = player.getLibrary().removeFromTop(game);
 				revealed.add(card);
@@ -104,7 +110,7 @@ public class ShapeAnew extends CardImpl<ShapeAnew> {
 					nonArtifactCards.add(card);
 			}
 			player.revealCards("Shape Anew", revealed, game);
-			artifactCard.putOntoBattlefield(game, Constants.Zone.LIBRARY, source.getId(), controller.getId());
+			artifactCard.putOntoBattlefield(game, Constants.Zone.LIBRARY, source.getId(), player.getId());
 			player.getLibrary().addAll(nonArtifactCards.getCards(game), game);
 			player.shuffleLibrary(game);
 			return true;
