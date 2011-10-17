@@ -47,7 +47,7 @@ import mage.target.TargetCard;
 public class ScryEffect extends OneShotEffect<ScryEffect> {
 
 	protected static FilterCard filter1 = new FilterCard("card to put on the bottom of your library");
-	protected static FilterCard filter2 = new FilterCard("card to put on the top of your library");
+	protected static FilterCard filter2 = new FilterCard("card to put on the top of your library (last chosen will be on top)");
 
 	protected int scryNumber;
 
