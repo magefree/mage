@@ -38,6 +38,7 @@ import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.ReplacementEffect;
+import mage.cards.Card;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -87,6 +88,9 @@ public class SpellStack extends Stack<StackObject> {
 		StackObject stackObject = getStackObject(objectId);
 		if (stackObject != null) {
 			if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER, objectId, sourceId, stackObject.getControllerId()))) {
+				if ( stackObject instanceof Spell ) {
+					game.rememberLKI(objectId, Zone.STACK, (Spell)stackObject);
+				}
 				this.remove(stackObject);
 				stackObject.counter(sourceId, game);
 				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTERED, objectId, sourceId, stackObject.getControllerId()));

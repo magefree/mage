@@ -29,10 +29,13 @@ package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
 import mage.players.Player;
 
 /**
@@ -61,13 +64,26 @@ public class LoseLifeControllerEffect extends OneShotEffect<LoseLifeControllerEf
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent targetPermanent = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(source), Zone.BATTLEFIELD);
-        if (targetPermanent != null) {
-            Player controller = game.getPlayer(targetPermanent.getControllerId());
-            if (controller != null) {
-                controller.loseLife(amount, game);
-                return true;
-            }
+        Card targetCard = game.getLastKnownInformation(targetPointer.getFirst(source), Zone.BATTLEFIELD);
+		
+        if ( targetCard != null ) {
+			Player controller = null;
+			
+			//Handles interaction with that were on the battlefield permanents.
+			if ( targetCard instanceof Permanent ) {
+				Permanent targetPermanent = (Permanent)targetCard;
+				controller = game.getPlayer(targetPermanent.getControllerId());
+			}
+			//Handles interactign with spells that were on the stack.
+			else if ( targetCard instanceof Spell ) {
+				Spell targetSpell = (Spell)targetCard;
+				controller = game.getPlayer(targetSpell.getControllerId());
+			}
+			
+			if ( controller != null ) {
+				controller.loseLife(amount, game);
+				return true;
+			}
         }
         return false;
     }

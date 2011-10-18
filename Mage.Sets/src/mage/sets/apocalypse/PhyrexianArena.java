@@ -32,11 +32,10 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.DrawCardControllerEffect;
-import mage.abilities.effects.common.LoseLifeControllerEffect;
+import mage.abilities.effects.common.LoseLifeSourceEffect;
 import mage.cards.CardImpl;
 
 /**
@@ -50,7 +49,7 @@ public class PhyrexianArena extends CardImpl<PhyrexianArena> {
         this.expansionSetCode = "APC";
         this.color.setBlack(true);
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new DrawCardControllerEffect(1), Constants.TargetController.YOU, false);
-        ability.addEffect(new LoseLifeControllerEffect(1));
+        ability.addEffect(new LoseLifeSourceEffect(1));
         this.addAbility(ability);
     }
 
