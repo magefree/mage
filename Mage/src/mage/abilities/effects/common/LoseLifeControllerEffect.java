@@ -76,12 +76,12 @@ public class LoseLifeControllerEffect extends OneShotEffect<LoseLifeControllerEf
         if ( targetCard != null ) {
 			Player controller = null;
 			
-			//Handles interaction with that were on the battlefield permanents.
+			//Handles interaction with permanents that were on the battlefield.
 			if ( targetCard instanceof Permanent ) {
 				Permanent targetPermanent = (Permanent)targetCard;
 				controller = game.getPlayer(targetPermanent.getControllerId());
 			}
-			//Handles interactign with spells that were on the stack.
+			//Handles interaction with spells that were on the stack.
 			else if ( targetCard instanceof Spell ) {
 				Spell targetSpell = (Spell)targetCard;
 				controller = game.getPlayer(targetSpell.getControllerId());
