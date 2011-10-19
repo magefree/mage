@@ -28,12 +28,8 @@
 
 package mage.player.ai;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.io.File;
+import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
@@ -43,6 +39,7 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.mana.ManaOptions;
+import mage.cards.Card;
 import mage.choices.Choice;
 import mage.filter.FilterAbility;
 import mage.game.Game;
@@ -50,6 +47,7 @@ import mage.game.combat.Combat;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
+import mage.sets.innistrad.UnholyFiend;
 import mage.target.Target;
 import mage.util.Logging;
 import org.apache.log4j.Logger;
@@ -66,10 +64,13 @@ public class SimulatedPlayer2 extends ComputerPlayer<SimulatedPlayer2> {
 	private transient ConcurrentLinkedQueue<Ability> allActions;
 	private static PassAbility pass = new PassAbility();
 
-	public SimulatedPlayer2(UUID id, boolean isSimulatedPlayer) {
+    private List<String> suggested;
+
+	public SimulatedPlayer2(UUID id, boolean isSimulatedPlayer, List<String> suggested) {
 		super(id);
 		pass.setControllerId(playerId);
 		this.isSimulatedPlayer = isSimulatedPlayer;
+        this.suggested = suggested;
 	}
 
 	public SimulatedPlayer2(final SimulatedPlayer2 player) {
@@ -101,6 +102,7 @@ public class SimulatedPlayer2 extends ComputerPlayer<SimulatedPlayer2> {
 		ManaOptions available = getManaAvailable(game);
 		available.addMana(manaPool.getMana());
 		List<Ability> playables = game.getPlayer(playerId).getPlayable(game, filter, available, isSimulatedPlayer);
+        playables = filterAbilities(game, playables, suggested);
 		for (Ability ability: playables) {
 			List<Ability> options = game.getPlayer(playerId).getPlayableOptions(ability, game);
 			if (options.size() == 0) {
@@ -140,6 +142,29 @@ public class SimulatedPlayer2 extends ComputerPlayer<SimulatedPlayer2> {
 //			allActions.add(new SimulatedAction(sim, actions));
 //		}
 //	}
+
+    protected List<Ability> filterAbilities(Game game, List<Ability> playables, List<String> suggested) {
+        if (playables.isEmpty()) {
+            return playables;
+        }
+        if (suggested == null || suggested.isEmpty()) {
+            return playables;
+        }
+        List<Ability> filtered = new ArrayList<Ability>();
+        for (Ability ability : playables) {
+            Card card = game.getCard(ability.getSourceId());
+            for (String s : suggested) {
+                if (s.equals(card.getName())) {
+                    System.out.println("matched: " + s);
+                    filtered.add(ability);
+                }
+            }
+        }
+        if (!filtered.isEmpty()) {
+            return filtered;
+        }
+        return playables;
+    }
 
 	//add a generic mana cost for each amount possible
 	protected void simulateVariableCosts(Ability ability, Game game) {
@@ -276,5 +301,4 @@ public class SimulatedPlayer2 extends ComputerPlayer<SimulatedPlayer2> {
 	public void priority(Game game) {
 		//should never get here
 	}
-
 }
