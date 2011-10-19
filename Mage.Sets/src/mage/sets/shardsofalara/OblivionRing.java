@@ -28,7 +28,6 @@
 
 package mage.sets.shardsofalara;
 
-import mage.abilities.effects.common.ReturnFromExileEffect;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -36,7 +35,8 @@ import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.effects.common.ExileTargetForSourceEffect;
+import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.target.Target;
@@ -54,12 +54,12 @@ public class OblivionRing extends CardImpl<OblivionRing> {
 		this.color.setWhite(true);
 		FilterNonlandPermanent filter = new FilterNonlandPermanent("another nonland permanent");
 		filter.setAnother(true);
-		Ability ability1 = new EntersBattlefieldTriggeredAbility(new ExileTargetEffect(this.getId(), "Oblivion Ring exile"), false);
+		Ability ability1 = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect( "Oblivion Ring exile"), false);
 		Target target = new TargetPermanent(filter);
         target.setRequired(true);
         ability1.addTarget(target);
 		this.addAbility(ability1);
-		Ability ability2 = new LeavesBattlefieldTriggeredAbility(new ReturnFromExileEffect(this.getId(), Zone.BATTLEFIELD), false);
+		Ability ability2 = new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD), false);
 		this.addAbility(ability2);
 	}
 

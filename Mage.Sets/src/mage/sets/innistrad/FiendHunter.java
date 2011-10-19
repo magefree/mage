@@ -34,14 +34,14 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.effects.common.ReturnFromExileEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
+import mage.abilities.effects.common.ExileTargetForSourceEffect;
+import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 
 /**
  * @author nantuko
@@ -64,14 +64,14 @@ public class FiendHunter extends CardImpl<FiendHunter> {
         this.toughness = new MageInt(3);
 
         // When Fiend Hunter enters the battlefield, you may exile another target creature.
-        Ability ability1 = new EntersBattlefieldTriggeredAbility(new ExileTargetEffect(this.getId(), "Fiend Hunter Exile"), false);
+        Ability ability1 = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect("Fiend Hunter Exile"), true);
         Target target = new TargetPermanent(filter);
         target.setRequired(true);
         ability1.addTarget(target);
         this.addAbility(ability1);
 
         // When Fiend Hunter leaves the battlefield, return the exiled card to the battlefield under its owner's control.
-        Ability ability2 = new LeavesBattlefieldTriggeredAbility(new ReturnFromExileEffect(this.getId(), Constants.Zone.BATTLEFIELD), false);
+        Ability ability2 = new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Constants.Zone.BATTLEFIELD), false);
         this.addAbility(ability2);
     }
 

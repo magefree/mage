@@ -37,8 +37,8 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.effects.common.ReturnFromExileEffect;
+import mage.abilities.effects.common.ExileTargetForSourceEffect;
+import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;
@@ -67,13 +67,13 @@ public class LeoninRelicWarder extends CardImpl<LeoninRelicWarder> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileTargetEffect(this.getId(), "Leonin Relic-Warder exile"), true);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect("Leonin Relic-Warder exile"), true);
         Target target = new TargetPermanent(filter);
         target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
 
-        Ability ability2 = new LeavesBattlefieldTriggeredAbility(new ReturnFromExileEffect(this.getId(), Constants.Zone.BATTLEFIELD), false);
+        Ability ability2 = new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Constants.Zone.BATTLEFIELD), false);
         this.addAbility(ability2);
     }
 
