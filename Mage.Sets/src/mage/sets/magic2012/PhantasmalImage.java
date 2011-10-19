@@ -30,18 +30,22 @@ package mage.sets.magic2012;
 import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesTargetTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CopyEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.players.Player;
+import mage.target.Target;
+import mage.target.TargetPermanent;
 
 /**
  *
@@ -61,7 +65,6 @@ public class PhantasmalImage extends CardImpl<PhantasmalImage> {
         this.toughness = new MageInt(0);
 
         Ability ability = new EntersBattlefieldAbility(new PhantasmalImageCopyEffect(), abilityText);
-		ability.addTarget(new TargetCreaturePermanent());
 		this.addAbility(ability);
     }
 
@@ -75,10 +78,10 @@ public class PhantasmalImage extends CardImpl<PhantasmalImage> {
     }
 }
 
-class PhantasmalImageCopyEffect extends ContinuousEffectImpl<PhantasmalImageCopyEffect> {
+class PhantasmalImageCopyEffect extends OneShotEffect<PhantasmalImageCopyEffect> {
 
     public PhantasmalImageCopyEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Layer.CopyEffects_1, Constants.SubLayer.NA, Constants.Outcome.BecomeCreature);
+		super(Outcome.Copy);
     }
 
     public PhantasmalImageCopyEffect(final PhantasmalImageCopyEffect effect) {
@@ -87,41 +90,26 @@ class PhantasmalImageCopyEffect extends ContinuousEffectImpl<PhantasmalImageCopy
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(source.getFirstTarget());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        permanent.setName(card.getName());
-        permanent.setExpansionSetCode(card.getExpansionSetCode());
-        permanent.getColor().setColor(card.getColor());
-        permanent.getManaCost().clear();
-        permanent.getManaCost().add(card.getManaCost());
+		Player player = game.getPlayer(source.getControllerId());
+		if ( player != null ) {
+			Target target = new TargetPermanent(new FilterCreaturePermanent());
+            if (target.canChoose(source.getControllerId(), game)) {
+                player.choose(Outcome.Copy, target, source.getSourceId(), game);
+                Permanent permanent = game.getPermanent(target.getFirstTarget());
+                if (permanent != null) {
+                    permanent = permanent.copy();
+                    permanent.reset(game);
+                    permanent.assignNewId();
+					permanent.getSubtype().add("Illusion");
+					permanent.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
+					
+                    game.addEffect(new CopyEffect(permanent), source);
 
-        permanent.getCardType().clear();
-        for (CardType type : card.getCardType()) {
-            permanent.getCardType().add(type);
-        }
-
-        permanent.getSubtype().clear();
-        for (String type : card.getSubtype()) {
-            permanent.getSubtype().add(type);
-        }
-        permanent.getSubtype().add("Illusion");
-
-        permanent.getSupertype().clear();
-        for (String type : card.getSupertype()) {
-            permanent.getSupertype().add(type);
-        }
-
-        permanent.getAbilities().clear();
-        for (Ability ability : card.getAbilities()) {
-            permanent.addAbility(ability);
-        }
-
-        permanent.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
-
-		permanent.getPower().setValue(card.getPower().getValue());
-		permanent.getToughness().setValue(card.getToughness().getValue());
-
-        return true;
+					return true;
+                }
+            }
+		}
+		return false;
     }
 
     @Override
