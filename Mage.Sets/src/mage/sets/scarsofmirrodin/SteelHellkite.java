@@ -48,6 +48,7 @@ import mage.watchers.WatcherImpl;
 
 import java.util.*;
 import mage.Constants.WatcherScope;
+import mage.filter.common.FilterNonlandPermanent;
 
 /**
  * @author nantuko
@@ -103,7 +104,7 @@ class SteelHellkiteDestroyEffect extends OneShotEffect {
         if (watcher != null) {
             int xValue = source.getManaCostsToPay().getX();
             for (UUID uuid : watcher.damagedPlayers) {
-                for (Permanent permanent: game.getBattlefield().getAllActivePermanents()) {
+                for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterNonlandPermanent(), uuid, game)) {
                     if (permanent.getControllerId().equals(uuid) && permanent.getManaCost().convertedManaCost() == xValue) {
                         permanent.destroy(source.getId(), game, false);
                     }
