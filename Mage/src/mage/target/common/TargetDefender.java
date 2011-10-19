@@ -195,7 +195,12 @@ public class TargetDefender extends TargetImpl<TargetDefender> {
 		}
 		Permanent permanent = game.getPermanent(id);
 		if (permanent != null) {
-			return permanent.canBeTargetedBy(targetSource, source.getControllerId(), game) && filter.match(permanent);
+			//Could be targeting due to combat decision to attack a player or planeswalker.
+			UUID controllerId = null;
+			if ( source != null ) {
+				controllerId = source.getControllerId();
+			}
+			return permanent.canBeTargetedBy(targetSource, controllerId, game) && filter.match(permanent);
 		}
 		return false;
 	}
