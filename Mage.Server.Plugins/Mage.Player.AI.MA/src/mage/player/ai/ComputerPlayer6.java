@@ -56,10 +56,8 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetCard;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.UUID;
+import java.io.File;
+import java.util.*;
 import java.util.concurrent.*;
 
 /**
@@ -81,11 +79,15 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 	protected int currentScore;
 	protected SimulationNode2 root;
 
+    private static final String FILE_WITH_INSTRUCTIONS = "config/ai.please.cast.this.txt";
+    private List<String> suggested = new ArrayList<String>();
+
 	public ComputerPlayer6(String name, RangeOfInfluence range, int skill) {
 		super(name, range);
 		maxDepth = skill * 2;
 		maxThink = skill * 3;
 		maxNodes = Config2.maxNodes;
+        getSuggestedActions();
 	}
 
 	public ComputerPlayer6(final ComputerPlayer6 player) {
@@ -773,7 +775,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 
 		for (Player copyPlayer: sim.getState().getPlayers().values()) {
 			Player origPlayer = game.getState().getPlayers().get(copyPlayer.getId());
-			SimulatedPlayer2 newPlayer = new SimulatedPlayer2(copyPlayer.getId(), copyPlayer.getId().equals(playerId));
+			SimulatedPlayer2 newPlayer = new SimulatedPlayer2(copyPlayer.getId(), copyPlayer.getId().equals(playerId), suggested);
 			newPlayer.restore(origPlayer);
 			sim.getState().getPlayers().put(copyPlayer.getId(), newPlayer);
 		}
@@ -795,4 +797,26 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 		}
 		return false;
 	}
+
+    protected void getSuggestedActions() {
+        try {
+            File file = new File(FILE_WITH_INSTRUCTIONS);
+            if (file.exists()) {
+                Scanner scanner = new Scanner(file);
+                while (scanner.hasNextLine()) {
+                    String line = scanner.nextLine();
+                    if (line.startsWith("cast:") || line.startsWith("play:")) {
+                        suggested.add(line.substring(5, line.length()));
+                    }
+                }
+                System.out.println("suggested::");
+                for (int i = 0; i < suggested.size(); i++) {
+                    System.out.println("    " + suggested.get(i));
+                }
+            }
+        } catch (Exception e) {
+            // swallow
+            e.printStackTrace();
+        }
+    }
 }

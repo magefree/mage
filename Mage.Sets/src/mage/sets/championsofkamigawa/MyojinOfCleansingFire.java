@@ -37,12 +37,15 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.CastFromHandCondition;
 import mage.abilities.condition.common.HasCounterCondition;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -54,7 +57,6 @@ import mage.watchers.Watcher;
 import mage.watchers.common.CastFromHandWatcher;
 
 /**
- *
  * @author Loki
  */
 public class MyojinOfCleansingFire extends CardImpl<MyojinOfCleansingFire> {
@@ -77,7 +79,7 @@ public class MyojinOfCleansingFire extends CardImpl<MyojinOfCleansingFire> {
         this.addWatcher(new CastFromHandWatcher());
 
         // Myojin of Cleansing Fire enters the battlefield with a divinity counter on it if you cast it from your hand.
-        this.addAbility(new EntersBattlefieldAbility(new MyojinOfCleansingFireEntersBattlefieldEffect(), "{this} enters the battlefield with a divinity counter on it if you cast it from your hand"));
+        this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.DIVINITY.createInstance()), new CastFromHandCondition(), ""), "{this} enters the battlefield with a divinity counter on it if you cast it from your hand"));
         // Myojin of Cleansing Fire is indestructible as long as it has a divinity counter on it.
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Constants.Duration.WhileOnBattlefield),
                 new HasCounterCondition(CounterType.DIVINITY), "{this} is indestructible as long as it has a divinity counter on it")));
@@ -94,33 +96,3 @@ public class MyojinOfCleansingFire extends CardImpl<MyojinOfCleansingFire> {
         return new MyojinOfCleansingFire(this);
     }
 }
-
-class MyojinOfCleansingFireEntersBattlefieldEffect extends OneShotEffect<MyojinOfCleansingFireEntersBattlefieldEffect> {
-    MyojinOfCleansingFireEntersBattlefieldEffect() {
-        super(Constants.Outcome.Benefit);
-    }
-
-    MyojinOfCleansingFireEntersBattlefieldEffect(final MyojinOfCleansingFireEntersBattlefieldEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent p = game.getPermanent(source.getSourceId());
-        if (p != null) {
-            Watcher watcher = game.getState().getWatchers().get("CastFromHand", source.getSourceId());
-            if (watcher != null && watcher.conditionMet()) {
-                p.addCounters(CounterType.DIVINITY.createInstance(), game);
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public MyojinOfCleansingFireEntersBattlefieldEffect copy() {
-        return new MyojinOfCleansingFireEntersBattlefieldEffect(this);
-    }
-}
-
-
-
