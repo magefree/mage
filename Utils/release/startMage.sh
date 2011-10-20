@@ -1,5 +1,5 @@
 #!/bin/sh
 cd ./client
 ./startClient.sh
-cd ./server
+cd ../server
 ./startServer.sh
