@@ -217,11 +217,15 @@ public class TournamentController {
 	}
 
 	public void submitDeck(UUID playerId, Deck deck) {
-		tournamentSessions.get(playerId).submitDeck(deck);
+		if (tournamentSessions.containsKey(playerId)) {
+    		tournamentSessions.get(playerId).submitDeck(deck);
+        }
 	}
 
 	public void updateDeck(UUID playerId, Deck deck) {
-		tournamentSessions.get(playerId).updateDeck(deck);
+		if (tournamentSessions.containsKey(playerId)) {
+    		tournamentSessions.get(playerId).updateDeck(deck);
+        }
 	}
 
     public void timeout(UUID userId) {

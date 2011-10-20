@@ -65,7 +65,7 @@ public class ChatSession {
 	}
 
 	public void kill(UUID userId) {
-		if (clients.containsKey(userId)) {
+		if (userId != null && clients.containsKey(userId)) {
 			String userName = clients.get(userId);
 			clients.remove(userId);
 			broadcast(userName, " has left", MessageColor.BLACK);

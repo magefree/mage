@@ -263,7 +263,8 @@ public class TableController {
 		else {
 			player = PlayerFactory.getInstance().createPlayer(playerType, name, options.getRange(), skill);
 		}
-		logger.info("Player created " + player.getId());
+        if (player != null)
+            logger.info("Player created " + player.getId());
 		return player;
 	}
 

@@ -119,7 +119,8 @@ public class User {
 	public synchronized void fireCallback(final ClientCallback call) {
 		if (isConnected()) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
-			session.fireCallback(call);		
+            if (session != null)
+                session.fireCallback(call);		
 		}
 	}
 

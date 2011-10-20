@@ -451,8 +451,11 @@ public class MageServerImpl implements MageServer {
 	@Override
 	public boolean isTableOwner(String sessionId, UUID roomId, UUID tableId) throws MageException {
 		try {
-			UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-			return TableManager.getInstance().isTableOwner(tableId, userId);
+            Session session = SessionManager.getInstance().getSession(sessionId);
+            if (session != null) {
+                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+                return TableManager.getInstance().isTableOwner(tableId, userId);
+            }
 		}
 		catch (Exception ex) {
 			handleException(ex);
