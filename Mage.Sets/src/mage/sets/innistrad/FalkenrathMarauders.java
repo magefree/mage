@@ -58,7 +58,7 @@ public class FalkenrathMarauders extends CardImpl<FalkenrathMarauders> {
         this.addAbility(HasteAbility.getInstance());
 
         // Whenever Falkenrath Marauders deals combat damage to a player, put two +1/+1 counters on it.
-		this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
+		this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), false));
     }
 
     public FalkenrathMarauders(final FalkenrathMarauders card) {
