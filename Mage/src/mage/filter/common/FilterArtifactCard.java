@@ -37,8 +37,6 @@ import mage.filter.FilterCard;
  */
 public class FilterArtifactCard extends FilterCard<FilterArtifactCard> {
 
-	private static final FilterArtifactCard defaultFilter = new FilterArtifactCard();
-
 	public FilterArtifactCard() {
 		this("artifact");
 	}
@@ -52,8 +50,15 @@ public class FilterArtifactCard extends FilterCard<FilterArtifactCard> {
 		super(filter);
 	}
 
+	/**
+	 * There are a lot of usages of this method, we should rip them out as we see
+	 * them and replace them with <code>new FilterArtifactCard()</code>.  This
+	 * use to return a static instance of this object which is bad as its completely
+	 * mutable and leads to EXTREMELY hard to track down issues!
+	 */
+	@Deprecated
 	public static FilterArtifactCard getDefault() {
-		return defaultFilter;
+		return new FilterArtifactCard();
 	}
 
 	@Override

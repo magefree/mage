@@ -39,8 +39,6 @@ import mage.game.permanent.PermanentToken;
  */
 public class FilterToken<T extends FilterToken<T>> extends FilterCreaturePermanent<FilterToken<T>> {
 
-	protected static FilterToken defaultFilter = new FilterToken();
-
 	public FilterToken() {
 		this("creature token");
 	}
@@ -53,8 +51,15 @@ public class FilterToken<T extends FilterToken<T>> extends FilterCreaturePermane
 		super(filter);
 	}
 
+	/**
+	 * There are a lot of usages of this method, we should rip them out as we see
+	 * them and replace them with <code>new FilterToken()</code>.  This
+	 * use to return a static instance of this object which is bad as its completely
+	 * mutable and leads to EXTREMELY hard to track down issues!
+	 */
+	@Deprecated
 	public static FilterToken getDefault() {
-		return defaultFilter;
+		return new FilterToken();
 	}
 
 	@Override
@@ -69,8 +74,6 @@ public class FilterToken<T extends FilterToken<T>> extends FilterCreaturePermane
 
 	@Override
 	public FilterToken<T> copy() {
-		if (this == defaultFilter)
-			return this;
 		return new FilterToken<T>(this);
 	}
 }
