@@ -205,6 +205,15 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 				}
 			}
 		}
+		if ( target instanceof TargetCardInHand ) {
+			List<Card> cards = new ArrayList<Card>();
+			cards.addAll(this.hand.getCards(game));
+			Card pick = pickTarget(cards, outcome, target, null, game);
+			if ( pick != null ) {
+				target.add(pick.getId(), game);
+				return true;
+			}
+		}
 		return false;
 	}
 
