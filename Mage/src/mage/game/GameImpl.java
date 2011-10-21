@@ -75,9 +75,6 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
 	private final static transient Logger logger = Logger.getLogger(GameImpl.class);
 
-	private static FilterPlaneswalkerPermanent filterPlaneswalker = new FilterPlaneswalkerPermanent();
-	private static FilterLegendaryPermanent filterLegendary = new FilterLegendaryPermanent();
-	private static FilterLegendaryPermanent filterLegendName = new FilterLegendaryPermanent();
 	private static FilterAura filterAura = new FilterAura();
 	private static FilterEquipment filterEquipment = new FilterEquipment();
 	private static FilterFortification filterFortification = new FilterFortification();
@@ -725,10 +722,10 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 			}
 		}
 		//20091005 - 704.5j, 801.14
-		if (getBattlefield().contains(filterPlaneswalker, 2)) {  //don't bother checking if less than 2 planeswalkers in play
+		if (getBattlefield().contains(new FilterPlaneswalkerPermanent(), 2)) {  //don't bother checking if less than 2 planeswalkers in play
 			for (Permanent planeswalker: getBattlefield().getAllActivePermanents(CardType.PLANESWALKER)) {
 				for (String planeswalkertype: planeswalker.getSubtype()) {
-					filterPlaneswalker.getSubtype().clear();
+					FilterPlaneswalkerPermanent filterPlaneswalker = new FilterPlaneswalkerPermanent();
 					filterPlaneswalker.getSubtype().add(planeswalkertype);
 					filterPlaneswalker.setScopeSubtype(ComparisonScope.Any);
 					if (getBattlefield().contains(filterPlaneswalker, planeswalker.getControllerId(), this, 2)) {
@@ -778,10 +775,11 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                 }
 			}
 		}
+		FilterLegendaryPermanent filterLegendary = new FilterLegendaryPermanent();
 		//20091005 - 704.5k, 801.12
 		if (getBattlefield().contains(filterLegendary, 2)) {  //don't bother checking if less than 2 legends in play
 			for (Permanent legend: getBattlefield().getAllActivePermanents(filterLegendary)) {
-				filterLegendName.getName().clear();
+				FilterLegendaryPermanent filterLegendName = new FilterLegendaryPermanent();
 				filterLegendName.getName().add(legend.getName());
 				if (getBattlefield().contains(filterLegendName, legend.getControllerId(), this, 2)) {
 					for (Permanent dupLegend: getBattlefield().getActivePermanents(filterLegendName, legend.getControllerId(), this)) {
