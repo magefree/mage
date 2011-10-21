@@ -38,8 +38,6 @@ import mage.game.permanent.Permanent;
  */
 public class FilterArtifactPermanent<T extends FilterArtifactPermanent<T>> extends FilterPermanent<FilterArtifactPermanent<T>> {
 
-	protected static FilterArtifactPermanent defaultFilter = new FilterArtifactPermanent();
-
 	protected boolean useAttacking;
 	protected boolean attacking;
 	protected boolean useBlocking;
@@ -66,8 +64,15 @@ public class FilterArtifactPermanent<T extends FilterArtifactPermanent<T>> exten
 		this.tapped = filter.tapped;
 	}
 
+	/**
+	 * There are a lot of usages of this method, we should rip them out as we see
+	 * them and replace them with <code>new FilterArtifactPermanent()</code>.  This
+	 * use to return a static instance of this object which is bad as its completely
+	 * mutable and leads to EXTREMELY hard to track down issues!
+	 */
+	@Deprecated
 	public static FilterArtifactPermanent getDefault() {
-		return defaultFilter;
+		return new FilterArtifactPermanent();
 	}
 
 	@Override
@@ -113,8 +118,6 @@ public class FilterArtifactPermanent<T extends FilterArtifactPermanent<T>> exten
 
 	@Override
 	public FilterArtifactPermanent<T> copy() {
-		if (this == defaultFilter)
-			return this;
 		return new FilterArtifactPermanent<T>(this);
 	}
 }

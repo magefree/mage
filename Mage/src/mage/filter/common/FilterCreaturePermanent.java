@@ -38,8 +38,6 @@ import mage.game.permanent.Permanent;
  */
 public class FilterCreaturePermanent<T extends FilterCreaturePermanent<T>> extends FilterPermanent<FilterCreaturePermanent<T>> {
 
-	protected static FilterCreaturePermanent defaultFilter = new FilterCreaturePermanent();
-
 	protected boolean useAttacking;
 	protected boolean attacking;
 	protected boolean useBlocking;
@@ -64,8 +62,15 @@ public class FilterCreaturePermanent<T extends FilterCreaturePermanent<T>> exten
 		this.tapped = filter.tapped;
 	}
 
+	/**
+	 * There are a lot of usages of this method, we should rip them out as we see
+	 * them and replace them with <code>new FilterCreaturePermanent()</code>.  This
+	 * use to return a static instance of this object which is bad as its completely
+	 * mutable and leads to EXTREMELY hard to track down issues!
+	 */
+	@Deprecated
 	public static FilterCreaturePermanent getDefault() {
-		return defaultFilter;
+		return new FilterCreaturePermanent();
 	}
 
 	@Override
@@ -113,8 +118,6 @@ public class FilterCreaturePermanent<T extends FilterCreaturePermanent<T>> exten
 
 	@Override
 	public FilterCreaturePermanent<T> copy() {
-		if (this == defaultFilter)
-			return this;
 		return new FilterCreaturePermanent<T>(this);
 	}
 }

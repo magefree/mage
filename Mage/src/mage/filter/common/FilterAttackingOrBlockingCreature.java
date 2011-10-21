@@ -28,15 +28,11 @@
 
 package mage.filter.common;
 
-import mage.filter.Filter;
-
 /**
  *
  * @author nantuko
  */
 public class FilterAttackingOrBlockingCreature extends FilterCreaturePermanent<FilterAttackingOrBlockingCreature> {
-
-    private static final FilterAttackingOrBlockingCreature defaultFilter = new FilterAttackingOrBlockingCreature();
 
 	public FilterAttackingOrBlockingCreature() {
 		this("attacking or blocking creature");
@@ -59,7 +55,14 @@ public class FilterAttackingOrBlockingCreature extends FilterCreaturePermanent<F
 		return new FilterAttackingOrBlockingCreature(this);
 	}
 
+	/**
+	 * There are a lot of usages of this method, we should rip them out as we see
+	 * them and replace them with <code>new FilterAttackingOrBlockingCreature()</code>.  This
+	 * use to return a static instance of this object which is bad as its completely
+	 * mutable and leads to EXTREMELY hard to track down issues!
+	 */
+	@Deprecated
     public static FilterAttackingOrBlockingCreature getDefault() {
-        return defaultFilter;
+        return new FilterAttackingOrBlockingCreature();
     }
 }

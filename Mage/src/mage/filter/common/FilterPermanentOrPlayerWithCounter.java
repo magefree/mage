@@ -28,16 +28,12 @@
 
 package mage.filter.common;
 
-import mage.abilities.Ability;
-import mage.filter.FilterImpl;
-import mage.filter.FilterInPlay;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterPlayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
-import javax.xml.transform.Source;
 import java.util.UUID;
 
 /**
