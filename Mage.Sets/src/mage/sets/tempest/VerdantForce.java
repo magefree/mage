@@ -51,7 +51,7 @@ public class VerdantForce extends CardImpl<VerdantForce> {
         this.color.setGreen(true);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new SaprolingToken()), Constants.TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new SaprolingToken()), Constants.TargetController.ANY, false));
     }
 
     public VerdantForce(final VerdantForce card) {

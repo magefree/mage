@@ -30,6 +30,8 @@ package mage.abilities.effects.common;
 import java.util.UUID;
 import mage.Constants;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.players.Player;
@@ -40,16 +42,17 @@ import mage.players.Player;
  */
 public class LoseLifePlayersEffect extends OneShotEffect<LoseLifePlayersEffect> {
 	
-	private int amount;
+	private DynamicValue amount;
 	
 	public LoseLifePlayersEffect(int amount) {
 		super(Constants.Outcome.Damage);
-		this.amount = amount;
+		this.amount = new StaticValue(amount);
 		staticText = "each player loses " + amount + " life";
 	}
 
 	public LoseLifePlayersEffect(final LoseLifePlayersEffect effect) {
 		super(effect);
+		this.amount = effect.amount;
 	}
 
 	@Override
@@ -57,7 +60,7 @@ public class LoseLifePlayersEffect extends OneShotEffect<LoseLifePlayersEffect> 
 		for (UUID playerId: game.getPlayer(source.getControllerId()).getInRange()) {
 			Player player = game.getPlayer(playerId);
 			if (player != null)
-				player.loseLife(amount, game);
+				player.loseLife(amount.calculate(game, source), game);
 		}
 		return true;
 	}
