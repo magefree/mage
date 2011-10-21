@@ -53,6 +53,7 @@ import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
+import mage.util.CardUtil;
 
 /**
  *
@@ -74,7 +75,7 @@ public class KarnLiberated extends CardImpl<KarnLiberated> {
 		this.addAbility(ability1);
 
         // -3: Exile target permanent.
-		LoyaltyAbility ability2 = new LoyaltyAbility(new ExileTargetEffect(), -3);
+		LoyaltyAbility ability2 = new LoyaltyAbility(new ExileTargetEffect(exileId, "Karn Liberated"), -3);
 		ability2.addTarget(new TargetPermanent());
 		this.addAbility(ability2);
         
@@ -131,7 +132,9 @@ class KarnLiberatedEffect extends OneShotEffect<KarnLiberatedEffect> {
             player.init(game);
         }
         for (Card card: cards) {
-            game.getExile().add(exileId, "Karn Liberated", card);
+			if ( CardUtil.isPermanentCard(card) && !card.getSubtype().contains("Aura") ) {
+				game.getExile().add(exileId, "Karn Liberated", card);
+			}
         }
         DelayedTriggeredAbility delayedAbility = new KarnLiberatedDelayedTriggeredAbility(exileId);
         delayedAbility.setSourceId(source.getSourceId());
@@ -192,8 +195,9 @@ class KarnLiberatedDelayedEffect extends OneShotEffect<KarnLiberatedDelayedEffec
     public boolean apply(Game game, Ability source) {
         ExileZone exile = game.getExile().getExileZone(exileId);
         for (Card card: exile.getCards(game)) {
-            card.putOntoBattlefield(game, Zone.EXILED, source.getSourceId(), source.getControllerId());
+			card.putOntoBattlefield(game, Zone.EXILED, source.getSourceId(), source.getControllerId());
         }
+		exile.clear();
         return true;
     }
 
