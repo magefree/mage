@@ -39,7 +39,7 @@ import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
- * @author North
+ * @author North, Loki
  */
 public class Crusade extends CardImpl<Crusade> {
 
@@ -47,6 +47,7 @@ public class Crusade extends CardImpl<Crusade> {
 
     static {
         filter.getColor().setWhite(true);
+        filter.setUseColor(true);
     }
 
     public Crusade(UUID ownerId) {
