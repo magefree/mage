@@ -30,7 +30,6 @@ package mage.util;
 
 import mage.Constants;
 import mage.Mana;
-import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCost;
@@ -40,7 +39,6 @@ import mage.cards.Card;
 import mage.game.permanent.token.Token;
 import mage.util.functions.CopyFunction;
 import mage.util.functions.CopyTokenFunction;
-import mage.util.functions.Function;
 
 /**
  * @author nantuko
@@ -113,4 +111,15 @@ public class CardUtil {
 		return new CopyTokenFunction(target);
 	}
 
+	public static boolean isPermanentCard ( Card card )  {
+		boolean permanent = false;
+		
+		permanent |= card.getCardType().contains(Constants.CardType.ARTIFACT);
+		permanent |= card.getCardType().contains(Constants.CardType.CREATURE);
+		permanent |= card.getCardType().contains(Constants.CardType.ENCHANTMENT);
+		permanent |= card.getCardType().contains(Constants.CardType.LAND);
+		permanent |= card.getCardType().contains(Constants.CardType.PLANESWALKER);
+		
+		return permanent;
+	}
 }
