@@ -428,7 +428,10 @@ public final class Constants {
     }
 
 	public static final List<String> PlaneswalkerTypes = new ArrayList<String>()
-		{{add("Ajani"); add("Bolas"); add("Chandra"); add("Elspeth");add("Garruk"); add("Jace"); add("Liliana"); add("Nissa"); add("Sarkhan"); add("Sorin"); add("Tezzeret");}};
+		{{add("Ajani"); add("Bolas"); add("Chandra"); add("Elspeth");
+		  add("Garruk"); add("Jace"); add("Liliana"); add("Nissa");
+		  add("Sarkhan"); add("Sorin"); add("Tezzeret"); add("Karn");
+		  add("Venser"); add("Gideon"); add("Koth");}};
 	
 	private Constants() {
 		throw new AssertionError();
