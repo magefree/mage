@@ -134,31 +134,35 @@ public class TargetCard<T extends TargetCard<T>> extends TargetObject<TargetCard
 	@Override
 	public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
 		Set<UUID> possibleTargets = new HashSet<UUID>();
-		Player player = game.getPlayer(sourceControllerId);
-		if (player != null) {
-			switch (zone) {
-				case HAND:
-					for (Card card: player.getHand().getCards(filter, game)) {
-						possibleTargets.add(card.getId());
+		for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
+			if (filter.matchOwner(playerId)) {
+				Player player = game.getPlayer(playerId);
+				if (player != null) {
+					switch (zone) {
+						case HAND:
+							for (Card card: player.getHand().getCards(filter, game)) {
+								possibleTargets.add(card.getId());
+							}
+							break;
+						case GRAVEYARD:
+							for (Card card: player.getGraveyard().getCards(filter, game)) {
+								possibleTargets.add(card.getId());
+							}
+							break;
+						case LIBRARY:
+							for (Card card: player.getLibrary().getUniqueCards(game)) {
+								if (filter.match(card))
+									possibleTargets.add(card.getId());
+							}
+							break;
+						case EXILED:
+							for (Card card: game.getExile().getPermanentExile().getUniqueCards(game)) {
+								if (filter.match(card, player.getId(), game))
+									possibleTargets.add(card.getId());
+							}
+							break;
 					}
-					break;
-				case GRAVEYARD:
-					for (Card card: player.getGraveyard().getCards(filter, game)) {
-						possibleTargets.add(card.getId());
-					}
-					break;
-				case LIBRARY:
-					for (Card card: player.getLibrary().getUniqueCards(game)) {
-						if (filter.match(card))
-							possibleTargets.add(card.getId());
-					}
-					break;
-                case EXILED:
-                    for (Card card: game.getExile().getPermanentExile().getUniqueCards(game)) {
-                        if (filter.match(card, player.getId(), game))
-                            possibleTargets.add(card.getId());
-                    }
-                    break;
+				}
 			}
 		}
 		return possibleTargets;
