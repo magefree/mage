@@ -90,7 +90,7 @@ class EssenceOfTheWildEffect extends ReplacementEffectImpl<EssenceOfTheWildEffec
 	public boolean applies(GameEvent event, Ability source, Game game) {
 		if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD) {
             Permanent perm = game.getPermanent(event.getTargetId());
-            if (perm != null && perm.getCardType().contains(CardType.CREATURE)) {
+            if (perm != null && perm.getCardType().contains(CardType.CREATURE) && perm.getControllerId().equals(source.getControllerId())) {
     			return true;
             }
 		}
