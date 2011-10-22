@@ -30,6 +30,8 @@ package mage.abilities.effects.common;
 import java.util.UUID;
 import mage.Constants;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.players.Player;
@@ -39,16 +41,21 @@ import mage.players.Player;
  * @author BetaSteward_at_googlemail.com
  */
 public class DamagePlayersEffect extends OneShotEffect<DamagePlayersEffect> {
-	private int amount;
+	private DynamicValue amount;
 
     public DamagePlayersEffect(int amount) {
-        super(Constants.Outcome.Damage);
+        this(Constants.Outcome.Damage, new StaticValue(amount));
+	}
+	
+	public DamagePlayersEffect(Constants.Outcome outcome, DynamicValue amount) {
+		super(outcome);
 		this.amount = amount;
 		staticText = "{source} deals " + amount + " damage to each player";
 	}
 
     public DamagePlayersEffect(final DamagePlayersEffect effect) {
         super(effect);
+		this.amount = effect.amount;
     }
 
     @Override
@@ -56,7 +63,7 @@ public class DamagePlayersEffect extends OneShotEffect<DamagePlayersEffect> {
 		for (UUID playerId: game.getPlayer(source.getControllerId()).getInRange()) {
 			Player player = game.getPlayer(playerId);
 			if (player != null)
-				player.damage(amount, source.getId(), game, false, true);
+				player.damage(amount.calculate(game, source), source.getId(), game, false, true);
 		}
         return true;
     }
