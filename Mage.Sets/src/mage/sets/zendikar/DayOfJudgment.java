@@ -45,7 +45,7 @@ public class DayOfJudgment extends CardImpl<DayOfJudgment> {
 		super(ownerId, 9, "Day of Judgment", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
 		this.expansionSetCode = "ZEN";
 		this.color.setWhite(true);
-		this.getSpellAbility().addEffect(new DestroyAllEffect(FilterCreaturePermanent.getDefault()));
+		this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterCreaturePermanent()));
 	}
 
 	public DayOfJudgment(final DayOfJudgment card) {
