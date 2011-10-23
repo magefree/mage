@@ -77,7 +77,7 @@ public class VenserTheSojourner extends CardImpl<VenserTheSojourner> {
 		//TODO: Venser's second ability doesn't lock in what it applies to. That's because the effect states a true thing about creatures,
 		// but doesn't actually change the characteristics of those creatures. As a result, all creatures are unblockable that turn, including creatures you don't control, creatures that weren't on the battlefield at the time the ability resolved, and creatures that have lost all abilities.
 		// -1: Creatures are unblockable this turn.
-		this.addAbility(new LoyaltyAbility(new GainAbilityAllEffect(UnblockableAbility.getInstance(), Constants.Duration.EndOfTurn, FilterCreaturePermanent.getDefault()), -1));
+		this.addAbility(new LoyaltyAbility(new GainAbilityAllEffect(UnblockableAbility.getInstance(), Constants.Duration.EndOfTurn, new FilterCreaturePermanent()), -1));
 
 		// -8: You get an emblem with "Whenever you cast a spell, exile target permanent."
 		LoyaltyAbility ability2 = new LoyaltyAbility(new GetEmblemEffect(new VenserTheSojournerEmblem()), -8);

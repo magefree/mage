@@ -54,15 +54,4 @@ public class FilterAttackingOrBlockingCreature extends FilterCreaturePermanent<F
 	public FilterAttackingOrBlockingCreature copy() {
 		return new FilterAttackingOrBlockingCreature(this);
 	}
-
-	/**
-	 * There are a lot of usages of this method, we should rip them out as we see
-	 * them and replace them with <code>new FilterAttackingOrBlockingCreature()</code>.  This
-	 * use to return a static instance of this object which is bad as its completely
-	 * mutable and leads to EXTREMELY hard to track down issues!
-	 */
-	@Deprecated
-    public static FilterAttackingOrBlockingCreature getDefault() {
-        return new FilterAttackingOrBlockingCreature();
-    }
 }

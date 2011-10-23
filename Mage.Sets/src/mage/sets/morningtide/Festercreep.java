@@ -58,7 +58,7 @@ public class Festercreep extends CardImpl<Festercreep> {
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), false));
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostAllEffect(-1, -1, Constants.Duration.EndOfTurn, FilterCreaturePermanent.getDefault(), true), new ManaCostsImpl("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostAllEffect(-1, -1, Constants.Duration.EndOfTurn, new FilterCreaturePermanent(), true), new ManaCostsImpl("{1}{B}"));
         ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance(1)));
         this.addAbility(ability);
     }

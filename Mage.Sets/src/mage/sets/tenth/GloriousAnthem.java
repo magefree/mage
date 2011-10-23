@@ -47,7 +47,7 @@ public class GloriousAnthem extends CardImpl<GloriousAnthem> {
         super(ownerId, 17, "Glorious Anthem", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{W}");
         this.expansionSetCode = "10E";
         this.color.setWhite(true);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Constants.Duration.WhileOnBattlefield, FilterCreaturePermanent.getDefault(), false)));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Constants.Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false)));
     }
 
     public GloriousAnthem(final GloriousAnthem card) {

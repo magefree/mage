@@ -42,8 +42,6 @@ public class FilterArtifactPermanent<T extends FilterArtifactPermanent<T>> exten
 	protected boolean attacking;
 	protected boolean useBlocking;
 	protected boolean blocking;
-	protected boolean useTapped;
-	protected boolean tapped;
 
 	public FilterArtifactPermanent() {
 		this("artifact");
@@ -62,17 +60,6 @@ public class FilterArtifactPermanent<T extends FilterArtifactPermanent<T>> exten
 		this.blocking = filter.blocking;
 		this.useTapped = filter.useTapped;
 		this.tapped = filter.tapped;
-	}
-
-	/**
-	 * There are a lot of usages of this method, we should rip them out as we see
-	 * them and replace them with <code>new FilterArtifactPermanent()</code>.  This
-	 * use to return a static instance of this object which is bad as its completely
-	 * mutable and leads to EXTREMELY hard to track down issues!
-	 */
-	@Deprecated
-	public static FilterArtifactPermanent getDefault() {
-		return new FilterArtifactPermanent();
 	}
 
 	@Override
@@ -106,14 +93,6 @@ public class FilterArtifactPermanent<T extends FilterArtifactPermanent<T>> exten
 
 	public void setBlocking ( boolean blocking ) {
 		this.blocking = blocking;
-	}
-
-	public void setUseTapped ( boolean useTapped ) {
-		this.useTapped = useTapped;
-	}
-
-	public void setTapped ( boolean tapped ) {
-		this.tapped = tapped;
 	}
 
 	@Override

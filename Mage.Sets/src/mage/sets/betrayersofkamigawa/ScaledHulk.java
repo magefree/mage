@@ -52,7 +52,7 @@ public class ScaledHulk extends CardImpl<ScaledHulk> {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         // Whenever you cast a Spirit or Arcane spell, Scaled Hulk gets +2/+2 until end of turn.
-        this.addAbility(new SpellCastTriggeredAbility(new BoostSourceEffect(2, 2, Constants.Duration.EndOfTurn), FilterSpiritOrArcaneCard.getDefault(), false));
+        this.addAbility(new SpellCastTriggeredAbility(new BoostSourceEffect(2, 2, Constants.Duration.EndOfTurn), new FilterSpiritOrArcaneCard(), false));
     }
 
     public ScaledHulk(final ScaledHulk card) {

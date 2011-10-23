@@ -33,7 +33,6 @@ import mage.Constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterAttackingCreature;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -49,7 +48,7 @@ public class Rebuke extends CardImpl<Rebuke> {
         this.color.setWhite(true);
 
         // Destroy target attacking creature.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(FilterAttackingCreature.getDefault()));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterAttackingCreature()));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 

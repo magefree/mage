@@ -114,7 +114,7 @@ class CagedSunEffect1 extends OneShotEffect<CagedSunEffect1> {
 
 class CagedSunEffect2 extends ContinuousEffectImpl<CagedSunEffect2> {
 
-	private static final FilterCreaturePermanent filter = FilterCreaturePermanent.getDefault();
+	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
 	public CagedSunEffect2() {
 		super(Duration.WhileOnBattlefield, Constants.Layer.PTChangingEffects_7, Constants.SubLayer.ModifyPT_7c, Constants.Outcome.BoostCreature);

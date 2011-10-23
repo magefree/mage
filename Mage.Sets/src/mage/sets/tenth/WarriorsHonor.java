@@ -46,7 +46,7 @@ public class WarriorsHonor extends CardImpl<WarriorsHonor> {
         super(ownerId, 58, "Warrior's Honor", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "10E";
         this.color.setWhite(true);
-        this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Constants.Duration.EndOfTurn, FilterCreaturePermanent.getDefault(), false));
+        this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Constants.Duration.EndOfTurn, new FilterCreaturePermanent(), false));
     }
 
     public WarriorsHonor(final WarriorsHonor card) {

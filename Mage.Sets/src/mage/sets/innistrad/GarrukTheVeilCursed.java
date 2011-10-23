@@ -33,7 +33,6 @@ import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -90,7 +89,7 @@ public class GarrukTheVeilCursed extends CardImpl<GarrukTheVeilCursed> {
         effect.setLockedIn(true);
         effect.setRule("Creatures you control get +X/+X until end of turn, where X is the number of creature cards in your graveyard");
         effects1.add(effect);
-        effects1.add(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Constants.Duration.EndOfTurn, FilterCreaturePermanent.getDefault()));
+        effects1.add(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Constants.Duration.EndOfTurn, new FilterCreaturePermanent()));
         this.addAbility(new LoyaltyAbility(effects1, -3));
     }
 
@@ -110,7 +109,7 @@ class GarrukTheVeilCursedValue implements DynamicValue {
     public int calculate(Game game, Ability sourceAbility) {
         Player player = game.getPlayer(sourceAbility.getControllerId());
         if (player != null) {
-            return player.getGraveyard().getCards(FilterCreatureCard.getDefault(), game).size();
+            return player.getGraveyard().getCards(new FilterCreatureCard(), game).size();
         }
         return 0;
     }
@@ -133,7 +132,7 @@ class GarrukTheVeilCursedValue implements DynamicValue {
 
 class GarrukTheVeilCursedEffect extends OneShotEffect<GarrukTheVeilCursedEffect> {
 
-    private static FilterPermanent filterCreature = new FilterPermanent("a creature you control");
+    private static final FilterPermanent filterCreature = new FilterPermanent("a creature you control");
 
     static {
         filterCreature.getCardType().add(CardType.CREATURE);

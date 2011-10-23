@@ -40,8 +40,6 @@ import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.FearAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterSpiritOrArcaneCard;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -57,7 +55,7 @@ public class KamiOfTheWaningMoon extends CardImpl<KamiOfTheWaningMoon> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
-        Ability ability = new SpellCastTriggeredAbility(new GainAbilityTargetEffect(FearAbility.getInstance(), Constants.Duration.EndOfTurn), FilterSpiritOrArcaneCard.getDefault(), false);
+        Ability ability = new SpellCastTriggeredAbility(new GainAbilityTargetEffect(FearAbility.getInstance(), Constants.Duration.EndOfTurn), new FilterSpiritOrArcaneCard(), false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

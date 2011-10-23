@@ -48,7 +48,7 @@ public class CopyPermanentEffect extends OneShotEffect<CopyPermanentEffect> {
     private FilterPermanent filter;
     
      public CopyPermanentEffect() {
-         this(FilterCreaturePermanent.getDefault());
+         this(new FilterCreaturePermanent());
      }
     
     public CopyPermanentEffect(FilterPermanent filter) {

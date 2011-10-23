@@ -66,7 +66,7 @@ public class WildbloodPack extends CardImpl<WildbloodPack> {
         this.addAbility(TrampleAbility.getInstance());
 
         // Attacking creatures you control get +3/+0.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(3, 0, Constants.Duration.WhileOnBattlefield, FilterAttackingCreature.getDefault(), false)));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(3, 0, Constants.Duration.WhileOnBattlefield, new FilterAttackingCreature(), false)));
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Wildblood Pack.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), Constants.TargetController.ANY, false);

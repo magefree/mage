@@ -57,7 +57,7 @@ public class DivineVerdict extends CardImpl<DivineVerdict> {
 
         this.color.setWhite(true);
 
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(FilterAttackingOrBlockingCreature.getDefault()));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterAttackingOrBlockingCreature()));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 

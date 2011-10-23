@@ -29,7 +29,6 @@
 package mage.target.common;
 
 import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPermanent;
 
 /**
@@ -38,7 +37,7 @@ import mage.target.TargetPermanent;
 public class TargetArtifactPermanent<T extends TargetArtifactPermanent<T>> extends TargetPermanent<TargetArtifactPermanent<T>> {
 
 	public TargetArtifactPermanent() {
-		this(1, 1, FilterArtifactPermanent.getDefault(), false);
+		this(1, 1, new FilterArtifactPermanent(), false);
 	}
 
 	public TargetArtifactPermanent(FilterArtifactPermanent filter) {
@@ -46,11 +45,11 @@ public class TargetArtifactPermanent<T extends TargetArtifactPermanent<T>> exten
 	}
 
 	public TargetArtifactPermanent(int numTargets) {
-		this(numTargets, numTargets, FilterArtifactPermanent.getDefault(), false);
+		this(numTargets, numTargets, new FilterArtifactPermanent(), false);
 	}
 
 	public TargetArtifactPermanent(int minNumTargets, int maxNumTargets) {
-		this(minNumTargets, maxNumTargets, FilterArtifactPermanent.getDefault(), false);
+		this(minNumTargets, maxNumTargets, new FilterArtifactPermanent(), false);
 	}
 
 	public TargetArtifactPermanent(int minNumTargets, int maxNumTargets, FilterArtifactPermanent filter, boolean notTarget) {

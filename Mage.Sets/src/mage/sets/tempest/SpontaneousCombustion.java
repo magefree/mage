@@ -48,7 +48,7 @@ public class SpontaneousCombustion extends CardImpl<SpontaneousCombustion> {
         this.color.setRed(true);
         this.color.setBlack(true);
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
-        this.getSpellAbility().addEffect(new DamageAllEffect(3, FilterCreaturePermanent.getDefault()));
+        this.getSpellAbility().addEffect(new DamageAllEffect(3, new FilterCreaturePermanent()));
     }
 
     public SpontaneousCombustion(final SpontaneousCombustion card) {

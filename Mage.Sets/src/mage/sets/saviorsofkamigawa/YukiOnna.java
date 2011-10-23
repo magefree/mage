@@ -62,12 +62,13 @@ public class YukiOnna extends CardImpl<YukiOnna> {
         this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
+
         // When Yuki-Onna enters the battlefield, destroy target artifact.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
         // Whenever you cast a Spirit or Arcane spell, you may return Yuki-Onna to its owner's hand.
-        this.addAbility(new SpellCastTriggeredAbility(new ReturnToHandSourceEffect(), FilterSpiritOrArcaneCard.getDefault(), true));
+        this.addAbility(new SpellCastTriggeredAbility(new ReturnToHandSourceEffect(), new FilterSpiritOrArcaneCard(), true));
     }
 
     public YukiOnna(final YukiOnna card) {

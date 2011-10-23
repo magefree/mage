@@ -28,7 +28,6 @@
 
 package mage.filter.common;
 
-import mage.abilities.Ability;
 import mage.filter.FilterImpl;
 import mage.filter.FilterInPlay;
 import mage.filter.FilterPermanent;

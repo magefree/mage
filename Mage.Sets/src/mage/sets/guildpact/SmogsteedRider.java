@@ -52,7 +52,7 @@ public class SmogsteedRider extends CardImpl<SmogsteedRider> {
         this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.addAbility(new AttacksTriggeredAbility(new GainAbilityControlledEffect(FearAbility.getInstance(), Constants.Duration.EndOfTurn, FilterAttackingCreature.getDefault(), true), false));
+        this.addAbility(new AttacksTriggeredAbility(new GainAbilityControlledEffect(FearAbility.getInstance(), Constants.Duration.EndOfTurn, new FilterAttackingCreature(), true), false));
     }
 
     public SmogsteedRider(final SmogsteedRider card) {

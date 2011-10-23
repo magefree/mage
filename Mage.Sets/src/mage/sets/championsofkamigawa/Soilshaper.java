@@ -38,8 +38,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.continious.BecomesCreatureTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterSpiritOrArcaneCard;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetLandPermanent;
@@ -55,7 +53,7 @@ public class Soilshaper extends CardImpl<Soilshaper> {
         this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        Ability ability = new SpellCastTriggeredAbility(new BecomesCreatureTargetEffect(new SoilshaperToken(), "land", Duration.EndOfTurn), FilterSpiritOrArcaneCard.getDefault(), false);
+        Ability ability = new SpellCastTriggeredAbility(new BecomesCreatureTargetEffect(new SoilshaperToken(), "land", Duration.EndOfTurn), new FilterSpiritOrArcaneCard(), false);
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
     }

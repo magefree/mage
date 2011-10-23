@@ -48,7 +48,7 @@ public class MassHysteria extends CardImpl<MassHysteria> {
         super(ownerId, 99, "Mass Hysteria", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{R}");
         this.expansionSetCode = "MRD";
         this.color.setRed(true);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAllEffect(HasteAbility.getInstance(), Constants.Duration.WhileOnBattlefield, FilterCreaturePermanent.getDefault(), false)));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAllEffect(HasteAbility.getInstance(), Constants.Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false)));
     }
 
     public MassHysteria(final MassHysteria card) {

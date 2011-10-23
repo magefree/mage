@@ -51,7 +51,7 @@ public class GruulWarPlow extends CardImpl<GruulWarPlow> {
     public GruulWarPlow(UUID ownerId) {
         super(ownerId, 151, "Gruul War Plow", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
         this.expansionSetCode = "GPT";
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(TrampleAbility.getInstance(), Constants.Duration.WhileOnBattlefield, FilterCreaturePermanent.getDefault())));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(TrampleAbility.getInstance(), Constants.Duration.WhileOnBattlefield, new FilterCreaturePermanent())));
         this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new GruulWarPlowToken(), "", Duration.EndOfTurn), new ManaCostsImpl("{1}{R}{G}")));
     }
 

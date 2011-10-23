@@ -63,7 +63,7 @@ public class InstigatorGang extends CardImpl<InstigatorGang> {
         this.toughness = new MageInt(3);
 
         // Attacking creatures you control get +1/+0.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Constants.Duration.WhileOnBattlefield, FilterAttackingCreature.getDefault(), false)));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Constants.Duration.WhileOnBattlefield, new FilterAttackingCreature(), false)));
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Instigator Gang.
         this.addAbility(new TransformAbility());

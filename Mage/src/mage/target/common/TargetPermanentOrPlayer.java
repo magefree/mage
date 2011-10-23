@@ -33,10 +33,8 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreatureOrPlayer;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterPermanentOrPlayer;
-import mage.filter.common.FilterPermanentOrPlayerWithCounter;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -143,7 +141,7 @@ public class TargetPermanentOrPlayer extends TargetImpl<TargetPermanentOrPlayer>
 					return true;
 			}
 		}
-		for (Permanent permanent: game.getBattlefield().getActivePermanents(FilterCreaturePermanent.getDefault(), sourceControllerId, game)) {
+		for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), sourceControllerId, game)) {
 			if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game) && filter.match(permanent, sourceId, sourceControllerId, game)) {
 				count++;
 				if (count >= this.minNumberOfTargets)
@@ -192,7 +190,7 @@ public class TargetPermanentOrPlayer extends TargetImpl<TargetPermanentOrPlayer>
 				possibleTargets.add(playerId);
 			}
 		}
-		for (Permanent permanent: game.getBattlefield().getActivePermanents(FilterCreaturePermanent.getDefault(), sourceControllerId, game)) {
+		for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), sourceControllerId, game)) {
 			if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game) && filter.match(permanent, sourceId, sourceControllerId, game)) {
 				possibleTargets.add(permanent.getId());
 			}
@@ -209,7 +207,7 @@ public class TargetPermanentOrPlayer extends TargetImpl<TargetPermanentOrPlayer>
 				possibleTargets.add(playerId);
 			}
 		}
-		for (Permanent permanent: game.getBattlefield().getActivePermanents(FilterCreaturePermanent.getDefault(), sourceControllerId, game)) {
+		for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), sourceControllerId, game)) {
 			if (filter.match(permanent, null, sourceControllerId, game)) {
 				possibleTargets.add(permanent.getId());
 			}

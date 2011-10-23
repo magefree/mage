@@ -82,7 +82,7 @@ class MassPolymorphEffect extends OneShotEffect<MassPolymorphEffect> {
 	@Override
 	public boolean apply(Game game, Ability source) {
 		int count;
-		List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(FilterCreaturePermanent.getDefault(), source.getControllerId());
+		List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId());
 		count = creatures.size();
 		for (Permanent creature: creatures) {
 			creature.moveToExile(null, null, source.getId(), game);

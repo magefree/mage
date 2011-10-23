@@ -46,7 +46,7 @@ public class CruelEdict extends CardImpl<CruelEdict> {
         super(ownerId, 133, "Cruel Edict", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
         this.expansionSetCode = "10E";
         this.color.setBlack(true);
-        this.getSpellAbility().addEffect(new SacrificeEffect(FilterCreaturePermanent.getDefault(), 1, "a creature"));
+        this.getSpellAbility().addEffect(new SacrificeEffect(new FilterCreaturePermanent(), 1, "a creature"));
         this.getSpellAbility().addTarget(new TargetOpponent());
         // Target opponent sacrifices a creature.
     }

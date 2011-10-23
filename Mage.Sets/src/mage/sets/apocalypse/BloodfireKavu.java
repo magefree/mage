@@ -54,7 +54,7 @@ public class BloodfireKavu extends CardImpl<BloodfireKavu> {
         this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DamageAllEffect(2, FilterCreaturePermanent.getDefault()), new ColoredManaCost(Constants.ColoredManaSymbol.R));
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DamageAllEffect(2, new FilterCreaturePermanent()), new ColoredManaCost(Constants.ColoredManaSymbol.R));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

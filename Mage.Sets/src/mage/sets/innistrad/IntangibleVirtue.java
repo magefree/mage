@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
@@ -45,7 +44,7 @@ import mage.filter.common.FilterToken;
  */
 public class IntangibleVirtue extends CardImpl<IntangibleVirtue> {
 
-    private final static FilterToken filter = FilterToken.getDefault();
+    private final static FilterToken filter = new FilterToken();
     
     public IntangibleVirtue(UUID ownerId) {
         super(ownerId, 19, "Intangible Virtue", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");

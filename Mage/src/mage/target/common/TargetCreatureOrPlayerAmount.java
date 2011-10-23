@@ -110,7 +110,7 @@ public class TargetCreatureOrPlayerAmount extends TargetAmount<TargetCreatureOrP
 					return true;
 			}
 		}
-		for (Permanent permanent: game.getBattlefield().getActivePermanents(FilterCreaturePermanent.getDefault(), sourceControllerId, game)) {
+		for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), sourceControllerId, game)) {
 			if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game) && filter.match(permanent, sourceId, sourceControllerId, game)) {
 				count++;
 				if (count >= this.minNumberOfTargets)
@@ -131,7 +131,7 @@ public class TargetCreatureOrPlayerAmount extends TargetAmount<TargetCreatureOrP
 					return true;
 			}
 		}
-		for (Permanent permanent: game.getBattlefield().getActivePermanents(FilterCreaturePermanent.getDefault(), sourceControllerId, game)) {
+		for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), sourceControllerId, game)) {
 			if (filter.match(permanent, null, sourceControllerId, game)) {
 				count++;
 				if (count >= this.minNumberOfTargets)
@@ -151,7 +151,7 @@ public class TargetCreatureOrPlayerAmount extends TargetAmount<TargetCreatureOrP
 				possibleTargets.add(playerId);
 			}
 		}
-		for (Permanent permanent: game.getBattlefield().getActivePermanents(FilterCreaturePermanent.getDefault(), sourceControllerId, game)) {
+		for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), sourceControllerId, game)) {
 			if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game) && filter.match(permanent, sourceId, sourceControllerId, game)) {
 				possibleTargets.add(permanent.getId());
 			}
@@ -168,7 +168,7 @@ public class TargetCreatureOrPlayerAmount extends TargetAmount<TargetCreatureOrP
 				possibleTargets.add(playerId);
 			}
 		}
-		for (Permanent permanent: game.getBattlefield().getActivePermanents(FilterCreaturePermanent.getDefault(), sourceControllerId, game)) {
+		for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), sourceControllerId, game)) {
 			if (filter.match(permanent, null, sourceControllerId, game)) {
 				possibleTargets.add(permanent.getId());
 			}

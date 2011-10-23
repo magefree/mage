@@ -82,7 +82,7 @@ class GleamOfResistanceEffect extends OneShotEffect<GleamOfResistanceEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent perm: game.getBattlefield().getAllActivePermanents(FilterCreaturePermanent.getDefault(), source.getControllerId())) {
+        for (Permanent perm: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId())) {
             if (perm.isTapped()) {
                 perm.untap(game);
             }

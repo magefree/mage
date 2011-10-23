@@ -39,8 +39,6 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.keyword.SoulshiftAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterSpiritOrArcaneCard;
 import mage.target.common.TargetOpponent;
 
@@ -55,7 +53,7 @@ public class ThiefOfHope extends CardImpl<ThiefOfHope> {
         this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        Ability ability = new SpellCastTriggeredAbility(new LoseLifeTargetEffect(1), FilterSpiritOrArcaneCard.getDefault(), false);
+        Ability ability = new SpellCastTriggeredAbility(new LoseLifeTargetEffect(1), new FilterSpiritOrArcaneCard(), false);
         ability.addEffect(new GainLifeEffect(1));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

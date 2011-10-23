@@ -50,7 +50,7 @@ public class Overrun extends CardImpl<Overrun> {
 		this.color.setGreen(true);
 
         this.getSpellAbility().addEffect(new BoostControlledEffect(3, 3, Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, FilterCreaturePermanent.getDefault()));
+        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent()));
     }
 
 	public Overrun(final Overrun card) {

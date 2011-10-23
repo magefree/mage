@@ -53,12 +53,13 @@ public class KemuriOnna extends CardImpl<KemuriOnna> {
         this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
+
         // When Kemuri-Onna enters the battlefield, target player discards a card.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(1), false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         // Whenever you cast a Spirit or Arcane spell, you may return Kemuri-Onna to its owner's hand.
-        this.addAbility(new SpellCastTriggeredAbility(new ReturnToHandSourceEffect(), FilterSpiritOrArcaneCard.getDefault(), true));
+        this.addAbility(new SpellCastTriggeredAbility(new ReturnToHandSourceEffect(), new FilterSpiritOrArcaneCard(), true));
     }
 
     public KemuriOnna(final KemuriOnna card) {

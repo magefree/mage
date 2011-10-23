@@ -47,7 +47,7 @@ import mage.filter.common.FilterCreaturePermanent;
 public class AutumnsVeil extends CardImpl<AutumnsVeil> {
 
 	private static final FilterSpell filterTarget1 = new FilterSpell("spells you control");
-	private static final FilterCreaturePermanent filterTarget2 = FilterCreaturePermanent.getDefault();
+	private static final FilterCreaturePermanent filterTarget2 = new FilterCreaturePermanent();
 	private static final FilterStackObject filterSource = new FilterStackObject("blue or black spells");
 
 	static {

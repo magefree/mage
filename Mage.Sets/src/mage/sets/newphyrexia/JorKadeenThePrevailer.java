@@ -62,7 +62,7 @@ public class JorKadeenThePrevailer extends CardImpl<JorKadeenThePrevailer> {
         this.toughness = new MageInt(4);
 
         this.addAbility(FirstStrikeAbility.getInstance());
-        ConditionalContinousEffect effect = new ConditionalContinousEffect(new BoostControlledEffect(3, 0, Duration.WhileOnBattlefield, FilterCreaturePermanent.getDefault(), true),
+        ConditionalContinousEffect effect = new ConditionalContinousEffect(new BoostControlledEffect(3, 0, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), true),
                 MetalcraftCondition.getInstance(), effectText);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }

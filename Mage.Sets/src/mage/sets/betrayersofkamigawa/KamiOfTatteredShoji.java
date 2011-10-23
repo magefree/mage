@@ -53,7 +53,7 @@ public class KamiOfTatteredShoji extends CardImpl<KamiOfTatteredShoji> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);
         // Whenever you cast a Spirit or Arcane spell, Kami of Tattered Shoji gains flying until end of turn.
-        this.addAbility(new SpellCastTriggeredAbility(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Constants.Duration.EndOfTurn), FilterSpiritOrArcaneCard.getDefault(), false));
+        this.addAbility(new SpellCastTriggeredAbility(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Constants.Duration.EndOfTurn), new FilterSpiritOrArcaneCard(), false));
     }
 
     public KamiOfTatteredShoji(final KamiOfTatteredShoji card) {

@@ -72,7 +72,7 @@ public class GarrukWildspeaker extends CardImpl<GarrukWildspeaker> {
 
 		Effects effects1 = new Effects();
 		effects1.add(new BoostControlledEffect(3, 3, Duration.EndOfTurn));
-		effects1.add(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, FilterCreaturePermanent.getDefault()));
+		effects1.add(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent()));
 		this.addAbility(new LoyaltyAbility(effects1, -4));
 	}
 

@@ -37,8 +37,6 @@ import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterSpiritOrArcaneCard;
 
 /**
@@ -54,7 +52,7 @@ public class SireOfTheStorm extends CardImpl<SireOfTheStorm> {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new SpellCastTriggeredAbility(new DrawCardControllerEffect(1), FilterSpiritOrArcaneCard.getDefault(), true));
+        this.addAbility(new SpellCastTriggeredAbility(new DrawCardControllerEffect(1), new FilterSpiritOrArcaneCard(), true));
     }
 
     public SireOfTheStorm(final SireOfTheStorm card) {

@@ -142,7 +142,7 @@ class AdaptiveAutomatonAddSubtypeEffect extends ContinuousEffectImpl<AdaptiveAut
 
 class AdaptiveAutomatonBoostControlledEffect extends ContinuousEffectImpl<AdaptiveAutomatonBoostControlledEffect> {
 
-	private static final FilterCreaturePermanent filter = FilterCreaturePermanent.getDefault();
+	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
 	public AdaptiveAutomatonBoostControlledEffect() {
 		super(Duration.WhileOnBattlefield, Constants.Layer.PTChangingEffects_7, Constants.SubLayer.ModifyPT_7c, Constants.Outcome.BoostCreature);

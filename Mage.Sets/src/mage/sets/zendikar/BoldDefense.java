@@ -64,7 +64,7 @@ public class BoldDefense extends CardImpl<BoldDefense> {
 
         this.getSpellAbility().addOptionalCost(new ManaCostsImpl("{3}{W}"));
 
-        ContinuousEffect effect = new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Constants.Duration.EndOfTurn, FilterCreaturePermanent.getDefault(), false);
+        ContinuousEffect effect = new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Constants.Duration.EndOfTurn, new FilterCreaturePermanent(), false);
         this.getSpellAbility().addEffect(new ConditionalContinousEffect(effect, KickedCondition.getInstance(), staticText));
     }
 

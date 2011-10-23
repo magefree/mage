@@ -37,8 +37,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterSpiritOrArcaneCard;
 import mage.target.common.TargetNonBasicLandPermanent;
 
@@ -53,7 +51,7 @@ public class OreGorger extends CardImpl<OreGorger> {
         this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
-        Ability ability = new SpellCastTriggeredAbility(new DestroyTargetEffect(), FilterSpiritOrArcaneCard.getDefault(), true);
+        Ability ability = new SpellCastTriggeredAbility(new DestroyTargetEffect(), new FilterSpiritOrArcaneCard(), true);
         ability.addTarget(new TargetNonBasicLandPermanent());
         this.addAbility(ability);
     }

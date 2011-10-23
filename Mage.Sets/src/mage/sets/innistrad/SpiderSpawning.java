@@ -54,7 +54,7 @@ public class SpiderSpawning extends CardImpl<SpiderSpawning> {
         this.color.setGreen(true);
 
         // Put a 1/2 green Spider creature token with reach onto the battlefield for each creature card in your graveyard.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new SpiderToken(), new CardsInControllerGraveyardCount(FilterCreatureCard.getDefault())));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new SpiderToken(), new CardsInControllerGraveyardCount(new FilterCreatureCard())));
         // Flashback {6}{B}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{6}{B}"), TimingRule.SORCERY));
     }

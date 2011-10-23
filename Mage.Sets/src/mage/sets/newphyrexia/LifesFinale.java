@@ -91,7 +91,7 @@ class LifesFinaleEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<Permanent> permanents = game.getBattlefield().getActivePermanents(FilterCreaturePermanent.getDefault(), source.getControllerId(), game);
+        List<Permanent> permanents = game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game);
         for (Permanent permanent : permanents) {
             permanent.destroy(source.getId(), game, false);
         }

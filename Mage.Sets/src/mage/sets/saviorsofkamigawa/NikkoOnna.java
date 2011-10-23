@@ -62,12 +62,13 @@ public class NikkoOnna extends CardImpl<NikkoOnna> {
         this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
+
         // When Nikko-Onna enters the battlefield, destroy target enchantment.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
         // Whenever you cast a Spirit or Arcane spell, you may return Nikko-Onna to its owner's hand.
-        this.addAbility(new SpellCastTriggeredAbility(new ReturnToHandSourceEffect(), FilterSpiritOrArcaneCard.getDefault(), true));
+        this.addAbility(new SpellCastTriggeredAbility(new ReturnToHandSourceEffect(), new FilterSpiritOrArcaneCard(), true));
     }
 
     public NikkoOnna(final NikkoOnna card) {

@@ -66,7 +66,7 @@ public class UnifiedWill extends CardImpl<UnifiedWill> {
 
 class UnifiedWillEffect extends CounterTargetEffect {
 
-	private static FilterCreaturePermanent filter = FilterCreaturePermanent.getDefault();
+	private static FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
 	public UnifiedWillEffect() {}
 

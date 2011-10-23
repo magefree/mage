@@ -78,7 +78,7 @@ public class PhyrexianRebirth extends CardImpl<PhyrexianRebirth> {
 		@Override
 		public boolean apply(Game game, Ability source) {
 			int count = 0;
-			for (Permanent permanent: game.getBattlefield().getActivePermanents(FilterCreaturePermanent.getDefault(), source.getControllerId(), game)) {
+			for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
 				count += permanent.destroy(source.getId(), game, false) ? 1 : 0;
 			}
 			HorrorToken horrorToken = new HorrorToken();

@@ -46,7 +46,7 @@ public class GloriousCharge extends CardImpl<GloriousCharge> {
         super(ownerId, 11, "Glorious Charge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "M10";
         this.color.setWhite(true);
-        this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Constants.Duration.EndOfTurn, FilterCreaturePermanent.getDefault(), false));
+        this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Constants.Duration.EndOfTurn, new FilterCreaturePermanent(), false));
     }
 
     public GloriousCharge(final GloriousCharge card) {

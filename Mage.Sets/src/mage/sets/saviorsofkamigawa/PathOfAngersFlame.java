@@ -47,8 +47,9 @@ public class PathOfAngersFlame extends CardImpl<PathOfAngersFlame> {
         this.expansionSetCode = "SOK";
         this.subtype.add("Arcane");
         this.color.setRed(true);
+
         // Creatures you control get +2/+0 until end of turn.
-        this.getSpellAbility().addEffect(new BoostControlledEffect(2, 0, Constants.Duration.EndOfTurn, FilterCreaturePermanent.getDefault(), false));
+        this.getSpellAbility().addEffect(new BoostControlledEffect(2, 0, Constants.Duration.EndOfTurn, new FilterCreaturePermanent(), false));
     }
 
     public PathOfAngersFlame(final PathOfAngersFlame card) {

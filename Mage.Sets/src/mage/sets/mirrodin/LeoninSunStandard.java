@@ -47,7 +47,7 @@ public class LeoninSunStandard extends CardImpl<LeoninSunStandard> {
     public LeoninSunStandard(UUID ownerId) {
         super(ownerId, 194, "Leonin Sun Standard", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "MRD";
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Constants.Duration.EndOfTurn, FilterCreaturePermanent.getDefault(), false), new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Constants.Duration.EndOfTurn, new FilterCreaturePermanent(), false), new ManaCostsImpl("{1}{W}")));
     }
 
     public LeoninSunStandard(final LeoninSunStandard card) {

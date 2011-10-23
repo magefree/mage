@@ -54,15 +54,4 @@ public class FilterCreatureCard extends FilterCard<FilterCreatureCard> {
 	public FilterCreatureCard copy() {
 		return new FilterCreatureCard(this);
 	}
-
-	/**
-	 * There are a lot of usages of this method, we should rip them out as we see
-	 * them and replace them with <code>new FilterCreatureCard()</code>.  This
-	 * use to return a static instance of this object which is bad as its completely
-	 * mutable and leads to EXTREMELY hard to track down issues!
-	 */
-	@Deprecated
-    public static FilterCreatureCard getDefault() {
-        return new FilterCreatureCard();
-    }
 }

@@ -32,7 +32,6 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.MageInt;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.Effects;
@@ -67,7 +66,7 @@ public class SarkhanVol extends CardImpl<SarkhanVol> {
 
 		Effects effects1 = new Effects();
 		effects1.add(new BoostControlledEffect(1, 1, Duration.EndOfTurn));
-		effects1.add(new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.EndOfTurn, FilterCreaturePermanent.getDefault()));
+		effects1.add(new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent()));
 		this.addAbility(new LoyaltyAbility(effects1, 1));
 
 		Effects effects2 = new Effects();

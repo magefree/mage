@@ -47,7 +47,7 @@ public class ChainReaction extends CardImpl<ChainReaction> {
 
         this.color.setRed(true);
 
-        this.getSpellAbility().addEffect(new DamageAllEffect(new PermanentsOnBattlefieldCount(FilterCreaturePermanent.getDefault()), FilterCreaturePermanent.getDefault()));
+        this.getSpellAbility().addEffect(new DamageAllEffect(new PermanentsOnBattlefieldCount(new FilterCreaturePermanent()), new FilterCreaturePermanent()));
     }
 
     public ChainReaction(final ChainReaction card) {

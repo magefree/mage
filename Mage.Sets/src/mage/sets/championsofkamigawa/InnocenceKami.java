@@ -42,8 +42,6 @@ import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterSpiritOrArcaneCard;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -62,7 +60,7 @@ public class InnocenceKami extends CardImpl<InnocenceKami> {
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
-        this.addAbility(new SpellCastTriggeredAbility(new UntapSourceEffect(), FilterSpiritOrArcaneCard.getDefault(), false));
+        this.addAbility(new SpellCastTriggeredAbility(new UntapSourceEffect(), new FilterSpiritOrArcaneCard(), false));
     }
 
     public InnocenceKami(final InnocenceKami card) {

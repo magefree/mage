@@ -31,13 +31,12 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.abilities.keyword.UnblockableAbility;
 import mage.cards.CardImpl;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.GoblinToken;
 import mage.target.Target;
 import mage.target.common.TargetOpponent;
 
@@ -73,16 +72,5 @@ public class HuntedPhantasm extends CardImpl<HuntedPhantasm> {
     @Override
     public HuntedPhantasm copy() {
         return new HuntedPhantasm(this);
-    }
-}
-
-class GoblinToken extends Token {
-    GoblinToken() {
-        super("Goblin", "1/1 red Goblin creature token");
-        cardType.add(CardType.CREATURE);
-        color = ObjectColor.RED;
-        subtype.add("Goblin");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
     }
 }

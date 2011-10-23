@@ -72,7 +72,7 @@ public class LilianaOfTheVeil extends CardImpl<LilianaOfTheVeil> {
         // +1: Each player discards a card.
         this.addAbility(new LoyaltyAbility(new DiscardEachPlayerEffect(), 1));
         // -2: Target player sacrifices a creature.
-        LoyaltyAbility ability = new LoyaltyAbility(new SacrificeEffect(FilterCreaturePermanent.getDefault(), 1, "Target player"), -2);
+        LoyaltyAbility ability = new LoyaltyAbility(new SacrificeEffect(new FilterCreaturePermanent(), 1, "Target player"), -2);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         // -6: Separate all permanents target player controls into two piles. That player sacrifices all permanents in the pile of his or her choice.

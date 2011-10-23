@@ -37,8 +37,6 @@ import mage.MageInt;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterSpiritOrArcaneCard;
 
 /**
@@ -53,7 +51,7 @@ public class KamiOfTheHunt extends CardImpl<KamiOfTheHunt> {
         this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.addAbility(new SpellCastTriggeredAbility(new BoostSourceEffect(1, 1, Constants.Duration.EndOfTurn), FilterSpiritOrArcaneCard.getDefault(), false));
+        this.addAbility(new SpellCastTriggeredAbility(new BoostSourceEffect(1, 1, Constants.Duration.EndOfTurn), new FilterSpiritOrArcaneCard(), false));
     }
 
     public KamiOfTheHunt(final KamiOfTheHunt card) {

@@ -55,7 +55,7 @@ public class OrbweaverKumo extends CardImpl<OrbweaverKumo> {
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
         this.addAbility(ReachAbility.getInstance());
-        this.addAbility(new SpellCastTriggeredAbility(new GainAbilitySourceEffect(new ForestwalkAbility(), Constants.Duration.EndOfTurn), FilterSpiritOrArcaneCard.getDefault(), false));
+        this.addAbility(new SpellCastTriggeredAbility(new GainAbilitySourceEffect(new ForestwalkAbility(), Constants.Duration.EndOfTurn), new FilterSpiritOrArcaneCard(), false));
     }
 
     public OrbweaverKumo(final OrbweaverKumo card) {

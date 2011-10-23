@@ -52,7 +52,7 @@ public class LeylineOfVitality extends CardImpl<LeylineOfVitality> {
 		this.expansionSetCode = "M11";
 		this.color.setGreen(true);
 		this.addAbility(LeylineAbility.getInstance());
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield, FilterCreaturePermanent.getDefault(), false)));
+		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false)));
         
         this.addAbility(new CreatureEntersBattlefieldTriggeredAbility(new GainLifeEffect(1), true));
 	}

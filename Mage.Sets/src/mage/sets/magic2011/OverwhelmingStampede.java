@@ -85,11 +85,11 @@ class OverwhelmingStampedeEffect extends ContinuousEffectImpl<OverwhelmingStampe
 	@Override
 	public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
 		int maxPower = 0;
-		for (Permanent perm: game.getBattlefield().getAllActivePermanents(FilterCreaturePermanent.getDefault(), source.getControllerId())) {
+		for (Permanent perm: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId())) {
 			if (perm.getPower().getValue() > maxPower)
 				maxPower = perm.getPower().getValue();
 		}
-		for (Permanent perm: game.getBattlefield().getAllActivePermanents(FilterCreaturePermanent.getDefault(), source.getControllerId())) {
+		for (Permanent perm: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId())) {
 			switch (layer) {
 				case PTChangingEffects_7:
 					if (sublayer == SubLayer.ModifyPT_7c) {

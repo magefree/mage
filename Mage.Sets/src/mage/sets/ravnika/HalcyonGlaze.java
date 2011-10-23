@@ -53,7 +53,7 @@ public class HalcyonGlaze extends CardImpl<HalcyonGlaze> {
         this.color.setBlue(true);
 
         // Whenever you cast a creature spell, Halcyon Glaze becomes a 4/4 Illusion creature with flying until end of turn. It's still an enchantment.
-        this.addAbility(new SpellCastTriggeredAbility(new BecomesCreatureSourceEffect(new HalcyonGlazeToken(), "enchantment", Constants.Duration.EndOfTurn), FilterCreatureCard.getDefault(), false));
+        this.addAbility(new SpellCastTriggeredAbility(new BecomesCreatureSourceEffect(new HalcyonGlazeToken(), "enchantment", Constants.Duration.EndOfTurn), new FilterCreatureCard(), false));
     }
 
     public HalcyonGlaze(final HalcyonGlaze card) {

@@ -37,8 +37,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterSpiritOrArcaneCard;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -53,7 +51,7 @@ public class HorizonSeed extends CardImpl<HorizonSeed> {
         this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        Ability ability = new SpellCastTriggeredAbility(new RegenerateTargetEffect(), FilterSpiritOrArcaneCard.getDefault(), false);
+        Ability ability = new SpellCastTriggeredAbility(new RegenerateTargetEffect(), new FilterSpiritOrArcaneCard(), false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

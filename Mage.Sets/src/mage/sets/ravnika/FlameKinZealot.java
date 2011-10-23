@@ -60,7 +60,7 @@ public class FlameKinZealot extends CardImpl<FlameKinZealot> {
 
         // When Flame-Kin Zealot enters the battlefield, creatures you control get +1/+1 and gain haste until end of turn.
         Ability ability = new EntersBattlefieldTriggeredAbility(new BoostControlledEffect(1, 1, Constants.Duration.EndOfTurn));
-        ability.addEffect(new GainAbilityControlledEffect(HasteAbility.getInstance(), Constants.Duration.EndOfTurn, FilterCreaturePermanent.getDefault()));
+        ability.addEffect(new GainAbilityControlledEffect(HasteAbility.getInstance(), Constants.Duration.EndOfTurn, new FilterCreaturePermanent()));
         this.addAbility(ability);
     }
 

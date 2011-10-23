@@ -52,7 +52,7 @@ public class PrimordialSage extends CardImpl<PrimordialSage> {
         this.toughness = new MageInt(5);
 
         // Whenever you cast a creature spell, you may draw a card.
-        this.addAbility(new SpellCastTriggeredAbility(new DrawCardControllerEffect(1), FilterCreatureCard.getDefault(), true));
+        this.addAbility(new SpellCastTriggeredAbility(new DrawCardControllerEffect(1), new FilterCreatureCard(), true));
     }
 
     public PrimordialSage(final PrimordialSage card) {

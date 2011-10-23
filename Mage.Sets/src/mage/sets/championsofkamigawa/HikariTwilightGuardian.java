@@ -63,7 +63,7 @@ public class HikariTwilightGuardian extends CardImpl<HikariTwilightGuardian> {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new SpellCastTriggeredAbility(new HikariTwilightGuardianEffect(), FilterSpiritOrArcaneCard.getDefault(), true));
+        this.addAbility(new SpellCastTriggeredAbility(new HikariTwilightGuardianEffect(), new FilterSpiritOrArcaneCard(), true));
     }
 
     public HikariTwilightGuardian (final HikariTwilightGuardian card) {

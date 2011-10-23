@@ -93,7 +93,7 @@ class KessigCagebreakersEffect extends OneShotEffect<KessigCagebreakersEffect> {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             WolfToken token = new WolfToken();
-            int count = player.getGraveyard().count(FilterCreatureCard.getDefault(), game);
+            int count = player.getGraveyard().count(new FilterCreatureCard(), game);
             for (int i = 0; i < count; i++) {
                 token.putOntoBattlefield(1, game, source.getId(), source.getControllerId());
                 Permanent permanent = game.getPermanent(token.getLastAddedToken());

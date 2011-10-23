@@ -74,7 +74,7 @@ public class AjaniGoldmane extends CardImpl<AjaniGoldmane> {
 
 		Effects effects1 = new Effects();
 		effects1.add(new AddCountersAllEffect(CounterType.P1P1.createInstance(), new FilterControlledCreaturePermanent()));
-		effects1.add(new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn, FilterCreaturePermanent.getDefault()));
+		effects1.add(new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent()));
 		this.addAbility(new LoyaltyAbility(effects1, -1));
 
 		this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new AvatarToken()), -6));

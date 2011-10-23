@@ -45,7 +45,7 @@ public class CreepingCorrosion extends CardImpl<CreepingCorrosion> {
 		super(ownerId, 78, "Creeping Corrosion", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");
 		this.expansionSetCode = "MBS";
 		this.color.setGreen(true);
-		this.getSpellAbility().addEffect(new DestroyAllEffect(FilterArtifactPermanent.getDefault()));
+		this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterArtifactPermanent()));
 	}
 
 	public CreepingCorrosion(final CreepingCorrosion card) {

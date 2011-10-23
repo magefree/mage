@@ -54,7 +54,7 @@ public class DestructiveForce extends CardImpl<DestructiveForce> {
 		this.expansionSetCode = "M11";
 		this.color.setRed(true);
 		this.getSpellAbility().addEffect(new SacrificeAllEffect(5, filter));
-		this.getSpellAbility().addEffect(new DamageAllEffect(5, FilterCreaturePermanent.getDefault()));
+		this.getSpellAbility().addEffect(new DamageAllEffect(5, new FilterCreaturePermanent()));
 	}
 
 	public DestructiveForce(final DestructiveForce card) {

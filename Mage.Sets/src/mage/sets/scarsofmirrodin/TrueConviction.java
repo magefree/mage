@@ -52,8 +52,8 @@ public class TrueConviction extends CardImpl<TrueConviction> {
         this.expansionSetCode = "SOM";
         
 		this.color.setWhite(true);
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield, FilterCreaturePermanent.getDefault())));
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield, FilterCreaturePermanent.getDefault())));
+		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent())));
+		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent())));
     }
 
     public TrueConviction (final TrueConviction card) {

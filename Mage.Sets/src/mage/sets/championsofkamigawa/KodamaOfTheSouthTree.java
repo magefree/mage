@@ -40,8 +40,6 @@ import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterSpiritOrArcaneCard;
 
@@ -57,8 +55,8 @@ public class KodamaOfTheSouthTree extends CardImpl<KodamaOfTheSouthTree> {
         this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
-        Ability ability = new SpellCastTriggeredAbility(new BoostControlledEffect(1, 1, Constants.Duration.EndOfTurn, FilterCreaturePermanent.getDefault(), true), FilterSpiritOrArcaneCard.getDefault(), false);
-        ability.addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Constants.Duration.EndOfTurn, FilterCreaturePermanent.getDefault(), true));
+        Ability ability = new SpellCastTriggeredAbility(new BoostControlledEffect(1, 1, Constants.Duration.EndOfTurn, new FilterCreaturePermanent(), true), new FilterSpiritOrArcaneCard(), false);
+        ability.addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Constants.Duration.EndOfTurn, new FilterCreaturePermanent(), true));
         this.addAbility(ability);
     }
 

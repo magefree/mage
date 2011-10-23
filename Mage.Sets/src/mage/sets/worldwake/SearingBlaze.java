@@ -159,7 +159,7 @@ class SearingBlazeEffect extends OneShotEffect<SearingBlazeEffect> {
 class SearingBlazeTarget<T extends TargetCreaturePermanent<T>> extends TargetPermanent<TargetCreaturePermanent<T>> {
 
     public SearingBlazeTarget() {
-        super(1, 1, FilterCreaturePermanent.getDefault(), false);
+        super(1, 1, new FilterCreaturePermanent(), false);
     }
 
     public SearingBlazeTarget(final SearingBlazeTarget target) {

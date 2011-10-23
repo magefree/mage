@@ -63,7 +63,7 @@ public class CruelUltimatum extends CardImpl<CruelUltimatum> {
 
         // Target opponent sacrifices a creature, discards three cards, then loses 5 life. You return a creature card from your graveyard to your hand, draw three cards, then gain 5 life.
         this.getSpellAbility().addTarget(new TargetOpponent());
-        this.getSpellAbility().addEffect(new SacrificeEffect(FilterCreaturePermanent.getDefault(), 1, "a creature"));
+        this.getSpellAbility().addEffect(new SacrificeEffect(new FilterCreaturePermanent(), 1, "a creature"));
         this.getSpellAbility().addEffect(new DiscardTargetEffect(3));
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(5));
 
