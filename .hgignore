@@ -31,12 +31,12 @@ Utils/author.txt
 .project
 .settings
 syntax: regexp
-.class
-.jar
-.iml
-.ipr
-.iws
-.log
+\.class
+\.jar
+\.iml
+\.ipr
+\.iws
+\.log
 nbactions.xml
 glob:Mage.Client/cheat.dck
 glob:Mage.Client/test.dck
