@@ -409,10 +409,10 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 			}
 			List<Permanent> targets;
 			if (outcome.isGood()) {
-				targets = threats(playerId, FilterCreaturePermanent.getDefault(), game);
+				targets = threats(playerId, new FilterCreaturePermanent(), game);
 			}
 			else {
-				targets = threats(opponentId, FilterCreaturePermanent.getDefault(), game);
+				targets = threats(opponentId, new FilterCreaturePermanent(), game);
 			}
 			for (Permanent permanent: targets) {
 				if (target.canTarget(permanent.getId(), source, game)) {
