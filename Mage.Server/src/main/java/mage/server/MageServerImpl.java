@@ -154,8 +154,10 @@ public class MageServerImpl implements MageServer {
 					new Runnable() {
 						@Override
 						public void run() {
-							UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-							TableManager.getInstance().removeTable(userId, tableId);
+                            if (SessionManager.getInstance().isValidSession(sessionId)) {
+							    UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+							    TableManager.getInstance().removeTable(userId, tableId);
+                            }
 						}
 					}
 				);
@@ -310,8 +312,10 @@ public class MageServerImpl implements MageServer {
 					new Runnable() {
 						@Override
 						public void run() {
-							UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-							TableManager.getInstance().startMatch(userId, roomId, tableId);
+                            if (SessionManager.getInstance().isValidSession(sessionId)) {
+							    UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+							    TableManager.getInstance().startMatch(userId, roomId, tableId);
+                            }
 						}
 					}
 				);
@@ -330,8 +334,10 @@ public class MageServerImpl implements MageServer {
 					new Runnable() {
 						@Override
 						public void run() {
-							UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-							TableManager.getInstance().startChallenge(userId, roomId, tableId, challengeId);
+                            if (SessionManager.getInstance().isValidSession(sessionId)) {
+							    UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+							    TableManager.getInstance().startChallenge(userId, roomId, tableId, challengeId);
+                            }
 						}
 					}
 				);
@@ -350,8 +356,10 @@ public class MageServerImpl implements MageServer {
 					new Runnable() {
 						@Override
 						public void run() {
-							UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-							TableManager.getInstance().startTournament(userId, roomId, tableId);
+                            if (SessionManager.getInstance().isValidSession(sessionId)) {
+							    UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+							    TableManager.getInstance().startTournament(userId, roomId, tableId);
+                            }
 						}
 					}
 				);
@@ -397,8 +405,10 @@ public class MageServerImpl implements MageServer {
 				new Runnable() {
 					@Override
 					public void run() {
-						UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-						ChatManager.getInstance().joinChat(chatId, userId);
+                        if (SessionManager.getInstance().isValidSession(sessionId)) {
+						    UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+						    ChatManager.getInstance().joinChat(chatId, userId);
+                        }
 					}
 				}
 			);
@@ -415,8 +425,10 @@ public class MageServerImpl implements MageServer {
 				new Runnable() {
 					@Override
 					public void run() {
-						UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-						ChatManager.getInstance().leaveChat(chatId, userId);
+                        if (SessionManager.getInstance().isValidSession(sessionId)) {
+						    UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+						    ChatManager.getInstance().leaveChat(chatId, userId);
+                        }
 					}
 				}
 			);
@@ -451,8 +463,7 @@ public class MageServerImpl implements MageServer {
 	@Override
 	public boolean isTableOwner(String sessionId, UUID roomId, UUID tableId) throws MageException {
 		try {
-            Session session = SessionManager.getInstance().getSession(sessionId);
-            if (session != null) {
+            if (SessionManager.getInstance().isValidSession(sessionId)) {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 return TableManager.getInstance().isTableOwner(tableId, userId);
             }
@@ -471,8 +482,10 @@ public class MageServerImpl implements MageServer {
 					new Runnable() {
 						@Override
 						public void run() {
-							UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-							TableManager.getInstance().swapSeats(tableId, userId, seatNum1, seatNum2);
+                            if (SessionManager.getInstance().isValidSession(sessionId)) {
+							    UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+							    TableManager.getInstance().swapSeats(tableId, userId, seatNum1, seatNum2);
+                            }
 						}
 					}
 				);
@@ -491,8 +504,10 @@ public class MageServerImpl implements MageServer {
 					new Runnable() {
 						@Override
 						public void run() {
-							UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-							GamesRoomManager.getInstance().getRoom(roomId).leaveTable(userId, tableId);
+                            if (SessionManager.getInstance().isValidSession(sessionId)) {
+							    UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+							    GamesRoomManager.getInstance().getRoom(roomId).leaveTable(userId, tableId);
+                            }
 						}
 					}
 				);
@@ -522,8 +537,10 @@ public class MageServerImpl implements MageServer {
 					new Runnable() {
 						@Override
 						public void run() {
-							UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-							GameManager.getInstance().joinGame(gameId, userId);
+                            if (SessionManager.getInstance().isValidSession(sessionId)) {
+							    UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+							    GameManager.getInstance().joinGame(gameId, userId);
+                            }
 						}
 					}
 				);
@@ -542,8 +559,10 @@ public class MageServerImpl implements MageServer {
 					new Runnable() {
 						@Override
 						public void run() {
-							UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-							DraftManager.getInstance().joinDraft(draftId, userId);
+                            if (SessionManager.getInstance().isValidSession(sessionId)) {
+							    UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+							    DraftManager.getInstance().joinDraft(draftId, userId);
+                            }
 						}
 					}
 				);
@@ -562,8 +581,10 @@ public class MageServerImpl implements MageServer {
 					new Runnable() {
 						@Override
 						public void run() {
-							UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-							TournamentManager.getInstance().joinTournament(tournamentId, userId);
+                            if (SessionManager.getInstance().isValidSession(sessionId)) {
+							    UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+							    TournamentManager.getInstance().joinTournament(tournamentId, userId);
+                            }
 						}
 					}
 				);
@@ -624,8 +645,10 @@ public class MageServerImpl implements MageServer {
 					new Runnable() {
 						@Override
 						public void run() {
-							User user = SessionManager.getInstance().getUser(sessionId);
-							user.sendPlayerString(gameId, data);
+                            if (SessionManager.getInstance().isValidSession(sessionId)) {
+							    User user = SessionManager.getInstance().getUser(sessionId);
+							    user.sendPlayerString(gameId, data);
+                            }
 						}
 					}
 				);
@@ -644,8 +667,10 @@ public class MageServerImpl implements MageServer {
 					new Runnable() {
 						@Override
 						public void run() {
-							User user = SessionManager.getInstance().getUser(sessionId);
-							user.sendPlayerBoolean(gameId, data);
+                            if (SessionManager.getInstance().isValidSession(sessionId)) {
+							    User user = SessionManager.getInstance().getUser(sessionId);
+							    user.sendPlayerBoolean(gameId, data);
+                            }
 						}
 					}
 				);
@@ -664,8 +689,10 @@ public class MageServerImpl implements MageServer {
 					new Runnable() {
 						@Override
 						public void run() {
-							User user = SessionManager.getInstance().getUser(sessionId);
-							user.sendPlayerInteger(gameId, data);
+                            if (SessionManager.getInstance().isValidSession(sessionId)) {
+							    User user = SessionManager.getInstance().getUser(sessionId);
+							    user.sendPlayerInteger(gameId, data);
+                            }
 						}
 					}
 				);
@@ -698,8 +725,10 @@ public class MageServerImpl implements MageServer {
 					new Runnable() {
 						@Override
 						public void run() {
-							UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-							GameManager.getInstance().concedeGame(gameId, userId);
+                            if (SessionManager.getInstance().isValidSession(sessionId)) {
+							    UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+							    GameManager.getInstance().concedeGame(gameId, userId);
+                            }
 						}
 					}
 				);
@@ -732,8 +761,10 @@ public class MageServerImpl implements MageServer {
 					new Runnable() {
 						@Override
 						public void run() {
-							UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-							GameManager.getInstance().watchGame(gameId, userId);
+                            if (SessionManager.getInstance().isValidSession(sessionId)) {
+							    UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+							    GameManager.getInstance().watchGame(gameId, userId);
+                            }
 						}
 					}
 				);
@@ -752,8 +783,10 @@ public class MageServerImpl implements MageServer {
 					new Runnable() {
 						@Override
 						public void run() {
-							UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-							GameManager.getInstance().stopWatching(gameId, userId);
+                            if (SessionManager.getInstance().isValidSession(sessionId)) {
+							    UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+							    GameManager.getInstance().stopWatching(gameId, userId);
+                            }
 						}
 					}
 				);
@@ -772,8 +805,10 @@ public class MageServerImpl implements MageServer {
 					new Runnable() {
 						@Override
 						public void run() {
-							UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-							ReplayManager.getInstance().replayGame(gameId, userId);
+                            if (SessionManager.getInstance().isValidSession(sessionId)) {
+							    UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+							    ReplayManager.getInstance().replayGame(gameId, userId);
+                            }
 						}
 					}
 				);
@@ -792,8 +827,10 @@ public class MageServerImpl implements MageServer {
 					new Runnable() {
 						@Override
 						public void run() {
-							UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-							ReplayManager.getInstance().startReplay(gameId, userId);
+                            if (SessionManager.getInstance().isValidSession(sessionId)) {
+							    UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+							    ReplayManager.getInstance().startReplay(gameId, userId);
+                            }
 						}
 					}
 				);
@@ -812,8 +849,10 @@ public class MageServerImpl implements MageServer {
 					new Runnable() {
 						@Override
 						public void run() {
-							UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-							ReplayManager.getInstance().stopReplay(gameId, userId);
+                            if (SessionManager.getInstance().isValidSession(sessionId)) {
+    							UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+							    ReplayManager.getInstance().stopReplay(gameId, userId);
+                            }
 						}
 					}
 				);
@@ -832,8 +871,10 @@ public class MageServerImpl implements MageServer {
 					new Runnable() {
 						@Override
 						public void run() {
-							UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-							ReplayManager.getInstance().nextPlay(gameId, userId);
+                            if (SessionManager.getInstance().isValidSession(sessionId)) {
+							    UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+							    ReplayManager.getInstance().nextPlay(gameId, userId);
+                            }
 						}
 					}
 				);
@@ -852,8 +893,10 @@ public class MageServerImpl implements MageServer {
 					new Runnable() {
 						@Override
 						public void run() {
-							UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-							ReplayManager.getInstance().previousPlay(gameId, userId);
+                            if (SessionManager.getInstance().isValidSession(sessionId)) {
+							    UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+							    ReplayManager.getInstance().previousPlay(gameId, userId);
+                            }
 						}
 					}
 				);
@@ -872,8 +915,10 @@ public class MageServerImpl implements MageServer {
 					new Runnable() {
 						@Override
 						public void run() {
-							UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-							ReplayManager.getInstance().skipForward(gameId, userId, moves);
+                            if (SessionManager.getInstance().isValidSession(sessionId)) {
+							    UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+							    ReplayManager.getInstance().skipForward(gameId, userId, moves);
+                            }
 						}
 					}
 				);
@@ -910,8 +955,10 @@ public class MageServerImpl implements MageServer {
 						@Override
 						public void run() {
 							if (testMode) {
-								UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-								GameManager.getInstance().cheat(gameId, userId, playerId, deckList);
+                                if (SessionManager.getInstance().isValidSession(sessionId)) {
+								    UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+								    GameManager.getInstance().cheat(gameId, userId, playerId, deckList);
+                                }
 							}
 						}
 					}
@@ -987,8 +1034,10 @@ public class MageServerImpl implements MageServer {
 					new Runnable() {
 						@Override
 						public void run() {
-							UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-							TableManager.getInstance().removeTable(userId, tableId);
+                            if (SessionManager.getInstance().isValidSession(sessionId)) {
+							    UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+							    TableManager.getInstance().removeTable(userId, tableId);
+                            }
 						}
 					}
 				);
