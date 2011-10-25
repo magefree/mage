@@ -63,7 +63,10 @@ public class PhyrexianRevoker extends CardImpl<PhyrexianRevoker> {
 		this.power = new MageInt(2);
 		this.toughness = new MageInt(1);
 
+        // As Phyrexian Revoker enters the battlefield, name a nonland card.
 		this.addAbility(new EntersBattlefieldTriggeredAbility(new PhyrexianRevokerEffect1()));
+
+        // Activated abilities of sources with the chosen name can't be activated.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhyrexianRevokerEffect2()));
 	}
 
@@ -96,8 +99,11 @@ class PhyrexianRevokerEffect1 extends OneShotEffect<PhyrexianRevokerEffect1> {
             Choice cardChoice = new ChoiceImpl();
             cardChoice.setChoices(Sets.getNonLandCardNames());
             cardChoice.clearChoice();
-            controller.choose(Outcome.Detriment, cardChoice, game);
+            while (!controller.choose(Outcome.Detriment, cardChoice, game)) {
+                game.debugMessage("player canceled choosing name. retrying.");
+            }
             String cardName = cardChoice.getChoice();
+            game.informPlayers("Phyrexian Revoker, named card: [" + cardName + "]");
             game.getState().setValue(source.getSourceId().toString(), cardName);
         }        
         return false;

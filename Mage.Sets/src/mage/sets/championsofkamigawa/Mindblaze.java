@@ -58,6 +58,11 @@ public class Mindblaze extends CardImpl<Mindblaze> {
         super(ownerId, 180, "Mindblaze", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{R}");
         this.expansionSetCode = "CHK";
 		this.color.setRed(true);
+
+        // Name a nonland card and choose a number greater than 0. Target player reveals his or her library.
+        // If that library contains exactly the chosen number of the named card,
+        // Mindblaze deals 8 damage to that player.
+        // Then that player shuffles his or her library.
         this.getSpellAbility().addEffect(new MindblazeEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
@@ -98,8 +103,18 @@ class MindblazeEffect extends OneShotEffect<MindblazeEffect> {
                 numbers.add(Integer.toString(i));
             }
             numberChoice.setChoices(numbers);
-            playerControls.choose(Constants.Outcome.Neutral, cardChoice, game);
-            playerControls.choose(Constants.Outcome.Neutral, numberChoice, game);
+
+            while (!playerControls.choose(Constants.Outcome.Neutral, cardChoice, game)) {
+                game.debugMessage("player canceled choosing name. retrying.");
+            }
+
+            while (!playerControls.choose(Constants.Outcome.Neutral, numberChoice, game)) {
+                game.debugMessage("player canceled choosing number. retrying.");
+            }
+
+            game.informPlayers("Mindblaze, named card: [" + cardChoice.getChoice() + "]");
+            game.informPlayers("Mindblaze, chosen number: [" + numberChoice.getChoice() + "]");
+
             Cards cards = new CardsImpl();
             cards.addAll(player.getLibrary().getCards(game));
             playerControls.revealCards("Library", cards, game);

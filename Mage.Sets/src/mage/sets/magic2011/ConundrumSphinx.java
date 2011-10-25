@@ -95,12 +95,16 @@ class ConundrumSphinxEffect extends OneShotEffect<ConundrumSphinxEffect> {
 		for (Player player: game.getPlayers().values()) {
 			if(player.getLibrary().size() > 0){
 				cardChoice.clearChoice();
-				player.choose(Outcome.DrawCard, cardChoice, game);
+				while (!player.choose(Outcome.DrawCard, cardChoice, game)) {
+                    game.debugMessage("player canceled choosing name. retrying.");
+                }
+                String cardName = cardChoice.getChoice();
+                game.informPlayers("Conundrum Sphinx, player: " + player.getName() + ", named card: [" + cardName + "]");
 				Card card = player.getLibrary().removeFromTop(game);
 				Cards cards  = new CardsImpl();
 				cards.add(card);
 				player.revealCards("Conundrum Sphinx", cards, game);
-				if (card.getName().equals(cardChoice.getChoice())) {
+				if (card.getName().equals(cardName)) {
 					card.moveToZone(Zone.HAND, source.getId(), game, true);
 				}
 				else {

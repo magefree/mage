@@ -96,10 +96,11 @@ class XenograftEffect extends OneShotEffect<XenograftEffect> {
         if (player != null && permanent != null) {
             Choice typeChoice = new ChoiceImpl(true);
             typeChoice.setChoices(Sets.getCreatureTypes());
-            if (player.choose(Outcome.BoostCreature, typeChoice, game)) {
-                game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + typeChoice.getChoice());
-                game.getState().setValue(source.getSourceId() + "_XenograftType", typeChoice.getChoice());
+            while (!player.choose(Outcome.BoostCreature, typeChoice, game)) {
+                game.debugMessage("player canceled choosing type. retrying.");
             }
+            game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + typeChoice.getChoice());
+            game.getState().setValue(source.getSourceId() + "_XenograftType", typeChoice.getChoice());
         }
         return false;
     }

@@ -31,11 +31,14 @@ package mage.game;
 import mage.Constants.*;
 import mage.MageObject;
 import mage.abilities.*;
+import mage.abilities.common.ChancellorAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.keyword.LeylineAbility;
+import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.Card;
 import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.counters.CounterType;
@@ -45,7 +48,10 @@ import mage.filter.common.*;
 import mage.game.combat.Combat;
 import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
-import mage.game.permanent.*;
+import mage.game.permanent.Battlefield;
+import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentCard;
+import mage.game.permanent.PermanentImpl;
 import mage.game.stack.SpellStack;
 import mage.game.stack.StackObject;
 import mage.game.turn.Phase;
@@ -54,22 +60,17 @@ import mage.game.turn.Turn;
 import mage.players.Player;
 import mage.players.PlayerList;
 import mage.players.Players;
+import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.watchers.Watcher;
+import mage.watchers.common.CastSpellLastTurnWatcher;
+import mage.watchers.common.MorbidWatcher;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
-import java.util.Map.Entry;
-import mage.abilities.common.ChancellorAbility;
-
-import mage.abilities.mana.TriggeredManaAbility;
-import mage.cards.CardsImpl;
-import mage.target.Target;
-import mage.target.TargetPermanent;
-import mage.watchers.common.CastSpellLastTurnWatcher;
-import mage.watchers.common.MorbidWatcher;
-import org.apache.log4j.Logger;
 
 public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializable {
 
@@ -929,6 +930,11 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	public void informPlayers(String message) {
 //		state.addMessage(message);
 		fireInformEvent(message);
+	}
+
+    @Override
+	public void debugMessage(String message) {
+        logger.warn(message);
 	}
 
 	@Override

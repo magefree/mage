@@ -95,8 +95,11 @@ class NevermoreEffect1 extends OneShotEffect<NevermoreEffect1> {
             Choice cardChoice = new ChoiceImpl();
             cardChoice.setChoices(Sets.getNonLandCardNames());
             cardChoice.clearChoice();
-            controller.choose(Outcome.Detriment, cardChoice, game);
+            while (!controller.choose(Outcome.Detriment, cardChoice, game)) {
+                game.debugMessage("player canceled choosing name. retrying.");
+            }
             String cardName = cardChoice.getChoice();
+            game.informPlayers("Nevermore, named card: [" + cardName + "]");
             game.getState().setValue(source.getSourceId().toString(), cardName);
         }        
         return false;

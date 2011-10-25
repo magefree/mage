@@ -54,6 +54,9 @@ public class Memoricide extends CardImpl<Memoricide> {
 		super(ownerId, 69, "Memoricide", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}");
 		this.expansionSetCode = "SOM";
 		this.color.setBlack(true);
+
+        // Name a nonland card. Search target player's graveyard, hand, and library for any number of cards with
+        // that name and exile them. Then that player shuffles his or her library
 		this.getSpellAbility().addTarget(new TargetPlayer());
 		this.getSpellAbility().addEffect(new MemoricideEffect());
 	}
@@ -88,8 +91,13 @@ class MemoricideEffect extends OneShotEffect<MemoricideEffect> {
 			Choice cardChoice = new ChoiceImpl();
 			cardChoice.setChoices(Sets.getNonLandCardNames());
 			cardChoice.clearChoice();
-			controller.choose(Outcome.Exile, cardChoice, game);
+
+            while (!controller.choose(Outcome.Exile, cardChoice, game)) {
+                game.debugMessage("player canceled choosing name. retrying.");
+            }
+
 			String cardName = cardChoice.getChoice();
+            game.informPlayers("Memoricide, named card: [" + cardName + "]");
 			for (Card card: player.getGraveyard().getCards(game)) {
 				if (card.getName().equals(cardName)) {
 					card.moveToExile(null, "", source.getId(), game);					

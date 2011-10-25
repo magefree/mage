@@ -97,10 +97,11 @@ class AdaptiveAutomatonEffect extends OneShotEffect<AdaptiveAutomatonEffect> {
 		if (player != null && permanent != null) {
 			Choice typeChoice = new ChoiceImpl(true);
 			typeChoice.setChoices(Sets.getCreatureTypes());
-			if (player.choose(Constants.Outcome.BoostCreature, typeChoice, game)) {
-				game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + typeChoice.getChoice());
-				game.getState().setValue(permanent.getId() + "_type", typeChoice.getChoice());
-			}
+			while (!player.choose(Constants.Outcome.BoostCreature, typeChoice, game)) {
+                game.debugMessage("player canceled choosing type. retrying.");
+            }
+			game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + typeChoice.getChoice());
+		    game.getState().setValue(permanent.getId() + "_type", typeChoice.getChoice());
 		}
 		return false;
 	}
