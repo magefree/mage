@@ -67,7 +67,7 @@ class CascadeBluffsFirstManaAbility extends BasicManaAbility<CascadeBluffsFirstM
 
     public CascadeBluffsFirstManaAbility() {
         super(new BasicManaEffect(new Mana(0, 0, 2, 0, 0, 0, 0)));
-        this.addCost(new ManaCostsImpl("{U/R}"));
+        this.addManaCost(new ManaCostsImpl("{U/R}"));
         this.netMana.setBlue(2);
     }
 
@@ -85,7 +85,7 @@ class CascadeBluffsSecondManaAbility extends BasicManaAbility<CascadeBluffsSecon
 
     public CascadeBluffsSecondManaAbility() {
         super(new BasicManaEffect(new Mana(1, 0, 1, 0, 0, 0, 0)));
-        this.addCost(new ManaCostsImpl("{U/R}"));
+        this.addManaCost(new ManaCostsImpl("{U/R}"));
         this.netMana.setBlue(1);
         this.netMana.setRed(1);
     }
@@ -104,7 +104,7 @@ class CascadeBluffsThirdManaAbility extends BasicManaAbility<CascadeBluffsThirdM
 
     public CascadeBluffsThirdManaAbility() {
         super(new BasicManaEffect(new Mana(2, 0, 0, 0, 0, 0, 0)));
-        this.addCost(new ManaCostsImpl("{U/R}"));
+        this.addManaCost(new ManaCostsImpl("{U/R}"));
         this.netMana.setRed(2);
     }
 

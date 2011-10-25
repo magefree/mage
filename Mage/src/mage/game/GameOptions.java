@@ -1,12 +1,14 @@
 package mage.game;
 
+import java.io.Serializable;
+
 /**
  * Game options for Mage game.
  * Mainly used in tests to configure {@link GameImpl} with specific params.
  *
  * @author ayratn
  */
-public class GameOptions {
+public class GameOptions implements Serializable {
 
 	private static GameOptions defInstance = new GameOptions();
 

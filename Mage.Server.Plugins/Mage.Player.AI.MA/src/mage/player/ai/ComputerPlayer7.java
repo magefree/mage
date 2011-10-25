@@ -151,7 +151,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
 			root = new SimulationNode2(null, sim, maxDepth, playerId);
 			logger.debug("simulating pre combat actions -----------------------------------------------------------------------------------------");
 
-			addActionsTimed(new FilterAbility());
+			addActionsTimed();
 			if (root.children.size() > 0) {
 				root = root.children.get(0);
 				int bestScore = root.getScore();
@@ -171,7 +171,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
 			root = new SimulationNode2(null, sim, maxDepth, playerId);
 			logger.debug("simulating post combat actions ----------------------------------------------------------------------------------------");
 
-			addActionsTimed(new FilterAbility());
+			addActionsTimed();
 			if (root.children.size() > 0) {
 				root = root.children.get(0);
 				int bestScore = root.getScore();
@@ -184,7 +184,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
 	}
 
 	@Override
-	protected int addActions(SimulationNode2 node, FilterAbility filter, int depth, int alpha, int beta) {
+	protected int addActions(SimulationNode2 node, int depth, int alpha, int beta) {
 		boolean stepFinished = false;
 		int val;
 		Game game = node.getGame();
@@ -199,7 +199,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
 		}
 		else if (node.getChildren().size() > 0) {
 			logger.debug("simulating -- somthing added children:" + node.getChildren().size());
-			val = minimaxAB(node, filter, depth-1, alpha, beta);
+			val = minimaxAB(node, depth-1, alpha, beta);
 		}
 		else {
 			if (logger.isDebugEnabled())
@@ -248,10 +248,10 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
 			}
 			else if (node.getChildren().size() > 0) {
 				logger.debug("simulating -- trigger added children:" + node.getChildren().size());
-				val = minimaxAB(node, filter, depth, alpha, beta);
+				val = minimaxAB(node, depth, alpha, beta);
 			}
 			else {
-				val = simulatePriority(node, game, filter, depth, alpha, beta);
+				val = simulatePriority(node, game, depth, alpha, beta);
 			}
 		}
 
@@ -520,7 +520,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
 			game.getPhase().setStep(new PostCombatMainStep());
 			game.getStep().beginStep(game, playerId);
 			game.getPlayers().resetPassed();
-			return addActions(node, new FilterAbility(), depth, alpha, beta);
+			return addActions(node, depth, alpha, beta);
 		}
 		return simulateCounterAttack(game, node, depth, alpha, beta);
 	}

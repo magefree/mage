@@ -68,7 +68,7 @@ class FloodedGroveFirstManaAbility extends BasicManaAbility<FloodedGroveFirstMan
 
     public FloodedGroveFirstManaAbility() {
         super(new BasicManaEffect(new Mana(0, 2, 0, 0, 0, 0, 0)));
-        this.addCost(new ManaCostsImpl("{G/U}"));
+        this.addManaCost(new ManaCostsImpl("{G/U}"));
         this.netMana.setGreen(2);
     }
 
@@ -86,7 +86,7 @@ class FloodedGroveSecondManaAbility extends BasicManaAbility<FloodedGroveSecondM
 
     public FloodedGroveSecondManaAbility() {
         super(new BasicManaEffect(new Mana(0, 1, 1, 0, 0, 0, 0)));
-        this.addCost(new ManaCostsImpl("{G/U}"));
+        this.addManaCost(new ManaCostsImpl("{G/U}"));
         this.netMana.setGreen(1);
         this.netMana.setBlue(1);
     }
@@ -105,7 +105,7 @@ class FloodedGroveThirdManaAbility extends BasicManaAbility<FloodedGroveThirdMan
 
     public FloodedGroveThirdManaAbility() {
         super(new BasicManaEffect(new Mana(0, 0, 2, 0, 0, 0, 0)));
-        this.addCost(new ManaCostsImpl("{G/U}"));
+        this.addManaCost(new ManaCostsImpl("{G/U}"));
         this.netMana.setBlue(2);
     }
 

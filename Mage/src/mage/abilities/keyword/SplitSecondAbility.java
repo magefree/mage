@@ -9,7 +9,7 @@ import mage.game.events.GameEvent;
 
 /**
  * Split Second
- * As long as this spell is on the stack, players can’t cast other spells or activate abilities that aren’t mana abilities.
+ * As long as this spell is on the stack, players can't cast other spells or activate abilities that aren't mana abilities.
  */
 public class SplitSecondAbility extends SimpleStaticAbility {
     private static final SplitSecondAbility ability = new SplitSecondAbility();

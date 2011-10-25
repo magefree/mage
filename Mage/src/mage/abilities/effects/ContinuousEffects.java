@@ -209,8 +209,9 @@ public class ContinuousEffects implements Serializable {
 	private List<ContinuousEffect> getLayeredEffects(Game game) {
 		List<ContinuousEffect> layerEffects = new ArrayList<ContinuousEffect>(layeredEffects);
 		for (Card card: game.getCards()) {
-			if (game.getZone(card.getId()) == Zone.HAND || game.getZone(card.getId()) == Zone.GRAVEYARD) {
-				for (Ability ability: card.getAbilities().getStaticAbilities(game.getZone(card.getId()))) {
+            Zone zone = game.getZone(card.getId());
+			if (zone == Zone.HAND || zone == Zone.GRAVEYARD) {
+				for (Ability ability: card.getAbilities().getStaticAbilities(zone)) {
 					for (Effect effect: ability.getEffects(game, EffectType.CONTINUOUS)) {
 						layerEffects.add((ContinuousEffect) effect);
 						abilityMap.put(effect.getId(), ability);
@@ -291,62 +292,33 @@ public class ContinuousEffects implements Serializable {
 			replaceEffects.add(planeswalkerRedirectionEffect);
 		//get all applicable Replacement effects in each players hand and graveyard
 		for (Card card: game.getCards()) {
-			if (game.getZone(card.getId()) == Zone.HAND || game.getZone(card.getId()) == Zone.GRAVEYARD) {
-				for (Ability ability: card.getAbilities().getStaticAbilities(game.getZone(card.getId()))) {
-					for (Effect effect: ability.getEffects(game, EffectType.REPLACEMENT)) {
-						ReplacementEffect rEffect = (ReplacementEffect) effect;
-						if (rEffect.applies(event, ability, game)) {
-							replaceEffects.add(rEffect);
-							abilityMap.put(rEffect.getId(), ability);
-						}
-					}
-					for (Effect effect: ability.getEffects(game, EffectType.PREVENTION)) {
-						ReplacementEffect rEffect = (ReplacementEffect) effect;
-						if (rEffect.applies(event, ability, game)) {
-							replaceEffects.add(rEffect);
-							abilityMap.put(rEffect.getId(), ability);
-						}
-					}
-				}
+            Zone zone = game.getZone(card.getId());
+			if (zone == Zone.HAND || zone == Zone.GRAVEYARD) {
+                for (Entry<ReplacementEffect, Ability> entry: card.getAbilities().getReplacementEffects(zone).entrySet()) {
+                    if (entry.getKey().applies(event, entry.getValue(), game)) {
+                        replaceEffects.add(entry.getKey());
+						abilityMap.put(entry.getKey().getId(), entry.getValue());
+                    }
+                }
 			}
 		}
 		//get all applicable Replacement effects on the battlefield
 		for (Permanent permanent: game.getBattlefield().getAllPermanents()) {
-			for (Ability ability: permanent.getAbilities().getStaticAbilities(Zone.BATTLEFIELD)) {
-				for (Effect effect: ability.getEffects(game, EffectType.REPLACEMENT)) {
-					ReplacementEffect rEffect = (ReplacementEffect) effect;
-					if (rEffect.applies(event, ability, game)) {
-						replaceEffects.add(rEffect);
-						abilityMap.put(rEffect.getId(), ability);
-					}
-				}
-				for (Effect effect: ability.getEffects(game, EffectType.PREVENTION)) {
-					ReplacementEffect rEffect = (ReplacementEffect) effect;
-					if (rEffect.applies(event, ability, game)) {
-						replaceEffects.add(rEffect);
-						abilityMap.put(rEffect.getId(), ability);
-					}
-				}
-			}
+            for (Entry<ReplacementEffect, Ability> entry: permanent.getAbilities().getReplacementEffects(Zone.BATTLEFIELD).entrySet()) {
+                if (entry.getKey().applies(event, entry.getValue(), game)) {
+                    replaceEffects.add(entry.getKey());
+                    abilityMap.put(entry.getKey().getId(), entry.getValue());
+                }
+            }
 		}
         //get all applicable Replacement effects on players
         for (Player player: game.getPlayers().values()) {
-			for (Ability ability: player.getAbilities().getStaticAbilities(Zone.BATTLEFIELD)) {
-				for (Effect effect: ability.getEffects(game, EffectType.REPLACEMENT)) {
-					ReplacementEffect rEffect = (ReplacementEffect) effect;
-					if (rEffect.applies(event, ability, game)) {
-						replaceEffects.add(rEffect);
-						abilityMap.put(rEffect.getId(), ability);
-					}
-				}
-				for (Effect effect: ability.getEffects(game, EffectType.PREVENTION)) {
-					ReplacementEffect rEffect = (ReplacementEffect) effect;
-					if (rEffect.applies(event, ability, game)) {
-						replaceEffects.add(rEffect);
-						abilityMap.put(rEffect.getId(), ability);
-					}
-				}
-			}
+            for (Entry<ReplacementEffect, Ability> entry: player.getAbilities().getReplacementEffects(Zone.BATTLEFIELD).entrySet()) {
+                if (entry.getKey().applies(event, entry.getValue(), game)) {
+                    replaceEffects.add(entry.getKey());
+                    abilityMap.put(entry.getKey().getId(), entry.getValue());
+                }
+            }
         }
 		//get all applicable transient Replacement effects
 		for (ReplacementEffect effect: replacementEffects) {

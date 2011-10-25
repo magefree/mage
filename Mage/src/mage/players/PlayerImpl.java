@@ -211,6 +211,11 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		findRange(game);
 	}
 
+    @Override
+    public RangeOfInfluence getRange() {
+        return range;
+    }
+    
 	protected void findRange(Game game) {
 		//20100423 - 801.2c
 		inRange.clear();
@@ -615,6 +620,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 			return false;
 
 		if (ability instanceof PassAbility) {
+            pass();
 			return true;
 		}
 		else if (ability instanceof PlayLandAbility) {
@@ -968,6 +974,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		this.inRange = player.getInRange();
 		this.landsPlayed = player.getLandsPlayed();
 		this.name = player.getName();
+        this.range = player.getRange();
         this.passed = player.isPassed();
 	}
 
@@ -1129,20 +1136,46 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	}
 
 	protected ManaOptions getManaAvailable(Game game) {
-		List<Permanent> manaPerms = this.getAvailableManaProducers(game);
-
 		ManaOptions available = new ManaOptions();
+
+        List<Permanent> manaPerms = this.getAvailableManaProducers(game);
 		for (Permanent perm: manaPerms) {
-			available.addMana(perm.getAbilities().getManaAbilities(Zone.BATTLEFIELD), game);
+			available.addMana(perm.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game), game);
+		}
+
+        List<Permanent> manaPermsWithCost = this.getAvailableManaProducersWithCost(game);
+		for (Permanent perm: manaPermsWithCost) {
+			available.addManaWithCost(perm.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game), game);
 		}
 		return available;
 	}
 
+    // returns only mana producers that don't require mana payment
 	protected List<Permanent> getAvailableManaProducers(Game game) {
 		List<Permanent> result = new ArrayList<Permanent>();
 		for (Permanent permanent: game.getBattlefield().getAllActivePermanents(playerId)) {
+            boolean canAdd = false;
 			for (ManaAbility ability: permanent.getAbilities().getManaAbilities(Zone.BATTLEFIELD)) {
 				if (ability.canActivate(playerId, game)) {
+					canAdd = true;
+				}
+                if (!ability.getManaCosts().isEmpty()) {
+                    canAdd = false;
+                    break;
+                }
+			}
+            if (canAdd)
+                result.add(permanent);
+		}
+		return result;
+	}
+
+    // returns only mana producers that require mana payment
+	protected List<Permanent> getAvailableManaProducersWithCost(Game game) {
+		List<Permanent> result = new ArrayList<Permanent>();
+		for (Permanent permanent: game.getBattlefield().getAllActivePermanents(playerId)) {
+			for (ManaAbility ability: permanent.getAbilities().getManaAbilities(Zone.BATTLEFIELD)) {
+				if (ability.canActivate(playerId, game) && !ability.getManaCosts().isEmpty()) {
 					result.add(permanent);
 					break;
 				}
@@ -1150,7 +1183,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		}
 		return result;
 	}
-
+        
 	protected boolean canPlay(ActivatedAbility ability, ManaOptions available, Game game) {
 		if (!(ability instanceof ManaAbility) && ability.canActivate(playerId, game)) {
 			ManaOptions abilityOptions = ability.getManaCosts().getOptions();
@@ -1172,28 +1205,28 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	}
 
 	@Override
-	public List<Ability> getPlayable(Game game, FilterAbility filter, ManaOptions available, boolean hidden) {
+	public List<Ability> getPlayable(Game game, boolean hidden) {
 		List<Ability> playable = new ArrayList<Ability>();
 
-//		ManaOptions available = getManaAvailable(game);
-//		available.addMana(manaPool.getMana());
+		ManaOptions available = getManaAvailable(game);
+		available.addMana(manaPool.getMana());
 
 		if (hidden) {
 			for (Card card: hand.getUniqueCards(game)) {
-				for (ActivatedAbility ability: card.getAbilities().getActivatedAbilities(Zone.HAND, filter)) {
+				for (ActivatedAbility ability: card.getAbilities().getActivatedAbilities(Zone.HAND)) {
 					if (canPlay(ability, available, game))
 						playable.add(ability);
 				}
 			}
 		}
 		for (Card card: graveyard.getUniqueCards(game)) {
-			for (ActivatedAbility ability: card.getAbilities().getActivatedAbilities(Zone.GRAVEYARD, filter)) {
+			for (ActivatedAbility ability: card.getAbilities().getActivatedAbilities(Zone.GRAVEYARD)) {
 				if (canPlay(ability, available, game))
 					playable.add(ability);
 			}
 		}
 		for (Permanent permanent: game.getBattlefield().getAllActivePermanents(playerId)) {
-			for (ActivatedAbility ability: permanent.getAbilities().getActivatedAbilities(Zone.BATTLEFIELD, filter)) {
+			for (ActivatedAbility ability: permanent.getAbilities().getActivatedAbilities(Zone.BATTLEFIELD)) {
 				if (canPlay(ability, available, game))
 					playable.add(ability);
 			}

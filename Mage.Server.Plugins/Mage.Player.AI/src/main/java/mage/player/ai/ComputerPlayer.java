@@ -235,8 +235,6 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 					return true;
 				}
 			}
-			if (!target.isRequired())
-				return false;
             return false;
 		}
 		if (target instanceof TargetDiscard || target instanceof TargetCardInHand) {
@@ -266,8 +264,6 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 					}
 				}
 			}
-			if (!target.isRequired())
-				return false;
             return false;
 		}
 		if (target instanceof TargetControlledPermanent) {
@@ -281,8 +277,6 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 					return true;
 				}
 			}
-			if (!target.isRequired())
-				return false;
             return false;
 		}
 		if (target instanceof TargetPermanent) {
@@ -299,8 +293,6 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 					return true;
 				}
 			}
-			if (!target.isRequired())
-				return false;
             return false;
 		}
 		if (target instanceof TargetCreatureOrPlayer) {
@@ -333,8 +325,6 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 					return true;
 				}
 			}
-			if (!target.isRequired())
-				return false;
             return false;
 		}
 		if (target instanceof TargetCardInGraveyard) {
@@ -357,8 +347,6 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 				target.addTarget(card.getId(), source, game);
 				return true;
 			}
-			if (!target.isRequired())
-				return false;
             return false;
 		}
 		if (target instanceof TargetCardInYourGraveyard) {
@@ -368,8 +356,6 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 				target.addTarget(card.getId(), source, game);
 				return true;
 			}
-			if (!target.isRequired())
-				return false;
             return false;
 		}
 		throw new IllegalStateException("Target wasn't handled. class:" + target.getClass().toString());
@@ -641,13 +627,14 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 			log.debug("findPlayables: " + playableInstant.toString() + "---" + playableNonInstant.toString() + "---" + playableAbilities.toString() );
 	}
 
-	@Override
-	protected ManaOptions getManaAvailable(Game game) {
-		return super.getManaAvailable(game);
-	}
+//	@Override
+//	protected ManaOptions getManaAvailable(Game game) {
+//		return super.getManaAvailable(game);
+//	}
 
 	@Override
 	public boolean playMana(ManaCost unpaid, Game game) {
+//        log.info("paying for " + unpaid.getText());
 		ManaCost cost;
 		List<Permanent> producers;
 		if (unpaid instanceof ManaCosts) {
@@ -657,10 +644,11 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 		else {
 			cost = unpaid;
 			producers = this.getAvailableManaProducers(game);
+            producers.addAll(this.getAvailableManaProducersWithCost(game));
 		}
 		for (Permanent perm: producers) {
 			// pay all colored costs first
-			for (ManaAbility ability: perm.getAbilities().getManaAbilities(Zone.BATTLEFIELD)) {
+			for (ManaAbility ability: perm.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
 				if (cost instanceof ColoredManaCost) {
 					if (cost.testPay(ability.getNetMana(game))) {
 						if (activateAbility(ability, game))
@@ -669,7 +657,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 				}
 			}
 			// then pay hybrid
-			for (ManaAbility ability: perm.getAbilities().getManaAbilities(Zone.BATTLEFIELD)) {
+			for (ManaAbility ability: perm.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
 				if (cost instanceof HybridManaCost) {
 					if (cost.testPay(ability.getNetMana(game))) {
 						if (activateAbility(ability, game))
@@ -678,7 +666,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 				}
 			}
 			// then pay mono hybrid
-			for (ManaAbility ability: perm.getAbilities().getManaAbilities(Zone.BATTLEFIELD)) {
+			for (ManaAbility ability: perm.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
 				if (cost instanceof MonoHybridManaCost) {
 					if (cost.testPay(ability.getNetMana(game))) {
 						if (activateAbility(ability, game))
@@ -687,7 +675,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 				}
 			}
 			// finally pay generic
-			for (ManaAbility ability: perm.getAbilities().getManaAbilities(Zone.BATTLEFIELD)) {
+			for (ManaAbility ability: perm.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
 				if (cost instanceof GenericManaCost) {
 					if (cost.testPay(ability.getNetMana(game))) {
 						if (activateAbility(ability, game))
@@ -713,11 +701,12 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 	 */
 	private List<Permanent> getSortedProducers(ManaCosts<ManaCost> unpaid, Game game) {
 		List<Permanent> unsorted = this.getAvailableManaProducers(game);
+        unsorted.addAll(this.getAvailableManaProducersWithCost(game));
 		Map<Permanent, Integer> scored = new HashMap<Permanent, Integer>();
 		for (Permanent permanent: unsorted) {
 			int score = 0;
 			for (ManaCost cost: unpaid) {
-				for (ManaAbility ability: permanent.getAbilities().getManaAbilities(Zone.BATTLEFIELD)) {
+				for (ManaAbility ability: permanent.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
 					if (cost.testPay(ability.getNetMana(game))) {
 						score++;
 						break;
@@ -725,7 +714,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 				}
 			}
 			if (score > 0) { // score mana producers that produce other mana types and have other uses higher
-				score += permanent.getAbilities().getManaAbilities(Zone.BATTLEFIELD).size();
+				score += permanent.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game).size();
 				score += permanent.getAbilities().getActivatedAbilities(Zone.BATTLEFIELD).size();
 				if (!permanent.getCardType().contains(CardType.LAND))
 					score+=2;
@@ -758,7 +747,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 		log.debug("playXMana");
 		//put everything into X
 		for (Permanent perm: this.getAvailableManaProducers(game)) {
-			for (ManaAbility ability: perm.getAbilities().getManaAbilities(Zone.BATTLEFIELD)) {
+			for (ManaAbility ability: perm.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
 				activateAbility(ability, game);
 			}
 		}

@@ -50,16 +50,18 @@ import mage.players.Player;
  */
 public class PermanentCard extends PermanentImpl<PermanentCard> {
 
-	protected String art;
 	protected List<String> levelerRules;
+    protected Card card;
 
 	public PermanentCard(Card card, UUID controllerId) {
 		super(card.getId(), card.getOwnerId(), controllerId, card.getName());
+        this.card = card.copy();
 		init(card);
 	}
 
 	protected PermanentCard(UUID id, Card card, UUID controllerId) {
 		super(card.getId(), card.getOwnerId(), controllerId, card.getName());
+        this.card = card.copy();
 		init(card);
 	}
 
@@ -75,27 +77,28 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
 
 	public PermanentCard(final PermanentCard permanent) {
 		super(permanent);
-		this.art = permanent.art;
+        this.card = permanent.card;
 	}
 
 	@Override
 	public void reset(Game game) {
 		// when the permanent is reset copy all original values from the card
 		// must copy card each reset so that the original values don't get modified
-		Card copy = game.getCard(objectId).copy();
-		copyFromCard(copy);
+		copyFromCard(card);
 		super.reset(game);
 	}
 
 	protected void copyFromCard(Card card) {
 		this.name = card.getName();
-		this.abilities = card.getAbilities();
+        this.abilities.clear();
+		this.abilities.addAll(card.getAbilities());
 		this.abilities.setControllerId(this.controllerId);
-		this.cardType = card.getCardType();
-		this.color = card.getColor();
-		this.manaCost = card.getManaCost();
-		this.power = card.getPower();
-		this.toughness = card.getToughness();
+        this.cardType.clear();
+		this.cardType.addAll(card.getCardType());
+		this.color = card.getColor().copy();
+		this.manaCost = card.getManaCost().copy();
+		this.power = card.getPower().copy();
+		this.toughness = card.getToughness().copy();
 		if (card instanceof LevelerCard) {
 			LevelAbility level = ((LevelerCard)card).getLevel(this.getCounters().getCount(CounterType.LEVEL));
 			if (level != null) {
@@ -106,8 +109,10 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
 				}
 			}
 		}
-		this.subtype = card.getSubtype();
-		this.supertype = card.getSupertype();
+        this.subtype.clear();
+		this.subtype.addAll(card.getSubtype());
+        this.supertype.clear();
+		this.supertype.addAll(card.getSupertype());
 		this.expansionSetCode = card.getExpansionSetCode();
 		this.rarity = card.getRarity();
 		this.cardNumber = card.getCardNumber();
@@ -124,7 +129,6 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
 		// or we want to trigger abilities that only trigger on leaving the battlefield
 		// card abilities will get triggered later when the card hits the new zone
         List<UUID> triggered = new ArrayList<UUID>();
-        Card card = game.getCard(objectId).copy();
 		for (TriggeredAbility ability: abilities.getTriggeredAbilities(event.getFromZone())) {
 			if (!card.getAbilities().containsKey(ability.getId())) {
 				if (ability.checkTrigger(event, game)) {
@@ -158,7 +162,6 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
 		if (controller != null && controller.removeFromBattlefield(this, game)) {
 			ZoneChangeEvent event = new ZoneChangeEvent(this, sourceId, controllerId, fromZone, toZone);
 			if (!game.replaceEvent(event)) {
-				Card card = game.getCard(objectId);
 				Player owner = game.getPlayer(ownerId);
 				game.rememberLKI(objectId, Zone.BATTLEFIELD, this);
 				if (owner != null) {
@@ -199,7 +202,6 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
 		if (controller != null && controller.removeFromBattlefield(this, game)) {
 			ZoneChangeEvent event = new ZoneChangeEvent(this, sourceId, ownerId, fromZone, Zone.EXILED);
 			if (!game.replaceEvent(event)) {
-				Card card = game.getCard(this.objectId);
 				if (exileId == null) {
 					game.getExile().getPermanentExile().add(card);
 				}

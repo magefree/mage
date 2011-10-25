@@ -46,6 +46,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.PostResolveEffect;
+import mage.abilities.mana.ManaAbility;
 import mage.choices.Choice;
 import mage.choices.Choices;
 import mage.game.Game;
@@ -194,6 +195,12 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
             }
 		}
 		
+        // this is a hack to prevent mana abilities with mana costs from causing endless loops - pay other costs first
+        if (this instanceof ManaAbility && !costs.pay(this, game, sourceId, controllerId, noMana)) {
+			logger.debug("activate mana ability failed - non mana costs");
+			return false;
+        }
+        
 		if (!useAlternativeCost(game)) {
 			//20101001 - 601.2e
 			game.getContinuousEffects().costModification(this, game);

@@ -161,9 +161,9 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
 			logger.debug("simulating pre combat actions -----------------------------------------------------------------------------------------");
 
 			if (!isTestMode)
-				addActionsTimed(new FilterAbility());
+				addActionsTimed();
 			else
-				addActions(root, new FilterAbility(), Integer.MIN_VALUE, Integer.MAX_VALUE);
+				addActions(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
 			logger.info(name + " simulated " + nodeCount + " nodes in " + thinkTime/1000000000.0 + "s - average " + nodeCount/(thinkTime/1000000000.0) + " nodes/s");
 			if (root.children.size() > 0) {
 				root = root.children.get(0);
@@ -185,9 +185,9 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
 			root = new SimulationNode(null, sim, playerId);
 			logger.debug("simulating post combat actions ----------------------------------------------------------------------------------------");
 			if (!isTestMode)
-				addActionsTimed(new FilterAbility());
+				addActionsTimed();
 			else
-				addActions(root, new FilterAbility(), Integer.MIN_VALUE, Integer.MAX_VALUE);
+				addActions(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
 			logger.info(name + " simulated " + nodeCount + " nodes in " + thinkTime/1000000000.0 + "s - average " + nodeCount/(thinkTime/1000000000.0) + " nodes/s");
 			if (root.children.size() > 0) {
 				root = root.children.get(0);
@@ -202,7 +202,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
 	}
 
 	@Override
-	protected int addActions(SimulationNode node, FilterAbility filter, int alpha, int beta) {
+	protected int addActions(SimulationNode node, int alpha, int beta) {
 		boolean stepFinished = false;
 		int val;
 		Game game = node.getGame();
@@ -217,7 +217,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
 		}
 		else if (node.getChildren().size() > 0) {
 			logger.debug(indent(node.depth) + "simulating -- somthing added children:" + node.getChildren().size());
-			val = minimaxAB(node, filter, alpha, beta);
+			val = minimaxAB(node, alpha, beta);
 		}
 		else {
 			if (logger.isDebugEnabled())
@@ -266,10 +266,10 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
 			}
 			else if (node.getChildren().size() > 0) {
 				logger.debug(indent(node.depth) + "simulating -- trigger added children:" + node.getChildren().size());
-				val = minimaxAB(node, filter, alpha, beta);
+				val = minimaxAB(node, alpha, beta);
 			}
 			else {
-				val = simulatePriority(node, game, filter, alpha, beta);
+				val = simulatePriority(node, game, alpha, beta);
 			}
 		}
 
@@ -535,7 +535,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
 			game.getPhase().setStep(new PostCombatMainStep());
 			game.getStep().beginStep(game, playerId);
 			game.getPlayers().resetPassed();
-			return addActions(node, new FilterAbility(), alpha, beta);
+			return addActions(node, alpha, beta);
 		}
 		return simulateCounterAttack(game, node, alpha, beta);
 	}

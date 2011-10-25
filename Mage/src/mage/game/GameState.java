@@ -314,17 +314,16 @@ public class GameState implements Serializable, Copyable<GameState> {
 	}
 
 	public Permanent getPermanent(UUID permanentId) {
-		Permanent permanent;
-		if (battlefield.containsPermanent(permanentId)) {
-			permanent = battlefield.getPermanent(permanentId);
-			setZone(permanent.getId(), Zone.BATTLEFIELD);
-			return permanent;
-		}
+        if (permanentId != null && battlefield.containsPermanent(permanentId)) {
+            Permanent permanent = battlefield.getPermanent(permanentId);
+            setZone(permanent.getId(), Zone.BATTLEFIELD);
+            return permanent;
+        }
 		return null;
 	}
 
 	public Zone getZone(UUID id) {
-		if (zones.containsKey(id))
+		if (id != null && zones.containsKey(id))
 			return zones.get(id);
 		return null;
 	}

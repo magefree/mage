@@ -93,19 +93,19 @@ import org.apache.log4j.Logger;
 public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements Player {
 
 	private static final transient Logger logger = Logger.getLogger(ComputerPlayer2.class);
-	private static final ExecutorService pool = Executors.newFixedThreadPool(1);
+	private static final transient ExecutorService pool = Executors.newFixedThreadPool(1);
 
 	protected int maxDepth;
 	protected int maxNodes;
 	protected int maxThink;
 	protected int nodeCount = 0;
 	protected long thinkTime = 0;
-	protected LinkedList<Ability> actions = new LinkedList<Ability>();
-	protected List<UUID> targets = new ArrayList<UUID>();
-	protected List<String> choices = new ArrayList<String>();
-	protected Combat combat;
+	protected transient LinkedList<Ability> actions = new LinkedList<Ability>();
+	protected transient List<UUID> targets = new ArrayList<UUID>();
+	protected transient List<String> choices = new ArrayList<String>();
+	protected transient Combat combat;
 	protected int currentScore;
-	protected SimulationNode root;
+	protected transient SimulationNode root;
 
 	public ComputerPlayer2(String name, RangeOfInfluence range, int skill) {
 		super(name, range);
@@ -192,9 +192,9 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 			root = new SimulationNode(null, sim, playerId);
 			logger.debug("simulating actions");
 			if (!isTestMode)
-				addActionsTimed(new FilterAbility());
+				addActionsTimed();
 			else
-				addActions(root, new FilterAbility(), Integer.MIN_VALUE, Integer.MAX_VALUE);
+				addActions(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
 			logger.info(name + " simulated " + nodeCount + " nodes in " + thinkTime/1000000000.0 + "s - average " + nodeCount/(thinkTime/1000000000.0) + " nodes/s");
 			if (root.children.size() > 0) {
 				root = root.children.get(0);
@@ -230,7 +230,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 		return false;
 	}
 
-	protected int minimaxAB(SimulationNode node, FilterAbility filter, int alpha, int beta) {
+	protected int minimaxAB(SimulationNode node, int alpha, int beta) {
 		UUID currentPlayerId = node.getGame().getPlayerList().get();
 		SimulationNode bestChild = null;
 		boolean isSimulatedPlayer = currentPlayerId.equals(playerId);
@@ -243,7 +243,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 //				logger.debug(indent(node.depth) + "simulating -- reached end-state");
 //				break;
 //			}
-			int val = addActions(child, filter, alpha, beta);
+			int val = addActions(child, alpha, beta);
 			if (!isSimulatedPlayer) {
 				if (val < beta) {
 					beta = val;
@@ -318,12 +318,12 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 		game.getPlayerList().setCurrent(game.getActivePlayerId());
 	}
 
-	protected void addActionsTimed(final FilterAbility filter) {
+	protected void addActionsTimed() {
 		FutureTask<Integer> task = new FutureTask<Integer>(new Callable<Integer>() {
 			@Override
 			public Integer call() throws Exception
 			{
-				return addActions(root, filter, Integer.MIN_VALUE, Integer.MAX_VALUE);
+				return addActions(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
 			}
 		});
 		long startTime = System.nanoTime();
@@ -358,7 +358,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 		}
 	}
 
-	protected int addActions(SimulationNode node, FilterAbility filter, int alpha, int beta) {
+	protected int addActions(SimulationNode node, int alpha, int beta) {
 		Game game = node.getGame();
 		if (Thread.interrupted()) {
 			Thread.currentThread().interrupt();
@@ -372,7 +372,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 		}
 		else if (node.getChildren().size() > 0) {
 			logger.debug(indent(node.depth) + "simulating -- somthing added children:" + node.getChildren().size());
-			val = minimaxAB(node, filter, alpha, beta);
+			val = minimaxAB(node, alpha, beta);
 		}
 		else {
 			if (logger.isDebugEnabled())
@@ -399,10 +399,10 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 			else if (node.getChildren().size() > 0) {
 				//declared attackers or blockers or triggered abilities
 				logger.debug(indent(node.depth) + "simulating -- attack/block/trigger added children:" + node.getChildren().size());
-				val = minimaxAB(node, filter, alpha, beta);
+				val = minimaxAB(node, alpha, beta);
 			}
 			else {
-				val = simulatePriority(node, game, filter, alpha, beta);
+				val = simulatePriority(node, game, alpha, beta);
 			}
 		}
 
@@ -412,7 +412,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 
 	}
 
-	protected int simulatePriority(SimulationNode node, Game game, FilterAbility filter, int alpha, int beta) {
+	protected int simulatePriority(SimulationNode node, Game game, int alpha, int beta) {
 		if (Thread.interrupted()) {
 			Thread.currentThread().interrupt();
 			logger.debug(indent(node.depth) + "interrupted");
@@ -423,7 +423,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 		boolean isSimulatedPlayer = currentPlayer.getId().equals(playerId);
 		logger.debug(indent(node.depth) + "simulating priority -- player " + currentPlayer.getName());
 		SimulationNode bestNode = null;
-		List<Ability> allActions = currentPlayer.simulatePriority(game, filter);
+		List<Ability> allActions = currentPlayer.simulatePriority(game);
 		if (logger.isDebugEnabled())
 			logger.debug(indent(node.depth) + "simulating -- adding " + allActions.size() + " children:" + allActions);
 		for (Ability action: allActions) {
@@ -448,7 +448,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 				if (logger.isDebugEnabled())
 					logger.debug(indent(newNode.depth) + "simulating -- node #:" + SimulationNode.getCount() + " actions:" + action);
 				sim.checkStateAndTriggered();
-				int val = addActions(newNode, filter, alpha, beta);
+				int val = addActions(newNode, alpha, beta);
 				if (!isSimulatedPlayer) {
 					if (val < beta) {
 						beta = val;

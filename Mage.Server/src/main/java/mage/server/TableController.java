@@ -406,7 +406,8 @@ public class TableController {
 		UUID choosingPlayerId = match.getChooser();
 		match.endGame();
 		table.endGame();
-		GameManager.getInstance().saveGame(match.getGame().getId());
+        if (!match.getGame().isSimulation())
+            GameManager.getInstance().saveGame(match.getGame().getId());
 		GameManager.getInstance().removeGame(match.getGame().getId());
 		try {
 			if (!match.isMatchOver()) {

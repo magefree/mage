@@ -124,6 +124,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		this.state = game.state.copy();
 		this.gameCards = game.gameCards;
 		this.simulation = game.simulation;
+        this.gameOptions = game.gameOptions;
 	}
 
 	@Override
@@ -235,8 +236,6 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
 	@Override
 	public Permanent getPermanent(UUID permanentId) {
-		if (permanentId == null)
-			return null;
 		return state.getPermanent(permanentId);
 	}
 
@@ -249,8 +248,6 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
 	@Override
 	public Zone getZone(UUID objectId) {
-		if (objectId == null)
-			return null;
 		return state.getZone(objectId);
 	}
 
@@ -271,7 +268,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
 	@Override
 	public void saveState() {
-		if (gameStates != null)
+		if (!simulation && gameStates != null)
 			gameStates.save(state);
 	}
 
@@ -350,13 +347,26 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	@Override
 	public void start(UUID choosingPlayerId, GameOptions options) {
         startTime = new Date();
+        this.gameOptions = options;
 		init(choosingPlayerId, options.testMode);
-		PlayerList players = state.getPlayerList(startingPlayerId);
+        play(startingPlayerId);
+		saveState();
+	}
+
+    @Override
+    public void resume() {
+        play(state.getActivePlayerId());
+    }
+    
+    protected void play(UUID nextPlayerId) {
+		PlayerList players = state.getPlayerList(nextPlayerId);
 		Player player = getPlayer(players.get());
 		while (!isGameOver()) {
 			state.setTurnNum(state.getTurnNum() + 1);
+            if (simulation)
+                logger.info("Turn " + Integer.toString(state.getTurnNum()));
 			fireInformEvent("Turn " + Integer.toString(state.getTurnNum()));
-			if (checkStopOnTurnOption(options)) return;
+			if (checkStopOnTurnOption()) return;
 			state.setActivePlayerId(player.getId());
 			state.getTurn().play(this, player.getId());
 			if (isGameOver())
@@ -366,13 +376,11 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		}
 
 		winnerId = findWinnersAndLosers();
-
-		saveState();
-	}
-
-	private boolean checkStopOnTurnOption(GameOptions options) {
-		if (options.stopOnTurn != null) {
-			if (options.stopOnTurn.equals(state.getTurnNum())) {
+    }
+    
+	private boolean checkStopOnTurnOption() {
+		if (gameOptions.stopOnTurn != null) {
+			if (gameOptions.stopOnTurn.equals(state.getTurnNum())) {
 				winnerId = null; //DRAW
 				saveState();
 				return true;
@@ -852,6 +860,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
 	@Override
 	public synchronized void firePriorityEvent(UUID playerId) {
+        if (simulation) return;
 		String message = this.state.getTurn().getStepType().toString();
 		if (this.canPlaySorcery(playerId))
 			message += " - play spells and abilities.";
@@ -863,71 +872,85 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
 	@Override
 	public synchronized void fireSelectEvent(UUID playerId, String message) {
+        if (simulation) return;
 		playerQueryEventSource.select(playerId, message);
 	}
 
 	@Override
 	public void firePlayManaEvent(UUID playerId, String message) {
+        if (simulation) return;
 		playerQueryEventSource.playMana(playerId, message);
 	}
 
 	@Override
 	public void firePlayXManaEvent(UUID playerId, String message) {
+        if (simulation) return;
 		playerQueryEventSource.playXMana(playerId, message);
 	}
 
 	@Override
 	public void fireAskPlayerEvent(UUID playerId, String message) {
+        if (simulation) return;
 		playerQueryEventSource.ask(playerId, message);
 	}
 
 	@Override
 	public void fireGetChoiceEvent(UUID playerId, String message, Collection<? extends ActivatedAbility> choices) {
+        if (simulation) return;
 		playerQueryEventSource.chooseAbility(playerId, message, choices);
 	}
 
 	@Override
 	public void fireGetModeEvent(UUID playerId, String message, Map<UUID, String> modes) {
+        if (simulation) return;
 		playerQueryEventSource.chooseMode(playerId, message, modes);
 	}
 
 	@Override
 	public void fireSelectTargetEvent(UUID playerId, String message, Set<UUID> targets, boolean required, Map<String, Serializable> options) {
+        if (simulation) return;
 		playerQueryEventSource.target(playerId, message, targets, required, options);
 	}
 
 	@Override
 	public void fireSelectTargetEvent(UUID playerId, String message, Cards cards, boolean required, Map<String, Serializable> options) {
+        if (simulation) return;
 		playerQueryEventSource.target(playerId, message, cards, required, options);
 	}
 
 	@Override
 	public void fireSelectTargetEvent(UUID playerId, String message, TriggeredAbilities abilities, boolean required) {
+        if (simulation) return;
 		playerQueryEventSource.target(playerId, message, abilities, required);
 	}
 
 	@Override
 	public void fireSelectTargetEvent(UUID playerId, String message, List<Permanent> perms, boolean required) {
+        if (simulation) return;
 		playerQueryEventSource.target(playerId, message, perms, required);
 	}
 
 	@Override
 	public void fireLookAtCardsEvent(UUID playerId, String message, Cards cards) {
+        if (simulation) return;
 		playerQueryEventSource.target(playerId, message, cards);
 	}
 
 	@Override
 	public void fireGetAmountEvent(UUID playerId, String message, int min, int max) {
+        if (simulation) return;
 		playerQueryEventSource.amount(playerId, message, min, max);
 	}
 
 	@Override
 	public void fireChooseEvent(UUID playerId, Choice choice) {
+        if (simulation) return;
 		playerQueryEventSource.choose(playerId, choice.getMessage(), choice.getChoices());
 	}
 
 	@Override
 	public void informPlayers(String message) {
+        if (simulation) return;
 //		state.addMessage(message);
 		fireInformEvent(message);
 	}
@@ -939,11 +962,13 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
 	@Override
 	public void fireInformEvent(String message) {
+        if (simulation) return;
 		tableEventSource.fireTableEvent(EventType.INFO, message, this);
 	}
 
 	@Override
 	public void fireUpdatePlayersEvent() {
+        if (simulation) return;
 		tableEventSource.fireTableEvent(EventType.UPDATE, null, this);
 	}
 	
@@ -1054,13 +1079,11 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
 	@Override
 	public void fireEvent(GameEvent event) {
-		applyEffects();
 		state.handleEvent(event, this);
 	}
 
 	@Override
 	public boolean replaceEvent(GameEvent event) {
-		applyEffects();
 		return state.replaceEvent(event, this);
 	}
 

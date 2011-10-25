@@ -32,6 +32,7 @@ import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
@@ -49,6 +50,8 @@ public class PassEffect extends OneShotEffect<PassEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        player.pass();
 		return true;
 	}
 

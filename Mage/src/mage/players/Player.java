@@ -34,6 +34,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import mage.Constants.Outcome;
+import mage.Constants.RangeOfInfluence;
 import mage.MageItem;
 import mage.MageObject;
 import mage.abilities.Abilities;
@@ -77,7 +78,8 @@ public interface Player extends MageItem, Copyable<Player> {
 
 	public boolean isHuman();
 	public String getName();
-	public Library getLibrary();
+    public RangeOfInfluence getRange();
+    public Library getLibrary();
 	public Cards getGraveyard();
 	public Abilities<Ability> getAbilities();
     public void addAbility(Ability ability);
@@ -240,7 +242,7 @@ public interface Player extends MageItem, Copyable<Player> {
 	public void phasing(Game game);
 	public void untap(Game game);
 
-	public List<Ability> getPlayable(Game game, FilterAbility filter, ManaOptions available, boolean hidden);
+	public List<Ability> getPlayable(Game game, boolean hidden);
 	public List<Ability> getPlayableOptions(Ability ability, Game game);
 	
 	public void addCounters(Counter counter, Game game);

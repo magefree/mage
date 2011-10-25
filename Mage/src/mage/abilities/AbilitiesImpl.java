@@ -29,14 +29,20 @@
 package mage.abilities;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import mage.Constants.EffectType;
 import mage.Constants.Zone;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.ReplacementEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.mana.ManaAbility;
 import mage.filter.FilterAbility;
+import mage.game.Game;
 
 /**
  *
@@ -103,6 +109,18 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
 	}
 
 	@Override
+	public Abilities<ManaAbility> getAvailableManaAbilities(Zone zone, Game game) {
+		Abilities<ManaAbility> abilities = new AbilitiesImpl<ManaAbility>();
+		for (T ability: this) {
+			if (ability instanceof ManaAbility && ability.getZone().match(zone)) {
+                if ((((ManaAbility)ability).canActivate(ability.getControllerId(), game)))
+                    abilities.add((ManaAbility)ability);
+			}
+		}
+		return abilities;
+	}
+
+    @Override
 	public Abilities<EvasionAbility> getEvasionAbilities() {
 		Abilities<EvasionAbility> abilities = new AbilitiesImpl<EvasionAbility>();
 		for (T ability: this) {
@@ -140,7 +158,22 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
 		}
 		return zonedAbilities;
 	}
-
+    
+    @Override
+    public Map<ReplacementEffect, Ability> getReplacementEffects(Zone zone) {
+        Map<ReplacementEffect, Ability> effects = new HashMap<ReplacementEffect, Ability>();
+		for (T ability: this) {
+			if (ability instanceof StaticAbility && ability.getZone().match(zone)) {
+				for (Effect effect: ability.getEffects()) {
+                    if (effect.getEffectType() == EffectType.REPLACEMENT || effect.getEffectType() == EffectType.PREVENTION) {
+                        effects.put((ReplacementEffect)effect, ability);
+                    }
+                }
+			}
+		}
+        return effects;
+    }
+    
 	@Override
 	public Abilities<ProtectionAbility> getProtectionAbilities() {
 		Abilities<ProtectionAbility> abilities = new AbilitiesImpl<ProtectionAbility>();

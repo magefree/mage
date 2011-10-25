@@ -44,9 +44,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.VariableManaCost;
-import mage.abilities.mana.ManaOptions;
 import mage.choices.Choice;
-import mage.filter.FilterAbility;
 import mage.game.Game;
 import mage.game.combat.Combat;
 import mage.game.events.GameEvent;
@@ -63,7 +61,6 @@ public class SimulatedPlayer extends ComputerPlayer<SimulatedPlayer> {
 
 	private final static transient Logger logger = Logger.getLogger(SimulatedPlayer.class);
 	private boolean isSimulatedPlayer;
-	private FilterAbility filter;
 	private transient ConcurrentLinkedQueue<Ability> allActions;
 	private static PassAbility pass = new PassAbility();
 	protected int maxDepth;
@@ -78,8 +75,6 @@ public class SimulatedPlayer extends ComputerPlayer<SimulatedPlayer> {
 	public SimulatedPlayer(final SimulatedPlayer player) {
 		super(player);
 		this.isSimulatedPlayer = player.isSimulatedPlayer;
-		if (player.filter != null)
-			this.filter = player.filter.copy();
 	}
 
 	@Override
@@ -87,10 +82,9 @@ public class SimulatedPlayer extends ComputerPlayer<SimulatedPlayer> {
 		return new SimulatedPlayer(this);
 	}
 
-	public List<Ability> simulatePriority(Game game, FilterAbility filter) {
+	public List<Ability> simulatePriority(Game game) {
 		allActions = new ConcurrentLinkedQueue<Ability>();
 		Game sim = game.copy();
-		this.filter = filter;
 
 		simulateOptions(sim, pass);
 
@@ -102,12 +96,10 @@ public class SimulatedPlayer extends ComputerPlayer<SimulatedPlayer> {
 
 	protected void simulateOptions(Game game, Ability previousActions) {
 		allActions.add(previousActions);
-		ManaOptions available = getManaAvailable(game);
-		available.addMana(manaPool.getMana());
-		List<Ability> playables = game.getPlayer(playerId).getPlayable(game, filter, available, isSimulatedPlayer);
+		List<Ability> playables = game.getPlayer(playerId).getPlayable(game, isSimulatedPlayer);
 		for (Ability ability: playables) {
 			List<Ability> options = game.getPlayer(playerId).getPlayableOptions(ability, game);
-			if (options.size() == 0) {
+			if (options.isEmpty()) {
 				if (ability.getManaCosts().getVariableCosts().size() > 0) {
 					simulateVariableCosts(ability, game);
 				}
@@ -147,7 +139,7 @@ public class SimulatedPlayer extends ComputerPlayer<SimulatedPlayer> {
 
 	//add a generic mana cost for each amount possible
 	protected void simulateVariableCosts(Ability ability, Game game) {
-		int numAvailable = getAvailableManaProducers(game).size();
+		int numAvailable = getAvailableManaProducers(game).size() - ability.getManaCosts().convertedManaCost();
 		int start = 0;
 		if (!(ability instanceof SpellAbility)) {
 			//only use x=0 on spell abilities
@@ -158,7 +150,7 @@ public class SimulatedPlayer extends ComputerPlayer<SimulatedPlayer> {
 		}
 		for (int i = start; i < numAvailable; i++) {
 			Ability newAbility = ability.copy();
-			newAbility.addManaCost(new GenericManaCost(i));
+			newAbility.addCost(new GenericManaCost(i));
 			allActions.add(newAbility);
 		}
 	}
@@ -223,7 +215,7 @@ public class SimulatedPlayer extends ComputerPlayer<SimulatedPlayer> {
 	}
 
 	protected void addBlocker(Game game, List<Permanent> blockers, Map<Integer, Combat> engagements) {
-		if (blockers.size() == 0)
+		if (blockers.isEmpty())
 			return;
 		int numGroups = game.getCombat().getGroups().size();
 		//try to block each attacker with each potential blocker
@@ -247,7 +239,7 @@ public class SimulatedPlayer extends ComputerPlayer<SimulatedPlayer> {
 	public boolean triggerAbility(TriggeredAbility source, Game game) {
 		Ability ability = source.copy();
 		List<Ability> options = getPlayableOptions(ability, game);
-		if (options.size() == 0) {
+		if (options.isEmpty()) {
 			if (logger.isDebugEnabled())
 				logger.debug("simulating -- triggered ability:" + ability);
 			game.getStack().push(new StackAbility(ability, playerId));

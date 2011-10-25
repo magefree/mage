@@ -68,7 +68,7 @@ class FetidHeathFirstManaAbility extends BasicManaAbility<FetidHeathFirstManaAbi
 
     public FetidHeathFirstManaAbility() {
         super(new BasicManaEffect(new Mana(0, 0, 0, 2, 0, 0, 0)));
-        this.addCost(new ManaCostsImpl("{W/B}"));
+        this.addManaCost(new ManaCostsImpl("{W/B}"));
         this.netMana.setWhite(2);
     }
 
@@ -86,7 +86,7 @@ class FetidHeathSecondManaAbility extends BasicManaAbility<FetidHeathSecondManaA
 
     public FetidHeathSecondManaAbility() {
         super(new BasicManaEffect(new Mana(0, 0, 0, 1, 1, 0, 0)));
-        this.addCost(new ManaCostsImpl("{W/B}"));
+        this.addManaCost(new ManaCostsImpl("{W/B}"));
         this.netMana.setBlack(1);
         this.netMana.setWhite(1);
     }
@@ -105,7 +105,7 @@ class FetidHeathThirdManaAbility extends BasicManaAbility<FetidHeathThirdManaAbi
 
     public FetidHeathThirdManaAbility() {
         super(new BasicManaEffect(new Mana(0, 0, 0, 0, 2, 0, 0)));
-        this.addCost(new ManaCostsImpl("{W/B}"));
+        this.addManaCost(new ManaCostsImpl("{W/B}"));
         this.netMana.setBlack(2);
     }
 

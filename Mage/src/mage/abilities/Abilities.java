@@ -30,12 +30,16 @@ package mage.abilities;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.UUID;
 import mage.Constants.Zone;
+import mage.abilities.effects.ReplacementEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.mana.ManaAbility;
 import mage.filter.FilterAbility;
+import mage.game.Game;
 
 /**
  * Represents a collection of {@link Ability Abilities}.  This is the top most
@@ -97,6 +101,18 @@ public interface Abilities<T extends Ability> extends List<T>, Serializable {
 	public Abilities<ManaAbility> getManaAbilities(Zone zone);
 	
 	/**
+	 * Retrieves all {@link ManaAbility mana abilities} in the given {@link Zone} that can be used.
+	 * 
+	 * @param zone The {@link Zone} to search for {@link ManaAbility mana abilities}.
+	 * @return All {@link ManaAbility mana abilities} for the given {@link Zone} that can be used.
+	 * 
+	 * @see mage.cards.CardImpl#getMana()
+	 * @see mage.players.PlayerImpl#getManaAvailable(mage.game.Game)
+	 * @see mage.players.PlayerImpl#getAvailableManaProducers(mage.game.Game)
+	 */
+	public Abilities<ManaAbility> getAvailableManaAbilities(Zone zone, Game game);
+
+    /**
 	 * Retrieves all {@link StaticAbility static abilities} in the given {@link Zone}.
 	 * 
 	 * @param zone The {@link Zone} to search for {@link StaticAbility}
@@ -241,4 +257,6 @@ public interface Abilities<T extends Ability> extends List<T>, Serializable {
 	 * @return 
 	 */
 	public Abilities<T> copy();
+
+    public Map<ReplacementEffect, Ability> getReplacementEffects(Zone zone);
 }

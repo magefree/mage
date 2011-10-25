@@ -43,7 +43,6 @@ import mage.abilities.effects.SearchEffect;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.choices.Choice;
-import mage.filter.FilterAbility;
 import mage.game.Game;
 import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
@@ -218,7 +217,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 			logger.info("simulating actions");
 			//int bestScore = addActionsTimed(new FilterAbility());
 			currentScore = GameStateEvaluator2.evaluate(playerId, game);
-			addActionsTimed(new FilterAbility());
+			addActionsTimed();
 			if (root.children.size() > 0) {
 				root = root.children.get(0);
 				//GameStateEvaluator2.evaluate(playerId, root.getGame());
@@ -268,7 +267,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 		return false;
 	}
 
-	protected int minimaxAB(SimulationNode2 node, FilterAbility filter, int depth, int alpha, int beta) {
+	protected int minimaxAB(SimulationNode2 node, int depth, int alpha, int beta) {
 		UUID currentPlayerId = node.getGame().getPlayerList().get();
 		SimulationNode2 bestChild = null;
 		for (SimulationNode2 child: node.getChildren()) {
@@ -281,7 +280,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 				//logger.info("simulating -- reached end-state, count=" + SimulationNode2.nodeCount);
 				break;
 			}
-			int val = addActions(child, filter, depth-1, alpha, beta);
+			int val = addActions(child, depth-1, alpha, beta);
 			if (!currentPlayerId.equals(playerId)) {
 				if (val < beta) {
 					beta = val;
@@ -364,12 +363,12 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 		game.getPlayerList().setCurrent(game.getActivePlayerId());
 	}
 
-	protected Integer addActionsTimed(final FilterAbility filter) {
+	protected Integer addActionsTimed() {
 		FutureTask<Integer> task = new FutureTask<Integer>(new Callable<Integer>() {
 			@Override
 			public Integer call() throws Exception
 			{
-				return addActions(root, filter, maxDepth, Integer.MIN_VALUE, Integer.MAX_VALUE);
+				return addActions(root, maxDepth, Integer.MIN_VALUE, Integer.MAX_VALUE);
 			}
 		});
 		pool.execute(task);
@@ -392,7 +391,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 		return 0;
 	}
 
-	protected int addActions(SimulationNode2 node, FilterAbility filter, int depth, int alpha, int beta) {
+	protected int addActions(SimulationNode2 node, int depth, int alpha, int beta) {
 		logger.debug("addActions: " + depth + ", alpha=" + alpha + ", beta=" + beta);
 		Game game = node.getGame();
 		int val;
@@ -411,7 +410,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 		}
 		else if (node.getChildren().size() > 0) {
 			logger.debug("simulating -- somthing added children:" + node.getChildren().size());
-			val = minimaxAB(node, filter, depth-1, alpha, beta);
+			val = minimaxAB(node, depth-1, alpha, beta);
 			return val;
 		}
 		else {
@@ -431,10 +430,10 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 			} else if (node.getChildren().size() > 0) {
 				//declared attackers or blockers or triggered abilities
 				logger.debug("simulating -- attack/block/trigger added children:" + node.getChildren().size());
-				val = minimaxAB(node, filter, depth-1, alpha, beta);
+				val = minimaxAB(node, depth-1, alpha, beta);
 			}
 			else {
-				val = simulatePriority(node, game, filter, depth, alpha, beta);
+				val = simulatePriority(node, game, depth, alpha, beta);
 			}
 		}
 
@@ -443,7 +442,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 
 	}
 
-	protected int simulatePriority(SimulationNode2 node, Game game, FilterAbility filter, int depth, int alpha, int beta) {
+	protected int simulatePriority(SimulationNode2 node, Game game, int depth, int alpha, int beta) {
 		if (Thread.interrupted()) {
 			Thread.currentThread().interrupt();
 			logger.info("interrupted");
@@ -453,7 +452,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 		SimulatedPlayer2 currentPlayer = (SimulatedPlayer2) game.getPlayer(game.getPlayerList().get());
 		//logger.info("simulating -- player " + currentPlayer.getName());
 		SimulationNode2 bestNode = null;
-		List<Ability> allActions = currentPlayer.simulatePriority(game, filter);
+		List<Ability> allActions = currentPlayer.simulatePriority(game);
 		logger.debug("simulating -- adding " + allActions.size() + " children:" + allActions);
 		for (Ability action: allActions) {
 			if (Thread.interrupted()) {
@@ -477,7 +476,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 				if (depth == 20) {
 					logger.info("*** Action *** " + action.toString());
 				}
-				int val = addActions(newNode, filter, depth-1, alpha, beta);
+				int val = addActions(newNode, depth-1, alpha, beta);
 				if (depth == 20) {
 					logger.info("*** Value *** " + val);
 				}

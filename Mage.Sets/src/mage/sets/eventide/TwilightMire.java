@@ -68,7 +68,7 @@ class TwilightMireFirstManaAbility extends BasicManaAbility<TwilightMireFirstMan
 
     public TwilightMireFirstManaAbility() {
         super(new BasicManaEffect(new Mana(0, 0, 0, 0, 2, 0, 0)));
-        this.addCost(new ManaCostsImpl("{B/G}"));
+        this.addManaCost(new ManaCostsImpl("{B/G}"));
         this.netMana.setBlack(2);
     }
 
@@ -86,7 +86,7 @@ class TwilightMireSecondManaAbility extends BasicManaAbility<TwilightMireSecondM
 
     public TwilightMireSecondManaAbility() {
         super(new BasicManaEffect(new Mana(0, 1, 0, 0, 1, 0, 0)));
-        this.addCost(new ManaCostsImpl("{B/G}"));
+        this.addManaCost(new ManaCostsImpl("{B/G}"));
         this.netMana.setBlack(1);
         this.netMana.setGreen(1);
     }
@@ -105,7 +105,7 @@ class TwilightMireThirdManaAbility extends BasicManaAbility<TwilightMireThirdMan
 
     public TwilightMireThirdManaAbility() {
         super(new BasicManaEffect(new Mana(0, 2, 0, 0, 0, 0, 0)));
-        this.addCost(new ManaCostsImpl("{B/G}"));
+        this.addManaCost(new ManaCostsImpl("{B/G}"));
         this.netMana.setGreen(2);
     }
 

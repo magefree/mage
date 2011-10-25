@@ -170,9 +170,10 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
 	@Override
 	public Collection<Card> getUniqueCards(Game game) {
 		Map<String, Card> cards = new HashMap<String, Card>();
-		for(UUID card: this) {
-			if (!cards.containsKey(game.getCard(card).getName())) {
-				cards.put(game.getCard(card).getName(), game.getCard(card));
+		for(UUID cardId: this) {
+            Card card = game.getCard(cardId);
+			if (!cards.containsKey(card.getName())) {
+				cards.put(card.getName(), card);
 			}
 		}
 		return cards.values();

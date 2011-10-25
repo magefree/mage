@@ -67,7 +67,7 @@ class RuggedPrairieFirstManaAbility extends BasicManaAbility<RuggedPrairieFirstM
 
     public RuggedPrairieFirstManaAbility() {
         super(new BasicManaEffect(new Mana(2, 0, 0, 0, 0, 0, 0)));
-        this.addCost(new ManaCostsImpl("{R/W}"));
+        this.addManaCost(new ManaCostsImpl("{R/W}"));
         this.netMana.setRed(2);
     }
 
@@ -85,7 +85,7 @@ class RuggedPrairieSecondManaAbility extends BasicManaAbility<RuggedPrairieSecon
 
     public RuggedPrairieSecondManaAbility() {
         super(new BasicManaEffect(new Mana(1, 0, 0, 1, 0, 0, 0)));
-        this.addCost(new ManaCostsImpl("{R/W}"));
+        this.addManaCost(new ManaCostsImpl("{R/W}"));
         this.netMana.setRed(1);
         this.netMana.setWhite(1);
     }
@@ -104,7 +104,7 @@ class RuggedPrairieThirdManaAbility extends BasicManaAbility<RuggedPrairieThirdM
 
     public RuggedPrairieThirdManaAbility() {
         super(new BasicManaEffect(new Mana(0, 0, 0, 2, 0, 0, 0)));
-        this.addCost(new ManaCostsImpl("{R/W}"));
+        this.addManaCost(new ManaCostsImpl("{R/W}"));
         this.netMana.setWhite(2);
     }
 
