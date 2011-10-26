@@ -46,6 +46,13 @@ public class NoSpellsWereCastLastTurnCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get("CastSpellLastTurnWatcher");
-        return watcher.getAmountOfSpellsCastOnPrevTurn() == 0;
+        // if any player cast spell, return false
+        for (Integer count : watcher.getAmountOfSpellsCastOnPrevTurn().values()) {
+            if (count > 0) {
+                return false;
+            }
+        }
+        // no one cast spell this turn
+        return true;
     }
 }

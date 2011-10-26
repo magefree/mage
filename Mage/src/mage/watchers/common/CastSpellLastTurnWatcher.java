@@ -33,14 +33,18 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.watchers.WatcherImpl;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author nantuko, BetaSteward_at_googlemail.com
  */
 public class CastSpellLastTurnWatcher extends WatcherImpl<CastSpellLastTurnWatcher> {
 
-    private int amountOfSpellsCastOnPrevTurn;
-    private int amountOfSpellsCastOnCurrentTurn;
+    private Map<UUID, Integer> amountOfSpellsCastOnPrevTurn = new HashMap<UUID, Integer>();
+    private Map<UUID, Integer> amountOfSpellsCastOnCurrentTurn = new HashMap<UUID, Integer>();
 
     public CastSpellLastTurnWatcher() {
         super("CastSpellLastTurnWatcher", WatcherScope.GAME);
@@ -55,17 +59,29 @@ public class CastSpellLastTurnWatcher extends WatcherImpl<CastSpellLastTurnWatch
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-            amountOfSpellsCastOnCurrentTurn++;
+            UUID playerId = event.getPlayerId();
+            if (playerId != null) {
+                Integer amount = amountOfSpellsCastOnCurrentTurn.get(playerId);
+                if (amount == null) {
+                    amount = Integer.valueOf(1);
+                } else {
+                    amount = Integer.valueOf(amount+1);
+                }
+                amountOfSpellsCastOnCurrentTurn.put(playerId, amount);
+                //Card card = game.getCard(event.getSourceId());
+                //System.out.println("CAST: " + card.getName());
+            }
         }
     }
 
     @Override
 	public void reset() {
-        amountOfSpellsCastOnPrevTurn = amountOfSpellsCastOnCurrentTurn;
-        amountOfSpellsCastOnCurrentTurn = 0;
+        amountOfSpellsCastOnPrevTurn.clear();
+        amountOfSpellsCastOnPrevTurn.putAll(amountOfSpellsCastOnCurrentTurn);
+        amountOfSpellsCastOnCurrentTurn.clear();
 	}
 
-    public int getAmountOfSpellsCastOnPrevTurn() {
+    public Map<UUID, Integer> getAmountOfSpellsCastOnPrevTurn() {
         return amountOfSpellsCastOnPrevTurn;
     }
 
