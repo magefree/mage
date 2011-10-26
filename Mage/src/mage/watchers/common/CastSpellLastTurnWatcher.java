@@ -35,6 +35,7 @@ import mage.watchers.WatcherImpl;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.UUID;
 
 /**
@@ -52,8 +53,12 @@ public class CastSpellLastTurnWatcher extends WatcherImpl<CastSpellLastTurnWatch
 
     public CastSpellLastTurnWatcher(final CastSpellLastTurnWatcher watcher) {
         super(watcher);
-        this.amountOfSpellsCastOnCurrentTurn = watcher.amountOfSpellsCastOnCurrentTurn;
-        this.amountOfSpellsCastOnPrevTurn = watcher.amountOfSpellsCastOnPrevTurn;
+        for (Entry<UUID, Integer> entry: watcher.amountOfSpellsCastOnCurrentTurn.entrySet()) {
+            amountOfSpellsCastOnCurrentTurn.put(entry.getKey(), entry.getValue());
+        }
+        for (Entry<UUID, Integer> entry: watcher.amountOfSpellsCastOnPrevTurn.entrySet()) {
+            amountOfSpellsCastOnPrevTurn.put(entry.getKey(), entry.getValue());
+        }
     }
     
     @Override
