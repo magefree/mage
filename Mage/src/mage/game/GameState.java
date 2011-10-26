@@ -349,7 +349,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 
 	public void handleEvent(GameEvent event, Game game) {
 		watchers.watch(event, game);
-		if (!replaceEvent(event, game)) {
+//		if (!replaceEvent(event, game)) {
 			//TODO: this is awkward - improve
 			if (event.getType() == EventType.ZONE_CHANGE) {
 				ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
@@ -371,7 +371,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 			command.checkTriggers(event, game);
 			delayed.checkTriggers(event, game);
 			exile.checkTriggers(event, game);
-		}
+//		}
 	}
 
 	public boolean replaceEvent(GameEvent event, Game game) {

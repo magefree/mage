@@ -32,6 +32,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.UUID;
 import mage.cards.Card;
 import mage.game.events.GameEvent;
@@ -52,8 +53,8 @@ public class Exile implements Serializable, Copyable<Exile> {
 	}
 
 	public Exile(final Exile exile) {
-		for (UUID exileId: exile.exileZones.keySet()) {
-			exileZones.put(exileId, exile.exileZones.get(exileId).copy());
+		for (Entry<UUID, ExileZone> entry: exile.exileZones.entrySet()) {
+			exileZones.put(entry.getKey(), entry.getValue().copy());
 		}
 	}
 

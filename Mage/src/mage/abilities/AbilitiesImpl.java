@@ -36,6 +36,7 @@ import java.util.UUID;
 import mage.Constants.EffectType;
 import mage.Constants.Zone;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.ReplacementEffect;
 import mage.abilities.keyword.KickerAbility;
@@ -174,7 +175,22 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
         return effects;
     }
     
-	@Override
+    @Override
+    public Map<Effect, Ability> getEffects(Zone zone, EffectType effectType) {
+        Map<Effect, Ability> effects = new HashMap<Effect, Ability>();
+		for (T ability: this) {
+			if (ability instanceof StaticAbility && ability.getZone().match(zone)) {
+				for (Effect effect: ability.getEffects()) {
+                    if (effect.getEffectType() == effectType) {
+                        effects.put(effect, ability);
+                    }
+                }
+			}
+		}
+        return effects;
+    }
+
+    @Override
 	public Abilities<ProtectionAbility> getProtectionAbilities() {
 		Abilities<ProtectionAbility> abilities = new AbilitiesImpl<ProtectionAbility>();
 		for (T ability: this) {

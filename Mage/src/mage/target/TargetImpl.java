@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
@@ -75,9 +76,9 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 		this.minNumberOfTargets = target.minNumberOfTargets;
 		this.required = target.required;
 		this.chosen = target.chosen;
-		for (UUID id: target.targets.keySet()) {
-			this.targets.put(id, target.targets.get(id));
-		}
+        for (Entry<UUID, Integer> entry: target.targets.entrySet()) {
+            targets.put(entry.getKey(), entry.getValue());
+        }
 	}
 
 	@Override

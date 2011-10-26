@@ -31,9 +31,10 @@ package mage.abilities;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.UUID;
+import mage.Constants.EffectType;
 import mage.Constants.Zone;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.ReplacementEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.abilities.keyword.ProtectionAbility;
@@ -259,4 +260,5 @@ public interface Abilities<T extends Ability> extends List<T>, Serializable {
 	public Abilities<T> copy();
 
     public Map<ReplacementEffect, Ability> getReplacementEffects(Zone zone);
+    public Map<Effect, Ability> getEffects(Zone zone, EffectType effectType);
 }
