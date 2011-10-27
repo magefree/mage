@@ -29,15 +29,15 @@ package mage.server.util;
 
 import org.apache.log4j.Logger;
 
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -54,6 +54,7 @@ public class ServerMessagesUtil {
 
     private static final Logger log = Logger.getLogger(ServerMessagesUtil.class);
     private static final String SERVER_MSG_TXT_FILE = "server.msg.txt";
+	private static ScheduledExecutorService updateExecutor;
 
     private List<String> messages = new ArrayList<String>();
     private ReadWriteLock lock = new ReentrantReadWriteLock();
@@ -70,8 +71,13 @@ public class ServerMessagesUtil {
     }
 
     public ServerMessagesUtil() {
-        timer.setInitialDelay(5000);
-        timer.start();
+        updateExecutor = Executors.newSingleThreadScheduledExecutor();
+		updateExecutor.scheduleAtFixedRate(new Runnable() {
+			@Override
+			public void run() {
+				reloadMessages();
+			}
+		}, 5, 5 * 60, TimeUnit.SECONDS);
     }
 
     public static ServerMessagesUtil getInstance() {
@@ -167,11 +173,11 @@ public class ServerMessagesUtil {
         return statistics.toString();
     }
 
-    private Timer timer = new Timer(1000 * 60, new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-            reloadMessages();
-        }
-    });
+//    private Timer timer = new Timer(1000 * 60, new ActionListener() {
+//        public void actionPerformed(ActionEvent e) {
+//            reloadMessages();
+//        }
+//    });
 
     public void setStartDate(long milliseconds) {
         this.startDate = milliseconds;

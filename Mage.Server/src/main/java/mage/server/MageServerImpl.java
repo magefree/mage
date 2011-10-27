@@ -263,11 +263,7 @@ public class MageServerImpl implements MageServer {
     @Override
 	public List<String> getConnectedPlayers(UUID roomId) throws MageException {
 		try {
-			List<String> players = new ArrayList<String>();
-			for (User user : UserManager.getInstance().getUsers()) {
-				players.add(user.getName());
-			}
-			return players;
+			return GamesRoomManager.getInstance().getRoom(roomId).getPlayers();
 		}
 		catch (Exception ex) {
 			handleException(ex);

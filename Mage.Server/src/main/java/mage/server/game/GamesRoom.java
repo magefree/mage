@@ -47,6 +47,7 @@ public interface GamesRoom extends Room {
 
 	public List<TableView> getTables();
     public List<MatchView> getFinished();
+    public List<String> getPlayers();
 	public boolean joinTable(UUID userId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList) throws MageException;
 	public boolean joinTournamentTable(UUID userId, UUID tableId, String name, String playerType, int skill) throws GameException;
 	public TableView createTable(UUID userId, MatchOptions options);
