@@ -10,7 +10,7 @@
 		<version>0.8.1</version>
 	</parent>
 	
-	<artifactId>Mage-Plugins</artifactId>
+	<artifactId>mage-plugins</artifactId>
 	<packaging>pom</packaging>
 	<name>Mage Plugins</name>	
 	<description>Mage Plugins POM</description>

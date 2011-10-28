@@ -10,7 +10,7 @@
         <version>0.8.1</version>
     </parent>
 
-    <artifactId>Mage</artifactId>
+    <artifactId>mage</artifactId>
     <packaging>jar</packaging>
     <name>Mage Framework</name>
 

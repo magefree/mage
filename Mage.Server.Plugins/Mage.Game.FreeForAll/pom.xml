@@ -6,18 +6,18 @@
   
     <parent>
         <groupId>org.mage</groupId>
-        <artifactId>Mage-Server-Plugins</artifactId>
+        <artifactId>mage-server-plugins</artifactId>
         <version>0.8.1</version>
     </parent>
 
-    <artifactId>Mage-Game-FreeForAll</artifactId>
+    <artifactId>mage-game-freeforall</artifactId>
     <packaging>jar</packaging>
     <name>Mage Game Free For All</name>
 	
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Mage</artifactId>
+            <artifactId>mage</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

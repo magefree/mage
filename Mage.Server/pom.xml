@@ -9,19 +9,19 @@
         <version>0.8.1</version>
     </parent>
 
-    <artifactId>Mage-Server</artifactId>
+    <artifactId>mage-server</artifactId>
     <packaging>jar</packaging>
     <name>Mage Server</name>
 
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Mage</artifactId>
+            <artifactId>mage</artifactId>
             <version>${mage-version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Mage-Common</artifactId>
+            <artifactId>mage-common</artifactId>
             <version>${mage-version}</version>
         </dependency>
         <dependency>
@@ -47,61 +47,61 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Mage-Player-AI</artifactId>
+            <artifactId>mage-player-ai</artifactId>
             <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Mage-Deck-Constructed</artifactId>
+            <artifactId>mage-deck-constructed</artifactId>
             <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Mage-Deck-Limited</artifactId>
+            <artifactId>mage-deck-limited</artifactId>
             <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Mage-Game-FreeForAll</artifactId>
+            <artifactId>mage-game-freeforall</artifactId>
             <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Mage-Game-TwoPlayerDuel</artifactId>
+            <artifactId>mage-game-twoplayerduel</artifactId>
             <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Mage-Player-Human</artifactId>
+            <artifactId>mage-player-human</artifactId>
             <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Mage-Player-AIMinimax</artifactId>
+            <artifactId>mage-player-aiminimax</artifactId>
             <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Mage-Player-AI-MA</artifactId>
+            <artifactId>mage-player-ai-ma</artifactId>
             <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Mage-Tournament-BoosterDraft</artifactId>
+            <artifactId>mage-tournament-boosterdraft</artifactId>
             <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Mage-Tournament-Sealed</artifactId>
+            <artifactId>mage-tournament-sealed</artifactId>
             <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>

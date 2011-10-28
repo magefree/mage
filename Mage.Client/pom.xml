@@ -10,24 +10,24 @@
     </parent>
 
     <groupId>org.mage</groupId>
-    <artifactId>Mage-Client</artifactId>
+    <artifactId>mage-client</artifactId>
     <packaging>jar</packaging>
     <name>Mage Client</name>
 
     <dependencies>
         <dependency>
             <groupId>org.mage</groupId>
-            <artifactId>Mage</artifactId>
+            <artifactId>mage</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.mage</groupId>
-            <artifactId>Mage-Common</artifactId>
+            <artifactId>mage-common</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.mage</groupId>
-            <artifactId>Mage-Sets</artifactId>
+            <artifactId>mage-sets</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -81,13 +81,13 @@
            -->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Mage-Theme-Plugin</artifactId>
+            <artifactId>mage-theme-plugin</artifactId>
             <version>0.4</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Mage-Counter-Plugin</artifactId>
+            <artifactId>mage-counter-plugin</artifactId>
             <version>0.1</version>
             <scope>runtime</scope>
         </dependency>

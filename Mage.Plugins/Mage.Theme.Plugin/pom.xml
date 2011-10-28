@@ -5,11 +5,11 @@
 
 	<parent>
 		<groupId>org.mage</groupId>
-		<artifactId>Mage-Plugins</artifactId>
+		<artifactId>mage-plugins</artifactId>
 		<version>0.8.1</version>
 	</parent>
 	
-	<artifactId>Mage-Theme-Plugin</artifactId>
+	<artifactId>mage-theme-plugin</artifactId>
 	<packaging>jar</packaging>
 	<version>${plugin-version}</version>	
 	<name>Mage Theme Plugin</name>
@@ -18,7 +18,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>Mage-Common</artifactId>
+			<artifactId>mage-common</artifactId>
 			<version>${mage-version}</version>
 		</dependency>
 		<dependency>

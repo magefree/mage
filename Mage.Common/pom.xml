@@ -10,14 +10,14 @@
         <version>0.8.1</version>
     </parent>
     
-    <artifactId>Mage-Common</artifactId>
+    <artifactId>mage-common</artifactId>
     <packaging>jar</packaging>
     <name>Mage Common Classes</name>
 	
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Mage</artifactId>
+            <artifactId>mage</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

@@ -9,7 +9,7 @@
 		<version>0.8.1</version>
 	</parent>
 	
-	<artifactId>Mage-Server-Plugins</artifactId>
+	<artifactId>mage-server-plugins</artifactId>
 	<packaging>pom</packaging>
 	<name>Mage Server Plugins</name>
 	<description>Mage Server Plugins POM</description>
