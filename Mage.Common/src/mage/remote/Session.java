@@ -29,8 +29,10 @@
 package mage.remote;
 
 import java.net.Authenticator;
+import java.net.ConnectException;
 import java.net.MalformedURLException;
 import java.net.PasswordAuthentication;
+import java.net.SocketException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -49,6 +51,7 @@ import mage.interfaces.callback.ClientCallback;
 import mage.utils.CompressUtil;
 import mage.view.*;
 import org.apache.log4j.Logger;
+import org.jboss.remoting.CannotConnectException;
 import org.jboss.remoting.Client;
 import org.jboss.remoting.ConnectionListener;
 import org.jboss.remoting.ConnectionValidator;
@@ -182,11 +185,28 @@ public class Session {
 				client.showMessage("Unable to connect to server. "  + ex.getMessage());
 			}
             // TODO: download client that matches server version
+        } catch (CannotConnectException ex) {
+            if (!canceled) {
+                Throwable t = ex.getCause();
+                String message = "";
+                while (t != null) {
+                    if (t instanceof ConnectException) {
+                        message = "Server is likely offline.";
+                        break;
+                    }
+                    if (t instanceof SocketException) {
+                        message = "Check your internet connection.";
+                        break;
+                    }
+                    t = t.getCause();
+                }
+				client.showMessage("Unable to connect to server. " + message);
+			}
 		} catch (Throwable t) {
 			logger.fatal("Unable to connect to server - ", t);
 			if (!canceled) {
 				disconnect(false);
-				client.showMessage("Unable to connect to server. "  + t.getMessage());
+				client.showMessage("Unable to connect to server.  "  + t.getMessage());
 			}
 		}
 		return false;
