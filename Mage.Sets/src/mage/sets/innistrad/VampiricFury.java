@@ -30,7 +30,12 @@ package mage.sets.innistrad;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
+import mage.Constants.Duration;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
+import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
+import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
@@ -58,6 +63,7 @@ public class VampiricFury extends CardImpl<VampiricFury> {
 
 		// Vampire creatures you control get +2/+0 and gain first strike until end of turn.
 		this.getSpellAbility().addEffect(new BoostControlledEffect(2, 0, Constants.Duration.EndOfTurn, vampires));
+                this.getSpellAbility().addEffect(new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, vampires));
 	}
 
 	public VampiricFury(final VampiricFury card) {
