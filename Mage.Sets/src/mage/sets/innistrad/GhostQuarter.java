@@ -104,7 +104,7 @@ class GhostQuarterEffect extends OneShotEffect<GhostQuarterEffect> {
                 if (player.searchLibrary(target, game)) {
                     Card card = player.getLibrary().remove(target.getFirstTarget(), game);
                     if (card != null) {
-                        card.putOntoBattlefield(game, Zone.HAND, source.getId(), source.getControllerId());
+                        card.putOntoBattlefield(game, Zone.HAND, source.getId(), permanent.getControllerId());
                     }
                 }
                 player.shuffleLibrary(game);
