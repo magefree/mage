@@ -76,9 +76,7 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 		this.minNumberOfTargets = target.minNumberOfTargets;
 		this.required = target.required;
 		this.chosen = target.chosen;
-        for (Entry<UUID, Integer> entry: target.targets.entrySet()) {
-            targets.put(entry.getKey(), entry.getValue());
-        }
+        this.targets.putAll(target.targets);
 	}
 
 	@Override

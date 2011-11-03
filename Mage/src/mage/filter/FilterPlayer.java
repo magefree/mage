@@ -52,9 +52,7 @@ public class FilterPlayer extends FilterImpl<Player, FilterPlayer> implements Fi
 
 	public FilterPlayer(FilterPlayer filter) {
 		super(filter);
-		for (UUID pId: filter.playerId) {
-			this.playerId.add(pId);
-		}
+        this.playerId.addAll(filter.playerId);
 		this.notPlayer = filter.notPlayer;
 		this.playerTarget = filter.playerTarget;
 	}

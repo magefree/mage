@@ -54,16 +54,16 @@ public class EndPhase extends Phase<EndPhase> {
 	}
 
 	@Override
-	protected void playStep(Game game, UUID activePlayerId) {
+	protected void playStep(Game game) {
 		if (currentStep.getType() == PhaseStep.CLEANUP) {
 			currentStep.beginStep(game, activePlayerId);
 			if (game.checkStateAndTriggered()) {
-				playStep(game, activePlayerId);
+				playStep(game);
 			}
 			currentStep.endStep(game, activePlayerId);
 		}
 		else
-			super.playStep(game, activePlayerId);
+			super.playStep(game);
 	}
 
 	@Override

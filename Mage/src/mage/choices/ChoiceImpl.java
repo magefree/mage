@@ -57,9 +57,7 @@ public class ChoiceImpl<T extends ChoiceImpl<T>> implements Choice, Serializable
 		this.chosen = choice.chosen;
 		this.required = choice.required;
 		this.message = choice.message;
-		for (String c: choice.choices) {
-			this.choices.add(c);
-		}
+        this.choices.addAll(choice.choices);
 	}
 
 	@Override

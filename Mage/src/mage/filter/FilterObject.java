@@ -91,12 +91,8 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
 		super(filter);
 		this.abilities = filter.abilities.copy();
 		this.notAbilities = filter.notAbilities;
-		for (CardType cType: (List<CardType>)filter.cardType) {
-			this.cardType.add(cType);
-		}
-		for (CardType cType: (List<CardType>)filter.notCardTypeList) {
-			this.notCardTypeList.add(cType);
-		}
+        this.cardType.addAll(filter.cardType);
+        this.notCardTypeList.addAll(filter.notCardTypeList);
 		this.scopeCardType = filter.scopeCardType;
 		this.notCardType = filter.notCardType;
 		this.notScopeCardType = filter.notScopeCardType;
@@ -106,18 +102,12 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
 		this.color = filter.color.copy();
 		this.scopeColor = filter.scopeColor;
 		this.notColor = filter.notColor;
-		for (String fName: (List<String>)filter.name) {
-			this.name.add(fName);
-		}
+        this.name.addAll(filter.name);
 		this.notName = filter.notName;
-		for (String fSubtype: (List<String>)filter.subtype) {
-			this.subtype.add(fSubtype);
-		}
+        this.subtype.addAll(filter.subtype);
 		this.scopeSubtype = filter.scopeSubtype;
 		this.notSubtype = filter.notSubtype;
-		for (String fSupertype: (List<String>)filter.supertype) {
-			this.supertype.add(fSupertype);
-		}
+        this.supertype.addAll(filter.supertype);
 		this.scopeSupertype = filter.scopeSupertype;
 		this.notSupertype = filter.notSupertype;
 		this.convertedManaCost = filter.convertedManaCost;

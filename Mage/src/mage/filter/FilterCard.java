@@ -67,13 +67,9 @@ public class FilterCard<T extends FilterCard<T>> extends FilterObject<Card, Filt
 
 	public FilterCard(FilterCard<T> filter) {
 		super(filter);
-		for (UUID oId: filter.ownerId) {
-			this.ownerId.add(oId);
-		}
+        this.ownerId.addAll(filter.ownerId);
 		this.notOwner = filter.notOwner;
-		for (String code: filter.expansionSetCode) {
-			this.expansionSetCode.add(code);
-		}
+        this.expansionSetCode.addAll(filter.expansionSetCode);
 		this.notExpansionSetCode = filter.notExpansionSetCode;
         this.owner = filter.owner;
 	}

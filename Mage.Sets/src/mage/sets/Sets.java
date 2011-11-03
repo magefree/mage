@@ -113,8 +113,8 @@ public class Sets extends HashMap<String, ExpansionSet> {
 
 	private void addSet(ExpansionSet set) {
 		this.put(set.getCode(), set);
+        cards.addAll(set.getCards());
 		for (Card card: set.getCards()) {
-			cards.add(card);
 			names.add(card.getName());
 			if (card.getCardType().contains(CardType.CREATURE)) {
 				for (String type :  card.getSubtype()) {

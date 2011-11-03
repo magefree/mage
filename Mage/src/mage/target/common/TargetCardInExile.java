@@ -62,7 +62,7 @@ public class TargetCardInExile extends TargetCard<TargetCardInExile> {
    	@Override
 	public boolean canTarget(UUID id, Ability source, Game game) {
 		Card card = game.getCard(id);
-		if (card != null && game.getZone(card.getId()) == Zone.EXILED) {
+		if (card != null && game.getState().getZone(card.getId()) == Zone.EXILED) {
             ExileZone exile;
             if (zoneId != null) {
                 exile = game.getExile().getExileZone(zoneId);

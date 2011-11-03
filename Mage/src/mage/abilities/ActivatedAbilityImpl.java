@@ -34,6 +34,7 @@ import mage.Constants.TimingRule;
 import mage.Constants.Zone;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
+import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.costs.mana.PhyrexianManaCost;
@@ -100,8 +101,8 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
 		if (cost != null) {
 			if (cost instanceof PhyrexianManaCost) {
 				this.addManaCost((PhyrexianManaCost)cost);
-			} else if (cost instanceof ManaCostsImpl) {
-				this.addManaCost((ManaCostsImpl) cost);
+			} else if (cost instanceof ManaCost) {
+				this.addManaCost((ManaCost) cost);
 			} else {
 				this.addCost(cost);
 			}
@@ -164,7 +165,7 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
 			return true;
 		else {
 			Card card = (Card)game.getObject(this.sourceId);
-			if (card != null && game.getZone(this.sourceId) != Zone.BATTLEFIELD)
+			if (card != null && game.getState().getZone(this.sourceId) != Zone.BATTLEFIELD)
 				return card.getOwnerId().equals(playerId);
 		}
 		return false;

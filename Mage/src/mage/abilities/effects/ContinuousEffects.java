@@ -60,13 +60,13 @@ import mage.players.Player;
 public class ContinuousEffects implements Serializable {
 
 	//transient Continuous effects
-	private final List<ContinuousEffect> layeredEffects = new ArrayList<ContinuousEffect>();
-	private final List<ReplacementEffect> replacementEffects = new ArrayList<ReplacementEffect>();
-	private final List<PreventionEffect> preventionEffects = new ArrayList<PreventionEffect>();
-	private final List<RequirementEffect> requirementEffects = new ArrayList<RequirementEffect>();
-	private final List<RestrictionEffect> restrictionEffects = new ArrayList<RestrictionEffect>();
-	private final List<AsThoughEffect> asThoughEffects = new ArrayList<AsThoughEffect>();
-	private final List<CostModificationEffect> costModificationEffects = new ArrayList<CostModificationEffect>();
+	private final ArrayList<ContinuousEffect> layeredEffects = new ArrayList<ContinuousEffect>();
+	private final ArrayList<ReplacementEffect> replacementEffects = new ArrayList<ReplacementEffect>();
+	private final ArrayList<PreventionEffect> preventionEffects = new ArrayList<PreventionEffect>();
+	private final ArrayList<RequirementEffect> requirementEffects = new ArrayList<RequirementEffect>();
+	private final ArrayList<RestrictionEffect> restrictionEffects = new ArrayList<RestrictionEffect>();
+	private final ArrayList<AsThoughEffect> asThoughEffects = new ArrayList<AsThoughEffect>();
+	private final ArrayList<CostModificationEffect> costModificationEffects = new ArrayList<CostModificationEffect>();
 
 	//map Abilities to Continuous effects
 	private final Map<UUID, Ability> abilityMap = new HashMap<UUID, Ability>();
@@ -82,24 +82,31 @@ public class ContinuousEffects implements Serializable {
 	public ContinuousEffects(final ContinuousEffects effect) {
 		this.applyCounters = effect.applyCounters.copy();
 		this.planeswalkerRedirectionEffect = effect.planeswalkerRedirectionEffect.copy();
+        layeredEffects.ensureCapacity(effect.layeredEffects.size());
 		for (ContinuousEffect entry: effect.layeredEffects) {
 			layeredEffects.add((ContinuousEffect) entry.copy());
 		}
+        replacementEffects.ensureCapacity(effect.replacementEffects.size());
 		for (ReplacementEffect entry: effect.replacementEffects) {
 			replacementEffects.add((ReplacementEffect)entry.copy());
 		}
+        preventionEffects.ensureCapacity(effect.preventionEffects.size());
 		for (PreventionEffect entry: effect.preventionEffects) {
 			preventionEffects.add((PreventionEffect)entry.copy());
 		}
+        requirementEffects.ensureCapacity(effect.requirementEffects.size());
 		for (RequirementEffect entry: effect.requirementEffects) {
 			requirementEffects.add((RequirementEffect)entry.copy());
 		}
+        restrictionEffects.ensureCapacity(effect.restrictionEffects.size());
 		for (RestrictionEffect entry: effect.restrictionEffects) {
 			restrictionEffects.add((RestrictionEffect)entry.copy());
 		}
+        asThoughEffects.ensureCapacity(effect.asThoughEffects.size());
 		for (AsThoughEffect entry: effect.asThoughEffects) {
 			asThoughEffects.add((AsThoughEffect)entry.copy());
 		}
+        costModificationEffects.ensureCapacity(effect.costModificationEffects.size());
 		for ( CostModificationEffect entry : effect.costModificationEffects ) {
 			costModificationEffects.add(entry);
 		}
@@ -209,7 +216,7 @@ public class ContinuousEffects implements Serializable {
 	private List<ContinuousEffect> getLayeredEffects(Game game) {
 		List<ContinuousEffect> layerEffects = new ArrayList<ContinuousEffect>(layeredEffects);
 		for (Card card: game.getCards()) {
-            Zone zone = game.getZone(card.getId());
+            Zone zone = game.getState().getZone(card.getId());
 			if (zone == Zone.HAND || zone == Zone.GRAVEYARD) {
                 for (Entry<Effect, Ability> entry: card.getAbilities().getEffects(zone, EffectType.CONTINUOUS).entrySet()) {
                     layerEffects.add((ContinuousEffect)entry.getKey());
@@ -284,7 +291,7 @@ public class ContinuousEffects implements Serializable {
 			replaceEffects.add(planeswalkerRedirectionEffect);
 		//get all applicable Replacement effects in each players hand and graveyard
 		for (Card card: game.getCards()) {
-            Zone zone = game.getZone(card.getId());
+            Zone zone = game.getState().getZone(card.getId());
 			if (zone == Zone.HAND || zone == Zone.GRAVEYARD) {
                 for (Entry<ReplacementEffect, Ability> entry: card.getAbilities().getReplacementEffects(zone).entrySet()) {
                     if (entry.getKey().applies(event, entry.getValue(), game)) {

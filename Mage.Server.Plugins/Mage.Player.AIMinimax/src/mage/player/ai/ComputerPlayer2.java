@@ -120,15 +120,9 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 		this.currentScore = player.currentScore;
 		if (player.combat != null)
 			this.combat = player.combat.copy();
-		for (Ability ability: player.actions) {
-			actions.add(ability);
-		}
-		for (UUID targetId: player.targets) {
-			targets.add(targetId);
-		}
-		for (String choice: player.choices) {
-			choices.add(choice);
-		}
+        this.actions.addAll(player.actions);
+        this.targets.addAll(player.targets);
+        this.choices.addAll(player.choices);
 	}
 
 	@Override
@@ -731,7 +725,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 		Game sim = game.copy();
 
 		for (Player copyPlayer: sim.getState().getPlayers().values()) {
-			Player origPlayer = game.getState().getPlayers().get(copyPlayer.getId());
+			Player origPlayer = game.getState().getPlayers().get(copyPlayer.getId()).copy();
 			SimulatedPlayer newPlayer = new SimulatedPlayer(copyPlayer.getId(), copyPlayer.getId().equals(playerId), maxDepth);
 			newPlayer.restore(origPlayer);
 			sim.getState().getPlayers().put(copyPlayer.getId(), newPlayer);

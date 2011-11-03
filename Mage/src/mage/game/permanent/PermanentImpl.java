@@ -112,20 +112,11 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 		this.loyaltyUsed = permanent.loyaltyUsed;
 		this.deathtouched = permanent.deathtouched;
 		this.counters = permanent.counters.copy();
-		for (UUID attachmentId : permanent.attachments) {
-			this.attachments.add(attachmentId);
-		}
-		for (UUID imprintedId : permanent.imprinted) {
-			this.imprinted.add(imprintedId);
-		}
-		for (UUID connectedCardId : permanent.connectedCards) {
-			this.connectedCards.add(connectedCardId);
-		}
+        this.attachments.addAll(permanent.attachments);
+        this.imprinted.addAll(permanent.imprinted);
+        this.connectedCards.addAll(permanent.connectedCards);
 		if (permanent.dealtDamageByThisTurn != null) {
-			dealtDamageByThisTurn = new ArrayList<UUID>();
-			for (UUID sourceId : permanent.dealtDamageByThisTurn) {
-				this.dealtDamageByThisTurn.add(sourceId);
-			}
+			dealtDamageByThisTurn = new ArrayList<UUID>(permanent.dealtDamageByThisTurn);
 			if (permanent.markedDamage != null) {
 				markedDamage = new ArrayList<Counter>();
 				for (Counter counter : permanent.markedDamage) {

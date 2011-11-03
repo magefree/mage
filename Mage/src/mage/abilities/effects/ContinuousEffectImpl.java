@@ -77,9 +77,7 @@ public abstract class ContinuousEffectImpl<T extends ContinuousEffectImpl<T>> ex
 		this.timestamp = new Date(effect.timestamp.getTime());
 		this.used = effect.used;
 		this.affectedObjectsSet = effect.affectedObjectsSet;
-		for (UUID objectId: effect.objects) {
-			this.objects.add(objectId);
-		}
+        this.objects.addAll(effect.objects);
 	}
 
 	@Override

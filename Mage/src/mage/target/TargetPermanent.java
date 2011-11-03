@@ -146,7 +146,8 @@ public class TargetPermanent<T extends TargetPermanent<T>> extends TargetObject<
 		int remainingTargets = this.minNumberOfTargets - targets.size();
 		if (remainingTargets == 0) {
 			// if we return true, then AnowonTheRuinSage will hang for AI when no targets in play
-            return false;
+            // TODO: retest Anowon the Ruin Sage
+            return true;
         }
 		int count = 0;
 		for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, sourceControllerId, game)) {

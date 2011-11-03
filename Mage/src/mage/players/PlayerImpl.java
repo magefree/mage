@@ -154,9 +154,8 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		this.range = player.range;
         this.canGainLife = player.canGainLife;
         this.canLoseLife = player.canLoseLife;
-		for (UUID id: player.inRange) {
-			this.inRange.add(id);
-		}
+        this.attachments.addAll(player.attachments);
+        this.inRange.addAll(player.inRange);
 		this.userData = player.userData;
 	}
 
@@ -504,7 +503,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		if (card != null) {
 			if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, ability.getId(), ability.getSourceId(), playerId))) {
 				int bookmark = game.bookmarkState();
-                Zone fromZone = game.getZone(card.getId());
+                Zone fromZone = game.getState().getZone(card.getId());
 				card.cast(game, fromZone, ability, playerId);
 
 				Ability spellAbility = game.getStack().getSpell(ability.getId()).getSpellAbility();
@@ -530,7 +529,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		//20091005 - 305.1
 		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, card.getId(), playerId))) {
 			int bookmark = game.bookmarkState();
-			Zone zone = game.getZone(card.getId());
+			Zone zone = game.getState().getZone(card.getId());
 			switch (zone) {
 				case HAND:
 					removeFromHand(card, game);
@@ -541,6 +540,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 				case GRAVEYARD:
 					removeFromGraveyard(card, game);
 					break;
+                default:
+                    // invalid zone for play land
+                    return false;
 			}
 
 			if (card.putOntoBattlefield(game, zone, null, playerId)) {

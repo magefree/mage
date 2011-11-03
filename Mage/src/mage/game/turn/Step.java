@@ -46,6 +46,11 @@ public abstract class Step<T extends Step<T>> implements Serializable {
 	protected EventType stepEvent;
 	protected EventType preStepEvent;
 	protected EventType postStepEvent;
+    protected StepPart stepPart;
+    
+    public enum StepPart {
+        PRE, PRIORITY, POST;
+    }
 
 	public abstract T copy();
 
@@ -60,6 +65,7 @@ public abstract class Step<T extends Step<T>> implements Serializable {
 		this.stepEvent = step.stepEvent;
 		this.preStepEvent = step.preStepEvent;
 		this.postStepEvent = step.postStepEvent;
+        this.stepPart = step.stepPart;
 	}
 
 	public PhaseStep getType() {
@@ -67,15 +73,19 @@ public abstract class Step<T extends Step<T>> implements Serializable {
 	}
 
 	public void beginStep(Game game, UUID activePlayerId) {
+        stepPart = StepPart.PRE;
 		game.fireEvent(new GameEvent(preStepEvent, null, null, activePlayerId));
 	}
 
 	public void priority(Game game, UUID activePlayerId) {
-		if (hasPriority)
+		if (hasPriority) {
+            stepPart = StepPart.PRIORITY;
 			game.playPriority(activePlayerId);
+        }
 	}
 
 	public void endStep(Game game, UUID activePlayerId) {
+        stepPart = StepPart.POST;
 		game.fireEvent(new GameEvent(postStepEvent, null, null, activePlayerId));
 	}
 
@@ -87,4 +97,8 @@ public abstract class Step<T extends Step<T>> implements Serializable {
 		return this.hasPriority;
 	}
 
+    public StepPart getStepPart() {
+        return stepPart;
+    }
+    
 }

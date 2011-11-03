@@ -66,9 +66,7 @@ public class Combat implements Serializable, Copyable<Combat> {
 		for (CombatGroup group : combat.groups) {
 			groups.add(group.copy());
 		}
-		for (UUID defenderId : combat.defenders) {
-			defenders.add(defenderId);
-		}
+        defenders.addAll(combat.defenders);
 		for (Map.Entry<UUID, CombatGroup> group : combat.blockingGroups.entrySet()) {
 			blockingGroups.put(group.getKey(), group.getValue());
 		}
@@ -128,6 +126,8 @@ public class Combat implements Serializable, Copyable<Combat> {
 			//20101001 - 508.1d
 			checkAttackRequirements(player, game);
 			player.selectAttackers(game);
+            if (game.isPaused() || game.isGameOver())
+                return;
             for (CombatGroup group: groups) {
                 for (UUID attacker: group.getAttackers()) {
                     game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ATTACKER_DECLARED, group.defenderId, attacker, attackerId));
@@ -169,6 +169,8 @@ public class Combat implements Serializable, Copyable<Combat> {
 			checkBlockRequirements(player, game);
 			for (UUID defenderId : getPlayerDefenders(game)) {
 				game.getPlayer(defenderId).selectBlockers(game);
+                if (game.isPaused() || game.isGameOver())
+                    return;
 				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, defenderId, defenderId));
 			}
 		}

@@ -61,14 +61,12 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
 	public CardsImpl(Zone zone, List<Card> cards) {
 		this(zone);
 		for (Card card: cards) {
-			add(card);
+			this.add(card.getId());
 		}
 	}
 
 	public CardsImpl(final CardsImpl cards) {
-		for (UUID cardId: cards) {
-			this.add(cardId);
-		}
+        this.addAll(cards);
 		this.ownerId = cards.ownerId;
 		this.zone = cards.zone;
 	}
@@ -163,7 +161,7 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
 	@Override
 	public void addAll(List<Card> cards) {
 		for (Card card: cards) {
-			add(card);
+			add(card.getId());
 		}
 	}
 

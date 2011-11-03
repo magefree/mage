@@ -32,13 +32,12 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Stack;
 import java.util.UUID;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.ReplacementEffect;
-import mage.cards.Card;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -105,15 +104,9 @@ public class SpellStack extends Stack<StackObject> {
 		boolean caught = false;
 		Map<ReplacementEffect, Ability> rEffects = new LinkedHashMap<ReplacementEffect, Ability>();
 		for (StackObject stackObject: this) {
-			for (Ability ability: stackObject.getAbilities()) {
-				if (ability.getZone() == Zone.STACK) {
-					for (Effect effect: ability.getEffects()) {
-						if (effect instanceof ReplacementEffect) {
-							if (((ReplacementEffect)effect).applies(event, ability, game))
-								rEffects.put((ReplacementEffect) effect, ability);
-						}
-					}
-				}
+			for (Entry<ReplacementEffect, Ability> entry: stackObject.getAbilities().getReplacementEffects(Zone.STACK).entrySet()) {
+                if (entry.getKey().applies(event, entry.getValue(), game))
+                    rEffects.put(entry.getKey(), entry.getValue());
 			}
 		}
 		if (rEffects.size() > 0) {

@@ -38,6 +38,7 @@ import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
+import mage.MageException;
 import mage.MageObjectImpl;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -46,6 +47,7 @@ import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.mana.ManaAbility;
 import mage.game.Game;
+import mage.game.GameException;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.PermanentCard;
@@ -226,7 +228,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 
     @Override
     public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag) {
-        Zone fromZone = game.getZone(objectId);
+        Zone fromZone = game.getState().getZone(objectId);
         ZoneChangeEvent event = new ZoneChangeEvent(this.objectId, sourceId, ownerId, fromZone, toZone);
         if (!game.replaceEvent(event)) {
             if (event.getFromZone() != null) {
@@ -243,8 +245,11 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                     case EXILED:
                         game.getExile().removeCard(this, game);
                         break;
+                    case STACK:
+                        break;
                     default:
-                        //logger.warning("moveToZone, not fully implemented: from="+event.getFromZone() + ", to="+event.getToZone());
+                        logger.fatal("invalid zone for card - " + fromZone);
+                        return false;
                 }
                 game.rememberLKI(objectId, event.getFromZone(), this);
             }
@@ -278,7 +283,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
             }
             game.setZone(objectId, event.getToZone());
             game.fireEvent(event);
-            return game.getZone(objectId) == toZone;
+            return game.getState().getZone(objectId) == toZone;
         }
         return false;
     }
@@ -309,14 +314,14 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
             game.getStack().push(new Spell(this, ability.copy(), controllerId));
             game.setZone(objectId, event.getToZone());
             game.fireEvent(event);
-            return game.getZone(objectId) == Zone.STACK;
+            return game.getState().getZone(objectId) == Zone.STACK;
         }
         return false;
     }
 
     @Override
     public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game) {
-        Zone fromZone = game.getZone(objectId);
+        Zone fromZone = game.getState().getZone(objectId);
         ZoneChangeEvent event = new ZoneChangeEvent(this.objectId, sourceId, ownerId, fromZone, Zone.EXILED);
         if (!game.replaceEvent(event)) {
             if (fromZone != null) {

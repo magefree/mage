@@ -59,7 +59,7 @@ public class ReturnToHandSourceEffect extends OneShotEffect<ReturnToHandSourceEf
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(source.getSourceId());
         if (card != null) {
-            switch (game.getZone(card.getId())) {
+            switch (game.getState().getZone(card.getId())) {
                 case BATTLEFIELD:
                     Permanent p = game.getPermanent(source.getSourceId());
                     if (p != null) {

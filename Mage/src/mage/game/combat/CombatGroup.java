@@ -67,21 +67,11 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 		this.blocked = group.blocked;
 		this.defenderId = group.defenderId;
 		this.defenderIsPlaneswalker = group.defenderIsPlaneswalker;
-		for (UUID attackerId: group.attackers) {
-			this.attackers.add(attackerId);
-		}
-		for (UUID blockerId: group.blockers) {
-			this.blockers.add(blockerId);
-		}
-		for (UUID orderId: group.blockerOrder) {
-			this.blockerOrder.add(orderId);
-		}
-		for (UUID orderId: group.attackerOrder) {
-			this.attackerOrder.add(orderId);
-		}
-		for (Map.Entry<UUID, UUID> entry : group.players.entrySet()) {
-			players.put(entry.getKey(), entry.getValue());
-		}
+        this.attackers.addAll(group.attackers);
+        this.blockers.addAll(group.blockers);
+        this.blockerOrder.addAll(group.blockerOrder);
+        this.attackerOrder.addAll(group.attackerOrder);
+        this.players.putAll(group.players);
 	}
 
 	protected String getValue(Game game) {

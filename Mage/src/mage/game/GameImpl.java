@@ -77,6 +77,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	private final static transient Logger logger = Logger.getLogger(GameImpl.class);
 
 	private static FilterAura filterAura = new FilterAura();
+    private static FilterLegendaryPermanent filterLegendary = new FilterLegendaryPermanent();
 	private static FilterEquipment filterEquipment = new FilterEquipment();
 	private static FilterFortification filterFortification = new FilterFortification();
 	private static Random rnd = new Random();
@@ -125,6 +126,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		this.gameCards = game.gameCards;
 		this.simulation = game.simulation;
         this.gameOptions = game.gameOptions;
+        this.lki.putAll(game.lki);
 	}
 
 	@Override
@@ -355,27 +357,44 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
     @Override
     public void resume() {
-        play(state.getActivePlayerId());
-    }
-    
-    protected void play(UUID nextPlayerId) {
-		PlayerList players = state.getPlayerList(nextPlayerId);
+		PlayerList players = state.getPlayerList(state.getActivePlayerId());
 		Player player = getPlayer(players.get());
-		while (!isGameOver()) {
-			state.setTurnNum(state.getTurnNum() + 1);
+        state.resume();
+		if (!isGameOver()) {
             if (simulation)
                 logger.info("Turn " + Integer.toString(state.getTurnNum()));
 			fireInformEvent("Turn " + Integer.toString(state.getTurnNum()));
 			if (checkStopOnTurnOption()) return;
-			state.setActivePlayerId(player.getId());
-			state.getTurn().play(this, player.getId());
-			if (isGameOver())
-				break;
-			endOfTurn();
-			player = players.getNext(this);
+			state.getTurn().resumePlay(this);
+			if (!isPaused() && !isGameOver()) {
+                endOfTurn();
+                player = players.getNext(this);
+                state.setTurnNum(state.getTurnNum() + 1);
+            }
 		}
-
-		winnerId = findWinnersAndLosers();
+        play(player.getId());
+    }
+    
+    protected void play(UUID nextPlayerId) {
+        if (!isPaused() && !isGameOver()) {
+            PlayerList players = state.getPlayerList(nextPlayerId);
+            Player player = getPlayer(players.get());
+            while (!isPaused() && !isGameOver()) {
+//                if (simulation)
+//                    logger.info("Turn " + Integer.toString(state.getTurnNum()));
+                fireInformEvent("Turn " + Integer.toString(state.getTurnNum()));
+                if (checkStopOnTurnOption()) return;
+                state.setActivePlayerId(player.getId());
+                state.getTurn().play(this, player.getId());
+                if (isPaused() || isGameOver())
+                    break;
+                endOfTurn();
+                player = players.getNext(this);
+                state.setTurnNum(state.getTurnNum() + 1);
+            }
+        }
+        if (isGameOver())
+            winnerId = findWinnersAndLosers();
     }
     
 	private boolean checkStopOnTurnOption() {
@@ -501,6 +520,16 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		return playerId;
 	}
 
+    @Override
+    public void pause() {
+        state.pause();
+    }
+    
+    @Override
+    public boolean isPaused() {
+        return state.isPaused();
+    }
+    
 	@Override
 	public void end() {
 		state.endGame();
@@ -547,25 +576,25 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	public void playPriority(UUID activePlayerId) {
         int bookmark = 0;
 		try {
-			while (!isGameOver()) {
+			while (!isPaused() && !isGameOver()) {
 				state.getPlayers().resetPassed();
 				state.getPlayerList().setCurrent(activePlayerId);
 				Player player;
-				while (!isGameOver()) {
+				while (!isPaused() && !isGameOver()) {
                     try {
                         if (bookmark == 0)
                             bookmark = bookmarkState();
                         player = getPlayer(state.getPlayerList().get());
                         state.setPriorityPlayerId(player.getId());
-                        while (!player.isPassed() && !player.hasLost() && !player.hasLeft() && !isGameOver()) {
+                        while (!player.isPassed() && !player.hasLost() && !player.hasLeft() && !isPaused() && !isGameOver()) {
                             checkStateAndTriggered();
-                            if (isGameOver()) return;
+                            if (isPaused() || isGameOver()) return;
                             // resetPassed should be called if player performs any action
                             player.priority(this);
-                            if (isGameOver()) return;
+                            if (isPaused() || isGameOver()) return;
                             applyEffects();
                         }
-                        if (isGameOver()) return;
+                        if (isPaused() || isGameOver()) return;
                         if (allPassed()) {
                             if (!state.getStack().isEmpty()) {
                                //20091005 - 115.4
@@ -669,9 +698,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	public boolean checkStateAndTriggered() {
 		boolean somethingHappened = false;
 		//20091005 - 115.5
-		while (!this.isGameOver()) {
+		while (!isPaused() && !this.isGameOver()) {
 			if (!checkStateBasedActions() ) {
-				if (this.isGameOver() || !checkTriggered()) {
+				if (isPaused() || this.isGameOver() || !checkTriggered()) {
 					break;
 				}
 			}
@@ -711,28 +740,127 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 				player.lost(this);
 			}
 		}
-		for (Permanent perm: getBattlefield().getAllActivePermanents(CardType.CREATURE)) {
-			//20091005 - 704.5f
-			if (perm.getToughness().getValue() == 0) {
-				if (perm.moveToZone(Zone.GRAVEYARD, null, this, false))
-					somethingHappened = true;
+        
+        List<Permanent> planeswalkers = new ArrayList<Permanent>();
+        List<Permanent> legendary = new ArrayList<Permanent>();
+        for (Permanent perm: getBattlefield().getAllActivePermanents()) {
+            if (perm.getCardType().contains(CardType.CREATURE)) {
+                //20091005 - 704.5f
+                if (perm.getToughness().getValue() == 0) {
+                    if (perm.moveToZone(Zone.GRAVEYARD, null, this, false)) {
+                        somethingHappened = true;
+                        continue;
+                    }
+                }
+                //20091005 - 704.5g/704.5h
+                else if (perm.getToughness().getValue() <= perm.getDamage() || perm.isDeathtouched()) {
+                    if (perm.destroy(null, this, false)) {
+                        somethingHappened = true;
+                        continue;
+                    }
+                }
+            }
+            if (perm.getCardType().contains(CardType.PLANESWALKER)) {
+                //20091005 - 704.5i
+                if (perm.getCounters().getCount(CounterType.LOYALTY) == 0) {
+                    if (perm.moveToZone(Zone.GRAVEYARD, null, this, false)) {
+                        somethingHappened = true;
+                        continue;
+                    }
+                }
+                planeswalkers.add(perm);
+            }
+            if (filterAura.match(perm)) {
+                //20091005 - 704.5n, 702.14c
+                if (perm.getAttachedTo() == null) {
+                    if (perm.moveToZone(Zone.GRAVEYARD, null, this, false))
+                        somethingHappened = true;
+                }
+                else {
+                    Target target = perm.getSpellAbility().getTargets().get(0);
+                    if (target instanceof TargetPermanent) {
+                        Permanent attachedTo = getPermanent(perm.getAttachedTo());
+                        if (attachedTo == null) {
+                            if (perm.moveToZone(Zone.GRAVEYARD, null, this, false))
+                                somethingHappened = true;
+                        }
+                        else {
+                            Filter auraFilter = perm.getSpellAbility().getTargets().get(0).getFilter();
+                            if (!auraFilter.match(attachedTo) || attachedTo.hasProtectionFrom(perm)) {
+                                if (perm.moveToZone(Zone.GRAVEYARD, null, this, false))
+                                    somethingHappened = true;
+                            }
+                        }
+                    }
+                    else if (target instanceof TargetPlayer) {
+                        Player attachedTo = getPlayer(perm.getAttachedTo());
+                        if (attachedTo == null) {
+                            if (perm.moveToZone(Zone.GRAVEYARD, null, this, false))
+                                somethingHappened = true;
+                        }
+                        else {
+                            Filter auraFilter = perm.getSpellAbility().getTargets().get(0).getFilter();
+                            if (!auraFilter.match(attachedTo) || attachedTo.hasProtectionFrom(perm)) {
+                                if (perm.moveToZone(Zone.GRAVEYARD, null, this, false))
+                                    somethingHappened = true;
+                            }
+                        }
+                    }
+                }
+            }
+            if (filterLegendary.match(perm))
+                legendary.add(perm);
+            if (filterEquipment.match(perm)) {
+                //20091005 - 704.5p, 702.14d
+                if (perm.getAttachedTo() != null) {
+                    Permanent creature = getPermanent(perm.getAttachedTo());
+                    if (creature == null) {
+                        perm.attachTo(null, this);
+                    }
+                    else if (!creature.getCardType().contains(CardType.CREATURE) || creature.hasProtectionFrom(perm)) {
+                        if (creature.removeAttachment(perm.getId(), this))
+                            somethingHappened = true;
+                    }
+                }
+            }
+            if (filterFortification.match(perm)) {
+                if (perm.getAttachedTo() != null) {
+                    Permanent land = getPermanent(perm.getAttachedTo());
+                    if (land == null) {
+                        perm.attachTo(null, this);
+                    }
+                    else if (!land.getCardType().contains(CardType.LAND) || land.hasProtectionFrom(perm)) {
+                        if (land.removeAttachment(perm.getId(), this))
+                            somethingHappened = true;
+                    }
+                }
+            }
+            //20091005 - 704.5q
+   			if (perm.getAttachments().size() > 0) {
+				for (UUID attachmentId: perm.getAttachments()) {
+					Permanent attachment = getPermanent(attachmentId);
+					if (attachment != null && !(attachment.getSubtype().contains("Aura") ||
+							attachment.getSubtype().contains("Equipment") ||
+							attachment.getSubtype().contains("Fortification"))) {
+						if (perm.removeAttachment(attachment.getId(), this))
+							somethingHappened = true;
+					}
+				}
 			}
-			//20091005 - 704.5g/704.5h
-			else if (perm.getToughness().getValue() <= perm.getDamage() || perm.isDeathtouched()) {
-				if (perm.destroy(null, this, false))
-					somethingHappened = true;
+
+            //20110501 - 704.5r
+            if (perm.getCounters().containsKey(CounterType.P1P1) && perm.getCounters().containsKey(CounterType.M1M1)) {
+				int p1p1 = perm.getCounters().getCount(CounterType.P1P1);
+				int m1m1 = perm.getCounters().getCount(CounterType.M1M1);
+				int min = Math.min(p1p1, m1m1);
+				perm.getCounters().removeCounter(CounterType.P1P1, min);
+				perm.getCounters().removeCounter(CounterType.M1M1, min);
 			}
-		}
-		//20091005 - 704.5i
-		for (Permanent perm: getBattlefield().getAllActivePermanents(CardType.PLANESWALKER)) {
-			if (perm.getCounters().getCount(CounterType.LOYALTY) == 0) {
-				if (perm.moveToZone(Zone.GRAVEYARD, null, this, false))
-					return true;
-			}
-		}
+
+        }
 		//20091005 - 704.5j, 801.14
-		if (getBattlefield().contains(new FilterPlaneswalkerPermanent(), 2)) {  //don't bother checking if less than 2 planeswalkers in play
-			for (Permanent planeswalker: getBattlefield().getAllActivePermanents(CardType.PLANESWALKER)) {
+		if (planeswalkers.size() > 1) {  //don't bother checking if less than 2 planeswalkers in play
+			for (Permanent planeswalker: planeswalkers) {
 				for (String planeswalkertype: planeswalker.getSubtype()) {
 					FilterPlaneswalkerPermanent filterPlaneswalker = new FilterPlaneswalkerPermanent();
 					filterPlaneswalker.getSubtype().add(planeswalkertype);
@@ -746,48 +874,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 				}
 			}
 		}
-		//20091005 - 704.5n, 702.14c
-		for (Permanent perm: getBattlefield().getAllActivePermanents(filterAura)) {
-			if (perm.getAttachedTo() == null) {
-				if (perm.moveToZone(Zone.GRAVEYARD, null, this, false))
-					somethingHappened = true;
-			}
-			else {
-                Target target = perm.getSpellAbility().getTargets().get(0);
-                if (target instanceof TargetPermanent) {
-                    Permanent attachedTo = getPermanent(perm.getAttachedTo());
-                    if (attachedTo == null) {
-                        if (perm.moveToZone(Zone.GRAVEYARD, null, this, false))
-                            somethingHappened = true;
-                    }
-                    else {
-                        Filter auraFilter = perm.getSpellAbility().getTargets().get(0).getFilter();
-                        if (!auraFilter.match(attachedTo) || attachedTo.hasProtectionFrom(perm)) {
-                            if (perm.moveToZone(Zone.GRAVEYARD, null, this, false))
-                                somethingHappened = true;
-                        }
-                    }
-                }
-                else if (target instanceof TargetPlayer) {
-                    Player attachedTo = getPlayer(perm.getAttachedTo());
-                    if (attachedTo == null) {
-                        if (perm.moveToZone(Zone.GRAVEYARD, null, this, false))
-                            somethingHappened = true;
-                    }
-                    else {
-                        Filter auraFilter = perm.getSpellAbility().getTargets().get(0).getFilter();
-                        if (!auraFilter.match(attachedTo) || attachedTo.hasProtectionFrom(perm)) {
-                            if (perm.moveToZone(Zone.GRAVEYARD, null, this, false))
-                                somethingHappened = true;
-                        }
-                    }
-                }
-			}
-		}
-		FilterLegendaryPermanent filterLegendary = new FilterLegendaryPermanent();
 		//20091005 - 704.5k, 801.12
-		if (getBattlefield().contains(filterLegendary, 2)) {  //don't bother checking if less than 2 legends in play
-			for (Permanent legend: getBattlefield().getAllActivePermanents(filterLegendary)) {
+		if (legendary.size() > 1) {  //don't bother checking if less than 2 legends in play
+			for (Permanent legend: legendary) {
 				FilterLegendaryPermanent filterLegendName = new FilterLegendaryPermanent();
 				filterLegendName.getName().add(legend.getName());
 				if (getBattlefield().contains(filterLegendName, legend.getControllerId(), this, 2)) {
@@ -796,55 +885,6 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 					}
 					return true;
 				}
-			}
-		}
-		//20091005 - 704.5p, 702.14d
-		for (Permanent perm: getBattlefield().getAllActivePermanents(filterEquipment)) {
-			if (perm.getAttachedTo() != null) {
-				Permanent creature = getPermanent(perm.getAttachedTo());
-				if (creature == null) {
-					perm.attachTo(null, this);
-				}
-				else if (!creature.getCardType().contains(CardType.CREATURE) || creature.hasProtectionFrom(perm)) {
-					if (creature.removeAttachment(perm.getId(), this))
-						somethingHappened = true;
-				}
-			}
-		}
-		for (Permanent perm: getBattlefield().getAllActivePermanents(filterFortification)) {
-			if (perm.getAttachedTo() != null) {
-				Permanent land = getPermanent(perm.getAttachedTo());
-				if (land == null) {
-					perm.attachTo(null, this);
-				}
-				else if (!land.getCardType().contains(CardType.LAND) || land.hasProtectionFrom(perm)) {
-					if (land.removeAttachment(perm.getId(), this))
-						somethingHappened = true;
-				}
-			}
-		}
-		//20091005 - 704.5q
-		for (Permanent perm: getBattlefield().getAllActivePermanents()) {
-			if (perm.getAttachments().size() > 0) {
-				for (UUID attachmentId: perm.getAttachments()) {
-					Permanent attachment = getPermanent(attachmentId);
-					if (attachment != null && !(attachment.getSubtype().contains("Aura") ||
-							attachment.getSubtype().contains("Equipment") ||
-							attachment.getSubtype().contains("Fortification"))) {
-						if (perm.removeAttachment(attachment.getId(), this))
-							return true;
-					}
-				}
-			}
-		}
-		//20110501 - 704.5r
-		for (Permanent perm: getBattlefield().getAllActivePermanents()) {
-			if (perm.getCounters().containsKey(CounterType.P1P1) && perm.getCounters().containsKey(CounterType.M1M1)) {
-				int p1p1 = perm.getCounters().getCount(CounterType.P1P1);
-				int m1m1 = perm.getCounters().getCount(CounterType.M1M1);
-				int min = Math.min(p1p1, m1m1);
-				perm.getCounters().removeCounter(CounterType.P1P1, min);
-				perm.getCounters().removeCounter(CounterType.M1M1, min);
 			}
 		}
 

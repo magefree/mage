@@ -53,7 +53,7 @@ public class FlashbackCost extends AlternativeCostImpl<FlashbackCost> {
 
     @Override
     public boolean isAvailable(Game game, Ability source) {
-        Constants.Zone zone = game.getZone(source.getSourceId());
+        Constants.Zone zone = game.getState().getZone(source.getSourceId());
         if (zone != null) {
             return zone.equals(Constants.Zone.GRAVEYARD);
         }

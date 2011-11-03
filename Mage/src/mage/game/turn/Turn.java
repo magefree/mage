@@ -30,6 +30,7 @@ package mage.game.turn;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 import mage.Constants.PhaseStep;
@@ -100,8 +101,8 @@ public class Turn implements Serializable {
 		return null;
 	}
 
-	public void play(Game game, UUID activePlayerId) {
-		if (game.isGameOver())
+    public void play(Game game, UUID activePlayerId) {
+		if (game.isPaused() || game.isGameOver())
 			return;
 
 		if (game.getState().getTurnMods().skipTurn(activePlayerId))
@@ -113,7 +114,7 @@ public class Turn implements Serializable {
 		resetCounts();
 		game.getPlayer(activePlayerId).beginTurn(game);
 		for (Phase phase: phases) {
-			if (game.isGameOver())
+			if (game.isPaused() || game.isGameOver())
 				return;
 			currentPhase = phase;
 			if (!game.getState().getTurnMods().skipPhase(activePlayerId, currentPhase.getType())) {
@@ -131,6 +132,44 @@ public class Turn implements Serializable {
 		//20091005 - 500.7
 		playExtraTurns(game);
 	}
+
+    public void resumePlay(Game game) {
+        activePlayerId = game.getActivePlayerId();
+        UUID priorityPlayerId = game.getPriorityPlayerId();
+        TurnPhase phaseType = game.getPhase().getType();
+        PhaseStep stepType = game.getStep().getType();
+
+        Iterator<Phase> it = phases.iterator();
+        Phase phase;
+        do {
+            phase = it.next();
+            currentPhase = phase;
+        } while (phase.type != phaseType);
+        if (phase.resumePlay(game, stepType)) {
+            //20091005 - 500.4/703.4n
+            game.emptyManaPools();
+            game.saveState();
+            //20091005 - 500.8
+            playExtraPhases(game, phase.getType());
+        }
+        while (it.hasNext()) {
+            phase = it.next();
+			if (game.isPaused() || game.isGameOver())
+				return;
+			currentPhase = phase;
+			if (!game.getState().getTurnMods().skipPhase(activePlayerId, currentPhase.getType())) {
+				if (phase.play(game, activePlayerId)) {
+					//20091005 - 500.4/703.4n
+					game.emptyManaPools();
+					game.saveState();
+					//20091005 - 500.8
+					playExtraPhases(game, phase.getType());
+				}
+			}
+			if (!currentPhase.equals(phase)) // phase was changed from the card
+				break;
+        }
+    }
 
 	private void checkTurnIsControlledByOtherPlayer(Game game, UUID activePlayerId) {
 		UUID newControllerId = game.getState().getTurnMods().controlsTurn(activePlayerId);

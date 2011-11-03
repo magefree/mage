@@ -61,13 +61,9 @@ public class FilterPermanent<T extends FilterPermanent<T>> extends FilterObject<
 
 	public FilterPermanent(final FilterPermanent<T> filter) {
 		super(filter);
-		for (UUID oId: filter.ownerId) {
-			this.ownerId.add(oId);
-		}
+        this.ownerId = new ArrayList<UUID>(filter.ownerId);
 		this.notOwner = filter.notOwner;
-		for (UUID oId: filter.controllerId) {
-			this.controllerId.add(oId);
-		}
+        this.controllerId  = new ArrayList<UUID>(filter.controllerId);
 		this.notController = filter.notController;
 		this.useTapped = filter.useTapped;
 		this.tapped = filter.tapped;

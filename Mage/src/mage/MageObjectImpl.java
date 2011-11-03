@@ -82,15 +82,9 @@ public abstract class MageObjectImpl<T extends MageObjectImpl<T>> implements Mag
 		power = object.power.copy();
 		toughness = object.toughness.copy();
 		abilities = object.abilities.copy();
-		for (CardType cType: object.cardType) {
-			cardType.add(cType);
-		}
-		for (String subType: object.subtype) {
-			this.subtype.add(subType);
-		}
-		for (String superType: object.supertype) {
-			this.supertype.add(superType);
-		}
+        this.cardType.addAll(object.cardType);
+        this.subtype.addAll(object.subtype);
+        this.supertype.addAll(object.supertype);
 	}
 
 	@Override

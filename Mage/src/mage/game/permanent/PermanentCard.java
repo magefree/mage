@@ -157,7 +157,7 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
 
 	@Override
 	public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag) {
-		Zone fromZone = game.getZone(objectId);
+		Zone fromZone = game.getState().getZone(objectId);
 		Player controller = game.getPlayer(controllerId);
 		if (controller != null && controller.removeFromBattlefield(this, game)) {
 			ZoneChangeEvent event = new ZoneChangeEvent(this, sourceId, controllerId, fromZone, toZone);
@@ -187,7 +187,7 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
 					}
 					game.setZone(objectId, event.getToZone());
 					game.fireEvent(event);
-					return game.getZone(objectId) == toZone;
+					return game.getState().getZone(objectId) == toZone;
 				}
 			}
 		}
@@ -197,7 +197,7 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
 
 	@Override
 	public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game) {
-		Zone fromZone = game.getZone(objectId);
+		Zone fromZone = game.getState().getZone(objectId);
 		Player controller = game.getPlayer(controllerId);
 		if (controller != null && controller.removeFromBattlefield(this, game)) {
 			ZoneChangeEvent event = new ZoneChangeEvent(this, sourceId, ownerId, fromZone, Zone.EXILED);

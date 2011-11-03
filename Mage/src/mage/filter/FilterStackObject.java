@@ -55,9 +55,7 @@ public class FilterStackObject<T extends FilterStackObject<T>> extends FilterObj
 
 	public FilterStackObject(final FilterStackObject<T> filter) {
 		super(filter);
-		for (UUID cId: filter.controllerId) {
-			this.controllerId.add(cId);
-		}
+        this.controllerId.addAll(filter.controllerId);
 		this.notController = filter.notController;
 		this.controller = filter.controller;
 	}

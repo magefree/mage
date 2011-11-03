@@ -135,16 +135,18 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
      */
     private void updateOptionalCosts() {
         Ability abilityOrig = card.getAbilities().get(ability.getId());
-        for (Object object : ability.getOptionalCosts()) {
-            Cost cost = (Cost) object;
-            for (Cost costOrig : abilityOrig.getOptionalCosts()) {
-                if (cost.getId().equals(costOrig.getId())) {
-                    if (cost.isPaid()) {
-                        costOrig.setPaid();
-                    } else {
-                        costOrig.clearPaid();
+        if (abilityOrig != null) {
+            for (Object object : ability.getOptionalCosts()) {
+                Cost cost = (Cost) object;
+                for (Cost costOrig : abilityOrig.getOptionalCosts()) {
+                    if (cost.getId().equals(costOrig.getId())) {
+                        if (cost.isPaid()) {
+                            costOrig.setPaid();
+                        } else {
+                            costOrig.clearPaid();
+                        }
+                        break;
                     }
-                    break;
                 }
             }
         }

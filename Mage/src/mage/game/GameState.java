@@ -85,8 +85,9 @@ public class GameState implements Serializable, Copyable<GameState> {
 	private Revealed revealed;
 	private Map<UUID, LookedAt> lookedAt = new HashMap<UUID, LookedAt>();
 	private Battlefield battlefield;
-	private int turnNum;
+	private int turnNum = 1;
 	private boolean gameOver;
+    private boolean paused;
 //	private List<String> messages = new ArrayList<String>();
 	private ContinuousEffects effects;
 	private TriggeredAbilities triggers;
@@ -128,9 +129,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 		this.command = state.command.copy();
 		this.exile = state.exile.copy();
 		this.revealed = state.revealed.copy();
-		for (Map.Entry<UUID, LookedAt> entry: state.lookedAt.entrySet()) {
-			lookedAt.put(entry.getKey(), entry.getValue());
-		}
+        this.lookedAt.putAll(state.lookedAt);
 		this.battlefield = state.battlefield.copy();
 		this.turnNum = state.turnNum;
 		this.gameOver = state.gameOver;
@@ -141,13 +140,8 @@ public class GameState implements Serializable, Copyable<GameState> {
 		this.combat = state.combat.copy();
 		this.turnMods = state.turnMods.copy();
 		this.watchers = state.watchers.copy();
-		for (Map.Entry<String, Object> entry : state.values.entrySet()) {
-			values.put(entry.getKey(), entry.getValue());
-			//TODO: might have to change value to Copyable
-		}
-		for (Map.Entry<UUID, Zone> entry: state.zones.entrySet()) {
-			zones.put(entry.getKey(), entry.getValue());
-		}
+        this.values.putAll(state.values);
+        this.zones.putAll(state.zones);
 		for (Map.Entry<UUID, Abilities<ActivatedAbility>> entry: state.otherAbilities.entrySet()) {
 			otherAbilities.put(entry.getKey(), entry.getValue().copy());
 		}
@@ -455,6 +449,18 @@ public class GameState implements Serializable, Copyable<GameState> {
         watchers.clear();
         values.clear();
         zones.clear();
+    }
+
+    public void pause() {
+        this.paused = true;
+    }
+    
+    public void resume() {
+        this.paused = false;
+    }
+    
+    public boolean isPaused() {
+        return this.paused;
     }
 
 }
