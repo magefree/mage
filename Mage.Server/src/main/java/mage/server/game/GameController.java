@@ -85,7 +85,7 @@ public class GameController implements GameCallback {
 	private UUID tableId;
 	private UUID choosingPlayerId;
 	private Future<?> gameFuture;
-
+    private boolean useTimeout = true;
 
 	public GameController(Game game, ConcurrentHashMap<UUID, UUID> userPlayerMap, UUID tableId, UUID choosingPlayerId) {
 		gameSessionId = UUID.randomUUID();
@@ -94,6 +94,12 @@ public class GameController implements GameCallback {
 		this.game = game;
 		this.tableId = tableId;
 		this.choosingPlayerId = choosingPlayerId;
+        for (Player player: game.getPlayers().values()) {
+            if (!player.isHuman()) {
+                useTimeout = false;
+                break;
+            }
+        }
 		init();
 	}
 
@@ -185,7 +191,7 @@ public class GameController implements GameCallback {
 
 	public void join(UUID userId) {
 		UUID playerId = userPlayerMap.get(userId);
-		GameSession gameSession = new GameSession(game, userId, playerId);
+		GameSession gameSession = new GameSession(game, userId, playerId, useTimeout);
 		gameSessions.put(playerId, gameSession);
 		User user = UserManager.getInstance().getUser(userId);
 		gameSession.setUserData(user.getUserData());

@@ -57,15 +57,17 @@ import mage.view.SimpleCardsView;
 public class GameSession extends GameWatcher {
 
 	private UUID playerId;
+    private boolean useTimeout;
 
 	private ScheduledFuture<?> futureTimeout;
 	protected static ScheduledExecutorService timeoutExecutor = ThreadExecutor.getInstance().getTimeoutExecutor();
 
 	private UserData userData;
 
-	public GameSession(Game game, UUID userId, UUID playerId) {
+	public GameSession(Game game, UUID userId, UUID playerId, boolean useTimeout) {
 		super(userId, game);
 		this.playerId = playerId;
+        this.useTimeout = useTimeout;
 	}
 
 	public void ask(final String question)  {
@@ -158,6 +160,8 @@ public class GameSession extends GameWatcher {
 	}
 
 	private synchronized void setupTimeout() {
+        if (!useTimeout)
+            return;
 		cancelTimeout();
 		futureTimeout = timeoutExecutor.schedule(
 			new Runnable() {
