@@ -22,6 +22,7 @@
 		<module>Mage.Player.AI</module>
 		<module>Mage.Player.AIMinimax</module>
 		<module>Mage.Player.AI.MA</module>
+		<module>Mage.Player.AIMCTS</module>
 		<module>Mage.Player.Human</module>
 		<module>Mage.Tournament.BoosterDraft</module>
 		<module>Mage.Tournament.Sealed</module>
