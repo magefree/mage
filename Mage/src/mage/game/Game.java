@@ -157,7 +157,7 @@ public interface Game extends MageItem, Serializable {
 	public void addDelayedTriggeredAbility(DelayedTriggeredAbility delayedAbility);
 	public void applyEffects();
 	public boolean checkStateAndTriggered();
-	public void playPriority(UUID activePlayerId);
+	public void playPriority(UUID activePlayerId, boolean resuming);
 	public boolean endTurn(UUID playerId);
 
 	//game transaction methods

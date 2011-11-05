@@ -173,7 +173,7 @@ public abstract class Phase<T extends Phase<T>> implements Serializable {
 		if (!currentStep.skipStep(game, activePlayerId)) {
 			prePriority(game, activePlayerId);
             if (!game.isPaused() && !game.isGameOver())
-                currentStep.priority(game, activePlayerId);
+                currentStep.priority(game, activePlayerId, false);
             if (!game.isPaused() && !game.isGameOver())
                 postPriority(game, activePlayerId);
 		}
@@ -185,7 +185,7 @@ public abstract class Phase<T extends Phase<T>> implements Serializable {
     			prePriority(game, activePlayerId);
             case PRIORITY:
                 if (!game.isPaused() && !game.isGameOver())
-                    currentStep.priority(game, activePlayerId);
+                    currentStep.priority(game, activePlayerId, true);
             case POST:
                 if (!game.isPaused() && !game.isGameOver())
                     postPriority(game, activePlayerId);

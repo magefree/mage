@@ -361,8 +361,8 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		Player player = getPlayer(players.get());
         state.resume();
 		if (!isGameOver()) {
-            if (simulation)
-                logger.info("Turn " + Integer.toString(state.getTurnNum()));
+//            if (simulation)
+//                logger.info("Turn " + Integer.toString(state.getTurnNum()));
 			fireInformEvent("Turn " + Integer.toString(state.getTurnNum()));
 			if (checkStopOnTurnOption()) return;
 			state.getTurn().resumePlay(this);
@@ -573,12 +573,17 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	}
 
 	@Override
-	public void playPriority(UUID activePlayerId) {
+	public void playPriority(UUID activePlayerId, boolean resuming) {
         int bookmark = 0;
 		try {
 			while (!isPaused() && !isGameOver()) {
-				state.getPlayers().resetPassed();
-				state.getPlayerList().setCurrent(activePlayerId);
+                if (!resuming) {
+                    state.getPlayers().resetPassed();
+                    state.getPlayerList().setCurrent(activePlayerId);
+                }
+                else {
+                    state.getPlayerList().setCurrent(this.getPriorityPlayerId());
+                }
 				Player player;
 				while (!isPaused() && !isGameOver()) {
                     try {
@@ -587,11 +592,14 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                         player = getPlayer(state.getPlayerList().get());
                         state.setPriorityPlayerId(player.getId());
                         while (!player.isPassed() && !player.hasLost() && !player.hasLeft() && !isPaused() && !isGameOver()) {
-                            checkStateAndTriggered();
-                            if (isPaused() || isGameOver()) return;
-                            // resetPassed should be called if player performs any action
-                            player.priority(this);
-                            if (isPaused() || isGameOver()) return;
+                            if (!resuming) {
+                                checkStateAndTriggered();
+                                if (isPaused() || isGameOver()) return;
+                                // resetPassed should be called if player performs any action
+                                player.priority(this);
+                                if (isPaused()) return;
+                            }
+                            resuming = false;
                             applyEffects();
                         }
                         if (isPaused() || isGameOver()) return;
