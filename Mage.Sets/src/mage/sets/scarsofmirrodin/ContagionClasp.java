@@ -54,7 +54,9 @@ public class ContagionClasp extends CardImpl<ContagionClasp> {
         super(ownerId, 144, "Contagion Clasp", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "SOM";
         Ability ability = new EntersBattlefieldTriggeredAbility(new AddCountersTargetEffect(CounterType.M1M1.createInstance()), false);
-        ability.addTarget(new TargetCreaturePermanent());
+        TargetCreaturePermanent target = new TargetCreaturePermanent();
+        target.setRequired(true);
+        ability.addTarget(target);
         this.addAbility(ability);
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ProliferateEffect(), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
