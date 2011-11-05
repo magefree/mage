@@ -25,77 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.championsofkamigawa;
+package mage.sets.worldwake;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.ReturnToHandSpellEffect;
+import mage.abilities.condition.common.LandfallCondition;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.common.GainLifeTargetEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.TargetPlayer;
+import mage.watchers.common.LandfallWatcher;
 
 /**
  *
  * @author Loki
  */
-public class HanabiBlast extends CardImpl<HanabiBlast> {
+public class RestForTheWeary extends CardImpl<RestForTheWeary> {
 
-    public HanabiBlast (UUID ownerId) {
-        super(ownerId, 170, "Hanabi Blast", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}{R}");
-        this.expansionSetCode = "CHK";
-		this.color.setRed(true);
-        this.getSpellAbility().addEffect(new DamageTargetEffect(2));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
-        this.getSpellAbility().addEffect(ReturnToHandSpellEffect.getInstance());
-        this.getSpellAbility().addEffect(new HanabiBlastDiscardEffect());
+    public RestForTheWeary(UUID ownerId) {
+        super(ownerId, 18, "Rest for the Weary", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
+        this.expansionSetCode = "WWK";
+
+        this.color.setWhite(true);
+
+        // Target player gains 4 life.
+        // Landfall - If you had a land enter the battlefield under your control this turn, that player gains 8 life instead.
+        this.addWatcher(new LandfallWatcher());
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new GainLifeTargetEffect(8), new GainLifeTargetEffect(4), LandfallCondition.getInstance(), "Target player gains 4 life. Landfall - If you had a land enter the battlefield under your control this turn, that player gains 8 life instead"));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public HanabiBlast (final HanabiBlast card) {
+    public RestForTheWeary(final RestForTheWeary card) {
         super(card);
     }
 
     @Override
-    public HanabiBlast copy() {
-        return new HanabiBlast(this);
+    public RestForTheWeary copy() {
+        return new RestForTheWeary(this);
     }
-
 }
-
-class HanabiBlastDiscardEffect extends OneShotEffect<HanabiBlastDiscardEffect> {
-
-	private static final String effectText = "discard a card at random";
-
-	HanabiBlastDiscardEffect () {
-		super(Constants.Outcome.Discard);
-		staticText = effectText;
-	}
-
-	HanabiBlastDiscardEffect(HanabiBlastDiscardEffect effect) {
-		super(effect);
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            player.discard(player.getHand().getRandom(game), source, game);
-            return true;
-        }
-		return false;
-	}
-
-	@Override
-	public HanabiBlastDiscardEffect copy() {
-		return new HanabiBlastDiscardEffect(this);
-	}
-
-}
-

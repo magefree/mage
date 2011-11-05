@@ -34,17 +34,12 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.WatcherScope;
-import mage.Constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.players.Player;
@@ -52,7 +47,7 @@ import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.Watcher;
-import mage.watchers.WatcherImpl;
+import mage.watchers.common.LandfallWatcher;
 
 /**
  *
@@ -81,35 +76,6 @@ public class SearingBlaze extends CardImpl<SearingBlaze> {
 	@Override
 	public SearingBlaze copy() {
 		return new SearingBlaze(this);
-	}
-
-}
-
-class LandfallWatcher extends WatcherImpl<LandfallWatcher> {
-
-	public LandfallWatcher() {
-		super("LandPlayed", WatcherScope.PLAYER);
-	}
-
-	public LandfallWatcher(final LandfallWatcher watcher) {
-		super(watcher);
-	}
-
-	@Override
-	public LandfallWatcher copy() {
-		return new LandfallWatcher(this);
-	}
-
-	@Override
-	public void watch(GameEvent event, Game game) {
-        if (condition == true) //no need to check - condition has already occured
-            return;
-		if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone() == Zone.BATTLEFIELD) {
-			Permanent permanent = game.getPermanent(event.getTargetId());
-			if (permanent.getCardType().contains(CardType.LAND) && permanent.getControllerId().equals(this.controllerId)) {
-				condition = true;
-			}
-		}
 	}
 
 }

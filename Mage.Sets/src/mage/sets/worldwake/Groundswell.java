@@ -36,19 +36,14 @@ import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.SubLayer;
-import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.Watcher;
-import mage.watchers.WatcherImpl;
+import mage.watchers.common.LandfallWatcher;
 
 /**
  *
