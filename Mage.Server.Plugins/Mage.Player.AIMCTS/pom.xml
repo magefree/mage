@@ -23,12 +23,12 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Mage</artifactId>
+            <artifactId>mage</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Mage-Player-AI</artifactId>
+            <artifactId>mage-player-ai</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

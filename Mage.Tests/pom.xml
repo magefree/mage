@@ -16,22 +16,22 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Mage</artifactId>
+            <artifactId>mage</artifactId>
             <version>${mage-version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Mage-Common</artifactId>
+            <artifactId>mage-common</artifactId>
             <version>${mage-version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Mage-Sets</artifactId>
+            <artifactId>mage-sets</artifactId>
             <version>${mage-version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Mage-Server</artifactId>
+            <artifactId>mage-server</artifactId>
             <version>${mage-version}</version>
         </dependency>
         <dependency>
@@ -41,13 +41,13 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Mage-Game-TwoPlayerDuel</artifactId>
+            <artifactId>mage-game-twoplayerduel</artifactId>
             <version>${project.version}</version>
             <scope>compile</scope>
         </dependency>
 		<dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Mage-Player-AI</artifactId>
+            <artifactId>mage-player-ai</artifactId>
             <version>${project.version}</version>
             <scope>compile</scope>
         </dependency>
