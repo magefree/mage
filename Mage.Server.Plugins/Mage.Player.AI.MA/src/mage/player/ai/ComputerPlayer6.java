@@ -233,7 +233,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 				root = root.children.get(0);
 			}
 			logger.info("simlating -- game value:" + game.getState().getValue() + " test value:" + test.gameValue);
-			if (root.playerId.equals(playerId) && root.abilities != null && game.getState().getValue() == test.gameValue) {
+			if (root.playerId.equals(playerId) && root.abilities != null && game.getState().getValue().hashCode() == test.gameValue) {
 
 				/*
 				// Try to fix horizon effect
@@ -442,7 +442,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 			logger.info("interrupted");
 			return GameStateEvaluator2.evaluate(playerId, game);
 		}
-		node.setGameValue(game.getState().getValue());
+		node.setGameValue(game.getState().getValue().hashCode());
 		SimulatedPlayer2 currentPlayer = (SimulatedPlayer2) game.getPlayer(game.getPlayerList().get());
 		//logger.info("simulating -- player " + currentPlayer.getName());
 		SimulationNode2 bestNode = null;

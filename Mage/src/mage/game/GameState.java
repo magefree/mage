@@ -157,13 +157,13 @@ public class GameState implements Serializable, Copyable<GameState> {
 		playerList.add(player.getId());
 	}
 
-	public int getValue() {
+	public String getValue() {
 		StringBuilder sb = new StringBuilder(1024);
 
 		sb.append(turnNum).append(turn.getPhaseType()).append(turn.getStepType()).append(activePlayerId).append(priorityPlayerId);
 
 		for (Player player: players.values()) {
-			sb.append("player").append(player.getLife()).append(player.getHand()).append(player.getLibrary().getCardList());
+			sb.append("player").append(player.getLife()).append("hand").append(player.getHand()).append("library").append(player.getLibrary().size()).append("graveyard").append(player.getGraveyard());
 		}
 
 		for (UUID permanentId: battlefield.getAllPermanentIds()) {
@@ -173,8 +173,12 @@ public class GameState implements Serializable, Copyable<GameState> {
 		for (StackObject spell: stack) {
 			sb.append("spell").append(spell.getId());
 		}
+        
+        for (ExileZone zone: exile.getExileZones()) {
+            sb.append("exile").append(zone.getName()).append(zone);
+        }
 
-		return sb.toString().hashCode();
+		return sb.toString();
 	}
 
 	public Players getPlayers() {

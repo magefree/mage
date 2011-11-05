@@ -211,7 +211,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 				root = root.children.get(0);
 			}
 			logger.debug("simlating -- game value:" + game.getState().getValue() + " test value:" + test.gameValue);
-			if (root.playerId.equals(playerId) && root.abilities != null && game.getState().getValue() == test.gameValue) {
+			if (root.playerId.equals(playerId) && root.abilities != null && game.getState().getValue().hashCode() == test.gameValue) {
 				logger.debug("simulating -- continuing previous action chain");
 				actions = new LinkedList<Ability>(root.abilities);
 				combat = root.combat;
@@ -412,7 +412,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 			logger.debug(indent(node.depth) + "interrupted");
 			return GameStateEvaluator.evaluate(playerId, game);
 		}
-		node.setGameValue(game.getState().getValue());
+		node.setGameValue(game.getState().getValue().hashCode());
 		SimulatedPlayer currentPlayer = (SimulatedPlayer) game.getPlayer(game.getPlayerList().get());
 		boolean isSimulatedPlayer = currentPlayer.getId().equals(playerId);
 		logger.debug(indent(node.depth) + "simulating priority -- player " + currentPlayer.getName());
