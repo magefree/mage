@@ -107,6 +107,8 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
 
 	@Override
 	public Card getRandom(Game game) {
+        if (this.size() == 0)
+            return null;
 		UUID[] cards = this.toArray(new UUID[0]);
 		return game.getCard(cards[rnd.nextInt(cards.length)]);
 	}
