@@ -33,6 +33,7 @@ import java.net.ConnectException;
 import java.net.MalformedURLException;
 import java.net.PasswordAuthentication;
 import java.net.SocketException;
+import java.net.SocketTimeoutException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -187,20 +188,7 @@ public class Session {
             // TODO: download client that matches server version
         } catch (CannotConnectException ex) {
             if (!canceled) {
-                Throwable t = ex.getCause();
-                String message = "";
-                while (t != null) {
-                    if (t instanceof ConnectException) {
-                        message = "Server is likely offline.";
-                        break;
-                    }
-                    if (t instanceof SocketException) {
-                        message = "Check your internet connection.";
-                        break;
-                    }
-                    t = t.getCause();
-                }
-				client.showMessage("Unable to connect to server. " + message);
+                handleCannotConnectException(ex);
 			}
 		} catch (Throwable t) {
 			logger.fatal("Unable to connect to server - ", t);
@@ -212,6 +200,28 @@ public class Session {
 		return false;
 	}
 	
+    private void handleCannotConnectException(CannotConnectException ex) {
+        logger.warn("Cannot connect", ex);
+        Throwable t = ex.getCause();
+        String message = "";
+        while (t != null) {
+            if (t instanceof ConnectException) {
+                message = "Server is likely offline.";
+                break;
+            }
+            if (t instanceof SocketException) {
+                message = "Check your internet connection.";
+                break;
+            }
+            if (t instanceof SocketTimeoutException) {
+                message = "Server is not responding.";
+                break;
+            }
+            t = t.getCause();
+        }
+        client.showMessage("Unable to connect to server. " + message);
+    }
+    
 	public synchronized void disconnect(boolean showMessage) {
 		if (isConnected())
 			sessionState = SessionState.DISCONNECTING;
