@@ -42,7 +42,7 @@ public class SystemUtil {
 				return;
 			}
 
-			//logger.info("Parsing init.txt for player : " + player.getName());
+			logger.info("Parsing init.txt... ");
 
 			Scanner scanner = new Scanner(f);
 			try {

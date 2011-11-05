@@ -247,6 +247,8 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                         break;
                     case STACK:
                         break;
+                    case OUTSIDE:
+                        break;
                     default:
                         logger.fatal("invalid zone for card - " + fromZone);
                         return false;
