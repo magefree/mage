@@ -37,6 +37,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.CantBlockSourceEffect;
 import mage.abilities.effects.common.continious.CantBeBlockedByOneEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -48,6 +49,7 @@ import mage.game.permanent.Permanent;
 /**
  *
  * @author Alvin
+ * @author ayratn
  */
 public class StromkirkNoble extends CardImpl<StromkirkNoble> {
 
@@ -77,7 +79,7 @@ public class StromkirkNoble extends CardImpl<StromkirkNoble> {
     }
 }
 
-class StromkirkEffect extends CantBlockSourceEffect {
+class StromkirkEffect extends RestrictionEffect<StromkirkEffect> {
 
 	public StromkirkEffect() {
 		super(Duration.WhileOnBattlefield);
@@ -85,6 +87,14 @@ class StromkirkEffect extends CantBlockSourceEffect {
 
 	public StromkirkEffect(final StromkirkEffect effect) {
 		super(effect);
+	}
+
+    @Override
+	public boolean applies(Permanent permanent, Ability source, Game game) {
+		if (permanent.getId().equals(source.getSourceId())) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override
