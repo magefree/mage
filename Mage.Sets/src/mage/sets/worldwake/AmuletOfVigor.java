@@ -84,7 +84,7 @@ class AmuletOfVigorTriggeredAbility extends TriggeredAbilityImpl<AmuletOfVigorTr
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.getToZone() == Constants.Zone.BATTLEFIELD) {
                 Permanent p = game.getPermanent(event.getTargetId());
-                if (p != null && p.isTapped()) {
+                if (p != null && p.isTapped() && p.getControllerId().equals(this.controllerId)) {
                     for (Effect effect : this.getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                     }

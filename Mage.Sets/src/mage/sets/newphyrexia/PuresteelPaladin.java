@@ -109,7 +109,8 @@ class PuresteelPaladinTriggeredAbility extends TriggeredAbilityImpl<PuresteelPal
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.getToZone() == Constants.Zone.BATTLEFIELD) {
                 Permanent permanent = game.getPermanent(event.getTargetId());
-                if (permanent != null && permanent.getSubtype().contains("Equipment")) {
+                if (permanent != null && permanent.getSubtype().contains("Equipment")
+                        && permanent.getControllerId().equals(this.controllerId)) {
                     return true;
                 }
             }
