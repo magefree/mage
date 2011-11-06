@@ -1169,7 +1169,11 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		/*if (!lki.containsKey(objectId)) {
 			return getCard(objectId);
 		}*/
-		return lki.get(objectId);
+        Card card = lki.get(objectId);
+        if (card != null) {
+            return card.copy();
+        }
+        return null;
 	}
 
 	/**
