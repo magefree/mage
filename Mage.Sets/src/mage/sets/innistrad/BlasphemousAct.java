@@ -46,65 +46,63 @@ import java.util.UUID;
  */
 public class BlasphemousAct extends CardImpl<BlasphemousAct> {
 
-	public BlasphemousAct(UUID ownerId) {
-		super(ownerId, 130, "Blasphemous Act", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{8}{R}");
-		this.expansionSetCode = "ISD";
+    public BlasphemousAct(UUID ownerId) {
+        super(ownerId, 130, "Blasphemous Act", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{8}{R}");
+        this.expansionSetCode = "ISD";
 
-		this.color.setRed(true);
+        this.color.setRed(true);
 
-		// Blasphemous Act costs {1} less to cast for each creature on the battlefield.
-		// Blasphemous Act deals 13 damage to each creature.
-		// need to override DamageAllEffect because of rules string
-		this.getSpellAbility().addEffect(new BlasphemousActEffect());
-	}
+        // Blasphemous Act costs {1} less to cast for each creature on the battlefield.
+        // Blasphemous Act deals 13 damage to each creature.
+        // need to override DamageAllEffect because of rules string
+        this.getSpellAbility().addEffect(new BlasphemousActEffect());
+    }
 
-	@Override
-	public void adjustCosts(Ability ability, Game game) {
-		if (MetalcraftCondition.getInstance().apply(game, ability)) {
-			int creatureCount = game.getState().getBattlefield().getAllActivePermanents(new FilterCreaturePermanent()).size();
-			int cost = 8 - creatureCount;
-			String adjustedCost = "{R}";
-			if (cost > 0) {
-				adjustedCost = "{" + String.valueOf(cost) + "}" + adjustedCost;
-			}
-			ability.getManaCostsToPay().clear();
-			ability.getManaCostsToPay().load(adjustedCost);
-		}
-	}
+    @Override
+    public void adjustCosts(Ability ability, Game game) {
+        int creatureCount = game.getState().getBattlefield().getAllActivePermanents(new FilterCreaturePermanent()).size();
+        int cost = 8 - creatureCount;
+        String adjustedCost = "{R}";
+        if (cost > 0) {
+            adjustedCost = "{" + String.valueOf(cost) + "}" + adjustedCost;
+        }
+        ability.getManaCostsToPay().clear();
+        ability.getManaCostsToPay().load(adjustedCost);
+    }
 
-	public BlasphemousAct(final BlasphemousAct card) {
-		super(card);
-	}
+    public BlasphemousAct(final BlasphemousAct card) {
+        super(card);
+    }
 
-	@Override
-	public BlasphemousAct copy() {
-		return new BlasphemousAct(this);
-	}
+    @Override
+    public BlasphemousAct copy() {
+        return new BlasphemousAct(this);
+    }
 }
 
 class BlasphemousActEffect extends OneShotEffect<BlasphemousActEffect> {
 
-	public BlasphemousActEffect() {
-		super(Constants.Outcome.Damage);
-		staticText = "{this} costs {1} less to cast for each creature on the battlefield.\n {this} deals 13 damage to each creature";
-	}
+    public BlasphemousActEffect() {
+        super(Constants.Outcome.Damage);
+        staticText = "{this} costs {1} less to cast for each creature on the battlefield.\n {this} deals 13 damage to each creature";
+    }
 
-	public BlasphemousActEffect(final BlasphemousActEffect effect) {
-		super(effect);
-	}
+    public BlasphemousActEffect(final BlasphemousActEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		List<Permanent> permanents = game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game);
-		for (Permanent permanent : permanents) {
-			permanent.damage(13, source.getId(), game, true, false);
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        List<Permanent> permanents = game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game);
+        for (Permanent permanent : permanents) {
+            permanent.damage(13, source.getId(), game, true, false);
+        }
+        return true;
+    }
 
-	@Override
-	public BlasphemousActEffect copy() {
-		return new BlasphemousActEffect(this);
-	}
+    @Override
+    public BlasphemousActEffect copy() {
+        return new BlasphemousActEffect(this);
+    }
 
 }
