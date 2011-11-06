@@ -73,9 +73,9 @@ public class SacrificeEffect extends OneShotEffect<SacrificeEffect>{
 	@Override
 	public boolean apply(Game game, Ability source) {
 		Player player = game.getPlayer(targetPointer.getFirst(source));
-		filter.setTargetController(TargetController.YOU);
+		//filter.setTargetController(TargetController.YOU);
 		int amount = count.calculate(game, source);
-		amount = Math.min(amount, game.getBattlefield().countAll(filter, source.getControllerId()));
+		amount = Math.min(amount, game.getBattlefield().countAll(filter, player.getId()));
 		Target target = new TargetControlledPermanent(amount, amount, filter, false);
 
 		//A spell or ability could have removed the only legal target this player
