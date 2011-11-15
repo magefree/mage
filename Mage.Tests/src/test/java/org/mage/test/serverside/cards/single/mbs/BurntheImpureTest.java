@@ -2,6 +2,7 @@ package org.mage.test.serverside.cards.single.mbs;
 
 import mage.Constants;
 import mage.filter.Filter;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestAPI;
 import org.mage.test.serverside.base.CardTestBase;
@@ -24,6 +25,7 @@ public class BurntheImpureTest extends CardTestBase {
 	 * @throws Exception
 	 */
 	@Test
+    @Ignore
 	public void testVersusInfectCreature() throws Exception {
 		// $include red.default
 		useRedDefault();

@@ -56,6 +56,8 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
 	private static FilterAbility filterLand = new FilterAbility();
 	private static FilterAbility filterNotLand = new FilterAbility();
 
+    private boolean allowBadMoves;
+
 	static {
 		filterLand.getTypes().add(AbilityType.PLAY_LAND);
 		filterLand.setZone(Zone.HAND);
@@ -155,7 +157,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
 			if (root.children.size() > 0) {
 				root = root.children.get(0);
 				int bestScore = root.getScore();
-				if (bestScore > currentScore) {
+				if (bestScore > currentScore || allowBadMoves) {
 					actions = new LinkedList<Ability>(root.abilities);
 					combat = root.combat;
 				}
@@ -175,7 +177,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
 			if (root.children.size() > 0) {
 				root = root.children.get(0);
 				int bestScore = root.getScore();
-				if (bestScore > currentScore) {
+				if (bestScore > currentScore || allowBadMoves) {
 					actions = new LinkedList<Ability>(root.abilities);
 					combat = root.combat;
 				}
@@ -222,8 +224,8 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
 				if (game.getActivePlayerId().equals(playerId)) {
 					if (testScore < currentScore) {
 						// if score at end of step is worse than original score don't check further
-						logger.debug("simulating -- abandoning check, no immediate benefit");
-						val = testScore;
+						//logger.debug("simulating -- abandoning check, no immediate benefit");
+					    val = testScore;
 					}
 					else {
 						switch (game.getTurn().getStepType()) {
@@ -541,4 +543,8 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
 		}
 	}
 
+    @Override
+    public void setAllowBadMoves(boolean allowBadMoves) {
+        this.allowBadMoves = allowBadMoves;
+    }
 }

@@ -1351,4 +1351,8 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         // do nothing
     }
 
+    public void setAllowBadMoves(boolean allowBadMoves) {
+        // do nothing
+    }
+
 }

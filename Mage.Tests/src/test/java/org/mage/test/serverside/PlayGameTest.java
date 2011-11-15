@@ -11,6 +11,7 @@ import mage.game.TwoPlayerDuel;
 import mage.player.ai.ComputerPlayer;
 import mage.players.Player;
 import mage.sets.Sets;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.MageTestBase;
 
@@ -27,7 +28,8 @@ public class PlayGameTest extends MageTestBase {
 
 	private static List<String> colorChoices = Arrays.asList("bu", "bg", "br", "bw", "ug", "ur", "uw", "gr", "gw", "rw", "bur", "buw", "bug", "brg", "brw", "bgw", "wur", "wug", "wrg", "rgu");
 
-	@Test
+	@Ignore
+    @Test
 	public void playOneGame() throws GameException, FileNotFoundException, IllegalArgumentException {
 		Game game = new TwoPlayerDuel(Constants.MultiplayerAttackOption.LEFT, Constants.RangeOfInfluence.ALL);
 

@@ -52,10 +52,8 @@ import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 import mage.game.turn.*;
 import mage.players.Player;
-import mage.sets.alarareborn.OfferingToAsha;
 import mage.target.Target;
 import mage.target.TargetCard;
-import sun.rmi.transport.ObjectTable;
 
 import java.io.File;
 import java.util.*;
@@ -86,7 +84,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 	public ComputerPlayer6(String name, RangeOfInfluence range, int skill) {
 		super(name, range);
 		maxDepth = skill * 2;
-		maxThink = skill * 3;
+		maxThink = skill * 300;
 		maxNodes = Config2.maxNodes;
         getSuggestedActions();
 	}
@@ -196,14 +194,21 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 			while (actions.peek() != null) {
 				Ability ability = actions.poll();
 				System.out.println("[" + game.getPlayer(playerId).getName() + "] Action: " + ability.toString());
+                if (ability.getTargets().size() > 0) {
+                    Player player = game.getPlayer(ability.getFirstTarget());
+                    if (player != null) {
+                        System.out.println("targets = " + player.getName());
+                    }
+                }
 				this.activateAbility((ActivatedAbility) ability, game);
 				if (ability.isUsesStack())
 					usedStack = true;
-                if (!suggested.isEmpty()) {
+                if (!suggested.isEmpty() && !(ability instanceof PassAbility)) {
                     Iterator<String> it = suggested.iterator();
                     while (it.hasNext()) {
                         Card card = game.getCard(ability.getSourceId());
                         String action = it.next();
+                        System.out.println("action="+action+";card="+card);
                         if (action.equals(card.getName())) {
                             System.out.println("removed from suggested="+action);
                             it.remove();
@@ -484,6 +489,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 				logger.debug("simulating -- node #:" + SimulationNode2.getCount() + " actions:" + action);
 				sim.checkStateAndTriggered();
 				int val = addActions(newNode, depth-1, alpha, beta);
+                logger.debug("val = " + val);
 				if (!currentPlayer.getId().equals(playerId)) {
 					if (val < beta) {
 						beta = val;
@@ -523,7 +529,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 					}
 				}
 				if (alpha >= beta) {
-					//logger.info("simulating -- pruning");
+					logger.info("simulating -- pruning");
 					break;
 				}
 				if (SimulationNode2.nodeCount > maxNodes) {
@@ -538,11 +544,21 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 			node.setScore(bestNode.getScore());
 		}
 		if (!currentPlayer.getId().equals(playerId)) {
-			//logger.info("returning priority beta: " + beta);
+            /*if (beta == Integer.MAX_VALUE) {
+                int val = GameStateEvaluator2.evaluate(playerId, game);
+                logger.info("returning priority beta: " + val);
+                return val;
+            }*/
+            logger.info("returning priority beta: " + beta);
 			return beta;
 		}
 		else {
-			//logger.info("returning priority alpha: " + alpha);
+            /*if (alpha == Integer.MIN_VALUE) {
+                int val = GameStateEvaluator2.evaluate(playerId, game);
+                logger.info("returning priority beta: " + val);
+                return val;
+            }*/
+            logger.info("returning priority alpha: " + alpha);
 			return alpha;
 		}
 	}

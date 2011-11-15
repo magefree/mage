@@ -164,6 +164,7 @@ public interface Player extends MageItem, Copyable<Player> {
 	public boolean isTestMode();
 	public void setTestMode(boolean value);
     public void addAction(String action);
+    public void setAllowBadMoves(boolean allowBadMoves);
 	
 	public void init(Game game);
 	public void init(Game game, boolean testMode);

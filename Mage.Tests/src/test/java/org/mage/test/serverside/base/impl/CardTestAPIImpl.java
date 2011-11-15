@@ -363,8 +363,8 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
         player.addAction("cast:"+cardName);
     }
 
-    public void castSpell(Player player, String cardName, String target) {
-        player.addAction("cast:"+cardName + ";" + target);
+    public void addFixedTarget(Player player, String cardName, Player target) {
+        player.addAction("cast:"+cardName + ";name=" + target.getName());
     }
 
     public void useAbility(Player player, String cardName) {

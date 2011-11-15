@@ -1,6 +1,7 @@
 package org.mage.test.serverside.cards.effects;
 
 import mage.filter.Filter;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestBase;
 
@@ -12,6 +13,7 @@ import org.mage.test.serverside.base.CardTestBase;
 public class BoostContinuousEffectTest extends CardTestBase {
 
 	@Test
+    @Ignore
 	public void testHonorOfThePoor() throws Exception {
 		load("M11/Honor of the Pure.test");
 		execute();

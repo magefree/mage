@@ -66,8 +66,8 @@ public abstract class CardTestBase extends CardTestAPIImpl {
 		Game game = new TwoPlayerDuel(Constants.MultiplayerAttackOption.LEFT, Constants.RangeOfInfluence.ALL);
 
 		playerA = aiTypeA.equals(CardTestBase.AIType.MinimaxHybrid) ?
-				createPlayer("ComputerA", "Computer - minimax hybrid") :
-				createPlayer("ComputerA", "Computer - mad");
+				createPlayer("PlayerA", "Computer - minimax hybrid") :
+				createPlayer("PlayerA", "Computer - mad");
 		playerA.setTestMode(true);
         logger.info("Loading deck...");
 		Deck deck = Deck.load(Sets.loadDeck("RB Aggro.dck"));
@@ -79,8 +79,8 @@ public abstract class CardTestBase extends CardTestAPIImpl {
 		game.loadCards(deck.getCards(), playerA.getId());
 
 		playerB = aiTypeB.equals(CardTestBase.AIType.MinimaxHybrid) ?
-				createPlayer("ComputerB", "Computer - minimax hybrid") :
-				createPlayer("ComputerB", "Computer - mad");
+				createPlayer("PlayerB", "Computer - minimax hybrid") :
+				createPlayer("PlayerB", "Computer - mad");
 		playerB.setTestMode(true);
 		Deck deck2 = Deck.load(Sets.loadDeck("RB Aggro.dck"));
 		if (deck2.getCards().size() < 40) {
