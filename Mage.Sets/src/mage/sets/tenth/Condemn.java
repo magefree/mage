@@ -29,6 +29,8 @@
 package mage.sets.tenth;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
@@ -86,7 +88,7 @@ class CondemnEffect extends OneShotEffect<CondemnEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getFirstTarget());
+		Permanent permanent = (Permanent)game.getLastKnownInformation(source.getFirstTarget(), Constants.Zone.BATTLEFIELD);
 		if (permanent != null) {
 			Player player = game.getPlayer(permanent.getControllerId());
 			if (player != null) {
