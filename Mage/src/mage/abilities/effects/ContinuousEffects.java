@@ -218,14 +218,14 @@ public class ContinuousEffects implements Serializable {
 		for (Card card: game.getCards()) {
             Zone zone = game.getState().getZone(card.getId());
 			if (zone == Zone.HAND || zone == Zone.GRAVEYARD) {
-                for (Entry<Effect, Ability> entry: card.getAbilities().getEffects(zone, EffectType.CONTINUOUS).entrySet()) {
+                for (Entry<Effect, Ability> entry: card.getAbilities().getEffects(game, zone, EffectType.CONTINUOUS).entrySet()) {
                     layerEffects.add((ContinuousEffect)entry.getKey());
                     abilityMap.put(entry.getKey().getId(), entry.getValue());
                 }
 			}
 		}
 		for (Permanent permanent: game.getBattlefield().getAllPermanents()) {
-            for (Entry<Effect, Ability> entry: permanent.getAbilities().getEffects(Zone.BATTLEFIELD, EffectType.CONTINUOUS).entrySet()) {
+            for (Entry<Effect, Ability> entry: permanent.getAbilities().getEffects(game, Zone.BATTLEFIELD, EffectType.CONTINUOUS).entrySet()) {
                 layerEffects.add((ContinuousEffect)entry.getKey());
                 abilityMap.put(entry.getKey().getId(), entry.getValue());
             }
@@ -247,7 +247,7 @@ public class ContinuousEffects implements Serializable {
 		List<RequirementEffect> effects = new ArrayList<RequirementEffect>();
 		//get all applicable Requirement effects on the battlefield
 		for (Permanent perm: game.getBattlefield().getActivePermanents(permanent.getControllerId(), game)) {
-            for (Entry<Effect, Ability> entry: perm.getAbilities().getEffects(Zone.BATTLEFIELD, EffectType.REQUIREMENT).entrySet()) {
+            for (Entry<Effect, Ability> entry: perm.getAbilities().getEffects(game, Zone.BATTLEFIELD, EffectType.REQUIREMENT).entrySet()) {
                 if (((RequirementEffect)entry.getKey()).applies(permanent, entry.getValue(), game)) {
                     effects.add((RequirementEffect)entry.getKey());
                     abilityMap.put(entry.getKey().getId(), entry.getValue());
@@ -265,7 +265,7 @@ public class ContinuousEffects implements Serializable {
 		List<RestrictionEffect> effects = new ArrayList<RestrictionEffect>();
 		//get all applicable Restriction effects on the battlefield
 		for (Permanent perm: game.getBattlefield().getActivePermanents(permanent.getControllerId(), game)) {
-            for (Entry<Effect, Ability> entry: perm.getAbilities().getEffects(Zone.BATTLEFIELD, EffectType.RESTRICTION).entrySet()) {
+            for (Entry<Effect, Ability> entry: perm.getAbilities().getEffects(game, Zone.BATTLEFIELD, EffectType.RESTRICTION).entrySet()) {
                 if (((RestrictionEffect)entry.getKey()).applies(permanent, entry.getValue(), game)) {
                     effects.add((RestrictionEffect)entry.getKey());
                     abilityMap.put(entry.getKey().getId(), entry.getValue());

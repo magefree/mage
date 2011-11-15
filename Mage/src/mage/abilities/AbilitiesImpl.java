@@ -176,14 +176,12 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
     }
     
     @Override
-    public Map<Effect, Ability> getEffects(Zone zone, EffectType effectType) {
+    public Map<Effect, Ability> getEffects(Game game, Zone zone, EffectType effectType) {
         Map<Effect, Ability> effects = new HashMap<Effect, Ability>();
 		for (T ability: this) {
 			if (ability instanceof StaticAbility && ability.getZone().match(zone)) {
-				for (Effect effect: ability.getEffects()) {
-                    if (effect.getEffectType() == effectType) {
-                        effects.put(effect, ability);
-                    }
+				for (Effect effect: ability.getEffects(game, effectType)) {
+                    effects.put(effect, ability);
                 }
 			}
 		}
