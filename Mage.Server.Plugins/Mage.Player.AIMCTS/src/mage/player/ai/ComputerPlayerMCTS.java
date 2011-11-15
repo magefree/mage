@@ -292,6 +292,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer<ComputerPlayerMCTS> imple
 			Player origPlayer = game.getState().getPlayers().get(copyPlayer.getId());
 			MCTSPlayer newPlayer = new MCTSPlayer(copyPlayer.getId());
 			newPlayer.restore(origPlayer);
+            //FIXME: this shuffling causes event to trigger that is not correct
             newPlayer.shuffleLibrary(mcts);
 			mcts.getState().getPlayers().put(copyPlayer.getId(), newPlayer);
 		}
