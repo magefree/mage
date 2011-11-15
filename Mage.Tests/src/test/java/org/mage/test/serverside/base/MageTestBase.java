@@ -54,8 +54,8 @@ public abstract class MageTestBase {
 	protected Map<Constants.Zone, String> commandsA = new HashMap<Constants.Zone, String>();
 	protected Map<Constants.Zone, String> commandsB = new HashMap<Constants.Zone, String>();
 
-	protected Player computerA;
-	protected Player computerB;
+	protected Player playerA;
+	protected Player playerB;
 
 	/**
 	 * Game instance initialized in load method.
@@ -293,6 +293,6 @@ public abstract class MageTestBase {
 	}
 
 	protected Player createPlayer(String name, String playerType) {
-		return PlayerFactory.getInstance().createPlayer(playerType, name, Constants.RangeOfInfluence.ALL, 1);
+		return PlayerFactory.getInstance().createPlayer(playerType, name, Constants.RangeOfInfluence.ALL, 10);
 	}
 }

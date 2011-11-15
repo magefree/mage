@@ -65,31 +65,33 @@ public abstract class CardTestBase extends CardTestAPIImpl {
 
 		Game game = new TwoPlayerDuel(Constants.MultiplayerAttackOption.LEFT, Constants.RangeOfInfluence.ALL);
 
-		computerA = aiTypeA.equals(CardTestBase.AIType.MinimaxHybrid) ?
+		playerA = aiTypeA.equals(CardTestBase.AIType.MinimaxHybrid) ?
 				createPlayer("ComputerA", "Computer - minimax hybrid") :
 				createPlayer("ComputerA", "Computer - mad");
-		computerA.setTestMode(true);
+		playerA.setTestMode(true);
+        logger.info("Loading deck...");
 		Deck deck = Deck.load(Sets.loadDeck("RB Aggro.dck"));
+        logger.info("Done!");
 		if (deck.getCards().size() < 40) {
 			throw new IllegalArgumentException("Couldn't load deck, deck size=" + deck.getCards().size());
 		}
-		game.addPlayer(computerA, deck);
-		game.loadCards(deck.getCards(), computerA.getId());
+		game.addPlayer(playerA, deck);
+		game.loadCards(deck.getCards(), playerA.getId());
 
-		computerB = aiTypeB.equals(CardTestBase.AIType.MinimaxHybrid) ?
+		playerB = aiTypeB.equals(CardTestBase.AIType.MinimaxHybrid) ?
 				createPlayer("ComputerB", "Computer - minimax hybrid") :
 				createPlayer("ComputerB", "Computer - mad");
-		computerB.setTestMode(true);
+		playerB.setTestMode(true);
 		Deck deck2 = Deck.load(Sets.loadDeck("RB Aggro.dck"));
 		if (deck2.getCards().size() < 40) {
 			throw new IllegalArgumentException("Couldn't load deck, deck size=" + deck2.getCards().size());
 		}
-		game.addPlayer(computerB, deck2);
-		game.loadCards(deck2.getCards(), computerB.getId());
-		activePlayer = computerA;
+		game.addPlayer(playerB, deck2);
+		game.loadCards(deck2.getCards(), playerB.getId());
+		activePlayer = playerA;
 		currentGame = game;
 
-		stopOnTurn = null;
+        stopOnTurn = 2;
 		handCardsA.clear();
 		handCardsB.clear();
 		battlefieldCardsA.clear();
@@ -124,33 +126,33 @@ public abstract class CardTestBase extends CardTestAPIImpl {
 
 		Game game = new TwoPlayerDuel(Constants.MultiplayerAttackOption.LEFT, Constants.RangeOfInfluence.ALL);
 
-		computerA = aiTypeA.equals(CardTestBase.AIType.MinimaxHybrid) ?
+		playerA = aiTypeA.equals(CardTestBase.AIType.MinimaxHybrid) ?
 				createPlayer("ComputerA", "Computer - minimax hybrid") :
 				createPlayer("ComputerA", "Computer - mad");
-		computerA.setTestMode(true);
+		playerA.setTestMode(true);
 
 		Deck deck = Deck.load(Sets.loadDeck("RB Aggro.dck"));
 
 		if (deck.getCards().size() < 40) {
 			throw new IllegalArgumentException("Couldn't load deck, deck size=" + deck.getCards().size());
 		}
-		game.addPlayer(computerA, deck);
-		game.loadCards(deck.getCards(), computerA.getId());
+		game.addPlayer(playerA, deck);
+		game.loadCards(deck.getCards(), playerA.getId());
 
-		computerB = aiTypeB.equals(CardTestBase.AIType.MinimaxHybrid) ?
+		playerB = aiTypeB.equals(CardTestBase.AIType.MinimaxHybrid) ?
 				createPlayer("ComputerB", "Computer - minimax hybrid") :
 				createPlayer("ComputerB", "Computer - mad");
-		computerB.setTestMode(true);
+		playerB.setTestMode(true);
 		Deck deck2 = Deck.load(Sets.loadDeck("RB Aggro.dck"));
 		if (deck2.getCards().size() < 40) {
 			throw new IllegalArgumentException("Couldn't load deck, deck size=" + deck2.getCards().size());
 		}
-		game.addPlayer(computerB, deck2);
-		game.loadCards(deck2.getCards(), computerB.getId());
+		game.addPlayer(playerB, deck2);
+		game.loadCards(deck2.getCards(), playerB.getId());
 
 		parseScenario(cardPath);
 
-		activePlayer = computerA;
+		activePlayer = playerA;
 		currentGame = game;
 	}
 
@@ -164,10 +166,10 @@ public abstract class CardTestBase extends CardTestAPIImpl {
 			throw new IllegalStateException("Game is not initialized. Use load method to load a test case and initialize a game.");
 		}
 
-		currentGame.cheat(computerA.getId(), commandsA);
-		currentGame.cheat(computerA.getId(), libraryCardsA, handCardsA, battlefieldCardsA, graveyardCardsA);
-		currentGame.cheat(computerB.getId(), commandsB);
-		currentGame.cheat(computerB.getId(), libraryCardsB, handCardsB, battlefieldCardsB, graveyardCardsB);
+		currentGame.cheat(playerA.getId(), commandsA);
+		currentGame.cheat(playerA.getId(), libraryCardsA, handCardsA, battlefieldCardsA, graveyardCardsA);
+		currentGame.cheat(playerB.getId(), commandsB);
+		currentGame.cheat(playerB.getId(), libraryCardsB, handCardsB, battlefieldCardsB, graveyardCardsB);
 
 		boolean testMode = true;
 		long t1 = System.nanoTime();
@@ -242,10 +244,10 @@ public abstract class CardTestBase extends CardTestAPIImpl {
 			String player = getStringParam(line, 1);
 			int expected = getIntParam(line, 2);
 			if (player.equals("ComputerA")) {
-				int actual = currentGame.getPlayer(computerA.getId()).getLife();
+				int actual = currentGame.getPlayer(playerA.getId()).getLife();
 				Assert.assertEquals("Life amounts are not equal", expected, actual);
 			} else if (player.equals("ComputerB")) {
-				int actual = currentGame.getPlayer(computerB.getId()).getLife();
+				int actual = currentGame.getPlayer(playerB.getId()).getLife();
 				Assert.assertEquals("Life amounts are not equal", expected, actual);
 			} else {
 				throw new IllegalArgumentException("Wrong player in 'life' line, player=" + player + ", line=" + line);
@@ -258,9 +260,9 @@ public abstract class CardTestBase extends CardTestAPIImpl {
 			int expectedCount = getIntParam(line, 3);
 			Player player = null;
 			if (playerName.equals("ComputerA")) {
-				player = currentGame.getPlayer(computerA.getId());
+				player = currentGame.getPlayer(playerA.getId());
 			} else if (playerName.equals("ComputerB")) {
-				player = currentGame.getPlayer(computerB.getId());
+				player = currentGame.getPlayer(playerB.getId());
 			} else {
 				throw new IllegalArgumentException("Wrong player in 'battlefield' line, player=" + player + ", line=" + line);
 			}
@@ -281,9 +283,9 @@ public abstract class CardTestBase extends CardTestAPIImpl {
 			int expectedCount = getIntParam(line, 3);
 			Player player = null;
 			if (playerName.equals("ComputerA")) {
-				player = currentGame.getPlayer(computerA.getId());
+				player = currentGame.getPlayer(playerA.getId());
 			} else if (playerName.equals("ComputerB")) {
-				player = currentGame.getPlayer(computerB.getId());
+				player = currentGame.getPlayer(playerB.getId());
 			} else {
 				throw new IllegalArgumentException("Wrong player in 'graveyard' line, player=" + player + ", line=" + line);
 			}

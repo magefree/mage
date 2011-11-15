@@ -52,8 +52,10 @@ import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 import mage.game.turn.*;
 import mage.players.Player;
+import mage.sets.alarareborn.OfferingToAsha;
 import mage.target.Target;
 import mage.target.TargetCard;
+import sun.rmi.transport.ObjectTable;
 
 import java.io.File;
 import java.util.*;
@@ -197,6 +199,17 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 				this.activateAbility((ActivatedAbility) ability, game);
 				if (ability.isUsesStack())
 					usedStack = true;
+                if (!suggested.isEmpty()) {
+                    Iterator<String> it = suggested.iterator();
+                    while (it.hasNext()) {
+                        Card card = game.getCard(ability.getSourceId());
+                        String action = it.next();
+                        if (action.equals(card.getName())) {
+                            System.out.println("removed from suggested="+action);
+                            it.remove();
+                        }
+                    }
+                }
 			}
 			if (usedStack)
 				pass();
@@ -233,6 +246,9 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 				root = root.children.get(0);
 			}
 			logger.info("simlating -- game value:" + game.getState().getValue() + " test value:" + test.gameValue);
+            if (!suggested.isEmpty()) {
+                return false;
+            }
 			if (root.playerId.equals(playerId) && root.abilities != null && game.getState().getValue().hashCode() == test.gameValue) {
 
 				/*
@@ -467,13 +483,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 				SimulationNode2 newNode = new SimulationNode2(node, sim, action, depth, currentPlayer.getId());
 				logger.debug("simulating -- node #:" + SimulationNode2.getCount() + " actions:" + action);
 				sim.checkStateAndTriggered();
-				if (depth == 20) {
-					logger.info("*** Action *** " + action.toString());
-				}
 				int val = addActions(newNode, depth-1, alpha, beta);
-				if (depth == 20) {
-					logger.info("*** Value *** " + val);
-				}
 				if (!currentPlayer.getId().equals(playerId)) {
 					if (val < beta) {
 						beta = val;
@@ -768,6 +778,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 
 		for (Player copyPlayer: sim.getState().getPlayers().values()) {
 			Player origPlayer = game.getState().getPlayers().get(copyPlayer.getId()).copy();
+            System.out.println("suggested=" + suggested);
 			SimulatedPlayer2 newPlayer = new SimulatedPlayer2(copyPlayer.getId(), copyPlayer.getId().equals(playerId), suggested);
 			newPlayer.restore(origPlayer);
 			sim.getState().getPlayers().put(copyPlayer.getId(), newPlayer);
@@ -810,6 +821,14 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
         } catch (Exception e) {
             // swallow
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void addAction(String action) {
+        System.out.println("adding to suggested actions: " + action);
+        if (action != null && action.startsWith("cast:") || action.startsWith("play:")) {
+            suggested.add(action.substring(5, action.length()));
         }
     }
 }

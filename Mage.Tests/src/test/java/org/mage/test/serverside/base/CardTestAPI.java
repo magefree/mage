@@ -1,8 +1,11 @@
 package org.mage.test.serverside.base;
 
 import mage.Constants;
+import mage.abilities.Ability;
 import mage.filter.Filter;
 import mage.players.Player;
+
+import java.util.List;
 
 /**
  * Interface for all test initialization and assertion operations.
@@ -37,7 +40,7 @@ public interface CardTestAPI {
 	 * Add a card to specified zone of specified player.
 	 *
 	 * @param gameZone {@link Constants.Zone} to add cards to.
-	 * @param player   {@link Player} to add cards for. Use either computerA or computerB.
+	 * @param player   {@link Player} to add cards for. Use either playerA or playerB.
 	 * @param cardName Card name in string format.
 	 */
 	void addCard(Constants.Zone gameZone, Player player, String cardName);
@@ -46,7 +49,7 @@ public interface CardTestAPI {
 	 * Add any amount of cards to specified zone of specified player.
 	 *
 	 * @param gameZone {@link Constants.Zone} to add cards to.
-	 * @param player   {@link Player} to add cards for. Use either computerA or computerB.
+	 * @param player   {@link Player} to add cards for. Use either playerA or playerB.
 	 * @param cardName Card name in string format.
 	 * @param count    Amount of cards to be added.
 	 */
@@ -56,7 +59,7 @@ public interface CardTestAPI {
 	 * Add any amount of cards to specified zone of specified player.
 	 *
 	 * @param gameZone {@link Constants.Zone} to add cards to.
-	 * @param player   {@link Player} to add cards for. Use either computerA or computerB.
+	 * @param player   {@link Player} to add cards for. Use either playerA or playerB.
 	 * @param cardName Card name in string format.
 	 * @param count    Amount of cards to be added.
 	 * @param tapped   In case gameZone is Battlefield, determines whether permanent should be tapped.
@@ -122,6 +125,21 @@ public interface CardTestAPI {
 	 *                  Use ALL, if you want "all creature with gived name should have specified p\t"
 	 */
 	void assertPowerToughness(Player player, String cardName, int power, int toughness, Filter.ComparisonScope scope)
+			throws AssertionError;
+
+    /**
+	 * Assert creature's abilities.
+	 * <p/>
+	 * Throws {@link AssertionError} in the following cases:
+	 * 1. no such player
+	 * 2. no such creature under player's control
+	 * 3. there is more than one creature with such name
+	 *
+	 * @param player    {@link Player} to get creatures for comparison.
+	 * @param cardName  Card name to compare with.
+	 * @param abilities Expected abilities
+	 */
+	void assertAbilities(Player player, String cardName, List<Ability> abilities)
 			throws AssertionError;
 
 	/**

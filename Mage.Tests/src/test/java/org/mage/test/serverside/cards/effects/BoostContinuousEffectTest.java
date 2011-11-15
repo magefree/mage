@@ -1,6 +1,5 @@
 package org.mage.test.serverside.cards.effects;
 
-import com.sun.xml.bind.v2.schemagen.xmlschema.Any;
 import mage.filter.Filter;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestBase;
@@ -17,7 +16,7 @@ public class BoostContinuousEffectTest extends CardTestBase {
 		load("M11/Honor of the Pure.test");
 		execute();
 
-		checkPermanentPT(computerA, "Tine Shrike", 3, 2, Filter.ComparisonScope.Any);
-		checkPermanentPT(computerA, "Runeclaw Bear", 2, 2, Filter.ComparisonScope.Any);
+		checkPermanentPT(playerA, "Tine Shrike", 3, 2, Filter.ComparisonScope.Any);
+		checkPermanentPT(playerA, "Runeclaw Bear", 2, 2, Filter.ComparisonScope.Any);
 	}
 }

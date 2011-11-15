@@ -32,7 +32,7 @@ public class PlayGameTest extends MageTestBase {
 		Game game = new TwoPlayerDuel(Constants.MultiplayerAttackOption.LEFT, Constants.RangeOfInfluence.ALL);
 
 		Player computerA = createPlayer("ComputerA", "Computer - minimax hybrid");
-//		Player computerA = createPlayer("ComputerA", "Computer - mad");
+//		Player playerA = createPlayer("ComputerA", "Computer - mad");
 //		Deck deck = Deck.load(Sets.loadDeck("RB Aggro.dck"));
 		Deck deck = generateRandomDeck();
 
@@ -43,7 +43,7 @@ public class PlayGameTest extends MageTestBase {
 		game.loadCards(deck.getCards(), computerA.getId());
 
 		Player computerB = createPlayer("ComputerB", "Computer - minimax hybrid");
-//		Player computerB = createPlayer("ComputerB", "Computer - mad");
+//		Player playerB = createPlayer("ComputerB", "Computer - mad");
 //		Deck deck2 = Deck.load(Sets.loadDeck("RB Aggro.dck"));
 		Deck deck2 = generateRandomDeck();
 		if (deck2.getCards().size() < 40) {
@@ -53,10 +53,10 @@ public class PlayGameTest extends MageTestBase {
 		game.loadCards(deck2.getCards(), computerB.getId());
 
 //		parseScenario("scenario1.txt");
-//		game.cheat(computerA.getId(), commandsA);
-//		game.cheat(computerA.getId(), libraryCardsA, handCardsA, battlefieldCardsA, graveyardCardsA);
-//		game.cheat(computerB.getId(), commandsB);
-//		game.cheat(computerB.getId(), libraryCardsB, handCardsB, battlefieldCardsB, graveyardCardsB);
+//		game.cheat(playerA.getId(), commandsA);
+//		game.cheat(playerA.getId(), libraryCardsA, handCardsA, battlefieldCardsA, graveyardCardsA);
+//		game.cheat(playerB.getId(), commandsB);
+//		game.cheat(playerB.getId(), libraryCardsB, handCardsB, battlefieldCardsB, graveyardCardsB);
 
 		//boolean testMode = false;
 		boolean testMode = true;

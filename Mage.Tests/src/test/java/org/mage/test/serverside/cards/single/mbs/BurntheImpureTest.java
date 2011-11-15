@@ -28,11 +28,11 @@ public class BurntheImpureTest extends CardTestBase {
 		// $include red.default
 		useRedDefault();
 		// hand:ComputerA:Burn the Impure:1
-		addCard(Constants.Zone.HAND, computerA, "Burn the Impure");
+		addCard(Constants.Zone.HAND, playerA, "Burn the Impure");
 		// battlefield:ComputerB:Tine Shrike:1
-		addCard(Constants.Zone.BATTLEFIELD, computerB, "Tine Shrike");
+		addCard(Constants.Zone.BATTLEFIELD, playerB, "Tine Shrike");
 		// player:ComputerB:life:3
-		setLife(computerB, 3);
+		setLife(playerB, 3);
 
 		setStopOnTurn(2);
 		execute();
@@ -40,13 +40,13 @@ public class BurntheImpureTest extends CardTestBase {
 		// turn:1
 		assertTurn(1);
 		// result:won
-		assertResult(computerA, CardTestAPI.GameResult.WON);
+		assertResult(playerA, CardTestAPI.GameResult.WON);
 		// life:ComputerA:20
-		assertLife(computerA, 20);
+		assertLife(playerA, 20);
 		// life:ComputerB:0
-		assertLife(computerB, 0);
+		assertLife(playerB, 0);
 		// assert Tine Shrike has been killed
-		assertPermanentCount(computerB, "Tine Shrike", 0);
+		assertPermanentCount(playerB, "Tine Shrike", 0);
 	}
 
 	/**
@@ -56,19 +56,19 @@ public class BurntheImpureTest extends CardTestBase {
 	@Test
 	public void testVersusNonInfectCreature() throws Exception {
 		useRedDefault();
-		addCard(Constants.Zone.HAND, computerA, "Burn the Impure");
-		addCard(Constants.Zone.BATTLEFIELD, computerB, "Runeclaw Bear", 3);
-		setLife(computerB, 3);
+		addCard(Constants.Zone.HAND, playerA, "Burn the Impure");
+		addCard(Constants.Zone.BATTLEFIELD, playerB, "Runeclaw Bear", 3);
+		setLife(playerB, 3);
 
 		setStopOnTurn(2);
 		execute();
 
 		assertTurn(2);
-		assertResult(computerA, CardTestAPI.GameResult.DRAW);
-		assertLife(computerA, 20);
-		assertLife(computerB, 3);
-		assertPermanentCount(computerB, "Runeclaw Bear", 2);
-		assertPowerToughness(computerB, "Runeclaw Bear", 2, 2, Filter.ComparisonScope.Any);
-		assertPowerToughness(computerB, "Runeclaw Bear", 2, 2, Filter.ComparisonScope.All);
+		assertResult(playerA, CardTestAPI.GameResult.DRAW);
+		assertLife(playerA, 20);
+		assertLife(playerB, 3);
+		assertPermanentCount(playerB, "Runeclaw Bear", 2);
+		assertPowerToughness(playerB, "Runeclaw Bear", 2, 2, Filter.ComparisonScope.Any);
+		assertPowerToughness(playerB, "Runeclaw Bear", 2, 2, Filter.ComparisonScope.All);
 	}
 }

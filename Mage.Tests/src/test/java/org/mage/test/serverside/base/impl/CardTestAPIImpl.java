@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import mage.Constants;
+import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.filter.Filter;
 import mage.game.permanent.Permanent;
@@ -28,23 +29,23 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
 	public void useRedDefault() {
 		// *** ComputerA ***
 		// battlefield:ComputerA:Mountain:5
-		addCard(Constants.Zone.BATTLEFIELD, computerA, "Mountain", 5);
+		addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 5);
 		// hand:ComputerA:Mountain:4
-		addCard(Constants.Zone.HAND, computerA, "Mountain", 5);
+		addCard(Constants.Zone.HAND, playerA, "Mountain", 5);
 		// library:ComputerA:clear:0
-		removeAllCardsFromLibrary(computerA);
+		removeAllCardsFromLibrary(playerA);
 		// library:ComputerA:Mountain:10
-		addCard(Constants.Zone.LIBRARY, computerA, "Mountain", 10);
+		addCard(Constants.Zone.LIBRARY, playerA, "Mountain", 10);
 
 		// *** ComputerB ***
 		// battlefield:ComputerB:Plains:2
-		addCard(Constants.Zone.BATTLEFIELD, computerB, "Plains", 2);
+		addCard(Constants.Zone.BATTLEFIELD, playerB, "Plains", 2);
 		// hand:ComputerB:Plains:2
-		addCard(Constants.Zone.HAND, computerB, "Plains", 2);
+		addCard(Constants.Zone.HAND, playerB, "Plains", 2);
 		// library:ComputerB:clear:0
-		removeAllCardsFromLibrary(computerB);
+		removeAllCardsFromLibrary(playerB);
 		// library:ComputerB:Plains:10
-		addCard(Constants.Zone.LIBRARY, computerB, "Plains", 10);
+		addCard(Constants.Zone.LIBRARY, playerB, "Plains", 10);
 	}
 	
 	/**
@@ -52,16 +53,16 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
 	 */
 	public void useWhiteDefault() {
 		// *** ComputerA ***
-		addCard(Constants.Zone.BATTLEFIELD, computerA, "Plains", 5);
-		addCard(Constants.Zone.HAND, computerA, "Plains", 5);
-		removeAllCardsFromLibrary(computerA);
-		addCard(Constants.Zone.LIBRARY, computerA, "Plains", 10);
+		addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 5);
+		addCard(Constants.Zone.HAND, playerA, "Plains", 5);
+		removeAllCardsFromLibrary(playerA);
+		addCard(Constants.Zone.LIBRARY, playerA, "Plains", 10);
 
 		// *** ComputerB ***
-		addCard(Constants.Zone.BATTLEFIELD, computerB, "Plains", 2);
-		addCard(Constants.Zone.HAND, computerB, "Plains", 2);
-		removeAllCardsFromLibrary(computerB);
-		addCard(Constants.Zone.LIBRARY, computerB, "Plains", 10);
+		addCard(Constants.Zone.BATTLEFIELD, playerB, "Plains", 2);
+		addCard(Constants.Zone.HAND, playerB, "Plains", 2);
+		removeAllCardsFromLibrary(playerB);
+		addCard(Constants.Zone.LIBRARY, playerB, "Plains", 10);
 	}
 
 	/**
@@ -71,9 +72,9 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
 	 * @param player {@link Player} to remove all library cards from.
 	 */
 	public void removeAllCardsFromLibrary(Player player) {
-		if (player.equals(computerA)) {
+		if (player.equals(playerA)) {
 			commandsA.put(Constants.Zone.LIBRARY, "clear");
-		} else if (player.equals(computerB)) {
+		} else if (player.equals(playerB)) {
 			commandsB.put(Constants.Zone.LIBRARY, "clear");
 		}
 	}
@@ -82,7 +83,7 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
 	 * Add a card to specified zone of specified player.
 	 *
 	 * @param gameZone {@link Constants.Zone} to add cards to.
-	 * @param player   {@link Player} to add cards for. Use either computerA or computerB.
+	 * @param player   {@link Player} to add cards for. Use either playerA or playerB.
 	 * @param cardName Card name in string format.
 	 */
 	public void addCard(Constants.Zone gameZone, Player player, String cardName) {
@@ -93,7 +94,7 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
 	 * Add any amount of cards to specified zone of specified player.
 	 *
 	 * @param gameZone {@link Constants.Zone} to add cards to.
-	 * @param player   {@link Player} to add cards for. Use either computerA or computerB.
+	 * @param player   {@link Player} to add cards for. Use either playerA or playerB.
 	 * @param cardName Card name in string format.
 	 * @param count    Amount of cards to be added.
 	 */
@@ -105,7 +106,7 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
 	 * Add any amount of cards to specified zone of specified player.
 	 *
 	 * @param gameZone {@link Constants.Zone} to add cards to.
-	 * @param player   {@link Player} to add cards for. Use either computerA or computerB.
+	 * @param player   {@link Player} to add cards for. Use either playerA or playerB.
 	 * @param cardName Card name in string format.
 	 * @param count    Amount of cards to be added.
 	 * @param tapped   In case gameZone is Battlefield, determines whether permanent should be tapped.
@@ -119,9 +120,9 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
 				Card card = Sets.findCard(cardName, true);
 				PermanentCard p = new PermanentCard(card, null);
 				p.setTapped(tapped);
-				if (player.equals(computerA)) {
+				if (player.equals(playerA)) {
 					battlefieldCardsA.add(p);
-				} else if (player.equals(computerB)) {
+				} else if (player.equals(playerB)) {
 					battlefieldCardsB.add(p);
 				}
 			}
@@ -145,7 +146,7 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
 	 * @return
 	 */
 	private List<Card> getCardList(Constants.Zone gameZone, Player player) {
-		if (player.equals(computerA)) {
+		if (player.equals(playerA)) {
 			if (gameZone.equals(Constants.Zone.HAND)) {
 				return handCardsA;
 			} else if (gameZone.equals(Constants.Zone.GRAVEYARD)) {
@@ -153,7 +154,7 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
 			} else if (gameZone.equals(Constants.Zone.LIBRARY)) {
 				return libraryCardsA;
 			}
-		} else if (player.equals(computerB)) {
+		} else if (player.equals(playerB)) {
 			if (gameZone.equals(Constants.Zone.HAND)) {
 				return handCardsB;
 			} else if (gameZone.equals(Constants.Zone.GRAVEYARD)) {
@@ -172,9 +173,9 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
 	 * @param life   Life count to set.
 	 */
 	public void setLife(Player player, int life) {
-		if (player.equals(computerA)) {
+		if (player.equals(playerA)) {
 			commandsA.put(Constants.Zone.OUTSIDE, "life:" + String.valueOf(life));
-		} else if (player.equals(computerB)) {
+		} else if (player.equals(playerB)) {
 			commandsB.put(Constants.Zone.OUTSIDE, "life:" + String.valueOf(life));
 		}
 	}
@@ -201,7 +202,7 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
 	 * @param result Expected {@link GameResult} to compare with.
 	 */
 	public void assertResult(Player player, GameResult result) throws AssertionError {
-		if (player.equals(computerA)) {
+		if (player.equals(playerA)) {
 			GameResult actual = CardTestAPI.GameResult.DRAW;
 			if (currentGame.getWinner().equals("Player ComputerA is the winner")) {
 				actual = CardTestAPI.GameResult.WON;
@@ -209,7 +210,7 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
 				actual = CardTestAPI.GameResult.LOST;
 			}
 			Assert.assertEquals("Game results are not equal", result, actual);
-		} else if (player.equals(computerB)) {
+		} else if (player.equals(playerB)) {
 			GameResult actual = CardTestAPI.GameResult.DRAW;
 			if (currentGame.getWinner().equals("Player ComputerB is the winner")) {
 				actual = CardTestAPI.GameResult.WON;
@@ -278,6 +279,31 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
 		}
 	}
 
+    /**
+     * {@inheritDoc}
+     */
+    public void assertAbilities(Player player, String cardName, List<Ability> abilities)
+            throws AssertionError {
+        int count = 0;
+        Permanent found = null;
+		for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents(player.getId())) {
+			if (permanent.getName().equals(cardName)) {
+				found = permanent;
+			}
+		}
+
+		Assert.assertNotNull("There is no such permanent under player's control, player=" + player.getName() +
+				", cardName=" + cardName, found);
+
+        Assert.assertTrue("There is more than one such permanent under player's control, player=" + player.getName() +
+                ", cardName=" + cardName, count == 1);
+
+        for (Ability ability : abilities) {
+            Assert.assertTrue("No such ability=" + ability.toString() + ", player=" + player.getName() +
+                    ", cardName" + cardName, found.getAbilities().contains(ability));
+        }
+    }
+
 	/**
 	 * Assert permanent count under player's control.
 	 *
@@ -328,4 +354,19 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
 		Assert.assertEquals("More than one permanent was found: " + cardName + "(" + count + ")", 1, count);
 		return permanent0;
 	}
+
+    public void playLand(Player player, String cardName) {
+        player.addAction("play:"+cardName);
+    }
+
+    public void castSpell(Player player, String cardName) {
+        player.addAction("cast:"+cardName);
+    }
+
+    public void castSpell(Player player, String cardName, String target) {
+        player.addAction("cast:"+cardName + ";" + target);
+    }
+
+    public void useAbility(Player player, String cardName) {
+    }
 }

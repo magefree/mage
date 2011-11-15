@@ -18,14 +18,14 @@ public class BugTapsItselfTest extends CardTestBase {
 	@Test
 	public void testVersusInfectCreature() throws Exception {
 		useWhiteDefault();
-		addCard(Constants.Zone.BATTLEFIELD, computerA, "Blinding Mage");
-		addCard(Constants.Zone.BATTLEFIELD, computerB, "Myr Sire");
+		addCard(Constants.Zone.BATTLEFIELD, playerA, "Blinding Mage");
+		addCard(Constants.Zone.BATTLEFIELD, playerB, "Myr Sire");
 
 		setStopOnTurn(4);
 		execute();
 
-		assertResult(computerA, GameResult.DRAW);
-		Permanent permanent = getPermanent("Blinding Mage", computerA.getId());
+		assertResult(playerA, GameResult.DRAW);
+		Permanent permanent = getPermanent("Blinding Mage", playerA.getId());
 		Assert.assertFalse("Should have been untapped", permanent.isTapped());
 	}
 }

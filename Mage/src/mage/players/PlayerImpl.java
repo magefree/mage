@@ -1345,4 +1345,10 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	public void setUserData(UserData userData) {
 		this.userData = userData;
 	}
+
+    @Override
+    public void addAction(String action) {
+        // do nothing
+    }
+
 }
