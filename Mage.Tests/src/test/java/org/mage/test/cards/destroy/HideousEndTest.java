@@ -19,7 +19,7 @@ public class HideousEndTest extends CardTestBase {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Swamp");
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Swamp");
         addCard(Constants.Zone.HAND, playerA, "Hideous End");
-        addCard(Constants.Zone.HAND, playerB, "Copper Myr");
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Copper Myr");
 
         castSpell(playerA, "Hideous End");
         addFixedTarget(playerA, "Hideous End", "Copper Myr");
