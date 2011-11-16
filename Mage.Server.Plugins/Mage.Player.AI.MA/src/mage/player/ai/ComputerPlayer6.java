@@ -234,11 +234,15 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 				root = root.children.get(0);
 				//GameStateEvaluator2.evaluate(playerId, root.getGame());
 				int bestScore = root.getScore();
-				if (bestScore > currentScore) {
+				//if (bestScore > currentScore) {
 					actions = new LinkedList<Ability>(root.abilities);
 					combat = root.combat;
-				}
-			}
+				//} else {
+                    //System.out.println("[" + game.getPlayer(playerId).getName() + "] Action: not better score");
+                //}
+			} else {
+                System.out.println("[" + game.getPlayer(playerId).getName() + "] Action: skip");
+            }
 		}
 	}
 

@@ -199,6 +199,12 @@ public class SimulatedPlayer2 extends ComputerPlayer<SimulatedPlayer2> {
                                 filtered.add(option);
                                 return filtered;
                             } else {
+                                Card target = game.getCard(option.getFirstTarget());
+                                if (target != null && target.getName().equals(name)) {
+                                    System.out.println("matched(option): " + s);
+                                    filtered.add(option);
+                                    return filtered;
+                                }
                                 System.out.println("not equal UUID for target, player=" + player);
                             }
                         }

@@ -157,11 +157,15 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
 			if (root.children.size() > 0) {
 				root = root.children.get(0);
 				int bestScore = root.getScore();
-				if (bestScore > currentScore || allowBadMoves) {
+				//if (bestScore > currentScore || allowBadMoves) {
 					actions = new LinkedList<Ability>(root.abilities);
 					combat = root.combat;
-				}
-			}
+				//} else {
+                    //System.out.println("[" + game.getPlayer(playerId).getName() + "][pre] Action: not better score");
+                //}
+			} else {
+                System.out.println("[" + game.getPlayer(playerId).getName() + "][pre] Action: skip");
+            }
 		}
 	}
 
@@ -177,11 +181,15 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
 			if (root.children.size() > 0) {
 				root = root.children.get(0);
 				int bestScore = root.getScore();
-				if (bestScore > currentScore || allowBadMoves) {
+				//if (bestScore > currentScore || allowBadMoves) {
 					actions = new LinkedList<Ability>(root.abilities);
 					combat = root.combat;
-				}
-			}
+				//} else {
+                    //System.out.println("[" + game.getPlayer(playerId).getName() + "][post] Action: not better score");
+                //}
+			} else {
+                System.out.println("[" + game.getPlayer(playerId).getName() + "][post] Action: skip");
+            }
 		}
 	}
 
