@@ -11,7 +11,6 @@ public class LightningBoltTest extends CardTestBase {
 
     @Test
     public void testDamageOpponent() {
-        System.out.println("TEST: testDamageOpponent");
         addCard(Constants.Zone.HAND, playerA, "Mountain");
         addCard(Constants.Zone.HAND, playerA, "Lightning Bolt");
 
@@ -26,7 +25,6 @@ public class LightningBoltTest extends CardTestBase {
 
     @Test
     public void testDamageSelf() {
-        System.out.println("TEST: testDamageSelf");
         addCard(Constants.Zone.HAND, playerA, "Mountain");
         addCard(Constants.Zone.HAND, playerA, "Lightning Bolt");
 
@@ -38,6 +36,51 @@ public class LightningBoltTest extends CardTestBase {
         execute();
         assertLife(playerA, 17);
         assertLife(playerB, 20);
+    }
+
+    @Test
+    public void testDamageSmallCreature() {
+        addCard(Constants.Zone.HAND, playerA, "Mountain");
+        addCard(Constants.Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Sejiri Merfolk");
+
+        playLand(playerA, "Mountain");
+        castSpell(playerA, "Lightning Bolt");
+        addFixedTarget(playerA, "Lightning Bolt", "Sejiri Merfolk");
+
+        execute();
+        assertPermanentCount(playerB, "Sejiri Merfolk", 0);
+    }
+
+    @Test
+    public void testDamageBigCreature() {
+        addCard(Constants.Zone.HAND, playerA, "Mountain");
+        addCard(Constants.Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Craw Wurm");
+
+        playLand(playerA, "Mountain");
+        castSpell(playerA, "Lightning Bolt");
+        addFixedTarget(playerA, "Lightning Bolt", "Craw Wurm");
+
+        execute();
+        assertPermanentCount(playerB, "Craw Wurm", 1);
+    }
+
+    @Test
+    public void testDamageBigCreatureTwice() {
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain");
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain");
+        addCard(Constants.Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Constants.Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Craw Wurm");
+
+        castSpell(playerA, "Lightning Bolt");
+        addFixedTarget(playerA, "Lightning Bolt", "Craw Wurm");
+        castSpell(playerA, "Lightning Bolt");
+        addFixedTarget(playerA, "Lightning Bolt", "Craw Wurm");
+
+        execute();
+        assertPermanentCount(playerB, "Craw Wurm", 0);
     }
 
 }

@@ -46,8 +46,8 @@ public abstract class CardTestBase extends CardTestAPIImpl {
 	private AIType aiTypeA, aiTypeB;
 
 	public CardTestBase() {
-		aiTypeA = CardTestBase.AIType.MAD;
-		aiTypeB = CardTestBase.AIType.MAD;
+		aiTypeA = AIType.MAD;
+		aiTypeB = AIType.MAD;
 	}
 
 	public CardTestBase(AIType aiTypeA, AIType aiTypeB) {
