@@ -373,4 +373,8 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
 
     public void useAbility(Player player, String cardName) {
     }
+
+    public void attack(Player player, String cardName) {
+        player.addAction("attack:"+cardName);
+    }
 }
