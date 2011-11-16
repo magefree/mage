@@ -31,6 +31,7 @@
         <module>Mage.Plugins</module>
         <module>Mage.Server.Plugins</module>
 		<module>Mage.Server.Console</module>
+        <module>Mage.Tests</module>
      </modules>
 
     <repositories>
