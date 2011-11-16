@@ -118,6 +118,9 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
 		if (gameZone.equals(Constants.Zone.BATTLEFIELD)) {
 			for (int i = 0; i < count; i++) {
 				Card card = Sets.findCard(cardName, true);
+                if (card == null) {
+                    throw new IllegalArgumentException("[TEST] Couldn't find a card: " + cardName);
+                }
 				PermanentCard p = new PermanentCard(card, null);
 				p.setTapped(tapped);
 				if (player.equals(playerA)) {
