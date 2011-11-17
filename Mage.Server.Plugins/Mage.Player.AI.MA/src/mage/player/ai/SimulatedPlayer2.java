@@ -73,6 +73,11 @@ public class SimulatedPlayer2 extends ComputerPlayer<SimulatedPlayer2> {
 	public SimulatedPlayer2(final SimulatedPlayer2 player) {
 		super(player);
 		this.isSimulatedPlayer = player.isSimulatedPlayer;
+        this.suggested = new ArrayList<String>();
+        for (String s : player.suggested) {
+            this.suggested.add(s);
+        }
+
 	}
 
 	@Override
