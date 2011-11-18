@@ -25,14 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.sets.tenth;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.effects.common.continious.BoostAllEffect;
+import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 
@@ -40,24 +38,24 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author Loki
  */
-public class Infest extends CardImpl<Infest> {
+public class WrathOfGod extends CardImpl<WrathOfGod> {
 
-    public Infest(UUID ownerId) {
-        super(ownerId, 80, "Infest", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
-        this.expansionSetCode = "ALA";
+    public WrathOfGod(UUID ownerId) {
+        super(ownerId, 61, "Wrath of God", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
+        this.expansionSetCode = "10E";
 
-        this.color.setBlack(true);
+        this.color.setWhite(true);
 
-        // All creatures get -2/-2 until end of turn.
-        this.getSpellAbility().addEffect(new BoostAllEffect(-2, -2, Constants.Duration.EndOfTurn, new FilterCreaturePermanent("All creatures"), false));
+        // Destroy all creatures. They can't be regenerated.
+        this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterCreaturePermanent("creatures"), true));
     }
 
-    public Infest(final Infest card) {
+    public WrathOfGod(final WrathOfGod card) {
         super(card);
     }
 
     @Override
-    public Infest copy() {
-        return new Infest(this);
+    public WrathOfGod copy() {
+        return new WrathOfGod(this);
     }
 }

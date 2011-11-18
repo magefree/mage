@@ -118,7 +118,7 @@ public class BoostAllEffect extends ContinuousEffectImpl<BoostAllEffect> {
 		StringBuilder sb = new StringBuilder();
 		if (excludeSource)
 			sb.append("Other ");
-		sb.append(filter.getMessage()).append(" get ");
+		sb.append(filter.getMessage()).append(" gets ");
         String p = power.toString();
         if(!p.startsWith("-"))
             sb.append("+");

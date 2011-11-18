@@ -36,35 +36,43 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class DestroyAllEffect extends OneShotEffect {
 
-	private FilterPermanent filter;
+    private FilterPermanent filter;
+    private boolean noRegen;
 
-	public DestroyAllEffect(FilterPermanent filter) {
-		super(Outcome.DestroyPermanent);
-		this.filter = filter;
-		staticText = "Destroy all " + filter.getMessage();
-	}
+    public DestroyAllEffect(FilterPermanent filter, boolean noRegen) {
+        super(Outcome.DestroyPermanent);
+        this.filter = filter;
+        this.noRegen = noRegen;
+        if (noRegen)
+            staticText = "Destroy all " + filter.getMessage() + ". They can't be regenerated";
+        else
+            staticText = "Destroy all " + filter.getMessage();
+    }
 
-	public DestroyAllEffect(final DestroyAllEffect effect) {
-		super(effect);
-		this.filter = effect.filter.copy();
-	}
+    public DestroyAllEffect(FilterPermanent filter) {
+        this(filter, false);
+    }
 
-	@Override
-	public DestroyAllEffect copy() {
-		return new DestroyAllEffect(this);
-	}
+    public DestroyAllEffect(final DestroyAllEffect effect) {
+        super(effect);
+        this.filter = effect.filter.copy();
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-			permanent.destroy(source.getId(), game, false);
-		}
-		return true;
-	}
+    @Override
+    public DestroyAllEffect copy() {
+        return new DestroyAllEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            permanent.destroy(source.getId(), game, noRegen);
+        }
+        return true;
+    }
 
 }

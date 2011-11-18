@@ -25,39 +25,71 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.sets.timeshifted;
 
 import java.util.UUID;
 
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.effects.common.continious.BoostAllEffect;
+import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.game.Game;
+import mage.players.Player;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
  * @author Loki
  */
-public class Infest extends CardImpl<Infest> {
+public class PsionicBlast extends CardImpl<PsionicBlast> {
 
-    public Infest(UUID ownerId) {
-        super(ownerId, 80, "Infest", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
-        this.expansionSetCode = "ALA";
+    public PsionicBlast(UUID ownerId) {
+        super(ownerId, 30, "Psionic Blast", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
+        this.expansionSetCode = "TSB";
 
-        this.color.setBlack(true);
+        this.color.setBlue(true);
 
-        // All creatures get -2/-2 until end of turn.
-        this.getSpellAbility().addEffect(new BoostAllEffect(-2, -2, Constants.Duration.EndOfTurn, new FilterCreaturePermanent("All creatures"), false));
+        // Psionic Blast deals 4 damage to target creature or player and 2 damage to you.
+        this.getSpellAbility().addEffect(new DamageTargetEffect(4));
+        this.getSpellAbility().addEffect(new PsionicBlastEffect());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }
 
-    public Infest(final Infest card) {
+    public PsionicBlast(final PsionicBlast card) {
         super(card);
     }
 
     @Override
-    public Infest copy() {
-        return new Infest(this);
+    public PsionicBlast copy() {
+        return new PsionicBlast(this);
+    }
+}
+
+class PsionicBlastEffect extends OneShotEffect<PsionicBlastEffect> {
+    PsionicBlastEffect() {
+        super(Constants.Outcome.Damage);
+        staticText = "{this} deals 2 damage to you";
+    }
+
+    PsionicBlastEffect(final PsionicBlastEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+            player.damage(2, source.getSourceId(), game, false, true);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public PsionicBlastEffect copy() {
+        return new PsionicBlastEffect(this);
     }
 }

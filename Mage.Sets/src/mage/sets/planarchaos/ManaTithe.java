@@ -25,39 +25,39 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.sets.planarchaos;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.effects.common.continious.BoostAllEffect;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.target.TargetSpell;
 
 /**
  *
  * @author Loki
  */
-public class Infest extends CardImpl<Infest> {
+public class ManaTithe extends CardImpl<ManaTithe> {
 
-    public Infest(UUID ownerId) {
-        super(ownerId, 80, "Infest", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
-        this.expansionSetCode = "ALA";
+    public ManaTithe(UUID ownerId) {
+        super(ownerId, 25, "Mana Tithe", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
+        this.expansionSetCode = "PLC";
 
-        this.color.setBlack(true);
+        this.color.setWhite(true);
 
-        // All creatures get -2/-2 until end of turn.
-        this.getSpellAbility().addEffect(new BoostAllEffect(-2, -2, Constants.Duration.EndOfTurn, new FilterCreaturePermanent("All creatures"), false));
+        // Counter target spell unless its controller pays {1}.
+        this.getSpellAbility().addTarget(new TargetSpell());
+        this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(1)));
     }
 
-    public Infest(final Infest card) {
+    public ManaTithe(final ManaTithe card) {
         super(card);
     }
 
     @Override
-    public Infest copy() {
-        return new Infest(this);
+    public ManaTithe copy() {
+        return new ManaTithe(this);
     }
 }
