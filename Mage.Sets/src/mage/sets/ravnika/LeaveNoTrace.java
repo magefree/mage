@@ -96,6 +96,7 @@ class LeaveNoTraceEffect extends OneShotEffect<LeaveNoTraceEffect> {
         Permanent target = game.getPermanent(targetPointer.getFirst(source));
         if (target != null) {
             ObjectColor color = target.getColor();
+            target.destroy(source.getSourceId(), game, false);
             for (Permanent p : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
                 if (p.getColor().shares(color)) {
                     p.destroy(source.getSourceId(), game, false);
