@@ -37,7 +37,7 @@ public class ShimmeringGrotto extends mage.sets.lorwyn.ShimmeringGrotto {
 
     public ShimmeringGrotto(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 247;
+        this.cardNumber = 246;
         this.expansionSetCode = "ISD";
     }
 
