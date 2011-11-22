@@ -45,6 +45,8 @@ import mage.counters.CounterType;
 import mage.counters.common.ChargeCounter;
 
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.costs.mana.GenericManaCost;
 
 /**
  * @author nantuko
@@ -58,15 +60,15 @@ public class TrigonOfThought extends CardImpl<TrigonOfThought> {
 		this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(new ChargeCounter(3)), ""));
 
 		Costs costs = new CostsImpl();
-		costs.add(new ManaCostsImpl("{2}"));
 		costs.add(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
 		costs.add(new TapSourceCost());
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardControllerEffect(1), costs));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardControllerEffect(1), costs);
+        ability.addManaCost(new GenericManaCost(2));
+		this.addAbility(ability);
 
-		Costs costs2 = new CostsImpl();
-		costs2.add(new ManaCostsImpl("{U}{U}"));
-		costs2.add(new TapSourceCost());
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), costs2));
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new TapSourceCost());
+        ability2.addManaCost(new ManaCostsImpl("{U}{U}"));
+		this.addAbility(ability2);
 	}
 
 	public TrigonOfThought(final TrigonOfThought card) {

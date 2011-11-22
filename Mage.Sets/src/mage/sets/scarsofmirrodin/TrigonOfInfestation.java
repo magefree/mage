@@ -46,6 +46,8 @@ import mage.counters.common.ChargeCounter;
 import mage.game.permanent.token.InsectInfectToken;
 
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.costs.mana.GenericManaCost;
 
 /**
  * @author nantuko
@@ -61,15 +63,15 @@ public class TrigonOfInfestation extends CardImpl<TrigonOfInfestation> {
 		this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(new ChargeCounter(3)), ""));
 
 		Costs costs = new CostsImpl();
-		costs.add(new ManaCostsImpl("{2}"));
 		costs.add(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
 		costs.add(new TapSourceCost());
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(insectToken), costs));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(insectToken), costs);
+        ability.addManaCost(new GenericManaCost(2));
+		this.addAbility(ability);
 
-		Costs costs2 = new CostsImpl();
-		costs2.add(new ManaCostsImpl("{G}{G}"));
-		costs2.add(new TapSourceCost());
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), costs2));
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new TapSourceCost());
+        ability2.addManaCost(new ManaCostsImpl("{G}{G}"));
+		this.addAbility(ability2);
 	}
 
 	public TrigonOfInfestation(final TrigonOfInfestation card) {

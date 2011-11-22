@@ -89,7 +89,7 @@ public class HearthcageGiant extends CardImpl<HearthcageGiant> {
 
 class RedElementalToken extends Token {
     RedElementalToken() {
-        super("Elemental", "3/1 red Elemental Shaman creature token");
+        super("Elemental Shaman", "3/1 red Elemental Shaman creature token");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add("Elemental");

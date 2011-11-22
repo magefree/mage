@@ -35,12 +35,9 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ScryEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -55,10 +52,9 @@ public class SorcerersStrongbox extends CardImpl<SorcerersStrongbox> {
 	public SorcerersStrongbox(UUID ownerId) {
 		super(ownerId, 213, "Sorcerer's Strongbox", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
 		this.expansionSetCode = "M11";
-		Costs costs = new CostsImpl();
-		costs.add(new GenericManaCost(2));
-		costs.add(new TapSourceCost());
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SorcerersStrongboxEffect(), costs));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SorcerersStrongboxEffect(), new TapSourceCost());
+        ability.addManaCost(new GenericManaCost(2));
+		this.addAbility(ability);
 	}
 
 	public SorcerersStrongbox(final SorcerersStrongbox card) {

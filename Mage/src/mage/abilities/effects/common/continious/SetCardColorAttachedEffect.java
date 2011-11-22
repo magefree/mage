@@ -60,9 +60,12 @@ public class SetCardColorAttachedEffect extends ContinuousEffectImpl<SetCardColo
         Permanent equipment = game.getPermanent(source.getSourceId());
         if (equipment != null && equipment.getAttachedTo() != null) {
             Permanent target = game.getPermanent(equipment.getAttachedTo());
-			target.getColor().setColor(setColor);
+            if (target != null) {
+                target.getColor().setColor(setColor);
+                return true;
+            }
         }
-        return true;
+        return false;
     }
 
     @Override

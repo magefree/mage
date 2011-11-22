@@ -60,10 +60,8 @@ public class VoltaicKey extends CardImpl<VoltaicKey> {
 	public VoltaicKey(UUID ownerId) {
 		super(ownerId, 219, "Voltaic Key", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
 		this.expansionSetCode = "M11";
-		Costs costs = new CostsImpl();
-		costs.add(new GenericManaCost(1));
-		costs.add(new TapSourceCost());
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), costs);
+		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
+        ability.addManaCost(new GenericManaCost(1));
 		ability.addTarget(new TargetPermanent(filter));
 		this.addAbility(ability);
 	}

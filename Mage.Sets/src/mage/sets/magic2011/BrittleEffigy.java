@@ -53,10 +53,10 @@ public class BrittleEffigy extends CardImpl<BrittleEffigy> {
 		super(ownerId, 202, "Brittle Effigy", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}");
 		this.expansionSetCode = "M11";
 		Costs costs = new CostsImpl();
-		costs.add(new GenericManaCost(4));
 		costs.add(new TapSourceCost());
 		costs.add(new ExileSourceCost());
 		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), costs);
+        ability.addManaCost(new GenericManaCost(4));
 		ability.addTarget(new TargetCreaturePermanent());
 		this.addAbility(ability);
 	}

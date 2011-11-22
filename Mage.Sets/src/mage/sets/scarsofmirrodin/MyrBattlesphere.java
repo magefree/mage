@@ -95,7 +95,7 @@ class MyrBattlesphereAbility extends TriggeredAbilityImpl<MyrBattlesphereAbility
 	public MyrBattlesphereAbility() {
 		super(Zone.BATTLEFIELD, new BoostSourceEffect(new GetXValue(), new StaticValue(0), Duration.EndOfTurn), true);
 		this.addEffect(new MyrBattlesphereEffect());
-		this.addCost(new TapVariableTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
+		this.addCost(new TapVariableTargetCost(new TargetControlledCreaturePermanent(1, Integer.MAX_VALUE, filter, false)));
 	}
 
 	public MyrBattlesphereAbility(final MyrBattlesphereAbility ability) {
@@ -106,7 +106,9 @@ class MyrBattlesphereAbility extends TriggeredAbilityImpl<MyrBattlesphereAbility
 	public boolean checkInterveningIfClause(Game game) {
 		if (costs.isPaid())
 			return true;
-		return costs.pay(this, game, this.getId(), this.getControllerId(), false);
+        if (costs.canPay(this.getId(), this.getControllerId(), game))
+            return costs.pay(this, game, this.getId(), this.getControllerId(), false);
+        return false;
 	}
 
 	@Override

@@ -34,7 +34,7 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.BasicManaAbility;
 import mage.cards.CardImpl;
@@ -56,7 +56,7 @@ public class KnotvineMystic extends CardImpl<KnotvineMystic>{
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new KnotvineMysticManaAbility();
-        ability.addCost(new ManaCostsImpl("{1}"));
+        ability.addManaCost(new GenericManaCost(1));
         this.addAbility(ability);
     }
 

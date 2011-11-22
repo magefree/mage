@@ -35,9 +35,6 @@ import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -58,10 +55,8 @@ public class EmberHauler extends CardImpl<EmberHauler> {
 		this.power = new MageInt(2);
 		this.toughness = new MageInt(2);
 
-		Costs<Cost> costs = new CostsImpl();
-		costs.add(new GenericManaCost(1));
-		costs.add(new SacrificeSourceCost());
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), costs);
+		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new SacrificeSourceCost());
+        ability.addManaCost(new GenericManaCost(1));
 		ability.addTarget(new TargetCreatureOrPlayer());
 		this.addAbility(ability);
 	}

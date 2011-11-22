@@ -32,9 +32,8 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.ScryEffect;
@@ -49,10 +48,9 @@ public class CrystalBall extends CardImpl<CrystalBall> {
 	public CrystalBall(UUID ownerId) {
 		super(ownerId, 203, "Crystal Ball", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
 		this.expansionSetCode = "M11";
-		Costs costs = new CostsImpl();
-		costs.add(new GenericManaCost(1));
-		costs.add(new TapSourceCost());
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(2), costs));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(2), new TapSourceCost());
+        ability.addManaCost(new GenericManaCost(1));
+		this.addAbility(ability);
 	}
 
 	public CrystalBall(final CrystalBall card) {

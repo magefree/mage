@@ -64,10 +64,10 @@ public class FaunaShaman extends CardImpl<FaunaShaman> {
 		this.toughness = new MageInt(2);
 
 		Costs<Cost> costs = new CostsImpl();
-		costs.add(new ColoredManaCost(ColoredManaSymbol.G));
 		costs.add(new TapSourceCost());
 		costs.add(new DiscardTargetCost(new TargetCardInHand(new FilterCreatureCard())));
 		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryRevealPutInHandEffect(new TargetCardInLibrary(new FilterCreatureCard())), costs);
+        ability.addManaCost(new ColoredManaCost(ColoredManaSymbol.G));
 		this.addAbility(ability);
 	}
 
