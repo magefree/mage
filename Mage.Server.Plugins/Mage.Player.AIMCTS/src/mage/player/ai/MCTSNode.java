@@ -271,7 +271,7 @@ public class MCTSNode {
         for (MCTSNode node: children) {
 //            logger.info(state);
 //            logger.info(node.stateValue);
-            if (node.stateValue == state) {
+            if (node.stateValue == state && node.action != null) {
                 return node;
             }
             MCTSNode match = node.getMatchingState(state);
