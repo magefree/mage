@@ -50,6 +50,7 @@ import mage.abilities.effects.ReplacementEffect;
 import mage.abilities.mana.ManaAbility;
 import mage.cards.Card;
 import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.choices.Choice;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
@@ -264,8 +265,16 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
     public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game) {
         if (cards.isEmpty())
             return !target.isRequired();
-        Card card = cards.getRandom(game);
-        target.add(card.getId(), game);
+        Set<UUID> possibleTargets = target.possibleTargets(playerId, game);
+        if (possibleTargets.isEmpty())
+            return !target.isRequired();
+        Iterator<UUID> it = possibleTargets.iterator();
+        int targetNum = rnd.nextInt(possibleTargets.size());
+        UUID targetId = it.next();
+        for (int i = 0; i < targetNum; i++) {
+            targetId = it.next();
+        }
+        target.add(targetId, game);
         return true;
     }
 
