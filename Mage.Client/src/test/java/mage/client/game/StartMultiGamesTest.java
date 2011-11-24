@@ -7,6 +7,9 @@ import mage.client.components.MageComponents;
 import mage.client.components.MageUI;
 import org.apache.log4j.Logger;
 
+/**
+ * @author ayratn
+ */
 public class StartMultiGamesTest {
 
 	private final static Logger logger = Logger.getLogger(StartMultiGamesTest.class);
