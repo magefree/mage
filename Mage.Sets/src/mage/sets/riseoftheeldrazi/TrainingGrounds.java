@@ -93,7 +93,7 @@ class TrainingGroundsCostReductionEffect extends ContinuousEffectImpl<TrainingGr
 	@Override
 	public boolean apply(Game game, Ability source) {
 		boolean applied = false;
-		List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(filter);
+		List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
 
 		if ( permanents != null && !permanents.isEmpty() ) {
 			for ( Permanent permanent : permanents ) {

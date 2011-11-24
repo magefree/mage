@@ -38,6 +38,7 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -114,10 +115,9 @@ class CopperhornScoutUntapEffect extends OneShotEffect<CopperhornScoutUntapEffec
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		FilterCreaturePermanent filter = new FilterCreaturePermanent();
-		filter.getControllerId().add(source.getControllerId());
+		FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
-		List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(filter);
+		List<Permanent> creatures = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
 
 		for ( Permanent creature : creatures ) {
 			if ( !creature.getId().equals(source.getSourceId()) ) {
