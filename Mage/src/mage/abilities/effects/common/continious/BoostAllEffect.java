@@ -93,7 +93,7 @@ public class BoostAllEffect extends ContinuousEffectImpl<BoostAllEffect> {
 	public void init(Ability source, Game game) {
 		super.init(source, game);
 		if (this.affectedObjectsSet) {
-			for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter)) {
+			for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
 				if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
 					objects.add(perm.getId());
 				}
@@ -103,7 +103,7 @@ public class BoostAllEffect extends ContinuousEffectImpl<BoostAllEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter)) {
+		for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
 			if (!this.affectedObjectsSet || objects.contains(perm.getId())) {
 				if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
 					perm.addPower(power.calculate(game, source));
