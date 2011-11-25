@@ -34,10 +34,8 @@
 
 package mage.client.game;
 
-import java.util.logging.Level;
 import mage.Constants;
 import mage.client.MageFrame;
-import mage.client.cards.Cards;
 import mage.client.chat.ChatPanel;
 import mage.client.dialog.*;
 import mage.client.game.FeedbackPanel.FeedbackMode;
@@ -50,8 +48,6 @@ import mage.view.*;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
@@ -62,7 +58,6 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
-import java.util.prefs.Preferences;
 import mage.client.components.MageComponents;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -88,6 +83,7 @@ public class GamePanel extends javax.swing.JPanel {
     private PickNumberDialog pickNumber;
 	private JLayeredPane jLayeredPane;
 	private String chosenHandKey = "You";
+    private boolean smallMode = false;
 
     /** Creates new form GamePanel */
     public GamePanel() {
@@ -121,6 +117,7 @@ public class GamePanel extends javax.swing.JPanel {
 					int height = ((JComponent)e.getSource()).getHeight();
 					j.setSize(width, height);
 					jSplitPane1.setSize(width, height);
+                    sizeToScreen();
 				}
 	        });
 
@@ -175,18 +172,37 @@ public class GamePanel extends javax.swing.JPanel {
 
 	private void sizeToScreen() {
     	Rectangle rect = this.getBounds();
-    	if (rect.height < 768) {
-    		Dimension bbDimension = new Dimension(128, 184);
-    		bigCard.setMaximumSize(bbDimension);
-    		bigCard.setMinimumSize(bbDimension);
-    		bigCard.setPreferredSize(bbDimension);
-    		this.handContainer.sizeHand(0.6);
-    		for (PlayAreaPanel p: players.values()) {
-    			p.sizePlayer();
-    		}
+        
+    	if (rect.height < 650) { 
+            if (smallMode == false) {
+                smallMode = true;
+                Dimension bbDimension = new Dimension(128, 184);
+                bigCard.setMaximumSize(bbDimension);
+                bigCard.setMinimumSize(bbDimension);
+                bigCard.setPreferredSize(bbDimension);
+                pnlGameInfo.revalidate();
+                pnlGameInfo.repaint();
+                this.handContainer.sizeHand(0.6);
+                for (PlayAreaPanel p: players.values()) {
+                    p.sizePlayer();
+                }
+            }
     	}
-		this.revalidate();
-		this.repaint();
+        else {
+            if (smallMode == true) {
+                smallMode = false;
+                Dimension bbDimension = new Dimension(256, 367);
+                bigCard.setMaximumSize(bbDimension);
+                bigCard.setMinimumSize(bbDimension);
+                bigCard.setPreferredSize(bbDimension);
+                pnlGameInfo.revalidate();
+                pnlGameInfo.repaint();
+                this.handContainer.sizeHand(1);
+                for (PlayAreaPanel p: players.values()) {
+                    p.sizePlayer();
+                }
+            }
+        }
 	}
 	
 	public synchronized void showGame(UUID gameId, UUID playerId) {
@@ -205,7 +221,6 @@ public class GamePanel extends javax.swing.JPanel {
 		this.gameChatPanel.connect(session.getGameChatId(gameId));
 		if (!session.joinGame(gameId))
 			hideGame();
-		sizeToScreen();
 	}
 
 	public synchronized void watchGame(UUID gameId) {
@@ -223,7 +238,6 @@ public class GamePanel extends javax.swing.JPanel {
 		this.gameChatPanel.connect(session.getGameChatId(gameId));
 		if (!session.watchGame(gameId))
 			hideGame();
-		sizeToScreen();
 	}
 
 	public synchronized void replayGame(UUID gameId) {
@@ -240,7 +254,6 @@ public class GamePanel extends javax.swing.JPanel {
 		this.gameChatPanel.clear();
 		if (!session.startReplay(gameId))
 			hideGame();
-		sizeToScreen();
 	}
 
 	public void hideGame() {
@@ -930,8 +943,6 @@ public class GamePanel extends javax.swing.JPanel {
 		abilityPicker.setVisible(false);
 	}
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    //private mage.client.game.AbilityPicker abilityPicker;
 	private mage.client.components.ability.AbilityPicker abilityPicker;
     private mage.client.cards.BigCard bigCard;
     private javax.swing.JButton btnConcede;
