@@ -265,7 +265,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
     public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game) {
         if (cards.isEmpty())
             return !target.isRequired();
-        Set<UUID> possibleTargets = target.possibleTargets(playerId, game);
+        Set<UUID> possibleTargets = target.possibleTargets(playerId, cards, game);
         if (possibleTargets.isEmpty())
             return !target.isRequired();
         Iterator<UUID> it = possibleTargets.iterator();
