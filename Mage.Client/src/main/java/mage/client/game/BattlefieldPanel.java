@@ -56,7 +56,6 @@ import mage.client.cards.BigCard;
 import mage.client.cards.Permanent;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.Config;
-import mage.game.permanent.Battlefield;
 import mage.view.PermanentView;
 
 /**

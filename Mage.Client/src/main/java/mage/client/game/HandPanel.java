@@ -22,14 +22,16 @@ import mage.view.SimpleCardsView;
 public class HandPanel extends JPanel {
 
     private static final int CARD_WIDTH = 75;
+    private static final double ASPECT_RATIO = 3.5 / 2.5;
 	
-	private Dimension handCardDimensionBig;
+	private boolean smallMode = false;
+    private Dimension handCardDimensionBig;
 	private Dimension handCardDimension;
 
     public HandPanel() {
         double factor = 1;
-        sizeHand(factor);
         initComponents();
+        sizeHand(factor, false);
     }
 
     public void initComponents() {
@@ -64,26 +66,29 @@ public class HandPanel extends JPanel {
 
     public void loadCards(SimpleCardsView cards, BigCard bigCard, UUID gameId) {
 		hand.loadCards(cards, bigCard, gameId);
-		hand.setPreferredSize(new java.awt.Dimension((getHandCardDimension().width + 5) * cards.size() + 5, getHandCardDimension().height + 20)); // for scroll
+        hand.sizeCards(getHandCardDimension());
 	}
 
     private Dimension getHandCardDimension() {
-        Preferences pref = MageFrame.getPreferences();
-        String useBigCards = pref.get(PreferencesDialog.KEY_HAND_USE_BIG_CARDS, "false");
-        if (useBigCards.equals("true")) {
+        String useBigCards = MageFrame.getPreferences().get(PreferencesDialog.KEY_HAND_USE_BIG_CARDS, "false");
+        if (!smallMode && useBigCards.equals("true")) {
             return handCardDimensionBig;
         }
         return handCardDimension;
     }
 
-    public void sizeHand(double factor) {
+    public void sizeHand(double factor, boolean smallMode) {
+        this.smallMode = smallMode;
         int width = (int)(factor * CARD_WIDTH);
-        handCardDimension = new Dimension(CARD_WIDTH, (int)(CARD_WIDTH * 3.5f / 2.5f));
-        handCardDimensionBig = new Dimension(CARD_WIDTH, (int)(width * 3.5f / 2.5f));
+        int bigWidth = (int)(Config.handScalingFactor * CARD_WIDTH);
+        handCardDimension = new Dimension(width, (int)(width * ASPECT_RATIO));
+        handCardDimensionBig = new Dimension(bigWidth, (int)(bigWidth * ASPECT_RATIO));
+   		hand.setCardDimension(getHandCardDimension());
+        hand.sizeCards(getHandCardDimension());
     }
     
     private JPanel jPanel;
-    private javax.swing.JScrollPane jScrollPane1;
+    private JScrollPane jScrollPane1;
 	private Border emptyBorder = new EmptyBorder(0,0,0,0);
     private mage.client.cards.Cards hand;
     

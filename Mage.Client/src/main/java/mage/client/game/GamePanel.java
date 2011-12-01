@@ -182,7 +182,7 @@ public class GamePanel extends javax.swing.JPanel {
                 bigCard.setPreferredSize(bbDimension);
                 pnlGameInfo.revalidate();
                 pnlGameInfo.repaint();
-                this.handContainer.sizeHand(0.6);
+                this.handContainer.sizeHand(0.8, smallMode);
                 for (PlayAreaPanel p: players.values()) {
                     p.sizePlayer();
                 }
@@ -197,7 +197,7 @@ public class GamePanel extends javax.swing.JPanel {
                 bigCard.setPreferredSize(bbDimension);
                 pnlGameInfo.revalidate();
                 pnlGameInfo.repaint();
-                this.handContainer.sizeHand(1);
+                this.handContainer.sizeHand(1, smallMode);
                 for (PlayAreaPanel p: players.values()) {
                     p.sizePlayer();
                 }
@@ -840,23 +840,21 @@ public class GamePanel extends javax.swing.JPanel {
         			.addComponent(pnlGameInfo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
         			.addGap(0)
         			.addGroup(gl_jPanel3.createParallelGroup(Alignment.LEADING)
-        				.addComponent(handContainer, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         				.addComponent(pnlBattlefield, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        				.addComponent(handContainer, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         				.addComponent(jPhases, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         gl_jPanel3.setVerticalGroup(
         	gl_jPanel3.createParallelGroup(Alignment.TRAILING)
         		.addGroup(gl_jPanel3.createSequentialGroup()
         			.addComponent(pnlBattlefield, GroupLayout.DEFAULT_SIZE, 545, Short.MAX_VALUE)
-        			.addPreferredGap(ComponentPlacement.RELATED)
         			.addComponent(handContainer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.RELATED)
         			.addComponent(jPhases, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         		.addComponent(pnlGameInfo, GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
         );
         jPanel3.setLayout(gl_jPanel3);
 
-        jPanel3.setMinimumSize(new Dimension(800, 600));
+        jPanel3.setMinimumSize(new Dimension(600, 400));
         jSplitPane1.setLeftComponent(jPanel3);
 
         gameChatPanel.setMinimumSize(new java.awt.Dimension(100, 48));

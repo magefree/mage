@@ -158,15 +158,19 @@ public class Cards extends javax.swing.JPanel {
         if (!isVisibleIfEmpty) {
         	cardArea.setVisible(cards.size() > 0);
         }
-		cardArea.setPreferredSize(new Dimension((int)(cards.size() * (getCardDimension().getWidth() + GAP_X)), (int)(getCardDimension().getHeight())));
-		cardArea.revalidate();
-		cardArea.repaint();
+        sizeCards(getCardDimension());
 		this.revalidate();
 		this.repaint();
 		
 		return changed;
 	}
 
+    public void sizeCards(Dimension cardDimension) {
+		cardArea.setPreferredSize(new Dimension((int)(cards.size() * (cardDimension.getWidth() + GAP_X)) + 5, (int)(cardDimension.getHeight()) + 20));
+		cardArea.revalidate();
+		cardArea.repaint();
+    }
+    
 	private Dimension getCardDimension() {
 	   	if (cardDimension == null) {
 			cardDimension = new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
@@ -254,7 +258,8 @@ public class Cards extends javax.swing.JPanel {
 
 	public void setCardDimension(Dimension dimension) {
 		this.cardDimension = dimension;
-	}
+        layoutCards(cardDimension);
+    }
 
     public void setZone(String zone) {
         this.zone = zone;
