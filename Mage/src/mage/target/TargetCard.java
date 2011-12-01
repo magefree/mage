@@ -131,6 +131,14 @@ public class TargetCard<T extends TargetCard<T>> extends TargetObject<TargetCard
 		return possibleTargets(sourceControllerId, game);
 	}
 
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Cards cards, Game game) {
+        Set<UUID> possibleTargets = new HashSet<UUID>();
+        for (Card card: cards.getCards(filter, game)) {
+            possibleTargets.add(card.getId());
+        }
+        return possibleTargets;
+    }
+    
 	@Override
 	public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
 		Set<UUID> possibleTargets = new HashSet<UUID>();

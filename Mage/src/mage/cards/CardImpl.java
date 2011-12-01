@@ -246,8 +246,8 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                         game.getExile().removeCard(this, game);
                         break;
                     case STACK:
-                        break;
                     case OUTSIDE:
+                    case PICK:
                         break;
                     default:
                         logger.fatal("invalid zone for card - " + fromZone);
@@ -282,6 +282,9 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                     if (flag)
                         permanent.setTapped(true);
                     break;
+                default:
+                    logger.fatal("invalid zone for card - " + toZone);
+                    return false;
             }
             game.setZone(objectId, event.getToZone());
             game.fireEvent(event);

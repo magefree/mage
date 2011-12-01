@@ -45,7 +45,6 @@ import mage.Constants.Layer;
 import mage.Constants.SubLayer;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.StaticAbility;
 import mage.cards.Card;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -422,52 +421,52 @@ public class ContinuousEffects implements Serializable {
 		removeInactiveEffects(game);
 		List<ContinuousEffect> layerEffects = getLayeredEffects(game);
 		List<ContinuousEffect> layer = filterLayeredEffects(layerEffects, Layer.CopyEffects_1);
-		for (ContinuousEffect effect: layer) {
-			effect.apply(Layer.CopyEffects_1, SubLayer.CharacteristicDefining_7a, abilityMap.get(effect.getId()), game);
-		}
+//		for (ContinuousEffect effect: layer) {
+//			effect.apply(Layer.CopyEffects_1, SubLayer.CharacteristicDefining_7a, abilityMap.get(effect.getId()), game);
+//		}
 		for (ContinuousEffect effect: layer) {
 			effect.apply(Layer.CopyEffects_1, SubLayer.NA, abilityMap.get(effect.getId()), game);
 		}
 		layer = filterLayeredEffects(layerEffects, Layer.ControlChangingEffects_2);
-		for (ContinuousEffect effect: layer) {
-			effect.apply(Layer.ControlChangingEffects_2, SubLayer.CharacteristicDefining_7a, abilityMap.get(effect.getId()), game);
-		}
+//		for (ContinuousEffect effect: layer) {
+//			effect.apply(Layer.ControlChangingEffects_2, SubLayer.CharacteristicDefining_7a, abilityMap.get(effect.getId()), game);
+//		}
 		for (ContinuousEffect effect: layer) {
 			effect.apply(Layer.ControlChangingEffects_2, SubLayer.NA, abilityMap.get(effect.getId()), game);
 		}
 		layer = filterLayeredEffects(layerEffects, Layer.TextChangingEffects_3);
-		for (ContinuousEffect effect: layer) {
-			effect.apply(Layer.TextChangingEffects_3, SubLayer.CharacteristicDefining_7a, abilityMap.get(effect.getId()), game);
-		}
+//		for (ContinuousEffect effect: layer) {
+//			effect.apply(Layer.TextChangingEffects_3, SubLayer.CharacteristicDefining_7a, abilityMap.get(effect.getId()), game);
+//		}
 		for (ContinuousEffect effect: layer) {
 			effect.apply(Layer.TextChangingEffects_3, SubLayer.NA, abilityMap.get(effect.getId()), game);
 		}
 		layer = filterLayeredEffects(layerEffects, Layer.TypeChangingEffects_4);
-		for (ContinuousEffect effect: layer) {
-			effect.apply(Layer.TypeChangingEffects_4, SubLayer.CharacteristicDefining_7a, abilityMap.get(effect.getId()), game);
-		}
+//		for (ContinuousEffect effect: layer) {
+//			effect.apply(Layer.TypeChangingEffects_4, SubLayer.CharacteristicDefining_7a, abilityMap.get(effect.getId()), game);
+//		}
 		for (ContinuousEffect effect: layer) {
 			effect.apply(Layer.TypeChangingEffects_4, SubLayer.NA, abilityMap.get(effect.getId()), game);
 		}
 		layer = filterLayeredEffects(layerEffects, Layer.ColorChangingEffects_5);
-		for (ContinuousEffect effect: layer) {
-			effect.apply(Layer.ColorChangingEffects_5, SubLayer.CharacteristicDefining_7a, abilityMap.get(effect.getId()), game);
-		}
+//		for (ContinuousEffect effect: layer) {
+//			effect.apply(Layer.ColorChangingEffects_5, SubLayer.CharacteristicDefining_7a, abilityMap.get(effect.getId()), game);
+//		}
 		for (ContinuousEffect effect: layer) {
 			effect.apply(Layer.ColorChangingEffects_5, SubLayer.NA, abilityMap.get(effect.getId()), game);
 		}
 		layer = filterLayeredEffects(layerEffects, Layer.AbilityAddingRemovingEffects_6);
-		for (ContinuousEffect effect: layer) {
-			effect.apply(Layer.AbilityAddingRemovingEffects_6, SubLayer.CharacteristicDefining_7a, abilityMap.get(effect.getId()), game);
-		}
+//		for (ContinuousEffect effect: layer) {
+//			effect.apply(Layer.AbilityAddingRemovingEffects_6, SubLayer.CharacteristicDefining_7a, abilityMap.get(effect.getId()), game);
+//		}
 		for (ContinuousEffect effect: layer) {
 			effect.apply(Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, abilityMap.get(effect.getId()), game);
 		}
 		layerEffects = getLayeredEffects(game);
 		layer = filterLayeredEffects(layerEffects, Layer.PTChangingEffects_7);
-		for (ContinuousEffect effect: layer) {
-			effect.apply(Layer.PTChangingEffects_7, SubLayer.CharacteristicDefining_7a, abilityMap.get(effect.getId()), game);
-		}
+//		for (ContinuousEffect effect: layer) {
+//			effect.apply(Layer.PTChangingEffects_7, SubLayer.CharacteristicDefining_7a, abilityMap.get(effect.getId()), game);
+//		}
 		for (ContinuousEffect effect: layer) {
 			effect.apply(Layer.PTChangingEffects_7, SubLayer.SetPT_7b, abilityMap.get(effect.getId()), game);
 		}

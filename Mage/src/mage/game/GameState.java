@@ -47,6 +47,7 @@ import mage.abilities.TriggeredAbilities;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
 import mage.game.combat.Combat;
+import mage.game.combat.CombatGroup;
 import mage.game.command.Command;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
@@ -176,6 +177,10 @@ public class GameState implements Serializable, Copyable<GameState> {
         
         for (ExileZone zone: exile.getExileZones()) {
             sb.append("exile").append(zone.getName()).append(zone);
+        }
+        
+        for (CombatGroup group: combat.getGroups()) {
+            sb.append("combat").append(group.getDefenderId()).append(group.getAttackers()).append(group.getBlockers());
         }
 
 		return sb.toString();
