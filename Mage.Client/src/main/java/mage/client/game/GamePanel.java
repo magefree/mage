@@ -184,7 +184,7 @@ public class GamePanel extends javax.swing.JPanel {
                 pnlGameInfo.repaint();
                 this.handContainer.sizeHand(0.8, smallMode);
                 for (PlayAreaPanel p: players.values()) {
-                    p.sizePlayer();
+                    p.sizePlayer(smallMode);
                 }
             }
     	}
@@ -199,7 +199,7 @@ public class GamePanel extends javax.swing.JPanel {
                 pnlGameInfo.repaint();
                 this.handContainer.sizeHand(1, smallMode);
                 for (PlayAreaPanel p: players.values()) {
-                    p.sizePlayer();
+                    p.sizePlayer(smallMode);
                 }
             }
         }
@@ -840,21 +840,24 @@ public class GamePanel extends javax.swing.JPanel {
         			.addComponent(pnlGameInfo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
         			.addGap(0)
         			.addGroup(gl_jPanel3.createParallelGroup(Alignment.LEADING)
-        				.addComponent(pnlBattlefield, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         				.addComponent(handContainer, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        				.addComponent(jPhases, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        				.addComponent(jPhases, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        				.addGroup(gl_jPanel3.createSequentialGroup()
+        					.addComponent(pnlBattlefield, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+        					.addGap(49))))
         );
         gl_jPanel3.setVerticalGroup(
         	gl_jPanel3.createParallelGroup(Alignment.TRAILING)
         		.addGroup(gl_jPanel3.createSequentialGroup()
-        			.addComponent(pnlBattlefield, GroupLayout.DEFAULT_SIZE, 545, Short.MAX_VALUE)
+        			.addComponent(pnlBattlefield, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+        			.addPreferredGap(ComponentPlacement.RELATED)
         			.addComponent(handContainer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
         			.addComponent(jPhases, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        		.addComponent(pnlGameInfo, GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
+        		.addComponent(pnlGameInfo, GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
         jPanel3.setLayout(gl_jPanel3);
 
-        jPanel3.setMinimumSize(new Dimension(600, 400));
+//        jPanel3.setMinimumSize(new Dimension(400, 400));
         jSplitPane1.setLeftComponent(jPanel3);
 
         gameChatPanel.setMinimumSize(new java.awt.Dimension(100, 48));
@@ -872,11 +875,11 @@ public class GamePanel extends javax.swing.JPanel {
         );
     }
 
-	private void btnConcedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConcedeActionPerformed
+	private void btnConcedeActionPerformed(java.awt.event.ActionEvent evt) {
 		if (modalQuestion("Are you sure you want to concede?", "Confirm concede") == JOptionPane.YES_OPTION) {
 			session.concedeGame(gameId);
 		}
-	}//GEN-LAST:event_btnConcedeActionPerformed
+	}
 
 	private void btnSwitchHandActionPerformed(java.awt.event.ActionEvent evt) {                                           
 		String[] choices = handCards.keySet().toArray(new String[0]);

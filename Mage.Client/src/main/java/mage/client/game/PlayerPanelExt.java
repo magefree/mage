@@ -70,6 +70,7 @@ import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 /**
  * Enhanced player pane.
@@ -98,6 +99,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
     /** Creates new form PlayerPanel */
     public PlayerPanelExt() {
+    	setPreferredSize(new Dimension(94, 212));
         initComponents();
     }
 
@@ -135,12 +137,16 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             }
         }
 		this.avatar.setText(player.getName());
+		this.btnPlayer.setText(player.getName());
 		if (player.isActive()) {
 			this.avatar.setBorder(greenBorder);
+			this.btnPlayer.setBorder(greenBorder);
 		} else if (player.hasLeft()) {
 			this.avatar.setBorder(redBorder);
+			this.btnPlayer.setBorder(redBorder);
 		} else {
 			this.avatar.setBorder(emptyBorder);
+			this.btnPlayer.setBorder(emptyBorder);
 		}
 
 		synchronized (this) {
@@ -183,6 +189,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private void initComponents() {
 		
     	panelBackground = new MageRoundPane();
+    	panelBackground.setPreferredSize(new Dimension(92, 212));
 		Rectangle r = new Rectangle(80, 80);
 		lifeLabel = new JLabel();
 		handLabel = new JLabel();
@@ -266,6 +273,18 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 			}
 		});
 
+		btnPlayer = new JButton();
+		btnPlayer.setText("Player");
+		btnPlayer.setVisible(false);
+		btnPlayer.setToolTipText("Player");
+		btnPlayer.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				session.sendPlayerUUID(gameId, playerId);
+			}
+		});
+		
+		
 		// Add mana symbols
 		BufferedImage imageManaW = ManaSymbols.getManaSymbolImageSmall("W");
 		ImagePanel manaW = new ImagePanel(imageManaW, ImagePanel.ACTUAL);
@@ -311,9 +330,6 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 		GroupLayout gl_panelBackground = new GroupLayout(panelBackground);
 		gl_panelBackground.setHorizontalGroup(
 			gl_panelBackground.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelBackground.createSequentialGroup()
-					.addGap(6)
-					.addComponent(avatar, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))
 				.addGroup(gl_panelBackground.createSequentialGroup()
 					.addGap(9)
 					.addComponent(life, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
@@ -383,13 +399,21 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 						.addGroup(gl_panelBackground.createSequentialGroup()
 							.addGap(1)
 							.addComponent(manaCountLabelU, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))))
+				.addGroup(gl_panelBackground.createSequentialGroup()
+					.addGap(6)
+					.addGroup(gl_panelBackground.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnPlayer, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(avatar, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE))
+					.addGap(14))
 		);
 		gl_panelBackground.setVerticalGroup(
 			gl_panelBackground.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelBackground.createSequentialGroup()
 					.addGap(6)
 					.addComponent(avatar, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
-					.addGap(3)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnPlayer)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panelBackground.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panelBackground.createSequentialGroup()
 							.addGap(1)
@@ -456,67 +480,32 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addComponent(panelBackground, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addComponent(panelBackground, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addComponent(panelBackground, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addComponent(panelBackground, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE))
 		);
 		setLayout(groupLayout);
 
     }
 
-    public void sizePlayerPanel() {
-    	Dimension r = new Dimension(60, 60);
-    	this.avatar.setSize(r);
-    	this.avatar.setPreferredSize(r);
+    public void sizePlayerPanel(boolean smallMode) {
+        if (smallMode) {
+            avatar.setVisible(false);
+            btnPlayer.setVisible(true);            
+            panelBackground.setPreferredSize(new Dimension(92, 160));
+            panelBackground.setBounds(0, 0, 92, 160);
+        }
+        else {
+        	avatar.setVisible(true);
+        	btnPlayer.setVisible(false);
+        	panelBackground.setPreferredSize(new Dimension(92, 212));
+        	panelBackground.setBounds(0, 0, 92, 212);
+        }
     }
-    
-//	private void addManaImagePanel(String mana, Rectangle rect, JPanel container) {
-//		BufferedImage imageMana = ManaSymbols.getManaSymbolImageSmall(mana);
-//		if (imageMana != null) {
-//			ImagePanel manaB = new ImagePanel(imageMana, ImagePanel.ACTUAL);
-//			manaB.setBounds(rect.x, rect.y, rect.width, rect.height);
-//			manaB.setOpaque(false);
-//			container.add(manaB);
-//		}
-//		JLabel manaCountLabel = new JLabel();
-//		manaCountLabel.setText("0");
-//		manaCountLabel.setBounds(rect.x + rect.width + 5, rect.y - 8, 30, 30);
-//		container.add(manaCountLabel);
-//		manaLabels.put(mana, manaCountLabel);
-//	}
-
-	/**
-	 * Adds image panel and label to the container panel.
-	 *
-	 * @param containerPanel
-	 * @param text
-	 * @param r
-	 * @param imagePath
-	 * @return
-	 */
-//	private JComponent addParam(JPanel containerPanel, String tooltip, JLabel text, Rectangle r, String imagePath, boolean isButton) {
-//		if (text != null) {
-//			text.setForeground(Color.black);
-//			containerPanel.add(text);
-//			text.setToolTipText(tooltip);
-//		}
-//
-//		Image image = ImageHelper.getImageFromResources(imagePath);
-//		BufferedImage resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
-//		JComponent component = null;
-//		if (isButton) {
-//		 	component = new HoverButton(null, resized, resized, resized, r);
-//		} else {
-//			component = new ImagePanel(resized, ImagePanel.ACTUAL);
-//		}
-//		component.setToolTipText(tooltip);
-//		component.setOpaque(false);
-//		containerPanel.add(component);
-//
-//		return component;
-//	}
 
 	private void btnGraveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraveActionPerformed
 		if (graveyard == null) {
@@ -536,6 +525,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 	}
 
 	private HoverButton avatar;
+	private JButton btnPlayer;
 	private ImagePanel life;
 	private ImagePanel poison;
 	private ImagePanel hand;

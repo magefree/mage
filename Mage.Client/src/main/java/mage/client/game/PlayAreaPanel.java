@@ -58,14 +58,13 @@ import javax.swing.LayoutStyle.ComponentPlacement;
  */
 public class PlayAreaPanel extends javax.swing.JPanel {
 
-	UUID playerId;
-	UUID gameId;
+	private UUID playerId;
+	private UUID gameId;
 
     /** Creates new form PlayAreaPanel */
     public PlayAreaPanel() {
         initComponents();
 		setOpaque(false);
-		jPanel1.setOpaque(false);
         jScrollPane1.setOpaque(false);
         jScrollPane1.getViewport().setOpaque(false);
         battlefieldPanel.setOpaque(false);
@@ -99,12 +98,9 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 		return battlefieldPanel;
 	}
 
-    @SuppressWarnings("unchecked")
     private void initComponents() {
 		setBorder(BorderFactory.createLineBorder(new Color(0,0,0,0)));
-        jPanel1 = new javax.swing.JPanel();
         playerPanel = new PlayerPanelExt();
-		playerPanel.setPreferredSize(new Dimension(92, 212));
         btnCheat = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         battlefieldPanel = new mage.client.game.BattlefieldPanel(jScrollPane1);
@@ -116,19 +112,6 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout gl_jPanel1 = new javax.swing.GroupLayout(jPanel1);
-        gl_jPanel1.setHorizontalGroup(
-        	gl_jPanel1.createParallelGroup(Alignment.LEADING)
-        		.addComponent(playerPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        gl_jPanel1.setVerticalGroup(
-        	gl_jPanel1.createParallelGroup(Alignment.LEADING)
-        		.addGroup(gl_jPanel1.createSequentialGroup()
-        			.addComponent(playerPanel, GroupLayout.PREFERRED_SIZE, 212, Short.MAX_VALUE)
-        			.addContainerGap())
-        );
-        jPanel1.setLayout(gl_jPanel1);
-
         jScrollPane1.setViewportView(battlefieldPanel);
 		Border empty = new EmptyBorder(0,0,0,0);
 		jScrollPane1.setBorder(empty);
@@ -136,29 +119,32 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         layout.setHorizontalGroup(
-        	layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(layout.createSequentialGroup()
-        			.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
-        			.addGap(0))
+        	layout.createSequentialGroup()
+        		.addComponent(playerPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        		.addPreferredGap(ComponentPlacement.RELATED)
+        		.addComponent(jScrollPane1, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-        	layout.createParallelGroup(Alignment.TRAILING)
-        		.addGroup(Alignment.LEADING, layout.createSequentialGroup()
-        			.addGroup(layout.createParallelGroup(Alignment.TRAILING)
-        				.addComponent(jScrollPane1)
-        				.addComponent(jPanel1, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 213, GroupLayout.PREFERRED_SIZE))
-        			.addGap(0))
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addComponent(playerPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        		.addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
         );
         this.setLayout(layout);
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
-    public void sizePlayer() {
-    	this.playerPanel.sizePlayerPanel();
+    public void sizePlayer(boolean smallMode) {
+    	this.playerPanel.sizePlayerPanel(smallMode);
+    	if (smallMode) {
+    		this.playerPanel.setPreferredSize(new Dimension(92, 160));
+    		this.jScrollPane1.setPreferredSize(new Dimension(160, 160));
+    	}
+    	else {
+    		this.playerPanel.setPreferredSize(new Dimension(92, 212));
+    		this.jScrollPane1.setPreferredSize(new Dimension(160, 212));
+    	}
     }
     
-	private void btnCheatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheatActionPerformed
+	private void btnCheatActionPerformed(java.awt.event.ActionEvent evt) {
 		try {
 			MageFrame.getSession().cheat(gameId, playerId, Sets.loadDeck("cheat.dck"));
 		} catch (FileNotFoundException ex) {
@@ -166,15 +152,12 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 		} catch (IOException ex) {
 			Logger.getLogger(PlayAreaPanel.class.getName()).log(Level.SEVERE, null, ex);
 		}
-	}//GEN-LAST:event_btnCheatActionPerformed
+	}
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    
     private mage.client.game.BattlefieldPanel battlefieldPanel;
 	private javax.swing.JButton btnCheat;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    //private mage.client.game.ManaPool manaPool;
     private PlayerPanelExt playerPanel;
-    // End of variables declaration//GEN-END:variables
 
 }
