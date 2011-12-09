@@ -62,7 +62,7 @@ public class CaravanEscort extends LevelerCard<CaravanEscort> {
 
         Abilities<Ability> levelAbilities = new AbilitiesImpl<Ability>();
         levelAbilities.add(FirstStrikeAbility.getInstance());
-        this.getLevels().add(new LevelAbility(7, -1, levelAbilities, 5, 5));
+        this.getLevels().add(new LevelAbility(5, -1, levelAbilities, 5, 5));
     }
 
     public CaravanEscort(final CaravanEscort card) {
