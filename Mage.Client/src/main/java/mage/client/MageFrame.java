@@ -623,7 +623,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 		btnExit = new javax.swing.JButton();
 		lblStatus = new javax.swing.JLabel();
 
-		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		setMinimumSize(new Dimension(600, 400));
 
 		desktopPane.setBackground(new java.awt.Color(204, 204, 204));
