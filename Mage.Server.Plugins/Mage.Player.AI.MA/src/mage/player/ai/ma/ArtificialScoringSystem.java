@@ -1,7 +1,6 @@
 package mage.player.ai.ma;
 
 import mage.Constants;
-import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
@@ -65,6 +64,7 @@ public class ArtificialScoringSystem {
 	public static int getVariablePermanentScore(final Game game, final Permanent permanent) {
 
 		int score = permanent.getCounters().getCount(CounterType.CHARGE) * 30;
+        score += permanent.getCounters().getCount(CounterType.LEVEL) * 30;
         score -= permanent.getDamage() * 2;
 		if (!canTap(permanent)) {
 			score += getTappedScore(permanent);
@@ -108,7 +108,13 @@ public class ArtificialScoringSystem {
 	}
 
 	public static int getTappedScore(final Permanent permanent) {
-		return permanent.getCardType().contains(Constants.CardType.CREATURE) ? -100 : -50;
+		if (permanent.getCardType().contains(Constants.CardType.CREATURE)) {
+            return -100;
+        } else if (permanent.getCardType().contains(Constants.CardType.LAND)) {
+            return -10;
+        } else {
+            return -50;
+        }
 	}
 
 	public static int getLifeScore(final int life) {

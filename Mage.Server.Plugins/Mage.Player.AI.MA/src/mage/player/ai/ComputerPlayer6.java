@@ -40,14 +40,17 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.SearchEffect;
+import mage.abilities.keyword.LevelUpAbility;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.choices.Choice;
+import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentCard;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 import mage.game.turn.*;
@@ -472,6 +475,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 		//logger.info("simulating -- player " + currentPlayer.getName());
 		SimulationNode2 bestNode = null;
 		List<Ability> allActions = currentPlayer.simulatePriority(game);
+        optimize(game, allActions);
 		logger.debug("simulating -- adding " + allActions.size() + " children:" + allActions);
 		for (Ability action: allActions) {
 			if (Thread.interrupted()) {
@@ -482,8 +486,8 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 			Game sim = game.copy();
 			if (sim.getPlayer(currentPlayer.getId()).activateAbility((ActivatedAbility) action.copy(), sim)) {
 				sim.applyEffects();
-				if (checkForRepeatedAction(sim, node, action, currentPlayer.getId()))
-					continue;
+				//if (checkForRepeatedAction(sim, node, action, currentPlayer.getId()))
+					//continue;
 				if (!sim.isGameOver() && action.isUsesStack()) {
 					// only pass if the last action uses the stack
 					sim.getPlayer(currentPlayer.getId()).pass();
@@ -566,6 +570,35 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 			return alpha;
 		}
 	}
+
+    /**
+     * Various AI optimizations for actions.
+     *
+     * @param allActions
+     */
+    protected void optimize(Game game, List<Ability> allActions) {
+        List<Ability> toRemove = null;
+        for (Ability ability : allActions) {
+            if (ability instanceof LevelUpAbility) {
+                Permanent permanent = game.getPermanent(ability.getSourceId());
+                if (permanent != null && permanent instanceof PermanentCard) {
+                    PermanentCard leveler = (PermanentCard) permanent;
+                        // check already existing Level counters and compare to maximum that make sense
+                        if (permanent.getCounters().getCount(CounterType.LEVEL) >= leveler.getMaxLevelCounters()) {
+                            if (toRemove == null) {
+                                toRemove = new ArrayList<Ability>();
+                            }
+                            toRemove.add(ability);
+                        }
+                }
+            }
+        }
+        if (toRemove != null) {
+            for (Ability r : toRemove) {
+                allActions.remove(r);
+            }
+        }
+    }
 
 	protected boolean allPassed(Game game) {
 		for (Player player: game.getPlayers().values()) {
@@ -806,7 +839,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 		return sim;
 	}
 
-	private boolean checkForRepeatedAction(Game sim, SimulationNode2 node, Ability action, UUID playerId) {
+	/*private boolean checkForRepeatedAction(Game sim, SimulationNode2 node, Ability action, UUID playerId) {
 		if (action instanceof PassAbility)
 			return false;
 		int val = GameStateEvaluator2.evaluate(playerId, sim);
@@ -820,7 +853,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 			}
 		}
 		return false;
-	}
+	}*/
 
     protected void getSuggestedActions() {
         try {

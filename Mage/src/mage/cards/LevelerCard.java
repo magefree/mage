@@ -28,12 +28,13 @@
 
 package mage.cards;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.keyword.LevelAbility;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -65,6 +66,14 @@ public abstract class LevelerCard<T extends LevelerCard<T>> extends CardImpl<T> 
 		}
 		return null;
 	}
+
+    public int getMaxLevelCounters() {
+        for (LevelAbility levelerLevel: levels) {
+			if (levelerLevel.getLevel2() == -1)
+				return levelerLevel.getLevel1();
+		}
+        return 0;
+    }
 
 	@Override
 	public List<String> getRules() {

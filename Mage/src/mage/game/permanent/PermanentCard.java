@@ -28,9 +28,6 @@
 
 package mage.game.permanent;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
@@ -43,192 +40,204 @@ import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class PermanentCard extends PermanentImpl<PermanentCard> {
 
-	protected List<String> levelerRules;
+    protected List<String> levelerRules;
+    protected int maxLevelCounters;
     protected Card card;
 
-	public PermanentCard(Card card, UUID controllerId) {
-		super(card.getId(), card.getOwnerId(), controllerId, card.getName());
+    public PermanentCard(Card card, UUID controllerId) {
+        super(card.getId(), card.getOwnerId(), controllerId, card.getName());
         this.card = card.copy();
-		init(card);
-	}
+        init(card);
+    }
 
-	protected PermanentCard(UUID id, Card card, UUID controllerId) {
-		super(card.getId(), card.getOwnerId(), controllerId, card.getName());
+    protected PermanentCard(UUID id, Card card, UUID controllerId) {
+        super(card.getId(), card.getOwnerId(), controllerId, card.getName());
         this.card = card.copy();
-		init(card);
-	}
+        init(card);
+    }
 
-	protected void init(Card card) {
-		copyFromCard(card);
-		/*if (card.getCardType().contains(CardType.PLANESWALKER)) {
-			this.loyalty = new MageInt(card.getLoyalty().getValue());
-		}*/
-		if (card instanceof LevelerCard) {
-			levelerRules = ((LevelerCard)card).getRules();
-		}
-	}
+    protected void init(Card card) {
+        copyFromCard(card);
+        /*if (card.getCardType().contains(CardType.PLANESWALKER)) {
+              this.loyalty = new MageInt(card.getLoyalty().getValue());
+          }*/
+        if (card instanceof LevelerCard) {
+            levelerRules = ((LevelerCard) card).getRules();
+            maxLevelCounters = ((LevelerCard) card).getMaxLevelCounters();
+        }
+    }
 
-	public PermanentCard(final PermanentCard permanent) {
-		super(permanent);
+    public PermanentCard(final PermanentCard permanent) {
+        super(permanent);
         this.card = permanent.card;
-	}
+        this.maxLevelCounters = permanent.maxLevelCounters;
+    }
 
-	@Override
-	public void reset(Game game) {
-		// when the permanent is reset copy all original values from the card
-		// must copy card each reset so that the original values don't get modified
-		copyFromCard(card);
-		super.reset(game);
-	}
+    @Override
+    public void reset(Game game) {
+        // when the permanent is reset copy all original values from the card
+        // must copy card each reset so that the original values don't get modified
+        copyFromCard(card);
+        super.reset(game);
+    }
 
-	protected void copyFromCard(Card card) {
-		this.name = card.getName();
+    protected void copyFromCard(Card card) {
+        this.name = card.getName();
         this.abilities.clear();
-		this.abilities.addAll(card.getAbilities());
-		this.abilities.setControllerId(this.controllerId);
+        this.abilities.addAll(card.getAbilities());
+        this.abilities.setControllerId(this.controllerId);
         this.cardType.clear();
-		this.cardType.addAll(card.getCardType());
-		this.color = card.getColor().copy();
-		this.manaCost = card.getManaCost().copy();
-		this.power = card.getPower().copy();
-		this.toughness = card.getToughness().copy();
-		if (card instanceof LevelerCard) {
-			LevelAbility level = ((LevelerCard)card).getLevel(this.getCounters().getCount(CounterType.LEVEL));
-			if (level != null) {
-				this.power.setValue(level.getPower());
-				this.toughness.setValue(level.getToughness());
-				for (Ability ability: level.getAbilities()) {
-					this.addAbility(ability);
-				}
-			}
-		}
+        this.cardType.addAll(card.getCardType());
+        this.color = card.getColor().copy();
+        this.manaCost = card.getManaCost().copy();
+        this.power = card.getPower().copy();
+        this.toughness = card.getToughness().copy();
+        if (card instanceof LevelerCard) {
+            LevelAbility level = ((LevelerCard) card).getLevel(this.getCounters().getCount(CounterType.LEVEL));
+            if (level != null) {
+                this.power.setValue(level.getPower());
+                this.toughness.setValue(level.getToughness());
+                for (Ability ability : level.getAbilities()) {
+                    this.addAbility(ability);
+                }
+            }
+        }
+        if (card instanceof PermanentCard) {
+            this.maxLevelCounters = ((PermanentCard) card).maxLevelCounters;
+        }
         this.subtype.clear();
-		this.subtype.addAll(card.getSubtype());
+        this.subtype.addAll(card.getSubtype());
         this.supertype.clear();
-		this.supertype.addAll(card.getSupertype());
-		this.expansionSetCode = card.getExpansionSetCode();
-		this.rarity = card.getRarity();
-		this.cardNumber = card.getCardNumber();
+        this.supertype.addAll(card.getSupertype());
+        this.expansionSetCode = card.getExpansionSetCode();
+        this.rarity = card.getRarity();
+        this.cardNumber = card.getCardNumber();
 
         canTransform = card.canTransform();
         if (canTransform) {
             secondSideCard = card.getSecondCardFace();
             nightCard = card.isNightCard();
         }
-	}
+    }
 
-	public void checkPermanentOnlyTriggers(ZoneChangeEvent event, Game game) {
-		// we only want to trigger abilities that are not on the underlying card ie. have been added by another effect
-		// or we want to trigger abilities that only trigger on leaving the battlefield
-		// card abilities will get triggered later when the card hits the new zone
+    public void checkPermanentOnlyTriggers(ZoneChangeEvent event, Game game) {
+        // we only want to trigger abilities that are not on the underlying card ie. have been added by another effect
+        // or we want to trigger abilities that only trigger on leaving the battlefield
+        // card abilities will get triggered later when the card hits the new zone
         List<UUID> triggered = new ArrayList<UUID>();
-		for (TriggeredAbility ability: abilities.getTriggeredAbilities(event.getFromZone())) {
-			if (!card.getAbilities().containsKey(ability.getId())) {
-				if (ability.checkTrigger(event, game)) {
+        for (TriggeredAbility ability : abilities.getTriggeredAbilities(event.getFromZone())) {
+            if (!card.getAbilities().containsKey(ability.getId())) {
+                if (ability.checkTrigger(event, game)) {
                     triggered.add(ability.getId());
-					ability.trigger(game, controllerId);
-				}
-			} else if (ability instanceof ZoneChangeTriggeredAbility && event.getFromZone() == Zone.BATTLEFIELD) {
-				ZoneChangeTriggeredAbility zcAbility = (ZoneChangeTriggeredAbility)ability;
-				if (zcAbility.getToZone() == null) {
-					if (ability.checkTrigger(event, game)) {
+                    ability.trigger(game, controllerId);
+                }
+            } else if (ability instanceof ZoneChangeTriggeredAbility && event.getFromZone() == Zone.BATTLEFIELD) {
+                ZoneChangeTriggeredAbility zcAbility = (ZoneChangeTriggeredAbility) ability;
+                if (zcAbility.getToZone() == null) {
+                    if (ability.checkTrigger(event, game)) {
                         triggered.add(ability.getId());
-						ability.trigger(game, controllerId);
-					}
-				}
-			}
-		}
-		for (TriggeredAbility ability: abilities.getTriggeredAbilities(event.getToZone())) {
-			if (!card.getAbilities().containsKey(ability.getId())) {
-				if (!triggered.contains(ability.getId()) && ability.checkTrigger(event, game)) {
-					ability.trigger(game, controllerId);
-				}
-			}
-		}
-	}
+                        ability.trigger(game, controllerId);
+                    }
+                }
+            }
+        }
+        for (TriggeredAbility ability : abilities.getTriggeredAbilities(event.getToZone())) {
+            if (!card.getAbilities().containsKey(ability.getId())) {
+                if (!triggered.contains(ability.getId()) && ability.checkTrigger(event, game)) {
+                    ability.trigger(game, controllerId);
+                }
+            }
+        }
+    }
 
 
-	@Override
-	public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag) {
-		Zone fromZone = game.getState().getZone(objectId);
-		Player controller = game.getPlayer(controllerId);
-		if (controller != null && controller.removeFromBattlefield(this, game)) {
-			ZoneChangeEvent event = new ZoneChangeEvent(this, sourceId, controllerId, fromZone, toZone);
-			if (!game.replaceEvent(event)) {
-				Player owner = game.getPlayer(ownerId);
-				game.rememberLKI(objectId, Zone.BATTLEFIELD, this);
-				if (owner != null) {
-					switch (event.getToZone()) {
-						case GRAVEYARD:
-							owner.putInGraveyard(card, game, !flag);
-							break;
-						case HAND:
-							owner.getHand().add(card);
-							break;
-						case EXILED:
-							game.getExile().getPermanentExile().add(card);
-							break;
-						case LIBRARY:
-							if (flag)
-								owner.getLibrary().putOnTop(card, game);
-							else
-								owner.getLibrary().putOnBottom(card, game);
-							break;
-						case BATTLEFIELD:
-							//should never happen
-							break;
-					}
-					game.setZone(objectId, event.getToZone());
-					game.fireEvent(event);
-					return game.getState().getZone(objectId) == toZone;
-				}
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag) {
+        Zone fromZone = game.getState().getZone(objectId);
+        Player controller = game.getPlayer(controllerId);
+        if (controller != null && controller.removeFromBattlefield(this, game)) {
+            ZoneChangeEvent event = new ZoneChangeEvent(this, sourceId, controllerId, fromZone, toZone);
+            if (!game.replaceEvent(event)) {
+                Player owner = game.getPlayer(ownerId);
+                game.rememberLKI(objectId, Zone.BATTLEFIELD, this);
+                if (owner != null) {
+                    switch (event.getToZone()) {
+                        case GRAVEYARD:
+                            owner.putInGraveyard(card, game, !flag);
+                            break;
+                        case HAND:
+                            owner.getHand().add(card);
+                            break;
+                        case EXILED:
+                            game.getExile().getPermanentExile().add(card);
+                            break;
+                        case LIBRARY:
+                            if (flag)
+                                owner.getLibrary().putOnTop(card, game);
+                            else
+                                owner.getLibrary().putOnBottom(card, game);
+                            break;
+                        case BATTLEFIELD:
+                            //should never happen
+                            break;
+                    }
+                    game.setZone(objectId, event.getToZone());
+                    game.fireEvent(event);
+                    return game.getState().getZone(objectId) == toZone;
+                }
+            }
+        }
+        return false;
+    }
 
 
-	@Override
-	public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game) {
-		Zone fromZone = game.getState().getZone(objectId);
-		Player controller = game.getPlayer(controllerId);
-		if (controller != null && controller.removeFromBattlefield(this, game)) {
-			ZoneChangeEvent event = new ZoneChangeEvent(this, sourceId, ownerId, fromZone, Zone.EXILED);
-			if (!game.replaceEvent(event)) {
-				if (exileId == null) {
-					game.getExile().getPermanentExile().add(card);
-				}
-				else {
-					game.getExile().createZone(exileId, name).add(card);
-				}
-				game.setZone(objectId, event.getToZone());
-				game.fireEvent(event);
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game) {
+        Zone fromZone = game.getState().getZone(objectId);
+        Player controller = game.getPlayer(controllerId);
+        if (controller != null && controller.removeFromBattlefield(this, game)) {
+            ZoneChangeEvent event = new ZoneChangeEvent(this, sourceId, ownerId, fromZone, Zone.EXILED);
+            if (!game.replaceEvent(event)) {
+                if (exileId == null) {
+                    game.getExile().getPermanentExile().add(card);
+                } else {
+                    game.getExile().createZone(exileId, name).add(card);
+                }
+                game.setZone(objectId, event.getToZone());
+                game.fireEvent(event);
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public PermanentCard copy() {
-		return new PermanentCard(this);
-	}
+    @Override
+    public PermanentCard copy() {
+        return new PermanentCard(this);
+    }
 
-	@Override
-	public List<String> getRules() {
-		if (levelerRules == null)
-			return super.getRules();
-		List<String> rules = new ArrayList<String>();
-		rules.addAll(super.getRules());
-		rules.addAll(levelerRules);
-		return rules;
-	}
+    public int getMaxLevelCounters() {
+        return this.maxLevelCounters;
+    }
+
+    @Override
+    public List<String> getRules() {
+        if (levelerRules == null)
+            return super.getRules();
+        List<String> rules = new ArrayList<String>();
+        rules.addAll(super.getRules());
+        rules.addAll(levelerRules);
+        return rules;
+    }
 
 }
