@@ -38,6 +38,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.BasicManaEffect;
+import mage.abilities.mana.BasicManaAbility;
 import mage.cards.CardImpl;
 
 /**
@@ -50,7 +51,7 @@ public class DreamstoneHedron extends CardImpl<DreamstoneHedron> {
         super(ownerId, 216, "Dreamstone Hedron", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{6}");
         this.expansionSetCode = "ROE";
 
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.ColorlessMana(3)), new TapSourceCost()));
+        this.addAbility(new DreamstoneHedronFirstManaAbility());
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new DrawCardControllerEffect(3),
                 new GenericManaCost(3));
@@ -67,4 +68,21 @@ public class DreamstoneHedron extends CardImpl<DreamstoneHedron> {
     public DreamstoneHedron copy() {
         return new DreamstoneHedron(this);
     }
+    
+    class DreamstoneHedronFirstManaAbility extends BasicManaAbility<DreamstoneHedronFirstManaAbility> {
+
+    public DreamstoneHedronFirstManaAbility() {
+        super(new BasicManaEffect(new Mana(0, 0, 0, 0, 0, 3, 0)));
+        this.netMana.setColorless(3);
+    }
+
+    public DreamstoneHedronFirstManaAbility(final DreamstoneHedronFirstManaAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public DreamstoneHedronFirstManaAbility copy() {
+        return new DreamstoneHedronFirstManaAbility(this);
+    }
+}
 }
