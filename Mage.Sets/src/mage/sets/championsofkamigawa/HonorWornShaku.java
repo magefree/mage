@@ -33,13 +33,11 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
+import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
@@ -62,8 +60,11 @@ public class HonorWornShaku extends CardImpl<HonorWornShaku> {
     public HonorWornShaku(UUID ownerId) {
         super(ownerId, 254, "Honor-Worn Shaku", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "CHK";
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 0, 0, 0, 0, 1, 0)), new TapSourceCost()));
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new UntapSourceEffect(), new TapTargetCost(new TargetControlledPermanent(filter)));
+        this.addAbility(new ColorlessManaAbility());
+        Ability ability = new SimpleActivatedAbility(
+                Constants.Zone.BATTLEFIELD, 
+                new UntapSourceEffect(), 
+                new TapTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);
     }
 
