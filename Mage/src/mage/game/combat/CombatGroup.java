@@ -28,12 +28,9 @@
 
 package mage.game.combat;
 
-import java.io.Serializable;
-import java.util.*;
 import mage.Constants.Outcome;
 import mage.abilities.common.DamageAsThoughNotBlockedAbility;
 import mage.abilities.keyword.DeathtouchAbility;
-
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -42,6 +39,9 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.Copyable;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
  *
@@ -480,8 +480,13 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 		}
 		if (blockers.contains(creatureId)) {
 			blockers.remove(creatureId);
+
+            // ayratn: Issue 375
+            /*
             if (blockers.isEmpty())
                 blocked = false;
+            */
+
 			//20100423 - 509.2a
 			if (blockerOrder.contains(creatureId))
 				blockerOrder.remove(creatureId);

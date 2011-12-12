@@ -31,4 +31,12 @@ public class DamageDistributionTest extends CardTestBase {
         assertLife(playerB, 4);
     }
 
+    @Test
+    public void testDoubleStrikeUnblocked() {
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Warren Instigator");
+        setLife(playerB, 4);
+        execute();
+        assertLife(playerB, 2);
+    }
+
 }
