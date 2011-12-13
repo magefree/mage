@@ -43,7 +43,6 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -51,20 +50,25 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class DemonicAppetite extends CardImpl<DemonicAppetite> {
 
-    public DemonicAppetite (UUID ownerId) {
+   public DemonicAppetite (UUID ownerId) {
         super(ownerId, 106, "Demonic Appetite", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
         this.expansionSetCode = "ROE";
         this.subtype.add("Aura");
-		this.color.setBlack(true);
+        this.color.setBlack(true);
 
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		this.addAbility(ability);
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3, Constants.Duration.WhileOnBattlefield)));
-        ability = new BeginningOfUpkeepTriggeredAbility(new SacrificeTargetEffect(), Constants.TargetController.YOU, false);
-        ability.addTarget(new TargetControlledCreaturePermanent());
+        TargetPermanent auraTarget = new TargetControlledCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
+        
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3, Constants.Duration.WhileOnBattlefield)));
+
+        ability = new BeginningOfUpkeepTriggeredAbility(
+                new DemonicAppetiteEffect(), 
+                Constants.TargetController.YOU, 
+                false);
+        ability.addTarget(new TargetControlledCreaturePermanent(true));
         this.addAbility(ability);
     }
 
@@ -76,5 +80,18 @@ public class DemonicAppetite extends CardImpl<DemonicAppetite> {
     public DemonicAppetite copy() {
         return new DemonicAppetite(this);
     }
-
 }
+
+    class DemonicAppetiteEffect extends SacrificeTargetEffect {
+            
+        DemonicAppetiteEffect() {
+                super();
+                staticText = "sacrifice a creature";
+        }
+        
+        @Override
+        public DemonicAppetiteEffect copy() {
+                return new DemonicAppetiteEffect();
+        }
+ 
+}  
