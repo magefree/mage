@@ -46,6 +46,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 /**
  *
  * @author North
+ * @author LevelX - changed to checkInterveningIfClause 
  */
 public class EmeriaTheSkyRuin extends CardImpl<EmeriaTheSkyRuin> {
 
@@ -96,11 +97,15 @@ class EmeriaTheSkyRuinTriggeredAbility extends TriggeredAbilityImpl<EmeriaTheSky
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE && event.getPlayerId().equals(this.controllerId)
-                && game.getBattlefield().count(filter, this.controllerId, game) > 6) {
+        if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE && event.getPlayerId().equals(this.controllerId)) {
             return true;
         }
         return false;
+    }
+    
+    @Override
+    public boolean checkInterveningIfClause(Game game) {
+	return game.getBattlefield().countAll(filter, this.controllerId) >= 7;
     }
 
     @Override
