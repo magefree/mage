@@ -53,7 +53,7 @@ public class BallynockTrapper extends CardImpl<BallynockTrapper> {
 
     static {
         filterWhiteSpell.setUseColor(true);
-        filterWhiteSpell.setColor(ObjectColor.RED);
+        filterWhiteSpell.setColor(ObjectColor.WHITE);
     }
 
     public BallynockTrapper(UUID ownerId) {

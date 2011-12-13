@@ -49,7 +49,7 @@ import mage.filter.common.FilterControlledPermanent;
 public class AngelicOverseer extends CardImpl<AngelicOverseer> {
 
     private static final String rule = "As long as you control a Human, {this} has hexproof and is indestructible.";
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Plains");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Human");
 
     static {
         filter.getSubtype().add("Human");

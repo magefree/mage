@@ -57,7 +57,7 @@ public class AegisAngel extends CardImpl<AegisAngel> {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
         this.addAbility(FlyingAbility.getInstance());
-        FilterPermanent filter = new FilterPermanent("another");
+        FilterPermanent filter = new FilterPermanent("another target permanent");
         filter.setAnother(true);
         Ability ability = new EntersBattlefieldTriggeredAbility(new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Constants.Duration.WhileOnBattlefield), false);
         Target target = new TargetPermanent(filter);

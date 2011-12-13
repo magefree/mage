@@ -54,7 +54,7 @@ public class BelligerentHatchling extends CardImpl<BelligerentHatchling> {
         filterRedSpell.setUseColor(true);
         filterRedSpell.setColor(ObjectColor.RED);
         filterWhiteSpell.setUseColor(true);
-        filterWhiteSpell.setColor(ObjectColor.RED);
+        filterWhiteSpell.setColor(ObjectColor.WHITE);
     }
 
     public BelligerentHatchling(UUID ownerId) {
