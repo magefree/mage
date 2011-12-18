@@ -8,26 +8,25 @@
     <format>zip</format>
   </formats>
   <dependencySets>
-    <dependencySet>
-      <outputDirectory>/lib</outputDirectory>
-      <includes>
-        <include>org.mage:Mage-Client</include>
-      </includes>
-    </dependencySet>
-    <dependencySet>
-      <outputDirectory>/lib/</outputDirectory>
-      <excludes>
-          <exclude>org.mage:Mage-Client</exclude>
-          <exclude>org.mage:Mage-Theme-Plugin</exclude>
-          <exclude>org.mage:Mage-Counter-Plugin</exclude>
-      </excludes>
-    </dependencySet>
+     <dependencySet>
+       <outputDirectory>/lib</outputDirectory>
+       <includes>
+         <include>org.mage:mage-client</include>
+       </includes>
+     </dependencySet>
+     <dependencySet>
+       <outputDirectory>/lib/</outputDirectory>
+       <excludes>
+           <exclude>org.mage:mage-client</exclude>
+           <exclude>org.mage:mage-theme-plugin</exclude>
+           <exclude>org.mage:mage-counter-plugin</exclude>
+       </excludes>
+     </dependencySet>
     <dependencySet>
         <outputDirectory>/plugins</outputDirectory>
         <includes>
-            <include>org.mage:Mage-Theme-Plugin</include>
-            <include>org.mage:Mage-Counter-Plugin</include>
-            <include>org.mage:Mage-Counter-Plugin</include>
+            <include>org.mage:mage-theme-plugin</include>
+            <include>org.mage:mage-counter-plugin</include>
         </includes>
     </dependencySet>
   </dependencySets>

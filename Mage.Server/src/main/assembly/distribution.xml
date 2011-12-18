@@ -11,36 +11,36 @@
         <dependencySet>
             <outputDirectory>/lib</outputDirectory>
             <includes>
-                <include>org.mage:Mage-Server</include>
+                <include>org.mage:mage-server</include>
             </includes>
         </dependencySet>
         <dependencySet>
             <outputDirectory>/plugins</outputDirectory>
             <includes>
-                <include>org.mage:Mage-Deck-Constructed</include>
-                <include>org.mage:Mage-Deck-Limited</include>
-                <include>org.mage:Mage-Game-FreeForAll</include>
-                <include>org.mage:Mage-Game-TwoPlayerDuel</include>
-                <include>org.mage:Mage-Player-AIMinimax</include>
-                <include>org.mage:Mage-Player-AI-MA</include>
-                <include>org.mage:Mage-Player-Human</include>
-                <include>org.mage:Mage-Tournament-BoosterDraft</include>
-                <include>org.mage:Mage-Tournament-Sealed</include>
+                <include>org.mage:mage-deck-constructed</include>
+                <include>org.mage:mage-deck-limited</include>
+                <include>org.mage:mage-game-freeforall</include>
+                <include>org.mage:mage-game-twoplayerduel</include>
+                <include>org.mage:mage-player-aiminimax</include>
+                <include>org.mage:mage-player-ai-ma</include>
+                <include>org.mage:mage-player-human</include>
+                <include>org.mage:mage-tournament-boosterdraft</include>
+                <include>org.mage:mage-tournament-sealed</include>
             </includes>
         </dependencySet>
         <dependencySet>
             <outputDirectory>/lib/</outputDirectory>
             <excludes>
-                <exclude>org.mage:Mage-Server</exclude>
-                <exclude>org.mage:Mage-Deck-Constructed</exclude>
-                <exclude>org.mage:Mage-Deck-Limited</exclude>
-                <exclude>org.mage:Mage-Game-FreeForAll</exclude>
-                <exclude>org.mage:Mage-Game-TwoPlayerDuel</exclude>
-                <exclude>org.mage:Mage-Player-AIMinimax</exclude>
-                <exclude>org.mage:Mage-Player-AI-MA</exclude>
-                <exclude>org.mage:Mage-Player-Human</exclude>
-                <exclude>org.mage:Mage-Tournament-BoosterDraft</exclude>
-                <exclude>org.mage:Mage-Tournament-Sealed</exclude>
+                <exclude>org.mage:mage-server</exclude>
+                <exclude>org.mage:mage-deck-constructed</exclude>
+                <exclude>org.mage:mage-deck-limited</exclude>
+                <exclude>org.mage:mage-game-freeforall</exclude>
+                <exclude>org.mage:mage-game-twoplayerduel</exclude>
+                <exclude>org.mage:mage-player-aiminimax</exclude>
+                <exclude>org.mage:mage-player-ai-ma</exclude>
+                <exclude>org.mage:mage-player-human</exclude>
+                <exclude>org.mage:mage-tournament-boosterdraft</exclude>
+                <exclude>org.mage:mage-tournament-sealed</exclude>
             </excludes>
         </dependencySet>
     </dependencySets>
