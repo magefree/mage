@@ -92,6 +92,9 @@ class SpikeshotGoblinEffect extends OneShotEffect<SpikeshotGoblinEffect> {
     public boolean apply(Game game, Ability source) {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         Permanent permanent = game.getPermanent(source.getFirstTarget());
+        if (sourcePermanent == null) {
+            sourcePermanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Constants.Zone.BATTLEFIELD);
+        }
 		if (sourcePermanent != null && permanent != null) {
 			permanent.damage(sourcePermanent.getPower().getValue(), source.getId(), game, true, false);
 			return true;
