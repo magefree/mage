@@ -25,43 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.sets.fifthdawn;
 
 import java.util.UUID;
-
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.abilities.effects.common.DrawCardControllerEffect;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
-import mage.cards.CardImpl;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class Bewilder extends CardImpl<Bewilder> {
+public class CranialPlating extends mage.sets.planechase.CranialPlating {
 
-    public Bewilder(UUID ownerId) {
-        super(ownerId, 49, "Bewilder", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "TSP";
-
-        this.color.setBlue(true);
-
-        // Target creature gets -3/-0 until end of turn.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(-3, 0, Constants.Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+    public CranialPlating(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 113;
+        this.expansionSetCode = "5DN";
     }
 
-    public Bewilder(final Bewilder card) {
+    public CranialPlating(final CranialPlating card) {
         super(card);
     }
 
     @Override
-    public Bewilder copy() {
-        return new Bewilder(this);
+    public CranialPlating copy() {
+        return new CranialPlating(this);
     }
 }
