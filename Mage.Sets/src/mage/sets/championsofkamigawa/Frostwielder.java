@@ -40,7 +40,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
@@ -75,7 +74,10 @@ public class Frostwielder extends CardImpl<Frostwielder> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
         
+        // {T}: Frostwielder deals 1 damage to target creature or player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        
+        // If a creature dealt damage by Frostwielder this turn would die, exile it instead.
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FrostwielderEffect()));

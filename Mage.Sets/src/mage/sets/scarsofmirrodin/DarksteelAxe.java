@@ -52,8 +52,8 @@ public class DarksteelAxe extends CardImpl<DarksteelAxe> {
         this.expansionSetCode = "SOM";
         this.subtype.add("Equipment");
         this.addAbility(IndestructibleAbility.getInstance());
-        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(2)));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 0)));
+        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(2)));
     }
 
     public DarksteelAxe (final DarksteelAxe card) {

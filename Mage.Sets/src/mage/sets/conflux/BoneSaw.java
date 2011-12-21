@@ -49,9 +49,9 @@ public class BoneSaw extends CardImpl<BoneSaw> {
         super(ownerId, 135, "Bone Saw", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{0}");
         this.expansionSetCode = "CON";
         this.subtype.add("Equipment");
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 0)));
-    }
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
+}
 
     public BoneSaw(final BoneSaw card) {
         super(card);

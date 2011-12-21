@@ -110,7 +110,7 @@ class CreepyDollTriggeredAbility extends TriggeredAbilityImpl<CreepyDollTriggere
 class CreepyDollEffect extends OneShotEffect<CreepyDollEffect> {
 
     CreepyDollEffect() {
-        super(Constants.Outcome.Tap);
+        super(Constants.Outcome.DestroyPermanent);
         staticText = "";
     }
 

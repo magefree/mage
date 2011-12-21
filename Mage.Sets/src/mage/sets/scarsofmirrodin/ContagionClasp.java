@@ -30,7 +30,7 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
@@ -53,11 +53,16 @@ public class ContagionClasp extends CardImpl<ContagionClasp> {
     public ContagionClasp (UUID ownerId) {
         super(ownerId, 144, "Contagion Clasp", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "SOM";
-        Ability ability = new EntersBattlefieldTriggeredAbility(new AddCountersTargetEffect(CounterType.M1M1.createInstance()), false);
+        
+        // When Contagion Clasp enters the battlefield, put a -1/-1 counter on target creature.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new AddCountersTargetEffect(CounterType.M1M1.createInstance(), Outcome.UnboostCreature), false);
         TargetCreaturePermanent target = new TargetCreaturePermanent();
         target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
+        
+        /* {4}, {T}: Proliferate. (You choose any number of permanents and/or players
+         * with counters on them, then give each another counter of a kind already there.) */
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ProliferateEffect(), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

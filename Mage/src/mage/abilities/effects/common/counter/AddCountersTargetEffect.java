@@ -48,9 +48,13 @@ public class AddCountersTargetEffect extends OneShotEffect<AddCountersTargetEffe
 	private Counter counter;
 
 	public AddCountersTargetEffect(Counter counter) {
-		super(Outcome.Benefit);
+		this(counter, Outcome.Benefit);
+ 	}
+
+        public AddCountersTargetEffect(Counter counter, Outcome outcome) {
+		super(outcome);
 		this.counter = counter;
-	}
+ 	}
 
 	public AddCountersTargetEffect(final AddCountersTargetEffect effect) {
 		super(effect);
