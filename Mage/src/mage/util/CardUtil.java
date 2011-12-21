@@ -65,7 +65,27 @@ public class CardUtil {
 
 		return false;
 	}
+	/**
+	 * Checks whether two cards share card subtypes.
+	 *
+	 * @param card1
+	 * @param card2
+	 * @return
+	 */
+	public static boolean shareSubtypes(Card card1, Card card2) {
 
+		if (card1 == null || card2 == null)
+			throw new IllegalArgumentException("Params can't be null");
+
+		for (String subtype : card1.getSubtype()) {
+			if (card2.getSubtype().contains(subtype)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+        
 	/**
 	 * Adjusts spell or ability cost to be paid.
 	 *
