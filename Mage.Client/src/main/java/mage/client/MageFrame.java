@@ -61,12 +61,13 @@ import mage.client.util.SettingsManager;
 import mage.client.util.gui.ArrowBuilder;
 import mage.components.ImagePanel;
 import mage.game.match.MatchOptions;
-import mage.interfaces.MageClient;
+import mage.interfaces.*;
 import mage.interfaces.callback.CallbackClient;
 import mage.interfaces.callback.ClientCallback;
 import mage.remote.Connection;
 import mage.remote.Connection.ProxyType;
 import mage.remote.Session;
+import mage.server.Main;
 import mage.sets.Sets;
 import mage.utils.MageVersion;
 import mage.view.TableView;
@@ -180,6 +181,12 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
 		session = new Session(this);
+        session.setEmbeddedMageServerAction(new mage.interfaces.Action() {
+            @Override
+            public void execute() {
+                Main.main(new String[] {});
+            }
+        });
 		callbackClient = new CallbackClientImpl(this);
 		connectDialog = new ConnectDialog();
 		desktopPane.add(connectDialog, JLayeredPane.POPUP_LAYER);

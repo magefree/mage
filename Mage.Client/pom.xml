@@ -30,6 +30,12 @@
             <artifactId>mage-sets</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <!-- for running embedded mage server -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>mage-server</artifactId>
+            <version>${mage-version}</version>
+        </dependency>
         <dependency>
             <groupId>com.googlecode.jspf</groupId>
             <artifactId>jspf-core</artifactId>

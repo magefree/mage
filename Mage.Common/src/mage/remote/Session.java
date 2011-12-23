@@ -28,23 +28,13 @@
 
 package mage.remote;
 
-import java.net.Authenticator;
-import java.net.ConnectException;
-import java.net.MalformedURLException;
-import java.net.PasswordAuthentication;
-import java.net.SocketException;
-import java.net.SocketTimeoutException;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-import mage.cards.decks.DeckCardLists;
-import mage.game.GameException;
 import mage.MageException;
+import mage.cards.decks.DeckCardLists;
 import mage.constants.Constants.SessionState;
+import mage.game.GameException;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
+import mage.interfaces.Action;
 import mage.interfaces.MageClient;
 import mage.interfaces.MageServer;
 import mage.interfaces.ServerState;
@@ -52,18 +42,16 @@ import mage.interfaces.callback.ClientCallback;
 import mage.utils.CompressUtil;
 import mage.view.*;
 import org.apache.log4j.Logger;
-import org.jboss.remoting.CannotConnectException;
-import org.jboss.remoting.Client;
-import org.jboss.remoting.ConnectionListener;
-import org.jboss.remoting.ConnectionValidator;
-import org.jboss.remoting.InvokerLocator;
-import org.jboss.remoting.Remoting;
+import org.jboss.remoting.*;
 import org.jboss.remoting.callback.Callback;
 import org.jboss.remoting.callback.HandleCallbackException;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
 import org.jboss.remoting.transport.bisocket.Bisocket;
 import org.jboss.remoting.transport.socket.SocketWrapper;
 import org.jboss.remoting.transporter.TransporterClient;
+
+import java.net.*;
+import java.util.*;
 
 /**
  *
@@ -81,11 +69,18 @@ public class Session {
 	private SessionState sessionState = SessionState.DISCONNECTED;
 	private Connection connection;
 
+    private Action embeddedMageServerAction;
+
     private static boolean debugMode = false;
-	private boolean canceled = false;
+    private static boolean standalone = true;
+
+    private boolean canceled = false;
 
     static {
         debugMode = System.getProperty("debug.mage") != null;
+        if (System.getProperty("skip.standalone") != null) {
+            standalone = false;
+        }
     }
 
 	public Session(MageClient client) {
@@ -107,6 +102,11 @@ public class Session {
 	}
 
 	public boolean connect() {
+
+        if (standalone && connection.getHost().equals("localhost")) {
+            runEmbeddedMageServer();
+        }
+
 		sessionState = SessionState.CONNECTING;
 		try {
 			System.setProperty("http.nonProxyHosts", "code.google.com");
@@ -199,7 +199,13 @@ public class Session {
 		}
 		return false;
 	}
-	
+
+    private void runEmbeddedMageServer() {
+        if (embeddedMageServerAction != null) {
+            embeddedMageServerAction.execute();
+        }
+    }
+
     private void handleCannotConnectException(CannotConnectException ex) {
         logger.warn("Cannot connect", ex);
         Throwable t = ex.getCause();
@@ -986,6 +992,9 @@ public class Session {
 		return false;
 	}
 
+    public void setEmbeddedMageServerAction(Action embeddedMageServerAction) {
+        this.embeddedMageServerAction = embeddedMageServerAction;
+    }
 }
 
 class MageAuthenticator extends Authenticator {

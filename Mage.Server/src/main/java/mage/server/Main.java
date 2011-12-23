@@ -207,8 +207,15 @@ public class Main {
 		@Override
 		public Object invoke(final InvocationRequest invocation) throws Throwable {
 			String sessionId = invocation.getSessionId();
-			InetAddress clientAddress = (InetAddress) invocation.getRequestPayload().get(Remoting.CLIENT_ADDRESS);
-			SessionManager.getInstance().getSession(sessionId).setHost(clientAddress.getHostAddress());
+            Map map = invocation.getRequestPayload();
+            String host;
+            if (map != null) {
+                InetAddress clientAddress = (InetAddress) invocation.getRequestPayload().get(Remoting.CLIENT_ADDRESS);
+                host = clientAddress.getHostAddress();
+            } else {
+                host = "localhost";
+            }
+            SessionManager.getInstance().getSession(sessionId).setHost(host);
 			return null;
 		}
 
