@@ -486,8 +486,8 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 			Game sim = game.copy();
 			if (sim.getPlayer(currentPlayer.getId()).activateAbility((ActivatedAbility) action.copy(), sim)) {
 				sim.applyEffects();
-				//if (checkForRepeatedAction(sim, node, action, currentPlayer.getId()))
-					//continue;
+				if (checkForRepeatedAction(sim, node, action, currentPlayer.getId()))
+					continue;
 				if (!sim.isGameOver() && action.isUsesStack()) {
 					// only pass if the last action uses the stack
 					sim.getPlayer(currentPlayer.getId()).pass();
@@ -839,7 +839,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 		return sim;
 	}
 
-	/*private boolean checkForRepeatedAction(Game sim, SimulationNode2 node, Ability action, UUID playerId) {
+	private boolean checkForRepeatedAction(Game sim, SimulationNode2 node, Ability action, UUID playerId) {
 		if (action instanceof PassAbility)
 			return false;
 		int val = GameStateEvaluator2.evaluate(playerId, sim);
@@ -848,12 +848,12 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 			test = test.getParent();
 		}
 		if (test != null && test.getAbilities() != null && test.getAbilities().size() == 1) {
-			if (action.toString().equals(test.getAbilities().get(0).toString()) && GameStateEvaluator2.evaluate(playerId, sim) == val) {
+			if (action.toString().equals(test.getAbilities().get(0).toString()) && GameStateEvaluator2.evaluate(playerId, test.getGame()) == val) {
 				return true;
 			}
 		}
 		return false;
-	}*/
+	}
 
     protected void getSuggestedActions() {
         try {

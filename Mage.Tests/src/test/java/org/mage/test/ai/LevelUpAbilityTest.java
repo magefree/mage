@@ -33,6 +33,7 @@ public class LevelUpAbilityTest extends CardTestBase {
             System.out.println(counter.getKey() + " : " + counter.getValue().getName() + " : " + counter.getValue().getCount());
         }
 
+        Assert.assertNotNull(master.getCounters());
         Assert.assertFalse(master.getCounters().isEmpty());
         Assert.assertEquals(12, master.getCounters().getCount(CounterType.LEVEL));
     }
