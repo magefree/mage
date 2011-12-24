@@ -1,8 +1,5 @@
 package org.mage.test.serverside.base.impl;
 
-import java.util.List;
-import java.util.UUID;
-
 import mage.Constants;
 import mage.abilities.Ability;
 import mage.cards.Card;
@@ -11,10 +8,12 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.sets.Sets;
-
 import org.junit.Assert;
 import org.mage.test.serverside.base.CardTestAPI;
 import org.mage.test.serverside.base.MageTestBase;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  * API for test initialization and asserting the test results.
@@ -207,17 +206,17 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
 	public void assertResult(Player player, GameResult result) throws AssertionError {
 		if (player.equals(playerA)) {
 			GameResult actual = CardTestAPI.GameResult.DRAW;
-			if (currentGame.getWinner().equals("Player ComputerA is the winner")) {
+			if (currentGame.getWinner().equals("Player PlayerA is the winner")) {
 				actual = CardTestAPI.GameResult.WON;
-			} else if (currentGame.getWinner().equals("Player ComputerB is the winner")) {
+			} else if (currentGame.getWinner().equals("Player PlayerB is the winner")) {
 				actual = CardTestAPI.GameResult.LOST;
 			}
 			Assert.assertEquals("Game results are not equal", result, actual);
 		} else if (player.equals(playerB)) {
 			GameResult actual = CardTestAPI.GameResult.DRAW;
-			if (currentGame.getWinner().equals("Player ComputerB is the winner")) {
+			if (currentGame.getWinner().equals("Player PlayerB is the winner")) {
 				actual = CardTestAPI.GameResult.WON;
-			} else if (currentGame.getWinner().equals("Player ComputerA is the winner")) {
+			} else if (currentGame.getWinner().equals("Player PlayerA is the winner")) {
 				actual = CardTestAPI.GameResult.LOST;
 			}
 			Assert.assertEquals("Game results are not equal", result, actual);

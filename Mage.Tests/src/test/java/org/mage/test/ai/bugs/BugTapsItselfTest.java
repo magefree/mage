@@ -1,4 +1,4 @@
-package org.mage.test.serverside.ai;
+package org.mage.test.ai.bugs;
 
 import junit.framework.Assert;
 import mage.Constants;
@@ -17,7 +17,6 @@ import org.mage.test.serverside.base.CardTestBase;
 public class BugTapsItselfTest extends CardTestBase {
 
 	@Test
-    @Ignore
 	public void testVersusInfectCreature() throws Exception {
 		useWhiteDefault();
 		addCard(Constants.Zone.BATTLEFIELD, playerA, "Blinding Mage");

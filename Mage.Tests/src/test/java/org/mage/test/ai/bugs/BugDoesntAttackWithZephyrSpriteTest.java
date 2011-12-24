@@ -1,4 +1,4 @@
-package org.mage.test.serverside.ai;
+package org.mage.test.ai.bugs;
 
 import mage.Constants;
 import org.junit.Test;
@@ -9,7 +9,7 @@ import org.mage.test.serverside.base.CardTestBase;
  *
  * @ayratn
  */
-public class BugDoesntAttackWithKnightTest extends CardTestBase {
+public class BugDoesntAttackWithZephyrSpriteTest extends CardTestBase {
 
 	@Test
 	public void testVersusInfectCreature() throws Exception {
@@ -30,6 +30,5 @@ public class BugDoesntAttackWithKnightTest extends CardTestBase {
 		assertResult(playerA, GameResult.WON);
 		// life:ComputerA:20
 		assertLife(playerA, 20);
-
 	}
 }
