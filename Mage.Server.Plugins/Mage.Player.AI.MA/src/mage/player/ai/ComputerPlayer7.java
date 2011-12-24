@@ -43,6 +43,7 @@ import mage.players.Player;
 import org.apache.log4j.Logger;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -184,6 +185,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
 				//if (bestScore > currentScore || allowBadMoves) {
 					actions = new LinkedList<Ability>(root.abilities);
 					combat = root.combat;
+                    logger.debug("final score: " + bestScore);
 				//} else {
                     //System.out.println("[" + game.getPlayer(playerId).getName() + "][post] Action: not better score");
                 //}
@@ -241,8 +243,8 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
 								val = simulateCombat(game, node, depth-1, alpha, beta, false);
 								break;
 							case POSTCOMBAT_MAIN:
-								val = simulateCounterAttack(game, node, depth-1, alpha, beta);
-								break;
+								//val = simulateCounterAttack(game, node, depth-1, alpha, beta);
+								//break;
 							default:
 								val = GameStateEvaluator2.evaluate(playerId, game);
 								break;
@@ -305,7 +307,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
 			}
 			else if (!counter) {
 				finishCombat(game);
-				val = simulateCounterAttack(game, node, depth, alpha, beta);
+				///val = simulateCounterAttack(game, node, depth, alpha, beta);
 			}
 		}
 		if (val == null)
@@ -329,6 +331,9 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
 		if (logger.isDebugEnabled())
 			logger.debug(attacker.getName() + "'s possible attackers: " + attacker.getAvailableAttackers(game));
 		for (Combat engagement: attacker.addAttackers(game)) {
+            if (logger.isDebugEnabled()) {
+                logger.debug("Attackers: " + engagement.getAttackers() + ", blockers: " + engagement.getBlockers());
+            }
 			if (alpha >= beta) {
 				logger.debug("simulating -- pruning attackers");
 				break;
@@ -359,7 +364,9 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
 					beta = val;
 					bestNode = newNode;
 					bestNode.setScore(val);
-					node.setCombat(simCombat);
+                    if (newNode.getChildren().size() > 0) {
+					    bestNode.setCombat(newNode.getChildren().get(0).getCombat());
+                    }
 				}
 			}
 			else {
@@ -367,7 +374,9 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
 					alpha = val;
 					bestNode = newNode;
 					bestNode.setScore(val);
-					node.setCombat(simCombat);
+                    if (newNode.getChildren().size() > 0) {
+					    bestNode.setCombat(newNode.getChildren().get(0).getCombat());
+                    }
 				}
 			}
 		}
@@ -396,7 +405,8 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
 			SimulatedPlayer2 defender = (SimulatedPlayer2) game.getPlayer(defenderId);
 			if (logger.isDebugEnabled())
 				logger.debug(defender.getName() + "'s possible blockers: " + defender.getAvailableBlockers(game));
-			for (Combat engagement: defender.addBlockers(game)) {
+            List<Combat> combats = defender.addBlockers(game);
+			for (Combat engagement: combats) {
 				if (alpha >= beta) {
 					logger.debug("simulating -- pruning blockers");
 					break;
@@ -436,14 +446,15 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
 						beta = val;
 						bestNode = newNode;
 						bestNode.setScore(val);
-						node.setCombat(simCombat);
+						bestNode.setCombat(simCombat);
 					}
 				}
 				else {
 					if (val > alpha) {
 						alpha = val;
 						bestNode = newNode;
-						node.setCombat(simCombat);
+                        bestNode.setScore(val);
+						bestNode.setCombat(simCombat);
 					}
 				}
 			}
@@ -532,7 +543,8 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
 			game.getPlayers().resetPassed();
 			return addActions(node, depth, alpha, beta);
 		}
-		return simulateCounterAttack(game, node, depth, alpha, beta);
+		//return simulateCounterAttack(game, node, depth, alpha, beta);
+        return GameStateEvaluator2.evaluate(playerId, game);
 	}
 
 	protected void simulateToEnd(Game game) {

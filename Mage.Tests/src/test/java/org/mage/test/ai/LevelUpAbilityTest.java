@@ -4,7 +4,6 @@ import junit.framework.Assert;
 import mage.Constants;
 import mage.counters.Counter;
 import mage.counters.CounterType;
-import mage.game.GameImpl;
 import mage.game.permanent.Permanent;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestBase;
@@ -37,8 +36,5 @@ public class LevelUpAbilityTest extends CardTestBase {
         Assert.assertNotNull(master.getCounters());
         Assert.assertFalse(master.getCounters().isEmpty());
         Assert.assertEquals(12, master.getCounters().getCount(CounterType.LEVEL));
-
-        System.out.println("Copy count: " + GameImpl.copyCount);
-        System.out.println("Copy time: " + GameImpl.copyTime + " ms");
     }
 }

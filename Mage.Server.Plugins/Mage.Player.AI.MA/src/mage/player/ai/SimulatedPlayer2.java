@@ -272,7 +272,14 @@ public class SimulatedPlayer2 extends ComputerPlayer<SimulatedPlayer2> {
 				logger.debug("simulating -- attack:" + sim.getCombat().getGroups().size());
 			}
 		}
-		return new ArrayList<Combat>(engagements.values());
+        List list = new ArrayList<Combat>(engagements.values());
+        Collections.sort(list, new Comparator<Combat>() {
+            @Override
+            public int compare(Combat o1, Combat o2) {
+                return Integer.valueOf(o2.getGroups().size()).compareTo(Integer.valueOf(o1.getGroups().size()));
+            }
+        });
+		return list;
 	}
 
 	public List<Combat> addBlockers(Game game) {

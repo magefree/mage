@@ -1,6 +1,7 @@
 package org.mage.test.serverside.performance;
 
 import mage.game.Game;
+import org.junit.Ignore;
 import org.mage.test.serverside.base.CardTestBase;
 
 /**
@@ -8,6 +9,7 @@ import org.mage.test.serverside.base.CardTestBase;
  *
  * @ayratn
  */
+@Ignore
 public class CopyGameStatePerformanceTest extends CardTestBase {
 
     public void run() throws Exception {

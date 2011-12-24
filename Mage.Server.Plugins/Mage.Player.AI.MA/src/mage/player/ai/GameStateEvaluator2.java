@@ -5,15 +5,15 @@
 
 package mage.player.ai;
 
-import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.player.ai.ma.ArtificialScoringSystem;
 import mage.players.Player;
 import mage.util.Logging;
+
+import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -80,7 +80,7 @@ public class GameStateEvaluator2 {
 		int score = lifeScore + permanentScore + handScore;
 		//if (logger.isLoggable(Level.FINE))
 			logger.fine("game state evaluated to- lifeScore:" + lifeScore + " permanentScore:" + permanentScore /*+ " handScore:" + handScore*/ + "total:" + score);
-		return score;
+        return score;
 	}
 
 	public static int evaluatePermanent(Permanent permanent, Game game) {

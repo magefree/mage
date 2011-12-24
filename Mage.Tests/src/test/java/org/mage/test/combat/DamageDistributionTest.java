@@ -22,6 +22,7 @@ public class DamageDistributionTest extends CardTestBase {
 
         Permanent instigator = getPermanent("Warren Instigator", playerA.getId());
         Assert.assertNotNull(instigator);
+        Assert.assertTrue("Computer didn't attacked with Warren Instigator", instigator.isTapped());
 
         // should block and die
         assertPermanentCount(playerB, "Merfolk Looter", 0);

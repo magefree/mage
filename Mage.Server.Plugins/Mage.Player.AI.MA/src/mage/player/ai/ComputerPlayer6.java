@@ -503,7 +503,9 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 						beta = val;
 						bestNode = newNode;
 						bestNode.setScore(val);
-						node.setCombat(newNode.getCombat());
+                        if (newNode.getChildren().size() > 0) {
+						    bestNode.setCombat(newNode.getChildren().get(0).getCombat());
+                        }
 					}
 
 					// no need to check other actions
@@ -517,11 +519,14 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 						alpha = val;
 						bestNode = newNode;
 						bestNode.setScore(val);
-						node.setCombat(newNode.getCombat());
-						if (node.getTargets().size() > 0)
+                        if (newNode.getChildren().size() > 0) {
+						    bestNode.setCombat(newNode.getChildren().get(0).getCombat());
+                        }
+						/*if (node.getTargets().size() > 0)
 							targets = node.getTargets();
 						if (node.getChoices().size() > 0)
 							choices = node.getChoices();
+                        */
 						if (depth == maxDepth) {
 							logger.info("saved");
 							node.children.clear();
@@ -813,6 +818,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 			for (int i = 0; i < groups.size(); i++) {
 				if (i < combat.getGroups().size()) {
 					for (UUID blockerId: combat.getGroups().get(i).getBlockers()) {
+                        logger.info("select blocker: " + blockerId + " vs " + groups.get(i).getAttackers().get(0));
 						this.declareBlocker(blockerId, groups.get(i).getAttackers().get(0), game);
 					}
 				}
