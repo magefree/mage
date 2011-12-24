@@ -542,7 +542,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 					}
 				}
 				if (alpha >= beta) {
-					logger.info("simulating -- pruning");
+					//logger.info("simulating -- pruning");
 					break;
 				}
 				if (SimulationNode2.nodeCount > maxNodes) {
@@ -562,7 +562,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                 logger.info("returning priority beta: " + val);
                 return val;
             }*/
-            logger.info("returning priority beta: " + beta);
+            //logger.info("returning priority beta: " + beta);
 			return beta;
 		}
 		else {
@@ -571,7 +571,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                 logger.info("returning priority beta: " + val);
                 return val;
             }*/
-            logger.info("returning priority alpha: " + alpha);
+            //logger.info("returning priority alpha: " + alpha);
 			return alpha;
 		}
 	}
