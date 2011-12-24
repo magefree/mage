@@ -29,11 +29,6 @@
 package mage.player.ai;
 
 
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.*;
-import java.util.Map.Entry;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
@@ -41,60 +36,49 @@ import mage.Constants.RangeOfInfluence;
 import mage.Constants.Zone;
 import mage.MageObject;
 import mage.Mana;
-import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
-import mage.abilities.Mode;
-import mage.abilities.Modes;
-import mage.abilities.SpellAbility;
-import mage.abilities.TriggeredAbilities;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.costs.mana.HybridManaCost;
-import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.costs.mana.MonoHybridManaCost;
-import mage.abilities.costs.mana.VariableManaCost;
+import mage.abilities.*;
+import mage.abilities.costs.mana.*;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.ReplacementEffect;
-import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.mana.ManaAbility;
 import mage.abilities.mana.ManaOptions;
-import mage.filter.common.*;
-import mage.game.draft.Draft;
-import mage.player.ai.simulators.CombatGroupSimulator;
-import mage.player.ai.simulators.CombatSimulator;
-import mage.player.ai.simulators.CreatureSimulator;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.filter.FilterPermanent;
+import mage.filter.common.*;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
+import mage.game.draft.Draft;
 import mage.game.match.Match;
 import mage.game.permanent.Permanent;
 import mage.game.tournament.Tournament;
+import mage.player.ai.simulators.CombatGroupSimulator;
+import mage.player.ai.simulators.CombatSimulator;
+import mage.player.ai.simulators.CreatureSimulator;
 import mage.player.ai.utils.RateCard;
 import mage.players.Player;
 import mage.players.PlayerImpl;
 import mage.players.net.UserData;
 import mage.players.net.UserGroup;
 import mage.sets.Sets;
-import mage.target.Target;
-import mage.target.TargetAmount;
-import mage.target.TargetCard;
-import mage.target.TargetPermanent;
-import mage.target.TargetPlayer;
+import mage.target.*;
 import mage.target.common.*;
 import mage.util.Copier;
 import mage.util.TreeNode;
 import org.apache.log4j.Logger;
+
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  *
@@ -799,9 +783,11 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 
 	@Override
 	public boolean chooseUse(Outcome outcome, String message, Game game) {
-		log.debug("chooseUse");
-		//TODO: improve this
-		return outcome.isGood();
+		log.debug("chooseUse: " + outcome.isGood());
+        // Be proactive! Always use abilities, the evaluation function will decide if it's good or not
+        // Otherwise some abilities won't be used by AI like LoseTargetEffect that has "bad" outcome
+        // but still is good when targets opponent
+        return true;
 	}
 
 	@Override
