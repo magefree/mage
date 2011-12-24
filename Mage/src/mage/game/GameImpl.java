@@ -105,6 +105,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	protected MultiplayerAttackOption attackOption;
 	protected GameOptions gameOptions;
 
+    public static volatile int copyCount = 0;
+    public static volatile long copyTime = 0;
+
 	@Override
 	public abstract T copy();
 
@@ -116,6 +119,10 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	}
 
 	public GameImpl(final GameImpl<T> game) {
+        long t1 = 0;
+        if (logger.isDebugEnabled()) {
+            t1 = System.currentTimeMillis();
+        }
 		this.id = game.id;
 		this.ready = game.ready;
 		this.startingPlayerId = game.startingPlayerId;
@@ -131,6 +138,10 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		this.simulation = game.simulation;
         this.gameOptions = game.gameOptions;
         this.lki.putAll(game.lki);
+        if (logger.isDebugEnabled()) {
+            copyCount++;
+            copyTime += (System.currentTimeMillis() - t1);
+        }
 	}
 
 	@Override
