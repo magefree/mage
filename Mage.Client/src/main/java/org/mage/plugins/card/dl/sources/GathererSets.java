@@ -24,6 +24,8 @@ public class GathererSets implements Iterable<DownloadJob> {
         symbolsReplacements.put("CFX", "CON");
         symbolsReplacements.put("APC", "AP");
         symbolsReplacements.put("TMP", "TE");
+        symbolsReplacements.put("INV", "IN");
+        symbolsReplacements.put("PLS", "PS");
     }
 
     public GathererSets(String path) {
