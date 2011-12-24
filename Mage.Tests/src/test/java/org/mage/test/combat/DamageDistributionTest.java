@@ -40,4 +40,21 @@ public class DamageDistributionTest extends CardTestBase {
         assertLife(playerB, 2);
     }
 
+    @Test
+    public void testNotAttackingVersusDoubleStrike() {
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Merfolk Looter");
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Warren Instigator");
+        setLife(playerB, 4);
+
+        execute();
+
+        // should block and die
+        assertPermanentCount(playerA, "Merfolk Looter", 1);
+        assertPermanentCount(playerB, "Warren Instigator", 1);
+
+        // creature is blocked
+        // blocker dies and second strike does nothing
+        assertLife(playerB, 4);
+    }
+
 }
