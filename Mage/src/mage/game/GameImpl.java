@@ -36,6 +36,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.keyword.LeylineAbility;
 import mage.abilities.mana.TriggeredManaAbility;
+import mage.actions.impl.MageAction;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
@@ -108,6 +109,12 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     public static volatile int copyCount = 0;
     public static volatile long copyTime = 0;
 
+    private LinkedList<MageAction> actions;
+    private Player scorePlayer;
+    private int score = 0;
+    private Player losingPlayer;
+    private boolean stateCheckRequired = false;
+
 	@Override
 	public abstract T copy();
 
@@ -116,6 +123,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		this.range = range;
 		this.attackOption = attackOption;
 		this.state = new GameState();
+        this.actions = new LinkedList<MageAction>();
 	}
 
 	public GameImpl(final GameImpl<T> game) {
@@ -142,6 +150,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
             copyCount++;
             copyTime += (System.currentTimeMillis() - t1);
         }
+        this.actions = new LinkedList<MageAction>();
+        this.stateCheckRequired = game.stateCheckRequired;
+        this.scorePlayer = game.scorePlayer;
 	}
 
 	@Override
@@ -365,6 +376,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	public void start(UUID choosingPlayerId, GameOptions options) {
         startTime = new Date();
         this.gameOptions = options;
+        scorePlayer = state.getPlayers().values().iterator().next();
 		init(choosingPlayerId, options.testMode);
         play(startingPlayerId);
 		saveState();
@@ -1330,6 +1342,14 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	}
 
     @Override
+    public int doAction(MageAction action) {
+        actions.add(action);
+		int value = action.doAction(this);
+		score += action.getScore(scorePlayer);
+        return value;
+    }
+
+    @Override
     public Date getStartTime() {
         return startTime;
     }
@@ -1343,4 +1363,29 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	public void setGameOptions(GameOptions options) {
 		this.gameOptions = options;
 	}
+
+    @Override
+    public void setLosingPlayer(Player player) {
+        this.losingPlayer = player;
+    }
+
+    @Override
+    public Player getLosingPlayer() {
+        return this.losingPlayer;
+    }
+
+    @Override
+    public void informPlayer(Player player, String message) {
+        //TODO: implement personal messages
+    }
+
+    @Override
+    public boolean getStateCheckRequired() {
+        return stateCheckRequired;
+    }
+
+    @Override
+    public void setStateCheckRequired() {
+        stateCheckRequired = true;
+    }
 }

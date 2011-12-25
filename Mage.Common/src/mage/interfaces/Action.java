@@ -1,7 +1,8 @@
 package mage.interfaces;
 
 /**
- * Action interface
+ * Light weight action interface
+ * For executing actions without any context.
  *
  * @author ayratn
  */

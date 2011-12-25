@@ -35,6 +35,7 @@
 package mage.client;
 
 import mage.Constants;
+import mage.interfaces.Action;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.client.cards.CardsStorage;
@@ -181,10 +182,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
 		session = new Session(this);
-        session.setEmbeddedMageServerAction(new mage.interfaces.Action() {
+        session.setEmbeddedMageServerAction(new Action() {
             @Override
             public void execute() {
-                Main.main(new String[] {});
+                Main.main(new String[]{});
             }
         });
 		callbackClient = new CallbackClientImpl(this);

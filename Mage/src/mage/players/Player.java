@@ -114,6 +114,7 @@ public interface Player extends MageItem, Copyable<Player> {
 	public void setTopCardRevealed(boolean topCardRevealed);
 	public UserData getUserData();
 	public void setUserData(UserData userData);
+    public boolean canLose(Game game);
 
 	/**
 	 * Returns a set of players which turns under you control.

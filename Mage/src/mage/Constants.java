@@ -274,25 +274,35 @@ public final class Constants {
 	}
 
 	public enum PhaseStep {
-		UNTAP ("Untap"),
-		UPKEEP ("Upkeep"),
-		DRAW ("Draw"),
-		PRECOMBAT_MAIN ("Precombat Main"),
-		BEGIN_COMBAT ("Begin Combat"),
-		DECLARE_ATTACKERS ("Declare Attackers"),
-		DECLARE_BLOCKERS ("Declare Blockers"),
-		FIRST_COMBAT_DAMAGE ("First Combat Damage"),
-		COMBAT_DAMAGE ("Combat Damage"),
-		END_COMBAT ("End Combat"),
-		POSTCOMBAT_MAIN ("Postcombat Main"),
-		END_TURN ("End Turn"),
-		CLEANUP ("Cleanup");
+		UNTAP ("Untap", 0),
+		UPKEEP ("Upkeep", 1),
+		DRAW ("Draw", 2),
+		PRECOMBAT_MAIN ("Precombat Main", 3),
+		BEGIN_COMBAT ("Begin Combat", 4),
+		DECLARE_ATTACKERS ("Declare Attackers", 5),
+		DECLARE_BLOCKERS ("Declare Blockers", 6),
+		FIRST_COMBAT_DAMAGE ("First Combat Damage", 7),
+		COMBAT_DAMAGE ("Combat Damage", 8),
+		END_COMBAT ("End Combat", 9),
+		POSTCOMBAT_MAIN ("Postcombat Main", 10),
+		END_TURN ("End Turn", 11),
+		CLEANUP ("Cleanup", 12);
 
 		private String text;
 
-		PhaseStep(String text) {
+        /**
+         * Index is used for game state scoring system.
+         */
+        private int index;
+
+		PhaseStep(String text, int index) {
 			this.text = text;
+            this.index = index;
 		}
+
+        public int getIndex() {
+            return index;
+        }
 
 		@Override
 		public String toString() {

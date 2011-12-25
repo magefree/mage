@@ -197,7 +197,7 @@ public class Library implements Serializable {
 	}
 
 
-	public boolean isEmtpyDraw() {
+	public boolean isEmptyDraw() {
 		return emptyDraw;
 	}
 

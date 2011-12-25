@@ -53,6 +53,7 @@ import mage.abilities.effects.common.LoseControlOnOtherPlayersControllerEffect;
 import mage.abilities.keyword.*;
 import mage.abilities.mana.ManaAbility;
 import mage.abilities.mana.ManaOptions;
+import mage.actions.MageDrawAction;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
@@ -60,7 +61,6 @@ import mage.cards.decks.Deck;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.counters.Counters;
-import mage.filter.FilterAbility;
 import mage.filter.common.FilterCreatureForCombat;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
@@ -337,29 +337,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		return false;
 	}
 
-	protected boolean drawCard(Game game) {
-		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DRAW_CARD, playerId, playerId))) {
-            Card card = getLibrary().removeFromTop(game);
-            if (card != null) {
-                card.moveToZone(Zone.HAND, null, game, false);
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DREW_CARD, card.getId(), playerId));
-                return true;
-            }
-        }
-		return false;
-	}
-
 	@Override
 	public int drawCards(int num, Game game) {
-		int numDrawn = 0;
-		for (int i = 0; i < num; i++) {
-			if (drawCard(game))
-				numDrawn++;
-			else
-				break;
-		}
-		game.fireInformEvent(name + " draws " + Integer.toString(numDrawn) + " card" + (numDrawn > 1?"s":""));
-		return numDrawn;
+        return game.doAction(new MageDrawAction(this, num));
 	}
 
 	@Override
@@ -992,7 +972,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
 	@Override
 	public boolean isEmptyDraw() {
-		return library.isEmtpyDraw();
+		return library.isEmptyDraw();
 	}
 
 	@Override
@@ -1029,7 +1009,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
 	@Override
 	public void lost(Game game) {
-		if (!game.replaceEvent(new GameEvent(GameEvent.EventType.LOSES, null, null, playerId))) {
+        if (canLose(game)) {
 			this.loses = true;
 			//20100423 - 603.9
 			if (!this.wins)
@@ -1037,6 +1017,11 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 			game.leave(playerId);
 		}
 	}
+
+    @Override
+    public boolean canLose(Game game) {
+        return !game.replaceEvent(new GameEvent(GameEvent.EventType.LOSES, null, null, playerId));
+    }
 
 	@Override
 	public void won(Game game) {

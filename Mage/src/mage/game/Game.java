@@ -28,6 +28,7 @@
 
 package mage.game;
 
+import mage.actions.impl.MageAction;
 import mage.game.match.MatchType;
 import mage.cards.Card;
 import mage.game.stack.SpellStack;
@@ -113,6 +114,10 @@ public interface Game extends MageItem, Serializable {
 	public Card getLastKnownInformation(UUID objectId, Zone zone);
 	public void rememberLKI(UUID objectId, Zone zone, Card card);
 	public void resetLKI();
+    public void setLosingPlayer(Player player);
+    public Player getLosingPlayer();
+    public void setStateCheckRequired();
+    public boolean getStateCheckRequired();
 
 	//client event methods
 	public void addTableEventListener(Listener<TableEvent> listener);
@@ -134,6 +139,7 @@ public interface Game extends MageItem, Serializable {
 	public void fireInformEvent(String message);
 	public void fireUpdatePlayersEvent();
 	public void informPlayers(String message);
+    public void informPlayer(Player player, String message);
     public void debugMessage(String message);
 	public void fireErrorEvent(String message, Exception ex);
 	
@@ -159,6 +165,8 @@ public interface Game extends MageItem, Serializable {
 	public boolean checkStateAndTriggered();
 	public void playPriority(UUID activePlayerId, boolean resuming);
 	public boolean endTurn(UUID playerId);
+
+    public int doAction(MageAction action);
 
 	//game transaction methods
 	public void saveState();
