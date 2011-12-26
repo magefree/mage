@@ -792,7 +792,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 
 	@Override
 	public boolean choose(Outcome outcome, Choice choice, Game game) {
-		log.debug("choose");
+		log.debug("choose 3");
 		//TODO: improve this
 		choice.setChoice(choice.getChoices().iterator().next());
 		return true;
@@ -823,7 +823,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 
 	@Override
 	public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game)  {
-		log.debug("choose");
+		log.debug("choose 2");
 		if (cards != null && cards.isEmpty()) {
 			if (!target.isRequired())
 				return false;
