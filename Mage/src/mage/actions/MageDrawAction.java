@@ -42,6 +42,7 @@ public class MageDrawAction extends MageAction {
             if (value == -1) {
                 break;
             }
+            numDrawn++;
             score += value;
         }
         game.fireInformEvent(player.getName() + " draws " + Integer.toString(numDrawn) + " card" + (numDrawn > 1 ? "s" : ""));
