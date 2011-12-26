@@ -3,25 +3,25 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../Config.xsd">
 	<server serverAddress="localhost" serverName="mage-server" port="17171" maxGameThreads="10" maxSecondsIdle="600"/>
 	<playerTypes>
-		<playerType name="Human" jar="Mage-Player-Human-${project.version}.jar" className="mage.player.human.HumanPlayer"/>
-		<playerType name="Computer - minimax" jar="Mage-Player-AIMinimax-${project.version}.jar" className="mage.player.ai.ComputerPlayer3"/>
-		<playerType name="Computer - mad" jar="Mage-Player-AI-MA-${project.version}.jar" className="mage.player.ai.ComputerPlayer6"/>
+		<playerType name="Human" jar="mage-player-human-${project.version}.jar" className="mage.player.human.HumanPlayer"/>
+		<playerType name="Computer - minimax" jar="mage-player-aiminimax-${project.version}.jar" className="mage.player.ai.ComputerPlayer3"/>
+		<playerType name="Computer - mad" jar="mage-player-ai-ma-${project.version}.jar" className="mage.player.ai.ComputerPlayer6"/>
 	</playerTypes>
 	<gameTypes>
-		<gameType name="Two Player Duel" jar="Mage-Game-TwoPlayerDuel-${project.version}.jar" className="mage.game.TwoPlayerMatch" typeName="mage.game.TwoPlayerDuelType"/>
-		<gameType name="Free For All" jar="Mage-Game-FreeForAll-${project.version}.jar" className="mage.game.FreeForAllMatch" typeName="mage.game.FreeForAllType"/>
+		<gameType name="Two Player Duel" jar="mage-game-twoplayerduel-${project.version}.jar" className="mage.game.TwoPlayerMatch" typeName="mage.game.TwoPlayerDuelType"/>
+		<gameType name="Free For All" jar="mage-game-freeforall-${project.version}.jar" className="mage.game.FreeForAllMatch" typeName="mage.game.FreeForAllType"/>
 	</gameTypes>
 	<tournamentTypes>
-		<tournamentType name="Elimination Booster Draft" jar="Mage-Tournament-BoosterDraft-${project.version}.jar" className="mage.tournament.BoosterDraftEliminationTournament" typeName="mage.tournament.BoosterDraftEliminationTournamentType"/>
-		<tournamentType name="Sealed Elimination" jar="Mage-Tournament-Sealed-${project.version}.jar" className="mage.tournament.SealedEliminationTournament" typeName="mage.tournament.SealedEliminationTournamentType"/>
+		<tournamentType name="Elimination Booster Draft" jar="mage-tournament-boosterdraft-${project.version}.jar" className="mage.tournament.BoosterDraftEliminationTournament" typeName="mage.tournament.BoosterDraftEliminationTournamentType"/>
+		<tournamentType name="Sealed Elimination" jar="mage-tournament-sealed-${project.version}.jar" className="mage.tournament.SealedEliminationTournament" typeName="mage.tournament.SealedEliminationTournamentType"/>
 	</tournamentTypes>
 	<deckTypes>
-		<deckType name="Constructed - Vintage" jar="Mage-Deck-Constructed-${project.version}.jar" className="mage.deck.Vintage"/>
-		<deckType name="Constructed - Extended" jar="Mage-Deck-Constructed-${project.version}.jar" className="mage.deck.Extended"/>
-		<deckType name="Constructed - Standard" jar="Mage-Deck-Constructed-${project.version}.jar" className="mage.deck.Standard"/>
-		<deckType name="Constructed - Shards of Alara Block" jar="Mage-Deck-Constructed-${project.version}.jar" className="mage.deck.ShardsOfAlaraBlock"/>
+		<deckType name="Constructed - Vintage" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Vintage"/>
+		<deckType name="Constructed - Extended" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Extended"/>
+		<deckType name="Constructed - Standard" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Standard"/>
+		<deckType name="Constructed - Shards of Alara Block" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.ShardsOfAlaraBlock"/>
 		<deckType name="Constructed - Zendikar Block" jar="Mage-Deck-Constructed-${project.version}.jar" className="mage.deck.ZendikarBlock"/>
-		<deckType name="Constructed - Scars of Mirrodin Block" jar="Mage-Deck-Constructed-${project.version}.jar" className="mage.deck.ScarsOfMirrodinBlock"/>
-		<deckType name="Limited" jar="Mage-Deck-Limited-${project.version}.jar" className="mage.deck.Limited"/>
+		<deckType name="Constructed - Scars of Mirrodin Block" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.ScarsOfMirrodinBlock"/>
+		<deckType name="Limited" jar="mage-deck-limited-${project.version}.jar" className="mage.deck.Limited"/>
 	</deckTypes>
 </config>
