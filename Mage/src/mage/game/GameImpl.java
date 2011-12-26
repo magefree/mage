@@ -109,7 +109,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     public static volatile int copyCount = 0;
     public static volatile long copyTime = 0;
 
-    private LinkedList<MageAction> actions;
+    private transient LinkedList<MageAction> actions;
     private Player scorePlayer;
     private int score = 0;
     private Player losingPlayer;
