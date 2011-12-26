@@ -7,7 +7,7 @@ import org.mage.test.serverside.base.CardTestBase;
 /**
  * Reproduces bug when AI didn't attack with one of the creatures.
  *
- * @ayratn
+ * @author ayratn
  */
 public class BugDoesntAttackTest extends CardTestBase {
 
