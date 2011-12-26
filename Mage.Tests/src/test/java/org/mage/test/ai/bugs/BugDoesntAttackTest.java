@@ -9,26 +9,31 @@ import org.mage.test.serverside.base.CardTestBase;
  *
  * @ayratn
  */
-public class BugDoesntAttackWithZephyrSpriteTest extends CardTestBase {
+public class BugDoesntAttackTest extends CardTestBase {
 
 	@Test
-	public void testVersusInfectCreature() throws Exception {
-		useRedDefault();
+	public void testAttackWithZephyrSprite() throws Exception {
 		addCard(Constants.Zone.HAND, playerA, "Zephyr Sprite");
 		addCard(Constants.Zone.HAND, playerA, "Island");
 		addCard(Constants.Zone.HAND, playerA, "Rupture Spire");
 		setLife(playerB, 1);
+        setStopOnTurn(4);
 
-		setStopOnTurn(4);
 		execute();
 
-		// life:ComputerB:0
 		assertLife(playerB, 0);
-		// turn:1
-		assertTurn(3);
-		// result:won
-		assertResult(playerA, GameResult.WON);
-		// life:ComputerA:20
-		assertLife(playerA, 20);
+	}
+
+    @Test
+	public void testAttackWithGoblinGuide() throws Exception {
+		addCard(Constants.Zone.HAND, playerA, "Goblin Guide");
+		addCard(Constants.Zone.HAND, playerA, "Mountain");
+
+        playLand(playerA, "Mountain");
+        castSpell(playerA, "Goblin Guide");
+
+		execute();
+
+		assertLife(playerB, 18);
 	}
 }
