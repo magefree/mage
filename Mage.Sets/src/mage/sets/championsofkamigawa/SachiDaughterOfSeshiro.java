@@ -51,7 +51,7 @@ public class SachiDaughterOfSeshiro extends CardImpl<SachiDaughterOfSeshiro> {
 
 
     private final static FilterCreaturePermanent snakeFilter = new FilterCreaturePermanent("Snakes");
-    private final static FilterCreaturePermanent shamanFilter = new FilterCreaturePermanent("Smahans");
+    private final static FilterCreaturePermanent shamanFilter = new FilterCreaturePermanent("Shamans");
 
     static {
         snakeFilter.getSubtype().add("Snake");
@@ -67,7 +67,9 @@ public class SachiDaughterOfSeshiro extends CardImpl<SachiDaughterOfSeshiro> {
         this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
+        // Other Snake creatures you control get +0/+1.
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(0, 1, Constants.Duration.WhileOnBattlefield, snakeFilter, true)));
+        // Shamans you control have "{T}: Add {G}{G} to your mana pool."
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 2, 0, 0, 0, 0, 0)), new TapSourceCost()), Constants.Duration.WhileOnBattlefield, shamanFilter, false)));
     }
 

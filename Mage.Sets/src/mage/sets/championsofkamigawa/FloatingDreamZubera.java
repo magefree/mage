@@ -131,6 +131,6 @@ class ZuberasDiedDynamicValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "for each Zubera that died this turn";
+        return "Zubera that died this turn";
     }
 }

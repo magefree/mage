@@ -30,7 +30,6 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
@@ -38,13 +37,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.watchers.Watcher;
-import mage.watchers.WatcherImpl;
 
 /**
  *
@@ -96,6 +90,6 @@ class SilentChantZuberaDynamicValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "for each Zubera that died this turn";
+        return "Zubera that died this turn";
     }
 }

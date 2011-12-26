@@ -34,12 +34,12 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.costs.common.OnlyDuringYourTurnCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DiscardTargetEffect;
 import mage.cards.CardImpl;
+import mage.target.TargetPlayer;
 
 /**
  *
@@ -57,6 +57,7 @@ public class ScepterOfFugue extends CardImpl<ScepterOfFugue> {
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DiscardTargetEffect(1), new ManaCostsImpl("{1}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new OnlyDuringYourTurnCost());
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 

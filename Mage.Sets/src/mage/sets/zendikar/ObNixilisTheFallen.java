@@ -28,18 +28,18 @@
 
 package mage.sets.zendikar;
 
+import java.util.UUID;
+
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LandfallAbility;
-import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.target.TargetPlayer;
-
-import java.util.UUID;
 
 /**
  *
@@ -56,7 +56,6 @@ public class ObNixilisTheFallen extends CardImpl<ObNixilisTheFallen> {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Landfall - Whenever a land enters the battlefield under your control, you may have target player lose 3 life. If you do, put three +1/+1 counters on Ob Nixilis, the Fallen.
         Ability ability = new LandfallAbility(new LoseLifeTargetEffect(3), true);
         ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)));
         ability.addTarget(new TargetPlayer());

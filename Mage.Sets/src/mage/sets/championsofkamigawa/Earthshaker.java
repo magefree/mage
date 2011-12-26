@@ -35,23 +35,28 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastTriggeredAbility;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.common.DamageAllEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  * @author Loki
  */
 public class Earthshaker extends CardImpl<Earthshaker> {
 
-    private final static FilterCard filter = new FilterCard("a Spirit or Arcane spell");
+    private final static FilterCard spellFilter = new FilterCard("a Spirit or Arcane spell");
+    private final static FilterCreaturePermanent creatureFilter = new FilterCreaturePermanent("creature without flying");
 
     static {
-        filter.getSubtype().add("Spirit");
-        filter.getSubtype().add("Arcane");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        spellFilter.getSubtype().add("Spirit");
+        spellFilter.getSubtype().add("Arcane");
+        spellFilter.setScopeSubtype(Filter.ComparisonScope.Any);
+        creatureFilter.getAbilities().add((Ability) FlyingAbility.getInstance());
+        creatureFilter.setNotAbilities(true);
     }
 
     public Earthshaker(UUID ownerId) {
@@ -61,9 +66,7 @@ public class Earthshaker extends CardImpl<Earthshaker> {
         this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
-        Ability ability = new SpellCastTriggeredAbility(new DamageTargetEffect(2), filter, false);
-        ability.addTarget(new TargetCreatureOrPlayer());
-        this.addAbility(ability);
+        this.addAbility(new SpellCastTriggeredAbility(new DamageAllEffect(new StaticValue(2) , creatureFilter), spellFilter, false));
     }
 
     public Earthshaker(final Earthshaker card) {
