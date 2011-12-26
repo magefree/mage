@@ -40,20 +40,20 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.SearchEffect;
-import mage.abilities.keyword.LevelUpAbility;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.choices.Choice;
-import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentCard;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 import mage.game.turn.*;
+import mage.player.ai.ma.optimizers.TreeOptimizer;
+import mage.player.ai.ma.optimizers.impl.EquipOptimizer;
+import mage.player.ai.ma.optimizers.impl.LevelUpOptimizer;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetCard;
@@ -83,6 +83,13 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 
     private static final String FILE_WITH_INSTRUCTIONS = "config/ai.please.cast.this.txt";
     private List<String> suggested = new ArrayList<String>();
+
+    private static final List<TreeOptimizer> optimizers = new ArrayList<TreeOptimizer>();
+
+    static {
+        optimizers.add(new LevelUpOptimizer());
+        optimizers.add(new EquipOptimizer());
+    }
 
 	public ComputerPlayer6(String name, RangeOfInfluence range, int skill) {
 		super(name, range);
@@ -582,26 +589,8 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
      * @param allActions
      */
     protected void optimize(Game game, List<Ability> allActions) {
-        List<Ability> toRemove = null;
-        for (Ability ability : allActions) {
-            if (ability instanceof LevelUpAbility) {
-                Permanent permanent = game.getPermanent(ability.getSourceId());
-                if (permanent != null && permanent instanceof PermanentCard) {
-                    PermanentCard leveler = (PermanentCard) permanent;
-                        // check already existing Level counters and compare to maximum that make sense
-                        if (permanent.getCounters().getCount(CounterType.LEVEL) >= leveler.getMaxLevelCounters()) {
-                            if (toRemove == null) {
-                                toRemove = new ArrayList<Ability>();
-                            }
-                            toRemove.add(ability);
-                        }
-                }
-            }
-        }
-        if (toRemove != null) {
-            for (Ability r : toRemove) {
-                allActions.remove(r);
-            }
+        for (TreeOptimizer optimizer : optimizers) {
+            optimizer.optimize(game, allActions);
         }
     }
 
