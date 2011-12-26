@@ -15,19 +15,19 @@ public class EquipAbilityTest extends CardTestBase {
 
     @Test
     public void testLevelUpAbilityUsage() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Boros Swiftblade");
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Steel Wall");
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Blade of the Bloodchief");
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Blazing Torch");
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Swamp", 3);
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 2);
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Sacred Foundry", 1);
-        setStopOnTurn(3);
 
         execute();
 
-        Permanent boros = getPermanent("Boros Swiftblade", playerA.getId());
-        Assert.assertNotNull(boros);
+        Permanent wall = getPermanent("Steel Wall", playerA.getId());
+        Assert.assertNotNull(wall);
 
-        Assert.assertEquals("Not equipped", 1, boros.getAttachments().size());
+        Assert.assertEquals("Not equipped", 2, wall.getAttachments().size());
 
         int count = 0;
         int tapped = 0;
@@ -42,6 +42,6 @@ public class EquipAbilityTest extends CardTestBase {
             }
         }
         Assert.assertEquals(6, count);
-        Assert.assertEquals(1, tapped);
+        Assert.assertEquals(2, tapped);
     }
 }
