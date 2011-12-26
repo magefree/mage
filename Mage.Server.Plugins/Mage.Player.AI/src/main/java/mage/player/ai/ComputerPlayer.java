@@ -836,7 +836,10 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 			if (card != null) {
 				target.add(card.getId(), game);
 				cardChoices.remove(card);
-			}
+			} else {
+                // We don't have any valid target to choose so stop choosing
+                break;
+            }
 			if (outcome.equals(Outcome.Neutral) && target.getTargets().size() > target.getNumberOfTargets() + (target.getMaxNumberOfTargets() - target.getNumberOfTargets()) / 2) {
 				return true;
 			}
