@@ -1,0 +1,3 @@
+Welcome! You are playing Mage version 0.8.2-beta.
+This is trunk version. Use only for internal testing.
+Contact us on www.slightlymagic.net.
