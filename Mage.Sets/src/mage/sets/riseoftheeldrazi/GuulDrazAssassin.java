@@ -60,6 +60,7 @@ public class GuulDrazAssassin extends LevelerCard<GuulDrazAssassin> {
 		this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
+
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{1}{B}")));
         Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostTargetEffect(-2, -2, Constants.Duration.EndOfTurn), new ManaCostsImpl("{B}"));
