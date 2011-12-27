@@ -5,12 +5,25 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 /**
  * @author Loki
  */
 public class DomainValue implements DynamicValue {
+    private Integer amount;
+
+    public DomainValue() {
+        this(1);
+    }
+
+    public DomainValue(Integer amount){
+        this.amount = amount;
+    }
+
+    public DomainValue(final DomainValue dynamicValue) {
+        this.amount = dynamicValue.amount;
+    }
+
     @Override
     public int calculate(Game game, Ability sourceAbility) {
         int havePlains = 0;
@@ -32,17 +45,17 @@ public class DomainValue implements DynamicValue {
                     haveForests = 1;
             }
         }
-        return haveForests + haveIslands + haveMountains + havePlains + haveSwamps;
+        return amount * (haveForests + haveIslands + haveMountains + havePlains + haveSwamps);
     }
 
     @Override
     public DynamicValue clone() {
-        return new DomainValue();
+        return new DomainValue(this);
     }
 
     @Override
     public String toString() {
-        return "1";
+        return amount.toString();
     }
 
 
