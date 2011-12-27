@@ -73,7 +73,7 @@ class PsychicMiasmaEffect1 extends OneShotEffect<PsychicMiasmaEffect1> {
 
 	public PsychicMiasmaEffect1() {
 		super(Outcome.Discard);
-		staticText = "Target player discards a card.";
+		staticText = "Target player discards a card";
 	}
 	
 	public PsychicMiasmaEffect1(final PsychicMiasmaEffect1 effect) {
@@ -106,7 +106,7 @@ class PsychicMiasmaEffect1 extends OneShotEffect<PsychicMiasmaEffect1> {
 class PsychicMiasmaEffect2 extends PostResolveEffect<PsychicMiasmaEffect2> {
 
 	public PsychicMiasmaEffect2() {
-		staticText = "If a land card is discarded this way, return {this} to its owner's hand.";
+		staticText = "If a land card is discarded this way, return {this} to its owner's hand";
 	}
 	
 	public PsychicMiasmaEffect2(final PsychicMiasmaEffect2 effect) {

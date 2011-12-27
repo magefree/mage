@@ -47,7 +47,7 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class LoamLion extends CardImpl<LoamLion> {
 
-    private static final String rule = "Loam Lion gets +1/+2 as long as you control a Forest";
+    private static final String rule = "{this} gets +1/+2 as long as you control a Forest";
     private static final FilterLandPermanent filter = new FilterLandPermanent("a Forest");
 
     static {
@@ -64,6 +64,7 @@ public class LoamLion extends CardImpl<LoamLion> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
+        // Loam Lion gets +1/+2 as long as you control a Forest.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinousEffect(new BoostSourceEffect(1, 2, Duration.WhileOnBattlefield),
                 new ControlsPermanentCondition(filter), rule)));

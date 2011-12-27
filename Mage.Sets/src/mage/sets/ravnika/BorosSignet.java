@@ -30,7 +30,6 @@ package mage.sets.ravnika;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.Mana;
@@ -38,7 +37,6 @@ import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.BasicManaEffect;
-import mage.abilities.mana.BasicManaAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 
@@ -51,6 +49,7 @@ public class BorosSignet extends CardImpl<BorosSignet> {
     public BorosSignet (UUID ownerId) {
         super(ownerId, 255, "Boros Signet", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "RAV";
+
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(new Mana(1, 0, 0, 1, 0, 0, 0)), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

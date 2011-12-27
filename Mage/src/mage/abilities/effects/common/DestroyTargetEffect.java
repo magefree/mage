@@ -81,7 +81,7 @@ public class DestroyTargetEffect extends OneShotEffect<DestroyTargetEffect> {
 
 	@Override
 	public String getText(Mode mode) {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         if (mode.getTargets().size() == 0) {
             sb.append("destroy that creature"); //TODO add possibility to specify text with targetPointer usage
         } else if (mode.getTargets().get(0).getNumberOfTargets() == 1)

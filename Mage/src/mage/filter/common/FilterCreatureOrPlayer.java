@@ -30,8 +30,6 @@ package mage.filter.common;
 
 import java.util.UUID;
 
-import mage.abilities.Ability;
-import mage.filter.Filter;
 import mage.filter.FilterImpl;
 import mage.filter.FilterInPlay;
 import mage.filter.FilterPlayer;
