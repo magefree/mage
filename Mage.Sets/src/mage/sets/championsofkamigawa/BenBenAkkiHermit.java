@@ -56,7 +56,6 @@ public class BenBenAkkiHermit extends CardImpl<BenBenAkkiHermit> {
            filter.setTapped(false);
            filter.setUseTapped(true);
            filter.getSubtype().add("Mountain");
-           filter.setScopeCardType(Filter.ComparisonScope.Any);
            filter.setScopeSubtype(Filter.ComparisonScope.Any);
        }
 

@@ -32,8 +32,8 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
-import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
@@ -51,8 +51,8 @@ public class SphereOfTheSuns extends CardImpl<SphereOfTheSuns> {
 
         Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(3)),
                 "Sphere of the Suns enters the battlefield tapped and with three charge counters on it.");
-        ability.addEffect(new TapSourceEffect());
         this.addAbility(ability);
+        this.addAbility(new EntersBattlefieldTappedAbility());
 
         RemoveCountersSourceCost removeCounterCost = new RemoveCountersSourceCost(CounterType.CHARGE.createInstance());
         ability = new AnyColorManaAbility();

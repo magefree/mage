@@ -38,7 +38,6 @@ import mage.abilities.common.LandfallAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.MayTapOrUntapTargetEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.cards.CardImpl;
@@ -50,6 +49,8 @@ import mage.target.common.TargetCreaturePermanent;
  * @author Loki
  */
 public class TideforceElemental extends CardImpl<TideforceElemental> {
+    
+  //  private final static String text = "You may tap or untap another target creature";
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
 
     static {
@@ -66,7 +67,10 @@ public class TideforceElemental extends CardImpl<TideforceElemental> {
         this.toughness = new MageInt(1);
 
         // {U}, {tap}: You may tap or untap another target creature.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new MayTapOrUntapTargetEffect(), new ColoredManaCost(Constants.ColoredManaSymbol.U));
+        Ability ability = new SimpleActivatedAbility(
+                Constants.Zone.BATTLEFIELD, 
+                new MayTapOrUntapTargetEffect(), 
+                new ColoredManaCost(Constants.ColoredManaSymbol.U));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);

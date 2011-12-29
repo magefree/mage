@@ -44,7 +44,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  */
 public class ScionOfTheWild extends CardImpl<ScionOfTheWild> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature you control");
+    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures you control");
 
     public ScionOfTheWild(UUID ownerId) {
         super(ownerId, 295, "Scion of the Wild", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");

@@ -101,7 +101,7 @@ public abstract class TriggeredAbilityImpl<T extends TriggeredAbilityImpl<T>> ex
     public String getRule() {
         String superRule = super.getRule(true);
         StringBuilder sb = new StringBuilder();
-        if (optional) {
+        if (optional && !superRule.toLowerCase().startsWith("you may")) {
             sb.append("you may ");
             if (!this.getTargets().isEmpty()) {
                 sb.append("have ");

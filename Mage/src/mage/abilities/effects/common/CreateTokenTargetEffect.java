@@ -63,6 +63,7 @@ public class CreateTokenTargetEffect extends OneShotEffect<CreateTokenTargetEffe
         }
         sb.append(message);
         sb.append(" under target ").append(mode.getTargets().get(0).getTargetName());
+        sb.append("'s control");
 		return sb.toString();
 	}
 }

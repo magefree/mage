@@ -31,6 +31,7 @@ package mage.sets.scarsofmirrodin;
 import java.util.UUID;
 
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -55,7 +56,7 @@ public class Skinrender extends CardImpl<Skinrender> {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        Effect putCountersEffect = new AddCountersTargetEffect(CounterType.M1M1.createInstance(3));
+        Effect putCountersEffect = new AddCountersTargetEffect(CounterType.M1M1.createInstance(3), Outcome.UnboostCreature);
         Ability ability = new EntersBattlefieldTriggeredAbility(putCountersEffect, false);
         Target target = new TargetCreaturePermanent();
         target.setRequired(true);

@@ -31,7 +31,7 @@ import java.util.UUID;
 public class AkkiLavarunner extends CardImpl<AkkiLavarunner> {
 
     public AkkiLavarunner(UUID ownerId) {
-        super(ownerId, 153, "Akki Lavarunner", Constants.Rarity.COMMON, new Constants.CardType[]{Constants.CardType.CREATURE}, "{3}{R}");
+        super(ownerId, 153, "Akki Lavarunner", Constants.Rarity.RARE, new Constants.CardType[]{Constants.CardType.CREATURE}, "{3}{R}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Goblin");
         this.subtype.add("Warrior");
@@ -57,7 +57,6 @@ class AkkiLavarunnerAbility extends TriggeredAbilityImpl<AkkiLavarunnerAbility> 
 
     public AkkiLavarunnerAbility() {
         super(Constants.Zone.BATTLEFIELD, new FlipSourceEffect());
-        this.addEffect(new UntapAllLandsControllerEffect());
     }
 
     public AkkiLavarunnerAbility(final AkkiLavarunnerAbility ability) {

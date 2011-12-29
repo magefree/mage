@@ -14,7 +14,7 @@ public class FlipSourceEffect extends OneShotEffect<FlipSourceEffect> {
 
     public FlipSourceEffect() {
         super(Constants.Outcome.BecomeCreature);
-        staticText = "flip it.";
+        staticText = "flip it";
     }
 
     public FlipSourceEffect(final FlipSourceEffect effect) {
