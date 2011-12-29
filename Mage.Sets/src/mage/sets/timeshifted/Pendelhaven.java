@@ -38,6 +38,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -45,6 +47,14 @@ import mage.target.common.TargetCreaturePermanent;
  * @author Loki
  */
 public class Pendelhaven extends CardImpl<Pendelhaven> {
+    private static FilterCreaturePermanent filter = new FilterCreaturePermanent("1/1 creature");
+
+    static {
+        filter.setPower(1);
+        filter.setPowerComparison(Filter.ComparisonType.Equal);
+        filter.setToughness(1);
+        filter.setToughnessComparison(Filter.ComparisonType.Equal);
+    }
 
     public Pendelhaven(UUID ownerId) {
         super(ownerId, 120, "Pendelhaven", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
@@ -55,7 +65,7 @@ public class Pendelhaven extends CardImpl<Pendelhaven> {
         this.addAbility(new GreenManaAbility());
         // {tap}: Target 1/1 creature gets +1/+2 until end of turn.
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostTargetEffect(1, 2, Constants.Duration.EndOfTurn), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
 
