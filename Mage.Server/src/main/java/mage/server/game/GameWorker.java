@@ -28,10 +28,11 @@
 
 package mage.server.game;
 
-import java.util.UUID;
-import java.util.concurrent.Callable;
 import mage.game.Game;
 import org.apache.log4j.Logger;
+
+import java.util.UUID;
+import java.util.concurrent.Callable;
 
 /**
  *
@@ -55,6 +56,7 @@ public class GameWorker implements Callable {
 	public Object call() {
 		try {
 			game.start(choosingPlayerId);
+			game.fireUpdatePlayersEvent();
 			result.gameResult(game.getWinner());
 		} catch (Exception ex) {
 			logger.fatal("GameWorker error ", ex);
