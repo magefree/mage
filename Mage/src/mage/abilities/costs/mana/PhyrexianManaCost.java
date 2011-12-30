@@ -28,12 +28,12 @@
 
 package mage.abilities.costs.mana;
 
-import java.util.UUID;
-
 import mage.Constants.ColoredManaSymbol;
 import mage.abilities.Ability;
 import mage.game.Game;
 import mage.players.ManaPool;
+
+import java.util.UUID;
 
 /**
  * 
@@ -70,7 +70,7 @@ public class PhyrexianManaCost extends ColoredManaCost {
 		if (!game.getPlayer(controllerId).isLifeTotalCanChange()) {
 			return false;
 		}
-		return game.getPlayer(controllerId).getLife() > 2;
+		return game.getPlayer(controllerId).getLife() >= 2;
 	}
 
 	@Override
