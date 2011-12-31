@@ -34,7 +34,7 @@ import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PreventAllCombatDamageEffect;
+import mage.abilities.effects.common.PreventAllDamageEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterCreaturePermanent;
@@ -64,7 +64,7 @@ public class Moonmist extends CardImpl<Moonmist> {
 
         // Transform all Humans. Prevent all combat damage that would be dealt this turn by creatures other than Werewolves and Wolves.
         this.getSpellAbility().addEffect(new MoonmistEffect());
-        this.getSpellAbility().addEffect(new PreventAllCombatDamageEffect(filter, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new PreventAllDamageEffect(filter, Duration.EndOfTurn, true));
     }
 
     public Moonmist(final Moonmist card) {

@@ -29,22 +29,12 @@ package mage.sets.magic2010;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
 
 /**
  *
@@ -62,7 +52,8 @@ public class SageOwl extends CardImpl<SageOwl> {
         this.toughness = new MageInt(1);
 
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SageOwlEffect()));
+        // When Sage Owl enters the battlefield, look at the top four cards of your library, then put them back in any order.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new LookLibraryControllerEffect(4)));
     }
 
     public SageOwl(final SageOwl card) {
@@ -72,59 +63,5 @@ public class SageOwl extends CardImpl<SageOwl> {
     @Override
     public SageOwl copy() {
         return new SageOwl(this);
-    }
-}
-
-class SageOwlEffect extends OneShotEffect<SageOwlEffect> {
-
-    public SageOwlEffect() {
-        super(Outcome.Neutral);
-        this.staticText = "look at the top four cards of your library, then put them back in any order";
-    }
-
-    public SageOwlEffect(final SageOwlEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SageOwlEffect copy() {
-        return new SageOwlEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-
-        Cards cards = new CardsImpl(Zone.PICK);
-        int count = Math.min(player.getLibrary().size(), 4);
-        for (int i = 0; i < count; i++) {
-            Card card = player.getLibrary().removeFromTop(game);
-            if (card != null) {
-                cards.add(card);
-                game.setZone(card.getId(), Zone.PICK);
-            }
-        }
-        player.lookAtCards("Sage Owl", cards, game);
-
-        TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put on the top of your library"));
-        target.setRequired(true);
-        while (cards.size() > 1) {
-            player.choose(Outcome.Neutral, cards, target, game);
-            Card card = cards.get(target.getFirstTarget(), game);
-            if (card != null) {
-                cards.remove(card);
-                card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
-            }
-            target.clearChosen();
-        }
-        if (cards.size() == 1) {
-            Card card = cards.get(cards.iterator().next(), game);
-            card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
-        }
-
-        return true;
     }
 }

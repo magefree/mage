@@ -29,10 +29,10 @@
 package mage.abilities.effects.common;
 
 import mage.Constants.Duration;
-import mage.Constants.PhaseStep;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.PreventionEffectImpl;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
@@ -40,32 +40,38 @@ import mage.game.permanent.Permanent;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LevelX
  */
-public class PreventAllCombatDamageEffect extends PreventionEffectImpl<PreventAllCombatDamageEffect> {
+public class PreventAllDamageEffect extends PreventionEffectImpl<PreventAllDamageEffect> {
 
-    private FilterCreaturePermanent filter;
-    
-    public PreventAllCombatDamageEffect(FilterCreaturePermanent filter, Duration duration) {
-		super(duration);
-        this.filter = filter;
-		staticText = "Prevent all combat damage " + duration.toString() + " dealt by " + filter.getMessage();
-	}
+        private FilterPermanent filter;
+        private Boolean onlyCombat;
 
-    public PreventAllCombatDamageEffect(Duration duration) {
-		super(duration);
-		staticText = "Prevent all combat damage " + duration.toString();
-	}
+        public PreventAllDamageEffect(FilterPermanent filter, Duration duration, Boolean onlyCombat) {
+                    super(duration);
+                    this.filter = filter;
+                    this.onlyCombat = onlyCombat;
+            }
+        public PreventAllDamageEffect(Duration duration, Boolean onlyCombat) {
+                    super(duration);
+                    this.onlyCombat = onlyCombat;
+            }
 
-	public PreventAllCombatDamageEffect(final PreventAllCombatDamageEffect effect) {
-		super(effect);
-        if (effect.filter != null)
-            this.filter = effect.filter.copy();
-	}
+        public PreventAllDamageEffect(Duration duration) {
+                    super(duration);
+                    this.onlyCombat = false;
+            }
+
+        public PreventAllDamageEffect(final PreventAllDamageEffect effect) {
+                super(effect);
+                if (effect.filter != null)
+                        this.filter = effect.filter.copy();
+                this.onlyCombat = effect.onlyCombat;
+        }
 
 	@Override
-	public PreventAllCombatDamageEffect copy() {
-		return new PreventAllCombatDamageEffect(this);
+	public PreventAllDamageEffect copy() {
+		return new PreventAllDamageEffect(this);
 	}
 
 	@Override
@@ -78,8 +84,15 @@ public class PreventAllCombatDamageEffect extends PreventionEffectImpl<PreventAl
 		GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), event.getAmount(), false);
 		if (!game.replaceEvent(preventEvent)) {
 			int damage = event.getAmount();
+                        Permanent permanent = game.getPermanent(event.getSourceId());
+                        StringBuilder sourceName = new StringBuilder();
+                        if (permanent != null) {
+                                sourceName.append(" from ").append(permanent.getName());
+                        }
+                        sourceName.insert(0, "Damage").append(" has been prevented: ").append(damage);
 			event.setAmount(0);
-			game.informPlayers("Damage has been prevented: " + damage);
+                        game.informPlayers(sourceName.toString());
+//			game.informPlayers("Damage" + sourceName + " has been prevented: " + damage);
 			game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), damage));
 		}
 		return false;
@@ -89,7 +102,7 @@ public class PreventAllCombatDamageEffect extends PreventionEffectImpl<PreventAl
 	public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game) && event instanceof DamageEvent) {
             DamageEvent damageEvent = (DamageEvent) event;
-            if (damageEvent.isCombatDamage()) {
+            if (damageEvent.isCombatDamage() || !onlyCombat) {
                 if (filter == null)
                     return true;
                 Permanent permanent = game.getPermanent(damageEvent.getSourceId());
@@ -100,4 +113,17 @@ public class PreventAllCombatDamageEffect extends PreventionEffectImpl<PreventAl
 		return false;
 	}
 
+        @Override
+	public String getText(Mode mode) {
+                StringBuilder sb = new StringBuilder("Prevent all ");
+                if (onlyCombat)
+                        sb.append("combat ");
+                sb.append("damage ");
+                sb.append(duration.toString());
+                if (filter != null) {
+                        sb.append(" dealt by ");
+                        sb.append(filter.getMessage());
+                }
+                return sb.toString();
+	}
 }

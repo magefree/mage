@@ -2,6 +2,7 @@ package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
@@ -20,8 +21,7 @@ public class SacrificeSourceUnlessPaysEffect extends OneShotEffect<SacrificeSour
     public SacrificeSourceUnlessPaysEffect(Cost cost) {
         super(Outcome.Sacrifice);
         this.cost = cost;
-        staticText = "sacrifice {this} unless you pay " + cost.getText();
-    }
+     }
 
     public SacrificeSourceUnlessPaysEffect(final SacrificeSourceUnlessPaysEffect effect) {
         super(effect);
@@ -49,4 +49,18 @@ public class SacrificeSourceUnlessPaysEffect extends OneShotEffect<SacrificeSour
         return new SacrificeSourceUnlessPaysEffect(this);
     }
 
+    	@Override
+	public String getText(Mode mode) {
+            StringBuilder sb = new StringBuilder("sacrifice {this} unless you ");
+            String costText = cost.getText();
+            if (costText.toLowerCase().startsWith("discard")) {
+                sb.append(costText.substring(0, 1).toLowerCase());
+                sb.append(costText.substring(1));
+            }
+            else
+                sb.append("pay ").append(costText);
+            
+            return sb.toString();
+
+	}
  }

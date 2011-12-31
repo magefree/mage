@@ -28,15 +28,21 @@
 
 package mage.abilities.effects.common;
 
+import mage.Constants;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
+import mage.abilities.SpellAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.filter.FilterCard;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetCard;
 
 /**
  *
@@ -44,45 +50,120 @@ import mage.players.Player;
  */
 public class LookLibraryControllerEffect extends OneShotEffect<LookLibraryControllerEffect> {
 
+    private int numberOfCards;
+    private boolean mayShuffleAfter;
+            
     public LookLibraryControllerEffect() {
+            this(1);
+    }
+
+    public LookLibraryControllerEffect(int numberOfCards) {
+            this(numberOfCards, false);
+    }
+    
+    public LookLibraryControllerEffect(int numberOfCards, boolean mayShuffleAfter) {
             super(Outcome.Benefit);
-            staticText = "Look at the top card of your Library";
+            this.numberOfCards = numberOfCards;
+            this.mayShuffleAfter = mayShuffleAfter;
     }
 
     public LookLibraryControllerEffect(final LookLibraryControllerEffect effect) {
             super(effect);
+            this.numberOfCards = effect.numberOfCards; 
+            this.mayShuffleAfter = effect.mayShuffleAfter;
     }
 
     @Override
     public LookLibraryControllerEffect copy() {
         return new LookLibraryControllerEffect(this);
+        
     }
     
     @Override
     public boolean apply(Game game, Ability source) {
-        String windowname; 
-        Player player = game.getPlayer(source.getControllerId());
-        Card sourcecard = game.getCard(source.getSourceId());
-        if (sourcecard == null) {
-            windowname = "Top card";
+        String windowName ="Reveal"; 
+        if (source instanceof SpellAbility) {
+            Card sourceCard = game.getCard(source.getSourceId());
+            if (sourceCard != null)
+                windowName = sourceCard.getName(); 
         }
         else {
-            windowname = sourcecard.getName();
+            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+            if (sourcePermanent != null)
+                windowName = sourcePermanent.getName(); 
         }
+        
+        Player player = game.getPlayer(source.getControllerId());
         if (player == null) {
             return false;
         }
 
-        Card card = player.getLibrary().getFromTop(game);
-        if (card != null) {
-            Cards cards = new CardsImpl(Zone.PICK);
-            cards.add(card);
-            player.lookAtCards(windowname, cards, game);
-        } else {
-            return false;
+        Cards cards = new CardsImpl(Zone.PICK);
+        int count = Math.min(player.getLibrary().size(), this.numberOfCards);
+        for (int i = 0; i < count; i++) {
+            Card card = player.getLibrary().removeFromTop(game);
+            if (card != null) {
+                cards.add(card);
+                game.setZone(card.getId(), Zone.PICK);
+            }
         }
+        player.lookAtCards(windowName, cards, game);
 
+        TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put on your library (last chosen will be on top)"));
+        target.setRequired(true);
+        while (cards.size() > 1) {
+            player.choose(Outcome.Neutral, cards, target, game);
+            Card card = cards.get(target.getFirstTarget(), game);
+            if (card != null) {
+                cards.remove(card);
+                card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+            }
+            target.clearChosen();
+        }
+        if (cards.size() == 1) {
+            Card card = cards.get(cards.iterator().next(), game);
+            card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+        }
+        if (this.mayShuffleAfter) {
+        	if (player.chooseUse(Constants.Outcome.Benefit, "Shuffle you library?", game)) {
+			player.shuffleLibrary(game);
+		}
+        }
         return true;
+    }
+    
+    @Override
+    public String getText(Mode mode) {
+        StringBuilder sb = new StringBuilder("Look at the top ");
+        switch(this.numberOfCards) {
+            case 1:
+                sb.append("card ");
+                break;
+            case 2:
+                sb.append("two");
+                break;
+            case 3:
+                sb.append("three");
+                break;
+            case 4:
+                sb.append("four");
+                break;
+            case 5:
+                sb.append("five");
+                break;
+            default:
+                sb.append(this.numberOfCards);
+                break;
+        }
+        if (this.numberOfCards > 1)
+                sb.append(" cards ");
+        
+        sb.append("of your Library");
+        if (this.numberOfCards > 1)
+            sb.append(", then put them back in any order");
+        if (this.mayShuffleAfter)
+            sb.append(". You may shuffle your library");
+        return sb.toString();
     }
 }
 

@@ -30,22 +30,12 @@ package mage.sets.worldwake;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.LookLibraryControllerEffect;
 import mage.abilities.mana.BlueManaAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
 
 /**
  *
@@ -56,8 +46,10 @@ public class HalimarDepths extends CardImpl<HalimarDepths> {
 	public HalimarDepths(UUID ownerId) {
 		super(ownerId, 137, "Halimar Depths", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "WWK";
-        this.addAbility(new EntersBattlefieldTappedAbility());
-		this.addAbility(new EntersBattlefieldTriggeredAbility(new HalimarDepthsEffect()));
+                // Halimar Depths enters the battlefield tapped.
+                this.addAbility(new EntersBattlefieldTappedAbility());
+                // When Halimar Depths enters the battlefield, look at the top three cards of your library, then put them back in any order.
+		this.addAbility(new EntersBattlefieldTriggeredAbility(new LookLibraryControllerEffect(3)));
 		this.addAbility(new BlueManaAbility());
 	}
 
@@ -68,60 +60,6 @@ public class HalimarDepths extends CardImpl<HalimarDepths> {
 	@Override
 	public HalimarDepths copy() {
 		return new HalimarDepths(this);
-	}
-
-}
-
-class HalimarDepthsEffect extends OneShotEffect<HalimarDepthsEffect> {
-
-	protected static FilterCard filter2 = new FilterCard("card to put on the top of your library");
-
-	public HalimarDepthsEffect() {
-		super(Outcome.Benefit);
-		staticText = "look at the top three cards of your library, then put them back in any order";
-	}
-
-	public HalimarDepthsEffect(final HalimarDepthsEffect effect) {
-		super(effect);
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-		Cards cards = new CardsImpl(Zone.PICK);
-		int count = Math.min(player.getLibrary().size(), 3);
-		for (int i = 0; i < count; i++) {
-			Card card = player.getLibrary().removeFromTop(game);
-            if (card != null) {
-			    cards.add(card);
-			    game.setZone(card.getId(), Zone.PICK);
-            }
-		}
-		if (cards.size() > 1) {
-			TargetCard target2 = new TargetCard(Zone.PICK, filter2);
-			target2.setRequired(true);
-			while (cards.size() > 1) {
-				player.choose(Outcome.Detriment, cards, target2, game);
-				Card card = cards.get(target2.getFirstTarget(), game);
-                if (card != null) {
-				    cards.remove(card);
-				    card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
-			    }
-                target2.clearChosen();
-            }
-		}
-		if (cards.size() == 1) {
-			Card card = cards.get(cards.iterator().next(), game);
-            if (card != null) {
-			    card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
-            }
-		}
-		return true;
-	}
-
-	@Override
-	public HalimarDepthsEffect copy() {
-		return new HalimarDepthsEffect(this);
 	}
 
 }

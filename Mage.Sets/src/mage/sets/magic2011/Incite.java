@@ -29,15 +29,18 @@
 package mage.sets.magic2011;
 
 import java.util.UUID;
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.SubLayer;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.AttacksIfAbleTargetEffect;
+import mage.abilities.effects.common.continious.SetCardColorTargetEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -53,8 +56,10 @@ public class Incite extends CardImpl<Incite> {
 		super(ownerId, 145, "Incite", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
 		this.expansionSetCode = "M11";
 		this.color.setRed(true);
-		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-		this.getSpellAbility().addEffect(new InciteEffect());
+                // Target creature becomes red until end of turn and attacks this turn if able.
+                this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+//		this.getSpellAbility().addEffect(new InciteEffect());
+                this.getSpellAbility().addEffect(new SetCardColorTargetEffect(ObjectColor.RED, Constants.Duration.EndOfTurn, "Target creature becomes red until end of turn"));
 		this.getSpellAbility().addEffect(new AttacksIfAbleTargetEffect(Duration.EndOfTurn));
 	}
 
@@ -68,34 +73,34 @@ public class Incite extends CardImpl<Incite> {
 	}
 }
 
-class InciteEffect extends ContinuousEffectImpl<InciteEffect> {
-
-	public InciteEffect() {
-		super(Duration.EndOfTurn, Layer.ColorChangingEffects_5, SubLayer.NA, Outcome.Detriment);
-		staticText = "Target creature becomes red until end of turn";
-	}
-
-	public InciteEffect(final InciteEffect effect) {
-		super(effect);
-	}
-
-	@Override
-	public InciteEffect copy() {
-		return new InciteEffect(this);
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getFirstTarget());
-		if (permanent != null) {
-			permanent.getColor().setRed(true);
-			permanent.getColor().setWhite(false);
-			permanent.getColor().setGreen(false);
-			permanent.getColor().setBlue(false);
-			permanent.getColor().setBlack(false);
-			return true;
-		}
-		return false;
-	}
-
-}
+//class InciteEffect extends ContinuousEffectImpl<InciteEffect> {
+//
+//	public InciteEffect() {
+//		super(Duration.EndOfTurn, Layer.ColorChangingEffects_5, SubLayer.NA, Outcome.Detriment);
+//		staticText = "Target creature becomes red until end of turn";
+//	}
+//
+//	public InciteEffect(final InciteEffect effect) {
+//		super(effect);
+//	}
+//
+//	@Override
+//	public InciteEffect copy() {
+//		return new InciteEffect(this);
+//	}
+//
+//	@Override
+//	public boolean apply(Game game, Ability source) {
+//		Permanent permanent = game.getPermanent(source.getFirstTarget());
+//		if (permanent != null) {
+//			permanent.getColor().setRed(true);
+//			permanent.getColor().setWhite(false);
+//			permanent.getColor().setGreen(false);
+//			permanent.getColor().setBlue(false);
+//			permanent.getColor().setBlack(false);
+//			return true;
+//		}
+//		return false;
+//	}
+//
+//}

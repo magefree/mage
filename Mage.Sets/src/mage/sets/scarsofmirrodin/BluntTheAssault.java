@@ -35,7 +35,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.PreventAllCombatDamageEffect;
+import mage.abilities.effects.common.PreventAllDamageEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 
@@ -56,7 +56,7 @@ public class BluntTheAssault extends CardImpl<BluntTheAssault> {
         this.expansionSetCode = "SOM";
 		this.color.setGreen(true);
         this.getSpellAbility().addEffect(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter)));
-        this.getSpellAbility().addEffect(new PreventAllCombatDamageEffect(Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new PreventAllDamageEffect(Constants.Duration.EndOfTurn, true));
     }
 
     public BluntTheAssault (final BluntTheAssault card) {

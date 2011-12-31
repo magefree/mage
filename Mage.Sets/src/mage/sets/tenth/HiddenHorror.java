@@ -51,7 +51,7 @@ public class HiddenHorror extends CardImpl<HiddenHorror> {
         this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new DiscardTargetCost(new TargetCardInHand(new FilterCreatureCard())))));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new DiscardTargetCost(new TargetCardInHand(new FilterCreatureCard("a creature card"))))));
     }
 
     public HiddenHorror(final HiddenHorror card) {

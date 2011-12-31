@@ -33,7 +33,7 @@ import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.PreventAllCombatDamageEffect;
+import mage.abilities.effects.common.PreventAllDamageEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 
@@ -47,7 +47,7 @@ public class Angelsong extends CardImpl<Angelsong> {
 		super(ownerId, 4, "Angelsong", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
 		this.expansionSetCode = "ALA";
 		this.color.setWhite(true);
-		this.getSpellAbility().addEffect(new PreventAllCombatDamageEffect(Duration.EndOfTurn));
+		this.getSpellAbility().addEffect(new PreventAllDamageEffect(Duration.EndOfTurn, true));
 		this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
 	}
 

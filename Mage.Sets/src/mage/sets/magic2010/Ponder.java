@@ -29,20 +29,11 @@ package mage.sets.magic2010;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardControllerEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.LookLibraryControllerEffect;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
 
 /**
  * @author nantuko
@@ -56,7 +47,7 @@ public class Ponder extends CardImpl<Ponder> {
 		this.color.setBlue(true);
 
 		// Look at the top three cards of your library, then put them back in any order. You may shuffle your library.
-		this.getSpellAbility().addEffect(new PonderEffect());
+		this.getSpellAbility().addEffect(new LookLibraryControllerEffect(3, true));
 		// Draw a card.
 		this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
 	}
@@ -69,62 +60,4 @@ public class Ponder extends CardImpl<Ponder> {
 	public Ponder copy() {
 		return new Ponder(this);
 	}
-}
-
-class PonderEffect extends OneShotEffect<PonderEffect> {
-
-	protected static FilterCard filter = new FilterCard("card to put on the top of your library");
-
-	public PonderEffect() {
-		super(Constants.Outcome.Benefit);
-		staticText = "Look at the top three cards of your library, then put them back in any order. You may shuffle your library";
-	}
-
-	public PonderEffect(final PonderEffect effect) {
-		super(effect);
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-		Cards cards = new CardsImpl(Constants.Zone.PICK);
-		int count = Math.min(3, player.getLibrary().size());
-		if (count == 0) {
-			return false;
-		}
-		for (int i = 0; i < count; i++) {
-			Card card = player.getLibrary().removeFromTop(game);
-			if (card != null) {
-				cards.add(card);
-			}
-			game.setZone(card.getId(), Constants.Zone.PICK);
-		}
-		if (cards.size() > 1) {
-			TargetCard target2 = new TargetCard(Constants.Zone.PICK, filter);
-			target2.setRequired(true);
-			while (cards.size() > 1) {
-				player.choose(Constants.Outcome.Benefit, cards, target2, game);
-				Card card = cards.get(target2.getFirstTarget(), game);
-				if (card != null) {
-					cards.remove(card);
-					card.moveToZone(Constants.Zone.LIBRARY, source.getId(), game, true);
-				}
-				target2.clearChosen();
-			}
-		}
-		if (cards.size() == 1) {
-			Card card = cards.get(cards.iterator().next(), game);
-			card.moveToZone(Constants.Zone.LIBRARY, source.getId(), game, true);
-		}
-		if (player.chooseUse(Constants.Outcome.Benefit, "Shuffle you library?", game)) {
-			player.shuffleLibrary(game);
-		}
-		return true;
-	}
-
-	@Override
-	public PonderEffect copy() {
-		return new PonderEffect(this);
-	}
-
 }

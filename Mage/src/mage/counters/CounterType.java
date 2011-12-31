@@ -49,11 +49,12 @@ public enum CounterType {
     FEATHER(new FeatherCounter().name),
     QUEST(new QuestCounter().name),
     ARROWHEAD(new ArrowheadCounter().name),
+    AIM(new AimCounter().name),
     EON(new EonCounter().name),
-	AWAKENING(new AwakeningCounter().name),
+    AWAKENING(new AwakeningCounter().name),
     DEVOTION(new DevotionCounter().name),
     DIVINITY(new DivinityCounter().name),
-	WISH(new WishCounter().name),
+    WISH(new WishCounter().name),
     HOOFPRINT(new HoofprintCounter().name),
     HATCHLING(new HatchlingCounter().name),
     KI(new KiCounter().name),
@@ -119,6 +120,8 @@ public enum CounterType {
                 return new QuestCounter(amount);
             case ARROWHEAD:
                 return new ArrowheadCounter(amount);
+            case AIM:
+                return new AimCounter(amount);
             case EON:
                 return new EonCounter(amount);
 			case AWAKENING:

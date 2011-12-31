@@ -37,7 +37,7 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.DeathtouchAbility;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
@@ -62,8 +62,11 @@ public class GlissaTheTraitor extends CardImpl<GlissaTheTraitor> {
 		this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
-        this.addAbility(FlyingAbility.getInstance());
+        // First strike, 
+        this.addAbility(FirstStrikeAbility.getInstance());
+        // Deathtouch
         this.addAbility(DeathtouchAbility.getInstance());
+        // Whenever a creature an opponent controls dies, you may return target artifact card from your graveyard to your hand.
         this.addAbility(new GlissaTheTraitorTriggeredAbility());
     }
 
@@ -113,6 +116,6 @@ class GlissaTheTraitorTriggeredAbility extends TriggeredAbilityImpl<GlissaTheTra
 
     @Override
     public String getRule() {
-        return "Whenever a creature an opponent controls is put into a graveyard from the battlefield, " + super.getRule();
+        return "Whenever a creature an opponent controls is put into a graveyard from the battlefield, you may " + super.getRule();
     }
 }

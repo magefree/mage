@@ -28,7 +28,6 @@
 package mage.sets.lorwyn;
 
 import mage.Constants.CardType;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
@@ -36,17 +35,10 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
 
 import java.util.UUID;
+import mage.abilities.effects.common.LookLibraryControllerEffect;
 
 /**
  *
@@ -65,7 +57,7 @@ public class GiltLeafSeer extends CardImpl<GiltLeafSeer> {
         this.toughness = new MageInt(2);
 
         // {G}, {tap}: Look at the top two cards of your library, then put them back in any order.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GiltLeafSeerEffect(), new ManaCostsImpl("{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryControllerEffect(2), new ManaCostsImpl("{G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -77,59 +69,5 @@ public class GiltLeafSeer extends CardImpl<GiltLeafSeer> {
     @Override
     public GiltLeafSeer copy() {
         return new GiltLeafSeer(this);
-    }
-}
-
-class GiltLeafSeerEffect extends OneShotEffect<GiltLeafSeerEffect> {
-
-    public GiltLeafSeerEffect() {
-        super(Outcome.Neutral);
-        this.staticText = "look at the top two cards of your library, then put them back in any order";
-    }
-
-    public GiltLeafSeerEffect(final GiltLeafSeerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public GiltLeafSeerEffect copy() {
-        return new GiltLeafSeerEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-
-        Cards cards = new CardsImpl(Zone.PICK);
-        int count = Math.min(player.getLibrary().size(), 2);
-        for (int i = 0; i < count; i++) {
-            Card card = player.getLibrary().removeFromTop(game);
-            if (card != null) {
-                cards.add(card);
-                game.setZone(card.getId(), Zone.PICK);
-            }
-        }
-        player.lookAtCards("Sage Owl", cards, game);
-
-        TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put on the top of your library"));
-        target.setRequired(true);
-        while (cards.size() > 1) {
-            player.choose(Outcome.Neutral, cards, target, game);
-            Card card = cards.get(target.getFirstTarget(), game);
-            if (card != null) {
-                cards.remove(card);
-                card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
-            }
-            target.clearChosen();
-        }
-        if (cards.size() == 1) {
-            Card card = cards.get(cards.iterator().next(), game);
-            card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
-        }
-
-        return true;
     }
 }
