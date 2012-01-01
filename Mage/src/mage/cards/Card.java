@@ -39,7 +39,6 @@ import mage.abilities.SpellAbility;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.watchers.Watcher;
-import mage.watchers.Watchers;
 
 public interface Card extends MageObject {
 

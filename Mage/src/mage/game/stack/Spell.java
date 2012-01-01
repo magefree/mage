@@ -49,7 +49,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.watchers.Watchers;
 
 import java.util.List;
 import java.util.UUID;
