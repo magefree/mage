@@ -28,7 +28,6 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
@@ -37,20 +36,17 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ControlPermanentCost;
-import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.counters.common.DevotionCounter;
 import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -79,7 +75,7 @@ public class BloodthirstyOgre extends CardImpl<BloodthirstyOgre> {
         // {T}: Put a devotion counter on Bloodthirsty Ogre
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(new DevotionCounter()),new TapSourceCost()));
         // {T}: Target creature gets -X/-X until end of turn, where X is the number of devotion counters on Bloodthirsty Ogre. Activate this ability only if you control a Demon.
-        CountersCount devotionCounters = new CountersCount(CounterType.DEVOTION, true);
+        DynamicValue devotionCounters = new SignInversionDynamicValue(new CountersCount(CounterType.DEVOTION));
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,new BoostTargetEffect(devotionCounters,devotionCounters, Duration.EndOfTurn),new TapSourceCost());
         ability.addCost(new ControlPermanentCost(filter));
         ability.addTarget(new TargetCreaturePermanent());
@@ -95,35 +91,4 @@ public class BloodthirstyOgre extends CardImpl<BloodthirstyOgre> {
         return new BloodthirstyOgre(this);
     }    
      
-}
-
-class IchorExplosionDynamicValue implements DynamicValue {
-    @Override
-    public int calculate(Game game, Ability sourceAbility) {
-        Card sourceCard = game.getCard(sourceAbility.getSourceId());
-        if (sourceCard != null) {
-            for (Object cost: sourceAbility.getCosts()) {
-                if (cost instanceof SacrificeTargetCost) {
-                    Permanent p = (Permanent) game.getLastKnownInformation(((SacrificeTargetCost) cost).getPermanents().get(0).getId(), Constants.Zone.BATTLEFIELD);
-                    return -1 * p.getPower().getValue();
-                }
-            }
-        }
-        return 0;
-    }
-
-    @Override
-    public DynamicValue clone() {
-        return this;
-    }
-
-    @Override
-    public String getMessage() {
-        return ", where X is the sacrificed creature's power";
-    }
-
-    @Override
-    public String toString() {
-        return "-X";
-    }
 }
