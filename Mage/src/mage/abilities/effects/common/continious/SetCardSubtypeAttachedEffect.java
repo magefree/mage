@@ -27,6 +27,8 @@
  */
 package mage.abilities.effects.common.continious;
 
+import java.util.ArrayList;
+import java.util.List;
 import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -38,19 +40,26 @@ import mage.game.permanent.Permanent;
  */
 public class SetCardSubtypeAttachedEffect extends ContinuousEffectImpl<SetCardSubtypeAttachedEffect> {
 
-	private String setSubtype;
+    private List<String> setSubtypes = new ArrayList<String>();
     private Constants.AttachmentType attachmentType;
 
     public SetCardSubtypeAttachedEffect(String setSubtype, Constants.Duration duration, Constants.AttachmentType attachmentType) {
         super(duration, Constants.Layer.TypeChangingEffects_4, Constants.SubLayer.NA, Constants.Outcome.Benefit);
-        this.setSubtype = setSubtype;
+        this.setSubtypes.add(setSubtype);
         this.attachmentType = attachmentType;
-		setText();
+	setText();
+    }
+
+    public SetCardSubtypeAttachedEffect(List<String> setSubtypes, Constants.Duration duration, Constants.AttachmentType attachmentType) {
+        super(duration, Constants.Layer.TypeChangingEffects_4, Constants.SubLayer.NA, Constants.Outcome.Benefit);
+        this.setSubtypes.addAll(setSubtypes);
+        this.attachmentType = attachmentType;
+	setText();
     }
 
     public SetCardSubtypeAttachedEffect(final SetCardSubtypeAttachedEffect effect) {
         super(effect);
-        this.setSubtype = effect.setSubtype;
+        this.setSubtypes = effect.setSubtypes;
         this.attachmentType = effect.attachmentType;
     }
 
@@ -61,7 +70,7 @@ public class SetCardSubtypeAttachedEffect extends ContinuousEffectImpl<SetCardSu
             Permanent target = game.getPermanent(equipment.getAttachedTo());
 			if (target != null) {
 				target.getSubtype().clear();
-				target.getSubtype().add(setSubtype);
+                                target.getSubtype().addAll(setSubtypes);
 			}
         }
         return true;
@@ -79,7 +88,10 @@ public class SetCardSubtypeAttachedEffect extends ContinuousEffectImpl<SetCardSu
         else if (attachmentType == Constants.AttachmentType.EQUIPMENT)
             sb.append("Equipped");
 
-        sb.append(" creature is ").append(setSubtype);
+        sb.append(" creature is a");
+        for (String subtype: this.setSubtypes) {
+            sb.append(" ").append(subtype);
+        }
         staticText = sb.toString();
     }
 }

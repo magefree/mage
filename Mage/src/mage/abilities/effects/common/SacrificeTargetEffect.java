@@ -47,6 +47,11 @@ public class SacrificeTargetEffect extends OneShotEffect<SacrificeTargetEffect> 
 		super(Outcome.Sacrifice);
 	}
 
+        public SacrificeTargetEffect(String text) {
+		this();
+                staticText = text;
+	}
+
 	public SacrificeTargetEffect(final SacrificeTargetEffect effect) {
 		super(effect);
 	}
@@ -71,10 +76,13 @@ public class SacrificeTargetEffect extends OneShotEffect<SacrificeTargetEffect> 
 
 	@Override
 	public String getText(Mode mode) {
-        if (mode.getTargets().get(0).getNumberOfTargets() == 1)
-		    return "The controller of target " + mode.getTargets().get(0).getTargetName() + " sacrifices it";
-        else
-            return "The controller of " + mode.getTargets().get(0).getNumberOfTargets() + " target " + mode.getTargets().get(0).getTargetName() + " sacrifices it";
-	}
+                if (staticText.equals("")) {    
+                    if (mode.getTargets().get(0).getNumberOfTargets() == 1)
+                                return "The controller of target " + mode.getTargets().get(0).getTargetName() + " sacrifices it";
+                    else
+                        return "The controller of " + mode.getTargets().get(0).getNumberOfTargets() + " target " + mode.getTargets().get(0).getTargetName() + " sacrifices it";
+                }
+                return staticText;
+        }
 
 }

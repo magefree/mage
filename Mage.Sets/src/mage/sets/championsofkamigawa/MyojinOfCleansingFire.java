@@ -33,7 +33,6 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -42,25 +41,20 @@ import mage.abilities.condition.common.HasCounterCondition;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.watchers.Watcher;
 import mage.watchers.common.CastFromHandWatcher;
 
 /**
  * @author Loki
  */
 public class MyojinOfCleansingFire extends CardImpl<MyojinOfCleansingFire> {
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("all other creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other creatures");
 
     static {
         filter.setAnother(true);

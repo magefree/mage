@@ -9,13 +9,20 @@ import mage.game.permanent.Permanent;
 
 public class CountersCount implements DynamicValue {
     private CounterType counter;
-
+    private boolean negative = false;
+    
     public CountersCount(CounterType counter) {
         this.counter = counter;
     }
 
+    public CountersCount(CounterType counter, boolean negative) {
+        this.counter = counter;
+        this.negative = negative;
+    }
+
     public CountersCount(final CountersCount countersCount) {
         this.counter = countersCount.counter;
+        this.negative = countersCount.negative;
     }
 
     @Override
@@ -26,7 +33,7 @@ public class CountersCount implements DynamicValue {
             p = (Permanent) game.getLastKnownInformation(sourceAbility.getSourceId(), Constants.Zone.BATTLEFIELD);
         }
         if (p != null) {
-            return p.getCounters().getCount(counter);
+            return (negative ? p.getCounters().getCount(counter)*-1:  p.getCounters().getCount(counter)) ;
         }
         return 0;
     }
@@ -38,7 +45,7 @@ public class CountersCount implements DynamicValue {
 
     @Override
     public String toString() {
-        return "1";
+        return (negative ?"-1":"1");
     }
 
     @Override
