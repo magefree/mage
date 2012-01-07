@@ -34,6 +34,8 @@ import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.Cards;
@@ -50,7 +52,7 @@ import mage.target.TargetCard;
  */
 public class LookLibraryControllerEffect extends OneShotEffect<LookLibraryControllerEffect> {
 
-    private int numberOfCards;
+    private DynamicValue numberOfCards;
     private boolean mayShuffleAfter;
             
     public LookLibraryControllerEffect() {
@@ -60,8 +62,16 @@ public class LookLibraryControllerEffect extends OneShotEffect<LookLibraryContro
     public LookLibraryControllerEffect(int numberOfCards) {
             this(numberOfCards, false);
     }
+
+    public LookLibraryControllerEffect(DynamicValue numberOfCards) {
+            this(numberOfCards, false);
+    }
     
     public LookLibraryControllerEffect(int numberOfCards, boolean mayShuffleAfter) {
+            this(new StaticValue(numberOfCards), mayShuffleAfter);
+    }
+
+    public LookLibraryControllerEffect(DynamicValue numberOfCards, boolean mayShuffleAfter) {
             super(Outcome.Benefit);
             this.numberOfCards = numberOfCards;
             this.mayShuffleAfter = mayShuffleAfter;
@@ -69,7 +79,7 @@ public class LookLibraryControllerEffect extends OneShotEffect<LookLibraryContro
 
     public LookLibraryControllerEffect(final LookLibraryControllerEffect effect) {
             super(effect);
-            this.numberOfCards = effect.numberOfCards; 
+            this.numberOfCards = effect.numberOfCards.clone(); 
             this.mayShuffleAfter = effect.mayShuffleAfter;
     }
 
@@ -99,7 +109,7 @@ public class LookLibraryControllerEffect extends OneShotEffect<LookLibraryContro
         }
 
         Cards cards = new CardsImpl(Zone.PICK);
-        int count = Math.min(player.getLibrary().size(), this.numberOfCards);
+        int count = Math.min(player.getLibrary().size(), this.numberOfCards.calculate(game, source));
         for (int i = 0; i < count; i++) {
             Card card = player.getLibrary().removeFromTop(game);
             if (card != null) {
@@ -134,8 +144,12 @@ public class LookLibraryControllerEffect extends OneShotEffect<LookLibraryContro
     
     @Override
     public String getText(Mode mode) {
+        int number = numberOfCards.calculate(null, null);
         StringBuilder sb = new StringBuilder("Look at the top ");
-        switch(this.numberOfCards) {
+        switch(number) {
+            case 0:
+                sb.append(" X ");
+                break;            
             case 1:
                 sb.append("card ");
                 break;
@@ -152,14 +166,16 @@ public class LookLibraryControllerEffect extends OneShotEffect<LookLibraryContro
                 sb.append("five");
                 break;
             default:
-                sb.append(this.numberOfCards);
+                sb.append(number);
                 break;
         }
-        if (this.numberOfCards > 1)
+        if (number != 1)
                 sb.append(" cards ");
         
         sb.append("of your Library");
-        if (this.numberOfCards > 1)
+        if (number == 0)
+            sb.append(", where {X} is the number of cards ").append(numberOfCards.getMessage());
+        if (number > 1)
             sb.append(", then put them back in any order");
         if (this.mayShuffleAfter)
             sb.append(". You may shuffle your library");

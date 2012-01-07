@@ -8,9 +8,11 @@ import mage.players.Player;
 public class CardsInControllerHandCount implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility) {
-        Player controller = game.getPlayer(sourceAbility.getControllerId());
-        if (controller != null) {
-            return controller.getHand().size();
+        if (sourceAbility != null) {
+            Player controller = game.getPlayer(sourceAbility.getControllerId());
+            if (controller != null) {
+                return controller.getHand().size();
+            }
         }
         return 0;
     }

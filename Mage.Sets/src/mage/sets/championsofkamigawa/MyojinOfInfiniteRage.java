@@ -65,7 +65,7 @@ public class MyojinOfInfiniteRage extends CardImpl<MyojinOfInfiniteRage> {
 
         this.color.setRed(true);
         this.power = new MageInt(7);
-        this.toughness = new MageInt(7);
+        this.toughness = new MageInt(4);
 
         this.addWatcher(new CastFromHandWatcher());
 

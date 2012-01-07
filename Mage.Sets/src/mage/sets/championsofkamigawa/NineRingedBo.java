@@ -1,9 +1,8 @@
 /*
- *  
- * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
+ *  Redistribution and use in source and binary forms, with or without modification, are
+ *  permitted provided that the following conditions are met:
  *
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
@@ -25,93 +24,84 @@
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
- * 
  */
-
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.Filter.ComparisonScope;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.DamagedByWatcher;
 
 /**
+ *
  * @author LevelX
  */
-public class KumanaoMasterYamabushi extends CardImpl<KumanaoMasterYamabushi> {
+public class NineRingedBo extends CardImpl<NineRingedBo> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("a land");
+     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("spirit");
 
     static {
-        filter.getCardType().add(CardType.LAND);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.getSubtype().add("Spirit");
+        filter.setScopeSubtype(ComparisonScope.Any);
     }
-
-    public KumanaoMasterYamabushi(UUID ownerId) {
-        super(ownerId, 176, "Kumanao, Master Yamabushi", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
+    
+    public NineRingedBo(UUID ownerId) {
+        super(ownerId, 263, "Nine-Ringed Bo", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "CHK";
-        this.supertype.add("Legendary");
-        this.subtype.add("Human");
-        this.subtype.add("Shaman");
-        this.color.setRed(true);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
-        
-        // {{1}{R}: Kumano, Master Yamabushi deals 1 damage to target creature or player.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{1}{R}") );
-        ability.addTarget(new TargetCreatureOrPlayer());
-        // If a creature dealt damage by Kumano this turn would die, exile it instead.
+
+        // {T}: Nine-Ringed Bo deals 1 damage to target Spirit creature. If that creature would die this turn, exile it instead.
+        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        // If that creature would die this turn, exile it instead.
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KumanaoMasterYamabushiEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NineRingedBoEffect()));
+        
         this.addWatcher(new DamagedByWatcher());
+
     }
 
-    public KumanaoMasterYamabushi(final KumanaoMasterYamabushi card) {
+    public NineRingedBo(final NineRingedBo card) {
         super(card);
     }
-
+    
     @Override
-    public KumanaoMasterYamabushi copy() {
-        return new KumanaoMasterYamabushi(this);
+    public NineRingedBo copy() {
+        return new NineRingedBo(this);
     }
-
 }
 
+    class NineRingedBoEffect extends ReplacementEffectImpl<NineRingedBoEffect> {
 
-class KumanaoMasterYamabushiEffect extends ReplacementEffectImpl<KumanaoMasterYamabushiEffect> {
-
-	public KumanaoMasterYamabushiEffect() {
+	public NineRingedBoEffect() {
 		super(Duration.EndOfTurn, Outcome.Exile);
-		staticText = "If a creature dealt damage by {this} this turn would die, exile it instead";
+		staticText = "If that creature would die this turn, exile it instead";
 	}
 
-	public KumanaoMasterYamabushiEffect(final KumanaoMasterYamabushiEffect effect) {
+	public NineRingedBoEffect(final NineRingedBoEffect effect) {
 		super(effect);
 	}
 
 	@Override
-	public KumanaoMasterYamabushiEffect copy() {
-		return new KumanaoMasterYamabushiEffect(this);
+	public NineRingedBoEffect copy() {
+		return new NineRingedBoEffect(this);
 	}
 
 	@Override
@@ -140,3 +130,5 @@ class KumanaoMasterYamabushiEffect extends ReplacementEffectImpl<KumanaoMasterYa
 	}
 
 }
+
+
