@@ -374,20 +374,22 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 	}
 
 	@Override
-	public void priority(Game game) {
+	public boolean priority(Game game) {
 		passed = false;
 		if (!abort) {
 			if (passedTurn && game.getStack().isEmpty()) {
 				pass();
-				return;
+				return false;
 			}
 			game.firePriorityEvent(playerId);
 			waitForResponse();
 			if (response.getBoolean() != null) {
 				pass();
+                return false;
 			} else if (response.getInteger() != null) {
 				pass();
 				passedTurn = true;
+                return false;
 			} else if (response.getString() != null && response.getString().equals("special")) {
 				specialAction(game);
 			} else if (response.getUUID() != null) {
@@ -403,7 +405,9 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
                     }
 				}
 			}
+            return true;
 		}
+        return false;
 	}
 
 	@Override

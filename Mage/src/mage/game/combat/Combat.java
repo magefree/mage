@@ -107,13 +107,13 @@ public class Combat implements Serializable, Copyable<Combat> {
 		attackerId = null;
 	}
 
-	public int getValue(Game game) {
+	public String getValue() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(attackerId).append(defenders);
 		for (CombatGroup group : groups) {
-			sb.append(group.getValue(game));
+			sb.append(group.defenderId).append(group.attackers).append(group.attackerOrder).append(group.blockers).append(group.blockerOrder);
 		}
-		return sb.toString().hashCode();
+		return sb.toString();
 	}
 
 	public void setAttacker(UUID playerId) {
@@ -128,16 +128,21 @@ public class Combat implements Serializable, Copyable<Combat> {
 			player.selectAttackers(game);
             if (game.isPaused() || game.isGameOver())
                 return;
-            for (CombatGroup group: groups) {
-                for (UUID attacker: group.getAttackers()) {
-                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ATTACKER_DECLARED, group.defenderId, attacker, attackerId));
-                }
-            }
-			game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_ATTACKERS, attackerId, attackerId));
-			game.fireInformEvent(player.getName() + " attacks with " + groups.size() + " creatures");
+            resumeSelectAttackers(game);
 		}
 	}
-
+    
+	public void resumeSelectAttackers(Game game) {
+        Player player = game.getPlayer(attackerId);
+        for (CombatGroup group: groups) {
+            for (UUID attacker: group.getAttackers()) {
+                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ATTACKER_DECLARED, group.defenderId, attacker, attackerId));
+            }
+        }
+        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_ATTACKERS, attackerId, attackerId));
+        game.fireInformEvent(player.getName() + " attacks with " + groups.size() + " creatures");
+    }
+    
 	protected void checkAttackRequirements(Player player, Game game) {
 		//20101001 - 508.1d
 		for (Permanent creature : player.getAvailableAttackers(game)) {
@@ -175,6 +180,13 @@ public class Combat implements Serializable, Copyable<Combat> {
 			}
 		}
 	}
+
+    public void resumeSelectBlockers(Game game) {
+        //TODO: this isn't quite right - but will work fine for two-player games
+        for (UUID defenderId : getPlayerDefenders(game)) {
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, defenderId, defenderId));
+        }
+    }
 
 	protected void checkBlockRequirements(Player player, Game game) {
 		//20101001 - 509.1c

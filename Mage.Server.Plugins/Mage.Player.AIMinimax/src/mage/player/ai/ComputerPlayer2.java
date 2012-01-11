@@ -131,14 +131,14 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 	}
 
 	@Override
-	public void priority(Game game) {
+	public boolean priority(Game game) {
 		logState(game);
 		game.firePriorityEvent(playerId);
 		switch (game.getTurn().getStepType()) {
 			case UPKEEP:
 			case DRAW:
 				pass();
-				break;
+				return false;
 			case PRECOMBAT_MAIN:
 			case BEGIN_COMBAT:
 			case DECLARE_ATTACKERS:
@@ -151,12 +151,13 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 					calculateActions(game);
 				}
 				act(game);
-				break;
+				return true;
 			case END_TURN:
 			case CLEANUP:
 				pass();
-				break;
+				return false;
 		}
+        return false;
 	}
 
 	protected void act(Game game) {
@@ -210,8 +211,8 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 				test = root;
 				root = root.children.get(0);
 			}
-			logger.debug("simlating -- game value:" + game.getState().getValue() + " test value:" + test.gameValue);
-			if (root.playerId.equals(playerId) && root.abilities != null && game.getState().getValue().hashCode() == test.gameValue) {
+			logger.debug("simlating -- game value:" + game.getState().getValue(true) + " test value:" + test.gameValue);
+			if (root.playerId.equals(playerId) && root.abilities != null && game.getState().getValue(true).hashCode() == test.gameValue) {
 				logger.debug("simulating -- continuing previous action chain");
 				actions = new LinkedList<Ability>(root.abilities);
 				combat = root.combat;
@@ -412,7 +413,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 			logger.debug(indent(node.depth) + "interrupted");
 			return GameStateEvaluator.evaluate(playerId, game);
 		}
-		node.setGameValue(game.getState().getValue().hashCode());
+		node.setGameValue(game.getState().getValue(true).hashCode());
 		SimulatedPlayer currentPlayer = (SimulatedPlayer) game.getPlayer(game.getPlayerList().get());
 		boolean isSimulatedPlayer = currentPlayer.getId().equals(playerId);
 		logger.debug(indent(node.depth) + "simulating priority -- player " + currentPlayer.getName());

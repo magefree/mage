@@ -201,10 +201,11 @@ public class MCTSPlayer extends ComputerPlayer<MCTSPlayer> {
     }
     
     @Override
-    public void priority(Game game) {
+    public boolean priority(Game game) {
 //        logger.info("Paused for Priority for player:" + getName());
         game.pause();
         nextAction = NextAction.PRIORITY;
+        return false;
     }
 
 //    @Override

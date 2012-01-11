@@ -30,14 +30,15 @@ package mage.player.ai;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.logging.Level;
+import mage.Constants.PhaseStep;
 import mage.Constants.RangeOfInfluence;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
+import mage.abilities.common.PassAbility;
+import mage.cards.Card;
 import mage.game.Game;
 import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
@@ -51,16 +52,18 @@ import org.apache.log4j.Logger;
  */
 public class ComputerPlayerMCTS extends ComputerPlayer<ComputerPlayerMCTS> implements Player {
 
+    private static final int thinkTimeRatioThreshold = 20;
+    
     protected transient MCTSNode root;
-    protected int thinkTime;
+    protected int maxThinkTime;
  	private final static transient Logger logger = Logger.getLogger(ComputerPlayerMCTS.class);
-    private ExecutorService pool;
+    private transient ExecutorService pool;
     private int cores;
     
 	public ComputerPlayerMCTS(String name, RangeOfInfluence range, int skill) {
 		super(name, range);
 		human = false;
-        thinkTime = skill;
+        maxThinkTime = (int) (skill * 1.5);
         cores = Runtime.getRuntime().availableProcessors();
         pool = Executors.newFixedThreadPool(cores);
 	}
@@ -79,12 +82,18 @@ public class ComputerPlayerMCTS extends ComputerPlayer<ComputerPlayerMCTS> imple
     }
 
     @Override
-    public void priority(Game game) {
+    public boolean priority(Game game) {
+        if (game.getStep().getType() == PhaseStep.DRAW)
+            logList("computer player " + name + " hand: ", new ArrayList(hand.getCards(game)));
+        game.firePriorityEvent(playerId);
         getNextAction(game, NextAction.PRIORITY);
         Ability ability =  root.getAction();
         if (ability == null)
             logger.fatal("null ability");
         activateAbility((ActivatedAbility)ability, game);
+        if (ability instanceof PassAbility)
+            return false;
+        return true;
     }
 
     protected void calculateActions(Game game, NextAction action) {
@@ -101,9 +110,13 @@ public class ComputerPlayerMCTS extends ComputerPlayer<ComputerPlayerMCTS> imple
     
     protected void getNextAction(Game game, NextAction nextAction) {
         if (root != null) {
-            root = root.getMatchingState(game.getState().getValue().hashCode(), nextAction);
-            if (root != null)
-                root.emancipate();
+            MCTSNode newRoot = null;
+            newRoot = root.getMatchingState(game.getState().getValue(false, game));
+            if (newRoot != null)
+                newRoot.emancipate();
+            else
+                logger.info("unable to find matching state");
+            root = newRoot;
         }
         calculateActions(game, nextAction);
     }
@@ -180,13 +193,8 @@ public class ComputerPlayerMCTS extends ComputerPlayer<ComputerPlayerMCTS> imple
 
     @Override
     public void selectAttackers(Game game) {
-        Game sim = createMCTSGame(game);
-        getNextAction(sim, NextAction.SELECT_ATTACKERS);
-//        MCTSPlayer player = (MCTSPlayer) sim.getPlayer(playerId);
-//        player.setNextAction(MCTSPlayer.NextAction.SELECT_ATTACKERS);
-//        root = new MCTSNode(sim);
-//        applyMCTS();
-        Combat combat = root.bestChild().getCombat();
+        getNextAction(game, NextAction.SELECT_ATTACKERS);
+        Combat combat = root.getCombat();
         UUID opponentId = game.getCombat().getDefenders().iterator().next();
         for (UUID attackerId: combat.getAttackers()) {
             this.declareAttacker(attackerId, opponentId, game);
@@ -195,13 +203,8 @@ public class ComputerPlayerMCTS extends ComputerPlayer<ComputerPlayerMCTS> imple
 
     @Override
     public void selectBlockers(Game game) {
-        Game sim = createMCTSGame(game);
-        getNextAction(sim, NextAction.SELECT_BLOCKERS);
-//        MCTSPlayer player = (MCTSPlayer) sim.getPlayer(playerId);
-//        player.setNextAction(MCTSPlayer.NextAction.SELECT_BLOCKERS);
-//        root = new MCTSNode(sim);
-//        applyMCTS();
-        Combat combat = root.bestChild().getCombat();
+        getNextAction(game, NextAction.SELECT_BLOCKERS);
+        Combat combat = root.getCombat();
         List<CombatGroup> groups = game.getCombat().getGroups();
         for (int i = 0; i < groups.size(); i++) {
             if (i < combat.getGroups().size()) {
@@ -248,36 +251,83 @@ public class ComputerPlayerMCTS extends ComputerPlayer<ComputerPlayerMCTS> imple
 //    }
 
     protected void applyMCTS(final Game game, final NextAction action) {
+        int thinkTime = calculateThinkTime(game, action);
+        
 		long startTime = System.nanoTime();
         long endTime = startTime + (thinkTime * 1000000000l);
         logger.info("applyMCTS - Thinking for " + (endTime - startTime)/1000000000.0 + "s");
         
-        List<MCTSExecutor> tasks = new ArrayList<MCTSExecutor>();
-        for (int i = 0; i < cores; i++) {
-            Game sim = createMCTSGame(game);
-            MCTSPlayer player = (MCTSPlayer) sim.getPlayer(playerId);
-            player.setNextAction(action);
-            MCTSExecutor exec = new MCTSExecutor(sim, playerId, thinkTime);
-            tasks.add(exec);
+        if (thinkTime > 0) {
+            List<MCTSExecutor> tasks = new ArrayList<MCTSExecutor>();
+            for (int i = 0; i < cores; i++) {
+                Game sim = createMCTSGame(game);
+                MCTSPlayer player = (MCTSPlayer) sim.getPlayer(playerId);
+                player.setNextAction(action);
+                MCTSExecutor exec = new MCTSExecutor(sim, playerId, thinkTime);
+                tasks.add(exec);
+            }
+
+            try {
+                pool.invokeAll(tasks);
+            } catch (InterruptedException ex) {
+                logger.warn("applyMCTS interrupted");
+            }
+
+            for (MCTSExecutor task: tasks) {
+                root.merge(task.getRoot());
+                task.clear();
+            }
+            tasks.clear();
+
+            logger.info("Created " + root.getNodeCount() + " nodes - size: " + root.size());
+            displayMemory();
         }
-        
-        try {
-            pool.invokeAll(tasks);
-        } catch (InterruptedException ex) {
-            logger.warn("applyMCTS interrupted");
-        }
-        
-        for (MCTSExecutor task: tasks) {
-            root.merge(task.getRoot());
-        }
-                
-        logger.info("Created " + root.getNodeCount() + " nodes");
+
+//        root.print(1);
         return;
     }
 
+    //try to ensure that there are at least 20 simulations per node at all times
+    private int calculateThinkTime(Game game, NextAction action) {
+        int thinkTime = 0;
+        int nodeSizeRatio = 0;
+        if (root.getNumChildren() > 0)
+            nodeSizeRatio = root.size() / root.getNumChildren();
+        logger.info("Ratio: " + nodeSizeRatio);
+        PhaseStep curStep = game.getStep().getType();
+        if (action == NextAction.SELECT_ATTACKERS || action == NextAction.SELECT_BLOCKERS) {
+            if (nodeSizeRatio < thinkTimeRatioThreshold) {
+                thinkTime = maxThinkTime;
+            }
+            else {
+                thinkTime = maxThinkTime / 2;
+            }
+        }
+        else if (game.getActivePlayerId().equals(playerId) && (curStep == PhaseStep.PRECOMBAT_MAIN || curStep == PhaseStep.POSTCOMBAT_MAIN)) {
+            if (nodeSizeRatio < thinkTimeRatioThreshold) {
+                thinkTime = maxThinkTime;
+            }
+            else {
+                thinkTime = maxThinkTime / 2;
+            }
+        }
+        else {
+            if (nodeSizeRatio < thinkTimeRatioThreshold) {
+                thinkTime = maxThinkTime / 2;
+            }
+            else {
+                thinkTime = 0;
+            }
+        }
+        return thinkTime;
+    }
+    
     /**
 	 * Copies game and replaces all players in copy with mcts players
      * Shuffles each players library so that there is no knowledge of its order
+     * Swaps all other players hands with random cards from the library so that
+     * there is no knowledge of what cards are in opponents hands
+     * The most knowledge that is known is what cards are in an opponents deck
 	 *
 	 * @param game
 	 * @return a new game object with simulated players
@@ -289,11 +339,35 @@ public class ComputerPlayerMCTS extends ComputerPlayer<ComputerPlayerMCTS> imple
 			Player origPlayer = game.getState().getPlayers().get(copyPlayer.getId());
 			MCTSPlayer newPlayer = new MCTSPlayer(copyPlayer.getId());
 			newPlayer.restore(origPlayer);
-            newPlayer.getLibrary().shuffle();
+            if (!newPlayer.getId().equals(playerId)) {
+                int handSize = newPlayer.getHand().size();
+                newPlayer.getLibrary().addAll(newPlayer.getHand().getCards(mcts), mcts);
+                newPlayer.getHand().clear();
+                newPlayer.getLibrary().shuffle();
+                for (int i = 0; i < handSize; i++) {
+                    Card card = newPlayer.getLibrary().removeFromTop(mcts);
+                    mcts.setZone(card.getId(), Zone.HAND);
+                    newPlayer.getHand().add(card);
+                }
+            }
+            else {
+                newPlayer.getLibrary().shuffle();                
+            }
 			mcts.getState().getPlayers().put(copyPlayer.getId(), newPlayer);
 		}
 		mcts.setSimulation(true);
+        mcts.resume();
 		return mcts;
 	}
+    
+    protected void displayMemory() {
+        long heapSize = Runtime.getRuntime().totalMemory();
+        long heapMaxSize = Runtime.getRuntime().maxMemory();
+        long heapFreeSize = Runtime.getRuntime().freeMemory();
+        long heapUsedSize = heapSize - heapFreeSize;
+        long mb = 1024 * 1024;
+        
+        logger.info("Max heap size: " + heapMaxSize/mb + " Heap size: " + heapSize/mb + " Used: " + heapUsedSize/mb);
+    }
     
 }

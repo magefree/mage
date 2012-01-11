@@ -137,7 +137,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		this.name = player.name;
 		this.human = player.human;
 		this.life = player.life;
-		this.wins = player.loses;
+		this.wins = player.wins;
 		this.loses = player.loses;
 		this.library = player.library.copy();
 		this.hand = player.hand.copy();
@@ -355,6 +355,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	public boolean putInHand(Card card, Game game) {
 		if (card.getOwnerId().equals(playerId)) {
 			this.hand.add(card);
+            game.setZone(card.getId(), Zone.HAND);
 		} else {
 			return game.getPlayer(card.getOwnerId()).putInHand(card, game);
 		}
@@ -557,10 +558,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                 int bookmark = game.bookmarkState();
                 ability.newId();
                 game.getStack().push(new StackAbility(ability, playerId));
-                String message = ability.getActivatedMessage(game);
                 if (ability.activate(game, false)) {
                     game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATED_ABILITY, ability.getId(), ability.getSourceId(), playerId));
-                    game.fireInformEvent(name + message);
+                    game.fireInformEvent(name + ability.getActivatedMessage(game));
                     game.removeBookmark(bookmark);
                     return true;
                 }
@@ -946,19 +946,31 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
 	@Override
 	public void restore(Player player) {
-		this.library = player.getLibrary();
-		this.hand = player.getHand();
-		this.graveyard = player.getGraveyard();
-		this.abilities = player.getAbilities();
-		this.manaPool = player.getManaPool();
+		this.library = player.getLibrary().copy();
+		this.hand = player.getHand().copy();
+		this.graveyard = player.getGraveyard().copy();
+		this.abilities = player.getAbilities().copy();
+		this.manaPool = player.getManaPool().copy();
 		this.life = player.getLife();
-		this.counters = player.getCounters();
-		this.inRange = player.getInRange();
+		this.counters = player.getCounters().copy();
+        this.inRange.clear();
+		this.inRange.addAll(player.getInRange());
 		this.landsPlayed = player.getLandsPlayed();
 		this.name = player.getName();
         this.range = player.getRange();
         this.passed = player.isPassed();
-	}
+		this.human = player.isHuman();
+		this.wins = player.hasWon();
+		this.loses = player.hasLost();
+		this.landsPerTurn = player.getLandsPerTurn();
+        this.maxHandSize = player.getMaxHandSize();
+		this.left = player.hasLeft();
+        this.canGainLife = player.isCanGainLife();
+        this.canLoseLife = player.isCanLoseLife();
+        this.attachments.clear();
+        this.attachments.addAll(player.getAttachments());
+		this.userData = player.getUserData();
+    }
 
 	@Override
 	public boolean isPassed() {
@@ -1255,7 +1267,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	private void addTargetOptions(List<Ability> options, Ability option, int targetNum, Game game) {
 		for (UUID targetId: option.getTargets().getUnchosen().get(targetNum).possibleTargets(option.getSourceId(), playerId, game)) {
 			Ability newOption = option.copy();
-			newOption.getTargets().get(targetNum).addTarget(targetId, option, game);
+			newOption.getTargets().get(targetNum).addTarget(targetId, option, game, true);
 			if (targetNum < option.getTargets().size() - 2) {
 				//addTargetOptions(options, newOption, targetNum + 1, game);
 				// ayrat: bug fix
@@ -1291,7 +1303,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	private void addCostTargetOptions(List<Ability> options, Ability option, int targetNum, Game game) {
 		for (UUID targetId: option.getCosts().getTargets().get(targetNum).possibleTargets(option.getSourceId(), playerId, game)) {
 			Ability newOption = option.copy();
-			newOption.getCosts().getTargets().get(targetNum).addTarget(targetId, option, game);
+			newOption.getCosts().getTargets().get(targetNum).addTarget(targetId, option, game, true);
 			if (targetNum < option.getCosts().getTargets().size() - 1) {
 				addCostTargetOptions(options, newOption, targetNum + 1, game);
 			}

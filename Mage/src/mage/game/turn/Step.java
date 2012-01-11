@@ -76,6 +76,10 @@ public abstract class Step<T extends Step<T>> implements Serializable {
         stepPart = StepPart.PRE;
 		game.fireEvent(new GameEvent(preStepEvent, null, null, activePlayerId));
 	}
+    
+    public void resumeBeginStep(Game game, UUID activePlayerId) {
+        stepPart = StepPart.PRE;
+    }
 
 	public void priority(Game game, UUID activePlayerId, boolean resuming) {
 		if (hasPriority) {

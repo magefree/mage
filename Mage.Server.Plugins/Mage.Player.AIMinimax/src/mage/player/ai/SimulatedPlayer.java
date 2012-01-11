@@ -188,7 +188,7 @@ public class SimulatedPlayer extends ComputerPlayer<SimulatedPlayer> {
 				if (binary.charAt(j) == '1')
 					sim.getCombat().declareAttacker(attackersList.get(j).getId(), defenderId, sim);
 			}
-			if (engagements.put(sim.getCombat().getValue(sim), sim.getCombat()) != null) {
+			if (engagements.put(sim.getCombat().getValue().hashCode(), sim.getCombat()) != null) {
 				logger.debug("simulating -- found redundant attack combination");
 			}
 			else if (logger.isDebugEnabled()) {
@@ -205,7 +205,7 @@ public class SimulatedPlayer extends ComputerPlayer<SimulatedPlayer> {
 
 		//add a node with no blockers
 		Game sim = game.copy();
-		engagements.put(sim.getCombat().getValue(sim), sim.getCombat());
+		engagements.put(sim.getCombat().getValue().hashCode(), sim.getCombat());
 		sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, playerId, playerId));
 
 		List<Permanent> blockers = getAvailableBlockers(game);
@@ -227,7 +227,7 @@ public class SimulatedPlayer extends ComputerPlayer<SimulatedPlayer> {
 			if (game.getCombat().getGroups().get(i).canBlock(blocker, game)) {
 				Game sim = game.copy();
 				sim.getCombat().getGroups().get(i).addBlocker(blocker.getId(), playerId, sim);
-				if (engagements.put(sim.getCombat().getValue(sim), sim.getCombat()) != null)
+				if (engagements.put(sim.getCombat().getValue().hashCode(), sim.getCombat()) != null)
 					logger.debug("simulating -- found redundant block combination");
 				addBlocker(sim, remaining, engagements);  // and recurse minus the used blocker
 			}
@@ -277,8 +277,9 @@ public class SimulatedPlayer extends ComputerPlayer<SimulatedPlayer> {
 	}
 
 	@Override
-	public void priority(Game game) {
+	public boolean priority(Game game) {
 		//should never get here
+        return false;
 	}
 
 	protected String indent(int num) {

@@ -40,7 +40,7 @@ import mage.game.events.GameEvent;
  */
 public class DiesTriggeredAbility extends ZoneChangeTriggeredAbility<DiesTriggeredAbility> {
 
-	boolean used = false;
+//	boolean used = false;
 	
 	public DiesTriggeredAbility(Effect effect, boolean optional) {
 		super(Zone.BATTLEFIELD, Zone.GRAVEYARD, effect, "When {this} dies, ", optional);
@@ -59,18 +59,18 @@ public class DiesTriggeredAbility extends ZoneChangeTriggeredAbility<DiesTrigger
 		return new DiesTriggeredAbility(this);
 	}
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		return super.checkTrigger(event, game) && !used;
-	}
+//	@Override
+//	public boolean checkTrigger(GameEvent event, Game game) {
+//		return super.checkTrigger(event, game) && !used;
+//	}
 
-	@Override
-	public void trigger(Game game, UUID controllerId) {
-		if ( !used ) {
-			super.trigger(game, controllerId);
-			used = true;
-		}
-	}
+//	@Override
+//	public void trigger(Game game, UUID controllerId) {
+//		if ( !used ) {
+//			super.trigger(game, controllerId);
+//			used = true;
+//		}
+//	}
 	
 	
 }

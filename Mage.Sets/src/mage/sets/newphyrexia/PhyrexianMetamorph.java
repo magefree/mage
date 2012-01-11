@@ -96,36 +96,37 @@ class PhyrexianMetamorphEffect extends ContinuousEffectImpl<PhyrexianMetamorphEf
 	public boolean apply(Game game, Ability source) {
 		Card card = game.getCard(source.getFirstTarget());
 		Permanent permanent = game.getPermanent(source.getSourceId());
-		permanent.setName(card.getName());
-		permanent.getColor().setColor(card.getColor());
-		permanent.getManaCost().clear();
-		permanent.getManaCost().add(card.getManaCost());
-		permanent.getCardType().clear();
-		for (CardType type: card.getCardType()) {
-			permanent.getCardType().add(type);
-		}
-        if (!card.getCardType().contains(CardType.ARTIFACT)) {
-            card.getCardType().add(CardType.ARTIFACT);
+        if (card != null && permanent != null) {
+            permanent.setName(card.getName());
+            permanent.getColor().setColor(card.getColor());
+            permanent.getManaCost().clear();
+            permanent.getManaCost().add(card.getManaCost());
+            permanent.getCardType().clear();
+            for (CardType type: card.getCardType()) {
+                permanent.getCardType().add(type);
+            }
+            if (!card.getCardType().contains(CardType.ARTIFACT)) {
+                card.getCardType().add(CardType.ARTIFACT);
+            }
+            permanent.getSubtype().clear();
+            for (String type: card.getSubtype()) {
+                permanent.getSubtype().add(type);
+            }
+            permanent.getSupertype().clear();
+            for (String type: card.getSupertype()) {
+                permanent.getSupertype().add(type);
+            }
+            permanent.setExpansionSetCode(card.getExpansionSetCode());
+            permanent.getAbilities().clear();
+            for (Ability ability0: card.getAbilities()) {
+    //            Ability ability = ability0.copy();
+    //            ability.newId();
+    //            ability.setSourceId(card.getId());
+                permanent.addAbility(ability0);
+            }
+            permanent.getPower().setValue(card.getPower().getValue());
+            permanent.getToughness().setValue(card.getToughness().getValue());
         }
-		permanent.getSubtype().clear();
-		for (String type: card.getSubtype()) {
-			permanent.getSubtype().add(type);
-		}
-		permanent.getSupertype().clear();
-		for (String type: card.getSupertype()) {
-			permanent.getSupertype().add(type);
-		}
-		permanent.setExpansionSetCode(card.getExpansionSetCode());
-		permanent.getAbilities().clear();
-		for (Ability ability0: card.getAbilities()) {
-//            Ability ability = ability0.copy();
-//            ability.newId();
-//            ability.setSourceId(card.getId());
-			permanent.addAbility(ability0);
-		}
-		permanent.getPower().setValue(card.getPower().getValue());
-		permanent.getToughness().setValue(card.getToughness().getValue());
-
 		return true;
 
 	}

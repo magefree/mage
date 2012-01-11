@@ -42,6 +42,7 @@ import mage.abilities.Mode;
 import mage.abilities.Modes;
 import mage.abilities.TriggeredAbilities;
 import mage.abilities.TriggeredAbility;
+import mage.abilities.common.PassAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
@@ -56,6 +57,7 @@ import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetAmount;
@@ -99,11 +101,24 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
     }
     
    	@Override
-	public void priority(Game game) {
+	public boolean priority(Game game) {
 //        logger.info("priority");
+        boolean didSomething = false;
+        Ability ability = getAction(game);
+//        logger.info("simulate " + ability.toString());
+        if (!(ability instanceof PassAbility))                
+            didSomething = true;
+
+        activateAbility((ActivatedAbility) ability, game);
+            
+        actionCount++;
+        return didSomething;
+    }
+
+    private Ability getAction(Game game) {
+        List<Ability> playables = getPlayableAbilities(game);
+        Ability ability;
         while (true) {
-            List<Ability> playables = getPlayableAbilities(game);
-            Ability ability;
             if (playables.size() == 1)
                 ability = playables.get(0);
             else
@@ -120,13 +135,23 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
                 if (amount > 0)
                     ability.addManaCost(new GenericManaCost(rnd.nextInt(amount)));
             }
-//            logger.info("simulate " + ability.toString());
-            activateAbility((ActivatedAbility) ability, game);
-            
-            actionCount++;
-            if (ability.isUsesStack())
+            // check if ability kills player, if not then it's ok to play
+//            if (ability.isUsesStack()) {
+//                Game testSim = game.copy();
+//                activateAbility((ActivatedAbility) ability, testSim);
+//                StackObject testAbility = testSim.getStack().pop();
+//                testAbility.resolve(testSim);
+//                testSim.applyEffects();
+//                testSim.checkStateAndTriggered();
+//                if (!testSim.getPlayer(playerId).hasLost()) {
+//                    break;
+//                }
+//            }
+//            else {
                 break;
+//            }
         }
+        return ability;
     }
     
     @Override

@@ -74,21 +74,21 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         this.players.putAll(group.players);
 	}
 
-	protected String getValue(Game game) {
-		StringBuilder sb = new StringBuilder(1024);
-		for (UUID attackerId: attackers) {
-			getPermanentValue(attackerId, sb, game);
-		}
-		for (UUID blockerId: blockers) {
-			getPermanentValue(blockerId, sb, game);
-		}
-		return sb.toString();
-	}
-
-	private void getPermanentValue(UUID permId, StringBuilder sb, Game game) {
-		Permanent perm = game.getPermanent(permId);
-		sb.append(perm.getValue());
-	}
+//	protected String getValue(Game game) {
+//		StringBuilder sb = new StringBuilder(1024);
+//		for (UUID attackerId: attackers) {
+//			getPermanentValue(attackerId, sb, game);
+//		}
+//		for (UUID blockerId: blockers) {
+//			getPermanentValue(blockerId, sb, game);
+//		}
+//		return sb.toString();
+//	}
+//
+//	private void getPermanentValue(UUID permId, StringBuilder sb, Game game) {
+//		Permanent perm = game.getPermanent(permId);
+//		sb.append(perm.getValue());
+//	}
 
 	public boolean hasFirstOrDoubleStrike(Game game) {
 		for (UUID permId: attackers) {

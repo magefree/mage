@@ -96,7 +96,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
 	}
 
 	@Override
-	public void priority(Game game) {
+	public boolean priority(Game game) {
 		logState(game);
 		if (logger.isDebugEnabled())
 			logger.debug("Game State: Turn-" + game.getTurnNum() + " Step-" + game.getTurn().getStepType() + " ActivePlayer-" + game.getPlayer(game.getActivePlayerId()).getName() + " PriorityPlayer-" + name);
@@ -105,51 +105,55 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
 			case UPKEEP:
 			case DRAW:
 				pass();
-				break;
+				return false;
 			case PRECOMBAT_MAIN:
 				if (game.getActivePlayerId().equals(playerId)) {
 					if (actions.size() == 0) {
 						calculatePreCombatActions(game);
 					}
 					act(game);
+                    return true;
 				}
 				else
 					pass();
-				break;
+				return false;
 			case BEGIN_COMBAT:
 				pass();
-				break;
+				return false;
 			case DECLARE_ATTACKERS:
 				if (!game.getActivePlayerId().equals(playerId)) {
 					if (actions.size() == 0) {
 						calculatePreCombatActions(game);
 					}
 					act(game);
+                    return true;
 				}
 				else
 					pass();
-				break;
+				return false;
 			case DECLARE_BLOCKERS:
             case FIRST_COMBAT_DAMAGE:
 			case COMBAT_DAMAGE:
 			case END_COMBAT:
 				pass();
-				break;
+				return false;
 			case POSTCOMBAT_MAIN:
 				if (game.getActivePlayerId().equals(playerId)) {
 					if (actions.size() == 0) {
 						calculatePostCombatActions(game);
 					}
 					act(game);
+                    return true;
 				}
 				else
 					pass();
-				break;
+				return false;
 			case END_TURN:
 			case CLEANUP:
 				pass();
-				break;
+				return false;
 		}
+        return false;
 	}
 
 	protected void calculatePreCombatActions(Game game) {

@@ -176,6 +176,11 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 
 	@Override
 	public void addTarget(UUID id, Ability source, Game game) {
+        addTarget(id, source, game, false);
+	}
+
+	@Override
+	public void addTarget(UUID id, Ability source, Game game, boolean skipEvent) {
 		//20100423 - 113.3
 		if (maxNumberOfTargets == 0 || targets.size() < maxNumberOfTargets) {
 			if (!targets.containsKey(id)) {
@@ -183,7 +188,8 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 					if (!game.replaceEvent(GameEvent.getEvent(EventType.TARGET, id, source.getId(), source.getControllerId()))) {
 						targets.put(id, 0);
 						chosen = targets.size() >= minNumberOfTargets;
-						game.fireEvent(GameEvent.getEvent(EventType.TARGETED, id, source.getId(), source.getControllerId()));
+                        if (!skipEvent)
+                            game.fireEvent(GameEvent.getEvent(EventType.TARGETED, id, source.getId(), source.getControllerId()));
 					}
 				}
 				else {
@@ -193,8 +199,13 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 		}
 	}
 
-	@Override
+    @Override
 	public void addTarget(UUID id, int amount, Ability source, Game game) {
+        addTarget(id, amount, source, game, false);
+	}
+
+    @Override
+	public void addTarget(UUID id, int amount, Ability source, Game game, boolean skipEvent) {
 		if (targets.containsKey(id)) {
 			amount += targets.get(id);
 		}
@@ -202,14 +213,15 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 			if (!game.replaceEvent(GameEvent.getEvent(EventType.TARGET, id, source.getId(), source.getControllerId()))) {
 				targets.put(id, amount);
 				chosen = targets.size() >= minNumberOfTargets;
-				game.fireEvent(GameEvent.getEvent(EventType.TARGETED, id, source.getId(), source.getControllerId()));
+                if (!skipEvent)
+                    game.fireEvent(GameEvent.getEvent(EventType.TARGETED, id, source.getId(), source.getControllerId()));
 			}
 		}
 		else {
 			targets.put(id, amount);
 		}
 	}
-
+    
 	@Override
 	public boolean choose(Outcome outcome, UUID playerId, UUID sourceId, Game game) {
 		Player player = game.getPlayer(playerId);

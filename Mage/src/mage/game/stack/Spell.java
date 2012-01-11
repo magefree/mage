@@ -182,21 +182,21 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 					String name = null;
 					if (object == null) {
 						Player targetPlayer = game.getPlayer(targetId);
-						if (player != null) name = targetPlayer.getName();
+						if (targetPlayer != null) name = targetPlayer.getName();
 					} else {
 						name = object.getName();
 					}
 					if (name != null && player.chooseUse(ability.getEffects().get(0).getOutcome(), "Change target from " + name + "?", game)) {
 						if (!player.chooseTarget(ability.getEffects().get(0).getOutcome(), newTarget, ability, game))
-							newTarget.addTarget(targetId, ability, game);
+							newTarget.addTarget(targetId, ability, game, false);
 					}
 					else {
-						newTarget.addTarget(targetId, ability, game);
+						newTarget.addTarget(targetId, ability, game, false);
 					}
 				}
 				target.clearChosen();
 				for (UUID newTargetId: newTarget.getTargets()) {
-					target.addTarget(newTargetId, ability, game);
+					target.addTarget(newTargetId, ability, game, false);
 				}
 			}
 			return true;

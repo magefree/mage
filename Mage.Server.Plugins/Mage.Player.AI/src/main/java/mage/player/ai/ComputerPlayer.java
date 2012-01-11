@@ -79,6 +79,8 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
+import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -428,7 +430,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 	}
 
 	@Override
-	public void priority(Game game) {
+	public boolean priority(Game game) {
 		log.debug("priority");
 		UUID opponentId = game.getOpponents(playerId).iterator().next();
 		if (game.getActivePlayerId().equals(playerId)) {
@@ -449,12 +451,12 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 							if (ability.canActivate(playerId, game)) {
 								if (ability.getEffects().hasOutcome(Outcome.PutLandInPlay)) {
 									if (this.activateAbility(ability, game))
-										return;
+										return true;
 								}
 								if (ability.getEffects().hasOutcome(Outcome.PutCreatureInPlay)) {
 									if (getOpponentBlockers(opponentId, game).size() <= 1)
 										if (this.activateAbility(ability, game))
-											return;
+											return true;
 								}
 							}
 						}
@@ -476,7 +478,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 							for (Card card: playableNonInstant) {
 								if (card.getSpellAbility().canActivate(playerId, game)) {
 									if (this.activateAbility(card.getSpellAbility(), game))
-										return;
+										return true;
 								}
 							}
 						}
@@ -485,7 +487,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 								if (ability.canActivate(playerId, game)) {
 									if (!(ability.getEffects().get(0) instanceof BecomesCreatureSourceEffect)) {
 										if (this.activateAbility(ability, game))
-											return;
+											return true;
 									}
 								}
 							}
@@ -512,7 +514,19 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 			}
 		}
 		pass();
+        return true;
 	}
+
+    
+   	@Override
+	public boolean activateAbility(ActivatedAbility ability, Game game) {
+        for (Target target: ability.getModes().getMode().getTargets()) {
+            for (UUID targetId: target.getTargets()) {
+                game.fireEvent(GameEvent.getEvent(EventType.TARGETED, targetId, ability.getId(), ability.getControllerId()));
+            }
+        }
+        return super.activateAbility(ability, game);
+    }
 
 	protected void playLand(Game game) {
 		log.debug("playLand");
@@ -699,6 +713,11 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 				}
 			}
 		}
+        // pay phyrexian life costs
+        if (cost instanceof PhyrexianManaCost) {
+            if (cost.pay(null, game, null, playerId, false))
+                return true;
+        }
 		return false;
 	}
 
@@ -1402,7 +1421,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 		for (MageObject object: list) {
 			sb.append(object.getName()).append(",");
 		}
-		log.debug(sb.toString());
+		log.info(sb.toString());
 	}
 
 	protected void logAbilityList(String message, List<Ability> list) {

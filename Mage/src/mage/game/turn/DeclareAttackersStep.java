@@ -63,6 +63,12 @@ public class DeclareAttackersStep extends Step<DeclareAttackersStep> {
 		game.getCombat().selectAttackers(game);
 	}
 
+    @Override
+    public void resumeBeginStep(Game game, UUID activePlayerId) {
+        super.resumeBeginStep(game, activePlayerId);
+        game.getCombat().resumeSelectAttackers(game);
+    }    
+    
 	@Override
 	public DeclareAttackersStep copy() {
 		return new DeclareAttackersStep(this);

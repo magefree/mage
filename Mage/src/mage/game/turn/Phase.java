@@ -117,7 +117,7 @@ public abstract class Phase<T extends Phase<T>> implements Serializable {
 		return false;
 	}
 
-    public boolean resumePlay(Game game, PhaseStep stepType) {
+    public boolean resumePlay(Game game, PhaseStep stepType, boolean wasPaused) {
 		if (game.isPaused() || game.isGameOver())
 			return false;
 
@@ -128,7 +128,7 @@ public abstract class Phase<T extends Phase<T>> implements Serializable {
             step = it.next();
             currentStep = step;
         } while (step.getType() != stepType);
-        resumeStep(game);
+        resumeStep(game, wasPaused);
         while (it.hasNext()) {
             step = it.next();
             if (game.isPaused() || game.isGameOver())
@@ -179,13 +179,20 @@ public abstract class Phase<T extends Phase<T>> implements Serializable {
 		}
 	}
 
-    protected void resumeStep(Game game) {
+    protected void resumeStep(Game game, boolean wasPaused) {
+        boolean resuming = true;
         switch (currentStep.getStepPart()) {
             case PRE:
-    			prePriority(game, activePlayerId);
+                if (wasPaused) {
+                    currentStep.resumeBeginStep(game, activePlayerId);
+                    resuming = false;
+                }
+                else {
+                    prePriority(game, activePlayerId);
+                }
             case PRIORITY:
                 if (!game.isPaused() && !game.isGameOver())
-                    currentStep.priority(game, activePlayerId, true);
+                    currentStep.priority(game, activePlayerId, resuming);
             case POST:
                 if (!game.isPaused() && !game.isGameOver())
                     postPriority(game, activePlayerId);

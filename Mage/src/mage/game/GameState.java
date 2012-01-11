@@ -32,7 +32,10 @@ import mage.abilities.TriggeredAbility;
 import mage.game.events.GameEvent;
 import mage.game.stack.SpellStack;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import mage.Constants.Zone;
@@ -42,10 +45,13 @@ import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.DelayedTriggeredAbilities;
 import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.Mode;
 import mage.abilities.SpecialActions;
 import mage.abilities.TriggeredAbilities;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
+import mage.cards.Card;
+import mage.choices.Choice;
 import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
 import mage.game.command.Command;
@@ -60,6 +66,7 @@ import mage.game.turn.TurnMods;
 import mage.players.Player;
 import mage.players.PlayerList;
 import mage.players.Players;
+import mage.target.Target;
 import mage.util.Copyable;
 import mage.watchers.Watchers;
 
@@ -146,6 +153,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 		for (Map.Entry<UUID, Abilities<ActivatedAbility>> entry: state.otherAbilities.entrySet()) {
 			otherAbilities.put(entry.getKey(), entry.getValue().copy());
 		}
+        this.paused = state.paused;
 	}
 
 	@Override
@@ -158,34 +166,100 @@ public class GameState implements Serializable, Copyable<GameState> {
 		playerList.add(player.getId());
 	}
 
-	public String getValue() {
+	public String getValue(boolean useHidden) {
 		StringBuilder sb = new StringBuilder(1024);
 
 		sb.append(turnNum).append(turn.getPhaseType()).append(turn.getStepType()).append(activePlayerId).append(priorityPlayerId);
 
 		for (Player player: players.values()) {
-			sb.append("player").append(player.getLife()).append("hand").append(player.getHand()).append("library").append(player.getLibrary().size()).append("graveyard").append(player.getGraveyard());
+			sb.append("player").append(player.getLife()).append("hand");
+            if (useHidden)
+                sb.append(player.getHand());
+            else
+                sb.append(player.getHand().size());
+            sb.append("library").append(player.getLibrary().size()).append("graveyard").append(player.getGraveyard());
 		}
 
-		for (UUID permanentId: battlefield.getAllPermanentIds()) {
-			sb.append("permanent").append(permanentId);
+        sb.append("permanents");
+		for (Permanent permanent: battlefield.getAllPermanents()) {
+			sb.append(permanent.getValue());
 		}
 
+        sb.append("spells");
 		for (StackObject spell: stack) {
-			sb.append("spell").append(spell.getId());
+			sb.append(spell.getControllerId()).append(spell.getName());
 		}
         
         for (ExileZone zone: exile.getExileZones()) {
             sb.append("exile").append(zone.getName()).append(zone);
         }
         
+        sb.append("combat");
         for (CombatGroup group: combat.getGroups()) {
-            sb.append("combat").append(group.getDefenderId()).append(group.getAttackers()).append(group.getBlockers());
+            sb.append(group.getDefenderId()).append(group.getAttackers()).append(group.getBlockers());
         }
 
 		return sb.toString();
 	}
 
+	public String getValue(boolean useHidden, Game game) {
+		StringBuilder sb = new StringBuilder(1024);
+
+		sb.append(turnNum).append(turn.getPhaseType()).append(turn.getStepType()).append(activePlayerId).append(priorityPlayerId);
+
+		for (Player player: players.values()) {
+			sb.append("player").append(player.isPassed()).append(player.getLife()).append("hand");
+            if (useHidden)
+                sb.append(player.getHand());
+            else
+                sb.append(player.getHand().size());
+            sb.append("library").append(player.getLibrary().size());
+            sb.append("graveyard");
+            for (Card card: player.getGraveyard().getCards(game)) {
+                sb.append(card.getName());
+            }
+		}
+
+        sb.append("permanents");
+        List<String> perms = new ArrayList<String>();
+		for (Permanent permanent: battlefield.getAllPermanents()) {
+			perms.add(permanent.getValue());
+		}
+        Collections.sort(perms);
+        sb.append(perms);
+
+        sb.append("spells");
+		for (StackObject spell: stack) {
+			sb.append(spell.getControllerId()).append(spell.getName());
+            sb.append(spell.getStackAbility().toString());
+            for (Mode mode: spell.getStackAbility().getModes().values()) {
+                if (!mode.getTargets().isEmpty()) {
+                    sb.append("targets");
+                    for (Target target: mode.getTargets()) {
+                        sb.append(target.getTargets());
+                    }
+                }
+                if (!mode.getChoices().isEmpty()) {
+                    sb.append("choices");
+                    for (Choice choice: mode.getChoices()) {
+                        sb.append(choice.getChoice());
+                    }
+                }
+            }
+		}
+        
+        for (ExileZone zone: exile.getExileZones()) {
+            sb.append("exile").append(zone.getName()).append(zone);
+        }
+        
+        sb.append("combat");
+        for (CombatGroup group: combat.getGroups()) {
+            sb.append(group.getDefenderId()).append(group.getAttackers()).append(group.getBlockers());
+        }
+
+		return sb.toString();
+	}
+    
 	public Players getPlayers() {
 		return players;
 	}

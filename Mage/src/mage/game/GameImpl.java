@@ -139,10 +139,10 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		this.attackOption = game.attackOption;
 		this.state = game.state.copy();
 		// Issue 350
-		//this.gameCards = game.gameCards;
-        for (Map.Entry<UUID, Card> entry: game.gameCards.entrySet()) {
-            this.gameCards.put(entry.getKey(), entry.getValue().copy());
-		}
+		this.gameCards = game.gameCards;
+//        for (Map.Entry<UUID, Card> entry: game.gameCards.entrySet()) {
+//            this.gameCards.put(entry.getKey(), entry.getValue().copy());
+//		}
 		this.simulation = game.simulation;
         this.gameOptions = game.gameOptions;
         this.lki.putAll(game.lki);
@@ -386,13 +386,14 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     public void resume() {
 		PlayerList players = state.getPlayerList(state.getActivePlayerId());
 		Player player = getPlayer(players.get());
+        boolean wasPaused = state.isPaused();
         state.resume();
 		if (!isGameOver()) {
 //            if (simulation)
 //                logger.info("Turn " + Integer.toString(state.getTurnNum()));
 			fireInformEvent("Turn " + Integer.toString(state.getTurnNum()));
 			if (checkStopOnTurnOption()) return;
-			state.getTurn().resumePlay(this);
+			state.getTurn().resumePlay(this, wasPaused);
 			if (!isPaused() && !isGameOver()) {
                 endOfTurn();
                 player = players.getNext(this);
@@ -623,12 +624,13 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                                 checkStateAndTriggered();
                                 if (isPaused() || isGameOver()) return;
                                 // resetPassed should be called if player performs any action
-                                player.priority(this);
+                                if (player.priority(this))
+                                    applyEffects();
                                 if (isPaused()) return;
                             }
                             resuming = false;
-                            applyEffects();
                         }
+                        resuming = false;
                         if (isPaused() || isGameOver()) return;
                         if (allPassed()) {
                             if (!state.getStack().isEmpty()) {
@@ -781,7 +783,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         for (Permanent perm: getBattlefield().getAllActivePermanents()) {
             if (perm.getCardType().contains(CardType.CREATURE)) {
                 //20091005 - 704.5f
-                if (perm.getToughness().getValue() == 0) {
+                if (perm.getToughness().getValue() <= 0) {
                     if (perm.moveToZone(Zone.GRAVEYARD, null, this, false)) {
                         somethingHappened = true;
                         continue;

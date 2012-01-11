@@ -133,7 +133,7 @@ public class Turn implements Serializable {
 		playExtraTurns(game);
 	}
 
-    public void resumePlay(Game game) {
+    public void resumePlay(Game game, boolean wasPaused) {
         activePlayerId = game.getActivePlayerId();
         UUID priorityPlayerId = game.getPriorityPlayerId();
         TurnPhase phaseType = game.getPhase().getType();
@@ -145,7 +145,7 @@ public class Turn implements Serializable {
             phase = it.next();
             currentPhase = phase;
         } while (phase.type != phaseType);
-        if (phase.resumePlay(game, stepType)) {
+        if (phase.resumePlay(game, stepType, wasPaused)) {
             //20091005 - 500.4/703.4n
             game.emptyManaPools();
             game.saveState();

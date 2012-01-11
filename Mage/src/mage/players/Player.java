@@ -210,7 +210,7 @@ public interface Player extends MageItem, Copyable<Player> {
 	public void setResponseBoolean(Boolean responseBoolean);
 	public void setResponseInteger(Integer data);
 
-	public abstract void priority(Game game);
+	public abstract boolean priority(Game game);
 	public abstract boolean choose(Outcome outcome, Target target, UUID sourceId, Game game);
 	public abstract boolean choose(Outcome outcome, Target target, UUID sourceId, Game game, Map<String, Serializable> options);
 	public abstract boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game);

@@ -152,6 +152,9 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 		sb.append(controllerId).append(name).append(tapped).append(damage);
 		sb.append(subtype).append(supertype).append(power.getValue()).append(toughness.getValue());
 		sb.append(abilities);
+        for (Counter counter: counters.values()) {
+            sb.append(counter.getName()).append(counter.getCount());
+        }
 		return sb.toString();
 	}
 

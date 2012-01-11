@@ -42,6 +42,7 @@ public class PassAbility extends ActivatedAbilityImpl<PassAbility> {
 
 	public PassAbility() {
 		super(Zone.ALL, new PassEffect());
+        this.usesStack = false;
 	}
 
 	public PassAbility(final PassAbility ability) {

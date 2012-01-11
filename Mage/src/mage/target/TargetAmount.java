@@ -76,9 +76,9 @@ public abstract class TargetAmount<T extends TargetAmount<T>> extends TargetImpl
 	}
 
 	@Override
-	public void addTarget(UUID id, int amount, Ability source, Game game) {
+	public void addTarget(UUID id, int amount, Ability source, Game game, boolean skipEvent) {
 		if (amount <= remainingAmount) {
-			super.addTarget(id, amount, source, game);
+			super.addTarget(id, amount, source, game, skipEvent);
 			remainingAmount -= amount;
 		}
 	}

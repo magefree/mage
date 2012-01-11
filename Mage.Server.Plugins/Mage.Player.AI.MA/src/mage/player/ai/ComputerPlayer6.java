@@ -116,14 +116,14 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 	}
 
 	@Override
-	public void priority(Game game) {
+	public boolean priority(Game game) {
 		logState(game);
 		game.firePriorityEvent(playerId);
 		switch (game.getTurn().getStepType()) {
 			case UPKEEP:
 			case DRAW:
 				pass();
-				break;
+				return false;
 			case PRECOMBAT_MAIN:
 			case DECLARE_BLOCKERS:
 			case POSTCOMBAT_MAIN:
@@ -134,16 +134,17 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 						calculateActions(game);
 					}
 					act(game);
+                    return true;
 				} else {
 					pass();
 				}
-				break;
+				return false;
 			case BEGIN_COMBAT:
             case FIRST_COMBAT_DAMAGE:
 			case COMBAT_DAMAGE:
 			case END_COMBAT:
 				pass();
-				break;
+				return false;
 			case DECLARE_ATTACKERS:
 				if (!game.getActivePlayerId().equals(playerId)) {
 					printOutState(game, playerId);
@@ -152,18 +153,20 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 						calculateActions(game);
 					}
 					act(game);
+                    return true;
 					//printOutState(game, playerId);
 				} else {
 					pass();
 				}
-				break;
+				return false;
 			case END_TURN:
 				pass();
-				break;
+				return false;
 			case CLEANUP:
 				pass();
-				break;
+				return false;
 		}
+		return false;
 	}
 
 	protected void printOutState(Game game, UUID playerId) {
@@ -264,11 +267,11 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 				test = root;
 				root = root.children.get(0);
 			}
-			logger.info("simlating -- game value:" + game.getState().getValue() + " test value:" + test.gameValue);
+			logger.info("simlating -- game value:" + game.getState().getValue(true) + " test value:" + test.gameValue);
             if (!suggested.isEmpty()) {
                 return false;
             }
-			if (root.playerId.equals(playerId) && root.abilities != null && game.getState().getValue().hashCode() == test.gameValue) {
+			if (root.playerId.equals(playerId) && root.abilities != null && game.getState().getValue(true).hashCode() == test.gameValue) {
 
 				/*
 				// Try to fix horizon effect
@@ -477,7 +480,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 			logger.info("interrupted");
 			return GameStateEvaluator2.evaluate(playerId, game);
 		}
-		node.setGameValue(game.getState().getValue().hashCode());
+		node.setGameValue(game.getState().getValue(true).hashCode());
 		SimulatedPlayer2 currentPlayer = (SimulatedPlayer2) game.getPlayer(game.getPlayerList().get());
 		//logger.info("simulating -- player " + currentPlayer.getName());
 		SimulationNode2 bestNode = null;
