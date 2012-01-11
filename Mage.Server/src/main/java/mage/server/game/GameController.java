@@ -481,7 +481,10 @@ public class GameController implements GameCallback {
 	}
 
 	private void informOthers(UUID playerId) throws MageException {
-		final String message = "Waiting for " + game.getPlayer(playerId).getName();
+        String message = "";
+        if (game.getStep() != null)
+            message += game.getStep().getType().toString() + " - ";
+		message += "Waiting for " + game.getPlayer(playerId).getName();
 		for (final Entry<UUID, GameSession> entry: gameSessions.entrySet()) {
 			if (!entry.getKey().equals(playerId)) {
 				entry.getValue().inform(message);
@@ -494,7 +497,7 @@ public class GameController implements GameCallback {
 
 	private void informOthers(List<UUID> players) throws MageException {
 		// first player is always original controller
-		final String message = "Waiting for " + game.getPlayer(players.get(0)).getName();
+		final String message = game.getStep().toString() + " - Waiting for " + game.getPlayer(players.get(0)).getName();
 		for (final Entry<UUID, GameSession> entry: gameSessions.entrySet()) {
 			boolean skip = false;
 			for (UUID uuid : players) {
