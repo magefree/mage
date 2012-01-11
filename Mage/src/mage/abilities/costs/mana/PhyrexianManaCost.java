@@ -29,6 +29,7 @@
 package mage.abilities.costs.mana;
 
 import mage.Constants.ColoredManaSymbol;
+import mage.Mana;
 import mage.abilities.Ability;
 import mage.game.Game;
 import mage.players.ManaPool;
@@ -43,6 +44,7 @@ public class PhyrexianManaCost extends ColoredManaCost {
 
 	public PhyrexianManaCost(ColoredManaSymbol mana) {
 		super(mana);
+        options.add(Mana.ColorlessMana(0));
 	}
 
 	public PhyrexianManaCost(PhyrexianManaCost manaCost) {

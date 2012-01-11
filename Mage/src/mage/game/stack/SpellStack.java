@@ -28,12 +28,12 @@
 
 package mage.game.stack;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Stack;
 import java.util.UUID;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SpellStack extends Stack<StackObject> {
+public class SpellStack extends ArrayDeque<StackObject> {
 
 	public SpellStack () {}
 

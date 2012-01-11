@@ -114,7 +114,8 @@ class AnnihilatorEffect extends OneShotEffect<AnnihilatorEffect> {
 		}
 
 		filter.setTargetController(TargetController.YOU);
-		Target target = new TargetControlledPermanent(1, count, filter, false);
+		int amount = Math.min(count, game.getBattlefield().countAll(filter, player.getId()));
+		Target target = new TargetControlledPermanent(amount, amount, filter, false);
 
 		//A spell or ability could have removed the only legal target this player
 		//had, if thats the case this ability should fizzle.

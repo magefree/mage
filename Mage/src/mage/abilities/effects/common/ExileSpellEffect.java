@@ -64,6 +64,6 @@ public class ExileSpellEffect extends PostResolveEffect<ExileSpellEffect> {
 
 	@Override
 	public void postResolve(Card card, Ability source, UUID controllerId, Game game) {
-		game.getExile().getPermanentExile().add(card);
+        card.moveToExile(null, "", source.getSourceId(), game);
 	}
 }

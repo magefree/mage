@@ -171,6 +171,8 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
 
 	@Override
 	public String getActivatedMessage(Game game) {
+        if (game.isSimulation())
+            return "";
 		return " activates ability from " + getMessageText(game);
 	}
 
