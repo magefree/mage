@@ -58,6 +58,7 @@ public class SacrificeAllEffect extends OneShotEffect<SacrificeAllEffect> {
 		super(Outcome.Sacrifice);
 		this.amount = amount;
 		this.filter = filter;
+                setText();
 	}
 
 	public SacrificeAllEffect(final SacrificeAllEffect effect) {

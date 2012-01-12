@@ -25,43 +25,61 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.sets.timeshifted;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
-import mage.abilities.effects.common.LookLibraryControllerEffect;
+import mage.ObjectColor;
+import mage.abilities.TriggeredAbility;
+import mage.abilities.common.OnEventTriggeredAbility;
+import mage.abilities.condition.common.DealtDamageToAnOpponent;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.counters.CounterType;
+import mage.filter.FilterCard;
+import mage.game.events.GameEvent;
 
 /**
  *
  * @author LevelX
  */
-public class DescendantOfSoramaro extends CardImpl<DescendantOfSoramaro> {
+public class WhirlingDervish extends CardImpl<WhirlingDervish> {
 
-    public DescendantOfSoramaro(UUID ownerId) {
-        super(ownerId, 33, "Descendant of Soramaro", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "SOK";
+    private static final String ruleText = "At the beginning of each end step, if {this} dealt damage to an opponent this turn, put a +1/+1 counter on it.";
+    private static final FilterCard filter = new FilterCard("black");
+
+    static {
+        filter.setColor(ObjectColor.BLACK);
+        filter.setUseColor(true);
+    }
+    
+    public WhirlingDervish(UUID ownerId) {
+        super(ownerId, 90, "Whirling Dervish", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}{G}");
+        this.expansionSetCode = "TSB";
         this.subtype.add("Human");
-        this.subtype.add("Wizard");
-        this.color.setBlue(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
-        // {1}{U}: Look at the top X cards of your library, where X is the number of cards in your hand, then put them back in any order.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryControllerEffect(new CardsInControllerHandCount()), new ManaCostsImpl("{1}{U}")));
+        this.subtype.add("Monk");
+
+        this.color.setGreen(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+        
+        // Protection from black
+        this.addAbility(new ProtectionAbility(filter));
+        // At the beginning of each end step, if Whirling Dervish dealt damage to an opponent this turn, put a +1/+1 counter on it.
+        TriggeredAbility triggered = new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of each end step", true, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
+	this.addAbility(new ConditionalTriggeredAbility(triggered, new DealtDamageToAnOpponent(), ruleText));
     }
 
-    public DescendantOfSoramaro(final DescendantOfSoramaro card) {
+    public WhirlingDervish(final WhirlingDervish card) {
         super(card);
     }
 
     @Override
-    public DescendantOfSoramaro copy() {
-        return new DescendantOfSoramaro(this);
+    public WhirlingDervish copy() {
+        return new WhirlingDervish(this);
     }
 }

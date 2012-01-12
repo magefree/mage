@@ -52,35 +52,43 @@ import mage.target.TargetCard;
  */
 public class LookLibraryControllerEffect extends OneShotEffect<LookLibraryControllerEffect> {
 
-    private DynamicValue numberOfCards;
-    private boolean mayShuffleAfter;
+    protected DynamicValue numberOfCards;
+    protected boolean mayShuffleAfter = false;
+    protected boolean putOnTop = true; // if false on put back on bottom of library
             
     public LookLibraryControllerEffect() {
             this(1);
     }
 
     public LookLibraryControllerEffect(int numberOfCards) {
-            this(numberOfCards, false);
+            this(numberOfCards, false, true);
     }
 
     public LookLibraryControllerEffect(DynamicValue numberOfCards) {
-            this(numberOfCards, false);
-    }
-    
-    public LookLibraryControllerEffect(int numberOfCards, boolean mayShuffleAfter) {
-            this(new StaticValue(numberOfCards), mayShuffleAfter);
+            this(numberOfCards, false, true);
     }
 
-    public LookLibraryControllerEffect(DynamicValue numberOfCards, boolean mayShuffleAfter) {
+    public LookLibraryControllerEffect(int numberOfCards, boolean mayShuffleAfter) {
+            this(numberOfCards, mayShuffleAfter, true);
+    }
+    
+    public LookLibraryControllerEffect(int numberOfCards, boolean mayShuffleAfter, boolean putOnTop) {
+            this(new StaticValue(numberOfCards), mayShuffleAfter, putOnTop);
+    }
+
+    public LookLibraryControllerEffect(DynamicValue numberOfCards, boolean mayShuffleAfter, boolean putOnTop) {
             super(Outcome.Benefit);
             this.numberOfCards = numberOfCards;
             this.mayShuffleAfter = mayShuffleAfter;
-    }
+            this.putOnTop = putOnTop;
 
+    }
+    
     public LookLibraryControllerEffect(final LookLibraryControllerEffect effect) {
             super(effect);
             this.numberOfCards = effect.numberOfCards.clone(); 
             this.mayShuffleAfter = effect.mayShuffleAfter;
+            this.putOnTop = effect.putOnTop;
     }
 
     @Override
@@ -92,6 +100,7 @@ public class LookLibraryControllerEffect extends OneShotEffect<LookLibraryContro
     @Override
     public boolean apply(Game game, Ability source) {
         String windowName ="Reveal"; 
+        
         if (source instanceof SpellAbility) {
             Card sourceCard = game.getCard(source.getSourceId());
             if (sourceCard != null)
@@ -108,25 +117,58 @@ public class LookLibraryControllerEffect extends OneShotEffect<LookLibraryContro
             return false;
         }
 
+        // take cards from library and look at them
         Cards cards = new CardsImpl(Zone.PICK);
         int count = Math.min(player.getLibrary().size(), this.numberOfCards.calculate(game, source));
         for (int i = 0; i < count; i++) {
             Card card = player.getLibrary().removeFromTop(game);
             if (card != null) {
                 cards.add(card);
+                this.cardLooked(card, game, source);
                 game.setZone(card.getId(), Zone.PICK);
             }
         }
         player.lookAtCards(windowName, cards, game);
 
-        TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put on your library (last chosen will be on top)"));
+        this.actionWithSelectedCards(cards, game, source, windowName);
+        
+        this.putCardsBack(source, player, cards, game);
+        
+        this.mayShuffle(player, game);
+        
+        return true;
+    }
+    /**
+     * 
+     * @param card
+     * @param game
+     * @param source 
+     */
+    protected void cardLooked(Card card, Game game, Ability source) {
+        return;
+    }
+    
+    protected void actionWithSelectedCards(Cards cards, Game game, Ability source, String windowName) {
+        return;
+    }
+
+    /**
+     * Put the rest of the cards back to library
+     * 
+     * @param source
+     * @param player
+     * @param cards
+     * @param game 
+     */
+    protected void putCardsBack(Ability source, Player player, Cards cards, Game game) {
+        TargetCard target = new TargetCard(Zone.PICK, new FilterCard(this.getPutBackText()));
         target.setRequired(true);
         while (cards.size() > 1) {
             player.choose(Outcome.Neutral, cards, target, game);
             Card card = cards.get(target.getFirstTarget(), game);
             if (card != null) {
                 cards.remove(card);
-                card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+                card.moveToZone(Zone.LIBRARY, source.getId(), game, putOnTop);
             }
             target.clearChosen();
         }
@@ -134,19 +176,41 @@ public class LookLibraryControllerEffect extends OneShotEffect<LookLibraryContro
             Card card = cards.get(cards.iterator().next(), game);
             card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
         }
+    }
+
+    /**
+     * Check to shuffle library if allowed
+     * @param player
+     * @param game 
+     */
+    protected void mayShuffle(Player player, Game game) {
         if (this.mayShuffleAfter) {
         	if (player.chooseUse(Constants.Outcome.Benefit, "Shuffle you library?", game)) {
 			player.shuffleLibrary(game);
 		}
         }
-        return true;
+    }
+    
+    protected String getPutBackText() {
+        StringBuilder sb = new StringBuilder("card to put ");
+        if (putOnTop)
+            sb.append("on your library (last chosen will be on top)");
+        else
+            sb.append("on bottom of your library (last chosen will be on bottom)");
+        return sb.toString();
     }
     
     @Override
     public String getText(Mode mode) {
-        int number = numberOfCards.calculate(null, null);
+        return setText(mode, "");
+    }
+    
+
+    public String setText(Mode mode, String middleText) {
+        int numberLook = numberOfCards.calculate(null, null);
+//        int numberPick = numberToPick.calculate(null, null) ;
         StringBuilder sb = new StringBuilder("Look at the top ");
-        switch(number) {
+        switch(numberLook) {
             case 0:
                 sb.append(" X ");
                 break;            
@@ -166,20 +230,29 @@ public class LookLibraryControllerEffect extends OneShotEffect<LookLibraryContro
                 sb.append("five");
                 break;
             default:
-                sb.append(number);
+                sb.append(numberLook);
                 break;
         }
-        if (number != 1)
+        if (numberLook != 1)
                 sb.append(" cards ");
         
         sb.append("of your Library");
-        if (number == 0)
+        if (numberLook == 0)
             sb.append(", where {X} is the number of cards ").append(numberOfCards.getMessage());
-        if (number > 1)
-            sb.append(", then put them back in any order");
+        
+        
+        if (!middleText.isEmpty()) {
+            sb.append(middleText);
+        }
+        else {
+            if (numberLook > 1)
+                sb.append(", then put them back in any order");
+        }
         if (this.mayShuffleAfter)
             sb.append(". You may shuffle your library");
+        
         return sb.toString();
     }
+    
 }
 

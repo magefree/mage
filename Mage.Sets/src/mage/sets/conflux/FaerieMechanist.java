@@ -25,43 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+
+package mage.sets.conflux;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
-import mage.abilities.effects.common.LookLibraryControllerEffect;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.filter.FilterCard;
 
 /**
  *
  * @author LevelX
  */
-public class DescendantOfSoramaro extends CardImpl<DescendantOfSoramaro> {
+public class FaerieMechanist extends CardImpl<FaerieMechanist> {
 
-    public DescendantOfSoramaro(UUID ownerId) {
-        super(ownerId, 33, "Descendant of Soramaro", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "SOK";
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
+    private final static FilterCard filter = new FilterCard("artifact card");
+    static {
+            filter.getCardType().add(CardType.ARTIFACT);
+    }
+    
+    public FaerieMechanist(UUID ownerId) {
+        super(ownerId, 27, "Faerie Mechanist", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{U}");
+        this.expansionSetCode = "CON";
         this.color.setBlue(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
-        // {1}{U}: Look at the top X cards of your library, where X is the number of cards in your hand, then put them back in any order.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryControllerEffect(new CardsInControllerHandCount()), new ManaCostsImpl("{1}{U}")));
+        this.subtype.add("Faerie");
+        this.subtype.add("Artificer");
+	this.power = new MageInt(2);
+	this.toughness = new MageInt(2);
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // When Faerie Mechanist enters the battlefield, look at the top three cards of your library. 
+        // You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new LookLibraryAndPickControllerEffect(new StaticValue(3), false, new StaticValue(1), filter, false)));
     }
 
-    public DescendantOfSoramaro(final DescendantOfSoramaro card) {
+    public FaerieMechanist(final FaerieMechanist card) {
         super(card);
     }
 
     @Override
-    public DescendantOfSoramaro copy() {
-        return new DescendantOfSoramaro(this);
+    public FaerieMechanist copy() {
+        return new FaerieMechanist(this);
     }
+
 }

@@ -33,16 +33,17 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ColoredManaCost;
-//import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.game.stack.StackAbility;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetOpponent;
-import mage.watchers.common.PlayerDamagedByWatcher;
+import mage.watchers.common.PlayerDamagedBySourceWatcher;
 
 /**
  *
@@ -63,8 +64,6 @@ public class WickedAkuba extends CardImpl<WickedAkuba> {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), new ColoredManaCost(Constants.ColoredManaSymbol.B));
         ability.addTarget(new WickedAkubaTarget());
         this.addAbility(ability);
-        // watcher to know if player was damaged by this Wicked Akuba
-        this.addWatcher(new PlayerDamagedByWatcher());
     }
 
     public WickedAkuba(final WickedAkuba card) {
@@ -78,7 +77,7 @@ public class WickedAkuba extends CardImpl<WickedAkuba> {
      
 }
 
-class WickedAkubaTarget extends TargetPlayer<TargetOpponent> {
+class WickedAkubaTarget extends TargetPlayer<WickedAkubaTarget> {
 
 	public WickedAkubaTarget() {
 		super();
@@ -92,30 +91,39 @@ class WickedAkubaTarget extends TargetPlayer<TargetOpponent> {
 	@Override
 	public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
 		filter.getPlayerId().clear();
-                PlayerDamagedByWatcher watcher = (PlayerDamagedByWatcher) game.getState().getWatchers().get("PlayerDamagedByWatcher", sourceId);
-                if (watcher != null) {
-                        for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()){
-                                        if (watcher.damagedPlayers.contains(playerId))
-                                                    filter.getPlayerId().add(playerId);
-                        }
-                        if (filter.getPlayerId().isEmpty()) // neccessary because empty playerId filter allows all players
-                            return false;
+                UUID source = null;
+                MageObject targetSource = game.getObject(sourceId);
+                if (targetSource instanceof StackAbility) {
+                    StackAbility stackAbility = (StackAbility) targetSource;
+                    source = stackAbility.getSourceId();
                 }
+                if (targetSource instanceof Permanent) {
+                    Permanent permanent = (Permanent) targetSource;
+                    source = permanent.getId();
+                }
+                if (source != null) {
+                        for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()){
+                                PlayerDamagedBySourceWatcher watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get("PlayerDamagedBySource", playerId);
+                                if (watcher != null && watcher.damageSources.contains(source))
+                                            filter.getPlayerId().add(playerId);
+                        }
+                }
+                if (filter.getPlayerId().isEmpty()) // neccessary because empty playerId filter allows all players
+                    return false;
 		return super.canChoose(sourceId, sourceControllerId, game);
 	}
 	
 	@Override
 	public boolean canTarget(UUID id, Ability source, Game game) {
 		filter.getPlayerId().clear();
-                PlayerDamagedByWatcher watcher = (PlayerDamagedByWatcher) game.getState().getWatchers().get("PlayerDamagedByWatcher", source.getSourceId());
-                if (watcher != null) {
-                        for (UUID playerId: game.getPlayer(source.getControllerId()).getInRange()){
-                                        if (watcher.damagedPlayers.contains(playerId))
-                                                    filter.getPlayerId().add(playerId);
-                        }
-                        if (filter.getPlayerId().isEmpty()) // neccessary because empty playerId filter allows all players
-                            return false;
-                        }
+                for (UUID playerId: game.getPlayer(source.getControllerId()).getInRange()){
+                    PlayerDamagedBySourceWatcher watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get("PlayerDamagedBySource", playerId);
+
+                    if (watcher != null && watcher.damageSources.contains(source.getSourceId()))
+                                            filter.getPlayerId().add(playerId);
+                }
+                if (filter.getPlayerId().isEmpty()) // neccessary because empty playerId filter allows all players
+                    return false;
 		return super.canTarget(id, source, game);
 	}
 

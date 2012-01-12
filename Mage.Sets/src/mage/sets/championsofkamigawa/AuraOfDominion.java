@@ -39,6 +39,8 @@ import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.UntapEnchantedEffect;
+import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
@@ -72,7 +74,7 @@ public class AuraOfDominion extends CardImpl<AuraOfDominion> {
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Untap));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AuraOfDominionEffect(), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new UntapEnchantedEffect(), new GenericManaCost(1));
         ability.addCost(new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
         this.addAbility(ability);
     }
@@ -84,36 +86,6 @@ public class AuraOfDominion extends CardImpl<AuraOfDominion> {
     @Override
     public AuraOfDominion copy() {
         return new AuraOfDominion(this);
-    }
-
-}
-
-class AuraOfDominionEffect extends OneShotEffect<AuraOfDominionEffect> {
-    AuraOfDominionEffect() {
-        super(Constants.Outcome.Untap);
-        staticText = "untap enchanted creature";
-    }
-
-    AuraOfDominionEffect(final AuraOfDominionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            Permanent attach = game.getPermanent(permanent.getAttachedTo());
-            if (attach != null) {
-                attach.untap(game);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public AuraOfDominionEffect copy() {
-        return new AuraOfDominionEffect(this);
     }
 
 }

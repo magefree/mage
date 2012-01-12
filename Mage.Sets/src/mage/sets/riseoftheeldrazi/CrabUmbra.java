@@ -37,6 +37,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.UntapEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.TotemArmorAbility;
 import mage.cards.CardImpl;
@@ -65,7 +66,7 @@ public class CrabUmbra extends CardImpl<CrabUmbra> {
 		Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // {2}{U}: Untap enchanted creature.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CrabUmbraEffect(), new ManaCostsImpl("{2}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new UntapEnchantedEffect(), new ManaCostsImpl("{2}{U}")));
         this.addAbility(new TotemArmorAbility());
     }
 
@@ -77,34 +78,4 @@ public class CrabUmbra extends CardImpl<CrabUmbra> {
     public CrabUmbra copy() {
         return new CrabUmbra(this);
     }
-}
-
-class CrabUmbraEffect extends OneShotEffect<CrabUmbraEffect> {
-    CrabUmbraEffect() {
-        super(Constants.Outcome.Untap);
-        staticText = "untap enchanted creature";
-    }
-
-    CrabUmbraEffect(final CrabUmbraEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            Permanent attach = game.getPermanent(permanent.getAttachedTo());
-            if (attach != null) {
-                attach.untap(game);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public CrabUmbraEffect copy() {
-        return new CrabUmbraEffect(this);
-    }
-
 }

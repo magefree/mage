@@ -1,5 +1,5 @@
 /*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
@@ -25,43 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+
+package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
-import mage.abilities.effects.common.LookLibraryControllerEffect;
+import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.cards.CardImpl;
+import mage.filter.FilterCard;
 
 /**
  *
  * @author LevelX
  */
-public class DescendantOfSoramaro extends CardImpl<DescendantOfSoramaro> {
+public class AncientStirrings extends CardImpl<AncientStirrings> {
 
-    public DescendantOfSoramaro(UUID ownerId) {
-        super(ownerId, 33, "Descendant of Soramaro", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "SOK";
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
-        this.color.setBlue(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
-        // {1}{U}: Look at the top X cards of your library, where X is the number of cards in your hand, then put them back in any order.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryControllerEffect(new CardsInControllerHandCount()), new ManaCostsImpl("{1}{U}")));
+    private final static FilterCard filter = new FilterCard("colorless card");
+    static {
+            filter.setColorless(true);
+            filter.setUseColorless(true);
+        }
+
+
+    public AncientStirrings (UUID ownerId) {
+        super(ownerId, 174, "Ancient Stirrings", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{G}");
+        this.expansionSetCode = "ROE";
+	this.color.setGreen(true);
+        
+        // Look at the top five cards of your library. You may reveal a colorless card from among them and put it into your hand. 
+        // Then put the rest on the bottom of your library in any order. (Cards with no colored mana in their mana costs are colorless. Lands are also colorless.)
+        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(new StaticValue(5), false, new StaticValue(1), filter, false));
     }
 
-    public DescendantOfSoramaro(final DescendantOfSoramaro card) {
+    public AncientStirrings (final AncientStirrings card) {
         super(card);
     }
 
     @Override
-    public DescendantOfSoramaro copy() {
-        return new DescendantOfSoramaro(this);
+    public AncientStirrings copy() {
+        return new AncientStirrings(this);
     }
+
 }
+

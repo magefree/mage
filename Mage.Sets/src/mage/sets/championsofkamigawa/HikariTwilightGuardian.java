@@ -41,9 +41,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromExileEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.FilterCard;
-import mage.filter.FilterSpell;
 import mage.filter.common.FilterSpiritOrArcaneCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -94,7 +91,7 @@ class HikariTwilightGuardianEffect extends OneShotEffect<HikariTwilightGuardianE
 	public boolean apply(Game game, Ability source) {
 		Permanent permanent = game.getPermanent(source.getSourceId());
 		if (permanent != null) {
-			if (permanent.moveToExile(source.getSourceId(), "Hikari, Twilight Guardian Exile", source.getId(), game)) {
+			if (permanent.moveToExile(source.getSourceId(), "Hikari, Twilight Guardian", source.getId(), game)) {
 				//create delayed triggered ability
 				HikariTwilightGuardianDelayedTriggeredAbility delayedAbility = new HikariTwilightGuardianDelayedTriggeredAbility(source.getSourceId());
 				delayedAbility.setSourceId(source.getSourceId());

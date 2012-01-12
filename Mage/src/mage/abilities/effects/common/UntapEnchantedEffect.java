@@ -28,85 +28,43 @@
 
 package mage.abilities.effects.common;
 
-import java.util.UUID;
 import mage.Constants.Outcome;
-import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.game.ExileZone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LevelX
  */
-public class ReturnFromExileEffect extends OneShotEffect<ReturnFromExileEffect> {
+public class UntapEnchantedEffect extends OneShotEffect<UntapEnchantedEffect> {
+    
+    public UntapEnchantedEffect() {
+        super(Outcome.Untap);
+        staticText = "untap enchanted creature";
+    }
 
-	private UUID exileId;
-	private Zone zone;
-	private boolean tapped;
+    public UntapEnchantedEffect(final UntapEnchantedEffect effect) {
+        super(effect);
+    }
 
-	public ReturnFromExileEffect(UUID exileId, Zone zone) {
-		this(exileId, zone, false);
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            Permanent attach = game.getPermanent(permanent.getAttachedTo());
+            if (attach != null) {
+                attach.untap(game);
+                return true;
+            }
+        }
+        return false;
+    }
 
-        public ReturnFromExileEffect(UUID exileId, Zone zone, String text) {
-		this(exileId, zone, false);
-                staticText = text;
-	}
-
-	public ReturnFromExileEffect(UUID exileId, Zone zone, boolean tapped) {
-		super(Outcome.PutCardInPlay);
-		this.exileId = exileId;
-		this.zone = zone;
-		this.tapped = tapped;
-                setText();
-	}
-
-	public ReturnFromExileEffect(final ReturnFromExileEffect effect) {
-		super(effect);
-		this.exileId = effect.exileId;
-		this.zone = effect.zone;
-		this.tapped = effect.tapped;
-	}
-
-	@Override
-	public ReturnFromExileEffect copy() {
-		return new ReturnFromExileEffect(this);
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		ExileZone exile = game.getExile().getExileZone(exileId);
-		if (exile != null) {
-			for (UUID cardId: exile) {
-				Card card = game.getCard(cardId);
-				card.moveToZone(zone, source.getId(), game, tapped);
-			}
-			exile.clear();
-			return true;
-		}
-		return false;
-	}
-
-	private void setText() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("return the exiled cards ");
-		switch(zone) {
-			case BATTLEFIELD:
-				sb.append("to the battlefield under its owner's control");
-				if (tapped)
-					sb.append(" tapped");
-				break;
-			case HAND:
-				sb.append("to their owner's hand");
-				break;
-			case GRAVEYARD:
-				sb.append("to their owner's graveyard");
-				break;
-		}
-		staticText = sb.toString();
-	}
+    @Override
+    public UntapEnchantedEffect copy() {
+        return new UntapEnchantedEffect(this);
+    }
 
 }

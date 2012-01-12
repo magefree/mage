@@ -28,40 +28,50 @@
 package mage.sets.saviorsofkamigawa;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
-import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
-import mage.abilities.effects.common.LookLibraryControllerEffect;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.TapEnchantedEffect;
+import mage.abilities.effects.common.UntapEnchantedEffect;
+import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX
  */
-public class DescendantOfSoramaro extends CardImpl<DescendantOfSoramaro> {
+public class FreedFromTheReal extends CardImpl<FreedFromTheReal> {
 
-    public DescendantOfSoramaro(UUID ownerId) {
-        super(ownerId, 33, "Descendant of Soramaro", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
+    public FreedFromTheReal(UUID ownerId) {
+        super(ownerId, 38, "Freed from the Real", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
         this.expansionSetCode = "SOK";
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
         this.color.setBlue(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
-        // {1}{U}: Look at the top X cards of your library, where X is the number of cards in your hand, then put them back in any order.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryControllerEffect(new CardsInControllerHandCount()), new ManaCostsImpl("{1}{U}")));
+        this.subtype.add("Aura");
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Untap));
+        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        // {U}: Tap enchanted creature.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapEnchantedEffect(), new ManaCostsImpl("{U}")));
+        // {U}: Untap enchanted creature.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapEnchantedEffect(), new ManaCostsImpl("{U}")));
+        
     }
 
-    public DescendantOfSoramaro(final DescendantOfSoramaro card) {
+    public FreedFromTheReal(final FreedFromTheReal card) {
         super(card);
     }
 
     @Override
-    public DescendantOfSoramaro copy() {
-        return new DescendantOfSoramaro(this);
+    public FreedFromTheReal copy() {
+        return new FreedFromTheReal(this);
     }
 }

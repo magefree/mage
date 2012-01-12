@@ -72,6 +72,7 @@ import org.apache.log4j.Logger;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
+import mage.watchers.common.PlayerDamagedBySourceWatcher;
 
 public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializable {
 
@@ -490,8 +491,12 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 			saveState();
 		}
 
-        state.getWatchers().add(new MorbidWatcher());
-        state.getWatchers().add(new CastSpellLastTurnWatcher());
+                for (UUID playerId: state.getPlayerList(startingPlayerId)) {
+                        state.getWatchers().add(new PlayerDamagedBySourceWatcher(playerId));
+                }
+                state.getWatchers().add(new MorbidWatcher());
+                state.getWatchers().add(new CastSpellLastTurnWatcher());
+                
         
 		//20100716 - 103.5
 		for (UUID playerId: state.getPlayerList(startingPlayerId)) {

@@ -25,43 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.abilities.condition.common;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
-import mage.abilities.effects.common.LookLibraryControllerEffect;
-import mage.cards.CardImpl;
+import mage.abilities.Ability;
+import mage.abilities.condition.Condition;
+import mage.game.Game;
+import mage.watchers.common.PlayerDamagedBySourceWatcher;
 
 /**
- *
  * @author LevelX
  */
-public class DescendantOfSoramaro extends CardImpl<DescendantOfSoramaro> {
-
-    public DescendantOfSoramaro(UUID ownerId) {
-        super(ownerId, 33, "Descendant of Soramaro", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "SOK";
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
-        this.color.setBlue(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
-        // {1}{U}: Look at the top X cards of your library, where X is the number of cards in your hand, then put them back in any order.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryControllerEffect(new CardsInControllerHandCount()), new ManaCostsImpl("{1}{U}")));
-    }
-
-    public DescendantOfSoramaro(final DescendantOfSoramaro card) {
-        super(card);
-    }
-
-    @Override
-    public DescendantOfSoramaro copy() {
-        return new DescendantOfSoramaro(this);
-    }
+public class DealtDamageToAnOpponent implements Condition {
+    
+	public DealtDamageToAnOpponent() {
+	}
+	
+	@Override
+	public boolean apply(Game game, Ability source) {
+                for (UUID opponentId: game.getOpponents(source.getControllerId())) {
+                        PlayerDamagedBySourceWatcher watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get("PlayerDamagedBySource", opponentId);
+                        if (watcher != null && watcher.damageSources.contains(source.getSourceId()))
+                                    return true;
+                }
+		return false;
+	}
 }
+
