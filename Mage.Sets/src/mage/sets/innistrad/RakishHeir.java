@@ -33,13 +33,13 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -94,6 +94,7 @@ class RakishHeirTriggeredAbility extends TriggeredAbilityImpl<RakishHeirTriggere
             Permanent permanent = game.getPermanent(event.getSourceId());
             if (damageEvent.isCombatDamage() && permanent != null
                     && permanent.hasSubtype("Vampire") && permanent.getControllerId().equals(controllerId)) {
+                this.getEffects().clear();
                 AddCountersTargetEffect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
                 effect.setTargetPointer(new FixedTarget(permanent.getId()));
                 this.addEffect(effect);
@@ -102,7 +103,7 @@ class RakishHeirTriggeredAbility extends TriggeredAbilityImpl<RakishHeirTriggere
         }
         return false;
     }
-
+    	
     @Override
     public String getRule() {
         return "Whenever a Vampire you control deals combat damage to a player, put a +1/+1 counter on it.";

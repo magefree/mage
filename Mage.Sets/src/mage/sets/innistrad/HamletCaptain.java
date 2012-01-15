@@ -60,7 +60,7 @@ public class HamletCaptain extends CardImpl<HamletCaptain> {
         this.toughness = new MageInt(2);
 
         // Whenever Hamlet Captain attacks or blocks, other Human creatures you control get +1/+1 until end of turn.
-        this.addAbility(new AttacksOrBlocksTriggeredAbility(new BoostControlledEffect(1, 1, Duration.EndOfTurn, filter), false));
+        this.addAbility(new AttacksOrBlocksTriggeredAbility(new BoostControlledEffect(1, 1, Duration.EndOfTurn, filter, true), false));
     }
 
     public HamletCaptain(final HamletCaptain card) {

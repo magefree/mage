@@ -45,7 +45,7 @@ import mage.filter.FilterPermanent;
  */
 public class Levitation extends CardImpl<Levitation> {
 
-    private final static FilterPermanent filter = new FilterPermanent("creature");
+    private final static FilterPermanent filter = new FilterPermanent("creatures ");
 
         static {
             filter.getCardType().add(CardType.CREATURE);
