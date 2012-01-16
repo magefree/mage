@@ -61,7 +61,6 @@ public class MCTSNode {
     private MCTSNode parent;
     private List<MCTSNode> children = new ArrayList<MCTSNode>();
     private Ability action;
-//    private Combat combat;
     private Game game;
     private String stateValue;
     private UUID playerId;
@@ -88,7 +87,6 @@ public class MCTSNode {
         this.game = game;
         this.stateValue = game.getState().getValue(false, game);
         this.parent = parent;
-//        this.combat = game.getCombat();
         setPlayer();
         nodeCount++;
     }
@@ -140,7 +138,6 @@ public class MCTSNode {
                 List<Ability> abilities = player.getPlayableOptions(game);
                 for (Ability ability: abilities) {
                     Game sim = game.copy();
-//                    String simState = sim.getState().getValue(false, sim);
 //                    logger.info("expand " + ability.toString());
                     MCTSPlayer simPlayer = (MCTSPlayer) sim.getPlayer(player.getId());
                     simPlayer.activateAbility((ActivatedAbility)ability, sim);
@@ -154,7 +151,6 @@ public class MCTSNode {
                 UUID defenderId = game.getOpponents(player.getId()).iterator().next();
                 for (List<UUID> attack: attacks) {
                     Game sim = game.copy();
-//                    String simState = sim.getState().getValue(false, sim);
                     MCTSPlayer simPlayer = (MCTSPlayer) sim.getPlayer(player.getId());
                     for (UUID attackerId: attack) {
                         simPlayer.declareAttacker(attackerId, defenderId, sim);
@@ -168,7 +164,6 @@ public class MCTSNode {
                 List<List<List<UUID>>> blocks = player.getBlocks(game);
                 for (List<List<UUID>> block: blocks) {
                     Game sim = game.copy();
-//                    String simState = sim.getState().getValue(false, sim);
                     MCTSPlayer simPlayer = (MCTSPlayer) sim.getPlayer(player.getId());
                     List<CombatGroup> groups = sim.getCombat().getGroups();
                     for (int i = 0; i < groups.size(); i++) {
@@ -248,7 +243,10 @@ public class MCTSNode {
     }
     
     public void emancipate() {
-        this.parent = null;
+        if (parent != null) {
+            this.parent.children.remove(this);
+            this.parent = null;
+        }
     }
     
     public Ability getAction() {
@@ -275,6 +273,16 @@ public class MCTSNode {
         return stateValue;
     }
     
+    public double getWinRatio() {
+        if (visits > 0)
+            return wins/(visits * 1.0);
+        return -1.0;
+    }
+    
+    public int getVisits() {
+        return visits;
+    }
+    
     /**
 	 * Copies game and replaces all players in copy with simulated players
      * Shuffles each players library so that there is no knowledge of its order
@@ -289,26 +297,37 @@ public class MCTSNode {
 			Player origPlayer = game.getState().getPlayers().get(copyPlayer.getId()).copy();
 			SimulatedPlayerMCTS newPlayer = new SimulatedPlayerMCTS(copyPlayer.getId(), true);
 			newPlayer.restore(origPlayer);
-            if (!newPlayer.getId().equals(playerId)) {
-                int handSize = newPlayer.getHand().size();
-                newPlayer.getLibrary().addAll(newPlayer.getHand().getCards(sim), sim);
-                newPlayer.getHand().clear();
-                newPlayer.getLibrary().shuffle();
-                for (int i = 0; i < handSize; i++) {
-                    Card card = newPlayer.getLibrary().removeFromTop(sim);
-                    sim.setZone(card.getId(), Zone.HAND);
-                    newPlayer.getHand().add(card);
-                }
-            }
-            else {
-                newPlayer.getLibrary().shuffle();                
-            }
 			sim.getState().getPlayers().put(copyPlayer.getId(), newPlayer);
 		}
+        randomizePlayers(sim, playerId);
 		sim.setSimulation(true);
 		return sim;
 	}
 
+    /*
+     * Shuffles each players library so that there is no knowledge of its order
+     * Swaps all other players hands with random cards from the library so that
+     * there is no knowledge of what cards are in opponents hands
+     */
+    protected void randomizePlayers(Game game, UUID playerId) {
+        for (Player player: game.getState().getPlayers().values()) {
+            if (!player.getId().equals(playerId)) {
+                int handSize = player.getHand().size();
+                player.getLibrary().addAll(player.getHand().getCards(game), game);
+                player.getHand().clear();
+                player.getLibrary().shuffle();
+                for (int i = 0; i < handSize; i++) {
+                    Card card = player.getLibrary().removeFromTop(game);
+                    game.setZone(card.getId(), Zone.HAND);
+                    player.getHand().add(card);
+                }
+            }
+            else {
+                player.getLibrary().shuffle();                
+            }
+        }
+    }
+    
     public boolean isTerminal() {
         return game.isGameOver();
     }

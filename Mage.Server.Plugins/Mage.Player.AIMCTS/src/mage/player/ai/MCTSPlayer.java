@@ -28,16 +28,13 @@
 package mage.player.ai;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.PassAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.game.Game;
-import mage.game.combat.Combat;
 import mage.game.permanent.Permanent;
 import org.apache.log4j.Logger;
 
