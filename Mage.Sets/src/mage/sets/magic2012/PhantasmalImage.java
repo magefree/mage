@@ -36,6 +36,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesTargetTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
@@ -64,7 +65,7 @@ public class PhantasmalImage extends CardImpl<PhantasmalImage> {
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
-        Ability ability = new EntersBattlefieldAbility(new PhantasmalImageCopyEffect(), abilityText);
+        Ability ability = new EntersBattlefieldAbility(new EntersBattlefieldEffect(new PhantasmalImageCopyEffect(), abilityText));
 		this.addAbility(ability);
     }
 

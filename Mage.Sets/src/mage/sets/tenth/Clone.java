@@ -33,9 +33,9 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.CopyPermanentEffect;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.EntersBattlefieldEffect;
+import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.cards.CardImpl;
 
 /**
