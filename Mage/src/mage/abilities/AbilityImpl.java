@@ -102,7 +102,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 		this.zone = ability.zone;
 		this.name = ability.name;
 		this.usesStack = ability.usesStack;
-		this.manaCosts = ability.manaCosts.copy();
+		this.manaCosts = ability.manaCosts;
 		this.manaCostsToPay = ability.manaCostsToPay.copy();
 		this.costs = ability.costs.copy();
 		this.optionalCosts = ability.optionalCosts.copy();

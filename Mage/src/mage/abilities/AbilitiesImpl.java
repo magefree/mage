@@ -29,6 +29,7 @@
 package mage.abilities;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -286,4 +287,17 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
 		return total;
 	}
 
+    @Override
+    public String getValue() {
+        List<String> abilities = new ArrayList<String>();
+        for (T ability: this) {
+            abilities.add(ability.toString());
+        }
+        Collections.sort(abilities);
+        StringBuilder sb = new StringBuilder();
+        for (String s: abilities) {
+            sb.append(s);
+        }
+        return sb.toString();
+    }
 }

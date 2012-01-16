@@ -1224,12 +1224,15 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 					playable.add(ability);
 			}
 		}
+        // eliminate duplicate activated abilities
+        Map<String, Ability> playableActivated = new HashMap<String, Ability>();
 		for (Permanent permanent: game.getBattlefield().getAllActivePermanents(playerId)) {
 			for (ActivatedAbility ability: permanent.getAbilities().getActivatedAbilities(Zone.BATTLEFIELD)) {
 				if (canPlay(ability, available, game))
-					playable.add(ability);
+					playableActivated.put(ability.toString(), ability);
 			}
 		}
+        playable.addAll(playableActivated.values());
 		return playable;
 	}
 

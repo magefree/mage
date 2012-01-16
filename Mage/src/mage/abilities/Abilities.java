@@ -261,4 +261,5 @@ public interface Abilities<T extends Ability> extends List<T>, Serializable {
 
     public Map<ReplacementEffect, Ability> getReplacementEffects(Zone zone);
     public Map<Effect, Ability> getEffects(Game game, Zone zone, EffectType effectType);
+    public String getValue();
 }
