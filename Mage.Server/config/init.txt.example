@@ -10,7 +10,7 @@
 # nickname - Player's name you connect to the game with
 #
 #
-battlefield:player:Forest:1
+battlefield:player:Forest:3
 graveyard:player:Plains:1
 battlefield:player:Snapsail Glider:1
 battlefield:computer:Island:2
