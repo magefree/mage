@@ -22,13 +22,14 @@ public class Card implements Comparable<Card> {
     private String rarity;
     private String cardNumber;
     private String artist;
+    private Card otherSide;
 
     public Card(Integer multiverseId) {
         this.multiverseId = multiverseId;
     }
 
     public Card(String card) {
-        String[] split = card.split("\\|",13);
+        String[] split = card.split("\\|", 13);
         if (split[0].length() > 0) {
             multiverseId = Integer.parseInt(split[0]);
         }
@@ -160,6 +161,14 @@ public class Card implements Comparable<Card> {
         this.types = types;
     }
 
+    public Card getOtherSide() {
+        return otherSide;
+    }
+
+    public void setOtherSide(Card otherSide) {
+        this.otherSide = otherSide;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -193,10 +202,15 @@ public class Card implements Comparable<Card> {
         sb.append(rarity != null ? rarity : "").append("|");
         sb.append(cardNumber != null ? cardNumber : "").append("|");
         sb.append(artist != null ? artist : "");
+
+        if (otherSide != null) {
+            sb.append("\n").append(otherSide.toString());
+        }
         return sb.toString();
     }
 
     public int compareTo(Card o) {
-        return this.multiverseId.compareTo(o.getMultiverseId());
+        int idCompareResult = this.multiverseId.compareTo(o.getMultiverseId());
+        return idCompareResult == 0 ? this.cardNumber.compareTo(o.getCardNumber()) : idCompareResult;
     }
 }

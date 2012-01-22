@@ -2,8 +2,8 @@ package north.gatherercrawler;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
+import north.gatherercrawler.util.CardsList;
 
 /**
  *
@@ -13,16 +13,35 @@ public class ThreadStarter extends Thread {
 
     private static Integer threadsDone = 0;
     private final Integer threads = 10;
+    private List<Card> sortedCards;
 
     public static synchronized void threadDone() {
         threadsDone++;
+    }
+
+    private void updateSortedCards() {
+        if (sortedCards == null) {
+            sortedCards = new ArrayList<Card>();
+            Iterator<Card> iterator = CardsList.iterator();
+            while (iterator.hasNext()) {
+                sortedCards.add(iterator.next());
+            }
+
+            Collections.sort(sortedCards, new Comparator<Card>() {
+
+                public int compare(Card o1, Card o2) {
+                    int expansionCompare = o1.getExpansion().compareTo(o2.getExpansion());
+                    return expansionCompare != 0 ? expansionCompare : o1.getCardNumber().compareTo(o2.getCardNumber());
+                }
+            });
+        }
     }
 
     private void writeCardsToFile() {
         try {
             FileWriter fstream = new FileWriter("cards-data.txt");
             BufferedWriter out = new BufferedWriter(fstream);
-            Iterator<Card> iterator = CardsList.iterator();
+            Iterator<Card> iterator = sortedCards.iterator();
             while (iterator.hasNext()) {
                 out.write(iterator.next().toString());
                 out.newLine();
@@ -37,7 +56,7 @@ public class ThreadStarter extends Thread {
         try {
             FileWriter fstream = new FileWriter("mtg-cards-data.txt");
             BufferedWriter out = new BufferedWriter(fstream);
-            Iterator<Card> iterator = CardsList.iterator();
+            Iterator<Card> iterator = sortedCards.iterator();
             while (iterator.hasNext()) {
                 Card card = iterator.next();
                 StringBuilder sb = new StringBuilder();
@@ -79,7 +98,7 @@ public class ThreadStarter extends Thread {
                 } else {
                     sb.append("||");
                 }
-                
+
                 List<String> cardText = card.getCardText();
                 for (int i = 0; i < cardText.size(); i++) {
                     sb.append(cardText.get(i));
@@ -114,6 +133,7 @@ public class ThreadStarter extends Thread {
             }
         }
 
+        updateSortedCards();
         writeCardsToFile();
         writeCardsToUtilFile();
     }

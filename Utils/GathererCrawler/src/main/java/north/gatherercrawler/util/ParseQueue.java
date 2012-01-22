@@ -1,4 +1,4 @@
-package north.gatherercrawler;
+package north.gatherercrawler.util;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 

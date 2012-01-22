@@ -1,7 +1,8 @@
-package north.gatherercrawler;
+package north.gatherercrawler.util;
 
 import java.util.Iterator;
 import java.util.concurrent.ConcurrentSkipListSet;
+import north.gatherercrawler.Card;
 
 /**
  *
