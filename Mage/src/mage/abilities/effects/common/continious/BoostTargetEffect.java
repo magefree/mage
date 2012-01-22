@@ -49,7 +49,9 @@ public class BoostTargetEffect extends ContinuousEffectImpl<BoostTargetEffect> {
 
     private DynamicValue power;
     private DynamicValue toughness;
-
+    // if true, all dynamic values should be calculated once
+    protected boolean isLockedIn = false;
+    
     public BoostTargetEffect(int power, int toughness, Duration duration) {
         this(new StaticValue(power), new StaticValue(toughness), duration);
     }
@@ -59,18 +61,41 @@ public class BoostTargetEffect extends ContinuousEffectImpl<BoostTargetEffect> {
         this.power = power;
         this.toughness = toughness;
     }
+    /**
+     * @param power power value to boost
+     * @param toughness toughness value to boost
+     * @param duration how long does the effecct apply
+     * @param continuousCalculation true = power and toughness will be calculated continuously
+     *                              false = power and toughness will be calculated once during resolution
+     */
+    public BoostTargetEffect(DynamicValue power, DynamicValue toughness, Duration duration, boolean isLockedIn) {
+        super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
+        this.power = power;
+        this.toughness = toughness;
+        this.isLockedIn = isLockedIn;
+    }
 
     public BoostTargetEffect(final BoostTargetEffect effect) {
         super(effect);
         this.power = effect.power.clone();
         this.toughness = effect.toughness.clone();
+        this.isLockedIn = effect.isLockedIn;
     }
 
     @Override
     public BoostTargetEffect copy() {
         return new BoostTargetEffect(this);
     }
-
+    
+    @Override
+    public void init(Ability source, Game game) {
+            super.init(source, game);
+            if (isLockedIn) {
+                power = new StaticValue(power.calculate(game, source));
+                toughness = new StaticValue(toughness.calculate(game, source));
+            }
+    }
+    
     @Override
     public boolean apply(Game game, Ability source) {
         int affectedTargets = 0;
@@ -114,5 +139,9 @@ public class BoostTargetEffect extends ContinuousEffectImpl<BoostTargetEffect> {
         }
         sb.append(message);
         return sb.toString();
+    }
+   
+    public void setLockedIn(boolean isLockedIn) {
+        this.isLockedIn =isLockedIn;
     }
 }

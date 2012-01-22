@@ -50,7 +50,7 @@ public class MightOfAlara extends CardImpl<MightOfAlara> {
         this.color.setGreen(true);
 
         // Domain - Target creature gets +1/+1 until end of turn for each basic land type among lands you control.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(new DomainValue(), new DomainValue(), Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(new DomainValue(), new DomainValue(), Constants.Duration.EndOfTurn, true));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

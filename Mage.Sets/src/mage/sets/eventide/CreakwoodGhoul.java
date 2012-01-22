@@ -28,7 +28,6 @@
 package mage.sets.eventide;
 
 import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -40,6 +39,7 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCardInGraveyard;
+
 
 /**
  *

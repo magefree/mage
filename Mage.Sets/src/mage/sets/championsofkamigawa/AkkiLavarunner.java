@@ -1,5 +1,6 @@
 package mage.sets.championsofkamigawa;
 
+import java.util.UUID;
 import mage.Constants;
 import mage.MageInt;
 import mage.ObjectColor;
@@ -11,7 +12,6 @@ import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.CopyTokenEffect;
 import mage.abilities.effects.common.FlipSourceEffect;
-import mage.abilities.effects.common.UntapAllLandsControllerEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.Card;
@@ -22,8 +22,6 @@ import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.Token;
-
-import java.util.UUID;
 
 /**
  * @author Loki

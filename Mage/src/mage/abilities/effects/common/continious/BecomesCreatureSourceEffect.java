@@ -81,7 +81,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl<BecomesCre
 								}
                             }
 						}
-						if (type == null) {
+						if (type == "" || type == null) {
 							permanent.getSubtype().clear();
 						}
 						if (token.getSubtype().size() > 0) {
