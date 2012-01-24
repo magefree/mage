@@ -29,7 +29,6 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -47,7 +46,7 @@ import mage.target.common.TargetOpponent;
  */
 public class HondenOfNightsReach extends CardImpl<HondenOfNightsReach> {
 
-    final static FilterControlledPermanent filter = new FilterControlledPermanent("shrine");
+    final static FilterControlledPermanent filter = new FilterControlledPermanent("Shrine");
 
     static {
         filter.getSubtype().add("Shrine");
@@ -60,6 +59,8 @@ public class HondenOfNightsReach extends CardImpl<HondenOfNightsReach> {
         this.supertype.add("Legendary");
         this.subtype.add("Shrine");
         this.color.setBlack(true);
+        
+        // At the beginning of your upkeep, target opponent discards a card for each Shrine you control.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new DiscardTargetEffect(new PermanentsOnBattlefieldCount(filter)), Constants.TargetController.YOU, false);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

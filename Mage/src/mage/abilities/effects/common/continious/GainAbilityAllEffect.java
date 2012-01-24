@@ -37,7 +37,6 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentToken;
 
 /**
  *
@@ -105,7 +104,12 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl<GainAbilityAllEff
 		StringBuilder sb = new StringBuilder();
 		if (excludeSource)
 			sb.append("Other ");
-		sb.append(filter.getMessage()).append(" gain ").append(ability.getRule());
+                sb.append(filter.getMessage());
+                if (duration.equals(Duration.WhileOnBattlefield))
+                    sb.append(" have ");
+                else
+                    sb.append(" gain ");
+		sb.append(ability.getRule());
 		sb.append(" ").append(duration.toString());
 		staticText = sb.toString();
 	}

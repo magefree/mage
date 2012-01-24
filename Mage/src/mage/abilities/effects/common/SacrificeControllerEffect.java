@@ -25,51 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.abilities.effects.common;
 
-package mage.sets.championsofkamigawa;
-
-import java.util.UUID;
-
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.GainLifeEffect;
-import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledPermanent;
+import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.filter.FilterPermanent;
+import mage.game.Game;
+import mage.target.targetpointer.FixedTarget;
 
 /**
- * @author Loki
+ *
+ * @author LevelX
  */
-public class HondenOfCleansingFire extends CardImpl<HondenOfCleansingFire> {
+public class SacrificeControllerEffect extends SacrificeEffect {
 
-    final static FilterControlledPermanent filter = new FilterControlledPermanent("Shrine");
 
-    static {
-        filter.getSubtype().add("Shrine");
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
-    }
+	public SacrificeControllerEffect ( FilterPermanent filter, DynamicValue count, String preText ) {
+		super(filter, count, preText);
+	}
 
-    public HondenOfCleansingFire(UUID ownerId) {
-        super(ownerId, 14, "Honden of Cleansing Fire", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
-        this.expansionSetCode = "CHK";
-        this.supertype.add("Legendary");
-        this.subtype.add("Shrine");
-        this.color.setWhite(true);
-        
-        // At the beginning of your upkeep, you gain 2 life for each Shrine you control.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter, 2)), Constants.TargetController.YOU, false));
-    }
+        public SacrificeControllerEffect ( FilterPermanent filter, int count, String preText ) {
+                this(filter, new StaticValue(count), preText);
+        }
 
-    public HondenOfCleansingFire(final HondenOfCleansingFire card) {
-        super(card);
-    }
+	public SacrificeControllerEffect (final SacrificeControllerEffect effect ) {
+		super(effect);
+	}
+	
+	@Override
+	public boolean apply(Game game, Ability source) {
+                this.targetPointer = new FixedTarget(source.getControllerId());
+                return super.apply(game, source);
+	}
 
-    @Override
-    public HondenOfCleansingFire copy() {
-        return new HondenOfCleansingFire(this);
-    }
-
+	@Override
+	public SacrificeControllerEffect copy() {
+		return new SacrificeControllerEffect(this);
+	}
 }
+

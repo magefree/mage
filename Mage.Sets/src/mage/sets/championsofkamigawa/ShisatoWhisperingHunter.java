@@ -35,7 +35,7 @@ import mage.Constants.TargetController;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.common.SacrificeEffect;
+import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.abilities.effects.common.SkipNextPlayerUntapStepEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -47,7 +47,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 public class ShisatoWhisperingHunter extends CardImpl<ShisatoWhisperingHunter> {
 
     
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Snake");
+    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Snake");
 
     static {
         filter.getSubtype().add("Snake");
@@ -66,11 +66,9 @@ public class ShisatoWhisperingHunter extends CardImpl<ShisatoWhisperingHunter> {
         this.toughness = new MageInt(2);
 
         // At the beginning of your upkeep, sacrifice a Snake.
-//        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ShisatoWhisperinSacrificeEffect(filter, 1,""), Constants.TargetController.YOU, false));        
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeEffect(filter, 1,""), Constants.TargetController.YOU, false));        
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeControllerEffect(filter, 1,""), Constants.TargetController.YOU, false));        
         // Whenever Shisato, Whispering Hunter deals combat damage to a player, that player skips his or her next untap step.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new SkipNextPlayerUntapStepEffect("that"),false, true));
-//        this.addAbility(new ShisatoWhisperingHunterAbility());
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new SkipNextPlayerUntapStepEffect("that "),false, true));
     }
 
     public ShisatoWhisperingHunter(final ShisatoWhisperingHunter card) {
