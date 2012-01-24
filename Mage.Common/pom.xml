@@ -50,6 +50,13 @@
             <artifactId>trove</artifactId>
             <version>1.0.2</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.sqlite</groupId>
+            <artifactId>sqlite</artifactId>
+            <version>0.5.6</version>
+        </dependency>
+
     </dependencies>
 	
     <build>
