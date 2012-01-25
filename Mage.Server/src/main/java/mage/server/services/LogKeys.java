@@ -19,6 +19,8 @@ public interface LogKeys {
 
     public static final String KEY_NOT_VALID_SESSION = "sessionNotValid";
 
+    public static final String KEY_NOT_VALID_SESSION_INTERNAL = "sessionNotValidInternal";
+
     public static final String KEY_TABLE_CREATED = "tableCreated";
 
     public static final String KEY_TOURNAMENT_TABLE_CREATED = "tournamentTableCreated";
