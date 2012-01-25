@@ -34,6 +34,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import mage.MageException;
 import mage.players.net.UserData;
 import mage.players.net.UserGroup;
+import mage.server.services.LogKeys;
+import mage.server.services.LogService;
+import mage.server.services.impl.LogServiceImpl;
 import mage.view.UserDataView;
 import org.apache.log4j.Logger;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
@@ -67,6 +70,7 @@ public class SessionManager {
 		Session session = sessions.get(sessionId);
 		if (session != null) {
 			session.registerUser(userName);
+            LogServiceImpl.instance.log(LogKeys.KEY_USER_CONNECTED, userName, session.getHost(), sessionId);
 			logger.info("User " + userName + " connected from " + session.getHost() + " sessionId: " + sessionId);
 			return true;
 		}
@@ -77,6 +81,7 @@ public class SessionManager {
 		Session session = sessions.get(sessionId);
 		if (session != null) {
 			session.registerAdmin();
+            LogServiceImpl.instance.log(LogKeys.KEY_ADMIN_CONNECTED, "Admin", session.getHost(), sessionId);
 			logger.info("Admin connected from " + session.getHost());
 			return true;
 		}
@@ -96,12 +101,14 @@ public class SessionManager {
 		Session session = sessions.get(sessionId);
    		sessions.remove(sessionId);
 		if (session != null) {
-			if (voluntary)
+			if (voluntary) {
 				session.kill();
-			else
+                LogServiceImpl.instance.log(LogKeys.KEY_SESSION_KILLED, sessionId);
+            } else {
 				session.disconnect();
-		}
-        else {
+                LogServiceImpl.instance.log(LogKeys.KEY_SESSION_DISCONNECTED, sessionId);
+            }
+		} else {
             logger.info("could not find session with id " + sessionId);
         }
 	}
@@ -117,6 +124,7 @@ public class SessionManager {
 	public void disconnectUser(String sessionId, String userSessionId) {
 		if (isAdmin(sessionId)) {
 			disconnect(userSessionId, true);
+            LogServiceImpl.instance.log(LogKeys.KEY_SESSION_DISCONNECTED_BY_ADMIN, sessionId, userSessionId);
 		}
 	}
 

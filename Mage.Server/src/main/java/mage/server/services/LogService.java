@@ -6,7 +6,12 @@ package mage.server.services;
  * @author noxx
  */
 public interface LogService {
-    public static final String KEY_GAME_STARTED = "gameStarted";
 
+    /**
+     * Logs any information
+     *
+     * @param key Log key. Should be the same for the same types of logs.
+     * @param args Any parameters in string representation.
+     */
     void log(String key, String... args);
 }

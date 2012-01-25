@@ -34,16 +34,20 @@ import mage.game.GameException;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
 import mage.interfaces.Action;
+import mage.interfaces.ActionWithResult;
 import mage.interfaces.MageServer;
 import mage.interfaces.ServerState;
 import mage.interfaces.callback.ClientCallback;
 import mage.remote.MageVersionException;
 import mage.server.draft.DraftManager;
 import mage.server.game.*;
+import mage.server.services.LogKeys;
+import mage.server.services.impl.LogServiceImpl;
 import mage.server.tournament.TournamentFactory;
 import mage.server.tournament.TournamentManager;
 import mage.server.util.ServerMessagesUtil;
 import mage.server.util.ThreadExecutor;
+import mage.utils.ActionWithBooleanResult;
 import mage.utils.CompressUtil;
 import mage.utils.MageVersion;
 import mage.view.*;
@@ -122,8 +126,11 @@ public class MageServerImpl implements MageServer {
 				UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
 				TableView table = GamesRoomManager.getInstance().getRoom(roomId).createTable(userId, options);
 				logger.info("Table " + table.getTableId() + " created");
-				return table;
-			}
+				LogServiceImpl.instance.log(LogKeys.KEY_TABLE_CREATED, sessionId, userId.toString(), table.getTableId().toString());
+                return table;
+			} else {
+                LogServiceImpl.instance.log(LogKeys.KEY_NOT_VALID_SESSION, "createTable", sessionId, roomId.toString());
+            }
 		}
 		catch (Exception ex) {
 			handleException(ex);
@@ -138,8 +145,11 @@ public class MageServerImpl implements MageServer {
 				UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
 				TableView table = GamesRoomManager.getInstance().getRoom(roomId).createTournamentTable(userId, options);
 				logger.info("Tournament table " + table.getTableId() + " created");
-				return table;
-			}
+                LogServiceImpl.instance.log(LogKeys.KEY_TOURNAMENT_TABLE_CREATED, sessionId, userId.toString(), table.getTableId().toString());
+                return table;
+			} else {
+                LogServiceImpl.instance.log(LogKeys.KEY_NOT_VALID_SESSION, "createTournamentTable", sessionId, roomId.toString());
+            }
 		}
 		catch (Exception ex) {
 			handleException(ex);
@@ -352,7 +362,7 @@ public class MageServerImpl implements MageServer {
         execute(sessionId, new Action() {
             public void execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-						    ChatManager.getInstance().joinChat(chatId, userId);
+                ChatManager.getInstance().joinChat(chatId, userId);
             }
         });
 	}
@@ -390,17 +400,15 @@ public class MageServerImpl implements MageServer {
 	}
 
 	@Override
-	public boolean isTableOwner(String sessionId, UUID roomId, UUID tableId) throws MageException {
-		try {
-            if (SessionManager.getInstance().isValidSession(sessionId)) {
-                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-                return TableManager.getInstance().isTableOwner(tableId, userId);
-            }
-		}
-		catch (Exception ex) {
-			handleException(ex);
-		}
-		return false;
+	public boolean isTableOwner(final String sessionId, UUID roomId, final UUID tableId) throws MageException {
+		return
+            executeWithResult(sessionId, new ActionWithBooleanResult() {
+                @Override
+                public Boolean execute() {
+                    UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+                    return TableManager.getInstance().isTableOwner(tableId, userId);
+                }
+            });
 	}
 
 	@Override
@@ -776,5 +784,18 @@ public class MageServerImpl implements MageServer {
 				handleException(ex);
 			}
 		}
+    }
+
+    protected <T> T executeWithResult(final String sessionId, final ActionWithResult<T> action) throws MageException {
+        if (SessionManager.getInstance().isValidSession(sessionId)) {
+            try {
+                if (SessionManager.getInstance().isValidSession(sessionId)) {
+                    return action.execute();
+                }
+            } catch (Exception ex) {
+                handleException(ex);
+            }
+        }
+        return action.negativeResult();
     }
 }

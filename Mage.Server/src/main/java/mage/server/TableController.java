@@ -51,6 +51,7 @@ import mage.players.Player;
 import mage.server.challenge.ChallengeManager;
 import mage.server.draft.DraftManager;
 import mage.server.game.*;
+import mage.server.services.LogKeys;
 import mage.server.services.LogService;
 import mage.server.services.impl.LogServiceImpl;
 import mage.server.tournament.TournamentFactory;
@@ -358,7 +359,7 @@ public class TableController {
             ServerMessagesUtil.getInstance().incGamesStarted();
 
             // log about game started
-            LogServiceImpl.instance.log(LogService.KEY_GAME_STARTED, String.valueOf(userPlayerMap.size()), creator, opponent);
+            LogServiceImpl.instance.log(LogKeys.KEY_GAME_STARTED, String.valueOf(userPlayerMap.size()), creator, opponent);
 		}
 		catch (Exception ex) {
 			logger.fatal("Error starting game", ex);
