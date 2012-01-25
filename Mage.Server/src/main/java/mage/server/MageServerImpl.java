@@ -36,6 +36,7 @@ import mage.game.tournament.TournamentOptions;
 import mage.interfaces.Action;
 import mage.interfaces.MageServer;
 import mage.interfaces.ServerState;
+import mage.interfaces.callback.ClientCallback;
 import mage.remote.MageVersionException;
 import mage.server.draft.DraftManager;
 import mage.server.game.*;
@@ -45,8 +46,8 @@ import mage.server.util.ServerMessagesUtil;
 import mage.server.util.ThreadExecutor;
 import mage.utils.CompressUtil;
 import mage.utils.MageVersion;
-import mage.view.ChatMessage.MessageColor;
 import mage.view.*;
+import mage.view.ChatMessage.MessageColor;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
@@ -740,6 +741,22 @@ public class MageServerImpl implements MageServer {
 		}
 		return null;
 	}
+
+    public void sendBroadcastMessage(final String sessionId, final String message) throws MageException {
+        execute(sessionId, new Action() {
+            public void execute() {
+                if (SessionManager.getInstance().isAdmin(sessionId) && message != null) {
+                    for (User user: UserManager.getInstance().getUsers()) {
+                        if (message.toLowerCase().startsWith("warn")) {
+                            user.fireCallback(new ClientCallback("serverMessage", null, new ChatMessage("SERVER", message, null, MessageColor.RED)));
+                        } else {
+                            user.fireCallback(new ClientCallback("serverMessage", null, new ChatMessage("SERVER", message, null, MessageColor.BLUE)));
+                        }
+			        }
+                }
+            }
+        });
+    }
 
     protected void execute(final String sessionId, final Action action) throws MageException {
         if (SessionManager.getInstance().isValidSession(sessionId)) {

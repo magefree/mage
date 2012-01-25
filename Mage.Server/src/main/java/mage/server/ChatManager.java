@@ -28,9 +28,10 @@
 
 package mage.server;
 
+import mage.view.ChatMessage.MessageColor;
+
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-import mage.view.ChatMessage.MessageColor;
 
 /**
  *

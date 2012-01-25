@@ -34,7 +34,12 @@
 
 package mage.server.console;
 
-import java.awt.Cursor;
+import mage.remote.Connection;
+import mage.remote.Connection.ProxyType;
+import org.apache.log4j.Logger;
+
+import javax.swing.*;
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -43,16 +48,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JDialog;
-
-import javax.swing.JOptionPane;
-import javax.swing.SwingWorker;
-
-import mage.remote.Connection;
-import mage.remote.Connection.ProxyType;
-
-import org.apache.log4j.Logger;
 
 /**
  *
@@ -416,11 +411,15 @@ public class ConnectDialog extends JDialog {
 		connection.setHost(this.txtServer.getText());
 		connection.setPort(Integer.valueOf(this.txtPort.getText()));
 		connection.setPassword(new String(txtPassword.getPassword()));
-		connection.setProxyType((ProxyType) this.cbProxyType.getSelectedItem());
-		connection.setProxyHost(this.txtProxyServer.getText());
-		connection.setProxyPort(Integer.valueOf(this.txtProxyPort.getText()));
-		connection.setProxyUsername(this.txtProxyUserName.getText());
-		connection.setProxyPassword(new String(this.txtPasswordField.getPassword()));
+
+        connection.setProxyType((ProxyType) this.cbProxyType.getSelectedItem());
+        if (!this.cbProxyType.getSelectedItem().equals(ProxyType.NONE)) {
+		    connection.setProxyHost(this.txtProxyServer.getText());
+		    connection.setProxyPort(Integer.valueOf(this.txtProxyPort.getText()));
+		    connection.setProxyUsername(this.txtProxyUserName.getText());
+		    connection.setProxyPassword(new String(this.txtPasswordField.getPassword()));
+        }
+
 		logger.debug("connecting: " + connection.getProxyType() + " " + connection.getProxyHost() + " " + connection.getProxyPort());
 		task = new ConnectTask();
 		task.execute();

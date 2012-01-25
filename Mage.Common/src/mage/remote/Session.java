@@ -573,6 +573,20 @@ public class Session {
 		return false;
 	}
 
+    public boolean sendBroadcastMessage(String message) {
+		try {
+			if (isConnected()) {
+				server.sendBroadcastMessage(sessionId, message);
+				return true;
+			}
+		} catch (MageException ex) {
+			handleMageException(ex);
+		} catch (Throwable t) {
+			handleThrowable(t);
+		}
+		return false;
+	}
+
 	public boolean joinGame(UUID gameId) {
 		try {
 			if (isConnected()) {

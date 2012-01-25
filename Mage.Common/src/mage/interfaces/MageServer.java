@@ -28,15 +28,16 @@
 
 package mage.interfaces;
 
-import mage.game.match.MatchOptions;
-import java.util.List;
-import java.util.UUID;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
+import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
 import mage.utils.MageVersion;
 import mage.view.*;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -120,6 +121,7 @@ public interface MageServer {
 	public List<UserView> getUsers(String sessionId) throws MageException;
 	public void disconnectUser(String sessionId, String userSessionId) throws MageException;
 	public void removeTable(String sessionId, UUID tableId) throws MageException;
+    public void sendBroadcastMessage(String sessionId, String message) throws MageException;
 
 	// messages of the day
 	public Object getServerMessagesCompressed(String sessionId) throws MageException;

@@ -34,18 +34,16 @@
 
 package mage.server.console;
 
-import java.util.UUID;
-import java.util.prefs.Preferences;
-import javax.swing.Box;
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 import mage.interfaces.MageClient;
 import mage.interfaces.callback.ClientCallback;
 import mage.remote.Connection;
 import mage.remote.Session;
 import mage.utils.MageVersion;
 import org.apache.log4j.Logger;
+
+import javax.swing.*;
+import java.util.UUID;
+import java.util.prefs.Preferences;
 
 /**
  *
@@ -103,11 +101,13 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
 	public void enableButtons() {
         btnConnect.setEnabled(true);
         btnConnect.setText("Disconnect");
+        btnSendMessage.setEnabled(true);
     }
 
     public void disableButtons() {
         btnConnect.setEnabled(true);
         btnConnect.setText("Connect");
+        btnSendMessage.setEnabled(false);
     }
 
     /** This method is called from within the constructor to
@@ -121,6 +121,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
 
         jToolBar1 = new javax.swing.JToolBar();
         btnConnect = new javax.swing.JButton();
+        btnSendMessage = new javax.swing.JButton();
         lblStatus = new javax.swing.JLabel();
         consolePanel1 = new mage.server.console.ConsolePanel();
 
@@ -139,6 +140,19 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
             }
         });
         jToolBar1.add(btnConnect);
+
+        btnSendMessage.setActionCommand("SendMessage");
+        btnSendMessage.setEnabled(false);
+        btnSendMessage.setFocusable(false);
+        btnSendMessage.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnSendMessage.setLabel("Send Message");
+        btnSendMessage.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnSendMessage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSendMessageActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnSendMessage);
 
         lblStatus.setText("Not Connected");
         jToolBar1.add(Box.createHorizontalGlue());
@@ -173,6 +187,13 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
         }
 	}//GEN-LAST:event_btnConnectActionPerformed
 
+    private void btnSendMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendMessageActionPerformed
+        String message = JOptionPane.showInputDialog(null, "Type message to send", "Broadcast message", JOptionPane.INFORMATION_MESSAGE);
+        if (message != null) {
+            session.sendBroadcastMessage(message);
+        }
+    }//GEN-LAST:event_btnSendMessageActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -190,6 +211,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConnect;
+    private javax.swing.JButton btnSendMessage;
     private mage.server.console.ConsolePanel consolePanel1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lblStatus;

@@ -28,8 +28,6 @@
 
 package mage.client.remote;
 
-import java.util.UUID;
-import javax.swing.SwingUtilities;
 import mage.cards.decks.Deck;
 import mage.client.MageFrame;
 import mage.client.chat.ChatPanel;
@@ -45,6 +43,9 @@ import mage.interfaces.callback.ClientCallback;
 import mage.utils.CompressUtil;
 import mage.view.*;
 import org.apache.log4j.Logger;
+
+import javax.swing.*;
+import java.util.UUID;
 
 /**
  *
@@ -104,8 +105,16 @@ public class CallbackClientImpl implements CallbackClient {
 								panel.receiveMessage(message.getUsername(), message.getMessage(), message.getTime(), message.getColor());
 							}
 						}
-					}
-					else if (callback.getMethod().equals("joinedTable")) {
+					} else if (callback.getMethod().equals("serverMessage")) {
+                        if (callback.getData() != null) {
+						    ChatMessage message = (ChatMessage) callback.getData();
+                            if (message.getColor().equals(ChatMessage.MessageColor.RED)) {
+                                JOptionPane.showMessageDialog(null, message.getMessage(), "Server message", JOptionPane.WARNING_MESSAGE);
+                            } else {
+                                JOptionPane.showMessageDialog(null, message.getMessage(), "Server message", JOptionPane.INFORMATION_MESSAGE);
+                            }
+                        }
+					} else if (callback.getMethod().equals("joinedTable")) {
                         TableClientMessage message = (TableClientMessage) callback.getData();
                         joinedTable(message.getRoomId(), message.getTableId(), message.getFlag());
 					}

@@ -28,8 +28,6 @@
 
 package mage.server;
 
-import java.util.Date;
-import java.util.UUID;
 import mage.MageException;
 import mage.interfaces.callback.ClientCallback;
 import mage.players.net.UserData;
@@ -40,6 +38,9 @@ import org.jboss.remoting.callback.AsynchInvokerCallbackHandler;
 import org.jboss.remoting.callback.Callback;
 import org.jboss.remoting.callback.HandleCallbackException;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
+
+import java.util.Date;
+import java.util.UUID;
 
 /**
  *
@@ -89,6 +90,9 @@ public class Session {
 	public void registerAdmin() {
 		this.isAdmin = true;
 		User user = UserManager.getInstance().createUser("Admin", host);
+        if (user == null) {
+            user = UserManager.getInstance().findUser("Admin");
+        }
 		user.setUserData(new UserData(UserGroup.ADMIN, 0));
 		this.userId = user.getId();
 	}
