@@ -1,20 +1,26 @@
 package mage.db;
 
+import mage.db.model.Log;
 import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author noxx
  */
-public enum EntityManager {
+public enum EntityManager implements Storage {
 
     instance;
 
     private static final Logger log = Logger.getLogger(EntityManager.class);
 
     private static final String MAGE_JDBC_URL = "jdbc:sqlite:db/mage.db";
+
+    private static String QUERY_SAVE_LOG = "insert into logs values (?, ?, ?, ?, ?, ?, ?, ?)";
+    private static String QUERY_GET_ALL_LOGS = "select * from logs";
 
     static {
         try {
@@ -30,6 +36,77 @@ public enum EntityManager {
     }
 
     /**
+     * Inserts log entry to DB.
+     *
+     * @param key
+     * @param date
+     * @param args
+     * @throws Exception
+     */
+    public void insertLog(String key, java.util.Date date, String... args) throws SQLException {
+        Connection conn = DriverManager.getConnection(MAGE_JDBC_URL);
+
+        try {
+            PreparedStatement prep = conn.prepareStatement(QUERY_SAVE_LOG);
+
+            prep.setString(1, key);
+            prep.setDate(2, new java.sql.Date(date.getTime()));
+
+            int index = 3;
+            for (String arg : args) {
+                if (index > 8) break;
+                prep.setString(index++, arg);
+            }
+
+            prep.execute();
+
+        } finally {
+            try {
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+                // swallow
+            }
+        }
+    }
+
+    @Override
+    public List<Log> getAllLogs() {
+        List<Log> logs = new ArrayList<Log>();
+
+        try {
+            Connection conn = DriverManager.getConnection(MAGE_JDBC_URL);
+            try {
+                Statement stat = conn.createStatement();
+                ResultSet rs = stat.executeQuery(QUERY_GET_ALL_LOGS);
+                while (rs.next()) {
+                    Log log = new Log(rs.getString(1), rs.getDate(2));
+                    List<String> args = new ArrayList<String>();
+                    for (int index = 0; index < 6; index++) {
+                        String arg = rs.getString(3 + index);
+                        if (arg == null) {
+                            break;
+                        }
+                        args.add(arg);
+                    }
+                    log.setArguments(args);
+                    logs.add(log);
+                }
+                rs.close();
+            } finally {
+                try {
+                    if (conn != null) conn.close();
+                } catch (Exception e) {
+                    // swallow
+                }
+            }
+        } catch (SQLException e) {
+            log.fatal("SQL Exception: ", e);
+        }
+
+        return logs;
+    }
+
+    /**
      * Inits database. Creates tables if they don't exist.
      *
      * @throws Exception
@@ -41,6 +118,7 @@ public enum EntityManager {
         try {
             Statement stat = conn.createStatement();
             stat.executeUpdate("create table if not exists users (login, password, status);");
+            stat.executeUpdate("create table if not exists logs (key, created_dt, arg0, arg1, arg2, arg3, arg4, arg5);");
         } finally {
             try {
                 conn.close();
@@ -63,7 +141,7 @@ public enum EntityManager {
         try {
             Statement stat = conn.createStatement();
             stat.executeUpdate("drop table users;");
-            stat.executeUpdate("create table users (login, password, status);");
+            init();
         } finally {
             try {
                 conn.close();
@@ -117,7 +195,7 @@ public enum EntityManager {
             rs.close();
         } finally {
             try {
-                conn.close();
+                if (conn != null) conn.close();
             } catch (Exception e) {
                 // swallow
             }
@@ -147,6 +225,7 @@ public enum EntityManager {
     }
 
     public static void main(String[] args) throws Exception {
+        //EntityManager.getInstance().reinit();
         EntityManager.getInstance().testDB();
     }
 }

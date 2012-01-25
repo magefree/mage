@@ -30,8 +30,10 @@ package mage.server;
 
 import mage.Constants.RangeOfInfluence;
 import mage.Constants.TableState;
+import mage.MageException;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
+import mage.cards.decks.InvalidDeckException;
 import mage.game.GameException;
 import mage.game.GameOptions;
 import mage.game.Seat;
@@ -42,16 +44,19 @@ import mage.game.events.Listener;
 import mage.game.events.TableEvent;
 import mage.game.match.Match;
 import mage.game.match.MatchOptions;
+import mage.game.match.MatchPlayer;
 import mage.game.tournament.Tournament;
 import mage.game.tournament.TournamentOptions;
-import mage.MageException;
 import mage.players.Player;
 import mage.server.challenge.ChallengeManager;
 import mage.server.draft.DraftManager;
 import mage.server.game.*;
+import mage.server.services.LogService;
+import mage.server.services.impl.LogServiceImpl;
 import mage.server.tournament.TournamentFactory;
 import mage.server.tournament.TournamentManager;
 import mage.server.util.ServerMessagesUtil;
+import mage.server.util.ThreadExecutor;
 import org.apache.log4j.Logger;
 
 import java.util.Map.Entry;
@@ -60,9 +65,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
-import mage.cards.decks.InvalidDeckException;
-import mage.game.match.MatchPlayer;
-import mage.server.util.ThreadExecutor;
 
 /**
  *
@@ -332,10 +334,19 @@ public class TableController {
 			match.startGame();
 			table.initGame();
 			GameManager.getInstance().createGameSession(match.getGame(), userPlayerMap, table.getId(), choosingPlayerId);
+            String creator = null;
+            String opponent = null;
 			for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
 				User user = UserManager.getInstance().getUser(entry.getKey());
 				if (user != null) {
 					user.gameStarted(match.getGame().getId(), entry.getValue());
+                    if (creator == null) {
+                        creator = user.getName();
+                    } else {
+                        if (opponent == null) {
+                            opponent = user.getName();
+                        }
+                    }
 				}
 				else {
 					TableManager.getInstance().removeTable(table.getId());
@@ -345,6 +356,9 @@ public class TableController {
 				}
 			}
             ServerMessagesUtil.getInstance().incGamesStarted();
+
+            // log about game started
+            LogServiceImpl.instance.log(LogService.KEY_GAME_STARTED, String.valueOf(userPlayerMap.size()), creator, opponent);
 		}
 		catch (Exception ex) {
 			logger.fatal("Error starting game", ex);
