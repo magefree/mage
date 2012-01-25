@@ -8,16 +8,15 @@ import java.sql.*;
 /**
  * @author noxx
  */
-public class EntityManager {
+public enum EntityManager {
+
+    instance;
 
     private static final Logger log = Logger.getLogger(EntityManager.class);
-
-    private static final EntityManager instance;
 
     private static final String MAGE_JDBC_URL = "jdbc:sqlite:db/mage.db";
 
     static {
-        instance = new EntityManager();
         try {
             init();
         } catch (Exception e) {
@@ -144,11 +143,6 @@ public class EntityManager {
         } else {
             log.debug("[DBTest] checking test user [ERROR]");
             log.debug("[DBTest] couldn't find test user");
-        }
-
-        while (rs.next()) {
-            System.out.println("user = " + rs.getString("login"));
-            System.out.println("password = " + rs.getString("password"));
         }
     }
 
