@@ -45,6 +45,7 @@ import mage.Constants.Layer;
 import mage.Constants.SubLayer;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
+import mage.abilities.StaticAbility;
 import mage.cards.Card;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -245,17 +246,20 @@ public class ContinuousEffects implements Serializable {
 	public List<RequirementEffect> getApplicableRequirementEffects(Permanent permanent, Game game) {
 		List<RequirementEffect> effects = new ArrayList<RequirementEffect>();
 		//get all applicable Requirement effects on the battlefield
-		for (Permanent perm: game.getBattlefield().getActivePermanents(permanent.getControllerId(), game)) {
-            for (Entry<Effect, Ability> entry: perm.getAbilities().getEffects(game, Zone.BATTLEFIELD, EffectType.REQUIREMENT).entrySet()) {
-                if (((RequirementEffect)entry.getKey()).applies(permanent, entry.getValue(), game)) {
-                    effects.add((RequirementEffect)entry.getKey());
-                    abilityMap.put(entry.getKey().getId(), entry.getValue());
-                }
-            }
-		}
+//		for (Permanent perm: game.getBattlefield().getActivePermanents(permanent.getControllerId(), game)) {
+//            for (Entry<Effect, Ability> entry: perm.getAbilities().getEffects(game, Zone.BATTLEFIELD, EffectType.REQUIREMENT).entrySet()) {
+//                if (((RequirementEffect)entry.getKey()).applies(permanent, entry.getValue(), game)) {
+//                    effects.add((RequirementEffect)entry.getKey());
+//                    abilityMap.put(entry.getKey().getId(), entry.getValue());
+//                }
+//            }
+//		}
 		for (RequirementEffect effect: requirementEffects) {
-			if (effect.applies(permanent, abilityMap.get(effect.getId()), game))
-				effects.add(effect);
+            Ability ability = abilityMap.get(effect.getId());
+            if (!(ability instanceof StaticAbility) || ability.getZone() == game.getZone(ability.getSourceId())) {
+                if (effect.applies(permanent, ability, game))
+                    effects.add(effect);
+            }
 		}
 		return effects;
 	}
@@ -263,17 +267,20 @@ public class ContinuousEffects implements Serializable {
 	public List<RestrictionEffect> getApplicableRestrictionEffects(Permanent permanent, Game game) {
 		List<RestrictionEffect> effects = new ArrayList<RestrictionEffect>();
 		//get all applicable Restriction effects on the battlefield
-		for (Permanent perm: game.getBattlefield().getActivePermanents(permanent.getControllerId(), game)) {
-            for (Entry<Effect, Ability> entry: perm.getAbilities().getEffects(game, Zone.BATTLEFIELD, EffectType.RESTRICTION).entrySet()) {
-                if (((RestrictionEffect)entry.getKey()).applies(permanent, entry.getValue(), game)) {
-                    effects.add((RestrictionEffect)entry.getKey());
-                    abilityMap.put(entry.getKey().getId(), entry.getValue());
-                }
-            }
-		}
+//		for (Permanent perm: game.getBattlefield().getActivePermanents(permanent.getControllerId(), game)) {
+//            for (Entry<Effect, Ability> entry: perm.getAbilities().getEffects(game, Zone.BATTLEFIELD, EffectType.RESTRICTION).entrySet()) {
+//                if (((RestrictionEffect)entry.getKey()).applies(permanent, entry.getValue(), game)) {
+//                    effects.add((RestrictionEffect)entry.getKey());
+//                    abilityMap.put(entry.getKey().getId(), entry.getValue());
+//                }
+//            }
+//		}
 		for (RestrictionEffect effect: restrictionEffects) {
-			if (effect.applies(permanent, abilityMap.get(effect.getId()), game))
-				effects.add(effect);
+            Ability ability = abilityMap.get(effect.getId());
+            if (!(ability instanceof StaticAbility) || ability.getZone() == game.getZone(ability.getSourceId())) {
+                if (effect.applies(permanent, ability, game))
+                    effects.add(effect);
+            }
 		}
 		return effects;
 	}
@@ -289,49 +296,55 @@ public class ContinuousEffects implements Serializable {
 		if (planeswalkerRedirectionEffect.applies(event, null, game))
 			replaceEffects.add(planeswalkerRedirectionEffect);
 		//get all applicable Replacement effects in each players hand and graveyard
-		for (Card card: game.getCards()) {
-            Zone zone = game.getState().getZone(card.getId());
-			if (zone == Zone.HAND || zone == Zone.GRAVEYARD) {
-                for (Entry<ReplacementEffect, Ability> entry: card.getAbilities().getReplacementEffects(zone).entrySet()) {
-                    if (entry.getKey().applies(event, entry.getValue(), game)) {
-                        replaceEffects.add(entry.getKey());
-						abilityMap.put(entry.getKey().getId(), entry.getValue());
-                    }
-                }
-			}
-		}
+//		for (Card card: game.getCards()) {
+//            Zone zone = game.getState().getZone(card.getId());
+//			if (zone == Zone.HAND || zone == Zone.GRAVEYARD) {
+//                for (Entry<ReplacementEffect, Ability> entry: card.getAbilities().getReplacementEffects(zone).entrySet()) {
+//                    if (entry.getKey().applies(event, entry.getValue(), game)) {
+//                        replaceEffects.add(entry.getKey());
+//						abilityMap.put(entry.getKey().getId(), entry.getValue());
+//                    }
+//                }
+//			}
+//		}
 		//get all applicable Replacement effects on the battlefield
-		for (Permanent permanent: game.getBattlefield().getAllPermanents()) {
-            for (Entry<ReplacementEffect, Ability> entry: permanent.getAbilities().getReplacementEffects(Zone.BATTLEFIELD).entrySet()) {
-                if (entry.getKey().applies(event, entry.getValue(), game)) {
-                    replaceEffects.add(entry.getKey());
-                    abilityMap.put(entry.getKey().getId(), entry.getValue());
-                }
-            }
-		}
+//		for (Permanent permanent: game.getBattlefield().getAllPermanents()) {
+//            for (Entry<ReplacementEffect, Ability> entry: permanent.getAbilities().getReplacementEffects(Zone.BATTLEFIELD).entrySet()) {
+//                if (entry.getKey().applies(event, entry.getValue(), game)) {
+//                    replaceEffects.add(entry.getKey());
+//                    abilityMap.put(entry.getKey().getId(), entry.getValue());
+//                }
+//            }
+//		}
         //get all applicable Replacement effects on players
-        for (Player player: game.getPlayers().values()) {
-            for (Entry<ReplacementEffect, Ability> entry: player.getAbilities().getReplacementEffects(Zone.BATTLEFIELD).entrySet()) {
-                if (entry.getKey().applies(event, entry.getValue(), game)) {
-                    replaceEffects.add(entry.getKey());
-                    abilityMap.put(entry.getKey().getId(), entry.getValue());
-                }
-            }
-        }
+//        for (Player player: game.getPlayers().values()) {
+//            for (Entry<ReplacementEffect, Ability> entry: player.getAbilities().getReplacementEffects(Zone.BATTLEFIELD).entrySet()) {
+//                if (entry.getKey().applies(event, entry.getValue(), game)) {
+//                    replaceEffects.add(entry.getKey());
+//                    abilityMap.put(entry.getKey().getId(), entry.getValue());
+//                }
+//            }
+//        }
 		//get all applicable transient Replacement effects
 		for (ReplacementEffect effect: replacementEffects) {
-			if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
-				if (effect.applies(event, abilityMap.get(effect.getId()), game)) {
-					replaceEffects.add(effect);
-				}
-			}
+            Ability ability = abilityMap.get(effect.getId());
+            if (!(ability instanceof StaticAbility) || ability.getZone() == game.getZone(ability.getSourceId())) {
+                if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
+                    if (effect.applies(event, ability, game)) {
+                        replaceEffects.add(effect);
+                    }
+                }
+            }
 		}
 		for (PreventionEffect effect: preventionEffects) {
-			if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
-				if (effect.applies(event, abilityMap.get(effect.getId()), game)) {
-					replaceEffects.add(effect);
-				}
-			}
+            Ability ability = abilityMap.get(effect.getId());
+            if (!(ability instanceof StaticAbility) || ability.getZone() == game.getZone(ability.getSourceId())) {
+                if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
+                    if (effect.applies(event, ability, game)) {
+                        replaceEffects.add(effect);
+                    }
+                }
+            }
 		}
 		return replaceEffects;
 	}

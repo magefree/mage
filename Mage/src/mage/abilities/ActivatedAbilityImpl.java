@@ -99,8 +99,6 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
 		if (cost != null) {
 			if (cost instanceof PhyrexianManaCost) {
 				this.addManaCost((PhyrexianManaCost)cost);
-			} else if (cost instanceof ManaCost) {
-				this.addManaCost((ManaCost) cost);
 			} else {
 				this.addCost(cost);
 			}

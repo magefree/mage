@@ -51,13 +51,11 @@ import mage.abilities.effects.ReplacementEffect;
 import mage.abilities.mana.ManaAbility;
 import mage.cards.Card;
 import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.choices.Choice;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
-import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetAmount;
@@ -133,7 +131,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
             if (ability.getManaCosts().getVariableCosts().size() > 0) {
                 int amount = getAvailableManaProducers(game).size() - ability.getManaCosts().convertedManaCost();
                 if (amount > 0)
-                    ability.addManaCost(new GenericManaCost(rnd.nextInt(amount)));
+                    ability.getManaCostsToPay().add(new GenericManaCost(rnd.nextInt(amount)));
             }
             // check if ability kills player, if not then it's ok to play
 //            if (ability.isUsesStack()) {
@@ -278,67 +276,82 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
 
     @Override
     public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game) {
-		return chooseRandom(target, game);
+        if (this.isHuman())
+            return chooseRandom(target, game);
+        return super.choose(outcome, target, sourceId, game);
     }
 
     @Override
     public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game, Map<String, Serializable> options) {
-		return chooseRandom(target, game);
+        if (this.isHuman())
+            return chooseRandom(target, game);
+        return super.choose(outcome, target, sourceId, game, options);
     }
 
     @Override
     public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game) {
-        if (cards.isEmpty())
-            return !target.isRequired();
-        Set<UUID> possibleTargets = target.possibleTargets(playerId, cards, game);
-        if (possibleTargets.isEmpty())
-            return !target.isRequired();
-        Iterator<UUID> it = possibleTargets.iterator();
-        int targetNum = rnd.nextInt(possibleTargets.size());
-        UUID targetId = it.next();
-        for (int i = 0; i < targetNum; i++) {
-            targetId = it.next();
+        if (this.isHuman()) {
+            if (cards.isEmpty())
+                return !target.isRequired();
+            Set<UUID> possibleTargets = target.possibleTargets(playerId, cards, game);
+            if (possibleTargets.isEmpty())
+                return !target.isRequired();
+            Iterator<UUID> it = possibleTargets.iterator();
+            int targetNum = rnd.nextInt(possibleTargets.size());
+            UUID targetId = it.next();
+            for (int i = 0; i < targetNum; i++) {
+                targetId = it.next();
+            }
+            target.add(targetId, game);
+            return true;
         }
-        target.add(targetId, game);
-        return true;
+        return super.choose(outcome, cards, target, game);
     }
 
     @Override
     public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
-        return chooseRandomTarget(target, source, game);
+        if (this.isHuman())
+            return chooseRandomTarget(target, source, game);
+        return super.chooseTarget(outcome, target, source, game);
     }
 
     @Override
     public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
-        if (cards.isEmpty())
-            return !target.isRequired();
-        Card card = cards.getRandom(game);
-        target.addTarget(card.getId(), source, game);
-        return true;
+        if (this.isHuman()) {
+            if (cards.isEmpty())
+                return !target.isRequired();
+            Card card = cards.getRandom(game);
+            target.addTarget(card.getId(), source, game);
+            return true;
+        }
+        return super.chooseTarget(outcome, cards, target, source, game);
     }
 
     @Override
     public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
-        Set<UUID> possibleTargets = target.possibleTargets(source==null?null:source.getSourceId(), playerId, game);
-        if (possibleTargets.isEmpty())
-            return !target.isRequired();
-        if (!target.isRequired()) {
-            if (rnd.nextInt(possibleTargets.size() + 1) == 0) {
-                return false;
+        if (this.isHuman()) {
+            Set<UUID> possibleTargets = target.possibleTargets(source==null?null:source.getSourceId(), playerId, game);
+            if (possibleTargets.isEmpty())
+                return !target.isRequired();
+            if (!target.isRequired()) {
+                if (rnd.nextInt(possibleTargets.size() + 1) == 0) {
+                    return false;
+                }
             }
-        }
-        if (possibleTargets.size() == 1) {
-            target.addTarget(possibleTargets.iterator().next(), target.getAmountRemaining(), source, game);
+            if (possibleTargets.size() == 1) {
+                target.addTarget(possibleTargets.iterator().next(), target.getAmountRemaining(), source, game);
+                return true;
+            }
+            Iterator<UUID> it = possibleTargets.iterator();
+            int targetNum = rnd.nextInt(possibleTargets.size());
+            UUID targetId = it.next();
+            for (int i = 0; i < targetNum; i++) {
+                targetId = it.next();
+            }
+            target.addTarget(targetId, rnd.nextInt(target.getAmountRemaining()) + 1, source, game);
             return true;
         }
-        Iterator<UUID> it = possibleTargets.iterator();
-        int targetNum = rnd.nextInt(possibleTargets.size());
-        UUID targetId = it.next();
-        for (int i = 0; i < targetNum; i++) {
-            targetId = it.next();
-        }
-        target.addTarget(targetId, rnd.nextInt(target.getAmountRemaining()) + 1, source, game);
-        return true;
+        return super.chooseTargetAmount(outcome, target, source, game);
     }
 
     @Override
@@ -348,19 +361,24 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
 
     @Override
     public boolean chooseUse(Outcome outcome, String message, Game game) {
-        return rnd.nextBoolean();
+        if (this.isHuman())
+            return rnd.nextBoolean();
+        return super.chooseUse(outcome, message, game);
     }
 
     @Override
     public boolean choose(Outcome outcome, Choice choice, Game game) {
-        Iterator<String> it = choice.getChoices().iterator();
-        String sChoice = it.next();
-        int choiceNum = rnd.nextInt(choice.getChoices().size());
-        for (int i = 0; i < choiceNum; i++) {
-            sChoice = it.next();
+        if (this.isHuman()) {
+            Iterator<String> it = choice.getChoices().iterator();
+            String sChoice = it.next();
+            int choiceNum = rnd.nextInt(choice.getChoices().size());
+            for (int i = 0; i < choiceNum; i++) {
+                sChoice = it.next();
+            }
+            choice.setChoice(sChoice);
+            return true;
         }
-		choice.setChoice(sChoice);
-		return true;
+        return super.choose(outcome, choice, game);
     }
 
     @Override
@@ -383,70 +401,87 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
 
     @Override
     public int chooseEffect(List<ReplacementEffect> rEffects, Game game) {
-        return rnd.nextInt(rEffects.size());
+        if (this.isHuman())
+            return rnd.nextInt(rEffects.size());
+        return super.chooseEffect(rEffects, game);
     }
 
     @Override
     public TriggeredAbility chooseTriggeredAbility(TriggeredAbilities abilities, Game game) {
-        return abilities.get(rnd.nextInt(abilities.size()));
+        if (this.isHuman())
+            return abilities.get(rnd.nextInt(abilities.size()));
+        return super.chooseTriggeredAbility(abilities, game);
     }
 
     @Override
     public Mode chooseMode(Modes modes, Ability source, Game game) {
-        Iterator<Mode> it = modes.values().iterator();
-        Mode mode = it.next();
-        if (modes.size() == 1)
+        if (this.isHuman()) {
+            Iterator<Mode> it = modes.values().iterator();
+            Mode mode = it.next();
+            if (modes.size() == 1)
+                return mode;
+            int modeNum = rnd.nextInt(modes.values().size());
+            for (int i = 0; i < modeNum; i++) {
+                mode = it.next();
+            }
             return mode;
-        int modeNum = rnd.nextInt(modes.values().size());
-        for (int i = 0; i < modeNum; i++) {
-            mode = it.next();
         }
-		return mode;
+        return super.chooseMode(modes, source, game);
     }
 
     @Override
     public UUID chooseAttackerOrder(List<Permanent> attackers, Game game) {
-        return attackers.get(rnd.nextInt(attackers.size())).getId();
+        if (this.isHuman())
+            return attackers.get(rnd.nextInt(attackers.size())).getId();
+        return super.chooseAttackerOrder(attackers, game);
     }
 
     @Override
     public UUID chooseBlockerOrder(List<Permanent> blockers, Game game) {
-        return blockers.get(rnd.nextInt(blockers.size())).getId();
+        if (this.isHuman())
+            return blockers.get(rnd.nextInt(blockers.size())).getId();
+        return super.chooseBlockerOrder(blockers, game);
     }
 
     @Override
     public void assignDamage(int damage, List<UUID> targets, String singleTargetName, UUID sourceId, Game game) {
-        int remainingDamage = damage;
-        UUID targetId;
-        int amount;
-        while (remainingDamage > 0) {
-            if (targets.size() == 1) {
-                targetId = targets.get(0);
-                amount = remainingDamage;
-            }
-            else {
-                targetId = targets.get(rnd.nextInt(targets.size()));
-                amount = rnd.nextInt(damage + 1);
-            }
-            Permanent permanent = game.getPermanent(targetId);
-            if (permanent != null) {
-                permanent.damage(amount, sourceId, game, true, false);
-                remainingDamage -= amount;
-            }
-            else {
-                Player player = game.getPlayer(targetId);
-                if (player != null) {
-                    player.damage(amount, sourceId, game, false, true);
+        if (this.isHuman()) {
+            int remainingDamage = damage;
+            UUID targetId;
+            int amount;
+            while (remainingDamage > 0) {
+                if (targets.size() == 1) {
+                    targetId = targets.get(0);
+                    amount = remainingDamage;
+                }
+                else {
+                    targetId = targets.get(rnd.nextInt(targets.size()));
+                    amount = rnd.nextInt(damage + 1);
+                }
+                Permanent permanent = game.getPermanent(targetId);
+                if (permanent != null) {
+                    permanent.damage(amount, sourceId, game, true, false);
                     remainingDamage -= amount;
                 }
+                else {
+                    Player player = game.getPlayer(targetId);
+                    if (player != null) {
+                        player.damage(amount, sourceId, game, false, true);
+                        remainingDamage -= amount;
+                    }
+                }
+                targets.remove(targetId);
             }
-            targets.remove(targetId);
         }
+        else
+            super.assignDamage(damage, targets, singleTargetName, sourceId, game);
     }
 
     @Override
     public int getAmount(int min, int max, String message, Game game) {
-        return rnd.nextInt(max - min) + min;
+        if (this.isHuman())
+            return rnd.nextInt(max - min) + min;
+        return super.getAmount(min, max, message, game);
     }
 
 }

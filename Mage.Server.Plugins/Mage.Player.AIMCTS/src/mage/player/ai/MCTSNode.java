@@ -42,7 +42,6 @@ import mage.game.Game;
 import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
 import mage.game.turn.Step.StepPart;
-import mage.player.ai.MCTSPlayer.NextAction;
 import mage.players.Player;
 import org.apache.log4j.Logger;
 
@@ -53,7 +52,7 @@ import org.apache.log4j.Logger;
 public class MCTSNode {
     
     private static final double selectionCoefficient = 1.0;
-    private static final double passRatioTolerance = 0.01;
+    private static final double passRatioTolerance = 0.0;
  	private final static transient Logger logger = Logger.getLogger(MCTSNode.class);
    
     private int visits = 0;
@@ -64,12 +63,14 @@ public class MCTSNode {
     private Game game;
     private String stateValue;
     private UUID playerId;
+    private boolean terminal = false;
     
     private static int nodeCount;
     
     public MCTSNode(Game game) {
         this.game = game;
         this.stateValue = game.getState().getValue(false, game);
+        this.terminal = game.isGameOver();
         setPlayer();
         nodeCount = 1;
     }    
@@ -77,6 +78,7 @@ public class MCTSNode {
     protected MCTSNode(MCTSNode parent, Game game, Ability action) {
         this.game = game;
         this.stateValue = game.getState().getValue(false, game);
+        this.terminal = game.isGameOver();
         this.parent = parent;
         this.action = action;
         setPlayer();
@@ -86,6 +88,7 @@ public class MCTSNode {
     protected MCTSNode(MCTSNode parent, Game game) {
         this.game = game;
         this.stateValue = game.getState().getValue(false, game);
+        this.terminal = game.isGameOver();
         this.parent = parent;
         setPlayer();
         nodeCount++;
@@ -144,6 +147,7 @@ public class MCTSNode {
                     sim.resume();
                     children.add(new MCTSNode(this, sim, ability));
                 }
+                game = null;
                 break;
             case SELECT_ATTACKERS:
 //                logger.info("Select attackers:" + player.getName());
@@ -185,7 +189,7 @@ public class MCTSNode {
         Game sim = createSimulation(game, playerId);
         sim.resume();
 //        long duration = System.nanoTime() - startTime;
-        int retVal = 0;  //anything other than a win is a loss
+        int retVal = -1;  //anything other than a win is a loss
         for (Player simPlayer: sim.getPlayers().values()) {
 //			logger.info(simPlayer.getName() + " calculated " + ((SimulatedPlayerMCTS)simPlayer).getActionCount() + " actions in " + duration/1000000000.0 + "s");
             if (simPlayer.getId().equals(playerId) && simPlayer.hasWon()) {
@@ -197,6 +201,8 @@ public class MCTSNode {
     }
     
     public void backpropagate(int result) {
+        if (result == 0)
+            return;
         if (result == 1)
             wins++;
         visits++;
@@ -232,6 +238,7 @@ public class MCTSNode {
                 //favour passing vs any other action if ratio is close
                 double ratio = node.wins/(node.visits * 1.0);
                 if (ratio > bestRatio - passRatioTolerance) {
+                    logger.info("choosing pass over " + bestChild.getAction());
                     bestChild = node;
                     bestCount = node.visits;
                     bestRatio = ratio;
@@ -329,7 +336,7 @@ public class MCTSNode {
     }
     
     public boolean isTerminal() {
-        return game.isGameOver();
+        return terminal;
     }
 
     public boolean isWinner(UUID playerId) {

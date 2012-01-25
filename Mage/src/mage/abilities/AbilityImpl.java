@@ -374,9 +374,14 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 
 	@Override
 	public void addCost(Cost cost) {
-		if (cost != null) {
-			this.costs.add(cost);
-		}
+        if (cost != null) {
+            if (cost instanceof ManaCost) {
+                this.addManaCost((ManaCost)cost);
+            }
+            else {
+                this.costs.add(cost);
+            }
+        }
 	}
 
 	@Override

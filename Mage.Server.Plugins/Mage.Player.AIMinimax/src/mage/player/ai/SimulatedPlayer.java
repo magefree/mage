@@ -150,7 +150,7 @@ public class SimulatedPlayer extends ComputerPlayer<SimulatedPlayer> {
 		}
 		for (int i = start; i < numAvailable; i++) {
 			Ability newAbility = ability.copy();
-			newAbility.addCost(new GenericManaCost(i));
+			newAbility.getManaCostsToPay().add(new GenericManaCost(i));
 			allActions.add(newAbility);
 		}
 	}

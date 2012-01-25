@@ -30,6 +30,7 @@ package mage.player.ai;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.PassAbility;
@@ -115,7 +116,7 @@ public class MCTSPlayer extends ComputerPlayer<MCTSPlayer> {
 		}
 		for (int i = start; i < numAvailable; i++) {
 			Ability newAbility = ability.copy();
-			newAbility.addManaCost(new GenericManaCost(i));
+			newAbility.getManaCostsToPay().add(new GenericManaCost(i));
 			options.add(newAbility);
 		}
 	}
@@ -242,7 +243,9 @@ public class MCTSPlayer extends ComputerPlayer<MCTSPlayer> {
 //
 //    @Override
 //    public boolean chooseUse(Outcome outcome, String message, Game game) {
-//        game.end();
+//        game.pause();
+//        nextAction = NextAction.CHOOSE_USE;
+//        return false;
 //    }
 //
 //    @Override
@@ -267,14 +270,12 @@ public class MCTSPlayer extends ComputerPlayer<MCTSPlayer> {
 
     @Override
     public void selectAttackers(Game game) {
-//        logger.info("Paused for select attackers for player:" + getName());
         game.pause();
         nextAction = NextAction.SELECT_ATTACKERS;
     }
 
     @Override
     public void selectBlockers(Game game) {
-//        logger.info("Paused for select blockers for player:" + getName());
         game.pause();
         nextAction = NextAction.SELECT_BLOCKERS;
     }

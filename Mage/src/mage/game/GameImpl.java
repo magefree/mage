@@ -72,6 +72,7 @@ import org.apache.log4j.Logger;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
+import mage.abilities.effects.Effect;
 import mage.watchers.common.PlayerDamagedBySourceWatcher;
 
 public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializable {
@@ -192,6 +193,15 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                 watcher.setSourceId(card.getId());
 				state.getWatchers().add(watcher);
 			}
+            for (StaticAbility ability: card.getAbilities().getStaticAbilities(Zone.ALL)) {
+                for (Mode mode: ability.getModes().values()) {
+                    for (Effect effect: mode.getEffects()) {
+                        if (effect instanceof ContinuousEffect) {
+                            state.addEffect((ContinuousEffect)effect, ability);
+                        }
+                    }
+                }
+            }
 		}
 	}
 

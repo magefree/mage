@@ -57,16 +57,10 @@ public class MCTSExecutor implements Callable<Boolean> {
         long endTime = startTime + (thinkTime * 1000000000l);
         MCTSNode current;
         
-//        if (root.getNumChildren() == 1)
-//            //there is only one possible action - don't spend a lot of time thinking
-//            endTime = startTime + 1000000000l;
         
-//        logger.info("applyMCTS - Thinking for " + (endTime - startTime)/1000000000.0 + "s");
         while (true) {
             long currentTime = System.nanoTime();
-//            logger.info("Remaining time: " + (endTime - currentTime)/1000000000.0 + "s");
             if (currentTime > endTime)
-//            if (root.getNodeCount() > 50)
                 break;
             current = root;
             
@@ -80,14 +74,17 @@ public class MCTSExecutor implements Callable<Boolean> {
                 // Expansion
                 current.expand();
                 
-//                if (current == root && current.getNumChildren() == 1)
-//                    //there is only one possible action - don't spend a lot of time thinking
-//                    endTime = startTime + 1000000000l;
-
-                // Simulation
-                current = current.select(this.playerId);
-                result = current.simulate(this.playerId);
-                simCount++;
+                // only run simulations for nodes that have siblings
+                if (current.getNumChildren() > 1) {
+                    // Simulation
+                    current = current.select(this.playerId);
+                    result = current.simulate(this.playerId);
+                    simCount++;
+                }
+                else {
+                    current = current.select(this.playerId);
+                    result = 0;
+                }
             }
             else {
                 result = current.isWinner(this.playerId)?1:-1;
@@ -95,8 +92,7 @@ public class MCTSExecutor implements Callable<Boolean> {
             // Backpropagation
             current.backpropagate(result);
         }
-//        logger.info("Created " + root.getNodeCount() + " nodes");
-        logger.info("Simulated " + simCount + " nodes");
+        logger.info("Simulated " + simCount + " games - nodes in tree: " + root.size());
         return true;
     }
 

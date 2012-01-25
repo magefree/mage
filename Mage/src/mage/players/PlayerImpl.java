@@ -1228,8 +1228,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         Map<String, Ability> playableActivated = new HashMap<String, Ability>();
 		for (Permanent permanent: game.getBattlefield().getAllActivePermanents(playerId)) {
 			for (ActivatedAbility ability: permanent.getAbilities().getActivatedAbilities(Zone.BATTLEFIELD)) {
-				if (canPlay(ability, available, game))
-					playableActivated.put(ability.toString(), ability);
+                if (!playableActivated.containsKey(ability.toString()))
+                    if (canPlay(ability, available, game))
+                        playableActivated.put(ability.toString(), ability);
 			}
 		}
         playable.addAll(playableActivated.values());
