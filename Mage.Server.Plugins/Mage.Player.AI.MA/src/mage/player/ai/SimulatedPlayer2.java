@@ -227,7 +227,7 @@ public class SimulatedPlayer2 extends ComputerPlayer<SimulatedPlayer2> {
 		// Start with X = {1}
 		for (int i = 1; i < numAvailable; i++) {
 			Ability newAbility = ability.copy();
-			newAbility.addManaCost(new GenericManaCost(i));
+			newAbility.getManaCostsToPay().add(new GenericManaCost(i));
 			allActions.add(newAbility);
 		}
 	}

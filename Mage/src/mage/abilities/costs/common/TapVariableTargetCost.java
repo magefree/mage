@@ -93,7 +93,12 @@ public class TapVariableTargetCost extends CostImpl<TapVariableTargetCost> imple
 		return amountPaid;
 	}
 
-	@Override
+    @Override
+    public void setAmount(int amount) {
+        amountPaid = amount;
+    }
+
+    @Override
 	public void setFilter(FilterMana filter) {
 	}
 

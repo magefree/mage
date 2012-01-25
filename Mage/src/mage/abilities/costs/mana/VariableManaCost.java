@@ -96,7 +96,12 @@ public class VariableManaCost extends ManaCostImpl<VariableManaCost> implements 
 		return payment.count() / multiplier;
 	}
 
-	@Override
+    @Override
+    public void setAmount(int amount) {
+        payment.setColorless(amount);
+    }
+
+    @Override
 	public boolean testPay(Mana testMana) {
 		return true;
 	}

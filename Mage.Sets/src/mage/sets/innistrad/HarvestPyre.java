@@ -128,5 +128,10 @@ class HarvestPyreCost extends CostImpl<HarvestPyreCost> implements VariableCost 
     public HarvestPyreCost copy() {
         return new HarvestPyreCost(this);
     }
+
+    @Override
+    public void setAmount(int amount) {
+        amountPaid = amount;
+    }
         
 }

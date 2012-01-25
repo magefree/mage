@@ -88,7 +88,12 @@ public class PayVariableLoyaltyCost extends CostImpl<PayVariableLoyaltyCost> imp
 		return amountPaid;
 	}
 
-	@Override
+    @Override
+    public void setAmount(int amount) {
+        amountPaid = amount;
+    }
+
+    @Override
 	public void setFilter(FilterMana filter) {
 	}
 

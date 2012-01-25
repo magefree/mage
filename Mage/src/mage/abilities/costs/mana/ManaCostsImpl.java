@@ -28,6 +28,7 @@
 
 package mage.abilities.costs.mana;
 
+import java.util.*;
 import mage.Constants.ColoredManaSymbol;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -38,8 +39,6 @@ import mage.game.Game;
 import mage.players.ManaPool;
 import mage.players.Player;
 import mage.target.Targets;
-
-import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -193,6 +192,13 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         if (!variableCosts.isEmpty())
             amount = variableCosts.get(0).getAmount();
         return amount;
+    }
+
+    @Override
+    public void setX(int x) {
+        List<VariableCost> variableCosts = getVariableCosts();
+        if (!variableCosts.isEmpty())
+            variableCosts.get(0).setAmount(x);
     }
 
     @Override

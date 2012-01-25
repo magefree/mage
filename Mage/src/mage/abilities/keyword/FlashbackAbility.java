@@ -32,8 +32,6 @@ import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileSourceEffect;
@@ -42,29 +40,28 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  * @author nantuko
  */
 public class FlashbackAbility extends ActivatedAbilityImpl<FlashbackAbility> {
 
-	public FlashbackAbility(ManaCosts costs, Constants.TimingRule timingRule) {
-		super(Constants.Zone.GRAVEYARD, new FlashbackEffect(), costs);
+	public FlashbackAbility(Cost cost, Constants.TimingRule timingRule) {
+		super(Constants.Zone.GRAVEYARD, new FlashbackEffect(), cost);
 		this.timing = timingRule;
 		this.usesStack = false;
 		this.addEffect(new CreateDelayedTriggeredAbilityEffect(new FlashbackTriggeredAbility()));
 	}
 
-	@Override
-	public boolean activate(Game game, boolean noMana) {
-		Card card = game.getCard(sourceId);
-		if (card != null) {
-			getEffects().get(0).setTargetPointer(new FixedTarget(card.getId()));
-			return super.activate(game, noMana);
-		}
-		return false;
-	}
+//	@Override
+//	public boolean activate(Game game, boolean noMana) {
+//		Card card = game.getCard(sourceId);
+//		if (card != null) {
+//			getEffects().get(0).setTargetPointer(new FixedTarget(card.getId()));
+//			return super.activate(game, noMana);
+//		}
+//		return false;
+//	}
 
 	public FlashbackAbility(final FlashbackAbility ability) {
 		super(ability);
@@ -109,15 +106,13 @@ class FlashbackEffect extends OneShotEffect<FlashbackEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Card target = (Card) game.getObject(targetPointer.getFirst(source));
-		if (target != null) {
-			Player controller = game.getPlayer(target.getOwnerId());
+		Card card = (Card) game.getObject(source.getSourceId());
+		if (card != null) {
+			Player controller = game.getPlayer(source.getControllerId());
 			if (controller != null) {
-                target.getSpellAbility().getManaCostsToPay().clear();
-                for (Cost cost: source.getManaCostsToPay()) {
-                    target.getSpellAbility().getManaCostsToPay().add((ManaCost) cost.copy());
-                }
-				return controller.cast(target.getSpellAbility(), game, true);
+                int amount = source.getManaCostsToPay().getX();
+                card.getSpellAbility().getManaCostsToPay().setX(amount);
+				return controller.cast(card.getSpellAbility(), game, true);
 			}
 		}
 		return false;
