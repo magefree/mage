@@ -25,8 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
-
+package mage.sets.saviorsofkamigawa;
 
 import java.util.UUID;
 import mage.Constants;
@@ -34,50 +33,59 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.DealsCombatDamageToACreatureTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.SkipNextUntapTargetEffect;
+import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
-import mage.counters.CounterType;
 import mage.filter.Filter;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 
 /**
- * @author nantuko
+ *
+ * @author LevelX
  */
-public class DearlyDeparted extends CardImpl<DearlyDeparted> {
-
-    private static final FilterCreaturePermanent filterHuman = new FilterCreaturePermanent("Human creatures");
-
+public class KashiTribeElite extends CardImpl<KashiTribeElite> {
+        
+    private final static FilterControlledPermanent filter = new FilterControlledPermanent("Legendary Snakes");
+    
     static {
-        filterHuman.getSubtype().add("Human");
-        filterHuman.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.getSupertype().add("Legendary");
+        filter.setScopeSupertype(Filter.ComparisonScope.Any);
+        filter.getSubtype().add("Snake");
+        filter.setScopeSubtype(Filter.ComparisonScope.Any);
     }
 
-    public DearlyDeparted(UUID ownerId) {
-        super(ownerId, 9, "Dearly Departed", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
-        this.expansionSetCode = "ISD";
-        this.subtype.add("Spirit");
+    public KashiTribeElite(UUID ownerId) {
+        super(ownerId, 135, "Kashi-Tribe Elite", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
+        this.expansionSetCode = "SOK";
+        this.subtype.add("Snake");
+        this.subtype.add("Warrior");
 
-        this.color.setWhite(true);
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
+        this.color.setGreen(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
 
-        this.addAbility(FlyingAbility.getInstance());
+        // Legendary Snakes you control have shroud. (They can't be the targets of spells or abilities.)
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(ShroudAbility.getInstance(), Constants.Duration.WhileOnBattlefield, filter, false)));
 
-        // As long as Dearly Departed is in your graveyard, each Human creature you control enters the battlefield with an additional +1/+1 counter on it.
-        Ability ability0 = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.GRAVEYARD, new GainAbilityControlledEffect(ability0, Constants.Duration.OneUse, filterHuman)));
+        // Whenever Kashi-Tribe Elite deals combat damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.
+        Ability ability;
+        ability = new DealsCombatDamageToACreatureTriggeredAbility(new TapTargetEffect("that creature"), false, true);
+        ability.addEffect(new SkipNextUntapTargetEffect("and it"));
+        this.addAbility(ability);
+        
     }
 
-    public DearlyDeparted(final DearlyDeparted card) {
+    public KashiTribeElite(final KashiTribeElite card) {
         super(card);
     }
 
     @Override
-    public DearlyDeparted copy() {
-        return new DearlyDeparted(this);
+    public KashiTribeElite copy() {
+        return new KashiTribeElite(this);
     }
 }

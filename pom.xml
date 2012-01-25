@@ -89,6 +89,16 @@
       </pluginRepository>
   </pluginRepositories>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.sqlite</groupId>
+                <artifactId>sqlite</artifactId>
+                <version>0.5.6</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <properties>
         <mage-version>0.8.2</mage-version>
     </properties>

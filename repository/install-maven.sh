@@ -1,0 +1,1 @@
+mvn install:install-file -DgroupId=org.sqlite -DartifactId=sqlite -Dversion=0.5.6 -Dpackaging=jar -Dfile=./org/sqlite/sqlitejdbc-v056.jar

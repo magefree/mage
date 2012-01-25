@@ -25,53 +25,87 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+
+package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
+import mage.Constants;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author North
+ * @author LevelX
  */
-public class ElderOfLaurels extends CardImpl<ElderOfLaurels> {
-
-    public ElderOfLaurels(UUID ownerId) {
-        super(ownerId, 177, "Elder of Laurels", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "ISD";
+public class KikuNightsFlower extends CardImpl<KikuNightsFlower> {
+    
+    public KikuNightsFlower (UUID ownerId) {
+        super(ownerId, 121, "Kiku, Night's Flower", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{B}");
+        this.expansionSetCode = "CHK";
+        this.supertype.add("Legendary");
         this.subtype.add("Human");
-        this.subtype.add("Advisor");
-
-        this.color.setGreen(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
-
-        // {3}{G}: Target creature gets +X/+X until end of turn, where X is the number of creatures you control.
-        PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent());
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new BoostTargetEffect(amount, amount, Duration.EndOfTurn, true),
-                new ManaCostsImpl("{3}{G}"));
+        this.subtype.add("Assassin");
+	this.color.setBlack(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+        
+        // {2}{B}{B}, {T}: Target creature deals damage to itself equal to its power.
+        Ability ability;
+        ability = new SimpleActivatedAbility(
+                Zone.BATTLEFIELD,
+                new KikuNightsFlowerEffect(), 
+                new ManaCostsImpl("{2}{B}{B}")
+        );
         ability.addTarget(new TargetCreaturePermanent());
+        ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
 
-    public ElderOfLaurels(final ElderOfLaurels card) {
+    public KikuNightsFlower (final KikuNightsFlower card) {
         super(card);
     }
 
     @Override
-    public ElderOfLaurels copy() {
-        return new ElderOfLaurels(this);
+    public KikuNightsFlower copy() {
+        return new KikuNightsFlower(this);
     }
 }
+
+class KikuNightsFlowerEffect extends OneShotEffect<KikuNightsFlowerEffect> {
+
+        public KikuNightsFlowerEffect() {
+            super(Constants.Outcome.Damage);
+            this.staticText = "Target creature deals damage to itself equal to its power";        
+        }
+
+	public KikuNightsFlowerEffect(final KikuNightsFlowerEffect effect) {
+		super(effect);
+	}
+
+	@Override
+	public KikuNightsFlowerEffect copy() {
+		return new KikuNightsFlowerEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		Permanent permanent = game.getPermanent(targetPointer.getFirst(source));
+		if (permanent != null) {
+			permanent.damage(permanent.getPower().getValue(), permanent.getId(), game, true, false);
+			return true;
+		}
+		return false;
+	}
+}
+

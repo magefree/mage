@@ -76,7 +76,8 @@ public class BloodthirstyOgre extends CardImpl<BloodthirstyOgre> {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(new DevotionCounter()),new TapSourceCost()));
         // {T}: Target creature gets -X/-X until end of turn, where X is the number of devotion counters on Bloodthirsty Ogre. Activate this ability only if you control a Demon.
         DynamicValue devotionCounters = new SignInversionDynamicValue(new CountersCount(CounterType.DEVOTION));
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,new BoostTargetEffect(devotionCounters,devotionCounters, Duration.EndOfTurn),new TapSourceCost());
+        Ability ability;
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(devotionCounters,devotionCounters, Duration.EndOfTurn, true),new TapSourceCost());
         ability.addCost(new ControlPermanentCost(filter));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

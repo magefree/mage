@@ -1,0 +1,3 @@
+Before building with Maven, install 3rd party libs to your repository using .bat or .sh file in 
+/repository folder
+

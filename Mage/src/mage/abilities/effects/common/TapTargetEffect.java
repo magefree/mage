@@ -47,6 +47,11 @@ public class TapTargetEffect extends OneShotEffect<TapTargetEffect> {
 		super(Outcome.Tap);
 	}
 
+        public TapTargetEffect(String text) {
+		this();
+                this.staticText = text;
+	}
+
 	public TapTargetEffect(final TapTargetEffect effect) {
 		super(effect);
 	}
@@ -71,12 +76,15 @@ public class TapTargetEffect extends OneShotEffect<TapTargetEffect> {
 
 	@Override
 	public String getText(Mode mode) {
-		Target target = mode.getTargets().get(0);
+                if (staticText.length() > 0)
+                    return "tap " + staticText;
+                
+      		Target target = mode.getTargets().get(0);
 		if (target.getMaxNumberOfTargets() > 1)
-            if (target.getMaxNumberOfTargets() == target.getNumberOfTargets())
-			    return "tap " + target.getNumberOfTargets() + " target " + mode.getTargets().get(0).getTargetName() + "s";
-            else
-                return "tap up to " + target.getMaxNumberOfTargets() + " target " + mode.getTargets().get(0).getTargetName() + "s";
+                        if (target.getMaxNumberOfTargets() == target.getNumberOfTargets())
+                                        return "tap " + target.getNumberOfTargets() + " target " + target.getTargetName() + "s";
+                        else
+                            return "tap up to " + target.getMaxNumberOfTargets() + " target " + target.getTargetName() + "s";
 		else
 			return "tap target " + mode.getTargets().get(0).getTargetName();
 	}

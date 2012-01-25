@@ -69,10 +69,10 @@ public class KondasBanner extends CardImpl<KondasBanner> {
         this.subtype.add("Equipment");
         
         // Creatures that share a color with equipped creature get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new KodasBannerColorBoostEffect()));        
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new KondasBannerColorBoostEffect()));        
 
         // Creatures that share a creature type with equipped creature get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new KodasBannerTypeBoostEffect()));        
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new KondasBannerTypeBoostEffect()));        
         
         // Konda's Banner can be attached only to a legendary creature.
         // Equip {2}
@@ -93,16 +93,16 @@ public class KondasBanner extends CardImpl<KondasBanner> {
     }        
 }
 
-class KodasBannerTypeBoostEffect extends BoostAllEffect  {
+class KondasBannerTypeBoostEffect extends BoostAllEffect  {
 
 	private static final String effectText = "Creatures that share a creature type with equipped creature get +1/+1";
         
-	KodasBannerTypeBoostEffect() {
+	KondasBannerTypeBoostEffect() {
 		super(1,1, Constants.Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false);
 		staticText = effectText;
 	}
 
-	KodasBannerTypeBoostEffect(KodasBannerTypeBoostEffect effect) {
+	KondasBannerTypeBoostEffect(KondasBannerTypeBoostEffect effect) {
 		super(effect);
 	}
 
@@ -113,38 +113,40 @@ class KodasBannerTypeBoostEffect extends BoostAllEffect  {
 	    if (equipment != null && equipment.getAttachedTo() != null)
             {
                 Permanent equipedCreature = game.getPermanent(equipment.getAttachedTo());
-                for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                        if (CardUtil.shareSubtypes(perm, equipedCreature) || perm.getAbilities().contains(ChangelingAbility.getInstance())) {
-            			if (!this.affectedObjectsSet || objects.contains(perm.getId())) {
-					perm.addPower(power.calculate(game, source));
-					perm.addToughness(toughness.calculate(game, source));
-                                }
-                            
-                        }
-		}
-		return true;
+                if (equipedCreature != null) {
+                    for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+                            if (CardUtil.shareSubtypes(perm, equipedCreature) || perm.getAbilities().contains(ChangelingAbility.getInstance())) {
+                                    if (!this.affectedObjectsSet || objects.contains(perm.getId())) {
+                                            perm.addPower(power.calculate(game, source));
+                                            perm.addToughness(toughness.calculate(game, source));
+                                    }
+
+                            }
+                    }
+                    return true;
+                }
             }
             return false;
         }
 
 	@Override
-	public KodasBannerTypeBoostEffect copy() {
-		return new KodasBannerTypeBoostEffect(this);
+	public KondasBannerTypeBoostEffect copy() {
+		return new KondasBannerTypeBoostEffect(this);
 	}
 
 }
 
 
-class KodasBannerColorBoostEffect extends BoostAllEffect  {
+class KondasBannerColorBoostEffect extends BoostAllEffect  {
 
 	private static final String effectText = "Creatures that share a color with equipped creature get +1/+1.";
         
-	KodasBannerColorBoostEffect() {
+	KondasBannerColorBoostEffect() {
 		super(1,1, Constants.Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false);
 		staticText = effectText;
 	}
 
-	KodasBannerColorBoostEffect(KodasBannerColorBoostEffect effect) {
+	KondasBannerColorBoostEffect(KondasBannerColorBoostEffect effect) {
 		super(effect);
 	}
 
@@ -170,8 +172,8 @@ class KodasBannerColorBoostEffect extends BoostAllEffect  {
         }
 
 	@Override
-	public KodasBannerColorBoostEffect copy() {
-		return new KodasBannerColorBoostEffect(this);
+	public KondasBannerColorBoostEffect copy() {
+		return new KondasBannerColorBoostEffect(this);
 	}
 
 }

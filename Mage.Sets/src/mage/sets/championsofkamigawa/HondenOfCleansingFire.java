@@ -58,6 +58,8 @@ public class HondenOfCleansingFire extends CardImpl<HondenOfCleansingFire> {
         this.supertype.add("Legendary");
         this.subtype.add("Shrine");
         this.color.setWhite(true);
+        
+        // At the beginning of your upkeep, you gain 2 life for each Shrine you control.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter, 2)), Constants.TargetController.YOU, false));
     }
 

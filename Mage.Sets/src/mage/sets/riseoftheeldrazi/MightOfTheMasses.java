@@ -51,7 +51,7 @@ public class MightOfTheMasses extends CardImpl<MightOfTheMasses> {
 
         PermanentsOnBattlefieldCount value = new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new BoostTargetEffect(value, value, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(value, value, Duration.EndOfTurn, true));
     }
 
     public MightOfTheMasses(final MightOfTheMasses card) {

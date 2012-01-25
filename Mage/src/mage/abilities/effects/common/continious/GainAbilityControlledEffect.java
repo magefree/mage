@@ -34,6 +34,7 @@ import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.keyword.FlyingAbility;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -104,8 +105,12 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl<GainAbilit
 		StringBuilder sb = new StringBuilder();
 		if (excludeSource)
 			sb.append("Other ");
-		sb.append(filter.getMessage()).append(" you control gain ").append(ability.getRule());
-		sb.append(" ").append(duration.toString());
+		sb.append(filter.getMessage()).append(" you control ");
+                if (duration.equals(Duration.WhileOnBattlefield))
+                    sb.append("have ");
+                else
+                    sb.append("gain ");
+		sb.append(ability.getRule()).append(" ").append(duration.toString());
 		staticText = sb.toString();
 	}
 

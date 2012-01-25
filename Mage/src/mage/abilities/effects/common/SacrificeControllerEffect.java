@@ -25,40 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conflux;
+package mage.abilities.effects.common;
 
-import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
-import mage.abilities.dynamicvalue.common.DomainValue;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
-import mage.cards.CardImpl;
-import mage.target.common.TargetCreaturePermanent;
+import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.filter.FilterPermanent;
+import mage.game.Game;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
- * @author North
+ * @author LevelX
  */
-public class DragDown extends CardImpl<DragDown> {
+public class SacrificeControllerEffect extends SacrificeEffect {
 
-    public DragDown(UUID ownerId) {
-        super(ownerId, 42, "Drag Down", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
-        this.expansionSetCode = "CON";
 
-        this.color.setBlack(true);
+	public SacrificeControllerEffect ( FilterPermanent filter, DynamicValue count, String preText ) {
+		super(filter, count, preText);
+	}
 
-        // Domain - Target creature gets -1/-1 until end of turn for each basic land type among lands you control.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(new DomainValue(-1), new DomainValue(-1), Duration.EndOfTurn, true));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-    }
+        public SacrificeControllerEffect ( FilterPermanent filter, int count, String preText ) {
+                this(filter, new StaticValue(count), preText);
+        }
 
-    public DragDown(final DragDown card) {
-        super(card);
-    }
+	public SacrificeControllerEffect (final SacrificeControllerEffect effect ) {
+		super(effect);
+	}
+	
+	@Override
+	public boolean apply(Game game, Ability source) {
+                this.targetPointer = new FixedTarget(source.getControllerId());
+                return super.apply(game, source);
+	}
 
-    @Override
-    public DragDown copy() {
-        return new DragDown(this);
-    }
+	@Override
+	public SacrificeControllerEffect copy() {
+		return new SacrificeControllerEffect(this);
+	}
 }
+

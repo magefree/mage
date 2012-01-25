@@ -58,7 +58,7 @@ public class ClockworkBeetle extends CardImpl<ClockworkBeetle> {
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), "{this} enters the battlefield with two +1/+1 counters on it"));
-        this.addAbility(new AttacksOrBlocksTriggeredAbility(new ClockworkCondorEffect(), false));
+        this.addAbility(new AttacksOrBlocksTriggeredAbility(new ClockworkBeetleEffect(), false));
     }
 
     public ClockworkBeetle(final ClockworkBeetle card) {
@@ -87,8 +87,8 @@ class ClockworkBeetleEffect extends OneShotEffect<ClockworkBeetleEffect> {
         if (p != null) {
             AtTheEndOfCombatDelayedTriggeredAbility ability = new AtTheEndOfCombatDelayedTriggeredAbility(new RemoveCounterSourceEffect(CounterType.P1P1.createInstance()));
             ability.setSourceId(source.getSourceId());
-			ability.setControllerId(source.getControllerId());
-			game.addDelayedTriggeredAbility(ability);
+            ability.setControllerId(source.getControllerId());
+            game.addDelayedTriggeredAbility(ability);
         }
         return false;
     }

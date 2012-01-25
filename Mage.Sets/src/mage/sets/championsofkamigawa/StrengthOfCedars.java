@@ -59,7 +59,7 @@ public class StrengthOfCedars extends CardImpl<StrengthOfCedars> {
         this.subtype.add("Arcane");
 		this.color.setGreen(true);
         this.getSpellAbility().addEffect(new BoostTargetEffect(new PermanentsOnBattlefieldCount(filter),
-                new PermanentsOnBattlefieldCount(filter), Constants.Duration.EndOfTurn));
+                new PermanentsOnBattlefieldCount(filter), Constants.Duration.EndOfTurn, true));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

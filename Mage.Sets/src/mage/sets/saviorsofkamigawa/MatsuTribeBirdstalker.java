@@ -25,54 +25,62 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.championsofkamigawa;
+package mage.sets.saviorsofkamigawa;
 
 import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.DiscardTargetEffect;
+import mage.abilities.common.DealsCombatDamageToACreatureTriggeredAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.SkipNextUntapTargetEffect;
+import mage.abilities.effects.common.TapTargetEffect;
+import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
+import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
+import mage.abilities.keyword.ReachAbility;
+import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
-import mage.target.common.TargetOpponent;
 
 /**
- * @author Loki
+ *
+ * @author LevelX
  */
-public class HondenOfNightsReach extends CardImpl<HondenOfNightsReach> {
-
-    final static FilterControlledPermanent filter = new FilterControlledPermanent("Shrine");
-
-    static {
-        filter.getSubtype().add("Shrine");
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
-    }
-
-    public HondenOfNightsReach(UUID ownerId) {
-        super(ownerId, 116, "Honden of Night's Reach", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");
-        this.expansionSetCode = "CHK";
-        this.supertype.add("Legendary");
-        this.subtype.add("Shrine");
-        this.color.setBlack(true);
+public class MatsuTribeBirdstalker extends CardImpl<MatsuTribeBirdstalker> {
         
-        // At the beginning of your upkeep, target opponent discards a card for each Shrine you control.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DiscardTargetEffect(new PermanentsOnBattlefieldCount(filter)), Constants.TargetController.YOU, false);
-        ability.addTarget(new TargetOpponent());
+    public MatsuTribeBirdstalker(UUID ownerId) {
+        super(ownerId, 137, "Matsu-Tribe Birdstalker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
+        this.expansionSetCode = "SOK";
+        this.subtype.add("Snake");
+        this.subtype.add("Warrior");
+
+        this.color.setGreen(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // Whenever Kashi-Tribe Elite deals combat damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.
+        Ability ability;
+        ability = new DealsCombatDamageToACreatureTriggeredAbility(new TapTargetEffect("that creature"), false, true);
+        ability.addEffect(new SkipNextUntapTargetEffect("and it"));
         this.addAbility(ability);
+        
+        // {G}: Matsu-Tribe Birdstalker gains reach until end of turn. (It can block creatures with flying.)
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD,
+                new GainAbilitySourceEffect(ReachAbility.getInstance(), Constants.Duration.EndOfTurn),
+                new ManaCostsImpl("{G}")));
     }
 
-    public HondenOfNightsReach(final HondenOfNightsReach card) {
+    public MatsuTribeBirdstalker(final MatsuTribeBirdstalker card) {
         super(card);
     }
 
     @Override
-    public HondenOfNightsReach copy() {
-        return new HondenOfNightsReach(this);
+    public MatsuTribeBirdstalker copy() {
+        return new MatsuTribeBirdstalker(this);
     }
-
 }

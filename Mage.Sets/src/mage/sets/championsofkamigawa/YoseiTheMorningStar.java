@@ -28,23 +28,20 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
-import mage.Constants.PhaseStep;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.TapTargetEffect;
+import mage.abilities.effects.common.SkipNextPlayerUntapStepEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.turn.TurnMod;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
@@ -69,7 +66,7 @@ public class YoseiTheMorningStar extends CardImpl<YoseiTheMorningStar> {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Yosei, the Morning Star dies, target player skips his or her next untap step. Tap up to five target permanents that player controls.
-        Ability ability = new DiesTriggeredAbility(new SkipNextUntapStepTargetEffect());
+        Ability ability = new DiesTriggeredAbility(new SkipNextPlayerUntapStepEffect());
         ability.addTarget(new TargetPlayer());
         ability.addTarget(new YoseiTheMorningStarTarget());
         ability.addEffect(new YoseiTheMorningStarTapEffect());
@@ -84,33 +81,6 @@ public class YoseiTheMorningStar extends CardImpl<YoseiTheMorningStar> {
     public YoseiTheMorningStar copy() {
         return new YoseiTheMorningStar(this);
     }
-}
-
-class SkipNextUntapStepTargetEffect extends OneShotEffect<SkipNextUntapStepTargetEffect> {
-
-	public SkipNextUntapStepTargetEffect() {
-		super(Constants.Outcome.Detriment);
-		staticText = "target player skips his or her next untap step";
-	}
-
-	public SkipNextUntapStepTargetEffect(SkipNextUntapStepTargetEffect effect) {
-		super(effect);
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		UUID playerId = source.getFirstTarget();
-		if (playerId != null) {
-			game.getState().getTurnMods().add(new TurnMod(playerId, PhaseStep.UNTAP));
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public SkipNextUntapStepTargetEffect copy() {
-		return new SkipNextUntapStepTargetEffect();
-	}
 }
 
  class YoseiTheMorningStarTarget extends TargetPermanent {

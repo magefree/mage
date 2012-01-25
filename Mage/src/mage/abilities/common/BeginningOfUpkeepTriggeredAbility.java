@@ -42,7 +42,7 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl<Begi
                         }
                         return true;
                     }
-					break;
+		    break;
                 case ANY:
                     for (Effect effect : this.getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
