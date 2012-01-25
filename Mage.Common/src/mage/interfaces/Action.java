@@ -1,11 +1,17 @@
 package mage.interfaces;
 
+import mage.MageException;
+
 /**
- * Light weight action interface
+ * Light weight action interface.
  * For executing actions without any context.
  *
- * @author ayratn
+ * @author ayratn, noxx
  */
 public interface Action {
-    public void execute();
+
+    /**
+     * Executes action.
+     */
+    public void execute() throws MageException;
 }

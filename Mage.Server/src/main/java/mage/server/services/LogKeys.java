@@ -22,4 +22,8 @@ public interface LogKeys {
     public static final String KEY_TABLE_CREATED = "tableCreated";
 
     public static final String KEY_TOURNAMENT_TABLE_CREATED = "tournamentTableCreated";
+
+    public static final String KEY_WRONG_VERSION = "wrongVersion";
+
+    public static final String KEY_NOT_ADMIN = "notAdminRestrictedOperation";
 }

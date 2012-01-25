@@ -1,8 +1,9 @@
 package mage.interfaces;
 
+import mage.MageException;
+
 /**
- * /**
- * Light weight action interface
+ * Light weight action interface.
  * For executing actions without any context.
  *
  * @param <T> Type to return as a result of execution.
@@ -15,10 +16,10 @@ public interface ActionWithResult<T> {
      * Executes and returns result.
      * @return
      */
-    public T execute();
+    public T execute() throws MageException;
 
     /**
-     * Returns negative result specific for type <T>.
+     * Defines negative result specific for type <T>.
      * @return
      */
     public T negativeResult();
