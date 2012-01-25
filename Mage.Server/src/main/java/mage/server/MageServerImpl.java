@@ -746,6 +746,8 @@ public class MageServerImpl implements MageServer {
                                 } catch (MageException me) {
                                     throw new RuntimeException(me);
                                 }
+                            } else {
+                                LogServiceImpl.instance.log(LogKeys.KEY_NOT_VALID_SESSION_INTERNAL, actionName, sessionId);
                             }
 						}
 					}
@@ -769,6 +771,7 @@ public class MageServerImpl implements MageServer {
         return executeWithResult(actionName, sessionId, action);
     }
 
+    //TODO: also run in threads with future task
     protected <T> T executeWithResult(String actionName, final String sessionId, final ActionWithResult<T> action) throws MageException {
         if (SessionManager.getInstance().isValidSession(sessionId)) {
             try {

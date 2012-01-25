@@ -202,7 +202,11 @@ public class Session {
 
     private void runEmbeddedMageServer() {
         if (embeddedMageServerAction != null) {
-            embeddedMageServerAction.execute();
+            try {
+                embeddedMageServerAction.execute();
+            } catch (MageException e) {
+                logger.error(e);
+            }
         }
     }
 
