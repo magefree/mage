@@ -42,6 +42,7 @@ import mage.remote.MageVersionException;
 import mage.server.draft.DraftManager;
 import mage.server.game.*;
 import mage.server.services.LogKeys;
+import mage.server.services.impl.FeedbackServiceImpl;
 import mage.server.services.impl.LogServiceImpl;
 import mage.server.tournament.TournamentFactory;
 import mage.server.tournament.TournamentManager;
@@ -61,7 +62,7 @@ import java.util.concurrent.ExecutorService;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, noxx
  */
 public class MageServerImpl implements MageServer {
 
@@ -706,6 +707,19 @@ public class MageServerImpl implements MageServer {
              }
         });
 	}
+
+    @Override
+    public void sendFeedbackMessage(final String sessionId, final String username, final String title, final String type, final String message, final String email) throws MageException {
+        if (title != null && message != null) {
+            execute("sendFeedbackMessage", sessionId, new Action() {
+                public void execute() {
+                    String host = SessionManager.getInstance().getSession(sessionId).getHost();
+                    FeedbackServiceImpl.instance.feedback(username, title, type, message, email, host);
+                    LogServiceImpl.instance.log(LogKeys.KEY_FEEDBACK_ADDED, sessionId, username, host);
+                }
+            });
+        }
+    }
 
     public void sendBroadcastMessage(final String sessionId, final String message) throws MageException {
         if (message != null) {

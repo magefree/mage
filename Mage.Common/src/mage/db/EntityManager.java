@@ -1,5 +1,6 @@
 package mage.db;
 
+import mage.db.model.Feedback;
 import mage.db.model.Log;
 import org.apache.log4j.Logger;
 
@@ -19,12 +20,18 @@ public enum EntityManager implements Storage {
 
     private static final String MAGE_JDBC_URL = "jdbc:sqlite:db/mage.db";
 
+    private static final String MAGE_JDBC_URL_FEEDBACK_DB = "jdbc:sqlite:db/feedback.db";
+
     private static String QUERY_SAVE_LOG = "insert into logs values (?, ?, ?, ?, ?, ?, ?, ?)";
     private static String QUERY_GET_ALL_LOGS = "select * from logs";
+
+    private static String QUERY_SAVE_FEEDBACK = "insert into feedbacks values (?, ?, ?, ?, ?, ?, ?, ?)";
+    private static String QUERY_GET_ALL_FEEDBACKS = "select * from feedbacks";
 
     static {
         try {
             init();
+            initFeedbackDB();
         } catch (Exception e) {
             log.fatal(e);
             e.printStackTrace();
@@ -69,6 +76,10 @@ public enum EntityManager implements Storage {
         }
     }
 
+    /**
+     * Get all logs
+     * @return
+     */
     @Override
     public List<Log> getAllLogs() {
         List<Log> logs = new ArrayList<Log>();
@@ -88,7 +99,6 @@ public enum EntityManager implements Storage {
                         }
                         args.add(arg);
                     }
-                    log.setArguments(args);
                     logs.add(log);
                 }
                 rs.close();
@@ -107,6 +117,86 @@ public enum EntityManager implements Storage {
     }
 
     /**
+     * Inserts feedback entry to DB.
+     *
+     *
+     * @param username
+     * @param title
+     * @param type
+     * @param message
+     * @param email
+     * @param host
+     * @param created
+     * @throws SQLException
+     */
+    public void insertFeedback(String username, String title, String type, String message, String email, String host, java.util.Date created) throws SQLException {
+        Connection conn = DriverManager.getConnection(MAGE_JDBC_URL_FEEDBACK_DB);
+
+        try {
+            PreparedStatement prep = conn.prepareStatement(QUERY_SAVE_FEEDBACK);
+
+            prep.setString(1, username);
+            prep.setString(2, title);
+            prep.setString(3, type);
+            prep.setString(4, message);
+            prep.setString(5, email);
+            prep.setString(6, host);
+            prep.setDate(7, new java.sql.Date(created.getTime()));
+            prep.setString(8, "new");
+
+            prep.execute();
+        } finally {
+            try {
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+                // swallow
+            }
+        }
+    }
+
+    /**
+     * Get all feedbacks
+     * @return
+     */
+    @Override
+    public List<Feedback> getAllFeedbacks() {
+        List<Feedback> feedbacks = new ArrayList<Feedback>();
+
+        try {
+            Connection conn = DriverManager.getConnection(MAGE_JDBC_URL_FEEDBACK_DB);
+            try {
+                Statement stat = conn.createStatement();
+                ResultSet rs = stat.executeQuery(QUERY_GET_ALL_FEEDBACKS);
+                while (rs.next()) {
+                    Feedback feedback = new Feedback();
+
+                    feedback.setUsername(rs.getString(1));
+                    feedback.setTitle(rs.getString(2));
+                    feedback.setType(rs.getString(3));
+                    feedback.setMessage(rs.getString(4));
+                    feedback.setEmail(rs.getString(5));
+                    feedback.setHost(rs.getString(6));
+                    feedback.setCreatedDate(rs.getDate(7));
+                    feedback.setStatus(rs.getString(8));
+
+                    feedbacks.add(feedback);
+                }
+                rs.close();
+            } finally {
+                try {
+                    if (conn != null) conn.close();
+                } catch (Exception e) {
+                    // swallow
+                }
+            }
+        } catch (SQLException e) {
+            log.fatal("SQL Exception: ", e);
+        }
+
+        return feedbacks;
+    }
+
+    /**
      * Inits database. Creates tables if they don't exist.
      *
      * @throws Exception
@@ -119,6 +209,22 @@ public enum EntityManager implements Storage {
             Statement stat = conn.createStatement();
             stat.executeUpdate("create table if not exists users (login, password, status);");
             stat.executeUpdate("create table if not exists logs (key, created_dt, arg0, arg1, arg2, arg3, arg4, arg5);");
+        } finally {
+            try {
+                conn.close();
+            } catch (Exception e) {
+                // swallow
+            }
+        }
+    }
+
+    protected static void initFeedbackDB() throws Exception {
+        Class.forName("org.sqlite.JDBC");
+        checkDBFolderExistance();
+        Connection conn = DriverManager.getConnection(MAGE_JDBC_URL_FEEDBACK_DB);
+        try {
+            Statement stat = conn.createStatement();
+            stat.executeUpdate("create table if not exists feedbacks (username, title, type, message, email, host, created_dt, status);");
         } finally {
             try {
                 conn.close();

@@ -28,4 +28,6 @@ public interface LogKeys {
     public static final String KEY_WRONG_VERSION = "wrongVersion";
 
     public static final String KEY_NOT_ADMIN = "notAdminRestrictedOperation";
+
+    public static final String KEY_FEEDBACK_ADDED = "feedbackAdded";
 }

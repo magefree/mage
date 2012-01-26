@@ -125,4 +125,7 @@ public interface MageServer {
 
 	// messages of the day
 	public Object getServerMessagesCompressed(String sessionId) throws MageException;
+
+    // feedback
+    public void sendFeedbackMessage(String sessionId, String username, String title, String type, String message, String email) throws MageException;
 }
