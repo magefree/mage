@@ -1,5 +1,5 @@
 /*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *  Copyright 2012 BetaSteward_at_googlemail.com. All rights reserved.
  * 
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
@@ -40,8 +40,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
- * @author Backfir3
+ * @author Backfir3, noxx
  */
 public class SetToughnessSourceEffect extends ContinuousEffectImpl<SetToughnessSourceEffect> {
 
@@ -51,41 +50,40 @@ public class SetToughnessSourceEffect extends ContinuousEffectImpl<SetToughnessS
     public SetToughnessSourceEffect(DynamicValue amount, Duration duration) {
         super(duration, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
         this.amount = amount;
-	staticText = "{this}'s toughness are each equal to the number of " + amount.getMessage();
+        staticText = "{this}'s toughness is equal to the number of " + amount.getMessage();
     }
 
     public SetToughnessSourceEffect(int power, int toughness, Duration duration) {
         super(duration, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
         this.toughness = toughness;
-	staticText = "{this}'s toughness is " + power + "/" + toughness;
+        staticText = "{this}'s toughness is " + toughness;
     }
 
     public SetToughnessSourceEffect(final SetToughnessSourceEffect effect) {
-	super(effect);
-	this.amount = effect.amount;
+        super(effect);
+        this.amount = effect.amount;
         this.toughness = effect.toughness;
     }
 
-	@Override
-	public SetToughnessSourceEffect copy() {
-		return new SetToughnessSourceEffect(this);
-	}
+    @Override
+    public SetToughnessSourceEffect copy() {
+        return new SetToughnessSourceEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-            Permanent target = game.getPermanent(source.getSourceId());
-            if (target != null) {
-                if (amount != null) {
-                    int value = amount.calculate(game, source);
-                    target.getToughness().setValue(value);
-                    return true;
-                }
-                else {
-                    if (toughness != Integer.MIN_VALUE)
-                        target.getToughness().setValue(toughness);
-                }
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent target = game.getPermanent(source.getSourceId());
+        if (target != null) {
+            if (amount != null) {
+                int value = amount.calculate(game, source);
+                target.getToughness().setValue(value);
+                return true;
+            } else {
+                if (toughness != Integer.MIN_VALUE)
+                    target.getToughness().setValue(toughness);
             }
-            return false;
-	}
+        }
+        return false;
+    }
 
 }
