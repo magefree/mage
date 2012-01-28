@@ -310,26 +310,26 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
 
     @Override
     public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
-        if (this.isHuman())
+//        if (this.isHuman())
             return chooseRandomTarget(target, source, game);
-        return super.chooseTarget(outcome, target, source, game);
+//        return super.chooseTarget(outcome, target, source, game);
     }
 
     @Override
     public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
-        if (this.isHuman()) {
+//        if (this.isHuman()) {
             if (cards.isEmpty())
                 return !target.isRequired();
             Card card = cards.getRandom(game);
             target.addTarget(card.getId(), source, game);
             return true;
-        }
-        return super.chooseTarget(outcome, cards, target, source, game);
+//        }
+//        return super.chooseTarget(outcome, cards, target, source, game);
     }
 
     @Override
     public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
-        if (this.isHuman()) {
+//        if (this.isHuman()) {
             Set<UUID> possibleTargets = target.possibleTargets(source==null?null:source.getSourceId(), playerId, game);
             if (possibleTargets.isEmpty())
                 return !target.isRequired();
@@ -350,8 +350,8 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
             }
             target.addTarget(targetId, rnd.nextInt(target.getAmountRemaining()) + 1, source, game);
             return true;
-        }
-        return super.chooseTargetAmount(outcome, target, source, game);
+//        }
+//        return super.chooseTargetAmount(outcome, target, source, game);
     }
 
     @Override

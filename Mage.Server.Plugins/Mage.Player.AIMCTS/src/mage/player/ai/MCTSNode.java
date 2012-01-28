@@ -61,6 +61,7 @@ public class MCTSNode {
     private List<MCTSNode> children = new ArrayList<MCTSNode>();
     private Ability action;
     private Game game;
+    private Combat combat;
     private String stateValue;
     private UUID playerId;
     private boolean terminal = false;
@@ -85,8 +86,9 @@ public class MCTSNode {
         nodeCount++;
     }
     
-    protected MCTSNode(MCTSNode parent, Game game) {
+    protected MCTSNode(MCTSNode parent, Game game, Combat combat) {
         this.game = game;
+        this.combat = combat;
         this.stateValue = game.getState().getValue(false, game);
         this.terminal = game.isGameOver();
         this.parent = parent;
@@ -147,7 +149,6 @@ public class MCTSNode {
                     sim.resume();
                     children.add(new MCTSNode(this, sim, ability));
                 }
-                game = null;
                 break;
             case SELECT_ATTACKERS:
 //                logger.info("Select attackers:" + player.getName());
@@ -160,7 +161,7 @@ public class MCTSNode {
                         simPlayer.declareAttacker(attackerId, defenderId, sim);
                     }
                     sim.resume();
-                    children.add(new MCTSNode(this, sim));
+                    children.add(new MCTSNode(this, sim, sim.getCombat()));
                 }
                 break;
             case SELECT_BLOCKERS:
@@ -178,10 +179,11 @@ public class MCTSNode {
                         }
                     }
                     sim.resume();
-                    children.add(new MCTSNode(this, sim));
+                    children.add(new MCTSNode(this, sim, sim.getCombat()));
                 }
                 break;
         }
+        game = null;
     }
         
     public int simulate(UUID playerId) {
@@ -269,7 +271,7 @@ public class MCTSNode {
     }
     
     public Combat getCombat() {
-        return game.getCombat();
+        return combat;
     }
     
     public int getNodeCount() {
@@ -340,9 +342,11 @@ public class MCTSNode {
     }
 
     public boolean isWinner(UUID playerId) {
-        Player player = game.getPlayer(playerId);
-        if (player != null && player.hasWon())
-            return true;
+        if (game != null) {
+            Player player = game.getPlayer(playerId);
+            if (player != null && player.hasWon())
+                return true;
+        }
         return false;
     }
 
@@ -399,7 +403,7 @@ public class MCTSNode {
                     }
                 }
                 else {
-                    if (mergeChild.game.getCombat().getValue().equals(child.game.getCombat().getValue())) {
+                    if (mergeChild.combat.getValue().equals(child.combat.getValue())) {
                         if (!mergeChild.stateValue.equals(child.stateValue)) {
                             logger.info("mismatched merge states");
                             mergeChildren.remove(mergeChild);
@@ -421,18 +425,18 @@ public class MCTSNode {
         }
     }
     
-    public void print(int depth) {
-        String indent = String.format("%1$-" + depth + "s", "");
-        StringBuilder sb = new StringBuilder();
-        MCTSPlayer player = (MCTSPlayer) game.getPlayer(playerId);
-        sb.append(indent).append(player.getName()).append(" ").append(visits).append(":").append(wins).append(" - ");
-        if (action != null)
-            sb.append(action.toString());
-        System.out.println(sb.toString());
-        for (MCTSNode child: children) {
-            child.print(depth + 1);
-        }
-    }
+//    public void print(int depth) {
+//        String indent = String.format("%1$-" + depth + "s", "");
+//        StringBuilder sb = new StringBuilder();
+//        MCTSPlayer player = (MCTSPlayer) game.getPlayer(playerId);
+//        sb.append(indent).append(player.getName()).append(" ").append(visits).append(":").append(wins).append(" - ");
+//        if (action != null)
+//            sb.append(action.toString());
+//        System.out.println(sb.toString());
+//        for (MCTSNode child: children) {
+//            child.print(depth + 1);
+//        }
+//    }
     
     public int size() {
         int num = 1;
