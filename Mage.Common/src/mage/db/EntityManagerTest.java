@@ -1,5 +1,6 @@
 package mage.db;
 
+import mage.db.model.Feedback;
 import mage.db.model.Log;
 
 import java.text.DateFormat;
@@ -28,6 +29,15 @@ public class EntityManagerTest {
             }
             System.out.println("]");
             System.out.println("   --------------");
+        }
+
+        System.out.println("********************************");
+
+        List<Feedback> feedbackList = EntityManager.instance.getAllFeedbacks();
+        System.out.println("feedbacks found: " + feedbackList.size());
+        for (Feedback feedback : feedbackList) {
+            System.out.println(feedback.toString());
+            System.out.println("--------------");
         }
     }
 }

@@ -252,6 +252,18 @@ public class Session {
 			client.showError("Network error.  You have been disconnected");
 	}
 
+    public synchronized boolean sendFeedback(String title, String type, String message, String email) {
+        if (isConnected()) {
+            try {
+                server.sendFeedbackMessage(sessionId, connection.getUsername(), title, type, message, email);
+                return true;
+            } catch (MageException e) {
+                logger.error(e);
+            }
+        }
+        return false;
+    }
+
 	class CallbackHandler implements InvokerCallbackHandler {
 		@Override
 		public void handleCallback(Callback callback) throws HandleCallbackException {
