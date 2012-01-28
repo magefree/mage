@@ -1,3 +1,3 @@
 #!/bin/sh
 
-java -Djava.security.policy=./config/security.policy -Djava.util.logging.config.file=./config/logging.config -Dlog4j.configuration=file:./config/log4j.properties -jar ./lib/Mage-Server-${project.version}.jar -Xms256M -Xmx512M
+java -Djava.security.policy=./config/security.policy -Djava.util.logging.config.file=./config/logging.config -Dlog4j.configuration=file:./config/log4j.properties -jar ./lib/mage-server-${project.version}.jar -Xms256M -Xmx512M
