@@ -253,6 +253,7 @@ public class FeedbackDialog extends javax.swing.JDialog {
         if (MageFrame.getSession().sendFeedback(title, type, message, email)) {
             JOptionPane.showMessageDialog(null, "Feedback was sent. Thank you!", "Success", JOptionPane.INFORMATION_MESSAGE);
             reset();
+            dialog.setVisible(false);
         } else {
             JOptionPane.showMessageDialog(null, "Couldn't sent feedback.", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -278,7 +279,7 @@ public class FeedbackDialog extends javax.swing.JDialog {
     }
 
     private void reset() {
-		jTabbedPane1.setSelectedIndex(0);
+	    cbFeedbackType.setSelectedIndex(0);
         txtIdeaTitle.setText("");
         txtFeedbackMessage.setText("");
         txtEmail.setText("");
