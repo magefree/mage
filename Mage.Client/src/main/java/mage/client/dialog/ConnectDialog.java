@@ -372,7 +372,7 @@ public class ConnectDialog extends MageDialog {
     private void findPublicServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         BufferedReader in = null;
         try {
-            URL serverListURL = new URL("http://78.129.251.125/files/server-list.txt");
+            URL serverListURL = new URL("http://download.magefree.com/files/server-list.txt");
 
             Connection.ProxyType configProxyType = Connection.ProxyType.valueByText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_TYPE, "None"));
 
