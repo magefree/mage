@@ -5,6 +5,7 @@ Magic 2012|magic2012|
 Planechase|planechase|
 Duel Decks: Elspeth vs. Tezzeret|elspethvstezzeret|
 Tempest|tempest|
+Urza's Saga|urzassaga|
 Invasion|invasion|
 Planeshift|planeshift|
 Apocalypse|apocalypse|
