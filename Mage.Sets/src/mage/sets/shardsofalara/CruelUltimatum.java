@@ -34,16 +34,13 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DiscardTargetEffect;
-import mage.abilities.effects.common.DrawCardEffect;
-import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.LoseLifeTargetEffect;
-import mage.abilities.effects.common.SacrificeEffect;
+import mage.abilities.effects.common.*;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
+import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetOpponent;
 
@@ -67,9 +64,8 @@ public class CruelUltimatum extends CardImpl<CruelUltimatum> {
         this.getSpellAbility().addEffect(new DiscardTargetEffect(3));
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(5));
 
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
         this.getSpellAbility().addEffect(new CruelUltimatumEffect());
-        this.getSpellAbility().addEffect(new DrawCardEffect(3));
+        this.getSpellAbility().addEffect(new DrawCardControllerEffect(3));
         this.getSpellAbility().addEffect(new GainLifeEffect(5));
     }
 
@@ -87,6 +83,7 @@ class CruelUltimatumEffect extends OneShotEffect<CruelUltimatumEffect> {
 
     public CruelUltimatumEffect() {
         super(Outcome.ReturnToHand);
+        this.staticText = "return a creature card from your graveyard to your hand";
     }
 
     public CruelUltimatumEffect(final CruelUltimatumEffect effect) {
@@ -100,9 +97,13 @@ class CruelUltimatumEffect extends OneShotEffect<CruelUltimatumEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(source.getTargets().get(1).getFirstTarget());
-        if (card != null) {
-            return card.moveToZone(Zone.HAND, source.getId(), game, true);
+        Player player = game.getPlayer(source.getControllerId());
+        TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard"));
+        if (player != null && player.choose(Outcome.ReturnToHand, target, source.getId(), game)) {
+            Card card = game.getCard(target.getFirstTarget());
+            if (card != null) {
+                return card.moveToZone(Zone.HAND, source.getId(), game, true);
+            }
         }
         return false;
     }

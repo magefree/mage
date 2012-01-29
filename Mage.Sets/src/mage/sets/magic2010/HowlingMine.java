@@ -28,20 +28,17 @@
 
 package mage.sets.magic2010;
 
+import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.DrawCardEffect;
+import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.target.TargetPlayer;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -68,7 +65,7 @@ public class HowlingMine extends CardImpl<HowlingMine> {
 class HowlingMineAbility extends TriggeredAbilityImpl<HowlingMineAbility> {
 
 	public HowlingMineAbility() {
-		super(Zone.BATTLEFIELD, new DrawCardEffect(1));
+		super(Zone.BATTLEFIELD, new DrawCardTargetEffect(1));
 	}
 
 	public HowlingMineAbility(final HowlingMineAbility ability) {
@@ -83,9 +80,7 @@ class HowlingMineAbility extends TriggeredAbilityImpl<HowlingMineAbility> {
 	@Override
 	public boolean checkTrigger(GameEvent event, Game game) {
 		if (event.getType() == EventType.DRAW_STEP_PRE) {
-			List<UUID> targets = new ArrayList<UUID>();
-			targets.add(event.getPlayerId());
-			this.getEffects().get(0).setValue("players", targets);
+            this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
 			return true;
 		}
 		return false;

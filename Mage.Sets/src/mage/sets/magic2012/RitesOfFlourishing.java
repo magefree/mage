@@ -27,20 +27,18 @@
  */
 package mage.sets.magic2012;
 
-import mage.Constants;
+import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.DrawCardEffect;
+import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.continious.PlayAdditionalLandsAllEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  * @author nantuko
@@ -57,7 +55,7 @@ public class RitesOfFlourishing extends CardImpl<RitesOfFlourishing> {
 		this.addAbility(new RitesOfFlourishingAbility());
 
 		// Each player may play an additional land on each of his or her turns.
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new PlayAdditionalLandsAllEffect()));
+		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayAdditionalLandsAllEffect()));
 	}
 
 	public RitesOfFlourishing(final RitesOfFlourishing card) {
@@ -73,7 +71,7 @@ public class RitesOfFlourishing extends CardImpl<RitesOfFlourishing> {
 class RitesOfFlourishingAbility extends TriggeredAbilityImpl<RitesOfFlourishingAbility> {
 
 	public RitesOfFlourishingAbility() {
-		super(Constants.Zone.BATTLEFIELD, new DrawCardEffect(1));
+		super(Zone.BATTLEFIELD, new DrawCardTargetEffect(1));
 	}
 
 	public RitesOfFlourishingAbility(final RitesOfFlourishingAbility ability) {
@@ -88,9 +86,7 @@ class RitesOfFlourishingAbility extends TriggeredAbilityImpl<RitesOfFlourishingA
 	@Override
 	public boolean checkTrigger(GameEvent event, Game game) {
 		if (event.getType() == GameEvent.EventType.DRAW_STEP_PRE) {
-			List<UUID> targets = new ArrayList<UUID>();
-			targets.add(event.getPlayerId());
-			this.getEffects().get(0).setValue("players", targets);
+			this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
 			return true;
 		}
 		return false;
