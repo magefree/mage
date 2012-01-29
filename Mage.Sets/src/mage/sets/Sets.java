@@ -75,6 +75,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
         this.addSet(BetrayersOfKamigawa.getInstance());
         this.addSet(ChampionsOfKamigawa.getInstance());
         this.addSet(Conflux.getInstance());
+        this.addSet(DarkAscension.getInstance());
         this.addSet(Darksteel.getInstance());
         this.addSet(Dissension.getInstance());
         this.addSet(ElspethvsTezzeret.getInstance());

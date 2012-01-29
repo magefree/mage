@@ -20,6 +20,7 @@ Champions of Kamigawa|CHK|
 Chronicles|CHR|
 Conflux|CON|
 Coldsnap|CSP|
+Dark Ascension|DKA|
 Darksteel|DST|
 Dissension|DIS|
 Deckmasters|DKM|

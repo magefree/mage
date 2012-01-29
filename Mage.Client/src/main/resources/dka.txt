@@ -1,0 +1,171 @@
+1|Archangel's Light
+2|Bar the Door
+3|Break of Day
+4|Burden of Guilt
+5|Curse of Exhaustion
+6|Elgaud Inquisitor
+7|Faith's Shield
+8|Gather the Townsfolk
+9|Gavony Ironwright
+10|Hollowhenge Spirit
+11|Increasing Devotion
+12|Lingering Souls
+13a|Loyal Cathar
+13b|Unhallowed Cathar
+14|Midnight Guard
+15|Niblis of the Mist
+16|Niblis of the Urn
+17|Ray of Revelation
+18|Requiem Angel
+19|Sanctuary Cat
+20|Seance
+21|Silverclaw Griffin
+22|Skillful Lunge
+23|Sudden Disappearance
+24|Thalia, Guardian of Thraben
+25|Thraben Doomsayer
+26|Thraben Heretic
+27|Artful Dodge
+28|Beguiler of Wills
+29|Bone to Ash
+30|Call to the Kindred
+31|Chant of the Skifsang
+32|Chill of Foreboding
+33|Counterlash
+34|Curse of Echoes
+35|Divination
+36|Dungeon Geists
+37|Geralf's Mindcrusher
+38|Griptide
+39|Havengul Runebinder
+40|Headless Skaab
+41|Increasing Confusion
+42|Mystic Retrieval
+43|Nephalia Seakite
+44|Niblis of the Breath
+45|Relentless Skaabs
+46|Saving Grasp
+47|Screeching Skaab
+48|Secrets of the Dead
+49|Shriekgeist
+50a|Soul Seizer
+50b|Ghastly Haunting
+51|Stormbound Geist
+52|Thought Scour
+53|Tower Geist
+54|Black Cat
+55a|Chosen of Markov
+55b|Markov's Servant
+56|Curse of Misfortunes
+57|Curse of Thirst
+58|Deadly Allure
+59|Death's Caress
+60|Falkenrath Torturer
+61|Farbog Boneflinger
+62|Fiend of the Shadows
+63|Geralf's Messenger
+64|Gravecrawler
+65|Gravepurge
+66|Gruesome Discovery
+67|Harrowing Journey
+68|Highborn Ghoul
+69|Increasing Ambition
+70|Mikaeus, the Unhallowed
+71a|Ravenous Demon
+71b|Archdemon of Greed
+72|Reap the Seagraf
+73|Sightless Ghoul
+74|Skirsdag Flayer
+75|Spiteful Shadows
+76|Tragic Slip
+77|Undying Evil
+78|Vengeful Vampire
+79|Wakedancer
+80|Zombie Apocalypse
+81a|Afflicted Deserter
+81b|Werewolf Ransacker
+82|Alpha Brawl
+83|Blood Feud
+84|Burning Oil
+85|Curse of Bloodletting
+86|Erdwal Ripper
+87|Faithless Looting
+88|Fires of Undeath
+89|Flayer of the Hatebound
+90|Fling
+91|Forge Devil
+92|Heckling Fiends
+93|Hellrider
+94a|Hinterland Hermit
+94b|Hinterland Scourge
+95|Increasing Vengeance
+96|Markov Blademaster
+97|Markov Warlord
+98a|Mondronen Shaman
+98b|Tovolar's Magehunter
+99|Moonveil Dragon
+100|Nearheath Stalker
+101|Pyreheart Wolf
+102|Russet Wolves
+103|Scorch the Fields
+104|Shattered Perception
+105|Talons of Falkenrath
+106|Torch Fiend
+107|Wrack with Madness
+108|Briarpack Alpha
+109|Clinging Mists
+110|Crushing Vines
+111|Dawntreader Elk
+112|Deranged Outcast
+113|Favor of the Woods
+114|Feed the Pack
+115|Ghoultree
+116|Gravetiller Wurm
+117|Grim Flowering
+118|Hollowhenge Beast
+119|Hunger of the Howlpack
+120|Increasing Savagery
+121|Kessig Recluse
+122a|Lambholt Elder
+122b|Silverpelt Werewolf
+123|Lost in the Woods
+124|Predator Ooze
+125a|Scorned Villager
+125b|Moonscarred Werewolf
+126|Somberwald Dryad
+127|Strangleroot Geist
+128|Tracker's Instincts
+129|Ulvenwald Bear
+130|Village Survivors
+131|Vorapede
+132|Wild Hunger
+133a|Wolfbitten Captive
+133b|Krallenhorde Killer
+134|Young Wolf
+135|Diregraf Captain
+136|Drogskol Captain
+137|Drogskol Reaver
+138|Falkenrath Aristocrat
+139|Havengul Lich
+140a|Huntmaster of the Fells
+140b|Ravager of the Fells
+141|Immerwolf
+142|Sorin, Lord of Innistrad
+143|Stromkirk Captain
+144|Altar of the Lost
+145|Avacyn's Collar
+146a|Chalice of Life
+146b|Chalice of Death
+147a|Elbrus, the Binding Blade
+147b|Withengar Unbound
+148|Executioner's Hood
+149|Grafdigger's Cage
+150|Heavy Mattock
+151|Helvault
+152|Jar of Eyeballs
+153|Warden of the Wall
+154|Wolfhunter's Quiver
+155|Evolving Wilds
+156|Grim Backwoods
+157|Haunted Fengraf
+158|Vault of the Archangel
