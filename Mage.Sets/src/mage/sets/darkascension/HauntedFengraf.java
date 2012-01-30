@@ -25,21 +25,22 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.sets.darkascension;
 
 import java.util.Random;
 import java.util.UUID;
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.MorbidCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreatureCard;
@@ -50,49 +51,45 @@ import mage.players.Player;
  *
  * @author North
  */
-public class WoodlandSleuth extends CardImpl<WoodlandSleuth> {
+public class HauntedFengraf extends CardImpl<HauntedFengraf> {
 
-    private final static String staticText = "Morbid - When {this} enters the battlefield, if a creature died this turn, return a creature card at random from your graveyard to your hand.";
+    public HauntedFengraf(UUID ownerId) {
+        super(ownerId, 157, "Haunted Fengraf", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
+        this.expansionSetCode = "DKA";
 
-    public WoodlandSleuth(UUID ownerId) {
-        super(ownerId, 210, "Woodland Sleuth", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.expansionSetCode = "ISD";
-        this.subtype.add("Human");
-        this.subtype.add("Scout");
-
-        this.color.setGreen(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
-
-        // Morbid - When Woodland Sleuth enters the battlefield, if a creature died this turn, return a creature card at random from your graveyard to your hand.
-        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new WoodlandSleuthEffect());
-        this.addAbility(new ConditionalTriggeredAbility(ability, MorbidCondition.getInstance(), staticText));
+        // {tap}: Add {1} to your mana pool.
+        this.addAbility(new ColorlessManaAbility());
+        // {3}, {tap}, Sacrifice Haunted Fengraf: Return a creature card at random from your graveyard to your hand.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HauntedFengrafEffect(), new GenericManaCost(3));
+        ability.addCost(new TapSourceCost());
+        ability.addCost(new SacrificeSourceCost());
+        this.addAbility(ability);
     }
 
-    public WoodlandSleuth(final WoodlandSleuth card) {
+    public HauntedFengraf(final HauntedFengraf card) {
         super(card);
     }
 
     @Override
-    public WoodlandSleuth copy() {
-        return new WoodlandSleuth(this);
+    public HauntedFengraf copy() {
+        return new HauntedFengraf(this);
     }
 }
 
-class WoodlandSleuthEffect extends OneShotEffect<WoodlandSleuthEffect> {
+class HauntedFengrafEffect extends OneShotEffect<HauntedFengrafEffect> {
 
-    public WoodlandSleuthEffect() {
+    public HauntedFengrafEffect() {
         super(Outcome.ReturnToHand);
-        this.staticText = "return a creature card at random from your graveyard to your hand";
+        this.staticText = "Return a creature card at random from your graveyard to your hand";
     }
 
-    public WoodlandSleuthEffect(final WoodlandSleuthEffect effect) {
+    public HauntedFengrafEffect(final HauntedFengrafEffect effect) {
         super(effect);
     }
 
     @Override
-    public WoodlandSleuthEffect copy() {
-        return new WoodlandSleuthEffect(this);
+    public HauntedFengrafEffect copy() {
+        return new HauntedFengrafEffect(this);
     }
 
     @Override
@@ -103,7 +100,7 @@ class WoodlandSleuthEffect extends OneShotEffect<WoodlandSleuthEffect> {
             if (cards.length > 0) {
                 Random rnd = new Random();
                 Card card = cards[rnd.nextInt(cards.length)];
-                card.moveToZone(Zone.HAND, source.getId(), game, true);
+                card.moveToZone(Constants.Zone.HAND, source.getId(), game, true);
                 game.informPlayers(card.getName() + " returned to the hand of " + player.getName());
                 return true;
             }
