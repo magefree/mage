@@ -249,7 +249,10 @@ public class FeedbackDialog extends javax.swing.JDialog {
         if (message.length() > 300) {
             JOptionPane.showMessageDialog(null, "\"Describe your idea\" value is too long (300 characters max)", "Warning", JOptionPane.INFORMATION_MESSAGE);
         }
-        String email = cleanUpType(cbFeedbackType.getSelectedItem().toString());
+        String email = txtEmail.getText().trim();
+        if (email.length() > 100) {
+            email = email.substring(0, 100);
+        }
         if (MageFrame.getSession().sendFeedback(title, type, message, email)) {
             JOptionPane.showMessageDialog(null, "Feedback was sent. Thank you!", "Success", JOptionPane.INFORMATION_MESSAGE);
             reset();
