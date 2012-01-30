@@ -97,10 +97,10 @@ public class ServerMessagesUtil {
         log.debug("Reading server messages...");
         List<String> motdMessages = readFromFile();
         List<String> newMessages = new ArrayList<String>();
-        newMessages.add(getServerStatistics());
         if (motdMessages != null) {
             newMessages.addAll(motdMessages);
         }
+        newMessages.add(getServerStatistics());
 
         lock.writeLock().lock();
         try {

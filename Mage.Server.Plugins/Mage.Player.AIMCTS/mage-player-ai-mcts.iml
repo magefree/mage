@@ -10,9 +10,9 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.14" level="project" />
-    <orderEntry type="module" module-name="Mage" />
-    <orderEntry type="module" module-name="Mage-Player-AI" />
-    <orderEntry type="module" module-name="Mage-Sets" />
+    <orderEntry type="module" module-name="mage" />
+    <orderEntry type="module" module-name="mage-player-ai" />
+    <orderEntry type="module" module-name="mage-sets" />
   </component>
 </module>
 
