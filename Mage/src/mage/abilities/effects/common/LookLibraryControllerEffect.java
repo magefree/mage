@@ -1,31 +1,30 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 package mage.abilities.effects.common;
 
 import mage.Constants;
@@ -55,63 +54,64 @@ public class LookLibraryControllerEffect extends OneShotEffect<LookLibraryContro
     protected DynamicValue numberOfCards;
     protected boolean mayShuffleAfter = false;
     protected boolean putOnTop = true; // if false on put back on bottom of library
-            
+
     public LookLibraryControllerEffect() {
-            this(1);
+        this(1);
     }
 
     public LookLibraryControllerEffect(int numberOfCards) {
-            this(numberOfCards, false, true);
+        this(numberOfCards, false, true);
     }
 
     public LookLibraryControllerEffect(DynamicValue numberOfCards) {
-            this(numberOfCards, false, true);
+        this(numberOfCards, false, true);
     }
 
     public LookLibraryControllerEffect(int numberOfCards, boolean mayShuffleAfter) {
-            this(numberOfCards, mayShuffleAfter, true);
+        this(numberOfCards, mayShuffleAfter, true);
     }
-    
+
     public LookLibraryControllerEffect(int numberOfCards, boolean mayShuffleAfter, boolean putOnTop) {
-            this(new StaticValue(numberOfCards), mayShuffleAfter, putOnTop);
+        this(new StaticValue(numberOfCards), mayShuffleAfter, putOnTop);
     }
 
     public LookLibraryControllerEffect(DynamicValue numberOfCards, boolean mayShuffleAfter, boolean putOnTop) {
-            super(Outcome.Benefit);
-            this.numberOfCards = numberOfCards;
-            this.mayShuffleAfter = mayShuffleAfter;
-            this.putOnTop = putOnTop;
+        super(Outcome.Benefit);
+        this.numberOfCards = numberOfCards;
+        this.mayShuffleAfter = mayShuffleAfter;
+        this.putOnTop = putOnTop;
 
     }
-    
+
     public LookLibraryControllerEffect(final LookLibraryControllerEffect effect) {
-            super(effect);
-            this.numberOfCards = effect.numberOfCards.clone(); 
-            this.mayShuffleAfter = effect.mayShuffleAfter;
-            this.putOnTop = effect.putOnTop;
+        super(effect);
+        this.numberOfCards = effect.numberOfCards.clone();
+        this.mayShuffleAfter = effect.mayShuffleAfter;
+        this.putOnTop = effect.putOnTop;
     }
 
     @Override
     public LookLibraryControllerEffect copy() {
         return new LookLibraryControllerEffect(this);
-        
+
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
-        String windowName ="Reveal"; 
-        
+        String windowName = "Reveal";
+
         if (source instanceof SpellAbility) {
             Card sourceCard = game.getCard(source.getSourceId());
-            if (sourceCard != null)
-                windowName = sourceCard.getName(); 
-        }
-        else {
+            if (sourceCard != null) {
+                windowName = sourceCard.getName();
+            }
+        } else {
             Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-            if (sourcePermanent != null)
-                windowName = sourcePermanent.getName(); 
+            if (sourcePermanent != null) {
+                windowName = sourcePermanent.getName();
+            }
         }
-        
+
         Player player = game.getPlayer(source.getControllerId());
         if (player == null) {
             return false;
@@ -131,34 +131,27 @@ public class LookLibraryControllerEffect extends OneShotEffect<LookLibraryContro
         player.lookAtCards(windowName, cards, game);
 
         this.actionWithSelectedCards(cards, game, source, windowName);
-        
+
         this.putCardsBack(source, player, cards, game);
-        
+
         this.mayShuffle(player, game);
-        
+
         return true;
     }
-    /**
-     * 
-     * @param card
-     * @param game
-     * @param source 
-     */
+
     protected void cardLooked(Card card, Game game, Ability source) {
-        return;
     }
-    
+
     protected void actionWithSelectedCards(Cards cards, Game game, Ability source, String windowName) {
-        return;
     }
 
     /**
      * Put the rest of the cards back to library
-     * 
+     *
      * @param source
      * @param player
      * @param cards
-     * @param game 
+     * @param game
      */
     protected void putCardsBack(Ability source, Player player, Cards cards, Game game) {
         TargetCard target = new TargetCard(Zone.PICK, new FilterCard(this.getPutBackText()));
@@ -180,40 +173,43 @@ public class LookLibraryControllerEffect extends OneShotEffect<LookLibraryContro
 
     /**
      * Check to shuffle library if allowed
+     *
      * @param player
-     * @param game 
+     * @param game
      */
     protected void mayShuffle(Player player, Game game) {
-        if (this.mayShuffleAfter) {
-        	if (player.chooseUse(Constants.Outcome.Benefit, "Shuffle you library?", game)) {
-			player.shuffleLibrary(game);
-		}
+        if (this.mayShuffleAfter && player.chooseUse(Constants.Outcome.Benefit, "Shuffle you library?", game)) {
+            player.shuffleLibrary(game);
         }
     }
-    
+
     protected String getPutBackText() {
         StringBuilder sb = new StringBuilder("card to put ");
-        if (putOnTop)
+        if (putOnTop) {
             sb.append("on your library (last chosen will be on top)");
-        else
+        } else {
             sb.append("on bottom of your library (last chosen will be on bottom)");
+        }
         return sb.toString();
     }
-    
+
     @Override
     public String getText(Mode mode) {
         return setText(mode, "");
     }
-    
 
     public String setText(Mode mode, String middleText) {
-        int numberLook = numberOfCards.calculate(null, null);
-//        int numberPick = numberToPick.calculate(null, null) ;
+        int numberLook;
+        try {
+            numberLook = Integer.parseInt(numberOfCards.toString());
+        } catch (NumberFormatException e) {
+            numberLook = 0;
+        }
         StringBuilder sb = new StringBuilder("Look at the top ");
-        switch(numberLook) {
+        switch (numberLook) {
             case 0:
                 sb.append(" X ");
-                break;            
+                break;
             case 1:
                 sb.append("card ");
                 break;
@@ -233,26 +229,25 @@ public class LookLibraryControllerEffect extends OneShotEffect<LookLibraryContro
                 sb.append(numberLook);
                 break;
         }
-        if (numberLook != 1)
-                sb.append(" cards ");
-        
+        if (numberLook != 1) {
+            sb.append(" cards ");
+        }
+
         sb.append("of your Library");
-        if (numberLook == 0)
+        if (numberLook == 0) {
             sb.append(", where {X} is the number of cards ").append(numberOfCards.getMessage());
-        
-        
+        }
+
+
         if (!middleText.isEmpty()) {
             sb.append(middleText);
+        } else if (numberLook > 1) {
+            sb.append(", then put them back in any order");
         }
-        else {
-            if (numberLook > 1)
-                sb.append(", then put them back in any order");
-        }
-        if (this.mayShuffleAfter)
+        if (this.mayShuffleAfter) {
             sb.append(". You may shuffle your library");
-        
+        }
+
         return sb.toString();
     }
-    
 }
-
