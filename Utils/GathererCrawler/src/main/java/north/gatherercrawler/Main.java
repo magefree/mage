@@ -45,7 +45,7 @@ public class Main {
         List<String> sets = new ArrayList<String>();
 
         // Change to false if you only want to add a specific set
-        if (false) {
+        if (true) {
             Document doc = Jsoup.connect("http://gatherer.wizards.com/Pages/Advanced.aspx").get();
             Elements select = doc.select("#autoCompleteSourceBoxsetAddText0_InnerTextBoxcontainer a");
             if (!select.isEmpty()) {
