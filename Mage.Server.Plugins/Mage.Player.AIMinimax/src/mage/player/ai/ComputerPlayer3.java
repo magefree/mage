@@ -28,9 +28,6 @@
 
 package mage.player.ai;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.UUID;
 import mage.Constants.AbilityType;
 import mage.Constants.PhaseStep;
 import mage.Constants.RangeOfInfluence;
@@ -41,25 +38,13 @@ import mage.game.Game;
 import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
 import mage.game.events.GameEvent;
-import mage.game.turn.BeginCombatStep;
-import mage.game.turn.BeginningPhase;
-import mage.game.turn.CleanupStep;
-import mage.game.turn.CombatDamageStep;
-import mage.game.turn.CombatPhase;
-import mage.game.turn.DeclareAttackersStep;
-import mage.game.turn.DeclareBlockersStep;
-import mage.game.turn.DrawStep;
-import mage.game.turn.EndOfCombatStep;
-import mage.game.turn.EndPhase;
-import mage.game.turn.EndStep;
-import mage.game.turn.FirstCombatDamageStep;
-import mage.game.turn.PostCombatMainPhase;
-import mage.game.turn.PostCombatMainStep;
-import mage.game.turn.Step;
-import mage.game.turn.UntapStep;
-import mage.game.turn.UpkeepStep;
+import mage.game.turn.*;
 import mage.players.Player;
 import org.apache.log4j.Logger;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -100,6 +85,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
 		logState(game);
 		if (logger.isDebugEnabled())
 			logger.debug("Game State: Turn-" + game.getTurnNum() + " Step-" + game.getTurn().getStepType() + " ActivePlayer-" + game.getPlayer(game.getActivePlayerId()).getName() + " PriorityPlayer-" + name);
+        game.getState().setPriorityPlayerId(playerId);
 		game.firePriorityEvent(playerId);
 		switch (game.getTurn().getStepType()) {
 			case UPKEEP:
