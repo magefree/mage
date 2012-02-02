@@ -28,32 +28,14 @@
 
 package mage.player.human;
 
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.Outcome;
 import mage.Constants.RangeOfInfluence;
 import mage.Constants.TargetController;
 import mage.Constants.Zone;
 import mage.MageObject;
-import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
-import mage.abilities.Mode;
-import mage.abilities.Modes;
-import mage.abilities.SpecialAction;
-import mage.abilities.TriggeredAbilities;
-import mage.abilities.TriggeredAbility;
+import mage.abilities.*;
 import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.costs.mana.PhyrexianManaCost;
-import mage.abilities.costs.mana.VariableManaCost;
+import mage.abilities.costs.mana.*;
 import mage.abilities.effects.ReplacementEffect;
 import mage.abilities.mana.ManaAbility;
 import mage.cards.Card;
@@ -78,6 +60,9 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetAttackingCreature;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetDefender;
+
+import java.io.Serializable;
+import java.util.*;
 
 
 /**
@@ -381,6 +366,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 				pass();
 				return false;
 			}
+            game.getState().setPriorityPlayerId(playerId);
 			game.firePriorityEvent(playerId);
 			waitForResponse();
 			if (response.getBoolean() != null) {
