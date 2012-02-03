@@ -136,7 +136,7 @@ class MyrWelderContinuousEffect extends ContinuousEffectImpl<MyrWelderContinuous
                 if (card != null) {
                     for (Ability ability: card.getAbilities()) {
                         if (ability instanceof ActivatedAbility) {
-                            perm.addAbility(ability);
+                            perm.addAbility(ability, game);
                         }
                     }
                 }

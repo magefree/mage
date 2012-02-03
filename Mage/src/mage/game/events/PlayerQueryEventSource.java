@@ -31,10 +31,7 @@ package mage.game.events;
 import java.io.Serializable;
 import java.util.*;
 
-import mage.abilities.ActivatedAbility;
-import mage.abilities.Mode;
-import mage.abilities.Modes;
-import mage.abilities.TriggeredAbilities;
+import mage.abilities.*;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
@@ -85,8 +82,8 @@ public class PlayerQueryEventSource implements EventSource<PlayerQueryEvent>, Se
 		dispatcher.fireEvent(PlayerQueryEvent.lookEvent(playerId, message, cards));
 	}
 
-	public void target(UUID playerId, String message, TriggeredAbilities abilities, boolean required) {
-		dispatcher.fireEvent(PlayerQueryEvent.targetEvent(playerId, message, abilities, required));
+	public void target(UUID playerId, String message, List<TriggeredAbility> abilities) {
+		dispatcher.fireEvent(PlayerQueryEvent.targetEvent(playerId, message, abilities));
 	}
 
 	public void target(UUID playerId, String message, List<Permanent> perms, boolean required) {

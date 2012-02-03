@@ -461,6 +461,12 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
         return false;
     }
 	
+    @Override
+    public boolean isInUseableZone(Game game) {
+        Zone test = game.getState().getZone(sourceId);
+        return test != null && zone.match(test);
+    }
+    
 	@Override
 	public String toString() {
 		return getRule();

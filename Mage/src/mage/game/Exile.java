@@ -90,12 +90,6 @@ public class Exile implements Serializable, Copyable<Exile> {
 		return exileZones.get(id);
 	}
 
-	public void checkTriggers(GameEvent event, Game game) {
-		for (ExileZone exile: exileZones.values()) {
-			exile.checkTriggers(event, game);
-		}
-	}
-
 	public Card getCard(UUID cardId, Game game) {
 		for (ExileZone exile: exileZones.values()) {
 			if (exile.contains(cardId))

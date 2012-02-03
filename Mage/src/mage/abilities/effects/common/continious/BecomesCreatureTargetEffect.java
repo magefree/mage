@@ -101,7 +101,7 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl<BecomesCre
                         if (sublayer == SubLayer.NA) {
                             if (token.getAbilities().size() > 0) {
                                 for (Ability ability : token.getAbilities()) {
-                                    permanent.addAbility(ability);
+                                    permanent.addAbility(ability, game);
                                 }
                             }
                         }

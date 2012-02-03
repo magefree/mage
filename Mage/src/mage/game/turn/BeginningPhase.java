@@ -28,7 +28,10 @@
 
 package mage.game.turn;
 
+import java.util.UUID;
 import mage.Constants.TurnPhase;
+import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 
 /**
@@ -47,6 +50,13 @@ public class BeginningPhase extends Phase<BeginningPhase> {
 		this.steps.add(new DrawStep());
 	}
 
+    @Override
+	public boolean beginPhase(Game game, UUID activePlayerId) {
+        game.getBattlefield().beginningOfTurn(game);
+        return super.beginPhase(game, activePlayerId);
+	}
+    
+    
 	public BeginningPhase(final BeginningPhase phase) {
 		super(phase);
 	}

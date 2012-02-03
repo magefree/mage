@@ -106,7 +106,7 @@ public class QuicksilverGargantuan extends CardImpl<QuicksilverGargantuan> {
 			permanent.setExpansionSetCode(card.getExpansionSetCode());
 			permanent.getAbilities().clear();
 			for (Ability ability : card.getAbilities()) {
-				permanent.addAbility(ability);
+				permanent.addAbility(ability, game);
 			}
 
 			return true;

@@ -82,7 +82,6 @@ public interface Game extends MageItem, Serializable {
 	public UUID getControllerId(UUID objectId);
 	public Permanent getPermanent(UUID permanentId);
 	public Card getCard(UUID cardId);
-	public Zone getZone(UUID objectId);
 	public void setZone(UUID objectId, Zone zone);
 	public void addPlayer(Player player, Deck deck) throws GameException;
 	public Player getPlayer(UUID playerId);
@@ -126,7 +125,7 @@ public interface Game extends MageItem, Serializable {
 	public void fireChooseEvent(UUID playerId, Choice choice);
 	public void fireSelectTargetEvent(UUID playerId, String message, Set<UUID> targets, boolean required, Map<String, Serializable> options);
 	public void fireSelectTargetEvent(UUID playerId, String message, Cards cards, boolean required, Map<String, Serializable> options);
-	public void fireSelectTargetEvent(UUID playerId, String message, TriggeredAbilities abilities, boolean required);
+	public void fireSelectTargetEvent(UUID playerId, String message, List<TriggeredAbility> abilities);
 	public void fireSelectTargetEvent(UUID playerId, String message, List<Permanent> perms, boolean required);
 	public void fireSelectEvent(UUID playerId, String message);
 	public void fireLookAtCardsEvent(UUID playerId, String message, Cards cards);

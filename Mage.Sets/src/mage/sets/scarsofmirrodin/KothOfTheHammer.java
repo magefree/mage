@@ -128,7 +128,7 @@ class KothOfTheHammerThirdEffect extends ContinuousEffectImpl<KothOfTheHammerThi
                     for (Permanent p : game.getBattlefield().getActivePermanents(KothOfTheHammer.filter, source.getControllerId(), game)) {
                         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
                         ability.addTarget(new TargetCreatureOrPlayer());
-                        p.addAbility(ability);
+                        p.addAbility(ability, game);
                     }
                 }
                 break;

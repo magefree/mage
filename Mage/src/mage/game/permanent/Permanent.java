@@ -97,14 +97,16 @@ public interface Permanent extends Card {
 	public void entersBattlefield(UUID sourceId, Game game);
 	public String getValue();
 
-	@Override
-	public void addAbility(Ability ability);
+    @Deprecated
+    @Override
+    public void addAbility(Ability ability);
+	public void addAbility(Ability ability, Game game);
 
 	public void setLoyaltyUsed(boolean used);
 	public boolean isLoyaltyUsed();
 
-	public void endOfTurn(Game game);
-	public void checkTriggers(GameEvent event, Game game);
+	public void beginningOfTurn(Game game);
+    public void endOfTurn(Game game);
 	public void checkControlChanged(Game game);
 	public int getTurnsOnBattlefield();
 

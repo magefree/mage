@@ -44,11 +44,11 @@ public class Command extends ArrayList<CommandObject> {
 		//
 	}
 
-	public void checkTriggers(GameEvent event, Game game) {
-		for (CommandObject commandObject: this) {
-			commandObject.checkTriggers(event, game);
-		}
-	}
+//	public void checkTriggers(GameEvent event, Game game) {
+//		for (CommandObject commandObject: this) {
+//			commandObject.checkTriggers(event, game);
+//		}
+//	}
 
 	public Command copy() {
 		return new Command(this);

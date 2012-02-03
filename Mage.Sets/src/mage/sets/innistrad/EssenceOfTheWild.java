@@ -160,7 +160,7 @@ class EssenceOfTheWildCopyEffect extends ContinuousEffectImpl<EssenceOfTheWildCo
             }
             permanent.getAbilities().clear();
             for (Ability ability: essence.getAbilities()) {
-                 permanent.addAbility(ability);
+                 permanent.addAbility(ability, game);
             }
             permanent.getPower().setValue(essence.getPower().getValue());
             permanent.getToughness().setValue(essence.getToughness().getValue());

@@ -407,7 +407,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
     }
 
     @Override
-    public TriggeredAbility chooseTriggeredAbility(TriggeredAbilities abilities, Game game) {
+    public TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game) {
         if (this.isHuman())
             return abilities.get(rnd.nextInt(abilities.size()));
         return super.chooseTriggeredAbility(abilities, game);

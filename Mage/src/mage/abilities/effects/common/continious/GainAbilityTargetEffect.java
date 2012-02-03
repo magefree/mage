@@ -71,7 +71,7 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl<GainAbilityTar
 		for (UUID permanentId : targetPointer.getTargets(source)) {
 			Permanent permanent = game.getPermanent(permanentId);
 			if (permanent != null) {
-				permanent.addAbility(ability);
+				permanent.addAbility(ability, game);
 				affectedTargets++;
 			}
 		}

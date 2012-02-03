@@ -30,20 +30,13 @@ package mage.abilities;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
-import mage.Constants.EffectType;
 import mage.Constants.Zone;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.ReplacementEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.mana.ManaAbility;
-import mage.filter.FilterAbility;
 import mage.game.Game;
 
 /**
@@ -82,17 +75,6 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
 		Abilities<ActivatedAbility> zonedAbilities = new AbilitiesImpl<ActivatedAbility>();
 		for (T ability: this) {
 			if (ability instanceof ActivatedAbility && ability.getZone().match(zone)) {
-				zonedAbilities.add((ActivatedAbility)ability);
-			}
-		}
-		return zonedAbilities;
-	}
-
-	@Override
-	public Abilities<ActivatedAbility> getActivatedAbilities(Zone zone, FilterAbility filter) {
-		Abilities<ActivatedAbility> zonedAbilities = new AbilitiesImpl<ActivatedAbility>();
-		for (T ability: this) {
-			if (ability instanceof ActivatedAbility && ability.getZone().match(zone) && filter.match(ability)) {
 				zonedAbilities.add((ActivatedAbility)ability);
 			}
 		}
@@ -161,34 +143,6 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
 		return zonedAbilities;
 	}
     
-    @Override
-    public Map<ReplacementEffect, Ability> getReplacementEffects(Zone zone) {
-        Map<ReplacementEffect, Ability> effects = new HashMap<ReplacementEffect, Ability>();
-		for (T ability: this) {
-			if (ability instanceof StaticAbility && ability.getZone().match(zone)) {
-				for (Effect effect: ability.getEffects()) {
-                    if (effect.getEffectType() == EffectType.REPLACEMENT || effect.getEffectType() == EffectType.PREVENTION) {
-                        effects.put((ReplacementEffect)effect, ability);
-                    }
-                }
-			}
-		}
-        return effects;
-    }
-    
-    @Override
-    public Map<Effect, Ability> getEffects(Game game, Zone zone, EffectType effectType) {
-        Map<Effect, Ability> effects = new HashMap<Effect, Ability>();
-		for (T ability: this) {
-			if (ability instanceof StaticAbility && ability.getZone().match(zone)) {
-				for (Effect effect: ability.getEffects(game, effectType)) {
-                    effects.put(effect, ability);
-                }
-			}
-		}
-        return effects;
-    }
-
     @Override
 	public Abilities<ProtectionAbility> getProtectionAbilities() {
 		Abilities<ProtectionAbility> abilities = new AbilitiesImpl<ProtectionAbility>();

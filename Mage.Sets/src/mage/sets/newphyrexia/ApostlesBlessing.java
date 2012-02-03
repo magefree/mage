@@ -114,7 +114,7 @@ class ApostlesBlessingEffect extends GainAbilityTargetEffect {
 		protectionFilter.setMessage(choice.getChoice());
 		Permanent creature = game.getPermanent(source.getFirstTarget());
 		if (creature != null) {
-			creature.addAbility(ability);
+			creature.addAbility(ability, game);
 			return true;
 		}
 		return false;

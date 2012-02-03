@@ -40,8 +40,8 @@ import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effects;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -118,7 +118,7 @@ class ElspethKnightErrantEffect extends ContinuousEffectImpl<ElspethKnightErrant
 	@Override
 	public boolean apply(Game game, Ability source) {
 		for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId())) {
-			perm.addAbility(IndestructibleAbility.getInstance());
+			perm.addAbility(IndestructibleAbility.getInstance(), game);
 		}
 		return true;
 	}

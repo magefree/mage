@@ -71,7 +71,7 @@ public class GainProtectionFromColorTargetEffect extends GainAbilityTargetEffect
 			protectionFilter.setColor(choice.getColor());
 			protectionFilter.setMessage(choice.getChoice());
 			((ProtectionAbility)ability).setFilter(protectionFilter);
-			creature.addAbility(ability);
+			creature.addAbility(ability, game);
 			return true;
 		}
 		return false;

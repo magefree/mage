@@ -114,7 +114,7 @@ class SpreadingSeasEffect extends ContinuousEffectImpl<SpreadingSeasEffect> {
 					case AbilityAddingRemovingEffects_6:
 						if (sublayer == SubLayer.NA) {
 							land.getAbilities().clear();
-							land.addAbility(new BlueManaAbility());
+							land.addAbility(new BlueManaAbility(), game);
 						}
 						break;
 				}

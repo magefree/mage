@@ -266,9 +266,6 @@ public class StackAbility implements StackObject, Ability {
 	public void addManaCost(ManaCost cost) { }
 
 	@Override
-	public void checkTriggers(GameEvent event, Game game) {	}
-
-	@Override
 	public AbilityType getAbilityType() {
 		return ability.getAbilityType();
 	}
@@ -329,5 +326,10 @@ public class StackAbility implements StackObject, Ability {
     @Override
     public boolean canChooseTarget(Game game) {
         return ability.canChooseTarget(game);
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

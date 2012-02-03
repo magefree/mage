@@ -351,5 +351,13 @@ public interface Ability extends Serializable {
 	public Modes getModes();
     
     public boolean canChooseTarget(Game game);
+    
+    /**
+     * Returns true if this abilities source is in the zone for the ability
+     * 
+     * @param game
+     * @return 
+     */
+    public boolean isInUseableZone(Game game);
 	
 }

@@ -33,27 +33,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-
 import mage.Constants.CardType;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
-import mage.MageException;
 import mage.MageObjectImpl;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.PlayLandAbility;
 import mage.abilities.SpellAbility;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.mana.ManaAbility;
 import mage.game.Game;
-import mage.game.GameException;
-import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.PermanentCard;
 import mage.game.stack.Spell;
 import mage.watchers.Watcher;
-import mage.watchers.WatcherImpl;
 import org.apache.log4j.Logger;
 
 public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> implements Card {
@@ -70,6 +63,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
     protected boolean canTransform;
     protected Card secondSideCard;
     protected boolean nightCard;
+    protected SpellAbility spellAbility;
 
     public CardImpl(UUID ownerId, int cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs) {
         this(ownerId, name);
@@ -175,11 +169,13 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 
     @Override
     public SpellAbility getSpellAbility() {
-        for (Ability ability : abilities.getActivatedAbilities(Zone.HAND)) {
-            if (ability instanceof SpellAbility)
-                return (SpellAbility) ability;
+        if (spellAbility == null) {
+            for (Ability ability : abilities.getActivatedAbilities(Zone.HAND)) {
+                if (ability instanceof SpellAbility)
+                    spellAbility = (SpellAbility) ability;
+            }
         }
-        return null;
+        return spellAbility;
     }
 
     @Override
@@ -198,15 +194,6 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
         return watchers;
     }
     
-    @Override
-    public void checkTriggers(Zone zone, GameEvent event, Game game) {
-        for (TriggeredAbility ability : abilities.getTriggeredAbilities(zone)) {
-            if (ability.checkTrigger(event, game)) {
-                ability.trigger(game, ownerId);
-            }
-        }
-    }
-
     @Override
     public String getExpansionSetCode() {
         return expansionSetCode;

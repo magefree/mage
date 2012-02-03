@@ -78,18 +78,6 @@ public interface Abilities<T extends Ability> extends List<T>, Serializable {
 	public Abilities<ActivatedAbility> getActivatedAbilities(Zone zone);
 	
 	/**
-	 * Retrieves all activated abilities for the given {@link Zone} that match
-	 * the given {@link FilterAbility}.
-	 * 
-	 * @param zone The {@link Zone} for which abilities should be retrieved.
-	 * @param filter The {@link FilterAbility} to apply to the result.
-	 * @return The {@link ActivatedAbility activated abilities} matching the {@link Zone} and {@link FilterAbility}.
-	 * 
-	 * @see mage.players.PlayerImpl#getPlayable(mage.game.Game, mage.filter.FilterAbility, mage.abilities.mana.ManaOptions, boolean)
-	 */
-	public Abilities<ActivatedAbility> getActivatedAbilities(Zone zone, FilterAbility filter);
-	
-	/**
 	 * Retrieves all {@link ManaAbility mana abilities} in the given {@link Zone}.
 	 * 
 	 * @param zone The {@link Zone} to search for {@link ManaAbility mana abilities}.
@@ -259,7 +247,5 @@ public interface Abilities<T extends Ability> extends List<T>, Serializable {
 	 */
 	public Abilities<T> copy();
 
-    public Map<ReplacementEffect, Ability> getReplacementEffects(Zone zone);
-    public Map<Effect, Ability> getEffects(Game game, Zone zone, EffectType effectType);
     public String getValue();
 }

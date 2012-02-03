@@ -73,7 +73,7 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl<GainAbilitySou
 	public boolean apply(Game game, Ability source) {
 		Permanent permanent = game.getPermanent(source.getSourceId());
 		if (permanent != null) {
-			permanent.addAbility(ability);
+			permanent.addAbility(ability, game);
 			return true;
 		}
 		return false;

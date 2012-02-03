@@ -229,24 +229,13 @@ public class Battlefield implements Serializable {
 		return field.containsKey(key);
 	}
 
-	public void checkTriggers(GameEvent event, Game game) {
-		if (game.getRangeOfInfluence() == RangeOfInfluence.ALL) {
-			for (Permanent perm: field.values()) {
-				if (perm.isPhasedIn())
-					perm.checkTriggers(event, game);
-			}
+    public void beginningOfTurn(Game game) {
+		for (Permanent perm: field.values()) {
+			perm.beginningOfTurn(game);
 		}
-		else {
-			//20100423 - 801.7
-			Set<UUID> range = game.getPlayer(event.getPlayerId()).getInRange();
-			for (Permanent perm: field.values()) {
-				if (range.contains(perm.getControllerId()) && perm.isPhasedIn())
-					perm.checkTriggers(event, game);
-			}
-		}
-	}
-
-	public void endOfTurn(UUID controllerId, Game game) {
+    }
+    
+    public void endOfTurn(UUID controllerId, Game game) {
 		for (Permanent perm: field.values()) {
 			perm.endOfTurn(game);
 		}

@@ -98,7 +98,7 @@ class ConcussiveBoltEffect extends ContinuousEffectImpl {
         if (player != null) {
             List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId());
             for (Permanent permanent : permanents) {
-                permanent.addAbility(CantBlockAbility.getInstance());
+                permanent.addAbility(CantBlockAbility.getInstance(), game);
                 affectedTargets++;
             }
         }

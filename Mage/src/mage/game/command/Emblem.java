@@ -88,18 +88,18 @@ public class Emblem implements CommandObject {
 		this.sourceId = sourceId;
 	}
 
-	@Override
-	public void checkTriggers(GameEvent event, Game game) {
-		// we have to use Zone.BATTLEFIELD to use the same predefined abilities (like SpellCastTriggeredAbility)
-		// and not create duplicates
-		for (TriggeredAbility ability: getAbilities().getTriggeredAbilities(Constants.Zone.BATTLEFIELD)) {
-			ability.setControllerId(getControllerId());
-			ability.setSourceId(getSourceId());
-			if (ability.checkTrigger(event, game)) {
-				ability.trigger(game, getControllerId());
-			}
-		}
-	}
+//	@Override
+//	public void checkTriggers(GameEvent event, Game game) {
+//		// we have to use Zone.BATTLEFIELD to use the same predefined abilities (like SpellCastTriggeredAbility)
+//		// and not create duplicates
+//		for (TriggeredAbility ability: getAbilities().getTriggeredAbilities(Constants.Zone.BATTLEFIELD)) {
+//			ability.setControllerId(getControllerId());
+//			ability.setSourceId(getSourceId());
+//			if (ability.checkTrigger(event, game)) {
+//				ability.trigger(game, getControllerId());
+//			}
+//		}
+//	}
 
 	@Override
 	public String getName() {

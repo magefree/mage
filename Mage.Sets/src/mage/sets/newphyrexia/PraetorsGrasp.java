@@ -144,7 +144,7 @@ class PraetorsGraspPlayEffect extends AsThoughEffectImpl<PraetorsGraspPlayEffect
 	public boolean applies(UUID sourceId, Ability source, Game game) {
         if (sourceId.equals(cardId)) {
             Card card = game.getCard(cardId);
-            if (card != null && game.getZone(cardId) == Zone.EXILED) {
+            if (card != null && game.getState().getZone(cardId) == Zone.EXILED) {
                 return true;
             }
         }

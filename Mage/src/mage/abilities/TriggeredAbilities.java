@@ -29,6 +29,11 @@
 package mage.abilities;
 
 import java.util.UUID;
+import mage.Constants;
+import mage.Constants.Zone;
+import mage.MageObject;
+import mage.game.Game;
+import mage.game.events.GameEvent;
 
 /**
  *
@@ -42,15 +47,19 @@ public class TriggeredAbilities extends AbilitiesImpl<TriggeredAbility> {
 		super(abilities);
 	}
 
-	public TriggeredAbilities getControlledBy(UUID controllerId) {
-		TriggeredAbilities controlledBy = new TriggeredAbilities();
-		for (TriggeredAbility ability: this) {
-			if (ability.getControllerId().equals(controllerId))
-				controlledBy.add(ability);
-		}
-		return controlledBy;
-	}
-	
+    public void checkTriggers(GameEvent event, Game game) {
+        for (TriggeredAbility ability: this) {
+            if (ability.isInUseableZone(game)) {
+                MageObject object = game.getObject(ability.getSourceId());
+                if (object.getAbilities().contains(ability)) {
+                    if (ability.checkTrigger(event, game)) {
+                        ability.trigger(game, ability.getControllerId());
+                    }
+                }
+            }
+        }
+    }
+    
 	@Override
 	public TriggeredAbilities copy() {
 		return new TriggeredAbilities(this);

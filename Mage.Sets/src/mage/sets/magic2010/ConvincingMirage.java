@@ -161,19 +161,19 @@ class ConvincingMirageContinousEffect extends ContinuousEffectImpl<ConvincingMir
                         if (sublayer == SubLayer.NA) {
                             land.getAbilities().clear();
                             if (choice.equals("Forest")) {
-                                land.addAbility(new GreenManaAbility());
+                                land.addAbility(new GreenManaAbility(), game);
                             }
                             if (choice.equals("Plains")) {
-                                land.addAbility(new WhiteManaAbility());
+                                land.addAbility(new WhiteManaAbility(), game);
                             }
                             if (choice.equals("Mountain")) {
-                                land.addAbility(new RedManaAbility());
+                                land.addAbility(new RedManaAbility(), game);
                             }
                             if (choice.equals("Island")) {
-                                land.addAbility(new BlueManaAbility());
+                                land.addAbility(new BlueManaAbility(), game);
                             }
                             if (choice.equals("Swamp")) {
-                                land.addAbility(new BlackManaAbility());
+                                land.addAbility(new BlackManaAbility(), game);
                             }
                         }
                         break;

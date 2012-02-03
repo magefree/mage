@@ -95,7 +95,7 @@ class CryptoplasmTransformEffect extends ContinuousEffectImpl<CryptoplasmTransfo
 
 		Ability upkeepAbility = new BeginningOfUpkeepTriggeredAbility(new CryptoplasmTransformEffect(), Constants.TargetController.YOU, true);
         upkeepAbility.addTarget(new TargetCreaturePermanent());
-        permanent.addAbility(upkeepAbility);
+        permanent.addAbility(upkeepAbility, game);
 
         return true;
     }

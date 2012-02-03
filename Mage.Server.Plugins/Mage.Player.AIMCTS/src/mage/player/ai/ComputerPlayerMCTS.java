@@ -58,6 +58,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer<ComputerPlayerMCTS> imple
 
     private static final int THINK_MIN_RATIO = 40;
     private static final int THINK_MAX_RATIO = 100;
+    private static final double THINK_TIME_MULTIPLIER = 2.0;
     private static final boolean USE_MULTIPLE_THREADS = false;
     
     protected transient MCTSNode root;
@@ -69,7 +70,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer<ComputerPlayerMCTS> imple
 	public ComputerPlayerMCTS(String name, RangeOfInfluence range, int skill) {
 		super(name, range);
 		human = false;
-        maxThinkTime = (int) (skill * 1.5);
+        maxThinkTime = (int) (skill * THINK_TIME_MULTIPLIER);
         cores = Runtime.getRuntime().availableProcessors();
         pool = Executors.newFixedThreadPool(cores);
 	}

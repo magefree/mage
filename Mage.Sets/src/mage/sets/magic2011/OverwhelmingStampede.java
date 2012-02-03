@@ -99,7 +99,7 @@ class OverwhelmingStampedeEffect extends ContinuousEffectImpl<OverwhelmingStampe
 					break;
 				case AbilityAddingRemovingEffects_6:
 					if (sublayer == SubLayer.NA) {
-						perm.addAbility(TrampleAbility.getInstance());
+						perm.addAbility(TrampleAbility.getInstance(), game);
 					}
 					break;
 			}

@@ -122,7 +122,7 @@ class GethLordOfTheVaultEffect extends OneShotEffect<GethLordOfTheVaultEffect> {
     	Card card = game.getCard(source.getFirstTarget());
     	if (card != null) {
     		// if still in graveyard
-    		if (game.getZone(card.getId()).equals(Zone.GRAVEYARD)) {
+    		if (game.getState().getZone(card.getId()).equals(Zone.GRAVEYARD)) {
 				Player player = game.getPlayer(card.getOwnerId());
 				if (card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), source.getControllerId())) {
 					player.getGraveyard().remove(card);

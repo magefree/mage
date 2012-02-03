@@ -396,7 +396,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 				MageObject object = game.getObject(response.getUUID());
 				if (object != null) {
 					Map<UUID, ActivatedAbility> useableAbilities = null;
-                    Zone zone = game.getZone(object.getId());
+                    Zone zone = game.getState().getZone(object.getId());
                     if (zone != null) {
                         useableAbilities = getUseableActivatedAbilities(object, zone, game);
                         if (useableAbilities != null && useableAbilities.size() > 0) {
@@ -411,10 +411,10 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 	}
 
 	@Override
-	public TriggeredAbility chooseTriggeredAbility(TriggeredAbilities abilities, Game game) {
+	public TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game) {
 		game.getState().setPriorityPlayerId(getId());
 		while (!abort) {
-			game.fireSelectTargetEvent(playerId, "Pick triggered ability (goes to the stack first)", abilities, true);
+			game.fireSelectTargetEvent(playerId, "Pick triggered ability (goes to the stack first)", abilities);
 			waitForResponse();
 			if (response.getUUID() != null) {
 				for (TriggeredAbility ability: abilities) {
@@ -472,7 +472,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 		MageObject object = game.getObject(response.getUUID());
 		if (object == null) return;
 		Map<UUID, ManaAbility> useableAbilities = null;
-        Zone zone = game.getZone(object.getId());
+        Zone zone = game.getState().getZone(object.getId());
         if (zone != null) {
             useableAbilities = getUseableManaAbilities(object, zone, game);
             if (useableAbilities != null && useableAbilities.size() > 0) {
@@ -496,7 +496,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
                         selectDefender(game.getCombat().getDefenders(), attacker.getId(), game);
                     }
                     else if (filterAttack.match(attacker, null, playerId, game) && game.getStack().isEmpty()) {
-                        if (game.getState().getTriggered().isEmpty() && game.getState().getDelayed().isEmpty())
+//                        if (game.getState().getTriggered().isEmpty() && game.getState().getDelayed().isEmpty())
                             game.getCombat().removeAttacker(attacker.getId(), game);
                     }
                 }
@@ -534,7 +534,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
                         selectCombatGroup(blocker.getId(), game);
                     }
                     else if (filterBlock.match(blocker, null, playerId, game) && game.getStack().isEmpty()) {
-                        if (game.getState().getTriggered().isEmpty() && game.getState().getDelayed().isEmpty())
+//                        if (game.getState().getTriggered().isEmpty() && game.getState().getDelayed().isEmpty())
                             game.getCombat().removeBlocker(blocker.getId(), game);
                     }
                 }

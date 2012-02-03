@@ -308,12 +308,6 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	}
 
 	@Override
-	public void checkTriggers(GameEvent event, Game game) {
-		hand.checkTriggers(event, game);
-		graveyard.checkTriggers(event, game);
-	}
-
-	@Override
 	public boolean canBeTargetedBy(MageObject source) {
 		if (this.hasLost() || this.hasLeft())
 			return false;

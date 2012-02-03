@@ -158,12 +158,18 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 		return sb.toString();
 	}
 
+    @Override
+    public void addAbility(Ability ability) {
+        throw new UnsupportedOperationException("Unsupported operation: use addAbility(Ability ability, Game game) instead");
+    }
+    
 	@Override
-	public void addAbility(Ability ability) {
+	public void addAbility(Ability ability, Game game) {
 		Ability copy = ability.copy();
         if (!abilities.containsKey(copy.getId())) {
             copy.setControllerId(controllerId);
             copy.setSourceId(objectId);
+            game.getState().addAbility(copy);
             abilities.add(copy);
         }
 	}
@@ -210,6 +216,11 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 	}
 
 	@Override
+	public void beginningOfTurn(Game game) {
+        this.controlledFromStartOfTurn = true;
+    }
+    
+	@Override
 	public void endOfTurn(Game game) {
 		this.damage = 0;
 		this.loyaltyUsed = false;
@@ -218,17 +229,6 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 		dealtDamageByThisTurn = null;
 		for (Ability ability : this.abilities) {
 			ability.reset(game);
-		}
-	}
-
-	@Override
-	public void checkTriggers(GameEvent event, Game game) {
-		if (event.getType() == EventType.BEGINNING_PHASE_PRE && game.getActivePlayerId().equals(controllerId))
-			this.controlledFromStartOfTurn = true;
-		for (TriggeredAbility ability : abilities.getTriggeredAbilities(Zone.BATTLEFIELD)) {
-			if (ability.checkTrigger(event, game)) {
-				ability.trigger(game, controllerId);
-			}
 		}
 	}
 

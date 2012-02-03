@@ -924,7 +924,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 	}
 	
 	@Override
-	public TriggeredAbility chooseTriggeredAbility(TriggeredAbilities abilities, Game game) {
+	public TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game) {
 		log.debug("chooseTriggeredAbility");
 		//TODO: improve this
 		if (abilities.size() > 0)

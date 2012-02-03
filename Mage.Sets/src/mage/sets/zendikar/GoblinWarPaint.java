@@ -103,7 +103,7 @@ class GoblinWarPaintEffect extends ContinuousEffectImpl<GoblinWarPaintEffect> {
                         break;
                     case AbilityAddingRemovingEffects_6:
                         if (sublayer == Constants.SubLayer.NA) {
-                            creature.addAbility(HasteAbility.getInstance());
+                            creature.addAbility(HasteAbility.getInstance(), game);
                         }
                         break;
                 }

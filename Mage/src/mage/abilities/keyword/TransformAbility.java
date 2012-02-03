@@ -107,7 +107,7 @@ class TransformEffect extends ContinuousEffectImpl<TransformEffect> {
         permanent.setExpansionSetCode(card.getExpansionSetCode());
         permanent.getAbilities().clear();
         for (Ability ability : card.getAbilities()) {
-            permanent.addAbility(ability);
+            permanent.addAbility(ability, game);
         }
         permanent.getPower().setValue(card.getPower().getValue());
         permanent.getToughness().setValue(card.getToughness().getValue());

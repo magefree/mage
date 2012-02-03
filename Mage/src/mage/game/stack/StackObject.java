@@ -28,11 +28,10 @@
 
 package mage.game.stack;
 
-import mage.abilities.Ability;
-import mage.game.*;
 import java.util.UUID;
 import mage.MageObject;
-import mage.game.events.GameEvent;
+import mage.abilities.Ability;
+import mage.game.Game;
 
 public interface StackObject extends MageObject {
 
@@ -40,7 +39,6 @@ public interface StackObject extends MageObject {
 	public boolean resolve(Game game);
 	public UUID getSourceId();
 	public UUID getControllerId();
-	public void checkTriggers(GameEvent event, Game game);
 	public void counter(UUID sourceId, Game game);
 	public Ability getStackAbility();
 	@Override

@@ -362,9 +362,7 @@ public final class Constants {
 		HAND, GRAVEYARD, LIBRARY, BATTLEFIELD, STACK, EXILED, ALL, OUTSIDE, PICK, COMMAND;
 		
 		public boolean match(Zone zone) {
-			if (this == zone || this == ALL || zone == ALL)
-				return true;
-			return false;
+			return (this == zone || this == ALL || zone == ALL);
 		}
 	}
 

@@ -44,17 +44,6 @@ import mage.game.events.GameEvent;
 		super(abilities);
 	}
 
-	public void checkTriggers(GameEvent event, Game game) {
-		Iterator<DelayedTriggeredAbility> it = this.iterator();
-		while (it.hasNext()) {
-			DelayedTriggeredAbility ability = it.next();
-			if (ability.checkTrigger(event, game)) {
-				ability.trigger(game, ability.controllerId);
-				it.remove();
-			}
-		}
-	}
-
 	@Override
 	public DelayedTriggeredAbilities copy() {
 		return new DelayedTriggeredAbilities(this);

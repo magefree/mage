@@ -29,18 +29,10 @@
 package mage.game.stack;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.UUID;
 import mage.Constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.effects.ReplacementEffect;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.players.Player;
 
 /**
  *
@@ -77,12 +69,6 @@ public class SpellStack extends ArrayDeque<StackObject> {
         }
     }
     
-	public void checkTriggers(GameEvent event, Game game) {
-		for (StackObject stackObject: this) {
-			stackObject.checkTriggers(event, game);
-		}
-	}
-
 	public boolean counter(UUID objectId, UUID sourceId, Game game) {
 		StackObject stackObject = getStackObject(objectId);
 		if (stackObject != null) {
@@ -98,30 +84,6 @@ public class SpellStack extends ArrayDeque<StackObject> {
 			return false;
 		}
 		return false;
-	}
-
-	public boolean replaceEvent(GameEvent event, Game game) {
-		boolean caught = false;
-		Map<ReplacementEffect, Ability> rEffects = new LinkedHashMap<ReplacementEffect, Ability>();
-		for (StackObject stackObject: this) {
-			for (Entry<ReplacementEffect, Ability> entry: stackObject.getAbilities().getReplacementEffects(Zone.STACK).entrySet()) {
-                if (entry.getKey().applies(event, entry.getValue(), game))
-                    rEffects.put(entry.getKey(), entry.getValue());
-			}
-		}
-		if (rEffects.size() > 0) {
-			List<ReplacementEffect> effects = new ArrayList(rEffects.keySet());
-			int index;
-			if (rEffects.size() == 1) {
-				index = 0;
-			}
-			else {
-				Player player = game.getPlayer(event.getPlayerId());
-				index = player.chooseEffect(effects, game);
-			}
-			caught = effects.get(index).replaceEvent(event, rEffects.get(effects.get(index)), game);
-		}
-		return caught;
 	}
 
 	public StackObject getStackObject(UUID id) {

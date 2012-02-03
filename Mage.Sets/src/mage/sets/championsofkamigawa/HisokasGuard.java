@@ -163,7 +163,7 @@ class HisokasGuardGainAbilityTargetEffect extends ContinuousEffectImpl<HisokasGu
                 if (hisokasGuard != null && hisokasGuard.getConnectedCards().size() > 0) {
                         Permanent guardedCreature = game.getPermanent(hisokasGuard.getConnectedCards().get(0));
                         if (guardedCreature != null && hisokasGuard.isTapped()) {
-                                guardedCreature.addAbility(ability);
+                                guardedCreature.addAbility(ability, game);
                                 return true;
                         }
                         else {

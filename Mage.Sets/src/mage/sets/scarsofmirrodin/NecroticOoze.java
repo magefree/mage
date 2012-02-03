@@ -111,7 +111,7 @@ class NecroticOozeEffect extends ContinuousEffectImpl<NecroticOozeEffect> {
 					if (card.getCardType().contains(CardType.CREATURE)) {
 						for (Ability ability: card.getAbilities()) {
 							if (ability instanceof ActivatedAbility) {
-								perm.addAbility(ability);
+								perm.addAbility(ability, game);
 							}
 						}
 					}

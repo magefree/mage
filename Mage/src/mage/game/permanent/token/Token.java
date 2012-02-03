@@ -96,6 +96,7 @@ public class Token extends MageObjectImpl<Token> {
             amount = event.getAmount();
             for (int i = 0; i < amount; i++) {
                 PermanentToken permanent = new PermanentToken(this, controllerId, setCode);
+                game.getState().addCard(permanent);
                 game.getBattlefield().addPermanent(permanent);
                 this.lastAddedTokenId = permanent.getId();
                 permanent.entersBattlefield(sourceId, game);

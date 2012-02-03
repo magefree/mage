@@ -310,16 +310,6 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 	public void setOwnerId(UUID controllerId) {}
 
 	@Override
-	public void checkTriggers(GameEvent event, Game game) {
-		checkTriggers(Zone.STACK, event, game);
-	}
-
-	@Override
-	public void checkTriggers(Zone zone, GameEvent event, Game game) {
-		card.checkTriggers(zone, event, game);
-	}
-
-	@Override
 	public List<String> getRules() {
 		return card.getRules();
 	}

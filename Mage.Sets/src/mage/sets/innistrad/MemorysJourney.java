@@ -130,7 +130,7 @@ class MemorysJourneyTarget extends TargetCard<MemorysJourneyTarget> {
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
         Card card = game.getCard(id);
-        if (card != null && game.getZone(card.getId()) == Zone.GRAVEYARD) {
+        if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
             UUID firstTarget = source.getFirstTarget();
             if (firstTarget != null && game.getPlayer(firstTarget).getGraveyard().contains(id)) {
                 return filter.match(card);

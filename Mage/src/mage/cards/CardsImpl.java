@@ -29,18 +29,10 @@
 package mage.cards;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import mage.Constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 
 /**
  *
@@ -79,8 +71,6 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
 	@Override
 	public void add(Card card) {
 		this.add(card.getId());
-//		if (zone != null)
-//			card.setZone(zone);
 	}
 
 	@Override
@@ -131,13 +121,6 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
 				result++;
 		}
 		return result;
-	}
-
-	@Override
-	public void checkTriggers(GameEvent event, Game game) {
-		for (UUID card: this) {
-			game.getCard(card).checkTriggers(zone, event, game);
-		}
 	}
 
 	@Override

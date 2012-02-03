@@ -188,7 +188,6 @@ public interface Player extends MageItem, Copyable<Player> {
 	public boolean canBeTargetedBy(MageObject source);
 	public boolean hasProtectionFrom(MageObject source);
 	public boolean flipCoin(Game game);
-	public void checkTriggers(GameEvent event, Game game);
 	public void discard(int amount, Ability source, Game game);
 	public void discardToMax(Game game);
 	public boolean discard(Card card, Ability source, Game game);
@@ -223,7 +222,7 @@ public interface Player extends MageItem, Copyable<Player> {
 	public abstract boolean playMana(ManaCost unpaid, Game game);
 	public abstract boolean playXMana(VariableManaCost cost, ManaCosts<ManaCost> costs, Game game);
 	public abstract int chooseEffect(List<ReplacementEffect> rEffects, Game game);
-	public abstract TriggeredAbility chooseTriggeredAbility(TriggeredAbilities abilities, Game game);
+	public abstract TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game);
 	public abstract Mode chooseMode(Modes modes, Ability source, Game game);
 	public abstract void selectAttackers(Game game);
 	public abstract void selectBlockers(Game game);

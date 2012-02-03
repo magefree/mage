@@ -94,7 +94,7 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl<GainAbilit
 		for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId())) {
 			if (!this.affectedObjectsSet || objects.contains(perm.getId())) {
 				if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
-					perm.addAbility(ability);
+					perm.addAbility(ability, game);
 				}
 			}
 		}

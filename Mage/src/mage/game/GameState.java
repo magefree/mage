@@ -39,17 +39,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import mage.Constants.Zone;
-import mage.abilities.Abilities;
-import mage.abilities.AbilitiesImpl;
-import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
-import mage.abilities.DelayedTriggeredAbilities;
-import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.Mode;
-import mage.abilities.SpecialActions;
-import mage.abilities.TriggeredAbilities;
+import mage.abilities.*;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
+import mage.abilities.effects.Effect;
 import mage.cards.Card;
 import mage.choices.Choice;
 import mage.game.combat.Combat;
@@ -68,6 +61,7 @@ import mage.players.PlayerList;
 import mage.players.Players;
 import mage.target.Target;
 import mage.util.Copyable;
+import mage.watchers.Watcher;
 import mage.watchers.Watchers;
 
 /**
@@ -98,7 +92,8 @@ public class GameState implements Serializable, Copyable<GameState> {
     private boolean paused;
 //	private List<String> messages = new ArrayList<String>();
 	private ContinuousEffects effects;
-	private TriggeredAbilities triggers;
+    private TriggeredAbilities triggers;
+	private List<TriggeredAbility> triggered = new ArrayList<TriggeredAbility>();
 	private DelayedTriggeredAbilities delayed;
 	private SpecialActions specialActions;
     private Map<UUID, Abilities<ActivatedAbility>> otherAbilities = new HashMap<UUID, Abilities<ActivatedAbility>>();
@@ -116,10 +111,9 @@ public class GameState implements Serializable, Copyable<GameState> {
 		command = new Command();
 		exile = new Exile();
 		revealed = new Revealed();
-		lookedAt = new HashMap<UUID, LookedAt>();
 		battlefield = new Battlefield();
 		effects = new ContinuousEffects();
-		triggers = new TriggeredAbilities();
+        triggers = new TriggeredAbilities();
 		delayed = new DelayedTriggeredAbilities();
 		specialActions = new SpecialActions();
 		combat = new Combat();
@@ -142,7 +136,10 @@ public class GameState implements Serializable, Copyable<GameState> {
 		this.turnNum = state.turnNum;
 		this.gameOver = state.gameOver;
 		this.effects = state.effects.copy();
-		this.triggers = state.triggers.copy();
+        for (TriggeredAbility trigger: state.triggered) {
+            this.triggered.add(trigger.copy());
+        }
+        this.triggers = state.triggers.copy();
 		this.delayed = state.delayed.copy();
 		this.specialActions = state.specialActions.copy();
 		this.combat = state.combat.copy();
@@ -413,7 +410,8 @@ public class GameState implements Serializable, Copyable<GameState> {
 		this.stack = state.stack;
 		this.command = state.command;
 		this.effects = state.effects;
-		this.triggers = state.triggers;
+        this.triggers = state.triggers;
+		this.triggered = state.triggered;
 		this.combat = state.combat;
 		this.exile = state.exile;
 		this.battlefield = state.battlefield;
@@ -426,41 +424,49 @@ public class GameState implements Serializable, Copyable<GameState> {
 
 	public void handleEvent(GameEvent event, Game game) {
 		watchers.watch(event, game);
-//		if (!replaceEvent(event, game)) {
-			//TODO: this is awkward - improve
-			if (event.getType() == EventType.ZONE_CHANGE) {
-				ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-				if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getTarget() != null) {
-					if (zEvent.getTarget() instanceof PermanentCard) {
-						((PermanentCard)zEvent.getTarget()).checkPermanentOnlyTriggers(zEvent, game);
-					}
-					else {
-						zEvent.getTarget().checkTriggers(zEvent.getFromZone(), event, game);
-						zEvent.getTarget().checkTriggers(zEvent.getToZone(), event, game);
-					}
-				}
-			}
-			for (Player player: players.values()) {
-				player.checkTriggers(event, game);
-			}
-			battlefield.checkTriggers(event, game);
-			stack.checkTriggers(event, game);
-			command.checkTriggers(event, game);
-			delayed.checkTriggers(event, game);
-			exile.checkTriggers(event, game);
-//		}
+        triggers.checkTriggers(event, game);
 	}
 
 	public boolean replaceEvent(GameEvent event, Game game) {
-		return stack.replaceEvent(event, game) | effects.replaceEvent(event, game);
-
+		return effects.replaceEvent(event, game);
 	}
 
-	public void addTriggeredAbility(TriggeredAbility ability) {
-		this.triggers.add(ability);
+    public void addCard(Card card) {
+        setZone(card.getId(), Zone.OUTSIDE);
+        for (Watcher watcher: card.getWatchers()) {
+            watcher.setControllerId(card.getOwnerId());
+            watcher.setSourceId(card.getId());
+            watchers.add(watcher);
+        }
+        for (Ability ability: card.getAbilities()) {
+            addAbility(ability);
+        }
+    }
+    
+	public void addAbility(Ability ability) {
+        if (ability instanceof StaticAbility) {
+            for (Mode mode: ability.getModes().values()) {
+                for (Effect effect: mode.getEffects()) {
+                    if (effect instanceof ContinuousEffect) {
+                        addEffect((ContinuousEffect)effect, ability);
+                    }
+                }
+            }
+        }
+        else if (ability instanceof TriggeredAbility) {
+            triggers.add((TriggeredAbility)ability);
+        }
 	}
 
-	public void addDelayedTriggeredAbility(DelayedTriggeredAbility ability) {
+    public void addTriggeredAbility(TriggeredAbility ability) {
+		this.triggered.add(ability);
+	}
+
+    public void removeTriggeredAbility(TriggeredAbility ability) {
+		this.triggered.remove(ability);
+	}
+
+    public void addDelayedTriggeredAbility(DelayedTriggeredAbility ability) {
 		this.delayed.add(ability);
 	}
 
@@ -473,8 +479,13 @@ public class GameState implements Serializable, Copyable<GameState> {
 		}
 	}
 
-	public TriggeredAbilities getTriggered() {
-		return this.triggers;
+	public List<TriggeredAbility> getTriggered(UUID controllerId) {
+        List<TriggeredAbility> triggereds = new ArrayList<TriggeredAbility>();
+        for (TriggeredAbility ability: triggered) {
+            if (ability.getControllerId().equals(controllerId))
+                triggereds.add(ability);
+        }
+		return triggereds;
 	}
 
     public DelayedTriggeredAbilities getDelayed() {
@@ -516,8 +527,9 @@ public class GameState implements Serializable, Copyable<GameState> {
     public void clear() {
         battlefield.clear();
         effects.clear();
-        delayed.clear();
         triggers.clear();
+        delayed.clear();
+        triggered.clear();
         stack.clear();
         exile.clear();
         command.clear();

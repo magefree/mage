@@ -109,7 +109,7 @@ class EvilPresenceEffect extends ContinuousEffectImpl<EvilPresenceEffect> {
                     case AbilityAddingRemovingEffects_6:
                         if (sublayer == SubLayer.NA) {
                             land.getAbilities().clear();
-                            land.addAbility(new BlackManaAbility());
+                            land.addAbility(new BlackManaAbility(), game);
                         }
                         break;
                 }

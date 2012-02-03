@@ -72,6 +72,7 @@ public class CopyPermanentEffect extends OneShotEffect<CopyPermanentEffect> {
                 Permanent perm = game.getPermanent(target.getFirstTarget());
                 if (perm != null) {
                     perm = perm.copy();
+                    game.getState().addCard(perm);
                     perm.reset(game);
                     perm.assignNewId();
                     game.addEffect(new CopyEffect(perm), source);

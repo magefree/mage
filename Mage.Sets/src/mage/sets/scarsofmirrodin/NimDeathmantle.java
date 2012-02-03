@@ -164,7 +164,7 @@ class NimDeathmantleEffect extends OneShotEffect<NimDeathmantleEffect> {
 					if (target != null && equipment != null) {
 						Card card = game.getCard(target);
 						// check if it's still in graveyard
-						if (card != null && game.getZone(card.getId()).equals(Constants.Zone.GRAVEYARD)) {
+						if (card != null && game.getState().getZone(card.getId()).equals(Constants.Zone.GRAVEYARD)) {
 							Player owner = game.getPlayer(card.getOwnerId());
 							if (card.putOntoBattlefield(game, Constants.Zone.GRAVEYARD, source.getId(), source.getControllerId())) {
 								owner.getGraveyard().remove(card);

@@ -187,21 +187,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		for (Card card: cards) {
 			card.setOwnerId(ownerId);
 			gameCards.put(card.getId(), card);
-			state.setZone(card.getId(), Zone.OUTSIDE);
-			for (Watcher watcher: card.getWatchers()) {
-                watcher.setControllerId(ownerId);
-                watcher.setSourceId(card.getId());
-				state.getWatchers().add(watcher);
-			}
-            for (StaticAbility ability: card.getAbilities().getStaticAbilities(Zone.ALL)) {
-                for (Mode mode: ability.getModes().values()) {
-                    for (Effect effect: mode.getEffects()) {
-                        if (effect instanceof ContinuousEffect) {
-                            state.addEffect((ContinuousEffect)effect, ability);
-                        }
-                    }
-                }
-            }
+            state.addCard(card);
 		}
 	}
 
@@ -285,10 +271,10 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		return gameCards.get(cardId);
 	}
 
-	@Override
-	public Zone getZone(UUID objectId) {
-		return state.getZone(objectId);
-	}
+//	@Override
+//	public Zone getZone(UUID objectId) {
+//		return state.getZone(objectId);
+//	}
 
 	@Override
 	public void setZone(UUID objectId, Zone zone) {
@@ -766,16 +752,16 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		for (UUID playerId: state.getPlayerList(state.getActivePlayerId())) {
 			Player player = getPlayer(playerId);
 			while (true) {
-				TriggeredAbilities abilities = state.getTriggered().getControlledBy(player.getId());
-				if (abilities.size() == 0)
+				List<TriggeredAbility> abilities = state.getTriggered(player.getId());
+				if (abilities.isEmpty())
 					break;
 				if (abilities.size() == 1) {
-					state.getTriggered().remove(abilities.get(0));
+					state.removeTriggeredAbility(abilities.get(0));
 					played |= player.triggerAbility(abilities.get(0), this);
 				}
 				else {
 					TriggeredAbility ability = player.chooseTriggeredAbility(abilities, this);
-					state.getTriggered().remove(ability);
+					state.removeTriggeredAbility(ability);
 					played |= player.triggerAbility(ability, this);
 				}
 			}
@@ -1011,9 +997,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	}
 
 	@Override
-	public void fireSelectTargetEvent(UUID playerId, String message, TriggeredAbilities abilities, boolean required) {
+	public void fireSelectTargetEvent(UUID playerId, String message, List<TriggeredAbility> abilities) {
         if (simulation) return;
-		playerQueryEventSource.target(playerId, message, abilities, required);
+		playerQueryEventSource.target(playerId, message, abilities);
 	}
 
 	@Override

@@ -114,7 +114,7 @@ class ShivsEmbraceEffect extends ContinuousEffectImpl<ShivsEmbraceEffect> {
 						break;
 					case AbilityAddingRemovingEffects_6:
 						if (sublayer == SubLayer.NA) {
-							creature.addAbility(FlyingAbility.getInstance());
+							creature.addAbility(FlyingAbility.getInstance(), game);
 						}
 						break;
 				}

@@ -34,6 +34,7 @@ import java.util.*;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.TriggeredAbilities;
+import mage.abilities.TriggeredAbility;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.game.permanent.Permanent;
@@ -144,8 +145,8 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
 		return new PlayerQueryEvent(playerId, message, null, null, null, cards, QueryType.PICK_TARGET, 0, 0, required, options);
 	}
 
-	public static PlayerQueryEvent targetEvent(UUID playerId, String message, TriggeredAbilities abilities, boolean required) {
-		return new PlayerQueryEvent(playerId, message, abilities, null, null, null, QueryType.PICK_ABILITY, 0, 0, required);
+	public static PlayerQueryEvent targetEvent(UUID playerId, String message, List<TriggeredAbility> abilities) {
+		return new PlayerQueryEvent(playerId, message, abilities, null, null, null, QueryType.PICK_ABILITY, 0, 0, true);
 	}
 
 	public static PlayerQueryEvent targetEvent(UUID playerId, String message, List<Permanent> perms, boolean required) {

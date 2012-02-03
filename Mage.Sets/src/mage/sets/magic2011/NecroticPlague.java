@@ -112,8 +112,8 @@ class NecroticPlagueEffect extends ContinuousEffectImpl<NecroticPlagueEffect> {
 				switch (layer) {
 					case AbilityAddingRemovingEffects_6:
 						if (sublayer == SubLayer.NA) {
-							creature.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new SacrificeSourceEffect()));
-							creature.addAbility(new DiesTriggeredAbility(new NecroticPlagueEffect2(source.getSourceId()), false));
+							creature.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new SacrificeSourceEffect()), game);
+							creature.addAbility(new DiesTriggeredAbility(new NecroticPlagueEffect2(source.getSourceId()), false), game);
 						}
 						break;
 				}

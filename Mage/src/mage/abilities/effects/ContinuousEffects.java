@@ -201,10 +201,11 @@ public class ContinuousEffects implements Serializable {
 	}
 
 	private boolean isInactive(ContinuousEffect effect, Game game) {
+        Ability ability = abilityMap.get(effect.getId());
 		switch(effect.getDuration()) {
 			case WhileOnBattlefield:
-				Permanent permanent = game.getPermanent(abilityMap.get(effect.getId()).getSourceId());
-				return (permanent == null || !permanent.isPhasedIn());
+                if (game.getObject(ability.getSourceId()) == null)
+                    return (true);
 			case OneUse:
 				return effect.isUsed();
 			case Custom:
@@ -214,22 +215,13 @@ public class ContinuousEffects implements Serializable {
 	}
 
 	private List<ContinuousEffect> getLayeredEffects(Game game) {
-		List<ContinuousEffect> layerEffects = new ArrayList<ContinuousEffect>(layeredEffects);
-		for (Card card: game.getCards()) {
-            Zone zone = game.getState().getZone(card.getId());
-			if (zone == Zone.HAND || zone == Zone.GRAVEYARD) {
-                for (Entry<Effect, Ability> entry: card.getAbilities().getEffects(game, zone, EffectType.CONTINUOUS).entrySet()) {
-                    layerEffects.add((ContinuousEffect)entry.getKey());
-                    abilityMap.put(entry.getKey().getId(), entry.getValue());
-                }
-			}
-		}
-		for (Permanent permanent: game.getBattlefield().getAllPermanents()) {
-            for (Entry<Effect, Ability> entry: permanent.getAbilities().getEffects(game, Zone.BATTLEFIELD, EffectType.CONTINUOUS).entrySet()) {
-                layerEffects.add((ContinuousEffect)entry.getKey());
-                abilityMap.put(entry.getKey().getId(), entry.getValue());
+		List<ContinuousEffect> layerEffects = new ArrayList<ContinuousEffect>();
+        for (ContinuousEffect effect: layeredEffects) {
+            Ability ability = abilityMap.get(effect.getId());
+            if (ability.isInUseableZone(game)) {
+                layerEffects.add(effect);
             }
-		}
+        }
 		Collections.sort(layerEffects, new TimestampSorter());
 		return layerEffects;
 	}
@@ -256,7 +248,7 @@ public class ContinuousEffects implements Serializable {
 //		}
 		for (RequirementEffect effect: requirementEffects) {
             Ability ability = abilityMap.get(effect.getId());
-            if (!(ability instanceof StaticAbility) || ability.getZone() == game.getZone(ability.getSourceId())) {
+            if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game)) {
                 if (effect.applies(permanent, ability, game))
                     effects.add(effect);
             }
@@ -277,7 +269,7 @@ public class ContinuousEffects implements Serializable {
 //		}
 		for (RestrictionEffect effect: restrictionEffects) {
             Ability ability = abilityMap.get(effect.getId());
-            if (!(ability instanceof StaticAbility) || ability.getZone() == game.getZone(ability.getSourceId())) {
+            if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game)) {
                 if (effect.applies(permanent, ability, game))
                     effects.add(effect);
             }
@@ -328,7 +320,7 @@ public class ContinuousEffects implements Serializable {
 		//get all applicable transient Replacement effects
 		for (ReplacementEffect effect: replacementEffects) {
             Ability ability = abilityMap.get(effect.getId());
-            if (!(ability instanceof StaticAbility) || ability.getZone() == game.getZone(ability.getSourceId())) {
+            if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game)) {
                 if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
                     if (effect.applies(event, ability, game)) {
                         replaceEffects.add(effect);
@@ -338,7 +330,7 @@ public class ContinuousEffects implements Serializable {
 		}
 		for (PreventionEffect effect: preventionEffects) {
             Ability ability = abilityMap.get(effect.getId());
-            if (!(ability instanceof StaticAbility) || ability.getZone() == game.getZone(ability.getSourceId())) {
+            if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game)) {
                 if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
                     if (effect.applies(event, ability, game)) {
                         replaceEffects.add(effect);
