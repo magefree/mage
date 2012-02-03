@@ -54,6 +54,7 @@ public class TolarianAcademy extends CardImpl<TolarianAcademy> {
 
     public TolarianAcademy(UUID ownerId) {
         super(ownerId, 330, "Tolarian Academy", Rarity.RARE, new CardType[]{CardType.LAND}, "");
+        this.supertype.add("Legendary");
         this.expansionSetCode = "USG";
 
         DynamicManaAbility ability = new DynamicManaAbility(Mana.BlueMana, new PermanentsOnBattlefieldCount(filter));
