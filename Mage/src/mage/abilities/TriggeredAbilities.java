@@ -49,9 +49,9 @@ public class TriggeredAbilities extends AbilitiesImpl<TriggeredAbility> {
 
     public void checkTriggers(GameEvent event, Game game) {
         for (TriggeredAbility ability: this) {
-            if (ability.isInUseableZone(game)) {
+            if (event.getType() == GameEvent.EventType.ZONE_CHANGE || ability.isInUseableZone(game)) {
                 MageObject object = game.getObject(ability.getSourceId());
-                if (object.getAbilities().contains(ability)) {
+                if (object != null && object.getAbilities().contains(ability)) {
                     if (ability.checkTrigger(event, game)) {
                         ability.trigger(game, ability.getControllerId());
                     }
