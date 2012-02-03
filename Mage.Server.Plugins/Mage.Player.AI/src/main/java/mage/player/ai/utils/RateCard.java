@@ -1,5 +1,7 @@
 package mage.player.ai.utils;
 
+import java.io.InputStream;
+import java.util.*;
 import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
@@ -10,9 +12,6 @@ import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreaturePermanent;
 import org.apache.log4j.Logger;
 
-import java.io.InputStream;
-import java.util.*;
-
 /**
  * Class responsible for reading ratings from resources and rating gived cards.
  * Based on card relative ratings from resources and card parameters.
@@ -22,6 +21,7 @@ import java.util.*;
 public class RateCard {
 
 	private static Map<String, Integer> ratings;
+    private static Map<String, Integer> rated = new HashMap<String, Integer>();
 	private static Integer min = Integer.MAX_VALUE, max = 0;
 
 	/**
@@ -41,11 +41,15 @@ public class RateCard {
 	/**
 	 * Get absolute score of the card.
 	 * Depends on type, manacost, rating.
+     * If allowedColors is null then the rating is retrieved from the cache
 	 *
 	 * @param card
 	 * @return
 	 */
 	public static int rateCard(Card card, List<Constants.ColoredManaSymbol> allowedColors) {
+        if (allowedColors == null && rated.containsKey(card.getName())) {
+            return rated.get(card.getName());
+        }
 		int type = 0;
 		if (card.getCardType().contains(Constants.CardType.CREATURE)) {
 			type = 10;
@@ -60,9 +64,11 @@ public class RateCard {
 		}
 		int score = 10 * getCardRating(card) + 2 * type + getManaCostScore(card, allowedColors)
 				+ 40 * isRemoval(card);
+        if (allowedColors == null)
+            rated.put(card.getName(), score);
 		return score;
 	}
-
+    
 	private static int isRemoval(Card card) {
 		if (card.getSubtype().contains("Aura") || card.getCardType().contains(Constants.CardType.INSTANT)
 				|| card.getCardType().contains(Constants.CardType.SORCERY)) {
