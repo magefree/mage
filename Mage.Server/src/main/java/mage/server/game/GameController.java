@@ -28,25 +28,8 @@
 
 package mage.server.game;
 
-import java.io.BufferedOutputStream;
-
-import mage.MageException;
-import mage.server.*;
-
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.io.Serializable;
-import java.util.*;
-import java.util.Map.Entry;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
-import java.util.zip.GZIPOutputStream;
-
 import mage.Constants.Zone;
+import mage.MageException;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.cards.Cards;
@@ -59,13 +42,25 @@ import mage.game.events.PlayerQueryEvent;
 import mage.game.events.TableEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.server.util.SystemUtil;
+import mage.server.*;
 import mage.server.util.Splitter;
+import mage.server.util.SystemUtil;
 import mage.server.util.ThreadExecutor;
 import mage.sets.Sets;
-import mage.view.*;
+import mage.view.AbilityPickerView;
+import mage.view.CardsView;
 import mage.view.ChatMessage.MessageColor;
+import mage.view.GameView;
+import mage.view.PermanentView;
 import org.apache.log4j.Logger;
+
+import java.io.*;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
+import java.util.zip.GZIPOutputStream;
 
 /**
  *
@@ -596,10 +591,17 @@ public class GameController implements GameCallback {
 				else {
 					//System.out.println("asThough: " + playerId + " " + game.getPriorityPlayerId());
 					Player player = game.getPlayer(playerId);
+                    boolean found = false;
 					for (UUID controlled : player.getPlayersUnderYourControl()) {
-						if (gameSessions.containsKey(controlled) && game.getPriorityPlayerId().equals(controlled))
+						if (gameSessions.containsKey(controlled) && game.getPriorityPlayerId().equals(controlled)) {
 							command.execute(controlled);
+                            found = true;
+                        }
 					}
+                    if (!found) {
+                        // something wrong - it may cause game freezes
+                        logger.warn("WARNING! GameController.sendMessage - couldn't find session for action execution.");
+                    }
 				}
 		} else {
 			// ignore - no control over the turn

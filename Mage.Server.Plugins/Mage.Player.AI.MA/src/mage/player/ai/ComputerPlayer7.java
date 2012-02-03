@@ -87,6 +87,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
 		logState(game);
 		if (logger.isDebugEnabled())
 			logger.debug("Game State: Turn-" + game.getTurnNum() + " Step-" + game.getTurn().getStepType() + " ActivePlayer-" + game.getPlayer(game.getActivePlayerId()).getName() + " PriorityPlayer-" + name);
+        game.getState().setPriorityPlayerId(playerId);
 		game.firePriorityEvent(playerId);
 		switch (game.getTurn().getStepType()) {
 			case UPKEEP:

@@ -27,11 +27,6 @@
  */
 package mage.player.ai;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import mage.Constants.PhaseStep;
 import mage.Constants.RangeOfInfluence;
 import mage.Constants.Zone;
@@ -49,6 +44,12 @@ import mage.game.combat.CombatGroup;
 import mage.player.ai.MCTSPlayer.NextAction;
 import mage.players.Player;
 import org.apache.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  *
@@ -92,6 +93,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer<ComputerPlayerMCTS> imple
     public boolean priority(Game game) {
         if (game.getStep().getType() == PhaseStep.PRECOMBAT_MAIN)
             logList("computer player " + name + " hand: ", new ArrayList(hand.getCards(game)));
+        game.getState().setPriorityPlayerId(playerId);
         game.firePriorityEvent(playerId);
         getNextAction(game, NextAction.PRIORITY);
         Ability ability =  root.getAction();

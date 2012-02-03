@@ -133,6 +133,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 	@Override
 	public boolean priority(Game game) {
 		logState(game);
+        game.getState().setPriorityPlayerId(playerId);
 		game.firePriorityEvent(playerId);
 		switch (game.getTurn().getStepType()) {
 			case UPKEEP:
