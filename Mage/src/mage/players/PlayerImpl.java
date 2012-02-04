@@ -630,17 +630,20 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
 	@Override
 	public boolean triggerAbility(TriggeredAbility source, Game game) {
+        if (source == null) {
+            log.warn("Null source in triggerAbility method");
+            return false;
+        }
 		//20091005 - 603.3c, 603.3d
 		int bookmark = game.bookmarkState();
         //FIXME: remove try\catch once we find out the reason for NPE on server
         TriggeredAbility ability = null;
         try {
-		    ability = (TriggeredAbility) source.copy();
+		    ability = source.copy();
         } catch (NullPointerException npe) {
             log.fatal("NPE for source=" + source);
-            if (source != null) {
-                log.fatal("NPE for source=" + source.getRule());
-            }
+            log.fatal("NPE for source=" + source.getRule());
+            throw npe;
         }
 		if (ability != null && ability.canChooseTarget(game)) {
 			if (ability.isUsesStack()) {
