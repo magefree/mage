@@ -74,8 +74,11 @@ import mage.players.net.UserData;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetDiscard;
 import mage.watchers.common.BloodthirstWatcher;
+import org.apache.log4j.Logger;
 
 public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Serializable {
+
+    private static final transient Logger log = Logger.getLogger(PlayerImpl.class);
 
     private static Random rnd = new Random();
     
@@ -629,7 +632,16 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	public boolean triggerAbility(TriggeredAbility source, Game game) {
 		//20091005 - 603.3c, 603.3d
 		int bookmark = game.bookmarkState();
-		TriggeredAbility ability = (TriggeredAbility) source.copy();
+        //FIXME: remove try\catch once we find out the reason for NPE on server
+        TriggeredAbility ability = null;
+        try {
+		    ability = (TriggeredAbility) source.copy();
+        } catch (NullPointerException npe) {
+            log.fatal("NPE for source=" + source);
+            if (source != null) {
+                log.fatal("NPE for source=" + source.getRule());
+            }
+        }
 		if (ability != null && ability.canChooseTarget(game)) {
 			if (ability.isUsesStack()) {
 				game.getStack().push(new StackAbility(ability, playerId));
