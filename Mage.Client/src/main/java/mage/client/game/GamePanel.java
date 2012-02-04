@@ -336,6 +336,9 @@ public class GamePanel extends javax.swing.JPanel {
 			if (playerNum == playerSeat)
 				break;
 		}
+        for (PlayAreaPanel p: players.values()) {
+            p.sizePlayer(smallMode);
+        }
 	}
 
 	public synchronized void updateGame(GameView game) {
