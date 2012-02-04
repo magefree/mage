@@ -229,15 +229,15 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 			state.setZone(objectId, Zone.BATTLEFIELD);
 			return object;
 		}
-		object = getCard(objectId);
-		if (object != null)
-			return object;
 		for (StackObject item: state.getStack()) {
 			if (item.getId().equals(objectId)) {
 				state.setZone(objectId, Zone.STACK);
 				return item;
 			}
 		}
+		object = getCard(objectId);
+		if (object != null)
+			return object;
 
 		return null;
 	}

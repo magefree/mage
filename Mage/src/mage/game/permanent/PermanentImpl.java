@@ -159,14 +159,15 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 	}
 
     @Override
+    @Deprecated
     public void addAbility(Ability ability) {
         throw new UnsupportedOperationException("Unsupported operation: use addAbility(Ability ability, Game game) instead");
     }
     
 	@Override
 	public void addAbility(Ability ability, Game game) {
-		Ability copy = ability.copy();
-        if (!abilities.containsKey(copy.getId())) {
+        if (!abilities.containsKey(ability.getId())) {
+    		Ability copy = ability.copy();
             copy.setControllerId(controllerId);
             copy.setSourceId(objectId);
             game.getState().addAbility(copy);

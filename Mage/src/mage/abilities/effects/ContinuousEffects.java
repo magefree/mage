@@ -202,6 +202,8 @@ public class ContinuousEffects implements Serializable {
 
 	private boolean isInactive(ContinuousEffect effect, Game game) {
         Ability ability = abilityMap.get(effect.getId());
+        if (ability == null)
+            return true;
 		switch(effect.getDuration()) {
 			case WhileOnBattlefield:
                 if (game.getObject(ability.getSourceId()) == null)

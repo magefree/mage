@@ -49,7 +49,6 @@ public class PermanentToken extends PermanentImpl<PermanentToken> {
 		super(controllerId, controllerId, token.getName());
 		this.token = token;
 		this.expansionSetCode = expansionSetCode;
-		copyFromToken(token);
 	}
 
 	public PermanentToken(final PermanentToken permanent) {
@@ -61,15 +60,15 @@ public class PermanentToken extends PermanentImpl<PermanentToken> {
 	@Override
 	public void reset(Game game) {
 		Token copy = token.copy();
-		copyFromToken(copy);
+		copyFromToken(copy, game);
 		super.reset(game);
 	}
 
-	protected void copyFromToken(Token token) {
+	protected void copyFromToken(Token token, Game game) {
 		this.name = token.getName();
 		this.abilities.clear();
 		for (Ability ability: token.getAbilities()) {
-			this.addAbility(ability);
+			this.addAbility(ability, game);
 		}
 		this.cardType = token.getCardType();
 		this.color = token.getColor();
