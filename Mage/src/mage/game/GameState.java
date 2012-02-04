@@ -424,6 +424,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 
 	public void handleEvent(GameEvent event, Game game) {
 		watchers.watch(event, game);
+        delayed.checkTriggers(event, game);
         triggers.checkTriggers(event, game);
 	}
 

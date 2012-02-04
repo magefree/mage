@@ -48,6 +48,19 @@ import mage.game.events.GameEvent;
 	public DelayedTriggeredAbilities copy() {
 		return new DelayedTriggeredAbilities(this);
 	}
+    
+	public void checkTriggers(GameEvent event, Game game) {
+        if (this.size() > 0) {
+            Iterator<DelayedTriggeredAbility> it = this.iterator();
+            while (it.hasNext()) {
+                DelayedTriggeredAbility ability = it.next();
+                if (ability.checkTrigger(event, game)) {
+                    ability.trigger(game, ability.controllerId);
+                    it.remove();
+                }
+            }
+        }
+	}
 
 }
 
