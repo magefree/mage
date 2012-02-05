@@ -52,10 +52,10 @@ public class MudbuttonTorchrunner extends CardImpl<MudbuttonTorchrunner> {
         this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
+        // When Mudbutton Torchrunner dies, it deals 3 damage to target creature or player.
         Ability ability = new DiesTriggeredAbility(new DamageTargetEffect(3), false);
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
-        // When Mudbutton Torchrunner dies, it deals 3 damage to target creature or player.
     }
 
     public MudbuttonTorchrunner(final MudbuttonTorchrunner card) {
