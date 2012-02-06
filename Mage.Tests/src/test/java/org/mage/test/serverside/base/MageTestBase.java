@@ -27,6 +27,7 @@ import java.io.FilenameFilter;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import mage.Constants.PhaseStep;
 
 /**
  * Base class for all tests.
@@ -69,6 +70,8 @@ public abstract class MageTestBase {
 	protected static Player activePlayer = null;
 
 	protected Integer stopOnTurn;
+    
+    protected PhaseStep stopAtStep = PhaseStep.UNTAP;
 
 	protected enum ParserState {
 		INIT,

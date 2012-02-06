@@ -14,6 +14,7 @@ import org.mage.test.serverside.base.MageTestBase;
 
 import java.util.List;
 import java.util.UUID;
+import mage.Constants.PhaseStep;
 
 /**
  * API for test initialization and asserting the test results.
@@ -187,6 +188,15 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
 	 */
 	public void setStopOnTurn(int turn) {
 		stopOnTurn = turn == -1 ? null : Integer.valueOf(turn);
+        stopAtStep = PhaseStep.UNTAP;
+	}
+
+    /**
+	 * Define turn number and step to stop the game on.
+	 */
+	public void setStopAt(int turn, PhaseStep step) {
+		stopOnTurn = turn == -1 ? null : Integer.valueOf(turn);
+        stopAtStep = step;
 	}
 
 	/**

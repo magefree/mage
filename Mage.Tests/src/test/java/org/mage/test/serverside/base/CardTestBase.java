@@ -17,6 +17,7 @@ import org.mage.test.serverside.base.impl.CardTestAPIImpl;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import mage.Constants.PhaseStep;
 
 /**
  * Base class for testing single cards and effects.
@@ -92,6 +93,7 @@ public abstract class CardTestBase extends CardTestAPIImpl {
 		currentGame = game;
 
         stopOnTurn = 2;
+        stopAtStep = PhaseStep.UNTAP;
 		handCardsA.clear();
 		handCardsB.clear();
 		battlefieldCardsA.clear();
@@ -176,6 +178,7 @@ public abstract class CardTestBase extends CardTestAPIImpl {
 		GameOptions gameOptions = new GameOptions();
 		gameOptions.testMode = true;
 		gameOptions.stopOnTurn = stopOnTurn;
+        gameOptions.stopAtStep = stopAtStep;
 		currentGame.start(activePlayer.getId(), gameOptions);
 		long t2 = System.nanoTime();
 		logger.info("Winner: " + currentGame.getWinner());

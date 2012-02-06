@@ -181,6 +181,11 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	public void setCustomData(Object data) {
 		this.customData = data;
 	}
+    
+    @Override
+    public GameOptions getOptions() {
+        return gameOptions;
+    }
 
 	@Override
 	public void loadCards(Set<Card> cards, UUID ownerId) {
@@ -423,7 +428,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     }
     
 	private boolean checkStopOnTurnOption() {
-		if (gameOptions.stopOnTurn != null) {
+		if (gameOptions.stopOnTurn != null && gameOptions.stopAtStep == PhaseStep.UNTAP) {
 			if (gameOptions.stopOnTurn.equals(state.getTurnNum())) {
 				winnerId = null; //DRAW
 				saveState();
@@ -432,7 +437,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		}
 		return false;
 	}
-
+    
 	protected void init(UUID choosingPlayerId, boolean testMode) {
 		for (Player player: state.getPlayers().values()) {
 			player.beginTurn(this);
@@ -1025,7 +1030,13 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         if (simulation) return;
 		playerQueryEventSource.choose(playerId, choice.getMessage(), choice.getChoices());
 	}
-
+    
+    @Override
+    public void fireChoosePileEvent(UUID playerId, List<? extends Card> pile1, List<? extends Card> pile2) {
+        if (simulation) return;
+        //playerQueryEventSource.choosePile(playerId, pile1, pile2);
+    }
+    
 	@Override
 	public void informPlayers(String message) {
         if (simulation) return;

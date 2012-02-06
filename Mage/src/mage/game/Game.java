@@ -78,6 +78,7 @@ public interface Game extends MageItem, Serializable {
 	public Collection<Card> getCards();
 	public Object getCustomData();
 	public void setCustomData(Object data);
+    public GameOptions getOptions();
 	public MageObject getObject(UUID objectId);
 	public UUID getControllerId(UUID objectId);
 	public Permanent getPermanent(UUID permanentId);
@@ -135,6 +136,7 @@ public interface Game extends MageItem, Serializable {
 	public void fireGetChoiceEvent(UUID playerId, String message, Collection<? extends ActivatedAbility> choices);
 	public void fireGetModeEvent(UUID playerId, String message, Map<UUID, String> modes);
 	public void fireGetAmountEvent(UUID playerId, String message, int min, int max);
+    public void fireChoosePileEvent(UUID playerId, List<? extends Card> pile1, List<? extends Card> pile2);
 	public void fireInformEvent(String message);
 	public void fireUpdatePlayersEvent();
 	public void informPlayers(String message);

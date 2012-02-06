@@ -1,6 +1,7 @@
 package mage.game;
 
 import java.io.Serializable;
+import mage.Constants.PhaseStep;
 
 /**
  * Game options for Mage game.
@@ -26,4 +27,10 @@ public class GameOptions implements Serializable {
 	 * By default, is null meaning that game shouldn't stop on any specific turn.
 	 */
 	public Integer stopOnTurn = null;
+    
+    /**
+     * Stop at the end of the turn if true otherwise stop at the beginning
+     */
+    public PhaseStep stopAtStep = PhaseStep.UNTAP;
+    
 }

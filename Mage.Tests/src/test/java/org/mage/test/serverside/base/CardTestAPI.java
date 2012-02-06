@@ -6,6 +6,7 @@ import mage.filter.Filter;
 import mage.players.Player;
 
 import java.util.List;
+import mage.Constants.PhaseStep;
 
 /**
  * Interface for all test initialization and assertion operations.
@@ -82,7 +83,12 @@ public interface CardTestAPI {
 	 */
 	void setStopOnTurn(int turn);
 
-	//******* ASSERT METHODS *******/
+	/**
+	 * Define the turn number and step to stop the game on.
+	 */
+	void setStopAt(int turn, PhaseStep step);
+
+    //******* ASSERT METHODS *******/
 
 	/**
 	 * Assert turn number after test execution.

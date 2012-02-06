@@ -102,10 +102,12 @@ public abstract class Phase<T extends Phase<T>> implements Serializable {
 		if (beginPhase(game, activePlayerId)) {
 
 			for (Step step: steps) {
+				currentStep = step;
+                if (!game.isSimulation())
+                    checkStopOnStepOption(game);
 				if (game.isPaused() || game.isGameOver())
 					return false;
-				currentStep = step;
-				if (!game.getState().getTurnMods().skipStep(activePlayerId, currentStep.getType()))
+				if (!game.getState().getTurnMods().skipStep(activePlayerId, getStep().getType()))
 					playStep(game);
 			}
             if (game.isPaused() || game.isGameOver())
@@ -115,6 +117,14 @@ public abstract class Phase<T extends Phase<T>> implements Serializable {
 			return true;
 		}
 		return false;
+	}
+
+    private void checkStopOnStepOption(Game game) {
+		if (game.getOptions().stopOnTurn != null && game.getOptions().stopAtStep == getStep().getType()) {
+			if (game.getOptions().stopOnTurn.equals(game.getState().getTurnNum())) {
+                game.pause();
+			}
+		}
 	}
 
     public boolean resumePlay(Game game, PhaseStep stepType, boolean wasPaused) {
