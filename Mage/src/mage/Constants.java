@@ -193,6 +193,7 @@ public final class Constants {
 		EndOfGame("for the rest of the game"),
 		WhileOnBattlefield(""),
 		WhileOnStack(""),
+        WhileInGraveyard(""),
 		EndOfTurn("until end of turn"),
 		EndOfCombat("until end of combat"),
 		Custom("");

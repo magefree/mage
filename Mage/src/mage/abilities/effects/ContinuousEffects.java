@@ -219,9 +219,16 @@ public class ContinuousEffects implements Serializable {
 	private List<ContinuousEffect> getLayeredEffects(Game game) {
 		List<ContinuousEffect> layerEffects = new ArrayList<ContinuousEffect>();
         for (ContinuousEffect effect: layeredEffects) {
-            Ability ability = abilityMap.get(effect.getId());
-            if (ability.isInUseableZone(game)) {
-                layerEffects.add(effect);
+            switch (effect.getDuration()) {
+                case WhileOnBattlefield:
+                case WhileOnStack:
+                case WhileInGraveyard:
+                    Ability ability = abilityMap.get(effect.getId());
+                    if (ability.isInUseableZone(game))
+                        layerEffects.add(effect);
+                    break;
+                default:
+                    layerEffects.add(effect);
             }
         }
 		Collections.sort(layerEffects, new TimestampSorter());
