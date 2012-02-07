@@ -674,7 +674,17 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 		return modes.getMode();
 	}
 
-	@Override
+    @Override
+    public boolean choosePile(Outcome outcome, String message, List<? extends Card> pile1, List<? extends Card> pile2, Game game) {
+		game.getState().setPriorityPlayerId(getId());
+		game.fireChoosePileEvent(playerId, message, pile1, pile2);
+		waitForBooleanResponse();
+		if (!abort)
+			return response.getBoolean();
+		return false;
+    }
+
+    @Override
 	public void setResponseString(String responseString) {
 		synchronized(response) {
 			response.setString(responseString);

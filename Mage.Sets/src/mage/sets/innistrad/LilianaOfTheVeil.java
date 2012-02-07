@@ -27,6 +27,7 @@
  */
 package mage.sets.innistrad;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.Constants.CardType;
@@ -47,11 +48,13 @@ import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 
 /**
@@ -112,35 +115,31 @@ class LilianaOfTheVeilEffect extends OneShotEffect<LilianaOfTheVeilEffect> {
         Player player = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         if (player != null && targetPlayer != null) {
-            List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(targetPlayer.getId());
-            CardsImpl cards = new CardsImpl();
-            for (Permanent permanent : permanents) {
-                cards.add(permanent);
-            }
-
-            TargetCard target = new TargetCard(0, cards.size(), Zone.BATTLEFIELD, new FilterCard("permanents to put in the first pile"));
-            CardsImpl pile1 = new CardsImpl();
-            if (player.choose(Outcome.Neutral, cards, target, game)) {
+            int count = game.getBattlefield().countAll(new FilterPermanent(), targetPlayer.getId());
+            TargetPermanent target = new TargetPermanent(0, count, new FilterPermanent("permanents to put in the first pile"), false);
+            List<Permanent> pile1 = new ArrayList<Permanent>();
+            if (player.choose(Outcome.Neutral, target, source.getSourceId(), game)) {
                 List<UUID> targets = target.getTargets();
                 for (UUID targetId : targets) {
-                    Card card = cards.get(targetId, game);
-                    if (card != null) {
-                        pile1.add(card);
-                        cards.remove(card);
+                    Permanent p = game.getPermanent(targetId);
+                    if (p != null) {
+                        pile1.add(p);
                     }
                 }
             }
-
-            player.revealCards("Pile 1 (Liliana of the Veil)", pile1, game);
-            player.revealCards("Pile 2 (Liliana of the Veil)", cards, game);
-
-            Choice choice = createChoice(pile1, cards, game);
-            if (targetPlayer.choose(Outcome.Neutral, choice, game)) {
-                if (choice.getChoice().startsWith("Pile 1")) {
-                    sacrificePermanents(pile1, game, source);
-                } else {
-                    sacrificePermanents(cards, game, source);
+            List<Permanent> pile2 = new ArrayList<Permanent>();
+            for (Permanent p: game.getBattlefield().getAllActivePermanents(targetPlayer.getId())) {
+                if (!pile1.contains(p)) {
+                    pile2.add(p);
                 }
+            }
+
+            boolean choice = targetPlayer.choosePile(Outcome.DestroyPermanent, "Choose a pile to sacrifice.", pile1, pile2, game);
+            
+            if (choice) {
+                sacrificePermanents(pile1, game, source);
+            } else {
+                sacrificePermanents(pile2, game, source);
             }
 
             return true;
@@ -148,33 +147,32 @@ class LilianaOfTheVeilEffect extends OneShotEffect<LilianaOfTheVeilEffect> {
         return false;
     }
 
-    private Choice createChoice(CardsImpl pile1, CardsImpl cards, Game game) {
-        Choice choice = new ChoiceImpl(true);
-        choice.setMessage("Select a pile of permanents to sacrifice:");
-        StringBuilder sb = new StringBuilder("Pile 1: ");
-        for (UUID cardId : pile1) {
-            Card card = pile1.get(cardId, game);
-            if (card != null) {
-                sb.append(card.getName()).append("; ");
-            }
-        }
-        sb.delete(sb.length() - 2, sb.length());
-        choice.getChoices().add(sb.toString());
-        sb = new StringBuilder("Pile 2: ");
-        for (UUID cardId : cards) {
-            Card card = cards.get(cardId, game);
-            if (card != null) {
-                sb.append(card.getName()).append("; ");
-            }
-        }
-        sb.delete(sb.length() - 2, sb.length());
-        choice.getChoices().add(sb.toString());
-        return choice;
-    }
+//    private Choice createChoice(CardsImpl pile1, CardsImpl cards, Game game) {
+//        Choice choice = new ChoiceImpl(true);
+//        choice.setMessage("Select a pile of permanents to sacrifice:");
+//        StringBuilder sb = new StringBuilder("Pile 1: ");
+//        for (UUID cardId : pile1) {
+//            Card card = pile1.get(cardId, game);
+//            if (card != null) {
+//                sb.append(card.getName()).append("; ");
+//            }
+//        }
+//        sb.delete(sb.length() - 2, sb.length());
+//        choice.getChoices().add(sb.toString());
+//        sb = new StringBuilder("Pile 2: ");
+//        for (UUID cardId : cards) {
+//            Card card = cards.get(cardId, game);
+//            if (card != null) {
+//                sb.append(card.getName()).append("; ");
+//            }
+//        }
+//        sb.delete(sb.length() - 2, sb.length());
+//        choice.getChoices().add(sb.toString());
+//        return choice;
+//    }
 
-    private void sacrificePermanents(CardsImpl pile1, Game game, Ability source) {
-        for (UUID permanentId : pile1) {
-            Permanent permanent = game.getPermanent(permanentId);
+    private void sacrificePermanents(List<Permanent> pile, Game game, Ability source) {
+        for (Permanent permanent : pile) {
             if (permanent != null) {
                 permanent.sacrifice(source.getSourceId(), game);
             }

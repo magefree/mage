@@ -110,6 +110,19 @@ public class GameSession extends GameWatcher {
 		}
 	}
 
+	public void choosePile(final String message, final CardsView pile1, final CardsView pile2) {
+		if (!killed) {
+			setupTimeout();
+			User user = UserManager.getInstance().getUser(userId);
+			if (user != null) {
+                List<CardsView> piles = new ArrayList<CardsView>();
+                piles.add(pile1);
+                piles.add(pile2);
+				user.fireCallback(new ClientCallback("gameChoosePile", game.getId(), new GameClientMessage(message, pile1, pile2)));
+			}
+		}
+	}
+
 	public void choose(final String message, final Set<String> choices) {
 		if (!killed) {
 			setupTimeout();

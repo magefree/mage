@@ -866,6 +866,12 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 		return true;
 	}
 
+    @Override
+    public boolean choosePile(Outcome outcome, String message, List<? extends Card> pile1, List<? extends Card> pile2, Game game) {
+        //TODO: improve this
+        return true;
+    }
+    
 	@Override
 	public void selectAttackers(Game game) {
 		log.debug("selectAttackers");

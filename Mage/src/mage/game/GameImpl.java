@@ -1032,9 +1032,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	}
     
     @Override
-    public void fireChoosePileEvent(UUID playerId, List<? extends Card> pile1, List<? extends Card> pile2) {
+    public void fireChoosePileEvent(UUID playerId, String message, List<? extends Card> pile1, List<? extends Card> pile2) {
         if (simulation) return;
-        //playerQueryEventSource.choosePile(playerId, pile1, pile2);
+        playerQueryEventSource.choosePile(playerId, message, pile1, pile2);
     }
     
 	@Override

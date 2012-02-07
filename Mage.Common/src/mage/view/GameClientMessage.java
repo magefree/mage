@@ -42,6 +42,7 @@ public class GameClientMessage implements Serializable {
 
 	private GameView gameView;
 	private CardsView cardsView;
+	private CardsView cardsView2;
 	private String message;
 	private AbilityPickerView abilityView;
 	private boolean flag;
@@ -83,6 +84,12 @@ public class GameClientMessage implements Serializable {
 		this.min = min;
 		this.max = max;
 	}
+	
+	public GameClientMessage(String message, CardsView pile1, CardsView pile2) {
+		this.message = message;
+		this.cardsView = pile1;
+		this.cardsView2 = pile2;
+	}
 
 	public GameClientMessage(CardsView cardView, String name) {
 		this.cardsView = cardView;
@@ -117,6 +124,14 @@ public class GameClientMessage implements Serializable {
 		return targets;
 	}
 
+	public CardsView getPile1() {
+		return cardsView;
+	}
+	
+	public CardsView getPile2() {
+		return cardsView2;
+	}
+	
 	public int getMin() {
 		return min;
 	}

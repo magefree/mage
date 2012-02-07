@@ -34,9 +34,23 @@
 
 package mage.client.game;
 
+import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.Serializable;
+import java.util.*;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.ExecutionException;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.*;
+import javax.swing.border.LineBorder;
 import mage.Constants;
 import mage.client.MageFrame;
 import mage.client.chat.ChatPanel;
+import mage.client.components.MageComponents;
 import mage.client.dialog.*;
 import mage.client.game.FeedbackPanel.FeedbackMode;
 import mage.client.plugins.impl.Plugins;
@@ -47,20 +61,6 @@ import mage.remote.Session;
 import mage.view.*;
 import org.apache.log4j.Logger;
 
-import javax.swing.*;
-import javax.swing.border.LineBorder;
-import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.Serializable;
-import java.util.*;
-import java.util.concurrent.CancellationException;
-import java.util.concurrent.ExecutionException;
-import mage.client.components.MageComponents;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
 
 /**
  *
@@ -539,11 +539,6 @@ public class GamePanel extends javax.swing.JPanel {
 		this.abilityPicker.show(choices, MageFrame.getDesktop().getMousePosition());
 	}
 
-//	public void revealCards(String name, CardsView cards) {
-//		ShowCardsDialog showCards = new ShowCardsDialog();
-//		showCards.loadCards(name, cards, bigCard, Config.dimensions, gameId, false);
-//	}
-//
 	private ShowCardsDialog showCards(String title, CardsView cards, boolean required) {
 		ShowCardsDialog showCards = new ShowCardsDialog();
 		showCards.loadCards(title, cards, bigCard, Config.dimensions, gameId, required);
@@ -563,6 +558,12 @@ public class GamePanel extends javax.swing.JPanel {
 		pickChoice.showDialog(message, choices);
 		session.sendPlayerString(gameId, pickChoice.getChoice());
 	}
+
+    public void pickPile(String message, CardsView pile1, CardsView pile2) {
+    	PickPileDialog pickPileDialog = new PickPileDialog();
+    	pickPileDialog.loadCards(message, pile1, pile2, bigCard, Config.dimensions, gameId);
+    	session.sendPlayerBoolean(gameId, pickPileDialog.isPickedPile1());
+    }
 
 	public Map<UUID, PlayAreaPanel> getPlayers() {
 		return players;
@@ -996,8 +997,8 @@ public class GamePanel extends javax.swing.JPanel {
 	private JButton endOfTurn;
 	private JButton prevStep;
 	private JLabel endButtonTip;
-}
 
+}
 class ReplayTask extends SwingWorker<Void, Collection<MatchView>> {
 
 	private Session session;

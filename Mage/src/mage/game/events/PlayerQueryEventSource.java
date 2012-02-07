@@ -62,6 +62,10 @@ public class PlayerQueryEventSource implements EventSource<PlayerQueryEvent>, Se
 		dispatcher.fireEvent(PlayerQueryEvent.chooseAbilityEvent(playerId, message, choices));
 	}
 
+	public void choosePile(UUID playerId, String message, List<? extends Card> pile1, List<? extends Card> pile2) {
+		dispatcher.fireEvent(PlayerQueryEvent.choosePileEvent(playerId, message, pile1, pile2));
+	}
+    
 	public void chooseMode(UUID playerId, String message, Map<UUID, String> modes) {
 		dispatcher.fireEvent(PlayerQueryEvent.chooseModeEvent(playerId, message, modes));
 	}

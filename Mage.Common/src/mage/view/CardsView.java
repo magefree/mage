@@ -45,7 +45,7 @@ public class CardsView extends HashMap<UUID, CardView> {
 
 	public CardsView() {}
 
-	public CardsView(Collection<Card> cards) {
+	public CardsView(Collection<? extends Card> cards) {
 		for (Card card: cards) {
 			this.put(card.getId(), new CardView(card));
 		}

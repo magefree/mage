@@ -153,6 +153,9 @@ public class GameController implements GameCallback {
 							case CHOOSE_ABILITY:
 								chooseAbility(event.getPlayerId(), event.getAbilities());
 								break;
+							case CHOOSE_PILE:
+								choosePile(event.getPlayerId(), event.getMessage(), event.getPile1(), event.getPile2());
+								break;
 							case CHOOSE_MODE:
 								chooseMode(event.getPlayerId(), event.getModes());
 								break;
@@ -383,6 +386,14 @@ public class GameController implements GameCallback {
 		perform(playerId, new Command() {
 			public void execute(UUID playerId) {
 				gameSessions.get(playerId).chooseAbility(new AbilityPickerView(choices));
+			}
+		});
+	}
+
+	private synchronized void choosePile(UUID playerId, final String message, final List<? extends Card> pile1, final List<? extends Card> pile2) throws MageException {
+		perform(playerId, new Command() {
+			public void execute(UUID playerId) {
+				gameSessions.get(playerId).choosePile(message, new CardsView(pile1), new CardsView(pile2));
 			}
 		});
 	}

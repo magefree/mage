@@ -310,48 +310,40 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
 
     @Override
     public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
-//        if (this.isHuman())
-            return chooseRandomTarget(target, source, game);
-//        return super.chooseTarget(outcome, target, source, game);
+        return chooseRandomTarget(target, source, game);
     }
 
     @Override
     public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
-//        if (this.isHuman()) {
-            if (cards.isEmpty())
-                return !target.isRequired();
-            Card card = cards.getRandom(game);
-            target.addTarget(card.getId(), source, game);
-            return true;
-//        }
-//        return super.chooseTarget(outcome, cards, target, source, game);
+        if (cards.isEmpty())
+            return !target.isRequired();
+        Card card = cards.getRandom(game);
+        target.addTarget(card.getId(), source, game);
+        return true;
     }
 
     @Override
     public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
-//        if (this.isHuman()) {
-            Set<UUID> possibleTargets = target.possibleTargets(source==null?null:source.getSourceId(), playerId, game);
-            if (possibleTargets.isEmpty())
-                return !target.isRequired();
-            if (!target.isRequired()) {
-                if (rnd.nextInt(possibleTargets.size() + 1) == 0) {
-                    return false;
-                }
+        Set<UUID> possibleTargets = target.possibleTargets(source==null?null:source.getSourceId(), playerId, game);
+        if (possibleTargets.isEmpty())
+            return !target.isRequired();
+        if (!target.isRequired()) {
+            if (rnd.nextInt(possibleTargets.size() + 1) == 0) {
+                return false;
             }
-            if (possibleTargets.size() == 1) {
-                target.addTarget(possibleTargets.iterator().next(), target.getAmountRemaining(), source, game);
-                return true;
-            }
-            Iterator<UUID> it = possibleTargets.iterator();
-            int targetNum = rnd.nextInt(possibleTargets.size());
-            UUID targetId = it.next();
-            for (int i = 0; i < targetNum; i++) {
-                targetId = it.next();
-            }
-            target.addTarget(targetId, rnd.nextInt(target.getAmountRemaining()) + 1, source, game);
+        }
+        if (possibleTargets.size() == 1) {
+            target.addTarget(possibleTargets.iterator().next(), target.getAmountRemaining(), source, game);
             return true;
-//        }
-//        return super.chooseTargetAmount(outcome, target, source, game);
+        }
+        Iterator<UUID> it = possibleTargets.iterator();
+        int targetNum = rnd.nextInt(possibleTargets.size());
+        UUID targetId = it.next();
+        for (int i = 0; i < targetNum; i++) {
+            targetId = it.next();
+        }
+        target.addTarget(targetId, rnd.nextInt(target.getAmountRemaining()) + 1, source, game);
+        return true;
     }
 
     @Override
@@ -366,6 +358,13 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
         return super.chooseUse(outcome, message, game);
     }
 
+    @Override
+    public boolean choosePile(Outcome outcome, String message, List<? extends Card> pile1, List<? extends Card> pile2, Game game) {
+        if (this.isHuman())
+            return rnd.nextBoolean();
+        return super.choosePile(outcome, message, pile1, pile2, game);
+    }
+    
     @Override
     public boolean choose(Outcome outcome, Choice choice, Game game) {
         if (this.isHuman()) {

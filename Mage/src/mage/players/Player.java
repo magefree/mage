@@ -219,6 +219,7 @@ public interface Player extends MageItem, Copyable<Player> {
 	public abstract boolean chooseMulligan(Game game);
 	public abstract boolean chooseUse(Outcome outcome, String message, Game game);
 	public abstract boolean choose(Outcome outcome, Choice choice, Game game);
+    public abstract boolean choosePile(Outcome outcome, String message, List<? extends Card> pile1, List<? extends Card> pile2, Game game);
 	public abstract boolean playMana(ManaCost unpaid, Game game);
 	public abstract boolean playXMana(VariableManaCost cost, ManaCosts<ManaCost> costs, Game game);
 	public abstract int chooseEffect(List<ReplacementEffect> rEffects, Game game);

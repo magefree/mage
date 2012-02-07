@@ -28,6 +28,7 @@
 
 package mage.client.remote;
 
+import java.util.List;
 import mage.cards.decks.Deck;
 import mage.client.MageFrame;
 import mage.client.chat.ChatPanel;
@@ -172,6 +173,12 @@ public class CallbackClientImpl implements CallbackClient {
 						GamePanel panel = frame.getGame(callback.getObjectId());
 						if (panel != null)
 							panel.pickAbility((AbilityPickerView) callback.getData());
+					}
+					else if (callback.getMethod().equals("gameChoosePile")) {
+						GameClientMessage message = (GameClientMessage) callback.getData();
+						GamePanel panel = frame.getGame(callback.getObjectId());
+						if (panel != null)
+							panel.pickPile(message.getMessage(), message.getPile1(), message.getPile2());
 					}
 					else if (callback.getMethod().equals("gameChoose")) {
 						GameClientMessage message = (GameClientMessage) callback.getData();
