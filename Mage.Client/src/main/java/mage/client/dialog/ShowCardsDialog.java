@@ -74,7 +74,7 @@ public class ShowCardsDialog extends MageDialog implements MouseListener {
     public void loadCards(String name, CardsView showCards, BigCard bigCard, CardDimensions dimension, UUID gameId, boolean modal) {
 		this.reloaded = true;
 		this.title = name;
-		cardArea.loadCards(showCards, bigCard, dimension, gameId);
+		cardArea.loadCards(showCards, bigCard, dimension, gameId, this);
 		if (getParent() != MageFrame.getDesktop() /*|| this.isClosed*/) {
 			MageFrame.getDesktop().add(this, JLayeredPane.POPUP_LAYER);
 		}
@@ -115,6 +115,7 @@ public class ShowCardsDialog extends MageDialog implements MouseListener {
 		setResizable(true);
 		getContentPane().setLayout(new java.awt.BorderLayout());
 		getContentPane().add(cardArea, java.awt.BorderLayout.CENTER);
+        this.addMouseListener(this);
 
 		pack();
 	}

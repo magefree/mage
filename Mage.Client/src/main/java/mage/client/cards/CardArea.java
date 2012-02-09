@@ -31,6 +31,7 @@ package mage.client.cards;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Rectangle;
+import java.awt.event.MouseListener;
 import java.util.UUID;
 
 import javax.swing.JLayeredPane;
@@ -67,44 +68,44 @@ public class CardArea extends JPanel {
 
 	}
 
-	public void loadCards(SimpleCardsView showCards, BigCard bigCard, CardDimensions dimension, UUID gameId) {
-        loadCards(CardsViewUtil.convertSimple(showCards), bigCard, dimension, gameId);
+	public void loadCards(SimpleCardsView showCards, BigCard bigCard, CardDimensions dimension, UUID gameId, MouseListener listener) {
+        loadCards(CardsViewUtil.convertSimple(showCards), bigCard, dimension, gameId, listener);
     }
     
-    public void loadCards(CardsView showCards, BigCard bigCard, CardDimensions dimension, UUID gameId) {
+    public void loadCards(CardsView showCards, BigCard bigCard, CardDimensions dimension, UUID gameId, MouseListener listener) {
 		this.reloaded = true;
 		cardArea.removeAll();
 		if (showCards != null && showCards.size() < 10)
-			loadCardsFew(showCards, bigCard, gameId);
+			loadCardsFew(showCards, bigCard, gameId, listener);
 		else
-			loadCardsMany(showCards, bigCard, gameId);
+			loadCardsMany(showCards, bigCard, gameId, listener);
 		cardArea.revalidate();
 
 		this.revalidate();
 		this.repaint();
 	}
 
-    public void loadCardsNarrow(CardsView showCards, BigCard bigCard, CardDimensions dimension, UUID gameId) {
+    public void loadCardsNarrow(CardsView showCards, BigCard bigCard, CardDimensions dimension, UUID gameId, MouseListener listener) {
 		this.reloaded = true;
 		cardArea.removeAll();
-		loadCardsMany(showCards, bigCard, gameId);
+		loadCardsMany(showCards, bigCard, gameId, listener);
 		cardArea.revalidate();
 
 		this.revalidate();
 		this.repaint();
 	}
 
-    private void loadCardsFew(CardsView showCards, BigCard bigCard, UUID gameId) {
+    private void loadCardsFew(CardsView showCards, BigCard bigCard, UUID gameId, MouseListener listener) {
 		Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
 		Dimension dimension = new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
 		for (CardView card : showCards.values()) {
-			addCard(card, bigCard, gameId, rectangle, dimension);
+			addCard(card, bigCard, gameId, rectangle, dimension, listener);
 			rectangle.translate(Config.dimensions.frameWidth, 0);
 		}
 		cardArea.setPreferredSize(new Dimension(Config.dimensions.frameWidth * showCards.size(), Config.dimensions.frameHeight));
 	}
 
-	private void addCard(CardView card, BigCard bigCard, UUID gameId, Rectangle rectangle, Dimension dimension) {
+	private void addCard(CardView card, BigCard bigCard, UUID gameId, Rectangle rectangle, Dimension dimension, MouseListener listener) {
 		if (card instanceof AbilityView) {
 			CardView tmp = ((AbilityView) card).getSourceCard();
 			tmp.overrideRules(card.getRules());
@@ -115,20 +116,22 @@ public class CardArea extends JPanel {
 		}
 		MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, dimension, gameId, true);
 		cardImg.setBounds(rectangle);
+        if (listener != null)
+            cardImg.addMouseListener(listener);
 		cardArea.add(cardImg);
 		cardArea.moveToFront(cardImg);
 		cardImg.update(card);
 		cardImg.setCardBounds(rectangle.x, rectangle.y, Config.dimensions.frameWidth, Config.dimensions.frameHeight);
 	}
 
-	private void loadCardsMany(CardsView showCards, BigCard bigCard, UUID gameId) {
+	private void loadCardsMany(CardsView showCards, BigCard bigCard, UUID gameId, MouseListener listener) {
 		int columns = 1;
 		if (showCards != null && showCards.size() > 0) {
 			Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
 			Dimension dimension = new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
 			int count = 0;
 			for (CardView card : showCards.values()) {
-				addCard(card, bigCard, gameId, rectangle, dimension);
+				addCard(card, bigCard, gameId, rectangle, dimension, listener);
 				if (count >= 20) {
 					rectangle.translate(Config.dimensions.frameWidth, -400);
 					columns++;

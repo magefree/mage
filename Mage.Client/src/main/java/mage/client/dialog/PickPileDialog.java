@@ -98,8 +98,8 @@ public class PickPileDialog extends MageDialog {
     
     public void loadCards(String name, CardsView pile1, CardsView pile2, BigCard bigCard, CardDimensions dimension, UUID gameId) {
 		this.title = name;
-		this.pile1.loadCardsNarrow(pile1, bigCard, dimension, gameId);
-		this.pile2.loadCardsNarrow(pile2, bigCard, dimension, gameId);
+		this.pile1.loadCardsNarrow(pile1, bigCard, dimension, gameId, null);
+		this.pile2.loadCardsNarrow(pile2, bigCard, dimension, gameId, null);
 		
 		if (getParent() != MageFrame.getDesktop() /*|| this.isClosed*/) {
 			MageFrame.getDesktop().add(this, JLayeredPane.POPUP_LAYER);
