@@ -1,8 +1,9 @@
 /*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *  
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
  *
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
@@ -24,38 +25,48 @@
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
+ * 
  */
-package mage.sets.tenth;
+package mage.sets.darkascension;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.effects.common.SacrificeEffect;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.effects.common.DiscardTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetOpponent;
 
 /**
  *
- * @author Loki
+ * @author LevelX
  */
-public class CruelEdict extends CardImpl<CruelEdict> {
+public class BlackCat extends CardImpl<BlackCat> {
 
-    public CruelEdict(UUID ownerId) {
-        super(ownerId, 133, "Cruel Edict", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
-        this.expansionSetCode = "10E";
+    public BlackCat(UUID ownerId) {
+        super(ownerId, 54, "Black Cat", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
+        this.expansionSetCode = "DKA";
+        this.subtype.add("Zombie");
+        this.subtype.add("Car");
+
         this.color.setBlack(true);
-        this.getSpellAbility().addEffect(new SacrificeEffect(new FilterCreaturePermanent(), 1, "Target opponent sacrifices a creature"));
-        this.getSpellAbility().addTarget(new TargetOpponent());
-        // Target opponent sacrifices a creature.
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+		// When Black Cat dies, target opponent discards a card at random.
+		Ability ability = new DiesTriggeredAbility(new DiscardTargetEffect(1, true),false);
+		ability.addTarget(new TargetOpponent());
+        this.addAbility(ability);
     }
 
-    public CruelEdict(final CruelEdict card) {
+    public BlackCat(final BlackCat card) {
         super(card);
     }
 
     @Override
-    public CruelEdict copy() {
-        return new CruelEdict(this);
+    public BlackCat copy() {
+        return new BlackCat(this);
     }
 }

@@ -29,12 +29,12 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -58,7 +58,7 @@ public class NezumiBoneReader extends CardImpl<NezumiBoneReader> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         // {B}, Sacrifice a creature: Target player discards a card. Activate this ability only any time you could cast a sorcery.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1),new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1),new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
         ability.addCost(new ManaCostsImpl("{B}"));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
