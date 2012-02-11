@@ -54,6 +54,7 @@ public class LookLibraryControllerEffect extends OneShotEffect<LookLibraryContro
     protected DynamicValue numberOfCards;
     protected boolean mayShuffleAfter = false;
     protected boolean putOnTop = true; // if false on put back on bottom of library
+	protected Zone targetZoneLookedCards; // GRAVEYARD, LIBRARY
 
     public LookLibraryControllerEffect() {
         this(1);
@@ -75,11 +76,16 @@ public class LookLibraryControllerEffect extends OneShotEffect<LookLibraryContro
         this(new StaticValue(numberOfCards), mayShuffleAfter, putOnTop);
     }
 
-    public LookLibraryControllerEffect(DynamicValue numberOfCards, boolean mayShuffleAfter, boolean putOnTop) {
-        super(Outcome.Benefit);
-        this.numberOfCards = numberOfCards;
-        this.mayShuffleAfter = mayShuffleAfter;
-        this.putOnTop = putOnTop;
+	public LookLibraryControllerEffect(DynamicValue numberOfCards, boolean mayShuffleAfter, boolean putOnTop) {
+		this(Outcome.Benefit, numberOfCards, mayShuffleAfter, Zone.LIBRARY, putOnTop);
+	}
+
+	public LookLibraryControllerEffect(Outcome outcome, DynamicValue numberOfCards, boolean mayShuffleAfter, Zone targetZoneLookedCards, boolean putOnTop) {
+		super(outcome);
+		this.numberOfCards = numberOfCards;
+		this.mayShuffleAfter = mayShuffleAfter;
+		this.targetZoneLookedCards = targetZoneLookedCards;
+		this.putOnTop = putOnTop;
 
     }
 
@@ -87,6 +93,7 @@ public class LookLibraryControllerEffect extends OneShotEffect<LookLibraryContro
         super(effect);
         this.numberOfCards = effect.numberOfCards.clone();
         this.mayShuffleAfter = effect.mayShuffleAfter;
+		this.targetZoneLookedCards = effect.targetZoneLookedCards;
         this.putOnTop = effect.putOnTop;
     }
 
@@ -154,22 +161,33 @@ public class LookLibraryControllerEffect extends OneShotEffect<LookLibraryContro
      * @param game
      */
     protected void putCardsBack(Ability source, Player player, Cards cards, Game game) {
-        TargetCard target = new TargetCard(Zone.PICK, new FilterCard(this.getPutBackText()));
-        target.setRequired(true);
-        while (cards.size() > 1) {
-            player.choose(Outcome.Neutral, cards, target, game);
-            Card card = cards.get(target.getFirstTarget(), game);
-            if (card != null) {
-                cards.remove(card);
-                card.moveToZone(Zone.LIBRARY, source.getId(), game, putOnTop);
-            }
-            target.clearChosen();
-        }
-        if (cards.size() == 1) {
-            Card card = cards.get(cards.iterator().next(), game);
-            card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
-        }
-    }
+		switch(targetZoneLookedCards) {
+			case LIBRARY: 
+				TargetCard target = new TargetCard(Zone.PICK, new FilterCard(this.getPutBackText()));
+				target.setRequired(true);
+				while (cards.size() > 1) {
+					player.choose(Outcome.Neutral, cards, target, game);
+					Card card = cards.get(target.getFirstTarget(), game);
+					if (card != null) {
+						cards.remove(card);
+						card.moveToZone(targetZoneLookedCards, source.getId(), game, putOnTop);
+					}
+					target.clearChosen();
+				}
+				if (cards.size() == 1) {
+					Card card = cards.get(cards.iterator().next(), game);
+					card.moveToZone(targetZoneLookedCards, source.getId(), game, true);
+				}
+				break;
+			case GRAVEYARD: 
+				for (Card card : cards.getCards(game)) {
+					card.moveToZone(Zone.GRAVEYARD, source.getId(), game, true);
+				}
+				break;
+			default:
+				// not supported yet
+		}
+	}
 
     /**
      * Check to shuffle library if allowed
