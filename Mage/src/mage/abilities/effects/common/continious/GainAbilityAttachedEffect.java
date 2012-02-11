@@ -77,12 +77,20 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl<GainAbilityA
 	}
 
 	private void setText() {
-        String prefix = "";
-        if (attachmentType == AttachmentType.AURA)
-            prefix = "Enchanted";
-        else if (attachmentType == AttachmentType.EQUIPMENT)
-            prefix = "Equipped";
-		staticText = prefix + " creature gains " + ability.getRule();
+        StringBuilder sb = new StringBuilder();
+        if (attachmentType == AttachmentType.AURA) {
+            sb.append("Enchanted"); 
+		} else if (attachmentType == AttachmentType.EQUIPMENT) {
+            sb.append("Equipped");
+		}
+		sb.append(" creature ");
+		if (duration == Duration.WhileOnBattlefield) {
+			sb.append("has ");	
+		} else {
+			sb.append("gains ");	
+		}
+		sb.append(ability.getRule());	
+		staticText = sb.toString();
 	}
 
 }

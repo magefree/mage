@@ -57,9 +57,9 @@ public class VaultOfTheArchangel extends CardImpl<VaultOfTheArchangel> {
         this.addAbility(new ColorlessManaAbility());
         // {2}{W}{B}, {tap}: Creatures you control gain deathtouch and lifelink until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new GainAbilityControlledEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent(), false),
+                new GainAbilityControlledEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("Creatures"), false),
                 new ManaCostsImpl("{2}{W}{B}"));
-        ability.addEffect(new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent(), false));
+        ability.addEffect(new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("Creatures"), false));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

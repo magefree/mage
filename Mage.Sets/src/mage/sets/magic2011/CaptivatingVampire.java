@@ -58,7 +58,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class CaptivatingVampire extends CardImpl<CaptivatingVampire> {
 
 	private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("Vampire creatures");
-	private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("untapped Vampire");
+	private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("untapped Vampires you control");
 
 	static {
 		filter1.getSubtype().add("Vampire");
