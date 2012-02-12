@@ -10,7 +10,7 @@ use File::Path;
 
 print "Start compiling...\n";
 chdir("..");
-#system("mvn clean install");
+system("mvn clean install -DskipTests");
 chdir("Mage.Client");
 system("mvn assembly:assembly");
 chdir("../Mage.Server");
