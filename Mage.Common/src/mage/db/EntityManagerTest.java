@@ -35,9 +35,13 @@ public class EntityManagerTest {
 
         List<Feedback> feedbackList = EntityManager.instance.getAllFeedbacks();
         System.out.println("feedbacks found: " + feedbackList.size());
+        int count = 1;
         for (Feedback feedback : feedbackList) {
-            System.out.println(feedback.toString());
+            System.out.println(count + ". " + feedback.toString());
+            System.out.println("message=" + feedback.getMessage());
+            System.out.println("mail=" + feedback.getEmail());
             System.out.println("--------------");
+            count++;
         }
     }
 }
