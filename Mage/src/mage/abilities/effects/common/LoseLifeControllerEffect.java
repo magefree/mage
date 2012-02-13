@@ -64,7 +64,7 @@ public class LoseLifeControllerEffect extends OneShotEffect<LoseLifeControllerEf
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card targetCard = game.getLastKnownInformation(targetPointer.getFirst(source), Zone.BATTLEFIELD);
+        MageObject targetCard = game.getLastKnownInformation(targetPointer.getFirst(source), Zone.BATTLEFIELD);
 		
 		if ( targetCard == null ) {
 			MageObject obj = game.getObject(targetPointer.getFirst(source));

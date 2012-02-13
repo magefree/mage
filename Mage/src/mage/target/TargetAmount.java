@@ -28,7 +28,7 @@
 
 package mage.target;
 
-import java.util.UUID;
+import java.util.*;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.game.Game;
@@ -95,5 +95,36 @@ public abstract class TargetAmount<T extends TargetAmount<T>> extends TargetImpl
 		}
 		return chosen = true;
 	}
+    
+    @Override
+    public List<T> getTargetOptions(Ability source, Game game) {
+        List<T> options = new ArrayList<T>();
+        Set<UUID> possibleTargets = possibleTargets(source.getSourceId(), source.getControllerId(), game);
+        
+        addTargets(this, possibleTargets, options, source, game);
+        
+        return options;
+    }
 
+    protected void addTargets(TargetAmount<T> target, Set<UUID> targets, List<T> options, Ability source, Game game) {
+        for (UUID targetId: targets) {
+            for (int n = 1; n <= target.remainingAmount; n++) {
+                T t = target.copy();
+                t.addTarget(targetId, n, source, game, true);
+                if (t.remainingAmount > 0) {
+                    if (targets.size() > 1) {
+                        Set<UUID> newTargets = new HashSet<UUID>();
+                        for (UUID newTarget: targets) {
+                            if (!newTarget.equals(targetId))
+                                newTargets.add(newTarget);
+                        }
+                        addTargets(t, newTargets, options, source, game);
+                    }
+                }
+                else {
+                    options.add(t);
+                }
+            }
+        }
+    }
 }

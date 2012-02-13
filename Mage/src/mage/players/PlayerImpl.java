@@ -71,6 +71,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.stack.StackAbility;
 import mage.players.net.UserData;
+import mage.target.Target;
+import mage.target.TargetAmount;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetDiscard;
 import mage.watchers.common.BloodthirstWatcher;
@@ -1278,15 +1280,25 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	}
 	
 	private void addTargetOptions(List<Ability> options, Ability option, int targetNum, Game game) {
-		for (UUID targetId: option.getTargets().getUnchosen().get(targetNum).possibleTargets(option.getSourceId(), playerId, game)) {
-			Ability newOption = option.copy();
-			newOption.getTargets().get(targetNum).addTarget(targetId, option, game, true);
-			if (targetNum < option.getTargets().size() - 2) {
+        for (Target target: option.getTargets().getUnchosen().get(targetNum).getTargetOptions(option, game)) {
+            Ability newOption = option.copy();
+            if (target instanceof TargetAmount) {
+                for (UUID targetId: target.getTargets()) {
+                    int amount = target.getTargetAmount(targetId);
+                    newOption.getTargets().get(targetNum).addTarget(targetId, amount, newOption, game, true);
+                }
+            }
+            else {
+                for (UUID targetId: target.getTargets()) {
+                    newOption.getTargets().get(targetNum).addTarget(targetId, newOption, game, true);
+                }
+            }
+            if (targetNum < option.getTargets().size() - 2) {
 				//addTargetOptions(options, newOption, targetNum + 1, game);
 				// ayrat: bug fix
 				addTargetOptions(options, newOption, targetNum + 1, game);
 			}
-			else {
+            else {
 				if (option.getChoices().size() > 0)
 					addChoiceOptions(options, newOption, 0, game);
 				else if (option.getCosts().getTargets().size() > 0)

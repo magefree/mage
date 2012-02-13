@@ -111,8 +111,8 @@ public interface Game extends MageItem, Serializable {
 	public Game copy();
 	public boolean isSimulation();
 	public void setSimulation(boolean simulation);
-	public Card getLastKnownInformation(UUID objectId, Zone zone);
-	public void rememberLKI(UUID objectId, Zone zone, Card card);
+	public MageObject getLastKnownInformation(UUID objectId, Zone zone);
+	public void rememberLKI(UUID objectId, Zone zone, MageObject object);
 	public void resetLKI();
     public void setLosingPlayer(Player player);
     public Player getLosingPlayer();

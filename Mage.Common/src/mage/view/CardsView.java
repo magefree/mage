@@ -36,6 +36,7 @@ import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.game.Game;
 import mage.game.GameState;
+import mage.game.permanent.Permanent;
 
 /**
  *
@@ -63,7 +64,7 @@ public class CardsView extends HashMap<UUID, CardView> {
 				case BATTLEFIELD:
                     sourceCard = game.getPermanent(ability.getSourceId());
                     if (sourceCard == null)
-					    sourceCard = game.getLastKnownInformation(ability.getSourceId(), Zone.BATTLEFIELD);
+					    sourceCard = (Permanent)game.getLastKnownInformation(ability.getSourceId(), Zone.BATTLEFIELD);
 					break;
 			}
 			if (sourceCard != null) {

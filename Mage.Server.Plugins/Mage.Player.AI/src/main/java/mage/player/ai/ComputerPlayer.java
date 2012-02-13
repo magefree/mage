@@ -216,6 +216,72 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 				return true;
 			}
 		}
+   		if (target instanceof TargetCreatureOrPlayer) {
+			List<Permanent> targets;
+			TargetCreatureOrPlayer t = ((TargetCreatureOrPlayer)target);
+			if (outcome.isGood()) {
+				targets = threats(playerId, ((FilterCreatureOrPlayer)t.getFilter()).getCreatureFilter(), game, target.getTargets());
+			}
+			else {
+				targets = threats(opponentId, ((FilterCreatureOrPlayer)t.getFilter()).getCreatureFilter(), game, target.getTargets());
+			}
+            for (Permanent permanent : targets) {
+                List<UUID> alreadyTargetted = target.getTargets();
+                if (t.canTarget(playerId, permanent.getId(), null, game)) {
+                    if (alreadyTargetted != null && !alreadyTargetted.contains(permanent.getId())) {
+                        target.add(permanent.getId(), game);
+                        return true;
+                    }
+                }
+            }
+			if (outcome.isGood()) {
+				if (target.canTarget(playerId, null, game)) {
+					target.add(playerId, game);
+					return true;
+				}
+			}
+			else {
+				if (target.canTarget(opponentId, null, game)) {
+					target.add(opponentId, game);
+					return true;
+				}
+			}
+            if (!target.isRequired())
+                return false;
+        }
+        if (target instanceof TargetPermanentOrPlayer) {
+			List<Permanent> targets;
+			TargetPermanentOrPlayer t = ((TargetPermanentOrPlayer)target);
+			if (outcome.isGood()) {
+				targets = threats(playerId, ((FilterPermanentOrPlayer)t.getFilter()).getPermanentFilter(), game, target.getTargets());
+			}
+			else {
+				targets = threats(opponentId, ((FilterPermanentOrPlayer)t.getFilter()).getPermanentFilter(), game, target.getTargets());
+			}
+            for (Permanent permanent : targets) {
+                List<UUID> alreadyTargetted = target.getTargets();
+                if (t.canTarget(permanent.getId(), game)) {
+                    if (alreadyTargetted != null && !alreadyTargetted.contains(permanent.getId())) {
+                        target.add(permanent.getId(), game);
+                        return true;
+                    }
+                }
+            }
+			if (outcome.isGood()) {
+				if (target.canTarget(playerId, null, game)) {
+					target.add(playerId, game);
+					return true;
+				}
+			}
+			else {
+				if (target.canTarget(opponentId, null, game)) {
+					target.add(opponentId, game);
+					return true;
+				}
+			}
+            if (!target.isRequired())
+                return false;
+        }
 		return false;
 	}
 

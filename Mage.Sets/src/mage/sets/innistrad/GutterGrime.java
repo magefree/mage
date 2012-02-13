@@ -36,6 +36,7 @@ import mage.Constants.Rarity;
 import mage.Constants.SubLayer;
 import mage.Constants.Zone;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
@@ -103,7 +104,7 @@ class GutterGrimeTriggeredAbility extends TriggeredAbilityImpl<GutterGrimeTrigge
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == EventType.ZONE_CHANGE) {
             UUID targetId = event.getTargetId();
-            Card card = game.getLastKnownInformation(targetId, Zone.BATTLEFIELD);
+            MageObject card = game.getLastKnownInformation(targetId, Zone.BATTLEFIELD);
             if (card != null && card instanceof Permanent && !(card instanceof PermanentToken)) {
                 Permanent permanent = (Permanent) card;
                 ZoneChangeEvent zEvent = (ZoneChangeEvent) event;

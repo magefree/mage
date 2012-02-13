@@ -34,6 +34,7 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BlocksOrBecomesBlockedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -85,7 +86,7 @@ class EngulfingSlagwurmEffect extends OneShotEffect<EngulfingSlagwurmEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Card c = game.getLastKnownInformation(targetPointer.getFirst(source), Constants.Zone.BATTLEFIELD);
+        MageObject c = game.getLastKnownInformation(targetPointer.getFirst(source), Constants.Zone.BATTLEFIELD);
         if (c != null && controller != null) {
             controller.gainLife(c.getPower().getValue(), game);
         }

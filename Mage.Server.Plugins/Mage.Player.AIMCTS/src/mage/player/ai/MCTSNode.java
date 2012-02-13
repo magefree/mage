@@ -118,9 +118,9 @@ public class MCTSNode {
             double uct;
             if (node.visits > 0)
                 if (isTarget)
-                    uct = (node.wins / (node.visits + 1.0)) + (selectionCoefficient * Math.sqrt(Math.log(visits + 1.0) / (node.visits + 1.0)));
+                    uct = (node.wins / (node.visits)) + (selectionCoefficient * Math.sqrt(Math.log(visits) / (node.visits)));
                 else
-                    uct = ((node.visits - node.wins) / (node.visits + 1.0)) + (selectionCoefficient * Math.sqrt(Math.log(visits + 1.0) / (node.visits + 1.0)));
+                    uct = ((node.visits - node.wins) / (node.visits)) + (selectionCoefficient * Math.sqrt(Math.log(visits) / (node.visits)));
             else
                 // ensure that a random unvisited node is played first
                 uct = 10000 + 1000 * Math.random();

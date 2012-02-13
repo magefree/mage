@@ -32,6 +32,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.Card;
@@ -92,7 +93,7 @@ class PawnOfUlamogTriggeredAbility extends TriggeredAbilityImpl<PawnOfUlamogTrig
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == EventType.ZONE_CHANGE) {
             UUID targetId = event.getTargetId();
-            Card card = game.getLastKnownInformation(targetId, Zone.BATTLEFIELD);
+            MageObject card = game.getLastKnownInformation(targetId, Zone.BATTLEFIELD);
             if (card != null && card instanceof Permanent && !(card instanceof PermanentToken)) {
                 Permanent permanent = (Permanent) card;
                 ZoneChangeEvent zEvent = (ZoneChangeEvent) event;

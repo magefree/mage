@@ -130,8 +130,10 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
             }
             if (ability.getManaCosts().getVariableCosts().size() > 0) {
                 int amount = getAvailableManaProducers(game).size() - ability.getManaCosts().convertedManaCost();
-                if (amount > 0)
+                if (amount > 0) {
+                    ability = ability.copy();
                     ability.getManaCostsToPay().add(new GenericManaCost(rnd.nextInt(amount)));
+                }
             }
             // check if ability kills player, if not then it's ok to play
 //            if (ability.isUsesStack()) {

@@ -35,6 +35,7 @@ import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.WatcherScope;
 import mage.Constants.Zone;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.OneShotEffect;
@@ -99,7 +100,7 @@ class FleshAllergyWatcher extends WatcherImpl<FleshAllergyWatcher> {
 	@Override
 	public void watch(GameEvent event, Game game) {
 		if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
-            Card card = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
+            MageObject card = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             if (card != null && card.getCardType().contains(CardType.CREATURE)) {
                 creaturesDiedThisTurn++;
             }
@@ -133,7 +134,7 @@ class FleshAllergyEffect extends OneShotEffect<FleshAllergyEffect> {
 	@Override
 	public boolean apply(Game game, Ability source) {
         FleshAllergyWatcher watcher = (FleshAllergyWatcher) game.getState().getWatchers().get("CreaturesDied");
-        Card card = game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
+        MageObject card = game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
         if (card != null && watcher != null) {
             Player player = game.getPlayer(((Permanent)card).getControllerId());
             if (player != null) {

@@ -60,7 +60,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer<ComputerPlayerMCTS> imple
     private static final int THINK_MIN_RATIO = 40;
     private static final int THINK_MAX_RATIO = 100;
     private static final double THINK_TIME_MULTIPLIER = 2.0;
-    private static final boolean USE_MULTIPLE_THREADS = false;
+    private static final boolean USE_MULTIPLE_THREADS = true;
     
     protected transient MCTSNode root;
     protected int maxThinkTime;

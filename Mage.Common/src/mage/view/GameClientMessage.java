@@ -46,6 +46,7 @@ public class GameClientMessage implements Serializable {
 	private String message;
 	private AbilityPickerView abilityView;
 	private boolean flag;
+	private boolean cancel;
 	private String[] strings;
 	private Set<UUID> targets;
 	private int min;

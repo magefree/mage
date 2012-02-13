@@ -33,6 +33,7 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -89,14 +90,14 @@ public class DivineOffering extends CardImpl<DivineOffering> {
 
                 @Override
                 public boolean apply(Game game, Ability source) {
-                        Card card = game.getLastKnownInformation(source.getFirstTarget(), Constants.Zone.BATTLEFIELD);
-            if (card != null) {
+                        MageObject card = game.getLastKnownInformation(source.getFirstTarget(), Constants.Zone.BATTLEFIELD);
+                        if (card != null) {
                             int cost = card.getManaCost().get(0).convertedManaCost();
                                 Player player = game.getPlayer(source.getControllerId());
                                 if (player != null) {
                                         player.gainLife(cost, game);
                                 }
-            }
+                        }
                         return true;
                 }
 

@@ -28,12 +28,8 @@
 
 package mage.target;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
@@ -260,6 +256,30 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 		return true;
 	}
 
+    @Override
+    public List<T> getTargetOptions(Ability source, Game game) {
+        List<T> options = new ArrayList<T>();
+        Set<UUID> possibleTargets = possibleTargets(source.getSourceId(), source.getControllerId(), game);
+        possibleTargets.removeAll(getTargets());
+        Iterator<UUID> it = possibleTargets.iterator();
+        while (it.hasNext()) {
+            UUID targetId = it.next();
+            T target = this.copy();
+            target.clearChosen();
+            target.addTarget(targetId, source, game, true);
+            if (!target.isChosen()) {
+                Iterator<UUID> it2 = possibleTargets.iterator();
+                while (it2.hasNext()&& !target.isChosen()) {
+                    UUID nextTargetId = it2.next();
+                    target.addTarget(nextTargetId, source, game, true);
+                }
+            }
+            if (target.isChosen())
+                options.add(target);
+        }        
+        return options;
+    }
+    
 	@Override
 	public List<UUID> getTargets() {
 		return new ArrayList<UUID>(targets.keySet());

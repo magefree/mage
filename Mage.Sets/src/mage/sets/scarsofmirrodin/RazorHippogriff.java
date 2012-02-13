@@ -105,7 +105,7 @@ public class RazorHippogriff extends CardImpl<RazorHippogriff> {
 			if (player != null) {
 				Card card = player.getGraveyard().get(source.getFirstTarget(), game);
 				if (card == null) {
-					card = game.getLastKnownInformation(source.getFirstTarget(), Zone.GRAVEYARD);
+					card = (Card)game.getLastKnownInformation(source.getFirstTarget(), Zone.GRAVEYARD);
 				}
 				if (card != null) {
 					player.gainLife(card.getManaCost().convertedManaCost(), game);

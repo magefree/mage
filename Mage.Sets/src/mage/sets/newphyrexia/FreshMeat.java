@@ -32,6 +32,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.WatcherScope;
 import mage.Constants.Zone;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -96,8 +97,8 @@ class FreshMeatWatcher extends WatcherImpl<FreshMeatWatcher> {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).isDiesEvent()) {
-            Card card = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (card != null && card.getOwnerId().equals(this.controllerId) && card.getCardType().contains(CardType.CREATURE)) {
+            MageObject card = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
+            if (card != null && ((Card)card).getOwnerId().equals(this.controllerId) && card.getCardType().contains(CardType.CREATURE)) {
                 creaturesCount++;
             }
         }

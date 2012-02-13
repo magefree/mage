@@ -61,6 +61,7 @@ public interface Target extends Serializable {
 	public boolean canTarget(UUID id, Game game);
 	public boolean canTarget(UUID id, Ability source, Game game);
 	public boolean isLegal(Ability source, Game game);
+    public List<? extends Target> getTargetOptions(Ability source, Game game);
 
 	//methods for non-targets
 	public boolean canChoose(UUID sourceControllerId, Game game);

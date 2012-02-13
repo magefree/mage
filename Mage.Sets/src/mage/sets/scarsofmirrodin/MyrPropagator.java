@@ -44,6 +44,7 @@ import mage.sets.tokens.EmptyToken;
 import mage.util.CardUtil;
 
 import java.util.UUID;
+import mage.MageObject;
 
 /**
  *
@@ -93,10 +94,10 @@ class MyrPropagatorCreateTokenEffect extends OneShotEffect<MyrPropagatorCreateTo
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Card thisCard = game.getLastKnownInformation(source.getSourceId(), Constants.Zone.BATTLEFIELD);
-		if (thisCard != null) {
+		MageObject thisCard = game.getLastKnownInformation(source.getSourceId(), Constants.Zone.BATTLEFIELD);
+		if (thisCard != null && thisCard instanceof Permanent) {
 			EmptyToken token = new EmptyToken();
-			CardUtil.copyTo(token).from(thisCard);
+			CardUtil.copyTo(token).from((Permanent)thisCard);
 			token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
 			return true;
 		} else { // maybe it's token

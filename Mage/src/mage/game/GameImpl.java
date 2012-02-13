@@ -95,7 +95,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	protected transient PlayerQueryEventSource playerQueryEventSource = new PlayerQueryEventSource();
 
 	protected Map<UUID, Card> gameCards = new HashMap<UUID, Card>();
-	protected Map<UUID, Card> lki = new HashMap<UUID, Card>();
+	protected Map<UUID, MageObject> lki = new HashMap<UUID, MageObject>();
 	protected GameState state;
     
     protected Date startTime;
@@ -1206,13 +1206,13 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	 * @return
 	 */
 	@Override
-	public Card getLastKnownInformation(UUID objectId, Zone zone) {
+	public MageObject getLastKnownInformation(UUID objectId, Zone zone) {
 		/*if (!lki.containsKey(objectId)) {
 			return getCard(objectId);
 		}*/
-        Card card = lki.get(objectId);
-        if (card != null) {
-            return card.copy();
+        MageObject object = lki.get(objectId);
+        if (object != null) {
+            return object.copy();
         }
         return null;
 	}
@@ -1225,9 +1225,11 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	 * @param card
 	 */
 	@Override
-	public void rememberLKI(UUID objectId, Zone zone, Card card) {
-		Card copy = card.copy();
-		lki.put(objectId, copy);
+	public void rememberLKI(UUID objectId, Zone zone, MageObject object) {
+        if (object instanceof Permanent || object instanceof StackObject) {
+            MageObject copy = object.copy();
+            lki.put(objectId, copy);
+        }
 	}
 
 	/**

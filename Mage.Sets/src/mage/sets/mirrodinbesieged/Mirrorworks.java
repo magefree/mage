@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.Cost;
@@ -134,10 +135,10 @@ class MirrorworksEffect extends OneShotEffect<MirrorworksEffect> {
 				if (cost.pay(source, game, source.getId(), source.getControllerId(), false)) {
 					UUID targetId = targetPointer.getFirst(source);
 					if (targetId != null) {
-						Card target = game.getLastKnownInformation(targetId, Constants.Zone.BATTLEFIELD);
-						if (target != null) {
+						MageObject target = game.getLastKnownInformation(targetId, Constants.Zone.BATTLEFIELD);
+						if (target != null && target instanceof Permanent) {
 							EmptyToken token = new EmptyToken();
-							CardUtil.copyTo(token).from(target);
+							CardUtil.copyTo(token).from((Permanent)target);
 							token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
 							return true;
 						}

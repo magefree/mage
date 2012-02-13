@@ -35,6 +35,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.WatcherScope;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -96,7 +97,7 @@ class ZuberasDiedWatcher extends WatcherImpl<ZuberasDiedWatcher> {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).isDiesEvent()) {
-            Card card = game.getLastKnownInformation(event.getTargetId(), Constants.Zone.BATTLEFIELD);
+            MageObject card = game.getLastKnownInformation(event.getTargetId(), Constants.Zone.BATTLEFIELD);
             if (card != null && card.hasSubtype("Zubera")) {
                 zuberasDiedThisTurn++;
             }
