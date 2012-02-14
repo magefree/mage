@@ -1359,7 +1359,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
     @Override
     public int doAction(MageAction action) {
-        actions.add(action);
+        //actions.add(action);
 		int value = action.doAction(this);
 		score += action.getScore(scorePlayer);
         return value;

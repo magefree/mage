@@ -40,6 +40,9 @@ public abstract class MageAction {
      * @return
      */
     public int getScore(final Player player) {
+        if (player == null || scorePlayer == null) {
+            return 0;
+        }
         if (player.getId().equals(scorePlayer.getId())) {
             return score;
         } else {
