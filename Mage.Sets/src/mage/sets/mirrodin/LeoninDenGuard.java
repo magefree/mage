@@ -28,17 +28,15 @@
 package mage.sets.mirrodin;
 
 import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.EquippedCondition;
-import mage.abilities.decorator.ConditionalStaticAbility;
+import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
-import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 
@@ -47,6 +45,9 @@ import mage.cards.CardImpl;
  * @author Loki
  */
 public class LeoninDenGuard extends CardImpl<LeoninDenGuard> {
+
+    private static final String rule1 = "As long as {this} is equipped, it gets +1/+1";
+    private static final String rule2 = "As long as {this} is equipped, it has vigilance";
 
     public LeoninDenGuard(UUID ownerId) {
         super(ownerId, 9, "Leonin Den-Guard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
@@ -58,10 +59,12 @@ public class LeoninDenGuard extends CardImpl<LeoninDenGuard> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
-        // As long as Leonin Den-Guard is equipped, it gets +1/+1 and has vigilance.
-        Ability ability = new ConditionalStaticAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Constants.Duration.WhileOnBattlefield), EquippedCondition.getInstance(), "As long as {this} is equipped, it gets +1/+1 and has vigilance.");
-        ability.addEffect(new GainAbilitySourceEffect(VigilanceAbility.getInstance()));
-        this.addAbility(ability);
+        // As long as Leonin Den-Guard is equipped, it gets +1/+1 and has vigilance.        
+        ConditionalContinousEffect effect1 = new ConditionalContinousEffect(new BoostSourceEffect(1, 1, Constants.Duration.WhileOnBattlefield), EquippedCondition.getInstance(), rule1);
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect1));
+        ConditionalContinousEffect effect2 = new ConditionalContinousEffect(new GainAbilitySourceEffect(VigilanceAbility.getInstance()), EquippedCondition.getInstance(), rule2);
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect2));
+
     }
 
     public LeoninDenGuard(final LeoninDenGuard card) {

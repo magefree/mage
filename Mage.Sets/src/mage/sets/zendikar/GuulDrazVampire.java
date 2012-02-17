@@ -28,14 +28,13 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
+import mage.Constants;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.condition.common.TenOrLessLifeCondition;
-import mage.abilities.decorator.ConditionalStaticAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.EquippedCondition;
+import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.IntimidateAbility;
@@ -47,7 +46,8 @@ import mage.cards.CardImpl;
  */
 public class GuulDrazVampire extends CardImpl<GuulDrazVampire> {
 
-    private static final String rule = "As long as an opponent has 10 or less life, {this} gets +2/+1 and has intimidate.";
+    private static final String rule1 = "As long as {this} is equipped, it gets +2/+1";
+    private static final String rule2 = "As long as {this} is equipped, it has intimidate";
 
     public GuulDrazVampire(UUID ownerId) {
         super(ownerId, 93, "Guul Draz Vampire", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
@@ -59,9 +59,11 @@ public class GuulDrazVampire extends CardImpl<GuulDrazVampire> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        Ability ability = new ConditionalStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 1, Duration.WhileOnBattlefield), new TenOrLessLifeCondition(TenOrLessLifeCondition.CheckType.AN_OPPONENT), rule);
-        ability.addEffect(new GainAbilitySourceEffect(IntimidateAbility.getInstance()));
-        this.addAbility(ability);
+        ConditionalContinousEffect effect1 = new ConditionalContinousEffect(new BoostSourceEffect(2, 1, Constants.Duration.WhileOnBattlefield), EquippedCondition.getInstance(), rule1);
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect1));
+        ConditionalContinousEffect effect2 = new ConditionalContinousEffect(new GainAbilitySourceEffect(IntimidateAbility.getInstance()), EquippedCondition.getInstance(), rule2);
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect2));
+
     }
 
     public GuulDrazVampire(final GuulDrazVampire card) {

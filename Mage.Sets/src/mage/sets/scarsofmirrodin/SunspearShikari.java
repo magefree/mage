@@ -28,14 +28,13 @@
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
-
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.EquippedCondition;
-import mage.abilities.decorator.ConditionalStaticAbility;
+import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.LifelinkAbility;
@@ -47,7 +46,8 @@ import mage.cards.CardImpl;
  */
 public class SunspearShikari extends CardImpl<SunspearShikari> {
 
-    private final static String rule = "As long as {this} is equipped, it has first strike and lifelink.";
+    private final static String rule1 = "As long as {this} is equipped, it has first strike";
+    private final static String rule2 = "As long as {this} is equipped, it has lifelink";
 
     public SunspearShikari(UUID ownerId) {
         super(ownerId, 23, "Sunspear Shikari", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
@@ -59,9 +59,10 @@ public class SunspearShikari extends CardImpl<SunspearShikari> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        Ability ability = new ConditionalStaticAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), EquippedCondition.getInstance(), rule);
-        ability.addEffect(new GainAbilitySourceEffect(LifelinkAbility.getInstance()));
-        this.addAbility(ability);
+        ConditionalContinousEffect effect1 = new ConditionalContinousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), EquippedCondition.getInstance(), rule1);
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect1));
+        ConditionalContinousEffect effect2 = new ConditionalContinousEffect(new GainAbilitySourceEffect(LifelinkAbility.getInstance()), EquippedCondition.getInstance(), rule2);
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect2));
     }
 
     public SunspearShikari(final SunspearShikari card) {

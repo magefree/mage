@@ -29,13 +29,14 @@ package mage.sets.innistrad;
 
 import java.util.Set;
 import java.util.UUID;
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalStaticAbility;
+import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
@@ -60,10 +61,8 @@ public class NightRevelers extends CardImpl<NightRevelers> {
         this.toughness = new MageInt(4);
 
         // Night Revelers has haste as long as an opponent controls a Human.
-        this.addAbility(new ConditionalStaticAbility(Zone.BATTLEFIELD,
-                new GainAbilitySourceEffect(HasteAbility.getInstance()),
-                new NightRevelersCondition(),
-                rule));
+        ConditionalContinousEffect effect = new ConditionalContinousEffect(new GainAbilitySourceEffect(HasteAbility.getInstance()), new NightRevelersCondition(), rule);
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect));
 
     }
 

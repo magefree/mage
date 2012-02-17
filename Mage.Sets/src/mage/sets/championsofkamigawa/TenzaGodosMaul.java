@@ -38,7 +38,7 @@ import mage.Constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.EquippedMatchesFilterCondition;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.decorator.ConditionalStaticAbility;
+import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.BoostEnchantedEffect;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
@@ -79,15 +79,13 @@ public class TenzaGodosMaul extends CardImpl<TenzaGodosMaul> {
         // Equipped creature gets +1/+1.  
 	this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1)));
         // As long as it's legendary, it gets an additional +2/+2.
-        this.addAbility(new ConditionalStaticAbility(
-                Constants.Zone.BATTLEFIELD, 
-                new BoostEnchantedEffect(2, 2, Constants.Duration.WhileOnBattlefield),
-                new EquippedMatchesFilterCondition(legendaryFilter), rule1));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(
+                new BoostEquippedEffect(2, 2), 
+                new EquippedMatchesFilterCondition(legendaryFilter), rule1)));
         // As long as it's red, it has trample.
-        this.addAbility(new ConditionalStaticAbility(
-                Constants.Zone.BATTLEFIELD, 
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(
                 new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.EQUIPMENT),
-                new EquippedMatchesFilterCondition(redFilter), rule2));
+                new EquippedMatchesFilterCondition(redFilter), rule2)));
         // Equip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)
         this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(1), new TargetControlledCreaturePermanent()));
         

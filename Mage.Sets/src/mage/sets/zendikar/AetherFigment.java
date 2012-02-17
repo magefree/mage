@@ -28,7 +28,7 @@
 
 package mage.sets.zendikar;
 
-import mage.Constants;
+import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
@@ -37,14 +37,10 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.decorator.ConditionalStaticAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.UnblockableAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-
-import java.util.UUID;
 
 /**
  * @author nantuko, BetaSteward_at_googlemail.com

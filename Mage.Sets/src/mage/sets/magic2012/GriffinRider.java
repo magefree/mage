@@ -28,15 +28,14 @@
 package mage.sets.magic2012;
 
 import java.util.UUID;
-
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.ControlsPermanentCondition;
-import mage.abilities.decorator.ConditionalStaticAbility;
+import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -51,7 +50,8 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class GriffinRider extends CardImpl<GriffinRider> {
 
-    private static final String rule = "As long as you control a Griffin creature, {this} gets +3/+3 and has flying.";
+    private static final String rule1 = "As long as you control a Griffin creature, {this} gets +3/+3.";
+    private static final String rule2 = "As long as you control a Griffin creature, {this} has flying.";
     private static final FilterPermanent filterGriffinCard = new FilterCreaturePermanent();
 
     static {
@@ -70,9 +70,10 @@ public class GriffinRider extends CardImpl<GriffinRider> {
         this.toughness = new MageInt(1);
 
         // As long as you control a Griffin creature, Griffin Rider gets +3/+3 and has flying.
-        Ability ability = new ConditionalStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(3, 3, Duration.WhileOnBattlefield), new ControlsPermanentCondition(filterGriffinCard), rule);
-        ability.addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance()));
-        this.addAbility(ability);
+        ConditionalContinousEffect effect1 = new ConditionalContinousEffect(new BoostSourceEffect(3, 3, Duration.WhileOnBattlefield), new ControlsPermanentCondition(filterGriffinCard), rule1);
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect1));
+        ConditionalContinousEffect effect2 = new ConditionalContinousEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance()), new ControlsPermanentCondition(filterGriffinCard), rule2);
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect2));
     }
 
     public GriffinRider(final GriffinRider card) {

@@ -28,14 +28,14 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.ControlsPermanentCondition;
-import mage.abilities.decorator.ConditionalStaticAbility;
+import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.*;
 import mage.cards.CardImpl;
@@ -48,7 +48,8 @@ import mage.filter.common.FilterControlledPermanent;
  */
 public class AngelicOverseer extends CardImpl<AngelicOverseer> {
 
-    private static final String rule = "As long as you control a Human, {this} has hexproof and is indestructible.";
+    private static final String rule1 = "As long as you control a Human, {this} has hexproof.";
+    private static final String rule2 = "As long as you control a Human, {this} is indestructible.";
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Human");
 
     static {
@@ -68,9 +69,11 @@ public class AngelicOverseer extends CardImpl<AngelicOverseer> {
         this.addAbility(FlyingAbility.getInstance());
 
         // As long as you control a Human, Angelic Overseer has hexproof and is indestructible.
-        Ability ability = new ConditionalStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilitySourceEffect(HexproofAbility.getInstance()), new ControlsPermanentCondition(filter), rule);
-        ability.addEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance()));
-        this.addAbility(ability);
+        ConditionalContinousEffect effect1 = new ConditionalContinousEffect(new GainAbilitySourceEffect(HexproofAbility.getInstance()), new ControlsPermanentCondition(filter), rule1);
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect1));
+        ConditionalContinousEffect effect2 = new ConditionalContinousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance()), new ControlsPermanentCondition(filter), rule2);
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect2));
+
     }
 
     public AngelicOverseer(final AngelicOverseer card) {

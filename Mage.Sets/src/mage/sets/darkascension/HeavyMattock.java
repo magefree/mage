@@ -28,14 +28,13 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.EquippedHasSubtypeCondition;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.decorator.ConditionalStaticAbility;
+import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
@@ -56,7 +55,7 @@ public class HeavyMattock extends CardImpl<HeavyMattock> {
         // Equipped creature gets +1/+1.
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1)));
         // As long as equipped creature is a Human, it gets an additional +1/+1.
-        this.addAbility(new ConditionalStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1), new EquippedHasSubtypeCondition("Human"), staticText));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(new BoostEquippedEffect(1, 1), new EquippedHasSubtypeCondition("Human"), staticText)));
         // Equip {2}
         this.addAbility(new EquipAbility(Constants.Outcome.BoostCreature, new GenericManaCost(2)));
     }

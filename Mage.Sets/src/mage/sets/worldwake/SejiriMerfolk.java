@@ -28,7 +28,6 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
@@ -37,15 +36,12 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.ControlsPermanentCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
-import mage.abilities.decorator.ConditionalStaticAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.common.FilterLandPermanent;
 
 /**
  *
@@ -53,7 +49,8 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class SejiriMerfolk extends CardImpl<SejiriMerfolk> {
 
-    private static final String rule = "As long as you control a Plains, {this} has first strike and lifelink.";
+    private static final String rule1 = "As long as you control a Plains, {this} has first strike.";
+    private static final String rule2 = "As long as you control a Plains, {this} has lifelink.";
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Plains");
 
     static {
@@ -72,9 +69,11 @@ public class SejiriMerfolk extends CardImpl<SejiriMerfolk> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        Ability ability = new ConditionalStaticAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(LifelinkAbility.getInstance()), new ControlsPermanentCondition(filter), rule);
-        ability.addEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()));
-        this.addAbility(ability);
+        ConditionalContinousEffect effect1 = new ConditionalContinousEffect(new GainAbilitySourceEffect(LifelinkAbility.getInstance()), new ControlsPermanentCondition(filter), rule1);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect1));
+        ConditionalContinousEffect effect2 = new ConditionalContinousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), new ControlsPermanentCondition(filter), rule2);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect2));
+
     }
 
     public SejiriMerfolk(final SejiriMerfolk card) {

@@ -33,11 +33,11 @@ import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.EnchantedCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalStaticAbility;
+import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -49,7 +49,9 @@ import mage.cards.CardImpl;
  */
 public class FlaringFlameKin extends CardImpl<FlaringFlameKin> {
 
-    private static final String rule = "As long as {this} is enchanted, it gets +2/+2, has trample, and has \"{R}: {this} gets +1/+0 until end of turn.\"";
+    private static final String rule1 = "As long as {this} is enchanted, it gets +2/+2";
+    private static final String rule2 = "As long as {this} is enchanted, it has trample";
+    private static final String rule3 = "As long as {this} is enchanted, it has \"{R}: {this} gets +1/+0 until end of turn.\"";
 
     public FlaringFlameKin(UUID ownerId) {
         super(ownerId, 62, "Flaring Flame-Kin", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
@@ -61,13 +63,16 @@ public class FlaringFlameKin extends CardImpl<FlaringFlameKin> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        Ability ability = new ConditionalStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), EnchantedCondition.getInstance(), rule);
-        ability.addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance()));
         SimpleActivatedAbility grantedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BoostSourceEffect(1, 0, Duration.EndOfTurn),
                 new ManaCostsImpl("{R}"));
-        ability.addEffect(new GainAbilitySourceEffect(grantedAbility));
-        this.addAbility(ability);
+        
+        ConditionalContinousEffect effect1 = new ConditionalContinousEffect(new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), EnchantedCondition.getInstance(), rule1);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect1));
+        ConditionalContinousEffect effect2 = new ConditionalContinousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance()), EnchantedCondition.getInstance(), rule2);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect2));
+        ConditionalContinousEffect effect3 = new ConditionalContinousEffect(new GainAbilitySourceEffect(grantedAbility), EnchantedCondition.getInstance(), rule3);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect3));
     }
 
     public FlaringFlameKin(final FlaringFlameKin card) {

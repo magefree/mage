@@ -27,6 +27,7 @@
  */
 package mage.sets.innistrad;
 
+import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -34,18 +35,16 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.EquippedHasSubtypeCondition;
-import mage.abilities.decorator.ConditionalStaticAbility;
+import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continious.BoostEnchantedEffect;
+import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  * @author nantuko
@@ -69,7 +68,7 @@ public class BondsOfFaith extends CardImpl<BondsOfFaith> {
         this.addAbility(ability);
 
         // Enchanted creature gets +2/+2 as long as it's a Human. Otherwise, it can't attack or block.
-        this.addAbility(new ConditionalStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Constants.Duration.WhileOnBattlefield), new EquippedHasSubtypeCondition("Human"), rule));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(new BoostEquippedEffect(2, 2), new EquippedHasSubtypeCondition("Human"), rule)));
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BondsOfFaithEffect()));
     }
 

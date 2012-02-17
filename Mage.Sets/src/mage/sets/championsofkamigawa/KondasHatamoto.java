@@ -28,17 +28,17 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-
+import mage.Constants;
+import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.Constants.CardType;
-import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.keyword.BushidoAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.ControlsPermanentCondition;
-import mage.abilities.decorator.ConditionalStaticAbility;
+import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
+import mage.abilities.keyword.BushidoAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
@@ -51,6 +51,8 @@ import mage.filter.common.FilterControlledPermanent;
 public class KondasHatamoto extends CardImpl<KondasHatamoto>{
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Legendary Samurai");
+    private static final String rule1 = "As long as you control a legendary Samurai, {this} gets +1/+2";
+    private static final String rule2 = "As long as you control a legendary Samurai, {this} has vigilance";
 
     static {
         filter.getSupertype().add("Legendary");
@@ -70,12 +72,10 @@ public class KondasHatamoto extends CardImpl<KondasHatamoto>{
         
         this.addAbility(new BushidoAbility(1));
         
-        ConditionalStaticAbility ability = new ConditionalStaticAbility(Zone.BATTLEFIELD,
-                        new BoostSourceEffect(1, 2, Duration.WhileOnBattlefield),
-                        new ControlsPermanentCondition(filter), 
-                        "As long as you control a legendary Samurai, {this} gets +1/+2 and has vigilance.");
-        ability.addEffect(new GainAbilitySourceEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield));
-        this.addAbility(ability);
+        ConditionalContinousEffect effect1 = new ConditionalContinousEffect(new BoostSourceEffect(1, 2, Duration.WhileOnBattlefield), new ControlsPermanentCondition(filter), rule1);
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect1));
+        ConditionalContinousEffect effect2 = new ConditionalContinousEffect(new GainAbilitySourceEffect(VigilanceAbility.getInstance()), new ControlsPermanentCondition(filter), rule2);
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect2));
         
     }
 

@@ -27,10 +27,8 @@
  */
 package mage.sets.magic2012;
 
-import static mage.Constants.Zone;
 
 import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -38,8 +36,9 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.HasCounterCondition;
-import mage.abilities.decorator.ConditionalStaticAbility;
+import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -67,9 +66,9 @@ public class PrimordialHydra extends CardImpl<PrimordialHydra> {
 
         this.addAbility(new EntersBattlefieldAbility(new PrimordialHydraEntersEffect(), "{this} enters the battlefield with X +1/+1 counters on it"));
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PrimordialHydraDoubleEffect(), Constants.TargetController.YOU, false));
-        this.addAbility(new ConditionalStaticAbility(Zone.BATTLEFIELD,
-				new GainAbilitySourceEffect(TrampleAbility.getInstance(), Constants.Duration.WhileOnBattlefield),
-				new HasCounterCondition(CounterType.P1P1, 10), staticText));
+        ConditionalContinousEffect effect = new ConditionalContinousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance()), new HasCounterCondition(CounterType.P1P1, 10), staticText);
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect));
+
 	}
 
     public PrimordialHydra(final PrimordialHydra card) {

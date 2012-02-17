@@ -28,14 +28,13 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.EquippedHasSubtypeCondition;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.decorator.ConditionalStaticAbility;
+import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
@@ -59,7 +58,7 @@ public class SilverInlaidDagger extends CardImpl<SilverInlaidDagger> {
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEquippedEffect(2, 0)));
 
         // As long as equipped creature is a Human, it gets an additional +1/+0
-        this.addAbility(new ConditionalStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEquippedEffect(1, 0), new EquippedHasSubtypeCondition("Human"), staticText));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(new BoostEquippedEffect(1, 0), new EquippedHasSubtypeCondition("Human"), staticText)));
     }
 
     public SilverInlaidDagger(final SilverInlaidDagger card) {
