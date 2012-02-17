@@ -16,6 +16,7 @@ public class SejiriMerfolkTest extends CardTestBase {
     @Test
     public void testWithoutPlains() {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Sejiri Merfolk");
+        setStopAt(1, Constants.PhaseStep.DRAW);
         execute();
         Permanent merfolk = getPermanent("Sejiri Merfolk", playerA.getId());
         Assert.assertNotNull(merfolk);
@@ -27,6 +28,7 @@ public class SejiriMerfolkTest extends CardTestBase {
     public void testWithPlains() {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Sejiri Merfolk");
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains");
+        setStopAt(1, Constants.PhaseStep.DRAW);
         execute();
         Permanent merfolk = getPermanent("Sejiri Merfolk", playerA.getId());
         Assert.assertNotNull(merfolk);

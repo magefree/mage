@@ -3,6 +3,7 @@ package org.mage.test.ai;
 import junit.framework.Assert;
 import mage.Constants;
 import mage.game.permanent.Permanent;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestBase;
 
@@ -14,6 +15,7 @@ import org.mage.test.serverside.base.CardTestBase;
 public class EquipAbilityTest extends CardTestBase {
 
     @Test
+    @Ignore
     public void testLevelUpAbilityUsage() {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Steel Wall");
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Blade of the Bloodchief");
@@ -22,6 +24,7 @@ public class EquipAbilityTest extends CardTestBase {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 2);
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Sacred Foundry", 1);
 
+        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
 
         Permanent wall = getPermanent("Steel Wall", playerA.getId());

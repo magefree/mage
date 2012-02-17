@@ -3,26 +3,23 @@ package org.mage.test.serverside.cards.abilities;
 import mage.Constants;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestBase;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  * @author ayratn
  */
-public class ProtectionFromTypeTest extends CardTestBase {
+public class ProtectionFromTypeTest extends CardTestPlayerBase {
 
 	@Test
 	public void testProtectionFromArtifacts() {
 		useRedDefault();
-		addCard(Constants.Zone.HAND, playerA, "Trigon of Corruption");
+		addCard(Constants.Zone.BATTLEFIELD, playerA, "Trigon of Corruption");
 
 		addCard(Constants.Zone.BATTLEFIELD, playerB, "Tel-Jilad Fallen");
 
-		setStopOnTurn(2);
+        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{2},Remove a Charge counter from {this}, {T}: put a -1/-1 counter on target creature. ", "Tel-Jilad Fallen");
+		setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
 		execute();
-
-		assertTurn(2);
-		assertResult(playerA, GameResult.DRAW);
-		assertLife(playerA, 20);
-		assertLife(playerB, 20);
 
 		// no one should be destroyed
 		assertPermanentCount(playerB, "Tel-Jilad Fallen", 1);
@@ -31,19 +28,15 @@ public class ProtectionFromTypeTest extends CardTestBase {
 	@Test
 	public void testNoProtection() {
 		useRedDefault();
-		addCard(Constants.Zone.HAND, playerA, "Trigon of Corruption");
+		addCard(Constants.Zone.BATTLEFIELD, playerA, "Trigon of Corruption");
 
 		addCard(Constants.Zone.BATTLEFIELD, playerB, "Coral Merfolk");
 
-		setStopOnTurn(2);
+        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{2},Remove a Charge counter from {this}, {T}: put a -1/-1 counter on target creature. ", "Coral Merfolk");
+		setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
 		execute();
 
-		assertTurn(2);
-		assertResult(playerA, GameResult.DRAW);
-		assertLife(playerA, 20);
-		assertLife(playerB, 20);
-
-		// no one should be destroyed
+		// Coral Merfolk should be destroyed
 		assertPermanentCount(playerB, "Coral Merfolk", 0);
 	}
 }

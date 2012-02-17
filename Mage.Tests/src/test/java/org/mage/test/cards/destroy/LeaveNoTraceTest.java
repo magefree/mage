@@ -22,6 +22,7 @@ public class LeaveNoTraceTest extends CardTestBase {
         castSpell(playerA, "Leave No Trace");
         addFixedTarget(playerA, "Leave No Trace", "Asceticism");
 
+        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
         assertPermanentCount(playerB, "Asceticism", 0);
         assertPermanentCount(playerB, "Awakening Zone", 0);

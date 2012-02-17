@@ -1,6 +1,7 @@
 package org.mage.test.ai.bugs;
 
 import mage.Constants;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestBase;
 
@@ -12,6 +13,7 @@ import org.mage.test.serverside.base.CardTestBase;
 public class BugDoesntAttackTest extends CardTestBase {
 
 	@Test
+    @Ignore
 	public void testAttackWithZephyrSprite() throws Exception {
 		addCard(Constants.Zone.HAND, playerA, "Zephyr Sprite");
 		addCard(Constants.Zone.HAND, playerA, "Island");
@@ -25,6 +27,7 @@ public class BugDoesntAttackTest extends CardTestBase {
 	}
 
     @Test
+    @Ignore
 	public void testAttackWithGoblinGuide() throws Exception {
 		addCard(Constants.Zone.HAND, playerA, "Goblin Guide");
 		addCard(Constants.Zone.HAND, playerA, "Mountain");

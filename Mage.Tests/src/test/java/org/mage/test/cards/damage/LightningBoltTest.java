@@ -1,23 +1,23 @@
 package org.mage.test.cards.damage;
 
 import mage.Constants;
+import mage.Constants.PhaseStep;
 import org.junit.Test;
-import org.mage.test.serverside.base.CardTestBase;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  * @author ayrat
  */
-public class LightningBoltTest extends CardTestBase {
+public class LightningBoltTest extends CardTestPlayerBase {
 
     @Test
     public void testDamageOpponent() {
-        addCard(Constants.Zone.HAND, playerA, "Mountain");
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain");
         addCard(Constants.Zone.HAND, playerA, "Lightning Bolt");
 
-        playLand(playerA, "Mountain");
-        castSpell(playerA, "Lightning Bolt");
-        // not specifying target, AI should choose opponent by itself
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
 
+        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
         assertLife(playerA, 20);
         assertLife(playerB, 17);
@@ -25,14 +25,12 @@ public class LightningBoltTest extends CardTestBase {
 
     @Test
     public void testDamageSelf() {
-        addCard(Constants.Zone.HAND, playerA, "Mountain");
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain");
         addCard(Constants.Zone.HAND, playerA, "Lightning Bolt");
 
-        playLand(playerA, "Mountain");
-        castSpell(playerA, "Lightning Bolt");
-        addFixedTarget(playerA, "Lightning Bolt", playerA);
-        playerA.setAllowBadMoves(true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerA);
 
+        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
         assertLife(playerA, 17);
         assertLife(playerB, 20);
@@ -40,28 +38,26 @@ public class LightningBoltTest extends CardTestBase {
 
     @Test
     public void testDamageSmallCreature() {
-        addCard(Constants.Zone.HAND, playerA, "Mountain");
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain");
         addCard(Constants.Zone.HAND, playerA, "Lightning Bolt");
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Sejiri Merfolk");
 
-        playLand(playerA, "Mountain");
-        castSpell(playerA, "Lightning Bolt");
-        addFixedTarget(playerA, "Lightning Bolt", "Sejiri Merfolk");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Sejiri Merfolk");
 
+        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
         assertPermanentCount(playerB, "Sejiri Merfolk", 0);
     }
 
     @Test
     public void testDamageBigCreature() {
-        addCard(Constants.Zone.HAND, playerA, "Mountain");
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain");
         addCard(Constants.Zone.HAND, playerA, "Lightning Bolt");
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Craw Wurm");
 
-        playLand(playerA, "Mountain");
-        castSpell(playerA, "Lightning Bolt");
-        addFixedTarget(playerA, "Lightning Bolt", "Craw Wurm");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Craw Wurm");
 
+        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
         assertPermanentCount(playerB, "Craw Wurm", 1);
     }
@@ -74,11 +70,10 @@ public class LightningBoltTest extends CardTestBase {
         addCard(Constants.Zone.HAND, playerA, "Lightning Bolt");
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Craw Wurm");
 
-        castSpell(playerA, "Lightning Bolt");
-        addFixedTarget(playerA, "Lightning Bolt", "Craw Wurm");
-        castSpell(playerA, "Lightning Bolt");
-        addFixedTarget(playerA, "Lightning Bolt", "Craw Wurm");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Craw Wurm");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Craw Wurm");
 
+        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
         assertPermanentCount(playerB, "Craw Wurm", 0);
     }

@@ -4,6 +4,7 @@ import junit.framework.Assert;
 import mage.Constants;
 import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestBase;
 
@@ -16,6 +17,7 @@ public class NimShamblerTest extends CardTestBase {
      * Reproduces the bug when AI sacrifices its creatures for no reason.
      */
     @Test
+    @Ignore
     public void testNoCreatureWasSacrificed() {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Nim Shambler");
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Blood Cultist");
@@ -32,6 +34,7 @@ public class NimShamblerTest extends CardTestBase {
     }
 
     @Test
+    @Ignore
     public void testAttackAndKillBlockerWithAdditionalDamage() {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Nim Shambler");
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Blood Cultist");

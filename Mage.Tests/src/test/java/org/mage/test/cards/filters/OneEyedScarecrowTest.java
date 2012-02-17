@@ -21,6 +21,7 @@ public class OneEyedScarecrowTest extends CardTestBase {
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Screeching Bat");
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Runeclaw Bear");
 
+        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
 
         Permanent scarecrow = getPermanent("One-Eyed Scarecrow", playerA.getId());
@@ -59,6 +60,7 @@ public class OneEyedScarecrowTest extends CardTestBase {
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Screeching Bat");
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Runeclaw Bear");
 
+        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
 
         // -1/2

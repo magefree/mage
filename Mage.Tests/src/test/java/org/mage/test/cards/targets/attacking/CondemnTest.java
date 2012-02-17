@@ -2,13 +2,14 @@ package org.mage.test.cards.targets.attacking;
 
 import junit.framework.Assert;
 import mage.Constants;
+import mage.Constants.PhaseStep;
 import org.junit.Test;
-import org.mage.test.serverside.base.CardTestBase;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  * @author ayratn
  */
-public class CondemnTest extends CardTestBase {
+public class CondemnTest extends CardTestPlayerBase {
 
     @Test
     public void testIllegalTarget() {
@@ -16,10 +17,10 @@ public class CondemnTest extends CardTestBase {
         addCard(Constants.Zone.HAND, playerA, "Condemn");
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Sejiri Merfolk");
 
-        castSpell(playerA, "Condemn");
         // check with illegal target
-        addFixedTarget(playerA, "Condemn", "Sejiri Merfolk");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Condemn", "Sejiri Merfolk");
 
+        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
         // spell shouldn't work
         assertPermanentCount(playerB, "Sejiri Merfolk", 1);
@@ -29,21 +30,20 @@ public class CondemnTest extends CardTestBase {
 
     @Test
     public void testLegalTarget() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains");
-        addCard(Constants.Zone.HAND, playerA, "Condemn");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Sejiri Merfolk");
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Plains");
+        addCard(Constants.Zone.HAND, playerB, "Condemn");
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Sejiri Merfolk");
 
-        attack(playerB, "Sejiri Merfolk");
-        castSpell(playerA, "Condemn");
-        addFixedTarget(playerA, "Condemn", "Sejiri Merfolk");
+        attack(1, playerA, "Sejiri Merfolk");
+        castSpell(1, PhaseStep.DECLARE_ATTACKERS, playerB, "Condemn", "Sejiri Merfolk");
 
-        setStopOnTurn(3);
+        setStopAt(1, Constants.PhaseStep.END_COMBAT);
         execute();
-        assertPermanentCount(playerB, "Sejiri Merfolk", 0);
-        assertLife(playerA, 20);
-        assertLife(playerB, 21);
+        assertPermanentCount(playerA, "Sejiri Merfolk", 0);
+        assertLife(playerB, 20);
+        assertLife(playerA, 21);
         // check was put on top
-        Assert.assertEquals(currentGame.getPlayer(playerB.getId()).getLibrary().size(), 60);
+        Assert.assertEquals(currentGame.getPlayer(playerA.getId()).getLibrary().size(), 61);
     }
 
 }

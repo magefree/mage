@@ -1311,11 +1311,14 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 				player.getGraveyard().add(card);
 			}
 			for (PermanentCard card : battlefield) {
-				card.setOwnerId(ownerId);
-				PermanentCard permanent = new PermanentCard(card, ownerId);
-				permanent.setTapped(card.isTapped());
-				((PermanentImpl)permanent).removeSummoningSickness();
-				getBattlefield().addPermanent(permanent);
+                setZone(card.getId(), Zone.BATTLEFIELD);
+                card.setOwnerId(ownerId);
+                PermanentCard permanent = new PermanentCard(card, ownerId);
+                getBattlefield().addPermanent(permanent);
+                permanent.entersBattlefield(permanent.getId(), this);                    
+                ((PermanentImpl)permanent).removeSummoningSickness();
+                if (card.isTapped())
+                    permanent.setTapped(true);
 			}
 			applyEffects();
 		}

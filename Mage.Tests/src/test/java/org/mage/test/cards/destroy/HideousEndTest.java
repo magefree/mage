@@ -18,6 +18,7 @@ public class HideousEndTest extends CardTestBase {
         castSpell(playerA, "Hideous End");
         addFixedTarget(playerA, "Hideous End", "Copper Myr");
 
+        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
         assertPermanentCount(playerB, "Copper Myr", 0);
         assertLife(playerB, 18);
@@ -34,6 +35,7 @@ public class HideousEndTest extends CardTestBase {
         castSpell(playerA, "Hideous End");
         addFixedTarget(playerA, "Hideous End", "Zombie Goliath");
 
+        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
         assertPermanentCount(playerB, "Zombie Goliath", 1);
         assertLife(playerB, 20);
@@ -54,6 +56,7 @@ public class HideousEndTest extends CardTestBase {
         castSpell(playerA, "Hideous End");
         addFixedTarget(playerA, "Hideous End", "Copper Myr");
 
+        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
         assertPermanentCount(playerB, "Copper Myr", 1);
         assertLife(playerB, 20);

@@ -3,6 +3,7 @@ package org.mage.test.ai;
 import junit.framework.Assert;
 import mage.Constants;
 import mage.game.permanent.Permanent;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestBase;
 
@@ -15,6 +16,7 @@ public class ObNixilistheFallenTest extends CardTestBase {
      * Reproduces bug when AI doesn't use good "may" ability.
      */
     @Test
+    @Ignore
     public void testMayAbilityUsed() {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Ob Nixilis, the Fallen");
         addCard(Constants.Zone.HAND, playerA, "Swamp", 1);

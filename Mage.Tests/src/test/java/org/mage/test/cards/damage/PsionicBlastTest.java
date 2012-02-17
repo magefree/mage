@@ -17,6 +17,7 @@ public class PsionicBlastTest extends CardTestBase {
         addCard(Constants.Zone.HAND, playerA, "Psionic Blast");
 
         castSpell(playerA, "Psionic Blast");
+        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 18);

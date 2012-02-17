@@ -4,13 +4,13 @@ import junit.framework.Assert;
 import mage.Constants;
 import mage.game.permanent.Permanent;
 import org.junit.Test;
-import org.mage.test.serverside.base.CardTestBase;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
  * @author ayrat
  */
-public class DamageDistributionTest extends CardTestBase {
+public class DamageDistributionTest extends CardTestPlayerBase {
 
     @Test
     public void testDoubleStrike() {
@@ -18,6 +18,9 @@ public class DamageDistributionTest extends CardTestBase {
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Merfolk Looter");
         setLife(playerB, 4);
 
+        attack(1, playerA, "Warren Instigator");
+        block(1, playerB, "Merfolk Looter", "Warren Instigator");
+        setStopAt(1, Constants.PhaseStep.END_COMBAT);
         execute();
 
         Permanent instigator = getPermanent("Warren Instigator", playerA.getId());
@@ -36,7 +39,11 @@ public class DamageDistributionTest extends CardTestBase {
     public void testDoubleStrikeUnblocked() {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Warren Instigator");
         setLife(playerB, 4);
+        
+        attack(1, playerA, "Warren Instigator");
+        setStopAt(1, Constants.PhaseStep.END_COMBAT);
         execute();
+        
         assertLife(playerB, 2);
     }
 
@@ -45,7 +52,8 @@ public class DamageDistributionTest extends CardTestBase {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Merfolk Looter");
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Warren Instigator");
         setLife(playerB, 4);
-
+        
+        setStopAt(1, Constants.PhaseStep.END_COMBAT);
         execute();
 
         // should block and die

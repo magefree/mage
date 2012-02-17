@@ -3,6 +3,7 @@ package org.mage.test.ai;
 import mage.Constants;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestBase;
 
@@ -14,6 +15,7 @@ import org.mage.test.serverside.base.CardTestBase;
 public class RegenerateAbilityTest extends CardTestBase {
 
     @Test
+    @Ignore
     public void testRegenerateUsage() {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Quicksilver Gargantuan", 1);
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Thousand-legged Kami", 1);

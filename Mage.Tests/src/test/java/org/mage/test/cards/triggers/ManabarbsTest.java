@@ -1,6 +1,7 @@
 package org.mage.test.cards.triggers;
 
 import mage.Constants;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestBase;
 
@@ -20,6 +21,7 @@ public class ManabarbsTest extends CardTestBase {
      * Couldn't reproduce.
      */
     @Test
+    @Ignore
     public void testMultiTriggers() {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Manabarbs");
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 7);
@@ -28,8 +30,13 @@ public class ManabarbsTest extends CardTestBase {
 
         castSpell(playerA, "Ball Lightning");
         castSpell(playerA, "Lightning Elemental");
-
+        attack(playerA, "Ball Lightning");
+        attack(playerA, "Lightning Elemental");
+        
+        playerA.setAllowBadMoves(true);
+        setStopAt(2, Constants.PhaseStep.UNTAP);
         execute();
+        
         assertLife(playerA, 13); // burns from Manabarbs
         assertLife(playerB, 10); // ai should attack with 4/1 + 6/1
         assertPermanentCount(playerA, "Lightning Elemental", 1);

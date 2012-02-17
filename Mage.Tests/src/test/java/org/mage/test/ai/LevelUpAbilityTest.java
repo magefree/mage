@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestBase;
 
 import java.util.Map;
+import org.junit.Ignore;
 
 /**
  * Make sure AI uses level up ability, but not too much (over the max useful level - Issue 441).
@@ -18,6 +19,7 @@ import java.util.Map;
 public class LevelUpAbilityTest extends CardTestBase {
 
     @Test
+    @Ignore
     public void testLevelUpAbilityUsage() {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Transcendent Master");
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Swamp", 15);

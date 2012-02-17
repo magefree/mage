@@ -28,7 +28,8 @@ public abstract class CardTestBase extends CardTestAPIImpl {
 
 	protected enum AIType {
 		MinimaxHybrid,
-		MAD
+		MAD,
+        MonteCarlo
 	}
 
 	protected enum ExpectedType {
@@ -56,6 +57,22 @@ public abstract class CardTestBase extends CardTestAPIImpl {
 		this.aiTypeB = aiTypeB;
 	}
 
+    protected Player createNewPlayer(String playerName, AIType aiType) {
+        Player player = null;
+        switch (aiType) {
+            case MinimaxHybrid:
+                player = createPlayer(playerName, "Computer - minimax hybrid");
+                break;
+            case MAD:
+                player = createPlayer(playerName, "Computer - mad");                
+                break;
+            case MonteCarlo:
+                player = createPlayer(playerName, "Computer - monte carlo");
+                break;
+        }
+        return player;
+    }
+    
 	@Before
 	public void reset() throws GameException, FileNotFoundException {
 		if (currentGame != null) {
@@ -66,9 +83,7 @@ public abstract class CardTestBase extends CardTestAPIImpl {
 
 		Game game = new TwoPlayerDuel(Constants.MultiplayerAttackOption.LEFT, Constants.RangeOfInfluence.ALL);
 
-		playerA = aiTypeA.equals(CardTestBase.AIType.MinimaxHybrid) ?
-				createPlayer("PlayerA", "Computer - minimax hybrid") :
-				createPlayer("PlayerA", "Computer - mad");
+		playerA = createNewPlayer("PlayerA", aiTypeA);
 		playerA.setTestMode(true);
         logger.info("Loading deck...");
 		Deck deck = Deck.load(Sets.loadDeck("RB Aggro.dck"));
@@ -79,9 +94,7 @@ public abstract class CardTestBase extends CardTestAPIImpl {
 		game.addPlayer(playerA, deck);
 		game.loadCards(deck.getCards(), playerA.getId());
 
-		playerB = aiTypeB.equals(CardTestBase.AIType.MinimaxHybrid) ?
-				createPlayer("PlayerB", "Computer - minimax hybrid") :
-				createPlayer("PlayerB", "Computer - mad");
+		playerB = createNewPlayer("PlayerB", aiTypeB);
 		playerB.setTestMode(true);
 		Deck deck2 = Deck.load(Sets.loadDeck("RB Aggro.dck"));
 		if (deck2.getCards().size() < 40) {
@@ -128,9 +141,7 @@ public abstract class CardTestBase extends CardTestAPIImpl {
 
 		Game game = new TwoPlayerDuel(Constants.MultiplayerAttackOption.LEFT, Constants.RangeOfInfluence.ALL);
 
-		playerA = aiTypeA.equals(CardTestBase.AIType.MinimaxHybrid) ?
-				createPlayer("ComputerA", "Computer - minimax hybrid") :
-				createPlayer("ComputerA", "Computer - mad");
+		playerA = createNewPlayer("ComputerA", aiTypeA);
 		playerA.setTestMode(true);
 
 		Deck deck = Deck.load(Sets.loadDeck("RB Aggro.dck"));
@@ -141,9 +152,7 @@ public abstract class CardTestBase extends CardTestAPIImpl {
 		game.addPlayer(playerA, deck);
 		game.loadCards(deck.getCards(), playerA.getId());
 
-		playerB = aiTypeB.equals(CardTestBase.AIType.MinimaxHybrid) ?
-				createPlayer("ComputerB", "Computer - minimax hybrid") :
-				createPlayer("ComputerB", "Computer - mad");
+		playerB = createNewPlayer("ComputerB", aiTypeB);
 		playerB.setTestMode(true);
 		Deck deck2 = Deck.load(Sets.loadDeck("RB Aggro.dck"));
 		if (deck2.getCards().size() < 40) {
