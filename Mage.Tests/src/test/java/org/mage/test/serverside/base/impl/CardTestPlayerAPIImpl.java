@@ -352,7 +352,36 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 		Assert.assertEquals("(Battlefield) Card counts are not equal (" + cardName + ")", count, actualCount);
 	}
 	
-	public Permanent getPermanent(String cardName, UUID controller) {
+	/**
+	 * Assert card count in player's graveyard.
+	 *
+	 * @param player   {@link Player} who's graveyard should be counted.
+	 * @param count    Expected count.
+	 */
+	public void assertGraveyardCount(Player player, int count) throws AssertionError {
+		int actual = currentGame.getPlayer(player.getId()).getGraveyard().size();
+		Assert.assertEquals("(Graveyard) Card counts are not equal ", count, actual);
+	}
+
+	/**
+	 * Assert card count in player's graveyard.
+	 *
+	 * @param player   {@link Player} who's graveyard should be counted.
+	 * @param cardName Name of the cards that should be counted.
+	 * @param count    Expected count.
+	 */
+	public void assertGraveyardCount(Player player, String cardName, int count) throws AssertionError {
+		int actualCount = 0;
+		for (Card card : player.getGraveyard().getCards(currentGame)) {
+            if (card.getName().equals(cardName)) {
+                actualCount++;
+            }
+        }
+
+		Assert.assertEquals("(Graveyard) Card counts are not equal (" + cardName + ")", count, actualCount);
+	}
+
+    public Permanent getPermanent(String cardName, UUID controller) {
 		Permanent permanent0 = null;
 		int count = 0;
 		for (Permanent permanent : currentGame.getBattlefield().getAllPermanents()) {
