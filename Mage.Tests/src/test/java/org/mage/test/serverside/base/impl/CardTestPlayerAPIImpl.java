@@ -353,6 +353,17 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 	}
 	
 	/**
+	 * Assert card count in player's hand.
+	 *
+	 * @param player   {@link Player} who's hand should be counted.
+	 * @param count    Expected count.
+	 */
+	public void assertHandCount(Player player, int count) throws AssertionError {
+		int actual = currentGame.getPlayer(player.getId()).getHand().size();
+		Assert.assertEquals("(Hand) Card counts are not equal ", count, actual);
+	}
+
+	/**
 	 * Assert card count in player's graveyard.
 	 *
 	 * @param player   {@link Player} who's graveyard should be counted.

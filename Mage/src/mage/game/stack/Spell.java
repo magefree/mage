@@ -303,6 +303,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 
 	@Override
 	public void setControllerId(UUID controllerId) {
+        this.ability.setControllerId(controllerId);
 		this.controllerId = controllerId;
 	}
 
