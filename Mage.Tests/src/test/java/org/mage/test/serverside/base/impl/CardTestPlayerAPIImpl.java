@@ -15,6 +15,7 @@ import org.mage.test.serverside.base.MageTestPlayerBase;
 import java.util.List;
 import java.util.UUID;
 import mage.Constants.PhaseStep;
+import mage.counters.CounterType;
 import org.mage.test.player.TestPlayer;
 
 /**
@@ -351,7 +352,24 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 		}
 		Assert.assertEquals("(Battlefield) Card counts are not equal (" + cardName + ")", count, actualCount);
 	}
-	
+
+	/**
+	 * Assert counter count on a permanent
+	 *
+	 * @param cardName  Name of the cards that should be counted.
+	 * @param type      Type of the counter that should be counted.
+     * @param count     Expected count.
+	 */
+	public void assertCounterCount(String cardName, CounterType type, int count) throws AssertionError {
+		int actualCount = 0;
+		for (Permanent permanent : currentGame.getBattlefield().getAllPermanents()) {
+            if (permanent.getName().equals(cardName)) {
+                actualCount += permanent.getCounters().getCount(type);
+            }
+		}
+		Assert.assertEquals("(Battlefield) Counter counts are not equal (" + cardName + ":" + type + ")", count, actualCount);
+	}
+    
 	/**
 	 * Assert card count in player's hand.
 	 *
