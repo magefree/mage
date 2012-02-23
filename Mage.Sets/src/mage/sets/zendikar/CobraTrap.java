@@ -32,16 +32,19 @@ import mage.Constants.CardType;
 import mage.Constants.ColoredManaSymbol;
 import mage.Constants.Rarity;
 import mage.Constants.WatcherScope;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostImpl;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SnakeToken;
+import mage.game.stack.StackObject;
+import mage.players.Player;
 import mage.watchers.Watcher;
 import mage.watchers.WatcherImpl;
 
@@ -96,11 +99,17 @@ class CobraTrapWatcher extends WatcherImpl<CobraTrapWatcher> {
         if (condition == true) { // no need to check - condition has already occured
             return;
         }
-        if (event.getType() == EventType.DESTROYED_PERMANENT
-                && !game.getPlayer(controllerId).getGraveyard().get(event.getTargetId(), game).getCardType().contains(CardType.CREATURE)
-                && game.getStack().getStackObject(event.getSourceId()) != null
-                && game.getOpponents(controllerId).contains(game.getStack().getStackObject(event.getSourceId()).getControllerId())) {
-            condition = true;
+        Player player = game.getPlayer(controllerId);
+        if (player != null && event.getType() == EventType.DESTROYED_PERMANENT) {
+            Permanent perm = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
+            if (perm != null && !perm.getCardType().contains(CardType.CREATURE)) {
+                if (game.getStack().size() > 0) {
+                    StackObject spell = game.getStack().getStackObject(event.getSourceId());
+                    if (spell != null && game.getOpponents(controllerId).contains(spell.getControllerId())) {
+                        condition = true;
+                    }
+                }
+            }
         }
     }
 }

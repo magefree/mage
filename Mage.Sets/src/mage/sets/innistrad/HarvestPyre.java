@@ -100,7 +100,7 @@ class HarvestPyreCost extends CostImpl<HarvestPyreCost> implements VariableCost 
         Player player = game.getPlayer(controllerId);
 		while (true) {
 			target.clearChosen();
-			if (target.choose(Outcome.Exile, controllerId, sourceId, game)) {
+			if (target.canChoose(controllerId, game) && target.choose(Outcome.Exile, controllerId, sourceId, game)) {
                 Card card = player.getGraveyard().get(target.getFirstTarget(), game);
                 if (card != null) {
                     player.getGraveyard().remove(card);

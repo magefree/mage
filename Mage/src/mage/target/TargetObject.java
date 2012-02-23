@@ -66,7 +66,9 @@ public abstract class TargetObject<T extends TargetObject<T>> extends TargetImpl
 	public String getTargetedName(Game game) {
 		StringBuilder sb = new StringBuilder();
 		for (UUID targetId: getTargets()) {
-			sb.append(game.getObject(targetId).getName()).append(" ");
+            MageObject object = game.getObject(targetId);
+            if (object != null)
+                sb.append(object.getName()).append(" ");
 		}
 		return sb.toString();
 	}

@@ -489,7 +489,8 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 				Ability spellAbility = game.getStack().getSpell(ability.getId()).getSpellAbility();
 				if (spellAbility.activate(game, noMana)) {
 					for (KickerAbility kicker: card.getAbilities().getKickerAbilities()) {
-						kicker.activate(game, false);
+                        if (kicker.getCosts().canPay(ability.getSourceId(), playerId, game) && kicker.canChooseTarget(game))
+                            kicker.activate(game, false);
 					}
                     GameEvent event = GameEvent.getEvent(GameEvent.EventType.SPELL_CAST, spellAbility.getId(), spellAbility.getSourceId(), playerId);
                     event.setZone(fromZone);
@@ -1209,7 +1210,10 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 					}
 				}
 			}
-
+            for (AlternativeCost cost: ability.getAlternativeCosts()) {
+                if (cost.isAvailable(game, ability) && cost.canPay(ability.getSourceId(), playerId, game))
+                    return true;
+            }
 		}
 		return false;
 	}
