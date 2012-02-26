@@ -29,6 +29,7 @@ public class TestPlayRandomGame extends MageTestBase {
 	private static List<String> colorChoices = Arrays.asList("bu", "bg", "br", "bw", "ug", "ur", "uw", "gr", "gw", "rw", "bur", "buw", "bug", "brg", "brw", "bgw", "wur", "wug", "wrg", "rgu");
 
     @Test
+    @Ignore
     public void playGames() throws GameException, FileNotFoundException {
         for (int i = 1; i < 100; i++) {
             logger.info("Playing game: " + i);

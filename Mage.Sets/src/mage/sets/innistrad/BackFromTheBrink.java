@@ -122,7 +122,7 @@ class BackFromTheBrinkCost extends CostImpl<BackFromTheBrinkCost> {
 
     @Override
     public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-        return targets.canChoose(controllerId, controllerId, game);
+        return targets.canChoose(controllerId, game);
     }
 
     @Override

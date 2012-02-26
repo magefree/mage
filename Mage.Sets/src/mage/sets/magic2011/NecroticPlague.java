@@ -42,6 +42,7 @@ import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
@@ -73,7 +74,7 @@ public class NecroticPlague extends CardImpl<NecroticPlague> {
 		this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
 		Ability ability = new EnchantAbility(auraTarget.getTargetName());
 		this.addAbility(ability);
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NecroticPlagueEffect()));
+		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NecroticPlagueEffect(this.objectId)));
 
 	}
 
@@ -81,21 +82,44 @@ public class NecroticPlague extends CardImpl<NecroticPlague> {
 		super(card);
 	}
 
+    @Override
+    public void assignNewId() {
+        super.assignNewId();
+        updateSource();
+    }
+
 	@Override
 	public NecroticPlague copy() {
 		return new NecroticPlague(this);
 	}
+    
+    private void updateSource() {
+        for (Ability ability: abilities) {
+            for (Effect effect: ability.getEffects()) {
+                if (effect instanceof NecroticPlagueEffect) {
+                    ((NecroticPlagueEffect)effect).updateSource(objectId);
+                }
+            }
+        }
+    }
 }
 
 class NecroticPlagueEffect extends ContinuousEffectImpl<NecroticPlagueEffect> {
 
-	public NecroticPlagueEffect() {
+    private Ability ability1;
+    private Ability ability2;
+    
+	public NecroticPlagueEffect(UUID cardId) {
 		super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        ability1 = new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new SacrificeSourceEffect());
+        ability2 = new DiesTriggeredAbility(new NecroticPlagueEffect2(cardId), false);
 		staticText = "Enchanted creature has \"At the beginning of your upkeep, sacrifice this creature.\"  When enchanted creature is put into a graveyard, its controller chooses target creature one of his or her opponents controls. Return {this} from its owner's graveyard to the battlefield attached to that creature.";
 	}
 
 	public NecroticPlagueEffect(final NecroticPlagueEffect effect) {
 		super(effect);
+        this.ability1 = effect.ability1.copy();
+        this.ability2 = effect.ability2.copy();
 	}
 
 	@Override
@@ -112,8 +136,8 @@ class NecroticPlagueEffect extends ContinuousEffectImpl<NecroticPlagueEffect> {
 				switch (layer) {
 					case AbilityAddingRemovingEffects_6:
 						if (sublayer == SubLayer.NA) {
-							creature.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new SacrificeSourceEffect()), game);
-							creature.addAbility(new DiesTriggeredAbility(new NecroticPlagueEffect2(source.getSourceId()), false), game);
+							creature.addAbility(ability1, game);
+							creature.addAbility(ability2, game);
 						}
 						break;
 				}
@@ -123,6 +147,14 @@ class NecroticPlagueEffect extends ContinuousEffectImpl<NecroticPlagueEffect> {
 		return false;
 	}
 
+    public void updateSource(UUID id) {
+        for (Effect effect: ability2.getEffects()) {
+            if (effect instanceof NecroticPlagueEffect2) {
+                ((NecroticPlagueEffect2)effect).updateSource(id);
+            }
+        }
+    }
+    
 	@Override
 	public boolean apply(Game game, Ability source) {
 		return false;
@@ -137,13 +169,13 @@ class NecroticPlagueEffect extends ContinuousEffectImpl<NecroticPlagueEffect> {
 
 class NecroticPlagueEffect2 extends OneShotEffect<NecroticPlagueEffect2> {
 
+    private UUID cardId;
+    
 	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 
 	static {
 		filter.setTargetController(TargetController.OPPONENT);
 	}
-
-	protected UUID cardId;
 
 	public NecroticPlagueEffect2(UUID cardId) {
 		super(Outcome.PutCardInPlay);
@@ -177,6 +209,10 @@ class NecroticPlagueEffect2 extends OneShotEffect<NecroticPlagueEffect2> {
 		return false;
 	}
 
+    public void updateSource(UUID id) {
+        this.cardId = id;
+    }
+    
 	@Override
 	public NecroticPlagueEffect2 copy() {
 		return new NecroticPlagueEffect2(this);

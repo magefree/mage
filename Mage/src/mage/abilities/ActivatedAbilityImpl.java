@@ -32,9 +32,9 @@ import java.util.UUID;
 import mage.Constants.AbilityType;
 import mage.Constants.TimingRule;
 import mage.Constants.Zone;
+import mage.MageObject;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
-import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.PhyrexianManaCost;
 import mage.abilities.effects.Effect;
@@ -176,7 +176,11 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
 
 	protected String getMessageText(Game game) {
 		StringBuilder sb = new StringBuilder();
-		sb.append(game.getObject(this.sourceId).getName());
+        MageObject object = game.getObject(this.sourceId);
+        if (object != null)
+            sb.append(object.getName());
+        else
+            sb.append("unknown");
 		if (getTargets().size() > 0) {
 			sb.append(" targeting ");
 			for (Target target: getTargets()) {
