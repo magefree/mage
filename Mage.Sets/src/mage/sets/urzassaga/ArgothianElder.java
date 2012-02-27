@@ -37,48 +37,36 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetLandPermanent;
 
 /**
  *
  * @author Backfir3
  */
-public class WesternPaladin extends CardImpl<WesternPaladin> {
+public class ArgothianElder extends CardImpl<ArgothianElder> {
 
-	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("white creature");
-
-	static {
-		filter.getColor().setWhite(true);
-		filter.setUseColor(true);
-		filter.setScopeColor(Filter.ComparisonScope.Any);
-	}
-
-	public WesternPaladin(UUID ownerId) {
-		super(ownerId, 168, "Western Paladin", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
+	public ArgothianElder(UUID ownerId) {
+		super(ownerId, 233, "Argothian Elder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
 		this.expansionSetCode = "USG";
-		this.subtype.add("Zombie");
-		this.subtype.add("Knight");
-		this.color.setBlack(true);
-		this.power = new MageInt(3);
-		this.toughness = new MageInt(3);
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{B}{B}"));
-		ability.addTarget(new TargetCreaturePermanent(filter));
-                ability.addCost(new TapSourceCost());
+		this.subtype.add("Elf");
+		this.subtype.add("Druid");
+		this.color.setGreen(true);
+		this.power = new MageInt(2);
+		this.toughness = new MageInt(2);
+		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
+		ability.addTarget(new TargetLandPermanent(2));
                 this.addAbility(ability);
         }
 
-	public WesternPaladin(final WesternPaladin card) {
+	public ArgothianElder(final ArgothianElder card) {
 		super(card);
 	}
 
 	@Override
-	public WesternPaladin copy() {
-		return new WesternPaladin(this);
+	public ArgothianElder copy() {
+		return new ArgothianElder(this);
 	}
 
 }

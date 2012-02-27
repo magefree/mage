@@ -28,57 +28,42 @@
 
 package mage.sets.urzassaga;
 
-
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.FilterPermanent;
+import mage.target.TargetPermanent;
 
 /**
  *
  * @author Backfir3
  */
-public class WesternPaladin extends CardImpl<WesternPaladin> {
+public class RainOfSalt extends CardImpl<RainOfSalt> {
 
-	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("white creature");
+    private final static FilterPermanent filter = new FilterPermanent("land");
 
-	static {
-		filter.getColor().setWhite(true);
-		filter.setUseColor(true);
-		filter.setScopeColor(Filter.ComparisonScope.Any);
-	}
+    static {
+        filter.getCardType().add(CardType.LAND);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
+    }
 
-	public WesternPaladin(UUID ownerId) {
-		super(ownerId, 168, "Western Paladin", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-		this.expansionSetCode = "USG";
-		this.subtype.add("Zombie");
-		this.subtype.add("Knight");
-		this.color.setBlack(true);
-		this.power = new MageInt(3);
-		this.toughness = new MageInt(3);
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{B}{B}"));
-		ability.addTarget(new TargetCreaturePermanent(filter));
-                ability.addCost(new TapSourceCost());
-                this.addAbility(ability);
-        }
+    public RainOfSalt(UUID ownerId) {
+        super(ownerId, 206, "Rain of Salt", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");
+        this.expansionSetCode = "USG";
+        this.color.setRed(true);
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getSpellAbility().addTarget(new TargetPermanent(2, filter));
+    }
 
-	public WesternPaladin(final WesternPaladin card) {
-		super(card);
-	}
+    public RainOfSalt(final RainOfSalt card) {
+        super(card);
+    }
 
-	@Override
-	public WesternPaladin copy() {
-		return new WesternPaladin(this);
-	}
-
+    @Override
+    public RainOfSalt copy() {
+        return new RainOfSalt(this);
+    }
 }

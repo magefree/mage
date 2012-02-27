@@ -48,18 +48,18 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Backfir3
  */
-public class WesternPaladin extends CardImpl<WesternPaladin> {
+public class EasternPaladin extends CardImpl<EasternPaladin> {
 
-	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("white creature");
+	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("green creature");
 
 	static {
-		filter.getColor().setWhite(true);
+		filter.getColor().setGreen(true);
 		filter.setUseColor(true);
 		filter.setScopeColor(Filter.ComparisonScope.Any);
 	}
 
-	public WesternPaladin(UUID ownerId) {
-		super(ownerId, 168, "Western Paladin", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
+	public EasternPaladin(UUID ownerId) {
+		super(ownerId, 133, "Eastern Paladin", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
 		this.expansionSetCode = "USG";
 		this.subtype.add("Zombie");
 		this.subtype.add("Knight");
@@ -72,13 +72,13 @@ public class WesternPaladin extends CardImpl<WesternPaladin> {
                 this.addAbility(ability);
         }
 
-	public WesternPaladin(final WesternPaladin card) {
+	public EasternPaladin(final EasternPaladin card) {
 		super(card);
 	}
 
 	@Override
-	public WesternPaladin copy() {
-		return new WesternPaladin(this);
+	public EasternPaladin copy() {
+		return new EasternPaladin(this);
 	}
 
 }
