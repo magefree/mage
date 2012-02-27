@@ -463,7 +463,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 	}
 
     public void playLand(int turnNum, PhaseStep step, TestPlayer player, String cardName) {
-        player.addAction(turnNum, step, "activate:Cast " + cardName);
+        player.addAction(turnNum, step, "activate:Play " + cardName);
     }
 
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName) {

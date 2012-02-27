@@ -273,6 +273,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                     logger.fatal("invalid zone for card - " + toZone);
                     return false;
             }
+            setControllerId(ownerId);
             game.setZone(objectId, event.getToZone());
             game.fireEvent(event);
             return game.getState().getZone(objectId) == toZone;

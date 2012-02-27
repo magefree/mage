@@ -201,12 +201,6 @@ public class Library implements Serializable {
 		return emptyDraw;
 	}
 
-	void setControllerId(UUID playerId, Game game) {
-		for (UUID cardId: library) {
-			game.getCard(cardId).setControllerId(playerId);
-		}
-	}
-
 	public void addAll(Set<Card> cards, Game game) {
 		for (Card card: cards) {
 			game.setZone(card.getId(), Zone.LIBRARY);

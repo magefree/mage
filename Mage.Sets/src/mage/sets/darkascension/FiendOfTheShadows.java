@@ -46,6 +46,7 @@ import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -76,8 +77,8 @@ public class FiendOfTheShadows extends CardImpl<FiendOfTheShadows> {
 
         this.addAbility(FlyingAbility.getInstance());
         // Whenever Fiend of the Shadows deals combat damage to a player, that player exiles a card from his or her hand. You may play that card for as long as it remains exiled.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ExileFromZoneTargetEffect(Constants.Zone.HAND, exileId, "Fiend of the Shadows", new FilterCard()), false));
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, new FiendOfTheShadowsEffect(exileId)));        
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ExileFromZoneTargetEffect(Constants.Zone.HAND, exileId, "Fiend of the Shadows", new FilterCard()), false, true));
+		this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, new FiendOfTheShadowsEffect(exileId)));
         
         // Sacrifice a Human: Regenerate Fiend of the Shadows.
         this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new RegenerateSourceEffect(), new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false))));
@@ -98,7 +99,7 @@ class FiendOfTheShadowsEffect extends AsThoughEffectImpl<FiendOfTheShadowsEffect
     private UUID exileId;
     
 	public FiendOfTheShadowsEffect(UUID exileId) {
-		super(Constants.AsThoughEffectType.CAST, Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+		super(Constants.AsThoughEffectType.CAST, Constants.Duration.EndOfGame, Constants.Outcome.Benefit);
         this.exileId = exileId;
 		staticText = "You may play that card for as long as it remains exiled";
 	}
@@ -122,8 +123,11 @@ class FiendOfTheShadowsEffect extends AsThoughEffectImpl<FiendOfTheShadowsEffect
 	public boolean applies(UUID sourceId, Ability source, Game game) {
 		Card card = game.getCard(sourceId);
 		if (card != null) {
-            if (game.getExile().getExileZone(exileId).contains(card.getId()))
+            ExileZone zone = game.getExile().getExileZone(exileId);
+            if (zone != null && zone.contains(card.getId())) {
+                card.setControllerId(source.getControllerId());
                 return true;
+            }
 		}
 		return false;
 	}
