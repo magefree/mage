@@ -99,7 +99,7 @@ class CurseOfOblivionAbility extends TriggeredAbilityImpl<CurseOfOblivionAbility
 
 	@Override
 	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.DRAW_STEP_PRE) {
+		if (event.getType() == EventType.UPKEEP_STEP_PRE) {
             Permanent enchantment = game.getPermanent(this.sourceId);
             if (enchantment != null && enchantment.getAttachedTo() != null) {
                 Player player = game.getPlayer(enchantment.getAttachedTo());

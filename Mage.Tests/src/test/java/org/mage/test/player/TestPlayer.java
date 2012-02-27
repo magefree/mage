@@ -29,6 +29,7 @@
 package org.mage.test.player;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 import mage.Constants;
@@ -40,6 +41,7 @@ import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterCreatureForCombat;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.stack.StackObject;
 import mage.player.ai.ComputerPlayer;
 import mage.players.Player;
 
@@ -159,6 +161,14 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
                 for (Permanent permanent: game.getBattlefield().getAllActivePermanents()) {
                     if (permanent.getName().equals(target)) {
                         ability.getTargets().get(0).addTarget(permanent.getId(), ability, game);
+                        break;
+                    }
+                }
+                Iterator<StackObject> it = game.getStack().iterator();
+                while (it.hasNext()) {
+                    StackObject object = it.next();
+                    if (object.getName().equals(target)) {
+                        ability.getTargets().get(0).addTarget(object.getId(), ability, game);
                         break;
                     }
                 }
