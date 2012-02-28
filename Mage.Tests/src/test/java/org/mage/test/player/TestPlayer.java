@@ -36,6 +36,7 @@ import mage.Constants;
 import mage.Constants.PhaseStep;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
+import mage.counters.Counter;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterCreatureForCombat;
@@ -80,7 +81,7 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
                     command = command.substring(command.indexOf("activate:") + 9);
                     String[] groups = command.split(";");
                     for (Ability ability: this.getPlayable(game, true)) {
-                        if (ability.toString().equals(groups[0])) {
+                        if (ability.toString().startsWith(groups[0])) {
                             if (groups.length > 1) {
                                 addTargets(ability, groups, game);
                             }
@@ -89,6 +90,18 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
                             return true;
                         }
                     }                    
+                }
+                if (action.getAction().startsWith("addCounters:")) {
+                    String command = action.getAction();
+                    command = command.substring(command.indexOf("addCounters:") + 12);
+                    String[] groups = command.split(";");
+                    for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
+                        if (permanent.getName().equals(groups[0])) {
+                            Counter counter = new Counter(groups[1], Integer.parseInt(groups[2]));
+                            permanent.addCounters(counter, game);
+                            break;
+                        }
+                    }
                 }
             }
         }
@@ -158,18 +171,21 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
             }
             else if (group.startsWith("target=")) {
                 target = group.substring(group.indexOf("target=") + 7);
-                for (Permanent permanent: game.getBattlefield().getAllActivePermanents()) {
-                    if (permanent.getName().equals(target)) {
-                        ability.getTargets().get(0).addTarget(permanent.getId(), ability, game);
-                        break;
+                String[] targets = target.split("\\^");
+                for (String t: targets) {
+                    for (Permanent permanent: game.getBattlefield().getAllActivePermanents()) {
+                        if (permanent.getName().equals(t)) {
+                            ability.getTargets().get(0).addTarget(permanent.getId(), ability, game);
+                            break;
+                        }
                     }
-                }
-                Iterator<StackObject> it = game.getStack().iterator();
-                while (it.hasNext()) {
-                    StackObject object = it.next();
-                    if (object.getName().equals(target)) {
-                        ability.getTargets().get(0).addTarget(object.getId(), ability, game);
-                        break;
+                    Iterator<StackObject> it = game.getStack().iterator();
+                    while (it.hasNext()) {
+                        StackObject object = it.next();
+                        if (object.getName().equals(t)) {
+                            ability.getTargets().get(0).addTarget(object.getId(), ability, game);
+                            break;
+                        }
                     }
                 }
             }

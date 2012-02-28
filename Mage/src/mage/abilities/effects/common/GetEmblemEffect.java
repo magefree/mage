@@ -30,12 +30,9 @@ package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.game.command.Emblem;
-import mage.game.permanent.token.Token;
 
 /**
  *
@@ -67,6 +64,9 @@ public class GetEmblemEffect extends OneShotEffect<GetEmblemEffect> {
 		newEmblem.setSourceId(source.getSourceId());
 		newEmblem.setControllerId(source.getControllerId());
 		game.getState().getCommand().add(newEmblem);
+        for (Ability ability: newEmblem.getAbilities()) {
+            game.getState().addAbility(ability);
+        }
 		return true;
 	}
 

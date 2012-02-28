@@ -27,22 +27,19 @@
 */
 package mage.game.command;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.Constants;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * @author nantuko
@@ -82,24 +79,12 @@ public class Emblem implements CommandObject {
 
 	public void setControllerId(UUID controllerId) {
 	 	this.controllerId = controllerId;
+        this.abilites.setControllerId(controllerId);
 	}
 
 	public void setSourceId(UUID sourceId) {
 		this.sourceId = sourceId;
 	}
-
-//	@Override
-//	public void checkTriggers(GameEvent event, Game game) {
-//		// we have to use Zone.BATTLEFIELD to use the same predefined abilities (like SpellCastTriggeredAbility)
-//		// and not create duplicates
-//		for (TriggeredAbility ability: getAbilities().getTriggeredAbilities(Constants.Zone.BATTLEFIELD)) {
-//			ability.setControllerId(getControllerId());
-//			ability.setSourceId(getSourceId());
-//			if (ability.checkTrigger(event, game)) {
-//				ability.trigger(game, getControllerId());
-//			}
-//		}
-//	}
 
 	@Override
 	public String getName() {
@@ -162,6 +147,7 @@ public class Emblem implements CommandObject {
 		return this.id;
 	}
 
+    @Override
 	public Emblem copy() {
 		return new Emblem(this);
 	}

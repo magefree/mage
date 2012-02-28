@@ -15,6 +15,7 @@ import org.mage.test.serverside.base.MageTestPlayerBase;
 import java.util.List;
 import java.util.UUID;
 import mage.Constants.PhaseStep;
+import mage.counters.Counter;
 import mage.counters.CounterType;
 import org.mage.test.player.TestPlayer;
 
@@ -156,7 +157,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 			}
 		}
 	}
-
+    
 	/**
 	 * Returns card list containter for specified game zone and player.
 	 *
@@ -490,7 +491,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         player.addAction(turnNum, step, "activate:" + ability + ";target=" + targetName);
     }
 
-    public void useAbility(int turnNum, PhaseStep step, TestPlayer player, String cardName) {
+    public void addCounters(int turnNum, PhaseStep step, TestPlayer player, String cardName, CounterType type, int count) {
+        player.addAction(turnNum, step, "addCounters:" + cardName + ";" + type.getName() + ";" + count);
     }
 
     public void attack(int turnNum, TestPlayer player, String attacker) {
