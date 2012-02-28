@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
@@ -100,7 +101,7 @@ class WerewolfRansackerAbility extends TriggeredAbilityImpl<WerewolfRansackerAbi
 	}
 
     public WerewolfRansackerAbility() {
-		super(Constants.Zone.BATTLEFIELD, new DestroyTargetEffect(), true);
+		super(Constants.Zone.BATTLEFIELD, new WerewolfRansackerEffect(), true);
 		Target target = new TargetPermanent(filter);
 		target.setRequired(true);
 		this.addTarget(target);
@@ -157,10 +158,12 @@ class WerewolfRansackerEffect extends OneShotEffect<WerewolfRansackerEffect> {
 				Permanent permanent = game.getPermanent(permanentId);
 				if (permanent != null) {
 					if (permanent.destroy(source.getId(), game, false)) {
-                        Player player = game.getPlayer(permanent.getControllerId());
-                        if (player != null)
-                            player.damage(3, source.getSourceId(), game, false, true);
                         affectedTargets++;
+                        if (game.getState().getZone(permanent.getId()) == Zone.GRAVEYARD) {
+                            Player player = game.getPlayer(permanent.getControllerId());
+                            if (player != null)
+                                player.damage(3, source.getSourceId(), game, false, true);
+                        }
                     }
 				}
 			}

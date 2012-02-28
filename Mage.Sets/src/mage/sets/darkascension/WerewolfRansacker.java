@@ -32,25 +32,13 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.TwoOrMoreSpellsWereCastLastTurnCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.FilterPermanent;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.Target;
-import mage.target.TargetPermanent;
 
 /**
  *
@@ -71,7 +59,6 @@ public class WerewolfRansacker extends CardImpl<WerewolfRansacker> {
         this.toughness = new MageInt(4);
 
         // Whenever this creature transforms into Werewolf Ransacker, you may destroy target artifact. If that artifact is put into a graveyard this way, Werewolf Ransacker deals 3 damage to that artifact's controller.
-//        this.addAbility(new WerewolfRansackerAbility());
         
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Werewolf Ransacker.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), Constants.TargetController.ANY, false);
@@ -88,80 +75,3 @@ public class WerewolfRansacker extends CardImpl<WerewolfRansacker> {
     }
 }
 
-//class WerewolfRansackerAbility extends TriggeredAbilityImpl<WerewolfRansackerAbility> {
-//
-//	private static final FilterPermanent filter = new FilterPermanent("artifact");
-//
-//	static {
-//		filter.getCardType().add(CardType.ARTIFACT);
-//		filter.setScopeCardType(Filter.ComparisonScope.Any);
-//	}
-//
-//    public WerewolfRansackerAbility() {
-//		super(Constants.Zone.BATTLEFIELD, new DestroyTargetEffect(), true);
-//		Target target = new TargetPermanent(filter);
-//		target.setRequired(true);
-//		this.addTarget(target);
-//	}
-//
-//	public WerewolfRansackerAbility(final WerewolfRansackerAbility ability) {
-//		super(ability);
-//	}
-//
-//	@Override
-//	public WerewolfRansackerAbility copy() {
-//		return new WerewolfRansackerAbility(this);
-//	}
-//
-//	@Override
-//	public boolean checkTrigger(GameEvent event, Game game) {
-//		if (event.getType() == GameEvent.EventType.TRANSFORMED) {
-//            if (event.getTargetId().equals(sourceId)) {
-//                return true;
-//            }
-//		}
-//		return false;
-//	}
-//
-//	@Override
-//	public String getRule() {
-//		return "Whenever this creature transforms into Werewolf Ransacker, you may destroy target artifact. If that artifact is put into a graveyard this way, Werewolf Ransacker deals 3 damage to that artifact's controller.";
-//	}
-//
-//}
-//
-//class WerewolfRansackerEffect extends OneShotEffect<WerewolfRansackerEffect> {
-//
-//	public WerewolfRansackerEffect() {
-//		super(Constants.Outcome.DestroyPermanent);
-//	}
-//
-//	public WerewolfRansackerEffect(final WerewolfRansackerEffect effect) {
-//		super(effect);
-//	}
-//
-//	@Override
-//	public WerewolfRansackerEffect copy() {
-//		return new WerewolfRansackerEffect(this);
-//	}
-//
-//	@Override
-//	public boolean apply(Game game, Ability source) {
-//        int affectedTargets = 0;
-//		if (targetPointer.getTargets(source).size() > 0) {
-//			for (UUID permanentId : targetPointer.getTargets(source)) {
-//				Permanent permanent = game.getPermanent(permanentId);
-//				if (permanent != null) {
-//					if (permanent.destroy(source.getId(), game, false)) {
-//                        Player player = game.getPlayer(permanent.getControllerId());
-//                        if (player != null)
-//                            player.damage(3, source.getSourceId(), game, false, true);
-//                        affectedTargets++;
-//                    }
-//				}
-//			}
-//		}
-//		return affectedTargets > 0;
-//	}
-//
-//}
