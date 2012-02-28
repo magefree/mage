@@ -28,19 +28,15 @@
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
-import mage.Constants.AttachmentType;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
-import mage.abilities.Ability;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
-import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
-import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 
@@ -55,8 +51,11 @@ public class SylvokLifestaff extends CardImpl<SylvokLifestaff> {
         this.expansionSetCode = "SOM";
         this.subtype.add("Equipment");
 
+        // Equipped creature gets +1/+0.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 0)));
+        // Whenever equipped creature dies, you gain 3 life.
         this.addAbility(new DiesAttachedTriggeredAbility(new GainLifeEffect(3), "equipped creature"));
+        // // Equip {1}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));
     }
 

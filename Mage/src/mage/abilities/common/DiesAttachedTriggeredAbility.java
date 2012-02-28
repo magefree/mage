@@ -42,6 +42,6 @@ public class DiesAttachedTriggeredAbility extends TriggeredAbilityImpl<DiesAttac
 
     @Override
     public String getRule() {
-        return "When " + attachedDescription + " dies," + super.getRule();
+        return "When " + attachedDescription + " dies, " + super.getRule();
     }
 }

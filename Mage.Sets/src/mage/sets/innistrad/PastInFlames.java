@@ -28,7 +28,6 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Layer;
@@ -61,7 +60,7 @@ public class PastInFlames extends CardImpl<PastInFlames> {
         this.getSpellAbility().addEffect(new PastInFlamesEffect());
         
         // Flashback {4}{R}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{4}{R}"), Constants.TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{4}{R}"), TimingRule.SORCERY));
 
     }
 

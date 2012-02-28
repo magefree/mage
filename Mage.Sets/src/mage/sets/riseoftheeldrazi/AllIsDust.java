@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.riseoftheeldrazi;
 
+import java.util.List;
 import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -38,8 +37,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.players.PlayerList;
 
 /**
  * @author Loki
@@ -62,10 +59,10 @@ public class AllIsDust extends CardImpl<AllIsDust> {
     public AllIsDust copy() {
         return new AllIsDust(this);
     }
-
 }
 
 class AllIsDustEffect extends OneShotEffect<AllIsDustEffect> {
+
     AllIsDustEffect() {
         super(Constants.Outcome.DestroyPermanent);
         staticText = "Each player sacrifices all colored permanents he or she controls";
@@ -77,7 +74,8 @@ class AllIsDustEffect extends OneShotEffect<AllIsDustEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent p : game.getBattlefield().getAllActivePermanents()) {
+        List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(source.getControllerId());
+        for (Permanent p : permanents) {
             if (!p.getColor().isColorless()) {
                 p.sacrifice(source.getSourceId(), game);
             }
@@ -90,5 +88,4 @@ class AllIsDustEffect extends OneShotEffect<AllIsDustEffect> {
     public AllIsDustEffect copy() {
         return new AllIsDustEffect(this);
     }
-
 }
