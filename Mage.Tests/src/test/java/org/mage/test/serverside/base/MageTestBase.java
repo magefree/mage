@@ -28,6 +28,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import mage.Constants.PhaseStep;
+import org.mage.test.player.RandomPlayer;
 
 /**
  * Base class for all tests.
@@ -298,4 +299,8 @@ public abstract class MageTestBase {
 	protected Player createPlayer(String name, String playerType) {
 		return PlayerFactory.getInstance().createPlayer(playerType, name, Constants.RangeOfInfluence.ALL, 5);
 	}
+    
+    protected Player createRandomPlayer(String name) {
+        return new RandomPlayer(name);
+    }
 }

@@ -147,30 +147,6 @@ class LilianaOfTheVeilEffect extends OneShotEffect<LilianaOfTheVeilEffect> {
         return false;
     }
 
-//    private Choice createChoice(CardsImpl pile1, CardsImpl cards, Game game) {
-//        Choice choice = new ChoiceImpl(true);
-//        choice.setMessage("Select a pile of permanents to sacrifice:");
-//        StringBuilder sb = new StringBuilder("Pile 1: ");
-//        for (UUID cardId : pile1) {
-//            Card card = pile1.get(cardId, game);
-//            if (card != null) {
-//                sb.append(card.getName()).append("; ");
-//            }
-//        }
-//        sb.delete(sb.length() - 2, sb.length());
-//        choice.getChoices().add(sb.toString());
-//        sb = new StringBuilder("Pile 2: ");
-//        for (UUID cardId : cards) {
-//            Card card = cards.get(cardId, game);
-//            if (card != null) {
-//                sb.append(card.getName()).append("; ");
-//            }
-//        }
-//        sb.delete(sb.length() - 2, sb.length());
-//        choice.getChoices().add(sb.toString());
-//        return choice;
-//    }
-
     private void sacrificePermanents(List<Permanent> pile, Game game, Ability source) {
         for (Permanent permanent : pile) {
             if (permanent != null) {

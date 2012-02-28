@@ -28,9 +28,9 @@
 
 package mage.abilities;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.Zone;
 import mage.MageObject;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -39,18 +39,22 @@ import mage.game.events.GameEvent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TriggeredAbilities extends AbilitiesImpl<TriggeredAbility> {
+public class TriggeredAbilities extends HashMap<UUID, TriggeredAbility> {
 
 	public TriggeredAbilities() {}
 
 	public TriggeredAbilities(final TriggeredAbilities abilities) {
-		super(abilities);
+		for (Map.Entry<UUID, TriggeredAbility> entry: abilities.entrySet()) {
+            this.put(entry.getKey(), entry.getValue().copy());
+        }
 	}
 
     public void checkTriggers(GameEvent event, Game game) {
-        for (TriggeredAbility ability: this) {
+        for (TriggeredAbility ability: this.values()) {
             if (ability.isInUseableZone(game)) {
-                MageObject object = game.getObject(ability.getSourceId());
+                MageObject object = game.getLastKnownInformation(ability.getSourceId(), event.getZone());
+                if (object == null)
+                    object = game.getObject(ability.getSourceId());
                 if (object != null && object.getAbilities().contains(ability)) {
                     if (ability.checkTrigger(event, game)) {
                         ability.trigger(game, ability.getControllerId());
@@ -59,8 +63,11 @@ public class TriggeredAbilities extends AbilitiesImpl<TriggeredAbility> {
             }
         }
     }
+
+    public void add(TriggeredAbility ability) {
+        this.put(ability.getId(), ability);
+    }
     
-	@Override
 	public TriggeredAbilities copy() {
 		return new TriggeredAbilities(this);
 	}

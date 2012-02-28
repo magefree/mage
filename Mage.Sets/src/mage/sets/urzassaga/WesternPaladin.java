@@ -67,10 +67,10 @@ public class WesternPaladin extends CardImpl<WesternPaladin> {
 		this.power = new MageInt(3);
 		this.toughness = new MageInt(3);
 		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{B}{B}"));
-        ability.addCost(new TapSourceCost());
 		ability.addTarget(new TargetCreaturePermanent(filter));
-        this.addAbility(ability);
-    }
+                ability.addCost(new TapSourceCost());
+                this.addAbility(ability);
+        }
 
 	public WesternPaladin(final WesternPaladin card) {
 		super(card);

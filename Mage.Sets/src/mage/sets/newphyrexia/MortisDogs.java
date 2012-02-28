@@ -91,7 +91,7 @@ class MortisDogsEffect extends OneShotEffect<MortisDogsEffect> {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(source));
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (player != null) {
+        if (player != null && sourcePermanent != null) {
             player.loseLife(sourcePermanent.getPower().getValue(), game);
             return true;
         }

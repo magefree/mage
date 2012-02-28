@@ -246,15 +246,6 @@ public class ContinuousEffects implements Serializable {
 
 	public List<RequirementEffect> getApplicableRequirementEffects(Permanent permanent, Game game) {
 		List<RequirementEffect> effects = new ArrayList<RequirementEffect>();
-		//get all applicable Requirement effects on the battlefield
-//		for (Permanent perm: game.getBattlefield().getActivePermanents(permanent.getControllerId(), game)) {
-//            for (Entry<Effect, Ability> entry: perm.getAbilities().getEffects(game, Zone.BATTLEFIELD, EffectType.REQUIREMENT).entrySet()) {
-//                if (((RequirementEffect)entry.getKey()).applies(permanent, entry.getValue(), game)) {
-//                    effects.add((RequirementEffect)entry.getKey());
-//                    abilityMap.put(entry.getKey().getId(), entry.getValue());
-//                }
-//            }
-//		}
 		for (RequirementEffect effect: requirementEffects) {
             Ability ability = abilityMap.get(effect.getId());
             if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game)) {
@@ -267,15 +258,6 @@ public class ContinuousEffects implements Serializable {
 
 	public List<RestrictionEffect> getApplicableRestrictionEffects(Permanent permanent, Game game) {
 		List<RestrictionEffect> effects = new ArrayList<RestrictionEffect>();
-		//get all applicable Restriction effects on the battlefield
-//		for (Permanent perm: game.getBattlefield().getActivePermanents(permanent.getControllerId(), game)) {
-//            for (Entry<Effect, Ability> entry: perm.getAbilities().getEffects(game, Zone.BATTLEFIELD, EffectType.RESTRICTION).entrySet()) {
-//                if (((RestrictionEffect)entry.getKey()).applies(permanent, entry.getValue(), game)) {
-//                    effects.add((RestrictionEffect)entry.getKey());
-//                    abilityMap.put(entry.getKey().getId(), entry.getValue());
-//                }
-//            }
-//		}
 		for (RestrictionEffect effect: restrictionEffects) {
             Ability ability = abilityMap.get(effect.getId());
             if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game)) {
@@ -296,36 +278,6 @@ public class ContinuousEffects implements Serializable {
 		List<ReplacementEffect> replaceEffects = new ArrayList<ReplacementEffect>();
 		if (planeswalkerRedirectionEffect.applies(event, null, game))
 			replaceEffects.add(planeswalkerRedirectionEffect);
-		//get all applicable Replacement effects in each players hand and graveyard
-//		for (Card card: game.getCards()) {
-//            Zone zone = game.getState().getZone(card.getId());
-//			if (zone == Zone.HAND || zone == Zone.GRAVEYARD) {
-//                for (Entry<ReplacementEffect, Ability> entry: card.getAbilities().getReplacementEffects(zone).entrySet()) {
-//                    if (entry.getKey().applies(event, entry.getValue(), game)) {
-//                        replaceEffects.add(entry.getKey());
-//						abilityMap.put(entry.getKey().getId(), entry.getValue());
-//                    }
-//                }
-//			}
-//		}
-		//get all applicable Replacement effects on the battlefield
-//		for (Permanent permanent: game.getBattlefield().getAllPermanents()) {
-//            for (Entry<ReplacementEffect, Ability> entry: permanent.getAbilities().getReplacementEffects(Zone.BATTLEFIELD).entrySet()) {
-//                if (entry.getKey().applies(event, entry.getValue(), game)) {
-//                    replaceEffects.add(entry.getKey());
-//                    abilityMap.put(entry.getKey().getId(), entry.getValue());
-//                }
-//            }
-//		}
-        //get all applicable Replacement effects on players
-//        for (Player player: game.getPlayers().values()) {
-//            for (Entry<ReplacementEffect, Ability> entry: player.getAbilities().getReplacementEffects(Zone.BATTLEFIELD).entrySet()) {
-//                if (entry.getKey().applies(event, entry.getValue(), game)) {
-//                    replaceEffects.add(entry.getKey());
-//                    abilityMap.put(entry.getKey().getId(), entry.getValue());
-//                }
-//            }
-//        }
 		//get all applicable transient Replacement effects
 		for (ReplacementEffect effect: replacementEffects) {
             Ability ability = abilityMap.get(effect.getId());
@@ -351,16 +303,6 @@ public class ContinuousEffects implements Serializable {
 	}
 
 	public boolean asThough(UUID objectId, AsThoughEffectType type, Game game) {
-		for (Permanent permanent: game.getBattlefield().getAllPermanents()) {
-			for (Ability ability: permanent.getAbilities().getStaticAbilities(Zone.BATTLEFIELD)) {
-				for (Effect effect: ability.getEffects(game, EffectType.ASTHOUGH)) {
-					AsThoughEffect rEffect = (AsThoughEffect) effect;
-					if (rEffect.applies(objectId, ability, game)) {
-						return true;
-					}
-				}
-			}
-		}
 		for (AsThoughEffect entry: asThoughEffects) {
 			AsThoughEffect effect = entry;
 			if (effect.getAsThoughEffectType() == type) {
@@ -435,52 +377,31 @@ public class ContinuousEffects implements Serializable {
 		removeInactiveEffects(game);
 		List<ContinuousEffect> layerEffects = getLayeredEffects(game);
 		List<ContinuousEffect> layer = filterLayeredEffects(layerEffects, Layer.CopyEffects_1);
-//		for (ContinuousEffect effect: layer) {
-//			effect.apply(Layer.CopyEffects_1, SubLayer.CharacteristicDefining_7a, abilityMap.get(effect.getId()), game);
-//		}
 		for (ContinuousEffect effect: layer) {
 			effect.apply(Layer.CopyEffects_1, SubLayer.NA, abilityMap.get(effect.getId()), game);
 		}
 		layer = filterLayeredEffects(layerEffects, Layer.ControlChangingEffects_2);
-//		for (ContinuousEffect effect: layer) {
-//			effect.apply(Layer.ControlChangingEffects_2, SubLayer.CharacteristicDefining_7a, abilityMap.get(effect.getId()), game);
-//		}
 		for (ContinuousEffect effect: layer) {
 			effect.apply(Layer.ControlChangingEffects_2, SubLayer.NA, abilityMap.get(effect.getId()), game);
 		}
 		layer = filterLayeredEffects(layerEffects, Layer.TextChangingEffects_3);
-//		for (ContinuousEffect effect: layer) {
-//			effect.apply(Layer.TextChangingEffects_3, SubLayer.CharacteristicDefining_7a, abilityMap.get(effect.getId()), game);
-//		}
 		for (ContinuousEffect effect: layer) {
 			effect.apply(Layer.TextChangingEffects_3, SubLayer.NA, abilityMap.get(effect.getId()), game);
 		}
 		layer = filterLayeredEffects(layerEffects, Layer.TypeChangingEffects_4);
-//		for (ContinuousEffect effect: layer) {
-//			effect.apply(Layer.TypeChangingEffects_4, SubLayer.CharacteristicDefining_7a, abilityMap.get(effect.getId()), game);
-//		}
 		for (ContinuousEffect effect: layer) {
 			effect.apply(Layer.TypeChangingEffects_4, SubLayer.NA, abilityMap.get(effect.getId()), game);
 		}
 		layer = filterLayeredEffects(layerEffects, Layer.ColorChangingEffects_5);
-//		for (ContinuousEffect effect: layer) {
-//			effect.apply(Layer.ColorChangingEffects_5, SubLayer.CharacteristicDefining_7a, abilityMap.get(effect.getId()), game);
-//		}
 		for (ContinuousEffect effect: layer) {
 			effect.apply(Layer.ColorChangingEffects_5, SubLayer.NA, abilityMap.get(effect.getId()), game);
 		}
 		layer = filterLayeredEffects(layerEffects, Layer.AbilityAddingRemovingEffects_6);
-//		for (ContinuousEffect effect: layer) {
-//			effect.apply(Layer.AbilityAddingRemovingEffects_6, SubLayer.CharacteristicDefining_7a, abilityMap.get(effect.getId()), game);
-//		}
 		for (ContinuousEffect effect: layer) {
 			effect.apply(Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, abilityMap.get(effect.getId()), game);
 		}
 		layerEffects = getLayeredEffects(game);
 		layer = filterLayeredEffects(layerEffects, Layer.PTChangingEffects_7);
-//		for (ContinuousEffect effect: layer) {
-//			effect.apply(Layer.PTChangingEffects_7, SubLayer.CharacteristicDefining_7a, abilityMap.get(effect.getId()), game);
-//		}
 		for (ContinuousEffect effect: layer) {
 			effect.apply(Layer.PTChangingEffects_7, SubLayer.SetPT_7b, abilityMap.get(effect.getId()), game);
 		}

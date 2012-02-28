@@ -62,6 +62,7 @@ import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.counters.Counters;
 import mage.filter.common.FilterCreatureForCombat;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.events.DamagePlayerEvent;
@@ -489,7 +490,8 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 				Ability spellAbility = game.getStack().getSpell(ability.getId()).getSpellAbility();
 				if (spellAbility.activate(game, noMana)) {
 					for (KickerAbility kicker: card.getAbilities().getKickerAbilities()) {
-						kicker.activate(game, false);
+                        if (kicker.getCosts().canPay(ability.getSourceId(), playerId, game) && kicker.canChooseTarget(game))
+                            kicker.activate(game, false);
 					}
                     GameEvent event = GameEvent.getEvent(GameEvent.EventType.SPELL_CAST, spellAbility.getId(), spellAbility.getSourceId(), playerId);
                     event.setZone(fromZone);
@@ -520,6 +522,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 				case GRAVEYARD:
 					removeFromGraveyard(card, game);
 					break;
+                case EXILED:
+                    game.getExile().removeCard(card, game);
+                    break;
                 default:
                     // invalid zone for play land
                     return false;
@@ -1209,7 +1214,10 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 					}
 				}
 			}
-
+            for (AlternativeCost cost: ability.getAlternativeCosts()) {
+                if (cost.isAvailable(game, ability) && cost.canPay(ability.getSourceId(), playerId, game))
+                    return true;
+            }
 		}
 		return false;
 	}
@@ -1235,6 +1243,24 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 					playable.add(ability);
 			}
 		}
+        for (ExileZone exile: game.getExile().getExileZones()) {
+            for (Card card: exile.getCards(game)) {
+                if (game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.CAST, game)) {
+                    for (ActivatedAbility ability: card.getAbilities().getActivatedAbilities(Zone.HAND)) {
+                        playable.add(ability);
+                    }
+                }
+            }
+        }
+        for (Cards cards: game.getState().getRevealed().values()) {
+            for (Card card: cards.getCards(game)) {
+                if (game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.CAST, game)) {
+                    for (ActivatedAbility ability: card.getAbilities().getActivatedAbilities(Zone.HAND)) {
+                        playable.add(ability);
+                    }
+                }
+            }
+        }
         // eliminate duplicate activated abilities
         Map<String, Ability> playableActivated = new HashMap<String, Ability>();
 		for (Permanent permanent: game.getBattlefield().getAllActivePermanents(playerId)) {

@@ -44,6 +44,8 @@ import mage.players.Player;
 import mage.target.common.TargetDiscard;
 
 import java.util.UUID;
+import mage.game.events.GameEvent;
+import mage.watchers.WatcherImpl;
 
 /**
  * @author nantuko
@@ -67,7 +69,7 @@ public class CivilizedScholar extends CardImpl<CivilizedScholar> {
         this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CivilizedScholarEffect(), new TapSourceCost()));
         this.addAbility(new TransformAbility());
 
-//        this.addWatcher(new HomicidalBrute.HomicidalBruteWatcher());
+        this.addWatcher(new HomicidalBruteWatcher());
     }
 
     public CivilizedScholar(final CivilizedScholar card) {
@@ -77,6 +79,31 @@ public class CivilizedScholar extends CardImpl<CivilizedScholar> {
     @Override
     public CivilizedScholar copy() {
         return new CivilizedScholar(this);
+    }
+}
+
+class HomicidalBruteWatcher extends WatcherImpl<HomicidalBruteWatcher> {
+
+    public HomicidalBruteWatcher() {
+        super("HomicidalBruteAttacked", Constants.WatcherScope.CARD);
+    }
+
+    public HomicidalBruteWatcher(final HomicidalBruteWatcher watcher) {
+        super(watcher);
+    }
+
+    @Override
+    public HomicidalBruteWatcher copy() {
+        return new HomicidalBruteWatcher(this);
+    }
+
+    @Override
+    public void watch(GameEvent event, Game game) {
+        if (condition == true)
+            return;
+        if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED && event.getSourceId().equals(sourceId)) {
+            condition = true;
+        }
     }
 }
 

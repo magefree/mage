@@ -58,7 +58,7 @@ class BloodthirstEffect extends OneShotEffect<BloodthirstEffect> {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             BloodthirstWatcher watcher = (BloodthirstWatcher) game.getState().getWatchers().get("DamagedOpponents", source.getControllerId());
-            if (watcher.conditionMet()) {
+            if (watcher != null && watcher.conditionMet()) {
                 Permanent p = game.getPermanent(source.getSourceId());
                 if (p != null) {
                     p.addCounters(CounterType.P1P1.createInstance(amount), game);

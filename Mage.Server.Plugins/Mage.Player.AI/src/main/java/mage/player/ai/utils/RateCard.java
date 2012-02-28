@@ -203,7 +203,9 @@ public class RateCard {
 				maxSingleCount = Math.max(maxSingleCount, typeCount);
 			}
 		}
-		return 2 * converted + 3 * (10 - SINGLE_PENALTY[maxSingleCount]/*-DOUBLE_PENALTY[doubleCount]*/);
+        if (maxSingleCount > 5)
+            maxSingleCount = 5;
+        return 2 * converted + 3 * (10 - SINGLE_PENALTY[maxSingleCount]/*-DOUBLE_PENALTY[doubleCount]*/);
 	}
 
 	/**

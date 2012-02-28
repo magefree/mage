@@ -96,6 +96,7 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
         this.abilities.clear();
         this.abilities.addAll(card.getAbilities());
         this.abilities.setControllerId(this.controllerId);
+        this.watchers.addAll(card.getWatchers());
         this.cardType.clear();
         this.cardType.addAll(card.getCardType());
         this.color = card.getColor().copy();
