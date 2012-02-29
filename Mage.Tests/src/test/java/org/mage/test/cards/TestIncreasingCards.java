@@ -3,6 +3,7 @@ package org.mage.test.cards;
 import junit.framework.Assert;
 import mage.Constants;
 import mage.filter.Filter;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -94,4 +95,25 @@ public class TestIncreasingCards extends CardTestPlayerBase {
 
     }
 
+    @Test
+    public void testIncreasingVengeance() {
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 6);
+        addCard(Constants.Zone.HAND, playerA, "Increasing Vengeance");
+        addCard(Constants.Zone.HAND, playerA, "Lightning Bolt", 2);
+
+        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Increasing Vengeance", "Lightning Bolt");
+        castSpell(3, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        activateAbility(3, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback {3}{R}{R}");
+
+        setStopAt(3, Constants.PhaseStep.BEGIN_COMBAT);
+        execute();
+        
+        assertLife(playerA, 20);
+        assertLife(playerB, 5);
+        assertGraveyardCount(playerA, 2);
+        assertExileCount("Increasing Vengeance", 1);
+
+    }
+    
 }

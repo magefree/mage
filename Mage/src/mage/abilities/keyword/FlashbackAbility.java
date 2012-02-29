@@ -110,6 +110,7 @@ class FlashbackEffect extends OneShotEffect<FlashbackEffect> {
 		if (card != null) {
 			Player controller = game.getPlayer(source.getControllerId());
 			if (controller != null) {
+                card.getSpellAbility().clear();
                 int amount = source.getManaCostsToPay().getX();
                 card.getSpellAbility().getManaCostsToPay().setX(amount);
 				return controller.cast(card.getSpellAbility(), game, true);

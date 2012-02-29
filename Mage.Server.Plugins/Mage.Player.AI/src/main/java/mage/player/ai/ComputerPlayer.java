@@ -81,6 +81,8 @@ import java.util.*;
 import java.util.Map.Entry;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 
 /**
  *
@@ -441,6 +443,19 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 			}
             return false;
 		}
+        if (target instanceof TargetSpell) {
+            if (game.getStack().size() > 0) {
+                Iterator<StackObject> it = game.getStack().iterator();
+                while (it.hasNext()) {
+                    StackObject o = it.next();
+                    if (o instanceof Spell && !source.getId().equals(o.getStackAbility().getId())) {
+                        target.addTarget(o.getId(), source, game);
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
 		throw new IllegalStateException("Target wasn't handled. class:" + target.getClass().toString());
 	}
 
