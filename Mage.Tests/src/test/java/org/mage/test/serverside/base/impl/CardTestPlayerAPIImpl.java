@@ -17,6 +17,7 @@ import java.util.UUID;
 import mage.Constants.PhaseStep;
 import mage.counters.Counter;
 import mage.counters.CounterType;
+import mage.game.ExileZone;
 import org.mage.test.player.TestPlayer;
 
 /**
@@ -427,6 +428,25 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 	public void assertGraveyardCount(Player player, int count) throws AssertionError {
 		int actual = currentGame.getPlayer(player.getId()).getGraveyard().size();
 		Assert.assertEquals("(Graveyard) Card counts are not equal ", count, actual);
+	}
+
+    /**
+	 * Assert card count in exile.
+	 *
+	 * @param cardName   Name of the cards that should be counted.
+	 * @param count    Expected count.
+	 */
+	public void assertExileCount(String cardName, int count) throws AssertionError {
+		int actualCount = 0;
+        for (ExileZone exile: currentGame.getExile().getExileZones()) {
+            for (Card card : exile.getCards(currentGame)) {
+                if (card.getName().equals(cardName)) {
+                    actualCount++;
+                }
+            }
+        }
+
+		Assert.assertEquals("(Exile) Card counts are not equal (" + cardName + ")", count, actualCount);
 	}
 
 	/**

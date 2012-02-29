@@ -250,7 +250,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                     game.getPlayer(ownerId).getHand().add(this);
                     break;
                 case STACK:
-                    game.getStack().push(new Spell(this, this.getSpellAbility().copy(), ownerId));
+                    game.getStack().push(new Spell(this, this.getSpellAbility().copy(), ownerId, event.getFromZone()));
                     break;
                 case EXILED:
                     game.getExile().getPermanentExile().add(this);
@@ -304,7 +304,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                 }
                 game.rememberLKI(objectId, event.getFromZone(), this);
             }
-            game.getStack().push(new Spell(this, ability.copy(), controllerId));
+            game.getStack().push(new Spell(this, ability.copy(), controllerId, event.getFromZone()));
             game.setZone(objectId, event.getToZone());
             game.fireEvent(event);
             return game.getState().getZone(objectId) == Zone.STACK;

@@ -28,6 +28,8 @@
 
 package mage.game.stack;
 
+import java.util.List;
+import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
@@ -46,13 +48,9 @@ import mage.abilities.effects.PostResolveEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.Card;
 import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.target.Target;
-
-import java.util.List;
-import java.util.UUID;
-import mage.game.events.ZoneChangeEvent;
 import mage.watchers.Watcher;
 
 /**
@@ -65,23 +63,26 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 	private SpellAbility ability;
 	private UUID controllerId;
 	private boolean copiedSpell;
+    private Zone fromZone;
 
-	public Spell(Card card, SpellAbility ability, UUID controllerId) {
+	public Spell(Card card, SpellAbility ability, UUID controllerId, Zone fromZone) {
 		this.card = card;
 		this.ability = ability;
         this.ability.setControllerId(controllerId);
 		this.controllerId = controllerId;
+        this.fromZone = fromZone;
 	}
 
 	public Spell(final Spell<T> spell) {
 		this.card = spell.card.copy();
 		this.ability = spell.ability.copy();
 		this.controllerId = spell.controllerId;
+        this.fromZone = spell.fromZone;
 	}
 
     @Override
     public boolean resolve(Game game) {
-        boolean result = false;
+        boolean result;
         if (card.getCardType().contains(CardType.INSTANT) || card.getCardType().contains(CardType.SORCERY)) {
             if (ability.getTargets().stillLegal(ability, game)) {
                 updateOptionalCosts();
@@ -359,7 +360,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 	}
 
 	public Spell copySpell() {
-		return new Spell(this.card.copy(), this.ability.copySpell(), this.controllerId);
+		return new Spell(this.card.copy(), this.ability.copySpell(), this.controllerId, this.fromZone);
 	}
 	
 	@Override
@@ -432,5 +433,9 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 	public boolean isCopiedSpell ( ) {
 		return this.copiedSpell;
 	}
+    
+    public Zone getFromZone() {
+        return this.fromZone;
+    }
 }
 
