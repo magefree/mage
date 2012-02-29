@@ -1,5 +1,8 @@
 package mage.client.game;
 
+import java.util.UUID;
+import java.util.concurrent.CountDownLatch;
+import javax.swing.SwingUtilities;
 import mage.client.components.MageUI;
 import mage.interfaces.MageClient;
 import mage.interfaces.callback.ClientCallback;
@@ -7,16 +10,14 @@ import mage.remote.Connection;
 import mage.remote.Session;
 import mage.utils.MageVersion;
 import org.apache.log4j.Logger;
-
-import javax.swing.*;
-import java.util.UUID;
-import java.util.concurrent.CountDownLatch;
+import org.junit.Ignore;
 
 /**
  * Test for emulating the connection from multi mage clients.
  *
  * @author ayratn
  */
+@Ignore
 public class MultiConnectTest {
 
     private final static Logger logger = Logger.getLogger(MultiConnectTest.class);

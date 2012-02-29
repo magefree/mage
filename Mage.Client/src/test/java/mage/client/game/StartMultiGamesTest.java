@@ -1,15 +1,16 @@
 package mage.client.game;
 
 import javax.swing.SwingUtilities;
-
 import mage.client.MageFrame;
 import mage.client.components.MageComponents;
 import mage.client.components.MageUI;
 import org.apache.log4j.Logger;
+import org.junit.Ignore;
 
 /**
  * @author ayratn
  */
+@Ignore
 public class StartMultiGamesTest {
 
 	private final static Logger logger = Logger.getLogger(StartMultiGamesTest.class);
