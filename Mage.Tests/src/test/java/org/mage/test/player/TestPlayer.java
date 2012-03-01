@@ -45,11 +45,13 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.player.ai.ComputerPlayer;
 import mage.players.Player;
+import org.junit.Ignore;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
+@Ignore
 public class TestPlayer extends ComputerPlayer<TestPlayer> {
 
     private List<PlayerAction> actions = new ArrayList<PlayerAction>();
