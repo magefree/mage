@@ -1242,12 +1242,19 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 				if (canPlay(ability, available, game))
 					playable.add(ability);
 			}
+            if (game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.CAST, game)) {
+                for (ActivatedAbility ability: card.getAbilities().getActivatedAbilities(Zone.HAND)) {
+                    if (ability instanceof SpellAbility || ability instanceof PlayLandAbility)
+                        playable.add(ability);
+                }
+            }
 		}
         for (ExileZone exile: game.getExile().getExileZones()) {
             for (Card card: exile.getCards(game)) {
                 if (game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.CAST, game)) {
                     for (ActivatedAbility ability: card.getAbilities().getActivatedAbilities(Zone.HAND)) {
-                        playable.add(ability);
+                        if (ability instanceof SpellAbility || ability instanceof PlayLandAbility)
+                            playable.add(ability);
                     }
                 }
             }
@@ -1256,7 +1263,8 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
             for (Card card: cards.getCards(game)) {
                 if (game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.CAST, game)) {
                     for (ActivatedAbility ability: card.getAbilities().getActivatedAbilities(Zone.HAND)) {
-                        playable.add(ability);
+                        if (ability instanceof SpellAbility || ability instanceof PlayLandAbility)
+                            playable.add(ability);
                     }
                 }
             }

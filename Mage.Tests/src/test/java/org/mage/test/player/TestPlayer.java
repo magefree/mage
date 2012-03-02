@@ -34,8 +34,10 @@ import java.util.List;
 import java.util.UUID;
 import mage.Constants;
 import mage.Constants.PhaseStep;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
+import mage.cards.Card;
 import mage.counters.Counter;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterAttackingCreature;
@@ -175,17 +177,10 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
                 target = group.substring(group.indexOf("target=") + 7);
                 String[] targets = target.split("\\^");
                 for (String t: targets) {
-                    for (Permanent permanent: game.getBattlefield().getAllActivePermanents()) {
-                        if (permanent.getName().equals(t)) {
-                            ability.getTargets().get(0).addTarget(permanent.getId(), ability, game);
-                            break;
-                        }
-                    }
-                    Iterator<StackObject> it = game.getStack().iterator();
-                    while (it.hasNext()) {
-                        StackObject object = it.next();
-                        if (object.getName().equals(t)) {
-                            ability.getTargets().get(0).addTarget(object.getId(), ability, game);
+                    for (UUID id: ability.getTargets().get(0).possibleTargets(ability.getSourceId(), ability.getControllerId(), game)) {
+                        MageObject object = game.getObject(id);
+                        if (object != null && object.getName().equals(t)) {
+                            ability.getTargets().get(0).addTarget(id, ability, game);
                             break;
                         }
                     }

@@ -504,7 +504,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability, Player target) {
-        player.addAction(turnNum, step, "activate:" + ability + ";target=" + target.getName());
+        player.addAction(turnNum, step, "activate:" + ability + ";targetPlayer=" + target.getName());
     }
 
     public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability, String targetName) {

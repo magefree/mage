@@ -29,6 +29,8 @@
 package mage.abilities;
 
 import java.util.Iterator;
+import mage.Constants;
+import mage.Constants.Duration;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
@@ -51,8 +53,7 @@ import mage.game.events.GameEvent;
     
 	public void checkTriggers(GameEvent event, Game game) {
         if (this.size() > 0) {
-            Iterator<DelayedTriggeredAbility> it = this.iterator();
-            while (it.hasNext()) {
+            for (Iterator<DelayedTriggeredAbility> it = this.iterator();it.hasNext();) {
                 DelayedTriggeredAbility ability = it.next();
                 if (ability.checkTrigger(event, game)) {
                     ability.trigger(game, ability.controllerId);
@@ -61,6 +62,14 @@ import mage.game.events.GameEvent;
             }
         }
 	}
+
+    public void removeEndOfTurnAbilities() {
+        for (Iterator<DelayedTriggeredAbility> it = this.iterator();it.hasNext();) {
+            DelayedTriggeredAbility ability = it.next();
+            if (ability.getDuration() == Duration.EndOfTurn)
+                it.remove();
+        }
+    }
 
 }
 

@@ -28,6 +28,7 @@
 
 package mage.abilities;
 
+import mage.Constants.Duration;
 import mage.Constants.Zone;
 import mage.abilities.effects.Effect;
 
@@ -37,14 +38,26 @@ import mage.abilities.effects.Effect;
  */
 public abstract class DelayedTriggeredAbility<T extends DelayedTriggeredAbility<T>> extends TriggeredAbilityImpl<T> {
 
-	public DelayedTriggeredAbility(Effect effect) {
-		super(Zone.ALL, effect);
+    private Duration duration;
+    
+    public DelayedTriggeredAbility(Effect effect) {
+        this(effect, Duration.EndOfGame);
 	}
 
-	public DelayedTriggeredAbility(final DelayedTriggeredAbility ability) {
+    public DelayedTriggeredAbility(Effect effect, Duration duration) {
+		super(Zone.ALL, effect);
+        this.duration = duration;
+	}
+
+    public DelayedTriggeredAbility(final DelayedTriggeredAbility ability) {
 		super(ability);
+        this.duration = ability.duration;
 	}
 
 	@Override
 	public abstract T copy();
+
+    public Duration getDuration() {
+        return duration;
+    }
 }
