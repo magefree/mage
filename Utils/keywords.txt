@@ -35,5 +35,6 @@ Shroud|instance|
 Trample|instance|
 Totem armor|new|
 Unblockable|instance|
+Undying|new|
 Vigilance|instance|
 Wither|instance|
