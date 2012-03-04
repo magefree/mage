@@ -1,15 +1,6 @@
 package org.mage.test.cards;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.Constants;
-import mage.Constants.PhaseStep;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.target.common.TargetCreatureOrPlayer;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 

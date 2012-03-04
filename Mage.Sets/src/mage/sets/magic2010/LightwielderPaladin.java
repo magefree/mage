@@ -100,6 +100,7 @@ class LightwielderPaladinTriggeredAbility extends TriggeredAbilityImpl<Lightwiel
             filter.setScopeColor(ComparisonScope.Any);
             filter.getControllerId().add(event.getTargetId());
             filter.setNotController(false);
+            this.getTargets().clear();
             this.addTarget(new TargetPermanent(filter));
             return true;
         }

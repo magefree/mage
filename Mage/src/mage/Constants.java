@@ -325,7 +325,7 @@ public final class Constants {
 		PutCreatureInPlay(true),
 		PutCardInPlay(true),
 		PutLandInPlay(true),
-		GainControl(true),
+		GainControl(false),
 		DrawCard(true),
 		Discard(false),
 		Sacrifice(false),

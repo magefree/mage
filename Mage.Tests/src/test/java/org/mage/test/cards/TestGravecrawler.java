@@ -1,8 +1,6 @@
 package org.mage.test.cards;
 
 import mage.Constants;
-import mage.Constants.PhaseStep;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 

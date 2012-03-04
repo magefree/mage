@@ -89,6 +89,7 @@ class ArmWithAEtherTriggeredAbility extends TriggeredAbilityImpl<ArmWithAEtherTr
     public boolean checkTrigger(GameEvent event, Game game) {
         Player opponent = game.getPlayer(event.getPlayerId());
         if (opponent != null && event.getType() == GameEvent.EventType.DAMAGED_PLAYER && event.getSourceId().equals(this.sourceId)) {
+            this.getTargets().clear();
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creature " + opponent.getName() + " controls");
             filter.getControllerId().add(opponent.getId());
             this.addTarget(new TargetCreaturePermanent(filter));

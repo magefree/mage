@@ -106,6 +106,7 @@ class BlindZealotTriggeredAbility extends TriggeredAbilityImpl<BlindZealotTrigge
                 sb.append(" to destroy target creature controlled by ");
                 sb.append(game.getPlayer(event.getTargetId()).getName()).append("?");
                 if (player.chooseUse(Outcome.DestroyPermanent, sb.toString(), game)) {
+                    this.getTargets().clear();
                     FilterCreaturePermanent filter = new FilterCreaturePermanent();
                     filter.getControllerId().add(event.getTargetId());
                     filter.setNotController(false);
