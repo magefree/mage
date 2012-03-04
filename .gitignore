@@ -56,3 +56,4 @@ Mage.Server.Plugins/Mage.Draft.8PlayerBooster/target
 \.conflict\~$
 /Mage.Server.Plugins/Mage.Player.AIMCTS/target/
 /Mage.Server.Console/target/
+*.classpath
