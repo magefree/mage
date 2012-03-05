@@ -32,6 +32,7 @@ import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.TimingRule;
+import mage.abilities.Mode;
 import mage.abilities.common.CantBlockAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
@@ -52,7 +53,7 @@ public class NightbirdsClutches extends CardImpl<NightbirdsClutches> {
         this.color.setRed(true);
 
         // Up to two target creatures can't block this turn.
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(CantBlockAbility.getInstance(), Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new NightbirdsClutchesEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
         // Flashback {3}{R}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{R}"), TimingRule.SORCERY));
@@ -65,5 +66,27 @@ public class NightbirdsClutches extends CardImpl<NightbirdsClutches> {
     @Override
     public NightbirdsClutches copy() {
         return new NightbirdsClutches(this);
+    }
+}
+
+class NightbirdsClutchesEffect extends GainAbilityTargetEffect {
+
+    public NightbirdsClutchesEffect() {
+        super(CantBlockAbility.getInstance(), Duration.EndOfTurn);
+        staticText = "Up to two target creatures can't block this turn";
+    }
+
+    public NightbirdsClutchesEffect(final NightbirdsClutchesEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public NightbirdsClutchesEffect copy() {
+        return new NightbirdsClutchesEffect(this);
+    }
+
+    @Override
+    public String getText(Mode mode) {
+        return staticText;
     }
 }

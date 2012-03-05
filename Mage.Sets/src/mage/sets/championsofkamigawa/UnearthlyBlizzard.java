@@ -30,8 +30,6 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -39,7 +37,6 @@ import mage.abilities.Mode;
 import mage.abilities.common.CantBlockAbility;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -53,13 +50,13 @@ public class UnearthlyBlizzard extends CardImpl<UnearthlyBlizzard> {
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
         this.color.setRed(true);
-        
-        Target target = new TargetCreaturePermanent(0,3);
-	target.setTargetName("Select up to three creatures that can't block this turn.");
-        
+
+        Target target = new TargetCreaturePermanent(0, 3);
+        target.setTargetName("Select up to three creatures that can't block this turn.");
+
         // Up to three target creatures can't block this turn.
         this.getSpellAbility().addEffect(new UnearthlyBlizzardEffect());
-	this.getSpellAbility().addTarget(target);
+        this.getSpellAbility().addTarget(target);
 
     }
 
@@ -91,6 +88,6 @@ class UnearthlyBlizzardEffect extends GainAbilityTargetEffect {
 
     @Override
     public String getText(Mode mode) {
-            return staticText;
+        return staticText;
     }
 }
