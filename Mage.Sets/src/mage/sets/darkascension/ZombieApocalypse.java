@@ -105,7 +105,6 @@ class ZombieApocalypseEffect extends OneShotEffect<ZombieApocalypseEffect> {
         Player player = game.getPlayer(source.getControllerId());
 
         for (Card card : player.getGraveyard().getCards(filterZombie, game)) {
-            player.getGraveyard().remove(card);
             card.putOntoBattlefield(game, Constants.Zone.GRAVEYARD, source.getId(), source.getControllerId());
             Permanent permanent = game.getPermanent(card.getId());
             if (permanent != null) {

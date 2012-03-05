@@ -124,7 +124,6 @@ class ArachnusSpinnerEffect extends OneShotEffect<ArachnusSpinnerEffect> {
             if (player.choose(Outcome.PutCardInPlay, player.getGraveyard(), target, game)) {
                 card = game.getCard(target.getFirstTarget());
                 if (card != null) {
-                    player.removeFromGraveyard(card, game);
                     zone = Zone.GRAVEYARD;
                 }
             }
@@ -134,7 +133,6 @@ class ArachnusSpinnerEffect extends OneShotEffect<ArachnusSpinnerEffect> {
             if (player.searchLibrary(target, game)) {
                 card = game.getCard(target.getFirstTarget());
                 if (card != null) {
-                    player.removeFromLibrary(card, game);
                     player.shuffleLibrary(game);
                     zone = Zone.LIBRARY;
                 }

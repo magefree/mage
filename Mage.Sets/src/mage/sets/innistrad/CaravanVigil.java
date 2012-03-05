@@ -95,7 +95,7 @@ class CaravanVigilEffect extends OneShotEffect<CaravanVigilEffect> {
             TargetCardInLibrary target = new TargetCardInLibrary(new FilterBasicLandCard());
             if (player.searchLibrary(target, game)) {
                 Cards cards = new CardsImpl();
-                Card card = player.getLibrary().remove(target.getFirstTarget(), game);
+                Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
                 if (card != null) {
                     cards.add(card);
                     if (MorbidCondition.getInstance().apply(game, source)

@@ -110,7 +110,7 @@ class QuestForTheHolyRelicEffect extends OneShotEffect<QuestForTheHolyRelicEffec
         filter.getSubtype().add("Equipment");
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
         if (player.searchLibrary(target, game)) {
-            Card card = player.getLibrary().remove(target.getFirstTarget(), game);
+            Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
             if (card != null) {
                 card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), source.getControllerId());
                 Permanent equipment = game.getPermanent(card.getId());

@@ -348,13 +348,33 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 
     @Override
     public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId) {
-        PermanentCard permanent = new PermanentCard(this, controllerId);
-        game.getBattlefield().addPermanent(permanent);
-        game.setZone(objectId, Zone.BATTLEFIELD);
-        game.applyEffects();
-        permanent.entersBattlefield(sourceId, game);
-        game.fireEvent(new ZoneChangeEvent(permanent, controllerId, fromZone, Zone.BATTLEFIELD));
-        return true;
+        ZoneChangeEvent event = new ZoneChangeEvent(this.objectId, sourceId, controllerId, fromZone, Zone.BATTLEFIELD);
+        if (!game.replaceEvent(event)) {
+            if (fromZone != null) {
+                switch (fromZone) {
+                    case GRAVEYARD:
+                        game.getPlayer(ownerId).removeFromGraveyard(this, game);
+                        break;
+                    case HAND:
+                        game.getPlayer(ownerId).removeFromHand(this, game);
+                        break;
+                    case LIBRARY:
+                        game.getPlayer(ownerId).removeFromLibrary(this, game);
+                        break;
+                    default:
+                        //logger.warning("putOntoBattlefield, not fully implemented: from="+fromZone);
+                }
+                game.rememberLKI(objectId, event.getFromZone(), this);
+            }
+            PermanentCard permanent = new PermanentCard(this, controllerId);
+            game.getBattlefield().addPermanent(permanent);
+            game.setZone(objectId, Zone.BATTLEFIELD);
+            game.applyEffects();
+            permanent.entersBattlefield(sourceId, game);
+            game.fireEvent(new ZoneChangeEvent(permanent, controllerId, fromZone, Zone.BATTLEFIELD));
+            return true;
+        }
+        return false;
     }
 
     @Override

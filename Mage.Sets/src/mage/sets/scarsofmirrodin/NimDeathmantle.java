@@ -167,7 +167,6 @@ class NimDeathmantleEffect extends OneShotEffect<NimDeathmantleEffect> {
 						if (card != null && game.getState().getZone(card.getId()).equals(Constants.Zone.GRAVEYARD)) {
 							Player owner = game.getPlayer(card.getOwnerId());
 							if (card.putOntoBattlefield(game, Constants.Zone.GRAVEYARD, source.getId(), source.getControllerId())) {
-								owner.getGraveyard().remove(card);
 								Permanent permanent = game.getPermanent(card.getId());
 								if (permanent != null) {
 									permanent.addAttachment(equipment.getId(), game);

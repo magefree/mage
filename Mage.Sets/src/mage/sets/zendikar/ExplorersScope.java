@@ -134,7 +134,6 @@ class ExplorersScopeEffect extends OneShotEffect<ExplorersScopeEffect> {
             if (card.getCardType().contains(CardType.LAND)) {
                 String message = "Put " + card.getName() + " onto the battlefield tapped?";
                 if (player.chooseUse(Outcome.PutLandInPlay, message, game)) {
-                    player.getLibrary().remove(card.getId(), game);
                     if (card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), source.getControllerId())) {
                         Permanent permanent = game.getPermanent(card.getId());
                         if (permanent != null) {

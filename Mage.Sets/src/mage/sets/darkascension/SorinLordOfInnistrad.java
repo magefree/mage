@@ -153,11 +153,7 @@ class SorinLordOfInnistradEffect extends OneShotEffect<SorinLordOfInnistradEffec
                 if (game.getState().getZone(targetId) == Zone.GRAVEYARD) {
                     Card card = game.getCard(targetId);
                     if (card != null) {
-                        Player owner = game.getPlayer(card.getOwnerId());
-                        if (owner != null) {
-                            owner.removeFromGraveyard(card, game);
-                            card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), player.getId());
-                        }
+                        card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), player.getId());
                     }
                 }
             }

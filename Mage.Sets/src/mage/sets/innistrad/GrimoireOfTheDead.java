@@ -104,7 +104,6 @@ class GrimoireOfTheDeadEffect extends OneShotEffect<GrimoireOfTheDeadEffect> {
 		for (Player player: game.getPlayers().values()) {
 			for (Card card: player.getGraveyard().getCards(game)) {
 				if (card.getCardType().contains(CardType.CREATURE)) {
-					player.getGraveyard().remove(card);
 					card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), source.getControllerId());
                     game.addEffect(new GrimoireOfTheDeadEffect2(card.getId()), source);
 				}
