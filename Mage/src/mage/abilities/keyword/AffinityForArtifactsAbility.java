@@ -68,6 +68,5 @@ public class AffinityForArtifactsAbility extends SimpleStaticAbility implements 
 
     @Override
     public void adjustCosts(Ability ability, Game game) {
-        ((CostModificationEffect)getEffects().get(0)).apply(game, this, ability);
     }
 }
