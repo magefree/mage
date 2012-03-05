@@ -32,6 +32,7 @@ import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.costs.mana.KickerManaCost;
@@ -72,9 +73,10 @@ public class GatekeeperOfMalakir extends CardImpl<GatekeeperOfMalakir> {
 
 		EntersBattlefieldTriggeredAbility ability =
 				new EntersBattlefieldTriggeredAbility(new SacrificeEffect(filter, 1, "target player"));
-		ability.addTarget(new TargetPlayer());
 
-		this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.getInstance(), "When {this} enters the battlefield, if it was kicked, target player sacrifices a creature"));
+		Ability conditionalAbility = new ConditionalTriggeredAbility(ability, KickedCondition.getInstance(), "When {this} enters the battlefield, if it was kicked, target player sacrifices a creature");
+        conditionalAbility.addTarget(new TargetPlayer());
+        this.addAbility(conditionalAbility);
 	}
 
 	public GatekeeperOfMalakir(final GatekeeperOfMalakir card) {

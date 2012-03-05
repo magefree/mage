@@ -72,6 +72,9 @@ public class SacrificeEffect extends OneShotEffect<SacrificeEffect>{
 	@Override
 	public boolean apply(Game game, Ability source) {
 		Player player = game.getPlayer(targetPointer.getFirst(source));
+        if (player == null) {
+            return false;
+        }
 		//filter.setTargetController(TargetController.YOU);
 		int amount = count.calculate(game, source);
 		amount = Math.min(amount, game.getBattlefield().countAll(filter, player.getId()));
