@@ -101,7 +101,6 @@ class PutCreatureOnBattlefieldEffect extends OneShotEffect<PutCreatureOnBattlefi
         Card card = game.getCard(source.getFirstTarget());
         Player player = game.getPlayer(card.getOwnerId());
         if (card != null && player != null) {
-            player.removeFromHand(card, game);
             card.putOntoBattlefield(game, Zone.HAND, source.getId(), source.getControllerId());
             return true;
         }

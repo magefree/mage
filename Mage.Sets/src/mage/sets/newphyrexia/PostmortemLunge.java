@@ -110,7 +110,7 @@ class PostmortemLungeEffect extends OneShotEffect<PostmortemLungeEffect> {
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(source.getFirstTarget());
         Player player = game.getPlayer(card.getOwnerId());
-        if (card != null && player != null && player.removeFromGraveyard(card, game)) {
+        if (card != null && player != null) {
             card.addAbility(HasteAbility.getInstance());
             card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), source.getControllerId());
 

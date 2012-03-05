@@ -110,7 +110,7 @@ class BirthingPodEffect extends OneShotEffect<BirthingPodEffect> {
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
             if (player.searchLibrary(target, game)) {
                 for (UUID cardId : target.getTargets()) {
-                    Card card = player.getLibrary().remove(cardId, game);
+                    Card card = player.getLibrary().getCard(cardId, game);
                     if (card != null) {
                         card.putOntoBattlefield(game, Constants.Zone.HAND, source.getId(), source.getControllerId());
                     }

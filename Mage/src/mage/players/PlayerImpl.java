@@ -512,24 +512,6 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, card.getId(), playerId))) {
 			int bookmark = game.bookmarkState();
 			Zone zone = game.getState().getZone(card.getId());
-			switch (zone) {
-				case HAND:
-					removeFromHand(card, game);
-					break;
-				case LIBRARY:
-					removeFromLibrary(card, game);
-					break;
-				case GRAVEYARD:
-					removeFromGraveyard(card, game);
-					break;
-                case EXILED:
-                    game.getExile().removeCard(card, game);
-                    break;
-                default:
-                    // invalid zone for play land
-                    return false;
-			}
-
 			if (card.putOntoBattlefield(game, zone, null, playerId)) {
 				landsPlayed++;
 				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LAND_PLAYED, card.getId(), playerId));

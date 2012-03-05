@@ -110,7 +110,6 @@ class BitterheartWitchEffect extends OneShotEffect<BitterheartWitchEffect> {
                         player.chooseTarget(Outcome.Detriment, target, source, game);
                         Player targetPlayer = game.getPlayer(target.getFirstTarget());
                         if (targetPlayer != null) {
-                            player.removeFromLibrary(card, game);
                             player.shuffleLibrary(game);
                             card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId());
                             return targetPlayer.addAttachment(card.getId(), game);

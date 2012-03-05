@@ -102,7 +102,7 @@ class GhostQuarterEffect extends OneShotEffect<GhostQuarterEffect> {
             if (player.chooseUse(Outcome.PutLandInPlay, "Do you wish to search for a basic land, put it onto the battlefield and then shuffle your library?", game)) {
                 TargetCardInLibrary target = new TargetCardInLibrary(new FilterBasicLandCard());
                 if (player.searchLibrary(target, game)) {
-                    Card card = player.getLibrary().remove(target.getFirstTarget(), game);
+                    Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
                     if (card != null) {
                         card.putOntoBattlefield(game, Zone.HAND, source.getId(), player.getId());
                     }

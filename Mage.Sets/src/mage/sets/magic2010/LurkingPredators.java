@@ -130,10 +130,8 @@ class LurkingPredatorsEffect extends OneShotEffect<LurkingPredatorsEffect> {
 
             if (card != null) {
                 if (card.getCardType().contains(CardType.CREATURE)) {
-                    player.getLibrary().remove(card.getId(), game);
                     card.putOntoBattlefield(game, Zone.HAND, source.getId(), source.getControllerId());
                 } else if (player.chooseUse(Outcome.Neutral, "Put " + card.getName() + " on the bottom of your library?", game)) {
-                    player.getLibrary().remove(card.getId(), game);
                     card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
                 }
             }
