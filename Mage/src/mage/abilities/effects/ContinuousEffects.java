@@ -325,16 +325,6 @@ public class ContinuousEffects implements Serializable {
 	 * @return
 	 */
 	public void costModification ( Ability abilityToModify, Game game ) {
-		for ( Permanent permanent : game.getBattlefield().getAllPermanents() ) {
-			for ( Ability ability : permanent.getAbilities().getStaticAbilities(Zone.BATTLEFIELD) ) {
-				for ( Effect effect : ability.getEffects(game, EffectType.COSTMODIFICATION) ) {
-					CostModificationEffect rEffect = (CostModificationEffect)effect;
-					if ( rEffect.applies(abilityToModify, ability, game) ) {
-						rEffect.apply(game, ability, abilityToModify);
-					}
-				}
-			}
-		}
 		for ( CostModificationEffect effect : costModificationEffects ) {
 			if ( effect.applies(abilityToModify, abilityMap.get(effect.getId()), game) ) {
 				effect.apply(game, abilityMap.get(effect.getId()), abilityToModify);
