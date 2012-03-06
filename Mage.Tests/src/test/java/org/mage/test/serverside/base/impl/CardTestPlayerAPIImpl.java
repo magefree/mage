@@ -14,6 +14,7 @@ import org.mage.test.serverside.base.MageTestPlayerBase;
 
 import java.util.List;
 import java.util.UUID;
+import mage.Constants.CardType;
 import mage.Constants.PhaseStep;
 import mage.counters.Counter;
 import mage.counters.CounterType;
@@ -319,6 +320,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 		for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents(player.getId())) {
 			if (permanent.getName().equals(cardName)) {
 				found = permanent;
+                break;
 			}
 		}
 
@@ -381,6 +383,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 		for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents()) {
 			if (permanent.getName().equals(cardName)) {
 				found = permanent;
+                break;
 			}
 		}
 
@@ -390,6 +393,29 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 	}
     
 	/**
+	 * Assert whether a permanent is a specified type or not
+	 *
+	 * @param cardName  Name of the permanent that should be checked.
+	 * @param type      A type to test for
+     * @param subType   a subtype to test for
+	 */
+	public void assertType(String cardName, CardType type, String subType) throws AssertionError {
+        Permanent found = null;
+		for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents()) {
+			if (permanent.getName().equals(cardName)) {
+				found = permanent;
+                break;
+			}
+		}
+
+		Assert.assertNotNull("There is no such permanent on the battlefield, cardName=" + cardName, found);
+        
+		Assert.assertTrue("(Battlefield) card type not found (" + cardName + ":" + type + ")", found.getCardType().contains(type));
+
+        Assert.assertTrue("(Battlefield) card sub-type not equal (" + cardName + ":" + subType + ")", found.getSubtype().contains(subType));
+	}
+
+    /**
 	 * Assert whether a permanent is tapped or not
 	 *
 	 * @param cardName  Name of the permanent that should be checked.

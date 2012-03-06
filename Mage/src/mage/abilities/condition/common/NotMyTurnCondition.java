@@ -27,6 +27,7 @@
  */
 package mage.abilities.condition.common;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.game.Game;
@@ -40,6 +41,9 @@ public class NotMyTurnCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return !game.getActivePlayerId().equals(source.getControllerId());
+        UUID activePlayerId = game.getActivePlayerId();
+        if (activePlayerId != null)
+            return !activePlayerId.equals(source.getControllerId());
+        return false;
     }
 }
