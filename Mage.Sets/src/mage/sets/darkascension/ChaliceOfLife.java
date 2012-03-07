@@ -72,8 +72,7 @@ public class ChaliceOfLife extends CardImpl<ChaliceOfLife> {
 
 class ChaliceOfLifeEffect extends OneShotEffect<ChaliceOfLifeEffect> {
     public ChaliceOfLifeEffect() {
-        super(Constants.Outcome.BecomeCreature);
-        staticText = "unattach {this}, then transform it";
+        super(Constants.Outcome.GainLife);
     }
 
     public ChaliceOfLifeEffect(final ChaliceOfLifeEffect effect) {
