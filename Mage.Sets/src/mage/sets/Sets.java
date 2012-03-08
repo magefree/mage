@@ -78,9 +78,11 @@ public class Sets extends HashMap<String, ExpansionSet> {
         this.addSet(DarkAscension.getInstance());
         this.addSet(Darksteel.getInstance());
         this.addSet(Dissension.getInstance());
+        this.addSet(EighthEdition.getInstance());
         this.addSet(ElspethvsTezzeret.getInstance());
         this.addSet(Eventide.getInstance());
         this.addSet(FifthDawn.getInstance());
+        this.addSet(FifthEdition.getInstance());
         this.addSet(FutureSight.getInstance());
         this.addSet(Guildpact.getInstance());
         this.addSet(Guru.getInstance());
@@ -95,6 +97,8 @@ public class Sets extends HashMap<String, ExpansionSet> {
         this.addSet(MirrodinBesieged.getInstance());
         this.addSet(Morningtide.getInstance());
         this.addSet(NewPhyrexia.getInstance());
+        this.addSet(NinthEdition.getInstance());
+        this.addSet(Onslaught.getInstance());
         this.addSet(PlanarChaos.getInstance());
         this.addSet(Planechase.getInstance());
         this.addSet(Planeshift.getInstance());

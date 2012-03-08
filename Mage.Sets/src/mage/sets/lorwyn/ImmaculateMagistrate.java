@@ -38,12 +38,12 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+import mage.filter.common.FilterControlledPermanent;
 
 /**
  *
@@ -80,7 +80,10 @@ public class ImmaculateMagistrate extends CardImpl<ImmaculateMagistrate> {
 }
 
 class ImmaculateMagistrateEffect extends OneShotEffect<ImmaculateMagistrateEffect> {
-
+    static final FilterControlledPermanent filter = new FilterControlledPermanent("Elf");
+    static {
+        filter.getSubtype().add("Elf");
+    }
     public ImmaculateMagistrateEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "Put a +1/+1 counter on target creature for each Elf you control";
@@ -99,8 +102,6 @@ class ImmaculateMagistrateEffect extends OneShotEffect<ImmaculateMagistrateEffec
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
-            FilterPermanent filter = new FilterPermanent("Elf card");
-            filter.getSubtype().add("Elf");
             int count = game.getBattlefield().count(filter, source.getControllerId(), game);
             if (count > 0) {
                 permanent.addCounters(CounterType.P1P1.createInstance(count), game);
