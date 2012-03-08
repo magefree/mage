@@ -57,7 +57,7 @@ public class FetchLandActivatedAbility extends ActivatedAbilityImpl<FetchLandAct
         filter.getSubtype().addAll(Arrays.asList(subTypes));
 		filter.setScopeSubtype(ComparisonScope.Any);
 		TargetCardInLibrary target = new TargetCardInLibrary(filter);
-		addEffect(new SearchLibraryPutInPlayEffect(target, false, Outcome.PutLandInPlay));
+		addEffect(new SearchLibraryPutInPlayEffect(target, false, true, Outcome.PutLandInPlay));
 	}
 
 	public FetchLandActivatedAbility(FetchLandActivatedAbility ability) {

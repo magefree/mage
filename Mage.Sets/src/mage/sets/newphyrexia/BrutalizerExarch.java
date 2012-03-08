@@ -111,16 +111,18 @@ class BrutalizerExarchEffect1 extends OneShotEffect<BrutalizerExarchEffect1> {
             TargetCardInLibrary target = new TargetCardInLibrary(new FilterCreatureCard("creature card in your library"));
             target.setRequired(true);
             if (player.searchLibrary(target, game)) {
-                Card card = game.getCard(target.getFirstTarget());
+                Card card = player.getLibrary().remove(target.getFirstTarget(), game);
                 if (card != null) {
                     Cards cards = new CardsImpl();
                     cards.add(card);
                     player.revealCards("Brutalizer Exarch", cards, game);
-                    player.shuffleLibrary(game);
-                    card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
-                    return true;
                 }
+                player.shuffleLibrary(game);
+                if (card != null)
+                    card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+                return true;
             }
+            player.shuffleLibrary(game);
         }
         return false;
     }

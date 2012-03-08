@@ -63,20 +63,24 @@ public class SearchLibraryPutOnLibraryEffect extends SearchEffect<SearchLibraryP
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-		player.searchLibrary(target, game);
-		List<Card> cards = new ArrayList<Card>();
-        if (target.getTargets().size() > 0) {
+        if (player == null)
+            return false;
+		if (player.searchLibrary(target, game)) {
+            List<Card> cards = new ArrayList<Card>();
             for (UUID cardId: (List<UUID>)target.getTargets()) {
                 Card card = player.getLibrary().remove(cardId, game);
                 if (card != null)
-					cards.add(card);
+                    cards.add(card);
             }
             player.shuffleLibrary(game);
-			for (Card card: cards) {
-				card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
-			}
+            for (Card card: cards) {
+                card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+            }
+            return true;
         }
-        return true;
+        // shuffle anyway
+        player.shuffleLibrary(game);
+        return false;
     }
 
     private void setText() {

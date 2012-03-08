@@ -63,7 +63,7 @@ public class RangerOfEos extends CardImpl<RangerOfEos> {
 		this.toughness = new MageInt(2);
 
 		TargetCardInLibrary target = new TargetCardInLibrary(0, 2, filter);
-		this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryRevealPutInHandEffect(target), true));
+		this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryRevealPutInHandEffect(target, false), true));
 	}
 
 	public RangerOfEos(final RangerOfEos card) {

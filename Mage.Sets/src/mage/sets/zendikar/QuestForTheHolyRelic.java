@@ -120,11 +120,9 @@ class QuestForTheHolyRelicEffect extends OneShotEffect<QuestForTheHolyRelicEffec
                     Permanent permanent = game.getPermanent(targetCreature.getFirstTarget());
                     permanent.addAttachment(equipment.getId(), game);
                 }
-
-                player.shuffleLibrary(game);
             }
         }
-
+        player.shuffleLibrary(game);
         return true;
     }
 }

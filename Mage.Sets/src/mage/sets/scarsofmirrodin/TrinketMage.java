@@ -63,7 +63,7 @@ public class TrinketMage extends CardImpl<TrinketMage> {
 		this.power = new MageInt(2);
 		this.toughness = new MageInt(2);
 	   	TargetCardInLibrary target = new TargetCardInLibrary(0, 1, filter);
-		SearchEffect effect = new SearchLibraryRevealPutInHandEffect(target);
+		SearchEffect effect = new SearchLibraryRevealPutInHandEffect(target, false);
 		this.addAbility(new EntersBattlefieldTriggeredAbility(effect, true));
 	}
 

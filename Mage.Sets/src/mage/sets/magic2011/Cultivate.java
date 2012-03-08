@@ -95,38 +95,41 @@ class CultivateEffect extends OneShotEffect<CultivateEffect> {
 	public boolean apply(Game game, Ability source) {
 		TargetCardInLibrary target = new TargetCardInLibrary(0, 2, new FilterBasicLandCard());
 		Player player = game.getPlayer(source.getControllerId());
-		player.searchLibrary(target, game);
-		if (target.getTargets().size() > 0) {
-			Cards revealed = new CardsImpl();
-			for (UUID cardId: (List<UUID>)target.getTargets()) {
-				Card card = player.getLibrary().getCard(cardId, game);
-				revealed.add(card);
-			}
-			player.revealCards("Cultivate", revealed, game);
-			if (target.getTargets().size() == 2) {
-				TargetCard target2 = new TargetCard(Zone.PICK, filter);
-				target2.setRequired(true);
-				player.choose(Outcome.Benefit, revealed, target2, game);
-				Card card = revealed.get(target2.getFirstTarget(), game);
-				card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), source.getControllerId());
-				revealed.remove(card);
-				Permanent permanent = game.getPermanent(card.getId());
-				if (permanent != null)
-					permanent.setTapped(true);
-				card = revealed.getCards(game).iterator().next();
-				card.moveToZone(Zone.HAND, source.getId(), game, false);
-			}
-			else if (target.getTargets().size() == 1) {
-				Card card = revealed.getCards(game).iterator().next();
-				card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), source.getControllerId());
-				Permanent permanent = game.getPermanent(card.getId());
-				if (permanent != null)
-					permanent.setTapped(true);
-			}
+		if (player.searchLibrary(target, game)) {
+            if (target.getTargets().size() > 0) {
+                Cards revealed = new CardsImpl();
+                for (UUID cardId: (List<UUID>)target.getTargets()) {
+                    Card card = player.getLibrary().getCard(cardId, game);
+                    revealed.add(card);
+                }
+                player.revealCards("Cultivate", revealed, game);
+                if (target.getTargets().size() == 2) {
+                    TargetCard target2 = new TargetCard(Zone.PICK, filter);
+                    target2.setRequired(true);
+                    player.choose(Outcome.Benefit, revealed, target2, game);
+                    Card card = revealed.get(target2.getFirstTarget(), game);
+                    card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), source.getControllerId());
+                    revealed.remove(card);
+                    Permanent permanent = game.getPermanent(card.getId());
+                    if (permanent != null)
+                        permanent.setTapped(true);
+                    card = revealed.getCards(game).iterator().next();
+                    card.moveToZone(Zone.HAND, source.getId(), game, false);
+                }
+                else if (target.getTargets().size() == 1) {
+                    Card card = revealed.getCards(game).iterator().next();
+                    card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), source.getControllerId());
+                    Permanent permanent = game.getPermanent(card.getId());
+                    if (permanent != null)
+                        permanent.setTapped(true);
+                }
 
-			player.shuffleLibrary(game);
-		}
-		return true;
+            }
+            player.shuffleLibrary(game);
+            return true;
+        }
+        player.shuffleLibrary(game);
+        return false;
 
 	}
 

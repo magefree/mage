@@ -104,15 +104,19 @@ class HoardingDragonEffect extends OneShotEffect<HoardingDragonEffect> {
 	@Override
 	public boolean apply(Game game, Ability source) {
 		Player player = game.getPlayer(source.getControllerId());
-		player.searchLibrary(target, game);
-		if (target.getTargets().size() > 0) {
-			Card card = player.getLibrary().remove(target.getFirstTarget(), game);
-			if (card != null){
-				game.getExile().add(exileId, "Hoarding Dragon exile", card);
-			}
-			player.shuffleLibrary(game);
-		}
-		return true;
+        if (player != null) {
+            if (player.searchLibrary(target, game)) {
+                if (target.getTargets().size() > 0) {
+                    Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
+                    if (card != null)
+                        card.moveToExile(exileId, "Hoarding Dragon exile", source.getSourceId(), game);
+                }
+            }
+            player.shuffleLibrary(game);
+            return true;
+        }
+        player.shuffleLibrary(game);
+		return false;
 	}
 
 	@Override

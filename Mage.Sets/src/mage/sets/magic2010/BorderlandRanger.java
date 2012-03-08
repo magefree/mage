@@ -54,7 +54,7 @@ public class BorderlandRanger extends CardImpl<BorderlandRanger> {
         this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryRevealPutInHandEffect(new TargetCardInLibrary(filter)), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryRevealPutInHandEffect(new TargetCardInLibrary(filter), false), true));
     }
 
     public BorderlandRanger(final BorderlandRanger card) {

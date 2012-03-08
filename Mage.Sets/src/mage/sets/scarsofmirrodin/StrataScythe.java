@@ -90,6 +90,8 @@ class StrataScytheImprintEffect extends OneShotEffect<StrataScytheImprintEffect>
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
+        if (player == null)
+            return false;
         TargetCardInLibrary target = new TargetCardInLibrary(new FilterLandCard());
 		if (player.searchLibrary(target, game)) {
             if (target.getTargets().size() > 0) {
@@ -103,8 +105,8 @@ class StrataScytheImprintEffect extends OneShotEffect<StrataScytheImprintEffect>
 					}
                 }
             }
-            player.shuffleLibrary(game);
         }
+        player.shuffleLibrary(game);
         return true;
     }
 

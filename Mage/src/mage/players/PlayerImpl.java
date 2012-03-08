@@ -1096,8 +1096,8 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 				newTarget = target;
 			if (newTarget.choose(Outcome.Neutral, playerId, null, game)) {
 				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LIBRARY_SEARCHED, playerId, playerId));
-				return true;
 			}
+    		return true;
 		}
 		return false;
 	}

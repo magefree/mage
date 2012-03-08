@@ -98,16 +98,18 @@ class InameDeathAspectEffect extends SearchEffect<InameDeathAspectEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-		player.searchLibrary(target, game);
-        if (target.getTargets().size() > 0) {
-            for (UUID cardId: target.getTargets()) {
-                Card card = player.getLibrary().remove(cardId, game);
-                if (card != null){
-					card.moveToZone(Constants.Zone.GRAVEYARD, source.getId(), game, false);
+        if (player != null && player.searchLibrary(target, game)) {
+            if (target.getTargets().size() > 0) {
+                for (UUID cardId: target.getTargets()) {
+                    Card card = player.getLibrary().remove(cardId, game);
+                    if (card != null){
+                        card.moveToZone(Constants.Zone.GRAVEYARD, source.getId(), game, false);
+                    }
                 }
             }
             player.shuffleLibrary(game);
+            return true;
         }
-        return true;
+        return false;
     }
 }

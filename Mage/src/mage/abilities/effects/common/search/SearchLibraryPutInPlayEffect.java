@@ -47,24 +47,35 @@ import mage.target.common.TargetCardInLibrary;
 public class SearchLibraryPutInPlayEffect extends SearchEffect<SearchLibraryPutInPlayEffect> {
 
 	private boolean tapped;
+    private boolean forceShuffle;
 
 	public SearchLibraryPutInPlayEffect(TargetCardInLibrary target) {
-		this(target, false, Outcome.PutCardInPlay);
+		this(target, false, true, Outcome.PutCardInPlay);
 	}
 	
 	public SearchLibraryPutInPlayEffect(TargetCardInLibrary target, boolean tapped) {
-		this(target, tapped, Outcome.PutCardInPlay);
+		this(target, tapped, true, Outcome.PutCardInPlay);
 	}
 
-	public SearchLibraryPutInPlayEffect(TargetCardInLibrary target, boolean tapped, Outcome outcome) {
+	public SearchLibraryPutInPlayEffect(TargetCardInLibrary target, boolean tapped, boolean forceShuffle) {
+		this(target, tapped, forceShuffle, Outcome.PutCardInPlay);
+	}
+    
+    public SearchLibraryPutInPlayEffect(TargetCardInLibrary target, boolean tapped, Outcome outcome) {
+        this(target, tapped, true, outcome);
+    }
+
+    public SearchLibraryPutInPlayEffect(TargetCardInLibrary target, boolean tapped, boolean forceShuffle, Outcome outcome) {
 		super(target, outcome);
 		this.tapped = tapped;
+        this.forceShuffle = forceShuffle;
 		setText();
 	}
 
 	public SearchLibraryPutInPlayEffect(final SearchLibraryPutInPlayEffect effect) {
 		super(effect);
 		this.tapped = effect.tapped;
+        this.forceShuffle = effect.forceShuffle;
 	}
 
 	@Override
@@ -75,6 +86,8 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect<SearchLibraryPutI
 	@Override
 	public boolean apply(Game game, Ability source) {
 		Player player = game.getPlayer(source.getControllerId());
+        if (player == null)
+            return false;
 		if (player.searchLibrary(target, game)) {
 			if (target.getTargets().size() > 0) {
 				for (UUID cardId: (List<UUID>)target.getTargets()) {
@@ -89,12 +102,12 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect<SearchLibraryPutI
 						}
 					}
 				}
-                player.shuffleLibrary(game);
-				return true;
 			}
+            player.shuffleLibrary(game);
+    		return true;
 		}
-        // shuffle anyway
-        player.shuffleLibrary(game);
+        if (forceShuffle)
+            player.shuffleLibrary(game);
 		return false;
 	}
 
@@ -115,7 +128,10 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect<SearchLibraryPutI
 		}
 		if (tapped)
 			sb.append(" tapped");
-		sb.append(". Then shuffle your library");
+        if (forceShuffle)
+            sb.append(". Then shuffle your library");
+        else
+            sb.append(". If you do, shuffle your library");
 		staticText = sb.toString();
 	}
 

@@ -48,14 +48,20 @@ import mage.target.common.TargetCardInLibrary;
 public class SearchLibraryPutInHandEffect extends SearchEffect<SearchLibraryPutInHandEffect> {
 
     private boolean revealCards = false;
+    private boolean forceShuffle;
 
     public SearchLibraryPutInHandEffect(TargetCardInLibrary target) {
-        this(target, false);
+        this(target, false, true);
     }
 
     public SearchLibraryPutInHandEffect(TargetCardInLibrary target, boolean revealCards) {
+        this(target, revealCards, true);
+    }
+
+    public SearchLibraryPutInHandEffect(TargetCardInLibrary target, boolean revealCards, boolean forceShuffle) {
 		super(target, Outcome.DrawCard);
         this.revealCards = revealCards;
+        this.forceShuffle = forceShuffle;
 		setText();
     }
 
@@ -72,30 +78,35 @@ public class SearchLibraryPutInHandEffect extends SearchEffect<SearchLibraryPutI
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-		player.searchLibrary(target, game);
-        if (target.getTargets().size() > 0) {
-            Cards cards = new CardsImpl();
-            for (UUID cardId: (List<UUID>)target.getTargets()) {
-                Card card = player.getLibrary().remove(cardId, game);
-                if (card != null){
-					card.moveToZone(Zone.HAND, source.getId(), game, false);
-                    if (revealCards) {
-                        cards.add(card);
+        if (player == null)
+            return false;
+		if (player.searchLibrary(target, game)) {
+            if (target.getTargets().size() > 0) {
+                Cards cards = new CardsImpl();
+                for (UUID cardId: (List<UUID>)target.getTargets()) {
+                    Card card = player.getLibrary().remove(cardId, game);
+                    if (card != null){
+                        card.moveToZone(Zone.HAND, source.getId(), game, false);
+                        if (revealCards) {
+                            cards.add(card);
+                        }
                     }
                 }
-            }
-            if (revealCards) {
-                String name = "Reveal";
-                Card sourceCard = game.getCard(source.getSourceId());
-                if (sourceCard != null) {
-                    name = sourceCard.getName();
+                if (revealCards) {
+                    String name = "Reveal";
+                    Card sourceCard = game.getCard(source.getSourceId());
+                    if (sourceCard != null) {
+                        name = sourceCard.getName();
+                    }
+                    player.revealCards(name, cards, game);
                 }
-                player.revealCards(name, cards, game);
             }
+            player.shuffleLibrary(game);
+            return true;
         }
-        // shuffle anyway
-        player.shuffleLibrary(game);
-        return true;
+        if (forceShuffle)
+            player.shuffleLibrary(game);
+        return false;
     }
 
     private void setText() {
@@ -108,7 +119,10 @@ public class SearchLibraryPutInHandEffect extends SearchEffect<SearchLibraryPutI
 		else {
 			sb.append("a ").append(target.getTargetName()).append(revealCards ? ", reveal it, " : "").append(" and put that card into your hand");
 		}
-		sb.append(". Then shuffle your library");
+        if (forceShuffle)
+            sb.append(". Then shuffle your library");
+        else
+            sb.append(". If you do, shuffle your library");
 
 		staticText = sb.toString();
     }

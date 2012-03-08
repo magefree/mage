@@ -82,6 +82,8 @@ class GreenSunsZenithSearchEffect extends OneShotEffect<GreenSunsZenithSearchEff
 	@Override
 	public boolean apply(Game game, Ability source) {
 		Player player = game.getPlayer(source.getControllerId());
+        if (player == null)
+            return false;
 		FilterCard filter = new FilterCard("green creature card with converted mana cost X or less");
 		filter.getColor().setGreen(true);
 		filter.setUseColor(true);
@@ -92,14 +94,14 @@ class GreenSunsZenithSearchEffect extends OneShotEffect<GreenSunsZenithSearchEff
 		TargetCardInLibrary target = new TargetCardInLibrary(filter);
 		if (player.searchLibrary(target, game)) {
 			if (target.getTargets().size() > 0) {
-				for (UUID cardId : (List<UUID>) target.getTargets()) {
-					Card card = player.getLibrary().getCard(cardId, game);
-					card.putOntoBattlefield(game, Constants.Zone.HAND, source.getId(), source.getControllerId());
-				}
-				player.shuffleLibrary(game);
-				return true;
+                Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
+                if (card != null)
+                    card.putOntoBattlefield(game, Constants.Zone.HAND, source.getId(), source.getControllerId());
 			}
+            player.shuffleLibrary(game);
+            return true;
 		}
+        player.shuffleLibrary(game);
 		return false;
 	}
 

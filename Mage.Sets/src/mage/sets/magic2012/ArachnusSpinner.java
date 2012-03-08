@@ -133,10 +133,10 @@ class ArachnusSpinnerEffect extends OneShotEffect<ArachnusSpinnerEffect> {
             if (player.searchLibrary(target, game)) {
                 card = game.getCard(target.getFirstTarget());
                 if (card != null) {
-                    player.shuffleLibrary(game);
                     zone = Zone.LIBRARY;
                 }
             }
+            player.shuffleLibrary(game);
         }
         if (card != null) {
             Permanent permanent = game.getPermanent(source.getFirstTarget());

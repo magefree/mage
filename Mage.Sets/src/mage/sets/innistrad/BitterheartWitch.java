@@ -65,7 +65,9 @@ public class BitterheartWitch extends CardImpl<BitterheartWitch> {
         this.addAbility(DeathtouchAbility.getInstance());
         
         // When Bitterheart Witch dies, you may search your library for a Curse card, put it onto the battlefield attached to target player, then shuffle your library.
-        this.addAbility(new DiesTriggeredAbility(new BitterheartWitchEffect(), true));
+        Ability ability = new DiesTriggeredAbility(new BitterheartWitchEffect(), true);
+        ability.addTarget(new TargetPlayer());
+        this.addAbility(ability);
         
     }
 
@@ -98,25 +100,21 @@ class BitterheartWitchEffect extends OneShotEffect<BitterheartWitchEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        TargetPlayer target = new TargetPlayer();
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
+        Player targetPlayer = game.getPlayer(source.getFirstTarget());
+        if (player != null && targetPlayer != null) {
             TargetCardInLibrary targetCard = new TargetCardInLibrary(filter);
             targetCard.setRequired(true);
             if (player.searchLibrary(targetCard, game)) {
                 Card card = game.getCard(targetCard.getFirstTarget());
                 if (card != null) {
-                    if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
-                        player.chooseTarget(Outcome.Detriment, target, source, game);
-                        Player targetPlayer = game.getPlayer(target.getFirstTarget());
-                        if (targetPlayer != null) {
-                            player.shuffleLibrary(game);
-                            card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId());
-                            return targetPlayer.addAttachment(card.getId(), game);
-                        }
-                    }
+                    card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId());
+                    targetPlayer.addAttachment(card.getId(), game);
                 }
+                player.shuffleLibrary(game);
+                return true;
             }
+            player.shuffleLibrary(game);
         }
         return false;
     }

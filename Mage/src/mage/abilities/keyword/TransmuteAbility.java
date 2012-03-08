@@ -63,23 +63,24 @@ class TransmuteEffect extends OneShotEffect<TransmuteEffect> {
             filter.setConvertedManaCost(sourceCard.getManaCost().convertedManaCost());
             filter.setConvertedManaCostComparison(Filter.ComparisonType.Equal);
             TargetCardInLibrary target = new TargetCardInLibrary(1, filter);
-            player.searchLibrary(target, game);
-            if (target.getTargets().size() > 0) {
-                Cards revealed = new CardsImpl();
-                for (UUID cardId : target.getTargets()) {
-                    Card card = player.getLibrary().remove(cardId, game);
-                    if (card != null) {
-                        card.moveToZone(Constants.Zone.HAND, source.getId(), game, false);
-                        revealed.add(card);
+            if (player.searchLibrary(target, game)) {
+                if (target.getTargets().size() > 0) {
+                    Cards revealed = new CardsImpl();
+                    for (UUID cardId : target.getTargets()) {
+                        Card card = player.getLibrary().remove(cardId, game);
+                        if (card != null) {
+                            card.moveToZone(Constants.Zone.HAND, source.getId(), game, false);
+                            revealed.add(card);
+                        }
                     }
+                    player.revealCards("Search", revealed, game);
                 }
-                player.shuffleLibrary(game);
-                player.revealCards("Search", revealed, game);
             }
+            player.shuffleLibrary(game);
+            return true;
         }
 
-
-        return true;
+        return false;
     }
 
     @Override

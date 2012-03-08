@@ -116,12 +116,10 @@ class DistantMemoriesEffect extends OneShotEffect<DistantMemoriesEffect> {
                 } else {
                     player.drawCards(3, game);
                 }
-            } else {
-                player.shuffleLibrary(game);
-                return false;
+                return true;
             }
         }
-
-        return true;
+        player.shuffleLibrary(game);
+        return false;
     }
 }

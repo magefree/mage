@@ -93,15 +93,16 @@ class PathToExileEffect extends OneShotEffect {
 			if (permanent.moveToZone(Zone.EXILED, source.getId(), game, false)) {
 				if (player.chooseUse(Outcome.PutCardInPlay, "Use Path to Exile effect?", game)) {
 					TargetCardInLibrary target = new TargetCardInLibrary(new FilterBasicLandCard());
-					player.searchLibrary(target, game);
-					Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
-					if (card != null) {
-						if (card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), permanent.getControllerId())) {
-							Permanent land = game.getPermanent(card.getId());
-							if (land != null)
-								land.setTapped(true);
-						}
-					}
+					if (player.searchLibrary(target, game)) {
+                        Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
+                        if (card != null) {
+                            if (card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), permanent.getControllerId())) {
+                                Permanent land = game.getPermanent(card.getId());
+                                if (land != null)
+                                    land.setTapped(true);
+                            }
+                        }
+                    }
 					player.shuffleLibrary(game);
 				}
 				return true;

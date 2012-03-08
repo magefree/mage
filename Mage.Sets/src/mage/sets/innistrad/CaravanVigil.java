@@ -106,9 +106,10 @@ class CaravanVigilEffect extends OneShotEffect<CaravanVigilEffect> {
                     }
                 }
                 player.revealCards("Caravan Vigil", cards, game);
+                player.shuffleLibrary(game);
+                return true;
             }
             player.shuffleLibrary(game);
-            return true;
         }
         return false;
     }

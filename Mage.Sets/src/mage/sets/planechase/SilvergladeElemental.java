@@ -59,7 +59,7 @@ public class SilvergladeElemental extends CardImpl<SilvergladeElemental> {
         this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false, false), true));
     }
 
     public SilvergladeElemental(final SilvergladeElemental card) {

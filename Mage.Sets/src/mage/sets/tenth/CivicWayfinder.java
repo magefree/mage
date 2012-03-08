@@ -53,7 +53,7 @@ public class CivicWayfinder extends CardImpl<CivicWayfinder> {
         this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryRevealPutInHandEffect(new TargetCardInLibrary(new FilterBasicLandCard())), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryRevealPutInHandEffect(new TargetCardInLibrary(new FilterBasicLandCard()), false), true));
     }
 
     public CivicWayfinder(final CivicWayfinder card) {
