@@ -29,7 +29,6 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -39,6 +38,7 @@ import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
+import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -49,18 +49,22 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class MidnightCovenant extends CardImpl<MidnightCovenant> {
 
-    public MidnightCovenant (UUID ownerId) {
+    public MidnightCovenant(UUID ownerId) {
         super(ownerId, 125, "Midnight Covenant", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Aura");
-		this.color.setBlack(true);
+        this.color.setBlack(true);
+
+        // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.AddAbility));
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Constants.Duration.EndOfTurn), new ColoredManaCost(Constants.ColoredManaSymbol.B)), Constants.AttachmentType.AURA)));
+        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        // Enchanted creature has "{B}: This creature gets +1/+1 until end of turn."
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Constants.Duration.EndOfTurn), new ColoredManaCost(Constants.ColoredManaSymbol.B)), Constants.AttachmentType.AURA)));
     }
 
-    public MidnightCovenant (final MidnightCovenant card) {
+    public MidnightCovenant(final MidnightCovenant card) {
         super(card);
     }
 
@@ -68,5 +72,4 @@ public class MidnightCovenant extends CardImpl<MidnightCovenant> {
     public MidnightCovenant copy() {
         return new MidnightCovenant(this);
     }
-
 }
