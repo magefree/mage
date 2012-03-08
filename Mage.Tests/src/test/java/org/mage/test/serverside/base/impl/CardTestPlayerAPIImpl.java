@@ -260,7 +260,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 	 */
 	public void assertLife(Player player, int life) throws AssertionError {
 		int actual = currentGame.getPlayer(player.getId()).getLife();
-		Assert.assertEquals("Life amounts are not equal", life, actual);
+		Assert.assertEquals("Life amounts are not equal for player " + player.getName(), life, actual);
 	}
 
 	/**

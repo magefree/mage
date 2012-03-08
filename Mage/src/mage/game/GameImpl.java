@@ -190,6 +190,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	@Override
 	public void loadCards(Set<Card> cards, UUID ownerId) {
 		for (Card card: cards) {
+            if (card instanceof PermanentCard) {
+                card = ((PermanentCard)card).getCard();
+            }
 			card.setOwnerId(ownerId);
 			gameCards.put(card.getId(), card);
             state.addCard(card);
@@ -1314,7 +1317,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 			for (PermanentCard card : battlefield) {
                 setZone(card.getId(), Zone.BATTLEFIELD);
                 card.setOwnerId(ownerId);
-                PermanentCard permanent = new PermanentCard(card, ownerId);
+                PermanentCard permanent = new PermanentCard(card.getCard(), ownerId);
                 getBattlefield().addPermanent(permanent);
                 permanent.entersBattlefield(permanent.getId(), this);                    
                 ((PermanentImpl)permanent).removeSummoningSickness();

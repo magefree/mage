@@ -170,37 +170,10 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
         }
     }
 
-//    public void checkPermanentOnlyTriggers(ZoneChangeEvent event, Game game) {
-//        // we only want to trigger abilities that are not on the underlying card ie. have been added by another effect
-//        // or we want to trigger abilities that only trigger on leaving the battlefield
-//        // card abilities will get triggered later when the card hits the new zone
-//        List<UUID> triggered = new ArrayList<UUID>();
-//        for (TriggeredAbility ability : abilities.getTriggeredAbilities(event.getFromZone())) {
-//            if (!card.getAbilities().containsKey(ability.getId())) {
-//                if (ability.checkTrigger(event, game)) {
-//                    triggered.add(ability.getId());
-//                    ability.trigger(game, controllerId);
-//                }
-//            } else if (ability instanceof ZoneChangeTriggeredAbility && event.getFromZone() == Zone.BATTLEFIELD) {
-//                ZoneChangeTriggeredAbility zcAbility = (ZoneChangeTriggeredAbility) ability;
-//                if (zcAbility.getToZone() == null) {
-//                    if (ability.checkTrigger(event, game)) {
-//                        triggered.add(ability.getId());
-//                        ability.trigger(game, controllerId);
-//                    }
-//                }
-//            }
-//        }
-//        for (TriggeredAbility ability : abilities.getTriggeredAbilities(event.getToZone())) {
-//            if (!card.getAbilities().containsKey(ability.getId())) {
-//                if (!triggered.contains(ability.getId()) && ability.checkTrigger(event, game)) {
-//                    ability.trigger(game, controllerId);
-//                }
-//            }
-//        }
-//    }
-
-
+    public Card getCard() {
+        return card;
+    }
+    
     @Override
     public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag) {
         Zone fromZone = game.getState().getZone(objectId);
