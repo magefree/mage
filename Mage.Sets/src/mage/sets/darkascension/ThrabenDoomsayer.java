@@ -59,7 +59,7 @@ public class ThrabenDoomsayer extends CardImpl<ThrabenDoomsayer> {
 
         // {tap}: Put a 1/1 white Human creature token onto the battlefield.
         this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CreateTokenEffect(new HumanToken()), new TapSourceCost()));
-        // Fateful hour — As long as you have 5 or less life, other creatures you control get +2/+2.
+        // Fateful hour - As long as you have 5 or less life, other creatures you control get +2/+2.
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(new BoostControlledEffect(2, 2, Constants.Duration.WhileOnBattlefield, false),
                 FatefulHourCondition.getInstance(), "As long as you have 5 or less life, other creatures you control get +2/+2")));
     }
