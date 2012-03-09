@@ -40,6 +40,7 @@ import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.common.FilterSpiritOrArcaneCard;
 import mage.game.permanent.token.Token;
 
 /**
@@ -47,14 +48,8 @@ import mage.game.permanent.token.Token;
  */
 public class JadeIdol extends CardImpl<JadeIdol> {
 
-    private final static FilterCard filter = new FilterCard("a Spirit or Arcane spell");
-
-    static {
-        filter.getSubtype().add("Spirit");
-        filter.getSubtype().add("Arcane");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
-    }
-
+    private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
+    
     public JadeIdol(UUID ownerId) {
         super(ownerId, 256, "Jade Idol", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
         this.expansionSetCode = "CHK";

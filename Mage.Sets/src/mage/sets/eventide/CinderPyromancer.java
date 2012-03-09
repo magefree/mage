@@ -29,7 +29,6 @@
 package mage.sets.eventide;
 
 import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -41,7 +40,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.target.TargetPlayer;
 
 /**
@@ -49,7 +48,7 @@ import mage.target.TargetPlayer;
  * @author Loki
  */
 public class CinderPyromancer extends CardImpl<CinderPyromancer> {
-    private static final FilterCard filter = new FilterCard("a red spell");
+    private static final FilterSpell filter = new FilterSpell("a red spell");
 
     static {
         filter.getColor().setRed(true);

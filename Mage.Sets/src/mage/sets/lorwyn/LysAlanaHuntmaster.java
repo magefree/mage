@@ -27,6 +27,7 @@
  */
 package mage.sets.lorwyn;
 
+import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
@@ -34,10 +35,8 @@ import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.game.permanent.token.ElfToken;
-
-import java.util.UUID;
 
 /**
  *
@@ -45,7 +44,7 @@ import java.util.UUID;
  */
 public class LysAlanaHuntmaster extends CardImpl<LysAlanaHuntmaster> {
 
-    private final static FilterCard filter = new FilterCard("Elf spell");
+    private final static FilterSpell filter = new FilterSpell("Elf spell");
 
     static {
         filter.getSubtype().add("Elf");

@@ -43,6 +43,8 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.filter.Filter;
+import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreatureCard;
 
 /**
@@ -52,12 +54,14 @@ import mage.filter.common.FilterCreatureCard;
 public class HandOfThePraetors extends CardImpl<HandOfThePraetors> {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with infect");
-    private static final FilterCreatureCard filterSpell = new FilterCreatureCard("a creature spell with infect");
+    private static final FilterSpell filterSpell = new FilterSpell("a creature spell with infect");
 
 	static {
 		filter.getAbilities().add(InfectAbility.getInstance());
 		filter.setNotAbilities(false);
         filterSpell.getAbilities().add(InfectAbility.getInstance());
+        filterSpell.getCardType().add(CardType.CREATURE);
+        filterSpell.setScopeCardType(Filter.ComparisonScope.Any);
 	}
 
     public HandOfThePraetors (UUID ownerId) {

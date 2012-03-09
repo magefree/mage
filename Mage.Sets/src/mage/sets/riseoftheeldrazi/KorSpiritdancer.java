@@ -39,7 +39,7 @@ import mage.abilities.dynamicvalue.common.AuraAttachedCount;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 
 /**
  *
@@ -47,7 +47,7 @@ import mage.filter.FilterCard;
  */
 public class KorSpiritdancer extends CardImpl<KorSpiritdancer> {
 
-    private static final FilterCard filter = new FilterCard("an Aura spell");
+    private static final FilterSpell filter = new FilterSpell("an Aura spell");
 
     static {
         filter.getSubtype().add("Aura");

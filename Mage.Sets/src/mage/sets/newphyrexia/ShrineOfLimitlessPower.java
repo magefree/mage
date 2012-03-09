@@ -44,7 +44,7 @@ import mage.abilities.effects.common.DiscardTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.target.TargetPlayer;
 
 /**
@@ -53,7 +53,7 @@ import mage.target.TargetPlayer;
  */
 public class ShrineOfLimitlessPower extends CardImpl<ShrineOfLimitlessPower> {
 
-    private static final FilterCard filter = new FilterCard("a black spell");
+    private static final FilterSpell filter = new FilterSpell("a black spell");
 
     static {
         filter.getColor().setBlack(true);

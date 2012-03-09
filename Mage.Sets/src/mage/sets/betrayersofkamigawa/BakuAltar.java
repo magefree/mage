@@ -51,11 +51,13 @@ import mage.game.permanent.token.SpiritToken;
  */
 public class BakuAltar extends CardImpl<BakuAltar> {
 
+    private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
+    
     public BakuAltar(UUID ownerId) {
         super(ownerId, 152, "Baku Altar", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "BOK";
         // Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Baku Altar.
-        this.addAbility(new SpellCastTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance(1)), new FilterSpiritOrArcaneCard(), true));
+        this.addAbility(new SpellCastTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance(1)), filter, true));
         // {2}, {tap}, Remove a ki counter from Baku Altar: Put a 1/1 colorless Spirit creature token onto the battlefield.
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CreateTokenEffect(new SpiritToken(), 1), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());

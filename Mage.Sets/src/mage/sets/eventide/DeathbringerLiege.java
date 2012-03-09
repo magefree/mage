@@ -29,7 +29,6 @@
 package mage.sets.eventide;
 
 import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -37,13 +36,11 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastTriggeredAbility;
-import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -56,8 +53,8 @@ import mage.target.common.TargetCreaturePermanent;
 public class DeathbringerLiege extends CardImpl<DeathbringerLiege> {
     private final static FilterCreaturePermanent filterWhite = new FilterCreaturePermanent("white creatures");
     private final static FilterCreaturePermanent filterBlack = new FilterCreaturePermanent("black creatures");
-    private final static FilterCard filterWhiteSpellCard = new FilterCard("a white spell");
-    private final static FilterCard filterBlackSpellCard = new FilterCard("a black spell");
+    private final static FilterSpell filterWhiteSpellCard = new FilterSpell("a white spell");
+    private final static FilterSpell filterBlackSpellCard = new FilterSpell("a black spell");
 
     static {
         filterWhite.setUseColor(true);

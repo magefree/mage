@@ -44,6 +44,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
@@ -54,7 +55,7 @@ import mage.players.Player;
  */
 public class CharmbreakerDevils extends CardImpl<CharmbreakerDevils> {
 
-    private static final FilterCard filter = new FilterCard("instant or sorcery card");
+    private static final FilterSpell filter = new FilterSpell("instant or sorcery card");
 
     static {
         filter.getCardType().add(CardType.INSTANT);

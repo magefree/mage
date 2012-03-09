@@ -48,7 +48,9 @@ import mage.target.common.TargetCreaturePermanent;
 
 public class TellerOfTales extends CardImpl<TellerOfTales> {
 
-    // Outcome.Benefit, "tap or untap target creature"
+     private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
+    
+   // Outcome.Benefit, "tap or untap target creature"
     
     public TellerOfTales(UUID ownerId) {
         super(ownerId, 95, "Teller of Tales", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
@@ -60,7 +62,7 @@ public class TellerOfTales extends CardImpl<TellerOfTales> {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever you cast a Spirit or Arcane spell, you may tap or untap target creature.
-        Ability ability = new SpellCastTriggeredAbility(new MayTapOrUntapTargetEffect(),new FilterSpiritOrArcaneCard(), true);
+        Ability ability = new SpellCastTriggeredAbility(new MayTapOrUntapTargetEffect(),filter, true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

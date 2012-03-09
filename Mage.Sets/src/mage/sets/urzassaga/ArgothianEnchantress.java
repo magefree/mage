@@ -35,7 +35,7 @@ import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 
 /**
  *
@@ -43,7 +43,7 @@ import mage.filter.FilterCard;
  */
 public class ArgothianEnchantress extends CardImpl<ArgothianEnchantress> {
 
-    private static final FilterCard filter = new FilterCard("an Enchantment spell");
+    private static final FilterSpell filter = new FilterSpell("an Enchantment spell");
 
     static {
         filter.getCardType().add(CardType.ENCHANTMENT);

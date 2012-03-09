@@ -37,7 +37,7 @@ import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.ForestwalkAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 
 /**
  *
@@ -45,8 +45,8 @@ import mage.filter.FilterCard;
  */
 public class TattermungeDuo extends CardImpl<TattermungeDuo> {
 
-    private static final FilterCard redFilter = new FilterCard("a red spell");
-    private static final FilterCard greenFilter = new FilterCard("a green spell");
+    private static final FilterSpell redFilter = new FilterSpell("a red spell");
+    private static final FilterSpell greenFilter = new FilterSpell("a green spell");
 
     static {
         redFilter.getColor().setRed(true);

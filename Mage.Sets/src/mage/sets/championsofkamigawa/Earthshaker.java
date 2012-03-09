@@ -42,19 +42,17 @@ import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterSpiritOrArcaneCard;
 
 /**
  * @author Loki
  */
 public class Earthshaker extends CardImpl<Earthshaker> {
 
-    private final static FilterCard spellFilter = new FilterCard("a Spirit or Arcane spell");
+    private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();    
     private final static FilterCreaturePermanent creatureFilter = new FilterCreaturePermanent("creature without flying");
 
     static {
-        spellFilter.getSubtype().add("Spirit");
-        spellFilter.getSubtype().add("Arcane");
-        spellFilter.setScopeSubtype(Filter.ComparisonScope.Any);
         creatureFilter.getAbilities().add((Ability) FlyingAbility.getInstance());
         creatureFilter.setNotAbilities(true);
     }
@@ -66,7 +64,7 @@ public class Earthshaker extends CardImpl<Earthshaker> {
         this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
-        this.addAbility(new SpellCastTriggeredAbility(new DamageAllEffect(new StaticValue(2) , creatureFilter), spellFilter, false));
+        this.addAbility(new SpellCastTriggeredAbility(new DamageAllEffect(new StaticValue(2) , creatureFilter), filter, false));
     }
 
     public Earthshaker(final Earthshaker card) {

@@ -36,11 +36,12 @@ import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.filter.common.FilterArtifactCard;
+import mage.filter.Filter;
+import mage.filter.FilterSpell;
 import mage.game.permanent.token.Token;
 
 /**
@@ -49,7 +50,11 @@ import mage.game.permanent.token.Token;
  */
 public class GolemFoundry extends CardImpl<GolemFoundry> {
 
-    private static final FilterArtifactCard filter = new FilterArtifactCard("an artifact spell");
+    private static final FilterSpell filter = new FilterSpell("an artifact spell");
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
+    }
 
     public GolemFoundry (UUID ownerId) {
         super(ownerId, 160, "Golem Foundry", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{3}");

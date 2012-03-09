@@ -28,7 +28,6 @@
 package mage.sets.eventide;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
@@ -37,7 +36,7 @@ import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.WolfToken;
 
@@ -46,8 +45,8 @@ import mage.game.permanent.token.WolfToken;
  */
 public class FableOfWolfAndOwl extends CardImpl<FableOfWolfAndOwl> {
 
-    private final static FilterCard filterGreenSpell = new FilterCard("a green spell");
-    private final static FilterCard filterBlueSpell = new FilterCard("a blue spell");
+    private final static FilterSpell filterGreenSpell = new FilterSpell("a green spell");
+    private final static FilterSpell filterBlueSpell = new FilterSpell("a blue spell");
 
     static {
         filterGreenSpell.setUseColor(true);

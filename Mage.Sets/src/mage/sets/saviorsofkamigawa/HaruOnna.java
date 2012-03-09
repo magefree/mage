@@ -44,6 +44,8 @@ import mage.filter.common.FilterSpiritOrArcaneCard;
  */
 public class HaruOnna extends CardImpl<HaruOnna> {
 
+    private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
+    
     public HaruOnna(UUID ownerId) {
         super(ownerId, 132, "Haru-Onna", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.expansionSetCode = "SOK";
@@ -55,7 +57,7 @@ public class HaruOnna extends CardImpl<HaruOnna> {
         // When Haru-Onna enters the battlefield, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(1)));
         // Whenever you cast a Spirit or Arcane spell, you may return Haru-Onna to its owner's hand.
-        this.addAbility(new SpellCastTriggeredAbility(new ReturnToHandSourceEffect(), new FilterSpiritOrArcaneCard(), true));
+        this.addAbility(new SpellCastTriggeredAbility(new ReturnToHandSourceEffect(), filter, true));
     }
 
     public HaruOnna(final HaruOnna card) {

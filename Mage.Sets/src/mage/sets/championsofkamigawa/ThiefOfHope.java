@@ -46,6 +46,9 @@ import mage.target.common.TargetOpponent;
  * @author Loki
  */
 public class ThiefOfHope extends CardImpl<ThiefOfHope> {
+
+    private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
+    
     public ThiefOfHope(UUID ownerId) {
         super(ownerId, 147, "Thief of Hope", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "CHK";
@@ -53,7 +56,7 @@ public class ThiefOfHope extends CardImpl<ThiefOfHope> {
         this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        Ability ability = new SpellCastTriggeredAbility(new LoseLifeTargetEffect(1), new FilterSpiritOrArcaneCard(), false);
+        Ability ability = new SpellCastTriggeredAbility(new LoseLifeTargetEffect(1), filter, false);
         ability.addEffect(new GainLifeEffect(1));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

@@ -37,7 +37,7 @@ import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 
 /**
  *
@@ -45,8 +45,8 @@ import mage.filter.FilterCard;
  */
 public class GravelgillDuo extends CardImpl<GravelgillDuo> {
 
-    private static final FilterCard blueFilter = new FilterCard("a blue spell");
-    private static final FilterCard blackFilter = new FilterCard("a black spell");
+    private static final FilterSpell blueFilter = new FilterSpell("a blue spell");
+    private static final FilterSpell blackFilter = new FilterSpell("a black spell");
 
     static {
         blueFilter.getColor().setBlue(true);

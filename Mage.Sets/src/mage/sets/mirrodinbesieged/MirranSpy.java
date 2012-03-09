@@ -34,7 +34,7 @@ import mage.MageInt;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterArtifactCard;
+import mage.filter.FilterSpell;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class MirranSpy extends CardImpl<MirranSpy> {
 
-    private static final FilterArtifactCard filter = new FilterArtifactCard("an artifact spell");
+    private static final FilterSpell filter = new FilterSpell("an artifact spell");
 
     public MirranSpy(UUID ownerId) {
         super(ownerId, 26, "Mirran Spy", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

@@ -29,14 +29,14 @@
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterArtifactCard;
+import mage.filter.Filter;
+import mage.filter.FilterSpell;
 
 /**
  *
@@ -44,7 +44,11 @@ import mage.filter.common.FilterArtifactCard;
  */
 public class Riddlesmith extends CardImpl<Riddlesmith> {
 
-    private static final FilterArtifactCard filter = new FilterArtifactCard("an artifact spell");
+    private static final FilterSpell filter = new FilterSpell("an artifact spell");
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
+    }
 
     public Riddlesmith (UUID ownerId) {
         super(ownerId, 40, "Riddlesmith", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

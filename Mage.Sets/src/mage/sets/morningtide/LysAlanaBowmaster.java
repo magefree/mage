@@ -38,7 +38,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class LysAlanaBowmaster extends CardImpl<LysAlanaBowmaster> {
 
-    private final static FilterCard filterElf = new FilterCard("Elf");
+    private final static FilterSpell filterElf = new FilterSpell("Elf");
     private final static FilterCreaturePermanent filterFlying = new FilterCreaturePermanent("creature with flying");
 
     static {

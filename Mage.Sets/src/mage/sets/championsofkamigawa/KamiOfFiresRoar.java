@@ -46,6 +46,9 @@ import mage.target.common.TargetCreaturePermanent;
  * @author Loki
  */
 public class KamiOfFiresRoar extends CardImpl<KamiOfFiresRoar> {
+
+    private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
+    
     public KamiOfFiresRoar(UUID ownerId) {
         super(ownerId, 174, "Kami of Fire's Roar", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.expansionSetCode = "CHK";
@@ -53,7 +56,7 @@ public class KamiOfFiresRoar extends CardImpl<KamiOfFiresRoar> {
         this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
-        Ability ability = new SpellCastTriggeredAbility(new GainAbilityTargetEffect(CantBlockAbility.getInstance(), Constants.Duration.EndOfTurn), new FilterSpiritOrArcaneCard(), false);
+        Ability ability = new SpellCastTriggeredAbility(new GainAbilityTargetEffect(CantBlockAbility.getInstance(), Constants.Duration.EndOfTurn), filter, false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

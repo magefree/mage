@@ -47,6 +47,9 @@ import mage.target.common.TargetCreaturePermanent;
  * @author Loki
  */
 public class KamiOfTheWaningMoon extends CardImpl<KamiOfTheWaningMoon> {
+
+    private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
+    
     public KamiOfTheWaningMoon(UUID ownerId) {
         super(ownerId, 120, "Kami of the Waning Moon", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "CHK";
@@ -55,7 +58,7 @@ public class KamiOfTheWaningMoon extends CardImpl<KamiOfTheWaningMoon> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
-        Ability ability = new SpellCastTriggeredAbility(new GainAbilityTargetEffect(FearAbility.getInstance(), Constants.Duration.EndOfTurn), new FilterSpiritOrArcaneCard(), false);
+        Ability ability = new SpellCastTriggeredAbility(new GainAbilityTargetEffect(FearAbility.getInstance(), Constants.Duration.EndOfTurn), filter, false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

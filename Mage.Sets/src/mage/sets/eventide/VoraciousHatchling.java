@@ -28,7 +28,6 @@
 package mage.sets.eventide;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
@@ -40,15 +39,15 @@ import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 
 /**
  * @author Loki
  */
 public class VoraciousHatchling extends CardImpl<VoraciousHatchling> {
 
-    private final static FilterCard filterWhiteSpell = new FilterCard("a white spell");
-    private final static FilterCard filterBlackSpell = new FilterCard("a black spell");
+    private final static FilterSpell filterWhiteSpell = new FilterSpell("a white spell");
+    private final static FilterSpell filterBlackSpell = new FilterSpell("a black spell");
 
     static {
         filterWhiteSpell.setUseColor(true);

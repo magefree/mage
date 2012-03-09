@@ -49,6 +49,9 @@ import mage.target.common.TargetCreaturePermanent;
  * @author Loki
  */
 public class InnocenceKami extends CardImpl<InnocenceKami> {
+
+    private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
+    
     public InnocenceKami(UUID ownerId) {
         super(ownerId, 18, "Innocence Kami", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
         this.expansionSetCode = "CHK";
@@ -60,7 +63,7 @@ public class InnocenceKami extends CardImpl<InnocenceKami> {
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
-        this.addAbility(new SpellCastTriggeredAbility(new UntapSourceEffect(), new FilterSpiritOrArcaneCard(), false));
+        this.addAbility(new SpellCastTriggeredAbility(new UntapSourceEffect(), filter, false));
     }
 
     public InnocenceKami(final InnocenceKami card) {

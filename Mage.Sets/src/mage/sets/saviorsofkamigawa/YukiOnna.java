@@ -48,7 +48,8 @@ import mage.target.TargetPermanent;
  */
 public class YukiOnna extends CardImpl<YukiOnna> {
 
-    private final static FilterPermanent filter = new FilterPermanent("artifact");
+    private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
+    private final static FilterPermanent filterTarget = new FilterPermanent("artifact");
 
     static {
         filter.getCardType().add(CardType.ARTIFACT);
@@ -65,10 +66,10 @@ public class YukiOnna extends CardImpl<YukiOnna> {
 
         // When Yuki-Onna enters the battlefield, destroy target artifact.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(filterTarget));
         this.addAbility(ability);
         // Whenever you cast a Spirit or Arcane spell, you may return Yuki-Onna to its owner's hand.
-        this.addAbility(new SpellCastTriggeredAbility(new ReturnToHandSourceEffect(), new FilterSpiritOrArcaneCard(), true));
+        this.addAbility(new SpellCastTriggeredAbility(new ReturnToHandSourceEffect(), filter, true));
     }
 
     public YukiOnna(final YukiOnna card) {

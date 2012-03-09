@@ -34,6 +34,8 @@ import mage.MageInt;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
+import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreatureCard;
 
 /**
@@ -42,6 +44,13 @@ import mage.filter.common.FilterCreatureCard;
  */
 public class PrimordialSage extends CardImpl<PrimordialSage> {
 
+    private static final FilterSpell filter = new FilterSpell("a creature spell");
+
+    static {
+        filter.getCardType().add(CardType.CREATURE);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
+    }
+    
     public PrimordialSage(UUID ownerId) {
         super(ownerId, 177, "Primordial Sage", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
         this.expansionSetCode = "RAV";
@@ -52,7 +61,7 @@ public class PrimordialSage extends CardImpl<PrimordialSage> {
         this.toughness = new MageInt(5);
 
         // Whenever you cast a creature spell, you may draw a card.
-        this.addAbility(new SpellCastTriggeredAbility(new DrawCardControllerEffect(1), new FilterCreatureCard(), true));
+        this.addAbility(new SpellCastTriggeredAbility(new DrawCardControllerEffect(1), filter, true));
     }
 
     public PrimordialSage(final PrimordialSage card) {

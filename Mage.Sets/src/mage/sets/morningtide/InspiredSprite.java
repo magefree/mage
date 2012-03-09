@@ -28,7 +28,6 @@
 package mage.sets.morningtide;
 
 import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -42,7 +41,7 @@ import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 
 /**
  *
@@ -50,7 +49,7 @@ import mage.filter.FilterCard;
  */
 public class InspiredSprite extends CardImpl<InspiredSprite> {
 
-    private final static FilterCard filter = new FilterCard("Wizard");
+    private final static FilterSpell filter = new FilterSpell("Wizard");
 
     static {
         filter.getSubtype().add("Wizard");

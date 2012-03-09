@@ -37,7 +37,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.Filter.ComparisonScope;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -49,7 +49,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class SphinxBoneWand extends CardImpl<SphinxBoneWand> {
 
-    private static final FilterCard filter = new FilterCard("an instant or sorcery spell");
+    private static final FilterSpell filter = new FilterSpell("an instant or sorcery spell");
 
     static {
         filter.getCardType().add(CardType.INSTANT);

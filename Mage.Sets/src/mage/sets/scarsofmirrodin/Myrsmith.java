@@ -29,7 +29,6 @@
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -40,7 +39,8 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterArtifactCard;
+import mage.filter.Filter;
+import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.permanent.token.MyrToken;
 
@@ -50,7 +50,11 @@ import mage.game.permanent.token.MyrToken;
  */
 public class Myrsmith extends CardImpl<Myrsmith> {
 
-    private static final FilterArtifactCard filter = new FilterArtifactCard("an artifact spell");
+    private static final FilterSpell filter = new FilterSpell("an artifact spell");
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
+    }
 
     public Myrsmith (UUID ownerId) {
         super(ownerId, 16, "Myrsmith", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

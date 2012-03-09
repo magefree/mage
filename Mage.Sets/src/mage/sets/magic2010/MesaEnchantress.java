@@ -34,7 +34,7 @@ import mage.MageInt;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 
 /**
  *
@@ -42,7 +42,7 @@ import mage.filter.FilterCard;
  */
 public class MesaEnchantress extends CardImpl<MesaEnchantress> {
 
-    private static final FilterCard filter = new FilterCard("an enchantment spell");
+    private static final FilterSpell filter = new FilterSpell("an enchantment spell");
 
     static {
         filter.getCardType().add(CardType.ENCHANTMENT);

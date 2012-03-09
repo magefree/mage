@@ -39,7 +39,7 @@ import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.abilities.keyword.WitherAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 
 /**
  *
@@ -47,8 +47,8 @@ import mage.filter.FilterCard;
  */
 public class NoxiousHatchling extends CardImpl<NoxiousHatchling> {
 
-    private final static FilterCard filterBlackSpell = new FilterCard("a black spell");
-    private final static FilterCard filterGreenSpell = new FilterCard("a green spell");
+    private final static FilterSpell filterBlackSpell = new FilterSpell("a black spell");
+    private final static FilterSpell filterGreenSpell = new FilterSpell("a green spell");
 
     static {
         filterBlackSpell.setUseColor(true);

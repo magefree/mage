@@ -47,6 +47,7 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -58,7 +59,7 @@ import mage.target.TargetCard;
  */
 public class ShrineOfPiercingVision extends CardImpl<ShrineOfPiercingVision> {
 
-    private static final FilterCard filter = new FilterCard("a blue spell");
+    private static final FilterSpell filter = new FilterSpell("a blue spell");
 
     static {
         filter.getColor().setBlue(true);

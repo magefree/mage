@@ -45,6 +45,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class BriarknitKami extends CardImpl<BriarknitKami> {
 
+    private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
+    
     public BriarknitKami(UUID ownerId) {
         super(ownerId, 124, "Briarknit Kami", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
         this.expansionSetCode = "SOK";
@@ -53,7 +55,7 @@ public class BriarknitKami extends CardImpl<BriarknitKami> {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         // Whenever you cast a Spirit or Arcane spell, put a +1/+1 counter on target creature.
-        Ability ability = new SpellCastTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new FilterSpiritOrArcaneCard(), false);
+        Ability ability = new SpellCastTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), filter, false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

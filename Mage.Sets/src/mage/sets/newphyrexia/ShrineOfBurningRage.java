@@ -29,7 +29,6 @@
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -45,7 +44,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -53,7 +52,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  * @author <author>
  */
 public class ShrineOfBurningRage extends CardImpl<ShrineOfBurningRage> {
-    private final static FilterCard filter = new FilterCard("a red spell");
+    private final static FilterSpell filter = new FilterSpell("a red spell");
 
     static {
         filter.getColor().setRed(true);

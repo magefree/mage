@@ -27,6 +27,7 @@
  */
 package mage.sets.magic2012;
 
+import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -38,25 +39,23 @@ import mage.abilities.keyword.BloodthirstAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
-
-import java.util.UUID;
 
 /**
  * @author nantuko
  */
 public class BloodlordOfVaasgoth extends CardImpl<BloodlordOfVaasgoth> {
 
-	private static final FilterCard filterCard = new FilterCard("a Vampire creature spell");
+	private static final FilterSpell filter = new FilterSpell("a Vampire creature spell");
 
 	static {
-		filterCard.getCardType().add(CardType.CREATURE);
-		filterCard.setScopeCardType(Filter.ComparisonScope.Any);
-		filterCard.getSubtype().add("Vampire");
-		filterCard.setScopeSubtype(Filter.ComparisonScope.Any);
+		filter.getCardType().add(CardType.CREATURE);
+		filter.setScopeCardType(Filter.ComparisonScope.Any);
+		filter.getSubtype().add("Vampire");
+		filter.setScopeSubtype(Filter.ComparisonScope.Any);
 	}
 
 	public BloodlordOfVaasgoth(UUID ownerId) {
@@ -75,7 +74,7 @@ public class BloodlordOfVaasgoth extends CardImpl<BloodlordOfVaasgoth> {
 		this.addAbility(FlyingAbility.getInstance());
 
 		// Whenever you cast a Vampire creature spell, it gains bloodthirst 3.
-		this.addAbility(new SpellCastTriggeredAbility(new BloodlordOfVaasgothEffect(), filterCard, false, true));
+		this.addAbility(new SpellCastTriggeredAbility(new BloodlordOfVaasgothEffect(), filter, false, true));
 	}
 
 	public BloodlordOfVaasgoth(final BloodlordOfVaasgoth card) {

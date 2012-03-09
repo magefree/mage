@@ -40,7 +40,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -49,7 +49,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class Gelectrode extends CardImpl<Gelectrode> {
 
-    private final static FilterCard filter = new FilterCard("an instant or sorcery spell");
+    private final static FilterSpell filter = new FilterSpell("an instant or sorcery spell");
 
     static {
         filter.getCardType().add(CardType.INSTANT);

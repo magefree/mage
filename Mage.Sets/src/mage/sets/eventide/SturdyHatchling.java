@@ -28,7 +28,6 @@
 package mage.sets.eventide;
 
 import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -44,15 +43,15 @@ import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 
 /**
  * @author Loki
  */
 public class SturdyHatchling extends CardImpl<SturdyHatchling> {
 
-    private final static FilterCard filterGreenSpell = new FilterCard("a green spell");
-    private final static FilterCard filterBlueSpell = new FilterCard("a blue spell");
+    private final static FilterSpell filterGreenSpell = new FilterSpell("a green spell");
+    private final static FilterSpell filterBlueSpell = new FilterSpell("a blue spell");
 
     static {
         filterGreenSpell.setUseColor(true);

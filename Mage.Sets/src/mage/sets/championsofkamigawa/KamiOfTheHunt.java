@@ -44,6 +44,8 @@ import mage.filter.common.FilterSpiritOrArcaneCard;
  */
 public class KamiOfTheHunt extends CardImpl<KamiOfTheHunt> {
 
+    private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
+    
     public KamiOfTheHunt(UUID ownerId) {
         super(ownerId, 219, "Kami of the Hunt", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.expansionSetCode = "CHK";
@@ -51,7 +53,7 @@ public class KamiOfTheHunt extends CardImpl<KamiOfTheHunt> {
         this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.addAbility(new SpellCastTriggeredAbility(new BoostSourceEffect(1, 1, Constants.Duration.EndOfTurn), new FilterSpiritOrArcaneCard(), false));
+        this.addAbility(new SpellCastTriggeredAbility(new BoostSourceEffect(1, 1, Constants.Duration.EndOfTurn), filter, false));
     }
 
     public KamiOfTheHunt(final KamiOfTheHunt card) {

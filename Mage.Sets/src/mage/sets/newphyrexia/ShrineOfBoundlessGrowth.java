@@ -45,7 +45,7 @@ import mage.abilities.effects.common.DynamicManaEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 
 /**
  *
@@ -53,7 +53,7 @@ import mage.filter.FilterCard;
  */
 public class ShrineOfBoundlessGrowth extends CardImpl<ShrineOfBoundlessGrowth> {
 
-    private static final FilterCard filter = new FilterCard("a green spell");
+    private static final FilterSpell filter = new FilterSpell("a green spell");
 
     static {
         filter.getColor().setGreen(true);

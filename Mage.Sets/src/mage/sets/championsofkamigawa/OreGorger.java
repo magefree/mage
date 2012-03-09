@@ -44,6 +44,9 @@ import mage.target.common.TargetNonBasicLandPermanent;
  * @author Loki
  */
 public class OreGorger extends CardImpl<OreGorger> {
+
+    private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
+    
     public OreGorger(UUID ownerId) {
         super(ownerId, 182, "Ore Gorger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
         this.expansionSetCode = "CHK";
@@ -51,7 +54,7 @@ public class OreGorger extends CardImpl<OreGorger> {
         this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
-        Ability ability = new SpellCastTriggeredAbility(new DestroyTargetEffect(), new FilterSpiritOrArcaneCard(), true);
+        Ability ability = new SpellCastTriggeredAbility(new DestroyTargetEffect(), filter, true);
         ability.addTarget(new TargetNonBasicLandPermanent());
         this.addAbility(ability);
     }

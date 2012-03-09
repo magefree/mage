@@ -1,9 +1,9 @@
 package mage.filter.common;
 
 import mage.filter.Filter;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 
-public class FilterSpiritOrArcaneCard  extends FilterCard<FilterSpiritOrArcaneCard> {
+public class FilterSpiritOrArcaneCard extends FilterSpell {
 
     public FilterSpiritOrArcaneCard() {
 		this("a Spirit or Arcane spell");

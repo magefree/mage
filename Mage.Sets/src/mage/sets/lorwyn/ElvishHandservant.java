@@ -27,6 +27,7 @@
  */
 package mage.sets.lorwyn;
 
+import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
@@ -35,9 +36,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.Filter;
-import mage.filter.FilterCard;
-
-import java.util.UUID;
+import mage.filter.FilterSpell;
 
 /**
  *
@@ -45,7 +44,7 @@ import java.util.UUID;
  */
 public class ElvishHandservant extends CardImpl<ElvishHandservant> {
 
-    private final static FilterCard filter = new FilterCard("Giant");
+    private final static FilterSpell filter = new FilterSpell("Giant");
 
     static {
         filter.getSubtype().add("Giant");

@@ -45,6 +45,8 @@ import mage.game.permanent.token.Token;
  */
 public class OyobiWhoSplitTheHeavens extends CardImpl<OyobiWhoSplitTheHeavens> {
 
+    private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
+    
     public OyobiWhoSplitTheHeavens(UUID ownerId) {
         super(ownerId, 18, "Oyobi, Who Split the Heavens", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{W}");
         this.expansionSetCode = "BOK";
@@ -55,7 +57,7 @@ public class OyobiWhoSplitTheHeavens extends CardImpl<OyobiWhoSplitTheHeavens> {
         this.toughness = new MageInt(6);
         this.addAbility(FlyingAbility.getInstance());
         // Whenever you cast a Spirit or Arcane spell, put a 3/3 white Spirit creature token with flying onto the battlefield.
-        this.addAbility(new SpellCastTriggeredAbility(new CreateTokenEffect(new AnotherSpiritToken()), new FilterSpiritOrArcaneCard(), false));
+        this.addAbility(new SpellCastTriggeredAbility(new CreateTokenEffect(new AnotherSpiritToken()), filter, false));
     }
 
     public OyobiWhoSplitTheHeavens(final OyobiWhoSplitTheHeavens card) {

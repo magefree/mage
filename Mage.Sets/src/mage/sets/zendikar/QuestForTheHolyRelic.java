@@ -44,7 +44,9 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
+import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -59,6 +61,12 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class QuestForTheHolyRelic extends CardImpl<QuestForTheHolyRelic> {
 
+    private static final FilterSpell filter = new FilterSpell("a creature spell");
+    static {
+        filter.getCardType().add(CardType.CREATURE);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
+    }
+    
     public QuestForTheHolyRelic(UUID ownerId) {
         super(ownerId, 33, "Quest for the Holy Relic", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");
         this.expansionSetCode = "ZEN";
@@ -66,7 +74,7 @@ public class QuestForTheHolyRelic extends CardImpl<QuestForTheHolyRelic> {
         this.color.setWhite(true);
 
         // Whenever you cast a creature spell, you may put a quest counter on Quest for the Holy Relic.
-        this.addAbility(new SpellCastTriggeredAbility(new AddCountersSourceEffect(CounterType.QUEST.createInstance()), new FilterCreatureCard(), true));
+        this.addAbility(new SpellCastTriggeredAbility(new AddCountersSourceEffect(CounterType.QUEST.createInstance()), filter, true));
         // Remove five quest counters from Quest for the Holy Relic and sacrifice it: Search your library for an Equipment card, put it onto the battlefield, and attach it to a creature you control. Then shuffle your library.
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new QuestForTheHolyRelicEffect(), new RemoveCountersSourceCost(CounterType.QUEST.createInstance(5)));
         ability.addCost(new SacrificeSourceCost());

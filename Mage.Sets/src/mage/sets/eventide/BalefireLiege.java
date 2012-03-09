@@ -28,7 +28,6 @@
 package mage.sets.eventide;
 
 import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -41,7 +40,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPlayer;
 
@@ -52,8 +51,8 @@ public class BalefireLiege extends CardImpl<BalefireLiege> {
 
     private final static FilterCreaturePermanent filterRedCreature = new FilterCreaturePermanent("red creatures");
     private final static FilterCreaturePermanent filterWhiteCreature = new FilterCreaturePermanent("white creatures");
-    private final static FilterCard filterRedSpell = new FilterCard("a red spell");
-    private final static FilterCard filterWhiteSpell = new FilterCard("a white spell");
+    private final static FilterSpell filterRedSpell = new FilterSpell("a red spell");
+    private final static FilterSpell filterWhiteSpell = new FilterSpell("a white spell");
 
     static {
         filterRedCreature.setUseColor(true);

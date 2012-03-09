@@ -38,7 +38,7 @@ import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -48,9 +48,9 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class TiborAndLumia extends CardImpl<TiborAndLumia> {
 
-    private final static FilterCard filterBlue = new FilterCard("a blue spell");
+    private final static FilterSpell filterBlue = new FilterSpell("a blue spell");
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature without flying");
-    private final static FilterCard filterRed = new FilterCard("a red spell");
+    private final static FilterSpell filterRed = new FilterSpell("a red spell");
 
     static {
         filterBlue.setUseColor(true);
@@ -60,13 +60,7 @@ public class TiborAndLumia extends CardImpl<TiborAndLumia> {
         filterRed.setUseColor(true);
         filterRed.getColor().setRed(true);
     }
-
-
-        static {
-
-        }
-
-
+    
     public TiborAndLumia(UUID ownerId) {
         super(ownerId, 135, "Tibor and Lumia", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{R}");
         this.expansionSetCode = "GPT";

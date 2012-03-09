@@ -31,6 +31,7 @@ import mage.Constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -42,8 +43,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class SpellCastTriggeredAbility extends TriggeredAbilityImpl<SpellCastTriggeredAbility> {
 
-    private static final FilterCard spellCard = new FilterCard("a spell");
-    protected FilterCard filter;
+    private static final FilterSpell spellCard = new FilterSpell("a spell");
+    protected FilterSpell filter;
 
 	/**
 	 * If true, the source that triggered the ability will be set as target to effect.
@@ -55,11 +56,11 @@ public class SpellCastTriggeredAbility extends TriggeredAbilityImpl<SpellCastTri
         this.filter = spellCard;
     }
 
-    public SpellCastTriggeredAbility(Effect effect, FilterCard filter, boolean optional) {
+    public SpellCastTriggeredAbility(Effect effect, FilterSpell filter, boolean optional) {
         this(effect, filter, optional, false);
     }
 
-	public SpellCastTriggeredAbility(Effect effect, FilterCard filter, boolean optional, boolean rememberSource) {
+	public SpellCastTriggeredAbility(Effect effect, FilterSpell filter, boolean optional, boolean rememberSource) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
 		this.rememberSource = rememberSource;

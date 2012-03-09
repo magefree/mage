@@ -44,7 +44,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.game.permanent.token.MyrToken;
 
 /**
@@ -53,7 +53,7 @@ import mage.game.permanent.token.MyrToken;
  */
 public class ShrineOfLoyalLegions extends CardImpl<ShrineOfLoyalLegions> {
 
-    private static final FilterCard filter = new FilterCard("a white spell");
+    private static final FilterSpell filter = new FilterSpell("a white spell");
 
     static {
         filter.getColor().setWhite(true);

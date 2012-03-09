@@ -36,7 +36,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.Filter;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 
 /**
  *
@@ -44,7 +44,7 @@ import mage.filter.FilterCard;
  */
 public class QuirionDryad extends CardImpl<QuirionDryad> {
 
-    private final static FilterCard filter = new FilterCard("white, blue, black, or red spell");
+    private final static FilterSpell filter = new FilterSpell("white, blue, black, or red spell");
 
     static {
         filter.setUseColor(true);

@@ -37,14 +37,14 @@ import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 
 /**
  * @author Loki
  */
 public class WeeDragonauts extends CardImpl<WeeDragonauts> {
 
-    private final static FilterCard filter = new FilterCard("instant or sorcery spell");
+    private final static FilterSpell filter = new FilterSpell("instant or sorcery spell");
 
     static {
         filter.getCardType().add(CardType.INSTANT);

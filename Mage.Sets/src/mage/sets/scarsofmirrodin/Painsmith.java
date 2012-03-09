@@ -29,7 +29,6 @@
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
@@ -39,7 +38,8 @@ import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterArtifactCard;
+import mage.filter.Filter;
+import mage.filter.FilterSpell;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -48,7 +48,11 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Painsmith extends CardImpl<Painsmith> {
 
-    private static final FilterArtifactCard filter = new FilterArtifactCard("an artifact spell");
+    private static final FilterSpell filter = new FilterSpell("an artifact spell");
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
+    }
 
     public Painsmith (UUID ownerId) {
         super(ownerId, 74, "Painsmith", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");

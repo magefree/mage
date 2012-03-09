@@ -46,6 +46,8 @@ import mage.target.TargetPlayer;
  */
 public class KemuriOnna extends CardImpl<KemuriOnna> {
 
+    private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
+    
     public KemuriOnna(UUID ownerId) {
         super(ownerId, 76, "Kemuri-Onna", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");
         this.expansionSetCode = "SOK";
@@ -59,7 +61,7 @@ public class KemuriOnna extends CardImpl<KemuriOnna> {
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         // Whenever you cast a Spirit or Arcane spell, you may return Kemuri-Onna to its owner's hand.
-        this.addAbility(new SpellCastTriggeredAbility(new ReturnToHandSourceEffect(), new FilterSpiritOrArcaneCard(), true));
+        this.addAbility(new SpellCastTriggeredAbility(new ReturnToHandSourceEffect(), filter, true));
     }
 
     public KemuriOnna(final KemuriOnna card) {

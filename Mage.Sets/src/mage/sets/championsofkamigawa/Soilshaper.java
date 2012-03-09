@@ -46,6 +46,9 @@ import mage.target.common.TargetLandPermanent;
  * @author Loki
  */
 public class Soilshaper extends CardImpl<Soilshaper> {
+
+    private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
+    
     public Soilshaper(UUID ownerId) {
         super(ownerId, 243, "Soilshaper", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.expansionSetCode = "CHK";
@@ -53,7 +56,7 @@ public class Soilshaper extends CardImpl<Soilshaper> {
         this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        Ability ability = new SpellCastTriggeredAbility(new BecomesCreatureTargetEffect(new SoilshaperToken(), "land", Duration.EndOfTurn), new FilterSpiritOrArcaneCard(), false);
+        Ability ability = new SpellCastTriggeredAbility(new BecomesCreatureTargetEffect(new SoilshaperToken(), "land", Duration.EndOfTurn), filter, false);
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
     }

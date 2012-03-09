@@ -28,7 +28,6 @@
 package mage.sets.eventide;
 
 import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -42,7 +41,7 @@ import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -52,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class MerrowLevitator extends CardImpl<MerrowLevitator> {
 
 
-    private final static FilterCard filterBlueSpell = new FilterCard("a blue spell");
+    private final static FilterSpell filterBlueSpell = new FilterSpell("a blue spell");
 
     static {
         filterBlueSpell.setUseColor(true);

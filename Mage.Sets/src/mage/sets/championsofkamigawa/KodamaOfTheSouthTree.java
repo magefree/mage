@@ -47,6 +47,9 @@ import mage.filter.common.FilterSpiritOrArcaneCard;
  * @author Loki
  */
 public class KodamaOfTheSouthTree extends CardImpl<KodamaOfTheSouthTree> {
+
+    private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
+    
     public KodamaOfTheSouthTree(UUID ownerId) {
         super(ownerId, 223, "Kodama of the South Tree", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
         this.expansionSetCode = "CHK";
@@ -55,7 +58,7 @@ public class KodamaOfTheSouthTree extends CardImpl<KodamaOfTheSouthTree> {
         this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
-        Ability ability = new SpellCastTriggeredAbility(new BoostControlledEffect(1, 1, Constants.Duration.EndOfTurn, new FilterCreaturePermanent(), true), new FilterSpiritOrArcaneCard(), false);
+        Ability ability = new SpellCastTriggeredAbility(new BoostControlledEffect(1, 1, Constants.Duration.EndOfTurn, new FilterCreaturePermanent(), true), filter, false);
         ability.addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Constants.Duration.EndOfTurn, new FilterCreaturePermanent(), true));
         this.addAbility(ability);
     }

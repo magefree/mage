@@ -34,7 +34,7 @@ import mage.Constants.Rarity;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.game.permanent.token.AngelToken;
 
 /**
@@ -43,7 +43,7 @@ import mage.game.permanent.token.AngelToken;
  */
 public class SigilOfTheEmptyThrone extends CardImpl<SigilOfTheEmptyThrone> {
 
-    private static final FilterCard filter = new FilterCard("an enchantment spell");
+    private static final FilterSpell filter = new FilterSpell("an enchantment spell");
 
     static {
         filter.getCardType().add(CardType.ENCHANTMENT);

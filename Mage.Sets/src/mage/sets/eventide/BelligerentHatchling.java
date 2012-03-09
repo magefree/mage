@@ -28,7 +28,6 @@
 package mage.sets.eventide;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
@@ -40,15 +39,15 @@ import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 
 /**
  * @author Loki
  */
 public class BelligerentHatchling extends CardImpl<BelligerentHatchling> {
 
-    private final static FilterCard filterRedSpell = new FilterCard("a red spell");
-    private final static FilterCard filterWhiteSpell = new FilterCard("a white spell");
+    private final static FilterSpell filterRedSpell = new FilterSpell("a red spell");
+    private final static FilterSpell filterWhiteSpell = new FilterSpell("a white spell");
 
     static {
         filterRedSpell.setUseColor(true);

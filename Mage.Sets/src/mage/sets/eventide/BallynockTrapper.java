@@ -28,7 +28,6 @@
 package mage.sets.eventide;
 
 import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -41,7 +40,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -49,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class BallynockTrapper extends CardImpl<BallynockTrapper> {
 
-    private final static FilterCard filterWhiteSpell = new FilterCard("a white spell");
+    private final static FilterSpell filterWhiteSpell = new FilterSpell("a white spell");
 
     static {
         filterWhiteSpell.setUseColor(true);

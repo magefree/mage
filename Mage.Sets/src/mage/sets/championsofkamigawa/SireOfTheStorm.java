@@ -43,6 +43,9 @@ import mage.filter.common.FilterSpiritOrArcaneCard;
  * @author Loki
  */
 public class SireOfTheStorm extends CardImpl<SireOfTheStorm> {
+
+    private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
+    
     public SireOfTheStorm(UUID ownerId) {
         super(ownerId, 85, "Sire of the Storm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
         this.expansionSetCode = "CHK";
@@ -52,7 +55,7 @@ public class SireOfTheStorm extends CardImpl<SireOfTheStorm> {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new SpellCastTriggeredAbility(new DrawCardControllerEffect(1), new FilterSpiritOrArcaneCard(), true));
+        this.addAbility(new SpellCastTriggeredAbility(new DrawCardControllerEffect(1), filter, true));
     }
 
     public SireOfTheStorm(final SireOfTheStorm card) {

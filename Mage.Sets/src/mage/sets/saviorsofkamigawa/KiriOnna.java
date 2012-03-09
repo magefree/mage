@@ -46,6 +46,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class KiriOnna extends CardImpl<KiriOnna> {
 
+    private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
+    
     public KiriOnna(UUID ownerId) {
         super(ownerId, 43, "Kiri-Onna", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
         this.expansionSetCode = "SOK";
@@ -59,7 +61,7 @@ public class KiriOnna extends CardImpl<KiriOnna> {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         // Whenever you cast a Spirit or Arcane spell, you may return Kiri-Onna to its owner's hand.
-        this.addAbility(new SpellCastTriggeredAbility(new ReturnToHandSourceEffect(), new FilterSpiritOrArcaneCard(), true));
+        this.addAbility(new SpellCastTriggeredAbility(new ReturnToHandSourceEffect(), filter, true));
     }
 
     public KiriOnna(final KiriOnna card) {

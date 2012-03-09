@@ -37,7 +37,7 @@ import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 
 /**
  *
@@ -45,8 +45,8 @@ import mage.filter.FilterCard;
  */
 public class SafeholdDuo extends CardImpl<SafeholdDuo> {
 
-    private static final FilterCard whiteFilter = new FilterCard("a white spell");
-    private static final FilterCard greenFilter = new FilterCard("a green spell");
+    private static final FilterSpell whiteFilter = new FilterSpell("a white spell");
+    private static final FilterSpell greenFilter = new FilterSpell("a green spell");
 
     static {
         whiteFilter.getColor().setWhite(true);

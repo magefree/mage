@@ -37,7 +37,7 @@ import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 
 /**
  *
@@ -45,8 +45,8 @@ import mage.filter.FilterCard;
  */
 public class ThistledownDuo extends CardImpl<ThistledownDuo> {
 
-    private static final FilterCard whiteFilter = new FilterCard("a white spell");
-    private static final FilterCard blueFilter = new FilterCard("a blue spell");
+    private static final FilterSpell whiteFilter = new FilterSpell("a white spell");
+    private static final FilterSpell blueFilter = new FilterSpell("a blue spell");
 
     static {
         whiteFilter.getColor().setWhite(true);
