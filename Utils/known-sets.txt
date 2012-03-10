@@ -1,3 +1,6 @@
+Fifth Edition|fifthedition|
+Eighth Edition|eighthedition|
+Ninth Edition|ninthedition|
 Tenth Edition|tenth|
 Magic 2010|magic2010|
 Magic 2011|magic2011|
@@ -9,6 +12,7 @@ Urza's Saga|urzassaga|
 Invasion|invasion|
 Planeshift|planeshift|
 Apocalypse|apocalypse|
+Onslaught|onslaught|
 Mirrodin|mirrodin|
 Darksteel|darksteel|
 Fifth Dawn|fifthdawn|
