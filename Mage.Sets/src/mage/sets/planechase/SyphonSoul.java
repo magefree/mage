@@ -28,9 +28,8 @@
 package mage.sets.planechase;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -47,6 +46,8 @@ public class SyphonSoul extends CardImpl<SyphonSoul> {
         super(ownerId, 43, "Syphon Soul", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
         this.expansionSetCode = "HOP";
         this.color.setBlack(true);
+
+        // Syphon Soul deals 2 damage to each other player. You gain life equal to the damage dealt this way.
         this.getSpellAbility().addEffect(new SyphonSoulEffect());
     }
 
@@ -62,7 +63,7 @@ public class SyphonSoul extends CardImpl<SyphonSoul> {
 
 class SyphonSoulEffect extends OneShotEffect<SyphonSoulEffect> {
     public SyphonSoulEffect() {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
         staticText = "{this} deals 2 damage to each other player. You gain life equal to the damage dealt this way";
     }
 
@@ -72,12 +73,15 @@ class SyphonSoulEffect extends OneShotEffect<SyphonSoulEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int loseLife = 0;
-        for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-            loseLife += game.getPlayer(opponentId).loseLife(2, game);
+        int damageDealt = 0;
+        for (UUID playerId : game.getPlayerList()) {
+            if (!playerId.equals(source.getControllerId())) {
+                damageDealt += game.getPlayer(playerId).damage(2, source.getSourceId(), game, false, true);
+            }
         }
-        if (loseLife > 0)
-            game.getPlayer(source.getControllerId()).gainLife(loseLife, game);
+        if (damageDealt > 0) {
+            game.getPlayer(source.getControllerId()).gainLife(damageDealt, game);
+        }
         return true;
     }
 
