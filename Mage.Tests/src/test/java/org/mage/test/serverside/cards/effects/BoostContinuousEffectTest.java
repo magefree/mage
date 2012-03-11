@@ -26,13 +26,13 @@ public class BoostContinuousEffectTest extends CardTestBase {
     
     @Test
     public void testHonorOfThePoor2() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Honor of the Pure");
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Honor of the Pure", 2);
         addCard(Constants.Zone.BATTLEFIELD, playerA, "White Knight");
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Black Knight");
 
         setStopAt(1, PhaseStep.CLEANUP);
         execute();
-        assertPowerToughness(playerA, "White Knight", 3, 3, Filter.ComparisonScope.Any);
+        assertPowerToughness(playerA, "White Knight", 4, 4, Filter.ComparisonScope.Any);
         assertPowerToughness(playerA, "Black Knight", 2, 2, Filter.ComparisonScope.Any);
     }
 
