@@ -65,7 +65,7 @@ public class GetEmblemEffect extends OneShotEffect<GetEmblemEffect> {
 		newEmblem.setControllerId(source.getControllerId());
 		game.getState().getCommand().add(newEmblem);
         for (Ability ability: newEmblem.getAbilities()) {
-            game.getState().addAbility(ability);
+            ability.resolve(game);
         }
 		return true;
 	}
