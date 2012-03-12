@@ -43,11 +43,11 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.Filter;
+import mage.filter.common.FilterNonTokenPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentToken;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 
 /**
  *
@@ -55,6 +55,13 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class PhyrexianIngester extends CardImpl<PhyrexianIngester> {
 
+    private static final FilterNonTokenPermanent filter = new FilterNonTokenPermanent("nontoken creature");
+    
+    static {
+        filter.getCardType().add(CardType.CREATURE);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
+    }
+    
     public PhyrexianIngester(UUID ownerId) {
         super(ownerId, 41, "Phyrexian Ingester", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{U}");
         this.expansionSetCode = "NPH";
@@ -66,22 +73,7 @@ public class PhyrexianIngester extends CardImpl<PhyrexianIngester> {
 
         // Imprint - When Phyrexian Ingester enters the battlefield, you may exile target nontoken creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(new PhyrexianIngesterImprintEffect(), true);
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature") {
-
-            @Override
-            public boolean match(Permanent permanent) {
-                if (!super.match(permanent)) {
-                    return notFilter;
-                }
-
-                if (permanent instanceof PermanentToken) {
-                    return notFilter;
-                }
-
-                return !notFilter;
-            }
-        };
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
         // Phyrexian Ingester gets +X/+Y, where X is the exiled creature card's power and Y is its toughness.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhyrexianIngesterBoostEffect()));
