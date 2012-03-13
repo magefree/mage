@@ -391,6 +391,17 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
         Assert.assertEquals("(Battlefield) Counter counts are not equal (" + cardName + ":" + type + ")", count, found.getCounters().getCount(type));
 	}
+
+    /**
+	 * Assert counter count on a player
+	 *
+	 * @param player    The player whos counters should be counted.
+	 * @param type      Type of the counter that should be counted.
+     * @param count     Expected count.
+	 */
+	public void assertCounterCount(Player player, CounterType type, int count) throws AssertionError {
+        Assert.assertEquals("(Battlefield) Counter counts are not equal (" + player.getName() + ":" + type + ")", count, player.getCounters().getCount(type));
+	}
     
 	/**
 	 * Assert whether a permanent is a specified type or not

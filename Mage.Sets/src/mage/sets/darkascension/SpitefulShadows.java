@@ -135,7 +135,9 @@ class SpitefulShadowsEffect extends OneShotEffect<SpitefulShadowsEffect> {
         Integer damageAmount = (Integer) this.getValue("damageAmount");
         UUID targetId = (UUID) this.getValue("targetId");
         if (damageAmount != null && targetId != null) {
-            Permanent permanent = (Permanent) game.getLastKnownInformation(targetId, Zone.BATTLEFIELD);
+            Permanent permanent = game.getPermanent(targetId);
+            if (permanent == null)
+                permanent = (Permanent) game.getLastKnownInformation(targetId, Zone.BATTLEFIELD);
             if (permanent != null) {
                 Player player = game.getPlayer(permanent.getControllerId());
                 if (player != null) {
