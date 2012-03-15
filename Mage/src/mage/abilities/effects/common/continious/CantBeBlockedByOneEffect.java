@@ -45,7 +45,11 @@ public class CantBeBlockedByOneEffect extends ContinuousEffectImpl<CantBeBlocked
     protected int amount;
 
     public CantBeBlockedByOneEffect(int amount) {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        this(amount, Duration.WhileOnBattlefield);
+    }
+    
+    public CantBeBlockedByOneEffect(int amount, Duration duration) {
+        super(duration, Outcome.Benefit);
         this.amount = amount;
         staticText = "{this} can't be blocked except by " + amount + " or more creatures";
     }

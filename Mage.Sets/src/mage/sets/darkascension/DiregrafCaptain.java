@@ -92,6 +92,14 @@ public class DiregrafCaptain extends CardImpl<DiregrafCaptain> {
 }
 
 class DiregrafCaptainTriggeredAbility extends TriggeredAbilityImpl<DiregrafCaptainTriggeredAbility> {
+    
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Zombie");
+
+    static {
+        filter.getSubtype().add("Zombie");
+        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+    }
+    
     public DiregrafCaptainTriggeredAbility() {
         super(Constants.Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), false);
         this.addTarget(new TargetOpponent());
@@ -107,7 +115,7 @@ class DiregrafCaptainTriggeredAbility extends TriggeredAbilityImpl<DiregrafCapta
             ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
             if (zEvent.getFromZone() == Constants.Zone.BATTLEFIELD && zEvent.getToZone() == Constants.Zone.GRAVEYARD) {
                 Permanent p = (Permanent) game.getLastKnownInformation(event.getTargetId(), Constants.Zone.BATTLEFIELD);
-                if (p != null && p.getControllerId().equals(this.controllerId)) {
+                if (p != null && p.getControllerId().equals(this.controllerId) && filter.match(p)) {
                     return true;
                 }
             }
