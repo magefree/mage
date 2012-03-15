@@ -29,24 +29,14 @@
 package mage.abilities.effects;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
-import java.util.UUID;
+import java.util.*;
 import mage.Constants.AsThoughEffectType;
 import mage.Constants.Duration;
-import mage.Constants.EffectType;
 import mage.Constants.Layer;
 import mage.Constants.SubLayer;
-import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
-import mage.cards.Card;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -60,16 +50,13 @@ import mage.players.Player;
 public class ContinuousEffects implements Serializable {
 
 	//transient Continuous effects
-	private final ArrayList<ContinuousEffect> layeredEffects = new ArrayList<ContinuousEffect>();
-	private final ArrayList<ReplacementEffect> replacementEffects = new ArrayList<ReplacementEffect>();
-	private final ArrayList<PreventionEffect> preventionEffects = new ArrayList<PreventionEffect>();
-	private final ArrayList<RequirementEffect> requirementEffects = new ArrayList<RequirementEffect>();
-	private final ArrayList<RestrictionEffect> restrictionEffects = new ArrayList<RestrictionEffect>();
-	private final ArrayList<AsThoughEffect> asThoughEffects = new ArrayList<AsThoughEffect>();
-	private final ArrayList<CostModificationEffect> costModificationEffects = new ArrayList<CostModificationEffect>();
-
-	//map Abilities to Continuous effects
-	private final Map<UUID, Ability> abilityMap = new HashMap<UUID, Ability>();
+	private ContinuousEffectsList<ContinuousEffect> layeredEffects = new ContinuousEffectsList<ContinuousEffect>();
+	private ContinuousEffectsList<ReplacementEffect> replacementEffects = new ContinuousEffectsList<ReplacementEffect>();
+	private ContinuousEffectsList<PreventionEffect> preventionEffects = new ContinuousEffectsList<PreventionEffect>();
+	private ContinuousEffectsList<RequirementEffect> requirementEffects = new ContinuousEffectsList<RequirementEffect>();
+	private ContinuousEffectsList<RestrictionEffect> restrictionEffects = new ContinuousEffectsList<RestrictionEffect>();
+	private ContinuousEffectsList<AsThoughEffect> asThoughEffects = new ContinuousEffectsList<AsThoughEffect>();
+	private ContinuousEffectsList<CostModificationEffect> costModificationEffects = new ContinuousEffectsList<CostModificationEffect>();
 
 	private final ApplyCountersEffect applyCounters;
 	private final PlaneswalkerRedirectionEffect planeswalkerRedirectionEffect;
@@ -82,37 +69,13 @@ public class ContinuousEffects implements Serializable {
 	public ContinuousEffects(final ContinuousEffects effect) {
 		this.applyCounters = effect.applyCounters.copy();
 		this.planeswalkerRedirectionEffect = effect.planeswalkerRedirectionEffect.copy();
-        layeredEffects.ensureCapacity(effect.layeredEffects.size());
-		for (ContinuousEffect entry: effect.layeredEffects) {
-			layeredEffects.add((ContinuousEffect) entry.copy());
-		}
-        replacementEffects.ensureCapacity(effect.replacementEffects.size());
-		for (ReplacementEffect entry: effect.replacementEffects) {
-			replacementEffects.add((ReplacementEffect)entry.copy());
-		}
-        preventionEffects.ensureCapacity(effect.preventionEffects.size());
-		for (PreventionEffect entry: effect.preventionEffects) {
-			preventionEffects.add((PreventionEffect)entry.copy());
-		}
-        requirementEffects.ensureCapacity(effect.requirementEffects.size());
-		for (RequirementEffect entry: effect.requirementEffects) {
-			requirementEffects.add((RequirementEffect)entry.copy());
-		}
-        restrictionEffects.ensureCapacity(effect.restrictionEffects.size());
-		for (RestrictionEffect entry: effect.restrictionEffects) {
-			restrictionEffects.add((RestrictionEffect)entry.copy());
-		}
-        asThoughEffects.ensureCapacity(effect.asThoughEffects.size());
-		for (AsThoughEffect entry: effect.asThoughEffects) {
-			asThoughEffects.add((AsThoughEffect)entry.copy());
-		}
-        costModificationEffects.ensureCapacity(effect.costModificationEffects.size());
-		for ( CostModificationEffect entry : effect.costModificationEffects ) {
-			costModificationEffects.add(entry);
-		}
-		for (Entry<UUID, Ability> entry: effect.abilityMap.entrySet()) {
-			abilityMap.put(entry.getKey(), entry.getValue().copy());
-		}
+        layeredEffects = effect.layeredEffects.copy();
+        replacementEffects = effect.replacementEffects.copy();
+        preventionEffects = effect.preventionEffects.copy();
+        requirementEffects = effect.requirementEffects.copy();
+        restrictionEffects = effect.restrictionEffects.copy();
+        asThoughEffects = effect.asThoughEffects.copy();
+        costModificationEffects = effect.costModificationEffects.copy();
 	}
 
 	public ContinuousEffects copy() {
@@ -128,92 +91,41 @@ public class ContinuousEffects implements Serializable {
 	}
 
 	public Ability getAbility(UUID effectId) {
-		return abilityMap.get(effectId);
+		Ability ability = layeredEffects.getAbility(effectId);
+        if (ability == null)
+            ability = replacementEffects.getAbility(effectId);
+        if (ability == null)
+            ability = preventionEffects.getAbility(effectId);
+        if (ability == null)
+            ability = requirementEffects.getAbility(effectId);
+        if (ability == null)
+            ability = restrictionEffects.getAbility(effectId);
+        if (ability == null)
+            ability = asThoughEffects.getAbility(effectId);
+        if (ability == null)
+            ability = costModificationEffects.getAbility(effectId);
+        return ability;
 	}
 
 	public void removeEndOfTurnEffects() {
-		for (Iterator<ContinuousEffect> i = layeredEffects.iterator(); i.hasNext();) {
-			ContinuousEffect entry = i.next();
-			if (entry.getDuration() == Duration.EndOfTurn)
-				i.remove();
-		}
-		for (Iterator<ReplacementEffect> i = replacementEffects.iterator(); i.hasNext();) {
-			ContinuousEffect entry = i.next();
-			if (entry.getDuration() == Duration.EndOfTurn)
-				i.remove();
-		}
-		for (Iterator<PreventionEffect> i = preventionEffects.iterator(); i.hasNext();) {
-			ContinuousEffect entry = i.next();
-			if (entry.getDuration() == Duration.EndOfTurn)
-				i.remove();
-		}
-		for (Iterator<RequirementEffect> i = requirementEffects.iterator(); i.hasNext();) {
-			ContinuousEffect entry = i.next();
-			if (entry.getDuration() == Duration.EndOfTurn)
-				i.remove();
-		}
-		for (Iterator<RestrictionEffect> i = restrictionEffects.iterator(); i.hasNext();) {
-			ContinuousEffect entry = i.next();
-			if (entry.getDuration() == Duration.EndOfTurn)
-				i.remove();
-		}
-		for (Iterator<AsThoughEffect> i = asThoughEffects.iterator(); i.hasNext();) {
-			ContinuousEffect entry = i.next();
-			if (entry.getDuration() == Duration.EndOfTurn)
-				i.remove();
-		}
-		for (Iterator<CostModificationEffect> i = costModificationEffects.iterator(); i.hasNext();) {
-			ContinuousEffect entry = i.next();
-			if (entry.getDuration() == Duration.EndOfTurn)
-				i.remove();
-		}
+        layeredEffects.removeEndOfTurnEffects();
+        replacementEffects.removeEndOfTurnEffects();
+		preventionEffects.removeEndOfTurnEffects();
+		requirementEffects.removeEndOfTurnEffects();
+		restrictionEffects.removeEndOfTurnEffects();
+		asThoughEffects.removeEndOfTurnEffects();
+		costModificationEffects.removeEndOfTurnEffects();
 	}
 
 	public void removeInactiveEffects(Game game) {
-		for (Iterator<ContinuousEffect> i = layeredEffects.iterator(); i.hasNext();) {
-			if (isInactive(i.next(), game))
-				i.remove();
-		}
-		for (Iterator<ReplacementEffect> i = replacementEffects.iterator(); i.hasNext();) {
-			if (isInactive(i.next(), game))
-				i.remove();
-		}
-		for (Iterator<PreventionEffect> i = preventionEffects.iterator(); i.hasNext();) {
-			if (isInactive(i.next(), game))
-				i.remove();
-		}
-		for (Iterator<RequirementEffect> i = requirementEffects.iterator(); i.hasNext();) {
-			if (isInactive(i.next(), game))
-				i.remove();
-		}
-		for (Iterator<RestrictionEffect> i = restrictionEffects.iterator(); i.hasNext();) {
-			if (isInactive(i.next(), game))
-				i.remove();
-		}
-		for (Iterator<AsThoughEffect> i = asThoughEffects.iterator(); i.hasNext();) {
-			if (isInactive(i.next(), game))
-				i.remove();
-		}
-		for (Iterator<CostModificationEffect> i = costModificationEffects.iterator(); i.hasNext();) {
-			if (isInactive(i.next(), game))
-				i.remove();
-		}
-	}
+        layeredEffects.removeInactiveEffects(game);
+        replacementEffects.removeInactiveEffects(game);
+		preventionEffects.removeInactiveEffects(game);
+		requirementEffects.removeInactiveEffects(game);
+		restrictionEffects.removeInactiveEffects(game);
+		asThoughEffects.removeInactiveEffects(game);
+		costModificationEffects.removeInactiveEffects(game);
 
-	private boolean isInactive(ContinuousEffect effect, Game game) {
-        Ability ability = abilityMap.get(effect.getId());
-        if (ability == null)
-            return true;
-		switch(effect.getDuration()) {
-			case WhileOnBattlefield:
-                if (game.getObject(ability.getSourceId()) == null)
-                    return (true);
-			case OneUse:
-				return effect.isUsed();
-			case Custom:
-				return effect.isInactive(abilityMap.get(effect.getId()), game);
-		}
-		return false;
 	}
 
 	private List<ContinuousEffect> getLayeredEffects(Game game) {
@@ -223,7 +135,7 @@ public class ContinuousEffects implements Serializable {
                 case WhileOnBattlefield:
                 case WhileOnStack:
                 case WhileInGraveyard:
-                    Ability ability = abilityMap.get(effect.getId());
+                    Ability ability = layeredEffects.getAbility(effect.getId());
                     if (ability.isInUseableZone(game))
                         layerEffects.add(effect);
                     break;
@@ -247,7 +159,7 @@ public class ContinuousEffects implements Serializable {
 	public List<RequirementEffect> getApplicableRequirementEffects(Permanent permanent, Game game) {
 		List<RequirementEffect> effects = new ArrayList<RequirementEffect>();
 		for (RequirementEffect effect: requirementEffects) {
-            Ability ability = abilityMap.get(effect.getId());
+            Ability ability = requirementEffects.getAbility(effect.getId());
             if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game)) {
                 if (effect.applies(permanent, ability, game))
                     effects.add(effect);
@@ -259,7 +171,7 @@ public class ContinuousEffects implements Serializable {
 	public List<RestrictionEffect> getApplicableRestrictionEffects(Permanent permanent, Game game) {
 		List<RestrictionEffect> effects = new ArrayList<RestrictionEffect>();
 		for (RestrictionEffect effect: restrictionEffects) {
-            Ability ability = abilityMap.get(effect.getId());
+            Ability ability = restrictionEffects.getAbility(effect.getId());
             if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game)) {
                 if (effect.applies(permanent, ability, game))
                     effects.add(effect);
@@ -280,7 +192,7 @@ public class ContinuousEffects implements Serializable {
 			replaceEffects.add(planeswalkerRedirectionEffect);
 		//get all applicable transient Replacement effects
 		for (ReplacementEffect effect: replacementEffects) {
-            Ability ability = abilityMap.get(effect.getId());
+            Ability ability = replacementEffects.getAbility(effect.getId());
             if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game)) {
                 if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
                     if (effect.applies(event, ability, game)) {
@@ -290,7 +202,7 @@ public class ContinuousEffects implements Serializable {
             }
 		}
 		for (PreventionEffect effect: preventionEffects) {
-            Ability ability = abilityMap.get(effect.getId());
+            Ability ability = preventionEffects.getAbility(effect.getId());
             if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game)) {
                 if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
                     if (effect.applies(event, ability, game)) {
@@ -307,7 +219,7 @@ public class ContinuousEffects implements Serializable {
 			AsThoughEffect effect = entry;
 			if (effect.getAsThoughEffectType() == type) {
 				if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
-					if (effect.applies(objectId, abilityMap.get(entry.getId()), game)) {
+					if (effect.applies(objectId, asThoughEffects.getAbility(entry.getId()), game)) {
 						return true;
 					}
 				}
@@ -317,7 +229,7 @@ public class ContinuousEffects implements Serializable {
 	}
 
 	/**
-	 * Inspects all {@link Permanent permanent's} {@link Ability abilities} on the battlefied
+	 * Inspects all {@link Permanent permanent's} {@link Ability abilities} on the battlefield
 	 * for {@link CostModificationEffect cost modification effects} and applies them if necessary.
 	 *
 	 * @param abilityToModify
@@ -326,8 +238,8 @@ public class ContinuousEffects implements Serializable {
 	 */
 	public void costModification ( Ability abilityToModify, Game game ) {
 		for ( CostModificationEffect effect : costModificationEffects ) {
-			if ( effect.applies(abilityToModify, abilityMap.get(effect.getId()), game) ) {
-				effect.apply(game, abilityMap.get(effect.getId()), abilityToModify);
+			if ( effect.applies(abilityToModify, costModificationEffects.getAbility(effect.getId()), game) ) {
+				effect.apply(game, costModificationEffects.getAbility(effect.getId()), abilityToModify);
 			}
 		}
 	}
@@ -354,7 +266,7 @@ public class ContinuousEffects implements Serializable {
                 index = player.chooseEffect(rEffects, game);
             }
             ReplacementEffect rEffect = rEffects.get(index);
-            caught = rEffect.replaceEvent(event, abilityMap.get(rEffect.getId()), game);
+            caught = rEffect.replaceEvent(event, this.getAbility(rEffect.getId()), game);
             if (caught)
                 break;
             consumed.add(rEffect.getId());
@@ -368,47 +280,47 @@ public class ContinuousEffects implements Serializable {
 		List<ContinuousEffect> layerEffects = getLayeredEffects(game);
 		List<ContinuousEffect> layer = filterLayeredEffects(layerEffects, Layer.CopyEffects_1);
 		for (ContinuousEffect effect: layer) {
-			effect.apply(Layer.CopyEffects_1, SubLayer.NA, abilityMap.get(effect.getId()), game);
+			effect.apply(Layer.CopyEffects_1, SubLayer.NA, layeredEffects.getAbility(effect.getId()), game);
 		}
 		layer = filterLayeredEffects(layerEffects, Layer.ControlChangingEffects_2);
 		for (ContinuousEffect effect: layer) {
-			effect.apply(Layer.ControlChangingEffects_2, SubLayer.NA, abilityMap.get(effect.getId()), game);
+			effect.apply(Layer.ControlChangingEffects_2, SubLayer.NA, layeredEffects.getAbility(effect.getId()), game);
 		}
 		layer = filterLayeredEffects(layerEffects, Layer.TextChangingEffects_3);
 		for (ContinuousEffect effect: layer) {
-			effect.apply(Layer.TextChangingEffects_3, SubLayer.NA, abilityMap.get(effect.getId()), game);
+			effect.apply(Layer.TextChangingEffects_3, SubLayer.NA, layeredEffects.getAbility(effect.getId()), game);
 		}
 		layer = filterLayeredEffects(layerEffects, Layer.TypeChangingEffects_4);
 		for (ContinuousEffect effect: layer) {
-			effect.apply(Layer.TypeChangingEffects_4, SubLayer.NA, abilityMap.get(effect.getId()), game);
+			effect.apply(Layer.TypeChangingEffects_4, SubLayer.NA, layeredEffects.getAbility(effect.getId()), game);
 		}
 		layer = filterLayeredEffects(layerEffects, Layer.ColorChangingEffects_5);
 		for (ContinuousEffect effect: layer) {
-			effect.apply(Layer.ColorChangingEffects_5, SubLayer.NA, abilityMap.get(effect.getId()), game);
+			effect.apply(Layer.ColorChangingEffects_5, SubLayer.NA, layeredEffects.getAbility(effect.getId()), game);
 		}
 		layer = filterLayeredEffects(layerEffects, Layer.AbilityAddingRemovingEffects_6);
 		for (ContinuousEffect effect: layer) {
-			effect.apply(Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, abilityMap.get(effect.getId()), game);
+			effect.apply(Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, layeredEffects.getAbility(effect.getId()), game);
 		}
 		layerEffects = getLayeredEffects(game);
 		layer = filterLayeredEffects(layerEffects, Layer.PTChangingEffects_7);
 		for (ContinuousEffect effect: layer) {
-			effect.apply(Layer.PTChangingEffects_7, SubLayer.SetPT_7b, abilityMap.get(effect.getId()), game);
+			effect.apply(Layer.PTChangingEffects_7, SubLayer.SetPT_7b, layeredEffects.getAbility(effect.getId()), game);
 		}
 		for (ContinuousEffect effect: layer) {
-			effect.apply(Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, abilityMap.get(effect.getId()), game);
+			effect.apply(Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, layeredEffects.getAbility(effect.getId()), game);
 		}
 		applyCounters.apply(Layer.PTChangingEffects_7, SubLayer.Counters_7d, null, game);
 		for (ContinuousEffect effect: layer) {
-			effect.apply(Layer.PTChangingEffects_7, SubLayer.SwitchPT_e, abilityMap.get(effect.getId()), game);
+			effect.apply(Layer.PTChangingEffects_7, SubLayer.SwitchPT_e, layeredEffects.getAbility(effect.getId()), game);
 		}
 		layer = filterLayeredEffects(layerEffects, Layer.PlayerEffects);
 		for (ContinuousEffect effect: layer) {
-			effect.apply(Layer.PlayerEffects, SubLayer.NA, abilityMap.get(effect.getId()), game);
+			effect.apply(Layer.PlayerEffects, SubLayer.NA, layeredEffects.getAbility(effect.getId()), game);
 		}
 		layer = filterLayeredEffects(layerEffects, Layer.RulesEffects);
 		for (ContinuousEffect effect: layer) {
-			effect.apply(Layer.RulesEffects, SubLayer.NA, abilityMap.get(effect.getId()), game);
+			effect.apply(Layer.RulesEffects, SubLayer.NA, layeredEffects.getAbility(effect.getId()), game);
 		}
 	}
 
@@ -416,38 +328,31 @@ public class ContinuousEffects implements Serializable {
 		switch (effect.getEffectType()) {
 			case REPLACEMENT:
 				ReplacementEffect newReplacementEffect = (ReplacementEffect)effect;
-				replacementEffects.add(newReplacementEffect);
-				abilityMap.put(newReplacementEffect.getId(), source);
+				replacementEffects.addEffect(newReplacementEffect, source);
 				break;
 			case PREVENTION:
 				PreventionEffect newPreventionEffect = (PreventionEffect)effect;
-				preventionEffects.add(newPreventionEffect);
-				abilityMap.put(newPreventionEffect.getId(), source);
+				preventionEffects.addEffect(newPreventionEffect, source);
 				break;
 			case RESTRICTION:
 				RestrictionEffect newRestrictionEffect = (RestrictionEffect)effect;
-				restrictionEffects.add(newRestrictionEffect);
-				abilityMap.put(newRestrictionEffect.getId(), source);
+				restrictionEffects.addEffect(newRestrictionEffect, source);
 				break;
 			case REQUIREMENT:
 				RequirementEffect newRequirementEffect = (RequirementEffect)effect;
-				requirementEffects.add(newRequirementEffect);
-				abilityMap.put(newRequirementEffect.getId(), source);
+				requirementEffects.addEffect(newRequirementEffect, source);
 				break;
 			case ASTHOUGH:
 				AsThoughEffect newAsThoughEffect = (AsThoughEffect)effect;
-				asThoughEffects.add(newAsThoughEffect);
-				abilityMap.put(newAsThoughEffect.getId(), source);
+				asThoughEffects.addEffect(newAsThoughEffect, source);
 				break;
 			case COSTMODIFICATION:
 				CostModificationEffect newCostModificationEffect = (CostModificationEffect)effect;
-				costModificationEffects.add(newCostModificationEffect);
-				abilityMap.put(newCostModificationEffect.getId(), source);
+				costModificationEffects.addEffect(newCostModificationEffect, source);
 				break;
 			default:
 				ContinuousEffect newEffect = (ContinuousEffect)effect;
-				layeredEffects.add(newEffect);
-				abilityMap.put(newEffect.getId(), source);
+				layeredEffects.addEffect(newEffect, source);
 				break;
 		}
 	}
@@ -460,7 +365,6 @@ public class ContinuousEffects implements Serializable {
         restrictionEffects.clear();
         asThoughEffects.clear();
         costModificationEffects.clear();
-        abilityMap.clear();
     }
 
 }

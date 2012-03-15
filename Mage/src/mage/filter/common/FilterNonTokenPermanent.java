@@ -1,5 +1,5 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+* Copyright 2012 BetaSteward_at_googlemail.com. All rights reserved.
 *
 * Redistribution and use in source and binary forms, with or without modification, are
 * permitted provided that the following conditions are met:
@@ -26,48 +26,46 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.abilities.effects.common;
+package mage.filter.common;
 
-import mage.Constants.Outcome;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.game.Game;
-import mage.game.command.Emblem;
+import mage.filter.FilterPermanent;
+import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentToken;
 
 /**
  *
- * @author nantuko
+ * @author BetaSteward_at_googlemail.com
  */
-public class GetEmblemEffect extends OneShotEffect<GetEmblemEffect> {
+public class FilterNonTokenPermanent extends FilterPermanent<FilterNonTokenPermanent> {
 
-	private Emblem emblem;
-
-	public GetEmblemEffect(Emblem emblem) {
-		super(Outcome.Benefit);
-		this.emblem = emblem;
-		this.staticText = "You get an emblem with \"" + emblem.getAbilities().getRules(null) + "\"";
+	public FilterNonTokenPermanent() {
+		this("nontoken permanent");
+	}
+	
+	public FilterNonTokenPermanent(String name) {
+		super(name);
 	}
 
-	public GetEmblemEffect(final GetEmblemEffect effect) {
-		super(effect);
-		this.emblem = effect.emblem;
+	public FilterNonTokenPermanent(final FilterNonTokenPermanent filter) {
+		super(filter);
 	}
 
-	@Override
-	public GetEmblemEffect copy() {
-		return new GetEmblemEffect(this);
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Emblem newEmblem = this.emblem.copy();
-		newEmblem.setSourceId(source.getSourceId());
-		newEmblem.setControllerId(source.getControllerId());
-		game.getState().getCommand().add(newEmblem);
-        for (Ability ability: newEmblem.getAbilities()) {
-            ability.resolve(game);
+    @Override
+    public boolean match(Permanent permanent) {
+        if (!super.match(permanent)) {
+            return notFilter;
         }
-		return true;
+
+        if (permanent instanceof PermanentToken) {
+            return notFilter;
+        }
+
+        return !notFilter;
+    }
+    
+	@Override
+	public FilterNonTokenPermanent copy() {
+		return new FilterNonTokenPermanent(this);
 	}
 
 }

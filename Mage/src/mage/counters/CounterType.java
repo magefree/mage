@@ -60,7 +60,10 @@ public enum CounterType {
     KI(new KiCounter().name),
     SLIME(new SlimeCounter().name),
     SPORE(new SporeCounter().name),
-    STUDY(new StudyCounter().name);
+    STUDY(new StudyCounter().name),
+    EYEBALL(new EyeballCounter().name),
+    ELIXIR(new ElixirCounter().name),
+    PAIN(new PainCounter().name);
 
     private String name;
 
@@ -144,6 +147,12 @@ public enum CounterType {
                 return new SporeCounter(amount);
             case STUDY:
                 return new StudyCounter(amount);
+            case EYEBALL:
+                return new EyeballCounter(amount);
+            case ELIXIR:
+                return new ElixirCounter(amount);
+            case PAIN:
+                return new PainCounter(amount);
         }
         return null;
     }

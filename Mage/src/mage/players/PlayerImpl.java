@@ -864,6 +864,12 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 				int actualDamage = event.getAmount();
 				if (actualDamage > 0) {
 					Permanent source = game.getPermanent(sourceId);
+					if(source == null){
+						MageObject lastKnownInformation = game.getLastKnownInformation(sourceId, Zone.BATTLEFIELD);
+						if(lastKnownInformation instanceof Permanent){
+							source = (Permanent) lastKnownInformation;
+						}
+					}
 					if (source != null && (source.getAbilities().containsKey(InfectAbility.getInstance().getId()))) {
 						addCounters(CounterType.POISON.createInstance(actualDamage), game);
 					} else {
@@ -1389,6 +1395,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         // do nothing
     }
 
+    @Override
     public void setAllowBadMoves(boolean allowBadMoves) {
         // do nothing
     }

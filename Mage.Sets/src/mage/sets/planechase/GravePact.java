@@ -28,66 +28,25 @@
 package mage.sets.planechase;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.CardImpl;
-import mage.game.Game;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class SyphonSoul extends CardImpl<SyphonSoul> {
+public class GravePact extends mage.sets.ninthedition.GravePact {
 
-    public SyphonSoul(UUID ownerId) {
-        super(ownerId, 43, "Syphon Soul", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
+    public GravePact(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 28;
         this.expansionSetCode = "HOP";
-        this.color.setBlack(true);
-
-        // Syphon Soul deals 2 damage to each other player. You gain life equal to the damage dealt this way.
-        this.getSpellAbility().addEffect(new SyphonSoulEffect());
     }
 
-    public SyphonSoul(final SyphonSoul card) {
+    public GravePact(final GravePact card) {
         super(card);
     }
 
     @Override
-    public SyphonSoul copy() {
-        return new SyphonSoul(this);
+    public GravePact copy() {
+        return new GravePact(this);
     }
-}
-
-class SyphonSoulEffect extends OneShotEffect<SyphonSoulEffect> {
-    public SyphonSoulEffect() {
-        super(Outcome.Damage);
-        staticText = "{this} deals 2 damage to each other player. You gain life equal to the damage dealt this way";
-    }
-
-    public SyphonSoulEffect(final SyphonSoulEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        int damageDealt = 0;
-        for (UUID playerId : game.getPlayerList()) {
-            if (!playerId.equals(source.getControllerId())) {
-                damageDealt += game.getPlayer(playerId).damage(2, source.getSourceId(), game, false, true);
-            }
-        }
-        if (damageDealt > 0) {
-            game.getPlayer(source.getControllerId()).gainLife(damageDealt, game);
-        }
-        return true;
-    }
-
-    @Override
-    public SyphonSoulEffect copy() {
-        return new SyphonSoulEffect(this);
-    }
-
 }

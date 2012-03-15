@@ -26,48 +26,47 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.abilities.effects.common;
+package mage.sets.urzassaga;
 
-import mage.Constants.Outcome;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.game.Game;
-import mage.game.command.Emblem;
+import java.util.UUID;
+import mage.Constants;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.Constants.Zone;
+import mage.MageInt;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.RegenerateSourceEffect;
+import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
+import mage.abilities.keyword.TrampleAbility;
+import mage.cards.CardImpl;
 
 /**
  *
- * @author nantuko
+ * @author Backfir3
  */
-public class GetEmblemEffect extends OneShotEffect<GetEmblemEffect> {
+public class ChildOfGaea extends CardImpl<ChildOfGaea> {
 
-	private Emblem emblem;
+    public ChildOfGaea(UUID ownerId) {
+        super(ownerId, 242, "Child of Gaea", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}{G}");
+        this.expansionSetCode = "USG";
+        this.subtype.add("Elemental");
+        this.color.setGreen(true);
+        this.power = new MageInt(7);
+        this.toughness = new MageInt(7);
 
-	public GetEmblemEffect(Emblem emblem) {
-		super(Outcome.Benefit);
-		this.emblem = emblem;
-		this.staticText = "You get an emblem with \"" + emblem.getAbilities().getRules(null) + "\"";
-	}
+        this.addAbility(TrampleAbility.getInstance());
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{G}{G}")), Constants.TargetController.YOU, false));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{G}")));
+    }
 
-	public GetEmblemEffect(final GetEmblemEffect effect) {
-		super(effect);
-		this.emblem = effect.emblem;
-	}
+    public ChildOfGaea(final ChildOfGaea card) {
+        super(card);
+    }
 
-	@Override
-	public GetEmblemEffect copy() {
-		return new GetEmblemEffect(this);
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Emblem newEmblem = this.emblem.copy();
-		newEmblem.setSourceId(source.getSourceId());
-		newEmblem.setControllerId(source.getControllerId());
-		game.getState().getCommand().add(newEmblem);
-        for (Ability ability: newEmblem.getAbilities()) {
-            ability.resolve(game);
-        }
-		return true;
-	}
-
+    @Override
+    public ChildOfGaea copy() {
+        return new ChildOfGaea(this);
+    }
 }

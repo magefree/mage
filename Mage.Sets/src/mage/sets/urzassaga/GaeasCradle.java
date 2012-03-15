@@ -26,48 +26,47 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.abilities.effects.common;
+package mage.sets.urzassaga;
 
-import mage.Constants.Outcome;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.game.Game;
-import mage.game.command.Emblem;
+import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.Mana;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.mana.DynamicManaAbility;
+import mage.cards.CardImpl;
+import mage.filter.Filter;
+import mage.filter.common.FilterControlledPermanent;
 
 /**
  *
- * @author nantuko
+ * @author Backfir3
  */
-public class GetEmblemEffect extends OneShotEffect<GetEmblemEffect> {
 
-	private Emblem emblem;
+public class GaeasCradle extends CardImpl<GaeasCradle> {
 
-	public GetEmblemEffect(Emblem emblem) {
-		super(Outcome.Benefit);
-		this.emblem = emblem;
-		this.staticText = "You get an emblem with \"" + emblem.getAbilities().getRules(null) + "\"";
-	}
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("creature you control");;
 
-	public GetEmblemEffect(final GetEmblemEffect effect) {
-		super(effect);
-		this.emblem = effect.emblem;
-	}
+    static {
+        filter.getCardType().add(CardType.CREATURE);
+        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+    }
 
-	@Override
-	public GetEmblemEffect copy() {
-		return new GetEmblemEffect(this);
-	}
+    public GaeasCradle(UUID ownerId) {
+        super(ownerId, 321, "Gaea's Cradle", Rarity.RARE, new CardType[]{CardType.LAND}, "");
+        this.expansionSetCode = "USG";
+        this.supertype.add("Legendary");
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Emblem newEmblem = this.emblem.copy();
-		newEmblem.setSourceId(source.getSourceId());
-		newEmblem.setControllerId(source.getControllerId());
-		game.getState().getCommand().add(newEmblem);
-        for (Ability ability: newEmblem.getAbilities()) {
-            ability.resolve(game);
-        }
-		return true;
-	}
+        DynamicManaAbility ability = new DynamicManaAbility(Mana.GreenMana, new PermanentsOnBattlefieldCount(filter));
+        this.addAbility(ability);
+    }
 
+    public GaeasCradle(final GaeasCradle card) {
+        super(card);
+    }
+
+    @Override
+    public GaeasCradle copy() {
+        return new GaeasCradle(this);
+    }
 }

@@ -26,48 +26,51 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.abilities.effects.common;
+package mage.sets.urzassaga;
 
-import mage.Constants.Outcome;
+import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.game.Game;
-import mage.game.command.Emblem;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continious.GainAbilityAllEffect;
+import mage.abilities.keyword.ProtectionAbility;
+import mage.cards.CardImpl;
+import mage.filter.Filter.ComparisonScope;
+import mage.filter.FilterCard;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
- * @author nantuko
+ * @author Backfir3
  */
-public class GetEmblemEffect extends OneShotEffect<GetEmblemEffect> {
+public class AbsoluteLaw extends CardImpl<AbsoluteLaw> {
 
-	private Emblem emblem;
+	private static final FilterCard filter = new FilterCard("Red");
 
-	public GetEmblemEffect(Emblem emblem) {
-		super(Outcome.Benefit);
-		this.emblem = emblem;
-		this.staticText = "You get an emblem with \"" + emblem.getAbilities().getRules(null) + "\"";
+	static {
+		filter.setUseColor(true);
+		filter.getColor().setRed(true);
+		filter.setScopeColor(ComparisonScope.Any);
 	}
 
-	public GetEmblemEffect(final GetEmblemEffect effect) {
-		super(effect);
-		this.emblem = effect.emblem;
+	public AbsoluteLaw(UUID ownerId) {
+		super(ownerId, 2, "Absolute Law", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
+		this.expansionSetCode = "USG";
+		this.color.setWhite(true);
+		Ability ability = new ProtectionAbility(filter);
+                this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false)));
+	}
+
+	public AbsoluteLaw(final AbsoluteLaw card) {
+		super(card);
 	}
 
 	@Override
-	public GetEmblemEffect copy() {
-		return new GetEmblemEffect(this);
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Emblem newEmblem = this.emblem.copy();
-		newEmblem.setSourceId(source.getSourceId());
-		newEmblem.setControllerId(source.getControllerId());
-		game.getState().getCommand().add(newEmblem);
-        for (Ability ability: newEmblem.getAbilities()) {
-            ability.resolve(game);
-        }
-		return true;
+	public AbsoluteLaw copy() {
+		return new AbsoluteLaw(this);
 	}
 
 }
