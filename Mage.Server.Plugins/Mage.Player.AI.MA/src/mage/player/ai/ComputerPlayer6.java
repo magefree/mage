@@ -54,6 +54,7 @@ import mage.game.turn.*;
 import mage.player.ai.ma.optimizers.TreeOptimizer;
 import mage.player.ai.ma.optimizers.impl.EquipOptimizer;
 import mage.player.ai.ma.optimizers.impl.LevelUpOptimizer;
+import mage.player.ai.util.CombatUtil;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetCard;
@@ -126,7 +127,6 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 				pass();
 				return false;
 			case PRECOMBAT_MAIN:
-			case DECLARE_BLOCKERS:
 			case POSTCOMBAT_MAIN:
 				if (game.getActivePlayerId().equals(playerId)) {
 					printOutState(game, playerId);
@@ -140,22 +140,26 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 					pass();
 				}
 				return false;
-			case BEGIN_COMBAT:
+            case BEGIN_COMBAT:
             case FIRST_COMBAT_DAMAGE:
 			case COMBAT_DAMAGE:
 			case END_COMBAT:
 				pass();
 				return false;
-			case DECLARE_ATTACKERS:
-				if (!game.getActivePlayerId().equals(playerId)) {
-					printOutState(game, playerId);
-					printOutState(game, game.getOpponents(playerId).iterator().next());
-					if (actions.size() == 0) {
-						calculateActions(game);
-					}
-					act(game);
+            case DECLARE_ATTACKERS:
+                if (game.getActivePlayerId().equals(playerId)) {
+                    declareAttackers(game, playerId);
+                    pass();
                     return true;
-					//printOutState(game, playerId);
+				} else {
+					pass();
+				}
+				return false;
+			case DECLARE_BLOCKERS:
+				if (!game.getActivePlayerId().equals(playerId)) {
+                    declareBlockers(game, playerId);
+                    pass();
+                    return true;
 				} else {
 					pass();
 				}
@@ -729,51 +733,10 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 			}
 			if (!game.getStep().skipStep(game, game.getActivePlayerId())) {
 				if (game.getTurn().getStepType() == PhaseStep.DECLARE_ATTACKERS) {
-					game.fireEvent(new GameEvent(GameEvent.EventType.DECLARE_ATTACKERS_STEP_PRE, null, null, activePlayerId));
-					if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_ATTACKERS, activePlayerId, activePlayerId))) {
-						for (Combat engagement: ((SimulatedPlayer2)game.getPlayer(activePlayerId)).addAttackers(game)) {
-							Game sim = game.copy();
-							UUID defenderId = game.getOpponents(playerId).iterator().next();
-							for (CombatGroup group: engagement.getGroups()) {
-								for (UUID attackerId: group.getAttackers()) {
-									sim.getPlayer(activePlayerId).declareAttacker(attackerId, defenderId, sim);
-								}
-							}
-							sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_ATTACKERS, playerId, playerId));
-							SimulationNode2 newNode = new SimulationNode2(node, sim, node.getDepth()-1, activePlayerId);
-							logger.debug("simulating -- node #:" + SimulationNode2.getCount() + " declare attakers");
-							newNode.setCombat(sim.getCombat());
-							node.children.add(newNode);
-						}
-					}
-				}
-				else if (game.getTurn().getStepType() == PhaseStep.DECLARE_BLOCKERS) {
-					game.fireEvent(new GameEvent(GameEvent.EventType.DECLARE_BLOCKERS_STEP_PRE, null, null, activePlayerId));
-					if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_BLOCKERS, activePlayerId, activePlayerId))) {
-						for (UUID defenderId: game.getCombat().getDefenders()) {
-							//check if defender is being attacked
-							if (game.getCombat().isAttacked(defenderId, game)) {
-								for (Combat engagement: ((SimulatedPlayer2)game.getPlayer(defenderId)).addBlockers(game)) {
-									Game sim = game.copy();
-									for (CombatGroup group: engagement.getGroups()) {
-										List<UUID> blockers = new ArrayList<UUID>();
-										blockers.addAll(group.getBlockers());
-										for (UUID blockerId: blockers) {
-											group.addBlocker(blockerId, defenderId, sim);
-										}
-										blockers = null;
-									}
-									sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, playerId, playerId));
-									SimulationNode2 newNode = new SimulationNode2(node, sim, node.getDepth()-1, defenderId);
-									logger.debug("simulating -- node #:" + SimulationNode2.getCount() + " declare blockers");
-									newNode.setCombat(sim.getCombat());
-									node.children.add(newNode);
-								}
-							}
-						}
-					}
-				}
-				else {
+                    declareAttackers(game, activePlayerId, node);
+				} else if (game.getTurn().getStepType() == PhaseStep.DECLARE_BLOCKERS) {
+                    declareBlockers(game, activePlayerId, node);
+				} else {
 					game.getStep().beginStep(game, activePlayerId);
 				}
 				if (game.getStep().getHasPriority())
@@ -786,7 +749,104 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 		game.checkStateAndTriggered();
 	}
 
-	@Override
+    private void declareBlockers(Game game, UUID activePlayerId) {
+        game.fireEvent(new GameEvent(GameEvent.EventType.DECLARE_BLOCKERS_STEP_PRE, null, null, activePlayerId));
+        if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_BLOCKERS, activePlayerId, activePlayerId))) {
+
+        }
+    }
+
+    private void declareBlockers(Game game, UUID activePlayerId, SimulationNode2 node) {
+        game.fireEvent(new GameEvent(GameEvent.EventType.DECLARE_BLOCKERS_STEP_PRE, null, null, activePlayerId));
+        if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_BLOCKERS, activePlayerId, activePlayerId))) {
+            /*for (UUID defenderId: game.getCombat().getDefenders()) {
+                //check if defender is being attacked
+                if (game.getCombat().isAttacked(defenderId, game)) {
+                    for (Combat engagement: ((SimulatedPlayer2)game.getPlayer(defenderId)).addBlockers(game)) {
+                        Game sim = game.copy();
+                        for (CombatGroup group: engagement.getGroups()) {
+                            List<UUID> blockers = new ArrayList<UUID>();
+                            blockers.addAll(group.getBlockers());
+                            for (UUID blockerId: blockers) {
+                                group.addBlocker(blockerId, defenderId, sim);
+                            }
+                            blockers = null;
+                        }
+                        sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, playerId, playerId));
+                        SimulationNode2 newNode = new SimulationNode2(node, sim, node.getDepth()-1, defenderId);
+                        logger.debug("simulating -- node #:" + SimulationNode2.getCount() + " declare blockers");
+                        newNode.setCombat(sim.getCombat());
+                        node.children.add(newNode);
+                    }
+                }
+            }*/
+        }
+    }
+
+    /**
+     * Choose attackers based on static information.
+     * That means that AI won't look to the future as it was before, but just choose attackers based on current state
+     * of the game. This is worse, but at least it is easier to implement and won't lead to the case when AI doesn't
+     * do anything - neither attack nor block.
+     *
+     * @param game
+     * @param activePlayerId
+     */
+    private void declareAttackers(Game game, UUID activePlayerId) {
+        game.fireEvent(new GameEvent(GameEvent.EventType.DECLARE_ATTACKERS_STEP_PRE, null, null, activePlayerId));
+        if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_ATTACKERS, activePlayerId, activePlayerId))) {
+
+            Player attackingPlayer = game.getPlayer(activePlayerId);
+            UUID defenderId = game.getOpponents(playerId).iterator().next();
+            Player defender = game.getPlayer(defenderId);
+
+            List<Permanent> attackersList = super.getAvailableAttackers(game);
+            if (attackersList.isEmpty()) {
+                return;
+            }
+
+            List<Permanent> possibleBlockers = defender.getAvailableBlockers(game);
+
+            List<Permanent> killers = CombatUtil.canKillOpponent(game, attackersList, possibleBlockers, defender);
+            if (!killers.isEmpty()) {
+                for (Permanent attacker : killers) {
+                    attackingPlayer.declareAttacker(attacker.getId(), defenderId, game);
+                }
+                return;
+            }
+
+            CombatUtil.handleExalted();
+
+            int aggressionRate = 5;
+            for (Permanent attacker : attackersList) {
+                if (aggressionRate == 5) {
+                    attackingPlayer.declareAttacker(attacker.getId(), defenderId, game);
+                }
+            }
+        }
+    }
+
+    private void declareAttackers(Game game, UUID activePlayerId, SimulationNode2 node) {
+        game.fireEvent(new GameEvent(GameEvent.EventType.DECLARE_ATTACKERS_STEP_PRE, null, null, activePlayerId));
+        if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_ATTACKERS, activePlayerId, activePlayerId))) {
+            for (Combat engagement: ((SimulatedPlayer2)game.getPlayer(activePlayerId)).addAttackers(game)) {
+                Game sim = game.copy();
+                UUID defenderId = game.getOpponents(playerId).iterator().next();
+                for (CombatGroup group: engagement.getGroups()) {
+                    for (UUID attackerId: group.getAttackers()) {
+                        sim.getPlayer(activePlayerId).declareAttacker(attackerId, defenderId, sim);
+                    }
+                }
+                sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_ATTACKERS, playerId, playerId));
+                SimulationNode2 newNode = new SimulationNode2(node, sim, node.getDepth()-1, activePlayerId);
+                logger.debug("simulating -- node #:" + SimulationNode2.getCount() + " declare attakers");
+                newNode.setCombat(sim.getCombat());
+                node.children.add(newNode);
+            }
+        }
+    }
+
+    @Override
 	public void selectAttackers(Game game) {
 		logger.debug("selectAttackers");
 		if (combat != null) {

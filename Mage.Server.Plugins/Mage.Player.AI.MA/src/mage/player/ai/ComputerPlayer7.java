@@ -29,22 +29,16 @@
 package mage.player.ai;
 
 import mage.Constants.AbilityType;
-import mage.Constants.PhaseStep;
 import mage.Constants.RangeOfInfluence;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.filter.FilterAbility;
 import mage.game.Game;
-import mage.game.combat.Combat;
-import mage.game.combat.CombatGroup;
-import mage.game.events.GameEvent;
 import mage.game.turn.*;
 import mage.players.Player;
 import org.apache.log4j.Logger;
 
 import java.util.LinkedList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -243,24 +237,27 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
 					    val = testScore;
 					}
 					else {
-						switch (game.getTurn().getStepType()) {
+						/*switch (game.getTurn().getStepType()) {
 							case PRECOMBAT_MAIN:
 								val = simulateCombat(game, node, depth-1, alpha, beta, false);
 								break;
 							case POSTCOMBAT_MAIN:
-								//val = simulateCounterAttack(game, node, depth-1, alpha, beta);
-								//break;
+								val = simulateCounterAttack(game, node, depth-1, alpha, beta);
+								break;
 							default:
 								val = GameStateEvaluator2.evaluate(playerId, game);
 								break;
-						}
+						}*/
+                        val = GameStateEvaluator2.evaluate(playerId, game);
 					}
 				}
 				else {
-					if (game.getTurn().getStepType() == PhaseStep.DECLARE_ATTACKERS)
+                    val = GameStateEvaluator2.evaluate(playerId, game);
+					/*if (game.getTurn().getStepType() == PhaseStep.DECLARE_ATTACKERS)
 						val = simulateBlockers(game, node, playerId, depth-1, alpha, beta, true);
 					else
 						val = GameStateEvaluator2.evaluate(playerId, game);
+						*/
 				}
 			}
 			else if (node.getChildren().size() > 0) {
@@ -278,7 +275,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
 
 	}
 
-	protected int simulateCombat(Game game, SimulationNode2 node, int depth, int alpha, int beta, boolean counter) {
+	/*protected int simulateCombat(Game game, SimulationNode2 node, int depth, int alpha, int beta, boolean counter) {
 		Integer val = null;
 		if (Thread.interrupted()) {
 			Thread.currentThread().interrupt();
@@ -320,10 +317,10 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
 		if (logger.isDebugEnabled())
 			logger.debug("returning -- combat score: " + val + " depth:" + depth + " for player:" + game.getPlayer(node.getPlayerId()).getName());
 		return val;
-	}
+	}*/
 
 
-	protected int simulateAttackers(Game game, SimulationNode2 node, UUID attackerId, int depth, int alpha, int beta, boolean counter) {
+	/*protected int simulateAttackers(Game game, SimulationNode2 node, UUID attackerId, int depth, int alpha, int beta, boolean counter) {
 		if (Thread.interrupted()) {
 			Thread.currentThread().interrupt();
 			logger.debug("interrupted");
@@ -395,9 +392,9 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
 		if (logger.isDebugEnabled())
 			logger.debug("returning -- combat attacker score: " + val + " depth:" + depth + " for player:" + game.getPlayer(node.getPlayerId()).getName());
 		return val;
-	}
+	}*/
 
-	protected int simulateBlockers(Game game, SimulationNode2 node, UUID defenderId, int depth, int alpha, int beta, boolean counter) {
+	/*protected int simulateBlockers(Game game, SimulationNode2 node, UUID defenderId, int depth, int alpha, int beta, boolean counter) {
 		if (Thread.interrupted()) {
 			Thread.currentThread().interrupt();
 			logger.debug("interrupted");
@@ -474,9 +471,9 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
 		if (logger.isDebugEnabled())
 			logger.debug("returning -- combat blocker score: " + val + " depth:" + depth + " for player:" + game.getPlayer(node.getPlayerId()).getName());
 		return val;
-	}
+	}*/
 
-	protected int simulateCounterAttack(Game game, SimulationNode2 node, int depth, int alpha, int beta) {
+	/*protected int simulateCounterAttack(Game game, SimulationNode2 node, int depth, int alpha, int beta) {
 		if (Thread.interrupted()) {
 			Thread.currentThread().interrupt();
 			logger.debug("interrupted");
@@ -501,7 +498,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
 		if (val == null)
 			val = GameStateEvaluator2.evaluate(playerId, game);
 		return val;
-	}
+	}*/
 
 	protected void simulateStep(Game game, Step step) {
 		if (Thread.interrupted()) {
@@ -523,7 +520,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
 		}
 	}
 
-	protected void finishCombat(Game game) {
+	/*protected void finishCombat(Game game) {
 		if (Thread.interrupted()) {
 			Thread.currentThread().interrupt();
 			logger.debug("interrupted");
@@ -532,7 +529,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
 		simulateStep(game, new FirstCombatDamageStep());
 		simulateStep(game, new CombatDamageStep());
 		simulateStep(game, new EndOfCombatStep());
-	}
+	}*/
 
 	protected int simulatePostCombatMain(Game game, SimulationNode2 node, int depth, int alpha, int beta) {
 		if (Thread.interrupted()) {
