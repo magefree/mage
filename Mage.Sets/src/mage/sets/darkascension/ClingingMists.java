@@ -27,7 +27,6 @@
  */
 package mage.sets.darkascension;
 
-import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -43,7 +42,8 @@ import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -62,7 +62,7 @@ public class ClingingMists extends CardImpl<ClingingMists> {
         // Prevent all combat damage that would be dealt this turn.
 		this.getSpellAbility().addEffect(new PreventAllDamageEffect(filter, Constants.Duration.EndOfTurn, true));
         
-        // Fateful hour — If you have 5 or less life, tap all attacking creatures. Those creatures don't untap during their controller's next untap step.
+        // Fateful hour - If you have 5 or less life, tap all attacking creatures. Those creatures don't untap during their controller's next untap step.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new ClingingMistsEffect(),
                 FatefulHourCondition.getInstance(), "If you have 5 or less life, tap all attacking creatures. Those creatures don't untap during their controller's next untap step."));
         
