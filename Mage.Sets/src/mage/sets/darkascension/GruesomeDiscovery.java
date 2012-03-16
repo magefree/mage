@@ -113,7 +113,7 @@ class GruesomeDiscoveryEffect extends OneShotEffect<GruesomeDiscoveryEffect> {
                 for (UUID targetId : targets) {
                     Card card = targetPlayer.getHand().get(targetId, game);
                     if (card != null) {
-                        return targetPlayer.discard(card, source, game);
+                        targetPlayer.discard(card, source, game);
                     }
                 }
             }
