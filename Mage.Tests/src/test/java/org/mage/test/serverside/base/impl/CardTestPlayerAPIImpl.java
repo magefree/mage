@@ -559,4 +559,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public void block(int turnNum, TestPlayer player, String blocker, String attacker) {
         player.addAction(turnNum, PhaseStep.DECLARE_BLOCKERS, "block:"+blocker+";"+attacker);
     }
+    
+    public void setChoice(TestPlayer player, String choice) {
+        player.addChoice(choice);
+    }
 }

@@ -38,6 +38,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.cards.Card;
+import mage.choices.Choice;
 import mage.counters.Counter;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterAttackingCreature;
@@ -57,6 +58,7 @@ import org.junit.Ignore;
 public class TestPlayer extends ComputerPlayer<TestPlayer> {
 
     private List<PlayerAction> actions = new ArrayList<PlayerAction>();
+    private List<String> choices = new ArrayList<String>();
     
     public TestPlayer(String name, Constants.RangeOfInfluence range) {
 		super(name, range);
@@ -69,6 +71,10 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
 
     public void addAction(int turnNum, PhaseStep step, String action) {
         actions.add(new PlayerAction(turnNum, step, action));
+    }
+    
+    public void addChoice(String choice) {
+        choices.add(choice);
     }
     
     @Override
@@ -152,6 +158,22 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
             }
         }
     }
+    
+	@Override
+	public boolean choose(Constants.Outcome outcome, Choice choice, Game game) {
+        if (!choices.isEmpty()) {
+            for (String choose1: choice.getChoices()) {
+                for (String choose2: choices) {
+                    if (choose1.equals(choose2)) {
+                        choice.setChoice(choose2);
+                        choices.remove(choose2);
+                        return true;
+                    }
+                }
+            }
+        }
+        return super.choose(outcome, choice, game);
+	}
     
     protected Permanent findPermanent(FilterPermanent filter, UUID controllerId, Game game) {
         List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(filter, controllerId);
