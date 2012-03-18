@@ -28,6 +28,7 @@
 
 package mage.abilities.effects.common;
 
+import java.util.LinkedList;
 import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
@@ -73,7 +74,8 @@ public class ReturnFromExileForSourceEffect extends OneShotEffect<ReturnFromExil
 		UUID exileId = source.getSourceId();
 		ExileZone exile = game.getExile().getExileZone(exileId);
 		if (exile != null) {
-			for (UUID cardId: exile) {
+            LinkedList<UUID> cards = new LinkedList<UUID>(exile);
+			for (UUID cardId: cards) {
 				Card card = game.getCard(cardId);
 				card.moveToZone(zone, source.getId(), game, tapped);
 			}
