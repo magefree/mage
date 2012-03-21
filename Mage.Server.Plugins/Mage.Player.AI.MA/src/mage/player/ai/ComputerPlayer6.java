@@ -752,8 +752,78 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
     private void declareBlockers(Game game, UUID activePlayerId) {
         game.fireEvent(new GameEvent(GameEvent.EventType.DECLARE_BLOCKERS_STEP_PRE, null, null, activePlayerId));
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_BLOCKERS, activePlayerId, activePlayerId))) {
+            List<Permanent> attackers = getAttackers(game);
+            if (attackers == null) {
+                return;
+            }
+
+            List<Permanent> possibleBlockers = super.getAvailableBlockers(game);
+            possibleBlockers = filterOutNonblocking(game, attackers, possibleBlockers);
+            if (possibleBlockers.isEmpty()) {
+                return;
+            }
+
+            attackers = filterOutUnblockable(game, attackers, possibleBlockers);
+            if (attackers.isEmpty()) {
+                return;
+            }
+
+            CombatUtil.sortByPower(attackers, false);
+
+            //TODO:
+
+            Player player = game.getPlayer(this.playerId);
+            Map<Permanent, List<Permanent>> map = new HashMap<Permanent, List<Permanent>>();
+
+            for (Map.Entry<Permanent, List<Permanent>> entry : map.entrySet()) {
+                UUID attackerId = entry.getKey().getId();
+                List<Permanent> blockers = entry.getValue();
+                if (blockers != null) {
+                    for (Permanent blocker : blockers) {
+                        player.declareAttacker(attackerId, blocker.getId(), game);
+                    }
+                }
+
+            }
 
         }
+    }
+
+    private List<Permanent> filterOutNonblocking(Game game, List<Permanent> attackers, List<Permanent> blockers) {
+        List<Permanent> blockersLeft = new ArrayList<Permanent>();
+        for (Permanent blocker : blockers) {
+            for (Permanent attacker : attackers) {
+                if (blocker.canBlock(attacker.getId(), game)) {
+                    blockersLeft.add(blocker);
+                    break;
+                }
+            }
+        }
+        return blockersLeft;
+    }
+
+    private List<Permanent> filterOutUnblockable(Game game, List<Permanent> attackers, List<Permanent> blockers) {
+        List<Permanent> attackersLeft = new ArrayList<Permanent>();
+        for (Permanent attacker : attackers) {
+            if (CombatUtil.canBeBlocked(game, attacker, blockers)) {
+                attackersLeft.add(attacker);
+            }
+        }
+        return attackersLeft;
+    }
+
+    private List<Permanent> getAttackers(Game game) {
+        List<UUID> attackersUUID = game.getCombat().getAttackers();
+        if (attackersUUID.isEmpty()) {
+            return null;
+        }
+
+        List<Permanent> attackers = new ArrayList<Permanent>();
+        for (UUID attackerId : attackersUUID) {
+            Permanent permanent = game.getPermanent(attackerId);
+            attackers.add(permanent);
+        }
+        return attackers;
     }
 
     private void declareBlockers(Game game, UUID activePlayerId, SimulationNode2 node) {

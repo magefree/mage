@@ -35,7 +35,7 @@ public class CombatUtil {
             }
         }
 
-        sortByPower(blockableAttackers);
+        sortByPower(blockableAttackers, true);
 
         // imagine that most powerful will be blocked as 1-vs-1
         List<Permanent> attackersThatWontBeBlocked = new ArrayList<Permanent>(blockableAttackers);
@@ -77,11 +77,15 @@ public class CombatUtil {
         return false;
     }
 
-    private static void sortByPower(List<Permanent> permanents) {
+    public static void sortByPower(List<Permanent> permanents, final boolean ascending) {
         Collections.sort(permanents, new Comparator<Permanent>() {
             @Override
             public int compare(Permanent o1, Permanent o2) {
-                return o2.getPower().getValue() - o1.getPower().getValue();
+                if (ascending) {
+                    return o2.getPower().getValue() - o1.getPower().getValue();
+                } else {
+                    return o1.getPower().getValue() - o2.getPower().getValue();
+                }
             }
         });
     }
@@ -113,5 +117,31 @@ public class CombatUtil {
     }
 
     public static void handleExalted() {
+    }
+
+    /**
+     * Determines what blockers from the list can block the attacker
+     *
+     * @param game         Game
+     * @param attacker     Attacker to check
+     * @param blockersList Blockers to try to block the attacker with.
+     * @return true if attacker can be blocked by any blocker
+     */
+    public static List<Permanent> getPossibleBlockers(Game game, Permanent attacker, List<Permanent> blockersList) {
+        List<Permanent> canBlock = new ArrayList<Permanent>();
+        for (Permanent blocker : blockersList) {
+            if (blocker.canBlock(attacker.getId(), game)) {
+                canBlock.add(blocker);
+            }
+        }
+        return canBlock;
+    }
+
+    public void blockWithGoodTrade(Game game, List<Permanent> attackers, List<Permanent> possibleBlockers) {
+        for (Permanent attacker : attackers) {
+            //TODO: handle attackers with "can't be blocked except"
+            List<Permanent> blockers = getPossibleBlockers(game, attacker, possibleBlockers);
+
+        }
     }
 }
