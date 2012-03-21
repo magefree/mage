@@ -60,12 +60,12 @@ public class ThreadStarter extends Thread {
             while (iterator.hasNext()) {
                 Card card = iterator.next();
                 StringBuilder sb = generateUtilLine(card);
-                out.write(sb.toString().replace("\u00C6", "AE"));
+                out.write(sb.toString().replace("\u00C6", "AE").replace("\u2014", "-"));
                 out.newLine();
 
                 if (card.getOtherSide() != null) {
                     sb = generateUtilLine(card.getOtherSide());
-                    out.write(sb.toString().replace("\u00C6", "AE"));
+                    out.write(sb.toString().replace("\u00C6", "AE").replace("\u2014", "-"));
                     out.newLine();
                 }
             }
