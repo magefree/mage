@@ -27,18 +27,13 @@
  */
 package mage.sets.darkascension;
 
-import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.FatefulHourCondition;
-import mage.abilities.condition.common.MetalcraftCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.effects.common.continious.GainAbilityControllerEffect;
 import mage.abilities.effects.common.continious.GainProtectionFromColorTargetEffect;
@@ -47,9 +42,10 @@ import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -65,7 +61,7 @@ public class FaithsShield extends CardImpl<FaithsShield> {
 
         // Target permanent you control gains protection from the color of your choice until end of turn.
         
-        // Fateful hour — If you have 5 or less life, instead you and each permanent you control gain protection from the color of your choice until end of turn.
+        // Fateful hour - If you have 5 or less life, instead you and each permanent you control gain protection from the color of your choice until end of turn.
         this.getSpellAbility().addEffect(new FaithsShieldEffect());
         this.getSpellAbility().addTarget(new TargetControlledPermanent());
         this.getSpellAbility().addChoice(new ChoiceColor());        
@@ -85,7 +81,7 @@ class FaithsShieldEffect extends OneShotEffect<FaithsShieldEffect> {
 
     public FaithsShieldEffect() {
         super(Outcome.Protect);
-        staticText = "Target permanent you control gains protection from the color of your choice until end of turn\nFateful hour — If you have 5 or less life, instead you and each permanent you control gain protection from the color of your choice until end of turn";
+        staticText = "Target permanent you control gains protection from the color of your choice until end of turn\nFateful hour - If you have 5 or less life, instead you and each permanent you control gain protection from the color of your choice until end of turn";
     }
     
     public FaithsShieldEffect(final FaithsShieldEffect effect) {
