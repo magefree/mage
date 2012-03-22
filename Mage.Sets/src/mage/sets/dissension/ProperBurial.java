@@ -87,6 +87,7 @@ class ProperBurialTriggeredAbility extends TriggeredAbilityImpl<ProperBurialTrig
                 && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             if (permanent.getControllerId().equals(this.getControllerId()) && permanent.getCardType().contains(CardType.CREATURE)) {
+                this.getEffects().clear();
                 this.addEffect(new GainLifeEffect(permanent.getToughness().getValue()));
                 return true;
             }

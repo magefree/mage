@@ -28,17 +28,14 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DoIfCostPaid;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -46,7 +43,6 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -95,7 +91,6 @@ class CradleOfVitalityGainLifeTriggeredAbility extends TriggeredAbilityImpl<Crad
 
 	@Override
 	public boolean checkTrigger(GameEvent event, Game game) {
-		Permanent permanent = game.getPermanent(event.getTargetId());
 		if (event.getType() == EventType.GAINED_LIFE && event.getPlayerId().equals(this.controllerId)) {
 			this.getEffects().get(0).setValue("amount", event.getAmount());
 			return true;

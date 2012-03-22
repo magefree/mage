@@ -90,6 +90,7 @@ class HellfireMongrelTriggeredAbility extends TriggeredAbilityImpl<HellfireMongr
         if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE && game.getOpponents(controllerId).contains(event.getPlayerId())) {
             Player player = game.getPlayer(event.getPlayerId());
             if (player != null && player.getHand().size() < 3) {
+                this.getEffects().clear();
                 DamageTargetEffect effect = new DamageTargetEffect(2);
                 effect.setTargetPointer(new FixedTarget(player.getId()));
                 this.addEffect(effect);

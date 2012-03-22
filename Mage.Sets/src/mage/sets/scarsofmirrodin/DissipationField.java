@@ -25,26 +25,19 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.StateTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.target.TargetStackObject;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -52,14 +45,16 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class DissipationField extends CardImpl<DissipationField> {
 
-    public DissipationField (UUID ownerId) {
+    public DissipationField(UUID ownerId) {
         super(ownerId, 32, "Dissipation Field", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
         this.expansionSetCode = "SOM";
-       	this.color.setBlue(true);
-		this.addAbility(new DissipationFieldEffect());
-	}
+        this.color.setBlue(true);
 
-    public DissipationField (final DissipationField card) {
+        // Whenever a permanent deals damage to you, return it to its owner's hand.
+        this.addAbility(new DissipationFieldAbility());
+    }
+
+    public DissipationField(final DissipationField card) {
         super(card);
     }
 
@@ -67,41 +62,37 @@ public class DissipationField extends CardImpl<DissipationField> {
     public DissipationField copy() {
         return new DissipationField(this);
     }
+}
 
-	public class DissipationFieldEffect extends TriggeredAbilityImpl<DissipationFieldEffect> {
+class DissipationFieldAbility extends TriggeredAbilityImpl<DissipationFieldAbility> {
 
-		public DissipationFieldEffect() {
-			super(Constants.Zone.BATTLEFIELD, new ReturnToHandTargetEffect());
-		}
+    public DissipationFieldAbility() {
+        super(Constants.Zone.BATTLEFIELD, new ReturnToHandTargetEffect());
+    }
 
-		public DissipationFieldEffect(DissipationFieldEffect effect) {
-			super(effect);
-		}
+    public DissipationFieldAbility(DissipationFieldAbility effect) {
+        super(effect);
+    }
 
-		@Override
-		public DissipationFieldEffect copy() {
-			return new DissipationFieldEffect(this);
-		}
+    @Override
+    public DissipationFieldAbility copy() {
+        return new DissipationFieldAbility(this);
+    }
 
-		@Override
-		public boolean checkTrigger(GameEvent event, Game game) {
-			if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER && event.getTargetId().equals(this.controllerId)) {
-				Permanent permanent = game.getPermanent(event.getSourceId());
-				if (permanent != null) {
-					this.getTargets().clear();
-					TargetCreaturePermanent target = new TargetCreaturePermanent();
-					target.add(permanent.getId(), game);
-					this.addTarget(target);
-					return true;
-				}
-			}
-			return false;
-		}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER && event.getTargetId().equals(this.controllerId)) {
+            Permanent permanent = game.getPermanent(event.getSourceId());
+            if (permanent != null) {
+                this.getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
+                return true;
+            }
+        }
+        return false;
+    }
 
-		@Override
-		public String getRule() {
-			return "Whenever a permanent deals damage to you, return it to its owner's hand.";
-		}
-	}
-
+    @Override
+    public String getRule() {
+        return "Whenever a permanent deals damage to you, return it to its owner's hand.";
+    }
 }

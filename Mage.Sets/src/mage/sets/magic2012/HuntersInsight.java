@@ -88,6 +88,7 @@ class HuntersInsightTriggeredAbility extends TriggeredAbilityImpl<HuntersInsight
     public boolean checkTrigger(GameEvent event, Game game) {
         if ((event.getType() == EventType.DAMAGED_PLAYER || event.getType() == EventType.DAMAGED_PLANESWALKER)
                 && event.getSourceId().equals(this.sourceId) && ((DamagedEvent) event).isCombatDamage()) {
+            this.getEffects().clear();
             this.addEffect(new DrawCardControllerEffect(event.getAmount()));
             return true;
         }

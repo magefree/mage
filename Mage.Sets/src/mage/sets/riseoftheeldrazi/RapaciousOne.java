@@ -93,6 +93,7 @@ class RapaciousOneTriggeredAbility extends TriggeredAbilityImpl<RapaciousOneTrig
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == EventType.DAMAGED_PLAYER && event.getSourceId().equals(this.sourceId)
                 && ((DamagedPlayerEvent) event).isCombatDamage()) {
+            this.getEffects().clear();
             this.addEffect(new CreateTokenEffect(new EldraziSpawnToken(), event.getAmount()));
             return true;
         }
