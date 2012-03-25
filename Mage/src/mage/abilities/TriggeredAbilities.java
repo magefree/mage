@@ -53,8 +53,9 @@ public class TriggeredAbilities extends HashMap<UUID, TriggeredAbility> {
         for (TriggeredAbility ability: this.values()) {
             if (ability.isInUseableZone(game)) {
                 MageObject object = game.getLastKnownInformation(ability.getSourceId(), event.getZone());
-                if (object == null)
+                if (object == null) {
                     object = game.getObject(ability.getSourceId());
+                }
                 if (object != null && object.getAbilities().contains(ability)) {
                     if (ability.checkTrigger(event, game)) {
                         ability.trigger(game, ability.getControllerId());

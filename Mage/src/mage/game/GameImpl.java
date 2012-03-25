@@ -1226,7 +1226,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	 *
 	 * @param objectId
 	 * @param zone
-	 * @param card
+	 * @param object
 	 */
 	@Override
 	public void rememberLKI(UUID objectId, Zone zone, MageObject object) {
