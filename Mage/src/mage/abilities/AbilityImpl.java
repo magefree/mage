@@ -36,6 +36,7 @@ import mage.Constants.AbilityType;
 import mage.Constants.EffectType;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
+import mage.MageObject;
 import mage.abilities.costs.*;
 import mage.abilities.costs.mana.KickerManaCost;
 import mage.abilities.costs.mana.ManaCost;
@@ -463,6 +464,13 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 	
     @Override
     public boolean isInUseableZone(Game game) {
+        // try LKI first
+        MageObject lkiTest = game.getLastKnownInformation(getSourceId(), zone);
+        if (lkiTest != null) {
+            return true;
+        }
+
+        // check against current state
         Zone test = game.getState().getZone(sourceId);
         return test != null && zone.match(test);
     }
