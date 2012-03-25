@@ -77,6 +77,11 @@ class TransformEffect extends ContinuousEffectImpl<TransformEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
+
+        if (permanent == null) {
+            return false;
+        }
+
         if (!permanent.isTransformed()) {
             // keep original card
             return true;
