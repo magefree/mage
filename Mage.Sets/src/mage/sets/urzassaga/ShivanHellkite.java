@@ -37,7 +37,7 @@ public class ShivanHellkite extends mage.sets.tenth.ShivanHellkite {
 
     public ShivanHellkite(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 215;
+        this.cardNumber = 214;
         this.expansionSetCode = "USG";
     }
 
