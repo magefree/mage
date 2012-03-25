@@ -70,7 +70,7 @@ public class Bitterblossom extends CardImpl<Bitterblossom> {
 
 class FaerieToken extends Token {
     FaerieToken() {
-        super("", "1/1 black Faerie Rogue creature token with flying");
+        super("Faerie Rogue", "1/1 black Faerie Rogue creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add("Faerie");
