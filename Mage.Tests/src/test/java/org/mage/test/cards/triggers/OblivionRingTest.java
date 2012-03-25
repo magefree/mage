@@ -30,7 +30,7 @@ public class OblivionRingTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 20);
         assertPermanentCount(playerA, "Oblivion Ring", 1);
-        assertPermanentCount(playerB, "Frost Titan", 0);
+        assertPermanentCount(playerB, "Craw Wurm", 0);
     }
 
     /**
@@ -54,6 +54,6 @@ public class OblivionRingTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 20);
         assertPermanentCount(playerA, "Oblivion Ring", 0);
-        assertPermanentCount(playerB, "Frost Titan", 1);
+        assertPermanentCount(playerB, "Craw Wurm", 1);
     }
 }
