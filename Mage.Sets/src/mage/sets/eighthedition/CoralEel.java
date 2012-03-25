@@ -27,18 +27,26 @@
  */
 package mage.sets.eighthedition;
 
+import mage.Constants;
+import mage.MageInt;
+import mage.cards.CardImpl;
+
 import java.util.UUID;
 
 /**
  *
  * @author North
  */
-public class CoralEel extends mage.sets.ninthedition.CoralEel {
+public class CoralEel extends CardImpl<CoralEel> {
 
     public CoralEel(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 70;
+        super(ownerId, 70, "Coral Eel", Constants.Rarity.COMMON, new Constants.CardType[]{Constants.CardType.CREATURE}, "{1}{U}");
         this.expansionSetCode = "8ED";
+        this.subtype.add("Fish");
+
+        this.color.setBlue(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
     }
 
     public CoralEel(final CoralEel card) {
