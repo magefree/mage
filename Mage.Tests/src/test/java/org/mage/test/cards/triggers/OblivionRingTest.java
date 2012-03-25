@@ -8,10 +8,14 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 /**
  * @author noxx
  *
- * Card: When Mausoleum Guard dies, put two 1/1 white Spirit creature tokens with flying onto the battlefield.
+ * Card: When Oblivion Ring enters the battlefield, exile another target nonland permanent.
+ * When Oblivion Ring leaves the battlefield, return the exiled card to the battlefield under its owner's control.
  */
 public class OblivionRingTest extends CardTestPlayerBase {
 
+    /**
+     * When Oblivion Ring enters the battlefield, exile another target nonland permanent.
+     */
     @Test
     public void testFirstTriggeredAbility() {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 3);
@@ -29,6 +33,9 @@ public class OblivionRingTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Frost Titan", 0);
     }
 
+    /**
+     * When Oblivion Ring leaves the battlefield, return the exiled card to the battlefield under its owner's control.
+     */
     @Test
     public void testSecondTriggeredAbility() {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 3);
