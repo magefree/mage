@@ -14,7 +14,7 @@ public class TestSightlessGhoul extends CardTestPlayerBase {
     public void testUndying() {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Sightless Ghoul");
 
-        addCard(Constants.Zone.HAND, playerB, "Mountain", 8);
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Mountain", 1);
         addCard(Constants.Zone.HAND, playerB, "Lightning Bolt");
 
         castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "Sightless Ghoul");
