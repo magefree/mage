@@ -336,7 +336,11 @@
                   <Component id="jButtonSearch" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jButtonClean" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="294" max="32767" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="cardCountLabel" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="cardCount" min="-2" pref="48" max="-2" attributes="0"/>
+                  <EmptySpace pref="165" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -349,6 +353,8 @@
                   <Component id="jTextFieldSearch" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonSearch" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonClean" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cardCountLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cardCount" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -392,6 +398,22 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCleanActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="cardCountLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Card count:"/>
+          </Properties>
+          <AccessibilityProperties>
+            <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="cardCountLabel"/>
+          </AccessibilityProperties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="cardCount">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="0"/>
+          </Properties>
+          <AccessibilityProperties>
+            <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="cardCount"/>
+          </AccessibilityProperties>
         </Component>
       </SubComponents>
     </Container>

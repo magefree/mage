@@ -196,7 +196,8 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 				}
 			}
 			this.currentView.loadCards(new CardsView(filteredCards), (SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected(), bigCard, null);
-		}
+		    this.cardCount.setText(String.valueOf(filteredCards.size()));
+        }
 		finally {
 			setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		}
@@ -280,6 +281,8 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         jTextFieldSearch = new javax.swing.JTextField();
         jButtonSearch = new javax.swing.JButton();
         jButtonClean = new javax.swing.JButton();
+        cardCountLabel = new javax.swing.JLabel();
+        cardCount = new javax.swing.JLabel();
 
         tbColor.setFloatable(false);
         tbColor.setRollover(true);
@@ -550,34 +553,47 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             }
         });
 
+        cardCountLabel.setText("Card count:");
+
+        cardCount.setText("0");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-					.addComponent(jButtonAddToMain)
-					.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-					.addComponent(jButtonAddToSideboard)
-					.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-					.addComponent(jLabel1)
-					.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-					.addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-					.addComponent(jButtonSearch)
-					.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-					.addComponent(jButtonClean)
-					.addContainerGap(294, Short.MAX_VALUE))
+                .addComponent(jButtonAddToMain)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonAddToSideboard)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonSearch)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonClean)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cardCountLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cardCount, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(165, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-					.addComponent(jButtonAddToMain)
-					.addComponent(jButtonAddToSideboard)
-					.addComponent(jLabel1)
-					.addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-					.addComponent(jButtonSearch)
-					.addComponent(jButtonClean))
+                .addComponent(jButtonAddToMain)
+                .addComponent(jButtonAddToSideboard)
+                .addComponent(jLabel1)
+                .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonSearch)
+                .addComponent(jButtonClean)
+                .addComponent(cardCountLabel)
+                .addComponent(cardCount))
         );
+
+        cardCountLabel.getAccessibleContext().setAccessibleName("cardCountLabel");
+        cardCount.getAccessibleContext().setAccessibleName("cardCount");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -814,6 +830,8 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBooster;
     private javax.swing.JButton btnClear;
+    private javax.swing.JLabel cardCount;
+    private javax.swing.JLabel cardCountLabel;
     private mage.client.cards.CardGrid cardGrid;
     private javax.swing.JComboBox cbExpansionSet;
     private javax.swing.JComboBox cbSortBy;
