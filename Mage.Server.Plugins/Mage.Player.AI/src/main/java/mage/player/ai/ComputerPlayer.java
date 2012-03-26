@@ -196,12 +196,16 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 		}
 		if (target instanceof TargetPermanent) {
 			List<Permanent> targets;
-			if (outcome.isGood()) {
-				targets = threats(playerId, ((TargetPermanent)target).getFilter(), game, target.getTargets());
-			}
-			else {
-				targets = threats(opponentId, ((TargetPermanent)target).getFilter(), game, target.getTargets());
-			}
+            if (outcome.isCanTargetAll()) {
+                targets = threats(null, ((TargetPermanent)target).getFilter(), game, target.getTargets());
+            } else {
+                if (outcome.isGood()) {
+                    targets = threats(playerId, ((TargetPermanent)target).getFilter(), game, target.getTargets());
+                }
+                else {
+                    targets = threats(opponentId, ((TargetPermanent)target).getFilter(), game, target.getTargets());
+                }
+            }
 			for (Permanent permanent: targets) {
 				if (((TargetPermanent)target).canTarget(playerId, permanent.getId(), null, game) && !target.getTargets().contains(permanent.getId())) {
 					target.add(permanent.getId(), game);
@@ -1486,7 +1490,10 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 	}
 
 	protected List<Permanent> threats(UUID playerId, FilterPermanent filter, Game game, List<UUID> targets) {
-		List<Permanent> threats = game.getBattlefield().getAllActivePermanents(filter, playerId);
+		List<Permanent> threats = playerId == null ?
+                game.getBattlefield().getAllActivePermanents(filter) :
+                game.getBattlefield().getAllActivePermanents(filter, playerId);
+
         Iterator<Permanent> it = threats.iterator();
         while (it.hasNext()) { // remove permanents already targetted
             Permanent test = it.next();
@@ -1494,6 +1501,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
                 it.remove();
         }
 		Collections.sort(threats, new PermanentComparator(game));
+        Collections.reverse(threats);
 		return threats;
 	}
 

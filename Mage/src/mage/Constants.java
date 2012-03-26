@@ -341,23 +341,32 @@ public final class Constants {
 		Transform(true),
 		Untap(true),
 		Win(true),
-		Copy(true),
+		Copy(true, true),
 		Benefit(true),
 		Detriment(false),
 		Neutral(true),
 		Removal(true);
 
 		private boolean good;
+        private boolean canTargetAll;
 
 		Outcome(boolean good) {
 			this.good = good;
+		}
+
+        Outcome(boolean good, boolean canTargetAll) {
+			this.good = good;
+            this.canTargetAll = canTargetAll;
 		}
 
 		public boolean isGood() {
 			return good;
 		}
 
-	}
+        public boolean isCanTargetAll() {
+            return canTargetAll;
+        }
+    }
 
 	public enum Zone {
 		HAND, GRAVEYARD, LIBRARY, BATTLEFIELD, STACK, EXILED, ALL, OUTSIDE, PICK, COMMAND;
