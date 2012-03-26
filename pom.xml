@@ -67,10 +67,6 @@
             <url>https://maven.nuxeo.org/nexus/content/repositories/public/org/</url>
         </repository>
         <repository>
-            <id>mage.googlecode.com</id>
-            <url>https://mage.googlecode.com/hg/repository/</url>
-        </repository>
-        <repository>
             <id>jetlang.googlecode.com</id>
             <name>Jetlang Repository for Maven</name>
             <url>http://jetlang.googlecode.com/svn/repo/</url>
