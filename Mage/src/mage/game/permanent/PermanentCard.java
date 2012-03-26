@@ -221,6 +221,7 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
         if (controller != null && controller.removeFromBattlefield(this, game)) {
             ZoneChangeEvent event = new ZoneChangeEvent(this, sourceId, ownerId, fromZone, Zone.EXILED);
             if (!game.replaceEvent(event)) {
+                game.rememberLKI(objectId, Zone.BATTLEFIELD, this);
                 if (exileId == null) {
                     game.getExile().getPermanentExile().add(card);
                 } else {

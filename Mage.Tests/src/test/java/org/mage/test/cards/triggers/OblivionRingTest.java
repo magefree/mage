@@ -56,4 +56,25 @@ public class OblivionRingTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Oblivion Ring", 0);
         assertPermanentCount(playerB, "Craw Wurm", 1);
     }
+
+    @Test
+    public void testWithOblivionRingExile() {
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 3);
+        addCard(Constants.Zone.HAND, playerA, "Oblivion Ring");
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Craw Wurm");
+
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Plains", 3);
+        addCard(Constants.Zone.HAND, playerB, "Revoke Existence");
+
+        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Oblivion Ring");
+        castSpell(2, Constants.PhaseStep.PRECOMBAT_MAIN, playerB, "Revoke Existence", "Oblivion Ring");
+
+        setStopAt(2, Constants.PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+        assertPermanentCount(playerA, "Oblivion Ring", 0);
+        assertPermanentCount(playerB, "Craw Wurm", 1);
+    }
 }
