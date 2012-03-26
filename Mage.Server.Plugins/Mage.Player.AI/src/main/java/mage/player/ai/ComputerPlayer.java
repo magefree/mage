@@ -375,6 +375,9 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 			else {
 				targets = threats(opponentId, ((TargetPermanent)target).getFilter(), game, target.getTargets());
 			}
+            if (targets.isEmpty() && target.isRequired()) {
+                targets = game.getBattlefield().getActivePermanents(((TargetPermanent)target).getFilter(), playerId, game);
+            }
 			for (Permanent permanent: targets) {
 				if (((TargetPermanent)target).canTarget(playerId, permanent.getId(), source, game)) {
 					target.addTarget(permanent.getId(), source, game);
@@ -392,6 +395,9 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 			else {
 				targets = threats(opponentId, ((FilterCreatureOrPlayer)t.getFilter()).getCreatureFilter(), game, target.getTargets());
 			}
+            if (targets.isEmpty() && target.isRequired()) {
+                targets = game.getBattlefield().getActivePermanents(((FilterCreatureOrPlayer)t.getFilter()).getCreatureFilter(), playerId, game);
+            }
             for (Permanent permanent : targets) {
                 List<UUID> alreadyTargetted = target.getTargets();
                 if (t.canTarget(playerId, permanent.getId(), source, game)) {
