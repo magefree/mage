@@ -95,6 +95,8 @@ class PhantasmalImageCopyEffect extends OneShotEffect<PhantasmalImageCopyEffect>
 		if ( player != null ) {
 			Target target = new TargetPermanent(new FilterCreaturePermanent());
             if (target.canChoose(source.getControllerId(), game)) {
+                target.setRequired(true);
+                target.setNotTarget(true);
                 player.choose(Outcome.Copy, target, source.getSourceId(), game);
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
@@ -103,7 +105,7 @@ class PhantasmalImageCopyEffect extends OneShotEffect<PhantasmalImageCopyEffect>
                     permanent.assignNewId();
 					permanent.getSubtype().add("Illusion");
 					permanent.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()), game);
-					
+
                     game.addEffect(new CopyEffect(permanent), source);
 
 					return true;
