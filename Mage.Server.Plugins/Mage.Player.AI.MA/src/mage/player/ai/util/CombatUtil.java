@@ -4,13 +4,16 @@ import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.InfectAbility;
 import mage.counters.CounterType;
 import mage.game.Game;
+import mage.game.combat.Combat;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.game.turn.CombatDamageStep;
+import mage.game.turn.EndOfCombatStep;
+import mage.game.turn.FirstCombatDamageStep;
+import mage.game.turn.Step;
 import mage.players.Player;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Base helper methods for combat.
@@ -20,6 +23,8 @@ import java.util.List;
 public class CombatUtil {
 
     private static final List<Permanent> emptyList = new ArrayList<Permanent>();
+
+    private static final transient org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(CombatUtil.class);
 
     private CombatUtil() {
     }
@@ -90,6 +95,19 @@ public class CombatUtil {
         });
     }
 
+    public static Permanent getWorstCreature(List<Permanent> creatures) {
+        if (creatures.isEmpty()) {
+            return null;
+        }
+        Collections.sort(creatures, new Comparator<Permanent>() {
+            @Override
+            public int compare(Permanent o1, Permanent o2) {
+                return o2.getPower().getValue() - o1.getPower().getValue();
+            }
+        });
+        return creatures.get(0);
+    }
+
     private static int sumDamage(List<Permanent> attackersThatWontBeBlocked, Player defender) {
         int damage = 0;
         for (Permanent attacker : attackersThatWontBeBlocked) {
@@ -137,11 +155,84 @@ public class CombatUtil {
         return canBlock;
     }
 
-    public void blockWithGoodTrade(Game game, List<Permanent> attackers, List<Permanent> possibleBlockers) {
+    public static CombatInfo blockWithGoodTrade(Game game, List<Permanent> attackers, List<Permanent> blockers) {
+
+        UUID attackerId = game.getCombat().getAttackerId();
+        UUID defenderId = game.getCombat().getDefenders().iterator().next();
+        if (attackerId == null || defenderId == null) {
+            log.warn("Couldn't find attacker or defender: " + attackerId + " " + defenderId);
+            return new CombatInfo();
+        }
+
+        CombatInfo combatInfo = new CombatInfo();
         for (Permanent attacker : attackers) {
             //TODO: handle attackers with "can't be blocked except"
-            List<Permanent> blockers = getPossibleBlockers(game, attacker, possibleBlockers);
-
+            List<Permanent> possibleBlockers = getPossibleBlockers(game, attacker, blockers);
+            List<Permanent> survivedBlockers = getBlockersThatWillSurvive(game, attackerId, defenderId, attacker, possibleBlockers);
+            if (!survivedBlockers.isEmpty()) {
+                Permanent blocker = getWorstCreature(survivedBlockers);
+                combatInfo.addPair(attacker, blocker);
+                blockers.remove(blocker);
+            }
+            if (blockers.isEmpty()) {
+                break;
+            }
         }
+
+        return combatInfo;
     }
+
+    private static List<Permanent> getBlockersThatWillSurvive(Game game, UUID attackerId, UUID defenderId, Permanent attacker, List<Permanent> possibleBlockers) {
+        List<Permanent> blockers = new ArrayList<Permanent>();
+        for (Permanent blocker : possibleBlockers) {
+            SurviveInfo info = willItSurvive(game, attackerId, defenderId, attacker, blocker);
+            if (info.isAttackerDied() && !info.isBlockerDied()) {
+                blockers.add(blocker);
+            }
+        }
+        return blockers;
+    }
+
+    private static SurviveInfo willItSurvive(Game game, UUID attackingPlayerId, UUID defendingPlayerId, Permanent attacker, Permanent blocker) {
+        Game sim = game.copy();
+
+        Combat combat = sim.getCombat();
+        combat.setAttacker(attackingPlayerId);
+        combat.setDefenders(sim);
+
+        sim.getPlayer(defendingPlayerId).declareBlocker(blocker.getId(), attacker.getId(), sim);
+        sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, defendingPlayerId, defendingPlayerId));
+
+        sim.checkStateAndTriggered();
+        while (!sim.getStack().isEmpty()) {
+            sim.getStack().resolve(sim);
+            sim.applyEffects();
+        }
+        sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARE_BLOCKERS_STEP_POST, sim.getActivePlayerId(), sim.getActivePlayerId()));
+
+        simulateStep(sim, new FirstCombatDamageStep());
+		simulateStep(sim, new CombatDamageStep());
+		simulateStep(sim, new EndOfCombatStep());
+
+        sim.checkStateAndTriggered();
+        while (!sim.getStack().isEmpty()) {
+            sim.getStack().resolve(sim);
+            sim.applyEffects();
+        }
+
+        return new SurviveInfo(!sim.getBattlefield().containsPermanent(attacker.getId()), !sim.getBattlefield().containsPermanent(blocker.getId()));
+    }
+
+    protected static void simulateStep(Game game, Step step) {
+        game.getPhase().setStep(step);
+        if (!step.skipStep(game, game.getActivePlayerId())) {
+            step.beginStep(game, game.getActivePlayerId());
+            game.checkStateAndTriggered();
+            while (!game.getStack().isEmpty()) {
+                game.getStack().resolve(game);
+                game.applyEffects();
+            }
+            step.endStep(game, game.getActivePlayerId());
+        }
+	}
 }

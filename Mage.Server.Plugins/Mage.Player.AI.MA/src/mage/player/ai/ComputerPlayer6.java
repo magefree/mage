@@ -54,6 +54,7 @@ import mage.game.turn.*;
 import mage.player.ai.ma.optimizers.TreeOptimizer;
 import mage.player.ai.ma.optimizers.impl.EquipOptimizer;
 import mage.player.ai.ma.optimizers.impl.LevelUpOptimizer;
+import mage.player.ai.util.CombatInfo;
 import mage.player.ai.util.CombatUtil;
 import mage.players.Player;
 import mage.target.Target;
@@ -150,7 +151,6 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                 if (game.getActivePlayerId().equals(playerId)) {
                     declareAttackers(game, playerId);
                     pass();
-                    return true;
 				} else {
 					pass();
 				}
@@ -159,7 +159,6 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 				if (!game.getActivePlayerId().equals(playerId)) {
                     declareBlockers(game, playerId);
                     pass();
-                    return true;
 				} else {
 					pass();
 				}
@@ -770,22 +769,24 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 
             CombatUtil.sortByPower(attackers, false);
 
-            //TODO:
-
+            CombatInfo combatInfo = CombatUtil.blockWithGoodTrade(game, attackers, possibleBlockers);
             Player player = game.getPlayer(this.playerId);
-            Map<Permanent, List<Permanent>> map = new HashMap<Permanent, List<Permanent>>();
 
-            for (Map.Entry<Permanent, List<Permanent>> entry : map.entrySet()) {
+            boolean blocked = false;
+            for (Map.Entry<Permanent, List<Permanent>> entry : combatInfo.getCombat().entrySet()) {
                 UUID attackerId = entry.getKey().getId();
                 List<Permanent> blockers = entry.getValue();
                 if (blockers != null) {
                     for (Permanent blocker : blockers) {
-                        player.declareAttacker(attackerId, blocker.getId(), game);
+                        player.declareBlocker(blocker.getId(), attackerId, game);
+                        blocked = true;
                     }
                 }
-
             }
 
+            if (blocked) {
+                game.getPlayers().resetPassed();
+            }
         }
     }
 
@@ -887,7 +888,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 
             CombatUtil.handleExalted();
 
-            int aggressionRate = 5;
+            int aggressionRate = 0;
             for (Permanent attacker : attackersList) {
                 if (aggressionRate == 5) {
                     attackingPlayer.declareAttacker(attacker.getId(), defenderId, game);

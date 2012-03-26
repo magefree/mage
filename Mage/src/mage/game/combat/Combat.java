@@ -438,8 +438,12 @@ public class Combat implements Serializable, Copyable<Combat> {
         if (creature != null)
             creature.setBlocking(0);
     }
-     
-	@Override
+
+    public UUID getAttackerId() {
+        return attackerId;
+    }
+
+    @Override
 	public Combat copy() {
 		return new Combat(this);
 	}
