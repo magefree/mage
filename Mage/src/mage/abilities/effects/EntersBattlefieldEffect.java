@@ -34,7 +34,6 @@ import mage.abilities.Mode;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.stack.Spell;
 
 /**
  *
@@ -80,17 +79,20 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl<EntersBattlef
 
 	@Override
 	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		Spell spell = game.getStack().getSpell(event.getSourceId());
+		//Spell spell = game.getStack().getSpell(event.getSourceId());
 		for (Effect effect: baseEffects) {
 			if (source.activate(game, false)) {
 				if (effect instanceof ContinuousEffect) {
 					game.addEffect((ContinuousEffect) effect, source);
 				}
 				else {
-					if (spell != null)
+                    // noxx: commented it out because of resulting in a bug
+                    // with CopyEffect (PhantasmalImageTest.java)
+					/*if (spell != null)
 						effect.apply(game, spell.getSpellAbility());
 					else
-						effect.apply(game, source);
+						effect.apply(game, source);*/
+                    effect.apply(game, source);
 				}
 			}
 		}

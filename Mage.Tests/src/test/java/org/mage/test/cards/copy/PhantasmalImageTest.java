@@ -27,7 +27,7 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);
-        assertPermanentCount(playerA, "Phantasmal Image", 1);
+        assertPermanentCount(playerA, "Craw Wurm", 1);
         assertPermanentCount(playerB, "Craw Wurm", 1);
     }
 
