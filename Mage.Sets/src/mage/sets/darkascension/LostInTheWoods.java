@@ -27,27 +27,24 @@
  */
 package mage.sets.darkascension;
 
-import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.cards.CardImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DiscardTargetEffect;
 import mage.cards.Card;
+import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -99,7 +96,7 @@ class LostInTheWoodsEffect extends OneShotEffect<LostInTheWoodsEffect> {
             player.revealCards("Lost in the Woods", cards, game);
 
             if (card != null) {
-                if (card.getName().equals("Forest")) {
+                if (card.getSubtype().contains("Forest")) {
                     Permanent permanent = game.getPermanent(targetPointer.getFirst(source));
                     if (permanent != null) {
                         permanent.removeFromCombat(game);
