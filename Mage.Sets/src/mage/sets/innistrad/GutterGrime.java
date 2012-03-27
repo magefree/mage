@@ -30,10 +30,8 @@ package mage.sets.innistrad;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
-import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.SubLayer;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.MageObject;
@@ -41,12 +39,9 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.CountersCount;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -71,7 +66,6 @@ public class GutterGrime extends CardImpl<GutterGrime> {
 
         // Whenever a nontoken creature you control dies, put a slime counter on Gutter Grime, then put a green Ooze creature token onto the battlefield with "This creature's power and toughness are each equal to the number of slime counters on Gutter Grime."
         this.addAbility(new GutterGrimeTriggeredAbility());
-        
     }
 
     public GutterGrime(final GutterGrime card) {
@@ -105,7 +99,7 @@ class GutterGrimeTriggeredAbility extends TriggeredAbilityImpl<GutterGrimeTrigge
         if (event.getType() == EventType.ZONE_CHANGE) {
             UUID targetId = event.getTargetId();
             MageObject card = game.getLastKnownInformation(targetId, Zone.BATTLEFIELD);
-            if (card != null && card instanceof Permanent && !(card instanceof PermanentToken)) {
+            if (card instanceof Permanent && !(card instanceof PermanentToken)) {
                 Permanent permanent = (Permanent) card;
                 ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
                 if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD
@@ -157,45 +151,11 @@ class GutterGrimeToken extends Token {
 		super("Ooze", "green Ooze creature token with \"This creature's power and toughness are each equal to the number of slime counters on Gutter Grime.\"");
 		cardType.add(CardType.CREATURE);
 		subtype.add("Ooze");
-        color.setGreen(true);
-		power = MageInt.EmptyMageInt;
-		toughness = MageInt.EmptyMageInt;
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GutterGrimeTokenEffect(sourceId)));
+		color.setGreen(true);
+		power = new MageInt(0);
+		toughness = new MageInt(0);
+		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(new GutterGrimeCounters(sourceId), Duration.WhileOnBattlefield)));
 	}
-}
-
-class GutterGrimeTokenEffect extends ContinuousEffectImpl<GutterGrimeTokenEffect> {
-
-	private GutterGrimeCounters counters;
-	
-	public GutterGrimeTokenEffect(UUID sourceId) {
-		super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
-        counters = new GutterGrimeCounters(sourceId);
-        staticText = "This creature's power and toughness are each equal to the number of slime counters on Gutter Grime";
-	}
-
-	public GutterGrimeTokenEffect(final GutterGrimeTokenEffect effect) {
-		super(effect);
-        counters = effect.counters.clone();
-	}
-
-	@Override
-	public GutterGrimeTokenEffect copy() {
-		return new GutterGrimeTokenEffect(this);
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent token = game.getPermanent(source.getSourceId());
-		if (token != null) {
-			int count = counters.calculate(game, source);
-			token.getPower().setValue(count);
-			token.getToughness().setValue(count);
-			return true;
-		}
-		return false;
-	}
-
 }
 
 class GutterGrimeCounters implements DynamicValue {
@@ -222,11 +182,11 @@ class GutterGrimeCounters implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "the number of slime counters on Gutter Grime";
+        return "slime counters on Gutter Grime";
     }
 
     @Override
     public String toString() {
-        return "+X";
+        return "1";
     }
 }
