@@ -33,7 +33,6 @@ import mage.Constants.Duration;
 import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
@@ -81,7 +80,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl<BecomesCre
 								}
                             }
 						}
-						if (type == "" || type == null) {
+						if ("".equals(type) || type == null) {
 							permanent.getSubtype().clear();
 						}
 						if (token.getSubtype().size() > 0) {
@@ -106,10 +105,12 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl<BecomesCre
 					break;
 				case PTChangingEffects_7:
 					if (sublayer == SubLayer.SetPT_7b) {
-						if (token.getPower() != MageInt.EmptyMageInt)
-							permanent.getPower().setValue(token.getPower().getValue());
-						if (token.getToughness() != MageInt.EmptyMageInt)
-							permanent.getToughness().setValue(token.getToughness().getValue());
+						int power = token.getPower().getValue();
+						int toughness = token.getToughness().getValue();
+						if (power != 0 && toughness != 0) {
+							permanent.getPower().setValue(power);
+							permanent.getToughness().setValue(toughness);
+						}
 					}
 			}
 			return true;
@@ -131,7 +132,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl<BecomesCre
 
 	@Override
 	public boolean hasLayer(Layer layer) {
-		return layer == Layer.PTChangingEffects_7 || layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.ColorChangingEffects_5 || layer == layer.TypeChangingEffects_4;
+		return layer == Layer.PTChangingEffects_7 || layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.ColorChangingEffects_5 || layer == Layer.TypeChangingEffects_4;
 	}
 
 }

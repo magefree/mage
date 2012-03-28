@@ -27,20 +27,18 @@
  */
 package mage.abilities.effects.common.continious;
 
-import mage.Constants;
+import java.util.UUID;
+import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
-
-import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -77,7 +75,7 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl<BecomesCre
                     case TypeChangingEffects_4:
                         if (sublayer == SubLayer.NA) {
                             if (token.getCardType().size() > 0) {
-                                for (Constants.CardType t : token.getCardType()) {
+                                for (CardType t : token.getCardType()) {
                                     if (!permanent.getCardType().contains(t)) {
                                         permanent.getCardType().add(t);
                                     }
@@ -108,10 +106,12 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl<BecomesCre
                         break;
                     case PTChangingEffects_7:
                         if (sublayer == SubLayer.SetPT_7b) {
-                            if (token.getPower() != MageInt.EmptyMageInt)
-                                permanent.getPower().setValue(token.getPower().getValue());
-                            if (token.getToughness() != MageInt.EmptyMageInt)
-                                permanent.getToughness().setValue(token.getToughness().getValue());
+                            int power = token.getPower().getValue();
+                            int toughness = token.getToughness().getValue();
+                            if (power != 0 && toughness != 0) {
+                                permanent.getPower().setValue(power);
+                                permanent.getToughness().setValue(toughness);
+                            }
                         }
                 }
             }
@@ -127,7 +127,7 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl<BecomesCre
 
     @Override
     public boolean hasLayer(Layer layer) {
-        return layer == Layer.PTChangingEffects_7 || layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.ColorChangingEffects_5 || layer == layer.TypeChangingEffects_4;
+        return layer == Layer.PTChangingEffects_7 || layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.ColorChangingEffects_5 || layer == Layer.TypeChangingEffects_4;
     }
 
     @Override

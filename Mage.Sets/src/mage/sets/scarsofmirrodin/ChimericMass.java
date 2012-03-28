@@ -27,26 +27,28 @@
  */
 package mage.sets.scarsofmirrodin;
 
-import mage.Constants.*;
+import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Outcome;
+import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CountersCount;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
+import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
-
-import java.util.UUID;
 
 /**
  *
@@ -109,39 +111,8 @@ class ChimericMassToken extends Token {
 		super("", "Construct artifact creature with \"This creature's power and toughness are each equal to the number of charge counters on it.\"");
 		cardType.add(CardType.CREATURE);
 		subtype.add("Construct");
-		power = MageInt.EmptyMageInt;
-		toughness = MageInt.EmptyMageInt;
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ChimericMassTokenEffect()));
+		power = new MageInt(0);
+		toughness = new MageInt(0);
+		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(new CountersCount(CounterType.CHARGE), Duration.WhileOnBattlefield)));
 	}
-}
-
-class ChimericMassTokenEffect extends ContinuousEffectImpl<ChimericMassTokenEffect> {
-
-	private DynamicValue counters = new CountersCount(CounterType.CHARGE);
-	
-	public ChimericMassTokenEffect() {
-		super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
-	}
-
-	public ChimericMassTokenEffect(final ChimericMassTokenEffect effect) {
-		super(effect);
-	}
-
-	@Override
-	public ChimericMassTokenEffect copy() {
-		return new ChimericMassTokenEffect(this);
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent token = game.getPermanent(source.getSourceId());
-		if (token != null) {
-			int count = counters.calculate(game, source);
-			token.getPower().setValue(count);
-			token.getToughness().setValue(count);
-			return true;
-		}
-		return false;
-	}
-
 }
