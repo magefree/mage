@@ -52,9 +52,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.UUID;
 
 /**
@@ -395,7 +393,7 @@ public class MageBook extends JComponent {
     private HoverButton pageRight;
 
     private int currentPage = 0;
-    private String currentSet = "ISD";
+    private String currentSet = "DKA";
 
     private static CardDimensions cardDimensions = new CardDimensions(1.2d);
     private static final Logger log = Logger.getLogger(MageBook.class);
