@@ -33,8 +33,21 @@ import mage.util.Copyable;
 
 public class MageInt implements Serializable, Copyable<MageInt> {
 
-	public static MageInt EmptyMageInt = new MageInt(Integer.MIN_VALUE, null);
-	
+	public static MageInt EmptyMageInt = new MageInt(Integer.MIN_VALUE, null) {
+
+        private static final String exceptionMessage = "MageInt.EmptyMageInt can't be modified.";
+
+		@Override
+		public void boostValue(int amount) {
+			throw new RuntimeException(exceptionMessage);
+		}
+
+		@Override
+		public void setValue(int value) {
+			throw new RuntimeException(exceptionMessage);
+		}
+	};
+
 	protected int baseValue;
 	protected String cardValue = "";
 	
