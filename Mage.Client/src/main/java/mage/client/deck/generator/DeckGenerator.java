@@ -8,6 +8,7 @@ import mage.cards.decks.Deck;
 import mage.client.MageFrame;
 import mage.client.cards.CardsStorage;
 import mage.client.util.gui.ColorsChooser;
+import mage.client.util.sets.ConstructedFormats;
 import mage.interfaces.rate.RateCallback;
 import mage.sets.Sets;
 import mage.utils.CardUtil;
@@ -30,6 +31,7 @@ public class DeckGenerator {
 
     private static JDialog dlg;
     private static String selectedColors;
+    private static JComboBox formats;
 
     private static final int SPELL_CARD_POOL_SIZE = 180;
 
@@ -53,8 +55,11 @@ public class DeckGenerator {
     public static String generateDeck() {
         JPanel p0 = new JPanel();
         p0.setLayout(new BoxLayout(p0, BoxLayout.Y_AXIS));
+
         JLabel text = new JLabel("Choose color for your deck: ");
+        text.setAlignmentX(Component.CENTER_ALIGNMENT);
         p0.add(text);
+
         p0.add(Box.createVerticalStrut(5));
 	    String chosen = MageFrame.getPreferences().get("genDeckColor", "u");
         final ColorsChooser colorsChooser = new ColorsChooser(chosen);
@@ -62,7 +67,20 @@ public class DeckGenerator {
 
         p0.add(Box.createVerticalStrut(5));
         JLabel text2 = new JLabel("(X - random color)");
+        text2.setAlignmentX(Component.CENTER_ALIGNMENT);
         p0.add(text2);
+
+        p0.add(Box.createVerticalStrut(5));
+        JPanel jPanel = new JPanel();
+        JLabel text3 = new JLabel("Choose format:");
+        formats = new JComboBox(ConstructedFormats.getTypes());
+        formats.setSelectedIndex(3);
+        formats.setPreferredSize(new Dimension(100, 25));
+        formats.setMaximumSize(new Dimension(100, 25));
+        formats.setAlignmentX(Component.LEFT_ALIGNMENT);
+        jPanel.add(text3);
+        jPanel.add(formats);
+        p0.add(jPanel);
 
         final JButton btnGenerate = new JButton("Ok");
         btnGenerate.addActionListener(new ActionListener() {
@@ -112,6 +130,13 @@ public class DeckGenerator {
         List<ColoredManaSymbol> allowedColors = new ArrayList<ColoredManaSymbol>();
         selectedColors = selectedColors.toUpperCase();
 
+        String format = (String)formats.getSelectedItem();
+        List<String> setsToUse = ConstructedFormats.getSetsByFormat(format);
+        if (setsToUse.isEmpty()) {
+            // use all
+            setsToUse = CardsStorage.getSetCodes();
+        }
+
         if (selectedColors.contains("X")) {
             selectedColors = getRandomColors(selectedColors);
         }
@@ -125,10 +150,12 @@ public class DeckGenerator {
         if (selectedColors.length() > 2) {
             cardPoolSize += ADDITIONAL_CARDS_FOR_3_COLOR_DECKS;
         }
-        List<Card> spellCardPool = generateSpellCardPool(cardPoolSize, allowedColors);
-        List<Card> landCardPool = generateNonBasicLandCardPool(MAX_NON_BASIC_SOURCE, allowedColors);
+        List<Card> spellCardPool = generateSpellCardPool(cardPoolSize, allowedColors, setsToUse);
+        List<Card> landCardPool = generateNonBasicLandCardPool(MAX_NON_BASIC_SOURCE, allowedColors, setsToUse);
 
         System.out.println("deck generator card pool: spells=" + spellCardPool.size() + ", lands=" + landCardPool.size());
+
+        final List<String> setsToUseFinal = setsToUse;
 
 	    deck = DeckBuilder.buildDeck(spellCardPool, allowedColors, landCardPool, new RateCallback() {
 		    @Override
@@ -137,7 +164,14 @@ public class DeckGenerator {
 		    }
 		    @Override
 		    public Card getBestBasicLand(ColoredManaSymbol color) {
-			    return DeckGenerator.getBestBasicLand(color);
+			    int tries = 100;
+                Card land;
+                do {
+                    land = DeckGenerator.getBestBasicLand(color);
+                    tries--;
+                    if (tries < 0) break;
+                } while (!setsToUseFinal.contains(land.getExpansionSetCode()));
+                return land;
 		    }
 	    });
     }
@@ -171,18 +205,22 @@ public class DeckGenerator {
      * @param allowedColors
      * @return
      */
-    private static List<Card> generateSpellCardPool(int cardsCount, List<ColoredManaSymbol> allowedColors) {
+    private static List<Card> generateSpellCardPool(int cardsCount, List<ColoredManaSymbol> allowedColors, List<String> setsToUse) {
         List<Card> spellCardPool = new ArrayList<Card>();
 
         int count = 0;
-        List<Card> allCards = new ArrayList<Card>();
-        allCards.addAll(CardsStorage.getAllCards());
-        int allCount = allCards.size();
+        List<Card> cardPool = new ArrayList<Card>();
+        for (Card card : CardsStorage.getAllCards()) {
+            if (setsToUse.contains(card.getExpansionSetCode())) {
+                cardPool.add(card);
+            }
+        }
+        int cardPoolCount = cardPool.size();
         Random random = new Random();
-        if (allCount > 0) {
+        if (cardPoolCount > 0) {
             int tries = 0;
             while (count < cardsCount) {
-                Card card = allCards.get(random.nextInt(allCount));
+                Card card = cardPool.get(random.nextInt(cardPoolCount));
                 if (!card.getCardType().contains(CardType.LAND)) {
                     if (cardFitsChosenColors(card, allowedColors)) {
                         spellCardPool.add(card);
@@ -234,12 +272,16 @@ public class DeckGenerator {
      * @param allowedColors
      * @return
      */
-    private static List<Card> generateNonBasicLandCardPool(int landsCount, List<ColoredManaSymbol> allowedColors) {
+    private static List<Card> generateNonBasicLandCardPool(int landsCount, List<ColoredManaSymbol> allowedColors, List<String> setsToUse) {
         List<Card> nonBasicLandCardPool = new ArrayList<Card>();
 
         int count = 0;
         List<Card> landCards = new ArrayList<Card>();
-        landCards.addAll(CardsStorage.getNonBasicLandCards());
+        for (Card land : CardsStorage.getNonBasicLandCards()) {
+            if (setsToUse.contains(land.getExpansionSetCode())) {
+                landCards.add(land);
+            }
+        }
         int allCount = landCards.size();
         Random random = new Random();
         if (allCount > 0) {
