@@ -34,6 +34,7 @@ import mage.abilities.Mode;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.stack.Spell;
 
 /**
  *
@@ -43,6 +44,8 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl<EntersBattlef
 
 	protected Effects baseEffects = new Effects();
 	protected String text;
+
+    public static final String SOURCE_CAST_SPELL_ABILITY = "sourceCastSpellAbility";
 
 	public EntersBattlefieldEffect(Effect baseEffect) {
 		this(baseEffect, "");
@@ -79,7 +82,7 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl<EntersBattlef
 
 	@Override
 	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		//Spell spell = game.getStack().getSpell(event.getSourceId());
+		Spell spell = game.getStack().getSpell(event.getSourceId());
 		for (Effect effect: baseEffects) {
 			if (source.activate(game, false)) {
 				if (effect instanceof ContinuousEffect) {
@@ -92,6 +95,9 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl<EntersBattlef
 						effect.apply(game, spell.getSpellAbility());
 					else
 						effect.apply(game, source);*/
+                    if (spell != null) {
+                        effect.setValue(SOURCE_CAST_SPELL_ABILITY, spell.getSpellAbility());
+                    }
                     effect.apply(game, source);
 				}
 			}

@@ -27,14 +27,7 @@
  */
 package mage.sets.scarsofmirrodin;
 
-import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Layer;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.SubLayer;
-import mage.Constants.Zone;
+import mage.Constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -44,6 +37,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CountersCount;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
 import mage.cards.CardImpl;
@@ -51,6 +45,8 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
+
+import java.util.UUID;
 
 /**
  *
@@ -87,13 +83,18 @@ class ChimericMassEffect extends OneShotEffect<ChimericMassEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int amount = source.getManaCostsToPay().getX();
-        Permanent p = game.getPermanent(source.getSourceId());
-        if (p != null) {
-            p.addCounters(CounterType.CHARGE.createInstance(amount), game);
+        Object value = getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
+        if (value != null && value instanceof Ability) {
+            Ability castAbility = (Ability)value;
+            int amount = castAbility.getManaCostsToPay().getX();
+            Permanent p = game.getPermanent(source.getSourceId());
+            if (p != null) {
+                p.addCounters(CounterType.CHARGE.createInstance(amount), game);
+                return true;
+            }
             return true;
         }
-        return true;
+        return false;
     }
 
     @Override
