@@ -78,13 +78,14 @@ public class ReturnFromExileEffect extends OneShotEffect<ReturnFromExileEffect> 
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		ExileZone exile = game.getExile().getExileZone(exileId).copy();
+		ExileZone exile = game.getExile().getExileZone(exileId);
 		if (exile != null) {
+            exile = exile.copy();
 			for (UUID cardId: exile) {
 				Card card = game.getCard(cardId);
 				card.moveToZone(zone, source.getId(), game, tapped);
 			}
-			exile.clear();
+			game.getExile().getExileZone(exileId).clear();
 			return true;
 		}
 		return false;

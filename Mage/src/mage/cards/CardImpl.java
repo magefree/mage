@@ -238,7 +238,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                         break;
                     default:
                         logger.fatal("invalid zone for card - " + fromZone);
-                        return false;
+                        break;
                 }
                 game.rememberLKI(objectId, event.getFromZone(), this);
             }

@@ -346,7 +346,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	public void discardToMax(Game game) {
 		while (hand.size() > this.maxHandSize) {
 			TargetDiscard target = new TargetDiscard(playerId);
-			chooseTarget(Outcome.Discard, target, null, game);
+			choose(Outcome.Discard, target, null, game);
 			discard(hand.get(target.getFirstTarget(), game), null, game);
 		}
 	}

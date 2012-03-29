@@ -194,11 +194,14 @@ class KarnLiberatedDelayedEffect extends OneShotEffect<KarnLiberatedDelayedEffec
     @Override
     public boolean apply(Game game, Ability source) {
         ExileZone exile = game.getExile().getExileZone(exileId);
-        for (Card card: exile.getCards(game)) {
-			card.putOntoBattlefield(game, Zone.EXILED, source.getSourceId(), source.getControllerId());
+        if (exile != null) {
+            for (Card card: exile.getCards(game)) {
+                card.putOntoBattlefield(game, Zone.EXILED, source.getSourceId(), source.getControllerId());
+            }
+            exile.clear();
+            return true;
         }
-		exile.clear();
-        return true;
+        return false;
     }
 
     @Override
