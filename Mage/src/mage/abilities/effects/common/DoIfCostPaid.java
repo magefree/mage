@@ -6,7 +6,6 @@ import mage.abilities.Mode;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 public class DoIfCostPaid extends OneShotEffect<DoIfCostPaid> {

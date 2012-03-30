@@ -42,7 +42,6 @@ import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -62,7 +61,7 @@ public class HorizonSpellbomb extends CardImpl<HorizonSpellbomb> {
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
-        this.addAbility(new DiesTriggeredAbility(new DoIfCostPaid(new DrawCardControllerEffect(1), new ManaCostsImpl("{G}")), false));
+        this.addAbility(new DiesTriggeredAbility(new DoIfCostPaid(new DrawCardControllerEffect(1), new ManaCostsImpl("{G}"))));
     }
 
     public HorizonSpellbomb(final HorizonSpellbomb card) {

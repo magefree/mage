@@ -37,7 +37,6 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.watchers.Watcher;
 
 public interface Card extends MageObject {
@@ -76,9 +75,18 @@ public interface Card extends MageObject {
      * <li>BATTLEFIELD: <ul><li>true - tapped</li><li>false - untapped</li></ul></li>
      * <li>GRAVEYARD: <ul><li>true - not from Battlefield</li><li>false - from Battlefield</li></ul></li>
      * </ul>
-     * @return true if cards was moved to zone
+     * @return true if card was moved to zone
      */
 	public boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag);
+
+    /**
+     * Moves the card to an exile zone
+     * @param exileId set to null for generic exile zone
+     * @param name used for exile zone with the specified exileId
+     * @param sourceId
+     * @param game
+     * @return true if card was moved to zone
+     */
 	public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game);
 	public boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId);
 	public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId);
