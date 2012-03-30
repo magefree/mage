@@ -67,8 +67,10 @@ public class ConditionalOneShotEffect extends OneShotEffect<ConditionalOneShotEf
 	@Override
 	public boolean apply(Game game, Ability source) {
 		if (condition.apply(game, source)) {
+			effect.setTargetPointer(this.targetPointer);
 			return effect.apply(game, source);
 		} else if (otherwiseEffect != null) {
+			otherwiseEffect.setTargetPointer(this.targetPointer);
 			return otherwiseEffect.apply(game, source);
 		}
 		return false;

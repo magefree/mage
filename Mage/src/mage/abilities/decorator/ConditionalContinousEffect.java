@@ -48,8 +48,10 @@ public class ConditionalContinousEffect extends ContinuousEffectImpl<Conditional
     @Override
     public boolean apply(Constants.Layer layer, Constants.SubLayer sublayer, Ability source, Game game) {
         if (condition.apply(game, source)) {
+            effect.setTargetPointer(this.targetPointer);
             return effect.apply(layer, sublayer, source, game);
         } else if (otherwiseEffect != null) {
+            otherwiseEffect.setTargetPointer(this.targetPointer);
             return otherwiseEffect.apply(layer, sublayer, source, game);
         }
         return false;
@@ -58,8 +60,10 @@ public class ConditionalContinousEffect extends ContinuousEffectImpl<Conditional
     @Override
     public boolean apply(Game game, Ability source) {
         if (condition.apply(game, source)) {
+            effect.setTargetPointer(this.targetPointer);
             return effect.apply(game, source);
         } else if (otherwiseEffect != null) {
+            otherwiseEffect.setTargetPointer(this.targetPointer);
             return otherwiseEffect.apply(game, source);
         }
         return false;

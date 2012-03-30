@@ -31,6 +31,7 @@ public class DoIfCostPaid extends OneShotEffect<DoIfCostPaid> {
 			if (player.chooseUse(executingEffect.getOutcome(), "Pay " + cost.getText() + " and " + executingEffect.getText(source.getModes().getMode()), game)) {
 				cost.clearPaid();
 				if (cost.pay(source, game, source.getId(), source.getControllerId(), false)) {
+                    executingEffect.setTargetPointer(this.targetPointer);
                     return executingEffect.apply(game, source);
                 }
 			}
