@@ -54,7 +54,7 @@ public class ArchiveTrap extends CardImpl<ArchiveTrap> {
         super(ownerId, 41, "Archive Trap", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
         this.expansionSetCode = "ZEN";
 
-        this.subtype.add("Elf");
+        this.subtype.add("Trap");
         this.color.setBlue(true);
 
         this.getSpellAbility().addTarget(new TargetOpponent());
