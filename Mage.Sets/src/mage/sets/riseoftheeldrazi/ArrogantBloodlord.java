@@ -92,15 +92,13 @@ class ArrogantBloodlordTriggeredAbility extends TriggeredAbilityImpl<ArrogantBlo
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.BLOCKER_DECLARED) {
-            Permanent blocker = game.getPermanent(event.getTargetId());
-            if (blocker != null && blocker.getPower().getValue() < 2) {
+            Permanent blocker = game.getPermanent(event.getSourceId());
+            Permanent arrogantBloodlord = game.getPermanent(sourceId);
+            if (blocker != null && blocker != arrogantBloodlord && blocker.getPower().getValue() < 2) {
                 return true;
             }
-            if (blocker == game.getPermanent(event.getSourceId())) {
-                if (blocker != null && game.getPermanent(event.getTargetId()).getPower().getValue() < 2) {
+            if (blocker != null && blocker == arrogantBloodlord && game.getPermanent(event.getTargetId()).getPower().getValue() < 2) {
                     return true;
-                }
-                return false;
             }
             return false;
         }
