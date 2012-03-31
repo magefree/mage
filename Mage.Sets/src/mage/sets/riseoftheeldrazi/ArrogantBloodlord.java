@@ -107,7 +107,7 @@ class ArrogantBloodlordTriggeredAbility extends TriggeredAbilityImpl<ArrogantBlo
 
     @Override
     public String getRule() {
-        return "Whenever Arrogant Bloodlord blocks or becomes blocked by a creature with power 1 or less, destroy Arrogant Bloodlord at end of combat.";
+        return "Whenever {this} blocks or becomes blocked by a creature with power 1 or less, destroy {this} at end of combat.";
     }
 }
 
@@ -115,7 +115,7 @@ class ArrogantBloodlordEffect extends OneShotEffect<ArrogantBloodlordEffect> {
     
     ArrogantBloodlordEffect() {
         super(Outcome.Detriment);
-        staticText = "Destroy Arrogant Bloodlord at the end of combat";
+        staticText = "Destroy {this} at the end of combat";
     }
     
     ArrogantBloodlordEffect(final ArrogantBloodlordEffect effect) {
