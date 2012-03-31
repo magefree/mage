@@ -81,7 +81,7 @@ public class AngelheartVial extends CardImpl<AngelheartVial> {
 class AngelheartVialTriggeredAbility extends TriggeredAbilityImpl<AngelheartVialTriggeredAbility> {
 
 	public AngelheartVialTriggeredAbility() {
-		super(Constants.Zone.BATTLEFIELD, new AngelheartVialAddCounterEffect(), true);
+		super(Constants.Zone.BATTLEFIELD, new AngelheartVialEffect(), true);
 	}
 
 	public AngelheartVialTriggeredAbility(final AngelheartVialTriggeredAbility ability) {
@@ -108,19 +108,19 @@ class AngelheartVialTriggeredAbility extends TriggeredAbilityImpl<AngelheartVial
 	}
 }
 
-class AngelheartVialAddCounterEffect extends OneShotEffect<AngelheartVialAddCounterEffect> {
+class AngelheartVialEffect extends OneShotEffect<AngelheartVialEffect> {
     
-    public AngelheartVialAddCounterEffect() {
+    public AngelheartVialEffect() {
         super(Outcome.Benefit);
     }
     
-    public AngelheartVialAddCounterEffect(final AngelheartVialAddCounterEffect effect) {
+    public AngelheartVialEffect(final AngelheartVialEffect effect) {
         super(effect);
     }
     
     @Override
-    public AngelheartVialAddCounterEffect copy() {
-        return new AngelheartVialAddCounterEffect(this);
+    public AngelheartVialEffect copy() {
+        return new AngelheartVialEffect(this);
     }
     
     @Override
