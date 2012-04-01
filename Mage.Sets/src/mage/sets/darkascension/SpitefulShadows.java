@@ -39,12 +39,12 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
-import mage.game.events.DamagedCreatureEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -97,12 +97,11 @@ class SpitefulShadowsTriggeredAbility extends TriggeredAbilityImpl<SpitefulShado
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE) {
             Permanent enchantment = game.getPermanent(sourceId);
-            if (enchantment != null && enchantment.getAttachedTo() != null) {
-                if (event.getTargetId().equals(enchantment.getAttachedTo())) {
-                    this.getEffects().get(0).setValue("damageAmount", event.getAmount());
-                    this.getEffects().get(0).setValue("targetId", event.getTargetId());
-                    return true;
-                }
+            UUID targetId = event.getTargetId();
+            if (enchantment != null && enchantment.getAttachedTo() != null && targetId.equals(enchantment.getAttachedTo())) {
+                this.getEffects().get(0).setValue("damageAmount", event.getAmount());
+                this.getEffects().get(0).setTargetPointer(new FixedTarget(targetId));
+                return true;
             }
         }
         return false;
@@ -133,11 +132,12 @@ class SpitefulShadowsEffect extends OneShotEffect<SpitefulShadowsEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Integer damageAmount = (Integer) this.getValue("damageAmount");
-        UUID targetId = (UUID) this.getValue("targetId");
+        UUID targetId = this.targetPointer.getFirst(source);
         if (damageAmount != null && targetId != null) {
             Permanent permanent = game.getPermanent(targetId);
-            if (permanent == null)
+            if (permanent == null) {
                 permanent = (Permanent) game.getLastKnownInformation(targetId, Zone.BATTLEFIELD);
+            }
             if (permanent != null) {
                 Player player = game.getPlayer(permanent.getControllerId());
                 if (player != null) {
