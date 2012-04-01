@@ -28,7 +28,6 @@
 package mage.sets.tenth;
 
 import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -38,6 +37,7 @@ import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.TargetPlayer;
 
 /**
  *
@@ -53,6 +53,7 @@ public class Peek extends CardImpl<Peek> {
 
         // Look at target player's hand.
         this.getSpellAbility().addEffect(new PeekEffect());
+        this.getSpellAbility().addTarget(new TargetPlayer());
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
     }
