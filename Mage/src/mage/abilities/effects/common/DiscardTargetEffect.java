@@ -98,8 +98,12 @@ public class DiscardTargetEffect extends OneShotEffect<DiscardTargetEffect> {
 
 	@Override
 	public String getText(Mode mode) {
-        StringBuilder sb = new StringBuilder("Target ");
-		sb.append(mode.getTargets().get(0).getTargetName());
+        StringBuilder sb = new StringBuilder();
+		if(mode.getTargets().isEmpty()){
+			sb.append("that player");
+		} else {
+			sb.append("Target ").append(mode.getTargets().get(0).getTargetName());
+		}
 		sb.append(" discards ");
         sb.append(amount).append(" card");
         try {
