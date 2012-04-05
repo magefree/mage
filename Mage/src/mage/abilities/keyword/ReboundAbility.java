@@ -131,8 +131,6 @@ public class ReboundAbility extends TriggeredAbilityImpl<ReboundAbility> {
  */
 class ReboundEffect extends OneShotEffect<ReboundEffect> {
 
-	private UUID originalId;
-
 	public ReboundEffect() {
 		super(Outcome.Benefit);
 	}
@@ -144,7 +142,7 @@ class ReboundEffect extends OneShotEffect<ReboundEffect> {
 	@Override
 	public boolean apply(Game game, Ability source) {
 		Spell sourceSpell = (Spell)game.getObject(source.getId());
-		if ( sourceSpell.isCopiedSpell() ) {
+		if ( sourceSpell != null && sourceSpell.isCopiedSpell() ) {
 			return false;
 		}
 		else {
@@ -201,7 +199,7 @@ class ReboundCastFromHandReplacementEffect extends ReplacementEffectImpl<Rebound
 	@Override
 	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
 		Spell sourceSpell = (Spell)game.getObject(source.getId());
-		if ( sourceSpell.isCopiedSpell() ) {
+		if ( sourceSpell != null && sourceSpell.isCopiedSpell() ) {
 			return false;
 		}
 		else {

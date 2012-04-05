@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darkascension;
+package mage.sets.zendikar;
 
 import java.util.UUID;
 import mage.Constants.CardType;
@@ -34,14 +34,13 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
@@ -50,11 +49,11 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author North
  */
-public class SpitefulShadows extends CardImpl<SpitefulShadows> {
+public class MireBlight extends CardImpl<MireBlight> {
 
-    public SpitefulShadows(UUID ownerId) {
-        super(ownerId, 75, "Spiteful Shadows", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
-        this.expansionSetCode = "DKA";
+    public MireBlight(UUID ownerId) {
+        super(ownerId, 104, "Mire Blight", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
+        this.expansionSetCode = "ZEN";
         this.subtype.add("Aura");
 
         this.color.setBlack(true);
@@ -62,35 +61,36 @@ public class SpitefulShadows extends CardImpl<SpitefulShadows> {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.UnboostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
-        // Whenever enchanted creature is dealt damage, it deals that much damage to its controller.
-        this.addAbility(new SpitefulShadowsTriggeredAbility());
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+        // When enchanted creature is dealt damage, destroy it.
+        this.addAbility(new MireBlightTriggeredAbility());
     }
 
-    public SpitefulShadows(final SpitefulShadows card) {
+    public MireBlight(final MireBlight card) {
         super(card);
     }
 
     @Override
-    public SpitefulShadows copy() {
-        return new SpitefulShadows(this);
+    public MireBlight copy() {
+        return new MireBlight(this);
     }
 }
 
-class SpitefulShadowsTriggeredAbility extends TriggeredAbilityImpl<SpitefulShadowsTriggeredAbility> {
+class MireBlightTriggeredAbility extends TriggeredAbilityImpl<MireBlightTriggeredAbility> {
 
-    public SpitefulShadowsTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new SpitefulShadowsEffect());
+    public MireBlightTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new DestroyTargetEffect());
     }
 
-    public SpitefulShadowsTriggeredAbility(final SpitefulShadowsTriggeredAbility ability) {
+    public MireBlightTriggeredAbility(final MireBlightTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public SpitefulShadowsTriggeredAbility copy() {
-        return new SpitefulShadowsTriggeredAbility(this);
+    public MireBlightTriggeredAbility copy() {
+        return new MireBlightTriggeredAbility(this);
     }
 
     @Override
@@ -99,7 +99,6 @@ class SpitefulShadowsTriggeredAbility extends TriggeredAbilityImpl<SpitefulShado
             Permanent enchantment = game.getPermanent(sourceId);
             UUID targetId = event.getTargetId();
             if (enchantment != null && enchantment.getAttachedTo() != null && targetId.equals(enchantment.getAttachedTo())) {
-                this.getEffects().get(0).setValue("damageAmount", event.getAmount());
                 this.getEffects().get(0).setTargetPointer(new FixedTarget(targetId));
                 return true;
             }
@@ -109,43 +108,6 @@ class SpitefulShadowsTriggeredAbility extends TriggeredAbilityImpl<SpitefulShado
 
     @Override
     public String getRule() {
-        return "Whenever enchanted creature is dealt damage, it deals that much damage to its controller.";
-    }
-}
-
-class SpitefulShadowsEffect extends OneShotEffect<SpitefulShadowsEffect> {
-
-    public SpitefulShadowsEffect() {
-        super(Outcome.Damage);
-        this.staticText = "it deals that much damage to its controller";
-    }
-
-    public SpitefulShadowsEffect(final SpitefulShadowsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SpitefulShadowsEffect copy() {
-        return new SpitefulShadowsEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Integer damageAmount = (Integer) this.getValue("damageAmount");
-        UUID targetId = this.targetPointer.getFirst(source);
-        if (damageAmount != null && targetId != null) {
-            Permanent permanent = game.getPermanent(targetId);
-            if (permanent == null) {
-                permanent = (Permanent) game.getLastKnownInformation(targetId, Zone.BATTLEFIELD);
-            }
-            if (permanent != null) {
-                Player player = game.getPlayer(permanent.getControllerId());
-                if (player != null) {
-                    player.damage(damageAmount, targetId, game, false, true);
-                    return true;
-                }
-            }
-        }
-        return false;
+        return "When enchanted creature is dealt damage, destroy it.";
     }
 }

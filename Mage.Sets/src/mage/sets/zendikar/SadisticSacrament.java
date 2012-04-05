@@ -53,6 +53,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class SadisticSacrament extends CardImpl<SadisticSacrament> {
 
+    private static final String ruleText = "Search target player's library for up to three cards, exile them, then that player shuffles his or her library. If {this} was kicked, instead search that player's library for up to fifteen cards, exile them, then that player shuffles his or her library";
+
     public SadisticSacrament(UUID ownerId) {
         super(ownerId, 110, "Sadistic Sacrament", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{B}{B}{B}");
         this.expansionSetCode = "ZEN";
@@ -67,7 +69,7 @@ public class SadisticSacrament extends CardImpl<SadisticSacrament> {
                 new SadisticSacramentEffect(15),
                 new SadisticSacramentEffect(3),
                 KickedCondition.getInstance(),
-                "Search target player's library for up to three cards, exile them, then that player shuffles his or her library. If Sadistic Sacrament was kicked, instead search that player's library for up to fifteen cards, exile them, then that player shuffles his or her library"));
+                ruleText));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
