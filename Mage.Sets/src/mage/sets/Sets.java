@@ -255,7 +255,9 @@ public class Sets extends HashMap<String, ExpansionSet> {
                 }
             }
             if (cardsFound.size() > 0) {
-                return cardsFound.get(rnd.nextInt(cardsFound.size()));
+                Card card = cardsFound.get(rnd.nextInt(cardsFound.size()));
+                String cardClassName = card.getClass().getName();
+                return CardImpl.createCard(cardClassName);
             }
         }
 		return null;
