@@ -56,6 +56,8 @@ import mage.view.PlayerView;
 import org.mage.card.arcane.ManaSymbols;
 
 import javax.swing.*;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import java.awt.*;
@@ -69,8 +71,6 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
 
 /**
  * Enhanced player pane.
@@ -203,6 +203,11 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
 		// Avatar
 		Image image = ImageHelper.getImageFromResources("/avatars/unknown.jpg");
+
+        topCardPanel = Plugins.getInstance().getMageCard(new CardView(Sets.findCard("Forest")), bigCard, topCardDimension, gameId, true);
+		topCardPanel.setVisible(false);
+		panelBackground.add(topCardPanel);
+
 		BufferedImage resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
 		avatar = new HoverButton("player", resized, resized, resized, r);
 		avatar.setObserver(new Command() {
