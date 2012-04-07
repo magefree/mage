@@ -57,6 +57,7 @@ public class DrawStep extends Step<DrawStep> {
 		//20091005 - 504.1/703.4c
 		activePlayer.drawCards(1, game);
 //		game.saveState();
+        game.applyEffects();
 		super.beginStep(game, activePlayerId);
 	}
 
