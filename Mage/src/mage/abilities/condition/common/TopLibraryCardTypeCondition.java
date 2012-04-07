@@ -1,16 +1,16 @@
 /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- * 
+ *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
- * 
+ *
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
- * 
+ *
  *     2. Redistributions in binary form must reproduce the above copyright notice, this list
  *        of conditions and the following disclaimer in the documentation and/or other materials
  *        provided with the distribution.
- * 
+ *
  *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
@@ -20,70 +20,50 @@
  *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.abilities.condition.common;
 
-package mage.abilities.effects.common;
-
-import mage.Mana;
+import mage.Constants.CardType;
 import mage.abilities.Ability;
-import mage.choices.ChoiceColor;
+import mage.abilities.condition.Condition;
 import mage.game.Game;
-import mage.players.Player;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ * @author jeffwadsworth
  */
-public class AddManaOfAnyColorEffect extends ManaEffect<AddManaOfAnyColorEffect> {
+public class TopLibraryCardTypeCondition implements Condition {
 
-    protected int amount;
+    public static enum CheckType {CREATURE, LAND, SORCERY, INSTANT}
 
-    public AddManaOfAnyColorEffect() {
-        super();
-        this.amount = 1;
-        staticText = "add one mana of any color to your mana pool";
-    }
+    ;
 
-    public AddManaOfAnyColorEffect(final int amount) {
-        super();
-        this.amount = amount;
-    }
+    private TopLibraryCardTypeCondition.CheckType type;
 
-    public AddManaOfAnyColorEffect(final AddManaOfAnyColorEffect effect) {
-        super(effect);
-        this.amount = effect.amount;
-    }
-
-    @Override
-    public AddManaOfAnyColorEffect copy() {
-        return new AddManaOfAnyColorEffect(this);
+    public TopLibraryCardTypeCondition(TopLibraryCardTypeCondition.CheckType type) {
+        this.type = type;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
-        Player player = game.getPlayer(source.getControllerId());
-
-        if (choice.getColor().isBlack()) {
-            player.getManaPool().addMana(Mana.BlackMana(amount), game, source);
-            return true;
-        } else if (choice.getColor().isBlue()) {
-            player.getManaPool().addMana(Mana.BlueMana(amount), game, source);
-            return true;
-        } else if (choice.getColor().isRed()) {
-            player.getManaPool().addMana(Mana.RedMana(amount), game, source);
-            return true;
-        } else if (choice.getColor().isGreen()) {
-            player.getManaPool().addMana(Mana.GreenMana(amount), game, source);
-            return true;
-        } else if (choice.getColor().isWhite()) {
-            player.getManaPool().addMana(Mana.WhiteMana(amount), game, source);
-            return true;
+        boolean conditionApplies = false;
+        switch (this.type) {
+            case CREATURE:
+                conditionApplies |= game.getPlayer(source.getControllerId()).getLibrary().getFromTop(game).getCardType().contains(CardType.CREATURE);
+                break;
+            case LAND:
+                conditionApplies |= game.getPlayer(source.getControllerId()).getLibrary().getFromTop(game).getCardType().contains(CardType.LAND);
+                break;
+            case SORCERY:
+                conditionApplies |= game.getPlayer(source.getControllerId()).getLibrary().getFromTop(game).getCardType().contains(CardType.SORCERY);
+                break;
+            case INSTANT:
+                conditionApplies |= game.getPlayer(source.getControllerId()).getLibrary().getFromTop(game).getCardType().contains(CardType.INSTANT);
+                break;
         }
-        return false;
+        return conditionApplies;
     }
-
 }
