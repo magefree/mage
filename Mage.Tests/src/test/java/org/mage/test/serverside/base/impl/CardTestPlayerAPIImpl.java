@@ -284,8 +284,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 			throws AssertionError {
 		int count = 0;
 		int fit = 0;
-		for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents(player.getId())) {
-			if (permanent.getName().equals(cardName)) {
+        int foundPower = 0;
+        int foundToughness = 0;
+        int found = 0;
+		for (Permanent permanent : currentGame.getBattlefield().getAllPermanents()) {
+			if (permanent.getName().equals(cardName) && permanent.getControllerId().equals(player.getId())) {
 				count++;
 				if (scope.equals(Filter.ComparisonScope.All)) {
 					Assert.assertEquals("Power is not the same (" + power + " vs. " + permanent.getPower().getValue() + ")",
@@ -295,8 +298,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 				} else if (scope.equals(Filter.ComparisonScope.Any)) {
 					if (power == permanent.getPower().getValue() && toughness == permanent.getToughness().getValue()) {
 						fit++;
-						break;
+                    	break;
 					}
+                    found++;
+                    foundPower = permanent.getPower().getValue();
+                    foundToughness = permanent.getToughness().getValue();
 				}
 			}
 		}
@@ -306,7 +312,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
 		if (scope.equals(Filter.ComparisonScope.Any)) {
 			Assert.assertTrue("There is no such creature under player's control with specified power&toughness, player=" + player.getName() +
-					", cardName=" + cardName, fit > 0);
+					", cardName=" + cardName + " (found similar: " + found + ", one of them: power=" + foundPower + " toughness=" + foundToughness + ")", fit > 0);
 		}
 	}
 

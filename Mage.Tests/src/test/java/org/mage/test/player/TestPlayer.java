@@ -116,7 +116,7 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
             }
         }
         pass();
-        return true;
+        return false;
     }
 
     @Override
