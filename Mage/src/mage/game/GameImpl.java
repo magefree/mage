@@ -449,9 +449,11 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		saveState();
 
 		//20091005 - 103.1
-		for (Player player: state.getPlayers().values()) {
-			player.shuffleLibrary(this);
-		}
+        if (!testMode) { //don't shuffle in test mode for card injection on top of player's libraries
+            for (Player player: state.getPlayers().values()) {
+                player.shuffleLibrary(this);
+            }
+        }
 
 		//20091005 - 103.2
 		TargetPlayer targetPlayer = new TargetPlayer();
@@ -1306,7 +1308,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 				setZone(card.getId(), Zone.LIBRARY);
 				player.getLibrary().putOnTop(card, this);
 			}
-			for (Card card : hand) {
+            for (Card card : hand) {
 				setZone(card.getId(), Zone.HAND);
 				player.getHand().add(card);
 			}
