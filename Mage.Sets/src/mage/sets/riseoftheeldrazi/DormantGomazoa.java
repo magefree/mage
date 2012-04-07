@@ -64,7 +64,7 @@ public class DormantGomazoa extends CardImpl<DormantGomazoa> {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipUntapSourceEffect()));
         
         // Whenever you become the target of a spell, you may untap Dormant Gomazoa.
-        this.addAbility(new BecomesTargetControllerSpellTriggeredAbility(new UntapSourceEffect()));
+        this.addAbility(new BecomesTargetControllerSpellTriggeredAbility(new UntapSourceEffect(), true));
     }
 
     public DormantGomazoa(final DormantGomazoa card) {
