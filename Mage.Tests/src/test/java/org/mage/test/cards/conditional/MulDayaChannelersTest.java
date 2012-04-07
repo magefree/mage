@@ -19,7 +19,9 @@ public class MulDayaChannelersTest extends CardTestPlayerBase {
     public void testBoostFromTopCreatureCard() {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 3);
         addCard(Constants.Zone.HAND, playerA, "Mul Daya Channelers");
+
         addCard(Constants.Zone.LIBRARY, playerA, "Memnite");
+        skipInitShuffling();
 
         castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Mul Daya Channelers");
 
@@ -53,8 +55,10 @@ public class MulDayaChannelersTest extends CardTestPlayerBase {
     public void testBoostLossThroughPhases() {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 3);
         addCard(Constants.Zone.HAND, playerA, "Mul Daya Channelers");
+
         addCard(Constants.Zone.LIBRARY, playerA, "Shock");
         addCard(Constants.Zone.LIBRARY, playerA, "Memnite");
+        skipInitShuffling();
 
         castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Mul Daya Channelers");
 

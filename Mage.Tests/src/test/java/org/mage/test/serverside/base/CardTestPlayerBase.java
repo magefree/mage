@@ -33,7 +33,9 @@ public abstract class CardTestPlayerBase extends CardTestPlayerAPIImpl {
 		BATTLEFIELD,
 		GRAVEYARD,
 		UNKNOWN
-	}
+    }
+
+    protected GameOptions gameOptions;
 
 	public CardTestPlayerBase() {
 	}
@@ -86,6 +88,8 @@ public abstract class CardTestPlayerBase extends CardTestPlayerAPIImpl {
 		libraryCardsB.clear();
 		commandsA.clear();
 		commandsB.clear();
+
+        gameOptions = new GameOptions();
 	}
 
 	public void load(String path) throws FileNotFoundException, GameException {
@@ -149,7 +153,7 @@ public abstract class CardTestPlayerBase extends CardTestPlayerAPIImpl {
 
 		boolean testMode = true;
 		long t1 = System.nanoTime();
-		GameOptions gameOptions = new GameOptions();
+
 		gameOptions.testMode = true;
 		gameOptions.stopOnTurn = stopOnTurn;
         gameOptions.stopAtStep = stopAtStep;
@@ -311,4 +315,7 @@ public abstract class CardTestPlayerBase extends CardTestPlayerAPIImpl {
 		}
 	}
 
+    protected void skipInitShuffling() {
+        gameOptions.skipInitShuffling = true;
+    }
 }

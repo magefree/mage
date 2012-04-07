@@ -32,5 +32,9 @@ public class GameOptions implements Serializable {
      * Stop at the end of the turn if true otherwise stop at the beginning
      */
     public PhaseStep stopAtStep = PhaseStep.UNTAP;
-    
+
+    /**
+     * If true, library won't be shuffled at the beginning of the game
+     */
+    public boolean skipInitShuffling = false;
 }

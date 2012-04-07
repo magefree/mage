@@ -63,8 +63,8 @@ public class TwoPlayerDuel extends GameImpl<TwoPlayerDuel> {
 	}
 
 	@Override
-	protected void init(UUID choosingPlayerId, boolean testMode) {
-		super.init(choosingPlayerId, testMode);
+	protected void init(UUID choosingPlayerId, GameOptions gameOptions) {
+		super.init(choosingPlayerId, gameOptions);
 		state.getTurnMods().add(new TurnMod(startingPlayerId, PhaseStep.DRAW));
 	}
 

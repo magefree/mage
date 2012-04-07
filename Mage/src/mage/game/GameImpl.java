@@ -382,7 +382,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         startTime = new Date();
         this.gameOptions = options;
         scorePlayer = state.getPlayers().values().iterator().next();
-		init(choosingPlayerId, options.testMode);
+		init(choosingPlayerId, options);
         play(startingPlayerId);
 		saveState();
 	}
@@ -441,7 +441,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		return false;
 	}
     
-	protected void init(UUID choosingPlayerId, boolean testMode) {
+	protected void init(UUID choosingPlayerId, GameOptions gameOptions) {
 		for (Player player: state.getPlayers().values()) {
 			player.beginTurn(this);
 		}
@@ -449,7 +449,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		saveState();
 
 		//20091005 - 103.1
-        if (!testMode) { //don't shuffle in test mode for card injection on top of player's libraries
+        if (!gameOptions.skipInitShuffling) { //don't shuffle in test mode for card injection on top of player's libraries
             for (Player player: state.getPlayers().values()) {
                 player.shuffleLibrary(this);
             }
@@ -479,10 +479,10 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		//20091005 - 103.3
 		for (UUID playerId: state.getPlayerList(startingPlayerId)) {
 			Player player = getPlayer(playerId);
-			if (!testMode || player.getLife() == 0) {
+			if (!gameOptions.testMode || player.getLife() == 0) {
 				player.setLife(this.getLife(), this);
 			}
-			if (!testMode) {
+			if (!gameOptions.testMode) {
 				player.drawCards(7, this);
 			}
 		}
