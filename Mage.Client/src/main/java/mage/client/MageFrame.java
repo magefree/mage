@@ -767,31 +767,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 		showDeckEditor(DeckEditorMode.Constructed, null, null, 0);
 	}//GEN-LAST:event_btnDeckEditorActionPerformed
 
-	private void btnChallengesActionPerformed(java.awt.event.ActionEvent evt) {
-		TableView table;
-		try {
-			MatchOptions options = new MatchOptions("1", "Two Player Duel");
-			options.getPlayerTypes().add("Human");
-			options.getPlayerTypes().add("Computer - default");
-			options.setDeckType("Limited");
-			options.setAttackOption(Constants.MultiplayerAttackOption.LEFT);
-			options.setRange(Constants.RangeOfInfluence.ALL);
-			options.setWinsNeeded(1);
-
-			//TODO: maybe we should have separate room id for quests (so they won't be visible in main tables list)
-			UUID roomId = MageFrame.getSession().getMainRoomId();
-
-			table = session.createTable(roomId, options);
-			session.joinTable(roomId, table.getTableId(), "Human", "Human", 1, Sets.loadDeck("UW Control.dck"));
-			session.joinTable(roomId, table.getTableId(), "Computer", "Computer - default", 1, Sets.loadDeck("UW Control.dck"));
-
-			//hideTables();
-			session.startChallenge(roomId, table.getTableId(), UUID.randomUUID());
-		} catch (Exception ex) {
-			//handleError(ex);
-		}
-	}
-
 	private void btnGamesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGamesActionPerformed
 		this.tablesPane.setVisible(true);
 		this.tablesPane.showTables();
