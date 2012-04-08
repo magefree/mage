@@ -30,7 +30,8 @@ package mage.util.functions;
 import mage.Constants;
 import mage.abilities.Ability;
 import mage.cards.Card;
-import mage.game.permanent.token.Token;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  * @author nantuko
@@ -38,6 +39,7 @@ import mage.game.permanent.token.Token;
 public class CopyFunction implements Function<Card, Card> {
 
 	protected Card target;
+	protected Game game;
 
 	public CopyFunction(Card target) {
 		if (target == null)
@@ -73,7 +75,11 @@ public class CopyFunction implements Function<Card, Card> {
 			Ability ability = ability0.copy();
 			ability.newId();
 			ability.setSourceId(target.getId());
-			target.addAbility(ability);
+			if(target instanceof Permanent) {
+				((Permanent)target).addAbility(ability, game);
+			} else {
+				target.addAbility(ability);
+			}
 		}
 
 		target.getPower().setValue(source.getPower().getValue());
@@ -82,7 +88,8 @@ public class CopyFunction implements Function<Card, Card> {
 		return target;
 	}
 
-	public Card from(Card source) {
+	public Card from(Card source, Game game) {
+        this.game = game;
 		return apply(source);
 	}
 }
