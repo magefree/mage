@@ -1,8 +1,12 @@
 package org.mage.test.serverside.base;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import mage.Constants;
+import mage.Constants.PhaseStep;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
+import mage.cards.decks.importer.DeckImporterUtil;
 import mage.filter.Filter;
 import mage.game.Game;
 import mage.game.GameException;
@@ -10,14 +14,9 @@ import mage.game.GameOptions;
 import mage.game.TwoPlayerDuel;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.sets.Sets;
 import org.junit.Assert;
 import org.junit.Before;
 import org.mage.test.serverside.base.impl.CardTestAPIImpl;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import mage.Constants.PhaseStep;
 
 /**
  * Base class for testing single cards and effects.
@@ -86,7 +85,7 @@ public abstract class CardTestBase extends CardTestAPIImpl {
 		playerA = createNewPlayer("PlayerA", aiTypeA);
 		playerA.setTestMode(true);
         logger.info("Loading deck...");
-		Deck deck = Deck.load(Sets.loadDeck("RB Aggro.dck"));
+		Deck deck = Deck.load(DeckImporterUtil.importDeck("RB Aggro.dck"));
         logger.info("Done!");
 		if (deck.getCards().size() < 40) {
 			throw new IllegalArgumentException("Couldn't load deck, deck size=" + deck.getCards().size());
@@ -96,7 +95,7 @@ public abstract class CardTestBase extends CardTestAPIImpl {
 
 		playerB = createNewPlayer("PlayerB", aiTypeB);
 		playerB.setTestMode(true);
-		Deck deck2 = Deck.load(Sets.loadDeck("RB Aggro.dck"));
+		Deck deck2 = Deck.load(DeckImporterUtil.importDeck("RB Aggro.dck"));
 		if (deck2.getCards().size() < 40) {
 			throw new IllegalArgumentException("Couldn't load deck, deck size=" + deck2.getCards().size());
 		}
@@ -144,7 +143,7 @@ public abstract class CardTestBase extends CardTestAPIImpl {
 		playerA = createNewPlayer("ComputerA", aiTypeA);
 		playerA.setTestMode(true);
 
-		Deck deck = Deck.load(Sets.loadDeck("RB Aggro.dck"));
+		Deck deck = Deck.load(DeckImporterUtil.importDeck("RB Aggro.dck"));
 
 		if (deck.getCards().size() < 40) {
 			throw new IllegalArgumentException("Couldn't load deck, deck size=" + deck.getCards().size());
@@ -154,7 +153,7 @@ public abstract class CardTestBase extends CardTestAPIImpl {
 
 		playerB = createNewPlayer("ComputerB", aiTypeB);
 		playerB.setTestMode(true);
-		Deck deck2 = Deck.load(Sets.loadDeck("RB Aggro.dck"));
+		Deck deck2 = Deck.load(DeckImporterUtil.importDeck("RB Aggro.dck"));
 		if (deck2.getCards().size() < 40) {
 			throw new IllegalArgumentException("Couldn't load deck, deck size=" + deck2.getCards().size());
 		}
@@ -308,7 +307,6 @@ public abstract class CardTestBase extends CardTestAPIImpl {
 				}
 			}
 			Assert.assertEquals("(Graveyard) Card counts are not equal (" + cardName + ")", expectedCount, actualCount);
-			return;
 		}
 	}
 

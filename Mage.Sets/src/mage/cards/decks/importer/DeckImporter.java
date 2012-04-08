@@ -26,66 +26,17 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.client.deckeditor;
+package mage.cards.decks.importer;
 
-import javax.swing.JOptionPane;
-import mage.cards.Card;
-import mage.cards.ExpansionSet;
 import mage.cards.decks.DeckCardLists;
-import mage.client.MageFrame;
-import mage.sets.Sets;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MWSDeckImporter extends DeckImporterImpl {
+public interface DeckImporter {
 
-	@Override
-	protected void readLine(String line, DeckCardLists deckList) {
-		if (line.length() == 0 || line.startsWith("//")) return;
-		boolean sideboard = false;
-		if (line.startsWith("SB:")) {
-			line = line.substring(3).trim();
-			sideboard = true;
-		}
-		int delim = line.indexOf(' ');
-		String lineNum = line.substring(0, delim).trim();
-		String setCode = "";
-		if (line.indexOf('[') != -1 ) {
-			int setStart = line.indexOf('[') + 1;
-			int setEnd = line.indexOf(']');
-			setCode = line.substring(setStart, setEnd).trim();
-			delim = setEnd;
-		}
-		String lineName = line.substring(delim + 1).trim();
-		try {
-			int num = Integer.parseInt(lineNum);
-			ExpansionSet set = null;
-			if (setCode.length() > 0)
-				set = Sets.findSet(setCode);
-			Card card;
-			if (set != null) {
-				card = set.findCard(lineName);
-			}
-			else {
-				card = Sets.findCard(lineName);
-			}
-			if (card == null)
-				sbMessage.append("Could not find card: '").append(lineName).append("' at line ").append(lineCount).append("\n");
-			else {
-				String cardName = card.getClass().getCanonicalName();
-				for (int i = 0; i < num; i++) {
-					if (!sideboard)
-						deckList.getCards().add(cardName);
-					else
-						deckList.getSideboard().add(cardName);
-				}
-			}
-		}
-		catch (NumberFormatException nfe) {
-			sbMessage.append("Invalid number: ").append(lineNum).append(" at line ").append(lineCount).append("\n");
-		}
-	}
+	public DeckCardLists importDeck(String file);
+	public String getErrors();
 
 }

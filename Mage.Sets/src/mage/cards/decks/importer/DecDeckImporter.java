@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.client.deckeditor;
+package mage.cards.decks.importer;
 
 import mage.cards.Card;
 import mage.cards.decks.DeckCardLists;

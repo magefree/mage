@@ -26,16 +26,57 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.client.deckeditor;
+package mage.cards.decks.importer;
 
+import java.io.File;
+import java.util.Scanner;
 import mage.cards.decks.DeckCardLists;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public interface DeckImporter {
+public abstract class DeckImporterImpl implements DeckImporter {
 
-	public DeckCardLists importDeck(String file);
-	
+	private final static Logger logger = Logger.getLogger(DeckImporterImpl.class);
+	protected StringBuilder sbMessage = new StringBuilder();
+	protected int lineCount;
+
+	@Override
+	public DeckCardLists importDeck(String file) {
+		File f = new File(file);
+		DeckCardLists deckList = new DeckCardLists();
+		lineCount = 0;
+		sbMessage.setLength(0);
+		try {
+			Scanner scanner = new Scanner(f);
+			try {
+				while (scanner.hasNextLine()) {
+					String line = scanner.nextLine().trim();
+					lineCount++;
+					readLine(line, deckList);
+				}
+				if (sbMessage.length() > 0) {
+                    logger.fatal(sbMessage);
+				}
+			}
+			catch (Exception ex) {
+				logger.fatal(null, ex);
+			}
+			finally {
+				scanner.close();
+			}
+		} catch (Exception ex) {
+			logger.fatal(null, ex);
+		}
+		return deckList;
+	}
+
+    @Override
+    public String getErrors(){
+        return sbMessage.toString();
+    }
+
+	protected abstract void readLine(String line, DeckCardLists deckList);
 }

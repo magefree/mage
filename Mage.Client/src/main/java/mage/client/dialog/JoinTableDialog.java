@@ -25,21 +25,13 @@
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
 */
-
-
-/*
- * JoinTableDialog.java
- *
- * Created on 15-Dec-2009, 11:18:48 PM
- */
-
 package mage.client.dialog;
 
-import mage.client.*;
 import java.util.UUID;
 import javax.swing.JOptionPane;
+import mage.cards.decks.importer.DeckImporterUtil;
+import mage.client.MageFrame;
 import mage.remote.Session;
-import mage.sets.Sets;
 import org.apache.log4j.Logger;
 
 /**
@@ -136,7 +128,7 @@ public class JoinTableDialog extends MageDialog {
 	private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
 		Session session = MageFrame.getSession();
 		try {
-			joined = session.joinTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), "Human", 1, Sets.loadDeck(this.newPlayerPanel.getDeckFile()));
+			joined = session.joinTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), "Human", 1, DeckImporterUtil.importDeck(this.newPlayerPanel.getDeckFile()));
 		} catch (Exception ex) {
 			handleError(ex);
 		}

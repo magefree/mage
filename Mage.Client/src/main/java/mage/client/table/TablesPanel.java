@@ -47,7 +47,6 @@ import mage.remote.MageRemoteException;
 import mage.remote.Session;
 import mage.client.util.ButtonColumn;
 import mage.game.match.MatchOptions;
-import mage.sets.Sets;
 import mage.view.TableView;
 import org.apache.log4j.Logger;
 
@@ -62,6 +61,7 @@ import java.util.*;
 import java.util.List;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
+import mage.cards.decks.importer.DeckImporterUtil;
 import mage.client.util.gui.GuiDisplayUtil;
 import mage.view.MatchView;
 
@@ -283,17 +283,17 @@ public class TablesPanel extends javax.swing.JPanel {
 
 	protected void reloadMessages() {
 		// reload server messages
-		List<String> messages = session.getServerMessages();
+		List<String> serverMessages = session.getServerMessages();
 		synchronized (this) {
-			this.messages = messages;
+			this.messages = serverMessages;
 			this.currentMessage = 0;
 		}
-		if (messages == null || messages.isEmpty()) {
+		if (serverMessages == null || serverMessages.isEmpty()) {
 			this.jPanel2.setVisible(false);
 		} else {
 			this.jPanel2.setVisible(true);
-			this.jLabel2.setText(messages.get(0));
-			this.jButton1.setVisible(messages.size() > 1);
+			this.jLabel2.setText(serverMessages.get(0));
+			this.jButton1.setVisible(serverMessages.size() > 1);
 		}
 	}
 
@@ -513,8 +513,8 @@ public class TablesPanel extends javax.swing.JPanel {
                 options.setRange(RangeOfInfluence.ALL);
                 options.setWinsNeeded(1);
                 table = session.createTable(roomId,	options);
-                session.joinTable(roomId, table.getTableId(), "Human", "Human", 1, Sets.loadDeck("test.dck"));
-                session.joinTable(roomId, table.getTableId(), "Computer", "Computer - minimax", 5, Sets.loadDeck("test.dck"));
+                session.joinTable(roomId, table.getTableId(), "Human", "Human", 1, DeckImporterUtil.importDeck("test.dck"));
+                session.joinTable(roomId, table.getTableId(), "Computer", "Computer - minimax", 5, DeckImporterUtil.importDeck("test.dck"));
                 session.startGame(roomId, table.getTableId());
             } catch (Exception ex) {
                 handleError(ex);

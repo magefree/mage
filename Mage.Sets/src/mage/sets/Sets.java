@@ -28,13 +28,10 @@
 
 package mage.sets;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.lang.reflect.Constructor;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import mage.Constants.CardType;
 import mage.Constants.ColoredManaSymbol;
 import mage.Mana;
@@ -295,50 +292,6 @@ public class Sets extends HashMap<String, ExpansionSet> {
 		if (fINSTANCE.containsKey(code))
 			return fINSTANCE.get(code);
 		return null;
-	}
-
-	public static DeckCardLists loadDeck(String file) throws FileNotFoundException {
-		DeckCardLists deckList = new DeckCardLists();
-
-		File f = new File(file);
-		Scanner scanner = new Scanner(f);
-		Pattern pattern = Pattern.compile("(SB:)?\\s*(\\d*)\\s*\\[([a-zA-Z0-9]{3}):(\\d*)\\].*");
-		try {
-			while (scanner.hasNextLine()) {
-				String line = scanner.nextLine().trim();
-				if (line.startsWith("#")) continue;
-				Matcher m = pattern.matcher(line);
-				if (m.matches()) {
-					boolean sideboard = false;
-					if (m.group(1) != null && m.group(1).equals("SB:"))
-						sideboard = true;
-					int count = Integer.parseInt(m.group(2));
-					String setCode = m.group(3);
-					int cardNum = Integer.parseInt(m.group(4));
-					ExpansionSet set = Sets.findSet(setCode);
-					String card = set.findCardName(cardNum);
-					for (int i = 0; i < count; i++) {
-						if (!sideboard) {
-							deckList.getCards().add(card);
-						}
-						else {
-							deckList.getSideboard().add(card);
-						}
-					}
-				}
-				else if (line.startsWith("NAME:")) {
-					deckList.setName(line.substring(5, line.length()));
-				}
-				else if (line.startsWith("AUTHOR:")) {
-					deckList.setAuthor(line.substring(7, line.length()));
-				}
-			}
-		}
-		finally {
-			scanner.close();
-		}
-
-		return deckList;
 	}
 
 	public static void saveDeck(String file, DeckCardLists deck) throws FileNotFoundException {

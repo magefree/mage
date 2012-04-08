@@ -25,18 +25,10 @@
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
 */
-
-/*
- * NewTableDialog.java
- *
- * Created on 15-Dec-2009, 10:35:42 PM
- */
-
 package mage.client.dialog;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import mage.client.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -45,12 +37,14 @@ import javax.swing.JOptionPane;
 import javax.swing.SpinnerNumberModel;
 import mage.Constants.MultiplayerAttackOption;
 import mage.Constants.RangeOfInfluence;
+import mage.client.MageFrame;
 import mage.client.components.MageComponents;
-import mage.remote.Session;
+import mage.cards.decks.importer.DeckImporterUtil;
 import mage.client.table.TablePlayerPanel;
 import mage.client.util.Event;
 import mage.client.util.Listener;
 import mage.game.match.MatchOptions;
+import mage.remote.Session;
 import mage.sets.Sets;
 import mage.view.GameTypeView;
 import mage.view.TableView;
@@ -322,7 +316,7 @@ public class NewTableDialog extends MageDialog {
 			return;
 		}
 		try {
-			if (session.joinTable(roomId, table.getTableId(), this.player1Panel.getPlayerName(), "Human", 1, Sets.loadDeck(this.player1Panel.getDeckFile()))) {
+			if (session.joinTable(roomId, table.getTableId(), this.player1Panel.getPlayerName(), "Human", 1, DeckImporterUtil.importDeck(this.player1Panel.getDeckFile()))) {
 				for (TablePlayerPanel player: players) {
 					if (!player.getPlayerType().equals("Human")) {
 						if (!player.joinTable(roomId, table.getTableId())) {

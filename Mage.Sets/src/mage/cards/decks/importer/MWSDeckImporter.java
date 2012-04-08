@@ -26,56 +26,64 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.client.deckeditor;
+package mage.cards.decks.importer;
 
-import java.io.File;
-import java.util.Scanner;
-import javax.swing.JOptionPane;
+import mage.cards.Card;
+import mage.cards.ExpansionSet;
 import mage.cards.decks.DeckCardLists;
-import mage.client.MageFrame;
-import org.apache.log4j.Logger;
+import mage.sets.Sets;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class DeckImporterImpl implements DeckImporter {
-
-	private final static Logger logger = Logger.getLogger(DeckImporterImpl.class);
-	protected StringBuilder sbMessage = new StringBuilder();
-	protected int lineCount;
+public class MWSDeckImporter extends DeckImporterImpl {
 
 	@Override
-	public DeckCardLists importDeck(String file) {
-		File f = new File(file);
-		DeckCardLists deckList = new DeckCardLists();
-		lineCount = 0;
-		sbMessage.setLength(0);
-		try {
-			Scanner scanner = new Scanner(f);
-			try {
-				while (scanner.hasNextLine()) {
-					String line = scanner.nextLine().trim();
-					lineCount++;
-					readLine(line, deckList);
-				}
-				if (sbMessage.length() > 0) {
-                    logger.fatal(sbMessage);
-					JOptionPane.showMessageDialog(MageFrame.getDesktop(), sbMessage.toString(), "Error importing deck", JOptionPane.ERROR_MESSAGE);
-				}
-			}
-			catch (Exception ex) {
-				JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage(), "Error importing deck", JOptionPane.ERROR_MESSAGE);
-				logger.fatal(null, ex);
-			}
-			finally {
-				scanner.close();
-			}
-		} catch (Exception ex) {
-			logger.fatal(null, ex);
+	protected void readLine(String line, DeckCardLists deckList) {
+		if (line.length() == 0 || line.startsWith("//")) return;
+		boolean sideboard = false;
+		if (line.startsWith("SB:")) {
+			line = line.substring(3).trim();
+			sideboard = true;
 		}
-		return deckList;
+		int delim = line.indexOf(' ');
+		String lineNum = line.substring(0, delim).trim();
+		String setCode = "";
+		if (line.indexOf('[') != -1 ) {
+			int setStart = line.indexOf('[') + 1;
+			int setEnd = line.indexOf(']');
+			setCode = line.substring(setStart, setEnd).trim();
+			delim = setEnd;
+		}
+		String lineName = line.substring(delim + 1).trim();
+		try {
+			int num = Integer.parseInt(lineNum);
+			ExpansionSet set = null;
+			if (setCode.length() > 0)
+				set = Sets.findSet(setCode);
+			Card card;
+			if (set != null) {
+				card = set.findCard(lineName);
+			}
+			else {
+				card = Sets.findCard(lineName);
+			}
+			if (card == null)
+				sbMessage.append("Could not find card: '").append(lineName).append("' at line ").append(lineCount).append("\n");
+			else {
+				String cardName = card.getClass().getCanonicalName();
+				for (int i = 0; i < num; i++) {
+					if (!sideboard)
+						deckList.getCards().add(cardName);
+					else
+						deckList.getSideboard().add(cardName);
+				}
+			}
+		}
+		catch (NumberFormatException nfe) {
+			sbMessage.append("Invalid number: ").append(lineNum).append(" at line ").append(lineCount).append("\n");
+		}
 	}
 
-	protected abstract void readLine(String line, DeckCardLists deckList);
 }

@@ -25,32 +25,21 @@
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
 */
-
-/*
- * PlayAreaPanel.java
- *
- * Created on Dec 22, 2009, 10:41:54 AM
- */
-
 package mage.client.game;
 
-import java.awt.*;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import mage.client.MageFrame;
-import mage.client.cards.BigCard;
-import mage.sets.Sets;
-import mage.view.PlayerView;
-
-import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
+import javax.swing.BorderFactory;
+import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
+import mage.client.MageFrame;
+import mage.client.cards.BigCard;
+import mage.cards.decks.importer.DeckImporterUtil;
+import mage.view.PlayerView;
 
 /**
  *
@@ -76,7 +65,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 		update(player);
 	}
 
-	public void init(PlayerView player, BigCard bigCard, UUID gameId) {
+	public final void init(PlayerView player, BigCard bigCard, UUID gameId) {
 		this.playerPanel.init(gameId, player.getPlayerId(), bigCard);
 		this.battlefieldPanel.init(gameId, bigCard);
 		if (MageFrame.getSession().isTestMode()) {
@@ -89,7 +78,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 		}
 	}
 
-	public void update(PlayerView player) {
+	public final void update(PlayerView player) {
 		this.playerPanel.update(player);
 		this.battlefieldPanel.update(player.getBattlefield());
 	}
@@ -107,6 +96,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 
         btnCheat.setText("Cheat");
         btnCheat.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCheatActionPerformed(evt);
             }
@@ -145,13 +135,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
     }
     
 	private void btnCheatActionPerformed(java.awt.event.ActionEvent evt) {
-		try {
-			MageFrame.getSession().cheat(gameId, playerId, Sets.loadDeck("cheat.dck"));
-		} catch (FileNotFoundException ex) {
-			Logger.getLogger(PlayAreaPanel.class.getName()).log(Level.SEVERE, null, ex);
-		} catch (IOException ex) {
-			Logger.getLogger(PlayAreaPanel.class.getName()).log(Level.SEVERE, null, ex);
-		}
+		MageFrame.getSession().cheat(gameId, playerId, DeckImporterUtil.importDeck("cheat.dck"));
 	}
 
     

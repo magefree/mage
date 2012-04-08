@@ -64,13 +64,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import mage.cards.decks.importer.DckDeckImporter;
 
 /**
  * Enhanced player pane.
@@ -520,13 +517,8 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 	}
 
 	private void btnCheatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheatActionPerformed
-		try {
-			session.cheat(gameId, playerId, Sets.loadDeck("cheat.dck"));
-		} catch (FileNotFoundException ex) {
-			Logger.getLogger(PlayAreaPanel.class.getName()).log(Level.SEVERE, null, ex);
-		} catch (IOException ex) {
-			Logger.getLogger(PlayAreaPanel.class.getName()).log(Level.SEVERE, null, ex);
-		}
+		DckDeckImporter deckImporter = new DckDeckImporter();
+		session.cheat(gameId, playerId, deckImporter.importDeck("cheat.dck"));
 	}
 
 	private HoverButton avatar;

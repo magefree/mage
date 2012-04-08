@@ -37,15 +37,13 @@ package mage.client.table;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.UUID;
-
 import javax.swing.DefaultComboBoxModel;
-
 import mage.client.MageFrame;
-import mage.remote.Session;
+import mage.cards.decks.importer.DeckImporterUtil;
 import mage.client.util.Config;
 import mage.client.util.Event;
 import mage.client.util.Listener;
-import mage.sets.Sets;
+import mage.remote.Session;
 
 /**
  *
@@ -79,7 +77,7 @@ public class TablePlayerPanel extends javax.swing.JPanel {
 
 	public boolean joinTable(UUID roomId, UUID tableId) throws FileNotFoundException, IOException, ClassNotFoundException {
 		if (!this.cbPlayerType.getSelectedItem().equals("Human")) {
-			return session.joinTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), (String)this.cbPlayerType.getSelectedItem(), this.newPlayerPanel.getLevel(), Sets.loadDeck(this.newPlayerPanel.getDeckFile()));
+			return session.joinTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), (String)this.cbPlayerType.getSelectedItem(), this.newPlayerPanel.getLevel(), DeckImporterUtil.importDeck(this.newPlayerPanel.getDeckFile()));
  		}
 		return true;
 	}

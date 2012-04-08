@@ -25,15 +25,10 @@
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
 */
-
-/*
- * DeckEditorPanel.java
- *
- * Created on Feb 18, 2010, 2:47:04 PM
- */
-
 package mage.client.deckeditor;
 
+import mage.cards.decks.importer.DeckImporter;
+import mage.cards.decks.importer.DeckImporterUtil;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -334,6 +329,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
         btnSave.setText("Save");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveActionPerformed(evt);
             }
@@ -341,6 +337,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
         btnLoad.setText("Load");
         btnLoad.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoadActionPerformed(evt);
             }
@@ -348,6 +345,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
         btnNew.setText("New");
         btnNew.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNewActionPerformed(evt);
             }
@@ -355,6 +353,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
         btnExit.setText("Exit");
         btnExit.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitActionPerformed(evt);
             }
@@ -363,6 +362,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         btnImport.setText("Import");
         btnImport.setName("btnImport"); // NOI18N
         btnImport.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnImportActionPerformed(evt);
             }
@@ -371,6 +371,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         btnSubmit.setText("Submit");
         btnSubmit.setName("btnSubmit"); // NOI18N
         btnSubmit.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSubmitActionPerformed(evt);
             }
@@ -379,6 +380,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         btnAddLand.setText("Add Land");
         btnAddLand.setName("btnAddLand"); // NOI18N
         btnAddLand.addActionListener(new java.awt.event.ActionListener() {
+            @Override
 	        public void actionPerformed(java.awt.event.ActionEvent evt) {
 		        btnAddLandActionPerformed(evt);
 	        }
@@ -480,7 +482,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 			File file = fcSelectDeck.getSelectedFile();
 			try {
 				setCursor(new Cursor(Cursor.WAIT_CURSOR));
-				deck = Deck.load(Sets.loadDeck(file.getPath()), true);
+				deck = Deck.load(DeckImporterUtil.importDeck(file.getPath()), true);
 			} catch (GameException ex) {
 				JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage(), "Error loading deck", JOptionPane.ERROR_MESSAGE);
 			} catch (Exception ex) {
@@ -550,9 +552,13 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 			File file = fcImportDeck.getSelectedFile();
 			try {
 				setCursor(new Cursor(Cursor.WAIT_CURSOR));
-				DeckImporter importer = getDeckImporter(file.getPath());
+				DeckImporter importer = DeckImporterUtil.getDeckImporter(file.getPath());
 				if (importer != null) {
 					deck = Deck.load(importer.importDeck(file.getPath()));
+					String errors = importer.getErrors();
+					if(!errors.isEmpty()){
+						JOptionPane.showMessageDialog(MageFrame.getDesktop(), errors, "Error importing deck", JOptionPane.ERROR_MESSAGE);
+					}
 				}
 				else {
 					JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Unknown deck format", "Error importing deck", JOptionPane.ERROR_MESSAGE);
@@ -584,17 +590,6 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 		AddLandDialog addLand = new AddLandDialog();
 		addLand.showDialog(deck);
 		refreshDeck();
-	}
-
-	public DeckImporter getDeckImporter(String file) {
-		if (file.toLowerCase().endsWith("dec"))
-			return new DecDeckImporter();
-		else if (file.toLowerCase().endsWith("mwdeck"))
-			return new MWSDeckImporter();
-		else if (file.toLowerCase().endsWith("txt"))
-			return new TxtDeckImporter();
-		else
-			return null;
 	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
