@@ -91,6 +91,6 @@ class UnderworldDreamsTriggeredAbility extends TriggeredAbilityImpl<UnderworldDr
 
     @Override
     public String getRule() {
-        return "Whenever an opponent draws a card, Underworld Dreams deals 1 damage to him or her";
+        return "Whenever an opponent draws a card, {this} deals 1 damage to him or her";
     }
 }
