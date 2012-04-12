@@ -193,7 +193,7 @@ public class CombatUtil {
         return blockers;
     }
 
-    private static SurviveInfo willItSurvive(Game game, UUID attackingPlayerId, UUID defendingPlayerId, Permanent attacker, Permanent blocker) {
+    public static SurviveInfo willItSurvive(Game game, UUID attackingPlayerId, UUID defendingPlayerId, Permanent attacker, Permanent blocker) {
         Game sim = game.copy();
 
         Combat combat = sim.getCombat();
@@ -223,6 +223,40 @@ public class CombatUtil {
         return new SurviveInfo(!sim.getBattlefield().containsPermanent(attacker.getId()), !sim.getBattlefield().containsPermanent(blocker.getId()));
     }
 
+    public static SurviveInfo getCombatInfo(Game game, UUID attackingPlayerId, UUID defendingPlayerId, Permanent attacker) {
+        Game sim = game.copy();
+
+        Combat combat = sim.getCombat();
+        combat.setAttacker(attackingPlayerId);
+        combat.setDefenders(sim);
+
+        UUID defenderId = sim.getCombat().getDefenders().iterator().next();
+        boolean triggered = false;
+
+        sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, defendingPlayerId, defendingPlayerId));
+
+        sim.checkStateAndTriggered();
+        while (!sim.getStack().isEmpty()) {
+            triggered = true;
+            sim.getStack().resolve(sim);
+            sim.applyEffects();
+        }
+        sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARE_BLOCKERS_STEP_POST, sim.getActivePlayerId(), sim.getActivePlayerId()));
+
+        simulateStep(sim, new FirstCombatDamageStep());
+		simulateStep(sim, new CombatDamageStep());
+		simulateStep(sim, new EndOfCombatStep());
+
+        sim.checkStateAndTriggered();
+        while (!sim.getStack().isEmpty()) {
+            triggered = true;
+            sim.getStack().resolve(sim);
+            sim.applyEffects();
+        }
+
+        return new SurviveInfo(!sim.getBattlefield().containsPermanent(attacker.getId()), false, sim.getPlayer(defenderId), triggered);
+    }
+
     protected static void simulateStep(Game game, Step step) {
         game.getPhase().setStep(step);
         if (!step.skipStep(game, game.getActivePlayerId())) {
@@ -235,4 +269,17 @@ public class CombatUtil {
             step.endStep(game, game.getActivePlayerId());
         }
 	}
+
+    public static boolean canBlock(Game game, Permanent blocker) {
+        boolean canBlock = true;
+        if (!blocker.isTapped()) {
+            try {
+                canBlock = blocker.canBlock(null, game);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return canBlock;
+    }
+
 }
