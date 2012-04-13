@@ -11,9 +11,6 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class PhantasmalImageTest extends CardTestPlayerBase {
 
-    /**
-     * When Oblivion Ring enters the battlefield, exile another target nonland permanent.
-     */
     @Test
     public void testCopyCreature() {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 2);
