@@ -45,6 +45,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInLibrary;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -114,9 +115,9 @@ class CurseOfMisfortunesEffect extends OneShotEffect<CurseOfMisfortunesEffect> {
                 if (player.searchLibrary(targetCard, game)) {
                     Card card = game.getCard(targetCard.getFirstTarget());
                     if (card != null) {
+                        this.setTargetPointer(new FixedTarget(targetPlayer.getId()));
                         player.shuffleLibrary(game);
-                        card.putOntoBattlefield(game, Constants.Zone.LIBRARY, source.getSourceId(), source.getControllerId());
-                        return targetPlayer.addAttachment(card.getId(), game);
+                        return card.putOntoBattlefield(game, Constants.Zone.LIBRARY, source.getId(), source.getControllerId());
                     }
                 }
                 player.shuffleLibrary(game);

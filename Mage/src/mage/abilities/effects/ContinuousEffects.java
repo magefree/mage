@@ -29,7 +29,6 @@
 package mage.abilities.effects;
 
 import java.io.Serializable;
-import java.util.Map.Entry;
 import java.util.*;
 import mage.Constants.AsThoughEffectType;
 import mage.Constants.Duration;
@@ -60,15 +59,18 @@ public class ContinuousEffects implements Serializable {
 
 	private final ApplyCountersEffect applyCounters;
 	private final PlaneswalkerRedirectionEffect planeswalkerRedirectionEffect;
+	private final AuraReplacementEffect auraReplacementEffect;
 
 	public ContinuousEffects() {
 		applyCounters = new ApplyCountersEffect();
 		planeswalkerRedirectionEffect = new PlaneswalkerRedirectionEffect();
+		auraReplacementEffect = new AuraReplacementEffect();
 	}
 
 	public ContinuousEffects(final ContinuousEffects effect) {
 		this.applyCounters = effect.applyCounters.copy();
 		this.planeswalkerRedirectionEffect = effect.planeswalkerRedirectionEffect.copy();
+		this.auraReplacementEffect = effect.auraReplacementEffect.copy();
         layeredEffects = effect.layeredEffects.copy();
         replacementEffects = effect.replacementEffects.copy();
         preventionEffects = effect.preventionEffects.copy();
@@ -190,6 +192,8 @@ public class ContinuousEffects implements Serializable {
 		List<ReplacementEffect> replaceEffects = new ArrayList<ReplacementEffect>();
 		if (planeswalkerRedirectionEffect.applies(event, null, game))
 			replaceEffects.add(planeswalkerRedirectionEffect);
+		if(auraReplacementEffect.applies(event, null, game))
+			replaceEffects.add(auraReplacementEffect);
 		//get all applicable transient Replacement effects
 		for (ReplacementEffect effect: replacementEffects) {
             Ability ability = replacementEffects.getAbility(effect.getId());

@@ -38,8 +38,8 @@ import mage.Constants.SubLayer;
 import mage.Constants.TargetController;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
@@ -56,6 +56,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -197,11 +198,8 @@ class NecroticPlagueEffect2 extends OneShotEffect<NecroticPlagueEffect2> {
                 if (controller.chooseTarget(Outcome.Detriment, target, source, game)) {
                     Card card = game.getCard(cardId);
                     if (card != null) {
-                        card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), source.getControllerId());
-                        Permanent permanent = game.getPermanent(target.getFirstTarget());
-                        if (permanent != null) {
-                            return permanent.addAttachment(cardId, game);
-                        }
+                        this.setTargetPointer(new FixedTarget(target.getFirstTarget()));
+                        return card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), source.getControllerId());
                     }
                 }
             }
@@ -217,6 +215,5 @@ class NecroticPlagueEffect2 extends OneShotEffect<NecroticPlagueEffect2> {
 	public NecroticPlagueEffect2 copy() {
 		return new NecroticPlagueEffect2(this);
 	}
-
 
 }

@@ -50,11 +50,9 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
@@ -179,15 +177,8 @@ class GigantiformEffect extends OneShotEffect<GigantiformEffect> {
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
         if (player != null && player.chooseUse(Outcome.PutCardInPlay, message, game) && player.searchLibrary(target, game)) {
             Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
-            TargetCreaturePermanent targetCreature = new TargetCreaturePermanent(new FilterCreaturePermanent("creature to attach Gigantiform to"));
-
-            if (card != null && card.putOntoBattlefield(game, Zone.HAND, source.getId(), source.getControllerId())
-                    && player.chooseTarget(Outcome.BoostCreature, targetCreature, source, game)) {
-                Permanent aura = game.getPermanent(card.getId());
-                Permanent creature = game.getPermanent(targetCreature.getFirstTarget());
-                if (aura != null && creature != null) {
-                    creature.addAttachment(aura.getId(), game);
-                }
+            if (card != null) {
+                card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), source.getControllerId());
             }
             player.shuffleLibrary(game);
             return true;
