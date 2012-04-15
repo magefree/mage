@@ -86,7 +86,7 @@ public class AuraReplacementEffect extends ReplacementEffectImpl<AuraReplacement
         if (targetId == null) {
             Target target = card.getSpellAbility().getTargets().get(0);
             Player player = game.getPlayer(card.getOwnerId());
-            if (player != null && player.choose(Outcome.BoostCreature, target, sourceId, game)) {
+            if (player != null && player.choose(Outcome.BoostCreature, target, card.getId(), game)) {
                 targetId = target.getFirstTarget();
             }
         }
