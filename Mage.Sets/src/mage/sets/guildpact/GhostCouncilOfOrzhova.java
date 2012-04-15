@@ -29,23 +29,21 @@
 package mage.sets.guildpact;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromExileEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -132,7 +130,8 @@ class GhostCouncilOfOrzhovaRemovingEffect extends OneShotEffect<GhostCouncilOfOr
 		if (permanent != null) {
 			if (permanent.moveToExile(source.getSourceId(), " Ghost Council of Orzhova Exile", source.getId(), game)) {
 				//create delayed triggered ability
-				GhostCouncilOfOrzhovaDelayedTriggeredAbility delayedAbility = new GhostCouncilOfOrzhovaDelayedTriggeredAbility(source.getSourceId());
+				AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(
+						new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
 				delayedAbility.setSourceId(source.getSourceId());
 				delayedAbility.setControllerId(source.getControllerId());
 				game.addDelayedTriggeredAbility(delayedAbility);
@@ -147,27 +146,4 @@ class GhostCouncilOfOrzhovaRemovingEffect extends OneShotEffect<GhostCouncilOfOr
 		return new GhostCouncilOfOrzhovaRemovingEffect(this);
 	}
 
-}
-
-class GhostCouncilOfOrzhovaDelayedTriggeredAbility extends DelayedTriggeredAbility<GhostCouncilOfOrzhovaDelayedTriggeredAbility> {
-
-	GhostCouncilOfOrzhovaDelayedTriggeredAbility ( UUID exileId ) {
-		super(new ReturnFromExileEffect(exileId, Zone.BATTLEFIELD));
-	}
-
-	GhostCouncilOfOrzhovaDelayedTriggeredAbility(GhostCouncilOfOrzhovaDelayedTriggeredAbility ability) {
-		super(ability);
-	}
-
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == GameEvent.EventType.END_TURN_STEP_PRE) {
-			return true;
-		}
-		return false;
-	}
-	@Override
-	public GhostCouncilOfOrzhovaDelayedTriggeredAbility copy() {
-		return new GhostCouncilOfOrzhovaDelayedTriggeredAbility(this);
-	}
 }

@@ -29,21 +29,19 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromExileEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterSpiritOrArcaneCard;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /**
@@ -96,7 +94,8 @@ class HikariTwilightGuardianEffect extends OneShotEffect<HikariTwilightGuardianE
 		if (permanent != null) {
 			if (permanent.moveToExile(source.getSourceId(), "Hikari, Twilight Guardian", source.getId(), game)) {
 				//create delayed triggered ability
-				HikariTwilightGuardianDelayedTriggeredAbility delayedAbility = new HikariTwilightGuardianDelayedTriggeredAbility(source.getSourceId());
+				AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(
+						new ReturnFromExileEffect(source.getSourceId(), Constants.Zone.BATTLEFIELD));
 				delayedAbility.setSourceId(source.getSourceId());
 				delayedAbility.setControllerId(source.getControllerId());
 				game.addDelayedTriggeredAbility(delayedAbility);
@@ -111,27 +110,4 @@ class HikariTwilightGuardianEffect extends OneShotEffect<HikariTwilightGuardianE
 		return new HikariTwilightGuardianEffect(this);
 	}
 
-}
-
-class HikariTwilightGuardianDelayedTriggeredAbility extends DelayedTriggeredAbility<HikariTwilightGuardianDelayedTriggeredAbility> {
-
-	HikariTwilightGuardianDelayedTriggeredAbility ( UUID exileId ) {
-		super(new ReturnFromExileEffect(exileId, Constants.Zone.BATTLEFIELD));
-	}
-
-	HikariTwilightGuardianDelayedTriggeredAbility(HikariTwilightGuardianDelayedTriggeredAbility ability) {
-		super(ability);
-	}
-
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == GameEvent.EventType.END_TURN_STEP_PRE) {
-			return true;
-		}
-		return false;
-	}
-	@Override
-	public HikariTwilightGuardianDelayedTriggeredAbility copy() {
-		return new HikariTwilightGuardianDelayedTriggeredAbility(this);
-	}
 }

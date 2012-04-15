@@ -29,12 +29,11 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromExileEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -42,7 +41,6 @@ import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.game.ExileZone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
@@ -90,18 +88,19 @@ class OtherworldlyJourneyEffect extends OneShotEffect<OtherworldlyJourneyEffect>
 		Permanent permanent = game.getPermanent(source.getFirstTarget());
 		if (permanent != null) {
 			if (permanent.moveToExile(source.getSourceId(), "Otherworldly Journey", source.getId(), game)) {
-                                ExileZone exile = game.getExile().getExileZone(source.getSourceId());
-                                // only if permanent is in exile (tokens would be stop to exist)
-                                if (exile != null && !exile.isEmpty()) { 
-                                        //create delayed triggered ability
-                                        OtherworldlyJourneyDelayedTriggeredAbility delayedAbility = new OtherworldlyJourneyDelayedTriggeredAbility(source.getSourceId());
-                                        delayedAbility.setSourceId(source.getSourceId());
-                                        delayedAbility.setControllerId(source.getControllerId());
-                                        AddCountersTargetEffect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
-                                        effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
-                                        delayedAbility.addEffect(effect);
-                                        game.addDelayedTriggeredAbility(delayedAbility);
-                                }
+				ExileZone exile = game.getExile().getExileZone(source.getSourceId());
+				// only if permanent is in exile (tokens would be stop to exist)
+				if (exile != null && !exile.isEmpty()) {
+					//create delayed triggered ability
+					AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(
+							new ReturnFromExileEffect(source.getSourceId(), Constants.Zone.BATTLEFIELD, "return that card to the battlefield under its owner's control with a +1/+1 counter on it"));
+					delayedAbility.setSourceId(source.getSourceId());
+					delayedAbility.setControllerId(source.getControllerId());
+					AddCountersTargetEffect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
+					effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
+					delayedAbility.addEffect(effect);
+					game.addDelayedTriggeredAbility(delayedAbility);
+				}
 				return true;
 			}
 		}
@@ -113,29 +112,4 @@ class OtherworldlyJourneyEffect extends OneShotEffect<OtherworldlyJourneyEffect>
 		return new OtherworldlyJourneyEffect(this);
 	}
 
-}
-
-class OtherworldlyJourneyDelayedTriggeredAbility extends DelayedTriggeredAbility<OtherworldlyJourneyDelayedTriggeredAbility> {
-
-	OtherworldlyJourneyDelayedTriggeredAbility ( UUID exileId ) {
-		super(new ReturnFromExileEffect(exileId, Constants.Zone.BATTLEFIELD, "return that card to the battlefield under its owner's control with a +1/+1 counter on it"));
-	}
-
-	OtherworldlyJourneyDelayedTriggeredAbility(OtherworldlyJourneyDelayedTriggeredAbility ability) {
-		super(ability);
-	}
-
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == GameEvent.EventType.END_TURN_STEP_PRE) {
-			return true;
-		}
-		return false;
-	}
-	@Override
-	public OtherworldlyJourneyDelayedTriggeredAbility copy() {
-		return new OtherworldlyJourneyDelayedTriggeredAbility(this);
-	}
-        
-        
 }
