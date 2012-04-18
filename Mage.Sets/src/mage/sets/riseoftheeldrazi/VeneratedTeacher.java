@@ -29,18 +29,19 @@ package mage.sets.riseoftheeldrazi;
 
 import java.util.List;
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.cards.CardImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.game.permanent.Permanent;
-import mage.game.Game;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.Constants.Outcome;
 import mage.counters.CounterType;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.abilities.Ability;
+import mage.cards.CardImpl;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.abilities.keyword.LevelUpAbility;
 
 /**
  *
@@ -90,8 +91,10 @@ class VeneratedTeacherEffect extends OneShotEffect<VeneratedTeacherEffect> {
         List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(filter, source.getControllerId());
         if (!permanents.isEmpty()) {
             for (Permanent permanent : permanents) {
-                if (permanent.getCounters().getCount(CounterType.LEVEL) > 0) {
-                    permanent.addCounters(CounterType.LEVEL.createInstance(2), game);
+                for (Ability ability : permanent.getAbilities()) {
+                    if (ability instanceof LevelUpAbility) {
+                        permanent.addCounters(CounterType.LEVEL.createInstance(2), game);
+                    }
                 }
             }
             return true;
