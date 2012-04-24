@@ -27,15 +27,12 @@
  */
 package mage.sets.magic2012;
 
-import java.beans.beancontext.BeanContextProxy;
 import java.util.UUID;
-
-import mage.Constants.Duration;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.abilities.effects.common.continious.BecomesCreatureTargetEffect;
 import mage.abilities.effects.common.continious.LoseAllAbilitiesTargetEffect;
-import mage.abilities.effects.common.continious.SetPowerToughnessTargetEffect;
 import mage.cards.CardImpl;
 import mage.game.permanent.token.FrogToken;
 import mage.target.common.TargetCreaturePermanent;

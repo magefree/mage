@@ -30,16 +30,11 @@ package mage.abilities;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
-import mage.Constants.EffectType;
 import mage.Constants.Zone;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.ReplacementEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.mana.ManaAbility;
-import mage.filter.FilterAbility;
 import mage.game.Game;
 
 /**
