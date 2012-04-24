@@ -37,27 +37,17 @@ import mage.Constants.Outcome;
 import mage.Constants.RangeOfInfluence;
 import mage.MageItem;
 import mage.MageObject;
-import mage.abilities.Abilities;
-import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
-import mage.abilities.Mode;
-import mage.abilities.Modes;
-import mage.abilities.SpellAbility;
-import mage.abilities.TriggeredAbilities;
-import mage.abilities.TriggeredAbility;
+import mage.abilities.*;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.ReplacementEffect;
-import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.counters.Counter;
 import mage.counters.Counters;
-import mage.filter.FilterAbility;
-import mage.game.events.GameEvent;
 import mage.game.Game;
 import mage.game.draft.Draft;
 import mage.game.match.Match;
@@ -78,20 +68,20 @@ public interface Player extends MageItem, Copyable<Player> {
 
 	public boolean isHuman();
 	public String getName();
-    public RangeOfInfluence getRange();
-    public Library getLibrary();
+	public RangeOfInfluence getRange();
+	public Library getLibrary();
 	public Cards getGraveyard();
 	public Abilities<Ability> getAbilities();
-    public void addAbility(Ability ability);
+	public void addAbility(Ability ability);
 	public Counters getCounters();
 	public int getLife();
 	public void setLife(int life, Game game);
 	public int loseLife(int amount, Game game);
-    public boolean isCanLoseLife();
-    public void setCanLoseLife(boolean canLoseLife);
+	public boolean isCanLoseLife();
+	public void setCanLoseLife(boolean canLoseLife);
 	public int gainLife(int amount, Game game);
-    public boolean isCanGainLife();
-    public void setCanGainLife(boolean canGainLife);
+	public boolean isCanGainLife();
+	public void setCanGainLife(boolean canGainLife);
 	public boolean isLifeTotalCanChange();
 	public void setLifeTotalCanChange(boolean lifeTotalCanChange);
 	public int damage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable);
@@ -114,7 +104,7 @@ public interface Player extends MageItem, Copyable<Player> {
 	public void setTopCardRevealed(boolean topCardRevealed);
 	public UserData getUserData();
 	public void setUserData(UserData userData);
-    public boolean canLose(Game game);
+	public boolean canLose(Game game);
 
 	/**
 	 * Returns a set of players which turns under you control.
@@ -164,8 +154,8 @@ public interface Player extends MageItem, Copyable<Player> {
 
 	public boolean isTestMode();
 	public void setTestMode(boolean value);
-    public void addAction(String action);
-    public void setAllowBadMoves(boolean allowBadMoves);
+	public void addAction(String action);
+	public void setAllowBadMoves(boolean allowBadMoves);
 	
 	public void init(Game game);
 	public void init(Game game, boolean testMode);
@@ -181,6 +171,14 @@ public interface Player extends MageItem, Copyable<Player> {
 	public boolean removeFromGraveyard(Card card, Game game);
 	public boolean removeFromLibrary(Card card, Game game);
 	public boolean searchLibrary(TargetCardInLibrary target, Game game);
+	/**
+	*
+	* @param target
+	* @param game
+	* @param targetPlayerId player whose library will be searched
+	* @return true if search was successful
+	*/
+	public boolean searchLibrary(TargetCardInLibrary target, Game game, UUID targetPlayerId);
 	public boolean canPlayLand();
 	public boolean playLand(Card card, Game game);
 	public boolean activateAbility(ActivatedAbility ability, Game game);
@@ -219,7 +217,7 @@ public interface Player extends MageItem, Copyable<Player> {
 	public abstract boolean chooseMulligan(Game game);
 	public abstract boolean chooseUse(Outcome outcome, String message, Game game);
 	public abstract boolean choose(Outcome outcome, Choice choice, Game game);
-    public abstract boolean choosePile(Outcome outcome, String message, List<? extends Card> pile1, List<? extends Card> pile2, Game game);
+	public abstract boolean choosePile(Outcome outcome, String message, List<? extends Card> pile1, List<? extends Card> pile2, Game game);
 	public abstract boolean playMana(ManaCost unpaid, Game game);
 	public abstract boolean playXMana(VariableManaCost cost, ManaCosts<ManaCost> costs, Game game);
 	public abstract int chooseEffect(List<ReplacementEffect> rEffects, Game game);
@@ -249,7 +247,7 @@ public interface Player extends MageItem, Copyable<Player> {
 	public List<Ability> getPlayableOptions(Ability ability, Game game);
 	
 	public void addCounters(Counter counter, Game game);
-    public List<UUID> getAttachments();
-    public boolean addAttachment(UUID permanentId, Game game);
-    public boolean removeAttachment(UUID permanentId, Game game);
+	public List<UUID> getAttachments();
+	public boolean addAttachment(UUID permanentId, Game game);
+	public boolean removeAttachment(UUID permanentId, Game game);
 }

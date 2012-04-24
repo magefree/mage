@@ -66,11 +66,15 @@ public class TargetCardInLibrary extends TargetCard<TargetCardInLibrary> {
 	}
 
 	@Override
-	public boolean choose(Outcome outcome, UUID playerId, UUID sourceId, Game game) {
+	public boolean choose(Outcome outcome, UUID playerId, UUID targetPlayerId, Game game) {
 		Player player = game.getPlayer(playerId);
+		Player targetPlayer = game.getPlayer(targetPlayerId);
+		if (targetPlayer == null) {
+			targetPlayer = player;
+		}
 		while (!isChosen() && !doneChosing()) {
 			chosen = targets.size() >= minNumberOfTargets;
-			if (!player.choose(outcome, new CardsImpl(Zone.LIBRARY, player.getLibrary().getCards(game)), this, game)) {
+			if (!player.choose(outcome, new CardsImpl(Zone.LIBRARY, targetPlayer.getLibrary().getCards(game)), this, game)) {
 				return chosen;
 			}
 			chosen = targets.size() >= minNumberOfTargets;
@@ -95,6 +99,10 @@ public class TargetCardInLibrary extends TargetCard<TargetCardInLibrary> {
 	@Override
 	public TargetCardInLibrary copy() {
 		return new TargetCardInLibrary(this);
+	}
+
+	public void setMinNumberOfTargets(int minNumberOfTargets) {
+		this.minNumberOfTargets = minNumberOfTargets;
 	}
 
 }

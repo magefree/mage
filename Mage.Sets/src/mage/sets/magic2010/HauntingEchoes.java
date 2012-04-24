@@ -28,23 +28,21 @@
 
 package mage.sets.magic2010;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.List;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.CardsImpl;
+import mage.filter.FilterCard;
 import mage.filter.common.FilterBasicLandCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+import mage.target.common.TargetCardInLibrary;
 
 /**
  *
@@ -85,22 +83,33 @@ class HauntingEchoesEffect extends OneShotEffect<HauntingEchoesEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getFirstTarget());
-		if (player != null) {
-			for (Card card: player.getGraveyard().getCards(game)) {
+		Player player = game.getPlayer(source.getControllerId());
+		Player targetPlayer = game.getPlayer(source.getFirstTarget());
+		if (targetPlayer != null) {
+			for (Card card: targetPlayer.getGraveyard().getCards(game)) {
 				if (!filter.match(card)) {
 					card.moveToExile(null, "", source.getId(), game);
-					for (Card lcard: player.getLibrary().getCards(game)) {
-						if (lcard.getName().equals(card.getName())) {
-							lcard.moveToExile(null, "", source.getId(), game);					
+
+					FilterCard filterCard = new FilterCard("cards named " + card.getName());
+					filterCard.getName().add(card.getName());
+					int count = targetPlayer.getLibrary().count(filterCard, game);
+					TargetCardInLibrary target = new TargetCardInLibrary(count, count, filterCard);
+					target.setRequired(true);
+
+					player.searchLibrary(target, game, targetPlayer.getId());
+					List<UUID> targets = target.getTargets();
+					for(UUID cardId : targets){
+						Card libraryCard = game.getCard(cardId);
+						if (libraryCard != null) {
+							libraryCard.moveToExile(null, "", source.getId(), game);
 						}
 					}
 				}
 			}
+			targetPlayer.shuffleLibrary(game);
+			return true;
 		}
-		game.getPlayer(source.getControllerId()).lookAtCards("Haunting Echoes", new CardsImpl(Zone.PICK, player.getLibrary().getCards(game)), game);
-		player.shuffleLibrary(game);
-		return true;
+		return false;
 	}
 
 	@Override

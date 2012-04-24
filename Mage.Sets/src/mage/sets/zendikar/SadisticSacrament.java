@@ -39,8 +39,6 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -107,11 +105,8 @@ class SadisticSacramentEffect extends OneShotEffect<SadisticSacramentEffect> {
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         Player player = game.getPlayer(source.getControllerId());
         if (player != null && targetPlayer != null) {
-            Cards targetPlayersLibrary = new CardsImpl();
-            targetPlayersLibrary.addAll(targetPlayer.getLibrary().getCardList());
-
             TargetCardInLibrary target = new TargetCardInLibrary(0, amount, new FilterCard("cards to exile"));
-            if (player.choose(Outcome.Benefit, targetPlayersLibrary, target, game)) {
+            if (player.searchLibrary(target, game, targetPlayer.getId())) {
                 List<UUID> targets = target.getTargets();
                 for (UUID targetId : targets) {
                     Card card = targetPlayer.getLibrary().remove(targetId, game);

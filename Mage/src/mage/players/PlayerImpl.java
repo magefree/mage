@@ -29,15 +29,7 @@
 package mage.players;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import mage.Constants.AsThoughEffectType;
 import mage.Constants.Outcome;
 import mage.Constants.RangeOfInfluence;
@@ -67,9 +59,9 @@ import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.events.DamagePlayerEvent;
 import mage.game.events.DamagedPlayerEvent;
-import mage.game.permanent.Permanent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 import mage.players.net.UserData;
 import mage.target.Target;
@@ -1092,16 +1084,24 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
 	@Override
 	public boolean searchLibrary(TargetCardInLibrary target, Game game) {
+		return searchLibrary(target, game, playerId);
+	}
+
+	@Override
+	public boolean searchLibrary(TargetCardInLibrary target, Game game, UUID targetPlayerId) {
 		//20091005 - 701.14c
-		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.SEARCH_LIBRARY, playerId, playerId))) {
-			TargetCardInLibrary newTarget;
+		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.SEARCH_LIBRARY, targetPlayerId, playerId))) {
+			TargetCardInLibrary newTarget = target.copy();
 			int count = library.count(target.getFilter(), game);
-			if (count < target.getNumberOfTargets())
-				newTarget = new TargetCardInLibrary(library.count(target.getFilter(), game), target.getMaxNumberOfTargets(), target.getFilter());
-			else
-				newTarget = target;
-			if (newTarget.choose(Outcome.Neutral, playerId, null, game)) {
-				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LIBRARY_SEARCHED, playerId, playerId));
+			if (count < target.getNumberOfTargets()) {
+				newTarget.setMinNumberOfTargets(count);
+			}
+			if (newTarget.choose(Outcome.Neutral, playerId, targetPlayerId, game)) {
+				target.getTargets().clear();
+				for(UUID targetId: newTarget.getTargets()){
+					target.add(targetId, game);
+				}
+				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LIBRARY_SEARCHED, targetPlayerId, playerId));
 			}
     		return true;
 		}
