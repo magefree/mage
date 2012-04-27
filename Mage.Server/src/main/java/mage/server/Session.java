@@ -75,8 +75,12 @@ public class Session {
 			if (user.getHost().equals(host)) {
 				if (user.getSessionId().isEmpty())
 					logger.info("Reconnecting session for " + userName);
-				else
-					throw new MageException("This machine is already connected");
+				else {
+					//throw new MageException("This machine is already connected");
+                    //disconnect previous one
+                    logger.info("Disconnecting another user instance: " + userName);
+                    UserManager.getInstance().disconnect(user.getId());
+                }
 			}
 			else {
 				throw new MageException("User name already in use");

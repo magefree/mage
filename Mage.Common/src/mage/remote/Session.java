@@ -267,6 +267,7 @@ public class Session {
 	class CallbackHandler implements InvokerCallbackHandler {
 		@Override
 		public void handleCallback(Callback callback) throws HandleCallbackException {
+            logger.info("callback handler");
 			client.processCallback((ClientCallback)callback.getCallbackObject());
 		}
 	}
