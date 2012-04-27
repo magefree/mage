@@ -29,7 +29,6 @@
  */
 package mage.sets.championsofkamigawa;
 
-import java.util.UUID;
 import mage.Constants;
 import mage.Constants.Zone;
 import mage.MageInt;
@@ -47,6 +46,8 @@ import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author LevelX
@@ -68,6 +69,7 @@ public class InitiateOfBlood extends CardImpl<InitiateOfBlood> {
         this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
+        this.flipCard = true;
 
         // {T}: Initiate of Blood deals 1 damage to target creature that was dealt damage this turn. 
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());

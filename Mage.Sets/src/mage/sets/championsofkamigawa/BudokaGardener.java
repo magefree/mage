@@ -27,8 +27,6 @@
  */
 package mage.sets.championsofkamigawa;
 
-import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -55,6 +53,8 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCardInHand;
 
+import java.util.UUID;
+
 /**
  * @author Loki
  */
@@ -67,6 +67,7 @@ public class BudokaGardener extends CardImpl<BudokaGardener> {
         this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
+        this.flipCard = true;
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BudokaGardenerEffect(), new TapSourceCost());
         ability.addTarget(new TargetCardInHand(new FilterLandCard()));
         this.addAbility(ability);

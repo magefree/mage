@@ -13,6 +13,7 @@ public class CardInfo {
     private boolean token;
     private boolean twoFacedCard;
     private boolean secondSide;
+    private boolean flipCard;
 
     public CardInfo(String name, String set, Integer collectorId) {
         this.name = name;
@@ -134,5 +135,13 @@ public class CardInfo {
 
     public void setDownloadName(String downloadName) {
         this.downloadName = downloadName;
+    }
+
+    public boolean isFlipCard() {
+        return flipCard;
+    }
+
+    public void setFlipCard(boolean flipCard) {
+        this.flipCard = flipCard;
     }
 }

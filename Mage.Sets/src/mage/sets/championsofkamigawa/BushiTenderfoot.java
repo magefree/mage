@@ -30,7 +30,6 @@
 
 package mage.sets.championsofkamigawa;
 
-import java.util.UUID;
 import mage.Constants;
 import mage.MageInt;
 import mage.abilities.common.DiesAndDealtDamageThisTurnTriggeredAbility;
@@ -44,6 +43,8 @@ import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.Token;
+
+import java.util.UUID;
 
 /**
  * @author LevelX
@@ -65,6 +66,7 @@ public class BushiTenderfoot extends CardImpl<BushiTenderfoot> {
         this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
+        this.flipCard = true;
 
         // When that creature is put into a graveyard this turn, flip Initiate of Blood.
         this.addAbility(new DiesAndDealtDamageThisTurnTriggeredAbility(new FlipSourceEffect()));

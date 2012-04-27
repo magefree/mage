@@ -28,11 +28,6 @@
 
 package mage.cards;
 
-import java.lang.reflect.Constructor;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
@@ -49,6 +44,12 @@ import mage.game.stack.Spell;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
 
+import java.lang.reflect.Constructor;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
+
 public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> implements Card {
     private static final long serialVersionUID = 1L;
 
@@ -64,6 +65,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
     protected Card secondSideCard;
     protected boolean nightCard;
     protected SpellAbility spellAbility;
+    protected boolean flipCard;
 
     public CardImpl(UUID ownerId, int cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs) {
         this(ownerId, name);
@@ -407,4 +409,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
         return this.nightCard;
     }
 
+    public boolean isFlipCard() {
+        return flipCard;
+    }
 }

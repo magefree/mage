@@ -28,8 +28,6 @@
 
 package mage.game.stack;
 
-import java.util.List;
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
@@ -52,6 +50,9 @@ import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.watchers.Watcher;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -340,6 +341,11 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 	}
 
     @Override
+    public boolean isFlipCard() {
+        return false;
+    }
+
+    @Override
     public boolean canTransform() {
         return false;
     }
@@ -437,5 +443,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
     public Zone getFromZone() {
         return this.fromZone;
     }
+
+
 }
 

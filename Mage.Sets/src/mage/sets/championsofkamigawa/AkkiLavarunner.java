@@ -1,6 +1,5 @@
 package mage.sets.championsofkamigawa;
 
-import java.util.UUID;
 import mage.Constants;
 import mage.MageInt;
 import mage.ObjectColor;
@@ -23,6 +22,8 @@ import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.Token;
 
+import java.util.UUID;
+
 /**
  * @author Loki
  */
@@ -36,6 +37,7 @@ public class AkkiLavarunner extends CardImpl<AkkiLavarunner> {
         this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
+        this.flipCard = true;
         this.addAbility(HasteAbility.getInstance());
         this.addAbility(new AkkiLavarunnerAbility());
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new TokTokVolcanoBorn()), FlippedCondition.getInstance(), "")));

@@ -27,8 +27,6 @@
  */
 package mage.sets.championsofkamigawa;
 
-import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -40,7 +38,9 @@ import mage.abilities.condition.common.FlippedCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.*;
+import mage.abilities.effects.common.CopyTokenEffect;
+import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
@@ -51,6 +51,8 @@ import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInOpponentsGraveyard;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -65,6 +67,8 @@ public class NezumiGraverobber extends CardImpl<NezumiGraverobber> {
         this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
+        this.flipCard = true;
+
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{1}{B}"));
         ability.addTarget(new TargetCardInOpponentsGraveyard(new FilterCard("card from an opponent's graveyard")));
         ability.addEffect(new NezumiGraverobberFlipEffect());

@@ -30,7 +30,6 @@
 
 package mage.sets.championsofkamigawa;
 
-import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
@@ -58,6 +57,8 @@ import mage.game.permanent.token.Token;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  * @author LevelX
  */
@@ -71,6 +72,7 @@ public class OrochiEggwatcher extends CardImpl<OrochiEggwatcher> {
         this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
+        this.flipCard = true;
         
         // {2}{G}, {T}: Put a 1/1 green Snake creature token onto the battlefield. If you control ten or more creatures, flip Orochi Eggwatcher.
         Ability ability;

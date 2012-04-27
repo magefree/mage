@@ -1,11 +1,12 @@
 package org.mage.plugins.card.dl.sources;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -85,7 +86,7 @@ public class WizardCardsImageSource implements CardImageSource {
     }
 
     @Override
-    public String generateURL(Integer collectorId, String cardName, String cardSet, boolean twoFacedCard, boolean secondSide) throws Exception {
+    public String generateURL(Integer collectorId, String cardName, String cardSet, boolean twoFacedCard, boolean secondSide, boolean isFlipCard) throws Exception {
         if (collectorId == null || cardSet == null) {
             throw new Exception("Wrong parameters for image: collector id: " + collectorId + ",card set: " + cardSet);
         }
