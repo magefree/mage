@@ -59,13 +59,13 @@ public class ThreadStarter extends Thread {
             Iterator<Card> iterator = sortedCards.iterator();
             while (iterator.hasNext()) {
                 Card card = iterator.next();
-                StringBuilder sb = generateUtilLine(card);
-                out.write(sb.toString().replace("\u00C6", "AE").replace("\u2014", "-"));
+                String cardLine = generateUtilLine(card);
+                out.write(replaceSpecialChards(cardLine));
                 out.newLine();
 
                 if (card.getOtherSide() != null) {
-                    sb = generateUtilLine(card.getOtherSide());
-                    out.write(sb.toString().replace("\u00C6", "AE").replace("\u2014", "-"));
+                    cardLine = generateUtilLine(card.getOtherSide());
+                    out.write(replaceSpecialChards(cardLine));
                     out.newLine();
                 }
             }
@@ -75,7 +75,87 @@ public class ThreadStarter extends Thread {
         }
     }
 
-    private StringBuilder generateUtilLine(Card card) {
+    private void writeCardsToTrackerFile() {
+        Set<String> knownSets = new TreeSet<String>();
+        knownSets.add("Fifth Edition");
+        knownSets.add("Eighth Edition");
+        knownSets.add("Ninth Edition");
+        knownSets.add("Tenth Edition");
+        knownSets.add("Magic 2010");
+        knownSets.add("Magic 2011");
+        knownSets.add("Magic 2012");
+        knownSets.add("Planechase");
+        knownSets.add("Duel Decks: Elspeth vs. Tezzeret");
+        knownSets.add("Tempest");
+        knownSets.add("Urza's Saga");
+        knownSets.add("Invasion");
+        knownSets.add("Planeshift");
+        knownSets.add("Apocalypse");
+        knownSets.add("Onslaught");
+        knownSets.add("Mirrodin");
+        knownSets.add("Darksteel");
+        knownSets.add("Fifth Dawn");
+        knownSets.add("Champions of Kamigawa");
+        knownSets.add("Betrayers of Kamigawa");
+        knownSets.add("Saviors of Kamigawa");
+        knownSets.add("Ravnica: City of Guilds");
+        knownSets.add("Guildpact");
+        knownSets.add("Dissension");
+        knownSets.add("Time Spiral");
+        knownSets.add("Time Spiral \"Timeshifted\"");
+        knownSets.add("Planar Chaos");
+        knownSets.add("Future Sight");
+        knownSets.add("Lorwyn");
+        knownSets.add("Morningtide");
+        knownSets.add("Shadowmoor");
+        knownSets.add("Eventide");
+        knownSets.add("Shards of Alara");
+        knownSets.add("Conflux");
+        knownSets.add("Alara Reborn");
+        knownSets.add("Zendikar");
+        knownSets.add("Worldwake");
+        knownSets.add("Rise of the Eldrazi");
+        knownSets.add("Scars of Mirrodin");
+        knownSets.add("Mirrodin Besieged");
+        knownSets.add("New Phyrexia");
+        knownSets.add("Innistrad");
+        knownSets.add("Dark Ascension");
+        knownSets.add("Avacyn Restored");
+        try {
+            FileWriter fstream = new FileWriter("mtg-cards-tracker-data.txt");
+            BufferedWriter out = new BufferedWriter(fstream);
+            Iterator<Card> iterator = sortedCards.iterator();
+            while (iterator.hasNext()) {
+                Card card = iterator.next();
+                if (knownSets.contains(card.getExpansion())) {
+                    String cardLine = card.toString();
+                    out.write(replaceSpecialChards(cardLine));
+                    out.newLine();
+
+                    if (card.getOtherSide() != null) {
+                        cardLine = card.getOtherSide().toString();
+                        out.write(replaceSpecialChards(cardLine));
+                        out.newLine();
+                    }
+                }
+            }
+            out.close();
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
+        }
+    }
+
+    private String replaceSpecialChards(String original) {
+        return original.replace("\u2014", "-").replace("\u00E9", "e")
+                .replace("\u00C6", "AE").replace("\u00E6", "ae")
+                .replace("\u00C1", "A").replace("\u00E1", "a")
+                .replace("\u00C2", "A").replace("\u00E2", "a")
+                .replace("\u00D6", "O").replace("\u00F6", "o")
+                .replace("\u00DB", "U").replace("\u00FB", "u")
+                .replace("\u00DC", "U").replace("\u00FC", "u");
+    }
+
+    private String generateUtilLine(Card card) {
         StringBuilder sb = new StringBuilder();
         sb.append(card.getName()).append("|");
         sb.append(card.getExpansion()).append("|");
@@ -121,7 +201,7 @@ public class ThreadStarter extends Thread {
             }
         }
         sb.append("|");
-        return sb;
+        return sb.toString();
     }
 
     @Override
@@ -143,5 +223,6 @@ public class ThreadStarter extends Thread {
         updateSortedCards();
         writeCardsToFile();
         writeCardsToUtilFile();
+        writeCardsToTrackerFile();
     }
 }
