@@ -1,0 +1,244 @@
+1|Angel of Glory's Rise
+2|Angel of Jubilation
+3|Angel's Mercy
+4|Angelic Wall
+5|Archangel
+6|Avacyn, Angel of Hope
+7|Banishing Stroke
+8|Builder's Blessing
+9|Call to Serve
+10|Cathars' Crusade
+11|Cathedral Sanctifier
+12|Cloudshift
+13|Commander's Authority
+14|Cursebreak
+15|Defang
+16|Defy Death
+17|Devout Chaplain
+18|Divine Deflection
+19|Emancipation Angel
+20|Entreat the Angels
+21|Farbog Explorer
+22|Goldnight Commander
+23|Goldnight Redeemer
+24|Herald of War
+25|Holy Justiciar
+26|Leap of Faith
+27|Midnight Duelist
+28|Midvast Protector
+29|Moonlight Geist
+30|Moorland Inquisitor
+31|Nearheath Pilgrim
+32|Restoration Angel
+33|Riders of Gavony
+34|Righteous Blow
+35|Seraph of Dawn
+36|Silverblade Paladin
+37|Spectral Gateguards
+38|Terminus
+39|Thraben Valiant
+40|Voice of the Provinces
+41|Zealous Strike
+42|Alchemist's Apprentice
+43|Amass the Components
+44|Arcane Melee
+45|Captain of the Mists
+46|Crippling Chill
+47|Deadeye Navigator
+48|Devastation Tide
+49|Dreadwaters
+50|Elgaud Shieldmate
+51|Favorable Winds
+52|Fettergeist
+53|Fleeting Distraction
+54|Galvanic Alchemist
+55|Geist Snatch
+56|Ghostform
+57|Ghostly Flicker
+58|Ghostly Touch
+59|Gryff Vanguard
+60|Havengul Skaab
+61|Infinite Reflection
+62|Into the Void
+63|Latch Seeker
+64|Lone Revenant
+65|Lunar Mystic
+66|Mass Appeal
+67|Mist Raven
+68|Misthollow Griffin
+69|Nephalia Smuggler
+70|Outwit
+71|Peel from Reality
+72|Rotcrown Ghoul
+73|Scrapskin Drake
+74|Second Guess
+75|Spectral Prison
+76|Spirit Away
+77|Stern Mentor
+78|Stolen Goods
+79|Tamiyo, the Moon Sage
+80|Tandem Lookout
+81|Temporal Mastery
+82|Vanishment
+83|Wingcrafter
+84|Appetite for Brains
+85|Barter in Blood
+86|Blood Artist
+87|Bloodflow Connoisseur
+88|Bone Splinters
+89|Butcher Ghoul
+90|Corpse Traders
+91|Crypt Creeper
+92|Dark Impostor
+93|Death Wind
+94|Demonic Rising
+95|Demonic Taskmaster
+96|Demonlord of Ashmouth
+97|Descent into Madness
+98|Dread Slaver
+99|Driver of the Dead
+100|Essence Harvest
+101|Evernight Shade
+102|Exquisite Blood
+103|Ghoulflesh
+104|Gloom Surgeon
+105|Grave Exchange
+106|Griselbrand
+107|Harvester of Souls
+108|Homicidal Seclusion
+109|Human Frailty
+110|Hunted Ghoul
+111|Killing Wave
+112|Maalfeld Twins
+113|Marrow Bats
+114|Mental Agony
+115|Necrobite
+116|Polluted Dead
+117|Predator's Gambit
+118|Renegade Demon
+119|Searchlight Geist
+120|Soulcage Fiend
+121|Treacherous Pit-Dweller
+122|Triumph of Cruelty
+123|Undead Executioner
+124|Unhallowed Pact
+125|Aggravate
+126|Archwing Dragon
+127|Banners Raised
+128|Battle Hymn
+129|Bonfire of the Damned
+130|Burn at the Stake
+131|Dangerous Wager
+132|Demolish
+133|Dual Casting
+134|Falkenrath Exterminator
+135|Fervent Cathar
+136|Gang of Devils
+137|Guise of Fire
+138|Hanweir Lancer
+139|Havengul Vampire
+140|Heirs of Stromkirk
+141|Hound of Griselbrand
+142|Kessig Malcontents
+143|Kruin Striker
+144|Lightning Mauler
+145|Lightning Prowess
+146|Mad Prophet
+147|Malicious Intent
+148|Malignus
+149|Pillar of Flame
+150|Raging Poltergeist
+151|Reforge the Soul
+152|Riot Ringleader
+153|Rite of Ruin
+154|Rush of Blood
+155|Scalding Devil
+156|Somberwald Vigilante
+157|Stonewright
+158|Thatcher Revolt
+159|Thunderbolt
+160|Thunderous Wrath
+161|Tibalt, the Fiend-Blooded
+162|Tyrant of Discord
+163|Uncanny Speed
+164|Vexing Devil
+165|Vigilante Justice
+166|Zealous Conscripts
+167|Abundant Growth
+168|Blessings of Nature
+169|Borderland Ranger
+170|Bower Passage
+171|Champion of Lambholt
+172|Craterhoof Behemoth
+173|Descendants' Path
+174|Diregraf Escort
+175|Druid's Familiar
+176|Druids' Repository
+177|Eaten by Spiders
+178|Flowering Lumberknot
+179|Geist Trappers
+180|Gloomwidow
+181|Grounded
+182|Howlgeist
+183|Joint Assault
+184|Lair Delve
+185|Natural End
+186|Nettle Swine
+187|Nightshade Peddler
+188|Pathbreaker Wurm
+189|Primal Surge
+190|Rain of Thorns
+191|Revenge of the Hunted
+192|Sheltering Word
+193|Snare the Skies
+194|Somberwald Sage
+195|Soul of the Harvest
+196|Terrifying Presence
+197|Timberland Guide
+198|Triumph of Ferocity
+199|Trusted Forcemage
+200|Ulvenwald Tracker
+201|Vorstclaw
+202|Wandering Wolf
+203|Wild Defiance
+204|Wildwood Geist
+205|Wolfir Avenger
+206|Wolfir Silverheart
+207|Yew Spirit
+208|Bruna, Light of Alabaster
+209|Gisela, Blade of Goldnight
+210|Sigarda, Host of Herons
+211|Angel's Tomb
+212|Angelic Armaments
+213|Bladed Bracers
+214|Conjurer's Closet
+215|Gallows at Willow Hill
+216|Haunted Guardian
+217|Moonsilver Spear
+218|Narstad Scrapper
+219|Otherworld Atlas
+220|Scroll of Avacyn
+221|Scroll of Griselbrand
+222|Tormentor's Trident
+223|Vanguard's Shield
+224|Vessel of Endless Rest
+225|Alchemist's Refuge
+226|Cavern of Souls
+227|Desolate Lighthouse
+228|Seraph Sanctuary
+229|Slayers' Stronghold
+230|Plains
+231|Plains
+232|Plains
+233|Island
+234|Island
+235|Island
+236|Swamp
+237|Swamp
+238|Swamp
+239|Mountain
+240|Mountain
+241|Mountain
+242|Forest
+243|Forest
+244|Forest

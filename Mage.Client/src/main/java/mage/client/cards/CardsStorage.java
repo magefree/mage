@@ -1,15 +1,13 @@
 package mage.client.cards;
 
+import java.io.InputStream;
+import java.util.*;
 import mage.Constants;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.ExpansionSet;
 import mage.sets.Sets;
 import mage.utils.CardUtil;
-
-import java.io.InputStream;
-import java.util.*;
-
 import org.apache.log4j.Logger;
 
 /**
@@ -179,10 +177,9 @@ public class CardsStorage {
 			readUnimplemented("ZEN", "/zen.txt", names, cards);
 			readUnimplemented("WWK", "/wwk.txt", names, cards);
 			readUnimplemented("ROE", "/roe.txt", names, cards);
-			readUnimplemented("DKA", "/dka.txt", names, cards);
+			readUnimplemented("AVR", "/avr.txt", names, cards);
 
 			names.clear();
-			names = null;
 		}
 		return cards;
 	}

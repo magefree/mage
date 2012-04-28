@@ -1,12 +1,11 @@
 package org.mage.plugins.card.dl.sources;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 
 /**
  *
@@ -28,6 +27,7 @@ public class WizardCardsImageSource implements CardImageSource {
     public WizardCardsImageSource() {
         sets = new HashMap();
         setsAliases = new HashMap();
+        setsAliases.put("AVR", "avacynrestored/cig");
         setsAliases.put("DKA", "darkascension/cig");
         setsAliases.put("ISD", "innistrad/cig");
         setsAliases.put("M12", "magic2012/cig");

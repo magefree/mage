@@ -1,9 +1,8 @@
 package org.mage.plugins.card.dl.sources;
 
-import org.mage.plugins.card.utils.CardImageUtils;
-
 import java.util.HashMap;
 import java.util.Map;
+import org.mage.plugins.card.utils.CardImageUtils;
 
 /**
  *
@@ -15,6 +14,7 @@ public class MagicCardsImageSource implements CardImageSource {
     private static final Map<String, String> setNameReplacement = new HashMap<String, String>() {
 
         {
+            put("AVR", "avacyn-restored");
             put("DKA", "dark-ascension");
             put("ISD", "innistrad");
             put("DDH", "duel-decks-ajani-vs-nicol-bolas");

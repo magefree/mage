@@ -1,4 +1,3 @@
-Tenth Edition|10E|
 Unlimited Edition|2ED|
 Revised Edition|3ED|
 Fourth Edition|4ED|
@@ -7,12 +6,15 @@ Fifth Edition|5ED|
 Classic Sixth Edition|6ED|
 Seventh Edition|7ED|
 Eighth Edition|8ED|
+Tenth Edition|10E|
 Alliances|ALL|
 Apocalypse|APC|
 Alara Reborn|ARB|
 Arabian Nights|ARN|
 Anthologies|ATH|
 Antiquities|ATQ|
+Archenemy|ARC|
+Avacyn Restored|AVR|
 Betrayers of Kamigawa|BOK|
 Battle Royale Box Set|BRB|
 Beatdown Box Set|BTD|
@@ -26,6 +28,7 @@ Dissension|DIS|
 Deckmasters|DKM|
 The Dark|DRK|
 Duel Decks: Divine vs. Demonic|DVD|
+Duel Decks: Elspeth vs. Tezzeret|DDF|
 Duel Decks: Elves vs. Goblins|EVG|
 Duel Decks: Garruk vs. Liliana|GVL|
 Duel Decks: Jace vs. Chandra|JVC|
@@ -36,6 +39,7 @@ Fallen Empires|FEM|
 Future Sight|FUT|
 From the Vault: Dragons|FVD|
 From the Vault: Exiled|FVE|
+From the Vault: Relics|FVR|
 Guildpact|GPT|
 Homelands|HML|
 Planechase|HOP|
@@ -51,6 +55,7 @@ Lorwyn|LRW|
 Magic 2010|M10|
 Magic 2011|M11|
 Magic 2012|M12|
+Magic: The Gathering-Commander|CMD|
 Masters Edition II|ME2|
 Masters Edition III|ME3|
 Masters Edition IV|ME4|
@@ -59,6 +64,9 @@ Mirage|MIR|
 Mercadian Masques|MMQ|
 Morningtide|MOR|
 Mirrodin|MRD|
+Mirrodin Besieged|MBS|
+MTGO Vanguard|VGO|
+New Phyrexia|NPH|
 Ninth Edition|9ED|
 Nemesis|NEM|
 Odyssey|ODY|
@@ -73,12 +81,13 @@ Premium Deck Series: Fire and Lightning|PD2|
 Premium Deck Series: Slivers|PDS|
 Ravnica: City of Guilds|RAV|
 Rise of the Eldrazi|ROE|
-Starter 2000|S00|
-Starter 1999|S99|
+Scars of Mirrodin|SOM|
 Scourge|SCG|
 Shadowmoor|SHM|
 Shards of Alara|ALA|
 Saviors of Kamigawa|SOK|
+Starter 2000|S00|
+Starter 1999|S99|
 Stronghold|STH|
 Tempest|TMP|
 Torment|TOR|
@@ -93,15 +102,7 @@ Vanguard Set 1|VG1|
 Vanguard Set 2|VG2|
 Vanguard Set 3|VG3|
 Vanguard Set 4|VG4|
-MTGO Vanguard|VGO|
 Visions|VIS|
 Weatherlight|WTH|
 Worldwake|WWK|
 Zendikar|ZEN|
-Archenemy|ARC|
-Scars of Mirrodin|SOM|
-From the Vault: Relics|FVR|
-Duel Decks: Elspeth vs. Tezzeret|DDF|
-Mirrodin Besieged|MBS|
-New Phyrexia|NPH|
-Magic: The Gathering-Commander|CMD|
