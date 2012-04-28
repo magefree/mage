@@ -32,45 +32,36 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.Ability;
+import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
-import mage.abilities.keyword.HasteAbility;
-import mage.abilities.keyword.VigilanceAbility;
-import mage.abilities.mana.ColorlessManaAbility;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class SlayersStronghold extends CardImpl<SlayersStronghold> {
+public class NarstadScrapper extends CardImpl<NarstadScrapper> {
 
-    public SlayersStronghold(UUID ownerId) {
-        super(ownerId, 229, "Slayers' Stronghold", Rarity.RARE, new CardType[]{CardType.LAND}, "");
+    public NarstadScrapper(UUID ownerId) {
+        super(ownerId, 218, "Narstad Scrapper", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
         this.expansionSetCode = "AVR";
+        this.subtype.add("Construct");
 
-        // {tap}: Add {1} to your mana pool.
-        this.addAbility(new ColorlessManaAbility());
-        // {R}{W}, {tap}: Target creature gets +2/+0 and gains vigilance and haste until end of turn.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostTargetEffect(2, 0, Constants.Duration.EndOfTurn), new ManaCostsImpl("{R}{W}"));
-        ability.addEffect(new GainAbilityTargetEffect(VigilanceAbility.getInstance(), Constants.Duration.EndOfTurn));
-        ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Constants.Duration.EndOfTurn));
-        ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+
+        // {2}: Narstad Scrapper gets +1/+0 until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Constants.Duration.EndOfTurn), new GenericManaCost(2)));
     }
 
-    public SlayersStronghold(final SlayersStronghold card) {
+    public NarstadScrapper(final NarstadScrapper card) {
         super(card);
     }
 
     @Override
-    public SlayersStronghold copy() {
-        return new SlayersStronghold(this);
+    public NarstadScrapper copy() {
+        return new NarstadScrapper(this);
     }
 }

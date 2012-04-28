@@ -32,45 +32,42 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.Ability;
+import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
-import mage.abilities.keyword.HasteAbility;
-import mage.abilities.keyword.VigilanceAbility;
-import mage.abilities.mana.ColorlessManaAbility;
+import mage.abilities.costs.common.PayLifeCost;
+import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class SlayersStronghold extends CardImpl<SlayersStronghold> {
+public class Griselbrand extends CardImpl<Griselbrand> {
 
-    public SlayersStronghold(UUID ownerId) {
-        super(ownerId, 229, "Slayers' Stronghold", Rarity.RARE, new CardType[]{CardType.LAND}, "");
+    public Griselbrand(UUID ownerId) {
+        super(ownerId, 106, "Griselbrand", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{B}{B}{B}{B}");
         this.expansionSetCode = "AVR";
+        this.supertype.add("Legendary");
+        this.subtype.add("Demon");
 
-        // {tap}: Add {1} to your mana pool.
-        this.addAbility(new ColorlessManaAbility());
-        // {R}{W}, {tap}: Target creature gets +2/+0 and gains vigilance and haste until end of turn.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostTargetEffect(2, 0, Constants.Duration.EndOfTurn), new ManaCostsImpl("{R}{W}"));
-        ability.addEffect(new GainAbilityTargetEffect(VigilanceAbility.getInstance(), Constants.Duration.EndOfTurn));
-        ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Constants.Duration.EndOfTurn));
-        ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+        this.color.setBlack(true);
+        this.power = new MageInt(7);
+        this.toughness = new MageInt(7);
+
+        this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(LifelinkAbility.getInstance());
+        // Pay 7 life: Draw seven cards.
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(7), new PayLifeCost(7)));
     }
 
-    public SlayersStronghold(final SlayersStronghold card) {
+    public Griselbrand(final Griselbrand card) {
         super(card);
     }
 
     @Override
-    public SlayersStronghold copy() {
-        return new SlayersStronghold(this);
+    public Griselbrand copy() {
+        return new Griselbrand(this);
     }
 }

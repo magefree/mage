@@ -28,49 +28,39 @@
 package mage.sets.avacynrestored;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
-import mage.abilities.keyword.HasteAbility;
-import mage.abilities.keyword.VigilanceAbility;
-import mage.abilities.mana.ColorlessManaAbility;
+import mage.MageInt;
+import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
-import mage.target.common.TargetCreaturePermanent;
+import mage.game.permanent.token.ZombieToken;
 
 /**
  *
  * @author Loki
  */
-public class SlayersStronghold extends CardImpl<SlayersStronghold> {
+public class MaalfeldTwins extends CardImpl<MaalfeldTwins> {
 
-    public SlayersStronghold(UUID ownerId) {
-        super(ownerId, 229, "Slayers' Stronghold", Rarity.RARE, new CardType[]{CardType.LAND}, "");
+    public MaalfeldTwins(UUID ownerId) {
+        super(ownerId, 112, "Maalfeld Twins", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{B}");
         this.expansionSetCode = "AVR";
+        this.subtype.add("Zombie");
 
-        // {tap}: Add {1} to your mana pool.
-        this.addAbility(new ColorlessManaAbility());
-        // {R}{W}, {tap}: Target creature gets +2/+0 and gains vigilance and haste until end of turn.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostTargetEffect(2, 0, Constants.Duration.EndOfTurn), new ManaCostsImpl("{R}{W}"));
-        ability.addEffect(new GainAbilityTargetEffect(VigilanceAbility.getInstance(), Constants.Duration.EndOfTurn));
-        ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Constants.Duration.EndOfTurn));
-        ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+        this.color.setBlack(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
+
+        // When Maalfeld Twins dies, put two 2/2 black Zombie creature tokens onto the battlefield.
+        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new ZombieToken(), 2)));
     }
 
-    public SlayersStronghold(final SlayersStronghold card) {
+    public MaalfeldTwins(final MaalfeldTwins card) {
         super(card);
     }
 
     @Override
-    public SlayersStronghold copy() {
-        return new SlayersStronghold(this);
+    public MaalfeldTwins copy() {
+        return new MaalfeldTwins(this);
     }
 }

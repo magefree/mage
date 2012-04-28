@@ -32,45 +32,31 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
-import mage.abilities.keyword.HasteAbility;
-import mage.abilities.keyword.VigilanceAbility;
-import mage.abilities.mana.ColorlessManaAbility;
+import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class SlayersStronghold extends CardImpl<SlayersStronghold> {
+public class BannersRaised extends CardImpl<BannersRaised> {
 
-    public SlayersStronghold(UUID ownerId) {
-        super(ownerId, 229, "Slayers' Stronghold", Rarity.RARE, new CardType[]{CardType.LAND}, "");
+    public BannersRaised(UUID ownerId) {
+        super(ownerId, 127, "Banners Raised", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "AVR";
 
-        // {tap}: Add {1} to your mana pool.
-        this.addAbility(new ColorlessManaAbility());
-        // {R}{W}, {tap}: Target creature gets +2/+0 and gains vigilance and haste until end of turn.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostTargetEffect(2, 0, Constants.Duration.EndOfTurn), new ManaCostsImpl("{R}{W}"));
-        ability.addEffect(new GainAbilityTargetEffect(VigilanceAbility.getInstance(), Constants.Duration.EndOfTurn));
-        ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Constants.Duration.EndOfTurn));
-        ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+        this.color.setRed(true);
+
+        // Creatures you control get +1/+0 until end of turn.
+        this.getSpellAbility().addEffect(new BoostControlledEffect(1, 0, Constants.Duration.EndOfTurn));
     }
 
-    public SlayersStronghold(final SlayersStronghold card) {
+    public BannersRaised(final BannersRaised card) {
         super(card);
     }
 
     @Override
-    public SlayersStronghold copy() {
-        return new SlayersStronghold(this);
+    public BannersRaised copy() {
+        return new BannersRaised(this);
     }
 }

@@ -32,15 +32,9 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
-import mage.abilities.keyword.HasteAbility;
-import mage.abilities.keyword.VigilanceAbility;
-import mage.abilities.mana.ColorlessManaAbility;
+import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -48,29 +42,26 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class SlayersStronghold extends CardImpl<SlayersStronghold> {
+public class ZealousStrike extends CardImpl<ZealousStrike> {
 
-    public SlayersStronghold(UUID ownerId) {
-        super(ownerId, 229, "Slayers' Stronghold", Rarity.RARE, new CardType[]{CardType.LAND}, "");
+    public ZealousStrike(UUID ownerId) {
+        super(ownerId, 41, "Zealous Strike", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "AVR";
 
-        // {tap}: Add {1} to your mana pool.
-        this.addAbility(new ColorlessManaAbility());
-        // {R}{W}, {tap}: Target creature gets +2/+0 and gains vigilance and haste until end of turn.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostTargetEffect(2, 0, Constants.Duration.EndOfTurn), new ManaCostsImpl("{R}{W}"));
-        ability.addEffect(new GainAbilityTargetEffect(VigilanceAbility.getInstance(), Constants.Duration.EndOfTurn));
-        ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Constants.Duration.EndOfTurn));
-        ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+        this.color.setWhite(true);
+
+        // Target creature gets +2/+2 and gains first strike until end of turn.
+        this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public SlayersStronghold(final SlayersStronghold card) {
+    public ZealousStrike(final ZealousStrike card) {
         super(card);
     }
 
     @Override
-    public SlayersStronghold copy() {
-        return new SlayersStronghold(this);
+    public ZealousStrike copy() {
+        return new ZealousStrike(this);
     }
 }
