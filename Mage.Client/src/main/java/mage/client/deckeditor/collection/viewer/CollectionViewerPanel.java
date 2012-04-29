@@ -27,6 +27,7 @@
 */
 package mage.client.deckeditor.collection.viewer;
 
+import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.util.sets.ConstructedFormats;
 
@@ -42,6 +43,7 @@ import java.awt.event.ActionListener;
  */
 public final class CollectionViewerPanel extends JPanel {
 
+    private static String LAYOYT_CONFIG_KEY = "collectionViewerLayoutConfig";
 
     public CollectionViewerPanel() {
         initComponents();
@@ -73,22 +75,26 @@ public final class CollectionViewerPanel extends JPanel {
         jPanel1.add(label2);
 
         small3x3 = new JRadioButton("3x3");
-        small3x3.setSelected(true);
+        boolean selected3x3 = MageFrame.getPreferences().get(LAYOYT_CONFIG_KEY, MageBook.LAYOUT_3x3).equals(MageBook.LAYOUT_3x3);
+        small3x3.setSelected(selected3x3);
         small3x3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 big4x4.setSelected(false);
-                mageBook.updateSize("small");
+                mageBook.updateSize(MageBook.LAYOUT_3x3);
+                MageFrame.getPreferences().put(LAYOYT_CONFIG_KEY, MageBook.LAYOUT_3x3);
             }
         });
         jPanel1.add(small3x3);
 
         big4x4 = new JRadioButton("4x4");
+        big4x4.setSelected(!selected3x3);
         big4x4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 small3x3.setSelected(false);
-                mageBook.updateSize("big");
+                mageBook.updateSize(MageBook.LAYOUT_4x4);
+                MageFrame.getPreferences().put(LAYOYT_CONFIG_KEY, MageBook.LAYOUT_4x4);
             }
         });
         jPanel1.add(big4x4);

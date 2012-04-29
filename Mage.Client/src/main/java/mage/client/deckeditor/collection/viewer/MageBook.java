@@ -61,6 +61,10 @@ import java.util.UUID;
  * @author nantuko
  */
 public class MageBook extends JComponent {
+    
+    public static final String LAYOUT_3x3 = "small";
+    
+    public static final String LAYOUT_4x4 = "big";
 
     public MageBook(BigCard bigCard) {
         super();
@@ -315,14 +319,16 @@ public class MageBook extends JComponent {
     }
 
     public void updateSize(String size) {
-        if (size.equals("small")) {
+        if (size.equals(LAYOUT_3x3)) {
             this.conf = new _3x3Configuration();
 
-        } else if (size.equals("big")) {
+        } else if (size.equals(LAYOUT_4x4)) {
             this.conf = new _4x4Configuration();
         } else {
             return;
         }
+        currentPage = 0;
+        pageLeft.setVisible(false);
         setSize(conf.WIDTH, conf.HEIGHT);
         setPreferredSize(new Dimension(conf.WIDTH, conf.HEIGHT));
         setMinimumSize(new Dimension(conf.WIDTH, conf.HEIGHT));
@@ -393,7 +399,7 @@ public class MageBook extends JComponent {
     private HoverButton pageRight;
 
     private int currentPage = 0;
-    private String currentSet = "DKA";
+    private String currentSet = "AVR";
 
     private static CardDimensions cardDimensions = new CardDimensions(1.2d);
     private static final Logger log = Logger.getLogger(MageBook.class);
