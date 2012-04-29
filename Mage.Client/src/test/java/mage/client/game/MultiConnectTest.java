@@ -8,6 +8,7 @@ import mage.interfaces.MageClient;
 import mage.interfaces.callback.ClientCallback;
 import mage.remote.Connection;
 import mage.remote.Session;
+import mage.remote.SessionImpl;
 import mage.utils.MageVersion;
 import org.apache.log4j.Logger;
 import org.junit.Ignore;
@@ -46,7 +47,7 @@ public class MultiConnectTest {
         }
 
         public void connect() {
-            session = new Session(this);
+            session = new SessionImpl(this);
             Connection connection = new Connection();
             connection.setUsername(username);
             connection.setHost("localhost");

@@ -34,21 +34,21 @@
 
 package mage.client.draft;
 
-import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.UUID;
-import javax.swing.Timer;
 import mage.client.MageFrame;
-import mage.client.constants.Constants.SortBy;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.CardsViewUtil;
-import mage.remote.Session;
 import mage.client.util.Event;
 import mage.client.util.Listener;
+import mage.remote.Session;
 import mage.view.CardsView;
 import mage.view.DraftPickView;
 import mage.view.DraftView;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.UUID;
 
 /**
  *

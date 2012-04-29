@@ -27,28 +27,26 @@
 */
 package mage.client.dialog;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
-import javax.swing.SpinnerNumberModel;
 import mage.Constants.MultiplayerAttackOption;
 import mage.Constants.RangeOfInfluence;
+import mage.cards.decks.importer.DeckImporterUtil;
 import mage.client.MageFrame;
 import mage.client.components.MageComponents;
-import mage.cards.decks.importer.DeckImporterUtil;
 import mage.client.table.TablePlayerPanel;
 import mage.client.util.Event;
 import mage.client.util.Listener;
 import mage.game.match.MatchOptions;
 import mage.remote.Session;
-import mage.sets.Sets;
 import mage.view.GameTypeView;
 import mage.view.TableView;
 import org.apache.log4j.Logger;
+
+import javax.swing.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *

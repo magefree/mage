@@ -28,1018 +28,148 @@
 
 package mage.remote;
 
-import mage.MageException;
 import mage.cards.decks.DeckCardLists;
-import mage.constants.Constants.SessionState;
-import mage.game.GameException;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
 import mage.interfaces.Action;
-import mage.interfaces.MageClient;
-import mage.interfaces.MageServer;
-import mage.interfaces.ServerState;
-import mage.interfaces.callback.ClientCallback;
-import mage.utils.CompressUtil;
 import mage.view.*;
-import org.apache.log4j.Logger;
-import org.jboss.remoting.*;
-import org.jboss.remoting.callback.Callback;
-import org.jboss.remoting.callback.HandleCallbackException;
-import org.jboss.remoting.callback.InvokerCallbackHandler;
-import org.jboss.remoting.transport.bisocket.Bisocket;
-import org.jboss.remoting.transport.socket.SocketWrapper;
-import org.jboss.remoting.transporter.TransporterClient;
 
-import java.net.*;
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.UUID;
 
 /**
+ * Extracted interface for SessionImpl class.
  *
- * @author BetaSteward_at_googlemail.com
+ * @author noxx
  */
-public class Session {
-
-	private final static Logger logger = Logger.getLogger(Session.class);
-
-	private String sessionId;
-	private MageServer server;
-	private MageClient client;
-	private Client callbackClient;
-	private ServerState serverState;
-	private SessionState sessionState = SessionState.DISCONNECTED;
-	private Connection connection;
-
-    private Action embeddedMageServerAction;
-
-    private static boolean debugMode = false;
-    private static boolean standalone = true;
-
-    private boolean canceled = false;
-
-    static {
-        debugMode = System.getProperty("debug.mage") != null;
-        if (System.getProperty("skip.standalone") != null) {
-            standalone = false;
-        }
-    }
-
-	public Session(MageClient client) {
-		this.client = client;
-	}
-	
-	public synchronized boolean connect(Connection connection) {
-		if (isConnected()) {
-			disconnect(true);
-		}
-		this.connection = connection;
-		this.canceled = false;
-		return connect();
-	}
-
-	public boolean stopConnecting() {
-		canceled = true;
-		return true;
-	}
-
-	public boolean connect() {
-
-        if (standalone && connection.getHost().equals("localhost")) {
-            runEmbeddedMageServer();
-        }
-
-		sessionState = SessionState.CONNECTING;
-		try {
-			System.setProperty("http.nonProxyHosts", "code.google.com");
-			System.setProperty("socksNonProxyHosts", "code.google.com");
-
-			// clear previous values
-			System.clearProperty("socksProxyHost");
-			System.clearProperty("socksProxyPort");
-			System.clearProperty("http.proxyHost");
-			System.clearProperty("http.proxyPort");
-
-			switch (connection.getProxyType()) {
-				case SOCKS:
-					System.setProperty("socksProxyHost", connection.getProxyHost());
-					System.setProperty("socksProxyPort", Integer.toString(connection.getProxyPort()));
-					break;
-				case HTTP:
-					System.setProperty("http.proxyHost", connection.getProxyHost());
-					System.setProperty("http.proxyPort", Integer.toString(connection.getProxyPort()));
-					Authenticator.setDefault(new MageAuthenticator(connection.getProxyUsername(), connection.getProxyPassword()));
-					break;
-			}
-			InvokerLocator clientLocator = new InvokerLocator(connection.getURI());
-			Map<String, String> metadata = new HashMap<String, String>();
-			metadata.put(SocketWrapper.WRITE_TIMEOUT, "2000");
-			metadata.put("generalizeSocketException", "true");
-			server = (MageServer) TransporterClient.createTransporterClient(clientLocator.getLocatorURI(), MageServer.class, metadata);
-			
-			Map<String, String> clientMetadata = new HashMap<String, String>();
-			clientMetadata.put(SocketWrapper.WRITE_TIMEOUT, "2000");
-			clientMetadata.put("generalizeSocketException", "true");
-			clientMetadata.put(Client.ENABLE_LEASE, "true");
-            clientMetadata.put(Remoting.USE_CLIENT_CONNECTION_IDENTITY, "true");
-			callbackClient = new Client(clientLocator, "callback", clientMetadata);
-			
-			Map<String, String> listenerMetadata = new HashMap<String, String>();
-            if (debugMode) {
-                // prevent client from disconnecting while debugging
-                listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_PERIOD, "1000000");
-                listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_TIMEOUT, "900000");
-            } else {
-			    listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_PERIOD, "10000");
-			    listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_TIMEOUT, "9000");
-            }
-			callbackClient.connect(new ClientConnectionListener(), listenerMetadata);
-
-			Map<String, String> callbackMetadata = new HashMap<String, String>();
-			callbackMetadata.put(Bisocket.IS_CALLBACK_SERVER, "true");
-			CallbackHandler callbackHandler = new CallbackHandler();
-			callbackClient.addListener(callbackHandler, callbackMetadata);
-			callbackClient.invoke("");
-									
-			this.sessionId = callbackClient.getSessionId();
-			boolean registerResult = false;
-			if (connection.getPassword() == null) {
-				UserDataView userDataView = new UserDataView(connection.getAvatarId());
-				// for backward compatibility. don't remove twice call - first one does nothing but for version checking
-				registerResult = server.registerClient(connection.getUsername(), sessionId, client.getVersion());
-				server.setUserData(connection.getUsername(), sessionId, userDataView);
-			} else {
-				registerResult = server.registerAdmin(connection.getPassword(), sessionId, client.getVersion());
-			}
-			if (registerResult) {
-				sessionState = SessionState.CONNECTED;
-				serverState = server.getServerState();
-				logger.info("Connected to MAGE server at " + connection.getHost() + ":" + connection.getPort());
-				client.connected("Connected to " + connection.getHost() + ":" + connection.getPort() + " ");
-				return true;
-			}
-			disconnect(false);
-			client.showMessage("Unable to connect to server.");
-		} catch (MalformedURLException ex) {
-			logger.fatal("", ex);
-			client.showMessage("Unable to connect to server. "  + ex.getMessage());
-        } catch (MageVersionException ex) {
-            if (!canceled) {
-				client.showMessage("Unable to connect to server. "  + ex.getMessage());
-			}
-            // TODO: download client that matches server version
-        } catch (CannotConnectException ex) {
-            if (!canceled) {
-                handleCannotConnectException(ex);
-			}
-		} catch (Throwable t) {
-			logger.fatal("Unable to connect to server - ", t);
-			if (!canceled) {
-				disconnect(false);
-				client.showMessage("Unable to connect to server.  "  + t.getMessage());
-			}
-		}
-		return false;
-	}
-
-    private void runEmbeddedMageServer() {
-        if (embeddedMageServerAction != null) {
-            try {
-                embeddedMageServerAction.execute();
-            } catch (MageException e) {
-                logger.error(e);
-            }
-        }
-    }
-
-    private void handleCannotConnectException(CannotConnectException ex) {
-        logger.warn("Cannot connect", ex);
-        Throwable t = ex.getCause();
-        String message = "";
-        while (t != null) {
-            if (t instanceof ConnectException) {
-                message = "Server is likely offline.";
-                break;
-            }
-            if (t instanceof SocketException) {
-                message = "Check your internet connection.";
-                break;
-            }
-            if (t instanceof SocketTimeoutException) {
-                message = "Server is not responding.";
-                break;
-            }
-            t = t.getCause();
-        }
-        client.showMessage("Unable to connect to server. " + message);
-    }
-    
-	public synchronized void disconnect(boolean showMessage) {
-		if (isConnected())
-			sessionState = SessionState.DISCONNECTING;
-		if (connection == null)
-			return;
-		try {
-			callbackClient.disconnect();
-			TransporterClient.destroyTransporterClient(server);
-		} catch (Throwable ex) {
-			logger.fatal("Error disconnecting ...", ex);
-		}
-		if (sessionState == SessionState.DISCONNECTING || sessionState == SessionState.CONNECTING) {
-			sessionState = SessionState.DISCONNECTED;
-			logger.info("Disconnected ... ");
-		}
-		client.disconnected();
-		if (showMessage)
-			client.showError("Network error.  You have been disconnected");
-	}
-
-    public synchronized boolean sendFeedback(String title, String type, String message, String email) {
-        if (isConnected()) {
-            try {
-                server.sendFeedbackMessage(sessionId, connection.getUsername(), title, type, message, email);
-                return true;
-            } catch (MageException e) {
-                logger.error(e);
-            }
-        }
-        return false;
-    }
-
-	class CallbackHandler implements InvokerCallbackHandler {
-		@Override
-		public void handleCallback(Callback callback) throws HandleCallbackException {
-            logger.info("callback handler");
-			client.processCallback((ClientCallback)callback.getCallbackObject());
-		}
-	}
-
-	class ClientConnectionListener implements ConnectionListener {
-		@Override
-		public void handleConnectionException(Throwable throwable, Client client) {
-			logger.info("connection to server lost - " + throwable.getMessage());
-			disconnect(true);
-		}
-	}
-	
-	public boolean isConnected() {
-		if (callbackClient == null)
-			return false;
-		return callbackClient.isConnected();
-	}
-
-	public String[] getPlayerTypes() {
-		return serverState.getPlayerTypes();
-	}
-
-	public List<GameTypeView> getGameTypes() {
-		return serverState.getGameTypes();
-	}
-
-	public String[] getDeckTypes() {
-		return serverState.getDeckTypes();
-	}
-
-	public List<TournamentTypeView> getTournamentTypes() {
-		return serverState.getTournamentTypes();
-	}
-
-	public boolean isTestMode() {
-		if (serverState != null)
-			return serverState.isTestMode();
-		return false;
-	}
-
-	public UUID getMainRoomId() {
-		try {
-			if (isConnected())
-				return server.getMainRoomId();
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return null;
-	}
-
-	public UUID getRoomChatId(UUID roomId) {
-		try {
-			if (isConnected())
-				return server.getRoomChatId(roomId);
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return null;
-	}
-
-	public UUID getTableChatId(UUID tableId) {
-		try {
-			if (isConnected())
-				return server.getTableChatId(tableId);
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return null;
-	}
-
-	public UUID getGameChatId(UUID gameId) {
-		try {
-			if (isConnected())
-				return server.getGameChatId(gameId);
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return null;
-	}
-
-	public TableView getTable(UUID roomId, UUID tableId) {
-		try {
-			if (isConnected())
-				return server.getTable(roomId, tableId);
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return null;
-	}
-
-	public boolean watchTable(UUID roomId, UUID tableId) {
-		try {
-			if (isConnected()) {
-				server.watchTable(sessionId, roomId, tableId);
-				return true;
-			}
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return false;
-	}
-
-	public boolean joinTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill, DeckCardLists deckList) {
-		try {
-			if (isConnected())
-				return server.joinTable(sessionId, roomId, tableId, playerName, playerType, skill, deckList);
-		} catch (GameException ex) {
-			handleGameException(ex);
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return false;
-	}
-
-	public boolean joinTournamentTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill) {
-		try {
-			if (isConnected())
-				return server.joinTournamentTable(sessionId, roomId, tableId, playerName, playerType, skill);
-		} catch (GameException ex) {
-			handleGameException(ex);
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return false;
-	}
-
-	public Collection<TableView> getTables(UUID roomId) throws MageRemoteException {
-		try {
-			if (isConnected())
-				return server.getTables(roomId);
-		} catch (MageException ex) {
-			handleMageException(ex);
-			throw new MageRemoteException();
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return null;
-	}
-
-	public Collection<MatchView> getFinishedMatches(UUID roomId) throws MageRemoteException {
-		try {
-			if (isConnected())
-				return server.getFinishedMatches(roomId);
-		} catch (MageException ex) {
-			handleMageException(ex);
-			throw new MageRemoteException();
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return null;
-	}
-
-    public Collection<String> getConnectedPlayers(UUID roomId) throws MageRemoteException {
-		try {
-			if (isConnected())
-				return server.getConnectedPlayers(roomId);
-		} catch (MageException ex) {
-			handleMageException(ex);
-			throw new MageRemoteException();
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return null;
-	}
-
-	public TournamentView getTournament(UUID tournamentId) throws MageRemoteException {
-		try {
-			if (isConnected())
-				return server.getTournament(tournamentId);
-		} catch (MageException ex) {
-			handleMageException(ex);
-			throw new MageRemoteException();
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return null;
-	}
-
-	public UUID getTournamentChatId(UUID tournamentId) {
-		try {
-			if (isConnected())
-				return server.getTournamentChatId(tournamentId);
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return null;
-	}
-
-	public boolean sendPlayerUUID(UUID gameId, UUID data) {
-		try {
-			if (isConnected()) {
-				server.sendPlayerUUID(gameId, sessionId, data);
-				return true;
-			}
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return false;
-	}
-
-	public boolean sendPlayerBoolean(UUID gameId, boolean data) {
-		try {
-			if (isConnected()) {
-				server.sendPlayerBoolean(gameId, sessionId, data);
-				return true;
-			}
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return false;
-	}
-
-	public boolean sendPlayerInteger(UUID gameId, int data) {
-		try {
-			if (isConnected()) {
-				server.sendPlayerInteger(gameId, sessionId, data);
-				return true;
-			}
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return false;
-	}
-
-	public boolean sendPlayerString(UUID gameId, String data) {
-		try {
-			if (isConnected()) {
-				server.sendPlayerString(gameId, sessionId, data);
-				return true;
-			}
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return false;
-	}
-
-	public DraftPickView sendCardPick(UUID draftId, UUID cardId) {
-		try {
-			if (isConnected())
-				return server.sendCardPick(draftId, sessionId, cardId);
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return null;
-	}
-
-	public boolean joinChat(UUID chatId) {
-		try {
-			if (isConnected()) {
-				server.joinChat(chatId, sessionId, connection.getUsername());
-				return true;
-			}
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return false;
-	}
-
-	public boolean leaveChat(UUID chatId) {
-//		lock.readLock().lock();
-		try {
-			if (isConnected()) {
-				server.leaveChat(chatId, sessionId);
-				return true;
-			}
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-//		} finally {
-//			lock.readLock().unlock();
-		}
-		return false;
-	}
-
-	public boolean sendChatMessage(UUID chatId, String message) {
-//		lock.readLock().lock();
-		try {
-			if (isConnected()) {
-				server.sendChatMessage(chatId, connection.getUsername(), message);
-				return true;
-			}
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-//		} finally {
-//			lock.readLock().unlock();
-		}
-		return false;
-	}
-
-    public boolean sendBroadcastMessage(String message) {
-		try {
-			if (isConnected()) {
-				server.sendBroadcastMessage(sessionId, message);
-				return true;
-			}
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);
-		}
-		return false;
-	}
-
-	public boolean joinGame(UUID gameId) {
-		try {
-			if (isConnected()) {
-				server.joinGame(gameId, sessionId);
-				return true;
-			}
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return false;
-	}
-
-	public boolean joinDraft(UUID draftId) {
-		try {
-			if (isConnected()) {
-				server.joinDraft(draftId, sessionId);
-				return true;
-			}
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return false;
-	}
-
-	public boolean joinTournament(UUID tournamentId) {
-		try {
-			if (isConnected()) {
-				server.joinTournament(tournamentId, sessionId);
-				return true;
-			}
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return false;
-	}
-
-	public boolean watchGame(UUID gameId) {
-		try {
-			if (isConnected()) {
-				server.watchGame(gameId, sessionId);
-				return true;
-			}
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return false;
-	}
-
-	public boolean replayGame(UUID gameId) {
-		try {
-			if (isConnected()) {
-				server.replayGame(gameId, sessionId);
-				return true;
-			}
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return false;
-	}
-
-	public TableView createTable(UUID roomId, MatchOptions matchOptions) {
-		try {
-			if (isConnected())
-				return server.createTable(sessionId, roomId, matchOptions);
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return null;
-	}
-
-	public TableView createTournamentTable(UUID roomId, TournamentOptions tournamentOptions) {
-		try {
-			if (isConnected())
-				return server.createTournamentTable(sessionId, roomId, tournamentOptions);
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return null;
-	}
-
-	public boolean isTableOwner(UUID roomId, UUID tableId) {
-		try {
-			if (isConnected())
-				return server.isTableOwner(sessionId, roomId, tableId);
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return false;
-	}
-
-	public boolean removeTable(UUID roomId, UUID tableId) {
-		try {
-			if (isConnected()) {
-				server.removeTable(sessionId, roomId, tableId);
-				return true;
-			}
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return false;
-	}
-
-	public boolean removeTable(UUID tableId) {
-		try {
-			if (isConnected()) {
-				server.removeTable(sessionId, tableId);
-				return true;
-			}
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return false;
-	}
-
-	public boolean swapSeats(UUID roomId, UUID tableId, int seatNum1, int seatNum2) {
-		try {
-			if (isConnected()) {
-				server.swapSeats(sessionId, roomId, tableId, seatNum1, seatNum2);
-				return true;
-			}
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return false;
-	}
-
-	public boolean leaveTable(UUID roomId, UUID tableId) {
-		try {
-			if (isConnected()) {
-				server.leaveTable(sessionId, roomId, tableId);
-				return true;
-			}
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return false;
-	}
-
-	public boolean startGame(UUID roomId, UUID tableId) {
-		try {
-			if (isConnected()) {
-				server.startMatch(sessionId, roomId, tableId);
-				return true;
-			}
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return false;
-	}
-
-	public boolean startTournament(UUID roomId, UUID tableId) {
-		try {
-			if (isConnected()) {
-				server.startTournament(sessionId, roomId, tableId);
-				return true;
-			}
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return false;
-	}
-
-	public boolean startChallenge(UUID roomId, UUID tableId, UUID challengeId) {
-		try {
-			if (isConnected()) {
-				server.startChallenge(sessionId, roomId, tableId, challengeId);
-				return true;
-			}
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return false;
-	}
-
-	public boolean submitDeck(UUID tableId, DeckCardLists deck) {
-		try {
-			if (isConnected())
-				return server.submitDeck(sessionId, tableId, deck);
-		} catch (GameException ex) {
-			handleGameException(ex);
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return false;
-	}
-
-	public boolean updateDeck(UUID tableId, DeckCardLists deck) {
-		try {
-			if (isConnected()) {
-				server.updateDeck(sessionId, tableId, deck);
-                return true;
-            }
-		} catch (GameException ex) {
-			handleGameException(ex);
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return false;
-	}
-
-    public boolean concedeGame(UUID gameId) {
-		try {
-			if (isConnected()) {
-				server.concedeGame(gameId, sessionId);
-				return true;
-			}
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return false;
-	}
-
-	public boolean stopWatching(UUID gameId) {
-		try {
-			if (isConnected()) {
-				server.stopWatching(gameId, sessionId);
-				return true;
-			}
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return false;
-	}
-
-	public boolean startReplay(UUID gameId) {
-		try {
-			if (isConnected()) {
-				server.startReplay(gameId, sessionId);
-				return true;
-			}
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return false;
-	}
-
-	public boolean stopReplay(UUID gameId) {
-		try {
-			if (isConnected()) {
-				server.stopReplay(gameId, sessionId);
-				return true;
-			}
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return false;
-	}
-
-	public boolean nextPlay(UUID gameId) {
-		try {
-			if (isConnected()) {
-				server.nextPlay(gameId, sessionId);
-				return true;
-			}
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return false;
-	}
-
-	public boolean previousPlay(UUID gameId) {
-		try {
-			if (isConnected()) {
-				server.previousPlay(gameId, sessionId);
-				return true;
-			}
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return false;
-	}
-
-	public boolean skipForward(UUID gameId, int moves) {
-		try {
-			if (isConnected()) {
-				server.skipForward(gameId, sessionId, moves);
-				return true;
-			}
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return false;
-	}
-
-    public boolean cheat(UUID gameId, UUID playerId, DeckCardLists deckList) {
-		try {
-			if (isConnected()) {
-				server.cheat(gameId, sessionId, playerId, deckList);
-				return true;
-			}
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return false;
-	}
-
-	public List<UserView> getUsers() {
-		try {
-			if (isConnected())
-				return server.getUsers(sessionId);
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return null;
-	}
-
-	public List<String> getServerMessages() {
-		try {
-			if (isConnected())
-				return (List<String>) CompressUtil.decompress(server.getServerMessagesCompressed(sessionId));
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);
-		}
-		return null;
-	}
-	
-	public boolean disconnectUser(String userSessionId) {
-		try {
-			if (isConnected()) {
-				server.disconnectUser(sessionId, userSessionId);
-				return true;
-			}
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);		
-		}
-		return false;
-	}
-
-	private void handleThrowable(Throwable t) {
-		logger.fatal("Communication error", t);
-		sessionState = SessionState.SERVER_UNAVAILABLE;
-		disconnect(true);
-	}
-
-	private void handleMageException(MageException ex) {
-		logger.fatal("Server error", ex);
-	}
-
-	private void handleGameException(GameException ex) {
-		logger.warn(ex.getMessage());
-		client.showError(ex.getMessage());
-	}
-
-
-	public String getUserName() {
-		return connection.getUsername();
-	}
-
-	public boolean updateAvatar(int avatarId) {
-		try {
-			if (isConnected()) {
-				UserDataView userDataView = new UserDataView(avatarId);
-				server.setUserData(connection.getUsername(), sessionId, userDataView);
-			}
-			return true;
-		} catch (MageException ex) {
-			handleMageException(ex);
-		} catch (Throwable t) {
-			handleThrowable(t);
-		}
-		return false;
-	}
-
-    public void setEmbeddedMageServerAction(Action embeddedMageServerAction) {
-        this.embeddedMageServerAction = embeddedMageServerAction;
-    }
-}
-
-class MageAuthenticator extends Authenticator {
-
-	private String username;
-	private String password;
-
-	public MageAuthenticator(String username, String password) {
-		this.username = username;
-		this.password = password;
-	}
-
-	@Override
-	public PasswordAuthentication getPasswordAuthentication () {
-		return new PasswordAuthentication (username, password.toCharArray());
-	}
+public interface Session {
+
+    boolean connect(Connection connection);
+
+    boolean stopConnecting();
+
+    boolean connect();
+
+    void disconnect(boolean showMessage);
+
+    boolean sendFeedback(String title, String type, String message, String email);
+
+    boolean isConnected();
+
+    String[] getPlayerTypes();
+
+    List<GameTypeView> getGameTypes();
+
+    String[] getDeckTypes();
+
+    List<TournamentTypeView> getTournamentTypes();
+
+    boolean isTestMode();
+
+    UUID getMainRoomId();
+
+    UUID getRoomChatId(UUID roomId);
+
+    UUID getTableChatId(UUID tableId);
+
+    UUID getGameChatId(UUID gameId);
+
+    TableView getTable(UUID roomId, UUID tableId);
+
+    boolean watchTable(UUID roomId, UUID tableId);
+
+    boolean joinTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill, DeckCardLists deckList);
+
+    boolean joinTournamentTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill);
+
+    Collection<TableView> getTables(UUID roomId) throws MageRemoteException;
+
+    Collection<MatchView> getFinishedMatches(UUID roomId) throws MageRemoteException;
+
+    Collection<String> getConnectedPlayers(UUID roomId) throws MageRemoteException;
+
+    TournamentView getTournament(UUID tournamentId) throws MageRemoteException;
+
+    UUID getTournamentChatId(UUID tournamentId);
+
+    boolean sendPlayerUUID(UUID gameId, UUID data);
+
+    boolean sendPlayerBoolean(UUID gameId, boolean data);
+
+    boolean sendPlayerInteger(UUID gameId, int data);
+
+    boolean sendPlayerString(UUID gameId, String data);
+
+    DraftPickView sendCardPick(UUID draftId, UUID cardId);
+
+    boolean joinChat(UUID chatId);
+
+    boolean leaveChat(UUID chatId);
+
+    boolean sendChatMessage(UUID chatId, String message);
+
+    boolean sendBroadcastMessage(String message);
+
+    boolean joinGame(UUID gameId);
+
+    boolean joinDraft(UUID draftId);
+
+    boolean joinTournament(UUID tournamentId);
+
+    boolean watchGame(UUID gameId);
+
+    boolean replayGame(UUID gameId);
+
+    TableView createTable(UUID roomId, MatchOptions matchOptions);
+
+    TableView createTournamentTable(UUID roomId, TournamentOptions tournamentOptions);
+
+    boolean isTableOwner(UUID roomId, UUID tableId);
+
+    boolean removeTable(UUID roomId, UUID tableId);
+
+    boolean removeTable(UUID tableId);
+
+    boolean swapSeats(UUID roomId, UUID tableId, int seatNum1, int seatNum2);
+
+    boolean leaveTable(UUID roomId, UUID tableId);
+
+    boolean startGame(UUID roomId, UUID tableId);
+
+    boolean startTournament(UUID roomId, UUID tableId);
+
+    boolean startChallenge(UUID roomId, UUID tableId, UUID challengeId);
+
+    boolean submitDeck(UUID tableId, DeckCardLists deck);
+
+    boolean updateDeck(UUID tableId, DeckCardLists deck);
+
+    boolean concedeGame(UUID gameId);
+
+    boolean stopWatching(UUID gameId);
+
+    boolean startReplay(UUID gameId);
+
+    boolean stopReplay(UUID gameId);
+
+    boolean nextPlay(UUID gameId);
+
+    boolean previousPlay(UUID gameId);
+
+    boolean skipForward(UUID gameId, int moves);
+
+    boolean cheat(UUID gameId, UUID playerId, DeckCardLists deckList);
+
+    List<UserView> getUsers();
+
+    List<String> getServerMessages();
+
+    boolean disconnectUser(String userSessionId);
+
+    String getUserName();
+
+    boolean updateAvatar(int avatarId);
+
+    void setEmbeddedMageServerAction(Action embeddedMageServerAction);
 }

@@ -36,7 +36,6 @@ package mage.client.game;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.MouseEvent;
 import java.io.Serializable;
 import java.util.Map;
 import java.util.UUID;

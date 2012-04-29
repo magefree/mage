@@ -38,6 +38,7 @@ import mage.interfaces.MageClient;
 import mage.interfaces.callback.ClientCallback;
 import mage.remote.Connection;
 import mage.remote.Session;
+import mage.remote.SessionImpl;
 import mage.utils.MageVersion;
 import org.apache.log4j.Logger;
 
@@ -79,7 +80,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
 		initComponents();
 		try {
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
-			session = new Session(this);
+			session = new SessionImpl(this);
 			connectDialog = new ConnectDialog();
 		} catch (Exception ex) {
 			logger.fatal("", ex);

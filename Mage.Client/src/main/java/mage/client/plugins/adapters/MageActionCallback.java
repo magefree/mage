@@ -5,7 +5,6 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.UUID;
-import java.util.prefs.Preferences;
 
 import javax.swing.*;
 

@@ -40,6 +40,7 @@ import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import javax.swing.SwingWorker;
 import javax.swing.table.AbstractTableModel;
+
 import mage.remote.Session;
 import mage.view.TableView;
 import mage.view.UserView;

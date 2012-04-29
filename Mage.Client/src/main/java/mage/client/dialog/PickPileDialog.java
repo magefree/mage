@@ -29,7 +29,6 @@
 package mage.client.dialog;
 
 import java.awt.BorderLayout;
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.UUID;
@@ -37,15 +36,11 @@ import java.util.UUID;
 import javax.swing.JButton;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 import mage.cards.CardDimensions;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.cards.CardArea;
-import mage.client.util.SettingsManager;
-import mage.client.util.gui.GuiDisplayUtil;
-import mage.remote.Session;
 import mage.view.CardsView;
 
 /**

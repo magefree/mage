@@ -34,7 +34,6 @@
 
 package mage.client;
 
-import mage.Constants;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.client.cards.CardsStorage;
@@ -60,7 +59,6 @@ import mage.client.util.EDTExceptionHandler;
 import mage.client.util.SettingsManager;
 import mage.client.util.gui.ArrowBuilder;
 import mage.components.ImagePanel;
-import mage.game.match.MatchOptions;
 import mage.interfaces.Action;
 import mage.interfaces.MageClient;
 import mage.interfaces.callback.CallbackClient;
@@ -68,10 +66,9 @@ import mage.interfaces.callback.ClientCallback;
 import mage.remote.Connection;
 import mage.remote.Connection.ProxyType;
 import mage.remote.Session;
+import mage.remote.SessionImpl;
 import mage.server.Main;
-import mage.sets.Sets;
 import mage.utils.MageVersion;
-import mage.view.TableView;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.ManaSymbols;
 
@@ -181,7 +178,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 		SettingsManager.getInstance().setScreenWidthAndHeight(1024, 768);
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-		session = new Session(this);
+		session = new SessionImpl(this);
         session.setEmbeddedMageServerAction(new Action() {
             @Override
             public void execute() {
