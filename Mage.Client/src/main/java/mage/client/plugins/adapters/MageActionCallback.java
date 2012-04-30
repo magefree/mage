@@ -1,13 +1,5 @@
 package mage.client.plugins.adapters;
 
-import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.util.List;
-import java.util.UUID;
-
-import javax.swing.*;
-
 import mage.Constants;
 import mage.cards.MageCard;
 import mage.cards.MagePermanent;
@@ -19,16 +11,22 @@ import mage.client.components.MageComponents;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.game.PlayAreaPanel;
 import mage.client.plugins.impl.Plugins;
-import mage.remote.Session;
 import mage.client.util.DefaultActionCallback;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.ArrowBuilder;
 import mage.client.util.gui.GuiDisplayUtil;
 import mage.components.CardInfoPane;
+import mage.remote.Session;
 import mage.utils.ThreadUtils;
 import mage.view.CardView;
-
 import org.jdesktop.swingx.JXPanel;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.util.List;
+import java.util.UUID;
 
 public class MageActionCallback implements ActionCallback {
 
@@ -126,14 +124,14 @@ public class MageActionCallback implements ActionCallback {
         }
 
         if (data.component instanceof MageCard) {
-            String zone = ((MageCard)(data.component)).getZone();
-            if (zone != null && zone.equals(Constants.Zone.HAND.toString())) {
+            //String zone = ((MageCard)(data.component)).getZone();
+            //if (zone != null && zone.equals(Constants.Zone.HAND.toString())) {
                 // for performance getting cached value
-                String showTooltips = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_HAND_SHOW_TOOLTIPS, "false");
+                String showTooltips = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_TOOLTIPS_ANY_ZONE, "false");
                 if (showTooltips.equals("false")) {
                     return;
                 }
-            }
+            //}
         }
 
         if (cardInfoPane == null) {

@@ -64,7 +64,7 @@ import static mage.client.util.PhaseManager.*;
 public class PreferencesDialog extends javax.swing.JDialog {
 
     public static final String KEY_HAND_USE_BIG_CARDS = "handUseBigCards";
-    public static final String KEY_HAND_SHOW_TOOLTIPS = "handShowTooltips";
+    public static final String KEY_SHOW_TOOLTIPS_ANY_ZONE = "showTooltipsInAnyZone";
 	public static final String KEY_PERMANENTS_IN_ONE_PILE = "nonLandPermanentsInOnePile";
     public static final String KEY_CARD_IMAGES_USE_DEFAULT = "cardImagesUseDefault";
     public static final String KEY_CARD_IMAGES_PATH = "cardImagesPath";
@@ -134,7 +134,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        showToolTipsInHand = new javax.swing.JCheckBox();
+        showToolTipsInAnyZone = new javax.swing.JCheckBox();
         displayBigCardsInHand = new javax.swing.JCheckBox();
         jPanel7 = new javax.swing.JPanel();
         nonLandPermanentsInOnePile = new javax.swing.JCheckBox();
@@ -209,9 +209,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Hand"));
 
-        showToolTipsInHand.setSelected(true);
-        showToolTipsInHand.setText("Show tooltips");
-        showToolTipsInHand.addActionListener(new java.awt.event.ActionListener() {
+        showToolTipsInAnyZone.setSelected(true);
+        showToolTipsInAnyZone.setText("Show tooltips");
+        showToolTipsInAnyZone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 showToolTipsInHandActionPerformed(evt);
             }
@@ -231,14 +231,14 @@ public class PreferencesDialog extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(showToolTipsInHand)
+                    .addComponent(showToolTipsInAnyZone)
                     .addComponent(displayBigCardsInHand))
                 .addContainerGap(161, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(showToolTipsInHand)
+                .addComponent(showToolTipsInAnyZone)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(displayBigCardsInHand)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -938,7 +938,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.checkBoxMain2Others, MAIN_2_OTHERS);
         save(prefs, dialog.checkBoxEndTurnOthers, END_OF_TURN_OTHERS);
         save(prefs, dialog.displayBigCardsInHand, KEY_HAND_USE_BIG_CARDS, "true", "false", UPDATE_CACHE_POLICY);
-        save(prefs, dialog.showToolTipsInHand, KEY_HAND_SHOW_TOOLTIPS, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.showToolTipsInAnyZone, KEY_SHOW_TOOLTIPS_ANY_ZONE, "true", "false", UPDATE_CACHE_POLICY);
 		save(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true", "false", UPDATE_CACHE_POLICY);
 
 		// connection
@@ -1103,7 +1103,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 		load(prefs, dialog.checkBoxMain2Others, MAIN_2_OTHERS);
 		load(prefs, dialog.checkBoxEndTurnOthers, END_OF_TURN_OTHERS);
 		load(prefs, dialog.displayBigCardsInHand, KEY_HAND_USE_BIG_CARDS, "true");
-		load(prefs, dialog.showToolTipsInHand, KEY_HAND_SHOW_TOOLTIPS, "true");
+		load(prefs, dialog.showToolTipsInAnyZone, KEY_SHOW_TOOLTIPS_ANY_ZONE, "true");
 		load(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true");
 	}
 
@@ -1374,7 +1374,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JPanel pnlProxySettings;
     private javax.swing.JCheckBox rememberPswd;
     private javax.swing.JButton saveButton;
-    private javax.swing.JCheckBox showToolTipsInHand;
+    private javax.swing.JCheckBox showToolTipsInAnyZone;
     private javax.swing.JPasswordField txtPasswordField;
     private javax.swing.JTextField txtProxyPort;
     private javax.swing.JTextField txtProxyServer;
