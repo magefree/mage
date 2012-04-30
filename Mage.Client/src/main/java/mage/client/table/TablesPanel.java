@@ -36,6 +36,7 @@ package mage.client.table;
 
 import mage.Constants.MultiplayerAttackOption;
 import mage.Constants.RangeOfInfluence;
+import mage.cards.decks.importer.DeckImporterUtil;
 import mage.client.MageFrame;
 import mage.client.chat.ChatPanel;
 import mage.client.components.MageComponents;
@@ -43,10 +44,12 @@ import mage.client.dialog.JoinTableDialog;
 import mage.client.dialog.NewTableDialog;
 import mage.client.dialog.NewTournamentDialog;
 import mage.client.dialog.TableWaitingDialog;
+import mage.client.util.ButtonColumn;
+import mage.client.util.gui.GuiDisplayUtil;
+import mage.game.match.MatchOptions;
 import mage.remote.MageRemoteException;
 import mage.remote.Session;
-import mage.client.util.ButtonColumn;
-import mage.game.match.MatchOptions;
+import mage.view.MatchView;
 import mage.view.TableView;
 import org.apache.log4j.Logger;
 
@@ -61,9 +64,6 @@ import java.util.*;
 import java.util.List;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
-import mage.cards.decks.importer.DeckImporterUtil;
-import mage.client.util.gui.GuiDisplayUtil;
-import mage.view.MatchView;
 
 
 /**

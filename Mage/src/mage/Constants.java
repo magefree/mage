@@ -401,7 +401,7 @@ public final class Constants {
 	}
 
 	public enum MultiplayerAttackOption {
-		MULITPLE("Attack Multiple Players"),
+		MULTIPLE("Attack Multiple Players"),
 		LEFT("Attack Left"),
 		RIGHT("Attack Right");
 

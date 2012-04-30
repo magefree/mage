@@ -264,7 +264,7 @@ public class MageServerImpl implements MageServer {
         execute("startMatch", sessionId, new Action() {
             public void execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-							    TableManager.getInstance().startMatch(userId, roomId, tableId);
+				TableManager.getInstance().startMatch(userId, roomId, tableId);
             }
         });
 	}

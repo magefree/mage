@@ -1,7 +1,5 @@
 package mage.player.ai.utils;
 
-import java.io.InputStream;
-import java.util.*;
 import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
@@ -11,6 +9,9 @@ import mage.target.Target;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreaturePermanent;
 import org.apache.log4j.Logger;
+
+import java.io.InputStream;
+import java.util.*;
 
 /**
  * Class responsible for reading ratings from resources and rating gived cards.
@@ -76,7 +77,7 @@ public class RateCard {
 			for (Ability ability : card.getAbilities()) {
 				for (Effect effect : ability.getEffects()) {
 					if (effect.getOutcome().equals(Constants.Outcome.Removal)) {
-						log.info("Found removal: " + card.getName());
+						log.debug("Found removal: " + card.getName());
 						return 1;
 					}
 					if (effect.getOutcome().equals(Constants.Outcome.Damage)) {
@@ -85,7 +86,7 @@ public class RateCard {
 							if (damageEffect.getAmount() > 1) {
 								for (Target target : ability.getTargets()) {
 									if (target instanceof TargetCreaturePermanent || target instanceof TargetCreatureOrPlayer) {
-										log.info("Found damage dealer: " + card.getName());
+										log.debug("Found damage dealer: " + card.getName());
 										return 1;
 									}
 								}
