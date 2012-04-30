@@ -106,9 +106,9 @@ public class SessionImpl implements Session {
 	@Override
     public boolean connect() {
 
-        if (standalone && connection.getHost().equals("localhost")) {
+        /*if (standalone && connection.getHost().equals("localhost")) {
             runEmbeddedMageServer();
-        }
+        }*/
 
 		sessionState = SessionState.CONNECTING;
 		try {
