@@ -61,11 +61,11 @@ public class MiracleWatcher extends WatcherImpl<MiracleWatcher> {
 
     public MiracleWatcher(final MiracleWatcher watcher) {
         super(watcher);
-        for (Entry<UUID, Integer> entry: watcher.amountOfCardsDrawnThisTurn.entrySet()) {
+        for (Entry<UUID, Integer> entry : watcher.amountOfCardsDrawnThisTurn.entrySet()) {
             amountOfCardsDrawnThisTurn.put(entry.getKey(), entry.getValue());
         }
     }
-    
+
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DREW_CARD) {
@@ -75,7 +75,7 @@ public class MiracleWatcher extends WatcherImpl<MiracleWatcher> {
                 if (amount == null) {
                     amount = Integer.valueOf(1);
                 } else {
-                    amount = Integer.valueOf(amount+1);
+                    amount = Integer.valueOf(amount + 1);
                 }
                 amountOfCardsDrawnThisTurn.put(playerId, amount);
                 if (amount == 1) {
@@ -105,9 +105,9 @@ public class MiracleWatcher extends WatcherImpl<MiracleWatcher> {
 
 
     @Override
-	public void reset() {
+    public void reset() {
         amountOfCardsDrawnThisTurn.clear();
-	}
+    }
 
     @Override
     public MiracleWatcher copy() {

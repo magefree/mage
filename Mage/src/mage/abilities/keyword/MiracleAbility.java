@@ -34,34 +34,34 @@ import mage.abilities.costs.Cost;
 
 /**
  * Miracle ability:
- *   You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.
+ * You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.
  *
  * @author noxx
  */
 public class MiracleAbility extends StaticAbility<MiracleAbility> {
 
     private static final String staticRule = " (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)";
-    
+
     private String ruleText;
-    
-	public MiracleAbility(Cost cost) {
-		super(Zone.BATTLEFIELD, null);
+
+    public MiracleAbility(Cost cost) {
+        super(Zone.BATTLEFIELD, null);
         addCost(cost);
         ruleText = "Miracle" + cost.getText() + staticRule;
-	}
+    }
 
     public MiracleAbility(MiracleAbility miracleAbility) {
         super(miracleAbility);
     }
 
-	@Override
-	public String getRule() {
-		return ruleText;
-	}
+    @Override
+    public String getRule() {
+        return ruleText;
+    }
 
-	@Override
-	public MiracleAbility copy() {
-		return new MiracleAbility(this);
-	}
+    @Override
+    public MiracleAbility copy() {
+        return new MiracleAbility(this);
+    }
 
 }
