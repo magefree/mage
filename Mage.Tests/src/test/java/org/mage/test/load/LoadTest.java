@@ -15,6 +15,7 @@ import mage.view.GameTypeView;
 import mage.view.TableView;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -76,6 +77,7 @@ public class LoadTest {
      * @throws Exception
      */
     @Test
+    @Ignore
     public void testStartGame() throws Exception {
         DeckCardLists deckList = createDeck();
 
