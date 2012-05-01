@@ -54,9 +54,9 @@ public class SkipNextUntapTargetEffect extends ReplacementEffectImpl<SkipNextUnt
 		super(Duration.OneUse, Outcome.Detriment);
 	}
 
-        public SkipNextUntapTargetEffect(String text) {
+    public SkipNextUntapTargetEffect(String text) {
 		this();
-                this.staticText = text;
+        this.staticText = text;
 	}
 
 	public SkipNextUntapTargetEffect(final SkipNextUntapTargetEffect effect) {
