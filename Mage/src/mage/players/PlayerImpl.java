@@ -481,7 +481,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 				card.cast(game, fromZone, ability, playerId);
 
 				Ability spellAbility = game.getStack().getSpell(ability.getId()).getSpellAbility();
-				if (spellAbility.activate(game, noMana)) {
+   				if (spellAbility.activate(game, noMana)) {
 					for (KickerAbility kicker: card.getAbilities().getKickerAbilities()) {
                         if (kicker.getCosts().canPay(ability.getSourceId(), playerId, game) && kicker.canChooseTarget(game))
                             kicker.activate(game, false);
@@ -1190,9 +1190,10 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         
 	protected boolean canPlay(ActivatedAbility ability, ManaOptions available, Game game) {
 		if (!(ability instanceof ManaAbility) && ability.canActivate(playerId, game)) {
-            game.getContinuousEffects().costModification(ability, game);
+            Ability copy = ability.copy();
+            game.getContinuousEffects().costModification(copy, game);
 
-			ManaOptions abilityOptions = ability.getManaCostsToPay().getOptions();
+			ManaOptions abilityOptions = copy.getManaCostsToPay().getOptions();
 			if (abilityOptions.size() == 0) {
 				return true;
 			}
@@ -1205,6 +1206,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 					}
 				}
 			}
+
             for (AlternativeCost cost: ability.getAlternativeCosts()) {
                 if (cost.isAvailable(game, ability) && cost.canPay(ability.getSourceId(), playerId, game))
                     return true;

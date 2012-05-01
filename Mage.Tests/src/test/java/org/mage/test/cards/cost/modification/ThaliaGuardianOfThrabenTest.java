@@ -1,4 +1,4 @@
-package org.mage.test.cards;
+package org.mage.test.cards.cost.modification;
 
 import mage.Constants;
 import org.junit.Test;

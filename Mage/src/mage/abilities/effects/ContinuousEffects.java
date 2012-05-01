@@ -219,6 +219,27 @@ public class ContinuousEffects implements Serializable {
 		return replaceEffects;
 	}
 
+    /**
+     * Filters out cost modification effects that are not active.
+     *
+     * @param game
+     * @return
+     */
+    private List<CostModificationEffect> getApplicableCostModificationEffects(Game game) {
+        List<CostModificationEffect> costEffects = new ArrayList<CostModificationEffect>();
+
+        for (CostModificationEffect effect: costModificationEffects) {
+            Ability ability = costModificationEffects.getAbility(effect.getId());
+            if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game)) {
+                if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
+                    costEffects.add(effect);
+                }
+            }
+        }
+
+        return costEffects;
+    }
+
 	public boolean asThough(UUID objectId, AsThoughEffectType type, Game game) {
 		for (AsThoughEffect entry: asThoughEffects) {
 			AsThoughEffect effect = entry;
@@ -242,9 +263,9 @@ public class ContinuousEffects implements Serializable {
 	 * @return
 	 */
 	public void costModification ( Ability abilityToModify, Game game ) {
-        //List<CostModificationEffect> costEffects = getApplicableCostModificationEffects(game);
+        List<CostModificationEffect> costEffects = getApplicableCostModificationEffects(game);
 
-        for ( CostModificationEffect effect : costModificationEffects) {
+        for ( CostModificationEffect effect : costEffects) {
 			if ( effect.applies(abilityToModify, costModificationEffects.getAbility(effect.getId()), game) ) {
 				effect.apply(game, costModificationEffects.getAbility(effect.getId()), abilityToModify);
 			}
