@@ -30,7 +30,10 @@ package mage.game;
 
 import mage.Constants.*;
 import mage.MageObject;
-import mage.abilities.*;
+import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
+import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.common.ChancellorAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
@@ -64,16 +67,15 @@ import mage.players.Players;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
-import mage.watchers.Watcher;
 import mage.watchers.common.CastSpellLastTurnWatcher;
+import mage.watchers.common.MiracleWatcher;
 import mage.watchers.common.MorbidWatcher;
+import mage.watchers.common.PlayerDamagedBySourceWatcher;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
-import mage.abilities.effects.Effect;
-import mage.watchers.common.PlayerDamagedBySourceWatcher;
 
 public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializable {
 
@@ -497,12 +499,12 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 			saveState();
 		}
 
-                for (UUID playerId: state.getPlayerList(startingPlayerId)) {
-                        state.getWatchers().add(new PlayerDamagedBySourceWatcher(playerId));
-                }
-                state.getWatchers().add(new MorbidWatcher());
-                state.getWatchers().add(new CastSpellLastTurnWatcher());
-                
+        for (UUID playerId : state.getPlayerList(startingPlayerId)) {
+            state.getWatchers().add(new PlayerDamagedBySourceWatcher(playerId));
+        }
+        state.getWatchers().add(new MorbidWatcher());
+        state.getWatchers().add(new CastSpellLastTurnWatcher());
+        state.getWatchers().add(new MiracleWatcher());
         
 		//20100716 - 103.5
 		for (UUID playerId: state.getPlayerList(startingPlayerId)) {

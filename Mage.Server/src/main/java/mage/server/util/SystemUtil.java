@@ -108,7 +108,10 @@ public class SystemUtil {
 	private static void swapWithAnyCard(Game game, Player player, Card card, Constants.Zone zone) {
 		if (zone.equals(Constants.Zone.BATTLEFIELD)) {
 			card.putOntoBattlefield(game, Constants.Zone.OUTSIDE, null, player.getId());
-		} else {
+		} else if (zone.equals(Constants.Zone.LIBRARY)) {
+            game.setZone(card.getId(), Constants.Zone.LIBRARY);
+            player.getLibrary().putOnTop(card, game);
+        } else {
 			card.moveToZone(zone, null, game, false);
 		}
 		logger.info("Added card to player's " + zone.toString() + ": " + card.getName() +", player = " + player.getName());
