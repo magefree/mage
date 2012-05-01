@@ -28,8 +28,6 @@
 
 package mage.players;
 
-import java.io.Serializable;
-import java.util.*;
 import mage.Constants.AsThoughEffectType;
 import mage.Constants.Outcome;
 import mage.Constants.RangeOfInfluence;
@@ -70,6 +68,9 @@ import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetDiscard;
 import mage.watchers.common.BloodthirstWatcher;
 import org.apache.log4j.Logger;
+
+import java.io.Serializable;
+import java.util.*;
 
 public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Serializable {
 
@@ -1189,7 +1190,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         
 	protected boolean canPlay(ActivatedAbility ability, ManaOptions available, Game game) {
 		if (!(ability instanceof ManaAbility) && ability.canActivate(playerId, game)) {
-			ManaOptions abilityOptions = ability.getManaCosts().getOptions();
+            game.getContinuousEffects().costModification(ability, game);
+
+			ManaOptions abilityOptions = ability.getManaCostsToPay().getOptions();
 			if (abilityOptions.size() == 0) {
 				return true;
 			}
