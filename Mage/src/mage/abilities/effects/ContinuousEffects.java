@@ -28,8 +28,6 @@
 
 package mage.abilities.effects;
 
-import java.io.Serializable;
-import java.util.*;
 import mage.Constants.AsThoughEffectType;
 import mage.Constants.Duration;
 import mage.Constants.Layer;
@@ -40,6 +38,9 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.io.Serializable;
+import java.util.*;
 
 
 /**
@@ -241,7 +242,9 @@ public class ContinuousEffects implements Serializable {
 	 * @return
 	 */
 	public void costModification ( Ability abilityToModify, Game game ) {
-		for ( CostModificationEffect effect : costModificationEffects ) {
+        //List<CostModificationEffect> costEffects = getApplicableCostModificationEffects(game);
+
+        for ( CostModificationEffect effect : costModificationEffects) {
 			if ( effect.applies(abilityToModify, costModificationEffects.getAbility(effect.getId()), game) ) {
 				effect.apply(game, costModificationEffects.getAbility(effect.getId()), abilityToModify);
 			}
