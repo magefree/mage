@@ -29,13 +29,8 @@
 package mage.game.permanent;
 
 import mage.Constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.common.ZoneChangeTriggeredAbility;
-import mage.abilities.keyword.LevelAbility;
 import mage.cards.Card;
 import mage.cards.LevelerCard;
-import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
@@ -103,7 +98,7 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
         this.manaCost = card.getManaCost().copy();
         this.power = card.getPower().copy();
         this.toughness = card.getToughness().copy();
-        if (card instanceof LevelerCard) {
+        /*if (card instanceof LevelerCard) {
             LevelAbility level = ((LevelerCard) card).getLevel(this.getCounters().getCount(CounterType.LEVEL));
             if (level != null) {
                 this.power.setValue(level.getPower());
@@ -112,7 +107,7 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
                     this.addAbility(ability);
                 }
             }
-        }
+        }*/
         if (card instanceof PermanentCard) {
             this.maxLevelCounters = ((PermanentCard) card).maxLevelCounters;
         }
@@ -142,7 +137,7 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
         this.manaCost = card.getManaCost().copy();
         this.power = card.getPower().copy();
         this.toughness = card.getToughness().copy();
-        if (card instanceof LevelerCard) {
+        /*if (card instanceof LevelerCard) {
             LevelAbility level = ((LevelerCard) card).getLevel(this.getCounters().getCount(CounterType.LEVEL));
             if (level != null) {
                 this.power.setValue(level.getPower());
@@ -151,7 +146,7 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
                     this.addAbility(ability, game);
                 }
             }
-        }
+        }*/
         if (card instanceof PermanentCard) {
             this.maxLevelCounters = ((PermanentCard) card).maxLevelCounters;
         }

@@ -27,7 +27,6 @@
  */
 package mage.sets.riseoftheeldrazi;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
@@ -35,14 +34,12 @@ import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.keyword.IndestructibleAbility;
-import mage.abilities.keyword.LevelAbility;
-import mage.abilities.keyword.LevelUpAbility;
-import mage.abilities.keyword.LifelinkAbility;
+import mage.abilities.keyword.*;
 import mage.cards.LevelerCard;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public class TranscendentMaster extends LevelerCard<TranscendentMaster> {
@@ -60,14 +57,14 @@ public class TranscendentMaster extends LevelerCard<TranscendentMaster> {
 
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{1}")));
 
-        Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
-        abilities1.add(LifelinkAbility.getInstance());
-        this.getLevels().add(new LevelAbility(6, 11, abilities1, 6, 6));
+        Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>(LifelinkAbility.getInstance());
+        Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>(LifelinkAbility.getInstance(),
+                IndestructibleAbility.getInstance());
 
-        Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
-        abilities2.add(LifelinkAbility.getInstance());
-        abilities2.add(IndestructibleAbility.getInstance());
-        this.getLevels().add(new LevelAbility(12, -1, abilities2, 9, 9));
+        LevelAbilityBuilder.construct(this,
+                new LevelAbility(6, 11, abilities1, 6, 6),
+                new LevelAbility(12, -1, abilities2, 9, 9)
+        );
     }
 
     public TranscendentMaster(final TranscendentMaster card) {

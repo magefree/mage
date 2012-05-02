@@ -28,16 +28,17 @@
 
 package mage.abilities;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
 import mage.Constants.Zone;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.keyword.KickerAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.mana.ManaAbility;
 import mage.game.Game;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -46,6 +47,12 @@ import mage.game.Game;
 public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Abilities<T> {
 
 	public AbilitiesImpl() {}
+
+    public AbilitiesImpl(T... abilities) {
+        for (T ability : abilities) {
+            add(ability);
+        }
+    }
 	
 	public AbilitiesImpl(final AbilitiesImpl<T> abilities) {
 		for (T ability: abilities) {

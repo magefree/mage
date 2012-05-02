@@ -37,8 +37,11 @@ import mage.game.Game;
  * @author nantuko
  */
 public class HasCounterCondition implements Condition {
-	private CounterType counterType;
+	
+    private CounterType counterType;
 	private int amount = 1;
+    private int from = -1;
+    private int to;
 
 	public HasCounterCondition(CounterType type) {
 		this.counterType = type;
@@ -49,8 +52,22 @@ public class HasCounterCondition implements Condition {
 		this.amount = amount;
 	}
 
+    public HasCounterCondition(CounterType type, int from, int to) {
+        this.counterType = type;
+        this.from = from;
+        this.to = to;
+    }
+
 	@Override
 	public boolean apply(Game game, Ability source) {
-		return game.getPermanent(source.getSourceId()).getCounters().getCount(counterType) >= amount;
+        if (from != -1) { //range compare
+            int count = game.getPermanent(source.getSourceId()).getCounters().getCount(counterType);
+            if (to == Integer.MAX_VALUE) {
+                return count >= from;
+            }
+            return count >= from && count <= to;
+        } else { // single compare (lte)
+		    return game.getPermanent(source.getSourceId()).getCounters().getCount(counterType) >= amount;
+        }
 	}
 }

@@ -71,7 +71,6 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
 
         castSpell(2, Constants.PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image");
 
-
         setStopAt(2, Constants.PhaseStep.END_TURN);
         execute();
 

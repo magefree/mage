@@ -35,16 +35,21 @@ import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
 
 /**
+ * The implementation by BetaSteward was discarded as requires special handling in Mage.Core.
+ *
+ * Instead it was replaced by conditional continuous effects and builder pattern.
  *
  * @author BetaSteward_at_googlemail.com
+ * @author noxx
  */
 public class LevelAbility extends StaticAbility<LevelAbility> {
 
-	private int level1;
-	private int level2;
-	private Abilities<Ability> abilities = new AbilitiesImpl<Ability>();
-	private int power;
-	private int toughness;
+    private int level1;
+    private int level2;
+    private int power;
+    private int toughness;
+
+    private Abilities<Ability> abilities = new AbilitiesImpl<Ability>();
 
 	public LevelAbility(int level1, int level2, Abilities<Ability> abilities, int power, int toughness) {
 		super(Zone.BATTLEFIELD, null);
