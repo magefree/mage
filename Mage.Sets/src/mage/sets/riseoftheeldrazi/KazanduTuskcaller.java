@@ -27,7 +27,6 @@
  */
 package mage.sets.riseoftheeldrazi;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
@@ -39,14 +38,15 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.LevelAbility;
 import mage.abilities.keyword.LevelUpAbility;
+import mage.abilities.keyword.LevelerCardBuilder;
 import mage.cards.LevelerCard;
 import mage.game.permanent.token.ElephantToken;
 
+import java.util.UUID;
+
 /**
- *
- * @author North
+ * @author North, noxx
  */
 public class KazanduTuskcaller extends LevelerCard<KazanduTuskcaller> {
 
@@ -66,13 +66,16 @@ public class KazanduTuskcaller extends LevelerCard<KazanduTuskcaller> {
         abilities1.add(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new CreateTokenEffect(new ElephantToken()),
                 new TapSourceCost()));
-        this.getLevels().add(new LevelAbility(2, 5, abilities1, 1, 1));
 
         Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
         abilities2.add(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new CreateTokenEffect(new ElephantToken(), 2),
                 new TapSourceCost()));
-        this.getLevels().add(new LevelAbility(6, -1, abilities2, 1, 1));
+
+        LevelerCardBuilder.construct(this,
+                new LevelerCardBuilder.LevelAbility(2, 5, abilities1, 1, 1),
+                new LevelerCardBuilder.LevelAbility(6, -1, abilities2, 1, 1)
+        );
     }
 
     public KazanduTuskcaller(final KazanduTuskcaller card) {

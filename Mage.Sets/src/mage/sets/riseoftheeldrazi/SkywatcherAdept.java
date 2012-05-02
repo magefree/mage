@@ -27,7 +27,6 @@
  */
 package mage.sets.riseoftheeldrazi;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
@@ -36,13 +35,15 @@ import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.LevelAbility;
 import mage.abilities.keyword.LevelUpAbility;
+import mage.abilities.keyword.LevelerCardBuilder;
 import mage.cards.LevelerCard;
+
+import java.util.UUID;
 
 /**
  *
- * @author North
+ * @author North, noxx
  */
 public class SkywatcherAdept extends LevelerCard<SkywatcherAdept> {
 
@@ -60,11 +61,14 @@ public class SkywatcherAdept extends LevelerCard<SkywatcherAdept> {
 
         Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
         abilities1.add(FlyingAbility.getInstance());
-        this.getLevels().add(new LevelAbility(1, 2, abilities1, 2, 2));
 
         Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
         abilities2.add(FlyingAbility.getInstance());
-        this.getLevels().add(new LevelAbility(3, -1, abilities2, 4, 2));
+
+        LevelerCardBuilder.construct(this,
+                new LevelerCardBuilder.LevelAbility(1, 2, abilities1, 2, 2),
+                new LevelerCardBuilder.LevelAbility(3, -1, abilities2, 4, 2)
+        );
     }
 
     public SkywatcherAdept(final SkywatcherAdept card) {

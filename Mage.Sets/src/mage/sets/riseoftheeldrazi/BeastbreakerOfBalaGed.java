@@ -27,7 +27,6 @@
  */
 package mage.sets.riseoftheeldrazi;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
@@ -35,14 +34,16 @@ import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.keyword.LevelAbility;
 import mage.abilities.keyword.LevelUpAbility;
+import mage.abilities.keyword.LevelerCardBuilder;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.LevelerCard;
 
+import java.util.UUID;
+
 /**
  *
- * @author North
+ * @author North, noxx
  */
 public class BeastbreakerOfBalaGed extends LevelerCard<BeastbreakerOfBalaGed> {
 
@@ -58,11 +59,13 @@ public class BeastbreakerOfBalaGed extends LevelerCard<BeastbreakerOfBalaGed> {
 
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{2}{G}")));
 
-        this.getLevels().add(new LevelAbility(1, 3, new AbilitiesImpl<Ability>(), 4, 4));
-
         Abilities<Ability> levelAbilities = new AbilitiesImpl<Ability>();
         levelAbilities.add(TrampleAbility.getInstance());
-        this.getLevels().add(new LevelAbility(4, -1, levelAbilities, 6, 6));
+
+        LevelerCardBuilder.construct(this,
+                new LevelerCardBuilder.LevelAbility(1, 3, new AbilitiesImpl<Ability>(), 4, 4),
+                new LevelerCardBuilder.LevelAbility(4, -1, levelAbilities, 6, 6)
+        );
     }
 
     public BeastbreakerOfBalaGed(final BeastbreakerOfBalaGed card) {

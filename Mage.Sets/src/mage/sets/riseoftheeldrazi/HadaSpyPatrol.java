@@ -27,7 +27,6 @@
  */
 package mage.sets.riseoftheeldrazi;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
@@ -35,15 +34,17 @@ import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.keyword.LevelAbility;
 import mage.abilities.keyword.LevelUpAbility;
+import mage.abilities.keyword.LevelerCardBuilder;
 import mage.abilities.keyword.ShroudAbility;
 import mage.abilities.keyword.UnblockableAbility;
 import mage.cards.LevelerCard;
 
+import java.util.UUID;
+
 /**
  *
- * @author North
+ * @author North, noxx
  */
 public class HadaSpyPatrol extends LevelerCard<HadaSpyPatrol> {
 
@@ -61,12 +62,15 @@ public class HadaSpyPatrol extends LevelerCard<HadaSpyPatrol> {
 
         Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
         abilities1.add(UnblockableAbility.getInstance());
-        this.getLevels().add(new LevelAbility(1, 2, abilities1, 2, 2));
 
         Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
         abilities2.add(UnblockableAbility.getInstance());
         abilities2.add(ShroudAbility.getInstance());
-        this.getLevels().add(new LevelAbility(3, -1, abilities2, 3, 3));
+
+        LevelerCardBuilder.construct(this,
+                new LevelerCardBuilder.LevelAbility(1, 2, abilities1, 2, 2),
+                new LevelerCardBuilder.LevelAbility(3, -1, abilities2, 3, 3)
+        );
     }
 
     public HadaSpyPatrol(final HadaSpyPatrol card) {

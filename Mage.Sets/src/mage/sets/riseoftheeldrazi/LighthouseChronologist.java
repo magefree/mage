@@ -28,7 +28,6 @@
 
 package mage.sets.riseoftheeldrazi;
 
-import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
@@ -40,16 +39,18 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.LevelAbility;
 import mage.abilities.keyword.LevelUpAbility;
+import mage.abilities.keyword.LevelerCardBuilder;
 import mage.cards.LevelerCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.turn.TurnMod;
 
+import java.util.UUID;
+
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, noxx
  */
 public class LighthouseChronologist extends LevelerCard<LighthouseChronologist> {
 
@@ -63,13 +64,16 @@ public class LighthouseChronologist extends LevelerCard<LighthouseChronologist> 
         this.toughness = new MageInt(3);
 
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{U}")));
+
         Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
-        this.getLevels().add(new LevelAbility(4, 6, abilities1, 2, 4));
 
         Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
         abilities2.add(new LighthouseChronologistAbility());
-        this.getLevels().add(new LevelAbility(7, -1, abilities2, 3, 5));
 
+        LevelerCardBuilder.construct(this,
+                new LevelerCardBuilder.LevelAbility(4, 6, abilities1, 2, 4),
+                new LevelerCardBuilder.LevelAbility(7, -1, abilities2, 3, 5)
+        );
     }
 
     public LighthouseChronologist (final LighthouseChronologist card) {

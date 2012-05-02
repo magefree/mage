@@ -27,18 +27,18 @@
  */
 package mage.sets.riseoftheeldrazi;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.LevelAbility;
+import mage.abilities.keyword.LevelerCardBuilder;
 import mage.abilities.keyword.LevelUpAbility;
 import mage.cards.LevelerCard;
+
+import java.util.UUID;
 
 /**
  *
@@ -58,11 +58,13 @@ public class CaravanEscort extends LevelerCard<CaravanEscort> {
 
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{2}")));
 
-        this.getLevels().add(new LevelAbility(1, 4, new AbilitiesImpl<Ability>(), 2, 2));
+        AbilitiesImpl<Ability> levelAbilities = new AbilitiesImpl<Ability>(FirstStrikeAbility.getInstance());
+        LevelerCardBuilder.construct(this,
+                new LevelerCardBuilder.LevelAbility(1, 4, new AbilitiesImpl<Ability>(), 2, 2),
+                new LevelerCardBuilder.LevelAbility(5, -1, levelAbilities, 5, 5)
+        );
 
-        Abilities<Ability> levelAbilities = new AbilitiesImpl<Ability>();
-        levelAbilities.add(FirstStrikeAbility.getInstance());
-        this.getLevels().add(new LevelAbility(5, -1, levelAbilities, 5, 5));
+        setMaxLevelCounters(5);
     }
 
     public CaravanEscort(final CaravanEscort card) {

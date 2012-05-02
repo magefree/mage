@@ -28,8 +28,6 @@
 
 package mage.sets.riseoftheeldrazi;
 
-import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -41,14 +39,16 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
-import mage.abilities.keyword.LevelAbility;
 import mage.abilities.keyword.LevelUpAbility;
+import mage.abilities.keyword.LevelerCardBuilder;
 import mage.cards.LevelerCard;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  *
- * @author Loki
+ * @author Loki, noxx
  */
 public class GuulDrazAssassin extends LevelerCard<GuulDrazAssassin> {
 
@@ -62,18 +62,23 @@ public class GuulDrazAssassin extends LevelerCard<GuulDrazAssassin> {
         this.toughness = new MageInt(1);
 
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{1}{B}")));
+
         Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostTargetEffect(-2, -2, Constants.Duration.EndOfTurn), new ManaCostsImpl("{B}"));
         ability.addTarget(new TargetCreaturePermanent());
         ability.addCost(new TapSourceCost());
         abilities1.add(ability);
-        this.getLevels().add(new LevelAbility(2, 3, abilities1, 2, 2));
+
         Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
         Ability ability2 = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostTargetEffect(-4, -4, Constants.Duration.EndOfTurn), new ManaCostsImpl("{B}"));
         ability2.addTarget(new TargetCreaturePermanent());
         ability2.addCost(new TapSourceCost());
         abilities2.add(ability2);
-        this.getLevels().add(new LevelAbility(4, -1, abilities2, 4, 4));
+
+        LevelerCardBuilder.construct(this,
+                new LevelerCardBuilder.LevelAbility(2, 3, abilities1, 2, 2),
+                new LevelerCardBuilder.LevelAbility(4, -1, abilities2, 4, 4)
+        );
     }
 
     public GuulDrazAssassin (final GuulDrazAssassin card) {

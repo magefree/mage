@@ -30,10 +30,7 @@ package mage.cards;
 
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.keyword.LevelAbility;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -42,46 +39,21 @@ import java.util.UUID;
  */
 public abstract class LevelerCard<T extends LevelerCard<T>> extends CardImpl<T> {
 
-	protected List<LevelAbility> levels = new ArrayList<LevelAbility>();
-
+    private int maxLevelCounters;
+    
 	public LevelerCard(UUID ownerId, int cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs) {
 		super(ownerId, cardNumber, name, rarity, cardTypes, costs);
 	}
 
 	public LevelerCard(LevelerCard card) {
 		super(card);
-		for (LevelAbility ability: (List<LevelAbility>)card.levels) {
-			this.levels.add(ability.copy());
-		}
-	}
-
-	public List<LevelAbility> getLevels() {
-		return levels;
-	}
-
-	public LevelAbility getLevel(int level) {
-		for (LevelAbility levelerLevel: levels) {
-			if (level >= levelerLevel.getLevel1() && (levelerLevel.getLevel2() == -1 || level <= levelerLevel.getLevel2()))
-				return levelerLevel;
-		}
-		return null;
 	}
 
     public int getMaxLevelCounters() {
-        for (LevelAbility levelerLevel: levels) {
-			if (levelerLevel.getLevel2() == -1)
-				return levelerLevel.getLevel1();
-		}
-        return 0;
+        return maxLevelCounters;
     }
 
-	@Override
-	public List<String> getRules() {
-		List<String> rules = new ArrayList<String>();
-		rules.addAll(super.getRules());
-		for (LevelAbility ability: levels) {
-			rules.add(ability.getRule());
-		}
-		return rules;
-	}
+    public void setMaxLevelCounters(int maxLevelCounters) {
+        this.maxLevelCounters = maxLevelCounters;
+    }
 }

@@ -40,7 +40,7 @@ import mage.cards.LevelerCard;
 import java.util.UUID;
 
 /**
- * @author North
+ * @author North, noxx
  */
 public class TranscendentMaster extends LevelerCard<TranscendentMaster> {
 
@@ -61,9 +61,9 @@ public class TranscendentMaster extends LevelerCard<TranscendentMaster> {
         Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>(LifelinkAbility.getInstance(),
                 IndestructibleAbility.getInstance());
 
-        LevelAbilityBuilder.construct(this,
-                new LevelAbility(6, 11, abilities1, 6, 6),
-                new LevelAbility(12, -1, abilities2, 9, 9)
+        LevelerCardBuilder.construct(this,
+                new LevelerCardBuilder.LevelAbility(6, 11, abilities1, 6, 6),
+                new LevelerCardBuilder.LevelAbility(12, -1, abilities2, 9, 9)
         );
     }
 

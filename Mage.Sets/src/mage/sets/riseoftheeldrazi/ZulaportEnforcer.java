@@ -27,7 +27,6 @@
  */
 package mage.sets.riseoftheeldrazi;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
@@ -38,15 +37,17 @@ import mage.abilities.Ability;
 import mage.abilities.EvasionAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.RestrictionEffect;
-import mage.abilities.keyword.LevelAbility;
 import mage.abilities.keyword.LevelUpAbility;
+import mage.abilities.keyword.LevelerCardBuilder;
 import mage.cards.LevelerCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
  *
- * @author North
+ * @author North, noxx
  */
 public class ZulaportEnforcer extends LevelerCard<ZulaportEnforcer> {
 
@@ -61,13 +62,18 @@ public class ZulaportEnforcer extends LevelerCard<ZulaportEnforcer> {
         this.toughness = new MageInt(1);
 
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{4}")));
+
         // LEVEL 1-2:  3/3
-        this.getLevels().add(new LevelAbility(1, 2, new AbilitiesImpl<Ability>(), 3, 3));
+
         // LEVEL 3+: 5/5
         // Zulaport Enforcer can't be blocked except by black creatures.
         Abilities<Ability> levelAbilities = new AbilitiesImpl<Ability>();
         levelAbilities.add(ZulaportEnforcerAbility.getInstance());
-        this.getLevels().add(new LevelAbility(3, -1, levelAbilities, 5, 5));
+
+        LevelerCardBuilder.construct(this,
+                new LevelerCardBuilder.LevelAbility(1, 2, new AbilitiesImpl<Ability>(), 3, 3),
+                new LevelerCardBuilder.LevelAbility(3, -1, levelAbilities, 5, 5)
+        );
     }
 
     public ZulaportEnforcer(final ZulaportEnforcer card) {

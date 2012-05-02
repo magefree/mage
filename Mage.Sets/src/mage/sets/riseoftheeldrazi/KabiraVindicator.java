@@ -27,7 +27,6 @@
  */
 package mage.sets.riseoftheeldrazi;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
@@ -39,14 +38,16 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
-import mage.abilities.keyword.LevelAbility;
 import mage.abilities.keyword.LevelUpAbility;
+import mage.abilities.keyword.LevelerCardBuilder;
 import mage.cards.LevelerCard;
 import mage.filter.common.FilterCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  *
- * @author North
+ * @author North, noxx
  */
 public class KabiraVindicator extends LevelerCard<KabiraVindicator> {
 
@@ -64,11 +65,14 @@ public class KabiraVindicator extends LevelerCard<KabiraVindicator> {
 
         Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
         abilities1.add(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), true)));
-        this.getLevels().add(new LevelAbility(2, 4, abilities1, 3, 6));
 
         Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
         abilities2.add(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), true)));
-        this.getLevels().add(new LevelAbility(5, -1, abilities2, 4, 8));
+
+        LevelerCardBuilder.construct(this,
+                new LevelerCardBuilder.LevelAbility(2, 4, abilities1, 3, 6),
+                new LevelerCardBuilder.LevelAbility(5, -1, abilities2, 4, 8)
+        );
     }
 
     public KabiraVindicator(final KabiraVindicator card) {

@@ -28,7 +28,6 @@
 
 package mage.sets.riseoftheeldrazi;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
@@ -38,13 +37,15 @@ import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.LevelAbility;
 import mage.abilities.keyword.LevelUpAbility;
+import mage.abilities.keyword.LevelerCardBuilder;
 import mage.cards.LevelerCard;
+
+import java.util.UUID;
 
 /**
  *
- * @author Loki
+ * @author Loki, noxx
  */
 public class StudentOfWarfare extends LevelerCard<StudentOfWarfare> {
 
@@ -60,10 +61,14 @@ public class StudentOfWarfare extends LevelerCard<StudentOfWarfare> {
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{W}")));
         Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
         abilities1.add(FirstStrikeAbility.getInstance());
-        this.getLevels().add(new LevelAbility(2, 6, abilities1, 3, 3));
+
         Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
         abilities2.add(DoubleStrikeAbility.getInstance());
-        this.getLevels().add(new LevelAbility(7, -1, abilities2, 4, 4));
+
+        LevelerCardBuilder.construct(this,
+                new LevelerCardBuilder.LevelAbility(2, 6, abilities1, 3, 3),
+                new LevelerCardBuilder.LevelAbility(7, -1, abilities2, 4, 4)
+        );
     }
 
     public StudentOfWarfare (final StudentOfWarfare card) {

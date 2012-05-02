@@ -28,8 +28,6 @@
 
 package mage.sets.riseoftheeldrazi;
 
-import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -40,15 +38,15 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.RegenerateSourceEffect;
-import mage.abilities.keyword.DeathtouchAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.LevelAbility;
 import mage.abilities.keyword.LevelUpAbility;
+import mage.abilities.keyword.LevelerCardBuilder;
 import mage.cards.LevelerCard;
+
+import java.util.UUID;
 
 /**
  *
- * @author Loki
+ * @author Loki, noxx
  */
 public class NullChampion extends LevelerCard<NullChampion> {
 
@@ -63,11 +61,14 @@ public class NullChampion extends LevelerCard<NullChampion> {
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{3}")));
 
         Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
-        this.getLevels().add(new LevelAbility(1, 3, abilities1, 4, 2));
 
         Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
         abilities2.add(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
-        this.getLevels().add(new LevelAbility(4, -1, abilities2, 7, 3));
+
+        LevelerCardBuilder.construct(this,
+                new LevelerCardBuilder.LevelAbility(1, 3, abilities1, 4, 2),
+                new LevelerCardBuilder.LevelAbility(4, -1, abilities2, 7, 3)
+        );
     }
 
     public NullChampion (final NullChampion card) {

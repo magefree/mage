@@ -35,8 +35,6 @@ import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 
@@ -45,7 +43,6 @@ import java.util.UUID;
  */
 public class PermanentCard extends PermanentImpl<PermanentCard> {
 
-    protected List<String> levelerRules;
     protected int maxLevelCounters;
     protected Card card;
 
@@ -67,7 +64,6 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
               this.loyalty = new MageInt(card.getLoyalty().getValue());
           }*/
         if (card instanceof LevelerCard) {
-            levelerRules = ((LevelerCard) card).getRules();
             maxLevelCounters = ((LevelerCard) card).getMaxLevelCounters();
         }
     }
@@ -237,16 +233,6 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
 
     public int getMaxLevelCounters() {
         return this.maxLevelCounters;
-    }
-
-    @Override
-    public List<String> getRules() {
-        if (levelerRules == null)
-            return super.getRules();
-        List<String> rules = new ArrayList<String>();
-        rules.addAll(super.getRules());
-        rules.addAll(levelerRules);
-        return rules;
     }
 
 }

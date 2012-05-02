@@ -27,7 +27,6 @@
  */
 package mage.sets.riseoftheeldrazi;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
@@ -36,14 +35,16 @@ import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.LevelAbility;
 import mage.abilities.keyword.LevelUpAbility;
+import mage.abilities.keyword.LevelerCardBuilder;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.LevelerCard;
 
+import java.util.UUID;
+
 /**
  *
- * @author North
+ * @author North, noxx
  */
 public class KnightOfCliffhaven extends LevelerCard<KnightOfCliffhaven> {
 
@@ -61,12 +62,15 @@ public class KnightOfCliffhaven extends LevelerCard<KnightOfCliffhaven> {
 
         Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
         abilities1.add(FlyingAbility.getInstance());
-        this.getLevels().add(new LevelAbility(1, 3, abilities1, 2, 3));
 
         Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
         abilities2.add(FlyingAbility.getInstance());
         abilities2.add(VigilanceAbility.getInstance());
-        this.getLevels().add(new LevelAbility(4, -1, abilities2, 4, 4));
+
+        LevelerCardBuilder.construct(this,
+                new LevelerCardBuilder.LevelAbility(1, 3, abilities1, 2, 3),
+                new LevelerCardBuilder.LevelAbility(4, -1, abilities2, 4, 4)
+        );
     }
 
     public KnightOfCliffhaven(final KnightOfCliffhaven card) {

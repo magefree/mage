@@ -28,7 +28,6 @@
 
 package mage.sets.riseoftheeldrazi;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
@@ -41,13 +40,15 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
-import mage.abilities.keyword.LevelAbility;
+import mage.abilities.keyword.LevelerCardBuilder;
 import mage.abilities.keyword.LevelUpAbility;
 import mage.cards.LevelerCard;
 
+import java.util.UUID;
+
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, noxx
  */
 public class EnclaveCryptologist extends LevelerCard<EnclaveCryptologist> {
 
@@ -61,16 +62,17 @@ public class EnclaveCryptologist extends LevelerCard<EnclaveCryptologist> {
         this.toughness = new MageInt(1);
 
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{1}{U}")));
-        Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
+
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), new TapSourceCost());
-        abilities1.add(ability);
-        this.getLevels().add(new LevelAbility(1, 2, abilities1, 0, 1));
+        Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>(ability);
 
-        Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new TapSourceCost());
-        abilities2.add(ability);
-        this.getLevels().add(new LevelAbility(3, -1, abilities2, 0, 1));
+        Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>(ability);
 
+        LevelerCardBuilder.construct(this,
+                new LevelerCardBuilder.LevelAbility(1, 2, abilities1, 0, 1),
+                new LevelerCardBuilder.LevelAbility(3, -1, abilities2, 0, 1)
+        );
     }
 
     public EnclaveCryptologist (final EnclaveCryptologist card) {

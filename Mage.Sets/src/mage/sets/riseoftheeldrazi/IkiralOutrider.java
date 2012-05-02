@@ -28,7 +28,6 @@
 
 package mage.sets.riseoftheeldrazi;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
@@ -36,15 +35,16 @@ import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.keyword.LevelAbility;
+import mage.abilities.keyword.LevelerCardBuilder;
 import mage.abilities.keyword.LevelUpAbility;
 import mage.abilities.keyword.VigilanceAbility;
-import mage.cards.CardImpl;
 import mage.cards.LevelerCard;
+
+import java.util.UUID;
 
 /**
  *
- * @author Loki
+ * @author Loki, noxx
  */
 public class IkiralOutrider extends LevelerCard<IkiralOutrider> {
 
@@ -58,12 +58,17 @@ public class IkiralOutrider extends LevelerCard<IkiralOutrider> {
         this.toughness = new MageInt(2);
 
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{4}")));
+
         Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
         abilities1.add(VigilanceAbility.getInstance());
-        this.getLevels().add(new LevelAbility(1, 3, abilities1, 2, 6));
+
         Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
         abilities2.add(VigilanceAbility.getInstance());
-        this.getLevels().add(new LevelAbility(4, -1, abilities2, 3, 10));
+
+        LevelerCardBuilder.construct(this,
+                new LevelerCardBuilder.LevelAbility(1, 3, abilities1, 2, 6),
+                new LevelerCardBuilder.LevelAbility(4, -1, abilities2, 3, 10)
+        );
     }
 
     public IkiralOutrider (final IkiralOutrider card) {

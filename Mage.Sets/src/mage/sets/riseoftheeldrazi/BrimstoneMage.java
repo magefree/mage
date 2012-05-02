@@ -28,7 +28,6 @@
 
 package mage.sets.riseoftheeldrazi;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
@@ -40,14 +39,16 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.keyword.LevelAbility;
 import mage.abilities.keyword.LevelUpAbility;
+import mage.abilities.keyword.LevelerCardBuilder;
 import mage.cards.LevelerCard;
 import mage.target.common.TargetCreatureOrPlayer;
 
+import java.util.UUID;
+
 /**
  *
- * @author Loki
+ * @author Loki, noxx
  */
 public class BrimstoneMage extends LevelerCard<BrimstoneMage> {
 
@@ -65,14 +66,16 @@ public class BrimstoneMage extends LevelerCard<BrimstoneMage> {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetCreatureOrPlayer());
         abilities1.add(ability);
-        this.getLevels().add(new LevelAbility(1, 2, abilities1, 2, 3));
 
         Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new TapSourceCost());
         ability.addTarget(new TargetCreatureOrPlayer());
         abilities2.add(ability);
-        this.getLevels().add(new LevelAbility(3, -1, abilities2, 2, 4));
 
+        LevelerCardBuilder.construct(this,
+                new LevelerCardBuilder.LevelAbility(1, 2, abilities1, 2, 3),
+                new LevelerCardBuilder.LevelAbility(3, -1, abilities2, 2, 4)
+        );
     }
 
     public BrimstoneMage (final BrimstoneMage card) {
