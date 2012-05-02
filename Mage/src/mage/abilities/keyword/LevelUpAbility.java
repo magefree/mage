@@ -55,5 +55,8 @@ public class LevelUpAbility extends ActivatedAbilityImpl<LevelUpAbility> {
 		return new LevelUpAbility(this);
 	}
 
-
+    @Override
+    public String getRule() {
+        return "Level up " + manaCostsToPay.getText();
+    }
 }
