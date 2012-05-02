@@ -373,6 +373,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
             game.setZone(objectId, Zone.BATTLEFIELD);
             game.applyEffects();
             permanent.entersBattlefield(sourceId, game);
+            game.applyEffects();
             game.fireEvent(new ZoneChangeEvent(permanent, controllerId, fromZone, Zone.BATTLEFIELD));
             return true;
         }

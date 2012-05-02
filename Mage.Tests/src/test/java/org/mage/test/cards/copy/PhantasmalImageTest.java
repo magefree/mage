@@ -28,4 +28,25 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Craw Wurm", 1);
     }
 
+    /**
+     * Tests that copy effect will copy EntersBattlefieldTriggeredAbility and it will be applied.
+     */
+    @Test
+    public void testCopiedEntersBattlefieldTriggeredAbility() {
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Constants.Zone.HAND, playerA, "Phantasmal Image");
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Howling Banshee");
+
+        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image");
+
+        setStopAt(2, Constants.PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Howling Banshee", 1);
+        assertPermanentCount(playerB, "Howling Banshee", 1);
+
+        assertLife(playerA, 17);
+        assertLife(playerB, 17);
+    }
+
 }
