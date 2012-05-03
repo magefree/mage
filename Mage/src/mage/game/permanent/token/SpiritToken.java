@@ -41,5 +41,4 @@ public class SpiritToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
-
 }

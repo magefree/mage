@@ -1,4 +1,4 @@
-package org.mage.test.cards.usedbyai;
+package org.mage.test.ai;
 
 import junit.framework.Assert;
 import mage.Constants;

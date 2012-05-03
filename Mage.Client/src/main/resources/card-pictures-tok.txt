@@ -1,3 +1,14 @@
+|Generate|TOK:AVR|Angel|
+|Generate|TOK:AVR|Human|
+|Generate|TOK:AVR|Spirit 1|
+|Generate|TOK:AVR|Spirit 2|
+|Generate|TOK:AVR|Demon|
+|Generate|TOK:AVR|Zombie|
+|Generate|TOK:AVR|Human 2|
+
+|Generate|TOK:DKA|Human|
+|Generate|TOK:DKA|Vampire|
+
 |Generate|TOK:ISD|Angel|
 |Generate|TOK:ISD|Spirit|
 |Generate|TOK:ISD|Homunculus|

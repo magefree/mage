@@ -3,7 +3,6 @@ package mage.abilities.decorator;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.condition.Condition;
-import mage.abilities.effects.ContinuousEffect;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
@@ -44,8 +43,6 @@ public class ConditionalTriggeredAbility extends TriggeredAbilityImpl<Conditiona
 		ability.setControllerId(this.getControllerId());
         if (ability.checkTrigger(event, game)) {
             if (condition.apply(game, this)) {
-                getTargets().clear();
-                getTargets().addAll(ability.getTargets());
                 return true;
             }
         }
