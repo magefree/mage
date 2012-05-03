@@ -28,13 +28,14 @@
 
 package mage.abilities.keyword;
 
-import java.io.ObjectStreamException;
 import mage.Constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.EvasionAbility;
 import mage.abilities.effects.RestrictionEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.io.ObjectStreamException;
 
 /**
  *
@@ -77,6 +78,11 @@ class FlyingEffect extends RestrictionEffect<FlyingEffect> {
 	public FlyingEffect(final FlyingEffect effect) {
 		super(effect);
 	}
+
+    @Override
+    public void newId() {
+        // do nothing
+    }
 
 	@Override
 	public boolean applies(Permanent permanent, Ability source, Game game) {
