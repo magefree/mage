@@ -353,20 +353,24 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
         ZoneChangeEvent event = new ZoneChangeEvent(this.objectId, sourceId, controllerId, fromZone, Zone.BATTLEFIELD);
         if (!game.replaceEvent(event)) {
             if (fromZone != null) {
+                boolean removed = false;
                 switch (fromZone) {
                     case GRAVEYARD:
-                        game.getPlayer(ownerId).removeFromGraveyard(this, game);
+                        removed = game.getPlayer(ownerId).removeFromGraveyard(this, game);
                         break;
                     case HAND:
-                        game.getPlayer(ownerId).removeFromHand(this, game);
+                        removed = game.getPlayer(ownerId).removeFromHand(this, game);
                         break;
                     case LIBRARY:
-                        game.getPlayer(ownerId).removeFromLibrary(this, game);
+                        removed = game.getPlayer(ownerId).removeFromLibrary(this, game);
                         break;
                     default:
                         //logger.warning("putOntoBattlefield, not fully implemented: from="+fromZone);
                 }
                 game.rememberLKI(objectId, event.getFromZone(), this);
+                if (!removed) {
+                    logger.warn("Couldn't find card in fromZone, card=" + getName() + ", fromZone=" + fromZone);
+                }
             }
             PermanentCard permanent = new PermanentCard(this, controllerId);
             game.getBattlefield().addPermanent(permanent);

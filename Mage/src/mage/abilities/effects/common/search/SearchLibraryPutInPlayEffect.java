@@ -28,8 +28,6 @@
 
 package mage.abilities.effects.common.search;
 
-import java.util.List;
-import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
@@ -39,6 +37,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -93,7 +94,7 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect<SearchLibraryPutI
 				for (UUID cardId: (List<UUID>)target.getTargets()) {
 					Card card = player.getLibrary().getCard(cardId, game);
 					if (card != null) {
-						if (card.putOntoBattlefield(game, Zone.HAND, source.getId(), source.getControllerId())) {
+						if (card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), source.getControllerId())) {
 							if (tapped) {
 								Permanent permanent = game.getPermanent(card.getId());
 								if (permanent != null)
