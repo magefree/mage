@@ -31,6 +31,7 @@ package mage.client.deckeditor.collection.viewer;
 import mage.cards.Card;
 import mage.cards.CardDimensions;
 import mage.cards.MageCard;
+import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.cards.CardsStorage;
 import mage.client.components.HoverButton;
@@ -70,7 +71,8 @@ public class MageBook extends JComponent {
         super();
         this.bigCard = bigCard;
         this.setsToDisplay = ConstructedFormats.getSetsByFormat(ConstructedFormats.getDefault());
-        this.conf = new _3x3Configuration();
+        boolean selected3x3 = MageFrame.getPreferences().get(CollectionViewerPanel.LAYOYT_CONFIG_KEY, MageBook.LAYOUT_3x3).equals(MageBook.LAYOUT_3x3);
+        this.conf = selected3x3 ? new _3x3Configuration() : new _4x4Configuration();
         initComponents();
     }
 
@@ -321,7 +323,6 @@ public class MageBook extends JComponent {
     public void updateSize(String size) {
         if (size.equals(LAYOUT_3x3)) {
             this.conf = new _3x3Configuration();
-
         } else if (size.equals(LAYOUT_4x4)) {
             this.conf = new _4x4Configuration();
         } else {

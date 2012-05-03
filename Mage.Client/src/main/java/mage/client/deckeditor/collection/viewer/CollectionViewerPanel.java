@@ -43,7 +43,7 @@ import java.awt.event.ActionListener;
  */
 public final class CollectionViewerPanel extends JPanel {
 
-    private static String LAYOYT_CONFIG_KEY = "collectionViewerLayoutConfig";
+    protected static String LAYOYT_CONFIG_KEY = "collectionViewerLayoutConfig";
 
     public CollectionViewerPanel() {
         initComponents();
