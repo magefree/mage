@@ -29,7 +29,6 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
@@ -39,7 +38,6 @@ import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -60,6 +58,7 @@ public class JuganTheRisingStar extends CardImpl<JuganTheRisingStar> {
         this.color.setGreen(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
+
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Jugan, the Rising Star dies, you may distribute five +1/+1 counters among any number of target creatures.
@@ -83,7 +82,7 @@ class JuganTheRisingStarMultiEffect extends OneShotEffect<JuganTheRisingStarMult
 
 	public JuganTheRisingStarMultiEffect() {
 		super(Outcome.BoostCreature);
-                this.staticText = "you may distribute five +1/+1 counters among any number of target creatures";
+                this.staticText = "distribute five +1/+1 counters among any number of target creatures";
 	}
 
 	public JuganTheRisingStarMultiEffect(final JuganTheRisingStarMultiEffect effect) {
