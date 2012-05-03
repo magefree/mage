@@ -5,6 +5,7 @@ Soulshift|number|
 Basic landcycling|cost|
 Cycling|cost|
 Level up|cost|
+Miracle|cost|
 Unearth|cost|
 Battle cry|new|
 Cascade|new|
