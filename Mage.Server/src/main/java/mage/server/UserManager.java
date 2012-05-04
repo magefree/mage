@@ -27,6 +27,9 @@
  */
 package mage.server;
 
+import mage.view.ChatMessage.MessageColor;
+import org.apache.log4j.Logger;
+
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.UUID;
@@ -34,9 +37,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-
-import mage.view.ChatMessage.MessageColor;
-import org.apache.log4j.Logger;
 
 /**
  *
@@ -127,9 +127,10 @@ public class UserManager {
 	
 	private void checkExpired() {
 		Calendar expired = Calendar.getInstance();
-		expired.add(Calendar.MINUTE, -10) ;
+		expired.add(Calendar.MINUTE, -1) ;
 		for (User user: users.values()) {
 			if (user.isExpired(expired.getTime())) {
+                logger.info("user session expired " + user.getId());
 				user.kill();
 				users.remove(user.getId());
 			}

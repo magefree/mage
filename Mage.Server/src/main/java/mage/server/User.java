@@ -27,11 +27,6 @@
  */
 package mage.server;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.UUID;
 import mage.cards.decks.Deck;
 import mage.game.Table;
 import mage.interfaces.callback.ClientCallback;
@@ -42,6 +37,12 @@ import mage.server.game.GameSession;
 import mage.server.tournament.TournamentSession;
 import mage.view.TableClientMessage;
 import org.apache.log4j.Logger;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.UUID;
 
 /**
  *
@@ -178,7 +179,7 @@ public class User {
 	}
 
 	public boolean isExpired(Date expired) {
-		return userState == UserState.Disconnected && lastActivity.before(expired);
+		return /*userState == UserState.Disconnected && */ lastActivity.before(expired);
 	}
 	
 	private void reconnect() {
