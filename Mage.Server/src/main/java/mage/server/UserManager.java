@@ -127,7 +127,7 @@ public class UserManager {
 	
 	private void checkExpired() {
 		Calendar expired = Calendar.getInstance();
-		expired.add(Calendar.MINUTE, -1) ;
+		expired.add(Calendar.MINUTE, -2) ;
 		for (User user: users.values()) {
 			if (user.isExpired(expired.getTime())) {
                 logger.info("user session expired " + user.getId());
