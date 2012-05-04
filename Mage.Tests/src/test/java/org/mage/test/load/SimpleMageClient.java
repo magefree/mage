@@ -3,6 +3,7 @@ package org.mage.test.load;
 import mage.interfaces.MageClient;
 import mage.interfaces.callback.CallbackClient;
 import mage.interfaces.callback.ClientCallback;
+import mage.remote.Session;
 import mage.utils.MageVersion;
 import org.apache.log4j.Logger;
 
@@ -20,7 +21,7 @@ public class SimpleMageClient implements MageClient {
     
     private static final transient Logger log = Logger.getLogger(SimpleMageClient.class);
 
-    private static CallbackClient callbackClient;
+    private CallbackClient callbackClient;
 
     public SimpleMageClient() {
         clientId = UUID.randomUUID();
@@ -60,5 +61,9 @@ public class SimpleMageClient implements MageClient {
     @Override
     public void processCallback(ClientCallback callback) {
         callbackClient.processCallback(callback);
+    }
+    
+    public void setSession(Session session) {
+        ((LoadCallbackClient)callbackClient).setSession(session);
     }
 }
