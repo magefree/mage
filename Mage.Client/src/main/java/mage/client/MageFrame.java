@@ -85,6 +85,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.prefs.Preferences;
 
 /**
@@ -115,6 +118,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 	private static Map<UUID, DraftPanel> drafts = new HashMap<UUID, DraftPanel>();
 	private static Map<UUID, TournamentPanel> tournaments = new HashMap<UUID, TournamentPanel>();
 	private static MageUI ui = new MageUI();
+
+    private static ScheduledExecutorService pingTaskExecutor = Executors.newSingleThreadScheduledExecutor();
 
 	/**
 	 * @return the session
@@ -192,6 +197,13 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 		errorDialog.setLocation(100, 100);
 		desktopPane.add(errorDialog, JLayeredPane.POPUP_LAYER);
 		ui.addComponent(MageComponents.DESKTOP_PANE, desktopPane);
+
+        pingTaskExecutor.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                session.ping();
+            }
+        }, 60, 60, TimeUnit.SECONDS);
 
 		try {
 			tablesPane = new TablesPane();

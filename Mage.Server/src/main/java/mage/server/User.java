@@ -177,6 +177,10 @@ public class User {
 		lastActivity = new Date();
 		GameManager.getInstance().sendPlayerInteger(gameId, userId, data);
 	}
+    
+    public void updateLastActivity() {
+        lastActivity = new Date();
+    }
 
 	public boolean isExpired(Date expired) {
 		return /*userState == UserState.Disconnected && */ lastActivity.before(expired);

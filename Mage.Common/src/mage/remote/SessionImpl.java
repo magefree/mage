@@ -1090,6 +1090,21 @@ public class SessionImpl implements Session {
     public void setEmbeddedMageServerAction(Action embeddedMageServerAction) {
         this.embeddedMageServerAction = embeddedMageServerAction;
     }
+
+    @Override
+    public boolean ping() {
+        try {
+            if (isConnected()) {
+                server.ping(sessionId);
+            }
+            return true;
+        } catch (MageException ex) {
+            handleMageException(ex);
+        } catch (Throwable t) {
+            handleThrowable(t);
+        }
+        return false;
+    }
 }
 
 class MageAuthenticator extends Authenticator {

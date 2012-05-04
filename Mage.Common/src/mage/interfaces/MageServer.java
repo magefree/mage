@@ -51,6 +51,8 @@ public interface MageServer {
 
 	public boolean setUserData(String userName, String sessionId, UserDataView userDataView) throws MageException;
 	public ServerState getServerState() throws MageException;
+    
+    public boolean ping(String sessionId) throws MageException;
 
 	//table methods
 	public TableView createTable(String sessionId, UUID roomId, MatchOptions matchOptions) throws MageException;
