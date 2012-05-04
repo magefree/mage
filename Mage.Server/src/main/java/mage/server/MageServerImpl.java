@@ -248,6 +248,11 @@ public class MageServerImpl implements MageServer {
 		}
 		return null;
 	}
+    
+    @Override
+    public boolean ping(String sessionId) {
+        return SessionManager.getInstance().extendUserSession(sessionId);
+    }
 
 	@Override
 	public void deregisterClient(final String sessionId) throws MageException {

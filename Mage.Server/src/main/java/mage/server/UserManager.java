@@ -124,13 +124,21 @@ public class UserManager {
 			users.remove(userId);
 		}
 	}
+
+    public boolean extendUserSession(UUID userId) {
+        if (users.containsKey(userId)) {
+            users.get(userId).updateLastActivity();
+            return true;
+        }
+        return false;
+    }
 	
 	private void checkExpired() {
 		Calendar expired = Calendar.getInstance();
-		expired.add(Calendar.MINUTE, -2) ;
+		expired.add(Calendar.MINUTE, -3) ;
 		for (User user: users.values()) {
 			if (user.isExpired(expired.getTime())) {
-                logger.info("user session expired " + user.getId());
+                logger.info(user.getName() + " session expired " + user.getId());
 				user.kill();
 				users.remove(user.getId());
 			}

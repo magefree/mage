@@ -57,6 +57,8 @@ public interface Session {
 
     boolean isConnected();
 
+    boolean ping();
+
     String[] getPlayerTypes();
 
     List<GameTypeView> getGameTypes();
