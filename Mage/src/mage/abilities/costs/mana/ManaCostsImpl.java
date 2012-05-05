@@ -28,7 +28,6 @@
 
 package mage.abilities.costs.mana;
 
-import java.util.*;
 import mage.Constants.ColoredManaSymbol;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -39,6 +38,8 @@ import mage.game.Game;
 import mage.players.ManaPool;
 import mage.players.Player;
 import mage.target.Targets;
+
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -252,6 +253,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
             if (mana == null || mana.length() == 0)
                 return;
             String[] symbols = mana.split("^\\{|\\}\\{|\\}$");
+            int modifierForX = 0;
             for (String symbol : symbols) {
                 if (symbol.length() > 0) {
                     if (symbol.length() == 1 || isNumeric(symbol)) {
@@ -260,8 +262,18 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
                         } else {
                             if (!symbol.equals("X"))
                                 this.add((T) new ColoredManaCost(ColoredManaSymbol.lookup(symbol.charAt(0))));
-                            else
-                                this.add((T) new VariableManaCost());
+                            else {
+                                // check X wasn't added before
+                                if (modifierForX == 0) {
+                                    // count X occurence
+                                    for (String s : symbols) {
+                                        if (s.equals("X")) {
+                                            modifierForX++;
+                                        }
+                                    }
+                                    this.add((T) new VariableManaCost(modifierForX));
+                                }
+                            }
                             //TODO: handle multiple {X} and/or {Y} symbols
                         }
                     } else {
