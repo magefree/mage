@@ -100,12 +100,14 @@ public class UserManager {
 	}
 	
 	public void disconnect(UUID userId) {
-        ChatManager.getInstance().removeUser(userId);
-		if (users.containsKey(userId)) {
-            logger.info("user disconnected " + userId);
-			users.get(userId).setSessionId("");
-			ChatManager.getInstance().broadcast(userId, "has lost connection", MessageColor.BLACK);
-		}
+        if (userId != null) {
+            ChatManager.getInstance().removeUser(userId);
+            if (users.containsKey(userId)) {
+                logger.info("user disconnected " + userId);
+                users.get(userId).setSessionId("");
+                ChatManager.getInstance().broadcast(userId, "has lost connection", MessageColor.BLACK);
+            }
+        }
 	}
 	
 	public boolean isAdmin(UUID userId) {
