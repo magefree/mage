@@ -994,7 +994,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
             }
 
             int aggressionRate = 5;
-            aggressionRate = getAggressionRate(oppScore, ourScore, outNumber, score, doAttack, turnsUntilDeathByUnblockable, doUnblockableAttack, aggressionRate);
+            //aggressionRate = getAggressionRate(oppScore, ourScore, outNumber, score, doAttack, turnsUntilDeathByUnblockable, doUnblockableAttack, aggressionRate);
             System.out.println("AI aggression = " + String.valueOf(aggressionRate));
 
 
@@ -1019,7 +1019,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 
                 boolean shouldAttack = shouldAttack(game, attackingPlayer.getId(), defenderId, attacker, possibleBlockers, aggressionRate);
 
-                if (shouldAttack && (totalFirstStrikeBlockPower < attacker.getToughness().getValue() || (aggressionRate == 5)) ) {
+                if (aggressionRate == 5 || shouldAttack && (totalFirstStrikeBlockPower < attacker.getToughness().getValue()) ) {
                     finalAttackers.add(attacker);
                 }
             }
@@ -1046,10 +1046,6 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 
         if (!isEffectiveAttacker(game, attackingPlayerId, defenderId, attacker, life, poison)) {
             return false;
-        }
-
-        if (aggressionRate == 5) {
-            return true;
         }
 
         for (Permanent defender : blockers) {
