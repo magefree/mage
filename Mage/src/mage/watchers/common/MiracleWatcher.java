@@ -37,6 +37,7 @@ import mage.abilities.keyword.MiracleAbility;
 import mage.cards.Card;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.stack.StackAbility;
 import mage.players.Player;
 import mage.watchers.WatcherImpl;
 
@@ -91,12 +92,25 @@ public class MiracleWatcher extends WatcherImpl<MiracleWatcher> {
             for (Ability ability : card.getAbilities()) {
                 if (ability instanceof MiracleAbility) {
                     Player controller = game.getPlayer(ability.getControllerId());
+                    // FIXME: I don't like that I need to call it manually
+                    // it's the place for bugs
+                    game.getContinuousEffects().costModification(ability, game);
                     ManaCosts<ManaCost> manaCostsToPay = ability.getManaCostsToPay();
-                    if (controller != null && controller.chooseUse(Constants.Outcome.Benefit, "Use Miracle " + manaCostsToPay.getText() + "?", game)) {
-                        if (manaCostsToPay.pay(ability, game, ability.getSourceId(), ability.getControllerId(), false)) {
-                            controller.cast(card.getSpellAbility(), game, true);
+                    if (controller != null) {
+                        game.getStack().add(new StackAbility(ability, controller.getId()));
+                        if (controller.chooseUse(Constants.Outcome.Benefit, "Use Miracle " + manaCostsToPay.getText() + "?", game)) {
+                            game.getStack().poll();
+                            ManaCosts costRef = card.getSpellAbility().getManaCostsToPay();
+                            // replace with the new cost
+                            costRef.clear();
+                            for (ManaCost manaCost : manaCostsToPay) {
+                                costRef.add(manaCost);
+                            }
+                            controller.cast(card.getSpellAbility(), game, false);
+                            break;
+                        } else {
+                            game.getStack().poll();
                         }
-                        break;
                     }
                 }
             }
