@@ -157,7 +157,7 @@ public class Session {
 			call.setMessageId(messageId++);
 			callbackHandler.handleCallbackOneway(new Callback(call));
 		} catch (HandleCallbackException ex) {
-			logger.fatal("Session fireCallback error", ex);
+			logger.fatal("Session fireCallback error: " + ex.getMessage(), ex);
 			disconnect();
 		}
 	}
