@@ -149,7 +149,7 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
 						legal = legal.replace("\r\n", "<div style='font-size:5pt'></div>");
 						legal += "<br>";
 						for (String ruling : rulings) {
-							if (!ruling.replace(".", "").trim().isEmpty()) {
+							if (ruling != null && !ruling.replace(".", "").trim().isEmpty()) {
 								legal += "<p style='margin: 2px'>";
 								legal += ruling;
 								legal += "</p>";
