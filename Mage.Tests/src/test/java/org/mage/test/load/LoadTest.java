@@ -72,7 +72,7 @@ public class LoadTest {
     /**
      * Determines how many times test will be executed in a row.
      */
-    private static final int EXECUTION_COUNT_PLAY_GAME = 1;
+    private static final int EXECUTION_COUNT_PLAY_GAME = 100;
 
     /**
      * Tests connecting with two players, creating game and starting it.
@@ -129,62 +129,82 @@ public class LoadTest {
     }
 
     /**
+     * Tests 10 simple games played one after another.
+     */
+    @Test
+    @Ignore
+    public void testSimpleGame() throws Exception {
+        final DeckCardLists deckList = createDeck();
+
+        for (int i = 0; i < EXECUTION_COUNT_PLAY_GAME; i++) {
+            final int j = i;
+            Thread t = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        testSimpleGame0(deckList, j);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            t.start();
+            t.join();
+        }
+    }
+
+    /**
      * Tests simple game till the end (game over).
      * Players do nothing but skip phases and discard cards at the end.
      *
      * This results in a game that lasts until there is no cards in library.
      */
-    @Test
-    @Ignore
-    public void testSimpleGame() throws Exception {
-        DeckCardLists deckList = createDeck();
+    private boolean testSimpleGame0(DeckCardLists deckList, int i) throws InterruptedException {
+        Connection connection = createConnection(TEST_USER_NAME + i);
 
-        for (int i = 0; i < EXECUTION_COUNT_PLAY_GAME; i++) {
-            Connection connection = createConnection(TEST_USER_NAME + i);
+        SimpleMageClient mageClient = new SimpleMageClient();
+        Session session = new SessionImpl(mageClient);
 
-            SimpleMageClient mageClient = new SimpleMageClient();
-            Session session = new SessionImpl(mageClient);
+        session.connect(connection);
 
-            session.connect(connection);
+        mageClient.setSession(session);
+        UUID roomId = session.getMainRoomId();
 
-            mageClient.setSession(session);
-            UUID roomId = session.getMainRoomId();
+        GameTypeView gameTypeView = session.getGameTypes().get(0);
+        log.info("Game type view: " + gameTypeView.getName());
+        MatchOptions options = createGameOptions(gameTypeView, session);
 
-            GameTypeView gameTypeView = session.getGameTypes().get(0);
-            log.info("Game type view: " + gameTypeView.getName());
-            MatchOptions options = createGameOptions(gameTypeView, session);
+        TableView table = session.createTable(roomId, options);
 
-            TableView table = session.createTable(roomId, options);
-
-            if (!session.joinTable(roomId, table.getTableId(), TEST_USER_NAME + i, "Human", 1, deckList)) {
-                log.error("Error while joining table");
-                Assert.assertTrue("Error while joining table", false);
-                return;
-            }
-
-            /*** Connect with a second player ***/
-            Connection connection2 = createConnection(TEST_USER_NAME_2 + i);
-            SimpleMageClient mageClient2 = new SimpleMageClient();
-            Session session2 = new SessionImpl(mageClient2);
-            session2.connect(connection2);
-
-            mageClient2.setSession(session2);
-            UUID roomId2 = session2.getMainRoomId();
-
-            // connect to the table with the same deck
-            if (!session2.joinTable(roomId2, table.getTableId(), TEST_USER_NAME_2 + i, "Human", 1, deckList)) {
-                log.error("Error while joining table");
-                Assert.assertTrue("Error while joining table", false);
-                return;
-            }
-
-            /*** Start game ***/
-            session.startGame(roomId, table.getTableId());
-
-            while (!mageClient.isGameOver()) {
-                Thread.sleep(1000);
-            }
+        if (!session.joinTable(roomId, table.getTableId(), TEST_USER_NAME + i, "Human", 1, deckList)) {
+            log.error("Error while joining table");
+            Assert.assertTrue("Error while joining table", false);
+            return true;
         }
+
+        /*** Connect with a second player ***/
+        Connection connection2 = createConnection(TEST_USER_NAME_2 + i);
+        SimpleMageClient mageClient2 = new SimpleMageClient();
+        Session session2 = new SessionImpl(mageClient2);
+        session2.connect(connection2);
+
+        mageClient2.setSession(session2);
+        UUID roomId2 = session2.getMainRoomId();
+
+        // connect to the table with the same deck
+        if (!session2.joinTable(roomId2, table.getTableId(), TEST_USER_NAME_2 + i, "Human", 1, deckList)) {
+            log.error("Error while joining table");
+            Assert.assertTrue("Error while joining table", false);
+            return true;
+        }
+
+        /*** Start game ***/
+        session.startGame(roomId, table.getTableId());
+
+        while (!mageClient.isGameOver()) {
+            Thread.sleep(1000);
+        }
+        return false;
     }
 
     /**

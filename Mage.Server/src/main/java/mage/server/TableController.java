@@ -52,7 +52,6 @@ import mage.server.challenge.ChallengeManager;
 import mage.server.draft.DraftManager;
 import mage.server.game.*;
 import mage.server.services.LogKeys;
-import mage.server.services.LogService;
 import mage.server.services.impl.LogServiceImpl;
 import mage.server.tournament.TournamentFactory;
 import mage.server.tournament.TournamentManager;
@@ -432,9 +431,12 @@ public class TableController {
                 cancelTimeout();
 				startGame(choosingPlayerId);
 			}
-//			else {
-//				GamesRoomManager.getInstance().removeTable(table.getId());
-//			}
+			else {
+				GamesRoomManager.getInstance().removeTable(table.getId());
+                match.getGames().clear();
+                match = null;
+                table = null;
+			}
 		} catch (GameException ex) {
 			logger.fatal(null, ex);
 		}

@@ -28,15 +28,16 @@
 
 package mage.game.turn;
 
+import mage.Constants.PhaseStep;
+import mage.Constants.TurnPhase;
+import mage.game.Game;
+import mage.players.Player;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
-import mage.Constants.PhaseStep;
-import mage.Constants.TurnPhase;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -121,7 +122,9 @@ public class Turn implements Serializable {
 				if (phase.play(game, activePlayerId)) {
 					//20091005 - 500.4/703.4n
 					game.emptyManaPools();
-					game.saveState();
+
+					//game.saveState();
+
 					//20091005 - 500.8
 					playExtraPhases(game, phase.getType());
 				}

@@ -97,6 +97,9 @@ public class TablesPanel extends javax.swing.JPanel {
 
         initComponents();
 
+        // disable replays
+        chkShowCompleted.setVisible(false);
+
 		tableTables.createDefaultColumnsFromModel();
 		chatPanel.useExtendedView(ChatPanel.VIEW_MODE.NONE);
 		chatPanel.setBorder(null);
