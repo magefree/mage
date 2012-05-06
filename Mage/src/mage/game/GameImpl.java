@@ -386,7 +386,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         scorePlayer = state.getPlayers().values().iterator().next();
 		init(choosingPlayerId, options);
         play(startingPlayerId);
-		saveState();
+		//saveState();
 	}
 
     @Override
@@ -448,7 +448,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 			player.beginTurn(this);
 		}
 		fireInformEvent("game has started");
-		saveState();
+		//saveState();
 
 		//20091005 - 103.1
         if (!gameOptions.skipInitShuffling) { //don't shuffle in test mode for card injection on top of player's libraries
@@ -476,7 +476,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 			return;
 		}
 
-		saveState();
+		//saveState();
 
 		//20091005 - 103.3
 		for (UUID playerId: state.getPlayerList(startingPlayerId)) {
@@ -496,7 +496,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 				mulligan(player.getId());
 			}
 			fireInformEvent(player.getName() + " keeps hand");
-			saveState();
+			//saveState();
 		}
 
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
@@ -627,8 +627,8 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 				Player player;
 				while (!isPaused() && !isGameOver()) {
                     try {
-                        if (bookmark == 0)
-                            bookmark = bookmarkState();
+                        //if (bookmark == 0)
+                            //bookmark = bookmarkState();
                         player = getPlayer(state.getPlayerList().get());
                         state.setPriorityPlayerId(player.getId());
                         while (!player.isPassed() && !player.hasLost() && !player.hasLeft() && !isPaused() && !isGameOver()) {
@@ -654,7 +654,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                                 state.getRevealed().reset();
                                 break;
                             } else {
-                                removeBookmark(bookmark);
+                                //removeBookmark(bookmark);
                                 return;
                             }
                         }
@@ -662,13 +662,13 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                     catch (Exception ex) {
                         logger.fatal("Game exception ", ex);
                         this.fireErrorEvent("Game exception occurred: ", ex);
-                        restoreState(bookmark);
+                        //restoreState(bookmark);
                         bookmark = 0;
                         continue;
                     }
 					state.getPlayerList().getNext();
 				}
-                removeBookmark(bookmark);
+                //removeBookmark(bookmark);
                 bookmark = 0;
 			}
 		} catch (Exception ex) {
