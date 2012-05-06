@@ -35,6 +35,8 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.keyword.MiracleAbility;
 import mage.cards.Card;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.StackAbility;
@@ -98,8 +100,12 @@ public class MiracleWatcher extends WatcherImpl<MiracleWatcher> {
                     ManaCosts<ManaCost> manaCostsToPay = ability.getManaCostsToPay();
                     if (controller != null) {
                         game.getStack().add(new StackAbility(ability, controller.getId()));
+                        Cards cards = new CardsImpl(Constants.Zone.PICK);
+                        cards.add(card);
+                        controller.lookAtCards("Miracle", cards, game);
                         if (controller.chooseUse(Constants.Outcome.Benefit, "Use Miracle " + manaCostsToPay.getText() + "?", game)) {
                             game.getStack().poll();
+                            controller.revealCards("Miracle", cards, game);
                             ManaCosts costRef = card.getSpellAbility().getManaCostsToPay();
                             // replace with the new cost
                             costRef.clear();
