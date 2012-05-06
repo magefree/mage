@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    private final static String URL_PREFIX = "http://magefree.com:81/test1/update/";
+    private final static String URL_PREFIX = "http://download.magefree.com/update/";
 
     public static void main(String[] args) throws Exception {
         Main m = new Main();
@@ -117,6 +117,9 @@ public class Main {
                 System.out.println("downloading " + filename);
                 try {
                     InputStream in = urlConnection.getInputStream();
+                    File f = new File(filename);
+                    if (!f.exists())
+                        f.getParentFile().mkdirs();
                     FileOutputStream out = new FileOutputStream(filename);
                     byte[] buf = new byte[4 * 1024];
                     int bytesRead;
