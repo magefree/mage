@@ -19,13 +19,13 @@ print "Enter new version: ";
 my $version = <STDIN>;
 chomp $version;
 
-find(\&finded, "..");
+find(\&update_in_finded, "..");
 update_version_in_java("../Mage.CLient/src/main/java/mage/client/MageFrame.java");
 update_version_in_java("../Mage.Server/src/main/java/mage/server/Main.java");
 update_version_in_java("../Mage.Server.Console/src/main/java/mage/server/console/ConsoleFrame.java");
 
-sub finded {
-    if (/pom\.xml$/) {
+sub update_in_finded {
+    if (/pom\.xml$/ && !/^\.git/) {
         update_version($_);
     }
 }
