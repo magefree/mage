@@ -27,7 +27,6 @@
  */
 package mage.sets.scarsofmirrodin;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
@@ -44,6 +43,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -83,7 +84,7 @@ class GlimmerpointStagEffect extends OneShotEffect<GlimmerpointStagEffect> {
 	private static final String effectText = "exile another target permanent. Return that card to the battlefield under its owner's control at the beginning of the next end step";
 
 	GlimmerpointStagEffect ( ) {
-		super(Outcome.Benefit);
+		super(Outcome.Detriment);
 		staticText = effectText;
 	}
 	
