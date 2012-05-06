@@ -129,15 +129,14 @@ public class LoadTest {
     }
 
     /**
-     * Test playing the whole game.
-     * Player use cheat to add lands, creatures and other cards.
-     * Then play only lands, one of them plays 1 damage targeting player.
+     * Tests simple game till the end (game over).
+     * Players do nothing but skip phases and discard cards at the end.
      *
-     * This results in 40 turns of the game.
+     * This results in a game that lasts until there is no cards in library.
      */
     @Test
     @Ignore
-    public void testPlayGame() throws Exception {
+    public void testSimpleGame() throws Exception {
         DeckCardLists deckList = createDeck();
 
         for (int i = 0; i < EXECUTION_COUNT_PLAY_GAME; i++) {
@@ -182,8 +181,23 @@ public class LoadTest {
             /*** Start game ***/
             session.startGame(roomId, table.getTableId());
 
-            Thread.sleep(100);
+            while (!mageClient.isGameOver()) {
+                Thread.sleep(1000);
+            }
         }
+    }
+
+    /**
+     * Tests playing the whole game.
+     * Player use cheat to add lands, creatures and other cards.
+     * Then play only lands, one of them plays 1 damage targeting player.
+     *
+     * This results in 40 turns of the game.
+     */
+    @Test
+    @Ignore
+    public void testPlayGame() throws Exception {
+        //TODO: to be implemented
     }
 
     /**

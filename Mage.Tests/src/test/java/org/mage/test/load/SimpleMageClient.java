@@ -66,4 +66,8 @@ public class SimpleMageClient implements MageClient {
     public void setSession(Session session) {
         ((LoadCallbackClient)callbackClient).setSession(session);
     }
+    
+    public boolean isGameOver() {
+        return ((LoadCallbackClient)callbackClient).isGameOver();
+    }
 }
