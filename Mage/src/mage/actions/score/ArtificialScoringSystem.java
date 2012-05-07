@@ -26,6 +26,9 @@ public class ArtificialScoringSystem implements ScoringSystem {
      * @return
      */
     public int getLoseGameScore(final Game game) {
+        if (game.getStep() == null) {
+            return 0;
+        }
         return ScoringConstants.LOSE_GAME_SCORE + game.getTurnNum() * 2500 + game.getStep().getType().getIndex() * 200;
     }
 
