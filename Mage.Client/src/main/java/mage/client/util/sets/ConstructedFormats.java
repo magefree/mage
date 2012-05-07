@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class ConstructedFormats {
 
-    private static final String[] constructedFormats = {"Standard", "Extended", "Modern", "All"};
+    private static final String[] constructedFormats = {"ISD\\DKA\\AVR", "Standard", "Extended", "Modern", "All"};
 
     private ConstructedFormats() {
     }
@@ -30,6 +30,9 @@ public class ConstructedFormats {
     }
 
     public static List<String> getSetsByFormat(String format) {
+        if (format.equals("ISD\\DKA\\AVR")) {
+            return innistradBlock;
+        }
         if (format.equals("Standard")) {
             return standard;
         }
@@ -45,6 +48,9 @@ public class ConstructedFormats {
     private static void buildLists() {
         for (String setCode : CardsStorage.getSetCodes()) {
             ExpansionSet set = Sets.findSet(setCode);
+            if (set.getReleaseDate().after(innistradBlockDate)) {
+                innistradBlock.add(set.getCode());
+            }
             if (set.getReleaseDate().after(standardDate)) {
                 standard.add(set.getCode());
             }
@@ -56,6 +62,9 @@ public class ConstructedFormats {
             }
         }
     }
+
+    private static final List<String> innistradBlock = new ArrayList<String>();
+    private static final Date innistradBlockDate = new GregorianCalendar(2011, 9, 29).getTime();
 
     private static final List<String> standard = new ArrayList<String>();
     private static final Date standardDate = new GregorianCalendar(2010, 9, 20).getTime();

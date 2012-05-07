@@ -74,7 +74,7 @@ public class DeckGenerator {
         JPanel jPanel = new JPanel();
         JLabel text3 = new JLabel("Choose format:");
         formats = new JComboBox(ConstructedFormats.getTypes());
-        formats.setSelectedIndex(3);
+        formats.setSelectedIndex(0);
         formats.setPreferredSize(new Dimension(100, 25));
         formats.setMaximumSize(new Dimension(100, 25));
         formats.setAlignmentX(Component.LEFT_ALIGNMENT);
