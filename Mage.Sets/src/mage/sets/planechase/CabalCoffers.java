@@ -29,26 +29,25 @@ package mage.sets.planechase;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Zone;
 import mage.Constants.Rarity;
-import mage.cards.CardImpl;
-import mage.abilities.Ability;
+import mage.Constants.Zone;
 import mage.Mana;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.common.DynamicManaEffect;
+import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
-import mage.game.Game;
-
 
 /**
  *
- * @author anonymous
+ * @author North
  */
 public class CabalCoffers extends CardImpl<CabalCoffers> {
-    
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("Swamps you control");
+
+    private final static FilterControlledPermanent filter = new FilterControlledPermanent("Swamp you control");
 
     static {
         filter.getSubtype().add("Swamp");
@@ -59,8 +58,10 @@ public class CabalCoffers extends CardImpl<CabalCoffers> {
         this.expansionSetCode = "HOP";
 
         // {2}, {tap}: Add {B} to your mana pool for each Swamp you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CabalCoffersManaEffect(), new TapSourceCost());
-        ability.addCost(new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new DynamicManaEffect(Mana.BlackMana, new PermanentsOnBattlefieldCount(filter)),
+                new GenericManaCost(2));
+        ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
 
@@ -71,38 +72,5 @@ public class CabalCoffers extends CardImpl<CabalCoffers> {
     @Override
     public CabalCoffers copy() {
         return new CabalCoffers(this);
-    }
-
-}
-
-class CabalCoffersManaEffect extends ManaEffect<CabalCoffersManaEffect> {
-    
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("Swamps you control");
-
-    static {
-        filter.getSubtype().add("Swamp");
-    }
-    
-    CabalCoffersManaEffect() {
-        super();
-        staticText = "Add B to your mana pool for each Swamp you control";
-    }
-    
-    CabalCoffersManaEffect(final CabalCoffersManaEffect effect) {
-        super(effect);
-    }
-    
-    @Override
-    public CabalCoffersManaEffect copy() {
-        return new CabalCoffersManaEffect(this);
-    }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-	int swamps = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game).size();
-	if (source.getSourceId() != null) {
-		game.getPlayer(source.getControllerId()).getManaPool().addMana(Mana.BlackMana(swamps), game, source);
-	}
-	return true;
     }
 }
