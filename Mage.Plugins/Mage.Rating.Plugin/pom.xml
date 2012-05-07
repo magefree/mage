@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.mage</groupId>
 		<artifactId>mage-plugins</artifactId>
-		<version>0.8.4</version>
+		<version>0.8.5</version>
 	</parent>
 
 	<groupId>org.mage</groupId>
@@ -45,7 +45,7 @@
 		<dependency>
 			<groupId>com.mortennobel</groupId>
 			<artifactId>java-image-scaling</artifactId>
-			<version>0.8.4</version>
+			<version>0.8.5</version>
 		</dependency>
 		<dependency>
 			<groupId>org.swinglabs</groupId>
