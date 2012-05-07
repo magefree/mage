@@ -27,8 +27,6 @@
  */
 package mage.sets.urzassaga;
 
-import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -39,11 +37,12 @@ import mage.abilities.effects.common.continious.ControlEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
- * @author Loki
+ * @author Loki, noxx
  */
 public class Confiscate extends CardImpl<Confiscate> {
 
@@ -55,11 +54,12 @@ public class Confiscate extends CardImpl<Confiscate> {
         this.color.setBlue(true);
 
         // Enchant permanent
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        TargetPermanent auraTarget = new TargetPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
+
         // You control enchanted permanent.
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ControlEnchantedEffect()));
     }
