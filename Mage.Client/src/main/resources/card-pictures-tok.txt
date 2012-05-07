@@ -1,5 +1,5 @@
 |Generate|TOK:AVR|Angel|
-|Generate|TOK:AVR|Human|
+|Generate|TOK:AVR|Human 1|
 |Generate|TOK:AVR|Spirit 1|
 |Generate|TOK:AVR|Spirit 2|
 |Generate|TOK:AVR|Demon|
