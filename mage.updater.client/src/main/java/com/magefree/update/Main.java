@@ -32,20 +32,18 @@ public class Main {
 
     public List<File> findJars() throws Exception {
         ArrayList<File> result = new ArrayList<File>();
-        File dir = new File("lib");
-        if (dir.exists() && dir.isDirectory()) {
-            for (File jar : dir.listFiles(new FilenameFilter() {
-                @Override
-                public boolean accept(File dir, String name) {
-                    return name.endsWith(".jar");
-                }
-            })) {
-                result.add(jar);
-            }
-        }
-        dir = new File("plugins");
-        if (dir.exists() && dir.isDirectory()) {
-            for (File jar : dir.listFiles(new FilenameFilter() {
+        result.addAll(findJarsInDir("mage-client/lib"));
+        result.addAll(findJarsInDir("mage-client/plugins"));
+        result.addAll(findJarsInDir("mage-server/lib"));
+        result.addAll(findJarsInDir("mage-server/plugins"));
+        return result;
+    }
+
+    public List<File> findJarsInDir(String dir) {
+        ArrayList<File> result = new ArrayList<File>();
+        File directory = new File(dir);
+        if (directory.exists() && directory.isDirectory()) {
+            for (File jar : directory.listFiles(new FilenameFilter() {
                 @Override
                 public boolean accept(File dir, String name) {
                     return name.endsWith(".jar");
