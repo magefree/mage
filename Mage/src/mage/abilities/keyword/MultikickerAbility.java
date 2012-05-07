@@ -93,4 +93,7 @@ public class MultikickerAbility extends KickerAbility {
 		return sb.toString();
 	}
 
+    public int getActivateCount() {
+        return activateCount;
+    }
 }

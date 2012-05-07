@@ -28,22 +28,23 @@
 
 package mage.sets.worldwake;
 
-import java.util.UUID;
+import mage.Constants;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.CountersCount;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.MultikickerAbility;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.counters.common.ChargeCounter;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -51,12 +52,18 @@ import mage.counters.common.ChargeCounter;
  */
 public class EverflowingChalice extends CardImpl<EverflowingChalice> {
 
+    protected static final String rule = "Everflowing Chalice enters the battlefield with a charge counter on it for each time it was kicked";
+    
 	public EverflowingChalice(UUID ownerId) {
 		super(ownerId, 123, "Everflowing Chalice", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{0}");
 		this.expansionSetCode = "WWK";
 
-		Ability ability1 = new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(new ChargeCounter()));
-		MultikickerAbility ability = new MultikickerAbility(new GainAbilitySourceEffect(ability1, Duration.WhileOnBattlefield), false);
+        // Everflowing Chalice enters the battlefield with a charge counter on it for each time it was kicked.
+        Ability ability1 = new EntersBattlefieldAbility(new EverflowingChaliceAddCountersEffect());
+        this.addAbility(ability1);
+
+        // Multikicker {2} (You may pay an additional {2} any number of times as you cast this spell.)
+        MultikickerAbility ability = new MultikickerAbility(new EmptyEffect(rule), false);
 		ability.addManaCost(new GenericManaCost(2));
 		this.addAbility(ability);
 
@@ -73,3 +80,62 @@ public class EverflowingChalice extends CardImpl<EverflowingChalice> {
 	}
 
 }
+
+class EmptyEffect extends OneShotEffect<EmptyEffect> {
+
+    public EmptyEffect(String rule) {
+        super(Constants.Outcome.DrawCard);
+        staticText = rule;
+    }
+
+    public EmptyEffect(final EmptyEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public EmptyEffect copy() {
+        return new EmptyEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        // empty effect
+        return true;
+    }
+
+}
+
+class EverflowingChaliceAddCountersEffect extends OneShotEffect<EverflowingChaliceAddCountersEffect> {
+
+    public EverflowingChaliceAddCountersEffect() {
+        super(Constants.Outcome.Benefit);
+        staticText = EverflowingChalice.rule;
+    }
+
+    public EverflowingChaliceAddCountersEffect(final EverflowingChaliceAddCountersEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            for (Ability ability : permanent.getAbilities()) {
+                if (ability instanceof MultikickerAbility) {
+                    int count = ((MultikickerAbility)ability).getActivateCount();
+                    if (count > 0) {
+                        permanent.addCounters(CounterType.CHARGE.createInstance(count), game);
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public EverflowingChaliceAddCountersEffect copy() {
+        return new EverflowingChaliceAddCountersEffect(this);
+    }
+
+}
+
