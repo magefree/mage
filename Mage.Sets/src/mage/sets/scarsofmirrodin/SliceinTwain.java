@@ -30,9 +30,7 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
@@ -45,7 +43,7 @@ import mage.target.TargetPermanent;
  * @author Loki
  */
 public class SliceinTwain extends CardImpl<SliceinTwain> {
-    private static FilterPermanent filter = new FilterPermanent("artifact or enchantment");
+    private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
 
 	static {
 		filter.getCardType().add(CardType.ARTIFACT);
