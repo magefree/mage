@@ -28,14 +28,11 @@
 
 package mage.filter;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 import mage.Constants.TargetController;
 import mage.cards.Card;
 import mage.game.Game;
+
+import java.util.*;
 
 /**
  *
@@ -90,24 +87,33 @@ public class FilterCard<T extends FilterCard<T>> extends FilterObject<Card, Filt
 			boolean filterOut = !card.getName().toLowerCase().contains(text.toLowerCase());
 			// if couldn't find
 			if (filterOut) {
-				// then try to find in rules
-				for (String rule : card.getRules()) {
-					if (rule.toLowerCase().contains(text.toLowerCase())) {
-						filterOut = false;
-						break;
-					}
-				}
+                //separate by spaces
+                String[] tokens = text.toLowerCase().split(" ");
+                int count = 0;
+                int found = 0;
+                for (String token : tokens) {
+                    if (!token.isEmpty()) {
+                        count++;
+                        // then try to find in rules
+                        for (String rule : card.getRules()) {
+                            if (rule.toLowerCase().contains(token)) {
+                                found++;
+                                break;
+                            }
+                        }
 
-                if (filterOut) {
-				    for (String subType : card.getSubtype()) {
-                        if (subType.equalsIgnoreCase(text)) {
-                            filterOut = false;
-                            break;
+                        if (filterOut) {
+                            for (String subType : card.getSubtype()) {
+                                if (subType.equalsIgnoreCase(token)) {
+                                    found++;
+                                    break;
+                                }
+                            }
                         }
                     }
                 }
 
-				if (filterOut)
+				if (found < count)
 					return notFilter;
 			}
 

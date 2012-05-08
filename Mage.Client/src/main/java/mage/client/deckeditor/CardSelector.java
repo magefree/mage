@@ -50,10 +50,7 @@ import mage.view.CardsView;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.util.*;
 import java.util.List;
 
@@ -67,6 +64,13 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 	private final FilterCard filter = new FilterCard();
 	private BigCard bigCard;
 	private boolean limited = false;
+
+    private final ActionListener searchAction = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent evt) {
+            jButtonSearchActionPerformed(evt);
+        }
+    };
 	
     /** Creates new form CardSelector */
     public CardSelector() {
@@ -83,6 +87,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 	    jScrollPane1.setOpaque(false);
 	    jScrollPane1.getViewport().setOpaque(false);
 		cbSortBy.setModel(new DefaultComboBoxModel(SortBy.values()));
+        jTextFieldSearch.addActionListener(searchAction);
 	}
 
 	public void initListViewComponents() {
