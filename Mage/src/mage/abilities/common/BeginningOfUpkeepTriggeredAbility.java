@@ -34,7 +34,13 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl<Begi
         if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE) {
             switch (targetController) {
                 case YOU:
-                    return event.getPlayerId().equals(this.controllerId);
+                    boolean yours = event.getPlayerId().equals(this.controllerId);
+                    if (yours) {
+                        for (Effect effect : this.getEffects()) {
+                            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+                        }
+                    }
+                    return yours;
                 case OPPONENT:
                     if (game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
                         for (Effect effect : this.getEffects()) {

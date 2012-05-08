@@ -611,7 +611,7 @@ public class GameController implements GameCallback {
 					}
                     if (!found) {
                         // something wrong - it may cause game freezes
-                        logger.warn("WARNING! GameController.sendMessage - couldn't find session for action execution.");
+                        logger.warn("WARNING! GameController.sendMessage - couldn't find session for action execution. Player: " + player.getName());
                     }
 				}
 		} else {

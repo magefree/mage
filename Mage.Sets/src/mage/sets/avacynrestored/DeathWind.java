@@ -25,53 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.avacynrestored;
 
-package mage.sets.conflux;
-
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
+import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
-import mage.counters.CounterType;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
 /**
- *
- * @author Loki
+ * @author noxx
  */
-public class ScarlandThrinax extends CardImpl<ScarlandThrinax> {
+public class DeathWind extends CardImpl<DeathWind> {
 
-    public ScarlandThrinax(UUID ownerId) {
-        super(ownerId, 123, "Scarland Thrinax", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}{R}{G}");
-        this.expansionSetCode = "CON";
+    public DeathWind(UUID ownerId) {
+        super(ownerId, 93, "Death Wind", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{X}{B}");
+        this.expansionSetCode = "AVR";
+
         this.color.setBlack(true);
-        this.color.setRed(true);
-        this.color.setGreen(true);
-        this.subtype.add("Lizard");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
 
-        // Sacrifice a creature: Put a +1/+1 counter on Scarland Thrinax.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
-        this.addAbility(ability);
+        // Target creature gets -X/-X until end of turn.
+        DynamicValue x = new SignInversionDynamicValue(new ManacostVariableValue());
+        this.getSpellAbility().addEffect(new BoostTargetEffect(x, x, Constants.Duration.EndOfTurn, true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public ScarlandThrinax(final ScarlandThrinax card) {
+    public DeathWind(final DeathWind card) {
         super(card);
     }
 
     @Override
-    public ScarlandThrinax copy() {
-        return new ScarlandThrinax(this);
+    public DeathWind copy() {
+        return new DeathWind(this);
     }
-
 }

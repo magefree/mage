@@ -24,6 +24,7 @@ public class DiesThisOrAnotherCreatureTriggeredAbility extends TriggeredAbilityI
 
     public DiesThisOrAnotherCreatureTriggeredAbility(DiesThisOrAnotherCreatureTriggeredAbility ability) {
         super(ability);
+        this.filter = ability.filter;
     }
 
     @Override

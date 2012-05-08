@@ -25,53 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.conflux;
+package mage.sets.avacynrestored;
 
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
-import mage.counters.CounterType;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.Target;
+import mage.target.TargetPlayer;
 
 import java.util.UUID;
 
 /**
  *
- * @author Loki
+ * @author noxx
  */
-public class ScarlandThrinax extends CardImpl<ScarlandThrinax> {
+public class BloodArtist extends CardImpl<BloodArtist> {
 
-    public ScarlandThrinax(UUID ownerId) {
-        super(ownerId, 123, "Scarland Thrinax", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}{R}{G}");
-        this.expansionSetCode = "CON";
+    public BloodArtist(UUID ownerId) {
+        super(ownerId, 86, "Blood Artist", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
+        this.expansionSetCode = "AVR";
+        this.subtype.add("Vampire");
+
         this.color.setBlack(true);
-        this.color.setRed(true);
-        this.color.setGreen(true);
-        this.subtype.add("Lizard");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(1);
 
-        // Sacrifice a creature: Put a +1/+1 counter on Scarland Thrinax.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        // Whenever Blood Artist or another creature dies, target player loses 1 life and you gain 1 life.
+        Ability ability = new DiesThisOrAnotherCreatureTriggeredAbility(new LoseLifeTargetEffect(1), false);
+        ability.addEffect(new GainLifeEffect(1));
+        Target target = new TargetPlayer();
+        target.setRequired(true);
+        ability.addTarget(target);
         this.addAbility(ability);
     }
 
-    public ScarlandThrinax(final ScarlandThrinax card) {
+    public BloodArtist(final BloodArtist card) {
         super(card);
     }
 
     @Override
-    public ScarlandThrinax copy() {
-        return new ScarlandThrinax(this);
+    public BloodArtist copy() {
+        return new BloodArtist(this);
     }
-
 }

@@ -35,6 +35,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -59,7 +60,9 @@ public class MistRaven extends CardImpl<MistRaven> {
 
         // When Mist Raven enters the battlefield, return target creature to its owner's hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect());
-        ability.addTarget(new TargetCreaturePermanent());
+        Target target = new TargetCreaturePermanent();
+        target.setRequired(true);
+        ability.addTarget(target);
         this.addAbility(ability);
     }
 

@@ -27,7 +27,6 @@
  */
 package mage.abilities.effects.common;
 
-import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -39,6 +38,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -72,17 +73,20 @@ public class SacrificeEffect extends OneShotEffect<SacrificeEffect>{
 	@Override
 	public boolean apply(Game game, Ability source) {
 		Player player = game.getPlayer(targetPointer.getFirst(source));
+
         if (player == null) {
             return false;
         }
-		//filter.setTargetController(TargetController.YOU);
-		int amount = count.calculate(game, source);
-		amount = Math.min(amount, game.getBattlefield().countAll(filter, player.getId()));
-		Target target = new TargetControlledPermanent(amount, amount, filter, false);
+
+        int amount = count.calculate(game, source);
+        int realCount = game.getBattlefield().countAll(filter, player.getId());
+		amount = Math.min(amount, realCount);
+
+        Target target = new TargetControlledPermanent(amount, amount, filter, false);
 
 		//A spell or ability could have removed the only legal target this player
 		//had, if thats the case this ability should fizzle.
-		if (amount > 0 && target.canChoose(player.getId(), game)) {
+		if (amount > 0 && target.canChoose(source.getSourceId(), player.getId(), game)) {
 			boolean abilityApplied = false;
 			while (!target.isChosen() && target.canChoose(player.getId(), game)) {
 				player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
@@ -112,7 +116,16 @@ public class SacrificeEffect extends OneShotEffect<SacrificeEffect>{
 
 	private void setText() {
 		StringBuilder sb = new StringBuilder();
-		sb.append(preText).append(" sacrifices ").append(count).append(" ").append(filter.getMessage());
+        sb.append(preText);
+        if (preText.contains("player")) {
+            sb.append(" sacrifices ");
+        } else {
+            sb.append(" sacrifice ");
+        }
+        if (!count.toString().equals("1")) {
+            sb.append(count).append(" ");
+        }
+        sb.append(filter.getMessage());
 		staticText = sb.toString();
 	}
 }

@@ -1,6 +1,5 @@
 package mage.abilities.common;
 
-import java.util.UUID;
 import mage.Constants;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -9,6 +8,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 public class DiesAnotherCreatureYouControlTriggeredAbility extends TriggeredAbilityImpl<DiesAnotherCreatureYouControlTriggeredAbility> {
     protected FilterCreaturePermanent filter;
@@ -24,6 +25,7 @@ public class DiesAnotherCreatureYouControlTriggeredAbility extends TriggeredAbil
 
     public DiesAnotherCreatureYouControlTriggeredAbility(DiesAnotherCreatureYouControlTriggeredAbility ability) {
         super(ability);
+        this.filter = ability.filter;
     }
 
     @Override

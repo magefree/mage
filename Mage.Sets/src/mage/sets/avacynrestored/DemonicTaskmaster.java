@@ -25,53 +25,55 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.avacynrestored;
 
-package mage.sets.conflux;
-
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.effects.common.SacrificeEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.counters.CounterType;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 
 import java.util.UUID;
 
 /**
  *
- * @author Loki
+ * @author noxx
  */
-public class ScarlandThrinax extends CardImpl<ScarlandThrinax> {
+public class DemonicTaskmaster extends CardImpl<DemonicTaskmaster> {
 
-    public ScarlandThrinax(UUID ownerId) {
-        super(ownerId, 123, "Scarland Thrinax", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}{R}{G}");
-        this.expansionSetCode = "CON";
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a creature other than Demonic Taskmaster");
+
+    static {
+        filter.setAnother(true);
+    }
+
+    public DemonicTaskmaster(UUID ownerId) {
+        super(ownerId, 95, "Demonic Taskmaster", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
+        this.expansionSetCode = "AVR";
+        this.subtype.add("Demon");
+
         this.color.setBlack(true);
-        this.color.setRed(true);
-        this.color.setGreen(true);
-        this.subtype.add("Lizard");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(3);
 
-        // Sacrifice a creature: Put a +1/+1 counter on Scarland Thrinax.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        this.addAbility(FlyingAbility.getInstance());
+
+        // At the beginning of your upkeep, sacrifice a creature other than Demonic Taskmaster.
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new SacrificeEffect(filter, 1, ""), Constants.TargetController.YOU, false);
         this.addAbility(ability);
     }
 
-    public ScarlandThrinax(final ScarlandThrinax card) {
+    public DemonicTaskmaster(final DemonicTaskmaster card) {
         super(card);
     }
 
     @Override
-    public ScarlandThrinax copy() {
-        return new ScarlandThrinax(this);
+    public DemonicTaskmaster copy() {
+        return new DemonicTaskmaster(this);
     }
-
 }
