@@ -27,19 +27,16 @@
  */
 package mage.sets.innistrad;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.Ability;
+import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -58,7 +55,9 @@ public class SelhoffOccultist extends CardImpl<SelhoffOccultist> {
         this.toughness = new MageInt(3);
 
         // Whenever Selhoff Occultist or another creature dies, target player puts the top card of his or her library into his or her graveyard.
-        this.addAbility(new SelhoffOccultistTriggeredAbility());
+        Ability ability = new DiesThisOrAnotherCreatureTriggeredAbility(new PutLibraryIntoGraveTargetEffect(1), false);
+        ability.addTarget(new TargetPlayer());
+        this.addAbility(ability);
     }
 
     public SelhoffOccultist(final SelhoffOccultist card) {
@@ -68,47 +67,5 @@ public class SelhoffOccultist extends CardImpl<SelhoffOccultist> {
     @Override
     public SelhoffOccultist copy() {
         return new SelhoffOccultist(this);
-    }
-}
-
-class SelhoffOccultistTriggeredAbility extends TriggeredAbilityImpl<SelhoffOccultistTriggeredAbility> {
-
-    public SelhoffOccultistTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(1), false);
-        this.addTarget(new TargetPlayer());
-    }
-
-    public SelhoffOccultistTriggeredAbility(final SelhoffOccultistTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public SelhoffOccultistTriggeredAbility copy() {
-        return new SelhoffOccultistTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
-                Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-                if (permanent != null) {
-                    if (permanent.getId().equals(this.getSourceId())) {
-                        return true;
-                    } else {
-                        if (permanent.getCardType().contains(CardType.CREATURE)) {
-                            return true;
-                        }
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} or another creature dies, target player puts the top card of his or her library into his or her graveyard.";
     }
 }

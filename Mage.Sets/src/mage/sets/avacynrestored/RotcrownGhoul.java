@@ -27,25 +27,19 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.Ability;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
 
 import java.util.UUID;
 
 /**
- *
  * @author noxx
-
  */
 public class RotcrownGhoul extends CardImpl<RotcrownGhoul> {
 
@@ -59,7 +53,9 @@ public class RotcrownGhoul extends CardImpl<RotcrownGhoul> {
         this.toughness = new MageInt(3);
 
         // When Rotcrown Ghoul dies, target player puts the top five cards of his or her library into his or her graveyard.
-        this.addAbility(new SelhoffOccultistTriggeredAbility());
+        Ability ability = new DiesTriggeredAbility(new PutLibraryIntoGraveTargetEffect(5));
+        ability.addTarget(new TargetPlayer());
+        this.addAbility(ability);
     }
 
     public RotcrownGhoul(final RotcrownGhoul card) {
@@ -69,43 +65,5 @@ public class RotcrownGhoul extends CardImpl<RotcrownGhoul> {
     @Override
     public RotcrownGhoul copy() {
         return new RotcrownGhoul(this);
-    }
-}
-
-class SelhoffOccultistTriggeredAbility extends TriggeredAbilityImpl<SelhoffOccultistTriggeredAbility> {
-
-    public SelhoffOccultistTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(5), false);
-        this.addTarget(new TargetPlayer());
-    }
-
-    public SelhoffOccultistTriggeredAbility(final SelhoffOccultistTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public SelhoffOccultistTriggeredAbility copy() {
-        return new SelhoffOccultistTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getFromZone() == Constants.Zone.BATTLEFIELD && zEvent.getToZone() == Constants.Zone.GRAVEYARD) {
-                Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Constants.Zone.BATTLEFIELD);
-                if (permanent != null) {
-                    if (permanent.getId().equals(this.getSourceId())) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} dies, target player puts the top five cards of his or her library into his or her graveyard.";
     }
 }
