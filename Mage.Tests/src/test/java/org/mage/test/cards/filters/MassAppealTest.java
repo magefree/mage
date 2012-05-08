@@ -26,8 +26,12 @@ public class MassAppealTest extends CardTestPlayerBase {
         assertHandCount(playerB, 0);
     }
 
+    /**
+     * Tests that cards will be drawn only for controller's permanents
+     * Tests Human creatures with several subtypes (subtype comparison scope)
+     */
     @Test
-    public void testNoDrawCards() {
+    public void testDrawingCards() {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 3);
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Ana Disciple", 2);
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Alabaster Mage", 3);
