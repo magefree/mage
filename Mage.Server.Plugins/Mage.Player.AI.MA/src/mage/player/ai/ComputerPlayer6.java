@@ -1120,21 +1120,27 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
     }
 
     private boolean isEffectiveAttacker(Game game, UUID attackingPlayerId, UUID defenderId, Permanent attacker, int life, int poison) {
-        SurviveInfo info = CombatUtil.getCombatInfo(game, attackingPlayerId, defenderId, attacker);
-        if (info.isAttackerDied()) {
+        try {
+            SurviveInfo info = CombatUtil.getCombatInfo(game, attackingPlayerId, defenderId, attacker);
+            if (info.isAttackerDied()) {
+                return false;
+            }
+    
+            if (info.getDefender().getLife() < life) {
+                return true;
+            }
+    
+            if (info.getDefender().getCounters().getCount(CounterType.POISON) > poison && poison < 10) {
+                return true;
+            }
+    
+            if (info.isTriggered()) {
+                return true;
+            }
+        } catch (Exception e) {
+            // swallow exception and return false
+            logger.error(e);
             return false;
-        }
-
-        if (info.getDefender().getLife() < life) {
-            return true;
-        }
-
-        if (info.getDefender().getCounters().getCount(CounterType.POISON) > poison && poison < 10) {
-            return true;
-        }
-
-        if (info.isTriggered()) {
-            return true;
         }
 
         return false;
