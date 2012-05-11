@@ -28,46 +28,52 @@
 package mage.sets.avacynrestored;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.ObjectColor;
+import mage.abilities.common.CreatureEntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.counters.CounterType;
-import mage.target.common.TargetCreaturePermanent;
+import mage.game.permanent.token.Token;
 
 /**
  *
  * @author Loki
  */
-public class TimberlandGuide extends CardImpl<TimberlandGuide> {
+public class AngelsTomb extends CardImpl<AngelsTomb> {
 
-    public TimberlandGuide(UUID ownerId) {
-        super(ownerId, 197, "Timberland Guide", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
+    public AngelsTomb(UUID ownerId) {
+        super(ownerId, 211, "Angel's Tomb", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "AVR";
-        this.subtype.add("Human");
-        this.subtype.add("Scout");
 
-        this.color.setGreen(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // When Timberland Guide enters the battlefield, put a +1/+1 counter on target creature.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
-        TargetCreaturePermanent target = new TargetCreaturePermanent();
-        target.setRequired(true);
-        ability.addTarget(target);
-        this.addAbility(ability);
+        // Whenever a creature enters the battlefield under your control, you may have Angel's Tomb become a 3/3 white Angel artifact creature with flying until end of turn.
+        this.addAbility(new CreatureEntersBattlefieldTriggeredAbility(new BecomesCreatureSourceEffect(new AngelTombToken(), "", Constants.Duration.EndOfTurn), true));
     }
 
-    public TimberlandGuide(final TimberlandGuide card) {
+    public AngelsTomb(final AngelsTomb card) {
         super(card);
     }
 
     @Override
-    public TimberlandGuide copy() {
-        return new TimberlandGuide(this);
+    public AngelsTomb copy() {
+        return new AngelsTomb(this);
+    }
+}
+
+class AngelTombToken extends Token {
+
+    public AngelTombToken() {
+        super("", "a 3/3 white Angel artifact creature with flying");
+        cardType.add(CardType.ARTIFACT);
+        cardType.add(CardType.CREATURE);
+        color = ObjectColor.WHITE;
+        subtype.add("Angel");
+        power = new MageInt(3);
+        toughness = new MageInt(3);
+        addAbility(FlyingAbility.getInstance());
     }
 }

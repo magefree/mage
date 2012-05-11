@@ -31,43 +31,39 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.DiesAnotherCreatureTriggeredAbility;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class TimberlandGuide extends CardImpl<TimberlandGuide> {
+public class HavengulVampire extends CardImpl<HavengulVampire> {
 
-    public TimberlandGuide(UUID ownerId) {
-        super(ownerId, 197, "Timberland Guide", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
+    public HavengulVampire(UUID ownerId) {
+        super(ownerId, 139, "Havengul Vampire", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.expansionSetCode = "AVR";
-        this.subtype.add("Human");
-        this.subtype.add("Scout");
+        this.subtype.add("Vampire");
 
-        this.color.setGreen(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+        this.color.setRed(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        // When Timberland Guide enters the battlefield, put a +1/+1 counter on target creature.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
-        TargetCreaturePermanent target = new TargetCreaturePermanent();
-        target.setRequired(true);
-        ability.addTarget(target);
-        this.addAbility(ability);
+        // Whenever Havengul Vampire deals combat damage to a player, put a +1/+1 counter on it.
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
+        // Whenever another creature dies, put a +1/+1 counter on Havengul Vampire.
+        this.addAbility(new DiesAnotherCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
     }
 
-    public TimberlandGuide(final TimberlandGuide card) {
+    public HavengulVampire(final HavengulVampire card) {
         super(card);
     }
 
     @Override
-    public TimberlandGuide copy() {
-        return new TimberlandGuide(this);
+    public HavengulVampire copy() {
+        return new HavengulVampire(this);
     }
 }
