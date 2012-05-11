@@ -27,14 +27,7 @@
  */
 package mage.sets.scarsofmirrodin;
 
-import java.util.UUID;
-import mage.Constants.AttachmentType;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
-import mage.Constants.PhaseStep;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.Constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -50,6 +43,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetCreatureOrPlayer;
 
+import java.util.UUID;
+
 /**
  *
  * @author North
@@ -61,13 +56,15 @@ public class HeavyArbalest extends CardImpl<HeavyArbalest> {
         this.expansionSetCode = "SOM";
         this.subtype.add("Equipment");
 
+        // Equip {4}
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(4)));
+
         SimpleStaticAbility ability1 = new SimpleStaticAbility(Zone.BATTLEFIELD, new HeavyArbalestEffect());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability1, AttachmentType.EQUIPMENT)));
 
         SimpleActivatedAbility ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());
         ability2.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability2, AttachmentType.EQUIPMENT)));
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(4)));
     }
 
     public HeavyArbalest(final HeavyArbalest card) {

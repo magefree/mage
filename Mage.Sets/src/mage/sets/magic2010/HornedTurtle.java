@@ -28,17 +28,17 @@
 
 package mage.sets.magic2010;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.cards.CardImpl;
 
+import java.util.UUID;
+
 /**
- *
  * @author Loki
  */
-public class HornedTurtle extends CardImpl<HornedTurtle>{
+public class HornedTurtle extends CardImpl<HornedTurtle> {
 
     public HornedTurtle(UUID ownerId) {
         super(ownerId, 55, "Horned Turtle", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
@@ -46,7 +46,7 @@ public class HornedTurtle extends CardImpl<HornedTurtle>{
         this.color.setBlue(true);
         this.subtype.add("Turtle");
         this.power = new MageInt(1);
-	this.toughness = new MageInt(4);
+        this.toughness = new MageInt(4);
     }
 
     public HornedTurtle(final HornedTurtle card) {

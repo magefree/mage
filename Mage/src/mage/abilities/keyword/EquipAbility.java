@@ -38,34 +38,33 @@ import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class EquipAbility extends ActivatedAbilityImpl<EquipAbility> {
 
-	public EquipAbility(Outcome outcome, Cost cost) {
-                this(outcome, cost, new TargetControlledCreaturePermanent());
-	}
-        
-	public EquipAbility(Outcome outcome, Cost cost, Target target) {
-		super(Zone.BATTLEFIELD, new AttachEffect(outcome, "Equip"), cost);
-		this.addTarget(target);
-		this.timing = TimingRule.SORCERY;
-	}
-        
+    public EquipAbility(Outcome outcome, Cost cost) {
+        this(outcome, cost, new TargetControlledCreaturePermanent());
+    }
 
-	public EquipAbility(final EquipAbility ability) {
-		super(ability);
-	}
+    public EquipAbility(Outcome outcome, Cost cost, Target target) {
+        super(Zone.BATTLEFIELD, new AttachEffect(outcome, "Equip"), cost);
+        this.addTarget(target);
+        this.timing = TimingRule.SORCERY;
+    }
 
-	@Override
-	public EquipAbility copy() {
-		return new EquipAbility(this);
-	}
 
-	@Override
-	public String getRule() {
-		return "Equip " + costs.getText() + manaCosts.getText();
-	}
+    public EquipAbility(final EquipAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public EquipAbility copy() {
+        return new EquipAbility(this);
+    }
+
+    @Override
+    public String getRule() {
+        return "Equip " + costs.getText() + manaCosts.getText();
+    }
 
 }
