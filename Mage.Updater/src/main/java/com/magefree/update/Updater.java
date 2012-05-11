@@ -1,6 +1,10 @@
 package com.magefree.update;
 
-import java.io.*;
+import com.magefree.update.helpers.ChechsumHelper;
+import com.magefree.update.helpers.FileHelper;
+
+import java.io.File;
+import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
@@ -166,40 +170,10 @@ public class Updater {
             urlConnection.connect();
 
             if (urlConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                downloadFile(filename, urlConnection);
+                FileHelper.downloadFile(filename, urlConnection);
             } else {
                 System.out.println(filename + " error status : " + urlConnection.getResponseMessage());
             }
-        }
-    }
-
-    /**
-     * Downloads specified file.
-     *
-     * @param filename
-     * @param urlConnection
-     */
-    private void downloadFile(String filename, HttpURLConnection urlConnection) {
-        System.out.println("Downloading " + filename);
-        try {
-            InputStream in = urlConnection.getInputStream();
-            File f = new File(filename);
-            if (!f.exists()) {
-                f.getParentFile().mkdirs();
-                System.out.println("Directories have been created: " + f.getParentFile().getPath());
-            }
-
-            FileOutputStream out = new FileOutputStream(filename);
-            byte[] buf = new byte[4 * 1024];
-            int bytesRead;
-
-            while ((bytesRead = in.read(buf)) != -1) {
-                out.write(buf, 0, bytesRead);
-            }
-
-            System.out.println("File has been updated: " + filename);
-        } catch (IOException e) {
-            System.out.println("i/o exception - " + e.getMessage());
         }
     }
 

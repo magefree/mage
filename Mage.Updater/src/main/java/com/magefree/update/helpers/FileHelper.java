@@ -1,7 +1,7 @@
-package com.magefree.update;
+package com.magefree.update.helpers;
 
-import java.io.File;
-import java.io.FilenameFilter;
+import java.io.*;
+import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +14,26 @@ public class FileHelper {
 
     private FileHelper() {
     }
+
+    /**
+     * Filters out dirs.
+     */
+    private static final FilenameFilter anyFileFilter = new FilenameFilter() {
+        @Override
+        public boolean accept(File dir, String name) {
+            return dir.isFile();
+        }
+    };
+
+    /**
+     * Filters out jars.
+     */
+    private static final FilenameFilter jarFileFilter = new FilenameFilter() {
+        @Override
+        public boolean accept(File dir, String name) {
+            return name.endsWith(".jar");
+        }
+    };
 
     /**
      * Gets .jar files from specified folder.
@@ -67,22 +87,32 @@ public class FileHelper {
     }
 
     /**
-     * Filters out dirs.
+     * Downloads specified file.
+     *
+     * @param filename
+     * @param urlConnection
      */
-    private static final FilenameFilter anyFileFilter = new FilenameFilter() {
-        @Override
-        public boolean accept(File dir, String name) {
-            return dir.isFile();
-        }
-    };
+    public static void downloadFile(String filename, HttpURLConnection urlConnection) {
+        System.out.println("Downloading " + filename);
+        try {
+            InputStream in = urlConnection.getInputStream();
+            File f = new File(filename);
+            if (!f.exists()) {
+                f.getParentFile().mkdirs();
+                System.out.println("Directories have been created: " + f.getParentFile().getPath());
+            }
 
-    /**
-     * Filters out jars.
-     */
-    private static final FilenameFilter jarFileFilter = new FilenameFilter() {
-        @Override
-        public boolean accept(File dir, String name) {
-            return name.endsWith(".jar");
+            FileOutputStream out = new FileOutputStream(filename);
+            byte[] buf = new byte[4 * 1024];
+            int bytesRead;
+
+            while ((bytesRead = in.read(buf)) != -1) {
+                out.write(buf, 0, bytesRead);
+            }
+
+            System.out.println("File has been updated: " + filename);
+        } catch (IOException e) {
+            System.out.println("i/o exception - " + e.getMessage());
         }
-    };
+    }
 }
