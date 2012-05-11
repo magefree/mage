@@ -32,7 +32,7 @@
         <module>Mage.Server.Plugins</module>
 		<module>Mage.Server.Console</module>
         <module>Mage.Tests</module>
-        <module>mage.updater.client</module>
+        <module>Mage.Updater</module>
     </modules>
 
     <repositories>
