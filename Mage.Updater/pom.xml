@@ -21,7 +21,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.magefree.update.Main</mainClass>
+                            <mainClass>com.magefree.update.Updater</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
