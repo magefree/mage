@@ -29,6 +29,7 @@ package mage.client.deckeditor.collection.viewer;
 
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
+import mage.client.dialog.PreferencesDialog;
 import mage.client.util.sets.ConstructedFormats;
 
 import javax.swing.*;
@@ -44,9 +45,16 @@ import java.awt.event.ActionListener;
 public final class CollectionViewerPanel extends JPanel {
 
     protected static String LAYOYT_CONFIG_KEY = "collectionViewerLayoutConfig";
+    protected static String FORMAT_CONFIG_KEY = "collectionViewerFormat";
 
     public CollectionViewerPanel() {
         initComponents();
+        try {
+            String format = PreferencesDialog.getCachedValue(CollectionViewerPanel.FORMAT_CONFIG_KEY, ConstructedFormats.getDefault());
+            formats.setSelectedItem(format);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void initComponents() {
@@ -133,6 +141,7 @@ public final class CollectionViewerPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 if (mageBook != null) {
                     String format = (String)formats.getSelectedItem();
+                    MageFrame.getPreferences().put(CollectionViewerPanel.FORMAT_CONFIG_KEY, format);
                     mageBook.updateDispayedSets(format);
                 }
             }
