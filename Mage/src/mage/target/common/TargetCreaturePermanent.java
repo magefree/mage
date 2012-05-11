@@ -41,12 +41,22 @@ public class TargetCreaturePermanent<T extends TargetCreaturePermanent<T>> exten
 		this(1, 1, new FilterCreaturePermanent(), false);
 	}
 
+    public TargetCreaturePermanent(boolean required) {
+        this();
+        setRequired(required);
+    }
+
 	public TargetCreaturePermanent(FilterCreaturePermanent filter) {
 		this(1, 1, filter, false);
 	}
 
 	public TargetCreaturePermanent(int numTargets) {
 		this(numTargets, numTargets, new FilterCreaturePermanent(), false);
+	}
+
+    public TargetCreaturePermanent(int numTargets, boolean required) {
+		this(numTargets);
+        setRequired(required);
 	}
 
 	public TargetCreaturePermanent(int minNumTargets, int maxNumTargets) {
