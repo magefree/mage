@@ -85,7 +85,6 @@ class SeraphSanctuaryTriggeredAbility extends TriggeredAbilityImpl<SeraphSanctua
         if (event.getType() == EventType.ZONE_CHANGE) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (((ZoneChangeEvent) event).getToZone() == Zone.BATTLEFIELD
-                    && permanent.getCardType().contains(CardType.CREATURE)
                     && permanent.hasSubtype("Angel")
                     && permanent.getControllerId().equals(this.controllerId)) {
                 return true;
