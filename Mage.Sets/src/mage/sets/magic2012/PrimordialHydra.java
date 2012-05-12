@@ -28,17 +28,18 @@
 package mage.sets.magic2012;
 
 
-import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.HasCounterCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -46,6 +47,8 @@ import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -92,11 +95,15 @@ class PrimordialHydraEntersEffect extends OneShotEffect<PrimordialHydraEntersEff
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int amount = source.getManaCostsToPay().getX();
-        Permanent p = game.getPermanent(source.getSourceId());
-        if (p != null) {
-            p.addCounters(CounterType.P1P1.createInstance(amount), game);
-            return true;
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            Object obj = getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
+            if (obj != null && obj instanceof SpellAbility) {
+                int amount = ((SpellAbility) obj).getManaCostsToPay().getX();
+                if (amount > 0) {
+                    permanent.addCounters(CounterType.P1P1.createInstance(amount), game);
+                }
+            }
         }
         return true;
     }

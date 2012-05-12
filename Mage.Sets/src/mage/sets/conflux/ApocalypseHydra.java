@@ -27,17 +27,17 @@
  */
 package mage.sets.conflux;
 
-import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
@@ -45,6 +45,8 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreatureOrPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -93,13 +95,18 @@ class ApocalypseHydraEffect extends OneShotEffect<ApocalypseHydraEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int amount = source.getManaCostsToPay().getX();
-        Permanent p = game.getPermanent(source.getSourceId());
-        if (p != null) {
-            if (amount < 5) {
-                p.addCounters(CounterType.P1P1.createInstance(amount), game);
-            } else {
-                p.addCounters(CounterType.P1P1.createInstance(amount * 2), game);
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            Object obj = getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
+            if (obj != null && obj instanceof SpellAbility) {
+                int amount = ((SpellAbility)obj).getManaCostsToPay().getX();
+                if (amount > 0) {
+                    if (amount < 5) {
+                        permanent.addCounters(CounterType.P1P1.createInstance(amount), game);
+                    } else {
+                        permanent.addCounters(CounterType.P1P1.createInstance(amount * 2), game);
+                    }
+                }
             }
             return true;
         }

@@ -28,17 +28,17 @@
 
 package mage.sets.shardsofalara;
 
-import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
+import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
@@ -47,13 +47,14 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Loki
  */
 public class SigilOfDistinction extends CardImpl<SigilOfDistinction> {
 
-    public SigilOfDistinction (UUID ownerId) {
+    public SigilOfDistinction(UUID ownerId) {
         super(ownerId, 219, "Sigil of Distinction", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{X}");
         this.expansionSetCode = "ALA";
         this.subtype.add("Equipment");
@@ -63,7 +64,7 @@ public class SigilOfDistinction extends CardImpl<SigilOfDistinction> {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public SigilOfDistinction (final SigilOfDistinction card) {
+    public SigilOfDistinction(final SigilOfDistinction card) {
         super(card);
     }
 
@@ -84,11 +85,16 @@ class SigilOfDistinctionEffect extends OneShotEffect<SigilOfDistinctionEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int amount = source.getManaCostsToPay().getX();
-        Permanent p = game.getPermanent(source.getSourceId());
-        if (p != null) {
-            p.addCounters(CounterType.CHARGE.createInstance(amount), game);
-            return true;
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            Object obj = getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
+            if (obj != null && obj instanceof SpellAbility) {
+                int amount = ((SpellAbility) obj).getManaCostsToPay().getX();
+                if (amount > 0) {
+                    permanent.addCounters(CounterType.CHARGE.createInstance(amount), game);
+                    return true;
+                }
+            }
         }
         return true;
     }

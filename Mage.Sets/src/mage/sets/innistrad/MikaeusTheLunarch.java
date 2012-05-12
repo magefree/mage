@@ -32,11 +32,13 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -107,9 +109,14 @@ class MikaeusTheLunarchEffect extends OneShotEffect<MikaeusTheLunarchEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        int amount = source.getManaCostsToPay().getX();
-        if (permanent != null && amount > 0) {
-            permanent.addCounters(CounterType.P1P1.createInstance(amount), game);
+        if (permanent != null) {
+            Object obj = getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
+            if (obj != null && obj instanceof SpellAbility) {
+                int amount = ((SpellAbility) obj).getManaCostsToPay().getX();
+                if (amount > 0) {
+                    permanent.addCounters(CounterType.P1P1.createInstance(amount), game);
+                }
+            }
         }
         return true;
     }

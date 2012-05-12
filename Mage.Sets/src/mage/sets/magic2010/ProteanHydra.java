@@ -28,28 +28,27 @@
 
 package mage.sets.magic2010;
 
-import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.Constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.PreventionEffectImpl;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -93,10 +92,15 @@ public class ProteanHydra extends CardImpl<ProteanHydra> {
 		@Override
 		public boolean apply(Game game, Ability source) {
 			Permanent permanent = game.getPermanent(source.getSourceId());
-            int amount = source.getManaCostsToPay().getX();
-			if (permanent != null && amount > 0) {
-				permanent.addCounters(CounterType.P1P1.createInstance(amount), game);
-			}
+            if (permanent != null) {
+                Object obj = getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
+                if (obj != null && obj instanceof SpellAbility) {
+                    int amount = ((SpellAbility)obj).getManaCostsToPay().getX();
+                    if (amount > 0) {
+                        permanent.addCounters(CounterType.P1P1.createInstance(amount), game);
+                    }
+                }
+            }
 			return true;
 		}
 
