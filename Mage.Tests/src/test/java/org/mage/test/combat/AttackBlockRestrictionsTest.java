@@ -51,4 +51,46 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
         Permanent crawWurm = getPermanent("Craw Wurm", playerB.getId());
         Assert.assertTrue("Should be tapped because of being blocked by Wall of Frost", crawWurm.isTapped());
     }
+
+    /**
+     * Tests card that says that it can't block specific cards
+     * Hunted Ghoul:
+     *   Hunted Ghoul can't block Humans.
+     */
+    @Test
+    public void testFilteredBlocking() {
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Hunted Ghoul");
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Elite Vanguard");
+
+        attack(2, playerB, "Elite Vanguard");
+        block(2, playerA, "Hunted Ghoul", "Elite Vanguard");
+
+        setStopAt(4, Constants.PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 18);
+        assertLife(playerB, 20);
+    }
+
+    /**
+     * Tests card that says that it can't block specific cards still can block others
+     * Hunted Ghoul:
+     *   Hunted Ghoul can't block Humans.
+     */
+    @Test
+    public void testFilteredBlocking2() {
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Hunted Ghoul");
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Craw Wurm");
+
+        attack(2, playerB, "Craw Wurm");
+        block(2, playerA, "Hunted Ghoul", "Craw Wurm");
+
+        setStopAt(4, Constants.PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertPermanentCount(playerA, "Hunted Ghoul", 0);
+    }
 }
