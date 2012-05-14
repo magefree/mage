@@ -36,7 +36,9 @@ import mage.Constants.Rarity;
 import mage.Constants.SubLayer;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.AttacksEquippedTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -62,7 +64,9 @@ public class TrepanationBlade extends CardImpl<TrepanationBlade> {
 
         // Whenever equipped creature attacks, defending player reveals cards from the top of his or her library until he or she reveals a land card.
         // The creature gets +1/+0 until end of turn for each card revealed this way. That player puts the revealed cards into his or her graveyard.
-        this.addAbility(new TrepanationBladeAbiltity());
+        Ability ability = new AttacksEquippedTriggeredAbility(new TrepanationBladeDiscardEffect());
+        ability.addEffect(new TrepanationBladeBoostEffect());
+        this.addAbility(ability);
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
     }
@@ -77,41 +81,11 @@ public class TrepanationBlade extends CardImpl<TrepanationBlade> {
     }
 }
 
-class TrepanationBladeAbiltity extends TriggeredAbilityImpl<TrepanationBladeAbiltity> {
-
-    public TrepanationBladeAbiltity() {
-        super(Zone.BATTLEFIELD, new TrepanationBladeDiscardEffect());
-        this.addEffect(new TrepanationBladeBoostEffect());
-    }
-
-    public TrepanationBladeAbiltity(final TrepanationBladeAbiltity abiltity) {
-        super(abiltity);
-    }
-
-    @Override
-    public TrepanationBladeAbiltity copy() {
-        return new TrepanationBladeAbiltity(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent equipment = game.getPermanent(this.sourceId);
-        if (equipment != null && equipment.getAttachedTo() != null && event.getType() == GameEvent.EventType.ATTACKER_DECLARED && event.getSourceId().equals(equipment.getAttachedTo())) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever equipped creature attacks, defending player reveals cards from the top of his or her library until he or she reveals a land card. The creature gets +1/+0 until end of turn for each card revealed this way. That player puts the revealed cards into his or her graveyard.";
-    }
-}
-
 class TrepanationBladeDiscardEffect extends OneShotEffect<TrepanationBladeDiscardEffect> {
 
     public TrepanationBladeDiscardEffect() {
         super(Outcome.Discard);
+        this.staticText = "defending player reveals cards from the top of his or her library until he or she reveals a land card. The creature gets +1/+0 until end of turn for each card revealed this way. That player puts the revealed cards into his or her graveyard";
     }
 
     public TrepanationBladeDiscardEffect(final TrepanationBladeDiscardEffect effect) {
@@ -159,6 +133,11 @@ class TrepanationBladeDiscardEffect extends OneShotEffect<TrepanationBladeDiscar
 
         game.getState().setValue(source.getSourceId().toString() + "_TrepanationBlade", null);
         return false;
+    }
+
+    @Override
+    public String getText(Mode mode) {
+        return super.getText(mode);    //To change body of overridden methods use File | Settings | File Templates.
     }
 }
 
