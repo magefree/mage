@@ -34,7 +34,9 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
+import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.AttacksEquippedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
@@ -56,9 +58,11 @@ public class ArgentumArmor extends CardImpl<ArgentumArmor> {
         super(ownerId, 137, "Argentum Armor", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{6}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Equipment");
-        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(6)));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(6, 6)));
-        this.addAbility(new ArgentumArmorAbiltity());
+        Ability ability = new AttacksEquippedTriggeredAbility(new DestroyTargetEffect());
+        ability.addTarget(new TargetPermanent());
+        this.addAbility(ability);
+        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(6)));
     }
 
     public ArgentumArmor (final ArgentumArmor card) {
@@ -68,35 +72,5 @@ public class ArgentumArmor extends CardImpl<ArgentumArmor> {
     @Override
     public ArgentumArmor copy() {
         return new ArgentumArmor(this);
-    }
-}
-
-class ArgentumArmorAbiltity extends TriggeredAbilityImpl<ArgentumArmorAbiltity> {
-    public ArgentumArmorAbiltity() {
-        super(Zone.BATTLEFIELD, new DestroyTargetEffect());
-        this.addTarget(new TargetPermanent());
-    }
-
-    public ArgentumArmorAbiltity(final ArgentumArmorAbiltity abiltity) {
-        super(abiltity);
-    }
-
-    @Override
-    public ArgentumArmorAbiltity copy() {
-        return new ArgentumArmorAbiltity(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent equipment = game.getPermanent(this.sourceId);
-	    if (equipment != null && equipment.getAttachedTo() != null && event.getType() == GameEvent.EventType.ATTACKER_DECLARED && event.getSourceId().equals(equipment.getAttachedTo())) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever equipped creature attacks, destroy target permanent.";
     }
 }

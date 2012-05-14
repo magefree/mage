@@ -34,6 +34,7 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.AttacksEquippedTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.EquipAbility;
@@ -57,7 +58,7 @@ public class ExplorersScope extends CardImpl<ExplorersScope> {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Equipment");
 
-        this.addAbility(new ExplorersScopeTriggeredAbiltity());
+        this.addAbility(new AttacksEquippedTriggeredAbility(new ExplorersScopeEffect()));
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
     }
 
@@ -68,38 +69,6 @@ public class ExplorersScope extends CardImpl<ExplorersScope> {
     @Override
     public ExplorersScope copy() {
         return new ExplorersScope(this);
-    }
-}
-
-class ExplorersScopeTriggeredAbiltity extends TriggeredAbilityImpl<ExplorersScopeTriggeredAbiltity> {
-
-    public ExplorersScopeTriggeredAbiltity() {
-        super(Zone.BATTLEFIELD, new ExplorersScopeEffect());
-    }
-
-    public ExplorersScopeTriggeredAbiltity(final ExplorersScopeTriggeredAbiltity abiltity) {
-        super(abiltity);
-    }
-
-    @Override
-    public ExplorersScopeTriggeredAbiltity copy() {
-        return new ExplorersScopeTriggeredAbiltity(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent equipment = game.getPermanent(this.sourceId);
-        if (equipment != null && equipment.getAttachedTo() != null
-                && event.getType() == GameEvent.EventType.ATTACKER_DECLARED
-                && event.getSourceId().equals(equipment.getAttachedTo())) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever equipped creature attacks, look at the top card of your library. If it's a land card, you may put it onto the battlefield tapped.";
     }
 }
 
