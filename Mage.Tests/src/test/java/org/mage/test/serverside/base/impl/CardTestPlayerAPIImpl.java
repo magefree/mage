@@ -1,25 +1,24 @@
 package org.mage.test.serverside.base.impl;
 
 import mage.Constants;
+import mage.Constants.CardType;
+import mage.Constants.PhaseStep;
 import mage.abilities.Ability;
 import mage.cards.Card;
+import mage.counters.CounterType;
 import mage.filter.Filter;
+import mage.game.ExileZone;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.sets.Sets;
 import org.junit.Assert;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestAPI;
 import org.mage.test.serverside.base.MageTestPlayerBase;
 
 import java.util.List;
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.PhaseStep;
-import mage.counters.Counter;
-import mage.counters.CounterType;
-import mage.game.ExileZone;
-import org.mage.test.player.TestPlayer;
 
 /**
  * API for test initialization and asserting the test results.
@@ -326,7 +325,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 		for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents(player.getId())) {
 			if (permanent.getName().equals(cardName)) {
 				found = permanent;
-                break;
+                count++;
 			}
 		}
 
