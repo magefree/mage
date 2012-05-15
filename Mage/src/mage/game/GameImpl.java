@@ -633,7 +633,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                         state.setPriorityPlayerId(player.getId());
                         while (!player.isPassed() && !player.hasLost() && !player.hasLeft() && !isPaused() && !isGameOver()) {
                             if (!resuming) {
-                                checkStateAndTriggered();
+                                if (checkStateAndTriggered()) {
+                                    applyEffects();
+                                }
                                 if (isPaused() || isGameOver()) return;
                                 // resetPassed should be called if player performs any action
                                 if (player.priority(this))
