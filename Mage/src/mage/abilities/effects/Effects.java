@@ -28,12 +28,13 @@
 
 package mage.abilities.effects;
 
+import mage.Constants.Outcome;
+import mage.abilities.Mode;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import mage.Constants.Outcome;
-import mage.abilities.Mode;
 
 /**
  *
@@ -56,7 +57,10 @@ public class Effects extends ArrayList<Effect> {
 	public String getText(Mode mode) {
 		StringBuilder sbText = new StringBuilder();
 		for (Effect effect: this) {
-			sbText.append(effect.getText(mode)).append(". ");
+            String rule = effect.getText(mode);
+            if (rule != null) {
+			    sbText.append(effect.getText(mode)).append(". ");
+            }
 		}
 		return sbText.toString();
 	}

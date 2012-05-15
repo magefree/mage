@@ -28,14 +28,15 @@
 
 package mage.abilities.effects;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.Constants.EffectType;
 import mage.Constants.Outcome;
 import mage.abilities.Mode;
 import mage.target.targetpointer.FirstTargetPointer;
 import mage.target.targetpointer.TargetPointer;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  *
@@ -77,21 +78,8 @@ public abstract class EffectImpl<T extends Effect<T>> implements Effect<T> {
 
 	@Override
 	public String getText(Mode mode) {
-		return staticText;
-//        if (staticText.equals("")) {
-//            return getDynamicText(source);
-//        } else {
-//            return staticText;
-//        }
+        return staticText;
 	}
-
-//    protected String getDynamicText(Ability source) {
-//        return "";
-//    }
-
-//    public void setStaticText(String staticText) {
-//        this.staticText = staticText;
-//    }
 
 	@Override
 	public Outcome getOutcome() {
