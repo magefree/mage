@@ -316,6 +316,18 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 	}
 
     /**
+     * See {@link #assertPowerToughness(mage.players.Player, String, int, int, mage.filter.Filter.ComparisonScope)}
+     * 
+     * @param player
+     * @param cardName
+     * @param power
+     * @param toughness
+     */
+    public void assertPowerToughness(Player player, String cardName, int power, int toughness) {
+        assertPowerToughness(player, cardName, power, toughness, Filter.ComparisonScope.Any);
+    }
+
+    /**
      * {@inheritDoc}
      */
     public void assertAbilities(Player player, String cardName, List<Ability> abilities)
