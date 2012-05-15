@@ -1,7 +1,5 @@
 package org.mage.test.serverside.base;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import mage.Constants;
 import mage.Constants.PhaseStep;
 import mage.cards.Card;
@@ -18,6 +16,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 
 /**
  * Base class for testing single cards and effects.
@@ -47,7 +48,7 @@ public abstract class CardTestPlayerBase extends CardTestPlayerAPIImpl {
 	@Before
 	public void reset() throws GameException, FileNotFoundException {
 		if (currentGame != null) {
-			logger.info("Resetting previous game and creating new one!");
+			logger.debug("Resetting previous game and creating new one!");
 			currentGame = null;
 			System.gc();
 		}
@@ -56,9 +57,9 @@ public abstract class CardTestPlayerBase extends CardTestPlayerAPIImpl {
 
 		playerA = createNewPlayer("PlayerA");
 		playerA.setTestMode(true);
-        logger.info("Loading deck...");
+        logger.debug("Loading deck...");
 		Deck deck = Deck.load(DeckImporterUtil.importDeck("RB Aggro.dck"));
-        logger.info("Done!");
+        logger.debug("Done!");
 		if (deck.getCards().size() < 40) {
 			throw new IllegalArgumentException("Couldn't load deck, deck size=" + deck.getCards().size());
 		}
@@ -103,7 +104,7 @@ public abstract class CardTestPlayerBase extends CardTestPlayerAPIImpl {
 		}
 
 		if (currentGame != null) {
-			logger.info("Resetting previous game and creating new one!");
+			logger.debug("Resetting previous game and creating new one!");
 			currentGame = null;
 			System.gc();
 		}
@@ -159,8 +160,8 @@ public abstract class CardTestPlayerBase extends CardTestPlayerAPIImpl {
         gameOptions.stopAtStep = stopAtStep;
 		currentGame.start(activePlayer.getId(), gameOptions);
 		long t2 = System.nanoTime();
-		logger.info("Winner: " + currentGame.getWinner());
-		logger.info("Time: " + (t2 - t1) / 1000000 + " ms");
+		logger.debug("Winner: " + currentGame.getWinner());
+		logger.info("Test has been executed. Execution time: " + (t2 - t1) / 1000000 + " ms");
 
 		assertTheResults();
 	}
@@ -169,7 +170,7 @@ public abstract class CardTestPlayerBase extends CardTestPlayerAPIImpl {
 	 * Assert expected and actual results.
 	 */
 	private void assertTheResults() {
-		logger.info("Matching expected results:");
+		logger.debug("Matching expected results:");
 		for (String line : expectedResults) {
 			boolean ok = false;
 			try {

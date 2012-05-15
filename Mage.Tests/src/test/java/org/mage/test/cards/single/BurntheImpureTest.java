@@ -12,6 +12,7 @@ import org.mage.test.serverside.base.CardTestBase;
  *
  * @ayratn
  */
+@Ignore
 public class BurntheImpureTest extends CardTestBase {
 
 	/**
@@ -25,7 +26,6 @@ public class BurntheImpureTest extends CardTestBase {
 	 * @throws Exception
 	 */
 	@Test
-    @Ignore
 	public void testVersusInfectCreature() throws Exception {
 		// $include red.default
 		useRedDefault();

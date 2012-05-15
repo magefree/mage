@@ -1,16 +1,14 @@
 package org.mage.test.serverside.base;
 
 import mage.Constants;
+import mage.Constants.PhaseStep;
 import mage.cards.Card;
 import mage.game.Game;
 import mage.game.match.MatchType;
 import mage.game.permanent.PermanentCard;
 import mage.game.tournament.TournamentType;
 import mage.players.Player;
-import mage.server.game.DeckValidatorFactory;
 import mage.server.game.GameFactory;
-import mage.server.game.PlayerFactory;
-import mage.server.tournament.TournamentFactory;
 import mage.server.util.ConfigSettings;
 import mage.server.util.PluginClassLoader;
 import mage.server.util.config.GamePlugin;
@@ -20,6 +18,7 @@ import mage.util.Copier;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.junit.BeforeClass;
+import org.mage.test.player.TestPlayer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,8 +26,6 @@ import java.io.FilenameFilter;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import mage.Constants.PhaseStep;
-import org.mage.test.player.TestPlayer;
 
 /**
  * Base class for all tests.
@@ -101,8 +98,8 @@ public abstract class MageTestPlayerBase {
 	@BeforeClass
 	public static void init() {
 		Logger.getRootLogger().setLevel(Level.DEBUG);
-		logger.info("Starting MAGE tests");
-		logger.info("Logging level: " + logger.getLevel());
+		logger.debug("Starting MAGE tests");
+		logger.debug("Logging level: " + logger.getLevel());
 		deleteSavedGames();
 		ConfigSettings config = ConfigSettings.getInstance();
 		for (GamePlugin plugin : config.getGameTypes()) {
