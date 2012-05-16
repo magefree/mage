@@ -39,6 +39,7 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -48,6 +49,11 @@ import mage.util.CardUtil;
  * @author Loki
  */
 public class Cryptoplasm extends CardImpl<Cryptoplasm> {
+    final static FilterCreaturePermanent filter = new FilterCreaturePermanent();
+
+    static {
+        filter.setAnother(true);
+    }
 
     public Cryptoplasm(UUID ownerId) {
         super(ownerId, 23, "Cryptoplasm", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
@@ -57,7 +63,7 @@ public class Cryptoplasm extends CardImpl<Cryptoplasm> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new CryptoplasmTransformEffect(), Constants.TargetController.YOU, true);
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
 
