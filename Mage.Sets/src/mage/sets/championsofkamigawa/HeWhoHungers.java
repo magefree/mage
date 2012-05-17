@@ -33,10 +33,6 @@ package mage.sets.championsofkamigawa;
  */
 
 
-import java.util.UUID;
-
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
@@ -45,19 +41,16 @@ import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetOpponentEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.SoulshiftAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  * @author LevelX
@@ -85,8 +78,8 @@ public class HeWhoHungers extends CardImpl<HeWhoHungers> {
         
         /* {1}, Sacrifice a Spirit: Target opponent reveals his or her hand. You choose a card from it. 
          * That player discards that card. Activate this ability only any time you could cast a sorcery. */
-        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new HeWhoHungersEffect(), new ManaCostsImpl("{1}"));
-        ability.addTarget(new TargetOpponent());
+        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DiscardCardYouChooseTargetOpponentEffect(), new ManaCostsImpl("{1}"));
+        ability.addTarget(new TargetOpponent(true));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);
         
@@ -102,43 +95,5 @@ public class HeWhoHungers extends CardImpl<HeWhoHungers> {
     public HeWhoHungers copy() {
         return new HeWhoHungers(this);
     }
-
-}
-
-class HeWhoHungersEffect extends OneShotEffect<HeWhoHungersEffect> {
-
-	public HeWhoHungersEffect() {
-		super(Constants.Outcome.Discard);
-		staticText = "Target opponent reveals his or her hand. You choose a card from it. That player discards that card";
-	}
-
-	public HeWhoHungersEffect(final HeWhoHungersEffect effect) {
-		super(effect);
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getFirstTarget());
-		if (player != null) {
-			player.revealCards("He Who Hungers", player.getHand(), game);
-			Player you = game.getPlayer(source.getControllerId());
-			if (you != null) {
-				TargetCard target = new TargetCard(Constants.Zone.PICK, new FilterCard());
-                                target.setRequired(true);
-				if (you.choose(Constants.Outcome.Benefit, player.getHand(), target, game)) {
-					Card card = player.getHand().get(target.getFirstTarget(), game);
-					if (card != null) {
-						return player.discard(card, source, game);
-					}
-				}
-			}
-		}
-		return false;
-	}
-
-	@Override
-	public HeWhoHungersEffect copy() {
-		return new HeWhoHungersEffect(this);
-	}
 
 }

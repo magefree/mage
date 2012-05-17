@@ -5,6 +5,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.target.targetpointer.FirstTargetPointer;
 import mage.target.targetpointer.FixedTarget;
 
 public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl<BeginningOfUpkeepTriggeredAbility> {
@@ -37,21 +38,27 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl<Begi
                     boolean yours = event.getPlayerId().equals(this.controllerId);
                     if (yours) {
                         for (Effect effect : this.getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+                            if (effect.getTargetPointer().equals(FirstTargetPointer.getInstance())) {
+                                effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+                            }
                         }
                     }
                     return yours;
                 case OPPONENT:
                     if (game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
                         for (Effect effect : this.getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+                            if (effect.getTargetPointer().equals(FirstTargetPointer.getInstance())) {
+                                effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+                            }
                         }
                         return true;
                     }
 		    break;
                 case ANY:
                     for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+                        if (effect.getTargetPointer().equals(FirstTargetPointer.getInstance())) {
+                            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+                        }
                     }
                     return true;
             }

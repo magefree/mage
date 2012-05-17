@@ -26,51 +26,50 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.target.common;
+package mage.abilities.effects.common;
 
+import mage.Constants.Outcome;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.game.Game;
-import mage.target.TargetPlayer;
-
-import java.util.UUID;
+import mage.game.permanent.Permanent;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author noxx
  */
-public class TargetOpponent extends TargetPlayer<TargetOpponent> {
+public class ReturnToBattlefieldUnderYourControlAttachedEffect extends OneShotEffect<ReturnToBattlefieldUnderYourControlAttachedEffect> {
 
-	public TargetOpponent() {
-		this(false);
+	public ReturnToBattlefieldUnderYourControlAttachedEffect() {
+		super(Outcome.Benefit);
+        staticText = "return that card to the battlefield under your control";
 	}
 
-    public TargetOpponent(boolean required) {
-        super();
-        this.targetName = "opponent";
-        setRequired(required);
-    }
-
-	public TargetOpponent(final TargetOpponent target) {
-		super(target);
-	}
-	
-	@Override
-	public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-		filter.getPlayerId().clear();
-		filter.getPlayerId().addAll(game.getOpponents(sourceControllerId));
-		return super.canChoose(sourceId, sourceControllerId, game);
-	}
-	
-	@Override
-	public boolean canTarget(UUID id, Ability source, Game game) {
-		filter.getPlayerId().clear();
-		filter.getPlayerId().addAll(game.getOpponents(source.getControllerId()));
-		return super.canTarget(id, source, game);
+	public ReturnToBattlefieldUnderYourControlAttachedEffect(final ReturnToBattlefieldUnderYourControlAttachedEffect effect) {
+		super(effect);
 	}
 
 	@Override
-	public TargetOpponent copy() {
-		return new TargetOpponent(this);
+	public ReturnToBattlefieldUnderYourControlAttachedEffect copy() {
+		return new ReturnToBattlefieldUnderYourControlAttachedEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+        Object object = getValue("attachedTo");
+        if (object != null && object instanceof Permanent) {
+            Card card = game.getCard(((Permanent)object).getId());
+            if (card != null) {
+                Zone currentZone = game.getState().getZone(card.getId());
+                if (card.putOntoBattlefield(game, currentZone, source.getId(), source.getControllerId())) {
+                    return true;
+                }
+            }
+        }
+
+		return false;
 	}
 
 }

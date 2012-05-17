@@ -26,51 +26,45 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.target.common;
+package mage.abilities.effects.common;
 
+import mage.Constants.Outcome;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.game.Game;
-import mage.target.TargetPlayer;
-
-import java.util.UUID;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author noxx
  */
-public class TargetOpponent extends TargetPlayer<TargetOpponent> {
+public class ReturnToBattlefieldUnderYourControlSourceEffect extends OneShotEffect<ReturnToBattlefieldUnderYourControlSourceEffect> {
 
-	public TargetOpponent() {
-		this(false);
+	public ReturnToBattlefieldUnderYourControlSourceEffect() {
+		super(Outcome.Benefit);
+        staticText = "return that card to the battlefield under your control";
 	}
 
-    public TargetOpponent(boolean required) {
-        super();
-        this.targetName = "opponent";
-        setRequired(required);
-    }
-
-	public TargetOpponent(final TargetOpponent target) {
-		super(target);
-	}
-	
-	@Override
-	public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-		filter.getPlayerId().clear();
-		filter.getPlayerId().addAll(game.getOpponents(sourceControllerId));
-		return super.canChoose(sourceId, sourceControllerId, game);
-	}
-	
-	@Override
-	public boolean canTarget(UUID id, Ability source, Game game) {
-		filter.getPlayerId().clear();
-		filter.getPlayerId().addAll(game.getOpponents(source.getControllerId()));
-		return super.canTarget(id, source, game);
+	public ReturnToBattlefieldUnderYourControlSourceEffect(final ReturnToBattlefieldUnderYourControlSourceEffect effect) {
+		super(effect);
 	}
 
 	@Override
-	public TargetOpponent copy() {
-		return new TargetOpponent(this);
+	public ReturnToBattlefieldUnderYourControlSourceEffect copy() {
+		return new ReturnToBattlefieldUnderYourControlSourceEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+        Card card = game.getCard(source.getSourceId());
+        if (card != null) {
+            Zone currentZone = game.getState().getZone(card.getId());
+            if (card.putOntoBattlefield(game, currentZone, source.getId(), source.getControllerId())) {
+                return true;
+            }
+        }
+		return false;
 	}
 
 }

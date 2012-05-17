@@ -1,16 +1,16 @@
 /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- * 
+ *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
- * 
+ *
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
- * 
+ *
  *     2. Redistributions in binary form must reproduce the above copyright notice, this list
  *        of conditions and the following disclaimer in the documentation and/or other materials
  *        provided with the distribution.
- * 
+ *
  *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
@@ -20,57 +20,60 @@
  *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.abilities.effects.common.discard;
 
-package mage.target.common;
-
+import mage.Constants;
 import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
+import mage.filter.FilterCard;
 import mage.game.Game;
-import mage.target.TargetPlayer;
-
-import java.util.UUID;
+import mage.players.Player;
+import mage.target.TargetCard;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author noxx
  */
-public class TargetOpponent extends TargetPlayer<TargetOpponent> {
+public class DiscardCardYouChooseTargetOpponentEffect extends OneShotEffect<DiscardCardYouChooseTargetOpponentEffect> {
 
-	public TargetOpponent() {
-		this(false);
+	public DiscardCardYouChooseTargetOpponentEffect() {
+		super(Constants.Outcome.Discard);
+		staticText = "Target opponent reveals his or her hand. You choose a card from it. That player discards that card";
 	}
 
-    public TargetOpponent(boolean required) {
-        super();
-        this.targetName = "opponent";
-        setRequired(required);
-    }
-
-	public TargetOpponent(final TargetOpponent target) {
-		super(target);
-	}
-	
-	@Override
-	public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-		filter.getPlayerId().clear();
-		filter.getPlayerId().addAll(game.getOpponents(sourceControllerId));
-		return super.canChoose(sourceId, sourceControllerId, game);
-	}
-	
-	@Override
-	public boolean canTarget(UUID id, Ability source, Game game) {
-		filter.getPlayerId().clear();
-		filter.getPlayerId().addAll(game.getOpponents(source.getControllerId()));
-		return super.canTarget(id, source, game);
+	public DiscardCardYouChooseTargetOpponentEffect(final DiscardCardYouChooseTargetOpponentEffect effect) {
+		super(effect);
 	}
 
 	@Override
-	public TargetOpponent copy() {
-		return new TargetOpponent(this);
+	public boolean apply(Game game, Ability source) {
+		Player player = game.getPlayer(source.getFirstTarget());
+		if (player != null) {
+			player.revealCards("Discard", player.getHand(), game);
+			Player you = game.getPlayer(source.getControllerId());
+			if (you != null) {
+				TargetCard target = new TargetCard(Constants.Zone.PICK, new FilterCard());
+                                target.setRequired(true);
+				if (you.choose(Constants.Outcome.Benefit, player.getHand(), target, game)) {
+					Card card = player.getHand().get(target.getFirstTarget(), game);
+					if (card != null) {
+						return player.discard(card, source, game);
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public DiscardCardYouChooseTargetOpponentEffect copy() {
+		return new DiscardCardYouChooseTargetOpponentEffect(this);
 	}
 
 }

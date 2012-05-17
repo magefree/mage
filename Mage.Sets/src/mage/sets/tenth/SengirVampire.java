@@ -55,7 +55,7 @@ public class SengirVampire extends CardImpl<SengirVampire> {
 		this.addAbility(FlyingAbility.getInstance());
 
 		// Whenever a creature dealt damage by Sengir Vampire this turn dies, put a +1/+1 counter on Sengir Vampire.
-		this.addAbility(new DiesAndDealtDamageThisTurnTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
+		this.addAbility(new DiesAndDealtDamageThisTurnTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
 	}
 
 	public SengirVampire(final SengirVampire card) {

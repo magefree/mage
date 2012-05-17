@@ -27,22 +27,15 @@
  */
 package mage.sets.magic2010;
 
-import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DealsDamageToOpponentTriggeredAbility;
+import mage.abilities.effects.common.DiscardTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -60,8 +53,9 @@ public class HypnoticSpecter extends CardImpl<HypnoticSpecter> {
         this.toughness = new MageInt(2);
 
         this.addAbility(FlyingAbility.getInstance());
+
         // Whenever Hypnotic Specter deals damage to an opponent, that player discards a card at random.
-        this.addAbility(new HypnoticSpecterTriggeredAbility());
+        this.addAbility(new DealsDamageToOpponentTriggeredAbility(new DiscardTargetEffect(1, true)));
     }
 
     public HypnoticSpecter(final HypnoticSpecter card) {
@@ -71,65 +65,5 @@ public class HypnoticSpecter extends CardImpl<HypnoticSpecter> {
     @Override
     public HypnoticSpecter copy() {
         return new HypnoticSpecter(this);
-    }
-}
-
-class HypnoticSpecterTriggeredAbility extends TriggeredAbilityImpl<HypnoticSpecterTriggeredAbility> {
-
-    public HypnoticSpecterTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new HypnoticSpecterEffect());
-    }
-
-    public HypnoticSpecterTriggeredAbility(final HypnoticSpecterTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public HypnoticSpecterTriggeredAbility copy() {
-        return new HypnoticSpecterTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER && event.getSourceId().equals(this.sourceId)
-                && game.getOpponents(this.getControllerId()).contains(event.getTargetId())) {
-            this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} deals damage to an opponent, that player discards a card at random.";
-    }
-}
-
-class HypnoticSpecterEffect extends OneShotEffect<HypnoticSpecterEffect> {
-
-    public HypnoticSpecterEffect() {
-        super(Outcome.Discard);
-    }
-
-    public HypnoticSpecterEffect(final HypnoticSpecterEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public HypnoticSpecterEffect copy() {
-        return new HypnoticSpecterEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(source));
-        if (player != null && !player.getHand().isEmpty()) {
-            Card card = player.getHand().getRandom(game);
-            if (card != null) {
-                player.discard(card, source, game);
-                return true;
-            }
-        }
-        return false;
     }
 }

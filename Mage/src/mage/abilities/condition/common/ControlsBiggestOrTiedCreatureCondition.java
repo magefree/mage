@@ -29,46 +29,39 @@ package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- * Describes condition when equipped permanent has subType
+ * Condition for:
+ *   - if you control the creature with the greatest power or tied for the greatest power
  *
- * @author nantuko
+ * @author noxx
  */
-public class EquippedHasSubtypeCondition implements Condition {
+public class ControlsBiggestOrTiedCreatureCondition implements Condition {
 
-    private String subType;
-    private String[] subTypes; // scope = Any
+    private static ControlsBiggestOrTiedCreatureCondition fInstance = new ControlsBiggestOrTiedCreatureCondition();
 
-    public EquippedHasSubtypeCondition(String subType) {
-        this.subType = subType;
-    }
+	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
-    public EquippedHasSubtypeCondition(String... subTypes) {
-        this.subTypes = subTypes;
+    public static Condition getInstance() {
+        return fInstance;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
-		if (permanent != null && permanent.getAttachedTo() != null) {
-            Permanent attachedTo = game.getBattlefield().getPermanent(permanent.getAttachedTo());
-            if (attachedTo != null) {
-                if (subType != null) {
-                    if (attachedTo.hasSubtype(this.subType)) {
-                        return true;
-                    }
-                } else {
-                    for (String s : subTypes) {
-                        if (attachedTo.hasSubtype(s)) {
-                            return true;
-                        }
-                    }
-                }
+        Set<UUID> controllers = new HashSet<UUID>();
+        int maxPower = -1;
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
+            if (maxPower == -1 || permanent.getPower().getValue() >= maxPower) {
+                controllers.add(permanent.getControllerId());
             }
-		}
-		return false;
+        }
+        return controllers.contains(source.getControllerId());
     }
 }

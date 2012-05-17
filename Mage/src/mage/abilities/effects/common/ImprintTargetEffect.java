@@ -32,61 +32,49 @@ import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.Target;
-
-import java.util.UUID;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ *
+ * @author noxx
  */
-public class TapTargetEffect extends OneShotEffect<TapTargetEffect> {
+public class ImprintTargetEffect extends OneShotEffect<ImprintTargetEffect> {
 
-    public TapTargetEffect() {
-        super(Outcome.Tap);
-    }
+	public ImprintTargetEffect() {
+		super(Outcome.Neutral);
+	}
 
-    public TapTargetEffect(String text) {
-        this();
-        this.staticText = text;
-    }
-
-    public TapTargetEffect(final TapTargetEffect effect) {
-        super(effect);
-    }
+	public ImprintTargetEffect(final ImprintTargetEffect effect) {
+		super(effect);
+	}
 
     @Override
-    public TapTargetEffect copy() {
-        return new TapTargetEffect(this);
-    }
+	public ImprintTargetEffect copy() {
+		return new ImprintTargetEffect(this);
+	}
 
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (UUID target : targetPointer.getTargets(source)) {
-            Permanent permanent = game.getPermanent(target);
+	@Override
+	public boolean apply(Game game, Ability source) {
+        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        if (sourcePermanent != null) {
+            Permanent permanent = game.getPermanent(targetPointer.getFirst(source));
             if (permanent != null) {
-                permanent.tap(game);
+                sourcePermanent.imprint(permanent.getId(), game);
             } else {
-                return false;
+                Card card = game.getCard(targetPointer.getFirst(source));
+                if (card != null) {
+                    sourcePermanent.imprint(card.getId(), game);
+                }
             }
         }
+
         return true;
-    }
+	}
 
     @Override
     public String getText(Mode mode) {
-        if (staticText.length() > 0)
-            return "tap " + staticText;
-
-        Target target = mode.getTargets().get(0);
-        if (target.getMaxNumberOfTargets() > 1)
-            if (target.getMaxNumberOfTargets() == target.getNumberOfTargets())
-                return "tap " + target.getNumberOfTargets() + " target " + target.getTargetName() + "s";
-            else
-                return "tap up to " + target.getMaxNumberOfTargets() + " target " + target.getTargetName() + "s";
-        else
-            return "tap target " + mode.getTargets().get(0).getTargetName();
+        return null;
     }
-
 }

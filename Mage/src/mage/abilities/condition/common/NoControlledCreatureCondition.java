@@ -29,46 +29,24 @@ package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
- * Describes condition when equipped permanent has subType
- *
- * @author nantuko
+ * @author noxx
  */
-public class EquippedHasSubtypeCondition implements Condition {
+public class NoControlledCreatureCondition implements Condition {
 
-    private String subType;
-    private String[] subTypes; // scope = Any
+    private static NoControlledCreatureCondition fInstance = new NoControlledCreatureCondition();
 
-    public EquippedHasSubtypeCondition(String subType) {
-        this.subType = subType;
-    }
+	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
-    public EquippedHasSubtypeCondition(String... subTypes) {
-        this.subTypes = subTypes;
+    public static Condition getInstance() {
+        return fInstance;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
-		if (permanent != null && permanent.getAttachedTo() != null) {
-            Permanent attachedTo = game.getBattlefield().getPermanent(permanent.getAttachedTo());
-            if (attachedTo != null) {
-                if (subType != null) {
-                    if (attachedTo.hasSubtype(this.subType)) {
-                        return true;
-                    }
-                } else {
-                    for (String s : subTypes) {
-                        if (attachedTo.hasSubtype(s)) {
-                            return true;
-                        }
-                    }
-                }
-            }
-		}
-		return false;
+		return game.getBattlefield().countAll(filter, source.getControllerId()) == 0;
     }
 }

@@ -28,21 +28,15 @@
 
 package mage.game.permanent;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.RangeOfInfluence;
 import mage.abilities.keyword.PhasingAbility;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
-import mage.game.events.GameEvent;
+
+import java.io.Serializable;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  *
@@ -137,6 +131,26 @@ public class Battlefield implements Serializable {
 		}
 		return count;
 	}
+
+    public int count(FilterPermanent filter, UUID sourceId, UUID sourcePlayerId, Game game) {
+        int count = 0;
+        if (game.getRangeOfInfluence() == RangeOfInfluence.ALL) {
+            for (Permanent permanent: field.values()) {
+                if (filter.match(permanent, sourceId, sourcePlayerId, game)) {
+                    count++;
+                }
+            }
+        }
+        else {
+            Set<UUID> range = game.getPlayer(sourcePlayerId).getInRange();
+            for (Permanent permanent: field.values()) {
+                if (range.contains(permanent.getControllerId()) && filter.match(permanent, sourceId, sourcePlayerId, game)) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
 
 	/**
 	 * Returns true if the battlefield contains at least 1 {@link Permanent}

@@ -34,8 +34,12 @@ public class DiesAttachedTriggeredAbility extends TriggeredAbilityImpl<DiesAttac
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
             Permanent p = (Permanent) game.getLastKnownInformation(event.getTargetId(), Constants.Zone.BATTLEFIELD);
-            if (p.getAttachments().contains(this.getSourceId()))
+            if (p.getAttachments().contains(this.getSourceId())) {
+                for (Effect effect : getEffects()) {
+                    effect.setValue("attachedTo", p);
+                }
                 return true;
+            }
 		}
 		return false;
     }

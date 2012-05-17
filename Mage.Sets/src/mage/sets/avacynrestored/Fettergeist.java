@@ -81,6 +81,10 @@ class FettergeistUnlessPaysEffect extends OneShotEffect<FettergeistUnlessPaysEff
 
     private static FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
+    static {
+        filter.setAnother(true);
+    }
+
     public FettergeistUnlessPaysEffect() {
         super(Constants.Outcome.Sacrifice);
         staticText = "sacrifice {this} unless you pay {1} for each other creature you control.";

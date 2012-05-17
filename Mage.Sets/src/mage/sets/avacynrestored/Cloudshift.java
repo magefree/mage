@@ -27,18 +27,18 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants.Zone;
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.abilities.effects.common.ExileTargetForSourceEffect;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.abilities.effects.common.ExileTargetForSourceEffect;
-import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
+
+import java.util.UUID;
 
 /**
  *
- * @author jeffwadsworth
+ * @author noxx
  */
 public class Cloudshift extends CardImpl<Cloudshift> {
 
@@ -51,7 +51,7 @@ public class Cloudshift extends CardImpl<Cloudshift> {
         // Exile target creature you control, then return that card to the battlefield under your control.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addEffect(new ExileTargetForSourceEffect("Cloudshift exile"));
-        this.getSpellAbility().addEffect(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD));
+        this.getSpellAbility().addEffect(new ReturnToBattlefieldUnderYourControlTargetEffect());
     }
 
     public Cloudshift(final Cloudshift card) {

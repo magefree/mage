@@ -1,16 +1,16 @@
 /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- * 
+ *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
- * 
+ *
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
- * 
+ *
  *     2. Redistributions in binary form must reproduce the above copyright notice, this list
  *        of conditions and the following disclaimer in the documentation and/or other materials
  *        provided with the distribution.
- * 
+ *
  *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
@@ -20,79 +20,56 @@
  *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.avacynrestored;
 
-package mage.sets.magic2011;
-
-import mage.Constants.*;
+import mage.Constants;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.OnEventTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.common.DamageControllerEffect;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetOpponentEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
 
 /**
- *
- * @author BetaSteward_at_googlemail.com
+ * @author noxx
  */
-public class JinxedIdol extends CardImpl<JinxedIdol> {
+public class CorpseTraders extends CardImpl<CorpseTraders> {
 
-	public JinxedIdol(UUID ownerId) {
-		super(ownerId, 208, "Jinxed Idol", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
-		this.expansionSetCode = "M11";
-		this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new DamageControllerEffect(2)));
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new JinxedIdolEffect(), new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
-		ability.addTarget(new TargetOpponent());
-		this.addAbility(ability);
-	}
+    public CorpseTraders(UUID ownerId) {
+        super(ownerId, 90, "Corpse Traders", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
+        this.expansionSetCode = "AVR";
+        this.subtype.add("Human");
+        this.subtype.add("Rogue");
 
-	public JinxedIdol(final JinxedIdol card) {
-		super(card);
-	}
+        this.color.setBlack(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-	@Override
-	public JinxedIdol copy() {
-		return new JinxedIdol(this);
-	}
+        // {2}{B}, Sacrifice a creature: Target opponent reveals his or her hand. You choose a card from it. That player discards that card. Activate this ability only any time you could cast a sorcery.
+        Ability ability = new ActivateAsSorceryActivatedAbility(Constants.Zone.BATTLEFIELD, new DiscardCardYouChooseTargetOpponentEffect(), new ManaCostsImpl("{2}{B}"));
+        ability.addTarget(new TargetOpponent(true));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        this.addAbility(ability);
+    }
 
-}
+    public CorpseTraders(final CorpseTraders card) {
+        super(card);
+    }
 
-class JinxedIdolEffect extends ContinuousEffectImpl<JinxedIdolEffect> {
-
-	public JinxedIdolEffect() {
-		super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
-		staticText = "Target opponent gains control of {this}";
-	}
-
-	public JinxedIdolEffect(final JinxedIdolEffect effect) {
-		super(effect);
-	}
-
-	@Override
-	public JinxedIdolEffect copy() {
-		return new JinxedIdolEffect(this);
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getSourceId());
-		if (permanent != null) {
-			return permanent.changeControllerId(source.getFirstTarget(), game);
-		}
-		return false;
-	}
-
+    @Override
+    public CorpseTraders copy() {
+        return new CorpseTraders(this);
+    }
 }

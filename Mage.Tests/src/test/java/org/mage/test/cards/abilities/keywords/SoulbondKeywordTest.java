@@ -5,6 +5,7 @@ import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.filter.Filter;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -347,5 +348,10 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         abilities.add(LifelinkAbility.getInstance());
         assertAbilities(playerA, "Nearheath Pilgrim", abilities);
         assertAbilities(playerA, "Elite Vanguard", abilities);
+    }
+
+    public void testExileAndReturnBack() {
+        //TODO: Soulbond + Soulshift
+        Assert.assertTrue(false);
     }
 }
