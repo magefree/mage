@@ -32,7 +32,8 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.BoostPairedEffect;
+import mage.abilities.effects.common.continious.GainAbilityPairedEffect;
+import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.SoulbondAbility;
 import mage.cards.CardImpl;
 
@@ -41,33 +42,33 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class TrustedForcemage extends CardImpl<TrustedForcemage> {
+public class NearheathPilgrim extends CardImpl<NearheathPilgrim> {
 
-    private static final String ruleText = "As long as {this} is paired with another creature, each of those creatures gets +1/+1";
-    
-    public TrustedForcemage(UUID ownerId) {
-        super(ownerId, 199, "Trusted Forcemage", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
+    private static final String ruleText = "As long as {this} is paired with another creature, both creatures have lifelink";
+
+    public NearheathPilgrim(UUID ownerId) {
+        super(ownerId, 31, "Nearheath Pilgrim", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.expansionSetCode = "AVR";
         this.subtype.add("Human");
-        this.subtype.add("Shaman");
+        this.subtype.add("Cleric");
 
-        this.color.setGreen(true);
+        this.color.setWhite(true);
         this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        this.toughness = new MageInt(1);
 
         // Soulbond
         this.addAbility(SoulbondAbility.getInstance());
 
-        // As long as Trusted Forcemage is paired with another creature, each of those creatures gets +1/+1.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostPairedEffect(1, 1, ruleText)));
+        // As long as Nearheath Pilgrim is paired with another creature, both creatures have lifelink.
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityPairedEffect(LifelinkAbility.getInstance(), ruleText)));
     }
 
-    public TrustedForcemage(final TrustedForcemage card) {
+    public NearheathPilgrim(final NearheathPilgrim card) {
         super(card);
     }
 
     @Override
-    public TrustedForcemage copy() {
-        return new TrustedForcemage(this);
+    public NearheathPilgrim copy() {
+        return new NearheathPilgrim(this);
     }
 }

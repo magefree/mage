@@ -32,8 +32,9 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.BoostPairedEffect;
+import mage.abilities.effects.common.continious.GainAbilityPairedEffect;
 import mage.abilities.keyword.SoulbondAbility;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 
 import java.util.UUID;
@@ -41,33 +42,33 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class TrustedForcemage extends CardImpl<TrustedForcemage> {
+public class SpectralGateguards extends CardImpl<SpectralGateguards> {
 
-    private static final String ruleText = "As long as {this} is paired with another creature, each of those creatures gets +1/+1";
-    
-    public TrustedForcemage(UUID ownerId) {
-        super(ownerId, 199, "Trusted Forcemage", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
+    private static final String ruleText = "As long as {this} is paired with another creature, both creatures have vigilance";
+
+    public SpectralGateguards(UUID ownerId) {
+        super(ownerId, 37, "Spectral Gateguards", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");
         this.expansionSetCode = "AVR";
-        this.subtype.add("Human");
-        this.subtype.add("Shaman");
+        this.subtype.add("Spirit");
+        this.subtype.add("Soldier");
 
-        this.color.setGreen(true);
+        this.color.setWhite(true);
         this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        this.toughness = new MageInt(5);
 
         // Soulbond
         this.addAbility(SoulbondAbility.getInstance());
 
-        // As long as Trusted Forcemage is paired with another creature, each of those creatures gets +1/+1.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostPairedEffect(1, 1, ruleText)));
+        // As long as Spectral Gateguards is paired with another creature, both creatures have vigilance.
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityPairedEffect(VigilanceAbility.getInstance(), ruleText)));
     }
 
-    public TrustedForcemage(final TrustedForcemage card) {
+    public SpectralGateguards(final SpectralGateguards card) {
         super(card);
     }
 
     @Override
-    public TrustedForcemage copy() {
-        return new TrustedForcemage(this);
+    public SpectralGateguards copy() {
+        return new SpectralGateguards(this);
     }
 }

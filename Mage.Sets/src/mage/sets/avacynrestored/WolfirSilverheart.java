@@ -41,33 +41,33 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class TrustedForcemage extends CardImpl<TrustedForcemage> {
+public class WolfirSilverheart extends CardImpl<WolfirSilverheart> {
 
-    private static final String ruleText = "As long as {this} is paired with another creature, each of those creatures gets +1/+1";
-    
-    public TrustedForcemage(UUID ownerId) {
-        super(ownerId, 199, "Trusted Forcemage", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
+    private static final String ruleText = "As long as {this} is paired with another creature, each of those creatures gets +4/+4";
+
+    public WolfirSilverheart(UUID ownerId) {
+        super(ownerId, 206, "Wolfir Silverheart", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
         this.expansionSetCode = "AVR";
-        this.subtype.add("Human");
-        this.subtype.add("Shaman");
+        this.subtype.add("Wolf");
+        this.subtype.add("Warrior");
 
         this.color.setGreen(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
         // Soulbond
         this.addAbility(SoulbondAbility.getInstance());
 
-        // As long as Trusted Forcemage is paired with another creature, each of those creatures gets +1/+1.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostPairedEffect(1, 1, ruleText)));
+        // As long as Wolfir Silverheart is paired with another creature, each of those creatures gets +4/+4.
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostPairedEffect(4, 4, ruleText)));
     }
 
-    public TrustedForcemage(final TrustedForcemage card) {
+    public WolfirSilverheart(final WolfirSilverheart card) {
         super(card);
     }
 
     @Override
-    public TrustedForcemage copy() {
-        return new TrustedForcemage(this);
+    public WolfirSilverheart copy() {
+        return new WolfirSilverheart(this);
     }
 }

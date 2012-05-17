@@ -32,7 +32,8 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.BoostPairedEffect;
+import mage.abilities.effects.common.continious.GainAbilityPairedEffect;
+import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.SoulbondAbility;
 import mage.cards.CardImpl;
 
@@ -41,33 +42,33 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class TrustedForcemage extends CardImpl<TrustedForcemage> {
+public class SilverbladePaladin extends CardImpl<SilverbladePaladin> {
 
-    private static final String ruleText = "As long as {this} is paired with another creature, each of those creatures gets +1/+1";
-    
-    public TrustedForcemage(UUID ownerId) {
-        super(ownerId, 199, "Trusted Forcemage", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
+    private static final String ruleText = "As long as {this} is paired with another creature, both creatures have double strike";
+
+    public SilverbladePaladin(UUID ownerId) {
+        super(ownerId, 36, "Silverblade Paladin", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
         this.expansionSetCode = "AVR";
         this.subtype.add("Human");
-        this.subtype.add("Shaman");
+        this.subtype.add("Knight");
 
-        this.color.setGreen(true);
+        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         // Soulbond
         this.addAbility(SoulbondAbility.getInstance());
 
-        // As long as Trusted Forcemage is paired with another creature, each of those creatures gets +1/+1.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostPairedEffect(1, 1, ruleText)));
+        // As long as Silverblade Paladin is paired with another creature, both creatures have double strike.
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityPairedEffect(DoubleStrikeAbility.getInstance(), ruleText)));
     }
 
-    public TrustedForcemage(final TrustedForcemage card) {
+    public SilverbladePaladin(final SilverbladePaladin card) {
         super(card);
     }
 
     @Override
-    public TrustedForcemage copy() {
-        return new TrustedForcemage(this);
+    public SilverbladePaladin copy() {
+        return new SilverbladePaladin(this);
     }
 }

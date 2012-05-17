@@ -32,42 +32,45 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.BoostPairedEffect;
+import mage.abilities.effects.common.continious.GainAbilityPairedEffect;
+import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.SoulbondAbility;
 import mage.cards.CardImpl;
 
 import java.util.UUID;
 
 /**
+ *
  * @author noxx
- */
-public class TrustedForcemage extends CardImpl<TrustedForcemage> {
 
-    private static final String ruleText = "As long as {this} is paired with another creature, each of those creatures gets +1/+1";
-    
-    public TrustedForcemage(UUID ownerId) {
-        super(ownerId, 199, "Trusted Forcemage", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
+ */
+public class LightningMauler extends CardImpl<LightningMauler> {
+
+    private static final String ruleText = "As long as {this} is paired with another creature, both creatures have haste";
+
+    public LightningMauler(UUID ownerId) {
+        super(ownerId, 144, "Lightning Mauler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.expansionSetCode = "AVR";
         this.subtype.add("Human");
-        this.subtype.add("Shaman");
+        this.subtype.add("Berserker");
 
-        this.color.setGreen(true);
+        this.color.setRed(true);
         this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        this.toughness = new MageInt(1);
 
         // Soulbond
         this.addAbility(SoulbondAbility.getInstance());
 
-        // As long as Trusted Forcemage is paired with another creature, each of those creatures gets +1/+1.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostPairedEffect(1, 1, ruleText)));
+        // As long as Lightning Mauler is paired with another creature, both creatures have haste.
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityPairedEffect(HasteAbility.getInstance(), ruleText)));
     }
 
-    public TrustedForcemage(final TrustedForcemage card) {
+    public LightningMauler(final LightningMauler card) {
         super(card);
     }
 
     @Override
-    public TrustedForcemage copy() {
-        return new TrustedForcemage(this);
+    public LightningMauler copy() {
+        return new LightningMauler(this);
     }
 }

@@ -32,7 +32,8 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.BoostPairedEffect;
+import mage.abilities.effects.common.continious.GainAbilityPairedEffect;
+import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.SoulbondAbility;
 import mage.cards.CardImpl;
 
@@ -41,33 +42,33 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class TrustedForcemage extends CardImpl<TrustedForcemage> {
+public class NightshadePeddler extends CardImpl<NightshadePeddler> {
 
-    private static final String ruleText = "As long as {this} is paired with another creature, each of those creatures gets +1/+1";
-    
-    public TrustedForcemage(UUID ownerId) {
-        super(ownerId, 199, "Trusted Forcemage", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
+    private static final String ruleText = "As long as {this} is paired with another creature, both creatures have deathtouch";
+
+    public NightshadePeddler(UUID ownerId) {
+        super(ownerId, 187, "Nightshade Peddler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.expansionSetCode = "AVR";
         this.subtype.add("Human");
-        this.subtype.add("Shaman");
+        this.subtype.add("Druid");
 
         this.color.setGreen(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
         // Soulbond
         this.addAbility(SoulbondAbility.getInstance());
 
-        // As long as Trusted Forcemage is paired with another creature, each of those creatures gets +1/+1.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostPairedEffect(1, 1, ruleText)));
+        // As long as Nightshade Peddler is paired with another creature, both creatures have deathtouch.
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityPairedEffect(DeathtouchAbility.getInstance(), ruleText)));
     }
 
-    public TrustedForcemage(final TrustedForcemage card) {
+    public NightshadePeddler(final NightshadePeddler card) {
         super(card);
     }
 
     @Override
-    public TrustedForcemage copy() {
-        return new TrustedForcemage(this);
+    public NightshadePeddler copy() {
+        return new NightshadePeddler(this);
     }
 }

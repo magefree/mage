@@ -32,42 +32,45 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.BoostPairedEffect;
+import mage.abilities.effects.common.continious.GainAbilityPairedEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.SoulbondAbility;
 import mage.cards.CardImpl;
 
 import java.util.UUID;
 
 /**
+ *
  * @author noxx
- */
-public class TrustedForcemage extends CardImpl<TrustedForcemage> {
 
-    private static final String ruleText = "As long as {this} is paired with another creature, each of those creatures gets +1/+1";
-    
-    public TrustedForcemage(UUID ownerId) {
-        super(ownerId, 199, "Trusted Forcemage", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
+ */
+public class Wingcrafter extends CardImpl<Wingcrafter> {
+
+    private static final String ruleText = "As long as {this} is paired with another creature, both creatures have flying";
+
+    public Wingcrafter(UUID ownerId) {
+        super(ownerId, 83, "Wingcrafter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
         this.expansionSetCode = "AVR";
         this.subtype.add("Human");
-        this.subtype.add("Shaman");
+        this.subtype.add("Wizard");
 
-        this.color.setGreen(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        this.color.setBlue(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
         // Soulbond
         this.addAbility(SoulbondAbility.getInstance());
 
-        // As long as Trusted Forcemage is paired with another creature, each of those creatures gets +1/+1.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostPairedEffect(1, 1, ruleText)));
+        // As long as Wingcrafter is paired with another creature, both creatures have flying.
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityPairedEffect(FlyingAbility.getInstance(), ruleText)));
     }
 
-    public TrustedForcemage(final TrustedForcemage card) {
+    public Wingcrafter(final Wingcrafter card) {
         super(card);
     }
 
     @Override
-    public TrustedForcemage copy() {
-        return new TrustedForcemage(this);
+    public Wingcrafter copy() {
+        return new Wingcrafter(this);
     }
 }

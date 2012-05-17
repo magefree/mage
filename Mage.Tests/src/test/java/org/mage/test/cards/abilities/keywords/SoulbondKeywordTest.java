@@ -1,6 +1,9 @@
 package org.mage.test.cards.abilities.keywords;
 
 import mage.Constants;
+import mage.abilities.Abilities;
+import mage.abilities.AbilitiesImpl;
+import mage.abilities.keyword.LifelinkAbility;
 import mage.filter.Filter;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -321,5 +324,28 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
 
         assertPowerToughness(playerA, "Trusted Forcemage", 3, 3);
         assertPowerToughness(playerA, "Phantasmal Bear", 3, 3);
+    }
+
+    /**
+     * Tests Soulbond that adds an ability to both creatures
+     */
+    @Test
+    public void testGrantingAbility() {
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Elite Vanguard");
+        addCard(Constants.Zone.HAND, playerA, "Nearheath Pilgrim");
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 2);
+
+        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Nearheath Pilgrim");
+
+        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPowerToughness(playerA, "Nearheath Pilgrim", 2, 1);
+        assertPowerToughness(playerA, "Elite Vanguard", 2, 1);
+
+        Abilities abilities = new AbilitiesImpl();
+        abilities.add(LifelinkAbility.getInstance());
+        assertAbilities(playerA, "Nearheath Pilgrim", abilities);
+        assertAbilities(playerA, "Elite Vanguard", abilities);
     }
 }

@@ -39,17 +39,18 @@ import mage.cards.CardImpl;
 import java.util.UUID;
 
 /**
+ *
  * @author noxx
- */
-public class TrustedForcemage extends CardImpl<TrustedForcemage> {
 
-    private static final String ruleText = "As long as {this} is paired with another creature, each of those creatures gets +1/+1";
+ */
+public class DruidsFamiliar extends CardImpl<DruidsFamiliar> {
+
+    private static final String ruleText = "As long as {this} is paired with another creature, each of those creatures gets +2/+2";
     
-    public TrustedForcemage(UUID ownerId) {
-        super(ownerId, 199, "Trusted Forcemage", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
+    public DruidsFamiliar(UUID ownerId) {
+        super(ownerId, 175, "Druid's Familiar", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.expansionSetCode = "AVR";
-        this.subtype.add("Human");
-        this.subtype.add("Shaman");
+        this.subtype.add("Bear");
 
         this.color.setGreen(true);
         this.power = new MageInt(2);
@@ -58,16 +59,16 @@ public class TrustedForcemage extends CardImpl<TrustedForcemage> {
         // Soulbond
         this.addAbility(SoulbondAbility.getInstance());
 
-        // As long as Trusted Forcemage is paired with another creature, each of those creatures gets +1/+1.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostPairedEffect(1, 1, ruleText)));
+        // As long as Druid's Familiar is paired with another creature, each of those creatures gets +2/+2.
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostPairedEffect(2, 2, ruleText)));
     }
 
-    public TrustedForcemage(final TrustedForcemage card) {
+    public DruidsFamiliar(final DruidsFamiliar card) {
         super(card);
     }
 
     @Override
-    public TrustedForcemage copy() {
-        return new TrustedForcemage(this);
+    public DruidsFamiliar copy() {
+        return new DruidsFamiliar(this);
     }
 }
