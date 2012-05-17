@@ -50,7 +50,7 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
      */
     @Test
     public void testTwoSoulbondCreaturesOnBattlefield() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Trusted Forcemage", 2);
+        addCard(Constants.Zone.HAND, playerA, "Trusted Forcemage", 2);
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 6);
 
         castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
@@ -59,8 +59,8 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPermanentCount(playerA, "Trusted Forcemage", 1);
-        assertPowerToughness(playerA, "Trusted Forcemage", 3, 3, Filter.ComparisonScope.All);
+        assertPermanentCount(playerA, "Trusted Forcemage", 2);
+        assertPowerToughness(playerA, "Trusted Forcemage", 4, 4, Filter.ComparisonScope.All);
     }
 
     /**
@@ -168,8 +168,8 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
 
         addCard(Constants.Zone.HAND, playerB, "Act of Treason");
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Mountain", 3);
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Elite Vanguard");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Plains", 1);
+        addCard(Constants.Zone.HAND, playerB, "Elite Vanguard");
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Plains", 3);
 
         castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
         castSpell(2, Constants.PhaseStep.PRECOMBAT_MAIN, playerB, "Act of Treason", "Trusted Forcemage");
@@ -196,8 +196,8 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
 
         addCard(Constants.Zone.HAND, playerB, "Act of Treason");
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Mountain", 3);
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Elite Vanguard");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Plains", 1);
+        addCard(Constants.Zone.HAND, playerB, "Elite Vanguard");
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Plains", 3);
 
         castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
         castSpell(2, Constants.PhaseStep.PRECOMBAT_MAIN, playerB, "Act of Treason", "Trusted Forcemage");
@@ -208,7 +208,7 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
 
         // returned back with no boost
         assertPermanentCount(playerA, "Trusted Forcemage", 1);
-        assertPowerToughness(playerB, "Trusted Forcemage", 2, 2);
+        assertPowerToughness(playerA, "Trusted Forcemage", 2, 2);
 
         // no boost on next turn (gets unpaired)
         assertPowerToughness(playerB, "Elite Vanguard", 2, 1);
@@ -222,7 +222,7 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Elite Vanguard");
         addCard(Constants.Zone.HAND, playerA, "Trusted Forcemage");
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 3);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 1);
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 3);
         addCard(Constants.Zone.HAND, playerA, "Unsummon", 1);
 
         castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
@@ -231,8 +231,8 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPowerToughness(playerA, "Trusted Forcemage", 2, 2);
         assertPermanentCount(playerA, "Elite Vanguard", 0);
+        assertPowerToughness(playerA, "Trusted Forcemage", 2, 2);
     }
 
     /**
@@ -265,9 +265,9 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Blinkmoth Nexus", 1);
 
         castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{1}: ");
+        activateAbility(1, Constants.PhaseStep.BEGIN_COMBAT, playerA, "{1}: ");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, Constants.PhaseStep.DECLARE_ATTACKERS);
         execute();
 
         // no effect on later animation
@@ -292,5 +292,34 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
 
         // test boost loss
         assertPowerToughness(playerA, "Trusted Forcemage", 2, 2);
+    }
+
+    /**
+     * Tests that after loosing first pair it is possible to pair creature with another one
+     */
+    @Test
+    public void testRebondOnNextCreature() {
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Elite Vanguard");
+        addCard(Constants.Zone.HAND, playerA, "Phantasmal Bear");
+        addCard(Constants.Zone.HAND, playerA, "Trusted Forcemage");
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 3);
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 3);
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 3);
+
+        addCard(Constants.Zone.HAND, playerA, "Lightning Bolt", 1);
+
+        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
+        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Elite Vanguard");
+        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Bear");
+
+        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Elite Vanguard", 0);
+        assertPermanentCount(playerA, "Phantasmal Bear", 1);
+
+        assertPowerToughness(playerA, "Trusted Forcemage", 3, 3);
+        assertPowerToughness(playerA, "Phantasmal Bear", 3, 3);
     }
 }

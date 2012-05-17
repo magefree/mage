@@ -28,9 +28,6 @@
 
 package mage;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public final class Constants {
 	
 	public enum ColoredManaSymbol {
@@ -445,12 +442,13 @@ public final class Constants {
         CARD
     }
 
-	public static final List<String> PlaneswalkerTypes = new ArrayList<String>()
+/*	public static final List<String> PlaneswalkerTypes = new ArrayList<String>()
 		{{add("Ajani"); add("Bolas"); add("Chandra"); add("Elspeth");
 		  add("Garruk"); add("Jace"); add("Liliana"); add("Nissa");
 		  add("Sarkhan"); add("Sorin"); add("Tezzeret"); add("Karn");
 		  add("Venser"); add("Gideon"); add("Koth");}};
-	
+*/
+
 	private Constants() {
 		throw new AssertionError();
 	}

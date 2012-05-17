@@ -27,19 +27,24 @@
  */
 package mage.sets.avacynrestored;
 
-import java.util.UUID;
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continious.BoostPairedEffect;
+import mage.abilities.keyword.SoulbondAbility;
 import mage.cards.CardImpl;
 
-/**
- *
- * @author noxx
+import java.util.UUID;
 
+/**
+ * @author noxx
  */
 public class TrustedForcemage extends CardImpl<TrustedForcemage> {
 
+    private static final String ruleText = "As long as Trusted Forcemage is paired with another creature, each of those creatures gets +1/+1";
+    
     public TrustedForcemage(UUID ownerId) {
         super(ownerId, 199, "Trusted Forcemage", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.expansionSetCode = "AVR";
@@ -51,7 +56,10 @@ public class TrustedForcemage extends CardImpl<TrustedForcemage> {
         this.toughness = new MageInt(2);
 
         // Soulbond
+        this.addAbility(SoulbondAbility.getInstance());
+
         // As long as Trusted Forcemage is paired with another creature, each of those creatures gets +1/+1.
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostPairedEffect(1, 1, ruleText)));
     }
 
     public TrustedForcemage(final TrustedForcemage card) {

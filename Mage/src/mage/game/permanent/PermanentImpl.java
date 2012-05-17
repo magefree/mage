@@ -28,6 +28,7 @@
 
 package mage.game.permanent;
 
+import mage.Constants.AsThoughEffectType;
 import mage.Constants.CardType;
 import mage.Constants.Zone;
 import mage.MageObject;
@@ -43,9 +44,10 @@ import mage.game.events.*;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 
-import java.util.*;
-
-import mage.Constants.AsThoughEffectType;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -76,6 +78,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
     protected List<UUID> connectedCards = new ArrayList<UUID>();
     protected List<UUID> dealtDamageByThisTurn;
     protected UUID attachedTo;
+    protected UUID pairedCard;
     protected List<Counter> markedDamage;
 
     private static final List<UUID> emptyList = Collections.unmodifiableList(new ArrayList<UUID>());
@@ -126,6 +129,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
         this.attachedTo = permanent.attachedTo;
         this.minBlockedBy = permanent.minBlockedBy;
         this.transformed = permanent.transformed;
+        this.pairedCard = permanent.pairedCard;
     }
 
     @Override
@@ -823,5 +827,20 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
     @Override
     public void setTransformed(boolean value) {
         this.transformed = value;
+    }
+
+    @Override
+    public void setPairedCard(UUID pairedCard) {
+        this.pairedCard = pairedCard;
+    }
+
+    @Override
+    public UUID getPairedCard() {
+        return pairedCard;
+    }
+
+    @Override
+    public void clearPairedCard() {
+        this.pairedCard = null;
     }
 }

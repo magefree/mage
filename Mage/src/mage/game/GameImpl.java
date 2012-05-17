@@ -67,10 +67,7 @@ import mage.players.Players;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
-import mage.watchers.common.CastSpellLastTurnWatcher;
-import mage.watchers.common.MiracleWatcher;
-import mage.watchers.common.MorbidWatcher;
-import mage.watchers.common.PlayerDamagedBySourceWatcher;
+import mage.watchers.common.*;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
@@ -505,6 +502,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         state.getWatchers().add(new MorbidWatcher());
         state.getWatchers().add(new CastSpellLastTurnWatcher());
         state.getWatchers().add(new MiracleWatcher());
+        state.getWatchers().add(new SoulbondWatcher());
         
 		//20100716 - 103.5
 		for (UUID playerId: state.getPlayerList(startingPlayerId)) {
@@ -810,6 +808,26 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                         continue;
                     }
                 }
+                if (perm.getPairedCard() != null) {
+                    //702.93e.: ...another player gains control
+                    // ...or the creature it's paired with leaves the battlefield.
+                    Permanent paired = getPermanent(perm.getPairedCard());
+                    if (paired == null || !perm.getControllerId().equals(paired.getControllerId())) {
+                        perm.setPairedCard(null);
+                        if (paired != null) {
+                            paired.setPairedCard(null);
+                        }
+                        somethingHappened = true;
+                    }
+                }
+            } else if (perm.getPairedCard() != null) {
+                //702.93e.: ...stops being a creature
+                Permanent paired = getPermanent(perm.getPairedCard());
+                perm.setPairedCard(null);
+                if (paired != null) {
+                    paired.setPairedCard(null);
+                }
+                somethingHappened = true;
             }
             if (perm.getCardType().contains(CardType.PLANESWALKER)) {
                 //20091005 - 704.5i

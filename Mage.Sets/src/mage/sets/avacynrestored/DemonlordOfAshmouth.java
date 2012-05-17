@@ -36,7 +36,7 @@ import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.UndyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
@@ -46,7 +46,7 @@ import java.util.UUID;
  */
 public class DemonlordOfAshmouth extends CardImpl<DemonlordOfAshmouth> {
 
-    private static FilterControlledPermanent filter = new FilterControlledPermanent(" another creature");
+    private static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(" another creature");
     
     static {
         filter.setAnother(true);

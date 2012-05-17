@@ -57,8 +57,12 @@ import mage.filter.common.*;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.draft.Draft;
+import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.match.Match;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 import mage.game.tournament.Tournament;
 import mage.player.ai.simulators.CombatGroupSimulator;
 import mage.player.ai.simulators.CombatSimulator;
@@ -79,10 +83,6 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
 
 /**
  *
@@ -184,7 +184,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 		}
 		if (target instanceof TargetControlledPermanent) {
 			List<Permanent> targets;
-			targets = threats(playerId, ((TargetControlledPermanent)target).getFilter(), game, target.getTargets());
+			targets = threats(playerId, sourceId, ((TargetControlledPermanent)target).getFilter(), game, target.getTargets());
 			if (!outcome.isGood())
 				Collections.reverse(targets);
 			for (Permanent permanent: targets) {
@@ -197,13 +197,13 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 		if (target instanceof TargetPermanent) {
 			List<Permanent> targets;
             if (outcome.isCanTargetAll()) {
-                targets = threats(null, ((TargetPermanent)target).getFilter(), game, target.getTargets());
+                targets = threats(null, sourceId, ((TargetPermanent)target).getFilter(), game, target.getTargets());
             } else {
                 if (outcome.isGood()) {
-                    targets = threats(playerId, ((TargetPermanent)target).getFilter(), game, target.getTargets());
+                    targets = threats(playerId, sourceId, ((TargetPermanent)target).getFilter(), game, target.getTargets());
                 }
                 else {
-                    targets = threats(opponentId, ((TargetPermanent)target).getFilter(), game, target.getTargets());
+                    targets = threats(opponentId, sourceId, ((TargetPermanent)target).getFilter(), game, target.getTargets());
                 }
             }
 			for (Permanent permanent: targets) {
@@ -226,10 +226,10 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 			List<Permanent> targets;
 			TargetCreatureOrPlayer t = ((TargetCreatureOrPlayer)target);
 			if (outcome.isGood()) {
-				targets = threats(playerId, ((FilterCreatureOrPlayer)t.getFilter()).getCreatureFilter(), game, target.getTargets());
+				targets = threats(playerId, sourceId, ((FilterCreatureOrPlayer)t.getFilter()).getCreatureFilter(), game, target.getTargets());
 			}
 			else {
-				targets = threats(opponentId, ((FilterCreatureOrPlayer)t.getFilter()).getCreatureFilter(), game, target.getTargets());
+				targets = threats(opponentId, sourceId, ((FilterCreatureOrPlayer)t.getFilter()).getCreatureFilter(), game, target.getTargets());
 			}
             for (Permanent permanent : targets) {
                 List<UUID> alreadyTargetted = target.getTargets();
@@ -259,10 +259,10 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 			List<Permanent> targets;
 			TargetPermanentOrPlayer t = ((TargetPermanentOrPlayer)target);
 			if (outcome.isGood()) {
-				targets = threats(playerId, ((FilterPermanentOrPlayer)t.getFilter()).getPermanentFilter(), game, target.getTargets());
+				targets = threats(playerId, sourceId, ((FilterPermanentOrPlayer)t.getFilter()).getPermanentFilter(), game, target.getTargets());
 			}
 			else {
-				targets = threats(opponentId, ((FilterPermanentOrPlayer)t.getFilter()).getPermanentFilter(), game, target.getTargets());
+				targets = threats(opponentId, sourceId, ((FilterPermanentOrPlayer)t.getFilter()).getPermanentFilter(), game, target.getTargets());
 			}
             for (Permanent permanent : targets) {
                 List<UUID> alreadyTargetted = target.getTargets();
@@ -356,7 +356,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 		}
 		if (target instanceof TargetControlledPermanent) {
 			List<Permanent> targets;
-			targets = threats(playerId, ((TargetControlledPermanent)target).getFilter(), game, target.getTargets());
+			targets = threats(playerId, source.getSourceId(), ((TargetControlledPermanent)target).getFilter(), game, target.getTargets());
 			if (!outcome.isGood())
 				Collections.reverse(targets);
 			for (Permanent permanent: targets) {
@@ -370,10 +370,10 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 		if (target instanceof TargetPermanent) {
 			List<Permanent> targets;
 			if (outcome.isGood()) {
-				targets = threats(playerId, ((TargetPermanent)target).getFilter(), game, target.getTargets());
+				targets = threats(playerId, source.getSourceId(), ((TargetPermanent)target).getFilter(), game, target.getTargets());
 			}
 			else {
-				targets = threats(opponentId, ((TargetPermanent)target).getFilter(), game, target.getTargets());
+				targets = threats(opponentId, source.getSourceId(), ((TargetPermanent)target).getFilter(), game, target.getTargets());
 			}
             if (targets.isEmpty() && target.isRequired()) {
                 targets = game.getBattlefield().getActivePermanents(((TargetPermanent)target).getFilter(), playerId, game);
@@ -390,10 +390,10 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 			List<Permanent> targets;
 			TargetCreatureOrPlayer t = ((TargetCreatureOrPlayer)target);
 			if (outcome.isGood()) {
-				targets = threats(playerId, ((FilterCreatureOrPlayer)t.getFilter()).getCreatureFilter(), game, target.getTargets());
+				targets = threats(playerId, source.getSourceId(), ((FilterCreatureOrPlayer)t.getFilter()).getCreatureFilter(), game, target.getTargets());
 			}
 			else {
-				targets = threats(opponentId, ((FilterCreatureOrPlayer)t.getFilter()).getCreatureFilter(), game, target.getTargets());
+				targets = threats(opponentId, source.getSourceId(), ((FilterCreatureOrPlayer)t.getFilter()).getCreatureFilter(), game, target.getTargets());
 			}
             if (targets.isEmpty() && target.isRequired()) {
                 targets = game.getBattlefield().getActivePermanents(((FilterCreatureOrPlayer)t.getFilter()).getCreatureFilter(), playerId, game);
@@ -503,10 +503,10 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 			}
 			List<Permanent> targets;
 			if (outcome.isGood()) {
-				targets = threats(playerId, new FilterCreaturePermanent(), game, target.getTargets());
+				targets = threats(playerId, source.getSourceId(), new FilterCreaturePermanent(), game, target.getTargets());
 			}
 			else {
-				targets = threats(opponentId, new FilterCreaturePermanent(), game, target.getTargets());
+				targets = threats(opponentId, source.getSourceId(), new FilterCreaturePermanent(), game, target.getTargets());
 			}
 			for (Permanent permanent: targets) {
 				if (target.canTarget(permanent.getId(), source, game)) {
@@ -1495,13 +1495,13 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 		return worst;
 	}
 
-	protected List<Permanent> threats(UUID playerId, FilterPermanent filter, Game game, List<UUID> targets) {
+	protected List<Permanent> threats(UUID playerId, UUID sourceId, FilterPermanent filter, Game game, List<UUID> targets) {
 		List<Permanent> threats = playerId == null ?
                 game.getBattlefield().getAllActivePermanents(filter) :
-                game.getBattlefield().getAllActivePermanents(filter, playerId);
+                game.getBattlefield().getActivePermanents(filter, playerId, sourceId, game);
 
         Iterator<Permanent> it = threats.iterator();
-        while (it.hasNext()) { // remove permanents already targetted
+        while (it.hasNext()) { // remove permanents already targeted
             Permanent test = it.next();
             if (targets.contains(test.getId()))
                 it.remove();

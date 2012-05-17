@@ -28,30 +28,54 @@
 
 package mage.filter.common;
 
-import mage.Constants.CardType;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author noxx
  */
-public class FilterControlledCreaturePermanent<T extends FilterControlledCreaturePermanent> extends FilterControlledPermanent<FilterControlledCreaturePermanent<T>> {
+public class FilterNotPairedControlledCreaturePermanent extends FilterControlledCreaturePermanent<FilterNotPairedControlledCreaturePermanent> {
 
-	public FilterControlledCreaturePermanent() {
-		this("creature you control");
+	public FilterNotPairedControlledCreaturePermanent() {
+		this("not paired creature you control");
 	}
 
-	public FilterControlledCreaturePermanent(String name) {
+	public FilterNotPairedControlledCreaturePermanent(String name) {
 		super(name);
-		cardType.add(CardType.CREATURE);
 	}
 
-	public FilterControlledCreaturePermanent(final FilterControlledCreaturePermanent filter) {
+	public FilterNotPairedControlledCreaturePermanent(final FilterNotPairedControlledCreaturePermanent filter) {
 		super(filter);
 	}
 
+    @Override
+    public boolean match(Permanent permanent) {
+        if (!super.match(permanent))
+            return notFilter;
+
+        if (permanent.getPairedCard() != null)
+            return notFilter;
+
+        return !notFilter;
+    }
+
+    @Override
+    public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
+        if (!super.match(permanent, sourceId, playerId, game))
+            return notFilter;
+
+        if (permanent.getPairedCard() != null)
+            return notFilter;
+
+        return !notFilter;
+    }
+
 	@Override
-	public FilterControlledCreaturePermanent copy() {
-		return new FilterControlledCreaturePermanent(this);
+	public FilterNotPairedControlledCreaturePermanent copy() {
+		return new FilterNotPairedControlledCreaturePermanent(this);
 	}
 
 }

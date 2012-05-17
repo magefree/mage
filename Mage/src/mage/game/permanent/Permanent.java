@@ -28,15 +28,15 @@
 
 package mage.game.permanent;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.game.Game;
-import mage.game.events.GameEvent;
+
+import java.util.List;
+import java.util.UUID;
 
 public interface Permanent extends Card {
 
@@ -176,6 +176,25 @@ public interface Permanent extends Card {
 	 * Clear all connected cards.
 	 */
 	public void clearConnectedCards();
+
+    /**
+     * Sets paired card.
+     *
+     * @param pairedCard
+     */
+    public void setPairedCard(UUID pairedCard);
+
+    /**
+     * Gets paired card. Can return null.
+     *
+     * @return
+     */
+    public UUID getPairedCard();
+
+    /**
+     * Makes permanent paired with no other permanent.
+     */
+    public void clearPairedCard();
 
 	@Override
 	public Permanent copy();
