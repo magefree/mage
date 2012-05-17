@@ -57,6 +57,9 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
 					List<String> rulings = new ArrayList<String>(rules);
 
 					if (card instanceof PermanentView) {
+                        if (card.getPairedCard() != null) {
+                            rulings.add("<span color='green'><i>Paired with another creature</i></span>");
+                        }
 						List<CounterView> counters = ((PermanentView) card).getCounters();
 						int count = counters != null ? counters.size() : 0;
 						if (count > 0) {

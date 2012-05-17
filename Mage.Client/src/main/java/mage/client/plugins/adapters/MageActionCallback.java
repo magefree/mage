@@ -114,6 +114,21 @@ public class MageActionCallback implements ActionCallback {
             }
         }
 
+        // Draw Arrows for paired cards
+        if (data.card.getPairedCard() != null) {
+            Point me = new Point(data.locationOnScreen);
+            me.translate(-parentPoint.x, -parentPoint.y);
+            UUID uuid = data.card.getPairedCard();
+            for (PlayAreaPanel pa : MageFrame.getGame(data.gameId).getPlayers().values()) {
+                MagePermanent permanent = pa.getBattlefieldPanel().getPermanents().get(uuid);
+                if (permanent != null) {
+                    Point target = permanent.getLocationOnScreen();
+                    target.translate(-parentPoint.x, -parentPoint.y);
+                    ArrowBuilder.addArrow((int) me.getX() + 35, (int) me.getY(), (int) target.getX() + 40, (int) target.getY() + 10, Color.green);
+                }
+            }
+        }
+
         showPopup(data, parentComponent, parentPoint);
     }
 

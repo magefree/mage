@@ -71,7 +71,9 @@ public class CardView extends SimpleCardView {
     protected CardView secondCardFace;
     protected boolean transformed;
 
-    public List<UUID> targets;
+    protected List<UUID> targets;
+
+    protected UUID pairedCard;
 
     public CardView(Card card, UUID cardId) {
         this(card);
@@ -93,6 +95,7 @@ public class CardView extends SimpleCardView {
             this.power = Integer.toString(card.getPower().getValue());
             this.toughness = Integer.toString(card.getToughness().getValue());
             this.loyalty = Integer.toString(((Permanent) card).getCounters().getCount(CounterType.LOYALTY));
+            this.pairedCard = ((Permanent)card).getPairedCard();
         } else {
             this.power = card.getPower().toString();
             this.toughness = card.getToughness().toString();
@@ -355,5 +358,9 @@ public class CardView extends SimpleCardView {
 
     public boolean isTransformed() {
         return this.transformed;
+    }
+
+    public UUID getPairedCard() {
+        return pairedCard;
     }
 }
