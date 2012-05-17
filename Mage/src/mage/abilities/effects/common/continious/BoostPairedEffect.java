@@ -70,10 +70,10 @@ public class BoostPairedEffect extends ContinuousEffectImpl<BoostPairedEffect> {
         if (permanent != null && permanent.getPairedCard() != null) {
             Permanent paired = game.getPermanent(permanent.getPairedCard());
             if (paired != null) {
-                permanent.addPower(1);
-                permanent.addToughness(1);
-                paired.addPower(1);
-                paired.addToughness(1);
+                permanent.addPower(power);
+                permanent.addToughness(toughness);
+                paired.addPower(power);
+                paired.addToughness(toughness);
                 return true;
             }
         }
