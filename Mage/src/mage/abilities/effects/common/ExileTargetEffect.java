@@ -53,6 +53,11 @@ public class ExileTargetEffect extends OneShotEffect<ExileTargetEffect> {
 		this.exileId = exileId;
 	}
 
+    public ExileTargetEffect(String exileZone) {
+        this();
+        this.exileZone = exileZone;
+    }
+
 	public ExileTargetEffect() {
 		super(Outcome.Exile);
 	}
