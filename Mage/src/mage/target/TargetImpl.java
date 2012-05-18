@@ -28,8 +28,6 @@
 
 package mage.target;
 
-import java.util.*;
-import java.util.Map.Entry;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
@@ -37,6 +35,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
+
+import java.util.*;
 
 /**
  *
@@ -247,13 +247,13 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 	@Override
 	public boolean isLegal(Ability source, Game game) {
 		//20101001 - 608.2b
-		for (UUID targetId: targets.keySet()) {
+        for (UUID targetId: targets.keySet()) {
 			if (game.replaceEvent(GameEvent.getEvent(EventType.TARGET, targetId, source.getId(), source.getControllerId())))
-				return false;
-			if (!canTarget(targetId, source, game))
-				return false;
+				continue;
+			if (canTarget(targetId, source, game))
+				return true;
 		}
-		return true;
+        return false;
 	}
 
     @Override
