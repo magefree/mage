@@ -763,7 +763,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
             if (!effect.canBeBlocked(attacker, this, game.getContinuousEffects().getAbility(effect.getId()), game))
                 return false;
         }
-        if (attacker.hasProtectionFrom(this))
+        if (attacker != null && attacker.hasProtectionFrom(this))
             return false;
         return true;
     }

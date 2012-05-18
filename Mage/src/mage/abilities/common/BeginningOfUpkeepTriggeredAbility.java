@@ -5,7 +5,6 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.target.targetpointer.FirstTargetPointer;
 import mage.target.targetpointer.FixedTarget;
 
 public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl<BeginningOfUpkeepTriggeredAbility> {
@@ -37,8 +36,8 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl<Begi
                 case YOU:
                     boolean yours = event.getPlayerId().equals(this.controllerId);
                     if (yours) {
-                        for (Effect effect : this.getEffects()) {
-                            if (effect.getTargetPointer().equals(FirstTargetPointer.getInstance())) {
+                        if (getTargets().size() == 0) {
+                            for (Effect effect : this.getEffects()) {
                                 effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                             }
                         }
@@ -46,8 +45,8 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl<Begi
                     return yours;
                 case OPPONENT:
                     if (game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
-                        for (Effect effect : this.getEffects()) {
-                            if (effect.getTargetPointer().equals(FirstTargetPointer.getInstance())) {
+                        if (getTargets().size() == 0) {
+                            for (Effect effect : this.getEffects()) {
                                 effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                             }
                         }
@@ -55,8 +54,8 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl<Begi
                     }
 		    break;
                 case ANY:
-                    for (Effect effect : this.getEffects()) {
-                        if (effect.getTargetPointer().equals(FirstTargetPointer.getInstance())) {
+                    if (getTargets().size() == 0) {
+                        for (Effect effect : this.getEffects()) {
                             effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                         }
                     }
