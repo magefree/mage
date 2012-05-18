@@ -35,6 +35,9 @@ public class BeginningOfYourEndStepTriggeredAbility extends TriggeredAbilityImpl
 
     @Override
     public String getRule() {
+        if (optional) {
+            return "At the beginning of your end step, you may " + modes.getText();
+        }
         return "At the beginning of your end step, " + modes.getText();
     }
 }
