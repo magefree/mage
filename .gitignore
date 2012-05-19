@@ -33,6 +33,7 @@ Mage.Tests/target
 Mage.Tests/Mage.log
 Mage.Tests/watchdog.log
 Mage/target
+Mage.Updater/target
 mage.updater.client/target
 Utils/GathererCrawler/target
 
