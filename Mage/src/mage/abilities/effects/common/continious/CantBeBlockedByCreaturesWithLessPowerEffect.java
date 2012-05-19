@@ -25,55 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.abilities.effects.common.continious;
 
-import java.util.UUID;
-import mage.Constants.CardType;
 import mage.Constants.Duration;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.continious.BoostSourceEffect;
-import mage.abilities.effects.common.continious.CantBeBlockedByCreaturesWithLessPowerEffect;
-import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
+import mage.abilities.Ability;
+import mage.abilities.effects.RestrictionEffect;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
  * @author North
  */
-public class AuraGnarlid extends CardImpl<AuraGnarlid> {
+public class CantBeBlockedByCreaturesWithLessPowerEffect extends RestrictionEffect<CantBeBlockedByCreaturesWithLessPowerEffect> {
 
-    private static final FilterPermanent filter = new FilterPermanent("Aura on the battlefield");
-
-    static {
-        filter.getSubtype().add("Aura");
+    public CantBeBlockedByCreaturesWithLessPowerEffect() {
+        super(Duration.WhileOnBattlefield);
+        staticText = "Creatures with power less than {this}'s power can't block it";
     }
 
-    public AuraGnarlid(UUID ownerId) {
-        super(ownerId, 175, "Aura Gnarlid", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "ROE";
-        this.subtype.add("Beast");
-
-        this.color.setGreen(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // Creatures with power less than Aura Gnarlid's power can't block it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesWithLessPowerEffect()));
-        // Aura Gnarlid gets +1/+1 for each Aura on the battlefield.
-        PermanentsOnBattlefieldCount count = new PermanentsOnBattlefieldCount(filter);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(count, count, Duration.WhileOnBattlefield)));
-    }
-
-    public AuraGnarlid(final AuraGnarlid card) {
-        super(card);
+    public CantBeBlockedByCreaturesWithLessPowerEffect(final CantBeBlockedByCreaturesWithLessPowerEffect effect) {
+        super(effect);
     }
 
     @Override
-    public AuraGnarlid copy() {
-        return new AuraGnarlid(this);
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        if (permanent.getId().equals(source.getSourceId())) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        if (blocker.getPower().getValue() < attacker.getPower().getValue()) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public CantBeBlockedByCreaturesWithLessPowerEffect copy() {
+        return new CantBeBlockedByCreaturesWithLessPowerEffect(this);
     }
 }
