@@ -33,6 +33,7 @@ Lifelink|instance|
 Phasing|instance|
 Reach|instance|
 Shroud|instance|
+Soulbond|instance|
 Trample|instance|
 Totem armor|new|
 Unblockable|instance|
