@@ -50,10 +50,18 @@ public class GloryOfWarfare extends CardImpl<GloryOfWarfare> {
     public GloryOfWarfare (UUID ownerId) {
         super(ownerId, 98, "Glory of Warfare", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{W}");
         this.expansionSetCode = "ARB";
-		this.color.setRed(true);
-		this.color.setWhite(true);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new BoostControlledEffect(2, 0, Duration.EndOfTurn), MyTurnCondition.getInstance(), "As long as it's your turn, creatures you control get +2/+0")));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new BoostControlledEffect(0, 2, Duration.EndOfTurn), NotMyTurnCondition.getInstance(), "As long as it's not your turn, creatures you control get +0/+2")));
+
+        this.color.setRed(true);
+        this.color.setWhite(true);
+
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
+                new BoostControlledEffect(2, 0, Duration.WhileOnBattlefield),
+                MyTurnCondition.getInstance(),
+                "As long as it's your turn, creatures you control get +2/+0")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
+                new BoostControlledEffect(0, 2, Duration.WhileOnBattlefield),
+                NotMyTurnCondition.getInstance(),
+                "As long as it's not your turn, creatures you control get +0/+2")));
     }
 
     public GloryOfWarfare (final GloryOfWarfare card) {
