@@ -27,7 +27,6 @@
  */
 package mage.abilities.effects;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Outcome;
@@ -43,6 +42,8 @@ import mage.game.permanent.PermanentCard;
 import mage.game.stack.StackAbility;
 import mage.players.Player;
 import mage.target.Target;
+
+import java.util.UUID;
 
 /**
  *
@@ -74,6 +75,12 @@ public class AuraReplacementEffect extends ReplacementEffectImpl<AuraReplacement
         Card card = game.getCard(event.getTargetId());
         UUID sourceId = event.getSourceId();
         UUID controllerId = event.getPlayerId();
+
+        // Aura enters the battlefield attached
+        Object object = game.getState().getValue("attachTo:"+card.getId());
+        if (object != null && object instanceof PermanentCard) {
+            return false;
+        }
 
         UUID targetId = null;
         MageObject sourceObject = game.getObject(sourceId);
@@ -113,6 +120,7 @@ public class AuraReplacementEffect extends ReplacementEffectImpl<AuraReplacement
             game.setZone(card.getId(), Zone.BATTLEFIELD);
             game.applyEffects();
             permanent.entersBattlefield(event.getSourceId(), game);
+            game.applyEffects();
             game.fireEvent(new ZoneChangeEvent(permanent, controllerId, fromZone, Zone.BATTLEFIELD));
 
             if (targetPermanent != null) {
