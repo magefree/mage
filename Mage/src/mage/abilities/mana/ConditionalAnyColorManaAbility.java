@@ -38,7 +38,7 @@ import mage.choices.ChoiceColor;
  * For cards like:
  *   {tap}: Add three mana of any one color to your mana pool. Spend this mana only to cast creature spells.
  *
- * @author
+ * @author noxx
  */
 public class ConditionalAnyColorManaAbility extends ManaAbility<ConditionalAnyColorManaAbility> {
 

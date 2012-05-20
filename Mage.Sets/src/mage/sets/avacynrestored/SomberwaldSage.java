@@ -72,4 +72,9 @@ class SomberwaldSageManaBuilder extends ConditionalManaBuilder {
     public ConditionalMana build(Object... options) {
         return new CreatureCastConditionalMana(this.mana);
     }
+
+    @Override
+    public String getRule() {
+        return "Spend this mana only to cast creature spells";
+    }
 }

@@ -48,7 +48,7 @@ public class AddConditionalManaOfAnyColorEffect extends ManaEffect<AddConditiona
         super();
         this.amount = amount;
         this.manaBuilder = manaBuilder;
-        staticText = "Add " + amount + " mana of any one color to your mana pool.";
+        staticText = "Add " + amount + " mana of any one color to your mana pool. "  + manaBuilder.getRule();
     }
 
     public AddConditionalManaOfAnyColorEffect(final AddConditionalManaOfAnyColorEffect effect) {

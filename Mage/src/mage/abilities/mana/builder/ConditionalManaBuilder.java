@@ -41,4 +41,6 @@ public abstract class ConditionalManaBuilder implements Builder<ConditionalMana>
         this.mana = mana;
         return this;
     }
+    
+    public abstract String getRule();
 }
