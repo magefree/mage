@@ -25,30 +25,27 @@
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
 */
-package mage.abilities.mana;
+package mage.abilities.mana.conditional;
 
 import mage.Constants;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.AddManaOfAnyColorEffect;
-import mage.choices.ChoiceColor;
+import mage.MageObject;
+import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
+import mage.abilities.condition.Condition;
+import mage.game.Game;
 
-public class AnyColorManaAbility extends ManaAbility<AnyColorManaAbility> {
-    public AnyColorManaAbility() {
-        this(new TapSourceCost());
-    }
-
-    public AnyColorManaAbility(Cost cost) {
-        super(Constants.Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), cost);
-        this.addChoice(new ChoiceColor());
-    }
-
-    public AnyColorManaAbility(final AnyColorManaAbility ability) {
-        super(ability);
-    }
-
+/**
+ * @author noxx
+ */
+class CreatureCastManaCondition implements Condition {
     @Override
-    public AnyColorManaAbility copy() {
-        return new AnyColorManaAbility(this);
+    public boolean apply(Game game, Ability source) {
+        if (source instanceof SpellAbility) {
+            MageObject object = game.getObject(source.getSourceId());
+            if (object != null && object.getCardType().contains(Constants.CardType.CREATURE)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

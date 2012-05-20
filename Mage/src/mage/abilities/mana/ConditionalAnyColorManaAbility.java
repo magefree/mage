@@ -30,25 +30,36 @@ package mage.abilities.mana;
 import mage.Constants;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.AddManaOfAnyColorEffect;
+import mage.abilities.effects.common.AddConditionalManaOfAnyColorEffect;
+import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.choices.ChoiceColor;
 
-public class AnyColorManaAbility extends ManaAbility<AnyColorManaAbility> {
-    public AnyColorManaAbility() {
-        this(new TapSourceCost());
+/**
+ * For cards like:
+ *   {tap}: Add three mana of any one color to your mana pool. Spend this mana only to cast creature spells.
+ *
+ * @author
+ */
+public class ConditionalAnyColorManaAbility extends ManaAbility<ConditionalAnyColorManaAbility> {
+
+    public ConditionalAnyColorManaAbility(int amount, ConditionalManaBuilder manaBuilder) {
+        this(new TapSourceCost(), amount, manaBuilder);
     }
 
-    public AnyColorManaAbility(Cost cost) {
-        super(Constants.Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), cost);
-        this.addChoice(new ChoiceColor());
+    public ConditionalAnyColorManaAbility(Cost cost, int amount, ConditionalManaBuilder manaBuilder) {
+        super(Constants.Zone.BATTLEFIELD, new AddConditionalManaOfAnyColorEffect(amount, manaBuilder), cost);
+        for (int i = 0; i < amount; i++) {
+            this.addChoice(new ChoiceColor());
+        }
     }
 
-    public AnyColorManaAbility(final AnyColorManaAbility ability) {
+    public ConditionalAnyColorManaAbility(final ConditionalAnyColorManaAbility ability) {
         super(ability);
     }
 
     @Override
-    public AnyColorManaAbility copy() {
-        return new AnyColorManaAbility(this);
+    public ConditionalAnyColorManaAbility copy() {
+        return new ConditionalAnyColorManaAbility(this);
     }
 }
+
