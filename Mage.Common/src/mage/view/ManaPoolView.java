@@ -28,11 +28,10 @@
 
 package mage.view;
 
-import java.io.Serializable;
-import java.util.concurrent.locks.Condition;
-
 import mage.ConditionalMana;
 import mage.players.ManaPool;
+
+import java.io.Serializable;
 
 /**
  *
@@ -56,12 +55,12 @@ public class ManaPoolView implements Serializable {
 		this.black = pool.getBlack();
 		this.colorless = pool.getColorless();
 		for (ConditionalMana mana : pool.getConditionalMana()) {
-			this.red = mana.getRed();
-			this.green = mana.getGreen();
-			this.blue = mana.getBlue();
-			this.white = mana.getWhite();
-			this.black = mana.getBlack();
-			this.colorless = mana.getColorless();
+			this.red += mana.getRed();
+			this.green += mana.getGreen();
+			this.blue += mana.getBlue();
+			this.white += mana.getWhite();
+			this.black += mana.getBlack();
+			this.colorless += mana.getColorless();
 		}
 	}
 	
