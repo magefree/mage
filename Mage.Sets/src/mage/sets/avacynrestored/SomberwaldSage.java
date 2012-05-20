@@ -25,20 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.mana.builder;
+package mage.sets.avacynrestored;
 
 import mage.ConditionalMana;
-import mage.Mana;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.mana.ConditionalAnyColorManaAbility;
+import mage.abilities.mana.builder.ConditionalManaBuilder;
+import mage.abilities.mana.conditional.CreatureCastConditionalMana;
+import mage.cards.CardImpl;
+
+import java.util.UUID;
 
 /**
  * @author noxx
  */
-public abstract class ConditionalManaBuilder implements Builder<ConditionalMana> {
+public class SomberwaldSage extends CardImpl<SomberwaldSage> {
 
-    protected Mana mana;
-    
-    public ConditionalManaBuilder setMana(Mana mana) {
-        this.mana = mana;
-        return this;
+    public SomberwaldSage(UUID ownerId) {
+        super(ownerId, 194, "Somberwald Sage", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}");
+        this.expansionSetCode = "AVR";
+        this.subtype.add("Human");
+        this.subtype.add("Druid");
+
+        this.color.setGreen(true);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(1);
+
+        // {tap}: Add three mana of any one color to your mana pool. Spend this mana only to cast creature spells.
+        this.addAbility(new ConditionalAnyColorManaAbility(3, new SomberwaldSageManaBuilder()));
+    }
+
+    public SomberwaldSage(final SomberwaldSage card) {
+        super(card);
+    }
+
+    @Override
+    public SomberwaldSage copy() {
+        return new SomberwaldSage(this);
+    }
+}
+
+class SomberwaldSageManaBuilder extends ConditionalManaBuilder {
+    @Override
+    public ConditionalMana build(Object... options) {
+        return new CreatureCastConditionalMana(this.mana);
     }
 }
