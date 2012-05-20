@@ -34,29 +34,20 @@
 
 package mage.client.game;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Rectangle;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.UUID;
-
-import javax.swing.JComponent;
-import javax.swing.JScrollPane;
-
-
 import mage.cards.MagePermanent;
 import mage.client.cards.BigCard;
 import mage.client.cards.Permanent;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.Config;
 import mage.view.PermanentView;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.util.*;
+import java.util.List;
+import java.util.Map.Entry;
 
 /**
  *
@@ -213,14 +204,16 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
         	final Component comp = c;
         	if (comp instanceof Permanent) {
         		if (((Permanent)comp).getPermanentId().equals(permanentId)) {
-					this.remove(comp);
-        		}
+					comp.setVisible(false);
+                    this.remove(comp);
+                }
         	} else if (comp instanceof MagePermanent) {
         		if (((MagePermanent)comp).getOriginal().getId().equals(permanentId)) {
         			Thread t = new Thread(new Runnable() {
 						@Override
 						public void run() {
 		        			Plugins.getInstance().onRemoveCard((MagePermanent)comp, count);
+                            comp.setVisible(false);
 							BattlefieldPanel.this.remove(comp);
 						}
 					});

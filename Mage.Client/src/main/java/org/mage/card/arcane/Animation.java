@@ -1,15 +1,11 @@
 package org.mage.card.arcane;
 
-import java.awt.Container;
-import java.awt.EventQueue;
-import java.awt.Point;
+import mage.cards.MagePermanent;
+
+import javax.swing.*;
+import java.awt.*;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import javax.swing.JLayeredPane;
-import javax.swing.SwingUtilities;
-
-import mage.cards.MagePermanent;
 
 abstract public class Animation {
 	static private final long TARGET_MILLIS_PER_FRAME = 30;
@@ -363,6 +359,7 @@ abstract public class Animation {
 			}
 
 			protected void end () {
+                card.setAlpha(0f);
 			}
 		};
 	}
