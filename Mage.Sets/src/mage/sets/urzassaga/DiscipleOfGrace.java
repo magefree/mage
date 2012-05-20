@@ -28,7 +28,6 @@
 
 package mage.sets.urzassaga;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
@@ -39,39 +38,40 @@ import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
 
+import java.util.UUID;
+
 /**
- *
  * @author Backfir3
  */
 public class DiscipleOfGrace extends CardImpl<DiscipleOfGrace> {
 
-	private static final FilterCard filter = new FilterCard("Black");
+    private static final FilterCard filter = new FilterCard("Black");
 
-	static {
-		filter.setUseColor(true);
-		filter.getColor().setBlack(true);
-		filter.setScopeColor(ComparisonScope.Any);
-	}
+    static {
+        filter.setUseColor(true);
+        filter.getColor().setBlack(true);
+        filter.setScopeColor(ComparisonScope.Any);
+    }
 
-	public DiscipleOfGrace(UUID ownerId) {
-		super(ownerId, 10, "Disciple Of Grace", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
-		this.expansionSetCode = "USG";
-		this.subtype.add("Human");
-		this.subtype.add("Cleric");
-		this.color.setWhite(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(2);
-		this.addAbility(new ProtectionAbility(filter));
-                this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
-        }
+    public DiscipleOfGrace(UUID ownerId) {
+        super(ownerId, 10, "Disciple Of Grace", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        this.expansionSetCode = "USG";
+        this.subtype.add("Human");
+        this.subtype.add("Cleric");
+        this.color.setWhite(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(2);
+        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+    }
 
-	public DiscipleOfGrace(final DiscipleOfGrace card) {
-		super(card);
-	}
+    public DiscipleOfGrace(final DiscipleOfGrace card) {
+        super(card);
+    }
 
-	@Override
-	public DiscipleOfGrace copy() {
-		return new DiscipleOfGrace(this);
-	}
+    @Override
+    public DiscipleOfGrace copy() {
+        return new DiscipleOfGrace(this);
+    }
 
 }
