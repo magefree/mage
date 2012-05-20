@@ -27,6 +27,7 @@
  */
 package mage.abilities.effects.common;
 
+import mage.Constants;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -77,6 +78,8 @@ public class SacrificeEffect extends OneShotEffect<SacrificeEffect>{
         if (player == null) {
             return false;
         }
+
+        filter.setTargetController(Constants.TargetController.YOU);
 
         int amount = count.calculate(game, source);
         int realCount = game.getBattlefield().countAll(filter, player.getId());
