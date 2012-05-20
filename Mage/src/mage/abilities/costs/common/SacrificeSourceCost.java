@@ -28,11 +28,12 @@
 
 package mage.abilities.costs.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -59,7 +60,10 @@ public class SacrificeSourceCost extends CostImpl<SacrificeSourceCost> {
 
 	@Override
 	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-		Permanent permanent = game.getPermanent(sourceId);
+        if (!game.getPlayer(controllerId).canPaySacrificeCost()) {
+            return false;
+        }
+        Permanent permanent = game.getPermanent(sourceId);
 		if (permanent != null) {
 			return true;
 		}

@@ -28,11 +28,6 @@
 
 package mage.players;
 
-import java.io.Serializable;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.Constants.RangeOfInfluence;
 import mage.MageItem;
@@ -60,6 +55,12 @@ import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.util.Copyable;
 
+import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
@@ -83,6 +84,10 @@ public interface Player extends MageItem, Copyable<Player> {
 	public boolean isCanGainLife();
 	public void setCanGainLife(boolean canGainLife);
 	public boolean isLifeTotalCanChange();
+    public void setCanPayLifeCost(boolean canPayLifeCost);
+    public boolean canPayLifeCost();
+    public void setCanPaySacrificeCost(boolean canPaySacrificeCost);
+    public boolean canPaySacrificeCost();
 	public void setLifeTotalCanChange(boolean lifeTotalCanChange);
 	public int damage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable);
 	public Cards getHand();

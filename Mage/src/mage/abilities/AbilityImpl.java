@@ -28,10 +28,6 @@
 
 package mage.abilities;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
 import mage.Constants.AbilityType;
 import mage.Constants.EffectType;
 import mage.Constants.Outcome;
@@ -42,19 +38,18 @@ import mage.abilities.costs.mana.KickerManaCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.Effects;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.PostResolveEffect;
+import mage.abilities.effects.*;
 import mage.abilities.mana.ManaAbility;
 import mage.choices.Choice;
 import mage.choices.Choices;
 import mage.game.Game;
 import mage.target.Target;
 import mage.target.Targets;
-
 import org.apache.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -465,6 +460,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
     @Override
     public boolean isInUseableZone(Game game) {
         // try LKI first
+
         MageObject lkiTest = game.getLastKnownInformation(getSourceId(), zone);
         if (lkiTest != null) {
             return true;

@@ -102,6 +102,8 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	protected boolean isTestMode = false;
 	protected boolean canGainLife = true;
 	protected boolean canLoseLife = true;
+    protected boolean canPayLifeCost = true;
+    protected boolean canPaySacrificeCost = true;
 	protected boolean isGameUnderControl = true;
 	protected UUID turnController;
 	protected Set<UUID> playersUnderYourControl = new HashSet<UUID>();
@@ -156,6 +158,8 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.attachments.addAll(player.attachments);
         this.inRange.addAll(player.inRange);
 		this.userData = player.userData;
+        this.canPayLifeCost = player.canPayLifeCost;
+        this.canPaySacrificeCost = player.canPaySacrificeCost;
 	}
 
 	@Override
@@ -195,6 +199,8 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		this.maxHandSize = 7;
         this.canGainLife = true;
         this.canLoseLife = true;
+        this.canPayLifeCost = true;
+        this.canPaySacrificeCost = true;
 		this.topCardRevealed = false;
 	}
 
@@ -1405,4 +1411,23 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         // do nothing
     }
 
+    @Override
+    public boolean canPayLifeCost() {
+        return isLifeTotalCanChange() && canPayLifeCost;
+    }
+
+    @Override
+    public void setCanPayLifeCost(boolean canPayLifeCost) {
+        this.canPayLifeCost = canPayLifeCost;
+    }
+
+    @Override
+    public boolean canPaySacrificeCost() {
+        return canPaySacrificeCost;
+    }
+
+    @Override
+    public void setCanPaySacrificeCost(boolean canPaySacrificeCost) {
+        this.canPaySacrificeCost = canPaySacrificeCost;
+    }
 }

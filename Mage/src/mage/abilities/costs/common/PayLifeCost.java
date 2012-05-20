@@ -28,10 +28,11 @@
 
 package mage.abilities.costs.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  *
@@ -53,9 +54,9 @@ public class PayLifeCost extends CostImpl<PayLifeCost> {
 
 	@Override
 	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-		if (amount > 0 && !game.getPlayer(controllerId).isLifeTotalCanChange()) {
-			return false;
-		}
+        if (amount > 0 && !game.getPlayer(controllerId).canPayLifeCost()) {
+            return false;
+        }
 		return game.getPlayer(controllerId).getLife() > amount;
 	}
 

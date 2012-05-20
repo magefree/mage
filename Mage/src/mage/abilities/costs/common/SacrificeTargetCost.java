@@ -28,15 +28,16 @@
 
 package mage.abilities.costs.common;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -74,7 +75,10 @@ public class SacrificeTargetCost extends CostImpl<SacrificeTargetCost> {
 
 	@Override
 	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-		return targets.canChoose(controllerId, game);
+        if (!game.getPlayer(controllerId).canPaySacrificeCost()) {
+            return false;
+        }
+        return targets.canChoose(controllerId, game);
 	}
 
 	@Override
