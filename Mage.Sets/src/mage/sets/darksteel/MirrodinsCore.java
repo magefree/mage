@@ -28,8 +28,6 @@
 
 package mage.sets.darksteel;
 
-import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -42,6 +40,8 @@ import mage.abilities.mana.AnyColorManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
+
+import java.util.UUID;
 
 /**
  *
@@ -57,7 +57,6 @@ public class MirrodinsCore extends CardImpl<MirrodinsCore> {
         Ability ability = new AnyColorManaAbility();
         ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
         this.addAbility(ability);
-
     }
 
     public MirrodinsCore (final MirrodinsCore card) {

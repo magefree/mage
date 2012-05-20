@@ -30,39 +30,68 @@ package mage.sets.avacynrestored;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.common.EntersAnotherCreatureYourControlTriggeredAbility;
-import mage.abilities.effects.common.continious.BoostControlledEffect;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 import java.util.UUID;
 
 /**
- * @author Loki
+ * @author noxx
  */
-public class GoldnightCommander extends CardImpl<GoldnightCommander> {
+public class BowerPassage extends CardImpl<BowerPassage> {
 
-    public GoldnightCommander(UUID ownerId) {
-        super(ownerId, 22, "Goldnight Commander", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
+    public BowerPassage(UUID ownerId) {
+        super(ownerId, 170, "Bower Passage", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
         this.expansionSetCode = "AVR";
-        this.subtype.add("Human");
-        this.subtype.add("Cleric");
-        this.subtype.add("Soldier");
 
-        this.color.setWhite(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        this.color.setGreen(true);
 
-        // Whenever another creature enters the battlefield under your control, creatures you control get +1/+1 until end of turn.
-        this.addAbility(new EntersAnotherCreatureYourControlTriggeredAbility(new BoostControlledEffect(1, 1, Constants.Duration.EndOfTurn)));
+        // Creatures with flying can't block creatures you control.
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BowerPassageEffect()));
     }
 
-    public GoldnightCommander(final GoldnightCommander card) {
+    public BowerPassage(final BowerPassage card) {
         super(card);
     }
 
     @Override
-    public GoldnightCommander copy() {
-        return new GoldnightCommander(this);
+    public BowerPassage copy() {
+        return new BowerPassage(this);
     }
+}
+
+class BowerPassageEffect extends RestrictionEffect<BowerPassageEffect> {
+
+    BowerPassageEffect() {
+        super(Constants.Duration.WhileOnBattlefield);
+        staticText = "Creatures with flying can't block creatures you control";
+    }
+
+    BowerPassageEffect(final BowerPassageEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        return true;
+    }
+
+    @Override
+    public BowerPassageEffect copy() {
+        return new BowerPassageEffect(this);
+    }
+
+    @Override
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        if (attacker.getControllerId().equals(source.getControllerId()) && blocker.getAbilities().contains(FlyingAbility.getInstance())) {
+            return false;
+        }
+        return true;
+    }
+
 }

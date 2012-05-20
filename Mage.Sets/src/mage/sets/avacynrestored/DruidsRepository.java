@@ -27,42 +27,46 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.common.EntersAnotherCreatureYourControlTriggeredAbility;
-import mage.abilities.effects.common.continious.BoostControlledEffect;
+import mage.abilities.Ability;
+import mage.abilities.common.AttacksCreatureYourControlTriggeredAbility;
+import mage.abilities.costs.common.RemoveCountersSourceCost;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
+import mage.counters.CounterType;
 
 import java.util.UUID;
 
 /**
- * @author Loki
+ *
+ * @author noxx
+
  */
-public class GoldnightCommander extends CardImpl<GoldnightCommander> {
+public class DruidsRepository extends CardImpl<DruidsRepository> {
 
-    public GoldnightCommander(UUID ownerId) {
-        super(ownerId, 22, "Goldnight Commander", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
+    public DruidsRepository(UUID ownerId) {
+        super(ownerId, 176, "Druids' Repository", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}");
         this.expansionSetCode = "AVR";
-        this.subtype.add("Human");
-        this.subtype.add("Cleric");
-        this.subtype.add("Soldier");
 
-        this.color.setWhite(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        this.color.setGreen(true);
 
-        // Whenever another creature enters the battlefield under your control, creatures you control get +1/+1 until end of turn.
-        this.addAbility(new EntersAnotherCreatureYourControlTriggeredAbility(new BoostControlledEffect(1, 1, Constants.Duration.EndOfTurn)));
+        // Whenever a creature you control attacks, put a charge counter on Druids' Repository.
+        this.addAbility(new AttacksCreatureYourControlTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance())));
+
+        // Remove a charge counter from Druids' Repository: Add one mana of any color to your mana pool.
+        Ability ability = new AnyColorManaAbility();
+        ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
+        this.addAbility(ability);
     }
 
-    public GoldnightCommander(final GoldnightCommander card) {
+    public DruidsRepository(final DruidsRepository card) {
         super(card);
     }
 
     @Override
-    public GoldnightCommander copy() {
-        return new GoldnightCommander(this);
+    public DruidsRepository copy() {
+        return new DruidsRepository(this);
     }
 }

@@ -26,73 +26,68 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.zendikar;
+package mage.abilities.effects.common.continious;
 
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.Constants.*;
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksCreatureYourControlTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.BoostControlledEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.cards.CardImpl;
-import mage.counters.CounterType;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.util.UUID;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BeastmasterAscension extends CardImpl<BeastmasterAscension> {
+public class LoseAbilityAttachedEffect extends ContinuousEffectImpl<LoseAbilityAttachedEffect> {
 
-	public BeastmasterAscension(UUID ownerId) {
-		super(ownerId, 159, "Beastmaster Ascension", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
-		this.expansionSetCode = "ZEN";
-		this.color.setGreen(true);
+	protected Ability ability;
+    protected AttachmentType attachmentType;
 
-		this.addAbility(new AttacksCreatureYourControlTriggeredAbility(new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BeastmasterAscensionEffect()));
+	public LoseAbilityAttachedEffect(Ability ability, AttachmentType attachmentType) {
+		super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.LoseAbility);
+		this.ability = ability;
+        this.attachmentType = attachmentType;
+		setText();
 	}
 
-	public BeastmasterAscension(final BeastmasterAscension card) {
-		super(card);
+	public LoseAbilityAttachedEffect(final LoseAbilityAttachedEffect effect) {
+		super(effect);
+		this.ability = effect.ability.copy();
+        this.attachmentType = effect.attachmentType;
 	}
 
 	@Override
-	public BeastmasterAscension copy() {
-		return new BeastmasterAscension(this);
-	}
-
-}
-
-class BeastmasterAscensionEffect extends BoostControlledEffect {
-
-	public BeastmasterAscensionEffect() {
-		super(5, 5, Duration.WhileOnBattlefield);
-		staticText = "As long as {this} has seven or more quest counters on it, creatures you control get +5/+5";
-	}
-
-	public BeastmasterAscensionEffect(final BeastmasterAscensionEffect effect) {
-		super(effect);
+	public LoseAbilityAttachedEffect copy() {
+		return new LoseAbilityAttachedEffect(this);
 	}
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getSourceId());
-		if (permanent != null && permanent.getCounters().getCount(CounterType.QUEST) > 6) {
-			super.apply(game, source);
+		Permanent equipment = game.getPermanent(source.getSourceId());
+		if (equipment != null && equipment.getAttachedTo() != null) {
+			Permanent creature = game.getPermanent(equipment.getAttachedTo());
+			if (creature != null) {
+                creature.getAbilities().remove(ability);
+            }
 		}
-		return false;
+		return true;
 	}
 
-	@Override
-	public BeastmasterAscensionEffect copy() {
-		return new BeastmasterAscensionEffect(this);
+	private void setText() {
+        StringBuilder sb = new StringBuilder();
+        if (attachmentType == AttachmentType.AURA) {
+            sb.append("Enchanted"); 
+		} else if (attachmentType == AttachmentType.EQUIPMENT) {
+            sb.append("Equipped");
+		}
+		sb.append(" creature ");
+		if (duration == Duration.WhileOnBattlefield) {
+			sb.append("loses ");
+		} else {
+			sb.append("loses ");
+		}
+		sb.append(ability.getRule());	
+		staticText = sb.toString();
 	}
 
 }

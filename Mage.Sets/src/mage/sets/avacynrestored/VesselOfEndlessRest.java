@@ -27,42 +27,41 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.common.EntersAnotherCreatureYourControlTriggeredAbility;
-import mage.abilities.effects.common.continious.BoostControlledEffect;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.PutOnLibraryTargetEffect;
+import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
+import mage.target.common.TargetCardInGraveyard;
 
 import java.util.UUID;
 
 /**
- * @author Loki
+ * @author noxx
  */
-public class GoldnightCommander extends CardImpl<GoldnightCommander> {
+public class VesselOfEndlessRest extends CardImpl<VesselOfEndlessRest> {
 
-    public GoldnightCommander(UUID ownerId) {
-        super(ownerId, 22, "Goldnight Commander", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
+    public VesselOfEndlessRest(UUID ownerId) {
+        super(ownerId, 224, "Vessel of Endless Rest", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "AVR";
-        this.subtype.add("Human");
-        this.subtype.add("Cleric");
-        this.subtype.add("Soldier");
 
-        this.color.setWhite(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        // When Vessel of Endless Rest enters the battlefield, put target card from a graveyard on the bottom of its owner's library.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new PutOnLibraryTargetEffect(false), false);
+        ability.addTarget(new TargetCardInGraveyard());
+        this.addAbility(ability);
 
-        // Whenever another creature enters the battlefield under your control, creatures you control get +1/+1 until end of turn.
-        this.addAbility(new EntersAnotherCreatureYourControlTriggeredAbility(new BoostControlledEffect(1, 1, Constants.Duration.EndOfTurn)));
+        // {tap}: Add one mana of any color to your mana pool.
+        this.addAbility(new AnyColorManaAbility());
     }
 
-    public GoldnightCommander(final GoldnightCommander card) {
+    public VesselOfEndlessRest(final VesselOfEndlessRest card) {
         super(card);
     }
 
     @Override
-    public GoldnightCommander copy() {
-        return new GoldnightCommander(this);
+    public VesselOfEndlessRest copy() {
+        return new VesselOfEndlessRest(this);
     }
 }

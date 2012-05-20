@@ -30,39 +30,47 @@ package mage.sets.avacynrestored;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.common.EntersAnotherCreatureYourControlTriggeredAbility;
-import mage.abilities.effects.common.continious.BoostControlledEffect;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.continious.LoseAbilityAttachedEffect;
+import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
 /**
- * @author Loki
+ * @author noxx
  */
-public class GoldnightCommander extends CardImpl<GoldnightCommander> {
+public class Grounded extends CardImpl<Grounded> {
 
-    public GoldnightCommander(UUID ownerId) {
-        super(ownerId, 22, "Goldnight Commander", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
+    public Grounded(UUID ownerId) {
+        super(ownerId, 181, "Grounded", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
         this.expansionSetCode = "AVR";
-        this.subtype.add("Human");
-        this.subtype.add("Cleric");
-        this.subtype.add("Soldier");
+        this.subtype.add("Aura");
 
-        this.color.setWhite(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        this.color.setGreen(true);
 
-        // Whenever another creature enters the battlefield under your control, creatures you control get +1/+1 until end of turn.
-        this.addAbility(new EntersAnotherCreatureYourControlTriggeredAbility(new BoostControlledEffect(1, 1, Constants.Duration.EndOfTurn)));
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.LoseAbility));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+
+        // Enchanted creature loses flying.
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new LoseAbilityAttachedEffect(FlyingAbility.getInstance(), Constants.AttachmentType.AURA)));
     }
 
-    public GoldnightCommander(final GoldnightCommander card) {
+    public Grounded(final Grounded card) {
         super(card);
     }
 
     @Override
-    public GoldnightCommander copy() {
-        return new GoldnightCommander(this);
+    public Grounded copy() {
+        return new Grounded(this);
     }
 }

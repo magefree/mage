@@ -93,4 +93,114 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Hunted Ghoul", 0);
     }
+
+    /**
+     * Tests "Creatures with flying can't block creatures you control"
+     */
+    @Test
+    public void testBowerPassage() {
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Bower Passage");
+
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Elite Vanguard");
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Arbor Elf");
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Assault Griffin");
+
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Angelic Wall");
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Air Elemental");
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Llanowar Elves");
+
+        // non flying vs. flying
+        attack(2, playerB, "Elite Vanguard");
+        block(2, playerA, "Angelic Wall", "Elite Vanguard");
+        // non flying vs. non flying
+        attack(2, playerB, "Arbor Elf");
+        block(2, playerA, "Llanowar Elves", "Arbor Elf");
+        // flying vs. flying
+        attack(2, playerB, "Assault Griffin");
+        block(2, playerA, "Air Elemental", "Assault Griffin");
+
+        setStopAt(2, Constants.PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 15);
+        assertLife(playerB, 20);
+    }
+
+    /**
+     * Tests restriction effect going away after card is destroyed
+     */
+    @Test
+    public void testBowerPassageDestroyed() {
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Bower Passage");
+
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Elite Vanguard");
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Arbor Elf");
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Assault Griffin");
+
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Angelic Wall");
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Air Elemental");
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Llanowar Elves");
+
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Constants.Zone.HAND, playerA, "Naturalize");
+
+        // non flying vs. flying
+        attack(2, playerB, "Elite Vanguard");
+        block(2, playerA, "Angelic Wall", "Elite Vanguard");
+        // non flying vs. non flying
+        attack(2, playerB, "Arbor Elf");
+        block(2, playerA, "Llanowar Elves", "Arbor Elf");
+        // flying vs. flying
+        attack(2, playerB, "Assault Griffin");
+        block(2, playerA, "Air Elemental", "Assault Griffin");
+
+        castSpell(2, Constants.PhaseStep.DECLARE_ATTACKERS, playerA, "Naturalize", "Bower Passage");
+
+        setStopAt(2, Constants.PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerB, "Bower Passage", 0);
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+    }
+
+    /**
+     * Tests "Creatures with flying can't block creatures you control"
+     */
+    @Test
+    public void testChampionOfLambholt() {
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Champion of Lambholt");
+
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Elite Vanguard");
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Arbor Elf");
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Assault Griffin");
+
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Plains", 5);
+        addCard(Constants.Zone.HAND, playerB, "Baneslayer Angel");
+
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Angelic Wall");
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Air Elemental");
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Llanowar Elves");
+
+        castSpell(2, Constants.PhaseStep.PRECOMBAT_MAIN, playerB, "Baneslayer Angel");
+
+        // non flying vs. flying
+        attack(2, playerB, "Elite Vanguard");
+        block(2, playerA, "Angelic Wall", "Elite Vanguard");
+        // non flying vs. non flying
+        attack(2, playerB, "Arbor Elf");
+        block(2, playerA, "Llanowar Elves", "Arbor Elf");
+        // flying vs. flying
+        attack(2, playerB, "Assault Griffin");
+        block(2, playerA, "Air Elemental", "Assault Griffin");
+
+        setStopAt(2, Constants.PhaseStep.END_TURN);
+        execute();
+
+        assertPowerToughness(playerB, "Champion of Lambholt", 2, 2);
+
+        assertLife(playerA, 17);
+        assertLife(playerB, 20);
+    }
 }
