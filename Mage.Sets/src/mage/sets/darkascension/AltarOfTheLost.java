@@ -27,9 +27,7 @@
  */
 package mage.sets.darkascension;
 
-import java.util.UUID;
 import mage.ConditionalMana;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
@@ -38,11 +36,13 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.keyword.FlashbackAbility;
-import mage.abilities.mana.BasicManaAbility;
+import mage.abilities.mana.ConditionalAnyColorManaAbility;
+import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.cards.CardImpl;
 import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  *
@@ -58,6 +58,9 @@ public class AltarOfTheLost extends CardImpl<AltarOfTheLost> {
         this.addAbility(new EntersBattlefieldTappedAbility());
         
         // {tap}: Add two mana in any combination of colors to your mana pool. Spend this mana only to cast spells with flashback from a graveyard.
+        this.addAbility(new ConditionalAnyColorManaAbility(2, new AltarOfTheLostManaBuilder()));
+
+        /*
         this.addAbility(new AltarOfTheLostManaAbility(Mana.BlackMana(2)));
         this.addAbility(new AltarOfTheLostManaAbility(Mana.BlueMana(2)));
         this.addAbility(new AltarOfTheLostManaAbility(Mana.RedMana(2)));
@@ -73,6 +76,7 @@ public class AltarOfTheLost extends CardImpl<AltarOfTheLost> {
         this.addAbility(new AltarOfTheLostManaAbility(new Mana(0, 0, 1, 1, 0, 0, 0)));
         this.addAbility(new AltarOfTheLostManaAbility(new Mana(0, 0, 1, 0, 1, 0, 0)));
         this.addAbility(new AltarOfTheLostManaAbility(new Mana(0, 0, 0, 1, 1, 0, 0)));
+        */
     }
 
     public AltarOfTheLost(final AltarOfTheLost card) {
@@ -85,21 +89,16 @@ public class AltarOfTheLost extends CardImpl<AltarOfTheLost> {
     }
 }
 
-class AltarOfTheLostManaAbility extends BasicManaAbility<AltarOfTheLostManaAbility> {
+class AltarOfTheLostManaBuilder extends ConditionalManaBuilder {
+    @Override
+    public ConditionalMana build(Object... options) {
+        return new AltarOfTheLostConditionalMana(this.mana);
+    }
 
-	AltarOfTheLostManaAbility(Mana mana) {
-		super(new BasicManaEffect(new AltarOfTheLostConditionalMana(mana)));
-		this.netMana = mana;
-	}
-
-	AltarOfTheLostManaAbility(AltarOfTheLostManaAbility ability) {
-		super(ability);
-	}
-
-	@Override
-	public AltarOfTheLostManaAbility copy() {
-		return new AltarOfTheLostManaAbility(this);
-	}
+    @Override
+    public String getRule() {
+        return "Spend this mana only to cast spells with flashback from a graveyard";
+    }
 }
 
 class AltarOfTheLostConditionalMana extends ConditionalMana {
