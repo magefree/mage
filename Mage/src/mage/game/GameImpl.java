@@ -758,6 +758,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 			}
 			somethingHappened = true;
 		}
+        resetLKI();
 		return somethingHappened;
 	}
 
