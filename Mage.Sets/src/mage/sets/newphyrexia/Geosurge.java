@@ -27,17 +27,19 @@
  */
 package mage.sets.newphyrexia;
 
-import java.util.UUID;
 import mage.ConditionalMana;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  *
@@ -77,9 +79,11 @@ class GeosurgeManaCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(source.getSourceId());
-        if (card != null && (card.getCardType().contains(CardType.ARTIFACT) || card.getCardType().contains(CardType.CREATURE))) {
-            return true;
+        if (source instanceof SpellAbility) {
+            Card card = game.getCard(source.getSourceId());
+            if (card != null && (card.getCardType().contains(CardType.ARTIFACT) || card.getCardType().contains(CardType.CREATURE))) {
+                return true;
+            }
         }
         return false;
     }
