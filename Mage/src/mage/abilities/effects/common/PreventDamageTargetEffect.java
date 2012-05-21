@@ -93,7 +93,11 @@ public class PreventDamageTargetEffect extends PreventionEffectImpl<PreventDamag
 	@Override
 	public String getText(Mode mode) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Prevent the next ").append(amount).append(" damage that would be dealt to target ");
+        if (amount == Integer.MAX_VALUE) {
+            sb.append("Prevent all damage that would be dealt to target ");
+        } else {
+            sb.append("Prevent the next ").append(amount).append(" damage that would be dealt to target ");
+        }
 		sb.append(mode.getTargets().get(0).getTargetName()).append(" ").append(duration.toString());
 		return sb.toString();
 	}
