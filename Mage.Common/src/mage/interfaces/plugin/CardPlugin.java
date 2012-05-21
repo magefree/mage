@@ -1,21 +1,19 @@
 package mage.interfaces.plugin;
 
+import mage.cards.Card;
+import mage.cards.MagePermanent;
+import mage.cards.action.ActionCallback;
+import mage.view.CardView;
+import mage.view.PermanentView;
+import net.xeoh.plugins.base.Plugin;
+
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
-
-import javax.swing.JComponent;
-
-import mage.cards.Card;
-import mage.cards.CardDimensions;
-import mage.cards.MagePermanent;
-import mage.cards.action.ActionCallback;
-import mage.view.CardView;
-import mage.view.PermanentView;
-import net.xeoh.plugins.base.Plugin;
 
 /**
  * Interface for card plugins
@@ -29,7 +27,7 @@ import net.xeoh.plugins.base.Plugin;
 public interface CardPlugin extends Plugin {
 	MagePermanent getMagePermanent(PermanentView permanent, Dimension dimension, UUID gameId, ActionCallback callback, boolean canBeFoil, boolean loadImage);
 	MagePermanent getMageCard(CardView permanent, Dimension dimension, UUID gameId, ActionCallback callback, boolean canBeFoil, boolean loadImage);
-	void sortPermanents(Map<String, JComponent> ui, Collection<MagePermanent> cards, Map<String, String> options);
+	int sortPermanents(Map<String, JComponent> ui, Collection<MagePermanent> cards, Map<String, String> options);
 
     /**
      * Check for new images.

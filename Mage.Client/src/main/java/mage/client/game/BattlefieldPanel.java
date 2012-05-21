@@ -42,6 +42,8 @@ import mage.client.util.Config;
 import mage.view.PermanentView;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -62,16 +64,23 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
 
 	protected Map<UUID, PermanentView> battlefield;
 	private Dimension cardDimension;
+
+    private JPanel jPanel;
+    private JScrollPane jScrollPane;
+    private int width;
 	
     /** Creates new form BattlefieldPanel */
-    public BattlefieldPanel(JScrollPane jScrollPane) {
-    	ui.put("jScrollPane", jScrollPane);
+    public BattlefieldPanel() {
     	ui.put("battlefieldPanel", this);
         initComponents();
         
         addComponentListener(new ComponentAdapter(){
 			@Override
 			public void componentResized(ComponentEvent e) {
+                int width = e.getComponent().getWidth();
+                int height = e.getComponent().getHeight();
+                BattlefieldPanel.this.jScrollPane.setSize(width, height);
+                BattlefieldPanel.this.width = width;
 				sortLayout();
 			}
         });
@@ -124,7 +133,11 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
 
 	//TODO: review sorting stuff
 	public void sortLayout() {
-		Plugins.getInstance().sortPermanents(ui, permanents.values());
+		int height = Plugins.getInstance().sortPermanents(ui, permanents.values());
+        BattlefieldPanel.this.jPanel.setPreferredSize(new Dimension(width - 30, height));
+        this.jScrollPane.repaint();
+        this.jScrollPane.revalidate();
+
 		if (battlefield == null) {return;}
 		
 		for (PermanentView permanent: battlefield.values()) {
@@ -149,7 +162,8 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
 		}
 		permanents.put(permanent.getId(), perm);
 		
-		BattlefieldPanel.this.add(perm, 10);
+		//BattlefieldPanel.this.jPanel.add(perm, 10);
+        this.jPanel.add(perm);
 		if (!Plugins.getInstance().isCardPluginLoaded()) {
 			moveToFront(perm);
 			perm.update(permanent);
@@ -200,12 +214,12 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
 	}
 
 	private void removePermanent(UUID permanentId, final int count) {
-        for (Component c: this.getComponents()) {
+        for (Component c: this.jPanel.getComponents()) {
         	final Component comp = c;
         	if (comp instanceof Permanent) {
         		if (((Permanent)comp).getPermanentId().equals(permanentId)) {
 					comp.setVisible(false);
-                    this.remove(comp);
+                    this.jPanel.remove(comp);
                 }
         	} else if (comp instanceof MagePermanent) {
         		if (((MagePermanent)comp).getOriginal().getId().equals(permanentId)) {
@@ -214,7 +228,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
 						public void run() {
 		        			Plugins.getInstance().onRemoveCard((MagePermanent)comp, count);
                             comp.setVisible(false);
-							BattlefieldPanel.this.remove(comp);
+							BattlefieldPanel.this.jPanel.remove(comp);
 						}
 					});
         			t.start();
@@ -257,6 +271,16 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
 
     private void initComponents() {
         setOpaque(true);
+
+        jPanel = new JPanel();
+        jPanel.setLayout(null);
+        jScrollPane = new JScrollPane(jPanel);
+
+        Border empty = new EmptyBorder(0,0,0,0);
+        jScrollPane.setBorder(empty);
+        jScrollPane.setViewportBorder(empty);
+
+        this.add(jScrollPane);
     }
 
 }

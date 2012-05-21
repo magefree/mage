@@ -27,19 +27,16 @@
 */
 package mage.client.game;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.util.UUID;
-import javax.swing.BorderFactory;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
+import mage.cards.decks.importer.DeckImporterUtil;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
-import mage.cards.decks.importer.DeckImporterUtil;
 import mage.view.PlayerView;
+
+import javax.swing.*;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.*;
+import java.util.UUID;
 
 /**
  *
@@ -54,8 +51,8 @@ public class PlayAreaPanel extends javax.swing.JPanel {
     public PlayAreaPanel() {
         initComponents();
 		setOpaque(false);
-        jScrollPane1.setOpaque(false);
-        jScrollPane1.getViewport().setOpaque(false);
+        //jScrollPane1.setOpaque(false);
+        //jScrollPane1.getViewport().setOpaque(false);
         battlefieldPanel.setOpaque(false);
 	}
 
@@ -91,8 +88,9 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 		setBorder(BorderFactory.createLineBorder(new Color(0,0,0,0)));
         playerPanel = new PlayerPanelExt();
         btnCheat = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        battlefieldPanel = new mage.client.game.BattlefieldPanel(jScrollPane1);
+        //jScrollPane1 = new javax.swing.JScrollPane();
+        //battlefieldPanel = new mage.client.game.BattlefieldPanel(jScrollPane1);
+        battlefieldPanel = new mage.client.game.BattlefieldPanel();
 
         btnCheat.setText("Cheat");
         btnCheat.addActionListener(new java.awt.event.ActionListener() {
@@ -102,22 +100,22 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             }
         });
 
-        jScrollPane1.setViewportView(battlefieldPanel);
-		Border empty = new EmptyBorder(0,0,0,0);
-		jScrollPane1.setBorder(empty);
-		jScrollPane1.setViewportBorder(empty);
+        //jScrollPane1.setViewportView(battlefieldPanel);
+		//Border empty = new EmptyBorder(0,0,0,0);
+		//jScrollPane1.setBorder(empty);
+		//jScrollPane1.setViewportBorder(empty);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         layout.setHorizontalGroup(
         	layout.createSequentialGroup()
         		.addComponent(playerPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
         		.addPreferredGap(ComponentPlacement.RELATED)
-        		.addComponent(jScrollPane1, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        		.addComponent(battlefieldPanel, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
         	layout.createParallelGroup(Alignment.LEADING)
         		.addComponent(playerPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        		.addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+        		.addComponent(battlefieldPanel, GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
         );
         this.setLayout(layout);
     }
@@ -126,11 +124,13 @@ public class PlayAreaPanel extends javax.swing.JPanel {
     	this.playerPanel.sizePlayerPanel(smallMode);
     	if (smallMode) {
     		this.playerPanel.setPreferredSize(new Dimension(92, 160));
-    		this.jScrollPane1.setPreferredSize(new Dimension(160, 160));
+    		//this.jScrollPane1.setPreferredSize(new Dimension(160, 160));
+            this.battlefieldPanel.setPreferredSize(new Dimension(160, 160));
     	}
     	else {
     		this.playerPanel.setPreferredSize(new Dimension(92, 212));
-    		this.jScrollPane1.setPreferredSize(new Dimension(160, 212));
+    		//this.jScrollPane1.setPreferredSize(new Dimension(160, 212));
+            this.battlefieldPanel.setPreferredSize(new Dimension(160, 212));
     	}
     }
     
@@ -141,7 +141,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
     
     private mage.client.game.BattlefieldPanel battlefieldPanel;
 	private javax.swing.JButton btnCheat;
-    private javax.swing.JScrollPane jScrollPane1;
+    //private javax.swing.JScrollPane jScrollPane1;
     private PlayerPanelExt playerPanel;
 
 }

@@ -101,25 +101,25 @@ public class CardPluginImpl implements CardPlugin {
     }
 
     @Override
-    public void sortPermanents(Map<String, JComponent> ui, Collection<MagePermanent> permanents, Map<String, String> options) {
+    public int sortPermanents(Map<String, JComponent> ui, Collection<MagePermanent> permanents, Map<String, String> options) {
         //TODO: add caching
 		//requires to find out is position have been changed that includes:
 		//adding/removing permanents, type change
 
 		if (ui == null)
             throw new RuntimeException("Error: no components");
-        JComponent component = ui.get("jScrollPane");
+        //JComponent component = ui.get("jScrollPane");
         JComponent component2 = ui.get("battlefieldPanel");
-        if (component == null)
-            throw new RuntimeException("Error: jScrollPane is missing");
+        //if (component == null)
+            //throw new RuntimeException("Error: jScrollPane is missing");
         if (component2 == null)
             throw new RuntimeException("Error: battlefieldPanel is missing");
-        if (!(component instanceof JScrollPane))
-            throw new RuntimeException("Error: jScrollPane has wrong type.");
-        if (!(component instanceof JScrollPane))
-            throw new RuntimeException("Error: battlefieldPanel is missing");
+        //if (!(component instanceof JScrollPane))
+            //throw new RuntimeException("Error: jScrollPane has wrong type.");
+        //if (!(component instanceof JScrollPane))
+            //throw new RuntimeException("Error: battlefieldPanel is missing");
 
-        JScrollPane jScrollPane = (JScrollPane) component;
+        //JScrollPane jScrollPane = (JScrollPane) component;
         JLayeredPane battlefieldPanel = (JLayeredPane) component2;
 
         Row allLands = new Row();
@@ -174,7 +174,7 @@ public class CardPluginImpl implements CardPlugin {
 		}
 
         cardWidth = cardWidthMax;
-        Rectangle rect = jScrollPane.getVisibleRect();
+        Rectangle rect = battlefieldPanel.getVisibleRect();
         playAreaWidth = rect.width;
         playAreaHeight = rect.height;
         while (true) {
@@ -270,6 +270,8 @@ public class CardPluginImpl implements CardPlugin {
             }
             y = rowBottom;
         }
+
+        return y;
     }
 
     private boolean empty(List<?> list) {

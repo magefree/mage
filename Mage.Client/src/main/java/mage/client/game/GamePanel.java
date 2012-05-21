@@ -34,19 +34,6 @@
 
 package mage.client.game;
 
-import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.Serializable;
-import java.util.*;
-import java.util.concurrent.CancellationException;
-import java.util.concurrent.ExecutionException;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.*;
-import javax.swing.border.LineBorder;
 import mage.Constants;
 import mage.client.MageFrame;
 import mage.client.chat.ChatPanel;
@@ -60,6 +47,20 @@ import mage.client.util.PhaseManager;
 import mage.remote.Session;
 import mage.view.*;
 import org.apache.log4j.Logger;
+
+import javax.swing.*;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.border.LineBorder;
+import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.Serializable;
+import java.util.*;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.ExecutionException;
 
 
 /**
@@ -848,7 +849,7 @@ public class GamePanel extends javax.swing.JPanel {
         				.addComponent(jPhases, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         				.addGroup(gl_jPanel3.createSequentialGroup()
         					.addComponent(pnlBattlefield, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-        					.addGap(49))))
+        					)))
         );
         gl_jPanel3.setVerticalGroup(
         	gl_jPanel3.createParallelGroup(Alignment.TRAILING)
