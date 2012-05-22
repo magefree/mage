@@ -276,7 +276,7 @@ public class CombatUtil {
             try {
                 canBlock = blocker.canBlock(null, game);
             } catch (Exception e) {
-                e.printStackTrace();
+                //e.printStackTrace();
             }
         }
         return canBlock;

@@ -28,11 +28,12 @@
 
 package mage.cards;
 
-import java.io.Serializable;
-import java.util.*;
 import mage.Constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
  *
@@ -45,6 +46,10 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
 	private Zone zone;
 
 	public CardsImpl() { }
+
+    public CardsImpl(Card card) {
+        this.add(card.getId());
+    }
 
 	public CardsImpl(Zone zone) {
 		this.zone = zone;
