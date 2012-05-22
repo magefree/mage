@@ -89,7 +89,7 @@ class ChampionOfLambholtEffect extends RestrictionEffect<ChampionOfLambholtEffec
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (sourcePermanent != null) {
+        if (sourcePermanent != null && permanent != null) {
             if (permanent.getPower().getValue() < sourcePermanent.getPower().getValue()) {
                 return true;
             }
