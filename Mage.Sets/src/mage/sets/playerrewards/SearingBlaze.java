@@ -8,7 +8,7 @@ import java.util.UUID;
 public class SearingBlaze extends mage.sets.worldwake.SearingBlaze {
     public SearingBlaze(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 52;
+        this.cardNumber = 53;
         this.expansionSetCode = "MPR";
     }
 
