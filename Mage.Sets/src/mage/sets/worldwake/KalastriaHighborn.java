@@ -27,7 +27,6 @@
  */
 package mage.sets.worldwake;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
@@ -43,6 +42,8 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -109,8 +110,8 @@ class KalastriaHighbornTriggeredAbility extends TriggeredAbilityImpl<KalastriaHi
 			if (permanent != null &&
 				zEvent.getToZone() == Zone.GRAVEYARD &&
 				zEvent.getFromZone() == Zone.BATTLEFIELD &&
-				permanent.getControllerId().equals(this.getControllerId()) &&
-				permanent.hasSubtype("Vampire"))
+				(permanent.getControllerId().equals(this.getControllerId()) &&
+				permanent.hasSubtype("Vampire") || permanent.getId().equals(this.getSourceId())))
 			{
 				return true;
 			}
