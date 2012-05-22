@@ -28,10 +28,6 @@
 
 package mage.sets;
 
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.lang.reflect.Constructor;
-import java.util.*;
 import mage.Constants.CardType;
 import mage.Constants.ColoredManaSymbol;
 import mage.Mana;
@@ -41,6 +37,11 @@ import mage.cards.ExpansionSet;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
 import org.apache.log4j.Logger;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.lang.reflect.Constructor;
+import java.util.*;
 
 /**
  *
@@ -111,6 +112,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
         this.addSet(TimeSpiral.getInstance());
         this.addSet(TimeSpiralTimeshifted.getInstance());
         this.addSet(UrzasSaga.getInstance());
+        this.addSet(UrzasLegacy.getInstance());
         this.addSet(Worldwake.getInstance());
         this.addSet(Zendikar.getInstance());
 	}

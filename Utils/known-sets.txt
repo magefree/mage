@@ -9,6 +9,7 @@ Planechase|planechase|
 Duel Decks: Elspeth vs. Tezzeret|elspethvstezzeret|
 Tempest|tempest|
 Urza's Saga|urzassaga|
+Urza's Legacy|urzaslegacy|
 Invasion|invasion|
 Planeshift|planeshift|
 Apocalypse|apocalypse|
