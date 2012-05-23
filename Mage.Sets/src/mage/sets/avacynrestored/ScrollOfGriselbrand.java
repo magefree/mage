@@ -43,6 +43,7 @@ import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.target.common.TargetOpponent;
 
 /**
  *
@@ -64,6 +65,7 @@ public class ScrollOfGriselbrand extends CardImpl<ScrollOfGriselbrand> {
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DiscardTargetEffect(1), new GenericManaCost(1));
         ability.addCost(new SacrificeSourceCost());
         ability.addEffect(new ConditionalOneShotEffect(new LoseLifeTargetEffect(3), new ControlsPermanentCondition(filter), "If you control a Demon, that player loses 3 life"));
+        ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }
 
