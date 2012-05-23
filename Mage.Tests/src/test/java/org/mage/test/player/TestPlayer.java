@@ -28,16 +28,11 @@
 
 package org.mage.test.player;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
 import mage.Constants;
 import mage.Constants.PhaseStep;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
-import mage.cards.Card;
 import mage.choices.Choice;
 import mage.counters.Counter;
 import mage.filter.FilterPermanent;
@@ -45,10 +40,17 @@ import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterCreatureForCombat;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.stack.StackObject;
 import mage.player.ai.ComputerPlayer;
 import mage.players.Player;
+import mage.target.Target;
+import mage.target.TargetPermanent;
 import org.junit.Ignore;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  *
@@ -174,6 +176,26 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
         }
         return super.choose(outcome, choice, game);
 	}
+
+    @Override
+    public boolean choose(Constants.Outcome outcome, Target target, UUID sourceId, Game game, Map<String, Serializable> options) {
+        if (!choices.isEmpty()) {
+            if (target instanceof TargetPermanent) {
+                for (Permanent permanent : game.getBattlefield().getAllActivePermanents((FilterPermanent)target.getFilter())) {
+                    for (String choose2: choices) {
+                        if (permanent.getName().equals(choose2)) {
+                            if (((TargetPermanent)target).canTarget(playerId, permanent.getId(), null, game) && !target.getTargets().contains(permanent.getId())) {
+                                target.add(permanent.getId(), game);
+                                choices.remove(choose2);
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return super.choose(outcome, target, sourceId, game, options);
+    }
     
     protected Permanent findPermanent(FilterPermanent filter, UUID controllerId, Game game) {
         List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(filter, controllerId);
