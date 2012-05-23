@@ -10,7 +10,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class CloneTest extends CardTestPlayerBase {
 
     /**
-     * Tests triggers working on both sides after Clone comming onto battlefield
+     * Tests triggers working on both sides after Clone coming onto battlefield
      */
     @Test
     public void testCloneTriggered() {
@@ -27,8 +27,10 @@ public class CloneTest extends CardTestPlayerBase {
         assertLife(playerA, 18);
         assertLife(playerB, 19);
 
-        assertHandCount(playerA, 2);
-        assertHandCount(playerB, 1);
+        // 1 from draw steps + 2 from Demon
+        assertHandCount(playerA, 3);
+        // 2 from draw steps + 1 from Demon
+        assertHandCount(playerB, 3);
 
         assertPermanentCount(playerA, "Bloodgift Demon", 1);
         assertPermanentCount(playerB, "Bloodgift Demon", 1);
@@ -37,7 +39,6 @@ public class CloneTest extends CardTestPlayerBase {
     /**
      * Tests Clone is sacrificed and only one effect is turned on
      */
-    //TODO: try this scenario in the game (bug report from player)
     @Test
     public void testCloneSacrifice() {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Bloodgift Demon", 1);
@@ -54,13 +55,17 @@ public class CloneTest extends CardTestPlayerBase {
         setStopAt(4, Constants.PhaseStep.END_TURN);
         execute();
 
-        assertLife(playerA, 18);
-        assertLife(playerB, 19);
-
-        assertHandCount(playerA, 2);
-        assertHandCount(playerB, 0);
-
         assertPermanentCount(playerA, "Bloodgift Demon", 1);
+        assertGraveyardCount(playerA, "Diabolic Edict", 1);
         assertPermanentCount(playerB, "Bloodgift Demon", 0);
+        assertGraveyardCount(playerB, "Clone", 1);
+
+        // 1 from draw steps + 2 from Demon
+        assertHandCount(playerA, 3);
+        // 2 from draw steps + no from Demon (should be sacrificed)
+        assertHandCount(playerB, 2);
+
+        assertLife(playerA, 18);
+        assertLife(playerB, 20);
     }
 }

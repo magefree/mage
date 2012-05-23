@@ -27,7 +27,6 @@
  */
 package mage.sets.innistrad;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
@@ -39,6 +38,8 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.game.events.GameEvent.EventType;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -59,7 +60,7 @@ public class BloodgiftDemon extends CardImpl<BloodgiftDemon> {
         // At the beginning of your upkeep, target player draws a card and loses 1 life.
         Ability ability = new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new DrawCardTargetEffect(1), false);
         ability.addEffect(new LoseLifeTargetEffect(1));
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
     }
 

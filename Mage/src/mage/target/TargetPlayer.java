@@ -28,14 +28,15 @@
 
 package mage.target;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.filter.FilterPlayer;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -44,6 +45,11 @@ import mage.players.Player;
 public class TargetPlayer<T extends TargetPlayer<T>> extends TargetImpl<TargetPlayer<T>> {
 
 	protected FilterPlayer filter = new FilterPlayer();
+
+    public TargetPlayer(boolean required) {
+        this();
+        setRequired(required);
+    }
 
 	public TargetPlayer() {
 		this(1, 1, false);
