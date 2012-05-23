@@ -27,8 +27,6 @@
  */
 package mage.sets.saviorsofkamigawa;
 
-import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -39,10 +37,13 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- * @author anonymous
+ * @author noxx
  */
 public class StampedingSerow extends CardImpl<StampedingSerow> {
 
@@ -64,7 +65,9 @@ public class StampedingSerow extends CardImpl<StampedingSerow> {
         this.addAbility(TrampleAbility.getInstance());
         // At the beginning of your upkeep, return a green creature you control to its owner's hand.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new ReturnToHandTargetEffect(), Constants.TargetController.YOU, false);
-        ability.addTarget(new TargetControlledCreaturePermanent(1, 1, filter, false));
+        Target target = new TargetControlledCreaturePermanent(1, 1, filter, false);
+        target.setRequired(true);
+        ability.addTarget(target);
         this.addAbility(ability);
     }
 
