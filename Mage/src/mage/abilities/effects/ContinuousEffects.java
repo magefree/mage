@@ -139,7 +139,7 @@ public class ContinuousEffects implements Serializable {
                 case WhileOnStack:
                 case WhileInGraveyard:
                     Ability ability = layeredEffects.getAbility(effect.getId());
-                    if (ability.isInUseableZone(game))
+                    if (ability.isInUseableZone(game, false))
                         layerEffects.add(effect);
                     break;
                 default:
@@ -163,7 +163,7 @@ public class ContinuousEffects implements Serializable {
 		List<RequirementEffect> effects = new ArrayList<RequirementEffect>();
 		for (RequirementEffect effect: requirementEffects) {
             Ability ability = requirementEffects.getAbility(effect.getId());
-            if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game)) {
+            if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, false)) {
                 if (effect.applies(permanent, ability, game))
                     effects.add(effect);
             }
@@ -175,7 +175,7 @@ public class ContinuousEffects implements Serializable {
 		List<RestrictionEffect> effects = new ArrayList<RestrictionEffect>();
 		for (RestrictionEffect effect: restrictionEffects) {
             Ability ability = restrictionEffects.getAbility(effect.getId());
-            if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game)) {
+            if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, false)) {
                 if (effect.applies(permanent, ability, game))
                     effects.add(effect);
             }
@@ -198,7 +198,7 @@ public class ContinuousEffects implements Serializable {
 		//get all applicable transient Replacement effects
 		for (ReplacementEffect effect: replacementEffects) {
             Ability ability = replacementEffects.getAbility(effect.getId());
-            if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game)) {
+            if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, false)) {
                 if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
                     if (effect.applies(event, ability, game)) {
                         replaceEffects.add(effect);
@@ -208,7 +208,7 @@ public class ContinuousEffects implements Serializable {
 		}
 		for (PreventionEffect effect: preventionEffects) {
             Ability ability = preventionEffects.getAbility(effect.getId());
-            if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game)) {
+            if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, false)) {
                 if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
                     if (effect.applies(event, ability, game)) {
                         replaceEffects.add(effect);
@@ -230,7 +230,7 @@ public class ContinuousEffects implements Serializable {
 
         for (CostModificationEffect effect: costModificationEffects) {
             Ability ability = costModificationEffects.getAbility(effect.getId());
-            if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game)) {
+            if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, false)) {
                 if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
                     costEffects.add(effect);
                 }

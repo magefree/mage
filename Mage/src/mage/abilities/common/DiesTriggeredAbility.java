@@ -28,15 +28,11 @@
 
 package mage.abilities.common;
 
-import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.Zone;
 import mage.MageObject;
 import mage.abilities.effects.Effect;
-import mage.cards.Card;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 
 /**
  *
@@ -59,7 +55,7 @@ public class DiesTriggeredAbility extends ZoneChangeTriggeredAbility<DiesTrigger
 	}
 
     @Override
-    public boolean isInUseableZone(Game game) {
+    public boolean isInUseableZone(Game game, boolean checkLKI) {
         // check it was previously on battlefield
         MageObject before = game.getLastKnownInformation(sourceId, Constants.Zone.BATTLEFIELD);
         // check now it is in graveyard

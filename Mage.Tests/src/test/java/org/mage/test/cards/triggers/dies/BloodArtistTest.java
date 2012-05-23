@@ -13,7 +13,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class BloodArtistTest extends CardTestPlayerBase {
 
     /**
-     * Tests that whenever Blood Artist goes to graveyard, it would trigget its ability.
+     * Tests that whenever Blood Artist goes to graveyard, it would trigger its ability.
      * Tests that after Blood Artist went to graveyard, his ability doesn't work anymore.
      */
     @Test
@@ -26,9 +26,9 @@ public class BloodArtistTest extends CardTestPlayerBase {
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Bloodflow Connoisseur", 1);
 
         castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Blood Artist");
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Bloodflow Connoisseur");
+        castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "Bloodflow Connoisseur");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, Constants.PhaseStep.END_TURN);
         execute();
         
         assertLife(playerA, 23);

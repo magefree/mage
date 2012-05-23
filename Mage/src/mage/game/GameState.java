@@ -28,16 +28,6 @@
 
 package mage.game;
 
-import mage.abilities.TriggeredAbility;
-import mage.game.events.GameEvent;
-import mage.game.stack.SpellStack;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 import mage.Constants.Zone;
 import mage.abilities.*;
 import mage.abilities.effects.ContinuousEffect;
@@ -48,11 +38,10 @@ import mage.choices.Choice;
 import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
 import mage.game.command.Command;
-import mage.game.events.GameEvent.EventType;
-import mage.game.events.ZoneChangeEvent;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Battlefield;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentCard;
+import mage.game.stack.SpellStack;
 import mage.game.stack.StackObject;
 import mage.game.turn.Turn;
 import mage.game.turn.TurnMods;
@@ -63,6 +52,9 @@ import mage.target.Target;
 import mage.util.Copyable;
 import mage.watchers.Watcher;
 import mage.watchers.Watchers;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
  *

@@ -458,12 +458,14 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
     }
 	
     @Override
-    public boolean isInUseableZone(Game game) {
+    public boolean isInUseableZone(Game game, boolean checkLKI) {
         // try LKI first
 
-        MageObject lkiTest = game.getLastKnownInformation(getSourceId(), zone);
-        if (lkiTest != null) {
-            return true;
+        if (checkLKI) {
+            MageObject lkiTest = game.getLastKnownInformation(getSourceId(), zone);
+            if (lkiTest != null) {
+                return true;
+            }
         }
 
         // check against current state

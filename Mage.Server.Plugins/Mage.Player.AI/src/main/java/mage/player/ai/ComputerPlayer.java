@@ -396,16 +396,18 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 				targets = threats(opponentId, source.getSourceId(), ((FilterCreatureOrPlayer)t.getFilter()).getCreatureFilter(), game, target.getTargets());
 			}
 
-            if (outcome.isGood()) {
-                if (target.canTarget(playerId, source, game)) {
-                    target.addTarget(playerId, source, game);
-                    return true;
+            if (targets.isEmpty()) {
+                if (outcome.isGood()) {
+                    if (target.canTarget(playerId, source, game)) {
+                        target.addTarget(playerId, source, game);
+                        return true;
+                    }
                 }
-            }
-            else {
-                if (target.canTarget(opponentId, source, game)) {
-                    target.addTarget(opponentId, source, game);
-                    return true;
+                else {
+                    if (target.canTarget(opponentId, source, game)) {
+                        target.addTarget(opponentId, source, game);
+                        return true;
+                    }
                 }
             }
 
@@ -419,6 +421,19 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
                         target.addTarget(permanent.getId(), source, game);
                         return true;
                     }
+                }
+            }
+
+            if (outcome.isGood()) {
+                if (target.canTarget(playerId, source, game)) {
+                    target.addTarget(playerId, source, game);
+                    return true;
+                }
+            }
+            else {
+                if (target.canTarget(opponentId, source, game)) {
+                    target.addTarget(opponentId, source, game);
+                    return true;
                 }
             }
 
@@ -1501,12 +1516,12 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 	protected List<Permanent> threats(UUID playerId, UUID sourceId, FilterPermanent filter, Game game, List<UUID> targets) {
 		List<Permanent> threats = playerId == null ?
                 game.getBattlefield().getAllActivePermanents(filter) :
-                game.getBattlefield().getAllActivePermanents(filter, playerId);
+                game.getBattlefield().getActivePermanents(filter, playerId, sourceId, game);
 
         Iterator<Permanent> it = threats.iterator();
         while (it.hasNext()) { // remove permanents already targeted
             Permanent test = it.next();
-            if (targets.contains(test.getId()))
+            if (targets.contains(test.getId()) || (playerId != null && !test.getControllerId().equals(playerId)))
                 it.remove();
         }
 		Collections.sort(threats, new PermanentComparator(game));

@@ -26,7 +26,7 @@ public class ArchangelsLightTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
         assertGraveyardCount(playerA, 1);
         assertGraveyardCount(playerA, "Archangel's Light", 1);
-        Assert.assertEquals(currentGame.getPlayer(playerA.getId()).getLibrary().size(), 66);
+        Assert.assertEquals(currentGame.getPlayer(playerA.getId()).getLibrary().size(), 77);
     }
 
     

@@ -350,6 +350,7 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         assertAbilities(playerA, "Elite Vanguard", abilities);
     }
 
+    @Test
     public void testExileAndReturnBack() {
         //TODO: Soulbond + Soulshift
         Assert.assertTrue(false);

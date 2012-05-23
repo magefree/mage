@@ -28,12 +28,13 @@
 
 package mage.abilities;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.MageObject;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  *
@@ -51,7 +52,7 @@ public class TriggeredAbilities extends HashMap<UUID, TriggeredAbility> {
 
     public void checkTriggers(GameEvent event, Game game) {
         for (TriggeredAbility ability: this.values()) {
-            if (ability.isInUseableZone(game)) {
+            if (ability.isInUseableZone(game, true)) {
                 MageObject object = game.getLastKnownInformation(ability.getSourceId(), event.getZone());
                 if (object == null) {
                     object = game.getObject(ability.getSourceId());

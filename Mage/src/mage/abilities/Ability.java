@@ -28,9 +28,6 @@
 
 package mage.abilities;
 
-import java.io.Serializable;
-import java.util.List;
-import java.util.UUID;
 import mage.Constants.AbilityType;
 import mage.Constants.EffectType;
 import mage.Constants.Zone;
@@ -46,6 +43,10 @@ import mage.choices.Choices;
 import mage.game.Game;
 import mage.target.Target;
 import mage.target.Targets;
+
+import java.io.Serializable;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * Practically everything in the game is started from an Ability.  This
@@ -356,8 +357,9 @@ public interface Ability extends Serializable {
      * Returns true if this abilities source is in the zone for the ability
      * 
      * @param game
+     * @param checkLKI
      * @return 
      */
-    public boolean isInUseableZone(Game game);
+    public boolean isInUseableZone(Game game, boolean checkLKI);
 	
 }

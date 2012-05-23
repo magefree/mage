@@ -42,8 +42,9 @@ public class CondemnTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Sejiri Merfolk", 0);
         assertLife(playerB, 20);
         assertLife(playerA, 21);
+
         // check was put on top
-        Assert.assertEquals(currentGame.getPlayer(playerA.getId()).getLibrary().size(), 61);
+        Assert.assertEquals(72, currentGame.getPlayer(playerA.getId()).getLibrary().size());
     }
 
 }

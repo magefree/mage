@@ -61,10 +61,10 @@ public class SorinLordOfInnistradTest extends CardTestPlayerBase {
         assertLife(playerA, 23);
         assertLife(playerB, 20);
         assertPermanentCount(playerA, "Sorin, Lord of Innistrad", 0);
-        assertPermanentCount(playerA, "Craw Wurm", 1);
         assertPermanentCount(playerB, "Craw Wurm", 0);
-        assertPermanentCount(playerA, "Angel of Mercy", 1);
         assertPermanentCount(playerB, "Angel of Mercy", 0);
+        assertPermanentCount(playerA, "Craw Wurm", 1);
+        assertPermanentCount(playerA, "Angel of Mercy", 1);
     }
 
 }

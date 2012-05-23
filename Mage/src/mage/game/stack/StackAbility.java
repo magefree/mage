@@ -28,36 +28,31 @@
 
 package mage.game.stack;
 
-import java.util.ArrayList;
 import mage.Constants.AbilityType;
-import mage.abilities.Mode;
-import mage.abilities.Modes;
-import mage.abilities.costs.AlternativeCost;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.Effects;
-import mage.choices.Choice;
-import mage.choices.Choices;
-import mage.game.*;
-import java.util.List;
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.EffectType;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.Abilities;
-import mage.abilities.AbilitiesImpl;
-import mage.abilities.Ability;
-import mage.abilities.StateTriggeredAbility;
+import mage.abilities.*;
+import mage.abilities.costs.AlternativeCost;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
+import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.game.events.GameEvent;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.Effects;
+import mage.choices.Choice;
+import mage.choices.Choices;
+import mage.game.Game;
 import mage.target.Target;
 import mage.target.Targets;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -329,7 +324,7 @@ public class StackAbility implements StackObject, Ability {
     }
 
     @Override
-    public boolean isInUseableZone(Game game) {
+    public boolean isInUseableZone(Game game, boolean checkLKI) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 }

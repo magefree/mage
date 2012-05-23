@@ -640,7 +640,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                                 if (checkStateAndTriggered()) {
                                     applyEffects();
                                 }
-                                resetLKI();
+                                //resetLKI();
                                 applyEffects();
                                 if (isPaused() || isGameOver()) return;
                                 // resetPassed should be called if player performs any action
@@ -660,7 +660,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                                 state.getPlayers().resetPassed();
                                 fireUpdatePlayersEvent();
                                 state.getRevealed().reset();
-                                resetLKI();
+                                //resetLKI();
                                 break;
                             } else {
                                 //removeBookmark(bookmark);
