@@ -27,9 +27,9 @@
 */
 package mage;
 
-import mage.Constants.ManaType;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
+import mage.abilities.mana.conditional.ManaCondition;
 import mage.filter.Filter;
 import mage.filter.FilterMana;
 import mage.game.Game;
@@ -37,6 +37,7 @@ import mage.game.Game;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author nantuko
@@ -59,6 +60,11 @@ public class ConditionalMana extends Mana implements Serializable {
 	 */
 	private Filter.ComparisonScope scope = Filter.ComparisonScope.All;
 
+    /**
+     * UUID of source for mana.
+     */
+    private UUID manaProducerId;
+
 	public ConditionalMana(Mana mana) {
 		super(mana);
 	}
@@ -78,12 +84,15 @@ public class ConditionalMana extends Mana implements Serializable {
 		this.scope = scope;
 	}
 
-	public boolean apply(Ability ability, Game game) {
+	public boolean apply(Ability ability, Game game, UUID manaProducerId) {
 		if (conditions.size() == 0) {
 			throw new IllegalStateException("Conditional mana should contain at least one Condition");
 		}
 		for (Condition condition : conditions) {
-			if (!condition.apply(game, ability)) {
+            boolean applied = (condition instanceof ManaCondition) ?
+                    ((ManaCondition)condition).apply(game, ability, manaProducerId) : condition.apply(game, ability);
+
+            if (!applied) {
 				// if one condition fails, return false only if All conditions should be met
 				// otherwise it may happen that Any other condition will be ok
 				if (scope.equals(Filter.ComparisonScope.All)) {
@@ -124,4 +133,11 @@ public class ConditionalMana extends Mana implements Serializable {
 		if (filter.isColorless()) colorless = 0;
     }
 
+    public UUID getManaProducerId() {
+        return manaProducerId;
+    }
+
+    public void setManaProducerId(UUID manaProducerId) {
+        this.manaProducerId = manaProducerId;
+    }
 }

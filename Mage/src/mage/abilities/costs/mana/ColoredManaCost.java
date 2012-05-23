@@ -78,6 +78,9 @@ public class ColoredManaCost extends ManaCostImpl<ColoredManaCost> {
 
 	@Override
 	public boolean testPay(Mana testMana) {
+        if (testMana.getAny() > 0) {
+            return true;
+        }
 		switch (mana) {
 			case B:
 				return testMana.getBlack() > 0;

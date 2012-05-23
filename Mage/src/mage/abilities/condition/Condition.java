@@ -8,10 +8,11 @@ import java.io.Serializable;
 /**
  * Interface describing condition occurrence.
  *
- * @author nantuko
+ * @author nantuko, noxx
  */
 public interface Condition extends Serializable {
-	/**
+
+    /**
 	 * Checks the game to see if this condition applies for the given ability.
 	 * 
 	 * @param game

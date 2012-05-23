@@ -33,57 +33,59 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.filter.FilterPermanent;
 import mage.game.permanent.Permanent;
+
 import java.util.List;
 
 /**
- * 
  * @author jeffwadsworth
  */
 public class PermanentHasCounterCondition implements Condition {
-    
-        public static enum CountType { MORE_THAN, FEWER_THAN, EQUAL_TO };
-	private CounterType counterType;
-	private int amount;
-        private FilterPermanent filter;
-        private CountType type;
-        
-        public PermanentHasCounterCondition(CounterType counterType, int amount, FilterPermanent filter) {
-                this(counterType, amount, filter, CountType.EQUAL_TO);
-        }
-        
-        public PermanentHasCounterCondition(CounterType counterType, int amount, FilterPermanent filter, CountType type) {
-                this.counterType = counterType;
-                this.amount = amount;
-                this.filter = filter;
-                this.type = type;
-        }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-                boolean conditionApplies = false;
-                List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(this.filter, source.getControllerId());
-                for (Permanent permanent : permanents) {
-                    switch ( this.type ) {
-			case FEWER_THAN:
-                                    if (permanent.getCounters().getCount(this.counterType) < this.amount) {
-                                        conditionApplies = true;
-                                        break;
-                                    }
-                                    break;
-			case MORE_THAN:
-                                    if (permanent.getCounters().getCount(this.counterType) > this.amount) {
-                                        conditionApplies = true;
-                                        break;
-                                    }
-                                    break;
-			case EQUAL_TO:
-                                    if (permanent.getCounters().getCount(this.counterType) == this.amount) {
-                                        conditionApplies = true;
-                                        break;
-                                    }
-                                    break;
+    public static enum CountType {MORE_THAN, FEWER_THAN, EQUAL_TO}
+
+    ;
+    private CounterType counterType;
+    private int amount;
+    private FilterPermanent filter;
+    private CountType type;
+
+    public PermanentHasCounterCondition(CounterType counterType, int amount, FilterPermanent filter) {
+        this(counterType, amount, filter, CountType.EQUAL_TO);
+    }
+
+    public PermanentHasCounterCondition(CounterType counterType, int amount, FilterPermanent filter, CountType type) {
+        this.counterType = counterType;
+        this.amount = amount;
+        this.filter = filter;
+        this.type = type;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        boolean conditionApplies = false;
+        List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(this.filter, source.getControllerId());
+        for (Permanent permanent : permanents) {
+            switch (this.type) {
+                case FEWER_THAN:
+                    if (permanent.getCounters().getCount(this.counterType) < this.amount) {
+                        conditionApplies = true;
+                        break;
                     }
-                }
-                return conditionApplies;
-	}
+                    break;
+                case MORE_THAN:
+                    if (permanent.getCounters().getCount(this.counterType) > this.amount) {
+                        conditionApplies = true;
+                        break;
+                    }
+                    break;
+                case EQUAL_TO:
+                    if (permanent.getCounters().getCount(this.counterType) == this.amount) {
+                        conditionApplies = true;
+                        break;
+                    }
+                    break;
+            }
+        }
+        return conditionApplies;
+    }
 }

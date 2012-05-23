@@ -41,6 +41,7 @@ public class AnyColorManaAbility extends ManaAbility<AnyColorManaAbility> {
     public AnyColorManaAbility(Cost cost) {
         super(Constants.Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), cost);
         this.addChoice(new ChoiceColor());
+        this.netMana.setAny(1);
     }
 
     public AnyColorManaAbility(final AnyColorManaAbility ability) {

@@ -27,10 +27,7 @@
 */
 package mage.abilities.mana.conditional;
 
-import mage.Constants;
-import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.condition.Condition;
 import mage.game.Game;
 
@@ -39,20 +36,11 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class CreatureCastManaCondition extends ManaCondition implements Condition {
+public abstract class ManaCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
-        if (source instanceof SpellAbility) {
-            MageObject object = game.getObject(source.getSourceId());
-            if (object != null && object.getCardType().contains(Constants.CardType.CREATURE)) {
-                return true;
-            }
-        }
         return false;
     }
-
-    @Override
-    public boolean apply(Game game, Ability source, UUID originalId) {
-        return apply(game, source, null);
-    }
+    
+    public abstract boolean apply(Game game, Ability source, UUID originalId);
 }

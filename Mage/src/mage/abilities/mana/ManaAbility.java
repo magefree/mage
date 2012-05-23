@@ -28,7 +28,6 @@
 
 package mage.abilities.mana;
 
-import java.util.UUID;
 import mage.Constants.AbilityType;
 import mage.Constants.Zone;
 import mage.Mana;
@@ -36,6 +35,8 @@ import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.common.ManaEffect;
 import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  *

@@ -1,4 +1,4 @@
-package org.mage.test.cards.single;
+package org.mage.test.cards.abilities.curses;
 
 import mage.Constants;
 import org.junit.Test;

@@ -28,11 +28,6 @@
 
 package mage.players;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import mage.ConditionalMana;
 import mage.Constants.ManaType;
 import mage.Mana;
@@ -41,6 +36,11 @@ import mage.filter.Filter;
 import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  *
@@ -103,7 +103,7 @@ public class ManaPool implements Serializable {
 			return 0;
 		}
 		for (ManaPoolItem mana : manaItems) {
-			if (mana.isConditional() && mana.getConditionalMana().get(manaType) > 0 && mana.getConditionalMana().apply(ability, game)) {
+			if (mana.isConditional() && mana.getConditionalMana().get(manaType) > 0 && mana.getConditionalMana().apply(ability, game, mana.getSourceId())) {
                 if (filter == null || filter.match(game.getObject(mana.getSourceId())))
                     return mana.getConditionalMana().get(manaType);
 			}
@@ -117,7 +117,7 @@ public class ManaPool implements Serializable {
 		}
 		int count = 0;
 		for (ConditionalMana mana : getConditionalMana()) {
-			if (mana.apply(ability, game)) {
+			if (mana.apply(ability, game, mana.getManaProducerId())) {
 				count += mana.count(filter);
 			}
 		}
@@ -140,7 +140,8 @@ public class ManaPool implements Serializable {
         while (it.hasNext()) {
             ManaPoolItem item = it.next();
             if (item.isConditional()) {
-                if (item.getConditionalMana().apply(ability, game)) {
+                ConditionalMana cm = item.getConditionalMana();
+                if (cm.apply(ability, game, cm.getManaProducerId())) {
                     total += item.count();
                     it.remove();
                 }
@@ -170,7 +171,7 @@ public class ManaPool implements Serializable {
             ManaPoolItem item = it.next();
             if (item.isConditional()) {
                 ConditionalMana c = item.getConditionalMana();
-                if (c.apply(ability, game)) {
+                if (c.apply(ability, game, c.getManaProducerId())) {
                     int count = c.count(filter);
                     if (count > 0) {
                         total += count;
@@ -246,10 +247,10 @@ public class ManaPool implements Serializable {
             this.manaItems.add(new ManaPoolItem((ConditionalMana)mana, source.getSourceId()));
 		} else {
             this.manaItems.add(new ManaPoolItem(mana.getRed(), mana.getGreen(), mana.getBlue(), mana.getWhite(), mana.getBlack(), mana.getColorless(), source.getSourceId()));
-            GameEvent event = GameEvent.getEvent(GameEvent.EventType.MANA_ADDED, source.getSourceId(), source.getId(), source.getControllerId());
-            event.setData(mana.toString());
-            game.fireEvent(event);
 		}
+        GameEvent event = GameEvent.getEvent(GameEvent.EventType.MANA_ADDED, source.getSourceId(), source.getId(), source.getControllerId());
+        event.setData(mana.toString());
+        game.fireEvent(event);
 	}
 
 	public List<ConditionalMana> getConditionalMana() {
@@ -276,7 +277,7 @@ public class ManaPool implements Serializable {
 
 	private void removeConditional(ManaType manaType, Ability ability, Game game) {
 		for (ConditionalMana mana : getConditionalMana()) {
-			if (mana.get(manaType) > 0 && mana.apply(ability, game)) {
+			if (mana.get(manaType) > 0 && mana.apply(ability, game, mana.getManaProducerId())) {
 				mana.set(manaType, mana.get(manaType) - 1);
 				break;
 			}

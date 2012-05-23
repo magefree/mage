@@ -27,11 +27,12 @@
 */
 package mage.players;
 
-import java.io.Serializable;
-import java.util.UUID;
 import mage.ConditionalMana;
 import mage.Constants.ManaType;
 import mage.Mana;
+
+import java.io.Serializable;
+import java.util.UUID;
 
 /**
  *
@@ -63,6 +64,7 @@ public class ManaPoolItem implements Serializable {
     public ManaPoolItem(ConditionalMana conditionalMana, UUID sourceId) {
         this.conditionalMana = conditionalMana;
         this.sourceId = sourceId;
+        this.conditionalMana.setManaProducerId(sourceId);
     }
     
     public ManaPoolItem(final ManaPoolItem item) {

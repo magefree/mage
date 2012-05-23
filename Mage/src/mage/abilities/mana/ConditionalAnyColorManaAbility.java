@@ -51,6 +51,7 @@ public class ConditionalAnyColorManaAbility extends ManaAbility<ConditionalAnyCo
         for (int i = 0; i < amount; i++) {
             this.addChoice(new ChoiceColor());
         }
+        this.netMana.setAny(amount);
     }
 
     public ConditionalAnyColorManaAbility(final ConditionalAnyColorManaAbility ability) {
