@@ -506,8 +506,10 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
     }
 
     @Override
-    public void clearConnectedCards() {
-        this.connectedCards.clear();
+    public void clearConnectedCards(String key) {
+        if (this.connectedCards.containsKey(key)) {
+            this.connectedCards.get(key).clear();
+        }
     }
 
     @Override

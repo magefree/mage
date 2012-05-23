@@ -28,8 +28,6 @@
 
 package mage.sets.newphyrexia;
 
-import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
@@ -38,7 +36,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CopyEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;
@@ -47,6 +44,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
+import mage.util.functions.ApplyToPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -96,7 +96,6 @@ class PhyrexianMetamorphEffect extends OneShotEffect<PhyrexianMetamorphEffect> {
     
     @Override
     public boolean apply(Game game, Ability source) {
-        //TODO: handle copying copies
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             Target target = new TargetPermanent(filter);
@@ -104,12 +103,16 @@ class PhyrexianMetamorphEffect extends OneShotEffect<PhyrexianMetamorphEffect> {
                 player.choose(Outcome.Copy, target, source.getSourceId(), game);
                 Permanent perm = game.getPermanent(target.getFirstTarget());
                 if (perm != null) {
-                    perm = perm.copy();
-                    perm.reset(game);
-                    perm.assignNewId();
-                    if (!perm.getCardType().contains(CardType.ARTIFACT))
-                        perm.getCardType().add(CardType.ARTIFACT);
-                    game.addEffect(new CopyEffect(perm), source);
+                    game.copyPermanent(perm, source, new ApplyToPermanent() {
+                        @Override
+                        public Boolean apply(Game game, Permanent permanent) {
+                            if (!permanent.getCardType().contains(CardType.ARTIFACT)) {
+                                permanent.getCardType().add(CardType.ARTIFACT);
+                            }
+                            return true;
+                        }
+                    });
+
                     return true;
                 }
             }

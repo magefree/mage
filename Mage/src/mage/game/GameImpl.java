@@ -37,6 +37,8 @@ import mage.abilities.TriggeredAbility;
 import mage.abilities.common.ChancellorAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.CopyEffect;
 import mage.abilities.keyword.LeylineAbility;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.actions.impl.MageAction;
@@ -67,6 +69,7 @@ import mage.players.Players;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
+import mage.util.functions.ApplyToPermanent;
 import mage.watchers.common.*;
 import org.apache.log4j.Logger;
 
@@ -649,15 +652,17 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                         if (isPaused() || isGameOver()) return;
                         if (allPassed()) {
                             if (!state.getStack().isEmpty()) {
-                               //20091005 - 115.4
+                                //20091005 - 115.4
                                 resolve();
                                 applyEffects();
                                 state.getPlayers().resetPassed();
                                 fireUpdatePlayersEvent();
                                 state.getRevealed().reset();
+                                resetLKI();
                                 break;
                             } else {
                                 //removeBookmark(bookmark);
+                                resetLKI();
                                 return;
                             }
                         }
@@ -718,13 +723,52 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
 	@Override
 	public void addEffect(ContinuousEffect continuousEffect, Ability source) {
-		ContinuousEffect newEffect = (ContinuousEffect)continuousEffect.copy();
-		Ability newAbility = source.copy();
+        Ability newAbility = source.copy();
+
+        ContinuousEffect newEffect = (ContinuousEffect)continuousEffect.copy();
 		newEffect.newId();
 		newEffect.setTimestamp();
 		newEffect.init(newAbility, this);
-		state.addEffect(newEffect, newAbility);
+
+        state.addEffect(newEffect, newAbility);
 	}
+
+    @Override
+    public void copyPermanent(Permanent targetPermanent, Ability source, ApplyToPermanent applier) {
+        Permanent permanent = targetPermanent.copy();
+        //getState().addCard(permanent);
+        permanent.reset(this);
+        permanent.assignNewId();
+        applier.apply(this, permanent);
+
+        Ability newAbility = source.copy();
+
+        CopyEffect newEffect = new CopyEffect(permanent, source.getSourceId());
+        newEffect.newId();
+        newEffect.setTimestamp();
+        newEffect.init(newAbility, this);
+
+        // handle copies of copies
+        for (Effect effect : getState().getContinuousEffects().getLayeredEffects(this)) {
+            if (effect instanceof CopyEffect) {
+                CopyEffect copyEffect = (CopyEffect) effect;
+                // there is another copy effect that our targetPermanent copies stats from
+                if (copyEffect.getSourceId().equals(targetPermanent.getId())) {
+                    MageObject object = ((CopyEffect) effect).getTarget();
+                    if (object instanceof Permanent) {
+                        // so we will use original card instead of target
+                        Permanent original = (Permanent)object;
+                        // copy it and apply changes we need
+                        original = original.copy();
+                        applier.apply(this, original);
+                        newEffect.setTarget(object);
+                    }
+                }
+            }
+        }
+
+        state.addEffect(newEffect, newAbility);
+    }
 
 	@Override
 	public void addTriggeredAbility(TriggeredAbility ability) {
@@ -758,7 +802,6 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 			}
 			somethingHappened = true;
 		}
-        resetLKI();
 		return somethingHappened;
 	}
 

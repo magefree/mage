@@ -189,6 +189,12 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
                                 choices.remove(choose2);
                                 return true;
                             }
+                        } else if ((permanent.getName()+"-"+permanent.getExpansionSetCode()).equals(choose2)) {
+                            if (((TargetPermanent)target).canTarget(playerId, permanent.getId(), null, game) && !target.getTargets().contains(permanent.getId())) {
+                                target.add(permanent.getId(), game);
+                                choices.remove(choose2);
+                                return true;
+                            }
                         }
                     }
                 }

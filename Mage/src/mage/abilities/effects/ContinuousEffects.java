@@ -131,7 +131,7 @@ public class ContinuousEffects implements Serializable {
 
 	}
 
-	private List<ContinuousEffect> getLayeredEffects(Game game) {
+	public List<ContinuousEffect> getLayeredEffects(Game game) {
 		List<ContinuousEffect> layerEffects = new ArrayList<ContinuousEffect>();
         for (ContinuousEffect effect: layeredEffects) {
             switch (effect.getDuration()) {

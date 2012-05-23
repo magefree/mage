@@ -27,8 +27,6 @@
  */
 package mage.sets.magic2012;
 
-import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
@@ -38,7 +36,6 @@ import mage.abilities.common.BecomesTargetTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CopyEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
@@ -47,6 +44,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
+import mage.util.functions.ApplyToPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -98,15 +98,17 @@ class PhantasmalImageCopyEffect extends OneShotEffect<PhantasmalImageCopyEffect>
                 target.setRequired(true);
                 target.setNotTarget(true);
                 player.choose(Outcome.Copy, target, source.getSourceId(), game);
-                Permanent permanent = game.getPermanent(target.getFirstTarget());
+                UUID targetId = target.getFirstTarget();
+                Permanent permanent = game.getPermanent(targetId);
                 if (permanent != null) {
-                    permanent = permanent.copy();
-                    permanent.reset(game);
-                    permanent.assignNewId();
-					permanent.getSubtype().add("Illusion");
-					permanent.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()), game);
-
-                    game.addEffect(new CopyEffect(permanent), source);
+                    game.copyPermanent(permanent, source, new ApplyToPermanent() {
+                        @Override
+                        public Boolean apply(Game game, Permanent permanent) {
+                            permanent.getSubtype().add("Illusion");
+                            permanent.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()), game);
+                            return true;
+                        }
+                    });
 
 					return true;
                 }

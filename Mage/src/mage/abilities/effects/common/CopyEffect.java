@@ -39,6 +39,8 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
@@ -46,15 +48,18 @@ import mage.game.permanent.Permanent;
 public class CopyEffect extends ContinuousEffectImpl<CopyEffect> {
 
     private MageObject target;
+    private UUID sourceId;
     
-	public CopyEffect(MageObject target) {
+	public CopyEffect(Permanent target, UUID sourceId) {
 		super(Duration.WhileOnBattlefield, Layer.CopyEffects_1, SubLayer.NA, Outcome.BecomeCreature);
         this.target = target;
+        this.sourceId = sourceId;
 	}
 
 	public CopyEffect(final CopyEffect effect) {
 		super(effect);
         this.target = effect.target.copy();
+        this.sourceId = effect.sourceId;
 	}
 
 	@Override
@@ -63,7 +68,7 @@ public class CopyEffect extends ContinuousEffectImpl<CopyEffect> {
         if (permanent == null) {
             return false;
         }
-
+        
         permanent.setName(target.getName());
         permanent.getColor().setColor(target.getColor());
         permanent.getManaCost().clear();
@@ -95,4 +100,15 @@ public class CopyEffect extends ContinuousEffectImpl<CopyEffect> {
 		return new CopyEffect(this);
 	}
 
+    public MageObject getTarget() {
+        return target;
+    }
+
+    public void setTarget(MageObject target) {
+        this.target = target;
+    }
+
+    public UUID getSourceId() {
+        return sourceId;
+    }
 }

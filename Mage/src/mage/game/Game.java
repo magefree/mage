@@ -28,42 +28,42 @@
 
 package mage.game;
 
-import mage.actions.impl.MageAction;
-import mage.game.match.MatchType;
-import mage.cards.Card;
-import mage.game.stack.SpellStack;
-import mage.MageObject;
-import java.io.Serializable;
-import java.util.*;
-
 import mage.Constants.MultiplayerAttackOption;
 import mage.Constants.RangeOfInfluence;
 import mage.Constants.Zone;
 import mage.MageItem;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.TriggeredAbilities;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
+import mage.actions.impl.MageAction;
+import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.game.combat.Combat;
 import mage.game.events.GameEvent;
-import mage.game.events.TableEvent;
 import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
+import mage.game.events.TableEvent;
+import mage.game.match.MatchType;
 import mage.game.permanent.Battlefield;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
+import mage.game.stack.SpellStack;
 import mage.game.turn.Phase;
 import mage.game.turn.Step;
 import mage.game.turn.Turn;
 import mage.players.Player;
 import mage.players.PlayerList;
 import mage.players.Players;
+import mage.util.functions.ApplyToPermanent;
+
+import java.io.Serializable;
+import java.util.*;
 
 public interface Game extends MageItem, Serializable {
 
@@ -160,7 +160,17 @@ public interface Game extends MageItem, Serializable {
 	public void concede(UUID playerId);
 	public void emptyManaPools();
 	public void addEffect(ContinuousEffect continuousEffect, Ability source);
-	public void addTriggeredAbility(TriggeredAbility ability);
+
+    /**
+     * This version supports copying of copies of any depth.
+     *
+     * @param targetPermanent
+     * @param source
+     * @param applier
+     */
+    public void copyPermanent(Permanent targetPermanent, Ability source, ApplyToPermanent applier);
+
+    public void addTriggeredAbility(TriggeredAbility ability);
 	public void addDelayedTriggeredAbility(DelayedTriggeredAbility delayedAbility);
 	public void applyEffects();
 	public boolean checkStateAndTriggered();

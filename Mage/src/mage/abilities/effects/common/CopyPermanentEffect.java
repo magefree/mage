@@ -27,6 +27,7 @@
  */
 package mage.abilities.effects.common;
 
+import mage.Constants;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -37,6 +38,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
+import mage.util.functions.ApplyToPermanent;
 
 /**
  *
@@ -63,7 +65,6 @@ public class CopyPermanentEffect extends OneShotEffect<CopyPermanentEffect> {
     
     @Override
     public boolean apply(Game game, Ability source) {
-        //TODO: handle copying copies
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             Target target = new TargetPermanent(filter);
@@ -71,11 +72,16 @@ public class CopyPermanentEffect extends OneShotEffect<CopyPermanentEffect> {
                 player.choose(Outcome.Copy, target, source.getSourceId(), game);
                 Permanent perm = game.getPermanent(target.getFirstTarget());
                 if (perm != null) {
-                    perm = perm.copy();
-                    game.getState().addCard(perm);
-                    perm.reset(game);
-                    perm.assignNewId();
-                    game.addEffect(new CopyEffect(perm), source);
+                    game.copyPermanent(perm, source, new ApplyToPermanent() {
+                        @Override
+                        public Boolean apply(Game game, Permanent permanent) {
+                            if (!permanent.getCardType().contains(Constants.CardType.ARTIFACT)) {
+                                permanent.getCardType().add(Constants.CardType.ARTIFACT);
+                            }
+                            return true;
+                        }
+                    });
+
                     return true;
                 }
             }

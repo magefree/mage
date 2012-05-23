@@ -103,7 +103,7 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Illusionary Servant");
 
         setChoice(playerA, "Illusionary Servant");
-        setChoice(playerA, "Phantasmal Image");
+        setChoice(playerA, "Illusionary Servant-M12");
 
         castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image");
         castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image");
