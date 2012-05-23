@@ -34,7 +34,7 @@ public class GolemSkinGauntletsTest extends CardTestPlayerBase {
         Permanent eliteVanguard = getPermanent("Elite Vanguard", playerA.getId());
         Assert.assertTrue(eliteVanguard.getAttachments().size() == 2);
         Assert.assertEquals(4, eliteVanguard.getPower().getValue());
-        Assert.assertEquals(1, eliteVanguard.getPower().getValue());
+        Assert.assertEquals(1, eliteVanguard.getToughness().getValue());
     }
 
 }

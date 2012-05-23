@@ -27,7 +27,6 @@
  */
 package mage.sets.mirrodin;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
@@ -37,6 +36,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.EquipmentAttachedCount;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
+
+import java.util.UUID;
 
 /**
  *
@@ -54,6 +55,7 @@ public class LoxodonPunisher extends CardImpl<LoxodonPunisher> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
+        // Loxodon Punisher gets +2/+2 for each Equipment attached to it
         EquipmentAttachedCount amount = new EquipmentAttachedCount(2);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(amount, amount, Duration.WhileOnBattlefield)));
     }

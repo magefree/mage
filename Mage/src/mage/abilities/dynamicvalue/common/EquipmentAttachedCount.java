@@ -27,16 +27,17 @@
  */
 package mage.abilities.dynamicvalue.common;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
  *
- * @author North
+ * @author North, noxx
  */
 public class EquipmentAttachedCount implements DynamicValue {
 
@@ -57,13 +58,16 @@ public class EquipmentAttachedCount implements DynamicValue {
     @Override
     public int calculate(Game game, Ability source) {
         int count = 0;
-        Permanent p = game.getPermanent(source.getSourceId());
-        if (p != null) {
-            List<UUID> attachments = p.getAttachments();
-            for (UUID attachmentId : attachments) {
-                Permanent attached = game.getPermanent(attachmentId);
-                if (attached != null && attached.getSubtype().contains("Equipment")) {
-                    count++;
+        Permanent equipment = game.getPermanent(source.getSourceId());
+        if (equipment != null) {
+            Permanent permanent = game.getPermanent(equipment.getAttachedTo());
+            if (permanent != null) {
+            List<UUID> attachments = permanent.getAttachments();
+                for (UUID attachmentId : attachments) {
+                    Permanent attached = game.getPermanent(attachmentId);
+                    if (attached != null && attached.getSubtype().contains("Equipment")) {
+                        count++;
+                    }
                 }
             }
 
