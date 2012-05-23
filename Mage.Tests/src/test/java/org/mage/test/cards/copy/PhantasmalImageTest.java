@@ -93,4 +93,29 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         Assert.assertFalse(masterCopied.getAbilities().contains(IndestructibleAbility.getInstance()));
     }
 
+    /**
+     * Tests copying creature with BecomesTargetTriggeredAbility
+     */
+    @Test
+    public void testCopyBecomesTargetTriggeredAbility() {
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 4);
+        addCard(Constants.Zone.HAND, playerA, "Phantasmal Image", 2);
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Illusionary Servant");
+
+        setChoice(playerA, "Illusionary Servant");
+        setChoice(playerA, "Phantasmal Image");
+
+        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image");
+        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image");
+
+        setStopAt(1, Constants.PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertGraveyardCount(playerA, 0);
+        assertPermanentCount(playerA, "Illusionary Servant", 3);
+    }
+
 }
