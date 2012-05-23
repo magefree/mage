@@ -395,6 +395,20 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 			else {
 				targets = threats(opponentId, source.getSourceId(), ((FilterCreatureOrPlayer)t.getFilter()).getCreatureFilter(), game, target.getTargets());
 			}
+
+            if (outcome.isGood()) {
+                if (target.canTarget(playerId, source, game)) {
+                    target.addTarget(playerId, source, game);
+                    return true;
+                }
+            }
+            else {
+                if (target.canTarget(opponentId, source, game)) {
+                    target.addTarget(opponentId, source, game);
+                    return true;
+                }
+            }
+
             if (targets.isEmpty() && target.isRequired()) {
                 targets = game.getBattlefield().getActivePermanents(((FilterCreatureOrPlayer)t.getFilter()).getCreatureFilter(), playerId, game);
             }
@@ -407,18 +421,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
                     }
                 }
             }
-			if (outcome.isGood()) {
-				if (target.canTarget(playerId, source, game)) {
-					target.addTarget(playerId, source, game);
-					return true;
-				}
-			}
-			else {
-				if (target.canTarget(opponentId, source, game)) {
-					target.addTarget(opponentId, source, game);
-					return true;
-				}
-			}
+
             if (!target.isRequired())
                 return false;
 		}
@@ -1498,7 +1501,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 	protected List<Permanent> threats(UUID playerId, UUID sourceId, FilterPermanent filter, Game game, List<UUID> targets) {
 		List<Permanent> threats = playerId == null ?
                 game.getBattlefield().getAllActivePermanents(filter) :
-                game.getBattlefield().getActivePermanents(filter, playerId, sourceId, game);
+                game.getBattlefield().getAllActivePermanents(filter, playerId);
 
         Iterator<Permanent> it = threats.iterator();
         while (it.hasNext()) { // remove permanents already targeted

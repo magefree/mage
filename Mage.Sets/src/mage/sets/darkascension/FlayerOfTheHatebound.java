@@ -27,7 +27,6 @@
  */
 package mage.sets.darkascension;
 
-import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -44,6 +43,8 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -64,7 +65,7 @@ public class FlayerOfTheHatebound extends CardImpl<FlayerOfTheHatebound> {
         
         // Whenever Flayer of the Hatebound or another creature enters the battlefield from your graveyard, that creature deals damage equal to its power to target creature or player.
         Ability ability = new FlayerTriggeredAbility();
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetCreatureOrPlayer(true));
         this.addAbility(ability);
     }
 

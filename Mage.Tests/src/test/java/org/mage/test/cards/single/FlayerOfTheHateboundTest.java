@@ -20,6 +20,7 @@ public class FlayerOfTheHateboundTest extends CardTestPlayerBase {
         addCard(Constants.Zone.HAND, playerA, "Lightning Bolt", 1);        
         
         castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Flayer of the Hatebound");
+
         setStopAt(2, Constants.PhaseStep.DRAW);
         execute();
         

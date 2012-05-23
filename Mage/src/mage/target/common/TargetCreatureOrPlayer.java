@@ -28,9 +28,6 @@
 
 package mage.target.common;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.Constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -42,6 +39,10 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetImpl;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
@@ -49,6 +50,11 @@ import mage.target.TargetImpl;
 public class TargetCreatureOrPlayer extends TargetImpl<TargetCreatureOrPlayer> {
 
 	protected FilterCreatureOrPlayer filter;
+
+    public TargetCreatureOrPlayer(boolean required) {
+        this();
+        setRequired(required);
+    }
 
 	public TargetCreatureOrPlayer() {
 		this(1, 1);

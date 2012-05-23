@@ -53,7 +53,7 @@ public abstract class CardTestPlayerBase extends CardTestPlayerAPIImpl {
 			System.gc();
 		}
 
-		Game game = new TwoPlayerDuel(Constants.MultiplayerAttackOption.LEFT, Constants.RangeOfInfluence.ALL);
+		Game game = new TwoPlayerDuel(Constants.MultiplayerAttackOption.LEFT, Constants.RangeOfInfluence.ONE);
 
 		playerA = createNewPlayer("PlayerA");
 		playerA.setTestMode(true);
