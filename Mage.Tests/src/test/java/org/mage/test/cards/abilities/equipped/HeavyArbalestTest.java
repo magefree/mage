@@ -37,17 +37,18 @@ public class HeavyArbalestTest extends CardTestPlayerBase {
     }
 
     /**
-     * Tests that creature with Heavy Arbalest will use it and untap later
+     * Tests that creature with Heavy Arbalest will use it and untap later after equip is equipped to another creature
      */
     @Test
     public void testUntapsLater() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 8);
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Heavy Arbalest");
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Elite Vanguard");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Llanowar Elves");
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Llanowar Elves");
 
         activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {4}", "Elite Vanguard");
         activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals 2 damage", playerB);
+        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {4}", "Llanowar Elves");
 
         setStopAt(5, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
@@ -56,7 +57,7 @@ public class HeavyArbalestTest extends CardTestPlayerBase {
         assertLife(playerB, 18);
 
         Permanent eliteVanguard = getPermanent("Elite Vanguard", playerA.getId());
-        Assert.assertTrue(eliteVanguard.getAttachments().size() > 0);
+        Assert.assertTrue(eliteVanguard.getAttachments().size() == 0);
         Assert.assertFalse(eliteVanguard.isTapped());
     }
 

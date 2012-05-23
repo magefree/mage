@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreatureOrPlayer;
 
 import java.util.UUID;
@@ -108,7 +109,13 @@ class HeavyArbalestEffect extends ReplacementEffectImpl<HeavyArbalestEffect> {
         if (game.getTurn().getStepType() == PhaseStep.UNTAP
                 && event.getType() == EventType.UNTAP
                 && event.getTargetId().equals(source.getSourceId())) {
-            return true;
+            Permanent p = game.getPermanent(source.getSourceId());
+            for (Ability ability : p.getAbilities()) {
+                if (ability.getRule().startsWith(staticText)) {
+                    return true;
+                }
+            }
+            used = true;
         }
         return false;
     }

@@ -230,6 +230,7 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
                     for (UUID id: ability.getTargets().get(0).possibleTargets(ability.getSourceId(), ability.getControllerId(), game)) {
                         MageObject object = game.getObject(id);
                         if (object != null && object.getName().equals(t)) {
+                            ability.getTargets().get(0).clearChosen();
                             ability.getTargets().get(0).addTarget(id, ability, game);
                             break;
                         }
