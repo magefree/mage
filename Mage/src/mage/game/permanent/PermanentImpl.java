@@ -44,10 +44,7 @@ import mage.game.events.*;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -74,8 +71,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
     protected boolean deathtouched;
     protected Counters counters;
     protected List<UUID> attachments = new ArrayList<UUID>();
-    protected List<UUID> imprinted = new ArrayList<UUID>();
-    protected List<UUID> connectedCards = new ArrayList<UUID>();
+    protected Map<String, List<UUID>> connectedCards = new HashMap<String, List<UUID>>();
     protected List<UUID> dealtDamageByThisTurn;
     protected UUID attachedTo;
     protected UUID pairedCard;
@@ -115,8 +111,9 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
         this.deathtouched = permanent.deathtouched;
         this.counters = permanent.counters.copy();
         this.attachments.addAll(permanent.attachments);
-        this.imprinted.addAll(permanent.imprinted);
-        this.connectedCards.addAll(permanent.connectedCards);
+        for (Map.Entry<String, List<UUID>> entry: permanent.connectedCards.entrySet()) {
+            this.connectedCards.put(entry.getKey(), entry.getValue());
+        }
         if (permanent.dealtDamageByThisTurn != null) {
             dealtDamageByThisTurn = new ArrayList<UUID>(permanent.dealtDamageByThisTurn);
             if (permanent.markedDamage != null) {
@@ -489,13 +486,23 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
     }
 
     @Override
-    public void addConnectedCard(UUID connectedCard) {
-        this.connectedCards.add(connectedCard);
+    public void addConnectedCard(String key, UUID connectedCard) {
+        if (this.connectedCards.containsKey(key)) {
+            this.connectedCards.get(key).add(connectedCard);
+        } else {
+            List<UUID> list = new ArrayList<UUID>();
+            list.add(connectedCard);
+            this.connectedCards.put(key, list);
+        }
     }
 
     @Override
-    public List<UUID> getConnectedCards() {
-        return this.connectedCards;
+    public List<UUID> getConnectedCards(String key) {
+        if (this.connectedCards.containsKey(key)) {
+            return this.connectedCards.get(key);
+        } else {
+            return emptyList;
+        }
     }
 
     @Override
@@ -796,19 +803,29 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 
     @Override
     public boolean imprint(UUID imprintedCard, Game game) {
-        this.imprinted.add(imprintedCard);
+        if (connectedCards.containsKey("imprint")) {
+            this.connectedCards.get("imprint").add(imprintedCard);
+        } else {
+            List<UUID> imprinted = new ArrayList<UUID>();
+            imprinted.add(imprintedCard);
+            this.connectedCards.put("imprint", imprinted);
+        }
         return true;
     }
 
     @Override
     public boolean clearImprinted(Game game) {
-        this.imprinted.clear();
+        this.connectedCards.put("imprint", new ArrayList<UUID>());
         return true;
     }
 
     @Override
     public List<UUID> getImprinted() {
-        return this.imprinted;
+        if (this.connectedCards.containsKey("imprint")) {
+            return this.connectedCards.get("imprint");
+        } else {
+            return emptyList;
+        }
     }
 
     @Override

@@ -161,21 +161,22 @@ public interface Permanent extends Card {
 	 * Allows to connect any card to permanent.
 	 * Very similar to Imprint except that it is for internal use only.
 	 *
+     * @param key
 	 * @param connectedCard
 	 */
-	public void addConnectedCard(UUID connectedCard);
+	public void addConnectedCard(String key, UUID connectedCard);
 
 	/**
 	 * Returns connected cards.
 	 * Very similar to Imprint except that it is for internal use only.
 	 * @return
 	 */
-	public List<UUID> getConnectedCards();
+	public List<UUID> getConnectedCards(String key);
 
 	/**
 	 * Clear all connected cards.
 	 */
-	public void clearConnectedCards();
+	public void clearConnectedCards(String key);
 
     /**
      * Sets paired card.

@@ -96,11 +96,11 @@ class RustTickTapTargetEffect extends TapTargetEffect {
 	@Override
 	public boolean apply(Game game, Ability source) {
 		Permanent rustTick = game.getPermanent(source.getSourceId());
-		if (rustTick != null) rustTick.clearConnectedCards();
+		if (rustTick != null) rustTick.clearConnectedCards("HisokasGuard");
 		for (UUID target : targetPointer.getTargets(source)) {
 			Permanent permanent = game.getPermanent(target);
 			if (permanent != null) {
-				rustTick.addConnectedCard(permanent.getId());
+				rustTick.addConnectedCard("HisokasGuard", permanent.getId());
 				permanent.tap(game);
 			} else {
 				return false;
@@ -135,8 +135,8 @@ class RustTickRestrictionEffect extends RestrictionEffect<RustTickRestrictionEff
 	public boolean applies(Permanent permanent, Ability source, Game game) {
 		Permanent rustTick = game.getPermanent(source.getSourceId());
 		if (rustTick != null && rustTick.isTapped()) {
-			if (rustTick.getConnectedCards().size() > 0) {
-				UUID target = rustTick.getConnectedCards().get(0);
+			if (rustTick.getConnectedCards("HisokasGuard").size() > 0) {
+				UUID target = rustTick.getConnectedCards("HisokasGuard").get(0);
 				if (target != null && target.equals(permanent.getId())) {
 					return true;
 				}
