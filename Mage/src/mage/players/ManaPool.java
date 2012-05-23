@@ -86,6 +86,7 @@ public class ManaPool implements Serializable {
         for (ManaPoolItem mana : manaItems) {
             if (filter == null || filter.match(game.getObject(mana.getSourceId()))) {
                 if (mana.get(manaType) > 0) {
+                    game.fireEvent(new GameEvent(GameEvent.EventType.MANA_PAYED, ability.getId(), mana.getSourceId(), ability.getControllerId()));
                     mana.remove(manaType);
                     return true;
                 }
@@ -279,7 +280,8 @@ public class ManaPool implements Serializable {
 		for (ConditionalMana mana : getConditionalMana()) {
 			if (mana.get(manaType) > 0 && mana.apply(ability, game, mana.getManaProducerId())) {
 				mana.set(manaType, mana.get(manaType) - 1);
-				break;
+                game.fireEvent(new GameEvent(GameEvent.EventType.MANA_PAYED, ability.getId(), mana.getManaProducerId(), ability.getControllerId()));
+                break;
 			}
 		}
 	}

@@ -28,8 +28,9 @@
 
 package mage.game.events;
 
-import java.util.UUID;
 import mage.Constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -87,7 +88,7 @@ public class GameEvent {
 		PLAY_LAND, LAND_PLAYED,
 		CAST_SPELL, SPELL_CAST,
 		ACTIVATE_ABILITY, ACTIVATED_ABILITY,
-        MANA_ADDED,
+        MANA_ADDED, MANA_PAYED,
 		LOSES, LOST, WINS,
 		TARGET, TARGETED,
 		COUNTER, COUNTERED,
