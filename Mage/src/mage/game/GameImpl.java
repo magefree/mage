@@ -640,6 +640,8 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                                 if (checkStateAndTriggered()) {
                                     applyEffects();
                                 }
+                                resetLKI();
+                                applyEffects();
                                 if (isPaused() || isGameOver()) return;
                                 // resetPassed should be called if player performs any action
                                 if (player.priority(this))
