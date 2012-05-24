@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.sets.avacynrestored;
 
 import mage.Constants;
 import mage.Constants.CardType;
@@ -46,48 +46,47 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class HarmsWay extends CardImpl<HarmsWay> {
+public class DivineDeflection extends CardImpl<DivineDeflection> {
 
-    public HarmsWay(UUID ownerId) {
-        super(ownerId, 14, "Harm's Way", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "M10";
+    public DivineDeflection(UUID ownerId) {
+        super(ownerId, 18, "Divine Deflection", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{W}");
+        this.expansionSetCode = "AVR";
 
         this.color.setWhite(true);
 
-        // The next 2 damage that a source of your choice would deal to you and/or permanents you control this turn is dealt to target creature or player instead.
-        this.getSpellAbility().addEffect(new HarmsWayPreventDamageTargetEffect(Constants.Duration.EndOfTurn, 2));
+        // Prevent the next X damage that would be dealt to you and/or permanents you control this turn. If damage is prevented this way, Divine Deflection deals that much damage to target creature or player.
+        this.getSpellAbility().addEffect(new DivineDeflectionPreventDamageTargetEffect(Constants.Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetSource());
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }
 
-    public HarmsWay(final HarmsWay card) {
+    public DivineDeflection(final DivineDeflection card) {
         super(card);
     }
 
     @Override
-    public HarmsWay copy() {
-        return new HarmsWay(this);
+    public DivineDeflection copy() {
+        return new DivineDeflection(this);
     }
 }
 
-class HarmsWayPreventDamageTargetEffect extends PreventionEffectImpl<HarmsWayPreventDamageTargetEffect> {
+class DivineDeflectionPreventDamageTargetEffect extends PreventionEffectImpl<DivineDeflectionPreventDamageTargetEffect> {
 
-    private int amount;
-
-    public HarmsWayPreventDamageTargetEffect(Constants.Duration duration, int amount) {
+    private int amount = -1;
+    
+    public DivineDeflectionPreventDamageTargetEffect(Constants.Duration duration) {
         super(duration);
-        this.amount = amount;
-        staticText = "The next " + amount + " damage that a source of your choice would deal to you and/or permanents you control this turn is dealt to target creature or player instead";
+        staticText = "Prevent the next X damage that would be dealt to you and/or permanents you control this turn. If damage is prevented this way, {this} deals that much damage to target creature or player";
     }
 
-    public HarmsWayPreventDamageTargetEffect(final HarmsWayPreventDamageTargetEffect effect) {
+    public DivineDeflectionPreventDamageTargetEffect(final DivineDeflectionPreventDamageTargetEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }
 
     @Override
-    public HarmsWayPreventDamageTargetEffect copy() {
-        return new HarmsWayPreventDamageTargetEffect(this);
+    public DivineDeflectionPreventDamageTargetEffect copy() {
+        return new DivineDeflectionPreventDamageTargetEffect(this);
     }
 
     @Override
@@ -99,6 +98,10 @@ class HarmsWayPreventDamageTargetEffect extends PreventionEffectImpl<HarmsWayPre
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), event.getAmount(), false);
         if (!game.replaceEvent(preventEvent)) {
+            if (amount == -1) {
+                // define once
+                amount = source.getManaCostsToPay().getX();
+            }
             int prevented = 0;
             if (event.getAmount() >= this.amount) {
                 int damage = amount;
