@@ -226,15 +226,28 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
             else if (group.startsWith("target=")) {
                 target = group.substring(group.indexOf("target=") + 7);
                 String[] targets = target.split("\\^");
+                int index = 0;
                 for (String t: targets) {
-                    for (UUID id: ability.getTargets().get(0).possibleTargets(ability.getSourceId(), ability.getControllerId(), game)) {
-                        MageObject object = game.getObject(id);
-                        if (object != null && object.getName().equals(t)) {
-                            if (ability.getTargets().get(0).getNumberOfTargets() == 1) {
-                                ability.getTargets().get(0).clearChosen();
+                    if (t.startsWith("targetPlayer=")) {
+                        target = t.substring(t.indexOf("targetPlayer=") + 13);
+                        for (Player player: game.getPlayers().values()) {
+                            if (player.getName().equals(target)) {
+                                ability.getTargets().get(index).addTarget(player.getId(), ability, game);
+                                index++;
+                                break;
                             }
-                            ability.getTargets().get(0).addTarget(id, ability, game);
-                            break;
+                        }
+                    } else {
+                        for (UUID id: ability.getTargets().get(0).possibleTargets(ability.getSourceId(), ability.getControllerId(), game)) {
+                            MageObject object = game.getObject(id);
+                            if (object != null && object.getName().equals(t)) {
+                                if (ability.getTargets().get(index).getNumberOfTargets() == 1) {
+                                    ability.getTargets().get(index).clearChosen();
+                                }
+                                ability.getTargets().get(index).addTarget(id, ability, game);
+                                index++;
+                                break;
+                            }
                         }
                     }
                 }
