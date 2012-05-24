@@ -30,12 +30,13 @@ package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.Target;
 
 import java.util.UUID;
-import mage.abilities.Mode;
 
 /**
  *
@@ -48,6 +49,11 @@ public class DestroyTargetEffect extends OneShotEffect<DestroyTargetEffect> {
 	public DestroyTargetEffect() {
 		this(false);
 	}
+
+    public DestroyTargetEffect(String ruleText) {
+        this(false);
+        staticText = ruleText;
+    }
 	
 	public DestroyTargetEffect(boolean noRegen) {
 		super(Outcome.DestroyPermanent);
@@ -67,7 +73,18 @@ public class DestroyTargetEffect extends OneShotEffect<DestroyTargetEffect> {
 	@Override
 	public boolean apply(Game game, Ability source) {
         int affectedTargets = 0;
-		if (targetPointer.getTargets(source).size() > 0) {
+        if (source.getTargets().size() > 1) { // for Rain of Thorns
+            for (Target target : source.getTargets()) {
+                for (UUID permanentId : target.getTargets()) {
+                    Permanent permanent = game.getPermanent(permanentId);
+                    if (permanent != null) {
+                        permanent.destroy(source.getId(), game, noRegen);
+                        affectedTargets++;
+                    }
+                }
+            }
+        }
+        else if (targetPointer.getTargets(source).size() > 0) {
 			for (UUID permanentId : targetPointer.getTargets(source)) {
 				Permanent permanent = game.getPermanent(permanentId);
 				if (permanent != null) {
@@ -81,6 +98,9 @@ public class DestroyTargetEffect extends OneShotEffect<DestroyTargetEffect> {
 
 	@Override
 	public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder();
         if (mode.getTargets().size() == 0) {
             sb.append("destroy that creature"); //TODO add possibility to specify text with targetPointer usage

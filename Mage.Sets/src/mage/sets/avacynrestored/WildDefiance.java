@@ -88,7 +88,7 @@ class CreaturesYouControlBecomesTargetTriggeredAbility extends TriggeredAbilityI
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.TARGETED) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.getControllerId().equals(this.controllerId)) {
+            if (permanent != null && permanent.getControllerId().equals(this.controllerId) && permanent.getCardType().contains(CardType.CREATURE)) {
                 MageObject object = game.getObject(event.getSourceId());
                 if (object != null && object instanceof Spell) {
                     Card c = (Spell)object;
