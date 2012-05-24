@@ -94,7 +94,7 @@ class ThopterAssemblyTriggeredAbility extends TriggeredAbilityImpl<ThopterAssemb
             filter.getSubtype().add("Thopter");
             filter.setScopeSubtype(Filter.ComparisonScope.Any);
             filter.setAnother(true);
-            if (!game.getBattlefield().contains(filter, controllerId, 1)) {
+            if (!game.getBattlefield().contains(filter, controllerId, 1, game)) {
                 return true;
             }
         }

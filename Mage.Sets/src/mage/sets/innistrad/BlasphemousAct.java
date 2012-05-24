@@ -60,7 +60,7 @@ public class BlasphemousAct extends CardImpl<BlasphemousAct> {
 
     @Override
     public void adjustCosts(Ability ability, Game game) {
-        int creatureCount = game.getState().getBattlefield().getAllActivePermanents(new FilterCreaturePermanent()).size();
+        int creatureCount = game.getState().getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), game).size();
         int cost = 8 - creatureCount;
         String adjustedCost = "{R}";
         if (cost > 0) {

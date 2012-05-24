@@ -28,13 +28,7 @@
 
 package mage.sets.magic2011;
 
-import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Layer;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.SubLayer;
+import mage.Constants.*;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.TrampleAbility;
@@ -42,6 +36,8 @@ import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -85,11 +81,11 @@ class OverwhelmingStampedeEffect extends ContinuousEffectImpl<OverwhelmingStampe
 	@Override
 	public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
 		int maxPower = 0;
-		for (Permanent perm: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId())) {
+		for (Permanent perm: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
 			if (perm.getPower().getValue() > maxPower)
 				maxPower = perm.getPower().getValue();
 		}
-		for (Permanent perm: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId())) {
+		for (Permanent perm: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
 			switch (layer) {
 				case PTChangingEffects_7:
 					if (sublayer == SubLayer.ModifyPT_7c) {

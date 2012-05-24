@@ -22,7 +22,7 @@ public class ControlPermanentCost extends CostImpl<ControlPermanentCost> {
 
     @Override
     public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-        return game.getBattlefield().contains(filter, controllerId, 1);
+        return game.getBattlefield().contains(filter, controllerId, 1, game);
     }
 
     @Override

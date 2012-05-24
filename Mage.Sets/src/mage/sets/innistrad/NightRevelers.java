@@ -27,8 +27,6 @@
  */
 package mage.sets.innistrad;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -42,6 +40,9 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -86,7 +87,7 @@ class NightRevelersCondition implements Condition {
 
         Set<UUID> opponents = game.getOpponents(source.getControllerId());
         for (UUID opponentId : opponents) {
-            conditionApplies |= game.getBattlefield().countAll(filter, opponentId) > 0;
+            conditionApplies |= game.getBattlefield().countAll(filter, opponentId, game) > 0;
         }
         return conditionApplies;
     }

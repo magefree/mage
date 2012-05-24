@@ -28,13 +28,13 @@
 
 package mage.filter;
 
+import mage.Constants.TargetController;
+import mage.game.Game;
+import mage.players.Player;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.Constants.TargetController;
-import mage.abilities.Ability;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -58,7 +58,7 @@ public class FilterPlayer extends FilterImpl<Player, FilterPlayer> implements Fi
 	}
 
 	@Override
-	public boolean match(Player player) {
+	public boolean match(Player player, Game game) {
 
 		if (playerId.size() > 0 && playerId.contains(player.getId()) == notPlayer)
 			return notFilter;
@@ -67,7 +67,7 @@ public class FilterPlayer extends FilterImpl<Player, FilterPlayer> implements Fi
 	}
 
 	public boolean match(Player player, UUID sourceId, UUID playerId, Game game) {
-		if (!this.match(player))
+		if (!this.match(player, game))
 			return notFilter;
 
 		if (playerTarget != TargetController.ANY && playerId != null) {

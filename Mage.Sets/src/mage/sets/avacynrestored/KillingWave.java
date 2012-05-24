@@ -27,10 +27,6 @@
  */
 package mage.sets.avacynrestored;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
@@ -42,6 +38,11 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -100,7 +101,7 @@ class KillingWaveEffect extends OneShotEffect<KillingWaveEffect> {
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
             for (UUID playerId : controller.getInRange()) {
                 Player player = game.getPlayer(playerId);
-                List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(filter, playerId);
+                List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(filter, playerId, game);
 
                 int lifePaid = 0;
                 int playerLife = player.getLife();

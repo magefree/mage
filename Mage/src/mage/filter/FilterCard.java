@@ -72,8 +72,8 @@ public class FilterCard<T extends FilterCard<T>> extends FilterObject<Card, Filt
 	}
 
 	@Override
-	public boolean match(Card card) {
-		if (!super.match(card))
+	public boolean match(Card card, Game game) {
+		if (!super.match(card, game))
 			return notFilter;
 
 		if (ownerId.size() > 0 && ownerId.contains(card.getOwnerId()) == notOwner)
@@ -123,7 +123,7 @@ public class FilterCard<T extends FilterCard<T>> extends FilterObject<Card, Filt
 	}
     
 	public boolean match(Card card, UUID playerId, Game game) {
-		if (!this.match(card))
+		if (!this.match(card, game))
 			return notFilter;
 
 		if (owner != TargetController.ANY && playerId != null) {
@@ -176,10 +176,10 @@ public class FilterCard<T extends FilterCard<T>> extends FilterObject<Card, Filt
 		return true;
 	}
 
-	public Set<Card> filter(Set<Card> cards) {
+	public Set<Card> filter(Set<Card> cards, Game game) {
 		Set<Card> filtered = new HashSet<Card>();
 		for (Card card: cards) {
-			if (match(card)) {
+			if (match(card, game)) {
 				filtered.add(card);
 			}
 		}

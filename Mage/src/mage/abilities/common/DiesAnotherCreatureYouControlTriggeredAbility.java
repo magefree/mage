@@ -97,7 +97,7 @@ public class DiesAnotherCreatureYouControlTriggeredAbility extends TriggeredAbil
             if (permanent != null && permanent.getCardType().contains(Constants.CardType.CREATURE) &&
                     zEvent.isDiesEvent() &&
                     permanent.getControllerId().equals(this.getControllerId()) && filter != null &&
-                    filter.match(permanent)) {
+                    filter.match(permanent, game)) {
                 return true;
             }
         }

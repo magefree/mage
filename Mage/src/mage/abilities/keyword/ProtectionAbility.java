@@ -32,11 +32,8 @@ import mage.Constants.Zone;
 import mage.MageObject;
 import mage.abilities.StaticAbility;
 import mage.cards.Card;
-import mage.filter.Filter;
-import mage.filter.FilterCard;
-import mage.filter.FilterObject;
-import mage.filter.FilterPermanent;
-import mage.filter.FilterSpell;
+import mage.filter.*;
+import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 
@@ -68,24 +65,24 @@ public class ProtectionAbility extends StaticAbility<ProtectionAbility> {
 		return "Protection from " + filter.getMessage();
 	}
 
-	public boolean canTarget(MageObject source) {
+	public boolean canTarget(MageObject source, Game game) {
 		if (filter instanceof FilterPermanent) {
 			if (source instanceof Permanent)
-				return !filter.match(source);
+				return !filter.match(source, game);
 			return true;
 		}
 		if (filter instanceof FilterSpell) {
 			if (source instanceof Spell)
-				return !filter.match(source);
+				return !filter.match(source, game);
 			return true;
 		}
 		if (filter instanceof FilterCard) {
 			if (source instanceof Card)
-				return !filter.match(source);
+				return !filter.match(source, game);
 			return true;
 		}
 		if (filter instanceof FilterObject) {
-			return !filter.match(source);
+			return !filter.match(source, game);
 		}
 		return true;
 	}

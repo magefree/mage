@@ -27,7 +27,6 @@
  */
 package mage.sets.conflux;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
@@ -38,6 +37,8 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -93,7 +94,7 @@ class DarkTemperEffect extends OneShotEffect<DarkTemperEffect> {
         filter.getColor().setBlack(true);
         filter.setUseColor(true);
 
-        if (game.getBattlefield().countAll(filter, source.getControllerId()) == 0) {
+        if (game.getBattlefield().countAll(filter, source.getControllerId(), game) == 0) {
             permanent.damage(2, source.getSourceId(), game, true, false);
         } else {
             permanent.destroy(source.getId(), game, false);

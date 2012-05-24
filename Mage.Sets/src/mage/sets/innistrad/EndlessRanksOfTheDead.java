@@ -85,7 +85,7 @@ class HalfZombiesCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility) {
-        int amount = game.getBattlefield().countAll(filter, sourceAbility.getControllerId()) / 2;
+        int amount = game.getBattlefield().countAll(filter, sourceAbility.getControllerId(), game) / 2;
         return amount;
     }
 

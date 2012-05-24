@@ -133,7 +133,7 @@ class MemorysJourneyTarget extends TargetCard<MemorysJourneyTarget> {
         if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
             UUID firstTarget = source.getFirstTarget();
             if (firstTarget != null && game.getPlayer(firstTarget).getGraveyard().contains(id)) {
-                return filter.match(card);
+                return filter.match(card, game);
             }
         }
         return false;

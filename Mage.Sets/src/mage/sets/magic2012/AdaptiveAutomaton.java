@@ -165,7 +165,7 @@ class AdaptiveAutomatonBoostControlledEffect extends ContinuousEffectImpl<Adapti
 		if (permanent != null) {
 			String subtype = (String) game.getState().getValue(permanent.getId() + "_type");
 			if (subtype != null) {
-				for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId())) {
+				for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
 					if (!perm.getId().equals(source.getSourceId()) && perm.hasSubtype(subtype)) {
 						perm.addPower(1);
 						perm.addToughness(1);

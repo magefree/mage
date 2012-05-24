@@ -107,7 +107,7 @@ class MalakirBloodwitchEffect extends OneShotEffect<MalakirBloodwitchEffect> {
 
         FilterControlledPermanent filter = new FilterControlledPermanent("Vampire");
         filter.getSubtype().add("Vampire");
-        int amount = game.getBattlefield().countAll(filter, source.getControllerId());
+        int amount = game.getBattlefield().countAll(filter, source.getControllerId(), game);
         Set<UUID> opponents = game.getOpponents(source.getControllerId());
 
         int total = 0;

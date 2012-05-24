@@ -28,7 +28,6 @@
 
 package mage.sets.conflux;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
@@ -42,6 +41,8 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+
+import java.util.UUID;
 
 /**
  *
@@ -103,7 +104,7 @@ class BloodhallOozeTriggeredAbility1 extends TriggeredAbilityImpl<BloodhallOozeT
 
     @Override
     public boolean checkInterveningIfClause(Game game) {
-        return game.getBattlefield().countAll(filter, this.controllerId) >= 1;
+        return game.getBattlefield().countAll(filter, this.controllerId, game) >= 1;
     }
 
     @Override
@@ -144,7 +145,7 @@ class BloodhallOozeTriggeredAbility2 extends TriggeredAbilityImpl<BloodhallOozeT
 
     @Override
     public boolean checkInterveningIfClause(Game game) {
-        return game.getBattlefield().countAll(filter, this.controllerId) >= 1;
+        return game.getBattlefield().countAll(filter, this.controllerId, game) >= 1;
     }
 
     @Override

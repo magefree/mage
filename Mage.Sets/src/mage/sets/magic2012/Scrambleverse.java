@@ -27,11 +27,6 @@
  */
 package mage.sets.magic2012;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -40,15 +35,15 @@ import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continious.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.players.PlayerList;
-import mage.players.Players;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.Random;
+import java.util.UUID;
 
 /**
  *
@@ -94,7 +89,7 @@ class ScrambleverseEffect extends OneShotEffect<ScrambleverseEffect> {
 		int count = players.size();
 		if (count > 1) {
 			FilterNonlandPermanent nonLand = new FilterNonlandPermanent();
-			for (Permanent permanent : game.getBattlefield().getAllActivePermanents(nonLand)) {
+			for (Permanent permanent : game.getBattlefield().getAllActivePermanents(nonLand, game)) {
 				ContinuousEffect effect = new ScrambleverseControlEffect(players.get(random.nextInt(count)));
 				effect.setTargetPointer(new FixedTarget(permanent.getId()));
 				game.addEffect(effect, source);

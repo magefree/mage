@@ -27,7 +27,6 @@
  */
 package mage.sets.zendikar;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
@@ -42,6 +41,8 @@ import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -105,7 +106,7 @@ class EmeriaTheSkyRuinTriggeredAbility extends TriggeredAbilityImpl<EmeriaTheSky
     
     @Override
     public boolean checkInterveningIfClause(Game game) {
-	return game.getBattlefield().countAll(filter, this.controllerId) >= 7;
+	return game.getBattlefield().countAll(filter, this.controllerId, game) >= 7;
     }
 
     @Override

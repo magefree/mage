@@ -27,7 +27,6 @@
  */
 package mage.sets.darkascension;
 
-import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -42,6 +41,8 @@ import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  *
@@ -109,7 +110,7 @@ class GravecrawlerPlayEffect extends AsThoughEffectImpl<GravecrawlerPlayEffect> 
         if (sourceId.equals(source.getSourceId())) {
             Card card = game.getCard(source.getSourceId());
             if (card != null && game.getState().getZone(source.getSourceId()) == Constants.Zone.GRAVEYARD) {
-                if (game.getBattlefield().countAll(filter, source.getControllerId()) > 0)
+                if (game.getBattlefield().countAll(filter, source.getControllerId(), game) > 0)
                     return true;
             }
         }

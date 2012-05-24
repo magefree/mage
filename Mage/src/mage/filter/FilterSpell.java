@@ -28,17 +28,18 @@
 
 package mage.filter;
 
-import java.util.UUID;
 import mage.Constants.Zone;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 
+import java.util.UUID;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FilterSpell extends FilterStackObject<FilterSpell> {
+public class FilterSpell<T extends FilterSpell<T>> extends FilterStackObject<FilterSpell<T>> {
 
     protected Zone fromZone = Zone.ALL;
     protected boolean notFromZone = false;    
@@ -53,27 +54,27 @@ public class FilterSpell extends FilterStackObject<FilterSpell> {
 
 	public FilterSpell(final FilterSpell filter) {
 		super(filter);
-		for (UUID cId: filter.controllerId) {
-			this.controllerId.add(cId);
+        for (Object cId: filter.getControllerId()) {
+			this.controllerId.add((UUID)cId);
 		}
 		this.notController = filter.notController;
 		this.controller = filter.controller;
 	}
 
 	@Override
-	public boolean match(StackObject spell) {
+	public boolean match(StackObject spell, Game game) {
 		if (!(spell instanceof Spell))
 			return notFilter;
 
         if (((Spell)spell).getFromZone().match(fromZone) == notFromZone)
             return notFilter;
         
-		return super.match(spell);
+		return super.match(spell, game);
 	}
 
     @Override
 	public boolean match(StackObject spell, UUID playerId, Game game) {
-		if (!this.match(spell))
+		if (!this.match(spell, game))
 			return notFilter;
         
         return super.match(spell, playerId, game);

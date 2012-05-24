@@ -34,7 +34,6 @@ import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.keyword.FlyingAbility;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -76,7 +75,7 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl<GainAbilit
 	public void init(Ability source, Game game) {
 		super.init(source, game);
 		if (this.affectedObjectsSet) {
-			for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId())) {
+			for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
 				if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
 					objects.add(perm.getId());
 				}
@@ -91,7 +90,7 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl<GainAbilit
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId())) {
+		for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
 			if (!this.affectedObjectsSet || objects.contains(perm.getId())) {
 				if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
 					perm.addAbility(ability, game);

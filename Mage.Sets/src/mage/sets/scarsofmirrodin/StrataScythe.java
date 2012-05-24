@@ -134,7 +134,7 @@ class SameNameAsExiledCountValue implements DynamicValue {
 		if (permanent != null && permanent.getImprinted().size() > 0) {
 			FilterPermanent filterPermanent = new FilterPermanent();
             filterPermanent.getName().add(game.getCard(permanent.getImprinted().get(0)).getName());
-            value = game.getBattlefield().countAll(filterPermanent);
+            value = game.getBattlefield().countAll(filterPermanent, game);
 		}
 		return value;
     }

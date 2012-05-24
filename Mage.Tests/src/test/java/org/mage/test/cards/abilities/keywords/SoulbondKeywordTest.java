@@ -5,7 +5,6 @@ import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.filter.Filter;
-import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -352,7 +351,18 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
 
     @Test
     public void testExileAndReturnBack() {
-        //TODO: Soulbond + Soulshift
-        Assert.assertTrue(false);
+        addCard(Constants.Zone.HAND, playerA, "Elite Vanguard");
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Trusted Forcemage");
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 2);
+
+        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Elite Vanguard");
+        castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Cloudshift", "Trusted Forcemage");
+
+        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Trusted Forcemage", 1);
+        assertPowerToughness(playerA, "Trusted Forcemage", 3, 3);
+        assertPowerToughness(playerA, "Elite Vanguard", 3, 2);
     }
 }

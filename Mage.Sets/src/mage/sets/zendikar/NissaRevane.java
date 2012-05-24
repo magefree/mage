@@ -114,7 +114,7 @@ class NissaRevaneGainLifeEffect extends OneShotEffect<NissaRevaneGainLifeEffect>
 	@Override
 	public boolean apply(Game game, Ability source) {
 		Player player = game.getPlayer(source.getControllerId());
-		int life = 2 * game.getBattlefield().countAll(filter);
+		int life = 2 * game.getBattlefield().countAll(filter, game);
 		if (player != null) {
 			player.gainLife(life, game);
 		}

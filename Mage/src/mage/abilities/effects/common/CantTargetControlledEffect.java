@@ -94,7 +94,7 @@ public class CantTargetControlledEffect extends ReplacementEffectImpl<CantTarget
 					return true;
 				else {
 					StackObject sourceObject = game.getStack().getStackObject(event.getSourceId());
-					if (sourceObject != null && filterSource.match(sourceObject)) {
+					if (sourceObject != null && filterSource.match(sourceObject, game)) {
 						return true;
 					}
 				}

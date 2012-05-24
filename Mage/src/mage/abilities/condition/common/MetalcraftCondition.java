@@ -27,6 +27,6 @@ public class MetalcraftCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return game.getBattlefield().contains(filter, source.getControllerId(), 3);
+        return game.getBattlefield().contains(filter, source.getControllerId(), 3, game);
     }
 }

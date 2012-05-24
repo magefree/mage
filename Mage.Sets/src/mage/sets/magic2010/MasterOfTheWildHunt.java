@@ -28,9 +28,6 @@
 
 package mage.sets.magic2010;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
@@ -51,6 +48,10 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.WolfToken;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -114,8 +115,8 @@ class MasterOfTheWildHuntEffect extends OneShotEffect<MasterOfTheWildHuntEffect>
 	public boolean apply(Game game, Ability source) {
 		List<UUID> wolves = new ArrayList<UUID>();
 		Permanent target = game.getPermanent(source.getFirstTarget());
-		if (target != null && game.getBattlefield().countAll(filter, source.getControllerId()) > 0) {
-			for (Permanent permanent: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId())) {
+		if (target != null && game.getBattlefield().countAll(filter, source.getControllerId(), game) > 0) {
+			for (Permanent permanent: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
 				permanent.tap(game);
 				target.damage(permanent.getToughness().getValue(), permanent.getId(), game, true, false);
 				wolves.add(permanent.getId());

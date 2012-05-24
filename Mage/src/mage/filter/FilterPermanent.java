@@ -28,12 +28,13 @@
 
 package mage.filter;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.Constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -82,8 +83,8 @@ public class FilterPermanent<T extends FilterPermanent<T>> extends FilterObject<
 	}
 
 	@Override
-	public boolean match(Permanent permanent) {
-		if (!super.match(permanent))
+	public boolean match(Permanent permanent, Game game) {
+		if (!super.match(permanent, game))
 			return notFilter;
 
 		if (ownerId.size() > 0 && ownerId.contains(permanent.getOwnerId()) == notOwner)
@@ -108,7 +109,7 @@ public class FilterPermanent<T extends FilterPermanent<T>> extends FilterObject<
 	}
 
 	public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
-		if (!this.match(permanent))
+		if (!this.match(permanent, game))
 			return notFilter;
 
 		if (controller != TargetController.ANY && playerId != null) {

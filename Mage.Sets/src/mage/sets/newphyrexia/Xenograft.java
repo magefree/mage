@@ -126,7 +126,7 @@ class XenograftAddSubtypeEffect extends ContinuousEffectImpl<XenograftAddSubtype
     public boolean apply(Game game, Ability source) {
         String subtype = (String) game.getState().getValue(source.getSourceId() + "_XenograftType");
         if (subtype != null) {
-            List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId());
+            List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game);
             for (Permanent permanent : permanents) {
                 if (permanent != null && !permanent.getSubtype().contains(subtype)) {
                     permanent.getSubtype().add(subtype);

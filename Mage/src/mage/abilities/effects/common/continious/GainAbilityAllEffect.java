@@ -75,7 +75,7 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl<GainAbilityAllEff
 	public void init(Ability source, Game game) {
 		super.init(source, game);
 		if (this.affectedObjectsSet) {
-            for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId())) {
+            for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                 if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
                     objects.add(perm.getId());
                 }
@@ -90,7 +90,7 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl<GainAbilityAllEff
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId())) {
+		for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
 			if (!this.affectedObjectsSet || objects.contains(perm.getId())) {
 				if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
 					perm.addAbility(ability, game);

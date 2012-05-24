@@ -27,14 +27,7 @@
  */
 package mage.sets.innistrad;
 
-import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Layer;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.SubLayer;
-import mage.Constants.Zone;
+import mage.Constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -46,6 +39,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -98,7 +93,7 @@ class CurseOfDeathsHoldEffect extends ContinuousEffectImpl<CurseOfDeathsHoldEffe
 		if (enchantment != null && enchantment.getAttachedTo() != null) {
 			Player player = game.getPlayer(enchantment.getAttachedTo());
 			if (player != null) {
-                for (Permanent perm: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId())) {
+                for (Permanent perm: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game)) {
                     perm.addPower(-1);
                     perm.addToughness(-1);
                 }

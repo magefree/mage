@@ -313,14 +313,14 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	}
 
 	@Override
-	public boolean canBeTargetedBy(MageObject source) {
+	public boolean canBeTargetedBy(MageObject source, Game game) {
 		if (this.hasLost() || this.hasLeft())
 			return false;
 		if (source != null) {
 			if (abilities.containsKey(ShroudAbility.getInstance().getId()))
 				return false;
 
-			if (hasProtectionFrom(source))
+			if (hasProtectionFrom(source, game))
 				return false;
 		}
 
@@ -328,9 +328,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	}
 
 	@Override
-	public boolean hasProtectionFrom(MageObject source) {
+	public boolean hasProtectionFrom(MageObject source, Game game) {
 		for (ProtectionAbility ability: abilities.getProtectionAbilities()) {
-			if (!ability.canTarget(source))
+			if (!ability.canTarget(source, game))
 				return true;
 		}
 		return false;
@@ -857,7 +857,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
 	@Override
 	public int damage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable) {
-		if (damage > 0 && canDamage(game.getObject(sourceId))) {
+		if (damage > 0 && canDamage(game.getObject(sourceId), game)) {
 			GameEvent event = new DamagePlayerEvent(playerId, sourceId, playerId, damage, preventable, combatDamage);
 			if (!game.replaceEvent(event)) {
 				int actualDamage = event.getAmount();
@@ -896,9 +896,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         }
 	}
 
-    protected boolean canDamage(MageObject source) {
+    protected boolean canDamage(MageObject source, Game game) {
 		for (ProtectionAbility ability: abilities.getProtectionAbilities()) {
-			if (!ability.canTarget(source))
+			if (!ability.canTarget(source, game))
 				return false;
 		}
 		return true;
@@ -1129,7 +1129,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	@Override
 	public List<Permanent> getAvailableAttackers(Game game) {
 		FilterCreatureForCombat filter = new FilterCreatureForCombat();
-		List<Permanent> attackers = game.getBattlefield().getAllActivePermanents(filter, playerId);
+		List<Permanent> attackers = game.getBattlefield().getAllActivePermanents(filter, playerId, game);
 		for (Iterator<Permanent> i = attackers.iterator(); i.hasNext();) {
 			Permanent entry = i.next();
 			if (!entry.canAttack(game))
@@ -1141,7 +1141,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	@Override
 	public List<Permanent> getAvailableBlockers(Game game) {
 		FilterCreatureForCombat blockFilter = new FilterCreatureForCombat();
-		List<Permanent> blockers = game.getBattlefield().getAllActivePermanents(blockFilter, playerId);
+		List<Permanent> blockers = game.getBattlefield().getAllActivePermanents(blockFilter, playerId, game);
 		return blockers;
 	}
 

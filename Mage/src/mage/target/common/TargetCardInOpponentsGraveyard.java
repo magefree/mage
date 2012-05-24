@@ -30,7 +30,7 @@ public class TargetCardInOpponentsGraveyard extends TargetCard<TargetCardInOppon
         Card card = game.getCard(id);
         if (card != null && game.getState().getZone(card.getId()) == Constants.Zone.GRAVEYARD) {
             if (game.getOpponents(source.getControllerId()).contains(card.getOwnerId())) {
-                return filter.match(card);
+                return filter.match(card, game);
             }
         }
         return false;

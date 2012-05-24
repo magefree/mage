@@ -29,6 +29,7 @@
 package mage.filter.common;
 
 import mage.filter.FilterPermanent;
+import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 
@@ -51,8 +52,8 @@ public class FilterNonTokenPermanent extends FilterPermanent<FilterNonTokenPerma
 	}
 
     @Override
-    public boolean match(Permanent permanent) {
-        if (!super.match(permanent)) {
+    public boolean match(Permanent permanent, Game game) {
+        if (!super.match(permanent, game)) {
             return notFilter;
         }
 

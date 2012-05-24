@@ -28,8 +28,6 @@
 
 package mage.sets.championsofkamigawa;
 
-import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -43,6 +41,8 @@ import mage.filter.Filter;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -99,7 +99,7 @@ class TakenoSamuraiGeneralEffect extends ContinuousEffectImpl<TakenoSamuraiGener
 	public void init(Ability source, Game game) {
 		super.init(source, game);
 		if (this.affectedObjectsSet) {
-			for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId())) {
+			for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
 				if (!perm.getId().equals(source.getSourceId())) {
                     for (Ability ability : perm.getAbilities()) {
                         if (ability instanceof BushidoAbility) {
@@ -113,7 +113,7 @@ class TakenoSamuraiGeneralEffect extends ContinuousEffectImpl<TakenoSamuraiGener
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId())) {
+		for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
 			if (!this.affectedObjectsSet || objects.contains(perm.getId())) {
 				if (!perm.getId().equals(source.getSourceId())) {
                     for (Ability ability : perm.getAbilities()) {

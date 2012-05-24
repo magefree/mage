@@ -28,8 +28,6 @@
 
 package mage.sets.magic2011;
 
-import java.util.List;
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
@@ -44,6 +42,9 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -82,7 +83,7 @@ class MassPolymorphEffect extends OneShotEffect<MassPolymorphEffect> {
 	@Override
 	public boolean apply(Game game, Ability source) {
 		int count;
-		List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId());
+		List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game);
 		count = creatures.size();
 		for (Permanent creature: creatures) {
 			creature.moveToExile(null, null, source.getId(), game);

@@ -94,7 +94,7 @@ class PyreheartWolfEffect extends OneShotEffect<PyreheartWolfEffect> {
     public boolean apply(Game game, Ability source) {
         
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
-        for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId())) {
+        for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
             CantBeBlockedByOneEffect effect = new CantBeBlockedByOneEffect(2, Duration.EndOfTurn);
             SimpleStaticAbility ability = new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect);
             perm.addAbility(ability, game);

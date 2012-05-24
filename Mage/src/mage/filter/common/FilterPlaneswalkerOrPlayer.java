@@ -28,13 +28,15 @@
 
 package mage.filter.common;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.filter.Filter;
 import mage.filter.FilterImpl;
 import mage.filter.FilterPlayer;
+import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -60,12 +62,12 @@ public class FilterPlaneswalkerOrPlayer extends FilterImpl<Object, FilterPlanesw
 	}
 
 	@Override
-	public boolean match(Object o) {
+	public boolean match(Object o, Game game) {
 		if (o instanceof Player) {
-			return playerFilter.match((Player)o);
+			return playerFilter.match((Player)o, game);
 		}
 		else if (o instanceof Permanent) {
-			return planeswalkerFilter.match((Permanent)o);
+			return planeswalkerFilter.match((Permanent)o, game);
 		}
 		return notFilter;
 	}

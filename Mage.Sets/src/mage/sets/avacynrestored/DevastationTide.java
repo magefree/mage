@@ -83,7 +83,7 @@ class DevastationTideEffect extends OneShotEffect<DevastationTideEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent creature : game.getBattlefield().getAllActivePermanents(new FilterNonlandPermanent())) {
+        for (Permanent creature : game.getBattlefield().getAllActivePermanents(new FilterNonlandPermanent(), game)) {
             creature.moveToZone(Constants.Zone.HAND, source.getSourceId(), game, true);
         }
         return true;

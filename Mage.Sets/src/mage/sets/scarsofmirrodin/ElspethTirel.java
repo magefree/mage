@@ -28,12 +28,9 @@
 
 package mage.sets.scarsofmirrodin;
 
-import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -48,6 +45,8 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.SoldierToken;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -90,7 +89,7 @@ class ElspethTirelFirstEffect extends OneShotEffect<ElspethTirelFirstEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int amount = game.getBattlefield().countAll(new FilterCreaturePermanent(), source.getControllerId());
+        int amount = game.getBattlefield().countAll(new FilterCreaturePermanent(), source.getControllerId(), game);
         Player player = game.getPlayer(source.getControllerId());
 		if (player != null) {
 			player.gainLife(amount, game);

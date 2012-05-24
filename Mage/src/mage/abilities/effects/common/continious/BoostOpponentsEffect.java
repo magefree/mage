@@ -44,7 +44,7 @@ public class BoostOpponentsEffect extends ContinuousEffectImpl<BoostOpponentsEff
 		super.init(source, game);
 		if (this.affectedObjectsSet) {
             Set<UUID> opponents = game.getOpponents(source.getControllerId());
-			for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter)) {
+			for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, game)) {
                 if (opponents.contains(perm.getControllerId())) {
 		            objects.add(perm.getId());
                 }
@@ -55,7 +55,7 @@ public class BoostOpponentsEffect extends ContinuousEffectImpl<BoostOpponentsEff
 	@Override
 	public boolean apply(Game game, Ability source) {
         Set<UUID> opponents = game.getOpponents(source.getControllerId());
-		for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter)) {
+		for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, game)) {
 			if (!this.affectedObjectsSet || objects.contains(perm.getId())) {
                 if (opponents.contains(perm.getControllerId())) {
 				    perm.addPower(power);

@@ -27,8 +27,6 @@
  */
 package mage.sets.betrayersofkamigawa;
 
-import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -39,6 +37,8 @@ import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -85,7 +85,7 @@ class FinalJudgmentEffect extends OneShotEffect<FinalJudgmentEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter)) {
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
             permanent.moveToExile(null, null,source.getId(), game);
         }
         return true;

@@ -28,27 +28,9 @@
 
 package mage.client.deckeditor.table;
 
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.UUID;
-
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableCellRenderer;
-
 import mage.Constants.CardType;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
-import mage.cards.MageCard;
 import mage.client.cards.BigCard;
 import mage.client.cards.CardEventSource;
 import mage.client.cards.CardsStorage;
@@ -59,6 +41,16 @@ import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
 import mage.sets.Sets;
 import mage.view.CardsView;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import java.awt.*;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.*;
+import java.util.List;
 
 /**
  *
@@ -156,13 +148,13 @@ public class CardTableSelector extends javax.swing.JPanel implements ComponentLi
 			setCursor(new Cursor(Cursor.WAIT_CURSOR));
 			if (!cards.isEmpty()) {
 				for (Card card: cards) {
-					if (filter.match(card))
+					if (filter.match(card, null))
 						filteredCards.add(card);
 				}
 			}
 			else {
 				for (Card card: CardsStorage.getAllCards()) {
-					if (filter.match(card))
+					if (filter.match(card, null))
 						filteredCards.add(card);
 				}
 			}

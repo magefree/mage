@@ -75,7 +75,7 @@ public interface Permanent extends Card {
 	public UUID getControllerId();
 	public boolean changeControllerId(UUID controllerId, Game game);
 	public boolean canBeTargetedBy(MageObject source, UUID controllerId, Game game);
-	public boolean hasProtectionFrom(MageObject source);
+	public boolean hasProtectionFrom(MageObject source, Game game);
 	public boolean hasSummoningSickness();
 	public int getDamage();
 	public int damage(int damage, UUID sourceId, Game game, boolean preventable, boolean combat);

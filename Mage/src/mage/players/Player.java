@@ -188,8 +188,8 @@ public interface Player extends MageItem, Copyable<Player> {
 	public boolean playLand(Card card, Game game);
 	public boolean activateAbility(ActivatedAbility ability, Game game);
 	public boolean triggerAbility(TriggeredAbility ability, Game game);
-	public boolean canBeTargetedBy(MageObject source);
-	public boolean hasProtectionFrom(MageObject source);
+	public boolean canBeTargetedBy(MageObject source, Game game);
+	public boolean hasProtectionFrom(MageObject source, Game game);
 	public boolean flipCoin(Game game);
 	public void discard(int amount, Ability source, Game game);
 	public void discardToMax(Game game);

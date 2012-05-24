@@ -30,7 +30,6 @@ package mage.abilities.common;
 import mage.Constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
-import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -76,7 +75,7 @@ public class SpellCastTriggeredAbility extends TriggeredAbilityImpl<SpellCastTri
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getPlayerId().equals(this.getControllerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && filter.match(spell)) {
+            if (spell != null && filter.match(spell, game)) {
 				if (rememberSource) {
 					this.getEffects().get(0).setTargetPointer(new FixedTarget(spell.getId()));
 				}

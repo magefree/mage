@@ -899,7 +899,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
             int defenderForcesForBlock = 0;
 
             FilterCreatureForCombat filter = new FilterCreatureForCombat();
-            for (Permanent possibleAttacker : game.getBattlefield().getAllActivePermanents(filter, defender.getId())) {
+            for (Permanent possibleAttacker : game.getBattlefield().getAllActivePermanents(filter, defender.getId(), game)) {
                 //TODO: it can be improved with next turn emulation
                 if (!possibleAttacker.getAbilities().contains(DefenderAbility.getInstance())) {
                     counterAttackList.add(possibleAttacker);
@@ -923,7 +923,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
             int possibleAttackersDamage = 0;
             int ourForces = 0;
 
-            for (Permanent possibleAttacker : game.getBattlefield().getAllActivePermanents(filter, playerId)) {
+            for (Permanent possibleAttacker : game.getBattlefield().getAllActivePermanents(filter, playerId, game)) {
                 //TODO: it can be improved with next turn emulation
                 if (!possibleAttacker.getAbilities().contains(DefenderAbility.getInstance())) {
                     possibleAttackersList.add(possibleAttacker);
@@ -1006,7 +1006,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                 int totalFirstStrikeBlockPower = 0;
 
                 if (!attacker.getAbilities().contains(FirstStrikeAbility.getInstance()) && !attacker.getAbilities().contains(DoubleStrikeAbility.getInstance())) {
-                    for (Permanent blockerWithFSorDB : game.getBattlefield().getAllActivePermanents(filter, playerId)) {
+                    for (Permanent blockerWithFSorDB : game.getBattlefield().getAllActivePermanents(filter, playerId, game)) {
                         if (blockerWithFSorDB.getAbilities().contains(DoubleStrikeAbility.getInstance())) {
                             totalFirstStrikeBlockPower += 2 * blockerWithFSorDB.getPower().getValue();
                         } else

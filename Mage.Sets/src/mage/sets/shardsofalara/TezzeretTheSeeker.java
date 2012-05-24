@@ -27,15 +27,7 @@
  */
 package mage.sets.shardsofalara;
 
-import java.util.List;
-import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Layer;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.SubLayer;
-import mage.Constants.Zone;
+import mage.Constants.*;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -56,6 +48,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetArtifactPermanent;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -157,7 +152,7 @@ class TezzeretTheSeekerEffect3 extends ContinuousEffectImpl<TezzeretTheSeekerEff
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(new FilterArtifactPermanent(), source.getControllerId());
+        List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(new FilterArtifactPermanent(), source.getControllerId(), game);
         for (Permanent permanent : permanents) {
             if (permanent != null) {
                 switch (layer) {

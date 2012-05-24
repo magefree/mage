@@ -28,7 +28,6 @@
 
 package mage.abilities.keyword;
 
-import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.Constants.TargetController;
 import mage.Constants.Zone;
@@ -43,6 +42,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  * TODO: Javadoc me
@@ -114,7 +115,7 @@ class AnnihilatorEffect extends OneShotEffect<AnnihilatorEffect> {
 		}
 
 		filter.setTargetController(TargetController.YOU);
-		int amount = Math.min(count, game.getBattlefield().countAll(filter, player.getId()));
+		int amount = Math.min(count, game.getBattlefield().countAll(filter, player.getId(), game));
 		Target target = new TargetControlledPermanent(amount, amount, filter, false);
 
 		//A spell or ability could have removed the only legal target this player

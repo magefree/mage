@@ -104,7 +104,7 @@ class LoneRevenantTriggeredAbility extends TriggeredAbilityImpl<LoneRevenantTrig
         if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER && event.getSourceId().equals(this.sourceId)
         && ((DamagedPlayerEvent) event).isCombatDamage()) {
             Permanent permanent = game.getPermanent(event.getSourceId());
-            int number = game.getBattlefield().countAll(filter, controllerId);
+            int number = game.getBattlefield().countAll(filter, controllerId, game);
                 
             if (permanent != null && number != 1) {
                 return false;

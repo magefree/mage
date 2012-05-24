@@ -28,23 +28,13 @@
 
 package mage.players;
 
-import java.io.Serializable;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-import java.util.UUID;
 import mage.Constants.Zone;
 import mage.cards.Card;
 import mage.filter.FilterCard;
 import mage.game.Game;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
  *
@@ -190,7 +180,7 @@ public class Library implements Serializable {
 	public int count(FilterCard filter, Game game) {
 		int result = 0;
 		for (UUID card: library) {
-			if (filter.match(game.getCard(card)))
+			if (filter.match(game.getCard(card), game))
 				result++;
 		}
 		return result;

@@ -27,8 +27,6 @@
  */
 package mage.sets.conflux;
 
-import java.util.List;
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
@@ -43,6 +41,9 @@ import mage.cards.CardImpl;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -79,7 +80,7 @@ class ControlsAnotherArtifactCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<Permanent> controlledArtifacts = game.getBattlefield().getAllActivePermanents(new FilterArtifactPermanent(), source.getControllerId());
+        List<Permanent> controlledArtifacts = game.getBattlefield().getAllActivePermanents(new FilterArtifactPermanent(), source.getControllerId(), game);
         for (Permanent permanent : controlledArtifacts) {
             if (!permanent.getId().equals(game.getObject(source.getSourceId()).getId())) {
                 return true;

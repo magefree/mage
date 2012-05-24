@@ -28,8 +28,6 @@
 
 package mage.filter;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.Constants.CardType;
 import mage.MageObject;
 import mage.ObjectColor;
@@ -37,6 +35,10 @@ import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.keyword.ChangelingAbility;
+import mage.game.Game;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -120,7 +122,7 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
 	}
 
 	@Override
-	public boolean match(E object) {
+	public boolean match(E object, Game game) {
 
 		if (name.size() > 0) {
 			if (name.contains(object.getName()) == notName)

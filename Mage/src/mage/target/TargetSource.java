@@ -28,9 +28,6 @@
 
 package mage.target;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.Constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -38,6 +35,10 @@ import mage.filter.FilterObject;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -106,14 +107,14 @@ public class TargetSource extends TargetObject<TargetSource> {
 	public boolean canChoose(UUID sourceControllerId, Game game) {
 		int count = 0;
 		for (StackObject stackObject: game.getStack()) {
-			if (game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match(stackObject)) {
+			if (game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match(stackObject, game)) {
 				count++;
 				if (count >= this.minNumberOfTargets)
 					return true;
 			}
 		}
 		for (Permanent permanent: game.getBattlefield().getActivePermanents(sourceControllerId, game)) {
-			if (filter.match(permanent)) {
+			if (filter.match(permanent, game)) {
 				count++;
 				if (count >= this.minNumberOfTargets)
 					return true;
@@ -131,12 +132,12 @@ public class TargetSource extends TargetObject<TargetSource> {
 	public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
 		Set<UUID> possibleTargets = new HashSet<UUID>();
 		for (StackObject stackObject: game.getStack()) {
-			if (game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match(stackObject)) {
+			if (game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match(stackObject, game)) {
 				possibleTargets.add(stackObject.getId());
 			}
 		}
 		for (Permanent permanent: game.getBattlefield().getActivePermanents(sourceControllerId, game)) {
-			if (filter.match(permanent)) {
+			if (filter.match(permanent, game)) {
 				possibleTargets.add(permanent.getId());
 			}
 		}

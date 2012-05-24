@@ -246,7 +246,7 @@ public class Combat implements Serializable, Copyable<Combat> {
 
 	private void addDefender(UUID defenderId, Game game) {
 		defenders.add(defenderId);
-		for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filterPlaneswalker, defenderId)) {
+		for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filterPlaneswalker, defenderId, game)) {
 			defenders.add(permanent.getId());
 		}
 	}

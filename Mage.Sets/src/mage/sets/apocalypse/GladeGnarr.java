@@ -27,21 +27,20 @@
  */
 package mage.sets.apocalypse;
 
-import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -90,7 +89,7 @@ class GladeGnarrTriggeredAbility extends TriggeredAbilityImpl<GladeGnarrTriggere
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && filter.match(spell)) {
+            if (spell != null && filter.match(spell, game)) {
                 return true;
             }
         }

@@ -95,7 +95,7 @@ class UnwindingClockEffect extends ContinuousEffectImpl<UnwindingClockEffect> {
         if (!applied && layer.equals(Layer.RulesEffects)) {
             if (!game.getActivePlayerId().equals(source.getControllerId()) && game.getStep().getType() == PhaseStep.UNTAP) {
                 game.getState().setValue(source.getSourceId() + "applied", true);
-                for (Permanent artifact: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId())) {
+                for (Permanent artifact: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                     boolean untap = true;
                     for (RestrictionEffect effect : game.getContinuousEffects().getApplicableRestrictionEffects(artifact, game)) {
                         untap &= effect.canBeUntapped(artifact, game);

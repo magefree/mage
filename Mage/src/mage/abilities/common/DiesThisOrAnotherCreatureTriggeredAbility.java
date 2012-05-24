@@ -82,7 +82,7 @@ public class DiesThisOrAnotherCreatureTriggeredAbility extends TriggeredAbilityI
                     if (permanent.getId().equals(this.getSourceId())) {
                         return true;
                     } else {
-                        if (filter.match(permanent)) {
+                        if (filter.match(permanent, game)) {
                             return true;
                         }
                     }

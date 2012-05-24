@@ -95,7 +95,7 @@ class DawnglareInvokerEffect extends OneShotEffect<DawnglareInvokerEffect> {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getFirstTarget());
         if (player != null) {
-            List<Permanent> allCreatures = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId());
+            List<Permanent> allCreatures = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game);
             for (Permanent creature : allCreatures) {
                 creature.tap(game);
             }

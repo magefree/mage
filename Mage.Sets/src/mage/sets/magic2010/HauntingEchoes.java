@@ -28,8 +28,6 @@
 
 package mage.sets.magic2010;
 
-import java.util.List;
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
@@ -43,6 +41,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -87,7 +88,7 @@ class HauntingEchoesEffect extends OneShotEffect<HauntingEchoesEffect> {
 		Player targetPlayer = game.getPlayer(source.getFirstTarget());
 		if (targetPlayer != null) {
 			for (Card card: targetPlayer.getGraveyard().getCards(game)) {
-				if (!filter.match(card)) {
+				if (!filter.match(card, game)) {
 					card.moveToExile(null, "", source.getId(), game);
 
 					FilterCard filterCard = new FilterCard("cards named " + card.getName());

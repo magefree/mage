@@ -95,7 +95,7 @@ class MindlessNullEffect extends RestrictionEffect<MindlessNullEffect> {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (game.getBattlefield().countAll(filter, source.getControllerId()) == 0) {
+        if (game.getBattlefield().countAll(filter, source.getControllerId(), game) == 0) {
             return true;
         }
         return false;

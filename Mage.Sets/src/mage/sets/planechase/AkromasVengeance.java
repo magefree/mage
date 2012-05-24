@@ -88,7 +88,7 @@ class AkromasVengeanceEffect extends OneShotEffect<AkromasVengeanceEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter)) {
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
             permanent.destroy(source.getId(), game, false);
         }
         return true;

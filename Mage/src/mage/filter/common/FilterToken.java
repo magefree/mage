@@ -28,6 +28,7 @@
 
 package mage.filter.common;
 
+import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 
@@ -50,10 +51,10 @@ public class FilterToken<T extends FilterToken<T>> extends FilterCreaturePermane
 	}
 
 	@Override
-	public boolean match(Permanent permanent) {
+	public boolean match(Permanent permanent, Game game) {
         if (!(permanent instanceof PermanentToken))
             return notFilter;
-		if (!super.match(permanent))
+		if (!super.match(permanent, game))
 			return notFilter;
 
 		return !notFilter;

@@ -96,7 +96,7 @@ class TyrantOfDiscordEffect extends OneShotEffect<TyrantOfDiscordEffect> {
         if (opponent != null) {
             boolean stop = false;
             while (!stop) {
-                int count = game.getBattlefield().countAll(new FilterPermanent(), opponent.getId());
+                int count = game.getBattlefield().countAll(new FilterPermanent(), opponent.getId(), game);
                 if (count > 0) {
                     int random = (int)(Math.random()*count);
                     int index = 0;

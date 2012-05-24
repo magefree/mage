@@ -116,7 +116,7 @@ class ControlFiveVampiresCost extends CostImpl<ControlFiveVampiresCost> {
 
     @Override
     public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-        return game.getBattlefield().contains(filter, controllerId, 5);
+        return game.getBattlefield().contains(filter, controllerId, 5, game);
     }
 
     @Override

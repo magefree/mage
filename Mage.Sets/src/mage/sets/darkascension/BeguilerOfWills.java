@@ -27,7 +27,6 @@
  */
 package mage.sets.darkascension;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
@@ -42,6 +41,8 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -95,7 +96,7 @@ class BeguilerOfWillsTarget extends TargetPermanent {
     @Override
     public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
         Permanent permanent = game.getPermanent(id);
-        int count = game.getBattlefield().countAll(this.filter, source.getControllerId());
+        int count = game.getBattlefield().countAll(this.filter, source.getControllerId(), game);
 
         if (permanent != null && permanent.getPower().getValue() <= count) {
             return super.canTarget(controllerId, id, source, game);

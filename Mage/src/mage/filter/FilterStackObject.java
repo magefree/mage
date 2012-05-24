@@ -28,12 +28,13 @@
 
 package mage.filter;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.Constants.TargetController;
 import mage.game.Game;
 import mage.game.stack.StackObject;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -61,9 +62,9 @@ public class FilterStackObject<T extends FilterStackObject<T>> extends FilterObj
 	}
 
 	@Override
-	public boolean match(StackObject spell) {
+	public boolean match(StackObject spell, Game game) {
 
-		if (!super.match(spell))
+		if (!super.match(spell, game))
 			return notFilter;
 
 		if (controllerId.size() > 0 && controllerId.contains(spell.getControllerId()) == notController)
@@ -73,7 +74,7 @@ public class FilterStackObject<T extends FilterStackObject<T>> extends FilterObj
 	}
 
 	public boolean match(StackObject spell, UUID playerId, Game game) {
-		if (!this.match(spell))
+		if (!this.match(spell, game))
 			return notFilter;
 
 		if (controller != TargetController.ANY && playerId != null) {

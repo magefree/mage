@@ -30,6 +30,7 @@ package mage.filter.common;
 
 import mage.Constants.CardType;
 import mage.filter.FilterPermanent;
+import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
@@ -63,8 +64,8 @@ public class FilterArtifactPermanent<T extends FilterArtifactPermanent<T>> exten
 	}
 
 	@Override
-	public boolean match(Permanent permanent) {
-		if (!super.match(permanent))
+	public boolean match(Permanent permanent, Game game) {
+		if (!super.match(permanent, game))
 			return notFilter;
 
 		if (useAttacking && permanent.isAttacking() != attacking)

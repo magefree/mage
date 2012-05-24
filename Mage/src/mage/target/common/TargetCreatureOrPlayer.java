@@ -86,11 +86,11 @@ public class TargetCreatureOrPlayer extends TargetImpl<TargetCreatureOrPlayer> {
 	public boolean canTarget(UUID id, Game game) {
 		Permanent permanent = game.getPermanent(id);
 		if (permanent != null) {
-			return filter.match(permanent);
+			return filter.match(permanent, game);
 		}
 		Player player = game.getPlayer(id);
 		if (player != null)
-			return filter.match(player);
+			return filter.match(player, game);
 		return false;
 	}
 
@@ -112,9 +112,9 @@ public class TargetCreatureOrPlayer extends TargetImpl<TargetCreatureOrPlayer> {
 		Player player = game.getPlayer(id);
 		if (player != null)
 			if (source != null)
-				return player.canBeTargetedBy(targetSource) && filter.match(player);
+				return player.canBeTargetedBy(targetSource, game) && filter.match(player, game);
 			else
-				return filter.match(player);
+				return filter.match(player, game);
 		return false;
 	}
 
@@ -133,7 +133,7 @@ public class TargetCreatureOrPlayer extends TargetImpl<TargetCreatureOrPlayer> {
 		MageObject targetSource = game.getObject(sourceId);
 		for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
 			Player player = game.getPlayer(playerId);
-			if (player != null && player.canBeTargetedBy(targetSource) && filter.match(player)) {
+			if (player != null && player.canBeTargetedBy(targetSource, game) && filter.match(player, game)) {
 				count++;
 				if (count >= this.minNumberOfTargets)
 					return true;
@@ -162,7 +162,7 @@ public class TargetCreatureOrPlayer extends TargetImpl<TargetCreatureOrPlayer> {
 		int count = 0;
 		for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
 			Player player = game.getPlayer(playerId);
-			if (player != null && filter.match(player)) {
+			if (player != null && filter.match(player, game)) {
 				count++;
 				if (count >= this.minNumberOfTargets)
 					return true;
@@ -184,7 +184,7 @@ public class TargetCreatureOrPlayer extends TargetImpl<TargetCreatureOrPlayer> {
 		MageObject targetSource = game.getObject(sourceId);
 		for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
 			Player player = game.getPlayer(playerId);
-			if (player != null && player.canBeTargetedBy(targetSource) && filter.match(player)) {
+			if (player != null && player.canBeTargetedBy(targetSource, game) && filter.match(player, game)) {
 				possibleTargets.add(playerId);
 			}
 		}
@@ -201,7 +201,7 @@ public class TargetCreatureOrPlayer extends TargetImpl<TargetCreatureOrPlayer> {
 		Set<UUID> possibleTargets = new HashSet<UUID>();
 		for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
 			Player player = game.getPlayer(playerId);
-			if (player != null && filter.match(player)) {
+			if (player != null && filter.match(player, game)) {
 				possibleTargets.add(playerId);
 			}
 		}

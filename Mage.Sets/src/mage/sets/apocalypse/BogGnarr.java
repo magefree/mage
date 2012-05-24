@@ -92,7 +92,7 @@ class BogGnarrTriggeredAbility extends TriggeredAbilityImpl<BogGnarrTriggeredAbi
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && filter.match(spell)) {
+            if (spell != null && filter.match(spell, game)) {
                 return true;
             }
         }

@@ -27,7 +27,6 @@
  */
 package mage.sets.darkascension;
 
-import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -43,6 +42,8 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -129,7 +130,7 @@ class ImmerwolfEffect extends ReplacementEffectImpl<ImmerwolfEffect> {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.TRANSFORM) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.getControllerId().equals(source.getControllerId()) && filterWerewolf.match(permanent) && filterNonhuman.match(permanent)) {
+            if (permanent != null && permanent.getControllerId().equals(source.getControllerId()) && filterWerewolf.match(permanent, game) && filterNonhuman.match(permanent, game)) {
                 return true;
             }
         }

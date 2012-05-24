@@ -63,7 +63,7 @@ public class PermanentHasCounterCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         boolean conditionApplies = false;
-        List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(this.filter, source.getControllerId());
+        List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(this.filter, source.getControllerId(), game);
         for (Permanent permanent : permanents) {
             switch (this.type) {
                 case FEWER_THAN:

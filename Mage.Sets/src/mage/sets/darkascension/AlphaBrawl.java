@@ -27,13 +27,10 @@
  */
 package mage.sets.darkascension;
 
-import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
@@ -41,6 +38,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -96,10 +95,10 @@ class AlphaBrawlEffect extends OneShotEffect<AlphaBrawlEffect> {
             Player player = game.getPlayer(creature.getControllerId());
             if (player != null) {
                 int power = creature.getPower().getValue();
-                for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, player.getId())) {
+                for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, player.getId(), game)) {
                     perm.damage(power, creature.getId(), game, true, false);
                 }
-                for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, player.getId())) {
+                for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, player.getId(), game)) {
                     creature.damage(perm.getPower().getValue(), perm.getId(), game, true, false);
                 }
                 return true;

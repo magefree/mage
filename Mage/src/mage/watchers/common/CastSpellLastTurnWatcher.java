@@ -31,12 +31,11 @@ package mage.watchers.common;
 import mage.Constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.stack.Spell;
 import mage.watchers.WatcherImpl;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.UUID;
 
 /**
  *
@@ -46,6 +45,7 @@ public class CastSpellLastTurnWatcher extends WatcherImpl<CastSpellLastTurnWatch
 
     private Map<UUID, Integer> amountOfSpellsCastOnPrevTurn = new HashMap<UUID, Integer>();
     private Map<UUID, Integer> amountOfSpellsCastOnCurrentTurn = new HashMap<UUID, Integer>();
+    private List<UUID> spellsCastThisTurnInOrder = new ArrayList<UUID>();
 
     public CastSpellLastTurnWatcher() {
         super("CastSpellLastTurnWatcher", WatcherScope.GAME);
@@ -64,6 +64,7 @@ public class CastSpellLastTurnWatcher extends WatcherImpl<CastSpellLastTurnWatch
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
+            spellsCastThisTurnInOrder.add(event.getTargetId());
             UUID playerId = event.getPlayerId();
             if (playerId != null) {
                 Integer amount = amountOfSpellsCastOnCurrentTurn.get(playerId);
@@ -84,10 +85,26 @@ public class CastSpellLastTurnWatcher extends WatcherImpl<CastSpellLastTurnWatch
         amountOfSpellsCastOnPrevTurn.clear();
         amountOfSpellsCastOnPrevTurn.putAll(amountOfSpellsCastOnCurrentTurn);
         amountOfSpellsCastOnCurrentTurn.clear();
+        spellsCastThisTurnInOrder.clear();
 	}
 
     public Map<UUID, Integer> getAmountOfSpellsCastOnPrevTurn() {
         return amountOfSpellsCastOnPrevTurn;
+    }
+
+    public Map<UUID, Integer> getAmountOfSpellsCastOnCurrentTurn() {
+        return amountOfSpellsCastOnCurrentTurn;
+    }
+    
+    public int getSpellOrder(Spell spell) {
+        int index = 0;
+        for (UUID uuid : spellsCastThisTurnInOrder) {
+            index++;
+            if (spell.getId().equals(uuid)) {
+                return index;
+            }
+        }
+        return 0;
     }
 
     @Override

@@ -27,14 +27,7 @@
  */
 package mage.sets.mirrodinbesieged;
 
-import java.util.List;
-import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Layer;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.SubLayer;
+import mage.Constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.CantBlockAbility;
 import mage.abilities.condition.common.MetalcraftCondition;
@@ -47,6 +40,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -96,7 +92,7 @@ class ConcussiveBoltEffect extends ContinuousEffectImpl {
         int affectedTargets = 0;
         Player player = game.getPlayer(source.getFirstTarget());
         if (player != null) {
-            List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId());
+            List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game);
             for (Permanent permanent : permanents) {
                 permanent.addAbility(CantBlockAbility.getInstance(), game);
                 affectedTargets++;

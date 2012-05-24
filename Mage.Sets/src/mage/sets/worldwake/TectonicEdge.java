@@ -28,7 +28,6 @@
 
 package mage.sets.worldwake;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
@@ -46,6 +45,8 @@ import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.target.common.TargetNonBasicLandPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -98,7 +99,7 @@ class TectonicEdgeCost extends CostImpl<TectonicEdgeCost> {
 	@Override
 	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
 		for (UUID opponentId: game.getOpponents(controllerId)) {
-			if (game.getBattlefield().countAll(filter, opponentId) > 3) {
+			if (game.getBattlefield().countAll(filter, opponentId, game) > 3) {
 				return true;
 			}
 		}

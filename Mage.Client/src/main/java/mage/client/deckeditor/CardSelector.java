@@ -190,13 +190,13 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 			setCursor(new Cursor(Cursor.WAIT_CURSOR));
 			if (limited) {
 				for (Card card: cards) {
-					if (filter.match(card))
+					if (filter.match(card, null))
 						filteredCards.add(card);
 				}
 			}
 			else {
 				for (Card card: CardsStorage.getAllCards()) {
-					if (filter.match(card))
+					if (filter.match(card, null))
 						filteredCards.add(card);
 				}
 			}

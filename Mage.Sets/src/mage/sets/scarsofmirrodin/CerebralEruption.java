@@ -27,7 +27,6 @@
  */
 package mage.sets.scarsofmirrodin;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
@@ -45,6 +44,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  *
@@ -96,7 +97,7 @@ class CerebralEruptionEffect1 extends OneShotEffect<CerebralEruptionEffect1> {
 			game.getState().setValue(source.getId().toString(), card);
 			int damage = card.getManaCost().convertedManaCost();
 			player.damage(damage, source.getId(), game, false, true);
-			for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, player.getId())) {
+			for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, player.getId(), game)) {
 				perm.damage(damage, source.getId(), game, true, false);
 			}
 			return true;

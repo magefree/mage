@@ -1411,7 +1411,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 
 	protected List<Permanent> getOpponentBlockers(UUID opponentId, Game game) {
 		FilterCreatureForCombat blockFilter = new FilterCreatureForCombat();
-		List<Permanent> blockers = game.getBattlefield().getAllActivePermanents(blockFilter, opponentId);
+		List<Permanent> blockers = game.getBattlefield().getAllActivePermanents(blockFilter, opponentId, game);
 		return blockers;
 	}
 
@@ -1515,7 +1515,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 
 	protected List<Permanent> threats(UUID playerId, UUID sourceId, FilterPermanent filter, Game game, List<UUID> targets) {
 		List<Permanent> threats = playerId == null ?
-                game.getBattlefield().getAllActivePermanents(filter) :
+                game.getBattlefield().getAllActivePermanents(filter, game) :
                 game.getBattlefield().getActivePermanents(filter, playerId, sourceId, game);
 
         Iterator<Permanent> it = threats.iterator();

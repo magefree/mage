@@ -28,7 +28,6 @@
 
 package mage.target.common;
 
-import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
@@ -38,6 +37,8 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
+
+import java.util.UUID;
 
 /**
  *
@@ -92,7 +93,7 @@ public class TargetCardInLibrary extends TargetCard<TargetCardInLibrary> {
 	public boolean canTarget(UUID id, Ability source, Game game) {
 		Card card = game.getPlayer(source.getControllerId()).getLibrary().getCard(id, game);
 		if (card != null)
-			return filter.match(card);
+			return filter.match(card, game);
 		return false;
 	}
 

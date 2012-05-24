@@ -27,8 +27,6 @@
  */
 package mage.sets.darkascension;
 
-import java.util.List;
-import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
@@ -42,6 +40,9 @@ import mage.filter.common.FilterNonlandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -85,9 +86,9 @@ class SuddenDisappearanceEffect extends OneShotEffect<SuddenDisappearanceEffect>
     
     @Override
     public boolean apply(Game game, Ability source) {
-        List<Permanent> perms = game.getBattlefield().getAllActivePermanents(filter, source.getFirstTarget());
+        List<Permanent> perms = game.getBattlefield().getAllActivePermanents(filter, source.getFirstTarget(), game);
         if (perms.size() > 0) {
-            for (Permanent permanent: game.getBattlefield().getAllActivePermanents(filter, source.getFirstTarget())) {
+            for (Permanent permanent: game.getBattlefield().getAllActivePermanents(filter, source.getFirstTarget(), game)) {
                 permanent.moveToExile(source.getSourceId(), "Sudden Disappearance", source.getSourceId(), game);
             }
             AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Constants.Zone.BATTLEFIELD));

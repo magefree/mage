@@ -27,13 +27,10 @@
  */
 package mage.sets.magic2012;
 
-import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -43,6 +40,8 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.token.SoldierToken;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * @author nantuko
@@ -86,14 +85,14 @@ class TimelyReinforcementsEffect extends OneShotEffect<TimelyReinforcementsEffec
 			boolean lessCreatures = false;
 			boolean lessLife = false;
 			FilterPermanent filter= new FilterCreaturePermanent();
-			int count = game.getBattlefield().countAll(filter, controller.getId());
+			int count = game.getBattlefield().countAll(filter, controller.getId(), game);
 			for (UUID uuid : game.getOpponents(controller.getId())) {
 				Player opponent = game.getPlayer(uuid);
 				if (opponent != null) {
 					if (opponent.getLife() > controller.getLife()) {
 						 lessLife = true;
 					}
-					if (game.getBattlefield().countAll(filter, uuid) > count) {
+					if (game.getBattlefield().countAll(filter, uuid, game) > count) {
 						lessCreatures = true;
 					}
 				}

@@ -114,7 +114,7 @@ class SerpentOfTheEndlessSeaEffect extends ReplacementEffectImpl<SerpentOfTheEnd
             FilterPermanent filter = new FilterPermanent();
             filter.getSubtype().add("Island");
 
-            if (game.getBattlefield().countAll(filter, event.getTargetId()) == 0) {
+            if (game.getBattlefield().countAll(filter, event.getTargetId(), game) == 0) {
                 return true;
             }
         }

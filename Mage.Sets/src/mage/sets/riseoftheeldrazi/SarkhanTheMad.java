@@ -180,7 +180,7 @@ class SarkhanTheMadDragonDamageEffect extends OneShotEffect<SarkhanTheMadDragonD
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		List<Permanent> dragons = game.getBattlefield().getAllActivePermanents(filter);
+		List<Permanent> dragons = game.getBattlefield().getAllActivePermanents(filter, game);
 		Player player = game.getPlayer(source.getTargets().getFirstTarget());
 		if ( player != null && dragons != null && !dragons.isEmpty() ) {
 			for ( Permanent dragon : dragons ) {

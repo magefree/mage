@@ -98,7 +98,7 @@ class DescendantsPathEffect extends OneShotEffect<DescendantsPathEffect> {
                     FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
                     filter.getSubtype().addAll(card.getSubtype());
                     filter.setScopeSubtype(Filter.ComparisonScope.Any);
-                    int count = game.getBattlefield().getAllActivePermanents(filter, player.getId()).size();
+                    int count = game.getBattlefield().getAllActivePermanents(filter, player.getId(), game).size();
                     if (count > 0) {
                         game.informPlayers("DescendantsPath: Found a creature that shares a creature type with the revealed card.");
                         if (player.chooseUse(Constants.Outcome.Benefit, "Cast the card?", game)) {

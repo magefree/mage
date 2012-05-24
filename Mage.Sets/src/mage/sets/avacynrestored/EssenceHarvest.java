@@ -89,7 +89,7 @@ class EssenceHarvestEffect extends OneShotEffect<EssenceHarvestEffect> {
         Player player = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         if (player != null && targetPlayer != null) {
-            List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId());
+            List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game);
             int amount = 0;
             for (Permanent creature : creatures) {
                 int power = creature.getPower().getValue();

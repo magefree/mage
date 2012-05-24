@@ -90,12 +90,12 @@ public class CantCounterControlledEffect extends ReplacementEffectImpl<CantCount
 			filterTarget.getControllerId().add(source.getControllerId());
 			Spell spell = game.getStack().getSpell(event.getTargetId());
 			if (spell != null) {
-				if (filterTarget.match(spell)) {
+				if (filterTarget.match(spell, game)) {
 					if (filterSource == null)
 						return true;
 					else {
 						MageObject sourceObject = game.getObject(source.getSourceId());
-						if (sourceObject != null && filterSource.match(sourceObject)) {
+						if (sourceObject != null && filterSource.match(sourceObject, game)) {
 							return true;
 						}
 					}

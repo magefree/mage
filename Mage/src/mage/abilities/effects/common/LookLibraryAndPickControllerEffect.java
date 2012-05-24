@@ -87,7 +87,7 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
     @Override
     protected void cardLooked(Card card, Game game, Ability source) {
     
-            if (numberToPick.calculate(game, source) > 0 && filter.match(card))
+            if (numberToPick.calculate(game, source) > 0 && filter.match(card, game))
                     ++foundCardsToPick;
     }
     

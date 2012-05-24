@@ -82,7 +82,7 @@ public class SacrificeEffect extends OneShotEffect<SacrificeEffect>{
         filter.setTargetController(Constants.TargetController.YOU);
 
         int amount = count.calculate(game, source);
-        int realCount = game.getBattlefield().countAll(filter, player.getId());
+        int realCount = game.getBattlefield().countAll(filter, player.getId(), game);
 		amount = Math.min(amount, realCount);
 
         Target target = new TargetControlledPermanent(amount, amount, filter, false);

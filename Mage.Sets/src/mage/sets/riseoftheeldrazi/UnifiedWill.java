@@ -28,7 +28,6 @@
 
 package mage.sets.riseoftheeldrazi;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
@@ -38,6 +37,8 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.stack.StackObject;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *
@@ -79,7 +80,7 @@ class UnifiedWillEffect extends CounterTargetEffect {
 	public boolean apply(Game game, Ability source) {
 		StackObject stackObject = game.getStack().getStackObject(source.getFirstTarget());
 		if (stackObject != null) {
-			if (game.getBattlefield().countAll(filter, source.getControllerId()) > game.getBattlefield().countAll(filter, stackObject.getControllerId())) {
+			if (game.getBattlefield().countAll(filter, source.getControllerId(), game) > game.getBattlefield().countAll(filter, stackObject.getControllerId(), game)) {
 				return game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
 			}
 			return true;

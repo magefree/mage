@@ -157,7 +157,7 @@ class RidersOfGavonyGainAbilityControlledEffect extends ContinuousEffectImpl<Rid
             }
         }
         if (protectionFilter != null) {
-            for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId())) {
+            for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                 perm.addAbility(new ProtectionAbility(protectionFilter), game);
             }
             return true;

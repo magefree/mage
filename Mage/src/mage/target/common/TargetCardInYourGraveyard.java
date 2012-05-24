@@ -68,7 +68,7 @@ public class TargetCardInYourGraveyard extends TargetCard<TargetCardInYourGravey
 		Card card = game.getCard(id);
 		if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD)
 			if (game.getPlayer(source.getControllerId()).getGraveyard().contains(id))
-				return filter.match(card);
+				return filter.match(card, game);
 		return false;
 	}
 

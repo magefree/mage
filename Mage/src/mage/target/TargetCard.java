@@ -28,15 +28,16 @@
 
 package mage.target;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.Constants.Zone;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -159,7 +160,7 @@ public class TargetCard<T extends TargetCard<T>> extends TargetObject<TargetCard
 							break;
 						case LIBRARY:
 							for (Card card: player.getLibrary().getUniqueCards(game)) {
-								if (filter.match(card))
+								if (filter.match(card, game))
 									possibleTargets.add(card.getId());
 							}
 							break;
@@ -179,7 +180,7 @@ public class TargetCard<T extends TargetCard<T>> extends TargetObject<TargetCard
 	public boolean canTarget(UUID id, Cards cards, Game game) {
 		Card card = cards.get(id, game);
 		if (card != null)
-			return filter.match(card);
+			return filter.match(card, game);
 		return false;
 	}
 

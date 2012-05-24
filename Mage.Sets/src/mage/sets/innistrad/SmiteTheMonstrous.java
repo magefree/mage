@@ -32,6 +32,7 @@ import mage.Constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
+import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
@@ -74,8 +75,8 @@ class FilterTheMonstrous extends FilterPermanent<FilterTheMonstrous> {
     }
 
     @Override
-    public boolean match(Permanent permanent) {
-        if (!super.match(permanent))
+    public boolean match(Permanent permanent, Game game) {
+        if (!super.match(permanent, game))
             return notFilter;
 
         if (!permanent.getCardType().contains(CardType.CREATURE))

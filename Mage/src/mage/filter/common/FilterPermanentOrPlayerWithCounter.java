@@ -69,7 +69,7 @@ public class FilterPermanentOrPlayerWithCounter extends FilterPermanentOrPlayer 
 	}
 
 	@Override
-	public boolean match(Object o) {
+	public boolean match(Object o, Game game) {
 		if (o instanceof Player) {
 			if (((Player)o).getCounters().size() == 0) {
 				return false;
@@ -79,7 +79,7 @@ public class FilterPermanentOrPlayerWithCounter extends FilterPermanentOrPlayer 
 				return false;
 			}
 		}
-		return super.match(o);
+		return super.match(o, game);
 	}
 
 	@Override

@@ -27,14 +27,16 @@
  */
 package mage.sets.innistrad;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
+import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -74,8 +76,8 @@ class FilterSpiritOrEnchantment extends FilterPermanent<FilterSpiritOrEnchantmen
     }
 
     @Override
-	public boolean match(Permanent permanent) {
-        if (!super.match(permanent))
+	public boolean match(Permanent permanent, Game game) {
+        if (!super.match(permanent, game))
             return notFilter;
 
         if (!permanent.getCardType().contains(CardType.ENCHANTMENT) && !permanent.hasSubtype("Spirit"))

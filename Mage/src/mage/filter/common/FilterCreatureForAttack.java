@@ -29,6 +29,7 @@
 package mage.filter.common;
 
 import mage.abilities.keyword.DefenderAbility;
+import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
@@ -58,8 +59,8 @@ public class FilterCreatureForAttack extends FilterCreaturePermanent<FilterCreat
 	}
 
 	@Override
-	public boolean match(Permanent permanent) {
-		if (!super.match(permanent))
+	public boolean match(Permanent permanent, Game game) {
+		if (!super.match(permanent, game))
 			return notFilter;
 
 		return permanent.canTap();

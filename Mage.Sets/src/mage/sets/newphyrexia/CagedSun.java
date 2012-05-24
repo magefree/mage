@@ -136,7 +136,7 @@ class CagedSunEffect2 extends ContinuousEffectImpl<CagedSunEffect2> {
 		if (permanent != null) {
             ObjectColor color = (ObjectColor) game.getState().getValue(permanent.getId() + "_color");
             if (color != null) {
-                for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId())) {
+                for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                     if (perm.getColor().contains(color)) {
                         perm.addPower(1);
                         perm.addToughness(1);

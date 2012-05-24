@@ -28,7 +28,6 @@
 
 package mage.abilities.effects;
 
-import java.util.UUID;
 import mage.Constants.Duration;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
@@ -41,6 +40,8 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -72,11 +73,11 @@ public class PlaneswalkerRedirectionEffect extends RedirectionEffect<Planeswalke
 				Player target = game.getPlayer(event.getTargetId());
 				Player player = game.getPlayer(playerId);
 				if (target != null && player != null) {
-					int numPlaneswalkers = game.getBattlefield().countAll(filter, target.getId());
+					int numPlaneswalkers = game.getBattlefield().countAll(filter, target.getId(), game);
 					if (numPlaneswalkers > 0 && player.chooseUse(outcome, "Redirect damage to planeswalker?", game)) {
 						redirectTarget = new TargetPermanent(filter);
 						if (numPlaneswalkers == 1) {
-							redirectTarget.add(game.getBattlefield().getAllActivePermanents(filter, target.getId()).get(0).getId(), game);
+							redirectTarget.add(game.getBattlefield().getAllActivePermanents(filter, target.getId(), game).get(0).getId(), game);
 						}
 						else {
 							player.choose(Outcome.Damage, redirectTarget, null, game);

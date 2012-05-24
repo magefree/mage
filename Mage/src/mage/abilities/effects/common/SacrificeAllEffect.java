@@ -28,11 +28,7 @@
 
 package mage.abilities.effects.common;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.Constants.Outcome;
-import mage.Constants.TargetController;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.filter.common.FilterControlledPermanent;
@@ -40,6 +36,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -76,7 +76,7 @@ public class SacrificeAllEffect extends OneShotEffect<SacrificeAllEffect> {
 	public boolean apply(Game game, Ability source) {
 		List<UUID> perms = new ArrayList<UUID>();
 		for (Player player: game.getPlayers().values()) {
-			int numTargets = Math.min(amount, game.getBattlefield().countAll(filter, player.getId()));
+			int numTargets = Math.min(amount, game.getBattlefield().countAll(filter, player.getId(), game));
 			TargetControlledPermanent target = new TargetControlledPermanent(numTargets, numTargets, filter, false);
             if (target.canChoose(player.getId(), game)) {
 				while (!target.isChosen()) {

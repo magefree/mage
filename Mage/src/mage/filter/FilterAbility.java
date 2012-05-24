@@ -28,12 +28,14 @@
 
 package mage.filter;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.Constants.AbilityType;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
+import mage.game.Game;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -71,7 +73,7 @@ public class FilterAbility<T extends Ability> extends FilterImpl<T, FilterAbilit
 	}
 
 	@Override
-	public boolean match(T object) {
+	public boolean match(T object, Game game) {
 
 		if (zone != null) {
 			if (object.getZone().match(zone) == notZone)

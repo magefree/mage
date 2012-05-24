@@ -110,7 +110,7 @@ class PainwrackerOniTriggeredAbility1 extends TriggeredAbilityImpl<PainwrackerOn
 
     @Override
     public boolean checkInterveningIfClause(Game game) {
-        return game.getBattlefield().countAll(filter, this.controllerId) < 1;
+        return game.getBattlefield().countAll(filter, this.controllerId, game) < 1;
     }
 
     @Override

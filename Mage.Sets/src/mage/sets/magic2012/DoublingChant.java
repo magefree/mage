@@ -27,9 +27,6 @@
  */
 package mage.sets.magic2012;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
@@ -44,6 +41,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -95,7 +96,7 @@ class DoublingChantEffect extends OneShotEffect<DoublingChantEffect> {
         if (player == null) {
             return false;
         }
-        List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId());
+        List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game);
         for (Permanent creature : creatures) {
             final String creatureName = creature.getName();
             if (!namesFiltered.contains(creatureName)) {

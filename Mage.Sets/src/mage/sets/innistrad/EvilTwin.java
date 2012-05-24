@@ -90,7 +90,7 @@ class EvilTwinFilter extends FilterCreaturePermanent<EvilTwinFilter> {
     
     @Override
 	public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
-		if (!super.match(permanent))
+		if (!super.match(permanent, game))
 			return notFilter;
         
 		Permanent twin = game.getPermanent(sourceId);

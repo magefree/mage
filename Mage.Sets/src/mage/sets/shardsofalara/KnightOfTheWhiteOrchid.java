@@ -28,7 +28,6 @@
 
 package mage.sets.shardsofalara;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
@@ -42,6 +41,8 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -99,9 +100,9 @@ class KnightOfTheWhiteOrchidAbility extends ZoneChangeTriggeredAbility<KnightOfT
 
 	@Override
 	public boolean checkInterveningIfClause(Game game) {
-		int numLands = game.getBattlefield().countAll(filter2, this.controllerId);
+		int numLands = game.getBattlefield().countAll(filter2, this.controllerId, game);
 		for (UUID opponentId: game.getOpponents(this.controllerId)) {
-			if (numLands < game.getBattlefield().countAll(filter2, opponentId)) {
+			if (numLands < game.getBattlefield().countAll(filter2, opponentId, game)) {
 				return true;
 			}
 		}

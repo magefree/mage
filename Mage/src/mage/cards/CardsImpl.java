@@ -112,7 +112,7 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
 	public int count(FilterCard filter, Game game) {
 		int result = 0;
 		for (UUID card: this) {
-			if (filter.match(game.getCard(card)))
+			if (filter.match(game.getCard(card), game))
 				result++;
 		}
 		return result;
@@ -132,7 +132,7 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
 	public Set<Card> getCards(FilterCard filter, Game game) {
 		Set<Card> cards = new LinkedHashSet<Card>();
 		for (UUID card: this) {
-			boolean match = filter.match(game.getCard(card));
+			boolean match = filter.match(game.getCard(card), game);
 			if (match)
 				cards.add(game.getCard(card));
 		}

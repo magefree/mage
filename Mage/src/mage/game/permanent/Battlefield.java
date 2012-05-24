@@ -75,10 +75,10 @@ public class Battlefield implements Serializable {
 	 * @param filter
 	 * @return count
 	 */
-	public int countAll(FilterPermanent filter) {
+	public int countAll(FilterPermanent filter, Game game) {
 		int count = 0;
 		for (Permanent permanent: field.values()) {
-			if (filter.match(permanent)) {
+			if (filter.match(permanent, game)) {
 				count++;
 			}
 		}
@@ -93,10 +93,10 @@ public class Battlefield implements Serializable {
 	 * @param controllerId
 	 * @return count
 	 */
-	public int countAll(FilterPermanent filter, UUID controllerId) {
+	public int countAll(FilterPermanent filter, UUID controllerId, Game game) {
 		int count = 0;
 		for (Permanent permanent: field.values()) {
-			if (permanent.getControllerId().equals(controllerId) && filter.match(permanent)) {
+			if (permanent.getControllerId().equals(controllerId) && filter.match(permanent, game)) {
 				count++;
 			}
 		}
@@ -160,10 +160,10 @@ public class Battlefield implements Serializable {
 	 * @param filter
 	 * @return boolean
 	 */
-	public boolean contains(FilterPermanent filter, int num) {
+	public boolean contains(FilterPermanent filter, int num, Game game) {
 		int count = 0;
 		for (Permanent permanent: field.values()) {
-			if (filter.match(permanent)) {
+			if (filter.match(permanent, game)) {
 				count++;
 				if (num == count)
 					return true;
@@ -181,10 +181,10 @@ public class Battlefield implements Serializable {
 	 * @param controllerId
 	 * @return boolean
 	 */
-	public boolean contains(FilterPermanent filter, UUID controllerId, int num) {
+	public boolean contains(FilterPermanent filter, UUID controllerId, int num, Game game) {
 		int count = 0;
 		for (Permanent permanent: field.values()) {
-			if (permanent.getControllerId().equals(controllerId) && filter.match(permanent)) {
+			if (permanent.getControllerId().equals(controllerId) && filter.match(permanent, game)) {
 				count++;
 				if (num == count)
 					return true;
@@ -310,14 +310,15 @@ public class Battlefield implements Serializable {
 	 * Returns all {@link Permanent} on the battlefield that match the supplied filter.
 	 * This method ignores the range of influence.
 	 * 
-	 * @param filter
-	 * @return a list of {@link Permanent}
+	 *
+     * @param filter
+     * @return a list of {@link Permanent}
 	 * @see Permanent
 	 */
-	public List<Permanent> getAllActivePermanents(FilterPermanent filter) {
+	public List<Permanent> getAllActivePermanents(FilterPermanent filter, Game game) {
 		List<Permanent> active = new ArrayList<Permanent>();
 		for (Permanent perm: field.values()) {
-			if (perm.isPhasedIn() && filter.match(perm))
+			if (perm.isPhasedIn() && filter.match(perm, game))
 				active.add(perm);
 		}
 		return active;
@@ -332,10 +333,10 @@ public class Battlefield implements Serializable {
 	 * @return a list of {@link Permanent}
 	 * @see Permanent
 	 */
-	public List<Permanent> getAllActivePermanents(FilterPermanent filter, UUID controllerId) {
+	public List<Permanent> getAllActivePermanents(FilterPermanent filter, UUID controllerId, Game game) {
 		List<Permanent> active = new ArrayList<Permanent>();
 		for (Permanent perm: field.values()) {
-			if (perm.isPhasedIn() && perm.getControllerId().equals(controllerId) && filter.match(perm))
+			if (perm.isPhasedIn() && perm.getControllerId().equals(controllerId) && filter.match(perm, game))
 				active.add(perm);
 		}
 		return active;

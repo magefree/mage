@@ -27,7 +27,6 @@
  */
 package mage.target.common;
 
-import java.util.UUID;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.cards.Card;
@@ -35,6 +34,8 @@ import mage.filter.FilterCard;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.target.TargetCard;
+
+import java.util.UUID;
 
 /**
  *
@@ -70,7 +71,7 @@ public class TargetCardInExile extends TargetCard<TargetCardInExile> {
                 exile = game.getExile().getPermanentExile();
             }
             if (exile != null && exile.contains(id)) {
-    			return filter.match(card);
+    			return filter.match(card, game);
             }
         }
 		return false;

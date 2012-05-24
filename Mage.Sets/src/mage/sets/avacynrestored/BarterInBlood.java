@@ -27,7 +27,6 @@
  */
 package mage.sets.avacynrestored;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
@@ -40,6 +39,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -91,7 +92,7 @@ class BarterInBloodEffect extends OneShotEffect<BarterInBloodEffect> {
             for (UUID playerId : controller.getInRange()) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    int amount = Math.min(2, game.getBattlefield().countAll(filter, player.getId()));
+                    int amount = Math.min(2, game.getBattlefield().countAll(filter, player.getId(), game));
                     Target target = new TargetControlledPermanent(amount, amount, filter, false);
                     target.setRequired(true);
                     if (amount > 0 && target.canChoose(player.getId(), game)

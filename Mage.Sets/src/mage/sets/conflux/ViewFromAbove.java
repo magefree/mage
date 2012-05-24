@@ -27,7 +27,6 @@
  */
 package mage.sets.conflux;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
@@ -41,6 +40,8 @@ import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -92,7 +93,7 @@ class ViewFromAboveEffect extends PostResolveEffect<ViewFromAboveEffect> {
         filter.getColor().setWhite(true);
         filter.setUseColor(true);
 
-        if (game.getBattlefield().countAll(filter, source.getControllerId()) > 0) {
+        if (game.getBattlefield().countAll(filter, source.getControllerId(), game) > 0) {
             card.moveToZone(Zone.HAND, source.getId(), game, false);
         } else {
             card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);

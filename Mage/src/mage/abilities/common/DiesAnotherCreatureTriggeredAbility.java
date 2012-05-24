@@ -70,7 +70,7 @@ public class DiesAnotherCreatureTriggeredAbility extends TriggeredAbilityImpl<Di
                     if (nontoken && permanent instanceof PermanentToken) {
                         return false;
                     }
-                    if (filter.match(permanent)) {
+                    if (filter.match(permanent, game)) {
                         return true;
                     }
                 }

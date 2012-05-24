@@ -28,14 +28,15 @@
 
 package mage.target;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.filter.FilterStackObject;
 import mage.game.Game;
 import mage.game.stack.StackObject;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -79,7 +80,7 @@ public class TargetStackObject extends TargetObject<TargetStackObject> {
 	public boolean canTarget(UUID id, Ability source, Game game) {
 		StackObject stackObject = game.getStack().getStackObject(id);
 		if (stackObject != null) {
-			return filter.match(stackObject);
+			return filter.match(stackObject, game);
 		}
 		return false;
 	}
@@ -93,7 +94,7 @@ public class TargetStackObject extends TargetObject<TargetStackObject> {
 	public boolean canChoose(UUID sourceControllerId, Game game) {
 		int count = 0;
 		for (StackObject stackObject: game.getStack()) {
-			if (game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match(stackObject)) {
+			if (game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match(stackObject, game)) {
 				count++;
 				if (count >= this.minNumberOfTargets)
 					return true;
@@ -111,7 +112,7 @@ public class TargetStackObject extends TargetObject<TargetStackObject> {
 	public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
 		Set<UUID> possibleTargets = new HashSet<UUID>();
 		for (StackObject stackObject: game.getStack()) {
-			if (game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match(stackObject)) {
+			if (game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match(stackObject, game)) {
 				possibleTargets.add(stackObject.getId());
 			}
 		}

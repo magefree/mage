@@ -28,13 +28,14 @@
 
 package mage.target.common;
 
-import java.util.UUID;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.target.TargetCard;
+
+import java.util.UUID;
 
 /**
  *
@@ -73,7 +74,7 @@ public class TargetDiscard extends TargetCard<TargetDiscard> {
 	public boolean canTarget(UUID id, Ability source, Game game) {
 		Card card = game.getPlayer(playerId).getHand().get(id, game);
 		if (card != null)
-			return filter.match(card);
+			return filter.match(card, game);
 		return false;
 	}
 

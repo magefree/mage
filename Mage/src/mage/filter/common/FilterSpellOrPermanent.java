@@ -29,7 +29,6 @@
  */
 package mage.filter.common;
 
-import java.util.UUID;
 import mage.filter.FilterImpl;
 import mage.filter.FilterInPlay;
 import mage.filter.FilterPermanent;
@@ -37,6 +36,8 @@ import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
+
+import java.util.UUID;
 
 /**
  *
@@ -72,11 +73,11 @@ public class FilterSpellOrPermanent extends FilterImpl<Object, FilterPermanentOr
 	}
 
 	@Override
-	public boolean match(Object o) {
+	public boolean match(Object o, Game game) {
 		if (o instanceof Spell) {
-			return spellFilter.match((Spell) o);
+			return spellFilter.match((Spell) o, game);
 		} else if (o instanceof Permanent) {
-			return permanentFilter.match((Permanent) o);
+			return permanentFilter.match((Permanent) o, game);
 		}
 		return notFilter;
 	}

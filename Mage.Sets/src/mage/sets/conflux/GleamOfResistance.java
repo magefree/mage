@@ -27,8 +27,6 @@
  */
 package mage.sets.conflux;
 
-import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -41,6 +39,8 @@ import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -82,7 +82,7 @@ class GleamOfResistanceEffect extends OneShotEffect<GleamOfResistanceEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent perm: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId())) {
+        for (Permanent perm: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
             if (perm.isTapped()) {
                 perm.untap(game);
             }

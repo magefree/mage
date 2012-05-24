@@ -94,7 +94,7 @@ class BonfireOfTheDamnedEffect extends OneShotEffect<BonfireOfTheDamnedEffect> {
            int damage = source.getManaCostsToPay().getX();
             if (damage > 0)  {
                 player.damage(damage, source.getId(), game, false, true);
-                for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, player.getId())) {
+                for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, player.getId(), game)) {
                     perm.damage(damage, source.getId(), game, true, false);
                 }
                 return true;

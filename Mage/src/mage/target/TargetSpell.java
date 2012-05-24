@@ -85,7 +85,7 @@ public class TargetSpell extends TargetObject<TargetSpell> {
         }
         Spell spell = game.getStack().getSpell(id);
         if (spell != null) {
-            return filter.match(spell);
+            return filter.match(spell, game);
         }
         return false;
     }
@@ -99,7 +99,7 @@ public class TargetSpell extends TargetObject<TargetSpell> {
 	public boolean canChoose(UUID sourceControllerId, Game game) {
 		int count = 0;
 		for (StackObject stackObject: game.getStack()) {
-			if (stackObject instanceof Spell && game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match((Spell)stackObject)) {
+			if (stackObject instanceof Spell && game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match((Spell)stackObject, game)) {
 				count++;
 				if (count >= this.minNumberOfTargets)
 					return true;
@@ -117,7 +117,7 @@ public class TargetSpell extends TargetObject<TargetSpell> {
 	public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
 		Set<UUID> possibleTargets = new HashSet<UUID>();
 		for (StackObject stackObject: game.getStack()) {
-			if (stackObject instanceof Spell && game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match((Spell)stackObject)) {
+			if (stackObject instanceof Spell && game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match((Spell)stackObject, game)) {
 				possibleTargets.add(stackObject.getId());
 			}
 		}

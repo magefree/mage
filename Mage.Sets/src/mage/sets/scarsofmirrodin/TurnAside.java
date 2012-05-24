@@ -43,7 +43,6 @@ import mage.game.stack.StackObject;
 import mage.target.TargetObject;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 import java.util.UUID;
 
@@ -124,7 +123,7 @@ public class TurnAside extends CardImpl<TurnAside> {
 		public boolean canChoose(UUID sourceControllerId, Game game) {
 			int count = 0;
 			for (StackObject stackObject : game.getStack()) {
-				if (stackObject instanceof Spell && game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match((Spell) stackObject)) {
+				if (stackObject instanceof Spell && game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match((Spell) stackObject, game)) {
 					if (targetsMyPermanent(stackObject.getId(), sourceControllerId, game)) {
 						count++;
 						if (count >= this.minNumberOfTargets)
@@ -139,7 +138,7 @@ public class TurnAside extends CardImpl<TurnAside> {
 		public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
 			Set<UUID> possibleTargets = new HashSet<UUID>();
 			for (StackObject stackObject : game.getStack()) {
-				if (stackObject instanceof Spell && game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match((Spell) stackObject)) {
+				if (stackObject instanceof Spell && game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match((Spell) stackObject, game)) {
 					if (targetsMyPermanent(stackObject.getId(), sourceControllerId, game)) {
 
 						possibleTargets.add(stackObject.getId());

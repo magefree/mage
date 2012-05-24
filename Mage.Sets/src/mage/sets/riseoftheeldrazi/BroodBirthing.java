@@ -88,7 +88,7 @@ class BroodBirthingEffect extends OneShotEffect<BroodBirthingEffect> {
         filter.setScopeSubtype(ComparisonScope.All);
 
         EldraziSpawnToken token = new EldraziSpawnToken();
-        int count = game.getBattlefield().countAll(filter, source.getControllerId()) > 0 ? 3 : 1;
+        int count = game.getBattlefield().countAll(filter, source.getControllerId(), game) > 0 ? 3 : 1;
         token.putOntoBattlefield(count, game, source.getSourceId(), source.getControllerId());
         return true;
     }

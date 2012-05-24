@@ -27,22 +27,21 @@
  */
 package mage.sets.riseoftheeldrazi;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.target.TargetObject;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * 
@@ -144,7 +143,7 @@ class TargetSpellTargetingControlledPermanent extends
 	public boolean canTarget(UUID id, Ability source, Game game) {
 		Spell spell = game.getStack().getSpell(id);
 		if (spell != null) {
-			return filter.match(spell);
+			return filter.match(spell, game);
 		}
 		return false;
 	}
@@ -161,7 +160,7 @@ class TargetSpellTargetingControlledPermanent extends
 			if (stackObject instanceof Spell
 					&& game.getPlayer(sourceControllerId).getInRange()
 							.contains(stackObject.getControllerId())
-					&& filter.match((Spell) stackObject)
+					&& filter.match((Spell) stackObject, game)
 					&& ((Spell) stackObject).getSpellAbility().getTargets()
 							.isChosen()
 					&& game.getPermanent(((Spell) stackObject)
@@ -191,7 +190,7 @@ class TargetSpellTargetingControlledPermanent extends
 			if (stackObject instanceof Spell
 					&& game.getPlayer(sourceControllerId).getInRange()
 							.contains(stackObject.getControllerId())
-					&& filter.match((Spell) stackObject)
+					&& filter.match((Spell) stackObject, game)
 					&& ((Spell) stackObject).getSpellAbility().getTargets()
 							.isChosen()
 					&& game.getPermanent(((Spell) stackObject)

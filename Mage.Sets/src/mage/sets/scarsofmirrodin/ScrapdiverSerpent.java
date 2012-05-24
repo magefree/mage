@@ -68,7 +68,7 @@ public class ScrapdiverSerpent extends CardImpl<ScrapdiverSerpent> {
 		public boolean apply(Game game, Ability source) {
 			UUID defendingPlayer = game.getCombat().getDefendingPlayer(source.getSourceId());
 			if (defendingPlayer != null) {
-				return game.getBattlefield().countAll(filter, defendingPlayer) > 0;
+				return game.getBattlefield().countAll(filter, defendingPlayer, game) > 0;
 			}
 			return false;
 		}

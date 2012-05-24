@@ -28,6 +28,8 @@
 
 package mage.filter;
 
+import mage.game.Game;
+
 import java.io.Serializable;
 
 /**
@@ -44,7 +46,7 @@ public interface Filter<E> extends Serializable {
 		Any, All
 	}
 	
-	public boolean match(E o);
+	public boolean match(E o, Game game);
 	public String getMessage();
 	public void setMessage(String message);
 	public void setNotFilter(boolean notFilter);

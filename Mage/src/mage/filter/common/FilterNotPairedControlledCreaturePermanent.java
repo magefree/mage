@@ -52,8 +52,8 @@ public class FilterNotPairedControlledCreaturePermanent extends FilterControlled
 	}
 
     @Override
-    public boolean match(Permanent permanent) {
-        if (!super.match(permanent))
+    public boolean match(Permanent permanent, Game game) {
+        if (!super.match(permanent, game))
             return notFilter;
 
         if (permanent.getPairedCard() != null)

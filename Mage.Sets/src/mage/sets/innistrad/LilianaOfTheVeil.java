@@ -27,9 +27,6 @@
  */
 package mage.sets.innistrad;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
@@ -49,6 +46,10 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -108,7 +109,7 @@ class LilianaOfTheVeilEffect extends OneShotEffect<LilianaOfTheVeilEffect> {
         Player player = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         if (player != null && targetPlayer != null) {
-            int count = game.getBattlefield().countAll(new FilterPermanent(), targetPlayer.getId());
+            int count = game.getBattlefield().countAll(new FilterPermanent(), targetPlayer.getId(), game);
             TargetPermanent target = new TargetPermanent(0, count, new FilterPermanent("permanents to put in the first pile"), false);
             List<Permanent> pile1 = new ArrayList<Permanent>();
             if (player.choose(Outcome.Neutral, target, source.getSourceId(), game)) {

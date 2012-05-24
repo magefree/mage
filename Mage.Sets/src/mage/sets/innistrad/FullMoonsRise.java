@@ -110,7 +110,7 @@ class FullMoonsRiseEffect extends OneShotEffect<FullMoonsRiseEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId())) {
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
             ReplacementEffect effect = new RegenerateTargetEffect();
             effect.setTargetPointer(new FixedTarget(permanent.getId()));
             game.addEffect(effect, source);

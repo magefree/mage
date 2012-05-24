@@ -27,15 +27,7 @@
  */
 package mage.sets.zendikar;
 
-import java.util.List;
-import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Layer;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.SubLayer;
-import mage.Constants.Zone;
+import mage.Constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -44,6 +36,9 @@ import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -106,7 +101,7 @@ class ArmamentMasterEffect extends ContinuousEffectImpl<ArmamentMasterEffect> {
     public void init(Ability source, Game game) {
         super.init(source, game);
         if (this.affectedObjectsSet) {
-            List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(filter, source.getControllerId());
+            List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game);
             for (Permanent perm : permanents) {
                 if (!perm.getId().equals(source.getSourceId())) {
                     objects.add(perm.getId());
@@ -118,7 +113,7 @@ class ArmamentMasterEffect extends ContinuousEffectImpl<ArmamentMasterEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         int count = countEquipment(game, source);
-        List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(filter, source.getControllerId());
+        List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game);
         for (Permanent perm : permanents) {
             if (!this.affectedObjectsSet || objects.contains(perm.getId())) {
                 if (!perm.getId().equals(source.getSourceId())) {

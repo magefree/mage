@@ -28,6 +28,7 @@
 
 package mage.filter.common;
 
+import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
@@ -55,8 +56,8 @@ public class FilterCreatureForCombat extends FilterCreaturePermanent<FilterCreat
 	}
 
 	@Override
-	public boolean match(Permanent permanent) {
-		if (!super.match(permanent))
+	public boolean match(Permanent permanent, Game game) {
+		if (!super.match(permanent, game))
 			return notFilter;
 
 		return permanent.getMaxBlocks() == 0 || permanent.getBlocking() < permanent.getMaxBlocks();

@@ -56,7 +56,7 @@ public class UntapAllLandsControllerEffect extends OneShotEffect<UntapAllLandsCo
 	public boolean apply(Game game, Ability source) {
 		Player player = game.getPlayer(source.getControllerId());
 		if (player != null) {
-			for (Permanent land: game.getBattlefield().getAllActivePermanents(new FilterLandPermanent(), player.getId())) {
+			for (Permanent land: game.getBattlefield().getAllActivePermanents(new FilterLandPermanent(), player.getId(), game)) {
 				land.untap(game);
 			}
 			return true;

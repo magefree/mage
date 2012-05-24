@@ -84,7 +84,7 @@ public class ManaPool implements Serializable {
             return true;
         }
         for (ManaPoolItem mana : manaItems) {
-            if (filter == null || filter.match(game.getObject(mana.getSourceId()))) {
+            if (filter == null || filter.match(game.getObject(mana.getSourceId()), game)) {
                 if (mana.get(manaType) > 0) {
                     game.fireEvent(new GameEvent(GameEvent.EventType.MANA_PAYED, ability.getId(), mana.getSourceId(), ability.getControllerId()));
                     mana.remove(manaType);
@@ -105,7 +105,7 @@ public class ManaPool implements Serializable {
 		}
 		for (ManaPoolItem mana : manaItems) {
 			if (mana.isConditional() && mana.getConditionalMana().get(manaType) > 0 && mana.getConditionalMana().apply(ability, game, mana.getSourceId())) {
-                if (filter == null || filter.match(game.getObject(mana.getSourceId())))
+                if (filter == null || filter.match(game.getObject(mana.getSourceId()), game))
                     return mana.getConditionalMana().get(manaType);
 			}
 		}

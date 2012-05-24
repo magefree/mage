@@ -91,7 +91,7 @@ class CalltoGloryFirstEffect extends OneShotEffect<CalltoGloryFirstEffect> {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            for (Permanent creature : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId())) {
+            for (Permanent creature : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game)) {
                 creature.untap(game);
             }
             return true;

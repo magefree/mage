@@ -89,7 +89,7 @@ class FeastOfBloodCost extends CostImpl<FeastOfBloodCost> {
 
     @Override
     public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-        return game.getBattlefield().contains(filter, controllerId, 2);
+        return game.getBattlefield().contains(filter, controllerId, 2, game);
     }
 
     @Override

@@ -62,7 +62,7 @@ public class MetalcraftCost extends CostImpl<MetalcraftCost> {
 
 	@Override
 	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-		return game.getBattlefield().contains(filter, controllerId, 3);
+		return game.getBattlefield().contains(filter, controllerId, 3, game);
 	}
 
 	@Override

@@ -85,7 +85,7 @@ class SleepEffect extends OneShotEffect<SleepEffect> {
 	public boolean apply(Game game, Ability source) {
 		Player player = game.getPlayer(source.getFirstTarget());
 		if (player != null) {
-			for (Permanent creature: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId())) {
+			for (Permanent creature: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game)) {
 				creature.tap(game);
 				game.addEffect(new SleepEffect2(creature.getId()), source);
 			}

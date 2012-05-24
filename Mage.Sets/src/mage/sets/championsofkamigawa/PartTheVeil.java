@@ -76,7 +76,7 @@ class PartTheVeilEffect extends OneShotEffect<PartTheVeilEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent creature : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId())) {
+        for (Permanent creature : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
             creature.moveToZone(Constants.Zone.HAND, source.getSourceId(), game, true);
         }
         return true;

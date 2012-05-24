@@ -27,14 +27,7 @@
  */
 package mage.sets.zendikar;
 
-import java.util.List;
-import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Layer;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.SubLayer;
+import mage.Constants.*;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.costs.mana.KickerManaCost;
@@ -45,6 +38,9 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -107,7 +103,7 @@ class MarshCasualtiesEffect extends ContinuousEffectImpl<MarshCasualtiesEffect> 
     public void init(Ability source, Game game) {
         super.init(source, game);
         if (this.affectedObjectsSet) {
-            List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getFirstTarget());
+            List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getFirstTarget(), game);
             for (Permanent creature : creatures) {
                 objects.add(creature.getId());
             }
@@ -116,7 +112,7 @@ class MarshCasualtiesEffect extends ContinuousEffectImpl<MarshCasualtiesEffect> 
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getFirstTarget());
+        List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getFirstTarget(), game);
         for (Permanent creature : creatures) {
             if (!this.affectedObjectsSet || objects.contains(creature.getId())) {
                 creature.addPower(power);

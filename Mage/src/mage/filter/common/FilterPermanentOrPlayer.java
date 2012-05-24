@@ -71,11 +71,11 @@ public class FilterPermanentOrPlayer extends FilterImpl<Object, FilterPermanentO
 	}
 
 	@Override
-	public boolean match(Object o) {
+	public boolean match(Object o, Game game) {
 		if (o instanceof Player) {
-			return playerFilter.match((Player) o);
+			return playerFilter.match((Player) o, game);
 		} else if (o instanceof Permanent) {
-			return permanentFilter.match((Permanent) o);
+			return permanentFilter.match((Permanent) o, game);
 		}
 		return notFilter;
 	}

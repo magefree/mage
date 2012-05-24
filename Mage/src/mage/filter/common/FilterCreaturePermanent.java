@@ -30,6 +30,7 @@ package mage.filter.common;
 
 import mage.Constants.CardType;
 import mage.filter.FilterPermanent;
+import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
@@ -67,8 +68,8 @@ public class FilterCreaturePermanent<T extends FilterCreaturePermanent<T>> exten
 	}
 
 	@Override
-	public boolean match(Permanent permanent) {
-		if (!super.match(permanent))
+	public boolean match(Permanent permanent, Game game) {
+		if (!super.match(permanent, game))
 			return notFilter;
 
 		if (useAttacking) {
@@ -118,7 +119,7 @@ public class FilterCreaturePermanent<T extends FilterCreaturePermanent<T>> exten
          * during the current turn. Works also if the creature
          * was meanwhile regenerated during the turn.
          * 
-         * @param useDamage 
+         * @param useDamageDealt
          */
       	public void setUseDamageDealt ( boolean useDamageDealt ) {
 		this.useDamageDealt = useDamageDealt;

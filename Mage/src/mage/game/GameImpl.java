@@ -888,7 +888,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                 }
                 planeswalkers.add(perm);
             }
-            if (filterAura.match(perm)) {
+            if (filterAura.match(perm, this)) {
                 //20091005 - 704.5n, 702.14c
                 if (perm.getAttachedTo() == null) {
                     if (perm.moveToZone(Zone.GRAVEYARD, null, this, false))
@@ -904,7 +904,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                         }
                         else {
                             Filter auraFilter = perm.getSpellAbility().getTargets().get(0).getFilter();
-                            if (!auraFilter.match(attachedTo) || attachedTo.hasProtectionFrom(perm)) {
+                            if (!auraFilter.match(attachedTo, this) || attachedTo.hasProtectionFrom(perm, this)) {
                                 if (perm.moveToZone(Zone.GRAVEYARD, null, this, false))
                                     somethingHappened = true;
                             }
@@ -918,7 +918,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                         }
                         else {
                             Filter auraFilter = perm.getSpellAbility().getTargets().get(0).getFilter();
-                            if (!auraFilter.match(attachedTo) || attachedTo.hasProtectionFrom(perm)) {
+                            if (!auraFilter.match(attachedTo, this) || attachedTo.hasProtectionFrom(perm, this)) {
                                 if (perm.moveToZone(Zone.GRAVEYARD, null, this, false))
                                     somethingHappened = true;
                             }
@@ -926,28 +926,28 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                     }
                 }
             }
-            if (filterLegendary.match(perm))
+            if (filterLegendary.match(perm, this))
                 legendary.add(perm);
-            if (filterEquipment.match(perm)) {
+            if (filterEquipment.match(perm, this)) {
                 //20091005 - 704.5p, 702.14d
                 if (perm.getAttachedTo() != null) {
                     Permanent creature = getPermanent(perm.getAttachedTo());
                     if (creature == null) {
                         perm.attachTo(null, this);
                     }
-                    else if (!creature.getCardType().contains(CardType.CREATURE) || creature.hasProtectionFrom(perm)) {
+                    else if (!creature.getCardType().contains(CardType.CREATURE) || creature.hasProtectionFrom(perm, this)) {
                         if (creature.removeAttachment(perm.getId(), this))
                             somethingHappened = true;
                     }
                 }
             }
-            if (filterFortification.match(perm)) {
+            if (filterFortification.match(perm, this)) {
                 if (perm.getAttachedTo() != null) {
                     Permanent land = getPermanent(perm.getAttachedTo());
                     if (land == null) {
                         perm.attachTo(null, this);
                     }
-                    else if (!land.getCardType().contains(CardType.LAND) || land.hasProtectionFrom(perm)) {
+                    else if (!land.getCardType().contains(CardType.LAND) || land.hasProtectionFrom(perm, this)) {
                         if (land.removeAttachment(perm.getId(), this))
                             somethingHappened = true;
                     }

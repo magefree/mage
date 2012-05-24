@@ -549,7 +549,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
      */
     private int damage(int damageAmount, UUID sourceId, Game game, boolean preventable, boolean combat, boolean markDamage) {
         int damageDone = 0;
-        if (damageAmount > 0 && canDamage(game.getObject(sourceId))) {
+        if (damageAmount > 0 && canDamage(game.getObject(sourceId), game)) {
             if (cardType.contains(CardType.PLANESWALKER)) {
                 damageDone = damagePlaneswalker(damageAmount, sourceId, game, preventable, combat, markDamage);
             } else {
@@ -661,7 +661,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
             if (abilities.containsKey(HexproofAbility.getInstance().getId()))
                 if (game.getOpponents(controllerId).contains(sourceControllerId))
                     return false;
-            if (hasProtectionFrom(source))
+            if (hasProtectionFrom(source, game))
                 return false;
         }
 
@@ -669,16 +669,16 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
     }
 
     @Override
-    public boolean hasProtectionFrom(MageObject source) {
+    public boolean hasProtectionFrom(MageObject source, Game game) {
         for (ProtectionAbility ability : abilities.getProtectionAbilities()) {
-            if (!ability.canTarget(source))
+            if (!ability.canTarget(source, game))
                 return true;
         }
         return false;
     }
 
-    protected boolean canDamage(MageObject source) {
-        return (!hasProtectionFrom(source));
+    protected boolean canDamage(MageObject source, Game game) {
+        return (!hasProtectionFrom(source, game));
     }
 
     @Override
@@ -772,7 +772,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
             if (!effect.canBeBlocked(attacker, this, game.getContinuousEffects().getAbility(effect.getId()), game))
                 return false;
         }
-        if (attacker != null && attacker.hasProtectionFrom(this))
+        if (attacker != null && attacker.hasProtectionFrom(this, game))
             return false;
         return true;
     }

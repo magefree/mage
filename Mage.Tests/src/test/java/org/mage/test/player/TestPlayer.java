@@ -181,7 +181,7 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
     public boolean choose(Constants.Outcome outcome, Target target, UUID sourceId, Game game, Map<String, Serializable> options) {
         if (!choices.isEmpty()) {
             if (target instanceof TargetPermanent) {
-                for (Permanent permanent : game.getBattlefield().getAllActivePermanents((FilterPermanent)target.getFilter())) {
+                for (Permanent permanent : game.getBattlefield().getAllActivePermanents((FilterPermanent)target.getFilter(), game)) {
                     for (String choose2: choices) {
                         if (permanent.getName().equals(choose2)) {
                             if (((TargetPermanent)target).canTarget(playerId, permanent.getId(), null, game) && !target.getTargets().contains(permanent.getId())) {
@@ -204,7 +204,7 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
     }
     
     protected Permanent findPermanent(FilterPermanent filter, UUID controllerId, Game game) {
-        List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(filter, controllerId);
+        List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(filter, controllerId, game);
         if (permanents.size() > 0)
             return permanents.get(0);
         return null;

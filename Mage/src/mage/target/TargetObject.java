@@ -28,11 +28,12 @@
 
 package mage.target;
 
-import java.util.UUID;
 import mage.Constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  *
@@ -77,7 +78,7 @@ public abstract class TargetObject<T extends TargetObject<T>> extends TargetImpl
 	public boolean canTarget(UUID id, Game game) {
 		MageObject object = game.getObject(id);
 		if (object != null && game.getState().getZone(id).match(zone))
-			return getFilter().match(object);
+			return getFilter().match(object, game);
 		return false;
 	}
 

@@ -27,7 +27,6 @@
  */
 package mage.sets.newphyrexia;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
@@ -38,6 +37,8 @@ import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -84,8 +85,8 @@ class WarReportEffect extends OneShotEffect<WarReportEffect> {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            int lifeToGain = game.getBattlefield().countAll(new FilterCreaturePermanent());
-            lifeToGain += game.getBattlefield().countAll(new FilterArtifactPermanent());
+            int lifeToGain = game.getBattlefield().countAll(new FilterCreaturePermanent(), game);
+            lifeToGain += game.getBattlefield().countAll(new FilterArtifactPermanent(), game);
             player.gainLife(lifeToGain, game);
         }
         return true;
