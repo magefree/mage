@@ -44,49 +44,68 @@ import mage.game.permanent.Permanent;
  * @author BetaSteward_at_googlemail.com
  */
 public class BoostSourceEffect extends ContinuousEffectImpl<BoostSourceEffect> {
-	private DynamicValue power;
-	private DynamicValue toughness;
+    private DynamicValue power;
+    private DynamicValue toughness;
+    private boolean lockedIn;
 
-	public BoostSourceEffect(int power, int toughness, Duration duration) {
-		this(new StaticValue(power), new StaticValue(toughness), duration);
-	}
-
-    public BoostSourceEffect(DynamicValue power, DynamicValue toughness, Duration duration) {
-        super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
-        this.power = power;
-		this.toughness = toughness;
-		setText();
+    public BoostSourceEffect(int power, int toughness, Duration duration) {
+        this(new StaticValue(power), new StaticValue(toughness), duration, false);
     }
 
-	public BoostSourceEffect(final BoostSourceEffect effect) {
-		super(effect);
-		this.power = effect.power.clone();
-		this.toughness = effect.toughness.clone();
-	}
+    public BoostSourceEffect(DynamicValue power, DynamicValue toughness, Duration duration) {
+        this(power, toughness, duration, false);
+    }
 
-	@Override
-	public BoostSourceEffect copy() {
-		return new BoostSourceEffect(this);
-	}
+    /**
+     * @param lockedIn if true, power and toughness will be calculated only once, when the ability resolves
+     */
+    public BoostSourceEffect(DynamicValue power, DynamicValue toughness, Duration duration, boolean lockedIn) {
+        super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
+        this.power = power;
+        this.toughness = toughness;
+        this.lockedIn = lockedIn;
+        setText();
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent target = game.getPermanent(source.getSourceId());
-		if (target != null) {
-			target.addPower(power.calculate(game, source));
-			target.addToughness(toughness.calculate(game, source));
-			return true;
-		}
-		return false;
-	}
+    public BoostSourceEffect(final BoostSourceEffect effect) {
+        super(effect);
+        this.power = effect.power.clone();
+        this.toughness = effect.toughness.clone();
+        this.lockedIn = effect.lockedIn;
+    }
 
-	public void setRule(String value) {
-		staticText = value;
-	}
+    @Override
+    public BoostSourceEffect copy() {
+        return new BoostSourceEffect(this);
+    }
 
-	private void setText() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("{this} gets ");
+    @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        if (lockedIn) {
+            power = new StaticValue(power.calculate(game, source));
+            toughness = new StaticValue(toughness.calculate(game, source));
+        }
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent target = game.getPermanent(source.getSourceId());
+        if (target != null) {
+            target.addPower(power.calculate(game, source));
+            target.addToughness(toughness.calculate(game, source));
+            return true;
+        }
+        return false;
+    }
+
+    public void setRule(String value) {
+        staticText = value;
+    }
+
+    private void setText() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("{this} gets ");
         String p = power.toString();
         if(!p.startsWith("-"))
             sb.append("+");
@@ -99,8 +118,8 @@ public class BoostSourceEffect extends ContinuousEffectImpl<BoostSourceEffect> {
                 sb.append("+");
         }
         sb.append(t);
-		if (duration != Duration.WhileOnBattlefield)
-			sb.append(" ").append(duration.toString());
+        if (duration != Duration.WhileOnBattlefield)
+            sb.append(" ").append(duration.toString());
         String message = power.getMessage();
         if (message.length() == 0)
             message = toughness.getMessage();
@@ -108,7 +127,7 @@ public class BoostSourceEffect extends ContinuousEffectImpl<BoostSourceEffect> {
             sb.append(" for each ");
         }
         sb.append(message);
-		staticText = sb.toString();
-	}
+        staticText = sb.toString();
+    }
 
 }

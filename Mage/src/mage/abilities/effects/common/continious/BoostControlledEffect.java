@@ -48,89 +48,96 @@ public class BoostControlledEffect extends ContinuousEffectImpl<BoostControlledE
 
     private DynamicValue power;
     private DynamicValue toughness;
-	protected boolean excludeSource;
-	protected FilterCreaturePermanent filter;
-    // if true, all dynamic values should be calculated once
-    protected boolean isLockedIn = false;
+    protected FilterCreaturePermanent filter;
+    protected boolean excludeSource;
+    protected boolean lockedIn = false;
 
-	public BoostControlledEffect(int power, int toughness, Duration duration) {
-		this(power, toughness, duration, new FilterCreaturePermanent(), false);
-	}
+    public BoostControlledEffect(int power, int toughness, Duration duration) {
+        this(power, toughness, duration, new FilterCreaturePermanent(), false);
+    }
 
     public BoostControlledEffect(DynamicValue power, DynamicValue toughness, Duration duration) {
-		this(power, toughness, duration, new FilterCreaturePermanent(), false);
-	}
+        this(power, toughness, duration, new FilterCreaturePermanent(), false);
+    }
 
-	public BoostControlledEffect(int power, int toughness, Duration duration, boolean excludeSource) {
-		this(power, toughness, duration, new FilterCreaturePermanent(), excludeSource);
-	}
+    public BoostControlledEffect(int power, int toughness, Duration duration, boolean excludeSource) {
+        this(power, toughness, duration, new FilterCreaturePermanent(), excludeSource);
+    }
 
-	public BoostControlledEffect(int power, int toughness, Duration duration, FilterCreaturePermanent filter) {
-		this(new StaticValue(power), new StaticValue(toughness), duration, filter, false);
-	}
+    public BoostControlledEffect(int power, int toughness, Duration duration, FilterCreaturePermanent filter) {
+        this(new StaticValue(power), new StaticValue(toughness), duration, filter, false);
+    }
 
-	public BoostControlledEffect(int power, int toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource) {
-		this(new StaticValue(power), new StaticValue(toughness), duration, filter, excludeSource);
-	}
+    public BoostControlledEffect(int power, int toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource) {
+        this(new StaticValue(power), new StaticValue(toughness), duration, filter, excludeSource);
+    }
 
     public BoostControlledEffect(DynamicValue power, DynamicValue toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource) {
-		super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
-		this.power = power;
-		this.toughness = toughness;
-		this.filter = filter;
-		this.excludeSource = excludeSource;
-		setText();
-	}
+        this(power, toughness, duration, filter, excludeSource, false);
+    }
 
-	public BoostControlledEffect(final BoostControlledEffect effect) {
-		super(effect);
-		this.power = effect.power;
-		this.toughness = effect.toughness;
-		this.filter = effect.filter.copy();
-		this.excludeSource = effect.excludeSource;
-        this.isLockedIn = effect.isLockedIn;
-	}
+    /**
+     * @param lockedIn if true, power and toughness will be calculated only once, when the ability resolves
+     */
+    public BoostControlledEffect(DynamicValue power, DynamicValue toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource, boolean lockedIn) {
+        super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
+        this.power = power;
+        this.toughness = toughness;
+        this.filter = filter;
+        this.excludeSource = excludeSource;
+        this.lockedIn = lockedIn;
+        setText();
+    }
 
-	@Override
-	public BoostControlledEffect copy() {
-		return new BoostControlledEffect(this);
-	}
+    public BoostControlledEffect(final BoostControlledEffect effect) {
+        super(effect);
+        this.power = effect.power;
+        this.toughness = effect.toughness;
+        this.filter = effect.filter.copy();
+        this.excludeSource = effect.excludeSource;
+        this.lockedIn = effect.lockedIn;
+    }
 
-	@Override
-	public void init(Ability source, Game game) {
-		super.init(source, game);
-		if (this.affectedObjectsSet) {
-			for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
-				if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
-					objects.add(perm.getId());
-				}
-			}
-		}
-        if (this.isLockedIn) {
+    @Override
+    public BoostControlledEffect copy() {
+        return new BoostControlledEffect(this);
+    }
+
+    @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        if (this.affectedObjectsSet) {
+            for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
+                if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
+                    objects.add(perm.getId());
+                }
+            }
+        }
+        if (this.lockedIn) {
             power = new StaticValue(power.calculate(game, source));
             toughness = new StaticValue(toughness.calculate(game, source));
         }
-	}
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
-			if (!this.affectedObjectsSet || objects.contains(perm.getId())) {
-				if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
-					perm.addPower(power.calculate(game, source));
-					perm.addToughness(toughness.calculate(game, source));
-				}
-			}
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
+            if (!this.affectedObjectsSet || objects.contains(perm.getId())) {
+                if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
+                    perm.addPower(power.calculate(game, source));
+                    perm.addToughness(toughness.calculate(game, source));
+                }
+            }
+        }
+        return true;
+    }
 
-	private void setText() {
-		StringBuilder sb = new StringBuilder();
-		if (excludeSource)
-			sb.append("Other ");
-		sb.append(filter.getMessage());
-		sb.append(" you control get ");
+    private void setText() {
+        StringBuilder sb = new StringBuilder();
+        if (excludeSource)
+            sb.append("Other ");
+        sb.append(filter.getMessage());
+        sb.append(" you control get ");
 
         String p = power.toString();
         if(!p.startsWith("-")) {
@@ -147,16 +154,15 @@ public class BoostControlledEffect extends ContinuousEffectImpl<BoostControlledE
         }
         sb.append(t);
 
-		sb.append((duration==Duration.EndOfTurn?" until end of turn":""));
-		staticText = sb.toString();
-	}
+        sb.append((duration==Duration.EndOfTurn?" until end of turn":""));
+        staticText = sb.toString();
+    }
 
     public void setRule(String rule) {
         staticText = rule;
     }
 
-    public void setLockedIn(boolean isLockedIn) {
-        this.isLockedIn =isLockedIn;
+    public void setLockedIn(boolean lockedIn) {
+        this.lockedIn = lockedIn;
     }
-
 }
