@@ -88,6 +88,7 @@ public class ThreadStarter extends Thread {
         knownSets.add("Duel Decks: Elspeth vs. Tezzeret");
         knownSets.add("Tempest");
         knownSets.add("Urza's Saga");
+        knownSets.add("Urza's Legacy");
         knownSets.add("Invasion");
         knownSets.add("Planeshift");
         knownSets.add("Apocalypse");
