@@ -153,9 +153,6 @@ class ContaminatedGroundEffect extends ContinuousEffectImpl<ContaminatedGroundEf
                         land.getAbilities().clear();
                         land.addAbility(new BlackManaAbility(), game);
                         break;
-                    case ControlChangingEffects_2:
-                        land.getColor().setColor(new ObjectColor(""));
-                        break;
                     case TypeChangingEffects_4:
                         if (!land.getCardType().contains(CardType.LAND))
                             land.getCardType().add(CardType.LAND);
@@ -173,6 +170,6 @@ class ContaminatedGroundEffect extends ContinuousEffectImpl<ContaminatedGroundEf
 
     @Override
     public boolean hasLayer(Constants.Layer layer) {
-        return layer == Constants.Layer.AbilityAddingRemovingEffects_6 || layer == Constants.Layer.ColorChangingEffects_5 || layer == Constants.Layer.TypeChangingEffects_4;
+        return layer == Constants.Layer.AbilityAddingRemovingEffects_6 || layer == Constants.Layer.TypeChangingEffects_4;
     }
 }
