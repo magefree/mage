@@ -43,6 +43,8 @@ import mage.filter.FilterSpell;
 import mage.players.Player;
 import mage.game.stack.Spell;
 import mage.target.TargetObject;
+import mage.target.Target;
+
 
 
 /**
@@ -161,11 +163,13 @@ public class Outwit extends CardImpl<Outwit> {
             if (spell != null) {
 		Ability ability = spell.getStackAbility();
                 if (ability != null && !ability.getTargets().isEmpty()) {
-                    for (UUID playerId : ability.getTargets().get(0).getTargets()) {
-                        Player player = game.getPlayer(playerId);
-                        if (player != null) {
-                            return true;
-			}
+                    for (Target target : ability.getTargets()) {
+                        for (UUID playerId : target.getTargets()) {
+                            Player player = game.getPlayer(playerId);
+                            if (player != null) {
+                                return true;
+                            }
+                        }
                     }
                 }
             }
