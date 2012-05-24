@@ -68,7 +68,7 @@ public class PreventDamageTargetEffect extends PreventionEffectImpl<PreventDamag
 		GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), event.getAmount(), false);
 		if (!game.replaceEvent(preventEvent)) {
 			if (event.getAmount() >= this.amount) {
-				int damage = event.getAmount();
+				int damage = amount;
 				event.setAmount(event.getAmount() - amount);
 				this.used = true;
 				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), damage));

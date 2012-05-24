@@ -30,13 +30,13 @@ package mage.abilities.effects.common;
 
 import mage.Constants.Duration;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.Target;
 
 import java.util.UUID;
-import mage.abilities.Mode;
 
 /**
  * @author nantuko
@@ -94,7 +94,7 @@ public class PreventDamageFromTargetEffect extends PreventionEffectImpl<PreventD
 				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, target, source.getId(), source.getControllerId(), damage));
 			} else {
 				if (event.getAmount() >= this.amount) {
-					int damage = event.getAmount();
+					int damage = amount;
 					event.setAmount(event.getAmount() - amount);
 					this.used = true;
 					game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, target, source.getId(), source.getControllerId(), damage));
