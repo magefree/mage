@@ -25,41 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.avacynrestored;
+package mage.abilities.dynamicvalue.common;
 
-import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
-import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.dynamicvalue.common.TargetPermanentPowerCount;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
-import mage.cards.CardImpl;
-import mage.target.common.TargetCreaturePermanent;
+import mage.Constants.Zone;
+import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
  * @author North
  */
-public class RushOfBlood extends CardImpl<RushOfBlood> {
+public class TargetPermanentPowerCount implements DynamicValue {
 
-    public RushOfBlood(UUID ownerId) {
-        super(ownerId, 154, "Rush of Blood", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
-        this.expansionSetCode = "AVR";
+    @Override
+    public int calculate(Game game, Ability sourceAbility) {
+        Permanent sourcePermanent = game.getPermanent(sourceAbility.getFirstTarget());
+        if (sourcePermanent == null) {
+            sourcePermanent = (Permanent) game.getLastKnownInformation(sourceAbility.getFirstTarget(), Zone.BATTLEFIELD);
+        }
+        if (sourcePermanent != null) {
+            return sourcePermanent.getPower().getValue();
+        }
 
-        this.color.setRed(true);
-
-        // Target creature gets +X/+0 until end of turn, where X is its power.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(new TargetPermanentPowerCount(), new StaticValue(0), Duration.EndOfTurn, true));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-    }
-
-    public RushOfBlood(final RushOfBlood card) {
-        super(card);
+        return 0;
     }
 
     @Override
-    public RushOfBlood copy() {
-        return new RushOfBlood(this);
+    public DynamicValue clone() {
+        return new SourcePermanentPowerCount();
+    }
+
+    @Override
+    public String toString() {
+        return "1";
+    }
+
+    @Override
+    public String getMessage() {
+        return "point of power it has";
     }
 }
