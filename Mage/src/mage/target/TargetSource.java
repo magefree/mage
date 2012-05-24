@@ -31,10 +31,12 @@ package mage.target;
 import mage.Constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.cards.Card;
 import mage.filter.FilterObject;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
+import mage.players.Player;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -71,6 +73,7 @@ public class TargetSource extends TargetObject<TargetSource> {
 	public TargetSource(final TargetSource target) {
 		super(target);
 		this.filter = target.filter.copy();
+        setNotTarget(true);
 	}
 
 	@Override
@@ -120,6 +123,22 @@ public class TargetSource extends TargetObject<TargetSource> {
 					return true;
 			}
 		}
+        for (Player player : game.getPlayers().values()) {
+            for (Card card : player.getGraveyard().getCards(game)) {
+                if (filter.match(card, game)) {
+                    count++;
+                    if (count >= this.minNumberOfTargets)
+                        return true;
+                }
+            }
+        }
+        for (Card card : game.getExile().getAllCards(game)) {
+            if (filter.match(card, game)) {
+                count++;
+                if (count >= this.minNumberOfTargets)
+                    return true;
+            }
+        }
 		return false;
 	}
 
@@ -141,6 +160,18 @@ public class TargetSource extends TargetObject<TargetSource> {
 				possibleTargets.add(permanent.getId());
 			}
 		}
+        for (Player player : game.getPlayers().values()) {
+            for (Card card : player.getGraveyard().getCards(game)) {
+                if (filter.match(card, game)) {
+                    possibleTargets.add(card.getId());
+                }
+            }
+        }
+        for (Card card : game.getExile().getAllCards(game)) {
+            if (filter.match(card, game)) {
+                possibleTargets.add(card.getId());
+            }
+        }
 		return possibleTargets;
 	}
 

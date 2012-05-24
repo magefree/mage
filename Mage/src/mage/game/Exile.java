@@ -28,15 +28,12 @@
 
 package mage.game;
 
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.UUID;
 import mage.cards.Card;
-import mage.game.events.GameEvent;
 import mage.util.Copyable;
+
+import java.io.Serializable;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  *
@@ -97,6 +94,14 @@ public class Exile implements Serializable, Copyable<Exile> {
 		}
 		return null;
 	}
+    
+    public List<Card> getAllCards(Game game) {
+        List<Card> cards = new ArrayList<Card>();
+        for (ExileZone exile: exileZones.values()) {
+            cards.addAll(exile.getCards(game));
+        }
+        return cards;
+    }
 
     public void removeCard(Card card, Game game) {
 		for (ExileZone exile: exileZones.values()) {
