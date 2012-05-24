@@ -270,15 +270,18 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
 	}
 
     private void initComponents() {
-        setOpaque(true);
+        setOpaque(false);
 
         jPanel = new JPanel();
         jPanel.setLayout(null);
+        jPanel.setOpaque(false);
         jScrollPane = new JScrollPane(jPanel);
 
         Border empty = new EmptyBorder(0,0,0,0);
         jScrollPane.setBorder(empty);
         jScrollPane.setViewportBorder(empty);
+        jScrollPane.setOpaque(false);
+        jScrollPane.getViewport().setOpaque(false);
 
         this.add(jScrollPane);
     }
