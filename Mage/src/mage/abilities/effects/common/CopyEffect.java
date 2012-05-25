@@ -67,7 +67,7 @@ public class CopyEffect extends ContinuousEffectImpl<CopyEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = game.getPermanent(this.sourceId);
         if (permanent == null) {
             return false;
         }
