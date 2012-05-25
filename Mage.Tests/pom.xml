@@ -9,7 +9,7 @@
         <version>0.8.5</version>
     </parent> 
 	
-    <artifactId>Mage-Tests</artifactId>
+    <artifactId>mage-tests</artifactId>
     <packaging>jar</packaging>
     <name>Mage Tests</name>
 	
