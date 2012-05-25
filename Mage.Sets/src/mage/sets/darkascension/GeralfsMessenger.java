@@ -27,7 +27,6 @@
  */
 package mage.sets.darkascension;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
@@ -38,6 +37,8 @@ import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.keyword.UndyingAbility;
 import mage.cards.CardImpl;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  *
@@ -58,7 +59,7 @@ public class GeralfsMessenger extends CardImpl<GeralfsMessenger> {
         this.addAbility(new EntersBattlefieldTappedAbility());
         // When Geralf's Messenger enters the battlefield, target opponent loses 2 life.
         Ability ability = new EntersBattlefieldTriggeredAbility(new LoseLifeTargetEffect(2));
-        ability.addTarget(new TargetOpponent());
+        ability.addTarget(new TargetOpponent(true));
         this.addAbility(ability);
         // Undying
         this.addAbility(new UndyingAbility());

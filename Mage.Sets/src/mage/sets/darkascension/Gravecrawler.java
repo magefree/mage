@@ -63,7 +63,7 @@ public class Gravecrawler extends CardImpl<Gravecrawler> {
         this.addAbility(CantBlockAbility.getInstance());
         
         // You may cast Gravecrawler from your graveyard as long as you control a Zombie.
-        this.addAbility(new SimpleStaticAbility(Zone.GRAVEYARD, new GravecrawlerPlayEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new GravecrawlerPlayEffect()));
         
     }
 
