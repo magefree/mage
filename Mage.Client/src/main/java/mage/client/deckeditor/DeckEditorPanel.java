@@ -27,23 +27,10 @@
 */
 package mage.client.deckeditor;
 
-import mage.cards.decks.importer.DeckImporter;
-import mage.cards.decks.importer.DeckImporterUtil;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.UUID;
-import java.util.concurrent.CancellationException;
-import java.util.concurrent.ExecutionException;
-
-import javax.swing.*;
-import javax.swing.filechooser.FileFilter;
-
 import mage.cards.Card;
 import mage.cards.decks.Deck;
+import mage.cards.decks.importer.DeckImporter;
+import mage.cards.decks.importer.DeckImporterUtil;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.cards.ICardGrid;
@@ -58,6 +45,18 @@ import mage.remote.Session;
 import mage.sets.Sets;
 import mage.view.CardView;
 import org.apache.log4j.Logger;
+
+import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.UUID;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.ExecutionException;
 
 /**
  *
@@ -186,7 +185,11 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 								((CardInfoPane)cardInfoPane).setCard(new CardView(card));
 							}
 							hidePopup();
-						}
+                        } else if (event.getEventName().equals("remove-main")) {
+                            DeckEditorPanel.this.deckArea.getDeckList().handleDoubleClick();
+                        } else if (event.getEventName().equals("remove-sideboard")) {
+                            DeckEditorPanel.this.deckArea.getSideboardList().handleDoubleClick();
+                        }
 						refreshDeck();
 					}
 				}
@@ -221,7 +224,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 						}
 						hidePopup();
 						refreshDeck();
-					}
+                    }
 				}
 			}
 		);

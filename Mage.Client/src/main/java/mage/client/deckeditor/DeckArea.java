@@ -37,6 +37,7 @@ package mage.client.deckeditor;
 
 import mage.cards.decks.Deck;
 import mage.client.cards.BigCard;
+import mage.client.cards.CardsList;
 import mage.client.util.Event;
 import mage.client.util.Listener;
 import mage.view.CardsView;
@@ -113,6 +114,13 @@ public class DeckArea extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public CardsList getDeckList() {
+        return deckList;
+    }
+
+    public CardsList getSideboardList() {
+        return sideboardList;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private mage.client.cards.CardsList deckList;

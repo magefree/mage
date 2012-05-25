@@ -38,6 +38,7 @@ import mage.Constants.CardType;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.client.cards.BigCard;
+import mage.client.cards.CardGrid;
 import mage.client.cards.CardsStorage;
 import mage.client.cards.ICardGrid;
 import mage.client.constants.Constants.SortBy;
@@ -75,6 +76,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     /** Creates new form CardSelector */
     public CardSelector() {
         initComponents();
+        cardGrid = new CardGrid();
 		makeTransparent();
 		initListViewComponents();
 		currentView = mainModel; // by default we use List View
@@ -266,7 +268,6 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         btnBooster = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        cardGrid = new mage.client.cards.CardGrid();
         tbTypes = new javax.swing.JToolBar();
         rdoLand = new javax.swing.JRadioButton();
         rdoCreatures = new javax.swing.JRadioButton();
@@ -288,6 +289,8 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         jButtonClean = new javax.swing.JButton();
         cardCountLabel = new javax.swing.JLabel();
         cardCount = new javax.swing.JLabel();
+        jButtonRemoveFromMain = new javax.swing.JButton();
+        jButtonRemoveFromSideboard = new javax.swing.JButton();
 
         tbColor.setFloatable(false);
         tbColor.setRollover(true);
@@ -364,7 +367,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         });
         tbColor.add(rdoColorless);
 
-        cbExpansionSet.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbExpansionSet.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
         cbExpansionSet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbExpansionSetActionPerformed(evt);
@@ -393,8 +396,6 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             }
         });
         tbColor.add(btnClear);
-
-        jScrollPane1.setViewportView(cardGrid);
 
         tbTypes.setFloatable(false);
         tbTypes.setRollover(true);
@@ -494,7 +495,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         });
         tbTypes.add(chkPiles);
 
-        cbSortBy.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbSortBy.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
         cbSortBy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbSortByActionPerformed(evt);
@@ -528,14 +529,16 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         jPanel1.setOpaque(false);
         jPanel1.setPreferredSize(new java.awt.Dimension(897, 35));
 
-        jButtonAddToMain.setText("Add to Main");
+        jButtonAddToMain.setText("+");
+        jButtonAddToMain.setToolTipText("Add to Main");
         jButtonAddToMain.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAddToMainActionPerformed(evt);
             }
         });
 
-        jButtonAddToSideboard.setText("Add to Sideboard");
+        jButtonAddToSideboard.setText("+S");
+        jButtonAddToSideboard.setToolTipText("Add to Sideboard");
         jButtonAddToSideboard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAddToSideboardActionPerformed(evt);
@@ -562,6 +565,22 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
         cardCount.setText("0");
 
+        jButtonRemoveFromMain.setText("-");
+        jButtonRemoveFromMain.setToolTipText("Remove from Main");
+        jButtonRemoveFromMain.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRemoveFromMainActionPerformed(evt);
+            }
+        });
+
+        jButtonRemoveFromSideboard.setText("-S");
+        jButtonRemoveFromSideboard.setToolTipText("Remove from Sideboard");
+        jButtonRemoveFromSideboard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRemoveFromSideboardActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -569,8 +588,12 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jButtonAddToMain)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonAddToSideboard)
+                .addComponent(jButtonRemoveFromMain)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonAddToSideboard)
+                .addGap(5, 5, 5)
+                .addComponent(jButtonRemoveFromSideboard)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -582,19 +605,21 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 .addComponent(cardCountLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cardCount, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(165, Short.MAX_VALUE))
+                .addContainerGap(186, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jButtonAddToMain)
-                .addComponent(jButtonAddToSideboard)
                 .addComponent(jLabel1)
                 .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(jButtonSearch)
                 .addComponent(jButtonClean)
                 .addComponent(cardCountLabel)
-                .addComponent(cardCount))
+                .addComponent(cardCount)
+                .addComponent(jButtonRemoveFromMain)
+                .addComponent(jButtonAddToSideboard)
+                .addComponent(jButtonRemoveFromSideboard))
         );
 
         cardCountLabel.getAccessibleContext().setAccessibleName("cardCountLabel");
@@ -801,6 +826,15 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 		}
 	}//GEN-LAST:event_jButtonAddToSideboardActionPerformed
 
+    private void jButtonRemoveFromMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveFromMainActionPerformed
+        mainModel.removeFromMainEvent(0);
+    }//GEN-LAST:event_jButtonRemoveFromMainActionPerformed
+
+    private void jButtonRemoveFromSideboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveFromSideboardActionPerformed
+        mainModel.removeFromSideEvent(0);
+    }//GEN-LAST:event_jButtonRemoveFromSideboardActionPerformed
+
+
 	private void jButtonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchActionPerformed
 		String name = jTextFieldSearch.getText().trim();
 		filter.setText(name);
@@ -813,7 +847,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 		filterCards();
 	}//GEN-LAST:event_jButtonCleanActionPerformed
 
-	public List<Integer> asList(final int[] is) {
+    public List<Integer> asList(final int[] is) {
         List<Integer> list = new ArrayList<Integer>();
 		for (int i : is) list.add(i);
 		return list;
@@ -837,13 +871,14 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     private javax.swing.JButton btnClear;
     private javax.swing.JLabel cardCount;
     private javax.swing.JLabel cardCountLabel;
-    private mage.client.cards.CardGrid cardGrid;
     private javax.swing.JComboBox cbExpansionSet;
     private javax.swing.JComboBox cbSortBy;
     private javax.swing.JCheckBox chkPiles;
     private javax.swing.JButton jButtonAddToMain;
     private javax.swing.JButton jButtonAddToSideboard;
     private javax.swing.JButton jButtonClean;
+    private javax.swing.JButton jButtonRemoveFromMain;
+    private javax.swing.JButton jButtonRemoveFromSideboard;
     private javax.swing.JButton jButtonSearch;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
@@ -867,6 +902,8 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     private javax.swing.JToolBar tbColor;
     private javax.swing.JToolBar tbTypes;
     // End of variables declaration//GEN-END:variables
+
+    private mage.client.cards.CardGrid cardGrid;
 
 	@Override
 	public void componentResized(ComponentEvent e) {

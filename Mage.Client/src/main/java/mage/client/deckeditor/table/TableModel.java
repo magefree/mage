@@ -29,6 +29,7 @@
 package mage.client.deckeditor.table;
 
 import mage.Constants;
+import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.cards.CardEventSource;
 import mage.client.cards.ICardGrid;
@@ -38,9 +39,11 @@ import mage.client.util.Config;
 import mage.client.util.Event;
 import mage.client.util.ImageHelper;
 import mage.client.util.Listener;
+import mage.client.util.gui.GuiDisplayUtil;
 import mage.view.CardView;
 import mage.view.CardsView;
 import org.apache.log4j.Logger;
+import org.jdesktop.swingx.JXPanel;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
@@ -51,9 +54,6 @@ import java.awt.image.BufferedImage;
 import java.util.*;
 import java.util.List;
 import java.util.Map.Entry;
-import mage.client.MageFrame;
-import mage.client.util.gui.GuiDisplayUtil;
-import org.jdesktop.swingx.JXPanel;
 
 /**
  * Table Model for card list.
@@ -276,6 +276,14 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 		CardView card = view.get(index);
 		cardEventSource.shiftDoubleClick(card.getId(), "shift-double-click");
 	}
+
+    public void removeFromMainEvent(int index) {
+        cardEventSource.removeFromMainEvent("remove-main");
+    }
+
+    public void removeFromSideEvent(int index) {
+        cardEventSource.removeFromSideboardEvent("remove-sideboard");
+    }
 
 	public void addListeners(final JTable table) {
 		// updates card detail, listens to any key strokes

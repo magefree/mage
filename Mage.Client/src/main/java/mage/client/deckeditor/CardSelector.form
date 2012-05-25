@@ -163,12 +163,6 @@
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-      <SubComponents>
-        <Container class="mage.client.cards.CardGrid" name="cardGrid">
-
-          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout"/>
-        </Container>
-      </SubComponents>
     </Container>
     <Container class="javax.swing.JToolBar" name="tbTypes">
       <Properties>
@@ -327,8 +321,12 @@
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jButtonAddToMain" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jButtonAddToSideboard" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonRemoveFromMain" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="jButtonAddToSideboard" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                  <Component id="jButtonRemoveFromSideboard" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jTextFieldSearch" min="-2" pref="112" max="-2" attributes="0"/>
@@ -340,7 +338,7 @@
                   <Component id="cardCountLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="cardCount" min="-2" pref="48" max="-2" attributes="0"/>
-                  <EmptySpace pref="165" max="32767" attributes="0"/>
+                  <EmptySpace pref="186" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -348,13 +346,15 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                   <Component id="jButtonAddToMain" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonAddToSideboard" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextFieldSearch" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonSearch" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonClean" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cardCountLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cardCount" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonRemoveFromMain" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonAddToSideboard" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonRemoveFromSideboard" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -362,7 +362,8 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="jButtonAddToMain">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Add to Main"/>
+            <Property name="text" type="java.lang.String" value="+"/>
+            <Property name="toolTipText" type="java.lang.String" value="Add to Main"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAddToMainActionPerformed"/>
@@ -370,7 +371,8 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButtonAddToSideboard">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Add to Sideboard"/>
+            <Property name="text" type="java.lang.String" value="+S"/>
+            <Property name="toolTipText" type="java.lang.String" value="Add to Sideboard"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAddToSideboardActionPerformed"/>
@@ -414,6 +416,24 @@
           <AccessibilityProperties>
             <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="cardCount"/>
           </AccessibilityProperties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonRemoveFromMain">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="-"/>
+            <Property name="toolTipText" type="java.lang.String" value="Remove from Main"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRemoveFromMainActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonRemoveFromSideboard">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="-S"/>
+            <Property name="toolTipText" type="java.lang.String" value="Remove from Sideboard"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRemoveFromSideboardActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

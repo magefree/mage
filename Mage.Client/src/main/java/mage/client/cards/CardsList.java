@@ -119,20 +119,24 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
 			public void mousePressed(MouseEvent e) {
 				if (e.getClickCount() == 2 && !e.isConsumed()) {
 					e.consume();
-					if (mainTable.getSelectedRowCount() > 0) {
-						int[] n = mainTable.getSelectedRows();
-						List<Integer> indexes = asList(n);
-						Collections.reverse(indexes);
-						for (Integer index : indexes) {
-							mainModel.doubleClick(index);
-						}
-					}
+                    handleDoubleClick();
 				}
 			}
 		});
 
 		mainModel.setUpdateCountsCallback(new UpdateCountsCallback(lblCount, lblCreatureCount, lblLandCount));
 	}
+
+    public void handleDoubleClick() {
+        if (mainTable.getSelectedRowCount() > 0) {
+            int[] n = mainTable.getSelectedRows();
+            List<Integer> indexes = asList(n);
+            Collections.reverse(indexes);
+            for (Integer index : indexes) {
+                mainModel.doubleClick(index);
+            }
+        }
+    }
 
 	public ICardGrid getMainModel() {
 		return mainModel;

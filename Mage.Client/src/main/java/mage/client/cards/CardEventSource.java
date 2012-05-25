@@ -28,12 +28,13 @@
 
 package mage.client.cards;
 
-import java.io.Serializable;
-import java.util.UUID;
 import mage.client.util.Event;
 import mage.client.util.EventDispatcher;
 import mage.client.util.EventSource;
 import mage.client.util.Listener;
+
+import java.io.Serializable;
+import java.util.UUID;
 
 /**
  *
@@ -55,6 +56,14 @@ public class CardEventSource implements EventSource<Event>, Serializable {
 	public void shiftDoubleClick(UUID cardId, String message) {
 		dispatcher.fireEvent(new Event(cardId, message));
 	}
+
+    public void removeFromMainEvent(String message) {
+        dispatcher.fireEvent(new Event(null, message));
+    }
+
+    public void removeFromSideboardEvent(String message) {
+        dispatcher.fireEvent(new Event(null, message));
+    }
 
 	@Override
 	public void clearListeners() {
