@@ -70,8 +70,9 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl<GainAbilityA
 		Permanent equipment = game.getPermanent(source.getSourceId());
 		if (equipment != null && equipment.getAttachedTo() != null) {
 			Permanent creature = game.getPermanent(equipment.getAttachedTo());
-			if (creature != null)
+			if (creature != null) {
 				creature.addAbility(ability, game);
+            }
 		}
 		return true;
 	}

@@ -67,7 +67,9 @@ public class LoseAbilityAttachedEffect extends ContinuousEffectImpl<LoseAbilityA
 		if (equipment != null && equipment.getAttachedTo() != null) {
 			Permanent creature = game.getPermanent(equipment.getAttachedTo());
 			if (creature != null) {
-                creature.getAbilities().remove(ability);
+                while (creature.getAbilities().contains(ability)) {
+                    creature.getAbilities().remove(ability);
+                }
             }
 		}
 		return true;

@@ -74,7 +74,7 @@ public class LoseAbilityTest extends CardTestPlayerBase {
     @Test
     public void testMultiGainVsLoseAbility() {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Air Elemental");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 5);
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 10);
         addCard(Constants.Zone.HAND, playerA, "Grounded");
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 10);
         addCard(Constants.Zone.HAND, playerA, "Drake Umbra", 2);
@@ -83,7 +83,7 @@ public class LoseAbilityTest extends CardTestPlayerBase {
         castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Drake Umbra", "Air Elemental");
         castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Grounded", "Air Elemental");
 
-        setStopAt(2, Constants.PhaseStep.END_TURN);
+        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -92,7 +92,7 @@ public class LoseAbilityTest extends CardTestPlayerBase {
         Permanent airElemental = getPermanent("Air Elemental", playerA.getId());
         Assert.assertNotNull(airElemental);
 
-        Assert.assertTrue(airElemental.getAttachments().size() == 3);
+        Assert.assertEquals(3, airElemental.getAttachments().size());
         // should NOT have flying
         Assert.assertFalse(airElemental.getAbilities().contains(FlyingAbility.getInstance()));
     }
