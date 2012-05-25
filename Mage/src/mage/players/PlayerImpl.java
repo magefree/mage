@@ -37,6 +37,7 @@ import mage.Mana;
 import mage.abilities.*;
 import mage.abilities.common.PassAbility;
 import mage.abilities.common.delayed.AtTheEndOfTurnStepPostDelayedTriggeredAbility;
+import mage.abilities.costs.AdjustingSourceCosts;
 import mage.abilities.costs.AlternativeCost;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.LoseControlOnOtherPlayersControllerEffect;
@@ -1198,6 +1199,15 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		if (!(ability instanceof ManaAbility) && ability.canActivate(playerId, game)) {
             Ability copy = ability.copy();
             game.getContinuousEffects().costModification(copy, game);
+
+            Card card = game.getCard(ability.getSourceId());
+            if (card != null) {
+                for (Ability ability0 : card.getAbilities()) {
+                    if (ability0 instanceof AdjustingSourceCosts) {
+                        ((AdjustingSourceCosts)ability0).adjustCosts(copy, game);
+                    }
+                }
+            }
 
 			ManaOptions abilityOptions = copy.getManaCostsToPay().getOptions();
 			if (abilityOptions.size() == 0) {

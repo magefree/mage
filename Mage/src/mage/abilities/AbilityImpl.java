@@ -40,6 +40,7 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.*;
 import mage.abilities.mana.ManaAbility;
+import mage.cards.Card;
 import mage.choices.Choice;
 import mage.choices.Choices;
 import mage.game.Game;
@@ -179,18 +180,16 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
             }
         }
 		//20100716 - 601.2e
-		if (game.getObject(sourceId) != null) {
-			//game.getObject(sourceId).adjustCosts(this, game);
-			if (game.getCard(sourceId) != null) {
-				game.getCard(sourceId).adjustCosts(this, game);
-                for (Ability ability : game.getCard(sourceId).getAbilities()) {
-                    if (ability instanceof AdjustingSourceCosts) {
-                        ((AdjustingSourceCosts)ability).adjustCosts(this, game);
-                    }
+        Card card = game.getCard(sourceId);
+        if (card != null) {
+            card.adjustCosts(this, game);
+            for (Ability ability : card.getAbilities()) {
+                if (ability instanceof AdjustingSourceCosts) {
+                    ((AdjustingSourceCosts)ability).adjustCosts(this, game);
                 }
             }
-		}
-		
+        }
+
         // this is a hack to prevent mana abilities with mana costs from causing endless loops - pay other costs first
         if (this instanceof ManaAbility && !costs.pay(this, game, sourceId, controllerId, noMana)) {
 			logger.debug("activate mana ability failed - non mana costs");
