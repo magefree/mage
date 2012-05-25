@@ -1,0 +1,33 @@
+//Created with Mage - www.magefree.com
+NAME:Vampire Onslaught
+AUTHOR:WotC
+
+# Creature
+1 [ZEN:114] Vampire Hexmage
+4 [ZEN:115] Vampire Lacerator
+3 [M12:115] Vampire Outcasts
+2 [ZEN:83] Bloodghast
+1 [WWK:59] Kalastria Highborn
+4 [ROE:122] Pawn of Ulamog
+4 [M11:85] Bloodthrone Vampire
+2 [ZEN:116] Vampire Nighthawk
+4 [M11:120] Viscera Seer
+4 [ZEN:89] Gatekeeper of Malakir
+# Instant
+4 [NPH:57] Dismember
+# Artifact
+2 [ZEN:196] Blade of the Bloodchief
+1 [SOM:175] Mimic Vat
+# Land
+1 [ZEN:229] Verdant Catacombs
+6 [M12:238] Swamp
+6 [M12:239] Swamp
+6 [M12:240] Swamp
+5 [M12:241] Swamp
+
+# Sideboard
+SB: 3 [ZEN:114] Vampire Hexmage
+SB: 2 [ZEN:116] Vampire Nighthawk
+SB: 4 [SOM:78] Skinrender
+SB: 2 [MBS:43] Go for the Throat
+SB: 4 [M12:94] Distress
