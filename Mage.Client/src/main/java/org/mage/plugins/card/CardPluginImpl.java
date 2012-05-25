@@ -121,6 +121,7 @@ public class CardPluginImpl implements CardPlugin {
 
         //JScrollPane jScrollPane = (JScrollPane) component;
         JLayeredPane battlefieldPanel = (JLayeredPane) component2;
+        JComponent jPanel = ui.get("jPanel");
 
         Row allLands = new Row();
 
@@ -166,7 +167,6 @@ public class CardPluginImpl implements CardPlugin {
 		boolean othersOnTheRight = true;
 		if (options != null && options.containsKey("nonLandPermanentsInOnePile")) {
 			if (options.get("nonLandPermanentsInOnePile").equals("true")) {
-//				System.out.println("in one pile");
 				othersOnTheRight = false;
 			   	allCreatures.addAll(allOthers);
 				allOthers.clear();
@@ -215,7 +215,7 @@ public class CardPluginImpl implements CardPlugin {
                 break;
             //cardWidth = (int)(cardWidth / 1.2);
 			//FIXME: -1 is too slow. why not binary search?
-            cardWidth--;
+            cardWidth -= 3;
         }
 
         // Get size of all the rows.
@@ -232,8 +232,6 @@ public class CardPluginImpl implements CardPlugin {
             y = rowBottom;
             maxRowWidth = Math.max(maxRowWidth, x);
         }
-        //setPreferredSize(new Dimension(maxRowWidth - cardSpacingX, y - cardSpacingY));
-        //revalidate();
 
         // Position all card panels.
         x = 0;
@@ -252,14 +250,15 @@ public class CardPluginImpl implements CardPlugin {
                 for (int panelIndex = 0, panelCount = stack.size(); panelIndex < panelCount; panelIndex++) {
                     MagePermanent panel = stack.get(panelIndex);
                     int stackPosition = panelCount - panelIndex - 1;
-                    ///setComponentZOrder((Component)panel, panelIndex);
+                    if (jPanel != null)
+                        jPanel.setComponentZOrder(panel, panelIndex);
                     int panelX = x + (stackPosition * stackSpacingX);
                     int panelY = y + (stackPosition * stackSpacingY);
                     //panel.setLocation(panelX, panelY);
 					try {
 						// may cause:
 						// java.lang.IllegalArgumentException: illegal component position 26 should be less then 26
-                    	battlefieldPanel.moveToBack(panel);
+                        battlefieldPanel.moveToFront(panel);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}

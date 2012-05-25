@@ -65,24 +65,27 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
 	protected Map<UUID, PermanentView> battlefield;
 	private Dimension cardDimension;
 
-    private JPanel jPanel;
+    private JComponent jPanel;
     private JScrollPane jScrollPane;
     private int width;
+    
+    private static int i = 0;
 	
     /** Creates new form BattlefieldPanel */
     public BattlefieldPanel() {
     	ui.put("battlefieldPanel", this);
         initComponents();
+        ui.put("jPanel", jPanel);
         
-        addComponentListener(new ComponentAdapter(){
-			@Override
-			public void componentResized(ComponentEvent e) {
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
                 int width = e.getComponent().getWidth();
                 int height = e.getComponent().getHeight();
                 BattlefieldPanel.this.jScrollPane.setSize(width, height);
                 BattlefieldPanel.this.width = width;
-				sortLayout();
-			}
+                sortLayout();
+            }
         });
     }
 
@@ -162,12 +165,13 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
 		}
 		permanents.put(permanent.getId(), perm);
 		
-		//BattlefieldPanel.this.jPanel.add(perm, 10);
-        this.jPanel.add(perm);
+		BattlefieldPanel.this.jPanel.add(perm, 10);
+        //this.jPanel.add(perm);
 		if (!Plugins.getInstance().isCardPluginLoaded()) {
 			moveToFront(perm);
 			perm.update(permanent);
 		} else {
+            moveToFront(jPanel);
             Plugins.getInstance().onAddCard(perm, 1);
 			/*Thread t = new Thread(new Runnable() {
 				@Override
@@ -272,7 +276,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
     private void initComponents() {
         setOpaque(false);
 
-        jPanel = new JPanel();
+        jPanel = new JLayeredPane();
         jPanel.setLayout(null);
         jPanel.setOpaque(false);
         jScrollPane = new JScrollPane(jPanel);
