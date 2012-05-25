@@ -62,6 +62,8 @@ public class ContinuousEffects implements Serializable {
 	private final PlaneswalkerRedirectionEffect planeswalkerRedirectionEffect;
 	private final AuraReplacementEffect auraReplacementEffect;
 
+    private List<ContinuousEffect> previous = new ArrayList<ContinuousEffect>();
+
 	public ContinuousEffects() {
 		applyCounters = new ApplyCountersEffect();
 		planeswalkerRedirectionEffect = new PlaneswalkerRedirectionEffect();
@@ -146,9 +148,29 @@ public class ContinuousEffects implements Serializable {
                     layerEffects.add(effect);
             }
         }
+
+        updateTimestamps(layerEffects);
+
 		Collections.sort(layerEffects, new TimestampSorter());
 		return layerEffects;
 	}
+
+    /**
+     * Initially effect timestamp is set when game starts in game.loadCard method.
+     * After that timestamp should be updated whenever effect becomes "actual" meaning it becomes turned on
+     * that is defined by Ability.#isInUseableZone(Game, boolean) method in #getLayeredEffects(Game).
+     * @param layerEffects
+     */
+    private void updateTimestamps(List<ContinuousEffect> layerEffects) {
+        for (ContinuousEffect continuousEffect : layerEffects) {
+            // check if it's new, then set timestamp
+            if (!previous.contains(continuousEffect)) {
+                continuousEffect.setTimestamp();
+            }
+        }
+        previous.clear();
+        previous.addAll(layerEffects);
+    }
 
 	private List<ContinuousEffect> filterLayeredEffects(List<ContinuousEffect> effects, Layer layer) {
 		List<ContinuousEffect> layerEffects = new ArrayList<ContinuousEffect>();
