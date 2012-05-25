@@ -364,7 +364,6 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 					lethalDamage = attacker.getToughness().getValue() - attacker.getDamage();
 				if (lethalDamage >= damage) {
 					assigned.put(attackerId, damage);
-					damage = 0;
 					break;
 				}
 				int damageAssigned = player.getAmount(lethalDamage, damage, "Assign damage to " + attacker.getName(), game);
@@ -516,6 +515,11 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 		for (UUID blockerId : blockers) {
 			for (UUID attackerId: attackers) {
 				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BLOCKER_DECLARED, attackerId, blockerId, players.get(blockerId)));
+			}
+		}
+		if(!blockers.isEmpty()) {
+			for (UUID attackerId: attackers) {
+				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_BLOCKED, attackerId, null));
 			}
 		}
 	}

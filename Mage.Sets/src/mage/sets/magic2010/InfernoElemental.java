@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.BlocksOrBecomesBlockedTriggeredAbility;
+import mage.abilities.common.BlocksOrBecomesBlockedByCreatureTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 
@@ -51,7 +51,7 @@ public class InfernoElemental extends CardImpl<InfernoElemental> {
         this.toughness = new MageInt(4);
 
         // Whenever Inferno Elemental blocks or becomes blocked by a creature, Inferno Elemental deals 3 damage to that creature.
-        this.addAbility(new BlocksOrBecomesBlockedTriggeredAbility(new DamageTargetEffect(3, true, "that creature"), false));
+        this.addAbility(new BlocksOrBecomesBlockedByCreatureTriggeredAbility(new DamageTargetEffect(3, true, "that creature"), false));
     }
 
     public InfernoElemental(final InfernoElemental card) {

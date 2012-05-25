@@ -88,7 +88,7 @@ public class GameEvent {
 		PLAY_LAND, LAND_PLAYED,
 		CAST_SPELL, SPELL_CAST,
 		ACTIVATE_ABILITY, ACTIVATED_ABILITY,
-        MANA_ADDED, MANA_PAYED,
+		MANA_ADDED, MANA_PAYED,
 		LOSES, LOST, WINS,
 		TARGET, TARGETED,
 		COUNTER, COUNTERED,
@@ -96,9 +96,10 @@ public class GameEvent {
 		DECLARE_ATTACKER, ATTACKER_DECLARED,
 		DECLARING_BLOCKERS, DECLARED_BLOCKERS,
 		DECLARE_BLOCKER, BLOCKER_DECLARED,
+		CREATURE_BLOCKED,
 		SEARCH_LIBRARY, LIBRARY_SEARCHED,
-        SHUFFLE_LIBRARY, LIBRARY_SHUFFLED,
-        ENCHANT_PLAYER, ENCHANTED_PLAYER,
+		SHUFFLE_LIBRARY, LIBRARY_SHUFFLED,
+		ENCHANT_PLAYER, ENCHANTED_PLAYER,
 
 		//permanent events
 		ENTERS_THE_BATTLEFIELD,
@@ -121,8 +122,8 @@ public class GameEvent {
 		COUNTER_REMOVED,
 		LOSE_CONTROL, LOST_CONTROL,
 		GAIN_CONTROL, GAINED_CONTROL,
-        CREATE_TOKEN,
-        REGENERATE, REGENERATED,
+		CREATE_TOKEN,
+		REGENERATE, REGENERATED,
 
 		//combat events
 		COMBAT_DAMAGE_APPLIED,
@@ -157,9 +158,9 @@ public class GameEvent {
 
 	public static GameEvent getEvent(EventType type, UUID targetId, UUID playerId, String data, int amount) {
 		GameEvent event = getEvent(type, targetId,playerId);
-        event.setAmount(amount);
-        event.setData(data);
-        return event;
+		event.setAmount(amount);
+		event.setData(data);
+		return event;
 	}
 
     public EventType getType() {
@@ -198,11 +199,11 @@ public class GameEvent {
 		this.data = data;
 	}
     
-    public Zone getZone() {
-        return zone;
-    }
+	public Zone getZone() {
+		return zone;
+	}
     
-    public void setZone(Zone zone) {
-        this.zone = zone;
-    }
+	public void setZone(Zone zone) {
+		this.zone = zone;
+	}
 }
