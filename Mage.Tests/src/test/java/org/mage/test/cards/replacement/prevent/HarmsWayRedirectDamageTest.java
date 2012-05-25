@@ -41,9 +41,6 @@ public class HarmsWayRedirectDamageTest extends CardTestPlayerBase {
      * Tests redirecting combat damage
      */
     @Test
-    @Ignore
-    // This test doesn't work in test framework but the test case works fine in real game
-    //  -- this is because of no possibility to ask AI to play spell when triggered is in the stack
     public void testRedirectCombatDamage() {
         addCard(Constants.Zone.HAND, playerA, "Harm's Way");
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains");
@@ -67,6 +64,9 @@ public class HarmsWayRedirectDamageTest extends CardTestPlayerBase {
      * Tests redirecting from triggered ability
      */
     @Test
+    @Ignore
+    // This test doesn't work in test framework but the test case works fine in real game
+    //  -- this is because of no possibility to ask AI to play spell when triggered is in the stack
     public void testRedirectTriggeredAbilityDamage() {
         addCard(Constants.Zone.HAND, playerA, "Lightning Bolt");
         addCard(Constants.Zone.HAND, playerA, "Harm's Way");
