@@ -223,7 +223,9 @@ public class TargetCreatureOrPlayer extends TargetImpl<TargetCreatureOrPlayer> {
 			}
 			else {
 				Player player = game.getPlayer(targetId);
-				sb.append(player.getName()).append(" ");
+                if (player != null) {
+				    sb.append(player.getName()).append(" ");
+                }
 			}
 		}
 		return sb.toString();
