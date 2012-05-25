@@ -105,7 +105,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 			if (!showCards.containsKey(entry.getKey())) {
 				i.remove();
 				if (displayNoCopies) {
-					String key = entry.getValue().getName() + entry.getValue().getExpansionSetCode();
+					String key = entry.getValue().getName() + entry.getValue().getExpansionSetCode() + entry.getValue().getCardNumber();
 					if (cardsNoCopies.containsKey(key)) {
 						Integer count = cardsNoCopies.get(key);
 						count--;
@@ -188,7 +188,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 		switch (column) {
 		case 0:
 			if (displayNoCopies) {
-				String key = c.getName() + c.getExpansionSetCode();
+				String key = c.getName() + c.getExpansionSetCode() + c.getCardNumber();
 				Integer count = cardsNoCopies.get(key);
 				return count != null ? count : "";
 			}
@@ -229,7 +229,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 		cards.put(card.getId(), card);
 
 		if (displayNoCopies) {
-			String key = card.getName()+card.getExpansionSetCode();
+			String key = card.getName()+card.getExpansionSetCode()+card.getCardNumber();
 			Integer count = 1;
 			if (cardsNoCopies.containsKey(key)) {
 				count = cardsNoCopies.get(key) + 1;
