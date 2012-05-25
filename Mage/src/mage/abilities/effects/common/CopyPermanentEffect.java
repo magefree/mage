@@ -66,13 +66,14 @@ public class CopyPermanentEffect extends OneShotEffect<CopyPermanentEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
+        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        if (player != null && sourcePermanent != null) {
             Target target = new TargetPermanent(filter);
             if (target.canChoose(source.getControllerId(), game)) {
                 player.choose(Outcome.Copy, target, source.getSourceId(), game);
-                Permanent perm = game.getPermanent(target.getFirstTarget());
-                if (perm != null) {
-                    game.copyPermanent(perm, source, new ApplyToPermanent() {
+                Permanent copyFromPermanent = game.getPermanent(target.getFirstTarget());
+                if (copyFromPermanent != null) {
+                    game.copyPermanent(copyFromPermanent, sourcePermanent, source, new ApplyToPermanent() {
                         @Override
                         public Boolean apply(Game game, Permanent permanent) {
                             if (!permanent.getCardType().contains(Constants.CardType.ARTIFACT)) {

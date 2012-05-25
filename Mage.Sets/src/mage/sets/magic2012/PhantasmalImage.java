@@ -92,16 +92,17 @@ class PhantasmalImageCopyEffect extends OneShotEffect<PhantasmalImageCopyEffect>
     @Override
     public boolean apply(Game game, Ability source) {
 		Player player = game.getPlayer(source.getControllerId());
-		if ( player != null ) {
+        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        if (player != null && sourcePermanent != null) {
 			Target target = new TargetPermanent(new FilterCreaturePermanent());
             if (target.canChoose(source.getControllerId(), game)) {
                 target.setRequired(true);
                 target.setNotTarget(true);
                 player.choose(Outcome.Copy, target, source.getSourceId(), game);
                 UUID targetId = target.getFirstTarget();
-                Permanent permanent = game.getPermanent(targetId);
-                if (permanent != null) {
-                    game.copyPermanent(permanent, source, new ApplyToPermanent() {
+                Permanent copyFromPermanent = game.getPermanent(targetId);
+                if (copyFromPermanent != null) {
+                    game.copyPermanent(copyFromPermanent, sourcePermanent, source, new ApplyToPermanent() {
                         @Override
                         public Boolean apply(Game game, Permanent permanent) {
                             permanent.getSubtype().add("Illusion");

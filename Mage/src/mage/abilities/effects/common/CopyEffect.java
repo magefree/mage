@@ -47,6 +47,9 @@ import java.util.UUID;
  */
 public class CopyEffect extends ContinuousEffectImpl<CopyEffect> {
 
+    /**
+     * Object we copy from
+     */
     private MageObject target;
     private UUID sourceId;
     

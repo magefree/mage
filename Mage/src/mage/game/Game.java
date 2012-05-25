@@ -164,11 +164,12 @@ public interface Game extends MageItem, Serializable {
     /**
      * This version supports copying of copies of any depth.
      *
-     * @param targetPermanent
+     * @param copyFromPermanent
+     * @param copyToPermanent
      * @param source
      * @param applier
      */
-    public void copyPermanent(Permanent targetPermanent, Ability source, ApplyToPermanent applier);
+    public void copyPermanent(Permanent copyFromPermanent, Permanent copyToPermanent, Ability source, ApplyToPermanent applier);
 
     public void addTriggeredAbility(TriggeredAbility ability);
 	public void addDelayedTriggeredAbility(DelayedTriggeredAbility delayedAbility);

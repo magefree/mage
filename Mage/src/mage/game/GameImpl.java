@@ -736,8 +736,8 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	}
 
     @Override
-    public void copyPermanent(Permanent targetPermanent, Ability source, ApplyToPermanent applier) {
-        Permanent permanent = targetPermanent.copy();
+    public void copyPermanent(Permanent copyFromPermanent, Permanent copyToPermanent, Ability source, ApplyToPermanent applier) {
+        Permanent permanent = copyFromPermanent.copy();
         //getState().addCard(permanent);
         permanent.reset(this);
         permanent.assignNewId();
@@ -745,7 +745,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
         Ability newAbility = source.copy();
 
-        CopyEffect newEffect = new CopyEffect(permanent, source.getSourceId());
+        CopyEffect newEffect = new CopyEffect(permanent, copyToPermanent.getId());
         newEffect.newId();
         newEffect.setTimestamp();
         newEffect.init(newAbility, this);
@@ -755,7 +755,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
             if (effect instanceof CopyEffect) {
                 CopyEffect copyEffect = (CopyEffect) effect;
                 // there is another copy effect that our targetPermanent copies stats from
-                if (copyEffect.getSourceId().equals(targetPermanent.getId())) {
+                if (copyEffect.getSourceId().equals(copyFromPermanent.getId())) {
                     MageObject object = ((CopyEffect) effect).getTarget();
                     if (object instanceof Permanent) {
                         // so we will use original card instead of target
