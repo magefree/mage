@@ -29,6 +29,7 @@
 package mage.sets.magic2010;
 
 import java.util.UUID;
+
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
@@ -37,7 +38,6 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 
 /**
- *
  * @author Loki
  */
 public class GriffinSentinel extends CardImpl<GriffinSentinel> {
@@ -50,7 +50,7 @@ public class GriffinSentinel extends CardImpl<GriffinSentinel> {
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(VigilanceAbility.getInstance());
         this.power = new MageInt(1);
-	this.toughness = new MageInt(3);
+        this.toughness = new MageInt(3);
     }
 
     public GriffinSentinel(final GriffinSentinel card) {
