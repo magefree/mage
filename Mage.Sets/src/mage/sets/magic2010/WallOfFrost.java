@@ -31,16 +31,11 @@ package mage.sets.magic2010;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.BlocksTriggeredAbility;
 import mage.abilities.effects.common.SkipNextUntapTargetEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -57,7 +52,8 @@ public class WallOfFrost extends CardImpl<WallOfFrost> {
 		this.toughness = new MageInt(7);
 
 		this.addAbility(DefenderAbility.getInstance());
-		this.addAbility(new WallOfFrostAbility());
+		// Whenever Wall of Frost blocks a creature, that creature doesn't untap during its controller's next untap step.
+		this.addAbility(new BlocksTriggeredAbility(new SkipNextUntapTargetEffect(), false, true));
 	}
 
 	public WallOfFrost(final WallOfFrost card) {
@@ -67,38 +63,6 @@ public class WallOfFrost extends CardImpl<WallOfFrost> {
 	@Override
 	public WallOfFrost copy() {
 		return new WallOfFrost(this);
-	}
-
-}
-
-class WallOfFrostAbility extends TriggeredAbilityImpl<WallOfFrostAbility> {
-
-	public WallOfFrostAbility() {
-		super(Zone.BATTLEFIELD, new SkipNextUntapTargetEffect(), false);
-	}
-
-	public WallOfFrostAbility(final WallOfFrostAbility ability) {
-		super(ability);
-	}
-
-	@Override
-	public WallOfFrostAbility copy() {
-		return new WallOfFrostAbility(this);
-	}
-
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.BLOCKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
-			this.addTarget(new TargetCreaturePermanent());
-			this.getTargets().get(0).add(event.getTargetId(), game);
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public String getRule() {
-		return "Whenever {this} blocks a creature, that creature doesn't untap during its controller's next untap step";
 	}
 
 }

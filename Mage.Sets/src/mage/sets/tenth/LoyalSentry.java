@@ -57,7 +57,7 @@ public class LoyalSentry extends CardImpl<LoyalSentry> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         
-        this.addAbility(new BlocksTriggeredAbility(new LoyalSentryEffect(), false));
+        this.addAbility(new BlocksTriggeredAbility(new LoyalSentryEffect(), false, true));
     }
 
     public LoyalSentry (final LoyalSentry card) {
