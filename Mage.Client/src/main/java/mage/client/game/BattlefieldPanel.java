@@ -202,6 +202,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
 				}
 			}
 		} else {
+            int index = permanent.getAttachments().size();
 			for (UUID attachmentId: permanent.getAttachments()) {
 				MagePermanent link = permanents.get(attachmentId);
 				if (link != null) {
@@ -211,8 +212,11 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
 					perm.setBounds(r);
 					moveToFront(link);
 					moveToFront(perm);
+                    jPanel.setComponentZOrder(link, index);
+                    index--;
 				}
 			}
+            jPanel.setComponentZOrder(perm, index);
 		}
 		
 	}
