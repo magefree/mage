@@ -119,7 +119,7 @@ public class Updater {
         for (String remoteFile : remote.keySet()) {
             if (local.containsKey(remoteFile)) {
                 if (!local.get(remoteFile).equals(remote.get(remoteFile))) {
-                    //System.out.println("jar need to be updated - " + remoteFile);
+//                    System.out.println("jar need to be updated - " + remoteFile + " local: " + local.get(remoteFile) + ", remoteL " + remote.get(remoteFile));
                     result.add(remoteFile);
                 }
             }

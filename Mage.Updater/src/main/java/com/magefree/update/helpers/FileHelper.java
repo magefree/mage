@@ -18,10 +18,10 @@ public class FileHelper {
     /**
      * Filters out dirs.
      */
-    private static final FilenameFilter anyFileFilter = new FilenameFilter() {
+    private static final FileFilter anyFileFilter = new FileFilter() {
         @Override
-        public boolean accept(File dir, String name) {
-            return dir.isFile();
+        public boolean accept(File f) {
+            return f.isFile();
         }
     };
 
