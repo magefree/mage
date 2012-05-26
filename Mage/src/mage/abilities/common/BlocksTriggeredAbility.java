@@ -54,6 +54,7 @@ public class BlocksTriggeredAbility extends TriggeredAbilityImpl<BlocksTriggered
 
     public BlocksTriggeredAbility(final BlocksTriggeredAbility ability) {
         super(ability);
+        this.fixedTargetPointer = ability.fixedTargetPointer;
     }
 
     @Override
