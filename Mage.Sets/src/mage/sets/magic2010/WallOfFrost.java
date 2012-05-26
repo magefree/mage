@@ -28,41 +28,81 @@
 
 package mage.sets.magic2010;
 
-import java.util.UUID;
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.BlocksTriggeredAbility;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.SkipNextUntapTargetEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class WallOfFrost extends CardImpl<WallOfFrost> {
 
-	public WallOfFrost(UUID ownerId) {
-		super(ownerId, 80, "Wall of Frost", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
-		this.expansionSetCode = "M10";
-		this.subtype.add("Wall");
-		this.color.setBlue(true);
-		this.power = new MageInt(0);
-		this.toughness = new MageInt(7);
+    public WallOfFrost(UUID ownerId) {
+        super(ownerId, 80, "Wall of Frost", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
+        this.expansionSetCode = "M10";
+        this.subtype.add("Wall");
+        this.color.setBlue(true);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(7);
 
-		this.addAbility(DefenderAbility.getInstance());
-		// Whenever Wall of Frost blocks a creature, that creature doesn't untap during its controller's next untap step.
-		this.addAbility(new BlocksTriggeredAbility(new SkipNextUntapTargetEffect(), false, true));
-	}
+        this.addAbility(DefenderAbility.getInstance());
+        // Whenever Wall of Frost blocks a creature, that creature doesn't untap during its controller's next untap step.
+        //this.addAbility(new BlocksTriggeredAbility(new SkipNextUntapTargetEffect(), false, true));
+        this.addAbility(new WallOfFrostAbility());
+    }
 
-	public WallOfFrost(final WallOfFrost card) {
-		super(card);
-	}
+    public WallOfFrost(final WallOfFrost card) {
+        super(card);
+    }
 
-	@Override
-	public WallOfFrost copy() {
-		return new WallOfFrost(this);
-	}
+    @Override
+    public WallOfFrost copy() {
+        return new WallOfFrost(this);
+    }
 
 }
+
+class WallOfFrostAbility extends TriggeredAbilityImpl<WallOfFrostAbility> {
+
+    public WallOfFrostAbility() {
+        super(Constants.Zone.BATTLEFIELD, new SkipNextUntapTargetEffect(), false);
+    }
+
+    public WallOfFrostAbility(final WallOfFrostAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public WallOfFrostAbility copy() {
+        return new WallOfFrostAbility(this);
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.BLOCKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
+            this.addTarget(new TargetCreaturePermanent());
+            this.getTargets().get(0).add(event.getTargetId(), game);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever {this} blocks a creature, that creature doesn't untap during its controller's next untap step";
+    }
+
+}
+
+
+
