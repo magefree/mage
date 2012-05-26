@@ -5,6 +5,8 @@ import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.filter.Filter;
+import mage.game.permanent.Permanent;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -352,17 +354,25 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
     @Test
     public void testExileAndReturnBack() {
         addCard(Constants.Zone.HAND, playerA, "Elite Vanguard");
+        addCard(Constants.Zone.HAND, playerA, "Cloudshift");
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Trusted Forcemage");
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 2);
 
         castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Elite Vanguard");
+        setChoice(playerA, "Yes");
         castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Cloudshift", "Trusted Forcemage");
+        setChoice(playerA, "No");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, Constants.PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerA, "Trusted Forcemage", 1);
-        assertPowerToughness(playerA, "Trusted Forcemage", 3, 3);
-        assertPowerToughness(playerA, "Elite Vanguard", 3, 2);
+        assertPowerToughness(playerA, "Trusted Forcemage", 2, 2);
+        assertPowerToughness(playerA, "Elite Vanguard", 2, 1);
+
+        Permanent trustedForcemange = getPermanent("Trusted Forcemage", playerA.getId());
+        Permanent eliteVanguard = getPermanent("Elite Vanguard", playerA.getId());
+        Assert.assertTrue(trustedForcemange.getPairedCard() == null);
+        Assert.assertTrue(eliteVanguard.getPairedCard() == null);
     }
 }

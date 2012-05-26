@@ -861,7 +861,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                     //702.93e.: ...another player gains control
                     // ...or the creature it's paired with leaves the battlefield.
                     Permanent paired = getPermanent(perm.getPairedCard());
-                    if (paired == null || !perm.getControllerId().equals(paired.getControllerId())) {
+                    if (paired == null || !perm.getControllerId().equals(paired.getControllerId()) || paired.getPairedCard() == null) {
                         perm.setPairedCard(null);
                         if (paired != null) {
                             paired.setPairedCard(null);

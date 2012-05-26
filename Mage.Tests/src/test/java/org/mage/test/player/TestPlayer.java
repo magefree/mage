@@ -202,6 +202,21 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
         }
         return super.choose(outcome, target, sourceId, game, options);
     }
+
+    @Override
+    public boolean chooseUse(Constants.Outcome outcome, String message, Game game) {
+        if (!choices.isEmpty()) {
+            if (choices.get(0).equals("No")) {
+                choices.remove(0);
+                return false;
+            }
+            if (choices.get(0).equals("Yes")) {
+                choices.remove(0);
+                return true;
+            }
+        }
+        return true;
+    }
     
     protected Permanent findPermanent(FilterPermanent filter, UUID controllerId, Game game) {
         List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(filter, controllerId, game);
