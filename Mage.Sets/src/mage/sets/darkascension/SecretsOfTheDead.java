@@ -33,9 +33,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.DrawCardControllerEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
-import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 
 /**

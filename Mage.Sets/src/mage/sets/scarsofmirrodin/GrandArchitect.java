@@ -57,8 +57,6 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.stack.SpellStack;
-import mage.game.stack.StackObject;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 

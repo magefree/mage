@@ -32,12 +32,10 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.keyword.InfectAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterArtifactCard;
-import mage.filter.common.FilterArtifactPermanent;
 
 /**
  *

@@ -29,15 +29,12 @@ package mage.sets.mirrodin;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;

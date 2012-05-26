@@ -30,9 +30,7 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
@@ -40,19 +38,17 @@ import mage.filter.Filter;
 import mage.filter.FilterSpell;
 import mage.target.TargetSpell;
 
-import static mage.filter.Filter.ComparisonScope.*;
-
 /**
  *
  * @author Loki
  */
 public class HaltOrder extends CardImpl<HaltOrder> {
 
-	private static FilterSpell filter = new FilterSpell("artifact spell");
+	private static final FilterSpell filter = new FilterSpell("artifact spell");
 
 	static {
 		filter.getCardType().add(CardType.ARTIFACT);
-		filter.setScopeCardType(Any);
+		filter.setScopeCardType(Filter.ComparisonScope.Any);
 	}
 
     public HaltOrder (UUID ownerId) {

@@ -34,14 +34,13 @@
 
 package mage.client.dialog;
 
-import mage.client.*;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import javax.swing.SwingWorker;
 import javax.swing.table.AbstractTableModel;
-
+import mage.client.*;
 import mage.client.chat.ChatPanel;
 import mage.client.components.MageComponents;
 import mage.remote.Session;

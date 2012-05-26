@@ -29,9 +29,6 @@
 package mage.sets.tenth;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.cards.CardImpl;
 
 /**
  *

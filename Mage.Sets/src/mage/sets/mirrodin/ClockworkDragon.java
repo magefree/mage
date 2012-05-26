@@ -36,7 +36,6 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -49,7 +48,6 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /**

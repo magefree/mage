@@ -29,7 +29,6 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.Mode;
 import mage.abilities.SpecialAction;
 import mage.abilities.effects.OneShotEffect;

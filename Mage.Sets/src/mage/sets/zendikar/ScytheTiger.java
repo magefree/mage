@@ -31,24 +31,22 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
-import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetControlledPermanent;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+
 /**
- * 
+ *
  * @author Rafbill
  */
-import mage.Constants;
-
 public class ScytheTiger extends CardImpl<ScytheTiger> {
 
     public ScytheTiger(UUID ownerId) {
-        super(ownerId, 183, "Scythe Tiger", Rarity.COMMON,
-                new CardType[]{CardType.CREATURE}, "{G}");
+        super(ownerId, 183, "Scythe Tiger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
         this.expansionSetCode = "ZEN";
         this.subtype.add("Cat");
 
@@ -60,7 +58,7 @@ public class ScytheTiger extends CardImpl<ScytheTiger> {
         // When Scythe Tiger enters the battlefield, sacrifice it unless you
         // sacrifice a land.
         FilterControlledPermanent filter = new FilterControlledPermanent("a land.");
-        filter.getCardType().add(Constants.CardType.LAND);
+        filter.getCardType().add(CardType.LAND);
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(new TargetControlledPermanent(filter)))));
     }
 

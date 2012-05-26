@@ -37,7 +37,6 @@ import mage.Constants.SubLayer;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AttacksEquippedTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -47,7 +46,6 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardsImpl;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 

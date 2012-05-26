@@ -39,8 +39,6 @@ import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.ForestwalkAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterSpiritOrArcaneCard;
 
 /**

@@ -27,7 +27,6 @@
  */
 package mage.sets.riseoftheeldrazi;
 
-import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.keyword.TrampleAbility;

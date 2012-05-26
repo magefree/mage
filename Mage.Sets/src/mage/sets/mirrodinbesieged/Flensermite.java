@@ -30,9 +30,7 @@ package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.keyword.InfectAbility;
 import mage.abilities.keyword.LifelinkAbility;

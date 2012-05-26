@@ -42,7 +42,6 @@ import mage.abilities.effects.common.continious.BoostEnchantedEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;

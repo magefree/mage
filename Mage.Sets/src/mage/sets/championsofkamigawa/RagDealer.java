@@ -41,7 +41,6 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.BushidoAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;

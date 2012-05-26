@@ -32,16 +32,13 @@ import java.util.UUID;
 
 import mage.Constants;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
-import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.players.Player;

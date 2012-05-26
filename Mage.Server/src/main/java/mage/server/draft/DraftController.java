@@ -29,22 +29,20 @@
 package mage.server.draft;
 
 import java.io.File;
-import java.util.UUID;
 import java.util.Map.Entry;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-
+import mage.MageException;
 import mage.game.draft.Draft;
 import mage.game.draft.DraftPlayer;
 import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
 import mage.game.events.TableEvent;
-import mage.MageException;
-import mage.server.game.GameController;
 import mage.server.TableManager;
 import mage.server.UserManager;
+import mage.server.game.GameController;
 import mage.server.util.ThreadExecutor;
 import mage.view.DraftPickView;
-import mage.view.DraftView;
 import org.apache.log4j.Logger;
 
 /**

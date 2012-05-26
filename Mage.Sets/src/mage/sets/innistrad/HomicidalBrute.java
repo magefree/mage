@@ -37,11 +37,8 @@ import mage.abilities.effects.common.TransformSourceEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.watchers.WatcherImpl;
 
 import java.util.UUID;
-import mage.Constants.WatcherScope;
-import mage.cards.Card;
 import mage.watchers.Watcher;
 
 /**

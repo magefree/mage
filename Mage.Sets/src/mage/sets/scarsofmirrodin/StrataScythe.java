@@ -45,7 +45,6 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandCard;
-import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;

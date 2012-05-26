@@ -36,13 +36,10 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.CounterTargetEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.DamageCreatureEvent;
-import mage.game.events.DamagedCreatureEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 

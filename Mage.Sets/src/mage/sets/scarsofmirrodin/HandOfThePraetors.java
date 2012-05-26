@@ -45,7 +45,6 @@ import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.filter.Filter;
 import mage.filter.FilterSpell;
-import mage.filter.common.FilterCreatureCard;
 
 /**
  *

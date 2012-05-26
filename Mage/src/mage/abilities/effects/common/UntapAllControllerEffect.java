@@ -32,7 +32,6 @@ import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;

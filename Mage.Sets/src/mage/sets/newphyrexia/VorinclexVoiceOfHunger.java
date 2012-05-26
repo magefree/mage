@@ -29,7 +29,6 @@ package mage.sets.newphyrexia;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
@@ -37,7 +36,6 @@ import mage.Mana;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.effects.common.SkipNextUntapTargetEffect;
 import mage.abilities.keyword.TrampleAbility;

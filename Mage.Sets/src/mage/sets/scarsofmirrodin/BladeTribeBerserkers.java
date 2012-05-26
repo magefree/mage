@@ -38,11 +38,8 @@ import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
-import mage.target.Target;
-import mage.target.TargetPlayer;
 
 /**
  *

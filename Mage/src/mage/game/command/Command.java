@@ -29,8 +29,6 @@
 package mage.game.command;
 
 import java.util.ArrayList;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 
 /**
  *

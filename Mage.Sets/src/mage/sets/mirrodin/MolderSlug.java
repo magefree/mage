@@ -36,11 +36,9 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.SacrificeEffect;
-import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;
-import mage.target.TargetPermanent;
 
 /**
  * @author Loki

@@ -35,9 +35,9 @@ import java.util.Map;
 import java.util.UUID;
 
 import mage.Constants;
-import mage.MageObject;
 import mage.Constants.PhaseStep;
 import mage.Constants.TurnPhase;
+import mage.MageObject;
 import mage.cards.Card;
 import mage.game.ExileZone;
 import mage.game.Game;

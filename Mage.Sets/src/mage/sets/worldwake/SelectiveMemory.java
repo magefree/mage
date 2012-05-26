@@ -27,7 +27,6 @@
  */
 package mage.sets.worldwake;
 
-import java.util.List;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;

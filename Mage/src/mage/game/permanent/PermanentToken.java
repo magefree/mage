@@ -30,7 +30,6 @@ package mage.game.permanent;
 
 import mage.Constants.Zone;
 import mage.abilities.Ability;
-import mage.cards.Card;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.token.Token;

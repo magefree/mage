@@ -41,7 +41,6 @@ import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.SoldierToken;
 

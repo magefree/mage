@@ -38,7 +38,6 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;

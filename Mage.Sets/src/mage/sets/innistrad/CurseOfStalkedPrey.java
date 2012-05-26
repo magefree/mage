@@ -34,7 +34,6 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.EnchantAbility;

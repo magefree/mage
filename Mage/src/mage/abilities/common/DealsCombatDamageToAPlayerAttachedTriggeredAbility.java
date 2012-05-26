@@ -3,8 +3,6 @@ package mage.abilities.common;
 import mage.Constants;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DiscardTargetEffect;
-import mage.abilities.effects.common.UntapAllLandsControllerEffect;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;

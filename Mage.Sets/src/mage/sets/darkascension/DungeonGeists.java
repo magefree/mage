@@ -35,7 +35,6 @@ import mage.Constants.WatcherScope;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.TapTargetEffect;

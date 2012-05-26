@@ -35,9 +35,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.PutIntoGraveFromAnywhereTriggeredAbility;
-import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.InfectAbility;
@@ -47,8 +45,6 @@ import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**

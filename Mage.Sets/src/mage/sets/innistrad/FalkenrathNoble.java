@@ -33,7 +33,6 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.keyword.FlyingAbility;

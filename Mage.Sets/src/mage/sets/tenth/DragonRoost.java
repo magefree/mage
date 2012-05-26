@@ -39,7 +39,6 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.game.permanent.token.DragonToken;
 import mage.game.permanent.token.Token;
 
 /**

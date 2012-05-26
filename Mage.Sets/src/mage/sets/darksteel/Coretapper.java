@@ -41,7 +41,6 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.counters.common.ChargeCounter;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.target.TargetPermanent;

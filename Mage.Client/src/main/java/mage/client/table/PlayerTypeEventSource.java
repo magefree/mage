@@ -29,7 +29,6 @@
 package mage.client.table;
 
 import java.io.Serializable;
-import java.util.UUID;
 import mage.client.util.Event;
 import mage.client.util.EventDispatcher;
 import mage.client.util.EventSource;

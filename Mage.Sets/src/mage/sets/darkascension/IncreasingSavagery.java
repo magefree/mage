@@ -36,7 +36,6 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
-import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;

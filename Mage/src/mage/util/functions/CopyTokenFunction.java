@@ -30,7 +30,6 @@ package mage.util.functions;
 import mage.Constants;
 import mage.abilities.Ability;
 import mage.cards.Card;
-import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Token;
 
 /**

@@ -36,15 +36,12 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.PhyrexianManaCost;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetCreatureOrPlayer;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  * @author Loki

@@ -36,7 +36,6 @@ import mage.abilities.common.BlocksTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterAttackingCreature;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**

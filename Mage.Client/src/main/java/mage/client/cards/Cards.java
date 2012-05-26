@@ -38,22 +38,18 @@ import java.awt.*;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.UUID;
 import java.util.Map.Entry;
-
+import java.util.UUID;
+import javax.swing.border.Border;
 import mage.cards.MageCard;
 import mage.client.plugins.impl.Plugins;
+import mage.client.util.CardsViewUtil;
 import mage.client.util.Config;
 import mage.view.CardView;
 import mage.view.CardsView;
 import mage.view.PermanentView;
-import mage.view.StackAbilityView;
-
-import javax.swing.border.Border;
-import mage.client.util.CardsViewUtil;
-import mage.sets.Sets;
-import mage.view.SimpleCardView;
 import mage.view.SimpleCardsView;
+import mage.view.StackAbilityView;
 
 /**
  *

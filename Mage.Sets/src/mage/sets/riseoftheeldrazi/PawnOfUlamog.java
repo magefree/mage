@@ -35,7 +35,6 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;

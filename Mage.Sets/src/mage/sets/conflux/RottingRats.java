@@ -30,19 +30,14 @@ package mage.sets.conflux;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DiscardEachPlayerEffect;
 import mage.abilities.keyword.UnearthAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *

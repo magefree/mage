@@ -28,9 +28,6 @@
 
 package mage.server.game;
 
-import mage.server.TableManager;
-import mage.server.RoomImpl;
-import mage.game.Table;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,11 +39,14 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import mage.Constants.TableState;
+import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
+import mage.game.Table;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
-import mage.MageException;
+import mage.server.RoomImpl;
+import mage.server.TableManager;
 import mage.server.User;
 import mage.server.UserManager;
 import mage.view.MatchView;

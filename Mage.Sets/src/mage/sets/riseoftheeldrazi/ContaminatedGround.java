@@ -32,7 +32,6 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
@@ -47,7 +46,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetLandPermanent;
 import mage.target.targetpointer.FixedTarget;
 

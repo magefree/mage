@@ -33,7 +33,6 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -42,7 +41,6 @@ import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.token.EldraziSpawnToken;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *

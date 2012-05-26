@@ -36,12 +36,10 @@ import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ReturnFromExileEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 

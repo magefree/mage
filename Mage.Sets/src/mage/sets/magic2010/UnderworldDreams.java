@@ -36,7 +36,6 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.target.targetpointer.FirstTargetPointer;
 import mage.target.targetpointer.FixedTarget;
 
 /**

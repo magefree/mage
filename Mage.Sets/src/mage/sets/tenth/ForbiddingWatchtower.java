@@ -39,8 +39,6 @@ import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.game.permanent.token.Token;

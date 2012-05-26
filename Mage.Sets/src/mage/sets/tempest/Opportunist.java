@@ -31,29 +31,16 @@ package mage.sets.tempest;
 import java.util.UUID;
 
 import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
-import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreaturePermanent;
-import mage.watchers.common.DamagedByWatcher;
 
 /**
  * @author LevelX

@@ -37,7 +37,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;

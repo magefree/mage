@@ -28,7 +28,6 @@
 
 package mage.server.tournament;
 
-import java.awt.*;
 import java.rmi.RemoteException;
 import java.util.UUID;
 import java.util.concurrent.ScheduledExecutorService;
@@ -36,7 +35,6 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import mage.cards.decks.Deck;
 import mage.game.tournament.Tournament;
-import mage.MageException;
 import mage.interfaces.callback.ClientCallback;
 import mage.server.User;
 import mage.server.UserManager;

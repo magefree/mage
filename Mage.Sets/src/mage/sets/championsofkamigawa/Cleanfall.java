@@ -30,17 +30,12 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  * @author Loki

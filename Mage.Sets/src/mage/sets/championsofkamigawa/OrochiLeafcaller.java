@@ -34,9 +34,7 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 

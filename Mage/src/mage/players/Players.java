@@ -29,8 +29,8 @@
 package mage.players;
 
 import java.util.LinkedHashMap;
-import java.util.UUID;
 import java.util.Map.Entry;
+import java.util.UUID;
 
 /**
  *

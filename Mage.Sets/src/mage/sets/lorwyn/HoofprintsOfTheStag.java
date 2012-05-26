@@ -32,7 +32,6 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.DrawCardTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;

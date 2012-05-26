@@ -33,7 +33,6 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.Constants.TargetController;
 import mage.MageInt;
 import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;

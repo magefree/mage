@@ -40,7 +40,6 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continious.SetPowerToughnessTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *

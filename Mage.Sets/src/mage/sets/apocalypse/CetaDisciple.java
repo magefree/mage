@@ -40,7 +40,6 @@ import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
 import mage.target.common.TargetCreaturePermanent;
 
 /**

@@ -35,7 +35,6 @@ import mage.abilities.common.DiesAnotherCreatureYouControlTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.game.permanent.token.SpiritWhiteToken;
 import mage.filter.common.FilterCreaturePermanent;
 

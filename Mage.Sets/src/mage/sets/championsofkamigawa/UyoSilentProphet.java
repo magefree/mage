@@ -42,7 +42,6 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterSpell;
-import mage.filter.common.FilterLandCard;
 import mage.filter.common.FilterLandPermanent;
 import mage.target.TargetSpell;
 import mage.target.common.TargetControlledPermanent;

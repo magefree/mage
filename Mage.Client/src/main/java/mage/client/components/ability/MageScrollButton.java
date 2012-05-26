@@ -3,9 +3,7 @@ package mage.client.components.ability;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.io.File;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.plaf.basic.BasicArrowButton;
 import javax.swing.plaf.metal.MetalScrollButton;

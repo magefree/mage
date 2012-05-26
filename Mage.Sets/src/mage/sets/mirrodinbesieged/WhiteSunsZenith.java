@@ -34,11 +34,9 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ShuffleSpellEffect;
 import mage.cards.CardImpl;
-import mage.game.permanent.token.EldraziSpawnToken;
 import mage.game.permanent.token.Token;
 
 /**

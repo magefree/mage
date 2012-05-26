@@ -37,12 +37,10 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 

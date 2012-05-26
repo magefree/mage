@@ -30,9 +30,7 @@ package mage.sets.zendikar;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;

@@ -32,7 +32,6 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.SoulshiftAbility;
-import mage.abilities.keyword.SoulshiftAbility;
 import mage.cards.CardImpl;
 
 /**

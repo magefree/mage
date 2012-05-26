@@ -30,9 +30,7 @@ package mage.sets.worldwake;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;

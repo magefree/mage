@@ -38,19 +38,14 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ReturnToHandTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.CounterUnlessPaysEffect;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ShroudAbility;
-import mage.abilities.keyword.UnblockableAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
-import mage.target.TargetSpell;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  * @author Loki

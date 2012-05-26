@@ -35,11 +35,9 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.costs.mana.KickerManaCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;
 

@@ -31,8 +31,8 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.keyword.HasteAbility;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 
 /**

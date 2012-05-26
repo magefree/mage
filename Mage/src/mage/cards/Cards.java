@@ -35,7 +35,6 @@ import java.util.Set;
 import java.util.UUID;
 import mage.filter.FilterCard;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 
 public interface Cards extends Set<UUID>, Serializable {
 

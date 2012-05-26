@@ -46,10 +46,10 @@ import mage.cards.MageCard;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.CardViewRarityComparator;
 import mage.client.util.Config;
-import mage.view.CardView;
-import mage.view.CardsView;
 import mage.client.util.Event;
 import mage.client.util.Listener;
+import mage.view.CardView;
+import mage.view.CardsView;
 
 /**
  *

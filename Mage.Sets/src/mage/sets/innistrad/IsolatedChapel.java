@@ -37,8 +37,6 @@ import mage.abilities.condition.common.UnlessCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.mana.BlackManaAbility;
-import mage.abilities.mana.BlueManaAbility;
-import mage.abilities.mana.RedManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonScope;

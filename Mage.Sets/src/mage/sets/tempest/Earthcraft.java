@@ -38,7 +38,6 @@ import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
-import mage.filter.common.FilterBasicLandCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;

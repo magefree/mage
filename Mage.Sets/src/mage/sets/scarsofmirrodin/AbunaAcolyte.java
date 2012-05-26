@@ -25,9 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.scarsofmirrodin;
-
 
 import mage.Constants.CardType;
 import mage.Constants.Duration;
@@ -45,7 +43,6 @@ import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
-
 
 /**
  *

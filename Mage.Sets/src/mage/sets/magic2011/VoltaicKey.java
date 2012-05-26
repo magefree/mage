@@ -34,8 +34,6 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.UntapTargetEffect;

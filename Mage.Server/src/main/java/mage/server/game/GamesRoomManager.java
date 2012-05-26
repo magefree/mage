@@ -30,7 +30,6 @@ package mage.server.game;
 
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-import org.apache.log4j.Logger;
 
 /**
  *

@@ -38,7 +38,6 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *

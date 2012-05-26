@@ -29,9 +29,6 @@
 package mage.abilities.costs;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import mage.abilities.costs.mana.ManaCosts;
 
 /**
  *

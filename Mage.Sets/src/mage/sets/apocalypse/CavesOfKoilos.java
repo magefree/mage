@@ -34,7 +34,6 @@ import mage.abilities.Ability;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
-import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 

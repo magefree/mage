@@ -38,7 +38,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
 

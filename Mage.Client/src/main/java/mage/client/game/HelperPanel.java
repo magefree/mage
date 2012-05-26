@@ -29,7 +29,6 @@
 package mage.client.game;
 
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * Panel with buttons that copy the state of feedback panel.

@@ -32,7 +32,6 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.abilities.effects.common.PreventDamageFromTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.Target;

@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.util.UUID;
-import java.util.prefs.Preferences;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;

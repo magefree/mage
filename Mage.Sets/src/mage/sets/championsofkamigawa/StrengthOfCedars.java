@@ -38,7 +38,6 @@ import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.common.FilterLandPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**

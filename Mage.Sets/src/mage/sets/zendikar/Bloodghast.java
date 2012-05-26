@@ -27,24 +27,22 @@
  */
 package mage.sets.zendikar;
 
-import mage.abilities.common.CantBlockAbility;
-import mage.Constants.Duration;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.TenOrLessLifeCondition;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
-import mage.abilities.keyword.HasteAbility;
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
+import mage.abilities.common.CantBlockAbility;
 import mage.abilities.common.LandfallAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.TenOrLessLifeCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
+import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
-
-import static mage.abilities.condition.common.TenOrLessLifeCondition.CheckType.*;
 
 /**
  *
@@ -65,7 +63,9 @@ public class Bloodghast extends CardImpl<Bloodghast> {
 		this.addAbility(CantBlockAbility.getInstance());
 		this.addAbility(new LandfallAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), true));
 		ContinuousEffect effect = new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(effect, new TenOrLessLifeCondition(AN_OPPONENT), "Bloodghast has haste as long as an opponent has 10 or less life.")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(effect,
+                new TenOrLessLifeCondition(TenOrLessLifeCondition.CheckType.AN_OPPONENT),
+                "Bloodghast has haste as long as an opponent has 10 or less life.")));
 	}
 
 	public Bloodghast(final Bloodghast card) {

@@ -35,17 +35,12 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToACreatureTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.SkipNextUntapTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
-import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.ReachAbility;
-import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledPermanent;
 
 /**
  *

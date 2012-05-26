@@ -29,7 +29,6 @@
 package mage.server;
 
 import java.util.UUID;
-import mage.server.ChatManager;
 
 /**
  *

@@ -31,7 +31,6 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;

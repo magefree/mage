@@ -27,7 +27,6 @@
  */
 package mage.sets.ravnika;
 
-import java.awt.*;
 import java.util.UUID;
 
 import mage.Constants;

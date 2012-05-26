@@ -33,11 +33,9 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BecomesTappedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;
@@ -45,7 +43,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**

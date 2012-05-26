@@ -28,22 +28,21 @@
 
 package mage.server;
 
-import mage.game.Table;
 import java.util.Collection;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import mage.MageException;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
+import mage.game.Table;
 import mage.game.draft.Draft;
 import mage.game.match.Match;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.Tournament;
 import mage.game.tournament.TournamentOptions;
-import mage.MageException;
 import mage.players.Player;
 import mage.server.game.GamesRoomManager;
-import org.apache.log4j.Logger;
 
 /**
  *

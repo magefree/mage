@@ -1,9 +1,7 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.game.Game;
 

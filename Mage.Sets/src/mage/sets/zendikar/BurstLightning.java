@@ -32,11 +32,9 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.KickerManaCost;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreatureOrPlayer;
 

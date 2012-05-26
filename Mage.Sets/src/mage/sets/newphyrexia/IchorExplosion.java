@@ -33,7 +33,6 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.common.continious.BoostAllEffect;

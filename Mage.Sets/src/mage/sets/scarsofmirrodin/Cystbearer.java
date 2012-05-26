@@ -31,11 +31,8 @@ package mage.sets.scarsofmirrodin;
 import java.util.UUID;
 
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.StaticAbility;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
 

@@ -35,13 +35,10 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.BoostAllEffect;
-import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;
-import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.ForestwalkAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**

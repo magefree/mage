@@ -37,7 +37,6 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.stack.StackObject;
 import mage.players.Player;

@@ -34,7 +34,6 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
-import mage.target.TargetPlayer;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;

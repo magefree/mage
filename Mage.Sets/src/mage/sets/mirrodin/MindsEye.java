@@ -34,13 +34,11 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *

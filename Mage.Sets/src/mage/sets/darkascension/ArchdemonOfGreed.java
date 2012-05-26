@@ -27,7 +27,6 @@
  */
 package mage.sets.darkascension;
 
-import java.util.List;
 import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
@@ -35,12 +34,9 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;

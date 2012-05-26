@@ -29,7 +29,6 @@
 package mage.abilities.keyword;
 
 import mage.Constants.Zone;
-import mage.abilities.Mode;
 import mage.abilities.StaticAbility;
 import mage.abilities.effects.Effect;
 import mage.cards.Card;

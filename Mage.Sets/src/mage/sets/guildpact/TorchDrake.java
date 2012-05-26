@@ -40,7 +40,6 @@ import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 
-import javax.xml.datatype.Duration;
 
 /**
  *

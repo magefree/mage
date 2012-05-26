@@ -34,7 +34,6 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.TrampleAbility;

@@ -34,8 +34,8 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import mage.server.util.config.Config;
-import mage.server.util.config.Plugin;
 import mage.server.util.config.GamePlugin;
+import mage.server.util.config.Plugin;
 import org.apache.log4j.Logger;
 
 /**

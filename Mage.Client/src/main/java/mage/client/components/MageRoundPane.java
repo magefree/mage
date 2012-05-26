@@ -4,8 +4,6 @@ import org.jdesktop.swingx.graphics.GraphicsUtilities;
 import org.jdesktop.swingx.graphics.ShadowRenderer;
 
 import java.awt.*;
-import java.awt.geom.Rectangle2D;
-import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;

@@ -28,11 +28,7 @@
 package mage.sets.newphyrexia;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
@@ -45,7 +41,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.DefenderAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;

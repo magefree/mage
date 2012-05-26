@@ -28,7 +28,6 @@
 
 package mage.client.remote;
 
-import java.util.List;
 import mage.cards.decks.Deck;
 import mage.client.MageFrame;
 import mage.client.chat.ChatPanel;

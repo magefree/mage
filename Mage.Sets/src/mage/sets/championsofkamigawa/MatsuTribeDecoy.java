@@ -40,9 +40,7 @@ import mage.abilities.effects.common.MustBlockSourceTargetEffect;
 import mage.abilities.effects.common.SkipNextUntapTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *

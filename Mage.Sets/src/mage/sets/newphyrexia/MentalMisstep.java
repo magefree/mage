@@ -34,8 +34,6 @@ import mage.Constants.Rarity;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
-import mage.filter.FilterCard;
-import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
 import mage.target.TargetSpell;
 

@@ -38,7 +38,6 @@ import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**

@@ -32,7 +32,6 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
-import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.ShuffleSpellEffect;
 import mage.cards.CardImpl;

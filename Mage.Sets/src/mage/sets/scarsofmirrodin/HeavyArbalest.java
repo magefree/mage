@@ -27,7 +27,13 @@
  */
 package mage.sets.scarsofmirrodin;
 
-import mage.Constants.*;
+import mage.Constants.AttachmentType;
+import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Outcome;
+import mage.Constants.PhaseStep;
+import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;

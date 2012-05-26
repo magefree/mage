@@ -32,7 +32,6 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.condition.common.ControlsPermanentCondition;
 import mage.abilities.common.CantBlockAbility;
 import mage.abilities.costs.mana.ColoredManaCost;

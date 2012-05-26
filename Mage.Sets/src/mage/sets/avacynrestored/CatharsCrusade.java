@@ -32,7 +32,6 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.common.CreatureEntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
-import mage.abilities.effects.common.counter.AddCountersControllerEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;

@@ -35,7 +35,6 @@ import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
-import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 
 /**

@@ -34,7 +34,6 @@ import mage.Constants.Rarity;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.CascadeAbility;
 import mage.cards.CardImpl;
-
 import mage.target.common.TargetCreaturePermanent;
 
 /**

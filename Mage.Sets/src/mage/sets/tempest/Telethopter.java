@@ -38,7 +38,6 @@ import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 

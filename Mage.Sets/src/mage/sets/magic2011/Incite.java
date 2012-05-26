@@ -32,18 +32,11 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
-import mage.Constants.Layer;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.SubLayer;
 import mage.ObjectColor;
-import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.AttacksIfAbleTargetEffect;
 import mage.abilities.effects.common.continious.SetCardColorTargetEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**

@@ -37,7 +37,6 @@ import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.turn.ControlTargetPlayerNextTurnEffect;

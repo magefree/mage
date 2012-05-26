@@ -30,9 +30,7 @@ package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.game.permanent.token.MyrToken;

@@ -30,7 +30,6 @@ package mage.filter;
 
 import java.util.UUID;
 
-import mage.abilities.Ability;
 import mage.game.Game;
 
 /**

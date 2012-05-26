@@ -27,8 +27,6 @@
  */
 package mage.sets.darkascension;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
@@ -38,14 +36,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *

@@ -27,7 +27,6 @@
  */
 package mage.sets.championsofkamigawa;
 
-import java.util.List;
 import java.util.UUID;
 
 import mage.Constants;

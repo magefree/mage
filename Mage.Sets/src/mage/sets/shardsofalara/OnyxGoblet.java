@@ -30,7 +30,6 @@ package mage.sets.shardsofalara;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
@@ -38,7 +37,6 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
-import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 
 /**

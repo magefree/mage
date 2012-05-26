@@ -32,7 +32,6 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.SkipNextUntapSourceEffect;
-import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.RedManaAbility;

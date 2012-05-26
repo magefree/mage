@@ -40,7 +40,6 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPlayer;
 
-import java.util.Iterator;
 import java.util.UUID;
 
 /**

@@ -34,7 +34,6 @@ import java.util.*;
 import mage.abilities.*;
 import mage.cards.Card;
 import mage.cards.Cards;
-import mage.cards.decks.Deck;
 import mage.game.permanent.Permanent;
 
 /**

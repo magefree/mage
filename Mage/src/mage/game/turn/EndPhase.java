@@ -28,7 +28,6 @@
 
 package mage.game.turn;
 
-import java.util.UUID;
 import mage.Constants.PhaseStep;
 import mage.Constants.TurnPhase;
 import mage.game.Game;

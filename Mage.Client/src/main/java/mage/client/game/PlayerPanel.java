@@ -39,8 +39,8 @@ import java.util.UUID;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.dialog.ShowCardsDialog;
-import mage.remote.Session;
 import mage.client.util.Config;
+import mage.remote.Session;
 import mage.view.PlayerView;
 
 /**

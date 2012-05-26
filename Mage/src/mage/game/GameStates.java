@@ -31,7 +31,6 @@ package mage.game;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
-import mage.util.Copier;
 import org.apache.log4j.Logger;
 
 /**

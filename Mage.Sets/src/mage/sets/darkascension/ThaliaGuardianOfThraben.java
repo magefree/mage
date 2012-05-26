@@ -41,7 +41,6 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
-import mage.util.CardUtil;
 
 /**
  *

@@ -44,7 +44,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
-import javax.xml.datatype.Duration;
 
 /**
  * @author Loki

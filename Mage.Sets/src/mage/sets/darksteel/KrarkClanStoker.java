@@ -30,14 +30,12 @@ package mage.sets.darksteel;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.BasicManaAbility;
 import mage.cards.CardImpl;

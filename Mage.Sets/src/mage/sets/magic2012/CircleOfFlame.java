@@ -35,8 +35,6 @@ import mage.Constants.Rarity;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.DestroyAllControlledTargetEffect;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;

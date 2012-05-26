@@ -40,7 +40,6 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetArtifactPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *

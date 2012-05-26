@@ -30,7 +30,6 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
@@ -41,7 +40,6 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *

@@ -37,7 +37,6 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;

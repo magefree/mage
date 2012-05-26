@@ -30,7 +30,6 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
@@ -38,8 +37,6 @@ import mage.MageInt;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterSpiritOrArcaneCard;
 import mage.game.permanent.token.Token;
 

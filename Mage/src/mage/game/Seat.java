@@ -30,7 +30,6 @@ package mage.game;
 
 import java.io.Serializable;
 import mage.players.Player;
-import org.apache.log4j.Logger;
 
 /**
  *

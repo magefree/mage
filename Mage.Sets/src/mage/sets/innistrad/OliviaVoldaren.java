@@ -38,7 +38,6 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continious.AddCardSubTypeTargetEffect;
-import mage.abilities.effects.common.continious.AddCardSubtypeAttachedEffect;
 import mage.abilities.effects.common.continious.GainControlTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -46,7 +45,6 @@ import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.sets.zendikar.MerfolkWayfinder;
 import mage.target.common.TargetCreaturePermanent;
 
 /**

@@ -40,7 +40,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.common.DrawCardControllerEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;

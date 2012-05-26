@@ -28,7 +28,6 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-import java.util.logging.Logger;
 
 import mage.Constants;
 import mage.Constants.CardType;
@@ -51,7 +50,6 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.target.common.TargetCardInLibrary;
 import mage.watchers.Watcher;
 import mage.watchers.WatcherImpl;
 

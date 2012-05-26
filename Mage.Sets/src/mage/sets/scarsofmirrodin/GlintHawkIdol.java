@@ -35,7 +35,6 @@ import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Abilities;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ColoredManaCost;

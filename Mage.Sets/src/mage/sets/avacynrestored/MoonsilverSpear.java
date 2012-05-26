@@ -32,7 +32,6 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AttacksEquippedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;

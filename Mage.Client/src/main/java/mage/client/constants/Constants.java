@@ -28,9 +28,9 @@
 
 package mage.client.constants;
 
+import java.io.File;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
-import java.io.File;
 
 /**
  *

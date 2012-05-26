@@ -38,8 +38,6 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
-import mage.game.combat.Combat;
-import mage.game.turn.CombatPhase;
 import mage.game.turn.TurnMod;
 import mage.target.Target;
 import mage.target.common.TargetOpponent;

@@ -38,8 +38,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
-import mage.abilities.effects.common.CantBlockSourceEffect;
-import mage.abilities.effects.common.continious.CantBeBlockedByOneEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;

@@ -41,7 +41,6 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.SkipNextUntapSourceEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetAttackingOrBlockingCreature;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *

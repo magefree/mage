@@ -32,7 +32,6 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleTriggeredAbility;
 import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;

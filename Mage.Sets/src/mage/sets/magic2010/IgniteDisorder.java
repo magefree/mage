@@ -33,7 +33,6 @@ import mage.Constants.Rarity;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetCreaturePermanentAmount;
 
 /**

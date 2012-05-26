@@ -31,7 +31,6 @@ package mage.game.turn;
 import java.util.UUID;
 import mage.Constants.TurnPhase;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 
 /**

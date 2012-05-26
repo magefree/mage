@@ -31,7 +31,6 @@ package mage.sets.magic2010;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.common.DrawCardAllEffect;

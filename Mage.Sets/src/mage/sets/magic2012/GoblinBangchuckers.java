@@ -27,7 +27,6 @@
  */
 package mage.sets.magic2012;
 
-import java.util.Random;
 import java.util.UUID;
 
 import mage.Constants;

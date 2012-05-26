@@ -28,7 +28,6 @@
 package mage.client.deckeditor.table;
 
 import java.util.Comparator;
-import java.util.List;
 
 import mage.cards.MageCard;
 import mage.view.CardView;

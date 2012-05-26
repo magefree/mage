@@ -28,7 +28,6 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;

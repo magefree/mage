@@ -44,7 +44,6 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.turn.TurnMod;
-
 import mage.target.common.TargetCreaturePermanent;
 
 /**

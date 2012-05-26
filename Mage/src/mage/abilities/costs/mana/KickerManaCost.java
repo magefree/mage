@@ -1,12 +1,5 @@
 package mage.abilities.costs.mana;
 
-import mage.abilities.Ability;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.CostImpl;
-import mage.game.Game;
-
-import java.util.UUID;
-
 /**
  * This cost must be used only as optional mana cost in cards with Kicker
  * @author Loki

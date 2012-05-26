@@ -35,7 +35,6 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AttacksEquippedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -43,9 +42,6 @@ import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
 /**

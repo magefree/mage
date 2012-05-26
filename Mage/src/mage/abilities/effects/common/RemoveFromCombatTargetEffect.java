@@ -28,7 +28,6 @@
 
 package mage.abilities.effects.common;
 
-import mage.Constants;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.Mode;

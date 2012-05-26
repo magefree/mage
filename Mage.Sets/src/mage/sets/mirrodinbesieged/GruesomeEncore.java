@@ -46,7 +46,6 @@ import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.players.Player;
 import mage.target.common.TargetCardInOpponentsGraveyard;
 import mage.target.targetpointer.FixedTarget;
 

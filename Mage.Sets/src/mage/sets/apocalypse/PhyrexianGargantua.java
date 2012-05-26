@@ -35,7 +35,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DrawCardControllerEffect;
-import mage.abilities.effects.common.LoseLifeControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceEffect;
 import mage.cards.CardImpl;
 

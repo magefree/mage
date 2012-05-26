@@ -40,7 +40,6 @@ import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
-import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreatureOrPlayer;
 

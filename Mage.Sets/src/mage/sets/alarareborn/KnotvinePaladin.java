@@ -37,7 +37,6 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**

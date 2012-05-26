@@ -44,7 +44,6 @@ import mage.game.permanent.token.WolfToken;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *

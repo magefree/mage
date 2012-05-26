@@ -35,14 +35,11 @@ import mage.Constants.Rarity;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.UnattachedTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.effects.common.SacrificeEquippedEffect;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.InfectAbility;
-import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 
 /**

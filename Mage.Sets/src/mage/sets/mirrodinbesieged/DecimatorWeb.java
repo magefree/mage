@@ -41,9 +41,7 @@ import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
-import mage.counters.Counter;
 import mage.counters.CounterType;
-import mage.target.TargetPlayer;
 import mage.target.common.TargetOpponent;
 
 /**

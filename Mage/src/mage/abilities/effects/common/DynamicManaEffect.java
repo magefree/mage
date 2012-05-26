@@ -31,7 +31,6 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.counters.CounterType;
 import mage.game.Game;
 
 /**

@@ -34,7 +34,6 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;

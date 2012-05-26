@@ -41,7 +41,6 @@ import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreatureOrPlayer;
 

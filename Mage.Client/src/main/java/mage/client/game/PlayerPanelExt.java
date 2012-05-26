@@ -36,6 +36,7 @@ package mage.client.game;
 
 import mage.cards.MageCard;
 import mage.cards.action.ActionCallback;
+import mage.cards.decks.importer.DckDeckImporter;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.components.HoverButton;
@@ -67,7 +68,6 @@ import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import mage.cards.decks.importer.DckDeckImporter;
 
 /**
  * Enhanced player pane.

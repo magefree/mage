@@ -39,8 +39,6 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterSpiritOrArcaneCard;
 

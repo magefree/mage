@@ -38,7 +38,6 @@ import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.costs.mana.KickerManaCost;
 import mage.abilities.decorator.ConditionalContinousEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;

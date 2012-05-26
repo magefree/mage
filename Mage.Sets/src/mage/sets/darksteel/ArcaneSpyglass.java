@@ -43,7 +43,6 @@ import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.counters.common.ChargeCounter;
 import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetControlledPermanent;

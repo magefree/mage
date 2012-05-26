@@ -36,7 +36,6 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.OnEventTriggeredAbility;
-import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
 import mage.abilities.condition.common.NoCreatureCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.SacrificeEffect;
@@ -44,7 +43,6 @@ import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.events.GameEvent;
-import mage.target.TargetPlayer;
 
 /**
  *

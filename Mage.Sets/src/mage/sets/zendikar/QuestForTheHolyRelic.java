@@ -47,7 +47,6 @@ import mage.counters.CounterType;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
-import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;

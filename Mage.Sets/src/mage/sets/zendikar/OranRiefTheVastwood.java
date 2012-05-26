@@ -41,7 +41,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.counters.common.PlusOneCounter;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.game.Game;

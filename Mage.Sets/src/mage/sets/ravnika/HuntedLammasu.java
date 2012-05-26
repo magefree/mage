@@ -29,21 +29,16 @@ package mage.sets.ravnika;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
 import mage.game.permanent.token.Token;
-import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetOpponent;
 

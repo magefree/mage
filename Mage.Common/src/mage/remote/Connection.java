@@ -30,7 +30,6 @@ package mage.remote;
 
 import java.net.*;
 import java.util.Enumeration;
-import java.util.logging.Logger;
 
 /**
  *

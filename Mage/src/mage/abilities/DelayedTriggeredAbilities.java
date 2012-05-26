@@ -29,7 +29,6 @@
 package mage.abilities;
 
 import java.util.Iterator;
-import mage.Constants;
 import mage.Constants.Duration;
 import mage.game.Game;
 import mage.game.events.GameEvent;

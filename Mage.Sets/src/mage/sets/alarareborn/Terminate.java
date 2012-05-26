@@ -33,7 +33,6 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-
 import mage.target.common.TargetCreaturePermanent;
 
 /**

@@ -37,7 +37,6 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;

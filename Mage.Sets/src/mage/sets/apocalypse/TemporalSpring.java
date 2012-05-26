@@ -31,7 +31,6 @@ import java.util.UUID;
 
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.TargetPermanent;

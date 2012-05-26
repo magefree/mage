@@ -35,7 +35,6 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -47,9 +46,6 @@ import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.TableEvent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledPermanent;
 

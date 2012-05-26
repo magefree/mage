@@ -36,8 +36,6 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.SpellCastTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;

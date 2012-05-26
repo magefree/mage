@@ -32,7 +32,6 @@ import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.cards.decks.Deck;
 import mage.sets.Sets;
-import mage.view.CardView;
 import mage.view.DeckView;
 import mage.view.SimpleCardView;
 import org.apache.log4j.Logger;

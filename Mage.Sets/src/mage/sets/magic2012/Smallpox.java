@@ -27,7 +27,6 @@
  */
 package mage.sets.magic2012;
 
-import java.security.PrivilegedActionException;
 import java.util.UUID;
 
 import mage.Constants;

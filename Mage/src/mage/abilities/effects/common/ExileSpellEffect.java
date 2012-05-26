@@ -30,9 +30,7 @@ package mage.abilities.effects.common;
 
 import java.io.ObjectStreamException;
 import java.util.UUID;
-import mage.Constants.Outcome;
 import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.PostResolveEffect;
 import mage.cards.Card;
 import mage.game.Game;

@@ -38,7 +38,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.SkipNextUntapTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;

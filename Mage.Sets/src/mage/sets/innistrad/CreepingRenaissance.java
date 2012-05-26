@@ -42,7 +42,6 @@ import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.game.Game;
 import mage.players.Player;
-import mage.sets.Sets;
 
 /**
  *

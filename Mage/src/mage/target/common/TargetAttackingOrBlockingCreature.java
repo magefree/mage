@@ -28,7 +28,6 @@
 
 package mage.target.common;
 
-import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterAttackingOrBlockingCreature;
 
 /**

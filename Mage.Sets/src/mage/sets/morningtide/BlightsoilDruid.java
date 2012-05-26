@@ -29,16 +29,12 @@ package mage.sets.morningtide;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.GreenManaAbility;
-import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 
 /**

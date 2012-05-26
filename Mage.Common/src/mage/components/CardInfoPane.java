@@ -1,6 +1,5 @@
 package mage.components;
 
-import mage.cards.Card;
 import mage.view.CardView;
 
 /**

@@ -37,7 +37,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.ForestwalkAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;

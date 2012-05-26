@@ -35,7 +35,6 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DrawCardControllerEffect;
-import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;

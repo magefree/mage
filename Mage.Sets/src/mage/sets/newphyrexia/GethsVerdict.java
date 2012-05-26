@@ -33,7 +33,6 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.SacrificeEffect;
-import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPlayer;

@@ -41,7 +41,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
-import java.util.List;
 import java.util.UUID;
 import mage.filter.Filter.ComparisonType;
 

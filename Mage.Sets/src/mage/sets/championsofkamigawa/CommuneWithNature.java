@@ -33,7 +33,6 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
 

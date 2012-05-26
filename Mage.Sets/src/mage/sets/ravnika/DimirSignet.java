@@ -30,18 +30,13 @@ package mage.sets.ravnika;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.BasicManaEffect;
-import mage.abilities.mana.BasicManaAbility;
-import mage.abilities.mana.ManaAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 
