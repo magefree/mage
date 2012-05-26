@@ -25,18 +25,53 @@
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
 */
+package mage.remote.interfaces;
 
-package mage.remote;
+import mage.cards.decks.DeckCardLists;
+import mage.game.match.MatchOptions;
+import mage.game.tournament.TournamentOptions;
+import mage.remote.MageRemoteException;
+import mage.view.TableView;
+import mage.view.TournamentView;
 
-import mage.interfaces.Action;
-import mage.remote.interfaces.*;
+import java.util.UUID;
 
 /**
- * Extracted interface for SessionImpl class.
- *
  * @author noxx
  */
-public interface Session extends ClientData, Connect, GamePlay, GameTypes, ServerState, ChatSession, Feedback, PlayerActions, Replays, Testable {
+public interface PlayerActions {
 
-    void setEmbeddedMageServerAction(Action embeddedMageServerAction);
+    TableView createTable(UUID roomId, MatchOptions matchOptions);
+
+    TableView createTournamentTable(UUID roomId, TournamentOptions tournamentOptions);
+
+    boolean removeTable(UUID roomId, UUID tableId);
+
+    boolean removeTable(UUID tableId);
+
+    boolean joinGame(UUID gameId);
+
+    boolean joinDraft(UUID draftId);
+
+    boolean joinTournament(UUID tournamentId);
+
+    boolean leaveTable(UUID roomId, UUID tableId);
+
+    boolean swapSeats(UUID roomId, UUID tableId, int seatNum1, int seatNum2);
+
+    boolean startTournament(UUID roomId, UUID tableId);
+
+    boolean startChallenge(UUID roomId, UUID tableId, UUID challengeId);
+
+    boolean joinTournamentTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill);
+
+    boolean watchTable(UUID roomId, UUID tableId);
+
+    boolean joinTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill, DeckCardLists deckList);
+
+    TableView getTable(UUID roomId, UUID tableId);
+
+    TournamentView getTournament(UUID tournamentId) throws MageRemoteException;
+
+    boolean isTableOwner(UUID roomId, UUID tableId);
 }

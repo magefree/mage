@@ -25,18 +25,18 @@
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
 */
+package mage.remote.interfaces;
 
-package mage.remote;
+import mage.cards.decks.DeckCardLists;
 
-import mage.interfaces.Action;
-import mage.remote.interfaces.*;
+import java.util.UUID;
 
 /**
- * Extracted interface for SessionImpl class.
- *
  * @author noxx
  */
-public interface Session extends ClientData, Connect, GamePlay, GameTypes, ServerState, ChatSession, Feedback, PlayerActions, Replays, Testable {
+public interface Testable {
 
-    void setEmbeddedMageServerAction(Action embeddedMageServerAction);
+    boolean isTestMode();
+
+    boolean cheat(UUID gameId, UUID playerId, DeckCardLists deckList);
 }

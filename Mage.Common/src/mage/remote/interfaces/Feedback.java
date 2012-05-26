@@ -25,18 +25,11 @@
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
 */
-
-package mage.remote;
-
-import mage.interfaces.Action;
-import mage.remote.interfaces.*;
+package mage.remote.interfaces;
 
 /**
- * Extracted interface for SessionImpl class.
- *
  * @author noxx
  */
-public interface Session extends ClientData, Connect, GamePlay, GameTypes, ServerState, ChatSession, Feedback, PlayerActions, Replays, Testable {
-
-    void setEmbeddedMageServerAction(Action embeddedMageServerAction);
+public interface Feedback {
+    boolean sendFeedback(String title, String type, String message, String email);
 }

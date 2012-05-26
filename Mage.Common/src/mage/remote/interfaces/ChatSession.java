@@ -25,18 +25,28 @@
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
 */
+package mage.remote.interfaces;
 
-package mage.remote;
-
-import mage.interfaces.Action;
-import mage.remote.interfaces.*;
+import java.util.UUID;
 
 /**
- * Extracted interface for SessionImpl class.
- *
  * @author noxx
  */
-public interface Session extends ClientData, Connect, GamePlay, GameTypes, ServerState, ChatSession, Feedback, PlayerActions, Replays, Testable {
+public interface ChatSession {
 
-    void setEmbeddedMageServerAction(Action embeddedMageServerAction);
+    UUID getRoomChatId(UUID roomId);
+
+    UUID getTableChatId(UUID tableId);
+
+    UUID getGameChatId(UUID gameId);
+
+    UUID getTournamentChatId(UUID tournamentId);
+
+    boolean joinChat(UUID chatId);
+
+    boolean leaveChat(UUID chatId);
+
+    boolean sendChatMessage(UUID chatId, String message);
+
+    boolean sendBroadcastMessage(String message);
 }

@@ -25,18 +25,37 @@
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
 */
+package mage.remote.interfaces;
 
-package mage.remote;
+import mage.cards.decks.DeckCardLists;
+import mage.view.DraftPickView;
 
-import mage.interfaces.Action;
-import mage.remote.interfaces.*;
+import java.util.UUID;
 
 /**
- * Extracted interface for SessionImpl class.
- *
  * @author noxx
  */
-public interface Session extends ClientData, Connect, GamePlay, GameTypes, ServerState, ChatSession, Feedback, PlayerActions, Replays, Testable {
+public interface GamePlay {
 
-    void setEmbeddedMageServerAction(Action embeddedMageServerAction);
+    boolean startGame(UUID roomId, UUID tableId);
+
+    boolean watchGame(UUID gameId);
+
+    boolean stopWatching(UUID gameId);
+
+    boolean sendPlayerUUID(UUID gameId, UUID data);
+
+    boolean sendPlayerBoolean(UUID gameId, boolean data);
+
+    boolean sendPlayerInteger(UUID gameId, int data);
+
+    boolean sendPlayerString(UUID gameId, String data);
+
+    boolean concedeGame(UUID gameId);
+
+    boolean submitDeck(UUID tableId, DeckCardLists deck);
+
+    boolean updateDeck(UUID tableId, DeckCardLists deck);
+
+    DraftPickView sendCardPick(UUID draftId, UUID cardId);
 }

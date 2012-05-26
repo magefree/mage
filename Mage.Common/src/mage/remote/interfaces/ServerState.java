@@ -25,18 +25,32 @@
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
 */
+package mage.remote.interfaces;
 
-package mage.remote;
+import mage.remote.MageRemoteException;
+import mage.view.MatchView;
+import mage.view.TableView;
+import mage.view.UserView;
 
-import mage.interfaces.Action;
-import mage.remote.interfaces.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.UUID;
 
 /**
- * Extracted interface for SessionImpl class.
- *
  * @author noxx
  */
-public interface Session extends ClientData, Connect, GamePlay, GameTypes, ServerState, ChatSession, Feedback, PlayerActions, Replays, Testable {
+public interface ServerState {
 
-    void setEmbeddedMageServerAction(Action embeddedMageServerAction);
+    UUID getMainRoomId();
+
+    List<UserView> getUsers();
+
+    Collection<String> getConnectedPlayers(UUID roomId) throws MageRemoteException;
+
+    List<String> getServerMessages();
+
+    Collection<TableView> getTables(UUID roomId) throws MageRemoteException;
+
+    Collection<MatchView> getFinishedMatches(UUID roomId) throws MageRemoteException;
+
 }

@@ -25,18 +25,26 @@
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
 */
+package mage.remote.interfaces;
 
-package mage.remote;
-
-import mage.interfaces.Action;
-import mage.remote.interfaces.*;
+import mage.remote.Connection;
 
 /**
- * Extracted interface for SessionImpl class.
- *
  * @author noxx
  */
-public interface Session extends ClientData, Connect, GamePlay, GameTypes, ServerState, ChatSession, Feedback, PlayerActions, Replays, Testable {
+public interface Connect {
 
-    void setEmbeddedMageServerAction(Action embeddedMageServerAction);
+    boolean connect(Connection connection);
+
+    boolean stopConnecting();
+
+    boolean connect();
+
+    void disconnect(boolean showMessage);
+
+    boolean ping();
+
+    boolean isConnected();
+
+    boolean disconnectUser(String userSessionId);
 }

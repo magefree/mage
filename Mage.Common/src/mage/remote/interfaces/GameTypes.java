@@ -25,18 +25,23 @@
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
 */
+package mage.remote.interfaces;
 
-package mage.remote;
+import mage.view.GameTypeView;
+import mage.view.TournamentTypeView;
 
-import mage.interfaces.Action;
-import mage.remote.interfaces.*;
+import java.util.List;
 
 /**
- * Extracted interface for SessionImpl class.
- *
  * @author noxx
  */
-public interface Session extends ClientData, Connect, GamePlay, GameTypes, ServerState, ChatSession, Feedback, PlayerActions, Replays, Testable {
+public interface GameTypes {
 
-    void setEmbeddedMageServerAction(Action embeddedMageServerAction);
+    String[] getPlayerTypes();
+
+    List<GameTypeView> getGameTypes();
+
+    String[] getDeckTypes();
+
+    List<TournamentTypeView> getTournamentTypes();
 }
