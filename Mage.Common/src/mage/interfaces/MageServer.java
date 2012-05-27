@@ -45,89 +45,90 @@ import java.util.UUID;
  */
 public interface MageServer {
 
-	public boolean registerClient(String userName, String sessionId, MageVersion version) throws MageException;
-	public boolean registerAdmin(String password, String sessionId, MageVersion version) throws MageException;
-	public void deregisterClient(String sessionId) throws MageException;
+    // connection methods
+	boolean registerClient(String userName, String sessionId, MageVersion version) throws MageException;
+	boolean registerAdmin(String password, String sessionId, MageVersion version) throws MageException;
+	void deregisterClient(String sessionId) throws MageException;
 
-	public boolean setUserData(String userName, String sessionId, UserDataView userDataView) throws MageException;
-	public ServerState getServerState() throws MageException;
-    
-    public boolean ping(String sessionId) throws MageException;
+    // user methods
+	boolean setUserData(String userName, String sessionId, UserDataView userDataView) throws MageException;
+	void sendFeedbackMessage(String sessionId, String username, String title, String type, String message, String email) throws MageException;
+
+    // server state methods
+    ServerState getServerState() throws MageException;
+    List<String> getConnectedPlayers(UUID roomId) throws MageException;
+	List<MatchView> getFinishedMatches(UUID roomId) throws MageException;
+    Object getServerMessagesCompressed(String sessionId) throws MageException; 	// messages of the day
+
+    // ping - extends session
+	boolean ping(String sessionId) throws MageException;
 
 	//table methods
-	public TableView createTable(String sessionId, UUID roomId, MatchOptions matchOptions) throws MageException;
-	public TableView createTournamentTable(String sessionId, UUID roomId, TournamentOptions tournamentOptions) throws MageException;
-	public boolean joinTable(String sessionId, UUID roomId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList) throws MageException, GameException;
-	public boolean joinTournamentTable(String sessionId, UUID roomId, UUID tableId, String name, String playerType, int skill) throws MageException, GameException;
-	public boolean submitDeck(String sessionId, UUID tableId, DeckCardLists deckList) throws MageException, GameException;
-	public void updateDeck(String sessionId, UUID tableId, DeckCardLists deckList) throws MageException, GameException;
-	public boolean watchTable(String sessionId, UUID roomId, UUID tableId) throws MageException;
-	public void leaveTable(String sessionId, UUID roomId, UUID tableId) throws MageException;
-	public void swapSeats(String sessionId, UUID roomId, UUID tableId, int seatNum1, int seatNum2) throws MageException;
-	public void removeTable(String sessionId, UUID roomId, UUID tableId) throws MageException;
-	public boolean isTableOwner(String sessionId, UUID roomId, UUID tableId) throws MageException;
-	public TableView getTable(UUID roomId, UUID tableId) throws MageException;
-	public List<TableView> getTables(UUID roomId) throws MageException;
-	public List<String> getConnectedPlayers(UUID roomId) throws MageException;
-    public List<MatchView> getFinishedMatches(UUID roomId) throws MageException;
+	TableView createTable(String sessionId, UUID roomId, MatchOptions matchOptions) throws MageException;
+	TableView createTournamentTable(String sessionId, UUID roomId, TournamentOptions tournamentOptions) throws MageException;
+	boolean joinTable(String sessionId, UUID roomId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList) throws MageException, GameException;
+	boolean joinTournamentTable(String sessionId, UUID roomId, UUID tableId, String name, String playerType, int skill) throws MageException, GameException;
+	boolean submitDeck(String sessionId, UUID tableId, DeckCardLists deckList) throws MageException, GameException;
+	void updateDeck(String sessionId, UUID tableId, DeckCardLists deckList) throws MageException, GameException;
+	boolean watchTable(String sessionId, UUID roomId, UUID tableId) throws MageException;
+	void leaveTable(String sessionId, UUID roomId, UUID tableId) throws MageException;
+	void swapSeats(String sessionId, UUID roomId, UUID tableId, int seatNum1, int seatNum2) throws MageException;
+	void removeTable(String sessionId, UUID roomId, UUID tableId) throws MageException;
+	boolean isTableOwner(String sessionId, UUID roomId, UUID tableId) throws MageException;
+	TableView getTable(UUID roomId, UUID tableId) throws MageException;
+	List<TableView> getTables(UUID roomId) throws MageException;
 
 	//chat methods
-	public void sendChatMessage(UUID chatId, String userName, String message) throws MageException;
-	public void joinChat(UUID chatId, String sessionId, String userName) throws MageException;
-	public void leaveChat(UUID chatId, String sessionId) throws MageException;
-	public UUID getTableChatId(UUID tableId) throws MageException;
-	public UUID getGameChatId(UUID gameId) throws MageException;
-	public UUID getRoomChatId(UUID roomId) throws MageException;
-	public UUID getTournamentChatId(UUID tournamentId) throws MageException;
+	void sendChatMessage(UUID chatId, String userName, String message) throws MageException;
+	void joinChat(UUID chatId, String sessionId, String userName) throws MageException;
+	void leaveChat(UUID chatId, String sessionId) throws MageException;
+	UUID getTableChatId(UUID tableId) throws MageException;
+	UUID getGameChatId(UUID gameId) throws MageException;
+	UUID getRoomChatId(UUID roomId) throws MageException;
+	UUID getTournamentChatId(UUID tournamentId) throws MageException;
 
 	//room methods
-	public UUID getMainRoomId() throws MageException;
+	UUID getMainRoomId() throws MageException;
 
 	//game methods
-	public void startMatch(String sessionId, UUID roomId, UUID tableId) throws MageException;
-	public void joinGame(UUID gameId, String sessionId) throws MageException;
-	public void watchGame(UUID gameId, String sessionId) throws MageException;
-	public void stopWatching(UUID gameId, String sessionId) throws MageException;
-	public void sendPlayerUUID(UUID gameId, String sessionId, UUID data) throws MageException;
-	public void sendPlayerString(UUID gameId, String sessionId, String data) throws MageException;
-	public void sendPlayerBoolean(UUID gameId, String sessionId, Boolean data) throws MageException;
-	public void sendPlayerInteger(UUID gameId, String sessionId, Integer data) throws MageException;
-	public void concedeGame(UUID gameId, String sessionId) throws MageException;
+	void startMatch(String sessionId, UUID roomId, UUID tableId) throws MageException;
+	void joinGame(UUID gameId, String sessionId) throws MageException;
+	void watchGame(UUID gameId, String sessionId) throws MageException;
+	void stopWatching(UUID gameId, String sessionId) throws MageException;
+	void sendPlayerUUID(UUID gameId, String sessionId, UUID data) throws MageException;
+	void sendPlayerString(UUID gameId, String sessionId, String data) throws MageException;
+	void sendPlayerBoolean(UUID gameId, String sessionId, Boolean data) throws MageException;
+	void sendPlayerInteger(UUID gameId, String sessionId, Integer data) throws MageException;
+	void concedeGame(UUID gameId, String sessionId) throws MageException;
+    GameView getGameView(UUID gameId, String sessionId, UUID playerId) throws MageException;
 
 	//tournament methods
-	public void startTournament(String sessionId, UUID roomId, UUID tableId) throws MageException;
-	public void joinTournament(UUID draftId, String sessionId) throws MageException;
-	public TournamentView getTournament(UUID tournamentId) throws MageException;
+	void startTournament(String sessionId, UUID roomId, UUID tableId) throws MageException;
+	void joinTournament(UUID draftId, String sessionId) throws MageException;
+	TournamentView getTournament(UUID tournamentId) throws MageException;
 
 	//draft methods
-	public void joinDraft(UUID draftId, String sessionId) throws MageException;
-	public DraftPickView sendCardPick(UUID draftId, String sessionId, UUID cardId) throws MageException;
+	void joinDraft(UUID draftId, String sessionId) throws MageException;
+	DraftPickView sendCardPick(UUID draftId, String sessionId, UUID cardId) throws MageException;
 
 	//challenge methods
-	public void startChallenge(String sessionId, UUID roomId, UUID tableId, UUID challengeId) throws MageException;
+	void startChallenge(String sessionId, UUID roomId, UUID tableId, UUID challengeId) throws MageException;
 
 	//replay methods
-	public void replayGame(UUID gameId, String sessionId) throws MageException;
-	public void startReplay(UUID gameId, String sessionId) throws MageException;
-	public void stopReplay(UUID gameId, String sessionId) throws MageException;
-	public void nextPlay(UUID gameId, String sessionId) throws MageException;
-	public void previousPlay(UUID gameId, String sessionId) throws MageException;
-    public void skipForward(UUID gameId, String sessionId, int moves) throws MageException;
+	void replayGame(UUID gameId, String sessionId) throws MageException;
+	void startReplay(UUID gameId, String sessionId) throws MageException;
+	void stopReplay(UUID gameId, String sessionId) throws MageException;
+	void nextPlay(UUID gameId, String sessionId) throws MageException;
+	void previousPlay(UUID gameId, String sessionId) throws MageException;
+	void skipForward(UUID gameId, String sessionId, int moves) throws MageException;
 
 	//test methods
-	public void cheat(UUID gameId, String sessionId, UUID playerId, DeckCardLists deckList) throws MageException;
-    public boolean cheat(UUID gameId, String sessionId, UUID playerId, String cardName) throws MageException;
-    public GameView getGameView(UUID gameId, String sessionId, UUID playerId) throws MageException;
+	void cheat(UUID gameId, String sessionId, UUID playerId, DeckCardLists deckList) throws MageException;
+	boolean cheat(UUID gameId, String sessionId, UUID playerId, String cardName) throws MageException;
 
 	//admin methods
-	public List<UserView> getUsers(String sessionId) throws MageException;
-	public void disconnectUser(String sessionId, String userSessionId) throws MageException;
-	public void removeTable(String sessionId, UUID tableId) throws MageException;
-    public void sendBroadcastMessage(String sessionId, String message) throws MageException;
-
-	// messages of the day
-	public Object getServerMessagesCompressed(String sessionId) throws MageException;
-
-    // feedback
-    public void sendFeedbackMessage(String sessionId, String username, String title, String type, String message, String email) throws MageException;
+	List<UserView> getUsers(String sessionId) throws MageException;
+	void disconnectUser(String sessionId, String userSessionId) throws MageException;
+	void removeTable(String sessionId, UUID tableId) throws MageException;
+	void sendBroadcastMessage(String sessionId, String message) throws MageException;
 }
