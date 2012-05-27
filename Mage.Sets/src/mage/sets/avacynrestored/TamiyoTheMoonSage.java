@@ -27,12 +27,7 @@
  */
 package mage.sets.avacynrestored;
 
-import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.Constants.*;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -55,6 +50,8 @@ import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
  *
  * @author North
@@ -76,7 +73,7 @@ public class TamiyoTheMoonSage extends CardImpl<TamiyoTheMoonSage> {
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
         // -2: Draw a card for each tapped creature target player controls.
-        ability = new LoyaltyAbility(new DrawCardControllerEffect(new TapedCreaturesControlledByTargetCount()), -2);
+        ability = new LoyaltyAbility(new DrawCardControllerEffect(new TappedCreaturesControlledByTargetCount()), -2);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         // -8: You get an emblem with "You have no maximum hand size" and "Whenever a card is put into your graveyard from anywhere, you may return it to your hand."
@@ -93,7 +90,7 @@ public class TamiyoTheMoonSage extends CardImpl<TamiyoTheMoonSage> {
     }
 }
 
-class TapedCreaturesControlledByTargetCount implements DynamicValue {
+class TappedCreaturesControlledByTargetCount implements DynamicValue {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
@@ -104,12 +101,12 @@ class TapedCreaturesControlledByTargetCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility) {
-        return game.getBattlefield().count(filter, sourceAbility.getFirstTarget(), game);
+        return game.getBattlefield().countAll(filter, sourceAbility.getFirstTarget(), game);
     }
 
     @Override
     public DynamicValue clone() {
-        return new TapedCreaturesControlledByTargetCount();
+        return new TappedCreaturesControlledByTargetCount();
     }
 
     @Override
