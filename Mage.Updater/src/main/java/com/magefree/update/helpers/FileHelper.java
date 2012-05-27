@@ -97,7 +97,7 @@ public class FileHelper {
         try {
             InputStream in = urlConnection.getInputStream();
             File f = new File(filename);
-            if (!f.exists()) {
+            if (!f.exists() && f.getParentFile() != null) {
                 f.getParentFile().mkdirs();
                 System.out.println("Directories have been created: " + f.getParentFile().getPath());
             }
