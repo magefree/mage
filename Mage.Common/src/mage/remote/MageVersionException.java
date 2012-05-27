@@ -39,7 +39,7 @@ public class MageVersionException extends MageException {
     private MageVersion serverVersion;
     
    	public MageVersionException(MageVersion clientVersion, MageVersion serverVersion) {
-        super("Wrong client version " + clientVersion + ", expecting version " + serverVersion + ". \r\n\r\nPlease download new version at magefree.com.");
+        super("Wrong client version " + clientVersion + ", expecting version " + serverVersion + ". \r\n\r\nPlease download latest version at download.magefree.com and use mage-updater.");
         this.serverVersion = serverVersion;
     }
 
