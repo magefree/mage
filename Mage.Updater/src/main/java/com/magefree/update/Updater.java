@@ -49,7 +49,12 @@ public class Updater {
         m.downloadAndUpdate(downloadList);
 
         // remove odd files
-        m.removeFiles(m.findRemoved(local, remote));
+        List<String> removeList = m.findRemoved(local, remote);
+        m.removeFiles(removeList);
+        
+        if (downloadList.isEmpty() && removeList.isEmpty()) {
+            System.out.println("Already up-to-date.");
+        }
     }
 
     /**
