@@ -94,7 +94,7 @@ class CascadeEffect extends OneShotEffect<CascadeEffect> {
 		Card card;
 		Player player = game.getPlayer(source.getControllerId());
 		ExileZone exile = game.getExile().createZone(source.getSourceId(), player.getName() + " Cascade");
-		int sourceCost = game.getObject(source.getSourceId()).getManaCost().convertedManaCost();
+		int sourceCost = game.getCard(source.getSourceId()).getManaCost().convertedManaCost();
 		do {
 			card = player.getLibrary().removeFromTop(game);
 			if (card == null)
