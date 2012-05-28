@@ -30,16 +30,10 @@ package mage.sets.riseoftheeldrazi;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
+import mage.abilities.common.AnotherCreatureEntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.events.ZoneChangeEvent;
 
 /**
  *
@@ -70,40 +64,3 @@ public class SoulsAttendant extends CardImpl<SoulsAttendant> {
     }
 }
 
-class AnotherCreatureEntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl<AnotherCreatureEntersBattlefieldTriggeredAbility> {
-
-    public AnotherCreatureEntersBattlefieldTriggeredAbility(Effect effect) {
-        this(effect, false);
-    }
-
-    public AnotherCreatureEntersBattlefieldTriggeredAbility(Effect effect, boolean optional) {
-        super(Zone.BATTLEFIELD, effect, optional);
-    }
-
-    public AnotherCreatureEntersBattlefieldTriggeredAbility(AnotherCreatureEntersBattlefieldTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getToZone() == Zone.BATTLEFIELD
-                    && zEvent.getTarget().getCardType().contains(CardType.CREATURE)
-                    && zEvent.getTargetId() != this.getSourceId()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever another creature enters the battlefield, " + super.getRule();
-    }
-
-    @Override
-    public AnotherCreatureEntersBattlefieldTriggeredAbility copy() {
-        return new AnotherCreatureEntersBattlefieldTriggeredAbility(this);
-    }
-}
