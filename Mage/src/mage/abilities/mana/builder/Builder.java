@@ -27,9 +27,11 @@
  */
 package mage.abilities.mana.builder;
 
+import java.io.Serializable;
+
 /**
  * @author noxx
  */
-public interface Builder<T> {
+public interface Builder<T> extends Serializable {
     public T build(Object... options);
 }
