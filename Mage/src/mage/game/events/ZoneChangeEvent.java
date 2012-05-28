@@ -78,7 +78,11 @@ public class ZoneChangeEvent extends GameEvent {
 	public Permanent getTarget() {
 		return target;
 	}
-    
+
+    public void setTarget(Permanent target) {
+        this.target = target;
+    }
+
     public boolean isDiesEvent() {
        return (toZone == Zone.GRAVEYARD && fromZone == Zone.BATTLEFIELD);
     }

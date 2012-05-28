@@ -270,6 +270,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                     game.applyEffects();
                     if (flag)
                         permanent.setTapped(true);
+                    event.setTarget(permanent);
                     break;
                 default:
                     logger.fatal("invalid zone for card - " + toZone);
