@@ -30,8 +30,8 @@ unlink("client.zip");
 unlink("server.zip");
 
 my $zip = Archive::Zip->new();;
-$zip->addTree("client", "client");
-$zip->addTree("server", "server");
+$zip->addTree("client", "mage-client");
+$zip->addTree("server", "mage-server");
 $zip->addFile("startMage.bat");
 $zip->writeToFileNamed("../mage-bundle.zip");
 chdir("..");
