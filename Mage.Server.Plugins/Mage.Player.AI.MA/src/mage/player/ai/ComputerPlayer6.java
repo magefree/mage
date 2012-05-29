@@ -153,7 +153,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 				return false;
             case DECLARE_ATTACKERS:
                 if (game.getActivePlayerId().equals(playerId)) {
-                    declareAttackers(game, playerId);
+                    //declareAttackers(game, playerId);
                     pass();
 				} else {
 					pass();
@@ -1188,7 +1188,8 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
     @Override
 	public void selectAttackers(Game game) {
 		logger.debug("selectAttackers");
-		if (combat != null) {
+        declareAttackers(game, playerId);
+		/*if (combat != null) {
 			UUID opponentId = game.getCombat().getDefenders().iterator().next();
 			String attackers = "";
 			for (UUID attackerId: combat.getAttackers()) {
@@ -1199,7 +1200,8 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 				}
 			}
 			logger.info("declare attackers: " + (attackers.isEmpty() ? "none" : attackers));
-		}
+		}*/
+
 	}
 
 	@Override
