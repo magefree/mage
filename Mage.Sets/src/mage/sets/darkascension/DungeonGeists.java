@@ -43,6 +43,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.Watcher;
 import mage.watchers.WatcherImpl;
@@ -75,7 +76,9 @@ public class DungeonGeists extends CardImpl<DungeonGeists> {
         // When Dungeon Geists enters the battlefield, tap target creature an opponent controls. That creature doesn't untap during its controller's untap step for as long as you control Dungeon Geists.
         Ability ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect(), false);
         ability.addEffect(new DungeonGeistsEffect());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        Target target = new TargetCreaturePermanent(filter);
+        target.setRequired(true);
+        ability.addTarget(target);
         this.addAbility(ability);
         this.addWatcher(new DungeonGeistsWatcher());
     }

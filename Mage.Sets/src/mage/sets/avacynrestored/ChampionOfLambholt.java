@@ -89,22 +89,22 @@ class ChampionOfLambholtEffect extends RestrictionEffect<ChampionOfLambholtEffec
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (sourcePermanent != null && permanent != null) {
-            if (permanent.getPower().getValue() < sourcePermanent.getPower().getValue()) {
-                return true;
-            }
+        if (sourcePermanent != null && permanent.equals(sourcePermanent)) {
+            return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        if (attacker != null && blocker != null) {
+            return blocker.getPower().getValue() > attacker.getPower().getValue();
+        }
+        return true;
     }
 
     @Override
     public ChampionOfLambholtEffect copy() {
         return new ChampionOfLambholtEffect(this);
     }
-
-    @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return false;
-    }
-
 }
