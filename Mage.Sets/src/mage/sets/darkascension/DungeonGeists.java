@@ -27,7 +27,6 @@
  */
 package mage.sets.darkascension;
 
-import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -47,6 +46,8 @@ import mage.game.events.ZoneChangeEvent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.Watcher;
 import mage.watchers.WatcherImpl;
+
+import java.util.UUID;
 
 /**
  *
@@ -70,8 +71,9 @@ public class DungeonGeists extends CardImpl<DungeonGeists> {
         this.toughness = new MageInt(3);
 
         this.addAbility(FlyingAbility.getInstance());
+
         // When Dungeon Geists enters the battlefield, tap target creature an opponent controls. That creature doesn't untap during its controller's untap step for as long as you control Dungeon Geists.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect(), true);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect(), false);
         ability.addEffect(new DungeonGeistsEffect());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
