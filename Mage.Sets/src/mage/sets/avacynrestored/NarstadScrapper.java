@@ -27,8 +27,6 @@
  */
 package mage.sets.avacynrestored;
 
-import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -37,6 +35,8 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
+
+import java.util.UUID;
 
 /**
  *
@@ -53,7 +53,7 @@ public class NarstadScrapper extends CardImpl<NarstadScrapper> {
         this.toughness = new MageInt(3);
 
         // {2}: Narstad Scrapper gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Constants.Duration.EndOfTurn), new GenericManaCost(2)));
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Constants.Duration.EndOfTurn), new GenericManaCost(2)));
     }
 
     public NarstadScrapper(final NarstadScrapper card) {
