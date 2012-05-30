@@ -47,7 +47,7 @@ public class ItThatBetrays extends CardImpl<ItThatBetrays> {
     FilterNonTokenPermanent filter = new FilterNonTokenPermanent();
 
     public ItThatBetrays(UUID ownerId) {
-        super(ownerId, 7, "It That Betrays", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}");
+        super(ownerId, 7, "It That Betrays", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{11}");
         this.expansionSetCode = "ROE";
         this.subtype.add("Eldrazi");
 
