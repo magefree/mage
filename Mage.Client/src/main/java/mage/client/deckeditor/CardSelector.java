@@ -43,6 +43,7 @@ import mage.client.cards.CardsStorage;
 import mage.client.cards.ICardGrid;
 import mage.client.constants.Constants.SortBy;
 import mage.client.deckeditor.table.TableModel;
+import mage.client.util.sets.ConstructedFormats;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
 import mage.sets.Sets;
@@ -152,16 +153,19 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 		Arrays.sort(l, new Comparator<Object>() {
 		    @Override
 		    public int compare(Object o1, Object o2) {
-		        return ((ExpansionSet)o1).getName().compareTo(((ExpansionSet)o2).getName());
+		        return ((ExpansionSet)o2).getReleaseDate().compareTo(((ExpansionSet)o1).getReleaseDate());
 		    }
 		});
 		cbExpansionSet.setModel(new DefaultComboBoxModel(l));
-		cbExpansionSet.insertItemAt("All sets", 0);
+		cbExpansionSet.insertItemAt("-- All sets", 0);
+        cbExpansionSet.insertItemAt("-- Standard", 1);
 		cbExpansionSet.setSelectedIndex(0);
 		initFilter();
 		if (this.cbExpansionSet.getSelectedItem() instanceof  ExpansionSet) {
-			filter.getExpansionSetCode().add(((ExpansionSet)this.cbExpansionSet.getSelectedItem()).getCode());
-		}
+			filter.getExpansionSetCode().add(((ExpansionSet) this.cbExpansionSet.getSelectedItem()).getCode());
+		} else if (this.cbExpansionSet.getSelectedItem().equals("-- Standard")) {
+            filter.getExpansionSetCode().addAll(ConstructedFormats.getSetsByFormat("Standard"));
+        }
 		filterCards();
 	}
 
@@ -742,9 +746,14 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 			filter.getExpansionSetCode().add(((ExpansionSet)this.cbExpansionSet.getSelectedItem()).getCode());
 			filterCards();
 		} else {
-			// auto switch for ListView for "All sets" (too many cards to load)
-			jToggleListView.doClick();
-			jToggleListView.setSelected(true);
+            if (this.cbExpansionSet.getSelectedItem().equals("-- Standard")) {
+                filter.getExpansionSetCode().addAll(ConstructedFormats.getSetsByFormat("Standard"));
+                filterCards();
+            } else {
+			    // auto switch for ListView for "All sets" (too many cards to load)
+			    jToggleListView.doClick();
+			    jToggleListView.setSelected(true);
+            }
 		}
 
 	}//GEN-LAST:event_cbExpansionSetActionPerformed
@@ -762,7 +771,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 			}
 			filterCards();
 		} else {
-			JOptionPane.showMessageDialog(null, "It's not possible to generate booster for not Expansion Set but all cards\nChoose Expandsion Set firest.");
+			JOptionPane.showMessageDialog(null, "It's not possible to generate booster for not Expansion Set \nChoose Expansion Set first.");
 		}
 	}//GEN-LAST:event_btnBoosterActionPerformed
 
