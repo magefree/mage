@@ -193,6 +193,7 @@ foreach my $setName (keys %{$cards{$cardName}}) {
                                 }
                             }
                             if ($keywords{$kw}) {
+                                $vars{'abilities'} .= "\n        // " . ucfirst($kwUnchanged);
                                 if ($keywords{$kw} eq 'instance') {
                                     $vars{'abilities'} .= "\n        this.addAbility(" . $kw . "Ability.getInstance());";
                                 } elsif ($keywords{$kw} eq 'new') {
