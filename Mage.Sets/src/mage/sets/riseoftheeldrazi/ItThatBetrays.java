@@ -35,7 +35,7 @@ import mage.abilities.keyword.AnnihilatorAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterNonTokenPermanent;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
-import mage.abilities.common.OpponentSacrificesPermanentTriggeredAbility;
+import mage.abilities.common.OpponentSacrificesNonTokenPermanentTriggeredAbility;
 
 
 /**
@@ -57,7 +57,7 @@ public class ItThatBetrays extends CardImpl<ItThatBetrays> {
         this.addAbility(new AnnihilatorAbility(2));
         
         // Whenever an opponent sacrifices a nontoken permanent, put that card onto the battlefield under your control.
-        this.addAbility(new OpponentSacrificesPermanentTriggeredAbility(new ReturnToBattlefieldUnderYourControlTargetEffect()));
+        this.addAbility(new OpponentSacrificesNonTokenPermanentTriggeredAbility(new ReturnToBattlefieldUnderYourControlTargetEffect()));
     }
 
     public ItThatBetrays(final ItThatBetrays card) {
