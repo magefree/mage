@@ -78,7 +78,7 @@ public class TwoFacedCardEffectsTest extends CardTestPlayerBase {
         execute();
 
         assertHandCount(playerA, 2);
-        assertHandCount(playerB, 1);
+        assertHandCount(playerB, 2);
 
         // should transform - original
         assertPermanentCount(playerA, "Howlpack Alpha", 1);

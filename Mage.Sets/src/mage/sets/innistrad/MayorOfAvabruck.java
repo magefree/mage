@@ -27,18 +27,17 @@
  */
 package mage.sets.innistrad;
 
-import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
-import mage.Constants.TargetController;
-import mage.Constants.Zone;
+import mage.Constants.*;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.InvertCondition;
 import mage.abilities.condition.common.NoSpellsWereCastLastTurnCondition;
+import mage.abilities.condition.common.TransformedCondition;
+import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.keyword.TransformAbility;
@@ -46,12 +45,16 @@ import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  *
- * @author North
+ * @author North, noxx
  */
 public class MayorOfAvabruck extends CardImpl<MayorOfAvabruck> {
 
+    private static final String ruleText = "Other Human creatures you control get +1/+1";
+    
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Human creatures");
 
     static {
@@ -74,7 +77,9 @@ public class MayorOfAvabruck extends CardImpl<MayorOfAvabruck> {
         this.toughness = new MageInt(1);
 
         // Other Human creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
+        Effect effect = new ConditionalContinousEffect(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true), new InvertCondition(new TransformedCondition()), ruleText);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+
         // At the beginning of each upkeep, if no spells were cast last turn, transform Mayor of Avabruck.
         this.addAbility(new TransformAbility());
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(true), TargetController.ANY, false);

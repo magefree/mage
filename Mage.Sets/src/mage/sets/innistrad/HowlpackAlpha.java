@@ -27,17 +27,13 @@
  */
 package mage.sets.innistrad;
 
-import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
-import mage.Constants.TargetController;
-import mage.Constants.Zone;
+import mage.Constants.*;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.TransformedCondition;
 import mage.abilities.condition.common.TwoOrMoreSpellsWereCastLastTurnCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -49,12 +45,16 @@ import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.WolfToken;
 
+import java.util.UUID;
+
 /**
  *
- * @author North
+ * @author North, noxx
  */
 public class HowlpackAlpha extends CardImpl<HowlpackAlpha> {
 
+    private static final String ruleText = "At the beginning of your end step, put a 2/2 green Wolf creature token onto the battlefield";
+    
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Werewolf and Wolf creatures");
 
     static {
@@ -79,7 +79,8 @@ public class HowlpackAlpha extends CardImpl<HowlpackAlpha> {
         // Other Werewolf and Wolf creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
         // At the beginning of your end step, put a 2/2 green Wolf creature token onto the battlefield.
-        this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new CreateTokenEffect(new WolfToken()), false));
+        this.addAbility(new ConditionalTriggeredAbility(new BeginningOfYourEndStepTriggeredAbility(new CreateTokenEffect(new WolfToken()), false), new TransformedCondition(), ruleText));
+
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Howlpack Alpha.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), TargetController.ANY, false);
         this.addAbility(new ConditionalTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.getInstance(), TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));

@@ -62,6 +62,7 @@ public interface Card extends MageObject {
 
 	public boolean canTransform();
 	public Card getSecondCardFace();
+    public void setSecondCardFace(Card card);
 	public boolean isNightCard();
 
 	public void assignNewId();

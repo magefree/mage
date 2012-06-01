@@ -28,11 +28,7 @@
 
 package mage.abilities.effects.common;
 
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Layer;
-import mage.Constants.Outcome;
-import mage.Constants.SubLayer;
+import mage.Constants.*;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -94,6 +90,10 @@ public class CopyEffect extends ContinuousEffectImpl<CopyEffect> {
         }
         permanent.getPower().setValue(target.getPower().getValue());
         permanent.getToughness().setValue(target.getToughness().getValue());
+        if (target instanceof Permanent) {
+            permanent.setTransformed(((Permanent)target).isTransformed());
+            permanent.setSecondCardFace(((Permanent) target).getSecondCardFace());
+        }
 
         return true;
 	}
