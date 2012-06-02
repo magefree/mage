@@ -356,6 +356,10 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
     }
 
     @Override
+    public void setSecondCardFace(Card card) {
+    }
+
+    @Override
     public boolean isNightCard() {
         return false;
     }
