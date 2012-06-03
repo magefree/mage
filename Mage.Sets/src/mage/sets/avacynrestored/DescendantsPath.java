@@ -112,6 +112,7 @@ class DescendantsPathEffect extends OneShotEffect<DescendantsPathEffect> {
                         player.getLibrary().putOnBottom(card, game);
                     }
                 } else {
+                    game.informPlayers("DescendantsPath: put " + card.getName() + " on the bottom.");
                     player.getLibrary().putOnBottom(card, game);
                 }
 

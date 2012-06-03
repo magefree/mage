@@ -128,6 +128,9 @@ public class Library implements Serializable {
 	public void putOnBottom(Card card, Game game) {
 		if (card.getOwnerId().equals(playerId)) {
 			game.setZone(card.getId(), Zone.LIBRARY);
+            if (library.contains(card.getId())) {
+                library.remove(card.getId());
+            }
 			library.add(card.getId());
 		}
 		else {
