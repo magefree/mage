@@ -31,6 +31,7 @@ package mage.abilities;
 import mage.MageObject;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -58,8 +59,12 @@ public class TriggeredAbilities extends HashMap<UUID, TriggeredAbility> {
                     object = game.getObject(ability.getSourceId());
                 }
                 if (object != null && object.getAbilities().contains(ability)) {
+                    if (object instanceof Permanent) {
+                        ability.setControllerId(((Permanent) object).getControllerId());
+                    }
                     if (ability.checkTrigger(event, game)) {
-                        ability.trigger(game, ability.getControllerId());
+                        UUID controllerId = ability.getControllerId();
+                        ability.trigger(game, controllerId);
                     }
                 }
             }
