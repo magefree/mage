@@ -256,6 +256,9 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
                         for (UUID id: ability.getTargets().get(0).possibleTargets(ability.getSourceId(), ability.getControllerId(), game)) {
                             MageObject object = game.getObject(id);
                             if (object != null && object.getName().equals(t)) {
+                                if (index >= ability.getTargets().size()) {
+                                    index--;
+                                }
                                 if (ability.getTargets().get(index).getNumberOfTargets() == 1) {
                                     ability.getTargets().get(index).clearChosen();
                                 }

@@ -54,9 +54,12 @@ public class TriggeredAbilities extends HashMap<UUID, TriggeredAbility> {
     public void checkTriggers(GameEvent event, Game game) {
         for (TriggeredAbility ability: this.values()) {
             if (ability.isInUseableZone(game, true)) {
-                MageObject object = game.getLastKnownInformation(ability.getSourceId(), event.getZone());
+                MageObject object = game.getPermanent(ability.getSourceId());
                 if (object == null) {
-                    object = game.getObject(ability.getSourceId());
+                    object = game.getLastKnownInformation(ability.getSourceId(), event.getZone());
+                    if (object == null) {
+                        object = game.getObject(ability.getSourceId());
+                    }
                 }
                 if (object != null && object.getAbilities().contains(ability)) {
                     if (object instanceof Permanent) {

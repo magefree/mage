@@ -57,7 +57,10 @@ public class SorinLordOfInnistradTest extends CardTestPlayerBase {
         activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "-6: ", "Craw Wurm^Angel of Mercy");
         setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
-        
+
+        assertPermanentCount(playerA, "Craw Wurm", 1);
+        assertPermanentCount(playerA, "Angel of Mercy", 1);
+
         assertLife(playerA, 23);
         assertLife(playerB, 20);
         assertPermanentCount(playerA, "Sorin, Lord of Innistrad", 0);
