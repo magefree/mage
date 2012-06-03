@@ -14,7 +14,10 @@ public class AltarOfTheLostTest extends CardTestPlayerBase {
     public void testCard() {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Altar of the Lost");
         addCard(Constants.Zone.GRAVEYARD, playerA, "Lingering Souls");
-        
+
+        setChoice(playerA, "Black");
+        setChoice(playerA, "Black");
+
         activateAbility(3, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback {1}{B}");
         setStopAt(3, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
@@ -29,7 +32,10 @@ public class AltarOfTheLostTest extends CardTestPlayerBase {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains");
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Altar of the Lost");
         addCard(Constants.Zone.HAND, playerA, "Lingering Souls");
-        
+
+        setChoice(playerA, "Black");
+        setChoice(playerA, "Black");
+
         castSpell(3, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Lingering Souls");
         setStopAt(3, Constants.PhaseStep.BEGIN_COMBAT);
         execute();

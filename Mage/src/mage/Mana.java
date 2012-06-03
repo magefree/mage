@@ -28,12 +28,12 @@
 
 package mage;
 
-import java.io.Serializable;
-
 import mage.Constants.ColoredManaSymbol;
 import mage.Constants.ManaType;
 import mage.filter.FilterMana;
 import mage.util.Copyable;
+
+import java.io.Serializable;
 
 /**
  *
@@ -208,6 +208,8 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
 			sbMana.append("{B}");
 		for (int i = 0; i < white; i++)
 			sbMana.append("{W}");
+        for (int i = 0; i < any; i++)
+            sbMana.append("{Any}");
 		if (colorless > 0) {
 			sbMana.append("{").append(Integer.toString(colorless)).append("}");
 		}
@@ -253,7 +255,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
 			compare.setWhite(0);
 		}
 		if (compare.getColorless() < 0) {
-			int remaining = compare.getRed() + compare.getGreen() + compare.getBlack() + compare.getBlue() + compare.getWhite();
+			int remaining = compare.getRed() + compare.getGreen() + compare.getBlack() + compare.getBlue() + compare.getWhite() + compare.getAny();
 			if (compare.getColorless() + remaining < 0)
 				return false;
 		}
