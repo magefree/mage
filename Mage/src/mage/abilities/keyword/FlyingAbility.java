@@ -72,7 +72,7 @@ public class FlyingAbility extends EvasionAbility<FlyingAbility> {
 class FlyingEffect extends RestrictionEffect<FlyingEffect> {
 
 	public FlyingEffect() {
-		super(Duration.WhileOnBattlefield);
+		super(Duration.EndOfGame);
 	}
 
 	public FlyingEffect(final FlyingEffect effect) {
