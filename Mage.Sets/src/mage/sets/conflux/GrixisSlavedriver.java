@@ -28,7 +28,6 @@
 
 package mage.sets.conflux;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
@@ -39,20 +38,21 @@ import mage.abilities.keyword.UnearthAbility;
 import mage.cards.CardImpl;
 import mage.game.permanent.token.ZombieToken;
 
+import java.util.UUID;
+
 /**
- *
  * @author Loki
  */
 public class GrixisSlavedriver extends CardImpl<GrixisSlavedriver> {
 
     public GrixisSlavedriver(UUID ownerId) {
-        super(ownerId, 46, "Grixis Slavedriver", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");
+        super(ownerId, 46, "Grixis Slavedriver", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{B}");
         this.expansionSetCode = "CON";
         this.color.setBlack(true);
         this.subtype.add("Zombie");
         this.subtype.add("Giant");
         this.power = new MageInt(4);
-	this.toughness = new MageInt(4);
+        this.toughness = new MageInt(4);
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new CreateTokenEffect(new ZombieToken()), false));
         this.addAbility(new UnearthAbility(new ManaCostsImpl("{3}{B}")));
     }
