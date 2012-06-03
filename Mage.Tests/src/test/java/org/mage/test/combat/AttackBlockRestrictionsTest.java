@@ -187,13 +187,13 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
 
         // non flying vs. flying
         attack(2, playerB, "Elite Vanguard");
-        block(2, playerA, "Angelic Wall", "Elite Vanguard");
+        block(2, playerA, "Angelic Wall", "Elite Vanguard"); // can't block
         // non flying vs. non flying
         attack(2, playerB, "Arbor Elf");
-        block(2, playerA, "Llanowar Elves", "Arbor Elf");
+        block(2, playerA, "Llanowar Elves", "Arbor Elf"); // can block
         // flying vs. flying
         attack(2, playerB, "Assault Griffin");
-        block(2, playerA, "Air Elemental", "Assault Griffin");
+        block(2, playerA, "Air Elemental", "Assault Griffin"); // can block
 
         setStopAt(2, Constants.PhaseStep.END_TURN);
         execute();
