@@ -37,7 +37,8 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
-import mage.game.events.DamagedEvent;
+import mage.game.events.DamageCreatureEvent;
+import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
@@ -90,11 +91,17 @@ class InquisitorsFlailEffect extends ReplacementEffectImpl<InquisitorsFlailEffec
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
+        boolean isCombat = false;
         switch (event.getType()) {
             case DAMAGE_CREATURE:
             case DAMAGE_PLAYER:
             case DAMAGE_PLANESWALKER:
-                if (((DamagedEvent) event).isCombatDamage()) {
+                if (event instanceof DamageCreatureEvent) {
+                    isCombat = ((DamageCreatureEvent) event).isCombatDamage();
+                } else if (event instanceof DamageEvent) {
+                    isCombat = ((DamageEvent) event).isCombatDamage();
+                }
+                if (isCombat) {
                     Permanent equipment = game.getPermanent(source.getSourceId());
                     if (equipment != null && equipment.getAttachedTo() != null) {
                         UUID attachedTo = equipment.getAttachedTo();
@@ -103,7 +110,6 @@ class InquisitorsFlailEffect extends ReplacementEffectImpl<InquisitorsFlailEffec
                         } else if (event.getTargetId().equals(attachedTo)) {
                             event.setAmount(event.getAmount() * 2);
                         }
-                        return true;
                     }
                 }
         }
