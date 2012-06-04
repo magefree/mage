@@ -69,4 +69,31 @@ public class DungeonGeistsTest extends CardTestPlayerBase {
         assertTapped("Craw Wurm", true);
     }
 
+    @Test
+    public void testWithBlink() {
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 4);
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 4);
+        addCard(Constants.Zone.HAND, playerA, "Dungeon Geists");
+        addCard(Constants.Zone.HAND, playerA, "Cloudshift");
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Craw Wurm");
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Elite Vanguard");
+
+        addTarget(playerA, "Craw Wurm"); // first target Craw Wurm
+        addTarget(playerA, "Elite Vanguard"); // after Cloudshift effect (return back to battlefield) target Elite Vanguard
+
+        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Dungeon Geists");
+        castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Cloudshift", "Dungeon Geists");
+        setStopAt(2, Constants.PhaseStep.DRAW);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+        assertPermanentCount(playerA, "Dungeon Geists", 1);
+        assertPermanentCount(playerB, "Craw Wurm", 1);
+        assertPermanentCount(playerB, "Elite Vanguard", 1);
+        assertTapped("Dungeon Geists", false);
+        assertTapped("Elite Vanguard", true);
+        assertTapped("Craw Wurm", false);
+    }
+
 }

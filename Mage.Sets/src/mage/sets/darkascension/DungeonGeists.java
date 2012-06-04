@@ -45,7 +45,6 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
-import mage.watchers.Watcher;
 import mage.watchers.WatcherImpl;
 
 import java.util.UUID;
@@ -121,16 +120,28 @@ class DungeonGeistsEffect extends ReplacementEffectImpl<DungeonGeistsEffect> {
 
 	@Override
 	public boolean applies(GameEvent event, Ability source, Game game) {
-        //don't replace untap event if control of this has been lost
-        Watcher watcher = game.getState().getWatchers().get("ControlLost", source.getSourceId());
-        if (watcher == null || !watcher.conditionMet()) {
-            if (game.getTurn().getStepType() == Constants.PhaseStep.UNTAP && event.getType() == GameEvent.EventType.UNTAP) {
-                if (event.getTargetId().equals(targetPointer.getFirst(source))) {
-                    return true;
-                }
+        if (event.getType() == GameEvent.EventType.LOST_CONTROL) {
+            if (event.getPlayerId().equals(source.getControllerId()) && event.getTargetId().equals(source.getSourceId())) {
+                this.used = true;
+                return false;
             }
         }
-		return false;
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(source.getSourceId())) {
+            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+            if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
+                this.used = true;
+                return false;
+            }
+        }
+
+
+        if (game.getTurn().getStepType() == Constants.PhaseStep.UNTAP && event.getType() == GameEvent.EventType.UNTAP) {
+            if (event.getTargetId().equals(targetPointer.getFirst(source))) {
+                return true;
+            }
+        }
+
+        return false;
 	}
 }
 
@@ -148,13 +159,16 @@ class DungeonGeistsWatcher extends WatcherImpl<DungeonGeistsWatcher> {
 	public void watch(GameEvent event, Game game) {
 		if (event.getType() == GameEvent.EventType.LOST_CONTROL && event.getPlayerId().equals(controllerId) && event.getTargetId().equals(sourceId)) {
             condition = true;
+            game.replaceEvent(event);
             return;
 		}
 		if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(sourceId)) {
 			ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
 			if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
-				condition = false;
-			}
+                condition = true;
+                game.replaceEvent(event);
+                return;
+            }
 		}
 	}
 
