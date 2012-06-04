@@ -28,7 +28,6 @@
 
 package mage.sets.magic2010;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
@@ -41,6 +40,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -89,7 +90,7 @@ class SoulWardenAbility extends TriggeredAbilityImpl<SoulWardenAbility> {
 	public boolean checkTrigger(GameEvent event, Game game) {
 		if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone() == Zone.BATTLEFIELD) {
 			Permanent permanent = game.getPermanent(event.getTargetId());
-			if (permanent.getCardType().contains(CardType.CREATURE) && !permanent.getId().equals(this.getSourceId())) {
+            if (permanent.getCardType().contains(CardType.CREATURE) && !permanent.getId().equals(this.getSourceId())) {
 				return true;
 			}
 		}

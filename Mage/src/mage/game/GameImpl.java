@@ -98,8 +98,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
 	protected Map<UUID, Card> gameCards = new HashMap<UUID, Card>();
 	protected Map<UUID, MageObject> lki = new HashMap<UUID, MageObject>();
+    protected Map<UUID, MageObject> shortLivingLKI = new HashMap<UUID, MageObject>();
 	protected GameState state;
-    
+
     protected Date startTime;
     protected Date endTime;
 	protected UUID startingPlayerId;
@@ -150,6 +151,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		this.simulation = game.simulation;
         this.gameOptions = game.gameOptions;
         this.lki.putAll(game.lki);
+        this.shortLivingLKI.putAll(game.shortLivingLKI);
         if (logger.isDebugEnabled()) {
             copyCount++;
             copyTime += (System.currentTimeMillis() - t1);
@@ -650,6 +652,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                             }
                             resuming = false;
                         }
+                        resetShortLivingLKI();
                         resuming = false;
                         if (isPaused() || isGameOver()) return;
                         if (allPassed()) {
@@ -661,6 +664,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                                 fireUpdatePlayersEvent();
                                 state.getRevealed().reset();
                                 //resetLKI();
+                                resetShortLivingLKI();
                                 break;
                             } else {
                                 //removeBookmark(bookmark);
@@ -1295,6 +1299,15 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         return null;
 	}
 
+    @Override
+    public MageObject getShortLivingLKI(UUID objectId, Zone zone) {
+        MageObject object = shortLivingLKI.get(objectId);
+        if (object != null) {
+            return object.copy();
+        }
+        return null;
+    }
+
 	/**
 	 * Remembers object state to be used as Last Known Information.
 	 *
@@ -1307,6 +1320,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         if (object instanceof Permanent || object instanceof StackObject) {
             MageObject copy = object.copy();
             lki.put(objectId, copy);
+            shortLivingLKI.put(objectId, copy);
         }
 	}
 
@@ -1317,6 +1331,11 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	public void resetLKI() {
 		lki.clear();
 	}
+
+    @Override
+    public void resetShortLivingLKI() {
+        shortLivingLKI.clear();
+    }
 
 	@Override
 	public void cheat(UUID ownerId, Map<Zone, String> commands) {

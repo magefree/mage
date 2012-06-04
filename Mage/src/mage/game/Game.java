@@ -112,8 +112,10 @@ public interface Game extends MageItem, Serializable {
 	public boolean isSimulation();
 	public void setSimulation(boolean simulation);
 	public MageObject getLastKnownInformation(UUID objectId, Zone zone);
+    public MageObject getShortLivingLKI(UUID objectId, Zone zone);
 	public void rememberLKI(UUID objectId, Zone zone, MageObject object);
 	public void resetLKI();
+    public void resetShortLivingLKI();
     public void setLosingPlayer(Player player);
     public Player getLosingPlayer();
     public void setStateCheckRequired();

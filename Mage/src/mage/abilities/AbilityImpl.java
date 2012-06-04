@@ -463,7 +463,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 
         // try LKI first
         if (checkLKI) {
-            MageObject lkiTest = game.getLastKnownInformation(getSourceId(), zone);
+            MageObject lkiTest = game.getShortLivingLKI(getSourceId(), zone);
             if (lkiTest != null) {
                 return true;
             }
