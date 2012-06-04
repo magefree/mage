@@ -617,7 +617,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
     protected int damageCreature(int damage, UUID sourceId, Game game, boolean preventable, boolean combat, boolean markDamage) {
         GameEvent event = new DamageCreatureEvent(objectId, sourceId, controllerId, damage, preventable, combat);
         if (!game.replaceEvent(event)) {
-            int actualDamage = event.getAmount();
+            int actualDamage = checkProtectionAbilities(event, sourceId, game);
             if (actualDamage > 0) {
                 //Permanent source = game.getPermanent(sourceId);
                 MageObject source = game.getObject(sourceId);
@@ -638,6 +638,20 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
             }
         }
         return 0;
+    }
+    
+    private int checkProtectionAbilities(GameEvent event, UUID sourceId, Game game) {
+        MageObject source = game.getObject(sourceId);
+        if (source != null && hasProtectionFrom(source, game)) {
+            GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, this.objectId, sourceId, this.controllerId, event.getAmount(), false);
+            if (!game.replaceEvent(preventEvent)) {
+                int damage = event.getAmount();
+                event.setAmount(0);
+                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, this.objectId, sourceId, this.controllerId, damage));
+                return 0;
+            }
+        }
+        return event.getAmount();
     }
 
     private void markDamage(Counter counter) {
@@ -678,7 +692,10 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
     }
 
     protected boolean canDamage(MageObject source, Game game) {
-        return (!hasProtectionFrom(source, game));
+        //noxx: having protection doesn't prevents from dealing damage
+        // instead it adds damage prevention
+        //return (!hasProtectionFrom(source, game));
+        return true;
     }
 
     @Override

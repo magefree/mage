@@ -41,4 +41,26 @@ public class MalignusNoPreventDamageTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Vedalken Outlander", 0);
     }
 
+    /**
+     * Tests that blocking red creature by creature by pro red will prevent damage
+     */
+    @Test
+    public void testBlockAnotherWithProRed() {
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Vedalken Outlander");
+
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Ogre Resister");
+
+        attack(2, playerB, "Ogre Resister");
+        block(2, playerA, "Vedalken Outlander", "Ogre Resister");
+
+        setStopAt(2, Constants.PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertPermanentCount(playerB, "Ogre Resister", 1);
+        assertPermanentCount(playerA, "Vedalken Outlander", 1);
+    }
+
 }
