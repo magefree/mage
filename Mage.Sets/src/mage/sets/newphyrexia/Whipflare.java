@@ -27,12 +27,13 @@
  */
 package mage.sets.newphyrexia;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -44,7 +45,6 @@ public class Whipflare extends CardImpl<Whipflare> {
 
     static {
         filter.getNotCardType().add(CardType.ARTIFACT);
-        filter.setNotCardType(true);
     }
 
     public Whipflare(UUID ownerId) {
@@ -52,6 +52,8 @@ public class Whipflare extends CardImpl<Whipflare> {
         this.expansionSetCode = "NPH";
 
         this.color.setRed(true);
+
+        // Whipflare deals 2 damage to each nonartifact creature.
         this.getSpellAbility().addEffect(new DamageAllEffect(2, filter));
     }
 
