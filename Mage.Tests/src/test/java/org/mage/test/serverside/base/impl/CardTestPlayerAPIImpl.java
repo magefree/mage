@@ -580,4 +580,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public void setChoice(TestPlayer player, String choice) {
         player.addChoice(choice);
     }
+    
+    public void addTarget(TestPlayer player, String target) {
+        player.addTarget(target);
+    }
 }

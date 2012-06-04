@@ -61,6 +61,7 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
 
     private List<PlayerAction> actions = new ArrayList<PlayerAction>();
     private List<String> choices = new ArrayList<String>();
+    private List<String> targets = new ArrayList<String>();
     
     public TestPlayer(String name, Constants.RangeOfInfluence range) {
 		super(name, range);
@@ -77,6 +78,10 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
     
     public void addChoice(String choice) {
         choices.add(choice);
+    }
+    
+    public void addTarget(String target) {
+        targets.add(target);
     }
     
     @Override
@@ -204,6 +209,32 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
     }
 
     @Override
+    public boolean chooseTarget(Constants.Outcome outcome, Target target, Ability source, Game game) {
+        if (!targets.isEmpty()) {
+            if (target instanceof TargetPermanent) {
+                for (Permanent permanent : game.getBattlefield().getAllActivePermanents((FilterPermanent)target.getFilter(), game)) {
+                    for (String _target: targets) {
+                        if (permanent.getName().equals(_target)) {
+                            if (((TargetPermanent)target).canTarget(playerId, permanent.getId(), null, game) && !target.getTargets().contains(permanent.getId())) {
+                                target.add(permanent.getId(), game);
+                                targets.remove(_target);
+                                return true;
+                            }
+                        } else if ((permanent.getName()+"-"+permanent.getExpansionSetCode()).equals(_target)) {
+                            if (((TargetPermanent)target).canTarget(playerId, permanent.getId(), null, game) && !target.getTargets().contains(permanent.getId())) {
+                                target.add(permanent.getId(), game);
+                                targets.remove(_target);
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return super.chooseTarget(outcome, target, source, game);
+    }
+
+        @Override
     public boolean chooseUse(Constants.Outcome outcome, String message, Game game) {
         if (!choices.isEmpty()) {
             if (choices.get(0).equals("No")) {
