@@ -27,14 +27,11 @@
  */
 package mage.sets.innistrad;
 
-import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.DealsCombatDamageToAPlayerAttachedTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -42,12 +39,15 @@ import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  *
- * @author Alvin
+ * @author Alvin, noxx
  */
 public class Curiosity extends CardImpl<Curiosity> {
 
@@ -64,8 +64,9 @@ public class Curiosity extends CardImpl<Curiosity> {
         this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Neutral));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
+
         // Whenever enchanted creature deals damage to an opponent, you may draw a card.
-        this.addAbility(new DealsCombatDamageToAPlayerAttachedTriggeredAbility(new DrawCardControllerEffect(1), "equipped", true));
+        this.addAbility(new CuriosityAbility());
     }
 
     public Curiosity(final Curiosity card) {
@@ -82,7 +83,7 @@ public class Curiosity extends CardImpl<Curiosity> {
 class CuriosityAbility extends TriggeredAbilityImpl<CuriosityAbility> {
 
     public CuriosityAbility() {
-        super(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(1));
+        super(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(1), true);
     }
 
     public CuriosityAbility(final CuriosityAbility ability) {
@@ -97,8 +98,8 @@ class CuriosityAbility extends TriggeredAbilityImpl<CuriosityAbility> {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event instanceof DamagedPlayerEvent) {
-            DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
-            if (damageEvent.isCombatDamage() && this.sourceId.equals(event.getSourceId())) {
+            Permanent permanent = game.getPermanent(event.getSourceId());
+            if (permanent != null && game.getOpponents(this.controllerId).contains(event.getTargetId()) && permanent.getAttachments().contains(this.getSourceId())) {
                 return true;
             }
         }
