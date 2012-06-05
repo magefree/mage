@@ -27,13 +27,14 @@
  */
 package mage.sets.riseoftheeldrazi;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.AnotherCreatureEntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+
+import java.util.UUID;
 
 /**
  *
@@ -51,6 +52,7 @@ public class SoulsAttendant extends CardImpl<SoulsAttendant> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
+        // Whenever another creature enters the battlefield, you may gain 1 life.
         this.addAbility(new AnotherCreatureEntersBattlefieldTriggeredAbility(new GainLifeEffect(1), true));
     }
 

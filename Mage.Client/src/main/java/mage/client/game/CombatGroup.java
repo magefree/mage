@@ -34,11 +34,11 @@
 
 package mage.client.game;
 
-import java.util.UUID;
-
 import mage.client.cards.BigCard;
 import mage.client.util.Config;
 import mage.view.CombatGroupView;
+
+import java.util.UUID;
 
 /**
  *
@@ -62,9 +62,9 @@ public class CombatGroup extends javax.swing.JPanel {
 
 	public void update(CombatGroupView combatGroup) {
 		this.lblDefender.setText(combatGroup.getDefenderName());
-		this.attackers.loadCards(combatGroup.getAttackers(), bigCard, gameId);
+		this.attackers.loadCards(combatGroup.getAttackers(), bigCard, gameId, null);
 //		attackers.setPreferredSize(new Dimension(Config.dimensions.frameWidth + 6, Config.dimensions.frameHeight + 6));
-		this.blockers.loadCards(combatGroup.getBlockers(), bigCard, gameId);
+		this.blockers.loadCards(combatGroup.getBlockers(), bigCard, gameId, null);
 //		blockers.setPreferredSize(new Dimension(Config.dimensions.frameWidth + 6, Config.dimensions.frameHeight + 6));
 		this.attackers.setVisible(true);
 		this.blockers.setVisible(true);

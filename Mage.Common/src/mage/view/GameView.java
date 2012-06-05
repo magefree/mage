@@ -28,12 +28,6 @@
 
 package mage.view;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.PhaseStep;
 import mage.Constants.TurnPhase;
@@ -49,6 +43,9 @@ import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 
+import java.io.Serializable;
+import java.util.*;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
@@ -60,6 +57,7 @@ public class GameView implements Serializable {
 	private SimpleCardsView hand;
 	private Map<String, SimpleCardsView> opponentHands;
 	private CardsView stack = new CardsView();
+    private List<UUID> stackOrder = new ArrayList<UUID>();
 	private List<ExileView> exiles = new ArrayList<ExileView>();
 	private List<RevealedView> revealed = new ArrayList<RevealedView>();
 	private List<LookedAtView> lookedAt = new ArrayList<LookedAtView>();
@@ -95,7 +93,9 @@ public class GameView implements Serializable {
 			else {
 				stack.put(stackObject.getId(), new CardView((Spell)stackObject));
 			}
+            stackOrder.add(stackObject.getId());
 		}
+        Collections.reverse(stackOrder);
 		for (ExileZone exileZone: state.getExile().getExileZones()) {
 			exiles.add(new ExileView(exileZone, game));
 		}
@@ -202,4 +202,8 @@ public class GameView implements Serializable {
 	public boolean getSpecial() {
 		return special;
 	}
+
+    public List<UUID> getStackOrder() {
+        return stackOrder;
+    }
 }

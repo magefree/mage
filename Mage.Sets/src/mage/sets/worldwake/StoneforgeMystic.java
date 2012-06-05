@@ -28,7 +28,6 @@
 
 package mage.sets.worldwake;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
@@ -43,6 +42,8 @@ import mage.cards.CardImpl;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -66,9 +67,11 @@ public class StoneforgeMystic extends CardImpl<StoneforgeMystic> {
 		this.power = new MageInt(1);
 		this.toughness = new MageInt(2);
 
-		TargetCardInLibrary target = new TargetCardInLibrary(1, 1, filter);
+		// When Stoneforge Mystic enters the battlefield, you may search your library for an Equipment card, reveal it, put it into your hand, then shuffle your library.
+        TargetCardInLibrary target = new TargetCardInLibrary(1, 1, filter);
 		this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryRevealPutInHandEffect(target), true));
 
+        // {1}{W}, {T}: You may put an Equipment card from your hand onto the battlefield.
 		SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PlayTargetWithoutPayingManaEffect(), new ManaCostsImpl("{1}{W}"));
 		ability.addCost(new TapSourceCost());
 		ability.addTarget(new TargetCardInHand(0, 1, filter));

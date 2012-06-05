@@ -34,22 +34,19 @@
 
 package mage.client.cards;
 
+import mage.cards.MageCard;
+import mage.client.plugins.impl.Plugins;
+import mage.client.util.CardsViewUtil;
+import mage.client.util.Config;
+import mage.view.*;
+
+import javax.swing.border.Border;
 import java.awt.*;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
-import javax.swing.border.Border;
-import mage.cards.MageCard;
-import mage.client.plugins.impl.Plugins;
-import mage.client.util.CardsViewUtil;
-import mage.client.util.Config;
-import mage.view.CardView;
-import mage.view.CardsView;
-import mage.view.PermanentView;
-import mage.view.SimpleCardsView;
-import mage.view.StackAbilityView;
 
 /**
  *
@@ -111,10 +108,10 @@ public class Cards extends javax.swing.JPanel {
 	}
 
     public boolean loadCards(SimpleCardsView cardsView, BigCard bigCard, UUID gameId) {        
-        return loadCards(CardsViewUtil.convertSimple(cardsView), bigCard, gameId);
+        return loadCards(CardsViewUtil.convertSimple(cardsView), bigCard, gameId, null);
     }
     
-	public boolean loadCards(CardsView cardsView, BigCard bigCard, UUID gameId) {
+	public boolean loadCards(CardsView cardsView, BigCard bigCard, UUID gameId, java.util.List<UUID> order) {
 		boolean changed = false;
 		
 		for (Iterator<Entry<UUID, MageCard>> i = cards.entrySet().iterator(); i.hasNext();) {
@@ -148,7 +145,7 @@ public class Cards extends javax.swing.JPanel {
 		}
 		
 		if (changed) {
-			layoutCards(getCardDimension());
+			layoutCards(getCardDimension(), cards, order);
 		}
 
         if (!isVisibleIfEmpty) {
@@ -195,14 +192,27 @@ public class Cards extends javax.swing.JPanel {
         }
 	}
 	
-	private void layoutCards(Dimension dimension) {
+	private void layoutCards(Dimension dimension, Map<UUID, MageCard> cards, java.util.List<UUID> order) {
 		if (Plugins.getInstance().isCardPluginLoaded()) {
 			int dx = GAP_X;
-			for (MageCard card: cards.values()) {
-				card.setLocation(dx, 0);
-				card.setCardBounds(dx, 0, dimension.width, dimension.height);
-				dx += dimension.width + GAP_X;
-			}
+            if (order != null) {
+                for (UUID cardId : order) {
+                    MageCard card = cards.get(cardId);
+                    if (card != null) {
+                        card.setLocation(dx, 0);
+                        card.setCardBounds(dx, 0, dimension.width, dimension.height);
+                        dx += dimension.width + GAP_X;
+                    } else {
+                        System.err.println("[ERROR] Cards.java: couldn't find a card from ordered list!");
+                    }
+                }
+            } else {
+                for (MageCard card: cards.values()) {
+                    card.setLocation(dx, 0);
+                    card.setCardBounds(dx, 0, dimension.width, dimension.height);
+                    dx += dimension.width + GAP_X;
+                }
+            }
 		}
 	}
 
@@ -254,7 +264,7 @@ public class Cards extends javax.swing.JPanel {
 
 	public void setCardDimension(Dimension dimension) {
 		this.cardDimension = dimension;
-        layoutCards(cardDimension);
+        layoutCards(cardDimension, cards, null);
     }
 
     public void setZone(String zone) {
