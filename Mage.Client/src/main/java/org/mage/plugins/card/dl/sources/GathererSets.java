@@ -28,6 +28,7 @@ public class GathererSets implements Iterable<DownloadJob> {
         symbolsReplacements.put("PLS", "PS");
         symbolsReplacements.put("USG", "UZ");
         symbolsReplacements.put("WTH", "WL");
+        symbolsReplacements.put("ULG", "GU");
     }
 
     public GathererSets(String path) {
