@@ -37,7 +37,6 @@ import mage.game.Game;
 import mage.game.stack.Spell;
 
 /**
- *
  * @author jeffwadsworth
  */
 public class BecomesTargetControllerSpellTriggeredAbility extends TriggeredAbilityImpl<BecomesTargetControllerSpellTriggeredAbility> {
@@ -58,14 +57,15 @@ public class BecomesTargetControllerSpellTriggeredAbility extends TriggeredAbili
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == EventType.TARGETED) {
-            if (event.getPlayerId().equals(controllerId)) {
+            if (event.getTargetId().equals(controllerId)) {
                 if (game.getObject(event.getSourceId()) instanceof Spell) {
-                return true;
+                    return true;
                 }
             }
         }
         return false;
     }
+
     @Override
     public String getRule() {
         return "When you become the target of a spell, " + super.getRule();
