@@ -68,17 +68,28 @@ public abstract class ExpansionSet implements Serializable {
     protected int numBoosterDoubleFaced;
     protected int ratioBoosterMythic;
 
+    protected String packageName;
+
     public ExpansionSet(String name, String code, String symbolCode, String packageName, Date releaseDate, SetType setType) {
         this.name = name;
         this.code = code;
         this.symbolCode = symbolCode;
         this.releaseDate = releaseDate;
         this.setType = setType;
-        this.cards = getCardClassesForPackage(packageName);
-        this.rarities = getCardsByRarity();
+        this.packageName = packageName;
+        //this.cards = getCardClassesForPackage(packageName);
+        //this.rarities = getCardsByRarity();
     }
 
     public List<Card> getCards() {
+        if (cards == null) {
+            synchronized (this) {
+                if (cards == null) {
+                    this.cards = getCardClassesForPackage(packageName);
+                    this.rarities = getCardsByRarity();
+                }
+            }
+        }
         return cards;
     }
 
@@ -118,7 +129,7 @@ public abstract class ExpansionSet implements Serializable {
     }
 
     public Card findCard(String name) {
-        for (Card card : cards) {
+        for (Card card : getCards()) {
             if (name.equalsIgnoreCase(card.getName())) {
                 Card newCard = card.copy();
                 newCard.assignNewId();
@@ -129,7 +140,7 @@ public abstract class ExpansionSet implements Serializable {
     }
 
     public Card findCard(int cardNum) {
-        for (Card card : cards) {
+        for (Card card : getCards()) {
             if (cardNum == card.getCardNumber()) {
                 Card newCard = card.copy();
                 newCard.assignNewId();
@@ -141,7 +152,7 @@ public abstract class ExpansionSet implements Serializable {
 
     public Card findCard(String name, boolean random) {
         List<Card> foundCards = new ArrayList<Card>();
-        for (Card card : cards) {
+        for (Card card : getCards()) {
             if (name.equalsIgnoreCase(card.getName())) {
                 foundCards.add(card);
             }
@@ -155,7 +166,7 @@ public abstract class ExpansionSet implements Serializable {
     }
 
     public String findCardName(int cardNum) {
-        for (Card card : cards) {
+        for (Card card : getCards()) {
             if (card.getCardNumber() == cardNum)
                 return card.getClass().getCanonicalName();
         }
@@ -425,7 +436,7 @@ public abstract class ExpansionSet implements Serializable {
     }
 
     protected Card getRandomDoubleFaced() {
-        int size = cards.size();
+        int size = getCards().size();
         if (size > 0) {
             Card card = cards.get(rnd.nextInt(size));
             int retryCount = 1000;

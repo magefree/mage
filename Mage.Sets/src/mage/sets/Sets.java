@@ -120,31 +120,53 @@ public class Sets extends HashMap<String, ExpansionSet> {
 
 	private void addSet(ExpansionSet set) {
 		this.put(set.getCode(), set);
-        cards.addAll(set.getCards());
-		for (Card card: set.getCards()) {
-			names.add(card.getName());
-			if (card.getCardType().contains(CardType.CREATURE)) {
-				for (String type :  card.getSubtype()) {
-					creatureTypes.add(type);
-				}
-			}
-			if (!card.getCardType().contains(CardType.LAND)) nonLandNames.add(card.getName());
-		}
 	}
 
+    private static void loadCards() {
+        if (cards.isEmpty()) {
+            System.out.println("Loading cards...");
+            long t1 = System.currentTimeMillis();
+            for (ExpansionSet set : getInstance().values()) {
+                cards.addAll(set.getCards());
+                for (Card card : set.getCards()) {
+                    names.add(card.getName());
+                    if (card.getCardType().contains(CardType.CREATURE)) {
+                        for (String type : card.getSubtype()) {
+                            creatureTypes.add(type);
+                        }
+                    }
+                    if (!card.getCardType().contains(CardType.LAND)) nonLandNames.add(card.getName());
+                }
+            }
+            System.out.println("It took " + (System.currentTimeMillis() - t1) / 1000 + " ms to load all cards.");
+        }
+    }
+
 	public static Set<String> getCardNames() {
+        if (names.isEmpty()) {
+            loadCards();
+        }
 		return names;
 	}
 
 	public static Set<String> getNonLandCardNames() {
+        if (nonLandNames.isEmpty()) {
+            loadCards();
+        }
 		return nonLandNames;
 	}
 
 	public static Set<String> getCreatureTypes() {
+        if (creatureTypes.isEmpty()) {
+            loadCards();
+        }
 		return creatureTypes;
 	}
 
 	public static Card getRandomCard() {
+        if (cards.isEmpty()) {
+            loadCards();
+        }
 		return cards.get(rnd.nextInt(cards.size()));
 	}
 

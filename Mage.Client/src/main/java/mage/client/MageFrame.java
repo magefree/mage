@@ -121,6 +121,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     private static ScheduledExecutorService pingTaskExecutor = Executors.newSingleThreadScheduledExecutor();
 
+    private static long startTime;
+
 	/**
 	 * @return the session
 	 */
@@ -300,6 +302,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 				disableButtons();
 				if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_CHECK, "true").equals("true"))
 					checkForNewImages();
+                logger.info("Client start up time: " + ((System.currentTimeMillis() - startTime) / 1000 + " ms"));
 				if (autoConnect())
 					enableButtons();
 				else {
@@ -929,6 +932,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 	 * @param args the command line arguments
 	 */
 	public static void main(final String args[]) {
+
+        startTime = System.currentTimeMillis();
 
 		Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
 			public void uncaughtException(Thread t, Throwable e) {
