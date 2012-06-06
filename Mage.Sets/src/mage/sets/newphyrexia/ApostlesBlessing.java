@@ -103,8 +103,10 @@ class ApostlesBlessingEffect extends GainAbilityTargetEffect {
 	public boolean apply(Game game, Ability source) {
 		ChoiceColorOrArtifact choice = (ChoiceColorOrArtifact) source.getChoices().get(0);
         if (choice.isArtifactSelected()) {
-            protectionFilter.getCardType().add(Constants.CardType.ARTIFACT);
-            protectionFilter.setScopeCardType(ComparisonScope.Any);
+            if (!protectionFilter.getCardType().contains(CardType.ARTIFACT)) {
+                protectionFilter.getCardType().add(Constants.CardType.ARTIFACT);
+                protectionFilter.setScopeCardType(ComparisonScope.Any);
+            }
         } else {
             protectionFilter.setColor(choice.getColor());
             protectionFilter.setUseColor(true);
@@ -112,6 +114,7 @@ class ApostlesBlessingEffect extends GainAbilityTargetEffect {
         }
 
 		protectionFilter.setMessage(choice.getChoice());
+        ((ProtectionAbility)ability).setFilter(protectionFilter);
 		Permanent creature = game.getPermanent(source.getFirstTarget());
 		if (creature != null) {
 			creature.addAbility(ability, game);
