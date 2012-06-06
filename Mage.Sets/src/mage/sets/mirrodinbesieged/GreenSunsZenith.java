@@ -36,6 +36,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ShuffleSpellEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -87,6 +88,7 @@ class GreenSunsZenithSearchEffect extends OneShotEffect<GreenSunsZenithSearchEff
 		filter.getColor().setGreen(true);
 		filter.setUseColor(true);
 		filter.getCardType().add(CardType.CREATURE);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
 		//Set the mana cost one higher to 'emulate' a less than or equal to comparison.
 		filter.setConvertedManaCost(source.getManaCostsToPay().getX() + 1);
 		filter.setConvertedManaCostComparison(ComparisonType.LessThan);
