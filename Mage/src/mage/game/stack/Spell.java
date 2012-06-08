@@ -436,7 +436,12 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 		throw new UnsupportedOperationException("Unsupported operation");
 	}
 
-	public void setCopiedSpell(boolean isCopied) {
+    @Override
+    public int getZoneChangeCounter() {
+        return card.getZoneChangeCounter();
+    }
+
+    public void setCopiedSpell(boolean isCopied) {
 		this.copiedSpell = isCopied;
 	}
 	

@@ -66,6 +66,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
     protected boolean nightCard;
     protected SpellAbility spellAbility;
     protected boolean flipCard;
+    protected int zoneChangeCounter = 1;
 
     public CardImpl(UUID ownerId, int cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs) {
         this(ownerId, name);
@@ -277,6 +278,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                     return false;
             }
             setControllerId(ownerId);
+            updateZoneChangeCounter();
             game.setZone(objectId, event.getToZone());
             game.fireEvent(event);
             return game.getState().getZone(objectId) == toZone;
@@ -342,6 +344,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
             } else {
                 game.getExile().createZone(exileId, name).add(this);
             }
+            updateZoneChangeCounter();
             game.setZone(objectId, event.getToZone());
             game.fireEvent(event);
             return true;
@@ -373,6 +376,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                     logger.warn("Couldn't find card in fromZone, card=" + getName() + ", fromZone=" + fromZone);
                 }
             }
+            updateZoneChangeCounter();
             PermanentCard permanent = new PermanentCard(this, controllerId);
             game.getBattlefield().addPermanent(permanent);
             game.setZone(objectId, Zone.BATTLEFIELD);
@@ -420,7 +424,17 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
         return this.nightCard;
     }
 
+    @Override
     public boolean isFlipCard() {
         return flipCard;
+    }
+
+    @Override
+    public int getZoneChangeCounter() {
+        return zoneChangeCounter;
+    }
+
+    private void updateZoneChangeCounter() {
+        zoneChangeCounter++;
     }
 }

@@ -31,6 +31,7 @@ package mage.target;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
+import mage.cards.Card;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -45,7 +46,8 @@ import java.util.*;
 public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 
 	protected Map<UUID, Integer> targets = new LinkedHashMap<UUID, Integer>();
-
+    protected Map<UUID, Integer> zoneChangeCounters = new HashMap<UUID, Integer>();
+    
 	protected String targetName;
 	protected Zone zone;
 	protected int maxNumberOfTargets;
@@ -73,6 +75,7 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 		this.required = target.required;
 		this.chosen = target.chosen;
         this.targets.putAll(target.targets);
+        this.zoneChangeCounters.putAll(target.zoneChangeCounters);
 	}
 
 	@Override
@@ -152,6 +155,7 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 	@Override
 	public void clearChosen() {
 		targets.clear();
+        zoneChangeCounters.clear();
 		chosen = false;
 	}
 
@@ -160,14 +164,17 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 		if (maxNumberOfTargets == 0 || targets.size() < maxNumberOfTargets) {
 			if (!targets.containsKey(id)) {
 				targets.put(id, 0);
+                rememberZoneChangeCounter(id, game);
 			}
 		}
 	}
     
     @Override
     public void remove(UUID id) {
-        if (targets.containsKey(id))
+        if (targets.containsKey(id)) {
             targets.remove(id);
+            zoneChangeCounters.remove(id);
+        }
     }
 
 	@Override
@@ -183,6 +190,7 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 				if (source != null) {
 					if (!game.replaceEvent(GameEvent.getEvent(EventType.TARGET, id, source.getId(), source.getControllerId()))) {
 						targets.put(id, 0);
+                        rememberZoneChangeCounter(id, game);
 						chosen = targets.size() >= minNumberOfTargets;
                         if (!skipEvent)
                             game.fireEvent(GameEvent.getEvent(EventType.TARGETED, id, source.getId(), source.getControllerId()));
@@ -194,6 +202,13 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 			}
 		}
 	}
+
+    private void rememberZoneChangeCounter(UUID id, Game game) {
+        Card card = game.getCard(id);
+        if (card != null) {
+            zoneChangeCounters.put(id, card.getZoneChangeCounter());
+        }
+    }
 
     @Override
 	public void addTarget(UUID id, int amount, Ability source, Game game) {
@@ -208,6 +223,7 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 		if (source != null) {
 			if (!game.replaceEvent(GameEvent.getEvent(EventType.TARGET, id, source.getId(), source.getControllerId()))) {
 				targets.put(id, amount);
+                rememberZoneChangeCounter(id, game);
 				chosen = targets.size() >= minNumberOfTargets;
                 if (!skipEvent)
                     game.fireEvent(GameEvent.getEvent(EventType.TARGETED, id, source.getId(), source.getControllerId()));
@@ -215,6 +231,7 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 		}
 		else {
 			targets.put(id, amount);
+            rememberZoneChangeCounter(id, game);
 		}
 	}
     
@@ -248,6 +265,12 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 	public boolean isLegal(Ability source, Game game) {
 		//20101001 - 608.2b
         for (UUID targetId: targets.keySet()) {
+            Card card = game.getCard(targetId);
+            if (card != null) {
+                if (zoneChangeCounters.containsKey(targetId) && zoneChangeCounters.get(targetId) != card.getZoneChangeCounter()) {
+                    continue; // it's not legal so continue to have a look at other targeted cards
+                }
+            }
 			if (game.replaceEvent(GameEvent.getEvent(EventType.TARGET, targetId, source.getId(), source.getControllerId())))
 				continue;
 			if (canTarget(targetId, source, game))
