@@ -68,7 +68,7 @@ public class DearlyDeparted extends CardImpl<DearlyDeparted> {
         this.addAbility(FlyingAbility.getInstance());
 
         // As long as Dearly Departed is in your graveyard, each Human creature you control enters the battlefield with an additional +1/+1 counter on it.
-        Ability ability0 = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)));
+        Ability ability0 = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)));
         this.addAbility(new SimpleStaticAbility(Constants.Zone.GRAVEYARD, new GainAbilityControlledEffect(ability0, Constants.Duration.OneUse, filterHuman)));
     }
 
