@@ -28,19 +28,13 @@
 
 package mage.abilities.effects;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
-import mage.Constants.Duration;
-import mage.Constants.EffectType;
-import mage.Constants.Layer;
-import mage.Constants.Outcome;
-import mage.Constants.SubLayer;
+import mage.Constants.*;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.TriggeredAbility;
 import mage.game.Game;
+
+import java.util.*;
 
 /**
  *
@@ -55,6 +49,7 @@ public abstract class ContinuousEffectImpl<T extends ContinuousEffectImpl<T>> ex
 	protected boolean used = false;
 	protected boolean affectedObjectsSet = false;
 	protected List<UUID> objects = new ArrayList<UUID>();
+    protected Map<UUID, Integer> metadata = new HashMap<UUID, Integer>();
 
 	public ContinuousEffectImpl(Duration duration, Outcome outcome) {
 		super(outcome);
@@ -156,5 +151,10 @@ public abstract class ContinuousEffectImpl<T extends ContinuousEffectImpl<T>> ex
 	public SubLayer getSublayer() {
 		return sublayer;
 	}
+
+    @Override
+    public void overrideRuleText(String text) {
+        this.staticText = text;
+    }
 
 }

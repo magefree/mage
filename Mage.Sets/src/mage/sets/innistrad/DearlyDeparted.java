@@ -28,7 +28,6 @@
 package mage.sets.innistrad;
 
 
-import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -36,6 +35,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -44,6 +44,8 @@ import mage.counters.CounterType;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  * @author nantuko
  */
@@ -51,6 +53,8 @@ public class DearlyDeparted extends CardImpl<DearlyDeparted> {
 
     private static final FilterCreaturePermanent filterHuman = new FilterCreaturePermanent("Human creatures");
 
+    private static final String ruleText = "As long as Dearly Departed is in your graveyard, each Human creature you control enters the battlefield with an additional +1/+1 counter on it";
+    
     static {
         filterHuman.getSubtype().add("Human");
         filterHuman.setScopeSubtype(Filter.ComparisonScope.Any);
@@ -68,8 +72,10 @@ public class DearlyDeparted extends CardImpl<DearlyDeparted> {
         this.addAbility(FlyingAbility.getInstance());
 
         // As long as Dearly Departed is in your graveyard, each Human creature you control enters the battlefield with an additional +1/+1 counter on it.
-        Ability ability0 = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.GRAVEYARD, new GainAbilityControlledEffect(ability0, Constants.Duration.OneUse, filterHuman)));
+        Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)));
+        ContinuousEffect effect = new GainAbilityControlledEffect(ability, Constants.Duration.WhileInGraveyard, filterHuman);
+        effect.overrideRuleText(ruleText);
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.GRAVEYARD, effect));
     }
 
     public DearlyDeparted(final DearlyDeparted card) {

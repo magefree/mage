@@ -28,12 +28,13 @@
 
 package mage.abilities.effects;
 
-import java.util.Date;
 import mage.Constants.Duration;
 import mage.Constants.Layer;
 import mage.Constants.SubLayer;
 import mage.abilities.Ability;
 import mage.game.Game;
+
+import java.util.Date;
 
 /**
  *
@@ -52,4 +53,5 @@ public interface ContinuousEffect<T extends ContinuousEffect<T>> extends Effect<
 	public void init(Ability source, Game game);
 	public Layer getLayer();
 	public SubLayer getSublayer();
+    public void overrideRuleText(String text);
 }
