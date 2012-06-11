@@ -32,6 +32,7 @@ import mage.MageObject;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentCard;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -54,24 +55,45 @@ public class TriggeredAbilities extends HashMap<UUID, TriggeredAbility> {
     public void checkTriggers(GameEvent event, Game game) {
         for (TriggeredAbility ability: this.values()) {
             if (ability.isInUseableZone(game, true)) {
-                MageObject object = game.getPermanent(ability.getSourceId());
-                if (object == null) {
-                    object = game.getLastKnownInformation(ability.getSourceId(), event.getZone());
-                    if (object == null) {
-                        object = game.getObject(ability.getSourceId());
-                    }
-                }
-                if (object != null && object.getAbilities().contains(ability)) {
-                    if (object instanceof Permanent) {
-                        ability.setControllerId(((Permanent) object).getControllerId());
-                    }
-                    if (ability.checkTrigger(event, game)) {
-                        UUID controllerId = ability.getControllerId();
-                        ability.trigger(game, controllerId);
+                MageObject object = getMageObject(event, game, ability);
+                if (object != null) {
+                    if (checkAbilityStillExists(ability, object)) {
+                        if (object instanceof Permanent) {
+                            ability.setControllerId(((Permanent) object).getControllerId());
+                        }
+                        if (ability.checkTrigger(event, game)) {
+                            UUID controllerId = ability.getControllerId();
+                            ability.trigger(game, controllerId);
+                        }
                     }
                 }
             }
         }
+    }
+
+    private boolean checkAbilityStillExists(TriggeredAbility ability, MageObject object) {
+        boolean exists = true;
+        if (!object.getAbilities().contains(ability)) {
+            exists = false;
+            if (object instanceof PermanentCard) {
+                PermanentCard permanent = (PermanentCard)object;
+                if (permanent.canTransform()) {
+                    exists = permanent.getCard().getAbilities().contains(ability);
+                }
+            }
+        }
+        return exists;
+    }
+
+    private MageObject getMageObject(GameEvent event, Game game, TriggeredAbility ability) {
+        MageObject object = game.getPermanent(ability.getSourceId());
+        if (object == null) {
+            object = game.getLastKnownInformation(ability.getSourceId(), event.getZone());
+            if (object == null) {
+                object = game.getObject(ability.getSourceId());
+            }
+        }
+        return object;
     }
 
     public void add(TriggeredAbility ability) {
