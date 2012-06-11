@@ -91,7 +91,7 @@ class InvaderParasiteImprintEffect extends OneShotEffect<InvaderParasiteImprintE
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        Permanent targetPermanent = game.getPermanent(targetPointer.getFirst(source));
+        Permanent targetPermanent = game.getPermanent(targetPointer.getFirst(game, source));
         if (sourcePermanent != null && targetPermanent != null) {
             targetPermanent.moveToExile(getId(), "Invader Parasite (Imprint)", source.getSourceId(), game);
             sourcePermanent.imprint(targetPermanent.getId(), game);

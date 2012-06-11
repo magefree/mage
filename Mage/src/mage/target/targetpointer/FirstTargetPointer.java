@@ -1,33 +1,72 @@
 package mage.target.targetpointer;
 
 import mage.abilities.Ability;
+import mage.cards.Card;
+import mage.game.Game;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class FirstTargetPointer implements TargetPointer {
-    private static FirstTargetPointer instance = new FirstTargetPointer();
+
+    private Map<UUID, Integer> zoneChangeCounter = new HashMap<UUID, Integer>();
 
     public static FirstTargetPointer getInstance() {
-        return instance;
+        return new FirstTargetPointer();
+    }
+
+    public FirstTargetPointer() {
+    }
+
+    public FirstTargetPointer(FirstTargetPointer firstTargetPointer) {
+        this.zoneChangeCounter = new HashMap<UUID, Integer>();
+        for (Map.Entry<UUID, Integer> entry : firstTargetPointer.zoneChangeCounter.entrySet()) {
+            this.zoneChangeCounter.put(entry.getKey(), entry.getValue());
+        }
     }
 
     @Override
-    public List<UUID> getTargets(Ability source) {
+    public void init(Game game, Ability source) {
+        if (source.getTargets().size() > 0) {
+            for (UUID target : source.getTargets().get(0).getTargets()) {
+                Card card = game.getCard(target);
+                if (card != null) {
+                    this.zoneChangeCounter.put(target, card.getZoneChangeCounter());
+                }    
+            }
+        }
+    }
+
+    @Override
+    public List<UUID> getTargets(Game game, Ability source) {
         ArrayList<UUID> target = new ArrayList<UUID>();
-        if (source.getTargets().size() > 0)
-            target.addAll(source.getTargets().get(0).getTargets());
+        if (source.getTargets().size() > 0) {
+            for (UUID targetId : source.getTargets().get(0).getTargets()) {
+                Card card = game.getCard(targetId);
+                if (card != null && zoneChangeCounter.containsKey(targetId)
+                        && card.getZoneChangeCounter() != zoneChangeCounter.get(targetId)) {
+                    continue;
+                }
+                target.add(targetId);
+            }
+        }
         return target;
     }
 
     @Override
-    public UUID getFirst(Ability source) {
-        return source.getFirstTarget();
+    public UUID getFirst(Game game, Ability source) {
+        UUID targetId = source.getFirstTarget();
+        if (zoneChangeCounter.containsKey(targetId)) {
+            Card card = game.getCard(targetId);
+            if (card != null && zoneChangeCounter.containsKey(targetId)
+                        && card.getZoneChangeCounter() != zoneChangeCounter.get(targetId)) {
+                return null;
+            }
+        }
+        return targetId;
     }
 
     @Override
     public TargetPointer copy() {
-        return instance;
+        return new FirstTargetPointer(this);
     }
 }

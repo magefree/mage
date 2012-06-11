@@ -87,7 +87,7 @@ class BeastWithinEffect extends OneShotEffect<BeastWithinEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(source), Constants.Zone.BATTLEFIELD);
+        Permanent permanent = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(game, source), Constants.Zone.BATTLEFIELD);
         if (permanent != null) {
             BeastToken token = new BeastToken();
             token.putOntoBattlefield(1, game, source.getId(), permanent.getControllerId());

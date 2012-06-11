@@ -65,7 +65,7 @@ public class PutOnLibraryTargetEffect extends OneShotEffect<PutOnLibraryTargetEf
     @Override
     public boolean apply(Game game, Ability source) {
         boolean result = false;
-        for (UUID targetId : targetPointer.getTargets(source)) {
+        for (UUID targetId : targetPointer.getTargets(game, source)) {
             switch (game.getState().getZone(targetId)) {
                 case BATTLEFIELD:
                     Permanent permanent = game.getPermanent(targetId);

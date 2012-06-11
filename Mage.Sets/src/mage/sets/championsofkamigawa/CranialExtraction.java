@@ -86,7 +86,7 @@ class CranialExtractionEffect extends OneShotEffect<CranialExtractionEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(targetPointer.getFirst(source));
+		Player player = game.getPlayer(targetPointer.getFirst(game, source));
 		Player controller = game.getPlayer(source.getControllerId());
 		if (player != null && controller != null) {
 			Choice cardChoice = new ChoiceImpl();

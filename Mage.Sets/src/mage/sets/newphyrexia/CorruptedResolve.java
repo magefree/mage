@@ -80,11 +80,11 @@ class CorruptedResolveEffect extends OneShotEffect<CorruptedResolveEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(targetPointer.getFirst(source));
+        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
         if (spell != null) {
             Player player = game.getPlayer(spell.getControllerId());
             if (player != null && player.getCounters().containsKey(CounterType.POISON))
-                return game.getStack().counter(targetPointer.getFirst(source), source.getSourceId(), game);
+                return game.getStack().counter(targetPointer.getFirst(game, source), source.getSourceId(), game);
         }
         return false;
     }

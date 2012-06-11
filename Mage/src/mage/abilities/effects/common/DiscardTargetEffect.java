@@ -77,7 +77,7 @@ public class DiscardTargetEffect extends OneShotEffect<DiscardTargetEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(source));
+        Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
 			if (randomDiscard) {
 				int maxAmount = Math.min(amount.calculate(game, source), player.getHand().size());

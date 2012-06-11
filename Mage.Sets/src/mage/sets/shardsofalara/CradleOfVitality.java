@@ -124,7 +124,7 @@ class CradleOfVitalityEffect extends OneShotEffect<CradleOfVitalityEffect> {
     public boolean apply(Game game, Ability source) {
     	int affectedTargets = 0;
     	Integer amount = (Integer) getValue("amount");
-		for (UUID uuid : targetPointer.getTargets(source)) {
+		for (UUID uuid : targetPointer.getTargets(game, source)) {
 			Permanent permanent = game.getPermanent(uuid);
 			permanent.addCounters(CounterType.P1P1.createInstance(amount), game);
 			affectedTargets ++;

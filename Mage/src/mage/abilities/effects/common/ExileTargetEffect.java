@@ -75,7 +75,7 @@ public class ExileTargetEffect extends OneShotEffect<ExileTargetEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(targetPointer.getFirst(source));
+		Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
 
         if (exileId == null) {
             exileId = getId();
@@ -84,7 +84,7 @@ public class ExileTargetEffect extends OneShotEffect<ExileTargetEffect> {
 		if (permanent != null) {
         	return permanent.moveToExile(exileId, exileZone, source.getSourceId(), game);
 		} else {
-            Card card = game.getCard(targetPointer.getFirst(source));
+            Card card = game.getCard(targetPointer.getFirst(game, source));
             if (card != null) {
                 return card.moveToExile(exileId, exileZone, source.getSourceId(), game);
             }

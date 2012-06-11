@@ -142,13 +142,13 @@ class ChandraAblazeEffect2 extends OneShotEffect<ChandraAblazeEffect2> {
     public boolean apply(Game game, Ability source) {
         Card card = (Card) this.getValue("discardedCard");
         if (card != null && card.getColor().isRed()) {
-            Permanent permanent = game.getPermanent(targetPointer.getFirst(source));
+            Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
             if (permanent != null) {
                 permanent.damage(4, source.getSourceId(), game, true, false);
                 return true;
             }
 
-            Player player = game.getPlayer(targetPointer.getFirst(source));
+            Player player = game.getPlayer(targetPointer.getFirst(game, source));
             if (player != null) {
                 player.damage(4, source.getSourceId(), game, false, true);
                 return true;

@@ -115,7 +115,7 @@ class HavengulLichPlayEffect extends AsThoughEffectImpl<HavengulLichPlayEffect> 
 	public boolean applies(UUID sourceId, Ability source, Game game) {
         Card card = game.getCard(sourceId);
         if (card != null && game.getState().getZone(card.getId()) == Constants.Zone.GRAVEYARD) {
-            if (targetPointer.getFirst(source).equals(card.getId()))
+            if (targetPointer.getFirst(game, source).equals(card.getId()))
                 return true;
         }
         return false;
@@ -136,7 +136,7 @@ class HavengulLichPlayedEffect extends OneShotEffect<HavengulLichPlayedEffect> {
     
     @Override
     public boolean apply(Game game, Ability source) {
-        DelayedTriggeredAbility ability = new HavengulLichDelayedTriggeredAbility(targetPointer.getFirst(source));
+        DelayedTriggeredAbility ability = new HavengulLichDelayedTriggeredAbility(targetPointer.getFirst(game, source));
         ability.setSourceId(source.getSourceId());
         ability.setControllerId(source.getControllerId());
         game.addDelayedTriggeredAbility(ability);

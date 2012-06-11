@@ -53,7 +53,7 @@ public class AddCardSubTypeTargetEffect extends ContinuousEffectImpl<AddCardSubT
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent target = game.getPermanent(targetPointer.getFirst(source));
+        Permanent target = game.getPermanent(targetPointer.getFirst(game, source));
         if (target != null) {
             if (!target.hasSubtype(addedSubType)) {
                 target.getSubtype().add(addedSubType);

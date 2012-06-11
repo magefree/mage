@@ -113,7 +113,7 @@ class GolemArtisanEffect extends OneShotEffect<GolemArtisanEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(targetPointer.getFirst(source));
+		Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
 		Player playerControls = game.getPlayer(source.getControllerId());
 		if (permanent != null && playerControls != null) {
 			Choice abilityChoice = new ChoiceImpl();

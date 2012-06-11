@@ -155,7 +155,7 @@ class MimicVatEffect extends OneShotEffect<MimicVatEffect> {
 		permanent.clearImprinted(game);
 
 		// Imprint a new one
-		UUID target = targetPointer.getFirst(source);
+		UUID target = targetPointer.getFirst(game, source);
 		if (target != null) {
 			Card card = game.getCard(target);
 			card.moveToExile(getId(), "Mimic Vat (Imprint)", source.getSourceId(), game);

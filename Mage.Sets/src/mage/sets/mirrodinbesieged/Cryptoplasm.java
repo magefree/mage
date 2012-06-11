@@ -91,7 +91,7 @@ class CryptoplasmTransformEffect extends ContinuousEffectImpl<CryptoplasmTransfo
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(targetPointer.getFirst(source));
+        Card card = game.getCard(targetPointer.getFirst(game, source));
         Permanent permanent = game.getPermanent(source.getSourceId());
 
         if (card == null || permanent == null)

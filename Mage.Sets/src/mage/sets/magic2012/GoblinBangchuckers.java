@@ -91,12 +91,12 @@ class GoblinBangchuckersEffect extends OneShotEffect<GoblinBangchuckersEffect> {
 		Player controller = game.getPlayer(source.getControllerId());
 		if (controller != null) {
 			if (controller.flipCoin(game)) {
-				Permanent permanent = game.getPermanent(targetPointer.getFirst(source));
+				Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
 				if (permanent != null) {
 					permanent.damage(2, source.getSourceId(), game, true, false);
 					return true;
 				}
-				Player player = game.getPlayer(targetPointer.getFirst(source));
+				Player player = game.getPlayer(targetPointer.getFirst(game, source));
 				if (player != null) {
 					player.damage(2, source.getSourceId(), game, false, true);
 					return true;

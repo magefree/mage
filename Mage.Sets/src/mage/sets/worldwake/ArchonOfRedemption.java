@@ -126,10 +126,10 @@ class ArchonOfRedemptionEffect extends OneShotEffect<ArchonOfRedemptionEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent p = game.getPermanent(targetPointer.getFirst(source));
+        Permanent p = game.getPermanent(targetPointer.getFirst(game, source));
         Player player = game.getPlayer(source.getControllerId());
         if (p == null) {
-            p = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(source), Constants.Zone.BATTLEFIELD);
+            p = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(game, source), Constants.Zone.BATTLEFIELD);
         }
         if (p != null && player != null) {
             player.gainLife(p.getPower().getValue(), game);

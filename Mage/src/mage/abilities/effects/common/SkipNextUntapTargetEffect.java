@@ -79,7 +79,7 @@ public class SkipNextUntapTargetEffect extends ReplacementEffectImpl<SkipNextUnt
 
 	@Override
 	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		if (targetPointer.getTargets(source).size() < 2) {
+		if (targetPointer.getTargets(game, source).size() < 2) {
 			used = true;
 		} else {
 			count++;
@@ -87,7 +87,7 @@ public class SkipNextUntapTargetEffect extends ReplacementEffectImpl<SkipNextUnt
 		// not clear how to turn off the effect for more than one target
 		// especially as some targets may leave the battlefield since the effect creation
 		// so handling this in applies method is the only option for now for such cases
-		if (count == targetPointer.getTargets(source).size()) {
+		if (count == targetPointer.getTargets(game, source).size()) {
 			// this won't work for targets disappeared before applies() return true
 			used = true;
 		}
@@ -97,7 +97,7 @@ public class SkipNextUntapTargetEffect extends ReplacementEffectImpl<SkipNextUnt
 	@Override
 	public boolean applies(GameEvent event, Ability source, Game game) {
 		if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getType() == EventType.UNTAP) {
-            for (UUID target : targetPointer.getTargets(source)) {
+            for (UUID target : targetPointer.getTargets(game, source)) {
                 if (event.getTargetId().equals(target)) {
                     if (!usedFor.contains(target)) {
                         usedFor.add(target);

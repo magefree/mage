@@ -27,7 +27,6 @@
  */
 package mage.abilities.effects.common.continious;
 
-import java.util.UUID;
 import mage.Constants.Duration;
 import mage.Constants.Layer;
 import mage.Constants.Outcome;
@@ -40,6 +39,8 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
+
+import java.util.UUID;
 
 /**
  *
@@ -88,12 +89,13 @@ public class BoostTargetEffect extends ContinuousEffectImpl<BoostTargetEffect> {
             power = new StaticValue(power.calculate(game, source));
             toughness = new StaticValue(toughness.calculate(game, source));
         }
+        targetPointer.init(game, source);
     }
     
     @Override
     public boolean apply(Game game, Ability source) {
         int affectedTargets = 0;
-        for (UUID permanentId : targetPointer.getTargets(source)) {
+        for (UUID permanentId : targetPointer.getTargets(game, source)) {
             Permanent target = (Permanent) game.getPermanent(permanentId);
             if (target != null) {
                 target.addPower(power.calculate(game, source));

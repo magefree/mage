@@ -122,7 +122,7 @@ class GravityWellEffect extends ContinuousEffectImpl<GravityWellEffect> {
 
     @Override
     public boolean apply(Constants.Layer layer, Constants.SubLayer sublayer, Ability source, Game game) {
-	Permanent permanent = game.getPermanent(targetPointer.getFirst(source));
+	Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
 	if (permanent != null) {
             switch (layer) {
                 case AbilityAddingRemovingEffects_6:

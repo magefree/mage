@@ -90,7 +90,7 @@ class MindblazeEffect extends OneShotEffect<MindblazeEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(source));
+        Player player = game.getPlayer(targetPointer.getFirst(game, source));
         Player playerControls = game.getPlayer(source.getControllerId());
         if (player != null && playerControls != null) {
             Choice cardChoice = new ChoiceImpl();

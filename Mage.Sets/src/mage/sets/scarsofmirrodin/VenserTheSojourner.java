@@ -110,8 +110,8 @@ class VenserTheSojournerEffect extends OneShotEffect<VenserTheSojournerEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		if (getTargetPointer().getFirst(source) != null) {
-			Permanent permanent = game.getPermanent(getTargetPointer().getFirst(source));
+		if (getTargetPointer().getFirst(game, source) != null) {
+			Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
 			if (permanent != null) {
 				if (permanent.moveToExile(source.getSourceId(), "Venser, the Sojourner", source.getSourceId(), game)) {
 					//create delayed triggered ability

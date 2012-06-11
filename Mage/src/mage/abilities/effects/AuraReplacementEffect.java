@@ -87,7 +87,7 @@ public class AuraReplacementEffect extends ReplacementEffectImpl<AuraReplacement
         if (sourceObject instanceof StackAbility) {
             StackAbility stackAbility = (StackAbility) sourceObject;
             if (!stackAbility.getEffects().isEmpty()) {
-                targetId = stackAbility.getEffects().get(0).getTargetPointer().getFirst(stackAbility);
+                targetId = stackAbility.getEffects().get(0).getTargetPointer().getFirst(game, stackAbility);
             }
         }
         if (targetId == null) {

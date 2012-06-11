@@ -22,7 +22,7 @@ public class MayTapOrUntapTargetEffect extends OneShotEffect<MayTapOrUntapTarget
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent target = game.getPermanent(targetPointer.getFirst(source));
+        Permanent target = game.getPermanent(targetPointer.getFirst(game, source));
         Player player = game.getPlayer(source.getControllerId());
         if (target != null && player != null) {
             if (target.isTapped()) {

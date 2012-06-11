@@ -57,7 +57,7 @@ public class ReturnToBattlefieldUnderYourControlTargetEffect extends OneShotEffe
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(targetPointer.getFirst(source));
+        Card card = game.getCard(targetPointer.getFirst(game, source));
         if (card != null) {
             Zone currentZone = game.getState().getZone(card.getId());
             if (card.putOntoBattlefield(game, currentZone, source.getId(), source.getControllerId())) {

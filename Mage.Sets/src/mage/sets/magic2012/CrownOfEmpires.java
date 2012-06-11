@@ -85,7 +85,7 @@ class CrownOfEmpiresEffect extends OneShotEffect<CrownOfEmpiresEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Permanent target = game.getPermanent(targetPointer.getFirst(source));
+		Permanent target = game.getPermanent(targetPointer.getFirst(game, source));
 		boolean scepter = false;
 		boolean throne = false;
 		for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
@@ -130,7 +130,7 @@ class CrownOfEmpiresControlEffect extends ContinuousEffectImpl<CrownOfEmpiresCon
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(targetPointer.getFirst(source));
+		Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
 		UUID controllerId = (UUID) game.getState().getValue(source.getSourceId().toString());
 		if (permanent != null && controllerId != null) {
 			return permanent.changeControllerId(controllerId, game);

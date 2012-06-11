@@ -93,7 +93,7 @@ class EmissaryOfHopeEffect extends OneShotEffect<EmissaryOfHopeEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(targetPointer.getFirst(source));
+        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
         Player sourcePlayer = game.getPlayer(source.getControllerId());
         if (targetPlayer != null && sourcePlayer != null) {
             int amount = game.getBattlefield().count(filter, targetPlayer.getId(), game);

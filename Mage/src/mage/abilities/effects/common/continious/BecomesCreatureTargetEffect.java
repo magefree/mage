@@ -68,7 +68,7 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl<BecomesCre
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         boolean result = false;
-        for (UUID permanentId : targetPointer.getTargets(source)) {
+        for (UUID permanentId : targetPointer.getTargets(game, source)) {
             Permanent permanent = game.getPermanent(permanentId);
             if (permanent != null) {
                 switch (layer) {

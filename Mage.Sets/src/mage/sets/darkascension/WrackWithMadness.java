@@ -83,7 +83,7 @@ class WrackWithMadnessEffect extends OneShotEffect<WrackWithMadnessEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(source));
+        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
         if (permanent != null) {
             permanent.damage(permanent.getPower().getValue(), permanent.getId(), game, true, false);
             return true;

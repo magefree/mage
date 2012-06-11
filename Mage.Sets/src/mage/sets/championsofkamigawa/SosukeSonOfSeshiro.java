@@ -139,7 +139,7 @@ class SosukeSonOfSeshiroEffect extends OneShotEffect<SosukeSonOfSeshiroEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent targetCreature = game.getPermanent(this.getTargetPointer().getFirst(source));
+        Permanent targetCreature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         if (targetCreature != null) {
             AtTheEndOfCombatDelayedTriggeredAbility delayedAbility = new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect());
             delayedAbility.setSourceId(source.getSourceId());

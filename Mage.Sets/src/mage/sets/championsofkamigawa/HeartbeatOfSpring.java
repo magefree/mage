@@ -124,7 +124,7 @@ class HeartbeatOfSpringEffect extends ManaEffect<HeartbeatOfSpringEffect> {
     
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent land = game.getPermanent(this.targetPointer.getFirst(source));
+        Permanent land = game.getPermanent(this.targetPointer.getFirst(game, source));
         Abilities<ManaAbility> mana = land.getAbilities().getManaAbilities(Zone.BATTLEFIELD);
         Mana types = new Mana();
         for (ManaAbility ability: mana) {

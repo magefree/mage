@@ -86,12 +86,12 @@ class BrimstoneVolleyEffect extends OneShotEffect<BrimstoneVolleyEffect> {
 		if (watcher.conditionMet()) {
 		  	damage = 5;
 		}
-		Permanent permanent = game.getPermanent(targetPointer.getFirst(source));
+		Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
 		if (permanent != null) {
 			permanent.damage(damage, source.getSourceId(), game, true, false);
 			return true;
 		}
-		Player player = game.getPlayer(targetPointer.getFirst(source));
+		Player player = game.getPlayer(targetPointer.getFirst(game, source));
 		if (player != null) {
 			player.damage(damage, source.getSourceId(), game, false, true);
 			return true;

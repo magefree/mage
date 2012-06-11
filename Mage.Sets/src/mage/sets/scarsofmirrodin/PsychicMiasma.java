@@ -82,7 +82,7 @@ class PsychicMiasmaEffect1 extends OneShotEffect<PsychicMiasmaEffect1> {
 	
 	@Override
 	public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(source));
+        Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
 			TargetDiscard target = new TargetDiscard(player.getId());
 			player.choose(Outcome.Discard, target, source.getSourceId(), game);

@@ -96,7 +96,7 @@ class GhostlyFlickerEffect extends OneShotEffect<GhostlyFlickerEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         UUID exileId = source.getSourceId();
-        for (UUID permanentId : targetPointer.getTargets(source)) {
+        for (UUID permanentId : targetPointer.getTargets(game, source)) {
             Permanent target = game.getPermanent(permanentId);
             if (target != null) {
                 target.moveToExile(exileId, "Ghostly Flicker", source.getId(), game);

@@ -104,8 +104,8 @@ class GallowsAtWillowHillEffect extends OneShotEffect<GallowsAtWillowHillEffect>
     @Override
     public boolean apply(Game game, Ability source) {
         int affectedTargets = 0;
-        if (targetPointer.getTargets(source).size() > 0) {
-            for (UUID permanentId : targetPointer.getTargets(source)) {
+        if (targetPointer.getTargets(game, source).size() > 0) {
+            for (UUID permanentId : targetPointer.getTargets(game, source)) {
                 Permanent permanent = game.getPermanent(permanentId);
                 if (permanent != null) {
                     Player controller = game.getPlayer(permanent.getControllerId());

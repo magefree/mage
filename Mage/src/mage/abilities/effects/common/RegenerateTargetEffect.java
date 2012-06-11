@@ -55,7 +55,7 @@ public class RegenerateTargetEffect  extends ReplacementEffectImpl<RegenerateTar
 	@Override
 	public boolean apply(Game game, Ability source) {
 		//20110204 - 701.11
-		Permanent permanent = game.getPermanent(targetPointer.getFirst(source));
+		Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
 		if (permanent != null && permanent.regenerate(this.getId(), game)) {
 			this.used = true;
 			return true;
@@ -76,7 +76,7 @@ public class RegenerateTargetEffect  extends ReplacementEffectImpl<RegenerateTar
 	@Override
 	public boolean applies(GameEvent event, Ability source, Game game) {
 		//20110204 - 701.11c - event.getAmount() is used to signal if regeneration is allowed
-		if (event.getType() == EventType.DESTROY_PERMANENT && event.getAmount() == 0 && event.getTargetId().equals(targetPointer.getFirst(source)) && !this.used) {
+		if (event.getType() == EventType.DESTROY_PERMANENT && event.getAmount() == 0 && event.getTargetId().equals(targetPointer.getFirst(game, source)) && !this.used) {
 			return true;
 		}
 		return false;

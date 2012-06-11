@@ -107,7 +107,7 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl<EntersBattlef
 
 	@Override
 	public String getText(Mode mode) {
-		if (text.length() == 0)
+		if (text == null || text.length() == 0)
 			return "{this} enters the battlefield " + baseEffects.getText(mode);
 		else
 			return "{this} enters the battlefield " + text;

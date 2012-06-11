@@ -103,7 +103,7 @@ class SorinMarkovEffect extends OneShotEffect<SorinMarkovEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(targetPointer.getFirst(source));
+		Player player = game.getPlayer(targetPointer.getFirst(game, source));
 		if (player != null) {
 			player.setLife(10, game);
 			return true;

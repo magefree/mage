@@ -33,13 +33,13 @@ import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.Target;
 
 import java.util.UUID;
-import mage.abilities.Mode;
-import mage.target.Target;
 
 /**
  *
@@ -65,10 +65,16 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl<GainAbilityTar
 		return new GainAbilityTargetEffect(this);
 	}
 
+    @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        targetPointer.init(game, source);
+    }
+
 	@Override
 	public boolean apply(Game game, Ability source) {
 		int affectedTargets = 0;
-		for (UUID permanentId : targetPointer.getTargets(source)) {
+		for (UUID permanentId : targetPointer.getTargets(game, source)) {
 			Permanent permanent = game.getPermanent(permanentId);
 			if (permanent != null) {
 				permanent.addAbility(ability, game);

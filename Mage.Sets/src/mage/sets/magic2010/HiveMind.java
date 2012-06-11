@@ -121,7 +121,7 @@ class HiveMindEffect extends OneShotEffect<HiveMindEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(targetPointer.getFirst(source));
+        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
         Player player = game.getPlayer(source.getControllerId());
         if (spell != null && player != null) {
             Set<UUID> players = player.getInRange();

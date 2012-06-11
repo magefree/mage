@@ -182,12 +182,12 @@ class BlazingTorchDamageEffect extends OneShotEffect<BlazingTorchDamageEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(source));
+        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
         if (permanent != null && sourceId != null) {
             permanent.damage(2, sourceId, game, true, false);
             return true;
         }
-        Player player = game.getPlayer(targetPointer.getFirst(source));
+        Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null && sourceId != null) {
             player.damage(2, sourceId, game, false, true);
             return true;

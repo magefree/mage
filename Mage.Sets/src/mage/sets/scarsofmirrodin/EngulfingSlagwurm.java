@@ -87,7 +87,7 @@ class EngulfingSlagwurmEffect extends OneShotEffect<EngulfingSlagwurmEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject c = game.getLastKnownInformation(targetPointer.getFirst(source), Constants.Zone.BATTLEFIELD);
+        MageObject c = game.getLastKnownInformation(targetPointer.getFirst(game, source), Constants.Zone.BATTLEFIELD);
         if (c != null && controller != null) {
             controller.gainLife(c.getPower().getValue(), game);
         }

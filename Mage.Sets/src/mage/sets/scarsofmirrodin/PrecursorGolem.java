@@ -121,7 +121,7 @@ class PrecursorGolemCopyTriggeredAbility extends TriggeredAbilityImpl<PrecursorG
 			UUID targetGolem = null;
 			SpellAbility sa = spell.getSpellAbility();
 			for (Effect effect : sa.getEffects()) {
-            	for (UUID target : effect.getTargetPointer().getTargets(sa)) {
+            	for (UUID target : effect.getTargetPointer().getTargets(game, sa)) {
 					Permanent permanent = game.getPermanent(target);
 					if (permanent != null) {
 						if (!permanent.hasSubtype("Golem")) {
@@ -170,7 +170,7 @@ class PrecursorGolemCopySpellEffect extends OneShotEffect<PrecursorGolemCopySpel
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Spell spell = game.getStack().getSpell(targetPointer.getFirst(source));
+		Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
 		if (spell != null) {
 			SpellAbility sa = spell.getSpellAbility();
 			UUID targetedGolem = (UUID) getValue("targetedGolem");

@@ -172,8 +172,8 @@ class MindbreakEffect extends OneShotEffect<MindbreakEffect>{
     @Override
     public boolean apply(Game game, Ability source) {
         int affectedTargets = 0;
-		if (targetPointer.getTargets(source).size() > 0) {
-			for (UUID spellId : targetPointer.getTargets(source)) {
+		if (targetPointer.getTargets(game, source).size() > 0) {
+			for (UUID spellId : targetPointer.getTargets(game, source)) {
 				Spell spell = game.getStack().getSpell(spellId);
 				if (spell != null) {
 					spell.moveToExile(null, null, source.getId(), game);

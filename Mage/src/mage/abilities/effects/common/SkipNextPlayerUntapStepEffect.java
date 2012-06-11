@@ -60,7 +60,7 @@ public class SkipNextPlayerUntapStepEffect extends OneShotEffect<SkipNextPlayerU
 	@Override
 	public boolean apply(Game game, Ability source) {
                 if (targetPointer != null) {
-                        Player player = game.getPlayer(targetPointer.getFirst(source));
+                        Player player = game.getPlayer(targetPointer.getFirst(game, source));
                         if (player != null) {
                                 game.getState().getTurnMods().add(new TurnMod(player.getId(), PhaseStep.UNTAP));
                                 return true;

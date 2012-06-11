@@ -108,7 +108,7 @@ class SnapcasterMageEffect extends ContinuousEffectImpl<SnapcasterMageEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Card card = game.getCard(targetPointer.getFirst(source));
+		Card card = game.getCard(targetPointer.getFirst(game, source));
 		if (card != null) {
             FlashbackAbility ability;
             if (card.getCardType().contains(CardType.INSTANT))

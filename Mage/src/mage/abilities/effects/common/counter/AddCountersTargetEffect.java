@@ -64,7 +64,7 @@ public class AddCountersTargetEffect extends OneShotEffect<AddCountersTargetEffe
 	@Override
 	public boolean apply(Game game, Ability source) {
 		int affectedTargets = 0;
-		for (UUID uuid : targetPointer.getTargets(source)) {
+		for (UUID uuid : targetPointer.getTargets(game, source)) {
 			Permanent permanent = game.getPermanent(uuid);
 			if (permanent != null) {
 				if (counter != null) {

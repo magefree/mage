@@ -132,7 +132,7 @@ class MirrorworksEffect extends OneShotEffect<MirrorworksEffect> {
 			if (player.chooseUse(outcome, "Pay " + cost.getText() + " and " + staticText, game)) {
 				cost.clearPaid();
 				if (cost.pay(source, game, source.getId(), source.getControllerId(), false)) {
-					UUID targetId = targetPointer.getFirst(source);
+					UUID targetId = targetPointer.getFirst(game, source);
 					if (targetId != null) {
 						MageObject target = game.getLastKnownInformation(targetId, Constants.Zone.BATTLEFIELD);
 						if (target != null && target instanceof Permanent) {

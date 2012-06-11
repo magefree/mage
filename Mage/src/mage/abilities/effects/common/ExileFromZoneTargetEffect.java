@@ -77,7 +77,7 @@ public class ExileFromZoneTargetEffect extends OneShotEffect<ExileFromZoneTarget
     
 	@Override
 	public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(source));
+        Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
             Target target = null;
             switch (zone) {

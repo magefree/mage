@@ -60,7 +60,7 @@ public class ReturnToHandTargetEffect extends OneShotEffect<ReturnToHandTargetEf
     @Override
     public boolean apply(Game game, Ability source) {
         boolean result = false;
-        for (UUID id : targetPointer.getTargets(source)) {
+        for (UUID id : targetPointer.getTargets(game, source)) {
             switch (game.getState().getZone(id)) {
                 case BATTLEFIELD:
                     Permanent permanent = game.getPermanent(id);

@@ -108,7 +108,7 @@ class BloodlordOfVaasgothEffect extends ContinuousEffectImpl {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Spell object = game.getStack().getSpell(targetPointer.getFirst(source));
+		Spell object = game.getStack().getSpell(targetPointer.getFirst(game, source));
 		if (object != null) {
 			Permanent permanent = game.getPermanent(object.getSourceId());
 			if (permanent != null) {

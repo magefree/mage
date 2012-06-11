@@ -99,7 +99,7 @@ class JaceMemoryAdeptEffect extends DrawCardTargetEffect {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		for (UUID target : targetPointer.getTargets(source)) {
+		for (UUID target : targetPointer.getTargets(game, source)) {
 			Player player = game.getPlayer(target);
 			if (player != null) {
 				player.drawCards(amount.calculate(game, source), game);

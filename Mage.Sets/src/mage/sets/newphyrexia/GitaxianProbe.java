@@ -80,7 +80,7 @@ class GitaxianProbeEffect extends OneShotEffect<GitaxianProbeEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Player player = game.getPlayer(targetPointer.getFirst(source));
+        Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null && controller != null) {
             controller.lookAtCards("Gitaxian Probe", player.getHand(), game);
         }

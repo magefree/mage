@@ -84,7 +84,7 @@ class ClutchOfTheUndercityEffect extends OneShotEffect<ClutchOfTheUndercityEffec
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent p = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(source), Constants.Zone.BATTLEFIELD);
+        Permanent p = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(game, source), Constants.Zone.BATTLEFIELD);
         if (p != null) {
             Player player = game.getPlayer(p.getControllerId());
             if (player != null) {

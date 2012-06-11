@@ -136,7 +136,7 @@ class DungeonGeistsEffect extends ReplacementEffectImpl<DungeonGeistsEffect> {
 
 
         if (game.getTurn().getStepType() == Constants.PhaseStep.UNTAP && event.getType() == GameEvent.EventType.UNTAP) {
-            if (event.getTargetId().equals(targetPointer.getFirst(source))) {
+            if (event.getTargetId().equals(targetPointer.getFirst(game, source))) {
                 return true;
             }
         }

@@ -199,7 +199,7 @@ class TamiyoTheMoonSageEffect extends OneShotEffect<TamiyoTheMoonSageEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(this.targetPointer.getFirst(source));
+        Card card = game.getCard(this.targetPointer.getFirst(game, source));
         if (card != null) {
             return card.moveToZone(Zone.HAND, source.getId(), game, true);
         }

@@ -96,7 +96,7 @@ class SphinxAmbassadorEffect extends OneShotEffect<SphinxAmbassadorEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Player targetPlayer = game.getPlayer(targetPointer.getFirst(source));
+        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
 
         if (player != null && targetPlayer != null) {
             TargetCardInLibrary target = new TargetCardInLibrary();

@@ -84,8 +84,8 @@ public class DestroyTargetEffect extends OneShotEffect<DestroyTargetEffect> {
                 }
             }
         }
-        else if (targetPointer.getTargets(source).size() > 0) {
-			for (UUID permanentId : targetPointer.getTargets(source)) {
+        else if (targetPointer.getTargets(game, source).size() > 0) {
+			for (UUID permanentId : targetPointer.getTargets(game, source)) {
 				Permanent permanent = game.getPermanent(permanentId);
 				if (permanent != null) {
 					permanent.destroy(source.getId(), game, noRegen);

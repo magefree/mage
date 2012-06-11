@@ -59,11 +59,11 @@ public class ImprintTargetEffect extends OneShotEffect<ImprintTargetEffect> {
 	public boolean apply(Game game, Ability source) {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (sourcePermanent != null) {
-            Permanent permanent = game.getPermanent(targetPointer.getFirst(source));
+            Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
             if (permanent != null) {
                 sourcePermanent.imprint(permanent.getId(), game);
             } else {
-                Card card = game.getCard(targetPointer.getFirst(source));
+                Card card = game.getCard(targetPointer.getFirst(game, source));
                 if (card != null) {
                     sourcePermanent.imprint(card.getId(), game);
                 }

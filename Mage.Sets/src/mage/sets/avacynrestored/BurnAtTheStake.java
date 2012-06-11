@@ -158,13 +158,13 @@ class BurnAtTheStakeEffect extends OneShotEffect<BurnAtTheStakeEffect> {
     public boolean apply(Game game, Ability source) {
         int amount = (new GetXValue()).calculate(game, source) * 3;
 
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(source));
+        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
         if (permanent != null) {
             permanent.damage(amount, source.getSourceId(), game, true, false);
             return true;
         }
 
-        Player player = game.getPlayer(targetPointer.getFirst(source));
+        Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
             player.damage(amount, source.getSourceId(), game, false, true);
             return true;

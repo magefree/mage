@@ -83,7 +83,7 @@ class FulgentDistractionEffect extends OneShotEffect<FulgentDistractionEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		for ( UUID target : targetPointer.getTargets(source) ) {
+		for ( UUID target : targetPointer.getTargets(game, source) ) {
 			Permanent creature = game.getPermanent(target);
 
 			List<UUID> copiedAttachments = new ArrayList<UUID>(creature.getAttachments());

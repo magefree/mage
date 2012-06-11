@@ -89,7 +89,7 @@ public class ShapeAnew extends CardImpl<ShapeAnew> {
 
 		@Override
 		public boolean apply(Game game, Ability source) {
-            Permanent sourcePermanent = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(source), Constants.Zone.BATTLEFIELD);
+            Permanent sourcePermanent = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(game, source), Constants.Zone.BATTLEFIELD);
             if (sourcePermanent == null) {
                 return false;
             }

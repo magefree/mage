@@ -84,7 +84,7 @@ class WalkingAtlasEffect extends OneShotEffect<WalkingAtlasEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card c = game.getCard(targetPointer.getFirst(source));
+        Card c = game.getCard(targetPointer.getFirst(game, source));
         if (c != null) {
             c.moveToZone(Constants.Zone.BATTLEFIELD, source.getSourceId(), game, false);
             return true;

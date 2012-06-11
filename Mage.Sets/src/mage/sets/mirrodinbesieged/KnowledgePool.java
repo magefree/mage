@@ -153,7 +153,7 @@ class KnowledgePoolEffect2 extends OneShotEffect<KnowledgePoolEffect2> {
     
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(targetPointer.getFirst(source));
+        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
         if (spell != null) {
             if (spell.moveToExile(source.getSourceId(), "Knowledge Pool Exile", id, game)) {
                 Player player = game.getPlayer(spell.getControllerId());

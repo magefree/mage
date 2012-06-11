@@ -64,7 +64,7 @@ public class PutOntoBattlefieldTargetEffect extends OneShotEffect<PutOntoBattlef
     @Override
     public boolean apply(Game game, Ability source) {
         boolean result = false;
-        for (UUID targetId : targetPointer.getTargets(source)) {
+        for (UUID targetId : targetPointer.getTargets(game, source)) {
             Card card = game.getCard(targetId);
             if (card != null) {
 

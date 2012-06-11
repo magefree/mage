@@ -132,7 +132,7 @@ class SpitefulShadowsEffect extends OneShotEffect<SpitefulShadowsEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Integer damageAmount = (Integer) this.getValue("damageAmount");
-        UUID targetId = this.targetPointer.getFirst(source);
+        UUID targetId = this.targetPointer.getFirst(game, source);
         if (damageAmount != null && targetId != null) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent == null) {

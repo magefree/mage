@@ -60,7 +60,7 @@ public class SacrificeEquippedEffect extends OneShotEffect<SacrificeEquippedEffe
 	public boolean apply(Game game, Ability source) {
 		Permanent equipment = game.getPermanent(source.getSourceId());
 		if (equipment != null && equipment.getAttachedTo() != null) {
-			UUID uuid = getTargetPointer().getFirst(source);
+			UUID uuid = getTargetPointer().getFirst(game, source);
 			Permanent permanent = game.getPermanent(uuid);
 			if (permanent == null) {
 				permanent = game.getPermanent(equipment.getAttachedTo());

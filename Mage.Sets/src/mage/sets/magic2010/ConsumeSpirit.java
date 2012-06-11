@@ -90,11 +90,11 @@ class ConsumeSpiritEffect extends OneShotEffect<ConsumeSpiritEffect> {
 	public boolean apply(Game game, Ability source) {
 		int damage = source.getManaCostsToPay().getX();
 		if (damage > 0) {
-			Permanent permanent = game.getPermanent(getTargetPointer().getFirst(source));
+			Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
 			if (permanent != null) {
 				permanent.damage(damage, source.getSourceId(), game, true, false);
 			} else {
-				Player player = game.getPlayer(getTargetPointer().getFirst(source));
+				Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
 				if (player != null) {
 					player.damage(damage, source.getSourceId(), game, false, true);
 				}

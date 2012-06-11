@@ -138,7 +138,7 @@ class SkaabRuinatorEffect extends OneShotEffect<SkaabRuinatorEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Card target = (Card) game.getObject(targetPointer.getFirst(source));
+		Card target = (Card) game.getObject(targetPointer.getFirst(game, source));
 		if (target != null) {
 			Player controller = game.getPlayer(target.getOwnerId());
 			if (controller != null) {

@@ -85,7 +85,7 @@ class CacklingCounterpartEffect extends OneShotEffect<CacklingCounterpartEffect>
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(this.targetPointer.getFirst(source));
+        Card card = game.getCard(this.targetPointer.getFirst(game, source));
         if (card != null) {
             EmptyToken token = new EmptyToken();
             CardUtil.copyTo(token).from(card);

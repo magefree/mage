@@ -123,7 +123,7 @@ class CreepyDollEffect extends OneShotEffect<CreepyDollEffect> {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             if (player.flipCoin(game)) {
-                UUID targetId = getTargetPointer().getFirst(source);
+                UUID targetId = getTargetPointer().getFirst(game, source);
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent != null) {
                     permanent.destroy(source.getId(), game, false);

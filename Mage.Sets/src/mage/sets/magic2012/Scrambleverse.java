@@ -125,7 +125,7 @@ class ScrambleverseControlEffect extends ContinuousEffectImpl<ScrambleverseContr
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(targetPointer.getFirst(source));
+		Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
 		if (permanent != null && controllerId != null) {
 			return permanent.changeControllerId(controllerId, game);
 		}

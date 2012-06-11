@@ -119,7 +119,7 @@ class IsolationCellEffect extends OneShotEffect<IsolationCellEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(source));
+        Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
             GenericManaCost cost = new GenericManaCost(2);
             if (!cost.pay(source, game, player.getId(), player.getId(), false)) {
