@@ -28,15 +28,16 @@
 
 package mage.target;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.Constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -108,8 +109,9 @@ public class TargetPermanent<T extends TargetPermanent<T>> extends TargetObject<
 	}
 
 	/**
-	 * Checks if there are enough {@link Permanent} that can be chosen.  Should only be used
-	 * for Ability targets since this checks for protection, shroud etc.
+	 * Checks if there are enough {@link Permanent} that can be chosen.
+     *
+     * Takes into account notTarget parameter, it case it's true doesn't check for protection, shroud etc.
 	 *
 	 * @param sourceId - the target event source
 	 * @param sourceControllerId - controller of the target event source
@@ -124,10 +126,13 @@ public class TargetPermanent<T extends TargetPermanent<T>> extends TargetObject<
 		int count = 0;
 		MageObject targetSource = game.getObject(sourceId);
 		for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
-			if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
-				count++;
-				if (count >= remainingTargets)
-					return true;
+			if (!targets.containsKey(permanent.getId())) {
+                if (!notTarget || permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
+                    count++;
+                    if (count >= remainingTargets) {
+                        return true;
+                    }
+                }
 			}
 		}
 		return false;
