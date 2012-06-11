@@ -118,4 +118,29 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Illusionary Servant", 3);
     }
 
+    /**
+     * Tests copying already transformed creature
+     * Makes sure it still has "When this creature becomes the target of a spell or ability, sacrifice it"
+     */
+    @Test
+    public void testCopyAlreadyTransformed() {
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Island", 2);
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Forest", 2);
+        addCard(Constants.Zone.HAND, playerB, "Phantasmal Image");
+        addCard(Constants.Zone.HAND, playerB, "Titanic Growth");
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Huntmaster of the Fells");
+
+        castSpell(2, Constants.PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image");
+        castSpell(2, Constants.PhaseStep.POSTCOMBAT_MAIN, playerB, "Titanic Growth", "Ravager of the Fells-M12");
+
+        setStopAt(2, Constants.PhaseStep.END_TURN);
+        execute();
+
+        // check opponent's creature wasn't chosen as a target for Titanic Growth
+        assertPowerToughness(playerA, "Ravager of the Fells", 4, 4);
+        // check playerA's creature was sacrificed
+        assertPermanentCount(playerB, "Ravager of the Fells", 0);
+        assertGraveyardCount(playerB, "Phantasmal Image", 1);
+    }
+
 }

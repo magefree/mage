@@ -67,7 +67,7 @@ public class CopyEffect extends ContinuousEffectImpl<CopyEffect> {
         if (permanent == null) {
             return false;
         }
-        
+
         permanent.setName(target.getName());
         permanent.getColor().setColor(target.getColor());
         permanent.getManaCost().clear();
@@ -94,6 +94,7 @@ public class CopyEffect extends ContinuousEffectImpl<CopyEffect> {
             permanent.setTransformed(((Permanent)target).isTransformed());
             permanent.setSecondCardFace(((Permanent) target).getSecondCardFace());
         }
+        permanent.setCopy(true);
 
         return true;
 	}

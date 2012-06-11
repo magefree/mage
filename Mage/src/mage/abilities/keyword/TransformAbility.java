@@ -61,6 +61,37 @@ public class TransformAbility extends SimpleStaticAbility {
     public String getRule() {
         return "";
     }
+
+    public static void transform(Permanent permanent, Card sourceCard, Game game) {
+        
+        if (sourceCard == null) {
+            return;
+        }
+
+        permanent.setName(sourceCard.getName());
+        permanent.getColor().setColor(sourceCard.getColor());
+        permanent.getManaCost().clear();
+        permanent.getManaCost().add(sourceCard.getManaCost());
+        permanent.getCardType().clear();
+        for (Constants.CardType type : sourceCard.getCardType()) {
+            permanent.getCardType().add(type);
+        }
+        permanent.getSubtype().clear();
+        for (String type : sourceCard.getSubtype()) {
+            permanent.getSubtype().add(type);
+        }
+        permanent.getSupertype().clear();
+        for (String type : sourceCard.getSupertype()) {
+            permanent.getSupertype().add(type);
+        }
+        permanent.setExpansionSetCode(sourceCard.getExpansionSetCode());
+        permanent.getAbilities().clear();
+        for (Ability ability : sourceCard.getAbilities()) {
+            permanent.addAbility(ability, game);
+        }
+        permanent.getPower().setValue(sourceCard.getPower().getValue());
+        permanent.getToughness().setValue(sourceCard.getToughness().getValue());
+    }
 }
 
 class TransformEffect extends ContinuousEffectImpl<TransformEffect> {
@@ -82,6 +113,10 @@ class TransformEffect extends ContinuousEffectImpl<TransformEffect> {
             return false;
         }
 
+        if (permanent.isCopy()) { // copies can't transform
+            return true;
+        }
+
         if (!permanent.isTransformed()) {
             // keep original card
             return true;
@@ -92,30 +127,8 @@ class TransformEffect extends ContinuousEffectImpl<TransformEffect> {
         if (card == null) {
             return false;
         }
-
-        permanent.setName(card.getName());
-        permanent.getColor().setColor(card.getColor());
-        permanent.getManaCost().clear();
-        permanent.getManaCost().add(card.getManaCost());
-        permanent.getCardType().clear();
-        for (Constants.CardType type : card.getCardType()) {
-            permanent.getCardType().add(type);
-        }
-        permanent.getSubtype().clear();
-        for (String type : card.getSubtype()) {
-            permanent.getSubtype().add(type);
-        }
-        permanent.getSupertype().clear();
-        for (String type : card.getSupertype()) {
-            permanent.getSupertype().add(type);
-        }
-        permanent.setExpansionSetCode(card.getExpansionSetCode());
-        permanent.getAbilities().clear();
-        for (Ability ability : card.getAbilities()) {
-            permanent.addAbility(ability, game);
-        }
-        permanent.getPower().setValue(card.getPower().getValue());
-        permanent.getToughness().setValue(card.getToughness().getValue());
+        
+        TransformAbility.transform(permanent, card, game);
 
         return true;
 

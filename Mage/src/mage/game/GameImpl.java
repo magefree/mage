@@ -40,6 +40,7 @@ import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CopyEffect;
 import mage.abilities.keyword.LeylineAbility;
+import mage.abilities.keyword.TransformAbility;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.actions.impl.MageAction;
 import mage.cards.Card;
@@ -746,6 +747,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         //getState().addCard(permanent);
         permanent.reset(this);
         permanent.assignNewId();
+        if (copyFromPermanent.isTransformed()) {
+            TransformAbility.transform(permanent, copyFromPermanent.getSecondCardFace(), this);
+        }
         applier.apply(this, permanent);
 
         Ability newAbility = source.copy();

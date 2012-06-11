@@ -27,9 +27,6 @@
 */
 package mage.game.command;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.Constants;
 import mage.MageInt;
 import mage.ObjectColor;
@@ -40,6 +37,10 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.game.Game;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author nantuko
@@ -146,6 +147,15 @@ public class Emblem implements CommandObject {
 	public UUID getId() {
 		return this.id;
 	}
+
+    @Override
+    public void setCopy(boolean isCopy) {
+    }
+
+    @Override
+    public boolean isCopy() {
+        return false;
+    }
 
     @Override
 	public Emblem copy() {

@@ -127,11 +127,17 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
         this.minBlockedBy = permanent.minBlockedBy;
         this.transformed = permanent.transformed;
         this.pairedCard = permanent.pairedCard;
+        this.copy = permanent.copy;
     }
 
     @Override
     public String toString() {
-        return this.name + "-" + this.expansionSetCode;
+        StringBuilder sb = new StringBuilder(this.name);
+        sb.append("-").append(this.expansionSetCode);
+        if (copy) {
+            sb.append(" [Copy]");
+        }
+        return sb.toString();
     }
 
     @Override
@@ -144,6 +150,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
             controllerChanged = false;
         this.maxBlocks = 1;
         this.minBlockedBy = 1;
+        this.copy = false;
     }
 
     @Override

@@ -79,6 +79,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 		this.ability = spell.ability.copy();
 		this.controllerId = spell.controllerId;
         this.fromZone = spell.fromZone;
+        this.copiedSpell = spell.copiedSpell;
 	}
 
     @Override
@@ -444,15 +445,23 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
     public void setCopiedSpell(boolean isCopied) {
 		this.copiedSpell = isCopied;
 	}
-	
-	public boolean isCopiedSpell ( ) {
+
+	public boolean isCopiedSpell() {
 		return this.copiedSpell;
 	}
-    
+
     public Zone getFromZone() {
         return this.fromZone;
     }
 
+    @Override
+    public void setCopy(boolean isCopy) {
+        setCopiedSpell(isCopy);
+    }
 
+    @Override
+    public boolean isCopy() {
+        return isCopiedSpell();
+    }
 }
 

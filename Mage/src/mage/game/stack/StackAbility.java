@@ -327,4 +327,13 @@ public class StackAbility implements StackObject, Ability {
     public boolean isInUseableZone(Game game, boolean checkLKI) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    @Override
+    public void setCopy(boolean isCopy) {
+    }
+
+    @Override
+    public boolean isCopy() {
+        return false;
+    }
 }

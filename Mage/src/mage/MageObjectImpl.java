@@ -28,10 +28,6 @@
 
 package mage;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
@@ -41,6 +37,10 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.game.Game;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public abstract class MageObjectImpl<T extends MageObjectImpl<T>> implements MageObject {
 
@@ -56,6 +56,7 @@ public abstract class MageObjectImpl<T extends MageObjectImpl<T>> implements Mag
 	protected String text;
 	protected MageInt power;
 	protected MageInt toughness;
+    protected boolean copy;
 	
 	@Override
 	public abstract T copy();
@@ -166,4 +167,13 @@ public abstract class MageObjectImpl<T extends MageObjectImpl<T>> implements Mag
 		}
 	}
 
+    @Override
+    public void setCopy(boolean isCopy) {
+        this.copy = isCopy;
+    }
+
+    @Override
+    public boolean isCopy() {
+        return copy;
+    }
 }

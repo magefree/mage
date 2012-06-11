@@ -1,13 +1,14 @@
 package mage;
 
-import java.io.Serializable;
-import java.util.List;
 import mage.Constants.CardType;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.game.Game;
+
+import java.io.Serializable;
+import java.util.List;
 
 public interface MageObject extends MageItem, Serializable {
 
@@ -29,4 +30,16 @@ public interface MageObject extends MageItem, Serializable {
 	public void adjustCosts(Ability ability, Game game);
 
 	public MageObject copy();
+
+    /**
+     * Defines that MageObject is a copy of another object
+     * @param isCopy
+     */
+    public void setCopy(boolean isCopy);
+
+    /**
+     * Checks if current MageObject is a copy of another object
+     * @return
+     */
+    public boolean isCopy();
 }
