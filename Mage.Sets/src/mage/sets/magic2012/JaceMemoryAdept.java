@@ -27,8 +27,6 @@
  */
 package mage.sets.magic2012;
 
-import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
@@ -45,6 +43,8 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
  * @author nantuko
  */
@@ -53,7 +53,7 @@ public class JaceMemoryAdept extends CardImpl<JaceMemoryAdept> {
 	public JaceMemoryAdept(UUID ownerId) {
 		super(ownerId, 58, "Jace, Memory Adept", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{U}{U}");
 		this.expansionSetCode = "M12";
-		this.supertype.add("Jace");
+		this.subtype.add("Jace");
 
 		this.color.setBlue(true);
 

@@ -27,8 +27,6 @@
  */
 package mage.sets.zendikar;
 
-import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -48,6 +46,8 @@ import mage.target.TargetPlayer;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
  *
  * @author nantuko
@@ -57,7 +57,7 @@ public class SorinMarkov extends CardImpl<SorinMarkov> {
     public SorinMarkov(UUID ownerId) {
         super(ownerId, 111, "Sorin Markov", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{B}{B}");
         this.expansionSetCode = "ZEN";
-        this.supertype.add("Sorin");
+        this.subtype.add("Sorin");
 
         this.color.setBlack(true);
 
