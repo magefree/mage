@@ -10,29 +10,25 @@ public class CardInfo {
     private String downloadName;
     private String set;
     private Integer collectorId;
+    private Integer type;
     private boolean token;
     private boolean twoFacedCard;
     private boolean secondSide;
     private boolean flipCard;
 
-    public CardInfo(String name, String set, Integer collectorId) {
-        this.name = name;
-        this.set = set;
-        this.collectorId = collectorId;
-        token = false;
+    public CardInfo(String name, String set, Integer collectorId, Integer type) {
+        this(name, set, collectorId, type, false);
     }
 
-    public CardInfo(String name, String set, Integer collectorId, boolean token) {
-        this.name = name;
-        this.set = set;
-        this.collectorId = collectorId;
-        this.token = token;
+    public CardInfo(String name, String set, Integer collectorId, Integer type, boolean token) {
+        this(name, set, collectorId, type, token, false, false);
     }
 
-    public CardInfo(String name, String set, Integer collectorId, boolean token, boolean twoFacedCard, boolean secondSide) {
+    public CardInfo(String name, String set, Integer collectorId, Integer type, boolean token, boolean twoFacedCard, boolean secondSide) {
         this.name = name;
         this.set = set;
         this.collectorId = collectorId;
+        this.type = type;
         this.token = token;
         this.twoFacedCard = twoFacedCard;
         this.secondSide = secondSide;
@@ -45,6 +41,7 @@ public class CardInfo {
         this.token = card.token;
         this.twoFacedCard = card.twoFacedCard;
         this.secondSide = card.secondSide;
+        this.type = card.type;
     }
 
     @Override
@@ -83,6 +80,7 @@ public class CardInfo {
         hash = 47 * hash + (this.name != null ? this.name.hashCode() : 0);
         hash = 47 * hash + (this.set != null ? this.set.hashCode() : 0);
         hash = 47 * hash + (this.collectorId != null ? this.collectorId.hashCode() : 0);
+        hash = 47 * hash + (this.type != null ? this.type.hashCode() : 0);
         hash = 47 * hash + (this.token ? 1 : 0);
         hash = 47 * hash + (this.twoFacedCard ? 1 : 0);
         hash = 47 * hash + (this.secondSide ? 1 : 0);
@@ -143,5 +141,13 @@ public class CardInfo {
 
     public void setFlipCard(boolean flipCard) {
         this.flipCard = flipCard;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 }

@@ -214,7 +214,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 		File file;
         for (Card card : allCards) {
             if (card.getCardNumber() > 0 && !card.getExpansionSetCode().isEmpty()) {
-                CardInfo url = new CardInfo(card.getName(), card.getExpansionSetCode(), card.getCardNumber(), false, card.canTransform(), card.isNightCard());
+                CardInfo url = new CardInfo(card.getName(), card.getExpansionSetCode(), card.getCardNumber(), 0, false, card.canTransform(), card.isNightCard());
                 boolean withCollectorId = false;
                 if (card.getName().equals("Forest") || card.getName().equals("Mountain") || card.getName().equals("Swamp") || card.getName().equals("Island") || card.getName().equals("Plains")) {
                     withCollectorId = true;
@@ -242,7 +242,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             for (Card card : allCards) {
                 if (card.getCardNumber() > 0 && !card.getExpansionSetCode().isEmpty()) {
                     String cardName = card.getName();
-                    CardInfo url = new CardInfo(cardName, card.getExpansionSetCode(), card.getCardNumber(), false, card.canTransform(), card.isNightCard());
+                    CardInfo url = new CardInfo(cardName, card.getExpansionSetCode(), card.getCardNumber(), 0, false, card.canTransform(), card.isNightCard());
                     if (cardName.equals("Forest") || cardName.equals("Swamp") || cardName.equals("Mountain") || cardName.equals("Island") || cardName.equals("Plains")) {
                         url.setDownloadName(card.getClass().getName().replace(card.getClass().getPackage().getName() + ".", ""));
                     }
@@ -255,7 +255,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                         // it has the same expansion set code and card number as original one
                         // second side = true;
                         Card secondSide = card.getSecondCardFace();
-                        url = new CardInfo(secondSide.getName(), card.getExpansionSetCode(), card.getCardNumber(), false, card.canTransform(), true);
+                        url = new CardInfo(secondSide.getName(), card.getExpansionSetCode(), card.getCardNumber(), 0, false, card.canTransform(), true);
                         allCardsUrls.add(url);
                     }
                 } else {
@@ -335,7 +335,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 					if (params.length >= 4) {
 						if (params[1].toLowerCase().equals("generate") && params[2].startsWith("TOK:")) {
 							String set = params[2].substring(4);
-							CardInfo card = new CardInfo(params[3], set, 0, true);
+							CardInfo card = new CardInfo(params[3], set, 0, 0, true);
 							list.add(card);
 						}
 					} else {

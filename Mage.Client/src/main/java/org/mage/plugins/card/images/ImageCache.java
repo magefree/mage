@@ -1,32 +1,28 @@
 package org.mage.plugins.card.images;
 
-import java.awt.Rectangle;
+import com.google.common.base.Function;
+import com.google.common.collect.ComputationException;
+import com.google.common.collect.MapMaker;
+import com.mortennobel.imagescaling.ResampleOp;
+import mage.view.CardView;
+import org.apache.log4j.Logger;
+import org.mage.plugins.card.constants.Constants;
+import org.mage.plugins.card.utils.CardImageUtils;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.imageio.ImageIO;
-
-import mage.view.CardView;
-
-import org.apache.log4j.Logger;
-import org.mage.plugins.card.constants.Constants;
-import org.mage.plugins.card.utils.CardImageUtils;
-
-import com.google.common.base.Function;
-import com.google.common.collect.ComputationException;
-import com.google.common.collect.MapMaker;
-import com.mortennobel.imagescaling.ResampleOp;
-import java.awt.Graphics2D;
-
 /**
  * This class stores ALL card images in a cache with soft values. this means
- * that the images may be collected when they are not needed any more, but will
+ * that the images may be garbage collected when they are not needed any more, but will
  * be kept as long as possible.
  * 
- * Key format: "<cardname>#<setname>#<collectorID>#<param>"
+ * Key format: "<cardname>#<setname>#<type>#<collectorID>#<param>"
  * 
  * where param is:
  * 
@@ -47,7 +43,7 @@ public class ImageCache {
 	 * Common pattern for keys.
 	 * Format: "<cardname>#<setname>#<collectorID>"
 	 */
-	private static final Pattern KEY_PATTERN = Pattern.compile("(.*)#(.*)#(.*)");
+	private static final Pattern KEY_PATTERN = Pattern.compile("(.*)#(.*)#(.*)#(.*)");
 	
 	static {
 		imageCache = new MapMaker().softValues().makeComputingMap(new Function<String, BufferedImage>() {
@@ -64,9 +60,10 @@ public class ImageCache {
 					if (m.matches()) {
 						String name = m.group(1);
 						String set = m.group(2);
-						Integer collectorId = Integer.parseInt(m.group(3));
+                        Integer type = Integer.parseInt(m.group(3));
+                        Integer collectorId = Integer.parseInt(m.group(4));
 
-						CardInfo info = new CardInfo(name, set, collectorId);
+						CardInfo info = new CardInfo(name, set, collectorId, type);
 						
 						if (collectorId == 0) info.setToken(true);
 						String path = CardImageUtils.getImagePath(info);
@@ -153,7 +150,8 @@ public class ImageCache {
 	 */
 	private static String getKey(CardView card) {
 		String set = card.getExpansionSetCode();
-		String key = card.getName() + "#" + set + "#" + String.valueOf(card.getCardNumber());
+        int type = card.getType();
+		String key = card.getName() + "#" + set + "#" + type + "#" + String.valueOf(card.getCardNumber());
 
 		return key;
 	}

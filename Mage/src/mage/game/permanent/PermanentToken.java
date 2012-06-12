@@ -104,8 +104,6 @@ public class PermanentToken extends PermanentImpl<PermanentToken> {
 		return token;
 	}
 
-
-
 	@Override
 	public PermanentToken copy() {
 		return new PermanentToken(this);

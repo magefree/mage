@@ -28,8 +28,6 @@
 
 package mage.game.permanent.token;
 
-import java.util.List;
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Zone;
 import mage.MageObjectImpl;
@@ -43,10 +41,14 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.PermanentToken;
 
+import java.util.List;
+import java.util.UUID;
+
 public class Token extends MageObjectImpl<Token> {
 
 	protected String description;
     private UUID lastAddedTokenId;
+    private int tokenType;
 
 	public Token(String name, String description) {
 		this.name = name;
@@ -68,6 +70,7 @@ public class Token extends MageObjectImpl<Token> {
 	public Token(final Token token) {
 		super(token);
 		this.description = token.description;
+        this.tokenType = token.tokenType;
 	}
 
 	public String getDescription() {
@@ -107,4 +110,12 @@ public class Token extends MageObjectImpl<Token> {
         }
         return false;
 	}
+
+    public int getTokenType() {
+        return tokenType;
+    }
+
+    public void setTokenType(int tokenType) {
+        this.tokenType = tokenType;
+    }
 }

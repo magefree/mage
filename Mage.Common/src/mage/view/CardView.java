@@ -68,6 +68,7 @@ public class CardView extends SimpleCardView {
     protected Rarity rarity;
     protected boolean isAbility;
     protected CardView ability;
+    protected int type;
 
     protected boolean canTransform;
     protected CardView secondCardFace;
@@ -112,6 +113,9 @@ public class CardView extends SimpleCardView {
         this.canTransform = card.canTransform();
         if (card instanceof PermanentToken) {
             this.rarity = Rarity.COMMON;
+            this.expansionSetCode = ((PermanentToken) card).getExpansionSetCode();
+            this.rules = ((PermanentToken) card).getRules();
+            this.type = ((PermanentToken)card).getToken().getTokenType();
         } else {
             this.rarity = card.getRarity();
         }
@@ -151,6 +155,7 @@ public class CardView extends SimpleCardView {
             this.rarity = Rarity.COMMON;
             this.expansionSetCode = ((PermanentToken) card).getExpansionSetCode();
             this.rules = ((PermanentToken) card).getRules();
+            this.type = ((PermanentToken)card).getToken().getTokenType();
         }
         if (name.equals("") && card instanceof StackAbility) {
             StackAbility stackAbility = (StackAbility)card;
@@ -211,6 +216,7 @@ public class CardView extends SimpleCardView {
         this.color = token.getColor();
         this.manaCost = token.getManaCost().getSymbols();
         this.rarity = Rarity.NA;
+        this.type = token.getTokenType();
         //this.expansionSetCode = "";
     }
 
@@ -378,5 +384,9 @@ public class CardView extends SimpleCardView {
 
     public UUID getPairedCard() {
         return pairedCard;
+    }
+
+    public int getType() {
+        return type;
     }
 }

@@ -1,11 +1,11 @@
 package org.mage.plugins.card.utils;
 
-import java.io.File;
-import java.util.HashMap;
-
 import org.mage.plugins.card.constants.Constants;
 import org.mage.plugins.card.images.CardInfo;
 import org.mage.plugins.card.properties.SettingsManager;
+
+import java.io.File;
+import java.util.HashMap;
 
 public class CardImageUtils {
 
@@ -145,10 +145,11 @@ public class CardImageUtils {
     }
 
 	public static String getImagePath(CardInfo card, boolean withCollector, String imagesPath) {
-		if (withCollector) {
+		String type = card.getType() != 0 ? " " + Integer.toString(card.getType()) : "";
+        if (withCollector) {
 			return getImageDir(card, imagesPath) + File.separator + card.getName() + "." + card.getCollectorId() + ".full.jpg";
 		} else {
-			return getImageDir(card, imagesPath) + File.separator + card.getName() + ".full.jpg";
+			return getImageDir(card, imagesPath) + File.separator + card.getName() + type + ".full.jpg";
 		}
 	}
 }
