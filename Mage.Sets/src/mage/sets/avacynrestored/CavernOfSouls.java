@@ -63,12 +63,14 @@ import java.util.UUID;
  */
 public class CavernOfSouls extends CardImpl<CavernOfSouls> {
 
+    private static final String ruleText = "As Cavern of Souls enters the battlefield, choose a creature type";
+    
     public CavernOfSouls(UUID ownerId) {
         super(ownerId, 226, "Cavern of Souls", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "AVR";
 
         // As Cavern of Souls enters the battlefield, choose a creature type.
-        this.addAbility(new EntersBattlefieldAbility(new CavernOfSoulsEffect()));
+        this.addAbility(new EntersBattlefieldAbility(new CavernOfSoulsEffect(), ruleText));
 
         // {tap}: Add {1} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
@@ -113,6 +115,7 @@ class CavernOfSoulsEffect extends OneShotEffect<CavernOfSoulsEffect> {
             }
             game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + typeChoice.getChoice());
             game.getState().setValue(permanent.getId() + "_type", typeChoice.getChoice());
+            permanent.addInfo("chosen type", "<i>Chosen type: " + typeChoice.getChoice() + "</i>");
         }
         return false;
     }
@@ -202,7 +205,8 @@ class CavernOfSoulsCantCounterEffect extends ReplacementEffectImpl<CavernOfSouls
 
     public CavernOfSoulsCantCounterEffect() {
         super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
-        staticText = "that spell can't be countered";
+        //staticText = "that spell can't be countered";
+        staticText = null;
     }
 
     public CavernOfSoulsCantCounterEffect(final CavernOfSoulsCantCounterEffect effect) {
