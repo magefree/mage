@@ -60,13 +60,7 @@ public class GetEmblemEffect extends OneShotEffect<GetEmblemEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Emblem newEmblem = this.emblem.copy();
-		newEmblem.setSourceId(source.getSourceId());
-		newEmblem.setControllerId(source.getControllerId());
-		game.getState().getCommand().add(newEmblem);
-        for (Ability ability: newEmblem.getAbilities()) {
-            ability.resolve(game);
-        }
+        game.addEmblem(emblem, source);
 		return true;
 	}
 

@@ -53,6 +53,7 @@ import mage.filter.Filter;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.*;
 import mage.game.combat.Combat;
+import mage.game.command.Emblem;
 import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
 import mage.game.permanent.Battlefield;
@@ -739,6 +740,16 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
         state.addEffect(newEffect, newAbility);
 	}
+
+    @Override
+    public void addEmblem(Emblem emblem, Ability source) {
+        Emblem newEmblem = emblem.copy();
+        newEmblem.setSourceId(source.getSourceId());
+        newEmblem.setControllerId(source.getControllerId());
+        newEmblem.assignNewId();
+        newEmblem.getAbilities().newId();
+        state.addEmblem(newEmblem);
+    }
 
     @Override
     public void copyPermanent(Permanent copyFromPermanent, Permanent copyToPermanent, Ability source, ApplyToPermanent applier) {

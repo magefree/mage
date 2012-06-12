@@ -68,6 +68,11 @@ public class Emblem implements CommandObject {
 		this.abilites = emblem.abilites.copy();
 	}
 
+    @Override
+    public void assignNewId() {
+        this.id = UUID.randomUUID();
+    }
+
 	@Override
 	public UUID getSourceId() {
 		return this.sourceId;
@@ -78,7 +83,7 @@ public class Emblem implements CommandObject {
 		return this.controllerId;
 	}
 
-	public void setControllerId(UUID controllerId) {
+    public void setControllerId(UUID controllerId) {
 	 	this.controllerId = controllerId;
         this.abilites.setControllerId(controllerId);
 	}

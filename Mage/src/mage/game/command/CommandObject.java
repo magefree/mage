@@ -28,8 +28,9 @@
 
 package mage.game.command;
 
-import java.util.UUID;
 import mage.MageObject;
+
+import java.util.UUID;
 
 /**
 *
@@ -39,6 +40,7 @@ public interface CommandObject extends MageObject {
 
 	public UUID getSourceId();
 	public UUID getControllerId();
+    public void assignNewId();
 //	public void checkTriggers(GameEvent event, Game game);
 	
 	@Override

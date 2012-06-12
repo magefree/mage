@@ -38,6 +38,7 @@ import mage.choices.Choice;
 import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
 import mage.game.command.Command;
+import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Battlefield;
 import mage.game.permanent.Permanent;
@@ -448,9 +449,16 @@ public class GameState implements Serializable, Copyable<GameState> {
             }
         }
         else if (ability instanceof TriggeredAbility) {
-            triggers.add((TriggeredAbility)ability);
+            addTriggeredAbility((TriggeredAbility)ability);
         }
 	}
+
+    public void addEmblem(Emblem emblem) {
+        getCommand().add(emblem);
+        for (Ability ability: emblem.getAbilities()) {
+            addAbility(ability);
+        }
+    }
 
     public void addTriggeredAbility(TriggeredAbility ability) {
 		this.triggered.add(ability);

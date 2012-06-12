@@ -8,6 +8,7 @@ import mage.cards.Card;
 import mage.counters.CounterType;
 import mage.filter.Filter;
 import mage.game.ExileZone;
+import mage.game.command.CommandObject;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.players.Player;
@@ -387,6 +388,23 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 		}
 		Assert.assertEquals("(Battlefield) Card counts are not equal (" + cardName + ")", count, actualCount);
 	}
+
+    /**
+     * Assert emblem count under player's control
+     *
+     * @param player
+     * @param count
+     * @throws AssertionError
+     */
+    public void assertEmblemCount(Player player, int count) throws AssertionError {
+        int actualCount = 0;
+        for (CommandObject commandObject : currentGame.getState().getCommand()) {
+            if (commandObject.getControllerId().equals(player.getId())) {
+                actualCount++;
+            }
+        }
+        Assert.assertEquals("Emblem counts are not equal", count, actualCount);
+    }
 
 	/**
 	 * Assert counter count on a permanent

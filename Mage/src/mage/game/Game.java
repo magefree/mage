@@ -45,6 +45,7 @@ import mage.cards.Cards;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.game.combat.Combat;
+import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
 import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
@@ -162,6 +163,7 @@ public interface Game extends MageItem, Serializable {
 	public void concede(UUID playerId);
 	public void emptyManaPools();
 	public void addEffect(ContinuousEffect continuousEffect, Ability source);
+    public void addEmblem(Emblem emblem, Ability source);
 
     /**
      * This version supports copying of copies of any depth.
