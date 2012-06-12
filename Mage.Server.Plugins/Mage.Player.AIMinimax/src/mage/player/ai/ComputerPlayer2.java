@@ -28,18 +28,6 @@
 
 package mage.player.ai;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.UUID;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.FutureTask;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 import mage.Constants.Outcome;
 import mage.Constants.PhaseStep;
 import mage.Constants.RangeOfInfluence;
@@ -54,7 +42,6 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.SearchEffect;
 import mage.cards.Cards;
 import mage.choices.Choice;
-import mage.filter.FilterAbility;
 import mage.game.Game;
 import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
@@ -62,29 +49,14 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
-import mage.game.turn.BeginCombatStep;
-import mage.game.turn.BeginningPhase;
-import mage.game.turn.CleanupStep;
-import mage.game.turn.CombatDamageStep;
-import mage.game.turn.CombatPhase;
-import mage.game.turn.DeclareAttackersStep;
-import mage.game.turn.DeclareBlockersStep;
-import mage.game.turn.DrawStep;
-import mage.game.turn.EndOfCombatStep;
-import mage.game.turn.EndPhase;
-import mage.game.turn.EndStep;
-import mage.game.turn.FirstCombatDamageStep;
-import mage.game.turn.Phase;
-import mage.game.turn.PostCombatMainPhase;
-import mage.game.turn.PostCombatMainStep;
-import mage.game.turn.PreCombatMainPhase;
-import mage.game.turn.PreCombatMainStep;
-import mage.game.turn.UntapStep;
-import mage.game.turn.UpkeepStep;
+import mage.game.turn.*;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetCard;
 import org.apache.log4j.Logger;
+
+import java.util.*;
+import java.util.concurrent.*;
 
 /**
  *
@@ -564,6 +536,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 				break;
 			}
 		}
+        game.informPlayers(getName() + " payed " + cost.getPayment().count() + " for " + cost.getText());
 		cost.setPaid();
 		return true;
 	}

@@ -193,6 +193,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer<ComputerPlayerMCTS> imple
 				break;
 			}
 		}
+        game.informPlayers(getName() + " payed " + cost.getPayment().count() + " for " + cost.getText());
 		cost.setPaid();
 		return true;
     }

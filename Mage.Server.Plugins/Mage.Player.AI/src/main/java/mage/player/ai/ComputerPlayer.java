@@ -901,7 +901,8 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 			return false;
 		}
 
-		cost.setPaid();
+        game.informPlayers(getName() + " payed " + cost.getPayment().count() + " for " + cost.getText());
+        cost.setPaid();
 		return true;
 	}
 

@@ -446,6 +446,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 		if (response.getBoolean() != null) {
 			if (!response.getBoolean())
 				return false;
+            game.informPlayers(getName() + " payed " + cost.getPayment().count() + " for " + cost.getText());
 			cost.setPaid();
 		} else if (response.getUUID() != null) {
 			playManaAbilities(game);

@@ -674,6 +674,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 				break;
 			}
 		}
+		game.informPlayers(getName() + " payed " + cost.getPayment().count() + " for " + cost.getText());
 		cost.setPaid();
 		return true;
 	}
