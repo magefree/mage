@@ -68,6 +68,8 @@ public interface Card extends MageObject {
 	public void assignNewId();
 
     public int getZoneChangeCounter();
+    
+    public void addInfo(String key, String value);
 
     /**
      * Moves the card to the specified zone

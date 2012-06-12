@@ -442,6 +442,11 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
         return card.getZoneChangeCounter();
     }
 
+    @Override
+    public void addInfo(String key, String value) {
+        // do nothing
+    }
+
     public void setCopiedSpell(boolean isCopied) {
 		this.copiedSpell = isCopied;
 	}

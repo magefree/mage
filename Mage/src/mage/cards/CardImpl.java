@@ -45,10 +45,7 @@ import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
 
 import java.lang.reflect.Constructor;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> implements Card {
     private static final long serialVersionUID = 1L;
@@ -67,6 +64,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
     protected SpellAbility spellAbility;
     protected boolean flipCard;
     protected int zoneChangeCounter = 1;
+    protected Map<String, String> info;
 
     public CardImpl(UUID ownerId, int cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs) {
         this(ownerId, name);
@@ -106,6 +104,11 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
         if (canTransform) {
             secondSideCard = card.secondSideCard;
             nightCard = card.nightCard;
+        }
+        
+        if (card.info != null) {
+            info = new HashMap<String, String>();
+            info.putAll(card.info);
         }
     }
 
@@ -153,6 +156,11 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
         List<String> rules = abilities.getRules(this.name);
         if (cardType.contains(CardType.INSTANT) || cardType.contains(CardType.SORCERY)) {
             rules.add(0, getSpellAbility().getRule(this.name));
+        }
+        if (info != null) {
+            for (String data : info.values()) {
+                rules.add(data);
+            }
         }
         return rules;
     }
@@ -436,5 +444,13 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 
     private void updateZoneChangeCounter() {
         zoneChangeCounter++;
+    }
+
+    @Override
+    public void addInfo(String key, String value) {
+        if (info == null) {
+            info = new HashMap<String, String>();
+        }
+        info.put(key, value);
     }
 }
