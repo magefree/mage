@@ -34,9 +34,10 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
@@ -46,13 +47,17 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.UnblockableAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
+import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.command.Emblem;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -67,7 +72,7 @@ public class VenserTheSojourner extends CardImpl<VenserTheSojourner> {
 		this.subtype.add("Venser");
 		this.color.setWhite(true);
 		this.color.setBlue(true);
-		this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), null));
+		this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(8)), null));
 
 		// +2: Exile target permanent you own. Return it to the battlefield under your control at the beginning of the next end step.
 		LoyaltyAbility ability1 = new LoyaltyAbility(new VenserTheSojournerEffect(), 2);
@@ -133,13 +138,62 @@ class VenserTheSojournerEffect extends OneShotEffect<VenserTheSojournerEffect> {
 
 }
 
+/**
+ * Emblem: "Whenever you cast a spell, exile target permanent."
+ */
 class VenserTheSojournerEmblem extends Emblem {
 
 	public VenserTheSojournerEmblem() {
-		Ability ability = new SpellCastTriggeredAbility(new ExileTargetEffect(), false);
+		Ability ability = new VenserTheSojournerSpellCastTriggeredAbility(new ExileTargetEffect(), false);
 		Target target = new TargetPermanent();
 		target.setRequired(true);
 		ability.addTarget(target);
 		this.getAbilities().add(ability);
 	}
+}
+
+class VenserTheSojournerSpellCastTriggeredAbility extends TriggeredAbilityImpl<VenserTheSojournerSpellCastTriggeredAbility> {
+
+    private static final FilterSpell spellCard = new FilterSpell("a spell");
+    protected FilterSpell filter;
+
+    /**
+     * If true, the source that triggered the ability will be set as target to effect.
+     */
+    protected boolean rememberSource = false;
+
+    public VenserTheSojournerSpellCastTriggeredAbility(Effect effect, boolean optional) {
+        super(Zone.COMMAND, effect, optional);
+        this.filter = spellCard;
+    }
+
+    public VenserTheSojournerSpellCastTriggeredAbility(final VenserTheSojournerSpellCastTriggeredAbility ability) {
+        super(ability);
+        filter = ability.filter;
+        this.rememberSource = ability.rememberSource;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getPlayerId().equals(this.getControllerId())) {
+            Spell spell = game.getStack().getSpell(event.getTargetId());
+            if (spell != null && filter.match(spell, game)) {
+                if (rememberSource) {
+                    this.getEffects().get(0).setTargetPointer(new FixedTarget(spell.getId()));
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever you cast a spell, exile target permanent.";
+    }
+
+    @Override
+    public VenserTheSojournerSpellCastTriggeredAbility copy() {
+        return new VenserTheSojournerSpellCastTriggeredAbility(this);
+    }
 }
