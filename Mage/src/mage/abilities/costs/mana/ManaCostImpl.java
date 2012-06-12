@@ -28,8 +28,6 @@
 
 package mage.abilities.costs.mana;
 
-import java.util.UUID;
-
 import mage.Constants.ColoredManaSymbol;
 import mage.Constants.ManaType;
 import mage.Mana;
@@ -40,6 +38,8 @@ import mage.filter.Filter;
 import mage.game.Game;
 import mage.players.ManaPool;
 import mage.players.Player;
+
+import java.util.UUID;
 
 public abstract class ManaCostImpl<T extends ManaCostImpl<T>> extends CostImpl<T> implements ManaCost {
 
@@ -116,6 +116,7 @@ public abstract class ManaCostImpl<T extends ManaCostImpl<T>> extends CostImpl<T
                     this.payment.addWhite();
                     return true;
                 }
+                break;
             case G:
                 if (pool.pay(ManaType.GREEN, ability, sourceFilter, game)) {
                     this.payment.addGreen();
