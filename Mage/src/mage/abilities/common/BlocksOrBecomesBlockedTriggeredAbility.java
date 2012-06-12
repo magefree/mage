@@ -50,8 +50,10 @@ public class BlocksOrBecomesBlockedTriggeredAbility extends TriggeredAbilityImpl
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if ((event.getType() == EventType.BLOCKER_DECLARED || event.getType() == EventType.CREATURE_BLOCKED)
-                && event.getSourceId().equals(this.getSourceId())) {
+        if (event.getType() == EventType.BLOCKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
+            return true;
+        }
+        if (event.getType() == EventType.CREATURE_BLOCKED && event.getTargetId().equals(this.getSourceId())) {
             return true;
         }
         return false;
