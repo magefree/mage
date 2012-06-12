@@ -32,9 +32,11 @@ import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.SkipNextUntapTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.continious.MaximumHandSizeControllerEffect;
@@ -44,6 +46,7 @@ import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
+import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.target.TargetPermanent;
@@ -54,7 +57,7 @@ import java.util.UUID;
 
 /**
  *
- * @author North
+ * @author North, noxx
  */
 public class TamiyoTheMoonSage extends CardImpl<TamiyoTheMoonSage> {
 
@@ -65,7 +68,7 @@ public class TamiyoTheMoonSage extends CardImpl<TamiyoTheMoonSage> {
 
         this.color.setBlue(true);
 
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), ""));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(8)), null));
 
         // +1: Tap target permanent. It doesn't untap during its controller's next untap step.
         LoyaltyAbility ability = new LoyaltyAbility(new TapTargetEffect(), 1);
@@ -77,7 +80,7 @@ public class TamiyoTheMoonSage extends CardImpl<TamiyoTheMoonSage> {
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         // -8: You get an emblem with "You have no maximum hand size" and "Whenever a card is put into your graveyard from anywhere, you may return it to your hand."
-        this.addAbility(new LoyaltyAbility(new TamiyoTheMoonSageThirdEffect(), -8));
+        this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new TamiyoTheMoonSageEmblem()), -8));
     }
 
     public TamiyoTheMoonSage(final TamiyoTheMoonSage card) {
@@ -117,34 +120,6 @@ class TappedCreaturesControlledByTargetCount implements DynamicValue {
     @Override
     public String getMessage() {
         return "tapped creature target player controls";
-    }
-}
-
-class TamiyoTheMoonSageThirdEffect extends OneShotEffect<TamiyoTheMoonSageThirdEffect> {
-
-    public TamiyoTheMoonSageThirdEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "You get an emblem with \"You have no maximum hand size\" and \"Whenever a card is put into your graveyard from anywhere, you may return it to your hand.\"";
-    }
-
-    public TamiyoTheMoonSageThirdEffect(final TamiyoTheMoonSageThirdEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public TamiyoTheMoonSageThirdEffect copy() {
-        return new TamiyoTheMoonSageThirdEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        // TODO: move this to emblem
-        game.addEffect(new MaximumHandSizeControllerEffect(Integer.MAX_VALUE, Duration.WhileOnBattlefield, false), source);
-        TamiyoTheMoonSageTriggeredAbility ability = new TamiyoTheMoonSageTriggeredAbility();
-        ability.setControllerId(source.getControllerId());
-        ability.setSourceId(source.getSourceId());
-        game.getState().addAbility(ability);
-        return true;
     }
 }
 
@@ -204,5 +179,17 @@ class TamiyoTheMoonSageEffect extends OneShotEffect<TamiyoTheMoonSageEffect> {
             return card.moveToZone(Zone.HAND, source.getId(), game, true);
         }
         return false;
+    }
+}
+
+/**
+ * Emblem with "You have no maximum hand size" and "Whenever a card is put into your graveyard from anywhere, you may return it to your hand."
+ */
+class TamiyoTheMoonSageEmblem extends Emblem {
+
+    public TamiyoTheMoonSageEmblem() {
+        Ability ability = new SimpleStaticAbility(Zone.COMMAND, new MaximumHandSizeControllerEffect(Integer.MAX_VALUE, Duration.EndOfGame, false));
+        this.getAbilities().add(ability);
+        this.getAbilities().add(new TamiyoTheMoonSageTriggeredAbility());
     }
 }
