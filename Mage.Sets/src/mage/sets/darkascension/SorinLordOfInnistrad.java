@@ -27,7 +27,6 @@
  */
 package mage.sets.darkascension;
 
-import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
@@ -56,6 +55,8 @@ import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author BetaSteward
@@ -78,7 +79,7 @@ public class SorinLordOfInnistrad extends CardImpl<SorinLordOfInnistrad> {
         this.color.setBlack(true);
         this.color.setWhite(true);
 
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), ""));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), null));
 
         // +1: Put a 1/1 black Vampire creature token with lifelink onto the battlefield.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new VampireToken()), 1));

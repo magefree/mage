@@ -31,10 +31,12 @@ package mage.sets.scarsofmirrodin;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
@@ -53,8 +55,6 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
-import mage.Constants.Zone;
-import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
 
 /**
  * @author nantuko
@@ -67,7 +67,7 @@ public class VenserTheSojourner extends CardImpl<VenserTheSojourner> {
 		this.subtype.add("Venser");
 		this.color.setWhite(true);
 		this.color.setBlue(true);
-		this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), ""));
+		this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), null));
 
 		// +2: Exile target permanent you own. Return it to the battlefield under your control at the beginning of the next end step.
 		LoyaltyAbility ability1 = new LoyaltyAbility(new VenserTheSojournerEffect(), 2);
