@@ -449,7 +449,7 @@ public class GameState implements Serializable, Copyable<GameState> {
             }
         }
         else if (ability instanceof TriggeredAbility) {
-            addTriggeredAbility((TriggeredAbility)ability);
+            this.triggers.add((TriggeredAbility)ability);
         }
 	}
 

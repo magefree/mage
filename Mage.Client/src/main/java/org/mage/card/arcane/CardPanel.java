@@ -810,6 +810,9 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 			} else if (card.getCardTypes().contains(CardType.PLANESWALKER)) {
 				sb.append("\n").append(card.getLoyalty());
 			}
+            if (card.getRules() == null) {
+                card.overrideRules(new ArrayList<String>());
+            }
 			for (String rule : card.getRules()) {
 				sb.append("\n").append(rule);
 			}

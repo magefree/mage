@@ -397,7 +397,7 @@ public class GamePanel extends javax.swing.JPanel {
 			}
 		}
 
-		this.stack.loadCards(game.getStack(), bigCard, gameId, game.getStackOrder());
+		this.stack.loadCards(game.getStack(), bigCard, gameId, null);
         GameManager.getInstance().setStackSize(game.getStack().size());
 
 		for (ExileView exile: game.getExile()) {

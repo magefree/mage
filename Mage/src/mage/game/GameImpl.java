@@ -53,6 +53,7 @@ import mage.filter.Filter;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.*;
 import mage.game.combat.Combat;
+import mage.game.command.CommandObject;
 import mage.game.command.Emblem;
 import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
@@ -253,10 +254,16 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
             }
 		}
 		object = getCard(objectId);
-		if (object != null)
-			return object;
 
-		return null;
+        if (object == null) {
+            for (CommandObject commandObject : state.getCommand()) {
+                if (commandObject.getId().equals(objectId)) {
+                    return commandObject;
+                }
+            }
+        }
+
+		return object;
 	}
 
 	@Override
@@ -748,6 +755,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         newEmblem.setControllerId(source.getControllerId());
         newEmblem.assignNewId();
         newEmblem.getAbilities().newId();
+        for (Ability ability : newEmblem.getAbilities()) {
+            ability.setSourceId(newEmblem.getId());
+        }
         state.addEmblem(newEmblem);
     }
 

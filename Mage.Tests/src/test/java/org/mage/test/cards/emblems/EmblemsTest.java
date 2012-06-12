@@ -107,6 +107,7 @@ public class EmblemsTest extends CardTestPlayerBase {
         execute();
 
         assertEmblemCount(playerA, 2);
+        assertPermanentCount(playerA, "Elite Vanguard", 0);
         assertHandCount(playerA, 1);
 
         boolean found = false;

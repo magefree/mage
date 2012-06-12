@@ -57,7 +57,7 @@ public class GameView implements Serializable {
 	private SimpleCardsView hand;
 	private Map<String, SimpleCardsView> opponentHands;
 	private CardsView stack = new CardsView();
-    private List<UUID> stackOrder = new ArrayList<UUID>();
+    //private List<UUID> stackOrder = new ArrayList<UUID>();
 	private List<ExileView> exiles = new ArrayList<ExileView>();
 	private List<RevealedView> revealed = new ArrayList<RevealedView>();
 	private List<LookedAtView> lookedAt = new ArrayList<LookedAtView>();
@@ -87,15 +87,17 @@ public class GameView implements Serializable {
                         updateLatestCardView(game, card, stackObject.getId());
                     }
                 } else if (object != null) {
-					stack.put(stackObject.getId(), new CardView(object));
+                    StackAbility stackAbility = ((StackAbility)object);
+                    stackAbility.newId();
+					stack.put(stackObject.getId(), new CardView(stackAbility));
 				}
 			}
 			else {
 				stack.put(stackObject.getId(), new CardView((Spell)stackObject));
 			}
-            stackOrder.add(stackObject.getId());
+            //stackOrder.add(stackObject.getId());
 		}
-        Collections.reverse(stackOrder);
+        //Collections.reverse(stackOrder);
 		for (ExileZone exileZone: state.getExile().getExileZones()) {
 			exiles.add(new ExileView(exileZone, game));
 		}
@@ -203,7 +205,7 @@ public class GameView implements Serializable {
 		return special;
 	}
 
-    public List<UUID> getStackOrder() {
+    /*public List<UUID> getStackOrder() {
         return stackOrder;
-    }
+    }*/
 }

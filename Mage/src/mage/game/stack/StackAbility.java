@@ -295,7 +295,9 @@ public class StackAbility implements StackObject, Ability {
 	}
 
 	@Override
-	public void newId() {}
+	public void newId() {
+        this.ability.newId();
+    }
 
 	@Override
 	public void newOriginalId() {}

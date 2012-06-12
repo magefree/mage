@@ -44,7 +44,6 @@ import mage.cards.Card;
 import mage.choices.Choice;
 import mage.choices.Choices;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.Targets;
 import org.apache.log4j.Logger;
@@ -459,7 +458,11 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 	
     @Override
     public boolean isInUseableZone(Game game, boolean checkLKI) {
-        Permanent permanent = game.getPermanent(getSourceId());
+
+        // emblem are always actual
+        if (zone.equals(Zone.COMMAND)) {
+            return true;
+        }
 
         // try LKI first
         if (checkLKI) {

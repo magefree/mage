@@ -28,6 +28,7 @@
 
 package mage.view;
 
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageObject;
@@ -38,6 +39,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
+import mage.game.stack.StackAbility;
 import mage.target.Target;
 import mage.target.Targets;
 
@@ -150,6 +152,15 @@ public class CardView extends SimpleCardView {
             this.expansionSetCode = ((PermanentToken) card).getExpansionSetCode();
             this.rules = ((PermanentToken) card).getRules();
         }
+        if (name.equals("") && card instanceof StackAbility) {
+            StackAbility stackAbility = (StackAbility)card;
+            if (stackAbility.getZone().equals(Constants.Zone.COMMAND)) {
+                this.name = "Emblem";
+                this.rarity = Rarity.NA;
+                this.rules = new ArrayList<String>();
+                this.rules.add(stackAbility.getRule());
+            }
+        }
     }
 
     protected CardView() {
@@ -162,6 +173,11 @@ public class CardView extends SimpleCardView {
             throw new IllegalArgumentException("Not supported.");
         }
         fillEmpty();
+    }
+
+    public CardView(String name) {
+        this(true);
+        this.name = name;
     }
 
     private void fillEmpty() {

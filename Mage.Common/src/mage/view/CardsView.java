@@ -28,9 +28,6 @@
 
 package mage.view;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.UUID;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.cards.Card;
@@ -38,11 +35,15 @@ import mage.game.Game;
 import mage.game.GameState;
 import mage.game.permanent.Permanent;
 
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.UUID;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CardsView extends HashMap<UUID, CardView> {
+public class CardsView extends LinkedHashMap<UUID, CardView> {
 
 	public CardsView() {}
 
@@ -66,6 +67,10 @@ public class CardsView extends HashMap<UUID, CardView> {
                     if (sourceCard == null)
 					    sourceCard = (Permanent)game.getLastKnownInformation(ability.getSourceId(), Zone.BATTLEFIELD);
 					break;
+                case COMMAND:
+                    ability.newId();
+                    this.put(ability.getId(), new AbilityView(ability, "Emblem", new CardView("Emblem")));
+                    break;
 			}
 			if (sourceCard != null) {
 				this.put(ability.getId(), new AbilityView(ability, sourceCard.getName(), new CardView(sourceCard)));
