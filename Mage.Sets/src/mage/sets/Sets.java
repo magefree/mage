@@ -133,10 +133,16 @@ public class Sets extends HashMap<String, ExpansionSet> {
                     if (card.getCardType().contains(CardType.CREATURE)) {
                         for (String type : card.getSubtype()) {
                             creatureTypes.add(type);
+                            if (type.equals("")) {
+                                throw new IllegalStateException("Card with empty subtype: " + card.getName());
+                            }
                         }
                     }
                     if (!card.getCardType().contains(CardType.LAND)) nonLandNames.add(card.getName());
                 }
+            }
+            if (creatureTypes.contains("")) {
+                creatureTypes.remove("");
             }
             System.out.println("It took " + (System.currentTimeMillis() - t1) / 1000 + " ms to load all cards.");
         }
