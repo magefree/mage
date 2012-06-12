@@ -28,7 +28,6 @@
 
 package mage.sets.worldwake;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
@@ -37,6 +36,8 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
+
+import java.util.UUID;
 
 /**
  *
@@ -54,7 +55,7 @@ public class HorizonDrake extends CardImpl<HorizonDrake> {
     public HorizonDrake (UUID ownerId) {
         super(ownerId, 30, "Horizon Drake", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
         this.expansionSetCode = "WWK";
-        this.subtype.add("");
+        this.subtype.add("Drake");
 		this.color.setBlue(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
