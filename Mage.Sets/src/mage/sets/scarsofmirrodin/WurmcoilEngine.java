@@ -28,7 +28,6 @@
 
 package mage.sets.scarsofmirrodin;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
@@ -39,6 +38,8 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.game.permanent.token.Token;
+
+import java.util.UUID;
 
 /**
  *
@@ -91,5 +92,7 @@ class Wurm2Token extends Token {
 		power = new MageInt(3);
 		toughness = new MageInt(3);
         this.addAbility(LifelinkAbility.getInstance());
+
+        setTokenType(2); // for image
     }
 }
