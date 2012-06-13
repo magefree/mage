@@ -1,3 +1,5 @@
+|Generate|EMBLEM:AVR|Tamiyo, the Moon Sage|
+
 |Generate|TOK:AVR|Angel|
 |Generate|TOK:AVR|Human 1|
 |Generate|TOK:AVR|Spirit 1|
@@ -5,6 +7,9 @@
 |Generate|TOK:AVR|Demon|
 |Generate|TOK:AVR|Zombie|
 |Generate|TOK:AVR|Human 2|
+
+|Generate|EMBLEM:DDI|Venser, the Sojourner|
+|Generate|EMBLEM:DDI|Koth of the Hammer|
 
 |Generate|TOK:DKA|Human|
 |Generate|TOK:DKA|Vampire|

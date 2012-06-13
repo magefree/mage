@@ -157,11 +157,11 @@ public class CardView extends SimpleCardView {
             this.rules = ((PermanentToken) card).getRules();
             this.type = ((PermanentToken)card).getToken().getTokenType();
         }
-        if (name.equals("") && card instanceof StackAbility) {
+        if (this.rarity == null && card instanceof StackAbility) {
             StackAbility stackAbility = (StackAbility)card;
             if (stackAbility.getZone().equals(Constants.Zone.COMMAND)) {
-                this.name = "Emblem";
                 this.rarity = Rarity.NA;
+                this.expansionSetCode = stackAbility.getExpansionSetCode();
                 this.rules = new ArrayList<String>();
                 this.rules.add(stackAbility.getRule());
             }

@@ -81,6 +81,7 @@ public interface Game extends MageItem, Serializable {
 	public void setCustomData(Object data);
     public GameOptions getOptions();
 	public MageObject getObject(UUID objectId);
+    public MageObject getEmblem(UUID objectId);
 	public UUID getControllerId(UUID objectId);
 	public Permanent getPermanent(UUID permanentId);
 	public Card getCard(UUID cardId);

@@ -1,8 +1,9 @@
 package org.mage.plugins.card.dl.sources;
 
+import org.mage.plugins.card.utils.CardImageUtils;
+
 import java.util.HashMap;
 import java.util.Map;
-import org.mage.plugins.card.utils.CardImageUtils;
 
 /**
  *
@@ -15,6 +16,7 @@ public class MagicCardsImageSource implements CardImageSource {
 
         {
             put("AVR", "avacyn-restored");
+            put("DDI", "duel-decks-venser-vs-koth");
             put("DKA", "dark-ascension");
             put("ISD", "innistrad");
             put("DDH", "duel-decks-ajani-vs-nicol-bolas");
@@ -76,7 +78,7 @@ public class MagicCardsImageSource implements CardImageSource {
 
     @Override
     public String generateTokenUrl(String name, String set) {
-        String _name = name.replaceAll(" ", "-").toLowerCase();
+        String _name = name.replaceAll(" ", "-").replace(",", "").toLowerCase();
         String _set = "not-supported-set";
         if (setNameReplacement.containsKey(set)) {
             _set = setNameReplacement.get(set);

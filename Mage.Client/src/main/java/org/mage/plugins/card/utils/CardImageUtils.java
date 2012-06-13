@@ -146,10 +146,11 @@ public class CardImageUtils {
 
 	public static String getImagePath(CardInfo card, boolean withCollector, String imagesPath) {
 		String type = card.getType() != 0 ? " " + Integer.toString(card.getType()) : "";
+        String name = card.getName();
         if (withCollector) {
-			return getImageDir(card, imagesPath) + File.separator + card.getName() + "." + card.getCollectorId() + ".full.jpg";
+			return getImageDir(card, imagesPath) + File.separator + name + "." + card.getCollectorId() + ".full.jpg";
 		} else {
-			return getImageDir(card, imagesPath) + File.separator + card.getName() + type + ".full.jpg";
+			return getImageDir(card, imagesPath) + File.separator + name + type + ".full.jpg";
 		}
 	}
 }

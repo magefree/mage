@@ -68,6 +68,8 @@ public class StackAbility implements StackObject, Ability {
 
 	private Ability ability;
 	private UUID controllerId;
+    private String name = "";
+    private String expansionSetCode;
 
 	public StackAbility(Ability ability, UUID controllerId) {
 		this.ability = ability;
@@ -77,6 +79,8 @@ public class StackAbility implements StackObject, Ability {
 	public StackAbility(final StackAbility spell) {
 		this.ability = spell.ability.copy();
 		this.controllerId = spell.controllerId;
+        this.name = spell.name;
+        this.expansionSetCode = spell.expansionSetCode;
 	}
 
 	@Override
@@ -101,8 +105,12 @@ public class StackAbility implements StackObject, Ability {
 
 	@Override
 	public String getName() {
-		return "";
+		return name;
 	}
+    
+    public String getExpansionSetCode() {
+        return expansionSetCode;
+    }
 
 	@Override
 	public List<CardType> getCardType() {
@@ -276,7 +284,13 @@ public class StackAbility implements StackObject, Ability {
 	}
 
 	@Override
-	public void setName(String name) { }
+	public void setName(String name) { 
+        this.name = name;
+    }
+    
+    public void setExpansionSetCode(String expansionSetCode) {
+        this.expansionSetCode = expansionSetCode;
+    }
 
 	@Override
 	public void adjustCosts(Ability ability, Game game) {}

@@ -37,6 +37,7 @@ import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.GameState;
 import mage.game.combat.CombatGroup;
+import mage.game.command.CommandObject;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
@@ -44,7 +45,10 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  *
@@ -89,6 +93,15 @@ public class GameView implements Serializable {
                 } else if (object != null) {
                     StackAbility stackAbility = ((StackAbility)object);
                     stackAbility.newId();
+                    MageObject emblem = game.getEmblem(stackAbility.getSourceId());
+                    if (emblem != null) {
+                        Card sourceCard = game.getCard(((CommandObject)emblem).getSourceId());
+                        if (sourceCard != null) {
+                            stackAbility.setName("Emblem " + sourceCard.getName());
+                            stackAbility.setExpansionSetCode(sourceCard.getExpansionSetCode());
+                        }
+                    }
+
 					stack.put(stackObject.getId(), new CardView(stackAbility));
 				}
 			}

@@ -266,6 +266,18 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		return object;
 	}
 
+    @Override
+    public MageObject getEmblem(UUID objectId) {
+        if (objectId == null)
+            return null;
+        for (CommandObject commandObject : state.getCommand()) {
+            if (commandObject.getId().equals(objectId)) {
+                return commandObject;
+            }
+        }
+        return null;
+    }
+
 	@Override
 	public UUID getControllerId(UUID objectId) {
 		if (objectId == null) {
