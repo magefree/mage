@@ -164,7 +164,6 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
 
         // Tests: When Geralf's Messenger enters the battlefield, target opponent loses 2 life.
         assertLife(playerB, 18);
-        assertLife(playerA, 18);
     }
 
 }

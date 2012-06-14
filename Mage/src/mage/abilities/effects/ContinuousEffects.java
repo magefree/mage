@@ -320,6 +320,7 @@ public class ContinuousEffects implements Serializable {
             if (caught)
                 break;
             consumed.add(rEffect.getId());
+            game.applyEffects();
         } while (true);
 		return caught;
 	}
