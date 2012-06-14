@@ -82,7 +82,7 @@ public class EmblemsTest extends CardTestPlayerBase {
         setStopAt(2, Constants.PhaseStep.UPKEEP);
         execute();
 
-        assertEmblemCount(playerA, 2);
+        assertEmblemCount(playerA, 1);
         assertHandCount(playerA, 10);
     }
 
@@ -106,7 +106,7 @@ public class EmblemsTest extends CardTestPlayerBase {
         setStopAt(2, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertEmblemCount(playerA, 2);
+        assertEmblemCount(playerA, 1);
         assertPermanentCount(playerA, "Elite Vanguard", 0);
         assertHandCount(playerA, 1);
 
