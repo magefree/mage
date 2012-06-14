@@ -2,6 +2,7 @@ package org.mage.test.combat;
 
 import junit.framework.Assert;
 import mage.Constants;
+import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -202,5 +203,27 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
 
         assertLife(playerA, 17);
         assertLife(playerB, 20);
+    }
+
+    /**
+     * Tests Unblockable
+     */
+    @Test
+    public void testUnblockable() {
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Blighted Agent");
+
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Blighted Agent");
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Llanowar Elves");
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Birds of Paradise");
+
+        attack(2, playerB, "Blighted Agent");
+        block(2, playerA, "Blighted Agent", "Blighted Agent");
+        block(2, playerA, "Llanowar Elves", "Blighted Agent");
+        block(2, playerA, "Birds of Paradise", "Blighted Agent");
+
+        setStopAt(2, Constants.PhaseStep.END_TURN);
+        execute();
+        
+        assertCounterCount(playerA, CounterType.POISON, 1);
     }
 }

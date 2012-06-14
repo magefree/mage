@@ -28,7 +28,6 @@
 
 package mage.abilities.keyword;
 
-import java.io.ObjectStreamException;
 import mage.Constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.EvasionAbility;
@@ -36,64 +35,70 @@ import mage.abilities.effects.RestrictionEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.io.ObjectStreamException;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class UnblockableAbility extends EvasionAbility<UnblockableAbility> {
 
-	private static final UnblockableAbility fINSTANCE =  new UnblockableAbility();
+    private static final UnblockableAbility fINSTANCE = new UnblockableAbility();
 
-	private Object readResolve() throws ObjectStreamException {
-		return fINSTANCE;
-	}
+    private Object readResolve() throws ObjectStreamException {
+        return fINSTANCE;
+    }
 
-	public static UnblockableAbility getInstance() {
-		return fINSTANCE;
-	}
+    public static UnblockableAbility getInstance() {
+        return fINSTANCE;
+    }
 
-	private UnblockableAbility() {
-		this.addEffect(new UnblockableEffect());
-	}
+    private UnblockableAbility() {
+        this.addEffect(new UnblockableEffect());
+    }
 
-	@Override
-	public String getRule() {
-		return "Unblockable";
-	}
+    @Override
+    public String getRule() {
+        return "Unblockable";
+    }
 
-	@Override
-	public UnblockableAbility copy() {
-		return fINSTANCE;
-	}
+    @Override
+    public UnblockableAbility copy() {
+        return fINSTANCE;
+    }
 
 }
 
 class UnblockableEffect extends RestrictionEffect<UnblockableEffect> {
 
-	public UnblockableEffect() {
-		super(Duration.WhileOnBattlefield);
-	}
+    public UnblockableEffect() {
+        super(Duration.EndOfGame);
+    }
 
-	public UnblockableEffect(final UnblockableEffect effect) {
-		super(effect);
-	}
+    public UnblockableEffect(final UnblockableEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean applies(Permanent permanent, Ability source, Game game) {
-		if (permanent.getId().equals(source.getSourceId())) {
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public void newId() {
+        // do nothing
+    }
 
-	@Override
-	public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-		return false;
-	}
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        if (permanent.getAbilities().containsKey(UnblockableAbility.getInstance().getId())) {
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public UnblockableEffect copy() {
-		return new UnblockableEffect(this);
-	}
+    @Override
+    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        return false;
+    }
+
+    @Override
+    public UnblockableEffect copy() {
+        return new UnblockableEffect(this);
+    }
 
 }
