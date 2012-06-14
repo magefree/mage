@@ -143,4 +143,28 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Phantasmal Image", 1);
     }
 
+    /**
+     * Tests that copy of Geralf's Messenger also enters tapped
+     * Geralf's Messenger: Geralf's Messenger enters the battlefield tapped
+     */
+    @Test
+    public void testCopyEntersTapped() {
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Constants.Zone.HAND, playerA, "Phantasmal Image");
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Geralf's Messenger");
+
+        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image");
+
+        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        Permanent copy = getPermanent("Geralf's Messenger", playerA.getId());
+        Assert.assertNotNull(copy);
+        Assert.assertTrue("Should be tapped", copy.isTapped());
+
+        // Tests: When Geralf's Messenger enters the battlefield, target opponent loses 2 life.
+        assertLife(playerB, 18);
+        assertLife(playerA, 18);
+    }
+
 }
