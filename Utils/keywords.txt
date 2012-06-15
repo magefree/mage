@@ -15,9 +15,12 @@ Hexproof|new|
 Islandwalk|new|
 Living weapon|new|
 Mountainwalk|new|
+Persist|new|
 Plainswalk|new|
 Rebound|new|
 Swampwalk|new|
+Totem armor|new|
+Undying|new|
 Deathtouch|instance|
 Defender|instance|
 Double Strike|instance|
@@ -35,8 +38,6 @@ Reach|instance|
 Shroud|instance|
 Soulbond|instance|
 Trample|instance|
-Totem armor|new|
 Unblockable|instance|
-Undying|new|
 Vigilance|instance|
 Wither|instance|
