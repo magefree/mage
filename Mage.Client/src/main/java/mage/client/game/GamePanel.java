@@ -36,8 +36,10 @@ package mage.client.game;
 
 import mage.Constants;
 import mage.client.MageFrame;
+import mage.client.cards.BigCard;
 import mage.client.chat.ChatPanel;
 import mage.client.components.MageComponents;
+import mage.client.components.ext.dlg.DialogManager;
 import mage.client.dialog.*;
 import mage.client.game.FeedbackPanel.FeedbackMode;
 import mage.client.plugins.impl.Plugins;
@@ -85,6 +87,8 @@ public class GamePanel extends javax.swing.JPanel {
 	private JLayeredPane jLayeredPane;
 	private String chosenHandKey = "You";
     private boolean smallMode = false;
+    
+    private int cachedStackSize;
 
     /** Creates new form GamePanel */
     public GamePanel() {
@@ -204,6 +208,10 @@ public class GamePanel extends javax.swing.JPanel {
                 }
             }
         }
+
+        DialogManager.getManager().setScreenWidth(rect.width);
+        DialogManager.getManager().setScreenHeight(rect.height);
+        DialogManager.getManager().setBounds(0, 0, rect.width, rect.height);
 	}
 	
 	public synchronized void showGame(UUID gameId, UUID playerId) {
@@ -399,6 +407,7 @@ public class GamePanel extends javax.swing.JPanel {
 
 		this.stack.loadCards(game.getStack(), bigCard, gameId, null);
         GameManager.getInstance().setStackSize(game.getStack().size());
+        displayStack(game, bigCard, feedbackPanel, gameId);
 
 		for (ExileView exile: game.getExile()) {
 			if (!exiles.containsKey(exile.getId())) {
@@ -420,6 +429,30 @@ public class GamePanel extends javax.swing.JPanel {
 		this.revalidate();
 		this.repaint();
 	}
+
+    private void displayStack(GameView game, BigCard bigCard, FeedbackPanel feedbackPanel, UUID gameId) {
+        if (game.getStack().size() > 0) {
+            if (game.getStack().size() != cachedStackSize) {
+                boolean allPaid = true;
+                for (CardView cardView : game.getStack().values()) {
+                    if (!cardView.isPaid()) {
+                        allPaid = false;
+                        break;
+                    }
+                }
+                if (allPaid) {
+                    DialogManager.getManager().fadeOut();
+                    cachedStackSize = game.getStack().size();
+                    DialogManager.getManager().showStackDialog(game.getStack(), bigCard, feedbackPanel, gameId);
+                }
+            } else {
+                // do nothing
+            }
+        } else {
+            cachedStackSize = game.getStack().size();
+            DialogManager.getManager().fadeOut();
+        }
+    }
 
 	/**
 	 * Update phase buttons\labels.
@@ -946,6 +979,7 @@ public class GamePanel extends javax.swing.JPanel {
 	public void installComponents() {
 		jLayeredPane.setOpaque(false);
 		jLayeredPane.add(abilityPicker);
+        jLayeredPane.add(DialogManager.getManager(), JLayeredPane.MODAL_LAYER, 0);
 		abilityPicker.setVisible(false);
 	}
 

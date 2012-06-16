@@ -42,6 +42,7 @@ import mage.client.components.MageComponents;
 import mage.client.components.MageJDesktop;
 import mage.client.components.MageRoundPane;
 import mage.client.components.MageUI;
+import mage.client.components.ext.dlg.DialogManager;
 import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.deckeditor.DeckEditorPane;
 import mage.client.deckeditor.collection.viewer.CollectionViewerPane;
@@ -183,6 +184,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 		initComponents();
 		setSize(1024, 768);
 		SettingsManager.getInstance().setScreenWidthAndHeight(1024, 768);
+        DialogManager.getManager().setScreenWidth(1024);
+        DialogManager.getManager().setScreenHeight(768);
+        DialogManager.getManager().setBounds(0, 0, 1024, 768);
+        DialogManager.getManager().setVisible(false);
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
 		session = new SessionImpl(this);

@@ -1,6 +1,8 @@
 package mage.client.util;
 
 
+import org.mage.card.arcane.CardPanel;
+
 import java.awt.*;
 
 /**
@@ -36,6 +38,10 @@ public class SettingsManager {
         this.screenHeight = screenHeight;
     }
 
+    public Rectangle getCardSize() {
+        return cardSize;
+    }
+
     /**
      * Get centered component position. Depends on screen width and height.
      *
@@ -63,4 +69,5 @@ public class SettingsManager {
     private int screenWidth;
     private int screenHeight;
 
+    private Rectangle cardSize = CardPanel.CARD_SIZE_FULL;
 }

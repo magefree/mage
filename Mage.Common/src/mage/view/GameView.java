@@ -32,6 +32,7 @@ import mage.Constants;
 import mage.Constants.PhaseStep;
 import mage.Constants.TurnPhase;
 import mage.MageObject;
+import mage.abilities.costs.Cost;
 import mage.cards.Card;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -90,6 +91,7 @@ public class GameView implements Serializable {
                     if (card.canTransform()) {
                         updateLatestCardView(game, card, stackObject.getId());
                     }
+                    checkPaid(stackObject.getId(), (StackAbility)stackObject);
                 } else if (object != null) {
                     StackAbility stackAbility = ((StackAbility)object);
                     stackAbility.newId();
@@ -103,10 +105,12 @@ public class GameView implements Serializable {
                     }
 
 					stack.put(stackObject.getId(), new CardView(stackAbility));
+                    checkPaid(stackObject.getId(), stackAbility);
 				}
 			}
 			else {
 				stack.put(stackObject.getId(), new CardView((Spell)stackObject));
+                checkPaid(stackObject.getId(), (Spell)stackObject);
 			}
             //stackOrder.add(stackObject.getId());
 		}
@@ -133,6 +137,31 @@ public class GameView implements Serializable {
 		}
 		this.special = state.getSpecialActions().getControlledBy(state.getPriorityPlayerId()).size() > 0;
 	}
+
+    private void checkPaid(UUID uuid, StackAbility stackAbility) {
+        for (Cost cost : stackAbility.getManaCostsToPay()) {
+            if (!cost.isPaid()) {
+                return;
+            }
+        }
+        CardView cardView = stack.get(uuid);
+        cardView.paid = true;
+    }
+
+    private void checkPaid(UUID uuid, Spell spell) {
+        for (Cost cost : spell.getSpellAbility().getManaCostsToPay()) {
+            if (!cost.isPaid()) {
+                return;
+            }
+        }
+        CardView cardView = stack.get(uuid);
+        cardView.paid = true;
+    }
+
+    private void setPaid(UUID uuid) {
+        CardView cardView = stack.get(uuid);
+        cardView.paid = true;
+    }
 
     private void updateLatestCardView(Game game, Card card, UUID stackId) {
         if (!card.canTransform()) {

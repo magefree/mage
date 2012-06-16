@@ -77,6 +77,7 @@ public class CardView extends SimpleCardView {
     protected List<UUID> targets;
 
     protected UUID pairedCard;
+    protected boolean paid;
 
     public CardView(Card card, UUID cardId) {
         this(card);
@@ -388,5 +389,13 @@ public class CardView extends SimpleCardView {
 
     public int getType() {
         return type;
+    }
+
+    public boolean isPaid() {
+        return paid;
+    }
+
+    public void setPaid(boolean paid) {
+        this.paid = paid;
     }
 }

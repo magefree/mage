@@ -42,11 +42,8 @@ import mage.view.*;
 
 import javax.swing.border.Border;
 import java.awt.*;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.UUID;
 
 /**
  *
@@ -122,8 +119,13 @@ public class Cards extends javax.swing.JPanel {
 				changed = true;
 			}
 		}
-		
-		for (CardView card: cardsView.values()) {
+
+        java.util.List<CardView> orderedList = new ArrayList<CardView>();
+        for (CardView card: cardsView.values()) {
+            orderedList.add(0, card);
+        }
+        
+        for (CardView card: orderedList) {
 			if (dontDisplayTapped) {
 				if (card instanceof PermanentView) {
 					((PermanentView)card).overrideTapped(false);

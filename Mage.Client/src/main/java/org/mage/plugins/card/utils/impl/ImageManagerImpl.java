@@ -1,19 +1,15 @@
 package org.mage.plugins.card.utils.impl;
 
-import java.awt.Color;
-import java.awt.Image;
-import java.awt.Rectangle;
-import java.awt.Toolkit;
+import mage.client.util.gui.BufferedImageBuilder;
+import org.mage.plugins.card.utils.ImageManager;
+import org.mage.plugins.card.utils.Transparency;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.CropImageFilter;
 import java.awt.image.FilteredImageSource;
 import java.net.URL;
-
-import javax.imageio.ImageIO;
-
-import mage.client.util.gui.BufferedImageBuilder;
-import org.mage.plugins.card.utils.ImageManager;
-import org.mage.plugins.card.utils.Transparency;
 
 public class ImageManagerImpl implements ImageManager {
 
@@ -52,7 +48,39 @@ public class ImageManagerImpl implements ImageManager {
 		return imageNight;
 	}
 
-	protected static Image getImageFromResourceTransparent(String path, Color mask, Rectangle rec) {
+    @Override
+    public Image getDlgCancelButtonImage() {
+        if (imageDlgCancelButton == null) {
+            imageDlgCancelButton = getBufferedImageFromResource("/dlg/dlg.cancel.png");
+        }
+        return imageDlgCancelButton;
+    }
+
+    @Override
+    public Image getDlgActiveCancelButtonImage() {
+        if (imageDlgActiveCancelButton == null) {
+            imageDlgActiveCancelButton = getBufferedImageFromResource("/dlg/dlg.cancel.hover.png");
+        }
+        return imageDlgActiveCancelButton;
+    }
+
+    @Override
+    public Image getDlgAcceptButtonImage() {
+        if (imageDlgAcceptButton == null) {
+            imageDlgAcceptButton = getBufferedImageFromResource("/dlg/dlg.ok.png");
+        }
+        return imageDlgAcceptButton;
+    }
+
+    @Override
+    public Image getDlgActiveAcceptButtonImage() {
+        if (imageDlgActiveAcceptButton == null) {
+            imageDlgActiveAcceptButton = getBufferedImageFromResource("/dlg/dlg.ok.hover.png");
+        }
+        return imageDlgActiveAcceptButton;
+    }
+
+    protected static Image getImageFromResourceTransparent(String path, Color mask, Rectangle rec) {
         BufferedImage image = null;
         Image imageCardTransparent = null;
         Image resized = null;
@@ -71,7 +99,25 @@ public class ImageManagerImpl implements ImageManager {
         return resized;
     }
 
-	private static BufferedImage imageSickness = null;
-	private static BufferedImage imageDay = null;
-	private static BufferedImage imageNight = null;
+    protected static BufferedImage getBufferedImageFromResource(String path) {
+        URL imageURL = ImageManager.class.getResource(path);
+        BufferedImage image = null;
+
+        try {
+            image = ImageIO.read(imageURL);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return image;
+    }
+
+	private static BufferedImage imageSickness;
+	private static BufferedImage imageDay;
+	private static BufferedImage imageNight;
+
+    private static BufferedImage imageDlgAcceptButton;
+    private static BufferedImage imageDlgActiveAcceptButton;
+    private static BufferedImage imageDlgCancelButton;
+    private static BufferedImage imageDlgActiveCancelButton;
 }
