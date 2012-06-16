@@ -1,4 +1,4 @@
-package org.mage.test.cards.events;
+package org.mage.test.cards.triggers.events;
 
 import mage.Constants;
 import mage.counters.CounterType;
@@ -9,7 +9,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TestSearchShuffle extends CardTestPlayerBase {
+public class SearchShuffleTest extends CardTestPlayerBase {
 
     
     /**

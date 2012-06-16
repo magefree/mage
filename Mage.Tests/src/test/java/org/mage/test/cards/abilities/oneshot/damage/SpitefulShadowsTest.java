@@ -1,8 +1,7 @@
-package org.mage.test.cards.damage;
+package org.mage.test.cards.abilities.oneshot.damage;
 
 import mage.Constants;
 import mage.counters.CounterType;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -13,7 +12,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  * 
  * @author BetaSteward
  */
-public class TestSpitefulShadows extends CardTestPlayerBase {
+public class SpitefulShadowsTest extends CardTestPlayerBase {
 
     @Test
     public void testCard() {
