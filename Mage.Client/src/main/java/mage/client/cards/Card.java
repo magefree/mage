@@ -361,14 +361,14 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
 					if (p != null) {
 						Point target = p.getLocationOnScreen();
 						Point me = this.getLocationOnScreen();
-						ArrowBuilder.addArrow((int)me.getX() + 35, (int)me.getY(), (int)target.getX() + 40, (int)target.getY() - 40, Color.red);
+						ArrowBuilder.addArrow((int)me.getX() + 35, (int)me.getY(), (int)target.getX() + 40, (int)target.getY() - 40, Color.red, ArrowBuilder.Type.TARGET);
 					} else {
 						for (PlayAreaPanel pa : MageFrame.getGame(gameId).getPlayers().values()) {
 							MagePermanent permanent = pa.getBattlefieldPanel().getPermanents().get(uuid);
 							if (permanent != null) {
 								Point target = permanent.getLocationOnScreen();
 								Point me = this.getLocationOnScreen();
-								ArrowBuilder.addArrow((int)me.getX() + 35, (int)me.getY(), (int)target.getX() + 40, (int)target.getY() + 10, Color.red);
+								ArrowBuilder.addArrow((int)me.getX() + 35, (int)me.getY(), (int)target.getX() + 40, (int)target.getY() + 10, Color.red, ArrowBuilder.Type.TARGET);
 							}
 						}
 					}
@@ -383,7 +383,10 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
 		if (popup != null) {
 			popup.hide();
 			popupShowing = false;
-			ArrowBuilder.removeAllArrows();
+			//ArrowBuilder.removeAllArrows();
+            ArrowBuilder.removeArrowsByType(ArrowBuilder.Type.TARGET);
+            ArrowBuilder.removeArrowsByType(ArrowBuilder.Type.PAIRED);
+            ArrowBuilder.removeArrowsByType(ArrowBuilder.Type.SOURCE);
 		}
 	}
 

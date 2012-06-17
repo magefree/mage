@@ -38,6 +38,7 @@ import mage.Constants;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.chat.ChatPanel;
+import mage.client.combat.CombatManager;
 import mage.client.components.MageComponents;
 import mage.client.components.ext.dlg.DialogManager;
 import mage.client.dialog.*;
@@ -421,9 +422,11 @@ public class GamePanel extends javax.swing.JPanel {
 		showRevealed(game);
 		showLookedAt(game);
 		if (game.getCombat().size() > 0) {
-			combat.showDialog(game.getCombat());
+			//combat.showDialog(game.getCombat());
+            CombatManager.getInstance().showCombat(game.getCombat(), gameId);
 		} else {
-			combat.hideDialog();
+			//combat.hideDialog();
+            CombatManager.getInstance().hideCombat();
 		}
 		updatePhases(game.getStep());
 		this.revalidate();

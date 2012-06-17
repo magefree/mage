@@ -28,12 +28,13 @@
 
 package mage.view;
 
-import java.io.Serializable;
-import java.util.UUID;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.io.Serializable;
+import java.util.UUID;
 
 /**
  *
@@ -45,6 +46,7 @@ public class CombatGroupView implements Serializable {
 	private CardsView attackers = new CardsView();
 	private CardsView blockers = new CardsView();
 	private String defenderName = "";
+    private UUID defenderId;
 
 	public CombatGroupView(CombatGroup combatGroup, Game game) {
 		Player player = game.getPlayer(combatGroup.getDefenderId());
@@ -56,7 +58,8 @@ public class CombatGroupView implements Serializable {
 			if (perm != null)
 				this.defenderName = perm.getName();
 		}
-		for (UUID id: combatGroup.getAttackers()) {
+        this.defenderId = combatGroup.getDefenderId();
+        for (UUID id: combatGroup.getAttackers()) {
 			Permanent attacker = game.getPermanent(id);
 			if (attacker != null)
 				attackers.put(id, new PermanentView(attacker, game.getCard(attacker.getId())));
@@ -79,4 +82,8 @@ public class CombatGroupView implements Serializable {
 	public CardsView getBlockers() {
 		return blockers;
 	}
+
+    public UUID getDefenderId() {
+        return defenderId;
+    }
 }
