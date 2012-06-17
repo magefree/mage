@@ -186,7 +186,8 @@ public class CombatUtil {
         List<Permanent> blockers = new ArrayList<Permanent>();
         for (Permanent blocker : possibleBlockers) {
             SurviveInfo info = willItSurvive(game, attackerId, defenderId, attacker, blocker);
-            if (info.isAttackerDied() && !info.isBlockerDied()) {
+            //if (info.isAttackerDied() && !info.isBlockerDied()) {
+            if (info.isAttackerDied()) {
                 blockers.add(blocker);
             }
         }
@@ -199,6 +200,10 @@ public class CombatUtil {
         Combat combat = sim.getCombat();
         combat.setAttacker(attackingPlayerId);
         combat.setDefenders(sim);
+
+        if (blocker == null || attacker == null || sim.getPlayer(defendingPlayerId) == null) {
+            return null;
+        }
 
         sim.getPlayer(defendingPlayerId).declareBlocker(blocker.getId(), attacker.getId(), sim);
         sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, defendingPlayerId, defendingPlayerId));
