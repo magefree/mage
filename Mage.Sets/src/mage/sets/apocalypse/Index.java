@@ -28,34 +28,34 @@
 
 package mage.sets.apocalypse;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.effects.common.LookLibraryControllerEffect;
 import mage.cards.CardImpl;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX
  */
 public class Index extends CardImpl<Index> {
 
-	public Index(UUID ownerId) {
-		super(ownerId, 25, "Index", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
-		this.expansionSetCode = "APC";
-		this.color.setBlue(true);
-                
-                // Look at the top five cards of your library, then put them back in any order.
-                this.getSpellAbility().addEffect(new LookLibraryControllerEffect(5));
-	}
+    public Index(UUID ownerId) {
+        super(ownerId, 25, "Index", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}");
+        this.expansionSetCode = "APC";
+        this.color.setBlue(true);
 
-	public Index(final Index card) {
-		super(card);
-	}
+        // Look at the top five cards of your library, then put them back in any order.
+        this.getSpellAbility().addEffect(new LookLibraryControllerEffect(5));
+    }
 
-	@Override
-	public Index copy() {
-		return new Index(this);
-	}
+    public Index(final Index card) {
+        super(card);
+    }
+
+    @Override
+    public Index copy() {
+        return new Index(this);
+    }
 
 }
