@@ -29,26 +29,24 @@
 package mage.sets.magic2011;
 
 import java.util.UUID;
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
-import mage.target.TargetPlayer;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com and jeff
  */
 public class WildEvocation extends CardImpl<WildEvocation> {
 
@@ -56,7 +54,9 @@ public class WildEvocation extends CardImpl<WildEvocation> {
 		super(ownerId, 160, "Wild Evocation", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{R}");
 		this.expansionSetCode = "M11";
 		this.color.setRed(true);
-		this.addAbility(new WildEvocationAbility());
+                
+                //At the beginning of each player's upkeep, that player reveals a card at random from his or her hand. If it's a land card, the player puts it onto the battlefield. Otherwise, the player casts it without paying its mana cost if able.
+		this.addAbility(new BeginningOfUpkeepTriggeredAbility(Constants.Zone.BATTLEFIELD, new WildEvocationEffect(), Constants.TargetController.ANY, false));
 	}
 
 	public WildEvocation(final WildEvocation card) {
@@ -70,42 +70,11 @@ public class WildEvocation extends CardImpl<WildEvocation> {
 
 }
 
-class WildEvocationAbility extends TriggeredAbilityImpl<WildEvocationAbility> {
-
-	public WildEvocationAbility() {
-		super(Zone.BATTLEFIELD, new WildEvocationEffect());
-	}
-
-	public WildEvocationAbility(final WildEvocationAbility ability) {
-		super(ability);
-	}
-
-	@Override
-	public WildEvocationAbility copy() {
-		return new WildEvocationAbility(this);
-	}
-
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.DRAW_STEP_PRE) {
-			this.addTarget(new TargetPlayer());
-			getTargets().get(0).add(event.getPlayerId(), game);
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public String getRule() {
-		return "At the beginning of each player's upkeep, that player reveals a card at random from his or her hand. If it's a land card, the player puts it onto the battlefield. Otherwise, the player casts it without paying its mana cost if able.";
-	}
-
-}
-
 class WildEvocationEffect extends OneShotEffect<WildEvocationEffect> {
 
 	public WildEvocationEffect() {
 		super(Outcome.PutCardInPlay);
+                staticText = "that player reveals a card at random from his or her hand.  If it's a land card, that player puts it onto the battlefield.  Otherwise, the player casts it without paying its mana cost if able";
 	}
 
 	public WildEvocationEffect(final WildEvocationEffect effect) {
@@ -114,7 +83,7 @@ class WildEvocationEffect extends OneShotEffect<WildEvocationEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getFirstTarget());
+		Player player = game.getPlayer(targetPointer.getFirst(game, source));
 		if (player != null && player.getHand().size() > 0) {
 			Card card = player.getHand().getRandom(game);
 			Cards cards = new CardsImpl();
