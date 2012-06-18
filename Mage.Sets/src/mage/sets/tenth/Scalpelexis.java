@@ -50,7 +50,7 @@ import mage.players.Player;
 public class Scalpelexis extends CardImpl<Scalpelexis> {
 
     public Scalpelexis(UUID ownerId) {
-        super(ownerId, 105, "Scalpelexis", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}");
+        super(ownerId, 105, "Scalpelexis", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}");
         this.expansionSetCode = "10E";
         this.subtype.add("Beast");
 
