@@ -50,7 +50,7 @@ import mage.players.Player;
 public class Scalpelexis extends CardImpl<Scalpelexis> {
 
     public Scalpelexis(UUID ownerId) {
-        super(ownerId, 105, "Scalpelexis", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}");
+        super(ownerId, 105, "Scalpelexis", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.expansionSetCode = "10E";
         this.subtype.add("Beast");
 
@@ -103,9 +103,9 @@ class ScalpelexisEffect extends OneShotEffect<ScalpelexisEffect> {
             int count = Math.min(player.getLibrary().size(), 4);
             for (int i = 0; i < count; i++) {
                 Card card = player.getLibrary().removeFromTop(game);
-                namesFiltered.add(card.getName());
                 if (card != null) {
-                    card.moveToExile(id, "Move <this> to exile", source.getId(), game);
+                    namesFiltered.add(card.getName());
+                    card.moveToExile(id, "Moved these cards to exile", source.getId(), game);
                 }
             }
         }
@@ -113,16 +113,15 @@ class ScalpelexisEffect extends OneShotEffect<ScalpelexisEffect> {
     }
     
     public boolean checkDuplicatedNames(List<String> string) {
-	for (int i = 0; i < string.size(); i++) {
+	for (int i = 0; i < string.size()-1; i++) {
             String stringToCheck = string.get(i);
-		if(stringToCheck == null) continue; //empty ignore
-                    for (int j = 0; j < string.size(); j++) {
-			if(i==j)continue; //same line ignore
-                            String stringToCompare = string.get(j);
-                            if (stringToCheck.equals(stringToCompare)){
-                                return true;
-                            }
-                    }
+            if(stringToCheck == null) continue; //empty ignore
+                for (int j = i+1; j < string.size(); j++) {
+                    String stringToCompare = string.get(j);
+                        if (stringToCheck.equals(stringToCompare)){
+                            return true;
+                        }
+                }
 	}
 	return false;
     }
