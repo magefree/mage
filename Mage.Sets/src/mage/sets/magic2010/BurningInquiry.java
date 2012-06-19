@@ -84,7 +84,12 @@ class BurningInquiryEffect extends OneShotEffect<BurningInquiryEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID playerId : game.getPlayerList()) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+
+        for (UUID playerId : controller.getInRange()) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 for (int i = 0; i < 3; i++) {

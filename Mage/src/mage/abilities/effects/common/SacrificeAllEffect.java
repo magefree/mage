@@ -74,21 +74,30 @@ public class SacrificeAllEffect extends OneShotEffect<SacrificeAllEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+
         List<UUID> perms = new ArrayList<UUID>();
-        for (Player player: game.getPlayers().values()) {
-            int numTargets = Math.min(amount, game.getBattlefield().countAll(filter, player.getId(), game));
-            TargetControlledPermanent target = new TargetControlledPermanent(numTargets, numTargets, filter, false);
-            if (target.canChoose(player.getId(), game)) {
-                while (!target.isChosen()) {
-                    player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+        for (UUID playerId : controller.getInRange()) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                int numTargets = Math.min(amount, game.getBattlefield().countAll(filter, player.getId(), game));
+                TargetControlledPermanent target = new TargetControlledPermanent(numTargets, numTargets, filter, false);
+                if (target.canChoose(player.getId(), game)) {
+                    while (!target.isChosen()) {
+                        player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+                    }
+                    perms.addAll(target.getTargets());
                 }
-                perms.addAll(target.getTargets());
             }
         }
-        for (UUID permID: perms) {
+        for (UUID permID : perms) {
             Permanent permanent = game.getPermanent(permID);
-            if (permanent != null)
+            if (permanent != null) {
                 permanent.sacrifice(source.getSourceId(), game);
+            }
         }
         return true;
     }
