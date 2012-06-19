@@ -76,7 +76,7 @@ class FilterSpiritOrEnchantment extends FilterPermanent<FilterSpiritOrEnchantmen
     }
 
     @Override
-	public boolean match(Permanent permanent, Game game) {
+    public boolean match(Permanent permanent, Game game) {
         if (!super.match(permanent, game))
             return notFilter;
 
@@ -87,7 +87,7 @@ class FilterSpiritOrEnchantment extends FilterPermanent<FilterSpiritOrEnchantmen
     }
 
     @Override
-	public FilterSpiritOrEnchantment copy() {
-		return new FilterSpiritOrEnchantment(this);
-	}
+    public FilterSpiritOrEnchantment copy() {
+        return new FilterSpiritOrEnchantment(this);
+    }
 }

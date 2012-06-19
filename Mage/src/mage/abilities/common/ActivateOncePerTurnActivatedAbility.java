@@ -41,58 +41,58 @@ import mage.game.Game;
  */
 public class ActivateOncePerTurnActivatedAbility extends ActivatedAbilityImpl<ActivateOncePerTurnActivatedAbility> {
 
-	public ActivateOncePerTurnActivatedAbility(Zone zone, Effect effect, Cost cost) {
-		super(zone, effect, cost);
-	}
+    public ActivateOncePerTurnActivatedAbility(Zone zone, Effect effect, Cost cost) {
+        super(zone, effect, cost);
+    }
 
-	public ActivateOncePerTurnActivatedAbility(ActivateOncePerTurnActivatedAbility ability) {
-		super(ability);
-	}
+    public ActivateOncePerTurnActivatedAbility(ActivateOncePerTurnActivatedAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public boolean canActivate(UUID playerId, Game game) {
-		if (super.canActivate(playerId, game)) {
-			Boolean activated = (Boolean)game.getState().getValue(this.originalId.toString() + "activated");
-			if (activated == null)
-				return true;
-			else
-				return !activated;
-		}
-		return false;
-	}
+    @Override
+    public boolean canActivate(UUID playerId, Game game) {
+        if (super.canActivate(playerId, game)) {
+            Boolean activated = (Boolean)game.getState().getValue(this.originalId.toString() + "activated");
+            if (activated == null)
+                return true;
+            else
+                return !activated;
+        }
+        return false;
+    }
 
-	@Override
-	public boolean activate(Game game, boolean noMana) {
-		if (canActivate(this.controllerId, game)) {
-			if (super.activate(game, noMana)) {
-				game.getState().setValue(this.originalId.toString() + "activated", Boolean.TRUE);
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean activate(Game game, boolean noMana) {
+        if (canActivate(this.controllerId, game)) {
+            if (super.activate(game, noMana)) {
+                game.getState().setValue(this.originalId.toString() + "activated", Boolean.TRUE);
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public void reset(Game game) {
-		game.getState().setValue(this.originalId.toString() + "activated", Boolean.FALSE);
-	}
+    @Override
+    public void reset(Game game) {
+        game.getState().setValue(this.originalId.toString() + "activated", Boolean.FALSE);
+    }
 
-	@Override
-	public boolean resolve(Game game) {
-		if (super.resolve(game)) {
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean resolve(Game game) {
+        if (super.resolve(game)) {
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return super.getRule() + " Activate this ability only once each turn.";
-	}
+    @Override
+    public String getRule() {
+        return super.getRule() + " Activate this ability only once each turn.";
+    }
 
-	@Override
-	public ActivateOncePerTurnActivatedAbility copy() {
-		return new ActivateOncePerTurnActivatedAbility(this);
-	}
+    @Override
+    public ActivateOncePerTurnActivatedAbility copy() {
+        return new ActivateOncePerTurnActivatedAbility(this);
+    }
 
 }

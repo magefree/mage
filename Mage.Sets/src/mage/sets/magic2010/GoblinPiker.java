@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class GoblinPiker extends mage.sets.tenth.GoblinPiker {
 
-	public GoblinPiker(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 140;
-		this.expansionSetCode = "M10";
-	}
+    public GoblinPiker(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 140;
+        this.expansionSetCode = "M10";
+    }
 
-	public GoblinPiker(final GoblinPiker card) {
-		super(card);
-	}
+    public GoblinPiker(final GoblinPiker card) {
+        super(card);
+    }
 
-	@Override
-	public GoblinPiker copy() {
-		return new GoblinPiker(this);
-	}
+    @Override
+    public GoblinPiker copy() {
+        return new GoblinPiker(this);
+    }
 
 }

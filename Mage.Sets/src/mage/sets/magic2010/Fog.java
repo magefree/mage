@@ -41,20 +41,20 @@ import mage.cards.CardImpl;
  */
 public class Fog extends CardImpl<Fog> {
 
-	public Fog(UUID ownerId) {
-		super(ownerId, 182, "Fog", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
-		this.expansionSetCode = "M10";
-		this.color.setGreen(true);
-		this.getSpellAbility().addEffect(new PreventAllDamageEffect(Duration.EndOfTurn, true));
-	}
+    public Fog(UUID ownerId) {
+        super(ownerId, 182, "Fog", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
+        this.expansionSetCode = "M10";
+        this.color.setGreen(true);
+        this.getSpellAbility().addEffect(new PreventAllDamageEffect(Duration.EndOfTurn, true));
+    }
 
-	public Fog(final Fog card) {
-		super(card);
-	}
+    public Fog(final Fog card) {
+        super(card);
+    }
 
-	@Override
-	public Fog copy() {
-		return new Fog(this);
-	}
+    @Override
+    public Fog copy() {
+        return new Fog(this);
+    }
 
 }

@@ -52,12 +52,12 @@ public class Gigantomancer extends CardImpl<Gigantomancer> {
         this.expansionSetCode = "ROE";
         this.subtype.add("Human");
         this.subtype.add("Shaman");
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-		Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new SetPowerToughnessTargetEffect(7, 7, Constants.Duration.EndOfTurn), new GenericManaCost(1));
-		ability.addTarget(new TargetControlledCreaturePermanent());
-		this.addAbility(ability);
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new SetPowerToughnessTargetEffect(7, 7, Constants.Duration.EndOfTurn), new GenericManaCost(1));
+        ability.addTarget(new TargetControlledCreaturePermanent());
+        this.addAbility(ability);
     }
 
     public Gigantomancer (final Gigantomancer card) {

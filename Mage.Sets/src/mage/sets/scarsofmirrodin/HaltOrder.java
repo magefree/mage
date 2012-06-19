@@ -44,20 +44,20 @@ import mage.target.TargetSpell;
  */
 public class HaltOrder extends CardImpl<HaltOrder> {
 
-	private static final FilterSpell filter = new FilterSpell("artifact spell");
+    private static final FilterSpell filter = new FilterSpell("artifact spell");
 
-	static {
-		filter.getCardType().add(CardType.ARTIFACT);
-		filter.setScopeCardType(Filter.ComparisonScope.Any);
-	}
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
+    }
 
     public HaltOrder (UUID ownerId) {
         super(ownerId, 34, "Halt Order", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "SOM";
         this.color.setBlue(true);
         this.getSpellAbility().addTarget(new TargetSpell(filter));
-		this.getSpellAbility().addEffect(new CounterTargetEffect());
-		this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+        this.getSpellAbility().addEffect(new CounterTargetEffect());
+        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
     }
 
     public HaltOrder (final HaltOrder card) {

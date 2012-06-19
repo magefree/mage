@@ -38,10 +38,10 @@ import java.util.List;
  */
 public class LimitedOptions implements Serializable {
 
-	protected List<String> sets = new ArrayList<String>();
+    protected List<String> sets = new ArrayList<String>();
 
-	public List<String> getSetCodes() {
-		return sets;
-	}
+    public List<String> getSetCodes() {
+        return sets;
+    }
 
 }

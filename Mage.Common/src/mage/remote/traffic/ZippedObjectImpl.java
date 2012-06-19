@@ -17,38 +17,38 @@ import java.util.zip.GZIPOutputStream;
  */
 public class ZippedObjectImpl<T> implements ZippedObject<T>, Serializable {
 
-	private byte[] data;
+    private byte[] data;
 
-	public ZippedObjectImpl(T object) {
-		zip(object);
-	}
-	
-	public void zip(T object) {
-		try {
-			ByteArrayOutputStream bos = new ByteArrayOutputStream();
-			GZIPOutputStream gz = new GZIPOutputStream(bos);
-			ObjectOutputStream oos = new ObjectOutputStream(gz);
-			oos.writeObject(object);
-			oos.close();
-			data = bos.toByteArray();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	@SuppressWarnings("unchecked")
-	public T unzip() {
-		try {
-			ByteArrayInputStream bis = new ByteArrayInputStream(data);
-			GZIPInputStream gz = new GZIPInputStream(bis);
-			ObjectInputStream ois = new ObjectInputStream(gz);
-			Object o = ois.readObject();
-			return (T)o;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
-	private static final long serialVersionUID = 1L;
+    public ZippedObjectImpl(T object) {
+        zip(object);
+    }
+
+    public void zip(T object) {
+        try {
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            GZIPOutputStream gz = new GZIPOutputStream(bos);
+            ObjectOutputStream oos = new ObjectOutputStream(gz);
+            oos.writeObject(object);
+            oos.close();
+            data = bos.toByteArray();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public T unzip() {
+        try {
+            ByteArrayInputStream bis = new ByteArrayInputStream(data);
+            GZIPInputStream gz = new GZIPInputStream(bis);
+            ObjectInputStream ois = new ObjectInputStream(gz);
+            Object o = ois.readObject();
+            return (T)o;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private static final long serialVersionUID = 1L;
 }

@@ -44,85 +44,85 @@ import java.util.UUID;
  */
 public abstract class EffectImpl<T extends Effect<T>> implements Effect<T> {
 
-	protected UUID id;
-	protected final Outcome outcome;
-	protected EffectType effectType;
+    protected UUID id;
+    protected final Outcome outcome;
+    protected EffectType effectType;
     protected TargetPointer targetPointer = FirstTargetPointer.getInstance();
     protected String staticText = "";
-	protected Map<String, Object> values;
+    protected Map<String, Object> values;
 
-	public EffectImpl(Outcome outcome) {
-		this.id = UUID.randomUUID();
-		this.outcome = outcome;
-	}
+    public EffectImpl(Outcome outcome) {
+        this.id = UUID.randomUUID();
+        this.outcome = outcome;
+    }
 
-	public EffectImpl(final EffectImpl effect) {
-		this.id = effect.id;
-		this.outcome = effect.outcome;
-		this.effectType = effect.effectType;
+    public EffectImpl(final EffectImpl effect) {
+        this.id = effect.id;
+        this.outcome = effect.outcome;
+        this.effectType = effect.effectType;
         this.staticText = effect.staticText;
         this.targetPointer = effect.targetPointer.copy();
-		if (effect.values != null) {
-			values = new HashMap<String, Object>();
-			Map<String, Object> map = effect.values;
-			for (Map.Entry<String, Object> entry : map.entrySet()) {
-				values.put(entry.getKey(), entry.getValue());
-			}
-		}
-	}
+        if (effect.values != null) {
+            values = new HashMap<String, Object>();
+            Map<String, Object> map = effect.values;
+            for (Map.Entry<String, Object> entry : map.entrySet()) {
+                values.put(entry.getKey(), entry.getValue());
+            }
+        }
+    }
 
-	@Override
-	public UUID getId() {
-		return id;
-	}
+    @Override
+    public UUID getId() {
+        return id;
+    }
 
-	@Override
-	public String getText(Mode mode) {
+    @Override
+    public String getText(Mode mode) {
         return staticText;
-	}
+    }
 
-	@Override
-	public Outcome getOutcome() {
-		return outcome;
-	}
+    @Override
+    public Outcome getOutcome() {
+        return outcome;
+    }
 
-	@Override
-	public EffectType getEffectType() {
-		return effectType;
-	}
+    @Override
+    public EffectType getEffectType() {
+        return effectType;
+    }
 
     @Override
     public void setTargetPointer(TargetPointer targetPointer) {
         this.targetPointer = targetPointer;
     }
 
-	@Override
-	public TargetPointer getTargetPointer() {
-		return this.targetPointer;
-	}
+    @Override
+    public TargetPointer getTargetPointer() {
+        return this.targetPointer;
+    }
 
-	@Override
-	public void newId() {
-		this.id = UUID.randomUUID();
-	}
+    @Override
+    public void newId() {
+        this.id = UUID.randomUUID();
+    }
 
-	@Override
-	public void setValue(String key, Object value) {
-		if (values == null) {
-			synchronized (this) {
-				if (values == null) {
-					values = new HashMap<String, Object>();
-				}
-			}
-		}
-		values.put(key, value);
-	}
+    @Override
+    public void setValue(String key, Object value) {
+        if (values == null) {
+            synchronized (this) {
+                if (values == null) {
+                    values = new HashMap<String, Object>();
+                }
+            }
+        }
+        values.put(key, value);
+    }
 
-	@Override
-	public Object getValue(String key) {
-		if (values == null) { // no value was set
-			return null;
-		}
-		return values.get(key);
-	}
+    @Override
+    public Object getValue(String key) {
+        if (values == null) { // no value was set
+            return null;
+        }
+        return values.get(key);
+    }
 }

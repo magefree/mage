@@ -40,20 +40,20 @@ import mage.cards.CardImpl;
  */
 public class JacesIngenuity extends CardImpl<JacesIngenuity> {
 
-	public JacesIngenuity(UUID ownerId) {
-		super(ownerId, 60, "Jace's Ingenuity", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
-		this.expansionSetCode = "M11";
-		this.color.setBlue(true);
-		this.getSpellAbility().addEffect(new DrawCardControllerEffect(3));
-	}
+    public JacesIngenuity(UUID ownerId) {
+        super(ownerId, 60, "Jace's Ingenuity", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
+        this.expansionSetCode = "M11";
+        this.color.setBlue(true);
+        this.getSpellAbility().addEffect(new DrawCardControllerEffect(3));
+    }
 
-	public JacesIngenuity(final JacesIngenuity card) {
-		super(card);
-	}
+    public JacesIngenuity(final JacesIngenuity card) {
+        super(card);
+    }
 
-	@Override
-	public JacesIngenuity copy() {
-		return new JacesIngenuity(this);
-	}
+    @Override
+    public JacesIngenuity copy() {
+        return new JacesIngenuity(this);
+    }
 }
 

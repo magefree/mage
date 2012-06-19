@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class Juggernaut extends mage.sets.tenth.Juggernaut {
 
-	public Juggernaut(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 209;
-		this.expansionSetCode = "M11";
-	}
+    public Juggernaut(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 209;
+        this.expansionSetCode = "M11";
+    }
 
-	public Juggernaut(final Juggernaut card) {
-		super(card);
-	}
+    public Juggernaut(final Juggernaut card) {
+        super(card);
+    }
 
-	@Override
-	public Juggernaut copy() {
-		return new Juggernaut(this);
-	}
+    @Override
+    public Juggernaut copy() {
+        return new Juggernaut(this);
+    }
 
 }

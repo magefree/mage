@@ -73,7 +73,7 @@ class WaspToken extends Token {
         cardType.add(CardType.CREATURE);
         this.subtype.add("Insect");
         power = new MageInt(1);
-		toughness = new MageInt(1);
+        toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
     }
 }

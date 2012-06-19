@@ -41,6 +41,6 @@ public abstract class ManaCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         return false;
     }
-    
+
     public abstract boolean apply(Game game, Ability source, UUID originalId);
 }

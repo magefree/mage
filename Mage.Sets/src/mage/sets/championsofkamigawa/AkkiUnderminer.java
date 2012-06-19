@@ -56,7 +56,7 @@ public class AkkiUnderminer extends CardImpl<AkkiUnderminer> {
         this.subtype.add("Goblin");
         this.subtype.add("Rogue");
         this.subtype.add("Shaman");
-		this.color.setRed(true);
+        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(new AkkiUnderminerAbility());
@@ -96,7 +96,7 @@ class AkkiUnderminerAbility extends TriggeredAbilityImpl<AkkiUnderminerAbility> 
                 for (Effect effect : this.getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                 }
-			    return true;
+                return true;
             }
         }
         return false;

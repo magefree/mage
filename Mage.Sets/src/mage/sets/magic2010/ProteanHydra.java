@@ -56,42 +56,42 @@ import java.util.UUID;
  */
 public class ProteanHydra extends CardImpl<ProteanHydra> {
 
-	public ProteanHydra(UUID ownerId) {
-		super(ownerId, 200, "Protean Hydra", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{X}{G}");
-		this.expansionSetCode = "M10";
-		this.subtype.add("Hydra");
-		this.color.setGreen(true);
-		this.power = new MageInt(0);
-		this.toughness = new MageInt(0);
+    public ProteanHydra(UUID ownerId) {
+        super(ownerId, 200, "Protean Hydra", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{X}{G}");
+        this.expansionSetCode = "M10";
+        this.subtype.add("Hydra");
+        this.color.setGreen(true);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(0);
 
-		this.addAbility(new EntersBattlefieldAbility(new ProteanHydraEffect1(), "with X +1/+1 counters on it"));
-		this.addAbility(new ProteanHydraAbility());
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ProteanHydraEffect2()));
-	}
+        this.addAbility(new EntersBattlefieldAbility(new ProteanHydraEffect1(), "with X +1/+1 counters on it"));
+        this.addAbility(new ProteanHydraAbility());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ProteanHydraEffect2()));
+    }
 
-	public ProteanHydra(final ProteanHydra card) {
-		super(card);
-	}
+    public ProteanHydra(final ProteanHydra card) {
+        super(card);
+    }
 
-	@Override
-	public ProteanHydra copy() {
-		return new ProteanHydra(this);
-	}
+    @Override
+    public ProteanHydra copy() {
+        return new ProteanHydra(this);
+    }
 
-	class ProteanHydraEffect1 extends OneShotEffect<ProteanHydraEffect1> {
+    class ProteanHydraEffect1 extends OneShotEffect<ProteanHydraEffect1> {
 
-		public ProteanHydraEffect1() {
-			super(Outcome.BoostCreature);
-			staticText = "{this} enters the battlefield with X +1/+1 counters on it";
-		}
+        public ProteanHydraEffect1() {
+            super(Outcome.BoostCreature);
+            staticText = "{this} enters the battlefield with X +1/+1 counters on it";
+        }
 
-		public ProteanHydraEffect1(final ProteanHydraEffect1 effect) {
-			super(effect);
-		}
+        public ProteanHydraEffect1(final ProteanHydraEffect1 effect) {
+            super(effect);
+        }
 
-		@Override
-		public boolean apply(Game game, Ability source) {
-			Permanent permanent = game.getPermanent(source.getSourceId());
+        @Override
+        public boolean apply(Game game, Ability source) {
+            Permanent permanent = game.getPermanent(source.getSourceId());
             if (permanent != null) {
                 Object obj = getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
                 if (obj != null && obj instanceof SpellAbility) {
@@ -101,123 +101,123 @@ public class ProteanHydra extends CardImpl<ProteanHydra> {
                     }
                 }
             }
-			return true;
-		}
+            return true;
+        }
 
-		@Override
-		public ProteanHydraEffect1 copy() {
-			return new ProteanHydraEffect1(this);
-		}
+        @Override
+        public ProteanHydraEffect1 copy() {
+            return new ProteanHydraEffect1(this);
+        }
 
-	}
+    }
 
-	class ProteanHydraEffect2 extends PreventionEffectImpl<ProteanHydraEffect2> {
+    class ProteanHydraEffect2 extends PreventionEffectImpl<ProteanHydraEffect2> {
 
-		public ProteanHydraEffect2() {
-			super(Duration.WhileOnBattlefield);
-		}
+        public ProteanHydraEffect2() {
+            super(Duration.WhileOnBattlefield);
+        }
 
-		public ProteanHydraEffect2(final ProteanHydraEffect2 effect) {
-			super(effect);
-			staticText = "If damage would be dealt to {this}, prevent that damage and remove that many +1/+1 counters from it";
-		}
+        public ProteanHydraEffect2(final ProteanHydraEffect2 effect) {
+            super(effect);
+            staticText = "If damage would be dealt to {this}, prevent that damage and remove that many +1/+1 counters from it";
+        }
 
-		@Override
-		public ProteanHydraEffect2 copy() {
-			return new ProteanHydraEffect2(this);
-		}
+        @Override
+        public ProteanHydraEffect2 copy() {
+            return new ProteanHydraEffect2(this);
+        }
 
-		@Override
-		public boolean apply(Game game, Ability source) {
-			return true;
-		}
+        @Override
+        public boolean apply(Game game, Ability source) {
+            return true;
+        }
 
-		@Override
-		public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-			boolean retValue = false;
-			GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), event.getAmount(), false);
-			int damage = event.getAmount();
-			if (!game.replaceEvent(preventEvent)) {
-				event.setAmount(0);
-				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), damage));
-				retValue = true;
-			}
-			Permanent permanent = game.getPermanent(source.getSourceId());
-			if (permanent != null) {
-				permanent.removeCounters(CounterType.P1P1.createInstance(damage), game);
-			}
-			return retValue;
-		}
+        @Override
+        public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+            boolean retValue = false;
+            GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), event.getAmount(), false);
+            int damage = event.getAmount();
+            if (!game.replaceEvent(preventEvent)) {
+                event.setAmount(0);
+                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), damage));
+                retValue = true;
+            }
+            Permanent permanent = game.getPermanent(source.getSourceId());
+            if (permanent != null) {
+                permanent.removeCounters(CounterType.P1P1.createInstance(damage), game);
+            }
+            return retValue;
+        }
 
-		@Override
-		public boolean applies(GameEvent event, Ability source, Game game) {
-			if (super.applies(event, source, game)) {
-				if (event.getTargetId().equals(source.getSourceId())) {
-					return true;
-				}
-			}
-			return false;
-		}
+        @Override
+        public boolean applies(GameEvent event, Ability source, Game game) {
+            if (super.applies(event, source, game)) {
+                if (event.getTargetId().equals(source.getSourceId())) {
+                    return true;
+                }
+            }
+            return false;
+        }
 
-	}
+    }
 
-	class ProteanHydraAbility extends TriggeredAbilityImpl<ProteanHydraAbility> {
+    class ProteanHydraAbility extends TriggeredAbilityImpl<ProteanHydraAbility> {
 
-		public ProteanHydraAbility() {
-			super(Zone.BATTLEFIELD, new CreateDelayedTriggeredAbilityEffect(new ProteanHydraDelayedTriggeredAbility()), false);
-		}
+        public ProteanHydraAbility() {
+            super(Zone.BATTLEFIELD, new CreateDelayedTriggeredAbilityEffect(new ProteanHydraDelayedTriggeredAbility()), false);
+        }
 
-		public ProteanHydraAbility(final ProteanHydraAbility ability) {
-			super(ability);
-		}
+        public ProteanHydraAbility(final ProteanHydraAbility ability) {
+            super(ability);
+        }
 
-		@Override
-		public ProteanHydraAbility copy() {
-			return new ProteanHydraAbility(this);
-		}
+        @Override
+        public ProteanHydraAbility copy() {
+            return new ProteanHydraAbility(this);
+        }
 
-		@Override
-		public boolean checkTrigger(GameEvent event, Game game) {
-			if (event.getType() == EventType.COUNTER_REMOVED && event.getData().equals("+1/+1") && event.getTargetId().equals(this.getSourceId())) {
-				return true;
-			}
-			return false;
-		}
+        @Override
+        public boolean checkTrigger(GameEvent event, Game game) {
+            if (event.getType() == EventType.COUNTER_REMOVED && event.getData().equals("+1/+1") && event.getTargetId().equals(this.getSourceId())) {
+                return true;
+            }
+            return false;
+        }
 
-		@Override
-		public String getRule() {
-			return "Whenever a +1/+1 counter is removed from {this}, put two +1/+1 counters on it at the beginning of the next end step.";
-		}
+        @Override
+        public String getRule() {
+            return "Whenever a +1/+1 counter is removed from {this}, put two +1/+1 counters on it at the beginning of the next end step.";
+        }
 
-	}
+    }
 
-	class ProteanHydraDelayedTriggeredAbility extends DelayedTriggeredAbility<ProteanHydraDelayedTriggeredAbility> {
+    class ProteanHydraDelayedTriggeredAbility extends DelayedTriggeredAbility<ProteanHydraDelayedTriggeredAbility> {
 
-		public ProteanHydraDelayedTriggeredAbility() {
-			super(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)));
-		}
+        public ProteanHydraDelayedTriggeredAbility() {
+            super(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)));
+        }
 
-		public ProteanHydraDelayedTriggeredAbility(final ProteanHydraDelayedTriggeredAbility ability) {
-			super(ability);
-		}
+        public ProteanHydraDelayedTriggeredAbility(final ProteanHydraDelayedTriggeredAbility ability) {
+            super(ability);
+        }
 
-		@Override
-		public ProteanHydraDelayedTriggeredAbility copy() {
-			return new ProteanHydraDelayedTriggeredAbility(this);
-		}
+        @Override
+        public ProteanHydraDelayedTriggeredAbility copy() {
+            return new ProteanHydraDelayedTriggeredAbility(this);
+        }
 
-		@Override
-		public boolean checkTrigger(GameEvent event, Game game) {
-			if (event.getType() == EventType.END_TURN_STEP_PRE) {
-				return true;
-			}
-			return false;
-		}
+        @Override
+        public boolean checkTrigger(GameEvent event, Game game) {
+            if (event.getType() == EventType.END_TURN_STEP_PRE) {
+                return true;
+            }
+            return false;
+        }
 
-		@Override
-		public String getRule() {
-			return "Put two +1/+1 counters on {this} at the beginning of the next end step";
-		}
+        @Override
+        public String getRule() {
+            return "Put two +1/+1 counters on {this} at the beginning of the next end step";
+        }
 
-	}
+    }
 }

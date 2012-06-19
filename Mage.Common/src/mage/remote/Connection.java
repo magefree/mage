@@ -37,171 +37,171 @@ import java.util.Enumeration;
  */
 public class Connection {
 
-	private String host;
-	private int port;
-	private String username;
-	private String password;
-	private ProxyType proxyType;
-	private String proxyHost;
-	private int proxyPort;
-	private String proxyUsername;
-	private String proxyPassword;
+    private String host;
+    private int port;
+    private String username;
+    private String password;
+    private ProxyType proxyType;
+    private String proxyHost;
+    private int proxyPort;
+    private String proxyUsername;
+    private String proxyPassword;
 
-	private int avatarId;
-	
-	private static final String serialization = "?serializationtype=jboss";
-	private static final String transport = "bisocket";
+    private int avatarId;
 
-	@Override
-	public int hashCode() {
-		return (transport + host + Integer.toString(port) + proxyType.toString()).hashCode();	
-	}
+    private static final String serialization = "?serializationtype=jboss";
+    private static final String transport = "bisocket";
 
-	@Override
-	public boolean equals(Object object) {
-		if (! (object instanceof Connection)) {
-			return false;	
-		}
-		Connection otherConnection = (Connection) object;
-		return hashCode() == otherConnection.hashCode();
-	}
+    @Override
+    public int hashCode() {
+        return (transport + host + Integer.toString(port) + proxyType.toString()).hashCode();    
+    }
 
-	@Override
-	public String toString() {
-		return host + ":" + Integer.toString(port) + "/" + serialization;
-	}
+    @Override
+    public boolean equals(Object object) {
+        if (! (object instanceof Connection)) {
+            return false;    
+        }
+        Connection otherConnection = (Connection) object;
+        return hashCode() == otherConnection.hashCode();
+    }
 
-	public String getURI() {
-		if (host.equals("localhost")) {
-			try {
-				InetAddress inet = getLocalAddress();
-				if (inet != null) {
-					return transport + "://" + inet.getHostAddress() + ":" + port + "/" + serialization;
-				}
-			} catch (SocketException ex) {
-				// just use localhost if can't find local ip
-			}
-		}
-		return transport + "://" + host + ":" + port + "/" + serialization;
-	}
-	
-	public ProxyType getProxyType() {
-		return proxyType;
-	}
+    @Override
+    public String toString() {
+        return host + ":" + Integer.toString(port) + "/" + serialization;
+    }
 
-	public void setProxyType(ProxyType proxyType) {
-		this.proxyType = proxyType;
-	}
+    public String getURI() {
+        if (host.equals("localhost")) {
+            try {
+                InetAddress inet = getLocalAddress();
+                if (inet != null) {
+                    return transport + "://" + inet.getHostAddress() + ":" + port + "/" + serialization;
+                }
+            } catch (SocketException ex) {
+                // just use localhost if can't find local ip
+            }
+        }
+        return transport + "://" + host + ":" + port + "/" + serialization;
+    }
 
-	public enum ProxyType {
-		SOCKS("Socks"), HTTP("HTTP"), NONE("None");
+    public ProxyType getProxyType() {
+        return proxyType;
+    }
 
-		private String text;
+    public void setProxyType(ProxyType proxyType) {
+        this.proxyType = proxyType;
+    }
 
-		ProxyType(String text) {
-			this.text = text;
-		}
+    public enum ProxyType {
+        SOCKS("Socks"), HTTP("HTTP"), NONE("None");
 
-		@Override
-		public String toString() {
-			return text;
-		}
+        private String text;
 
-		public static ProxyType valueByText(String value) {
-			for (ProxyType type : values()) {
-				if (type.text.equals(value)) return type;
-			}
-			return NONE;
-		}
-	}
+        ProxyType(String text) {
+            this.text = text;
+        }
 
-	public String getHost() {
-		return host;
-	}
+        @Override
+        public String toString() {
+            return text;
+        }
 
-	public void setHost(String host) {
-		this.host = host;
-	}
+        public static ProxyType valueByText(String value) {
+            for (ProxyType type : values()) {
+                if (type.text.equals(value)) return type;
+            }
+            return NONE;
+        }
+    }
 
-	public int getPort() {
-		return port;
-	}
+    public String getHost() {
+        return host;
+    }
 
-	public void setPort(int port) {
-		this.port = port;
-	}
+    public void setHost(String host) {
+        this.host = host;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public int getPort() {
+        return port;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public void setPort(int port) {
+        this.port = port;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public String getProxyHost() {
-		return proxyHost;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public void setProxyHost(String proxyHost) {
-		this.proxyHost = proxyHost;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public int getProxyPort() {
-		return proxyPort;
-	}
+    public String getProxyHost() {
+        return proxyHost;
+    }
 
-	public void setProxyPort(int proxyPort) {
-		this.proxyPort = proxyPort;
-	}
+    public void setProxyHost(String proxyHost) {
+        this.proxyHost = proxyHost;
+    }
 
-	public String getProxyUsername() {
-		return proxyUsername;
-	}
+    public int getProxyPort() {
+        return proxyPort;
+    }
 
-	public void setProxyUsername(String proxyUsername) {
-		this.proxyUsername = proxyUsername;
-	}
+    public void setProxyPort(int proxyPort) {
+        this.proxyPort = proxyPort;
+    }
 
-	public String getProxyPassword() {
-		return proxyPassword;
-	}
+    public String getProxyUsername() {
+        return proxyUsername;
+    }
 
-	public void setProxyPassword(String proxyPassword) {
-		this.proxyPassword = proxyPassword;
-	}
-	
-	public static InetAddress getLocalAddress() throws SocketException {
-		for (Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces(); interfaces.hasMoreElements(); ) {
-			NetworkInterface iface = interfaces.nextElement( );
-			if (iface.isLoopback())
-				continue;
-			for (InterfaceAddress addr: iface.getInterfaceAddresses()) {
+    public void setProxyUsername(String proxyUsername) {
+        this.proxyUsername = proxyUsername;
+    }
+
+    public String getProxyPassword() {
+        return proxyPassword;
+    }
+
+    public void setProxyPassword(String proxyPassword) {
+        this.proxyPassword = proxyPassword;
+    }
+
+    public static InetAddress getLocalAddress() throws SocketException {
+        for (Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces(); interfaces.hasMoreElements(); ) {
+            NetworkInterface iface = interfaces.nextElement( );
+            if (iface.isLoopback())
+                continue;
+            for (InterfaceAddress addr: iface.getInterfaceAddresses()) {
                 if (addr != null) {
                     InetAddress iaddr = addr.getAddress();
                     if (iaddr != null && iaddr instanceof Inet4Address) {
                         return iaddr;
                     }
                 }
-			}
-		}
-		return null;
-	}
+            }
+        }
+        return null;
+    }
 
-	public int getAvatarId() {
-		return avatarId;
-	}
+    public int getAvatarId() {
+        return avatarId;
+    }
 
-	public void setAvatarId(int avatarId) {
-		this.avatarId = avatarId;
-	}
+    public void setAvatarId(int avatarId) {
+        this.avatarId = avatarId;
+    }
 
 }

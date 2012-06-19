@@ -50,7 +50,7 @@ public class FusionElemental extends CardImpl<FusionElemental> {
         this.color.setRed(true);
         this.color.setWhite(true);
         this.power = new MageInt(8);
-	this.toughness = new MageInt(8);
+    this.toughness = new MageInt(8);
     }
 
     public FusionElemental(final FusionElemental card) {

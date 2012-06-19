@@ -51,60 +51,60 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class PistusStrike extends CardImpl<PistusStrike> {
 
-	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
 
-	static {
-		filter.getAbilities().add(FlyingAbility.getInstance());
-	}
+    static {
+        filter.getAbilities().add(FlyingAbility.getInstance());
+    }
 
-	public PistusStrike(UUID ownerId) {
-		super(ownerId, 86, "Pistus Strike", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
-		this.expansionSetCode = "MBS";
-		this.color.setGreen(true);
-		
-		this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-		this.getSpellAbility().addEffect(new DestroyTargetEffect());
-		this.getSpellAbility().addEffect(new PoisonControllerTargetCreatureEffect());
-	}
+    public PistusStrike(UUID ownerId) {
+        super(ownerId, 86, "Pistus Strike", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
+        this.expansionSetCode = "MBS";
+        this.color.setGreen(true);
 
-	public PistusStrike(final PistusStrike card) {
-		super(card);
-	}
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getSpellAbility().addEffect(new PoisonControllerTargetCreatureEffect());
+    }
 
-	@Override
-	public PistusStrike copy() {
-		return new PistusStrike(this);
-	}
+    public PistusStrike(final PistusStrike card) {
+        super(card);
+    }
+
+    @Override
+    public PistusStrike copy() {
+        return new PistusStrike(this);
+    }
 }
 
 class PoisonControllerTargetCreatureEffect extends OneShotEffect<PoisonControllerTargetCreatureEffect> {
 
-	public PoisonControllerTargetCreatureEffect() {
-		super(Outcome.Damage);
+    public PoisonControllerTargetCreatureEffect() {
+        super(Outcome.Damage);
         staticText = "Its controller gets a poison counter";
-	}
+    }
 
-	public PoisonControllerTargetCreatureEffect(final PoisonControllerTargetCreatureEffect effect) {
-		super(effect);
-	}
+    public PoisonControllerTargetCreatureEffect(final PoisonControllerTargetCreatureEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public PoisonControllerTargetCreatureEffect copy() {
-		return new PoisonControllerTargetCreatureEffect(this);
-	}
+    @Override
+    public PoisonControllerTargetCreatureEffect copy() {
+        return new PoisonControllerTargetCreatureEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent p = game.getBattlefield().getPermanent(source.getFirstTarget());
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent p = game.getBattlefield().getPermanent(source.getFirstTarget());
         if (p == null) {
             p = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
         }
         if (p != null) {
             Player player = game.getPlayer(p.getControllerId());
             if (player != null) {
-    			player.addCounters(CounterType.POISON.createInstance(), game);
+                player.addCounters(CounterType.POISON.createInstance(), game);
             }
         }
-		return false;
-	}
+        return false;
+    }
 }

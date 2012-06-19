@@ -44,39 +44,39 @@ import mage.game.permanent.Permanent;
  */
 public class SetPowerToughnessSourceEffect extends ContinuousEffectImpl<SetPowerToughnessSourceEffect> {
 
-	private DynamicValue amount;
+    private DynamicValue amount;
     private int power;
     private int toughness;
 
     public SetPowerToughnessSourceEffect(DynamicValue amount, Duration duration) {
         super(duration, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
         this.amount = amount;
-		staticText = "{this}'s power and toughness are each equal to the number of " + amount.getMessage();
+        staticText = "{this}'s power and toughness are each equal to the number of " + amount.getMessage();
     }
 
     public SetPowerToughnessSourceEffect(int power, int toughness, Duration duration) {
         super(duration, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
         this.power = power;
         this.toughness = toughness;
-		staticText = "{this}'s power and toughness is " + power + "/" + toughness;
+        staticText = "{this}'s power and toughness is " + power + "/" + toughness;
     }
 
     public SetPowerToughnessSourceEffect(final SetPowerToughnessSourceEffect effect) {
-		super(effect);
-		this.amount = effect.amount;
+        super(effect);
+        this.amount = effect.amount;
         this.power = effect.power;
         this.toughness = effect.toughness;
-	}
+    }
 
-	@Override
-	public SetPowerToughnessSourceEffect copy() {
-		return new SetPowerToughnessSourceEffect(this);
-	}
+    @Override
+    public SetPowerToughnessSourceEffect copy() {
+        return new SetPowerToughnessSourceEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent target = game.getPermanent(source.getSourceId());
-		if (target != null) {
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent target = game.getPermanent(source.getSourceId());
+        if (target != null) {
             if (amount != null) {
                 int value = amount.calculate(game, source);
                 target.getPower().setValue(value);
@@ -89,8 +89,8 @@ public class SetPowerToughnessSourceEffect extends ContinuousEffectImpl<SetPower
                 if (toughness != Integer.MIN_VALUE)
                     target.getToughness().setValue(toughness);
             }
-		}
-		return false;
-	}
+        }
+        return false;
+    }
 
 }

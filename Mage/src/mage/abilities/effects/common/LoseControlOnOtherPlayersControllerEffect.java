@@ -40,27 +40,27 @@ import mage.players.Player;
  */
 public class LoseControlOnOtherPlayersControllerEffect extends OneShotEffect<LoseControlOnOtherPlayersControllerEffect> {
 
-	public LoseControlOnOtherPlayersControllerEffect() {
-		super(Outcome.Detriment);
-	}
+    public LoseControlOnOtherPlayersControllerEffect() {
+        super(Outcome.Detriment);
+    }
 
-	public LoseControlOnOtherPlayersControllerEffect(final LoseControlOnOtherPlayersControllerEffect effect) {
-		super(effect);
-	}
+    public LoseControlOnOtherPlayersControllerEffect(final LoseControlOnOtherPlayersControllerEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public LoseControlOnOtherPlayersControllerEffect copy() {
-		return new LoseControlOnOtherPlayersControllerEffect(this);
-	}
+    @Override
+    public LoseControlOnOtherPlayersControllerEffect copy() {
+        return new LoseControlOnOtherPlayersControllerEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-		if (player != null) {
-			player.resetOtherTurnsControlled();
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+            player.resetOtherTurnsControlled();
+            return true;
+        }
+        return false;
+    }
 
 }

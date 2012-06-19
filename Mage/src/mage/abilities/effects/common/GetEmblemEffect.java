@@ -40,28 +40,28 @@ import mage.game.command.Emblem;
  */
 public class GetEmblemEffect extends OneShotEffect<GetEmblemEffect> {
 
-	private Emblem emblem;
+    private Emblem emblem;
 
-	public GetEmblemEffect(Emblem emblem) {
-		super(Outcome.Benefit);
-		this.emblem = emblem;
-		this.staticText = "You get an emblem with \"" + emblem.getAbilities().getRules(null) + "\"";
-	}
+    public GetEmblemEffect(Emblem emblem) {
+        super(Outcome.Benefit);
+        this.emblem = emblem;
+        this.staticText = "You get an emblem with \"" + emblem.getAbilities().getRules(null) + "\"";
+    }
 
-	public GetEmblemEffect(final GetEmblemEffect effect) {
-		super(effect);
-		this.emblem = effect.emblem;
-	}
+    public GetEmblemEffect(final GetEmblemEffect effect) {
+        super(effect);
+        this.emblem = effect.emblem;
+    }
 
-	@Override
-	public GetEmblemEffect copy() {
-		return new GetEmblemEffect(this);
-	}
+    @Override
+    public GetEmblemEffect copy() {
+        return new GetEmblemEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
         game.addEmblem(emblem, source);
-		return true;
-	}
+        return true;
+    }
 
 }

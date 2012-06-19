@@ -43,31 +43,31 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class NaturesSpiral extends CardImpl<NaturesSpiral> {
 
-	private static final FilterCard filter = new FilterCard("permanent card from your graveyard");
+    private static final FilterCard filter = new FilterCard("permanent card from your graveyard");
 
-	static {
-		filter.getCardType().add(CardType.ARTIFACT);
-		filter.getCardType().add(CardType.CREATURE);
-		filter.getCardType().add(CardType.ENCHANTMENT);
-		filter.getCardType().add(CardType.LAND);
-		filter.getCardType().add(CardType.PLANESWALKER);
-		filter.setScopeCardType(ComparisonScope.Any);
-	}
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.getCardType().add(CardType.CREATURE);
+        filter.getCardType().add(CardType.ENCHANTMENT);
+        filter.getCardType().add(CardType.LAND);
+        filter.getCardType().add(CardType.PLANESWALKER);
+        filter.setScopeCardType(ComparisonScope.Any);
+    }
 
-	public NaturesSpiral(UUID ownerId) {
-		super(ownerId, 196, "Nature's Spiral", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
-		this.expansionSetCode = "M10";
-		this.color.setGreen(true);
-		this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
-		this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-	}
+    public NaturesSpiral(UUID ownerId) {
+        super(ownerId, 196, "Nature's Spiral", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
+        this.expansionSetCode = "M10";
+        this.color.setGreen(true);
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
+        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+    }
 
-	public NaturesSpiral(final NaturesSpiral card) {
-		super(card);
-	}
+    public NaturesSpiral(final NaturesSpiral card) {
+        super(card);
+    }
 
-	@Override
-	public NaturesSpiral copy() {
-		return new NaturesSpiral(this);
-	}
+    @Override
+    public NaturesSpiral copy() {
+        return new NaturesSpiral(this);
+    }
 }

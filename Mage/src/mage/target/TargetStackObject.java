@@ -44,84 +44,84 @@ import java.util.UUID;
  */
 public class TargetStackObject extends TargetObject<TargetStackObject> {
 
-	protected FilterStackObject filter;
+    protected FilterStackObject filter;
 
-	public TargetStackObject() {
-		this(1, 1, new FilterStackObject());
-	}
+    public TargetStackObject() {
+        this(1, 1, new FilterStackObject());
+    }
 
-	public TargetStackObject(FilterStackObject filter) {
-		this(1, 1, filter);
-	}
+    public TargetStackObject(FilterStackObject filter) {
+        this(1, 1, filter);
+    }
 
-	public TargetStackObject(int numTargets, FilterStackObject filter) {
-		this(numTargets, numTargets, filter);
-	}
+    public TargetStackObject(int numTargets, FilterStackObject filter) {
+        this(numTargets, numTargets, filter);
+    }
 
-	public TargetStackObject(int minNumTargets, int maxNumTargets, FilterStackObject filter) {
-		this.minNumberOfTargets = minNumTargets;
-		this.maxNumberOfTargets = maxNumTargets;
-		this.zone = Zone.STACK;
-		this.filter = filter;
-		this.targetName = filter.getMessage();
-	}
+    public TargetStackObject(int minNumTargets, int maxNumTargets, FilterStackObject filter) {
+        this.minNumberOfTargets = minNumTargets;
+        this.maxNumberOfTargets = maxNumTargets;
+        this.zone = Zone.STACK;
+        this.filter = filter;
+        this.targetName = filter.getMessage();
+    }
 
-	public TargetStackObject(final TargetStackObject target) {
-		super(target);
-		this.filter = target.filter.copy();
-	}
+    public TargetStackObject(final TargetStackObject target) {
+        super(target);
+        this.filter = target.filter.copy();
+    }
 
-	@Override
-	public FilterStackObject getFilter() {
-		return filter;
-	}
+    @Override
+    public FilterStackObject getFilter() {
+        return filter;
+    }
 
-	@Override
-	public boolean canTarget(UUID id, Ability source, Game game) {
-		StackObject stackObject = game.getStack().getStackObject(id);
-		if (stackObject != null) {
-			return filter.match(stackObject, game);
-		}
-		return false;
-	}
+    @Override
+    public boolean canTarget(UUID id, Ability source, Game game) {
+        StackObject stackObject = game.getStack().getStackObject(id);
+        if (stackObject != null) {
+            return filter.match(stackObject, game);
+        }
+        return false;
+    }
 
-	@Override
-	public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-		return canChoose(sourceControllerId, game);
-	}
+    @Override
+    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+        return canChoose(sourceControllerId, game);
+    }
 
-	@Override
-	public boolean canChoose(UUID sourceControllerId, Game game) {
-		int count = 0;
-		for (StackObject stackObject: game.getStack()) {
-			if (game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match(stackObject, game)) {
-				count++;
-				if (count >= this.minNumberOfTargets)
-					return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean canChoose(UUID sourceControllerId, Game game) {
+        int count = 0;
+        for (StackObject stackObject: game.getStack()) {
+            if (game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match(stackObject, game)) {
+                count++;
+                if (count >= this.minNumberOfTargets)
+                    return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-		return possibleTargets(sourceControllerId, game);
-	}
+    @Override
+    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+        return possibleTargets(sourceControllerId, game);
+    }
 
-	@Override
-	public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
-		Set<UUID> possibleTargets = new HashSet<UUID>();
-		for (StackObject stackObject: game.getStack()) {
-			if (game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match(stackObject, game)) {
-				possibleTargets.add(stackObject.getId());
-			}
-		}
-		return possibleTargets;
-	}
+    @Override
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
+        Set<UUID> possibleTargets = new HashSet<UUID>();
+        for (StackObject stackObject: game.getStack()) {
+            if (game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match(stackObject, game)) {
+                possibleTargets.add(stackObject.getId());
+            }
+        }
+        return possibleTargets;
+    }
 
-	@Override
-	public TargetStackObject copy() {
-		return new TargetStackObject(this);
-	}
+    @Override
+    public TargetStackObject copy() {
+        return new TargetStackObject(this);
+    }
 
 }

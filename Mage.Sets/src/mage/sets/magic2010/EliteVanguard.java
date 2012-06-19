@@ -40,23 +40,23 @@ import mage.cards.CardImpl;
  */
 public class EliteVanguard extends CardImpl<EliteVanguard> {
 
-	public EliteVanguard(UUID ownerId) {
-		super(ownerId, 9, "Elite Vanguard", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}");
-		this.expansionSetCode = "M10";
-		this.color.setWhite(true);
-		this.subtype.add("Human");
-		this.subtype.add("Soldier");
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(1);
-	}
+    public EliteVanguard(UUID ownerId) {
+        super(ownerId, 9, "Elite Vanguard", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}");
+        this.expansionSetCode = "M10";
+        this.color.setWhite(true);
+        this.subtype.add("Human");
+        this.subtype.add("Soldier");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
+    }
 
-	public EliteVanguard(final EliteVanguard card) {
-		super(card);
-	}
+    public EliteVanguard(final EliteVanguard card) {
+        super(card);
+    }
 
-	@Override
-	public EliteVanguard copy() {
-		return new EliteVanguard(this);
-	}
+    @Override
+    public EliteVanguard copy() {
+        return new EliteVanguard(this);
+    }
 
 }

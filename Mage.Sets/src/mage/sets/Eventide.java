@@ -8,9 +8,9 @@ import java.util.GregorianCalendar;
 public class Eventide extends ExpansionSet {
     private static final Eventide fINSTANCE =  new Eventide();
 
-	public static Eventide getInstance() {
-		return fINSTANCE;
-	}
+    public static Eventide getInstance() {
+        return fINSTANCE;
+    }
 
     private Eventide() {
         super("Eventide", "EVE", "", "mage.sets.eventide", new GregorianCalendar(2008, 6, 25).getTime(), Constants.SetType.EXPANSION);

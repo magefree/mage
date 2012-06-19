@@ -48,40 +48,40 @@ import java.util.UUID;
  */
 public class GatekeeperOfMalakir extends CardImpl<GatekeeperOfMalakir> {
 
-	private static final FilterControlledPermanent filter;
+    private static final FilterControlledPermanent filter;
 
-	static {
-		filter = new FilterControlledPermanent();
-		filter.getCardType().add(CardType.CREATURE);
-		filter.setMessage(" a creature");
-	}
+    static {
+        filter = new FilterControlledPermanent();
+        filter.getCardType().add(CardType.CREATURE);
+        filter.setMessage(" a creature");
+    }
 
-	public GatekeeperOfMalakir(UUID ownerId) {
-		super(ownerId, 89, "Gatekeeper of Malakir", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}{B}");
-		this.expansionSetCode = "ZEN";
-		this.subtype.add("Vampire");
-		this.subtype.add("Warrior");
+    public GatekeeperOfMalakir(UUID ownerId) {
+        super(ownerId, 89, "Gatekeeper of Malakir", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}{B}");
+        this.expansionSetCode = "ZEN";
+        this.subtype.add("Vampire");
+        this.subtype.add("Warrior");
 
-		this.color.setBlack(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+        this.color.setBlack(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
         this.getSpellAbility().addOptionalCost(new KickerManaCost("{B}"));
 
-		EntersBattlefieldTriggeredAbility ability =
-				new EntersBattlefieldTriggeredAbility(new SacrificeEffect(filter, 1, "target player"));
+        EntersBattlefieldTriggeredAbility ability =
+                new EntersBattlefieldTriggeredAbility(new SacrificeEffect(filter, 1, "target player"));
 
-		Ability conditionalAbility = new ConditionalTriggeredAbility(ability, KickedCondition.getInstance(), "When {this} enters the battlefield, if it was kicked, target player sacrifices a creature");
+        Ability conditionalAbility = new ConditionalTriggeredAbility(ability, KickedCondition.getInstance(), "When {this} enters the battlefield, if it was kicked, target player sacrifices a creature");
         conditionalAbility.addTarget(new TargetPlayer());
         this.addAbility(conditionalAbility);
-	}
+    }
 
-	public GatekeeperOfMalakir(final GatekeeperOfMalakir card) {
-		super(card);
-	}
+    public GatekeeperOfMalakir(final GatekeeperOfMalakir card) {
+        super(card);
+    }
 
-	@Override
-	public GatekeeperOfMalakir copy() {
-		return new GatekeeperOfMalakir(this);
-	}
+    @Override
+    public GatekeeperOfMalakir copy() {
+        return new GatekeeperOfMalakir(this);
+    }
 }

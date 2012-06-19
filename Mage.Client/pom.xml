@@ -155,7 +155,7 @@
                     </descriptors>
                 </configuration>
             </plugin>
-            
+
 <!--
             <plugin>
                 <groupId>com.akathist.maven.plugins.launch4j</groupId>

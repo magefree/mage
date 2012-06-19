@@ -55,7 +55,7 @@ public class CircleOfFlame extends CardImpl<CircleOfFlame> {
         this.color.setRed(true);
 
         // Whenever a creature without flying attacks you or a planeswalker you control, Circle of Flame deals 1 damage to that creature.
-		this.addAbility(new CircleOfFlameTriggeredAbility());
+        this.addAbility(new CircleOfFlameTriggeredAbility());
     }
 
     public CircleOfFlame(final CircleOfFlame card) {
@@ -70,7 +70,7 @@ public class CircleOfFlame extends CardImpl<CircleOfFlame> {
 
 class CircleOfFlameTriggeredAbility extends TriggeredAbilityImpl<CircleOfFlameTriggeredAbility> {
 
-	public CircleOfFlameTriggeredAbility() {
+    public CircleOfFlameTriggeredAbility() {
         super(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(1));
     }
 
@@ -87,31 +87,31 @@ class CircleOfFlameTriggeredAbility extends TriggeredAbilityImpl<CircleOfFlameTr
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED) {
 
-			// check has flying
-			Permanent attacker = game.getPermanent(event.getSourceId());
-			if (attacker == null || attacker.getAbilities().contains(FlyingAbility.getInstance())) {
-				return false;
-			}
+            // check has flying
+            Permanent attacker = game.getPermanent(event.getSourceId());
+            if (attacker == null || attacker.getAbilities().contains(FlyingAbility.getInstance())) {
+                return false;
+            }
 
-			// check attacks you
-			boolean youOrYourPlaneswalker = false;
-			boolean you = event.getTargetId().equals(this.getControllerId());
-			if (you) {
-				youOrYourPlaneswalker = true;
-			} else{ // check attacks your planeswalker
-				Permanent permanent = game.getPermanent(event.getTargetId());
-				youOrYourPlaneswalker = permanent != null
-						&& permanent.getCardType().contains(CardType.PLANESWALKER)
-						&& permanent.getControllerId().equals(this.getControllerId());
-			}
-			if (youOrYourPlaneswalker) {
-				for (Effect effect : this.getEffects()) {
-					effect.setTargetPointer(new FixedTarget(attacker.getId()));
-				}
-				return true;
-			}
-		}
-		return false;
+            // check attacks you
+            boolean youOrYourPlaneswalker = false;
+            boolean you = event.getTargetId().equals(this.getControllerId());
+            if (you) {
+                youOrYourPlaneswalker = true;
+            } else{ // check attacks your planeswalker
+                Permanent permanent = game.getPermanent(event.getTargetId());
+                youOrYourPlaneswalker = permanent != null
+                        && permanent.getCardType().contains(CardType.PLANESWALKER)
+                        && permanent.getControllerId().equals(this.getControllerId());
+            }
+            if (youOrYourPlaneswalker) {
+                for (Effect effect : this.getEffects()) {
+                    effect.setTargetPointer(new FixedTarget(attacker.getId()));
+                }
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

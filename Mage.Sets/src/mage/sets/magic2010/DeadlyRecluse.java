@@ -48,7 +48,7 @@ public class DeadlyRecluse extends CardImpl<DeadlyRecluse> {
         this.color.setGreen(true);
         this.subtype.add("Spider");
         this.power = new MageInt(1);
-	this.toughness = new MageInt(2);
+    this.toughness = new MageInt(2);
         this.addAbility(ReachAbility.getInstance());
         this.addAbility(DeathtouchAbility.getInstance());
     }

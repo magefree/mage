@@ -65,7 +65,7 @@ public class CurseOfTheNightlyHunt extends CardImpl<CurseOfTheNightlyHunt> {
 
         // Creatures enchanted player controls attack each turn if able.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CurseOfTheNightlyHuntEffect()));
-        
+
     }
 
     public CurseOfTheNightlyHunt(final CurseOfTheNightlyHunt card) {
@@ -80,36 +80,36 @@ public class CurseOfTheNightlyHunt extends CardImpl<CurseOfTheNightlyHunt> {
 
 class CurseOfTheNightlyHuntEffect extends RequirementEffect<CurseOfTheNightlyHuntEffect> {
 
-	public CurseOfTheNightlyHuntEffect() {
-		super(Duration.WhileOnBattlefield);
+    public CurseOfTheNightlyHuntEffect() {
+        super(Duration.WhileOnBattlefield);
         staticText = "Creatures enchanted player controls attack each turn if able";
-	}
+    }
 
-	public CurseOfTheNightlyHuntEffect(final CurseOfTheNightlyHuntEffect effect) {
-		super(effect);
-	}
+    public CurseOfTheNightlyHuntEffect(final CurseOfTheNightlyHuntEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public CurseOfTheNightlyHuntEffect copy() {
-		return new CurseOfTheNightlyHuntEffect(this);
-	}
+    @Override
+    public CurseOfTheNightlyHuntEffect copy() {
+        return new CurseOfTheNightlyHuntEffect(this);
+    }
 
-	@Override
-	public boolean applies(Permanent permanent, Ability source, Game game) {
-		if (source.getControllerId().equals(permanent.getControllerId())) {
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        if (source.getControllerId().equals(permanent.getControllerId())) {
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public boolean mustAttack(Game game) {
-		return true;
-	}
+    @Override
+    public boolean mustAttack(Game game) {
+        return true;
+    }
 
-	@Override
-	public boolean mustBlock(Game game) {
-		return false;
-	}
+    @Override
+    public boolean mustBlock(Game game) {
+        return false;
+    }
 
 }

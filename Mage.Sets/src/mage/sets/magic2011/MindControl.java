@@ -36,18 +36,18 @@ import java.util.UUID;
  */
 public class MindControl extends mage.sets.magic2010.MindControl {
 
-	public MindControl(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 67;
-		this.expansionSetCode = "M11";
-	}
+    public MindControl(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 67;
+        this.expansionSetCode = "M11";
+    }
 
-	public MindControl(final MindControl card) {
-		super(card);
-	}
+    public MindControl(final MindControl card) {
+        super(card);
+    }
 
-	@Override
-	public MindControl copy() {
-		return new MindControl(this);
-	}
+    @Override
+    public MindControl copy() {
+        return new MindControl(this);
+    }
 }

@@ -40,23 +40,23 @@ import mage.cards.CardImpl;
  */
 public class MaritimeGuard extends CardImpl<MaritimeGuard> {
 
-	public MaritimeGuard(UUID ownerId) {
-		super(ownerId, 63, "Maritime Guard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-		this.expansionSetCode = "M11";
-		this.color.setBlue(true);
-		this.subtype.add("Merfolk");
-		this.subtype.add("Soldier");
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(3);
-	}
+    public MaritimeGuard(UUID ownerId) {
+        super(ownerId, 63, "Maritime Guard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
+        this.expansionSetCode = "M11";
+        this.color.setBlue(true);
+        this.subtype.add("Merfolk");
+        this.subtype.add("Soldier");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(3);
+    }
 
-	public MaritimeGuard(final MaritimeGuard card) {
-		super(card);
-	}
+    public MaritimeGuard(final MaritimeGuard card) {
+        super(card);
+    }
 
-	@Override
-	public MaritimeGuard copy() {
-		return new MaritimeGuard(this);
-	}
+    @Override
+    public MaritimeGuard copy() {
+        return new MaritimeGuard(this);
+    }
 
 }

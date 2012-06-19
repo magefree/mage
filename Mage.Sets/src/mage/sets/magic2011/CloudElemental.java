@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class CloudElemental extends mage.sets.tenth.CloudElemental {
 
-	public CloudElemental(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 50;
-		this.expansionSetCode = "M11";
-	}
+    public CloudElemental(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 50;
+        this.expansionSetCode = "M11";
+    }
 
-	public CloudElemental(final CloudElemental card) {
-		super(card);
-	}
+    public CloudElemental(final CloudElemental card) {
+        super(card);
+    }
 
-	@Override
-	public CloudElemental copy() {
-		return new CloudElemental(this);
-	}
+    @Override
+    public CloudElemental copy() {
+        return new CloudElemental(this);
+    }
 
 }

@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class LightningBolt extends mage.sets.magic2010.LightningBolt {
 
-	public LightningBolt(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 149;
-		this.expansionSetCode = "M11";
-	}
+    public LightningBolt(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 149;
+        this.expansionSetCode = "M11";
+    }
 
-	public LightningBolt(final LightningBolt card) {
-		super(card);
-	}
+    public LightningBolt(final LightningBolt card) {
+        super(card);
+    }
 
-	@Override
-	public LightningBolt copy() {
-		return new LightningBolt(this);
-	}
+    @Override
+    public LightningBolt copy() {
+        return new LightningBolt(this);
+    }
 
 }

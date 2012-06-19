@@ -62,7 +62,7 @@ public class Opportunist extends CardImpl<Opportunist> {
         this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        
+
         // {T}: Opportunist deals 1 damage to target creature that was dealt damage this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));

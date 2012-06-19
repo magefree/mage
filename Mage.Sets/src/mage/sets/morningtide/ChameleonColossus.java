@@ -85,24 +85,24 @@ class ChameleonColossusEffect extends ContinuousEffectImpl<ChameleonColossusEffe
         staticText = "{this} gets +X/+X until end of turn, where X is its power";
     }
 
-	public ChameleonColossusEffect(final ChameleonColossusEffect effect) {
-		super(effect);
-	}
+    public ChameleonColossusEffect(final ChameleonColossusEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public ChameleonColossusEffect copy() {
-		return new ChameleonColossusEffect(this);
-	}
+    @Override
+    public ChameleonColossusEffect copy() {
+        return new ChameleonColossusEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-		if (sourcePermanent != null) {
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        if (sourcePermanent != null) {
             int power = sourcePermanent.getPower().getValue();
-			sourcePermanent.addPower(power);
-			sourcePermanent.addToughness(power);
-			return true;
-		}
-		return false;
-	}
+            sourcePermanent.addPower(power);
+            sourcePermanent.addToughness(power);
+            return true;
+        }
+        return false;
+    }
 }

@@ -49,9 +49,9 @@ public class OgresCleaver extends CardImpl<OgresCleaver> {
         super(ownerId, 220, "Ogre's Cleaver", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "ROE";
         this.subtype.add("Equipment");
-        
+
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(5)));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(5, 0)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(5, 0)));
     }
 
     public OgresCleaver (final OgresCleaver card) {

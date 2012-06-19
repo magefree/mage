@@ -44,75 +44,75 @@ import mage.game.Table;
  */
 public class TableView implements Serializable {
     private static final long serialVersionUID = 1L;
-	
-	private UUID tableId;
-	private String gameType;
-	private String deckType;
-	private String tableName;
-	private String controllerName;
-	private Date createTime;
-	private TableState tableState;
-	private boolean isTournament;
-	private List<SeatView> seats = new ArrayList<SeatView>();
-	private List<UUID> games = new ArrayList<UUID>();
 
-	public TableView(Table table) {
-		this.tableId = table.getId();
-		this.gameType = table.getGameType();
-		this.tableName = table.getName();
-		this.controllerName = table.getControllerName();
-		this.createTime = table.getCreateTime();
-		this.deckType = table.getDeckType();
-		this.tableState = table.getState();
-		this.isTournament = table.isTournament();
-		for (Seat seat: table.getSeats()) {
-			seats.add(new SeatView(seat));
-		}
-		if (!table.isTournament()) {
-			for (Game game: table.getMatch().getGames()) {
-				games.add(game.getId());
-			}
-		}
-	}
+    private UUID tableId;
+    private String gameType;
+    private String deckType;
+    private String tableName;
+    private String controllerName;
+    private Date createTime;
+    private TableState tableState;
+    private boolean isTournament;
+    private List<SeatView> seats = new ArrayList<SeatView>();
+    private List<UUID> games = new ArrayList<UUID>();
 
-	public UUID getTableId() {
-		return tableId;
-	}
+    public TableView(Table table) {
+        this.tableId = table.getId();
+        this.gameType = table.getGameType();
+        this.tableName = table.getName();
+        this.controllerName = table.getControllerName();
+        this.createTime = table.getCreateTime();
+        this.deckType = table.getDeckType();
+        this.tableState = table.getState();
+        this.isTournament = table.isTournament();
+        for (Seat seat: table.getSeats()) {
+            seats.add(new SeatView(seat));
+        }
+        if (!table.isTournament()) {
+            for (Game game: table.getMatch().getGames()) {
+                games.add(game.getId());
+            }
+        }
+    }
 
-	public String getTableName() {
-		return tableName;
-	}
+    public UUID getTableId() {
+        return tableId;
+    }
 
-	public String getControllerName() {
-		return controllerName;
-	}
+    public String getTableName() {
+        return tableName;
+    }
 
-	public String getGameType() {
-		return gameType;
-	}
+    public String getControllerName() {
+        return controllerName;
+    }
 
-	public String getDeckType() {
-		return deckType;
-	}
-	
-	public Date getCreateTime() {
-		return createTime;
-	}
+    public String getGameType() {
+        return gameType;
+    }
 
-	public TableState getTableState() {
-		return tableState;
-	}
+    public String getDeckType() {
+        return deckType;
+    }
 
-	public List<SeatView> getSeats() {
-		return seats;
-	}
+    public Date getCreateTime() {
+        return createTime;
+    }
 
-	public List<UUID> getGames() {
-		return games;
-	}
+    public TableState getTableState() {
+        return tableState;
+    }
 
-	public boolean isTournament() {
-		return this.isTournament;
-	}
+    public List<SeatView> getSeats() {
+        return seats;
+    }
+
+    public List<UUID> getGames() {
+        return games;
+    }
+
+    public boolean isTournament() {
+        return this.isTournament;
+    }
 
 }

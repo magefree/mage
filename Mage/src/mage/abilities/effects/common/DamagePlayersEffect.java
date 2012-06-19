@@ -41,30 +41,30 @@ import mage.players.Player;
  * @author BetaSteward_at_googlemail.com
  */
 public class DamagePlayersEffect extends OneShotEffect<DamagePlayersEffect> {
-	private DynamicValue amount;
+    private DynamicValue amount;
 
     public DamagePlayersEffect(int amount) {
         this(Constants.Outcome.Damage, new StaticValue(amount));
-	}
-	
-	public DamagePlayersEffect(Constants.Outcome outcome, DynamicValue amount) {
-		super(outcome);
-		this.amount = amount;
-		staticText = "{source} deals " + amount + " damage to each player";
-	}
+    }
+
+    public DamagePlayersEffect(Constants.Outcome outcome, DynamicValue amount) {
+        super(outcome);
+        this.amount = amount;
+        staticText = "{source} deals " + amount + " damage to each player";
+    }
 
     public DamagePlayersEffect(final DamagePlayersEffect effect) {
         super(effect);
-		this.amount = effect.amount;
+        this.amount = effect.amount;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-		for (UUID playerId: game.getPlayer(source.getControllerId()).getInRange()) {
-			Player player = game.getPlayer(playerId);
-			if (player != null)
-				player.damage(amount.calculate(game, source), source.getId(), game, false, true);
-		}
+        for (UUID playerId: game.getPlayer(source.getControllerId()).getInRange()) {
+            Player player = game.getPlayer(playerId);
+            if (player != null)
+                player.damage(amount.calculate(game, source), source.getId(), game, false, true);
+        }
         return true;
     }
 

@@ -83,37 +83,37 @@ public class CurseOfThePiercedHeart extends CardImpl<CurseOfThePiercedHeart> {
 
 class CurseOfThePiercedHeartAbility extends TriggeredAbilityImpl<CurseOfThePiercedHeartAbility> {
 
-	public CurseOfThePiercedHeartAbility() {
-		super(Zone.BATTLEFIELD, new DamageTargetEffect(1));
-	}
+    public CurseOfThePiercedHeartAbility() {
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(1));
+    }
 
-	public CurseOfThePiercedHeartAbility(final CurseOfThePiercedHeartAbility ability) {
-		super(ability);
-	}
+    public CurseOfThePiercedHeartAbility(final CurseOfThePiercedHeartAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public CurseOfThePiercedHeartAbility copy() {
-		return new CurseOfThePiercedHeartAbility(this);
-	}
+    @Override
+    public CurseOfThePiercedHeartAbility copy() {
+        return new CurseOfThePiercedHeartAbility(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.DRAW_STEP_PRE) {
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.DRAW_STEP_PRE) {
             Permanent enchantment = game.getPermanent(this.sourceId);
             if (enchantment != null && enchantment.getAttachedTo() != null) {
                 Player player = game.getPlayer(enchantment.getAttachedTo());
                 if (player != null && game.getActivePlayerId().equals(player.getId())) {
                     this.getEffects().get(0).setTargetPointer(new FixedTarget(player.getId()));
-        			return true;
+                    return true;
                 }
             }
-		}
-		return false;
-	}
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "At the beginning of enchanted player's upkeep, Curse of the Pierced Heart deals 1 damage to that player.";
-	}
+    @Override
+    public String getRule() {
+        return "At the beginning of enchanted player's upkeep, Curse of the Pierced Heart deals 1 damage to that player.";
+    }
 
 }

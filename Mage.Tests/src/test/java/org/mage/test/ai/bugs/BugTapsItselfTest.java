@@ -16,18 +16,18 @@ import org.mage.test.serverside.base.CardTestBase;
  */
 public class BugTapsItselfTest extends CardTestBase {
 
-	@Test
+    @Test
     @Ignore
-	public void testVersusInfectCreature() throws Exception {
-		useWhiteDefault();
-		addCard(Constants.Zone.BATTLEFIELD, playerA, "Blinding Mage");
-		addCard(Constants.Zone.BATTLEFIELD, playerB, "Myr Sire");
+    public void testVersusInfectCreature() throws Exception {
+        useWhiteDefault();
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Blinding Mage");
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Myr Sire");
 
-		setStopOnTurn(4);
-		execute();
+        setStopOnTurn(4);
+        execute();
 
-		assertResult(playerA, GameResult.DRAW);
-		Permanent permanent = getPermanent("Blinding Mage", playerA.getId());
-		Assert.assertFalse("Should have been untapped", permanent.isTapped());
-	}
+        assertResult(playerA, GameResult.DRAW);
+        Permanent permanent = getPermanent("Blinding Mage", playerA.getId());
+        Assert.assertFalse("Should have been untapped", permanent.isTapped());
+    }
 }

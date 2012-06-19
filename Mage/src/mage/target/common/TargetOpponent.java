@@ -40,9 +40,9 @@ import java.util.UUID;
  */
 public class TargetOpponent extends TargetPlayer<TargetOpponent> {
 
-	public TargetOpponent() {
-		this(false);
-	}
+    public TargetOpponent() {
+        this(false);
+    }
 
     public TargetOpponent(boolean required) {
         super();
@@ -50,27 +50,27 @@ public class TargetOpponent extends TargetPlayer<TargetOpponent> {
         setRequired(required);
     }
 
-	public TargetOpponent(final TargetOpponent target) {
-		super(target);
-	}
-	
-	@Override
-	public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-		filter.getPlayerId().clear();
-		filter.getPlayerId().addAll(game.getOpponents(sourceControllerId));
-		return super.canChoose(sourceId, sourceControllerId, game);
-	}
-	
-	@Override
-	public boolean canTarget(UUID id, Ability source, Game game) {
-		filter.getPlayerId().clear();
-		filter.getPlayerId().addAll(game.getOpponents(source.getControllerId()));
-		return super.canTarget(id, source, game);
-	}
+    public TargetOpponent(final TargetOpponent target) {
+        super(target);
+    }
 
-	@Override
-	public TargetOpponent copy() {
-		return new TargetOpponent(this);
-	}
+    @Override
+    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+        filter.getPlayerId().clear();
+        filter.getPlayerId().addAll(game.getOpponents(sourceControllerId));
+        return super.canChoose(sourceId, sourceControllerId, game);
+    }
+
+    @Override
+    public boolean canTarget(UUID id, Ability source, Game game) {
+        filter.getPlayerId().clear();
+        filter.getPlayerId().addAll(game.getOpponents(source.getControllerId()));
+        return super.canTarget(id, source, game);
+    }
+
+    @Override
+    public TargetOpponent copy() {
+        return new TargetOpponent(this);
+    }
 
 }

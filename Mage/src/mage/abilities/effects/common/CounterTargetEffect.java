@@ -40,27 +40,27 @@ import mage.game.Game;
  */
 public class CounterTargetEffect extends OneShotEffect<CounterTargetEffect> {
 
-	public CounterTargetEffect() {
-		super(Outcome.Detriment);
-	}
+    public CounterTargetEffect() {
+        super(Outcome.Detriment);
+    }
 
-	public CounterTargetEffect(final CounterTargetEffect effect) {
-		super(effect);
-	}
+    public CounterTargetEffect(final CounterTargetEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public CounterTargetEffect copy() {
-		return new CounterTargetEffect(this);
-	}
+    @Override
+    public CounterTargetEffect copy() {
+        return new CounterTargetEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
+    }
 
-	@Override
-	public String getText(Mode mode) {
-		return "Counter target " + mode.getTargets().get(0).getTargetName();
-	}
+    @Override
+    public String getText(Mode mode) {
+        return "Counter target " + mode.getTargets().get(0).getTargetName();
+    }
 
 }

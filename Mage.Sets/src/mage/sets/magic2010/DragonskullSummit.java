@@ -49,32 +49,32 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class DragonskullSummit extends CardImpl<DragonskullSummit> {
 
-	private static final FilterLandPermanent filter = new FilterLandPermanent();
+    private static final FilterLandPermanent filter = new FilterLandPermanent();
 
-	static {
-		filter.getSubtype().add("Swamp");
-		filter.getSubtype().add("Mountain");
-		filter.setScopeSubtype(ComparisonScope.Any);
-		filter.setMessage("Swamp or a Mountain");
-	}
+    static {
+        filter.getSubtype().add("Swamp");
+        filter.getSubtype().add("Mountain");
+        filter.setScopeSubtype(ComparisonScope.Any);
+        filter.setMessage("Swamp or a Mountain");
+    }
 
-	public DragonskullSummit(UUID ownerId) {
-		super(ownerId, 223, "Dragonskull Summit", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-		this.expansionSetCode = "M10";
+    public DragonskullSummit(UUID ownerId) {
+        super(ownerId, 223, "Dragonskull Summit", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+        this.expansionSetCode = "M10";
 
-		Condition controls = new UnlessCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0));
-		String abilityText = "tap it unless you control a " + filter.getMessage();
-		this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
-		this.addAbility(new BlackManaAbility());
-		this.addAbility(new RedManaAbility());
-	}
+        Condition controls = new UnlessCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0));
+        String abilityText = "tap it unless you control a " + filter.getMessage();
+        this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
+        this.addAbility(new BlackManaAbility());
+        this.addAbility(new RedManaAbility());
+    }
 
-	public DragonskullSummit(final DragonskullSummit card) {
-		super(card);
-	}
+    public DragonskullSummit(final DragonskullSummit card) {
+        super(card);
+    }
 
-	@Override
-	public DragonskullSummit copy() {
-		return new DragonskullSummit(this);
-	}
+    @Override
+    public DragonskullSummit copy() {
+        return new DragonskullSummit(this);
+    }
 }

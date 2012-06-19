@@ -43,33 +43,33 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class ExaltedAbility extends TriggeredAbilityImpl<ExaltedAbility> {
 
-	public ExaltedAbility() {
-		super(Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Duration.EndOfTurn));
-	}
+    public ExaltedAbility() {
+        super(Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Duration.EndOfTurn));
+    }
 
-	public ExaltedAbility(final ExaltedAbility ability) {
-		super(ability);
-	}
+    public ExaltedAbility(final ExaltedAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public ExaltedAbility copy() {
-		return new ExaltedAbility(this);
-	}
+    @Override
+    public ExaltedAbility copy() {
+        return new ExaltedAbility(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.DECLARED_ATTACKERS && game.getActivePlayerId().equals(this.controllerId) ) {
-			if (game.getCombat().attacksAlone()) {
-				this.getEffects().get(0).setTargetPointer(new FixedTarget(game.getCombat().getAttackers().get(0)));
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.DECLARED_ATTACKERS && game.getActivePlayerId().equals(this.controllerId) ) {
+            if (game.getCombat().attacksAlone()) {
+                this.getEffects().get(0).setTargetPointer(new FixedTarget(game.getCombat().getAttackers().get(0)));
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "Exalted";
-	}
+    @Override
+    public String getRule() {
+        return "Exalted";
+    }
 
 }

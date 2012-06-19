@@ -82,7 +82,7 @@ public class IncreasingVengeance extends CardImpl<IncreasingVengeance> {
 }
 
 class IncreasingVengeanceEffect extends OneShotEffect<IncreasingVengeanceEffect> {
-        
+
     public IncreasingVengeanceEffect() {
         super(Constants.Outcome.BoostCreature);
         staticText = "Copy target instant or sorcery spell you control. If Increasing Vengeance was cast from a graveyard, copy that spell twice instead. You may choose new targets for the copies";
@@ -94,13 +94,13 @@ class IncreasingVengeanceEffect extends OneShotEffect<IncreasingVengeanceEffect>
 
     @Override
     public boolean apply(Game game, Ability source) {
-		Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
-		if (spell != null) {
-			Spell copy = spell.copySpell();
-			copy.setControllerId(source.getControllerId());
-			copy.setCopiedSpell(true);
-			game.getStack().push(copy);
-			copy.chooseNewTargets(game, source.getControllerId());
+        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+        if (spell != null) {
+            Spell copy = spell.copySpell();
+            copy.setControllerId(source.getControllerId());
+            copy.setCopiedSpell(true);
+            game.getStack().push(copy);
+            copy.chooseNewTargets(game, source.getControllerId());
             Spell sourceSpell = (Spell) game.getStack().getStackObject(source.getSourceId());
             if (sourceSpell != null) {
                 if (sourceSpell.getFromZone() == Constants.Zone.GRAVEYARD) {
@@ -112,8 +112,8 @@ class IncreasingVengeanceEffect extends OneShotEffect<IncreasingVengeanceEffect>
                 }
             }
             return true;
-		}
-		return false;
+        }
+        return false;
     }
 
     @Override

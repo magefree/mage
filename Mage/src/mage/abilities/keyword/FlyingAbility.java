@@ -43,65 +43,65 @@ import java.io.ObjectStreamException;
  */
 public class FlyingAbility extends EvasionAbility<FlyingAbility> {
 
-	private static final FlyingAbility fINSTANCE =  new FlyingAbility();
+    private static final FlyingAbility fINSTANCE =  new FlyingAbility();
 
-	private Object readResolve() throws ObjectStreamException {
-		return fINSTANCE;
-	}
+    private Object readResolve() throws ObjectStreamException {
+        return fINSTANCE;
+    }
 
-	public static FlyingAbility getInstance() {
-		return fINSTANCE;
-	}
+    public static FlyingAbility getInstance() {
+        return fINSTANCE;
+    }
 
-	private FlyingAbility() {
-		this.addEffect(new FlyingEffect());
-	}
+    private FlyingAbility() {
+        this.addEffect(new FlyingEffect());
+    }
 
-	@Override
-	public String getRule() {
-		return "Flying";
-	}
+    @Override
+    public String getRule() {
+        return "Flying";
+    }
 
-	@Override
-	public FlyingAbility copy() {
-		return fINSTANCE;
-	}
+    @Override
+    public FlyingAbility copy() {
+        return fINSTANCE;
+    }
 
 }
 
 class FlyingEffect extends RestrictionEffect<FlyingEffect> {
 
-	public FlyingEffect() {
-		super(Duration.EndOfGame);
-	}
+    public FlyingEffect() {
+        super(Duration.EndOfGame);
+    }
 
-	public FlyingEffect(final FlyingEffect effect) {
-		super(effect);
-	}
+    public FlyingEffect(final FlyingEffect effect) {
+        super(effect);
+    }
 
     @Override
     public void newId() {
         // do nothing
     }
 
-	@Override
-	public boolean applies(Permanent permanent, Ability source, Game game) {
-		if (permanent.getAbilities().containsKey(FlyingAbility.getInstance().getId())) {
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        if (permanent.getAbilities().containsKey(FlyingAbility.getInstance().getId())) {
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-		if (blocker.getAbilities().containsKey(FlyingAbility.getInstance().getId()) || blocker.getAbilities().containsKey(ReachAbility.getInstance().getId()))
-			return true;
-		return false;
-	}
+    @Override
+    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        if (blocker.getAbilities().containsKey(FlyingAbility.getInstance().getId()) || blocker.getAbilities().containsKey(ReachAbility.getInstance().getId()))
+            return true;
+        return false;
+    }
 
-	@Override
-	public FlyingEffect copy() {
-		return new FlyingEffect(this);
-	}
+    @Override
+    public FlyingEffect copy() {
+        return new FlyingEffect(this);
+    }
 
 }

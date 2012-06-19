@@ -58,7 +58,7 @@ public class PastInFlames extends CardImpl<PastInFlames> {
 
         // Each instant and sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.
         this.getSpellAbility().addEffect(new PastInFlamesEffect());
-        
+
         // Flashback {4}{R}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{4}{R}"), TimingRule.SORCERY));
 
@@ -76,20 +76,20 @@ public class PastInFlames extends CardImpl<PastInFlames> {
 
 class PastInFlamesEffect extends ContinuousEffectImpl<PastInFlamesEffect> {
 
-	public PastInFlamesEffect() {
-		super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+    public PastInFlamesEffect() {
+        super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.staticText = "Each instant and sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost";
-	}
+    }
 
-	public PastInFlamesEffect(final PastInFlamesEffect effect) {
-		super(effect);
-	}
+    public PastInFlamesEffect(final PastInFlamesEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public PastInFlamesEffect copy() {
-		return new PastInFlamesEffect(this);
-	}
-    
+    @Override
+    public PastInFlamesEffect copy() {
+        return new PastInFlamesEffect(this);
+    }
+
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
@@ -106,8 +106,8 @@ class PastInFlamesEffect extends ContinuousEffectImpl<PastInFlamesEffect> {
         }
     }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             for (UUID cardId: player.getGraveyard()) {
@@ -127,6 +127,6 @@ class PastInFlamesEffect extends ContinuousEffectImpl<PastInFlamesEffect> {
             }
             return true;
         }
-		return false;
-	}
+        return false;
+    }
 }

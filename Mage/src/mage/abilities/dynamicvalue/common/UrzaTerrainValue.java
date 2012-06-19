@@ -7,11 +7,11 @@ import mage.game.Game;
 
 public class UrzaTerrainValue implements DynamicValue {
     private final int v;
-    
+
     public UrzaTerrainValue(int val) {
         v = val;
     }
-    
+
     @Override
     public int calculate(Game game, Ability sourceAbility) {
         FilterControlledPermanent pp = new FilterControlledPermanent("Urza's Power Plant");
@@ -19,19 +19,19 @@ public class UrzaTerrainValue implements DynamicValue {
         PermanentsOnBattlefieldCount ppP = new PermanentsOnBattlefieldCount(pp);
         if (ppP.calculate(game, sourceAbility) < 1)
             return 1;
-        
+
         FilterControlledPermanent to = new FilterControlledPermanent("Urza's Tower");
         to.getName().add("Urza's Tower");
         PermanentsOnBattlefieldCount toP = new PermanentsOnBattlefieldCount(to);
         if (toP.calculate(game, sourceAbility) < 1)
             return 1;
-        
+
         FilterControlledPermanent mi = new FilterControlledPermanent("Urza's Mine");
         mi.getName().add("Urza's Mine");
         PermanentsOnBattlefieldCount miP = new PermanentsOnBattlefieldCount(mi);
         if (miP.calculate(game, sourceAbility) < 1)
             return 1;
-        
+
         return v;
     }
 

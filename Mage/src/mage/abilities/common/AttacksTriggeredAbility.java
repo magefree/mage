@@ -41,31 +41,31 @@ import mage.game.events.GameEvent.EventType;
  */
 public class AttacksTriggeredAbility extends TriggeredAbilityImpl<AttacksTriggeredAbility> {
 
-	public AttacksTriggeredAbility(Effect effect, boolean optional) {
-		super(Zone.BATTLEFIELD, effect, optional);
-	}
+    public AttacksTriggeredAbility(Effect effect, boolean optional) {
+        super(Zone.BATTLEFIELD, effect, optional);
+    }
 
-	public AttacksTriggeredAbility(final AttacksTriggeredAbility ability) {
-		super(ability);
-	}
+    public AttacksTriggeredAbility(final AttacksTriggeredAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId()) ) {
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId()) ) {
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "When {this} attacks, " + super.getRule();
-	}
+    @Override
+    public String getRule() {
+        return "When {this} attacks, " + super.getRule();
+    }
 
-	@Override
-	public AttacksTriggeredAbility copy() {
-		return new AttacksTriggeredAbility(this);
-	}
+    @Override
+    public AttacksTriggeredAbility copy() {
+        return new AttacksTriggeredAbility(this);
+    }
 
 
 }

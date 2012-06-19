@@ -49,9 +49,9 @@ public class GoblinWarBuggy extends CardImpl<GoblinWarBuggy>{
         this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-		
-		this.addAbility(HasteAbility.getInstance());
-		this.addAbility(new EchoAbility("{1}{R}"));
+
+        this.addAbility(HasteAbility.getInstance());
+        this.addAbility(new EchoAbility("{1}{R}"));
     }
 
     public GoblinWarBuggy(final GoblinWarBuggy card) {

@@ -39,13 +39,13 @@ import mage.abilities.keyword.FlyingAbility;
  */
 public class DragonToken extends Token {
 
-	public DragonToken() {
-		super("Dragon", "4/4 red Dragon creature token with flying");
-		cardType.add(CardType.CREATURE);
-		color = ObjectColor.RED;
-		subtype.add("Dragon");
-		power = new MageInt(4);
-		toughness = new MageInt(4);
-		addAbility(FlyingAbility.getInstance());
-	}
+    public DragonToken() {
+        super("Dragon", "4/4 red Dragon creature token with flying");
+        cardType.add(CardType.CREATURE);
+        color = ObjectColor.RED;
+        subtype.add("Dragon");
+        power = new MageInt(4);
+        toughness = new MageInt(4);
+        addAbility(FlyingAbility.getInstance());
+    }
 }

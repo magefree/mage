@@ -51,95 +51,95 @@ import java.util.UUID;
  */
 public class CrownOfEmpires extends CardImpl<CrownOfEmpires> {
 
-	public CrownOfEmpires(UUID ownerId) {
-		super(ownerId, 203, "Crown of Empires", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-		this.expansionSetCode = "M12";
+    public CrownOfEmpires(UUID ownerId) {
+        super(ownerId, 203, "Crown of Empires", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
+        this.expansionSetCode = "M12";
 
-		// {3}, {tap}: Tap target creature. Gain control of that creature instead if you control artifacts named Scepter of Empires and Throne of Empires.
-		Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CrownOfEmpiresEffect(), new GenericManaCost(3));
-		ability.addTarget(new TargetCreaturePermanent());
-		ability.addCost(new TapSourceCost());
-		this.addAbility(ability);
-	}
+        // {3}, {tap}: Tap target creature. Gain control of that creature instead if you control artifacts named Scepter of Empires and Throne of Empires.
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CrownOfEmpiresEffect(), new GenericManaCost(3));
+        ability.addTarget(new TargetCreaturePermanent());
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
+    }
 
-	public CrownOfEmpires(final CrownOfEmpires card) {
-		super(card);
-	}
+    public CrownOfEmpires(final CrownOfEmpires card) {
+        super(card);
+    }
 
-	@Override
-	public CrownOfEmpires copy() {
-		return new CrownOfEmpires(this);
-	}
+    @Override
+    public CrownOfEmpires copy() {
+        return new CrownOfEmpires(this);
+    }
 }
 
 class CrownOfEmpiresEffect extends OneShotEffect<CrownOfEmpiresEffect> {
 
-	public CrownOfEmpiresEffect() {
-		super(Constants.Outcome.Tap);
-		staticText = "Tap target creature. Gain control of that creature instead if you control artifacts named Scepter of Empires and Throne of Empires";
-	}
+    public CrownOfEmpiresEffect() {
+        super(Constants.Outcome.Tap);
+        staticText = "Tap target creature. Gain control of that creature instead if you control artifacts named Scepter of Empires and Throne of Empires";
+    }
 
-	public CrownOfEmpiresEffect(CrownOfEmpiresEffect effect) {
-		super(effect);
-	}
+    public CrownOfEmpiresEffect(CrownOfEmpiresEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent target = game.getPermanent(targetPointer.getFirst(game, source));
-		boolean scepter = false;
-		boolean throne = false;
-		for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
-			if (permanent.getName().equals("Scepter of Empires")) {
-				scepter = true;
-			} else if (permanent.getName().equals("Throne of Empires")) {
-				throne = true;
-			}
-			if (scepter && throne) break;
-		}
-		if (scepter && throne) {
-			ContinuousEffect effect = new CrownOfEmpiresControlEffect();
-			effect.setTargetPointer(new FixedTarget(target.getId()));
-			game.getState().setValue(source.getSourceId().toString(), source.getControllerId());
-			game.addEffect(effect, source);
-		} else {
-			target.tap(game);
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent target = game.getPermanent(targetPointer.getFirst(game, source));
+        boolean scepter = false;
+        boolean throne = false;
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
+            if (permanent.getName().equals("Scepter of Empires")) {
+                scepter = true;
+            } else if (permanent.getName().equals("Throne of Empires")) {
+                throne = true;
+            }
+            if (scepter && throne) break;
+        }
+        if (scepter && throne) {
+            ContinuousEffect effect = new CrownOfEmpiresControlEffect();
+            effect.setTargetPointer(new FixedTarget(target.getId()));
+            game.getState().setValue(source.getSourceId().toString(), source.getControllerId());
+            game.addEffect(effect, source);
+        } else {
+            target.tap(game);
+        }
+        return false;
+    }
 
-	@Override
-	public CrownOfEmpiresEffect copy() {
-		return new CrownOfEmpiresEffect(this);
-	}
+    @Override
+    public CrownOfEmpiresEffect copy() {
+        return new CrownOfEmpiresEffect(this);
+    }
 }
 
 class CrownOfEmpiresControlEffect extends ContinuousEffectImpl<CrownOfEmpiresControlEffect> {
 
-	public CrownOfEmpiresControlEffect() {
-		super(Constants.Duration.EndOfGame, Constants.Layer.ControlChangingEffects_2, Constants.SubLayer.NA, Constants.Outcome.GainControl);
-	}
+    public CrownOfEmpiresControlEffect() {
+        super(Constants.Duration.EndOfGame, Constants.Layer.ControlChangingEffects_2, Constants.SubLayer.NA, Constants.Outcome.GainControl);
+    }
 
-	public CrownOfEmpiresControlEffect(final CrownOfEmpiresControlEffect effect) {
-		super(effect);
-	}
+    public CrownOfEmpiresControlEffect(final CrownOfEmpiresControlEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public CrownOfEmpiresControlEffect copy() {
-		return new CrownOfEmpiresControlEffect(this);
-	}
+    @Override
+    public CrownOfEmpiresControlEffect copy() {
+        return new CrownOfEmpiresControlEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
-		UUID controllerId = (UUID) game.getState().getValue(source.getSourceId().toString());
-		if (permanent != null && controllerId != null) {
-			return permanent.changeControllerId(controllerId, game);
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        UUID controllerId = (UUID) game.getState().getValue(source.getSourceId().toString());
+        if (permanent != null && controllerId != null) {
+            return permanent.changeControllerId(controllerId, game);
+        }
+        return false;
+    }
 
-	@Override
-	public String getText(Mode mode) {
-		return "Gain control of {this}";
-	}
+    @Override
+    public String getText(Mode mode) {
+        return "Gain control of {this}";
+    }
 }

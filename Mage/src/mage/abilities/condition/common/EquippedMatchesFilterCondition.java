@@ -50,7 +50,7 @@ public class EquippedMatchesFilterCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
-		if (permanent != null && permanent.getAttachedTo() != null) {
+        if (permanent != null && permanent.getAttachedTo() != null) {
                         Permanent attachedTo = game.getBattlefield().getPermanent(permanent.getAttachedTo());
                         if (attachedTo != null) {
                                 if (filter.match(attachedTo, attachedTo.getId(),attachedTo.getControllerId(), game)) {
@@ -58,7 +58,7 @@ public class EquippedMatchesFilterCondition implements Condition {
                                 }
 
                         }
-		}
-		return false;
+        }
+        return false;
     }
 }

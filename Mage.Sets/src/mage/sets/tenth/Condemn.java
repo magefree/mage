@@ -49,55 +49,55 @@ import mage.target.common.TargetAttackingCreature;
  */
 public class Condemn extends CardImpl<Condemn> {
 
-	public Condemn(UUID ownerId) {
-		super(ownerId, 13, "Condemn", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
-		this.expansionSetCode = "10E";
-		this.color.setWhite(true);
+    public Condemn(UUID ownerId) {
+        super(ownerId, 13, "Condemn", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
+        this.expansionSetCode = "10E";
+        this.color.setWhite(true);
         // Put target attacking creature on the bottom of its owner's library.
-		this.getSpellAbility().addTarget(new TargetAttackingCreature());
-		this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(false));
+        this.getSpellAbility().addTarget(new TargetAttackingCreature());
+        this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(false));
         // Its controller gains life equal to its toughness.
-		this.getSpellAbility().addEffect(new CondemnEffect());
+        this.getSpellAbility().addEffect(new CondemnEffect());
 
-	}
+    }
 
-	public Condemn(final Condemn card) {
-		super(card);
-	}
+    public Condemn(final Condemn card) {
+        super(card);
+    }
 
-	@Override
-	public Condemn copy() {
-		return new Condemn(this);
-	}
+    @Override
+    public Condemn copy() {
+        return new Condemn(this);
+    }
 
 }
 
 class CondemnEffect extends OneShotEffect<CondemnEffect> {
 
-	public CondemnEffect() {
-		super(Outcome.GainLife);
-		staticText = "Its controller gains life equal to its toughness";
-	}
+    public CondemnEffect() {
+        super(Outcome.GainLife);
+        staticText = "Its controller gains life equal to its toughness";
+    }
 
-	public CondemnEffect(final CondemnEffect effect) {
-		super(effect);
-	}
+    public CondemnEffect(final CondemnEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public CondemnEffect copy() {
-		return new CondemnEffect(this);
-	}
+    @Override
+    public CondemnEffect copy() {
+        return new CondemnEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent permanent = (Permanent)game.getLastKnownInformation(source.getFirstTarget(), Constants.Zone.BATTLEFIELD);
-		if (permanent != null) {
-			Player player = game.getPlayer(permanent.getControllerId());
-			if (player != null) {
-				player.gainLife(permanent.getToughness().getValue(), game);
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = (Permanent)game.getLastKnownInformation(source.getFirstTarget(), Constants.Zone.BATTLEFIELD);
+        if (permanent != null) {
+            Player player = game.getPlayer(permanent.getControllerId());
+            if (player != null) {
+                player.gainLife(permanent.getToughness().getValue(), game);
+            }
+        }
+        return false;
+    }
 
 }

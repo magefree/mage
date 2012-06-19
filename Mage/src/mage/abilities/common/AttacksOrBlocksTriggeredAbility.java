@@ -8,12 +8,12 @@ import mage.game.events.GameEvent;
 
 public class AttacksOrBlocksTriggeredAbility extends TriggeredAbilityImpl<AttacksOrBlocksTriggeredAbility> {
     public AttacksOrBlocksTriggeredAbility(Effect effect, boolean optional) {
-		super(Constants.Zone.BATTLEFIELD, effect, optional);
-	}
+        super(Constants.Zone.BATTLEFIELD, effect, optional);
+    }
 
     public AttacksOrBlocksTriggeredAbility(final AttacksOrBlocksTriggeredAbility ability) {
-		super(ability);
-	}
+        super(ability);
+    }
 
     @Override
     public AttacksOrBlocksTriggeredAbility copy() {
@@ -21,9 +21,9 @@ public class AttacksOrBlocksTriggeredAbility extends TriggeredAbilityImpl<Attack
     }
 
     @Override
-	public String getRule() {
-		return "When {this} attacks or blocks, " + super.getRule();
-	}
+    public String getRule() {
+        return "When {this} attacks or blocks, " + super.getRule();
+    }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {

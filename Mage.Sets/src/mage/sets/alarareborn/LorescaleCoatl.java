@@ -47,12 +47,12 @@ public class LorescaleCoatl extends CardImpl<LorescaleCoatl> {
         super(ownerId, 101, "Lorescale Coatl", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{U}");
         this.expansionSetCode = "ARB";
         this.subtype.add("Snake");
-        
-		this.color.setGreen(true);
-		this.color.setBlue(true);
+
+        this.color.setGreen(true);
+        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        
+
         this.addAbility(new DrawCardTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true));
     }
 

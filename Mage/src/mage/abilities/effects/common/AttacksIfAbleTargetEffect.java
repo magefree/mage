@@ -41,44 +41,44 @@ import mage.game.permanent.Permanent;
  */
 public class AttacksIfAbleTargetEffect extends RequirementEffect<AttacksIfAbleTargetEffect> {
 
-	public AttacksIfAbleTargetEffect(Duration duration) {
-		super(duration);
-	}
+    public AttacksIfAbleTargetEffect(Duration duration) {
+        super(duration);
+    }
 
-	public AttacksIfAbleTargetEffect(final AttacksIfAbleTargetEffect effect) {
-		super(effect);
-	}
+    public AttacksIfAbleTargetEffect(final AttacksIfAbleTargetEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public AttacksIfAbleTargetEffect copy() {
-		return new AttacksIfAbleTargetEffect(this);
-	}
+    @Override
+    public AttacksIfAbleTargetEffect copy() {
+        return new AttacksIfAbleTargetEffect(this);
+    }
 
-	@Override
-	public boolean applies(Permanent permanent, Ability source, Game game) {
-		Permanent creature = game.getPermanent(source.getFirstTarget());
-		if (creature != null && creature.getId().equals(permanent.getId())) {
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        Permanent creature = game.getPermanent(source.getFirstTarget());
+        if (creature != null && creature.getId().equals(permanent.getId())) {
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public boolean mustAttack(Game game) {
-		return true;
-	}
+    @Override
+    public boolean mustAttack(Game game) {
+        return true;
+    }
 
-	@Override
-	public boolean mustBlock(Game game) {
-		return false;
-	}
+    @Override
+    public boolean mustBlock(Game game) {
+        return false;
+    }
 
-	@Override
-	public String getText(Mode mode) {
-		if (this.duration == Duration.EndOfTurn)
-			return "Target " + mode.getTargets().get(0).getTargetName() + " attacks this turn if able";
-		else
-			return "Target " + mode.getTargets().get(0).getTargetName() + " attacks each turn if able";
-	}
+    @Override
+    public String getText(Mode mode) {
+        if (this.duration == Duration.EndOfTurn)
+            return "Target " + mode.getTargets().get(0).getTargetName() + " attacks this turn if able";
+        else
+            return "Target " + mode.getTargets().get(0).getTargetName() + " attacks each turn if able";
+    }
 
 }

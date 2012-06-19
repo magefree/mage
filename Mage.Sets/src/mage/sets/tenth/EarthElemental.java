@@ -44,7 +44,7 @@ public class EarthElemental extends CardImpl<EarthElemental> {
         super(ownerId, 199, "Earth Elemental", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
         this.expansionSetCode = "10E";
         this.subtype.add("Elemental");
-		this.color.setRed(true);
+        this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
     }

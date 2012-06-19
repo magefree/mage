@@ -43,24 +43,24 @@ import mage.cards.CardImpl;
  */
 public class PrizedUnicorn extends CardImpl<PrizedUnicorn> {
 
-	public PrizedUnicorn(UUID ownerId) {
-		super(ownerId, 199, "Prized Unicorn", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
-		this.expansionSetCode = "M10";
-		this.subtype.add("Unicorn");
-		this.color.setGreen(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+    public PrizedUnicorn(UUID ownerId) {
+        super(ownerId, 199, "Prized Unicorn", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
+        this.expansionSetCode = "M10";
+        this.subtype.add("Unicorn");
+        this.color.setGreen(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBlockSourceEffect()));
-	}
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBlockSourceEffect()));
+    }
 
-	public PrizedUnicorn(final PrizedUnicorn card) {
-		super(card);
-	}
+    public PrizedUnicorn(final PrizedUnicorn card) {
+        super(card);
+    }
 
-	@Override
-	public PrizedUnicorn copy() {
-		return new PrizedUnicorn(this);
-	}
+    @Override
+    public PrizedUnicorn copy() {
+        return new PrizedUnicorn(this);
+    }
 
 }

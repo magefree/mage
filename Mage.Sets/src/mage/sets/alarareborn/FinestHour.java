@@ -52,94 +52,94 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class FinestHour extends CardImpl<FinestHour> {
 
-	public FinestHour(UUID ownerId) {
-		super(ownerId, 126, "Finest Hour", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{W}{U}");
-		this.expansionSetCode = "ARB";
-		this.color.setWhite(true);
-		this.color.setGreen(true);
-		this.color.setBlue(true);
-		this.addAbility(new ExaltedAbility());
-		this.addAbility(new FinestHourAbility());
-	}
+    public FinestHour(UUID ownerId) {
+        super(ownerId, 126, "Finest Hour", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{W}{U}");
+        this.expansionSetCode = "ARB";
+        this.color.setWhite(true);
+        this.color.setGreen(true);
+        this.color.setBlue(true);
+        this.addAbility(new ExaltedAbility());
+        this.addAbility(new FinestHourAbility());
+    }
 
-	public FinestHour(final FinestHour card) {
-		super(card);
-	}
+    public FinestHour(final FinestHour card) {
+        super(card);
+    }
 
-	@Override
-	public FinestHour copy() {
-		return new FinestHour(this);
-	}
+    @Override
+    public FinestHour copy() {
+        return new FinestHour(this);
+    }
 
 }
 
 class FinestHourAbility extends TriggeredAbilityImpl<FinestHourAbility> {
 
-	public FinestHourAbility() {
-		super(Zone.BATTLEFIELD, new FinestHourEffect());
-	}
+    public FinestHourAbility() {
+        super(Zone.BATTLEFIELD, new FinestHourEffect());
+    }
 
-	public FinestHourAbility(final FinestHourAbility ability) {
-		super(ability);
-	}
+    public FinestHourAbility(final FinestHourAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public FinestHourAbility copy() {
-		return new FinestHourAbility(this);
-	}
+    @Override
+    public FinestHourAbility copy() {
+        return new FinestHourAbility(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (checkInterveningIfClause(game) && game.getActivePlayerId().equals(this.controllerId)) {
-			if (event.getType() == EventType.DECLARED_ATTACKERS) {
-				if (game.getCombat().attacksAlone()) {
-					this.addTarget(new TargetCreaturePermanent());
-					getTargets().get(0).add(game.getCombat().getAttackers().get(0), game);
-					return true;
-				}
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (checkInterveningIfClause(game) && game.getActivePlayerId().equals(this.controllerId)) {
+            if (event.getType() == EventType.DECLARED_ATTACKERS) {
+                if (game.getCombat().attacksAlone()) {
+                    this.addTarget(new TargetCreaturePermanent());
+                    getTargets().get(0).add(game.getCombat().getAttackers().get(0), game);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public boolean checkInterveningIfClause(Game game) {
-		return game.getTurn().getPhase(TurnPhase.COMBAT).getCount() == 0;
-	}
+    @Override
+    public boolean checkInterveningIfClause(Game game) {
+        return game.getTurn().getPhase(TurnPhase.COMBAT).getCount() == 0;
+    }
 
-	@Override
-	public String getRule() {
-		return "Whenever a creature you control attacks alone, if it's the first combat phase of the turn, untap that creature. After this phase, there is an additional combat phase.";
-	}
+    @Override
+    public String getRule() {
+        return "Whenever a creature you control attacks alone, if it's the first combat phase of the turn, untap that creature. After this phase, there is an additional combat phase.";
+    }
 
 }
 
 class FinestHourEffect extends OneShotEffect<FinestHourEffect> {
 
-	public FinestHourEffect() {
-		super(Outcome.Benefit);
-	}
+    public FinestHourEffect() {
+        super(Outcome.Benefit);
+    }
 
-	public FinestHourEffect(final FinestHourEffect effect) {
-		super(effect);
-	}
+    public FinestHourEffect(final FinestHourEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public FinestHourEffect copy() {
-		return new FinestHourEffect(this);
-	}
+    @Override
+    public FinestHourEffect copy() {
+        return new FinestHourEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getFirstTarget());
-		if (permanent != null) {
-			permanent.untap(game);
-			game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), TurnPhase.COMBAT, null, false));
-		}
-		else {
-			return false;
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        if (permanent != null) {
+            permanent.untap(game);
+            game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), TurnPhase.COMBAT, null, false));
+        }
+        else {
+            return false;
+        }
+        return true;
+    }
 
 }

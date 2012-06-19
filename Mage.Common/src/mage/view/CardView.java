@@ -232,19 +232,19 @@ public class CardView extends SimpleCardView {
         }
     }
 
-//	protected List<String> formatRules(List<String> rules) {
-//		List<String> newRules = new ArrayList<String>();
-//		for (String rule: rules) {
-//			newRules.add(formatRule(rule));
-//		}
-//		return newRules;
-//	}
+//    protected List<String> formatRules(List<String> rules) {
+//        List<String> newRules = new ArrayList<String>();
+//        for (String rule: rules) {
+//            newRules.add(formatRule(rule));
+//        }
+//        return newRules;
+//    }
 //
-//	protected String formatRule(String rule) {
-//		String replace = rule.replace("{this}", this.name);
-//		replace = replace.replace("{source}", this.name);
-//		return replace;
-//	}
+//    protected String formatRule(String rule) {
+//        String replace = rule.replace("{this}", this.name);
+//        replace = replace.replace("{source}", this.name);
+//        return replace;
+//    }
 
     public String getName() {
         return name;

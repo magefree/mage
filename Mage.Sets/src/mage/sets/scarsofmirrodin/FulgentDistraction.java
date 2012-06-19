@@ -51,11 +51,11 @@ public class FulgentDistraction extends CardImpl<FulgentDistraction> {
     public FulgentDistraction (UUID ownerId) {
         super(ownerId, 7, "Fulgent Distraction", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "SOM";
-        
-		this.color.setWhite(true);
 
-		this.getSpellAbility().addEffect(new FulgentDistractionEffect());
-		this.getSpellAbility().addTarget(new TargetCreaturePermanent(2));
+        this.color.setWhite(true);
+
+        this.getSpellAbility().addEffect(new FulgentDistractionEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(2));
     }
 
     public FulgentDistraction (final FulgentDistraction card) {
@@ -70,46 +70,46 @@ public class FulgentDistraction extends CardImpl<FulgentDistraction> {
 
 class FulgentDistractionEffect extends OneShotEffect<FulgentDistractionEffect> {
 
-	private static String text = "Choose two target creatures. Tap those creatures, then unattach all Equipment from them";
+    private static String text = "Choose two target creatures. Tap those creatures, then unattach all Equipment from them";
 
-	FulgentDistractionEffect ( ) {
-		super(Outcome.Tap);
-		staticText = text;
-	}
+    FulgentDistractionEffect ( ) {
+        super(Outcome.Tap);
+        staticText = text;
+    }
 
-	FulgentDistractionEffect ( FulgentDistractionEffect effect ) {
-		super(effect);
-	}
+    FulgentDistractionEffect ( FulgentDistractionEffect effect ) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		for ( UUID target : targetPointer.getTargets(game, source) ) {
-			Permanent creature = game.getPermanent(target);
+    @Override
+    public boolean apply(Game game, Ability source) {
+        for ( UUID target : targetPointer.getTargets(game, source) ) {
+            Permanent creature = game.getPermanent(target);
 
-			List<UUID> copiedAttachments = new ArrayList<UUID>(creature.getAttachments());
-			for ( UUID equipmentId : copiedAttachments ) {
-				Permanent equipment = game.getPermanent(equipmentId);
-				boolean isEquipment = false;
+            List<UUID> copiedAttachments = new ArrayList<UUID>(creature.getAttachments());
+            for ( UUID equipmentId : copiedAttachments ) {
+                Permanent equipment = game.getPermanent(equipmentId);
+                boolean isEquipment = false;
 
-				for ( Ability ability : equipment.getAbilities() ) {
-					if ( ability instanceof EquipAbility ) {
-						isEquipment = true;
-					}
-				}
+                for ( Ability ability : equipment.getAbilities() ) {
+                    if ( ability instanceof EquipAbility ) {
+                        isEquipment = true;
+                    }
+                }
 
-				if ( isEquipment ) {
-					creature.removeAttachment(equipmentId, game);
-				}
-			}
-			
-			creature.tap(game);
-		}
-		return true;
-	}
+                if ( isEquipment ) {
+                    creature.removeAttachment(equipmentId, game);
+                }
+            }
 
-	@Override
-	public FulgentDistractionEffect copy() {
-		return new FulgentDistractionEffect(this);
-	}
+            creature.tap(game);
+        }
+        return true;
+    }
+
+    @Override
+    public FulgentDistractionEffect copy() {
+        return new FulgentDistractionEffect(this);
+    }
 
 }

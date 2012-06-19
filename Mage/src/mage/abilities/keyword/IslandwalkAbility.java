@@ -39,21 +39,21 @@ public class IslandwalkAbility extends LandwalkAbility {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Island");
 
-	static {
-		filter.getSubtype().add("Island");
-		filter.setScopeSubtype(ComparisonScope.Any);
-	}
+    static {
+        filter.getSubtype().add("Island");
+        filter.setScopeSubtype(ComparisonScope.Any);
+    }
 
-	public IslandwalkAbility() {
-		super(filter);
-	}
+    public IslandwalkAbility() {
+        super(filter);
+    }
 
-	public IslandwalkAbility(final IslandwalkAbility ability) {
-		super(ability);
-	}
+    public IslandwalkAbility(final IslandwalkAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public IslandwalkAbility copy() {
-		return new IslandwalkAbility(this);
-	}
+    @Override
+    public IslandwalkAbility copy() {
+        return new IslandwalkAbility(this);
+    }
 }

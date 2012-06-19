@@ -49,22 +49,22 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class DarkslickShores extends CardImpl<DarkslickShores> {
 
-	private static FilterLandPermanent filter = new FilterLandPermanent();
+    private static FilterLandPermanent filter = new FilterLandPermanent();
 
-	static {
-		filter.setScopeSubtype(ComparisonScope.Any);
-		filter.setMessage("lands");
-	}
-	
+    static {
+        filter.setScopeSubtype(ComparisonScope.Any);
+        filter.setMessage("lands");
+    }
+
     public DarkslickShores (UUID ownerId) {
         super(ownerId, 226, "Darkslick Shores", Rarity.RARE, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "SOM";
 
         Condition controls = new UnlessCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.FEWER_THAN, 4));
-		String abilityText = "tap it unless you control fewer than 3 " + filter.getMessage();
-		this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
-		this.addAbility(new BlueManaAbility());
-		this.addAbility(new BlackManaAbility());
+        String abilityText = "tap it unless you control fewer than 3 " + filter.getMessage();
+        this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
+        this.addAbility(new BlueManaAbility());
+        this.addAbility(new BlackManaAbility());
     }
 
     public DarkslickShores (final DarkslickShores card) {

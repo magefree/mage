@@ -46,11 +46,11 @@ import java.util.UUID;
 public class KessigMalcontents extends CardImpl<KessigMalcontents> {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Humans you control");
-    
+
     static {
         filter.getSubtype().add("Human");
     }
-    
+
     public KessigMalcontents(UUID ownerId) {
         super(ownerId, 142, "Kessig Malcontents", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.expansionSetCode = "AVR";

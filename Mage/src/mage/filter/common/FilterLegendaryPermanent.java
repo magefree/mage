@@ -36,22 +36,22 @@ import mage.filter.FilterPermanent;
  */
 public class FilterLegendaryPermanent extends FilterPermanent<FilterLegendaryPermanent> {
 
-	public FilterLegendaryPermanent() {
-		this("legend");
-	}
+    public FilterLegendaryPermanent() {
+        this("legend");
+    }
 
-	public FilterLegendaryPermanent(String name) {
-		super(name);
-		this.supertype.add("Legendary");
-	}
+    public FilterLegendaryPermanent(String name) {
+        super(name);
+        this.supertype.add("Legendary");
+    }
 
-	public FilterLegendaryPermanent(final FilterLegendaryPermanent filter) {
-		super(filter);
-	}
+    public FilterLegendaryPermanent(final FilterLegendaryPermanent filter) {
+        super(filter);
+    }
 
-	@Override
-	public FilterLegendaryPermanent copy() {
-		return new FilterLegendaryPermanent(this);
-	}
+    @Override
+    public FilterLegendaryPermanent copy() {
+        return new FilterLegendaryPermanent(this);
+    }
 
 }

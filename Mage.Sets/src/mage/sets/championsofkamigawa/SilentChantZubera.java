@@ -51,7 +51,7 @@ public class SilentChantZubera extends CardImpl<SilentChantZubera> {
         this.expansionSetCode = "CHK";
         this.subtype.add("Zubera");
         this.subtype.add("Spirit");
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
         Ability ability = new DiesTriggeredAbility(new GainLifeEffect(new SilentChantZuberaDynamicValue()));

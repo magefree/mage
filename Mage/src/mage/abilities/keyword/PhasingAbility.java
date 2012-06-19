@@ -38,28 +38,28 @@ import mage.abilities.StaticAbility;
  */
 public class PhasingAbility extends StaticAbility<PhasingAbility> {
 
-	private static final PhasingAbility fINSTANCE =  new PhasingAbility();
+    private static final PhasingAbility fINSTANCE =  new PhasingAbility();
 
-	private Object readResolve() throws ObjectStreamException {
-		return fINSTANCE;
-	}
+    private Object readResolve() throws ObjectStreamException {
+        return fINSTANCE;
+    }
 
-	public static PhasingAbility getInstance() {
-		return fINSTANCE;
-	}
+    public static PhasingAbility getInstance() {
+        return fINSTANCE;
+    }
 
-	private PhasingAbility() {
-		super(Zone.BATTLEFIELD, null);
-	}
+    private PhasingAbility() {
+        super(Zone.BATTLEFIELD, null);
+    }
 
-	@Override
-	public String getRule() {
-		return "Phasing";
-	}
+    @Override
+    public String getRule() {
+        return "Phasing";
+    }
 
-	@Override
-	public PhasingAbility copy() {
-		return fINSTANCE;
-	}
+    @Override
+    public PhasingAbility copy() {
+        return fINSTANCE;
+    }
 
 }

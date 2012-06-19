@@ -43,54 +43,54 @@ public class FilterSpell<T extends FilterSpell<T>> extends FilterStackObject<Fil
 
     protected Zone fromZone = Zone.ALL;
     protected boolean notFromZone = false;    
-    
-	public FilterSpell() {
-		super("spell");
-	}
 
-	public FilterSpell(String name) {
-		super(name);
-	}
+    public FilterSpell() {
+        super("spell");
+    }
 
-	public FilterSpell(final FilterSpell filter) {
-		super(filter);
+    public FilterSpell(String name) {
+        super(name);
+    }
+
+    public FilterSpell(final FilterSpell filter) {
+        super(filter);
         for (Object cId: filter.getControllerId()) {
-			this.controllerId.add((UUID)cId);
-		}
-		this.notController = filter.notController;
-		this.controller = filter.controller;
-	}
+            this.controllerId.add((UUID)cId);
+        }
+        this.notController = filter.notController;
+        this.controller = filter.controller;
+    }
 
-	@Override
-	public boolean match(StackObject spell, Game game) {
-		if (!(spell instanceof Spell))
-			return notFilter;
+    @Override
+    public boolean match(StackObject spell, Game game) {
+        if (!(spell instanceof Spell))
+            return notFilter;
 
         if (((Spell)spell).getFromZone().match(fromZone) == notFromZone)
             return notFilter;
-        
-		return super.match(spell, game);
-	}
+
+        return super.match(spell, game);
+    }
 
     @Override
-	public boolean match(StackObject spell, UUID playerId, Game game) {
-		if (!this.match(spell, game))
-			return notFilter;
-        
+    public boolean match(StackObject spell, UUID playerId, Game game) {
+        if (!this.match(spell, game))
+            return notFilter;
+
         return super.match(spell, playerId, game);
     }
-    
-	@Override
-	public FilterSpell copy() {
-		return new FilterSpell(this);
-	}
+
+    @Override
+    public FilterSpell copy() {
+        return new FilterSpell(this);
+    }
 
     public void setFromZone(Zone fromZone) {
         this.fromZone = fromZone;
     }
-    
-	public void setNotFromZone(boolean notFromZone) {
-		this.notFromZone = notFromZone;
-	}
+
+    public void setNotFromZone(boolean notFromZone) {
+        this.notFromZone = notFromZone;
+    }
 
 }

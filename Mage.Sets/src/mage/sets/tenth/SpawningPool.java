@@ -76,7 +76,7 @@ class SkeletonToken extends Token {
         this.subtype.add("Skeleton");
         color = ObjectColor.BLACK;
         power = new MageInt(1);
-		toughness = new MageInt(1);
+        toughness = new MageInt(1);
         this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ColoredManaCost(Constants.ColoredManaSymbol.B)));
     }
 }

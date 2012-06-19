@@ -42,25 +42,25 @@ import mage.cards.CardImpl;
  */
 public class AbbeyGriffin extends CardImpl<AbbeyGriffin> {
 
-	public AbbeyGriffin(UUID ownerId) {
-		super(ownerId, 1, "Abbey Griffin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
-		this.expansionSetCode = "ISD";
-		this.subtype.add("Griffin");
-		this.color.setWhite(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+    public AbbeyGriffin(UUID ownerId) {
+        super(ownerId, 1, "Abbey Griffin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
+        this.expansionSetCode = "ISD";
+        this.subtype.add("Griffin");
+        this.color.setWhite(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-		this.addAbility(FlyingAbility.getInstance());
-		this.addAbility(VigilanceAbility.getInstance());
-	}
+        this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(VigilanceAbility.getInstance());
+    }
 
-	public AbbeyGriffin(final AbbeyGriffin card) {
-		super(card);
-	}
+    public AbbeyGriffin(final AbbeyGriffin card) {
+        super(card);
+    }
 
-	@Override
-	public AbbeyGriffin copy() {
-		return new AbbeyGriffin(this);
-	}
+    @Override
+    public AbbeyGriffin copy() {
+        return new AbbeyGriffin(this);
+    }
 
 }

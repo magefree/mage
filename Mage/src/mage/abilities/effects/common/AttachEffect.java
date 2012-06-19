@@ -41,37 +41,37 @@ import mage.players.Player;
  */
 public class AttachEffect extends OneShotEffect<AttachEffect> {
 
-	public AttachEffect(Outcome outcome) {
-		super(outcome);
-	}
+    public AttachEffect(Outcome outcome) {
+        super(outcome);
+    }
 
-	public AttachEffect(Outcome outcome, String rule) {
-		super(outcome);
-		staticText = rule;
-	}
+    public AttachEffect(Outcome outcome, String rule) {
+        super(outcome);
+        staticText = rule;
+    }
 
-	public AttachEffect(final AttachEffect effect) {
-		super(effect);
-	}
+    public AttachEffect(final AttachEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public AttachEffect copy() {
-		return new AttachEffect(this);
-	}
+    @Override
+    public AttachEffect copy() {
+        return new AttachEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getFirstTarget());
-		if (permanent != null) {
-			return permanent.addAttachment(source.getSourceId(), game);
-		}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        if (permanent != null) {
+            return permanent.addAttachment(source.getSourceId(), game);
+        }
         else {
             Player player = game.getPlayer(source.getFirstTarget());
             if (player != null) {
                 return player.addAttachment(source.getSourceId(), game);
             }
         }
-		return false;
-	}
+        return false;
+    }
 
 }

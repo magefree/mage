@@ -74,18 +74,18 @@ public class VeneratedTeacher extends CardImpl<VeneratedTeacher> {
 }
 
 class VeneratedTeacherEffect extends OneShotEffect<VeneratedTeacherEffect> {
-    
+
     FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures you control");
-    
+
     public VeneratedTeacherEffect() {
         super(Outcome.BoostCreature);
         staticText = "put two level counters on each creature you control with level up";
     }
-    
+
     public VeneratedTeacherEffect(final VeneratedTeacherEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game);
@@ -101,7 +101,7 @@ class VeneratedTeacherEffect extends OneShotEffect<VeneratedTeacherEffect> {
         }
         return false;
     }
-    
+
     @Override
     public VeneratedTeacherEffect copy() {
         return new VeneratedTeacherEffect(this);

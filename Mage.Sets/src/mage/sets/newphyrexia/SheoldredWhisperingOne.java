@@ -55,7 +55,7 @@ public class SheoldredWhisperingOne extends CardImpl<SheoldredWhisperingOne> {
         this.expansionSetCode = "NPH";
         this.supertype.add("Legendary");
         this.subtype.add("Praetor");
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
         this.addAbility(new SwampwalkAbility());

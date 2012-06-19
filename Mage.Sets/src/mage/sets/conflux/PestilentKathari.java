@@ -55,7 +55,7 @@ public class PestilentKathari extends CardImpl<PestilentKathari> {
         this.subtype.add("Warrior");        
         this.color.setBlack(true);
         this.power = new MageInt(1);
-	this.toughness = new MageInt(1);
+    this.toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(DeathtouchAbility.getInstance());
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{2}{R}")));

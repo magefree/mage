@@ -50,79 +50,79 @@ import mage.target.TargetPlayer;
  */
 public class Memoricide extends CardImpl<Memoricide> {
 
-	public Memoricide(UUID ownerId) {
-		super(ownerId, 69, "Memoricide", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}");
-		this.expansionSetCode = "SOM";
-		this.color.setBlack(true);
+    public Memoricide(UUID ownerId) {
+        super(ownerId, 69, "Memoricide", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}");
+        this.expansionSetCode = "SOM";
+        this.color.setBlack(true);
 
         // Name a nonland card. Search target player's graveyard, hand, and library for any number of cards with
         // that name and exile them. Then that player shuffles his or her library
-		this.getSpellAbility().addTarget(new TargetPlayer());
-		this.getSpellAbility().addEffect(new MemoricideEffect());
-	}
+        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addEffect(new MemoricideEffect());
+    }
 
-	public Memoricide(final Memoricide card) {
-		super(card);
-	}
+    public Memoricide(final Memoricide card) {
+        super(card);
+    }
 
-	@Override
-	public Memoricide copy() {
-		return new Memoricide(this);
-	}
+    @Override
+    public Memoricide copy() {
+        return new Memoricide(this);
+    }
 
 }
 
 class MemoricideEffect extends OneShotEffect<MemoricideEffect> {
-	
-	public MemoricideEffect() {
-		super(Outcome.Exile);
-		staticText = "Name a nonland card. Search target player's graveyard, hand, and library for any number of cards with that name and exile them. Then that player shuffles his or her library";
-	}
-	
-	public MemoricideEffect(final MemoricideEffect effect) {
-		super(effect);
-	}
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(targetPointer.getFirst(game, source));
-		Player controller = game.getPlayer(source.getControllerId());
-		if (player != null && controller != null) {
-			Choice cardChoice = new ChoiceImpl();
-			cardChoice.setChoices(Sets.getNonLandCardNames());
-			cardChoice.clearChoice();
+    public MemoricideEffect() {
+        super(Outcome.Exile);
+        staticText = "Name a nonland card. Search target player's graveyard, hand, and library for any number of cards with that name and exile them. Then that player shuffles his or her library";
+    }
+
+    public MemoricideEffect(final MemoricideEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player controller = game.getPlayer(source.getControllerId());
+        if (player != null && controller != null) {
+            Choice cardChoice = new ChoiceImpl();
+            cardChoice.setChoices(Sets.getNonLandCardNames());
+            cardChoice.clearChoice();
 
             while (!controller.choose(Outcome.Exile, cardChoice, game)) {
                 game.debugMessage("player canceled choosing name. retrying.");
             }
 
-			String cardName = cardChoice.getChoice();
+            String cardName = cardChoice.getChoice();
             game.informPlayers("Memoricide, named card: [" + cardName + "]");
-			for (Card card: player.getGraveyard().getCards(game)) {
-				if (card.getName().equals(cardName)) {
-					card.moveToExile(null, "", source.getId(), game);					
-				}
-			}
-			for (Card card: player.getHand().getCards(game)) {
-				if (card.getName().equals(cardName)) {
-					card.moveToExile(null, "", source.getId(), game);					
-				}
-			}
-			for (Card card: player.getLibrary().getCards(game)) {
-				if (card.getName().equals(cardName)) {
-					card.moveToExile(null, "", source.getId(), game);					
-				}
-			}
-			controller.lookAtCards("Memoricide Hand", player.getHand(), game);
-			controller.lookAtCards("Memoricide Library", new CardsImpl(Zone.PICK, player.getLibrary().getCards(game)), game);
-			player.shuffleLibrary(game);
-		}
-		return true;
-	}
+            for (Card card: player.getGraveyard().getCards(game)) {
+                if (card.getName().equals(cardName)) {
+                    card.moveToExile(null, "", source.getId(), game);                    
+                }
+            }
+            for (Card card: player.getHand().getCards(game)) {
+                if (card.getName().equals(cardName)) {
+                    card.moveToExile(null, "", source.getId(), game);                    
+                }
+            }
+            for (Card card: player.getLibrary().getCards(game)) {
+                if (card.getName().equals(cardName)) {
+                    card.moveToExile(null, "", source.getId(), game);                    
+                }
+            }
+            controller.lookAtCards("Memoricide Hand", player.getHand(), game);
+            controller.lookAtCards("Memoricide Library", new CardsImpl(Zone.PICK, player.getLibrary().getCards(game)), game);
+            player.shuffleLibrary(game);
+        }
+        return true;
+    }
 
-	@Override
-	public MemoricideEffect copy() {
-		return new MemoricideEffect(this);
-	}
-	
+    @Override
+    public MemoricideEffect copy() {
+        return new MemoricideEffect(this);
+    }
+
 }

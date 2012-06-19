@@ -43,21 +43,21 @@ import mage.cards.CardImpl;
  */
 public class Explore extends CardImpl<Explore> {
 
-	public Explore(UUID ownerId) {
-		super(ownerId, 99, "Explore", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
-		this.expansionSetCode = "WWK";
-		this.color.setGreen(true);
-		
-		this.getSpellAbility().addEffect(new PlayAdditionalLandsControllerEffect(1, Duration.EndOfTurn));
-		this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
-	}
+    public Explore(UUID ownerId) {
+        super(ownerId, 99, "Explore", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
+        this.expansionSetCode = "WWK";
+        this.color.setGreen(true);
 
-	public Explore(final Explore card) {
-		super(card);
-	}
+        this.getSpellAbility().addEffect(new PlayAdditionalLandsControllerEffect(1, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+    }
 
-	@Override
-	public Explore copy() {
-		return new Explore(this);
-	}
+    public Explore(final Explore card) {
+        super(card);
+    }
+
+    @Override
+    public Explore copy() {
+        return new Explore(this);
+    }
 }

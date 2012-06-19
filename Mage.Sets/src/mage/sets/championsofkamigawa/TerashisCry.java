@@ -52,7 +52,7 @@ public class TerashisCry extends CardImpl<TerashisCry> {
 
         // Tap up to three target creatures.
         Target target = new TargetCreaturePermanent(0,3);
-	target.setTargetName("up to three");
+    target.setTargetName("up to three");
         this.getSpellAbility().addEffect(new TapTargetEffect());
         this.getSpellAbility().addTarget(target);
     }

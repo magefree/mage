@@ -49,54 +49,54 @@ import mage.game.permanent.token.Token;
  */
 public class GargoyleCastle extends CardImpl<GargoyleCastle> {
 
-	public GargoyleCastle(UUID ownerId) {
-		super(ownerId, 225, "Gargoyle Castle", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-		this.expansionSetCode = "M10";
-		this.addAbility(new ColorlessManaAbility());
-		this.addAbility(new GargoyleCastleAbility());
-	}
+    public GargoyleCastle(UUID ownerId) {
+        super(ownerId, 225, "Gargoyle Castle", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+        this.expansionSetCode = "M10";
+        this.addAbility(new ColorlessManaAbility());
+        this.addAbility(new GargoyleCastleAbility());
+    }
 
-	public GargoyleCastle(final GargoyleCastle card) {
-		super(card);
-	}
+    public GargoyleCastle(final GargoyleCastle card) {
+        super(card);
+    }
 
-	@Override
-	public GargoyleCastle copy() {
-		return new GargoyleCastle(this);
-	}
+    @Override
+    public GargoyleCastle copy() {
+        return new GargoyleCastle(this);
+    }
 
 }
 
 class GargoyleCastleAbility extends ActivatedAbilityImpl<GargoyleCastleAbility> {
 
-	public GargoyleCastleAbility() {
-		super(Zone.BATTLEFIELD, null);
-		addCost(new TapSourceCost());
-		addCost(new GenericManaCost(5));
-		addCost(new SacrificeSourceCost());
-		addEffect(new CreateTokenEffect(new GargoyleToken()));
-	}
+    public GargoyleCastleAbility() {
+        super(Zone.BATTLEFIELD, null);
+        addCost(new TapSourceCost());
+        addCost(new GenericManaCost(5));
+        addCost(new SacrificeSourceCost());
+        addEffect(new CreateTokenEffect(new GargoyleToken()));
+    }
 
-	public GargoyleCastleAbility(final GargoyleCastleAbility ability) {
-		super(ability);
-	}
+    public GargoyleCastleAbility(final GargoyleCastleAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public GargoyleCastleAbility copy() {
-		return new GargoyleCastleAbility(this);
-	}
+    @Override
+    public GargoyleCastleAbility copy() {
+        return new GargoyleCastleAbility(this);
+    }
 
 }
 
 class GargoyleToken extends Token {
 
-	public GargoyleToken() {
-		super("Gargoyle", "3/4 colorless Gargoyle artifact creature token with flying");
-		cardType.add(CardType.CREATURE);
-		cardType.add(CardType.ARTIFACT);
-		subtype.add("Gargoyle");
-		power = new MageInt(3);
-		toughness = new MageInt(4);
-		addAbility(FlyingAbility.getInstance());
-	}
+    public GargoyleToken() {
+        super("Gargoyle", "3/4 colorless Gargoyle artifact creature token with flying");
+        cardType.add(CardType.CREATURE);
+        cardType.add(CardType.ARTIFACT);
+        subtype.add("Gargoyle");
+        power = new MageInt(3);
+        toughness = new MageInt(4);
+        addAbility(FlyingAbility.getInstance());
+    }
 }

@@ -38,20 +38,20 @@ import mage.cards.ExpansionSet;
  */
 public class Magic2010 extends ExpansionSet {
 
-	private static final Magic2010 fINSTANCE =  new Magic2010();
+    private static final Magic2010 fINSTANCE =  new Magic2010();
 
-	public static Magic2010 getInstance() {
-		return fINSTANCE;
-	}
+    public static Magic2010 getInstance() {
+        return fINSTANCE;
+    }
 
-	private Magic2010() {
-		super("Magic 2010", "M10", "seticon_M10", "mage.sets.magic2010", new GregorianCalendar(2009, 6, 17).getTime(), SetType.CORE);
-		this.hasBoosters = true;
-		this.numBoosterLands = 1;
-		this.numBoosterCommon = 10;
-		this.numBoosterUncommon = 3;
-		this.numBoosterRare = 1;
-		this.ratioBoosterMythic = 8;
-	}
+    private Magic2010() {
+        super("Magic 2010", "M10", "seticon_M10", "mage.sets.magic2010", new GregorianCalendar(2009, 6, 17).getTime(), SetType.CORE);
+        this.hasBoosters = true;
+        this.numBoosterLands = 1;
+        this.numBoosterCommon = 10;
+        this.numBoosterUncommon = 3;
+        this.numBoosterRare = 1;
+        this.ratioBoosterMythic = 8;
+    }
 
 }

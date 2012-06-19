@@ -44,9 +44,9 @@ public class SteadyProgress extends CardImpl<SteadyProgress> {
     public SteadyProgress (UUID ownerId) {
         super(ownerId, 45, "Steady Progress", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "SOM";
-		this.color.setBlue(true);
-		this.getSpellAbility().addEffect(new ProliferateEffect());
-		this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+        this.color.setBlue(true);
+        this.getSpellAbility().addEffect(new ProliferateEffect());
+        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
     }
 
     public SteadyProgress (final SteadyProgress card) {

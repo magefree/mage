@@ -47,7 +47,7 @@ public class TaintedStrike extends CardImpl<TaintedStrike> {
     public TaintedStrike (UUID ownerId) {
         super(ownerId, 80, "Tainted Strike", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "SOM";
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.getSpellAbility().addEffect(new BoostTargetEffect(1, 0, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(InfectAbility.getInstance(), Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

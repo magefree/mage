@@ -42,25 +42,25 @@ import mage.game.Game;
  */
 public abstract class CostModificationEffectImpl<T extends CostModificationEffectImpl<T>> extends ContinuousEffectImpl<T> implements CostModificationEffect<T> {
 
-	public CostModificationEffectImpl ( Duration duration, Outcome outcome ) {
-		super(duration, outcome);
-		this.effectType = EffectType.COSTMODIFICATION;
-	}
+    public CostModificationEffectImpl ( Duration duration, Outcome outcome ) {
+        super(duration, outcome);
+        this.effectType = EffectType.COSTMODIFICATION;
+    }
 
-	public CostModificationEffectImpl(final CostModificationEffectImpl<T> effect) {
-		super(effect);
-		this.effectType = effect.effectType;
-	}
+    public CostModificationEffectImpl(final CostModificationEffectImpl<T> effect) {
+        super(effect);
+        this.effectType = effect.effectType;
+    }
 
-	/**
-	 * Overridden and 'no-op' implementation put in place.
-	 *
-	 * @see #apply(mage.game.Game, mage.abilities.Ability, mage.abilities.Ability)
-	 *
-	 * @param game
-	 * @param source
-	 * @return
-	 */
-	@Override
-	public final boolean apply ( Game game, Ability source ) { return false; }
+    /**
+     * Overridden and 'no-op' implementation put in place.
+     *
+     * @see #apply(mage.game.Game, mage.abilities.Ability, mage.abilities.Ability)
+     *
+     * @param game
+     * @param source
+     * @return
+     */
+    @Override
+    public final boolean apply ( Game game, Ability source ) { return false; }
 }

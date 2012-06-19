@@ -43,30 +43,30 @@ import mage.filter.FilterCard;
  * @author ayratn
  */
 public class MirranCrusader extends CardImpl<MirranCrusader> {
-	private static FilterCard filter = new FilterCard("Black");
-	private static FilterCard filter2 = new FilterCard("Green");
+    private static FilterCard filter = new FilterCard("Black");
+    private static FilterCard filter2 = new FilterCard("Green");
 
-	static {
-		filter.setUseColor(true);
-		filter.getColor().setBlack(true);
-		filter.setScopeColor(ComparisonScope.Any);
+    static {
+        filter.setUseColor(true);
+        filter.getColor().setBlack(true);
+        filter.setScopeColor(ComparisonScope.Any);
 
-		filter2.setUseColor(true);
-		filter2.getColor().setGreen(true);
-		filter2.setScopeColor(ComparisonScope.Any);
-	}
+        filter2.setUseColor(true);
+        filter2.getColor().setGreen(true);
+        filter2.setScopeColor(ComparisonScope.Any);
+    }
 
     public MirranCrusader (UUID ownerId) {
         super(ownerId, 14, "Mirran Crusader", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
         this.expansionSetCode = "MBS";
         this.subtype.add("Human");
         this.subtype.add("Knight");
-		this.color.setWhite(true);
-		this.power = new MageInt(2);
+        this.color.setWhite(true);
+        this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-		this.addAbility(DoubleStrikeAbility.getInstance());
-		this.addAbility(new ProtectionAbility(filter));
-		this.addAbility(new ProtectionAbility(filter2));
+        this.addAbility(DoubleStrikeAbility.getInstance());
+        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(new ProtectionAbility(filter2));
     }
 
     public MirranCrusader (final MirranCrusader card) {

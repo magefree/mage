@@ -47,7 +47,7 @@ public class SerumRaker extends CardImpl<SerumRaker> {
         super(ownerId, 31, "Serum Raker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
         this.expansionSetCode = "MBS";
         this.subtype.add("Drake");
-		this.color.setBlue(true);
+        this.color.setBlue(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());

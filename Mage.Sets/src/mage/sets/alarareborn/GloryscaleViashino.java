@@ -52,9 +52,9 @@ public class GloryscaleViashino extends CardImpl<GloryscaleViashino> {
         this.expansionSetCode = "ARB";
         this.subtype.add("Viashino");
         this.subtype.add("Soldier");
-		this.color.setRed(true);
-		this.color.setGreen(true);
-		this.color.setWhite(true);
+        this.color.setRed(true);
+        this.color.setGreen(true);
+        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(new GloryscaleViashinoAbility());
@@ -88,12 +88,12 @@ class GloryscaleViashinoAbility extends TriggeredAbilityImpl<GloryscaleViashinoA
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
          if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-			Spell spell = game.getStack().getSpell(event.getTargetId());
-			if (spell != null && spell.getColor().isMulticolored() && event.getPlayerId().equals(getControllerId())) {
-				return true;
+            Spell spell = game.getStack().getSpell(event.getTargetId());
+            if (spell != null && spell.getColor().isMulticolored() && event.getPlayerId().equals(getControllerId())) {
+                return true;
             }
-		}
-		return false;
+        }
+        return false;
     }
 
     @Override

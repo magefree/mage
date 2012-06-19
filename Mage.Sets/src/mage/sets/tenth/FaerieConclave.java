@@ -75,7 +75,7 @@ class FaerieConclaveToken extends Token {
         this.subtype.add("Faerie");
         color = ObjectColor.BLUE;
         power = new MageInt(2);
-		toughness = new MageInt(1);
+        toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
     }
 }

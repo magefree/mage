@@ -77,11 +77,11 @@ class HereticsPunishmentEffect extends OneShotEffect<HereticsPunishmentEffect> {
         super(Outcome.Damage);
         staticText = "Choose target creature or player, then put the top three cards of your library into your graveyard. Heretic's Punishment deals damage to that creature or player equal to the highest converted mana cost among those cards";
     }
-    
+
     public HereticsPunishmentEffect(final HereticsPunishmentEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
@@ -114,5 +114,5 @@ class HereticsPunishmentEffect extends OneShotEffect<HereticsPunishmentEffect> {
     public HereticsPunishmentEffect copy() {
         return new HereticsPunishmentEffect(this);
     }
-    
+
 }

@@ -37,23 +37,23 @@ import mage.cards.ExpansionSet;
  */
 public class BoosterDraft extends DraftImpl<BoosterDraft> {
 
-	public BoosterDraft(DraftOptions options, List<ExpansionSet> sets) {
-		super(options, sets);
-	}
+    public BoosterDraft(DraftOptions options, List<ExpansionSet> sets) {
+        super(options, sets);
+    }
 
-	@Override
-	public void start() {
-		while (boosterNum < sets.size()) {
-			openBooster();
-			while (pickCards()) {
-				if (boosterNum % 2 == 1)
-					passLeft();
-				else
-					passRight();
-				fireUpdatePlayersEvent();
-			}
-		}
-		this.fireEndDraftEvent();
-	}
+    @Override
+    public void start() {
+        while (boosterNum < sets.size()) {
+            openBooster();
+            while (pickCards()) {
+                if (boosterNum % 2 == 1)
+                    passLeft();
+                else
+                    passRight();
+                fireUpdatePlayersEvent();
+            }
+        }
+        this.fireEndDraftEvent();
+    }
 
 }

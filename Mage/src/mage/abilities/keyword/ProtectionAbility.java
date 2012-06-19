@@ -43,55 +43,55 @@ import mage.game.stack.Spell;
  */
 public class ProtectionAbility extends StaticAbility<ProtectionAbility> {
 
-	protected Filter filter;
+    protected Filter filter;
 
-	public ProtectionAbility(Filter filter) {
-		super(Zone.BATTLEFIELD, null);
-		this.filter = filter;
-	}
+    public ProtectionAbility(Filter filter) {
+        super(Zone.BATTLEFIELD, null);
+        this.filter = filter;
+    }
 
-	public ProtectionAbility(final ProtectionAbility ability) {
-		super(ability);
-		this.filter = ability.filter.copy();
-	}
+    public ProtectionAbility(final ProtectionAbility ability) {
+        super(ability);
+        this.filter = ability.filter.copy();
+    }
 
-	@Override
-	public ProtectionAbility copy() {
-		return new ProtectionAbility(this);
-	}
+    @Override
+    public ProtectionAbility copy() {
+        return new ProtectionAbility(this);
+    }
 
-	@Override
-	public String getRule() {
-		return "Protection from " + filter.getMessage();
-	}
+    @Override
+    public String getRule() {
+        return "Protection from " + filter.getMessage();
+    }
 
-	public boolean canTarget(MageObject source, Game game) {
-		if (filter instanceof FilterPermanent) {
-			if (source instanceof Permanent)
-				return !filter.match(source, game);
-			return true;
-		}
-		if (filter instanceof FilterSpell) {
-			if (source instanceof Spell)
-				return !filter.match(source, game);
-			return true;
-		}
-		if (filter instanceof FilterCard) {
-			if (source instanceof Card)
-				return !filter.match(source, game);
-			return true;
-		}
-		if (filter instanceof FilterObject) {
-			return !filter.match(source, game);
-		}
-		return true;
-	}
+    public boolean canTarget(MageObject source, Game game) {
+        if (filter instanceof FilterPermanent) {
+            if (source instanceof Permanent)
+                return !filter.match(source, game);
+            return true;
+        }
+        if (filter instanceof FilterSpell) {
+            if (source instanceof Spell)
+                return !filter.match(source, game);
+            return true;
+        }
+        if (filter instanceof FilterCard) {
+            if (source instanceof Card)
+                return !filter.match(source, game);
+            return true;
+        }
+        if (filter instanceof FilterObject) {
+            return !filter.match(source, game);
+        }
+        return true;
+    }
 
-	public Filter getFilter() {
-		return filter;
-	}
+    public Filter getFilter() {
+        return filter;
+    }
 
-	public void setFilter(FilterCard filter) {
-		this.filter = filter;
-	}
+    public void setFilter(FilterCard filter) {
+        this.filter = filter;
+    }
 }

@@ -51,7 +51,7 @@ public class NeurokInvisimancer extends CardImpl<NeurokInvisimancer> {
         this.expansionSetCode = "SOM";
         this.subtype.add("Human");
         this.subtype.add("Wizard");
-		this.color.setBlue(true);
+        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         this.addAbility(UnblockableAbility.getInstance());

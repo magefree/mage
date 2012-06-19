@@ -45,49 +45,49 @@ import java.util.UUID;
  */
 public class SacrificeTargetCost extends CostImpl<SacrificeTargetCost> {
 
-	List<Permanent> permanents = new ArrayList<Permanent>();
+    List<Permanent> permanents = new ArrayList<Permanent>();
 
-	public SacrificeTargetCost(TargetControlledPermanent target) {
-		this.addTarget(target);
-		this.text = "Sacrifice " + target.getTargetName();
-	}
+    public SacrificeTargetCost(TargetControlledPermanent target) {
+        this.addTarget(target);
+        this.text = "Sacrifice " + target.getTargetName();
+    }
 
-	public SacrificeTargetCost(SacrificeTargetCost cost) {
-		super(cost);
-		for (Permanent permanent: cost.permanents) {
-			this.permanents.add(permanent.copy());
-		}
-	}
+    public SacrificeTargetCost(SacrificeTargetCost cost) {
+        super(cost);
+        for (Permanent permanent: cost.permanents) {
+            this.permanents.add(permanent.copy());
+        }
+    }
 
-	@Override
-	public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-		if (targets.choose(Outcome.Sacrifice, controllerId, sourceId, game)) {
-			for (UUID targetId: targets.get(0).getTargets()) {
-				Permanent permanent = game.getPermanent(targetId);
-				if (permanent == null)
-					return false;
-				permanents.add(permanent.copy());
-				paid |= permanent.sacrifice(sourceId, game);
-			}
-		}
-		return paid;
-	}
+    @Override
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+        if (targets.choose(Outcome.Sacrifice, controllerId, sourceId, game)) {
+            for (UUID targetId: targets.get(0).getTargets()) {
+                Permanent permanent = game.getPermanent(targetId);
+                if (permanent == null)
+                    return false;
+                permanents.add(permanent.copy());
+                paid |= permanent.sacrifice(sourceId, game);
+            }
+        }
+        return paid;
+    }
 
-	@Override
-	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+    @Override
+    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
         if (!game.getPlayer(controllerId).canPaySacrificeCost()) {
             return false;
         }
         return targets.canChoose(controllerId, game);
-	}
+    }
 
-	@Override
-	public SacrificeTargetCost copy() {
-		return new SacrificeTargetCost(this);
-	}
-	
-	public List<Permanent> getPermanents() {
-		return permanents;
-	}
+    @Override
+    public SacrificeTargetCost copy() {
+        return new SacrificeTargetCost(this);
+    }
+
+    public List<Permanent> getPermanents() {
+        return permanents;
+    }
 
 }

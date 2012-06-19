@@ -50,21 +50,21 @@ import org.apache.log4j.Logger;
  */
 public class MageDialog extends javax.swing.JInternalFrame {
 
-	private final static Logger logger = Logger.getLogger(MageDialog.class);
+    private final static Logger logger = Logger.getLogger(MageDialog.class);
 
-	protected boolean modal = false;
+    protected boolean modal = false;
 
     /** Creates new form MageDialog */
     public MageDialog() {
-		initComponents();
+        initComponents();
     }
 
     @Override
     public void show() {
         super.show();
-		this.toFront();
-		if (modal)
-			this.setClosable(false);
+        this.toFront();
+        if (modal)
+            this.setClosable(false);
         if (this.modal) {
             startModal();
         }
@@ -73,36 +73,36 @@ public class MageDialog extends javax.swing.JInternalFrame {
     @Override
     public void setVisible(boolean value) {
         super.setVisible(value);
-		if (value)
-			this.toFront();
+        if (value)
+            this.toFront();
         if (modal) {
-	        this.setClosable(false);
+            this.setClosable(false);
             if (value) {
                 startModal();
             } else {
-	            if (SwingUtilities.isEventDispatchThread()) {
-					stopModal();
-				} else {
-					try {
-						SwingUtilities.invokeAndWait(new Runnable() {
-							@Override
-							public void run() {
-								stopModal();
-							}
-						});
-					} catch (InterruptedException ex) {
-						logger.fatal("MageDialog error", ex);
-					} catch (InvocationTargetException ex) {
-						logger.fatal("MageDialog error", ex);
-					}
-				}
+                if (SwingUtilities.isEventDispatchThread()) {
+                    stopModal();
+                } else {
+                    try {
+                        SwingUtilities.invokeAndWait(new Runnable() {
+                            @Override
+                            public void run() {
+                                stopModal();
+                            }
+                        });
+                    } catch (InterruptedException ex) {
+                        logger.fatal("MageDialog error", ex);
+                    } catch (InvocationTargetException ex) {
+                        logger.fatal("MageDialog error", ex);
+                    }
+                }
             }
         }
     }
 
     private synchronized void startModal() {
 
-		try {
+        try {
             if (SwingUtilities.isEventDispatchThread()) {
                 EventQueue theQueue = getToolkit().getSystemEventQueue();
                 while (isVisible()) {
@@ -126,7 +126,7 @@ public class MageDialog extends javax.swing.JInternalFrame {
                         } else if (source instanceof MenuComponent) {
                             ((MenuComponent) source).dispatchEvent(event);
                         } else {
-							logger.warn("Unable to dispatch: " + event);
+                            logger.warn("Unable to dispatch: " + event);
                         }
                     }
                 }
@@ -144,7 +144,7 @@ public class MageDialog extends javax.swing.JInternalFrame {
         notifyAll();
     }
 
-	public void setModal(boolean modal) {
+    public void setModal(boolean modal) {
         this.modal = modal;
     }
 
@@ -152,10 +152,10 @@ public class MageDialog extends javax.swing.JInternalFrame {
         return this.modal;
     }
 
-	public void hideDialog() {
-		this.setVisible(false);
-	}
-	
+    public void hideDialog() {
+        this.setVisible(false);
+    }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

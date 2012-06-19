@@ -55,17 +55,17 @@ public class WreathofGeists extends CardImpl<WreathofGeists> {
         super(ownerId, 211, "Wreath of Geists", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");
         this.expansionSetCode = "ISD";
         this.subtype.add("Aura");
-		this.color.setGreen(true);
+        this.color.setGreen(true);
 
-		// Enchant creature
-		TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
 
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		this.addAbility(ability);
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
 
-		// Enchanted creature gets +X/+X, where X is the number of creature cards in your graveyard.
+        // Enchanted creature gets +X/+X, where X is the number of creature cards in your graveyard.
         DynamicValue value = new CardsInControllerGraveyardCount(new FilterCreatureCard());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(value, value)));
     }

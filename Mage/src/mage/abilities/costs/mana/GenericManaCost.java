@@ -35,58 +35,58 @@ import mage.players.ManaPool;
 
 public class GenericManaCost extends ManaCostImpl<GenericManaCost> {
 
-	protected int mana;
+    protected int mana;
 
-	public GenericManaCost(int mana) {
-		this.mana = mana;
-		this.cost = Mana.ColorlessMana(mana);
-		this.options.addMana(Mana.ColorlessMana(mana));
-	}
+    public GenericManaCost(int mana) {
+        this.mana = mana;
+        this.cost = Mana.ColorlessMana(mana);
+        this.options.addMana(Mana.ColorlessMana(mana));
+    }
 
-	public GenericManaCost(GenericManaCost manaCost) {
-		super(manaCost);
-		this.mana = manaCost.mana;
-	}
+    public GenericManaCost(GenericManaCost manaCost) {
+        super(manaCost);
+        this.mana = manaCost.mana;
+    }
 
-	public void setMana(int mana) {
-		this.mana = mana;
-	}
+    public void setMana(int mana) {
+        this.mana = mana;
+    }
 
-	@Override
-	public int convertedManaCost() {
-		return mana;
-	}
+    @Override
+    public int convertedManaCost() {
+        return mana;
+    }
 
-	@Override
-	public boolean isPaid() {
-		if (paid)
-			return true;
-		return this.isColorlessPaid(mana);
-	}
+    @Override
+    public boolean isPaid() {
+        if (paid)
+            return true;
+        return this.isColorlessPaid(mana);
+    }
 
-	@Override
-	public void assignPayment(Game game, Ability ability, ManaPool pool) {
-		this.assignColorless(ability, game, pool, mana);
-	}
+    @Override
+    public void assignPayment(Game game, Ability ability, ManaPool pool) {
+        this.assignColorless(ability, game, pool, mana);
+    }
 
-	@Override
-	public String getText() {
-		return "{" + Integer.toString(mana) + "}";
-	}
+    @Override
+    public String getText() {
+        return "{" + Integer.toString(mana) + "}";
+    }
 
-	@Override
-	public GenericManaCost getUnpaid() {
-		return new GenericManaCost(mana - this.payment.count());
-	}
+    @Override
+    public GenericManaCost getUnpaid() {
+        return new GenericManaCost(mana - this.payment.count());
+    }
 
-	@Override
-	public boolean testPay(Mana testMana) {
-		return testMana.count() > 0;
-	}
+    @Override
+    public boolean testPay(Mana testMana) {
+        return testMana.count() > 0;
+    }
 
-	@Override
-	public GenericManaCost copy() {
-		return new GenericManaCost(this);
-	}
+    @Override
+    public GenericManaCost copy() {
+        return new GenericManaCost(this);
+    }
 
 }

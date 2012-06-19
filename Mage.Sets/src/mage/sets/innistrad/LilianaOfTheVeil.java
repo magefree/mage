@@ -129,7 +129,7 @@ class LilianaOfTheVeilEffect extends OneShotEffect<LilianaOfTheVeilEffect> {
             }
 
             boolean choice = targetPlayer.choosePile(Outcome.DestroyPermanent, "Choose a pile to sacrifice.", pile1, pile2, game);
-            
+
             if (choice) {
                 sacrificePermanents(pile1, game, source);
             } else {

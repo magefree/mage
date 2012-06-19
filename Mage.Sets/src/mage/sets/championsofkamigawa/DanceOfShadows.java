@@ -48,7 +48,7 @@ public class DanceOfShadows extends CardImpl<DanceOfShadows> {
         super(ownerId, 108, "Dance of Shadows", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.getSpellAbility().addEffect(new BoostControlledEffect(1, 0, Constants.Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(FearAbility.getInstance(), Constants.Duration.EndOfTurn));
     }

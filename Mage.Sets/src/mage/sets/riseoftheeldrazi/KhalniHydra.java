@@ -50,69 +50,69 @@ import mage.game.Game;
  */
 public class KhalniHydra extends CardImpl<KhalniHydra> {
 
-	private static final FilterControlledCreaturePermanent filter;
+    private static final FilterControlledCreaturePermanent filter;
 
-	static {
-		filter = new FilterControlledCreaturePermanent();
-		filter.setUseColor(true);
-		filter.setColor(ObjectColor.GREEN);
-	}
+    static {
+        filter = new FilterControlledCreaturePermanent();
+        filter.setUseColor(true);
+        filter.setColor(ObjectColor.GREEN);
+    }
 
-	public KhalniHydra(UUID ownerId) {
-		super(ownerId, 192, "Khalni Hydra", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{G}{G}{G}{G}{G}{G}{G}{G}");
-		this.expansionSetCode = "ROE";
-		this.subtype.add("Hydra");
+    public KhalniHydra(UUID ownerId) {
+        super(ownerId, 192, "Khalni Hydra", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{G}{G}{G}{G}{G}{G}{G}{G}");
+        this.expansionSetCode = "ROE";
+        this.subtype.add("Hydra");
 
-		this.color.setGreen(true);
-		this.power = new MageInt(8);
-		this.toughness = new MageInt(8);
-		this.addAbility(new SimpleStaticAbility(Zone.STACK, new KhalniHydraCostReductionEffect()));
-		this.addAbility(TrampleAbility.getInstance());
-	}
+        this.color.setGreen(true);
+        this.power = new MageInt(8);
+        this.toughness = new MageInt(8);
+        this.addAbility(new SimpleStaticAbility(Zone.STACK, new KhalniHydraCostReductionEffect()));
+        this.addAbility(TrampleAbility.getInstance());
+    }
 
-	public KhalniHydra(final KhalniHydra card) {
-		super(card);
-	}
+    public KhalniHydra(final KhalniHydra card) {
+        super(card);
+    }
 
-	@Override
-	public void adjustCosts(Ability ability, Game game) {
-		super.adjustCosts(ability, game);
-		int reductionAmount = game.getBattlefield().getAllActivePermanents(filter, game).size();
-		Iterator<ManaCost> iter = ability.getManaCostsToPay().iterator();
+    @Override
+    public void adjustCosts(Ability ability, Game game) {
+        super.adjustCosts(ability, game);
+        int reductionAmount = game.getBattlefield().getAllActivePermanents(filter, game).size();
+        Iterator<ManaCost> iter = ability.getManaCostsToPay().iterator();
 
-		while ( reductionAmount > 0 && iter.hasNext() ) {
-			iter.next();
-			iter.remove();
-			reductionAmount--;
-		}
-	}
+        while ( reductionAmount > 0 && iter.hasNext() ) {
+            iter.next();
+            iter.remove();
+            reductionAmount--;
+        }
+    }
 
-	@Override
-	public KhalniHydra copy() {
-		return new KhalniHydra(this);
-	}
+    @Override
+    public KhalniHydra copy() {
+        return new KhalniHydra(this);
+    }
 }
 
 class KhalniHydraCostReductionEffect extends OneShotEffect<KhalniHydraCostReductionEffect> {
-	private static final String effectText = "{this} costs {G} less to cast for each green creature you control";
+    private static final String effectText = "{this} costs {G} less to cast for each green creature you control";
 
-	KhalniHydraCostReductionEffect ( ) {
-		super(Outcome.Benefit);
-		this.staticText = effectText;
-	}
+    KhalniHydraCostReductionEffect ( ) {
+        super(Outcome.Benefit);
+        this.staticText = effectText;
+    }
 
-	KhalniHydraCostReductionEffect ( KhalniHydraCostReductionEffect effect ) {
-		super(effect);
-	}
+    KhalniHydraCostReductionEffect ( KhalniHydraCostReductionEffect effect ) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
 
-	@Override
-	public KhalniHydraCostReductionEffect copy() {
-		return new KhalniHydraCostReductionEffect(this);
-	}
+    @Override
+    public KhalniHydraCostReductionEffect copy() {
+        return new KhalniHydraCostReductionEffect(this);
+    }
 
 }

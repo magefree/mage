@@ -44,8 +44,8 @@ public class CapturedSunlight extends CardImpl<CapturedSunlight> {
     public CapturedSunlight (UUID ownerId) {
         super(ownerId, 66, "Captured Sunlight", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}{W}");
         this.expansionSetCode = "ARB";
-		this.color.setGreen(true);
-		this.color.setWhite(true);
+        this.color.setGreen(true);
+        this.color.setWhite(true);
         this.getSpellAbility().addEffect(new GainLifeEffect(4));
         this.addAbility(new CascadeAbility());
     }

@@ -50,26 +50,26 @@ public class ViridianCorrupter extends CardImpl<ViridianCorrupter> {
 
     private static FilterPermanent filter = new FilterPermanent("artifact");
 
-	static {
-		filter.getCardType().add(CardType.ARTIFACT);
-		filter.setScopeCardType(Filter.ComparisonScope.Any);
-	}
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
+    }
 
     public ViridianCorrupter (UUID ownerId) {
         super(ownerId, 94, "Viridian Corrupter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
         this.expansionSetCode = "MBS";
         this.subtype.add("Elf");
         this.subtype.add("Shaman");
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(InfectAbility.getInstance());
 
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
-		Target target = new TargetPermanent(filter);
-		target.setRequired(true);
-		ability.addTarget(target);
-		this.addAbility(ability);
+        Target target = new TargetPermanent(filter);
+        target.setRequired(true);
+        ability.addTarget(target);
+        this.addAbility(ability);
     }
 
     public ViridianCorrupter (final ViridianCorrupter card) {

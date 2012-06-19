@@ -50,7 +50,7 @@ public class CrimsonWisps extends CardImpl<CrimsonWisps> {
     public CrimsonWisps (UUID ownerId) {
         super(ownerId, 88, "Crimson Wisps", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "SHM";
-		this.color.setRed(true);
+        this.color.setRed(true);
         // Target creature becomes red and gains haste until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new SetCardColorTargetEffect(ObjectColor.RED, Constants.Duration.EndOfTurn));

@@ -49,56 +49,56 @@ import mage.players.Player;
  */
 public class ElixirOfImmortality extends CardImpl<ElixirOfImmortality> {
 
-	public ElixirOfImmortality(UUID ownerId) {
-		super(ownerId, 206, "Elixir of Immortality", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-		this.expansionSetCode = "M11";
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ElixerOfImmortalityEffect(), new TapSourceCost());
+    public ElixirOfImmortality(UUID ownerId) {
+        super(ownerId, 206, "Elixir of Immortality", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
+        this.expansionSetCode = "M11";
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ElixerOfImmortalityEffect(), new TapSourceCost());
         ability.addManaCost(new GenericManaCost(2));
-		this.addAbility(ability);
-	}
+        this.addAbility(ability);
+    }
 
-	public ElixirOfImmortality(final ElixirOfImmortality card) {
-		super(card);
-	}
+    public ElixirOfImmortality(final ElixirOfImmortality card) {
+        super(card);
+    }
 
-	@Override
-	public ElixirOfImmortality copy() {
-		return new ElixirOfImmortality(this);
-	}
+    @Override
+    public ElixirOfImmortality copy() {
+        return new ElixirOfImmortality(this);
+    }
 
 }
 
 class ElixerOfImmortalityEffect extends OneShotEffect<ElixerOfImmortalityEffect> {
 
-	public ElixerOfImmortalityEffect() {
-		super(Outcome.GainLife);
-		staticText = "Shuffle {this} and your graveyard into your library";
-	}
+    public ElixerOfImmortalityEffect() {
+        super(Outcome.GainLife);
+        staticText = "Shuffle {this} and your graveyard into your library";
+    }
 
-	public ElixerOfImmortalityEffect(final ElixerOfImmortalityEffect effect) {
-		super(effect);
-	}
+    public ElixerOfImmortalityEffect(final ElixerOfImmortalityEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-		Permanent permanent = game.getPermanent(source.getSourceId());
-		if (player != null) {
-			player.gainLife(5, game);
-			if (permanent != null) {
-				permanent.moveToZone(Zone.LIBRARY, source.getId(), game, true);
-			}
-			player.getLibrary().addAll(player.getGraveyard().getCards(game), game);
-			player.getGraveyard().clear();
-			player.shuffleLibrary(game);
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (player != null) {
+            player.gainLife(5, game);
+            if (permanent != null) {
+                permanent.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+            }
+            player.getLibrary().addAll(player.getGraveyard().getCards(game), game);
+            player.getGraveyard().clear();
+            player.shuffleLibrary(game);
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public ElixerOfImmortalityEffect copy() {
-		return new ElixerOfImmortalityEffect(this);
-	}
+    @Override
+    public ElixerOfImmortalityEffect copy() {
+        return new ElixerOfImmortalityEffect(this);
+    }
 
 }

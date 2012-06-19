@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class TerramorphicExpanse extends mage.sets.tenth.TerramorphicExpanse {
 
-	public TerramorphicExpanse(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 139;
-		this.expansionSetCode = "HOP";
-	}
+    public TerramorphicExpanse(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 139;
+        this.expansionSetCode = "HOP";
+    }
 
-	public TerramorphicExpanse(final TerramorphicExpanse card) {
-		super(card);
-	}
+    public TerramorphicExpanse(final TerramorphicExpanse card) {
+        super(card);
+    }
 
-	@Override
-	public TerramorphicExpanse copy() {
-		return new TerramorphicExpanse(this);
-	}
+    @Override
+    public TerramorphicExpanse copy() {
+        return new TerramorphicExpanse(this);
+    }
 
 }

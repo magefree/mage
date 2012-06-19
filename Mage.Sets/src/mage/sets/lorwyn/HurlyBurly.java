@@ -58,8 +58,8 @@ public class HurlyBurly extends CardImpl<HurlyBurly> {
         this.color.setRed(true);
         this.getSpellAbility().addEffect(new DamageAllEffect(1, filterWithFlying));
         Mode mode = new Mode();
-		mode.getEffects().add(new DamageAllEffect(1, filterWithoutFlying));
-		this.getSpellAbility().addMode(mode);
+        mode.getEffects().add(new DamageAllEffect(1, filterWithoutFlying));
+        this.getSpellAbility().addMode(mode);
     }
 
     public HurlyBurly(final HurlyBurly card) {

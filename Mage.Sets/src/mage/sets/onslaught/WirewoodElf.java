@@ -38,23 +38,23 @@ import mage.cards.CardImpl;
  * @author Melkhior
  */
 public class WirewoodElf extends CardImpl<WirewoodElf> {
-	public WirewoodElf(UUID ownerId) {
-		super(ownerId, 301, "Wirewood Elf", Constants.Rarity.COMMON, new Constants.CardType[]{Constants.CardType.CREATURE}, "{1}{G}");
-		this.expansionSetCode = "ONS";
-		this.subtype.add("Elf");
-		this.subtype.add("Druid");
-		this.color.setGreen(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(2);
-		this.addAbility(new GreenManaAbility());
-	}
+    public WirewoodElf(UUID ownerId) {
+        super(ownerId, 301, "Wirewood Elf", Constants.Rarity.COMMON, new Constants.CardType[]{Constants.CardType.CREATURE}, "{1}{G}");
+        this.expansionSetCode = "ONS";
+        this.subtype.add("Elf");
+        this.subtype.add("Druid");
+        this.color.setGreen(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(2);
+        this.addAbility(new GreenManaAbility());
+    }
 
-	public WirewoodElf(final WirewoodElf card) {
-		super(card);
-	}
+    public WirewoodElf(final WirewoodElf card) {
+        super(card);
+    }
 
-	@Override
-	public WirewoodElf copy() {
-		return new WirewoodElf(this);
-	}
+    @Override
+    public WirewoodElf copy() {
+        return new WirewoodElf(this);
+    }
 }

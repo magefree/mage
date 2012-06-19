@@ -51,7 +51,7 @@ public class Updater {
         // remove odd files
         List<String> removeList = m.findRemoved(local, remote);
         m.removeFiles(removeList);
-        
+
         if (downloadList.isEmpty() && removeList.isEmpty()) {
             System.out.println("Already up-to-date.");
         }

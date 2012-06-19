@@ -64,33 +64,33 @@ public class GolemsHeart extends CardImpl<GolemsHeart> {
 
 class GolemsHeartAbility extends TriggeredAbilityImpl<GolemsHeartAbility> {
 
-	public GolemsHeartAbility() {
-		super(Zone.BATTLEFIELD, new GainLifeEffect(1), true);
-	}
+    public GolemsHeartAbility() {
+        super(Zone.BATTLEFIELD, new GainLifeEffect(1), true);
+    }
 
-	public GolemsHeartAbility(final GolemsHeartAbility ability) {
-		super(ability);
-	}
+    public GolemsHeartAbility(final GolemsHeartAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public GolemsHeartAbility copy() {
-		return new GolemsHeartAbility(this);
-	}
+    @Override
+    public GolemsHeartAbility copy() {
+        return new GolemsHeartAbility(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-			Spell spell = game.getStack().getSpell(event.getTargetId());
-			if (spell != null && spell.getCardType().contains(CardType.ARTIFACT)) {
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
+            Spell spell = game.getStack().getSpell(event.getTargetId());
+            if (spell != null && spell.getCardType().contains(CardType.ARTIFACT)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "Whenever a player casts an artifact spell, you may gain 1 life.";
-	}
+    @Override
+    public String getRule() {
+        return "Whenever a player casts an artifact spell, you may gain 1 life.";
+    }
 
 }

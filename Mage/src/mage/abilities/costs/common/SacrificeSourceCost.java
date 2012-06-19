@@ -41,38 +41,38 @@ import java.util.UUID;
  */
 public class SacrificeSourceCost extends CostImpl<SacrificeSourceCost> {
 
-	public SacrificeSourceCost() {
-		this.text = "Sacrifice {this}";
-	}
+    public SacrificeSourceCost() {
+        this.text = "Sacrifice {this}";
+    }
 
-	public SacrificeSourceCost(SacrificeSourceCost cost) {
-		super(cost);
-	}
+    public SacrificeSourceCost(SacrificeSourceCost cost) {
+        super(cost);
+    }
 
-	@Override
-	public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-		Permanent permanent = game.getPermanent(sourceId);
-		if (permanent != null) {
-			paid = permanent.sacrifice(sourceId, game);
-		}
-		return paid;
-	}
+    @Override
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+        Permanent permanent = game.getPermanent(sourceId);
+        if (permanent != null) {
+            paid = permanent.sacrifice(sourceId, game);
+        }
+        return paid;
+    }
 
-	@Override
-	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+    @Override
+    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
         if (!game.getPlayer(controllerId).canPaySacrificeCost()) {
             return false;
         }
         Permanent permanent = game.getPermanent(sourceId);
-		if (permanent != null) {
-			return true;
-		}
-		return false;
-	}
+        if (permanent != null) {
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public SacrificeSourceCost copy() {
-		return new SacrificeSourceCost(this);
-	}
+    @Override
+    public SacrificeSourceCost copy() {
+        return new SacrificeSourceCost(this);
+    }
 
 }

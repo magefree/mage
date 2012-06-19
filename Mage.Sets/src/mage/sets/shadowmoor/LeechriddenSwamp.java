@@ -62,10 +62,10 @@ public class LeechriddenSwamp extends CardImpl<LeechriddenSwamp> {
 
         // <i>({tap}: Add {B} to your mana pool.)</i>
         this.addAbility(new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new BasicManaEffect(Mana.BlackMana), new TapSourceCost()));
-        
+
         // Leechridden Swamp enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        
+
         // {B}, {tap}: Each opponent loses 1 life. Activate this ability only if you control two or more black permanents.
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new LeechriddenSwampLoseLifeEffect(), new ManaCostsImpl("{B}"));
         ability.addCost(new ControlTwoOrMoreBlackPermanentsCost());
@@ -83,7 +83,7 @@ public class LeechriddenSwamp extends CardImpl<LeechriddenSwamp> {
 }
 
 class ControlTwoOrMoreBlackPermanentsCost extends CostImpl<ControlTwoOrMoreBlackPermanentsCost> {
-    
+
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
 
     static {
@@ -123,26 +123,26 @@ class LeechriddenSwampLoseLifeEffect extends OneShotEffect<LeechriddenSwampLoseL
 
     LeechriddenSwampLoseLifeEffect ( ) {
         super(Outcome.Damage);
-	staticText = effectText;
+    staticText = effectText;
     }
 
     LeechriddenSwampLoseLifeEffect ( LeechriddenSwampLoseLifeEffect effect ) {
-	super(effect);
+    super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-	Players players = game.getPlayers();
+    Players players = game.getPlayers();
         for ( Player player : players.values() ) {
             if ( !player.getId().equals(source.getControllerId()) ) {
                 player.loseLife(1, game);
             }
-	}
-	return true;
+    }
+    return true;
     }
 
     @Override
     public LeechriddenSwampLoseLifeEffect copy() {
-	return new LeechriddenSwampLoseLifeEffect(this);
+    return new LeechriddenSwampLoseLifeEffect(this);
     }
 }

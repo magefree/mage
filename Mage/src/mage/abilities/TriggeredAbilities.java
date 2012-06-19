@@ -44,13 +44,13 @@ import java.util.UUID;
  */
 public class TriggeredAbilities extends HashMap<UUID, TriggeredAbility> {
 
-	public TriggeredAbilities() {}
+    public TriggeredAbilities() {}
 
-	public TriggeredAbilities(final TriggeredAbilities abilities) {
-		for (Map.Entry<UUID, TriggeredAbility> entry: abilities.entrySet()) {
+    public TriggeredAbilities(final TriggeredAbilities abilities) {
+        for (Map.Entry<UUID, TriggeredAbility> entry: abilities.entrySet()) {
             this.put(entry.getKey(), entry.getValue().copy());
         }
-	}
+    }
 
     public void checkTriggers(GameEvent event, Game game) {
         for (TriggeredAbility ability: this.values()) {
@@ -99,9 +99,9 @@ public class TriggeredAbilities extends HashMap<UUID, TriggeredAbility> {
     public void add(TriggeredAbility ability) {
         this.put(ability.getId(), ability);
     }
-    
-	public TriggeredAbilities copy() {
-		return new TriggeredAbilities(this);
-	}
+
+    public TriggeredAbilities copy() {
+        return new TriggeredAbilities(this);
+    }
 
 }

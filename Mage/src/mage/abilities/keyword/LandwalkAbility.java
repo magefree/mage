@@ -42,52 +42,52 @@ import mage.game.permanent.Permanent;
  */
 public class LandwalkAbility extends EvasionAbility<LandwalkAbility> {
 
-	public LandwalkAbility(FilterLandPermanent filter) {
-		this.addEffect(new LandwalkEffect(filter));
-	}
+    public LandwalkAbility(FilterLandPermanent filter) {
+        this.addEffect(new LandwalkEffect(filter));
+    }
 
-	public LandwalkAbility(final LandwalkAbility ability) {
-		super(ability);
-	}
+    public LandwalkAbility(final LandwalkAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public LandwalkAbility copy() {
-		return new LandwalkAbility(this);
-	}
+    @Override
+    public LandwalkAbility copy() {
+        return new LandwalkAbility(this);
+    }
 
 }
 
 class LandwalkEffect extends RestrictionEffect<LandwalkEffect> {
 
-	protected FilterLandPermanent filter;
+    protected FilterLandPermanent filter;
 
-	public LandwalkEffect(FilterLandPermanent filter) {
-		super(Duration.WhileOnBattlefield);
-		this.filter = filter;
-		staticText = filter.getMessage() + "walk";
-	}
+    public LandwalkEffect(FilterLandPermanent filter) {
+        super(Duration.WhileOnBattlefield);
+        this.filter = filter;
+        staticText = filter.getMessage() + "walk";
+    }
 
-	public LandwalkEffect(final LandwalkEffect effect) {
-		super(effect);
-		this.filter = effect.filter.copy();
-	}
+    public LandwalkEffect(final LandwalkEffect effect) {
+        super(effect);
+        this.filter = effect.filter.copy();
+    }
 
-	@Override
-	public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-		return !game.getBattlefield().contains(filter, blocker.getControllerId(), 1, game);
-	}
+    @Override
+    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        return !game.getBattlefield().contains(filter, blocker.getControllerId(), 1, game);
+    }
 
-	@Override
-	public boolean applies(Permanent permanent, Ability source, Game game) {
-		if (permanent.getId().equals(source.getSourceId())) {
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        if (permanent.getId().equals(source.getSourceId())) {
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public LandwalkEffect copy() {
-		return new LandwalkEffect(this);
-	}
+    @Override
+    public LandwalkEffect copy() {
+        return new LandwalkEffect(this);
+    }
 
 }

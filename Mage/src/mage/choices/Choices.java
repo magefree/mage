@@ -41,54 +41,54 @@ import mage.players.Player;
  */
 public class Choices extends ArrayList<Choice> {
 
-	protected Outcome outcome;
+    protected Outcome outcome;
 
-	public Choices() {}
+    public Choices() {}
 
-	public Choices(final Choices choices) {
-		this.outcome = choices.outcome;
-		for (Choice choice: choices) {
-			this.add(choice.copy());
-		}
-	}
+    public Choices(final Choices choices) {
+        this.outcome = choices.outcome;
+        for (Choice choice: choices) {
+            this.add(choice.copy());
+        }
+    }
 
-	public Choices copy() {
-		return new Choices(this);
-	}
+    public Choices copy() {
+        return new Choices(this);
+    }
 
-	public List<Choice> getUnchosen() {
-		List<Choice> unchosen = new ArrayList<Choice>();
-		for (Choice choice: this) {
-			if (!choice.isChosen())
-				unchosen.add(choice);
-		}
-		return unchosen;
-	}
+    public List<Choice> getUnchosen() {
+        List<Choice> unchosen = new ArrayList<Choice>();
+        for (Choice choice: this) {
+            if (!choice.isChosen())
+                unchosen.add(choice);
+        }
+        return unchosen;
+    }
 
-	public void clearChosen() {
-		for (Choice choice: this) {
-			choice.clearChoice();
-		}
-	}
+    public void clearChosen() {
+        for (Choice choice: this) {
+            choice.clearChoice();
+        }
+    }
 
-	public boolean isChosen() {
-		for (Choice choice: this) {
-			if (!choice.isChosen())
-				return false;
-		}
-		return true;
-	}
+    public boolean isChosen() {
+        for (Choice choice: this) {
+            if (!choice.isChosen())
+                return false;
+        }
+        return true;
+    }
 
-	public boolean choose(Game game, Ability source) {
-		if (this.size() > 0) {
-			Player player = game.getPlayer(source.getControllerId());
-			while (!isChosen()) {
-				Choice choice = this.getUnchosen().get(0);
-				if (!player.choose(outcome, choice, game))
-					return false;
-			}
-		}
-		return true;
-	}
+    public boolean choose(Game game, Ability source) {
+        if (this.size() > 0) {
+            Player player = game.getPlayer(source.getControllerId());
+            while (!isChosen()) {
+                Choice choice = this.getUnchosen().get(0);
+                if (!player.choose(outcome, choice, game))
+                    return false;
+            }
+        }
+        return true;
+    }
 
 }

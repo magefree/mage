@@ -54,80 +54,80 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class VolcanicStrength extends CardImpl<VolcanicStrength> {
 
-	public VolcanicStrength(UUID ownerId) {
-		super(ownerId, 158, "Volcanic Strength", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
-		this.expansionSetCode = "M11";
-		this.color.setRed(true);
-		this.subtype.add("Aura");
+    public VolcanicStrength(UUID ownerId) {
+        super(ownerId, 158, "Volcanic Strength", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
+        this.expansionSetCode = "M11";
+        this.color.setRed(true);
+        this.subtype.add("Aura");
 
-		TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		this.addAbility(ability);
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VolcanicStrengthEffect()));
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VolcanicStrengthEffect()));
 
-	}
+    }
 
-	public VolcanicStrength(final VolcanicStrength card) {
-		super(card);
-	}
+    public VolcanicStrength(final VolcanicStrength card) {
+        super(card);
+    }
 
-	@Override
-	public VolcanicStrength copy() {
-		return new VolcanicStrength(this);
-	}
+    @Override
+    public VolcanicStrength copy() {
+        return new VolcanicStrength(this);
+    }
 }
 
 class VolcanicStrengthEffect extends ContinuousEffectImpl<VolcanicStrengthEffect> {
 
-	public VolcanicStrengthEffect() {
-		super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
-		staticText = "Enchanted creature gets +2/+2 and has mountainwalk";
-	}
+    public VolcanicStrengthEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
+        staticText = "Enchanted creature gets +2/+2 and has mountainwalk";
+    }
 
-	public VolcanicStrengthEffect(final VolcanicStrengthEffect effect) {
-		super(effect);
-	}
+    public VolcanicStrengthEffect(final VolcanicStrengthEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public VolcanicStrengthEffect copy() {
-		return new VolcanicStrengthEffect(this);
-	}
+    @Override
+    public VolcanicStrengthEffect copy() {
+        return new VolcanicStrengthEffect(this);
+    }
 
-	@Override
-	public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-		Permanent enchantment = game.getPermanent(source.getSourceId());
-		if (enchantment != null && enchantment.getAttachedTo() != null) {
-			Permanent creature = game.getPermanent(enchantment.getAttachedTo());
-			if (creature != null) {
-				switch (layer) {
-					case PTChangingEffects_7:
-						if (sublayer == SubLayer.ModifyPT_7c) {
-							creature.addPower(2);
-							creature.addToughness(2);
-						}
-						break;
-					case AbilityAddingRemovingEffects_6:
-						if (sublayer == SubLayer.NA) {
-							creature.addAbility(new MountainwalkAbility(), game);
-						}
-						break;
-				}
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        Permanent enchantment = game.getPermanent(source.getSourceId());
+        if (enchantment != null && enchantment.getAttachedTo() != null) {
+            Permanent creature = game.getPermanent(enchantment.getAttachedTo());
+            if (creature != null) {
+                switch (layer) {
+                    case PTChangingEffects_7:
+                        if (sublayer == SubLayer.ModifyPT_7c) {
+                            creature.addPower(2);
+                            creature.addToughness(2);
+                        }
+                        break;
+                    case AbilityAddingRemovingEffects_6:
+                        if (sublayer == SubLayer.NA) {
+                            creature.addAbility(new MountainwalkAbility(), game);
+                        }
+                        break;
+                }
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
 
-	@Override
-	public boolean hasLayer(Layer layer) {
-		return layer == Layer.AbilityAddingRemovingEffects_6 || layer == layer.PTChangingEffects_7;
-	}
+    @Override
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.AbilityAddingRemovingEffects_6 || layer == layer.PTChangingEffects_7;
+    }
 
 }

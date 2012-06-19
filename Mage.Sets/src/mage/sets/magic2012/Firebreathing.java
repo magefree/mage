@@ -53,12 +53,12 @@ public class Firebreathing extends CardImpl<Firebreathing> {
         super(ownerId, 132, "Firebreathing", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");
         this.expansionSetCode = "M12";
         this.subtype.add("Aura");
-		this.color.setRed(true);
+        this.color.setRed(true);
         TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.AddAbility));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		this.addAbility(ability);
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.AddAbility));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
         this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 0, Constants.Duration.EndOfTurn), new ColoredManaCost(Constants.ColoredManaSymbol.R)));
     }
 

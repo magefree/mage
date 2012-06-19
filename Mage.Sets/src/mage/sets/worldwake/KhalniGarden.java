@@ -44,21 +44,21 @@ import mage.game.permanent.token.PlantToken;
  */
 public class KhalniGarden extends CardImpl<KhalniGarden> {
 
-	public KhalniGarden(UUID ownerId) {
-		super(ownerId, 138, "Khalni Garden", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
-		this.expansionSetCode = "WWK";
-		this.addAbility(new EntersBattlefieldTappedAbility());
-		this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new PlantToken()), false));
-		this.addAbility(new GreenManaAbility());
-	}
+    public KhalniGarden(UUID ownerId) {
+        super(ownerId, 138, "Khalni Garden", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
+        this.expansionSetCode = "WWK";
+        this.addAbility(new EntersBattlefieldTappedAbility());
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new PlantToken()), false));
+        this.addAbility(new GreenManaAbility());
+    }
 
-	public KhalniGarden(final KhalniGarden card) {
-		super(card);
-	}
+    public KhalniGarden(final KhalniGarden card) {
+        super(card);
+    }
 
-	@Override
-	public KhalniGarden copy() {
-		return new KhalniGarden(this);
-	}
+    @Override
+    public KhalniGarden copy() {
+        return new KhalniGarden(this);
+    }
 
 }

@@ -47,23 +47,23 @@ import java.util.UUID;
  */
 public class GainAbilityTargetEffect extends ContinuousEffectImpl<GainAbilityTargetEffect> {
 
-	protected Ability ability;
+    protected Ability ability;
 
-	public GainAbilityTargetEffect(Ability ability, Duration duration) {
-		super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, 
+    public GainAbilityTargetEffect(Ability ability, Duration duration) {
+        super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, 
                 ability.getEffects().size() > 0 ? ability.getEffects().get(0).getOutcome() : Outcome.AddAbility);
-		this.ability = ability;
-	}
+        this.ability = ability;
+    }
 
-	public GainAbilityTargetEffect(final GainAbilityTargetEffect effect) {
-		super(effect);
-		this.ability = effect.ability.copy();
-	}
+    public GainAbilityTargetEffect(final GainAbilityTargetEffect effect) {
+        super(effect);
+        this.ability = effect.ability.copy();
+    }
 
-	@Override
-	public GainAbilityTargetEffect copy() {
-		return new GainAbilityTargetEffect(this);
-	}
+    @Override
+    public GainAbilityTargetEffect copy() {
+        return new GainAbilityTargetEffect(this);
+    }
 
     @Override
     public void init(Ability source, Game game) {
@@ -71,22 +71,22 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl<GainAbilityTar
         targetPointer.init(game, source);
     }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		int affectedTargets = 0;
-		for (UUID permanentId : targetPointer.getTargets(game, source)) {
-			Permanent permanent = game.getPermanent(permanentId);
-			if (permanent != null) {
-				permanent.addAbility(ability, game);
-				affectedTargets++;
-			}
-		}
-		return affectedTargets > 0;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        int affectedTargets = 0;
+        for (UUID permanentId : targetPointer.getTargets(game, source)) {
+            Permanent permanent = game.getPermanent(permanentId);
+            if (permanent != null) {
+                permanent.addAbility(ability, game);
+                affectedTargets++;
+            }
+        }
+        return affectedTargets > 0;
+    }
 
-	@Override
-	public String getText(Mode mode) {
-		StringBuilder sb = new StringBuilder();
+    @Override
+    public String getText(Mode mode) {
+        StringBuilder sb = new StringBuilder();
         Target target = mode.getTargets().get(0);
         if(target.getNumberOfTargets() > 1){
             if (target.getNumberOfTargets() < target.getMaxNumberOfTargets()) {
@@ -96,8 +96,8 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl<GainAbilityTar
         } else {
             sb.append("Target ").append(target.getTargetName()).append(" gains ");
         }
-		sb.append(ability.getRule()).append(" ").append(duration.toString());
-		return sb.toString();
-	}
+        sb.append(ability.getRule()).append(" ").append(duration.toString());
+        return sb.toString();
+    }
 
 }

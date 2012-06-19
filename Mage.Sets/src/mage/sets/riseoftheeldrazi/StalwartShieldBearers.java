@@ -50,7 +50,7 @@ public class StalwartShieldBearers extends CardImpl<StalwartShieldBearers> {
     static {
         filter.getAbilities().add(DefenderAbility.getInstance());
     }
-    
+
     public StalwartShieldBearers(UUID ownerId) {
         super(ownerId, 46, "Stalwart Shield-Bearers", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.expansionSetCode = "ROE";
@@ -60,7 +60,7 @@ public class StalwartShieldBearers extends CardImpl<StalwartShieldBearers> {
         this.color.setWhite(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
-        
+
         this.addAbility(DefenderAbility.getInstance());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 2, Duration.WhileOnBattlefield, filter, true)));
     }

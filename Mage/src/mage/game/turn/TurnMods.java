@@ -40,109 +40,109 @@ import mage.Constants.TurnPhase;
  */
 public class TurnMods extends ArrayList<TurnMod> {
 
-	public TurnMods() {}
+    public TurnMods() {}
 
-	public TurnMods(final TurnMods mods) {
-		for (TurnMod mod: mods) {
-			this.add(mod.copy());
-		}
-	}
+    public TurnMods(final TurnMods mods) {
+        for (TurnMod mod: mods) {
+            this.add(mod.copy());
+        }
+    }
 
-	public boolean extraTurn(UUID playerId) {
-		ListIterator<TurnMod> it = this.listIterator(this.size());
-		while (it.hasPrevious()) {
-			TurnMod turnMod = it.previous();
-			if (turnMod.isExtraTurn() == true && turnMod.getPlayerId().equals(playerId)) {
-				it.remove();
-				return true;
-			}
-		}
-		return false;
-	}
+    public boolean extraTurn(UUID playerId) {
+        ListIterator<TurnMod> it = this.listIterator(this.size());
+        while (it.hasPrevious()) {
+            TurnMod turnMod = it.previous();
+            if (turnMod.isExtraTurn() == true && turnMod.getPlayerId().equals(playerId)) {
+                it.remove();
+                return true;
+            }
+        }
+        return false;
+    }
 
-	public boolean skipTurn(UUID playerId) {
-		ListIterator<TurnMod> it = this.listIterator(this.size());
-		while (it.hasPrevious()) {
-			TurnMod turnMod = it.previous();
-			if (turnMod.isSkipTurn() == true && turnMod.getPlayerId().equals(playerId)) {
-				it.remove();
-				return true;
-			}
-		}
-		return false;
-	}
+    public boolean skipTurn(UUID playerId) {
+        ListIterator<TurnMod> it = this.listIterator(this.size());
+        while (it.hasPrevious()) {
+            TurnMod turnMod = it.previous();
+            if (turnMod.isSkipTurn() == true && turnMod.getPlayerId().equals(playerId)) {
+                it.remove();
+                return true;
+            }
+        }
+        return false;
+    }
 
-	public UUID controlsTurn(UUID playerId) {
-		ListIterator<TurnMod> it = this.listIterator(this.size());
-		UUID newControllerId = null;
-		while (it.hasPrevious()) {
-			TurnMod turnMod = it.previous();
-			if (turnMod.getNewControllerId() != null && turnMod.getPlayerId().equals(playerId)) {
-				newControllerId = turnMod.getNewControllerId();
-				it.remove();
-			}
-		}
-		// now delete all other - control next turn effect is not cumulative
-		it = this.listIterator(this.size());
-		while (it.hasPrevious()) {
-			TurnMod turnMod = it.previous();
-			if (turnMod.getNewControllerId() != null && turnMod.getPlayerId().equals(playerId)) {
-				it.remove();
-			}
-		}
-		return newControllerId;
-	}
+    public UUID controlsTurn(UUID playerId) {
+        ListIterator<TurnMod> it = this.listIterator(this.size());
+        UUID newControllerId = null;
+        while (it.hasPrevious()) {
+            TurnMod turnMod = it.previous();
+            if (turnMod.getNewControllerId() != null && turnMod.getPlayerId().equals(playerId)) {
+                newControllerId = turnMod.getNewControllerId();
+                it.remove();
+            }
+        }
+        // now delete all other - control next turn effect is not cumulative
+        it = this.listIterator(this.size());
+        while (it.hasPrevious()) {
+            TurnMod turnMod = it.previous();
+            if (turnMod.getNewControllerId() != null && turnMod.getPlayerId().equals(playerId)) {
+                it.remove();
+            }
+        }
+        return newControllerId;
+    }
 
-	public Step extraStep(UUID playerId, PhaseStep afterStep) {
-		ListIterator<TurnMod> it = this.listIterator(this.size());
-		while (it.hasPrevious()) {
-			TurnMod turnMod = it.previous();
-			if (turnMod.getExtraStep() != null && turnMod.getPlayerId().equals(playerId) && (turnMod.getAfterStep() == null || turnMod.getAfterStep() == afterStep)) {
-				it.remove();
-				return turnMod.getExtraStep();
-			}
-		}
-		return null;
-	}
+    public Step extraStep(UUID playerId, PhaseStep afterStep) {
+        ListIterator<TurnMod> it = this.listIterator(this.size());
+        while (it.hasPrevious()) {
+            TurnMod turnMod = it.previous();
+            if (turnMod.getExtraStep() != null && turnMod.getPlayerId().equals(playerId) && (turnMod.getAfterStep() == null || turnMod.getAfterStep() == afterStep)) {
+                it.remove();
+                return turnMod.getExtraStep();
+            }
+        }
+        return null;
+    }
 
-	public boolean skipStep(UUID playerId, PhaseStep step) {
-		ListIterator<TurnMod> it = this.listIterator(this.size());
-		while (it.hasPrevious()) {
-			TurnMod turnMod = it.previous();
-			if (turnMod.getSkipStep() != null && turnMod.getPlayerId().equals(playerId) && turnMod.getSkipStep() == step) {
-				it.remove();
-				return true;
-			}
-		}
-		return false;
-	}
+    public boolean skipStep(UUID playerId, PhaseStep step) {
+        ListIterator<TurnMod> it = this.listIterator(this.size());
+        while (it.hasPrevious()) {
+            TurnMod turnMod = it.previous();
+            if (turnMod.getSkipStep() != null && turnMod.getPlayerId().equals(playerId) && turnMod.getSkipStep() == step) {
+                it.remove();
+                return true;
+            }
+        }
+        return false;
+    }
 
-	public TurnPhase extraPhase(UUID playerId, TurnPhase afterPhase) {
-		ListIterator<TurnMod> it = this.listIterator(this.size());
-		while (it.hasPrevious()) {
-			TurnMod turnMod = it.previous();
-			if (turnMod.getExtraPhase() != null && turnMod.getPlayerId().equals(playerId) && turnMod.getExtraPhase() != null && (turnMod.getAfterPhase() == null || turnMod.getAfterPhase() == afterPhase)) {
-				it.remove();
-				return turnMod.getExtraPhase();
-			}
-		}
-		return null;
-	}
+    public TurnPhase extraPhase(UUID playerId, TurnPhase afterPhase) {
+        ListIterator<TurnMod> it = this.listIterator(this.size());
+        while (it.hasPrevious()) {
+            TurnMod turnMod = it.previous();
+            if (turnMod.getExtraPhase() != null && turnMod.getPlayerId().equals(playerId) && turnMod.getExtraPhase() != null && (turnMod.getAfterPhase() == null || turnMod.getAfterPhase() == afterPhase)) {
+                it.remove();
+                return turnMod.getExtraPhase();
+            }
+        }
+        return null;
+    }
 
-	public boolean skipPhase(UUID playerId, TurnPhase phase) {
-		ListIterator<TurnMod> it = this.listIterator(this.size());
-		while (it.hasPrevious()) {
-			TurnMod turnMod = it.previous();
-			if (turnMod.getSkipPhase() != null && turnMod.getPlayerId().equals(playerId) && turnMod.getSkipPhase() == phase) {
-				it.remove();
-				return true;
-			}
-		}
-		return false;
-	}
+    public boolean skipPhase(UUID playerId, TurnPhase phase) {
+        ListIterator<TurnMod> it = this.listIterator(this.size());
+        while (it.hasPrevious()) {
+            TurnMod turnMod = it.previous();
+            if (turnMod.getSkipPhase() != null && turnMod.getPlayerId().equals(playerId) && turnMod.getSkipPhase() == phase) {
+                it.remove();
+                return true;
+            }
+        }
+        return false;
+    }
 
-	public TurnMods copy() {
-		return new TurnMods(this);
-	}
+    public TurnMods copy() {
+        return new TurnMods(this);
+    }
 
 }

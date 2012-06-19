@@ -40,19 +40,19 @@ import mage.game.Game;
  */
 public class DiesTriggeredAbility extends ZoneChangeTriggeredAbility<DiesTriggeredAbility> {
 
-//	boolean used = false;
-	
-	public DiesTriggeredAbility(Effect effect, boolean optional) {
-		super(Zone.BATTLEFIELD, Zone.GRAVEYARD, effect, "When {this} dies, ", optional);
-	}
+//    boolean used = false;
 
-	public DiesTriggeredAbility(Effect effect) {
-		this(effect, false);
-	}
+    public DiesTriggeredAbility(Effect effect, boolean optional) {
+        super(Zone.BATTLEFIELD, Zone.GRAVEYARD, effect, "When {this} dies, ", optional);
+    }
 
-	public DiesTriggeredAbility(DiesTriggeredAbility ability) {
-		super(ability);
-	}
+    public DiesTriggeredAbility(Effect effect) {
+        this(effect, false);
+    }
+
+    public DiesTriggeredAbility(DiesTriggeredAbility ability) {
+        super(ability);
+    }
 
     @Override
     public boolean isInUseableZone(Game game, boolean checkLKI) {
@@ -63,23 +63,23 @@ public class DiesTriggeredAbility extends ZoneChangeTriggeredAbility<DiesTrigger
         return before != null && after != null && Zone.GRAVEYARD.match(after);
     }
 
-	@Override
-	public DiesTriggeredAbility copy() {
-		return new DiesTriggeredAbility(this);
-	}
+    @Override
+    public DiesTriggeredAbility copy() {
+        return new DiesTriggeredAbility(this);
+    }
 
-//	@Override
-//	public boolean checkTrigger(GameEvent event, Game game) {
-//		return super.checkTrigger(event, game) && !used;
-//	}
+//    @Override
+//    public boolean checkTrigger(GameEvent event, Game game) {
+//        return super.checkTrigger(event, game) && !used;
+//    }
 
-//	@Override
-//	public void trigger(Game game, UUID controllerId) {
-//		if ( !used ) {
-//			super.trigger(game, controllerId);
-//			used = true;
-//		}
-//	}
-	
-	
+//    @Override
+//    public void trigger(Game game, UUID controllerId) {
+//        if ( !used ) {
+//            super.trigger(game, controllerId);
+//            used = true;
+//        }
+//    }
+
+
 }

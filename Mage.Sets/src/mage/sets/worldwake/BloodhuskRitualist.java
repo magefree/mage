@@ -51,14 +51,14 @@ public class BloodhuskRitualist extends CardImpl<BloodhuskRitualist> {
         this.expansionSetCode = "WWK";
         this.subtype.add("Vampire");
         this.subtype.add("Shaman");
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         MultikickerAbility ability = new MultikickerAbility(new DiscardTargetEffect(1), false);
         ability.addTarget(new TargetOpponent());
-		ability.addManaCost(new ColoredManaCost(Constants.ColoredManaSymbol.B));
-		this.addAbility(ability);
+        ability.addManaCost(new ColoredManaCost(Constants.ColoredManaSymbol.B));
+        this.addAbility(ability);
     }
 
     public BloodhuskRitualist (final BloodhuskRitualist card) {

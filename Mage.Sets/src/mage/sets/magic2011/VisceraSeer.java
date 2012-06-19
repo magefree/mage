@@ -45,25 +45,25 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class VisceraSeer extends CardImpl<VisceraSeer> {
 
-	public VisceraSeer(UUID ownerId) {
-		super(ownerId, 120, "Viscera Seer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Vampire");
-		this.subtype.add("Wizard");
-		this.color.setBlack(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
+    public VisceraSeer(UUID ownerId) {
+        super(ownerId, 120, "Viscera Seer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Vampire");
+        this.subtype.add("Wizard");
+        this.color.setBlack(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1), new SacrificeTargetCost(new TargetControlledCreaturePermanent())));
-	}
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1), new SacrificeTargetCost(new TargetControlledCreaturePermanent())));
+    }
 
-	public VisceraSeer(final VisceraSeer card) {
-		super(card);
-	}
+    public VisceraSeer(final VisceraSeer card) {
+        super(card);
+    }
 
-	@Override
-	public VisceraSeer copy() {
-		return new VisceraSeer(this);
-	}
+    @Override
+    public VisceraSeer copy() {
+        return new VisceraSeer(this);
+    }
 
 }

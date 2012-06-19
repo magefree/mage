@@ -56,48 +56,48 @@ import mage.watchers.common.LandfallWatcher;
  */
 public class SearingBlaze extends CardImpl<SearingBlaze> {
 
-	public SearingBlaze(UUID ownerId) {
-		super(ownerId, 90, "Searing Blaze", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}{R}");
-		this.expansionSetCode = "WWK";
-		this.color.setRed(true);
+    public SearingBlaze(UUID ownerId) {
+        super(ownerId, 90, "Searing Blaze", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}{R}");
+        this.expansionSetCode = "WWK";
+        this.color.setRed(true);
 
-		// Searing Blaze deals 1 damage to target player and 1 damage to target creature that player controls.
-		// Landfall - If you had a land enter the battlefield under your control this turn, Searing Blaze deals 3 damage to that player and 3 damage to that creature instead.
-		this.getSpellAbility().addTarget(new TargetPlayer());
-		this.getSpellAbility().addTarget(new SearingBlazeTarget());
-		this.getSpellAbility().addEffect(new SearingBlazeEffect());
-		this.addWatcher(new LandfallWatcher());
-	}
+        // Searing Blaze deals 1 damage to target player and 1 damage to target creature that player controls.
+        // Landfall - If you had a land enter the battlefield under your control this turn, Searing Blaze deals 3 damage to that player and 3 damage to that creature instead.
+        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new SearingBlazeTarget());
+        this.getSpellAbility().addEffect(new SearingBlazeEffect());
+        this.addWatcher(new LandfallWatcher());
+    }
 
-	public SearingBlaze(final SearingBlaze card) {
-		super(card);
-	}
+    public SearingBlaze(final SearingBlaze card) {
+        super(card);
+    }
 
-	@Override
-	public SearingBlaze copy() {
-		return new SearingBlaze(this);
-	}
+    @Override
+    public SearingBlaze copy() {
+        return new SearingBlaze(this);
+    }
 
 }
 
 class SearingBlazeEffect extends OneShotEffect<SearingBlazeEffect> {
 
-	public SearingBlazeEffect() {
-		super(Outcome.Damage);
-		staticText = "{this} deals 1 damage to target player and 1 damage to target creature that player controls.  \nLandfall - If you had a land enter the battlefield under your control this turn, {this} deals 3 damage to that player and 3 damage to that creature instead";
-	}
+    public SearingBlazeEffect() {
+        super(Outcome.Damage);
+        staticText = "{this} deals 1 damage to target player and 1 damage to target creature that player controls.  \nLandfall - If you had a land enter the battlefield under your control this turn, {this} deals 3 damage to that player and 3 damage to that creature instead";
+    }
 
-	public SearingBlazeEffect(final SearingBlazeEffect effect) {
-		super(effect);
-	}
+    public SearingBlazeEffect(final SearingBlazeEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public SearingBlazeEffect copy() {
-		return new SearingBlazeEffect(this);
-	}
+    @Override
+    public SearingBlazeEffect copy() {
+        return new SearingBlazeEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
         Watcher watcher = game.getState().getWatchers().get("LandPlayed", source.getControllerId());
         Player player = game.getPlayer(source.getTargets().get(0).getFirstTarget());
         Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
@@ -118,7 +118,7 @@ class SearingBlazeEffect extends OneShotEffect<SearingBlazeEffect> {
             }
         }
         return true;
-	}
+    }
 
 }
 

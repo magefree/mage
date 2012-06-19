@@ -45,61 +45,61 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class RitesOfFlourishing extends CardImpl<RitesOfFlourishing> {
 
-	public RitesOfFlourishing(UUID ownerId) {
-		super(ownerId, 192, "Rites of Flourishing", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
-		this.expansionSetCode = "M12";
+    public RitesOfFlourishing(UUID ownerId) {
+        super(ownerId, 192, "Rites of Flourishing", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
+        this.expansionSetCode = "M12";
 
-		this.color.setGreen(true);
+        this.color.setGreen(true);
 
-		// At the beginning of each player's draw step, that player draws an additional card.
-		this.addAbility(new RitesOfFlourishingAbility());
+        // At the beginning of each player's draw step, that player draws an additional card.
+        this.addAbility(new RitesOfFlourishingAbility());
 
-		// Each player may play an additional land on each of his or her turns.
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayAdditionalLandsAllEffect()));
-	}
+        // Each player may play an additional land on each of his or her turns.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayAdditionalLandsAllEffect()));
+    }
 
-	public RitesOfFlourishing(final RitesOfFlourishing card) {
-		super(card);
-	}
+    public RitesOfFlourishing(final RitesOfFlourishing card) {
+        super(card);
+    }
 
-	@Override
-	public RitesOfFlourishing copy() {
-		return new RitesOfFlourishing(this);
-	}
+    @Override
+    public RitesOfFlourishing copy() {
+        return new RitesOfFlourishing(this);
+    }
 }
 
 class RitesOfFlourishingAbility extends TriggeredAbilityImpl<RitesOfFlourishingAbility> {
 
-	public RitesOfFlourishingAbility() {
-		super(Zone.BATTLEFIELD, new DrawCardTargetEffect(1));
-	}
+    public RitesOfFlourishingAbility() {
+        super(Zone.BATTLEFIELD, new DrawCardTargetEffect(1));
+    }
 
-	public RitesOfFlourishingAbility(final RitesOfFlourishingAbility ability) {
-		super(ability);
-	}
+    public RitesOfFlourishingAbility(final RitesOfFlourishingAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public RitesOfFlourishingAbility copy() {
-		return new RitesOfFlourishingAbility(this);
-	}
+    @Override
+    public RitesOfFlourishingAbility copy() {
+        return new RitesOfFlourishingAbility(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == GameEvent.EventType.DRAW_STEP_PRE) {
-			this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.DRAW_STEP_PRE) {
+            this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public boolean checkInterveningIfClause(Game game) {
-		return !game.getPermanent(this.sourceId).isTapped();
-	}
+    @Override
+    public boolean checkInterveningIfClause(Game game) {
+        return !game.getPermanent(this.sourceId).isTapped();
+    }
 
-	@Override
-	public String getRule() {
-		return "At the beginning of each player's draw step, that player draws an additional card.";
-	}
+    @Override
+    public String getRule() {
+        return "At the beginning of each player's draw step, that player draws an additional card.";
+    }
 
 }

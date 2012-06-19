@@ -48,7 +48,7 @@ public class WindriderEel extends CardImpl<WindriderEel> {
         super(ownerId, 78, "Windrider Eel", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.expansionSetCode = "ZEN";
         this.subtype.add("Fish");
-		this.color.setBlue(true);
+        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());

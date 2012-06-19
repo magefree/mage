@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class HonorOfThePure extends mage.sets.magic2010.HonorOfThePure {
 
-	public HonorOfThePure(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 17;
-		this.expansionSetCode = "M11";
-	}
+    public HonorOfThePure(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 17;
+        this.expansionSetCode = "M11";
+    }
 
-	public HonorOfThePure(final HonorOfThePure card) {
-		super(card);
-	}
+    public HonorOfThePure(final HonorOfThePure card) {
+        super(card);
+    }
 
-	@Override
-	public HonorOfThePure copy() {
-		return new HonorOfThePure(this);
-	}
+    @Override
+    public HonorOfThePure copy() {
+        return new HonorOfThePure(this);
+    }
 
 }

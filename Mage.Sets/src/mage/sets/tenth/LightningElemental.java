@@ -45,7 +45,7 @@ public class LightningElemental extends CardImpl<LightningElemental> {
         super(ownerId, 217, "Lightning Elemental", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.expansionSetCode = "10E";
         this.subtype.add("Elemental");
-		this.color.setRed(true);
+        this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(1);
         this.addAbility(HasteAbility.getInstance());

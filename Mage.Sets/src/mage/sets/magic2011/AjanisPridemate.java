@@ -47,55 +47,55 @@ import mage.game.events.GameEvent.EventType;
  */
 public class AjanisPridemate extends CardImpl<AjanisPridemate> {
 
-	public AjanisPridemate(UUID ownerId) {
-		super(ownerId, 3, "Ajani's Pridemate", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "1}{W}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Cat");
-		this.subtype.add("Soldier");
-		this.color.setWhite(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+    public AjanisPridemate(UUID ownerId) {
+        super(ownerId, 3, "Ajani's Pridemate", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "1}{W}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Cat");
+        this.subtype.add("Soldier");
+        this.color.setWhite(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-		this.addAbility(new AjanisPridemateAbility());
-	}
+        this.addAbility(new AjanisPridemateAbility());
+    }
 
-	public AjanisPridemate(final AjanisPridemate card) {
-		super(card);
-	}
+    public AjanisPridemate(final AjanisPridemate card) {
+        super(card);
+    }
 
-	@Override
-	public AjanisPridemate copy() {
-		return new AjanisPridemate(this);
-	}
+    @Override
+    public AjanisPridemate copy() {
+        return new AjanisPridemate(this);
+    }
 
 }
 
 class AjanisPridemateAbility extends TriggeredAbilityImpl<AjanisPridemateAbility> {
 
-	public AjanisPridemateAbility() {
-		super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true);
-	}
+    public AjanisPridemateAbility() {
+        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true);
+    }
 
-	public AjanisPridemateAbility(final AjanisPridemateAbility ability) {
-		super(ability);
-	}
+    public AjanisPridemateAbility(final AjanisPridemateAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public AjanisPridemateAbility copy() {
-		return new AjanisPridemateAbility(this);
-	}
+    @Override
+    public AjanisPridemateAbility copy() {
+        return new AjanisPridemateAbility(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.GAINED_LIFE && event.getPlayerId().equals(controllerId)) {
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.GAINED_LIFE && event.getPlayerId().equals(controllerId)) {
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "Whenever you gain life, you may put a +1/+1 counter on {this}.";
-	}
+    @Override
+    public String getRule() {
+        return "Whenever you gain life, you may put a +1/+1 counter on {this}.";
+    }
 
 }

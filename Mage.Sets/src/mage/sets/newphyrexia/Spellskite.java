@@ -81,17 +81,17 @@ class SpellskiteEffect extends OneShotEffect<SpellskiteEffect> {
         super(Outcome.Neutral);
         staticText = "Change a target of target spell or ability to {this}";
     }
-    
+
     public SpellskiteEffect(final SpellskiteEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
-		Spell spell = game.getStack().getSpell(source.getFirstTarget());
-		if (spell != null) {
+        Spell spell = game.getStack().getSpell(source.getFirstTarget());
+        if (spell != null) {
             Targets targets = spell.getSpellAbility().getTargets();
-			if (targets.size() == 1 && targets.get(0).getTargets().size() == 1) {
+            if (targets.size() == 1 && targets.get(0).getTargets().size() == 1) {
                 Target target = targets.get(0);
                 if (target.canTarget(source.getSourceId(), game)) {
                     target.clearChosen();
@@ -120,13 +120,13 @@ class SpellskiteEffect extends OneShotEffect<SpellskiteEffect> {
                     }
                 }
             }
-		}
-		return false;
+        }
+        return false;
     }
 
     @Override
     public SpellskiteEffect copy() {
         return new SpellskiteEffect(this);
     }
-    
+
 }

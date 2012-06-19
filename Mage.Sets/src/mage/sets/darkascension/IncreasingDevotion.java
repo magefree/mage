@@ -53,7 +53,7 @@ public class IncreasingDevotion extends CardImpl<IncreasingDevotion> {
 
         // Put five 1/1 white Human creature tokens onto the battlefield. If Increasing Devotion was cast from a graveyard, put ten of those tokens onto the battlefield instead.
         this.getSpellAbility().addEffect(new IncreasingDevotionEffect());
-        
+
         // Flashback {7}{W}{W}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{7}{W}{W}"), Constants.TimingRule.SORCERY));
     }
@@ -69,9 +69,9 @@ public class IncreasingDevotion extends CardImpl<IncreasingDevotion> {
 }
 
 class IncreasingDevotionEffect extends OneShotEffect<IncreasingDevotionEffect> {
-    
+
     private static HumanToken token = new HumanToken();
-    
+
     public IncreasingDevotionEffect() {
         super(Constants.Outcome.PutCreatureInPlay);
         staticText = "Put five 1/1 white Human creature tokens onto the battlefield. If Increasing Devotion was cast from a graveyard, put ten of those tokens onto the battlefield instead";

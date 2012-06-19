@@ -43,26 +43,26 @@ import mage.cards.CardImpl;
  */
 public class BloodbraidElf extends CardImpl<BloodbraidElf> {
 
-	public BloodbraidElf(UUID ownerId) {
-		super(ownerId, 50, "Bloodbraid Elf", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
-		this.expansionSetCode = "ARB";
-		this.color.setRed(true);
-		this.color.setGreen(true);
-		this.subtype.add("Elf");
-		this.subtype.add("Berserker");
-		this.power = new MageInt(3);
-		this.toughness = new MageInt(2);
-		this.addAbility(HasteAbility.getInstance());
-		this.addAbility(new CascadeAbility());
-	}
+    public BloodbraidElf(UUID ownerId) {
+        super(ownerId, 50, "Bloodbraid Elf", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
+        this.expansionSetCode = "ARB";
+        this.color.setRed(true);
+        this.color.setGreen(true);
+        this.subtype.add("Elf");
+        this.subtype.add("Berserker");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(2);
+        this.addAbility(HasteAbility.getInstance());
+        this.addAbility(new CascadeAbility());
+    }
 
-	public BloodbraidElf(final BloodbraidElf card) {
-		super(card);
-	}
+    public BloodbraidElf(final BloodbraidElf card) {
+        super(card);
+    }
 
-	@Override
-	public BloodbraidElf copy() {
-		return new BloodbraidElf(this);
-	}
+    @Override
+    public BloodbraidElf copy() {
+        return new BloodbraidElf(this);
+    }
 
 }

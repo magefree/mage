@@ -48,7 +48,7 @@ public class SnappingCreeper extends CardImpl<SnappingCreeper> {
         super(ownerId, 112, "Snapping Creeper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.expansionSetCode = "WWK";
         this.subtype.add("Plant");
-		this.color.setGreen(true);        
+        this.color.setGreen(true);        
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
         this.addAbility(new LandfallAbility(new GainAbilitySourceEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn), false));

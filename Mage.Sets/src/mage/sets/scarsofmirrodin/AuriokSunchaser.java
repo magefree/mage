@@ -48,31 +48,31 @@ import mage.cards.CardImpl;
  */
 public class AuriokSunchaser extends CardImpl<AuriokSunchaser> {
 
-	protected static String effect1Text = "Metalcraft - As long as you control three or more artifacts, Auriok Sunchaser gets +2/+2";
-	protected static String effect2Text = "Metalcraft - As long as you control three or more artifacts, Auriok Sunchaser has flying";
+    protected static String effect1Text = "Metalcraft - As long as you control three or more artifacts, Auriok Sunchaser gets +2/+2";
+    protected static String effect2Text = "Metalcraft - As long as you control three or more artifacts, Auriok Sunchaser has flying";
 
-	public AuriokSunchaser(UUID ownerId) {
-		super(ownerId, 4, "Auriok Sunchaser", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
-		this.expansionSetCode = "SOM";
-		this.subtype.add("Human");
-		this.subtype.add("Soldier");
+    public AuriokSunchaser(UUID ownerId) {
+        super(ownerId, 4, "Auriok Sunchaser", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        this.expansionSetCode = "SOM";
+        this.subtype.add("Human");
+        this.subtype.add("Soldier");
 
-		this.color.setWhite(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
+        this.color.setWhite(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-		ContinuousEffect effect1 = new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield);
+        ContinuousEffect effect1 = new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(effect1, MetalcraftCondition.getInstance(), effect1Text)));
-		ContinuousEffect effect2 = new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield);
+        ContinuousEffect effect2 = new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(effect2, MetalcraftCondition.getInstance(), effect2Text)));
-	}
+    }
 
-	public AuriokSunchaser(final AuriokSunchaser card) {
-		super(card);
-	}
+    public AuriokSunchaser(final AuriokSunchaser card) {
+        super(card);
+    }
 
-	@Override
-	public AuriokSunchaser copy() {
-		return new AuriokSunchaser(this);
-	}
+    @Override
+    public AuriokSunchaser copy() {
+        return new AuriokSunchaser(this);
+    }
 }

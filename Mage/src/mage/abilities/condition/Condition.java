@@ -13,11 +13,11 @@ import java.io.Serializable;
 public interface Condition extends Serializable {
 
     /**
-	 * Checks the game to see if this condition applies for the given ability.
-	 * 
-	 * @param game
-	 * @param source
-	 * @return
-	 */
+     * Checks the game to see if this condition applies for the given ability.
+     * 
+     * @param game
+     * @param source
+     * @return
+     */
     boolean apply(Game game, Ability source);
 }

@@ -44,25 +44,25 @@ import mage.cards.CardImpl;
  */
 public class Clone extends CardImpl<Clone> {
 
-	public Clone(UUID ownerId) {
-		super(ownerId, 73, "Clone", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}");
-		this.expansionSetCode = "10E";
-		this.color.setBlue(true);
-		this.subtype.add("Shapeshifter");
-		this.power = new MageInt(0);
-		this.toughness = new MageInt(0);
+    public Clone(UUID ownerId) {
+        super(ownerId, 73, "Clone", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}");
+        this.expansionSetCode = "10E";
+        this.color.setBlue(true);
+        this.subtype.add("Shapeshifter");
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(0);
 
-		Ability ability = new EntersBattlefieldAbility(new EntersBattlefieldEffect(new CopyPermanentEffect()), "You may have {this} enter the battlefield as a copy of any creature on the battlefield");
-		this.addAbility(ability);
-	}
+        Ability ability = new EntersBattlefieldAbility(new EntersBattlefieldEffect(new CopyPermanentEffect()), "You may have {this} enter the battlefield as a copy of any creature on the battlefield");
+        this.addAbility(ability);
+    }
 
-	public Clone(final Clone card) {
-		super(card);
-	}
+    public Clone(final Clone card) {
+        super(card);
+    }
 
-	@Override
-	public Clone copy() {
-		return new Clone(this);
-	}
+    @Override
+    public Clone copy() {
+        return new Clone(this);
+    }
 
 }

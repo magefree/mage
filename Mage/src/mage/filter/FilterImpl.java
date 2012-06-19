@@ -37,62 +37,62 @@ import mage.ObjectColor;
  */
 public abstract class FilterImpl<E, T extends FilterImpl<E, T>> implements Filter<E> {
 
-	protected static ListComparer<CardType> compCardType = new ListComparer<CardType>();
-	protected static ListComparer<String> compString = new ListComparer<String>();
+    protected static ListComparer<CardType> compCardType = new ListComparer<CardType>();
+    protected static ListComparer<String> compString = new ListComparer<String>();
 
-	protected String message;
-	protected boolean notFilter = false;
+    protected String message;
+    protected boolean notFilter = false;
 
-	@Override
-	public abstract FilterImpl<E, T> copy();
+    @Override
+    public abstract FilterImpl<E, T> copy();
 
-	public FilterImpl(String name) {
-		this.message = name;
-	}
+    public FilterImpl(String name) {
+        this.message = name;
+    }
 
-	public FilterImpl(FilterImpl filter) {
-		this.message = filter.message;
-		this.notFilter = filter.notFilter;
-	}
+    public FilterImpl(FilterImpl filter) {
+        this.message = filter.message;
+        this.notFilter = filter.notFilter;
+    }
 
-	protected boolean compareInts(int int1, int int2, ComparisonType type) {
-		switch (type) {
-			case Equal:
-				if (int1 != int2)
-					return false;
-				break;
-			case GreaterThan:
-				if (int1 <= int2)
-					return false;
-				break;
-			case LessThan:
-				if (int1 >= int2)
-					return false;
-				break;
-		}
-		return true;
-	}
+    protected boolean compareInts(int int1, int int2, ComparisonType type) {
+        switch (type) {
+            case Equal:
+                if (int1 != int2)
+                    return false;
+                break;
+            case GreaterThan:
+                if (int1 <= int2)
+                    return false;
+                break;
+            case LessThan:
+                if (int1 >= int2)
+                    return false;
+                break;
+        }
+        return true;
+    }
 
-	protected boolean compareColors(ObjectColor color1, ObjectColor color2, ComparisonScope scope) {
-		if (scope == ComparisonScope.All)
-			return color2.equals(color1);
-		else
-			return color2.contains(color1);
-	}
+    protected boolean compareColors(ObjectColor color1, ObjectColor color2, ComparisonScope scope) {
+        if (scope == ComparisonScope.All)
+            return color2.equals(color1);
+        else
+            return color2.contains(color1);
+    }
 
-	@Override
-	public String getMessage() {
-		return message;
-	}
+    @Override
+    public String getMessage() {
+        return message;
+    }
 
-	@Override
-	public void setMessage(String message) {
-		this.message = message;
-	}
+    @Override
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
-	@Override
-	public void setNotFilter(boolean notFilter) {
-		this.notFilter = notFilter;
-	}
+    @Override
+    public void setNotFilter(boolean notFilter) {
+        this.notFilter = notFilter;
+    }
 
 }

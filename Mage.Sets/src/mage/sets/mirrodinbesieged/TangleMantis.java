@@ -45,7 +45,7 @@ public class TangleMantis extends CardImpl<TangleMantis> {
         super(ownerId, 91, "Tangle Mantis", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
         this.expansionSetCode = "MBS";
         this.subtype.add("Insect");
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
         this.addAbility(TrampleAbility.getInstance());

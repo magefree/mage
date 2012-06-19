@@ -44,7 +44,7 @@ public class RaiseTheAlarm extends CardImpl<RaiseTheAlarm> {
     public RaiseTheAlarm (UUID ownerId) {
         super(ownerId, 16, "Raise the Alarm", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "MRD";
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SoldierToken(), 2));
     }
 

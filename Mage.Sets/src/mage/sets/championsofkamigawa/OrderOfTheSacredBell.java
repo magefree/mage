@@ -45,7 +45,7 @@ public class OrderOfTheSacredBell extends CardImpl<OrderOfTheSacredBell> {
         this.expansionSetCode = "CHK";
         this.subtype.add("Human");
         this.subtype.add("Monk");
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
     }

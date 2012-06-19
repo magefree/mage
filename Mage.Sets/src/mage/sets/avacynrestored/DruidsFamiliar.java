@@ -46,7 +46,7 @@ import java.util.UUID;
 public class DruidsFamiliar extends CardImpl<DruidsFamiliar> {
 
     private static final String ruleText = "As long as {this} is paired with another creature, each of those creatures gets +2/+2";
-    
+
     public DruidsFamiliar(UUID ownerId) {
         super(ownerId, 175, "Druid's Familiar", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.expansionSetCode = "AVR";

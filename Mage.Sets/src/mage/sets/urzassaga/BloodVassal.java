@@ -52,7 +52,7 @@ public class BloodVassal extends CardImpl<BloodVassal> {
         this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        
+
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 0, 0, 0, 2, 0, 0)), new SacrificeSourceCost()));
     }
 

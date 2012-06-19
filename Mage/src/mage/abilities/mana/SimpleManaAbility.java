@@ -38,17 +38,17 @@ import mage.abilities.effects.common.ManaEffect;
  */
 public class SimpleManaAbility extends ManaAbility<SimpleManaAbility> {
 
-	public SimpleManaAbility(Zone zone, ManaEffect effect, Cost cost) {
-		super(zone, effect, cost);
-	}
+    public SimpleManaAbility(Zone zone, ManaEffect effect, Cost cost) {
+        super(zone, effect, cost);
+    }
 
-	public SimpleManaAbility(final SimpleManaAbility ability) {
-		super(ability);
-	}
+    public SimpleManaAbility(final SimpleManaAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public SimpleManaAbility copy() {
-		return new SimpleManaAbility(this);
-	}
+    @Override
+    public SimpleManaAbility copy() {
+        return new SimpleManaAbility(this);
+    }
 
 }

@@ -41,60 +41,60 @@ import mage.players.ManaPool;
  */
 public class VariableManaCost extends ManaCostImpl<VariableManaCost> implements VariableCost {
 
-	protected int multiplier;
-	protected FilterMana filter;
+    protected int multiplier;
+    protected FilterMana filter;
 
-	public VariableManaCost() {
-		this(1);
-	}
-	
-	public VariableManaCost(int multiplier) {
-		this.multiplier = multiplier;
+    public VariableManaCost() {
+        this(1);
+    }
+
+    public VariableManaCost(int multiplier) {
+        this.multiplier = multiplier;
         this.cost = new Mana();
         options.add(new Mana());
-	}
+    }
 
-	public VariableManaCost(VariableManaCost manaCost) {
-		super(manaCost);
-		this.multiplier = manaCost.multiplier;
-		if (manaCost.filter != null) this.filter = manaCost.filter.copy();
-	}
+    public VariableManaCost(VariableManaCost manaCost) {
+        super(manaCost);
+        this.multiplier = manaCost.multiplier;
+        if (manaCost.filter != null) this.filter = manaCost.filter.copy();
+    }
 
-	@Override
-	public int convertedManaCost() {
-		return 0;
-	}
+    @Override
+    public int convertedManaCost() {
+        return 0;
+    }
 
-	@Override
-	public void assignPayment(Game game, Ability ability, ManaPool pool) {
-		payment.add(pool.getMana(filter));
-		payment.add(pool.getAllConditionalMana(ability, game, filter));
-		pool.payX(ability, game, filter);
-	}
+    @Override
+    public void assignPayment(Game game, Ability ability, ManaPool pool) {
+        payment.add(pool.getMana(filter));
+        payment.add(pool.getAllConditionalMana(ability, game, filter));
+        pool.payX(ability, game, filter);
+    }
 
-	@Override
-	public String getText() {
-		if (multiplier > 1) {
-			String symbol = "";
-			for (int i = 0; i < multiplier; i++) {
-				symbol += "{X}";
-			}
-			return symbol;
-		}
-		else {
-			return "{X}";
-		}
-	}
+    @Override
+    public String getText() {
+        if (multiplier > 1) {
+            String symbol = "";
+            for (int i = 0; i < multiplier; i++) {
+                symbol += "{X}";
+            }
+            return symbol;
+        }
+        else {
+            return "{X}";
+        }
+    }
 
-	@Override
-	public VariableManaCost getUnpaid() {
-		return this;
-	}
+    @Override
+    public VariableManaCost getUnpaid() {
+        return this;
+    }
 
-	@Override
-	public int getAmount() {
-		return payment.count() / multiplier;
-	}
+    @Override
+    public int getAmount() {
+        return payment.count() / multiplier;
+    }
 
     @Override
     public void setAmount(int amount) {
@@ -102,18 +102,18 @@ public class VariableManaCost extends ManaCostImpl<VariableManaCost> implements 
     }
 
     @Override
-	public boolean testPay(Mana testMana) {
-		return true;
-	}
+    public boolean testPay(Mana testMana) {
+        return true;
+    }
 
-	@Override
-	public void setFilter(FilterMana filter) {
-		this.filter = filter;
-	}
+    @Override
+    public void setFilter(FilterMana filter) {
+        this.filter = filter;
+    }
 
-	@Override
-	public VariableManaCost copy() {
-		return new VariableManaCost(this);
-	}
-	
+    @Override
+    public VariableManaCost copy() {
+        return new VariableManaCost(this);
+    }
+
 }

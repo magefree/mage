@@ -36,45 +36,45 @@ import java.io.Serializable;
  */
 public class MageVersion implements Serializable, Comparable<MageVersion> {
 
-	private int major;
-	private int minor;
-	private int patch;
+    private int major;
+    private int minor;
+    private int patch;
 
     private String info = "";
 
-	public MageVersion(int major, int minor, int patch, String info) {
-		this.major = major;
-		this.minor = minor;
-		this.patch = patch;
+    public MageVersion(int major, int minor, int patch, String info) {
+        this.major = major;
+        this.minor = minor;
+        this.patch = patch;
         this.info = info;
-	}
-	
-	public int getMajor() {
-		return major;
-	}
+    }
 
-	public int getMinor() {
-		return minor;
-	}
+    public int getMajor() {
+        return major;
+    }
 
-	public int getPatch() {
-		return patch;
-	}
+    public int getMinor() {
+        return minor;
+    }
 
-	@Override
-	public String toString() {
-		return major + "." + minor + "." + patch + info;
-	}
+    public int getPatch() {
+        return patch;
+    }
 
-	@Override
-	public int compareTo(MageVersion o) {
-		if (major != o.major)
-			return major - o.major;
-		if (minor != o.minor)
-			return minor - o.minor;
-		if (patch != o.patch)
-			return patch - o.patch;
+    @Override
+    public String toString() {
+        return major + "." + minor + "." + patch + info;
+    }
+
+    @Override
+    public int compareTo(MageVersion o) {
+        if (major != o.major)
+            return major - o.major;
+        if (minor != o.minor)
+            return minor - o.minor;
+        if (patch != o.patch)
+            return patch - o.patch;
         return info.compareTo(o.info);
-	}
+    }
 
 }

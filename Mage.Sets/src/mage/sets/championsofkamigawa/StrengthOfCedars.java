@@ -56,7 +56,7 @@ public class StrengthOfCedars extends CardImpl<StrengthOfCedars> {
         super(ownerId, 245, "Strength of Cedars", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{G}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.getSpellAbility().addEffect(new BoostTargetEffect(new PermanentsOnBattlefieldCount(filter),
                 new PermanentsOnBattlefieldCount(filter), Constants.Duration.EndOfTurn, true));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

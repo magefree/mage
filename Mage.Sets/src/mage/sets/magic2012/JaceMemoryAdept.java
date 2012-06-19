@@ -50,72 +50,72 @@ import java.util.UUID;
  */
 public class JaceMemoryAdept extends CardImpl<JaceMemoryAdept> {
 
-	public JaceMemoryAdept(UUID ownerId) {
-		super(ownerId, 58, "Jace, Memory Adept", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{U}{U}");
-		this.expansionSetCode = "M12";
-		this.subtype.add("Jace");
+    public JaceMemoryAdept(UUID ownerId) {
+        super(ownerId, 58, "Jace, Memory Adept", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{U}{U}");
+        this.expansionSetCode = "M12";
+        this.subtype.add("Jace");
 
-		this.color.setBlue(true);
+        this.color.setBlue(true);
 
-		this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4))));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4))));
 
-		// +1: Draw a card. Target player puts the top card of his or her library into his or her graveyard.
-		LoyaltyAbility ability1 = new LoyaltyAbility(new DrawCardControllerEffect(1), 1);
-		ability1.addEffect(new PutLibraryIntoGraveTargetEffect(1));
-		ability1.addTarget(new TargetPlayer());
-		this.addAbility(ability1);
+        // +1: Draw a card. Target player puts the top card of his or her library into his or her graveyard.
+        LoyaltyAbility ability1 = new LoyaltyAbility(new DrawCardControllerEffect(1), 1);
+        ability1.addEffect(new PutLibraryIntoGraveTargetEffect(1));
+        ability1.addTarget(new TargetPlayer());
+        this.addAbility(ability1);
 
-		// 0: Target player puts the top ten cards of his or her library into his or her graveyard.
-		LoyaltyAbility ability2 = new LoyaltyAbility(new PutLibraryIntoGraveTargetEffect(10), 0);
-		ability2.addTarget(new TargetPlayer());
-		this.addAbility(ability2);
+        // 0: Target player puts the top ten cards of his or her library into his or her graveyard.
+        LoyaltyAbility ability2 = new LoyaltyAbility(new PutLibraryIntoGraveTargetEffect(10), 0);
+        ability2.addTarget(new TargetPlayer());
+        this.addAbility(ability2);
 
-		// -7: Any number of target players each draw twenty cards.
-		LoyaltyAbility ability3 = new LoyaltyAbility(new JaceMemoryAdeptEffect(20), -7);
-		ability3.addTarget(new TargetPlayer(0, Integer.MAX_VALUE, false)); //any number
-		this.addAbility(ability3);
-	}
+        // -7: Any number of target players each draw twenty cards.
+        LoyaltyAbility ability3 = new LoyaltyAbility(new JaceMemoryAdeptEffect(20), -7);
+        ability3.addTarget(new TargetPlayer(0, Integer.MAX_VALUE, false)); //any number
+        this.addAbility(ability3);
+    }
 
-	public JaceMemoryAdept(final JaceMemoryAdept card) {
-		super(card);
-	}
+    public JaceMemoryAdept(final JaceMemoryAdept card) {
+        super(card);
+    }
 
-	@Override
-	public JaceMemoryAdept copy() {
-		return new JaceMemoryAdept(this);
-	}
+    @Override
+    public JaceMemoryAdept copy() {
+        return new JaceMemoryAdept(this);
+    }
 }
 
 class JaceMemoryAdeptEffect extends DrawCardTargetEffect {
 
-	public JaceMemoryAdeptEffect(int amount) {
-		super(amount);
-		staticText = "Any number of target players each draw twenty cards";
-	}
+    public JaceMemoryAdeptEffect(int amount) {
+        super(amount);
+        staticText = "Any number of target players each draw twenty cards";
+    }
 
-	public JaceMemoryAdeptEffect(final DrawCardTargetEffect effect) {
-		super(effect);
-	}
+    public JaceMemoryAdeptEffect(final DrawCardTargetEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		for (UUID target : targetPointer.getTargets(game, source)) {
-			Player player = game.getPlayer(target);
-			if (player != null) {
-				player.drawCards(amount.calculate(game, source), game);
-			}
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        for (UUID target : targetPointer.getTargets(game, source)) {
+            Player player = game.getPlayer(target);
+            if (player != null) {
+                player.drawCards(amount.calculate(game, source), game);
+            }
+        }
+        return true;
+    }
 
-	@Override
-	public String getText(Mode mode) {
-		return staticText;
-	}
+    @Override
+    public String getText(Mode mode) {
+        return staticText;
+    }
 
-	public JaceMemoryAdeptEffect copy() {
-		return new JaceMemoryAdeptEffect(this);
-	}
+    public JaceMemoryAdeptEffect copy() {
+        return new JaceMemoryAdeptEffect(this);
+    }
 }
 
 

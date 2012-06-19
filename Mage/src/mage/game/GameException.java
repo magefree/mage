@@ -36,8 +36,8 @@ import mage.MageException;
  */
 public class GameException extends MageException {
 
-	public GameException (String message) {
-		super(message);
-	}
+    public GameException (String message) {
+        super(message);
+    }
 
 }

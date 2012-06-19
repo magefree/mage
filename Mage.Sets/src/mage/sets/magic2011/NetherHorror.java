@@ -40,23 +40,23 @@ import mage.cards.CardImpl;
  */
 public class NetherHorror extends CardImpl<NetherHorror> {
 
-	public NetherHorror(UUID ownerId) {
-		super(ownerId, 108, "Nether Horror", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Horror");
-		this.color.setBlack(true);
-		this.power = new MageInt(4);
-		this.toughness = new MageInt(2);
+    public NetherHorror(UUID ownerId) {
+        super(ownerId, 108, "Nether Horror", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Horror");
+        this.color.setBlack(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(2);
 
-	}
+    }
 
-	public NetherHorror(final NetherHorror card) {
-		super(card);
-	}
+    public NetherHorror(final NetherHorror card) {
+        super(card);
+    }
 
-	@Override
-	public NetherHorror copy() {
-		return new NetherHorror(this);
-	}
+    @Override
+    public NetherHorror copy() {
+        return new NetherHorror(this);
+    }
 
 }

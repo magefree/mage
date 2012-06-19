@@ -38,52 +38,52 @@ import java.util.List;
  */
 public class DeckCardLists implements Serializable {
 
-	private String name;
-	private String author;
-	private List<String> cards = new ArrayList<String>();
-	private List<String> sideboard = new ArrayList<String>();
+    private String name;
+    private String author;
+    private List<String> cards = new ArrayList<String>();
+    private List<String> sideboard = new ArrayList<String>();
 
-	/**
-	 * @return the cards
-	 */
-	public List<String> getCards() {
-		return cards;
-	}
+    /**
+     * @return the cards
+     */
+    public List<String> getCards() {
+        return cards;
+    }
 
-	/**
-	 * @param cards the cards to set
-	 */
-	public void setCards(List<String> cards) {
-		this.cards = cards;
-	}
+    /**
+     * @param cards the cards to set
+     */
+    public void setCards(List<String> cards) {
+        this.cards = cards;
+    }
 
-	/**
-	 * @return the sideboard
-	 */
-	public List<String> getSideboard() {
-		return sideboard;
-	}
+    /**
+     * @return the sideboard
+     */
+    public List<String> getSideboard() {
+        return sideboard;
+    }
 
-	/**
-	 * @param sideboard the sideboard to set
-	 */
-	public void setSideboard(List<String> sideboard) {
-		this.sideboard = sideboard;
-	}
+    /**
+     * @param sideboard the sideboard to set
+     */
+    public void setSideboard(List<String> sideboard) {
+        this.sideboard = sideboard;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getAuthor() {
-		return author;
-	}
+    public String getAuthor() {
+        return author;
+    }
 
-	public void setAuthor(String author) {
-		this.author = author;
-	}
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 }

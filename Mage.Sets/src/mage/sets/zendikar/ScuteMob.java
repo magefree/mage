@@ -48,59 +48,59 @@ import mage.game.events.GameEvent.EventType;
  */
 public class ScuteMob extends CardImpl<ScuteMob> {
 
-	public ScuteMob(UUID ownerId) {
-		super(ownerId, 182, "Scute Mob", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}");
-		this.expansionSetCode = "ZEN";
-		this.color.setGreen(true);
-		this.subtype.add("Insect");
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
-		this.addAbility(new ScuteMobAbility());
-	}
+    public ScuteMob(UUID ownerId) {
+        super(ownerId, 182, "Scute Mob", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}");
+        this.expansionSetCode = "ZEN";
+        this.color.setGreen(true);
+        this.subtype.add("Insect");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+        this.addAbility(new ScuteMobAbility());
+    }
 
-	public ScuteMob(final ScuteMob card) {
-		super(card);
-	}
+    public ScuteMob(final ScuteMob card) {
+        super(card);
+    }
 
-	@Override
-	public ScuteMob copy() {
-		return new ScuteMob(this);
-	}
+    @Override
+    public ScuteMob copy() {
+        return new ScuteMob(this);
+    }
 
 }
 
 class ScuteMobAbility extends TriggeredAbilityImpl<ScuteMobAbility> {
 
-	private FilterLandPermanent filter = new FilterLandPermanent();
+    private FilterLandPermanent filter = new FilterLandPermanent();
 
-	public ScuteMobAbility() {
-		super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(4)));
-	}
+    public ScuteMobAbility() {
+        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(4)));
+    }
 
-	public ScuteMobAbility(final ScuteMobAbility ability) {
-		super(ability);
-	}
+    public ScuteMobAbility(final ScuteMobAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public ScuteMobAbility copy() {
-		return new ScuteMobAbility(this);
-	}
+    @Override
+    public ScuteMobAbility copy() {
+        return new ScuteMobAbility(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.UPKEEP_STEP_PRE && event.getPlayerId().equals(this.controllerId)) {
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.UPKEEP_STEP_PRE && event.getPlayerId().equals(this.controllerId)) {
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public boolean checkInterveningIfClause(Game game) {
-		return game.getBattlefield().countAll(filter, this.controllerId, game) >= 5;
-	}
+    @Override
+    public boolean checkInterveningIfClause(Game game) {
+        return game.getBattlefield().countAll(filter, this.controllerId, game) >= 5;
+    }
 
-	@Override
-	public String getRule() {
-		return "At the beginning of your upkeep, if you control five or more lands, put four +1/+1 counters on {this}.";
-	}
+    @Override
+    public String getRule() {
+        return "At the beginning of your upkeep, if you control five or more lands, put four +1/+1 counters on {this}.";
+    }
 }

@@ -53,7 +53,7 @@ public class NumaiOutcast extends CardImpl<NumaiOutcast> {
         this.expansionSetCode = "CHK";
         this.subtype.add("Human");
         this.subtype.add("Samurai");
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(new BushidoAbility(2));

@@ -50,7 +50,7 @@ public class WerewolfRansacker extends CardImpl<WerewolfRansacker> {
         super(ownerId, 81, "Werewolf Ransacker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "");
         this.expansionSetCode = "DKA";
         this.subtype.add("Werewolf");
-        
+
         // this card is the second face of double-faced card
         this.nightCard = true;
         this.canTransform = true;
@@ -59,7 +59,7 @@ public class WerewolfRansacker extends CardImpl<WerewolfRansacker> {
         this.toughness = new MageInt(4);
 
         // Whenever this creature transforms into Werewolf Ransacker, you may destroy target artifact. If that artifact is put into a graveyard this way, Werewolf Ransacker deals 3 damage to that artifact's controller.
-        
+
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Werewolf Ransacker.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), Constants.TargetController.ANY, false);
         this.addAbility(new ConditionalTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.getInstance(), TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));

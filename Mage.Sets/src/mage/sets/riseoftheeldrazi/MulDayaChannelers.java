@@ -50,7 +50,7 @@ import mage.choices.ChoiceColor;
  * @author jeffwadsworth
  */
 public class MulDayaChannelers extends CardImpl<MulDayaChannelers> {
-   
+
     private static final String rule1 = "As long as the top card of your library is a creature card, {this} gets +3/+3";
     private static final String rule2 = "As long as the top card of your library is a land card, {this} has T: Add two mana of any one color to your mana pool.";
 
@@ -64,14 +64,14 @@ public class MulDayaChannelers extends CardImpl<MulDayaChannelers> {
         this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-       
+
         // Play with the top card of your library revealed.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithTheTopCardRevealedEffect()));
-       
+
         // As long as the top card of your library is a creature card, Mul Daya Channelers gets +3/+3.
         ConditionalContinousEffect effect = new ConditionalContinousEffect(new BoostSourceEffect(3, 3, Constants.Duration.WhileOnBattlefield), new TopLibraryCardTypeCondition(CREATURE), rule1);
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect));
-       
+
         // As long as the top card of your library is a land card, Mul Daya Channelers has "T: Add two mana of any one color to your mana pool."
         ConditionalActivatedAbility ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(2), new TapSourceCost(), new TopLibraryCardTypeCondition(LAND), rule2);
         ability.addChoice(new ChoiceColor());

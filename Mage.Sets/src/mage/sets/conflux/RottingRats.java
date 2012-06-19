@@ -50,7 +50,7 @@ public class RottingRats extends CardImpl<RottingRats> {
         this.expansionSetCode = "CON";
         this.subtype.add("Zombie");
         this.subtype.add("Rat");
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DiscardEachPlayerEffect()));

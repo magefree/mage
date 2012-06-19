@@ -42,38 +42,38 @@ import mage.players.Player;
  */
 public class GainLifeEffect extends OneShotEffect<GainLifeEffect> {
 
-	private DynamicValue life;
+    private DynamicValue life;
 
     public GainLifeEffect(int life) {
         this(new StaticValue(life));
     }
 
-	public GainLifeEffect(DynamicValue life) {
-		super(Outcome.GainLife);
-		this.life = life;
-		setText();
-	}
+    public GainLifeEffect(DynamicValue life) {
+        super(Outcome.GainLife);
+        this.life = life;
+        setText();
+    }
 
-	public GainLifeEffect(final GainLifeEffect effect) {
-		super(effect);
-		this.life = effect.life.clone();
-	}
+    public GainLifeEffect(final GainLifeEffect effect) {
+        super(effect);
+        this.life = effect.life.clone();
+    }
 
-	@Override
-	public GainLifeEffect copy() {
-		return new GainLifeEffect(this);
-	}
+    @Override
+    public GainLifeEffect copy() {
+        return new GainLifeEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-		if (player != null) {
-			player.gainLife(life.calculate(game, source), game);
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+            player.gainLife(life.calculate(game, source), game);
+        }
+        return true;
+    }
 
-	private void setText() {
+    private void setText() {
         StringBuilder sb = new StringBuilder();
         String message = life.getMessage();
 
@@ -86,7 +86,7 @@ public class GainLifeEffect extends OneShotEffect<GainLifeEffect> {
             sb.append(message.equals("1") ? " equal to the number of " : " for each ");
             sb.append(message);
         }
-		staticText = sb.toString();
-	}
+        staticText = sb.toString();
+    }
 
 }

@@ -46,53 +46,53 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ChandrasOutrage extends CardImpl<ChandrasOutrage> {
 
-	public ChandrasOutrage(UUID ownerId) {
-		super(ownerId, 128, "Chandra's Outrage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}{R}");
-		this.expansionSetCode = "M11";
-		this.color.setRed(true);
-		this.getSpellAbility().addEffect(new ChandrasOutrageEffect());
-		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-	}
+    public ChandrasOutrage(UUID ownerId) {
+        super(ownerId, 128, "Chandra's Outrage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}{R}");
+        this.expansionSetCode = "M11";
+        this.color.setRed(true);
+        this.getSpellAbility().addEffect(new ChandrasOutrageEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+    }
 
-	public ChandrasOutrage(final ChandrasOutrage card) {
-		super(card);
-	}
+    public ChandrasOutrage(final ChandrasOutrage card) {
+        super(card);
+    }
 
-	@Override
-	public ChandrasOutrage copy() {
-		return new ChandrasOutrage(this);
-	}
+    @Override
+    public ChandrasOutrage copy() {
+        return new ChandrasOutrage(this);
+    }
 
 }
 
 class ChandrasOutrageEffect extends OneShotEffect<ChandrasOutrageEffect> {
 
-	public ChandrasOutrageEffect() {
-		super(Outcome.Damage);
-		staticText = "{this} deals 4 damage to target creature and 2 damage to that creature's controller";
-	}
+    public ChandrasOutrageEffect() {
+        super(Outcome.Damage);
+        staticText = "{this} deals 4 damage to target creature and 2 damage to that creature's controller";
+    }
 
-	public ChandrasOutrageEffect(final ChandrasOutrageEffect effect) {
-		super(effect);
-	}
-	
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getFirstTarget());
-		if (permanent != null) {
-			Player player = game.getPlayer(permanent.getControllerId());
-			if (player != null) {
-				permanent.damage(4, source.getSourceId(), game, true, false);
-				player.damage(2, source.getSourceId(), game, false, true);
-				return true;
-			}
-		}
-		return false;
-	}
+    public ChandrasOutrageEffect(final ChandrasOutrageEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public ChandrasOutrageEffect copy() {
-		return new ChandrasOutrageEffect(this);
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        if (permanent != null) {
+            Player player = game.getPlayer(permanent.getControllerId());
+            if (player != null) {
+                permanent.damage(4, source.getSourceId(), game, true, false);
+                player.damage(2, source.getSourceId(), game, false, true);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public ChandrasOutrageEffect copy() {
+        return new ChandrasOutrageEffect(this);
+    }
 
 }

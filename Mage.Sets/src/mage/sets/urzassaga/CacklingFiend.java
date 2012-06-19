@@ -47,52 +47,52 @@ import mage.players.Player;
  */
 public class CacklingFiend extends CardImpl<CacklingFiend> {
 
-	public CacklingFiend(UUID ownerId) {
-		super(ownerId, 121, "Cackling Fiend", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-		this.expansionSetCode = "USG";
-		this.subtype.add("Zombie");
-		this.color.setBlack(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(1);
+    public CacklingFiend(UUID ownerId) {
+        super(ownerId, 121, "Cackling Fiend", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
+        this.expansionSetCode = "USG";
+        this.subtype.add("Zombie");
+        this.color.setBlack(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-		this.addAbility(FlyingAbility.getInstance());
-		this.addAbility(new EntersBattlefieldTriggeredAbility(new CacklingFiendEffect(), false));
-	}
+        this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CacklingFiendEffect(), false));
+    }
 
-	public CacklingFiend(final CacklingFiend card) {
-		super(card);
-	}
+    public CacklingFiend(final CacklingFiend card) {
+        super(card);
+    }
 
-	@Override
-	public CacklingFiend copy() {
-		return new CacklingFiend(this);
-	}
+    @Override
+    public CacklingFiend copy() {
+        return new CacklingFiend(this);
+    }
 
 }
 
 class CacklingFiendEffect extends OneShotEffect<CacklingFiendEffect> {
 
-	public CacklingFiendEffect() {
-		super(Outcome.Discard);
-		staticText = "each opponent discards a card";
-	}
+    public CacklingFiendEffect() {
+        super(Outcome.Discard);
+        staticText = "each opponent discards a card";
+    }
 
-	public CacklingFiendEffect(final CacklingFiendEffect effect) {
-		super(effect);
-	}
+    public CacklingFiendEffect(final CacklingFiendEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		for (UUID playerId: game.getOpponents(source.getControllerId())) {
-			Player player = game.getPlayer(playerId);
-			player.discard(1, source, game);
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        for (UUID playerId: game.getOpponents(source.getControllerId())) {
+            Player player = game.getPlayer(playerId);
+            player.discard(1, source, game);
+        }
+        return true;
+    }
 
-	@Override
-	public CacklingFiendEffect copy() {
-		return new CacklingFiendEffect(this);
-	}
+    @Override
+    public CacklingFiendEffect copy() {
+        return new CacklingFiendEffect(this);
+    }
 
 }

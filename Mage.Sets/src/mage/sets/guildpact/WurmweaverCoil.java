@@ -67,11 +67,11 @@ public class WurmweaverCoil extends CardImpl<WurmweaverCoil> {
         this.subtype.add("Aura");
         this.color.setGreen(true);
         TargetPermanent auraTarget = new TargetCreaturePermanent(filter);
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Benefit));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		this.addAbility(ability);
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEnchantedEffect(6, 6, Constants.Duration.WhileOnBattlefield)));
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Benefit));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEnchantedEffect(6, 6, Constants.Duration.WhileOnBattlefield)));
         Ability activatedAbility = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CreateTokenEffect(new WurmweaverCoilToken(), 1), new ManaCostsImpl("{G}{G}{G}"));
         activatedAbility.addCost(new SacrificeSourceCost());
         this.addAbility(activatedAbility);

@@ -40,22 +40,22 @@ import mage.cards.CardImpl;
  */
 public class BaronyVampire extends CardImpl<BaronyVampire> {
 
-	public BaronyVampire(UUID ownerId) {
-		super(ownerId, 82, "Barony Vampire", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-		this.expansionSetCode = "M11";
-		this.color.setBlack(true);
-		this.subtype.add("Vampire");
-		this.power = new MageInt(3);
-		this.toughness = new MageInt(2);
-	}
+    public BaronyVampire(UUID ownerId) {
+        super(ownerId, 82, "Barony Vampire", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
+        this.expansionSetCode = "M11";
+        this.color.setBlack(true);
+        this.subtype.add("Vampire");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(2);
+    }
 
-	public BaronyVampire(final BaronyVampire card) {
-		super(card);
-	}
+    public BaronyVampire(final BaronyVampire card) {
+        super(card);
+    }
 
-	@Override
-	public BaronyVampire copy() {
-		return new BaronyVampire(this);
-	}
+    @Override
+    public BaronyVampire copy() {
+        return new BaronyVampire(this);
+    }
 
 }

@@ -72,274 +72,274 @@ import java.util.concurrent.TimeUnit;
  */
 public class TableController {
 
-	private final static Logger logger = Logger.getLogger(TableController.class);
+    private final static Logger logger = Logger.getLogger(TableController.class);
 
-	private UUID userId;
-	private UUID chatId;
-	private String controllerName;
-	private Table table;
-	private Match match;
-	private MatchOptions options;
-	private Tournament tournament;
-	private ConcurrentHashMap<UUID, UUID> userPlayerMap = new ConcurrentHashMap<UUID, UUID>();
-    
-	private ScheduledFuture<?> futureTimeout;
-	protected static ScheduledExecutorService timeoutExecutor = ThreadExecutor.getInstance().getTimeoutExecutor();
+    private UUID userId;
+    private UUID chatId;
+    private String controllerName;
+    private Table table;
+    private Match match;
+    private MatchOptions options;
+    private Tournament tournament;
+    private ConcurrentHashMap<UUID, UUID> userPlayerMap = new ConcurrentHashMap<UUID, UUID>();
 
-	public TableController(UUID roomId, UUID userId, MatchOptions options) {
-		this.userId = userId;
-		chatId = ChatManager.getInstance().createChatSession();
-		this.options = options;
-		match = GameFactory.getInstance().createMatch(options.getGameType(), options);
-		if (userId != null) {
-			User user = UserManager.getInstance().getUser(userId);
-			controllerName = user.getName();
-		} 
-		else
-			controllerName = "System";
-		table = new Table(roomId, options.getGameType(), options.getName(), controllerName, DeckValidatorFactory.getInstance().createDeckValidator(options.getDeckType()), options.getPlayerTypes(), match);
-		init();
-	}
+    private ScheduledFuture<?> futureTimeout;
+    protected static ScheduledExecutorService timeoutExecutor = ThreadExecutor.getInstance().getTimeoutExecutor();
 
-	public TableController(UUID roomId, UUID userId, TournamentOptions options) {
-		this.userId = userId;
-		chatId = ChatManager.getInstance().createChatSession();
-		tournament = TournamentFactory.getInstance().createTournament(options.getTournamentType(), options);
-		if (userId != null) {
-			User user = UserManager.getInstance().getUser(userId);
-			controllerName = user.getName();
-		} 
-		else
-			controllerName = "System";
-		table = new Table(roomId, options.getTournamentType(), options.getName(), controllerName, DeckValidatorFactory.getInstance().createDeckValidator(options.getMatchOptions().getDeckType()), options.getPlayerTypes(), tournament);
-	}
+    public TableController(UUID roomId, UUID userId, MatchOptions options) {
+        this.userId = userId;
+        chatId = ChatManager.getInstance().createChatSession();
+        this.options = options;
+        match = GameFactory.getInstance().createMatch(options.getGameType(), options);
+        if (userId != null) {
+            User user = UserManager.getInstance().getUser(userId);
+            controllerName = user.getName();
+        } 
+        else
+            controllerName = "System";
+        table = new Table(roomId, options.getGameType(), options.getName(), controllerName, DeckValidatorFactory.getInstance().createDeckValidator(options.getDeckType()), options.getPlayerTypes(), match);
+        init();
+    }
 
-	private void init() {
-		match.addTableEventListener(
-			new Listener<TableEvent> () {
-				@Override
-				public void event(TableEvent event) {
-					try {
-						switch (event.getEventType()) {
-							case SIDEBOARD:
-								sideboard(event.getPlayerId(), event.getDeck());
-								break;
-						}
-					} catch (MageException ex) {
-						logger.fatal("Table event listener error", ex);
-					}
-				}
-			}
-		);
-	}
+    public TableController(UUID roomId, UUID userId, TournamentOptions options) {
+        this.userId = userId;
+        chatId = ChatManager.getInstance().createChatSession();
+        tournament = TournamentFactory.getInstance().createTournament(options.getTournamentType(), options);
+        if (userId != null) {
+            User user = UserManager.getInstance().getUser(userId);
+            controllerName = user.getName();
+        } 
+        else
+            controllerName = "System";
+        table = new Table(roomId, options.getTournamentType(), options.getName(), controllerName, DeckValidatorFactory.getInstance().createDeckValidator(options.getMatchOptions().getDeckType()), options.getPlayerTypes(), tournament);
+    }
 
-	public synchronized boolean joinTournament(UUID userId, String name, String playerType, int skill) throws GameException {
-		if (table.getState() != TableState.WAITING) {
-			return false;
-		}
-		Seat seat = table.getNextAvailableSeat(playerType);
-		if (seat == null) {
-			throw new GameException("No available seats.");
-		}
-		Player player = createPlayer(name, seat.getPlayerType(), skill);
-		tournament.addPlayer(player, seat.getPlayerType());
-		table.joinTable(player, seat);
+    private void init() {
+        match.addTableEventListener(
+            new Listener<TableEvent> () {
+                @Override
+                public void event(TableEvent event) {
+                    try {
+                        switch (event.getEventType()) {
+                            case SIDEBOARD:
+                                sideboard(event.getPlayerId(), event.getDeck());
+                                break;
+                        }
+                    } catch (MageException ex) {
+                        logger.fatal("Table event listener error", ex);
+                    }
+                }
+            }
+        );
+    }
+
+    public synchronized boolean joinTournament(UUID userId, String name, String playerType, int skill) throws GameException {
+        if (table.getState() != TableState.WAITING) {
+            return false;
+        }
+        Seat seat = table.getNextAvailableSeat(playerType);
+        if (seat == null) {
+            throw new GameException("No available seats.");
+        }
+        Player player = createPlayer(name, seat.getPlayerType(), skill);
+        tournament.addPlayer(player, seat.getPlayerType());
+        table.joinTable(player, seat);
         User user = UserManager.getInstance().getUser(userId);
         user.addTable(player.getId(), table);
         user.joinedTable(table.getRoomId(), table.getId(), true);
-		logger.info("player joined " + player.getId());
-		//only add human players to sessionPlayerMap
-		if (seat.getPlayer().isHuman()) {
-			userPlayerMap.put(userId, player.getId());
-		}
+        logger.info("player joined " + player.getId());
+        //only add human players to sessionPlayerMap
+        if (seat.getPlayer().isHuman()) {
+            userPlayerMap.put(userId, player.getId());
+        }
 
-		return true;
-	}
+        return true;
+    }
 
-	public synchronized boolean joinTable(UUID userId, String name, String playerType, int skill, DeckCardLists deckList) throws MageException {
-		if (table.getState() != TableState.WAITING) {
-			return false;
-		}
-		Seat seat = table.getNextAvailableSeat(playerType);
-		if (seat == null) {
-			throw new GameException("No available seats.");
-		}
-		Deck deck = Deck.load(deckList);
-		if (!Main.isTestMode() && !table.getValidator().validate(deck)) {
-			throw new InvalidDeckException(name + " has an invalid deck for this format", table.getValidator().getInvalid());
-		}
-		
-		Player player = createPlayer(name, seat.getPlayerType(), skill);
-		match.addPlayer(player, deck);
-		table.joinTable(player, seat);
+    public synchronized boolean joinTable(UUID userId, String name, String playerType, int skill, DeckCardLists deckList) throws MageException {
+        if (table.getState() != TableState.WAITING) {
+            return false;
+        }
+        Seat seat = table.getNextAvailableSeat(playerType);
+        if (seat == null) {
+            throw new GameException("No available seats.");
+        }
+        Deck deck = Deck.load(deckList);
+        if (!Main.isTestMode() && !table.getValidator().validate(deck)) {
+            throw new InvalidDeckException(name + " has an invalid deck for this format", table.getValidator().getInvalid());
+        }
+
+        Player player = createPlayer(name, seat.getPlayerType(), skill);
+        match.addPlayer(player, deck);
+        table.joinTable(player, seat);
         User user = UserManager.getInstance().getUser(userId);
         user.addTable(player.getId(), table);
         user.joinedTable(table.getRoomId(), table.getId(), false);
-		logger.info("player joined " + player.getId());
-		//only add human players to sessionPlayerMap
-		if (seat.getPlayer().isHuman()) {
-			userPlayerMap.put(userId, player.getId());
-		}
+        logger.info("player joined " + player.getId());
+        //only add human players to sessionPlayerMap
+        if (seat.getPlayer().isHuman()) {
+            userPlayerMap.put(userId, player.getId());
+        }
 
-		return true;
-	}
+        return true;
+    }
 
-	public void addPlayer(UUID userId, Player player, String playerType, Deck deck) throws GameException  {
-		if (table.getState() != TableState.WAITING) {
-			return;
-		}
-		Seat seat = table.getNextAvailableSeat(playerType);
-		if (seat == null) {
-			throw new GameException("No available seats.");
-		}
-		match.addPlayer(player, deck);
-		table.joinTable(player, seat);
-		if (player.isHuman()) {
-			userPlayerMap.put(userId, player.getId());
-		}
-	}
-	
-	public synchronized boolean submitDeck(UUID userId, DeckCardLists deckList) throws MageException {
-		UUID playerId = userPlayerMap.get(userId);
-		if (table.getState() != TableState.SIDEBOARDING && table.getState() != TableState.CONSTRUCTING) {
-			return false;
-		}
-		Deck deck = Deck.load(deckList);
-		if (!Main.isTestMode() && !table.getValidator().validate(deck)) {
-			throw new InvalidDeckException("Invalid deck for this format", table.getValidator().getInvalid());
-		}
-		submitDeck(userId, playerId, deck);
-		return true;
-	}
+    public void addPlayer(UUID userId, Player player, String playerType, Deck deck) throws GameException  {
+        if (table.getState() != TableState.WAITING) {
+            return;
+        }
+        Seat seat = table.getNextAvailableSeat(playerType);
+        if (seat == null) {
+            throw new GameException("No available seats.");
+        }
+        match.addPlayer(player, deck);
+        table.joinTable(player, seat);
+        if (player.isHuman()) {
+            userPlayerMap.put(userId, player.getId());
+        }
+    }
 
-	public void updateDeck(UUID userId, DeckCardLists deckList) throws MageException {
-		UUID playerId = userPlayerMap.get(userId);
-		if (table.getState() != TableState.SIDEBOARDING && table.getState() != TableState.CONSTRUCTING) {
-			return;
-		}
-		Deck deck = Deck.load(deckList);
-		updateDeck(userId, playerId, deck);
-	}
+    public synchronized boolean submitDeck(UUID userId, DeckCardLists deckList) throws MageException {
+        UUID playerId = userPlayerMap.get(userId);
+        if (table.getState() != TableState.SIDEBOARDING && table.getState() != TableState.CONSTRUCTING) {
+            return false;
+        }
+        Deck deck = Deck.load(deckList);
+        if (!Main.isTestMode() && !table.getValidator().validate(deck)) {
+            throw new InvalidDeckException("Invalid deck for this format", table.getValidator().getInvalid());
+        }
+        submitDeck(userId, playerId, deck);
+        return true;
+    }
+
+    public void updateDeck(UUID userId, DeckCardLists deckList) throws MageException {
+        UUID playerId = userPlayerMap.get(userId);
+        if (table.getState() != TableState.SIDEBOARDING && table.getState() != TableState.CONSTRUCTING) {
+            return;
+        }
+        Deck deck = Deck.load(deckList);
+        updateDeck(userId, playerId, deck);
+    }
 
     private void submitDeck(UUID userId, UUID playerId, Deck deck) {
-		if (table.getState() == TableState.SIDEBOARDING) {
-			match.submitDeck(playerId, deck);
+        if (table.getState() == TableState.SIDEBOARDING) {
+            match.submitDeck(playerId, deck);
             UserManager.getInstance().getUser(userId).removeSideboarding(table.getId());
-		}
-		else {
-			TournamentManager.getInstance().submitDeck(tournament.getId(), playerId, deck);
+        }
+        else {
+            TournamentManager.getInstance().submitDeck(tournament.getId(), playerId, deck);
             UserManager.getInstance().getUser(userId).removeConstructing(table.getId());
-		}
-	}
+        }
+    }
 
     private void updateDeck(UUID userId, UUID playerId, Deck deck) {
-		if (table.getState() == TableState.SIDEBOARDING) {
-			match.updateDeck(playerId, deck);
-		}
-		else {
-			TournamentManager.getInstance().updateDeck(tournament.getId(), playerId, deck);
-		}
-	}
+        if (table.getState() == TableState.SIDEBOARDING) {
+            match.updateDeck(playerId, deck);
+        }
+        else {
+            TournamentManager.getInstance().updateDeck(tournament.getId(), playerId, deck);
+        }
+    }
 
     public boolean watchTable(UUID userId) {
-		if (table.getState() != TableState.DUELING) {
-			return false;
-		}
-		UserManager.getInstance().getUser(userId).watchGame(match.getGame().getId());
-		return true;
-	}
+        if (table.getState() != TableState.DUELING) {
+            return false;
+        }
+        UserManager.getInstance().getUser(userId).watchGame(match.getGame().getId());
+        return true;
+    }
 
-	public boolean replayTable(UUID userId) {
-		if (table.getState() != TableState.FINISHED) {
-			return false;
-		}
-		ReplayManager.getInstance().replayGame(table.getId(), userId);
-		return true;
-	}
+    public boolean replayTable(UUID userId) {
+        if (table.getState() != TableState.FINISHED) {
+            return false;
+        }
+        ReplayManager.getInstance().replayGame(table.getId(), userId);
+        return true;
+    }
 
-	private Player createPlayer(String name, String playerType, int skill) {
-		Player player;
-		if (options == null) {
-			player = PlayerFactory.getInstance().createPlayer(playerType, name, RangeOfInfluence.ALL, skill);
-		}
-		else {
-			player = PlayerFactory.getInstance().createPlayer(playerType, name, options.getRange(), skill);
-		}
+    private Player createPlayer(String name, String playerType, int skill) {
+        Player player;
+        if (options == null) {
+            player = PlayerFactory.getInstance().createPlayer(playerType, name, RangeOfInfluence.ALL, skill);
+        }
+        else {
+            player = PlayerFactory.getInstance().createPlayer(playerType, name, options.getRange(), skill);
+        }
         if (player != null)
             logger.info("Player created " + player.getId());
-		return player;
-	}
+        return player;
+    }
 
-	public void kill(UUID userId) {
-		leaveTable(userId);
-		userPlayerMap.remove(userId);
-	}
-	
-	public synchronized void leaveTable(UUID userId) {
-		if (table.getState() == TableState.WAITING || table.getState() == TableState.STARTING)
-			table.leaveTable(userPlayerMap.get(userId));
-	}
+    public void kill(UUID userId) {
+        leaveTable(userId);
+        userPlayerMap.remove(userId);
+    }
 
-	public synchronized void startMatch(UUID userId) {
-		if (userId.equals(this.userId)) {
-			startMatch();
-		}
-	}
+    public synchronized void leaveTable(UUID userId) {
+        if (table.getState() == TableState.WAITING || table.getState() == TableState.STARTING)
+            table.leaveTable(userPlayerMap.get(userId));
+    }
 
-	public synchronized void startChallenge(UUID userId, UUID challengeId) {
-		if (userId.equals(this.userId)) {
-			try {
-				match.startMatch();
-				match.startGame();
-				table.initGame();
-				GameOptions options = new GameOptions();
-				options.testMode = true;
-//				match.getGame().setGameOptions(options);
-				GameManager.getInstance().createGameSession(match.getGame(), userPlayerMap, table.getId(), null);
-				ChallengeManager.getInstance().prepareChallenge(getPlayerId(), match);
-				for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
-					UserManager.getInstance().getUser(entry.getKey()).gameStarted(match.getGame().getId(), entry.getValue());
-				}
-			} catch (GameException ex) {
-				logger.fatal(null, ex);
-			}
-		}
-	}
+    public synchronized void startMatch(UUID userId) {
+        if (userId.equals(this.userId)) {
+            startMatch();
+        }
+    }
 
-	private UUID getPlayerId() throws GameException {
-		UUID playerId = null;
-		for (Entry<UUID, UUID> entry : userPlayerMap.entrySet()) {
-			playerId = entry.getValue();
-			break;
-		}
-		if (playerId == null)
-			throw new GameException("Couldn't find a player in challenge mode.");
-		return playerId;
-	}
+    public synchronized void startChallenge(UUID userId, UUID challengeId) {
+        if (userId.equals(this.userId)) {
+            try {
+                match.startMatch();
+                match.startGame();
+                table.initGame();
+                GameOptions options = new GameOptions();
+                options.testMode = true;
+//                match.getGame().setGameOptions(options);
+                GameManager.getInstance().createGameSession(match.getGame(), userPlayerMap, table.getId(), null);
+                ChallengeManager.getInstance().prepareChallenge(getPlayerId(), match);
+                for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
+                    UserManager.getInstance().getUser(entry.getKey()).gameStarted(match.getGame().getId(), entry.getValue());
+                }
+            } catch (GameException ex) {
+                logger.fatal(null, ex);
+            }
+        }
+    }
 
-	public synchronized void startMatch() {
-		if (table.getState() == TableState.STARTING) {
-			try {
-				match.startMatch();
-				startGame(null);
-			} catch (GameException ex) {
-				logger.fatal("Error starting match ", ex);
-				match.endGame();
-			}
-		}
-	}
+    private UUID getPlayerId() throws GameException {
+        UUID playerId = null;
+        for (Entry<UUID, UUID> entry : userPlayerMap.entrySet()) {
+            playerId = entry.getValue();
+            break;
+        }
+        if (playerId == null)
+            throw new GameException("Couldn't find a player in challenge mode.");
+        return playerId;
+    }
 
-	private void startGame(UUID choosingPlayerId) throws GameException {
-		try {
-			match.startGame();
-			table.initGame();
-			GameManager.getInstance().createGameSession(match.getGame(), userPlayerMap, table.getId(), choosingPlayerId);
+    public synchronized void startMatch() {
+        if (table.getState() == TableState.STARTING) {
+            try {
+                match.startMatch();
+                startGame(null);
+            } catch (GameException ex) {
+                logger.fatal("Error starting match ", ex);
+                match.endGame();
+            }
+        }
+    }
+
+    private void startGame(UUID choosingPlayerId) throws GameException {
+        try {
+            match.startGame();
+            table.initGame();
+            GameManager.getInstance().createGameSession(match.getGame(), userPlayerMap, table.getId(), choosingPlayerId);
             String creator = null;
             String opponent = null;
-			for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
-				User user = UserManager.getInstance().getUser(entry.getKey());
-				if (user != null) {
-					user.gameStarted(match.getGame().getId(), entry.getValue());
+            for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
+                User user = UserManager.getInstance().getUser(entry.getKey());
+                if (user != null) {
+                    user.gameStarted(match.getGame().getId(), entry.getValue());
                     if (creator == null) {
                         creator = user.getName();
                     } else {
@@ -347,121 +347,121 @@ public class TableController {
                             opponent = user.getName();
                         }
                     }
-				}
-				else {
-					TableManager.getInstance().removeTable(table.getId());
-					GameManager.getInstance().removeGame(match.getGame().getId());
-					logger.warn("Unable to find player " + entry.getKey());
-					break;
-				}
-			}
+                }
+                else {
+                    TableManager.getInstance().removeTable(table.getId());
+                    GameManager.getInstance().removeGame(match.getGame().getId());
+                    logger.warn("Unable to find player " + entry.getKey());
+                    break;
+                }
+            }
             ServerMessagesUtil.getInstance().incGamesStarted();
 
             // log about game started
             LogServiceImpl.instance.log(LogKeys.KEY_GAME_STARTED, String.valueOf(userPlayerMap.size()), creator, opponent);
-		}
-		catch (Exception ex) {
-			logger.fatal("Error starting game", ex);
-			TableManager.getInstance().removeTable(table.getId());
-			GameManager.getInstance().removeGame(match.getGame().getId());
-		}
-	}
+        }
+        catch (Exception ex) {
+            logger.fatal("Error starting game", ex);
+            TableManager.getInstance().removeTable(table.getId());
+            GameManager.getInstance().removeGame(match.getGame().getId());
+        }
+    }
 
-	public synchronized void startTournament(UUID userId) {
-		try {
-			if (userId.equals(this.userId) && table.getState() == TableState.STARTING) {
-				TournamentManager.getInstance().createTournamentSession(tournament, userPlayerMap, table.getId());
-				for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
-					User user = UserManager.getInstance().getUser(entry.getKey());
-					user.tournamentStarted(tournament.getId(), entry.getValue());
-				}
-			}
-		}
-		catch (Exception ex) {
-			logger.fatal("Error starting tournament", ex);
-			TableManager.getInstance().removeTable(table.getId());
-			TournamentManager.getInstance().kill(tournament.getId(), userId);
-		}
-	}
+    public synchronized void startTournament(UUID userId) {
+        try {
+            if (userId.equals(this.userId) && table.getState() == TableState.STARTING) {
+                TournamentManager.getInstance().createTournamentSession(tournament, userPlayerMap, table.getId());
+                for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
+                    User user = UserManager.getInstance().getUser(entry.getKey());
+                    user.tournamentStarted(tournament.getId(), entry.getValue());
+                }
+            }
+        }
+        catch (Exception ex) {
+            logger.fatal("Error starting tournament", ex);
+            TableManager.getInstance().removeTable(table.getId());
+            TournamentManager.getInstance().kill(tournament.getId(), userId);
+        }
+    }
 
-	public void startDraft(Draft draft) {
-		table.initDraft();
-		DraftManager.getInstance().createDraftSession(draft, userPlayerMap, table.getId());
-		for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
-			UserManager.getInstance().getUser(entry.getKey()).draftStarted(draft.getId(), entry.getValue());
-		}
-	}
+    public void startDraft(Draft draft) {
+        table.initDraft();
+        DraftManager.getInstance().createDraftSession(draft, userPlayerMap, table.getId());
+        for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
+            UserManager.getInstance().getUser(entry.getKey()).draftStarted(draft.getId(), entry.getValue());
+        }
+    }
 
-	private void sideboard(UUID playerId, Deck deck) throws MageException {
-		for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
-			if (entry.getValue().equals(playerId)) {
-				User user = UserManager.getInstance().getUser(entry.getKey());
+    private void sideboard(UUID playerId, Deck deck) throws MageException {
+        for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
+            if (entry.getValue().equals(playerId)) {
+                User user = UserManager.getInstance().getUser(entry.getKey());
                 int remaining = (int) futureTimeout.getDelay(TimeUnit.SECONDS);
                 if (user != null)
-					user.sideboard(deck, table.getId(), remaining, options.isLimited());
-				break;
-			}
-		}
-	}
+                    user.sideboard(deck, table.getId(), remaining, options.isLimited());
+                break;
+            }
+        }
+    }
 
     public int getRemainingTime() {
         return (int) futureTimeout.getDelay(TimeUnit.SECONDS);
     }    
-    
-	public void construct() {
-		table.construct();
-	}
-    
+
+    public void construct() {
+        table.construct();
+    }
+
     public MatchOptions getOptions() {
         return options;
     }
 
-	public void endGame() {
-		UUID choosingPlayerId = match.getChooser();
-		match.endGame();
-		table.endGame();
+    public void endGame() {
+        UUID choosingPlayerId = match.getChooser();
+        match.endGame();
+        table.endGame();
         //if (!match.getGame().isSimulation())
             //GameManager.getInstance().saveGame(match.getGame().getId());
-		GameManager.getInstance().removeGame(match.getGame().getId());
-		try {
-			if (!match.isMatchOver()) {
-				table.sideboard();
+        GameManager.getInstance().removeGame(match.getGame().getId());
+        try {
+            if (!match.isMatchOver()) {
+                table.sideboard();
                 setupTimeout(Match.SIDEBOARD_TIME);
-				match.sideboard();
+                match.sideboard();
                 cancelTimeout();
-				startGame(choosingPlayerId);
-			}
-			else {
-				GamesRoomManager.getInstance().removeTable(table.getId());
+                startGame(choosingPlayerId);
+            }
+            else {
+                GamesRoomManager.getInstance().removeTable(table.getId());
                 match.getGames().clear();
                 match = null;
                 table = null;
-			}
-		} catch (GameException ex) {
-			logger.fatal(null, ex);
-		}
-	}
+            }
+        } catch (GameException ex) {
+            logger.fatal(null, ex);
+        }
+    }
 
-	private synchronized void setupTimeout(int seconds) {
-		cancelTimeout();
-		if (seconds > 0) {
-			futureTimeout = timeoutExecutor.schedule(
-				new Runnable() {
-					@Override
-					public void run() {
-						autoSideboard();
-					}
-				},
-				seconds, TimeUnit.SECONDS
-			);
-		}
-	}
-    
-	private synchronized void cancelTimeout() {
-		if (futureTimeout != null) {
-			futureTimeout.cancel(false);
-		}
-	}
+    private synchronized void setupTimeout(int seconds) {
+        cancelTimeout();
+        if (seconds > 0) {
+            futureTimeout = timeoutExecutor.schedule(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        autoSideboard();
+                    }
+                },
+                seconds, TimeUnit.SECONDS
+            );
+        }
+    }
+
+    private synchronized void cancelTimeout() {
+        if (futureTimeout != null) {
+            futureTimeout.cancel(false);
+        }
+    }
 
     private void autoSideboard() {
         for (MatchPlayer player: match.getPlayers()) {
@@ -469,47 +469,47 @@ public class TableController {
                 match.submitDeck(player.getPlayer().getId(), player.generateDeck());
         }
     }
-    
+
     public void endDraft(Draft draft) {
-		for (DraftPlayer player: draft.getPlayers()) {
-			tournament.getPlayer(player.getPlayer().getId()).setDeck(player.getDeck());
-		}
-		tournament.nextStep();
-	}
+        for (DraftPlayer player: draft.getPlayers()) {
+            tournament.getPlayer(player.getPlayer().getId()).setDeck(player.getDeck());
+        }
+        tournament.nextStep();
+    }
 
-	public void endTournament(Tournament tournament) {
-		//TODO: implement this
-	}
+    public void endTournament(Tournament tournament) {
+        //TODO: implement this
+    }
 
-	public void swapSeats(int seatNum1, int seatNum2) {
-		if (table.getState() == TableState.STARTING) {
-			if (seatNum1 >= 0 && seatNum2 >= 0 && seatNum1 < table.getSeats().length && seatNum2 < table.getSeats().length) {
-				Player swapPlayer = table.getSeats()[seatNum1].getPlayer();
-				String swapType = table.getSeats()[seatNum1].getPlayerType();
-				table.getSeats()[seatNum1].setPlayer(table.getSeats()[seatNum2].getPlayer());
-				table.getSeats()[seatNum1].setPlayerType(table.getSeats()[seatNum2].getPlayerType());
-				table.getSeats()[seatNum2].setPlayer(swapPlayer);
-				table.getSeats()[seatNum2].setPlayerType(swapType);
-			}
-		}
-	}
+    public void swapSeats(int seatNum1, int seatNum2) {
+        if (table.getState() == TableState.STARTING) {
+            if (seatNum1 >= 0 && seatNum2 >= 0 && seatNum1 < table.getSeats().length && seatNum2 < table.getSeats().length) {
+                Player swapPlayer = table.getSeats()[seatNum1].getPlayer();
+                String swapType = table.getSeats()[seatNum1].getPlayerType();
+                table.getSeats()[seatNum1].setPlayer(table.getSeats()[seatNum2].getPlayer());
+                table.getSeats()[seatNum1].setPlayerType(table.getSeats()[seatNum2].getPlayerType());
+                table.getSeats()[seatNum2].setPlayer(swapPlayer);
+                table.getSeats()[seatNum2].setPlayerType(swapType);
+            }
+        }
+    }
 
-	public boolean isOwner(UUID userId) {
+    public boolean isOwner(UUID userId) {
         if (userId == null)
             return false;
-		return userId.equals(this.userId);
-	}
+        return userId.equals(this.userId);
+    }
 
-	public Table getTable() {
-		return table;
-	}
+    public Table getTable() {
+        return table;
+    }
 
-	public UUID getChatId() {
-		return chatId;
-	}
+    public UUID getChatId() {
+        return chatId;
+    }
 
-	public Match getMatch() {
-		return match;
-	}
+    public Match getMatch() {
+        return match;
+    }
 
 }

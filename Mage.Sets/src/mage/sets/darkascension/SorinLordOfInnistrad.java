@@ -63,14 +63,14 @@ import java.util.UUID;
  */
 public class SorinLordOfInnistrad extends CardImpl<SorinLordOfInnistrad> {
 
-	private static final FilterPermanent filter = new FilterPermanent("creature or planeswalker");
+    private static final FilterPermanent filter = new FilterPermanent("creature or planeswalker");
 
-	static {
-		filter.getCardType().add(CardType.CREATURE);
-		filter.getCardType().add(CardType.PLANESWALKER);
+    static {
+        filter.getCardType().add(CardType.CREATURE);
+        filter.getCardType().add(CardType.PLANESWALKER);
         filter.setScopeCardType(Filter.ComparisonScope.Any);
-	}
-    
+    }
+
     public SorinLordOfInnistrad(UUID ownerId) {
         super(ownerId, 142, "Sorin, Lord of Innistrad", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{B}");
         this.expansionSetCode = "DKA";
@@ -83,10 +83,10 @@ public class SorinLordOfInnistrad extends CardImpl<SorinLordOfInnistrad> {
 
         // +1: Put a 1/1 black Vampire creature token with lifelink onto the battlefield.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new VampireToken()), 1));
-        
+
         // -2: You get an emblem with "Creatures you control get +1/+0."
-		this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new SorinEmblem()), -2));
-        
+        this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new SorinEmblem()), -2));
+
         // -6: Destroy up to three target creatures and/or other planeswalkers. Return each card put into a graveyard this way to the battlefield under your control.
         LoyaltyAbility ability = new LoyaltyAbility(new SorinLordOfInnistradEffect(), -6);
         ability.addTarget(new TargetPermanent(0, 3, filter, false));
@@ -117,11 +117,11 @@ class VampireToken extends Token {
 
 class SorinEmblem extends Emblem {
 
-	public SorinEmblem() {
+    public SorinEmblem() {
         BoostControlledEffect effect = new BoostControlledEffect(1, 0, Duration.EndOfGame);
-		Ability ability = new SimpleStaticAbility(Zone.COMMAND, effect);
-		this.getAbilities().add(ability);
-	}
+        Ability ability = new SimpleStaticAbility(Zone.COMMAND, effect);
+        this.getAbilities().add(ability);
+    }
 }
 
 class SorinLordOfInnistradEffect extends OneShotEffect<SorinLordOfInnistradEffect> {
@@ -159,7 +159,7 @@ class SorinLordOfInnistradEffect extends OneShotEffect<SorinLordOfInnistradEffec
                 }
             }
         }
-        
+
         return true;
     }
 

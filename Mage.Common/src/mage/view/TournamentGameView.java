@@ -41,49 +41,49 @@ import mage.game.tournament.TournamentPairing;
 public class TournamentGameView implements Serializable {
     private static final long serialVersionUID = 1L;
 
-	private int roundNum;
-	private UUID matchId;
-	private UUID gameId;
-	private String state;
-	private String result;
-	private String players;
+    private int roundNum;
+    private UUID matchId;
+    private UUID gameId;
+    private String state;
+    private String result;
+    private String players;
 
-	TournamentGameView(int roundNum, TournamentPairing pair, Game game) {
-		this.roundNum = roundNum;
-		this.matchId = pair.getMatch().getId();
-		this.gameId = game.getId();
-		this.players = pair.getPlayer1().getPlayer().getName() + " " + pair.getPlayer2().getPlayer().getName();
-		if (game.isGameOver()) {
-			this.state = "Finished";
-			this.result = game.getWinner();
-		} 
-		else {
-			this.state = "Dueling";
-			this.result = "";
-		}
-	}
+    TournamentGameView(int roundNum, TournamentPairing pair, Game game) {
+        this.roundNum = roundNum;
+        this.matchId = pair.getMatch().getId();
+        this.gameId = game.getId();
+        this.players = pair.getPlayer1().getPlayer().getName() + " " + pair.getPlayer2().getPlayer().getName();
+        if (game.isGameOver()) {
+            this.state = "Finished";
+            this.result = game.getWinner();
+        } 
+        else {
+            this.state = "Dueling";
+            this.result = "";
+        }
+    }
 
-	public int getRoundNum() {
-		return roundNum;
-	}
+    public int getRoundNum() {
+        return roundNum;
+    }
 
-	public UUID getMatchId() {
-		return this.matchId;
-	}
+    public UUID getMatchId() {
+        return this.matchId;
+    }
 
-	public UUID getGameId() {
-		return this.gameId;
-	}
+    public UUID getGameId() {
+        return this.gameId;
+    }
 
-	public String getState() {
-		return this.state;
-	}
+    public String getState() {
+        return this.state;
+    }
 
-	public String getResult() {
-		return this.result;
-	}
+    public String getResult() {
+        return this.result;
+    }
 
-	public String getPlayers() {
-		return this.players;
-	}
+    public String getPlayers() {
+        return this.players;
+    }
 }

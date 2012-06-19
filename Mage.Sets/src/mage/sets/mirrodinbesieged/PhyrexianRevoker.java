@@ -56,28 +56,28 @@ import mage.sets.Sets;
  */
 public class PhyrexianRevoker extends CardImpl<PhyrexianRevoker> {
 
-	public PhyrexianRevoker(UUID ownerId) {
-		super(ownerId, 122, "Phyrexian Revoker", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
-		this.expansionSetCode = "MBS";
-		this.subtype.add("Horror");
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(1);
+    public PhyrexianRevoker(UUID ownerId) {
+        super(ownerId, 122, "Phyrexian Revoker", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
+        this.expansionSetCode = "MBS";
+        this.subtype.add("Horror");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
 
         // As Phyrexian Revoker enters the battlefield, name a nonland card.
-		this.addAbility(new EntersBattlefieldTriggeredAbility(new PhyrexianRevokerEffect1()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new PhyrexianRevokerEffect1()));
 
         // Activated abilities of sources with the chosen name can't be activated.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhyrexianRevokerEffect2()));
-	}
+    }
 
-	public PhyrexianRevoker(final PhyrexianRevoker card) {
-		super(card);
-	}
+    public PhyrexianRevoker(final PhyrexianRevoker card) {
+        super(card);
+    }
 
-	@Override
-	public PhyrexianRevoker copy() {
-		return new PhyrexianRevoker(this);
-	}
+    @Override
+    public PhyrexianRevoker copy() {
+        return new PhyrexianRevoker(this);
+    }
 
 }
 
@@ -87,14 +87,14 @@ class PhyrexianRevokerEffect1 extends OneShotEffect<PhyrexianRevokerEffect1> {
         super(Outcome.Detriment);
         staticText = "name a nonland card";
     }
-    
+
     public PhyrexianRevokerEffect1(final PhyrexianRevokerEffect1 effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
-		Player controller = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Choice cardChoice = new ChoiceImpl();
             cardChoice.setChoices(Sets.getNonLandCardNames());
@@ -113,7 +113,7 @@ class PhyrexianRevokerEffect1 extends OneShotEffect<PhyrexianRevokerEffect1> {
     public PhyrexianRevokerEffect1 copy() {
         return new PhyrexianRevokerEffect1(this);
     }
-    
+
 }
 
 class PhyrexianRevokerEffect2 extends ReplacementEffectImpl<PhyrexianRevokerEffect2> {
@@ -122,11 +122,11 @@ class PhyrexianRevokerEffect2 extends ReplacementEffectImpl<PhyrexianRevokerEffe
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Activated abilities of sources with the chosen name can't be activated";
     }
-    
+
     public PhyrexianRevokerEffect2(final PhyrexianRevokerEffect2 effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         return true;
@@ -152,5 +152,5 @@ class PhyrexianRevokerEffect2 extends ReplacementEffectImpl<PhyrexianRevokerEffe
         }
         return false;
     }
-    
+
 }

@@ -57,91 +57,91 @@ import mage.view.SimpleCardsView;
  */
 public class ShowCardsDialog extends MageDialog implements MouseListener {
 
-	private boolean reloaded = false;
+    private boolean reloaded = false;
 
-	/**
-	 * Creates new form ShowCardsDialog
-	 */
-	public ShowCardsDialog() {
-		initComponents();
-		this.setModal(false);
-	}
+    /**
+     * Creates new form ShowCardsDialog
+     */
+    public ShowCardsDialog() {
+        initComponents();
+        this.setModal(false);
+    }
 
-	public void loadCards(String name, SimpleCardsView showCards, BigCard bigCard, CardDimensions dimension, UUID gameId, boolean modal) {
+    public void loadCards(String name, SimpleCardsView showCards, BigCard bigCard, CardDimensions dimension, UUID gameId, boolean modal) {
         loadCards(name, CardsViewUtil.convertSimple(showCards), bigCard, dimension, gameId, modal);
     }
-    
+
     public void loadCards(String name, CardsView showCards, BigCard bigCard, CardDimensions dimension, UUID gameId, boolean modal) {
-		this.reloaded = true;
-		this.title = name;
-		cardArea.loadCards(showCards, bigCard, dimension, gameId, this);
-		if (getParent() != MageFrame.getDesktop() /*|| this.isClosed*/) {
-			MageFrame.getDesktop().add(this, JLayeredPane.POPUP_LAYER);
-		}
-		pack();
+        this.reloaded = true;
+        this.title = name;
+        cardArea.loadCards(showCards, bigCard, dimension, gameId, this);
+        if (getParent() != MageFrame.getDesktop() /*|| this.isClosed*/) {
+            MageFrame.getDesktop().add(this, JLayeredPane.POPUP_LAYER);
+        }
+        pack();
 
-		this.revalidate();
-		this.repaint();
-		this.setModal(modal);
+        this.revalidate();
+        this.repaint();
+        this.setModal(modal);
 
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				int width = ShowCardsDialog.this.getWidth();
-				int height = ShowCardsDialog.this.getWidth();
-				if (width > 0 && height > 0) {
-					Point centered = SettingsManager.getInstance().getComponentPosition(width, height);
-					ShowCardsDialog.this.setLocation(centered.x, centered.y);
-					GuiDisplayUtil.keepComponentInsideScreen(centered.x, centered.y, ShowCardsDialog.this);
-				}
-				ShowCardsDialog.this.setVisible(true);
-			}
-		});
-	}
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                int width = ShowCardsDialog.this.getWidth();
+                int height = ShowCardsDialog.this.getWidth();
+                if (width > 0 && height > 0) {
+                    Point centered = SettingsManager.getInstance().getComponentPosition(width, height);
+                    ShowCardsDialog.this.setLocation(centered.x, centered.y);
+                    GuiDisplayUtil.keepComponentInsideScreen(centered.x, centered.y, ShowCardsDialog.this);
+                }
+                ShowCardsDialog.this.setVisible(true);
+            }
+        });
+    }
 
-	public boolean isReloaded() {
-		return this.reloaded;
-	}
+    public boolean isReloaded() {
+        return this.reloaded;
+    }
 
-	public void clearReloaded() {
-		this.reloaded = false;
-	}
+    public void clearReloaded() {
+        this.reloaded = false;
+    }
 
-	private void initComponents() {
+    private void initComponents() {
 
-		cardArea = new CardArea();
+        cardArea = new CardArea();
 
-		setClosable(true);
-		setResizable(true);
-		getContentPane().setLayout(new java.awt.BorderLayout());
-		getContentPane().add(cardArea, java.awt.BorderLayout.CENTER);
+        setClosable(true);
+        setResizable(true);
+        getContentPane().setLayout(new java.awt.BorderLayout());
+        getContentPane().add(cardArea, java.awt.BorderLayout.CENTER);
         this.addMouseListener(this);
 
-		pack();
-	}
-	
-	private CardArea cardArea;
+        pack();
+    }
 
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		this.hideDialog();
-	}
+    private CardArea cardArea;
 
-	@Override
-	public void mousePressed(MouseEvent e) {
-		this.hideDialog();
-	}
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        this.hideDialog();
+    }
 
-	@Override
-	public void mouseReleased(MouseEvent e) {
-	}
+    @Override
+    public void mousePressed(MouseEvent e) {
+        this.hideDialog();
+    }
 
-	@Override
-	public void mouseEntered(MouseEvent e) {
-	}
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    }
 
-	@Override
-	public void mouseExited(MouseEvent e) {
-	}
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+    }
 
 }

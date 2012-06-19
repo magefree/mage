@@ -60,7 +60,7 @@ public class VentSentinel extends CardImpl<VentSentinel> {
         this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
-        
+
         this.addAbility(DefenderAbility.getInstance());
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)), new ManaCostsImpl("{1}{R}"));
         ability.addCost(new TapSourceCost());

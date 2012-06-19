@@ -44,27 +44,27 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class HonorOfThePure extends CardImpl<HonorOfThePure> {
 
-	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("White creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("White creatures");
 
-	static {
-		filter.setUseColor(true);
-		filter.getColor().setWhite(true);
-	}
+    static {
+        filter.setUseColor(true);
+        filter.getColor().setWhite(true);
+    }
 
-	public HonorOfThePure(UUID ownerId) {
-		super(ownerId, 16, "Honor of the Pure", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
-		this.expansionSetCode = "M10";
-		this.color.setWhite(true);
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
-	}
+    public HonorOfThePure(UUID ownerId) {
+        super(ownerId, 16, "Honor of the Pure", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
+        this.expansionSetCode = "M10";
+        this.color.setWhite(true);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
+    }
 
-	public HonorOfThePure(final HonorOfThePure card) {
-		super(card);
-	}
+    public HonorOfThePure(final HonorOfThePure card) {
+        super(card);
+    }
 
-	@Override
-	public HonorOfThePure copy() {
-		return new HonorOfThePure(this);
-	}
+    @Override
+    public HonorOfThePure copy() {
+        return new HonorOfThePure(this);
+    }
 
 }

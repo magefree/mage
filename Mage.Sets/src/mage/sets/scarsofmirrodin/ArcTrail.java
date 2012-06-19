@@ -53,11 +53,11 @@ public class ArcTrail extends CardImpl<ArcTrail> {
         super(ownerId, 81, "Arc Trail", Rarity.UNCOMMON, new CardType[] { CardType.SORCERY }, "{1}{R}");
         this.expansionSetCode = "SOM";
 
-		this.color.setRed(true);
+        this.color.setRed(true);
 
-		Target target = new TargetCreatureOrPlayer(2);
-		this.getSpellAbility().addTarget(target);
-		this.getSpellAbility().addEffect(ArcTrailEffect.getInstance());
+        Target target = new TargetCreatureOrPlayer(2);
+        this.getSpellAbility().addTarget(target);
+        this.getSpellAbility().addEffect(ArcTrailEffect.getInstance());
     }
 
     public ArcTrail (final ArcTrail card) {
@@ -73,51 +73,51 @@ public class ArcTrail extends CardImpl<ArcTrail> {
 
 class ArcTrailEffect extends OneShotEffect {
 
-	private static final ArcTrailEffect fINSTANCE =  new ArcTrailEffect();
+    private static final ArcTrailEffect fINSTANCE =  new ArcTrailEffect();
 
-	private Object readResolve() throws ObjectStreamException {
-		return fINSTANCE;
-	}
+    private Object readResolve() throws ObjectStreamException {
+        return fINSTANCE;
+    }
 
-	public static ArcTrailEffect getInstance() {
-		return fINSTANCE;
-	}
+    public static ArcTrailEffect getInstance() {
+        return fINSTANCE;
+    }
 
-	private ArcTrailEffect ( ) {
-		super(Outcome.Damage);
-		staticText = "{source} deals 2 damage to target creature or player and 1 damage to another target creature or player.";
-	}
+    private ArcTrailEffect ( ) {
+        super(Outcome.Damage);
+        staticText = "{source} deals 2 damage to target creature or player and 1 damage to another target creature or player.";
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
 
-		boolean applied = false;
-		boolean twoDamageDone = false;
-		int damage = 2;
+        boolean applied = false;
+        boolean twoDamageDone = false;
+        int damage = 2;
 
-		for ( UUID target : targetPointer.getTargets(game, source) ) {
-			Permanent permanent = game.getPermanent(target);
+        for ( UUID target : targetPointer.getTargets(game, source) ) {
+            Permanent permanent = game.getPermanent(target);
 
-			if ( twoDamageDone ) {
-				damage = 1;
-			}
+            if ( twoDamageDone ) {
+                damage = 1;
+            }
 
-			if (permanent != null) {
-				applied |= (permanent.damage( damage, source.getSourceId(), game, false, true ) > 0);
-			}
-			Player player = game.getPlayer(target);
-			if (player != null) {
-				applied |= (player.damage( damage, source.getSourceId(), game, false, true ) > 0);
-			}
+            if (permanent != null) {
+                applied |= (permanent.damage( damage, source.getSourceId(), game, false, true ) > 0);
+            }
+            Player player = game.getPlayer(target);
+            if (player != null) {
+                applied |= (player.damage( damage, source.getSourceId(), game, false, true ) > 0);
+            }
 
-			twoDamageDone = true;
-		}
-		return applied;
-	}
+            twoDamageDone = true;
+        }
+        return applied;
+    }
 
-	@Override
-	public Effect copy() {
-		return fINSTANCE;
-	}
+    @Override
+    public Effect copy() {
+        return fINSTANCE;
+    }
 
 }

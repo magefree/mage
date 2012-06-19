@@ -51,63 +51,63 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class PrimevalTitan extends CardImpl<PrimevalTitan> {
 
-	public PrimevalTitan(UUID ownerId) {
-		super(ownerId, 192, "Primeval Titan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Giant");
-		this.color.setGreen(true);
-		this.power = new MageInt(6);
-		this.toughness = new MageInt(6);
+    public PrimevalTitan(UUID ownerId) {
+        super(ownerId, 192, "Primeval Titan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Giant");
+        this.color.setGreen(true);
+        this.power = new MageInt(6);
+        this.toughness = new MageInt(6);
 
-		this.addAbility(TrampleAbility.getInstance());
-		this.addAbility(new PrimevalTitanAbility());
-	}
+        this.addAbility(TrampleAbility.getInstance());
+        this.addAbility(new PrimevalTitanAbility());
+    }
 
-	public PrimevalTitan(final PrimevalTitan card) {
-		super(card);
-	}
+    public PrimevalTitan(final PrimevalTitan card) {
+        super(card);
+    }
 
-	@Override
-	public PrimevalTitan copy() {
-		return new PrimevalTitan(this);
-	}
+    @Override
+    public PrimevalTitan copy() {
+        return new PrimevalTitan(this);
+    }
 
 }
 
 class PrimevalTitanAbility extends TriggeredAbilityImpl<PrimevalTitanAbility> {
 
-	public PrimevalTitanAbility() {
-		super(Zone.BATTLEFIELD, null, true);
-		TargetCardInLibrary target = new TargetCardInLibrary(2, new FilterLandCard());
-		this.addEffect(new SearchLibraryPutInPlayEffect(target, true, Outcome.PutLandInPlay));
-	}
+    public PrimevalTitanAbility() {
+        super(Zone.BATTLEFIELD, null, true);
+        TargetCardInLibrary target = new TargetCardInLibrary(2, new FilterLandCard());
+        this.addEffect(new SearchLibraryPutInPlayEffect(target, true, Outcome.PutLandInPlay));
+    }
 
-	public PrimevalTitanAbility(final PrimevalTitanAbility ability) {
-		super(ability);
-	}
+    public PrimevalTitanAbility(final PrimevalTitanAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public PrimevalTitanAbility copy() {
-		return new PrimevalTitanAbility(this);
-	}
+    @Override
+    public PrimevalTitanAbility copy() {
+        return new PrimevalTitanAbility(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
-			return true;
-		}
-		if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId()) ) {
-			ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-			if (zEvent.getToZone() == Zone.BATTLEFIELD) {
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
+            return true;
+        }
+        if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId()) ) {
+            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+            if (zEvent.getToZone() == Zone.BATTLEFIELD) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "Whenever {this} enters the battlefield or attacks, you may search your library for up to two land cards, put them onto the battlefield tapped, then shuffle your library.";
-	}
+    @Override
+    public String getRule() {
+        return "Whenever {this} enters the battlefield or attacks, you may search your library for up to two land cards, put them onto the battlefield tapped, then shuffle your library.";
+    }
 
 }

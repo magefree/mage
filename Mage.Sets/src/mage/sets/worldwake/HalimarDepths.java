@@ -43,23 +43,23 @@ import mage.cards.CardImpl;
  */
 public class HalimarDepths extends CardImpl<HalimarDepths> {
 
-	public HalimarDepths(UUID ownerId) {
-		super(ownerId, 137, "Halimar Depths", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
-		this.expansionSetCode = "WWK";
+    public HalimarDepths(UUID ownerId) {
+        super(ownerId, 137, "Halimar Depths", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
+        this.expansionSetCode = "WWK";
                 // Halimar Depths enters the battlefield tapped.
                 this.addAbility(new EntersBattlefieldTappedAbility());
                 // When Halimar Depths enters the battlefield, look at the top three cards of your library, then put them back in any order.
-		this.addAbility(new EntersBattlefieldTriggeredAbility(new LookLibraryControllerEffect(3)));
-		this.addAbility(new BlueManaAbility());
-	}
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new LookLibraryControllerEffect(3)));
+        this.addAbility(new BlueManaAbility());
+    }
 
-	public HalimarDepths(final HalimarDepths card) {
-		super(card);
-	}
+    public HalimarDepths(final HalimarDepths card) {
+        super(card);
+    }
 
-	@Override
-	public HalimarDepths copy() {
-		return new HalimarDepths(this);
-	}
+    @Override
+    public HalimarDepths copy() {
+        return new HalimarDepths(this);
+    }
 
 }

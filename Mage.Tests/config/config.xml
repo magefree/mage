@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../Config.xsd">
-	<server serverAddress="0.0.0.0" serverName="mage-server" port="17171" maxGameThreads="10" maxSecondsIdle="600"/>
-	<playerTypes>
-		<playerType name="Computer - minimax hybrid" jar="mage-player-aiminimax.jar" className="mage.player.ai.ComputerPlayer3"/>
-		<playerType name="Computer - mad" jar="mage-player-ai-ma.jar" className="mage.player.ai.ComputerPlayer7"/>
-		<playerType name="Computer - monte carlo" jar="mage-player-aimcts.jar" className="mage.player.ai.ComputerPlayerMCTS"/>
-	</playerTypes>
-	<gameTypes>
-		<gameType name="Two Player Duel" jar="mage-game-twoplayerduel.jar" className="mage.game.TwoPlayerMatch" typeName="mage.game.TwoPlayerDuelType"/>
-	</gameTypes>
-	<tournamentTypes>
-		<tournamentType name="Elimination Booster Draft" jar="mage-tournament-booster-draft.jar" className="mage.tournament.BoosterDraftEliminationTournament" typeName="mage.tournament.BoosterDraftEliminationTournamentType"/>
-	</tournamentTypes>
-	<deckTypes>
-		<deckType name="Constructed" jar="mage-deck-constructed.jar" className="mage.deck.Constructed"/>
-		<deckType name="Limited" jar="mage-deck-limited.jar" className="mage.deck.Limited"/>
-	</deckTypes>
+    <server serverAddress="0.0.0.0" serverName="mage-server" port="17171" maxGameThreads="10" maxSecondsIdle="600"/>
+    <playerTypes>
+        <playerType name="Computer - minimax hybrid" jar="mage-player-aiminimax.jar" className="mage.player.ai.ComputerPlayer3"/>
+        <playerType name="Computer - mad" jar="mage-player-ai-ma.jar" className="mage.player.ai.ComputerPlayer7"/>
+        <playerType name="Computer - monte carlo" jar="mage-player-aimcts.jar" className="mage.player.ai.ComputerPlayerMCTS"/>
+    </playerTypes>
+    <gameTypes>
+        <gameType name="Two Player Duel" jar="mage-game-twoplayerduel.jar" className="mage.game.TwoPlayerMatch" typeName="mage.game.TwoPlayerDuelType"/>
+    </gameTypes>
+    <tournamentTypes>
+        <tournamentType name="Elimination Booster Draft" jar="mage-tournament-booster-draft.jar" className="mage.tournament.BoosterDraftEliminationTournament" typeName="mage.tournament.BoosterDraftEliminationTournamentType"/>
+    </tournamentTypes>
+    <deckTypes>
+        <deckType name="Constructed" jar="mage-deck-constructed.jar" className="mage.deck.Constructed"/>
+        <deckType name="Limited" jar="mage-deck-limited.jar" className="mage.deck.Limited"/>
+    </deckTypes>
 </config>

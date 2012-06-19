@@ -42,18 +42,18 @@ import mage.game.Game;
  */
 public class InvertCondition implements Condition {
 
-	private Condition condition;
+    private Condition condition;
 
-	public InvertCondition(Condition condition) {
-		this.condition = condition;
-	}
+    public InvertCondition(Condition condition) {
+        this.condition = condition;
+    }
 
-	/*
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return !condition.apply(game, source);
-	}
+    /*
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return !condition.apply(game, source);
+    }
 
 }

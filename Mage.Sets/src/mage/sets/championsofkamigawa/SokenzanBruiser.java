@@ -46,7 +46,7 @@ public class SokenzanBruiser extends CardImpl<SokenzanBruiser> {
         this.expansionSetCode = "CHK";
         this.subtype.add("Ogre");
         this.subtype.add("Warrior");
-		this.color.setRed(true);
+        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(new MountainwalkAbility());

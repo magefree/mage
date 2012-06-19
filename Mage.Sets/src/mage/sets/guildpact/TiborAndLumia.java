@@ -60,7 +60,7 @@ public class TiborAndLumia extends CardImpl<TiborAndLumia> {
         filterRed.setUseColor(true);
         filterRed.getColor().setRed(true);
     }
-    
+
     public TiborAndLumia(UUID ownerId) {
         super(ownerId, 135, "Tibor and Lumia", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{R}");
         this.expansionSetCode = "GPT";

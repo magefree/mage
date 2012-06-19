@@ -54,8 +54,8 @@ public class TajuruArcher extends CardImpl<TajuruArcher> {
 
     static {
         filter.getSubtype().add("Ally");
-		filter.setScopeSubtype(Filter.ComparisonScope.Any);
-		filter.setTargetController(Constants.TargetController.YOU);
+        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.setTargetController(Constants.TargetController.YOU);
         filterTarget.getAbilities().add(FlyingAbility.getInstance());
     }
 

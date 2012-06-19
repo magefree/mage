@@ -66,7 +66,7 @@ public class WithengarUnbound extends CardImpl<WithengarUnbound> {
         this.addAbility(TrampleAbility.getInstance());
         // Whenever a player loses the game, put thirteen +1/+1 counters on Withengar Unbound.
         this.addAbility(new WithengarUnboundTriggeredAbility());
-        
+
     }
 
     public WithengarUnbound(final WithengarUnbound card) {

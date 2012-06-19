@@ -53,31 +53,31 @@ import mage.abilities.costs.mana.GenericManaCost;
  */
 public class TrigonOfThought extends CardImpl<TrigonOfThought> {
 
-	public TrigonOfThought(UUID ownerId) {
-		super(ownerId, 217, "Trigon of Thought", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{5}");
-		this.expansionSetCode = "SOM";
+    public TrigonOfThought(UUID ownerId) {
+        super(ownerId, 217, "Trigon of Thought", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{5}");
+        this.expansionSetCode = "SOM";
 
-		this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(new ChargeCounter(3)), ""));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(new ChargeCounter(3)), ""));
 
-		Costs costs = new CostsImpl();
-		costs.add(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
-		costs.add(new TapSourceCost());
+        Costs costs = new CostsImpl();
+        costs.add(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
+        costs.add(new TapSourceCost());
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardControllerEffect(1), costs);
         ability.addManaCost(new GenericManaCost(2));
-		this.addAbility(ability);
+        this.addAbility(ability);
 
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new TapSourceCost());
         ability2.addManaCost(new ManaCostsImpl("{U}{U}"));
-		this.addAbility(ability2);
-	}
+        this.addAbility(ability2);
+    }
 
-	public TrigonOfThought(final TrigonOfThought card) {
-		super(card);
-	}
+    public TrigonOfThought(final TrigonOfThought card) {
+        super(card);
+    }
 
-	@Override
-	public TrigonOfThought copy() {
-		return new TrigonOfThought(this);
-	}
+    @Override
+    public TrigonOfThought copy() {
+        return new TrigonOfThought(this);
+    }
 
 }

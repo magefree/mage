@@ -51,7 +51,7 @@ public class Blistergrub extends CardImpl<Blistergrub> {
         super(ownerId, 56, "Blistergrub", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Horror");
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(new DiesTriggeredAbility(new BlistergrubEffect(), false));

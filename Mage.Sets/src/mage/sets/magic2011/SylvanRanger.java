@@ -44,28 +44,28 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class SylvanRanger extends CardImpl<SylvanRanger> {
 
-	private static final FilterBasicLandCard filter = new FilterBasicLandCard();
+    private static final FilterBasicLandCard filter = new FilterBasicLandCard();
 
-	public SylvanRanger(UUID ownerId) {
-		super(ownerId, 198, "Sylvan Ranger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Elf");
-		this.subtype.add("Scout");
-		this.color.setGreen(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
+    public SylvanRanger(UUID ownerId) {
+        super(ownerId, 198, "Sylvan Ranger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Elf");
+        this.subtype.add("Scout");
+        this.color.setGreen(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-		TargetCardInLibrary target = new TargetCardInLibrary(filter);
-		this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryRevealPutInHandEffect(target)));
-	}
+        TargetCardInLibrary target = new TargetCardInLibrary(filter);
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryRevealPutInHandEffect(target)));
+    }
 
-	public SylvanRanger(final SylvanRanger card) {
-		super(card);
-	}
+    public SylvanRanger(final SylvanRanger card) {
+        super(card);
+    }
 
-	@Override
-	public SylvanRanger copy() {
-		return new SylvanRanger(this);
-	}
+    @Override
+    public SylvanRanger copy() {
+        return new SylvanRanger(this);
+    }
 
 }

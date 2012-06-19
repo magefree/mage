@@ -59,10 +59,10 @@ public class FlightOfFancy extends CardImpl<FlightOfFancy> {
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		this.addAbility(ability);
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
         // When Flight of Fancy enters the battlefield, draw two cards.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(2), false));
         // Enchanted creature has flying.

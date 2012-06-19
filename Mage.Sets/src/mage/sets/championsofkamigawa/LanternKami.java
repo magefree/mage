@@ -45,7 +45,7 @@ public class LanternKami extends CardImpl<LanternKami> {
         super(ownerId, 32, "Lantern Kami", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Spirit");
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());

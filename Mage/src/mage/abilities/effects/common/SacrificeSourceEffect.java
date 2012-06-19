@@ -40,27 +40,27 @@ import mage.game.permanent.Permanent;
  */
 public class SacrificeSourceEffect extends OneShotEffect<SacrificeSourceEffect> {
 
-	public SacrificeSourceEffect() {
-		super(Outcome.Sacrifice);
-		staticText = "sacrifice {this}";
-	}
+    public SacrificeSourceEffect() {
+        super(Outcome.Sacrifice);
+        staticText = "sacrifice {this}";
+    }
 
-	public SacrificeSourceEffect(final SacrificeSourceEffect effect) {
-		super(effect);
-	}
+    public SacrificeSourceEffect(final SacrificeSourceEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public SacrificeSourceEffect copy() {
-		return new SacrificeSourceEffect(this);
-	}
+    @Override
+    public SacrificeSourceEffect copy() {
+        return new SacrificeSourceEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getSourceId());
-		if (permanent != null) {
-			return permanent.sacrifice(source.getSourceId(), game);
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            return permanent.sacrifice(source.getSourceId(), game);
+        }
+        return false;
+    }
 
 }

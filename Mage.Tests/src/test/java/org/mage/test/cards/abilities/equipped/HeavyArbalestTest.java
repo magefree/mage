@@ -24,10 +24,10 @@ public class HeavyArbalestTest extends CardTestPlayerBase {
 
         activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {4}", "Elite Vanguard");
         activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals 2 damage", playerB);
-        
+
         setStopAt(3, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
-        
+
         assertLife(playerA, 20);
         assertLife(playerB, 18);
 

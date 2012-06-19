@@ -42,76 +42,76 @@ import java.util.UUID;
  */
 public class FilterStackObject<T extends FilterStackObject<T>> extends FilterObject<StackObject, FilterStackObject<T>> {
 
-	protected List<UUID> controllerId = new ArrayList<UUID>();
-	protected boolean notController = false;
-	protected TargetController controller = TargetController.ANY;
+    protected List<UUID> controllerId = new ArrayList<UUID>();
+    protected boolean notController = false;
+    protected TargetController controller = TargetController.ANY;
 
-	public FilterStackObject() {
-		super("spell or ability");
-	}
+    public FilterStackObject() {
+        super("spell or ability");
+    }
 
-	public FilterStackObject(String name) {
-		super(name);
-	}
+    public FilterStackObject(String name) {
+        super(name);
+    }
 
-	public FilterStackObject(final FilterStackObject<T> filter) {
-		super(filter);
+    public FilterStackObject(final FilterStackObject<T> filter) {
+        super(filter);
         this.controllerId.addAll(filter.controllerId);
-		this.notController = filter.notController;
-		this.controller = filter.controller;
-	}
+        this.notController = filter.notController;
+        this.controller = filter.controller;
+    }
 
-	@Override
-	public boolean match(StackObject spell, Game game) {
+    @Override
+    public boolean match(StackObject spell, Game game) {
 
-		if (!super.match(spell, game))
-			return notFilter;
+        if (!super.match(spell, game))
+            return notFilter;
 
-		if (controllerId.size() > 0 && controllerId.contains(spell.getControllerId()) == notController)
-			return notFilter;
+        if (controllerId.size() > 0 && controllerId.contains(spell.getControllerId()) == notController)
+            return notFilter;
 
-		return !notFilter;
-	}
+        return !notFilter;
+    }
 
-	public boolean match(StackObject spell, UUID playerId, Game game) {
-		if (!this.match(spell, game))
-			return notFilter;
+    public boolean match(StackObject spell, UUID playerId, Game game) {
+        if (!this.match(spell, game))
+            return notFilter;
 
-		if (controller != TargetController.ANY && playerId != null) {
-			switch(controller) {
-				case YOU:
-					if (!spell.getControllerId().equals(playerId))
-						return notFilter;
-					break;
-				case OPPONENT:
-					if (!game.getOpponents(playerId).contains(spell.getControllerId()))
-						return notFilter;
-					break;
-				case NOT_YOU:
-					if (spell.getControllerId().equals(playerId))
-						return notFilter;
-					break;
-			}
-		}
+        if (controller != TargetController.ANY && playerId != null) {
+            switch(controller) {
+                case YOU:
+                    if (!spell.getControllerId().equals(playerId))
+                        return notFilter;
+                    break;
+                case OPPONENT:
+                    if (!game.getOpponents(playerId).contains(spell.getControllerId()))
+                        return notFilter;
+                    break;
+                case NOT_YOU:
+                    if (spell.getControllerId().equals(playerId))
+                        return notFilter;
+                    break;
+            }
+        }
 
-		return !notFilter;
-	}
+        return !notFilter;
+    }
 
-	public List<UUID> getControllerId() {
-		return controllerId;
-	}
+    public List<UUID> getControllerId() {
+        return controllerId;
+    }
 
-	public void setNotController(boolean notController) {
-		this.notController = notController;
-	}
+    public void setNotController(boolean notController) {
+        this.notController = notController;
+    }
 
-	public void setTargetController(TargetController controller) {
-		this.controller = controller;
-	}
+    public void setTargetController(TargetController controller) {
+        this.controller = controller;
+    }
 
-	@Override
-	public FilterStackObject copy() {
-		return new FilterStackObject(this);
-	}
+    @Override
+    public FilterStackObject copy() {
+        return new FilterStackObject(this);
+    }
 
 }

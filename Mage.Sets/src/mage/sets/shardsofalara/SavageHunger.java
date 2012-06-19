@@ -57,12 +57,12 @@ public class SavageHunger extends CardImpl<SavageHunger> {
         super(ownerId, 147, "Savage Hunger", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         this.expansionSetCode = "ALA";
         this.subtype.add("Aura");
-		this.color.setGreen(true);
+        this.color.setGreen(true);
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
-		this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
+        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
         SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 0, Duration.WhileOnBattlefield));
         ability.addEffect(new GainAbilityAttachedEffect(TrampleAbility.getInstance(), Constants.AttachmentType.AURA));

@@ -62,7 +62,7 @@ public class NineRingedBo extends CardImpl<NineRingedBo> {
         filter.getSubtype().add("Spirit");
         filter.setScopeSubtype(ComparisonScope.Any);
     }
-    
+
     public NineRingedBo(UUID ownerId) {
         super(ownerId, 263, "Nine-Ringed Bo", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "CHK";
@@ -73,7 +73,7 @@ public class NineRingedBo extends CardImpl<NineRingedBo> {
         // If that creature would die this turn, exile it instead.
         this.addAbility(ability);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NineRingedBoEffect()));
-        
+
         this.addWatcher(new DamagedByWatcher());
 
     }
@@ -81,7 +81,7 @@ public class NineRingedBo extends CardImpl<NineRingedBo> {
     public NineRingedBo(final NineRingedBo card) {
         super(card);
     }
-    
+
     @Override
     public NineRingedBo copy() {
         return new NineRingedBo(this);
@@ -90,44 +90,44 @@ public class NineRingedBo extends CardImpl<NineRingedBo> {
 
     class NineRingedBoEffect extends ReplacementEffectImpl<NineRingedBoEffect> {
 
-	public NineRingedBoEffect() {
-		super(Duration.EndOfTurn, Outcome.Exile);
-		staticText = "If that creature would die this turn, exile it instead";
-	}
+    public NineRingedBoEffect() {
+        super(Duration.EndOfTurn, Outcome.Exile);
+        staticText = "If that creature would die this turn, exile it instead";
+    }
 
-	public NineRingedBoEffect(final NineRingedBoEffect effect) {
-		super(effect);
-	}
+    public NineRingedBoEffect(final NineRingedBoEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public NineRingedBoEffect copy() {
-		return new NineRingedBoEffect(this);
-	}
+    @Override
+    public NineRingedBoEffect copy() {
+        return new NineRingedBoEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent permanent = ((ZoneChangeEvent)event).getTarget();
         if (permanent != null) {
             return permanent.moveToExile(null, "", source.getId(), game);
         }
-		return false;
-	}
+        return false;
+    }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
                         DamagedByWatcher watcher = 
                                 (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", source.getSourceId());
                         if (watcher != null)
                                 return watcher.damagedCreatures.contains(event.getTargetId());
                         }
-		return false;
-	}
+        return false;
+    }
 
 }
 

@@ -36,34 +36,34 @@ import mage.target.TargetPermanent;
  */
 public class TargetArtifactPermanent<T extends TargetArtifactPermanent<T>> extends TargetPermanent<TargetArtifactPermanent<T>> {
 
-	public TargetArtifactPermanent() {
-		this(1, 1, new FilterArtifactPermanent(), false);
-	}
+    public TargetArtifactPermanent() {
+        this(1, 1, new FilterArtifactPermanent(), false);
+    }
 
-	public TargetArtifactPermanent(FilterArtifactPermanent filter) {
-		this(1, 1, filter, false);
-	}
+    public TargetArtifactPermanent(FilterArtifactPermanent filter) {
+        this(1, 1, filter, false);
+    }
 
-	public TargetArtifactPermanent(int numTargets) {
-		this(numTargets, numTargets, new FilterArtifactPermanent(), false);
-	}
+    public TargetArtifactPermanent(int numTargets) {
+        this(numTargets, numTargets, new FilterArtifactPermanent(), false);
+    }
 
-	public TargetArtifactPermanent(int minNumTargets, int maxNumTargets) {
-		this(minNumTargets, maxNumTargets, new FilterArtifactPermanent(), false);
-	}
+    public TargetArtifactPermanent(int minNumTargets, int maxNumTargets) {
+        this(minNumTargets, maxNumTargets, new FilterArtifactPermanent(), false);
+    }
 
-	public TargetArtifactPermanent(int minNumTargets, int maxNumTargets, FilterArtifactPermanent filter, boolean notTarget) {
-		super(minNumTargets, maxNumTargets, filter, notTarget);
-		this.targetName = filter.getMessage();
-	}
+    public TargetArtifactPermanent(int minNumTargets, int maxNumTargets, FilterArtifactPermanent filter, boolean notTarget) {
+        super(minNumTargets, maxNumTargets, filter, notTarget);
+        this.targetName = filter.getMessage();
+    }
 
-	public TargetArtifactPermanent(final TargetArtifactPermanent target) {
-		super(target);
-	}
+    public TargetArtifactPermanent(final TargetArtifactPermanent target) {
+        super(target);
+    }
 
-	@Override
-	public TargetArtifactPermanent copy() {
-		return new TargetArtifactPermanent(this);
-	}
+    @Override
+    public TargetArtifactPermanent copy() {
+        return new TargetArtifactPermanent(this);
+    }
 
 }

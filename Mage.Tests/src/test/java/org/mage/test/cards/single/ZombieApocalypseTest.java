@@ -24,7 +24,7 @@ public class ZombieApocalypseTest extends CardTestPlayerBase {
 
         setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
-        
+
         assertGraveyardCount(playerA, 2);
         assertGraveyardCount(playerB, 2);
         assertPermanentCount(playerA, "Bog Raiders", 2);
@@ -34,5 +34,5 @@ public class ZombieApocalypseTest extends CardTestPlayerBase {
 
     }
 
-    
+
 }

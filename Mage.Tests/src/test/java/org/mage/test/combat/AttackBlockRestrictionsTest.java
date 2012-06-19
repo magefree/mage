@@ -223,7 +223,7 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
 
         setStopAt(2, Constants.PhaseStep.END_TURN);
         execute();
-        
+
         assertCounterCount(playerA, CounterType.POISON, 1);
     }
 }

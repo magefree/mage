@@ -9,18 +9,18 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  * @author BetaSteward, noxx
  */
 public class HuntmasterOfTheFellsTest extends CardTestPlayerBase {
-    
+
     @Test
     public void testCard() {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 3);
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain");
         addCard(Constants.Zone.HAND, playerA, "Huntmaster of the Fells");
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Ornithopter");
-        
+
         castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Huntmaster of the Fells");
         setStopAt(3, Constants.PhaseStep.DRAW);
         execute();
-        
+
         assertLife(playerA, 22);
         assertLife(playerB, 18);
         assertPermanentCount(playerA, "Wolf", 1);

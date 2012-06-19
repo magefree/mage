@@ -43,26 +43,26 @@ import mage.cards.CardImpl;
  */
 public class Thrummingbird extends CardImpl<Thrummingbird> {
 
-	public Thrummingbird(UUID ownerId) {
-		super(ownerId, 47, "Thrummingbird", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-		this.expansionSetCode = "SOM";
-		this.subtype.add("Bird");
-		this.subtype.add("Horror");
-        
-		this.color.setBlue(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
-        
-		this.addAbility(FlyingAbility.getInstance());
+    public Thrummingbird(UUID ownerId) {
+        super(ownerId, 47, "Thrummingbird", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
+        this.expansionSetCode = "SOM";
+        this.subtype.add("Bird");
+        this.subtype.add("Horror");
+
+        this.color.setBlue(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        this.addAbility(FlyingAbility.getInstance());
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ProliferateEffect(), false));
-	}
+    }
 
-	public Thrummingbird(final Thrummingbird card) {
-		super(card);
-	}
+    public Thrummingbird(final Thrummingbird card) {
+        super(card);
+    }
 
-	@Override
-	public Thrummingbird copy() {
-		return new Thrummingbird(this);
-	}
+    @Override
+    public Thrummingbird copy() {
+        return new Thrummingbird(this);
+    }
 }

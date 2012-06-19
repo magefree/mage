@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class GoblinChieftain extends mage.sets.magic2010.GoblinChieftain {
 
-	public GoblinChieftain(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 141;
-		this.expansionSetCode = "M11";
-	}
+    public GoblinChieftain(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 141;
+        this.expansionSetCode = "M11";
+    }
 
-	public GoblinChieftain(final GoblinChieftain card) {
-		super(card);
-	}
+    public GoblinChieftain(final GoblinChieftain card) {
+        super(card);
+    }
 
-	@Override
-	public GoblinChieftain copy() {
-		return new GoblinChieftain(this);
-	}
+    @Override
+    public GoblinChieftain copy() {
+        return new GoblinChieftain(this);
+    }
 
 }

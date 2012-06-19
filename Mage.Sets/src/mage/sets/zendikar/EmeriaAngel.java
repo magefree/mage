@@ -44,38 +44,38 @@ import mage.game.permanent.token.Token;
  */
 public class EmeriaAngel extends CardImpl<EmeriaAngel> {
 
-	public EmeriaAngel(UUID ownerId) {
-		super(ownerId, 11, "Emeria Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-		this.expansionSetCode = "ZEN";
-		this.subtype.add("Angel");
-		this.color.setWhite(true);
-		this.power = new MageInt(3);
-		this.toughness = new MageInt(3);
+    public EmeriaAngel(UUID ownerId) {
+        super(ownerId, 11, "Emeria Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
+        this.expansionSetCode = "ZEN";
+        this.subtype.add("Angel");
+        this.color.setWhite(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-		this.addAbility(FlyingAbility.getInstance());
-		this.addAbility(new LandfallAbility(new CreateTokenEffect(new BirdToken()), true));
-	}
+        this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(new LandfallAbility(new CreateTokenEffect(new BirdToken()), true));
+    }
 
-	public EmeriaAngel(final EmeriaAngel card) {
-		super(card);
-	}
+    public EmeriaAngel(final EmeriaAngel card) {
+        super(card);
+    }
 
-	@Override
-	public EmeriaAngel copy() {
-		return new EmeriaAngel(this);
-	}
+    @Override
+    public EmeriaAngel copy() {
+        return new EmeriaAngel(this);
+    }
 
 }
 
 class BirdToken extends Token {
 
-	public BirdToken() {
-		super("Bird", "1/1 white Bird creature token with flying");
-		cardType.add(CardType.CREATURE);
-		color.setWhite(true);
-		subtype.add("Bird");
-		power = new MageInt(1);
-		toughness = new MageInt(1);
-		addAbility(FlyingAbility.getInstance());
-	}
+    public BirdToken() {
+        super("Bird", "1/1 white Bird creature token with flying");
+        cardType.add(CardType.CREATURE);
+        color.setWhite(true);
+        subtype.add("Bird");
+        power = new MageInt(1);
+        toughness = new MageInt(1);
+        addAbility(FlyingAbility.getInstance());
+    }
 }

@@ -46,79 +46,79 @@ import mage.game.permanent.Permanent;
  */
 public class BoostAllEffect extends ContinuousEffectImpl<BoostAllEffect> {
 
-	protected DynamicValue power;
-	protected DynamicValue toughness;
-	protected boolean excludeSource;
-	protected FilterCreaturePermanent filter;
+    protected DynamicValue power;
+    protected DynamicValue toughness;
+    protected boolean excludeSource;
+    protected FilterCreaturePermanent filter;
 
-	public BoostAllEffect(int power, int toughness, Duration duration) {
-		this(power, toughness, duration, new FilterCreaturePermanent(), false);
-	}
+    public BoostAllEffect(int power, int toughness, Duration duration) {
+        this(power, toughness, duration, new FilterCreaturePermanent(), false);
+    }
 
     public BoostAllEffect(DynamicValue power, DynamicValue toughness, Duration duration) {
-		this(power, toughness, duration, new FilterCreaturePermanent(), false);
-	}
+        this(power, toughness, duration, new FilterCreaturePermanent(), false);
+    }
 
-	public BoostAllEffect(int power, int toughness, Duration duration, boolean excludeSource) {
-		this(power, toughness, duration, new FilterCreaturePermanent(), excludeSource);
-	}
+    public BoostAllEffect(int power, int toughness, Duration duration, boolean excludeSource) {
+        this(power, toughness, duration, new FilterCreaturePermanent(), excludeSource);
+    }
 
     public BoostAllEffect(int power, int toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource) {
         this(new StaticValue(power), new StaticValue(toughness), duration, filter, excludeSource);
     }
 
-	public BoostAllEffect(DynamicValue power, DynamicValue toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource) {
-		super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
-		this.power = power;
-		this.toughness = toughness;
-		this.filter = filter;
-		this.excludeSource = excludeSource;
-		setText();
-	}
+    public BoostAllEffect(DynamicValue power, DynamicValue toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource) {
+        super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
+        this.power = power;
+        this.toughness = toughness;
+        this.filter = filter;
+        this.excludeSource = excludeSource;
+        setText();
+    }
 
-	public BoostAllEffect(final BoostAllEffect effect) {
-		super(effect);
-		this.power = effect.power;
-		this.toughness = effect.toughness;
-		this.filter = effect.filter.copy();
-		this.excludeSource = effect.excludeSource;
-	}
+    public BoostAllEffect(final BoostAllEffect effect) {
+        super(effect);
+        this.power = effect.power;
+        this.toughness = effect.toughness;
+        this.filter = effect.filter.copy();
+        this.excludeSource = effect.excludeSource;
+    }
 
-	@Override
-	public BoostAllEffect copy() {
-		return new BoostAllEffect(this);
-	}
+    @Override
+    public BoostAllEffect copy() {
+        return new BoostAllEffect(this);
+    }
 
-	@Override
-	public void init(Ability source, Game game) {
-		super.init(source, game);
-		if (this.affectedObjectsSet) {
-			for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-				if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
-					objects.add(perm.getId());
-				}
-			}
-		}
-	}
+    @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        if (this.affectedObjectsSet) {
+            for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+                if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
+                    objects.add(perm.getId());
+                }
+            }
+        }
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-			if (!this.affectedObjectsSet || objects.contains(perm.getId())) {
-				if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
-					perm.addPower(power.calculate(game, source));
-					perm.addToughness(toughness.calculate(game, source));
-				}
-			}
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+            if (!this.affectedObjectsSet || objects.contains(perm.getId())) {
+                if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
+                    perm.addPower(power.calculate(game, source));
+                    perm.addToughness(toughness.calculate(game, source));
+                }
+            }
+        }
+        return true;
+    }
 
-	private void setText() {
-		StringBuilder sb = new StringBuilder();
-		if (excludeSource)
-			sb.append("Other ");
-		sb.append(filter.getMessage()).append(" gets ");
+    private void setText() {
+        StringBuilder sb = new StringBuilder();
+        if (excludeSource)
+            sb.append("Other ");
+        sb.append(filter.getMessage()).append(" gets ");
         String p = power.toString();
         if(!p.startsWith("-"))
             sb.append("+");
@@ -131,9 +131,9 @@ public class BoostAllEffect extends ContinuousEffectImpl<BoostAllEffect> {
                 sb.append("+");
         }
         sb.append(t);
-		sb.append((duration==Duration.EndOfTurn?" until end of turn":""));
+        sb.append((duration==Duration.EndOfTurn?" until end of turn":""));
         sb.append(power.getMessage());
-		staticText = sb.toString();
-	}
+        staticText = sb.toString();
+    }
 
 }

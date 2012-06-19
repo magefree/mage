@@ -31,17 +31,17 @@ public class SacrificeSourceUnlessPaysEffect extends OneShotEffect<SacrificeSour
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-		Permanent permanent = game.getPermanent(source.getSourceId());
-		if (player != null && permanent != null) { 
-			if (player.chooseUse(Outcome.Benefit, "Pay " + cost.getText() /* + " or sacrifice " + permanent.getName() */ + "?", game)) {
-				cost.clearPaid();
-				if (cost.pay(source, game, source.getId(), source.getControllerId(), false))
-					return true;
-			}
-			permanent.sacrifice(source.getSourceId(), game);
-			return true;
-		}
-		return false;
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (player != null && permanent != null) { 
+            if (player.chooseUse(Outcome.Benefit, "Pay " + cost.getText() /* + " or sacrifice " + permanent.getName() */ + "?", game)) {
+                cost.clearPaid();
+                if (cost.pay(source, game, source.getId(), source.getControllerId(), false))
+                    return true;
+            }
+            permanent.sacrifice(source.getSourceId(), game);
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -49,8 +49,8 @@ public class SacrificeSourceUnlessPaysEffect extends OneShotEffect<SacrificeSour
         return new SacrificeSourceUnlessPaysEffect(this);
     }
 
-    	@Override
-	public String getText(Mode mode) {
+        @Override
+    public String getText(Mode mode) {
             StringBuilder sb = new StringBuilder("sacrifice {this} unless you ");
             String costText = cost.getText();
             if (costText.toLowerCase().startsWith("discard")) {
@@ -59,8 +59,8 @@ public class SacrificeSourceUnlessPaysEffect extends OneShotEffect<SacrificeSour
             }
             else
                 sb.append("pay ").append(costText);
-            
+
             return sb.toString();
 
-	}
+    }
  }

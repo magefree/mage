@@ -45,28 +45,28 @@ import mage.cards.CardImpl;
  */
 public class VampireLacerator extends CardImpl<VampireLacerator> {
 
-	public VampireLacerator(UUID ownerId) {
-		super(ownerId, 115, "Vampire Lacerator", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
-		this.expansionSetCode = "ZEN";
-		this.subtype.add("Vampire");
-		this.subtype.add("Warrior");
-		this.color.setBlack(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+    public VampireLacerator(UUID ownerId) {
+        super(ownerId, 115, "Vampire Lacerator", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
+        this.expansionSetCode = "ZEN";
+        this.subtype.add("Vampire");
+        this.subtype.add("Warrior");
+        this.color.setBlack(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
             new ConditionalOneShotEffect(
-					new LoseLifeSourceEffect(1),
-					new UnlessCondition( new TenOrLessLifeCondition(TenOrLessLifeCondition.CheckType.AN_OPPONENT) ),
-					"you lose 1 life unless an opponent has 10 or less life"), Constants.TargetController.YOU, false));
-	}
+                    new LoseLifeSourceEffect(1),
+                    new UnlessCondition( new TenOrLessLifeCondition(TenOrLessLifeCondition.CheckType.AN_OPPONENT) ),
+                    "you lose 1 life unless an opponent has 10 or less life"), Constants.TargetController.YOU, false));
+    }
 
-	public VampireLacerator(final VampireLacerator card) {
-		super(card);
-	}
+    public VampireLacerator(final VampireLacerator card) {
+        super(card);
+    }
 
-	@Override
-	public VampireLacerator copy() {
-		return new VampireLacerator(this);
-	}
+    @Override
+    public VampireLacerator copy() {
+        return new VampireLacerator(this);
+    }
 }

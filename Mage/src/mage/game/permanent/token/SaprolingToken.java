@@ -38,12 +38,12 @@ import mage.ObjectColor;
  */
 public class SaprolingToken extends Token {
 
-	public SaprolingToken() {
-		super("Saproling", "1/1 green Saproling creature token");
-		cardType.add(CardType.CREATURE);
-		color = ObjectColor.GREEN;
-		subtype.add("Saproling");
-		power = new MageInt(1);
-		toughness = new MageInt(1);
-	}
+    public SaprolingToken() {
+        super("Saproling", "1/1 green Saproling creature token");
+        cardType.add(CardType.CREATURE);
+        color = ObjectColor.GREEN;
+        subtype.add("Saproling");
+        power = new MageInt(1);
+        toughness = new MageInt(1);
+    }
 }

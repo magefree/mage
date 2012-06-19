@@ -61,7 +61,7 @@ public class SosukeSonOfSeshiro extends CardImpl<SosukeSonOfSeshiro> {
             filter.getSubtype().add("Snake");
             filter.setScopeSubtype(Filter.ComparisonScope.Any);
     }
-    
+
     public SosukeSonOfSeshiro(UUID ownerId) {
         super(ownerId, 244, "Sosuke, Son of Seshiro", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
         this.expansionSetCode = "CHK";
@@ -127,7 +127,7 @@ class SosukeSonOfSeshiroTriggeredAbility extends TriggeredAbilityImpl<SosukeSonO
 }
 
 class SosukeSonOfSeshiroEffect extends OneShotEffect<SosukeSonOfSeshiroEffect> {
-    
+
     SosukeSonOfSeshiroEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "destroy that creature at end of combat";

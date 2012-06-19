@@ -39,20 +39,20 @@ import java.util.GregorianCalendar;
  */
 public class Weatherlight extends ExpansionSet {
 
-	private static final Weatherlight fINSTANCE =  new Weatherlight();
+    private static final Weatherlight fINSTANCE =  new Weatherlight();
 
-	public static Weatherlight getInstance() {
-		return fINSTANCE;
-	}
+    public static Weatherlight getInstance() {
+        return fINSTANCE;
+    }
 
-	private Weatherlight() {
-		super("Weatherlight", "WTH", "exp_symbol_mtgwth", "mage.sets.weatherlight", new GregorianCalendar(1997, 5, 31).getTime(), SetType.EXPANSION);
-		this.hasBoosters = true;
-		this.numBoosterLands = 1;
-		this.numBoosterCommon = 10;
-		this.numBoosterUncommon = 3;
-		this.numBoosterRare = 1;
-		this.ratioBoosterMythic = 0;
-	}
+    private Weatherlight() {
+        super("Weatherlight", "WTH", "exp_symbol_mtgwth", "mage.sets.weatherlight", new GregorianCalendar(1997, 5, 31).getTime(), SetType.EXPANSION);
+        this.hasBoosters = true;
+        this.numBoosterLands = 1;
+        this.numBoosterCommon = 10;
+        this.numBoosterUncommon = 3;
+        this.numBoosterRare = 1;
+        this.ratioBoosterMythic = 0;
+    }
 
 }

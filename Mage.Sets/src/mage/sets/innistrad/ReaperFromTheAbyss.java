@@ -51,39 +51,39 @@ import mage.watchers.Watcher;
 public class ReaperFromTheAbyss extends CardImpl<ReaperFromTheAbyss> {
 
     private static FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Demon creature");
-    
+
     static {
         filter.getSubtype().add("Demon");
         filter.setNotSubtype(true);
     }
 
     public ReaperFromTheAbyss(UUID ownerId) {
-		super(ownerId, 112, "Reaper from the Abyss", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{B}");
-		this.expansionSetCode = "ISD";
-		this.subtype.add("Demon");
-		this.color.setBlack(true);
-		this.power = new MageInt(6);
-		this.toughness = new MageInt(6);
+        super(ownerId, 112, "Reaper from the Abyss", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{B}");
+        this.expansionSetCode = "ISD";
+        this.subtype.add("Demon");
+        this.color.setBlack(true);
+        this.power = new MageInt(6);
+        this.toughness = new MageInt(6);
 
-		this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(FlyingAbility.getInstance());
         Ability ability = new ReaperFromTheAbyssAbility();
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
-	}
+    }
 
-	public ReaperFromTheAbyss(final ReaperFromTheAbyss card) {
-		super(card);
-	}
+    public ReaperFromTheAbyss(final ReaperFromTheAbyss card) {
+        super(card);
+    }
 
-	@Override
-	public ReaperFromTheAbyss copy() {
-		return new ReaperFromTheAbyss(this);
-	}
+    @Override
+    public ReaperFromTheAbyss copy() {
+        return new ReaperFromTheAbyss(this);
+    }
 
 }
 
 class ReaperFromTheAbyssAbility extends TriggeredAbilityImpl<ReaperFromTheAbyssAbility> {
-    
+
     public ReaperFromTheAbyssAbility() {
         super(Constants.Zone.BATTLEFIELD, new DestroyTargetEffect(), false);
     }
@@ -102,8 +102,8 @@ class ReaperFromTheAbyssAbility extends TriggeredAbilityImpl<ReaperFromTheAbyssA
         if (event.getType() == GameEvent.EventType.END_TURN_STEP_PRE) {
             Watcher watcher = game.getState().getWatchers().get("Morbid");
             return watcher.conditionMet();
-		}
-		return false;
+        }
+        return false;
     }
 
     @Override

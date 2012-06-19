@@ -31,7 +31,7 @@ public class ArcaneMeleeTest extends CardTestPlayerBase {
 
         setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
-        
+
         assertLife(playerA, 20);
         assertLife(playerB, 20);
         // by default players don't draw 7 cards at startup in tests (it can be changed through command though)

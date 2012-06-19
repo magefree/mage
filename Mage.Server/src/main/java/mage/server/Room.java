@@ -36,6 +36,6 @@ import java.util.UUID;
  * @author BetaSteward_at_googlemail.com
  */
 public interface Room extends Remote {
-	public UUID getChatId();
-	public UUID getRoomId();
+    public UUID getChatId();
+    public UUID getRoomId();
 }

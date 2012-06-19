@@ -56,12 +56,12 @@ public class RecumbentBliss extends CardImpl<RecumbentBliss> {
         this.expansionSetCode = "EVE";
         this.subtype.add("Aura");
         this.color.setWhite(true);
-		TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Detriment));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		this.addAbility(ability);
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new RecumbentBlissEffect()));
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Detriment));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new RecumbentBlissEffect()));
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(1), Constants.TargetController.YOU, true));
     }
 
@@ -77,37 +77,37 @@ public class RecumbentBliss extends CardImpl<RecumbentBliss> {
 
 class RecumbentBlissEffect extends RestrictionEffect<RecumbentBlissEffect> {
 
-	public RecumbentBlissEffect() {
-		super(Constants.Duration.WhileOnBattlefield);
-		staticText = "Enchanted creature can't attack or block";
-	}
+    public RecumbentBlissEffect() {
+        super(Constants.Duration.WhileOnBattlefield);
+        staticText = "Enchanted creature can't attack or block";
+    }
 
-	public RecumbentBlissEffect(final RecumbentBlissEffect effect) {
-		super(effect);
-	}
+    public RecumbentBlissEffect(final RecumbentBlissEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean applies(Permanent permanent, Ability source, Game game) {
-		if (permanent.getAttachments().contains((source.getSourceId()))) {
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        if (permanent.getAttachments().contains((source.getSourceId()))) {
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public boolean canAttack(Game game) {
-		return false;
-	}
+    @Override
+    public boolean canAttack(Game game) {
+        return false;
+    }
 
-	@Override
-	public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-		return false;
-	}
+    @Override
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        return false;
+    }
 
-	@Override
-	public RecumbentBlissEffect copy() {
-		return new RecumbentBlissEffect(this);
-	}
+    @Override
+    public RecumbentBlissEffect copy() {
+        return new RecumbentBlissEffect(this);
+    }
 
 }
 

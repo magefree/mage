@@ -45,9 +45,9 @@ public class FuelForTheCause extends CardImpl<FuelForTheCause> {
     public FuelForTheCause (UUID ownerId) {
         super(ownerId, 25, "Fuel for the Cause", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
         this.expansionSetCode = "MBS";
-		this.color.setBlue(true);
+        this.color.setBlue(true);
         this.getSpellAbility().addTarget(new TargetSpell());
-		this.getSpellAbility().addEffect(new CounterTargetEffect());
+        this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addEffect(new ProliferateEffect());
     }
 

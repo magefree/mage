@@ -54,39 +54,39 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SarkhanVol extends CardImpl<SarkhanVol> {
 
-	private static DragonToken dragonToken = new DragonToken();
+    private static DragonToken dragonToken = new DragonToken();
 
-	public SarkhanVol(UUID ownerId) {
-		super(ownerId, 191, "Sarkhan Vol", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{G}");
-		this.expansionSetCode = "ALA";
-		this.subtype.add("Sarkhan");
-		this.color.setRed(true);
-		this.color.setGreen(true);
-		this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), ""));
+    public SarkhanVol(UUID ownerId) {
+        super(ownerId, 191, "Sarkhan Vol", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{G}");
+        this.expansionSetCode = "ALA";
+        this.subtype.add("Sarkhan");
+        this.color.setRed(true);
+        this.color.setGreen(true);
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), ""));
 
-		Effects effects1 = new Effects();
-		effects1.add(new BoostControlledEffect(1, 1, Duration.EndOfTurn));
-		effects1.add(new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent()));
-		this.addAbility(new LoyaltyAbility(effects1, 1));
+        Effects effects1 = new Effects();
+        effects1.add(new BoostControlledEffect(1, 1, Duration.EndOfTurn));
+        effects1.add(new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent()));
+        this.addAbility(new LoyaltyAbility(effects1, 1));
 
-		Effects effects2 = new Effects();
-		effects2.add(new GainControlTargetEffect(Duration.EndOfTurn));
-		effects2.add(new UntapTargetEffect());
-		effects2.add(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
+        Effects effects2 = new Effects();
+        effects2.add(new GainControlTargetEffect(Duration.EndOfTurn));
+        effects2.add(new UntapTargetEffect());
+        effects2.add(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
 
-		LoyaltyAbility ability = new LoyaltyAbility(effects2, -2);
-		ability.addTarget(new TargetCreaturePermanent());
-		this.addAbility(ability);
+        LoyaltyAbility ability = new LoyaltyAbility(effects2, -2);
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
 
-		this.addAbility(new LoyaltyAbility(new CreateTokenEffect(dragonToken), -6));
-	}
+        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(dragonToken), -6));
+    }
 
-	public SarkhanVol(final SarkhanVol card) {
-		super(card);
-	}
+    public SarkhanVol(final SarkhanVol card) {
+        super(card);
+    }
 
-	@Override
-	public SarkhanVol copy() {
-		return new SarkhanVol(this);
-	}
+    @Override
+    public SarkhanVol copy() {
+        return new SarkhanVol(this);
+    }
 }

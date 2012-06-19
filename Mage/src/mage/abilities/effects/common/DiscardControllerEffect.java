@@ -46,7 +46,7 @@ public class DiscardControllerEffect extends OneShotEffect<DiscardControllerEffe
     public DiscardControllerEffect(DynamicValue amount) {
         super(Outcome.Discard);
         this.amount = amount;
-		setText();
+        setText();
     }
 
     public DiscardControllerEffect(int amount) {
@@ -73,7 +73,7 @@ public class DiscardControllerEffect extends OneShotEffect<DiscardControllerEffe
         return false;
     }
 
-	private void setText() {
+    private void setText() {
         StringBuilder sb = new StringBuilder("Discard ");
         sb.append(amount).append(" card");
         try {

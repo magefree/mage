@@ -48,33 +48,33 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class KnightExemplar extends CardImpl<KnightExemplar> {
 
-	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Knight creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Knight creatures");
 
-	static {
-		filter.getSubtype().add("Knight");
-	}
+    static {
+        filter.getSubtype().add("Knight");
+    }
 
-	public KnightExemplar(UUID ownerId) {
-		super(ownerId, 20, "Knight Exemplar", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Human");
-		this.subtype.add("Knight");
-		this.color.setWhite(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+    public KnightExemplar(UUID ownerId) {
+        super(ownerId, 20, "Knight Exemplar", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Human");
+        this.subtype.add("Knight");
+        this.color.setWhite(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-		this.addAbility(FirstStrikeAbility.getInstance());
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield, filter, true)));
-	}
+        this.addAbility(FirstStrikeAbility.getInstance());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield, filter, true)));
+    }
 
-	public KnightExemplar(final KnightExemplar card) {
-		super(card);
-	}
+    public KnightExemplar(final KnightExemplar card) {
+        super(card);
+    }
 
-	@Override
-	public KnightExemplar copy() {
-		return new KnightExemplar(this);
-	}
+    @Override
+    public KnightExemplar copy() {
+        return new KnightExemplar(this);
+    }
 
 }

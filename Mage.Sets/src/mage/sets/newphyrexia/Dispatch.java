@@ -47,7 +47,7 @@ public class Dispatch extends CardImpl<Dispatch> {
     public Dispatch (UUID ownerId) {
         super(ownerId, 7, "Dispatch", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "NPH";
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         this.getSpellAbility().addEffect(new TapTargetEffect());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new ExileTargetEffect(), MetalcraftCondition.getInstance(), "Metalcraft - If you control three or more artifacts, exile that creature"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

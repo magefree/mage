@@ -44,26 +44,26 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Plummet extends CardImpl<Plummet> {
 
-	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
 
-	static {
-		filter.getAbilities().add(FlyingAbility.getInstance());
-	}
+    static {
+        filter.getAbilities().add(FlyingAbility.getInstance());
+    }
 
-	public Plummet(UUID ownerId) {
-		super(ownerId, 190, "Plummet", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
-		this.expansionSetCode = "M11";
-		this.color.setGreen(true);
-		this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-		this.getSpellAbility().addEffect(new DestroyTargetEffect());
-	}
+    public Plummet(UUID ownerId) {
+        super(ownerId, 190, "Plummet", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
+        this.expansionSetCode = "M11";
+        this.color.setGreen(true);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+    }
 
-	public Plummet(final Plummet card) {
-		super(card);
-	}
+    public Plummet(final Plummet card) {
+        super(card);
+    }
 
-	@Override
-	public Plummet copy() {
-		return new Plummet(this);
-	}
+    @Override
+    public Plummet copy() {
+        return new Plummet(this);
+    }
 }

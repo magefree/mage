@@ -39,12 +39,12 @@ import mage.cards.Card;
  */
 public class SimpleCardsView extends HashMap<UUID, SimpleCardView> {
 
-	public SimpleCardsView() {}
+    public SimpleCardsView() {}
 
-	public SimpleCardsView(Collection<Card> cards) {
-		for (Card card: cards) {
-			this.put(card.getId(), new SimpleCardView(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.isFaceDown()));
-		}
-	}
+    public SimpleCardsView(Collection<Card> cards) {
+        for (Card card: cards) {
+            this.put(card.getId(), new SimpleCardView(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.isFaceDown()));
+        }
+    }
 
 }

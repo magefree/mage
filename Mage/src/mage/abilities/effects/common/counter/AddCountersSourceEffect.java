@@ -42,42 +42,42 @@ public class AddCountersSourceEffect extends OneShotEffect<AddCountersSourceEffe
 
     private Counter counter;
 
-	public AddCountersSourceEffect(Counter counter) {
-		super(Outcome.Benefit);
-		this.counter = counter.copy();
-		setText();
-	}
+    public AddCountersSourceEffect(Counter counter) {
+        super(Outcome.Benefit);
+        this.counter = counter.copy();
+        setText();
+    }
 
-	public AddCountersSourceEffect(final AddCountersSourceEffect effect) {
-		super(effect);
-		if (effect.counter != null)
-			this.counter = effect.counter.copy();
-	}
+    public AddCountersSourceEffect(final AddCountersSourceEffect effect) {
+        super(effect);
+        if (effect.counter != null)
+            this.counter = effect.counter.copy();
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getSourceId());
-		if (permanent != null) {
-			if (counter != null) {
-				permanent.addCounters(counter.copy(), game);
-			}
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            if (counter != null) {
+                permanent.addCounters(counter.copy(), game);
+            }
+        }
+        return true;
+    }
 
     private void setText() {
-		if (counter.getCount() > 1) {
-			StringBuilder sb = new StringBuilder();
-			sb.append("put ").append(Integer.toString(counter.getCount())).append(" ").append(counter.getName()).append(" counters on {this}");
-			staticText = sb.toString();
-		} else
-			staticText = "put a " + counter.getName() + " counter on {this}";
-	}
+        if (counter.getCount() > 1) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("put ").append(Integer.toString(counter.getCount())).append(" ").append(counter.getName()).append(" counters on {this}");
+            staticText = sb.toString();
+        } else
+            staticText = "put a " + counter.getName() + " counter on {this}";
+    }
 
-	@Override
-	public AddCountersSourceEffect copy() {
-		return new AddCountersSourceEffect(this);
-	}
+    @Override
+    public AddCountersSourceEffect copy() {
+        return new AddCountersSourceEffect(this);
+    }
 
 
 }

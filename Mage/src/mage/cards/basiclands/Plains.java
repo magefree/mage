@@ -37,12 +37,12 @@ import mage.abilities.mana.WhiteManaAbility;
  */
 public abstract class Plains extends BasicLand<Plains> {
 
-	public Plains(UUID ownerId, int cardNumber) {
-		super(ownerId, cardNumber, "Plains", new WhiteManaAbility());
-	}
+    public Plains(UUID ownerId, int cardNumber) {
+        super(ownerId, cardNumber, "Plains", new WhiteManaAbility());
+    }
 
-	public Plains(Plains land) {
-		super(land);
-	}
+    public Plains(Plains land) {
+        super(land);
+    }
 
 }

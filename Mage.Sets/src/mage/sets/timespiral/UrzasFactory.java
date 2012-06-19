@@ -76,8 +76,8 @@ class AssemblyWorkerToken extends Token {
         super("Assembly-Worker", "a 2/2 colorless Assembly-Worker artifact creature token");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
-		subtype.add("Assembly-Worker");
-		power = new MageInt(2);
-		toughness = new MageInt(2);
+        subtype.add("Assembly-Worker");
+        power = new MageInt(2);
+        toughness = new MageInt(2);
     }
 }

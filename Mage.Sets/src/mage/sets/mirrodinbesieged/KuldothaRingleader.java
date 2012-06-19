@@ -47,11 +47,11 @@ public class KuldothaRingleader extends CardImpl<KuldothaRingleader> {
         this.expansionSetCode = "MBS";
         this.subtype.add("Giant");
         this.subtype.add("Berserker");
-    	this.color.setRed(true);
+        this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
-		this.addAbility(new BattleCryAbility());
-		this.addAbility(new AttacksEachTurnStaticAbility());
+        this.addAbility(new BattleCryAbility());
+        this.addAbility(new AttacksEachTurnStaticAbility());
     }
 
     public KuldothaRingleader (final KuldothaRingleader card) {

@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class KamiOfTheWaningMoon extends CardImpl<KamiOfTheWaningMoon> {
 
     private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
-    
+
     public KamiOfTheWaningMoon(UUID ownerId) {
         super(ownerId, 120, "Kami of the Waning Moon", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "CHK";

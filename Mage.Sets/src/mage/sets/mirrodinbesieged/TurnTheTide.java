@@ -45,7 +45,7 @@ public class TurnTheTide extends CardImpl<TurnTheTide> {
     public TurnTheTide (UUID ownerId) {
         super(ownerId, 35, "Turn the Tide", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "MBS";
-		this.color.setBlue(true);
+        this.color.setBlue(true);
         this.getSpellAbility().addEffect(new BoostOpponentsEffect(-2, 0, Constants.Duration.EndOfTurn));
     }
 

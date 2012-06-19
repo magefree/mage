@@ -40,56 +40,56 @@ import mage.game.permanent.Permanent;
  */
 public class LoseAbilityAttachedEffect extends ContinuousEffectImpl<LoseAbilityAttachedEffect> {
 
-	protected Ability ability;
+    protected Ability ability;
     protected AttachmentType attachmentType;
 
-	public LoseAbilityAttachedEffect(Ability ability, AttachmentType attachmentType) {
-		super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.LoseAbility);
-		this.ability = ability;
+    public LoseAbilityAttachedEffect(Ability ability, AttachmentType attachmentType) {
+        super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.LoseAbility);
+        this.ability = ability;
         this.attachmentType = attachmentType;
-		setText();
-	}
+        setText();
+    }
 
-	public LoseAbilityAttachedEffect(final LoseAbilityAttachedEffect effect) {
-		super(effect);
-		this.ability = effect.ability.copy();
+    public LoseAbilityAttachedEffect(final LoseAbilityAttachedEffect effect) {
+        super(effect);
+        this.ability = effect.ability.copy();
         this.attachmentType = effect.attachmentType;
-	}
+    }
 
-	@Override
-	public LoseAbilityAttachedEffect copy() {
-		return new LoseAbilityAttachedEffect(this);
-	}
+    @Override
+    public LoseAbilityAttachedEffect copy() {
+        return new LoseAbilityAttachedEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent equipment = game.getPermanent(source.getSourceId());
-		if (equipment != null && equipment.getAttachedTo() != null) {
-			Permanent creature = game.getPermanent(equipment.getAttachedTo());
-			if (creature != null) {
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent equipment = game.getPermanent(source.getSourceId());
+        if (equipment != null && equipment.getAttachedTo() != null) {
+            Permanent creature = game.getPermanent(equipment.getAttachedTo());
+            if (creature != null) {
                 while (creature.getAbilities().contains(ability)) {
                     creature.getAbilities().remove(ability);
                 }
             }
-		}
-		return true;
-	}
+        }
+        return true;
+    }
 
-	private void setText() {
+    private void setText() {
         StringBuilder sb = new StringBuilder();
         if (attachmentType == AttachmentType.AURA) {
             sb.append("Enchanted"); 
-		} else if (attachmentType == AttachmentType.EQUIPMENT) {
+        } else if (attachmentType == AttachmentType.EQUIPMENT) {
             sb.append("Equipped");
-		}
-		sb.append(" creature ");
-		if (duration == Duration.WhileOnBattlefield) {
-			sb.append("loses ");
-		} else {
-			sb.append("loses ");
-		}
-		sb.append(ability.getRule());	
-		staticText = sb.toString();
-	}
+        }
+        sb.append(" creature ");
+        if (duration == Duration.WhileOnBattlefield) {
+            sb.append("loses ");
+        } else {
+            sb.append("loses ");
+        }
+        sb.append(ability.getRule());    
+        staticText = sb.toString();
+    }
 
 }

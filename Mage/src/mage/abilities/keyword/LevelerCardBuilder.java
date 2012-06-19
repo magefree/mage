@@ -111,7 +111,7 @@ public class LevelerCardBuilder {
         this.abilities.add(ability);
         return this;
     }
-    
+
     public LevelerCardBuilder setRule(String rule) {
         this.rule = rule;
         return this;

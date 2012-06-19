@@ -38,19 +38,19 @@ import java.io.Serializable;
  */
 public interface Filter<E> extends Serializable {
 
-	public enum ComparisonType {
-		GreaterThan, Equal, LessThan
-	}
-	
-	public enum ComparisonScope {
-		Any, All
-	}
-	
-	public boolean match(E o, Game game);
-	public String getMessage();
-	public void setMessage(String message);
-	public void setNotFilter(boolean notFilter);
-	
-	public Filter<E> copy();
-	
+    public enum ComparisonType {
+        GreaterThan, Equal, LessThan
+    }
+
+    public enum ComparisonScope {
+        Any, All
+    }
+
+    public boolean match(E o, Game game);
+    public String getMessage();
+    public void setMessage(String message);
+    public void setNotFilter(boolean notFilter);
+
+    public Filter<E> copy();
+
 }

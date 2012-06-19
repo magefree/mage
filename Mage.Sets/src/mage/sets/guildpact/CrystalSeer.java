@@ -55,7 +55,7 @@ public class CrystalSeer extends CardImpl<CrystalSeer> {
         this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        
+
         // When Crystal Seer enters the battlefield, look at the top four cards of your library, then put them back in any order.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new LookLibraryControllerEffect(4)));
 

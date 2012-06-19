@@ -42,115 +42,115 @@ import java.util.*;
  */
 public abstract class ContinuousEffectImpl<T extends ContinuousEffectImpl<T>> extends EffectImpl<T> implements ContinuousEffect<T> {
 
-	protected Duration duration;
-	protected Layer layer;
-	protected SubLayer sublayer;
-	protected Date timestamp;
-	protected boolean used = false;
-	protected boolean affectedObjectsSet = false;
-	protected List<UUID> objects = new ArrayList<UUID>();
+    protected Duration duration;
+    protected Layer layer;
+    protected SubLayer sublayer;
+    protected Date timestamp;
+    protected boolean used = false;
+    protected boolean affectedObjectsSet = false;
+    protected List<UUID> objects = new ArrayList<UUID>();
     protected Map<UUID, Integer> metadata = new HashMap<UUID, Integer>();
 
-	public ContinuousEffectImpl(Duration duration, Outcome outcome) {
-		super(outcome);
-		this.duration = duration;
-		this.timestamp = new Date();
-		this.effectType = EffectType.CONTINUOUS;
-	}
+    public ContinuousEffectImpl(Duration duration, Outcome outcome) {
+        super(outcome);
+        this.duration = duration;
+        this.timestamp = new Date();
+        this.effectType = EffectType.CONTINUOUS;
+    }
 
-	public ContinuousEffectImpl(Duration duration, Layer layer, SubLayer sublayer, Outcome outcome) {
-		this(duration, outcome);
-		this.layer = layer;
-		this.sublayer = sublayer;
-	}
+    public ContinuousEffectImpl(Duration duration, Layer layer, SubLayer sublayer, Outcome outcome) {
+        this(duration, outcome);
+        this.layer = layer;
+        this.sublayer = sublayer;
+    }
 
-	public ContinuousEffectImpl(final ContinuousEffectImpl<T> effect) {
-		super(effect);
-		this.duration = effect.duration;
-		this.layer = effect.layer;
-		this.sublayer = effect.sublayer;
-		this.timestamp = new Date(effect.timestamp.getTime());
-		this.used = effect.used;
-		this.affectedObjectsSet = effect.affectedObjectsSet;
+    public ContinuousEffectImpl(final ContinuousEffectImpl<T> effect) {
+        super(effect);
+        this.duration = effect.duration;
+        this.layer = effect.layer;
+        this.sublayer = effect.sublayer;
+        this.timestamp = new Date(effect.timestamp.getTime());
+        this.used = effect.used;
+        this.affectedObjectsSet = effect.affectedObjectsSet;
         this.objects.addAll(effect.objects);
-	}
+    }
 
-	@Override
-	public Duration getDuration() {
-		return duration;
-	}
+    @Override
+    public Duration getDuration() {
+        return duration;
+    }
 
-	@Override
-	public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-		if (this.layer == layer && this.sublayer == sublayer) {
-			return apply(game, source);
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        if (this.layer == layer && this.sublayer == sublayer) {
+            return apply(game, source);
+        }
+        return false;
+    }
 
-	@Override
-	public Date getTimestamp() {
-		return timestamp;
-	}
+    @Override
+    public Date getTimestamp() {
+        return timestamp;
+    }
 
-	@Override
-	public void setTimestamp() {
-		this.timestamp = new Date();
-	}
+    @Override
+    public void setTimestamp() {
+        this.timestamp = new Date();
+    }
 
-	@Override
-	public void newId() {
-		this.id = UUID.randomUUID();
-	}
+    @Override
+    public void newId() {
+        this.id = UUID.randomUUID();
+    }
 
-	@Override
-	public boolean hasLayer(Layer layer) {
-		return this.layer == layer;
-	}
+    @Override
+    public boolean hasLayer(Layer layer) {
+        return this.layer == layer;
+    }
 
-	@Override
-	public boolean isUsed() {
-		return used;
-	}
+    @Override
+    public boolean isUsed() {
+        return used;
+    }
 
-	@Override
-	public void init(Ability source, Game game) {
-		//20100716 - 611.2c
-		if (source instanceof ActivatedAbility || source instanceof TriggeredAbility) {
-			if (layer != null) {
-				switch (layer) {
-					case CopyEffects_1:
-					case ControlChangingEffects_2:
-					case TextChangingEffects_3:
-					case TypeChangingEffects_4:
-					case ColorChangingEffects_5:
-					case AbilityAddingRemovingEffects_6:
-					case PTChangingEffects_7:
-						this.affectedObjectsSet = true;
-				}
-			}
-			else {
-				if (hasLayer(Layer.CopyEffects_1) || hasLayer(Layer.ControlChangingEffects_2) || hasLayer(Layer.TextChangingEffects_3) ||
-					hasLayer(Layer.TypeChangingEffects_4) || hasLayer(Layer.ColorChangingEffects_5) || hasLayer(Layer.AbilityAddingRemovingEffects_6) ||
-					hasLayer(Layer.PTChangingEffects_7)) {
-					this.affectedObjectsSet = true;
-				}
-			}
-		}
-	}
+    @Override
+    public void init(Ability source, Game game) {
+        //20100716 - 611.2c
+        if (source instanceof ActivatedAbility || source instanceof TriggeredAbility) {
+            if (layer != null) {
+                switch (layer) {
+                    case CopyEffects_1:
+                    case ControlChangingEffects_2:
+                    case TextChangingEffects_3:
+                    case TypeChangingEffects_4:
+                    case ColorChangingEffects_5:
+                    case AbilityAddingRemovingEffects_6:
+                    case PTChangingEffects_7:
+                        this.affectedObjectsSet = true;
+                }
+            }
+            else {
+                if (hasLayer(Layer.CopyEffects_1) || hasLayer(Layer.ControlChangingEffects_2) || hasLayer(Layer.TextChangingEffects_3) ||
+                    hasLayer(Layer.TypeChangingEffects_4) || hasLayer(Layer.ColorChangingEffects_5) || hasLayer(Layer.AbilityAddingRemovingEffects_6) ||
+                    hasLayer(Layer.PTChangingEffects_7)) {
+                    this.affectedObjectsSet = true;
+                }
+            }
+        }
+    }
 
-	@Override
-	public boolean isInactive(Ability source, Game game) {
-		return false;
-	}
+    @Override
+    public boolean isInactive(Ability source, Game game) {
+        return false;
+    }
 
-	public Layer getLayer() {
-		return layer;
-	}
+    public Layer getLayer() {
+        return layer;
+    }
 
-	public SubLayer getSublayer() {
-		return sublayer;
-	}
+    public SubLayer getSublayer() {
+        return sublayer;
+    }
 
     @Override
     public void overrideRuleText(String text) {

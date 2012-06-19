@@ -56,7 +56,7 @@ public class EzurisBrigade extends CardImpl<EzurisBrigade> {
         this.expansionSetCode = "SOM";
         this.subtype.add("Elf");
         this.subtype.add("Warrior");
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         ContinuousEffect boostSource = new BoostSourceEffect(4, 4, Duration.WhileOnBattlefield);

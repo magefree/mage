@@ -67,7 +67,7 @@ public class Mindshrieker extends CardImpl<Mindshrieker> {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MindshriekerEffect(), new ManaCostsImpl("{2}"));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
-        
+
     }
 
     public Mindshrieker(final Mindshrieker card) {
@@ -86,18 +86,18 @@ class MindshriekerEffect extends OneShotEffect<MindshriekerEffect> {
         super(Outcome.BoostCreature);
         staticText = "Target player puts the top card of his or her library into his or her graveyard. {this} gets +X/+X until end of turn, where X is that card's converted mana cost";
     }
-    
+
     public MindshriekerEffect(final MindshriekerEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getFirstTarget());
-		if (player != null && player.getLibrary().size() > 0) {
-			Card card = player.getLibrary().removeFromTop(game);
-			if (card != null) {
-				card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
+        Player player = game.getPlayer(source.getFirstTarget());
+        if (player != null && player.getLibrary().size() > 0) {
+            Card card = player.getLibrary().removeFromTop(game);
+            if (card != null) {
+                card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
                 int amount = card.getManaCost().convertedManaCost();
                 if (amount > 0)
                     game.addEffect(new BoostSourceEffect(amount, amount, Duration.EndOfTurn), source);
@@ -111,5 +111,5 @@ class MindshriekerEffect extends OneShotEffect<MindshriekerEffect> {
     public MindshriekerEffect copy() {
         return new MindshriekerEffect(this);
     }
-    
+
 }

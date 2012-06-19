@@ -48,7 +48,7 @@ public class PilgrimsEye extends CardImpl<PilgrimsEye> {
 
     static {
         filter.getSupertype().add("Basic");
-		filter.getCardType().add(CardType.LAND);
+        filter.getCardType().add(CardType.LAND);
     }
 
     public PilgrimsEye (UUID ownerId) {

@@ -50,9 +50,9 @@ public class TowerOfMurmurs extends CardImpl<TowerOfMurmurs> {
     public TowerOfMurmurs (UUID ownerId) {
         super(ownerId, 268, "Tower of Murmurs", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
         this.expansionSetCode = "MRD";
-		Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(8), new GenericManaCost(8));
-		ability.addCost(new TapSourceCost());
-		ability.addTarget(new TargetPlayer());
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(8), new GenericManaCost(8));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 

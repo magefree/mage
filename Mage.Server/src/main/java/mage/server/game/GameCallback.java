@@ -36,6 +36,6 @@ import mage.MageException;
  */
 public interface GameCallback {
 
-	public void gameResult(String result) throws MageException;
-	
+    public void gameResult(String result) throws MageException;
+
 }

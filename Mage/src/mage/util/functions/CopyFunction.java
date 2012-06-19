@@ -38,58 +38,58 @@ import mage.game.permanent.Permanent;
  */
 public class CopyFunction implements Function<Card, Card> {
 
-	protected Card target;
-	protected Game game;
+    protected Card target;
+    protected Game game;
 
-	public CopyFunction(Card target) {
-		if (target == null)
-			throw new IllegalArgumentException("Target can't be null");
-		this.target = target;
-	}
+    public CopyFunction(Card target) {
+        if (target == null)
+            throw new IllegalArgumentException("Target can't be null");
+        this.target = target;
+    }
 
-	@Override
-	public Card apply(Card source) {
-		if (target == null)
-			throw new IllegalArgumentException("Target can't be null");
+    @Override
+    public Card apply(Card source) {
+        if (target == null)
+            throw new IllegalArgumentException("Target can't be null");
 
-		target.setName(source.getName());
-		target.getColor().setColor(source.getColor());
-		target.getManaCost().clear();
-		target.getManaCost().add(source.getManaCost());
-		target.getCardType().clear();
-		for (Constants.CardType type : source.getCardType()) {
-			target.getCardType().add(type);
-		}
-		target.getSubtype().clear();
-		for (String type : source.getSubtype()) {
-			target.getSubtype().add(type);
-		}
-		target.getSupertype().clear();
-		for (String type : source.getSupertype()) {
-			target.getSupertype().add(type);
-		}
-		target.setExpansionSetCode(source.getExpansionSetCode());
-		target.getAbilities().clear();
+        target.setName(source.getName());
+        target.getColor().setColor(source.getColor());
+        target.getManaCost().clear();
+        target.getManaCost().add(source.getManaCost());
+        target.getCardType().clear();
+        for (Constants.CardType type : source.getCardType()) {
+            target.getCardType().add(type);
+        }
+        target.getSubtype().clear();
+        for (String type : source.getSubtype()) {
+            target.getSubtype().add(type);
+        }
+        target.getSupertype().clear();
+        for (String type : source.getSupertype()) {
+            target.getSupertype().add(type);
+        }
+        target.setExpansionSetCode(source.getExpansionSetCode());
+        target.getAbilities().clear();
 
-		for (Ability ability0 : source.getAbilities()) {
-			Ability ability = ability0.copy();
-			ability.newId();
-			ability.setSourceId(target.getId());
-			if(target instanceof Permanent) {
-				((Permanent)target).addAbility(ability, game);
-			} else {
-				target.addAbility(ability);
-			}
-		}
+        for (Ability ability0 : source.getAbilities()) {
+            Ability ability = ability0.copy();
+            ability.newId();
+            ability.setSourceId(target.getId());
+            if(target instanceof Permanent) {
+                ((Permanent)target).addAbility(ability, game);
+            } else {
+                target.addAbility(ability);
+            }
+        }
 
-		target.getPower().setValue(source.getPower().getValue());
-		target.getToughness().setValue(source.getToughness().getValue());
+        target.getPower().setValue(source.getPower().getValue());
+        target.getToughness().setValue(source.getToughness().getValue());
 
-		return target;
-	}
+        return target;
+    }
 
-	public Card from(Card source, Game game) {
+    public Card from(Card source, Game game) {
         this.game = game;
-		return apply(source);
-	}
+        return apply(source);
+    }
 }

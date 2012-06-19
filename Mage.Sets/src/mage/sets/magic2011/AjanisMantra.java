@@ -42,20 +42,20 @@ import mage.game.events.GameEvent.EventType;
  */
 public class AjanisMantra extends CardImpl<AjanisMantra> {
 
-	public AjanisMantra(UUID ownerId) {
-		super(ownerId, 2, "Ajani's Mantra", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
-		this.expansionSetCode = "M11";
-		this.getColor().setWhite(true);
-		this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new GainLifeEffect(1), true));
-	}
+    public AjanisMantra(UUID ownerId) {
+        super(ownerId, 2, "Ajani's Mantra", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
+        this.expansionSetCode = "M11";
+        this.getColor().setWhite(true);
+        this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new GainLifeEffect(1), true));
+    }
 
-	public AjanisMantra(final AjanisMantra card) {
-		super(card);
-	}
+    public AjanisMantra(final AjanisMantra card) {
+        super(card);
+    }
 
-	@Override
-	public AjanisMantra copy() {
-		return new AjanisMantra(this);
-	}
+    @Override
+    public AjanisMantra copy() {
+        return new AjanisMantra(this);
+    }
 
 }

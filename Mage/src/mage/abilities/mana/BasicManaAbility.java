@@ -38,12 +38,12 @@ import mage.abilities.effects.common.ManaEffect;
  */
 public abstract class BasicManaAbility<T extends BasicManaAbility<T>> extends ManaAbility<T> {
 
-	public BasicManaAbility(ManaEffect effect) {
-		super(Zone.BATTLEFIELD, effect, new TapSourceCost());
-	}
+    public BasicManaAbility(ManaEffect effect) {
+        super(Zone.BATTLEFIELD, effect, new TapSourceCost());
+    }
 
-	public BasicManaAbility(BasicManaAbility ability) {
-		super(ability);
-	}
+    public BasicManaAbility(BasicManaAbility ability) {
+        super(ability);
+    }
 
 }

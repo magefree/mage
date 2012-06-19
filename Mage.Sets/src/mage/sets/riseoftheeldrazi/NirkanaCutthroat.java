@@ -54,7 +54,7 @@ public class NirkanaCutthroat extends LevelerCard<NirkanaCutthroat> {
         this.expansionSetCode = "ROE";
         this.subtype.add("Vampire");
         this.subtype.add("Warrior");
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{2}{B}")));

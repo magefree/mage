@@ -46,12 +46,12 @@ import mage.target.common.TargetCardInExile;
 public class RunicRepetition extends CardImpl<RunicRepetition> {
 
     private static final FilterCard filter = new FilterCard("exiled card with flashback you own");
-    
+
     static {
         filter.setTargetOwner(TargetController.YOU);
         filter.getAbilities().add(new FlashbackAbility(new ManaCostsImpl("{0}"), TimingRule.INSTANT));
     }
-    
+
     public RunicRepetition(UUID ownerId) {
         super(ownerId, 72, "Runic Repetition", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
         this.expansionSetCode = "ISD";
@@ -72,5 +72,5 @@ public class RunicRepetition extends CardImpl<RunicRepetition> {
     public RunicRepetition copy() {
         return new RunicRepetition(this);
     }
-    
+
 }

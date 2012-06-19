@@ -53,7 +53,7 @@ public class Demystify extends CardImpl<Demystify> {
     public Demystify (UUID ownerId) {
         super(ownerId, 14, "Demystify", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "10E";
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }

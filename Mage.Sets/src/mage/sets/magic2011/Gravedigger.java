@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class Gravedigger extends mage.sets.tenth.Gravedigger {
 
-	public Gravedigger(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 98;
-		this.expansionSetCode = "M11";
-	}
+    public Gravedigger(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 98;
+        this.expansionSetCode = "M11";
+    }
 
-	public Gravedigger(final Gravedigger card) {
-		super(card);
-	}
+    public Gravedigger(final Gravedigger card) {
+        super(card);
+    }
 
-	@Override
-	public Gravedigger copy() {
-		return new Gravedigger(this);
-	}
+    @Override
+    public Gravedigger copy() {
+        return new Gravedigger(this);
+    }
 
 }

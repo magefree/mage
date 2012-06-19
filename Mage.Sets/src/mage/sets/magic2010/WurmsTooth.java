@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class WurmsTooth extends mage.sets.tenth.WurmsTooth {
 
-	public WurmsTooth(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 222;
-		this.expansionSetCode = "M10";
-	}
+    public WurmsTooth(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 222;
+        this.expansionSetCode = "M10";
+    }
 
-	public WurmsTooth(final WurmsTooth card) {
-		super(card);
-	}
+    public WurmsTooth(final WurmsTooth card) {
+        super(card);
+    }
 
-	@Override
-	public WurmsTooth copy() {
-		return new WurmsTooth(this);
-	}
+    @Override
+    public WurmsTooth copy() {
+        return new WurmsTooth(this);
+    }
 
 }

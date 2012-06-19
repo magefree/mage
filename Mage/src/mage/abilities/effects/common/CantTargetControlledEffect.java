@@ -47,73 +47,73 @@ import mage.game.stack.StackObject;
  */
 public class CantTargetControlledEffect extends ReplacementEffectImpl<CantTargetControlledEffect> {
 
-	private FilterPermanent filterTarget;
-	private FilterStackObject filterSource;
+    private FilterPermanent filterTarget;
+    private FilterStackObject filterSource;
 
-	public CantTargetControlledEffect(FilterPermanent filterTarget, FilterStackObject filterSource, Duration duration) {
-		super(duration, Outcome.Benefit);
-		this.filterTarget = filterTarget;
-		this.filterSource = filterSource;
-		setText();
-	}
+    public CantTargetControlledEffect(FilterPermanent filterTarget, FilterStackObject filterSource, Duration duration) {
+        super(duration, Outcome.Benefit);
+        this.filterTarget = filterTarget;
+        this.filterSource = filterSource;
+        setText();
+    }
 
-	public CantTargetControlledEffect(FilterPermanent filterTarget, Duration duration) {
-		this(filterTarget, null, duration);
-	}
+    public CantTargetControlledEffect(FilterPermanent filterTarget, Duration duration) {
+        this(filterTarget, null, duration);
+    }
 
-	public CantTargetControlledEffect(final CantTargetControlledEffect effect) {
-		super(effect);
-		if (effect.filterTarget != null)
-			this.filterTarget = effect.filterTarget.copy();
-		if (effect.filterSource != null)
-			this.filterSource = effect.filterSource.copy();
-	}
+    public CantTargetControlledEffect(final CantTargetControlledEffect effect) {
+        super(effect);
+        if (effect.filterTarget != null)
+            this.filterTarget = effect.filterTarget.copy();
+        if (effect.filterSource != null)
+            this.filterSource = effect.filterSource.copy();
+    }
 
-	@Override
-	public CantTargetControlledEffect copy() {
-		return new CantTargetControlledEffect(this);
-	}
+    @Override
+    public CantTargetControlledEffect copy() {
+        return new CantTargetControlledEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		return true;
-	}
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        return true;
+    }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (event.getType() == EventType.TARGET) {
-			filterTarget.setTargetController(TargetController.YOU);
-			Permanent permanent = game.getPermanent(event.getTargetId());
-			if (permanent != null && filterTarget.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
-				if (filterSource == null)
-					return true;
-				else {
-					StackObject sourceObject = game.getStack().getStackObject(event.getSourceId());
-					if (sourceObject != null && filterSource.match(sourceObject, game)) {
-						return true;
-					}
-				}
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (event.getType() == EventType.TARGET) {
+            filterTarget.setTargetController(TargetController.YOU);
+            Permanent permanent = game.getPermanent(event.getTargetId());
+            if (permanent != null && filterTarget.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
+                if (filterSource == null)
+                    return true;
+                else {
+                    StackObject sourceObject = game.getStack().getStackObject(event.getSourceId());
+                    if (sourceObject != null && filterSource.match(sourceObject, game)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 
-	private void setText() {
-		StringBuilder sb = new StringBuilder();
-		sb.append(filterTarget.getMessage()).append(" can't be the targets of ");
-		if (filterSource != null) {
-			sb.append(filterSource.getMessage());
-		}
-		else {
-			sb.append("spells");
-		}
-		sb.append(" ").append(duration.toString());
-		staticText = sb.toString();
-	}
+    private void setText() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(filterTarget.getMessage()).append(" can't be the targets of ");
+        if (filterSource != null) {
+            sb.append(filterSource.getMessage());
+        }
+        else {
+            sb.append("spells");
+        }
+        sb.append(" ").append(duration.toString());
+        staticText = sb.toString();
+    }
 
 }

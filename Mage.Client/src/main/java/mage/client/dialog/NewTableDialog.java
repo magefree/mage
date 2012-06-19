@@ -54,22 +54,22 @@ import java.util.UUID;
  */
 public class NewTableDialog extends MageDialog {
 
-	private final static Logger logger = Logger.getLogger(NewTableDialog.class);
+    private final static Logger logger = Logger.getLogger(NewTableDialog.class);
 
-	private TableView table;
-	private UUID playerId;
-	private UUID roomId;
-	private Session session;
-	private List<TablePlayerPanel> players = new ArrayList<TablePlayerPanel>();
-	
-	private static final String LIMITED = "Limited";
-	
+    private TableView table;
+    private UUID playerId;
+    private UUID roomId;
+    private Session session;
+    private List<TablePlayerPanel> players = new ArrayList<TablePlayerPanel>();
+
+    private static final String LIMITED = "Limited";
+
     /** Creates new form NewTableDialog */
     public NewTableDialog() {
         initComponents();
-	    txtName.setText("Game");
-		player1Panel.showLevel(false);
-		this.spnNumWins.setModel(new SpinnerNumberModel(1, 1, 5, 1));
+        txtName.setText("Game");
+        player1Panel.showLevel(false);
+        this.spnNumWins.setModel(new SpinnerNumberModel(1, 1, 5, 1));
     }
 
     /** This method is called from within the constructor to
@@ -290,150 +290,150 @@ public class NewTableDialog extends MageDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-	private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-		this.table = null;
-		this.playerId = null;
-		this.hideDialog();
-	}//GEN-LAST:event_btnCancelActionPerformed
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        this.table = null;
+        this.playerId = null;
+        this.hideDialog();
+    }//GEN-LAST:event_btnCancelActionPerformed
 
-	private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
-		GameTypeView gameType = (GameTypeView) cbGameType.getSelectedItem();
-		MatchOptions options = new MatchOptions(this.txtName.getText(), gameType.getName());
-		options.getPlayerTypes().add("Human");
-		for (TablePlayerPanel player: players) {
-			options.getPlayerTypes().add(player.getPlayerType());
-		}
-		options.setDeckType((String) this.cbDeckType.getSelectedItem());
+    private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
+        GameTypeView gameType = (GameTypeView) cbGameType.getSelectedItem();
+        MatchOptions options = new MatchOptions(this.txtName.getText(), gameType.getName());
+        options.getPlayerTypes().add("Human");
+        for (TablePlayerPanel player: players) {
+            options.getPlayerTypes().add(player.getPlayerType());
+        }
+        options.setDeckType((String) this.cbDeckType.getSelectedItem());
         options.setLimited(false);
-		options.setAttackOption((MultiplayerAttackOption) this.cbAttackOption.getSelectedItem());
-		options.setRange((RangeOfInfluence) this.cbRange.getSelectedItem());
-		options.setWinsNeeded((Integer)this.spnNumWins.getValue());
-		table = session.createTable(roomId, options);
-		if (table == null) {
-			JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error creating table.", "Error", JOptionPane.ERROR_MESSAGE);
-			return;
-		}
-		try {
-			if (session.joinTable(roomId, table.getTableId(), this.player1Panel.getPlayerName(), "Human", 1, DeckImporterUtil.importDeck(this.player1Panel.getDeckFile()))) {
-				for (TablePlayerPanel player: players) {
-					if (!player.getPlayerType().equals("Human")) {
-						if (!player.joinTable(roomId, table.getTableId())) {
-							JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error joining table.", "Error", JOptionPane.ERROR_MESSAGE);
-							session.removeTable(roomId, table.getTableId());
-							table = null;
-							return;
-						}
-					}
-				}
-				this.hideDialog();
-				return;
-			}
-		} catch (FileNotFoundException ex) {
-			handleError(ex);
-		} catch (IOException ex) {
-			handleError(ex);
-		} catch (ClassNotFoundException ex) {
-			handleError(ex);
-		}
-		JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error joining table.", "Error", JOptionPane.ERROR_MESSAGE);
-		session.removeTable(roomId, table.getTableId());
-		table = null;
-	}//GEN-LAST:event_btnOKActionPerformed
+        options.setAttackOption((MultiplayerAttackOption) this.cbAttackOption.getSelectedItem());
+        options.setRange((RangeOfInfluence) this.cbRange.getSelectedItem());
+        options.setWinsNeeded((Integer)this.spnNumWins.getValue());
+        table = session.createTable(roomId, options);
+        if (table == null) {
+            JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error creating table.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try {
+            if (session.joinTable(roomId, table.getTableId(), this.player1Panel.getPlayerName(), "Human", 1, DeckImporterUtil.importDeck(this.player1Panel.getDeckFile()))) {
+                for (TablePlayerPanel player: players) {
+                    if (!player.getPlayerType().equals("Human")) {
+                        if (!player.joinTable(roomId, table.getTableId())) {
+                            JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error joining table.", "Error", JOptionPane.ERROR_MESSAGE);
+                            session.removeTable(roomId, table.getTableId());
+                            table = null;
+                            return;
+                        }
+                    }
+                }
+                this.hideDialog();
+                return;
+            }
+        } catch (FileNotFoundException ex) {
+            handleError(ex);
+        } catch (IOException ex) {
+            handleError(ex);
+        } catch (ClassNotFoundException ex) {
+            handleError(ex);
+        }
+        JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error joining table.", "Error", JOptionPane.ERROR_MESSAGE);
+        session.removeTable(roomId, table.getTableId());
+        table = null;
+    }//GEN-LAST:event_btnOKActionPerformed
 
-	private void cbGameTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbGameTypeActionPerformed
-		setGameOptions();
-	}//GEN-LAST:event_cbGameTypeActionPerformed
+    private void cbGameTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbGameTypeActionPerformed
+        setGameOptions();
+    }//GEN-LAST:event_cbGameTypeActionPerformed
 
-	private void numPlayersChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_numPlayersChanged
-		int numPlayers = (Integer)this.spnNumPlayers.getValue() - 1;
-		createPlayers(numPlayers);
-	}//GEN-LAST:event_numPlayersChanged
+    private void numPlayersChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_numPlayersChanged
+        int numPlayers = (Integer)this.spnNumPlayers.getValue() - 1;
+        createPlayers(numPlayers);
+    }//GEN-LAST:event_numPlayersChanged
 
-	private void spnNumWinsnumPlayersChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnNumWinsnumPlayersChanged
-		// TODO add your handling code here:
-	}//GEN-LAST:event_spnNumWinsnumPlayersChanged
+    private void spnNumWinsnumPlayersChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnNumWinsnumPlayersChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_spnNumWinsnumPlayersChanged
 
-	private void setGameOptions() {
-		GameTypeView gameType = (GameTypeView) cbGameType.getSelectedItem();
-		this.spnNumPlayers.setModel(new SpinnerNumberModel(gameType.getMinPlayers(), gameType.getMinPlayers(), gameType.getMaxPlayers(), 1));
-		this.spnNumPlayers.setEnabled(gameType.getMinPlayers() != gameType.getMaxPlayers());
-		this.cbAttackOption.setEnabled(gameType.isUseAttackOption());
-		this.cbRange.setEnabled(gameType.isUseRange());
-		createPlayers(gameType.getMinPlayers() - 1);
-	}
+    private void setGameOptions() {
+        GameTypeView gameType = (GameTypeView) cbGameType.getSelectedItem();
+        this.spnNumPlayers.setModel(new SpinnerNumberModel(gameType.getMinPlayers(), gameType.getMinPlayers(), gameType.getMaxPlayers(), 1));
+        this.spnNumPlayers.setEnabled(gameType.getMinPlayers() != gameType.getMaxPlayers());
+        this.cbAttackOption.setEnabled(gameType.isUseAttackOption());
+        this.cbRange.setEnabled(gameType.isUseRange());
+        createPlayers(gameType.getMinPlayers() - 1);
+    }
 
-	private void createPlayers(int numPlayers) {
-		if (numPlayers > players.size()) {
-			while (players.size() != numPlayers) {
-				TablePlayerPanel playerPanel = new TablePlayerPanel();
-				playerPanel.init(players.size() + 2);
-				players.add(playerPanel);
-				playerPanel.addPlayerTypeEventListener(
-					new Listener<Event> () {
-						@Override
-						public void event(Event event) {
-							drawPlayers();
-						}
-					}
-				);
-			}
-		}
-		else if (numPlayers < players.size()) {
-			while (players.size() != numPlayers) {
-				players.remove(players.size() - 1);
-			}
-		}
-		drawPlayers();
-	}
+    private void createPlayers(int numPlayers) {
+        if (numPlayers > players.size()) {
+            while (players.size() != numPlayers) {
+                TablePlayerPanel playerPanel = new TablePlayerPanel();
+                playerPanel.init(players.size() + 2);
+                players.add(playerPanel);
+                playerPanel.addPlayerTypeEventListener(
+                    new Listener<Event> () {
+                        @Override
+                        public void event(Event event) {
+                            drawPlayers();
+                        }
+                    }
+                );
+            }
+        }
+        else if (numPlayers < players.size()) {
+            while (players.size() != numPlayers) {
+                players.remove(players.size() - 1);
+            }
+        }
+        drawPlayers();
+    }
 
-	private void drawPlayers() {
-		this.pnlOtherPlayers.removeAll();
-		for (TablePlayerPanel panel: players) {
-			this.pnlOtherPlayers.add(panel);
-		}
-		this.pack();
-		this.revalidate();
-		this.repaint();
-	}
+    private void drawPlayers() {
+        this.pnlOtherPlayers.removeAll();
+        for (TablePlayerPanel panel: players) {
+            this.pnlOtherPlayers.add(panel);
+        }
+        this.pack();
+        this.revalidate();
+        this.repaint();
+    }
 
-	private void handleError(Exception ex) {
-		logger.fatal("Error loading deck", ex);
-		JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error loading deck.", "Error", JOptionPane.ERROR_MESSAGE);
-	}
+    private void handleError(Exception ex) {
+        logger.fatal("Error loading deck", ex);
+        JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error loading deck.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
 
-	public void showDialog(UUID roomId) {
-		session = MageFrame.getSession();
-		MageFrame.getUI().addButton(MageComponents.NEW_TABLE_OK_BUTTON, btnOK);
-		this.player1Panel.setPlayerName(session.getUserName());
-		cbGameType.setModel(new DefaultComboBoxModel(session.getGameTypes().toArray()));
-		cbDeckType.setModel(new DefaultComboBoxModel(session.getDeckTypes()));
-		selectLimitedByDefault();
-		cbRange.setModel(new DefaultComboBoxModel(RangeOfInfluence.values()));
-		cbAttackOption.setModel(new DefaultComboBoxModel(MultiplayerAttackOption.values()));
-		this.roomId = roomId;
-		this.setModal(true);
-		setGameOptions();
-		this.setLocation(150, 100);
-		this.setVisible(true);
-	}
+    public void showDialog(UUID roomId) {
+        session = MageFrame.getSession();
+        MageFrame.getUI().addButton(MageComponents.NEW_TABLE_OK_BUTTON, btnOK);
+        this.player1Panel.setPlayerName(session.getUserName());
+        cbGameType.setModel(new DefaultComboBoxModel(session.getGameTypes().toArray()));
+        cbDeckType.setModel(new DefaultComboBoxModel(session.getDeckTypes()));
+        selectLimitedByDefault();
+        cbRange.setModel(new DefaultComboBoxModel(RangeOfInfluence.values()));
+        cbAttackOption.setModel(new DefaultComboBoxModel(MultiplayerAttackOption.values()));
+        this.roomId = roomId;
+        this.setModal(true);
+        setGameOptions();
+        this.setLocation(150, 100);
+        this.setVisible(true);
+    }
 
-	public TableView getTable() {
-		return table;
-	}
+    public TableView getTable() {
+        return table;
+    }
 
-	public UUID getPlayerId() {
-		return playerId;
-	}
-	
-	private void selectLimitedByDefault() {
-		for (int i = 0; i < cbDeckType.getItemCount(); i++) {
-			String name = (String)cbDeckType.getItemAt(i);
-			if (name.equals(LIMITED)) {
-				cbDeckType.setSelectedIndex(i);
-				break;
-			}
-		}
-	}
+    public UUID getPlayerId() {
+        return playerId;
+    }
+
+    private void selectLimitedByDefault() {
+        for (int i = 0; i < cbDeckType.getItemCount(); i++) {
+            String name = (String)cbDeckType.getItemAt(i);
+            if (name.equals(LIMITED)) {
+                cbDeckType.setSelectedIndex(i);
+                break;
+            }
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;

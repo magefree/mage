@@ -42,38 +42,38 @@ import mage.players.Player;
  */
 public class TapSourceUnlessPaysEffect extends OneShotEffect<TapSourceUnlessPaysEffect> {
 
-	protected Cost cost;
+    protected Cost cost;
 
-	public TapSourceUnlessPaysEffect(Cost cost) {
-		super(Outcome.Tap);
-		this.cost = cost;
-	}
+    public TapSourceUnlessPaysEffect(Cost cost) {
+        super(Outcome.Tap);
+        this.cost = cost;
+    }
 
-	public TapSourceUnlessPaysEffect(final TapSourceUnlessPaysEffect effect) {
-		super(effect);
-		this.cost = effect.cost;
-	}
+    public TapSourceUnlessPaysEffect(final TapSourceUnlessPaysEffect effect) {
+        super(effect);
+        this.cost = effect.cost;
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-		Permanent permanent = game.getPermanent(source.getSourceId());
-		if (player != null && permanent != null) { 
-			if (player.chooseUse(Outcome.Benefit, cost.getText() + " or " + permanent.getName() + " comes into play tapped?", game)) {
-				cost.clearPaid();
-				if (cost.pay(source, game, source.getId(), source.getControllerId(), false))
-					return true;
-			}
-			permanent.tap(game);
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (player != null && permanent != null) { 
+            if (player.chooseUse(Outcome.Benefit, cost.getText() + " or " + permanent.getName() + " comes into play tapped?", game)) {
+                cost.clearPaid();
+                if (cost.pay(source, game, source.getId(), source.getControllerId(), false))
+                    return true;
+            }
+            permanent.tap(game);
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public TapSourceUnlessPaysEffect copy() {
-		return new TapSourceUnlessPaysEffect(this);
-	}
+    @Override
+    public TapSourceUnlessPaysEffect copy() {
+        return new TapSourceUnlessPaysEffect(this);
+    }
 
 
 }

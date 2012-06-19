@@ -61,7 +61,7 @@ public class Fettergeist extends CardImpl<Fettergeist> {
         this.toughness = new MageInt(4);
 
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // At the beginning of your upkeep, sacrifice Fettergeist unless you pay {1} for each other creature you control.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new FettergeistUnlessPaysEffect(), Constants.TargetController.YOU, false));
 

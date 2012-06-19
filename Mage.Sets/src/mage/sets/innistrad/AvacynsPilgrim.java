@@ -41,24 +41,24 @@ import java.util.UUID;
  */
 public class AvacynsPilgrim extends CardImpl<AvacynsPilgrim> {
 
-	public AvacynsPilgrim(UUID ownerId) {
-		super(ownerId, 170, "Avacyn's Pilgrim", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
-		this.expansionSetCode = "ISD";
-		this.subtype.add("Human");
-		this.subtype.add("Monk");
-		this.color.setGreen(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
-		this.addAbility(new WhiteManaAbility());
-	}
+    public AvacynsPilgrim(UUID ownerId) {
+        super(ownerId, 170, "Avacyn's Pilgrim", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
+        this.expansionSetCode = "ISD";
+        this.subtype.add("Human");
+        this.subtype.add("Monk");
+        this.color.setGreen(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+        this.addAbility(new WhiteManaAbility());
+    }
 
-	public AvacynsPilgrim(final AvacynsPilgrim card) {
-		super(card);
-	}
+    public AvacynsPilgrim(final AvacynsPilgrim card) {
+        super(card);
+    }
 
-	@Override
-	public AvacynsPilgrim copy() {
-		return new AvacynsPilgrim(this);
-	}
+    @Override
+    public AvacynsPilgrim copy() {
+        return new AvacynsPilgrim(this);
+    }
 
 }

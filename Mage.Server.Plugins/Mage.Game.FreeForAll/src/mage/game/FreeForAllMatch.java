@@ -37,15 +37,15 @@ import mage.game.match.MatchOptions;
  */
 public class FreeForAllMatch extends MatchImpl {
 
-	public FreeForAllMatch(MatchOptions options) {
-		super(options);
-	}
+    public FreeForAllMatch(MatchOptions options) {
+        super(options);
+    }
 
-	@Override
-	public void startGame() throws GameException {
-		FreeForAll game = new FreeForAll(options.getAttackOption(), options.getRange());
-		initGame(game);
-		games.add(game);
-	}
+    @Override
+    public void startGame() throws GameException {
+        FreeForAll game = new FreeForAll(options.getAttackOption(), options.getRange());
+        initGame(game);
+        games.add(game);
+    }
 
 }

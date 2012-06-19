@@ -47,23 +47,23 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class LeylineOfVitality extends CardImpl<LeylineOfVitality> {
 
-	public LeylineOfVitality(UUID ownerId) {
-		super(ownerId, 183, "Leyline of Vitality", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
-		this.expansionSetCode = "M11";
-		this.color.setGreen(true);
-		this.addAbility(LeylineAbility.getInstance());
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false)));
-        
+    public LeylineOfVitality(UUID ownerId) {
+        super(ownerId, 183, "Leyline of Vitality", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
+        this.expansionSetCode = "M11";
+        this.color.setGreen(true);
+        this.addAbility(LeylineAbility.getInstance());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false)));
+
         this.addAbility(new CreatureEntersBattlefieldTriggeredAbility(new GainLifeEffect(1), true));
-	}
+    }
 
-	public LeylineOfVitality(final LeylineOfVitality card) {
-		super(card);
-	}
+    public LeylineOfVitality(final LeylineOfVitality card) {
+        super(card);
+    }
 
-	@Override
-	public LeylineOfVitality copy() {
-		return new LeylineOfVitality(this);
-	}
+    @Override
+    public LeylineOfVitality copy() {
+        return new LeylineOfVitality(this);
+    }
 
 }

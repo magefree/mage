@@ -41,23 +41,23 @@ import mage.cards.CardImpl;
  */
 public class Ornithopter extends CardImpl<Ornithopter> {
 
-	public Ornithopter(UUID ownerId) {
-		super(ownerId, 336, "Ornithopter", Rarity.COMMON, new CardType[]{CardType.CREATURE, CardType.ARTIFACT}, "{0}");
-		this.expansionSetCode = "10E";
-		this.subtype.add("Thopter");
-		this.power = new MageInt(0);
-		this.toughness = new MageInt(2);
+    public Ornithopter(UUID ownerId) {
+        super(ownerId, 336, "Ornithopter", Rarity.COMMON, new CardType[]{CardType.CREATURE, CardType.ARTIFACT}, "{0}");
+        this.expansionSetCode = "10E";
+        this.subtype.add("Thopter");
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(2);
 
-		this.addAbility(FlyingAbility.getInstance());
-	}
+        this.addAbility(FlyingAbility.getInstance());
+    }
 
-	public Ornithopter(final Ornithopter card) {
-		super(card);
-	}
+    public Ornithopter(final Ornithopter card) {
+        super(card);
+    }
 
-	@Override
-	public Ornithopter copy() {
-		return new Ornithopter(this);
-	}
+    @Override
+    public Ornithopter copy() {
+        return new Ornithopter(this);
+    }
 
 }

@@ -47,7 +47,7 @@ public class AkkiBlizzardHerder extends CardImpl<AkkiBlizzardHerder> {
     static {
         filter.getCardType().add(CardType.LAND);
     }
-    
+
     public AkkiBlizzardHerder(UUID ownerId) {
         super(ownerId, 91, "Akki Blizzard-Herder", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.expansionSetCode = "BOK";

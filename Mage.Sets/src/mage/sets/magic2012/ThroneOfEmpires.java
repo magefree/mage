@@ -48,57 +48,57 @@ import java.util.UUID;
  */
 public class ThroneOfEmpires extends CardImpl<ThroneOfEmpires> {
 
-	public ThroneOfEmpires(UUID ownerId) {
-		super(ownerId, 221, "Throne of Empires", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-		this.expansionSetCode = "M12";
+    public ThroneOfEmpires(UUID ownerId) {
+        super(ownerId, 221, "Throne of Empires", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
+        this.expansionSetCode = "M12";
 
-		// {1}, {tap}: Put a 1/1 white Soldier creature token onto the battlefield. Put five of those tokens onto the battlefield instead if you control artifacts named Crown of Empires and Scepter of Empires.
-		Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ThroneOfEmpiresEffect(), new GenericManaCost(1));
-		ability.addCost(new TapSourceCost());
-		this.addAbility(ability);
-	}
+        // {1}, {tap}: Put a 1/1 white Soldier creature token onto the battlefield. Put five of those tokens onto the battlefield instead if you control artifacts named Crown of Empires and Scepter of Empires.
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ThroneOfEmpiresEffect(), new GenericManaCost(1));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
+    }
 
-	public ThroneOfEmpires(final ThroneOfEmpires card) {
-		super(card);
-	}
+    public ThroneOfEmpires(final ThroneOfEmpires card) {
+        super(card);
+    }
 
-	@Override
-	public ThroneOfEmpires copy() {
-		return new ThroneOfEmpires(this);
-	}
+    @Override
+    public ThroneOfEmpires copy() {
+        return new ThroneOfEmpires(this);
+    }
 }
 
 class ThroneOfEmpiresEffect extends OneShotEffect<ThroneOfEmpiresEffect> {
 
-	public ThroneOfEmpiresEffect() {
-		super(Constants.Outcome.PutCreatureInPlay);
-		staticText = "Put a 1/1 white Soldier creature token onto the battlefield. Put five of those tokens onto the battlefield instead if you control artifacts named Crown of Empires and Scepter of Empires";
-	}
+    public ThroneOfEmpiresEffect() {
+        super(Constants.Outcome.PutCreatureInPlay);
+        staticText = "Put a 1/1 white Soldier creature token onto the battlefield. Put five of those tokens onto the battlefield instead if you control artifacts named Crown of Empires and Scepter of Empires";
+    }
 
-	public ThroneOfEmpiresEffect(ThroneOfEmpiresEffect effect) {
-		super(effect);
-	}
+    public ThroneOfEmpiresEffect(ThroneOfEmpiresEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		boolean scepter = false;
-		boolean crown = false;
-		for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
-			if (permanent.getName().equals("Scepter of Empires")) {
-				scepter = true;
-			} else if (permanent.getName().equals("Crown of Empires")) {
-				crown = true;
-			}
-			if (scepter && crown) break;
-		}
-		Token soldier = new SoldierToken();
-		int count = scepter && crown ? 5 : 1;
-		soldier.putOntoBattlefield(count, game, source.getSourceId(), source.getControllerId());
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        boolean scepter = false;
+        boolean crown = false;
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
+            if (permanent.getName().equals("Scepter of Empires")) {
+                scepter = true;
+            } else if (permanent.getName().equals("Crown of Empires")) {
+                crown = true;
+            }
+            if (scepter && crown) break;
+        }
+        Token soldier = new SoldierToken();
+        int count = scepter && crown ? 5 : 1;
+        soldier.putOntoBattlefield(count, game, source.getSourceId(), source.getControllerId());
+        return false;
+    }
 
-	@Override
-	public ThroneOfEmpiresEffect copy() {
-		return new ThroneOfEmpiresEffect(this);
-	}
+    @Override
+    public ThroneOfEmpiresEffect copy() {
+        return new ThroneOfEmpiresEffect(this);
+    }
 }

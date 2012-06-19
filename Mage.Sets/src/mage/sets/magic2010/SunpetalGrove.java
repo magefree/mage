@@ -49,32 +49,32 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class SunpetalGrove extends CardImpl<SunpetalGrove> {
 
-	private static final FilterLandPermanent filter = new FilterLandPermanent();
+    private static final FilterLandPermanent filter = new FilterLandPermanent();
 
-	static {
-		filter.getSubtype().add("Forest");
-		filter.getSubtype().add("Plains");
-		filter.setScopeSubtype(ComparisonScope.Any);
-		filter.setMessage("Forest or a Plains");
-	}
+    static {
+        filter.getSubtype().add("Forest");
+        filter.getSubtype().add("Plains");
+        filter.setScopeSubtype(ComparisonScope.Any);
+        filter.setMessage("Forest or a Plains");
+    }
 
-	public SunpetalGrove(UUID ownerId) {
-		super(ownerId, 228, "Sunpetal Grove", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-		this.expansionSetCode = "M10";
+    public SunpetalGrove(UUID ownerId) {
+        super(ownerId, 228, "Sunpetal Grove", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+        this.expansionSetCode = "M10";
 
-		Condition controls = new UnlessCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0));
-		String abilityText = "tap it unless you control a " + filter.getMessage();
-		this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
-		this.addAbility(new GreenManaAbility());
-		this.addAbility(new WhiteManaAbility());
-	}
+        Condition controls = new UnlessCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0));
+        String abilityText = "tap it unless you control a " + filter.getMessage();
+        this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
+        this.addAbility(new GreenManaAbility());
+        this.addAbility(new WhiteManaAbility());
+    }
 
-	public SunpetalGrove(final SunpetalGrove card) {
-		super(card);
-	}
+    public SunpetalGrove(final SunpetalGrove card) {
+        super(card);
+    }
 
-	@Override
-	public SunpetalGrove copy() {
-		return new SunpetalGrove(this);
-	}
+    @Override
+    public SunpetalGrove copy() {
+        return new SunpetalGrove(this);
+    }
 }

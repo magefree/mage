@@ -43,27 +43,27 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class DestructiveForce extends CardImpl<DestructiveForce> {
 
-	private static final FilterControlledPermanent filter = new FilterControlledPermanent("land");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("land");
 
-	static {
-		filter.getCardType().add(CardType.LAND);
-	}
+    static {
+        filter.getCardType().add(CardType.LAND);
+    }
 
-	public DestructiveForce(UUID ownerId) {
-		super(ownerId, 133, "Destructive Force", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{R}{R}");
-		this.expansionSetCode = "M11";
-		this.color.setRed(true);
-		this.getSpellAbility().addEffect(new SacrificeAllEffect(5, filter));
-		this.getSpellAbility().addEffect(new DamageAllEffect(5, new FilterCreaturePermanent()));
-	}
+    public DestructiveForce(UUID ownerId) {
+        super(ownerId, 133, "Destructive Force", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{R}{R}");
+        this.expansionSetCode = "M11";
+        this.color.setRed(true);
+        this.getSpellAbility().addEffect(new SacrificeAllEffect(5, filter));
+        this.getSpellAbility().addEffect(new DamageAllEffect(5, new FilterCreaturePermanent()));
+    }
 
-	public DestructiveForce(final DestructiveForce card) {
-		super(card);
-	}
+    public DestructiveForce(final DestructiveForce card) {
+        super(card);
+    }
 
-	@Override
-	public DestructiveForce copy() {
-		return new DestructiveForce(this);
-	}
+    @Override
+    public DestructiveForce copy() {
+        return new DestructiveForce(this);
+    }
 
 }

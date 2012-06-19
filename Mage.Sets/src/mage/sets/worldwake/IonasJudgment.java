@@ -53,10 +53,10 @@ public class IonasJudgment extends CardImpl<IonasJudgment> {
     public IonasJudgment (UUID ownerId) {
         super(ownerId, 8, "Iona's Judgment", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{W}");
         this.expansionSetCode = "WWK";
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         this.getSpellAbility().addEffect(new ExileTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
-        
+
     }
 
     public IonasJudgment (final IonasJudgment card) {

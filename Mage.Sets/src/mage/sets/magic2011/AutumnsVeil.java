@@ -46,32 +46,32 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class AutumnsVeil extends CardImpl<AutumnsVeil> {
 
-	private static final FilterSpell filterTarget1 = new FilterSpell("spells you control");
-	private static final FilterCreaturePermanent filterTarget2 = new FilterCreaturePermanent();
-	private static final FilterStackObject filterSource = new FilterStackObject("blue or black spells");
+    private static final FilterSpell filterTarget1 = new FilterSpell("spells you control");
+    private static final FilterCreaturePermanent filterTarget2 = new FilterCreaturePermanent();
+    private static final FilterStackObject filterSource = new FilterStackObject("blue or black spells");
 
-	static {
-		filterSource.getColor().setBlue(true);
-		filterSource.getColor().setBlack(true);
-		filterSource.setScopeColor(ComparisonScope.Any);
-	}
+    static {
+        filterSource.getColor().setBlue(true);
+        filterSource.getColor().setBlack(true);
+        filterSource.setScopeColor(ComparisonScope.Any);
+    }
 
-	public AutumnsVeil(UUID ownerId) {
-		super(ownerId, 162, "Autumn's Veil", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}");
-		this.expansionSetCode = "M11";
-		this.color.setGreen(true);
-		this.getSpellAbility().addEffect(new CantCounterControlledEffect(filterTarget1, filterSource, Duration.EndOfTurn));
-		this.getSpellAbility().addEffect(new CantTargetControlledEffect(filterTarget2, filterSource, Duration.EndOfTurn));
-	}
+    public AutumnsVeil(UUID ownerId) {
+        super(ownerId, 162, "Autumn's Veil", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}");
+        this.expansionSetCode = "M11";
+        this.color.setGreen(true);
+        this.getSpellAbility().addEffect(new CantCounterControlledEffect(filterTarget1, filterSource, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new CantTargetControlledEffect(filterTarget2, filterSource, Duration.EndOfTurn));
+    }
 
-	public AutumnsVeil(final AutumnsVeil card) {
-		super(card);
-	}
+    public AutumnsVeil(final AutumnsVeil card) {
+        super(card);
+    }
 
-	@Override
-	public AutumnsVeil copy() {
-		return new AutumnsVeil(this);
-	}
+    @Override
+    public AutumnsVeil copy() {
+        return new AutumnsVeil(this);
+    }
 
 }
 

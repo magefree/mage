@@ -76,22 +76,22 @@ public class Seance extends CardImpl<Seance> {
 
 class SeanceEffect extends OneShotEffect<SeanceEffect> {
 
-	public SeanceEffect() {
-		super(Constants.Outcome.PutCreatureInPlay);
-		this.staticText = "put a token onto the battlefield that's a copy of that card except it's a Spirit in addition to its other types. Exile it at the beginning of the next end step";
-	}
+    public SeanceEffect() {
+        super(Constants.Outcome.PutCreatureInPlay);
+        this.staticText = "put a token onto the battlefield that's a copy of that card except it's a Spirit in addition to its other types. Exile it at the beginning of the next end step";
+    }
 
-	public SeanceEffect(final SeanceEffect effect) {
-		super(effect);
-	}
+    public SeanceEffect(final SeanceEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public SeanceEffect copy() {
-		return new SeanceEffect(this);
-	}
+    @Override
+    public SeanceEffect copy() {
+        return new SeanceEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
         Card card = game.getCard(source.getFirstTarget());
         if (card != null) {
             card.moveToExile(null, "", source.getSourceId(), game);
@@ -112,7 +112,7 @@ class SeanceEffect extends OneShotEffect<SeanceEffect> {
             return true;
         }
 
-		return false;
-	}
+        return false;
+    }
 
 }

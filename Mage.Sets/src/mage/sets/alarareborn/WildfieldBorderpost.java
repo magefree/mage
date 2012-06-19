@@ -64,8 +64,8 @@ public class WildfieldBorderpost extends CardImpl<WildfieldBorderpost> {
     public WildfieldBorderpost (UUID ownerId) {
         super(ownerId, 80, "Wildfield Borderpost", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}{G}{W}");
         this.expansionSetCode = "ARB";
-		this.color.setGreen(true);
-		this.color.setWhite(true);
+        this.color.setGreen(true);
+        this.color.setWhite(true);
         Cost cost = new CompositeCost(new GenericManaCost(1), new ReturnToHandTargetCost(new TargetControlledPermanent(filter)), COST_DESCRIPTION);
         this.getSpellAbility().addAlternativeCost(new AlternativeCostImpl(ALTERNATIVE_COST_DESCRIPTION, cost));
         this.addAbility(new EntersBattlefieldTappedAbility());

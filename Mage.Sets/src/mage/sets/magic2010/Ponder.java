@@ -40,24 +40,24 @@ import mage.cards.CardImpl;
  */
 public class Ponder extends CardImpl<Ponder> {
 
-	public Ponder(UUID ownerId) {
-		super(ownerId, 68, "Ponder", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}");
-		this.expansionSetCode = "M10";
+    public Ponder(UUID ownerId) {
+        super(ownerId, 68, "Ponder", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}");
+        this.expansionSetCode = "M10";
 
-		this.color.setBlue(true);
+        this.color.setBlue(true);
 
-		// Look at the top three cards of your library, then put them back in any order. You may shuffle your library.
-		this.getSpellAbility().addEffect(new LookLibraryControllerEffect(3, true));
-		// Draw a card.
-		this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
-	}
+        // Look at the top three cards of your library, then put them back in any order. You may shuffle your library.
+        this.getSpellAbility().addEffect(new LookLibraryControllerEffect(3, true));
+        // Draw a card.
+        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+    }
 
-	public Ponder(final Ponder card) {
-		super(card);
-	}
+    public Ponder(final Ponder card) {
+        super(card);
+    }
 
-	@Override
-	public Ponder copy() {
-		return new Ponder(this);
-	}
+    @Override
+    public Ponder copy() {
+        return new Ponder(this);
+    }
 }

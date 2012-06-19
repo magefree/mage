@@ -43,55 +43,55 @@ import mage.players.Player;
  */
 public class PreventAllDamageToEffect extends PreventionEffectImpl<PreventAllDamageToEffect> {
 
-	protected FilterInPlay filter;
+    protected FilterInPlay filter;
 
-	public PreventAllDamageToEffect(Duration duration, FilterInPlay filter) {
-		super(duration);
-		this.filter = filter;
-		staticText = "Prevent all damage that would be dealt to " + filter.getMessage() + " " + duration.toString();
-	}
+    public PreventAllDamageToEffect(Duration duration, FilterInPlay filter) {
+        super(duration);
+        this.filter = filter;
+        staticText = "Prevent all damage that would be dealt to " + filter.getMessage() + " " + duration.toString();
+    }
 
-	public PreventAllDamageToEffect(final PreventAllDamageToEffect effect) {
-		super(effect);
-		this.filter = effect.filter.copy();
-	}
+    public PreventAllDamageToEffect(final PreventAllDamageToEffect effect) {
+        super(effect);
+        this.filter = effect.filter.copy();
+    }
 
-	@Override
-	public PreventAllDamageToEffect copy() {
-		return new PreventAllDamageToEffect(this);
-	}
+    @Override
+    public PreventAllDamageToEffect copy() {
+        return new PreventAllDamageToEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), event.getAmount(), false);
-		if (!game.replaceEvent(preventEvent)) {
-			int damage = event.getAmount();
-			event.setAmount(0);
-			game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), damage));
-		}
-		return false;
-	}
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), event.getAmount(), false);
+        if (!game.replaceEvent(preventEvent)) {
+            int damage = event.getAmount();
+            event.setAmount(0);
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), damage));
+        }
+        return false;
+    }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (super.applies(event, source, game)) {
-			Permanent permanent = game.getPermanent(event.getTargetId());
-			if (permanent != null) {
-				if (filter.match(permanent, source.getSourceId(), source.getControllerId(), game))
-					return true;
-			}
-			else {
-				Player player = game.getPlayer(event.getTargetId());
-				if (player != null && filter.match(player, source.getSourceId(), source.getControllerId(), game))
-					return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (super.applies(event, source, game)) {
+            Permanent permanent = game.getPermanent(event.getTargetId());
+            if (permanent != null) {
+                if (filter.match(permanent, source.getSourceId(), source.getControllerId(), game))
+                    return true;
+            }
+            else {
+                Player player = game.getPlayer(event.getTargetId());
+                if (player != null && filter.match(player, source.getSourceId(), source.getControllerId(), game))
+                    return true;
+            }
+        }
+        return false;
+    }
 
 }

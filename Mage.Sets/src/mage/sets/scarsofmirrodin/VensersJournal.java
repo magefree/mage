@@ -51,11 +51,11 @@ public class VensersJournal extends CardImpl<VensersJournal> {
         this.expansionSetCode = "SOM";
 
         // You have no maximum hand size.
-		Effect effect = new MaximumHandSizeControllerEffect(Integer.MAX_VALUE, Constants.Duration.WhileOnBattlefield, false);
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect));
+        Effect effect = new MaximumHandSizeControllerEffect(Integer.MAX_VALUE, Constants.Duration.WhileOnBattlefield, false);
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect));
 
         // At the beginning of your upkeep, you gain 1 life for each card in your hand.
-		this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(new CardsInControllerHandCount()), Constants.TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(new CardsInControllerHandCount()), Constants.TargetController.YOU, false));
     }
 
     public VensersJournal(final VensersJournal card) {

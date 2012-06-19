@@ -58,28 +58,28 @@ public class QuagSickness extends CardImpl<QuagSickness> {
         filter.setTargetController(TargetController.YOU);
     }
 
-	public QuagSickness(UUID ownerId) {
-		super(ownerId, 111, "Quag Sickness", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
-		this.expansionSetCode = "M11";
-		this.color.setBlack(true);
-		this.subtype.add("Aura");
+    public QuagSickness(UUID ownerId) {
+        super(ownerId, 111, "Quag Sickness", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
+        this.expansionSetCode = "M11";
+        this.color.setBlack(true);
+        this.subtype.add("Aura");
 
-		TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-		this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
+        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
         PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(filter, -1);
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(amount, amount, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(amount, amount, Duration.WhileOnBattlefield)));
 
-	}
+    }
 
-	public QuagSickness(final QuagSickness card) {
-		super(card);
-	}
+    public QuagSickness(final QuagSickness card) {
+        super(card);
+    }
 
-	@Override
-	public QuagSickness copy() {
-		return new QuagSickness(this);
-	}
+    @Override
+    public QuagSickness copy() {
+        return new QuagSickness(this);
+    }
 }

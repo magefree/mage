@@ -37,52 +37,52 @@ import mage.game.permanent.token.Token;
  */
 public class CopyTokenFunction implements Function<Token, Card> {
 
-	protected Token target;
+    protected Token target;
 
-	public CopyTokenFunction(Token target) {
-		if (target == null)
-			throw new IllegalArgumentException("Target can't be null");
-		this.target = target;
-	}
+    public CopyTokenFunction(Token target) {
+        if (target == null)
+            throw new IllegalArgumentException("Target can't be null");
+        this.target = target;
+    }
 
-	@Override
-	public Token apply(Card source) {
-		if (target == null)
-			throw new IllegalArgumentException("Target can't be null");
+    @Override
+    public Token apply(Card source) {
+        if (target == null)
+            throw new IllegalArgumentException("Target can't be null");
 
-		target.setName(source.getName());
-		target.getColor().setColor(source.getColor());
-		target.getManaCost().clear();
-		target.getManaCost().add(source.getManaCost());
-		target.getCardType().clear();
-		for (Constants.CardType type : source.getCardType()) {
-			target.getCardType().add(type);
-		}
-		target.getSubtype().clear();
-		for (String type : source.getSubtype()) {
-			target.getSubtype().add(type);
-		}
-		target.getSupertype().clear();
-		for (String type : source.getSupertype()) {
-			target.getSupertype().add(type);
-		}
-		//target.setExpansionSetCode(source.getExpansionSetCode());
-		target.getAbilities().clear();
+        target.setName(source.getName());
+        target.getColor().setColor(source.getColor());
+        target.getManaCost().clear();
+        target.getManaCost().add(source.getManaCost());
+        target.getCardType().clear();
+        for (Constants.CardType type : source.getCardType()) {
+            target.getCardType().add(type);
+        }
+        target.getSubtype().clear();
+        for (String type : source.getSubtype()) {
+            target.getSubtype().add(type);
+        }
+        target.getSupertype().clear();
+        for (String type : source.getSupertype()) {
+            target.getSupertype().add(type);
+        }
+        //target.setExpansionSetCode(source.getExpansionSetCode());
+        target.getAbilities().clear();
 
-		for (Ability ability0 : source.getAbilities()) {
-			Ability ability = ability0.copy();
-			ability.newId();
-			ability.setSourceId(target.getId());
-			target.addAbility(ability);
-		}
+        for (Ability ability0 : source.getAbilities()) {
+            Ability ability = ability0.copy();
+            ability.newId();
+            ability.setSourceId(target.getId());
+            target.addAbility(ability);
+        }
 
-		target.getPower().setValue(source.getPower().getValue());
-		target.getToughness().setValue(source.getToughness().getValue());
+        target.getPower().setValue(source.getPower().getValue());
+        target.getToughness().setValue(source.getToughness().getValue());
 
-		return target;
-	}
+        return target;
+    }
 
-	public Token from(Card source) {
-		return apply(source);
-	}
+    public Token from(Card source) {
+        return apply(source);
+    }
 }

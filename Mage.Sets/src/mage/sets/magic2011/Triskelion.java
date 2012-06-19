@@ -49,26 +49,26 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class Triskelion extends CardImpl<Triskelion> {
 
-	public Triskelion(UUID ownerId) {
-		super(ownerId, 218, "Triskelion", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Construct");
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
+    public Triskelion(UUID ownerId) {
+        super(ownerId, 218, "Triskelion", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Construct");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-		this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)), "with three +1/+1 counters on it"));
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new RemoveCountersSourceCost(CounterType.P1P1.createInstance()));
-		ability.addTarget(new TargetCreatureOrPlayer());
-		this.addAbility(ability);
-	}
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)), "with three +1/+1 counters on it"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new RemoveCountersSourceCost(CounterType.P1P1.createInstance()));
+        ability.addTarget(new TargetCreatureOrPlayer());
+        this.addAbility(ability);
+    }
 
-	public Triskelion(final Triskelion card) {
-		super(card);
-	}
+    public Triskelion(final Triskelion card) {
+        super(card);
+    }
 
-	@Override
-	public Triskelion copy() {
-		return new Triskelion(this);
-	}
+    @Override
+    public Triskelion copy() {
+        return new Triskelion(this);
+    }
 
 }

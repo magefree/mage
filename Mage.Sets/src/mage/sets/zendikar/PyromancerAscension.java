@@ -52,121 +52,121 @@ import mage.target.TargetSpell;
  * @author nantuko
  */
 public class PyromancerAscension extends CardImpl<PyromancerAscension> {
-	
-	public PyromancerAscension(UUID ownerId) {
-		super(ownerId, 143, "Pyromancer Ascension", Rarity.RARE, new CardType[] { CardType.ENCHANTMENT }, "{1}{R}");
-		this.expansionSetCode = "ZEN";
-		this.color.setRed(true);
-		this.addAbility(new PyromancerAscensionQuestTriggeredAbility());
-		this.addAbility(new PyromancerAscensionCopyTriggeredAbility());
-	}
 
-	public PyromancerAscension(final PyromancerAscension card) {
-		super(card);
-	}
+    public PyromancerAscension(UUID ownerId) {
+        super(ownerId, 143, "Pyromancer Ascension", Rarity.RARE, new CardType[] { CardType.ENCHANTMENT }, "{1}{R}");
+        this.expansionSetCode = "ZEN";
+        this.color.setRed(true);
+        this.addAbility(new PyromancerAscensionQuestTriggeredAbility());
+        this.addAbility(new PyromancerAscensionCopyTriggeredAbility());
+    }
 
-	@Override
-	public PyromancerAscension copy() {
-		return new PyromancerAscension(this);
-	}
+    public PyromancerAscension(final PyromancerAscension card) {
+        super(card);
+    }
+
+    @Override
+    public PyromancerAscension copy() {
+        return new PyromancerAscension(this);
+    }
 
 }
 
 class PyromancerAscensionQuestTriggeredAbility extends TriggeredAbilityImpl<PyromancerAscensionQuestTriggeredAbility> {
-	
-	PyromancerAscensionQuestTriggeredAbility() {
-		super(Constants.Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true);
-	}
 
-	PyromancerAscensionQuestTriggeredAbility(final PyromancerAscensionQuestTriggeredAbility ability) {
-		super(ability);
-	}
+    PyromancerAscensionQuestTriggeredAbility() {
+        super(Constants.Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true);
+    }
 
-	@Override
-	public PyromancerAscensionQuestTriggeredAbility copy() {
-		return new PyromancerAscensionQuestTriggeredAbility(this);
-	}
+    PyromancerAscensionQuestTriggeredAbility(final PyromancerAscensionQuestTriggeredAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getPlayerId().equals(this.getControllerId())) {
-			Spell spell = game.getStack().getSpell(event.getTargetId());
-			if (isControlledInstantOrSorcery(spell)) {
-				Card sourceCard = game.getCard(spell.getSourceId());
-				if (sourceCard != null) {
-					for (UUID uuid : game.getPlayer(this.getControllerId()).getGraveyard()) {
-						if (!uuid.equals(sourceCard.getId())) {
-							Card card = game.getCard(uuid);
-							if (card != null && card.getName().equals(sourceCard.getName())) {
-								return true;
-							}
-						}
-					}
-				}	
-			}
-		}
-		return false;
-	}
-	
-	private boolean isControlledInstantOrSorcery(Spell spell) {
-		return spell != null && 
-			(spell.getControllerId().equals(this.getControllerId())) && 
-			(spell.getCardType().contains(CardType.INSTANT) || spell.getCardType().contains(CardType.SORCERY));
-	}
+    @Override
+    public PyromancerAscensionQuestTriggeredAbility copy() {
+        return new PyromancerAscensionQuestTriggeredAbility(this);
+    }
 
-	@Override
-	public String getRule() {
-		return "Whenever you cast an instant or sorcery spell that has the same name as a card in your graveyard, you may put a quest counter on {this}.";
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getPlayerId().equals(this.getControllerId())) {
+            Spell spell = game.getStack().getSpell(event.getTargetId());
+            if (isControlledInstantOrSorcery(spell)) {
+                Card sourceCard = game.getCard(spell.getSourceId());
+                if (sourceCard != null) {
+                    for (UUID uuid : game.getPlayer(this.getControllerId()).getGraveyard()) {
+                        if (!uuid.equals(sourceCard.getId())) {
+                            Card card = game.getCard(uuid);
+                            if (card != null && card.getName().equals(sourceCard.getName())) {
+                                return true;
+                            }
+                        }
+                    }
+                }    
+            }
+        }
+        return false;
+    }
+
+    private boolean isControlledInstantOrSorcery(Spell spell) {
+        return spell != null && 
+            (spell.getControllerId().equals(this.getControllerId())) && 
+            (spell.getCardType().contains(CardType.INSTANT) || spell.getCardType().contains(CardType.SORCERY));
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever you cast an instant or sorcery spell that has the same name as a card in your graveyard, you may put a quest counter on {this}.";
+    }
 }
 
 class PyromancerAscensionCopyTriggeredAbility extends TriggeredAbilityImpl<PyromancerAscensionCopyTriggeredAbility> {
-	
-	private static FilterSpell filter = new FilterSpell();
-	
-	static {
-		filter.getCardType().add(CardType.INSTANT);
-		filter.getCardType().add(CardType.SORCERY);
-		filter.setScopeCardType(ComparisonScope.Any);
-	}
-	
-	PyromancerAscensionCopyTriggeredAbility() {
-		super(Constants.Zone.BATTLEFIELD, new CopyTargetSpellEffect(), true);
-		this.addTarget(new TargetSpell(filter));
-	}
 
-	PyromancerAscensionCopyTriggeredAbility(final PyromancerAscensionCopyTriggeredAbility ability) {
-		super(ability);
-	}
+    private static FilterSpell filter = new FilterSpell();
 
-	@Override
-	public PyromancerAscensionCopyTriggeredAbility copy() {
-		return new PyromancerAscensionCopyTriggeredAbility(this);
-	}
+    static {
+        filter.getCardType().add(CardType.INSTANT);
+        filter.getCardType().add(CardType.SORCERY);
+        filter.setScopeCardType(ComparisonScope.Any);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getPlayerId().equals(this.getControllerId())) {
-			Spell spell = game.getStack().getSpell(event.getTargetId());
-			if (isControlledInstantOrSorcery(spell)) {
-				Permanent permanent = game.getBattlefield().getPermanent(this.getSourceId());
-				if (permanent != null && permanent.getCounters().getCount(CounterType.QUEST) >= 2) {
-					this.getTargets().get(0).add(spell.getId(), game);
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-	
-	private boolean isControlledInstantOrSorcery(Spell spell) {
-		return spell != null && 
-			(spell.getControllerId().equals(this.getControllerId())) && 
-			(spell.getCardType().contains(CardType.INSTANT) || spell.getCardType().contains(CardType.SORCERY));
-	}
+    PyromancerAscensionCopyTriggeredAbility() {
+        super(Constants.Zone.BATTLEFIELD, new CopyTargetSpellEffect(), true);
+        this.addTarget(new TargetSpell(filter));
+    }
 
-	@Override
-	public String getRule() {
-		return "Whenever you cast an instant or sorcery spell while {this} has two or more quest counters on it, you may copy that spell. You may choose new targets for the copy.";
-	}
+    PyromancerAscensionCopyTriggeredAbility(final PyromancerAscensionCopyTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public PyromancerAscensionCopyTriggeredAbility copy() {
+        return new PyromancerAscensionCopyTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getPlayerId().equals(this.getControllerId())) {
+            Spell spell = game.getStack().getSpell(event.getTargetId());
+            if (isControlledInstantOrSorcery(spell)) {
+                Permanent permanent = game.getBattlefield().getPermanent(this.getSourceId());
+                if (permanent != null && permanent.getCounters().getCount(CounterType.QUEST) >= 2) {
+                    this.getTargets().get(0).add(spell.getId(), game);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean isControlledInstantOrSorcery(Spell spell) {
+        return spell != null && 
+            (spell.getControllerId().equals(this.getControllerId())) && 
+            (spell.getCardType().contains(CardType.INSTANT) || spell.getCardType().contains(CardType.SORCERY));
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever you cast an instant or sorcery spell while {this} has two or more quest counters on it, you may copy that spell. You may choose new targets for the copy.";
+    }
 }

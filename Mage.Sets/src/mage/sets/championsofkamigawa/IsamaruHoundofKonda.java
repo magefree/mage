@@ -45,7 +45,7 @@ public class IsamaruHoundofKonda extends CardImpl<IsamaruHoundofKonda> {
         this.expansionSetCode = "CHK";
         this.supertype.add("Legendary");
         this.subtype.add("Hound");
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
     }

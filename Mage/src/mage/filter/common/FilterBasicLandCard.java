@@ -37,20 +37,20 @@ import mage.filter.FilterCard;
  */
 public class FilterBasicLandCard extends FilterCard<FilterBasicLandCard> {
 
-	public FilterBasicLandCard() {
-		super("basic land card");
-		this.cardType.add(CardType.LAND);
-		this.setScopeCardType(ComparisonScope.Any);
-		this.supertype.add("Basic");
-		this.setScopeSupertype(ComparisonScope.Any);
-	}
+    public FilterBasicLandCard() {
+        super("basic land card");
+        this.cardType.add(CardType.LAND);
+        this.setScopeCardType(ComparisonScope.Any);
+        this.supertype.add("Basic");
+        this.setScopeSupertype(ComparisonScope.Any);
+    }
 
-	public FilterBasicLandCard(final FilterBasicLandCard filter) {
-		super(filter);
-	}
+    public FilterBasicLandCard(final FilterBasicLandCard filter) {
+        super(filter);
+    }
 
-	@Override
-	public FilterBasicLandCard copy() {
-		return new FilterBasicLandCard(this);
-	}
+    @Override
+    public FilterBasicLandCard copy() {
+        return new FilterBasicLandCard(this);
+    }
 }

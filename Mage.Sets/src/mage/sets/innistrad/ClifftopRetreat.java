@@ -49,32 +49,32 @@ import java.util.UUID;
  */
 public class ClifftopRetreat extends CardImpl<ClifftopRetreat> {
 
-	private static final FilterLandPermanent filter = new FilterLandPermanent();
+    private static final FilterLandPermanent filter = new FilterLandPermanent();
 
-	static {
-		filter.getSubtype().add("Mountain");
-		filter.getSubtype().add("Plains");
-		filter.setScopeSubtype(ComparisonScope.Any);
-		filter.setMessage("Mountain or a Plains");
-	}
+    static {
+        filter.getSubtype().add("Mountain");
+        filter.getSubtype().add("Plains");
+        filter.setScopeSubtype(ComparisonScope.Any);
+        filter.setMessage("Mountain or a Plains");
+    }
 
-	public ClifftopRetreat(UUID ownerId) {
-		super(ownerId, 238, "Clifftop Retreat", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-		this.expansionSetCode = "ISD";
+    public ClifftopRetreat(UUID ownerId) {
+        super(ownerId, 238, "Clifftop Retreat", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+        this.expansionSetCode = "ISD";
 
-		Condition controls = new UnlessCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0));
-		String abilityText = "tap it unless you control a " + filter.getMessage();
-		this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
-		this.addAbility(new RedManaAbility());
-		this.addAbility(new WhiteManaAbility());
-	}
+        Condition controls = new UnlessCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0));
+        String abilityText = "tap it unless you control a " + filter.getMessage();
+        this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
+        this.addAbility(new RedManaAbility());
+        this.addAbility(new WhiteManaAbility());
+    }
 
-	public ClifftopRetreat(final ClifftopRetreat card) {
-		super(card);
-	}
+    public ClifftopRetreat(final ClifftopRetreat card) {
+        super(card);
+    }
 
-	@Override
-	public ClifftopRetreat copy() {
-		return new ClifftopRetreat(this);
-	}
+    @Override
+    public ClifftopRetreat copy() {
+        return new ClifftopRetreat(this);
+    }
 }

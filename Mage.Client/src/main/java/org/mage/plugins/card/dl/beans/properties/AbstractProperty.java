@@ -22,7 +22,7 @@ public abstract class AbstractProperty<T> implements Property<T> {
         T value = getValue();
         return value == null? 0:value.hashCode();
     }
-    
+
     @Override
     public boolean equals(Object obj) {
         if(!(obj instanceof Property<?>)) return false;
@@ -30,7 +30,7 @@ public abstract class AbstractProperty<T> implements Property<T> {
         Object other = ((Property<?>) obj).getValue();
         return value == other || (value != null && value.equals(other));
     }
-    
+
     @Override
     public String toString() {
         return valueOf(getValue());

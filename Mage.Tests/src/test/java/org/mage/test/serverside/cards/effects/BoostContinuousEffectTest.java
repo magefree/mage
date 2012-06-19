@@ -14,16 +14,16 @@ import org.mage.test.serverside.base.CardTestBase;
  */
 public class BoostContinuousEffectTest extends CardTestBase {
 
-	@Test
+    @Test
     @Ignore
-	public void testHonorOfThePoor() throws Exception {
-		load("M11/Honor of the Pure.test");
-		execute();
+    public void testHonorOfThePoor() throws Exception {
+        load("M11/Honor of the Pure.test");
+        execute();
 
-		checkPermanentPT(playerA, "Tine Shrike", 3, 2, Filter.ComparisonScope.Any);
-		checkPermanentPT(playerA, "Runeclaw Bear", 2, 2, Filter.ComparisonScope.Any);
-	}
-    
+        checkPermanentPT(playerA, "Tine Shrike", 3, 2, Filter.ComparisonScope.Any);
+        checkPermanentPT(playerA, "Runeclaw Bear", 2, 2, Filter.ComparisonScope.Any);
+    }
+
     @Test
     public void testHonorOfThePoor2() {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Honor of the Pure", 2);

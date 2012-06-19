@@ -44,7 +44,7 @@ import java.util.UUID;
 public class TrustedForcemage extends CardImpl<TrustedForcemage> {
 
     private static final String ruleText = "As long as {this} is paired with another creature, each of those creatures gets +1/+1";
-    
+
     public TrustedForcemage(UUID ownerId) {
         super(ownerId, 199, "Trusted Forcemage", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.expansionSetCode = "AVR";

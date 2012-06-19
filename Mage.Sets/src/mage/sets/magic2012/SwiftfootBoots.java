@@ -54,7 +54,7 @@ public class SwiftfootBoots extends CardImpl<SwiftfootBoots> {
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HexproofAbility.getInstance(), Constants.AttachmentType.EQUIPMENT)));
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HasteAbility.getInstance(), Constants.AttachmentType.EQUIPMENT)));
         this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(1)));
-        
+
     }
 
     public SwiftfootBoots (final SwiftfootBoots card) {

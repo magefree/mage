@@ -44,21 +44,21 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class MightyLeap extends CardImpl<MightyLeap> {
 
-	public MightyLeap(UUID ownerId) {
-		super(ownerId, 22, "Mighty Leap", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-		this.expansionSetCode = "M11";
-		this.color.setWhite(true);
-		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-		this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
-		this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
-	}
+    public MightyLeap(UUID ownerId) {
+        super(ownerId, 22, "Mighty Leap", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
+        this.expansionSetCode = "M11";
+        this.color.setWhite(true);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
+    }
 
-	public MightyLeap(final MightyLeap card) {
-		super(card);
-	}
+    public MightyLeap(final MightyLeap card) {
+        super(card);
+    }
 
-	@Override
-	public MightyLeap copy() {
-		return new MightyLeap(this);
-	}
+    @Override
+    public MightyLeap copy() {
+        return new MightyLeap(this);
+    }
 }

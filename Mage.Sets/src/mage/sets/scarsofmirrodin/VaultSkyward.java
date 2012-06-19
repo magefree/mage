@@ -47,7 +47,7 @@ public class VaultSkyward extends CardImpl<VaultSkyward> {
     public VaultSkyward (UUID ownerId) {
         super(ownerId, 51, "Vault Skyward", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "SOM";
-		this.color.setBlue(true);
+        this.color.setBlue(true);
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new UntapTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

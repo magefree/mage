@@ -38,11 +38,11 @@ import mage.utils.MageVersion;
  */
 public interface MageClient extends CallbackClient {
 
-	public UUID getId();
-	public MageVersion getVersion();
-	public void connected(String message);
-	public void disconnected();
-	public void showMessage(String message);
-	public void showError(String message);
-	
+    public UUID getId();
+    public MageVersion getVersion();
+    public void connected(String message);
+    public void disconnected();
+    public void showMessage(String message);
+    public void showError(String message);
+
 }

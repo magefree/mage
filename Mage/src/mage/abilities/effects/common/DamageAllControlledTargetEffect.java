@@ -41,34 +41,34 @@ import mage.game.permanent.Permanent;
  */
 public class DamageAllControlledTargetEffect extends OneShotEffect<DamageAllControlledTargetEffect> {
 
-	private FilterCreaturePermanent filter;
-	private int amount;
+    private FilterCreaturePermanent filter;
+    private int amount;
 
-	public DamageAllControlledTargetEffect(int amount, FilterCreaturePermanent filter) {
-		super(Outcome.Damage);
-		this.amount = amount;
-		this.filter = filter;
-		getText();
-	}
+    public DamageAllControlledTargetEffect(int amount, FilterCreaturePermanent filter) {
+        super(Outcome.Damage);
+        this.amount = amount;
+        this.filter = filter;
+        getText();
+    }
 
-	public DamageAllControlledTargetEffect(final DamageAllControlledTargetEffect effect) {
-		super(effect);
-		this.amount = effect.amount;
-		this.filter = effect.filter.copy();
-	}
+    public DamageAllControlledTargetEffect(final DamageAllControlledTargetEffect effect) {
+        super(effect);
+        this.amount = effect.amount;
+        this.filter = effect.filter.copy();
+    }
 
-	@Override
-	public DamageAllControlledTargetEffect copy() {
-		return new DamageAllControlledTargetEffect(this);
-	}
+    @Override
+    public DamageAllControlledTargetEffect copy() {
+        return new DamageAllControlledTargetEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		for (Permanent permanent: game.getBattlefield().getAllActivePermanents(filter, source.getFirstTarget(), game)) {
-			permanent.damage(amount, source.getId(), game, true, false);
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        for (Permanent permanent: game.getBattlefield().getAllActivePermanents(filter, source.getFirstTarget(), game)) {
+            permanent.damage(amount, source.getId(), game, true, false);
+        }
+        return true;
+    }
 
     private void getText() {
         StringBuilder sb = new StringBuilder("{this} deals ");

@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class DragonsClaw extends mage.sets.tenth.DragonsClaw {
 
-	public DragonsClaw(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 210;
-		this.expansionSetCode = "M10";
-	}
+    public DragonsClaw(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 210;
+        this.expansionSetCode = "M10";
+    }
 
-	public DragonsClaw(final DragonsClaw card) {
-		super(card);
-	}
+    public DragonsClaw(final DragonsClaw card) {
+        super(card);
+    }
 
-	@Override
-	public DragonsClaw copy() {
-		return new DragonsClaw(this);
-	}
+    @Override
+    public DragonsClaw copy() {
+        return new DragonsClaw(this);
+    }
 
 }

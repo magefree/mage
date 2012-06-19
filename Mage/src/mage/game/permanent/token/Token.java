@@ -46,55 +46,55 @@ import java.util.UUID;
 
 public class Token extends MageObjectImpl<Token> {
 
-	protected String description;
+    protected String description;
     private UUID lastAddedTokenId;
     private int tokenType;
 
-	public Token(String name, String description) {
-		this.name = name;
-		this.description = description;
-	}
+    public Token(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
 
-	public Token(String name, String description, ObjectColor color, List<String> subtype, int power, int toughness, Abilities abilities) {
-		this(name, description);
-		this.cardType.add(CardType.CREATURE);
-		this.color = color.copy();
-		this.subtype = subtype;
-		this.power.setValue(power);
-		this.toughness.setValue(toughness);
-		if (abilities != null) {
-			this.abilities = abilities.copy();
-		}
-	}
+    public Token(String name, String description, ObjectColor color, List<String> subtype, int power, int toughness, Abilities abilities) {
+        this(name, description);
+        this.cardType.add(CardType.CREATURE);
+        this.color = color.copy();
+        this.subtype = subtype;
+        this.power.setValue(power);
+        this.toughness.setValue(toughness);
+        if (abilities != null) {
+            this.abilities = abilities.copy();
+        }
+    }
 
-	public Token(final Token token) {
-		super(token);
-		this.description = token.description;
+    public Token(final Token token) {
+        super(token);
+        this.description = token.description;
         this.tokenType = token.tokenType;
-	}
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
     public UUID getLastAddedToken() {
         return lastAddedTokenId;
     }
 
     public void addAbility(Ability ability) {
-		ability.setSourceId(this.getId());
-		abilities.add(ability);
-	}
+        ability.setSourceId(this.getId());
+        abilities.add(ability);
+    }
 
-	@Override
-	public Token copy() {
-		return new Token(this);
-	}
+    @Override
+    public Token copy() {
+        return new Token(this);
+    }
 
-	public boolean putOntoBattlefield(int amount, Game game, UUID sourceId, UUID controllerId) {
-		Card source = game.getCard(sourceId);
-		String setCode = source != null ? source.getExpansionSetCode() : null;
-		GameEvent event = GameEvent.getEvent(EventType.CREATE_TOKEN, null, sourceId, controllerId, amount);
+    public boolean putOntoBattlefield(int amount, Game game, UUID sourceId, UUID controllerId) {
+        Card source = game.getCard(sourceId);
+        String setCode = source != null ? source.getExpansionSetCode() : null;
+        GameEvent event = GameEvent.getEvent(EventType.CREATE_TOKEN, null, sourceId, controllerId, amount);
         if (!game.replaceEvent(event)) {
             amount = event.getAmount();
             for (int i = 0; i < amount; i++) {
@@ -109,7 +109,7 @@ public class Token extends MageObjectImpl<Token> {
             return true;
         }
         return false;
-	}
+    }
 
     public int getTokenType() {
         return tokenType;

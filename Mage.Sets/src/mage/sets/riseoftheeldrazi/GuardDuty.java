@@ -53,13 +53,13 @@ public class GuardDuty extends CardImpl<GuardDuty> {
         super(ownerId, 23, "Guard Duty", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");
         this.expansionSetCode = "ROE";
         this.subtype.add("Aura");
-		this.color.setWhite(true);
+        this.color.setWhite(true);
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		this.addAbility(ability);
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
 
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(DefenderAbility.getInstance(), Constants.AttachmentType.AURA)));
     }

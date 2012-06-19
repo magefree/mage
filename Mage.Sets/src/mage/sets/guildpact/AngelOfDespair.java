@@ -49,8 +49,8 @@ public class AngelOfDespair extends CardImpl<AngelOfDespair> {
         super(ownerId, 101, "Angel of Despair", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}{B}{B}");
         this.expansionSetCode = "GPT";
         this.subtype.add("Angel");
-		this.color.setWhite(true);
-		this.color.setBlack(true);
+        this.color.setWhite(true);
+        this.color.setBlack(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
         this.addAbility(FlyingAbility.getInstance());

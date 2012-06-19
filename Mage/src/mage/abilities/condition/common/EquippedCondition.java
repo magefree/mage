@@ -50,14 +50,14 @@ public class EquippedCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
-		if (permanent != null) {
-			for (UUID uuid : permanent.getAttachments()) {
-				Permanent attached = game.getBattlefield().getPermanent(uuid);
-				if (attached.getSubtype().contains("Equipment")) {
-					return true;
-				}
-			}
-		}
-		return false;
+        if (permanent != null) {
+            for (UUID uuid : permanent.getAttachments()) {
+                Permanent attached = game.getBattlefield().getPermanent(uuid);
+                if (attached.getSubtype().contains("Equipment")) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

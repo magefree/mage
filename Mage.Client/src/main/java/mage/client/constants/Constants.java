@@ -37,78 +37,78 @@ import javax.swing.border.Border;
  * @author BetaSteward_at_googlemail.com
  */
 public final class Constants {
-	private Constants() {
-		throw new AssertionError();
-	}
+    private Constants() {
+        throw new AssertionError();
+    }
 
-	public static final int FRAME_MAX_HEIGHT = 367;
-	public static final int FRAME_MAX_WIDTH = 256;
-	public static final int ART_MAX_HEIGHT = 168;
-	public static final int ART_MAX_WIDTH = 227;
-	public static final int SYMBOL_MAX_HEIGHT = 14;
-	public static final int SYMBOL_MAX_WIDTH = 14;
-	public static final int SYMBOL_MAX_XOFFSET = 27;
-	public static final int SYMBOL_MAX_YOFFSET = 15;
-	public static final int SYMBOL_MAX_SPACE = 14;
-	public static final int CONTENT_MAX_XOFFSET = 15;
-	public static final int ART_MAX_YOFFSET = 37;
-	public static final int NAME_MAX_YOFFSET = 28;
-	public static final int TYPE_MAX_YOFFSET = 223;
-	public static final int ICON_MAX_HEIGHT = 16;
-	public static final int ICON_MAX_WIDTH = 16;
-	public static final int ICON_MAX_XOFFSET = 238;
-	public static final int ICON_MAX_YOFFSET = 210;
-	public static final int TEXT_MAX_YOFFSET = 232;
-	public static final int TEXT_MAX_WIDTH = 227;
-	public static final int TEXT_MAX_HEIGHT = 105;
-	public static final int NAME_FONT_MAX_SIZE = 13;
-	public static final int TEXT_FONT_MAX_SIZE = 11;
-	public static final int POWBOX_MAX_TOP = 336;
-	public static final int POWBOX_MAX_LEFT = 202;
-	public static final int POWBOX_TEXT_MAX_TOP = 352;
-	public static final int POWBOX_TEXT_MAX_LEFT = 212;
-	public static final int DAMAGE_MAX_LEFT = 180;
+    public static final int FRAME_MAX_HEIGHT = 367;
+    public static final int FRAME_MAX_WIDTH = 256;
+    public static final int ART_MAX_HEIGHT = 168;
+    public static final int ART_MAX_WIDTH = 227;
+    public static final int SYMBOL_MAX_HEIGHT = 14;
+    public static final int SYMBOL_MAX_WIDTH = 14;
+    public static final int SYMBOL_MAX_XOFFSET = 27;
+    public static final int SYMBOL_MAX_YOFFSET = 15;
+    public static final int SYMBOL_MAX_SPACE = 14;
+    public static final int CONTENT_MAX_XOFFSET = 15;
+    public static final int ART_MAX_YOFFSET = 37;
+    public static final int NAME_MAX_YOFFSET = 28;
+    public static final int TYPE_MAX_YOFFSET = 223;
+    public static final int ICON_MAX_HEIGHT = 16;
+    public static final int ICON_MAX_WIDTH = 16;
+    public static final int ICON_MAX_XOFFSET = 238;
+    public static final int ICON_MAX_YOFFSET = 210;
+    public static final int TEXT_MAX_YOFFSET = 232;
+    public static final int TEXT_MAX_WIDTH = 227;
+    public static final int TEXT_MAX_HEIGHT = 105;
+    public static final int NAME_FONT_MAX_SIZE = 13;
+    public static final int TEXT_FONT_MAX_SIZE = 11;
+    public static final int POWBOX_MAX_TOP = 336;
+    public static final int POWBOX_MAX_LEFT = 202;
+    public static final int POWBOX_TEXT_MAX_TOP = 352;
+    public static final int POWBOX_TEXT_MAX_LEFT = 212;
+    public static final int DAMAGE_MAX_LEFT = 180;
 
-	public static final Border EMPTY_BORDER = BorderFactory.createEmptyBorder(2,2,2,2);
+    public static final Border EMPTY_BORDER = BorderFactory.createEmptyBorder(2,2,2,2);
 
-	public static final double SCALE_FACTOR = 0.5;
-	
-	public static final String PLUGINS_DIRECTORY = "plugins/";
+    public static final double SCALE_FACTOR = 0.5;
+
+    public static final String PLUGINS_DIRECTORY = "plugins/";
 
     public static final String RESOURCE_PATH_MANA_LARGE = IO.imageBaseDir + "symbols" + File.separator + "large";
-	public static final String RESOURCE_PATH_MANA_MEDIUM = IO.imageBaseDir + "symbols" + File.separator + "medium";
+    public static final String RESOURCE_PATH_MANA_MEDIUM = IO.imageBaseDir + "symbols" + File.separator + "medium";
     public static final String RESOURCE_PATH_SET = IO.imageBaseDir + "sets" + File.separator;
-	public static final String RESOURCE_PATH_SET_SMALL = RESOURCE_PATH_SET + File.separator + "small" + File.separator;
+    public static final String RESOURCE_PATH_SET_SMALL = RESOURCE_PATH_SET + File.separator + "small" + File.separator;
     public static final String BASE_SOUND_PATH = "plugins" + File.separator + "sounds" + File.separator;
 
     public interface IO {
-		public static final String imageBaseDir = "plugins" + File.separator + "images" + File.separator;
-		public static final String IMAGE_PROPERTIES_FILE = "image.url.properties";
-	}
+        public static final String imageBaseDir = "plugins" + File.separator + "images" + File.separator;
+        public static final String IMAGE_PROPERTIES_FILE = "image.url.properties";
+    }
 
-	public enum DeckEditorMode {
-		Constructed,
-		Limited,
-		Sideboard
-	}
+    public enum DeckEditorMode {
+        Constructed,
+        Limited,
+        Sideboard
+    }
 
-	public enum SortBy {
-		CASTING_COST ("Casting Cost"),
-		RARITY ("Rarity"),
-		COLOR ("Color"),
-		NAME ("Name"),
-		UNSORTED ("Unsorted");
+    public enum SortBy {
+        CASTING_COST ("Casting Cost"),
+        RARITY ("Rarity"),
+        COLOR ("Color"),
+        NAME ("Name"),
+        UNSORTED ("Unsorted");
 
-		private String text;
+        private String text;
 
-		SortBy(String text) {
-			this.text = text;
-		}
+        SortBy(String text) {
+            this.text = text;
+        }
 
-		@Override
-		public String toString() {
-			return text;
-		}
-	}
+        @Override
+        public String toString() {
+            return text;
+        }
+    }
 
 }

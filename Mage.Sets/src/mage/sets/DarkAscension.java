@@ -47,10 +47,10 @@ public class DarkAscension  extends ExpansionSet {
         super("Dark Ascension", "DKA", "seticon_mtgdka", "mage.sets.darkascension", new GregorianCalendar(2012, 1, 3).getTime(), SetType.EXPANSION);
         this.blockName = "Innistrad";
         this.hasBoosters = true;
-		this.numBoosterLands = 1;
-		this.numBoosterCommon = 10;
-		this.numBoosterUncommon = 3;
-		this.numBoosterRare = 1;
-		this.ratioBoosterMythic = 8;
+        this.numBoosterLands = 1;
+        this.numBoosterCommon = 10;
+        this.numBoosterUncommon = 3;
+        this.numBoosterRare = 1;
+        this.ratioBoosterMythic = 8;
     }
 }

@@ -45,7 +45,7 @@ import mage.cards.CardImpl;
  */
 public class KnightOfTheSkywardEye extends CardImpl<KnightOfTheSkywardEye> {
 
-	public KnightOfTheSkywardEye(UUID ownerId) {
+    public KnightOfTheSkywardEye(UUID ownerId) {
         super(ownerId, 15, "Knight of the Skyward Eye", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.expansionSetCode = "ALA";
         this.subtype.add("Human");
@@ -57,7 +57,7 @@ public class KnightOfTheSkywardEye extends CardImpl<KnightOfTheSkywardEye> {
 
         // {3}{G}: Knight of the Skyward Eye gets +3/+3 until end of turn. Activate this ability only once each turn.
         this.addAbility(new ActivateOncePerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(3, 3, Duration.EndOfTurn), new ManaCostsImpl("{3}{G}")));
-        
+
     }
 
     public KnightOfTheSkywardEye(final KnightOfTheSkywardEye card) {

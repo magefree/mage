@@ -59,7 +59,7 @@ public class OxiddaDaredevil extends CardImpl<OxiddaDaredevil> {
     public OxiddaDaredevil (UUID ownerId) {
         super(ownerId, 100, "Oxidda Daredevil", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.expansionSetCode = "SOM";
-		this.color.setRed(true);        
+        this.color.setRed(true);        
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,

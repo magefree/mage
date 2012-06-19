@@ -47,54 +47,54 @@ import mage.target.TargetPlayer;
  */
 public class Traumatize extends CardImpl<Traumatize> {
 
-	public Traumatize(UUID ownerId) {
-		super(ownerId, 119, "Traumatize", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
-		this.expansionSetCode = "10E";
-		this.color.setBlue(true);
-		this.getSpellAbility().addTarget(new TargetPlayer());
-		this.getSpellAbility().addEffect(new TraumatizeEffect());
-	}
+    public Traumatize(UUID ownerId) {
+        super(ownerId, 119, "Traumatize", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
+        this.expansionSetCode = "10E";
+        this.color.setBlue(true);
+        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addEffect(new TraumatizeEffect());
+    }
 
-	public Traumatize(final Traumatize card) {
-		super(card);
-	}
+    public Traumatize(final Traumatize card) {
+        super(card);
+    }
 
-	@Override
-	public Traumatize copy() {
-		return new Traumatize(this);
-	}
+    @Override
+    public Traumatize copy() {
+        return new Traumatize(this);
+    }
 }
 
 class TraumatizeEffect extends OneShotEffect<TraumatizeEffect> {
 
-	public TraumatizeEffect() {
-		super(Outcome.Detriment);
-		staticText = "Target player puts the top half of his or her library, rounded down, into his or her graveyard";
-	}
+    public TraumatizeEffect() {
+        super(Outcome.Detriment);
+        staticText = "Target player puts the top half of his or her library, rounded down, into his or her graveyard";
+    }
 
-	public TraumatizeEffect(final TraumatizeEffect effect) {
-		super(effect);
-	}
+    public TraumatizeEffect(final TraumatizeEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getFirstTarget());
-		Card card;
-		int amount = player.getLibrary().size() / 2;
-		for (int i = 0; i < amount; i++) {
-			card = player.getLibrary().removeFromTop(game);
-			if (card != null) {
-				card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
-			} else {
-				break;
-			}
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getFirstTarget());
+        Card card;
+        int amount = player.getLibrary().size() / 2;
+        for (int i = 0; i < amount; i++) {
+            card = player.getLibrary().removeFromTop(game);
+            if (card != null) {
+                card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
+            } else {
+                break;
+            }
+        }
+        return true;
+    }
 
-	@Override
-	public TraumatizeEffect copy() {
-		return new TraumatizeEffect(this);
-	}
+    @Override
+    public TraumatizeEffect copy() {
+        return new TraumatizeEffect(this);
+    }
 
 }

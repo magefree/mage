@@ -54,9 +54,9 @@ public class AetherAdept extends CardImpl<AetherAdept> {
         this.toughness = new MageInt(2);
 
         // When AEther Adept enters the battlefield, return target creature to its owner's hand.
-		Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect());
-		ability.addTarget(new TargetCreaturePermanent());
-		this.addAbility(ability);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect());
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
     public AetherAdept(final AetherAdept card) {

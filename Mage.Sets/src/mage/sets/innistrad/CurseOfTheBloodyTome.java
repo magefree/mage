@@ -63,13 +63,13 @@ public class CurseOfTheBloodyTome extends CardImpl<CurseOfTheBloodyTome> {
 
         // Enchant player
         TargetPlayer target = new TargetPlayer();
-		this.getSpellAbility().addTarget(target);
-		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.AddAbility));
-		Ability ability = new EnchantAbility(target.getTargetName());
-		this.addAbility(ability);
+        this.getSpellAbility().addTarget(target);
+        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.AddAbility));
+        Ability ability = new EnchantAbility(target.getTargetName());
+        this.addAbility(ability);
         // At the beginning of enchanted player's upkeep, that player puts the top two cards of his or her library into his or her graveyard.
-		this.addAbility(new CurseOfTheBloodyTomeAbility());
-		
+        this.addAbility(new CurseOfTheBloodyTomeAbility());
+
     }
 
     public CurseOfTheBloodyTome(final CurseOfTheBloodyTome card) {
@@ -84,37 +84,37 @@ public class CurseOfTheBloodyTome extends CardImpl<CurseOfTheBloodyTome> {
 
 class CurseOfTheBloodyTomeAbility extends TriggeredAbilityImpl<CurseOfTheBloodyTomeAbility> {
 
-	public CurseOfTheBloodyTomeAbility() {
-		super(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(2));
-	}
+    public CurseOfTheBloodyTomeAbility() {
+        super(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(2));
+    }
 
-	public CurseOfTheBloodyTomeAbility(final CurseOfTheBloodyTomeAbility ability) {
-		super(ability);
-	}
+    public CurseOfTheBloodyTomeAbility(final CurseOfTheBloodyTomeAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public CurseOfTheBloodyTomeAbility copy() {
-		return new CurseOfTheBloodyTomeAbility(this);
-	}
+    @Override
+    public CurseOfTheBloodyTomeAbility copy() {
+        return new CurseOfTheBloodyTomeAbility(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.DRAW_STEP_PRE) {
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.DRAW_STEP_PRE) {
             Permanent enchantment = game.getPermanent(this.sourceId);
             if (enchantment != null && enchantment.getAttachedTo() != null) {
                 Player player = game.getPlayer(enchantment.getAttachedTo());
                 if (player != null && game.getActivePlayerId().equals(player.getId())) {
                     this.getEffects().get(0).setTargetPointer(new FixedTarget(player.getId()));
-        			return true;
+                    return true;
                 }
             }
-		}
-		return false;
-	}
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "At the beginning of enchanted player's upkeep, that player puts the top two cards of his or her library into his or her graveyard.";
-	}
+    @Override
+    public String getRule() {
+        return "At the beginning of enchanted player's upkeep, that player puts the top two cards of his or her library into his or her graveyard.";
+    }
 
 }

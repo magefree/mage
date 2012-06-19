@@ -65,49 +65,49 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     public static final String KEY_HAND_USE_BIG_CARDS = "handUseBigCards";
     public static final String KEY_SHOW_TOOLTIPS_ANY_ZONE = "showTooltipsInAnyZone";
-	public static final String KEY_PERMANENTS_IN_ONE_PILE = "nonLandPermanentsInOnePile";
+    public static final String KEY_PERMANENTS_IN_ONE_PILE = "nonLandPermanentsInOnePile";
     public static final String KEY_CARD_IMAGES_USE_DEFAULT = "cardImagesUseDefault";
     public static final String KEY_CARD_IMAGES_PATH = "cardImagesPath";
     public static final String KEY_CARD_IMAGES_CHECK = "cardImagesCheck";
 
-	public static final String KEY_PROXY_ADDRESS = "proxyAddress";
-	public static final String KEY_PROXY_PORT = "proxyPort";
-	public static final String KEY_PROXY_USERNAME = "proxyUsername";
-	public static final String KEY_PROXY_REMEMBER = "proxyRemember";
-	public static final String KEY_PROXY_TYPE = "proxyType";
-	public static final String KEY_PROXY_PSWD = "proxyPassword";
+    public static final String KEY_PROXY_ADDRESS = "proxyAddress";
+    public static final String KEY_PROXY_PORT = "proxyPort";
+    public static final String KEY_PROXY_USERNAME = "proxyUsername";
+    public static final String KEY_PROXY_REMEMBER = "proxyRemember";
+    public static final String KEY_PROXY_TYPE = "proxyType";
+    public static final String KEY_PROXY_PSWD = "proxyPassword";
 
-	public static final String KEY_AVATAR = "selectedId";
+    public static final String KEY_AVATAR = "selectedId";
 
     private static Map<String, String> cache = new HashMap<String, String>();
     private static final Boolean UPDATE_CACHE_POLICY = Boolean.TRUE;
 
-	public static final String OPEN_CONNECTION_TAB = "Open-Connection-Tab";
+    public static final String OPEN_CONNECTION_TAB = "Open-Connection-Tab";
 
-	private static final transient Logger log = Logger.getLogger(PreferencesDialog.class);
+    private static final transient Logger log = Logger.getLogger(PreferencesDialog.class);
 
-	public static final int DEFAULT_AVATAR_ID = 51;
-	private static int selectedId = DEFAULT_AVATAR_ID;
-	private static Set<Integer> availableAvatars = new HashSet<Integer>();
-	private static Map<Integer, JPanel> panels = new HashMap<Integer, JPanel>();
+    public static final int DEFAULT_AVATAR_ID = 51;
+    private static int selectedId = DEFAULT_AVATAR_ID;
+    private static Set<Integer> availableAvatars = new HashSet<Integer>();
+    private static Map<Integer, JPanel> panels = new HashMap<Integer, JPanel>();
 
-	private static final Border GREEN_BORDER = BorderFactory.createLineBorder(Color.GREEN, 3);
-	private static final Border BLACK_BORDER = BorderFactory.createLineBorder(Color.BLACK, 3);
+    private static final Border GREEN_BORDER = BorderFactory.createLineBorder(Color.GREEN, 3);
+    private static final Border BLACK_BORDER = BorderFactory.createLineBorder(Color.BLACK, 3);
 
-	static {
-		availableAvatars.add(51);
-		availableAvatars.add(13);
-		availableAvatars.add(9);
-		availableAvatars.add(53);
-		availableAvatars.add(10);
-		availableAvatars.add(39);
-		availableAvatars.add(19);
-		availableAvatars.add(30);
-		availableAvatars.add(25);
+    static {
+        availableAvatars.add(51);
+        availableAvatars.add(13);
+        availableAvatars.add(9);
+        availableAvatars.add(53);
+        availableAvatars.add(10);
+        availableAvatars.add(39);
+        availableAvatars.add(19);
+        availableAvatars.add(30);
+        availableAvatars.add(25);
 
-	}
+    }
 
-	private final JFileChooser fc = new JFileChooser();
+    private final JFileChooser fc = new JFileChooser();
 
     {
         fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -118,8 +118,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         imageFolderPath.setEditable(false);
-		cbProxyType.setModel(new DefaultComboBoxModel(Connection.ProxyType.values()));
-		addAvatars();
+        cbProxyType.setModel(new DefaultComboBoxModel(Connection.ProxyType.values()));
+        addAvatars();
     }
 
     /** This method is called from within the constructor to
@@ -939,26 +939,26 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.checkBoxEndTurnOthers, END_OF_TURN_OTHERS);
         save(prefs, dialog.displayBigCardsInHand, KEY_HAND_USE_BIG_CARDS, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.showToolTipsInAnyZone, KEY_SHOW_TOOLTIPS_ANY_ZONE, "true", "false", UPDATE_CACHE_POLICY);
-		save(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true", "false", UPDATE_CACHE_POLICY);
 
-		// connection
+        // connection
         save(prefs, dialog.cbProxyType, KEY_PROXY_TYPE);
-		save(prefs, dialog.txtProxyServer, KEY_PROXY_ADDRESS);
-		save(prefs, dialog.txtProxyPort, KEY_PROXY_PORT);
-		save(prefs, dialog.txtProxyUserName, KEY_PROXY_USERNAME);
-		save(prefs, dialog.rememberPswd, KEY_PROXY_REMEMBER, "true", "false", UPDATE_CACHE_POLICY);
-		if (dialog.rememberPswd.isSelected()) {
-			char[] input = txtPasswordField.getPassword();
-			prefs.put(KEY_PROXY_PSWD, new String(input));
-		}
+        save(prefs, dialog.txtProxyServer, KEY_PROXY_ADDRESS);
+        save(prefs, dialog.txtProxyPort, KEY_PROXY_PORT);
+        save(prefs, dialog.txtProxyUserName, KEY_PROXY_USERNAME);
+        save(prefs, dialog.rememberPswd, KEY_PROXY_REMEMBER, "true", "false", UPDATE_CACHE_POLICY);
+        if (dialog.rememberPswd.isSelected()) {
+            char[] input = txtPasswordField.getPassword();
+            prefs.put(KEY_PROXY_PSWD, new String(input));
+        }
 
-		if (availableAvatars.contains(selectedId)) {
-			prefs.put(KEY_AVATAR, String.valueOf(selectedId));
-			updateCache(KEY_AVATAR, String.valueOf(selectedId));
-		}
+        if (availableAvatars.contains(selectedId)) {
+            prefs.put(KEY_AVATAR, String.valueOf(selectedId));
+            updateCache(KEY_AVATAR, String.valueOf(selectedId));
+        }
 
-		// images
-		saveImagesPath(prefs);
+        // images
+        saveImagesPath(prefs);
 
         try {
             prefs.flush();
@@ -1012,13 +1012,13 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     private void cbProxyTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProxyTypeActionPerformed
         this.showProxySettings();
-	}//GEN-LAST:event_cbProxyTypeActionPerformed
+    }//GEN-LAST:event_cbProxyTypeActionPerformed
 
     private void txtPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordFieldActionPerformed
-	}//GEN-LAST:event_txtPasswordFieldActionPerformed
+    }//GEN-LAST:event_txtPasswordFieldActionPerformed
 
     private void txtProxyPortkeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProxyPortkeyTyped
-	}//GEN-LAST:event_txtProxyPortkeyTyped
+    }//GEN-LAST:event_txtProxyPortkeyTyped
 
     private void nonLandPermanentsInOnePileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nonLandPermanentsInOnePileActionPerformed
     }//GEN-LAST:event_nonLandPermanentsInOnePileActionPerformed
@@ -1026,126 +1026,126 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private void rememberPswdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rememberPswdActionPerformed
     }//GEN-LAST:event_rememberPswdActionPerformed
 
-	private void showProxySettings() {
-		if (cbProxyType.getSelectedItem() == Connection.ProxyType.SOCKS) {
-			this.pnlProxy.setVisible(true);
-			this.pnlProxySettings.setVisible(true);
-		}
-		else if (cbProxyType.getSelectedItem() == Connection.ProxyType.HTTP) {
-			this.pnlProxy.setVisible(true);
-			this.pnlProxySettings.setVisible(true);
-		}
-		else if (cbProxyType.getSelectedItem() == Connection.ProxyType.NONE) {
-			this.pnlProxy.setVisible(false);
-			this.pnlProxySettings.setVisible(false);
-		}
-		this.pack();
-		this.repaint();
-	}
+    private void showProxySettings() {
+        if (cbProxyType.getSelectedItem() == Connection.ProxyType.SOCKS) {
+            this.pnlProxy.setVisible(true);
+            this.pnlProxySettings.setVisible(true);
+        }
+        else if (cbProxyType.getSelectedItem() == Connection.ProxyType.HTTP) {
+            this.pnlProxy.setVisible(true);
+            this.pnlProxySettings.setVisible(true);
+        }
+        else if (cbProxyType.getSelectedItem() == Connection.ProxyType.NONE) {
+            this.pnlProxy.setVisible(false);
+            this.pnlProxySettings.setVisible(false);
+        }
+        this.pack();
+        this.repaint();
+    }
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-		int param = 0;
-		if (args.length > 0) {
-			String param1 = args[0];
-			if (param1.equals(OPEN_CONNECTION_TAB)) {
-				param = 3;
-			}
-		}
-		final int openedTab = param;
+        int param = 0;
+        if (args.length > 0) {
+            String param1 = args[0];
+            if (param1.equals(OPEN_CONNECTION_TAB)) {
+                param = 3;
+            }
+        }
+        final int openedTab = param;
         java.awt.EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				if (!dialog.isVisible()) {
-					Preferences prefs = MageFrame.getPreferences();
+            public void run() {
+                if (!dialog.isVisible()) {
+                    Preferences prefs = MageFrame.getPreferences();
 
-					// Phases
-	                loadPhases(prefs);
+                    // Phases
+                    loadPhases(prefs);
 
-					// Connection
-					loadProxySettings(prefs);
+                    // Connection
+                    loadProxySettings(prefs);
 
-					// Selected avatar
-					loadSelectedAvatar(prefs);
+                    // Selected avatar
+                    loadSelectedAvatar(prefs);
 
-					// Images
-					loadImagesPath(prefs);
+                    // Images
+                    loadImagesPath(prefs);
 
-					// open specified tab before displaying
-					openTab(openedTab);
+                    // open specified tab before displaying
+                    openTab(openedTab);
 
-					dialog.setLocation(300, 200);
-					dialog.reset();
+                    dialog.setLocation(300, 200);
+                    dialog.reset();
 
-					dialog.setVisible(true);
-				} else {
-					dialog.requestFocus();
-				}
-			}
-		});
+                    dialog.setVisible(true);
+                } else {
+                    dialog.requestFocus();
+                }
+            }
+        });
     }
 
-	private static void loadPhases(Preferences prefs) {
-		load(prefs, dialog.checkBoxUpkeepYou, UPKEEP_YOU);
-		load(prefs, dialog.checkBoxDrawYou, DRAW_YOU);
-		load(prefs, dialog.checkBoxMainYou, MAIN_YOU);
-		load(prefs, dialog.checkBoxBeforeCYou, BEFORE_COMBAT_YOU);
-		load(prefs, dialog.checkBoxEndOfCYou, END_OF_COMBAT_YOU);
-		load(prefs, dialog.checkBoxMain2You, MAIN_2_YOU);
-		load(prefs, dialog.checkBoxEndTurnYou, END_OF_TURN_YOU);
+    private static void loadPhases(Preferences prefs) {
+        load(prefs, dialog.checkBoxUpkeepYou, UPKEEP_YOU);
+        load(prefs, dialog.checkBoxDrawYou, DRAW_YOU);
+        load(prefs, dialog.checkBoxMainYou, MAIN_YOU);
+        load(prefs, dialog.checkBoxBeforeCYou, BEFORE_COMBAT_YOU);
+        load(prefs, dialog.checkBoxEndOfCYou, END_OF_COMBAT_YOU);
+        load(prefs, dialog.checkBoxMain2You, MAIN_2_YOU);
+        load(prefs, dialog.checkBoxEndTurnYou, END_OF_TURN_YOU);
 
-		load(prefs, dialog.checkBoxUpkeepOthers, UPKEEP_OTHERS);
-		load(prefs, dialog.checkBoxDrawOthers, DRAW_OTHERS);
-		load(prefs, dialog.checkBoxMainOthers, MAIN_OTHERS);
-		load(prefs, dialog.checkBoxBeforeCOthers, BEFORE_COMBAT_OTHERS);
-		load(prefs, dialog.checkBoxEndOfCOthers, END_OF_COMBAT_OTHERS);
-		load(prefs, dialog.checkBoxMain2Others, MAIN_2_OTHERS);
-		load(prefs, dialog.checkBoxEndTurnOthers, END_OF_TURN_OTHERS);
-		load(prefs, dialog.displayBigCardsInHand, KEY_HAND_USE_BIG_CARDS, "true");
-		load(prefs, dialog.showToolTipsInAnyZone, KEY_SHOW_TOOLTIPS_ANY_ZONE, "true");
-		load(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true");
-	}
+        load(prefs, dialog.checkBoxUpkeepOthers, UPKEEP_OTHERS);
+        load(prefs, dialog.checkBoxDrawOthers, DRAW_OTHERS);
+        load(prefs, dialog.checkBoxMainOthers, MAIN_OTHERS);
+        load(prefs, dialog.checkBoxBeforeCOthers, BEFORE_COMBAT_OTHERS);
+        load(prefs, dialog.checkBoxEndOfCOthers, END_OF_COMBAT_OTHERS);
+        load(prefs, dialog.checkBoxMain2Others, MAIN_2_OTHERS);
+        load(prefs, dialog.checkBoxEndTurnOthers, END_OF_TURN_OTHERS);
+        load(prefs, dialog.displayBigCardsInHand, KEY_HAND_USE_BIG_CARDS, "true");
+        load(prefs, dialog.showToolTipsInAnyZone, KEY_SHOW_TOOLTIPS_ANY_ZONE, "true");
+        load(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true");
+    }
 
-	private static void loadProxySettings(Preferences prefs) {
-		dialog.cbProxyType.setSelectedItem(Connection.ProxyType.valueOf(MageFrame.getPreferences().get(KEY_PROXY_TYPE, "NONE").toUpperCase()));
+    private static void loadProxySettings(Preferences prefs) {
+        dialog.cbProxyType.setSelectedItem(Connection.ProxyType.valueOf(MageFrame.getPreferences().get(KEY_PROXY_TYPE, "NONE").toUpperCase()));
 
-		load(prefs, dialog.txtProxyServer, KEY_PROXY_ADDRESS, Config.serverName);
-		load(prefs, dialog.txtProxyPort, KEY_PROXY_PORT, Integer.toString(Config.port));
-		load(prefs, dialog.txtProxyUserName, KEY_PROXY_USERNAME, "");
-		load(prefs, dialog.rememberPswd, KEY_PROXY_REMEMBER, "true", "false");
-		if (dialog.rememberPswd.isSelected()) {
-			load(prefs, dialog.txtPasswordField, KEY_PROXY_PSWD, "");
-		}
-	}
+        load(prefs, dialog.txtProxyServer, KEY_PROXY_ADDRESS, Config.serverName);
+        load(prefs, dialog.txtProxyPort, KEY_PROXY_PORT, Integer.toString(Config.port));
+        load(prefs, dialog.txtProxyUserName, KEY_PROXY_USERNAME, "");
+        load(prefs, dialog.rememberPswd, KEY_PROXY_REMEMBER, "true", "false");
+        if (dialog.rememberPswd.isSelected()) {
+            load(prefs, dialog.txtPasswordField, KEY_PROXY_PSWD, "");
+        }
+    }
 
-	private static void loadSelectedAvatar(Preferences prefs) {
-		getSelectedAvatar();
-		dialog.setSelectedId(selectedId);
-	}
+    private static void loadSelectedAvatar(Preferences prefs) {
+        getSelectedAvatar();
+        dialog.setSelectedId(selectedId);
+    }
 
-	public static int getSelectedAvatar() {
-		try {
-			selectedId = Integer.valueOf(MageFrame.getPreferences().get(KEY_AVATAR, String.valueOf(DEFAULT_AVATAR_ID)));
-		} catch (NumberFormatException n) {
-			selectedId = DEFAULT_AVATAR_ID;
-		} finally {
-			if (!availableAvatars.contains(selectedId)) {
-				selectedId = DEFAULT_AVATAR_ID;
-			}
-		}
-		return selectedId;
-	}
+    public static int getSelectedAvatar() {
+        try {
+            selectedId = Integer.valueOf(MageFrame.getPreferences().get(KEY_AVATAR, String.valueOf(DEFAULT_AVATAR_ID)));
+        } catch (NumberFormatException n) {
+            selectedId = DEFAULT_AVATAR_ID;
+        } finally {
+            if (!availableAvatars.contains(selectedId)) {
+                selectedId = DEFAULT_AVATAR_ID;
+            }
+        }
+        return selectedId;
+    }
 
-	private static void openTab(int index) {
-		try {
-			if (index > 0) {
-				dialog.jTabbedPane1.setSelectedIndex(3);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+    private static void openTab(int index) {
+        try {
+            if (index > 0) {
+                dialog.jTabbedPane1.setSelectedIndex(3);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     private static void loadImagesPath(Preferences prefs) {
         String prop = prefs.get(KEY_CARD_IMAGES_USE_DEFAULT, "true");
@@ -1183,17 +1183,17 @@ public class PreferencesDialog extends javax.swing.JDialog {
         checkBox.setSelected(prop.equals(yesValue));
     }
 
-	private static void load(Preferences prefs, JCheckBox checkBox, String propName, String yesValue, String defaultValue) {
+    private static void load(Preferences prefs, JCheckBox checkBox, String propName, String yesValue, String defaultValue) {
         String prop = prefs.get(propName, defaultValue);
         checkBox.setSelected(prop.equals(yesValue));
     }
 
-	private static void load(Preferences prefs, JTextField field, String propName, String defaultValue) {
+    private static void load(Preferences prefs, JTextField field, String propName, String defaultValue) {
         String prop = prefs.get(propName, defaultValue);
         field.setText(prop);
     }
 
-	private static void load(Preferences prefs, JComboBox field, String propName, String defaultValue) {
+    private static void load(Preferences prefs, JComboBox field, String propName, String defaultValue) {
         String prop = prefs.get(propName, defaultValue);
         field.setSelectedItem(prop);
     }
@@ -1213,19 +1213,19 @@ public class PreferencesDialog extends javax.swing.JDialog {
         }
     }
 
-	private static void save(Preferences prefs, JTextField textField, String propName) {
+    private static void save(Preferences prefs, JTextField textField, String propName) {
         prefs.put(propName, textField.getText().trim());
-		updateCache(propName, textField.getText().trim());
-    }
-    
-	private static void save(Preferences prefs, JComboBox comboBox, String propName) {
-        prefs.put(propName, comboBox.getSelectedItem().toString().trim());
-		updateCache(propName, comboBox.getSelectedItem().toString().trim());
+        updateCache(propName, textField.getText().trim());
     }
 
-	public void reset() {
-		jTabbedPane1.setSelectedIndex(0);
-	}
+    private static void save(Preferences prefs, JComboBox comboBox, String propName) {
+        prefs.put(propName, comboBox.getSelectedItem().toString().trim());
+        updateCache(propName, comboBox.getSelectedItem().toString().trim());
+    }
+
+    public void reset() {
+        jTabbedPane1.setSelectedIndex(0);
+    }
 
     public static String getCachedValue(String key, String def) {
         if (cache.containsKey(key)) {
@@ -1243,69 +1243,69 @@ public class PreferencesDialog extends javax.swing.JDialog {
         cache.put(key, value);
     }
 
-	private void addAvatars() {
-		try {
-			addAvatar(jPanel10, 51, true, false);
-			addAvatar(jPanel13, 13, false, false);
-			addAvatar(jPanel11, 9,  false, false);
-			addAvatar(jPanel12, 53, false, false);
-			addAvatar(jPanel14, 10, false, false);
-			addAvatar(jPanel15, 39, false, false);
-			addAvatar(jPanel19, 19, false, false);
-			addAvatar(jPanel20, 30, false, false);
-			addAvatar(jPanel21, 25, false, false);
+    private void addAvatars() {
+        try {
+            addAvatar(jPanel10, 51, true, false);
+            addAvatar(jPanel13, 13, false, false);
+            addAvatar(jPanel11, 9,  false, false);
+            addAvatar(jPanel12, 53, false, false);
+            addAvatar(jPanel14, 10, false, false);
+            addAvatar(jPanel15, 39, false, false);
+            addAvatar(jPanel19, 19, false, false);
+            addAvatar(jPanel20, 30, false, false);
+            addAvatar(jPanel21, 25, false, false);
 
-			addAvatar(jPanel16, 22, false, true);
-			addAvatar(jPanel17, 77, false, true);
-			addAvatar(jPanel18, 62, false, true);
-		} catch (Exception e) {
-			log.error(e, e);
-		}
-	}
+            addAvatar(jPanel16, 22, false, true);
+            addAvatar(jPanel17, 77, false, true);
+            addAvatar(jPanel18, 62, false, true);
+        } catch (Exception e) {
+            log.error(e, e);
+        }
+    }
 
-	public void setSelectedId(int id) {
-		if (availableAvatars.contains(id)) {
-			for (JPanel panel : panels.values()) {
-				panel.setBorder(BLACK_BORDER);
-			}
-			this.selectedId = id;
-			panels.get(this.selectedId).setBorder(GREEN_BORDER);
-		}
-	}
+    public void setSelectedId(int id) {
+        if (availableAvatars.contains(id)) {
+            for (JPanel panel : panels.values()) {
+                panel.setBorder(BLACK_BORDER);
+            }
+            this.selectedId = id;
+            panels.get(this.selectedId).setBorder(GREEN_BORDER);
+        }
+    }
 
-	private void addAvatar(JPanel jPanel, final int id, boolean selected, boolean locked) {
-		String path = "/avatars/" + String.valueOf(id) + ".jpg";
-		panels.put(id, jPanel);
-		Image image = ImageHelper.getImageFromResources(path);
-		Rectangle r = new Rectangle(90, 90);
-		BufferedImage bufferedImage;
-		if (!locked) {
-			bufferedImage = BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB);
-		} else {
-			bufferedImage = BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB, new Color(150, 150, 150, 170));
-		}
-		BufferedImage resized = ImageHelper.getResizedImage(bufferedImage, r);
-		final JLabel jLabel = new JLabel();
-		jLabel.setIcon(new ImageIcon(resized));
-		if (selected) {
-			jPanel.setBorder(GREEN_BORDER);
-		} else {
-			jPanel.setBorder(BLACK_BORDER);
-		}
-		jPanel.setLayout(new BorderLayout());
-		jPanel.add(jLabel);
-		if (!locked) {
-			jLabel.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mousePressed(MouseEvent e) {
-					if (selectedId != id) {
-						setSelectedId(id);
-						MageFrame.getSession().updateAvatar(id);
-					}
-				}
-			});
-		}
-	}
+    private void addAvatar(JPanel jPanel, final int id, boolean selected, boolean locked) {
+        String path = "/avatars/" + String.valueOf(id) + ".jpg";
+        panels.put(id, jPanel);
+        Image image = ImageHelper.getImageFromResources(path);
+        Rectangle r = new Rectangle(90, 90);
+        BufferedImage bufferedImage;
+        if (!locked) {
+            bufferedImage = BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB);
+        } else {
+            bufferedImage = BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB, new Color(150, 150, 150, 170));
+        }
+        BufferedImage resized = ImageHelper.getResizedImage(bufferedImage, r);
+        final JLabel jLabel = new JLabel();
+        jLabel.setIcon(new ImageIcon(resized));
+        if (selected) {
+            jPanel.setBorder(GREEN_BORDER);
+        } else {
+            jPanel.setBorder(BLACK_BORDER);
+        }
+        jPanel.setLayout(new BorderLayout());
+        jPanel.add(jLabel);
+        if (!locked) {
+            jLabel.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    if (selectedId != id) {
+                        setSelectedId(id);
+                        MageFrame.getSession().updateAvatar(id);
+                    }
+                }
+            });
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton browseButton;

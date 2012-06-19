@@ -45,19 +45,19 @@ import mage.sets.Sets;
  */
 public class AddLandDialog extends MageDialog {
 
-	private Deck deck;
+    private Deck deck;
 
     /** Creates new form AddLandDialog */
     public AddLandDialog() {
         initComponents();
-		this.setModal(true);
+        this.setModal(true);
     }
 
-	public void showDialog(Deck deck) {
-		this.deck = deck;
-		MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
-		this.setVisible(true);
-	}
+    public void showDialog(Deck deck) {
+        this.deck = deck;
+        MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
+        this.setVisible(true);
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -188,33 +188,33 @@ public class AddLandDialog extends MageDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-	private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-		this.hideDialog();
-	}//GEN-LAST:event_btnCancelActionPerformed
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        this.hideDialog();
+    }//GEN-LAST:event_btnCancelActionPerformed
 
-	private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-		int nForest = ((Number)spnForest.getValue()).intValue();
-		for (int i = 0; i < nForest; i++) {
-			deck.getCards().add(Sets.findCard("Forest", true));
-		}
-		int nIsland = ((Number)spnIsland.getValue()).intValue();
-		for (int i = 0; i < nIsland; i++) {
-			deck.getCards().add(Sets.findCard("Island", true));
-		}
-		int nMountain = ((Number)spnMountain.getValue()).intValue();
-		for (int i = 0; i < nMountain; i++) {
-			deck.getCards().add(Sets.findCard("Mountain", true));
-		}
-		int nPlains = ((Number)spnPlains.getValue()).intValue();
-		for (int i = 0; i < nPlains; i++) {
-			deck.getCards().add(Sets.findCard("Plains", true));
-		}
-		int nSwamp = ((Number)spnSwamp.getValue()).intValue();
-		for (int i = 0; i < nSwamp; i++) {
-			deck.getCards().add(Sets.findCard("Swamp", true));
-		}
-		this.hideDialog();
-	}//GEN-LAST:event_btnAddActionPerformed
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        int nForest = ((Number)spnForest.getValue()).intValue();
+        for (int i = 0; i < nForest; i++) {
+            deck.getCards().add(Sets.findCard("Forest", true));
+        }
+        int nIsland = ((Number)spnIsland.getValue()).intValue();
+        for (int i = 0; i < nIsland; i++) {
+            deck.getCards().add(Sets.findCard("Island", true));
+        }
+        int nMountain = ((Number)spnMountain.getValue()).intValue();
+        for (int i = 0; i < nMountain; i++) {
+            deck.getCards().add(Sets.findCard("Mountain", true));
+        }
+        int nPlains = ((Number)spnPlains.getValue()).intValue();
+        for (int i = 0; i < nPlains; i++) {
+            deck.getCards().add(Sets.findCard("Plains", true));
+        }
+        int nSwamp = ((Number)spnSwamp.getValue()).intValue();
+        for (int i = 0; i < nSwamp; i++) {
+            deck.getCards().add(Sets.findCard("Swamp", true));
+        }
+        this.hideDialog();
+    }//GEN-LAST:event_btnAddActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

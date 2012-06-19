@@ -53,38 +53,38 @@ import java.util.UUID;
  */
 public class KarganDragonlord extends LevelerCard<KarganDragonlord> {
 
-	public KarganDragonlord(UUID ownerId) {
-		super(ownerId, 152, "Kargan Dragonlord", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{R}{R}");
-		this.expansionSetCode = "ROE";
-		this.subtype.add("Human");
-		this.subtype.add("Warrior");
-		this.color.setRed(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+    public KarganDragonlord(UUID ownerId) {
+        super(ownerId, 152, "Kargan Dragonlord", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{R}{R}");
+        this.expansionSetCode = "ROE";
+        this.subtype.add("Human");
+        this.subtype.add("Warrior");
+        this.color.setRed(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-		this.addAbility(new LevelUpAbility(new ManaCostsImpl("{R}")));
+        this.addAbility(new LevelUpAbility(new ManaCostsImpl("{R}")));
 
-		Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
-		abilities1.add(FlyingAbility.getInstance());
+        Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
+        abilities1.add(FlyingAbility.getInstance());
 
-		Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
-		abilities2.add(FlyingAbility.getInstance());
-		abilities2.add(TrampleAbility.getInstance());
-		abilities2.add(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
+        Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
+        abilities2.add(FlyingAbility.getInstance());
+        abilities2.add(TrampleAbility.getInstance());
+        abilities2.add(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
 
         LevelerCardBuilder.construct(this,
                 new LevelerCardBuilder.LevelAbility(4, 7, abilities1, 4, 4),
                 new LevelerCardBuilder.LevelAbility(8, -1, abilities2, 8, 8)
         );
-	}
+    }
 
-	public KarganDragonlord(final KarganDragonlord card) {
-		super(card);
-	}
+    public KarganDragonlord(final KarganDragonlord card) {
+        super(card);
+    }
 
-	@Override
-	public KarganDragonlord copy() {
-		return new KarganDragonlord(this);
-	}
+    @Override
+    public KarganDragonlord copy() {
+        return new KarganDragonlord(this);
+    }
 
 }

@@ -39,35 +39,35 @@ import mage.game.events.GameEvent.EventType;
  */
 public class EndPhase extends Phase<EndPhase> {
 
-	public EndPhase() {
-		this.type = TurnPhase.END;
-		this.event = EventType.END_PHASE;
-		this.preEvent = EventType.END_PHASE_PRE;
-		this.postEvent = EventType.END_PHASE_POST;
-		this.steps.add(new EndStep());
-		this.steps.add(new CleanupStep());
-	}
+    public EndPhase() {
+        this.type = TurnPhase.END;
+        this.event = EventType.END_PHASE;
+        this.preEvent = EventType.END_PHASE_PRE;
+        this.postEvent = EventType.END_PHASE_POST;
+        this.steps.add(new EndStep());
+        this.steps.add(new CleanupStep());
+    }
 
-	public EndPhase(final EndPhase phase) {
-		super(phase);
-	}
+    public EndPhase(final EndPhase phase) {
+        super(phase);
+    }
 
-	@Override
-	protected void playStep(Game game) {
-		if (currentStep.getType() == PhaseStep.CLEANUP) {
-			currentStep.beginStep(game, activePlayerId);
-			if (game.checkStateAndTriggered()) {
-				playStep(game);
-			}
-			currentStep.endStep(game, activePlayerId);
-		}
-		else
-			super.playStep(game);
-	}
+    @Override
+    protected void playStep(Game game) {
+        if (currentStep.getType() == PhaseStep.CLEANUP) {
+            currentStep.beginStep(game, activePlayerId);
+            if (game.checkStateAndTriggered()) {
+                playStep(game);
+            }
+            currentStep.endStep(game, activePlayerId);
+        }
+        else
+            super.playStep(game);
+    }
 
-	@Override
-	public EndPhase copy() {
-		return new EndPhase(this);
-	}
+    @Override
+    public EndPhase copy() {
+        return new EndPhase(this);
+    }
 
 }

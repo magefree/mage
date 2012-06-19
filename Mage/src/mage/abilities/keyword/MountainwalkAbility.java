@@ -37,23 +37,23 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class MountainwalkAbility extends LandwalkAbility {
 
-	private static final FilterLandPermanent filter = new FilterLandPermanent("Mountain");
+    private static final FilterLandPermanent filter = new FilterLandPermanent("Mountain");
 
-	static {
-		filter.getSubtype().add("Mountain");
-		filter.setScopeSubtype(ComparisonScope.Any);
-	}
+    static {
+        filter.getSubtype().add("Mountain");
+        filter.setScopeSubtype(ComparisonScope.Any);
+    }
 
-	public MountainwalkAbility() {
-		super(filter);
-	}
+    public MountainwalkAbility() {
+        super(filter);
+    }
 
-	public MountainwalkAbility(final MountainwalkAbility ability) {
-		super(ability);
-	}
+    public MountainwalkAbility(final MountainwalkAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public MountainwalkAbility copy() {
-		return new MountainwalkAbility(this);
-	}
+    @Override
+    public MountainwalkAbility copy() {
+        return new MountainwalkAbility(this);
+    }
 }

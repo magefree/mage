@@ -73,29 +73,29 @@ public class PhyrexianVatmother extends CardImpl<PhyrexianVatmother> {
 
 class PoisonControllerEffect extends OneShotEffect<PoisonControllerEffect> {
 
-	public PoisonControllerEffect() {
-		super(Outcome.Damage);
-		staticText = "you get a poison counter";
+    public PoisonControllerEffect() {
+        super(Outcome.Damage);
+        staticText = "you get a poison counter";
 
-	}
+    }
 
-	public PoisonControllerEffect(final PoisonControllerEffect effect) {
-		super(effect);
-	}
+    public PoisonControllerEffect(final PoisonControllerEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public PoisonControllerEffect copy() {
-		return new PoisonControllerEffect(this);
-	}
+    @Override
+    public PoisonControllerEffect copy() {
+        return new PoisonControllerEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-		if (player != null) {
-			player.addCounters(CounterType.POISON.createInstance(), game);
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+            player.addCounters(CounterType.POISON.createInstance(), game);
+            return true;
+        }
+        return false;
+    }
 
 }

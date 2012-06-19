@@ -47,17 +47,17 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class RavenousDemon extends CardImpl<RavenousDemon> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("Human");
-    
+
     static {
         filter.getSubtype().add("Human");
         filter.setScopeSubtype(Filter.ComparisonScope.Any);
     }
-    
+
     public RavenousDemon(UUID ownerId) {
         super(ownerId, 71, "Ravenous Demon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
         this.expansionSetCode = "DKA";
         this.subtype.add("Demon");
-        
+
         this.canTransform = true;
         this.secondSideCard = new ArchdemonOfGreed(ownerId);
 

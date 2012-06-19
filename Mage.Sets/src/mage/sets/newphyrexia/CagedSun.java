@@ -62,10 +62,10 @@ public class CagedSun extends CardImpl<CagedSun> {
 
         // As Caged Sun enters the battlefield, choose a color.
         this.addAbility(new EntersBattlefieldAbility(new CagedSunEffect1()));
-        
+
         // Creatures you control of the chosen color get +1/+1.
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new CagedSunEffect2()));
-        
+
         // Whenever a land's ability adds one or more mana of the chosen color to your mana pool, add one additional mana of that color to your mana pool.
         this.addAbility(new CagedSunTriggeredAbility());
     }
@@ -82,58 +82,58 @@ public class CagedSun extends CardImpl<CagedSun> {
 
 class CagedSunEffect1 extends OneShotEffect<CagedSunEffect1> {
 
-	public CagedSunEffect1() {
-		super(Constants.Outcome.BoostCreature);
-		staticText = "As {this} enters the battlefield, choose a color";
-	}
+    public CagedSunEffect1() {
+        super(Constants.Outcome.BoostCreature);
+        staticText = "As {this} enters the battlefield, choose a color";
+    }
 
-	public CagedSunEffect1(final CagedSunEffect1 effect) {
-		super(effect);
-	}
+    public CagedSunEffect1(final CagedSunEffect1 effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-		Permanent permanent = game.getPermanent(source.getSourceId());
-		if (player != null && permanent != null) {
-			ChoiceColor colorChoice = new ChoiceColor();
-			if (player.choose(Constants.Outcome.BoostCreature, colorChoice, game)) {
-				game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + colorChoice.getChoice());
-				game.getState().setValue(permanent.getId() + "_color", colorChoice.getColor());
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (player != null && permanent != null) {
+            ChoiceColor colorChoice = new ChoiceColor();
+            if (player.choose(Constants.Outcome.BoostCreature, colorChoice, game)) {
+                game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + colorChoice.getChoice());
+                game.getState().setValue(permanent.getId() + "_color", colorChoice.getColor());
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public CagedSunEffect1 copy() {
-		return new CagedSunEffect1(this);
-	}
+    @Override
+    public CagedSunEffect1 copy() {
+        return new CagedSunEffect1(this);
+    }
 
 }
 
 class CagedSunEffect2 extends ContinuousEffectImpl<CagedSunEffect2> {
 
-	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
-	public CagedSunEffect2() {
-		super(Duration.WhileOnBattlefield, Constants.Layer.PTChangingEffects_7, Constants.SubLayer.ModifyPT_7c, Constants.Outcome.BoostCreature);
-		staticText = "Creatures you control of the chosen color get +1/+1";
-	}
+    public CagedSunEffect2() {
+        super(Duration.WhileOnBattlefield, Constants.Layer.PTChangingEffects_7, Constants.SubLayer.ModifyPT_7c, Constants.Outcome.BoostCreature);
+        staticText = "Creatures you control of the chosen color get +1/+1";
+    }
 
-	public CagedSunEffect2(final CagedSunEffect2 effect) {
-		super(effect);
-	}
+    public CagedSunEffect2(final CagedSunEffect2 effect) {
+        super(effect);
+    }
 
-	@Override
-	public CagedSunEffect2 copy() {
-		return new CagedSunEffect2(this);
-	}
+    @Override
+    public CagedSunEffect2 copy() {
+        return new CagedSunEffect2(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getSourceId());
-		if (permanent != null) {
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
             ObjectColor color = (ObjectColor) game.getState().getValue(permanent.getId() + "_color");
             if (color != null) {
                 for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
@@ -144,48 +144,48 @@ class CagedSunEffect2 extends ContinuousEffectImpl<CagedSunEffect2> {
                 }
             }
         }
-		return true;
-	}
+        return true;
+    }
 
 }
 
 class CagedSunTriggeredAbility extends TriggeredManaAbility<CagedSunTriggeredAbility> {
 
-	private static final String staticText = "Whenever a land's ability adds one or more mana of the chosen color to your mana pool, add one additional mana of that color to your mana pool.";
+    private static final String staticText = "Whenever a land's ability adds one or more mana of the chosen color to your mana pool, add one additional mana of that color to your mana pool.";
 
-	public CagedSunTriggeredAbility() {
-		super(Zone.BATTLEFIELD, new CagedSunEffect());
-	}
+    public CagedSunTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new CagedSunEffect());
+    }
 
-	public CagedSunTriggeredAbility(CagedSunTriggeredAbility ability) {
-		super(ability);
-	}
+    public CagedSunTriggeredAbility(CagedSunTriggeredAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == GameEvent.EventType.MANA_ADDED && event.getPlayerId().equals(controllerId)) {
-			Permanent permanent = game.getPermanent(event.getTargetId());
-			if (permanent == null) {
-				permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-			}
-			if (permanent != null && permanent.getCardType().contains(CardType.LAND)) {
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.MANA_ADDED && event.getPlayerId().equals(controllerId)) {
+            Permanent permanent = game.getPermanent(event.getTargetId());
+            if (permanent == null) {
+                permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
+            }
+            if (permanent != null && permanent.getCardType().contains(CardType.LAND)) {
                 ObjectColor color = (ObjectColor) game.getState().getValue(this.sourceId + "_color");
                 if (color != null && event.getData().contains(color.toString()))
                     return true;
-			}
-		}
-		return false;
-	}
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public CagedSunTriggeredAbility copy() {
-		return new CagedSunTriggeredAbility(this);
-	}
+    @Override
+    public CagedSunTriggeredAbility copy() {
+        return new CagedSunTriggeredAbility(this);
+    }
 
-	@Override
-	public String getRule() {
-		return staticText;
-	}
+    @Override
+    public String getRule() {
+        return staticText;
+    }
 }
 
 
@@ -195,11 +195,11 @@ class CagedSunEffect extends ManaEffect<CagedSunEffect> {
         super();
         staticText = "add one additional mana of that color to your mana pool";
     }
-    
+
     public CagedSunEffect(final CagedSunEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
@@ -223,5 +223,5 @@ class CagedSunEffect extends ManaEffect<CagedSunEffect> {
     public CagedSunEffect copy() {
         return new CagedSunEffect(this);
     }
-    
+
 }

@@ -38,40 +38,40 @@ import java.util.UUID;
  */
 public class Round {
 
-	private int roundNum;
-	private List<TournamentPairing> pairs = new ArrayList<TournamentPairing>();
+    private int roundNum;
+    private List<TournamentPairing> pairs = new ArrayList<TournamentPairing>();
 
-	public Round(int roundNum) {
-		this.roundNum = roundNum;
-	}
+    public Round(int roundNum) {
+        this.roundNum = roundNum;
+    }
 
-	public void addPairing(TournamentPairing match) {
-		this.pairs.add(match);
-	}
+    public void addPairing(TournamentPairing match) {
+        this.pairs.add(match);
+    }
 
-	public TournamentPairing getPairing(UUID pairId) {
-		for (TournamentPairing pair: pairs) {
-			if (pair.getId().equals(pairId)) {
-				return pair;
-			}
-		}
-		return null;
-	}
+    public TournamentPairing getPairing(UUID pairId) {
+        for (TournamentPairing pair: pairs) {
+            if (pair.getId().equals(pairId)) {
+                return pair;
+            }
+        }
+        return null;
+    }
 
-	public List<TournamentPairing> getPairs() {
-		return pairs;
-	}
+    public List<TournamentPairing> getPairs() {
+        return pairs;
+    }
 
-	public int getRoundNumber() {
-		return this.roundNum;
-	}
+    public int getRoundNumber() {
+        return this.roundNum;
+    }
 
-	public boolean isRoundOver() {
-		for (TournamentPairing pair: pairs) {
-			if (!pair.getMatch().isMatchOver()) {
-				return false;
-			}
-		}
-		return true;
-	}
+    public boolean isRoundOver() {
+        for (TournamentPairing pair: pairs) {
+            if (!pair.getMatch().isMatchOver()) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

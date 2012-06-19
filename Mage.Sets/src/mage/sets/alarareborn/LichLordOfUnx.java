@@ -66,11 +66,11 @@ public class LichLordOfUnx extends CardImpl<LichLordOfUnx> {
         this.subtype.add("Zombie");
         this.subtype.add("Wizard");
 
-		this.color.setBlue(true);
-		this.color.setBlack(true);
+        this.color.setBlue(true);
+        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        
+
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CreateTokenEffect(new ZombieWizardToken()), new ManaCostsImpl("{U}{B}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -100,6 +100,6 @@ class ZombieWizardToken extends Token {
         subtype.add("Zombie");
         subtype.add("Wizard");
         power = new MageInt(1);
-		toughness = new MageInt(1);
+        toughness = new MageInt(1);
     }
 }

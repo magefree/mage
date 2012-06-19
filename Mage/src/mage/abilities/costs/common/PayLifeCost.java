@@ -40,35 +40,35 @@ import java.util.UUID;
  */
 public class PayLifeCost extends CostImpl<PayLifeCost> {
 
-	private int amount;
+    private int amount;
 
-	public PayLifeCost(int amount) {
-		this.amount = amount;
-		this.text = "Pay " + Integer.toString(amount) + " life";
-	}
+    public PayLifeCost(int amount) {
+        this.amount = amount;
+        this.text = "Pay " + Integer.toString(amount) + " life";
+    }
 
-	public PayLifeCost(PayLifeCost cost) {
-		super(cost);
-		this.amount = cost.amount;
-	}
+    public PayLifeCost(PayLifeCost cost) {
+        super(cost);
+        this.amount = cost.amount;
+    }
 
-	@Override
-	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+    @Override
+    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
         if (amount > 0 && !game.getPlayer(controllerId).canPayLifeCost()) {
             return false;
         }
-		return game.getPlayer(controllerId).getLife() > amount;
-	}
+        return game.getPlayer(controllerId).getLife() > amount;
+    }
 
-	@Override
-	public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-		this.paid = game.getPlayer(controllerId).loseLife(amount, game) == amount;
-		return paid;
-	}
+    @Override
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+        this.paid = game.getPlayer(controllerId).loseLife(amount, game) == amount;
+        return paid;
+    }
 
-	@Override
-	public PayLifeCost copy() {
-		return new PayLifeCost(this);
-	}
+    @Override
+    public PayLifeCost copy() {
+        return new PayLifeCost(this);
+    }
 
 }

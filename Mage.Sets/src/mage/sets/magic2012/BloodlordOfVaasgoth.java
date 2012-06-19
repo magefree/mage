@@ -49,76 +49,76 @@ import mage.game.stack.Spell;
  */
 public class BloodlordOfVaasgoth extends CardImpl<BloodlordOfVaasgoth> {
 
-	private static final FilterSpell filter = new FilterSpell("a Vampire creature spell");
+    private static final FilterSpell filter = new FilterSpell("a Vampire creature spell");
 
-	static {
-		filter.getCardType().add(CardType.CREATURE);
-		filter.setScopeCardType(Filter.ComparisonScope.Any);
-		filter.getSubtype().add("Vampire");
-		filter.setScopeSubtype(Filter.ComparisonScope.Any);
-	}
+    static {
+        filter.getCardType().add(CardType.CREATURE);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.getSubtype().add("Vampire");
+        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+    }
 
-	public BloodlordOfVaasgoth(UUID ownerId) {
-		super(ownerId, 82, "Bloodlord of Vaasgoth", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
-		this.expansionSetCode = "M12";
-		this.subtype.add("Vampire");
-		this.subtype.add("Warrior");
+    public BloodlordOfVaasgoth(UUID ownerId) {
+        super(ownerId, 82, "Bloodlord of Vaasgoth", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
+        this.expansionSetCode = "M12";
+        this.subtype.add("Vampire");
+        this.subtype.add("Warrior");
 
-		this.color.setBlack(true);
-		this.power = new MageInt(3);
-		this.toughness = new MageInt(3);
+        this.color.setBlack(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-		// Bloodthirst 3
-		this.addAbility(new BloodthirstAbility(3));
+        // Bloodthirst 3
+        this.addAbility(new BloodthirstAbility(3));
 
-		this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(FlyingAbility.getInstance());
 
-		// Whenever you cast a Vampire creature spell, it gains bloodthirst 3.
-		this.addAbility(new SpellCastTriggeredAbility(new BloodlordOfVaasgothEffect(), filter, false, true));
-	}
+        // Whenever you cast a Vampire creature spell, it gains bloodthirst 3.
+        this.addAbility(new SpellCastTriggeredAbility(new BloodlordOfVaasgothEffect(), filter, false, true));
+    }
 
-	public BloodlordOfVaasgoth(final BloodlordOfVaasgoth card) {
-		super(card);
-	}
+    public BloodlordOfVaasgoth(final BloodlordOfVaasgoth card) {
+        super(card);
+    }
 
-	@Override
-	public BloodlordOfVaasgoth copy() {
-		return new BloodlordOfVaasgoth(this);
-	}
+    @Override
+    public BloodlordOfVaasgoth copy() {
+        return new BloodlordOfVaasgoth(this);
+    }
 }
 
 class BloodlordOfVaasgothEffect extends ContinuousEffectImpl {
 
-	private Ability ability = new BloodthirstAbility(3);
+    private Ability ability = new BloodthirstAbility(3);
 
-	public BloodlordOfVaasgothEffect() {
-		super(Constants.Duration.OneUse, Constants.Layer.AbilityAddingRemovingEffects_6, Constants.SubLayer.NA, Constants.Outcome.AddAbility);
-		staticText = "it gains bloodthirst 3";
-	}
+    public BloodlordOfVaasgothEffect() {
+        super(Constants.Duration.OneUse, Constants.Layer.AbilityAddingRemovingEffects_6, Constants.SubLayer.NA, Constants.Outcome.AddAbility);
+        staticText = "it gains bloodthirst 3";
+    }
 
-	public BloodlordOfVaasgothEffect(final BloodlordOfVaasgothEffect effect) {
-		super(effect);
+    public BloodlordOfVaasgothEffect(final BloodlordOfVaasgothEffect effect) {
+        super(effect);
         this.ability = effect.ability.copy();
-	}
+    }
 
-	@Override
-	public BloodlordOfVaasgothEffect copy() {
-		return new BloodlordOfVaasgothEffect(this);
-	}
+    @Override
+    public BloodlordOfVaasgothEffect copy() {
+        return new BloodlordOfVaasgothEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Spell object = game.getStack().getSpell(targetPointer.getFirst(game, source));
-		if (object != null) {
-			Permanent permanent = game.getPermanent(object.getSourceId());
-			if (permanent != null) {
-				permanent.addAbility(ability, game);
-				return true;
-			}
-		} else {
-			used = true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Spell object = game.getStack().getSpell(targetPointer.getFirst(game, source));
+        if (object != null) {
+            Permanent permanent = game.getPermanent(object.getSourceId());
+            if (permanent != null) {
+                permanent.addAbility(ability, game);
+                return true;
+            }
+        } else {
+            used = true;
+        }
+        return false;
+    }
 
 }

@@ -34,25 +34,25 @@ package mage.game.tournament;
  */
 public abstract class TournamentSingleElimination extends TournamentImpl {
 
-	public TournamentSingleElimination(TournamentOptions options) {
-		super(options);
-	}
+    public TournamentSingleElimination(TournamentOptions options) {
+        super(options);
+    }
 
-	@Override
-	protected void runTournament() {
-		while (this.getActivePlayers().size() > 1) {
-			Round round = createRoundRandom();
-			playRound(round);
-			eliminatePlayers(round);
-		}
-		nextStep();
-	}
+    @Override
+    protected void runTournament() {
+        while (this.getActivePlayers().size() > 1) {
+            Round round = createRoundRandom();
+            playRound(round);
+            eliminatePlayers(round);
+        }
+        nextStep();
+    }
 
-	private void eliminatePlayers(Round round) {
-		for (TournamentPairing pair: round.getPairs()) {
-			pair.eliminatePlayers();
-		}
-	}
+    private void eliminatePlayers(Round round) {
+        for (TournamentPairing pair: round.getPairs()) {
+            pair.eliminatePlayers();
+        }
+    }
 
 
 }

@@ -48,29 +48,29 @@ import java.util.UUID;
  */
 public class SalvageScout extends CardImpl<SalvageScout> {
 
-	public SalvageScout(UUID ownerId) {
-		super(ownerId, 19, "Salvage Scout", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
-		this.expansionSetCode = "SOM";
-		this.subtype.add("Human");
-		this.subtype.add("Scout");
+    public SalvageScout(UUID ownerId) {
+        super(ownerId, 19, "Salvage Scout", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
+        this.expansionSetCode = "SOM";
+        this.subtype.add("Human");
+        this.subtype.add("Scout");
 
-		this.color.setWhite(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
+        this.color.setWhite(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{W}"));
-		ability.addTarget(new TargetCardInYourGraveyard(new FilterArtifactCard("artifact card from your graveyard")));
-		ability.addCost(new SacrificeSourceCost());
-		this.addAbility(ability);
-	}
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{W}"));
+        ability.addTarget(new TargetCardInYourGraveyard(new FilterArtifactCard("artifact card from your graveyard")));
+        ability.addCost(new SacrificeSourceCost());
+        this.addAbility(ability);
+    }
 
-	public SalvageScout(final SalvageScout card) {
-		super(card);
-	}
+    public SalvageScout(final SalvageScout card) {
+        super(card);
+    }
 
-	@Override
-	public SalvageScout copy() {
-		return new SalvageScout(this);
-	}
+    @Override
+    public SalvageScout copy() {
+        return new SalvageScout(this);
+    }
 
 }

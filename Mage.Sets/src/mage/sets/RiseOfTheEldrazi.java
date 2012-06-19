@@ -38,22 +38,22 @@ import mage.cards.ExpansionSet;
  */
 public class RiseOfTheEldrazi extends ExpansionSet {
 
-	private static final RiseOfTheEldrazi fINSTANCE =  new RiseOfTheEldrazi();
+    private static final RiseOfTheEldrazi fINSTANCE =  new RiseOfTheEldrazi();
 
-	public static RiseOfTheEldrazi getInstance() {
-		return fINSTANCE;
-	}
+    public static RiseOfTheEldrazi getInstance() {
+        return fINSTANCE;
+    }
 
-	private RiseOfTheEldrazi() {
-		super("Rise of the Eldrazi", "ROE", "seticon_ROE", "mage.sets.riseoftheeldrazi", new GregorianCalendar(2010, 3, 17).getTime(), SetType.EXPANSION);
-		this.blockName = "Zendikar";
-		this.parentSet = Zendikar.getInstance();
-		this.hasBoosters = true;
-		this.numBoosterLands = 1;
-		this.numBoosterCommon = 10;
-		this.numBoosterUncommon = 3;
-		this.numBoosterRare = 1;
-		this.ratioBoosterMythic = 8;
-	}
+    private RiseOfTheEldrazi() {
+        super("Rise of the Eldrazi", "ROE", "seticon_ROE", "mage.sets.riseoftheeldrazi", new GregorianCalendar(2010, 3, 17).getTime(), SetType.EXPANSION);
+        this.blockName = "Zendikar";
+        this.parentSet = Zendikar.getInstance();
+        this.hasBoosters = true;
+        this.numBoosterLands = 1;
+        this.numBoosterCommon = 10;
+        this.numBoosterUncommon = 3;
+        this.numBoosterRare = 1;
+        this.ratioBoosterMythic = 8;
+    }
 
 }

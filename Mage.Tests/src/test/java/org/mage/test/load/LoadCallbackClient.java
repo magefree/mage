@@ -18,16 +18,16 @@ import java.util.UUID;
 public class LoadCallbackClient implements CallbackClient {
 
     private static final transient Logger log = Logger.getLogger(LoadCallbackClient.class);
-    
+
     private Session session;
     private UUID gameId;
     private UUID playerId;
     private boolean gameOver;
-    
+
     private volatile int controlCount;
 
     private GameView gameView;
-    
+
     @Override
     public void processCallback(ClientCallback callback) {
         //TODO
@@ -75,7 +75,7 @@ public class LoadCallbackClient implements CallbackClient {
         }
 
     }
-    
+
     public void setSession(Session session) {
         this.session = session;
     }

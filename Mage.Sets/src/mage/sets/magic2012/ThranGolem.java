@@ -61,7 +61,7 @@ public class ThranGolem extends CardImpl<ThranGolem> {
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
-        
+
         ConditionalContinousEffect effect1 = new ConditionalContinousEffect(new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), EnchantedCondition.getInstance(), rule1);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect1));
         ConditionalContinousEffect effect2 = new ConditionalContinousEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance()), EnchantedCondition.getInstance(), rule2);

@@ -41,21 +41,21 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class FlameSlash extends CardImpl<FlameSlash> {
 
-	public FlameSlash(UUID ownerId) {
-		super(ownerId, 145, "Flame Slash", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");
-		this.expansionSetCode = "ROE";
-		this.color.setRed(true);
-		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-		this.getSpellAbility().addEffect(new DamageTargetEffect(4));
-	}
+    public FlameSlash(UUID ownerId) {
+        super(ownerId, 145, "Flame Slash", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");
+        this.expansionSetCode = "ROE";
+        this.color.setRed(true);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addEffect(new DamageTargetEffect(4));
+    }
 
-	public FlameSlash(final FlameSlash card) {
-		super(card);
-	}
+    public FlameSlash(final FlameSlash card) {
+        super(card);
+    }
 
-	@Override
-	public FlameSlash copy() {
-		return new FlameSlash(this);
-	}
+    @Override
+    public FlameSlash copy() {
+        return new FlameSlash(this);
+    }
 
 }

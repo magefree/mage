@@ -38,69 +38,69 @@ import mage.players.Player;
  */
 public class TournamentPlayer {
 
-	protected int points;
-	protected String name;
-	protected String playerType;
-	protected Player player;
-	protected Deck deck;
-	protected String results = "";
-	protected boolean eliminated = false;
-	protected boolean doneConstructing;
-	protected boolean joined = false;
+    protected int points;
+    protected String name;
+    protected String playerType;
+    protected Player player;
+    protected Deck deck;
+    protected String results = "";
+    protected boolean eliminated = false;
+    protected boolean doneConstructing;
+    protected boolean joined = false;
 
-	public TournamentPlayer(Player player, String playerType) {
-		this.player = player;
-		this.playerType = playerType;
-	}
+    public TournamentPlayer(Player player, String playerType) {
+        this.player = player;
+        this.playerType = playerType;
+    }
 
-	public Player getPlayer() {
-		return player;
-	}
+    public Player getPlayer() {
+        return player;
+    }
 
-	public String getPlayerType() {
-		return playerType;
-	}
+    public String getPlayerType() {
+        return playerType;
+    }
 
-	public Deck getDeck() {
-		return deck;
-	}
+    public Deck getDeck() {
+        return deck;
+    }
 
-	public int getPoints() {
-		return points;
-	}
+    public int getPoints() {
+        return points;
+    }
 
-	public void setPoints(int points) {
-		this.points = points;
-	}
+    public void setPoints(int points) {
+        this.points = points;
+    }
 
-	public boolean getEliminated() {
-		return eliminated;
-	}
+    public boolean getEliminated() {
+        return eliminated;
+    }
 
-	public void setEliminated() {
-		this.eliminated = true;
-	}
+    public void setEliminated() {
+        this.eliminated = true;
+    }
 
-	public boolean isJoined() {
-		return joined;
-	}
+    public boolean isJoined() {
+        return joined;
+    }
 
-	public void setJoined() {
-		this.joined = true;
-	}
+    public void setJoined() {
+        this.joined = true;
+    }
 
-	public void setConstructing() {
-		this.doneConstructing = false;
-	}
+    public void setConstructing() {
+        this.doneConstructing = false;
+    }
 
-	public void submitDeck(Deck deck) {
-		this.deck = deck;
-		this.doneConstructing = true;
-	}
+    public void submitDeck(Deck deck) {
+        this.deck = deck;
+        this.doneConstructing = true;
+    }
 
-	public void updateDeck(Deck deck) {
-		this.deck = deck;
-	}
+    public void updateDeck(Deck deck) {
+        this.deck = deck;
+    }
 
     public Deck generateDeck() {
         //TODO: improve this
@@ -111,20 +111,20 @@ public class TournamentPlayer {
         }
         return deck;
     }
-    
-	public boolean isDoneConstructing() {
-		return this.doneConstructing;
-	}
 
-	public void setDeck(Deck deck) {
-		this.deck = deck;
-	}
+    public boolean isDoneConstructing() {
+        return this.doneConstructing;
+    }
 
-	public String getResults() {
-		return this.results;
-	}
+    public void setDeck(Deck deck) {
+        this.deck = deck;
+    }
 
-	public void setResults(String results) {
-		this.results = results;
-	}
+    public String getResults() {
+        return this.results;
+    }
+
+    public void setResults(String results) {
+        this.results = results;
+    }
 }

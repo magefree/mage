@@ -38,13 +38,13 @@ import mage.ObjectColor;
  */
 public class FrogToken extends Token {
 
-	public FrogToken() {
-		super("Frog", "1/1 blue Frog creature token");
-		cardType.add(CardType.CREATURE);
-		color = ObjectColor.BLUE;
-		subtype.add("Frog");
-		power = new MageInt(1);
-		toughness = new MageInt(1);
-	}
+    public FrogToken() {
+        super("Frog", "1/1 blue Frog creature token");
+        cardType.add(CardType.CREATURE);
+        color = ObjectColor.BLUE;
+        subtype.add("Frog");
+        power = new MageInt(1);
+        toughness = new MageInt(1);
+    }
 
 }

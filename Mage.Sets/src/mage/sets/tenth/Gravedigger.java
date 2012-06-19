@@ -45,26 +45,26 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class Gravedigger extends CardImpl<Gravedigger> {
 
-	public Gravedigger(UUID ownerId) {
-		super(ownerId, 146, "Gravedigger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
-		this.expansionSetCode = "10E";
-		this.subtype.add("Zombie");
-		this.color.setBlack(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+    public Gravedigger(UUID ownerId) {
+        super(ownerId, 146, "Gravedigger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
+        this.expansionSetCode = "10E";
+        this.subtype.add("Zombie");
+        this.color.setBlack(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-		Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true);
-		ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
-		this.addAbility(ability);
-	}
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true);
+        ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
+        this.addAbility(ability);
+    }
 
-	public Gravedigger(final Gravedigger card) {
-		super(card);
-	}
+    public Gravedigger(final Gravedigger card) {
+        super(card);
+    }
 
-	@Override
-	public Gravedigger copy() {
-		return new Gravedigger(this);
-	}
+    @Override
+    public Gravedigger copy() {
+        return new Gravedigger(this);
+    }
 
 }

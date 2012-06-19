@@ -61,7 +61,7 @@ public class OniPossession extends CardImpl<OniPossession> {
         setSubtypes.add("Demon");
         setSubtypes.add("Spirit");
     }
-    
+
     public OniPossession(UUID ownerId) {
         super(ownerId, 135, "Oni Possession", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
         this.expansionSetCode = "CHK";
@@ -70,10 +70,10 @@ public class OniPossession extends CardImpl<OniPossession> {
         this.color.setBlack(true);
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
-	this.getSpellAbility().addTarget(auraTarget);
-	this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
-	Ability ability = new EnchantAbility(auraTarget.getTargetName());
-	this.addAbility(ability);
+    this.getSpellAbility().addTarget(auraTarget);
+    this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
+    Ability ability = new EnchantAbility(auraTarget.getTargetName());
+    this.addAbility(ability);
         // At the beginning of your upkeep, sacrifice a creature.
         Ability ability2 = new BeginningOfUpkeepTriggeredAbility(new SacrificeTargetEffect("sacrifice a creature"), Constants.TargetController.YOU, false);
         ability2.addTarget(new TargetControlledCreaturePermanent(1,1, new FilterControlledCreaturePermanent(),false, true));

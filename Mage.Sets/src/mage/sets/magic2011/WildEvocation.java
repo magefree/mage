@@ -50,59 +50,59 @@ import mage.players.Player;
  */
 public class WildEvocation extends CardImpl<WildEvocation> {
 
-	public WildEvocation(UUID ownerId) {
-		super(ownerId, 160, "Wild Evocation", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{R}");
-		this.expansionSetCode = "M11";
-		this.color.setRed(true);
-                
+    public WildEvocation(UUID ownerId) {
+        super(ownerId, 160, "Wild Evocation", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{R}");
+        this.expansionSetCode = "M11";
+        this.color.setRed(true);
+
                 //At the beginning of each player's upkeep, that player reveals a card at random from his or her hand. If it's a land card, the player puts it onto the battlefield. Otherwise, the player casts it without paying its mana cost if able.
-		this.addAbility(new BeginningOfUpkeepTriggeredAbility(Constants.Zone.BATTLEFIELD, new WildEvocationEffect(), Constants.TargetController.ANY, false));
-	}
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Constants.Zone.BATTLEFIELD, new WildEvocationEffect(), Constants.TargetController.ANY, false));
+    }
 
-	public WildEvocation(final WildEvocation card) {
-		super(card);
-	}
+    public WildEvocation(final WildEvocation card) {
+        super(card);
+    }
 
-	@Override
-	public WildEvocation copy() {
-		return new WildEvocation(this);
-	}
+    @Override
+    public WildEvocation copy() {
+        return new WildEvocation(this);
+    }
 
 }
 
 class WildEvocationEffect extends OneShotEffect<WildEvocationEffect> {
 
-	public WildEvocationEffect() {
-		super(Outcome.PutCardInPlay);
+    public WildEvocationEffect() {
+        super(Outcome.PutCardInPlay);
                 staticText = "that player reveals a card at random from his or her hand.  If it's a land card, that player puts it onto the battlefield.  Otherwise, the player casts it without paying its mana cost if able";
-	}
+    }
 
-	public WildEvocationEffect(final WildEvocationEffect effect) {
-		super(effect);
-	}
+    public WildEvocationEffect(final WildEvocationEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(targetPointer.getFirst(game, source));
-		if (player != null && player.getHand().size() > 0) {
-			Card card = player.getHand().getRandom(game);
-			Cards cards = new CardsImpl();
-			cards.add(card);
-			player.revealCards("Wild Evocation", cards, game);
-			if (card.getCardType().contains(CardType.LAND)) {
-				card.putOntoBattlefield(game, Zone.HAND, source.getId(), player.getId());
-			}
-			else {
-				player.cast(card.getSpellAbility(), game, true);
-			}
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        if (player != null && player.getHand().size() > 0) {
+            Card card = player.getHand().getRandom(game);
+            Cards cards = new CardsImpl();
+            cards.add(card);
+            player.revealCards("Wild Evocation", cards, game);
+            if (card.getCardType().contains(CardType.LAND)) {
+                card.putOntoBattlefield(game, Zone.HAND, source.getId(), player.getId());
+            }
+            else {
+                player.cast(card.getSpellAbility(), game, true);
+            }
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public WildEvocationEffect copy() {
-		return new WildEvocationEffect(this);
-	}
+    @Override
+    public WildEvocationEffect copy() {
+        return new WildEvocationEffect(this);
+    }
 
 }

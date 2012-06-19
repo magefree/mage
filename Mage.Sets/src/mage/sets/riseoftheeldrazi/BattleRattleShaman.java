@@ -58,7 +58,7 @@ public class BattleRattleShaman extends CardImpl<BattleRattleShaman> {
         Ability ability = new BeginningOfCombatTriggeredAbility(Constants.Zone.BATTLEFIELD, new BoostTargetEffect(2, 0, Constants.Duration.EndOfTurn), Constants.TargetController.YOU, true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
-                
+
     }
 
     public BattleRattleShaman(final BattleRattleShaman card) {

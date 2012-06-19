@@ -51,13 +51,13 @@ public class Godsire extends CardImpl<Godsire> {
         super(ownerId, 170, "Godsire", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{R}{G}{G}{W}");
         this.expansionSetCode = "ALA";
         this.subtype.add("Beast");
-		this.color.setRed(true);
-		this.color.setGreen(true);
-		this.color.setWhite(true);
+        this.color.setRed(true);
+        this.color.setGreen(true);
+        this.color.setWhite(true);
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
-		this.addAbility(VigilanceAbility.getInstance());
-		this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CreateTokenEffect(new BeastToken()), new TapSourceCost()));
+        this.addAbility(VigilanceAbility.getInstance());
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CreateTokenEffect(new BeastToken()), new TapSourceCost()));
     }
 
     public Godsire (final Godsire card) {
@@ -72,14 +72,14 @@ public class Godsire extends CardImpl<Godsire> {
 }
 
 class BeastToken extends Token {
-	BeastToken() {
-		super("Beast", "an 8/8 Beast creature token that's red, green, and white");
-		cardType.add(CardType.CREATURE);
-		color.setGreen(true);
-		color.setWhite(true);
-		color.setRed(true);
-		subtype.add("Beast");
-		power = new MageInt(8);
-		toughness = new MageInt(8);
-	}
+    BeastToken() {
+        super("Beast", "an 8/8 Beast creature token that's red, green, and white");
+        cardType.add(CardType.CREATURE);
+        color.setGreen(true);
+        color.setWhite(true);
+        color.setRed(true);
+        subtype.add("Beast");
+        power = new MageInt(8);
+        toughness = new MageInt(8);
+    }
 }

@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class RoyalAssassin extends mage.sets.tenth.RoyalAssassin {
 
-	public RoyalAssassin(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 110;
-		this.expansionSetCode = "M10";
-	}
+    public RoyalAssassin(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 110;
+        this.expansionSetCode = "M10";
+    }
 
-	public RoyalAssassin(final RoyalAssassin card) {
-		super(card);
-	}
+    public RoyalAssassin(final RoyalAssassin card) {
+        super(card);
+    }
 
-	@Override
-	public RoyalAssassin copy() {
-		return new RoyalAssassin(this);
-	}
+    @Override
+    public RoyalAssassin copy() {
+        return new RoyalAssassin(this);
+    }
 
 }

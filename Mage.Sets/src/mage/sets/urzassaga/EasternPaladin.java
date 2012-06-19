@@ -50,35 +50,35 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class EasternPaladin extends CardImpl<EasternPaladin> {
 
-	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("green creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("green creature");
 
-	static {
-		filter.getColor().setGreen(true);
-		filter.setUseColor(true);
-		filter.setScopeColor(Filter.ComparisonScope.Any);
-	}
+    static {
+        filter.getColor().setGreen(true);
+        filter.setUseColor(true);
+        filter.setScopeColor(Filter.ComparisonScope.Any);
+    }
 
-	public EasternPaladin(UUID ownerId) {
-		super(ownerId, 133, "Eastern Paladin", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-		this.expansionSetCode = "USG";
-		this.subtype.add("Zombie");
-		this.subtype.add("Knight");
-		this.color.setBlack(true);
-		this.power = new MageInt(3);
-		this.toughness = new MageInt(3);
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{B}{B}"));
-		ability.addTarget(new TargetCreaturePermanent(filter));
+    public EasternPaladin(UUID ownerId) {
+        super(ownerId, 133, "Eastern Paladin", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
+        this.expansionSetCode = "USG";
+        this.subtype.add("Zombie");
+        this.subtype.add("Knight");
+        this.color.setBlack(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{B}{B}"));
+        ability.addTarget(new TargetCreaturePermanent(filter));
                 ability.addCost(new TapSourceCost());
                 this.addAbility(ability);
         }
 
-	public EasternPaladin(final EasternPaladin card) {
-		super(card);
-	}
+    public EasternPaladin(final EasternPaladin card) {
+        super(card);
+    }
 
-	@Override
-	public EasternPaladin copy() {
-		return new EasternPaladin(this);
-	}
+    @Override
+    public EasternPaladin copy() {
+        return new EasternPaladin(this);
+    }
 
 }

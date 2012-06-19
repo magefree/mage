@@ -78,7 +78,7 @@ public class EightAndAHalfTale extends CardImpl<EightAndAHalfTale> {
                 ObjectColor.WHITE, Constants.Duration.EndOfTurn),new ManaCostsImpl("{1}"));
         ability2.addTarget(new TargetSpellOrPermanent());
         this.addAbility(ability2);
-        
+
     }
 
     public EightAndAHalfTale(final EightAndAHalfTale card) {

@@ -45,26 +45,26 @@ import mage.target.common.TargetLandPermanent;
 //20091005 - 702.64
 public class FortifyAbility extends ActivatedAbilityImpl<FortifyAbility> {
 
-	private static final FilterLandPermanent filter = new FilterLandPermanent("land you control");
+    private static final FilterLandPermanent filter = new FilterLandPermanent("land you control");
 
-	static {
-		filter.setTargetController(TargetController.YOU);
-	}
+    static {
+        filter.setTargetController(TargetController.YOU);
+    }
 
-	public FortifyAbility(Zone zone, AttachEffect effect, Cost cost) {
-		super(zone, effect, cost);
-		this.addTarget(new TargetLandPermanent(filter));
-		timing = TimingRule.SORCERY;
-	}
+    public FortifyAbility(Zone zone, AttachEffect effect, Cost cost) {
+        super(zone, effect, cost);
+        this.addTarget(new TargetLandPermanent(filter));
+        timing = TimingRule.SORCERY;
+    }
 
-	public FortifyAbility(final FortifyAbility ability) {
-		super(ability);
-	}
+    public FortifyAbility(final FortifyAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public FortifyAbility copy() {
-		return new FortifyAbility(this);
-	}
+    @Override
+    public FortifyAbility copy() {
+        return new FortifyAbility(this);
+    }
 
 
 }

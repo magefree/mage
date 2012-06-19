@@ -11,18 +11,18 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  * @author BetaSteward
  */
 public class HollowhengeSpiritTest extends CardTestPlayerBase {
-    
+
     @Test
     public void testCard() {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 4);
         addCard(Constants.Zone.HAND, playerA, "Hollowhenge Spirit");
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Craw Wurm");
-        
+
         castSpell(2, Constants.PhaseStep.DECLARE_BLOCKERS, playerA, "Hollowhenge Spirit");
         attack(2, playerB, "Craw Wurm");
         setStopAt(2, Constants.PhaseStep.END_TURN);
         execute();
-        
+
         assertLife(playerA, 20);
         assertLife(playerB, 20);
         assertPermanentCount(playerA, "Hollowhenge Spirit", 1);
@@ -36,12 +36,12 @@ public class HollowhengeSpiritTest extends CardTestPlayerBase {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 4);
         addCard(Constants.Zone.HAND, playerA, "Hollowhenge Spirit");
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Craw Wurm");
-        
+
         castSpell(1, Constants.PhaseStep.DECLARE_BLOCKERS, playerA, "Hollowhenge Spirit");
         attack(1, playerA, "Craw Wurm");
         setStopAt(1, Constants.PhaseStep.END_TURN);
         execute();
-        
+
         assertLife(playerA, 20);
         assertLife(playerB, 20);
         assertPermanentCount(playerA, "Hollowhenge Spirit", 1);
@@ -55,11 +55,11 @@ public class HollowhengeSpiritTest extends CardTestPlayerBase {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 4);
         addCard(Constants.Zone.HAND, playerA, "Hollowhenge Spirit");
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Craw Wurm");
-        
+
         castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Hollowhenge Spirit");
         setStopAt(1, Constants.PhaseStep.END_TURN);
         execute();
-        
+
         assertLife(playerA, 20);
         assertLife(playerB, 20);
         assertPermanentCount(playerA, "Hollowhenge Spirit", 1);

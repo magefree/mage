@@ -57,7 +57,7 @@ public class DynamicManaAbility extends ManaAbility<DynamicManaAbility> {
 
     public DynamicManaAbility(final DynamicManaAbility ability) {
         super(ability);
-		manaEffect = ability.manaEffect;
+        manaEffect = ability.manaEffect;
     }
 
     @Override

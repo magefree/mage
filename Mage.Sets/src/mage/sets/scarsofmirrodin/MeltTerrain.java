@@ -52,7 +52,7 @@ public class MeltTerrain extends CardImpl<MeltTerrain> {
     public MeltTerrain (UUID ownerId) {
         super(ownerId, 97, "Melt Terrain", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
         this.expansionSetCode = "SOM";
-		this.color.setRed(true);
+        this.color.setRed(true);
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new MeltTerrainEffect());
         this.getSpellAbility().addTarget(new TargetLandPermanent());

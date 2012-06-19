@@ -41,36 +41,36 @@ import mage.game.permanent.Permanent;
  */
 public class DestroyAllNamedPermanentsEffect extends OneShotEffect<DestroyAllNamedPermanentsEffect> {
 
-	public DestroyAllNamedPermanentsEffect() {
-		super(Outcome.DestroyPermanent);
-	}
+    public DestroyAllNamedPermanentsEffect() {
+        super(Outcome.DestroyPermanent);
+    }
 
-	public DestroyAllNamedPermanentsEffect(final DestroyAllNamedPermanentsEffect effect) {
-		super(effect);
-	}
+    public DestroyAllNamedPermanentsEffect(final DestroyAllNamedPermanentsEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public DestroyAllNamedPermanentsEffect copy() {
-		return new DestroyAllNamedPermanentsEffect(this);
-	}
+    @Override
+    public DestroyAllNamedPermanentsEffect copy() {
+        return new DestroyAllNamedPermanentsEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getFirstTarget());
-		String name = permanent.getName();
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        String name = permanent.getName();
 
-		permanent.destroy(source.getSourceId(), game, false);
-		for (Permanent perm: game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-			if (perm.getName().equals(name))
-				perm.destroy(source.getId(), game, false);
-		}
+        permanent.destroy(source.getSourceId(), game, false);
+        for (Permanent perm: game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
+            if (perm.getName().equals(name))
+                perm.destroy(source.getId(), game, false);
+        }
 
-		return true;
-	}
+        return true;
+    }
 
-	@Override
-	public String getText(Mode mode) {
-		return "Destroy target " + mode.getTargets().get(0).getTargetName() + " and all other permanents with the same name as that permanent";
-	}
+    @Override
+    public String getText(Mode mode) {
+        return "Destroy target " + mode.getTargets().get(0).getTargetName() + " and all other permanents with the same name as that permanent";
+    }
 
 }

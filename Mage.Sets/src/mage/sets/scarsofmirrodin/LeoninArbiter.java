@@ -52,84 +52,84 @@ import mage.players.Player;
  */
 public class LeoninArbiter extends CardImpl<LeoninArbiter> {
 
-	public LeoninArbiter(UUID ownerId) {
-		super(ownerId, 14, "Leonin Arbiter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}");
-		this.expansionSetCode = "SOM";
-		this.subtype.add("Cat");
-		this.subtype.add("Cleric");
+    public LeoninArbiter(UUID ownerId) {
+        super(ownerId, 14, "Leonin Arbiter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        this.expansionSetCode = "SOM";
+        this.subtype.add("Cat");
+        this.subtype.add("Cleric");
 
-		this.color.setWhite(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+        this.color.setWhite(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LeoninArbiterReplacementEffect()));
-	}
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LeoninArbiterReplacementEffect()));
+    }
 
-	public LeoninArbiter(final LeoninArbiter card) {
-		super(card);
-	}
+    public LeoninArbiter(final LeoninArbiter card) {
+        super(card);
+    }
 
-	@Override
-	public LeoninArbiter copy() {
-		return new LeoninArbiter(this);
-	}
+    @Override
+    public LeoninArbiter copy() {
+        return new LeoninArbiter(this);
+    }
 }
 
 class LeoninArbiterReplacementEffect extends ReplacementEffectImpl<LeoninArbiterReplacementEffect> {
 
-	private static final String effectText = "Players can't search libraries. Any player may pay {2} for that player to ignore this effect until end of turn";
-	private List<UUID> paidPlayers = new ArrayList<UUID>();
+    private static final String effectText = "Players can't search libraries. Any player may pay {2} for that player to ignore this effect until end of turn";
+    private List<UUID> paidPlayers = new ArrayList<UUID>();
 
-	LeoninArbiterReplacementEffect ( ) {
-		super(Duration.WhileOnBattlefield, Outcome.Neutral);
-		staticText = effectText;
-	}
+    LeoninArbiterReplacementEffect ( ) {
+        super(Duration.WhileOnBattlefield, Outcome.Neutral);
+        staticText = effectText;
+    }
 
-	LeoninArbiterReplacementEffect ( LeoninArbiterReplacementEffect effect ) {
-		super(effect);
-		this.paidPlayers = effect.paidPlayers;
-	}
+    LeoninArbiterReplacementEffect ( LeoninArbiterReplacementEffect effect ) {
+        super(effect);
+        this.paidPlayers = effect.paidPlayers;
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		throw new UnsupportedOperationException("Not supported.");
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        throw new UnsupportedOperationException("Not supported.");
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		if ( event.getType() == EventType.SEARCH_LIBRARY && !paidPlayers.contains(event.getPlayerId()) ) {
-			Player player = game.getPlayer(event.getPlayerId());
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        if ( event.getType() == EventType.SEARCH_LIBRARY && !paidPlayers.contains(event.getPlayerId()) ) {
+            Player player = game.getPlayer(event.getPlayerId());
 
-			if ( player != null ) {
-				ManaCostsImpl arbiterTax = new ManaCostsImpl("{2}");
-				if ( arbiterTax.canPay(source.getSourceId(), event.getPlayerId(), game) &&
-					 player.chooseUse(Outcome.Neutral, "Pay {2} to search your library?", game) )
-				{
-					if (arbiterTax.payOrRollback(source, game, this.getId(), event.getPlayerId()) ) {
-						paidPlayers.add(event.getPlayerId());
-						return false;
-					}
-				}
-			}
-			return true;
-		}
-		return false;
-	}
+            if ( player != null ) {
+                ManaCostsImpl arbiterTax = new ManaCostsImpl("{2}");
+                if ( arbiterTax.canPay(source.getSourceId(), event.getPlayerId(), game) &&
+                     player.chooseUse(Outcome.Neutral, "Pay {2} to search your library?", game) )
+                {
+                    if (arbiterTax.payOrRollback(source, game, this.getId(), event.getPlayerId()) ) {
+                        paidPlayers.add(event.getPlayerId());
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		if ( event.getType() == EventType.SEARCH_LIBRARY ) {
-			return true;
-		}
-		if ( event.getType() == EventType.END_TURN_STEP_POST ) {
-			this.paidPlayers.clear();
-		}
-		return false;
-	}
-	
-	@Override
-	public LeoninArbiterReplacementEffect copy() {
-		return new LeoninArbiterReplacementEffect(this);
-	}
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if ( event.getType() == EventType.SEARCH_LIBRARY ) {
+            return true;
+        }
+        if ( event.getType() == EventType.END_TURN_STEP_POST ) {
+            this.paidPlayers.clear();
+        }
+        return false;
+    }
+
+    @Override
+    public LeoninArbiterReplacementEffect copy() {
+        return new LeoninArbiterReplacementEffect(this);
+    }
 
 }

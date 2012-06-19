@@ -59,11 +59,11 @@ public class StonehornDignitary extends CardImpl<StonehornDignitary> {
         this.toughness = new MageInt(4);
 
         // When Stonehorn Dignitary enters the battlefield, target opponent skips his or her next combat phase.
-		Ability ability = new EntersBattlefieldTriggeredAbility(new SkipNextCombatEffect());
-		Target target = new TargetOpponent();
-		target.setRequired(true);
-		ability.addTarget(target);
-		this.addAbility(ability);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new SkipNextCombatEffect());
+        Target target = new TargetOpponent();
+        target.setRequired(true);
+        ability.addTarget(target);
+        this.addAbility(ability);
     }
 
     public StonehornDignitary(final StonehornDignitary card) {
@@ -78,27 +78,27 @@ public class StonehornDignitary extends CardImpl<StonehornDignitary> {
 
 class SkipNextCombatEffect extends OneShotEffect<SkipNextCombatEffect> {
 
-	public SkipNextCombatEffect() {
-		super(Constants.Outcome.Detriment);
-		staticText = "target opponent skips his or her next combat phase";
-	}
+    public SkipNextCombatEffect() {
+        super(Constants.Outcome.Detriment);
+        staticText = "target opponent skips his or her next combat phase";
+    }
 
-	public SkipNextCombatEffect(SkipNextCombatEffect effect) {
-		super(effect);
-	}
+    public SkipNextCombatEffect(SkipNextCombatEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		UUID targetId = source.getFirstTarget();
-		if (targetId != null) {
-			game.getState().getTurnMods().add(new TurnMod(targetId, Constants.TurnPhase.COMBAT, null, true));
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        UUID targetId = source.getFirstTarget();
+        if (targetId != null) {
+            game.getState().getTurnMods().add(new TurnMod(targetId, Constants.TurnPhase.COMBAT, null, true));
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public SkipNextCombatEffect copy() {
-		return new SkipNextCombatEffect();
-	}
+    @Override
+    public SkipNextCombatEffect copy() {
+        return new SkipNextCombatEffect();
+    }
 }

@@ -42,32 +42,32 @@ import mage.game.stack.Spell;
  */
 public class CopyTargetSpellEffect extends OneShotEffect<CopyTargetSpellEffect> {
 
-	public CopyTargetSpellEffect() {
-		super(Outcome.Copy);
-	}
-	
-	public CopyTargetSpellEffect(final CopyTargetSpellEffect effect) {
-		super(effect);
-	}
+    public CopyTargetSpellEffect() {
+        super(Outcome.Copy);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
-		if (spell != null) {
-			Spell copy = spell.copySpell();
-			copy.setControllerId(source.getControllerId());
-			copy.setCopiedSpell(true);
-			game.getStack().push(copy);
-			copy.chooseNewTargets(game, source.getControllerId());
-			return true;
-		}
-		return false;
-	}
+    public CopyTargetSpellEffect(final CopyTargetSpellEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public CopyTargetSpellEffect copy() {
-		return new CopyTargetSpellEffect(this);
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+        if (spell != null) {
+            Spell copy = spell.copySpell();
+            copy.setControllerId(source.getControllerId());
+            copy.setCopiedSpell(true);
+            game.getStack().push(copy);
+            copy.chooseNewTargets(game, source.getControllerId());
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public CopyTargetSpellEffect copy() {
+        return new CopyTargetSpellEffect(this);
+    }
 
    @Override
     public String getText(Mode mode) {

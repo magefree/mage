@@ -55,10 +55,10 @@ public class LightningDragon extends CardImpl<LightningDragon>{
         this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
-        
-	this.addAbility(FlyingAbility.getInstance());
-	this.addAbility(new EchoAbility("{2}{R}{R}"));
-	this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
+
+    this.addAbility(FlyingAbility.getInstance());
+    this.addAbility(new EchoAbility("{2}{R}{R}"));
+    this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
     }
 
     public LightningDragon(final LightningDragon card) {

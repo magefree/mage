@@ -48,68 +48,68 @@ import mage.client.util.Config;
  */
 public class NewPlayerPanel extends javax.swing.JPanel {
 
-	private JFileChooser fcSelectDeck;
+    private JFileChooser fcSelectDeck;
 
     /** Creates new form NewPlayerPanel */
     public NewPlayerPanel() {
         initComponents();
-		fcSelectDeck = new JFileChooser();
-		fcSelectDeck.setAcceptAllFileFilterUsed(false);
-		fcSelectDeck.addChoosableFileFilter(new DeckFilter());
-	    String deckPath = MageFrame.getPreferences().get("defaultDeckPath", "");
-	    if (deckPath.isEmpty()) {
-			if (Config.defaultDeckPath != null) deckPath = Config.defaultDeckPath;
-	    }
-	    this.txtPlayerDeck.setText(deckPath);
-		if (Config.defaultComputerName != null) this.txtPlayerName.setText(Config.defaultComputerName);
-		if (cbLevel.getModel().getSize() > 0) cbLevel.setSelectedIndex(cbLevel.getModel().getSize()-1);
+        fcSelectDeck = new JFileChooser();
+        fcSelectDeck.setAcceptAllFileFilterUsed(false);
+        fcSelectDeck.addChoosableFileFilter(new DeckFilter());
+        String deckPath = MageFrame.getPreferences().get("defaultDeckPath", "");
+        if (deckPath.isEmpty()) {
+            if (Config.defaultDeckPath != null) deckPath = Config.defaultDeckPath;
+        }
+        this.txtPlayerDeck.setText(deckPath);
+        if (Config.defaultComputerName != null) this.txtPlayerName.setText(Config.defaultComputerName);
+        if (cbLevel.getModel().getSize() > 0) cbLevel.setSelectedIndex(cbLevel.getModel().getSize()-1);
     }
 
-	public void setPlayerName(String playerName) {
-		this.txtPlayerName.setText(playerName);
-		this.txtPlayerName.setEditable(false);
-		this.txtPlayerName.setEnabled(false);
+    public void setPlayerName(String playerName) {
+        this.txtPlayerName.setText(playerName);
+        this.txtPlayerName.setEditable(false);
+        this.txtPlayerName.setEnabled(false);
     }
 
-	protected void playerLoadDeck() {
-		String lastFolder = MageFrame.getPreferences().get("lastDeckFolder", "");
-		if (!lastFolder.isEmpty())
-			fcSelectDeck.setCurrentDirectory(new File(lastFolder));
-		int ret = fcSelectDeck.showDialog(this, "Select Deck");
-		if (ret == JFileChooser.APPROVE_OPTION) {
-			File file = fcSelectDeck.getSelectedFile();
-			this.txtPlayerDeck.setText(file.getPath());
-			try {
-				MageFrame.getPreferences().put("lastDeckFolder", file.getCanonicalPath());
-			} catch (IOException ex) {	}
-		}
-		fcSelectDeck.setSelectedFile(null);
-	}
+    protected void playerLoadDeck() {
+        String lastFolder = MageFrame.getPreferences().get("lastDeckFolder", "");
+        if (!lastFolder.isEmpty())
+            fcSelectDeck.setCurrentDirectory(new File(lastFolder));
+        int ret = fcSelectDeck.showDialog(this, "Select Deck");
+        if (ret == JFileChooser.APPROVE_OPTION) {
+            File file = fcSelectDeck.getSelectedFile();
+            this.txtPlayerDeck.setText(file.getPath());
+            try {
+                MageFrame.getPreferences().put("lastDeckFolder", file.getCanonicalPath());
+            } catch (IOException ex) {    }
+        }
+        fcSelectDeck.setSelectedFile(null);
+    }
 
-	protected void generateDeck() {
-		String path = DeckGenerator.generateDeck();
-		if (path != null) {
-			this.txtPlayerDeck.setText(path);
-			MageFrame.getPreferences().put("defaultDeckPath", path);
-		}
-	}
+    protected void generateDeck() {
+        String path = DeckGenerator.generateDeck();
+        if (path != null) {
+            this.txtPlayerDeck.setText(path);
+            MageFrame.getPreferences().put("defaultDeckPath", path);
+        }
+    }
 
-	public String getPlayerName() {
-		return this.txtPlayerName.getText();
-	}
+    public String getPlayerName() {
+        return this.txtPlayerName.getText();
+    }
 
-	public String getDeckFile() {
-		return this.txtPlayerDeck.getText();
-	}
+    public String getDeckFile() {
+        return this.txtPlayerDeck.getText();
+    }
 
-	public int getLevel() {
-		return Integer.valueOf((String)this.cbLevel.getSelectedItem());
-	}
+    public int getLevel() {
+        return Integer.valueOf((String)this.cbLevel.getSelectedItem());
+    }
 
-	public void showLevel(boolean show) {
-		this.cbLevel.setVisible(show);
-		this.lblLevel.setVisible(show);
-	}
+    public void showLevel(boolean show) {
+        this.cbLevel.setVisible(show);
+        this.lblLevel.setVisible(show);
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -193,13 +193,13 @@ public class NewPlayerPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-	private void btnPlayerDeckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayerDeckActionPerformed
-		playerLoadDeck();
+    private void btnPlayerDeckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayerDeckActionPerformed
+        playerLoadDeck();
 }//GEN-LAST:event_btnPlayerDeckActionPerformed
 
-	private void btnGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateActionPerformed
-		generateDeck();
-	}//GEN-LAST:event_btnGenerateActionPerformed
+    private void btnGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateActionPerformed
+        generateDeck();
+    }//GEN-LAST:event_btnGenerateActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -217,10 +217,10 @@ public class NewPlayerPanel extends javax.swing.JPanel {
 
 class DeckFilter extends FileFilter {
 
-	@Override
-	public boolean accept(File f) {
-		if (f.isDirectory())
-			return true;
+    @Override
+    public boolean accept(File f) {
+        if (f.isDirectory())
+            return true;
 
         String ext = null;
         String s = f.getName();
@@ -229,12 +229,12 @@ class DeckFilter extends FileFilter {
         if (i > 0 &&  i < s.length() - 1) {
             ext = s.substring(i+1).toLowerCase();
         }
-		return (ext==null)?false:ext.equals("dck");
-	}
+        return (ext==null)?false:ext.equals("dck");
+    }
 
-	@Override
-	public String getDescription() {
-		return "Deck Files";
-	}
+    @Override
+    public String getDescription() {
+        return "Deck Files";
+    }
 
 }

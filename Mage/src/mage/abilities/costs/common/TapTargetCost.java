@@ -44,40 +44,40 @@ import java.util.UUID;
  */
 public class TapTargetCost extends CostImpl<TapTargetCost> {
 
-	TargetControlledPermanent target;
+    TargetControlledPermanent target;
 
-	public TapTargetCost(TargetControlledPermanent target) {
-		this.target = target;
-		this.text = "Tap " + target.getMaxNumberOfTargets() + " " + target.getTargetName();
-	}
+    public TapTargetCost(TargetControlledPermanent target) {
+        this.target = target;
+        this.text = "Tap " + target.getMaxNumberOfTargets() + " " + target.getTargetName();
+    }
 
-	public TapTargetCost(final TapTargetCost cost) {
-		super(cost);
-		this.target = cost.target.copy();
-	}
+    public TapTargetCost(final TapTargetCost cost) {
+        super(cost);
+        this.target = cost.target.copy();
+    }
 
-	@Override
-	public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-		if (target.choose(Outcome.Tap, controllerId, sourceId, game)) {
-			for (UUID targetId: (List<UUID>)target.getTargets()) {
-				Permanent permanent = game.getPermanent(targetId);
-				if (permanent == null)
-					return false;
-				paid |= permanent.tap(game);
-			}
-		}
-		return paid;
-	}
+    @Override
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+        if (target.choose(Outcome.Tap, controllerId, sourceId, game)) {
+            for (UUID targetId: (List<UUID>)target.getTargets()) {
+                Permanent permanent = game.getPermanent(targetId);
+                if (permanent == null)
+                    return false;
+                paid |= permanent.tap(game);
+            }
+        }
+        return paid;
+    }
 
-	@Override
-	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-		return target.canChoose(controllerId, game);
-	}
+    @Override
+    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+        return target.canChoose(controllerId, game);
+    }
 
-	@Override
-	public TapTargetCost copy() {
-		return new TapTargetCost(this);
-	}
+    @Override
+    public TapTargetCost copy() {
+        return new TapTargetCost(this);
+    }
 
 
 }

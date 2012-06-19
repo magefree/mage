@@ -47,7 +47,7 @@ public class KodamaOfTheNorthTree extends CardImpl<KodamaOfTheNorthTree> {
         this.expansionSetCode = "CHK";
         this.supertype.add("Legendary");
         this.subtype.add("Spirit");
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(4);
         this.addAbility(TrampleAbility.getInstance());

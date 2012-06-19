@@ -54,17 +54,17 @@ public class FastByteArrayInputStream extends InputStream {
         this.count = count;
     }
 
-	@Override
+    @Override
     public final int available() {
         return count - pos;
     }
 
-	@Override
+    @Override
     public final int read() {
         return (pos < count) ? (buf[pos++] & 0xff) : -1;
     }
 
-	@Override
+    @Override
     public final int read(byte[] b, int off, int len) {
         if (pos >= count)
             return -1;
@@ -77,7 +77,7 @@ public class FastByteArrayInputStream extends InputStream {
         return len;
     }
 
-	@Override
+    @Override
     public final long skip(long n) {
         if ((pos + n) > count)
             n = count - pos;

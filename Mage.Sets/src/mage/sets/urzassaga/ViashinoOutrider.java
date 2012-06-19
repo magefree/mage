@@ -48,8 +48,8 @@ public class ViashinoOutrider extends CardImpl<ViashinoOutrider>{
         this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
-        
-	this.addAbility(new EchoAbility("{2}{R}"));
+
+    this.addAbility(new EchoAbility("{2}{R}"));
     }
 
     public ViashinoOutrider(final ViashinoOutrider card) {

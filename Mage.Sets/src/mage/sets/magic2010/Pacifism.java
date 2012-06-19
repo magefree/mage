@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class Pacifism extends mage.sets.tenth.Pacifism {
 
-	public Pacifism(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 22;
-		this.expansionSetCode = "M10";
-	}
+    public Pacifism(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 22;
+        this.expansionSetCode = "M10";
+    }
 
-	public Pacifism(final Pacifism card) {
-		super(card);
-	}
+    public Pacifism(final Pacifism card) {
+        super(card);
+    }
 
-	@Override
-	public Pacifism copy() {
-		return new Pacifism(this);
-	}
+    @Override
+    public Pacifism copy() {
+        return new Pacifism(this);
+    }
 
 }

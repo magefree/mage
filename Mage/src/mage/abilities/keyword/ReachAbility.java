@@ -38,28 +38,28 @@ import mage.abilities.StaticAbility;
  */
 public class ReachAbility extends StaticAbility<ReachAbility> {
 
-	private static final ReachAbility fINSTANCE =  new ReachAbility();
+    private static final ReachAbility fINSTANCE =  new ReachAbility();
 
-	private Object readResolve() throws ObjectStreamException {
-		return fINSTANCE;
-	}
+    private Object readResolve() throws ObjectStreamException {
+        return fINSTANCE;
+    }
 
-	public static ReachAbility getInstance() {
-		return fINSTANCE;
-	}
+    public static ReachAbility getInstance() {
+        return fINSTANCE;
+    }
 
-	private ReachAbility() {
-		super(Zone.BATTLEFIELD, null);
-	}
+    private ReachAbility() {
+        super(Zone.BATTLEFIELD, null);
+    }
 
-	@Override
-	public String getRule() {
-		return "Reach";
-	}
+    @Override
+    public String getRule() {
+        return "Reach";
+    }
 
-	@Override
-	public ReachAbility copy() {
-		return fINSTANCE;
-	}
+    @Override
+    public ReachAbility copy() {
+        return fINSTANCE;
+    }
 
 }

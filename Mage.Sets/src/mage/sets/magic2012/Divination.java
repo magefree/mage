@@ -43,7 +43,7 @@ public class Divination extends CardImpl<Divination> {
     public Divination (UUID ownerId) {
         super(ownerId, 50, "Divination", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
         this.expansionSetCode = "M12";
-		this.color.setBlue(true);
+        this.color.setBlue(true);
         this.getSpellAbility().addEffect(new DrawCardControllerEffect(2));
     }
 

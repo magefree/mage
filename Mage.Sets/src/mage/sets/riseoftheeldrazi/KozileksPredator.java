@@ -43,25 +43,25 @@ import mage.game.permanent.token.EldraziSpawnToken;
  */
 public class KozileksPredator extends CardImpl<KozileksPredator> {
 
-	public KozileksPredator(UUID ownerId) {
-		super(ownerId, 193, "Kozilek's Predator", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
-		this.expansionSetCode = "ROE";
-		this.subtype.add("Eldrazi");
-		this.subtype.add("Drone");
-		this.color.setGreen(true);
-		this.power = new MageInt(3);
-		this.toughness = new MageInt(3);
+    public KozileksPredator(UUID ownerId) {
+        super(ownerId, 193, "Kozilek's Predator", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
+        this.expansionSetCode = "ROE";
+        this.subtype.add("Eldrazi");
+        this.subtype.add("Drone");
+        this.color.setGreen(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-		this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new EldraziSpawnToken(), 2), false));
-	}
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new EldraziSpawnToken(), 2), false));
+    }
 
-	public KozileksPredator(final KozileksPredator card) {
-		super(card);
-	}
+    public KozileksPredator(final KozileksPredator card) {
+        super(card);
+    }
 
-	@Override
-	public KozileksPredator copy() {
-		return new KozileksPredator(this);
-	}
+    @Override
+    public KozileksPredator copy() {
+        return new KozileksPredator(this);
+    }
 
 }

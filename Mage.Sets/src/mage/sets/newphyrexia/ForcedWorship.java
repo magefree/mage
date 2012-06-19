@@ -57,12 +57,12 @@ public class ForcedWorship extends CardImpl<ForcedWorship> {
         super(ownerId, 11, "Forced Worship", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "NPH";
         this.subtype.add("Aura");
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Detriment));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		this.addAbility(ability);
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Detriment));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ForcedWorshipEffect()));
         this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ReturnToHandSourceEffect(), new ManaCostsImpl("{2}{W}")));
     }
@@ -80,31 +80,31 @@ public class ForcedWorship extends CardImpl<ForcedWorship> {
 
 class ForcedWorshipEffect extends RestrictionEffect<ForcedWorshipEffect> {
 
-	public ForcedWorshipEffect() {
-		super(Constants.Duration.WhileOnBattlefield);
-		staticText = "Enchanted creature can't attack";
-	}
+    public ForcedWorshipEffect() {
+        super(Constants.Duration.WhileOnBattlefield);
+        staticText = "Enchanted creature can't attack";
+    }
 
-	public ForcedWorshipEffect(final ForcedWorshipEffect effect) {
-		super(effect);
-	}
+    public ForcedWorshipEffect(final ForcedWorshipEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean applies(Permanent permanent, Ability source, Game game) {
-		if (permanent.getAttachments().contains((source.getSourceId()))) {
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        if (permanent.getAttachments().contains((source.getSourceId()))) {
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public boolean canAttack(Game game) {
-		return false;
-	}
+    @Override
+    public boolean canAttack(Game game) {
+        return false;
+    }
 
-	@Override
-	public ForcedWorshipEffect copy() {
-		return new ForcedWorshipEffect(this);
-	}
+    @Override
+    public ForcedWorshipEffect copy() {
+        return new ForcedWorshipEffect(this);
+    }
 
 }

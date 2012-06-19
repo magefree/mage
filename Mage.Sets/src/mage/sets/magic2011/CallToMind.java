@@ -43,30 +43,30 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class CallToMind extends CardImpl<CallToMind> {
 
-	private static final FilterCard filter = new FilterCard("instant or sorcery card from your graveyard");
+    private static final FilterCard filter = new FilterCard("instant or sorcery card from your graveyard");
 
-	static {
-		filter.getCardType().add(CardType.INSTANT);
-		filter.getCardType().add(CardType.SORCERY);
-		filter.setScopeCardType(ComparisonScope.Any);
-	}
+    static {
+        filter.getCardType().add(CardType.INSTANT);
+        filter.getCardType().add(CardType.SORCERY);
+        filter.setScopeCardType(ComparisonScope.Any);
+    }
 
-	public CallToMind(UUID ownerId) {
-		super(ownerId, 47, "Call to Mind", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
-		this.expansionSetCode = "M11";
-		this.color.setBlue(true);
+    public CallToMind(UUID ownerId) {
+        super(ownerId, 47, "Call to Mind", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
+        this.expansionSetCode = "M11";
+        this.color.setBlue(true);
 
-		this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-		this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
-	}
+        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
+    }
 
-	public CallToMind(final CallToMind card) {
-		super(card);
-	}
+    public CallToMind(final CallToMind card) {
+        super(card);
+    }
 
-	@Override
-	public CallToMind copy() {
-		return new CallToMind(this);
-	}
+    @Override
+    public CallToMind copy() {
+        return new CallToMind(this);
+    }
 
 }

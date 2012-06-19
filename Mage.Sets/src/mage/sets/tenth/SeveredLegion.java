@@ -45,7 +45,7 @@ public class SeveredLegion extends CardImpl<SeveredLegion> {
         super(ownerId, 177, "Severed Legion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
         this.expansionSetCode = "10E";
         this.subtype.add("Zombie");
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(FearAbility.getInstance());

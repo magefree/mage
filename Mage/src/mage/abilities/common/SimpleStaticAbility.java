@@ -38,17 +38,17 @@ import mage.abilities.effects.Effect;
  */
 public class SimpleStaticAbility extends StaticAbility<SimpleStaticAbility> {
 
-	public SimpleStaticAbility(Zone zone, Effect effect) {
-		super(zone, effect);
-	}
+    public SimpleStaticAbility(Zone zone, Effect effect) {
+        super(zone, effect);
+    }
 
-	public SimpleStaticAbility(SimpleStaticAbility ability) {
-		super(ability);
-	}
+    public SimpleStaticAbility(SimpleStaticAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public SimpleStaticAbility copy() {
-		return new SimpleStaticAbility(this);
-	}
+    @Override
+    public SimpleStaticAbility copy() {
+        return new SimpleStaticAbility(this);
+    }
 
 }

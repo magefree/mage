@@ -56,7 +56,7 @@ public class VectisAgents extends CardImpl<VectisAgents> {
         this.subtype.add("Human");
         this.subtype.add("Rogue");
         this.power = new MageInt(4);
-	this.toughness = new MageInt(3);
+    this.toughness = new MageInt(3);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(-2, -0, Duration.EndOfTurn), new ManaCostsImpl("{U}{B}"));
         ability.addEffect(new GainAbilitySourceEffect(UnblockableAbility.getInstance(), Duration.EndOfTurn));
         this.addAbility(ability);

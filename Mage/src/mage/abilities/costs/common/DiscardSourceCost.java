@@ -41,36 +41,36 @@ import mage.players.Player;
  */
 public class DiscardSourceCost extends CostImpl<DiscardSourceCost> {
 
-	public DiscardSourceCost() {}
+    public DiscardSourceCost() {}
 
-	public DiscardSourceCost(DiscardSourceCost cost) {
-		super(cost);
-	}
+    public DiscardSourceCost(DiscardSourceCost cost) {
+        super(cost);
+    }
 
-	@Override
-	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-		return game.getPlayer(controllerId).getHand().contains(sourceId);
-	}
+    @Override
+    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+        return game.getPlayer(controllerId).getHand().contains(sourceId);
+    }
 
-	@Override
-	public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-		Player player = game.getPlayer(controllerId);
-		if (player != null) {
-			Card card = player.getHand().get(sourceId, game);
-			if (card != null) {
-				paid = player.discard(card, null, game);
-			}
-		}
-		return paid;
-	}
+    @Override
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+        Player player = game.getPlayer(controllerId);
+        if (player != null) {
+            Card card = player.getHand().get(sourceId, game);
+            if (card != null) {
+                paid = player.discard(card, null, game);
+            }
+        }
+        return paid;
+    }
 
-	@Override
-	public String getText() {
-		return "Discard {this}";
-	}
+    @Override
+    public String getText() {
+        return "Discard {this}";
+    }
 
-	@Override
-	public DiscardSourceCost copy() {
-		return new DiscardSourceCost(this);
-	}
+    @Override
+    public DiscardSourceCost copy() {
+        return new DiscardSourceCost(this);
+    }
 }

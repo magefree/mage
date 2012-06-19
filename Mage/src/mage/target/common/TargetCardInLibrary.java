@@ -46,64 +46,64 @@ import java.util.UUID;
  */
 public class TargetCardInLibrary extends TargetCard<TargetCardInLibrary> {
 
-	public TargetCardInLibrary() {
-		this(1, 1, new FilterCard());
-	}
+    public TargetCardInLibrary() {
+        this(1, 1, new FilterCard());
+    }
 
-	public TargetCardInLibrary(FilterCard filter) {
-		this(1, 1, filter);
-	}
+    public TargetCardInLibrary(FilterCard filter) {
+        this(1, 1, filter);
+    }
 
-	public TargetCardInLibrary(int numTargets, FilterCard filter) {
-		this(numTargets, numTargets, filter);
-	}
+    public TargetCardInLibrary(int numTargets, FilterCard filter) {
+        this(numTargets, numTargets, filter);
+    }
 
-	public TargetCardInLibrary(int minNumTargets, int maxNumTargets, FilterCard filter) {
-		super(minNumTargets, maxNumTargets, Zone.LIBRARY, filter);
-	}
+    public TargetCardInLibrary(int minNumTargets, int maxNumTargets, FilterCard filter) {
+        super(minNumTargets, maxNumTargets, Zone.LIBRARY, filter);
+    }
 
-	public TargetCardInLibrary(final TargetCardInLibrary target) {
-		super(target);
-	}
+    public TargetCardInLibrary(final TargetCardInLibrary target) {
+        super(target);
+    }
 
-	@Override
-	public boolean choose(Outcome outcome, UUID playerId, UUID targetPlayerId, Game game) {
-		Player player = game.getPlayer(playerId);
-		Player targetPlayer = game.getPlayer(targetPlayerId);
-		if (targetPlayer == null) {
-			targetPlayer = player;
-		}
-		while (!isChosen() && !doneChosing()) {
-			chosen = targets.size() >= minNumberOfTargets;
-			if (!player.choose(outcome, new CardsImpl(Zone.LIBRARY, targetPlayer.getLibrary().getCards(game)), this, game)) {
-				return chosen;
-			}
-			chosen = targets.size() >= minNumberOfTargets;
-		}
-		// Issue 231
-		/*while (!doneChosing()) {
-			if (!player.choose(outcome, new CardsImpl(Zone.LIBRARY, player.getLibrary().getCards(game)), this, game)) {
-				break;
-			}
-		}*/
-		return chosen = true;
-	}
+    @Override
+    public boolean choose(Outcome outcome, UUID playerId, UUID targetPlayerId, Game game) {
+        Player player = game.getPlayer(playerId);
+        Player targetPlayer = game.getPlayer(targetPlayerId);
+        if (targetPlayer == null) {
+            targetPlayer = player;
+        }
+        while (!isChosen() && !doneChosing()) {
+            chosen = targets.size() >= minNumberOfTargets;
+            if (!player.choose(outcome, new CardsImpl(Zone.LIBRARY, targetPlayer.getLibrary().getCards(game)), this, game)) {
+                return chosen;
+            }
+            chosen = targets.size() >= minNumberOfTargets;
+        }
+        // Issue 231
+        /*while (!doneChosing()) {
+            if (!player.choose(outcome, new CardsImpl(Zone.LIBRARY, player.getLibrary().getCards(game)), this, game)) {
+                break;
+            }
+        }*/
+        return chosen = true;
+    }
 
-	@Override
-	public boolean canTarget(UUID id, Ability source, Game game) {
-		Card card = game.getPlayer(source.getControllerId()).getLibrary().getCard(id, game);
-		if (card != null)
-			return filter.match(card, game);
-		return false;
-	}
+    @Override
+    public boolean canTarget(UUID id, Ability source, Game game) {
+        Card card = game.getPlayer(source.getControllerId()).getLibrary().getCard(id, game);
+        if (card != null)
+            return filter.match(card, game);
+        return false;
+    }
 
-	@Override
-	public TargetCardInLibrary copy() {
-		return new TargetCardInLibrary(this);
-	}
+    @Override
+    public TargetCardInLibrary copy() {
+        return new TargetCardInLibrary(this);
+    }
 
-	public void setMinNumberOfTargets(int minNumberOfTargets) {
-		this.minNumberOfTargets = minNumberOfTargets;
-	}
+    public void setMinNumberOfTargets(int minNumberOfTargets) {
+        this.minNumberOfTargets = minNumberOfTargets;
+    }
 
 }

@@ -40,20 +40,20 @@ import mage.cards.CardImpl;
  */
 public class ScaldingTarn extends CardImpl<ScaldingTarn> {
 
-	public ScaldingTarn(UUID ownerId) {
-		super(ownerId, 223, "Scalding Tarn", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-		this.expansionSetCode = "ZEN";
-		this.addAbility(new FetchLandActivatedAbility(new String[] {"Island", "Mountain"}));
-	}
+    public ScaldingTarn(UUID ownerId) {
+        super(ownerId, 223, "Scalding Tarn", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+        this.expansionSetCode = "ZEN";
+        this.addAbility(new FetchLandActivatedAbility(new String[] {"Island", "Mountain"}));
+    }
 
-	public ScaldingTarn(final ScaldingTarn card) {
-		super(card);
-	}
+    public ScaldingTarn(final ScaldingTarn card) {
+        super(card);
+    }
 
-	@Override
-	public ScaldingTarn copy() {
-		return new ScaldingTarn(this);
-	}
+    @Override
+    public ScaldingTarn copy() {
+        return new ScaldingTarn(this);
+    }
 
 }
 

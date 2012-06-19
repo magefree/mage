@@ -45,9 +45,9 @@ public class NacatlOutlander extends CardImpl<NacatlOutlander> {
     private static final FilterCard filter = new FilterCard("blue");
 
     static {
-    	filter.setUseColor(true);
-    	filter.getColor().setBlue(true);
-		filter.setScopeColor(ComparisonScope.Any);
+        filter.setUseColor(true);
+        filter.getColor().setBlue(true);
+        filter.setScopeColor(ComparisonScope.Any);
     }
 
     public NacatlOutlander(UUID ownerId) {
@@ -58,7 +58,7 @@ public class NacatlOutlander extends CardImpl<NacatlOutlander> {
         this.subtype.add("Cat");
         this.subtype.add("Scout");
         this.power = new MageInt(2);
-    	this.toughness = new MageInt(2);
+        this.toughness = new MageInt(2);
         this.addAbility(new ProtectionAbility(filter));
     }
 

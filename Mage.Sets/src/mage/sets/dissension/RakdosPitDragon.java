@@ -56,7 +56,7 @@ public class RakdosPitDragon extends CardImpl<RakdosPitDragon> {
         super(ownerId, 69, "Rakdos Pit Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
         this.expansionSetCode = "DIS";
         this.subtype.add("Dragon");
-		this.color.setRed(true);
+        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{R}{R}")));

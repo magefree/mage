@@ -47,80 +47,80 @@ import mage.players.Player;
  * @author BetaSteward_at_googlemail.com
  */
 public class CascadeAbility extends TriggeredAbilityImpl<CascadeAbility> {
-	//20091005 - 702.82
+    //20091005 - 702.82
 
-	public CascadeAbility() {
-		super(Zone.STACK, new CascadeEffect());
-	}
+    public CascadeAbility() {
+        super(Zone.STACK, new CascadeEffect());
+    }
 
-	public CascadeAbility(CascadeAbility ability) {
-		super(ability);
-	}
+    public CascadeAbility(CascadeAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.SPELL_CAST) {
-			Spell spell = game.getStack().getSpell(event.getTargetId());
-			if (spell != null && spell.getSourceId().equals(this.getSourceId())) {
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.SPELL_CAST) {
+            Spell spell = game.getStack().getSpell(event.getTargetId());
+            if (spell != null && spell.getSourceId().equals(this.getSourceId())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "Cascade";
-	}
+    @Override
+    public String getRule() {
+        return "Cascade";
+    }
 
-	@Override
-	public CascadeAbility copy() {
-		return new CascadeAbility(this);
-	}
+    @Override
+    public CascadeAbility copy() {
+        return new CascadeAbility(this);
+    }
 }
 
 class CascadeEffect extends OneShotEffect<CascadeEffect> {
 
-	public CascadeEffect() {
-		super(Outcome.PutCardInPlay);
-	}
+    public CascadeEffect() {
+        super(Outcome.PutCardInPlay);
+    }
 
-	public CascadeEffect(CascadeEffect effect) {
-		super(effect);
-	}
+    public CascadeEffect(CascadeEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Card card;
-		Player player = game.getPlayer(source.getControllerId());
-		ExileZone exile = game.getExile().createZone(source.getSourceId(), player.getName() + " Cascade");
-		int sourceCost = game.getCard(source.getSourceId()).getManaCost().convertedManaCost();
-		do {
-			card = player.getLibrary().removeFromTop(game);
-			if (card == null)
-				break;
-			card.moveToExile(exile.getId(), exile.getName(), source.getId(), game);
-		} while (card.getCardType().contains(CardType.LAND) || card.getManaCost().convertedManaCost() >= sourceCost);
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Card card;
+        Player player = game.getPlayer(source.getControllerId());
+        ExileZone exile = game.getExile().createZone(source.getSourceId(), player.getName() + " Cascade");
+        int sourceCost = game.getCard(source.getSourceId()).getManaCost().convertedManaCost();
+        do {
+            card = player.getLibrary().removeFromTop(game);
+            if (card == null)
+                break;
+            card.moveToExile(exile.getId(), exile.getName(), source.getId(), game);
+        } while (card.getCardType().contains(CardType.LAND) || card.getManaCost().convertedManaCost() >= sourceCost);
 
-		if (card != null) {
-			if (player.chooseUse(outcome, "Use cascade effect on " + card.getName() + "?", game)) {
-				player.cast(card.getSpellAbility(), game, true);
-				exile.remove(card.getId());
-			}
-		}
+        if (card != null) {
+            if (player.chooseUse(outcome, "Use cascade effect on " + card.getName() + "?", game)) {
+                player.cast(card.getSpellAbility(), game, true);
+                exile.remove(card.getId());
+            }
+        }
 
-		while (exile.size() > 0) {
-			card = exile.getRandom(game);
-			exile.remove(card.getId());
-			card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
-		}
+        while (exile.size() > 0) {
+            card = exile.getRandom(game);
+            exile.remove(card.getId());
+            card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
+        }
 
-		return true;
-	}
+        return true;
+    }
 
-	@Override
-	public CascadeEffect copy() {
-		return new CascadeEffect(this);
-	}
+    @Override
+    public CascadeEffect copy() {
+        return new CascadeEffect(this);
+    }
 
 }

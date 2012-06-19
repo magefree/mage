@@ -66,7 +66,7 @@ public class GoblinRazerunners extends CardImpl<GoblinRazerunners> {
         this.expansionSetCode = "CON";
         this.subtype.add("Goblin");
         this.subtype.add("Warrior");
-		this.color.setRed(true);
+        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl("{1}{R}"));

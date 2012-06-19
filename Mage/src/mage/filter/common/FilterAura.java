@@ -37,22 +37,22 @@ import mage.filter.FilterPermanent;
  */
 public class FilterAura extends FilterPermanent<FilterAura> {
 
-	public FilterAura() {
-		this("aura");
-	}
+    public FilterAura() {
+        this("aura");
+    }
 
-	public FilterAura(String name) {
-		super(name);
-		this.cardType.add(CardType.ENCHANTMENT);
-		this.getSubtype().add("Aura");
-	}
+    public FilterAura(String name) {
+        super(name);
+        this.cardType.add(CardType.ENCHANTMENT);
+        this.getSubtype().add("Aura");
+    }
 
-	public FilterAura(final FilterAura filter) {
-		super(filter);
-	}
+    public FilterAura(final FilterAura filter) {
+        super(filter);
+    }
 
-	@Override
-	public FilterAura copy() {
-		return new FilterAura(this);
-	}
+    @Override
+    public FilterAura copy() {
+        return new FilterAura(this);
+    }
 }

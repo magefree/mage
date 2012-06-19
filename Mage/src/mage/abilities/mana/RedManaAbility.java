@@ -37,18 +37,18 @@ import mage.abilities.effects.common.BasicManaEffect;
  */
 public class RedManaAbility extends BasicManaAbility<RedManaAbility> {
 
-	public RedManaAbility() {
-		super(new BasicManaEffect(Mana.RedMana));
-		this.netMana.setRed(1);
-	}
+    public RedManaAbility() {
+        super(new BasicManaEffect(Mana.RedMana));
+        this.netMana.setRed(1);
+    }
 
-	public RedManaAbility(RedManaAbility ability) {
-		super(ability);
-	}
+    public RedManaAbility(RedManaAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public RedManaAbility copy() {
-		return new RedManaAbility(this);
-	}
+    @Override
+    public RedManaAbility copy() {
+        return new RedManaAbility(this);
+    }
 
 }

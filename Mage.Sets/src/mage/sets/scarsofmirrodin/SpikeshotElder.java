@@ -56,7 +56,7 @@ public class SpikeshotElder extends CardImpl<SpikeshotElder> {
         this.expansionSetCode = "SOM";
         this.subtype.add("Goblin");
         this.subtype.add("Shaman");
-		this.color.setRed(true);
+        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SpikeshotElderEffect(), new ManaCostsImpl("{1}{R}{R}"));
@@ -91,16 +91,16 @@ class SpikeshotElderEffect extends OneShotEffect<SpikeshotElderEffect> {
         if (sourcePermanent == null) {
             sourcePermanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Constants.Zone.BATTLEFIELD);
         }
-		if (sourcePermanent != null && permanent != null) {
-			permanent.damage(sourcePermanent.getPower().getValue(), source.getId(), game, true, false);
-			return true;
-		}
-		Player player = game.getPlayer(source.getFirstTarget());
-		if (sourcePermanent != null && player != null) {
-			player.damage(sourcePermanent.getPower().getValue(), source.getSourceId(), game, false, true);
-			return true;
-		}
-		return false;
+        if (sourcePermanent != null && permanent != null) {
+            permanent.damage(sourcePermanent.getPower().getValue(), source.getId(), game, true, false);
+            return true;
+        }
+        Player player = game.getPlayer(source.getFirstTarget());
+        if (sourcePermanent != null && player != null) {
+            player.damage(sourcePermanent.getPower().getValue(), source.getSourceId(), game, false, true);
+            return true;
+        }
+        return false;
     }
 
     @Override

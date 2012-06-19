@@ -47,7 +47,7 @@ public class JungleWeaver extends CardImpl<JungleWeaver> {
         super(ownerId, 134, "Jungle Weaver", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
         this.expansionSetCode = "ALA";
         this.subtype.add("Spider");
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
         this.addAbility(ReachAbility.getInstance());

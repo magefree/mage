@@ -38,31 +38,31 @@ import mage.game.draft.DraftPlayer;
 public class DraftPickView implements Serializable {
     private static final long serialVersionUID = 1L;
 
-	protected SimpleCardsView booster;
-	protected SimpleCardsView picks;
-	protected boolean picking;
-	protected int timeout;
+    protected SimpleCardsView booster;
+    protected SimpleCardsView picks;
+    protected boolean picking;
+    protected int timeout;
 
-	public DraftPickView(DraftPlayer player, int timeout) {
-		this.booster = new SimpleCardsView(player.getBooster());
-		this.picks = new SimpleCardsView(player.getDeck().getSideboard());
-		this.picking = player.isPicking();
-		this.timeout = timeout;
-	}
+    public DraftPickView(DraftPlayer player, int timeout) {
+        this.booster = new SimpleCardsView(player.getBooster());
+        this.picks = new SimpleCardsView(player.getDeck().getSideboard());
+        this.picking = player.isPicking();
+        this.timeout = timeout;
+    }
 
-	public SimpleCardsView getBooster() {
-		return booster;
-	}
+    public SimpleCardsView getBooster() {
+        return booster;
+    }
 
-	public SimpleCardsView getPicks() {
-		return picks;
-	}
+    public SimpleCardsView getPicks() {
+        return picks;
+    }
 
-	public boolean isPicking() {
-		return this.picking;
-	}
+    public boolean isPicking() {
+        return this.picking;
+    }
 
-	public int getTimeout() {
-		return timeout;
-	}
+    public int getTimeout() {
+        return timeout;
+    }
 }

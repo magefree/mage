@@ -92,16 +92,16 @@ class StrataScytheImprintEffect extends OneShotEffect<StrataScytheImprintEffect>
         if (player == null)
             return false;
         TargetCardInLibrary target = new TargetCardInLibrary(new FilterLandCard());
-		if (player.searchLibrary(target, game)) {
+        if (player.searchLibrary(target, game)) {
             if (target.getTargets().size() > 0) {
                 UUID cardId = target.getTargets().get(0);
                 Card card = player.getLibrary().remove(cardId, game);
-			    if (card != null) {
+                if (card != null) {
                     card.moveToExile(source.getSourceId(), "Strata Scythe", source.getId(), game);
-					Permanent permanent = game.getPermanent(source.getSourceId());
-					if (permanent != null) {
-						permanent.imprint(card.getId(), game);
-					}
+                    Permanent permanent = game.getPermanent(source.getSourceId());
+                    if (permanent != null) {
+                        permanent.imprint(card.getId(), game);
+                    }
                 }
             }
         }
@@ -130,12 +130,12 @@ class SameNameAsExiledCountValue implements DynamicValue {
     public int calculate(Game game, Ability sourceAbility) {
         int value = 0;
         Permanent permanent = game.getPermanent(sourceAbility.getSourceId());
-		if (permanent != null && permanent.getImprinted().size() > 0) {
-			FilterPermanent filterPermanent = new FilterPermanent();
+        if (permanent != null && permanent.getImprinted().size() > 0) {
+            FilterPermanent filterPermanent = new FilterPermanent();
             filterPermanent.getName().add(game.getCard(permanent.getImprinted().get(0)).getName());
             value = game.getBattlefield().countAll(filterPermanent, game);
-		}
-		return value;
+        }
+        return value;
     }
 
     @Override

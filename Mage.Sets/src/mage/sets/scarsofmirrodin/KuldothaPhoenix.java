@@ -48,29 +48,29 @@ import mage.cards.CardImpl;
  */
 public class KuldothaPhoenix extends CardImpl<KuldothaPhoenix> {
 
-	public KuldothaPhoenix(UUID ownerId) {
-		super(ownerId, 95, "Kuldotha Phoenix", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}{R}");
-		this.expansionSetCode = "SOM";
-		this.subtype.add("Phoenix");
-		this.color.setRed(true);
-		this.power = new MageInt(4);
-		this.toughness = new MageInt(4);
+    public KuldothaPhoenix(UUID ownerId) {
+        super(ownerId, 95, "Kuldotha Phoenix", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}{R}");
+        this.expansionSetCode = "SOM";
+        this.subtype.add("Phoenix");
+        this.color.setRed(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
-		this.addAbility(FlyingAbility.getInstance());
-		this.addAbility(HasteAbility.getInstance());
-		Ability ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(true), new ManaCostsImpl("{4}"));
-		ability.addCost(new MetalcraftCost());
-		ability.addCost(new OnlyDuringUpkeepCost());
-		this.addAbility(ability);
-	}
+        this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(HasteAbility.getInstance());
+        Ability ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(true), new ManaCostsImpl("{4}"));
+        ability.addCost(new MetalcraftCost());
+        ability.addCost(new OnlyDuringUpkeepCost());
+        this.addAbility(ability);
+    }
 
-	public KuldothaPhoenix(final KuldothaPhoenix card) {
-		super(card);
-	}
+    public KuldothaPhoenix(final KuldothaPhoenix card) {
+        super(card);
+    }
 
-	@Override
-	public KuldothaPhoenix copy() {
-		return new KuldothaPhoenix(this);
-	}
+    @Override
+    public KuldothaPhoenix copy() {
+        return new KuldothaPhoenix(this);
+    }
 
 }

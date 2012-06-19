@@ -49,12 +49,12 @@ public class MindRot extends CardImpl<MindRot> {
         this.getSpellAbility().addEffect(new DiscardTargetEffect(2));
     }
 
-	public MindRot(final MindRot card) {
-		super(card);
-	}
+    public MindRot(final MindRot card) {
+        super(card);
+    }
 
-	@Override
-	public MindRot copy() {
-		return new MindRot(this);
-	}
+    @Override
+    public MindRot copy() {
+        return new MindRot(this);
+    }
 }

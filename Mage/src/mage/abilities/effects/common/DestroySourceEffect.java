@@ -40,36 +40,36 @@ import mage.game.permanent.Permanent;
  */
 public class DestroySourceEffect extends OneShotEffect<DestroySourceEffect> {
 
-	protected boolean noRegen;
+    protected boolean noRegen;
 
-	public DestroySourceEffect() {
-		this(false);
-	}
+    public DestroySourceEffect() {
+        this(false);
+    }
 
-	public DestroySourceEffect(boolean noRegen) {
-		super(Outcome.DestroyPermanent);
-		this.noRegen = noRegen;
-		staticText = "Destroy {this}";
-	}
+    public DestroySourceEffect(boolean noRegen) {
+        super(Outcome.DestroyPermanent);
+        this.noRegen = noRegen;
+        staticText = "Destroy {this}";
+    }
 
-	public DestroySourceEffect(final DestroySourceEffect effect) {
-		super(effect);
-		this.noRegen = effect.noRegen;
-	}
+    public DestroySourceEffect(final DestroySourceEffect effect) {
+        super(effect);
+        this.noRegen = effect.noRegen;
+    }
 
-	@Override
-	public DestroySourceEffect copy() {
-		return new DestroySourceEffect(this);
-	}
+    @Override
+    public DestroySourceEffect copy() {
+        return new DestroySourceEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getSourceId());
-		if (permanent != null) {
-			permanent.destroy(source.getId(), game, noRegen);
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            permanent.destroy(source.getId(), game, noRegen);
+            return true;
+        }
+        return false;
+    }
 
 }

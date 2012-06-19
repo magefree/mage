@@ -30,7 +30,7 @@ public class SkipNextUntapSourceEffect extends ReplacementEffectImpl<SkipNextUnt
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         used = true;
-		return true;
+        return true;
     }
 
     @Override

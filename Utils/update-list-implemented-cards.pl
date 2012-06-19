@@ -51,12 +51,12 @@ close(DATA);
 my %implementedCards;
 
 foreach my $setName (keys %knownSets) {
-	foreach my $keyCard (keys %{$cardsBySet{$setName}}) {
+    foreach my $keyCard (keys %{$cardsBySet{$setName}}) {
         my $fileName = "../Mage.Sets/src/mage/sets/" . $knownSets{$setName} . "/" . getClassName($keyCard) . ".java";
         if(-e $fileName) {
             $implementedCards{$keyCard} = 1;
         }
-	}
+    }
 }
 
 open (OLD, "> $oldListFile");

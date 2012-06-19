@@ -36,21 +36,21 @@ import mage.game.match.MatchType;
  */
 public class FreeForAllType extends MatchType<FreeForAllType> {
 
-	public FreeForAllType() {
-		this.name = "Free For All";
-		this.maxPlayers = 10;
-		this.minPlayers = 3;
-		this.numTeams = 0;
-		this.useAttackOption = true;
-		this.useRange = true;
-	}
+    public FreeForAllType() {
+        this.name = "Free For All";
+        this.maxPlayers = 10;
+        this.minPlayers = 3;
+        this.numTeams = 0;
+        this.useAttackOption = true;
+        this.useRange = true;
+    }
 
-	protected FreeForAllType(final FreeForAllType matchType) {
-		super(matchType);
-	}
+    protected FreeForAllType(final FreeForAllType matchType) {
+        super(matchType);
+    }
 
-	@Override
-	public FreeForAllType copy() {
-		return new FreeForAllType(this);
-	}
+    @Override
+    public FreeForAllType copy() {
+        return new FreeForAllType(this);
+    }
 }

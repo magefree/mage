@@ -50,7 +50,7 @@ public class Soulscour extends CardImpl<Soulscour> {
     public Soulscour (UUID ownerId) {
         super(ownerId, 14, "Soulscour", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{7}{W}{W}{W}");
         this.expansionSetCode = "DST";
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         this.getSpellAbility().addEffect(new SoulscourEffect());
     }
 

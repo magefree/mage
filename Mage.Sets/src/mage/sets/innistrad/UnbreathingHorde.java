@@ -64,8 +64,8 @@ public class UnbreathingHorde extends CardImpl<UnbreathingHorde> {
         this.toughness = new MageInt(0);
 
         // Unbreathing Horde enters the battlefield with a +1/+1 counter on it for each other Zombie you control and each Zombie card in your graveyard.
- 		this.addAbility(new EntersBattlefieldAbility(new UnbreathingHordeEffect1(), "with a +1/+1 counter on it for each other Zombie you control and each Zombie card in your graveyard"));
-       
+         this.addAbility(new EntersBattlefieldAbility(new UnbreathingHordeEffect1(), "with a +1/+1 counter on it for each other Zombie you control and each Zombie card in your graveyard"));
+
         // If Unbreathing Horde would be dealt damage, prevent that damage and remove a +1/+1 counter from it.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UnbreathingHordeEffect2()));
     }
@@ -84,12 +84,12 @@ class UnbreathingHordeEffect1 extends OneShotEffect<UnbreathingHordeEffect1> {
 
     private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent();
     private static final FilterCreatureCard filter2 = new FilterCreatureCard();
-    
+
     static {
         filter1.getSubtype().add("Zombie");
         filter2.getSubtype().add("Zombie");
     }
-    
+
     public UnbreathingHordeEffect1() {
         super(Outcome.BoostCreature);
         staticText = "{this} enters the battlefield with a +1/+1 counter on it for each other Zombie you control and each Zombie card in your graveyard";

@@ -40,24 +40,24 @@ import mage.cards.CardImpl;
  */
 public class GoblinPiker extends CardImpl<GoblinPiker> {
 
-	public GoblinPiker(UUID ownerId) {
-		super(ownerId, 209, "Goblin Piker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-		this.expansionSetCode = "10E";
-		this.subtype.add("Goblin");
-		this.subtype.add("Warrier");
-		this.color.setRed(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(1);
+    public GoblinPiker(UUID ownerId) {
+        super(ownerId, 209, "Goblin Piker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
+        this.expansionSetCode = "10E";
+        this.subtype.add("Goblin");
+        this.subtype.add("Warrier");
+        this.color.setRed(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-	}
+    }
 
-	public GoblinPiker(final GoblinPiker card) {
-		super(card);
-	}
+    public GoblinPiker(final GoblinPiker card) {
+        super(card);
+    }
 
-	@Override
-	public GoblinPiker copy() {
-		return new GoblinPiker(this);
-	}
+    @Override
+    public GoblinPiker copy() {
+        return new GoblinPiker(this);
+    }
 
 }

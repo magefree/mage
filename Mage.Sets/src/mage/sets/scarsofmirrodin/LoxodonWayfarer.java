@@ -46,7 +46,7 @@ public class LoxodonWayfarer extends CardImpl<LoxodonWayfarer> {
         this.expansionSetCode = "SOM";
         this.subtype.add("Elephant");
         this.subtype.add("Monk");
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(5);
     }

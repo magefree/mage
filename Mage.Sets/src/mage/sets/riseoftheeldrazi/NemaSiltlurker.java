@@ -44,7 +44,7 @@ public class NemaSiltlurker extends CardImpl<NemaSiltlurker> {
         super(ownerId, 200, "Nema Siltlurker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
         this.expansionSetCode = "ROE";
         this.subtype.add("Lizard");
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
     }

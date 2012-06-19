@@ -49,31 +49,31 @@ import java.util.UUID;
  */
 public class SpiritMantle extends CardImpl<SpiritMantle> {
 
-	public SpiritMantle(UUID ownerId) {
-		super(ownerId, 35, "Spirit Mantle", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
-		this.expansionSetCode = "M12";
-		this.subtype.add("Aura");
+    public SpiritMantle(UUID ownerId) {
+        super(ownerId, 35, "Spirit Mantle", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
+        this.expansionSetCode = "M12";
+        this.subtype.add("Aura");
 
-		this.color.setWhite(true);
+        this.color.setWhite(true);
 
-		// Enchant creature
-		TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.AddAbility));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		this.addAbility(ability);
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.AddAbility));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
 
-		// Enchanted creature gets +1/+1 and has protection from creatures.
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Constants.Duration.WhileOnBattlefield)));
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new ProtectionAbility(new FilterCreatureCard("creatures")), Constants.AttachmentType.AURA)));
-	}
+        // Enchanted creature gets +1/+1 and has protection from creatures.
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Constants.Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new ProtectionAbility(new FilterCreatureCard("creatures")), Constants.AttachmentType.AURA)));
+    }
 
-	public SpiritMantle(final SpiritMantle card) {
-		super(card);
-	}
+    public SpiritMantle(final SpiritMantle card) {
+        super(card);
+    }
 
-	@Override
-	public SpiritMantle copy() {
-		return new SpiritMantle(this);
-	}
+    @Override
+    public SpiritMantle copy() {
+        return new SpiritMantle(this);
+    }
 }

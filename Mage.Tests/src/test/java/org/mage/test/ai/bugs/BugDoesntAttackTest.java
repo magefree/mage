@@ -12,31 +12,31 @@ import org.mage.test.serverside.base.CardTestBase;
  */
 public class BugDoesntAttackTest extends CardTestBase {
 
-	@Test
+    @Test
     @Ignore
-	public void testAttackWithZephyrSprite() throws Exception {
-		addCard(Constants.Zone.HAND, playerA, "Zephyr Sprite");
-		addCard(Constants.Zone.HAND, playerA, "Island");
-		addCard(Constants.Zone.HAND, playerA, "Rupture Spire");
-		setLife(playerB, 1);
+    public void testAttackWithZephyrSprite() throws Exception {
+        addCard(Constants.Zone.HAND, playerA, "Zephyr Sprite");
+        addCard(Constants.Zone.HAND, playerA, "Island");
+        addCard(Constants.Zone.HAND, playerA, "Rupture Spire");
+        setLife(playerB, 1);
         setStopOnTurn(4);
 
-		execute();
+        execute();
 
-		assertLife(playerB, 0);
-	}
+        assertLife(playerB, 0);
+    }
 
     @Test
     @Ignore
-	public void testAttackWithGoblinGuide() throws Exception {
-		addCard(Constants.Zone.HAND, playerA, "Goblin Guide");
-		addCard(Constants.Zone.HAND, playerA, "Mountain");
+    public void testAttackWithGoblinGuide() throws Exception {
+        addCard(Constants.Zone.HAND, playerA, "Goblin Guide");
+        addCard(Constants.Zone.HAND, playerA, "Mountain");
 
         playLand(playerA, "Mountain");
         castSpell(playerA, "Goblin Guide");
 
-		execute();
+        execute();
 
-		assertLife(playerB, 18);
-	}
+        assertLife(playerB, 18);
+    }
 }

@@ -38,29 +38,29 @@ import mage.target.TargetPermanent;
  */
 public class TargetControlledPermanent<T extends TargetControlledPermanent<T>> extends TargetPermanent<TargetControlledPermanent<T>> {
 
-	public TargetControlledPermanent() {
-		this(1, 1, new FilterControlledPermanent(), false);
-	}
+    public TargetControlledPermanent() {
+        this(1, 1, new FilterControlledPermanent(), false);
+    }
 
-	public TargetControlledPermanent(int numTargets) {
-		this(numTargets, numTargets, new FilterControlledPermanent(), false);
-	}
+    public TargetControlledPermanent(int numTargets) {
+        this(numTargets, numTargets, new FilterControlledPermanent(), false);
+    }
 
-	public TargetControlledPermanent(FilterControlledPermanent filter) {
-		this(1, 1, filter, false);
-	}
+    public TargetControlledPermanent(FilterControlledPermanent filter) {
+        this(1, 1, filter, false);
+    }
 
-	public TargetControlledPermanent(int minNumTargets, int maxNumTargets, FilterPermanent filter, boolean notTarget) {
-		super(minNumTargets, maxNumTargets, filter, notTarget);
-		this.targetName = filter.getMessage();
-	}
+    public TargetControlledPermanent(int minNumTargets, int maxNumTargets, FilterPermanent filter, boolean notTarget) {
+        super(minNumTargets, maxNumTargets, filter, notTarget);
+        this.targetName = filter.getMessage();
+    }
 
-	public TargetControlledPermanent(final TargetControlledPermanent target) {
-		super(target);
-	}
+    public TargetControlledPermanent(final TargetControlledPermanent target) {
+        super(target);
+    }
 
-	@Override
-	public TargetControlledPermanent copy() {
-		return new TargetControlledPermanent(this);
-	}
+    @Override
+    public TargetControlledPermanent copy() {
+        return new TargetControlledPermanent(this);
+    }
 }

@@ -66,7 +66,7 @@ public class NirkanaRevenant extends CardImpl<NirkanaRevenant> {
 
         // Whenever you tap a Swamp for mana, add {B} to your mana pool.
         this.addAbility(new NirkanaRevenantTriggeredAbility());
-        
+
         // {B}: Nirkana Revenant gets +1/+1 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Constants.Duration.EndOfTurn), new ManaCostsImpl("{B}")));
     }
@@ -82,33 +82,33 @@ public class NirkanaRevenant extends CardImpl<NirkanaRevenant> {
 }
 
   class NirkanaRevenantTriggeredAbility extends TriggeredAbilityImpl<NirkanaRevenantTriggeredAbility> {
-      
+
     public NirkanaRevenantTriggeredAbility() {
-	super(Zone.BATTLEFIELD, new NirkanaRevenantEffect());
+    super(Zone.BATTLEFIELD, new NirkanaRevenantEffect());
     }
 
     public NirkanaRevenantTriggeredAbility(final NirkanaRevenantTriggeredAbility ability) {
-	super(ability);
+    super(ability);
     }
-    
+
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-	if (event.getType() == GameEvent.EventType.TAPPED_FOR_MANA ) {
+    if (event.getType() == GameEvent.EventType.TAPPED_FOR_MANA ) {
             Permanent permanent = game.getPermanent(event.getSourceId());
             if (permanent == null) {
-		permanent = (Permanent) game.getLastKnownInformation(event.getSourceId(), Zone.BATTLEFIELD);
+        permanent = (Permanent) game.getLastKnownInformation(event.getSourceId(), Zone.BATTLEFIELD);
             }
             if (permanent != null && permanent.getSubtype().contains("Swamp") && permanent.getControllerId().equals(this.controllerId)) {
                 getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
                 return true;
             }
-	}
-	return false;
     }
-    
+    return false;
+    }
+
     @Override
     public NirkanaRevenantTriggeredAbility copy() {
-	return new NirkanaRevenantTriggeredAbility(this);
+    return new NirkanaRevenantTriggeredAbility(this);
     }
 
     @Override
@@ -118,15 +118,15 @@ public class NirkanaRevenant extends CardImpl<NirkanaRevenant> {
 }
 
 class NirkanaRevenantEffect extends OneShotEffect<NirkanaRevenantEffect> {
-    
+
     NirkanaRevenantEffect() {
         super(Outcome.PutManaInPool);
     }
-    
+
     NirkanaRevenantEffect(final NirkanaRevenantEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
@@ -136,10 +136,10 @@ class NirkanaRevenantEffect extends OneShotEffect<NirkanaRevenantEffect> {
         }
         return false;
     }
-    
+
     @Override
     public NirkanaRevenantEffect copy() {
-	return new NirkanaRevenantEffect(this);
+    return new NirkanaRevenantEffect(this);
     }
 }
 

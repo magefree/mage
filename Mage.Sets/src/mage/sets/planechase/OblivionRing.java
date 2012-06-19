@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class OblivionRing extends mage.sets.shardsofalara.OblivionRing {
 
-	public OblivionRing(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 4;
-		this.expansionSetCode = "HOP";
-	}
+    public OblivionRing(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 4;
+        this.expansionSetCode = "HOP";
+    }
 
-	public OblivionRing(final OblivionRing card) {
-		super(card);
-	}
+    public OblivionRing(final OblivionRing card) {
+        super(card);
+    }
 
-	@Override
-	public OblivionRing copy() {
-		return new OblivionRing(this);
-	}
+    @Override
+    public OblivionRing copy() {
+        return new OblivionRing(this);
+    }
 
 }

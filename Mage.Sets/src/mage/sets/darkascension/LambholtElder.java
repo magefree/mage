@@ -56,7 +56,7 @@ public class LambholtElder extends CardImpl<LambholtElder> {
         this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
-        
+
         this.canTransform = true;
         this.secondSideCard = new SilverpeltWerewolf(ownerId);
 

@@ -55,8 +55,8 @@ public class Monomania extends CardImpl<Monomania> {
         this.color.setBlack(true);
 
         // Target player chooses a card in his or her hand and discards the rest.
-		this.getSpellAbility().addEffect(new MonomaniaEffect());
-		this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addEffect(new MonomaniaEffect());
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public Monomania(final Monomania card) {
@@ -71,44 +71,44 @@ public class Monomania extends CardImpl<Monomania> {
 
 class MonomaniaEffect extends OneShotEffect<MonomaniaEffect> {
 
-	private static final FilterCard filter = new FilterCard("a card");
+    private static final FilterCard filter = new FilterCard("a card");
 
-	public MonomaniaEffect() {
-		super(Constants.Outcome.Discard);
-		staticText = "Target player chooses a card in his or her hand and discards the rest";
-	}
+    public MonomaniaEffect() {
+        super(Constants.Outcome.Discard);
+        staticText = "Target player chooses a card in his or her hand and discards the rest";
+    }
 
-	public MonomaniaEffect(final MonomaniaEffect effect) {
-		super(effect);
-	}
+    public MonomaniaEffect(final MonomaniaEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getFirstTarget());
-		if (player != null) {
-			TargetCard target = new TargetCard(Constants.Zone.PICK, filter);
-			target.setRequired(true);
-			if (player.choose(Constants.Outcome.Detriment, player.getHand(), target, game)) {
-				while (player.getHand().size() > 1) {
-					for (UUID uuid : player.getHand()) {
-						if (!uuid.equals(target.getFirstTarget())) {
-							Card card = player.getHand().get(uuid, game);
-							if (card != null) {
-								player.discard(card, source, game);
-								break;
-							}
-						}
-					}
-				}
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getFirstTarget());
+        if (player != null) {
+            TargetCard target = new TargetCard(Constants.Zone.PICK, filter);
+            target.setRequired(true);
+            if (player.choose(Constants.Outcome.Detriment, player.getHand(), target, game)) {
+                while (player.getHand().size() > 1) {
+                    for (UUID uuid : player.getHand()) {
+                        if (!uuid.equals(target.getFirstTarget())) {
+                            Card card = player.getHand().get(uuid, game);
+                            if (card != null) {
+                                player.discard(card, source, game);
+                                break;
+                            }
+                        }
+                    }
+                }
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public MonomaniaEffect copy() {
-		return new MonomaniaEffect(this);
-	}
+    @Override
+    public MonomaniaEffect copy() {
+        return new MonomaniaEffect(this);
+    }
 
 }

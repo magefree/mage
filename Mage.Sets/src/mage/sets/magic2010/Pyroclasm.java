@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class Pyroclasm extends mage.sets.tenth.Pyroclasm {
 
-	public Pyroclasm(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 152;
-		this.expansionSetCode = "M10";
-	}
+    public Pyroclasm(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 152;
+        this.expansionSetCode = "M10";
+    }
 
-	public Pyroclasm(final Pyroclasm card) {
-		super(card);
-	}
+    public Pyroclasm(final Pyroclasm card) {
+        super(card);
+    }
 
-	@Override
-	public Pyroclasm copy() {
-		return new Pyroclasm(this);
-	}
+    @Override
+    public Pyroclasm copy() {
+        return new Pyroclasm(this);
+    }
 
 }

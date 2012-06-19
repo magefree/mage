@@ -41,30 +41,30 @@ import mage.game.permanent.Permanent;
  */
 public class DestroyAllControlledTargetEffect extends OneShotEffect<DestroyAllControlledTargetEffect> {
 
-	private FilterPermanent filter;
+    private FilterPermanent filter;
 
-	public DestroyAllControlledTargetEffect(FilterPermanent filter) {
-		super(Outcome.DestroyPermanent);
-		this.filter = filter;
-		staticText = "Destroy all " + filter.getMessage() + " controlled by target player";
-	}
+    public DestroyAllControlledTargetEffect(FilterPermanent filter) {
+        super(Outcome.DestroyPermanent);
+        this.filter = filter;
+        staticText = "Destroy all " + filter.getMessage() + " controlled by target player";
+    }
 
-	public DestroyAllControlledTargetEffect(final DestroyAllControlledTargetEffect effect) {
-		super(effect);
-		this.filter = effect.filter.copy();
-	}
+    public DestroyAllControlledTargetEffect(final DestroyAllControlledTargetEffect effect) {
+        super(effect);
+        this.filter = effect.filter.copy();
+    }
 
-	@Override
-	public DestroyAllControlledTargetEffect copy() {
-		return new DestroyAllControlledTargetEffect(this);
-	}
+    @Override
+    public DestroyAllControlledTargetEffect copy() {
+        return new DestroyAllControlledTargetEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		for (Permanent permanent: game.getBattlefield().getAllActivePermanents(filter, source.getFirstTarget(), game)) {
-			permanent.destroy(source.getId(), game, false);
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        for (Permanent permanent: game.getBattlefield().getAllActivePermanents(filter, source.getFirstTarget(), game)) {
+            permanent.destroy(source.getId(), game, false);
+        }
+        return true;
+    }
 
 }

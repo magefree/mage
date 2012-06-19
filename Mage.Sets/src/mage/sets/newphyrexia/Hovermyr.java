@@ -46,10 +46,10 @@ public class Hovermyr extends CardImpl<Hovermyr> {
         super(ownerId, 138, "Hovermyr", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
         this.expansionSetCode = "NPH";
         this.subtype.add("Myr");
-        
+
         this.power = new MageInt(1 );
         this.toughness = new MageInt( 2);
-        
+
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(VigilanceAbility.getInstance());
     }

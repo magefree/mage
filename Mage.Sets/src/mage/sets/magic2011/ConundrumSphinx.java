@@ -54,70 +54,70 @@ import mage.sets.Sets;
  */
 public class ConundrumSphinx extends CardImpl<ConundrumSphinx> {
 
-	public ConundrumSphinx(UUID ownerId) {
-		super(ownerId, 51, "Conundrum Sphinx", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Sphinx");
-		this.color.setBlue(true);
-		this.power = new MageInt(4);
-		this.toughness = new MageInt(4);
+    public ConundrumSphinx(UUID ownerId) {
+        super(ownerId, 51, "Conundrum Sphinx", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Sphinx");
+        this.color.setBlue(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
-		this.addAbility(FlyingAbility.getInstance());
-		this.addAbility(new AttacksTriggeredAbility(new ConundrumSphinxEffect(), false));
-	}
+        this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(new AttacksTriggeredAbility(new ConundrumSphinxEffect(), false));
+    }
 
-	public ConundrumSphinx(final ConundrumSphinx card) {
-		super(card);
-	}
+    public ConundrumSphinx(final ConundrumSphinx card) {
+        super(card);
+    }
 
-	@Override
-	public ConundrumSphinx copy() {
-		return new ConundrumSphinx(this);
-	}
+    @Override
+    public ConundrumSphinx copy() {
+        return new ConundrumSphinx(this);
+    }
 
 }
 
 class ConundrumSphinxEffect extends OneShotEffect<ConundrumSphinxEffect> {
 
-	public ConundrumSphinxEffect() {
-		super(Outcome.DrawCard);
-		staticText = "each player names a card. Then each player reveals the top card of his or her library. If the card a player revealed is the card he or she named, that player puts it into his or her hand. If it's not, that player puts it on the bottom of his or her library";
-	}
+    public ConundrumSphinxEffect() {
+        super(Outcome.DrawCard);
+        staticText = "each player names a card. Then each player reveals the top card of his or her library. If the card a player revealed is the card he or she named, that player puts it into his or her hand. If it's not, that player puts it on the bottom of his or her library";
+    }
 
-	public ConundrumSphinxEffect(final ConundrumSphinxEffect effect) {
-		super(effect);
-	}
+    public ConundrumSphinxEffect(final ConundrumSphinxEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Choice cardChoice = new ChoiceImpl();
-		cardChoice.setChoices(Sets.getCardNames());
-		for (Player player: game.getPlayers().values()) {
-			if(player.getLibrary().size() > 0){
-				cardChoice.clearChoice();
-				while (!player.choose(Outcome.DrawCard, cardChoice, game)) {
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Choice cardChoice = new ChoiceImpl();
+        cardChoice.setChoices(Sets.getCardNames());
+        for (Player player: game.getPlayers().values()) {
+            if(player.getLibrary().size() > 0){
+                cardChoice.clearChoice();
+                while (!player.choose(Outcome.DrawCard, cardChoice, game)) {
                     game.debugMessage("player canceled choosing name. retrying.");
                 }
                 String cardName = cardChoice.getChoice();
                 game.informPlayers("Conundrum Sphinx, player: " + player.getName() + ", named card: [" + cardName + "]");
-				Card card = player.getLibrary().removeFromTop(game);
-				Cards cards  = new CardsImpl();
-				cards.add(card);
-				player.revealCards("Conundrum Sphinx", cards, game);
-				if (card.getName().equals(cardName)) {
-					card.moveToZone(Zone.HAND, source.getId(), game, true);
-				}
-				else {
-					card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
-				}
-			}
-		}
-		return true;
-	}
+                Card card = player.getLibrary().removeFromTop(game);
+                Cards cards  = new CardsImpl();
+                cards.add(card);
+                player.revealCards("Conundrum Sphinx", cards, game);
+                if (card.getName().equals(cardName)) {
+                    card.moveToZone(Zone.HAND, source.getId(), game, true);
+                }
+                else {
+                    card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
+                }
+            }
+        }
+        return true;
+    }
 
-	@Override
-	public ConundrumSphinxEffect copy() {
-		return new ConundrumSphinxEffect(this);
-	}
+    @Override
+    public ConundrumSphinxEffect copy() {
+        return new ConundrumSphinxEffect(this);
+    }
 
 }

@@ -60,9 +60,9 @@ public class MyrPropagator extends CardImpl<MyrPropagator> {
         this.toughness = new MageInt(1);
 
         // {3}, {tap}: Put a token that's a copy of Myr Propagator onto the battlefield.
-		Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new MyrPropagatorCreateTokenEffect(), new GenericManaCost(3));
-		ability.addCost(new TapSourceCost());
-		this.addAbility(ability);
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new MyrPropagatorCreateTokenEffect(), new GenericManaCost(3));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
     }
 
     public MyrPropagator(final MyrPropagator card) {
@@ -77,38 +77,38 @@ public class MyrPropagator extends CardImpl<MyrPropagator> {
 
 class MyrPropagatorCreateTokenEffect extends OneShotEffect<MyrPropagatorCreateTokenEffect> {
 
-	public MyrPropagatorCreateTokenEffect() {
-		super(Constants.Outcome.PutCreatureInPlay);
-		this.staticText = "Put a token that's a copy of Myr Propagator onto the battlefield";
-	}
+    public MyrPropagatorCreateTokenEffect() {
+        super(Constants.Outcome.PutCreatureInPlay);
+        this.staticText = "Put a token that's a copy of Myr Propagator onto the battlefield";
+    }
 
-	public MyrPropagatorCreateTokenEffect(final MyrPropagatorCreateTokenEffect effect) {
-		super(effect);
-	}
+    public MyrPropagatorCreateTokenEffect(final MyrPropagatorCreateTokenEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public MyrPropagatorCreateTokenEffect copy() {
-		return new MyrPropagatorCreateTokenEffect(this);
-	}
+    @Override
+    public MyrPropagatorCreateTokenEffect copy() {
+        return new MyrPropagatorCreateTokenEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		MageObject thisCard = game.getLastKnownInformation(source.getSourceId(), Constants.Zone.BATTLEFIELD);
-		if (thisCard != null && thisCard instanceof Permanent) {
-			EmptyToken token = new EmptyToken();
-			CardUtil.copyTo(token).from((Permanent)thisCard);
-			token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
-			return true;
-		} else { // maybe it's token
-			Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
-			if (permanent != null) {
-				EmptyToken token = new EmptyToken();
-				CardUtil.copyTo(token).from(permanent);
-				token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        MageObject thisCard = game.getLastKnownInformation(source.getSourceId(), Constants.Zone.BATTLEFIELD);
+        if (thisCard != null && thisCard instanceof Permanent) {
+            EmptyToken token = new EmptyToken();
+            CardUtil.copyTo(token).from((Permanent)thisCard);
+            token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+            return true;
+        } else { // maybe it's token
+            Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
+            if (permanent != null) {
+                EmptyToken token = new EmptyToken();
+                CardUtil.copyTo(token).from(permanent);
+                token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

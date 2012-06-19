@@ -57,95 +57,95 @@ import mage.target.common.TargetOpponent;
  */
 public class GideonJura extends CardImpl<GideonJura> {
 
-	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
 
-	static {
-		filter.setUseTapped(true);
-		filter.setTapped(true);
-	}
+    static {
+        filter.setUseTapped(true);
+        filter.setTapped(true);
+    }
 
-	public GideonJura(UUID ownerId) {
-		super(ownerId, 21, "Gideon Jura", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{W}");
-		this.expansionSetCode = "ROE";
-		this.subtype.add("Gideon");
-		this.color.setWhite(true);
-		this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(6)), ""));
+    public GideonJura(UUID ownerId) {
+        super(ownerId, 21, "Gideon Jura", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{W}");
+        this.expansionSetCode = "ROE";
+        this.subtype.add("Gideon");
+        this.color.setWhite(true);
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(6)), ""));
 
-		LoyaltyAbility ability1 = new LoyaltyAbility(new GideonJuraEffect(), 2);
-		ability1.addTarget(new TargetOpponent());
-		this.addAbility(ability1);
+        LoyaltyAbility ability1 = new LoyaltyAbility(new GideonJuraEffect(), 2);
+        ability1.addTarget(new TargetOpponent());
+        this.addAbility(ability1);
 
-		LoyaltyAbility ability2 = new LoyaltyAbility(new DestroyTargetEffect(), -2);
-		ability2.addTarget(new TargetCreaturePermanent(filter));
-		this.addAbility(ability2);
+        LoyaltyAbility ability2 = new LoyaltyAbility(new DestroyTargetEffect(), -2);
+        ability2.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability2);
 
-		LoyaltyAbility ability3 = new LoyaltyAbility(new BecomesCreatureSourceEffect(new GideonJuraToken(), "planeswalker", Duration.EndOfTurn), 0);
-		ability3.addEffect(new PreventAllDamageSourceEffect(Duration.EndOfTurn));
-		this.addAbility(ability3);
-	}
+        LoyaltyAbility ability3 = new LoyaltyAbility(new BecomesCreatureSourceEffect(new GideonJuraToken(), "planeswalker", Duration.EndOfTurn), 0);
+        ability3.addEffect(new PreventAllDamageSourceEffect(Duration.EndOfTurn));
+        this.addAbility(ability3);
+    }
 
-	public GideonJura(final GideonJura card) {
-		super(card);
-	}
+    public GideonJura(final GideonJura card) {
+        super(card);
+    }
 
-	@Override
-	public GideonJura copy() {
-		return new GideonJura(this);
-	}
+    @Override
+    public GideonJura copy() {
+        return new GideonJura(this);
+    }
 
 }
 
 class GideonJuraToken extends Token {
 
-	public GideonJuraToken() {
-		super("", "6/6 Human Soldier creature");
-		cardType.add(CardType.CREATURE);
-		subtype.add("Human");
-		subtype.add("Soldier");
-		power = new MageInt(6);
-		toughness = new MageInt(6);
-	}
+    public GideonJuraToken() {
+        super("", "6/6 Human Soldier creature");
+        cardType.add(CardType.CREATURE);
+        subtype.add("Human");
+        subtype.add("Soldier");
+        power = new MageInt(6);
+        toughness = new MageInt(6);
+    }
 
 }
 
 class GideonJuraEffect extends RequirementEffect<GideonJuraEffect> {
 
-	public GideonJuraEffect() {
-		super(Duration.Custom);
-		staticText = "During target opponent's next turn, creatures that player controls attack {this} if able";
-	}
+    public GideonJuraEffect() {
+        super(Duration.Custom);
+        staticText = "During target opponent's next turn, creatures that player controls attack {this} if able";
+    }
 
-	public GideonJuraEffect(final GideonJuraEffect effect) {
-		super(effect);
-	}
+    public GideonJuraEffect(final GideonJuraEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public GideonJuraEffect copy() {
-		return new GideonJuraEffect(this);
-	}
+    @Override
+    public GideonJuraEffect copy() {
+        return new GideonJuraEffect(this);
+    }
 
-	@Override
-	public boolean applies(Permanent permanent, Ability source, Game game) {
-		return permanent.getControllerId().equals(source.getFirstTarget());
-	}
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        return permanent.getControllerId().equals(source.getFirstTarget());
+    }
 
-	@Override
-	public boolean isInactive(Ability source, Game game) {
-		return (game.getPhase().getType() == TurnPhase.END && game.getActivePlayerId().equals(source.getFirstTarget()));
-	}
+    @Override
+    public boolean isInactive(Ability source, Game game) {
+        return (game.getPhase().getType() == TurnPhase.END && game.getActivePlayerId().equals(source.getFirstTarget()));
+    }
 
-	@Override
-	public UUID mustAttackDefender(Ability source, Game game) {
-		return source.getSourceId();
-	}
+    @Override
+    public UUID mustAttackDefender(Ability source, Game game) {
+        return source.getSourceId();
+    }
 
-	@Override
-	public boolean mustAttack(Game game) {
-		return true;
-	}
+    @Override
+    public boolean mustAttack(Game game) {
+        return true;
+    }
 
-	@Override
-	public boolean mustBlock(Game game) {
-		return false;
-	}
+    @Override
+    public boolean mustBlock(Game game) {
+        return false;
+    }
 }

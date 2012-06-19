@@ -55,7 +55,7 @@ public class ConqueringManticore extends CardImpl<ConqueringManticore> {
         this.color.setRed(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
-        
+
         Ability ability = new EntersBattlefieldTriggeredAbility(new GainControlTargetEffect(Duration.EndOfTurn), false);
         ability.addEffect(new UntapTargetEffect());
         ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));

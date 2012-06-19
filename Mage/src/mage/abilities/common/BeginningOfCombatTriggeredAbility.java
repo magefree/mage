@@ -52,7 +52,7 @@ public class BeginningOfCombatTriggeredAbility extends TriggeredAbilityImpl<Begi
                         }
                         return true;
                     }
-		    break;
+            break;
                 case ANY:
                     if (getTargets().size() == 0) {
                         for (Effect effect : this.getEffects()) {

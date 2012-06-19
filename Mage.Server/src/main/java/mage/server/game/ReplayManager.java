@@ -37,41 +37,41 @@ import mage.server.UserManager;
  * @author BetaSteward_at_googlemail.com
  */
 public class ReplayManager {
-	private final static ReplayManager INSTANCE = new ReplayManager();
+    private final static ReplayManager INSTANCE = new ReplayManager();
 
-	public static ReplayManager getInstance() {
-		return INSTANCE;
-	}
+    public static ReplayManager getInstance() {
+        return INSTANCE;
+    }
 
-	private ReplayManager() {}
+    private ReplayManager() {}
 
-	private ConcurrentHashMap<String, ReplaySession> replaySessions = new ConcurrentHashMap<String, ReplaySession>();
+    private ConcurrentHashMap<String, ReplaySession> replaySessions = new ConcurrentHashMap<String, ReplaySession>();
 
-	public void replayGame(UUID gameId, UUID userId) {
-		ReplaySession replaySession = new ReplaySession(gameId, userId);
-		replaySessions.put(gameId.toString() + userId.toString(), replaySession);
-		UserManager.getInstance().getUser(userId).replayGame(gameId);
-	}
+    public void replayGame(UUID gameId, UUID userId) {
+        ReplaySession replaySession = new ReplaySession(gameId, userId);
+        replaySessions.put(gameId.toString() + userId.toString(), replaySession);
+        UserManager.getInstance().getUser(userId).replayGame(gameId);
+    }
 
-	public void startReplay(UUID gameId, UUID userId) {
-		replaySessions.get(gameId.toString() + userId.toString()).replay();
-	}
+    public void startReplay(UUID gameId, UUID userId) {
+        replaySessions.get(gameId.toString() + userId.toString()).replay();
+    }
 
-	public void stopReplay(UUID gameId, UUID userId) {
-		replaySessions.get(gameId.toString() + userId.toString()).stop();
-	}
+    public void stopReplay(UUID gameId, UUID userId) {
+        replaySessions.get(gameId.toString() + userId.toString()).stop();
+    }
 
-	public void nextPlay(UUID gameId, UUID userId) {
-		replaySessions.get(gameId.toString() + userId.toString()).next();
-	}
+    public void nextPlay(UUID gameId, UUID userId) {
+        replaySessions.get(gameId.toString() + userId.toString()).next();
+    }
 
-	public void previousPlay(UUID gameId, UUID userId) {
-		replaySessions.get(gameId.toString() + userId.toString()).previous();
-	}
-    
-	public void skipForward(UUID gameId, UUID userId, int moves) {
-		replaySessions.get(gameId.toString() + userId.toString()).next(moves);
-	}
+    public void previousPlay(UUID gameId, UUID userId) {
+        replaySessions.get(gameId.toString() + userId.toString()).previous();
+    }
+
+    public void skipForward(UUID gameId, UUID userId, int moves) {
+        replaySessions.get(gameId.toString() + userId.toString()).next(moves);
+    }
 
 
 }

@@ -45,7 +45,7 @@ public class Rejuvenate extends CardImpl<Rejuvenate> {
     public Rejuvenate (UUID ownerId) {
         super(ownerId, 271, "Rejuvenate", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
         this.expansionSetCode = "USG";
-	this.color.setGreen(true);
+    this.color.setGreen(true);
         this.getSpellAbility().addEffect(new GainLifeEffect(6));
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }

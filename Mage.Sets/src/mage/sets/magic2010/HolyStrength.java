@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class HolyStrength extends mage.sets.tenth.HolyStrength {
 
-	public HolyStrength(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 15;
-		this.expansionSetCode = "M10";
-	}
+    public HolyStrength(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 15;
+        this.expansionSetCode = "M10";
+    }
 
-	public HolyStrength(final HolyStrength card) {
-		super(card);
-	}
+    public HolyStrength(final HolyStrength card) {
+        super(card);
+    }
 
-	@Override
-	public HolyStrength copy() {
-		return new HolyStrength(this);
-	}
+    @Override
+    public HolyStrength copy() {
+        return new HolyStrength(this);
+    }
 
 }

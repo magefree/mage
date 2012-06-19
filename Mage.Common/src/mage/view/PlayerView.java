@@ -46,111 +46,111 @@ import mage.players.Player;
 public class PlayerView implements Serializable {
     private static final long serialVersionUID = 1L;
 
-	private UUID playerId;
-	private String name;
-	private int life;
-	private int poison;
-	private int libraryCount;
-	private int handCount;
-	private boolean isActive;
-	private boolean hasLeft;
-	private ManaPoolView manaPool;
-	private SimpleCardsView graveyard = new SimpleCardsView();
-	private Map<UUID, PermanentView> battlefield = new HashMap<UUID, PermanentView>();
-	private CardView topCard;
-	private UserDataView userDataView;
+    private UUID playerId;
+    private String name;
+    private int life;
+    private int poison;
+    private int libraryCount;
+    private int handCount;
+    private boolean isActive;
+    private boolean hasLeft;
+    private ManaPoolView manaPool;
+    private SimpleCardsView graveyard = new SimpleCardsView();
+    private Map<UUID, PermanentView> battlefield = new HashMap<UUID, PermanentView>();
+    private CardView topCard;
+    private UserDataView userDataView;
 
-	public PlayerView(Player player, GameState state, Game game) {
-		this.playerId = player.getId();
-		this.name = player.getName();
-		this.life = player.getLife();
-		this.poison = player.getCounters().getCount(CounterType.POISON);
-		this.libraryCount = player.getLibrary().size();
-		this.handCount = player.getHand().size();
-		this.manaPool = new ManaPoolView(player.getManaPool());
-		this.isActive = (player.getId().equals(state.getActivePlayerId()));
-		this.hasLeft = player.hasLeft();
-		for (Card card: player.getGraveyard().getCards(game)) {
-			graveyard.put(card.getId(), new SimpleCardView(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.isFaceDown()));
-		}
-		for (Permanent permanent: state.getBattlefield().getAllPermanents()) {
-			if (showInBattlefield(permanent, state)) {
-				PermanentView view = new PermanentView(permanent, game.getCard(permanent.getId()));
-				battlefield.put(view.getId(), view);
-			}
-		}
-		this.topCard = player.isTopCardRevealed() && player.getLibrary().size() > 0 ?
-				new CardView(player.getLibrary().getFromTop(game)) : null;
-		if (player.getUserData() != null) {
-			this.userDataView = new UserDataView(player.getUserData());
-		} else {
-			this.userDataView = new UserDataView(0);
-		}
-	}
+    public PlayerView(Player player, GameState state, Game game) {
+        this.playerId = player.getId();
+        this.name = player.getName();
+        this.life = player.getLife();
+        this.poison = player.getCounters().getCount(CounterType.POISON);
+        this.libraryCount = player.getLibrary().size();
+        this.handCount = player.getHand().size();
+        this.manaPool = new ManaPoolView(player.getManaPool());
+        this.isActive = (player.getId().equals(state.getActivePlayerId()));
+        this.hasLeft = player.hasLeft();
+        for (Card card: player.getGraveyard().getCards(game)) {
+            graveyard.put(card.getId(), new SimpleCardView(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.isFaceDown()));
+        }
+        for (Permanent permanent: state.getBattlefield().getAllPermanents()) {
+            if (showInBattlefield(permanent, state)) {
+                PermanentView view = new PermanentView(permanent, game.getCard(permanent.getId()));
+                battlefield.put(view.getId(), view);
+            }
+        }
+        this.topCard = player.isTopCardRevealed() && player.getLibrary().size() > 0 ?
+                new CardView(player.getLibrary().getFromTop(game)) : null;
+        if (player.getUserData() != null) {
+            this.userDataView = new UserDataView(player.getUserData());
+        } else {
+            this.userDataView = new UserDataView(0);
+        }
+    }
 
-	private boolean showInBattlefield(Permanent permanent, GameState state) {
+    private boolean showInBattlefield(Permanent permanent, GameState state) {
 
-		//show permanents controlled by player or attachments to permanents controlled by player
-		if (permanent.getAttachedTo() == null)
-			return permanent.getControllerId().equals(playerId);
-		else {
-			Permanent attachedTo = state.getPermanent(permanent.getAttachedTo());
-			if (attachedTo != null)
-				return attachedTo.getControllerId().equals(playerId);
-			else
-				return permanent.getControllerId().equals(playerId);
-		}
-	}
+        //show permanents controlled by player or attachments to permanents controlled by player
+        if (permanent.getAttachedTo() == null)
+            return permanent.getControllerId().equals(playerId);
+        else {
+            Permanent attachedTo = state.getPermanent(permanent.getAttachedTo());
+            if (attachedTo != null)
+                return attachedTo.getControllerId().equals(playerId);
+            else
+                return permanent.getControllerId().equals(playerId);
+        }
+    }
 
-	public int getLife() {
-		return this.life;
-	}
+    public int getLife() {
+        return this.life;
+    }
 
-	public int getPoison() {
-		return this.poison;
-	}
+    public int getPoison() {
+        return this.poison;
+    }
 
-	public int getLibraryCount() {
-		return this.libraryCount;
-	}
+    public int getLibraryCount() {
+        return this.libraryCount;
+    }
 
-	public int getHandCount() {
-		return this.handCount;
-	}
+    public int getHandCount() {
+        return this.handCount;
+    }
 
-	public ManaPoolView getManaPool() {
-		return this.manaPool;
-	}
+    public ManaPoolView getManaPool() {
+        return this.manaPool;
+    }
 
-	public SimpleCardsView getGraveyard() {
-		return this.graveyard;
-	}
+    public SimpleCardsView getGraveyard() {
+        return this.graveyard;
+    }
 
-	public Map<UUID, PermanentView> getBattlefield() {
-		return this.battlefield;
-	}
+    public Map<UUID, PermanentView> getBattlefield() {
+        return this.battlefield;
+    }
 
-	public UUID getPlayerId() {
-		return this.playerId;
-	}
+    public UUID getPlayerId() {
+        return this.playerId;
+    }
 
-	public String getName() {
-		return this.name;
-	}
+    public String getName() {
+        return this.name;
+    }
 
-	public boolean isActive() {
-		return this.isActive;
-	}
+    public boolean isActive() {
+        return this.isActive;
+    }
 
-	public boolean hasLeft() {
-		return this.hasLeft;
-	}
+    public boolean hasLeft() {
+        return this.hasLeft;
+    }
 
-	public CardView getTopCard() {
-		return this.topCard;
-	}
+    public CardView getTopCard() {
+        return this.topCard;
+    }
 
-	public UserDataView getUserData() {
-		return this.userDataView;
-	}
+    public UserDataView getUserData() {
+        return this.userDataView;
+    }
 }

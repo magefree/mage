@@ -62,7 +62,7 @@ public class VedalkenCertarch extends CardImpl<VedalkenCertarch> {
         this.expansionSetCode = "SOM";
         this.subtype.add("Vedalken");
         this.subtype.add("Wizard");
-		this.color.setBlue(true);
+        this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         Ability ability = new MetalcraftActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapSourceCost());

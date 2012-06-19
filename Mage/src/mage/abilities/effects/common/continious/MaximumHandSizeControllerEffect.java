@@ -42,60 +42,60 @@ import mage.players.Player;
  */
 public class MaximumHandSizeControllerEffect extends ContinuousEffectImpl<MaximumHandSizeControllerEffect> {
 
-	protected int handSize;
-	protected boolean reduce;
+    protected int handSize;
+    protected boolean reduce;
 
-	/**
-	 * @param handSize Maximum hand size to set or to reduce by
-	 * @param duration Effect duration
-	 * @param reduce   If true, the hand size will be reduced related to current value, otherwise it will be set.
-	 */
-	public MaximumHandSizeControllerEffect(int handSize, Duration duration, boolean reduce) {
-		super(duration, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
-		this.handSize = handSize;
-		this.reduce = reduce;
-		setText();
-	}
+    /**
+     * @param handSize Maximum hand size to set or to reduce by
+     * @param duration Effect duration
+     * @param reduce   If true, the hand size will be reduced related to current value, otherwise it will be set.
+     */
+    public MaximumHandSizeControllerEffect(int handSize, Duration duration, boolean reduce) {
+        super(duration, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
+        this.handSize = handSize;
+        this.reduce = reduce;
+        setText();
+    }
 
-	public MaximumHandSizeControllerEffect(final MaximumHandSizeControllerEffect effect) {
-		super(effect);
-		this.handSize = effect.handSize;
-		this.reduce = effect.reduce;
-	}
+    public MaximumHandSizeControllerEffect(final MaximumHandSizeControllerEffect effect) {
+        super(effect);
+        this.handSize = effect.handSize;
+        this.reduce = effect.reduce;
+    }
 
-	@Override
-	public MaximumHandSizeControllerEffect copy() {
-		return new MaximumHandSizeControllerEffect(this);
-	}
+    @Override
+    public MaximumHandSizeControllerEffect copy() {
+        return new MaximumHandSizeControllerEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-		if (player != null) {
-			if (reduce) {
-				player.setMaxHandSize(player.getMaxHandSize() - handSize);
-			} else {
-				player.setMaxHandSize(handSize);
-			}
-			return true;
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+            if (reduce) {
+                player.setMaxHandSize(player.getMaxHandSize() - handSize);
+            } else {
+                player.setMaxHandSize(handSize);
+            }
+            return true;
+        }
+        return true;
+    }
 
-	private void setText() {
+    private void setText() {
 
-		if (handSize == Integer.MAX_VALUE) {
-			staticText = "You have no maximum hand size";
-		} else {
-			StringBuilder sb = new StringBuilder("Your maximum hand size is ");
-			if (reduce) {
-				sb.append("reduced by ");
-				sb.append(Integer.toString(handSize));
-			} else {
-				sb.append(Integer.toString(handSize));
-			}
-			staticText = sb.toString();
-		}
-	}
+        if (handSize == Integer.MAX_VALUE) {
+            staticText = "You have no maximum hand size";
+        } else {
+            StringBuilder sb = new StringBuilder("Your maximum hand size is ");
+            if (reduce) {
+                sb.append("reduced by ");
+                sb.append(Integer.toString(handSize));
+            } else {
+                sb.append(Integer.toString(handSize));
+            }
+            staticText = sb.toString();
+        }
+    }
 
 }

@@ -81,7 +81,7 @@ public class BoostTargetEffect extends ContinuousEffectImpl<BoostTargetEffect> {
     public BoostTargetEffect copy() {
         return new BoostTargetEffect(this);
     }
-    
+
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
@@ -91,7 +91,7 @@ public class BoostTargetEffect extends ContinuousEffectImpl<BoostTargetEffect> {
         }
         targetPointer.init(game, source);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         int affectedTargets = 0;

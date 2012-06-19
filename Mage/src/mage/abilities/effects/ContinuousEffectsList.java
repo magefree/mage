@@ -41,56 +41,56 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
     private final Map<UUID, Ability> abilityMap = new HashMap<UUID, Ability>();
 
     public ContinuousEffectsList() { }
-    
-	public ContinuousEffectsList(final ContinuousEffectsList<T> effects) {
+
+    public ContinuousEffectsList(final ContinuousEffectsList<T> effects) {
         this.ensureCapacity(effects.size());
-		for (ContinuousEffect cost: effects) {
-			this.add((T)cost.copy());
-		}
-		for (Map.Entry<UUID, Ability> entry: effects.abilityMap.entrySet()) {
-			abilityMap.put(entry.getKey(), entry.getValue().copy());
-		}
-	}
-    
+        for (ContinuousEffect cost: effects) {
+            this.add((T)cost.copy());
+        }
+        for (Map.Entry<UUID, Ability> entry: effects.abilityMap.entrySet()) {
+            abilityMap.put(entry.getKey(), entry.getValue().copy());
+        }
+    }
+
     public ContinuousEffectsList copy() {
         return new ContinuousEffectsList(this);
     }
-    
-	public void removeEndOfTurnEffects() {
-		for (Iterator<T> i = this.iterator(); i.hasNext();) {
-			T entry = i.next();
-			if (entry.getDuration() == Constants.Duration.EndOfTurn) {
-				i.remove();
-                abilityMap.remove(entry.getId());
-            }
-		}
-    }
-    
-    public void removeInactiveEffects(Game game) {
-		for (Iterator<T> i = this.iterator(); i.hasNext();) {
+
+    public void removeEndOfTurnEffects() {
+        for (Iterator<T> i = this.iterator(); i.hasNext();) {
             T entry = i.next();
-			if (isInactive(entry, game)) {
-				i.remove();
+            if (entry.getDuration() == Constants.Duration.EndOfTurn) {
+                i.remove();
                 abilityMap.remove(entry.getId());
             }
-		}
+        }
     }
-    
+
+    public void removeInactiveEffects(Game game) {
+        for (Iterator<T> i = this.iterator(); i.hasNext();) {
+            T entry = i.next();
+            if (isInactive(entry, game)) {
+                i.remove();
+                abilityMap.remove(entry.getId());
+            }
+        }
+    }
+
     private boolean isInactive(T effect, Game game) {
         Ability ability = abilityMap.get(effect.getId());
         if (ability == null)
             return true;
-		switch(effect.getDuration()) {
-			case WhileOnBattlefield:
+        switch(effect.getDuration()) {
+            case WhileOnBattlefield:
                 if (game.getObject(ability.getSourceId()) == null)
                     return (true);
-			case OneUse:
-				return effect.isUsed();
-			case Custom:
-				return effect.isInactive(abilityMap.get(effect.getId()), game);
-		}
-		return false;
-	}
+            case OneUse:
+                return effect.isUsed();
+            case Custom:
+                return effect.isInactive(abilityMap.get(effect.getId()), game);
+        }
+        return false;
+    }
 
     public void addEffect(T effect, Ability source) {
         if (abilityMap.containsKey(effect.getId()))
@@ -102,7 +102,7 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
     public Ability getAbility(UUID effectId) {
         return abilityMap.get(effectId);
     }
-    
+
     @Override
     public void clear() {
         super.clear();

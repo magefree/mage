@@ -52,7 +52,7 @@ public class WallOfFaith extends CardImpl<WallOfFaith> {
         this.color.setWhite(true);
         this.subtype.add("Wall");
         this.power = new MageInt(0);
-	this.toughness = new MageInt(5);
+    this.toughness = new MageInt(5);
 
         this.addAbility(DefenderAbility.getInstance());
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ManaCostsImpl("{W}")));

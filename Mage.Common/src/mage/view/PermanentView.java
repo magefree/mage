@@ -43,82 +43,82 @@ import mage.game.permanent.PermanentToken;
 public class PermanentView extends CardView {
     private static final long serialVersionUID = 1L;
 
-	private boolean tapped;
-	private boolean flipped;
-	private boolean phasedIn;
-	private boolean faceUp;
-	private boolean summoningSickness;
-	private int damage;
-	private List<UUID> attachments;
-	private List<CounterView> counters;
-	private CardView original;
+    private boolean tapped;
+    private boolean flipped;
+    private boolean phasedIn;
+    private boolean faceUp;
+    private boolean summoningSickness;
+    private int damage;
+    private List<UUID> attachments;
+    private List<CounterView> counters;
+    private CardView original;
 
-	public PermanentView(Permanent permanent, Card card) {
-		super(permanent);
-		this.rules = permanent.getRules();
-		this.tapped = permanent.isTapped();
-		this.flipped = permanent.isFlipped();
-		this.phasedIn = permanent.isPhasedIn();
-		this.faceUp = permanent.isFaceUp();
-		this.summoningSickness = permanent.hasSummoningSickness();
-		this.damage = permanent.getDamage();
-		if (permanent.getAttachments().size() > 0) {
-			attachments = new ArrayList<UUID>();
-			attachments.addAll(permanent.getAttachments());
-		}
-		if (permanent.getCounters().size() > 0) {
-			counters = new ArrayList<CounterView>();
-			for (Counter counter: permanent.getCounters().values()) {
-				counters.add(new CounterView(counter));
-			}
-		}
-		if (permanent instanceof PermanentToken) {
-			original = new CardView(((PermanentToken)permanent).getToken());
-			original.expansionSetCode = permanent.getExpansionSetCode();
-		}
-		else {
-			original = new CardView(card);
-		}
-		this.transformed = permanent.isTransformed();
-	}
+    public PermanentView(Permanent permanent, Card card) {
+        super(permanent);
+        this.rules = permanent.getRules();
+        this.tapped = permanent.isTapped();
+        this.flipped = permanent.isFlipped();
+        this.phasedIn = permanent.isPhasedIn();
+        this.faceUp = permanent.isFaceUp();
+        this.summoningSickness = permanent.hasSummoningSickness();
+        this.damage = permanent.getDamage();
+        if (permanent.getAttachments().size() > 0) {
+            attachments = new ArrayList<UUID>();
+            attachments.addAll(permanent.getAttachments());
+        }
+        if (permanent.getCounters().size() > 0) {
+            counters = new ArrayList<CounterView>();
+            for (Counter counter: permanent.getCounters().values()) {
+                counters.add(new CounterView(counter));
+            }
+        }
+        if (permanent instanceof PermanentToken) {
+            original = new CardView(((PermanentToken)permanent).getToken());
+            original.expansionSetCode = permanent.getExpansionSetCode();
+        }
+        else {
+            original = new CardView(card);
+        }
+        this.transformed = permanent.isTransformed();
+    }
 
-	public boolean isTapped() {
-		return tapped;
-	}
+    public boolean isTapped() {
+        return tapped;
+    }
 
-	public int getDamage() {
-		return damage;
-	}
+    public int getDamage() {
+        return damage;
+    }
 
-	public boolean isFlipped() {
-		return flipped;
-	}
+    public boolean isFlipped() {
+        return flipped;
+    }
 
-	public boolean isPhasedIn() {
-		return phasedIn;
-	}
+    public boolean isPhasedIn() {
+        return phasedIn;
+    }
 
-	public boolean isFaceUp() {
-		return faceUp;
-	}
+    public boolean isFaceUp() {
+        return faceUp;
+    }
 
-	public boolean hasSummoningSickness(){
-		return summoningSickness;
-	}
+    public boolean hasSummoningSickness(){
+        return summoningSickness;
+    }
 
-	public List<UUID> getAttachments() {
-		return attachments;
-	}
+    public List<UUID> getAttachments() {
+        return attachments;
+    }
 
-	public List<CounterView> getCounters() {
-		return counters;
-	}
+    public List<CounterView> getCounters() {
+        return counters;
+    }
 
-	public CardView getOriginal() {
-		return original;
-	}
-	
-	public void overrideTapped(boolean tapped) {
-		this.tapped = tapped;
-	}
+    public CardView getOriginal() {
+        return original;
+    }
+
+    public void overrideTapped(boolean tapped) {
+        this.tapped = tapped;
+    }
 }

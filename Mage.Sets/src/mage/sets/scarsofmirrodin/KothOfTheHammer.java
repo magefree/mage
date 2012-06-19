@@ -68,7 +68,7 @@ public class KothOfTheHammer extends CardImpl<KothOfTheHammer> {
 
     static {
         filter.getSubtype().add("Mountain");
-		filter.setTargetController(Constants.TargetController.YOU);
+        filter.setTargetController(Constants.TargetController.YOU);
         filterCount.getSubtype().add("Mountain");
         filterCount.setTargetController(Constants.TargetController.YOU);
     }
@@ -77,9 +77,9 @@ public class KothOfTheHammer extends CardImpl<KothOfTheHammer> {
         super(ownerId, 94, "Koth of the Hammer", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{R}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Koth");
-		this.color.setRed(true);
+        this.color.setRed(true);
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), ""));
-        
+
         Ability ability = new LoyaltyAbility(new UntapTargetEffect(), 1);
         ability.addEffect(new BecomesCreatureTargetEffect(new KothOfTheHammerToken(), "land", Duration.EndOfTurn));
         ability.addTarget(new TargetLandPermanent(filter));
@@ -99,15 +99,15 @@ public class KothOfTheHammer extends CardImpl<KothOfTheHammer> {
 }
 class KothOfTheHammerToken extends Token {
 
-	public KothOfTheHammerToken() {
-		super("Elemental", "4/4 red Elemental");
-		this.cardType.add(CardType.CREATURE);
-		this.subtype.add("Elemental");
+    public KothOfTheHammerToken() {
+        super("Elemental", "4/4 red Elemental");
+        this.cardType.add(CardType.CREATURE);
+        this.subtype.add("Elemental");
 
-		this.color.setRed(true);
-		this.power = new MageInt(4);
-		this.toughness = new MageInt(4);
-	}
+        this.color.setRed(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
+    }
 }
 
 class KothOfTheHammerThirdEffect extends ContinuousEffectImpl<KothOfTheHammerThirdEffect> {
@@ -121,7 +121,7 @@ class KothOfTheHammerThirdEffect extends ContinuousEffectImpl<KothOfTheHammerThi
     }
 
     @Override
-	public boolean apply(Constants.Layer layer, Constants.SubLayer sublayer, Ability source, Game game) {
+    public boolean apply(Constants.Layer layer, Constants.SubLayer sublayer, Ability source, Game game) {
         switch (layer) {
             case AbilityAddingRemovingEffects_6:
                 if (sublayer == Constants.SubLayer.NA) {
@@ -147,8 +147,8 @@ class KothOfTheHammerThirdEffect extends ContinuousEffectImpl<KothOfTheHammerThi
     }
 
     @Override
-	public boolean hasLayer(Constants.Layer layer) {
-		return layer == Constants.Layer.AbilityAddingRemovingEffects_6;
-	}
+    public boolean hasLayer(Constants.Layer layer) {
+        return layer == Constants.Layer.AbilityAddingRemovingEffects_6;
+    }
 
 }

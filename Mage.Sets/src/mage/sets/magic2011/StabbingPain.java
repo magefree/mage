@@ -43,21 +43,21 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class StabbingPain extends CardImpl<StabbingPain> {
 
-	public StabbingPain(UUID ownerId) {
-		super(ownerId, 118, "Stabbing Pain", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
-		this.expansionSetCode = "M11";
-		this.color.setBlack(true);
-		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-		this.getSpellAbility().addEffect(new BoostTargetEffect(-1, -1, Duration.EndOfTurn));
-		this.getSpellAbility().addEffect(new TapTargetEffect());
-	}
+    public StabbingPain(UUID ownerId) {
+        super(ownerId, 118, "Stabbing Pain", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
+        this.expansionSetCode = "M11";
+        this.color.setBlack(true);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addEffect(new BoostTargetEffect(-1, -1, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new TapTargetEffect());
+    }
 
-	public StabbingPain(final StabbingPain card) {
-		super(card);
-	}
+    public StabbingPain(final StabbingPain card) {
+        super(card);
+    }
 
-	@Override
-	public StabbingPain copy() {
-		return new StabbingPain(this);
-	}
+    @Override
+    public StabbingPain copy() {
+        return new StabbingPain(this);
+    }
 }

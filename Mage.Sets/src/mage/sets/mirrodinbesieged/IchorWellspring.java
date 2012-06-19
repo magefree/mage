@@ -42,20 +42,20 @@ import java.util.UUID;
  */
 public class IchorWellspring extends CardImpl<IchorWellspring> {
 
-	public IchorWellspring(UUID ownerId) {
-		super(ownerId, 110, "Ichor Wellspring", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-		this.expansionSetCode = "MBS";
-		this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(1)));
-		this.addAbility(new DiesTriggeredAbility(new DrawCardControllerEffect(1)));
-	}
+    public IchorWellspring(UUID ownerId) {
+        super(ownerId, 110, "Ichor Wellspring", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
+        this.expansionSetCode = "MBS";
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(1)));
+        this.addAbility(new DiesTriggeredAbility(new DrawCardControllerEffect(1)));
+    }
 
-	public IchorWellspring(final IchorWellspring card) {
-		super(card);
-	}
+    public IchorWellspring(final IchorWellspring card) {
+        super(card);
+    }
 
-	@Override
-	public IchorWellspring copy() {
-		return new IchorWellspring(this);
-	}
+    @Override
+    public IchorWellspring copy() {
+        return new IchorWellspring(this);
+    }
 
 }

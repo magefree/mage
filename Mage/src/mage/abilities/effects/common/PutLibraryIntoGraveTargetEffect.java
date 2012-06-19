@@ -45,47 +45,47 @@ import mage.players.Player;
  */
 public class PutLibraryIntoGraveTargetEffect extends OneShotEffect<PutLibraryIntoGraveTargetEffect> {
 
-	private DynamicValue amount;
+    private DynamicValue amount;
 
     public PutLibraryIntoGraveTargetEffect(int amount) {
         this(new StaticValue(amount));
     }
 
-	public PutLibraryIntoGraveTargetEffect(DynamicValue amount) {
-		super(Outcome.Detriment);
-		this.amount = amount;
-	}
+    public PutLibraryIntoGraveTargetEffect(DynamicValue amount) {
+        super(Outcome.Detriment);
+        this.amount = amount;
+    }
 
-	public PutLibraryIntoGraveTargetEffect(final PutLibraryIntoGraveTargetEffect effect) {
-		super(effect);
-		this.amount = effect.amount.clone();
-	}
+    public PutLibraryIntoGraveTargetEffect(final PutLibraryIntoGraveTargetEffect effect) {
+        super(effect);
+        this.amount = effect.amount.clone();
+    }
 
-	public void setAmount(DynamicValue value) {
-		this.amount = value;
-	}
+    public void setAmount(DynamicValue value) {
+        this.amount = value;
+    }
 
-	@Override
-	public PutLibraryIntoGraveTargetEffect copy() {
-		return new PutLibraryIntoGraveTargetEffect(this);
-	}
+    @Override
+    public PutLibraryIntoGraveTargetEffect copy() {
+        return new PutLibraryIntoGraveTargetEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(targetPointer.getFirst(game, source));
-		if (player != null) {
-			// putting cards to grave shouldn't end the game, so getting minimun available
-			int cardsCount = Math.min(amount.calculate(game, source), player.getLibrary().size());
-			for (int i = 0; i < cardsCount; i++) {
-				Card card = player.getLibrary().removeFromTop(game);
-				if (card != null)
-					card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
-				else
-					break;
-			}
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        if (player != null) {
+            // putting cards to grave shouldn't end the game, so getting minimun available
+            int cardsCount = Math.min(amount.calculate(game, source), player.getLibrary().size());
+            for (int i = 0; i < cardsCount; i++) {
+                Card card = player.getLibrary().removeFromTop(game);
+                if (card != null)
+                    card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
+                else
+                    break;
+            }
+        }
+        return true;
+    }
 
     @Override
     public String getText(Mode mode) {

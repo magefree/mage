@@ -57,122 +57,122 @@ import java.util.UUID;
  */
 public class PrototypePortal extends CardImpl<PrototypePortal> {
 
-	public PrototypePortal(UUID ownerId) {
-		super(ownerId, 195, "Prototype Portal", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-		this.expansionSetCode = "SOM";
+    public PrototypePortal(UUID ownerId) {
+        super(ownerId, 195, "Prototype Portal", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
+        this.expansionSetCode = "SOM";
 
-		// Imprint - When Prototype Portal enters the battlefield, you may exile an artifact card from your hand.
-		this.addAbility(new EntersBattlefieldTriggeredAbility(new PrototypePortalEffect(), true));
+        // Imprint - When Prototype Portal enters the battlefield, you may exile an artifact card from your hand.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new PrototypePortalEffect(), true));
 
-		// {X}, {tap}: Put a token that's a copy of the exiled card onto the battlefield. X is the converted mana cost of that card.
-		Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new PrototypePortalCreateTokenEffect(), new ManaCostsImpl("{X}"));
-		ability.addCost(new TapSourceCost());
-		this.addAbility(ability);
-	}
+        // {X}, {tap}: Put a token that's a copy of the exiled card onto the battlefield. X is the converted mana cost of that card.
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new PrototypePortalCreateTokenEffect(), new ManaCostsImpl("{X}"));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
+    }
 
-	public PrototypePortal(final PrototypePortal card) {
-		super(card);
-	}
+    public PrototypePortal(final PrototypePortal card) {
+        super(card);
+    }
 
-	@Override
-	public void adjustCosts(Ability ability, Game game) {
-		Permanent card = game.getPermanent(ability.getSourceId());
-		if (card != null) {
-			if (card.getImprinted().size() > 0) {
-				Card imprinted = game.getCard(card.getImprinted().get(0));
-				if (imprinted != null) {
-					ability.getManaCostsToPay().add(0, new GenericManaCost(imprinted.getManaCost().convertedManaCost()));
-				}
-			}
-		}
+    @Override
+    public void adjustCosts(Ability ability, Game game) {
+        Permanent card = game.getPermanent(ability.getSourceId());
+        if (card != null) {
+            if (card.getImprinted().size() > 0) {
+                Card imprinted = game.getCard(card.getImprinted().get(0));
+                if (imprinted != null) {
+                    ability.getManaCostsToPay().add(0, new GenericManaCost(imprinted.getManaCost().convertedManaCost()));
+                }
+            }
+        }
 
-		// no {X} anymore as we already have imprinted the card with defined manacost
-		for (ManaCost cost : ability.getManaCostsToPay()) {
-			if (cost instanceof VariableCost) {
-				cost.setPaid();
-			}
-		}
-	}
+        // no {X} anymore as we already have imprinted the card with defined manacost
+        for (ManaCost cost : ability.getManaCostsToPay()) {
+            if (cost instanceof VariableCost) {
+                cost.setPaid();
+            }
+        }
+    }
 
-	@Override
-	public PrototypePortal copy() {
-		return new PrototypePortal(this);
-	}
+    @Override
+    public PrototypePortal copy() {
+        return new PrototypePortal(this);
+    }
 }
 
 class PrototypePortalEffect extends OneShotEffect<PrototypePortalEffect> {
 
-	private static FilterCard filter = new FilterArtifactCard();
+    private static FilterCard filter = new FilterArtifactCard();
 
-	public PrototypePortalEffect() {
-		super(Constants.Outcome.Benefit);
-		staticText = "exile an artifact card from your hand";
-	}
+    public PrototypePortalEffect() {
+        super(Constants.Outcome.Benefit);
+        staticText = "exile an artifact card from your hand";
+    }
 
-	public PrototypePortalEffect(PrototypePortalEffect effect) {
-		super(effect);
-	}
+    public PrototypePortalEffect(PrototypePortalEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-		if (player.getHand().size() > 0) {
-			TargetCard target = new TargetCard(Constants.Zone.HAND, filter);
-			target.setRequired(true);
-			player.choose(Constants.Outcome.Benefit, player.getHand(), target, game);
-			Card card = player.getHand().get(target.getFirstTarget(), game);
-			if (card != null) {
-				card.moveToExile(getId(), "Prototype Portal (Imprint)", source.getSourceId(), game);
-				Permanent permanent = game.getPermanent(source.getSourceId());
-				if (permanent != null) {
-					permanent.imprint(card.getId(), game);
-				}
-				return true;
-			}
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player.getHand().size() > 0) {
+            TargetCard target = new TargetCard(Constants.Zone.HAND, filter);
+            target.setRequired(true);
+            player.choose(Constants.Outcome.Benefit, player.getHand(), target, game);
+            Card card = player.getHand().get(target.getFirstTarget(), game);
+            if (card != null) {
+                card.moveToExile(getId(), "Prototype Portal (Imprint)", source.getSourceId(), game);
+                Permanent permanent = game.getPermanent(source.getSourceId());
+                if (permanent != null) {
+                    permanent.imprint(card.getId(), game);
+                }
+                return true;
+            }
+        }
+        return true;
+    }
 
-	@Override
-	public PrototypePortalEffect copy() {
-		return new PrototypePortalEffect(this);
-	}
+    @Override
+    public PrototypePortalEffect copy() {
+        return new PrototypePortalEffect(this);
+    }
 
 }
 
 class PrototypePortalCreateTokenEffect extends OneShotEffect<PrototypePortalCreateTokenEffect> {
 
-	public PrototypePortalCreateTokenEffect() {
-		super(Constants.Outcome.PutCreatureInPlay);
-		this.staticText = "Put a token that's a copy of the exiled card onto the battlefield. X is the converted mana cost of that card";
-	}
+    public PrototypePortalCreateTokenEffect() {
+        super(Constants.Outcome.PutCreatureInPlay);
+        this.staticText = "Put a token that's a copy of the exiled card onto the battlefield. X is the converted mana cost of that card";
+    }
 
-	public PrototypePortalCreateTokenEffect(final PrototypePortalCreateTokenEffect effect) {
-		super(effect);
-	}
+    public PrototypePortalCreateTokenEffect(final PrototypePortalCreateTokenEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public PrototypePortalCreateTokenEffect copy() {
-		return new PrototypePortalCreateTokenEffect(this);
-	}
+    @Override
+    public PrototypePortalCreateTokenEffect copy() {
+        return new PrototypePortalCreateTokenEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getSourceId());
-		if (permanent == null) return false;
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent == null) return false;
 
-		if (permanent.getImprinted().size() > 0) {
-			Card card = game.getCard(permanent.getImprinted().get(0));
-			if (card != null) {
-				EmptyToken token = new EmptyToken();
-				CardUtil.copyTo(token).from(card);
-				token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
-				return true;
-			}
-		}
+        if (permanent.getImprinted().size() > 0) {
+            Card card = game.getCard(permanent.getImprinted().get(0));
+            if (card != null) {
+                EmptyToken token = new EmptyToken();
+                CardUtil.copyTo(token).from(card);
+                token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+                return true;
+            }
+        }
 
-		return false;
-	}
+        return false;
+    }
 
 }
 

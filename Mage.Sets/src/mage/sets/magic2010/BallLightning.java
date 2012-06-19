@@ -45,26 +45,26 @@ import mage.game.events.GameEvent.EventType;
  */
 public class BallLightning extends CardImpl<BallLightning> {
 
-	public BallLightning(UUID ownerId) {
-		super(ownerId, 125, "Ball Lightning", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}{R}{R}");
-		this.expansionSetCode = "M10";
-		this.subtype.add("Elemental");
-		this.color.setRed(true);
-		this.power = new MageInt(6);
-		this.toughness = new MageInt(1);
+    public BallLightning(UUID ownerId) {
+        super(ownerId, 125, "Ball Lightning", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}{R}{R}");
+        this.expansionSetCode = "M10";
+        this.subtype.add("Elemental");
+        this.color.setRed(true);
+        this.power = new MageInt(6);
+        this.toughness = new MageInt(1);
 
-		this.addAbility(TrampleAbility.getInstance());
-		this.addAbility(HasteAbility.getInstance());
-		this.addAbility(new OnEventTriggeredAbility(EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new SacrificeSourceEffect()));
-	}
+        this.addAbility(TrampleAbility.getInstance());
+        this.addAbility(HasteAbility.getInstance());
+        this.addAbility(new OnEventTriggeredAbility(EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new SacrificeSourceEffect()));
+    }
 
-	public BallLightning(final BallLightning card) {
-		super(card);
-	}
+    public BallLightning(final BallLightning card) {
+        super(card);
+    }
 
-	@Override
-	public BallLightning copy() {
-		return new BallLightning(this);
-	}
+    @Override
+    public BallLightning copy() {
+        return new BallLightning(this);
+    }
 
 }

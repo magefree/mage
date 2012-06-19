@@ -45,9 +45,9 @@ public class ZombieOutlander extends CardImpl<ZombieOutlander> {
     private static final FilterCard filter = new FilterCard("green");
 
     static {
-    	filter.setUseColor(true);
-    	filter.getColor().setGreen(true);
-		filter.setScopeColor(ComparisonScope.Any);
+        filter.setUseColor(true);
+        filter.getColor().setGreen(true);
+        filter.setScopeColor(ComparisonScope.Any);
     }
 
     public ZombieOutlander(UUID ownerId) {
@@ -58,7 +58,7 @@ public class ZombieOutlander extends CardImpl<ZombieOutlander> {
         this.subtype.add("Zombie");
         this.subtype.add("Scout");
         this.power = new MageInt(2);
-    	this.toughness = new MageInt(2);
+        this.toughness = new MageInt(2);
         this.addAbility(new ProtectionAbility(filter));
     }
 

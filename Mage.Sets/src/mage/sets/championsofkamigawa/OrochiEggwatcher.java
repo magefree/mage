@@ -73,7 +73,7 @@ public class OrochiEggwatcher extends CardImpl<OrochiEggwatcher> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.flipCard = true;
-        
+
         // {2}{G}, {T}: Put a 1/1 green Snake creature token onto the battlefield. If you control ten or more creatures, flip Orochi Eggwatcher.
         Ability ability;
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SnakeToken()),new ManaCostsImpl("{2}{G}"));

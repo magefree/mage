@@ -50,65 +50,65 @@ import mage.filter.Filter.ComparisonType;
  */
 public class GreenSunsZenith extends CardImpl<GreenSunsZenith> {
 
-	public GreenSunsZenith(UUID ownerId) {
-		super(ownerId, 81, "Green Sun's Zenith", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{G}");
-		this.expansionSetCode = "MBS";
-		this.color.setGreen(true);
-		this.getSpellAbility().addEffect(new GreenSunsZenithSearchEffect());
-		this.getSpellAbility().addEffect(ShuffleSpellEffect.getInstance());
-	}
+    public GreenSunsZenith(UUID ownerId) {
+        super(ownerId, 81, "Green Sun's Zenith", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{G}");
+        this.expansionSetCode = "MBS";
+        this.color.setGreen(true);
+        this.getSpellAbility().addEffect(new GreenSunsZenithSearchEffect());
+        this.getSpellAbility().addEffect(ShuffleSpellEffect.getInstance());
+    }
 
-	public GreenSunsZenith(final GreenSunsZenith card) {
-		super(card);
-	}
+    public GreenSunsZenith(final GreenSunsZenith card) {
+        super(card);
+    }
 
-	@Override
-	public GreenSunsZenith copy() {
-		return new GreenSunsZenith(this);
-	}
+    @Override
+    public GreenSunsZenith copy() {
+        return new GreenSunsZenith(this);
+    }
 
 }
 
 class GreenSunsZenithSearchEffect extends OneShotEffect<GreenSunsZenithSearchEffect> {
-	GreenSunsZenithSearchEffect() {
-		super(Constants.Outcome.PutCreatureInPlay);
-		staticText = "Search your library for a green creature card with converted mana cost X or less, put it onto the battlefield, then shuffle your library";
-	}
+    GreenSunsZenithSearchEffect() {
+        super(Constants.Outcome.PutCreatureInPlay);
+        staticText = "Search your library for a green creature card with converted mana cost X or less, put it onto the battlefield, then shuffle your library";
+    }
 
-	GreenSunsZenithSearchEffect(final GreenSunsZenithSearchEffect effect) {
-		super(effect);
-	}
+    GreenSunsZenithSearchEffect(final GreenSunsZenithSearchEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
         if (player == null)
             return false;
-		FilterCard filter = new FilterCard("green creature card with converted mana cost X or less");
-		filter.getColor().setGreen(true);
-		filter.setUseColor(true);
-		filter.getCardType().add(CardType.CREATURE);
+        FilterCard filter = new FilterCard("green creature card with converted mana cost X or less");
+        filter.getColor().setGreen(true);
+        filter.setUseColor(true);
+        filter.getCardType().add(CardType.CREATURE);
         filter.setScopeCardType(Filter.ComparisonScope.Any);
-		//Set the mana cost one higher to 'emulate' a less than or equal to comparison.
-		filter.setConvertedManaCost(source.getManaCostsToPay().getX() + 1);
-		filter.setConvertedManaCostComparison(ComparisonType.LessThan);
-		TargetCardInLibrary target = new TargetCardInLibrary(filter);
-		if (player.searchLibrary(target, game)) {
-			if (target.getTargets().size() > 0) {
+        //Set the mana cost one higher to 'emulate' a less than or equal to comparison.
+        filter.setConvertedManaCost(source.getManaCostsToPay().getX() + 1);
+        filter.setConvertedManaCostComparison(ComparisonType.LessThan);
+        TargetCardInLibrary target = new TargetCardInLibrary(filter);
+        if (player.searchLibrary(target, game)) {
+            if (target.getTargets().size() > 0) {
                 Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
                 if (card != null)
                     card.putOntoBattlefield(game, Constants.Zone.HAND, source.getId(), source.getControllerId());
-			}
+            }
             player.shuffleLibrary(game);
             return true;
-		}
+        }
         player.shuffleLibrary(game);
-		return false;
-	}
+        return false;
+    }
 
-	@Override
-	public GreenSunsZenithSearchEffect copy() {
-		return new GreenSunsZenithSearchEffect(this);
-	}
+    @Override
+    public GreenSunsZenithSearchEffect copy() {
+        return new GreenSunsZenithSearchEffect(this);
+    }
 
 }

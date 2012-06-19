@@ -12,13 +12,13 @@ import java.util.UUID;
  */
 public class Splitter {
 
-	public static List<UUID> split(Game game, UUID playerId) {
-		List<UUID> players = new ArrayList<UUID>();
-		//players.add(playerId); // add original player
-		Player player = game.getPlayer(playerId);
-		if (player != null && player.getTurnControlledBy() != null) {
-			players.add(player.getTurnControlledBy());
-		}
-		return players;
-	}
+    public static List<UUID> split(Game game, UUID playerId) {
+        List<UUID> players = new ArrayList<UUID>();
+        //players.add(playerId); // add original player
+        Player player = game.getPlayer(playerId);
+        if (player != null && player.getTurnControlledBy() != null) {
+            players.add(player.getTurnControlledBy());
+        }
+        return players;
+    }
 }

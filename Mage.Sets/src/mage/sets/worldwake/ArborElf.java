@@ -48,34 +48,34 @@ import mage.target.common.TargetLandPermanent;
  */
 public class ArborElf extends CardImpl<ArborElf> {
 
-	private static final FilterLandPermanent filter = new FilterLandPermanent();
+    private static final FilterLandPermanent filter = new FilterLandPermanent();
 
-	static {
-		filter.getSubtype().add("Forest");
+    static {
+        filter.getSubtype().add("Forest");
         filter.setScopeSubtype(Filter.ComparisonScope.Any);
-	}
+    }
 
-	public ArborElf(UUID ownerId) {
-		super(ownerId, 95, "Arbor Elf", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
-		this.expansionSetCode = "WWK";
-		this.subtype.add("Elf");
-		this.subtype.add("Druid");
-		this.color.setGreen(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
-		TargetLandPermanent target = new TargetLandPermanent(filter);
-		ability.addTarget(target);
-		this.addAbility(ability);
-	}
+    public ArborElf(UUID ownerId) {
+        super(ownerId, 95, "Arbor Elf", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
+        this.expansionSetCode = "WWK";
+        this.subtype.add("Elf");
+        this.subtype.add("Druid");
+        this.color.setGreen(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
+        TargetLandPermanent target = new TargetLandPermanent(filter);
+        ability.addTarget(target);
+        this.addAbility(ability);
+    }
 
-	public ArborElf(final ArborElf card) {
-		super(card);
-	}
+    public ArborElf(final ArborElf card) {
+        super(card);
+    }
 
-	@Override
-	public ArborElf copy() {
-		return new ArborElf(this);
-	}
+    @Override
+    public ArborElf copy() {
+        return new ArborElf(this);
+    }
 
 }

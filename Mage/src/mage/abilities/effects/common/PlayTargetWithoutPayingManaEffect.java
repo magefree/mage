@@ -44,31 +44,31 @@ import mage.target.Target;
  */
 public class PlayTargetWithoutPayingManaEffect extends OneShotEffect<PlayTargetWithoutPayingManaEffect> {
 
-	public PlayTargetWithoutPayingManaEffect() {
-		super(Outcome.GainControl);
-	}
+    public PlayTargetWithoutPayingManaEffect() {
+        super(Outcome.GainControl);
+    }
 
-	public PlayTargetWithoutPayingManaEffect(final PlayTargetWithoutPayingManaEffect effect) {
-		super(effect);
-	}
+    public PlayTargetWithoutPayingManaEffect(final PlayTargetWithoutPayingManaEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public PlayTargetWithoutPayingManaEffect copy() {
-		return new PlayTargetWithoutPayingManaEffect(this);
-	}
+    @Override
+    public PlayTargetWithoutPayingManaEffect copy() {
+        return new PlayTargetWithoutPayingManaEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player controller = game.getPlayer(source.getControllerId());
-		Card target = (Card) game.getObject(source.getFirstTarget());
-		if (controller != null && target != null) {
-			return controller.cast(target.getSpellAbility(), game, true);
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        Card target = (Card) game.getObject(source.getFirstTarget());
+        if (controller != null && target != null) {
+            return controller.cast(target.getSpellAbility(), game, true);
+        }
+        return false;
+    }
 
-	@Override
-	public String getText(Mode mode) {
+    @Override
+    public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
         if (mode.getTargets().size() > 0) {
             Target target = mode.getTargets().get(0);
@@ -79,6 +79,6 @@ public class PlayTargetWithoutPayingManaEffect extends OneShotEffect<PlayTargetW
                 sb.append("you may cast target ").append(target.getTargetName()).append(" without paying its mana cost");
             }
         }
-		return sb.toString();
-	}
+        return sb.toString();
+    }
 }

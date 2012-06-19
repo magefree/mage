@@ -57,81 +57,81 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ShivsEmbrace extends CardImpl<ShivsEmbrace> {
 
-	public ShivsEmbrace(UUID ownerId) {
-		super(ownerId, 156, "Shiv's Embrace", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
-		this.expansionSetCode = "M11";
-		this.color.setRed(true);
-		this.subtype.add("Aura");
+    public ShivsEmbrace(UUID ownerId) {
+        super(ownerId, 156, "Shiv's Embrace", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
+        this.expansionSetCode = "M11";
+        this.color.setRed(true);
+        this.subtype.add("Aura");
 
-		TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		this.addAbility(ability);
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ShivsEmbraceEffect()));
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ShivsEmbraceEffect()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
 
-	}
+    }
 
-	public ShivsEmbrace(final ShivsEmbrace card) {
-		super(card);
-	}
+    public ShivsEmbrace(final ShivsEmbrace card) {
+        super(card);
+    }
 
-	@Override
-	public ShivsEmbrace copy() {
-		return new ShivsEmbrace(this);
-	}
+    @Override
+    public ShivsEmbrace copy() {
+        return new ShivsEmbrace(this);
+    }
 }
 
 class ShivsEmbraceEffect extends ContinuousEffectImpl<ShivsEmbraceEffect> {
 
-	public ShivsEmbraceEffect() {
-		super(Duration.WhileOnBattlefield, Outcome.Detriment);
-		staticText = "Enchanted creature gets +2/+2 and has flying";
-	}
+    public ShivsEmbraceEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        staticText = "Enchanted creature gets +2/+2 and has flying";
+    }
 
-	public ShivsEmbraceEffect(final ShivsEmbraceEffect effect) {
-		super(effect);
-	}
+    public ShivsEmbraceEffect(final ShivsEmbraceEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public ShivsEmbraceEffect copy() {
-		return new ShivsEmbraceEffect(this);
-	}
+    @Override
+    public ShivsEmbraceEffect copy() {
+        return new ShivsEmbraceEffect(this);
+    }
 
-	@Override
-	public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-		Permanent enchantment = game.getPermanent(source.getSourceId());
-		if (enchantment != null && enchantment.getAttachedTo() != null) {
-			Permanent creature = game.getPermanent(enchantment.getAttachedTo());
-			if (creature != null) {
-				switch (layer) {
-					case PTChangingEffects_7:
-						if (sublayer == SubLayer.ModifyPT_7c) {
-							creature.addPower(2);
-							creature.addToughness(2);
-						}
-						break;
-					case AbilityAddingRemovingEffects_6:
-						if (sublayer == SubLayer.NA) {
-							creature.addAbility(FlyingAbility.getInstance(), game);
-						}
-						break;
-				}
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        Permanent enchantment = game.getPermanent(source.getSourceId());
+        if (enchantment != null && enchantment.getAttachedTo() != null) {
+            Permanent creature = game.getPermanent(enchantment.getAttachedTo());
+            if (creature != null) {
+                switch (layer) {
+                    case PTChangingEffects_7:
+                        if (sublayer == SubLayer.ModifyPT_7c) {
+                            creature.addPower(2);
+                            creature.addToughness(2);
+                        }
+                        break;
+                    case AbilityAddingRemovingEffects_6:
+                        if (sublayer == SubLayer.NA) {
+                            creature.addAbility(FlyingAbility.getInstance(), game);
+                        }
+                        break;
+                }
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
 
-	@Override
-	public boolean hasLayer(Layer layer) {
-		return layer == Layer.AbilityAddingRemovingEffects_6 || layer == layer.PTChangingEffects_7;
-	}
+    @Override
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.AbilityAddingRemovingEffects_6 || layer == layer.PTChangingEffects_7;
+    }
 
 }

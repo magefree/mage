@@ -44,61 +44,61 @@ import mage.game.permanent.Permanent;
  */
 public class FearAbility extends EvasionAbility<FearAbility> {
 
-	private static final FearAbility fINSTANCE =  new FearAbility();
+    private static final FearAbility fINSTANCE =  new FearAbility();
 
-	private Object readResolve() throws ObjectStreamException {
-		return fINSTANCE;
-	}
+    private Object readResolve() throws ObjectStreamException {
+        return fINSTANCE;
+    }
 
-	public static FearAbility getInstance() {
-		return fINSTANCE;
-	}
+    public static FearAbility getInstance() {
+        return fINSTANCE;
+    }
 
-	private FearAbility() {
-		this.addEffect(new FearEffect());
-	}
+    private FearAbility() {
+        this.addEffect(new FearEffect());
+    }
 
-	@Override
-	public String getRule() {
-		return "Fear";
-	}
+    @Override
+    public String getRule() {
+        return "Fear";
+    }
 
-	@Override
-	public FearAbility copy() {
-		return fINSTANCE;
-	}
+    @Override
+    public FearAbility copy() {
+        return fINSTANCE;
+    }
 
 }
 
 class FearEffect extends RestrictionEffect<FearEffect> {
 
-	public FearEffect() {
-		super(Duration.WhileOnBattlefield);
-	}
+    public FearEffect() {
+        super(Duration.WhileOnBattlefield);
+    }
 
-	public FearEffect(final FearEffect effect) {
-		super(effect);
-	}
+    public FearEffect(final FearEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean applies(Permanent permanent, Ability source, Game game) {
-		if (permanent.getAbilities().containsKey(FearAbility.getInstance().getId())) {
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-		if (blocker.getCardType().contains(Constants.CardType.ARTIFACT) || blocker.getColor().isBlack()) {
-			return true;
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        if (permanent.getAbilities().containsKey(FearAbility.getInstance().getId())) {
+            return true;
         }
-		return false;
-	}
+        return false;
+    }
 
-	@Override
-	public FearEffect copy() {
-		return new FearEffect(this);
-	}
+    @Override
+    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        if (blocker.getCardType().contains(Constants.CardType.ARTIFACT) || blocker.getColor().isBlack()) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public FearEffect copy() {
+        return new FearEffect(this);
+    }
 
 }

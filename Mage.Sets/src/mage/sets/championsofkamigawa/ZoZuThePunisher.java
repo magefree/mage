@@ -83,11 +83,11 @@ public class ZoZuThePunisher extends CardImpl<ZoZuThePunisher> {
 }
 
 class ZoZuThePunisherAbility extends TriggeredAbilityImpl<ZoZuThePunisherAbility> {
-    
+
     public ZoZuThePunisherAbility() {
             super(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(2));
     }
-    
+
     ZoZuThePunisherAbility(final ZoZuThePunisherAbility ability) {
             super(ability);
     }
@@ -96,11 +96,11 @@ class ZoZuThePunisherAbility extends TriggeredAbilityImpl<ZoZuThePunisherAbility
     public ZoZuThePunisherAbility copy() {
             return new ZoZuThePunisherAbility(this);
     }
-    
+
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
             if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone() == Constants.Zone.BATTLEFIELD) {
-			Permanent permanent = game.getPermanent(event.getTargetId());
+            Permanent permanent = game.getPermanent(event.getTargetId());
                         if (permanent != null && permanent.getCardType().contains(CardType.LAND)) {
                                 Player player = game.getPlayer(permanent.getControllerId());
                                 if (player != null) {
@@ -109,7 +109,7 @@ class ZoZuThePunisherAbility extends TriggeredAbilityImpl<ZoZuThePunisherAbility
                                             }
                                             return true;
                                 }
-			}
+            }
             }
             return false;
     }

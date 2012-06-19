@@ -60,7 +60,7 @@ public class CastSpellLastTurnWatcher extends WatcherImpl<CastSpellLastTurnWatch
             amountOfSpellsCastOnPrevTurn.put(entry.getKey(), entry.getValue());
         }
     }
-    
+
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
@@ -81,12 +81,12 @@ public class CastSpellLastTurnWatcher extends WatcherImpl<CastSpellLastTurnWatch
     }
 
     @Override
-	public void reset() {
+    public void reset() {
         amountOfSpellsCastOnPrevTurn.clear();
         amountOfSpellsCastOnPrevTurn.putAll(amountOfSpellsCastOnCurrentTurn);
         amountOfSpellsCastOnCurrentTurn.clear();
         spellsCastThisTurnInOrder.clear();
-	}
+    }
 
     public Map<UUID, Integer> getAmountOfSpellsCastOnPrevTurn() {
         return amountOfSpellsCastOnPrevTurn;
@@ -95,7 +95,7 @@ public class CastSpellLastTurnWatcher extends WatcherImpl<CastSpellLastTurnWatch
     public Map<UUID, Integer> getAmountOfSpellsCastOnCurrentTurn() {
         return amountOfSpellsCastOnCurrentTurn;
     }
-    
+
     public int getSpellOrder(Spell spell) {
         int index = 0;
         for (UUID uuid : spellsCastThisTurnInOrder) {
@@ -111,5 +111,5 @@ public class CastSpellLastTurnWatcher extends WatcherImpl<CastSpellLastTurnWatch
     public CastSpellLastTurnWatcher copy() {
         return new CastSpellLastTurnWatcher(this);
     }
-    
+
 }

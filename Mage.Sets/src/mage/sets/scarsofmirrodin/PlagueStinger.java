@@ -48,7 +48,7 @@ public class PlagueStinger extends CardImpl<PlagueStinger> {
         this.expansionSetCode = "SOM";
         this.subtype.add("Insect");
         this.subtype.add("Horror");
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());

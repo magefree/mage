@@ -53,7 +53,7 @@ public class ThievingMagpie extends CardImpl<ThievingMagpie> {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // Whenever Thieving Magpie deals damage to an opponent, draw a card.
         this.addAbility(new DealsDamageToOpponentTriggeredAbility(new DrawCardControllerEffect(1)));
     }

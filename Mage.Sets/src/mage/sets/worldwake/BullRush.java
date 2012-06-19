@@ -45,7 +45,7 @@ public class BullRush extends CardImpl<BullRush> {
     public BullRush (UUID ownerId) {
         super(ownerId, 73, "Bull Rush", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "WWK";
-		this.color.setRed(true);        
+        this.color.setRed(true);        
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 0, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

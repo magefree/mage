@@ -49,32 +49,32 @@ import java.util.UUID;
  */
 public class WoodlandCemetery extends CardImpl<WoodlandCemetery> {
 
-	private static final FilterLandPermanent filter = new FilterLandPermanent();
+    private static final FilterLandPermanent filter = new FilterLandPermanent();
 
-	static {
-		filter.getSubtype().add("Forest");
-		filter.getSubtype().add("Swamp");
-		filter.setScopeSubtype(ComparisonScope.Any);
-		filter.setMessage("Swamp or a Forest");
-	}
+    static {
+        filter.getSubtype().add("Forest");
+        filter.getSubtype().add("Swamp");
+        filter.setScopeSubtype(ComparisonScope.Any);
+        filter.setMessage("Swamp or a Forest");
+    }
 
-	public WoodlandCemetery(UUID ownerId) {
-		super(ownerId, 249, "Woodland Cemetery", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-		this.expansionSetCode = "ISD";
+    public WoodlandCemetery(UUID ownerId) {
+        super(ownerId, 249, "Woodland Cemetery", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+        this.expansionSetCode = "ISD";
 
-		Condition controls = new UnlessCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0));
-		String abilityText = "tap it unless you control a " + filter.getMessage();
-		this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
-		this.addAbility(new BlackManaAbility());
-		this.addAbility(new GreenManaAbility());
-	}
+        Condition controls = new UnlessCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0));
+        String abilityText = "tap it unless you control a " + filter.getMessage();
+        this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
+        this.addAbility(new BlackManaAbility());
+        this.addAbility(new GreenManaAbility());
+    }
 
-	public WoodlandCemetery(final WoodlandCemetery card) {
-		super(card);
-	}
+    public WoodlandCemetery(final WoodlandCemetery card) {
+        super(card);
+    }
 
-	@Override
-	public WoodlandCemetery copy() {
-		return new WoodlandCemetery(this);
-	}
+    @Override
+    public WoodlandCemetery copy() {
+        return new WoodlandCemetery(this);
+    }
 }

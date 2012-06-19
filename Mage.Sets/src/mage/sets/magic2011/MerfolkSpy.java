@@ -50,56 +50,56 @@ import java.util.UUID;
  */
 public class MerfolkSpy extends CardImpl<MerfolkSpy> {
 
-	public MerfolkSpy(UUID ownerId) {
-		super(ownerId, 66, "Merfolk Spy", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Merfolk");
-		this.subtype.add("Rogue");
-		this.color.setBlue(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
+    public MerfolkSpy(UUID ownerId) {
+        super(ownerId, 66, "Merfolk Spy", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Merfolk");
+        this.subtype.add("Rogue");
+        this.color.setBlue(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-		this.addAbility(new IslandwalkAbility());
-		this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new MerfolkSpyEffect(), false, true));
-	}
+        this.addAbility(new IslandwalkAbility());
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new MerfolkSpyEffect(), false, true));
+    }
 
-	public MerfolkSpy(final MerfolkSpy card) {
-		super(card);
-	}
+    public MerfolkSpy(final MerfolkSpy card) {
+        super(card);
+    }
 
-	@Override
-	public MerfolkSpy copy() {
-		return new MerfolkSpy(this);
-	}
+    @Override
+    public MerfolkSpy copy() {
+        return new MerfolkSpy(this);
+    }
 
 }
 
 class MerfolkSpyEffect extends OneShotEffect<MerfolkSpyEffect> {
 
-	public MerfolkSpyEffect() {
-		super(Outcome.Detriment);
-		staticText = "that player reveals a card at random from his or her hand";
-	}
+    public MerfolkSpyEffect() {
+        super(Outcome.Detriment);
+        staticText = "that player reveals a card at random from his or her hand";
+    }
 
-	public MerfolkSpyEffect(final MerfolkSpyEffect effect) {
-		super(effect);
-	}
+    public MerfolkSpyEffect(final MerfolkSpyEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(targetPointer.getFirst(game, source));
-		if (player != null && player.getHand().size() > 0) {
-			Cards revealed = new CardsImpl();
-			revealed.add(player.getHand().getRandom(game));
-			player.revealCards("Merfolk Spy", revealed, game);
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        if (player != null && player.getHand().size() > 0) {
+            Cards revealed = new CardsImpl();
+            revealed.add(player.getHand().getRandom(game));
+            player.revealCards("Merfolk Spy", revealed, game);
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public MerfolkSpyEffect copy() {
-		return new MerfolkSpyEffect(this);
-	}
+    @Override
+    public MerfolkSpyEffect copy() {
+        return new MerfolkSpyEffect(this);
+    }
 
 }

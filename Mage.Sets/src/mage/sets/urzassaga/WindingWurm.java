@@ -48,8 +48,8 @@ public class WindingWurm extends CardImpl<WindingWurm>{
         this.color.setGreen(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
-        
-	this.addAbility(new EchoAbility("{4}{G}"));
+
+    this.addAbility(new EchoAbility("{4}{G}"));
     }
 
     public WindingWurm(final WindingWurm card) {

@@ -23,21 +23,21 @@ public class BoundProperty<T> extends AbstractProperty<T> {
     private PropertyChangeSupport s;
     private String                name;
     private Property<T>           property;
-    
+
     public BoundProperty(PropertyChangeSupport s, String name, Property<T> property) {
         if(property == null) throw new IllegalArgumentException();
         this.s = s;
         this.name = name;
         this.property = property;
-        
+
     }
-    
+
     public void setValue(T value) {
         T old = getValue();
         property.setValue(value);
         s.firePropertyChange(name, old, getValue());
     }
-    
+
     public T getValue() {
         return property.getValue();
     }

@@ -56,7 +56,7 @@ public class WallOfReverence extends CardImpl<WallOfReverence> {
         this.expansionSetCode = "CON";
         this.subtype.add("Spirit");
         this.subtype.add("Wall");
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(6);
         this.addAbility(DefenderAbility.getInstance());

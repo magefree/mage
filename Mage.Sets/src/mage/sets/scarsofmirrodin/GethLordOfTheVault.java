@@ -58,44 +58,44 @@ import mage.target.common.TargetCardInOpponentsGraveyard;
  */
 public class GethLordOfTheVault extends CardImpl<GethLordOfTheVault> {
 
-	private static final FilterCard filter = new FilterCard("artifact or creature card from an opponent's graveyard");
+    private static final FilterCard filter = new FilterCard("artifact or creature card from an opponent's graveyard");
 
-	static {
-		filter.getCardType().add(CardType.CREATURE);
-		filter.getCardType().add(CardType.ARTIFACT);
-		filter.setScopeCardType(ComparisonScope.Any);
-	}
-	
+    static {
+        filter.getCardType().add(CardType.CREATURE);
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.setScopeCardType(ComparisonScope.Any);
+    }
+
     public GethLordOfTheVault (UUID ownerId) {
         super(ownerId, 64, "Geth, Lord of the Vault", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
         this.expansionSetCode = "SOM";
         this.supertype.add("Legendary");
         this.subtype.add("Zombie");
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
-        
+
         this.addAbility(IntimidateAbility.getInstance());
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GethLordOfTheVaultEffect(), new ManaCostsImpl("{X}{B}"));
         ability.addTarget(new TargetCardInOpponentsGraveyard(filter));
         this.addAbility(ability);
     }
 
-	@Override
-	public void adjustCosts(Ability ability, Game game) {
-		Card card = game.getCard(ability.getFirstTarget());
-		if (card != null) {
-			// insert at the beginning (so it will be {2}{B}, not {B}{2})
-			ability.getManaCostsToPay().add(0, new GenericManaCost(card.getManaCost().convertedManaCost()));
-		}
-		// no {X} anymore as we already have chosen the target with defined manacost
-		for (ManaCost cost : ability.getManaCostsToPay()) {
-			if (cost instanceof VariableCost) {
-				cost.setPaid();
-			}
-		}
-	}
-	
+    @Override
+    public void adjustCosts(Ability ability, Game game) {
+        Card card = game.getCard(ability.getFirstTarget());
+        if (card != null) {
+            // insert at the beginning (so it will be {2}{B}, not {B}{2})
+            ability.getManaCostsToPay().add(0, new GenericManaCost(card.getManaCost().convertedManaCost()));
+        }
+        // no {X} anymore as we already have chosen the target with defined manacost
+        for (ManaCost cost : ability.getManaCostsToPay()) {
+            if (cost instanceof VariableCost) {
+                cost.setPaid();
+            }
+        }
+    }
+
     public GethLordOfTheVault (final GethLordOfTheVault card) {
         super(card);
     }
@@ -107,8 +107,8 @@ public class GethLordOfTheVault extends CardImpl<GethLordOfTheVault> {
 
 }
 class GethLordOfTheVaultEffect extends OneShotEffect<GethLordOfTheVaultEffect> {
-    
-	public GethLordOfTheVaultEffect() {
+
+    public GethLordOfTheVaultEffect() {
         super(Outcome.Benefit);
         staticText = "Put target artifact or creature card with converted mana cost X from an opponent's graveyard onto the battlefield under your control tapped. Then that player puts the top X cards of his or her library into his or her graveyard";
     }
@@ -119,34 +119,34 @@ class GethLordOfTheVaultEffect extends OneShotEffect<GethLordOfTheVaultEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-    	Card card = game.getCard(source.getFirstTarget());
-    	if (card != null) {
-    		// if still in graveyard
-    		if (game.getState().getZone(card.getId()).equals(Zone.GRAVEYARD)) {
-				Player player = game.getPlayer(card.getOwnerId());
-				if (card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), source.getControllerId())) {
-					
-					Permanent permanent = game.getPermanent(card.getId());
-					if (permanent != null) {
-						permanent.setTapped(true);
-					}
+        Card card = game.getCard(source.getFirstTarget());
+        if (card != null) {
+            // if still in graveyard
+            if (game.getState().getZone(card.getId()).equals(Zone.GRAVEYARD)) {
+                Player player = game.getPlayer(card.getOwnerId());
+                if (card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), source.getControllerId())) {
 
-					int xvalue = card.getManaCost().convertedManaCost();
-					int cardsCount = Math.min(xvalue, player.getLibrary().size());
+                    Permanent permanent = game.getPermanent(card.getId());
+                    if (permanent != null) {
+                        permanent.setTapped(true);
+                    }
 
-					for (int i = 0; i < cardsCount; i++) {
-						Card removedCard = player.getLibrary().getFromTop(game);
-						if (removedCard != null) {
-							removedCard.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
-						} else {
-							break;
-						}
-					}
+                    int xvalue = card.getManaCost().convertedManaCost();
+                    int cardsCount = Math.min(xvalue, player.getLibrary().size());
 
-				}
-    		}
-    	}
-    	return false;
+                    for (int i = 0; i < cardsCount; i++) {
+                        Card removedCard = player.getLibrary().getFromTop(game);
+                        if (removedCard != null) {
+                            removedCard.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
+                        } else {
+                            break;
+                        }
+                    }
+
+                }
+            }
+        }
+        return false;
     }
 
     @Override

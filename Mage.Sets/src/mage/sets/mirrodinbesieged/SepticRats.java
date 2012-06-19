@@ -92,7 +92,7 @@ class SepticRatsTriggeredAbility extends TriggeredAbilityImpl<SepticRatsTriggere
             if (target != null)
                 if (target.getCounters().getCount(CounterType.POISON) > 0)
                     return true;
-		}
+        }
         return false;
     }
 

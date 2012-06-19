@@ -45,64 +45,64 @@ import java.util.UUID;
  */
 public class FilterSpellOrPermanent extends FilterImpl<Object, FilterPermanentOrPlayer> implements FilterInPlay<Object> {
 
-	protected FilterPermanent permanentFilter;
-	protected FilterSpell spellFilter;
+    protected FilterPermanent permanentFilter;
+    protected FilterSpell spellFilter;
 
-	public FilterSpellOrPermanent() {
-		this("spell or permanent");
-	}
+    public FilterSpellOrPermanent() {
+        this("spell or permanent");
+    }
 
-	public FilterSpellOrPermanent(String name, UUID controllerId) {
-		super(name);
-		permanentFilter = new FilterPermanent();
-		spellFilter = new FilterSpell();
-		permanentFilter.getControllerId().add(controllerId);
-		spellFilter.getControllerId().add(controllerId);
-	}
+    public FilterSpellOrPermanent(String name, UUID controllerId) {
+        super(name);
+        permanentFilter = new FilterPermanent();
+        spellFilter = new FilterSpell();
+        permanentFilter.getControllerId().add(controllerId);
+        spellFilter.getControllerId().add(controllerId);
+    }
 
-	public FilterSpellOrPermanent(String name) {
-		super(name);
-		permanentFilter = new FilterPermanent();
-		spellFilter = new FilterSpell();
-	}
+    public FilterSpellOrPermanent(String name) {
+        super(name);
+        permanentFilter = new FilterPermanent();
+        spellFilter = new FilterSpell();
+    }
 
-	public FilterSpellOrPermanent(final FilterSpellOrPermanent filter) {
-		super(filter);
-		this.permanentFilter = filter.permanentFilter.copy();
-		this.spellFilter = filter.spellFilter.copy();
-	}
+    public FilterSpellOrPermanent(final FilterSpellOrPermanent filter) {
+        super(filter);
+        this.permanentFilter = filter.permanentFilter.copy();
+        this.spellFilter = filter.spellFilter.copy();
+    }
 
-	@Override
-	public boolean match(Object o, Game game) {
-		if (o instanceof Spell) {
-			return spellFilter.match((Spell) o, game);
-		} else if (o instanceof Permanent) {
-			return permanentFilter.match((Permanent) o, game);
-		}
-		return notFilter;
-	}
+    @Override
+    public boolean match(Object o, Game game) {
+        if (o instanceof Spell) {
+            return spellFilter.match((Spell) o, game);
+        } else if (o instanceof Permanent) {
+            return permanentFilter.match((Permanent) o, game);
+        }
+        return notFilter;
+    }
 
-	@Override
-	public boolean match(Object o, UUID sourceId, UUID playerId, Game game) {
-		if (o instanceof Spell) {
-			return spellFilter.match((Spell) o, playerId, game);
-		} else if (o instanceof Permanent) {
-			return permanentFilter.match((Permanent) o, sourceId, playerId, game);
-		}
-		return notFilter;
-	}
+    @Override
+    public boolean match(Object o, UUID sourceId, UUID playerId, Game game) {
+        if (o instanceof Spell) {
+            return spellFilter.match((Spell) o, playerId, game);
+        } else if (o instanceof Permanent) {
+            return permanentFilter.match((Permanent) o, sourceId, playerId, game);
+        }
+        return notFilter;
+    }
 
-	public FilterPermanent getPermanentFilter() {
-		return this.permanentFilter;
-	}
+    public FilterPermanent getPermanentFilter() {
+        return this.permanentFilter;
+    }
 
-	public FilterSpell getspellFilter() {
-		return this.spellFilter;
-	}
+    public FilterSpell getspellFilter() {
+        return this.spellFilter;
+    }
 
-	@Override
-	public FilterSpellOrPermanent copy() {
-		return new FilterSpellOrPermanent(this);
-	}
+    @Override
+    public FilterSpellOrPermanent copy() {
+        return new FilterSpellOrPermanent(this);
+    }
 
 }

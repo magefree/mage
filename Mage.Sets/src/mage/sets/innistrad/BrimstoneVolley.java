@@ -46,62 +46,62 @@ import java.util.UUID;
  */
 public class BrimstoneVolley extends CardImpl<BrimstoneVolley> {
 
-	public BrimstoneVolley(UUID ownerId) {
-		super(ownerId, 132, "Brimstone Volley", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
-		this.expansionSetCode = "ISD";
+    public BrimstoneVolley(UUID ownerId) {
+        super(ownerId, 132, "Brimstone Volley", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
+        this.expansionSetCode = "ISD";
 
-		this.color.setRed(true);
+        this.color.setRed(true);
 
-		// Brimstone Volley deals 3 damage to target creature or player.
-		// Morbid - Brimstone Volley deals 5 damage to that creature or player instead if a creature died this turn.
-		this.getSpellAbility().addEffect(new BrimstoneVolleyEffect());
-		this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
-	}
+        // Brimstone Volley deals 3 damage to target creature or player.
+        // Morbid - Brimstone Volley deals 5 damage to that creature or player instead if a creature died this turn.
+        this.getSpellAbility().addEffect(new BrimstoneVolleyEffect());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+    }
 
-	public BrimstoneVolley(final BrimstoneVolley card) {
-		super(card);
-	}
+    public BrimstoneVolley(final BrimstoneVolley card) {
+        super(card);
+    }
 
-	@Override
-	public BrimstoneVolley copy() {
-		return new BrimstoneVolley(this);
-	}
+    @Override
+    public BrimstoneVolley copy() {
+        return new BrimstoneVolley(this);
+    }
 }
 
 class BrimstoneVolleyEffect extends OneShotEffect<BrimstoneVolleyEffect> {
 
-	public BrimstoneVolleyEffect() {
-		super(Constants.Outcome.Damage);
-		staticText = "{this} deals 3 damage to target creature or player.\n Morbid - {this} deals 5 damage to that creature or player instead if a creature died this turn";
-	}
+    public BrimstoneVolleyEffect() {
+        super(Constants.Outcome.Damage);
+        staticText = "{this} deals 3 damage to target creature or player.\n Morbid - {this} deals 5 damage to that creature or player instead if a creature died this turn";
+    }
 
-	public BrimstoneVolleyEffect(final BrimstoneVolleyEffect effect) {
-		super(effect);
-	}
+    public BrimstoneVolleyEffect(final BrimstoneVolleyEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		int damage = 3;
-		Watcher watcher = game.getState().getWatchers().get("Morbid");
-		if (watcher.conditionMet()) {
-		  	damage = 5;
-		}
-		Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
-		if (permanent != null) {
-			permanent.damage(damage, source.getSourceId(), game, true, false);
-			return true;
-		}
-		Player player = game.getPlayer(targetPointer.getFirst(game, source));
-		if (player != null) {
-			player.damage(damage, source.getSourceId(), game, false, true);
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        int damage = 3;
+        Watcher watcher = game.getState().getWatchers().get("Morbid");
+        if (watcher.conditionMet()) {
+              damage = 5;
+        }
+        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        if (permanent != null) {
+            permanent.damage(damage, source.getSourceId(), game, true, false);
+            return true;
+        }
+        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        if (player != null) {
+            player.damage(damage, source.getSourceId(), game, false, true);
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public BrimstoneVolleyEffect copy() {
-		return new BrimstoneVolleyEffect(this);
-	}
+    @Override
+    public BrimstoneVolleyEffect copy() {
+        return new BrimstoneVolleyEffect(this);
+    }
 
 }

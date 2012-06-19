@@ -46,7 +46,7 @@ public class WornPowerstone extends CardImpl<WornPowerstone> {
     public WornPowerstone (UUID ownerId) {
         super(ownerId, 318, "Worn Powerstone", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "USG";
-		this.addAbility(new EntersBattlefieldTappedAbility());
+        this.addAbility(new EntersBattlefieldTappedAbility());
         this.addAbility(new WornPowerstoneAbility());
     }
 

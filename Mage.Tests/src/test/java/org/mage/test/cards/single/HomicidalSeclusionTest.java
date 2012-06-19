@@ -22,10 +22,10 @@ public class HomicidalSeclusionTest extends CardTestPlayerBase {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Homicidal Seclusion");
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Air Elemental", 1);
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Horned Turtle", 1);
-        
+
         setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
-        
+
         assertLife(playerA, 20);
         assertLife(playerB, 20);
 
@@ -98,5 +98,5 @@ public class HomicidalSeclusionTest extends CardTestPlayerBase {
         abilities.add(LifelinkAbility.getInstance());
         assertAbilities(playerA, "Air Elemental", abilities);
     }
-    
+
 }

@@ -49,10 +49,10 @@ import mage.target.common.TargetControlledPermanent;
 public class ThroneofGeth extends CardImpl<ThroneofGeth> {
     private static FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
 
-	static {
-		filter.getCardType().add(CardType.ARTIFACT);
-		filter.setScopeCardType(Filter.ComparisonScope.Any);
-	}
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
+    }
 
     public ThroneofGeth (UUID ownerId) {
         super(ownerId, 211, "Throne of Geth", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");

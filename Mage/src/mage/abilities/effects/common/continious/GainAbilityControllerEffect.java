@@ -43,40 +43,40 @@ import mage.players.Player;
  */
 public class GainAbilityControllerEffect extends ContinuousEffectImpl<GainAbilityControllerEffect> {
 
-	protected Ability ability;
+    protected Ability ability;
 
-	/**
-	 * Add ability with Duration.WhileOnBattlefield
-	 * @param ability
-	 */
-	public GainAbilityControllerEffect(Ability ability) {
-		this(ability, Duration.WhileOnBattlefield);
-	}
+    /**
+     * Add ability with Duration.WhileOnBattlefield
+     * @param ability
+     */
+    public GainAbilityControllerEffect(Ability ability) {
+        this(ability, Duration.WhileOnBattlefield);
+    }
 
-	public GainAbilityControllerEffect(Ability ability, Duration duration) {
-		super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-		this.ability = ability;
-		staticText = "You have " + ability.getRule() + " " + duration.toString();
-	}
+    public GainAbilityControllerEffect(Ability ability, Duration duration) {
+        super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+        this.ability = ability;
+        staticText = "You have " + ability.getRule() + " " + duration.toString();
+    }
 
-	public GainAbilityControllerEffect(final GainAbilityControllerEffect effect) {
-		super(effect);
-		this.ability = effect.ability.copy();
-	}
+    public GainAbilityControllerEffect(final GainAbilityControllerEffect effect) {
+        super(effect);
+        this.ability = effect.ability.copy();
+    }
 
-	@Override
-	public GainAbilityControllerEffect copy() {
-		return new GainAbilityControllerEffect(this);
-	}
+    @Override
+    public GainAbilityControllerEffect copy() {
+        return new GainAbilityControllerEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-		if (player != null) {
-			player.addAbility(ability);
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+            player.addAbility(ability);
+            return true;
+        }
+        return false;
+    }
 
 }

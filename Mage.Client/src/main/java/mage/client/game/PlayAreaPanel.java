@@ -44,48 +44,48 @@ import java.util.UUID;
  */
 public class PlayAreaPanel extends javax.swing.JPanel {
 
-	private UUID playerId;
-	private UUID gameId;
+    private UUID playerId;
+    private UUID gameId;
 
     /** Creates new form PlayAreaPanel */
     public PlayAreaPanel() {
         initComponents();
-		setOpaque(false);
+        setOpaque(false);
         //jScrollPane1.setOpaque(false);
         //jScrollPane1.getViewport().setOpaque(false);
         battlefieldPanel.setOpaque(false);
-	}
+    }
 
-	public PlayAreaPanel(PlayerView player, BigCard bigCard, UUID gameId, boolean me) {
-		this();
-		init(player, bigCard, gameId);
-		update(player);
-	}
+    public PlayAreaPanel(PlayerView player, BigCard bigCard, UUID gameId, boolean me) {
+        this();
+        init(player, bigCard, gameId);
+        update(player);
+    }
 
-	public final void init(PlayerView player, BigCard bigCard, UUID gameId) {
-		this.playerPanel.init(gameId, player.getPlayerId(), bigCard);
-		this.battlefieldPanel.init(gameId, bigCard);
-		if (MageFrame.getSession().isTestMode()) {
-			this.playerId = player.getPlayerId();
-			this.gameId = gameId;
-			this.btnCheat.setVisible(true);
-		}
-		else {
-			this.btnCheat.setVisible(false);
-		}
-	}
+    public final void init(PlayerView player, BigCard bigCard, UUID gameId) {
+        this.playerPanel.init(gameId, player.getPlayerId(), bigCard);
+        this.battlefieldPanel.init(gameId, bigCard);
+        if (MageFrame.getSession().isTestMode()) {
+            this.playerId = player.getPlayerId();
+            this.gameId = gameId;
+            this.btnCheat.setVisible(true);
+        }
+        else {
+            this.btnCheat.setVisible(false);
+        }
+    }
 
-	public final void update(PlayerView player) {
-		this.playerPanel.update(player);
-		this.battlefieldPanel.update(player.getBattlefield());
-	}
+    public final void update(PlayerView player) {
+        this.playerPanel.update(player);
+        this.battlefieldPanel.update(player.getBattlefield());
+    }
 
-	public mage.client.game.BattlefieldPanel getBattlefieldPanel() {
-		return battlefieldPanel;
-	}
+    public mage.client.game.BattlefieldPanel getBattlefieldPanel() {
+        return battlefieldPanel;
+    }
 
     private void initComponents() {
-		setBorder(BorderFactory.createLineBorder(new Color(0,0,0,0)));
+        setBorder(BorderFactory.createLineBorder(new Color(0,0,0,0)));
         playerPanel = new PlayerPanelExt();
         btnCheat = new javax.swing.JButton();
         //jScrollPane1 = new javax.swing.JScrollPane();
@@ -101,46 +101,46 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         });
 
         //jScrollPane1.setViewportView(battlefieldPanel);
-		//Border empty = new EmptyBorder(0,0,0,0);
-		//jScrollPane1.setBorder(empty);
-		//jScrollPane1.setViewportBorder(empty);
+        //Border empty = new EmptyBorder(0,0,0,0);
+        //jScrollPane1.setBorder(empty);
+        //jScrollPane1.setViewportBorder(empty);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         layout.setHorizontalGroup(
-        	layout.createSequentialGroup()
-        		.addComponent(playerPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        		.addPreferredGap(ComponentPlacement.RELATED)
-        		.addComponent(battlefieldPanel, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            layout.createSequentialGroup()
+                .addComponent(playerPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addComponent(battlefieldPanel, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-        	layout.createParallelGroup(Alignment.LEADING)
-        		.addComponent(playerPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        		.addComponent(battlefieldPanel, GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+            layout.createParallelGroup(Alignment.LEADING)
+                .addComponent(playerPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(battlefieldPanel, GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
         );
         this.setLayout(layout);
     }
 
     public void sizePlayer(boolean smallMode) {
-    	this.playerPanel.sizePlayerPanel(smallMode);
-    	if (smallMode) {
-    		this.playerPanel.setPreferredSize(new Dimension(92, 160));
-    		//this.jScrollPane1.setPreferredSize(new Dimension(160, 160));
+        this.playerPanel.sizePlayerPanel(smallMode);
+        if (smallMode) {
+            this.playerPanel.setPreferredSize(new Dimension(92, 160));
+            //this.jScrollPane1.setPreferredSize(new Dimension(160, 160));
             this.battlefieldPanel.setPreferredSize(new Dimension(160, 160));
-    	}
-    	else {
-    		this.playerPanel.setPreferredSize(new Dimension(92, 212));
-    		//this.jScrollPane1.setPreferredSize(new Dimension(160, 212));
+        }
+        else {
+            this.playerPanel.setPreferredSize(new Dimension(92, 212));
+            //this.jScrollPane1.setPreferredSize(new Dimension(160, 212));
             this.battlefieldPanel.setPreferredSize(new Dimension(160, 212));
-    	}
+        }
     }
-    
-	private void btnCheatActionPerformed(java.awt.event.ActionEvent evt) {
-		MageFrame.getSession().cheat(gameId, playerId, DeckImporterUtil.importDeck("cheat.dck"));
-	}
 
-    
+    private void btnCheatActionPerformed(java.awt.event.ActionEvent evt) {
+        MageFrame.getSession().cheat(gameId, playerId, DeckImporterUtil.importDeck("cheat.dck"));
+    }
+
+
     private mage.client.game.BattlefieldPanel battlefieldPanel;
-	private javax.swing.JButton btnCheat;
+    private javax.swing.JButton btnCheat;
     //private javax.swing.JScrollPane jScrollPane1;
     private PlayerPanelExt playerPanel;
 

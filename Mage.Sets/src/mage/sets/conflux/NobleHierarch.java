@@ -45,26 +45,26 @@ import mage.cards.CardImpl;
  */
 public class NobleHierarch extends CardImpl<NobleHierarch> {
 
-	public NobleHierarch(UUID ownerId) {
-		super(ownerId, 87, "Noble Hierarch", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}");
-		this.expansionSetCode = "CON";
-		this.color.setGreen(true);
-		this.subtype.add("Human");
-		this.subtype.add("Druid");
-		this.power = new MageInt(0);
-		this.toughness = new MageInt(1);
-		this.addAbility(new ExaltedAbility());
-		this.addAbility(new GreenManaAbility());
-		this.addAbility(new WhiteManaAbility());
-		this.addAbility(new BlueManaAbility());
-	}
+    public NobleHierarch(UUID ownerId) {
+        super(ownerId, 87, "Noble Hierarch", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}");
+        this.expansionSetCode = "CON";
+        this.color.setGreen(true);
+        this.subtype.add("Human");
+        this.subtype.add("Druid");
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(1);
+        this.addAbility(new ExaltedAbility());
+        this.addAbility(new GreenManaAbility());
+        this.addAbility(new WhiteManaAbility());
+        this.addAbility(new BlueManaAbility());
+    }
 
-	public NobleHierarch(final NobleHierarch card) {
-		super(card);
-	}
+    public NobleHierarch(final NobleHierarch card) {
+        super(card);
+    }
 
-	@Override
-	public NobleHierarch copy() {
-		return new NobleHierarch(this);
-	}
+    @Override
+    public NobleHierarch copy() {
+        return new NobleHierarch(this);
+    }
 }

@@ -49,7 +49,7 @@ import mage.game.Game;
  * @author jeffwadsworth
  */
 public class Narcolepsy extends CardImpl<Narcolepsy> {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature");
 
     static {
@@ -69,7 +69,7 @@ public class Narcolepsy extends CardImpl<Narcolepsy> {
         this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Detriment));
         EnchantAbility ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        
+
         // At the beginning of each upkeep, if enchanted creature is untapped, tap it.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new NarcolepsyEffect(), Constants.TargetController.ANY, false));
     }
@@ -85,16 +85,16 @@ public class Narcolepsy extends CardImpl<Narcolepsy> {
 }
 
 class NarcolepsyEffect extends OneShotEffect<NarcolepsyEffect> {
-    
+
     public NarcolepsyEffect() {
         super(Constants.Outcome.Detriment);
         this.staticText = "if enchanted creature is untapped, tap it";
     }
-    
+
     public NarcolepsyEffect(final NarcolepsyEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent narcolepsy = game.getPermanent(source.getSourceId());
@@ -107,7 +107,7 @@ class NarcolepsyEffect extends OneShotEffect<NarcolepsyEffect> {
         }
         return false;
     }
-    
+
     @Override
     public NarcolepsyEffect copy() {
         return new NarcolepsyEffect(this);

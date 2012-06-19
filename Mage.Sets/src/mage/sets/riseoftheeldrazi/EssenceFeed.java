@@ -47,7 +47,7 @@ public class EssenceFeed extends CardImpl<EssenceFeed> {
     public EssenceFeed (UUID ownerId) {
         super(ownerId, 110, "Essence Feed", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{5}{B}");
         this.expansionSetCode = "ROE";
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(3));
         this.getSpellAbility().addEffect(new GainLifeEffect(3));
         this.getSpellAbility().addEffect(new CreateTokenEffect(new EldraziSpawnToken(), 3));

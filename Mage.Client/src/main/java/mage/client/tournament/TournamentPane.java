@@ -48,16 +48,16 @@ public class TournamentPane extends MagePane {
         initComponents();
     }
 
-	public void showTournament(UUID tournamentId) {
-		this.setTitle("Tournament " + tournamentId);
-		this.tournamentPanel.showTournament(tournamentId);
-		this.repaint();
-	}
+    public void showTournament(UUID tournamentId) {
+        this.setTitle("Tournament " + tournamentId);
+        this.tournamentPanel.showTournament(tournamentId);
+        this.repaint();
+    }
 
     public void hideTournament() {
         tournamentPanel.hideTournament();
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -88,14 +88,14 @@ public class TournamentPane extends MagePane {
     private mage.client.tournament.TournamentPanel tournamentPanel;
     // End of variables declaration//GEN-END:variables
 
-	@Override
-	public void activated() {
-		tournamentPanel.startTasks();
-	}
+    @Override
+    public void activated() {
+        tournamentPanel.startTasks();
+    }
 
-	@Override
-	public void deactivated() {
-		tournamentPanel.stopTasks();
-	}
+    @Override
+    public void deactivated() {
+        tournamentPanel.stopTasks();
+    }
 
 }

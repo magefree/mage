@@ -41,34 +41,34 @@ import mage.game.Game;
  */
 public class MetalcraftCost extends CostImpl<MetalcraftCost> {
 
-	private static final FilterPermanent filter = new FilterPermanent("artifact");
+    private static final FilterPermanent filter = new FilterPermanent("artifact");
 
-	static {
-		filter.getCardType().add(CardType.ARTIFACT);
-	}
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+    }
 
-	public MetalcraftCost() {
-		this.text = "Activate this ability only if you control three or more artifacts";
-	}
+    public MetalcraftCost() {
+        this.text = "Activate this ability only if you control three or more artifacts";
+    }
 
-	public MetalcraftCost(final MetalcraftCost cost) {
-		super(cost);
-	}
+    public MetalcraftCost(final MetalcraftCost cost) {
+        super(cost);
+    }
 
-	@Override
-	public MetalcraftCost copy() {
-		return new MetalcraftCost(this);
-	}
+    @Override
+    public MetalcraftCost copy() {
+        return new MetalcraftCost(this);
+    }
 
-	@Override
-	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-		return game.getBattlefield().contains(filter, controllerId, 3, game);
-	}
+    @Override
+    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+        return game.getBattlefield().contains(filter, controllerId, 3, game);
+    }
 
-	@Override
-	public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-		this.paid = true;
-		return paid;
-	}
+    @Override
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+        this.paid = true;
+        return paid;
+    }
 
 }

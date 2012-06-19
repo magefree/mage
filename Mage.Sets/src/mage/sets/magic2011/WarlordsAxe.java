@@ -46,22 +46,22 @@ import mage.cards.CardImpl;
  */
 public class WarlordsAxe extends CardImpl<WarlordsAxe> {
 
-	public WarlordsAxe(UUID ownerId) {
-		super(ownerId, 220, "Warlord's Axe", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Equipment");
-		this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(4)));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 1)));
-	}
+    public WarlordsAxe(UUID ownerId) {
+        super(ownerId, 220, "Warlord's Axe", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Equipment");
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(4)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 1)));
+    }
 
-	protected WarlordsAxe(WarlordsAxe me) {
-		super(me);
-	}
+    protected WarlordsAxe(WarlordsAxe me) {
+        super(me);
+    }
 
-	@Override
-	public WarlordsAxe copy() {
-		return new WarlordsAxe(this);
-	}
+    @Override
+    public WarlordsAxe copy() {
+        return new WarlordsAxe(this);
+    }
 
 }
 

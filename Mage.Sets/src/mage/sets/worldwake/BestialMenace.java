@@ -43,22 +43,22 @@ import mage.game.permanent.token.WolfToken;
  */
 public class BestialMenace extends CardImpl<BestialMenace> {
 
-	public BestialMenace(UUID ownerId) {
-		super(ownerId, 97, "Bestial Menace", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
-		this.expansionSetCode = "WWK";
-		this.color.setGreen(true);
-		this.getSpellAbility().addEffect(new CreateTokenEffect(new SnakeToken()));
-		this.getSpellAbility().addEffect(new CreateTokenEffect(new WolfToken()));
-		this.getSpellAbility().addEffect(new CreateTokenEffect(new ElephantToken()));
-	}
+    public BestialMenace(UUID ownerId) {
+        super(ownerId, 97, "Bestial Menace", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
+        this.expansionSetCode = "WWK";
+        this.color.setGreen(true);
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new SnakeToken()));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new WolfToken()));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new ElephantToken()));
+    }
 
-	public BestialMenace(final BestialMenace card) {
-		super(card);
-	}
+    public BestialMenace(final BestialMenace card) {
+        super(card);
+    }
 
-	@Override
-	public BestialMenace copy() {
-		return new BestialMenace(this);
-	}
+    @Override
+    public BestialMenace copy() {
+        return new BestialMenace(this);
+    }
 
 }

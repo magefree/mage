@@ -61,28 +61,28 @@ public class KondasBanner extends CardImpl<KondasBanner> {
         legendaryFilter.getSupertype().add("Legendary");
         legendaryFilter.setScopeSupertype(Filter.ComparisonScope.Any);
     }
-    
+
     public KondasBanner(UUID ownerId) {
         super(ownerId, 259, "Konda's Banner", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "CHK";
         this.supertype.add("Legendary");
         this.subtype.add("Equipment");
-        
+
         // Creatures that share a color with equipped creature get +1/+1.
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new KondasBannerColorBoostEffect()));        
 
         // Creatures that share a creature type with equipped creature get +1/+1.
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new KondasBannerTypeBoostEffect()));        
-        
+
         // Konda's Banner can be attached only to a legendary creature.
         // Equip {2}
         this.addAbility(new EquipAbility(
                 Constants.Outcome.AddAbility, 
                 new GenericManaCost(2), 
                 new TargetControlledCreaturePermanent(1,1, legendaryFilter, false)));
-        
+
     }
-    
+
     public KondasBanner(final KondasBanner card) {
         super(card);
     }
@@ -95,22 +95,22 @@ public class KondasBanner extends CardImpl<KondasBanner> {
 
 class KondasBannerTypeBoostEffect extends BoostAllEffect  {
 
-	private static final String effectText = "Creatures that share a creature type with equipped creature get +1/+1";
-        
-	KondasBannerTypeBoostEffect() {
-		super(1,1, Constants.Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false);
-		staticText = effectText;
-	}
+    private static final String effectText = "Creatures that share a creature type with equipped creature get +1/+1";
 
-	KondasBannerTypeBoostEffect(KondasBannerTypeBoostEffect effect) {
-		super(effect);
-	}
+    KondasBannerTypeBoostEffect() {
+        super(1,1, Constants.Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false);
+        staticText = effectText;
+    }
 
-	@Override
+    KondasBannerTypeBoostEffect(KondasBannerTypeBoostEffect effect) {
+        super(effect);
+    }
+
+    @Override
         public boolean apply(Game game, Ability source) {
             // Check if the equipment is attached 
             Permanent equipment = game.getPermanent(source.getSourceId());
-	    if (equipment != null && equipment.getAttachedTo() != null)
+        if (equipment != null && equipment.getAttachedTo() != null)
             {
                 Permanent equipedCreature = game.getPermanent(equipment.getAttachedTo());
                 if (equipedCreature != null) {
@@ -129,51 +129,51 @@ class KondasBannerTypeBoostEffect extends BoostAllEffect  {
             return false;
         }
 
-	@Override
-	public KondasBannerTypeBoostEffect copy() {
-		return new KondasBannerTypeBoostEffect(this);
-	}
+    @Override
+    public KondasBannerTypeBoostEffect copy() {
+        return new KondasBannerTypeBoostEffect(this);
+    }
 
 }
 
 
 class KondasBannerColorBoostEffect extends BoostAllEffect  {
 
-	private static final String effectText = "Creatures that share a color with equipped creature get +1/+1.";
-        
-	KondasBannerColorBoostEffect() {
-		super(1,1, Constants.Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false);
-		staticText = effectText;
-	}
+    private static final String effectText = "Creatures that share a color with equipped creature get +1/+1.";
 
-	KondasBannerColorBoostEffect(KondasBannerColorBoostEffect effect) {
-		super(effect);
-	}
+    KondasBannerColorBoostEffect() {
+        super(1,1, Constants.Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false);
+        staticText = effectText;
+    }
 
-	@Override
+    KondasBannerColorBoostEffect(KondasBannerColorBoostEffect effect) {
+        super(effect);
+    }
+
+    @Override
         public boolean apply(Game game, Ability source) {
             // Check if the equipment is attached 
             Permanent equipment = game.getPermanent(source.getSourceId());
-	    if (equipment != null && equipment.getAttachedTo() != null)
+        if (equipment != null && equipment.getAttachedTo() != null)
             {
                 Permanent equipedCreature = game.getPermanent(equipment.getAttachedTo());
                 for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                         if (equipedCreature.getColor().shares(perm.getColor())) {
-            			if (!this.affectedObjectsSet || objects.contains(perm.getId())) {
-					perm.addPower(power.calculate(game, source));
-					perm.addToughness(toughness.calculate(game, source));
+                        if (!this.affectedObjectsSet || objects.contains(perm.getId())) {
+                    perm.addPower(power.calculate(game, source));
+                    perm.addToughness(toughness.calculate(game, source));
                                 }
-                            
+
                         }
-		}
-		return true;
+        }
+        return true;
             }
             return false;
         }
 
-	@Override
-	public KondasBannerColorBoostEffect copy() {
-		return new KondasBannerColorBoostEffect(this);
-	}
+    @Override
+    public KondasBannerColorBoostEffect copy() {
+        return new KondasBannerColorBoostEffect(this);
+    }
 
 }

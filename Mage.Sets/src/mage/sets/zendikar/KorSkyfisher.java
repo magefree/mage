@@ -51,14 +51,14 @@ public class KorSkyfisher extends CardImpl<KorSkyfisher> {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Kor");
         this.subtype.add("Soldier");
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false);
-		Target target = new TargetControlledPermanent();
-		target.setRequired(true);
-		target.setNotTarget(true);
+        Target target = new TargetControlledPermanent();
+        target.setRequired(true);
+        target.setNotTarget(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

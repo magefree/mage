@@ -52,37 +52,37 @@ import mage.game.permanent.token.Token;
  */
 public class LavaclawReaches extends CardImpl<LavaclawReaches> {
 
-	public LavaclawReaches(UUID ownerId) {
-		super(ownerId, 139, "Lavaclaw Reaches", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-		this.expansionSetCode = "WWK";
-		this.addAbility(new EntersBattlefieldTappedAbility());
-		this.addAbility(new BlackManaAbility());
-		this.addAbility(new RedManaAbility());
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new LavaclawReachesToken(), "land", Duration.EndOfTurn), new ManaCostsImpl("{1}{B}{R}")));
-	}
+    public LavaclawReaches(UUID ownerId) {
+        super(ownerId, 139, "Lavaclaw Reaches", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+        this.expansionSetCode = "WWK";
+        this.addAbility(new EntersBattlefieldTappedAbility());
+        this.addAbility(new BlackManaAbility());
+        this.addAbility(new RedManaAbility());
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new LavaclawReachesToken(), "land", Duration.EndOfTurn), new ManaCostsImpl("{1}{B}{R}")));
+    }
 
-	public LavaclawReaches(final LavaclawReaches card) {
-		super(card);
-	}
+    public LavaclawReaches(final LavaclawReaches card) {
+        super(card);
+    }
 
-	@Override
-	public LavaclawReaches copy() {
-		return new LavaclawReaches(this);
-	}
+    @Override
+    public LavaclawReaches copy() {
+        return new LavaclawReaches(this);
+    }
 
 }
 
 class LavaclawReachesToken extends Token {
 
-	public LavaclawReachesToken() {
-		super("", "2/2 black and red Elemental creature with \"{X}: This creature gets +X/+0 until end of turn.\"");
-		cardType.add(CardType.CREATURE);
-		subtype.add("Elemental");
-		color.setRed(true);
-		color.setBlack(true);
-		power = new MageInt(2);
-		toughness = new MageInt(2);
-		addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new ManacostVariableValue(), new StaticValue(0), Duration.EndOfTurn), new ManaCostsImpl("{X}")));
-	}
+    public LavaclawReachesToken() {
+        super("", "2/2 black and red Elemental creature with \"{X}: This creature gets +X/+0 until end of turn.\"");
+        cardType.add(CardType.CREATURE);
+        subtype.add("Elemental");
+        color.setRed(true);
+        color.setBlack(true);
+        power = new MageInt(2);
+        toughness = new MageInt(2);
+        addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new ManacostVariableValue(), new StaticValue(0), Duration.EndOfTurn), new ManaCostsImpl("{X}")));
+    }
 
 }

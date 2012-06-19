@@ -50,26 +50,26 @@ import mage.game.permanent.Permanent;
  */
 public class PhyrexianHydra extends CardImpl<PhyrexianHydra> {
 
-	public PhyrexianHydra(UUID ownerId) {
-		super(ownerId, 85, "Phyrexian Hydra", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
-		this.expansionSetCode = "MBS";
-		this.subtype.add("Hydra");
-		this.color.setGreen(true);
-		this.power = new MageInt(7);
-		this.toughness = new MageInt(7);
+    public PhyrexianHydra(UUID ownerId) {
+        super(ownerId, 85, "Phyrexian Hydra", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
+        this.expansionSetCode = "MBS";
+        this.subtype.add("Hydra");
+        this.color.setGreen(true);
+        this.power = new MageInt(7);
+        this.toughness = new MageInt(7);
 
-		this.addAbility(InfectAbility.getInstance());
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhyrexianHydraEffect()));
-	}
+        this.addAbility(InfectAbility.getInstance());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhyrexianHydraEffect()));
+    }
 
-	public PhyrexianHydra(final PhyrexianHydra card) {
-		super(card);
-	}
+    public PhyrexianHydra(final PhyrexianHydra card) {
+        super(card);
+    }
 
-	@Override
-	public PhyrexianHydra copy() {
-		return new PhyrexianHydra(this);
-	}
+    @Override
+    public PhyrexianHydra copy() {
+        return new PhyrexianHydra(this);
+    }
 
 }
 

@@ -42,53 +42,53 @@ import mage.target.TargetCard;
  */
 public class TargetCardInYourGraveyard extends TargetCard<TargetCardInYourGraveyard> {
 
-	public TargetCardInYourGraveyard() {
-		this(1, 1, new FilterCard("card from your graveyard"));
-	}
+    public TargetCardInYourGraveyard() {
+        this(1, 1, new FilterCard("card from your graveyard"));
+    }
 
-	public TargetCardInYourGraveyard(FilterCard filter) {
-		this(1, 1, filter);
-	}
+    public TargetCardInYourGraveyard(FilterCard filter) {
+        this(1, 1, filter);
+    }
 
-	public TargetCardInYourGraveyard(int numTargets, FilterCard filter) {
-		this(numTargets, numTargets, filter);
-	}
+    public TargetCardInYourGraveyard(int numTargets, FilterCard filter) {
+        this(numTargets, numTargets, filter);
+    }
 
-	public TargetCardInYourGraveyard(int minNumTargets, int maxNumTargets, FilterCard filter) {
-		super(minNumTargets, maxNumTargets, Zone.GRAVEYARD, filter);
-		this.targetName = filter.getMessage();
-	}
+    public TargetCardInYourGraveyard(int minNumTargets, int maxNumTargets, FilterCard filter) {
+        super(minNumTargets, maxNumTargets, Zone.GRAVEYARD, filter);
+        this.targetName = filter.getMessage();
+    }
 
-	public TargetCardInYourGraveyard(final TargetCardInYourGraveyard target) {
-		super(target);
-	}
+    public TargetCardInYourGraveyard(final TargetCardInYourGraveyard target) {
+        super(target);
+    }
 
-	@Override
-	public boolean canTarget(UUID id, Ability source, Game game) {
-		Card card = game.getCard(id);
-		if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD)
-			if (game.getPlayer(source.getControllerId()).getGraveyard().contains(id))
-				return filter.match(card, game);
-		return false;
-	}
+    @Override
+    public boolean canTarget(UUID id, Ability source, Game game) {
+        Card card = game.getCard(id);
+        if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD)
+            if (game.getPlayer(source.getControllerId()).getGraveyard().contains(id))
+                return filter.match(card, game);
+        return false;
+    }
 
-	/**
-	 * Checks if there are enough {@link Card} that can be selected.
-	 *
-	 * @param sourceControllerId - controller of the select event
-	 * @param game
-	 * @return - true if enough valid {@link Card} exist
-	 */
-	@Override
-	public boolean canChoose(UUID sourceControllerId, Game game) {
-		if (game.getPlayer(sourceControllerId).getGraveyard().count(filter, game) >= this.minNumberOfTargets)
-			return true;
-		return false;
-	}
+    /**
+     * Checks if there are enough {@link Card} that can be selected.
+     *
+     * @param sourceControllerId - controller of the select event
+     * @param game
+     * @return - true if enough valid {@link Card} exist
+     */
+    @Override
+    public boolean canChoose(UUID sourceControllerId, Game game) {
+        if (game.getPlayer(sourceControllerId).getGraveyard().count(filter, game) >= this.minNumberOfTargets)
+            return true;
+        return false;
+    }
 
-	@Override
-	public TargetCardInYourGraveyard copy() {
-		return new TargetCardInYourGraveyard(this);
-	}
+    @Override
+    public TargetCardInYourGraveyard copy() {
+        return new TargetCardInYourGraveyard(this);
+    }
 
 }

@@ -53,11 +53,11 @@ public class GhastlyHaunting extends CardImpl<GhastlyHaunting> {
         this.canTransform = true;
 
         // Enchant creature
-		TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-        
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+
         // You control enchanted creature.
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ControlEnchantedEffect()));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ControlEnchantedEffect()));
     }
 
     public GhastlyHaunting(final GhastlyHaunting card) {

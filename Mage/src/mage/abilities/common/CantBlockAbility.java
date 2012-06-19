@@ -19,55 +19,55 @@ import mage.game.permanent.Permanent;
  */
 public class CantBlockAbility extends SimpleStaticAbility {
 
-	private static final CantBlockAbility fINSTANCE =  new CantBlockAbility();
+    private static final CantBlockAbility fINSTANCE =  new CantBlockAbility();
 
-	private Object readResolve() throws ObjectStreamException {
-		return fINSTANCE;
-	}
+    private Object readResolve() throws ObjectStreamException {
+        return fINSTANCE;
+    }
 
-	public static CantBlockAbility getInstance() {
-		return fINSTANCE;
-	}
+    public static CantBlockAbility getInstance() {
+        return fINSTANCE;
+    }
 
-	private CantBlockAbility() {
-		super(Zone.BATTLEFIELD, new CantBlockEffect());
-	}
+    private CantBlockAbility() {
+        super(Zone.BATTLEFIELD, new CantBlockEffect());
+    }
 
-	@Override
-	public String getRule() {
-		return "{this} can't block";
-	}
+    @Override
+    public String getRule() {
+        return "{this} can't block";
+    }
 
-	@Override
-	public CantBlockAbility copy() {
-		return fINSTANCE;
-	}
+    @Override
+    public CantBlockAbility copy() {
+        return fINSTANCE;
+    }
 
 }
 
 class CantBlockEffect extends RestrictionEffect<CantBlockEffect> {
 
-	public CantBlockEffect() {
-		super(Duration.WhileOnBattlefield);
-	}
+    public CantBlockEffect() {
+        super(Duration.WhileOnBattlefield);
+    }
 
-	public CantBlockEffect(final CantBlockEffect effect) {
-		super(effect);
-	}
+    public CantBlockEffect(final CantBlockEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean applies(Permanent permanent, Ability source, Game game) {
-		return permanent.getAbilities().containsKey(CantBlockAbility.getInstance().getId()) || source.getId().equals(CantBlockAbility.getInstance().getId());
-	}
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        return permanent.getAbilities().containsKey(CantBlockAbility.getInstance().getId()) || source.getId().equals(CantBlockAbility.getInstance().getId());
+    }
 
-	@Override
-	public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-		return !blocker.getAbilities().containsKey(CantBlockAbility.getInstance().getId());
-	}
+    @Override
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        return !blocker.getAbilities().containsKey(CantBlockAbility.getInstance().getId());
+    }
 
-	@Override
-	public CantBlockEffect copy() {
-		return new CantBlockEffect(this);
-	}
+    @Override
+    public CantBlockEffect copy() {
+        return new CantBlockEffect(this);
+    }
 
 }

@@ -45,7 +45,7 @@ public class TasteOfBlood extends CardImpl<TasteOfBlood> {
     public TasteOfBlood (UUID ownerId) {
         super(ownerId, 113, "Taste of Blood", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
         this.expansionSetCode = "M12";
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
         this.getSpellAbility().addEffect(new GainLifeEffect(1));
         this.getSpellAbility().addTarget(new TargetPlayer());

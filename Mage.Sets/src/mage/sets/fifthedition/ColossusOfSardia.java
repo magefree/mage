@@ -59,10 +59,10 @@ public class ColossusOfSardia extends CardImpl<ColossusOfSardia> {
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());
-        
+
         // Colossus of Sardia doesn't untap during your untap step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipUntapSourceEffect()));
-        
+
         // {9}: Untap Colossus of Sardia. Activate this ability only during your upkeep.
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl("{9}"));
         ability.addCost(new OnlyDuringUpkeepCost());

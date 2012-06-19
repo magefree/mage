@@ -41,25 +41,25 @@ import mage.abilities.effects.Effect;
  */
 public class SimpleActivatedAbility extends ActivatedAbilityImpl<SimpleActivatedAbility> {
 
-	public SimpleActivatedAbility(Zone zone, Effect effect, ManaCosts cost) {
-		super(zone, effect, cost);
-	}
+    public SimpleActivatedAbility(Zone zone, Effect effect, ManaCosts cost) {
+        super(zone, effect, cost);
+    }
 
-	public SimpleActivatedAbility(Zone zone, Effect effect, Costs costs) {
-		super(zone, effect, costs);
-	}
+    public SimpleActivatedAbility(Zone zone, Effect effect, Costs costs) {
+        super(zone, effect, costs);
+    }
 
-	public SimpleActivatedAbility(Zone zone, Effect effect, Cost cost) {
-		super(zone, effect, cost);
-	}
+    public SimpleActivatedAbility(Zone zone, Effect effect, Cost cost) {
+        super(zone, effect, cost);
+    }
 
-	public SimpleActivatedAbility(SimpleActivatedAbility ability) {
-		super(ability);
-	}
+    public SimpleActivatedAbility(SimpleActivatedAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public SimpleActivatedAbility copy() {
-		return new SimpleActivatedAbility(this);
-	}
+    @Override
+    public SimpleActivatedAbility copy() {
+        return new SimpleActivatedAbility(this);
+    }
 
 }

@@ -58,10 +58,10 @@ public class ElspethTirel extends CardImpl<ElspethTirel> {
         super(ownerId, 6, "Elspeth Tirel", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{W}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Elspeth");
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), ""));
 
-		
+
         this.addAbility(new LoyaltyAbility(new ElspethTirelFirstEffect(), 2));
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new SoldierToken(), 3), -2));
         this.addAbility(new LoyaltyAbility(new ElspethTirelThirdEffect(), -5));
@@ -91,10 +91,10 @@ class ElspethTirelFirstEffect extends OneShotEffect<ElspethTirelFirstEffect> {
     public boolean apply(Game game, Ability source) {
         int amount = game.getBattlefield().countAll(new FilterCreaturePermanent(), source.getControllerId(), game);
         Player player = game.getPlayer(source.getControllerId());
-		if (player != null) {
-			player.gainLife(amount, game);
-		}
-		return true;
+        if (player != null) {
+            player.gainLife(amount, game);
+        }
+        return true;
     }
 
     @Override
@@ -117,9 +117,9 @@ class ElspethTirelThirdEffect extends OneShotEffect<ElspethTirelThirdEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent perm: game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-			if (!perm.getId().equals(source.getSourceId()) && !(perm instanceof PermanentToken) && ! (perm.getCardType().contains(CardType.LAND)))
-				perm.destroy(source.getId(), game, false);
-		}
+            if (!perm.getId().equals(source.getSourceId()) && !(perm instanceof PermanentToken) && ! (perm.getCardType().contains(CardType.LAND)))
+                perm.destroy(source.getId(), game, false);
+        }
         return true;
     }
 

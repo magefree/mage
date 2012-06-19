@@ -74,58 +74,58 @@ public class TakenoSamuraiGeneral extends CardImpl<TakenoSamuraiGeneral> {
 }
 
 class TakenoSamuraiGeneralEffect extends ContinuousEffectImpl<TakenoSamuraiGeneralEffect> {
-	private static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
+    private static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
     static {
         filter.getSubtype().add("Samurai");
         filter.setScopeSubtype(Filter.ComparisonScope.Any);
     }
 
-	public TakenoSamuraiGeneralEffect() {
-		super(Constants.Duration.WhileOnBattlefield, Constants.Layer.PTChangingEffects_7, Constants.SubLayer.ModifyPT_7c, Constants.Outcome.BoostCreature);
-		staticText = "Each other Samurai creature you control gets +1/+1 for each point of bushido it has";
-	}
+    public TakenoSamuraiGeneralEffect() {
+        super(Constants.Duration.WhileOnBattlefield, Constants.Layer.PTChangingEffects_7, Constants.SubLayer.ModifyPT_7c, Constants.Outcome.BoostCreature);
+        staticText = "Each other Samurai creature you control gets +1/+1 for each point of bushido it has";
+    }
 
-	public TakenoSamuraiGeneralEffect(final TakenoSamuraiGeneralEffect effect) {
-		super(effect);
-	}
+    public TakenoSamuraiGeneralEffect(final TakenoSamuraiGeneralEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public TakenoSamuraiGeneralEffect copy() {
-		return new TakenoSamuraiGeneralEffect(this);
-	}
+    @Override
+    public TakenoSamuraiGeneralEffect copy() {
+        return new TakenoSamuraiGeneralEffect(this);
+    }
 
-	@Override
-	public void init(Ability source, Game game) {
-		super.init(source, game);
-		if (this.affectedObjectsSet) {
-			for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
-				if (!perm.getId().equals(source.getSourceId())) {
+    @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        if (this.affectedObjectsSet) {
+            for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
+                if (!perm.getId().equals(source.getSourceId())) {
                     for (Ability ability : perm.getAbilities()) {
                         if (ability instanceof BushidoAbility) {
                             objects.add(perm.getId());
                         }
                     }
-				}
-			}
-		}
-	}
+                }
+            }
+        }
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
-			if (!this.affectedObjectsSet || objects.contains(perm.getId())) {
-				if (!perm.getId().equals(source.getSourceId())) {
+    @Override
+    public boolean apply(Game game, Ability source) {
+        for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
+            if (!this.affectedObjectsSet || objects.contains(perm.getId())) {
+                if (!perm.getId().equals(source.getSourceId())) {
                     for (Ability ability : perm.getAbilities()) {
                         if (ability instanceof BushidoAbility) {
                             perm.addPower(((BushidoAbility) ability).getValue());
                             perm.addToughness(((BushidoAbility) ability).getValue());
                         }
                     }
-				}
-			}
-		}
-		return true;
-	}
+                }
+            }
+        }
+        return true;
+    }
 
 }

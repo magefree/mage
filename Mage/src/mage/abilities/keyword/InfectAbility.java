@@ -57,28 +57,28 @@ import mage.abilities.StaticAbility;
  */
 public class InfectAbility extends StaticAbility<InfectAbility> {
 
-	private static final InfectAbility fINSTANCE =  new InfectAbility();
+    private static final InfectAbility fINSTANCE =  new InfectAbility();
 
-	private Object readResolve() throws ObjectStreamException {
-		return fINSTANCE;
-	}
+    private Object readResolve() throws ObjectStreamException {
+        return fINSTANCE;
+    }
 
-	public static InfectAbility getInstance() {
-		return fINSTANCE;
-	}
+    public static InfectAbility getInstance() {
+        return fINSTANCE;
+    }
 
-	private InfectAbility() {
-		super(Zone.ALL, null);
-	}
+    private InfectAbility() {
+        super(Zone.ALL, null);
+    }
 
-	@Override
-	public String getRule() {
-		return "Infect";
-	}
+    @Override
+    public String getRule() {
+        return "Infect";
+    }
 
-	@Override
-	public InfectAbility copy() {
-		return fINSTANCE;
-	}
+    @Override
+    public InfectAbility copy() {
+        return fINSTANCE;
+    }
 
 }

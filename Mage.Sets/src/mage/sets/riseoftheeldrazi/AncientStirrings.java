@@ -52,8 +52,8 @@ public class AncientStirrings extends CardImpl<AncientStirrings> {
     public AncientStirrings (UUID ownerId) {
         super(ownerId, 174, "Ancient Stirrings", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{G}");
         this.expansionSetCode = "ROE";
-	this.color.setGreen(true);
-        
+    this.color.setGreen(true);
+
         // Look at the top five cards of your library. You may reveal a colorless card from among them and put it into your hand. 
         // Then put the rest on the bottom of your library in any order. (Cards with no colored mana in their mana costs are colorless. Lands are also colorless.)
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(new StaticValue(5), false, new StaticValue(1), filter, false));

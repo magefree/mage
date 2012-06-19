@@ -47,7 +47,7 @@ public class PreysVengeance extends CardImpl<PreysVengeance> {
     public PreysVengeance (UUID ownerId) {
         super(ownerId, 205, "Prey's Vengeance", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "ROE";
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Constants.Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.addAbility(new ReboundAbility());

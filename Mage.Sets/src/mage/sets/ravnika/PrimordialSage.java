@@ -49,7 +49,7 @@ public class PrimordialSage extends CardImpl<PrimordialSage> {
         filter.getCardType().add(CardType.CREATURE);
         filter.setScopeCardType(Filter.ComparisonScope.Any);
     }
-    
+
     public PrimordialSage(UUID ownerId) {
         super(ownerId, 177, "Primordial Sage", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
         this.expansionSetCode = "RAV";

@@ -46,7 +46,7 @@ public class NezumiRonin extends CardImpl<NezumiRonin> {
         this.expansionSetCode = "CHK";
         this.subtype.add("Rat");
         this.subtype.add("Samurai");
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
         this.addAbility(new BushidoAbility(1));

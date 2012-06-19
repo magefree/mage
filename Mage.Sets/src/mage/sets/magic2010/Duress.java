@@ -57,57 +57,57 @@ public class Duress extends CardImpl<Duress> {
         this.getSpellAbility().addEffect(new DuressEffect());
     }
 
-	public Duress(final Duress card) {
-		super(card);
-	}
+    public Duress(final Duress card) {
+        super(card);
+    }
 
-	@Override
-	public Duress copy() {
-		return new Duress(this);
-	}
+    @Override
+    public Duress copy() {
+        return new Duress(this);
+    }
 }
 
 class DuressEffect extends OneShotEffect<DuressEffect> {
 
-	private static final FilterCard filter = new FilterCard("noncreature, nonland card");
+    private static final FilterCard filter = new FilterCard("noncreature, nonland card");
 
-	static {
-		filter.getNotCardType().add(CardType.CREATURE);
-		filter.getNotCardType().add(CardType.LAND);
-	}
+    static {
+        filter.getNotCardType().add(CardType.CREATURE);
+        filter.getNotCardType().add(CardType.LAND);
+    }
 
-	public DuressEffect() {
-		super(Outcome.Discard);
-		staticText = "Target opponent reveals his or her hand. You choose a noncreature, nonland card from it. That player discards that card";
-	}
+    public DuressEffect() {
+        super(Outcome.Discard);
+        staticText = "Target opponent reveals his or her hand. You choose a noncreature, nonland card from it. That player discards that card";
+    }
 
-	public DuressEffect(final DuressEffect effect) {
-		super(effect);
-	}
+    public DuressEffect(final DuressEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getFirstTarget());
-		if (player != null) {
-			player.revealCards("Duress", player.getHand(), game);
-			Player you = game.getPlayer(source.getControllerId());
-			if (you != null) {
-				TargetCard target = new TargetCard(Zone.PICK, filter);
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getFirstTarget());
+        if (player != null) {
+            player.revealCards("Duress", player.getHand(), game);
+            Player you = game.getPlayer(source.getControllerId());
+            if (you != null) {
+                TargetCard target = new TargetCard(Zone.PICK, filter);
                 target.setRequired(true);
-				if (you.choose(Outcome.Benefit, player.getHand(), target, game)) {
-					Card card = player.getHand().get(target.getFirstTarget(), game);
-					if (card != null) {
-						return player.discard(card, source, game);
-					}
-				}
-			}
-		}
-		return false;
-	}
+                if (you.choose(Outcome.Benefit, player.getHand(), target, game)) {
+                    Card card = player.getHand().get(target.getFirstTarget(), game);
+                    if (card != null) {
+                        return player.discard(card, source, game);
+                    }
+                }
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public DuressEffect copy() {
-		return new DuressEffect(this);
-	}
+    @Override
+    public DuressEffect copy() {
+        return new DuressEffect(this);
+    }
 
 }

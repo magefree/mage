@@ -43,36 +43,36 @@ import org.apache.log4j.Logger;
  */
 public abstract class MagePane extends javax.swing.JInternalFrame {
 
-	private final static Logger logger = Logger.getLogger(MagePane.class);
+    private final static Logger logger = Logger.getLogger(MagePane.class);
 
     /** Creates new form MagePane */
     public MagePane() {
         initComponents();
-		hideTitle();
+        hideTitle();
     }
 
-	private void hideTitle() {
-		if (ui instanceof BasicInternalFrameUI)
-			((BasicInternalFrameUI) ui).setNorthPane(null);
-	}
+    private void hideTitle() {
+        if (ui instanceof BasicInternalFrameUI)
+            ((BasicInternalFrameUI) ui).setNorthPane(null);
+    }
 
-	@Override
-	public void updateUI() {
-		super.updateUI();
-		hideTitle();
-	}
+    @Override
+    public void updateUI() {
+        super.updateUI();
+        hideTitle();
+    }
 
-	public void hideFrame() {
-		MageFrame.deactivate(this);
-	}
-	
-	public void activated() {
-		
-	}
-	
-	public void deactivated() {
-		
-	}
+    public void hideFrame() {
+        MageFrame.deactivate(this);
+    }
+
+    public void activated() {
+
+    }
+
+    public void deactivated() {
+
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.

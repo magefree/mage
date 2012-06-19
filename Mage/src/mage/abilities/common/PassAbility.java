@@ -40,28 +40,28 @@ import mage.game.Game;
  */
 public class PassAbility extends ActivatedAbilityImpl<PassAbility> {
 
-	public PassAbility() {
-		super(Zone.ALL, new PassEffect());
+    public PassAbility() {
+        super(Zone.ALL, new PassEffect());
         this.usesStack = false;
-	}
+    }
 
-	public PassAbility(final PassAbility ability) {
-		super(ability);
-	}
-	
-	@Override
-	public PassAbility copy() {
-		return new PassAbility(this);
-	}
+    public PassAbility(final PassAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public boolean canActivate(UUID playerId, Game game) {
-		return true;
-	}
+    @Override
+    public PassAbility copy() {
+        return new PassAbility(this);
+    }
 
-	@Override
-	public String toString() {
-		return "Pass";
-	}
+    @Override
+    public boolean canActivate(UUID playerId, Game game) {
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Pass";
+    }
 
 }

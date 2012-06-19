@@ -39,7 +39,7 @@ import java.io.ObjectStreamException;
 public class SoulbondAbility extends StaticAbility<SoulbondAbility> {
 
     private static final SoulbondAbility fINSTANCE = new SoulbondAbility();
-    
+
     private Object readResolve() throws ObjectStreamException {
         return fINSTANCE;
     }

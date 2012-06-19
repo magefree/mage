@@ -50,7 +50,7 @@ public class BlackSunsZenith extends CardImpl<BlackSunsZenith> {
     public BlackSunsZenith (UUID ownerId) {
         super(ownerId, 39, "Black Sun's Zenith", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{B}{B}");
         this.expansionSetCode = "MBS";
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.getSpellAbility().addEffect(new BlackSunsZenithEffect());
         this.getSpellAbility().addEffect(ShuffleSpellEffect.getInstance());
     }

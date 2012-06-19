@@ -34,22 +34,22 @@ package mage.filter.common;
  */
 public class FilterUntappedCreature extends FilterCreaturePermanent<FilterUntappedCreature> {
 
-	public FilterUntappedCreature() {
-		this("untapped creature");
-	}
+    public FilterUntappedCreature() {
+        this("untapped creature");
+    }
 
-	public FilterUntappedCreature(String name) {
-		super(name);
-		this.tapped = false;
-		this.useTapped = true;
-	}
+    public FilterUntappedCreature(String name) {
+        super(name);
+        this.tapped = false;
+        this.useTapped = true;
+    }
 
-	public FilterUntappedCreature(final FilterUntappedCreature filter) {
-		super(filter);
-	}
+    public FilterUntappedCreature(final FilterUntappedCreature filter) {
+        super(filter);
+    }
 
-	@Override
-	public FilterUntappedCreature copy() {
-		return new FilterUntappedCreature(this);
-	}
+    @Override
+    public FilterUntappedCreature copy() {
+        return new FilterUntappedCreature(this);
+    }
 }

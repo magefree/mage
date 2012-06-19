@@ -47,8 +47,8 @@ public class WistfulSelkie extends CardImpl<WistfulSelkie> {
         this.expansionSetCode = "EVE";
         this.subtype.add("Merfolk");
         this.subtype.add("Wizard");
-		this.color.setGreen(true);
-		this.color.setBlue(true);
+        this.color.setGreen(true);
+        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(1)));

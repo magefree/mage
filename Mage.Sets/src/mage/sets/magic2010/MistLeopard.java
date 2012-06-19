@@ -47,7 +47,7 @@ public class MistLeopard extends CardImpl<MistLeopard> {
         this.color.setGreen(true);
         this.subtype.add("Cat");
         this.power = new MageInt(3);
-	this.toughness = new MageInt(2);
+    this.toughness = new MageInt(2);
         this.addAbility(ShroudAbility.getInstance());
     }
 

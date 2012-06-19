@@ -47,59 +47,59 @@ import java.util.concurrent.TimeUnit;
  */
 public class UserManager {
 
-	protected static ScheduledExecutorService expireExecutor = Executors.newSingleThreadScheduledExecutor();
+    protected static ScheduledExecutorService expireExecutor = Executors.newSingleThreadScheduledExecutor();
 
-	private final static UserManager INSTANCE = new UserManager();
-	private final static Logger logger = Logger.getLogger(UserManager.class);
+    private final static UserManager INSTANCE = new UserManager();
+    private final static Logger logger = Logger.getLogger(UserManager.class);
 
-	public static UserManager getInstance() {
-		return INSTANCE;
-	}
+    public static UserManager getInstance() {
+        return INSTANCE;
+    }
 
-	private UserManager() {
-		expireExecutor.scheduleAtFixedRate(new Runnable() {
-			@Override
-			public void run() {
-				checkExpired();
-			}
-		}, 60, 60, TimeUnit.SECONDS);
-	}
+    private UserManager() {
+        expireExecutor.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                checkExpired();
+            }
+        }, 60, 60, TimeUnit.SECONDS);
+    }
 
-	private ConcurrentHashMap<UUID, User> users = new ConcurrentHashMap<UUID, User>();
+    private ConcurrentHashMap<UUID, User> users = new ConcurrentHashMap<UUID, User>();
 
-	public User createUser(String userName, String host) {
-		if (findUser(userName) != null)
-			return null; //user already exists
-		User user = new User(userName, host);
-		users.put(user.getId(), user);
-		return user;
-	}
-	
-	public User getUser(UUID userId) {
-		return users.get(userId);
-	}
-	
-	public User findUser(String userName) {
-		for (User user: users.values()) {
-			if (user.getName().equals(userName))
-				return user;
-		}
-		return null;
-	}
-	
-	public Collection<User> getUsers() {
-		return users.values();
-	}
-		
-	public boolean connectToSession(String sessionId, UUID userId) {
-		if (users.containsKey(userId)) {
-			users.get(userId).setSessionId(sessionId);
-			return true;
-		}
-		return false;
-	}
-	
-	public void disconnect(UUID userId) {
+    public User createUser(String userName, String host) {
+        if (findUser(userName) != null)
+            return null; //user already exists
+        User user = new User(userName, host);
+        users.put(user.getId(), user);
+        return user;
+    }
+
+    public User getUser(UUID userId) {
+        return users.get(userId);
+    }
+
+    public User findUser(String userName) {
+        for (User user: users.values()) {
+            if (user.getName().equals(userName))
+                return user;
+        }
+        return null;
+    }
+
+    public Collection<User> getUsers() {
+        return users.values();
+    }
+
+    public boolean connectToSession(String sessionId, UUID userId) {
+        if (users.containsKey(userId)) {
+            users.get(userId).setSessionId(sessionId);
+            return true;
+        }
+        return false;
+    }
+
+    public void disconnect(UUID userId) {
         if (userId != null) {
             ChatManager.getInstance().removeUser(userId);
             if (users.containsKey(userId)) {
@@ -108,24 +108,24 @@ public class UserManager {
                 ChatManager.getInstance().broadcast(userId, "has lost connection", MessageColor.BLACK);
             }
         }
-	}
-	
-	public boolean isAdmin(UUID userId) {
-		if (users.containsKey(userId)) {
-			return users.get(userId).getName().equals("Admin");
-		}
-		return false;
-	}
+    }
 
-	public void removeUser(UUID userId) {
-		if (users.containsKey(userId)) {
+    public boolean isAdmin(UUID userId) {
+        if (users.containsKey(userId)) {
+            return users.get(userId).getName().equals("Admin");
+        }
+        return false;
+    }
+
+    public void removeUser(UUID userId) {
+        if (users.containsKey(userId)) {
             logger.info("user removed" + userId);
-			users.get(userId).setSessionId("");
-			ChatManager.getInstance().broadcast(userId, "has disconnected", MessageColor.BLACK);
-			users.get(userId).kill();
-			users.remove(userId);
-		}
-	}
+            users.get(userId).setSessionId("");
+            ChatManager.getInstance().broadcast(userId, "has disconnected", MessageColor.BLACK);
+            users.get(userId).kill();
+            users.remove(userId);
+        }
+    }
 
     public boolean extendUserSession(UUID userId) {
         if (users.containsKey(userId)) {
@@ -134,17 +134,17 @@ public class UserManager {
         }
         return false;
     }
-	
-	private void checkExpired() {
-		Calendar expired = Calendar.getInstance();
-		expired.add(Calendar.MINUTE, -3) ;
-		for (User user: users.values()) {
-			if (user.isExpired(expired.getTime())) {
+
+    private void checkExpired() {
+        Calendar expired = Calendar.getInstance();
+        expired.add(Calendar.MINUTE, -3) ;
+        for (User user: users.values()) {
+            if (user.isExpired(expired.getTime())) {
                 logger.info(user.getName() + " session expired " + user.getId());
-				user.kill();
-				users.remove(user.getId());
-			}
-		}
-	}
-	
+                user.kill();
+                users.remove(user.getId());
+            }
+        }
+    }
+
 }

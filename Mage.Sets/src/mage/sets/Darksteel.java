@@ -9,9 +9,9 @@ public class Darksteel extends ExpansionSet {
 
     private static final Darksteel fINSTANCE =  new Darksteel();
 
-	public static Darksteel getInstance() {
-		return fINSTANCE;
-	}
+    public static Darksteel getInstance() {
+        return fINSTANCE;
+    }
 
     public Darksteel() {
         super("Darksteel", "DST", "", "mage.sets.darksteel", new GregorianCalendar(2004, 1, 6).getTime(), Constants.SetType.EXPANSION);

@@ -39,42 +39,42 @@ import mage.target.Targets;
  */
 public class Mode implements Serializable {
 
-	protected UUID id;
-	protected Targets targets;
-	protected Choices choices;
-	protected Effects effects;
-	
-	public Mode() {
-		this.id = UUID.randomUUID();
-		this.targets = new Targets();
-		this.choices = new Choices();
-		this.effects = new Effects();
-	}
-	
-	public Mode(Mode mode) {
-		this.id = mode.id;
-		this.targets = mode.targets.copy();
-		this.choices = mode.choices.copy();
-		this.effects = mode.effects.copy();
-	}
-	
-	public Mode copy() {
-		return new Mode(this);
-	}
-	
-	public UUID getId() {
-		return id;
-	}
-	
-	public Targets getTargets() {
-		return targets;
-	}
-	
-	public Choices getChoices() {
-		return choices;
-	}
-	
-	public Effects getEffects() {
-		return effects;
-	}
+    protected UUID id;
+    protected Targets targets;
+    protected Choices choices;
+    protected Effects effects;
+
+    public Mode() {
+        this.id = UUID.randomUUID();
+        this.targets = new Targets();
+        this.choices = new Choices();
+        this.effects = new Effects();
+    }
+
+    public Mode(Mode mode) {
+        this.id = mode.id;
+        this.targets = mode.targets.copy();
+        this.choices = mode.choices.copy();
+        this.effects = mode.effects.copy();
+    }
+
+    public Mode copy() {
+        return new Mode(this);
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public Targets getTargets() {
+        return targets;
+    }
+
+    public Choices getChoices() {
+        return choices;
+    }
+
+    public Effects getEffects() {
+        return effects;
+    }
 }

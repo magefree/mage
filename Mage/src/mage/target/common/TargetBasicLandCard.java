@@ -39,20 +39,20 @@ import mage.target.TargetCard;
  */
 public class TargetBasicLandCard extends TargetCard<TargetBasicLandCard> {
 
-	public TargetBasicLandCard(Zone zone) {
-		super(zone);
-		filter.getSupertype().add("Basic");
-		filter.setScopeSupertype(ComparisonScope.Any);
-		filter.getCardType().add(CardType.LAND);
-		filter.setScopeCardType(ComparisonScope.Any);
-	}
+    public TargetBasicLandCard(Zone zone) {
+        super(zone);
+        filter.getSupertype().add("Basic");
+        filter.setScopeSupertype(ComparisonScope.Any);
+        filter.getCardType().add(CardType.LAND);
+        filter.setScopeCardType(ComparisonScope.Any);
+    }
 
-	public TargetBasicLandCard(final TargetBasicLandCard target) {
-		super(target);
-	}
+    public TargetBasicLandCard(final TargetBasicLandCard target) {
+        super(target);
+    }
 
-	@Override
-	public TargetBasicLandCard copy() {
-		return new TargetBasicLandCard(this);
-	}
+    @Override
+    public TargetBasicLandCard copy() {
+        return new TargetBasicLandCard(this);
+    }
 }

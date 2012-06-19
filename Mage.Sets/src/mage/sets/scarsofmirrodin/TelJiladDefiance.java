@@ -44,22 +44,22 @@ import java.util.UUID;
  */
 public class TelJiladDefiance extends CardImpl<TelJiladDefiance> {
 
-	public TelJiladDefiance(UUID ownerId) {
-		super(ownerId, 129, "Tel-Jilad Defiance", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
-		this.expansionSetCode = "SOM";
-		this.color.setGreen(true);
-		this.getSpellAbility().addEffect(new GainProtectionFromTypeTargetEffect(Constants.Duration.EndOfTurn, new FilterArtifactCard("artifacts")));
-		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-		this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
-	}
+    public TelJiladDefiance(UUID ownerId) {
+        super(ownerId, 129, "Tel-Jilad Defiance", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
+        this.expansionSetCode = "SOM";
+        this.color.setGreen(true);
+        this.getSpellAbility().addEffect(new GainProtectionFromTypeTargetEffect(Constants.Duration.EndOfTurn, new FilterArtifactCard("artifacts")));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+    }
 
-	public TelJiladDefiance(final TelJiladDefiance card) {
-		super(card);
-	}
+    public TelJiladDefiance(final TelJiladDefiance card) {
+        super(card);
+    }
 
-	@Override
-	public TelJiladDefiance copy() {
-		return new TelJiladDefiance(this);
-	}
+    @Override
+    public TelJiladDefiance copy() {
+        return new TelJiladDefiance(this);
+    }
 
 }

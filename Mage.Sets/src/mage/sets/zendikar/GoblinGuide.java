@@ -51,62 +51,62 @@ import mage.players.Player;
  */
 public class GoblinGuide extends CardImpl<GoblinGuide> {
 
-	public GoblinGuide(UUID ownerId) {
-		super(ownerId, 126, "Goblin Guide", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}");
-		this.expansionSetCode = "ZEN";
-		this.color.setRed(true);
-		this.subtype.add("Goblin");
-		this.subtype.add("Scout");
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
-		this.addAbility(HasteAbility.getInstance());
-		this.addAbility(new AttacksTriggeredAbility(new GoblinGuideEffect(), false));
-	}
+    public GoblinGuide(UUID ownerId) {
+        super(ownerId, 126, "Goblin Guide", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}");
+        this.expansionSetCode = "ZEN";
+        this.color.setRed(true);
+        this.subtype.add("Goblin");
+        this.subtype.add("Scout");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+        this.addAbility(HasteAbility.getInstance());
+        this.addAbility(new AttacksTriggeredAbility(new GoblinGuideEffect(), false));
+    }
 
-	public GoblinGuide(final GoblinGuide card) {
-		super(card);
-	}
+    public GoblinGuide(final GoblinGuide card) {
+        super(card);
+    }
 
-	@Override
-	public GoblinGuide copy() {
-		return new GoblinGuide(this);
-	}
+    @Override
+    public GoblinGuide copy() {
+        return new GoblinGuide(this);
+    }
 
 }
 
 class GoblinGuideEffect extends OneShotEffect<GoblinGuideEffect> {
 
-	public GoblinGuideEffect() {
-		super(Outcome.DrawCard);
-		staticText = "defending player reveals the top card of his or her library. If it's a land card, that player puts it into his or her hand";
-	}
+    public GoblinGuideEffect() {
+        super(Outcome.DrawCard);
+        staticText = "defending player reveals the top card of his or her library. If it's a land card, that player puts it into his or her hand";
+    }
 
-	public GoblinGuideEffect(final GoblinGuideEffect effect) {
-		super(effect);
-	}
+    public GoblinGuideEffect(final GoblinGuideEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public GoblinGuideEffect copy() {
-		return new GoblinGuideEffect(this);
-	}
+    @Override
+    public GoblinGuideEffect copy() {
+        return new GoblinGuideEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		UUID defenderId = game.getCombat().getDefendingPlayer(source.getSourceId());
-		Player defender = game.getPlayer(defenderId);
-		if (defender != null) {
-			Cards cards = new CardsImpl();
-			Card card = defender.getLibrary().getFromTop(game);
-			if (card != null) {
-				cards.add(card);
-				defender.revealCards("Goblin Guide", cards, game);
-				if (card.getCardType().contains(CardType.LAND)) {
-					defender.getLibrary().removeFromTop(game);
-					card.moveToZone(Zone.HAND, source.getId(), game, true);
-				}
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        UUID defenderId = game.getCombat().getDefendingPlayer(source.getSourceId());
+        Player defender = game.getPlayer(defenderId);
+        if (defender != null) {
+            Cards cards = new CardsImpl();
+            Card card = defender.getLibrary().getFromTop(game);
+            if (card != null) {
+                cards.add(card);
+                defender.revealCards("Goblin Guide", cards, game);
+                if (card.getCardType().contains(CardType.LAND)) {
+                    defender.getLibrary().removeFromTop(game);
+                    card.moveToZone(Zone.HAND, source.getId(), game, true);
+                }
+            }
+        }
+        return false;
+    }
 
 }

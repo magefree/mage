@@ -46,70 +46,70 @@ import java.util.UUID;
  */
 public class EchoCirclet extends CardImpl<EchoCirclet> {
 
-	public EchoCirclet(UUID ownerId) {
-		super(ownerId, 153, "Echo Circlet", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-		this.expansionSetCode = "SOM";
-		this.subtype.add("Equipment");
+    public EchoCirclet(UUID ownerId) {
+        super(ownerId, 153, "Echo Circlet", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
+        this.expansionSetCode = "SOM";
+        this.subtype.add("Equipment");
 
-		this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(1)));
-		// Equipped creature can block an additional creature.
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new EchoCircletEffect()));
-	}
+        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(1)));
+        // Equipped creature can block an additional creature.
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new EchoCircletEffect()));
+    }
 
-	public EchoCirclet(final EchoCirclet card) {
-		super(card);
-	}
+    public EchoCirclet(final EchoCirclet card) {
+        super(card);
+    }
 
-	@Override
-	public EchoCirclet copy() {
-		return new EchoCirclet(this);
-	}
+    @Override
+    public EchoCirclet copy() {
+        return new EchoCirclet(this);
+    }
 }
 
 class EchoCircletEffect extends ContinuousEffectImpl<EchoCircletEffect> {
 
-	public EchoCircletEffect() {
-		super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
-		staticText = "Equipped creature can block an additional creature";
-	}
+    public EchoCircletEffect() {
+        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        staticText = "Equipped creature can block an additional creature";
+    }
 
-	public EchoCircletEffect(final EchoCircletEffect effect) {
-		super(effect);
-	}
+    public EchoCircletEffect(final EchoCircletEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public EchoCircletEffect copy() {
-		return new EchoCircletEffect(this);
-	}
+    @Override
+    public EchoCircletEffect copy() {
+        return new EchoCircletEffect(this);
+    }
 
-	@Override
-	public boolean apply(Constants.Layer layer, Constants.SubLayer sublayer, Ability source, Game game) {
-		Permanent perm = game.getPermanent(source.getSourceId());
-		if (perm != null && perm.getAttachedTo() != null) {
-			Permanent equipped = game.getPermanent(perm.getAttachedTo());
-			if (equipped != null) {
-				switch (layer) {
-					case RulesEffects:
-						// maxBlocks = 0 equals to "can block any number of creatures"
-						if (equipped.getMaxBlocks() > 0) {
-							equipped.setMaxBlocks(equipped.getMaxBlocks() + 1);
-						}
-						break;
-				}
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Constants.Layer layer, Constants.SubLayer sublayer, Ability source, Game game) {
+        Permanent perm = game.getPermanent(source.getSourceId());
+        if (perm != null && perm.getAttachedTo() != null) {
+            Permanent equipped = game.getPermanent(perm.getAttachedTo());
+            if (equipped != null) {
+                switch (layer) {
+                    case RulesEffects:
+                        // maxBlocks = 0 equals to "can block any number of creatures"
+                        if (equipped.getMaxBlocks() > 0) {
+                            equipped.setMaxBlocks(equipped.getMaxBlocks() + 1);
+                        }
+                        break;
+                }
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
 
-	@Override
-	public boolean hasLayer(Constants.Layer layer) {
-		return layer == Constants.Layer.RulesEffects;
-	}
+    @Override
+    public boolean hasLayer(Constants.Layer layer) {
+        return layer == Constants.Layer.RulesEffects;
+    }
 
 }

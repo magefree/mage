@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class Cancel extends mage.sets.tenth.Cancel {
 
-	public Cancel(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 33;
-		this.expansionSetCode = "ALA";
-	}
+    public Cancel(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 33;
+        this.expansionSetCode = "ALA";
+    }
 
-	public Cancel(final Cancel card) {
-		super(card);
-	}
+    public Cancel(final Cancel card) {
+        super(card);
+    }
 
-	@Override
-	public Cancel copy() {
-		return new Cancel(this);
-	}
+    @Override
+    public Cancel copy() {
+        return new Cancel(this);
+    }
 
 }

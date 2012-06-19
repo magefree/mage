@@ -43,26 +43,26 @@ import mage.cards.CardImpl;
  */
 public class HowlingBanshee extends CardImpl<HowlingBanshee> {
 
-	public HowlingBanshee(UUID ownerId) {
-		super(ownerId, 99, "Howling Banshee", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-		this.expansionSetCode = "M10";
-		this.subtype.add("Spirit");
-		this.color.setBlack(true);
-		this.power = new MageInt(3);
-		this.toughness = new MageInt(3);
+    public HowlingBanshee(UUID ownerId) {
+        super(ownerId, 99, "Howling Banshee", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
+        this.expansionSetCode = "M10";
+        this.subtype.add("Spirit");
+        this.color.setBlack(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-		this.addAbility(FlyingAbility.getInstance());
-		this.addAbility(new EntersBattlefieldTriggeredAbility(new LoseLifePlayersEffect(3), false));
-	}
+        this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new LoseLifePlayersEffect(3), false));
+    }
 
-	public HowlingBanshee(final HowlingBanshee card) {
-		super(card);
-	}
+    public HowlingBanshee(final HowlingBanshee card) {
+        super(card);
+    }
 
-	@Override
-	public HowlingBanshee copy() {
-		return new HowlingBanshee(this);
-	}
+    @Override
+    public HowlingBanshee copy() {
+        return new HowlingBanshee(this);
+    }
 
 }
 

@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class Sleep extends mage.sets.magic2010.Sleep {
 
-	public Sleep(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 73;
-		this.expansionSetCode = "M11";
-	}
+    public Sleep(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 73;
+        this.expansionSetCode = "M11";
+    }
 
-	public Sleep(final Sleep card) {
-		super(card);
-	}
+    public Sleep(final Sleep card) {
+        super(card);
+    }
 
-	@Override
-	public Sleep copy() {
-		return new Sleep(this);
-	}
+    @Override
+    public Sleep copy() {
+        return new Sleep(this);
+    }
 
 }

@@ -42,32 +42,32 @@ import mage.game.permanent.Permanent;
  */
 public abstract class RequirementEffect<T extends RequirementEffect<T>> extends ContinuousEffectImpl<T> {
 
-	public RequirementEffect(Duration duration) {
-		super(duration, Outcome.Detriment);
-		this.effectType = EffectType.REQUIREMENT;
-	}
+    public RequirementEffect(Duration duration) {
+        super(duration, Outcome.Detriment);
+        this.effectType = EffectType.REQUIREMENT;
+    }
 
-	public RequirementEffect(final RequirementEffect effect) {
-		super(effect);
-	}
+    public RequirementEffect(final RequirementEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		throw new UnsupportedOperationException("Not supported.");
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        throw new UnsupportedOperationException("Not supported.");
+    }
 
-	public abstract boolean applies(Permanent permanent, Ability source, Game game);
+    public abstract boolean applies(Permanent permanent, Ability source, Game game);
 
-	public abstract boolean mustAttack(Game game);
+    public abstract boolean mustAttack(Game game);
 
-	public abstract boolean mustBlock(Game game);
+    public abstract boolean mustBlock(Game game);
 
-	public UUID mustAttackDefender(Ability source, Game game) {
-		return null;
-	}
+    public UUID mustAttackDefender(Ability source, Game game) {
+        return null;
+    }
 
-	public UUID mustBlockAttacker(Ability source, Game game) {
-		return null;
-	}
+    public UUID mustBlockAttacker(Ability source, Game game) {
+        return null;
+    }
 
 }

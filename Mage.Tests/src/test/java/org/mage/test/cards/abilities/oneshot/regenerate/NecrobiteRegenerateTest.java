@@ -23,10 +23,10 @@ public class NecrobiteRegenerateTest extends CardTestPlayerBase {
         attack(2, playerB, "Elite Vanguard");
         block(2, playerA, "Craw Wurm", "Elite Vanguard");
         castSpell(2, Constants.PhaseStep.DECLARE_BLOCKERS, playerB, "Necrobite", "Elite Vanguard");
-        
+
         setStopAt(2, Constants.PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        
+
         assertLife(playerA, 20);
         assertLife(playerB, 20);
 

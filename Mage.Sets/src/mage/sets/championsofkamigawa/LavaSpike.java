@@ -45,10 +45,10 @@ public class LavaSpike extends CardImpl<LavaSpike> {
         super(ownerId, 178, "Lava Spike", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
-		this.color.setRed(true);
+        this.color.setRed(true);
         this.getSpellAbility().addTarget(new TargetPlayer());
-		this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        
+        this.getSpellAbility().addEffect(new DamageTargetEffect(3));
+
     }
 
     public LavaSpike (final LavaSpike card) {

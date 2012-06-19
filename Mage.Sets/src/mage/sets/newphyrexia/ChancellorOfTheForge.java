@@ -69,7 +69,7 @@ public class ChancellorOfTheForge extends CardImpl<ChancellorOfTheForge> {
 
         // You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, put a 1/1 red Goblin creature token with haste onto the battlefield.
         this.addAbility(new ChancellorAbility(new ChancellorOfTheForgeDelayedTriggeredAbility(), abilityText));
-        
+
         // When Chancellor of the Forge enters the battlefield, put X 1/1 red Goblin creature tokens with haste onto the battlefield, where X is the number of creatures you control.
         DynamicValue value = new PermanentsOnBattlefieldCount(filter);
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GoblinToken(), value), false));
@@ -87,35 +87,35 @@ public class ChancellorOfTheForge extends CardImpl<ChancellorOfTheForge> {
 
 class ChancellorOfTheForgeDelayedTriggeredAbility extends DelayedTriggeredAbility<ChancellorOfTheForgeDelayedTriggeredAbility> {
 
-	ChancellorOfTheForgeDelayedTriggeredAbility () {
-		super(new CreateTokenEffect(new GoblinToken()));
-	}
+    ChancellorOfTheForgeDelayedTriggeredAbility () {
+        super(new CreateTokenEffect(new GoblinToken()));
+    }
 
-	ChancellorOfTheForgeDelayedTriggeredAbility(ChancellorOfTheForgeDelayedTriggeredAbility ability) {
-		super(ability);
-	}
+    ChancellorOfTheForgeDelayedTriggeredAbility(ChancellorOfTheForgeDelayedTriggeredAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE) {
-			return true;
-		}
-		return false;
-	}
-	@Override
-	public ChancellorOfTheForgeDelayedTriggeredAbility copy() {
-		return new ChancellorOfTheForgeDelayedTriggeredAbility(this);
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE) {
+            return true;
+        }
+        return false;
+    }
+    @Override
+    public ChancellorOfTheForgeDelayedTriggeredAbility copy() {
+        return new ChancellorOfTheForgeDelayedTriggeredAbility(this);
+    }
 }
 
 class GoblinToken extends Token {
-	public GoblinToken() {
-		super("Goblin", "1/1 red Goblin creature token with haste");
-		cardType.add(CardType.CREATURE);
+    public GoblinToken() {
+        super("Goblin", "1/1 red Goblin creature token with haste");
+        cardType.add(CardType.CREATURE);
         color.setRed(true);
-		subtype.add("Goblin");
-		power = new MageInt(1);
-		toughness = new MageInt(1);
+        subtype.add("Goblin");
+        power = new MageInt(1);
+        toughness = new MageInt(1);
         addAbility(HasteAbility.getInstance());
-	}
+    }
 }

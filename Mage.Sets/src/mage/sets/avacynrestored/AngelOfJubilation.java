@@ -50,7 +50,7 @@ import java.util.UUID;
 public class AngelOfJubilation extends CardImpl<AngelOfJubilation> {
 
     private final static FilterCreaturePermanent filterNonBlack = new FilterCreaturePermanent("nonblack creatures");
-    
+
     static {
         filterNonBlack.setUseColor(true);
         filterNonBlack.setColor(ObjectColor.BLACK);

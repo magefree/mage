@@ -53,13 +53,13 @@ public class Lifelink extends CardImpl<Lifelink> {
         super(ownerId, 24, "Lifelink", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");
         this.expansionSetCode = "M12";
         this.subtype.add("Aura");
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.AddAbility));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		this.addAbility(ability);
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), Constants.AttachmentType.AURA)));
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.AddAbility));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), Constants.AttachmentType.AURA)));
     }
 
     public Lifelink (final Lifelink card) {

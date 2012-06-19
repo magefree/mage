@@ -41,72 +41,72 @@ import mage.players.Player;
  */
 public class KickerAbility extends StaticAbility<KickerAbility> {
 
-	protected boolean kicked = false;
-	protected boolean replaces = false;
+    protected boolean kicked = false;
+    protected boolean replaces = false;
 
-	public KickerAbility(Effect effect, boolean replaces) {
-		super(Zone.STACK, effect);
-		this.replaces = replaces;
-	}
+    public KickerAbility(Effect effect, boolean replaces) {
+        super(Zone.STACK, effect);
+        this.replaces = replaces;
+    }
 
-	public KickerAbility(final KickerAbility ability) {
-		super(ability);
-		this.kicked = ability.kicked;
-		this.replaces = ability.replaces;
-	}
+    public KickerAbility(final KickerAbility ability) {
+        super(ability);
+        this.kicked = ability.kicked;
+        this.replaces = ability.replaces;
+    }
 
-	@Override
-	public KickerAbility copy() {
-		return new KickerAbility(this);
-	}
+    @Override
+    public KickerAbility copy() {
+        return new KickerAbility(this);
+    }
 
-	@Override
-	public boolean activate(Game game, boolean noMana) {
-		Player player = game.getPlayer(this.getControllerId());
+    @Override
+    public boolean activate(Game game, boolean noMana) {
+        Player player = game.getPlayer(this.getControllerId());
 
-		String message = "Use kicker - " + getRule() + "?";
-		Card card = game.getCard(sourceId);
-		// replace by card name or just plain "this"
-		String text = card == null ? "this" : card.getName();
-		message = message.replace("{this}", text).replace("{source}", text);
-		if (player.chooseUse(getEffects().get(0).getOutcome(), message, game)) {
-			int bookmark = game.bookmarkState();
-			if (super.activate(game, noMana)) {
-				game.removeBookmark(bookmark);
-				kicked = true;
-			}
-			else {
-				game.restoreState(bookmark);
-				kicked = false;
-			}
-			return kicked;
-		}
-		return false;
-	}
+        String message = "Use kicker - " + getRule() + "?";
+        Card card = game.getCard(sourceId);
+        // replace by card name or just plain "this"
+        String text = card == null ? "this" : card.getName();
+        message = message.replace("{this}", text).replace("{source}", text);
+        if (player.chooseUse(getEffects().get(0).getOutcome(), message, game)) {
+            int bookmark = game.bookmarkState();
+            if (super.activate(game, noMana)) {
+                game.removeBookmark(bookmark);
+                kicked = true;
+            }
+            else {
+                game.restoreState(bookmark);
+                kicked = false;
+            }
+            return kicked;
+        }
+        return false;
+    }
 
-	public boolean isKicked() {
-		return kicked;
-	}
+    public boolean isKicked() {
+        return kicked;
+    }
 
-	public boolean isReplaces() {
-		return replaces;
-	}
+    public boolean isReplaces() {
+        return replaces;
+    }
 
-	@Override
-	public String getRule() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("Kicker");
-		if (manaCosts.size() > 0) {
-			sb.append(manaCosts.getText());
-			if (costs.size() > 0)
-				sb.append(",");
-		}
-		if (costs.size() > 0)
-			sb.append(costs.getText());
-		sb.append(":").append(modes.getText());
-		if (replaces)
-			sb.append(" instead");
-		return sb.toString();
-	}
+    @Override
+    public String getRule() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Kicker");
+        if (manaCosts.size() > 0) {
+            sb.append(manaCosts.getText());
+            if (costs.size() > 0)
+                sb.append(",");
+        }
+        if (costs.size() > 0)
+            sb.append(costs.getText());
+        sb.append(":").append(modes.getText());
+        if (replaces)
+            sb.append(" instead");
+        return sb.toString();
+    }
 
 }

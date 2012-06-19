@@ -43,21 +43,21 @@ import java.util.UUID;
  */
 public class UntamedMight extends CardImpl<UntamedMight> {
 
-	public UntamedMight(UUID ownerId) {
-		super(ownerId, 131, "Untamed Might", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{X}{G}");
-		this.expansionSetCode = "SOM";
-		this.color.setGreen(true);
-		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-		this.getSpellAbility().addEffect(new BoostTargetEffect(new ManacostVariableValue(), new ManacostVariableValue(), Constants.Duration.EndOfTurn));
-	}
+    public UntamedMight(UUID ownerId) {
+        super(ownerId, 131, "Untamed Might", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{X}{G}");
+        this.expansionSetCode = "SOM";
+        this.color.setGreen(true);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addEffect(new BoostTargetEffect(new ManacostVariableValue(), new ManacostVariableValue(), Constants.Duration.EndOfTurn));
+    }
 
-	public UntamedMight(final UntamedMight card) {
-		super(card);
-	}
+    public UntamedMight(final UntamedMight card) {
+        super(card);
+    }
 
-	@Override
-	public UntamedMight copy() {
-		return new UntamedMight(this);
-	}
+    @Override
+    public UntamedMight copy() {
+        return new UntamedMight(this);
+    }
 
 }

@@ -42,9 +42,9 @@ public class Dissension extends ExpansionSet {
 
     private static final Dissension fINSTANCE =  new Dissension();
 
-	public static Dissension getInstance() {
-		return fINSTANCE;
-	}
+    public static Dissension getInstance() {
+        return fINSTANCE;
+    }
 
     private Dissension() {
         super("Dissension", "DIS", "", "mage.sets.dissension", new GregorianCalendar(2006, 4, 5).getTime(), Constants.SetType.EXPANSION);

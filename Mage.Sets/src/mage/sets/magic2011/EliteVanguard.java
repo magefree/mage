@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class EliteVanguard extends mage.sets.magic2010.EliteVanguard {
 
-	public EliteVanguard(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 13;
-		this.expansionSetCode = "M11";
-	}
+    public EliteVanguard(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 13;
+        this.expansionSetCode = "M11";
+    }
 
-	public EliteVanguard(final EliteVanguard card) {
-		super(card);
-	}
+    public EliteVanguard(final EliteVanguard card) {
+        super(card);
+    }
 
-	@Override
-	public EliteVanguard copy() {
-		return new EliteVanguard(this);
-	}
+    @Override
+    public EliteVanguard copy() {
+        return new EliteVanguard(this);
+    }
 
 }

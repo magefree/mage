@@ -49,8 +49,8 @@ public class RuneScarredDemon extends CardImpl<RuneScarredDemon> {
         super(ownerId, 106, "Rune-Scarred Demon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
         this.expansionSetCode = "M12";
         this.subtype.add("Demon");
-		this.color.setBlack(true);
-		this.color.setBlack(true);
+        this.color.setBlack(true);
+        this.color.setBlack(true);
         this.power = new MageInt(6 );
         this.toughness = new MageInt( 6);
         this.addAbility(FlyingAbility.getInstance());

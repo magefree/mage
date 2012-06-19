@@ -47,27 +47,27 @@ import mage.game.events.GameEvent.EventType;
  */
 public class HellsparkElemental extends CardImpl<HellsparkElemental> {
 
-	public HellsparkElemental(UUID ownerId) {
-		super(ownerId, 65, "Hellspark Elemental", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-		this.expansionSetCode = "CON";
-		this.subtype.add("Elemental");
-		this.color.setRed(true);
-		this.power = new MageInt(3);
-		this.toughness = new MageInt(1);
+    public HellsparkElemental(UUID ownerId) {
+        super(ownerId, 65, "Hellspark Elemental", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
+        this.expansionSetCode = "CON";
+        this.subtype.add("Elemental");
+        this.color.setRed(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(1);
 
-		this.addAbility(HasteAbility.getInstance());
-		this.addAbility(new OnEventTriggeredAbility(EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new SacrificeSourceEffect()));
-		this.addAbility(new UnearthAbility(new ManaCostsImpl("{1}{R}")));
+        this.addAbility(HasteAbility.getInstance());
+        this.addAbility(new OnEventTriggeredAbility(EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new SacrificeSourceEffect()));
+        this.addAbility(new UnearthAbility(new ManaCostsImpl("{1}{R}")));
 
-	}
+    }
 
-	public HellsparkElemental(final HellsparkElemental card) {
-		super(card);
-	}
+    public HellsparkElemental(final HellsparkElemental card) {
+        super(card);
+    }
 
-	@Override
-	public HellsparkElemental copy() {
-		return new HellsparkElemental(this);
-	}
+    @Override
+    public HellsparkElemental copy() {
+        return new HellsparkElemental(this);
+    }
 
 }

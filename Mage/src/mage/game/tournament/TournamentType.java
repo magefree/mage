@@ -36,41 +36,41 @@ import java.io.Serializable;
  */
 public class TournamentType <T extends TournamentType<T>> implements Serializable {
 
-	protected String name;
-	protected int minPlayers;
-	protected int maxPlayers;
-	protected int numBoosters;
-	protected boolean draft;
-	protected boolean limited;
+    protected String name;
+    protected int minPlayers;
+    protected int maxPlayers;
+    protected int numBoosters;
+    protected boolean draft;
+    protected boolean limited;
 
-	protected TournamentType() {}
+    protected TournamentType() {}
 
-	@Override
-	public String toString() {
-		return name;
-	}
+    @Override
+    public String toString() {
+        return name;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public int getMinPlayers() {
-		return minPlayers;
-	}
+    public int getMinPlayers() {
+        return minPlayers;
+    }
 
-	public int getMaxPlayers() {
-		return maxPlayers;
-	}
+    public int getMaxPlayers() {
+        return maxPlayers;
+    }
 
-	public int getNumBoosters() {
-		return numBoosters;
-	}
+    public int getNumBoosters() {
+        return numBoosters;
+    }
 
-	public boolean isDraft() {
-		return draft;
-	}
+    public boolean isDraft() {
+        return draft;
+    }
 
-	public boolean isLimited() {
-		return limited;
-	}
+    public boolean isLimited() {
+        return limited;
+    }
 }

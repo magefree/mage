@@ -61,7 +61,7 @@ public class PraetorsGrasp extends CardImpl<PraetorsGrasp> {
         // Search target opponent's library for a card and exile it face down. Then that player shuffles his or her library. You may look at and play that card for as long as it remains exiled.
         this.getSpellAbility().addEffect(new PraetorsGraspEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
-        
+
     }
 
     public PraetorsGrasp(final PraetorsGrasp card) {
@@ -118,30 +118,30 @@ class PraetorsGraspEffect extends OneShotEffect<PraetorsGraspEffect> {
 class PraetorsGraspPlayEffect extends AsThoughEffectImpl<PraetorsGraspPlayEffect> {
 
     private UUID cardId;
-    
-	public PraetorsGraspPlayEffect(UUID cardId) {
-		super(AsThoughEffectType.CAST, Duration.EndOfGame, Outcome.Benefit);
+
+    public PraetorsGraspPlayEffect(UUID cardId) {
+        super(AsThoughEffectType.CAST, Duration.EndOfGame, Outcome.Benefit);
         this.cardId = cardId;
-		staticText = "You may look at and play that card for as long as it remains exiled";
-	}
+        staticText = "You may look at and play that card for as long as it remains exiled";
+    }
 
-	public PraetorsGraspPlayEffect(final PraetorsGraspPlayEffect effect) {
-		super(effect);
+    public PraetorsGraspPlayEffect(final PraetorsGraspPlayEffect effect) {
+        super(effect);
         this.cardId = effect.cardId;
-	}
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
 
-	@Override
-	public PraetorsGraspPlayEffect copy() {
-		return new PraetorsGraspPlayEffect(this);
-	}
+    @Override
+    public PraetorsGraspPlayEffect copy() {
+        return new PraetorsGraspPlayEffect(this);
+    }
 
-	@Override
-	public boolean applies(UUID sourceId, Ability source, Game game) {
+    @Override
+    public boolean applies(UUID sourceId, Ability source, Game game) {
         if (sourceId.equals(cardId)) {
             Card card = game.getCard(cardId);
             if (card != null && game.getState().getZone(cardId) == Zone.EXILED) {
@@ -149,6 +149,6 @@ class PraetorsGraspPlayEffect extends AsThoughEffectImpl<PraetorsGraspPlayEffect
             }
         }
         return false;
-	}
+    }
 
 }

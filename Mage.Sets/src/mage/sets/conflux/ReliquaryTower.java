@@ -53,7 +53,7 @@ public class ReliquaryTower extends CardImpl<ReliquaryTower> {
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect));
 
         // {tap}: Add {1} to your mana pool.
-		this.addAbility(new ColorlessManaAbility());
+        this.addAbility(new ColorlessManaAbility());
     }
 
     public ReliquaryTower(final ReliquaryTower card) {

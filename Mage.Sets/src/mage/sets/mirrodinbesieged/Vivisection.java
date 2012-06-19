@@ -45,7 +45,7 @@ public class Vivisection extends CardImpl<Vivisection> {
     public Vivisection (UUID ownerId) {
         super(ownerId, 38, "Vivisection", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");
         this.expansionSetCode = "MBS";
-		this.color.setBlue(true);
+        this.color.setBlue(true);
         this.getSpellAbility().addEffect(new DrawCardControllerEffect(3));
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
     }

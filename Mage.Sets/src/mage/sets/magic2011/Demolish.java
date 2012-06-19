@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class Demolish extends mage.sets.zendikar.Demolish {
 
-	public Demolish(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 132;
-		this.expansionSetCode = "M11";
-	}
+    public Demolish(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 132;
+        this.expansionSetCode = "M11";
+    }
 
-	public Demolish(final Demolish card) {
-		super(card);
-	}
+    public Demolish(final Demolish card) {
+        super(card);
+    }
 
-	@Override
-	public Demolish copy() {
-		return new Demolish(this);
-	}
+    @Override
+    public Demolish copy() {
+        return new Demolish(this);
+    }
 
 }

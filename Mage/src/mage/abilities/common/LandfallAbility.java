@@ -44,37 +44,37 @@ import mage.game.permanent.Permanent;
  */
 public class LandfallAbility extends TriggeredAbilityImpl<LandfallAbility> {
 
-	public LandfallAbility(Effect effect, boolean optional) {
-		super(Zone.BATTLEFIELD, effect, optional);
-	}
+    public LandfallAbility(Effect effect, boolean optional) {
+        super(Zone.BATTLEFIELD, effect, optional);
+    }
 
-	public LandfallAbility ( Zone zone, Effect effect, Boolean optional ) {
-		super(zone, effect, optional);
-	}
+    public LandfallAbility ( Zone zone, Effect effect, Boolean optional ) {
+        super(zone, effect, optional);
+    }
 
-	public LandfallAbility(final LandfallAbility ability) {
-		super(ability);
-	}
+    public LandfallAbility(final LandfallAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone() == Zone.BATTLEFIELD) {
-			Permanent permanent = game.getPermanent(event.getTargetId());
-			if (permanent != null && permanent.getCardType().contains(CardType.LAND) && permanent.getControllerId().equals(this.controllerId)) {
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone() == Zone.BATTLEFIELD) {
+            Permanent permanent = game.getPermanent(event.getTargetId());
+            if (permanent != null && permanent.getCardType().contains(CardType.LAND) && permanent.getControllerId().equals(this.controllerId)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "Landfall - Whenever a land enters the battlefield under your control, " + super.getRule();
-	}
+    @Override
+    public String getRule() {
+        return "Landfall - Whenever a land enters the battlefield under your control, " + super.getRule();
+    }
 
-	@Override
-	public LandfallAbility copy() {
-		return new LandfallAbility(this);
-	}
+    @Override
+    public LandfallAbility copy() {
+        return new LandfallAbility(this);
+    }
 
 }

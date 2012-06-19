@@ -46,7 +46,7 @@ public class Blightwidow extends CardImpl<Blightwidow> {
         super(ownerId, 77, "Blightwidow", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.expansionSetCode = "MBS";
         this.subtype.add("Spider");
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
         this.addAbility(ReachAbility.getInstance());

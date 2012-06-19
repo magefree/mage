@@ -52,66 +52,66 @@ import mage.watchers.common.DamagedByWatcher;
  */
 public class RedSunsZenith extends CardImpl<RedSunsZenith> {
 
-	public RedSunsZenith(UUID ownerId) {
-		super(ownerId, 74, "Red Sun's Zenith", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{R}");
-		this.expansionSetCode = "MBS";
-		this.color.setRed(true);
-		this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
-		this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
-		this.getSpellAbility().addEffect(new RedSunsZenithEffect());
-		this.getSpellAbility().addEffect(ShuffleSpellEffect.getInstance());
+    public RedSunsZenith(UUID ownerId) {
+        super(ownerId, 74, "Red Sun's Zenith", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{R}");
+        this.expansionSetCode = "MBS";
+        this.color.setRed(true);
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
+        this.getSpellAbility().addEffect(new RedSunsZenithEffect());
+        this.getSpellAbility().addEffect(ShuffleSpellEffect.getInstance());
         this.addWatcher(new DamagedByWatcher());
-	}
+    }
 
-	public RedSunsZenith(final RedSunsZenith card) {
-		super(card);
-	}
+    public RedSunsZenith(final RedSunsZenith card) {
+        super(card);
+    }
 
-	@Override
-	public RedSunsZenith copy() {
-		return new RedSunsZenith(this);
-	}
+    @Override
+    public RedSunsZenith copy() {
+        return new RedSunsZenith(this);
+    }
 
 }
 
 class RedSunsZenithEffect extends ReplacementEffectImpl<RedSunsZenithEffect> {
 
-	public RedSunsZenithEffect() {
-		super(Duration.EndOfTurn, Outcome.Exile);
-		staticText = "If a creature dealt damage this way would die this turn, exile it instead";
-	}
+    public RedSunsZenithEffect() {
+        super(Duration.EndOfTurn, Outcome.Exile);
+        staticText = "If a creature dealt damage this way would die this turn, exile it instead";
+    }
 
-	public RedSunsZenithEffect(final RedSunsZenithEffect effect) {
-		super(effect);
-	}
+    public RedSunsZenithEffect(final RedSunsZenithEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public RedSunsZenithEffect copy() {
-		return new RedSunsZenithEffect(this);
-	}
+    @Override
+    public RedSunsZenithEffect copy() {
+        return new RedSunsZenithEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent permanent = ((ZoneChangeEvent)event).getTarget();
         if (permanent != null) {
             return permanent.moveToExile(null, "", source.getId(), game);
         }
-		return false;
-	}
+        return false;
+    }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
             DamagedByWatcher watcher = (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", source.getSourceId());
             if (watcher != null)
                 return watcher.damagedCreatures.contains(event.getTargetId());
-		}
-		return false;
-	}
+        }
+        return false;
+    }
 
 }

@@ -48,11 +48,11 @@ public class CorpseCur extends CardImpl<CorpseCur> {
 
     private static final FilterCard filter = new FilterCard("creature card with infect from your graveyard");
 
-	static {
-		filter.getAbilities().add(InfectAbility.getInstance());
-		filter.setNotAbilities(false);
+    static {
+        filter.getAbilities().add(InfectAbility.getInstance());
+        filter.setNotAbilities(false);
 
-	}
+    }
 
     public CorpseCur (UUID ownerId) {
         super(ownerId, 147, "Corpse Cur", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

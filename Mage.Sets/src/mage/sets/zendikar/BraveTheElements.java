@@ -48,62 +48,62 @@ import mage.game.Game;
  */
 public class BraveTheElements extends CardImpl<BraveTheElements> {
 
-	public BraveTheElements(UUID ownerId) {
-		super(ownerId, 4, "Brave the Elements", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
-		this.expansionSetCode = "ZEN";
-		this.color.setWhite(true);
-		this.getSpellAbility().addChoice(new ChoiceColor());
-		this.getSpellAbility().addEffect(new BraveTheElementsEffect());
-	}
+    public BraveTheElements(UUID ownerId) {
+        super(ownerId, 4, "Brave the Elements", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
+        this.expansionSetCode = "ZEN";
+        this.color.setWhite(true);
+        this.getSpellAbility().addChoice(new ChoiceColor());
+        this.getSpellAbility().addEffect(new BraveTheElementsEffect());
+    }
 
-	public BraveTheElements(final BraveTheElements card) {
-		super(card);
-	}
+    public BraveTheElements(final BraveTheElements card) {
+        super(card);
+    }
 
-	@Override
-	public BraveTheElements copy() {
-		return new BraveTheElements(this);
-	}
+    @Override
+    public BraveTheElements copy() {
+        return new BraveTheElements(this);
+    }
 
 }
 
 class BraveTheElementsEffect extends GainAbilityControlledEffect {
 
-	private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent();
 
-	static {
-		filter1.setUseColor(true);
-		filter1.getColor().setWhite(true);
-		filter1.setScopeColor(ComparisonScope.Any);
-	}
+    static {
+        filter1.setUseColor(true);
+        filter1.getColor().setWhite(true);
+        filter1.setScopeColor(ComparisonScope.Any);
+    }
 
-	FilterCard filter2;
+    FilterCard filter2;
 
-	public BraveTheElementsEffect() {
-		super(new ProtectionAbility(new FilterCard()), Duration.EndOfTurn, filter1);
-		filter2 = (FilterCard)((ProtectionAbility)ability).getFilter();
-		filter2.setUseColor(true);
-		filter2.setScopeColor(ComparisonScope.Any);
-		staticText = "Choose a color. White creatures you control gain protection from the chosen color until end of turn";
-	}
+    public BraveTheElementsEffect() {
+        super(new ProtectionAbility(new FilterCard()), Duration.EndOfTurn, filter1);
+        filter2 = (FilterCard)((ProtectionAbility)ability).getFilter();
+        filter2.setUseColor(true);
+        filter2.setScopeColor(ComparisonScope.Any);
+        staticText = "Choose a color. White creatures you control gain protection from the chosen color until end of turn";
+    }
 
-	public BraveTheElementsEffect(final BraveTheElementsEffect effect) {
-		super(effect);
-		this.filter2 = effect.filter2.copy();
-	}
+    public BraveTheElementsEffect(final BraveTheElementsEffect effect) {
+        super(effect);
+        this.filter2 = effect.filter2.copy();
+    }
 
-	@Override
-	public BraveTheElementsEffect copy() {
-		return new BraveTheElementsEffect(this);
-	}
+    @Override
+    public BraveTheElementsEffect copy() {
+        return new BraveTheElementsEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
-		filter2.setColor(choice.getColor());
-		filter2.setMessage(choice.getChoice());
-		ability = new ProtectionAbility(new FilterCard(filter2));
-		return super.apply(game, source);
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
+        filter2.setColor(choice.getColor());
+        filter2.setMessage(choice.getChoice());
+        ability = new ProtectionAbility(new FilterCard(filter2));
+        return super.apply(game, source);
+    }
 
 }

@@ -45,7 +45,7 @@ public class BogTatters extends CardImpl<BogTatters> {
         super(ownerId, 84, "Bog Tatters", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");
         this.expansionSetCode = "ZEN";
         this.subtype.add("Wraith");
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
         this.addAbility(new SwampwalkAbility());

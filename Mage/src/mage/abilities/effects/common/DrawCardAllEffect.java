@@ -41,34 +41,34 @@ import mage.players.Player;
  */
 public class DrawCardAllEffect extends OneShotEffect<DrawCardAllEffect> {
 
-	protected int amount;
+    protected int amount;
 
-	public DrawCardAllEffect(int amount) {
-		super(Outcome.DrawCard);
-		this.amount = amount;
-		staticText = "Each player draws " + Integer.toString(amount) + " card" + (amount == 1?"":"s");
-	}
+    public DrawCardAllEffect(int amount) {
+        super(Outcome.DrawCard);
+        this.amount = amount;
+        staticText = "Each player draws " + Integer.toString(amount) + " card" + (amount == 1?"":"s");
+    }
 
-	public DrawCardAllEffect(final DrawCardAllEffect effect) {
-		super(effect);
-		this.amount = effect.amount;
-	}
+    public DrawCardAllEffect(final DrawCardAllEffect effect) {
+        super(effect);
+        this.amount = effect.amount;
+    }
 
-	@Override
-	public DrawCardAllEffect copy() {
-		return new DrawCardAllEffect(this);
-	}
+    @Override
+    public DrawCardAllEffect copy() {
+        return new DrawCardAllEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
 
-		Player sourcePlayer = game.getPlayer(source.getControllerId());
-		for (UUID playerId: sourcePlayer.getInRange()) {
-			Player player = game.getPlayer(playerId);
-			if (player != null)
-				player.drawCards(amount, game);
-		}
-		return true;
-	}
+        Player sourcePlayer = game.getPlayer(source.getControllerId());
+        for (UUID playerId: sourcePlayer.getInRange()) {
+            Player player = game.getPlayer(playerId);
+            if (player != null)
+                player.drawCards(amount, game);
+        }
+        return true;
+    }
 
 }

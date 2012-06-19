@@ -57,7 +57,7 @@ public class AcidWebSpider extends CardImpl<AcidWebSpider> {
         super(ownerId, 108, "Acid Web Spider", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Spider");
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
         this.addAbility(ReachAbility.getInstance());

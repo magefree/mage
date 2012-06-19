@@ -22,7 +22,7 @@ public class SecondGuessTest extends CardTestPlayerBase {
 
         setStopAt(1, Constants.PhaseStep.END_TURN);
         execute();
-        
+
         assertLife(playerA, 20);
         assertLife(playerB, 17);
 

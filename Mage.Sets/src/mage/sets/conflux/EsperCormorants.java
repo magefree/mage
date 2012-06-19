@@ -48,7 +48,7 @@ public class EsperCormorants extends CardImpl<EsperCormorants> {
         this.color.setWhite(true);
         this.color.setBlue(true);
         this.power = new MageInt(3);
-	this.toughness = new MageInt(3);
+    this.toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());
     }
 

@@ -34,22 +34,22 @@ package mage.target.common;
  */
 public class TargetNonBasicLandPermanent extends TargetLandPermanent<TargetNonBasicLandPermanent> {
 
-	public TargetNonBasicLandPermanent() {
-		filter.setNotName(true);
-		filter.getName().add("Island");
-		filter.getName().add("Forest");
-		filter.getName().add("Mountain");
-		filter.getName().add("Swamp");
-		filter.getName().add("Plains");
-		this.targetName = "nonbasic land";
-	}
+    public TargetNonBasicLandPermanent() {
+        filter.setNotName(true);
+        filter.getName().add("Island");
+        filter.getName().add("Forest");
+        filter.getName().add("Mountain");
+        filter.getName().add("Swamp");
+        filter.getName().add("Plains");
+        this.targetName = "nonbasic land";
+    }
 
-	public TargetNonBasicLandPermanent(final TargetNonBasicLandPermanent target) {
-		super(target);
-	}
+    public TargetNonBasicLandPermanent(final TargetNonBasicLandPermanent target) {
+        super(target);
+    }
 
-	@Override
-	public TargetNonBasicLandPermanent copy() {
-		return new TargetNonBasicLandPermanent(this);
-	}
+    @Override
+    public TargetNonBasicLandPermanent copy() {
+        return new TargetNonBasicLandPermanent(this);
+    }
 }

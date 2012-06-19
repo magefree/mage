@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class SilvercoatLion extends mage.sets.magic2010.SilvercoatLion {
 
-	public SilvercoatLion(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 31;
-		this.expansionSetCode = "M11";
-	}
+    public SilvercoatLion(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 31;
+        this.expansionSetCode = "M11";
+    }
 
-	public SilvercoatLion(final SilvercoatLion card) {
-		super(card);
-	}
+    public SilvercoatLion(final SilvercoatLion card) {
+        super(card);
+    }
 
-	@Override
-	public SilvercoatLion copy() {
-		return new SilvercoatLion(this);
-	}
+    @Override
+    public SilvercoatLion copy() {
+        return new SilvercoatLion(this);
+    }
 
 }

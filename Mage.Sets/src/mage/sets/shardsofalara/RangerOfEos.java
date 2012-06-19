@@ -45,34 +45,34 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class RangerOfEos extends CardImpl<RangerOfEos> {
 
-	private static final FilterCard filter = new FilterCard("creature cards with converted mana cost 1 or less");
+    private static final FilterCard filter = new FilterCard("creature cards with converted mana cost 1 or less");
 
-	static {
-		filter.getCardType().add(CardType.CREATURE);
-		filter.setConvertedManaCost(2);
-		filter.setConvertedManaCostComparison(ComparisonType.LessThan);
-	}
+    static {
+        filter.getCardType().add(CardType.CREATURE);
+        filter.setConvertedManaCost(2);
+        filter.setConvertedManaCostComparison(ComparisonType.LessThan);
+    }
 
-	public RangerOfEos(UUID ownerId) {
-		super(ownerId, 21, "Ranger of Eos", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}");
-		this.expansionSetCode = "ALA";
-		this.color.setWhite(true);
-		this.subtype.add("Human");
-		this.subtype.add("Soldier");
-		this.power = new MageInt(3);
-		this.toughness = new MageInt(2);
+    public RangerOfEos(UUID ownerId) {
+        super(ownerId, 21, "Ranger of Eos", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}");
+        this.expansionSetCode = "ALA";
+        this.color.setWhite(true);
+        this.subtype.add("Human");
+        this.subtype.add("Soldier");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(2);
 
-		TargetCardInLibrary target = new TargetCardInLibrary(0, 2, filter);
-		this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryRevealPutInHandEffect(target, false), true));
-	}
+        TargetCardInLibrary target = new TargetCardInLibrary(0, 2, filter);
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryRevealPutInHandEffect(target, false), true));
+    }
 
-	public RangerOfEos(final RangerOfEos card) {
-		super(card);
-	}
+    public RangerOfEos(final RangerOfEos card) {
+        super(card);
+    }
 
-	@Override
-	public RangerOfEos copy() {
-		return new RangerOfEos(this);
-	}
+    @Override
+    public RangerOfEos copy() {
+        return new RangerOfEos(this);
+    }
 
 }

@@ -44,75 +44,75 @@ import org.apache.log4j.Logger;
  */
 public class GameWatcher {
 
-	protected final static Logger logger = Logger.getLogger(GameWatcher.class);
+    protected final static Logger logger = Logger.getLogger(GameWatcher.class);
 
-	protected UUID userId;
-	protected Game game;
-	protected boolean killed = false;
+    protected UUID userId;
+    protected Game game;
+    protected boolean killed = false;
 
-	public GameWatcher(UUID userId, Game game) {
-		this.userId = userId;
-		this.game = game;
-	}
+    public GameWatcher(UUID userId, Game game) {
+        this.userId = userId;
+        this.game = game;
+    }
 
-	public boolean init() {
-		if (!killed) {
-			User user = UserManager.getInstance().getUser(userId);
-			if (user != null) {
-				user.fireCallback(new ClientCallback("gameInit", game.getId(), getGameView()));
-				return true;
-			}
-		}
-		return false;
-	}
+    public boolean init() {
+        if (!killed) {
+            User user = UserManager.getInstance().getUser(userId);
+            if (user != null) {
+                user.fireCallback(new ClientCallback("gameInit", game.getId(), getGameView()));
+                return true;
+            }
+        }
+        return false;
+    }
 
-	public void update() {
-		if (!killed) {
-			User user = UserManager.getInstance().getUser(userId);
-			if (user != null) {
-				user.fireCallback(new ClientCallback("gameUpdate", game.getId(), getGameView()));
-			}
-		}
-	}
+    public void update() {
+        if (!killed) {
+            User user = UserManager.getInstance().getUser(userId);
+            if (user != null) {
+                user.fireCallback(new ClientCallback("gameUpdate", game.getId(), getGameView()));
+            }
+        }
+    }
 
-	public void inform(final String message) {
-		if (!killed) {
-			User user = UserManager.getInstance().getUser(userId);
-			if (user != null) {
-				user.fireCallback(new ClientCallback("gameInform", game.getId(), new GameClientMessage(getGameView(), message)));
-			}
-		}
-	}
+    public void inform(final String message) {
+        if (!killed) {
+            User user = UserManager.getInstance().getUser(userId);
+            if (user != null) {
+                user.fireCallback(new ClientCallback("gameInform", game.getId(), new GameClientMessage(getGameView(), message)));
+            }
+        }
+    }
 
-	public void gameOver(final String message) {
-		if (!killed) {
-			User user = UserManager.getInstance().getUser(userId);
-			if (user != null) {
-				user.fireCallback(new ClientCallback("gameOver", game.getId(), message));
-			}
-		}
-	}
+    public void gameOver(final String message) {
+        if (!killed) {
+            User user = UserManager.getInstance().getUser(userId);
+            if (user != null) {
+                user.fireCallback(new ClientCallback("gameOver", game.getId(), message));
+            }
+        }
+    }
 
-	public void gameError(final String message) {
-		if (!killed) {
-			User user = UserManager.getInstance().getUser(userId);
-			if (user != null) {
-				user.fireCallback(new ClientCallback("gameError", game.getId(), message));
-			}
-		}
-	}
-	
-	protected void handleRemoteException(RemoteException ex) {
-		logger.fatal("GameWatcher error", ex);
-		GameManager.getInstance().kill(game.getId(), userId);
-	}
-	
-	public void setKilled() {
-		killed = true;
-	}
+    public void gameError(final String message) {
+        if (!killed) {
+            User user = UserManager.getInstance().getUser(userId);
+            if (user != null) {
+                user.fireCallback(new ClientCallback("gameError", game.getId(), message));
+            }
+        }
+    }
 
-	public GameView getGameView() {
-		return new GameView(game.getState(), game);
-	}
+    protected void handleRemoteException(RemoteException ex) {
+        logger.fatal("GameWatcher error", ex);
+        GameManager.getInstance().kill(game.getId(), userId);
+    }
+
+    public void setKilled() {
+        killed = true;
+    }
+
+    public GameView getGameView() {
+        return new GameView(game.getState(), game);
+    }
 
 }

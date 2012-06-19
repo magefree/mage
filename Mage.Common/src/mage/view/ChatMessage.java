@@ -37,39 +37,39 @@ import java.io.Serializable;
 public class ChatMessage implements Serializable {
     private static final long serialVersionUID = 1L;
 
-	private String username;
-	private String time;
-	private String message;
-	private MessageColor color;
+    private String username;
+    private String time;
+    private String message;
+    private MessageColor color;
 
-	public enum MessageColor {
-		BLACK, RED, GREEN, BLUE, ORANGE;
-	}
+    public enum MessageColor {
+        BLACK, RED, GREEN, BLUE, ORANGE;
+    }
 
-	public ChatMessage(String username, String message, String time, MessageColor color) {
-		this.username = username;
-		this.message = message;
-		this.time = time;
-		this.color = color;
-	}
+    public ChatMessage(String username, String message, String time, MessageColor color) {
+        this.username = username;
+        this.message = message;
+        this.time = time;
+        this.color = color;
+    }
 
-	public String getMessage() {
-		return message;
-	}
+    public String getMessage() {
+        return message;
+    }
 
-	public MessageColor getColor() {
-		return color;
-	}
+    public MessageColor getColor() {
+        return color;
+    }
 
-	public boolean isUserMessage() {
-		return color != null && color.equals(MessageColor.BLUE);
-	}
+    public boolean isUserMessage() {
+        return color != null && color.equals(MessageColor.BLUE);
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public String getTime() {
-		return time;
-	}
+    public String getTime() {
+        return time;
+    }
 }

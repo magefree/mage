@@ -36,11 +36,11 @@ import mage.Mana;
 public abstract class ConditionalManaBuilder implements Builder<ConditionalMana> {
 
     protected Mana mana;
-    
+
     public ConditionalManaBuilder setMana(Mana mana) {
         this.mana = mana;
         return this;
     }
-    
+
     public abstract String getRule();
 }

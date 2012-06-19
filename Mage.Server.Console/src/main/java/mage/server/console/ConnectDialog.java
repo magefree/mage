@@ -55,65 +55,65 @@ import java.util.concurrent.ExecutionException;
  */
 public class ConnectDialog extends JDialog {
 
-	private final static Logger logger = Logger.getLogger(ConnectDialog.class);
-	private ConsoleFrame console;
-	private Connection connection;
-	private ConnectTask task;
+    private final static Logger logger = Logger.getLogger(ConnectDialog.class);
+    private ConsoleFrame console;
+    private Connection connection;
+    private ConnectTask task;
 
     /** Creates new form ConnectDialog */
     public ConnectDialog() {
        initComponents();
-		cbProxyType.setModel(new DefaultComboBoxModel(Connection.ProxyType.values()));
+        cbProxyType.setModel(new DefaultComboBoxModel(Connection.ProxyType.values()));
     }
 
-	public void showDialog(ConsoleFrame console) {
-		this.console = console;
-		this.txtServer.setText(ConsoleFrame.getPreferences().get("serverAddress", "localhost"));
-		this.txtPort.setText(ConsoleFrame.getPreferences().get("serverPort", Integer.toString(17171)));
-		this.chkAutoConnect.setSelected(Boolean.parseBoolean(ConsoleFrame.getPreferences().get("autoConnect", "false")));
-		this.txtProxyServer.setText(ConsoleFrame.getPreferences().get("proxyAddress", "localhost"));
-		this.txtProxyPort.setText(ConsoleFrame.getPreferences().get("proxyPort", Integer.toString(17171)));
-		this.cbProxyType.setSelectedItem(Connection.ProxyType.valueOf(ConsoleFrame.getPreferences().get("proxyType", "NONE").toUpperCase()));
-		this.txtProxyUserName.setText(ConsoleFrame.getPreferences().get("proxyUsername", ""));
-		this.txtPasswordField.setText(ConsoleFrame.getPreferences().get("proxyPassword", ""));
-		this.showProxySettings();
-		this.setModal(true);
-		this.setLocation(50, 50);
-		this.setVisible(true);
-	}
+    public void showDialog(ConsoleFrame console) {
+        this.console = console;
+        this.txtServer.setText(ConsoleFrame.getPreferences().get("serverAddress", "localhost"));
+        this.txtPort.setText(ConsoleFrame.getPreferences().get("serverPort", Integer.toString(17171)));
+        this.chkAutoConnect.setSelected(Boolean.parseBoolean(ConsoleFrame.getPreferences().get("autoConnect", "false")));
+        this.txtProxyServer.setText(ConsoleFrame.getPreferences().get("proxyAddress", "localhost"));
+        this.txtProxyPort.setText(ConsoleFrame.getPreferences().get("proxyPort", Integer.toString(17171)));
+        this.cbProxyType.setSelectedItem(Connection.ProxyType.valueOf(ConsoleFrame.getPreferences().get("proxyType", "NONE").toUpperCase()));
+        this.txtProxyUserName.setText(ConsoleFrame.getPreferences().get("proxyUsername", ""));
+        this.txtPasswordField.setText(ConsoleFrame.getPreferences().get("proxyPassword", ""));
+        this.showProxySettings();
+        this.setModal(true);
+        this.setLocation(50, 50);
+        this.setVisible(true);
+    }
 
-	private void showProxySettings() {
-		if (cbProxyType.getSelectedItem() == Connection.ProxyType.SOCKS) {
-			this.pnlProxy.setVisible(true);
-			this.pnlProxyAuth.setVisible(false);
-			this.pnlProxySettings.setVisible(true);
-		}
-		else if (cbProxyType.getSelectedItem() == Connection.ProxyType.HTTP) {
-			this.pnlProxy.setVisible(true);
-			this.pnlProxyAuth.setVisible(true);
-			this.pnlProxySettings.setVisible(true);
-		}
-		else if (cbProxyType.getSelectedItem() == Connection.ProxyType.NONE) {
-			this.pnlProxy.setVisible(false);
-			this.pnlProxyAuth.setVisible(false);
-			this.pnlProxySettings.setVisible(false);
-		}
-		this.pack();
-		this.repaint();
-	}
+    private void showProxySettings() {
+        if (cbProxyType.getSelectedItem() == Connection.ProxyType.SOCKS) {
+            this.pnlProxy.setVisible(true);
+            this.pnlProxyAuth.setVisible(false);
+            this.pnlProxySettings.setVisible(true);
+        }
+        else if (cbProxyType.getSelectedItem() == Connection.ProxyType.HTTP) {
+            this.pnlProxy.setVisible(true);
+            this.pnlProxyAuth.setVisible(true);
+            this.pnlProxySettings.setVisible(true);
+        }
+        else if (cbProxyType.getSelectedItem() == Connection.ProxyType.NONE) {
+            this.pnlProxy.setVisible(false);
+            this.pnlProxyAuth.setVisible(false);
+            this.pnlProxySettings.setVisible(false);
+        }
+        this.pack();
+        this.repaint();
+    }
 
-	private void saveSettings() {
-		ConsoleFrame.getPreferences().put("serverAddress", txtServer.getText());
-		ConsoleFrame.getPreferences().put("serverPort", txtPort.getText());
-		ConsoleFrame.getPreferences().put("autoConnect", Boolean.toString(chkAutoConnect.isSelected()));
-		ConsoleFrame.getPreferences().put("proxyAddress", txtProxyServer.getText());
-		ConsoleFrame.getPreferences().put("proxyPort", txtProxyPort.getText());
-		ConsoleFrame.getPreferences().put("proxyType", cbProxyType.getSelectedItem().toString());
-		ConsoleFrame.getPreferences().put("proxyUsername", txtProxyUserName.getText());
-		char[] input = txtPasswordField.getPassword();
-		ConsoleFrame.getPreferences().put("proxyPassword", new String(input));
-		Arrays.fill(input, '0');
-	}
+    private void saveSettings() {
+        ConsoleFrame.getPreferences().put("serverAddress", txtServer.getText());
+        ConsoleFrame.getPreferences().put("serverPort", txtPort.getText());
+        ConsoleFrame.getPreferences().put("autoConnect", Boolean.toString(chkAutoConnect.isSelected()));
+        ConsoleFrame.getPreferences().put("proxyAddress", txtProxyServer.getText());
+        ConsoleFrame.getPreferences().put("proxyPort", txtProxyPort.getText());
+        ConsoleFrame.getPreferences().put("proxyType", cbProxyType.getSelectedItem().toString());
+        ConsoleFrame.getPreferences().put("proxyUsername", txtProxyUserName.getText());
+        char[] input = txtPasswordField.getPassword();
+        ConsoleFrame.getPreferences().put("proxyPassword", new String(input));
+        Arrays.fill(input, '0');
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -378,151 +378,151 @@ public class ConnectDialog extends JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-	private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-		ConsoleFrame.getPreferences().put("autoConnect", Boolean.toString(chkAutoConnect.isSelected()));
-		if (task != null && !task.isDone())
-			task.cancel(true);
-		else
-			this.setVisible(false);
-	}//GEN-LAST:event_btnCancelActionPerformed
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        ConsoleFrame.getPreferences().put("autoConnect", Boolean.toString(chkAutoConnect.isSelected()));
+        if (task != null && !task.isDone())
+            task.cancel(true);
+        else
+            this.setVisible(false);
+    }//GEN-LAST:event_btnCancelActionPerformed
 
-	private void btnConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnectActionPerformed
-		
-		if (txtPassword.getPassword().length == 0) {
-			JOptionPane.showMessageDialog(rootPane, "Please provide a password");
-			return;
-		}
-		if (txtServer.getText().trim().isEmpty()) {
-			JOptionPane.showMessageDialog(rootPane, "Please provide a server address");
-			return;
-		}
-		if (txtPort.getText().trim().isEmpty()) {
-			JOptionPane.showMessageDialog(rootPane, "Please provide a port number");
-			return;
-		}
-		if (Integer.valueOf(txtPort.getText()) < 1 || Integer.valueOf(txtPort.getText()) > 65535 ) {
-			JOptionPane.showMessageDialog(rootPane, "Invalid port number");
-			txtPort.setText(ConsoleFrame.getPreferences().get("serverPort", Integer.toString(17171)));
-			return;
-		}
+    private void btnConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnectActionPerformed
 
-		setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-		connection = new Connection();
-		connection.setHost(this.txtServer.getText());
-		connection.setPort(Integer.valueOf(this.txtPort.getText()));
-		connection.setPassword(new String(txtPassword.getPassword()));
+        if (txtPassword.getPassword().length == 0) {
+            JOptionPane.showMessageDialog(rootPane, "Please provide a password");
+            return;
+        }
+        if (txtServer.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Please provide a server address");
+            return;
+        }
+        if (txtPort.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Please provide a port number");
+            return;
+        }
+        if (Integer.valueOf(txtPort.getText()) < 1 || Integer.valueOf(txtPort.getText()) > 65535 ) {
+            JOptionPane.showMessageDialog(rootPane, "Invalid port number");
+            txtPort.setText(ConsoleFrame.getPreferences().get("serverPort", Integer.toString(17171)));
+            return;
+        }
+
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        connection = new Connection();
+        connection.setHost(this.txtServer.getText());
+        connection.setPort(Integer.valueOf(this.txtPort.getText()));
+        connection.setPassword(new String(txtPassword.getPassword()));
 
         connection.setProxyType((ProxyType) this.cbProxyType.getSelectedItem());
         if (!this.cbProxyType.getSelectedItem().equals(ProxyType.NONE)) {
-		    connection.setProxyHost(this.txtProxyServer.getText());
-		    connection.setProxyPort(Integer.valueOf(this.txtProxyPort.getText()));
-		    connection.setProxyUsername(this.txtProxyUserName.getText());
-		    connection.setProxyPassword(new String(this.txtPasswordField.getPassword()));
+            connection.setProxyHost(this.txtProxyServer.getText());
+            connection.setProxyPort(Integer.valueOf(this.txtProxyPort.getText()));
+            connection.setProxyUsername(this.txtProxyUserName.getText());
+            connection.setProxyPassword(new String(this.txtPasswordField.getPassword()));
         }
 
-		logger.debug("connecting: " + connection.getProxyType() + " " + connection.getProxyHost() + " " + connection.getProxyPort());
-		task = new ConnectTask();
-		task.execute();
+        logger.debug("connecting: " + connection.getProxyType() + " " + connection.getProxyHost() + " " + connection.getProxyPort());
+        task = new ConnectTask();
+        task.execute();
 
-	}//GEN-LAST:event_btnConnectActionPerformed
+    }//GEN-LAST:event_btnConnectActionPerformed
 
-	private class ConnectTask extends SwingWorker<Boolean, Void> {
+    private class ConnectTask extends SwingWorker<Boolean, Void> {
 
-		private boolean result = false;
+        private boolean result = false;
 
-		@Override
-		protected Boolean doInBackground() throws Exception {
-			lblStatus.setText("Connecting...");
-			btnConnect.setEnabled(false);
-			result = console.connect(connection);
-			return result;
-		}
+        @Override
+        protected Boolean doInBackground() throws Exception {
+            lblStatus.setText("Connecting...");
+            btnConnect.setEnabled(false);
+            result = console.connect(connection);
+            return result;
+        }
 
-		@Override
-		protected void done() {
-			try {
-				get();
-				setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-				btnConnect.setEnabled(true);
-				if (result) {
-					lblStatus.setText("");
-					connected();
-				}
-				else {
-					lblStatus.setText("Could not connect");
-				}
-			} catch (InterruptedException ex) {
-				logger.fatal("Update Players Task error", ex);
-			} catch (ExecutionException ex) {
-				logger.fatal("Update Players Task error", ex);
-			} catch (CancellationException ex) {}
-		}
-	}
+        @Override
+        protected void done() {
+            try {
+                get();
+                setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+                btnConnect.setEnabled(true);
+                if (result) {
+                    lblStatus.setText("");
+                    connected();
+                }
+                else {
+                    lblStatus.setText("Could not connect");
+                }
+            } catch (InterruptedException ex) {
+                logger.fatal("Update Players Task error", ex);
+            } catch (ExecutionException ex) {
+                logger.fatal("Update Players Task error", ex);
+            } catch (CancellationException ex) {}
+        }
+    }
 
-	private void connected() {
-		this.saveSettings();
-		this.setVisible(false);
-	}
+    private void connected() {
+        this.saveSettings();
+        this.setVisible(false);
+    }
 
 
-	private void keyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_keyTyped
-		char c = evt.getKeyChar();
-		if (!Character.isDigit(c))
-			evt.consume();
-	}//GEN-LAST:event_keyTyped
+    private void keyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_keyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c))
+            evt.consume();
+    }//GEN-LAST:event_keyTyped
 
-	private void chkAutoConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkAutoConnectActionPerformed
-		
-		// TODO add your handling code here:
-	}//GEN-LAST:event_chkAutoConnectActionPerformed
+    private void chkAutoConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkAutoConnectActionPerformed
 
-	private void txtProxyPortkeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProxyPortkeyTyped
-		// TODO add your handling code here:
-	}//GEN-LAST:event_txtProxyPortkeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chkAutoConnectActionPerformed
+
+    private void txtProxyPortkeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProxyPortkeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtProxyPortkeyTyped
 
     private void findPublicServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    	BufferedReader in = null;
-    	try {
-			URL serverListURL = new URL("http://download.magefree.com/files/server-list.txt");
-			in = new BufferedReader(new InputStreamReader(serverListURL.openStream()));
-			
-			List<String> servers = new ArrayList<String>();
-			String inputLine;
-			while ((inputLine = in.readLine()) != null) {
-				System.out.println("Found server: "+inputLine);
-				servers.add(inputLine);
-			}
-			
-			if (servers.size() == 0) {
-				JOptionPane.showMessageDialog(null, "Couldn't find any server.");
-				return;
-			}
+        BufferedReader in = null;
+        try {
+            URL serverListURL = new URL("http://download.magefree.com/files/server-list.txt");
+            in = new BufferedReader(new InputStreamReader(serverListURL.openStream()));
 
-			String selectedServer = (String) JOptionPane.showInputDialog(null,
-					"Choose MAGE Public Server:", "Input",
-					JOptionPane.INFORMATION_MESSAGE, null, servers.toArray(),
-					servers.get(0));
-			if (selectedServer != null) {
-				String[] params = selectedServer.split(":");
-				if (params.length == 3) {
-					this.txtServer.setText(params[1]);
-					this.txtPort.setText(params[2]);
-				} else {
-					JOptionPane.showMessageDialog(null, "Wrong server data format.");
-				}
-			}
+            List<String> servers = new ArrayList<String>();
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                System.out.println("Found server: "+inputLine);
+                servers.add(inputLine);
+            }
 
-			in.close();
-		} catch(Exception ex) {
-			logger.error(ex,ex);
-		} finally {
-			if (in != null) try { in.close(); } catch (Exception e) {}
-		}
+            if (servers.size() == 0) {
+                JOptionPane.showMessageDialog(null, "Couldn't find any server.");
+                return;
+            }
+
+            String selectedServer = (String) JOptionPane.showInputDialog(null,
+                    "Choose MAGE Public Server:", "Input",
+                    JOptionPane.INFORMATION_MESSAGE, null, servers.toArray(),
+                    servers.get(0));
+            if (selectedServer != null) {
+                String[] params = selectedServer.split(":");
+                if (params.length == 3) {
+                    this.txtServer.setText(params[1]);
+                    this.txtPort.setText(params[2]);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Wrong server data format.");
+                }
+            }
+
+            in.close();
+        } catch(Exception ex) {
+            logger.error(ex,ex);
+        } finally {
+            if (in != null) try { in.close(); } catch (Exception e) {}
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-	private void cbProxyTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProxyTypeActionPerformed
-		this.showProxySettings();
-	}//GEN-LAST:event_cbProxyTypeActionPerformed
+    private void cbProxyTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProxyTypeActionPerformed
+        this.showProxySettings();
+    }//GEN-LAST:event_cbProxyTypeActionPerformed
 
         private void txtPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordFieldActionPerformed
             // TODO add your handling code here:

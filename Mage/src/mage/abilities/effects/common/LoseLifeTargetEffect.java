@@ -43,44 +43,44 @@ import mage.players.Player;
  */
 public class LoseLifeTargetEffect extends OneShotEffect<LoseLifeTargetEffect> {
 
-	protected DynamicValue amount;
+    protected DynamicValue amount;
 
     public LoseLifeTargetEffect(int amount) {
         this(new StaticValue(amount));
     }
 
-	public LoseLifeTargetEffect(DynamicValue amount) {
-		super(Outcome.Damage);
-		this.amount = amount;
-	}
+    public LoseLifeTargetEffect(DynamicValue amount) {
+        super(Outcome.Damage);
+        this.amount = amount;
+    }
 
-	public LoseLifeTargetEffect(final LoseLifeTargetEffect effect) {
-		super(effect);
-		this.amount = effect.amount.clone();
-	}
+    public LoseLifeTargetEffect(final LoseLifeTargetEffect effect) {
+        super(effect);
+        this.amount = effect.amount.clone();
+    }
 
-	@Override
-	public LoseLifeTargetEffect copy() {
-		return new LoseLifeTargetEffect(this);
-	}
+    @Override
+    public LoseLifeTargetEffect copy() {
+        return new LoseLifeTargetEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(targetPointer.getFirst(game, source));
-		if (player != null) {
-			player.loseLife(amount.calculate(game, source), game);
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        if (player != null) {
+            player.loseLife(amount.calculate(game, source), game);
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public String getText(Mode mode) {
+    @Override
+    public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
         String message = amount.getMessage();
 
         if (mode.getTargets().size() > 0) {
-		    sb.append("Target ").append(mode.getTargets().get(0).getTargetName());
+            sb.append("Target ").append(mode.getTargets().get(0).getTargetName());
         } else {
             sb.append("that player");
         }
@@ -94,7 +94,7 @@ public class LoseLifeTargetEffect extends OneShotEffect<LoseLifeTargetEffect> {
             sb.append(message);
         }
         return sb.toString();
-	}
+    }
 
 
 }

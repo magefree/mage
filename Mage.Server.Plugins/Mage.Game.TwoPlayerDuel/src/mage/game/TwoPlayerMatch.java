@@ -37,15 +37,15 @@ import mage.game.match.MatchOptions;
  */
 public class TwoPlayerMatch extends MatchImpl {
 
-	public TwoPlayerMatch(MatchOptions options) {
-		super(options);
-	}
+    public TwoPlayerMatch(MatchOptions options) {
+        super(options);
+    }
 
-	@Override
-	public void startGame() throws GameException {
-		TwoPlayerDuel game = new TwoPlayerDuel(options.getAttackOption(), options.getRange());
-		initGame(game);
-		games.add(game);
-	}
-	
+    @Override
+    public void startGame() throws GameException {
+        TwoPlayerDuel game = new TwoPlayerDuel(options.getAttackOption(), options.getRange());
+        initGame(game);
+        games.add(game);
+    }
+
 }

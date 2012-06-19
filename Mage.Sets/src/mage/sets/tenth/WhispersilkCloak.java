@@ -50,22 +50,22 @@ import mage.cards.CardImpl;
  */
 public class WhispersilkCloak extends CardImpl<WhispersilkCloak> {
 
-	public WhispersilkCloak(UUID ownerId) {
-		super(ownerId, 345, "Whispersilk Cloak", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-		this.expansionSetCode = "10E";
-		this.subtype.add("Equipment");
-		this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(UnblockableAbility.getInstance(), AttachmentType.EQUIPMENT)));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ShroudAbility.getInstance(), AttachmentType.EQUIPMENT)));
-	}
+    public WhispersilkCloak(UUID ownerId) {
+        super(ownerId, 345, "Whispersilk Cloak", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
+        this.expansionSetCode = "10E";
+        this.subtype.add("Equipment");
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(UnblockableAbility.getInstance(), AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ShroudAbility.getInstance(), AttachmentType.EQUIPMENT)));
+    }
 
-	protected WhispersilkCloak(WhispersilkCloak me) {
-		super(me);
-	}
+    protected WhispersilkCloak(WhispersilkCloak me) {
+        super(me);
+    }
 
-	@Override
-	public WhispersilkCloak copy() {
-		return new WhispersilkCloak(this);
-	}
+    @Override
+    public WhispersilkCloak copy() {
+        return new WhispersilkCloak(this);
+    }
 
 }

@@ -45,37 +45,37 @@ import mage.game.permanent.token.Token;
  */
 public class ConquerorsPledge extends CardImpl<ConquerorsPledge> {
 
-	public ConquerorsPledge(UUID ownerId) {
-		super(ownerId, 8, "Conqueror's Pledge", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}{W}");
-		this.expansionSetCode = "ZEN";
-		this.color.setWhite(true);
+    public ConquerorsPledge(UUID ownerId) {
+        super(ownerId, 8, "Conqueror's Pledge", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}{W}");
+        this.expansionSetCode = "ZEN";
+        this.color.setWhite(true);
         this.getSpellAbility().addOptionalCost(new KickerManaCost("{6}"));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new CreateTokenEffect(new KorSoldierToken(), 12),
                 new CreateTokenEffect(new KorSoldierToken(), 6), KickedCondition.getInstance(),
                 "Put six 1/1 white Kor Soldier creature tokens onto the battlefield. If {this} was kicked, put twelve of those tokens onto the battlefield instead"));
-	}
+    }
 
-	public ConquerorsPledge(final ConquerorsPledge card) {
-		super(card);
-	}
+    public ConquerorsPledge(final ConquerorsPledge card) {
+        super(card);
+    }
 
-	@Override
-	public ConquerorsPledge copy() {
-		return new ConquerorsPledge(this);
-	}
+    @Override
+    public ConquerorsPledge copy() {
+        return new ConquerorsPledge(this);
+    }
 
 }
 
 class KorSoldierToken extends Token {
 
-	public KorSoldierToken() {
-		super("Kor Soldier", "1/1 white Kor Soldier creature token");
-		cardType.add(CardType.CREATURE);
-		color.setWhite(true);
-		subtype.add("Kor");
-		subtype.add("Soldier");
-		power = new MageInt(1);
-		toughness = new MageInt(1);
-	}
+    public KorSoldierToken() {
+        super("Kor Soldier", "1/1 white Kor Soldier creature token");
+        cardType.add(CardType.CREATURE);
+        color.setWhite(true);
+        subtype.add("Kor");
+        subtype.add("Soldier");
+        power = new MageInt(1);
+        toughness = new MageInt(1);
+    }
 
 }

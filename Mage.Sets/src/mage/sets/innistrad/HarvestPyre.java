@@ -59,7 +59,7 @@ public class HarvestPyre extends CardImpl<HarvestPyre> {
 
         // As an additional cost to cast Harvest Pyre, exile X cards from your graveyard.
         this.getSpellAbility().addCost(new HarvestPyreCost());
-        
+
         // Harvest Pyre deals X damage to target creature.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new DamageTargetEffect(new GetXValue()));
@@ -77,17 +77,17 @@ public class HarvestPyre extends CardImpl<HarvestPyre> {
 
 class HarvestPyreCost extends CostImpl<HarvestPyreCost> implements VariableCost  {
 
-	protected int amountPaid = 0;
-    
+    protected int amountPaid = 0;
+
     public HarvestPyreCost() {
         this.text = "As an additional cost to cast Harvest Pyre, exile X cards from your graveyard";
     }
-        
+
     public HarvestPyreCost(final HarvestPyreCost cost) {
         super(cost);
         this.amountPaid = cost.amountPaid;
     }
-    
+
     @Override
     public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
         return true;
@@ -95,12 +95,12 @@ class HarvestPyreCost extends CostImpl<HarvestPyreCost> implements VariableCost 
 
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-		amountPaid = 0;
+        amountPaid = 0;
         Target target = new TargetCardInYourGraveyard();
         Player player = game.getPlayer(controllerId);
-		while (true) {
-			target.clearChosen();
-			if (target.canChoose(controllerId, game) && target.choose(Outcome.Exile, controllerId, sourceId, game)) {
+        while (true) {
+            target.clearChosen();
+            if (target.canChoose(controllerId, game) && target.choose(Outcome.Exile, controllerId, sourceId, game)) {
                 Card card = player.getGraveyard().get(target.getFirstTarget(), game);
                 if (card != null) {
                     player.getGraveyard().remove(card);
@@ -111,18 +111,18 @@ class HarvestPyreCost extends CostImpl<HarvestPyreCost> implements VariableCost 
             else 
                 break;
         }
-		paid = true;
-		return true;
+        paid = true;
+        return true;
     }
 
-	@Override
-	public int getAmount() {
-		return amountPaid;
-	}
+    @Override
+    public int getAmount() {
+        return amountPaid;
+    }
 
-	@Override
-	public void setFilter(FilterMana filter) {
-	}
+    @Override
+    public void setFilter(FilterMana filter) {
+    }
 
     @Override
     public HarvestPyreCost copy() {
@@ -133,5 +133,5 @@ class HarvestPyreCost extends CostImpl<HarvestPyreCost> implements VariableCost 
     public void setAmount(int amount) {
         amountPaid = amount;
     }
-        
+
 }

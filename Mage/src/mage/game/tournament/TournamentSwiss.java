@@ -33,13 +33,13 @@ package mage.game.tournament;
  */
 public abstract class TournamentSwiss extends TournamentImpl {
 
-	public TournamentSwiss(TournamentOptions options) {
-		super(options);
-	}
+    public TournamentSwiss(TournamentOptions options) {
+        super(options);
+    }
 
-	@Override
-	protected void runTournament() {
-		//TODO: implement this
-	}
+    @Override
+    protected void runTournament() {
+        //TODO: implement this
+    }
 
 }

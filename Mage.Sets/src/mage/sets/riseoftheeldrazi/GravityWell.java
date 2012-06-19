@@ -70,18 +70,18 @@ public class GravityWell extends CardImpl<GravityWell> {
 }
 
 class GravityWellTriggeredAbility extends TriggeredAbilityImpl<GravityWellTriggeredAbility> {
-    
+
     public GravityWellTriggeredAbility() {
-	super(Constants.Zone.BATTLEFIELD, new GravityWellEffect());
+    super(Constants.Zone.BATTLEFIELD, new GravityWellEffect());
     }
 
     public GravityWellTriggeredAbility(final GravityWellTriggeredAbility ability) {
-	super(ability);
+    super(ability);
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-	if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED ) {
+    if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED ) {
             Permanent attacker = game.getPermanent(event.getSourceId());
             if (attacker != null && attacker.getAbilities().contains(FlyingAbility.getInstance())) {
                 for (Effect effect : getEffects()) {
@@ -95,59 +95,59 @@ class GravityWellTriggeredAbility extends TriggeredAbilityImpl<GravityWellTrigge
 
     @Override
     public String getRule() {
-	return "Whenever a creature with flying attacks, " + super.getRule();
+    return "Whenever a creature with flying attacks, " + super.getRule();
     }
 
     @Override
     public GravityWellTriggeredAbility copy() {
-	return new GravityWellTriggeredAbility(this);
+    return new GravityWellTriggeredAbility(this);
     }
 }
 
 class GravityWellEffect extends ContinuousEffectImpl<GravityWellEffect> {
-    
+
     public GravityWellEffect() {
-	super(Constants.Duration.EndOfTurn, Constants.Outcome.LoseAbility);
-	staticText = "it loses flying until end of turn";
+    super(Constants.Duration.EndOfTurn, Constants.Outcome.LoseAbility);
+    staticText = "it loses flying until end of turn";
     }
 
     public GravityWellEffect(final GravityWellEffect effect) {
-	super(effect);
+    super(effect);
     }
 
     @Override
     public GravityWellEffect copy() {
-	return new GravityWellEffect(this);
+    return new GravityWellEffect(this);
     }
 
     @Override
     public boolean apply(Constants.Layer layer, Constants.SubLayer sublayer, Ability source, Game game) {
-	Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
-	if (permanent != null) {
+    Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+    if (permanent != null) {
             switch (layer) {
                 case AbilityAddingRemovingEffects_6:
                     if (sublayer == Constants.SubLayer.NA) {
-			for (Iterator<Ability> i = permanent.getAbilities().iterator(); i.hasNext();) {
+            for (Iterator<Ability> i = permanent.getAbilities().iterator(); i.hasNext();) {
                             Ability entry = i.next();
                             if (entry.getId().equals(FlyingAbility.getInstance().getId()))
-				i.remove();
-			}
+                i.remove();
+            }
                     }
                     break;
             }
             return true;
         }
-	return false;
+    return false;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-	return false;
+    return false;
     }
 
     @Override
     public boolean hasLayer(Constants.Layer layer) {
-	return layer == Constants.Layer.AbilityAddingRemovingEffects_6;
+    return layer == Constants.Layer.AbilityAddingRemovingEffects_6;
     }
 
 }

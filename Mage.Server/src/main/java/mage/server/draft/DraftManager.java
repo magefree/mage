@@ -38,50 +38,50 @@ import mage.view.DraftPickView;
  * @author BetaSteward_at_googlemail.com
  */
 public class DraftManager {
-	private final static DraftManager INSTANCE = new DraftManager();
+    private final static DraftManager INSTANCE = new DraftManager();
 
-	public static DraftManager getInstance() {
-		return INSTANCE;
-	}
+    public static DraftManager getInstance() {
+        return INSTANCE;
+    }
 
-	private DraftManager() {}
+    private DraftManager() {}
 
-	private ConcurrentHashMap<UUID, DraftController> draftControllers = new ConcurrentHashMap<UUID, DraftController>();
+    private ConcurrentHashMap<UUID, DraftController> draftControllers = new ConcurrentHashMap<UUID, DraftController>();
 
-	public UUID createDraftSession(Draft draft, ConcurrentHashMap<UUID, UUID> userPlayerMap, UUID tableId) {
-		DraftController draftController = new DraftController(draft, userPlayerMap, tableId);
-		draftControllers.put(draft.getId(), draftController);
-		return draftController.getSessionId();
-	}
+    public UUID createDraftSession(Draft draft, ConcurrentHashMap<UUID, UUID> userPlayerMap, UUID tableId) {
+        DraftController draftController = new DraftController(draft, userPlayerMap, tableId);
+        draftControllers.put(draft.getId(), draftController);
+        return draftController.getSessionId();
+    }
 
-	public void joinDraft(UUID draftId, UUID userId) {
-		draftControllers.get(draftId).join(userId);
-	}
+    public void joinDraft(UUID draftId, UUID userId) {
+        draftControllers.get(draftId).join(userId);
+    }
 
-	public void destroyChatSession(UUID gameId) {
-		draftControllers.remove(gameId);
-	}
+    public void destroyChatSession(UUID gameId) {
+        draftControllers.remove(gameId);
+    }
 
-	public DraftPickView sendCardPick(UUID draftId, UUID userId, UUID cardId) {
-		return draftControllers.get(draftId).sendCardPick(userId, cardId);
-	}
+    public DraftPickView sendCardPick(UUID draftId, UUID userId, UUID cardId) {
+        return draftControllers.get(draftId).sendCardPick(userId, cardId);
+    }
 
-	public void removeSession(UUID userId) {
-		for (DraftController controller: draftControllers.values()) {
-			controller.kill(userId);
-		}
-	}
+    public void removeSession(UUID userId) {
+        for (DraftController controller: draftControllers.values()) {
+            controller.kill(userId);
+        }
+    }
 
-	public void kill(UUID draftId, UUID userId) {
-		draftControllers.get(draftId).kill(userId);
-	}
+    public void kill(UUID draftId, UUID userId) {
+        draftControllers.get(draftId).kill(userId);
+    }
 
-	public void timeout(UUID gameId, UUID userId) {
-		draftControllers.get(gameId).timeout(userId);
-	}
+    public void timeout(UUID gameId, UUID userId) {
+        draftControllers.get(gameId).timeout(userId);
+    }
 
-	public void removeDraft(UUID draftId) {
-		draftControllers.remove(draftId);
-	}
+    public void removeDraft(UUID draftId) {
+        draftControllers.remove(draftId);
+    }
 
 }

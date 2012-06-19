@@ -43,87 +43,87 @@ import java.util.List;
  */
 public class FilterAbility<T extends Ability> extends FilterImpl<T, FilterAbility<T>> implements Filter<T> {
 
-	protected static ListComparer<Outcome> compOutcome = new ListComparer<Outcome>();
+    protected static ListComparer<Outcome> compOutcome = new ListComparer<Outcome>();
 
-	protected List<Outcome> outcomes = new ArrayList<Outcome>();
-	protected ComparisonScope scopeOutcome = ComparisonScope.All;
-	protected boolean notOutcome;
-	protected List<AbilityType> types = new ArrayList<AbilityType>();
-	protected boolean notType;
-	protected Zone zone;
-	protected boolean notZone;
+    protected List<Outcome> outcomes = new ArrayList<Outcome>();
+    protected ComparisonScope scopeOutcome = ComparisonScope.All;
+    protected boolean notOutcome;
+    protected List<AbilityType> types = new ArrayList<AbilityType>();
+    protected boolean notType;
+    protected Zone zone;
+    protected boolean notZone;
 
-	public FilterAbility() {
-		super("");
-	}
+    public FilterAbility() {
+        super("");
+    }
 
-	public FilterAbility(FilterAbility<T> filter) {
-		super(filter);
-		for (Outcome outcome: filter.outcomes) {
-			this.outcomes.add(outcome);
-		}
-		this.scopeOutcome = filter.scopeOutcome;
-		this.notOutcome = filter.notOutcome;
-		for (AbilityType aType: filter.types) {
-			this.types.add(aType);
-		}
-		this.notType = filter.notType;
-		this.zone = filter.zone;
-		this.notZone = filter.notZone;
-	}
+    public FilterAbility(FilterAbility<T> filter) {
+        super(filter);
+        for (Outcome outcome: filter.outcomes) {
+            this.outcomes.add(outcome);
+        }
+        this.scopeOutcome = filter.scopeOutcome;
+        this.notOutcome = filter.notOutcome;
+        for (AbilityType aType: filter.types) {
+            this.types.add(aType);
+        }
+        this.notType = filter.notType;
+        this.zone = filter.zone;
+        this.notZone = filter.notZone;
+    }
 
-	@Override
-	public boolean match(T object, Game game) {
+    @Override
+    public boolean match(T object, Game game) {
 
-		if (zone != null) {
-			if (object.getZone().match(zone) == notZone)
-				return notFilter;
-		}
+        if (zone != null) {
+            if (object.getZone().match(zone) == notZone)
+                return notFilter;
+        }
 
-		if (outcomes.size() > 0) {
-			if (!compOutcome.compare(outcomes, object.getEffects().getOutcomes(), scopeOutcome, notOutcome))
-				return notFilter;
-		}
-		
-		if (types.size() > 0) {
-			if (types.contains(object.getAbilityType()) == notType)
-				return notFilter;
-		}
+        if (outcomes.size() > 0) {
+            if (!compOutcome.compare(outcomes, object.getEffects().getOutcomes(), scopeOutcome, notOutcome))
+                return notFilter;
+        }
 
-		return !notFilter;
-	}
+        if (types.size() > 0) {
+            if (types.contains(object.getAbilityType()) == notType)
+                return notFilter;
+        }
 
-	public List<Outcome> getOutcomes() {
-		return this.outcomes;
-	}
+        return !notFilter;
+    }
 
-	public void setScopeOutcome(ComparisonScope scopeOutcome) {
-		this.scopeOutcome = scopeOutcome;
-	}
+    public List<Outcome> getOutcomes() {
+        return this.outcomes;
+    }
 
-	public void setNotOutcome(boolean notOutcome) {
-		this.notOutcome = notOutcome;
-	}
+    public void setScopeOutcome(ComparisonScope scopeOutcome) {
+        this.scopeOutcome = scopeOutcome;
+    }
 
-	public List<AbilityType> getTypes() {
-		return types;
-	}
+    public void setNotOutcome(boolean notOutcome) {
+        this.notOutcome = notOutcome;
+    }
 
-	public void setNotType(boolean notType) {
-		this.notType = notType;
-	}
+    public List<AbilityType> getTypes() {
+        return types;
+    }
 
-	public void setZone(Zone zone) {
-		this.zone = zone;
-	}
+    public void setNotType(boolean notType) {
+        this.notType = notType;
+    }
 
-	public void setNotZone(boolean notZone) {
-		this.notZone = notZone;
-	}
+    public void setZone(Zone zone) {
+        this.zone = zone;
+    }
 
-	@Override
-	public FilterAbility<T> copy() {
-		return new FilterAbility<T>(this);
-	}
+    public void setNotZone(boolean notZone) {
+        this.notZone = notZone;
+    }
+
+    @Override
+    public FilterAbility<T> copy() {
+        return new FilterAbility<T>(this);
+    }
 
 }

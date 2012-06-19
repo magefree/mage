@@ -52,62 +52,62 @@ import mage.target.common.TargetCreatureOrPlayerAmount;
  */
 public class InfernoTitan extends CardImpl<InfernoTitan> {
 
-	public InfernoTitan(UUID ownerId) {
-		super(ownerId, 146, "Inferno Titan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Giant");
-		this.color.setRed(true);
-		this.power = new MageInt(6);
-		this.toughness = new MageInt(6);
+    public InfernoTitan(UUID ownerId) {
+        super(ownerId, 146, "Inferno Titan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Giant");
+        this.color.setRed(true);
+        this.power = new MageInt(6);
+        this.toughness = new MageInt(6);
 
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
-		this.addAbility(new InfernoTitanAbility());
-	}
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
+        this.addAbility(new InfernoTitanAbility());
+    }
 
-	public InfernoTitan(final InfernoTitan card) {
-		super(card);
-	}
+    public InfernoTitan(final InfernoTitan card) {
+        super(card);
+    }
 
-	@Override
-	public InfernoTitan copy() {
-		return new InfernoTitan(this);
-	}
+    @Override
+    public InfernoTitan copy() {
+        return new InfernoTitan(this);
+    }
 
 }
 
 class InfernoTitanAbility extends TriggeredAbilityImpl<InfernoTitanAbility> {
 
-	public InfernoTitanAbility() {
-		super(Zone.BATTLEFIELD, new DamageMultiEffect(3), false);
-		this.addTarget(new TargetCreatureOrPlayerAmount(3));
-	}
+    public InfernoTitanAbility() {
+        super(Zone.BATTLEFIELD, new DamageMultiEffect(3), false);
+        this.addTarget(new TargetCreatureOrPlayerAmount(3));
+    }
 
-	public InfernoTitanAbility(final InfernoTitanAbility ability) {
-		super(ability);
-	}
+    public InfernoTitanAbility(final InfernoTitanAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public InfernoTitanAbility copy() {
-		return new InfernoTitanAbility(this);
-	}
+    @Override
+    public InfernoTitanAbility copy() {
+        return new InfernoTitanAbility(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
-			return true;
-		}
-		if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId()) ) {
-			ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-			if (zEvent.getToZone() == Zone.BATTLEFIELD) {
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
+            return true;
+        }
+        if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId()) ) {
+            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+            if (zEvent.getToZone() == Zone.BATTLEFIELD) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "Whenever {this} enters the battlefield or attacks, it deals 3 damage divided as you choose among one, two, or three target creatures and/or players.";
-	}
+    @Override
+    public String getRule() {
+        return "Whenever {this} enters the battlefield or attacks, it deals 3 damage divided as you choose among one, two, or three target creatures and/or players.";
+    }
 
 }

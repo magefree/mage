@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class Disentomb extends mage.sets.magic2010.Disentomb {
 
-	public Disentomb(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 94;
-		this.expansionSetCode = "M11";
-	}
+    public Disentomb(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 94;
+        this.expansionSetCode = "M11";
+    }
 
-	public Disentomb(final Disentomb card) {
-		super(card);
-	}
+    public Disentomb(final Disentomb card) {
+        super(card);
+    }
 
-	@Override
-	public Disentomb copy() {
-		return new Disentomb(this);
-	}
+    @Override
+    public Disentomb copy() {
+        return new Disentomb(this);
+    }
 
 }

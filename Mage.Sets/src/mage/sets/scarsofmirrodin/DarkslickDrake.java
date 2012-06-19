@@ -48,7 +48,7 @@ public class DarkslickDrake extends CardImpl<DarkslickDrake> {
         super(ownerId, 30, "Darkslick Drake", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Drake");
-		this.color.setBlue(true);
+        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
         this.addAbility(FlyingAbility.getInstance());

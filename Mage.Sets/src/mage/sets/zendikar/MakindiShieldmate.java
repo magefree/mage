@@ -54,7 +54,7 @@ public class MakindiShieldmate extends CardImpl<MakindiShieldmate> {
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
 
-		this.addAbility(DefenderAbility.getInstance());
+        this.addAbility(DefenderAbility.getInstance());
 
         this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true));
     }

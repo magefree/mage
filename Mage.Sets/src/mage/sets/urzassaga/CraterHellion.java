@@ -57,11 +57,11 @@ public class CraterHellion extends CardImpl<CraterHellion>{
         this.color.setRed(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
-		
-	this.addAbility(new EchoAbility("{4}{R}{R}"));
-		
-	//When Crater Hellion enters the battlefield, it deals 4 damage to each other creature.
-	this.addAbility(new EntersBattlefieldTriggeredAbility(new CraterHellionEffect(), false));
+
+    this.addAbility(new EchoAbility("{4}{R}{R}"));
+
+    //When Crater Hellion enters the battlefield, it deals 4 damage to each other creature.
+    this.addAbility(new EntersBattlefieldTriggeredAbility(new CraterHellionEffect(), false));
     }
 
     public CraterHellion(final CraterHellion card) {
@@ -77,22 +77,22 @@ public class CraterHellion extends CardImpl<CraterHellion>{
 
 class CraterHellionEffect extends OneShotEffect<CraterHellionEffect> {
 
-	public CraterHellionEffect() {
-		super(Outcome.Damage);
+    public CraterHellionEffect() {
+        super(Outcome.Damage);
                 staticText = "it deals 4 damage to each other creature";
-	}
+    }
 
-	public CraterHellionEffect(final CraterHellionEffect effect) {
-		super(effect);
-	}
+    public CraterHellionEffect(final CraterHellionEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public CraterHellionEffect copy() {
-		return new CraterHellionEffect(this);
-	}
+    @Override
+    public CraterHellionEffect copy() {
+        return new CraterHellionEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
             List<Permanent> permanents = game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game);
             for (Permanent permanent: permanents) {
                 if(!permanent.getId().equals(source.getSourceId())) {
@@ -100,5 +100,5 @@ class CraterHellionEffect extends OneShotEffect<CraterHellionEffect> {
                 }
             }
             return true;
-	}
+    }
 }

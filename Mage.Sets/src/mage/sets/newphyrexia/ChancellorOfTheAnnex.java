@@ -62,11 +62,11 @@ public class ChancellorOfTheAnnex extends CardImpl<ChancellorOfTheAnnex> {
 
         // You may reveal this card from your opening hand. If you do, when each opponent casts his or her first spell of the game, counter that spell unless that player pays {1}.
         this.addAbility(new ChancellorAbility(new ChancellorOfTheAnnexEffect()));
-        
+
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // Whenever an opponent casts a spell, counter it unless that player pays {1}.
-		this.addAbility(new OpponentCastsSpellTriggeredAbility(new CounterUnlessPaysEffect(new GenericManaCost(1)), false));
+        this.addAbility(new OpponentCastsSpellTriggeredAbility(new CounterUnlessPaysEffect(new GenericManaCost(1)), false));
     }
 
     public ChancellorOfTheAnnex(final ChancellorOfTheAnnex card) {
@@ -81,17 +81,17 @@ public class ChancellorOfTheAnnex extends CardImpl<ChancellorOfTheAnnex> {
 
 class ChancellorOfTheAnnexEffect extends OneShotEffect<ChancellorOfTheAnnexEffect> {
 
-	public ChancellorOfTheAnnexEffect () {
-		super(Outcome.Benefit);
-		staticText = "when each opponent casts his or her first spell of the game, counter that spell unless that player pays {1}";
-	}
+    public ChancellorOfTheAnnexEffect () {
+        super(Outcome.Benefit);
+        staticText = "when each opponent casts his or her first spell of the game, counter that spell unless that player pays {1}";
+    }
 
-	public ChancellorOfTheAnnexEffect(ChancellorOfTheAnnexEffect effect) {
-		super(effect);
-	}
+    public ChancellorOfTheAnnexEffect(ChancellorOfTheAnnexEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             DelayedTriggeredAbility ability = new ChancellorOfTheAnnexDelayedTriggeredAbility(opponentId);
             ability.setSourceId(source.getSourceId());
@@ -99,40 +99,40 @@ class ChancellorOfTheAnnexEffect extends OneShotEffect<ChancellorOfTheAnnexEffec
             game.addDelayedTriggeredAbility(ability);
         }
         return true;
-	}
+    }
 
-	@Override
-	public ChancellorOfTheAnnexEffect copy() {
-		return new ChancellorOfTheAnnexEffect(this);
-	}
+    @Override
+    public ChancellorOfTheAnnexEffect copy() {
+        return new ChancellorOfTheAnnexEffect(this);
+    }
 
 }
 
 class ChancellorOfTheAnnexDelayedTriggeredAbility extends DelayedTriggeredAbility<ChancellorOfTheAnnexDelayedTriggeredAbility> {
 
     private UUID playerId;
-    
-	ChancellorOfTheAnnexDelayedTriggeredAbility (UUID playerId) {
-		super(new CounterUnlessPaysEffect(new GenericManaCost(1)));
+
+    ChancellorOfTheAnnexDelayedTriggeredAbility (UUID playerId) {
+        super(new CounterUnlessPaysEffect(new GenericManaCost(1)));
         this.playerId = playerId;
-	}
+    }
 
-	ChancellorOfTheAnnexDelayedTriggeredAbility(ChancellorOfTheAnnexDelayedTriggeredAbility ability) {
-		super(ability);
+    ChancellorOfTheAnnexDelayedTriggeredAbility(ChancellorOfTheAnnexDelayedTriggeredAbility ability) {
+        super(ability);
         this.playerId = ability.playerId;
-	}
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getPlayerId().equals(playerId)) {
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getPlayerId().equals(playerId)) {
             this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));
-			return true;
-		}
-		return false;
-	}
-    
-	@Override
-	public ChancellorOfTheAnnexDelayedTriggeredAbility copy() {
-		return new ChancellorOfTheAnnexDelayedTriggeredAbility(this);
-	}
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public ChancellorOfTheAnnexDelayedTriggeredAbility copy() {
+        return new ChancellorOfTheAnnexDelayedTriggeredAbility(this);
+    }
 }

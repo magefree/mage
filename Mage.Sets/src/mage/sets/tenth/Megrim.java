@@ -49,7 +49,7 @@ public class Megrim extends CardImpl<Megrim> {
     public Megrim (UUID ownerId) {
         super(ownerId, 157, "Megrim", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
         this.expansionSetCode = "10E";
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.addAbility(new MergimTriggeredAbility());
     }
 

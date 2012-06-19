@@ -62,7 +62,7 @@ public class FrontierGuide extends CardImpl<FrontierGuide> {
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true),
                 new ManaCostsImpl("{3}{G}"));
         ability.addCost(new TapSourceCost());
-		this.addAbility(ability);
+        this.addAbility(ability);
     }
 
     public FrontierGuide(final FrontierGuide card) {

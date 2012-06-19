@@ -57,8 +57,8 @@ public class TrainingGrounds extends CardImpl<TrainingGrounds> {
     public TrainingGrounds (UUID ownerId) {
         super(ownerId, 91, "Training Grounds", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{U}");
         this.expansionSetCode = "ROE";
-        
-		this.color.setBlue(true);
+
+        this.color.setBlue(true);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TrainingGroundsCostReductionEffect()));
     }
 
@@ -74,59 +74,59 @@ public class TrainingGrounds extends CardImpl<TrainingGrounds> {
 
 class TrainingGroundsCostReductionEffect extends ContinuousEffectImpl<TrainingGroundsCostReductionEffect> {
 
-	private static final String effectText = "Activated abilities of creatures you control cost up to {2} less to activate. This effect can't reduce the amount of mana an ability costs to activate to less than one mana";
-	private static final FilterControlledCreaturePermanent filter;
+    private static final String effectText = "Activated abilities of creatures you control cost up to {2} less to activate. This effect can't reduce the amount of mana an ability costs to activate to less than one mana";
+    private static final FilterControlledCreaturePermanent filter;
 
-	static {
-		filter = new FilterControlledCreaturePermanent();
-	}
+    static {
+        filter = new FilterControlledCreaturePermanent();
+    }
 
-	TrainingGroundsCostReductionEffect ( ) {
-		super(Duration.WhileOnBattlefield, Layer.TextChangingEffects_3, SubLayer.NA, Outcome.Benefit);
-		staticText = effectText;
-	}
+    TrainingGroundsCostReductionEffect ( ) {
+        super(Duration.WhileOnBattlefield, Layer.TextChangingEffects_3, SubLayer.NA, Outcome.Benefit);
+        staticText = effectText;
+    }
 
-	TrainingGroundsCostReductionEffect ( TrainingGroundsCostReductionEffect effect ) {
-		super(effect);
-	}
+    TrainingGroundsCostReductionEffect ( TrainingGroundsCostReductionEffect effect ) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		boolean applied = false;
-		List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
+    @Override
+    public boolean apply(Game game, Ability source) {
+        boolean applied = false;
+        List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
 
-		if ( permanents != null && !permanents.isEmpty() ) {
-			for ( Permanent permanent : permanents ) {
-				for ( Ability ability : permanent.getAbilities() ) {
-					if ( !(ability instanceof SpellAbility) && ability.getManaCosts() != null ) {
-						int costCount = ability.getManaCosts().size();
-						for ( Cost cost : ability.getManaCosts() ) {
-							if ( cost instanceof GenericManaCost ) {
-								GenericManaCost costCasted = (GenericManaCost)cost;
-								int amount = costCasted.convertedManaCost();
-								int adjustedAmount = 0;
-								if ( costCount == 1 && (amount - 2) <= 0 ) {
-									adjustedAmount = 1;
-								}
-								else {
-									//In case the adjusted amount goes below 0.
-									adjustedAmount = Math.max(0, amount - 2);
-								}
-								costCasted.setMana(adjustedAmount);
-								applied = true;
-							}
-						}
-					}
-				}
-			}
-		}
-		
-		return applied;
-	}
+        if ( permanents != null && !permanents.isEmpty() ) {
+            for ( Permanent permanent : permanents ) {
+                for ( Ability ability : permanent.getAbilities() ) {
+                    if ( !(ability instanceof SpellAbility) && ability.getManaCosts() != null ) {
+                        int costCount = ability.getManaCosts().size();
+                        for ( Cost cost : ability.getManaCosts() ) {
+                            if ( cost instanceof GenericManaCost ) {
+                                GenericManaCost costCasted = (GenericManaCost)cost;
+                                int amount = costCasted.convertedManaCost();
+                                int adjustedAmount = 0;
+                                if ( costCount == 1 && (amount - 2) <= 0 ) {
+                                    adjustedAmount = 1;
+                                }
+                                else {
+                                    //In case the adjusted amount goes below 0.
+                                    adjustedAmount = Math.max(0, amount - 2);
+                                }
+                                costCasted.setMana(adjustedAmount);
+                                applied = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
-	@Override
-	public TrainingGroundsCostReductionEffect copy() {
-		return new TrainingGroundsCostReductionEffect(this);
-	}
+        return applied;
+    }
+
+    @Override
+    public TrainingGroundsCostReductionEffect copy() {
+        return new TrainingGroundsCostReductionEffect(this);
+    }
 
 }

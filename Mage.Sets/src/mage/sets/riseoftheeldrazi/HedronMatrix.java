@@ -71,31 +71,31 @@ public class HedronMatrix extends CardImpl<HedronMatrix> {
 
 class HedronMatrixEffect extends ContinuousEffectImpl<HedronMatrixEffect> {
 
-	public HedronMatrixEffect() {
-		super(Duration.WhileOnBattlefield, Constants.Layer.PTChangingEffects_7, Constants.SubLayer.ModifyPT_7c, Constants.Outcome.BoostCreature);
-		staticText = "Equipped creature gets +X/+X, where X is its converted mana cost";
-	}
+    public HedronMatrixEffect() {
+        super(Duration.WhileOnBattlefield, Constants.Layer.PTChangingEffects_7, Constants.SubLayer.ModifyPT_7c, Constants.Outcome.BoostCreature);
+        staticText = "Equipped creature gets +X/+X, where X is its converted mana cost";
+    }
 
-	public HedronMatrixEffect(final HedronMatrixEffect effect) {
-		super(effect);
-	}
+    public HedronMatrixEffect(final HedronMatrixEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public HedronMatrixEffect copy() {
-		return new HedronMatrixEffect(this);
-	}
+    @Override
+    public HedronMatrixEffect copy() {
+        return new HedronMatrixEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent equipment = game.getPermanent(source.getSourceId());
-		if (equipment != null && equipment.getAttachedTo() != null) {
-			Permanent creature = game.getPermanent(equipment.getAttachedTo());
-			if (creature != null) {
-				creature.addPower(creature.getManaCost().convertedManaCost());
-				creature.addToughness(creature.getManaCost().convertedManaCost());
-			}
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent equipment = game.getPermanent(source.getSourceId());
+        if (equipment != null && equipment.getAttachedTo() != null) {
+            Permanent creature = game.getPermanent(equipment.getAttachedTo());
+            if (creature != null) {
+                creature.addPower(creature.getManaCost().convertedManaCost());
+                creature.addToughness(creature.getManaCost().convertedManaCost());
+            }
+        }
+        return true;
+    }
 
 }

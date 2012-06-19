@@ -54,7 +54,7 @@ public class NayaBattlemage extends CardImpl<NayaBattlemage> {
         this.expansionSetCode = "ALA";
         this.subtype.add("Human");
         this.subtype.add("Shaman");
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}"));

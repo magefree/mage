@@ -58,10 +58,10 @@ public class PhyrexianMetamorph extends CardImpl<PhyrexianMetamorph> {
         super(ownerId, 42, "Phyrexian Metamorph", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{UP}");
         this.expansionSetCode = "NPH";
         this.subtype.add("Shapeshifter");
-		this.color.setBlue(true);
+        this.color.setBlue(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
-		Ability ability = new EntersBattlefieldAbility(new EntersBattlefieldEffect(new PhyrexianMetamorphEffect()), "You may have {this} enter the battlefield as a copy of any artifact or creature on the battlefield, except it's an artifact in addition to its other types");
+        Ability ability = new EntersBattlefieldAbility(new EntersBattlefieldEffect(new PhyrexianMetamorphEffect()), "You may have {this} enter the battlefield as a copy of any artifact or creature on the battlefield, except it's an artifact in addition to its other types");
         this.addAbility(ability);
     }
 
@@ -77,7 +77,7 @@ public class PhyrexianMetamorph extends CardImpl<PhyrexianMetamorph> {
 }
 
 class PhyrexianMetamorphEffect extends OneShotEffect<PhyrexianMetamorphEffect> {
-    
+
     private static final FilterPermanent filter = new FilterPermanent("artifact or creature");
 
     static {
@@ -85,7 +85,7 @@ class PhyrexianMetamorphEffect extends OneShotEffect<PhyrexianMetamorphEffect> {
         filter.getCardType().add(CardType.CREATURE);
         filter.setScopeCardType(Filter.ComparisonScope.Any);
     }
-        
+
     public PhyrexianMetamorphEffect() {
         super(Outcome.Copy);
     }
@@ -93,7 +93,7 @@ class PhyrexianMetamorphEffect extends OneShotEffect<PhyrexianMetamorphEffect> {
     public PhyrexianMetamorphEffect(final PhyrexianMetamorphEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
@@ -125,5 +125,5 @@ class PhyrexianMetamorphEffect extends OneShotEffect<PhyrexianMetamorphEffect> {
     public PhyrexianMetamorphEffect copy() {
         return new PhyrexianMetamorphEffect(this);
     }
-    
+
 }

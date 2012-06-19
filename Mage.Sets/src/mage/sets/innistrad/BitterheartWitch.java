@@ -63,12 +63,12 @@ public class BitterheartWitch extends CardImpl<BitterheartWitch> {
         this.toughness = new MageInt(2);
 
         this.addAbility(DeathtouchAbility.getInstance());
-        
+
         // When Bitterheart Witch dies, you may search your library for a Curse card, put it onto the battlefield attached to target player, then shuffle your library.
         Ability ability = new DiesTriggeredAbility(new BitterheartWitchEffect(), true);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
-        
+
     }
 
     public BitterheartWitch(final BitterheartWitch card) {
@@ -84,11 +84,11 @@ public class BitterheartWitch extends CardImpl<BitterheartWitch> {
 class BitterheartWitchEffect extends OneShotEffect<BitterheartWitchEffect> {
 
     private final static FilterCard filter = new FilterCard("Curse card in your library");
-    
+
     static {
         filter.getSubtype().add("Curse");
     }
-    
+
     public BitterheartWitchEffect() {
         super(Outcome.Detriment);
         staticText = "you may search your library for a Curse card, put it onto the battlefield attached to target player, then shuffle your library";

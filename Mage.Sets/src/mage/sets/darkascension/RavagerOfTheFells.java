@@ -55,14 +55,14 @@ public class RavagerOfTheFells extends CardImpl<RavagerOfTheFells> {
         // this card is the second face of double-faced card
         this.nightCard = true;
         this.canTransform = true;
-        
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever this creature transforms into Ravager of the Fells, it deals 2 damage to target opponent and 2 damage to up to one target creature that player controls.
-        
+
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Ravager of the Fells.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), Constants.TargetController.ANY, false);
         this.addAbility(new ConditionalTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.getInstance(), TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));

@@ -41,22 +41,22 @@ import mage.target.common.TargetNonlandPermanent;
  */
 public class MaelstromPulse extends CardImpl<MaelstromPulse> {
 
-	public MaelstromPulse(UUID ownerId) {
-		super(ownerId, 92, "Maelstrom Pulse", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{B}{G}");
-		this.expansionSetCode = "ARB";
-		this.color.setBlack(true);
-		this.color.setGreen(true);
-		this.getSpellAbility().addTarget(new TargetNonlandPermanent());
-		this.getSpellAbility().addEffect(new DestroyAllNamedPermanentsEffect());
-	}
+    public MaelstromPulse(UUID ownerId) {
+        super(ownerId, 92, "Maelstrom Pulse", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{B}{G}");
+        this.expansionSetCode = "ARB";
+        this.color.setBlack(true);
+        this.color.setGreen(true);
+        this.getSpellAbility().addTarget(new TargetNonlandPermanent());
+        this.getSpellAbility().addEffect(new DestroyAllNamedPermanentsEffect());
+    }
 
-	public MaelstromPulse(final MaelstromPulse card) {
-		super(card);
-	}
+    public MaelstromPulse(final MaelstromPulse card) {
+        super(card);
+    }
 
-	@Override
-	public MaelstromPulse copy() {
-		return new MaelstromPulse(this);
-	}
+    @Override
+    public MaelstromPulse copy() {
+        return new MaelstromPulse(this);
+    }
 
 }

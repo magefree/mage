@@ -30,9 +30,9 @@ public class SoulWardenTest extends CardTestPlayerBase {
 
         setStopAt(1, Constants.PhaseStep.END_TURN);
         execute();
-        
+
         assertLife(playerA, 21);
         assertLife(playerB, 20);
     }
-    
+
 }

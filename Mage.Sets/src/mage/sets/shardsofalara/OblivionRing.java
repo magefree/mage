@@ -54,30 +54,30 @@ public class OblivionRing extends CardImpl<OblivionRing> {
          anotherNonlandPermanent.setAnother(true);
     }
 
-	public OblivionRing(UUID ownerId) {
-		super(ownerId, 20, "Oblivion Ring", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
-		this.expansionSetCode = "ALA";
-		this.color.setWhite(true);
+    public OblivionRing(UUID ownerId) {
+        super(ownerId, 20, "Oblivion Ring", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
+        this.expansionSetCode = "ALA";
+        this.color.setWhite(true);
 
         // When Oblivion Ring enters the battlefield, exile another target nonland permanent.
         Ability ability1 = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect( "Oblivion Ring exile"), false);
-		Target target = new TargetPermanent(anotherNonlandPermanent);
+        Target target = new TargetPermanent(anotherNonlandPermanent);
         target.setRequired(true);
         ability1.addTarget(target);
-		this.addAbility(ability1);
+        this.addAbility(ability1);
 
         // When Oblivion Ring leaves the battlefield, return the exiled card to the battlefield under its owner's control.
         Ability ability2 = new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD), false);
-		this.addAbility(ability2);
-	}
+        this.addAbility(ability2);
+    }
 
-	public OblivionRing(final OblivionRing card) {
-		super(card);
-	}
+    public OblivionRing(final OblivionRing card) {
+        super(card);
+    }
 
-	@Override
-	public OblivionRing copy() {
-		return new OblivionRing(this);
-	}
+    @Override
+    public OblivionRing copy() {
+        return new OblivionRing(this);
+    }
 
 }

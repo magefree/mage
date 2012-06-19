@@ -71,7 +71,7 @@ class HalfZombiesCount implements DynamicValue {
 
     private static HalfZombiesCount instance;
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-    
+
     static {
         filter.getSubtype().add("Zombie");
     }

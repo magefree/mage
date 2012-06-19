@@ -49,7 +49,7 @@ public class RallyTheForces extends CardImpl<RallyTheForces> {
     public RallyTheForces (UUID ownerId) {
         super(ownerId, 73, "Rally the Forces", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
         this.expansionSetCode = "MBS";
-		this.color.setRed(true);
+        this.color.setRed(true);
         this.getSpellAbility().addEffect(new BoostAllEffect(1, 1, Constants.Duration.EndOfTurn, filter, false));
         this.getSpellAbility().addEffect(new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Constants.Duration.EndOfTurn, filter, false));
     }

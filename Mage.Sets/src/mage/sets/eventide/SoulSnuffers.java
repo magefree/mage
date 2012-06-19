@@ -49,7 +49,7 @@ public class SoulSnuffers extends CardImpl<SoulSnuffers> {
         this.expansionSetCode = "EVE";
         this.subtype.add("Elemental");
         this.subtype.add("Shaman");
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersAllEffect(CounterType.M1M1.createInstance(), new FilterCreaturePermanent())));

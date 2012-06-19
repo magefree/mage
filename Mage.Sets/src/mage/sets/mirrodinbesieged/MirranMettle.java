@@ -49,10 +49,10 @@ public class MirranMettle extends CardImpl<MirranMettle> {
         super(ownerId, 84, "Mirran Mettle", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "MBS";
         this.color.setGreen(true);
-        
+
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
-        
+
         this.getSpellAbility().addEffect(new ConditionalContinousEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn), MetalcraftCondition.getInstance(), effectText));
     }
 

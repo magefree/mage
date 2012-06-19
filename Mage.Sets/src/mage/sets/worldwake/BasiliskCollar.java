@@ -49,21 +49,21 @@ import mage.cards.CardImpl;
  */
 public class BasiliskCollar extends CardImpl<BasiliskCollar> {
 
-	public BasiliskCollar(UUID ownerId) {
-		super(ownerId, 122, "Basilisk Collar", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}");
-		this.expansionSetCode = "WWK";
-		this.subtype.add("Equipment");
-		this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), Constants.AttachmentType.EQUIPMENT)));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(DeathtouchAbility.getInstance(), Constants.AttachmentType.EQUIPMENT)));
-	}
+    public BasiliskCollar(UUID ownerId) {
+        super(ownerId, 122, "Basilisk Collar", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}");
+        this.expansionSetCode = "WWK";
+        this.subtype.add("Equipment");
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), Constants.AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(DeathtouchAbility.getInstance(), Constants.AttachmentType.EQUIPMENT)));
+    }
 
-	public BasiliskCollar(final BasiliskCollar card) {
-		super(card);
-	}
+    public BasiliskCollar(final BasiliskCollar card) {
+        super(card);
+    }
 
-	@Override
-	public BasiliskCollar copy() {
-		return new BasiliskCollar(this);
-	}
+    @Override
+    public BasiliskCollar copy() {
+        return new BasiliskCollar(this);
+    }
 }

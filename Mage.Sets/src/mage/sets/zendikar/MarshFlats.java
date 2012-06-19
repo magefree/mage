@@ -40,19 +40,19 @@ import mage.cards.CardImpl;
  */
 public class MarshFlats extends CardImpl<MarshFlats> {
 
-	public MarshFlats(UUID ownerId) {
-		super(ownerId, 219, "Marsh Flats", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-		this.expansionSetCode = "ZEN";
-		this.addAbility(new FetchLandActivatedAbility(new String[] {"Swamp", "Plains"}));
-	}
+    public MarshFlats(UUID ownerId) {
+        super(ownerId, 219, "Marsh Flats", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+        this.expansionSetCode = "ZEN";
+        this.addAbility(new FetchLandActivatedAbility(new String[] {"Swamp", "Plains"}));
+    }
 
-	public MarshFlats(final MarshFlats card) {
-		super(card);
-	}
+    public MarshFlats(final MarshFlats card) {
+        super(card);
+    }
 
-	@Override
-	public MarshFlats copy() {
-		return new MarshFlats(this);
-	}
+    @Override
+    public MarshFlats copy() {
+        return new MarshFlats(this);
+    }
 
 }

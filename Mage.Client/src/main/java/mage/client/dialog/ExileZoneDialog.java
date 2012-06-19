@@ -51,28 +51,28 @@ public class ExileZoneDialog extends MageDialog {
     /** Creates new form ExileZoneDialog */
     public ExileZoneDialog() {
         initComponents();
-		this.setModal(false);
+        this.setModal(false);
     }
 
-	public void loadCards(ExileView exile, BigCard bigCard, UUID gameId) {
-		this.title = exile.getName();
-		boolean changed = false;
-		changed = cards.loadCards(exile, bigCard, gameId);
-		if (exile.size() > 0) {
-			show();
-			if (changed) {
-				try {
-					this.setIcon(false);
-				} catch (PropertyVetoException ex) {
-					Logger.getLogger(ExileZoneDialog.class.getName()).log(Level.SEVERE, null, ex);
-				}
-			}
-		}
-		else {
-			this.hideDialog();
-		}
-	}
-	
+    public void loadCards(ExileView exile, BigCard bigCard, UUID gameId) {
+        this.title = exile.getName();
+        boolean changed = false;
+        changed = cards.loadCards(exile, bigCard, gameId);
+        if (exile.size() > 0) {
+            show();
+            if (changed) {
+                try {
+                    this.setIcon(false);
+                } catch (PropertyVetoException ex) {
+                    Logger.getLogger(ExileZoneDialog.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        else {
+            this.hideDialog();
+        }
+    }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

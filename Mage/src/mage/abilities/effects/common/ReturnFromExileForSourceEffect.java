@@ -44,64 +44,64 @@ import mage.game.Game;
  */
 public class ReturnFromExileForSourceEffect extends OneShotEffect<ReturnFromExileForSourceEffect> {
 
-	private Zone zone;
-	private boolean tapped;
+    private Zone zone;
+    private boolean tapped;
 
-	public ReturnFromExileForSourceEffect(Zone zone) {
-		this(zone, false);
-	}
+    public ReturnFromExileForSourceEffect(Zone zone) {
+        this(zone, false);
+    }
 
-	public ReturnFromExileForSourceEffect(Zone zone, boolean tapped) {
-		super(Outcome.PutCardInPlay);
-		this.zone = zone;
-		this.tapped = tapped;
-		setText();
-	}
+    public ReturnFromExileForSourceEffect(Zone zone, boolean tapped) {
+        super(Outcome.PutCardInPlay);
+        this.zone = zone;
+        this.tapped = tapped;
+        setText();
+    }
 
-	public ReturnFromExileForSourceEffect(final ReturnFromExileForSourceEffect effect) {
-		super(effect);
-		this.zone = effect.zone;
-		this.tapped = effect.tapped;
-	}
+    public ReturnFromExileForSourceEffect(final ReturnFromExileForSourceEffect effect) {
+        super(effect);
+        this.zone = effect.zone;
+        this.tapped = effect.tapped;
+    }
 
-	@Override
-	public ReturnFromExileForSourceEffect copy() {
-		return new ReturnFromExileForSourceEffect(this);
-	}
+    @Override
+    public ReturnFromExileForSourceEffect copy() {
+        return new ReturnFromExileForSourceEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		UUID exileId = source.getSourceId();
-		ExileZone exile = game.getExile().getExileZone(exileId);
-		if (exile != null) {
+    @Override
+    public boolean apply(Game game, Ability source) {
+        UUID exileId = source.getSourceId();
+        ExileZone exile = game.getExile().getExileZone(exileId);
+        if (exile != null) {
             LinkedList<UUID> cards = new LinkedList<UUID>(exile);
-			for (UUID cardId: cards) {
-				Card card = game.getCard(cardId);
-				card.moveToZone(zone, source.getId(), game, tapped);
-			}
-			exile.clear();
-			return true;
-		}
-		return false;
-	}
+            for (UUID cardId: cards) {
+                Card card = game.getCard(cardId);
+                card.moveToZone(zone, source.getId(), game, tapped);
+            }
+            exile.clear();
+            return true;
+        }
+        return false;
+    }
 
-	private void setText() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("return the exiled cards ");
-		switch(zone) {
-			case BATTLEFIELD:
-				sb.append("to the battlefield under its owner's control");
-				if (tapped)
-					sb.append(" tapped");
-				break;
-			case HAND:
-				sb.append("to their owner's hand");
-				break;
-			case GRAVEYARD:
-				sb.append("to their owner's graveyard");
-				break;
-		}
-		staticText = sb.toString();
-	}
+    private void setText() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("return the exiled cards ");
+        switch(zone) {
+            case BATTLEFIELD:
+                sb.append("to the battlefield under its owner's control");
+                if (tapped)
+                    sb.append(" tapped");
+                break;
+            case HAND:
+                sb.append("to their owner's hand");
+                break;
+            case GRAVEYARD:
+                sb.append("to their owner's graveyard");
+                break;
+        }
+        staticText = sb.toString();
+    }
 
 }

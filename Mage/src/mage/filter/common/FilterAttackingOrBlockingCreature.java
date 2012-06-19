@@ -34,24 +34,24 @@ package mage.filter.common;
  */
 public class FilterAttackingOrBlockingCreature extends FilterCreaturePermanent<FilterAttackingOrBlockingCreature> {
 
-	public FilterAttackingOrBlockingCreature() {
-		this("attacking or blocking creature");
-	}
+    public FilterAttackingOrBlockingCreature() {
+        this("attacking or blocking creature");
+    }
 
-	public FilterAttackingOrBlockingCreature(String name) {
-		super(name);
-		this.attacking = true;
-		this.useAttacking = true;
-		this.blocking = true;
-		this.useBlocking = true;
-	}
+    public FilterAttackingOrBlockingCreature(String name) {
+        super(name);
+        this.attacking = true;
+        this.useAttacking = true;
+        this.blocking = true;
+        this.useBlocking = true;
+    }
 
-	public FilterAttackingOrBlockingCreature(final FilterAttackingOrBlockingCreature filter) {
-		super(filter);
-	}
+    public FilterAttackingOrBlockingCreature(final FilterAttackingOrBlockingCreature filter) {
+        super(filter);
+    }
 
-	@Override
-	public FilterAttackingOrBlockingCreature copy() {
-		return new FilterAttackingOrBlockingCreature(this);
-	}
+    @Override
+    public FilterAttackingOrBlockingCreature copy() {
+        return new FilterAttackingOrBlockingCreature(this);
+    }
 }

@@ -38,80 +38,80 @@ import java.util.Set;
  */
 public class ChoiceImpl<T extends ChoiceImpl<T>> implements Choice, Serializable {
 
-	protected boolean chosen;
-	protected boolean required;
-	protected String choice;
-	protected Set<String> choices = new HashSet<String>();
-	protected String message;
+    protected boolean chosen;
+    protected boolean required;
+    protected String choice;
+    protected Set<String> choices = new HashSet<String>();
+    protected String message;
 
-	public ChoiceImpl() {
-		this(false);
-	}
+    public ChoiceImpl() {
+        this(false);
+    }
 
-	public ChoiceImpl(boolean required) {
-		this.required = required;
-	}
+    public ChoiceImpl(boolean required) {
+        this.required = required;
+    }
 
-	public ChoiceImpl(ChoiceImpl<T> choice) {
-		this.choice = choice.choice;
-		this.chosen = choice.chosen;
-		this.required = choice.required;
-		this.message = choice.message;
+    public ChoiceImpl(ChoiceImpl<T> choice) {
+        this.choice = choice.choice;
+        this.chosen = choice.chosen;
+        this.required = choice.required;
+        this.message = choice.message;
         this.choices.addAll(choice.choices);
-	}
+    }
 
-	@Override
-	public boolean isChosen() {
-		return chosen;
-	}
+    @Override
+    public boolean isChosen() {
+        return chosen;
+    }
 
-	@Override
-	public void clearChoice() {
-		choice = null;
-		chosen = false;
-	}
+    @Override
+    public void clearChoice() {
+        choice = null;
+        chosen = false;
+    }
 
-	@Override
-	public String getMessage() {
-		return message;
-	}
+    @Override
+    public String getMessage() {
+        return message;
+    }
 
-	@Override
-	public void setMessage(String message) {
-		this.message = message;
-	}
+    @Override
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
-	@Override
-	public Set<String> getChoices() {
-		return choices;
-	}
+    @Override
+    public Set<String> getChoices() {
+        return choices;
+    }
 
-	@Override
-	public void setChoices(Set<String> choices) {
-		this.choices = choices;
-	}
+    @Override
+    public void setChoices(Set<String> choices) {
+        this.choices = choices;
+    }
 
-	@Override
-	public String getChoice() {
-		return choice;
-	}
+    @Override
+    public String getChoice() {
+        return choice;
+    }
 
-	@Override
-	public void setChoice(String choice) {
-		if (choices.contains(choice)) {
-			this.choice = choice;
-			this.chosen = true;
-		}
-	}
+    @Override
+    public void setChoice(String choice) {
+        if (choices.contains(choice)) {
+            this.choice = choice;
+            this.chosen = true;
+        }
+    }
 
-	@Override
-	public boolean isRequired() {
-		return this.required;
-	}
+    @Override
+    public boolean isRequired() {
+        return this.required;
+    }
 
-	@Override
-	public T copy() {
-		return (T)new ChoiceImpl(this);
-	}
+    @Override
+    public T copy() {
+        return (T)new ChoiceImpl(this);
+    }
 
 }

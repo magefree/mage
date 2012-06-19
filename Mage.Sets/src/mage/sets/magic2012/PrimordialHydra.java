@@ -56,7 +56,7 @@ import java.util.UUID;
  */
 public class PrimordialHydra extends CardImpl<PrimordialHydra> {
 
-	private final static String staticText = "{this} has trample as long as it has ten or more +1/+1 counters on it";
+    private final static String staticText = "{this} has trample as long as it has ten or more +1/+1 counters on it";
 
     public PrimordialHydra(UUID ownerId) {
         super(ownerId, 189, "Primordial Hydra", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{X}{G}{G}");
@@ -72,7 +72,7 @@ public class PrimordialHydra extends CardImpl<PrimordialHydra> {
         ConditionalContinousEffect effect = new ConditionalContinousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance()), new HasCounterCondition(CounterType.P1P1, 10), staticText);
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect));
 
-	}
+    }
 
     public PrimordialHydra(final PrimordialHydra card) {
         super(card);

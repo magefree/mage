@@ -43,29 +43,29 @@ import mage.game.permanent.token.SaprolingToken;
  */
 public class SproutingThrinax extends CardImpl<SproutingThrinax> {
 
-	private static SaprolingToken saprolingToken = new SaprolingToken();
+    private static SaprolingToken saprolingToken = new SaprolingToken();
 
-	public SproutingThrinax(UUID ownerId) {
-		super(ownerId, 197, "Sprouting Thrinax", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}{R}{G}");
-		this.expansionSetCode = "ALA";
-		this.color.setBlack(true);
-		this.color.setRed(true);
-		this.color.setGreen(true);
-		this.subtype.add("Lizard");
-		this.power = new MageInt(3);
-		this.toughness = new MageInt(3);
+    public SproutingThrinax(UUID ownerId) {
+        super(ownerId, 197, "Sprouting Thrinax", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}{R}{G}");
+        this.expansionSetCode = "ALA";
+        this.color.setBlack(true);
+        this.color.setRed(true);
+        this.color.setGreen(true);
+        this.subtype.add("Lizard");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-		this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(saprolingToken, 3), false));
-	}
+        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(saprolingToken, 3), false));
+    }
 
-	public SproutingThrinax(final SproutingThrinax card) {
-		super(card);
-	}
+    public SproutingThrinax(final SproutingThrinax card) {
+        super(card);
+    }
 
-	@Override
-	public SproutingThrinax copy() {
-		return new SproutingThrinax(this);
-	}
+    @Override
+    public SproutingThrinax copy() {
+        return new SproutingThrinax(this);
+    }
 
 }
 

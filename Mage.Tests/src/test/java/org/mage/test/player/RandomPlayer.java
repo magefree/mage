@@ -72,45 +72,45 @@ import org.apache.log4j.Logger;
  * @author BetaSteward_at_googlemail.com
  */
 public class RandomPlayer extends ComputerPlayer<RandomPlayer> {
-    
-	private boolean isSimulatedPlayer;
+
+    private boolean isSimulatedPlayer;
     private static Random rnd = new Random();
     private int actionCount = 0;
-    
+
     protected PassAbility pass = new PassAbility();
 
     public RandomPlayer(String name) {
-		super(name, RangeOfInfluence.ALL);
-		this.isSimulatedPlayer = true;
-	}
+        super(name, RangeOfInfluence.ALL);
+        this.isSimulatedPlayer = true;
+    }
 
-	public RandomPlayer(final RandomPlayer player) {
-		super(player);
-		this.isSimulatedPlayer = player.isSimulatedPlayer;
-	}
+    public RandomPlayer(final RandomPlayer player) {
+        super(player);
+        this.isSimulatedPlayer = player.isSimulatedPlayer;
+    }
 
-	@Override
-	public RandomPlayer copy() {
-		return new RandomPlayer(this);
-	}
+    @Override
+    public RandomPlayer copy() {
+        return new RandomPlayer(this);
+    }
 
     public boolean isSimulatedPlayer() {
         return this.isSimulatedPlayer;
     }
-    
+
     public int getActionCount() {
         return actionCount;
     }
-    
-   	@Override
-	public boolean priority(Game game) {
+
+       @Override
+    public boolean priority(Game game) {
         boolean didSomething = false;
         Ability ability = getAction(game);
         if (!(ability instanceof PassAbility))                
             didSomething = true;
 
         activateAbility((ActivatedAbility) ability, game);
-            
+
         actionCount++;
         return didSomething;
     }
@@ -161,9 +161,9 @@ public class RandomPlayer extends ComputerPlayer<RandomPlayer> {
         playables.add(pass);
         return playables;
     }
-   
+
     @Override
-	public boolean triggerAbility(TriggeredAbility source, Game game) {
+    public boolean triggerAbility(TriggeredAbility source, Game game) {
         if (source != null && source.canChooseTarget(game)) {
             Ability ability;
             List<Ability> options = getPlayableOptions(source, game);
@@ -176,32 +176,32 @@ public class RandomPlayer extends ComputerPlayer<RandomPlayer> {
                 else
                     ability = options.get(rnd.nextInt(options.size()));
             }
-			if (ability.isUsesStack()) {
-				game.getStack().push(new StackAbility(ability, playerId));
-				if (ability.activate(game, false)) {
+            if (ability.isUsesStack()) {
+                game.getStack().push(new StackAbility(ability, playerId));
+                if (ability.activate(game, false)) {
                     actionCount++;
-					return true;
-				}
-			} else {
-				if (ability.activate(game, false)) {
-					ability.resolve(game);
+                    return true;
+                }
+            } else {
+                if (ability.activate(game, false)) {
+                    ability.resolve(game);
                     actionCount++;
-					return true;
-				}
-			}
+                    return true;
+                }
+            }
         }
         return false;
-	}
+    }
 
     @Override
     public void selectAttackers(Game game) {
-		//useful only for two player games - will only attack first opponent
-		UUID defenderId = game.getOpponents(playerId).iterator().next();
-		List<Permanent> attackersList = super.getAvailableAttackers(game);
-		//use binary digits to calculate powerset of attackers
-		int powerElements = (int) Math.pow(2, attackersList.size());
+        //useful only for two player games - will only attack first opponent
+        UUID defenderId = game.getOpponents(playerId).iterator().next();
+        List<Permanent> attackersList = super.getAvailableAttackers(game);
+        //use binary digits to calculate powerset of attackers
+        int powerElements = (int) Math.pow(2, attackersList.size());
         int value = rnd.nextInt(powerElements);
-		StringBuilder binary = new StringBuilder();
+        StringBuilder binary = new StringBuilder();
         binary.append(Integer.toBinaryString(value));
         while (binary.length() < attackersList.size()) {
             binary.insert(0, "0");  //pad with zeros
@@ -215,10 +215,10 @@ public class RandomPlayer extends ComputerPlayer<RandomPlayer> {
 
     @Override
     public void selectBlockers(Game game) {
-		int numGroups = game.getCombat().getGroups().size();
-		if (numGroups == 0) return;
+        int numGroups = game.getCombat().getGroups().size();
+        if (numGroups == 0) return;
 
-		List<Permanent> blockers = getAvailableBlockers(game);
+        List<Permanent> blockers = getAvailableBlockers(game);
         for (Permanent blocker: blockers) {
             int check = rnd.nextInt(numGroups + 1);
             if (check < numGroups) {
@@ -228,7 +228,7 @@ public class RandomPlayer extends ComputerPlayer<RandomPlayer> {
             }
         }
         actionCount++;
-	}
+    }
 
     @Override
     public void abort() {
@@ -257,7 +257,7 @@ public class RandomPlayer extends ComputerPlayer<RandomPlayer> {
         target.add(targetId, game);
         return true;
     }
-    
+
     protected boolean chooseRandomTarget(Target target, Ability source, Game game) {
         Set<UUID> possibleTargets = target.possibleTargets(source==null?null:source.getSourceId(), playerId, game);
         if (possibleTargets.isEmpty())
@@ -360,7 +360,7 @@ public class RandomPlayer extends ComputerPlayer<RandomPlayer> {
     public boolean choosePile(Outcome outcome, String message, List<? extends Card> pile1, List<? extends Card> pile2, Game game) {
         return rnd.nextBoolean();
     }
-    
+
     @Override
     public boolean choose(Outcome outcome, Choice choice, Game game) {
         Iterator<String> it = choice.getChoices().iterator();
@@ -375,20 +375,20 @@ public class RandomPlayer extends ComputerPlayer<RandomPlayer> {
 
     @Override
     public boolean playXMana(VariableManaCost cost, ManaCosts<ManaCost> costs, Game game) {
-		for (Permanent perm: this.getAvailableManaProducers(game)) {
-			for (ManaAbility ability: perm.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
+        for (Permanent perm: this.getAvailableManaProducers(game)) {
+            for (ManaAbility ability: perm.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
                 if (rnd.nextBoolean())
                     activateAbility(ability, game);
-			}
-		}
+            }
+        }
 
-		// don't allow X=0
-		if (getManaPool().count() == 0) {
-			return false;
-		}
+        // don't allow X=0
+        if (getManaPool().count() == 0) {
+            return false;
+        }
 
-		cost.setPaid();
-		return true;
+        cost.setPaid();
+        return true;
     }
 
     @Override

@@ -43,38 +43,38 @@ import mage.game.events.GameEvent.EventType;
  */
 public class CantCounterSourceEffect extends ReplacementEffectImpl<CantCounterSourceEffect> {
 
-	public CantCounterSourceEffect() {
-		super(Duration.WhileOnStack, Outcome.Benefit);
-		staticText = "{this} can't be countered";
-	}
-	
-	public CantCounterSourceEffect(final CantCounterSourceEffect effect) {
-		super(effect);
-	}
+    public CantCounterSourceEffect() {
+        super(Duration.WhileOnStack, Outcome.Benefit);
+        staticText = "{this} can't be countered";
+    }
 
-	@Override
-	public CantCounterSourceEffect copy() {
-		return new CantCounterSourceEffect(this);
-	}
+    public CantCounterSourceEffect(final CantCounterSourceEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
+    @Override
+    public CantCounterSourceEffect copy() {
+        return new CantCounterSourceEffect(this);
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (event.getType() == EventType.COUNTER) {
-			UUID spellId = game.getCard(source.getSourceId()).getSpellAbility().getId();
-			if (event.getTargetId().equals(spellId))
-				return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        return true;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (event.getType() == EventType.COUNTER) {
+            UUID spellId = game.getCard(source.getSourceId()).getSpellAbility().getId();
+            if (event.getTargetId().equals(spellId))
+                return true;
+        }
+        return false;
+    }
 
 }

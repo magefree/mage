@@ -43,20 +43,20 @@ import mage.game.permanent.token.EldraziSpawnToken;
  */
 public class AwakeningZone extends CardImpl<AwakeningZone> {
 
-	public AwakeningZone(UUID ownerId) {
-		super(ownerId, 176, "Awakening Zone", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
-		this.expansionSetCode = "ROE";
-		this.getColor().setGreen(true);
-		this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new CreateTokenEffect(new EldraziSpawnToken()), true));
-	}
+    public AwakeningZone(UUID ownerId) {
+        super(ownerId, 176, "Awakening Zone", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
+        this.expansionSetCode = "ROE";
+        this.getColor().setGreen(true);
+        this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new CreateTokenEffect(new EldraziSpawnToken()), true));
+    }
 
-	public AwakeningZone(final AwakeningZone card) {
-		super(card);
-	}
+    public AwakeningZone(final AwakeningZone card) {
+        super(card);
+    }
 
-	@Override
-	public AwakeningZone copy() {
-		return new AwakeningZone(this);
-	}
+    @Override
+    public AwakeningZone copy() {
+        return new AwakeningZone(this);
+    }
 
 }

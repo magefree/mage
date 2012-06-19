@@ -37,23 +37,23 @@ import mage.filter.FilterPermanent;
  */
 public class FilterNonlandPermanent extends FilterPermanent<FilterNonlandPermanent> {
 
-	public FilterNonlandPermanent() {
-		this("nonland permanent");
-	}
-	
-	public FilterNonlandPermanent(String name) {
-		super(name);
-		notCardType = true;
-		cardType.add(CardType.LAND);
-	}
+    public FilterNonlandPermanent() {
+        this("nonland permanent");
+    }
 
-	public FilterNonlandPermanent(final FilterNonlandPermanent filter) {
-		super(filter);
-	}
+    public FilterNonlandPermanent(String name) {
+        super(name);
+        notCardType = true;
+        cardType.add(CardType.LAND);
+    }
 
-	@Override
-	public FilterNonlandPermanent copy() {
-		return new FilterNonlandPermanent(this);
-	}
+    public FilterNonlandPermanent(final FilterNonlandPermanent filter) {
+        super(filter);
+    }
+
+    @Override
+    public FilterNonlandPermanent copy() {
+        return new FilterNonlandPermanent(this);
+    }
 
 }

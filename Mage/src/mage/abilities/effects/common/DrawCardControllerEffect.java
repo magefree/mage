@@ -42,53 +42,53 @@ import mage.players.Player;
  */
 public class DrawCardControllerEffect extends OneShotEffect<DrawCardControllerEffect> {
 
-	protected DynamicValue amount;
+    protected DynamicValue amount;
 
-	public DrawCardControllerEffect(int amount) {
-		this(new StaticValue(amount));
-	}
+    public DrawCardControllerEffect(int amount) {
+        this(new StaticValue(amount));
+    }
 
-	public DrawCardControllerEffect(DynamicValue amount) {
-		super(Outcome.DrawCard);
-		this.amount = amount.clone();
-		setText();
-	}
+    public DrawCardControllerEffect(DynamicValue amount) {
+        super(Outcome.DrawCard);
+        this.amount = amount.clone();
+        setText();
+    }
 
-	public DrawCardControllerEffect(final DrawCardControllerEffect effect) {
-		super(effect);
-		this.amount = effect.amount.clone();
-	}
+    public DrawCardControllerEffect(final DrawCardControllerEffect effect) {
+        super(effect);
+        this.amount = effect.amount.clone();
+    }
 
-	@Override
-	public DrawCardControllerEffect copy() {
-		return new DrawCardControllerEffect(this);
-	}
+    @Override
+    public DrawCardControllerEffect copy() {
+        return new DrawCardControllerEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-		if (player != null) {
-			player.drawCards(amount.calculate(game, source), game);
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+            player.drawCards(amount.calculate(game, source), game);
+            return true;
+        }
+        return false;
+    }
 
-	private void setText() {
-		StringBuilder sb = new StringBuilder();
-		boolean oneCard = (amount instanceof StaticValue && amount.calculate(null, null) == 1) 
+    private void setText() {
+        StringBuilder sb = new StringBuilder();
+        boolean oneCard = (amount instanceof StaticValue && amount.calculate(null, null) == 1) 
                                 || amount instanceof PermanentsOnBattlefieldCount;
-		sb.append("draw ").append(oneCard ? "a" : amount).append(" card");
-		if (!oneCard) {
-			sb.append("s");
-		}
+        sb.append("draw ").append(oneCard ? "a" : amount).append(" card");
+        if (!oneCard) {
+            sb.append("s");
+        }
                 String message = amount.getMessage();
-		if (message.length() > 0) {
-			sb.append(" for each ");
-		}
-		sb.append(message);
-		staticText = sb.toString();
-	}
+        if (message.length() > 0) {
+            sb.append(" for each ");
+        }
+        sb.append(message);
+        staticText = sb.toString();
+    }
 
 
 }

@@ -48,28 +48,28 @@ import mage.game.permanent.Permanent;
  */
 public class HeroOfOxidRidge extends CardImpl<HeroOfOxidRidge> {
 
-	public HeroOfOxidRidge(UUID ownerId) {
-		super(ownerId, 66, "Hero of Oxid Ridge", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
-		this.expansionSetCode = "MBS";
-		this.subtype.add("Human");
-		this.subtype.add("Knight");
-		this.color.setRed(true);
-		this.power = new MageInt(4);
-		this.toughness = new MageInt(2);
+    public HeroOfOxidRidge(UUID ownerId) {
+        super(ownerId, 66, "Hero of Oxid Ridge", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
+        this.expansionSetCode = "MBS";
+        this.subtype.add("Human");
+        this.subtype.add("Knight");
+        this.color.setRed(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(2);
 
-		this.addAbility(HasteAbility.getInstance());
-		this.addAbility(new BattleCryAbility());
+        this.addAbility(HasteAbility.getInstance());
+        this.addAbility(new BattleCryAbility());
         this.addAbility(new AttacksTriggeredAbility(new HeroOfOxidRidgeEffect(), false));
-	}
+    }
 
-	public HeroOfOxidRidge(final HeroOfOxidRidge card) {
-		super(card);
-	}
+    public HeroOfOxidRidge(final HeroOfOxidRidge card) {
+        super(card);
+    }
 
-	@Override
-	public HeroOfOxidRidge copy() {
-		return new HeroOfOxidRidge(this);
-	}
+    @Override
+    public HeroOfOxidRidge copy() {
+        return new HeroOfOxidRidge(this);
+    }
 
 }
 
@@ -79,11 +79,11 @@ class HeroOfOxidRidgeEffect extends RestrictionEffect<HeroOfOxidRidgeEffect> {
         super(Duration.EndOfTurn);
         staticText = "creatures with power 1 or less can't block this turn";
     }
-    
+
     public HeroOfOxidRidgeEffect(final HeroOfOxidRidgeEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public HeroOfOxidRidgeEffect copy() {
         return new HeroOfOxidRidgeEffect(this);
@@ -97,8 +97,8 @@ class HeroOfOxidRidgeEffect extends RestrictionEffect<HeroOfOxidRidgeEffect> {
     }
 
     @Override
-	public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-		return false;
-	}
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        return false;
+    }
 
 }

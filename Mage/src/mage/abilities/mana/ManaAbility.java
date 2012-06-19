@@ -44,32 +44,32 @@ import java.util.UUID;
  */
 public abstract class ManaAbility<T extends ManaAbility<T>> extends ActivatedAbilityImpl<T> {
 
-	protected Mana netMana = new Mana();
+    protected Mana netMana = new Mana();
 
-	public ManaAbility(Zone zone, ManaEffect effect, Cost cost) {
-		super(AbilityType.MANA, zone);
-		this.usesStack = false;
-		if (effect != null) {
-			this.addEffect(effect);
-		}
-		if (cost != null)
-			this.addCost(cost);
-	}
+    public ManaAbility(Zone zone, ManaEffect effect, Cost cost) {
+        super(AbilityType.MANA, zone);
+        this.usesStack = false;
+        if (effect != null) {
+            this.addEffect(effect);
+        }
+        if (cost != null)
+            this.addCost(cost);
+    }
 
-	public ManaAbility(ManaAbility ability) {
-		super(ability);
-		this.netMana = ability.netMana.copy();
-	}
+    public ManaAbility(ManaAbility ability) {
+        super(ability);
+        this.netMana = ability.netMana.copy();
+    }
 
-	@Override
-	public boolean canActivate(UUID playerId, Game game) {
-		if (!controlsAbility(playerId, game))
-			return false;
-		//20091005 - 605.3a
-		return costs.canPay(sourceId, controllerId, game);
-	}
+    @Override
+    public boolean canActivate(UUID playerId, Game game) {
+        if (!controlsAbility(playerId, game))
+            return false;
+        //20091005 - 605.3a
+        return costs.canPay(sourceId, controllerId, game);
+    }
 
-	public Mana getNetMana(Game game) {
-		return netMana;
-	}
+    public Mana getNetMana(Game game) {
+        return netMana;
+    }
 }

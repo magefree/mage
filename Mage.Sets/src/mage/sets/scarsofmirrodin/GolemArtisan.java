@@ -61,94 +61,94 @@ import java.util.UUID;
  */
 public class GolemArtisan extends CardImpl<GolemArtisan> {
 
-	private static final FilterPermanent filter = new FilterPermanent("artifact creature");
+    private static final FilterPermanent filter = new FilterPermanent("artifact creature");
 
-	static {
-		filter.getCardType().add(CardType.ARTIFACT);
-		filter.getCardType().add(CardType.CREATURE);
-		filter.setScopeCardType(Filter.ComparisonScope.All);
-	}
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.getCardType().add(CardType.CREATURE);
+        filter.setScopeCardType(Filter.ComparisonScope.All);
+    }
 
-	public GolemArtisan(UUID ownerId) {
-		super(ownerId, 159, "Golem Artisan", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
-		this.expansionSetCode = "SOM";
-		this.subtype.add("Golem");
+    public GolemArtisan(UUID ownerId) {
+        super(ownerId, 159, "Golem Artisan", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
+        this.expansionSetCode = "SOM";
+        this.subtype.add("Golem");
 
-		this.power = new MageInt(3);
-		this.toughness = new MageInt(3);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-		// {2}: Target artifact creature gets +1/+1 until end of turn.
-		Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Constants.Duration.EndOfTurn), new GenericManaCost(2));
-		Target target = new TargetPermanent(filter);
-		ability.addTarget(target);
-		this.addAbility(ability);
+        // {2}: Target artifact creature gets +1/+1 until end of turn.
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Constants.Duration.EndOfTurn), new GenericManaCost(2));
+        Target target = new TargetPermanent(filter);
+        ability.addTarget(target);
+        this.addAbility(ability);
 
-		// {2}: Target artifact creature gains your choice of flying, trample, or haste until end of turn.
-		ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GolemArtisanEffect(), new GenericManaCost(2));
-		target = new TargetPermanent(filter);
-		ability.addTarget(target);
-		this.addAbility(ability);
+        // {2}: Target artifact creature gains your choice of flying, trample, or haste until end of turn.
+        ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GolemArtisanEffect(), new GenericManaCost(2));
+        target = new TargetPermanent(filter);
+        ability.addTarget(target);
+        this.addAbility(ability);
 
-	}
+    }
 
-	public GolemArtisan(final GolemArtisan card) {
-		super(card);
-	}
+    public GolemArtisan(final GolemArtisan card) {
+        super(card);
+    }
 
-	@Override
-	public GolemArtisan copy() {
-		return new GolemArtisan(this);
-	}
+    @Override
+    public GolemArtisan copy() {
+        return new GolemArtisan(this);
+    }
 }
 
 class GolemArtisanEffect extends OneShotEffect<GolemArtisanEffect> {
-	GolemArtisanEffect() {
-		super(Constants.Outcome.AddAbility);
-		staticText = "Target artifact creature gains your choice of flying, trample, or haste until end of turn";
-	}
+    GolemArtisanEffect() {
+        super(Constants.Outcome.AddAbility);
+        staticText = "Target artifact creature gains your choice of flying, trample, or haste until end of turn";
+    }
 
-	GolemArtisanEffect(final GolemArtisanEffect effect) {
-		super(effect);
-	}
+    GolemArtisanEffect(final GolemArtisanEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
-		Player playerControls = game.getPlayer(source.getControllerId());
-		if (permanent != null && playerControls != null) {
-			Choice abilityChoice = new ChoiceImpl();
-			abilityChoice.setMessage("Choose an ability to add");
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        Player playerControls = game.getPlayer(source.getControllerId());
+        if (permanent != null && playerControls != null) {
+            Choice abilityChoice = new ChoiceImpl();
+            abilityChoice.setMessage("Choose an ability to add");
 
-			Set<String> abilities = new HashSet<String>();
-			abilities.add(FlyingAbility.getInstance().getRule());
-			abilities.add(TrampleAbility.getInstance().getRule());
-			abilities.add(HasteAbility.getInstance().getRule());
-			abilityChoice.setChoices(abilities);
-			playerControls.choose(Constants.Outcome.AddAbility, abilityChoice, game);
+            Set<String> abilities = new HashSet<String>();
+            abilities.add(FlyingAbility.getInstance().getRule());
+            abilities.add(TrampleAbility.getInstance().getRule());
+            abilities.add(HasteAbility.getInstance().getRule());
+            abilityChoice.setChoices(abilities);
+            playerControls.choose(Constants.Outcome.AddAbility, abilityChoice, game);
 
-			String chosen = abilityChoice.getChoice();
-			Ability ability = null;
-			if (FlyingAbility.getInstance().getRule().equals(chosen)) {
-				ability = FlyingAbility.getInstance();
-			} else if (TrampleAbility.getInstance().getRule().equals(chosen)) {
-				ability = TrampleAbility.getInstance();
-			} else if (HasteAbility.getInstance().getRule().equals(chosen)) {
-				ability = HasteAbility.getInstance();
-			}
+            String chosen = abilityChoice.getChoice();
+            Ability ability = null;
+            if (FlyingAbility.getInstance().getRule().equals(chosen)) {
+                ability = FlyingAbility.getInstance();
+            } else if (TrampleAbility.getInstance().getRule().equals(chosen)) {
+                ability = TrampleAbility.getInstance();
+            } else if (HasteAbility.getInstance().getRule().equals(chosen)) {
+                ability = HasteAbility.getInstance();
+            }
 
-			if (ability != null) {
-				ContinuousEffect effect = new GainAbilityTargetEffect(ability, Constants.Duration.EndOfTurn);
-				game.addEffect(effect, source);
-				return true;
-			}
-		}
+            if (ability != null) {
+                ContinuousEffect effect = new GainAbilityTargetEffect(ability, Constants.Duration.EndOfTurn);
+                game.addEffect(effect, source);
+                return true;
+            }
+        }
 
-		return false;
-	}
+        return false;
+    }
 
-	@Override
-	public GolemArtisanEffect copy() {
-		return new GolemArtisanEffect(this);
-	}
+    @Override
+    public GolemArtisanEffect copy() {
+        return new GolemArtisanEffect(this);
+    }
 
 }

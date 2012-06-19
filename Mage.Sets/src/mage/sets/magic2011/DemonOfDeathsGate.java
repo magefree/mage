@@ -48,56 +48,56 @@ import java.util.UUID;
  */
 public class DemonOfDeathsGate extends CardImpl<DemonOfDeathsGate> {
 
-	public DemonOfDeathsGate(UUID ownerId) {
-		super(ownerId, 92, "Demon of Death's Gate", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{6}{B}{B}{B}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Demon");
-		this.color.setBlack(true);
-		this.power = new MageInt(9);
-		this.toughness = new MageInt(9);
-		this.getSpellAbility().addAlternativeCost(new DemonOfDeathsGateAlternativeCost());
+    public DemonOfDeathsGate(UUID ownerId) {
+        super(ownerId, 92, "Demon of Death's Gate", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{6}{B}{B}{B}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Demon");
+        this.color.setBlack(true);
+        this.power = new MageInt(9);
+        this.toughness = new MageInt(9);
+        this.getSpellAbility().addAlternativeCost(new DemonOfDeathsGateAlternativeCost());
 
-		this.addAbility(FlyingAbility.getInstance());
-		this.addAbility(TrampleAbility.getInstance());
-	}
+        this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(TrampleAbility.getInstance());
+    }
 
-	public DemonOfDeathsGate(final DemonOfDeathsGate card) {
-		super(card);
-	}
+    public DemonOfDeathsGate(final DemonOfDeathsGate card) {
+        super(card);
+    }
 
-	@Override
-	public DemonOfDeathsGate copy() {
-		return new DemonOfDeathsGate(this);
-	}
+    @Override
+    public DemonOfDeathsGate copy() {
+        return new DemonOfDeathsGate(this);
+    }
 
 }
 
 class DemonOfDeathsGateAlternativeCost extends AlternativeCostImpl<DemonOfDeathsGateAlternativeCost> {
-	private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("black creature");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("black creature");
 
-	static {
-		filter.getColor().setBlack(true);
-		filter.setUseColor(true);
-	}
+    static {
+        filter.getColor().setBlack(true);
+        filter.setUseColor(true);
+    }
 
-	public DemonOfDeathsGateAlternativeCost() {
-		super("pay 6 life and sacrifice three black creatures");
-		this.add(new PayLifeCost(6));
-		this.add(new SacrificeTargetCost(new TargetControlledPermanent(3, 3, filter, false)));
-	}
+    public DemonOfDeathsGateAlternativeCost() {
+        super("pay 6 life and sacrifice three black creatures");
+        this.add(new PayLifeCost(6));
+        this.add(new SacrificeTargetCost(new TargetControlledPermanent(3, 3, filter, false)));
+    }
 
-	public DemonOfDeathsGateAlternativeCost(final DemonOfDeathsGateAlternativeCost cost) {
-		super(cost);
-	}
+    public DemonOfDeathsGateAlternativeCost(final DemonOfDeathsGateAlternativeCost cost) {
+        super(cost);
+    }
 
-	@Override
-	public DemonOfDeathsGateAlternativeCost copy() {
-		return new DemonOfDeathsGateAlternativeCost(this);
-	}
+    @Override
+    public DemonOfDeathsGateAlternativeCost copy() {
+        return new DemonOfDeathsGateAlternativeCost(this);
+    }
 
-	@Override
-	public String getText() {
-		return "You may pay 6 life and sacrifice three black creatures rather than pay Demon of Death's Gate's mana cost";
-	}
+    @Override
+    public String getText() {
+        return "You may pay 6 life and sacrifice three black creatures rather than pay Demon of Death's Gate's mana cost";
+    }
 
 }

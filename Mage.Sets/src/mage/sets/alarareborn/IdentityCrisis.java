@@ -50,8 +50,8 @@ public class IdentityCrisis extends CardImpl<IdentityCrisis> {
     public IdentityCrisis (UUID ownerId) {
         super(ownerId, 81, "Identity Crisis", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}{B}{B}");
         this.expansionSetCode = "ARB";
-		this.color.setWhite(true);
-		this.color.setBlack(true);
+        this.color.setWhite(true);
+        this.color.setBlack(true);
         this.getSpellAbility().addEffect(new IdentityCrisisEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
     }

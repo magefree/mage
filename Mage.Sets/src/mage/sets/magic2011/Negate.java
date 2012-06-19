@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class Negate extends mage.sets.magic2010.Negate {
 
-	public Negate(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 68;
-		this.expansionSetCode = "M11";
-	}
+    public Negate(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 68;
+        this.expansionSetCode = "M11";
+    }
 
-	public Negate(final Negate card) {
-		super(card);
-	}
+    public Negate(final Negate card) {
+        super(card);
+    }
 
-	@Override
-	public Negate copy() {
-		return new Negate(this);
-	}
+    @Override
+    public Negate copy() {
+        return new Negate(this);
+    }
 
 }

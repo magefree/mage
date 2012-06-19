@@ -48,28 +48,28 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class MindControl extends CardImpl<MindControl> {
 
-	public MindControl(UUID ownerId) {
-		super(ownerId, 63, "Mind Control", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
-		this.expansionSetCode = "M10";
-		this.color.setBlue(true);
-		this.subtype.add("Aura");
+    public MindControl(UUID ownerId) {
+        super(ownerId, 63, "Mind Control", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
+        this.expansionSetCode = "M10";
+        this.color.setBlue(true);
+        this.subtype.add("Aura");
 
-		TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		this.addAbility(ability);
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
 
-	}
+    }
 
-	public MindControl(final MindControl card) {
-		super(card);
-	}
+    public MindControl(final MindControl card) {
+        super(card);
+    }
 
-	@Override
-	public MindControl copy() {
-		return new MindControl(this);
-	}
+    @Override
+    public MindControl copy() {
+        return new MindControl(this);
+    }
 }
 

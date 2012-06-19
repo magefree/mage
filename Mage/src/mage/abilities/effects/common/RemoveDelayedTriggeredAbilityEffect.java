@@ -40,28 +40,28 @@ import mage.game.Game;
  */
 public class RemoveDelayedTriggeredAbilityEffect extends OneShotEffect<RemoveDelayedTriggeredAbilityEffect> {
 
-	protected UUID abilityId;
+    protected UUID abilityId;
 
-	public RemoveDelayedTriggeredAbilityEffect(UUID abilityId) {
-		super(Outcome.Neutral);
-		this.abilityId = abilityId;
-		staticText = "remove triggered ability";
-	}
+    public RemoveDelayedTriggeredAbilityEffect(UUID abilityId) {
+        super(Outcome.Neutral);
+        this.abilityId = abilityId;
+        staticText = "remove triggered ability";
+    }
 
-	public RemoveDelayedTriggeredAbilityEffect(final RemoveDelayedTriggeredAbilityEffect effect) {
-		super(effect);
-		this.abilityId = effect.abilityId;
-	}
+    public RemoveDelayedTriggeredAbilityEffect(final RemoveDelayedTriggeredAbilityEffect effect) {
+        super(effect);
+        this.abilityId = effect.abilityId;
+    }
 
-	@Override
-	public RemoveDelayedTriggeredAbilityEffect copy() {
-		return new RemoveDelayedTriggeredAbilityEffect(this);
-	}
+    @Override
+    public RemoveDelayedTriggeredAbilityEffect copy() {
+        return new RemoveDelayedTriggeredAbilityEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		game.getState().removeDelayedTriggeredAbility(abilityId);
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        game.getState().removeDelayedTriggeredAbility(abilityId);
+        return true;
+    }
 
 }

@@ -41,50 +41,50 @@ import java.util.UUID;
  */
 public abstract class TargetObject<T extends TargetObject<T>> extends TargetImpl<T> {
 
-	protected TargetObject() {}
-	
-	public TargetObject(Zone zone) {
-		this(1, 1, zone, false);
-	}
+    protected TargetObject() {}
 
-	public TargetObject(int numTargets, Zone zone) {
-		this(numTargets, numTargets, zone, false);
-	}
+    public TargetObject(Zone zone) {
+        this(1, 1, zone, false);
+    }
 
-	public TargetObject(final TargetObject target) {
-		super(target);
-	}
+    public TargetObject(int numTargets, Zone zone) {
+        this(numTargets, numTargets, zone, false);
+    }
 
-	public TargetObject(int minNumTargets, int maxNumTargets, Zone zone, boolean notTarget) {
-		this.minNumberOfTargets = minNumTargets;
-		this.maxNumberOfTargets = maxNumTargets;
-		this.zone = zone;
-		this.targetName = "card";
-		this.notTarget = notTarget;
-	}
-	
-	@Override
-	public String getTargetedName(Game game) {
-		StringBuilder sb = new StringBuilder();
-		for (UUID targetId: getTargets()) {
+    public TargetObject(final TargetObject target) {
+        super(target);
+    }
+
+    public TargetObject(int minNumTargets, int maxNumTargets, Zone zone, boolean notTarget) {
+        this.minNumberOfTargets = minNumTargets;
+        this.maxNumberOfTargets = maxNumTargets;
+        this.zone = zone;
+        this.targetName = "card";
+        this.notTarget = notTarget;
+    }
+
+    @Override
+    public String getTargetedName(Game game) {
+        StringBuilder sb = new StringBuilder();
+        for (UUID targetId: getTargets()) {
             MageObject object = game.getObject(targetId);
             if (object != null)
                 sb.append(object.getName()).append(" ");
-		}
-		return sb.toString();
-	}
+        }
+        return sb.toString();
+    }
 
-	@Override
-	public boolean canTarget(UUID id, Game game) {
-		MageObject object = game.getObject(id);
-		if (object != null && game.getState().getZone(id).match(zone))
-			return getFilter().match(object, game);
-		return false;
-	}
+    @Override
+    public boolean canTarget(UUID id, Game game) {
+        MageObject object = game.getObject(id);
+        if (object != null && game.getState().getZone(id).match(zone))
+            return getFilter().match(object, game);
+        return false;
+    }
 
-	@Override
-	public boolean canTarget(UUID id, Ability source, Game game) {
-		return canTarget(id, game);
-	}
+    @Override
+    public boolean canTarget(UUID id, Ability source, Game game) {
+        return canTarget(id, game);
+    }
 
 }

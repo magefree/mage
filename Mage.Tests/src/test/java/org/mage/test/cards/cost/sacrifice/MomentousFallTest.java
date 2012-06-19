@@ -21,7 +21,7 @@ public class MomentousFallTest extends CardTestPlayerBase {
 
         setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
-        
+
         assertPermanentCount(playerA, "Geralf's Messenger", 1);
         assertPowerToughness(playerA, "Geralf's Messenger", 5, 4); // +1/+1 counter + Anthem effect
         assertHandCount(playerA, 4); // +4 cards
@@ -44,5 +44,5 @@ public class MomentousFallTest extends CardTestPlayerBase {
         assertLife(playerA, 22); // +2 life
     }
 
-    
+
 }

@@ -57,7 +57,7 @@ public class GuulDrazAssassin extends LevelerCard<GuulDrazAssassin> {
         this.expansionSetCode = "ROE";
         this.subtype.add("Vampire");
         this.subtype.add("Assassin");
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

@@ -50,11 +50,11 @@ public class TrollAscetic extends CardImpl<TrollAscetic> {
         this.expansionSetCode = "MRD";
         this.subtype.add("Troll");
         this.subtype.add("Shaman");
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
-		this.addAbility(HexproofAbility.getInstance());
-		this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{G}")));
+        this.addAbility(HexproofAbility.getInstance());
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{G}")));
     }
 
     public TrollAscetic (final TrollAscetic card) {

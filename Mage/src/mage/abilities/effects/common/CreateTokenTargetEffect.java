@@ -14,15 +14,15 @@ import mage.game.permanent.token.Token;
  */
 public class CreateTokenTargetEffect extends OneShotEffect<CreateTokenTargetEffect> {
     private Token token;
-	private DynamicValue amount;
+    private DynamicValue amount;
 
-	public CreateTokenTargetEffect(Token token) {
-		this(token, new StaticValue(1));
-	}
+    public CreateTokenTargetEffect(Token token) {
+        this(token, new StaticValue(1));
+    }
 
-	public CreateTokenTargetEffect(Token token, int amount) {
-		this(token, new StaticValue(amount));
-	}
+    public CreateTokenTargetEffect(Token token, int amount) {
+        this(token, new StaticValue(amount));
+    }
 
     public CreateTokenTargetEffect(Token token, DynamicValue amount) {
         super(Constants.Outcome.PutCreatureInPlay);
@@ -30,25 +30,25 @@ public class CreateTokenTargetEffect extends OneShotEffect<CreateTokenTargetEffe
         this.amount = amount.clone();
     }
 
-	public CreateTokenTargetEffect(final CreateTokenTargetEffect effect) {
-		super(effect);
-		this.amount = effect.amount;
-		this.token = effect.token.copy();
-	}
+    public CreateTokenTargetEffect(final CreateTokenTargetEffect effect) {
+        super(effect);
+        this.amount = effect.amount;
+        this.token = effect.token.copy();
+    }
 
-	@Override
-	public CreateTokenTargetEffect copy() {
-		return new CreateTokenTargetEffect(this);
-	}
+    @Override
+    public CreateTokenTargetEffect copy() {
+        return new CreateTokenTargetEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
         int value = amount.calculate(game, source);
-		token.putOntoBattlefield(value, game, source.getSourceId(), targetPointer.getFirst(game, source));
-		return true;
-	}
+        token.putOntoBattlefield(value, game, source.getSourceId(), targetPointer.getFirst(game, source));
+        return true;
+    }
 
-	@Override
+    @Override
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder("put ");
         if (amount.toString().equals("1")) {
@@ -56,7 +56,7 @@ public class CreateTokenTargetEffect extends OneShotEffect<CreateTokenTargetEffe
         } else {
             sb.append(amount.toString());
         }
-		sb.append(" ").append(token.getDescription()).append(" onto the battlefield");
+        sb.append(" ").append(token.getDescription()).append(" onto the battlefield");
         String message = amount.getMessage();
         if (message.length() > 0) {
             sb.append(" for each ");
@@ -64,6 +64,6 @@ public class CreateTokenTargetEffect extends OneShotEffect<CreateTokenTargetEffe
         sb.append(message);
         sb.append(" under target ").append(mode.getTargets().get(0).getTargetName());
         sb.append("'s control");
-		return sb.toString();
-	}
+        return sb.toString();
+    }
 }

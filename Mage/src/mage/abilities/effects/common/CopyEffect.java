@@ -48,21 +48,21 @@ public class CopyEffect extends ContinuousEffectImpl<CopyEffect> {
      */
     private MageObject target;
     private UUID sourceId;
-    
-	public CopyEffect(Permanent target, UUID sourceId) {
-		super(Duration.WhileOnBattlefield, Layer.CopyEffects_1, SubLayer.NA, Outcome.BecomeCreature);
+
+    public CopyEffect(Permanent target, UUID sourceId) {
+        super(Duration.WhileOnBattlefield, Layer.CopyEffects_1, SubLayer.NA, Outcome.BecomeCreature);
         this.target = target;
         this.sourceId = sourceId;
-	}
+    }
 
-	public CopyEffect(final CopyEffect effect) {
-		super(effect);
+    public CopyEffect(final CopyEffect effect) {
+        super(effect);
         this.target = effect.target.copy();
         this.sourceId = effect.sourceId;
-	}
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(this.sourceId);
         if (permanent == null) {
             return false;
@@ -97,12 +97,12 @@ public class CopyEffect extends ContinuousEffectImpl<CopyEffect> {
         permanent.setCopy(true);
 
         return true;
-	}
+    }
 
-	@Override
-	public CopyEffect copy() {
-		return new CopyEffect(this);
-	}
+    @Override
+    public CopyEffect copy() {
+        return new CopyEffect(this);
+    }
 
     public MageObject getTarget() {
         return target;

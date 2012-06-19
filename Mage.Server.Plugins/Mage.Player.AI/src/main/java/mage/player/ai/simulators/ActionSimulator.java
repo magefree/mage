@@ -44,40 +44,40 @@ import mage.players.Player;
  */
 public class ActionSimulator {
 
-	private ComputerPlayer player;
-	private List<Card> playableInstants = new ArrayList<Card>();
-	private List<ActivatedAbility> playableAbilities = new ArrayList<ActivatedAbility>();
+    private ComputerPlayer player;
+    private List<Card> playableInstants = new ArrayList<Card>();
+    private List<ActivatedAbility> playableAbilities = new ArrayList<ActivatedAbility>();
 
-	private Game game;
+    private Game game;
 
-	public ActionSimulator(ComputerPlayer player) {
-		this.player = player;
-	}
+    public ActionSimulator(ComputerPlayer player) {
+        this.player = player;
+    }
 
-	public void simulate(Game game) {
+    public void simulate(Game game) {
 
-	}
+    }
 
-	public int evaluateState() {
-		Player opponent = game.getPlayer(game.getOpponents(player.getId()).iterator().next());
-		if (game.isGameOver()) {
-			if (player.hasLost() || opponent.hasWon())
-				return Integer.MIN_VALUE;
-			if (opponent.hasLost() || player.hasWon())
-				return Integer.MAX_VALUE;
-		}
-		int value = player.getLife();
-		value -= opponent.getLife();
-		PermanentEvaluator evaluator = new PermanentEvaluator();
-		for (Permanent permanent: game.getBattlefield().getAllActivePermanents(player.getId())) {
-			value += evaluator.evaluate(permanent, game);
-		}
-		for (Permanent permanent: game.getBattlefield().getAllActivePermanents(player.getId())) {
-			value -= evaluator.evaluate(permanent, game);
-		}
-		value += player.getHand().size();
-		value -= opponent.getHand().size();
-		return value;
-	}
+    public int evaluateState() {
+        Player opponent = game.getPlayer(game.getOpponents(player.getId()).iterator().next());
+        if (game.isGameOver()) {
+            if (player.hasLost() || opponent.hasWon())
+                return Integer.MIN_VALUE;
+            if (opponent.hasLost() || player.hasWon())
+                return Integer.MAX_VALUE;
+        }
+        int value = player.getLife();
+        value -= opponent.getLife();
+        PermanentEvaluator evaluator = new PermanentEvaluator();
+        for (Permanent permanent: game.getBattlefield().getAllActivePermanents(player.getId())) {
+            value += evaluator.evaluate(permanent, game);
+        }
+        for (Permanent permanent: game.getBattlefield().getAllActivePermanents(player.getId())) {
+            value -= evaluator.evaluate(permanent, game);
+        }
+        value += player.getHand().size();
+        value -= opponent.getHand().size();
+        return value;
+    }
 
 }

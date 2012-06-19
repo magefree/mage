@@ -38,13 +38,13 @@ import mage.Constants.Outcome;
  */
 public abstract class ReplacementEffectImpl<T extends ReplacementEffectImpl<T>> extends ContinuousEffectImpl<T> implements ReplacementEffect<T> {
 
-	public ReplacementEffectImpl(Duration duration, Outcome outcome) {
-		super(duration, outcome);
-		this.effectType = EffectType.REPLACEMENT;
-	}
+    public ReplacementEffectImpl(Duration duration, Outcome outcome) {
+        super(duration, outcome);
+        this.effectType = EffectType.REPLACEMENT;
+    }
 
-	public ReplacementEffectImpl(final ReplacementEffectImpl effect) {
-		super(effect);
-	}
+    public ReplacementEffectImpl(final ReplacementEffectImpl effect) {
+        super(effect);
+    }
 
 }

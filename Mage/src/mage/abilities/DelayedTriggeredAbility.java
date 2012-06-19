@@ -39,23 +39,23 @@ import mage.abilities.effects.Effect;
 public abstract class DelayedTriggeredAbility<T extends DelayedTriggeredAbility<T>> extends TriggeredAbilityImpl<T> {
 
     private Duration duration;
-    
+
     public DelayedTriggeredAbility(Effect effect) {
         this(effect, Duration.EndOfGame);
-	}
+    }
 
     public DelayedTriggeredAbility(Effect effect, Duration duration) {
-		super(Zone.ALL, effect);
+        super(Zone.ALL, effect);
         this.duration = duration;
-	}
+    }
 
     public DelayedTriggeredAbility(final DelayedTriggeredAbility ability) {
-		super(ability);
+        super(ability);
         this.duration = ability.duration;
-	}
+    }
 
-	@Override
-	public abstract T copy();
+    @Override
+    public abstract T copy();
 
     public Duration getDuration() {
         return duration;

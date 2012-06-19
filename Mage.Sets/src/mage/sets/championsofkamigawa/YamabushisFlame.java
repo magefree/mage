@@ -52,7 +52,7 @@ import mage.watchers.common.DamagedByWatcher;
  */
 public class YamabushisFlame extends CardImpl<YamabushisFlame> {
 
-	public YamabushisFlame(UUID ownerId) {
+    public YamabushisFlame(UUID ownerId) {
             super(ownerId, 198, "Yamabushi's Flame", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
             this.expansionSetCode = "CHK";
             this.color.setRed(true);
@@ -68,12 +68,12 @@ public class YamabushisFlame extends CardImpl<YamabushisFlame> {
 
         public YamabushisFlame(final YamabushisFlame card) {
                 super(card);
-	}
+    }
 
-	@Override
-	public YamabushisFlame copy() {
-		return new YamabushisFlame(this);
-	}
+    @Override
+    public YamabushisFlame copy() {
+        return new YamabushisFlame(this);
+    }
 }
 
 class YamabushisFlameEffect extends ReplacementEffectImpl<YamabushisFlameEffect> {

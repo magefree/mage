@@ -53,7 +53,7 @@ public class GrafdiggersCage extends CardImpl<GrafdiggersCage> {
 
         // Creature cards can't enter the battlefield from graveyards or libraries.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GrafdiggersCageEffect()));
-        
+
         // Players can't cast cards in graveyards or libraries.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GrafdiggersCageEffect2()));
     }
@@ -70,32 +70,32 @@ public class GrafdiggersCage extends CardImpl<GrafdiggersCage> {
 
 class GrafdiggersCageEffect extends ReplacementEffectImpl<GrafdiggersCageEffect> {
 
-	public GrafdiggersCageEffect() {
-		super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
-		staticText = "Creature cards can't enter the battlefield from graveyards or libraries";
-	}
+    public GrafdiggersCageEffect() {
+        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        staticText = "Creature cards can't enter the battlefield from graveyards or libraries";
+    }
 
-	public GrafdiggersCageEffect(final GrafdiggersCageEffect effect) {
-		super(effect);
-	}
+    public GrafdiggersCageEffect(final GrafdiggersCageEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public GrafdiggersCageEffect copy() {
-		return new GrafdiggersCageEffect(this);
-	}
+    @Override
+    public GrafdiggersCageEffect copy() {
+        return new GrafdiggersCageEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		return true;
-	}
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        return true;
+    }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
         if (event instanceof ZoneChangeEvent) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
             if (zEvent.getToZone() == Zone.BATTLEFIELD && (zEvent.getFromZone() == Zone.GRAVEYARD || zEvent.getFromZone() == Zone.LIBRARY)) {
@@ -105,40 +105,40 @@ class GrafdiggersCageEffect extends ReplacementEffectImpl<GrafdiggersCageEffect>
                 }
             }
         }
-		return false;
-	}
+        return false;
+    }
 
 }
 
 class GrafdiggersCageEffect2 extends ReplacementEffectImpl<GrafdiggersCageEffect2> {
 
-	public GrafdiggersCageEffect2() {
-		super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
-		staticText = "Players can't cast cards in graveyards or libraries";
-	}
+    public GrafdiggersCageEffect2() {
+        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        staticText = "Players can't cast cards in graveyards or libraries";
+    }
 
-	public GrafdiggersCageEffect2(final GrafdiggersCageEffect2 effect) {
-		super(effect);
-	}
+    public GrafdiggersCageEffect2(final GrafdiggersCageEffect2 effect) {
+        super(effect);
+    }
 
-	@Override
-	public GrafdiggersCageEffect2 copy() {
-		return new GrafdiggersCageEffect2(this);
-	}
+    @Override
+    public GrafdiggersCageEffect2 copy() {
+        return new GrafdiggersCageEffect2(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		return true;
-	}
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        return true;
+    }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (event.getType() == GameEvent.EventType.CAST_SPELL) {
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (event.getType() == GameEvent.EventType.CAST_SPELL) {
             Card card = game.getCard(event.getSourceId());
             if (card != null) {
                 Zone zone = game.getState().getZone(card.getId());
@@ -146,8 +146,8 @@ class GrafdiggersCageEffect2 extends ReplacementEffectImpl<GrafdiggersCageEffect
                     return true;
                 }
             }
-		}
-		return false;
-	}
+        }
+        return false;
+    }
 
 }

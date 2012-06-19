@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class Flashfreeze extends mage.sets.tenth.Flashfreeze {
 
-	public Flashfreeze(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 53;
-		this.expansionSetCode = "M11";
-	}
+    public Flashfreeze(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 53;
+        this.expansionSetCode = "M11";
+    }
 
-	public Flashfreeze(final Flashfreeze card) {
-		super(card);
-	}
+    public Flashfreeze(final Flashfreeze card) {
+        super(card);
+    }
 
-	@Override
-	public Flashfreeze copy() {
-		return new Flashfreeze(this);
-	}
+    @Override
+    public Flashfreeze copy() {
+        return new Flashfreeze(this);
+    }
 
 }

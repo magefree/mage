@@ -56,7 +56,7 @@ public class Incinerate extends CardImpl<Incinerate> {
 
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
-		this.getSpellAbility().addEffect(new IncinerateEffect());
+        this.getSpellAbility().addEffect(new IncinerateEffect());
         this.addWatcher(new DamagedByWatcher());
     }
 
@@ -72,38 +72,38 @@ public class Incinerate extends CardImpl<Incinerate> {
 
 class IncinerateEffect extends ReplacementEffectImpl<IncinerateEffect> {
 
-	public IncinerateEffect() {
-		super(Duration.EndOfTurn, Outcome.Detriment);
-		staticText = "A creature dealt damage this way can't be regenerated this turn";
-	}
+    public IncinerateEffect() {
+        super(Duration.EndOfTurn, Outcome.Detriment);
+        staticText = "A creature dealt damage this way can't be regenerated this turn";
+    }
 
-	public IncinerateEffect(final IncinerateEffect effect) {
-		super(effect);
-	}
+    public IncinerateEffect(final IncinerateEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public IncinerateEffect copy() {
-		return new IncinerateEffect(this);
-	}
+    @Override
+    public IncinerateEffect copy() {
+        return new IncinerateEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
-
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+    @Override
+    public boolean apply(Game game, Ability source) {
         return true;
-	}
+    }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (event.getType() == EventType.REGENERATE) {
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        return true;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (event.getType() == EventType.REGENERATE) {
             DamagedByWatcher watcher = (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", source.getSourceId());
             if (watcher != null)
                 return watcher.damagedCreatures.contains(event.getTargetId());
-		}
-		return false;
-	}
+        }
+        return false;
+    }
 
 }

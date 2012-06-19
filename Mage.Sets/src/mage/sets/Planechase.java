@@ -38,14 +38,14 @@ import mage.cards.ExpansionSet;
  */
 public class Planechase extends ExpansionSet {
 
-	private static final Planechase fINSTANCE =  new Planechase();
+    private static final Planechase fINSTANCE =  new Planechase();
 
-	public static Planechase getInstance() {
-		return fINSTANCE;
-	}
+    public static Planechase getInstance() {
+        return fINSTANCE;
+    }
 
-	private Planechase() {
-		super("Planechase", "HOP", "", "mage.sets.planechase", new GregorianCalendar(2009, 8, 4).getTime(), SetType.REPRINT);
-	}
+    private Planechase() {
+        super("Planechase", "HOP", "", "mage.sets.planechase", new GregorianCalendar(2009, 8, 4).getTime(), SetType.REPRINT);
+    }
 
 }

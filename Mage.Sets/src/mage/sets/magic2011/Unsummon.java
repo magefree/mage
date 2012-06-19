@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class Unsummon extends mage.sets.conflux.Unsummon {
 
-	public Unsummon(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 78;
-		this.expansionSetCode = "M11";
-	}
+    public Unsummon(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 78;
+        this.expansionSetCode = "M11";
+    }
 
-	public Unsummon(final Unsummon card) {
-		super(card);
-	}
+    public Unsummon(final Unsummon card) {
+        super(card);
+    }
 
-	@Override
-	public Unsummon copy() {
-		return new Unsummon(this);
-	}
+    @Override
+    public Unsummon copy() {
+        return new Unsummon(this);
+    }
 
 }

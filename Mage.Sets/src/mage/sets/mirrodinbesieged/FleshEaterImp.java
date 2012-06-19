@@ -55,9 +55,9 @@ public class FleshEaterImp extends CardImpl<FleshEaterImp> {
         this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-		this.addAbility(FlyingAbility.getInstance());
-		this.addAbility(InfectAbility.getInstance());
-		this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Constants.Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledCreaturePermanent())));
+        this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(InfectAbility.getInstance());
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Constants.Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledCreaturePermanent())));
     }
 
     public FleshEaterImp (final FleshEaterImp card) {

@@ -61,7 +61,7 @@ public class AngelOfGlorysRise extends CardImpl<AngelOfGlorysRise> {
         this.toughness = new MageInt(6);
 
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // When Angel of Glory's Rise enters the battlefield, exile all Zombies, then return all Human creature cards from your graveyard to the battlefield.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new AngelOfGlorysRiseEffect());
         this.addAbility(ability);
@@ -78,10 +78,10 @@ public class AngelOfGlorysRise extends CardImpl<AngelOfGlorysRise> {
 }
 
 class AngelOfGlorysRiseEffect extends OneShotEffect<AngelOfGlorysRiseEffect> {
-    
+
     private static final FilterCreatureCard filterHuman = new FilterCreatureCard();
     private static final FilterCreaturePermanent filterZombie = new FilterCreaturePermanent();
-    
+
     static {
         filterZombie.getSubtype().add("Zombie");
         filterZombie.setScopeSubtype(Filter.ComparisonScope.Any);

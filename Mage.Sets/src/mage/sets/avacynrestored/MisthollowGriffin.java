@@ -56,7 +56,7 @@ public class MisthollowGriffin extends CardImpl<MisthollowGriffin> {
         this.toughness = new MageInt(3);
 
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // You may cast Misthollow Griffin from exile.
         this.addAbility(new SimpleStaticAbility(Constants.Zone.EXILED, new MisthollowGriffinPlayEffect()));
     }
@@ -72,28 +72,28 @@ public class MisthollowGriffin extends CardImpl<MisthollowGriffin> {
 }
 
 class MisthollowGriffinPlayEffect extends AsThoughEffectImpl<MisthollowGriffinPlayEffect> {
-    
-	public MisthollowGriffinPlayEffect() {
-		super(Constants.AsThoughEffectType.CAST, Constants.Duration.EndOfGame, Constants.Outcome.Benefit);
-		staticText = "You may cast Misthollow Griffin from exile";
-	}
 
-	public MisthollowGriffinPlayEffect(final MisthollowGriffinPlayEffect effect) {
-		super(effect);
-	}
+    public MisthollowGriffinPlayEffect() {
+        super(Constants.AsThoughEffectType.CAST, Constants.Duration.EndOfGame, Constants.Outcome.Benefit);
+        staticText = "You may cast Misthollow Griffin from exile";
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
+    public MisthollowGriffinPlayEffect(final MisthollowGriffinPlayEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public MisthollowGriffinPlayEffect copy() {
-		return new MisthollowGriffinPlayEffect(this);
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
 
-	@Override
-	public boolean applies(UUID sourceId, Ability source, Game game) {
+    @Override
+    public MisthollowGriffinPlayEffect copy() {
+        return new MisthollowGriffinPlayEffect(this);
+    }
+
+    @Override
+    public boolean applies(UUID sourceId, Ability source, Game game) {
             if (sourceId.equals(source.getSourceId())) {
                 Card card = game.getCard(source.getSourceId());
                 if (card != null && card.getOwnerId().equals(source.getControllerId()) && game.getState().getZone(source.getSourceId()) == Constants.Zone.EXILED) {
@@ -101,5 +101,5 @@ class MisthollowGriffinPlayEffect extends AsThoughEffectImpl<MisthollowGriffinPl
                 }
             }
             return false;
-	}
+    }
 }

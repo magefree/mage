@@ -22,10 +22,10 @@ public class HandPanel extends JPanel {
 
     private static final int CARD_WIDTH = 75;
     private static final double ASPECT_RATIO = 3.5 / 2.5;
-	
-	private boolean smallMode = false;
+
+    private boolean smallMode = false;
     private Dimension handCardDimensionBig;
-	private Dimension handCardDimension;
+    private Dimension handCardDimension;
 
     public HandPanel() {
         double factor = 1;
@@ -35,7 +35,7 @@ public class HandPanel extends JPanel {
 
     public void initComponents() {
         hand = new mage.client.cards.Cards(true);
-		hand.setCardDimension(getHandCardDimension());
+        hand.setCardDimension(getHandCardDimension());
         jPanel = new JPanel();
         jScrollPane1 = new JScrollPane(jPanel);
         jScrollPane1.getViewport().setBackground(new Color(0,0,0,0));
@@ -44,14 +44,14 @@ public class HandPanel extends JPanel {
         jPanel.setBackground(new Color(0,0,0,0));
         jPanel.add(hand);
 
-		setOpaque(false);
-		jPanel.setOpaque(false);
-		jScrollPane1.setOpaque(false);
+        setOpaque(false);
+        jPanel.setOpaque(false);
+        jScrollPane1.setOpaque(false);
 
-		jPanel.setBorder(emptyBorder);
-		jScrollPane1.setBorder(emptyBorder);
-		jScrollPane1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-		jScrollPane1.getHorizontalScrollBar().setUnitIncrement(8);
+        jPanel.setBorder(emptyBorder);
+        jScrollPane1.setBorder(emptyBorder);
+        jScrollPane1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+        jScrollPane1.getHorizontalScrollBar().setUnitIncrement(8);
 
         setLayout(new BorderLayout());
         add(jScrollPane1, BorderLayout.CENTER);
@@ -59,14 +59,14 @@ public class HandPanel extends JPanel {
         hand.setHScrollSpeed(8);
         hand.setBackgroundColor(new Color(0, 0, 0, 100));
         hand.setVisibleIfEmpty(false);
-		hand.setBorder(emptyBorder);
+        hand.setBorder(emptyBorder);
         hand.setZone(Constants.Zone.HAND.toString());
     }
 
     public void loadCards(SimpleCardsView cards, BigCard bigCard, UUID gameId) {
-		hand.loadCards(cards, bigCard, gameId);
+        hand.loadCards(cards, bigCard, gameId);
         hand.sizeCards(getHandCardDimension());
-	}
+    }
 
     private Dimension getHandCardDimension() {
         String useBigCards = MageFrame.getPreferences().get(PreferencesDialog.KEY_HAND_USE_BIG_CARDS, "false");
@@ -82,13 +82,13 @@ public class HandPanel extends JPanel {
         int bigWidth = (int)(Config.handScalingFactor * CARD_WIDTH);
         handCardDimension = new Dimension(width, (int)(width * ASPECT_RATIO));
         handCardDimensionBig = new Dimension(bigWidth, (int)(bigWidth * ASPECT_RATIO));
-   		hand.setCardDimension(getHandCardDimension());
+           hand.setCardDimension(getHandCardDimension());
         hand.sizeCards(getHandCardDimension());
     }
-    
+
     private JPanel jPanel;
     private JScrollPane jScrollPane1;
-	private Border emptyBorder = new EmptyBorder(0,0,0,0);
+    private Border emptyBorder = new EmptyBorder(0,0,0,0);
     private mage.client.cards.Cards hand;
-    
+
 }

@@ -37,29 +37,29 @@ import mage.target.TargetPermanent;
  */
 public class TargetLandPermanent<T extends TargetLandPermanent<T>> extends TargetPermanent<TargetLandPermanent<T>> {
 
-	public TargetLandPermanent() {
-		this(1, 1, new FilterLandPermanent(), false);
-	}
+    public TargetLandPermanent() {
+        this(1, 1, new FilterLandPermanent(), false);
+    }
 
-	public TargetLandPermanent(FilterLandPermanent filter) {
-		this(1, 1, filter, false);
-	}
+    public TargetLandPermanent(FilterLandPermanent filter) {
+        this(1, 1, filter, false);
+    }
 
-	public TargetLandPermanent(int numTargets) {
-		this(numTargets, numTargets, new FilterLandPermanent(), false);
-	}
+    public TargetLandPermanent(int numTargets) {
+        this(numTargets, numTargets, new FilterLandPermanent(), false);
+    }
 
-	public TargetLandPermanent(int minNumTargets, int maxNumTargets, FilterLandPermanent filter, boolean notTarget) {
-		super(minNumTargets, maxNumTargets, filter, notTarget);
-		this.targetName = filter.getMessage();
-	}
+    public TargetLandPermanent(int minNumTargets, int maxNumTargets, FilterLandPermanent filter, boolean notTarget) {
+        super(minNumTargets, maxNumTargets, filter, notTarget);
+        this.targetName = filter.getMessage();
+    }
 
-	public TargetLandPermanent(final TargetLandPermanent target) {
-		super(target);
-	}
+    public TargetLandPermanent(final TargetLandPermanent target) {
+        super(target);
+    }
 
-	@Override
-	public TargetLandPermanent copy() {
-		return new TargetLandPermanent(this);
-	}
+    @Override
+    public TargetLandPermanent copy() {
+        return new TargetLandPermanent(this);
+    }
 }

@@ -43,41 +43,41 @@ import mage.game.permanent.Permanent;
  */
 public class ExileTargetForSourceEffect extends OneShotEffect<ExileTargetForSourceEffect> {
 
-	private String exileZone = null;
+    private String exileZone = null;
 
-	public ExileTargetForSourceEffect(String exileZone) {
-		this();
-		this.exileZone = exileZone;
-	}
+    public ExileTargetForSourceEffect(String exileZone) {
+        this();
+        this.exileZone = exileZone;
+    }
 
-	public ExileTargetForSourceEffect() {
-		super(Outcome.Exile);
-	}
+    public ExileTargetForSourceEffect() {
+        super(Outcome.Exile);
+    }
 
-	public ExileTargetForSourceEffect(final ExileTargetForSourceEffect effect) {
-		super(effect);
-		this.exileZone = effect.exileZone;
-	}
+    public ExileTargetForSourceEffect(final ExileTargetForSourceEffect effect) {
+        super(effect);
+        this.exileZone = effect.exileZone;
+    }
 
-	@Override
-	public ExileTargetForSourceEffect copy() {
-		return new ExileTargetForSourceEffect(this);
-	}
+    @Override
+    public ExileTargetForSourceEffect copy() {
+        return new ExileTargetForSourceEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
-		UUID exileId = source.getSourceId();
-		if (permanent != null) {
-			return permanent.moveToExile(exileId, exileZone, source.getId(), game);
-		} else {
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        UUID exileId = source.getSourceId();
+        if (permanent != null) {
+            return permanent.moveToExile(exileId, exileZone, source.getId(), game);
+        } else {
             Card card = game.getCard(targetPointer.getFirst(game, source));
             if (card != null) {
                 return card.moveToExile(exileId, exileZone, source.getId(), game);
             }
         }
         return false;
-	}
+    }
 
     @Override
     public String getText(Mode mode) {

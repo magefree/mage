@@ -80,22 +80,22 @@ public class JuganTheRisingStar extends CardImpl<JuganTheRisingStar> {
 
 class JuganTheRisingStarMultiEffect extends OneShotEffect<JuganTheRisingStarMultiEffect> {
 
-	public JuganTheRisingStarMultiEffect() {
-		super(Outcome.BoostCreature);
+    public JuganTheRisingStarMultiEffect() {
+        super(Outcome.BoostCreature);
                 this.staticText = "distribute five +1/+1 counters among any number of target creatures";
-	}
+    }
 
-	public JuganTheRisingStarMultiEffect(final JuganTheRisingStarMultiEffect effect) {
-		super(effect);
-	}
+    public JuganTheRisingStarMultiEffect(final JuganTheRisingStarMultiEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public JuganTheRisingStarMultiEffect copy() {
-		return new JuganTheRisingStarMultiEffect(this);
-	}
+    @Override
+    public JuganTheRisingStarMultiEffect copy() {
+        return new JuganTheRisingStarMultiEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
                 if (source.getTargets().size() > 0) {
                     Target multiTarget = source.getTargets().get(0);
                     for (UUID target: multiTarget.getTargets()) {
@@ -105,7 +105,7 @@ class JuganTheRisingStarMultiEffect extends OneShotEffect<JuganTheRisingStarMult
                         }
                     }
                 }
-		return true;
-	}
+        return true;
+    }
 
 }

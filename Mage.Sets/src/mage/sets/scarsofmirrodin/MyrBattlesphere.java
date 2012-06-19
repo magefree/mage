@@ -59,106 +59,106 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class MyrBattlesphere extends CardImpl<MyrBattlesphere> {
 
-	public MyrBattlesphere(UUID ownerId) {
-		super(ownerId, 180, "Myr Battlesphere", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");
-		this.expansionSetCode = "SOM";
-		this.subtype.add("Myr");
-		this.subtype.add("Construct");
-		this.power = new MageInt(4);
-		this.toughness = new MageInt(7);
+    public MyrBattlesphere(UUID ownerId) {
+        super(ownerId, 180, "Myr Battlesphere", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");
+        this.expansionSetCode = "SOM";
+        this.subtype.add("Myr");
+        this.subtype.add("Construct");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(7);
 
-		this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new MyrToken(), 4), false));
-		this.addAbility(new MyrBattlesphereAbility());
-	}
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new MyrToken(), 4), false));
+        this.addAbility(new MyrBattlesphereAbility());
+    }
 
-	public MyrBattlesphere(final MyrBattlesphere card) {
-		super(card);
-	}
+    public MyrBattlesphere(final MyrBattlesphere card) {
+        super(card);
+    }
 
-	@Override
-	public MyrBattlesphere copy() {
-		return new MyrBattlesphere(this);
-	}
+    @Override
+    public MyrBattlesphere copy() {
+        return new MyrBattlesphere(this);
+    }
 
 }
 
 class MyrBattlesphereAbility extends TriggeredAbilityImpl<MyrBattlesphereAbility> {
 
-	private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Myr");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Myr");
 
-	static {
-		filter.getSubtype().add("Myr");
-		filter.setTapped(false);
-		filter.setUseTapped(true);
-	}
+    static {
+        filter.getSubtype().add("Myr");
+        filter.setTapped(false);
+        filter.setUseTapped(true);
+    }
 
-	public MyrBattlesphereAbility() {
-		super(Zone.BATTLEFIELD, new BoostSourceEffect(new GetXValue(), new StaticValue(0), Duration.EndOfTurn), true);
-		this.addEffect(new MyrBattlesphereEffect());
-		this.addCost(new TapVariableTargetCost(new TargetControlledCreaturePermanent(1, Integer.MAX_VALUE, filter, false)));
-	}
+    public MyrBattlesphereAbility() {
+        super(Zone.BATTLEFIELD, new BoostSourceEffect(new GetXValue(), new StaticValue(0), Duration.EndOfTurn), true);
+        this.addEffect(new MyrBattlesphereEffect());
+        this.addCost(new TapVariableTargetCost(new TargetControlledCreaturePermanent(1, Integer.MAX_VALUE, filter, false)));
+    }
 
-	public MyrBattlesphereAbility(final MyrBattlesphereAbility ability) {
-		super(ability);
-	}
+    public MyrBattlesphereAbility(final MyrBattlesphereAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public boolean checkInterveningIfClause(Game game) {
-		if (costs.isPaid())
-			return true;
+    @Override
+    public boolean checkInterveningIfClause(Game game) {
+        if (costs.isPaid())
+            return true;
         if (costs.canPay(this.getId(), this.getControllerId(), game))
             return costs.pay(this, game, this.getId(), this.getControllerId(), false);
         return false;
-	}
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId()) ) {
-			costs.clearPaid();
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId()) ) {
+            costs.clearPaid();
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "When {this} attacks, " + super.getRule();
-	}
+    @Override
+    public String getRule() {
+        return "When {this} attacks, " + super.getRule();
+    }
 
-	@Override
-	public MyrBattlesphereAbility copy() {
-		return new MyrBattlesphereAbility(this);
-	}
+    @Override
+    public MyrBattlesphereAbility copy() {
+        return new MyrBattlesphereAbility(this);
+    }
 
 }
 
 class MyrBattlesphereEffect extends OneShotEffect<MyrBattlesphereEffect> {
 
     private GetXValue amount = new GetXValue();
-    
-	public MyrBattlesphereEffect() {
-		super(Outcome.Damage);
-	}
 
-	public MyrBattlesphereEffect(final MyrBattlesphereEffect effect) {
-		super(effect);
+    public MyrBattlesphereEffect() {
+        super(Outcome.Damage);
+    }
+
+    public MyrBattlesphereEffect(final MyrBattlesphereEffect effect) {
+        super(effect);
         this.amount = effect.amount.clone();
-	}
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		UUID defenderId = game.getCombat().getDefendingPlayer(source.getSourceId());
-		Player defender = game.getPlayer(defenderId);
-		if (defender != null) {
-			defender.damage(amount.calculate(game, source), source.getSourceId(), game, false, false);
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        UUID defenderId = game.getCombat().getDefendingPlayer(source.getSourceId());
+        Player defender = game.getPlayer(defenderId);
+        if (defender != null) {
+            defender.damage(amount.calculate(game, source), source.getSourceId(), game, false, false);
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public MyrBattlesphereEffect copy() {
-		return new MyrBattlesphereEffect(this);
-	}
+    @Override
+    public MyrBattlesphereEffect copy() {
+        return new MyrBattlesphereEffect(this);
+    }
 
 }

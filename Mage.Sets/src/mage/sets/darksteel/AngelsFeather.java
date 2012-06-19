@@ -38,19 +38,19 @@ import java.util.UUID;
 
 public class AngelsFeather extends mage.sets.tenth.AngelsFeather {
 
-	public AngelsFeather(UUID ownerId) {
-		super(ownerId);
+    public AngelsFeather(UUID ownerId) {
+        super(ownerId);
         this.cardNumber = 92;
-		this.expansionSetCode = "DST";
-	}
+        this.expansionSetCode = "DST";
+    }
 
-	public AngelsFeather(final AngelsFeather card) {
-		super(card);
-	}
+    public AngelsFeather(final AngelsFeather card) {
+        super(card);
+    }
 
-	@Override
-	public AngelsFeather copy() {
-		return new AngelsFeather(this);
-	}
+    @Override
+    public AngelsFeather copy() {
+        return new AngelsFeather(this);
+    }
 
 }

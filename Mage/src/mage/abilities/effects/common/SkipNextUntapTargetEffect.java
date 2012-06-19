@@ -47,56 +47,56 @@ import java.util.UUID;
  */
 public class SkipNextUntapTargetEffect extends ReplacementEffectImpl<SkipNextUntapTargetEffect> {
 
-	protected Set<UUID> usedFor = new HashSet<UUID>();
-	protected int count;
+    protected Set<UUID> usedFor = new HashSet<UUID>();
+    protected int count;
 
-	public SkipNextUntapTargetEffect() {
-		super(Duration.OneUse, Outcome.Detriment);
-	}
+    public SkipNextUntapTargetEffect() {
+        super(Duration.OneUse, Outcome.Detriment);
+    }
 
     public SkipNextUntapTargetEffect(String text) {
-		this();
+        this();
         this.staticText = text;
-	}
+    }
 
-	public SkipNextUntapTargetEffect(final SkipNextUntapTargetEffect effect) {
-		super(effect);
-		for (UUID uuid : effect.usedFor) {
-			this.usedFor.add(uuid);
-		}
-		this.count = effect.count;
-	}
+    public SkipNextUntapTargetEffect(final SkipNextUntapTargetEffect effect) {
+        super(effect);
+        for (UUID uuid : effect.usedFor) {
+            this.usedFor.add(uuid);
+        }
+        this.count = effect.count;
+    }
 
-	@Override
-	public SkipNextUntapTargetEffect copy() {
-		return new SkipNextUntapTargetEffect(this);
-	}
+    @Override
+    public SkipNextUntapTargetEffect copy() {
+        return new SkipNextUntapTargetEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		if (targetPointer.getTargets(game, source).size() < 2) {
-			used = true;
-		} else {
-			count++;
-		}
-		// not clear how to turn off the effect for more than one target
-		// especially as some targets may leave the battlefield since the effect creation
-		// so handling this in applies method is the only option for now for such cases
-		if (count == targetPointer.getTargets(game, source).size()) {
-			// this won't work for targets disappeared before applies() return true
-			used = true;
-		}
-		return true;
-	}
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        if (targetPointer.getTargets(game, source).size() < 2) {
+            used = true;
+        } else {
+            count++;
+        }
+        // not clear how to turn off the effect for more than one target
+        // especially as some targets may leave the battlefield since the effect creation
+        // so handling this in applies method is the only option for now for such cases
+        if (count == targetPointer.getTargets(game, source).size()) {
+            // this won't work for targets disappeared before applies() return true
+            used = true;
+        }
+        return true;
+    }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getType() == EventType.UNTAP) {
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getType() == EventType.UNTAP) {
             for (UUID target : targetPointer.getTargets(game, source)) {
                 if (event.getTargetId().equals(target)) {
                     if (!usedFor.contains(target)) {
@@ -107,17 +107,17 @@ public class SkipNextUntapTargetEffect extends ReplacementEffectImpl<SkipNextUnt
                 }
             }
 
-			return false;
-		}
-		return false;
-	}
+            return false;
+        }
+        return false;
+    }
 
-	@Override
-	public String getText(Mode mode) {
+    @Override
+    public String getText(Mode mode) {
             if (staticText.length() > 0) 
                 return staticText + " doesn't untap during its controller's next untap step";
             else 
-		return "Target " + mode.getTargets().get(0).getTargetName() + " doesn't untap during its controller's next untap step";
-	}
+        return "Target " + mode.getTargets().get(0).getTargetName() + " doesn't untap during its controller's next untap step";
+    }
 
 }

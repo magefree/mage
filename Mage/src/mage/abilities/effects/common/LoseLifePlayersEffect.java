@@ -41,33 +41,33 @@ import mage.players.Player;
  * @author BetaSteward_at_googlemail.com
  */
 public class LoseLifePlayersEffect extends OneShotEffect<LoseLifePlayersEffect> {
-	
-	private DynamicValue amount;
-	
-	public LoseLifePlayersEffect(int amount) {
-		super(Constants.Outcome.Damage);
-		this.amount = new StaticValue(amount);
-		staticText = "each player loses " + amount + " life";
-	}
 
-	public LoseLifePlayersEffect(final LoseLifePlayersEffect effect) {
-		super(effect);
-		this.amount = effect.amount;
-	}
+    private DynamicValue amount;
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		for (UUID playerId: game.getPlayer(source.getControllerId()).getInRange()) {
-			Player player = game.getPlayer(playerId);
-			if (player != null)
-				player.loseLife(amount.calculate(game, source), game);
-		}
-		return true;
-	}
+    public LoseLifePlayersEffect(int amount) {
+        super(Constants.Outcome.Damage);
+        this.amount = new StaticValue(amount);
+        staticText = "each player loses " + amount + " life";
+    }
 
-	@Override
-	public LoseLifePlayersEffect copy() {
-		return new LoseLifePlayersEffect(this);
-	}
+    public LoseLifePlayersEffect(final LoseLifePlayersEffect effect) {
+        super(effect);
+        this.amount = effect.amount;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        for (UUID playerId: game.getPlayer(source.getControllerId()).getInRange()) {
+            Player player = game.getPlayer(playerId);
+            if (player != null)
+                player.loseLife(amount.calculate(game, source), game);
+        }
+        return true;
+    }
+
+    @Override
+    public LoseLifePlayersEffect copy() {
+        return new LoseLifePlayersEffect(this);
+    }
 
 }

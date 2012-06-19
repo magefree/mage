@@ -62,7 +62,7 @@ public class FlayerOfTheHatebound extends CardImpl<FlayerOfTheHatebound> {
         this.toughness = new MageInt(2);
 
         this.addAbility(new UndyingAbility());
-        
+
         // Whenever Flayer of the Hatebound or another creature enters the battlefield from your graveyard, that creature deals damage equal to its power to target creature or player.
         Ability ability = new FlayerTriggeredAbility();
         ability.addTarget(new TargetCreatureOrPlayer(true));
@@ -97,8 +97,8 @@ class FlayerTriggeredAbility extends TriggeredAbilityImpl<FlayerTriggeredAbility
                     && ((ZoneChangeEvent) event).getFromZone() == Constants.Zone.GRAVEYARD
                     && permanent.getOwnerId().equals(controllerId)
                     && permanent.getCardType().contains(CardType.CREATURE)) {
-				Effect effect = this.getEffects().get(0);
-				effect.setValue("damageSource", event.getTargetId());
+                Effect effect = this.getEffects().get(0);
+                effect.setValue("damageSource", event.getTargetId());
                 return true;
             }
         }

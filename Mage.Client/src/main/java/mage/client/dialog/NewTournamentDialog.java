@@ -62,32 +62,32 @@ import org.apache.log4j.Logger;
  */
 public class NewTournamentDialog extends MageDialog {
 
-	private final static Logger logger = Logger.getLogger(NewTournamentDialog.class);
+    private final static Logger logger = Logger.getLogger(NewTournamentDialog.class);
 
-	private TableView table;
-	private UUID playerId;
-	private UUID roomId;
-	private Session session;
-	private List<TournamentPlayerPanel> players = new ArrayList<TournamentPlayerPanel>();
-	private List<JComboBox> packs = new ArrayList<JComboBox>();
+    private TableView table;
+    private UUID playerId;
+    private UUID roomId;
+    private Session session;
+    private List<TournamentPlayerPanel> players = new ArrayList<TournamentPlayerPanel>();
+    private List<JComboBox> packs = new ArrayList<JComboBox>();
 
-	/** Creates new form NewTournamentDialog */
+    /** Creates new form NewTournamentDialog */
     public NewTournamentDialog() {
         initComponents();
-	    txtName.setText("Tournament");
+        txtName.setText("Tournament");
     }
 
-	public void showDialog(UUID roomId) {
-		this.roomId = roomId;
-		session = MageFrame.getSession();
-		this.txtPlayer1Name.setText(session.getUserName());
-		cbTournamentType.setModel(new DefaultComboBoxModel(session.getTournamentTypes().toArray()));
-		cbDraftTiming.setModel(new DefaultComboBoxModel(DraftOptions.TimingOption.values()));
-		this.setModal(true);
-		setTournamentOptions();
-		this.setLocation(150, 100);
-		this.setVisible(true);
-	}
+    public void showDialog(UUID roomId) {
+        this.roomId = roomId;
+        session = MageFrame.getSession();
+        this.txtPlayer1Name.setText(session.getUserName());
+        cbTournamentType.setModel(new DefaultComboBoxModel(session.getTournamentTypes().toArray()));
+        cbDraftTiming.setModel(new DefaultComboBoxModel(DraftOptions.TimingOption.values()));
+        this.setModal(true);
+        setTournamentOptions();
+        this.setLocation(150, 100);
+        this.setVisible(true);
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -277,173 +277,173 @@ public class NewTournamentDialog extends MageDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-	private void cbTournamentTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTournamentTypeActionPerformed
-		setTournamentOptions();
-	}//GEN-LAST:event_cbTournamentTypeActionPerformed
+    private void cbTournamentTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTournamentTypeActionPerformed
+        setTournamentOptions();
+    }//GEN-LAST:event_cbTournamentTypeActionPerformed
 
-	private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-		TournamentTypeView tournamentType = (TournamentTypeView) cbTournamentType.getSelectedItem();
-		TournamentOptions tOptions = new TournamentOptions(this.txtName.getText());
-		tOptions.setTournamentType(tournamentType.getName());
-		tOptions.getPlayerTypes().add("Human");
-		for (TournamentPlayerPanel player: players) {
-			tOptions.getPlayerTypes().add((String) player.getPlayerType().getSelectedItem());
-		}
-		if (tournamentType.isDraft()) {
-			DraftOptions options = new DraftOptions();
-			options.setDraftType("");
-			options.setTiming((TimingOption) this.cbDraftTiming.getSelectedItem());
-			tOptions.setLimitedOptions(options);
-		}
-		if (tournamentType.isLimited()) {
-			if (tOptions.getLimitedOptions() == null)
-				tOptions.setLimitedOptions(new LimitedOptions());
-			for (JComboBox pack: packs) {
-				tOptions.getLimitedOptions().getSetCodes().add(((ExpansionSet) pack.getSelectedItem()).getCode());
-			}
-		}
-		tOptions.getMatchOptions().setDeckType("Limited");
-		tOptions.getMatchOptions().setWinsNeeded(2);
-		tOptions.getMatchOptions().setAttackOption(MultiplayerAttackOption.LEFT);
-		tOptions.getMatchOptions().setRange(RangeOfInfluence.ALL);
+    private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
+        TournamentTypeView tournamentType = (TournamentTypeView) cbTournamentType.getSelectedItem();
+        TournamentOptions tOptions = new TournamentOptions(this.txtName.getText());
+        tOptions.setTournamentType(tournamentType.getName());
+        tOptions.getPlayerTypes().add("Human");
+        for (TournamentPlayerPanel player: players) {
+            tOptions.getPlayerTypes().add((String) player.getPlayerType().getSelectedItem());
+        }
+        if (tournamentType.isDraft()) {
+            DraftOptions options = new DraftOptions();
+            options.setDraftType("");
+            options.setTiming((TimingOption) this.cbDraftTiming.getSelectedItem());
+            tOptions.setLimitedOptions(options);
+        }
+        if (tournamentType.isLimited()) {
+            if (tOptions.getLimitedOptions() == null)
+                tOptions.setLimitedOptions(new LimitedOptions());
+            for (JComboBox pack: packs) {
+                tOptions.getLimitedOptions().getSetCodes().add(((ExpansionSet) pack.getSelectedItem()).getCode());
+            }
+        }
+        tOptions.getMatchOptions().setDeckType("Limited");
+        tOptions.getMatchOptions().setWinsNeeded(2);
+        tOptions.getMatchOptions().setAttackOption(MultiplayerAttackOption.LEFT);
+        tOptions.getMatchOptions().setRange(RangeOfInfluence.ALL);
         tOptions.getMatchOptions().setLimited(true);
-		table = session.createTournamentTable(roomId, tOptions);
-		if (table == null) {
-			JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error creating table.", "Error", JOptionPane.ERROR_MESSAGE);
-			return;
-		}
-		if (session.joinTournamentTable(roomId, table.getTableId(), this.txtPlayer1Name.getText(), "Human", 1)) {
-			for (TournamentPlayerPanel player: players) {
-				if (!player.getPlayerType().equals("Human")) {
-					if (!player.joinTournamentTable(roomId, table.getTableId())) {
-						JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error joining tournament.", "Error", JOptionPane.ERROR_MESSAGE);
-						session.removeTable(roomId, table.getTableId());
-						table = null;
-						return;
-					}
-				}
-			}
-			this.hideDialog();
-			return;
-		}
-		JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error joining tournament.", "Error", JOptionPane.ERROR_MESSAGE);
-		session.removeTable(roomId, table.getTableId());
-		table = null;
-	}//GEN-LAST:event_btnOkActionPerformed
+        table = session.createTournamentTable(roomId, tOptions);
+        if (table == null) {
+            JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error creating table.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (session.joinTournamentTable(roomId, table.getTableId(), this.txtPlayer1Name.getText(), "Human", 1)) {
+            for (TournamentPlayerPanel player: players) {
+                if (!player.getPlayerType().equals("Human")) {
+                    if (!player.joinTournamentTable(roomId, table.getTableId())) {
+                        JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error joining tournament.", "Error", JOptionPane.ERROR_MESSAGE);
+                        session.removeTable(roomId, table.getTableId());
+                        table = null;
+                        return;
+                    }
+                }
+            }
+            this.hideDialog();
+            return;
+        }
+        JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error joining tournament.", "Error", JOptionPane.ERROR_MESSAGE);
+        session.removeTable(roomId, table.getTableId());
+        table = null;
+    }//GEN-LAST:event_btnOkActionPerformed
 
-	private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-		this.table = null;
-		this.playerId = null;
-		this.hideDialog();
-	}//GEN-LAST:event_btnCancelActionPerformed
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        this.table = null;
+        this.playerId = null;
+        this.hideDialog();
+    }//GEN-LAST:event_btnCancelActionPerformed
 
-	private void spnNumPlayersStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnNumPlayersStateChanged
-		int numPlayers = (Integer)this.spnNumPlayers.getValue() - 1;
-		createPlayers(numPlayers);
-	}//GEN-LAST:event_spnNumPlayersStateChanged
+    private void spnNumPlayersStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnNumPlayersStateChanged
+        int numPlayers = (Integer)this.spnNumPlayers.getValue() - 1;
+        createPlayers(numPlayers);
+    }//GEN-LAST:event_spnNumPlayersStateChanged
 
-	private void setTournamentOptions() {
-		TournamentTypeView tournamentType = (TournamentTypeView) cbTournamentType.getSelectedItem();
-		this.spnNumPlayers.setModel(new SpinnerNumberModel(tournamentType.getMinPlayers(), tournamentType.getMinPlayers(), tournamentType.getMaxPlayers(), 1));
-		this.spnNumPlayers.setEnabled(tournamentType.getMinPlayers() != tournamentType.getMaxPlayers());
-		createPlayers(tournamentType.getMinPlayers() - 1);
-		if (tournamentType.isLimited()) {
-			this.pnlPacks.setVisible(true);
-			createPacks(tournamentType.getNumBoosters());
-		}
-		else {
-			this.pnlPacks.setVisible(false);
-		}
-		this.pnlDraftOptions.setVisible(tournamentType.isDraft());
-	}
+    private void setTournamentOptions() {
+        TournamentTypeView tournamentType = (TournamentTypeView) cbTournamentType.getSelectedItem();
+        this.spnNumPlayers.setModel(new SpinnerNumberModel(tournamentType.getMinPlayers(), tournamentType.getMinPlayers(), tournamentType.getMaxPlayers(), 1));
+        this.spnNumPlayers.setEnabled(tournamentType.getMinPlayers() != tournamentType.getMaxPlayers());
+        createPlayers(tournamentType.getMinPlayers() - 1);
+        if (tournamentType.isLimited()) {
+            this.pnlPacks.setVisible(true);
+            createPacks(tournamentType.getNumBoosters());
+        }
+        else {
+            this.pnlPacks.setVisible(false);
+        }
+        this.pnlDraftOptions.setVisible(tournamentType.isDraft());
+    }
 
-	private void createPacks(int numPacks) {
-		while (packs.size() > numPacks) {
-			pnlPacks.remove(packs.get(packs.size() - 1));
-			packs.remove(packs.size() - 1);
-		}
-		while (packs.size() < numPacks) {
-			JComboBox pack = new JComboBox();
-			pack.setModel(new DefaultComboBoxModel(Sets.getInstance().values().toArray()));
-			pnlPacks.add(pack);
-			packs.add(pack);
-			pack.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent evt) {
-					packActionPerformed(evt);
-				}
-			});
-		}
-		this.pack();
-		this.revalidate();
-		this.repaint();
-	}
+    private void createPacks(int numPacks) {
+        while (packs.size() > numPacks) {
+            pnlPacks.remove(packs.get(packs.size() - 1));
+            packs.remove(packs.size() - 1);
+        }
+        while (packs.size() < numPacks) {
+            JComboBox pack = new JComboBox();
+            pack.setModel(new DefaultComboBoxModel(Sets.getInstance().values().toArray()));
+            pnlPacks.add(pack);
+            packs.add(pack);
+            pack.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    packActionPerformed(evt);
+                }
+            });
+        }
+        this.pack();
+        this.revalidate();
+        this.repaint();
+    }
 
-	private void packActionPerformed(java.awt.event.ActionEvent evt) {
-		boolean start = false;
-		int selectedIndex = 0;
-		for (JComboBox pack: packs) {
-			if (!start) {
-				if (evt.getSource().equals(pack)) {
-					start = true;
-					selectedIndex = pack.getSelectedIndex();
-				}
-			}
-			else {
-				pack.setSelectedIndex(selectedIndex);
-			}
-		}
-	}
+    private void packActionPerformed(java.awt.event.ActionEvent evt) {
+        boolean start = false;
+        int selectedIndex = 0;
+        for (JComboBox pack: packs) {
+            if (!start) {
+                if (evt.getSource().equals(pack)) {
+                    start = true;
+                    selectedIndex = pack.getSelectedIndex();
+                }
+            }
+            else {
+                pack.setSelectedIndex(selectedIndex);
+            }
+        }
+    }
 
-	private void createPlayers(int numPlayers) {
-		if (numPlayers > players.size()) {
-			while (players.size() != numPlayers) {
-				TournamentPlayerPanel playerPanel = new TournamentPlayerPanel();
-				playerPanel.init(players.size() + 2);
-				players.add(playerPanel);
-			}
-		}
-		else if (numPlayers < players.size()) {
-			while (players.size() != numPlayers) {
-				players.remove(players.size() - 1);
-			}
-		}
-		drawPlayers();
-	}
+    private void createPlayers(int numPlayers) {
+        if (numPlayers > players.size()) {
+            while (players.size() != numPlayers) {
+                TournamentPlayerPanel playerPanel = new TournamentPlayerPanel();
+                playerPanel.init(players.size() + 2);
+                players.add(playerPanel);
+            }
+        }
+        else if (numPlayers < players.size()) {
+            while (players.size() != numPlayers) {
+                players.remove(players.size() - 1);
+            }
+        }
+        drawPlayers();
+    }
 
-	private void drawPlayers() {
-		this.pnlOtherPlayers.removeAll();
-		for (TournamentPlayerPanel panel: players) {
-			this.pnlOtherPlayers.add(panel);
-			panel.getPlayerType().addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent evt) {
-					playerActionPerformed(evt);
-				}
-			});
-		}
-		this.pack();
-		this.revalidate();
-		this.repaint();
-	}
+    private void drawPlayers() {
+        this.pnlOtherPlayers.removeAll();
+        for (TournamentPlayerPanel panel: players) {
+            this.pnlOtherPlayers.add(panel);
+            panel.getPlayerType().addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    playerActionPerformed(evt);
+                }
+            });
+        }
+        this.pack();
+        this.revalidate();
+        this.repaint();
+    }
 
-	private void playerActionPerformed(java.awt.event.ActionEvent evt) {
-		boolean start = false;
-		int selectedIndex = 0;
-		for (TournamentPlayerPanel player: players) {
-			if (!start) {
-				if (evt.getSource().equals(player.getPlayerType())) {
-					start = true;
-					selectedIndex = player.getPlayerType().getSelectedIndex();
-				}
-			}
-			else {
-				player.getPlayerType().setSelectedIndex(selectedIndex);
-			}
-		}
-	}
+    private void playerActionPerformed(java.awt.event.ActionEvent evt) {
+        boolean start = false;
+        int selectedIndex = 0;
+        for (TournamentPlayerPanel player: players) {
+            if (!start) {
+                if (evt.getSource().equals(player.getPlayerType())) {
+                    start = true;
+                    selectedIndex = player.getPlayerType().getSelectedIndex();
+                }
+            }
+            else {
+                player.getPlayerType().setSelectedIndex(selectedIndex);
+            }
+        }
+    }
 
-	public TableView getTable() {
-		return table;
-	}
+    public TableView getTable() {
+        return table;
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

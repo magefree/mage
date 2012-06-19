@@ -40,8 +40,8 @@ public class TransformedCondition implements Condition {
     public TransformedCondition() {
     }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
         return game.getPermanent(source.getSourceId()).isTransformed();
-	}
+    }
 }

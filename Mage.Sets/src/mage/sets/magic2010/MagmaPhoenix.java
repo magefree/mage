@@ -47,26 +47,26 @@ import mage.cards.CardImpl;
  */
 public class MagmaPhoenix extends CardImpl<MagmaPhoenix> {
 
-	public MagmaPhoenix(UUID ownerId) {
-		super(ownerId, 148, "Magma Phoenix", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
-		this.expansionSetCode = "M10";
-		this.subtype.add("Phoenix");
-		this.color.setRed(true);
-		this.power = new MageInt(3);
-		this.toughness = new MageInt(3);
+    public MagmaPhoenix(UUID ownerId) {
+        super(ownerId, 148, "Magma Phoenix", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
+        this.expansionSetCode = "M10";
+        this.subtype.add("Phoenix");
+        this.color.setRed(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-		this.addAbility(FlyingAbility.getInstance());
-		this.addAbility(new DiesTriggeredAbility(new DamageEverythingEffect(3), false));
-		this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl("{3}{R}{R}")));
-	}
+        this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(new DiesTriggeredAbility(new DamageEverythingEffect(3), false));
+        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl("{3}{R}{R}")));
+    }
 
-	public MagmaPhoenix(final MagmaPhoenix card) {
-		super(card);
-	}
+    public MagmaPhoenix(final MagmaPhoenix card) {
+        super(card);
+    }
 
-	@Override
-	public MagmaPhoenix copy() {
-		return new MagmaPhoenix(this);
-	}
+    @Override
+    public MagmaPhoenix copy() {
+        return new MagmaPhoenix(this);
+    }
 
 }

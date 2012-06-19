@@ -70,7 +70,7 @@ public class GarrukPrimalHunter extends CardImpl<GarrukPrimalHunter> {
         super(ownerId, 174, "Garruk, Primal Hunter", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{G}{G}");
         this.expansionSetCode = "M12";
         this.subtype.add("Garruk");
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), ""));
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new BeastToken()), 1));
         this.addAbility(new LoyaltyAbility(new GarrukPrimalHunterEffect(), -3));
@@ -122,13 +122,13 @@ class GarrukPrimalHunterEffect extends OneShotEffect<GarrukPrimalHunterEffect> {
 
 class WurmToken extends Token {
 
-	public WurmToken() {
-		super("Wurm", "a 6/6 green Wurm creature token");
-		cardType.add(CardType.CREATURE);
-		color = ObjectColor.GREEN;
-		subtype.add("Wurm");
-		power = new MageInt(6);
-		toughness = new MageInt(6);
-	}
+    public WurmToken() {
+        super("Wurm", "a 6/6 green Wurm creature token");
+        cardType.add(CardType.CREATURE);
+        color = ObjectColor.GREEN;
+        subtype.add("Wurm");
+        power = new MageInt(6);
+        toughness = new MageInt(6);
+    }
 
 }

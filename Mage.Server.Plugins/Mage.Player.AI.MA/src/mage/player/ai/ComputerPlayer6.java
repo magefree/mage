@@ -74,18 +74,18 @@ import java.util.concurrent.*;
  */
 public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements Player {
 
-	private static final transient org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(ComputerPlayer6.class);
-	private static final ExecutorService pool = Executors.newFixedThreadPool(1);
+    private static final transient org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(ComputerPlayer6.class);
+    private static final ExecutorService pool = Executors.newFixedThreadPool(1);
 
-	protected int maxDepth;
-	protected int maxNodes;
-	protected int maxThink;
-	protected LinkedList<Ability> actions = new LinkedList<Ability>();
-	protected List<UUID> targets = new ArrayList<UUID>();
-	protected List<String> choices = new ArrayList<String>();
-	protected Combat combat;
-	protected int currentScore;
-	protected SimulationNode2 root;
+    protected int maxDepth;
+    protected int maxNodes;
+    protected int maxThink;
+    protected LinkedList<Ability> actions = new LinkedList<Ability>();
+    protected List<UUID> targets = new ArrayList<UUID>();
+    protected List<String> choices = new ArrayList<String>();
+    protected Combat combat;
+    protected int currentScore;
+    protected SimulationNode2 root;
 
     private static final String FILE_WITH_INSTRUCTIONS = "config/ai.please.cast.this.txt";
     private List<String> suggested = new ArrayList<String>();
@@ -97,133 +97,133 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
         optimizers.add(new EquipOptimizer());
     }
 
-	public ComputerPlayer6(String name, RangeOfInfluence range, int skill) {
-		super(name, range);
-		maxDepth = skill * 2;
-		maxThink = skill * 300;
-		maxNodes = Config2.maxNodes;
+    public ComputerPlayer6(String name, RangeOfInfluence range, int skill) {
+        super(name, range);
+        maxDepth = skill * 2;
+        maxThink = skill * 300;
+        maxNodes = Config2.maxNodes;
         getSuggestedActions();
-	}
+    }
 
-	public ComputerPlayer6(final ComputerPlayer6 player) {
-		super(player);
-		this.maxDepth = player.maxDepth;
-		this.currentScore = player.currentScore;
-		if (player.combat != null)
-			this.combat = player.combat.copy();
+    public ComputerPlayer6(final ComputerPlayer6 player) {
+        super(player);
+        this.maxDepth = player.maxDepth;
+        this.currentScore = player.currentScore;
+        if (player.combat != null)
+            this.combat = player.combat.copy();
         this.actions.addAll(player.actions);
         this.targets.addAll(player.targets);
         this.choices.addAll(player.choices);
-	}
+    }
 
-	@Override
-	public ComputerPlayer6 copy() {
-		return new ComputerPlayer6(this);
-	}
+    @Override
+    public ComputerPlayer6 copy() {
+        return new ComputerPlayer6(this);
+    }
 
-	@Override
-	public boolean priority(Game game) {
-		logState(game);
+    @Override
+    public boolean priority(Game game) {
+        logState(game);
         game.getState().setPriorityPlayerId(playerId);
-		game.firePriorityEvent(playerId);
-		switch (game.getTurn().getStepType()) {
-			case UPKEEP:
-			case DRAW:
-				pass();
-				return false;
-			case PRECOMBAT_MAIN:
-			case POSTCOMBAT_MAIN:
-				if (game.getActivePlayerId().equals(playerId)) {
-					printOutState(game, playerId);
-					printOutState(game, game.getOpponents(playerId).iterator().next());
-					if (actions.size() == 0) {
-						calculateActions(game);
-					}
-					act(game);
+        game.firePriorityEvent(playerId);
+        switch (game.getTurn().getStepType()) {
+            case UPKEEP:
+            case DRAW:
+                pass();
+                return false;
+            case PRECOMBAT_MAIN:
+            case POSTCOMBAT_MAIN:
+                if (game.getActivePlayerId().equals(playerId)) {
+                    printOutState(game, playerId);
+                    printOutState(game, game.getOpponents(playerId).iterator().next());
+                    if (actions.size() == 0) {
+                        calculateActions(game);
+                    }
+                    act(game);
                     return true;
-				} else {
-					pass();
-				}
-				return false;
+                } else {
+                    pass();
+                }
+                return false;
             case BEGIN_COMBAT:
             case FIRST_COMBAT_DAMAGE:
-			case COMBAT_DAMAGE:
-			case END_COMBAT:
-				pass();
-				return false;
+            case COMBAT_DAMAGE:
+            case END_COMBAT:
+                pass();
+                return false;
             case DECLARE_ATTACKERS:
                 if (game.getActivePlayerId().equals(playerId)) {
                     //declareAttackers(game, playerId);
                     pass();
-				} else {
-					pass();
-				}
-				return false;
-			case DECLARE_BLOCKERS:
-				if (!game.getActivePlayerId().equals(playerId)) {
+                } else {
+                    pass();
+                }
+                return false;
+            case DECLARE_BLOCKERS:
+                if (!game.getActivePlayerId().equals(playerId)) {
                     declareBlockers(game, playerId);
                     pass();
-				} else {
-					pass();
-				}
-				return false;
-			case END_TURN:
-				pass();
-				return false;
-			case CLEANUP:
-				pass();
-				return false;
-		}
-		return false;
-	}
+                } else {
+                    pass();
+                }
+                return false;
+            case END_TURN:
+                pass();
+                return false;
+            case CLEANUP:
+                pass();
+                return false;
+        }
+        return false;
+    }
 
-	protected void printOutState(Game game, UUID playerId) {
-		Player player = game.getPlayer(playerId);
-		System.out.println("Turn::"+game.getTurnNum());
-		System.out.println("[" + game.getPlayer(playerId).getName() + "] " + game.getTurn().getStepType().name() +", life=" + player.getLife());
-		Player opponent = game.getPlayer(game.getOpponents(playerId).iterator().next());
-		System.out.println("[Opponent] life=" + opponent.getLife());
+    protected void printOutState(Game game, UUID playerId) {
+        Player player = game.getPlayer(playerId);
+        System.out.println("Turn::"+game.getTurnNum());
+        System.out.println("[" + game.getPlayer(playerId).getName() + "] " + game.getTurn().getStepType().name() +", life=" + player.getLife());
+        Player opponent = game.getPlayer(game.getOpponents(playerId).iterator().next());
+        System.out.println("[Opponent] life=" + opponent.getLife());
 
-		String s = "[";
-		for (Card card : player.getHand().getCards(game)) {
-			s += card.getName() + ";";
-		}
-		s += "]";
-		System.out.println("Hand: " + s);
-		s = "[";
-		for (Permanent permanent : game.getBattlefield().getAllPermanents()) {
-			 if (permanent.getOwnerId().equals(player.getId())) {
-				 s += permanent.getName();
-				 if (permanent.isTapped()) {
-					s+="(tapped)";
-				 }
-				 if (permanent.isAttacking()) {
-					s+="(attacking)";
-				 }
-				 s+=";";
-			 }
-		}
-		s += "]";
-		System.out.println("Permanents: " + s);
-	}
+        String s = "[";
+        for (Card card : player.getHand().getCards(game)) {
+            s += card.getName() + ";";
+        }
+        s += "]";
+        System.out.println("Hand: " + s);
+        s = "[";
+        for (Permanent permanent : game.getBattlefield().getAllPermanents()) {
+             if (permanent.getOwnerId().equals(player.getId())) {
+                 s += permanent.getName();
+                 if (permanent.isTapped()) {
+                    s+="(tapped)";
+                 }
+                 if (permanent.isAttacking()) {
+                    s+="(attacking)";
+                 }
+                 s+=";";
+             }
+        }
+        s += "]";
+        System.out.println("Permanents: " + s);
+    }
 
-	protected void act(Game game) {
-		if (actions == null || actions.size() == 0)
-			pass();
-		else {
-			boolean usedStack = false;
-			while (actions.peek() != null) {
-				Ability ability = actions.poll();
-				System.out.println("[" + game.getPlayer(playerId).getName() + "] Action: " + ability.toString());
+    protected void act(Game game) {
+        if (actions == null || actions.size() == 0)
+            pass();
+        else {
+            boolean usedStack = false;
+            while (actions.peek() != null) {
+                Ability ability = actions.poll();
+                System.out.println("[" + game.getPlayer(playerId).getName() + "] Action: " + ability.toString());
                 if (ability.getTargets().size() > 0) {
                     Player player = game.getPlayer(ability.getFirstTarget());
                     if (player != null) {
                         System.out.println("targets = " + player.getName());
                     }
                 }
-				this.activateAbility((ActivatedAbility) ability, game);
-				if (ability.isUsesStack())
-					usedStack = true;
+                this.activateAbility((ActivatedAbility) ability, game);
+                if (ability.isUsesStack())
+                    usedStack = true;
                 if (!suggested.isEmpty() && !(ability instanceof PassAbility)) {
                     Iterator<String> it = suggested.iterator();
                     while (it.hasNext()) {
@@ -236,363 +236,363 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                         }
                     }
                 }
-			}
-			if (usedStack)
-				pass();
-		}
-	}
+            }
+            if (usedStack)
+                pass();
+        }
+    }
 
-	protected void calculateActions(Game game) {
-		if (!getNextAction(game)) {
-			Game sim = createSimulation(game);
-			SimulationNode2.resetCount();
-			root = new SimulationNode2(null, sim, maxDepth, playerId);
-			logger.info("simulating actions");
-			//int bestScore = addActionsTimed(new FilterAbility());
-			currentScore = GameStateEvaluator2.evaluate(playerId, game);
-			addActionsTimed();
-			if (root.children.size() > 0) {
-				root = root.children.get(0);
-				//GameStateEvaluator2.evaluate(playerId, root.getGame());
-				int bestScore = root.getScore();
-				//if (bestScore > currentScore) {
-					actions = new LinkedList<Ability>(root.abilities);
-					combat = root.combat;
-				//} else {
+    protected void calculateActions(Game game) {
+        if (!getNextAction(game)) {
+            Game sim = createSimulation(game);
+            SimulationNode2.resetCount();
+            root = new SimulationNode2(null, sim, maxDepth, playerId);
+            logger.info("simulating actions");
+            //int bestScore = addActionsTimed(new FilterAbility());
+            currentScore = GameStateEvaluator2.evaluate(playerId, game);
+            addActionsTimed();
+            if (root.children.size() > 0) {
+                root = root.children.get(0);
+                //GameStateEvaluator2.evaluate(playerId, root.getGame());
+                int bestScore = root.getScore();
+                //if (bestScore > currentScore) {
+                    actions = new LinkedList<Ability>(root.abilities);
+                    combat = root.combat;
+                //} else {
                     //System.out.println("[" + game.getPlayer(playerId).getName() + "] Action: not better score");
                 //}
-			} else {
+            } else {
                 System.out.println("[" + game.getPlayer(playerId).getName() + "] Action: skip");
             }
-		}
-	}
+        }
+    }
 
-	protected boolean getNextAction(Game game) {
-		if (root != null && root.children.size() > 0) {
-			SimulationNode2 test = root;
-			root = root.children.get(0);
-			while (root.children.size() > 0 && !root.playerId.equals(playerId)) {
-				test = root;
-				root = root.children.get(0);
-			}
-			logger.info("simlating -- game value:" + game.getState().getValue(true) + " test value:" + test.gameValue);
+    protected boolean getNextAction(Game game) {
+        if (root != null && root.children.size() > 0) {
+            SimulationNode2 test = root;
+            root = root.children.get(0);
+            while (root.children.size() > 0 && !root.playerId.equals(playerId)) {
+                test = root;
+                root = root.children.get(0);
+            }
+            logger.info("simlating -- game value:" + game.getState().getValue(true) + " test value:" + test.gameValue);
             if (!suggested.isEmpty()) {
                 return false;
             }
-			if (root.playerId.equals(playerId) && root.abilities != null && game.getState().getValue(true).hashCode() == test.gameValue) {
+            if (root.playerId.equals(playerId) && root.abilities != null && game.getState().getValue(true).hashCode() == test.gameValue) {
 
-				/*
-				// Try to fix horizon effect
-				if (root.combat == null || root.combat.getAttackers().size() == 0) {
-					FilterCreatureForAttack attackFilter = new FilterCreatureForAttack();
-					attackFilter.getControllerId().add(playerId);
-					List<Permanent> attackers = game.getBattlefield().getAllActivePermanents(attackFilter);
-					if (attackers.size() > 0) {
-						// we have attackers but don't attack with any of them
-						// let's try once again to avoid possible horizon effect
-						return false;
-					}
-				}
-				*/
+                /*
+                // Try to fix horizon effect
+                if (root.combat == null || root.combat.getAttackers().size() == 0) {
+                    FilterCreatureForAttack attackFilter = new FilterCreatureForAttack();
+                    attackFilter.getControllerId().add(playerId);
+                    List<Permanent> attackers = game.getBattlefield().getAllActivePermanents(attackFilter);
+                    if (attackers.size() > 0) {
+                        // we have attackers but don't attack with any of them
+                        // let's try once again to avoid possible horizon effect
+                        return false;
+                    }
+                }
+                */
 
-				logger.info("simulating -- continuing previous action chain");
-				actions = new LinkedList<Ability>(root.abilities);
-				combat = root.combat;
-				return true;
-			}
-			else {
-				return false;
-			}
-		}
-		return false;
-	}
+                logger.info("simulating -- continuing previous action chain");
+                actions = new LinkedList<Ability>(root.abilities);
+                combat = root.combat;
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        return false;
+    }
 
-	protected int minimaxAB(SimulationNode2 node, int depth, int alpha, int beta) {
-		UUID currentPlayerId = node.getGame().getPlayerList().get();
-		SimulationNode2 bestChild = null;
-		for (SimulationNode2 child: node.getChildren()) {
-			Combat _combat = child.getCombat();
-			if (alpha >= beta) {
-				//logger.info("alpha beta pruning");
-				break;
-			}
-			if (SimulationNode2.nodeCount > maxNodes) {
-				//logger.info("simulating -- reached end-state, count=" + SimulationNode2.nodeCount);
-				break;
-			}
-			int val = addActions(child, depth-1, alpha, beta);
-			if (!currentPlayerId.equals(playerId)) {
-				if (val < beta) {
-					beta = val;
-					bestChild = child;
-					if (node.getCombat() == null) {
-						node.setCombat(_combat);
-						bestChild.setCombat(_combat);
-					}
-				}
-				// no need to check other actions
-				if (val == GameStateEvaluator2.LOSE_GAME_SCORE) {
-					logger.debug("lose - break");
-					break;
-				}
-			}
-			else {
-				if (val > alpha) {
-					alpha = val;
-					bestChild = child;
-					if (node.getCombat() == null) {
-						node.setCombat(_combat);
-						bestChild.setCombat(_combat);
-					}
-				}
-				// no need to check other actions
-				if (val == GameStateEvaluator2.WIN_GAME_SCORE) {
-					logger.debug("win - break");
-					break;
-				}
-			}
-		}
-		node.children.clear();
-		if (bestChild != null)
-			node.children.add(bestChild);
-		if (!currentPlayerId.equals(playerId)) {
-			//logger.info("returning minimax beta: " + beta);
-			return beta;
-		}
-		else {
-			//logger.info("returning minimax alpha: " + alpha);
-			return alpha;
-		}
-	}
+    protected int minimaxAB(SimulationNode2 node, int depth, int alpha, int beta) {
+        UUID currentPlayerId = node.getGame().getPlayerList().get();
+        SimulationNode2 bestChild = null;
+        for (SimulationNode2 child: node.getChildren()) {
+            Combat _combat = child.getCombat();
+            if (alpha >= beta) {
+                //logger.info("alpha beta pruning");
+                break;
+            }
+            if (SimulationNode2.nodeCount > maxNodes) {
+                //logger.info("simulating -- reached end-state, count=" + SimulationNode2.nodeCount);
+                break;
+            }
+            int val = addActions(child, depth-1, alpha, beta);
+            if (!currentPlayerId.equals(playerId)) {
+                if (val < beta) {
+                    beta = val;
+                    bestChild = child;
+                    if (node.getCombat() == null) {
+                        node.setCombat(_combat);
+                        bestChild.setCombat(_combat);
+                    }
+                }
+                // no need to check other actions
+                if (val == GameStateEvaluator2.LOSE_GAME_SCORE) {
+                    logger.debug("lose - break");
+                    break;
+                }
+            }
+            else {
+                if (val > alpha) {
+                    alpha = val;
+                    bestChild = child;
+                    if (node.getCombat() == null) {
+                        node.setCombat(_combat);
+                        bestChild.setCombat(_combat);
+                    }
+                }
+                // no need to check other actions
+                if (val == GameStateEvaluator2.WIN_GAME_SCORE) {
+                    logger.debug("win - break");
+                    break;
+                }
+            }
+        }
+        node.children.clear();
+        if (bestChild != null)
+            node.children.add(bestChild);
+        if (!currentPlayerId.equals(playerId)) {
+            //logger.info("returning minimax beta: " + beta);
+            return beta;
+        }
+        else {
+            //logger.info("returning minimax alpha: " + alpha);
+            return alpha;
+        }
+    }
 
-	protected SearchEffect getSearchEffect(StackAbility ability) {
-		for (Effect effect: ability.getEffects()) {
-			if (effect instanceof SearchEffect) {
-				return (SearchEffect) effect;
-			}
-		}
-		return null;
-	}
+    protected SearchEffect getSearchEffect(StackAbility ability) {
+        for (Effect effect: ability.getEffects()) {
+            if (effect instanceof SearchEffect) {
+                return (SearchEffect) effect;
+            }
+        }
+        return null;
+    }
 
-	protected void resolve(SimulationNode2 node, int depth, Game game) {
-		StackObject ability = game.getStack().pop();
-		if (ability instanceof StackAbility) {
-			SearchEffect effect = getSearchEffect((StackAbility) ability);
-			if (effect != null && ability.getControllerId().equals(playerId)) {
-				Target target = effect.getTarget();
-				if (!target.doneChosing()) {
-					for (UUID targetId: target.possibleTargets(ability.getSourceId(), ability.getControllerId(), game)) {
-						Game sim = game.copy();
-						StackAbility newAbility = (StackAbility) ability.copy();
-						SearchEffect newEffect = getSearchEffect((StackAbility) newAbility);
-						newEffect.getTarget().addTarget(targetId, newAbility, sim);
-						sim.getStack().push(newAbility);
-						SimulationNode2 newNode = new SimulationNode2(node, sim, depth, ability.getControllerId());
-						node.children.add(newNode);
-						newNode.getTargets().add(targetId);
-						logger.debug("simulating search -- node#: " + SimulationNode2.getCount() + "for player: " + sim.getPlayer(ability.getControllerId()).getName());
-					}
-					return;
-				}
-			}
-		}
-		//logger.info("simulating resolve ");
-		ability.resolve(game);
-		game.applyEffects();
-		game.getPlayers().resetPassed();
-		game.getPlayerList().setCurrent(game.getActivePlayerId());
-	}
+    protected void resolve(SimulationNode2 node, int depth, Game game) {
+        StackObject ability = game.getStack().pop();
+        if (ability instanceof StackAbility) {
+            SearchEffect effect = getSearchEffect((StackAbility) ability);
+            if (effect != null && ability.getControllerId().equals(playerId)) {
+                Target target = effect.getTarget();
+                if (!target.doneChosing()) {
+                    for (UUID targetId: target.possibleTargets(ability.getSourceId(), ability.getControllerId(), game)) {
+                        Game sim = game.copy();
+                        StackAbility newAbility = (StackAbility) ability.copy();
+                        SearchEffect newEffect = getSearchEffect((StackAbility) newAbility);
+                        newEffect.getTarget().addTarget(targetId, newAbility, sim);
+                        sim.getStack().push(newAbility);
+                        SimulationNode2 newNode = new SimulationNode2(node, sim, depth, ability.getControllerId());
+                        node.children.add(newNode);
+                        newNode.getTargets().add(targetId);
+                        logger.debug("simulating search -- node#: " + SimulationNode2.getCount() + "for player: " + sim.getPlayer(ability.getControllerId()).getName());
+                    }
+                    return;
+                }
+            }
+        }
+        //logger.info("simulating resolve ");
+        ability.resolve(game);
+        game.applyEffects();
+        game.getPlayers().resetPassed();
+        game.getPlayerList().setCurrent(game.getActivePlayerId());
+    }
 
-	protected Integer addActionsTimed() {
-		FutureTask<Integer> task = new FutureTask<Integer>(new Callable<Integer>() {
-			@Override
-			public Integer call() throws Exception
-			{
-				return addActions(root, maxDepth, Integer.MIN_VALUE, Integer.MAX_VALUE);
-			}
-		});
-		pool.execute(task);
-		try {
-			return task.get(maxThink, TimeUnit.SECONDS);
-		} catch (TimeoutException e) {
-			logger.info("simulating - timed out");
-			task.cancel(true);
-		} catch (ExecutionException e) {
-			e.printStackTrace();
-			task.cancel(true);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-			task.cancel(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-			task.cancel(true);
-		}
-		//TODO: timeout handling
-		return 0;
-	}
+    protected Integer addActionsTimed() {
+        FutureTask<Integer> task = new FutureTask<Integer>(new Callable<Integer>() {
+            @Override
+            public Integer call() throws Exception
+            {
+                return addActions(root, maxDepth, Integer.MIN_VALUE, Integer.MAX_VALUE);
+            }
+        });
+        pool.execute(task);
+        try {
+            return task.get(maxThink, TimeUnit.SECONDS);
+        } catch (TimeoutException e) {
+            logger.info("simulating - timed out");
+            task.cancel(true);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+            task.cancel(true);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            task.cancel(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            task.cancel(true);
+        }
+        //TODO: timeout handling
+        return 0;
+    }
 
-	protected int addActions(SimulationNode2 node, int depth, int alpha, int beta) {
-		logger.debug("addActions: " + depth + ", alpha=" + alpha + ", beta=" + beta);
-		Game game = node.getGame();
-		int val;
-		if (Thread.interrupted()) {
-			Thread.currentThread().interrupt();
-			val = GameStateEvaluator2.evaluate(playerId, game);
-			logger.info("interrupted - " + val);
-			return val;
-		}
-		if (depth <= 0 || SimulationNode2.nodeCount > maxNodes || game.isGameOver()) {
-			logger.debug("simulating -- reached end state, node count=" + SimulationNode2.nodeCount + ", depth=" + depth);
-			val = GameStateEvaluator2.evaluate(playerId, game);
-			UUID currentPlayerId = node.getGame().getPlayerList().get();
-			//logger.info("reached - " + val + ", playerId=" + playerId + ", node.pid="+currentPlayerId);
-			return val;
-		}
-		else if (node.getChildren().size() > 0) {
-			logger.debug("simulating -- somthing added children:" + node.getChildren().size());
-			val = minimaxAB(node, depth-1, alpha, beta);
-			return val;
-		}
-		else {
-			logger.debug("simulating -- alpha: " + alpha + " beta: " + beta + " depth:" + depth + " step:" + game.getTurn().getStepType() + " for player:" + (node.getPlayerId().equals(playerId) ? "yes" : "no"));
-			if (allPassed(game)) {
-				if (!game.getStack().isEmpty()) {
-					resolve(node, depth, game);
-				}
-				else {
-					game.getPlayers().resetPassed();
-					playNext(game, game.getActivePlayerId(), node);
-				}
-			}
+    protected int addActions(SimulationNode2 node, int depth, int alpha, int beta) {
+        logger.debug("addActions: " + depth + ", alpha=" + alpha + ", beta=" + beta);
+        Game game = node.getGame();
+        int val;
+        if (Thread.interrupted()) {
+            Thread.currentThread().interrupt();
+            val = GameStateEvaluator2.evaluate(playerId, game);
+            logger.info("interrupted - " + val);
+            return val;
+        }
+        if (depth <= 0 || SimulationNode2.nodeCount > maxNodes || game.isGameOver()) {
+            logger.debug("simulating -- reached end state, node count=" + SimulationNode2.nodeCount + ", depth=" + depth);
+            val = GameStateEvaluator2.evaluate(playerId, game);
+            UUID currentPlayerId = node.getGame().getPlayerList().get();
+            //logger.info("reached - " + val + ", playerId=" + playerId + ", node.pid="+currentPlayerId);
+            return val;
+        }
+        else if (node.getChildren().size() > 0) {
+            logger.debug("simulating -- somthing added children:" + node.getChildren().size());
+            val = minimaxAB(node, depth-1, alpha, beta);
+            return val;
+        }
+        else {
+            logger.debug("simulating -- alpha: " + alpha + " beta: " + beta + " depth:" + depth + " step:" + game.getTurn().getStepType() + " for player:" + (node.getPlayerId().equals(playerId) ? "yes" : "no"));
+            if (allPassed(game)) {
+                if (!game.getStack().isEmpty()) {
+                    resolve(node, depth, game);
+                }
+                else {
+                    game.getPlayers().resetPassed();
+                    playNext(game, game.getActivePlayerId(), node);
+                }
+            }
 
-			if (game.isGameOver()) {
-				val = GameStateEvaluator2.evaluate(playerId, game);
-			} else if (node.getChildren().size() > 0) {
-				//declared attackers or blockers or triggered abilities
-				logger.debug("simulating -- attack/block/trigger added children:" + node.getChildren().size());
-				val = minimaxAB(node, depth-1, alpha, beta);
-			}
-			else {
-				val = simulatePriority(node, game, depth, alpha, beta);
-			}
-		}
+            if (game.isGameOver()) {
+                val = GameStateEvaluator2.evaluate(playerId, game);
+            } else if (node.getChildren().size() > 0) {
+                //declared attackers or blockers or triggered abilities
+                logger.debug("simulating -- attack/block/trigger added children:" + node.getChildren().size());
+                val = minimaxAB(node, depth-1, alpha, beta);
+            }
+            else {
+                val = simulatePriority(node, game, depth, alpha, beta);
+            }
+        }
 
-		logger.debug("returning -- score: " + val + " depth:" + depth + " step:" + game.getTurn().getStepType() + " for player:" + game.getPlayer(node.getPlayerId()).getName());
-		return val;
+        logger.debug("returning -- score: " + val + " depth:" + depth + " step:" + game.getTurn().getStepType() + " for player:" + game.getPlayer(node.getPlayerId()).getName());
+        return val;
 
-	}
+    }
 
-	protected int simulatePriority(SimulationNode2 node, Game game, int depth, int alpha, int beta) {
-		if (Thread.interrupted()) {
-			Thread.currentThread().interrupt();
-			logger.info("interrupted");
-			return GameStateEvaluator2.evaluate(playerId, game);
-		}
-		node.setGameValue(game.getState().getValue(true).hashCode());
-		SimulatedPlayer2 currentPlayer = (SimulatedPlayer2) game.getPlayer(game.getPlayerList().get());
-		//logger.info("simulating -- player " + currentPlayer.getName());
-		SimulationNode2 bestNode = null;
-		List<Ability> allActions = currentPlayer.simulatePriority(game);
+    protected int simulatePriority(SimulationNode2 node, Game game, int depth, int alpha, int beta) {
+        if (Thread.interrupted()) {
+            Thread.currentThread().interrupt();
+            logger.info("interrupted");
+            return GameStateEvaluator2.evaluate(playerId, game);
+        }
+        node.setGameValue(game.getState().getValue(true).hashCode());
+        SimulatedPlayer2 currentPlayer = (SimulatedPlayer2) game.getPlayer(game.getPlayerList().get());
+        //logger.info("simulating -- player " + currentPlayer.getName());
+        SimulationNode2 bestNode = null;
+        List<Ability> allActions = currentPlayer.simulatePriority(game);
         optimize(game, allActions);
-		logger.debug("simulating -- adding " + allActions.size() + " children:" + allActions);
-		for (Ability action: allActions) {
-			if (Thread.interrupted()) {
-				Thread.currentThread().interrupt();
-				logger.debug("interrupted");
-				break;
-			}
-			Game sim = game.copy();
-			if (sim.getPlayer(currentPlayer.getId()).activateAbility((ActivatedAbility) action.copy(), sim)) {
-				sim.applyEffects();
-				if (checkForRepeatedAction(sim, node, action, currentPlayer.getId()))
-					continue;
-				if (!sim.isGameOver() && action.isUsesStack()) {
-					// only pass if the last action uses the stack
-					sim.getPlayer(currentPlayer.getId()).pass();
-					sim.getPlayerList().getNext();
-				}
-				SimulationNode2 newNode = new SimulationNode2(node, sim, action, depth, currentPlayer.getId());
-				logger.debug("simulating -- node #:" + SimulationNode2.getCount() + " actions:" + action);
-				sim.checkStateAndTriggered();
-				int val = addActions(newNode, depth-1, alpha, beta);
+        logger.debug("simulating -- adding " + allActions.size() + " children:" + allActions);
+        for (Ability action: allActions) {
+            if (Thread.interrupted()) {
+                Thread.currentThread().interrupt();
+                logger.debug("interrupted");
+                break;
+            }
+            Game sim = game.copy();
+            if (sim.getPlayer(currentPlayer.getId()).activateAbility((ActivatedAbility) action.copy(), sim)) {
+                sim.applyEffects();
+                if (checkForRepeatedAction(sim, node, action, currentPlayer.getId()))
+                    continue;
+                if (!sim.isGameOver() && action.isUsesStack()) {
+                    // only pass if the last action uses the stack
+                    sim.getPlayer(currentPlayer.getId()).pass();
+                    sim.getPlayerList().getNext();
+                }
+                SimulationNode2 newNode = new SimulationNode2(node, sim, action, depth, currentPlayer.getId());
+                logger.debug("simulating -- node #:" + SimulationNode2.getCount() + " actions:" + action);
+                sim.checkStateAndTriggered();
+                int val = addActions(newNode, depth-1, alpha, beta);
                 logger.debug("val = " + val);
-				if (!currentPlayer.getId().equals(playerId)) {
-					if (val < beta) {
-						beta = val;
-						bestNode = newNode;
-						bestNode.setScore(val);
+                if (!currentPlayer.getId().equals(playerId)) {
+                    if (val < beta) {
+                        beta = val;
+                        bestNode = newNode;
+                        bestNode.setScore(val);
                         if (newNode.getChildren().size() > 0) {
-						    bestNode.setCombat(newNode.getChildren().get(0).getCombat());
+                            bestNode.setCombat(newNode.getChildren().get(0).getCombat());
                         }
-					}
+                    }
 
-					// no need to check other actions
-					if (val == GameStateEvaluator2.LOSE_GAME_SCORE) {
-						logger.debug("lose - break");
-						break;
-					}
-				}
-				else {
-					if (val > alpha) {
-						alpha = val;
-						bestNode = newNode;
-						bestNode.setScore(val);
+                    // no need to check other actions
+                    if (val == GameStateEvaluator2.LOSE_GAME_SCORE) {
+                        logger.debug("lose - break");
+                        break;
+                    }
+                }
+                else {
+                    if (val > alpha) {
+                        alpha = val;
+                        bestNode = newNode;
+                        bestNode.setScore(val);
                         if (newNode.getChildren().size() > 0) {
-						    bestNode.setCombat(newNode.getChildren().get(0).getCombat());
+                            bestNode.setCombat(newNode.getChildren().get(0).getCombat());
                         }
-						/*if (node.getTargets().size() > 0)
-							targets = node.getTargets();
-						if (node.getChoices().size() > 0)
-							choices = node.getChoices();
+                        /*if (node.getTargets().size() > 0)
+                            targets = node.getTargets();
+                        if (node.getChoices().size() > 0)
+                            choices = node.getChoices();
                         */
-						if (depth == maxDepth) {
-							logger.info("saved");
-							node.children.clear();
-							node.children.add(bestNode);
-							node.setScore(bestNode.getScore());
+                        if (depth == maxDepth) {
+                            logger.info("saved");
+                            node.children.clear();
+                            node.children.add(bestNode);
+                            node.setScore(bestNode.getScore());
                         }
-					}
+                    }
 
-					// no need to check other actions
-					if (val == GameStateEvaluator2.WIN_GAME_SCORE) {
-						logger.debug("win - break");
-						break;
-					}
-				}
-				if (alpha >= beta) {
-					//logger.info("simulating -- pruning");
-					break;
-				}
-				if (SimulationNode2.nodeCount > maxNodes) {
-					logger.debug("simulating -- reached end-state");
-					break;
-				}
-			}
-		}
-		if (bestNode != null) {
-			node.children.clear();
-			node.children.add(bestNode);
-			node.setScore(bestNode.getScore());
-		}
-		if (!currentPlayer.getId().equals(playerId)) {
+                    // no need to check other actions
+                    if (val == GameStateEvaluator2.WIN_GAME_SCORE) {
+                        logger.debug("win - break");
+                        break;
+                    }
+                }
+                if (alpha >= beta) {
+                    //logger.info("simulating -- pruning");
+                    break;
+                }
+                if (SimulationNode2.nodeCount > maxNodes) {
+                    logger.debug("simulating -- reached end-state");
+                    break;
+                }
+            }
+        }
+        if (bestNode != null) {
+            node.children.clear();
+            node.children.add(bestNode);
+            node.setScore(bestNode.getScore());
+        }
+        if (!currentPlayer.getId().equals(playerId)) {
             /*if (beta == Integer.MAX_VALUE) {
                 int val = GameStateEvaluator2.evaluate(playerId, game);
                 logger.info("returning priority beta: " + val);
                 return val;
             }*/
             //logger.info("returning priority beta: " + beta);
-			return beta;
-		}
-		else {
+            return beta;
+        }
+        else {
             /*if (alpha == Integer.MIN_VALUE) {
                 int val = GameStateEvaluator2.evaluate(playerId, game);
                 logger.info("returning priority beta: " + val);
                 return val;
             }*/
             //logger.info("returning priority alpha: " + alpha);
-			return alpha;
-		}
-	}
+            return alpha;
+        }
+    }
 
     /**
      * Various AI optimizations for actions.
@@ -605,153 +605,153 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
         }
     }
 
-	protected boolean allPassed(Game game) {
-		for (Player player: game.getPlayers().values()) {
-			if (!player.isPassed() && !player.hasLost() && !player.hasLeft())
-				return false;
-		}
-		return true;
-	}
+    protected boolean allPassed(Game game) {
+        for (Player player: game.getPlayers().values()) {
+            if (!player.isPassed() && !player.hasLost() && !player.hasLeft())
+                return false;
+        }
+        return true;
+    }
 
-	@Override
-	public boolean choose(Outcome outcome, Choice choice, Game game) {
-		if (choices.isEmpty())
-			return super.choose(outcome, choice, game);
-		if (!choice.isChosen()) {
-			for (String achoice: choices) {
-				choice.setChoice(achoice);
-				if (choice.isChosen()) {
-					choices.clear();
-					return true;
-				}
-			}
-			return false;
-		}
-		return true;
-	}
+    @Override
+    public boolean choose(Outcome outcome, Choice choice, Game game) {
+        if (choices.isEmpty())
+            return super.choose(outcome, choice, game);
+        if (!choice.isChosen()) {
+            for (String achoice: choices) {
+                choice.setChoice(achoice);
+                if (choice.isChosen()) {
+                    choices.clear();
+                    return true;
+                }
+            }
+            return false;
+        }
+        return true;
+    }
 
-	@Override
-	public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game)  {
-		if (targets.isEmpty())
-			return super.chooseTarget(outcome, cards, target, source, game);
-		if (!target.doneChosing()) {
-			for (UUID targetId: targets) {
-				target.addTarget(targetId, source, game);
-				if (target.doneChosing()) {
-					targets.clear();
-					return true;
-				}
-			}
-			return false;
-		}
-		return true;
-	}
+    @Override
+    public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game)  {
+        if (targets.isEmpty())
+            return super.chooseTarget(outcome, cards, target, source, game);
+        if (!target.doneChosing()) {
+            for (UUID targetId: targets) {
+                target.addTarget(targetId, source, game);
+                if (target.doneChosing()) {
+                    targets.clear();
+                    return true;
+                }
+            }
+            return false;
+        }
+        return true;
+    }
 
-	@Override
-	public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game)  {
-		if (targets.isEmpty())
-			return super.choose(outcome, cards, target, game);
-		if (!target.doneChosing()) {
-			for (UUID targetId: targets) {
-				target.add(targetId, game);
-				if (target.doneChosing()) {
-					targets.clear();
-					return true;
-				}
-			}
-			return false;
-		}
-		return true;
-	}
+    @Override
+    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game)  {
+        if (targets.isEmpty())
+            return super.choose(outcome, cards, target, game);
+        if (!target.doneChosing()) {
+            for (UUID targetId: targets) {
+                target.add(targetId, game);
+                if (target.doneChosing()) {
+                    targets.clear();
+                    return true;
+                }
+            }
+            return false;
+        }
+        return true;
+    }
 
-		@Override
-	public boolean playXMana(VariableManaCost cost, ManaCosts<ManaCost> costs, Game game) {
-		//SimulatedPlayer.simulateVariableCosts method adds a generic mana cost for each option
-		for (ManaCost manaCost: costs) {
-			if (manaCost instanceof GenericManaCost) {
-				cost.setPayment(manaCost.getPayment());
-				logger.debug("using X = " + cost.getPayment().count());
-				break;
-			}
-		}
-		game.informPlayers(getName() + " payed " + cost.getPayment().count() + " for " + cost.getText());
-		cost.setPaid();
-		return true;
-	}
+        @Override
+    public boolean playXMana(VariableManaCost cost, ManaCosts<ManaCost> costs, Game game) {
+        //SimulatedPlayer.simulateVariableCosts method adds a generic mana cost for each option
+        for (ManaCost manaCost: costs) {
+            if (manaCost instanceof GenericManaCost) {
+                cost.setPayment(manaCost.getPayment());
+                logger.debug("using X = " + cost.getPayment().count());
+                break;
+            }
+        }
+        game.informPlayers(getName() + " payed " + cost.getPayment().count() + " for " + cost.getText());
+        cost.setPaid();
+        return true;
+    }
 
-	public void playNext(Game game, UUID activePlayerId, SimulationNode2 node) {
-		boolean skip = false;
-		while (true) {
-			Phase currentPhase = game.getPhase();
-			if (!skip)
-				currentPhase.getStep().endStep(game, activePlayerId);
-			game.applyEffects();
-			switch (currentPhase.getStep().getType()) {
-				case UNTAP:
-					game.getPhase().setStep(new UpkeepStep());
-					break;
-				case UPKEEP:
-					game.getPhase().setStep(new DrawStep());
-					break;
-				case DRAW:
-					game.getTurn().setPhase(new PreCombatMainPhase());
-					game.getPhase().setStep(new PreCombatMainStep());
-					break;
-				case PRECOMBAT_MAIN:
-					game.getTurn().setPhase(new CombatPhase());
-					game.getPhase().setStep(new BeginCombatStep());
-					break;
-				case BEGIN_COMBAT:
-					game.getPhase().setStep(new DeclareAttackersStep());
-					break;
-				case DECLARE_ATTACKERS:
-					game.getPhase().setStep(new DeclareBlockersStep());
-					break;
-				case DECLARE_BLOCKERS:
-					game.getPhase().setStep(new FirstCombatDamageStep());
-					break;
+    public void playNext(Game game, UUID activePlayerId, SimulationNode2 node) {
+        boolean skip = false;
+        while (true) {
+            Phase currentPhase = game.getPhase();
+            if (!skip)
+                currentPhase.getStep().endStep(game, activePlayerId);
+            game.applyEffects();
+            switch (currentPhase.getStep().getType()) {
+                case UNTAP:
+                    game.getPhase().setStep(new UpkeepStep());
+                    break;
+                case UPKEEP:
+                    game.getPhase().setStep(new DrawStep());
+                    break;
+                case DRAW:
+                    game.getTurn().setPhase(new PreCombatMainPhase());
+                    game.getPhase().setStep(new PreCombatMainStep());
+                    break;
+                case PRECOMBAT_MAIN:
+                    game.getTurn().setPhase(new CombatPhase());
+                    game.getPhase().setStep(new BeginCombatStep());
+                    break;
+                case BEGIN_COMBAT:
+                    game.getPhase().setStep(new DeclareAttackersStep());
+                    break;
+                case DECLARE_ATTACKERS:
+                    game.getPhase().setStep(new DeclareBlockersStep());
+                    break;
+                case DECLARE_BLOCKERS:
+                    game.getPhase().setStep(new FirstCombatDamageStep());
+                    break;
                 case FIRST_COMBAT_DAMAGE:
                     game.getPhase().setStep(new CombatDamageStep());
                     break;
-				case COMBAT_DAMAGE:
-					game.getPhase().setStep(new EndOfCombatStep());
-					break;
-				case END_COMBAT:
-					game.getTurn().setPhase(new PostCombatMainPhase());
-					game.getPhase().setStep(new PostCombatMainStep());
-					break;
-				case POSTCOMBAT_MAIN:
-					game.getTurn().setPhase(new EndPhase());
-					game.getPhase().setStep(new EndStep());
-					break;
-				case END_TURN:
-					game.getPhase().setStep(new CleanupStep());
-					break;
-				case CLEANUP:
-					game.getPhase().getStep().beginStep(game, activePlayerId);
-					if (!game.checkStateAndTriggered() && !game.isGameOver()) {
-						game.getState().setActivePlayerId(game.getState().getPlayerList(game.getActivePlayerId()).getNext());
-						game.getTurn().setPhase(new BeginningPhase());
-						game.getPhase().setStep(new UntapStep());
-					}
-			}
-			if (!game.getStep().skipStep(game, game.getActivePlayerId())) {
-				if (game.getTurn().getStepType() == PhaseStep.DECLARE_ATTACKERS) {
+                case COMBAT_DAMAGE:
+                    game.getPhase().setStep(new EndOfCombatStep());
+                    break;
+                case END_COMBAT:
+                    game.getTurn().setPhase(new PostCombatMainPhase());
+                    game.getPhase().setStep(new PostCombatMainStep());
+                    break;
+                case POSTCOMBAT_MAIN:
+                    game.getTurn().setPhase(new EndPhase());
+                    game.getPhase().setStep(new EndStep());
+                    break;
+                case END_TURN:
+                    game.getPhase().setStep(new CleanupStep());
+                    break;
+                case CLEANUP:
+                    game.getPhase().getStep().beginStep(game, activePlayerId);
+                    if (!game.checkStateAndTriggered() && !game.isGameOver()) {
+                        game.getState().setActivePlayerId(game.getState().getPlayerList(game.getActivePlayerId()).getNext());
+                        game.getTurn().setPhase(new BeginningPhase());
+                        game.getPhase().setStep(new UntapStep());
+                    }
+            }
+            if (!game.getStep().skipStep(game, game.getActivePlayerId())) {
+                if (game.getTurn().getStepType() == PhaseStep.DECLARE_ATTACKERS) {
                     declareAttackers(game, activePlayerId, node);
-				} else if (game.getTurn().getStepType() == PhaseStep.DECLARE_BLOCKERS) {
+                } else if (game.getTurn().getStepType() == PhaseStep.DECLARE_BLOCKERS) {
                     declareBlockers(game, activePlayerId, node);
-				} else {
-					game.getStep().beginStep(game, activePlayerId);
-				}
-				if (game.getStep().getHasPriority())
-					break;
-			}
-			else {
-				skip = true;
-			}
-		}
-		game.checkStateAndTriggered();
-	}
+                } else {
+                    game.getStep().beginStep(game, activePlayerId);
+                }
+                if (game.getStep().getHasPriority())
+                    break;
+            }
+            else {
+                skip = true;
+            }
+        }
+        game.checkStateAndTriggered();
+    }
 
     private void declareBlockers(Game game, UUID activePlayerId) {
         game.fireEvent(new GameEvent(GameEvent.EventType.DECLARE_BLOCKERS_STEP_PRE, null, null, activePlayerId));
@@ -1126,15 +1126,15 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
             if (info.isAttackerDied()) {
                 return false;
             }
-    
+
             if (info.getDefender().getLife() < life) {
                 return true;
             }
-    
+
             if (info.getDefender().getCounters().getCount(CounterType.POISON) > poison && poison < 10) {
                 return true;
             }
-    
+
             if (info.isTriggered()) {
                 return true;
             }
@@ -1187,74 +1187,74 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
     }
 
     @Override
-	public void selectAttackers(Game game) {
-		logger.debug("selectAttackers");
+    public void selectAttackers(Game game) {
+        logger.debug("selectAttackers");
         declareAttackers(game, playerId);
-		/*if (combat != null) {
-			UUID opponentId = game.getCombat().getDefenders().iterator().next();
-			String attackers = "";
-			for (UUID attackerId: combat.getAttackers()) {
-				Permanent attacker = game.getPermanent(attackerId);
-				if (attacker != null) {
-					attackers = "[" + attacker.getName() + "]";
-					this.declareAttacker(attackerId, opponentId, game);
-				}
-			}
-			logger.info("declare attackers: " + (attackers.isEmpty() ? "none" : attackers));
-		}*/
+        /*if (combat != null) {
+            UUID opponentId = game.getCombat().getDefenders().iterator().next();
+            String attackers = "";
+            for (UUID attackerId: combat.getAttackers()) {
+                Permanent attacker = game.getPermanent(attackerId);
+                if (attacker != null) {
+                    attackers = "[" + attacker.getName() + "]";
+                    this.declareAttacker(attackerId, opponentId, game);
+                }
+            }
+            logger.info("declare attackers: " + (attackers.isEmpty() ? "none" : attackers));
+        }*/
 
-	}
+    }
 
-	@Override
-	public void selectBlockers(Game game) {
-		logger.debug("selectBlockers");
-		if (combat != null && combat.getGroups().size() > 0) {
-			List<CombatGroup> groups = game.getCombat().getGroups();
-			for (int i = 0; i < groups.size(); i++) {
-				if (i < combat.getGroups().size()) {
-					for (UUID blockerId: combat.getGroups().get(i).getBlockers()) {
+    @Override
+    public void selectBlockers(Game game) {
+        logger.debug("selectBlockers");
+        if (combat != null && combat.getGroups().size() > 0) {
+            List<CombatGroup> groups = game.getCombat().getGroups();
+            for (int i = 0; i < groups.size(); i++) {
+                if (i < combat.getGroups().size()) {
+                    for (UUID blockerId: combat.getGroups().get(i).getBlockers()) {
                         logger.info("select blocker: " + blockerId + " vs " + groups.get(i).getAttackers().get(0));
-						this.declareBlocker(blockerId, groups.get(i).getAttackers().get(0), game);
-					}
-				}
-			}
-		}
-	}
+                        this.declareBlocker(blockerId, groups.get(i).getAttackers().get(0), game);
+                    }
+                }
+            }
+        }
+    }
 
-	/**
-	 * Copies game and replaces all players in copy with simulated players
-	 *
-	 * @param game
-	 * @return a new game object with simulated players
-	 */
-	protected Game createSimulation(Game game) {
-		Game sim = game.copy();
+    /**
+     * Copies game and replaces all players in copy with simulated players
+     *
+     * @param game
+     * @return a new game object with simulated players
+     */
+    protected Game createSimulation(Game game) {
+        Game sim = game.copy();
 
-		for (Player copyPlayer: sim.getState().getPlayers().values()) {
-			Player origPlayer = game.getState().getPlayers().get(copyPlayer.getId()).copy();
+        for (Player copyPlayer: sim.getState().getPlayers().values()) {
+            Player origPlayer = game.getState().getPlayers().get(copyPlayer.getId()).copy();
             System.out.println("suggested=" + suggested);
-			SimulatedPlayer2 newPlayer = new SimulatedPlayer2(copyPlayer.getId(), copyPlayer.getId().equals(playerId), suggested);
-			newPlayer.restore(origPlayer);
-			sim.getState().getPlayers().put(copyPlayer.getId(), newPlayer);
-		}
-		return sim;
-	}
+            SimulatedPlayer2 newPlayer = new SimulatedPlayer2(copyPlayer.getId(), copyPlayer.getId().equals(playerId), suggested);
+            newPlayer.restore(origPlayer);
+            sim.getState().getPlayers().put(copyPlayer.getId(), newPlayer);
+        }
+        return sim;
+    }
 
-	private boolean checkForRepeatedAction(Game sim, SimulationNode2 node, Ability action, UUID playerId) {
-		if (action instanceof PassAbility)
-			return false;
-		int val = GameStateEvaluator2.evaluate(playerId, sim);
-		SimulationNode2 test = node.getParent();
-		while (test != null && !test.getPlayerId().equals(playerId)) {
-			test = test.getParent();
-		}
-		if (test != null && test.getAbilities() != null && test.getAbilities().size() == 1) {
-			if (action.toString().equals(test.getAbilities().get(0).toString()) && GameStateEvaluator2.evaluate(playerId, test.getGame()) == val) {
-				return true;
-			}
-		}
-		return false;
-	}
+    private boolean checkForRepeatedAction(Game sim, SimulationNode2 node, Ability action, UUID playerId) {
+        if (action instanceof PassAbility)
+            return false;
+        int val = GameStateEvaluator2.evaluate(playerId, sim);
+        SimulationNode2 test = node.getParent();
+        while (test != null && !test.getPlayerId().equals(playerId)) {
+            test = test.getParent();
+        }
+        if (test != null && test.getAbilities() != null && test.getAbilities().size() == 1) {
+            if (action.toString().equals(test.getAbilities().get(0).toString()) && GameStateEvaluator2.evaluate(playerId, test.getGame()) == val) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     protected void getSuggestedActions() {
         try {

@@ -37,23 +37,23 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class SwampwalkAbility extends LandwalkAbility {
 
-	private static final FilterLandPermanent filter = new FilterLandPermanent("Swamp");
+    private static final FilterLandPermanent filter = new FilterLandPermanent("Swamp");
 
-	static {
-		filter.getSubtype().add("Swamp");
-		filter.setScopeSubtype(ComparisonScope.Any);
-	}
+    static {
+        filter.getSubtype().add("Swamp");
+        filter.setScopeSubtype(ComparisonScope.Any);
+    }
 
-	public SwampwalkAbility() {
-		super(filter);
-	}
+    public SwampwalkAbility() {
+        super(filter);
+    }
 
-	public SwampwalkAbility(final SwampwalkAbility ability) {
-		super(ability);
-	}
+    public SwampwalkAbility(final SwampwalkAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public SwampwalkAbility copy() {
-		return new SwampwalkAbility(this);
-	}
+    @Override
+    public SwampwalkAbility copy() {
+        return new SwampwalkAbility(this);
+    }
 }

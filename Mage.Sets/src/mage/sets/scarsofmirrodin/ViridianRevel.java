@@ -50,8 +50,8 @@ public class ViridianRevel extends CardImpl<ViridianRevel> {
     public ViridianRevel (UUID ownerId) {
         super(ownerId, 132, "Viridian Revel", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}");
         this.expansionSetCode = "SOM";
-		this.color.setGreen(true);
-		this.addAbility(new ViridianRevelTriggeredAbility());
+        this.color.setGreen(true);
+        this.addAbility(new ViridianRevelTriggeredAbility());
     }
 
     public ViridianRevel (final ViridianRevel card) {
@@ -65,32 +65,32 @@ public class ViridianRevel extends CardImpl<ViridianRevel> {
 }
 
 class ViridianRevelTriggeredAbility extends TriggeredAbilityImpl<ViridianRevelTriggeredAbility> {
-	ViridianRevelTriggeredAbility() {
-		super(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(1), true);
-	}
+    ViridianRevelTriggeredAbility() {
+        super(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(1), true);
+    }
 
-	ViridianRevelTriggeredAbility(final ViridianRevelTriggeredAbility ability) {
-		super(ability);
-	}
+    ViridianRevelTriggeredAbility(final ViridianRevelTriggeredAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public ViridianRevelTriggeredAbility copy() {
-		return new ViridianRevelTriggeredAbility(this);
-	}
+    @Override
+    public ViridianRevelTriggeredAbility copy() {
+        return new ViridianRevelTriggeredAbility(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
             Card card = game.getCard(event.getTargetId());
             if (card != null && card.getCardType().contains(CardType.ARTIFACT)) {
                 return true;
             }
-		}
-		return false;
-	}
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "Whenever an artifact is put into an opponent's graveyard from the battlefield, you may draw a card.";
-	}
+    @Override
+    public String getRule() {
+        return "Whenever an artifact is put into an opponent's graveyard from the battlefield, you may draw a card.";
+    }
 }

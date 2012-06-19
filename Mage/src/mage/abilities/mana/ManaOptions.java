@@ -44,44 +44,44 @@ import mage.game.Game;
  */
 public class ManaOptions extends ArrayList<Mana> {
 
-	public ManaOptions () {};
+    public ManaOptions () {};
 
-	public ManaOptions(final ManaOptions options) {
-		for (Mana mana: options) {
-			this.add(mana.copy());
-		}
-	}
+    public ManaOptions(final ManaOptions options) {
+        for (Mana mana: options) {
+            this.add(mana.copy());
+        }
+    }
 
-	public void addMana(List<ManaAbility> abilities, Game game) {
-		if (isEmpty())
-			this.add(new Mana());
-		if (!abilities.isEmpty()) {
-			if (abilities.size() == 1) {
-				//if there is only one mana option available add it to all the existing options
-				addMana(abilities.get(0).getNetMana(game));
-			}
-			else if (abilities.size() > 1) {
-				//perform a union of all existing options and the new options
-				List<Mana> copy = copy();
-				this.clear();
-				for (ManaAbility ability: abilities) {
-					for (Mana mana: copy) {
-						Mana newMana = new Mana();
-						newMana.add(mana);
-						newMana.add(ability.getNetMana(game));
-						this.add(newMana);
-					}
-				}
-			}
-		}
-	}
+    public void addMana(List<ManaAbility> abilities, Game game) {
+        if (isEmpty())
+            this.add(new Mana());
+        if (!abilities.isEmpty()) {
+            if (abilities.size() == 1) {
+                //if there is only one mana option available add it to all the existing options
+                addMana(abilities.get(0).getNetMana(game));
+            }
+            else if (abilities.size() > 1) {
+                //perform a union of all existing options and the new options
+                List<Mana> copy = copy();
+                this.clear();
+                for (ManaAbility ability: abilities) {
+                    for (Mana mana: copy) {
+                        Mana newMana = new Mana();
+                        newMana.add(mana);
+                        newMana.add(ability.getNetMana(game));
+                        this.add(newMana);
+                    }
+                }
+            }
+        }
+    }
 
-	public void addManaWithCost(List<ManaAbility> abilities, Game game) {
-		if (isEmpty())
-			this.add(new Mana());
-		if (!abilities.isEmpty()) {
-			if (abilities.size() == 1) {
-				//if there is only one mana option available add it to all the existing options
+    public void addManaWithCost(List<ManaAbility> abilities, Game game) {
+        if (isEmpty())
+            this.add(new Mana());
+        if (!abilities.isEmpty()) {
+            if (abilities.size() == 1) {
+                //if there is only one mana option available add it to all the existing options
                 ManaAbility ability = abilities.get(0);
                 if (ability.getManaCosts().isEmpty()) {
                     addMana(ability.getNetMana(game));
@@ -89,12 +89,12 @@ public class ManaOptions extends ArrayList<Mana> {
                 else {
                     addMana(ability.getManaCosts().getMana(), ability.getNetMana(game));
                 }
-			}
-			else if (abilities.size() > 1) {
-				//perform a union of all existing options and the new options
-				List<Mana> copy = copy();
-				this.clear();
-				for (ManaAbility ability: abilities) {
+            }
+            else if (abilities.size() > 1) {
+                //perform a union of all existing options and the new options
+                List<Mana> copy = copy();
+                this.clear();
+                for (ManaAbility ability: abilities) {
                     if (ability.getManaCosts().isEmpty()) {
                         for (Mana mana: copy) {
                             Mana newMana = new Mana();
@@ -114,56 +114,56 @@ public class ManaOptions extends ArrayList<Mana> {
                             this.add(newMana);
                         }
                     }
-				}
-			}
-		}
-	}
-    
-	public void addMana(Mana addMana) {
-		if (isEmpty())
-			this.add(new Mana());
-		for (Mana mana: this) {
-			mana.add(addMana);
-		}
-	}
+                }
+            }
+        }
+    }
 
-	public void addMana(ManaOptions options) {
-		if (isEmpty())
-			this.add(new Mana());
-		if (!options.isEmpty()) {
-			if (options.size() == 1) {
-				//if there is only one mana option available add it to all the existing options
-				addMana(options.get(0));
-			}
-			else if (options.size() > 1) {
-				//perform a union of all existing options and the new options
-				List<Mana> copy = copy();
-				this.clear();
-				for (Mana addMana: options) {
-					for (Mana mana: copy) {
-						Mana newMana = new Mana();
-						newMana.add(mana);
-						newMana.add(addMana);
-						this.add(newMana);
-					}
-				}
-			}
-		}
-	}
+    public void addMana(Mana addMana) {
+        if (isEmpty())
+            this.add(new Mana());
+        for (Mana mana: this) {
+            mana.add(addMana);
+        }
+    }
 
-	public ManaOptions copy() {
-		return new ManaOptions(this);
-	}
+    public void addMana(ManaOptions options) {
+        if (isEmpty())
+            this.add(new Mana());
+        if (!options.isEmpty()) {
+            if (options.size() == 1) {
+                //if there is only one mana option available add it to all the existing options
+                addMana(options.get(0));
+            }
+            else if (options.size() > 1) {
+                //perform a union of all existing options and the new options
+                List<Mana> copy = copy();
+                this.clear();
+                for (Mana addMana: options) {
+                    for (Mana mana: copy) {
+                        Mana newMana = new Mana();
+                        newMana.add(mana);
+                        newMana.add(addMana);
+                        this.add(newMana);
+                    }
+                }
+            }
+        }
+    }
 
-	public void addMana(Mana cost, Mana addMana) {
-		if (isEmpty())
-			this.add(new Mana());
-		for (Mana mana: this) {
+    public ManaOptions copy() {
+        return new ManaOptions(this);
+    }
+
+    public void addMana(Mana cost, Mana addMana) {
+        if (isEmpty())
+            this.add(new Mana());
+        for (Mana mana: this) {
             if (mana.contains(cost)) {
                 mana.subtract(cost);
                 mana.add(addMana);
             }
-		}
-	}
+        }
+    }
 
 }

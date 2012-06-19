@@ -90,17 +90,17 @@ class PhyrexianObliteratorTriggeredAbility extends TriggeredAbilityImpl<Phyrexia
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE && event.getTargetId().equals(this.sourceId)) {
-			UUID controller = game.getControllerId(event.getSourceId());
-			if (controller != null) {
-				Player player = game.getPlayer(controller);
-				if (player != null) {
-					getEffects().get(0).setTargetPointer(new FixedTarget(player.getId()));
-					((SacrificeEffect) getEffects().get(0)).setAmount(new StaticValue(event.getAmount()));
-					return true;
-				}
-			}
-		}
-		return false;
+            UUID controller = game.getControllerId(event.getSourceId());
+            if (controller != null) {
+                Player player = game.getPlayer(controller);
+                if (player != null) {
+                    getEffects().get(0).setTargetPointer(new FixedTarget(player.getId()));
+                    ((SacrificeEffect) getEffects().get(0)).setAmount(new StaticValue(event.getAmount()));
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override

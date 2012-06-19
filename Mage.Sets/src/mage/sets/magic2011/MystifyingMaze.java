@@ -54,61 +54,61 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class MystifyingMaze extends CardImpl<MystifyingMaze> {
 
-	private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking creature an opponent controls");
+    private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking creature an opponent controls");
 
-	static {
-		filter.setTargetController(TargetController.OPPONENT);
-	}
+    static {
+        filter.setTargetController(TargetController.OPPONENT);
+    }
 
-	public MystifyingMaze(UUID ownerId) {
-		super(ownerId, 226, "Mystifying Maze", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-		this.expansionSetCode = "M11";
-		this.addAbility(new ColorlessManaAbility());
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MystifyingMazeEffect(), new ManaCostsImpl("{4}"));
-		ability.addCost(new TapSourceCost());
-		ability.addTarget(new TargetCreaturePermanent(filter));
-		this.addAbility(ability);
-	}
+    public MystifyingMaze(UUID ownerId) {
+        super(ownerId, 226, "Mystifying Maze", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+        this.expansionSetCode = "M11";
+        this.addAbility(new ColorlessManaAbility());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MystifyingMazeEffect(), new ManaCostsImpl("{4}"));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
+    }
 
-	public MystifyingMaze(final MystifyingMaze card) {
-		super(card);
-	}
+    public MystifyingMaze(final MystifyingMaze card) {
+        super(card);
+    }
 
-	@Override
-	public MystifyingMaze copy() {
-		return new MystifyingMaze(this);
-	}
+    @Override
+    public MystifyingMaze copy() {
+        return new MystifyingMaze(this);
+    }
 }
 
 class MystifyingMazeEffect extends OneShotEffect<MystifyingMazeEffect> {
 
-	public MystifyingMazeEffect() {
-		super(Outcome.Detriment);
-		staticText = "Exile target attacking creature an opponent controls. At the beginning of the next end step, return it to the battlefield tapped under its owner's control";
-	}
+    public MystifyingMazeEffect() {
+        super(Outcome.Detriment);
+        staticText = "Exile target attacking creature an opponent controls. At the beginning of the next end step, return it to the battlefield tapped under its owner's control";
+    }
 
-	public MystifyingMazeEffect(final MystifyingMazeEffect effect) {
-		super(effect);
-	}
+    public MystifyingMazeEffect(final MystifyingMazeEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getFirstTarget());
-		if (permanent != null) {
-			if (permanent.moveToExile(source.getSourceId(), "Mystifying Maze Exile", source.getId(), game)) {
-				//create delayed triggered ability
-				AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD, true));
-				delayedAbility.setSourceId(source.getSourceId());
-				delayedAbility.setControllerId(source.getControllerId());
-				game.addDelayedTriggeredAbility(delayedAbility);
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        if (permanent != null) {
+            if (permanent.moveToExile(source.getSourceId(), "Mystifying Maze Exile", source.getId(), game)) {
+                //create delayed triggered ability
+                AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD, true));
+                delayedAbility.setSourceId(source.getSourceId());
+                delayedAbility.setControllerId(source.getControllerId());
+                game.addDelayedTriggeredAbility(delayedAbility);
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public MystifyingMazeEffect copy() {
-		return new MystifyingMazeEffect(this);
-	}
+    @Override
+    public MystifyingMazeEffect copy() {
+        return new MystifyingMazeEffect(this);
+    }
 }

@@ -52,7 +52,7 @@ import mage.target.Target;
  * @author jeffwadsworth
  */
 public class Outwit extends CardImpl<Outwit> {
-    
+
     private static FilterSpell filter = new FilterSpell("spell that targets a player");
 
     public Outwit(UUID ownerId) {
@@ -63,7 +63,7 @@ public class Outwit extends CardImpl<Outwit> {
 
         // Counter target spell that targets a player.
         this.getSpellAbility().addEffect(new CounterTargetEffect());
-	this.getSpellAbility().addTarget(new CustomTargetSpell(filter));
+    this.getSpellAbility().addTarget(new CustomTargetSpell(filter));
     }
 
     public Outwit(final Outwit card) {
@@ -80,88 +80,88 @@ public class Outwit extends CardImpl<Outwit> {
 
         protected FilterSpell filter;
 
-	public CustomTargetSpell() {
+    public CustomTargetSpell() {
             this(1, 1, new FilterSpell());
-	}
+    }
 
-	public CustomTargetSpell(FilterSpell filter) {
+    public CustomTargetSpell(FilterSpell filter) {
             this(1, 1, filter);
-	}
+    }
 
-	public CustomTargetSpell(int numTargets, FilterSpell filter) {
+    public CustomTargetSpell(int numTargets, FilterSpell filter) {
             this(numTargets, numTargets, filter);
-	}
+    }
 
-	public CustomTargetSpell(int minNumTargets, int maxNumTargets, FilterSpell filter) {
+    public CustomTargetSpell(int minNumTargets, int maxNumTargets, FilterSpell filter) {
             this.minNumberOfTargets = minNumTargets;
             this.maxNumberOfTargets = maxNumTargets;
             this.zone = Constants.Zone.STACK;
             this.filter = filter;
             this.targetName = filter.getMessage();
-	}
+    }
 
-	public CustomTargetSpell(final CustomTargetSpell target) {
+    public CustomTargetSpell(final CustomTargetSpell target) {
             super(target);
             this.filter = target.filter.copy();
-	}
+    }
 
-	@Override
-	public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+    @Override
+    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
             return canChoose(sourceControllerId, game);
-	}
+    }
 
-	@Override
-	public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+    @Override
+    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
             return possibleTargets(sourceControllerId, game);
-	}
+    }
 
-	@Override
-	public boolean canTarget(UUID id, Ability source, Game game) {
+    @Override
+    public boolean canTarget(UUID id, Ability source, Game game) {
             if (super.canTarget(id, source, game)) {
                 if (targetsPlayer(id, game)) {
                     return true;
-		}
+        }
             }
             return false;
-	}
+    }
 
-	@Override
-	public boolean canChoose(UUID sourceControllerId, Game game) {
+    @Override
+    public boolean canChoose(UUID sourceControllerId, Game game) {
             int count = 0;
             for (StackObject stackObject : game.getStack()) {
-		if (stackObject instanceof Spell && filter.match((Spell) stackObject, game)) {
+        if (stackObject instanceof Spell && filter.match((Spell) stackObject, game)) {
                     if (targetsPlayer(stackObject.getId(), game)) {
                         count++;
-			if (count >= this.minNumberOfTargets)
+            if (count >= this.minNumberOfTargets)
                             return true;
                     }
-		}
+        }
             }
             return false;
-	}
+    }
 
-	@Override
-	public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
+    @Override
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
             Set<UUID> possibleTargets = new HashSet<UUID>();
             for (StackObject stackObject : game.getStack()) {
                 if (stackObject instanceof Spell && filter.match((Spell) stackObject, game)) {
                     if (targetsPlayer(stackObject.getId(), game)) {
                         possibleTargets.add(stackObject.getId());
                     }
-		}
+        }
             }
             return possibleTargets;
-	}
+    }
 
-	@Override
-	public Filter getFilter() {
+    @Override
+    public Filter getFilter() {
             return filter;
-	}
+    }
 
-	private boolean targetsPlayer(UUID id, Game game) {
+    private boolean targetsPlayer(UUID id, Game game) {
             StackObject spell = game.getStack().getStackObject(id);
             if (spell != null) {
-		Ability ability = spell.getStackAbility();
+        Ability ability = spell.getStackAbility();
                 if (ability != null && !ability.getTargets().isEmpty()) {
                     for (Target target : ability.getTargets()) {
                         for (UUID playerId : target.getTargets()) {
@@ -174,11 +174,11 @@ public class Outwit extends CardImpl<Outwit> {
                 }
             }
             return false;
-	}
+    }
 
-	@Override
-	public CustomTargetSpell copy() {
+    @Override
+    public CustomTargetSpell copy() {
             return new CustomTargetSpell(this);
-	}
+    }
     }
 }

@@ -51,61 +51,61 @@ import mage.game.permanent.Permanent;
  */
 public class RelentlessRats extends CardImpl<RelentlessRats> {
 
-	private final static FilterCreaturePermanent filter = new FilterCreaturePermanent();
-	
-	static {
-		filter.getName().add("Relentless Rats");
-	}
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
-	public RelentlessRats(UUID ownerId) {
-		super(ownerId, 173, "Relentless Rats", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
-		this.expansionSetCode = "10E";
-		this.subtype.add("Rat");
-		this.color.setBlack(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+    static {
+        filter.getName().add("Relentless Rats");
+    }
 
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RelentlessRatsEffect()));
-	}
+    public RelentlessRats(UUID ownerId) {
+        super(ownerId, 173, "Relentless Rats", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
+        this.expansionSetCode = "10E";
+        this.subtype.add("Rat");
+        this.color.setBlack(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-	public RelentlessRats(final RelentlessRats card) {
-		super(card);
-	}
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RelentlessRatsEffect()));
+    }
 
-	@Override
-	public RelentlessRats copy() {
-		return new RelentlessRats(this);
-	}
-	
-	class RelentlessRatsEffect extends ContinuousEffectImpl<RelentlessRatsEffect> {
+    public RelentlessRats(final RelentlessRats card) {
+        super(card);
+    }
 
-		public RelentlessRatsEffect() {
-			super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
-			staticText = "{this} gets +1/+1 for each other creature on the battlefield named Relentless Rats";
-		}
+    @Override
+    public RelentlessRats copy() {
+        return new RelentlessRats(this);
+    }
 
-		public RelentlessRatsEffect(final RelentlessRatsEffect effect) {
-			super(effect);
-		}
+    class RelentlessRatsEffect extends ContinuousEffectImpl<RelentlessRatsEffect> {
 
-		@Override
-		public RelentlessRatsEffect copy() {
-			return new RelentlessRatsEffect(this);
-		}
+        public RelentlessRatsEffect() {
+            super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
+            staticText = "{this} gets +1/+1 for each other creature on the battlefield named Relentless Rats";
+        }
 
-		@Override
-		public boolean apply(Game game, Ability source) {
-			int count = game.getBattlefield().count(filter, source.getControllerId(), game) - 1;
-			if (count > 0) {
-				Permanent target = (Permanent) game.getPermanent(source.getSourceId());
-				if (target != null) {
-					target.addPower(count);
-					target.addToughness(count);
-					return true;
-				}
-			}
-			return false;
-		}
+        public RelentlessRatsEffect(final RelentlessRatsEffect effect) {
+            super(effect);
+        }
 
-	}
+        @Override
+        public RelentlessRatsEffect copy() {
+            return new RelentlessRatsEffect(this);
+        }
+
+        @Override
+        public boolean apply(Game game, Ability source) {
+            int count = game.getBattlefield().count(filter, source.getControllerId(), game) - 1;
+            if (count > 0) {
+                Permanent target = (Permanent) game.getPermanent(source.getSourceId());
+                if (target != null) {
+                    target.addPower(count);
+                    target.addToughness(count);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+    }
 }

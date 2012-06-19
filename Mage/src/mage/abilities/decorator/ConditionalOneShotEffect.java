@@ -40,45 +40,45 @@ import mage.game.Game;
  */
 public class ConditionalOneShotEffect extends OneShotEffect<ConditionalOneShotEffect> {
 
-	private OneShotEffect effect;
-	private OneShotEffect otherwiseEffect;
-	private Condition condition;
+    private OneShotEffect effect;
+    private OneShotEffect otherwiseEffect;
+    private Condition condition;
 
-	public ConditionalOneShotEffect(OneShotEffect effect, Condition condition, String text) {
-		this(effect, null, condition, text);
-	}
+    public ConditionalOneShotEffect(OneShotEffect effect, Condition condition, String text) {
+        this(effect, null, condition, text);
+    }
 
-	public ConditionalOneShotEffect(OneShotEffect effect, OneShotEffect otherwiseEffect, Condition condition, String text) {
-		super(effect.getOutcome());
-		this.effect = effect;
-		this.otherwiseEffect = otherwiseEffect;
-		this.condition = condition;
-		this.staticText = text;
-	}
+    public ConditionalOneShotEffect(OneShotEffect effect, OneShotEffect otherwiseEffect, Condition condition, String text) {
+        super(effect.getOutcome());
+        this.effect = effect;
+        this.otherwiseEffect = otherwiseEffect;
+        this.condition = condition;
+        this.staticText = text;
+    }
 
-	public ConditionalOneShotEffect(ConditionalOneShotEffect effect) {
-		super(effect);
-		this.effect = (OneShotEffect) effect.effect.copy();
-		if (effect.otherwiseEffect != null)
-			this.otherwiseEffect = (OneShotEffect) effect.otherwiseEffect.copy();
-		this.condition = effect.condition;
-	}
+    public ConditionalOneShotEffect(ConditionalOneShotEffect effect) {
+        super(effect);
+        this.effect = (OneShotEffect) effect.effect.copy();
+        if (effect.otherwiseEffect != null)
+            this.otherwiseEffect = (OneShotEffect) effect.otherwiseEffect.copy();
+        this.condition = effect.condition;
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		if (condition.apply(game, source)) {
-			effect.setTargetPointer(this.targetPointer);
-			return effect.apply(game, source);
-		} else if (otherwiseEffect != null) {
-			otherwiseEffect.setTargetPointer(this.targetPointer);
-			return otherwiseEffect.apply(game, source);
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        if (condition.apply(game, source)) {
+            effect.setTargetPointer(this.targetPointer);
+            return effect.apply(game, source);
+        } else if (otherwiseEffect != null) {
+            otherwiseEffect.setTargetPointer(this.targetPointer);
+            return otherwiseEffect.apply(game, source);
+        }
+        return false;
+    }
 
-	@Override
-	public ConditionalOneShotEffect copy() {
-		return new ConditionalOneShotEffect(this);
-	}
+    @Override
+    public ConditionalOneShotEffect copy() {
+        return new ConditionalOneShotEffect(this);
+    }
 
 }

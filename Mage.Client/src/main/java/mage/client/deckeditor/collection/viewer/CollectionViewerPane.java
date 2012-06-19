@@ -44,21 +44,21 @@ public class CollectionViewerPane extends MagePane {
 
     public CollectionViewerPane() {
         boolean initialized = false;
-		this.setTitle("Collection Viewier");
+        this.setTitle("Collection Viewier");
         if (Plugins.getInstance().isThemePluginLoaded()) {
-        	Map<String, JComponent> ui = new HashMap<String, JComponent>();
-	        JComponent container = Plugins.getInstance().updateTablePanel(ui);
-			if (container != null) {
-				collectionViewerPanel = new CollectionViewerPanel();
-				initComponents(container);
-    			container.add(collectionViewerPanel);
-    			container.setOpaque(false);
-    			collectionViewerPanel.setOpaque(false);
-				initialized = true;
-			}
+            Map<String, JComponent> ui = new HashMap<String, JComponent>();
+            JComponent container = Plugins.getInstance().updateTablePanel(ui);
+            if (container != null) {
+                collectionViewerPanel = new CollectionViewerPanel();
+                initComponents(container);
+                container.add(collectionViewerPanel);
+                container.setOpaque(false);
+                collectionViewerPanel.setOpaque(false);
+                initialized = true;
+            }
         }
         if (!initialized) {
-        	initComponents(null);
+            initComponents(null);
         }
     }
 

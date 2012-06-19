@@ -46,7 +46,7 @@ public class CoralMerfolk extends CardImpl<CoralMerfolk> {
         this.color.setBlue(true);
         this.subtype.add("Merfolk");
         this.power = new MageInt(2);
-	this.toughness = new MageInt(1);
+    this.toughness = new MageInt(1);
     }
 
     public CoralMerfolk(final CoralMerfolk card) {

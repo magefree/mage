@@ -64,8 +64,8 @@ public class FirewildBorderpost extends CardImpl<FirewildBorderpost> {
     public FirewildBorderpost (UUID ownerId) {
         super(ownerId, 54, "Firewild Borderpost", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}{R}{G}");
         this.expansionSetCode = "ARB";
-		this.color.setRed(true);
-		this.color.setGreen(true);
+        this.color.setRed(true);
+        this.color.setGreen(true);
         Cost cost = new CompositeCost(new GenericManaCost(1), new ReturnToHandTargetCost(new TargetControlledPermanent(filter)), COST_DESCRIPTION);
         this.getSpellAbility().addAlternativeCost(new AlternativeCostImpl(ALTERNATIVE_COST_DESCRIPTION, cost));
         this.addAbility(new EntersBattlefieldTappedAbility());

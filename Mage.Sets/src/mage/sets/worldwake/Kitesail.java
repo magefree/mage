@@ -52,8 +52,8 @@ public class Kitesail extends CardImpl<Kitesail> {
         this.subtype.add("Equipment");
 
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEquippedEffect(1, 0)));
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), Constants.AttachmentType.EQUIPMENT)));
-		this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), Constants.AttachmentType.EQUIPMENT)));
+        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(2)));
     }
 
     public Kitesail(final Kitesail card) {

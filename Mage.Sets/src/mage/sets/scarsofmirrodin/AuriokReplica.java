@@ -51,84 +51,84 @@ import mage.target.TargetSource;
  */
 public class AuriokReplica extends CardImpl<AuriokReplica> {
 
-	public AuriokReplica(UUID ownerId) {
-		super(ownerId, 138, "Auriok Replica", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
-		this.expansionSetCode = "SOM";
-		this.subtype.add("Cleric");
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+    public AuriokReplica(UUID ownerId) {
+        super(ownerId, 138, "Auriok Replica", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
+        this.expansionSetCode = "SOM";
+        this.subtype.add("Cleric");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AuriokReplicaEffect(), new ManaCostsImpl("{W}"));
-		ability.addCost(new SacrificeSourceCost());
-		this.addAbility(ability);
-	}
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AuriokReplicaEffect(), new ManaCostsImpl("{W}"));
+        ability.addCost(new SacrificeSourceCost());
+        this.addAbility(ability);
+    }
 
-	public AuriokReplica(final AuriokReplica card) {
-		super(card);
-	}
+    public AuriokReplica(final AuriokReplica card) {
+        super(card);
+    }
 
-	@Override
-	public AuriokReplica copy() {
-		return new AuriokReplica(this);
-	}
+    @Override
+    public AuriokReplica copy() {
+        return new AuriokReplica(this);
+    }
 
 }
 
 class AuriokReplicaEffect extends PreventionEffectImpl<AuriokReplicaEffect> {
 
-	private TargetSource target = new TargetSource();
+    private TargetSource target = new TargetSource();
 
-	public AuriokReplicaEffect() {
-		super(Duration.EndOfTurn);
-		staticText = "Prevent all damage a source of your choice would deal to you this turn";
-	}
+    public AuriokReplicaEffect() {
+        super(Duration.EndOfTurn);
+        staticText = "Prevent all damage a source of your choice would deal to you this turn";
+    }
 
-	public AuriokReplicaEffect(final AuriokReplicaEffect effect) {
-		super(effect);
-		this.target = effect.target.copy();
-	}
+    public AuriokReplicaEffect(final AuriokReplicaEffect effect) {
+        super(effect);
+        this.target = effect.target.copy();
+    }
 
-	@Override
-	public AuriokReplicaEffect copy() {
-		return new AuriokReplicaEffect(this);
-	}
+    @Override
+    public AuriokReplicaEffect copy() {
+        return new AuriokReplicaEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
 
-	@Override
-	public void init(Ability source, Game game) {
-		this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), game);
-	}
+    @Override
+    public void init(Ability source, Game game) {
+        this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), game);
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		if (event.getTargetId().equals(source.getControllerId()) && event.getSourceId().equals(target.getFirstTarget())) {
-			preventDamage(event, source, target.getFirstTarget(), game);
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        if (event.getTargetId().equals(source.getControllerId()) && event.getSourceId().equals(target.getFirstTarget())) {
+            preventDamage(event, source, target.getFirstTarget(), game);
+            return true;
+        }
+        return false;
+    }
 
-	private void preventDamage(GameEvent event, Ability source, UUID target, Game game) {
-		GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, target, source.getId(), source.getControllerId(), event.getAmount(), false);
-		if (!game.replaceEvent(preventEvent)) {
-			int damage = event.getAmount();
-			event.setAmount(0);
-			game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, target, source.getId(), source.getControllerId(), damage));
-		}
-	}
+    private void preventDamage(GameEvent event, Ability source, UUID target, Game game) {
+        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, target, source.getId(), source.getControllerId(), event.getAmount(), false);
+        if (!game.replaceEvent(preventEvent)) {
+            int damage = event.getAmount();
+            event.setAmount(0);
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, target, source.getId(), source.getControllerId(), damage));
+        }
+    }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (!this.used && super.applies(event, source, game)) {
-			if (event.getTargetId().equals(source.getControllerId()) && event.getSourceId().equals(target.getFirstTarget())) {
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (!this.used && super.applies(event, source, game)) {
+            if (event.getTargetId().equals(source.getControllerId()) && event.getSourceId().equals(target.getFirstTarget())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

@@ -36,22 +36,22 @@ import mage.Constants.CardType;
  */
 public class FilterControlledCreaturePermanent<T extends FilterControlledCreaturePermanent> extends FilterControlledPermanent<FilterControlledCreaturePermanent<T>> {
 
-	public FilterControlledCreaturePermanent() {
-		this("creature you control");
-	}
+    public FilterControlledCreaturePermanent() {
+        this("creature you control");
+    }
 
-	public FilterControlledCreaturePermanent(String name) {
-		super(name);
-		cardType.add(CardType.CREATURE);
-	}
+    public FilterControlledCreaturePermanent(String name) {
+        super(name);
+        cardType.add(CardType.CREATURE);
+    }
 
-	public FilterControlledCreaturePermanent(final FilterControlledCreaturePermanent filter) {
-		super(filter);
-	}
+    public FilterControlledCreaturePermanent(final FilterControlledCreaturePermanent filter) {
+        super(filter);
+    }
 
-	@Override
-	public FilterControlledCreaturePermanent copy() {
-		return new FilterControlledCreaturePermanent(this);
-	}
+    @Override
+    public FilterControlledCreaturePermanent copy() {
+        return new FilterControlledCreaturePermanent(this);
+    }
 
 }

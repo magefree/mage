@@ -51,7 +51,7 @@ public class CorruptedHarvester extends CardImpl<CorruptedHarvester> {
         super(ownerId, 59, "Corrupted Harvester", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Horror");
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(3);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}"));

@@ -58,7 +58,7 @@ public class HondenOfSeeingWinds extends CardImpl<HondenOfSeeingWinds> {
         this.supertype.add("Legendary");
         this.subtype.add("Shrine");
         this.color.setBlue(true);
-        
+
         // At the beginning of your upkeep, draw a card for each Shrine you control.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DrawCardControllerEffect(new PermanentsOnBattlefieldCount(filter)), Constants.TargetController.YOU, false));
     }

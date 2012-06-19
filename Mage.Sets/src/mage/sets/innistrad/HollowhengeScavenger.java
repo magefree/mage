@@ -45,19 +45,19 @@ import java.util.UUID;
  */
 public class HollowhengeScavenger extends CardImpl<HollowhengeScavenger> {
 
-	private final static String staticText = "Morbid - When {this} enters the battlefield, if a creature died this turn, you gain 5 life.";
+    private final static String staticText = "Morbid - When {this} enters the battlefield, if a creature died this turn, you gain 5 life.";
 
     public HollowhengeScavenger(UUID ownerId) {
-		super(ownerId, 188, "Hollowhenge Scavenger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
-		this.expansionSetCode = "ISD";
-		this.color.setGreen(true);
-		this.subtype.add("Elemental");
-		this.power = new MageInt(4);
-		this.toughness = new MageInt(5);
+        super(ownerId, 188, "Hollowhenge Scavenger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
+        this.expansionSetCode = "ISD";
+        this.color.setGreen(true);
+        this.subtype.add("Elemental");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(5);
 
-		// Morbid - When Hollowhenge Scavenger enters the battlefield, if a creature died this turn, you gain 5 life.
-		TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new GainLifeEffect(5));
-		this.addAbility(new ConditionalTriggeredAbility(ability, MorbidCondition.getInstance(), staticText));
+        // Morbid - When Hollowhenge Scavenger enters the battlefield, if a creature died this turn, you gain 5 life.
+        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new GainLifeEffect(5));
+        this.addAbility(new ConditionalTriggeredAbility(ability, MorbidCondition.getInstance(), staticText));
     }
 
     public HollowhengeScavenger(final HollowhengeScavenger card) {

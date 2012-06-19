@@ -62,25 +62,25 @@ import mage.util.CardUtil;
 public class KarnLiberated extends CardImpl<KarnLiberated> {
 
     private UUID exileId = UUID.randomUUID();
-    
+
     public KarnLiberated(UUID ownerId) {
         super(ownerId, 1, "Karn Liberated", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{7}");
         this.expansionSetCode = "NPH";
         this.subtype.add("Karn");
-		this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(6)), ""));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(6)), ""));
 
         // +4: Target player exiles a card from his or her hand.
         LoyaltyAbility ability1 = new LoyaltyAbility(new ExileFromZoneTargetEffect(Zone.HAND, exileId, "Karn Liberated", new FilterCard()), 4);
-		ability1.addTarget(new TargetPlayer());
-		this.addAbility(ability1);
+        ability1.addTarget(new TargetPlayer());
+        this.addAbility(ability1);
 
         // -3: Exile target permanent.
-		LoyaltyAbility ability2 = new LoyaltyAbility(new ExileTargetEffect(exileId, "Karn Liberated"), -3);
-		ability2.addTarget(new TargetPermanent());
-		this.addAbility(ability2);
-        
+        LoyaltyAbility ability2 = new LoyaltyAbility(new ExileTargetEffect(exileId, "Karn Liberated"), -3);
+        ability2.addTarget(new TargetPermanent());
+        this.addAbility(ability2);
+
         // -14: Restart the game, leaving in exile all non-Aura permanent cards exiled with Karn Liberated. Then put those cards onto the battlefield under your control.
-		this.addAbility(new LoyaltyAbility(new KarnLiberatedEffect(exileId), -14));
+        this.addAbility(new LoyaltyAbility(new KarnLiberatedEffect(exileId), -14));
     }
 
     public KarnLiberated(final KarnLiberated card) {
@@ -96,18 +96,18 @@ public class KarnLiberated extends CardImpl<KarnLiberated> {
 class KarnLiberatedEffect extends OneShotEffect<KarnLiberatedEffect> {
 
     private UUID exileId;
-    
+
     public KarnLiberatedEffect(UUID exileId) {
         super(Outcome.ExtraTurn);
         this.exileId = exileId;
         this.staticText = "Restart the game, leaving in exile all non-Aura permanent cards exiled with {this}. Then put those cards onto the battlefield under your control.";
     }
-    
+
     public KarnLiberatedEffect(final KarnLiberatedEffect effect) {
         super(effect);
         this.exileId = effect.exileId;
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         List<Card> cards = new ArrayList<Card>();
@@ -132,9 +132,9 @@ class KarnLiberatedEffect extends OneShotEffect<KarnLiberatedEffect> {
             player.init(game);
         }
         for (Card card: cards) {
-			if ( CardUtil.isPermanentCard(card) && !card.getSubtype().contains("Aura") ) {
-				game.getExile().add(exileId, "Karn Liberated", card);
-			}
+            if ( CardUtil.isPermanentCard(card) && !card.getSubtype().contains("Aura") ) {
+                game.getExile().add(exileId, "Karn Liberated", card);
+            }
         }
         DelayedTriggeredAbility delayedAbility = new KarnLiberatedDelayedTriggeredAbility(exileId);
         delayedAbility.setSourceId(source.getSourceId());
@@ -148,7 +148,7 @@ class KarnLiberatedEffect extends OneShotEffect<KarnLiberatedEffect> {
     public KarnLiberatedEffect copy() {
         return new KarnLiberatedEffect(this);
     }
-    
+
 }
 
 class KarnLiberatedDelayedTriggeredAbility extends DelayedTriggeredAbility<KarnLiberatedDelayedTriggeredAbility> {
@@ -185,12 +185,12 @@ class KarnLiberatedDelayedEffect extends OneShotEffect<KarnLiberatedDelayedEffec
         this.exileId = exileId;
         this.staticText = "Put those cards onto the battlefield under your control";
     }
-    
+
     public KarnLiberatedDelayedEffect(final KarnLiberatedDelayedEffect effect) {
         super(effect);
         this.exileId = effect.exileId;
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         ExileZone exile = game.getExile().getExileZone(exileId);
@@ -208,5 +208,5 @@ class KarnLiberatedDelayedEffect extends OneShotEffect<KarnLiberatedDelayedEffec
     public KarnLiberatedDelayedEffect copy() {
         return new KarnLiberatedDelayedEffect(this);
     }
-    
+
 }

@@ -52,7 +52,7 @@ public class InfectiousHorror extends CardImpl<InfectiousHorror> {
         this.expansionSetCode = "CON";
         this.subtype.add("Zombie");
         this.subtype.add("Horror");
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(new AttacksTriggeredAbility(new InfectiousHorrorEffect(), false));

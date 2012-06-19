@@ -73,53 +73,53 @@ public class WindbornMuse extends CardImpl<WindbornMuse> {
 
 class WindbornMuseReplacementEffect extends ReplacementEffectImpl<WindbornMuseReplacementEffect> {
 
-	private static final String effectText = "Creatures can't attack you unless their controller pays {2} for each creature he or she controls that's attacking you";
+    private static final String effectText = "Creatures can't attack you unless their controller pays {2} for each creature he or she controls that's attacking you";
 
-	WindbornMuseReplacementEffect ( ) {
-		super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
-		staticText = effectText;
-	}
+    WindbornMuseReplacementEffect ( ) {
+        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        staticText = effectText;
+    }
 
-	WindbornMuseReplacementEffect ( WindbornMuseReplacementEffect effect ) {
-		super(effect);
-	}
+    WindbornMuseReplacementEffect ( WindbornMuseReplacementEffect effect ) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		throw new UnsupportedOperationException("Not supported.");
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        throw new UnsupportedOperationException("Not supported.");
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		if ( event.getType() == GameEvent.EventType.DECLARE_ATTACKER) {
-			Player player = game.getPlayer(event.getPlayerId());
-			if ( player != null && event.getTargetId().equals(source.getControllerId())) {
-				ManaCostsImpl propagandaTax = new ManaCostsImpl("{2}");
-				if ( propagandaTax.canPay(source.getSourceId(), event.getPlayerId(), game) &&
-					 player.chooseUse(Constants.Outcome.Benefit, "Pay {2} to declare attacker?", game) )
-				{
-					if (propagandaTax.payOrRollback(source, game, this.getId(), event.getPlayerId())) {
-						return false;
-					}
-				}
-			}
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        if ( event.getType() == GameEvent.EventType.DECLARE_ATTACKER) {
+            Player player = game.getPlayer(event.getPlayerId());
+            if ( player != null && event.getTargetId().equals(source.getControllerId())) {
+                ManaCostsImpl propagandaTax = new ManaCostsImpl("{2}");
+                if ( propagandaTax.canPay(source.getSourceId(), event.getPlayerId(), game) &&
+                     player.chooseUse(Constants.Outcome.Benefit, "Pay {2} to declare attacker?", game) )
+                {
+                    if (propagandaTax.payOrRollback(source, game, this.getId(), event.getPlayerId())) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		if ( event.getType() == GameEvent.EventType.DECLARE_ATTACKER && event.getTargetId().equals(source.getControllerId()) ) {
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if ( event.getType() == GameEvent.EventType.DECLARE_ATTACKER && event.getTargetId().equals(source.getControllerId()) ) {
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public WindbornMuseReplacementEffect copy() {
-		return new WindbornMuseReplacementEffect(this);
-	}
+    @Override
+    public WindbornMuseReplacementEffect copy() {
+        return new WindbornMuseReplacementEffect(this);
+    }
 
 }
 

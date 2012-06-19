@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
 public class KemuriOnna extends CardImpl<KemuriOnna> {
 
     private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
-    
+
     public KemuriOnna(UUID ownerId) {
         super(ownerId, 76, "Kemuri-Onna", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");
         this.expansionSetCode = "SOK";

@@ -51,163 +51,163 @@ import org.apache.log4j.Logger;
  */
 public class DraftController {
 
-	private final static Logger logger = Logger.getLogger(GameController.class);
-	public static final String INIT_FILE_PATH = "config" + File.separator + "init.txt";
+    private final static Logger logger = Logger.getLogger(GameController.class);
+    public static final String INIT_FILE_PATH = "config" + File.separator + "init.txt";
 
-	private ConcurrentHashMap<UUID, DraftSession> draftSessions = new ConcurrentHashMap<UUID, DraftSession>();
-	private ConcurrentHashMap<UUID, UUID> userPlayerMap;
-	private UUID draftSessionId;
-	private Draft draft;
-	private UUID tableId;
+    private ConcurrentHashMap<UUID, DraftSession> draftSessions = new ConcurrentHashMap<UUID, DraftSession>();
+    private ConcurrentHashMap<UUID, UUID> userPlayerMap;
+    private UUID draftSessionId;
+    private Draft draft;
+    private UUID tableId;
 
-	public DraftController(Draft draft, ConcurrentHashMap<UUID, UUID> userPlayerMap, UUID tableId) {
-		draftSessionId = UUID.randomUUID();
-		this.userPlayerMap = userPlayerMap;
-		this.draft = draft;
-		this.tableId = tableId;
-		init();
-	}
+    public DraftController(Draft draft, ConcurrentHashMap<UUID, UUID> userPlayerMap, UUID tableId) {
+        draftSessionId = UUID.randomUUID();
+        this.userPlayerMap = userPlayerMap;
+        this.draft = draft;
+        this.tableId = tableId;
+        init();
+    }
 
-	private void init() {
-		draft.addTableEventListener(
-			new Listener<TableEvent> () {
-				@Override
-				public void event(TableEvent event) {
-					try {
-						switch (event.getEventType()) {
-							case UPDATE:
-								updateDraft();
-								break;
-							case END:
-								endDraft();
-								break;
-						}
-					}
-					catch (MageException ex) {
-						logger.fatal("Table event listener error", ex);
-					}
-				}
-			}
-		);
-		draft.addPlayerQueryEventListener(
-			new Listener<PlayerQueryEvent> () {
-				@Override
-				public void event(PlayerQueryEvent event) {
-					try {
-						switch (event.getQueryType()) {
-							case PICK_CARD:
-								pickCard(event.getPlayerId(), event.getMax());
-								break;
-						}
-					}
-					catch (MageException ex) {
-						logger.fatal("Table event listener error", ex);
-					}
-				}
-			}
-		);
-		for (DraftPlayer player: draft.getPlayers()) {
-			if (!player.getPlayer().isHuman()) {
-				player.setJoined();
-				logger.info("player " + player.getPlayer().getId() + " has joined draft " + draft.getId());
-			}
-		}
-		checkStart();
-	}
+    private void init() {
+        draft.addTableEventListener(
+            new Listener<TableEvent> () {
+                @Override
+                public void event(TableEvent event) {
+                    try {
+                        switch (event.getEventType()) {
+                            case UPDATE:
+                                updateDraft();
+                                break;
+                            case END:
+                                endDraft();
+                                break;
+                        }
+                    }
+                    catch (MageException ex) {
+                        logger.fatal("Table event listener error", ex);
+                    }
+                }
+            }
+        );
+        draft.addPlayerQueryEventListener(
+            new Listener<PlayerQueryEvent> () {
+                @Override
+                public void event(PlayerQueryEvent event) {
+                    try {
+                        switch (event.getQueryType()) {
+                            case PICK_CARD:
+                                pickCard(event.getPlayerId(), event.getMax());
+                                break;
+                        }
+                    }
+                    catch (MageException ex) {
+                        logger.fatal("Table event listener error", ex);
+                    }
+                }
+            }
+        );
+        for (DraftPlayer player: draft.getPlayers()) {
+            if (!player.getPlayer().isHuman()) {
+                player.setJoined();
+                logger.info("player " + player.getPlayer().getId() + " has joined draft " + draft.getId());
+            }
+        }
+        checkStart();
+    }
 
-	private UUID getPlayerId(UUID userId) {
-		return userPlayerMap.get(userId);
-	}
+    private UUID getPlayerId(UUID userId) {
+        return userPlayerMap.get(userId);
+    }
 
-	public void join(UUID userId) {
-		UUID playerId = userPlayerMap.get(userId);
-		DraftSession draftSession = new DraftSession(draft, userId, playerId);
-		draftSessions.put(playerId, draftSession);
-		UserManager.getInstance().getUser(userId).addDraft(playerId, draftSession);
-		logger.info("User " + UserManager.getInstance().getUser(userId).getName() + " has joined draft " + draft.getId());
-		draft.getPlayer(playerId).setJoined();
-		checkStart();
-	}
+    public void join(UUID userId) {
+        UUID playerId = userPlayerMap.get(userId);
+        DraftSession draftSession = new DraftSession(draft, userId, playerId);
+        draftSessions.put(playerId, draftSession);
+        UserManager.getInstance().getUser(userId).addDraft(playerId, draftSession);
+        logger.info("User " + UserManager.getInstance().getUser(userId).getName() + " has joined draft " + draft.getId());
+        draft.getPlayer(playerId).setJoined();
+        checkStart();
+    }
 
-	private synchronized void startDraft() {
-		for (final Entry<UUID, DraftSession> entry: draftSessions.entrySet()) {
-			if (!entry.getValue().init()) {
-				logger.fatal("Unable to initialize client");
-				//TODO: generate client error message
-				return;
-			}
-		}
-		draft.start();
-	}
+    private synchronized void startDraft() {
+        for (final Entry<UUID, DraftSession> entry: draftSessions.entrySet()) {
+            if (!entry.getValue().init()) {
+                logger.fatal("Unable to initialize client");
+                //TODO: generate client error message
+                return;
+            }
+        }
+        draft.start();
+    }
 
-	private void checkStart() {
-		if (allJoined()) {
-			ThreadExecutor.getInstance().getCallExecutor().execute(
-				new Runnable() {
-					@Override
-					public void run() {
-						startDraft();
-					}
-			});
-		}
-	}
+    private void checkStart() {
+        if (allJoined()) {
+            ThreadExecutor.getInstance().getCallExecutor().execute(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        startDraft();
+                    }
+            });
+        }
+    }
 
-	private boolean allJoined() {
-		if (!draft.allJoined())
-			return false;
-		for (DraftPlayer player: draft.getPlayers()) {
-			if (player.getPlayer().isHuman() && draftSessions.get(player.getPlayer().getId()) == null) {
-				return false;
-			}
-		}
-		return true;
-	}
+    private boolean allJoined() {
+        if (!draft.allJoined())
+            return false;
+        for (DraftPlayer player: draft.getPlayers()) {
+            if (player.getPlayer().isHuman() && draftSessions.get(player.getPlayer().getId()) == null) {
+                return false;
+            }
+        }
+        return true;
+    }
 
-	private void leave(UUID userId) {
-		draft.leave(getPlayerId(userId));
-	}
+    private void leave(UUID userId) {
+        draft.leave(getPlayerId(userId));
+    }
 
-	private void endDraft() throws MageException {
-		for (final DraftSession draftSession: draftSessions.values()) {
-			draftSession.draftOver();
-			draftSession.removeDraft();
-		}
-		TableManager.getInstance().endDraft(tableId, draft);
-	}
+    private void endDraft() throws MageException {
+        for (final DraftSession draftSession: draftSessions.values()) {
+            draftSession.draftOver();
+            draftSession.removeDraft();
+        }
+        TableManager.getInstance().endDraft(tableId, draft);
+    }
 
-	public void kill(UUID userId) {
-		if (userPlayerMap.containsKey(userId)) {
-			draftSessions.get(userPlayerMap.get(userId)).setKilled();
-			draftSessions.remove(userPlayerMap.get(userId));
-			leave(userId);
-			userPlayerMap.remove(userId);
-		}
-	}
+    public void kill(UUID userId) {
+        if (userPlayerMap.containsKey(userId)) {
+            draftSessions.get(userPlayerMap.get(userId)).setKilled();
+            draftSessions.remove(userPlayerMap.get(userId));
+            leave(userId);
+            userPlayerMap.remove(userId);
+        }
+    }
 
-	public void timeout(UUID userId) {
-		if (userPlayerMap.containsKey(userId)) {
-			draft.autoPick(userPlayerMap.get(userId));
-			logger.info("Draft pick timeout - autopick for player: " + userPlayerMap.get(userId));
-		}
-	}
+    public void timeout(UUID userId) {
+        if (userPlayerMap.containsKey(userId)) {
+            draft.autoPick(userPlayerMap.get(userId));
+            logger.info("Draft pick timeout - autopick for player: " + userPlayerMap.get(userId));
+        }
+    }
 
-	public UUID getSessionId() {
-		return this.draftSessionId;
-	}
+    public UUID getSessionId() {
+        return this.draftSessionId;
+    }
 
-	public DraftPickView sendCardPick(UUID userId, UUID cardId) {
-		return draftSessions.get(userPlayerMap.get(userId)).sendCardPick(cardId);
-	}
+    public DraftPickView sendCardPick(UUID userId, UUID cardId) {
+        return draftSessions.get(userPlayerMap.get(userId)).sendCardPick(cardId);
+    }
 
-	private synchronized void updateDraft() throws MageException {
-		for (final Entry<UUID, DraftSession> entry: draftSessions.entrySet()) {
-			entry.getValue().update();
-		}
-	}
+    private synchronized void updateDraft() throws MageException {
+        for (final Entry<UUID, DraftSession> entry: draftSessions.entrySet()) {
+            entry.getValue().update();
+        }
+    }
 
-	private synchronized void pickCard(UUID playerId, int timeout) throws MageException {
-		if (draftSessions.containsKey(playerId))
-			draftSessions.get(playerId).pickCard(timeout);
-	}
+    private synchronized void pickCard(UUID playerId, int timeout) throws MageException {
+        if (draftSessions.containsKey(playerId))
+            draftSessions.get(playerId).pickCard(timeout);
+    }
 
 }

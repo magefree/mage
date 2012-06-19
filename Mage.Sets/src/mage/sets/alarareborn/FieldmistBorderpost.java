@@ -64,8 +64,8 @@ public class FieldmistBorderpost extends CardImpl<FieldmistBorderpost> {
     public FieldmistBorderpost (UUID ownerId) {
         super(ownerId, 5, "Fieldmist Borderpost", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}{W}{U}");
         this.expansionSetCode = "ARB";
-		this.color.setWhite(true);
-		this.color.setBlue(true);
+        this.color.setWhite(true);
+        this.color.setBlue(true);
         Cost cost = new CompositeCost(new GenericManaCost(1), new ReturnToHandTargetCost(new TargetControlledPermanent(filter)), COST_DESCRIPTION);
         this.getSpellAbility().addAlternativeCost(new AlternativeCostImpl(ALTERNATIVE_COST_DESCRIPTION, cost));
         this.addAbility(new EntersBattlefieldTappedAbility());

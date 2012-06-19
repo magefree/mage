@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class DemonsHorn extends mage.sets.tenth.DemonsHorn {
 
-	public DemonsHorn(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 209;
-		this.expansionSetCode = "M10";
-	}
+    public DemonsHorn(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 209;
+        this.expansionSetCode = "M10";
+    }
 
-	public DemonsHorn(final DemonsHorn card) {
-		super(card);
-	}
+    public DemonsHorn(final DemonsHorn card) {
+        super(card);
+    }
 
-	@Override
-	public DemonsHorn copy() {
-		return new DemonsHorn(this);
-	}
+    @Override
+    public DemonsHorn copy() {
+        return new DemonsHorn(this);
+    }
 
 }

@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class DrownedCatacomb extends mage.sets.magic2010.DrownedCatacomb {
 
-	public DrownedCatacomb(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 224;
-		this.expansionSetCode = "M11";
-	}
+    public DrownedCatacomb(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 224;
+        this.expansionSetCode = "M11";
+    }
 
-	public DrownedCatacomb(final DrownedCatacomb card) {
-		super(card);
-	}
+    public DrownedCatacomb(final DrownedCatacomb card) {
+        super(card);
+    }
 
-	@Override
-	public DrownedCatacomb copy() {
-		return new DrownedCatacomb(this);
-	}
+    @Override
+    public DrownedCatacomb copy() {
+        return new DrownedCatacomb(this);
+    }
 
 }

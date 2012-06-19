@@ -54,7 +54,7 @@ import java.util.UUID;
 public class MayorOfAvabruck extends CardImpl<MayorOfAvabruck> {
 
     private static final String ruleText = "Other Human creatures you control get +1/+1";
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Human creatures");
 
     static {

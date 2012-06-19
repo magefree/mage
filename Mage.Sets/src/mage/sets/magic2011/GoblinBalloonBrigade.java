@@ -46,25 +46,25 @@ import mage.cards.CardImpl;
  */
 public class GoblinBalloonBrigade extends CardImpl<GoblinBalloonBrigade> {
 
-	public GoblinBalloonBrigade(UUID ownerId) {
-		super(ownerId, 140, "Goblin Balloon Brigade", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Goblin");
-		this.subtype.add("Warrior");
-		this.color.setRed(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
+    public GoblinBalloonBrigade(UUID ownerId) {
+        super(ownerId, 140, "Goblin Balloon Brigade", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Goblin");
+        this.subtype.add("Warrior");
+        this.color.setRed(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{R}")));
-	}
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{R}")));
+    }
 
-	public GoblinBalloonBrigade(final GoblinBalloonBrigade card) {
-		super(card);
-	}
+    public GoblinBalloonBrigade(final GoblinBalloonBrigade card) {
+        super(card);
+    }
 
-	@Override
-	public GoblinBalloonBrigade copy() {
-		return new GoblinBalloonBrigade(this);
-	}
+    @Override
+    public GoblinBalloonBrigade copy() {
+        return new GoblinBalloonBrigade(this);
+    }
 
 }

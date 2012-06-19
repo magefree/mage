@@ -58,7 +58,7 @@ public class OmenMachine extends CardImpl<OmenMachine> {
 
         // Players can't draw cards.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OmenMachineEffect()));
-        
+
         // At the beginning of each player's draw step, that player exiles the top card of his or her library. If it's a land card, the player puts it onto the battlefield. Otherwise, the player casts it without paying its mana cost if able.
         this.addAbility(new OmenMachineAbility());
     }
@@ -79,11 +79,11 @@ class OmenMachineEffect extends ReplacementEffectImpl<OmenMachineEffect> {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
         staticText = "Players can't draw cards";
     }
-    
+
     public OmenMachineEffect(final OmenMachineEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         return true;
@@ -106,37 +106,37 @@ class OmenMachineEffect extends ReplacementEffectImpl<OmenMachineEffect> {
         }
         return false;
     }
-    
+
 }
 
 class OmenMachineAbility extends TriggeredAbilityImpl<OmenMachineAbility> {
 
-	public OmenMachineAbility() {
-		super(Zone.BATTLEFIELD, new OmenMachineEffect2());
-	}
+    public OmenMachineAbility() {
+        super(Zone.BATTLEFIELD, new OmenMachineEffect2());
+    }
 
-	public OmenMachineAbility(final OmenMachineAbility ability) {
-		super(ability);
-	}
+    public OmenMachineAbility(final OmenMachineAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public OmenMachineAbility copy() {
-		return new OmenMachineAbility(this);
-	}
+    @Override
+    public OmenMachineAbility copy() {
+        return new OmenMachineAbility(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.DRAW_STEP_PRE) {
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.DRAW_STEP_PRE) {
             this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
-			return true;
-		}
-		return false;
-	}
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "At the beginning of each player's draw step, that player exiles the top card of his or her library. If it's a land card, the player puts it onto the battlefield. Otherwise, the player casts it without paying its mana cost if able.";
-	}
+    @Override
+    public String getRule() {
+        return "At the beginning of each player's draw step, that player exiles the top card of his or her library. If it's a land card, the player puts it onto the battlefield. Otherwise, the player casts it without paying its mana cost if able.";
+    }
 
 }
 
@@ -145,11 +145,11 @@ class OmenMachineEffect2 extends OneShotEffect<OmenMachineEffect2> {
     public OmenMachineEffect2() {
         super(Outcome.PlayForFree);
     }
-    
+
     public OmenMachineEffect2(final OmenMachineEffect2 effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
@@ -173,5 +173,5 @@ class OmenMachineEffect2 extends OneShotEffect<OmenMachineEffect2> {
     public OmenMachineEffect2 copy() {
         return new OmenMachineEffect2(this);
     }
-    
+
 }

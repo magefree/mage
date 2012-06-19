@@ -48,14 +48,14 @@ import java.util.UUID;
 public class GhostlyFlicker extends CardImpl<GhostlyFlicker> {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifacts, creatures, and/or lands you control");
-    
+
     static {
         filter.getCardType().add(CardType.CREATURE);
         filter.getCardType().add(CardType.LAND);
         filter.getCardType().add(CardType.ARTIFACT);
         filter.setScopeCardType(Filter.ComparisonScope.Any);
     }
-    
+
     public GhostlyFlicker(UUID ownerId) {
         super(ownerId, 57, "Ghostly Flicker", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "AVR";

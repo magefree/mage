@@ -42,30 +42,30 @@ import javax.swing.SpinnerNumberModel;
  */
 public class PickNumberDialog extends MageDialog {
 
-	private boolean cancel;
+    private boolean cancel;
 
     /** Creates new form PickNumberDialog */
     public PickNumberDialog() {
         initComponents();
-		this.setModal(true);
+        this.setModal(true);
     }
 
-	public void showDialog(int min, int max, String message) {
-		this.spnAmount.setModel(new SpinnerNumberModel(min, min, max, 1));
-		this.lblMessage.setText(message);
-		this.btnOk.setVisible(true);
-		this.btnCancel.setVisible(false);
-		this.pack();
-		this.setVisible(true);
-	}
+    public void showDialog(int min, int max, String message) {
+        this.spnAmount.setModel(new SpinnerNumberModel(min, min, max, 1));
+        this.lblMessage.setText(message);
+        this.btnOk.setVisible(true);
+        this.btnCancel.setVisible(false);
+        this.pack();
+        this.setVisible(true);
+    }
 
-	public int getAmount() {
-		return ((Number)spnAmount.getValue()).intValue();
-	}
+    public int getAmount() {
+        return ((Number)spnAmount.getValue()).intValue();
+    }
 
-	public boolean isCancel() {
-		return cancel;
-	}
+    public boolean isCancel() {
+        return cancel;
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -102,7 +102,7 @@ public class PickNumberDialog extends MageDialog {
 
         lblMessage.setBorder(null);
         lblMessage.setEditable(false);
-        lblMessage.setCursor(null	);
+        lblMessage.setCursor(null    );
         lblMessage.setFocusable(false);
         lblMessage.setOpaque(false);
         jScrollPane1.setViewportView(lblMessage);
@@ -143,15 +143,15 @@ public class PickNumberDialog extends MageDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-	private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-		this.cancel = false;
-		this.hideDialog();
-	}//GEN-LAST:event_btnOkActionPerformed
+    private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
+        this.cancel = false;
+        this.hideDialog();
+    }//GEN-LAST:event_btnOkActionPerformed
 
-	private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-		this.cancel = true;
-		this.hideDialog();
-	}//GEN-LAST:event_btnCancelActionPerformed
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        this.cancel = true;
+        this.hideDialog();
+    }//GEN-LAST:event_btnCancelActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;

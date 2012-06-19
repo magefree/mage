@@ -56,14 +56,14 @@ public class MagefireWings extends CardImpl<MagefireWings> {
         super(ownerId, 88, "Magefire Wings", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}{R}");
         this.expansionSetCode = "ARB";
         this.subtype.add("Aura");
-		this.color.setBlue(true);
-		this.color.setRed(true);
+        this.color.setBlue(true);
+        this.color.setRed(true);
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		this.addAbility(ability);
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
 
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 0, Duration.WhileOnBattlefield)));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), Constants.AttachmentType.AURA)));

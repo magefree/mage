@@ -44,25 +44,25 @@ import mage.cards.CardImpl;
  */
 public class ReassemblingSkeleton extends CardImpl<ReassemblingSkeleton> {
 
-	public ReassemblingSkeleton(UUID ownerId) {
-		super(ownerId, 112, "Reassembling Skeleton", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Skeleton");
-		this.subtype.add("Warrior");
-		this.color.setBlack(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
+    public ReassemblingSkeleton(UUID ownerId) {
+        super(ownerId, 112, "Reassembling Skeleton", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Skeleton");
+        this.subtype.add("Warrior");
+        this.color.setBlack(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-		this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(true), new ManaCostsImpl("{1}{B}")));
-	}
+        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(true), new ManaCostsImpl("{1}{B}")));
+    }
 
-	public ReassemblingSkeleton(final ReassemblingSkeleton card) {
-		super(card);
-	}
+    public ReassemblingSkeleton(final ReassemblingSkeleton card) {
+        super(card);
+    }
 
-	@Override
-	public ReassemblingSkeleton copy() {
-		return new ReassemblingSkeleton(this);
-	}
+    @Override
+    public ReassemblingSkeleton copy() {
+        return new ReassemblingSkeleton(this);
+    }
 
 }

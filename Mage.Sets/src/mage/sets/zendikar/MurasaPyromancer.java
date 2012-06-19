@@ -52,8 +52,8 @@ public class MurasaPyromancer extends CardImpl<MurasaPyromancer> {
 
     static {
         filter.getSubtype().add("Ally");
-		filter.setScopeSubtype(Filter.ComparisonScope.Any);
-		filter.setTargetController(Constants.TargetController.YOU);
+        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.setTargetController(Constants.TargetController.YOU);
     }
 
     public MurasaPyromancer(UUID ownerId) {

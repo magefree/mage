@@ -111,10 +111,10 @@ class ThopterToken extends Token {
     ThopterToken() {
         super("Thopter", "a 1/1 colorless Thopter artifact creature token with flying");
         cardType.add(Constants.CardType.CREATURE);
-		cardType.add(Constants.CardType.ARTIFACT);
-		subtype.add("Thopter");
-		power = new MageInt(1);
-		toughness = new MageInt(1);
+        cardType.add(Constants.CardType.ARTIFACT);
+        subtype.add("Thopter");
+        power = new MageInt(1);
+        toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
     }
 }

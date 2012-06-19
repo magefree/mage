@@ -40,29 +40,29 @@ import mage.players.Player;
  */
 public class DrawDiscardControllerEffect extends OneShotEffect<DrawDiscardControllerEffect> {
 
-	public DrawDiscardControllerEffect() {
-		super(Outcome.DrawCard);
-		staticText = "Draw a card, then discard a card";
-	}
+    public DrawDiscardControllerEffect() {
+        super(Outcome.DrawCard);
+        staticText = "Draw a card, then discard a card";
+    }
 
-	public DrawDiscardControllerEffect(final DrawDiscardControllerEffect effect) {
-		super(effect);
-	}
+    public DrawDiscardControllerEffect(final DrawDiscardControllerEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public DrawDiscardControllerEffect copy() {
-		return new DrawDiscardControllerEffect(this);
-	}
+    @Override
+    public DrawDiscardControllerEffect copy() {
+        return new DrawDiscardControllerEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-		if (player != null) {
-			player.drawCards(1, game);
-			player.discard(1, source, game);
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+            player.drawCards(1, game);
+            player.discard(1, source, game);
+            return true;
+        }
+        return false;
+    }
 
 }

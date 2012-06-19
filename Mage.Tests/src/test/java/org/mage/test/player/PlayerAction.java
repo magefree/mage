@@ -35,27 +35,27 @@ import mage.Constants.PhaseStep;
  * @author BetaSteward_at_googlemail.com
  */
 public class PlayerAction {
-    
+
     private int turnNum;
     private PhaseStep step;
     private String action;
-    
+
     public PlayerAction(int turnNum, PhaseStep step, String action) {
         this.turnNum = turnNum;
         this.step = step;
         this.action = action;
     }
-    
+
     public int getTurnNum() {
         return turnNum;
     }
-    
+
     public PhaseStep getStep() {
         return step;
     }
-    
+
     public String getAction() {
         return action;
     }
-        
+
 }

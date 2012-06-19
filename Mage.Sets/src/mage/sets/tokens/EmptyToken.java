@@ -34,7 +34,7 @@ import mage.game.permanent.token.Token;
  */
 public class EmptyToken extends Token {
 
-	public EmptyToken() {
-		super("", "");
-	}
+    public EmptyToken() {
+        super("", "");
+    }
 }

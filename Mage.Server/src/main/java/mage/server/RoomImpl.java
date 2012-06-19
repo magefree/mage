@@ -36,29 +36,29 @@ import java.util.UUID;
  */
 public abstract class RoomImpl implements Room {
 
-	private UUID chatId;
-	private UUID roomId;
+    private UUID chatId;
+    private UUID roomId;
 
-	public RoomImpl() {
-		roomId = UUID.randomUUID();
-		chatId = ChatManager.getInstance().createChatSession();
-	}
+    public RoomImpl() {
+        roomId = UUID.randomUUID();
+        chatId = ChatManager.getInstance().createChatSession();
+    }
 
-	/**
-	 * @return the chatId
-	 */
-	@Override
-	public UUID getChatId() {
-		return chatId;
-	}
+    /**
+     * @return the chatId
+     */
+    @Override
+    public UUID getChatId() {
+        return chatId;
+    }
 
-	/**
-	 * @return the roomId
-	 */
-	@Override
-	public UUID getRoomId() {
-		return roomId;
-	}
+    /**
+     * @return the roomId
+     */
+    @Override
+    public UUID getRoomId() {
+        return roomId;
+    }
 
 
 

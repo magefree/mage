@@ -60,27 +60,27 @@ import java.util.UUID;
  */
 public class Spell<T extends Spell<T>> implements StackObject, Card {
 
-	private Card card;
-	private SpellAbility ability;
-	private UUID controllerId;
-	private boolean copiedSpell;
+    private Card card;
+    private SpellAbility ability;
+    private UUID controllerId;
+    private boolean copiedSpell;
     private Zone fromZone;
 
-	public Spell(Card card, SpellAbility ability, UUID controllerId, Zone fromZone) {
-		this.card = card;
-		this.ability = ability;
+    public Spell(Card card, SpellAbility ability, UUID controllerId, Zone fromZone) {
+        this.card = card;
+        this.ability = ability;
         this.ability.setControllerId(controllerId);
-		this.controllerId = controllerId;
+        this.controllerId = controllerId;
         this.fromZone = fromZone;
-	}
+    }
 
-	public Spell(final Spell<T> spell) {
-		this.card = spell.card.copy();
-		this.ability = spell.ability.copy();
-		this.controllerId = spell.controllerId;
+    public Spell(final Spell<T> spell) {
+        this.card = spell.card.copy();
+        this.ability = spell.ability.copy();
+        this.controllerId = spell.controllerId;
         this.fromZone = spell.fromZone;
         this.copiedSpell = spell.copiedSpell;
-	}
+    }
 
     @Override
     public boolean resolve(Game game) {
@@ -154,192 +154,192 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
         }
     }
 
-	protected boolean resolveKicker(Game game) {
-		boolean replaced = false;
-		for (KickerAbility kicker: card.getAbilities().getKickerAbilities()) {
-			if (kicker.isKicked()) {
-				if (kicker.isReplaces()) {
-					replaced = true;
-				}
-				kicker.resolve(game);
-			}
-		}
-		return replaced;
-	}
+    protected boolean resolveKicker(Game game) {
+        boolean replaced = false;
+        for (KickerAbility kicker: card.getAbilities().getKickerAbilities()) {
+            if (kicker.isKicked()) {
+                if (kicker.isReplaces()) {
+                    replaced = true;
+                }
+                kicker.resolve(game);
+            }
+        }
+        return replaced;
+    }
 
-	/**
-	 * Choose new targets for the spell
-	 *
-	 * @param game
-	 * @param playerId Player UUID who changes the targets.
-	 * @return
-	 */
-	public boolean chooseNewTargets(Game game, UUID playerId) {
-		Player player = game.getPlayer(playerId);
-		if (player != null) {
-			for (Target target: ability.getTargets()) {
-				Target newTarget = target.copy();
-				newTarget.clearChosen();
-				for (UUID targetId: target.getTargets()) {
-					MageObject object = game.getObject(targetId);
-					String name = null;
-					if (object == null) {
-						Player targetPlayer = game.getPlayer(targetId);
-						if (targetPlayer != null) name = targetPlayer.getName();
-					} else {
-						name = object.getName();
-					}
-					if (name != null && player.chooseUse(ability.getEffects().get(0).getOutcome(), "Change target from " + name + "?", game)) {
-						if (!player.chooseTarget(ability.getEffects().get(0).getOutcome(), newTarget, ability, game))
-							newTarget.addTarget(targetId, ability, game, false);
-					}
-					else {
-						newTarget.addTarget(targetId, ability, game, false);
-					}
-				}
-				target.clearChosen();
-				for (UUID newTargetId: newTarget.getTargets()) {
-					target.addTarget(newTargetId, ability, game, false);
-				}
-			}
-			return true;
-		}
-		return false;
-	}
-	
-	@Override
-	public void counter(UUID sourceId, Game game) {
-		card.moveToZone(Zone.GRAVEYARD, sourceId, game, false);
-	}
-
-	@Override
-	public UUID getSourceId() {
-		return card.getId();
-	}
-
-	@Override
-	public UUID getControllerId() {
-		return this.controllerId;
-	}
-
-	@Override
-	public String getName() {
-		return card.getName();
-	}
-
-	@Override
-	public void setName(String name) {}
-
-	@Override
-	public Rarity getRarity() {
-		return card.getRarity();
-	}
-
-	@Override
-	public void setRarity(Rarity rarity) {}
-
-	@Override
-	public List<CardType> getCardType() {
-		return card.getCardType();
-	}
-
-	@Override
-	public List<String> getSubtype() {
-		return card.getSubtype();
-	}
-
-	@Override
-	public boolean hasSubtype(String subtype) {
-		return card.hasSubtype(subtype);
-	}
-
-	@Override
-	public List<String> getSupertype() {
-		return card.getSupertype();
-	}
-
-	@Override
-	public Abilities<Ability> getAbilities() {
-		return card.getAbilities();
-	}
-
-	@Override
-	public ObjectColor getColor() {
-		return card.getColor();
-	}
-
-	@Override
-	public ManaCosts<ManaCost> getManaCost() {
-		return card.getManaCost();
-	}
-
-	@Override
-	public MageInt getPower() {
-		return card.getPower();
-	}
-
-	@Override
-	public MageInt getToughness() {
-		return card.getToughness();
-	}
-
-	@Override
-	public UUID getId() {
-		return ability.getId();
-	}
-
-	@Override
-	public UUID getOwnerId() {
-		return card.getOwnerId();
-	}
-
-	@Override
-	public void addAbility(Ability ability) {}
-
-	@Override
-	public void addWatcher(Watcher watcher) {}
+    /**
+     * Choose new targets for the spell
+     *
+     * @param game
+     * @param playerId Player UUID who changes the targets.
+     * @return
+     */
+    public boolean chooseNewTargets(Game game, UUID playerId) {
+        Player player = game.getPlayer(playerId);
+        if (player != null) {
+            for (Target target: ability.getTargets()) {
+                Target newTarget = target.copy();
+                newTarget.clearChosen();
+                for (UUID targetId: target.getTargets()) {
+                    MageObject object = game.getObject(targetId);
+                    String name = null;
+                    if (object == null) {
+                        Player targetPlayer = game.getPlayer(targetId);
+                        if (targetPlayer != null) name = targetPlayer.getName();
+                    } else {
+                        name = object.getName();
+                    }
+                    if (name != null && player.chooseUse(ability.getEffects().get(0).getOutcome(), "Change target from " + name + "?", game)) {
+                        if (!player.chooseTarget(ability.getEffects().get(0).getOutcome(), newTarget, ability, game))
+                            newTarget.addTarget(targetId, ability, game, false);
+                    }
+                    else {
+                        newTarget.addTarget(targetId, ability, game, false);
+                    }
+                }
+                target.clearChosen();
+                for (UUID newTargetId: newTarget.getTargets()) {
+                    target.addTarget(newTargetId, ability, game, false);
+                }
+            }
+            return true;
+        }
+        return false;
+    }
 
     @Override
-	public SpellAbility getSpellAbility() {
-		return ability;
-	}
+    public void counter(UUID sourceId, Game game) {
+        card.moveToZone(Zone.GRAVEYARD, sourceId, game, false);
+    }
 
-	@Override
-	public void setControllerId(UUID controllerId) {
+    @Override
+    public UUID getSourceId() {
+        return card.getId();
+    }
+
+    @Override
+    public UUID getControllerId() {
+        return this.controllerId;
+    }
+
+    @Override
+    public String getName() {
+        return card.getName();
+    }
+
+    @Override
+    public void setName(String name) {}
+
+    @Override
+    public Rarity getRarity() {
+        return card.getRarity();
+    }
+
+    @Override
+    public void setRarity(Rarity rarity) {}
+
+    @Override
+    public List<CardType> getCardType() {
+        return card.getCardType();
+    }
+
+    @Override
+    public List<String> getSubtype() {
+        return card.getSubtype();
+    }
+
+    @Override
+    public boolean hasSubtype(String subtype) {
+        return card.hasSubtype(subtype);
+    }
+
+    @Override
+    public List<String> getSupertype() {
+        return card.getSupertype();
+    }
+
+    @Override
+    public Abilities<Ability> getAbilities() {
+        return card.getAbilities();
+    }
+
+    @Override
+    public ObjectColor getColor() {
+        return card.getColor();
+    }
+
+    @Override
+    public ManaCosts<ManaCost> getManaCost() {
+        return card.getManaCost();
+    }
+
+    @Override
+    public MageInt getPower() {
+        return card.getPower();
+    }
+
+    @Override
+    public MageInt getToughness() {
+        return card.getToughness();
+    }
+
+    @Override
+    public UUID getId() {
+        return ability.getId();
+    }
+
+    @Override
+    public UUID getOwnerId() {
+        return card.getOwnerId();
+    }
+
+    @Override
+    public void addAbility(Ability ability) {}
+
+    @Override
+    public void addWatcher(Watcher watcher) {}
+
+    @Override
+    public SpellAbility getSpellAbility() {
+        return ability;
+    }
+
+    @Override
+    public void setControllerId(UUID controllerId) {
         this.ability.setControllerId(controllerId);
-		this.controllerId = controllerId;
-	}
-
-	@Override
-	public void setOwnerId(UUID controllerId) {}
-
-	@Override
-	public List<String> getRules() {
-		return card.getRules();
-	}
+        this.controllerId = controllerId;
+    }
 
     @Override
-	public List<Watcher> getWatchers() {
-		return card.getWatchers();
-	}
+    public void setOwnerId(UUID controllerId) {}
 
-	@Override
-	public String getExpansionSetCode() {
-		return card.getExpansionSetCode();
-	}
+    @Override
+    public List<String> getRules() {
+        return card.getRules();
+    }
 
-	@Override
-	public void setExpansionSetCode(String expansionSetCode) {}
+    @Override
+    public List<Watcher> getWatchers() {
+        return card.getWatchers();
+    }
 
-	@Override
-	public void setFaceDown(boolean value) {
-		throw new RuntimeException("Not implemented.");
-	}
+    @Override
+    public String getExpansionSetCode() {
+        return card.getExpansionSetCode();
+    }
 
-	@Override
-	public boolean isFaceDown() {
-		return false;
-	}
+    @Override
+    public void setExpansionSetCode(String expansionSetCode) {}
+
+    @Override
+    public void setFaceDown(boolean value) {
+        throw new RuntimeException("Not implemented.");
+    }
+
+    @Override
+    public boolean isFaceDown() {
+        return false;
+    }
 
     @Override
     public boolean isFlipCard() {
@@ -366,51 +366,51 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
     }
 
     @Override
-	public Spell copy() {
-		return new Spell(this);
-	}
-
-	public Spell copySpell() {
-		return new Spell(this.card.copy(), this.ability.copySpell(), this.controllerId, this.fromZone);
-	}
-	
-	@Override
-	public void adjustCosts(Ability ability, Game game) {}
-
-	@Override
-	public boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag) {
-		throw new UnsupportedOperationException("Unsupported operation");
-	}
-
-	@Override
-	public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game) {
-		ZoneChangeEvent event = new ZoneChangeEvent(this.getId(), sourceId, this.getOwnerId(), Zone.STACK, Zone.EXILED);
-		if (!game.replaceEvent(event)) {
-            game.getStack().remove(this);
-			game.rememberLKI(this.getId(), event.getFromZone(), this);
-			
-			if (exileId == null) {
-				game.getExile().getPermanentExile().add(this.card);
-			}
-			else {
-				game.getExile().createZone(exileId, name).add(this.card);
-			}
-			game.setZone(this.card.getId(), event.getToZone());
-			game.fireEvent(event);
-			return event.getToZone() == Zone.EXILED;
-		}
-		return false;
+    public Spell copy() {
+        return new Spell(this);
     }
 
-	@Override
-	public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId) {
-		throw new UnsupportedOperationException("Unsupported operation");
-	}
+    public Spell copySpell() {
+        return new Spell(this.card.copy(), this.ability.copySpell(), this.controllerId, this.fromZone);
+    }
 
-	@Override
-	public int getCardNumber() {
-		return card.getCardNumber();
-	}
+    @Override
+    public void adjustCosts(Ability ability, Game game) {}
+
+    @Override
+    public boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag) {
+        throw new UnsupportedOperationException("Unsupported operation");
+    }
+
+    @Override
+    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game) {
+        ZoneChangeEvent event = new ZoneChangeEvent(this.getId(), sourceId, this.getOwnerId(), Zone.STACK, Zone.EXILED);
+        if (!game.replaceEvent(event)) {
+            game.getStack().remove(this);
+            game.rememberLKI(this.getId(), event.getFromZone(), this);
+
+            if (exileId == null) {
+                game.getExile().getPermanentExile().add(this.card);
+            }
+            else {
+                game.getExile().createZone(exileId, name).add(this.card);
+            }
+            game.setZone(this.card.getId(), event.getToZone());
+            game.fireEvent(event);
+            return event.getToZone() == Zone.EXILED;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId) {
+        throw new UnsupportedOperationException("Unsupported operation");
+    }
+
+    @Override
+    public int getCardNumber() {
+        return card.getCardNumber();
+    }
 
     @Override
     public void setCardNumber(int cid) {
@@ -418,24 +418,24 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
     }
 
     @Override
-	public List<Mana> getMana() {
-		return card.getMana();
-	}
+    public List<Mana> getMana() {
+        return card.getMana();
+    }
 
-	@Override
-	public boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId) {
-		throw new UnsupportedOperationException("Unsupported operation");
-	}
+    @Override
+    public boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId) {
+        throw new UnsupportedOperationException("Unsupported operation");
+    }
 
-	@Override
-	public Ability getStackAbility() {
-		return this.ability;
-	}
+    @Override
+    public Ability getStackAbility() {
+        return this.ability;
+    }
 
-	@Override
-	public void assignNewId() {
-		throw new UnsupportedOperationException("Unsupported operation");
-	}
+    @Override
+    public void assignNewId() {
+        throw new UnsupportedOperationException("Unsupported operation");
+    }
 
     @Override
     public int getZoneChangeCounter() {
@@ -448,12 +448,12 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
     }
 
     public void setCopiedSpell(boolean isCopied) {
-		this.copiedSpell = isCopied;
-	}
+        this.copiedSpell = isCopied;
+    }
 
-	public boolean isCopiedSpell() {
-		return this.copiedSpell;
-	}
+    public boolean isCopiedSpell() {
+        return this.copiedSpell;
+    }
 
     public Zone getFromZone() {
         return this.fromZone;

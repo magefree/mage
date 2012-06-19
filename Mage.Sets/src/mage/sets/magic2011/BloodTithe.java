@@ -43,49 +43,49 @@ import mage.game.Game;
  */
 public class BloodTithe extends CardImpl<BloodTithe> {
 
-	public BloodTithe(UUID ownerId) {
-		super(ownerId, 84, "Blood Tithe", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");
-		this.expansionSetCode = "M11";
-		this.getColor().setBlack(true);
+    public BloodTithe(UUID ownerId) {
+        super(ownerId, 84, "Blood Tithe", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");
+        this.expansionSetCode = "M11";
+        this.getColor().setBlack(true);
 
-		this.getSpellAbility().addEffect(new BloodTitheEffect());
-	}
+        this.getSpellAbility().addEffect(new BloodTitheEffect());
+    }
 
-	public BloodTithe(final BloodTithe card) {
-		super(card);
-	}
+    public BloodTithe(final BloodTithe card) {
+        super(card);
+    }
 
-	@Override
-	public BloodTithe copy() {
-		return new BloodTithe(this);
-	}
+    @Override
+    public BloodTithe copy() {
+        return new BloodTithe(this);
+    }
 
 }
 
 class BloodTitheEffect extends OneShotEffect<BloodTitheEffect> {
 
-	public BloodTitheEffect() {
-		super(Outcome.Damage);
-		staticText = "Each opponent loses 3 life. You gain life equal to the life lost this way";
-	}
+    public BloodTitheEffect() {
+        super(Outcome.Damage);
+        staticText = "Each opponent loses 3 life. You gain life equal to the life lost this way";
+    }
 
-	public BloodTitheEffect(final BloodTitheEffect effect) {
-		super(effect);
-	}
+    public BloodTitheEffect(final BloodTitheEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		int damage = 0;
-		for (UUID opponentId: game.getOpponents(source.getControllerId())) {
-			damage += game.getPlayer(opponentId).damage(3, source.getSourceId(), game, false, true);
-		}
-		game.getPlayer(source.getControllerId()).gainLife(damage, game);
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        int damage = 0;
+        for (UUID opponentId: game.getOpponents(source.getControllerId())) {
+            damage += game.getPlayer(opponentId).damage(3, source.getSourceId(), game, false, true);
+        }
+        game.getPlayer(source.getControllerId()).gainLife(damage, game);
+        return true;
+    }
 
-	@Override
-	public BloodTitheEffect copy() {
-		return new BloodTitheEffect(this);
-	}
+    @Override
+    public BloodTitheEffect copy() {
+        return new BloodTitheEffect(this);
+    }
 
 }

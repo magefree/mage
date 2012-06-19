@@ -58,7 +58,7 @@ public class CarnifexDemon extends CardImpl<CarnifexDemon> {
         super(ownerId, 57, "Carnifex Demon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Demon");
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
         this.addAbility(FlyingAbility.getInstance());

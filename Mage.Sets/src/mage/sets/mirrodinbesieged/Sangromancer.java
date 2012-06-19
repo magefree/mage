@@ -54,7 +54,7 @@ public class Sangromancer extends CardImpl<Sangromancer> {
         this.expansionSetCode = "MBS";
         this.subtype.add("Vampire");
         this.subtype.add("Shaman");
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());

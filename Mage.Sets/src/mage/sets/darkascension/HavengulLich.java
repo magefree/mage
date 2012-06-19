@@ -76,7 +76,7 @@ public class HavengulLich extends CardImpl<HavengulLich> {
         ability.addEffect(new HavengulLichPlayedEffect());
         ability.addTarget(new TargetCardInGraveyard(filter));
         this.addAbility(ability);
-        
+
     }
 
     public HavengulLich(final HavengulLich card) {
@@ -92,34 +92,34 @@ public class HavengulLich extends CardImpl<HavengulLich> {
 //allow card in graveyard to be played
 class HavengulLichPlayEffect extends AsThoughEffectImpl<HavengulLichPlayEffect> {
 
-	public HavengulLichPlayEffect() {
-		super(Constants.AsThoughEffectType.CAST, Constants.Duration.EndOfTurn, Constants.Outcome.Benefit);
-		staticText = "You may cast target creature card in a graveyard this turn";
-	}
+    public HavengulLichPlayEffect() {
+        super(Constants.AsThoughEffectType.CAST, Constants.Duration.EndOfTurn, Constants.Outcome.Benefit);
+        staticText = "You may cast target creature card in a graveyard this turn";
+    }
 
-	public HavengulLichPlayEffect(final HavengulLichPlayEffect effect) {
-		super(effect);
-	}
+    public HavengulLichPlayEffect(final HavengulLichPlayEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
 
-	@Override
-	public HavengulLichPlayEffect copy() {
-		return new HavengulLichPlayEffect(this);
-	}
+    @Override
+    public HavengulLichPlayEffect copy() {
+        return new HavengulLichPlayEffect(this);
+    }
 
-	@Override
-	public boolean applies(UUID sourceId, Ability source, Game game) {
+    @Override
+    public boolean applies(UUID sourceId, Ability source, Game game) {
         Card card = game.getCard(sourceId);
         if (card != null && game.getState().getZone(card.getId()) == Constants.Zone.GRAVEYARD) {
             if (targetPointer.getFirst(game, source).equals(card.getId()))
                 return true;
         }
         return false;
-	}
+    }
 
 }
 
@@ -129,54 +129,54 @@ class HavengulLichPlayedEffect extends OneShotEffect<HavengulLichPlayedEffect> {
     public HavengulLichPlayedEffect() {
         super(Outcome.PutCreatureInPlay);
     }
-    
+
     public HavengulLichPlayedEffect(final HavengulLichPlayedEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         DelayedTriggeredAbility ability = new HavengulLichDelayedTriggeredAbility(targetPointer.getFirst(game, source));
         ability.setSourceId(source.getSourceId());
         ability.setControllerId(source.getControllerId());
         game.addDelayedTriggeredAbility(ability);
-		return true;
+        return true;
     }
 
     @Override
     public HavengulLichPlayedEffect copy() {
         return new HavengulLichPlayedEffect(this);
     }
-    
+
 }
 
 // when card is played create continuous effect
 class HavengulLichDelayedTriggeredAbility extends DelayedTriggeredAbility<HavengulLichDelayedTriggeredAbility> {
 
     private UUID cardId;
-    
-	public HavengulLichDelayedTriggeredAbility (UUID cardId) {
-		super(new HavengulLichEffect(cardId), Duration.EndOfTurn);
+
+    public HavengulLichDelayedTriggeredAbility (UUID cardId) {
+        super(new HavengulLichEffect(cardId), Duration.EndOfTurn);
         this.cardId = cardId;
-	}
+    }
 
-	public HavengulLichDelayedTriggeredAbility(HavengulLichDelayedTriggeredAbility ability) {
-		super(ability);
+    public HavengulLichDelayedTriggeredAbility(HavengulLichDelayedTriggeredAbility ability) {
+        super(ability);
         this.cardId = ability.cardId;
-	}
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getSourceId().equals(cardId)) {
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getSourceId().equals(cardId)) {
             return true;
-		}
-		return false;
-	}
-    
-	@Override
-	public HavengulLichDelayedTriggeredAbility copy() {
-		return new HavengulLichDelayedTriggeredAbility(this);
-	}
+        }
+        return false;
+    }
+
+    @Override
+    public HavengulLichDelayedTriggeredAbility copy() {
+        return new HavengulLichDelayedTriggeredAbility(this);
+    }
 }
 
 // copy activated abilities of card
@@ -185,29 +185,29 @@ class HavengulLichEffect extends ContinuousEffectImpl<HavengulLichEffect> {
     private UUID cardId;
 
     public HavengulLichEffect(UUID cardId) {
-		super(Duration.EndOfTurn, Constants.Layer.AbilityAddingRemovingEffects_6, Constants.SubLayer.NA, Constants.Outcome.AddAbility);
+        super(Duration.EndOfTurn, Constants.Layer.AbilityAddingRemovingEffects_6, Constants.SubLayer.NA, Constants.Outcome.AddAbility);
         this.cardId = cardId;
-	}
+    }
 
-	public HavengulLichEffect(final HavengulLichEffect effect) {
-		super(effect);
+    public HavengulLichEffect(final HavengulLichEffect effect) {
+        super(effect);
         this.cardId = effect.cardId;
-	}
+    }
 
-	@Override
-	public HavengulLichEffect copy() {
-		return new HavengulLichEffect(this);
-	}
+    @Override
+    public HavengulLichEffect copy() {
+        return new HavengulLichEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         Card card = game.getCard(cardId);
         if (permanent != null && card != null) {
             for (ActivatedAbility ability: card.getAbilities().getActivatedAbilities(Zone.BATTLEFIELD)) {
                 permanent.addAbility(ability, game);
             }
-		}
-		return false;
-	}
+        }
+        return false;
+    }
 }

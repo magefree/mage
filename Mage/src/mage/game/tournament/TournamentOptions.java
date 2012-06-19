@@ -39,42 +39,42 @@ import mage.game.match.MatchOptions;
  */
 public class TournamentOptions implements Serializable {
 
-	protected String name;
-	protected String tournamentType;
-	protected List<String> playerTypes = new ArrayList<String>();
-	protected MatchOptions matchOptions = new MatchOptions("", "Two Player Duel");
-	protected LimitedOptions limitedOptions;
+    protected String name;
+    protected String tournamentType;
+    protected List<String> playerTypes = new ArrayList<String>();
+    protected MatchOptions matchOptions = new MatchOptions("", "Two Player Duel");
+    protected LimitedOptions limitedOptions;
 
-	public TournamentOptions(String name) {
-		this.name = name;
-	}
+    public TournamentOptions(String name) {
+        this.name = name;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getTournamentType() {
-		return tournamentType;
-	}
+    public String getTournamentType() {
+        return tournamentType;
+    }
 
-	public void setTournamentType(String tournamentType) {
-		this.tournamentType = tournamentType;
-	}
+    public void setTournamentType(String tournamentType) {
+        this.tournamentType = tournamentType;
+    }
 
-	public List<String> getPlayerTypes() {
-		return playerTypes;
-	}
+    public List<String> getPlayerTypes() {
+        return playerTypes;
+    }
 
-	public MatchOptions getMatchOptions() {
-		return matchOptions;
-	}
+    public MatchOptions getMatchOptions() {
+        return matchOptions;
+    }
 
-	public void setLimitedOptions(LimitedOptions limitedOptions) {
-		this.limitedOptions = limitedOptions;
-	}
+    public void setLimitedOptions(LimitedOptions limitedOptions) {
+        this.limitedOptions = limitedOptions;
+    }
 
-	public LimitedOptions getLimitedOptions() {
-		return limitedOptions;
-	}
+    public LimitedOptions getLimitedOptions() {
+        return limitedOptions;
+    }
 
 }

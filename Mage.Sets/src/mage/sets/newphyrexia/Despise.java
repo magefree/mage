@@ -72,46 +72,46 @@ public class Despise extends CardImpl<Despise> {
 
 class DespiseEffect extends OneShotEffect<DespiseEffect> {
 
-	private static final FilterCard filter = new FilterCard("creature or planeswalker card");
+    private static final FilterCard filter = new FilterCard("creature or planeswalker card");
 
-	static {
-		filter.getCardType().add(CardType.CREATURE);
-		filter.getCardType().add(CardType.PLANESWALKER);
+    static {
+        filter.getCardType().add(CardType.CREATURE);
+        filter.getCardType().add(CardType.PLANESWALKER);
         filter.setScopeCardType(Filter.ComparisonScope.Any);
-	}
+    }
 
-	public DespiseEffect() {
-		super(Constants.Outcome.Discard);
-		staticText = "Target opponent reveals his or her hand. You choose a creature or planeswalker card from it. That player discards that card";
-	}
+    public DespiseEffect() {
+        super(Constants.Outcome.Discard);
+        staticText = "Target opponent reveals his or her hand. You choose a creature or planeswalker card from it. That player discards that card";
+    }
 
-	public DespiseEffect(final DespiseEffect effect) {
-		super(effect);
-	}
+    public DespiseEffect(final DespiseEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getFirstTarget());
-		if (player != null) {
-			player.revealCards("Despise", player.getHand(), game);
-			Player you = game.getPlayer(source.getControllerId());
-			if (you != null) {
-				TargetCard target = new TargetCard(Constants.Zone.PICK, filter);
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getFirstTarget());
+        if (player != null) {
+            player.revealCards("Despise", player.getHand(), game);
+            Player you = game.getPlayer(source.getControllerId());
+            if (you != null) {
+                TargetCard target = new TargetCard(Constants.Zone.PICK, filter);
                 target.setRequired(true);
-				if (you.choose(Constants.Outcome.Benefit, player.getHand(), target, game)) {
-					Card card = player.getHand().get(target.getFirstTarget(), game);
-					if (card != null) {
-						return player.discard(card, source, game);
-					}
-				}
-			}
-		}
-		return false;
-	}
+                if (you.choose(Constants.Outcome.Benefit, player.getHand(), target, game)) {
+                    Card card = player.getHand().get(target.getFirstTarget(), game);
+                    if (card != null) {
+                        return player.discard(card, source, game);
+                    }
+                }
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public DespiseEffect copy() {
-		return new DespiseEffect(this);
-	}
+    @Override
+    public DespiseEffect copy() {
+        return new DespiseEffect(this);
+    }
 
 }

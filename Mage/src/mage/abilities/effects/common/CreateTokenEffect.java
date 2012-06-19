@@ -42,56 +42,56 @@ import mage.game.permanent.token.Token;
  */
 public class CreateTokenEffect extends OneShotEffect<CreateTokenEffect> {
 
-	private Token token;
-	private DynamicValue amount;
+    private Token token;
+    private DynamicValue amount;
 
-	public CreateTokenEffect(Token token) {
-		this(token, new StaticValue(1));
-	}
+    public CreateTokenEffect(Token token) {
+        this(token, new StaticValue(1));
+    }
 
-	public CreateTokenEffect(Token token, int amount) {
-		this(token, new StaticValue(amount));
-	}
+    public CreateTokenEffect(Token token, int amount) {
+        this(token, new StaticValue(amount));
+    }
 
     public CreateTokenEffect(Token token, DynamicValue amount) {
         super(Outcome.PutCreatureInPlay);
         this.token = token;
         this.amount = amount.clone();
-		setText();
+        setText();
     }
 
-	public CreateTokenEffect(final CreateTokenEffect effect) {
-		super(effect);
-		this.amount = effect.amount;
-		this.token = effect.token.copy();
-	}
+    public CreateTokenEffect(final CreateTokenEffect effect) {
+        super(effect);
+        this.amount = effect.amount;
+        this.token = effect.token.copy();
+    }
 
-	@Override
-	public CreateTokenEffect copy() {
-		return new CreateTokenEffect(this);
-	}
+    @Override
+    public CreateTokenEffect copy() {
+        return new CreateTokenEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
         int value = amount.calculate(game, source);
-		token.putOntoBattlefield(value, game, source.getSourceId(), source.getControllerId());
-		return true;
-	}
+        token.putOntoBattlefield(value, game, source.getSourceId(), source.getControllerId());
+        return true;
+    }
 
-	private void setText() {
+    private void setText() {
         StringBuilder sb = new StringBuilder("put ");
         if (amount.toString().equals("1")) {
             sb.append("a");
         } else {
             sb.append(amount.toString());
         }
-		sb.append(" ").append(token.getDescription()).append(" onto the battlefield");
+        sb.append(" ").append(token.getDescription()).append(" onto the battlefield");
         String message = amount.getMessage();
         if (message.length() > 0) {
             sb.append(" for each ");
         }
         sb.append(message);
-		staticText = sb.toString();
-	}
+        staticText = sb.toString();
+    }
 
 }

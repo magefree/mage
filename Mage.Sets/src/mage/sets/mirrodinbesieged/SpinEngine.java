@@ -48,60 +48,60 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SpinEngine extends CardImpl<SpinEngine> {
 
-	public SpinEngine(UUID ownerId) {
-		super(ownerId, 135, "Spin Engine", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
-		this.expansionSetCode = "MBS";
-		this.subtype.add("Construct");
-		this.power = new MageInt(3);
-		this.toughness = new MageInt(1);
+    public SpinEngine(UUID ownerId) {
+        super(ownerId, 135, "Spin Engine", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
+        this.expansionSetCode = "MBS";
+        this.subtype.add("Construct");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(1);
 
         // {R}: Target creature can't block Spin Engine this turn
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SpinEngineEffect(), new ManaCostsImpl("{R}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
-	}
+    }
 
-	public SpinEngine(final SpinEngine card) {
-		super(card);
-	}
+    public SpinEngine(final SpinEngine card) {
+        super(card);
+    }
 
-	@Override
-	public SpinEngine copy() {
-		return new SpinEngine(this);
-	}
+    @Override
+    public SpinEngine copy() {
+        return new SpinEngine(this);
+    }
 
 }
 
 class SpinEngineEffect extends RestrictionEffect<SpinEngineEffect> {
 
-	public SpinEngineEffect() {
-		super(Duration.EndOfTurn);
+    public SpinEngineEffect() {
+        super(Duration.EndOfTurn);
         staticText = "Target creature can't block {this} this turn";
-	}
+    }
 
-	public SpinEngineEffect(final SpinEngineEffect effect) {
-		super(effect);
-	}
+    public SpinEngineEffect(final SpinEngineEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean applies(Permanent permanent, Ability source, Game game) {
-		if (permanent.getId().equals(source.getSourceId())) {
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        if (permanent.getId().equals(source.getSourceId())) {
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-		UUID targetId = source.getFirstTarget();
+    @Override
+    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        UUID targetId = source.getFirstTarget();
         if (targetId != null && blocker.getId().equals(targetId))
             return false;
         return true;
-	}
+    }
 
-	@Override
-	public SpinEngineEffect copy() {
-		return new SpinEngineEffect(this);
-	}
+    @Override
+    public SpinEngineEffect copy() {
+        return new SpinEngineEffect(this);
+    }
 
 }

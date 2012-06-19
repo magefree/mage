@@ -40,45 +40,45 @@ import mage.view.TournamentView;
  */
 public class TournamentManager {
 
-	private final static TournamentManager INSTANCE = new TournamentManager();
+    private final static TournamentManager INSTANCE = new TournamentManager();
 
-	private ConcurrentHashMap<UUID, TournamentController> controllers = new ConcurrentHashMap<UUID, TournamentController>();
+    private ConcurrentHashMap<UUID, TournamentController> controllers = new ConcurrentHashMap<UUID, TournamentController>();
 
-	public static TournamentManager getInstance() {
-		return INSTANCE;
-	}
+    public static TournamentManager getInstance() {
+        return INSTANCE;
+    }
 
-	public void createTournamentSession(Tournament tournament, ConcurrentHashMap<UUID, UUID> userPlayerMap, UUID tableId) {
-		TournamentController tournamentController = new TournamentController(tournament, userPlayerMap, tableId);
-		controllers.put(tournament.getId(), tournamentController);
-	}
+    public void createTournamentSession(Tournament tournament, ConcurrentHashMap<UUID, UUID> userPlayerMap, UUID tableId) {
+        TournamentController tournamentController = new TournamentController(tournament, userPlayerMap, tableId);
+        controllers.put(tournament.getId(), tournamentController);
+    }
 
-	public void joinTournament(UUID tournamentId, UUID userId) {
-		controllers.get(tournamentId).join(userId);
-	}
+    public void joinTournament(UUID tournamentId, UUID userId) {
+        controllers.get(tournamentId).join(userId);
+    }
 
-	public void kill(UUID tournamentId, UUID userId) {
-		controllers.get(tournamentId).kill(userId);
-	}
+    public void kill(UUID tournamentId, UUID userId) {
+        controllers.get(tournamentId).kill(userId);
+    }
 
-	public void timeout(UUID tournamentId, UUID userId) {
-		controllers.get(tournamentId).timeout(userId);
-	}
+    public void timeout(UUID tournamentId, UUID userId) {
+        controllers.get(tournamentId).timeout(userId);
+    }
 
-	public void submitDeck(UUID tournamentId, UUID playerId, Deck deck) {
-		controllers.get(tournamentId).submitDeck(playerId, deck);
-	}
+    public void submitDeck(UUID tournamentId, UUID playerId, Deck deck) {
+        controllers.get(tournamentId).submitDeck(playerId, deck);
+    }
 
-	public void updateDeck(UUID tournamentId, UUID playerId, Deck deck) {
-		controllers.get(tournamentId).updateDeck(playerId, deck);
-	}
+    public void updateDeck(UUID tournamentId, UUID playerId, Deck deck) {
+        controllers.get(tournamentId).updateDeck(playerId, deck);
+    }
 
     public TournamentView getTournamentView(UUID tournamentId) {
-		return controllers.get(tournamentId).getTournamentView();
-	}
+        return controllers.get(tournamentId).getTournamentView();
+    }
 
-	public UUID getChatId(UUID tournamentId) {
-		return controllers.get(tournamentId).getChatId();
-	}
+    public UUID getChatId(UUID tournamentId) {
+        return controllers.get(tournamentId).getChatId();
+    }
 
 }

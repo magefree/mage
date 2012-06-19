@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class UnholyStrength extends mage.sets.tenth.UnholyStrength {
 
-	public UnholyStrength(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 116;
-		this.expansionSetCode = "M10";
-	}
+    public UnholyStrength(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 116;
+        this.expansionSetCode = "M10";
+    }
 
-	public UnholyStrength(final UnholyStrength card) {
-		super(card);
-	}
+    public UnholyStrength(final UnholyStrength card) {
+        super(card);
+    }
 
-	@Override
-	public UnholyStrength copy() {
-		return new UnholyStrength(this);
-	}
+    @Override
+    public UnholyStrength copy() {
+        return new UnholyStrength(this);
+    }
 
 }

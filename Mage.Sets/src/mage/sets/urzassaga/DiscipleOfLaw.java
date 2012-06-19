@@ -45,33 +45,33 @@ import mage.filter.FilterCard;
  */
 public class DiscipleOfLaw extends CardImpl<DiscipleOfLaw> {
 
-	private static final FilterCard filter = new FilterCard("Red");
+    private static final FilterCard filter = new FilterCard("Red");
 
-	static {
-		filter.setUseColor(true);
-		filter.getColor().setRed(true);
-		filter.setScopeColor(ComparisonScope.Any);
-	}
+    static {
+        filter.setUseColor(true);
+        filter.getColor().setRed(true);
+        filter.setScopeColor(ComparisonScope.Any);
+    }
 
-	public DiscipleOfLaw(UUID ownerId) {
-		super(ownerId, 11, "Disciple Of Law", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
-		this.expansionSetCode = "USG";
-		this.subtype.add("Human");
-		this.subtype.add("Cleric");
-		this.color.setWhite(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(2);
-		this.addAbility(new ProtectionAbility(filter));
+    public DiscipleOfLaw(UUID ownerId) {
+        super(ownerId, 11, "Disciple Of Law", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        this.expansionSetCode = "USG";
+        this.subtype.add("Human");
+        this.subtype.add("Cleric");
+        this.color.setWhite(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(2);
+        this.addAbility(new ProtectionAbility(filter));
                 this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
         }
 
-	public DiscipleOfLaw(final DiscipleOfLaw card) {
-		super(card);
-	}
+    public DiscipleOfLaw(final DiscipleOfLaw card) {
+        super(card);
+    }
 
-	@Override
-	public DiscipleOfLaw copy() {
-		return new DiscipleOfLaw(this);
-	}
+    @Override
+    public DiscipleOfLaw copy() {
+        return new DiscipleOfLaw(this);
+    }
 
 }

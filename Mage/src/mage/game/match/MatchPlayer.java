@@ -37,48 +37,48 @@ import mage.players.Player;
  * @author BetaSteward_at_googlemail.com
  */
 public class MatchPlayer {
-	private int wins;
-	private int loses;
-	private Deck deck;
-	private Player player;
-	private boolean doneSideboarding;
+    private int wins;
+    private int loses;
+    private Deck deck;
+    private Player player;
+    private boolean doneSideboarding;
 
-	public MatchPlayer(Player player, Deck deck) {
-		this.player = player;
-		this.deck = deck;
-		this.wins = 0;
-		this.loses = 0;
-		this.doneSideboarding = true;
-	}
+    public MatchPlayer(Player player, Deck deck) {
+        this.player = player;
+        this.deck = deck;
+        this.wins = 0;
+        this.loses = 0;
+        this.doneSideboarding = true;
+    }
 
-	public int getWins() {
-		return wins;
-	}
+    public int getWins() {
+        return wins;
+    }
 
-	public void addWin() {
-		this.wins++;
-	}
+    public void addWin() {
+        this.wins++;
+    }
 
-	public int getLoses() {
-		return loses;
-	}
+    public int getLoses() {
+        return loses;
+    }
 
-	public void addLose() {
-		this.loses++;
-	}
+    public void addLose() {
+        this.loses++;
+    }
 
-	public Deck getDeck() {
-		return deck;
-	}
+    public Deck getDeck() {
+        return deck;
+    }
 
-	public void submitDeck(Deck deck) {
-		this.deck = deck;
-		this.doneSideboarding = true;
-	}
+    public void submitDeck(Deck deck) {
+        this.deck = deck;
+        this.doneSideboarding = true;
+    }
 
-	public void updateDeck(Deck deck) {
-		this.deck = deck;
-	}
+    public void updateDeck(Deck deck) {
+        this.deck = deck;
+    }
 
     public Deck generateDeck() {
         //TODO: improve this
@@ -89,17 +89,17 @@ public class MatchPlayer {
         }
         return deck;
     }
-    
-	public Player getPlayer() {
-		return player;
-	}
 
-	public void setSideboarding() {
-		this.doneSideboarding = false;
-	}
+    public Player getPlayer() {
+        return player;
+    }
 
-	public boolean isDoneSideboarding() {
-		return this.doneSideboarding;
-	}
+    public void setSideboarding() {
+        this.doneSideboarding = false;
+    }
+
+    public boolean isDoneSideboarding() {
+        return this.doneSideboarding;
+    }
 
 }

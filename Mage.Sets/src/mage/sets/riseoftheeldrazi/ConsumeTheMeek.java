@@ -40,12 +40,12 @@ import mage.abilities.effects.common.DestroyAllEffect;
  * @author anonymous
  */
 public class ConsumeTheMeek extends CardImpl<ConsumeTheMeek> {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with converted mana cost 3 or less");
 
     static {
-	filter.setConvertedManaCost(4);
-	filter.setConvertedManaCostComparison(Filter.ComparisonType.LessThan);
+    filter.setConvertedManaCost(4);
+    filter.setConvertedManaCostComparison(Filter.ComparisonType.LessThan);
     }
 
     public ConsumeTheMeek(UUID ownerId) {

@@ -53,7 +53,7 @@ public class GuardiansPledge extends CardImpl<GuardiansPledge> {
         public GuardiansPledge (UUID ownerId) {
         super(ownerId, 22, "Guardians' Pledge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}{W}");
         this.expansionSetCode = "M12";
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         this.getSpellAbility().addEffect(new BoostControlledEffect(2, 2, Constants.Duration.EndOfTurn, filter, false));
     }
 

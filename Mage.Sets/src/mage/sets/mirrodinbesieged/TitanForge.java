@@ -82,6 +82,6 @@ class GolemToken extends Token {
         cardType.add(CardType.CREATURE);
         subtype.add("Golem");
         power = new MageInt(9);
-		toughness = new MageInt(9);
+        toughness = new MageInt(9);
     }
 }

@@ -51,7 +51,7 @@ public class Spinebiter extends CardImpl<Spinebiter> {
         this.toughness = new MageInt(4);
 
         this.addAbility(InfectAbility.getInstance());
-        
+
         // You may have Spinebiter assign its combat damage as though it weren't blocked.
         this.addAbility(DamageAsThoughNotBlockedAbility.getInstance());
     }

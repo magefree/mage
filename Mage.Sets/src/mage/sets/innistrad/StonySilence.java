@@ -56,7 +56,7 @@ public class StonySilence extends CardImpl<StonySilence> {
 
         // Activated abilities of artifacts can't be activated.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new StonySilenceEffect()));
-        
+
     }
 
     public StonySilence(final StonySilence card) {
@@ -68,18 +68,18 @@ public class StonySilence extends CardImpl<StonySilence> {
         return new StonySilence(this);
     }
 }
-    
+
 class StonySilenceEffect extends ReplacementEffectImpl<StonySilenceEffect> {
 
     public StonySilenceEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Activated abilities of artifacts can't be activated";
     }
-    
+
     public StonySilenceEffect(final StonySilenceEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         return true;
@@ -105,5 +105,5 @@ class StonySilenceEffect extends ReplacementEffectImpl<StonySilenceEffect> {
         }
         return false;
     }
-    
+
 }

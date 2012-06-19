@@ -49,7 +49,7 @@ public class CavernThoctar extends CardImpl<CavernThoctar> {
         super(ownerId, 125, "Cavern Thoctar", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}");
         this.expansionSetCode = "ALA";
         this.subtype.add("Beast");
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")));

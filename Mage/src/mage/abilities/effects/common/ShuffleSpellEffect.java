@@ -44,34 +44,34 @@ import mage.players.Player;
  */
 public class ShuffleSpellEffect extends PostResolveEffect<ShuffleSpellEffect> {
 
-	private static final ShuffleSpellEffect fINSTANCE =  new ShuffleSpellEffect();
+    private static final ShuffleSpellEffect fINSTANCE =  new ShuffleSpellEffect();
 
-	private Object readResolve() throws ObjectStreamException {
-		return fINSTANCE;
-	}
+    private Object readResolve() throws ObjectStreamException {
+        return fINSTANCE;
+    }
 
-	private ShuffleSpellEffect() {
-		staticText = "Shuffle {this} into its owner's library";
-	}
-	
-	public static ShuffleSpellEffect getInstance() {
-		return fINSTANCE;
-	}
+    private ShuffleSpellEffect() {
+        staticText = "Shuffle {this} into its owner's library";
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
+    public static ShuffleSpellEffect getInstance() {
+        return fINSTANCE;
+    }
 
-	@Override
-	public ShuffleSpellEffect copy() {
-		return fINSTANCE;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
 
-	@Override
-	public void postResolve(Card card, Ability source, UUID controllerId, Game game) {
-		card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
-		Player player = game.getPlayer(card.getOwnerId());
-		if (player != null) player.shuffleLibrary(game);
-	}
+    @Override
+    public ShuffleSpellEffect copy() {
+        return fINSTANCE;
+    }
+
+    @Override
+    public void postResolve(Card card, Ability source, UUID controllerId, Game game) {
+        card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
+        Player player = game.getPlayer(card.getOwnerId());
+        if (player != null) player.shuffleLibrary(game);
+    }
 }

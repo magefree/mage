@@ -49,56 +49,56 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class AdventuringGear extends CardImpl<AdventuringGear> {
 
-	public AdventuringGear(UUID ownerId) {
-		super(ownerId, 195, "Adventuring Gear", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-		this.expansionSetCode = "ZEN";
-		this.subtype.add("Equipment");
-		this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));
-		this.addAbility(new AdventuringGearAbility());
-	}
+    public AdventuringGear(UUID ownerId) {
+        super(ownerId, 195, "Adventuring Gear", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
+        this.expansionSetCode = "ZEN";
+        this.subtype.add("Equipment");
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));
+        this.addAbility(new AdventuringGearAbility());
+    }
 
-	public AdventuringGear(final AdventuringGear card) {
-		super(card);
-	}
+    public AdventuringGear(final AdventuringGear card) {
+        super(card);
+    }
 
-	@Override
-	public AdventuringGear copy() {
-		return new AdventuringGear(this);
-	}
+    @Override
+    public AdventuringGear copy() {
+        return new AdventuringGear(this);
+    }
 
 }
 
 class AdventuringGearAbility extends LandfallAbility {
 
-	public AdventuringGearAbility() {
-		super(null, false);
-		this.addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
-		this.addTarget(new TargetCreaturePermanent());
-	}
+    public AdventuringGearAbility() {
+        super(null, false);
+        this.addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
+        this.addTarget(new TargetCreaturePermanent());
+    }
 
-	public AdventuringGearAbility(final AdventuringGearAbility ability) {
-		super(ability);
-	}
+    public AdventuringGearAbility(final AdventuringGearAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (super.checkTrigger(event, game)) {
-			Permanent equipment = game.getPermanent(this.sourceId);
-			if (equipment != null && equipment.getAttachedTo() != null) {
-				Permanent creature = game.getPermanent(equipment.getAttachedTo());
-				if (creature != null) {
-					this.getTargets().get(0).clearChosen();
-					this.getTargets().get(0).add(creature.getId(), game);
-					return true;
-				}
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (super.checkTrigger(event, game)) {
+            Permanent equipment = game.getPermanent(this.sourceId);
+            if (equipment != null && equipment.getAttachedTo() != null) {
+                Permanent creature = game.getPermanent(equipment.getAttachedTo());
+                if (creature != null) {
+                    this.getTargets().get(0).clearChosen();
+                    this.getTargets().get(0).add(creature.getId(), game);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public AdventuringGearAbility copy() {
-		return new AdventuringGearAbility(this);
-	}
+    @Override
+    public AdventuringGearAbility copy() {
+        return new AdventuringGearAbility(this);
+    }
 
 }

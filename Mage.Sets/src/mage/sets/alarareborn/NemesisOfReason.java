@@ -53,8 +53,8 @@ public class NemesisOfReason extends CardImpl<NemesisOfReason> {
         this.expansionSetCode = "ARB";
         this.subtype.add("Leviathan");
         this.subtype.add("Horror");
-		this.color.setBlue(true);
-		this.color.setBlack(true);
+        this.color.setBlue(true);
+        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(7);
         this.addAbility(new NemesisOfReasonTriggeredAbility());
@@ -90,9 +90,9 @@ class NemesisOfReasonTriggeredAbility extends TriggeredAbilityImpl<NemesisOfReas
             for (Effect effect : this.getEffects()) {
                 effect.setTargetPointer(new FixedTarget(event.getTargetId()));
             }
-			return true;
-		}
-		return false;
+            return true;
+        }
+        return false;
     }
 
     @Override

@@ -14,17 +14,17 @@ import javax.swing.plaf.synth.SynthStyleFactory;
  * @author nantuko
  */
 public class MageSynthStyleFactory extends SynthStyleFactory {
-	private SynthStyleFactory wrappedFactory;
+    private SynthStyleFactory wrappedFactory;
 
-	public MageSynthStyleFactory(SynthStyleFactory factory) {
-		this.wrappedFactory = factory;
-	}
+    public MageSynthStyleFactory(SynthStyleFactory factory) {
+        this.wrappedFactory = factory;
+    }
 
-	public SynthStyle getStyle(JComponent c, Region id) {
-		SynthStyle s = wrappedFactory.getStyle(c, id);
-		if (id == Region.INTERNAL_FRAME) {
-			s = new TranslucentSynthSytle(s);
-		}
-		return s;
-	}
+    public SynthStyle getStyle(JComponent c, Region id) {
+        SynthStyle s = wrappedFactory.getStyle(c, id);
+        if (id == Region.INTERNAL_FRAME) {
+            s = new TranslucentSynthSytle(s);
+        }
+        return s;
+    }
 }

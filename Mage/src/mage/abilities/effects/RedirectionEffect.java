@@ -49,49 +49,49 @@ import mage.target.TargetPermanent;
  */
 public abstract class RedirectionEffect<T extends RedirectionEffect<T>> extends ReplacementEffectImpl<T> {
 
-	protected TargetPermanent redirectTarget;
+    protected TargetPermanent redirectTarget;
 
-	public RedirectionEffect(Duration duration) {
-		super(duration, Outcome.RedirectDamage);
-		this.effectType = EffectType.REDIRECTION;
-	}
+    public RedirectionEffect(Duration duration) {
+        super(duration, Outcome.RedirectDamage);
+        this.effectType = EffectType.REDIRECTION;
+    }
 
-	public RedirectionEffect(final RedirectionEffect effect) {
-		super(effect);
-		this.redirectTarget = effect.redirectTarget;
-	}
+    public RedirectionEffect(final RedirectionEffect effect) {
+        super(effect);
+        this.redirectTarget = effect.redirectTarget;
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		DamageEvent damageEvent = (DamageEvent)event;
-		Permanent permanent = game.getPermanent(redirectTarget.getFirstTarget());
-		Ability damageSource = getSource(damageEvent.getSourceId(), game);
-		if (permanent != null && damageSource != null) {
-			permanent.damage(damageEvent.getAmount(), damageSource.getId(), game, damageEvent.isPreventable(), damageEvent.isCombatDamage());
-			return true;
-		}
-		Player player = game.getPlayer(redirectTarget.getFirstTarget());
-		if (player != null) {
-			player.damage(damageEvent.getAmount(), damageSource.getId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable());
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        DamageEvent damageEvent = (DamageEvent)event;
+        Permanent permanent = game.getPermanent(redirectTarget.getFirstTarget());
+        Ability damageSource = getSource(damageEvent.getSourceId(), game);
+        if (permanent != null && damageSource != null) {
+            permanent.damage(damageEvent.getAmount(), damageSource.getId(), game, damageEvent.isPreventable(), damageEvent.isCombatDamage());
+            return true;
+        }
+        Player player = game.getPlayer(redirectTarget.getFirstTarget());
+        if (player != null) {
+            player.damage(damageEvent.getAmount(), damageSource.getId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable());
+            return true;
+        }
+        return false;
+    }
 
-	protected Ability getSource(UUID sourceId, Game game) {
-		StackObject source = game.getStack().getStackObject(sourceId);
-		if (source != null) {
-			if (source instanceof StackAbility)
-				return (StackAbility)source;
-			if (source instanceof Spell)
-				return ((Spell)source).getSpellAbility();
-		}
-		return null;
-	}
+    protected Ability getSource(UUID sourceId, Game game) {
+        StackObject source = game.getStack().getStackObject(sourceId);
+        if (source != null) {
+            if (source instanceof StackAbility)
+                return (StackAbility)source;
+            if (source instanceof Spell)
+                return ((Spell)source).getSpellAbility();
+        }
+        return null;
+    }
 
 }

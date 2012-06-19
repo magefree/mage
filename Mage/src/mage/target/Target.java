@@ -44,49 +44,49 @@ import mage.game.Game;
  */
 public interface Target extends Serializable {
 
-	public boolean isChosen();
-	public boolean doneChosing();
-	public void clearChosen();
-	public boolean isNotTarget();
-	public void setNotTarget(boolean notTarget);
-	
-	// methods for targets
-	public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game);
-	public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game);
-	public boolean chooseTarget(Outcome outcome, UUID playerId, Ability source, Game game);
-	public void addTarget(UUID id, Ability source, Game game);
-	public void addTarget(UUID id, int amount, Ability source, Game game);
-	public void addTarget(UUID id, Ability source, Game game, boolean skipEvent);
-	public void addTarget(UUID id, int amount, Ability source, Game game, boolean skipEvent);
-	public boolean canTarget(UUID id, Game game);
-	public boolean canTarget(UUID id, Ability source, Game game);
-	public boolean isLegal(Ability source, Game game);
+    public boolean isChosen();
+    public boolean doneChosing();
+    public void clearChosen();
+    public boolean isNotTarget();
+    public void setNotTarget(boolean notTarget);
+
+    // methods for targets
+    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game);
+    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game);
+    public boolean chooseTarget(Outcome outcome, UUID playerId, Ability source, Game game);
+    public void addTarget(UUID id, Ability source, Game game);
+    public void addTarget(UUID id, int amount, Ability source, Game game);
+    public void addTarget(UUID id, Ability source, Game game, boolean skipEvent);
+    public void addTarget(UUID id, int amount, Ability source, Game game, boolean skipEvent);
+    public boolean canTarget(UUID id, Game game);
+    public boolean canTarget(UUID id, Ability source, Game game);
+    public boolean isLegal(Ability source, Game game);
     public List<? extends Target> getTargetOptions(Ability source, Game game);
 
-	//methods for non-targets
-	public boolean canChoose(UUID sourceControllerId, Game game);
-	public Set<UUID> possibleTargets(UUID sourceControllerId, Game game);
-	public boolean choose(Outcome outcome, UUID playerId, UUID sourceId, Game game);
-	public void add(UUID id, Game game);
+    //methods for non-targets
+    public boolean canChoose(UUID sourceControllerId, Game game);
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Game game);
+    public boolean choose(Outcome outcome, UUID playerId, UUID sourceId, Game game);
+    public void add(UUID id, Game game);
     public void remove(UUID targetId);
 
-	public String getMessage();
-	public String getTargetName();
-	public void setTargetName(String name);
-	public String getTargetedName(Game game);
-	public Zone getZone();
+    public String getMessage();
+    public String getTargetName();
+    public void setTargetName(String name);
+    public String getTargetedName(Game game);
+    public Zone getZone();
 
-	public int getTargetAmount(UUID targetId);
-	public int getNumberOfTargets();
-	public int getMaxNumberOfTargets();
-	public List<UUID> getTargets();
-	public Filter getFilter();
-	
-	public boolean isRequired();
-	public void setRequired(boolean required);
+    public int getTargetAmount(UUID targetId);
+    public int getNumberOfTargets();
+    public int getMaxNumberOfTargets();
+    public List<UUID> getTargets();
+    public Filter getFilter();
 
-//	public UUID getLastTarget();
-	public UUID getFirstTarget();
+    public boolean isRequired();
+    public void setRequired(boolean required);
 
-	public Target copy();
+//    public UUID getLastTarget();
+    public UUID getFirstTarget();
+
+    public Target copy();
 }

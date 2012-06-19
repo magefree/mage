@@ -41,42 +41,42 @@ import mage.game.permanent.Permanent;
  */
 public class RemoveCountersSourceCost extends CostImpl<RemoveCountersSourceCost> {
 
-	private int amount;
-	private String name;
+    private int amount;
+    private String name;
 
     public RemoveCountersSourceCost(Counter counter) {
-		this.amount = counter.getCount();
-		this.name = counter.getName();
-		this.text = "Remove " + (amount == 1 ? "a" : amount) + " " + name + " counter"
-			+ (amount != 1 ? "s" : "") + " from {this}";
-	}
+        this.amount = counter.getCount();
+        this.name = counter.getName();
+        this.text = "Remove " + (amount == 1 ? "a" : amount) + " " + name + " counter"
+            + (amount != 1 ? "s" : "") + " from {this}";
+    }
 
-	public RemoveCountersSourceCost(RemoveCountersSourceCost cost) {
-		super(cost);
-		this.amount = cost.amount;
-		this.name = cost.name;
-	}
+    public RemoveCountersSourceCost(RemoveCountersSourceCost cost) {
+        super(cost);
+        this.amount = cost.amount;
+        this.name = cost.name;
+    }
 
-	@Override
-	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-		Permanent permanent = game.getPermanent(sourceId);
-		if (permanent.getCounters().getCount(name) >= amount)
-			return true;
-		return false;
-	}
+    @Override
+    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+        Permanent permanent = game.getPermanent(sourceId);
+        if (permanent.getCounters().getCount(name) >= amount)
+            return true;
+        return false;
+    }
 
-	@Override
-	public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-		Permanent permanent = game.getPermanent(sourceId);
-		if (permanent != null && permanent.getCounters().getCount(name) >= amount) {
-			permanent.removeCounters(name, amount, game);
-			this.paid = true;
-		}
-		return paid;
-	}
+    @Override
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+        Permanent permanent = game.getPermanent(sourceId);
+        if (permanent != null && permanent.getCounters().getCount(name) >= amount) {
+            permanent.removeCounters(name, amount, game);
+            this.paid = true;
+        }
+        return paid;
+    }
 
-	@Override
-	public RemoveCountersSourceCost copy() {
-		return new RemoveCountersSourceCost(this);
-	}
+    @Override
+    public RemoveCountersSourceCost copy() {
+        return new RemoveCountersSourceCost(this);
+    }
 }

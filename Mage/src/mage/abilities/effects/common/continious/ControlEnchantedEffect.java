@@ -11,47 +11,47 @@ import mage.game.permanent.Permanent;
  */
 public class ControlEnchantedEffect extends ContinuousEffectImpl<ControlEnchantedEffect> {
 
-	public ControlEnchantedEffect() {
-		super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Detriment);
-		staticText = "You control enchanted creature";
-	}
+    public ControlEnchantedEffect() {
+        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Detriment);
+        staticText = "You control enchanted creature";
+    }
 
-	public ControlEnchantedEffect(final ControlEnchantedEffect effect) {
-		super(effect);
-	}
+    public ControlEnchantedEffect(final ControlEnchantedEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public ControlEnchantedEffect copy() {
-		return new ControlEnchantedEffect(this);
-	}
+    @Override
+    public ControlEnchantedEffect copy() {
+        return new ControlEnchantedEffect(this);
+    }
 
-	@Override
-	public boolean apply(Constants.Layer layer, Constants.SubLayer sublayer, Ability source, Game game) {
-		Permanent enchantment = game.getPermanent(source.getSourceId());
-		if (enchantment != null && enchantment.getAttachedTo() != null) {
-			Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
-			if (permanent != null) {
-				switch (layer) {
-					case ControlChangingEffects_2:
-						if (sublayer == Constants.SubLayer.NA) {
-							permanent.changeControllerId(source.getControllerId(), game);
-						}
-						break;
-				}
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Constants.Layer layer, Constants.SubLayer sublayer, Ability source, Game game) {
+        Permanent enchantment = game.getPermanent(source.getSourceId());
+        if (enchantment != null && enchantment.getAttachedTo() != null) {
+            Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
+            if (permanent != null) {
+                switch (layer) {
+                    case ControlChangingEffects_2:
+                        if (sublayer == Constants.SubLayer.NA) {
+                            permanent.changeControllerId(source.getControllerId(), game);
+                        }
+                        break;
+                }
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
 
-	@Override
-	public boolean hasLayer(Constants.Layer layer) {
-		return layer == Constants.Layer.ControlChangingEffects_2;
-	}
+    @Override
+    public boolean hasLayer(Constants.Layer layer) {
+        return layer == Constants.Layer.ControlChangingEffects_2;
+    }
 
 }

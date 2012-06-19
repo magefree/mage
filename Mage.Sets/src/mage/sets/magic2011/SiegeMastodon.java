@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class SiegeMastodon extends mage.sets.magic2010.SiegeMastodon {
 
-	public SiegeMastodon(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 29;
-		this.expansionSetCode = "M11";
-	}
+    public SiegeMastodon(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 29;
+        this.expansionSetCode = "M11";
+    }
 
-	public SiegeMastodon(final SiegeMastodon card) {
-		super(card);
-	}
+    public SiegeMastodon(final SiegeMastodon card) {
+        super(card);
+    }
 
-	@Override
-	public SiegeMastodon copy() {
-		return new SiegeMastodon(this);
-	}
+    @Override
+    public SiegeMastodon copy() {
+        return new SiegeMastodon(this);
+    }
 
 }

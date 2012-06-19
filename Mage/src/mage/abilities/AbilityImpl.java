@@ -58,113 +58,113 @@ import java.util.UUID;
  */
 public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 
-	private final static transient Logger logger = Logger.getLogger(AbilityImpl.class);
+    private final static transient Logger logger = Logger.getLogger(AbilityImpl.class);
 
-	protected UUID id;
-	protected UUID originalId;
-	protected AbilityType abilityType;
-	protected UUID controllerId;
-	protected UUID sourceId;
-	protected ManaCosts<ManaCost> manaCosts;
-	protected ManaCosts<ManaCost> manaCostsToPay;
-	protected Costs<Cost> costs;
-	protected ArrayList<AlternativeCost> alternativeCosts = new ArrayList<AlternativeCost>();
-	protected Costs<Cost> optionalCosts;
-	protected Modes modes;
-	protected Zone zone;
-	protected String name;
-	protected boolean usesStack = true;
-
-	@Override
-	public abstract T copy();
-
-	public AbilityImpl(AbilityType abilityType, Zone zone) {
-		this.id = UUID.randomUUID();
-		this.originalId = id;
-		this.abilityType = abilityType;
-		this.zone = zone;
-		this.manaCosts = new ManaCostsImpl<ManaCost>();
-		this.manaCostsToPay = new ManaCostsImpl<ManaCost>();
-		this.costs = new CostsImpl<Cost>();
-		this.optionalCosts = new CostsImpl<Cost>();
-		this.modes = new Modes();
-	}
-
-	public AbilityImpl(final AbilityImpl<T> ability) {
-		this.id = ability.id;
-		this.originalId = ability.originalId;
-		this.abilityType = ability.abilityType;
-		this.controllerId = ability.controllerId;
-		this.sourceId = ability.sourceId;
-		this.zone = ability.zone;
-		this.name = ability.name;
-		this.usesStack = ability.usesStack;
-		this.manaCosts = ability.manaCosts;
-		this.manaCostsToPay = ability.manaCostsToPay.copy();
-		this.costs = ability.costs.copy();
-		this.optionalCosts = ability.optionalCosts.copy();
-		for (AlternativeCost cost: ability.alternativeCosts) {
-			this.alternativeCosts.add((AlternativeCost)cost.copy());
-		}
-		this.modes = ability.modes.copy();
-	}
-
-	@Override
-	public UUID getId() {
-		return id;
-	}
-
-	@Override
-	public void newId() {
-		this.id = UUID.randomUUID();
-		getEffects().newId();
-	}
-
-	@Override
-	public void newOriginalId() {
-		this.id = UUID.randomUUID();
-        this.originalId = id;
-		getEffects().newId();
-	}
+    protected UUID id;
+    protected UUID originalId;
+    protected AbilityType abilityType;
+    protected UUID controllerId;
+    protected UUID sourceId;
+    protected ManaCosts<ManaCost> manaCosts;
+    protected ManaCosts<ManaCost> manaCostsToPay;
+    protected Costs<Cost> costs;
+    protected ArrayList<AlternativeCost> alternativeCosts = new ArrayList<AlternativeCost>();
+    protected Costs<Cost> optionalCosts;
+    protected Modes modes;
+    protected Zone zone;
+    protected String name;
+    protected boolean usesStack = true;
 
     @Override
-	public AbilityType getAbilityType() {
-		return this.abilityType;
-	}
+    public abstract T copy();
 
-	@Override
-	public boolean resolve(Game game) {
-		boolean result = true;
-		//20100716 - 117.12
-		if (checkIfClause(game)) {
-			for (Effect effect: getEffects()) {
-				if (effect instanceof OneShotEffect) {
-					if (!(effect instanceof PostResolveEffect))
-						result &= effect.apply(game, this);
-				}
-				else {
-					game.addEffect((ContinuousEffect) effect, this);
-				}
-			}
-		}
-		return result;
-	}
+    public AbilityImpl(AbilityType abilityType, Zone zone) {
+        this.id = UUID.randomUUID();
+        this.originalId = id;
+        this.abilityType = abilityType;
+        this.zone = zone;
+        this.manaCosts = new ManaCostsImpl<ManaCost>();
+        this.manaCostsToPay = new ManaCostsImpl<ManaCost>();
+        this.costs = new CostsImpl<Cost>();
+        this.optionalCosts = new CostsImpl<Cost>();
+        this.modes = new Modes();
+    }
 
-	@Override
-	public boolean activate(Game game, boolean noMana) {
-		// 20110204 - 700.2
-		if (!modes.choose(game, this))
-			return false;
-		//20100716 - 601.2b
-		if (getChoices().size() > 0 && getChoices().choose(game, this) == false) {
-			logger.debug("activate failed - choice");
-			return false;
-		}
-		//20100716 - 601.2b
-		if (getTargets().size() > 0 && getTargets().chooseTargets(getEffects().get(0).getOutcome(), this.controllerId, this, game) == false) {
-			logger.debug("activate failed - target");
-			return false;
-		}
+    public AbilityImpl(final AbilityImpl<T> ability) {
+        this.id = ability.id;
+        this.originalId = ability.originalId;
+        this.abilityType = ability.abilityType;
+        this.controllerId = ability.controllerId;
+        this.sourceId = ability.sourceId;
+        this.zone = ability.zone;
+        this.name = ability.name;
+        this.usesStack = ability.usesStack;
+        this.manaCosts = ability.manaCosts;
+        this.manaCostsToPay = ability.manaCostsToPay.copy();
+        this.costs = ability.costs.copy();
+        this.optionalCosts = ability.optionalCosts.copy();
+        for (AlternativeCost cost: ability.alternativeCosts) {
+            this.alternativeCosts.add((AlternativeCost)cost.copy());
+        }
+        this.modes = ability.modes.copy();
+    }
+
+    @Override
+    public UUID getId() {
+        return id;
+    }
+
+    @Override
+    public void newId() {
+        this.id = UUID.randomUUID();
+        getEffects().newId();
+    }
+
+    @Override
+    public void newOriginalId() {
+        this.id = UUID.randomUUID();
+        this.originalId = id;
+        getEffects().newId();
+    }
+
+    @Override
+    public AbilityType getAbilityType() {
+        return this.abilityType;
+    }
+
+    @Override
+    public boolean resolve(Game game) {
+        boolean result = true;
+        //20100716 - 117.12
+        if (checkIfClause(game)) {
+            for (Effect effect: getEffects()) {
+                if (effect instanceof OneShotEffect) {
+                    if (!(effect instanceof PostResolveEffect))
+                        result &= effect.apply(game, this);
+                }
+                else {
+                    game.addEffect((ContinuousEffect) effect, this);
+                }
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public boolean activate(Game game, boolean noMana) {
+        // 20110204 - 700.2
+        if (!modes.choose(game, this))
+            return false;
+        //20100716 - 601.2b
+        if (getChoices().size() > 0 && getChoices().choose(game, this) == false) {
+            logger.debug("activate failed - choice");
+            return false;
+        }
+        //20100716 - 601.2b
+        if (getTargets().size() > 0 && getTargets().chooseTargets(getEffects().get(0).getOutcome(), this.controllerId, this, game) == false) {
+            logger.debug("activate failed - target");
+            return false;
+        }
 
         for (Cost cost : optionalCosts) {
             if (cost instanceof KickerManaCost) {
@@ -179,7 +179,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
                 }
             }
         }
-		//20100716 - 601.2e
+        //20100716 - 601.2e
         Card card = game.getCard(sourceId);
         if (card != null) {
             card.adjustCosts(this, game);
@@ -192,183 +192,183 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 
         // this is a hack to prevent mana abilities with mana costs from causing endless loops - pay other costs first
         if (this instanceof ManaAbility && !costs.pay(this, game, sourceId, controllerId, noMana)) {
-			logger.debug("activate mana ability failed - non mana costs");
-			return false;
+            logger.debug("activate mana ability failed - non mana costs");
+            return false;
         }
-        
-		if (!useAlternativeCost(game)) {
-			//20101001 - 601.2e
-			game.getContinuousEffects().costModification(this, game);
-			
-			//20100716 - 601.2f
-			if (!manaCostsToPay.pay(this, game, sourceId, controllerId, noMana)) {
-				logger.debug("activate failed - mana");
-				return false;
-			}
-		}
-		//20100716 - 601.2g
-		if (!costs.pay(this, game, sourceId, controllerId, noMana)) {
-			logger.debug("activate failed - non mana costs");
-			return false;
-		}
-		return true;
-	}
 
-	@Override
-	public void reset(Game game) {}
+        if (!useAlternativeCost(game)) {
+            //20101001 - 601.2e
+            game.getContinuousEffects().costModification(this, game);
 
-	protected boolean useAlternativeCost(Game game) {
-		for (AlternativeCost cost: alternativeCosts) {
-			if (cost.isAvailable(game, this)) {
-				if (game.getPlayer(this.controllerId).chooseUse(Outcome.Neutral, "Use alternative cost " + cost.getName(), game))
-					return cost.pay(this, game, sourceId, controllerId, false);
-			}
-		}
-		return false;
-	}
+            //20100716 - 601.2f
+            if (!manaCostsToPay.pay(this, game, sourceId, controllerId, noMana)) {
+                logger.debug("activate failed - mana");
+                return false;
+            }
+        }
+        //20100716 - 601.2g
+        if (!costs.pay(this, game, sourceId, controllerId, noMana)) {
+            logger.debug("activate failed - non mana costs");
+            return false;
+        }
+        return true;
+    }
 
-	@Override
-	public boolean checkIfClause(Game game) {
-		return true;
-	}
-
-	@Override
-	public UUID getControllerId() {
-		return controllerId;
-	}
-
-	@Override
-	public void setControllerId(UUID controllerId) {
-		this.controllerId = controllerId;
-	}
-
-
-	@Override
-	public UUID getSourceId() {
-		return sourceId;
-	}
-
-	@Override
-	public void setSourceId(UUID sourceId) {
-		this.sourceId = sourceId;
-	}
-
-	@Override
-	public Costs getCosts() {
-		return costs;
-	}
-
-	@Override
-	public ManaCosts<ManaCost> getManaCosts() {
-		return manaCosts;
-	}
-
-	/**
-	 * Should be used by {@link mage.abilities.effects.CostModificationEffect cost modification effects}
-	 * to manipulate what is actually paid before resolution.
-	 * 
-	 * @return
-	 */
     @Override
-	public ManaCosts<ManaCost> getManaCostsToPay ( ) {
-		return manaCostsToPay;
-	}
+    public void reset(Game game) {}
 
-	@Override
-	public List<AlternativeCost> getAlternativeCosts() {
-		return alternativeCosts;
-	}
+    protected boolean useAlternativeCost(Game game) {
+        for (AlternativeCost cost: alternativeCosts) {
+            if (cost.isAvailable(game, this)) {
+                if (game.getPlayer(this.controllerId).chooseUse(Outcome.Neutral, "Use alternative cost " + cost.getName(), game))
+                    return cost.pay(this, game, sourceId, controllerId, false);
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public Costs getOptionalCosts() {
-		return optionalCosts;
-	}
+    @Override
+    public boolean checkIfClause(Game game) {
+        return true;
+    }
 
-	@Override
-	public Effects getEffects() {
-		return modes.getMode().getEffects();
-	}
+    @Override
+    public UUID getControllerId() {
+        return controllerId;
+    }
 
-	@Override
-	public Effects getEffects(Game game, EffectType effectType) {
-		Effects typedEffects = new Effects();
-		for (Effect effect: getEffects()) {
-			if (effect.getEffectType() == effectType) {
-				typedEffects.add(effect);
-			}
-		}
-		return typedEffects;
-	}
+    @Override
+    public void setControllerId(UUID controllerId) {
+        this.controllerId = controllerId;
+    }
 
-	@Override
-	public Choices getChoices() {
-		return modes.getMode().getChoices();
-	}
 
-	@Override
-	public Zone getZone() {
-		return zone;
-	}
+    @Override
+    public UUID getSourceId() {
+        return sourceId;
+    }
 
-	@Override
-	public boolean isUsesStack() {
-		return usesStack;
-	}
+    @Override
+    public void setSourceId(UUID sourceId) {
+        this.sourceId = sourceId;
+    }
 
-	@Override
-	public String getRule() {
-		return getRule(false);
-	}
+    @Override
+    public Costs getCosts() {
+        return costs;
+    }
 
-	@Override
-	public String getRule(boolean all) {
-		StringBuilder sbRule = new StringBuilder();
+    @Override
+    public ManaCosts<ManaCost> getManaCosts() {
+        return manaCosts;
+    }
 
-		if (all || this.abilityType != AbilityType.SPELL) {
-			if (manaCosts.size() > 0) {
-				sbRule.append(manaCosts.getText());
-			}
-			if (costs.size() > 0) {
-				if (sbRule.length() > 0) {
-					sbRule.append(",");
-				}
-				sbRule.append(costs.getText());
-			}
-			if (sbRule.length() > 0) {
-				sbRule.append(": ");
-			}
-		}
-		else if (this.alternativeCosts.size() > 0) {
-			for (AlternativeCost cost: alternativeCosts) {
-				sbRule.append(cost.getText()).append("\n");
-			}
-		}
-		else {
-			for (Cost cost: this.costs) {
-				if (!(cost instanceof ManaCost)) {
-					sbRule.append("As an additional cost to cast {this}, ").append(cost.getText()).append("\n");
-				}
-			}
-		}
+    /**
+     * Should be used by {@link mage.abilities.effects.CostModificationEffect cost modification effects}
+     * to manipulate what is actually paid before resolution.
+     * 
+     * @return
+     */
+    @Override
+    public ManaCosts<ManaCost> getManaCostsToPay ( ) {
+        return manaCostsToPay;
+    }
 
-		sbRule.append(modes.getText());
+    @Override
+    public List<AlternativeCost> getAlternativeCosts() {
+        return alternativeCosts;
+    }
 
-		return sbRule.toString();
-	}
+    @Override
+    public Costs getOptionalCosts() {
+        return optionalCosts;
+    }
 
-	@Override
-	public String getRule(String source) {
-		return formatRule(getRule(), source);
-	}
+    @Override
+    public Effects getEffects() {
+        return modes.getMode().getEffects();
+    }
 
-	protected String formatRule(String rule, String source) {
-		String replace = rule.replace("{this}", source);
-		replace = replace.replace("{source}", source);
-		return replace;
-	}
+    @Override
+    public Effects getEffects(Game game, EffectType effectType) {
+        Effects typedEffects = new Effects();
+        for (Effect effect: getEffects()) {
+            if (effect.getEffectType() == effectType) {
+                typedEffects.add(effect);
+            }
+        }
+        return typedEffects;
+    }
 
-	@Override
-	public void addCost(Cost cost) {
+    @Override
+    public Choices getChoices() {
+        return modes.getMode().getChoices();
+    }
+
+    @Override
+    public Zone getZone() {
+        return zone;
+    }
+
+    @Override
+    public boolean isUsesStack() {
+        return usesStack;
+    }
+
+    @Override
+    public String getRule() {
+        return getRule(false);
+    }
+
+    @Override
+    public String getRule(boolean all) {
+        StringBuilder sbRule = new StringBuilder();
+
+        if (all || this.abilityType != AbilityType.SPELL) {
+            if (manaCosts.size() > 0) {
+                sbRule.append(manaCosts.getText());
+            }
+            if (costs.size() > 0) {
+                if (sbRule.length() > 0) {
+                    sbRule.append(",");
+                }
+                sbRule.append(costs.getText());
+            }
+            if (sbRule.length() > 0) {
+                sbRule.append(": ");
+            }
+        }
+        else if (this.alternativeCosts.size() > 0) {
+            for (AlternativeCost cost: alternativeCosts) {
+                sbRule.append(cost.getText()).append("\n");
+            }
+        }
+        else {
+            for (Cost cost: this.costs) {
+                if (!(cost instanceof ManaCost)) {
+                    sbRule.append("As an additional cost to cast {this}, ").append(cost.getText()).append("\n");
+                }
+            }
+        }
+
+        sbRule.append(modes.getText());
+
+        return sbRule.toString();
+    }
+
+    @Override
+    public String getRule(String source) {
+        return formatRule(getRule(), source);
+    }
+
+    protected String formatRule(String rule, String source) {
+        String replace = rule.replace("{this}", source);
+        replace = replace.replace("{source}", source);
+        return replace;
+    }
+
+    @Override
+    public void addCost(Cost cost) {
         if (cost != null) {
             if (cost instanceof ManaCost) {
                 this.addManaCost((ManaCost)cost);
@@ -377,76 +377,76 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
                 this.costs.add(cost);
             }
         }
-	}
+    }
 
-	@Override
-	public void addManaCost(ManaCost cost) {
-		if (cost != null) {
-			this.manaCosts.add(cost);
-			this.manaCostsToPay.add(cost);
-		}
-	}
+    @Override
+    public void addManaCost(ManaCost cost) {
+        if (cost != null) {
+            this.manaCosts.add(cost);
+            this.manaCostsToPay.add(cost);
+        }
+    }
 
-	@Override
-	public void addAlternativeCost(AlternativeCost cost) {
-		if (cost != null) {
-			this.alternativeCosts.add(cost);
-		}
-	}
+    @Override
+    public void addAlternativeCost(AlternativeCost cost) {
+        if (cost != null) {
+            this.alternativeCosts.add(cost);
+        }
+    }
 
-	@Override
-	public void addOptionalCost(Cost cost) {
-		if (cost != null) {
-			this.optionalCosts.add(cost);
-		}
-	}
+    @Override
+    public void addOptionalCost(Cost cost) {
+        if (cost != null) {
+            this.optionalCosts.add(cost);
+        }
+    }
 
-	@Override
-	public void addEffect(Effect effect) {
-		if (effect != null) {
-			getEffects().add(effect);
-		}
-	}
+    @Override
+    public void addEffect(Effect effect) {
+        if (effect != null) {
+            getEffects().add(effect);
+        }
+    }
 
-	@Override
-	public void addTarget(Target target) {
-		if (target != null) {
-			getTargets().add(target);
-		}
-	}
+    @Override
+    public void addTarget(Target target) {
+        if (target != null) {
+            getTargets().add(target);
+        }
+    }
 
-	@Override
-	public void addChoice(Choice choice) {
-		if (choice != null) {
-			getChoices().add(choice);
-		}
-	}
+    @Override
+    public void addChoice(Choice choice) {
+        if (choice != null) {
+            getChoices().add(choice);
+        }
+    }
 
-	@Override
-	public Targets getTargets() {
-		return modes.getMode().getTargets();
-	}
+    @Override
+    public Targets getTargets() {
+        return modes.getMode().getTargets();
+    }
 
-	@Override
-	public UUID getFirstTarget() {
-		return getTargets().getFirstTarget();
-	}
+    @Override
+    public UUID getFirstTarget() {
+        return getTargets().getFirstTarget();
+    }
 
-	@Override
-	public boolean isModal() {
-		return this.modes.size() > 1;
-	}
-	
-	@Override
-	public void addMode(Mode mode) {
-		this.modes.addMode(mode);
-	}
-	
-	@Override
-	public Modes getModes() {
-		return modes;
-	}
-    
+    @Override
+    public boolean isModal() {
+        return this.modes.size() > 1;
+    }
+
+    @Override
+    public void addMode(Mode mode) {
+        this.modes.addMode(mode);
+    }
+
+    @Override
+    public Modes getModes() {
+        return modes;
+    }
+
     @Override
     public boolean canChooseTarget(Game game) {
         for (Mode mode: modes.values()) {
@@ -455,7 +455,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
         }
         return false;
     }
-	
+
     @Override
     public boolean isInUseableZone(Game game, boolean checkLKI) {
 
@@ -476,9 +476,9 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
         Zone test = game.getState().getZone(sourceId);
         return test != null && zone.match(test);
     }
-    
-	@Override
-	public String toString() {
-		return getRule();
-	}
+
+    @Override
+    public String toString() {
+        return getRule();
+    }
 }

@@ -49,43 +49,43 @@ import mage.view.PlayerView;
  */
 public class PlayerPanel extends javax.swing.JPanel {
 
-	private UUID playerId;
-	private UUID gameId;
-	private Session session;
-	private PlayerView player;
+    private UUID playerId;
+    private UUID gameId;
+    private Session session;
+    private PlayerView player;
 
-	private ShowCardsDialog graveyard;
-	private BigCard bigCard;
+    private ShowCardsDialog graveyard;
+    private BigCard bigCard;
 
     /** Creates new form PlayerPanel */
     public PlayerPanel() {
         initComponents();
     }
 
-	public void init(UUID gameId, UUID playerId, BigCard bigCard) {
-		this.gameId = gameId;
-		this.playerId = playerId;
-		this.bigCard = bigCard;
-		session = MageFrame.getSession();
-	}
+    public void init(UUID gameId, UUID playerId, BigCard bigCard) {
+        this.gameId = gameId;
+        this.playerId = playerId;
+        this.bigCard = bigCard;
+        session = MageFrame.getSession();
+    }
 
-	public void update(PlayerView player) {
-		this.player = player;
-		this.txtLife.setText(Integer.toString(player.getLife()));
-		this.txtHand.setText(Integer.toString(player.getHandCount()));
-		this.txtLibrary.setText(Integer.toString(player.getLibraryCount()));
-		this.btnGrave.setText(Integer.toString(player.getGraveyard().size()));
-		this.btnPlayerName.setText(player.getName());
-		if (player.isActive()) {
-			this.btnPlayerName.setBackground(Color.DARK_GRAY);
-		}
-		else if (player.hasLeft()) {
-			this.btnPlayerName.setBackground(Color.RED);
-		}
-		else {
-			this.btnPlayerName.setBackground(Color.LIGHT_GRAY);
-		}
-	}
+    public void update(PlayerView player) {
+        this.player = player;
+        this.txtLife.setText(Integer.toString(player.getLife()));
+        this.txtHand.setText(Integer.toString(player.getHandCount()));
+        this.txtLibrary.setText(Integer.toString(player.getLibraryCount()));
+        this.btnGrave.setText(Integer.toString(player.getGraveyard().size()));
+        this.btnPlayerName.setText(player.getName());
+        if (player.isActive()) {
+            this.btnPlayerName.setBackground(Color.DARK_GRAY);
+        }
+        else if (player.hasLeft()) {
+            this.btnPlayerName.setBackground(Color.RED);
+        }
+        else {
+            this.btnPlayerName.setBackground(Color.LIGHT_GRAY);
+        }
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -192,16 +192,16 @@ public class PlayerPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-	private void btnPlayerNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayerNameActionPerformed
-		session.sendPlayerUUID(gameId, playerId);
-	}//GEN-LAST:event_btnPlayerNameActionPerformed
+    private void btnPlayerNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayerNameActionPerformed
+        session.sendPlayerUUID(gameId, playerId);
+    }//GEN-LAST:event_btnPlayerNameActionPerformed
 
-	private void btnGraveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraveActionPerformed
-		if (graveyard == null) {
-			graveyard = new ShowCardsDialog();
-		}
-		graveyard.loadCards(player.getName() + " graveyard", player.getGraveyard(), bigCard, Config.dimensions, gameId, false);
-	}//GEN-LAST:event_btnGraveActionPerformed
+    private void btnGraveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraveActionPerformed
+        if (graveyard == null) {
+            graveyard = new ShowCardsDialog();
+        }
+        graveyard.loadCards(player.getName() + " graveyard", player.getGraveyard(), bigCard, Config.dimensions, gameId, false);
+    }//GEN-LAST:event_btnGraveActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

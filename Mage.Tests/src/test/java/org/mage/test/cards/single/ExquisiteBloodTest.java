@@ -36,7 +36,7 @@ public class ExquisiteBloodTest extends CardTestPlayerBase {
 
         setStopAt(2, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
-        
+
         assertLife(playerB, 12);
         assertLife(playerA, 26);
     }

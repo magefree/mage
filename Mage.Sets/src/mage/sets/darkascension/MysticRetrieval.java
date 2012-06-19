@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class MysticRetrieval extends CardImpl<MysticRetrieval> {
     private static final FilterCard filter = new FilterCard("instant or sorcery card from your graveyard");
-    
+
     static {
         filter.getCardType().add(CardType.INSTANT);
         filter.getCardType().add(CardType.SORCERY);

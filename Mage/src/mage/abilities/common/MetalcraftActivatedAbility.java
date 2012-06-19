@@ -42,33 +42,33 @@ import mage.abilities.effects.Effect;
  */
 public class MetalcraftActivatedAbility extends ActivatedAbilityImpl<MetalcraftActivatedAbility> {
 
-	public MetalcraftActivatedAbility(Zone zone, Effect effect, ManaCosts cost) {
-		super(zone, effect, cost);
-		this.costs.add(new MetalcraftCost());
-	}
+    public MetalcraftActivatedAbility(Zone zone, Effect effect, ManaCosts cost) {
+        super(zone, effect, cost);
+        this.costs.add(new MetalcraftCost());
+    }
 
-	public MetalcraftActivatedAbility(Zone zone, Effect effect, Costs costs) {
-		super(zone, effect, costs);
-		this.costs.add(new MetalcraftCost());
-	}
+    public MetalcraftActivatedAbility(Zone zone, Effect effect, Costs costs) {
+        super(zone, effect, costs);
+        this.costs.add(new MetalcraftCost());
+    }
 
-	public MetalcraftActivatedAbility(Zone zone, Effect effect, Cost cost) {
-		super(zone, effect, cost);
-		this.costs.add(new MetalcraftCost());
-	}
+    public MetalcraftActivatedAbility(Zone zone, Effect effect, Cost cost) {
+        super(zone, effect, cost);
+        this.costs.add(new MetalcraftCost());
+    }
 
-	public MetalcraftActivatedAbility(MetalcraftActivatedAbility ability) {
-		super(ability);
-	}
+    public MetalcraftActivatedAbility(MetalcraftActivatedAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public MetalcraftActivatedAbility copy() {
-		return new MetalcraftActivatedAbility(this);
-	}
+    @Override
+    public MetalcraftActivatedAbility copy() {
+        return new MetalcraftActivatedAbility(this);
+    }
 
-	@Override
-	public String getRule() {
-		return "Metalcraft - " + super.getRule();
-	}
+    @Override
+    public String getRule() {
+        return "Metalcraft - " + super.getRule();
+    }
 
 }

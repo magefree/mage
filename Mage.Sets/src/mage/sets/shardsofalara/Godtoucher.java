@@ -90,7 +90,7 @@ class GodtoucherEffect extends PreventionEffectImpl<GodtoucherEffect> {
 
     public GodtoucherEffect(Duration duration) {
         super(duration);
-		staticText = "Prevent all damage that would be dealt to target creature with power 5 or greater this turn";
+        staticText = "Prevent all damage that would be dealt to target creature with power 5 or greater this turn";
     }
 
     public GodtoucherEffect(final GodtoucherEffect effect) {

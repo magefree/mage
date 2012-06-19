@@ -48,7 +48,7 @@ public class DreadDrone extends CardImpl<DreadDrone> {
         this.expansionSetCode = "ROE";
         this.subtype.add("Eldrazi");
         this.subtype.add("Drone");
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(1);
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new EldraziSpawnToken(), 2)));

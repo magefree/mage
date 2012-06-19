@@ -99,7 +99,7 @@ public class LevelUpAbilityTest extends CardTestPlayerBase {
 
         Permanent master = getPermanent("Transcendent Master", playerA.getId());
         Assert.assertEquals(12, master.getCounters().getCount(CounterType.LEVEL));
-        
+
         Assert.assertEquals("Power different", 9, master.getPower().getValue());
         Assert.assertEquals("Toughness different", 9, master.getToughness().getValue());
         Assert.assertTrue(master.getAbilities().contains(LifelinkAbility.getInstance()));

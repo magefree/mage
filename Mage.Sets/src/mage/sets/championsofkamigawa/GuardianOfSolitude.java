@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class GuardianOfSolitude extends CardImpl<GuardianOfSolitude> {
 
     private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
-    
+
     public GuardianOfSolitude(UUID ownerId) {
         super(ownerId, 64, "Guardian of Solitude", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.expansionSetCode = "CHK";

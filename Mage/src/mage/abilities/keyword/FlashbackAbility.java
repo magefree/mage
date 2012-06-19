@@ -46,110 +46,110 @@ import mage.players.Player;
  */
 public class FlashbackAbility extends ActivatedAbilityImpl<FlashbackAbility> {
 
-	public FlashbackAbility(Cost cost, Constants.TimingRule timingRule) {
-		super(Constants.Zone.GRAVEYARD, new FlashbackEffect(), cost);
-		this.timing = timingRule;
-		this.usesStack = false;
-		this.addEffect(new CreateDelayedTriggeredAbilityEffect(new FlashbackTriggeredAbility()));
-	}
+    public FlashbackAbility(Cost cost, Constants.TimingRule timingRule) {
+        super(Constants.Zone.GRAVEYARD, new FlashbackEffect(), cost);
+        this.timing = timingRule;
+        this.usesStack = false;
+        this.addEffect(new CreateDelayedTriggeredAbilityEffect(new FlashbackTriggeredAbility()));
+    }
 
-//	@Override
-//	public boolean activate(Game game, boolean noMana) {
-//		Card card = game.getCard(sourceId);
-//		if (card != null) {
-//			getEffects().get(0).setTargetPointer(new FixedTarget(card.getId()));
-//			return super.activate(game, noMana);
-//		}
-//		return false;
-//	}
+//    @Override
+//    public boolean activate(Game game, boolean noMana) {
+//        Card card = game.getCard(sourceId);
+//        if (card != null) {
+//            getEffects().get(0).setTargetPointer(new FixedTarget(card.getId()));
+//            return super.activate(game, noMana);
+//        }
+//        return false;
+//    }
 
-	public FlashbackAbility(final FlashbackAbility ability) {
-		super(ability);
-	}
+    public FlashbackAbility(final FlashbackAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public FlashbackAbility copy() {
-		return new FlashbackAbility(this);
-	}
+    @Override
+    public FlashbackAbility copy() {
+        return new FlashbackAbility(this);
+    }
 
-	@Override
-	public String getRule() {
-		StringBuilder sbRule = new StringBuilder("Flashback ");
-		if (manaCosts.size() > 0) {
-			sbRule.append(manaCosts.getText());
-		}
-		if (costs.size() > 0) {
-			if (sbRule.length() > 0) {
-				sbRule.append(",");
-			}
-			sbRule.append(costs.getText());
-		}
-		return sbRule.toString();
-	}
+    @Override
+    public String getRule() {
+        StringBuilder sbRule = new StringBuilder("Flashback ");
+        if (manaCosts.size() > 0) {
+            sbRule.append(manaCosts.getText());
+        }
+        if (costs.size() > 0) {
+            if (sbRule.length() > 0) {
+                sbRule.append(",");
+            }
+            sbRule.append(costs.getText());
+        }
+        return sbRule.toString();
+    }
 }
 
 class FlashbackEffect extends OneShotEffect<FlashbackEffect> {
 
-	public FlashbackEffect() {
-		super(Constants.Outcome.Benefit);
-		staticText = "";
-	}
+    public FlashbackEffect() {
+        super(Constants.Outcome.Benefit);
+        staticText = "";
+    }
 
-	public FlashbackEffect(final FlashbackEffect effect) {
-		super(effect);
-	}
+    public FlashbackEffect(final FlashbackEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public FlashbackEffect copy() {
-		return new FlashbackEffect(this);
-	}
+    @Override
+    public FlashbackEffect copy() {
+        return new FlashbackEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Card card = (Card) game.getObject(source.getSourceId());
-		if (card != null) {
-			Player controller = game.getPlayer(source.getControllerId());
-			if (controller != null) {
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Card card = (Card) game.getObject(source.getSourceId());
+        if (card != null) {
+            Player controller = game.getPlayer(source.getControllerId());
+            if (controller != null) {
                 card.getSpellAbility().clear();
                 int amount = source.getManaCostsToPay().getX();
                 card.getSpellAbility().getManaCostsToPay().setX(amount);
-				return controller.cast(card.getSpellAbility(), game, true);
-			}
-		}
-		return false;
-	}
+                return controller.cast(card.getSpellAbility(), game, true);
+            }
+        }
+        return false;
+    }
 }
 
 class FlashbackTriggeredAbility extends DelayedTriggeredAbility<FlashbackTriggeredAbility> {
 
-	public FlashbackTriggeredAbility() {
-		super(new ExileSourceEffect());
-		usesStack = false;
-	}
+    public FlashbackTriggeredAbility() {
+        super(new ExileSourceEffect());
+        usesStack = false;
+    }
 
-	public FlashbackTriggeredAbility(final FlashbackTriggeredAbility ability) {
-		super(ability);
-	}
+    public FlashbackTriggeredAbility(final FlashbackTriggeredAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public FlashbackTriggeredAbility copy() {
-		return new FlashbackTriggeredAbility(this);
-	}
+    @Override
+    public FlashbackTriggeredAbility copy() {
+        return new FlashbackTriggeredAbility(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(this.sourceId)) {
-			ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-			if (zEvent.getFromZone() == Constants.Zone.STACK) {
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(this.sourceId)) {
+            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+            if (zEvent.getFromZone() == Constants.Zone.STACK) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "(If the flashback cost was paid, exile this card instead of putting it anywhere else any time it would leave the stack)";
-	}
+    @Override
+    public String getRule() {
+        return "(If the flashback cost was paid, exile this card instead of putting it anywhere else any time it would leave the stack)";
+    }
 
 }

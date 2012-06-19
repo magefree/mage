@@ -88,16 +88,16 @@ class GlintHawkIdolTriggeredAbility extends TriggeredAbilityImpl<GlintHawkIdolTr
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && !event.getTargetId().equals(this.getSourceId())) {
-			ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-			if (zEvent.getToZone() == Constants.Zone.BATTLEFIELD) {
-				Permanent permanent = game.getPermanent(event.getTargetId());
-				if (permanent != null && permanent.getCardType().contains(CardType.ARTIFACT)
-						&& permanent.getControllerId().equals(this.controllerId)) {
-					return true;
-				}
-			}
-		}
-		return false;
+            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+            if (zEvent.getToZone() == Constants.Zone.BATTLEFIELD) {
+                Permanent permanent = game.getPermanent(event.getTargetId());
+                if (permanent != null && permanent.getCardType().contains(CardType.ARTIFACT)
+                        && permanent.getControllerId().equals(this.controllerId)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override
@@ -113,7 +113,7 @@ class GlintHawkIdolToken extends Token {
         cardType.add(CardType.CREATURE);
         subtype.add("Bird");
         power = new MageInt(2);
-		toughness = new MageInt(2);
+        toughness = new MageInt(2);
         addAbility(FlyingAbility.getInstance());
     }
 }

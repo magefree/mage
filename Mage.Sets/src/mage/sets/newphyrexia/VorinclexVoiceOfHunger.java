@@ -69,7 +69,7 @@ public class VorinclexVoiceOfHunger extends CardImpl<VorinclexVoiceOfHunger> {
         this.addAbility(TrampleAbility.getInstance());
         // Whenever you tap a land for mana, add one mana to your mana pool of any type that land produced.
         this.addAbility(new VorinclexTriggeredAbility1());
-        
+
         // Whenever an opponent taps a land for mana, that land doesn't untap during its controller's next untap step.
         this.addAbility(new VorinclexTriggeredAbility2());
     }
@@ -86,40 +86,40 @@ public class VorinclexVoiceOfHunger extends CardImpl<VorinclexVoiceOfHunger> {
 
 class VorinclexTriggeredAbility1 extends TriggeredManaAbility<VorinclexTriggeredAbility1> {
 
-	private static final String staticText = "Whenever you tap a land for mana, add one mana to your mana pool of any type that land produced.";
+    private static final String staticText = "Whenever you tap a land for mana, add one mana to your mana pool of any type that land produced.";
 
-	public VorinclexTriggeredAbility1() {
-		super(Zone.BATTLEFIELD, new VorinclexEffect());
-	}
+    public VorinclexTriggeredAbility1() {
+        super(Zone.BATTLEFIELD, new VorinclexEffect());
+    }
 
-	public VorinclexTriggeredAbility1(VorinclexTriggeredAbility1 ability) {
-		super(ability);
-	}
+    public VorinclexTriggeredAbility1(VorinclexTriggeredAbility1 ability) {
+        super(ability);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == GameEvent.EventType.TAPPED_FOR_MANA && event.getPlayerId().equals(controllerId)) {
-			Permanent permanent = game.getPermanent(event.getSourceId());
-			if (permanent == null) {
-				permanent = (Permanent) game.getLastKnownInformation(event.getSourceId(), Zone.BATTLEFIELD);
-			}
-			if (permanent != null && permanent.getCardType().contains(CardType.LAND)) {
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.TAPPED_FOR_MANA && event.getPlayerId().equals(controllerId)) {
+            Permanent permanent = game.getPermanent(event.getSourceId());
+            if (permanent == null) {
+                permanent = (Permanent) game.getLastKnownInformation(event.getSourceId(), Zone.BATTLEFIELD);
+            }
+            if (permanent != null && permanent.getCardType().contains(CardType.LAND)) {
                 getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
                 return true;
-			}
-		}
-		return false;
-	}
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public VorinclexTriggeredAbility1 copy() {
-		return new VorinclexTriggeredAbility1(this);
-	}
+    @Override
+    public VorinclexTriggeredAbility1 copy() {
+        return new VorinclexTriggeredAbility1(this);
+    }
 
-	@Override
-	public String getRule() {
-		return staticText;
-	}
+    @Override
+    public String getRule() {
+        return staticText;
+    }
 }
 
 
@@ -129,11 +129,11 @@ class VorinclexEffect extends ManaEffect<VorinclexEffect> {
         super();
         staticText = "add one mana to your mana pool of any type that land produced";
     }
-    
+
     public VorinclexEffect(final VorinclexEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent land = game.getPermanent(this.targetPointer.getFirst(game, source));
@@ -194,40 +194,40 @@ class VorinclexEffect extends ManaEffect<VorinclexEffect> {
     public VorinclexEffect copy() {
         return new VorinclexEffect(this);
     }
-    
+
 }
 
 class VorinclexTriggeredAbility2 extends TriggeredAbilityImpl<VorinclexTriggeredAbility2> {
 
-	private static final String staticText = "Whenever an opponent taps a land for mana, that land doesn't untap during its controller's next untap step.";
+    private static final String staticText = "Whenever an opponent taps a land for mana, that land doesn't untap during its controller's next untap step.";
 
-	public VorinclexTriggeredAbility2() {
-		super(Zone.BATTLEFIELD, new SkipNextUntapTargetEffect());
-	}
+    public VorinclexTriggeredAbility2() {
+        super(Zone.BATTLEFIELD, new SkipNextUntapTargetEffect());
+    }
 
-	public VorinclexTriggeredAbility2(VorinclexTriggeredAbility2 ability) {
-		super(ability);
-	}
+    public VorinclexTriggeredAbility2(VorinclexTriggeredAbility2 ability) {
+        super(ability);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == GameEvent.EventType.TAPPED_FOR_MANA && game.getOpponents(controllerId).contains(event.getPlayerId())) {
-			Permanent permanent = game.getPermanent(event.getSourceId());
-			if (permanent != null && permanent.getCardType().contains(CardType.LAND)) {
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.TAPPED_FOR_MANA && game.getOpponents(controllerId).contains(event.getPlayerId())) {
+            Permanent permanent = game.getPermanent(event.getSourceId());
+            if (permanent != null && permanent.getCardType().contains(CardType.LAND)) {
                 getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
-				return true;
-			}
-		}
-		return false;
-	}
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public VorinclexTriggeredAbility2 copy() {
-		return new VorinclexTriggeredAbility2(this);
-	}
+    @Override
+    public VorinclexTriggeredAbility2 copy() {
+        return new VorinclexTriggeredAbility2(this);
+    }
 
-	@Override
-	public String getRule() {
-		return staticText;
-	}
+    @Override
+    public String getRule() {
+        return staticText;
+    }
 }

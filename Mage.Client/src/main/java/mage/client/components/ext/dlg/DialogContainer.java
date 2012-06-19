@@ -28,14 +28,14 @@ public class DialogContainer extends JPanel {
 
     private boolean drawContainer = true;
     private DialogManager.MTGDialogs dialogType;
-    
+
     public DialogContainer(DialogManager.MTGDialogs dialogType, DlgParams params) {
         setOpaque(false);
         this.dialogType = dialogType;
 
         setLayout(null);
         drawContainer = true;
-        
+
         if (dialogType == DialogManager.MTGDialogs.MessageDialog) {
             //backgroundColor = new Color(0, 255, 255, 60);
             if (params.type.equals(MessageDlg.Types.Warning)) {
@@ -74,10 +74,10 @@ public class DialogContainer extends JPanel {
             //backgroundColor = new Color(200, 200, 172, 120);
             //backgroundColor = new Color(180, 150, 200, 120);
             //backgroundColor = new Color(0, 255, 0, 60);
-        	
-        	//latest:
-        	backgroundColor = new Color(139, 46, 173, 20);
-        	//backgroundColor = new Color(139, 46, 173, 0);
+
+            //latest:
+            backgroundColor = new Color(139, 46, 173, 20);
+            //backgroundColor = new Color(139, 46, 173, 0);
 
             alpha = 0;
             ChoiceDialog dlg = new ChoiceDialog(params);
@@ -150,12 +150,12 @@ public class DialogContainer extends JPanel {
 
     @Override
     protected void paintComponent(Graphics g) {
-    	
-    	if (!drawContainer) {
-    		return;
-    	}
-    	
-    	int x = X_OFFSET;
+
+        if (!drawContainer) {
+            return;
+        }
+
+        int x = X_OFFSET;
         int y = Y_OFFSET;
         int w = getWidth() - 2 * X_OFFSET;
         int h = getHeight() - 2 * Y_OFFSET;
@@ -205,9 +205,9 @@ public class DialogContainer extends JPanel {
     public void showDialog(boolean bShow) {
         setVisible(bShow);
     }
-    
+
     public DialogManager.MTGDialogs getType() {
-    	return this.dialogType;
+        return this.dialogType;
     }
 
     /**

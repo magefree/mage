@@ -74,13 +74,13 @@ public class FeedThePack extends CardImpl<FeedThePack> {
 class FeedThePackEffect extends OneShotEffect<FeedThePackEffect> {
 
     private static final FilterNonTokenPermanent filter = new FilterNonTokenPermanent("nontoken creature");
-    
+
     static {
         filter.getCardType().add(CardType.CREATURE);
         filter.setScopeCardType(Filter.ComparisonScope.Any);
         filter.setTargetController(Constants.TargetController.YOU);
     }
-    
+
     public FeedThePackEffect() {
         super(Constants.Outcome.Sacrifice);
         this.staticText = "sacrifice a nontoken creature. If you do, put X 2/2 green Wolf creature tokens onto the battlefield, where X is the sacrificed creature's toughness";

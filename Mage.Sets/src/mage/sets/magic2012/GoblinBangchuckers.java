@@ -60,9 +60,9 @@ public class GoblinBangchuckers extends CardImpl<GoblinBangchuckers> {
         this.toughness = new MageInt(2);
 
         // {tap}: Flip a coin. If you win the flip, Goblin Bangchuckers deals 2 damage to target creature or player. If you lose the flip, Goblin Bangchuckers deals 2 damage to itself.
-		Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GoblinBangchuckersEffect(), new TapSourceCost());
-		ability.addTarget(new TargetCreatureOrPlayer());
-		this.addAbility(ability);
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GoblinBangchuckersEffect(), new TapSourceCost());
+        ability.addTarget(new TargetCreatureOrPlayer());
+        this.addAbility(ability);
     }
 
     public GoblinBangchuckers(final GoblinBangchuckers card) {
@@ -77,43 +77,43 @@ public class GoblinBangchuckers extends CardImpl<GoblinBangchuckers> {
 
 class GoblinBangchuckersEffect extends OneShotEffect<GoblinBangchuckersEffect> {
 
-	public GoblinBangchuckersEffect() {
-		super(Constants.Outcome.Damage);
-		staticText = "{tap}: Flip a coin. If you win the flip, Goblin Bangchuckers deals 2 damage to target creature or player. If you lose the flip, Goblin Bangchuckers deals 2 damage to itself";
-	}
+    public GoblinBangchuckersEffect() {
+        super(Constants.Outcome.Damage);
+        staticText = "{tap}: Flip a coin. If you win the flip, Goblin Bangchuckers deals 2 damage to target creature or player. If you lose the flip, Goblin Bangchuckers deals 2 damage to itself";
+    }
 
-	public GoblinBangchuckersEffect(GoblinBangchuckersEffect effect) {
-		super(effect);
-	}
+    public GoblinBangchuckersEffect(GoblinBangchuckersEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player controller = game.getPlayer(source.getControllerId());
-		if (controller != null) {
-			if (controller.flipCoin(game)) {
-				Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
-				if (permanent != null) {
-					permanent.damage(2, source.getSourceId(), game, true, false);
-					return true;
-				}
-				Player player = game.getPlayer(targetPointer.getFirst(game, source));
-				if (player != null) {
-					player.damage(2, source.getSourceId(), game, false, true);
-					return true;
-				}
-			} else {
-				Permanent permanent = game.getPermanent(source.getSourceId());
-				if (permanent != null) {
-					permanent.damage(2, source.getSourceId(), game, true, false);
-					return true;
-				}
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            if (controller.flipCoin(game)) {
+                Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+                if (permanent != null) {
+                    permanent.damage(2, source.getSourceId(), game, true, false);
+                    return true;
+                }
+                Player player = game.getPlayer(targetPointer.getFirst(game, source));
+                if (player != null) {
+                    player.damage(2, source.getSourceId(), game, false, true);
+                    return true;
+                }
+            } else {
+                Permanent permanent = game.getPermanent(source.getSourceId());
+                if (permanent != null) {
+                    permanent.damage(2, source.getSourceId(), game, true, false);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public GoblinBangchuckersEffect copy() {
-		return new GoblinBangchuckersEffect(this);
-	}
+    @Override
+    public GoblinBangchuckersEffect copy() {
+        return new GoblinBangchuckersEffect(this);
+    }
 }

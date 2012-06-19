@@ -44,53 +44,53 @@ import java.util.UUID;
  */
 public class ExileTargetEffect extends OneShotEffect<ExileTargetEffect> {
 
-	private String exileZone = null;
-	private UUID exileId = null;
+    private String exileZone = null;
+    private UUID exileId = null;
 
-	public ExileTargetEffect(UUID exileId, String exileZone) {
-		this();
-		this.exileZone = exileZone;
-		this.exileId = exileId;
-	}
+    public ExileTargetEffect(UUID exileId, String exileZone) {
+        this();
+        this.exileZone = exileZone;
+        this.exileId = exileId;
+    }
 
     public ExileTargetEffect(String exileZone) {
         this();
         this.exileZone = exileZone;
     }
 
-	public ExileTargetEffect() {
-		super(Outcome.Exile);
-	}
+    public ExileTargetEffect() {
+        super(Outcome.Exile);
+    }
 
-	public ExileTargetEffect(final ExileTargetEffect effect) {
-		super(effect);
-		this.exileZone = effect.exileZone;
-		this.exileId = effect.exileId;
-	}
+    public ExileTargetEffect(final ExileTargetEffect effect) {
+        super(effect);
+        this.exileZone = effect.exileZone;
+        this.exileId = effect.exileId;
+    }
 
     @Override
-	public ExileTargetEffect copy() {
-		return new ExileTargetEffect(this);
-	}
+    public ExileTargetEffect copy() {
+        return new ExileTargetEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
 
         if (exileId == null) {
             exileId = getId();
         }
 
-		if (permanent != null) {
-        	return permanent.moveToExile(exileId, exileZone, source.getSourceId(), game);
-		} else {
+        if (permanent != null) {
+            return permanent.moveToExile(exileId, exileZone, source.getSourceId(), game);
+        } else {
             Card card = game.getCard(targetPointer.getFirst(game, source));
             if (card != null) {
                 return card.moveToExile(exileId, exileZone, source.getSourceId(), game);
             }
         }
         return false;
-	}
+    }
 
     @Override
     public String getText(Mode mode) {

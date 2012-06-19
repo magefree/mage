@@ -43,39 +43,39 @@ import static mage.Constants.*;
  */
 public class PlayTheTopCardEffect extends AsThoughEffectImpl<PlayTheTopCardEffect> {
 
-	private FilterCard filter;
+    private FilterCard filter;
 
-	public PlayTheTopCardEffect(FilterCard filter) {
-		super(AsThoughEffectType.CAST, Duration.WhileOnBattlefield, Outcome.Benefit);
-		this.filter = filter;
-		staticText = "You may play the top card of your library if it's a " + filter.getMessage();
-	}
+    public PlayTheTopCardEffect(FilterCard filter) {
+        super(AsThoughEffectType.CAST, Duration.WhileOnBattlefield, Outcome.Benefit);
+        this.filter = filter;
+        staticText = "You may play the top card of your library if it's a " + filter.getMessage();
+    }
 
-	public PlayTheTopCardEffect(final PlayTheTopCardEffect effect) {
-		super(effect);
-		this.filter = effect.filter;
-	}
+    public PlayTheTopCardEffect(final PlayTheTopCardEffect effect) {
+        super(effect);
+        this.filter = effect.filter;
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
 
-	@Override
-	public PlayTheTopCardEffect copy() {
-		return new PlayTheTopCardEffect(this);
-	}
+    @Override
+    public PlayTheTopCardEffect copy() {
+        return new PlayTheTopCardEffect(this);
+    }
 
-	@Override
-	public boolean applies(UUID sourceId, Ability source, Game game) {
-		Card card = game.getCard(sourceId);
-		if (card != null && filter.match(card, game)) {
-			Player player = game.getPlayer(card.getOwnerId());
-			if (player != null && card.equals(player.getLibrary().getFromTop(game))) {
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean applies(UUID sourceId, Ability source, Game game) {
+        Card card = game.getCard(sourceId);
+        if (card != null && filter.match(card, game)) {
+            Player player = game.getPlayer(card.getOwnerId());
+            if (player != null && card.equals(player.getLibrary().getFromTop(game))) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

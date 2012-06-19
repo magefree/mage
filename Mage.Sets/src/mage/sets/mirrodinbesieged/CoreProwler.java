@@ -49,8 +49,8 @@ public class CoreProwler extends CardImpl<CoreProwler> {
         this.subtype.add("Horror");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-		this.addAbility(InfectAbility.getInstance());
-		this.addAbility(new DiesTriggeredAbility(new ProliferateEffect()));
+        this.addAbility(InfectAbility.getInstance());
+        this.addAbility(new DiesTriggeredAbility(new ProliferateEffect()));
     }
 
     public CoreProwler (final CoreProwler card) {

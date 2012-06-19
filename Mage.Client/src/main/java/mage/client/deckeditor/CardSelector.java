@@ -62,10 +62,10 @@ import java.util.List;
  */
 public class CardSelector extends javax.swing.JPanel implements ComponentListener {
 
-	private final List<Card> cards = new ArrayList<Card>();
-	private final FilterCard filter = new FilterCard();
-	private BigCard bigCard;
-	private boolean limited = false;
+    private final List<Card> cards = new ArrayList<Card>();
+    private final FilterCard filter = new FilterCard();
+    private BigCard bigCard;
+    private boolean limited = false;
 
     private final ActionListener searchAction = new ActionListener() {
         @Override
@@ -73,184 +73,184 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             jButtonSearchActionPerformed(evt);
         }
     };
-	
+
     /** Creates new form CardSelector */
     public CardSelector() {
         initComponents();
         cardGrid = new CardGrid();
-		makeTransparent();
-		initListViewComponents();
-		currentView = mainModel; // by default we use List View
+        makeTransparent();
+        initListViewComponents();
+        currentView = mainModel; // by default we use List View
     }
 
-	public void makeTransparent() {
-		this.addComponentListener(this);
-		setOpaque(false);
-	    cardGrid.setOpaque(false);
-	    jScrollPane1.setOpaque(false);
-	    jScrollPane1.getViewport().setOpaque(false);
-		cbSortBy.setModel(new DefaultComboBoxModel(SortBy.values()));
+    public void makeTransparent() {
+        this.addComponentListener(this);
+        setOpaque(false);
+        cardGrid.setOpaque(false);
+        jScrollPane1.setOpaque(false);
+        jScrollPane1.getViewport().setOpaque(false);
+        cbSortBy.setModel(new DefaultComboBoxModel(SortBy.values()));
         jTextFieldSearch.addActionListener(searchAction);
-	}
+    }
 
-	public void initListViewComponents() {
-		mainTable = new JTable();
+    public void initListViewComponents() {
+        mainTable = new JTable();
 
-		mainModel = new TableModel();
-		mainModel.addListeners(mainTable);
+        mainModel = new TableModel();
+        mainModel.addListeners(mainTable);
 
         mainTable.setModel(mainModel);
-		mainTable.setForeground(Color.white);
-		DefaultTableCellRenderer myRenderer = (DefaultTableCellRenderer) mainTable.getDefaultRenderer(String.class);
-		myRenderer.setBackground(new Color(0, 0, 0, 100));
-		mainTable.getColumnModel().getColumn(0).setMaxWidth(0);
-		mainTable.getColumnModel().getColumn(0).setPreferredWidth(10);
-		mainTable.getColumnModel().getColumn(1).setPreferredWidth(110);
-		mainTable.getColumnModel().getColumn(2).setPreferredWidth(90);
-		mainTable.getColumnModel().getColumn(3).setPreferredWidth(50);
-		mainTable.getColumnModel().getColumn(4).setPreferredWidth(170);
-		mainTable.getColumnModel().getColumn(5).setPreferredWidth(30);
-		mainTable.getColumnModel().getColumn(6).setPreferredWidth(15);
-		mainTable.getColumnModel().getColumn(7).setPreferredWidth(15);
+        mainTable.setForeground(Color.white);
+        DefaultTableCellRenderer myRenderer = (DefaultTableCellRenderer) mainTable.getDefaultRenderer(String.class);
+        myRenderer.setBackground(new Color(0, 0, 0, 100));
+        mainTable.getColumnModel().getColumn(0).setMaxWidth(0);
+        mainTable.getColumnModel().getColumn(0).setPreferredWidth(10);
+        mainTable.getColumnModel().getColumn(1).setPreferredWidth(110);
+        mainTable.getColumnModel().getColumn(2).setPreferredWidth(90);
+        mainTable.getColumnModel().getColumn(3).setPreferredWidth(50);
+        mainTable.getColumnModel().getColumn(4).setPreferredWidth(170);
+        mainTable.getColumnModel().getColumn(5).setPreferredWidth(30);
+        mainTable.getColumnModel().getColumn(6).setPreferredWidth(15);
+        mainTable.getColumnModel().getColumn(7).setPreferredWidth(15);
 
-		jScrollPane1.setViewportView(mainTable);
+        jScrollPane1.setViewportView(mainTable);
 
-		mainTable.setOpaque(false);
+        mainTable.setOpaque(false);
 
-		cbSortBy.setEnabled(false);
-	    chkPiles.setEnabled(false);
+        cbSortBy.setEnabled(false);
+        chkPiles.setEnabled(false);
 
-		mainTable.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent e) {
-				if (e.getClickCount() == 2 && !e.isConsumed()) {
-					e.consume();
-					jButtonAddToMainActionPerformed(null);
-				}
-			}
-		});
-	}
+        mainTable.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent e) {
+                if (e.getClickCount() == 2 && !e.isConsumed()) {
+                    e.consume();
+                    jButtonAddToMainActionPerformed(null);
+                }
+            }
+        });
+    }
 
-	public void loadSideboard(List<Card> sideboard, BigCard bigCard) {
-		this.bigCard = bigCard;
-		this.btnBooster.setVisible(false);
-		this.btnClear.setVisible(false);
-		this.cbExpansionSet.setVisible(false);
-		this.limited = true;
-		this.cards.clear();
-		for (Card card: sideboard) {
-			this.cards.add(card);
-		}
-		initFilter();
-		filterCards();
-	}
+    public void loadSideboard(List<Card> sideboard, BigCard bigCard) {
+        this.bigCard = bigCard;
+        this.btnBooster.setVisible(false);
+        this.btnClear.setVisible(false);
+        this.cbExpansionSet.setVisible(false);
+        this.limited = true;
+        this.cards.clear();
+        for (Card card: sideboard) {
+            this.cards.add(card);
+        }
+        initFilter();
+        filterCards();
+    }
 
-	public void loadCards(BigCard bigCard) {
-		this.bigCard = bigCard;
-		this.btnBooster.setVisible(true);
-		this.btnClear.setVisible(true);
-		this.cbExpansionSet.setVisible(true);
-		Object[] l = Sets.getInstance().values().toArray();
-		Arrays.sort(l, new Comparator<Object>() {
-		    @Override
-		    public int compare(Object o1, Object o2) {
-		        return ((ExpansionSet)o2).getReleaseDate().compareTo(((ExpansionSet)o1).getReleaseDate());
-		    }
-		});
-		cbExpansionSet.setModel(new DefaultComboBoxModel(l));
-		cbExpansionSet.insertItemAt("-- All sets", 0);
+    public void loadCards(BigCard bigCard) {
+        this.bigCard = bigCard;
+        this.btnBooster.setVisible(true);
+        this.btnClear.setVisible(true);
+        this.cbExpansionSet.setVisible(true);
+        Object[] l = Sets.getInstance().values().toArray();
+        Arrays.sort(l, new Comparator<Object>() {
+            @Override
+            public int compare(Object o1, Object o2) {
+                return ((ExpansionSet)o2).getReleaseDate().compareTo(((ExpansionSet)o1).getReleaseDate());
+            }
+        });
+        cbExpansionSet.setModel(new DefaultComboBoxModel(l));
+        cbExpansionSet.insertItemAt("-- All sets", 0);
         cbExpansionSet.insertItemAt("-- Standard", 1);
-		cbExpansionSet.setSelectedIndex(0);
-		initFilter();
-		if (this.cbExpansionSet.getSelectedItem() instanceof  ExpansionSet) {
-			filter.getExpansionSetCode().add(((ExpansionSet) this.cbExpansionSet.getSelectedItem()).getCode());
-		} else if (this.cbExpansionSet.getSelectedItem().equals("-- Standard")) {
+        cbExpansionSet.setSelectedIndex(0);
+        initFilter();
+        if (this.cbExpansionSet.getSelectedItem() instanceof  ExpansionSet) {
+            filter.getExpansionSetCode().add(((ExpansionSet) this.cbExpansionSet.getSelectedItem()).getCode());
+        } else if (this.cbExpansionSet.getSelectedItem().equals("-- Standard")) {
             filter.getExpansionSetCode().addAll(ConstructedFormats.getSetsByFormat("Standard"));
         }
-		filterCards();
-	}
+        filterCards();
+    }
 
-	private void initFilter() {
-		filter.setUseColor(true);
-		filter.getColor().setBlack(true);
-		filter.getColor().setBlue(true);
-		filter.getColor().setGreen(true);
-		filter.getColor().setWhite(true);
-		filter.getColor().setRed(true);
-		filter.setColorless(true);
-		filter.setUseColorless(true);
-		filter.setNotColor(false);
-		filter.setScopeColor(ComparisonScope.Any);
-		filter.getCardType().add(CardType.LAND);
-		filter.getCardType().add(CardType.ARTIFACT);
-		filter.getCardType().add(CardType.CREATURE);
-		filter.getCardType().add(CardType.ENCHANTMENT);
-		filter.getCardType().add(CardType.INSTANT);
-		filter.getCardType().add(CardType.PLANESWALKER);
-		filter.getCardType().add(CardType.SORCERY);
-		filter.setScopeCardType(ComparisonScope.Any);
-	}
+    private void initFilter() {
+        filter.setUseColor(true);
+        filter.getColor().setBlack(true);
+        filter.getColor().setBlue(true);
+        filter.getColor().setGreen(true);
+        filter.getColor().setWhite(true);
+        filter.getColor().setRed(true);
+        filter.setColorless(true);
+        filter.setUseColorless(true);
+        filter.setNotColor(false);
+        filter.setScopeColor(ComparisonScope.Any);
+        filter.getCardType().add(CardType.LAND);
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.getCardType().add(CardType.CREATURE);
+        filter.getCardType().add(CardType.ENCHANTMENT);
+        filter.getCardType().add(CardType.INSTANT);
+        filter.getCardType().add(CardType.PLANESWALKER);
+        filter.getCardType().add(CardType.SORCERY);
+        filter.setScopeCardType(ComparisonScope.Any);
+    }
 
-	private void filterCards() {
-		try {
-			List<Card> filteredCards = new ArrayList<Card>();
-			setCursor(new Cursor(Cursor.WAIT_CURSOR));
-			if (limited) {
-				for (Card card: cards) {
-					if (filter.match(card, null))
-						filteredCards.add(card);
-				}
-			}
-			else {
-				for (Card card: CardsStorage.getAllCards()) {
-					if (filter.match(card, null))
-						filteredCards.add(card);
-				}
-			}
-			this.currentView.loadCards(new CardsView(filteredCards), (SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected(), bigCard, null);
-		    this.cardCount.setText(String.valueOf(filteredCards.size()));
+    private void filterCards() {
+        try {
+            List<Card> filteredCards = new ArrayList<Card>();
+            setCursor(new Cursor(Cursor.WAIT_CURSOR));
+            if (limited) {
+                for (Card card: cards) {
+                    if (filter.match(card, null))
+                        filteredCards.add(card);
+                }
+            }
+            else {
+                for (Card card: CardsStorage.getAllCards()) {
+                    if (filter.match(card, null))
+                        filteredCards.add(card);
+                }
+            }
+            this.currentView.loadCards(new CardsView(filteredCards), (SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected(), bigCard, null);
+            this.cardCount.setText(String.valueOf(filteredCards.size()));
         }
-		finally {
-			setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-		}
-	}
+        finally {
+            setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        }
+    }
 
-	public ICardGrid getCardsList() {
-		return this.currentView;
-	}
+    public ICardGrid getCardsList() {
+        return this.currentView;
+    }
 
-	public List<ICardGrid> getCardGridComponents() {
-		List<ICardGrid> components = new ArrayList<ICardGrid>();
-		components.add(mainModel);
-		components.add(cardGrid);
-		return components;
-	}
+    public List<ICardGrid> getCardGridComponents() {
+        List<ICardGrid> components = new ArrayList<ICardGrid>();
+        components.add(mainModel);
+        components.add(cardGrid);
+        return components;
+    }
 
-	public void removeCard(UUID cardId) {
-		this.mainModel.removeCard(cardId);
-		this.cardGrid.removeCard(cardId);
-		for (Card card: cards) {
-			if (card.getId().equals(cardId)) {
-				cards.remove(card);
-				break;
-			}
-		}
-	}
+    public void removeCard(UUID cardId) {
+        this.mainModel.removeCard(cardId);
+        this.cardGrid.removeCard(cardId);
+        for (Card card: cards) {
+            if (card.getId().equals(cardId)) {
+                cards.remove(card);
+                break;
+            }
+        }
+    }
 
-	public Card getCard(UUID cardId) {
-		if (!cards.isEmpty()) {
-			for (Card card: cards) {
-				if (card.getId().equals(cardId))
-					return card;
-			}
-		}
-		else {
-			for (Card card: CardsStorage.getAllCards()) {
-				if (card.getId().equals(cardId))
-					return card;
-			}
-		}
-		return null;
-	}
+    public Card getCard(UUID cardId) {
+        if (!cards.isEmpty()) {
+            for (Card card: cards) {
+                if (card.getId().equals(cardId))
+                    return card;
+            }
+        }
+        else {
+            for (Card card: CardsStorage.getAllCards()) {
+                if (card.getId().equals(cardId))
+                    return card;
+            }
+        }
+        return null;
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -654,186 +654,186 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         );
     }// </editor-fold>//GEN-END:initComponents
 
-	private void rdoGreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoGreenActionPerformed
-		filter.getColor().setGreen(this.rdoGreen.isSelected());
-		filterCards();
-	}//GEN-LAST:event_rdoGreenActionPerformed
+    private void rdoGreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoGreenActionPerformed
+        filter.getColor().setGreen(this.rdoGreen.isSelected());
+        filterCards();
+    }//GEN-LAST:event_rdoGreenActionPerformed
 
-	private void rdoBlackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoBlackActionPerformed
-		filter.getColor().setBlack(this.rdoBlack.isSelected());
-		filterCards();
-	}//GEN-LAST:event_rdoBlackActionPerformed
+    private void rdoBlackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoBlackActionPerformed
+        filter.getColor().setBlack(this.rdoBlack.isSelected());
+        filterCards();
+    }//GEN-LAST:event_rdoBlackActionPerformed
 
-	private void rdoWhiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoWhiteActionPerformed
-		filter.getColor().setWhite(this.rdoWhite.isSelected());
-		filterCards();
-	}//GEN-LAST:event_rdoWhiteActionPerformed
+    private void rdoWhiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoWhiteActionPerformed
+        filter.getColor().setWhite(this.rdoWhite.isSelected());
+        filterCards();
+    }//GEN-LAST:event_rdoWhiteActionPerformed
 
-	private void rdoRedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoRedActionPerformed
-		filter.getColor().setRed(this.rdoRed.isSelected());
-		filterCards();
-	}//GEN-LAST:event_rdoRedActionPerformed
+    private void rdoRedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoRedActionPerformed
+        filter.getColor().setRed(this.rdoRed.isSelected());
+        filterCards();
+    }//GEN-LAST:event_rdoRedActionPerformed
 
-	private void rdoBlueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoBlueActionPerformed
-		filter.getColor().setBlue(this.rdoBlue.isSelected());
-		filterCards();
-	}//GEN-LAST:event_rdoBlueActionPerformed
+    private void rdoBlueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoBlueActionPerformed
+        filter.getColor().setBlue(this.rdoBlue.isSelected());
+        filterCards();
+    }//GEN-LAST:event_rdoBlueActionPerformed
 
-	private void rdoColorlessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoColorlessActionPerformed
-		filter.setColorless(this.rdoColorless.isSelected());
-		filterCards();
-	}//GEN-LAST:event_rdoColorlessActionPerformed
+    private void rdoColorlessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoColorlessActionPerformed
+        filter.setColorless(this.rdoColorless.isSelected());
+        filterCards();
+    }//GEN-LAST:event_rdoColorlessActionPerformed
 
-	private void rdoLandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoLandActionPerformed
-		if (this.rdoLand.isSelected())
-			filter.getCardType().add(CardType.LAND);
-		else
-			filter.getCardType().remove(CardType.LAND);
-		filterCards();
-	}//GEN-LAST:event_rdoLandActionPerformed
+    private void rdoLandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoLandActionPerformed
+        if (this.rdoLand.isSelected())
+            filter.getCardType().add(CardType.LAND);
+        else
+            filter.getCardType().remove(CardType.LAND);
+        filterCards();
+    }//GEN-LAST:event_rdoLandActionPerformed
 
-	private void rdoCreaturesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoCreaturesActionPerformed
-		if (this.rdoCreatures.isSelected())
-			filter.getCardType().add(CardType.CREATURE);
-		else
-			filter.getCardType().remove(CardType.CREATURE);
-		filterCards();
-	}//GEN-LAST:event_rdoCreaturesActionPerformed
+    private void rdoCreaturesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoCreaturesActionPerformed
+        if (this.rdoCreatures.isSelected())
+            filter.getCardType().add(CardType.CREATURE);
+        else
+            filter.getCardType().remove(CardType.CREATURE);
+        filterCards();
+    }//GEN-LAST:event_rdoCreaturesActionPerformed
 
-	private void rdoArtifactsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoArtifactsActionPerformed
-		if (this.rdoArtifacts.isSelected())
-			filter.getCardType().add(CardType.ARTIFACT);
-		else
-			filter.getCardType().remove(CardType.ARTIFACT);
-		filterCards();
-	}//GEN-LAST:event_rdoArtifactsActionPerformed
+    private void rdoArtifactsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoArtifactsActionPerformed
+        if (this.rdoArtifacts.isSelected())
+            filter.getCardType().add(CardType.ARTIFACT);
+        else
+            filter.getCardType().remove(CardType.ARTIFACT);
+        filterCards();
+    }//GEN-LAST:event_rdoArtifactsActionPerformed
 
-	private void rdoEnchantmentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoEnchantmentsActionPerformed
-		if (this.rdoEnchantments.isSelected())
-			filter.getCardType().add(CardType.ENCHANTMENT);
-		else
-			filter.getCardType().remove(CardType.ENCHANTMENT);
-		filterCards();
-	}//GEN-LAST:event_rdoEnchantmentsActionPerformed
+    private void rdoEnchantmentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoEnchantmentsActionPerformed
+        if (this.rdoEnchantments.isSelected())
+            filter.getCardType().add(CardType.ENCHANTMENT);
+        else
+            filter.getCardType().remove(CardType.ENCHANTMENT);
+        filterCards();
+    }//GEN-LAST:event_rdoEnchantmentsActionPerformed
 
-	private void rdoInstantsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoInstantsActionPerformed
-		if (this.rdoInstants.isSelected())
-			filter.getCardType().add(CardType.INSTANT);
-		else
-			filter.getCardType().remove(CardType.INSTANT);
-		filterCards();
-	}//GEN-LAST:event_rdoInstantsActionPerformed
+    private void rdoInstantsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoInstantsActionPerformed
+        if (this.rdoInstants.isSelected())
+            filter.getCardType().add(CardType.INSTANT);
+        else
+            filter.getCardType().remove(CardType.INSTANT);
+        filterCards();
+    }//GEN-LAST:event_rdoInstantsActionPerformed
 
-	private void rdoSorceriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoSorceriesActionPerformed
-		if (this.rdoSorceries.isSelected())
-			filter.getCardType().add(CardType.SORCERY);
-		else
-			filter.getCardType().remove(CardType.SORCERY);
-		filterCards();
-	}//GEN-LAST:event_rdoSorceriesActionPerformed
+    private void rdoSorceriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoSorceriesActionPerformed
+        if (this.rdoSorceries.isSelected())
+            filter.getCardType().add(CardType.SORCERY);
+        else
+            filter.getCardType().remove(CardType.SORCERY);
+        filterCards();
+    }//GEN-LAST:event_rdoSorceriesActionPerformed
 
-	private void rdoPlaneswalkersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoPlaneswalkersActionPerformed
-		if (this.rdoPlaneswalkers.isSelected())
-			filter.getCardType().add(CardType.PLANESWALKER);
-		else
-			filter.getCardType().remove(CardType.PLANESWALKER);
-		filterCards();
-	}//GEN-LAST:event_rdoPlaneswalkersActionPerformed
+    private void rdoPlaneswalkersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoPlaneswalkersActionPerformed
+        if (this.rdoPlaneswalkers.isSelected())
+            filter.getCardType().add(CardType.PLANESWALKER);
+        else
+            filter.getCardType().remove(CardType.PLANESWALKER);
+        filterCards();
+    }//GEN-LAST:event_rdoPlaneswalkersActionPerformed
 
-	private void cbExpansionSetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbExpansionSetActionPerformed
-		filter.getExpansionSetCode().clear();
-		if (cbExpansionSet.getSelectedItem() instanceof ExpansionSet) {
-			filter.getExpansionSetCode().add(((ExpansionSet)this.cbExpansionSet.getSelectedItem()).getCode());
-			filterCards();
-		} else {
+    private void cbExpansionSetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbExpansionSetActionPerformed
+        filter.getExpansionSetCode().clear();
+        if (cbExpansionSet.getSelectedItem() instanceof ExpansionSet) {
+            filter.getExpansionSetCode().add(((ExpansionSet)this.cbExpansionSet.getSelectedItem()).getCode());
+            filterCards();
+        } else {
             if (this.cbExpansionSet.getSelectedItem().equals("-- Standard")) {
                 filter.getExpansionSetCode().addAll(ConstructedFormats.getSetsByFormat("Standard"));
                 filterCards();
             } else {
-			    // auto switch for ListView for "All sets" (too many cards to load)
-			    jToggleListView.doClick();
-			    jToggleListView.setSelected(true);
+                // auto switch for ListView for "All sets" (too many cards to load)
+                jToggleListView.doClick();
+                jToggleListView.setSelected(true);
             }
-		}
+        }
 
-	}//GEN-LAST:event_cbExpansionSetActionPerformed
+    }//GEN-LAST:event_cbExpansionSetActionPerformed
 
-	private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-		cards.clear();
-		filterCards();
-	}//GEN-LAST:event_btnClearActionPerformed
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        cards.clear();
+        filterCards();
+    }//GEN-LAST:event_btnClearActionPerformed
 
-	private void btnBoosterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBoosterActionPerformed
-		if (cbExpansionSet.getSelectedItem() instanceof ExpansionSet) {
-			List<Card> booster = ((ExpansionSet)this.cbExpansionSet.getSelectedItem()).createBooster();
-			for (Card card: booster) {
-				cards.add(card);
-			}
-			filterCards();
-		} else {
-			JOptionPane.showMessageDialog(null, "It's not possible to generate booster for not Expansion Set \nChoose Expansion Set first.");
-		}
-	}//GEN-LAST:event_btnBoosterActionPerformed
+    private void btnBoosterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBoosterActionPerformed
+        if (cbExpansionSet.getSelectedItem() instanceof ExpansionSet) {
+            List<Card> booster = ((ExpansionSet)this.cbExpansionSet.getSelectedItem()).createBooster();
+            for (Card card: booster) {
+                cards.add(card);
+            }
+            filterCards();
+        } else {
+            JOptionPane.showMessageDialog(null, "It's not possible to generate booster for not Expansion Set \nChoose Expansion Set first.");
+        }
+    }//GEN-LAST:event_btnBoosterActionPerformed
 
-	private void cbSortByActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSortByActionPerformed
-		if (cbSortBy.getSelectedItem() instanceof SortBy)
-			this.currentView.drawCards((SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected());
-	}//GEN-LAST:event_cbSortByActionPerformed
+    private void cbSortByActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSortByActionPerformed
+        if (cbSortBy.getSelectedItem() instanceof SortBy)
+            this.currentView.drawCards((SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected());
+    }//GEN-LAST:event_cbSortByActionPerformed
 
-	private void chkPilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkPilesActionPerformed
-		if (cbSortBy.getSelectedItem() instanceof SortBy)
-			this.currentView.drawCards((SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected());
-	}//GEN-LAST:event_chkPilesActionPerformed
+    private void chkPilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkPilesActionPerformed
+        if (cbSortBy.getSelectedItem() instanceof SortBy)
+            this.currentView.drawCards((SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected());
+    }//GEN-LAST:event_chkPilesActionPerformed
 
-	private void jToggleListViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleListViewActionPerformed
-		jToggleCardView.setSelected(false);
-		currentView = mainModel;
-		jScrollPane1.setViewportView(mainTable);
-		cbSortBy.setEnabled(false);
-	    chkPiles.setEnabled(false);
-		jButtonAddToMain.setEnabled(true);
-		jButtonAddToSideboard.setEnabled(true);
-		filterCards();
-	}//GEN-LAST:event_jToggleListViewActionPerformed
+    private void jToggleListViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleListViewActionPerformed
+        jToggleCardView.setSelected(false);
+        currentView = mainModel;
+        jScrollPane1.setViewportView(mainTable);
+        cbSortBy.setEnabled(false);
+        chkPiles.setEnabled(false);
+        jButtonAddToMain.setEnabled(true);
+        jButtonAddToSideboard.setEnabled(true);
+        filterCards();
+    }//GEN-LAST:event_jToggleListViewActionPerformed
 
-	private void jToggleCardViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleCardViewActionPerformed
-		jToggleListView.setSelected(false);
-		currentView = cardGrid;
-		jScrollPane1.setViewportView(cardGrid);
-		cbSortBy.setEnabled(true);
-	    chkPiles.setEnabled(true);
-		jButtonAddToMain.setEnabled(false);
-		jButtonAddToSideboard.setEnabled(false);
-		filterCards();
-	}//GEN-LAST:event_jToggleCardViewActionPerformed
+    private void jToggleCardViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleCardViewActionPerformed
+        jToggleListView.setSelected(false);
+        currentView = cardGrid;
+        jScrollPane1.setViewportView(cardGrid);
+        cbSortBy.setEnabled(true);
+        chkPiles.setEnabled(true);
+        jButtonAddToMain.setEnabled(false);
+        jButtonAddToSideboard.setEnabled(false);
+        filterCards();
+    }//GEN-LAST:event_jToggleCardViewActionPerformed
 
-	private void jButtonAddToMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddToMainActionPerformed
-    	if (mainTable.getSelectedRowCount() > 0) {
-			int[] n = mainTable.getSelectedRows();
-			List<Integer> indexes = asList(n);
-			Collections.reverse(indexes);
-			for (Integer index : indexes) {
-				mainModel.doubleClick(index);
-			}
-			//if (!mode.equals(Constants.DeckEditorMode.Constructed))
-			if (limited)
-				mainModel.fireTableDataChanged();
-		}
-	}//GEN-LAST:event_jButtonAddToMainActionPerformed
+    private void jButtonAddToMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddToMainActionPerformed
+        if (mainTable.getSelectedRowCount() > 0) {
+            int[] n = mainTable.getSelectedRows();
+            List<Integer> indexes = asList(n);
+            Collections.reverse(indexes);
+            for (Integer index : indexes) {
+                mainModel.doubleClick(index);
+            }
+            //if (!mode.equals(Constants.DeckEditorMode.Constructed))
+            if (limited)
+                mainModel.fireTableDataChanged();
+        }
+    }//GEN-LAST:event_jButtonAddToMainActionPerformed
 
-	private void jButtonAddToSideboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddToSideboardActionPerformed
-		if (mainTable.getSelectedRowCount() > 0) {
-			int[] n = mainTable.getSelectedRows();
-			List<Integer> indexes = asList(n);
-			Collections.reverse(indexes);
-			for (Integer index : indexes) {
-				mainModel.shiftDoubleClick(index);
-			}
-			//if (!mode.equals(Constants.DeckEditorMode.Constructed))
-			if (limited)
-				mainModel.fireTableDataChanged();
-		}
-	}//GEN-LAST:event_jButtonAddToSideboardActionPerformed
+    private void jButtonAddToSideboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddToSideboardActionPerformed
+        if (mainTable.getSelectedRowCount() > 0) {
+            int[] n = mainTable.getSelectedRows();
+            List<Integer> indexes = asList(n);
+            Collections.reverse(indexes);
+            for (Integer index : indexes) {
+                mainModel.shiftDoubleClick(index);
+            }
+            //if (!mode.equals(Constants.DeckEditorMode.Constructed))
+            if (limited)
+                mainModel.fireTableDataChanged();
+        }
+    }//GEN-LAST:event_jButtonAddToSideboardActionPerformed
 
     private void jButtonRemoveFromMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveFromMainActionPerformed
         mainModel.removeFromMainEvent(0);
@@ -844,36 +844,36 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     }//GEN-LAST:event_jButtonRemoveFromSideboardActionPerformed
 
 
-	private void jButtonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchActionPerformed
-		String name = jTextFieldSearch.getText().trim();
-		filter.setText(name);
-		filterCards();
-	}//GEN-LAST:event_jButtonSearchActionPerformed
+    private void jButtonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchActionPerformed
+        String name = jTextFieldSearch.getText().trim();
+        filter.setText(name);
+        filterCards();
+    }//GEN-LAST:event_jButtonSearchActionPerformed
 
-	private void jButtonCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCleanActionPerformed
-		jTextFieldSearch.setText("");
-		filter.setText("");
-		filterCards();
-	}//GEN-LAST:event_jButtonCleanActionPerformed
+    private void jButtonCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCleanActionPerformed
+        jTextFieldSearch.setText("");
+        filter.setText("");
+        filterCards();
+    }//GEN-LAST:event_jButtonCleanActionPerformed
 
     public List<Integer> asList(final int[] is) {
         List<Integer> list = new ArrayList<Integer>();
-		for (int i : is) list.add(i);
-		return list;
+        for (int i : is) list.add(i);
+        return list;
     }
 
-	public void refresh() {
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				currentView.refresh();
-			}
-		});
-	}
+    public void refresh() {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                currentView.refresh();
+            }
+        });
+    }
 
-	private TableModel mainModel;
-	private JTable mainTable;
-	private ICardGrid currentView;
+    private TableModel mainModel;
+    private JTable mainTable;
+    private ICardGrid currentView;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBooster;
@@ -914,28 +914,28 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
     private mage.client.cards.CardGrid cardGrid;
 
-	@Override
-	public void componentResized(ComponentEvent e) {
-		if (cbSortBy.getSelectedItem() instanceof SortBy)
-			this.currentView.drawCards((SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected());
-	}
+    @Override
+    public void componentResized(ComponentEvent e) {
+        if (cbSortBy.getSelectedItem() instanceof SortBy)
+            this.currentView.drawCards((SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected());
+    }
 
-	@Override
-	public void componentMoved(ComponentEvent e) {
-		if (cbSortBy.getSelectedItem() instanceof SortBy)
-			this.currentView.drawCards((SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected());
-	}
+    @Override
+    public void componentMoved(ComponentEvent e) {
+        if (cbSortBy.getSelectedItem() instanceof SortBy)
+            this.currentView.drawCards((SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected());
+    }
 
-	@Override
-	public void componentShown(ComponentEvent e) {
-		if (cbSortBy.getSelectedItem() instanceof SortBy)
-			this.currentView.drawCards((SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected());
-	}
+    @Override
+    public void componentShown(ComponentEvent e) {
+        if (cbSortBy.getSelectedItem() instanceof SortBy)
+            this.currentView.drawCards((SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected());
+    }
 
-	@Override
-	public void componentHidden(ComponentEvent e) {
-		if (cbSortBy.getSelectedItem() instanceof SortBy)
-			this.currentView.drawCards((SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected());
-	}
+    @Override
+    public void componentHidden(ComponentEvent e) {
+        if (cbSortBy.getSelectedItem() instanceof SortBy)
+            this.currentView.drawCards((SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected());
+    }
 
 }

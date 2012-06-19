@@ -35,19 +35,19 @@ import java.io.Serializable;
  * @author BetaSteward_at_googlemail.com
  */
 public class Event implements Serializable {
-	private Object source;
-	private String eventName;
+    private Object source;
+    private String eventName;
 
-	public Event(Object source, String eventName) {
-		this.source = source;
-		this.eventName = eventName;
-	}
+    public Event(Object source, String eventName) {
+        this.source = source;
+        this.eventName = eventName;
+    }
 
-	public Object getSource() {
-		return source;
-	}
+    public Object getSource() {
+        return source;
+    }
 
-	public String getEventName() {
-		return eventName;
-	}
+    public String getEventName() {
+        return eventName;
+    }
 }

@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class Naturalize extends mage.sets.magic2010.Naturalize {
 
-	public Naturalize(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 141;
-		this.expansionSetCode = "ALA";
-	}
+    public Naturalize(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 141;
+        this.expansionSetCode = "ALA";
+    }
 
-	public Naturalize(final Naturalize card) {
-		super(card);
-	}
+    public Naturalize(final Naturalize card) {
+        super(card);
+    }
 
-	@Override
-	public Naturalize copy() {
-		return new Naturalize(this);
-	}
+    @Override
+    public Naturalize copy() {
+        return new Naturalize(this);
+    }
 
 }

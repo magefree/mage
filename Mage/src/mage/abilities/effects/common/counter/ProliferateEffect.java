@@ -47,98 +47,98 @@ import java.util.*;
  */
 public class ProliferateEffect extends OneShotEffect<ProliferateEffect> {
 
-	public ProliferateEffect() {
-		super(Outcome.Benefit);
-		staticText = "Proliferate. (You choose any number of permanents and/or players with counters on them, then give each another counter of a kind already there.)";
-	}
+    public ProliferateEffect() {
+        super(Outcome.Benefit);
+        staticText = "Proliferate. (You choose any number of permanents and/or players with counters on them, then give each another counter of a kind already there.)";
+    }
 
-	public ProliferateEffect(ProliferateEffect effect) {
-		super(effect);
-	}
+    public ProliferateEffect(ProliferateEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player controller = game.getPlayer(source.getControllerId());
-		Target target = new TargetPermanentOrPlayerWithCounter(0, Integer.MAX_VALUE, true);
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        Target target = new TargetPermanentOrPlayerWithCounter(0, Integer.MAX_VALUE, true);
 
-		//A spell or ability could have removed the only legal target this player
-		//had, if thats the case this ability should fizzle.
-		if (target.canChoose(controller.getId(), game)) {
-			boolean abilityApplied = false;
-			Map<String, Serializable> options = new HashMap<String, Serializable>();
-			options.put("UI.right.btn.text", "Done");
-			while (target.canChoose(controller.getId(), game)) {
-				if (controller.choose(Outcome.Benefit, target, source.getSourceId(), game, options)) {
-					break;
-				}
-			}
+        //A spell or ability could have removed the only legal target this player
+        //had, if thats the case this ability should fizzle.
+        if (target.canChoose(controller.getId(), game)) {
+            boolean abilityApplied = false;
+            Map<String, Serializable> options = new HashMap<String, Serializable>();
+            options.put("UI.right.btn.text", "Done");
+            while (target.canChoose(controller.getId(), game)) {
+                if (controller.choose(Outcome.Benefit, target, source.getSourceId(), game, options)) {
+                    break;
+                }
+            }
 
-			for (int idx = 0; idx < target.getTargets().size(); idx++) {
-				UUID chosen = (UUID) target.getTargets().get(idx);
-				Permanent permanent = game.getPermanent(chosen);
-				if (permanent != null) {
-					if (permanent.getCounters().size() > 0) {
-						if (permanent.getCounters().size() == 1) {
-							for (Counter counter : permanent.getCounters().values()) {
-								permanent.addCounters(counter.getName(), 1, game);
-							}
-						} else {
-							Choice choice = new ChoiceImpl(true);
-							Set<String> choices = new HashSet<String>();
-							for (Counter counter : permanent.getCounters().values()) {
-								choices.add(counter.getName());
-							}
-							choice.setChoices(choices);
-							choice.setMessage("Choose a counter to proliferate (" + permanent.getName() + ")");
-							controller.choose(Outcome.Benefit, choice, game);
-							for (Counter counter : permanent.getCounters().values()) {
-								if (counter.getName().equals(choice.getChoice())) {
-									permanent.addCounters(counter.getName(), 1, game);
-									break;
-								}
-							}
-						}
-					}
-				} else {
-					Player player = game.getPlayer(chosen);
-					if (player != null) {
-						if (player.getCounters().size() > 0) {
-							if (player.getCounters().size() == 1) {
-								for (Counter counter : player.getCounters().values()) {
+            for (int idx = 0; idx < target.getTargets().size(); idx++) {
+                UUID chosen = (UUID) target.getTargets().get(idx);
+                Permanent permanent = game.getPermanent(chosen);
+                if (permanent != null) {
+                    if (permanent.getCounters().size() > 0) {
+                        if (permanent.getCounters().size() == 1) {
+                            for (Counter counter : permanent.getCounters().values()) {
+                                permanent.addCounters(counter.getName(), 1, game);
+                            }
+                        } else {
+                            Choice choice = new ChoiceImpl(true);
+                            Set<String> choices = new HashSet<String>();
+                            for (Counter counter : permanent.getCounters().values()) {
+                                choices.add(counter.getName());
+                            }
+                            choice.setChoices(choices);
+                            choice.setMessage("Choose a counter to proliferate (" + permanent.getName() + ")");
+                            controller.choose(Outcome.Benefit, choice, game);
+                            for (Counter counter : permanent.getCounters().values()) {
+                                if (counter.getName().equals(choice.getChoice())) {
+                                    permanent.addCounters(counter.getName(), 1, game);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    Player player = game.getPlayer(chosen);
+                    if (player != null) {
+                        if (player.getCounters().size() > 0) {
+                            if (player.getCounters().size() == 1) {
+                                for (Counter counter : player.getCounters().values()) {
                                     Counter newCounter = new Counter(counter.getName(), 1);
-									player.addCounters(newCounter, game);
-								}
-							} else {
-								Choice choice = new ChoiceImpl(true);
-								Set<String> choices = new HashSet<String>();
-								for (Counter counter : player.getCounters().values()) {
-									choices.add(counter.getName());
-								}
-								choice.setChoices(choices);
-								choice.setMessage("Choose a counter to proliferate (" + player.getName() + ")");
-								controller.choose(Outcome.Benefit, choice, game);
-								for (Counter counter : player.getCounters().values()) {
-									if (counter.getName().equals(choice.getChoice())) {
+                                    player.addCounters(newCounter, game);
+                                }
+                            } else {
+                                Choice choice = new ChoiceImpl(true);
+                                Set<String> choices = new HashSet<String>();
+                                for (Counter counter : player.getCounters().values()) {
+                                    choices.add(counter.getName());
+                                }
+                                choice.setChoices(choices);
+                                choice.setMessage("Choose a counter to proliferate (" + player.getName() + ")");
+                                controller.choose(Outcome.Benefit, choice, game);
+                                for (Counter counter : player.getCounters().values()) {
+                                    if (counter.getName().equals(choice.getChoice())) {
                                         Counter newCounter = new Counter(counter.getName(), 1);
                                         player.addCounters(newCounter, game);
-										break;
-									}
-								}
-							}
-						}
-					}
-				}
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
 
-			}
+            }
 
-			return abilityApplied;
-		}
-		return false;
-	}
+            return abilityApplied;
+        }
+        return false;
+    }
 
-	@Override
-	public ProliferateEffect copy() {
-		return new ProliferateEffect(this);
-	}
+    @Override
+    public ProliferateEffect copy() {
+        return new ProliferateEffect(this);
+    }
 
 }

@@ -42,38 +42,38 @@ import mage.target.TargetCard;
  */
 public class DiscardCardYouChooseTargetOpponentEffect extends OneShotEffect<DiscardCardYouChooseTargetOpponentEffect> {
 
-	public DiscardCardYouChooseTargetOpponentEffect() {
-		super(Constants.Outcome.Discard);
-		staticText = "Target opponent reveals his or her hand. You choose a card from it. That player discards that card";
-	}
+    public DiscardCardYouChooseTargetOpponentEffect() {
+        super(Constants.Outcome.Discard);
+        staticText = "Target opponent reveals his or her hand. You choose a card from it. That player discards that card";
+    }
 
-	public DiscardCardYouChooseTargetOpponentEffect(final DiscardCardYouChooseTargetOpponentEffect effect) {
-		super(effect);
-	}
+    public DiscardCardYouChooseTargetOpponentEffect(final DiscardCardYouChooseTargetOpponentEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getFirstTarget());
-		if (player != null) {
-			player.revealCards("Discard", player.getHand(), game);
-			Player you = game.getPlayer(source.getControllerId());
-			if (you != null) {
-				TargetCard target = new TargetCard(Constants.Zone.PICK, new FilterCard());
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getFirstTarget());
+        if (player != null) {
+            player.revealCards("Discard", player.getHand(), game);
+            Player you = game.getPlayer(source.getControllerId());
+            if (you != null) {
+                TargetCard target = new TargetCard(Constants.Zone.PICK, new FilterCard());
                                 target.setRequired(true);
-				if (you.choose(Constants.Outcome.Benefit, player.getHand(), target, game)) {
-					Card card = player.getHand().get(target.getFirstTarget(), game);
-					if (card != null) {
-						return player.discard(card, source, game);
-					}
-				}
-			}
-		}
-		return false;
-	}
+                if (you.choose(Constants.Outcome.Benefit, player.getHand(), target, game)) {
+                    Card card = player.getHand().get(target.getFirstTarget(), game);
+                    if (card != null) {
+                        return player.discard(card, source, game);
+                    }
+                }
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public DiscardCardYouChooseTargetOpponentEffect copy() {
-		return new DiscardCardYouChooseTargetOpponentEffect(this);
-	}
+    @Override
+    public DiscardCardYouChooseTargetOpponentEffect copy() {
+        return new DiscardCardYouChooseTargetOpponentEffect(this);
+    }
 
 }

@@ -61,29 +61,29 @@ public class ComputerPlayerMCTS extends ComputerPlayer<ComputerPlayerMCTS> imple
     private static final int THINK_MAX_RATIO = 100;
     private static final double THINK_TIME_MULTIPLIER = 2.0;
     private static final boolean USE_MULTIPLE_THREADS = true;
-    
+
     protected transient MCTSNode root;
     protected int maxThinkTime;
- 	private final static transient Logger logger = Logger.getLogger(ComputerPlayerMCTS.class);
+     private final static transient Logger logger = Logger.getLogger(ComputerPlayerMCTS.class);
     private transient ExecutorService pool;
     private int cores;
-    
-	public ComputerPlayerMCTS(String name, RangeOfInfluence range, int skill) {
-		super(name, range);
-		human = false;
+
+    public ComputerPlayerMCTS(String name, RangeOfInfluence range, int skill) {
+        super(name, range);
+        human = false;
         maxThinkTime = (int) (skill * THINK_TIME_MULTIPLIER);
         cores = Runtime.getRuntime().availableProcessors();
         pool = Executors.newFixedThreadPool(cores);
-	}
+    }
 
-	protected ComputerPlayerMCTS(UUID id) {
-		super(id);
-	}
+    protected ComputerPlayerMCTS(UUID id) {
+        super(id);
+    }
 
-	public ComputerPlayerMCTS(final ComputerPlayerMCTS player) {
-		super(player);
-	}
-    
+    public ComputerPlayerMCTS(final ComputerPlayerMCTS player) {
+        super(player);
+    }
+
     @Override
     public ComputerPlayerMCTS copy() {
         return new ComputerPlayerMCTS(this);
@@ -116,7 +116,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer<ComputerPlayerMCTS> imple
         root = root.bestChild();
         root.emancipate();
     }
-    
+
     protected void getNextAction(Game game, NextAction nextAction) {
         if (root != null) {
             MCTSNode newRoot;
@@ -131,7 +131,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer<ComputerPlayerMCTS> imple
         }
         calculateActions(game, nextAction);
     }
-    
+
 //    @Override
 //    public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game) {
 //        throw new UnsupportedOperationException("Not supported yet.");
@@ -185,17 +185,17 @@ public class ComputerPlayerMCTS extends ComputerPlayer<ComputerPlayerMCTS> imple
 
     @Override
     public boolean playXMana(VariableManaCost cost, ManaCosts<ManaCost> costs, Game game) {
-		//MCTSPlayer.simulateVariableCosts method adds a generic mana cost for each option
-		for (ManaCost manaCost: costs) {
-			if (manaCost instanceof GenericManaCost) {
-				cost.setPayment(manaCost.getPayment());
-				logger.debug("using X = " + cost.getPayment().count());
-				break;
-			}
-		}
+        //MCTSPlayer.simulateVariableCosts method adds a generic mana cost for each option
+        for (ManaCost manaCost: costs) {
+            if (manaCost instanceof GenericManaCost) {
+                cost.setPayment(manaCost.getPayment());
+                logger.debug("using X = " + cost.getPayment().count());
+                break;
+            }
+        }
         game.informPlayers(getName() + " payed " + cost.getPayment().count() + " for " + cost.getText());
-		cost.setPaid();
-		return true;
+        cost.setPaid();
+        return true;
     }
 
 //    @Override
@@ -274,11 +274,11 @@ public class ComputerPlayerMCTS extends ComputerPlayer<ComputerPlayerMCTS> imple
 
     protected void applyMCTS(final Game game, final NextAction action) {
         int thinkTime = calculateThinkTime(game, action);
-        
-		long startTime = System.nanoTime();
+
+        long startTime = System.nanoTime();
         long endTime = startTime + (thinkTime * 1000000000l);
         logger.info("applyMCTS - Thinking for " + (endTime - startTime)/1000000000.0 + "s");
-        
+
         if (thinkTime > 0) {
             if (USE_MULTIPLE_THREADS) {
                 List<MCTSExecutor> tasks = new ArrayList<MCTSExecutor>();
@@ -380,24 +380,24 @@ public class ComputerPlayerMCTS extends ComputerPlayer<ComputerPlayerMCTS> imple
         }
         return thinkTime;
     }
-    
+
     /**
-	 * Copies game and replaces all players in copy with mcts players
+     * Copies game and replaces all players in copy with mcts players
      * Shuffles each players library so that there is no knowledge of its order
      * Swaps all other players hands with random cards from the library so that
      * there is no knowledge of what cards are in opponents hands
      * The most knowledge that is known is what cards are in an opponents deck
-	 *
-	 * @param game
-	 * @return a new game object with simulated players
-	 */
-	protected Game createMCTSGame(Game game) {
-		Game mcts = game.copy();
+     *
+     * @param game
+     * @return a new game object with simulated players
+     */
+    protected Game createMCTSGame(Game game) {
+        Game mcts = game.copy();
 
-		for (Player copyPlayer: mcts.getState().getPlayers().values()) {
-			Player origPlayer = game.getState().getPlayers().get(copyPlayer.getId());
-			MCTSPlayer newPlayer = new MCTSPlayer(copyPlayer.getId());
-			newPlayer.restore(origPlayer);
+        for (Player copyPlayer: mcts.getState().getPlayers().values()) {
+            Player origPlayer = game.getState().getPlayers().get(copyPlayer.getId());
+            MCTSPlayer newPlayer = new MCTSPlayer(copyPlayer.getId());
+            newPlayer.restore(origPlayer);
             if (!newPlayer.getId().equals(playerId)) {
                 int handSize = newPlayer.getHand().size();
                 newPlayer.getLibrary().addAll(newPlayer.getHand().getCards(mcts), mcts);
@@ -412,21 +412,21 @@ public class ComputerPlayerMCTS extends ComputerPlayer<ComputerPlayerMCTS> imple
             else {
                 newPlayer.getLibrary().shuffle();                
             }
-			mcts.getState().getPlayers().put(copyPlayer.getId(), newPlayer);
-		}
-		mcts.setSimulation(true);
+            mcts.getState().getPlayers().put(copyPlayer.getId(), newPlayer);
+        }
+        mcts.setSimulation(true);
         mcts.resume();
-		return mcts;
-	}
-    
+        return mcts;
+    }
+
     protected void displayMemory() {
         long heapSize = Runtime.getRuntime().totalMemory();
         long heapMaxSize = Runtime.getRuntime().maxMemory();
         long heapFreeSize = Runtime.getRuntime().freeMemory();
         long heapUsedSize = heapSize - heapFreeSize;
         long mb = 1024 * 1024;
-        
+
         logger.info("Max heap size: " + heapMaxSize/mb + " Heap size: " + heapSize/mb + " Used: " + heapUsedSize/mb);
     }
-    
+
 }

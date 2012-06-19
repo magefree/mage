@@ -40,19 +40,19 @@ import mage.cards.CardImpl;
  */
 public class VerdantCatacombs extends CardImpl<VerdantCatacombs> {
 
-	public VerdantCatacombs(UUID ownerId) {
-		super(ownerId, 229, "Verdant Catacombs", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-		this.expansionSetCode = "ZEN";
-		this.addAbility(new FetchLandActivatedAbility(new String[] {"Forest", "Swamp"}));
-	}
+    public VerdantCatacombs(UUID ownerId) {
+        super(ownerId, 229, "Verdant Catacombs", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+        this.expansionSetCode = "ZEN";
+        this.addAbility(new FetchLandActivatedAbility(new String[] {"Forest", "Swamp"}));
+    }
 
-	public VerdantCatacombs(final VerdantCatacombs card) {
-		super(card);
-	}
+    public VerdantCatacombs(final VerdantCatacombs card) {
+        super(card);
+    }
 
-	@Override
-	public VerdantCatacombs copy() {
-		return new VerdantCatacombs(this);
-	}
+    @Override
+    public VerdantCatacombs copy() {
+        return new VerdantCatacombs(this);
+    }
 
 }

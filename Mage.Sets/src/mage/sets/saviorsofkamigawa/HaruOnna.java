@@ -45,7 +45,7 @@ import mage.filter.common.FilterSpiritOrArcaneCard;
 public class HaruOnna extends CardImpl<HaruOnna> {
 
     private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
-    
+
     public HaruOnna(UUID ownerId) {
         super(ownerId, 132, "Haru-Onna", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.expansionSetCode = "SOK";

@@ -53,34 +53,34 @@ import mage.target.common.TargetLandPermanent;
  */
 public class GarrukWildspeaker extends CardImpl<GarrukWildspeaker> {
 
-	private static BeastToken beastToken = new BeastToken();
+    private static BeastToken beastToken = new BeastToken();
 
-	public GarrukWildspeaker(UUID ownerId) {
-		super(ownerId, 183, "Garruk Wildspeaker", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{G}");
-		this.expansionSetCode = "M10";
-		this.subtype.add("Garruk");
-		this.color.setGreen(true);
-		this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), ""));
+    public GarrukWildspeaker(UUID ownerId) {
+        super(ownerId, 183, "Garruk Wildspeaker", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{G}");
+        this.expansionSetCode = "M10";
+        this.subtype.add("Garruk");
+        this.color.setGreen(true);
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), ""));
 
 
-		LoyaltyAbility ability1 = new LoyaltyAbility(new UntapTargetEffect(), 1);
-		ability1.addTarget(new TargetLandPermanent(2));
-		this.addAbility(ability1);
+        LoyaltyAbility ability1 = new LoyaltyAbility(new UntapTargetEffect(), 1);
+        ability1.addTarget(new TargetLandPermanent(2));
+        this.addAbility(ability1);
 
-		this.addAbility(new LoyaltyAbility(new CreateTokenEffect(beastToken), -1));
+        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(beastToken), -1));
 
-		Effects effects1 = new Effects();
-		effects1.add(new BoostControlledEffect(3, 3, Duration.EndOfTurn));
-		effects1.add(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent()));
-		this.addAbility(new LoyaltyAbility(effects1, -4));
-	}
+        Effects effects1 = new Effects();
+        effects1.add(new BoostControlledEffect(3, 3, Duration.EndOfTurn));
+        effects1.add(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent()));
+        this.addAbility(new LoyaltyAbility(effects1, -4));
+    }
 
-	public GarrukWildspeaker(final GarrukWildspeaker card) {
-		super(card);
-	}
+    public GarrukWildspeaker(final GarrukWildspeaker card) {
+        super(card);
+    }
 
-	@Override
-	public GarrukWildspeaker copy() {
-		return new GarrukWildspeaker(this);
-	}
+    @Override
+    public GarrukWildspeaker copy() {
+        return new GarrukWildspeaker(this);
+    }
 }

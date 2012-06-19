@@ -47,7 +47,7 @@ public class SecretsOfTheDead extends CardImpl<SecretsOfTheDead> {
     static {
         filter.setFromZone(Constants.Zone.GRAVEYARD);
     }
-    
+
     public SecretsOfTheDead(UUID ownerId) {
         super(ownerId, 48, "Secrets of the Dead", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
         this.expansionSetCode = "DKA";

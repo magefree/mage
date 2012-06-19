@@ -49,9 +49,9 @@ import mage.target.common.TargetCreaturePermanent;
 public class TellerOfTales extends CardImpl<TellerOfTales> {
 
      private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
-    
+
    // Outcome.Benefit, "tap or untap target creature"
-    
+
     public TellerOfTales(UUID ownerId) {
         super(ownerId, 95, "Teller of Tales", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
         this.expansionSetCode = "CHK";

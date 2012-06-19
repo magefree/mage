@@ -54,62 +54,62 @@ import java.util.UUID;
  */
 public class TectonicEdge extends CardImpl<TectonicEdge> {
 
-	public TectonicEdge(UUID ownerId) {
-		super(ownerId, 145, "Tectonic Edge", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);
-		this.expansionSetCode = "WWK";
-		this.addAbility(new ColorlessManaAbility());
-		Costs costs = new CostsImpl();
-		costs.add(new TapSourceCost());
-		costs.add(new SacrificeSourceCost());
-		costs.add(new TectonicEdgeCost());
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), costs);
-		ability.addTarget(new TargetNonBasicLandPermanent());
-		ability.addManaCost(new GenericManaCost(1));
-		this.addAbility(ability);
-	}
+    public TectonicEdge(UUID ownerId) {
+        super(ownerId, 145, "Tectonic Edge", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);
+        this.expansionSetCode = "WWK";
+        this.addAbility(new ColorlessManaAbility());
+        Costs costs = new CostsImpl();
+        costs.add(new TapSourceCost());
+        costs.add(new SacrificeSourceCost());
+        costs.add(new TectonicEdgeCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), costs);
+        ability.addTarget(new TargetNonBasicLandPermanent());
+        ability.addManaCost(new GenericManaCost(1));
+        this.addAbility(ability);
+    }
 
-	public TectonicEdge(final TectonicEdge card) {
-		super(card);
-	}
+    public TectonicEdge(final TectonicEdge card) {
+        super(card);
+    }
 
-	@Override
-	public TectonicEdge copy() {
-		return new TectonicEdge(this);
-	}
+    @Override
+    public TectonicEdge copy() {
+        return new TectonicEdge(this);
+    }
 
 }
 
 class TectonicEdgeCost extends CostImpl<TectonicEdgeCost> {
 
-	FilterLandPermanent filter = new FilterLandPermanent();
+    FilterLandPermanent filter = new FilterLandPermanent();
 
-	public TectonicEdgeCost() {
-		this.text = "Activate this ability only if an opponent controls four or more lands";
-	}
+    public TectonicEdgeCost() {
+        this.text = "Activate this ability only if an opponent controls four or more lands";
+    }
 
-	public TectonicEdgeCost(final TectonicEdgeCost cost) {
-		super(cost);
-	}
+    public TectonicEdgeCost(final TectonicEdgeCost cost) {
+        super(cost);
+    }
 
-	@Override
-	public TectonicEdgeCost copy() {
-		return new TectonicEdgeCost(this);
-	}
+    @Override
+    public TectonicEdgeCost copy() {
+        return new TectonicEdgeCost(this);
+    }
 
-	@Override
-	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-		for (UUID opponentId: game.getOpponents(controllerId)) {
-			if (game.getBattlefield().countAll(filter, opponentId, game) > 3) {
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+        for (UUID opponentId: game.getOpponents(controllerId)) {
+            if (game.getBattlefield().countAll(filter, opponentId, game) > 3) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-		this.paid = true;
-		return paid;
-	}
+    @Override
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+        this.paid = true;
+        return paid;
+    }
 
 }

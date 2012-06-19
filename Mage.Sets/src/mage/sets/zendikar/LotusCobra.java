@@ -43,27 +43,27 @@ import mage.choices.ChoiceColor;
  */
 public class LotusCobra extends CardImpl<LotusCobra> {
 
-	public LotusCobra(UUID ownerId) {
-		super(ownerId, 168, "Lotus Cobra", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{G}");
-		this.expansionSetCode = "ZEN";
-		this.subtype.add("Snake");
-        
-		this.color.setGreen(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(1);
+    public LotusCobra(UUID ownerId) {
+        super(ownerId, 168, "Lotus Cobra", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{G}");
+        this.expansionSetCode = "ZEN";
+        this.subtype.add("Snake");
 
-		LandfallAbility ability = new LandfallAbility(new AddManaOfAnyColorEffect(), false);
-		ability.addChoice(new ChoiceColor());
-		this.addAbility(ability);
-	}
+        this.color.setGreen(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-	public LotusCobra(final LotusCobra card) {
-		super(card);
-	}
+        LandfallAbility ability = new LandfallAbility(new AddManaOfAnyColorEffect(), false);
+        ability.addChoice(new ChoiceColor());
+        this.addAbility(ability);
+    }
 
-	@Override
-	public LotusCobra copy() {
-		return new LotusCobra(this);
-	}
+    public LotusCobra(final LotusCobra card) {
+        super(card);
+    }
+
+    @Override
+    public LotusCobra copy() {
+        return new LotusCobra(this);
+    }
 
 }

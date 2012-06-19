@@ -45,25 +45,25 @@ import mage.cards.CardImpl;
  */
 public class FieryHellhound extends CardImpl<FieryHellhound> {
 
-	public FieryHellhound(UUID ownerId) {
-		super(ownerId, 135, "Fiery Hellhound", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
-		this.expansionSetCode = "M10";
-		this.subtype.add("Elemental");
-		this.subtype.add("Hound");
-		this.color.setRed(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+    public FieryHellhound(UUID ownerId) {
+        super(ownerId, 135, "Fiery Hellhound", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
+        this.expansionSetCode = "M10";
+        this.subtype.add("Elemental");
+        this.subtype.add("Hound");
+        this.color.setRed(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
-	}
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
+    }
 
-	public FieryHellhound(final FieryHellhound card) {
-		super(card);
-	}
+    public FieryHellhound(final FieryHellhound card) {
+        super(card);
+    }
 
-	@Override
-	public FieryHellhound copy() {
-		return new FieryHellhound(this);
-	}
+    @Override
+    public FieryHellhound copy() {
+        return new FieryHellhound(this);
+    }
 
 }

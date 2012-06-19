@@ -49,13 +49,13 @@ import mage.target.common.TargetCreaturePermanent;
  * @author Loki
  */
 public class BeaconBehemoth extends CardImpl<BeaconBehemoth> {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 5 or greater");
 
-	static {		
-		filter.setPower(4);
+    static {        
+        filter.setPower(4);
         filter.setPowerComparison(ComparisonType.GreaterThan);
-	}
+    }
 
     public BeaconBehemoth (UUID ownerId) {
         super(ownerId, 78, "Beacon Behemoth", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
@@ -78,5 +78,5 @@ public class BeaconBehemoth extends CardImpl<BeaconBehemoth> {
     public BeaconBehemoth copy() {
         return new BeaconBehemoth(this);
     }
-    
+
 }

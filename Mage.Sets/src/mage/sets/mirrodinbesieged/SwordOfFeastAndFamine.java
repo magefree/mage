@@ -111,7 +111,7 @@ class SwordOfFeastAndFamineAbility extends TriggeredAbilityImpl<SwordOfFeastAndF
                 for (Effect effect : this.getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                 }
-			    return true;
+                return true;
             }
         }
         return false;

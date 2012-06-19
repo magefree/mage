@@ -47,54 +47,54 @@ import java.util.UUID;
  */
 public class AbilityPicker extends JPopupMenu implements PopupMenuListener {
 
-	private Session session;
-	private UUID gameId;
+    private Session session;
+    private UUID gameId;
 
-	public AbilityPicker() {
-		this.addPopupMenuListener(this);
-	}
+    public AbilityPicker() {
+        this.addPopupMenuListener(this);
+    }
 
-	public void init(Session session, UUID gameId) {
-		this.session = session;
-		this.gameId = gameId;
-	}
+    public void init(Session session, UUID gameId) {
+        this.session = session;
+        this.gameId = gameId;
+    }
 
-	public void show(AbilityPickerView choices, Point p) {
-		if (p == null) return;
-		this.removeAll();
-		for (Entry<UUID, String> choice: choices.getChoices().entrySet()) {
-			this.add(new AbilityPickerAction(choice.getKey(), choice.getValue()));
-		}
-		this.show(MageFrame.getDesktop(), p.x, p.y);
-		GuiDisplayUtil.keepComponentInsideScreen(p.x, p.y, this);
-	}
+    public void show(AbilityPickerView choices, Point p) {
+        if (p == null) return;
+        this.removeAll();
+        for (Entry<UUID, String> choice: choices.getChoices().entrySet()) {
+            this.add(new AbilityPickerAction(choice.getKey(), choice.getValue()));
+        }
+        this.show(MageFrame.getDesktop(), p.x, p.y);
+        GuiDisplayUtil.keepComponentInsideScreen(p.x, p.y, this);
+    }
 
-	@Override
-	public void popupMenuWillBecomeVisible(PopupMenuEvent e) {	}
+    @Override
+    public void popupMenuWillBecomeVisible(PopupMenuEvent e) {    }
 
-	@Override
-	public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {  }
+    @Override
+    public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {  }
 
-	@Override
-	public void popupMenuCanceled(PopupMenuEvent e) {
-		session.sendPlayerBoolean(gameId, false);
-	}
+    @Override
+    public void popupMenuCanceled(PopupMenuEvent e) {
+        session.sendPlayerBoolean(gameId, false);
+    }
 
-	private class AbilityPickerAction extends AbstractAction {
+    private class AbilityPickerAction extends AbstractAction {
 
-		private UUID id;
+        private UUID id;
 
-		public AbilityPickerAction(UUID id, String choice) {
-			this.id = id;
-			putValue(Action.NAME, choice);
-		}
+        public AbilityPickerAction(UUID id, String choice) {
+            this.id = id;
+            putValue(Action.NAME, choice);
+        }
 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			session.sendPlayerUUID(gameId, id);
-			setVisible(false);
-		}
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            session.sendPlayerUUID(gameId, id);
+            setVisible(false);
+        }
 
-	}
+    }
 
 }

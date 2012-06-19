@@ -115,7 +115,7 @@ class SwordOfWarAndPeaceAbility extends TriggeredAbilityImpl<SwordOfWarAndPeaceA
             Permanent p = game.getPermanent(event.getSourceId());
             if (damageEvent.isCombatDamage() && p != null && p.getAttachments().contains(this.getSourceId())) {
                 getTargets().get(0).add(event.getPlayerId(), game);
-			    return true;
+                return true;
             }
         }
         return false;

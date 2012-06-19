@@ -52,7 +52,7 @@ public class OxiddaScrapmelter extends CardImpl<OxiddaScrapmelter> {
         this.expansionSetCode = "SOM";
         this.subtype.add("Beast");
 
-		this.color.setRed(true);
+        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

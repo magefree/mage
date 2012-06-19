@@ -58,7 +58,7 @@ public class MuddleTheMixture extends CardImpl<MuddleTheMixture> {
 
         // Counter target instant or sorcery spell.
         this.getSpellAbility().addTarget(new TargetSpell(filter));
-		this.getSpellAbility().addEffect(new CounterTargetEffect());
+        this.getSpellAbility().addEffect(new CounterTargetEffect());
         // Transmute {1}{U}{U}
         this.addAbility(new TransmuteAbility("{1}{U}{U}"));
     }

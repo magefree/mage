@@ -37,22 +37,22 @@ import mage.abilities.effects.Effect;
  */
 public class EntersBattlefieldTriggeredAbility extends ZoneChangeTriggeredAbility<EntersBattlefieldTriggeredAbility> {
 
-	public EntersBattlefieldTriggeredAbility(Effect effect) {
-		this(effect, false);
-	}
+    public EntersBattlefieldTriggeredAbility(Effect effect) {
+        this(effect, false);
+    }
 
-	public EntersBattlefieldTriggeredAbility(Effect effect, boolean optional) {
-		super(Zone.BATTLEFIELD, effect, "When {this} enters the battlefield, ", optional);
-	}
+    public EntersBattlefieldTriggeredAbility(Effect effect, boolean optional) {
+        super(Zone.BATTLEFIELD, effect, "When {this} enters the battlefield, ", optional);
+    }
 
-	public EntersBattlefieldTriggeredAbility(EntersBattlefieldTriggeredAbility ability) {
-		super(ability);
-	}
+    public EntersBattlefieldTriggeredAbility(EntersBattlefieldTriggeredAbility ability) {
+        super(ability);
+    }
 
 
-	@Override
-	public EntersBattlefieldTriggeredAbility copy() {
-		return new EntersBattlefieldTriggeredAbility(this);
-	}
+    @Override
+    public EntersBattlefieldTriggeredAbility copy() {
+        return new EntersBattlefieldTriggeredAbility(this);
+    }
 
 }

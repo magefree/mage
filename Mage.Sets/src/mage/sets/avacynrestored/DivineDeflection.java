@@ -73,7 +73,7 @@ public class DivineDeflection extends CardImpl<DivineDeflection> {
 class DivineDeflectionPreventDamageTargetEffect extends PreventionEffectImpl<DivineDeflectionPreventDamageTargetEffect> {
 
     private int amount = -1;
-    
+
     public DivineDeflectionPreventDamageTargetEffect(Constants.Duration duration) {
         super(duration);
         staticText = "Prevent the next X damage that would be dealt to you and/or permanents you control this turn. If damage is prevented this way, {this} deals that much damage to target creature or player";

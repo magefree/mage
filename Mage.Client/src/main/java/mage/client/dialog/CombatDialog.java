@@ -52,69 +52,69 @@ import java.util.logging.Logger;
  */
 public class CombatDialog extends MageDialog {
 
-	private UUID gameId;
-	private BigCard bigCard;
-	private int lastX = 500;
-	private int lastY = 300;
+    private UUID gameId;
+    private BigCard bigCard;
+    private int lastX = 500;
+    private int lastY = 300;
 
     /** Creates new form CombatDialog */
     public CombatDialog() {
-    	
+
         JPanel contentPane = new JPanel() {
-			private static final long serialVersionUID = -8283955788355547309L;
-			public void paintComponent(Graphics g) {
-				g.setColor(new Color(50, 50, 50, 100));
-				g.fillRect(0, 0, getWidth(), getHeight());
-			}
-		};
+            private static final long serialVersionUID = -8283955788355547309L;
+            public void paintComponent(Graphics g) {
+                g.setColor(new Color(50, 50, 50, 100));
+                g.fillRect(0, 0, getWidth(), getHeight());
+            }
+        };
         setContentPane(contentPane);
-    	
+
         initComponents();
-		this.setModal(false);
-		
+        this.setModal(false);
+
         combatArea.setOpaque(false);
         jScrollPane1.setOpaque(false);
         jScrollPane1.getViewport().setOpaque(false);
         getRootPane().setOpaque(false);
 
-		//setDefaultCloseOperation(JInternalFrame.HIDE_ON_CLOSE);
+        //setDefaultCloseOperation(JInternalFrame.HIDE_ON_CLOSE);
     }
 
-	public void init(UUID gameId, BigCard bigCard) {
-		this.gameId = gameId;
-		this.bigCard = bigCard;
-	}
+    public void init(UUID gameId, BigCard bigCard) {
+        this.gameId = gameId;
+        this.bigCard = bigCard;
+    }
 
-	public void showDialog(List<CombatGroupView> combat) {
-		combatArea.removeAll();
-		for (CombatGroupView group: combat) {
-			CombatGroup combatGroup = new CombatGroup();
-			combatGroup.init(gameId, bigCard);
-			combatGroup.update(group);
-			combatGroup.setVisible(true);
-			combatArea.add(combatGroup);
-			combatGroup.revalidate();
-		}
-		try {
-			this.setSelected(true);
-		} catch (PropertyVetoException ex) {
-			Logger.getLogger(CombatDialog.class.getName()).log(Level.SEVERE, null, ex);
-		}
-		pack();
-		this.revalidate();
-		this.repaint();
-		if (!this.isVisible())  {
-			this.setVisible(true);
-			this.setLocation(lastX, lastY);
-		}
-	}
+    public void showDialog(List<CombatGroupView> combat) {
+        combatArea.removeAll();
+        for (CombatGroupView group: combat) {
+            CombatGroup combatGroup = new CombatGroup();
+            combatGroup.init(gameId, bigCard);
+            combatGroup.update(group);
+            combatGroup.setVisible(true);
+            combatArea.add(combatGroup);
+            combatGroup.revalidate();
+        }
+        try {
+            this.setSelected(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(CombatDialog.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        pack();
+        this.revalidate();
+        this.repaint();
+        if (!this.isVisible())  {
+            this.setVisible(true);
+            this.setLocation(lastX, lastY);
+        }
+    }
 
-	@Override
-	public void hideDialog() {
-		this.lastX = this.getX();
-		this.lastY = this.getY();
-		super.hideDialog();
-	}
+    @Override
+    public void hideDialog() {
+        this.lastX = this.getX();
+        this.lastY = this.getY();
+        super.hideDialog();
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.

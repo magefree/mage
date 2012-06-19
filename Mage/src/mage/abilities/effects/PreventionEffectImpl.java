@@ -42,25 +42,25 @@ import mage.game.events.GameEvent;
  */
 public abstract class PreventionEffectImpl<T extends PreventionEffectImpl<T>> extends ReplacementEffectImpl<T> implements PreventionEffect<T> {
 
-	public PreventionEffectImpl(Duration duration) {
-		super(duration, Outcome.PreventDamage);
-		this.effectType = EffectType.PREVENTION;
-	}
+    public PreventionEffectImpl(Duration duration) {
+        super(duration, Outcome.PreventDamage);
+        this.effectType = EffectType.PREVENTION;
+    }
 
-	public PreventionEffectImpl(final PreventionEffectImpl effect) {
-		super(effect);
-	}
+    public PreventionEffectImpl(final PreventionEffectImpl effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		switch (event.getType()) {
-			case DAMAGE_CREATURE:
-			case DAMAGE_PLAYER:
-			case DAMAGE_PLANESWALKER:
-				return event.getFlag();
-			default:
-				return false;
-		}
-	}
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        switch (event.getType()) {
+            case DAMAGE_CREATURE:
+            case DAMAGE_PLAYER:
+            case DAMAGE_PLANESWALKER:
+                return event.getFlag();
+            default:
+                return false;
+        }
+    }
 
 }

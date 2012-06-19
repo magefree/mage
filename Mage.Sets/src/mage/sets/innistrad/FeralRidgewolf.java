@@ -44,27 +44,27 @@ import mage.cards.CardImpl;
  */
 public class FeralRidgewolf extends CardImpl<FeralRidgewolf> {
 
-	public FeralRidgewolf(UUID ownerId) {
-		super(ownerId, 142, "Feral Ridgewolf", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-		this.expansionSetCode = "ISD";
-		this.subtype.add("Wolf");
+    public FeralRidgewolf(UUID ownerId) {
+        super(ownerId, 142, "Feral Ridgewolf", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        this.expansionSetCode = "ISD";
+        this.subtype.add("Wolf");
 
-		this.color.setRed(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(2);
+        this.color.setRed(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(2);
 
-		this.addAbility(TrampleAbility.getInstance());
+        this.addAbility(TrampleAbility.getInstance());
 
-		// {1}{R}: Feral Ridgewolf gets +2/+0 until end of turn.
-		this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Constants.Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")));
-	}
+        // {1}{R}: Feral Ridgewolf gets +2/+0 until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Constants.Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")));
+    }
 
-	public FeralRidgewolf(final FeralRidgewolf card) {
-		super(card);
-	}
+    public FeralRidgewolf(final FeralRidgewolf card) {
+        super(card);
+    }
 
-	@Override
-	public FeralRidgewolf copy() {
-		return new FeralRidgewolf(this);
-	}
+    @Override
+    public FeralRidgewolf copy() {
+        return new FeralRidgewolf(this);
+    }
 }

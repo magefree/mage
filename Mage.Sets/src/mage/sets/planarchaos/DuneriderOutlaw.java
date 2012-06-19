@@ -56,7 +56,7 @@ public class DuneriderOutlaw extends CardImpl<DuneriderOutlaw> {
         filter.setColor(ObjectColor.GREEN);
         filter.setUseColor(true);
     }
-    
+
     public DuneriderOutlaw(UUID ownerId) {
         super(ownerId, 86, "Dunerider Outlaw", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}{B}");
         this.expansionSetCode = "PLC";
@@ -67,12 +67,12 @@ public class DuneriderOutlaw extends CardImpl<DuneriderOutlaw> {
         this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        
+
         // Protection from green
         this.addAbility(new ProtectionAbility(filter));
         // At the beginning of each end step, if Dunerider Outlaw dealt damage to an opponent this turn, put a +1/+1 counter on it.
         TriggeredAbility triggered = new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of each end step", true, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
-		this.addAbility(new ConditionalTriggeredAbility(triggered, new DealtDamageToAnOpponent(), ruleText));
+        this.addAbility(new ConditionalTriggeredAbility(triggered, new DealtDamageToAnOpponent(), ruleText));
     }
 
     public DuneriderOutlaw(final DuneriderOutlaw card) {

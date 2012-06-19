@@ -25,10 +25,10 @@ public class AngelOfFlightAlabaster extends CardImpl<AngelOfFlightAlabaster> {
     public AngelOfFlightAlabaster(UUID ownerId) {
         super(ownerId, 2, "Angel of Flight Alabaster", Constants.Rarity.RARE, new Constants.CardType[]{Constants.CardType.CREATURE}, "{4}{W}");
         this.expansionSetCode = "ISD";
-		this.subtype.add("Angel");
-		this.color.setWhite(true);
-		this.power = new MageInt(4);
-		this.toughness = new MageInt(4);
+        this.subtype.add("Angel");
+        this.color.setWhite(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
         this.addAbility(FlyingAbility.getInstance());
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new ReturnToHandTargetEffect(), Constants.TargetController.YOU, false);

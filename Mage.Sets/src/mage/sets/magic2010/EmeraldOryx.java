@@ -47,7 +47,7 @@ public class EmeraldOryx extends CardImpl<EmeraldOryx> {
         this.color.setGreen(true);
         this.subtype.add("Antelope");
         this.power = new MageInt(2);
-	this.toughness = new MageInt(3);
+    this.toughness = new MageInt(3);
         this.addAbility(new ForestwalkAbility());
     }
 

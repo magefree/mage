@@ -59,11 +59,11 @@ public class ContagionEngine extends CardImpl<ContagionEngine> {
         this.expansionSetCode = "SOM";
         Ability ability = new EntersBattlefieldTriggeredAbility(new ContagionEngineEffect());
         ability.addTarget(new TargetPlayer());
-		this.addAbility(ability);
-		ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ProliferateEffect(), new GenericManaCost(4));
-		ability.addCost(new TapSourceCost());
-		ability.addEffect(new ProliferateEffect());
-		this.addAbility(ability);
+        this.addAbility(ability);
+        ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ProliferateEffect(), new GenericManaCost(4));
+        ability.addCost(new TapSourceCost());
+        ability.addEffect(new ProliferateEffect());
+        this.addAbility(ability);
     }
 
     public ContagionEngine (final ContagionEngine card) {
@@ -78,30 +78,30 @@ public class ContagionEngine extends CardImpl<ContagionEngine> {
 }
 
 class ContagionEngineEffect extends OneShotEffect<ContagionEngineEffect> {
-	ContagionEngineEffect() {
-		super(Constants.Outcome.UnboostCreature);
-		staticText = "put a -1/-1 counter on each creature target player controls";
-	}
+    ContagionEngineEffect() {
+        super(Constants.Outcome.UnboostCreature);
+        staticText = "put a -1/-1 counter on each creature target player controls";
+    }
 
-	ContagionEngineEffect(final ContagionEngineEffect effect) {
-		super(effect);
-	}
+    ContagionEngineEffect(final ContagionEngineEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player target = game.getPlayer(source.getFirstTarget());
-		if (target != null) {
-			for (Permanent p : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), target.getId(), game)) {
-				p.addCounters(CounterType.M1M1.createInstance(), game);
-			}
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player target = game.getPlayer(source.getFirstTarget());
+        if (target != null) {
+            for (Permanent p : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), target.getId(), game)) {
+                p.addCounters(CounterType.M1M1.createInstance(), game);
+            }
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public ContagionEngineEffect copy() {
-		return new ContagionEngineEffect(this);
-	}
+    @Override
+    public ContagionEngineEffect copy() {
+        return new ContagionEngineEffect(this);
+    }
 
 }

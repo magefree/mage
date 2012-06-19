@@ -36,26 +36,26 @@ import mage.filter.common.FilterAttackingOrBlockingCreature;
  */
 public class TargetAttackingOrBlockingCreature extends TargetCreaturePermanent<TargetAttackingOrBlockingCreature> {
 
-	public TargetAttackingOrBlockingCreature() {
-		this(1, 1, new FilterAttackingOrBlockingCreature(), false);
-	}
+    public TargetAttackingOrBlockingCreature() {
+        this(1, 1, new FilterAttackingOrBlockingCreature(), false);
+    }
 
-	public TargetAttackingOrBlockingCreature(int numTargets) {
-		this(numTargets, numTargets, new FilterAttackingOrBlockingCreature(), false);
-	}
+    public TargetAttackingOrBlockingCreature(int numTargets) {
+        this(numTargets, numTargets, new FilterAttackingOrBlockingCreature(), false);
+    }
 
-	public TargetAttackingOrBlockingCreature(int minNumTargets, int maxNumTargets, FilterAttackingOrBlockingCreature filter, boolean notTarget) {
-		super(minNumTargets, maxNumTargets, filter, notTarget);
-		this.targetName = filter.getMessage();
-	}
+    public TargetAttackingOrBlockingCreature(int minNumTargets, int maxNumTargets, FilterAttackingOrBlockingCreature filter, boolean notTarget) {
+        super(minNumTargets, maxNumTargets, filter, notTarget);
+        this.targetName = filter.getMessage();
+    }
 
-	public TargetAttackingOrBlockingCreature(final TargetAttackingOrBlockingCreature target) {
-		super(target);
-	}
+    public TargetAttackingOrBlockingCreature(final TargetAttackingOrBlockingCreature target) {
+        super(target);
+    }
 
-	@Override
-	public TargetAttackingOrBlockingCreature copy() {
-		return new TargetAttackingOrBlockingCreature(this);
-	}
+    @Override
+    public TargetAttackingOrBlockingCreature copy() {
+        return new TargetAttackingOrBlockingCreature(this);
+    }
 
 }

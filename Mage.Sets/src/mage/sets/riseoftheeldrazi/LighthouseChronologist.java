@@ -105,9 +105,9 @@ class LighthouseChronologistAbility extends TriggeredAbilityImpl<LighthouseChron
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.END_TURN_STEP_PRE && !game.getActivePlayerId().equals(this.controllerId)) {
-			return true;
-		}
-		return false;
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -118,23 +118,23 @@ class LighthouseChronologistAbility extends TriggeredAbilityImpl<LighthouseChron
 
 class LighthouseChronologistEffect extends OneShotEffect<LighthouseChronologistEffect> {
 
-	public LighthouseChronologistEffect() {
-		super(Outcome.ExtraTurn);
-	}
+    public LighthouseChronologistEffect() {
+        super(Outcome.ExtraTurn);
+    }
 
-	public LighthouseChronologistEffect(final LighthouseChronologistEffect effect) {
-		super(effect);
-	}
+    public LighthouseChronologistEffect(final LighthouseChronologistEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public LighthouseChronologistEffect copy() {
-		return new LighthouseChronologistEffect(this);
-	}
+    @Override
+    public LighthouseChronologistEffect copy() {
+        return new LighthouseChronologistEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), false));
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), false));
+        return true;
+    }
 
 }

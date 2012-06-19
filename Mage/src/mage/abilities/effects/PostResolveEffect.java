@@ -39,19 +39,19 @@ import mage.game.Game;
  */
 public abstract class PostResolveEffect<T extends PostResolveEffect<T>> extends OneShotEffect<T> {
 
-	public PostResolveEffect() {
-		super(Outcome.Neutral);
-	}
-	
-	public PostResolveEffect(final PostResolveEffect effect) {
-		super(effect);
-	}
-	
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
+    public PostResolveEffect() {
+        super(Outcome.Neutral);
+    }
 
-	public abstract void postResolve(Card card, Ability source, UUID controllerId, Game game);
+    public PostResolveEffect(final PostResolveEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    public abstract void postResolve(Card card, Ability source, UUID controllerId, Game game);
 
 }

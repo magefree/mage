@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class MindRot extends mage.sets.magic2010.MindRot {
 
-	public MindRot(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 105;
-		this.expansionSetCode = "M11";
-	}
+    public MindRot(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 105;
+        this.expansionSetCode = "M11";
+    }
 
-	public MindRot(final MindRot card) {
-		super(card);
-	}
+    public MindRot(final MindRot card) {
+        super(card);
+    }
 
-	@Override
-	public MindRot copy() {
-		return new MindRot(this);
-	}
+    @Override
+    public MindRot copy() {
+        return new MindRot(this);
+    }
 
 }

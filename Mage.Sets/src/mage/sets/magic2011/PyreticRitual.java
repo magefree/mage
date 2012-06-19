@@ -41,19 +41,19 @@ import mage.cards.CardImpl;
  */
 public class PyreticRitual extends CardImpl<PyreticRitual> {
 
-	public PyreticRitual(UUID ownerId) {
-		super(ownerId, 153, "Pyretic Ritual", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
-		this.expansionSetCode = "M11";
-		this.color.setRed(true);
-		this.getSpellAbility().addEffect(new BasicManaEffect(Mana.RedMana(3)));
-	}
+    public PyreticRitual(UUID ownerId) {
+        super(ownerId, 153, "Pyretic Ritual", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
+        this.expansionSetCode = "M11";
+        this.color.setRed(true);
+        this.getSpellAbility().addEffect(new BasicManaEffect(Mana.RedMana(3)));
+    }
 
-	public PyreticRitual(final PyreticRitual card) {
-		super(card);
-	}
+    public PyreticRitual(final PyreticRitual card) {
+        super(card);
+    }
 
-	@Override
-	public PyreticRitual copy() {
-		return new PyreticRitual(this);
-	}
+    @Override
+    public PyreticRitual copy() {
+        return new PyreticRitual(this);
+    }
 }

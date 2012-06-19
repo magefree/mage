@@ -57,50 +57,50 @@ import mage.view.CardsView;
  */
 public class DraftGrid extends javax.swing.JPanel implements MouseListener {
 
-	protected CardEventSource cardEventSource = new CardEventSource();
-	protected BigCard bigCard;
+    protected CardEventSource cardEventSource = new CardEventSource();
+    protected BigCard bigCard;
 
     /** Creates new form DraftGrid */
     public DraftGrid() {
         initComponents();
     }
 
-	public void loadBooster(CardsView booster, BigCard bigCard) {
-		this.bigCard = bigCard;
-		this.removeAll();
-		int numColumns = 5;
-		int curColumn = 0;
-		int curRow = 0;
-		int offsetX = 5;
-		int offsetY = 3;
-		Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
-		Dimension dimension = new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
-		List<CardView> sortedCards = new ArrayList<CardView>(booster.values());
-		Collections.sort(sortedCards, new CardViewRarityComparator());
-		for (CardView card: sortedCards) {
-			MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, dimension, null, true);
-			cardImg.addMouseListener(this);
-			add(cardImg);
-			cardImg.update(card);
-			rectangle.setLocation(curColumn * (Config.dimensions.frameWidth + offsetX) + offsetX, curRow * (Config.dimensions.frameHeight + offsetY) + offsetY);
-			cardImg.setBounds(rectangle);
-			cardImg.setCardBounds(rectangle.x, rectangle.y, Config.dimensions.frameWidth, Config.dimensions.frameHeight);
-			curColumn++;
-			if (curColumn == numColumns) {
-				curColumn = 0;
-				curRow++;
-			}
-		}
-		repaint();
-	}
+    public void loadBooster(CardsView booster, BigCard bigCard) {
+        this.bigCard = bigCard;
+        this.removeAll();
+        int numColumns = 5;
+        int curColumn = 0;
+        int curRow = 0;
+        int offsetX = 5;
+        int offsetY = 3;
+        Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
+        Dimension dimension = new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
+        List<CardView> sortedCards = new ArrayList<CardView>(booster.values());
+        Collections.sort(sortedCards, new CardViewRarityComparator());
+        for (CardView card: sortedCards) {
+            MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, dimension, null, true);
+            cardImg.addMouseListener(this);
+            add(cardImg);
+            cardImg.update(card);
+            rectangle.setLocation(curColumn * (Config.dimensions.frameWidth + offsetX) + offsetX, curRow * (Config.dimensions.frameHeight + offsetY) + offsetY);
+            cardImg.setBounds(rectangle);
+            cardImg.setCardBounds(rectangle.x, rectangle.y, Config.dimensions.frameWidth, Config.dimensions.frameHeight);
+            curColumn++;
+            if (curColumn == numColumns) {
+                curColumn = 0;
+                curRow++;
+            }
+        }
+        repaint();
+    }
 
-	public void addCardEventListener(Listener<Event> listener) {
-		cardEventSource.addListener(listener);
-	}
+    public void addCardEventListener(Listener<Event> listener) {
+        cardEventSource.addListener(listener);
+    }
 
-	public void clearCardEventListeners() {
-		cardEventSource.clearListeners();
-	}
+    public void clearCardEventListeners() {
+        cardEventSource.clearListeners();
+    }
 
 
     /** This method is called from within the constructor to
@@ -124,29 +124,29 @@ public class DraftGrid extends javax.swing.JPanel implements MouseListener {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-	@Override
-	public void mouseClicked(MouseEvent e) {
-	}
+    @Override
+    public void mouseClicked(MouseEvent e) {
+    }
 
-	@Override
-	public void mousePressed(MouseEvent e) {
-		Object obj = e.getSource();
-		if (obj instanceof MageCard) {
-			this.cardEventSource.doubleClick(((MageCard)obj).getOriginal().getId(), "pick-a-card");
-		}
-	}
+    @Override
+    public void mousePressed(MouseEvent e) {
+        Object obj = e.getSource();
+        if (obj instanceof MageCard) {
+            this.cardEventSource.doubleClick(((MageCard)obj).getOriginal().getId(), "pick-a-card");
+        }
+    }
 
-	@Override
-	public void mouseReleased(MouseEvent e) {
-	}
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    }
 
-	@Override
-	public void mouseEntered(MouseEvent e) {
-	}
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
 
-	@Override
-	public void mouseExited(MouseEvent e) {
-	}
+    @Override
+    public void mouseExited(MouseEvent e) {
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -46,55 +46,55 @@ import mage.game.events.GameEvent.EventType;
  */
 public class Silence extends CardImpl<Silence> {
 
-	public Silence(UUID ownerId) {
-		super(ownerId, 31, "Silence", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{W}");
-		this.expansionSetCode = "M10";
-		this.color.setWhite(true);
-		this.getSpellAbility().addEffect(new SilenceEffect());
-	}
+    public Silence(UUID ownerId) {
+        super(ownerId, 31, "Silence", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{W}");
+        this.expansionSetCode = "M10";
+        this.color.setWhite(true);
+        this.getSpellAbility().addEffect(new SilenceEffect());
+    }
 
-	public Silence(final Silence card) {
-		super(card);
-	}
+    public Silence(final Silence card) {
+        super(card);
+    }
 
-	@Override
-	public Silence copy() {
-		return new Silence(this);
-	}
+    @Override
+    public Silence copy() {
+        return new Silence(this);
+    }
 }
 
 class SilenceEffect extends ReplacementEffectImpl<SilenceEffect> {
 
-	public SilenceEffect() {
-		super(Duration.EndOfTurn, Outcome.Benefit);
-		staticText = "Your opponents can't cast spells this turn";
-	}
+    public SilenceEffect() {
+        super(Duration.EndOfTurn, Outcome.Benefit);
+        staticText = "Your opponents can't cast spells this turn";
+    }
 
-	public SilenceEffect(final SilenceEffect effect) {
-		super(effect);
-	}
+    public SilenceEffect(final SilenceEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public SilenceEffect copy() {
-		return new SilenceEffect(this);
-	}
+    @Override
+    public SilenceEffect copy() {
+        return new SilenceEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		return true;
-	}
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        return true;
+    }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (event.getType() == EventType.CAST_SPELL && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (event.getType() == EventType.CAST_SPELL && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
+            return true;
+        }
+        return false;
+    }
 
 }

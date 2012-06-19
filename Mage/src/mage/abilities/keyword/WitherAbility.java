@@ -48,28 +48,28 @@ import java.io.ObjectStreamException;
  */
 public class WitherAbility extends StaticAbility<WitherAbility> {
 
-	private static final WitherAbility fINSTANCE =  new WitherAbility();
+    private static final WitherAbility fINSTANCE =  new WitherAbility();
 
-	private Object readResolve() throws ObjectStreamException {
-		return fINSTANCE;
-	}
+    private Object readResolve() throws ObjectStreamException {
+        return fINSTANCE;
+    }
 
-	public static WitherAbility getInstance() {
-		return fINSTANCE;
-	}
+    public static WitherAbility getInstance() {
+        return fINSTANCE;
+    }
 
-	private WitherAbility() {
-		super(Zone.ALL, null);
-	}
+    private WitherAbility() {
+        super(Zone.ALL, null);
+    }
 
-	@Override
-	public String getRule() {
-		return "Wither";
-	}
+    @Override
+    public String getRule() {
+        return "Wither";
+    }
 
-	@Override
-	public WitherAbility copy() {
-		return fINSTANCE;
-	}
+    @Override
+    public WitherAbility copy() {
+        return fINSTANCE;
+    }
 
 }

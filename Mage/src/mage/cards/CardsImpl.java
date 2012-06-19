@@ -41,130 +41,130 @@ import java.util.*;
  */
 public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializable {
 
-	private static Random rnd = new Random();
-	private UUID ownerId;
-	private Zone zone;
+    private static Random rnd = new Random();
+    private UUID ownerId;
+    private Zone zone;
 
-	public CardsImpl() { }
+    public CardsImpl() { }
 
     public CardsImpl(Card card) {
         this.add(card.getId());
     }
 
-	public CardsImpl(Zone zone) {
-		this.zone = zone;
-	}
+    public CardsImpl(Zone zone) {
+        this.zone = zone;
+    }
 
-	public CardsImpl(Zone zone, List<Card> cards) {
-		this(zone);
-		for (Card card: cards) {
-			this.add(card.getId());
-		}
-	}
+    public CardsImpl(Zone zone, List<Card> cards) {
+        this(zone);
+        for (Card card: cards) {
+            this.add(card.getId());
+        }
+    }
 
-	public CardsImpl(final CardsImpl cards) {
+    public CardsImpl(final CardsImpl cards) {
         this.addAll(cards);
-		this.ownerId = cards.ownerId;
-		this.zone = cards.zone;
-	}
+        this.ownerId = cards.ownerId;
+        this.zone = cards.zone;
+    }
 
-	@Override
-	public Cards copy() {
-		return new CardsImpl(this);
-	}
+    @Override
+    public Cards copy() {
+        return new CardsImpl(this);
+    }
 
-	@Override
-	public void add(Card card) {
-		this.add(card.getId());
-	}
+    @Override
+    public void add(Card card) {
+        this.add(card.getId());
+    }
 
-	@Override
-	public Card get(UUID cardId, Game game) {
-		if (this.contains(cardId))
-			return game.getCard(cardId);
-		return null;
-	}
+    @Override
+    public Card get(UUID cardId, Game game) {
+        if (this.contains(cardId))
+            return game.getCard(cardId);
+        return null;
+    }
 
-	@Override
-	public void remove(Card card) {
-		if (card == null)
-			return;
-		this.remove(card.getId());
-	}
+    @Override
+    public void remove(Card card) {
+        if (card == null)
+            return;
+        this.remove(card.getId());
+    }
 
-	@Override
-	public void setOwner(UUID ownerId, Game game) {
-		this.ownerId = ownerId;
-		for (UUID card: this) {
-			game.getCard(card).setOwnerId(ownerId);
-		}
-	}
+    @Override
+    public void setOwner(UUID ownerId, Game game) {
+        this.ownerId = ownerId;
+        for (UUID card: this) {
+            game.getCard(card).setOwnerId(ownerId);
+        }
+    }
 
-	@Override
-	public Card getRandom(Game game) {
+    @Override
+    public Card getRandom(Game game) {
         if (this.size() == 0)
             return null;
-		UUID[] cards = this.toArray(new UUID[0]);
-		return game.getCard(cards[rnd.nextInt(cards.length)]);
-	}
+        UUID[] cards = this.toArray(new UUID[0]);
+        return game.getCard(cards[rnd.nextInt(cards.length)]);
+    }
 
-	@Override
-	public int count(FilterCard filter, Game game) {
-		int result = 0;
-		for (UUID card: this) {
-			if (filter.match(game.getCard(card), game))
-				result++;
-		}
-		return result;
-	}
+    @Override
+    public int count(FilterCard filter, Game game) {
+        int result = 0;
+        for (UUID card: this) {
+            if (filter.match(game.getCard(card), game))
+                result++;
+        }
+        return result;
+    }
 
-   	@Override
-	public int count(FilterCard filter, UUID playerId, Game game) {
-		int result = 0;
-		for (UUID card: this) {
-			if (filter.match(game.getCard(card), playerId, game))
-				result++;
-		}
-		return result;
-	}
+       @Override
+    public int count(FilterCard filter, UUID playerId, Game game) {
+        int result = 0;
+        for (UUID card: this) {
+            if (filter.match(game.getCard(card), playerId, game))
+                result++;
+        }
+        return result;
+    }
 
-	@Override
-	public Set<Card> getCards(FilterCard filter, Game game) {
-		Set<Card> cards = new LinkedHashSet<Card>();
-		for (UUID card: this) {
-			boolean match = filter.match(game.getCard(card), game);
-			if (match)
-				cards.add(game.getCard(card));
-		}
-		return cards;
-	}
+    @Override
+    public Set<Card> getCards(FilterCard filter, Game game) {
+        Set<Card> cards = new LinkedHashSet<Card>();
+        for (UUID card: this) {
+            boolean match = filter.match(game.getCard(card), game);
+            if (match)
+                cards.add(game.getCard(card));
+        }
+        return cards;
+    }
 
-	@Override
-	public Set<Card> getCards(Game game) {
-		Set<Card> cards = new LinkedHashSet<Card>();
-		for (UUID card: this) {
-			cards.add(game.getCard(card));
-		}
-		return cards;
-	}
+    @Override
+    public Set<Card> getCards(Game game) {
+        Set<Card> cards = new LinkedHashSet<Card>();
+        for (UUID card: this) {
+            cards.add(game.getCard(card));
+        }
+        return cards;
+    }
 
-	@Override
-	public void addAll(List<Card> cards) {
-		for (Card card: cards) {
-			add(card.getId());
-		}
-	}
+    @Override
+    public void addAll(List<Card> cards) {
+        for (Card card: cards) {
+            add(card.getId());
+        }
+    }
 
-	@Override
-	public Collection<Card> getUniqueCards(Game game) {
-		Map<String, Card> cards = new HashMap<String, Card>();
-		for(UUID cardId: this) {
+    @Override
+    public Collection<Card> getUniqueCards(Game game) {
+        Map<String, Card> cards = new HashMap<String, Card>();
+        for(UUID cardId: this) {
             Card card = game.getCard(cardId);
-			if (!cards.containsKey(card.getName())) {
-				cards.put(card.getName(), card);
-			}
-		}
-		return cards.values();
-	}
+            if (!cards.containsKey(card.getName())) {
+                cards.put(card.getName(), card);
+            }
+        }
+        return cards.values();
+    }
 
 }

@@ -65,16 +65,16 @@ public class MarrowGnawer extends CardImpl<MarrowGnawer> {
         filterSacrifice.getSubtype().add("Rat");
         filter3.getSubtype().add("Rat");
     }
-    
+
     public MarrowGnawer (UUID ownerId) {
         super(ownerId, 124, "Marrow-Gnawer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Rat");
         this.subtype.add("Rogue");
-	this.color.setBlack(true);
+    this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
-        
+
         // Rat creatures have fear. (They can't be blocked except by artifact creatures and/or black creatures.)
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(FearAbility.getInstance(), Constants.Duration.WhileOnBattlefield, filterFear)));
 
@@ -98,13 +98,13 @@ public class MarrowGnawer extends CardImpl<MarrowGnawer> {
 
 class RatToken extends Token {
 
-	public RatToken() {
-		super("Rat", "1/1 black Rat creature token");
-		cardType.add(CardType.CREATURE);
-		color = ObjectColor.BLACK;
-		subtype.add("Rat");
-		power = new MageInt(1);
-		toughness = new MageInt(1);
-	}
+    public RatToken() {
+        super("Rat", "1/1 black Rat creature token");
+        cardType.add(CardType.CREATURE);
+        color = ObjectColor.BLACK;
+        subtype.add("Rat");
+        power = new MageInt(1);
+        toughness = new MageInt(1);
+    }
 
 }

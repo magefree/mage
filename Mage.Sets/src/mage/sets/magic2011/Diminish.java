@@ -42,21 +42,21 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Diminish extends CardImpl<Diminish> {
 
-	public Diminish(UUID ownerId) {
-		super(ownerId, 52, "Diminish", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
-		this.expansionSetCode = "M11";
-		this.color.setBlue(true);
-		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-		this.getSpellAbility().addEffect(new SetPowerToughnessTargetEffect(1, 1, Duration.EndOfTurn));
-	}
+    public Diminish(UUID ownerId) {
+        super(ownerId, 52, "Diminish", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
+        this.expansionSetCode = "M11";
+        this.color.setBlue(true);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addEffect(new SetPowerToughnessTargetEffect(1, 1, Duration.EndOfTurn));
+    }
 
-	public Diminish(final Diminish card) {
-		super(card);
-	}
+    public Diminish(final Diminish card) {
+        super(card);
+    }
 
-	@Override
-	public Diminish copy() {
-		return new Diminish(this);
-	}
+    @Override
+    public Diminish copy() {
+        return new Diminish(this);
+    }
 
 }

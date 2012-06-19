@@ -46,7 +46,7 @@ public class Disperse extends CardImpl<Disperse> {
         this.expansionSetCode = "SOM";
         this.color.setBlue(true);
 
-		this.getSpellAbility().addTarget(new TargetNonlandPermanent());
+        this.getSpellAbility().addTarget(new TargetNonlandPermanent());
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
     }
 

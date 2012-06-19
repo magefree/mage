@@ -37,61 +37,61 @@ import mage.game.Game;
  */
 public class MultikickerAbility extends KickerAbility {
 
-	int activateCount;
+    int activateCount;
 
-	public MultikickerAbility(Effect effect, boolean replaces) {
-		super(effect, replaces);
-	}
+    public MultikickerAbility(Effect effect, boolean replaces) {
+        super(effect, replaces);
+    }
 
-	public MultikickerAbility(final MultikickerAbility ability) {
-		super(ability);
-		this.activateCount = ability.activateCount;
-	}
+    public MultikickerAbility(final MultikickerAbility ability) {
+        super(ability);
+        this.activateCount = ability.activateCount;
+    }
 
-	@Override
-	public MultikickerAbility copy() {
-		return new MultikickerAbility(this);
-	}
+    @Override
+    public MultikickerAbility copy() {
+        return new MultikickerAbility(this);
+    }
 
-	@Override
-	public boolean activate(Game game, boolean noMana) {
-		activateCount = 0;
-		while (true) {
-			this.costs.clearPaid();
-			this.manaCostsToPay.clearPaid();
-			if (!super.activate(game, noMana))
-				break;
-			activateCount++;
-		}
-		kicked = activateCount > 0;
-		return kicked;
-	}
+    @Override
+    public boolean activate(Game game, boolean noMana) {
+        activateCount = 0;
+        while (true) {
+            this.costs.clearPaid();
+            this.manaCostsToPay.clearPaid();
+            if (!super.activate(game, noMana))
+                break;
+            activateCount++;
+        }
+        kicked = activateCount > 0;
+        return kicked;
+    }
 
-	@Override
-	public boolean resolve(Game game) {
-		boolean result = false;
-		for (int i = 0; i < activateCount; i++) {
-			result |= super.resolve(game);
-		}
-		return result;
-	}
+    @Override
+    public boolean resolve(Game game) {
+        boolean result = false;
+        for (int i = 0; i < activateCount; i++) {
+            result |= super.resolve(game);
+        }
+        return result;
+    }
 
-	@Override
-	public String getRule() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("Multikicker");
-		if (manaCosts.size() > 0) {
-			sb.append(manaCosts.getText());
-			if (costs.size() > 0)
-				sb.append(",");
-		}
-		if (costs.size() > 0)
-			sb.append(costs.getText());
-		sb.append(":").append(modes.getText());
-		if (replaces)
-			sb.append(" instead");
-		return sb.toString();
-	}
+    @Override
+    public String getRule() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Multikicker");
+        if (manaCosts.size() > 0) {
+            sb.append(manaCosts.getText());
+            if (costs.size() > 0)
+                sb.append(",");
+        }
+        if (costs.size() > 0)
+            sb.append(costs.getText());
+        sb.append(":").append(modes.getText());
+        if (replaces)
+            sb.append(" instead");
+        return sb.toString();
+    }
 
     public int getActivateCount() {
         return activateCount;

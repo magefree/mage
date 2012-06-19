@@ -46,67 +46,67 @@ import mage.target.TargetCard;
  */
 public class ScryEffect extends OneShotEffect<ScryEffect> {
 
-	protected static FilterCard filter1 = new FilterCard("card to put on the bottom of your library");
-	protected static FilterCard filter2 = new FilterCard("card to put on the top of your library (last chosen will be on top)");
+    protected static FilterCard filter1 = new FilterCard("card to put on the bottom of your library");
+    protected static FilterCard filter2 = new FilterCard("card to put on the top of your library (last chosen will be on top)");
 
-	protected int scryNumber;
+    protected int scryNumber;
 
-	public ScryEffect(int scryNumber) {
-		super(Outcome.Benefit);
-		this.scryNumber = scryNumber;
-		staticText = "Scry " + scryNumber;
-	}
+    public ScryEffect(int scryNumber) {
+        super(Outcome.Benefit);
+        this.scryNumber = scryNumber;
+        staticText = "Scry " + scryNumber;
+    }
 
-	public ScryEffect(final ScryEffect effect) {
-		super(effect);
-		this.scryNumber = effect.scryNumber;
-	}
+    public ScryEffect(final ScryEffect effect) {
+        super(effect);
+        this.scryNumber = effect.scryNumber;
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-		Cards cards = new CardsImpl(Zone.PICK);
-		int count = Math.min(scryNumber, player.getLibrary().size());
-		if (count == 0) {
-			return false;
-		}
-		for (int i = 0; i < count; i++) {
-			Card card = player.getLibrary().removeFromTop(game);
-			cards.add(card);
-			game.setZone(card.getId(), Zone.PICK);
-		}
-		TargetCard target1 = new TargetCard(Zone.PICK, filter1);
-		while (cards.size() > 0 && player.choose(Outcome.Detriment, cards, target1, game)) {
-			Card card = cards.get(target1.getFirstTarget(), game);
-			if (card != null) {
-				cards.remove(card);
-				card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
-			}
-			target1.clearChosen();
-		}
-		if (cards.size() > 1) {
-			TargetCard target2 = new TargetCard(Zone.PICK, filter2);
-			target2.setRequired(true);
-			while (cards.size() > 1) {
-				player.choose(Outcome.Benefit, cards, target2, game);
-				Card card = cards.get(target2.getFirstTarget(), game);
-				if (card != null) {
-					cards.remove(card);
-					card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
-				}
-				target2.clearChosen();
-			}
-		}
-		if (cards.size() == 1) {
-			Card card = cards.get(cards.iterator().next(), game);
-			card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        Cards cards = new CardsImpl(Zone.PICK);
+        int count = Math.min(scryNumber, player.getLibrary().size());
+        if (count == 0) {
+            return false;
+        }
+        for (int i = 0; i < count; i++) {
+            Card card = player.getLibrary().removeFromTop(game);
+            cards.add(card);
+            game.setZone(card.getId(), Zone.PICK);
+        }
+        TargetCard target1 = new TargetCard(Zone.PICK, filter1);
+        while (cards.size() > 0 && player.choose(Outcome.Detriment, cards, target1, game)) {
+            Card card = cards.get(target1.getFirstTarget(), game);
+            if (card != null) {
+                cards.remove(card);
+                card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
+            }
+            target1.clearChosen();
+        }
+        if (cards.size() > 1) {
+            TargetCard target2 = new TargetCard(Zone.PICK, filter2);
+            target2.setRequired(true);
+            while (cards.size() > 1) {
+                player.choose(Outcome.Benefit, cards, target2, game);
+                Card card = cards.get(target2.getFirstTarget(), game);
+                if (card != null) {
+                    cards.remove(card);
+                    card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+                }
+                target2.clearChosen();
+            }
+        }
+        if (cards.size() == 1) {
+            Card card = cards.get(cards.iterator().next(), game);
+            card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+        }
+        return true;
+    }
 
-	@Override
-	public ScryEffect copy() {
-		return new ScryEffect(this);
-	}
+    @Override
+    public ScryEffect copy() {
+        return new ScryEffect(this);
+    }
 
 }

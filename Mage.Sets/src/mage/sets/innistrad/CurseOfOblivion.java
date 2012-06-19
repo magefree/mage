@@ -84,37 +84,37 @@ public class CurseOfOblivion extends CardImpl<CurseOfOblivion> {
 
 class CurseOfOblivionAbility extends TriggeredAbilityImpl<CurseOfOblivionAbility> {
 
-	public CurseOfOblivionAbility() {
-		super(Zone.BATTLEFIELD, new ExileFromZoneTargetEffect(Zone.GRAVEYARD, null, "", new FilterCard(), 2));
-	}
+    public CurseOfOblivionAbility() {
+        super(Zone.BATTLEFIELD, new ExileFromZoneTargetEffect(Zone.GRAVEYARD, null, "", new FilterCard(), 2));
+    }
 
-	public CurseOfOblivionAbility(final CurseOfOblivionAbility ability) {
-		super(ability);
-	}
+    public CurseOfOblivionAbility(final CurseOfOblivionAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public CurseOfOblivionAbility copy() {
-		return new CurseOfOblivionAbility(this);
-	}
+    @Override
+    public CurseOfOblivionAbility copy() {
+        return new CurseOfOblivionAbility(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.UPKEEP_STEP_PRE) {
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.UPKEEP_STEP_PRE) {
             Permanent enchantment = game.getPermanent(this.sourceId);
             if (enchantment != null && enchantment.getAttachedTo() != null) {
                 Player player = game.getPlayer(enchantment.getAttachedTo());
                 if (player != null && game.getActivePlayerId().equals(player.getId())) {
                     this.getEffects().get(0).setTargetPointer(new FixedTarget(player.getId()));
-        			return true;
+                    return true;
                 }
             }
-		}
-		return false;
-	}
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "At the beginning of enchanted player's upkeep, that player exiles two cards from his or her graveyard.";
-	}
+    @Override
+    public String getRule() {
+        return "At the beginning of enchanted player's upkeep, that player exiles two cards from his or her graveyard.";
+    }
 
 }

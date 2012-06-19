@@ -53,152 +53,152 @@ import mage.watchers.WatcherImpl;
  */
 public class AngelicArbiter extends CardImpl<AngelicArbiter> {
 
-	public AngelicArbiter(UUID ownerId) {
-		super(ownerId, 4, "Angelic Arbiter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Angel");
-		this.color.setWhite(true);
-		this.power = new MageInt(5);
-		this.toughness = new MageInt(6);
+    public AngelicArbiter(UUID ownerId) {
+        super(ownerId, 4, "Angelic Arbiter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Angel");
+        this.color.setWhite(true);
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(6);
 
-		this.addAbility(FlyingAbility.getInstance());
-		this.addWatcher(new AngelicArbiterWatcher1());
-		this.addWatcher(new AngelicArbiterWatcher2());
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AngelicArbiterEffect1()));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AngelicArbiterEffect2()));
-	}
+        this.addAbility(FlyingAbility.getInstance());
+        this.addWatcher(new AngelicArbiterWatcher1());
+        this.addWatcher(new AngelicArbiterWatcher2());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AngelicArbiterEffect1()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AngelicArbiterEffect2()));
+    }
 
-	public AngelicArbiter(final AngelicArbiter card) {
-		super(card);
-	}
+    public AngelicArbiter(final AngelicArbiter card) {
+        super(card);
+    }
 
-	@Override
-	public AngelicArbiter copy() {
-		return new AngelicArbiter(this);
-	}
+    @Override
+    public AngelicArbiter copy() {
+        return new AngelicArbiter(this);
+    }
 
 }
 
 class AngelicArbiterWatcher1 extends WatcherImpl<AngelicArbiterWatcher1> {
 
-	public AngelicArbiterWatcher1() {
-		super("OpponentCastSpell", WatcherScope.PLAYER);
-	}
+    public AngelicArbiterWatcher1() {
+        super("OpponentCastSpell", WatcherScope.PLAYER);
+    }
 
-	public AngelicArbiterWatcher1(final AngelicArbiterWatcher1 watcher) {
-		super(watcher);
-	}
+    public AngelicArbiterWatcher1(final AngelicArbiterWatcher1 watcher) {
+        super(watcher);
+    }
 
-	@Override
-	public AngelicArbiterWatcher1 copy() {
-		return new AngelicArbiterWatcher1(this);
-	}
+    @Override
+    public AngelicArbiterWatcher1 copy() {
+        return new AngelicArbiterWatcher1(this);
+    }
 
-	@Override
-	public void watch(GameEvent event, Game game) {
+    @Override
+    public void watch(GameEvent event, Game game) {
         if (condition == true) //no need to check - condition has already occured
             return;
-		if (event.getType() == EventType.SPELL_CAST && game.getActivePlayerId().equals(event.getPlayerId()) && game.getOpponents(controllerId).contains(event.getPlayerId()))
-			condition = true;
-	}
+        if (event.getType() == EventType.SPELL_CAST && game.getActivePlayerId().equals(event.getPlayerId()) && game.getOpponents(controllerId).contains(event.getPlayerId()))
+            condition = true;
+    }
 
 }
 
 class AngelicArbiterWatcher2 extends WatcherImpl<AngelicArbiterWatcher2> {
 
-	public AngelicArbiterWatcher2() {
-		super("OpponentAttacked", WatcherScope.PLAYER);
-	}
+    public AngelicArbiterWatcher2() {
+        super("OpponentAttacked", WatcherScope.PLAYER);
+    }
 
-	public AngelicArbiterWatcher2(final AngelicArbiterWatcher2 watcher) {
-		super(watcher);
-	}
+    public AngelicArbiterWatcher2(final AngelicArbiterWatcher2 watcher) {
+        super(watcher);
+    }
 
-	@Override
-	public AngelicArbiterWatcher2 copy() {
-		return new AngelicArbiterWatcher2(this);
-	}
+    @Override
+    public AngelicArbiterWatcher2 copy() {
+        return new AngelicArbiterWatcher2(this);
+    }
 
-	@Override
-	public void watch(GameEvent event, Game game) {
-		if (event.getType() == EventType.DECLARED_ATTACKERS && game.getActivePlayerId().equals(event.getPlayerId()) && game.getOpponents(controllerId).contains(event.getPlayerId()))
-			condition = true;
-	}
+    @Override
+    public void watch(GameEvent event, Game game) {
+        if (event.getType() == EventType.DECLARED_ATTACKERS && game.getActivePlayerId().equals(event.getPlayerId()) && game.getOpponents(controllerId).contains(event.getPlayerId()))
+            condition = true;
+    }
 
 }
 
 class AngelicArbiterEffect1 extends ReplacementEffectImpl<AngelicArbiterEffect1> {
 
-	public AngelicArbiterEffect1() {
-		super(Duration.WhileOnBattlefield, Outcome.Benefit);
-	}
+    public AngelicArbiterEffect1() {
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+    }
 
-	public AngelicArbiterEffect1(final AngelicArbiterEffect1 effect) {
-		super(effect);
-		staticText = "Each opponent who cast a spell this turn can't attack with creatures";
-	}
+    public AngelicArbiterEffect1(final AngelicArbiterEffect1 effect) {
+        super(effect);
+        staticText = "Each opponent who cast a spell this turn can't attack with creatures";
+    }
 
-	@Override
-	public AngelicArbiterEffect1 copy() {
-		return new AngelicArbiterEffect1(this);
-	}
+    @Override
+    public AngelicArbiterEffect1 copy() {
+        return new AngelicArbiterEffect1(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		return true;
-	}
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        return true;
+    }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (event.getType() == EventType.DECLARE_ATTACKER && game.getActivePlayerId().equals(event.getPlayerId()) && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (event.getType() == EventType.DECLARE_ATTACKER && game.getActivePlayerId().equals(event.getPlayerId()) && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             Watcher watcher = game.getState().getWatchers().get("OpponentCastSpell", source.getControllerId());
             if (watcher != null && watcher.conditionMet())
                 return true;
-		}
-		return false;
-	}
+        }
+        return false;
+    }
 
 }
 
 class AngelicArbiterEffect2 extends ReplacementEffectImpl<AngelicArbiterEffect2> {
 
-	public AngelicArbiterEffect2() {
-		super(Duration.WhileOnBattlefield, Outcome.Benefit);
-		staticText = "Each opponent who attacked with a creature this turn can't cast spells";
-	}
+    public AngelicArbiterEffect2() {
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        staticText = "Each opponent who attacked with a creature this turn can't cast spells";
+    }
 
-	public AngelicArbiterEffect2(final AngelicArbiterEffect2 effect) {
-		super(effect);
-	}
+    public AngelicArbiterEffect2(final AngelicArbiterEffect2 effect) {
+        super(effect);
+    }
 
-	@Override
-	public AngelicArbiterEffect2 copy() {
-		return new AngelicArbiterEffect2(this);
-	}
+    @Override
+    public AngelicArbiterEffect2 copy() {
+        return new AngelicArbiterEffect2(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		return true;
-	}
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        return true;
+    }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (event.getType() == EventType.CAST_SPELL && game.getActivePlayerId().equals(event.getPlayerId()) && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (event.getType() == EventType.CAST_SPELL && game.getActivePlayerId().equals(event.getPlayerId()) && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             Watcher watcher = game.getState().getWatchers().get("OpponentAttacked", source.getControllerId());
             if (watcher != null && watcher.conditionMet())
                 return true;
-		}
-		return false;
-	}
+        }
+        return false;
+    }
 
 }

@@ -47,35 +47,35 @@ import mage.filter.FilterStackObject;
  */
 public class GaeasRevenge extends CardImpl<GaeasRevenge> {
 
-	private static final FilterStackObject filter = new FilterStackObject("nongreen spells or abilities from nongreen sources");
+    private static final FilterStackObject filter = new FilterStackObject("nongreen spells or abilities from nongreen sources");
 
-	static {
-		filter.getColor().setGreen(true);
-		filter.setNotColor(true);
-		filter.setUseColor(true);
-	}
+    static {
+        filter.getColor().setGreen(true);
+        filter.setNotColor(true);
+        filter.setUseColor(true);
+    }
 
-	public GaeasRevenge(UUID ownerId) {
-		super(ownerId, 174, "Gaea's Revenge", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Elemental");
-		this.color.setGreen(true);
-		this.power = new MageInt(8);
-		this.toughness = new MageInt(5);
+    public GaeasRevenge(UUID ownerId) {
+        super(ownerId, 174, "Gaea's Revenge", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Elemental");
+        this.color.setGreen(true);
+        this.power = new MageInt(8);
+        this.toughness = new MageInt(5);
 
-		this.addAbility(new SimpleStaticAbility(Zone.STACK, new CantCounterSourceEffect()));
-		this.addAbility(HasteAbility.getInstance());
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantTargetSourceEffect(filter, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.STACK, new CantCounterSourceEffect()));
+        this.addAbility(HasteAbility.getInstance());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantTargetSourceEffect(filter, Duration.WhileOnBattlefield)));
 
-	}
+    }
 
-	public GaeasRevenge(final GaeasRevenge card) {
-		super(card);
-	}
+    public GaeasRevenge(final GaeasRevenge card) {
+        super(card);
+    }
 
-	@Override
-	public GaeasRevenge copy() {
-		return new GaeasRevenge(this);
-	}
+    @Override
+    public GaeasRevenge copy() {
+        return new GaeasRevenge(this);
+    }
 
 }

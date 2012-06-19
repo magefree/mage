@@ -46,8 +46,8 @@ import java.util.UUID;
  */
 public class CombatGroup extends javax.swing.JPanel {
 
-	private UUID gameId;
-	private BigCard bigCard;
+    private UUID gameId;
+    private BigCard bigCard;
 
     /** Creates new form CombatGroup */
     public CombatGroup() {
@@ -55,20 +55,20 @@ public class CombatGroup extends javax.swing.JPanel {
         attackers.setDontDisplayTapped(true);
     }
 
-	public void init(UUID gameId, BigCard bigCard) {
-		this.gameId = gameId;
-		this.bigCard = bigCard;
-	}
+    public void init(UUID gameId, BigCard bigCard) {
+        this.gameId = gameId;
+        this.bigCard = bigCard;
+    }
 
-	public void update(CombatGroupView combatGroup) {
-		this.lblDefender.setText(combatGroup.getDefenderName());
-		this.attackers.loadCards(combatGroup.getAttackers(), bigCard, gameId, null);
-//		attackers.setPreferredSize(new Dimension(Config.dimensions.frameWidth + 6, Config.dimensions.frameHeight + 6));
-		this.blockers.loadCards(combatGroup.getBlockers(), bigCard, gameId, null);
-//		blockers.setPreferredSize(new Dimension(Config.dimensions.frameWidth + 6, Config.dimensions.frameHeight + 6));
-		this.attackers.setVisible(true);
-		this.blockers.setVisible(true);
-	}
+    public void update(CombatGroupView combatGroup) {
+        this.lblDefender.setText(combatGroup.getDefenderName());
+        this.attackers.loadCards(combatGroup.getAttackers(), bigCard, gameId, null);
+//        attackers.setPreferredSize(new Dimension(Config.dimensions.frameWidth + 6, Config.dimensions.frameHeight + 6));
+        this.blockers.loadCards(combatGroup.getBlockers(), bigCard, gameId, null);
+//        blockers.setPreferredSize(new Dimension(Config.dimensions.frameWidth + 6, Config.dimensions.frameHeight + 6));
+        this.attackers.setVisible(true);
+        this.blockers.setVisible(true);
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.

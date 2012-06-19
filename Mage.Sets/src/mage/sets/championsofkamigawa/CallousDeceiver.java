@@ -68,7 +68,7 @@ public class CallousDeceiver extends CardImpl<CallousDeceiver> {
         this.toughness = new MageInt(3);
         // {1}: Look at the top card of your library.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryControllerEffect(), new GenericManaCost(1)));  
-        
+
         // {2}: Reveal the top card of your library. If it's a land card, {this} gets +1/+0 and gains flying until end of turn.
         Ability ability = new CallousDeceiverAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1,0,Duration.EndOfTurn), new ManaCostsImpl("{2}"));
         ability.addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(),Duration.EndOfTurn));
@@ -78,7 +78,7 @@ public class CallousDeceiver extends CardImpl<CallousDeceiver> {
     public CallousDeceiver(final CallousDeceiver card) {
         super(card);
     }
-    
+
     @Override
     public CallousDeceiver copy() {
         return new CallousDeceiver(this);
@@ -87,22 +87,22 @@ public class CallousDeceiver extends CardImpl<CallousDeceiver> {
 }
 
 class CallousDeceiverAbility extends ActivateOncePerTurnActivatedAbility {
-    	
+
         public CallousDeceiverAbility(Zone zone, Effect effect, Cost cost) {
-		super(zone, effect, cost);
-	}
+        super(zone, effect, cost);
+    }
 
         public CallousDeceiverAbility(CallousDeceiverAbility ability) {
-		super(ability);
-	}
-    
+        super(ability);
+    }
+
         @Override
         public CallousDeceiverAbility copy() {
                 return new CallousDeceiverAbility(this);
         }
-    
+
         @Override
-	public boolean checkIfClause(Game game) {
+    public boolean checkIfClause(Game game) {
                 Player player = game.getPlayer(this.getControllerId());
                 if (player != null) {
                     Cards cards = new CardsImpl();
@@ -113,11 +113,11 @@ class CallousDeceiverAbility extends ActivateOncePerTurnActivatedAbility {
                             return true;
                     }
                 }
-		return false;
+        return false;
         }
-    
+
         @Override
-	public String getRule() {
-		return "{2}: Reveal the top card of your library. If it's a land card, {this} gets +1/+0 and gains flying until end of turn. Activate this ability only once each turn."; 
-	}
+    public String getRule() {
+        return "{2}: Reveal the top card of your library. If it's a land card, {this} gets +1/+0 and gains flying until end of turn. Activate this ability only once each turn."; 
+    }
 }

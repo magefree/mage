@@ -45,48 +45,48 @@ import mage.players.Player;
  */
 public class PayVariableLoyaltyCost extends CostImpl<PayVariableLoyaltyCost> implements VariableCost {
 
-	protected int amountPaid = 0;
+    protected int amountPaid = 0;
 
-	public PayVariableLoyaltyCost() {
-		this.text = "-X";
-	}
+    public PayVariableLoyaltyCost() {
+        this.text = "-X";
+    }
 
-	public PayVariableLoyaltyCost(final PayVariableLoyaltyCost cost) {
-		super(cost);
-		this.amountPaid = cost.amountPaid;
-	}
+    public PayVariableLoyaltyCost(final PayVariableLoyaltyCost cost) {
+        super(cost);
+        this.amountPaid = cost.amountPaid;
+    }
 
-	@Override
-	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-		Permanent planeswalker = game.getPermanent(sourceId);
-		return !planeswalker.isLoyaltyUsed();
-	}
+    @Override
+    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+        Permanent planeswalker = game.getPermanent(sourceId);
+        return !planeswalker.isLoyaltyUsed();
+    }
 
-	@Override
-	public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-		Permanent planeswalker = game.getPermanent(sourceId);
-		Player player = game.getPlayer(planeswalker.getControllerId());
-		this.amountPaid = player.getAmount(0, planeswalker.getCounters().getCount(CounterType.LOYALTY), "Choose X", game);
-		if (this.amountPaid> 0) {
-			planeswalker.getCounters().removeCounter(CounterType.LOYALTY, this.amountPaid); 
-		} else if (this.amountPaid < 0) {
-			planeswalker.getCounters().addCounter(CounterType.LOYALTY.createInstance(Math.abs(this.amountPaid)));
-		}
-		planeswalker.setLoyaltyUsed(true);
-		this.paid = true;
-		return paid;
-	}
+    @Override
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+        Permanent planeswalker = game.getPermanent(sourceId);
+        Player player = game.getPlayer(planeswalker.getControllerId());
+        this.amountPaid = player.getAmount(0, planeswalker.getCounters().getCount(CounterType.LOYALTY), "Choose X", game);
+        if (this.amountPaid> 0) {
+            planeswalker.getCounters().removeCounter(CounterType.LOYALTY, this.amountPaid); 
+        } else if (this.amountPaid < 0) {
+            planeswalker.getCounters().addCounter(CounterType.LOYALTY.createInstance(Math.abs(this.amountPaid)));
+        }
+        planeswalker.setLoyaltyUsed(true);
+        this.paid = true;
+        return paid;
+    }
 
-	@Override
-	public void clearPaid() {
-		paid = false;
-		amountPaid = 0;
-	}
+    @Override
+    public void clearPaid() {
+        paid = false;
+        amountPaid = 0;
+    }
 
-	@Override
-	public int getAmount() {
-		return amountPaid;
-	}
+    @Override
+    public int getAmount() {
+        return amountPaid;
+    }
 
     @Override
     public void setAmount(int amount) {
@@ -94,12 +94,12 @@ public class PayVariableLoyaltyCost extends CostImpl<PayVariableLoyaltyCost> imp
     }
 
     @Override
-	public void setFilter(FilterMana filter) {
-	}
+    public void setFilter(FilterMana filter) {
+    }
 
-	@Override
-	public PayVariableLoyaltyCost copy() {
-		return new PayVariableLoyaltyCost(this);
-	}
+    @Override
+    public PayVariableLoyaltyCost copy() {
+        return new PayVariableLoyaltyCost(this);
+    }
 
 }

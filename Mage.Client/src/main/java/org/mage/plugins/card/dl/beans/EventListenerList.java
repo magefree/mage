@@ -29,7 +29,7 @@ import com.google.common.collect.Lists;
  */
 public class EventListenerList extends javax.swing.event.EventListenerList {
     private static final long serialVersionUID = -7545754245081842909L;
-    
+
     /**
      * Returns an iterable over all listeners for the specified classes. the listener classes are in the specified
      * order. for every class, listeners are in the reverse order of registering. A listener contained multiple
@@ -38,10 +38,10 @@ public class EventListenerList extends javax.swing.event.EventListenerList {
     public <T extends EventListener> Iterable<T> getIterable(final Class<? extends T>... listenerClass) {
         //transform class -> iterable
         List<Iterable<T>> l = Lists.transform(asList(listenerClass), new ClassToIterableFunction<T>());
-        
+
         //compose iterable (use an arraylist to memoize the function's results)
         final Iterable<T> it = Iterables.concat(new ArrayList<Iterable<T>>(l));
-        
+
         //transform to singleton iterators
         return new Iterable<T>() {
             public Iterator<T> iterator() {
@@ -49,7 +49,7 @@ public class EventListenerList extends javax.swing.event.EventListenerList {
             }
         };
     }
-    
+
     /**
      * Returns an iterator over all listeners for the specified classes. the listener classes are in the specified
      * order. for every class, listeners are in the reverse order of registering. A listener contained multiple
@@ -58,7 +58,7 @@ public class EventListenerList extends javax.swing.event.EventListenerList {
     public <T extends EventListener> Iterator<T> getIterator(Class<? extends T>... listenerClass) {
         return getIterable(listenerClass).iterator();
     }
-    
+
     /**
      * Iterates backwards over the listeners registered for a class by using the original array. The Listener runs
      * backwards, just as listener notification usually works.
@@ -67,11 +67,11 @@ public class EventListenerList extends javax.swing.event.EventListenerList {
         private final Class<? extends T> listenerClass;
         private Object[]                 listeners = listenerList;
         private int                      index     = listeners.length;
-        
+
         private ListenerIterator(Class<? extends T> listenerClass) {
             this.listenerClass = listenerClass;
         }
-        
+
         @Override
         @SuppressWarnings("unchecked")
         protected T computeNext() {
@@ -81,34 +81,34 @@ public class EventListenerList extends javax.swing.event.EventListenerList {
             return endOfData();
         }
     }
-    
+
     /**
      * Transforms a class to the associated listener iterator
      */
     private class ClassToIterableFunction<T> implements Function<Class<? extends T>, Iterable<T>> {
-        
+
         public Iterable<T> apply(final Class<? extends T> from) {
             return new Iterable<T>() {
-                
+
                 public Iterator<T> iterator() {
                     return new ListenerIterator<T>(from);
                 }
             };
         }
     }
-    
+
     /**
      * Filters the delegate iterator so that every but the first occurrence of every element is ignored.
      */
     private static class SingletonIterator<T> extends AbstractIterator<T> {
         private Iterator<T> it;
         private HashSet<T>  previous = new HashSet<T>();
-        
+
         public SingletonIterator(Iterator<T> it) {
             this.it = it;
         }
-        
-        
+
+
         @Override
         protected T computeNext() {
             while(it.hasNext()) {

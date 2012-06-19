@@ -51,71 +51,71 @@ import java.util.UUID;
  */
 public class HauntingEchoes extends CardImpl<HauntingEchoes> {
 
-	public HauntingEchoes(UUID ownerId) {
-		super(ownerId, 98, "Haunting Echoes", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
-		this.expansionSetCode = "M10";
-		this.color.setBlack(true);
-		this.getSpellAbility().addTarget(new TargetPlayer());
-		this.getSpellAbility().addEffect(new HauntingEchoesEffect());
-	}
+    public HauntingEchoes(UUID ownerId) {
+        super(ownerId, 98, "Haunting Echoes", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
+        this.expansionSetCode = "M10";
+        this.color.setBlack(true);
+        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addEffect(new HauntingEchoesEffect());
+    }
 
-	public HauntingEchoes(final HauntingEchoes card) {
-		super(card);
-	}
+    public HauntingEchoes(final HauntingEchoes card) {
+        super(card);
+    }
 
-	@Override
-	public HauntingEchoes copy() {
-		return new HauntingEchoes(this);
-	}
+    @Override
+    public HauntingEchoes copy() {
+        return new HauntingEchoes(this);
+    }
 }
 
 class HauntingEchoesEffect extends OneShotEffect<HauntingEchoesEffect> {
 
-	private static final FilterBasicLandCard filter = new FilterBasicLandCard();
+    private static final FilterBasicLandCard filter = new FilterBasicLandCard();
 
-	public HauntingEchoesEffect() {
-		super(Outcome.Detriment);
-		staticText = "Exile all cards from target player's graveyard other than basic land cards. For each card exiled this way, search that player's library for all cards with the same name as that card and exile them. Then that player shuffles his or her library";
-	}
+    public HauntingEchoesEffect() {
+        super(Outcome.Detriment);
+        staticText = "Exile all cards from target player's graveyard other than basic land cards. For each card exiled this way, search that player's library for all cards with the same name as that card and exile them. Then that player shuffles his or her library";
+    }
 
-	public HauntingEchoesEffect(final HauntingEchoesEffect effect) {
-		super(effect);
-	}
+    public HauntingEchoesEffect(final HauntingEchoesEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-		Player targetPlayer = game.getPlayer(source.getFirstTarget());
-		if (targetPlayer != null) {
-			for (Card card: targetPlayer.getGraveyard().getCards(game)) {
-				if (!filter.match(card, game)) {
-					card.moveToExile(null, "", source.getId(), game);
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        Player targetPlayer = game.getPlayer(source.getFirstTarget());
+        if (targetPlayer != null) {
+            for (Card card: targetPlayer.getGraveyard().getCards(game)) {
+                if (!filter.match(card, game)) {
+                    card.moveToExile(null, "", source.getId(), game);
 
-					FilterCard filterCard = new FilterCard("cards named " + card.getName());
-					filterCard.getName().add(card.getName());
-					int count = targetPlayer.getLibrary().count(filterCard, game);
-					TargetCardInLibrary target = new TargetCardInLibrary(count, count, filterCard);
-					target.setRequired(true);
+                    FilterCard filterCard = new FilterCard("cards named " + card.getName());
+                    filterCard.getName().add(card.getName());
+                    int count = targetPlayer.getLibrary().count(filterCard, game);
+                    TargetCardInLibrary target = new TargetCardInLibrary(count, count, filterCard);
+                    target.setRequired(true);
 
-					player.searchLibrary(target, game, targetPlayer.getId());
-					List<UUID> targets = target.getTargets();
-					for(UUID cardId : targets){
-						Card libraryCard = game.getCard(cardId);
-						if (libraryCard != null) {
-							libraryCard.moveToExile(null, "", source.getId(), game);
-						}
-					}
-				}
-			}
-			targetPlayer.shuffleLibrary(game);
-			return true;
-		}
-		return false;
-	}
+                    player.searchLibrary(target, game, targetPlayer.getId());
+                    List<UUID> targets = target.getTargets();
+                    for(UUID cardId : targets){
+                        Card libraryCard = game.getCard(cardId);
+                        if (libraryCard != null) {
+                            libraryCard.moveToExile(null, "", source.getId(), game);
+                        }
+                    }
+                }
+            }
+            targetPlayer.shuffleLibrary(game);
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public HauntingEchoesEffect copy() {
-		return new HauntingEchoesEffect(this);
-	}
+    @Override
+    public HauntingEchoesEffect copy() {
+        return new HauntingEchoesEffect(this);
+    }
 
 }

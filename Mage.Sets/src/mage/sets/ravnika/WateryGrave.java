@@ -44,23 +44,23 @@ import mage.cards.CardImpl;
  */
 public class WateryGrave extends CardImpl<WateryGrave> {
 
-	public WateryGrave(UUID ownerId) {
-		super(ownerId, 286, "Watery Grave", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-		this.expansionSetCode = "RAV";
-		this.subtype.add("Island");
-		this.subtype.add("Swamp");
-		this.addAbility(new BlueManaAbility());
-		this.addAbility(new BlackManaAbility());
-		this.addAbility(new EntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "As {this} enters the battlefield, you may pay 2 life. If you don't, {this} enters the battlefield tapped"));
-	}
+    public WateryGrave(UUID ownerId) {
+        super(ownerId, 286, "Watery Grave", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+        this.expansionSetCode = "RAV";
+        this.subtype.add("Island");
+        this.subtype.add("Swamp");
+        this.addAbility(new BlueManaAbility());
+        this.addAbility(new BlackManaAbility());
+        this.addAbility(new EntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "As {this} enters the battlefield, you may pay 2 life. If you don't, {this} enters the battlefield tapped"));
+    }
 
-	public WateryGrave(final WateryGrave card) {
-		super(card);
-	}
+    public WateryGrave(final WateryGrave card) {
+        super(card);
+    }
 
-	@Override
-	public WateryGrave copy() {
-		return new WateryGrave(this);
-	}
+    @Override
+    public WateryGrave copy() {
+        return new WateryGrave(this);
+    }
 
 }

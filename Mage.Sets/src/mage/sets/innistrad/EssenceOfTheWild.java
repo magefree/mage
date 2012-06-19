@@ -77,33 +77,33 @@ public class EssenceOfTheWild extends CardImpl<EssenceOfTheWild> {
 
 class EssenceOfTheWildEffect extends ReplacementEffectImpl<EssenceOfTheWildEffect> {
 
-	public EssenceOfTheWildEffect() {
-		super(Duration.WhileOnBattlefield, Outcome.Copy);
+    public EssenceOfTheWildEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Copy);
         staticText = "Creatures you control enter the battlefield as a copy of {this}";
-	}
+    }
 
-	public EssenceOfTheWildEffect(EssenceOfTheWildEffect effect) {
-		super(effect);
-	}
+    public EssenceOfTheWildEffect(EssenceOfTheWildEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD) {
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD) {
             Permanent perm = game.getPermanent(event.getTargetId());
             if (perm != null && perm.getCardType().contains(CardType.CREATURE) && perm.getControllerId().equals(source.getControllerId())) {
-    			return true;
+                return true;
             }
-		}
-		return false;
-	}
+        }
+        return false;
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent perm = game.getPermanent(source.getSourceId());
         if (perm != null) {
             perm = perm.copy();
@@ -111,13 +111,13 @@ class EssenceOfTheWildEffect extends ReplacementEffectImpl<EssenceOfTheWildEffec
             perm.assignNewId();
             game.addEffect(new EssenceOfTheWildCopyEffect(perm, event.getTargetId()), source);
         }
-		return false;
-	}
+        return false;
+    }
 
-	@Override
-	public EssenceOfTheWildEffect copy() {
-		return new EssenceOfTheWildEffect(this);
-	}
+    @Override
+    public EssenceOfTheWildEffect copy() {
+        return new EssenceOfTheWildEffect(this);
+    }
 
 }
 
@@ -125,21 +125,21 @@ class EssenceOfTheWildCopyEffect extends ContinuousEffectImpl<EssenceOfTheWildCo
 
     private Permanent essence;
     private UUID targetId;
-    
-	public EssenceOfTheWildCopyEffect(Permanent essence, UUID targetId) {
-		super(Duration.EndOfGame, Layer.CopyEffects_1, SubLayer.NA, Outcome.BecomeCreature);
+
+    public EssenceOfTheWildCopyEffect(Permanent essence, UUID targetId) {
+        super(Duration.EndOfGame, Layer.CopyEffects_1, SubLayer.NA, Outcome.BecomeCreature);
         this.essence = essence;
         this.targetId = targetId;
-	}
+    }
 
-	public EssenceOfTheWildCopyEffect(final EssenceOfTheWildCopyEffect effect) {
-		super(effect);
+    public EssenceOfTheWildCopyEffect(final EssenceOfTheWildCopyEffect effect) {
+        super(effect);
         this.essence = effect.essence.copy();
         this.targetId = effect.targetId;
-	}
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(targetId);
         if (permanent != null) {
             permanent.setName(essence.getName());
@@ -168,11 +168,11 @@ class EssenceOfTheWildCopyEffect extends ContinuousEffectImpl<EssenceOfTheWildCo
             return true;
         }
         return false;
-	}
+    }
 
-	@Override
-	public EssenceOfTheWildCopyEffect copy() {
-		return new EssenceOfTheWildCopyEffect(this);
-	}
+    @Override
+    public EssenceOfTheWildCopyEffect copy() {
+        return new EssenceOfTheWildCopyEffect(this);
+    }
 
 }

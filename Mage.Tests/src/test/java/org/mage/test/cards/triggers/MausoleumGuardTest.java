@@ -12,7 +12,7 @@ import org.mage.test.serverside.base.CardTestBase;
 public class MausoleumGuardTest extends CardTestBase {
 
     /**
-     * Issue 350:	Mausoleum Guard
+     * Issue 350:    Mausoleum Guard
      * Destroyed a mausoleum guard, was supposed to get two 1/1 fliers when it dies. None of them were created.
      *
      * version: 0.8.1

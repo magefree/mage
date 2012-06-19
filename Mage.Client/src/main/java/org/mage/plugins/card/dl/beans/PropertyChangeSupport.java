@@ -17,14 +17,14 @@ package org.mage.plugins.card.dl.beans;
  */
 public class PropertyChangeSupport extends java.beans.PropertyChangeSupport {
     private static final long serialVersionUID = -4241465377828790076L;
-    
+
     private Object            sourceBean;
-    
+
     public PropertyChangeSupport(Object sourceBean) {
         super(sourceBean);
         this.sourceBean = sourceBean;
     }
-    
+
     public Object getSourceBean() {
         return sourceBean;
     }

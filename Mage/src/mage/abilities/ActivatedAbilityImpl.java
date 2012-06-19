@@ -49,145 +49,145 @@ import mage.target.Target;
  */
 public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> extends AbilityImpl<T> implements ActivatedAbility {
 
-	protected TimingRule timing = TimingRule.INSTANT;
+    protected TimingRule timing = TimingRule.INSTANT;
 
-	protected ActivatedAbilityImpl(AbilityType abilityType, Zone zone) {
-		super(abilityType, zone);
-	}
+    protected ActivatedAbilityImpl(AbilityType abilityType, Zone zone) {
+        super(abilityType, zone);
+    }
 
-	public ActivatedAbilityImpl(ActivatedAbilityImpl ability) {
-		super(ability);
-		timing = ability.timing;
-	}
+    public ActivatedAbilityImpl(ActivatedAbilityImpl ability) {
+        super(ability);
+        timing = ability.timing;
+    }
 
-	public ActivatedAbilityImpl(Zone zone) {
-		this(zone, null);
-	}
+    public ActivatedAbilityImpl(Zone zone) {
+        this(zone, null);
+    }
 
-	public ActivatedAbilityImpl(Zone zone, Effect effect) {
-		super(AbilityType.ACTIVATED, zone);
-		if (effect != null) {
-			this.addEffect(effect);
-		}
-	}
+    public ActivatedAbilityImpl(Zone zone, Effect effect) {
+        super(AbilityType.ACTIVATED, zone);
+        if (effect != null) {
+            this.addEffect(effect);
+        }
+    }
 
-	public ActivatedAbilityImpl(Zone zone, Effect effect, ManaCosts cost) {
-		super(AbilityType.ACTIVATED, zone);
-		if (effect != null) {
-			this.addEffect(effect);
-		}
-		if (cost != null)
-			this.addManaCost(cost);
-	}
+    public ActivatedAbilityImpl(Zone zone, Effect effect, ManaCosts cost) {
+        super(AbilityType.ACTIVATED, zone);
+        if (effect != null) {
+            this.addEffect(effect);
+        }
+        if (cost != null)
+            this.addManaCost(cost);
+    }
 
-	public ActivatedAbilityImpl(Zone zone, Effects effects, ManaCosts cost) {
-		super(AbilityType.ACTIVATED, zone);
-		if (effects != null) {
-			for (Effect effect: effects) {
-				this.addEffect(effect);
-			}
-		}
-		if (cost != null)
-			this.addManaCost(cost);
-	}
+    public ActivatedAbilityImpl(Zone zone, Effects effects, ManaCosts cost) {
+        super(AbilityType.ACTIVATED, zone);
+        if (effects != null) {
+            for (Effect effect: effects) {
+                this.addEffect(effect);
+            }
+        }
+        if (cost != null)
+            this.addManaCost(cost);
+    }
 
-	public ActivatedAbilityImpl(Zone zone, Effect effect, Cost cost) {
-		super(AbilityType.ACTIVATED, zone);
-		if (effect != null) {
-			this.addEffect(effect);
-		}
-		if (cost != null) {
-			if (cost instanceof PhyrexianManaCost) {
-				this.addManaCost((PhyrexianManaCost)cost);
-			} else {
-				this.addCost(cost);
-			}
-		}
-	}
+    public ActivatedAbilityImpl(Zone zone, Effect effect, Cost cost) {
+        super(AbilityType.ACTIVATED, zone);
+        if (effect != null) {
+            this.addEffect(effect);
+        }
+        if (cost != null) {
+            if (cost instanceof PhyrexianManaCost) {
+                this.addManaCost((PhyrexianManaCost)cost);
+            } else {
+                this.addCost(cost);
+            }
+        }
+    }
 
-	public ActivatedAbilityImpl(Zone zone, Effect effect, Costs<Cost> costs) {
-		super(AbilityType.ACTIVATED, zone);
-		if (effect != null) {
-			this.addEffect(effect);
-		}
-		if (costs != null) {
-			for (Cost cost: costs) {
-				this.addCost(cost);
-			}
-		}
-	}
+    public ActivatedAbilityImpl(Zone zone, Effect effect, Costs<Cost> costs) {
+        super(AbilityType.ACTIVATED, zone);
+        if (effect != null) {
+            this.addEffect(effect);
+        }
+        if (costs != null) {
+            for (Cost cost: costs) {
+                this.addCost(cost);
+            }
+        }
+    }
 
-	public ActivatedAbilityImpl(Zone zone, Effects effects, Cost cost) {
-		super(AbilityType.ACTIVATED, zone);
-		if (effects != null) {
-			for (Effect effect: effects) {
-				this.addEffect(effect);
-			}
-		}
-		if (cost != null)
-			this.addCost(cost);
-	}
+    public ActivatedAbilityImpl(Zone zone, Effects effects, Cost cost) {
+        super(AbilityType.ACTIVATED, zone);
+        if (effects != null) {
+            for (Effect effect: effects) {
+                this.addEffect(effect);
+            }
+        }
+        if (cost != null)
+            this.addCost(cost);
+    }
 
-	public ActivatedAbilityImpl(Zone zone, Effects effects, Costs<Cost> costs) {
-		super(AbilityType.ACTIVATED, zone);
-		for (Effect effect: effects) {
-			if (effect != null) {
-				this.addEffect(effect);
-			}
-		}
-		if (costs != null) {
-			for (Cost cost: costs) {
-				this.addCost(cost);
-			}
-		}
-	}
+    public ActivatedAbilityImpl(Zone zone, Effects effects, Costs<Cost> costs) {
+        super(AbilityType.ACTIVATED, zone);
+        for (Effect effect: effects) {
+            if (effect != null) {
+                this.addEffect(effect);
+            }
+        }
+        if (costs != null) {
+            for (Cost cost: costs) {
+                this.addCost(cost);
+            }
+        }
+    }
 
-	@Override
-	public boolean canActivate(UUID playerId, Game game) {
-		//20091005 - 602.2
-		if (!controlsAbility(playerId, game))
-			return false;
-		//20091005 - 602.5d/602.5e
-		if (timing == TimingRule.INSTANT || game.canPlaySorcery(playerId)) {
-			if (costs.canPay(sourceId, controllerId, game) && canChooseTarget(game)) {
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean canActivate(UUID playerId, Game game) {
+        //20091005 - 602.2
+        if (!controlsAbility(playerId, game))
+            return false;
+        //20091005 - 602.5d/602.5e
+        if (timing == TimingRule.INSTANT || game.canPlaySorcery(playerId)) {
+            if (costs.canPay(sourceId, controllerId, game) && canChooseTarget(game)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	protected boolean controlsAbility(UUID playerId, Game game) {
-		if (this.controllerId != null && this.controllerId.equals(playerId))
-			return true;
-		else {
-			Card card = (Card)game.getObject(this.sourceId);
-			if (card != null && game.getState().getZone(this.sourceId) != Zone.BATTLEFIELD)
-				return card.getOwnerId().equals(playerId);
-		}
-		return false;
-	}
+    protected boolean controlsAbility(UUID playerId, Game game) {
+        if (this.controllerId != null && this.controllerId.equals(playerId))
+            return true;
+        else {
+            Card card = (Card)game.getObject(this.sourceId);
+            if (card != null && game.getState().getZone(this.sourceId) != Zone.BATTLEFIELD)
+                return card.getOwnerId().equals(playerId);
+        }
+        return false;
+    }
 
-	@Override
-	public String getActivatedMessage(Game game) {
+    @Override
+    public String getActivatedMessage(Game game) {
         if (game.isSimulation())
             return "";
-		return " activates ability from " + getMessageText(game);
-	}
+        return " activates ability from " + getMessageText(game);
+    }
 
-	protected String getMessageText(Game game) {
-		StringBuilder sb = new StringBuilder();
+    protected String getMessageText(Game game) {
+        StringBuilder sb = new StringBuilder();
         MageObject object = game.getObject(this.sourceId);
         if (object != null)
             sb.append(object.getName());
         else
             sb.append("unknown");
-		if (getTargets().size() > 0) {
-			sb.append(" targeting ");
-			for (Target target: getTargets()) {
-				sb.append(target.getTargetedName(game));
-			}
-		}
-		return sb.toString();
-	}
+        if (getTargets().size() > 0) {
+            sb.append(" targeting ");
+            for (Target target: getTargets()) {
+                sb.append(target.getTargetedName(game));
+            }
+        }
+        return sb.toString();
+    }
 
 }

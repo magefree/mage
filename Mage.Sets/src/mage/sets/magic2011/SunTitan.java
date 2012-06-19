@@ -52,76 +52,76 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class SunTitan extends CardImpl<SunTitan> {
 
-	public SunTitan(UUID ownerId) {
-		super(ownerId, 35, "Sun Titan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Giant");
-		this.color.setWhite(true);
-		this.power = new MageInt(6);
-		this.toughness = new MageInt(6);
+    public SunTitan(UUID ownerId) {
+        super(ownerId, 35, "Sun Titan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Giant");
+        this.color.setWhite(true);
+        this.power = new MageInt(6);
+        this.toughness = new MageInt(6);
 
-		this.addAbility(VigilanceAbility.getInstance());
-		this.addAbility(new SunTitanAbility());
-	}
+        this.addAbility(VigilanceAbility.getInstance());
+        this.addAbility(new SunTitanAbility());
+    }
 
-	public SunTitan(final SunTitan card) {
-		super(card);
-	}
+    public SunTitan(final SunTitan card) {
+        super(card);
+    }
 
-	@Override
-	public SunTitan copy() {
-		return new SunTitan(this);
-	}
+    @Override
+    public SunTitan copy() {
+        return new SunTitan(this);
+    }
 
 }
 
 class SunTitanAbility extends TriggeredAbilityImpl<SunTitanAbility> {
 
-	private static final FilterCard filter = new FilterCard("permanent card with converted mana cost 3 or less from your graveyard");
+    private static final FilterCard filter = new FilterCard("permanent card with converted mana cost 3 or less from your graveyard");
 
-	static {
-		filter.getCardType().add(CardType.ARTIFACT);
-		filter.getCardType().add(CardType.CREATURE);
-		filter.getCardType().add(CardType.ENCHANTMENT);
-		filter.getCardType().add(CardType.LAND);
-		filter.getCardType().add(CardType.PLANESWALKER);
-		filter.setScopeCardType(ComparisonScope.Any);
-		filter.setConvertedManaCost(4);
-		filter.setConvertedManaCostComparison(ComparisonType.LessThan);
-	}
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.getCardType().add(CardType.CREATURE);
+        filter.getCardType().add(CardType.ENCHANTMENT);
+        filter.getCardType().add(CardType.LAND);
+        filter.getCardType().add(CardType.PLANESWALKER);
+        filter.setScopeCardType(ComparisonScope.Any);
+        filter.setConvertedManaCost(4);
+        filter.setConvertedManaCostComparison(ComparisonType.LessThan);
+    }
 
-	public SunTitanAbility() {
-		super(Zone.BATTLEFIELD, null, true);
-		this.addTarget(new TargetCardInYourGraveyard(filter));
-		this.addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
-	}
+    public SunTitanAbility() {
+        super(Zone.BATTLEFIELD, null, true);
+        this.addTarget(new TargetCardInYourGraveyard(filter));
+        this.addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
+    }
 
-	public SunTitanAbility(final SunTitanAbility ability) {
-		super(ability);
-	}
+    public SunTitanAbility(final SunTitanAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public SunTitanAbility copy() {
-		return new SunTitanAbility(this);
-	}
+    @Override
+    public SunTitanAbility copy() {
+        return new SunTitanAbility(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
-			return true;
-		}
-		if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId()) ) {
-			ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-			if (zEvent.getToZone() == Zone.BATTLEFIELD) {
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
+            return true;
+        }
+        if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId()) ) {
+            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+            if (zEvent.getToZone() == Zone.BATTLEFIELD) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "Whenever {this} enters the battlefield or attacks, you may return target permanent card with converted mana cost 3 or less from your graveyard to the battlefield.";
-	}
+    @Override
+    public String getRule() {
+        return "Whenever {this} enters the battlefield or attacks, you may return target permanent card with converted mana cost 3 or less from your graveyard to the battlefield.";
+    }
 
 }

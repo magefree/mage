@@ -54,7 +54,7 @@ public class MomentousFall extends CardImpl<MomentousFall> {
 
         // As an additional cost to cast Momentous Fall, sacrifice a creature.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
-        
+
         // You draw cards equal to the sacrificed creature's power, then you gain life equal to its toughness.
         this.getSpellAbility().addEffect(new MomentousFallEffect());
     }
@@ -70,22 +70,22 @@ public class MomentousFall extends CardImpl<MomentousFall> {
 }
 
 class MomentousFallEffect extends OneShotEffect<MomentousFallEffect> {
-    
+
     public MomentousFallEffect() {
         super(Outcome.GainLife);
         staticText = "You draw cards equal to the sacrificed creature's power, then you gain life equal to its toughness";
     }
-    
+
     public MomentousFallEffect(final MomentousFallEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         int power = 0;
         int toughness = 0;
         Player player = game.getPlayer(source.getControllerId());
-        
+
         for (Cost cost: source.getCosts()) {
             if (cost instanceof SacrificeTargetCost && ((SacrificeTargetCost)cost).getPermanents().size() > 0) {
                 power = ((SacrificeTargetCost)cost).getPermanents().get(0).getPower().getValue();
@@ -101,7 +101,7 @@ class MomentousFallEffect extends OneShotEffect<MomentousFallEffect> {
         }
         return true;
     }
-    
+
     @Override
     public MomentousFallEffect copy() {
         return new MomentousFallEffect(this);

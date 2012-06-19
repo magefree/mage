@@ -45,134 +45,134 @@ import java.util.List;
  * @author BetaSteward_at_googlemail.com
  */
 public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> extends FilterImpl<E, T> implements Filter<E> {
-	protected Abilities<Ability> abilities;
-	protected boolean notAbilities;
-	protected List<CardType> cardType = new ArrayList<CardType>();
-	protected ComparisonScope scopeCardType = ComparisonScope.Any;
-	protected List<CardType> notCardTypeList = new ArrayList<CardType>();
-	protected ComparisonScope notScopeCardType = ComparisonScope.Any;
-	protected boolean notCardType;
-	protected boolean colorless;
-	protected boolean useColorless;
-	protected boolean useColor;
-	protected ObjectColor color;
-	protected ComparisonScope scopeColor = ComparisonScope.Any;
-	protected boolean notColor;
-	protected List<String> name = new ArrayList<String>();
-	protected boolean notName;
-	protected List<String> subtype = new ArrayList<String>();
-	protected ComparisonScope scopeSubtype = ComparisonScope.All;
-	protected boolean notSubtype;
-	protected List<String> supertype = new ArrayList<String>();
-	protected ComparisonScope scopeSupertype = ComparisonScope.Any;
-	protected boolean notSupertype;
-	protected int convertedManaCost;
-	protected ComparisonType convertedManaCostComparison;
-	protected int power;
-	protected ComparisonType powerComparison;
-	protected int toughness;
-	protected ComparisonType toughnessComparison;
+    protected Abilities<Ability> abilities;
+    protected boolean notAbilities;
+    protected List<CardType> cardType = new ArrayList<CardType>();
+    protected ComparisonScope scopeCardType = ComparisonScope.Any;
+    protected List<CardType> notCardTypeList = new ArrayList<CardType>();
+    protected ComparisonScope notScopeCardType = ComparisonScope.Any;
+    protected boolean notCardType;
+    protected boolean colorless;
+    protected boolean useColorless;
+    protected boolean useColor;
+    protected ObjectColor color;
+    protected ComparisonScope scopeColor = ComparisonScope.Any;
+    protected boolean notColor;
+    protected List<String> name = new ArrayList<String>();
+    protected boolean notName;
+    protected List<String> subtype = new ArrayList<String>();
+    protected ComparisonScope scopeSubtype = ComparisonScope.All;
+    protected boolean notSubtype;
+    protected List<String> supertype = new ArrayList<String>();
+    protected ComparisonScope scopeSupertype = ComparisonScope.Any;
+    protected boolean notSupertype;
+    protected int convertedManaCost;
+    protected ComparisonType convertedManaCostComparison;
+    protected int power;
+    protected ComparisonType powerComparison;
+    protected int toughness;
+    protected ComparisonType toughnessComparison;
 
-	/**
-	 * Indicates that filter shouldn't match the source.
-	 */
-	protected boolean another;
+    /**
+     * Indicates that filter shouldn't match the source.
+     */
+    protected boolean another;
 
-	@Override
-	public FilterObject<E, T> copy() {
-		return new FilterObject<E, T>(this);
-	}
+    @Override
+    public FilterObject<E, T> copy() {
+        return new FilterObject<E, T>(this);
+    }
 
-	public FilterObject(String name) {
-		super(name);
-		abilities = new AbilitiesImpl<Ability>();
-		color = new ObjectColor();
-	}
+    public FilterObject(String name) {
+        super(name);
+        abilities = new AbilitiesImpl<Ability>();
+        color = new ObjectColor();
+    }
 
-	public FilterObject(FilterObject filter) {
-		super(filter);
-		this.abilities = filter.abilities.copy();
-		this.notAbilities = filter.notAbilities;
+    public FilterObject(FilterObject filter) {
+        super(filter);
+        this.abilities = filter.abilities.copy();
+        this.notAbilities = filter.notAbilities;
         this.cardType.addAll(filter.cardType);
         this.notCardTypeList.addAll(filter.notCardTypeList);
-		this.scopeCardType = filter.scopeCardType;
-		this.notCardType = filter.notCardType;
-		this.notScopeCardType = filter.notScopeCardType;
-		this.colorless = filter.colorless;
-		this.useColorless = filter.useColorless;
-		this.useColor = filter.useColor;
-		this.color = filter.color.copy();
-		this.scopeColor = filter.scopeColor;
-		this.notColor = filter.notColor;
+        this.scopeCardType = filter.scopeCardType;
+        this.notCardType = filter.notCardType;
+        this.notScopeCardType = filter.notScopeCardType;
+        this.colorless = filter.colorless;
+        this.useColorless = filter.useColorless;
+        this.useColor = filter.useColor;
+        this.color = filter.color.copy();
+        this.scopeColor = filter.scopeColor;
+        this.notColor = filter.notColor;
         this.name.addAll(filter.name);
-		this.notName = filter.notName;
+        this.notName = filter.notName;
         this.subtype.addAll(filter.subtype);
-		this.scopeSubtype = filter.scopeSubtype;
-		this.notSubtype = filter.notSubtype;
+        this.scopeSubtype = filter.scopeSubtype;
+        this.notSubtype = filter.notSubtype;
         this.supertype.addAll(filter.supertype);
-		this.scopeSupertype = filter.scopeSupertype;
-		this.notSupertype = filter.notSupertype;
-		this.convertedManaCost = filter.convertedManaCost;
-		this.convertedManaCostComparison = filter.convertedManaCostComparison;
-		this.power = filter.power;
-		this.powerComparison = filter.powerComparison;
-		this.toughness = filter.toughness;
-		this.toughnessComparison = filter.toughnessComparison;
-		this.another = filter.another;
-	}
+        this.scopeSupertype = filter.scopeSupertype;
+        this.notSupertype = filter.notSupertype;
+        this.convertedManaCost = filter.convertedManaCost;
+        this.convertedManaCostComparison = filter.convertedManaCostComparison;
+        this.power = filter.power;
+        this.powerComparison = filter.powerComparison;
+        this.toughness = filter.toughness;
+        this.toughnessComparison = filter.toughnessComparison;
+        this.another = filter.another;
+    }
 
-	@Override
-	public boolean match(E object, Game game) {
+    @Override
+    public boolean match(E object, Game game) {
 
-		if (name.size() > 0) {
-			if (name.contains(object.getName()) == notName)
-				return notFilter;
-		}
+        if (name.size() > 0) {
+            if (name.contains(object.getName()) == notName)
+                return notFilter;
+        }
 
-		if (useColor) {
-			if (scopeColor == ComparisonScope.All) {
-				if (object.getColor().equals(color) == notColor) {
-					return notFilter;
-				}
-			}
-			else if (object.getColor().contains(color) == notColor) {
-				if (useColorless && colorless) { //need to treat colorless like a color in this case
-					if (object.getColor().isColorless() != colorless) {
-						return notFilter;
-					}
-				}
-				else {
-					return notFilter;
-				}
-			}
-		}
-		else if (useColorless && object.getColor().isColorless() != colorless) {
-			return notFilter;
-		}
+        if (useColor) {
+            if (scopeColor == ComparisonScope.All) {
+                if (object.getColor().equals(color) == notColor) {
+                    return notFilter;
+                }
+            }
+            else if (object.getColor().contains(color) == notColor) {
+                if (useColorless && colorless) { //need to treat colorless like a color in this case
+                    if (object.getColor().isColorless() != colorless) {
+                        return notFilter;
+                    }
+                }
+                else {
+                    return notFilter;
+                }
+            }
+        }
+        else if (useColorless && object.getColor().isColorless() != colorless) {
+            return notFilter;
+        }
 
-		if (cardType.size() > 0) {
-			if (!compCardType.compare(cardType, object.getCardType(), scopeCardType, notCardType))
-				return notFilter;
-		}
+        if (cardType.size() > 0) {
+            if (!compCardType.compare(cardType, object.getCardType(), scopeCardType, notCardType))
+                return notFilter;
+        }
 
-		if (notCardTypeList.size() > 0) {
-			if (compCardType.compare(notCardTypeList, object.getCardType(), notScopeCardType, false))
-				return notFilter;
-		}
-		
-		if (subtype.size() > 0) {
-			if (!object.getAbilities().contains(ChangelingAbility.getInstance())) {
-				if (!compString.compare(subtype, object.getSubtype(), scopeSubtype, notSubtype))
-					return notFilter;
-			}
-		}
+        if (notCardTypeList.size() > 0) {
+            if (compCardType.compare(notCardTypeList, object.getCardType(), notScopeCardType, false))
+                return notFilter;
+        }
 
-		if (supertype.size() > 0) {
-			if (!compString.compare(supertype, object.getSupertype(), scopeSupertype, notSupertype))
-				return notFilter;
-		}
+        if (subtype.size() > 0) {
+            if (!object.getAbilities().contains(ChangelingAbility.getInstance())) {
+                if (!compString.compare(subtype, object.getSubtype(), scopeSubtype, notSubtype))
+                    return notFilter;
+            }
+        }
 
-		if (abilities.size() > 0) {
+        if (supertype.size() > 0) {
+            if (!compString.compare(supertype, object.getSupertype(), scopeSupertype, notSupertype))
+                return notFilter;
+        }
+
+        if (abilities.size() > 0) {
             List<Ability> test = new ArrayList<Ability>(abilities);
             for (Ability ability: object.getAbilities()) {
                 for (Ability abilityTest: test) {
@@ -184,143 +184,143 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
             }
             if (test.isEmpty() == notAbilities)
                 return notFilter;
-		}
+        }
 
-		if (convertedManaCostComparison != null) {
-			if (!compareInts(object.getManaCost().convertedManaCost(), convertedManaCost, convertedManaCostComparison))
-				return notFilter;
-		}
+        if (convertedManaCostComparison != null) {
+            if (!compareInts(object.getManaCost().convertedManaCost(), convertedManaCost, convertedManaCostComparison))
+                return notFilter;
+        }
 
-		if (powerComparison != null) {
-			if (!compareInts(object.getPower().getValue(), power, powerComparison))
-				return notFilter;
-		}
+        if (powerComparison != null) {
+            if (!compareInts(object.getPower().getValue(), power, powerComparison))
+                return notFilter;
+        }
 
-		if (toughnessComparison != null) {
-			if (!compareInts(object.getToughness().getValue(), toughness, toughnessComparison))
-				return notFilter;
-		}
+        if (toughnessComparison != null) {
+            if (!compareInts(object.getToughness().getValue(), toughness, toughnessComparison))
+                return notFilter;
+        }
 
-		return !notFilter;
-	}
+        return !notFilter;
+    }
 
-	public Abilities getAbilities() {
-		return this.abilities;
-	}
+    public Abilities getAbilities() {
+        return this.abilities;
+    }
 
-	public void setNotAbilities(boolean notAbilities) {
-		this.notAbilities = notAbilities;
-	}
+    public void setNotAbilities(boolean notAbilities) {
+        this.notAbilities = notAbilities;
+    }
 
-	public List<CardType> getCardType() {
-		return this.cardType;
-	}
-	
-	public List<CardType> getNotCardType() {
-		return this.notCardTypeList;
-	}
+    public List<CardType> getCardType() {
+        return this.cardType;
+    }
 
-	public void setScopeCardType(ComparisonScope scopeCardType) {
-		this.scopeCardType = scopeCardType;
-	}
-	
-	public void setNotScopeCardType(ComparisonScope notScopeCardType) {
-		this.notScopeCardType = notScopeCardType;
-	}
+    public List<CardType> getNotCardType() {
+        return this.notCardTypeList;
+    }
 
-	public void setNotCardType(boolean notCardTypeList) {
-		this.notCardType = notCardTypeList;
-	}
+    public void setScopeCardType(ComparisonScope scopeCardType) {
+        this.scopeCardType = scopeCardType;
+    }
 
-	public void setColor(ObjectColor color) {
-		this.color = color;
-	}
+    public void setNotScopeCardType(ComparisonScope notScopeCardType) {
+        this.notScopeCardType = notScopeCardType;
+    }
 
-	public ObjectColor getColor() {
-		return this.color;
-	}
+    public void setNotCardType(boolean notCardTypeList) {
+        this.notCardType = notCardTypeList;
+    }
 
-	public void setScopeColor(ComparisonScope scopeColor) {
-		this.scopeColor = scopeColor;
-	}
+    public void setColor(ObjectColor color) {
+        this.color = color;
+    }
 
-	public void setNotColor(boolean notColor) {
-		this.notColor = notColor;
-	}
+    public ObjectColor getColor() {
+        return this.color;
+    }
 
-	public List<String> getName() {
-		return this.name;
-	}
+    public void setScopeColor(ComparisonScope scopeColor) {
+        this.scopeColor = scopeColor;
+    }
 
-	public void setNotName(boolean notName) {
-		this.notName = notName;
-	}
+    public void setNotColor(boolean notColor) {
+        this.notColor = notColor;
+    }
 
-	public List<String> getSubtype() {
-		return this.subtype;
-	}
+    public List<String> getName() {
+        return this.name;
+    }
 
-	public void setScopeSubtype(ComparisonScope scopeSubtype) {
-		this.scopeSubtype = scopeSubtype;
-	}
+    public void setNotName(boolean notName) {
+        this.notName = notName;
+    }
 
-	public void setNotSubtype(boolean notSubtype) {
-		this.notSubtype = notSubtype;
-	}
+    public List<String> getSubtype() {
+        return this.subtype;
+    }
 
-	public List<String> getSupertype() {
-		return this.supertype;
-	}
+    public void setScopeSubtype(ComparisonScope scopeSubtype) {
+        this.scopeSubtype = scopeSubtype;
+    }
 
-	public void setScopeSupertype(ComparisonScope scopeSupertype) {
-		this.scopeSupertype = scopeSupertype;
-	}
+    public void setNotSubtype(boolean notSubtype) {
+        this.notSubtype = notSubtype;
+    }
 
-	public void setNotSupertype(boolean notSupertype) {
-		this.notSupertype = notSupertype;
-	}
+    public List<String> getSupertype() {
+        return this.supertype;
+    }
 
-	public void setConvertedManaCost(int convertedManaCost) {
-		this.convertedManaCost = convertedManaCost;
-	}
+    public void setScopeSupertype(ComparisonScope scopeSupertype) {
+        this.scopeSupertype = scopeSupertype;
+    }
 
-	public void setConvertedManaCostComparison(ComparisonType convertedManaCostComparison) {
-		this.convertedManaCostComparison = convertedManaCostComparison;
-	}
+    public void setNotSupertype(boolean notSupertype) {
+        this.notSupertype = notSupertype;
+    }
 
-	public void setPower(int power) {
-		this.power = power;
-	}
+    public void setConvertedManaCost(int convertedManaCost) {
+        this.convertedManaCost = convertedManaCost;
+    }
 
-	public void setPowerComparison(ComparisonType powerComparison) {
-		this.powerComparison = powerComparison;
-	}
+    public void setConvertedManaCostComparison(ComparisonType convertedManaCostComparison) {
+        this.convertedManaCostComparison = convertedManaCostComparison;
+    }
 
-	public void setToughness(int toughness) {
-		this.toughness = toughness;
-	}
+    public void setPower(int power) {
+        this.power = power;
+    }
 
-	public void setToughnessComparison(ComparisonType toughnessComparison) {
-		this.toughnessComparison = toughnessComparison;
-	}
+    public void setPowerComparison(ComparisonType powerComparison) {
+        this.powerComparison = powerComparison;
+    }
 
-	public void setUseColor(boolean useColor) {
-		this.useColor = useColor;
-	}
+    public void setToughness(int toughness) {
+        this.toughness = toughness;
+    }
 
-	public void setColorless(boolean colorless) {
-		this.colorless = colorless;
-	}
+    public void setToughnessComparison(ComparisonType toughnessComparison) {
+        this.toughnessComparison = toughnessComparison;
+    }
 
-	public void setUseColorless(boolean useColorless) {
-		this.useColorless = useColorless;
-	}
+    public void setUseColor(boolean useColor) {
+        this.useColor = useColor;
+    }
 
-	public boolean isAnother() {
-		return another;
-	}
+    public void setColorless(boolean colorless) {
+        this.colorless = colorless;
+    }
 
-	public void setAnother(boolean another) {
-		this.another = another;
-	}
+    public void setUseColorless(boolean useColorless) {
+        this.useColorless = useColorless;
+    }
+
+    public boolean isAnother() {
+        return another;
+    }
+
+    public void setAnother(boolean another) {
+        this.another = another;
+    }
 }

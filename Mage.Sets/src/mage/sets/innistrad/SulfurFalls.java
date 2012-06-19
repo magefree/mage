@@ -49,32 +49,32 @@ import java.util.UUID;
  */
 public class SulfurFalls extends CardImpl<SulfurFalls> {
 
-	private static final FilterLandPermanent filter = new FilterLandPermanent();
+    private static final FilterLandPermanent filter = new FilterLandPermanent();
 
-	static {
-		filter.getSubtype().add("Island");
-		filter.getSubtype().add("Mountain");
-		filter.setScopeSubtype(ComparisonScope.Any);
-		filter.setMessage("Island or a Mountain");
-	}
+    static {
+        filter.getSubtype().add("Island");
+        filter.getSubtype().add("Mountain");
+        filter.setScopeSubtype(ComparisonScope.Any);
+        filter.setMessage("Island or a Mountain");
+    }
 
-	public SulfurFalls(UUID ownerId) {
-		super(ownerId, 248, "Sulfur Falls", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-		this.expansionSetCode = "ISD";
+    public SulfurFalls(UUID ownerId) {
+        super(ownerId, 248, "Sulfur Falls", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+        this.expansionSetCode = "ISD";
 
-		Condition controls = new UnlessCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0));
-		String abilityText = "tap it unless you control a " + filter.getMessage();
-		this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
-		this.addAbility(new BlueManaAbility());
-		this.addAbility(new RedManaAbility());
-	}
+        Condition controls = new UnlessCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0));
+        String abilityText = "tap it unless you control a " + filter.getMessage();
+        this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
+        this.addAbility(new BlueManaAbility());
+        this.addAbility(new RedManaAbility());
+    }
 
-	public SulfurFalls(final SulfurFalls card) {
-		super(card);
-	}
+    public SulfurFalls(final SulfurFalls card) {
+        super(card);
+    }
 
-	@Override
-	public SulfurFalls copy() {
-		return new SulfurFalls(this);
-	}
+    @Override
+    public SulfurFalls copy() {
+        return new SulfurFalls(this);
+    }
 }

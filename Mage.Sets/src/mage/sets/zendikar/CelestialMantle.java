@@ -60,14 +60,14 @@ public class CelestialMantle extends CardImpl<CelestialMantle> {
         super(ownerId, 6, "Celestial Mantle", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{W}{W}");
         this.expansionSetCode = "ZEN";
         this.subtype.add("Aura");
-		this.color.setWhite(true);
+        this.color.setWhite(true);
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		this.addAbility(ability);
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3, Constants.Duration.WhileOnBattlefield)));
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3, Constants.Duration.WhileOnBattlefield)));
         this.addAbility(new CelestialMantleAbility());
     }
 
@@ -104,7 +104,7 @@ class CelestialMantleAbility extends TriggeredAbilityImpl<CelestialMantleAbility
             DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
             Permanent p = game.getPermanent(event.getSourceId());
             if (damageEvent.isCombatDamage() && p != null && p.getAttachments().contains(this.getSourceId())) {
-			    return true;
+                return true;
             }
         }
         return false;

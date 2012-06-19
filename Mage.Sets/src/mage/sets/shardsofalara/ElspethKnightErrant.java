@@ -61,71 +61,71 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ElspethKnightErrant extends CardImpl<ElspethKnightErrant> {
 
-	private static SoldierToken soldierToken = new SoldierToken();
+    private static SoldierToken soldierToken = new SoldierToken();
 
-	public ElspethKnightErrant(UUID ownerId) {
-		super(ownerId, 9, "Elspeth, Knight-Errant", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{W}");
-		this.expansionSetCode = "ALA";
-		this.subtype.add("Elspeth");
-		this.color.setWhite(true);
-		this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), ""));
+    public ElspethKnightErrant(UUID ownerId) {
+        super(ownerId, 9, "Elspeth, Knight-Errant", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{W}");
+        this.expansionSetCode = "ALA";
+        this.subtype.add("Elspeth");
+        this.color.setWhite(true);
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), ""));
 
-		this.addAbility(new LoyaltyAbility(new CreateTokenEffect(soldierToken), 1));
+        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(soldierToken), 1));
 
-		Effects effects1 = new Effects();
-		effects1.add(new BoostTargetEffect(3, 3, Duration.EndOfTurn));
-		effects1.add(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
-		LoyaltyAbility ability1 = new LoyaltyAbility(effects1, 1);
-		ability1.addTarget(new TargetCreaturePermanent());
-		this.addAbility(ability1);
+        Effects effects1 = new Effects();
+        effects1.add(new BoostTargetEffect(3, 3, Duration.EndOfTurn));
+        effects1.add(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
+        LoyaltyAbility ability1 = new LoyaltyAbility(effects1, 1);
+        ability1.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability1);
 
-		this.addAbility(new LoyaltyAbility(new ElspethKnightErrantEffect(), -8));
+        this.addAbility(new LoyaltyAbility(new ElspethKnightErrantEffect(), -8));
 
-	}
+    }
 
-	public ElspethKnightErrant(final ElspethKnightErrant card) {
-		super(card);
-	}
+    public ElspethKnightErrant(final ElspethKnightErrant card) {
+        super(card);
+    }
 
-	@Override
-	public ElspethKnightErrant copy() {
-		return new ElspethKnightErrant(this);
-	}
+    @Override
+    public ElspethKnightErrant copy() {
+        return new ElspethKnightErrant(this);
+    }
 
 }
 
 class ElspethKnightErrantEffect extends ContinuousEffectImpl<ElspethKnightErrantEffect> {
 
-	private static final FilterPermanent filter = new FilterPermanent("artifacts, creatures, enchantments and lands");
+    private static final FilterPermanent filter = new FilterPermanent("artifacts, creatures, enchantments and lands");
 
-	static {
-		filter.getCardType().add(CardType.ARTIFACT);
-		filter.getCardType().add(CardType.CREATURE);
-		filter.getCardType().add(CardType.ENCHANTMENT);
-		filter.getCardType().add(CardType.LAND);
-		filter.setScopeCardType(ComparisonScope.Any);
-	}
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.getCardType().add(CardType.CREATURE);
+        filter.getCardType().add(CardType.ENCHANTMENT);
+        filter.getCardType().add(CardType.LAND);
+        filter.setScopeCardType(ComparisonScope.Any);
+    }
 
-	public ElspethKnightErrantEffect() {
-		super(Duration.EndOfGame, Layer.RulesEffects, SubLayer.NA, Outcome.AddAbility);
-		staticText = "For the rest of the game artifacts, creature, enchantments and lands you control are indestructible";
-	}
+    public ElspethKnightErrantEffect() {
+        super(Duration.EndOfGame, Layer.RulesEffects, SubLayer.NA, Outcome.AddAbility);
+        staticText = "For the rest of the game artifacts, creature, enchantments and lands you control are indestructible";
+    }
 
-	public ElspethKnightErrantEffect(final ElspethKnightErrantEffect effect) {
-		super(effect);
-	}
+    public ElspethKnightErrantEffect(final ElspethKnightErrantEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
-			perm.addAbility(IndestructibleAbility.getInstance(), game);
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
+            perm.addAbility(IndestructibleAbility.getInstance(), game);
+        }
+        return true;
+    }
 
-	@Override
-	public ElspethKnightErrantEffect copy() {
-		return new ElspethKnightErrantEffect(this);
-	}
+    @Override
+    public ElspethKnightErrantEffect copy() {
+        return new ElspethKnightErrantEffect(this);
+    }
 
 }

@@ -44,26 +44,26 @@ import mage.game.events.GameEvent.EventType;
  */
 public class ArcRunner extends CardImpl<ArcRunner> {
 
-	public ArcRunner(UUID ownerId) {
-		super(ownerId, 123, "Arc Runner", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Elemental");
-		this.subtype.add("Ox");
-		this.color.setRed(true);
-		this.power = new MageInt(5);
-		this.toughness = new MageInt(1);
+    public ArcRunner(UUID ownerId) {
+        super(ownerId, 123, "Arc Runner", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Elemental");
+        this.subtype.add("Ox");
+        this.color.setRed(true);
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(1);
 
-		this.addAbility(HasteAbility.getInstance());
-		this.addAbility(new OnEventTriggeredAbility(EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new SacrificeSourceEffect()));
-	}
+        this.addAbility(HasteAbility.getInstance());
+        this.addAbility(new OnEventTriggeredAbility(EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new SacrificeSourceEffect()));
+    }
 
-	public ArcRunner(final ArcRunner card) {
-		super(card);
-	}
+    public ArcRunner(final ArcRunner card) {
+        super(card);
+    }
 
-	@Override
-	public ArcRunner copy() {
-		return new ArcRunner(this);
-	}
+    @Override
+    public ArcRunner copy() {
+        return new ArcRunner(this);
+    }
 
 }

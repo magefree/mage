@@ -37,21 +37,21 @@ import mage.filter.FilterPermanent;
  */
 public class FilterPlaneswalkerPermanent extends FilterPermanent<FilterPlaneswalkerPermanent> {
 
-	public FilterPlaneswalkerPermanent() {
-		this("planeswalker");
-	}
+    public FilterPlaneswalkerPermanent() {
+        this("planeswalker");
+    }
 
-	public FilterPlaneswalkerPermanent(String name) {
-		super(name);
-		cardType.add(CardType.PLANESWALKER);
-	}
+    public FilterPlaneswalkerPermanent(String name) {
+        super(name);
+        cardType.add(CardType.PLANESWALKER);
+    }
 
-	public FilterPlaneswalkerPermanent(final FilterPlaneswalkerPermanent filter) {
-		super(filter);
-	}
+    public FilterPlaneswalkerPermanent(final FilterPlaneswalkerPermanent filter) {
+        super(filter);
+    }
 
-	@Override
-	public FilterPlaneswalkerPermanent copy() {
-		return new FilterPlaneswalkerPermanent(this);
-	}
+    @Override
+    public FilterPlaneswalkerPermanent copy() {
+        return new FilterPlaneswalkerPermanent(this);
+    }
 }

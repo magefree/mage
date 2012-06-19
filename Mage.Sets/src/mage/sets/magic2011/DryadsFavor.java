@@ -54,74 +54,74 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class DryadsFavor extends CardImpl<DryadsFavor> {
 
-	public DryadsFavor(UUID ownerId) {
-		super(ownerId, 169, "Dryad's Favor", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");
-		this.expansionSetCode = "M11";
-		this.color.setGreen(true);
-		this.subtype.add("Aura");
+    public DryadsFavor(UUID ownerId) {
+        super(ownerId, 169, "Dryad's Favor", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");
+        this.expansionSetCode = "M11";
+        this.color.setGreen(true);
+        this.subtype.add("Aura");
 
-		TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		this.addAbility(ability);
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DryadsFavorEffect()));
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DryadsFavorEffect()));
 
-	}
+    }
 
-	public DryadsFavor(final DryadsFavor card) {
-		super(card);
-	}
+    public DryadsFavor(final DryadsFavor card) {
+        super(card);
+    }
 
-	@Override
-	public DryadsFavor copy() {
-		return new DryadsFavor(this);
-	}
+    @Override
+    public DryadsFavor copy() {
+        return new DryadsFavor(this);
+    }
 }
 
 class DryadsFavorEffect extends ContinuousEffectImpl<DryadsFavorEffect> {
 
-	public DryadsFavorEffect() {
-		super(Duration.WhileOnBattlefield, Outcome.Detriment);
-		staticText = "Enchanted creature has forestwalk";
-	}
+    public DryadsFavorEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        staticText = "Enchanted creature has forestwalk";
+    }
 
-	public DryadsFavorEffect(final DryadsFavorEffect effect) {
-		super(effect);
-	}
+    public DryadsFavorEffect(final DryadsFavorEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public DryadsFavorEffect copy() {
-		return new DryadsFavorEffect(this);
-	}
+    @Override
+    public DryadsFavorEffect copy() {
+        return new DryadsFavorEffect(this);
+    }
 
-	@Override
-	public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-		Permanent enchantment = game.getPermanent(source.getSourceId());
-		if (enchantment != null && enchantment.getAttachedTo() != null) {
-			Permanent creature = game.getPermanent(enchantment.getAttachedTo());
-			if (creature != null) {
-				switch (layer) {
-					case AbilityAddingRemovingEffects_6:
-						if (sublayer == SubLayer.NA) {
-							creature.addAbility(new ForestwalkAbility(), game);
-						}
-						break;
-				}
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        Permanent enchantment = game.getPermanent(source.getSourceId());
+        if (enchantment != null && enchantment.getAttachedTo() != null) {
+            Permanent creature = game.getPermanent(enchantment.getAttachedTo());
+            if (creature != null) {
+                switch (layer) {
+                    case AbilityAddingRemovingEffects_6:
+                        if (sublayer == SubLayer.NA) {
+                            creature.addAbility(new ForestwalkAbility(), game);
+                        }
+                        break;
+                }
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
 
-	@Override
-	public boolean hasLayer(Layer layer) {
-		return layer == Layer.AbilityAddingRemovingEffects_6;
-	}
+    @Override
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.AbilityAddingRemovingEffects_6;
+    }
 
 }

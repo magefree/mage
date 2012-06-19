@@ -60,7 +60,7 @@ public class FaithsShield extends CardImpl<FaithsShield> {
         this.color.setWhite(true);
 
         // Target permanent you control gains protection from the color of your choice until end of turn.
-        
+
         // Fateful hour - If you have 5 or less life, instead you and each permanent you control gain protection from the color of your choice until end of turn.
         this.getSpellAbility().addEffect(new FaithsShieldEffect());
         this.getSpellAbility().addTarget(new TargetControlledPermanent());
@@ -83,20 +83,20 @@ class FaithsShieldEffect extends OneShotEffect<FaithsShieldEffect> {
         super(Outcome.Protect);
         staticText = "Target permanent you control gains protection from the color of your choice until end of turn\nFateful hour - If you have 5 or less life, instead you and each permanent you control gain protection from the color of your choice until end of turn";
     }
-    
+
     public FaithsShieldEffect(final FaithsShieldEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         if (FatefulHourCondition.getInstance().apply(game, source)) {
             ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
             FilterCard filter = new FilterCard();
-       		filter.setUseColor(true);
-			filter.setColor(choice.getColor());
-			filter.setMessage(choice.getChoice());
-        	filter.setScopeColor(Filter.ComparisonScope.Any);
+               filter.setUseColor(true);
+            filter.setColor(choice.getColor());
+            filter.setMessage(choice.getChoice());
+            filter.setScopeColor(Filter.ComparisonScope.Any);
 
             Ability ability = new ProtectionAbility(filter) ;
             game.addEffect(new GainAbilityControlledEffect(ability, Duration.EndOfTurn), source);
@@ -112,5 +112,5 @@ class FaithsShieldEffect extends OneShotEffect<FaithsShieldEffect> {
     public FaithsShieldEffect copy() {
         return new FaithsShieldEffect(this);
     }
-    
+
 }

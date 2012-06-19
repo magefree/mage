@@ -1,21 +1,21 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  
+
     <modelVersion>4.0.0</modelVersion>
-  
+
     <parent>
         <groupId>org.mage</groupId>
         <artifactId>mage-root</artifactId>
         <version>0.8.6</version>
     </parent>
-  
+
     <groupId>org.mage</groupId>
     <artifactId>mage-sets</artifactId>
     <packaging>jar</packaging>
     <name>Mage Sets</name>
     <url>http://maven.apache.org</url>
-	
+
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -29,7 +29,7 @@
             <type>jar</type>
         </dependency>
     </dependencies>
-	
+
     <build>
         <sourceDirectory>src</sourceDirectory>
         <plugins>
@@ -50,10 +50,10 @@
             </plugin>
 
         </plugins>
-    
+
         <finalName>mage-sets</finalName>
     </build>
-  
+
     <properties/>
-	
+
 </project>

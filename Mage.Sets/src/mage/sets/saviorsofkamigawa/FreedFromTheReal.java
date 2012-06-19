@@ -63,7 +63,7 @@ public class FreedFromTheReal extends CardImpl<FreedFromTheReal> {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapEnchantedEffect(), new ManaCostsImpl("{U}")));
         // {U}: Untap enchanted creature.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapEnchantedEffect(), new ManaCostsImpl("{U}")));
-        
+
     }
 
     public FreedFromTheReal(final FreedFromTheReal card) {

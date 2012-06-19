@@ -75,38 +75,38 @@ public class Brainbite extends CardImpl<Brainbite> {
 
 class BrainbiteEffect extends OneShotEffect<BrainbiteEffect> {
 
-	public BrainbiteEffect() {
-		super(Constants.Outcome.Discard);
-		staticText = "Target opponent reveals his or her hand. You choose a card from it. That player discards that card";
-	}
+    public BrainbiteEffect() {
+        super(Constants.Outcome.Discard);
+        staticText = "Target opponent reveals his or her hand. You choose a card from it. That player discards that card";
+    }
 
-	public BrainbiteEffect(final BrainbiteEffect effect) {
-		super(effect);
-	}
+    public BrainbiteEffect(final BrainbiteEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getFirstTarget());
-		if (player != null) {
-			player.revealCards("Brainbite", player.getHand(), game);
-			Player you = game.getPlayer(source.getControllerId());
-			if (you != null) {
-				TargetCard target = new TargetCard(Constants.Zone.PICK, new FilterCard());
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getFirstTarget());
+        if (player != null) {
+            player.revealCards("Brainbite", player.getHand(), game);
+            Player you = game.getPlayer(source.getControllerId());
+            if (you != null) {
+                TargetCard target = new TargetCard(Constants.Zone.PICK, new FilterCard());
                 target.setRequired(true);
-				if (you.choose(Constants.Outcome.Benefit, player.getHand(), target, game)) {
-					Card card = player.getHand().get(target.getFirstTarget(), game);
-					if (card != null) {
-						return player.discard(card, source, game);
-					}
-				}
-			}
-		}
-		return false;
-	}
+                if (you.choose(Constants.Outcome.Benefit, player.getHand(), target, game)) {
+                    Card card = player.getHand().get(target.getFirstTarget(), game);
+                    if (card != null) {
+                        return player.discard(card, source, game);
+                    }
+                }
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public BrainbiteEffect copy() {
-		return new BrainbiteEffect(this);
-	}
+    @Override
+    public BrainbiteEffect copy() {
+        return new BrainbiteEffect(this);
+    }
 
 }

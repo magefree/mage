@@ -139,7 +139,7 @@ public class BigCard extends JComponent {
                 graphics.drawImage(bigImage, 0, 0, this);
             }
         }*/
-	    if (bigImage != null) {
+        if (bigImage != null) {
             graphics.drawImage(bigImage, 0, 0, this);
         }
         super.paintComponent(graphics);
@@ -175,7 +175,7 @@ public class BigCard extends JComponent {
             }
         }
         */
-	    repaint();
+        repaint();
     }
 
     private Thread getFoilThread() {
@@ -212,9 +212,9 @@ public class BigCard extends JComponent {
                         if (source == null) {
                             source = BufferedImageBuilder.bufferImage(bigImage);
                         }
-	                    if (source == null) {
-		                    return;
-	                    }
+                        if (source == null) {
+                            return;
+                        }
                         f = filter.filter(source, null);
                     }
                     synchronized (BigCard.class) {
@@ -261,7 +261,7 @@ public class BigCard extends JComponent {
         setMaximumSize(new Dimension(FRAME_MAX_WIDTH, FRAME_MAX_HEIGHT));
         setPreferredSize(getMinimumSize());
         setLayout(null);
-		//setBackground(new Color(255,255,255,200));
+        //setBackground(new Color(255,255,255,200));
 
         scrollPane.setBorder(null);
         scrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -275,10 +275,10 @@ public class BigCard extends JComponent {
         add(scrollPane);
     }// </editor-fold>//GEN-END:initComponents
 
-	public void setDefaultImage() {
-	   	bigImage = ImageHelper.getImageFromResources("/empty.png");
+    public void setDefaultImage() {
+           bigImage = ImageHelper.getImageFromResources("/empty.png");
         bigImage = ImageHelper.getResizedImage((BufferedImage) bigImage, getWidth(), getHeight());
-	}
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane scrollPane;

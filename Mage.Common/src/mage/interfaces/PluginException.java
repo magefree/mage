@@ -10,13 +10,13 @@ import mage.MageException;
  */
 public class PluginException extends MageException {
 
-	private static final long serialVersionUID = 5528005696138392272L;
+    private static final long serialVersionUID = 5528005696138392272L;
 
-	public PluginException(String message) {
-		super(message);
-	}
-	
-	public PluginException(Throwable t) {
-		super(t);
-	}
+    public PluginException(String message) {
+        super(message);
+    }
+
+    public PluginException(Throwable t) {
+        super(t);
+    }
 }

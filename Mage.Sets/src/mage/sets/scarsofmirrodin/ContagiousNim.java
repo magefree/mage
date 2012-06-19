@@ -45,7 +45,7 @@ public class ContagiousNim extends CardImpl<ContagiousNim> {
         super(ownerId, 58, "Contagious Nim", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Zombie");
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(InfectAbility.getInstance());

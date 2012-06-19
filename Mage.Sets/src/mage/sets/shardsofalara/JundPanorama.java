@@ -62,24 +62,24 @@ public class JundPanorama extends CardImpl<JundPanorama> {
         filter.setScopeSubtype(Filter.ComparisonScope.Any);
     }
 
-	public JundPanorama(UUID ownerId) {
-		super(ownerId, 225, "Jund Panorama", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
-		this.expansionSetCode = "ALA";
-		this.addAbility(new ColorlessManaAbility());
-		TargetCardInLibrary target = new TargetCardInLibrary(filter);
+    public JundPanorama(UUID ownerId) {
+        super(ownerId, 225, "Jund Panorama", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
+        this.expansionSetCode = "ALA";
+        this.addAbility(new ColorlessManaAbility());
+        TargetCardInLibrary target = new TargetCardInLibrary(filter);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(target, true, Outcome.PutLandInPlay), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
-	}
+    }
 
-	public JundPanorama(final JundPanorama card) {
-		super(card);
-	}
+    public JundPanorama(final JundPanorama card) {
+        super(card);
+    }
 
-	@Override
-	public JundPanorama copy() {
-		return new JundPanorama(this);
-	}
+    @Override
+    public JundPanorama copy() {
+        return new JundPanorama(this);
+    }
 
 }

@@ -36,35 +36,35 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  */
 public class TargetControlledCreaturePermanent extends TargetControlledPermanent<TargetControlledCreaturePermanent> {
 
-	public TargetControlledCreaturePermanent() {
-		this(1, 1, new FilterControlledCreaturePermanent(), false);
-	}
+    public TargetControlledCreaturePermanent() {
+        this(1, 1, new FilterControlledCreaturePermanent(), false);
+    }
 
-	public TargetControlledCreaturePermanent(boolean required) {
-		this(1, 1, new FilterControlledCreaturePermanent(), false);
-		this.required = required;
-	}
+    public TargetControlledCreaturePermanent(boolean required) {
+        this(1, 1, new FilterControlledCreaturePermanent(), false);
+        this.required = required;
+    }
 
-	public TargetControlledCreaturePermanent(int numTargets) {
-		this(numTargets, numTargets, new FilterControlledCreaturePermanent(), false);
-	}
+    public TargetControlledCreaturePermanent(int numTargets) {
+        this(numTargets, numTargets, new FilterControlledCreaturePermanent(), false);
+    }
 
-	public TargetControlledCreaturePermanent(int minNumTargets, int maxNumTargets, FilterControlledCreaturePermanent filter, boolean notTarget) {
-		super(minNumTargets, maxNumTargets, filter, notTarget);
-		this.targetName = filter.getMessage();
-	}
+    public TargetControlledCreaturePermanent(int minNumTargets, int maxNumTargets, FilterControlledCreaturePermanent filter, boolean notTarget) {
+        super(minNumTargets, maxNumTargets, filter, notTarget);
+        this.targetName = filter.getMessage();
+    }
 
         public TargetControlledCreaturePermanent(int minNumTargets, int maxNumTargets, FilterControlledCreaturePermanent filter, boolean notTarget, boolean required) {
-		this(minNumTargets, maxNumTargets, filter, notTarget);
+        this(minNumTargets, maxNumTargets, filter, notTarget);
                 this.required = required;
-	}
+    }
 
-	public TargetControlledCreaturePermanent(final TargetControlledCreaturePermanent target) {
-		super(target);
-	}
+    public TargetControlledCreaturePermanent(final TargetControlledCreaturePermanent target) {
+        super(target);
+    }
 
-	@Override
-	public TargetControlledCreaturePermanent copy() {
-		return new TargetControlledCreaturePermanent(this);
-	}
+    @Override
+    public TargetControlledCreaturePermanent copy() {
+        return new TargetControlledCreaturePermanent(this);
+    }
 }

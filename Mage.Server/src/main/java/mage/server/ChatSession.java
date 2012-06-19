@@ -45,58 +45,58 @@ import org.apache.log4j.Logger;
  */
 public class ChatSession {
 
-	private final static Logger logger = Logger.getLogger(ChatSession.class);
-	private ConcurrentHashMap<UUID, String> clients = new ConcurrentHashMap<UUID, String>();
-	private UUID chatId;
-	private DateFormat timeFormatter = SimpleDateFormat.getTimeInstance(SimpleDateFormat.SHORT);
+    private final static Logger logger = Logger.getLogger(ChatSession.class);
+    private ConcurrentHashMap<UUID, String> clients = new ConcurrentHashMap<UUID, String>();
+    private UUID chatId;
+    private DateFormat timeFormatter = SimpleDateFormat.getTimeInstance(SimpleDateFormat.SHORT);
 
-	public ChatSession() {
-		chatId = UUID.randomUUID();
-	}
+    public ChatSession() {
+        chatId = UUID.randomUUID();
+    }
 
-	public void join(UUID userId) {
-		User user = UserManager.getInstance().getUser(userId);
-		if (user != null) {
-			String userName = user.getName();
-			clients.put(userId, userName);
-			broadcast(userName, " has joined", MessageColor.BLACK);
-			logger.info(userName + " joined chat " + chatId);
-		}
-	}
+    public void join(UUID userId) {
+        User user = UserManager.getInstance().getUser(userId);
+        if (user != null) {
+            String userName = user.getName();
+            clients.put(userId, userName);
+            broadcast(userName, " has joined", MessageColor.BLACK);
+            logger.info(userName + " joined chat " + chatId);
+        }
+    }
 
-	public void kill(UUID userId) {
-		if (userId != null && clients.containsKey(userId)) {
-			String userName = clients.get(userId);
-			clients.remove(userId);
-			broadcast(userName, " has left", MessageColor.BLACK);
-			logger.info(userName + " has left chat " + chatId);
-		}
-	}
+    public void kill(UUID userId) {
+        if (userId != null && clients.containsKey(userId)) {
+            String userName = clients.get(userId);
+            clients.remove(userId);
+            broadcast(userName, " has left", MessageColor.BLACK);
+            logger.info(userName + " has left chat " + chatId);
+        }
+    }
 
-	public void broadcast(String userName, String message, MessageColor color) {
-		Calendar cal = new GregorianCalendar();
-		final String msg = message;
-		final String time = timeFormatter.format(cal.getTime());
-		final String username = userName;
-		logger.debug("Broadcasting '" + msg + "' for " + chatId);
-		for (UUID userId: clients.keySet()) {
-			User user = UserManager.getInstance().getUser(userId);
-			if (user != null)
-				user.fireCallback(new ClientCallback("chatMessage", chatId, new ChatMessage(username, msg, time, color)));
-			else
-				kill(userId);
-		}
-	}
+    public void broadcast(String userName, String message, MessageColor color) {
+        Calendar cal = new GregorianCalendar();
+        final String msg = message;
+        final String time = timeFormatter.format(cal.getTime());
+        final String username = userName;
+        logger.debug("Broadcasting '" + msg + "' for " + chatId);
+        for (UUID userId: clients.keySet()) {
+            User user = UserManager.getInstance().getUser(userId);
+            if (user != null)
+                user.fireCallback(new ClientCallback("chatMessage", chatId, new ChatMessage(username, msg, time, color)));
+            else
+                kill(userId);
+        }
+    }
 
-	/**
-	 * @return the chatId
-	 */
-	public UUID getChatId() {
-		return chatId;
-	}
+    /**
+     * @return the chatId
+     */
+    public UUID getChatId() {
+        return chatId;
+    }
 
-	public boolean hasUser(UUID userId) {
-		return clients.containsKey(userId);
-	}
+    public boolean hasUser(UUID userId) {
+        return clients.containsKey(userId);
+    }
 
 }

@@ -52,7 +52,7 @@ public class VictorysHerald extends CardImpl<VictorysHerald> {
         super(ownerId, 18, "Victory's Herald", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}{W}");
         this.expansionSetCode = "MBS";
         this.subtype.add("Angel");
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         Ability ability = new AttacksTriggeredAbility(new GainAbilityControlledEffect(FlyingAbility.getInstance(), Constants.Duration.EndOfTurn, new FilterAttackingCreature()), false);

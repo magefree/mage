@@ -55,11 +55,11 @@ import java.util.UUID;
  */
 public class DungeonGeists extends CardImpl<DungeonGeists> {
 
-	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 
-	static {
-		filter.setTargetController(Constants.TargetController.OPPONENT);
-	}
+    static {
+        filter.setTargetController(Constants.TargetController.OPPONENT);
+    }
 
     public DungeonGeists(UUID ownerId) {
         super(ownerId, 36, "Dungeon Geists", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
@@ -94,32 +94,32 @@ public class DungeonGeists extends CardImpl<DungeonGeists> {
 
 class DungeonGeistsEffect extends ReplacementEffectImpl<DungeonGeistsEffect> {
 
-	public DungeonGeistsEffect() {
-		super(Constants.Duration.OneUse, Constants.Outcome.Detriment);
+    public DungeonGeistsEffect() {
+        super(Constants.Duration.OneUse, Constants.Outcome.Detriment);
         this.staticText = "That creature doesn't untap during its controller's untap step for as long as you control Dungeon Geists";
-	}
+    }
 
-	public DungeonGeistsEffect(final DungeonGeistsEffect effect) {
-		super(effect);
-	}
+    public DungeonGeistsEffect(final DungeonGeistsEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public DungeonGeistsEffect copy() {
-		return new DungeonGeistsEffect(this);
-	}
+    @Override
+    public DungeonGeistsEffect copy() {
+        return new DungeonGeistsEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		return true;
-	}
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        return true;
+    }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.LOST_CONTROL) {
             if (event.getPlayerId().equals(source.getControllerId()) && event.getTargetId().equals(source.getSourceId())) {
                 this.used = true;
@@ -142,43 +142,43 @@ class DungeonGeistsEffect extends ReplacementEffectImpl<DungeonGeistsEffect> {
         }
 
         return false;
-	}
+    }
 }
 
 class DungeonGeistsWatcher extends WatcherImpl<DungeonGeistsWatcher> {
 
-	DungeonGeistsWatcher () {
-		super("ControlLost", WatcherScope.CARD);
-	}
+    DungeonGeistsWatcher () {
+        super("ControlLost", WatcherScope.CARD);
+    }
 
-	DungeonGeistsWatcher(DungeonGeistsWatcher watcher) {
-		super(watcher);
-	}
+    DungeonGeistsWatcher(DungeonGeistsWatcher watcher) {
+        super(watcher);
+    }
 
-	@Override
-	public void watch(GameEvent event, Game game) {
-		if (event.getType() == GameEvent.EventType.LOST_CONTROL && event.getPlayerId().equals(controllerId) && event.getTargetId().equals(sourceId)) {
+    @Override
+    public void watch(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.LOST_CONTROL && event.getPlayerId().equals(controllerId) && event.getTargetId().equals(sourceId)) {
             condition = true;
             game.replaceEvent(event);
             return;
-		}
-		if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(sourceId)) {
-			ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-			if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
+        }
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(sourceId)) {
+            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+            if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
                 condition = true;
                 game.replaceEvent(event);
                 return;
             }
-		}
-	}
+        }
+    }
 
     @Override
-	public void reset() {
+    public void reset() {
         //don't reset condition each turn - only when this leaves the battlefield
-	}
-    
-	@Override
-	public DungeonGeistsWatcher copy() {
-		return new DungeonGeistsWatcher(this);
-	}
+    }
+
+    @Override
+    public DungeonGeistsWatcher copy() {
+        return new DungeonGeistsWatcher(this);
+    }
 }

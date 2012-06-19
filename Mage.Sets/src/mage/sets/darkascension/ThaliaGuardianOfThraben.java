@@ -60,10 +60,10 @@ public class ThaliaGuardianOfThraben extends CardImpl<ThaliaGuardianOfThraben> {
         this.toughness = new MageInt(1);
 
         this.addAbility(FirstStrikeAbility.getInstance());
-        
+
         // Noncreature spells cost {1} more to cast.
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ThaliaGuardianOfThrabenCostReductionEffect()));
-        
+
     }
 
     public ThaliaGuardianOfThraben(final ThaliaGuardianOfThraben card) {
@@ -78,36 +78,36 @@ public class ThaliaGuardianOfThraben extends CardImpl<ThaliaGuardianOfThraben> {
 
 class ThaliaGuardianOfThrabenCostReductionEffect extends CostModificationEffectImpl<ThaliaGuardianOfThrabenCostReductionEffect> {
 
-	ThaliaGuardianOfThrabenCostReductionEffect ( ) {
-		super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
-		staticText = "Noncreature spells cost {1} more to cast";
-	}
+    ThaliaGuardianOfThrabenCostReductionEffect ( ) {
+        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        staticText = "Noncreature spells cost {1} more to cast";
+    }
 
-	ThaliaGuardianOfThrabenCostReductionEffect(ThaliaGuardianOfThrabenCostReductionEffect effect) {
-		super(effect);
-	}
+    ThaliaGuardianOfThrabenCostReductionEffect(ThaliaGuardianOfThrabenCostReductionEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source, Ability abilityToModify) {
-		SpellAbility spellAbility = (SpellAbility) abilityToModify;
-		spellAbility.getManaCostsToPay().add(new GenericManaCost(1));
-		return true;
-	}
-	
-	@Override
-	public boolean applies(Ability abilityToModify, Ability source, Game game) {
-		if (abilityToModify instanceof SpellAbility) {
-			Card card = game.getCard(abilityToModify.getSourceId());
-			if (card != null && !card.getCardType().contains(CardType.CREATURE)) {
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source, Ability abilityToModify) {
+        SpellAbility spellAbility = (SpellAbility) abilityToModify;
+        spellAbility.getManaCostsToPay().add(new GenericManaCost(1));
+        return true;
+    }
 
-	@Override
-	public ThaliaGuardianOfThrabenCostReductionEffect copy() {
-		return new ThaliaGuardianOfThrabenCostReductionEffect(this);
-	}
+    @Override
+    public boolean applies(Ability abilityToModify, Ability source, Game game) {
+        if (abilityToModify instanceof SpellAbility) {
+            Card card = game.getCard(abilityToModify.getSourceId());
+            if (card != null && !card.getCardType().contains(CardType.CREATURE)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public ThaliaGuardianOfThrabenCostReductionEffect copy() {
+        return new ThaliaGuardianOfThrabenCostReductionEffect(this);
+    }
 
 }

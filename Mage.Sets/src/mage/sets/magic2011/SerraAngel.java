@@ -38,20 +38,20 @@ import java.util.UUID;
  */
 public class SerraAngel extends mage.sets.tenth.SerraAngel {
 
-	public SerraAngel(UUID ownerId) {
-		super(ownerId);
-		this.rarity = Constants.Rarity.UNCOMMON;
-		this.cardNumber = 27;
-		this.expansionSetCode = "M11";
-	}
+    public SerraAngel(UUID ownerId) {
+        super(ownerId);
+        this.rarity = Constants.Rarity.UNCOMMON;
+        this.cardNumber = 27;
+        this.expansionSetCode = "M11";
+    }
 
-	public SerraAngel(final SerraAngel card) {
-		super(card);
-	}
+    public SerraAngel(final SerraAngel card) {
+        super(card);
+    }
 
-	@Override
-	public SerraAngel copy() {
-		return new SerraAngel(this);
-	}
+    @Override
+    public SerraAngel copy() {
+        return new SerraAngel(this);
+    }
 
 }

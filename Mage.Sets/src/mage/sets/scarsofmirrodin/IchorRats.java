@@ -53,7 +53,7 @@ public class IchorRats extends CardImpl<IchorRats> {
         super(ownerId, 67, "Ichor Rats", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Rat");
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         this.addAbility(InfectAbility.getInstance());

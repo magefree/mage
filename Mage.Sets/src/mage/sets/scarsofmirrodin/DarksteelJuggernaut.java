@@ -60,7 +60,7 @@ public class DarksteelJuggernaut extends CardImpl<DarksteelJuggernaut> {
         this.subtype.add("Juggernaut");
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
-        
+
         SetPowerToughnessSourceEffect effect = new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Constants.Duration.EndOfGame);
         this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, effect));
         this.addAbility(IndestructibleAbility.getInstance());

@@ -57,7 +57,7 @@ public class LinvalaKeeperOfSilence extends CardImpl<LinvalaKeeperOfSilence> {
         this.expansionSetCode = "ROE";
         this.supertype.add("Legendary");
         this.subtype.add("Angel");
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
         this.addAbility(FlyingAbility.getInstance());
@@ -94,8 +94,8 @@ class LinvalaKeeperOfSilenceEffect extends ReplacementEffectImpl<LinvalaKeeperOf
         Permanent p = game.getPermanent(event.getSourceId());
         if ( event.getType() == GameEvent.EventType.ACTIVATE_ABILITY && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())
                 && p != null && p.getCardType().contains(CardType.CREATURE)) {
-			return true;
-		}
+            return true;
+        }
         return false;
     }
 

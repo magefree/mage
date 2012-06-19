@@ -59,73 +59,73 @@ import java.util.UUID;
  */
 public class MasterOfTheWildHunt extends CardImpl<MasterOfTheWildHunt> {
 
-	private static WolfToken wolfToken = new WolfToken();
+    private static WolfToken wolfToken = new WolfToken();
 
-	public MasterOfTheWildHunt(UUID ownerId) {
-		super(ownerId, 191, "Master of the Wild Hunt", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-		this.expansionSetCode = "M10";
-		this.subtype.add("Human");
-		this.subtype.add("Shaman");
-		this.color.setGreen(true);
-		this.power = new MageInt(3);
-		this.toughness = new MageInt(3);
+    public MasterOfTheWildHunt(UUID ownerId) {
+        super(ownerId, 191, "Master of the Wild Hunt", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
+        this.expansionSetCode = "M10";
+        this.subtype.add("Human");
+        this.subtype.add("Shaman");
+        this.color.setGreen(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-		this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new CreateTokenEffect(wolfToken)));
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MasterOfTheWildHuntEffect(), new TapSourceCost());
-		ability.addTarget(new TargetCreaturePermanent());
-		this.addAbility(ability);
-	}
+        this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new CreateTokenEffect(wolfToken)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MasterOfTheWildHuntEffect(), new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
+    }
 
-	public MasterOfTheWildHunt(final MasterOfTheWildHunt card) {
-		super(card);
-	}
+    public MasterOfTheWildHunt(final MasterOfTheWildHunt card) {
+        super(card);
+    }
 
-	@Override
-	public MasterOfTheWildHunt copy() {
-		return new MasterOfTheWildHunt(this);
-	}
+    @Override
+    public MasterOfTheWildHunt copy() {
+        return new MasterOfTheWildHunt(this);
+    }
 }
 
 class MasterOfTheWildHuntEffect extends OneShotEffect<MasterOfTheWildHuntEffect> {
 
-	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
-	static {
-		filter.getSubtype().add("Wolf");
+    static {
+        filter.getSubtype().add("Wolf");
         filter.setScopeSubtype(Filter.ComparisonScope.Any);
-		filter.setTapped(false);
-		filter.setUseTapped(true);
-	}
+        filter.setTapped(false);
+        filter.setUseTapped(true);
+    }
 
-	public MasterOfTheWildHuntEffect() {
-		super(Outcome.Damage);
-		staticText = "Tap all untapped Wolf creatures you control. Each Wolf tapped this way deals damage equal to its power to target creature. That creature deals damage equal to its power divided as its controller chooses among any number of those Wolves";
-	}
+    public MasterOfTheWildHuntEffect() {
+        super(Outcome.Damage);
+        staticText = "Tap all untapped Wolf creatures you control. Each Wolf tapped this way deals damage equal to its power to target creature. That creature deals damage equal to its power divided as its controller chooses among any number of those Wolves";
+    }
 
-	public MasterOfTheWildHuntEffect(final MasterOfTheWildHuntEffect effect) {
-		super(effect);
-	}
+    public MasterOfTheWildHuntEffect(final MasterOfTheWildHuntEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public MasterOfTheWildHuntEffect copy() {
-		return new MasterOfTheWildHuntEffect(this);
-	}
+    @Override
+    public MasterOfTheWildHuntEffect copy() {
+        return new MasterOfTheWildHuntEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		List<UUID> wolves = new ArrayList<UUID>();
-		Permanent target = game.getPermanent(source.getFirstTarget());
-		if (target != null && game.getBattlefield().countAll(filter, source.getControllerId(), game) > 0) {
-			for (Permanent permanent: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
-				permanent.tap(game);
-				target.damage(permanent.getToughness().getValue(), permanent.getId(), game, true, false);
-				wolves.add(permanent.getId());
-			}
-			Player player = game.getPlayer(target.getControllerId());
-			player.assignDamage(target.getPower().getValue(), wolves, "Wolf", target.getId(), game);
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        List<UUID> wolves = new ArrayList<UUID>();
+        Permanent target = game.getPermanent(source.getFirstTarget());
+        if (target != null && game.getBattlefield().countAll(filter, source.getControllerId(), game) > 0) {
+            for (Permanent permanent: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
+                permanent.tap(game);
+                target.damage(permanent.getToughness().getValue(), permanent.getId(), game, true, false);
+                wolves.add(permanent.getId());
+            }
+            Player player = game.getPlayer(target.getControllerId());
+            player.assignDamage(target.getPower().getValue(), wolves, "Wolf", target.getId(), game);
+            return true;
+        }
+        return false;
+    }
 
 }

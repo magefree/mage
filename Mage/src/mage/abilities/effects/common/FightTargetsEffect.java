@@ -44,11 +44,11 @@ public class FightTargetsEffect extends OneShotEffect<FightTargetsEffect> {
     public FightTargetsEffect() {
         super(Outcome.Damage);
     }
-    
+
     public FightTargetsEffect(final FightTargetsEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent creature1 = game.getPermanent(source.getTargets().get(0).getFirstTarget());
@@ -68,10 +68,10 @@ public class FightTargetsEffect extends OneShotEffect<FightTargetsEffect> {
     public FightTargetsEffect copy() {
         return new FightTargetsEffect(this);
     }
-    
+
     @Override
     public String getText(Mode mode) {
         return "Target " + mode.getTargets().get(0).getTargetName() + " fights target " + mode.getTargets().get(1).getTargetName();
     }
-    
+
 }

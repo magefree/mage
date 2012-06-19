@@ -37,17 +37,17 @@ import mage.abilities.effects.common.BasicManaEffect;
  */
 public class ColorlessManaAbility extends BasicManaAbility<ColorlessManaAbility> {
 
-	public ColorlessManaAbility() {
-		super(new BasicManaEffect(Mana.ColorlessMana));
-		this.netMana.setColorless(1);
-	}
+    public ColorlessManaAbility() {
+        super(new BasicManaEffect(Mana.ColorlessMana));
+        this.netMana.setColorless(1);
+    }
 
-	public ColorlessManaAbility(ColorlessManaAbility ability) {
-		super(ability);
-	}
+    public ColorlessManaAbility(ColorlessManaAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public ColorlessManaAbility copy() {
-		return new ColorlessManaAbility(this);
-	}
+    @Override
+    public ColorlessManaAbility copy() {
+        return new ColorlessManaAbility(this);
+    }
 }

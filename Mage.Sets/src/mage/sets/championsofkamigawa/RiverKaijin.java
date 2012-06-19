@@ -44,7 +44,7 @@ public class RiverKaijin extends CardImpl<RiverKaijin> {
         super(ownerId, 83, "River Kaijin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Spirit");
-		this.color.setBlue(true);
+        this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
     }

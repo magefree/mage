@@ -57,8 +57,8 @@ public class VithianRenegades extends CardImpl<VithianRenegades> {
         this.expansionSetCode = "ARB";
         this.subtype.add("Human");
         this.subtype.add("Shaman");
-		this.color.setRed(true);
-		this.color.setGreen(true);
+        this.color.setRed(true);
+        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());

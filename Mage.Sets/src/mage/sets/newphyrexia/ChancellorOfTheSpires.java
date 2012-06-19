@@ -56,9 +56,9 @@ import mage.target.common.TargetCardInOpponentsGraveyard;
 public class ChancellorOfTheSpires extends CardImpl<ChancellorOfTheSpires> {
 
     private static final String abilityText = "at the beginning of the first upkeep, each opponent puts the top seven cards of his or her library into his or her graveyard";
-    
+
     private static final FilterCard filter = new FilterCard("instant or sorcery card from an opponent's graveyard");
-    
+
     static {
         filter.getCardType().add(CardType.INSTANT);
         filter.getCardType().add(CardType.SORCERY);
@@ -76,9 +76,9 @@ public class ChancellorOfTheSpires extends CardImpl<ChancellorOfTheSpires> {
 
         // You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, each opponent puts the top seven cards of his or her library into his or her graveyard.
         this.addAbility(new ChancellorAbility(new ChancellorOfTheSpiresDelayedTriggeredAbility(), abilityText));
-        
+
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // When Chancellor of the Spires enters the battlefield, you may cast target instant or sorcery card from an opponent's graveyard without paying its mana cost.
         Ability ability = new EntersBattlefieldTriggeredAbility(new PlayTargetWithoutPayingManaEffect(), true);
         ability.addTarget(new TargetCardInOpponentsGraveyard(filter));
@@ -97,40 +97,40 @@ public class ChancellorOfTheSpires extends CardImpl<ChancellorOfTheSpires> {
 
 class ChancellorOfTheSpiresDelayedTriggeredAbility extends DelayedTriggeredAbility<ChancellorOfTheSpiresDelayedTriggeredAbility> {
 
-	ChancellorOfTheSpiresDelayedTriggeredAbility () {
-		super(new ChancellorOfTheSpiresEffect());
-	}
+    ChancellorOfTheSpiresDelayedTriggeredAbility () {
+        super(new ChancellorOfTheSpiresEffect());
+    }
 
-	ChancellorOfTheSpiresDelayedTriggeredAbility(ChancellorOfTheSpiresDelayedTriggeredAbility ability) {
-		super(ability);
-	}
+    ChancellorOfTheSpiresDelayedTriggeredAbility(ChancellorOfTheSpiresDelayedTriggeredAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE) {
-			return true;
-		}
-		return false;
-	}
-	@Override
-	public ChancellorOfTheSpiresDelayedTriggeredAbility copy() {
-		return new ChancellorOfTheSpiresDelayedTriggeredAbility(this);
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE) {
+            return true;
+        }
+        return false;
+    }
+    @Override
+    public ChancellorOfTheSpiresDelayedTriggeredAbility copy() {
+        return new ChancellorOfTheSpiresDelayedTriggeredAbility(this);
+    }
 }
 
 class ChancellorOfTheSpiresEffect extends OneShotEffect<ChancellorOfTheSpiresEffect> {
 
-	ChancellorOfTheSpiresEffect () {
-		super(Outcome.Benefit);
-		staticText = "each opponent puts the top seven cards of his or her library into his or her graveyard";
-	}
+    ChancellorOfTheSpiresEffect () {
+        super(Outcome.Benefit);
+        staticText = "each opponent puts the top seven cards of his or her library into his or her graveyard";
+    }
 
-	ChancellorOfTheSpiresEffect(ChancellorOfTheSpiresEffect effect) {
-		super(effect);
-	}
+    ChancellorOfTheSpiresEffect(ChancellorOfTheSpiresEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             Player player = game.getPlayer(opponentId);
             if (player != null) {
@@ -145,12 +145,12 @@ class ChancellorOfTheSpiresEffect extends OneShotEffect<ChancellorOfTheSpiresEff
             }
         }
         return true;
-	}
+    }
 
-	@Override
-	public ChancellorOfTheSpiresEffect copy() {
-		return new ChancellorOfTheSpiresEffect(this);
-	}
+    @Override
+    public ChancellorOfTheSpiresEffect copy() {
+        return new ChancellorOfTheSpiresEffect(this);
+    }
 
 }
 

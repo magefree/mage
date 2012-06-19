@@ -41,20 +41,20 @@ import mage.target.TargetPlayer;
  */
 public class LavaAxe extends CardImpl<LavaAxe> {
 
-	public LavaAxe(UUID ownerId) {
-		super(ownerId, 215, "Lava Axe", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{R}");
-		this.expansionSetCode = "10E";
-		this.color.setRed(true);
-		this.getSpellAbility().addTarget(new TargetPlayer());
-		this.getSpellAbility().addEffect(new DamageTargetEffect(5));
-	}
+    public LavaAxe(UUID ownerId) {
+        super(ownerId, 215, "Lava Axe", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{R}");
+        this.expansionSetCode = "10E";
+        this.color.setRed(true);
+        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addEffect(new DamageTargetEffect(5));
+    }
 
-	public LavaAxe(final LavaAxe card) {
-		super(card);
-	}
+    public LavaAxe(final LavaAxe card) {
+        super(card);
+    }
 
-	@Override
-	public LavaAxe copy() {
-		return new LavaAxe(this);
-	}
+    @Override
+    public LavaAxe copy() {
+        return new LavaAxe(this);
+    }
 }

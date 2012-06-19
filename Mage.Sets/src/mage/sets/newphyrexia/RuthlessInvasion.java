@@ -48,7 +48,7 @@ public class RuthlessInvasion extends CardImpl<RuthlessInvasion> {
     public RuthlessInvasion (UUID ownerId) {
         super(ownerId, 93, "Ruthless Invasion", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{RP}");
         this.expansionSetCode = "NPH";
-		this.color.setRed(true);
+        this.color.setRed(true);
         this.getSpellAbility().addEffect(new RuthlessInvasionEffect());
     }
 

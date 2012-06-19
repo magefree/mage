@@ -53,12 +53,12 @@ public class Flight extends CardImpl<Flight> {
         super(ownerId, 53, "Flight", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");
         this.expansionSetCode = "M12";
         this.subtype.add("Aura");
-		this.color.setBlue(true);
+        this.color.setBlue(true);
         TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.AddAbility));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		this.addAbility(ability);
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.AddAbility));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), Constants.AttachmentType.AURA)));
     }
 

@@ -34,27 +34,27 @@ package mage.counters;
  */
 public abstract class BoostCounter<T extends BoostCounter<T>> extends Counter<T> {
 
-	protected int power;
-	protected int toughness;
+    protected int power;
+    protected int toughness;
 
-	public BoostCounter(int power, int toughness) {
-		super(String.format("%1$+d/%2$+d", power, toughness));
-		this.power = power;
-		this.toughness = toughness;
-	}
+    public BoostCounter(int power, int toughness) {
+        super(String.format("%1$+d/%2$+d", power, toughness));
+        this.power = power;
+        this.toughness = toughness;
+    }
 
-	public BoostCounter(final BoostCounter counter) {
-		super(counter);
-		this.power = counter.power;
-		this.toughness = counter.toughness;
-	}
+    public BoostCounter(final BoostCounter counter) {
+        super(counter);
+        this.power = counter.power;
+        this.toughness = counter.toughness;
+    }
 
-	public int getPower() {
-		return power;
-	}
+    public int getPower() {
+        return power;
+    }
 
-	public int getToughness() {
-		return toughness;
-	}
+    public int getToughness() {
+        return toughness;
+    }
 
 }

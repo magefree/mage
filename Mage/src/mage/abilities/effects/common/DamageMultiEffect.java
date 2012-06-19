@@ -44,29 +44,29 @@ import mage.target.Target;
  */
 public class DamageMultiEffect extends OneShotEffect<DamageMultiEffect> {
 
-	protected int amount;
+    protected int amount;
 
-	public DamageMultiEffect(int amount) {
-		super(Outcome.Damage);
-		this.amount = amount;
-	}
+    public DamageMultiEffect(int amount) {
+        super(Outcome.Damage);
+        this.amount = amount;
+    }
 
-	public int getAmount() {
-		return amount;
-	}
+    public int getAmount() {
+        return amount;
+    }
 
-	public DamageMultiEffect(final DamageMultiEffect effect) {
-		super(effect);
-		this.amount = effect.amount;
-	}
+    public DamageMultiEffect(final DamageMultiEffect effect) {
+        super(effect);
+        this.amount = effect.amount;
+    }
 
-	@Override
-	public DamageMultiEffect copy() {
-		return new DamageMultiEffect(this);
-	}
+    @Override
+    public DamageMultiEffect copy() {
+        return new DamageMultiEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
         if (source.getTargets().size() > 0) {
             Target multiTarget = source.getTargets().get(0);
             for (UUID target: multiTarget.getTargets()) {
@@ -82,16 +82,16 @@ public class DamageMultiEffect extends OneShotEffect<DamageMultiEffect> {
                 }
             }
         }
-		return true;
-	}
+        return true;
+    }
 
-	@Override
-	public String getText(Mode mode) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("{source} deals ").append(Integer.toString(amount));
-		sb.append(" damage divided as you choose among any number of target ").append(mode.getTargets().get(0).getTargetName());
-		return sb.toString();
-	}
+    @Override
+    public String getText(Mode mode) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("{source} deals ").append(Integer.toString(amount));
+        sb.append(" damage divided as you choose among any number of target ").append(mode.getTargets().get(0).getTargetName());
+        return sb.toString();
+    }
 
 
 }

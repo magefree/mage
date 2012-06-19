@@ -47,7 +47,7 @@ public class ValiantGuard extends CardImpl<ValiantGuard> {
         this.subtype.add("Human");
         this.subtype.add("Soldier");
         this.power = new MageInt(0);
-	this.toughness = new MageInt(3);
+    this.toughness = new MageInt(3);
     }
 
     public ValiantGuard(final ValiantGuard card) {

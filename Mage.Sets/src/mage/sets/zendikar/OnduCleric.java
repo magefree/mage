@@ -50,8 +50,8 @@ public class OnduCleric extends CardImpl<OnduCleric> {
 
     static {
         filter.getSubtype().add("Ally");
-		filter.setScopeSubtype(Filter.ComparisonScope.Any);
-		filter.setTargetController(Constants.TargetController.YOU);
+        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.setTargetController(Constants.TargetController.YOU);
     }
 
     public OnduCleric(UUID ownerId) {

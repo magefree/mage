@@ -46,52 +46,52 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class FurnaceCelebration extends CardImpl<FurnaceCelebration> {
 
-	public FurnaceCelebration(UUID ownerId) {
-		super(ownerId, 90, "Furnace Celebration", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{R}");
-		this.expansionSetCode = "SOM";
-		this.color.setRed(true);
-		this.addAbility(new FurnaceCelebrationAbility());
-	}
+    public FurnaceCelebration(UUID ownerId) {
+        super(ownerId, 90, "Furnace Celebration", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{R}");
+        this.expansionSetCode = "SOM";
+        this.color.setRed(true);
+        this.addAbility(new FurnaceCelebrationAbility());
+    }
 
-	public FurnaceCelebration(final FurnaceCelebration card) {
-		super(card);
-	}
+    public FurnaceCelebration(final FurnaceCelebration card) {
+        super(card);
+    }
 
-	@Override
-	public FurnaceCelebration copy() {
-		return new FurnaceCelebration(this);
-	}
+    @Override
+    public FurnaceCelebration copy() {
+        return new FurnaceCelebration(this);
+    }
 
 }
 
 class FurnaceCelebrationAbility extends TriggeredAbilityImpl<FurnaceCelebrationAbility> {
 
-	public FurnaceCelebrationAbility() {
-		super(Zone.BATTLEFIELD, new DoIfCostPaid(new DamageTargetEffect(2), new ManaCostsImpl("{2}")));
-		this.addTarget(new TargetCreatureOrPlayer());
-	}
-	
-	public FurnaceCelebrationAbility(final FurnaceCelebrationAbility ability) {
-		super(ability);
-	}
-	
-	@Override
-	public FurnaceCelebrationAbility copy() {
-		return new FurnaceCelebrationAbility(this);
-	}
+    public FurnaceCelebrationAbility() {
+        super(Zone.BATTLEFIELD, new DoIfCostPaid(new DamageTargetEffect(2), new ManaCostsImpl("{2}")));
+        this.addTarget(new TargetCreatureOrPlayer());
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == GameEvent.EventType.SACRIFICED_PERMANENT && event.getPlayerId().equals(this.getControllerId()) && !event.getTargetId().equals(sourceId)) {
-			return true;
-		}
-		return false;
-	}
+    public FurnaceCelebrationAbility(final FurnaceCelebrationAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public String getRule() {
-		return "Whenever you sacrifice another permanent, " + super.getRule();
-	}
+    @Override
+    public FurnaceCelebrationAbility copy() {
+        return new FurnaceCelebrationAbility(this);
+    }
 
-	
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.SACRIFICED_PERMANENT && event.getPlayerId().equals(this.getControllerId()) && !event.getTargetId().equals(sourceId)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever you sacrifice another permanent, " + super.getRule();
+    }
+
+
 }

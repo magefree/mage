@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class DiabolicTutor extends mage.sets.tenth.DiabolicTutor {
 
-	public DiabolicTutor(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 93;
-		this.expansionSetCode = "M11";
-	}
+    public DiabolicTutor(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 93;
+        this.expansionSetCode = "M11";
+    }
 
-	public DiabolicTutor(final DiabolicTutor card) {
-		super(card);
-	}
+    public DiabolicTutor(final DiabolicTutor card) {
+        super(card);
+    }
 
-	@Override
-	public DiabolicTutor copy() {
-		return new DiabolicTutor(this);
-	}
+    @Override
+    public DiabolicTutor copy() {
+        return new DiabolicTutor(this);
+    }
 
 }

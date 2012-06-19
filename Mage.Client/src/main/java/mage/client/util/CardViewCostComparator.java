@@ -37,15 +37,15 @@ import mage.view.CardView;
  */
 public class CardViewCostComparator implements Comparator<CardView> {
 
-	@Override
-	public int compare(CardView o1, CardView o2) {
-		int val = Integer.valueOf(o1.getConvertedManaCost()).compareTo(Integer.valueOf(o2.getConvertedManaCost()));
-		if (val == 0) {
-			return o1.getName().compareTo(o2.getName());
-		}
-		else {
-			return val;
-		}
-	}
+    @Override
+    public int compare(CardView o1, CardView o2) {
+        int val = Integer.valueOf(o1.getConvertedManaCost()).compareTo(Integer.valueOf(o2.getConvertedManaCost()));
+        if (val == 0) {
+            return o1.getName().compareTo(o2.getName());
+        }
+        else {
+            return val;
+        }
+    }
 
 }

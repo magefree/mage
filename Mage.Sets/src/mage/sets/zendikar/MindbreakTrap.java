@@ -56,7 +56,7 @@ import mage.watchers.WatcherImpl;
 public class MindbreakTrap extends CardImpl<MindbreakTrap> {
 
     private static final FilterSpell filter = new FilterSpell("spell to exile");
-    
+
     public MindbreakTrap(UUID ownerId) {
         super(ownerId, 57, "Mindbreak Trap", Rarity.MYTHIC, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
         this.expansionSetCode = "ZEN";
@@ -172,21 +172,21 @@ class MindbreakEffect extends OneShotEffect<MindbreakEffect>{
     @Override
     public boolean apply(Game game, Ability source) {
         int affectedTargets = 0;
-		if (targetPointer.getTargets(game, source).size() > 0) {
-			for (UUID spellId : targetPointer.getTargets(game, source)) {
-				Spell spell = game.getStack().getSpell(spellId);
-				if (spell != null) {
-					spell.moveToExile(null, null, source.getId(), game);
-					affectedTargets++;
-				}
-			}
-		}
-		return affectedTargets > 0;
+        if (targetPointer.getTargets(game, source).size() > 0) {
+            for (UUID spellId : targetPointer.getTargets(game, source)) {
+                Spell spell = game.getStack().getSpell(spellId);
+                if (spell != null) {
+                    spell.moveToExile(null, null, source.getId(), game);
+                    affectedTargets++;
+                }
+            }
+        }
+        return affectedTargets > 0;
     }
 
     @Override
     public MindbreakEffect copy() {
         return new MindbreakEffect(this);
     }
-    
+
 }

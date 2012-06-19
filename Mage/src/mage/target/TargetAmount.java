@@ -40,69 +40,69 @@ import mage.players.Player;
  */
 public abstract class TargetAmount<T extends TargetAmount<T>> extends TargetImpl<T> {
 
-	int amount;
-	int remainingAmount;
+    int amount;
+    int remainingAmount;
 
-	public TargetAmount(int amount) {
-		this.amount = amount;
-		this.remainingAmount = amount;
-		this.required = true;
-	}
+    public TargetAmount(int amount) {
+        this.amount = amount;
+        this.remainingAmount = amount;
+        this.required = true;
+    }
 
-	public TargetAmount(final TargetAmount target) {
-		super(target);
-		this.amount = target.amount;
-		this.remainingAmount = target.remainingAmount;
-	}
+    public TargetAmount(final TargetAmount target) {
+        super(target);
+        this.amount = target.amount;
+        this.remainingAmount = target.remainingAmount;
+    }
 
-	public int getAmountRemaining() {
-		return remainingAmount;
-	}
+    public int getAmountRemaining() {
+        return remainingAmount;
+    }
 
-	@Override
-	public boolean isChosen() {
-		return doneChosing();
-	}
+    @Override
+    public boolean isChosen() {
+        return doneChosing();
+    }
 
-	@Override
-	public boolean doneChosing() {
-		return remainingAmount == 0;
-	}
+    @Override
+    public boolean doneChosing() {
+        return remainingAmount == 0;
+    }
 
-	@Override
-	public void clearChosen() {
-		super.clearChosen();
-		remainingAmount = amount;
-	}
+    @Override
+    public void clearChosen() {
+        super.clearChosen();
+        remainingAmount = amount;
+    }
 
-	@Override
-	public void addTarget(UUID id, int amount, Ability source, Game game, boolean skipEvent) {
-		if (amount <= remainingAmount) {
-			super.addTarget(id, amount, source, game, skipEvent);
-			remainingAmount -= amount;
-		}
-	}
+    @Override
+    public void addTarget(UUID id, int amount, Ability source, Game game, boolean skipEvent) {
+        if (amount <= remainingAmount) {
+            super.addTarget(id, amount, source, game, skipEvent);
+            remainingAmount -= amount;
+        }
+    }
 
-	@Override
-	public boolean chooseTarget(Outcome outcome, UUID playerId, Ability source, Game game) {
-		Player player = game.getPlayer(playerId);
-		chosen = remainingAmount == 0;
-		while (remainingAmount > 0) {
-			if (!player.chooseTargetAmount(outcome, this, source, game)) {
-				return chosen;
-			}
-			chosen = remainingAmount == 0;
-		}
-		return chosen = true;
-	}
-    
+    @Override
+    public boolean chooseTarget(Outcome outcome, UUID playerId, Ability source, Game game) {
+        Player player = game.getPlayer(playerId);
+        chosen = remainingAmount == 0;
+        while (remainingAmount > 0) {
+            if (!player.chooseTargetAmount(outcome, this, source, game)) {
+                return chosen;
+            }
+            chosen = remainingAmount == 0;
+        }
+        return chosen = true;
+    }
+
     @Override
     public List<T> getTargetOptions(Ability source, Game game) {
         List<T> options = new ArrayList<T>();
         Set<UUID> possibleTargets = possibleTargets(source.getSourceId(), source.getControllerId(), game);
-        
+
         addTargets(this, possibleTargets, options, source, game);
-        
+
         return options;
     }
 

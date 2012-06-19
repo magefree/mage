@@ -46,24 +46,24 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class SejiriSteppe extends CardImpl<SejiriSteppe> {
 
-	public SejiriSteppe(UUID ownerId) {
-		super(ownerId, 142, "Sejiri Steppe", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
-		this.expansionSetCode = "WWK";
-		this.addAbility(new EntersBattlefieldTappedAbility());
-		EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new GainProtectionFromColorTargetEffect(Duration.EndOfTurn), false);
-		ability.addTarget(new TargetControlledCreaturePermanent());
-		ability.addChoice(new ChoiceColor());
-		this.addAbility(ability);
-		this.addAbility(new WhiteManaAbility());
-	}
+    public SejiriSteppe(UUID ownerId) {
+        super(ownerId, 142, "Sejiri Steppe", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
+        this.expansionSetCode = "WWK";
+        this.addAbility(new EntersBattlefieldTappedAbility());
+        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new GainProtectionFromColorTargetEffect(Duration.EndOfTurn), false);
+        ability.addTarget(new TargetControlledCreaturePermanent());
+        ability.addChoice(new ChoiceColor());
+        this.addAbility(ability);
+        this.addAbility(new WhiteManaAbility());
+    }
 
-	public SejiriSteppe(final SejiriSteppe card) {
-		super(card);
-	}
+    public SejiriSteppe(final SejiriSteppe card) {
+        super(card);
+    }
 
-	@Override
-	public SejiriSteppe copy() {
-		return new SejiriSteppe(this);
-	}
+    @Override
+    public SejiriSteppe copy() {
+        return new SejiriSteppe(this);
+    }
 
 }

@@ -63,7 +63,7 @@ public class CurseOfBloodletting extends CardImpl<CurseOfBloodletting> {
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Damage));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
-        
+
         // If a source would deal damage to enchanted player, it deals double that damage to that player instead.
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new CurseOfBloodlettingEffect()));
     }
@@ -80,26 +80,26 @@ public class CurseOfBloodletting extends CardImpl<CurseOfBloodletting> {
 
 class CurseOfBloodlettingEffect extends ReplacementEffectImpl<CurseOfBloodlettingEffect> {
 
-	public CurseOfBloodlettingEffect() {
-		super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Damage);
-		staticText = "If a source would deal damage to enchanted player, it deals double that damage to that player instead";
-	}
+    public CurseOfBloodlettingEffect() {
+        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Damage);
+        staticText = "If a source would deal damage to enchanted player, it deals double that damage to that player instead";
+    }
 
-	public CurseOfBloodlettingEffect(final CurseOfBloodlettingEffect effect) {
-		super(effect);
-	}
+    public CurseOfBloodlettingEffect(final CurseOfBloodlettingEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public CurseOfBloodlettingEffect copy() {
-		return new CurseOfBloodlettingEffect(this);
-	}
+    @Override
+    public CurseOfBloodlettingEffect copy() {
+        return new CurseOfBloodlettingEffect(this);
+    }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		switch (event.getType()) {
-			case DAMAGE_PLAYER:
-				StackObject spell = game.getStack().getStackObject(event.getSourceId());
-				if (spell != null) {
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        switch (event.getType()) {
+            case DAMAGE_PLAYER:
+                StackObject spell = game.getStack().getStackObject(event.getSourceId());
+                if (spell != null) {
                     Permanent enchantment = game.getPermanent(source.getSourceId());
                     if (enchantment != null && enchantment.getAttachedTo() != null) {
                         Player player = game.getPlayer(enchantment.getAttachedTo());
@@ -107,19 +107,19 @@ class CurseOfBloodlettingEffect extends ReplacementEffectImpl<CurseOfBloodlettin
                             event.setAmount(event.getAmount() * 2);
                         }
                     }
-				}
-		}
-		return false;
-	}
+                }
+        }
+        return false;
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		return apply(game, source);
-	}
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        return apply(game, source);
+    }
 
 }

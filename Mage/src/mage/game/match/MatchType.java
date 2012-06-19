@@ -36,59 +36,59 @@ import java.io.Serializable;
  */
 public abstract class MatchType<T extends MatchType<T>> implements Serializable {
 
-	protected String name;
-	protected int minPlayers;
-	protected int maxPlayers;
-	protected int numTeams;
-	protected int playersPerTeam;
-	protected boolean useRange;
-	protected boolean useAttackOption;
+    protected String name;
+    protected int minPlayers;
+    protected int maxPlayers;
+    protected int numTeams;
+    protected int playersPerTeam;
+    protected boolean useRange;
+    protected boolean useAttackOption;
 
-	protected MatchType() {}
-	
-	protected MatchType(final MatchType matchType) {
-		this.name = matchType.name;
-		this.maxPlayers = matchType.maxPlayers;
-		this.minPlayers = matchType.minPlayers;
-		this.numTeams = matchType.numTeams;
-		this.playersPerTeam = matchType.playersPerTeam;
-		this.useRange = matchType.useRange;
-		this.useAttackOption = matchType.useAttackOption;
-	}
+    protected MatchType() {}
 
-	public abstract T copy();
+    protected MatchType(final MatchType matchType) {
+        this.name = matchType.name;
+        this.maxPlayers = matchType.maxPlayers;
+        this.minPlayers = matchType.minPlayers;
+        this.numTeams = matchType.numTeams;
+        this.playersPerTeam = matchType.playersPerTeam;
+        this.useRange = matchType.useRange;
+        this.useAttackOption = matchType.useAttackOption;
+    }
 
-	@Override
-	public String toString() {
-		return name;
-	}
-	
-	public String getName() {
-		return name;
-	}
+    public abstract T copy();
 
-	public int getMinPlayers() {
-		return minPlayers;
-	}
+    @Override
+    public String toString() {
+        return name;
+    }
 
-	public int getMaxPlayers() {
-		return maxPlayers;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public int getNumTeams() {
-		return numTeams;
-	}
+    public int getMinPlayers() {
+        return minPlayers;
+    }
 
-	public int getPlayersPerTeam() {
-		return playersPerTeam;
-	}
+    public int getMaxPlayers() {
+        return maxPlayers;
+    }
 
-	public boolean isUseRange() {
-		return useRange;
-	}
+    public int getNumTeams() {
+        return numTeams;
+    }
 
-	public boolean isUseAttackOption() {
-		return useAttackOption;
-	}
+    public int getPlayersPerTeam() {
+        return playersPerTeam;
+    }
+
+    public boolean isUseRange() {
+        return useRange;
+    }
+
+    public boolean isUseAttackOption() {
+        return useAttackOption;
+    }
 
 }

@@ -64,12 +64,12 @@ public class EvilTwin extends CardImpl<EvilTwin> {
         this.toughness = new MageInt(0);
 
         // You may have Evil Twin enter the battlefield as a copy of any creature on the battlefield except it gains "{U}{B}, {T}: Destroy target creature with the same name as this creature.
-		Ability ability1 = new EntersBattlefieldAbility(new EntersBattlefieldEffect(new CopyPermanentEffect()), "You may have {this} enter the battlefield as a copy of any creature on the battlefield except it gains {U}{B}, {T}: Destroy target creature with the same name as this creature");
+        Ability ability1 = new EntersBattlefieldAbility(new EntersBattlefieldEffect(new CopyPermanentEffect()), "You may have {this} enter the battlefield as a copy of any creature on the battlefield except it gains {U}{B}, {T}: Destroy target creature with the same name as this creature");
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{U}{B}"));
         ability2.addCost(new TapSourceCost());
         ability2.addTarget(new TargetCreaturePermanent(new EvilTwinFilter()));
-		ability1.addEffect(new GainAbilitySourceEffect(ability2));
-		this.addAbility(ability1);
+        ability1.addEffect(new GainAbilitySourceEffect(ability2));
+        this.addAbility(ability1);
     }
 
     public EvilTwin(final EvilTwin card) {
@@ -83,23 +83,23 @@ public class EvilTwin extends CardImpl<EvilTwin> {
 }
 
 class EvilTwinFilter extends FilterCreaturePermanent<EvilTwinFilter> {
-  
+
     public EvilTwinFilter() {
         super("creature with the same name as this creature");
     }
-    
+
     @Override
-	public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
-		if (!super.match(permanent, game))
-			return notFilter;
-        
-		Permanent twin = game.getPermanent(sourceId);
-		if (twin != null) {
+    public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
+        if (!super.match(permanent, game))
+            return notFilter;
+
+        Permanent twin = game.getPermanent(sourceId);
+        if (twin != null) {
             if (!permanent.getName().equals(twin.getName()))
                 return false;
         }
-        
+
         return !notFilter;
     }
-    
+
 }

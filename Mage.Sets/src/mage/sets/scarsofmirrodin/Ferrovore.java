@@ -60,8 +60,8 @@ public class Ferrovore extends CardImpl<Ferrovore> {
         super(ownerId, 88, "Ferrovore", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Beast");
-        
-		this.color.setRed(true);
+
+        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(3, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}"));

@@ -45,7 +45,7 @@ public class JagwaspSwarm extends CardImpl<JagwaspSwarm> {
         super(ownerId, 58, "Jagwasp Swarm", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.expansionSetCode = "WWK";
         this.subtype.add("Insect");
-		this.color.setBlack(true);        
+        this.color.setBlack(true);        
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());

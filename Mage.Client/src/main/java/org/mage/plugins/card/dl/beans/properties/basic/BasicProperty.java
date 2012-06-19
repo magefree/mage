@@ -18,19 +18,19 @@ import org.mage.plugins.card.dl.beans.properties.AbstractProperty;
  */
 public class BasicProperty<T> extends AbstractProperty<T> {
     private T value;
-    
+
     public BasicProperty() {
         this(null);
     }
-    
+
     public BasicProperty(T initialValue) {
         value = initialValue;
     }
-    
+
     public void setValue(T value) {
         this.value = value;
     }
-    
+
     public T getValue() {
         return value;
     }

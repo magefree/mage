@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class CudgelTroll extends mage.sets.magic2010.CudgelTroll {
 
-	public CudgelTroll(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 167;
-		this.expansionSetCode = "M11";
-	}
+    public CudgelTroll(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 167;
+        this.expansionSetCode = "M11";
+    }
 
-	public CudgelTroll(final CudgelTroll card) {
-		super(card);
-	}
+    public CudgelTroll(final CudgelTroll card) {
+        super(card);
+    }
 
-	@Override
-	public CudgelTroll copy() {
-		return new CudgelTroll(this);
-	}
+    @Override
+    public CudgelTroll copy() {
+        return new CudgelTroll(this);
+    }
 
 }

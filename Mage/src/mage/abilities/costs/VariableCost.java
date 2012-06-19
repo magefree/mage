@@ -36,7 +36,7 @@ import mage.filter.FilterMana;
  */
 public interface VariableCost {
 
-	public int getAmount();
+    public int getAmount();
     public void setAmount(int amount);
-	public void setFilter(FilterMana filter);
+    public void setFilter(FilterMana filter);
 }

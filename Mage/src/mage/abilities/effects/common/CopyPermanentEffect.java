@@ -45,13 +45,13 @@ import mage.util.functions.ApplyToPermanent;
  * @author BetaSteward_at_googlemail.com
  */
 public class CopyPermanentEffect extends OneShotEffect<CopyPermanentEffect> {
-    
+
     private FilterPermanent filter;
-    
+
      public CopyPermanentEffect() {
          this(new FilterCreaturePermanent());
      }
-    
+
     public CopyPermanentEffect(FilterPermanent filter) {
         super(Outcome.Copy);
         this.filter = filter;
@@ -62,7 +62,7 @@ public class CopyPermanentEffect extends OneShotEffect<CopyPermanentEffect> {
         super(effect);
         this.filter = effect.filter.copy();
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
@@ -94,5 +94,5 @@ public class CopyPermanentEffect extends OneShotEffect<CopyPermanentEffect> {
     public CopyPermanentEffect copy() {
         return new CopyPermanentEffect(this);
     }
-    
+
 }

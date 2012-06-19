@@ -105,7 +105,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
             secondSideCard = card.secondSideCard;
             nightCard = card.nightCard;
         }
-        
+
         if (card.info != null) {
             info = new HashMap<String, String>();
             info.putAll(card.info);
@@ -204,7 +204,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
     public List<Watcher> getWatchers() {
         return watchers;
     }
-    
+
     @Override
     public String getExpansionSetCode() {
         return expansionSetCode;

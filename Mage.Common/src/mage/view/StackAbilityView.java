@@ -39,28 +39,28 @@ import mage.game.stack.StackAbility;
 public class StackAbilityView extends CardView {
     private static final long serialVersionUID = 1L;
 
-	private String sourceName;
-	private CardView sourceCard;
+    private String sourceName;
+    private CardView sourceCard;
 
-	public StackAbilityView(StackAbility ability, String sourceName, CardView sourceCard) {
-		this.id = ability.getId();
-		this.name = "Ability";
-		this.sourceName = sourceName;
-		this.sourceCard = sourceCard;
-		this.rules = new ArrayList<String>();
-		rules.add(ability.getRule(sourceName));
-		this.power = ability.getPower().toString();
-		this.toughness = ability.getToughness().toString();
-		this.loyalty = "";
-		this.cardTypes = ability.getCardType();
-		this.subTypes = ability.getSubtype();
-		this.superTypes = ability.getSupertype();
-		this.color = ability.getColor();
-		this.manaCost = ability.getManaCost().getSymbols();
-		setTargets(ability.getTargets());
-	}
+    public StackAbilityView(StackAbility ability, String sourceName, CardView sourceCard) {
+        this.id = ability.getId();
+        this.name = "Ability";
+        this.sourceName = sourceName;
+        this.sourceCard = sourceCard;
+        this.rules = new ArrayList<String>();
+        rules.add(ability.getRule(sourceName));
+        this.power = ability.getPower().toString();
+        this.toughness = ability.getToughness().toString();
+        this.loyalty = "";
+        this.cardTypes = ability.getCardType();
+        this.subTypes = ability.getSubtype();
+        this.superTypes = ability.getSupertype();
+        this.color = ability.getColor();
+        this.manaCost = ability.getManaCost().getSymbols();
+        setTargets(ability.getTargets());
+    }
 
-	public CardView getSourceCard() {
-		return this.sourceCard;
-	}
+    public CardView getSourceCard() {
+        return this.sourceCard;
+    }
 }

@@ -28,7 +28,7 @@ public class ControlPermanentCost extends CostImpl<ControlPermanentCost> {
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
         this.paid = true;
-		return paid;
+        return paid;
     }
 
     @Override

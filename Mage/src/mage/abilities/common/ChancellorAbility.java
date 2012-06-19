@@ -44,7 +44,7 @@ public class ChancellorAbility extends StaticAbility<ChancellorAbility> {
     public ChancellorAbility(DelayedTriggeredAbility ability, String text) {
         super(Zone.HAND, new ChancellorEffect(ability, text));
     }
-    
+
     public ChancellorAbility(OneShotEffect effect) {
         super(Zone.HAND, effect);
     }
@@ -52,45 +52,45 @@ public class ChancellorAbility extends StaticAbility<ChancellorAbility> {
     public ChancellorAbility(final ChancellorAbility ability) {
         super(ability);
     }
-    
+
     @Override
     public ChancellorAbility copy() {
         return new ChancellorAbility(this);
     }
-    
-   	@Override
-	public String getRule() {
-		return "You may reveal this card from your opening hand. If you do, " + super.getRule();
-	}
-    
+
+       @Override
+    public String getRule() {
+        return "You may reveal this card from your opening hand. If you do, " + super.getRule();
+    }
+
 }
 
 class ChancellorEffect extends OneShotEffect<ChancellorEffect> {
 
     private DelayedTriggeredAbility ability;
-    
-	ChancellorEffect (DelayedTriggeredAbility ability, String text) {
-		super(Outcome.Benefit);
+
+    ChancellorEffect (DelayedTriggeredAbility ability, String text) {
+        super(Outcome.Benefit);
         this.ability = ability;
-		staticText = text;
-	}
+        staticText = text;
+    }
 
-	ChancellorEffect(ChancellorEffect effect) {
-		super(effect);
+    ChancellorEffect(ChancellorEffect effect) {
+        super(effect);
         this.ability = effect.ability;
-	}
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
         ability.setSourceId(source.getSourceId());
         ability.setControllerId(source.getControllerId());
         game.addDelayedTriggeredAbility(ability);
         return true;
-	}
+    }
 
-	@Override
-	public ChancellorEffect copy() {
-		return new ChancellorEffect(this);
-	}
+    @Override
+    public ChancellorEffect copy() {
+        return new ChancellorEffect(this);
+    }
 
 }

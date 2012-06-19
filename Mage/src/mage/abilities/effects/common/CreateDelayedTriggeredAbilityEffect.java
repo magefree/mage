@@ -40,36 +40,36 @@ import mage.game.Game;
  */
 public class CreateDelayedTriggeredAbilityEffect extends OneShotEffect<CreateDelayedTriggeredAbilityEffect> {
 
-	protected DelayedTriggeredAbility ability;
+    protected DelayedTriggeredAbility ability;
 
-	public CreateDelayedTriggeredAbilityEffect(DelayedTriggeredAbility ability) {
-		super(ability.getEffects().get(0).getOutcome());
-		this.ability = ability;
-	}
+    public CreateDelayedTriggeredAbilityEffect(DelayedTriggeredAbility ability) {
+        super(ability.getEffects().get(0).getOutcome());
+        this.ability = ability;
+    }
 
-	public CreateDelayedTriggeredAbilityEffect(final CreateDelayedTriggeredAbilityEffect effect) {
-		super(effect);
-		this.ability = effect.ability.copy();
-	}
+    public CreateDelayedTriggeredAbilityEffect(final CreateDelayedTriggeredAbilityEffect effect) {
+        super(effect);
+        this.ability = effect.ability.copy();
+    }
 
-	@Override
-	public CreateDelayedTriggeredAbilityEffect copy() {
-		return new CreateDelayedTriggeredAbilityEffect(this);
-	}
+    @Override
+    public CreateDelayedTriggeredAbilityEffect copy() {
+        return new CreateDelayedTriggeredAbilityEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		DelayedTriggeredAbility delayedAbility = (DelayedTriggeredAbility) ability.copy();
-		delayedAbility.setSourceId(source.getSourceId());
-		delayedAbility.setControllerId(source.getControllerId());
-		delayedAbility.getTargets().addAll(source.getTargets());
-		game.addDelayedTriggeredAbility(delayedAbility);
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        DelayedTriggeredAbility delayedAbility = (DelayedTriggeredAbility) ability.copy();
+        delayedAbility.setSourceId(source.getSourceId());
+        delayedAbility.setControllerId(source.getControllerId());
+        delayedAbility.getTargets().addAll(source.getTargets());
+        game.addDelayedTriggeredAbility(delayedAbility);
+        return true;
+    }
 
-	@Override
-	public String getText(Mode mode) {
-		return ability.getRule();
-	}
+    @Override
+    public String getText(Mode mode) {
+        return ability.getRule();
+    }
 
 }

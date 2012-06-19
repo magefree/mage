@@ -41,20 +41,20 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Excommunicate extends CardImpl<Excommunicate> {
 
-	public Excommunicate(UUID ownerId) {
-		super(ownerId, 11, "Excommunicate", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");
-		this.expansionSetCode = "ALA";
-		this.color.setWhite(true);
-		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-		this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
-	}
+    public Excommunicate(UUID ownerId) {
+        super(ownerId, 11, "Excommunicate", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");
+        this.expansionSetCode = "ALA";
+        this.color.setWhite(true);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
+    }
 
-	public Excommunicate(final Excommunicate card) {
-		super(card);
-	}
+    public Excommunicate(final Excommunicate card) {
+        super(card);
+    }
 
-	@Override
-	public Excommunicate copy() {
-		return new Excommunicate(this);
-	}
+    @Override
+    public Excommunicate copy() {
+        return new Excommunicate(this);
+    }
 }

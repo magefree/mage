@@ -52,54 +52,54 @@ import mage.game.permanent.Permanent;
  */
 public class OranRiefTheVastwood extends CardImpl<OranRiefTheVastwood> {
 
-	public OranRiefTheVastwood(UUID ownerId) {
-		super(ownerId, 221, "Oran-Rief, the Vastwood", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-		this.expansionSetCode = "ZEN";
-		this.addAbility(new EntersBattlefieldTappedAbility());
-		this.addAbility(new GreenManaAbility());
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new OranRiefTheVastwoodEffect(), new TapSourceCost()));
-	}
+    public OranRiefTheVastwood(UUID ownerId) {
+        super(ownerId, 221, "Oran-Rief, the Vastwood", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+        this.expansionSetCode = "ZEN";
+        this.addAbility(new EntersBattlefieldTappedAbility());
+        this.addAbility(new GreenManaAbility());
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new OranRiefTheVastwoodEffect(), new TapSourceCost()));
+    }
 
-	public OranRiefTheVastwood(final OranRiefTheVastwood card) {
-		super(card);
-	}
+    public OranRiefTheVastwood(final OranRiefTheVastwood card) {
+        super(card);
+    }
 
-	@Override
-	public OranRiefTheVastwood copy() {
-		return new OranRiefTheVastwood(this);
-	}
+    @Override
+    public OranRiefTheVastwood copy() {
+        return new OranRiefTheVastwood(this);
+    }
 
 }
 
 class OranRiefTheVastwoodEffect extends OneShotEffect<OranRiefTheVastwoodEffect> {
 
-	public OranRiefTheVastwoodEffect() {
-		super(Outcome.BoostCreature);
-		staticText = "Put a +1/+1 counter on each green creature that entered the battlefield this turn";
-	}
+    public OranRiefTheVastwoodEffect() {
+        super(Outcome.BoostCreature);
+        staticText = "Put a +1/+1 counter on each green creature that entered the battlefield this turn";
+    }
 
-	public OranRiefTheVastwoodEffect(final OranRiefTheVastwoodEffect effect) {
-		super(effect);
-	}
+    public OranRiefTheVastwoodEffect(final OranRiefTheVastwoodEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public OranRiefTheVastwoodEffect copy() {
-		return new OranRiefTheVastwoodEffect(this);
-	}
+    @Override
+    public OranRiefTheVastwoodEffect copy() {
+        return new OranRiefTheVastwoodEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		FilterPermanent filter = new FilterPermanent();
-		filter.getCardType().add(CardType.CREATURE);
-		filter.getColor().setGreen(true);
+    @Override
+    public boolean apply(Game game, Ability source) {
+        FilterPermanent filter = new FilterPermanent();
+        filter.getCardType().add(CardType.CREATURE);
+        filter.getColor().setGreen(true);
         filter.setScopeColor(Filter.ComparisonScope.Any);
-		filter.setUseColor(true);
-		for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
-			if (permanent.getTurnsOnBattlefield() == 0) {
-				permanent.addCounters(CounterType.P1P1.createInstance(), game);
-			}
-		}
-		return true;
-	}
+        filter.setUseColor(true);
+        for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
+            if (permanent.getTurnsOnBattlefield() == 0) {
+                permanent.addCounters(CounterType.P1P1.createInstance(), game);
+            }
+        }
+        return true;
+    }
 
 }

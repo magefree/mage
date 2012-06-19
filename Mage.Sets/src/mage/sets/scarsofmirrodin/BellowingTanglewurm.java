@@ -59,7 +59,7 @@ public class BellowingTanglewurm extends CardImpl<BellowingTanglewurm> {
         super(ownerId, 111, "Bellowing Tanglewurm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Wurm");
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         this.addAbility(IntimidateAbility.getInstance());

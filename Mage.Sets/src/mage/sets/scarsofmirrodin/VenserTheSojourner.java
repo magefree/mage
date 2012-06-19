@@ -66,75 +66,75 @@ import java.util.UUID;
  */
 public class VenserTheSojourner extends CardImpl<VenserTheSojourner> {
 
-	public VenserTheSojourner(UUID ownerId) {
-		super(ownerId, 135, "Venser, the Sojourner", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{U}");
-		this.expansionSetCode = "SOM";
-		this.subtype.add("Venser");
-		this.color.setWhite(true);
-		this.color.setBlue(true);
-		this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), null));
+    public VenserTheSojourner(UUID ownerId) {
+        super(ownerId, 135, "Venser, the Sojourner", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{U}");
+        this.expansionSetCode = "SOM";
+        this.subtype.add("Venser");
+        this.color.setWhite(true);
+        this.color.setBlue(true);
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), null));
 
-		// +2: Exile target permanent you own. Return it to the battlefield under your control at the beginning of the next end step.
-		LoyaltyAbility ability1 = new LoyaltyAbility(new VenserTheSojournerEffect(), 2);
-		ability1.addTarget(new TargetControlledPermanent());
-		this.addAbility(ability1);
+        // +2: Exile target permanent you own. Return it to the battlefield under your control at the beginning of the next end step.
+        LoyaltyAbility ability1 = new LoyaltyAbility(new VenserTheSojournerEffect(), 2);
+        ability1.addTarget(new TargetControlledPermanent());
+        this.addAbility(ability1);
 
-		//TODO: Venser's second ability doesn't lock in what it applies to. That's because the effect states a true thing about creatures,
-		// but doesn't actually change the characteristics of those creatures. As a result, all creatures are unblockable that turn, including creatures you don't control, creatures that weren't on the battlefield at the time the ability resolved, and creatures that have lost all abilities.
-		// -1: Creatures are unblockable this turn.
-		this.addAbility(new LoyaltyAbility(new GainAbilityAllEffect(UnblockableAbility.getInstance(), Constants.Duration.EndOfTurn, new FilterCreaturePermanent()), -1));
+        //TODO: Venser's second ability doesn't lock in what it applies to. That's because the effect states a true thing about creatures,
+        // but doesn't actually change the characteristics of those creatures. As a result, all creatures are unblockable that turn, including creatures you don't control, creatures that weren't on the battlefield at the time the ability resolved, and creatures that have lost all abilities.
+        // -1: Creatures are unblockable this turn.
+        this.addAbility(new LoyaltyAbility(new GainAbilityAllEffect(UnblockableAbility.getInstance(), Constants.Duration.EndOfTurn, new FilterCreaturePermanent()), -1));
 
-		// -8: You get an emblem with "Whenever you cast a spell, exile target permanent."
-		LoyaltyAbility ability2 = new LoyaltyAbility(new GetEmblemEffect(new VenserTheSojournerEmblem()), -8);
-		this.addAbility(ability2);
-	}
+        // -8: You get an emblem with "Whenever you cast a spell, exile target permanent."
+        LoyaltyAbility ability2 = new LoyaltyAbility(new GetEmblemEffect(new VenserTheSojournerEmblem()), -8);
+        this.addAbility(ability2);
+    }
 
-	public VenserTheSojourner(final VenserTheSojourner card) {
-		super(card);
-	}
+    public VenserTheSojourner(final VenserTheSojourner card) {
+        super(card);
+    }
 
-	@Override
-	public VenserTheSojourner copy() {
-		return new VenserTheSojourner(this);
-	}
+    @Override
+    public VenserTheSojourner copy() {
+        return new VenserTheSojourner(this);
+    }
 
 }
 
 class VenserTheSojournerEffect extends OneShotEffect<VenserTheSojournerEffect> {
 
-	private static final String effectText = "Exile target permanent you own. Return it to the battlefield under your control at the beginning of the next end step";
+    private static final String effectText = "Exile target permanent you own. Return it to the battlefield under your control at the beginning of the next end step";
 
-	VenserTheSojournerEffect() {
-		super(Constants.Outcome.Benefit);
-		staticText = effectText;
-	}
+    VenserTheSojournerEffect() {
+        super(Constants.Outcome.Benefit);
+        staticText = effectText;
+    }
 
-	VenserTheSojournerEffect(VenserTheSojournerEffect effect) {
-		super(effect);
-	}
+    VenserTheSojournerEffect(VenserTheSojournerEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		if (getTargetPointer().getFirst(game, source) != null) {
-			Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-			if (permanent != null) {
-				if (permanent.moveToExile(source.getSourceId(), "Venser, the Sojourner", source.getSourceId(), game)) {
-					//create delayed triggered ability
-					AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
-					delayedAbility.setSourceId(source.getSourceId());
-					delayedAbility.setControllerId(source.getControllerId());
-					game.addDelayedTriggeredAbility(delayedAbility);
-					return true;
-				}
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        if (getTargetPointer().getFirst(game, source) != null) {
+            Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+            if (permanent != null) {
+                if (permanent.moveToExile(source.getSourceId(), "Venser, the Sojourner", source.getSourceId(), game)) {
+                    //create delayed triggered ability
+                    AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
+                    delayedAbility.setSourceId(source.getSourceId());
+                    delayedAbility.setControllerId(source.getControllerId());
+                    game.addDelayedTriggeredAbility(delayedAbility);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public VenserTheSojournerEffect copy() {
-		return new VenserTheSojournerEffect(this);
-	}
+    @Override
+    public VenserTheSojournerEffect copy() {
+        return new VenserTheSojournerEffect(this);
+    }
 
 }
 
@@ -143,13 +143,13 @@ class VenserTheSojournerEffect extends OneShotEffect<VenserTheSojournerEffect> {
  */
 class VenserTheSojournerEmblem extends Emblem {
 
-	public VenserTheSojournerEmblem() {
-		Ability ability = new VenserTheSojournerSpellCastTriggeredAbility(new ExileTargetEffect(), false);
-		Target target = new TargetPermanent();
-		target.setRequired(true);
-		ability.addTarget(target);
-		this.getAbilities().add(ability);
-	}
+    public VenserTheSojournerEmblem() {
+        Ability ability = new VenserTheSojournerSpellCastTriggeredAbility(new ExileTargetEffect(), false);
+        Target target = new TargetPermanent();
+        target.setRequired(true);
+        ability.addTarget(target);
+        this.getAbilities().add(ability);
+    }
 }
 
 class VenserTheSojournerSpellCastTriggeredAbility extends TriggeredAbilityImpl<VenserTheSojournerSpellCastTriggeredAbility> {

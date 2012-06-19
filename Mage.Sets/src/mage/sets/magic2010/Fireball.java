@@ -47,71 +47,71 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class Fireball extends CardImpl<Fireball> {
 
-	public Fireball(UUID ownerId) {
-		super(ownerId, 136, "Fireball", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{R}");
-		this.expansionSetCode = "M10";
-		this.color.setRed(true);
-		this.getSpellAbility().addTarget(new TargetCreatureOrPlayer(0, Integer.MAX_VALUE));
-		this.getSpellAbility().addEffect(new FireballEffect());
-	}
+    public Fireball(UUID ownerId) {
+        super(ownerId, 136, "Fireball", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{R}");
+        this.expansionSetCode = "M10";
+        this.color.setRed(true);
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer(0, Integer.MAX_VALUE));
+        this.getSpellAbility().addEffect(new FireballEffect());
+    }
 
-	@Override
-	public void adjustCosts(Ability ability, Game game) {
-		int numTargets = ability.getTargets().get(0).getTargets().size();
-		if (numTargets > 1) {
-			ability.getManaCostsToPay().add(new GenericManaCost(numTargets - 1));
-		}
-	}
+    @Override
+    public void adjustCosts(Ability ability, Game game) {
+        int numTargets = ability.getTargets().get(0).getTargets().size();
+        if (numTargets > 1) {
+            ability.getManaCostsToPay().add(new GenericManaCost(numTargets - 1));
+        }
+    }
 
-	public Fireball(final Fireball card) {
-		super(card);
-	}
+    public Fireball(final Fireball card) {
+        super(card);
+    }
 
-	@Override
-	public Fireball copy() {
-		return new Fireball(this);
-	}
+    @Override
+    public Fireball copy() {
+        return new Fireball(this);
+    }
 }
 
 class FireballEffect extends OneShotEffect<FireballEffect> {
 
-	public FireballEffect() {
-		super(Outcome.Damage);
-		staticText = "{this} deals X damage divided evenly, rounded down, among any number of target creatures and/or players.\n {this} costs {1} more to cast for each target beyond the first";
-	}
+    public FireballEffect() {
+        super(Outcome.Damage);
+        staticText = "{this} deals X damage divided evenly, rounded down, among any number of target creatures and/or players.\n {this} costs {1} more to cast for each target beyond the first";
+    }
 
-	public FireballEffect(final FireballEffect effect) {
-		super(effect);
-	}
+    public FireballEffect(final FireballEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		int numTargets = targetPointer.getTargets(game, source).size();
-		int damage = source.getManaCostsToPay().getX();
-		if (numTargets > 0) {
-			int damagePer = damage/numTargets;
-			if (damagePer > 0) {
-				for (UUID targetId: targetPointer.getTargets(game, source)) {
-					Permanent permanent = game.getPermanent(targetId);
-					if (permanent != null) {
-						permanent.damage(damagePer, source.getSourceId(), game, true, false);
-					}
-					else {
-						Player player = game.getPlayer(targetId);
-						if (player != null) {
-							player.damage(damagePer, source.getSourceId(), game, false, true);
-						}
-					}
-				}
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        int numTargets = targetPointer.getTargets(game, source).size();
+        int damage = source.getManaCostsToPay().getX();
+        if (numTargets > 0) {
+            int damagePer = damage/numTargets;
+            if (damagePer > 0) {
+                for (UUID targetId: targetPointer.getTargets(game, source)) {
+                    Permanent permanent = game.getPermanent(targetId);
+                    if (permanent != null) {
+                        permanent.damage(damagePer, source.getSourceId(), game, true, false);
+                    }
+                    else {
+                        Player player = game.getPlayer(targetId);
+                        if (player != null) {
+                            player.damage(damagePer, source.getSourceId(), game, false, true);
+                        }
+                    }
+                }
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public FireballEffect copy() {
-		return new FireballEffect(this);
-	}
+    @Override
+    public FireballEffect copy() {
+        return new FireballEffect(this);
+    }
 
 }

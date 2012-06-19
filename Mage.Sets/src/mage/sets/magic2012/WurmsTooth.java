@@ -40,8 +40,8 @@ public class WurmsTooth extends mage.sets.tenth.WurmsTooth {
         super(ownerId);
         this.cardNumber = 223;
         this.expansionSetCode = "M12";
-        
-        
+
+
     }
 
     public WurmsTooth(final WurmsTooth card) {

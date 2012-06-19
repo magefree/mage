@@ -45,7 +45,7 @@ public class ScourgeServant extends CardImpl<ScourgeServant> {
         super(ownerId, 54, "Scourge Servant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");
         this.expansionSetCode = "MBS";
         this.subtype.add("Zombie");
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(InfectAbility.getInstance());

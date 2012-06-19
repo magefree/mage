@@ -40,117 +40,117 @@ import mage.Constants.TurnPhase;
  */
 public class TurnMod implements Serializable {
 
-	private UUID playerId;
-	private UUID newControllerId;
-	private boolean extraTurn;
-	private boolean skipTurn;
-	private TurnPhase extraPhase;
-	private TurnPhase skipPhase;
-	private Step extraStep;
-	private PhaseStep skipStep;
-	private TurnPhase afterPhase;
-	private PhaseStep afterStep;
+    private UUID playerId;
+    private UUID newControllerId;
+    private boolean extraTurn;
+    private boolean skipTurn;
+    private TurnPhase extraPhase;
+    private TurnPhase skipPhase;
+    private Step extraStep;
+    private PhaseStep skipStep;
+    private TurnPhase afterPhase;
+    private PhaseStep afterStep;
 
-	public TurnMod(UUID playerId, boolean skip) {
-		this.playerId = playerId;
-		if (skip)
-			this.skipTurn = true;
-		else
-			this.extraTurn = true;
-	}
+    public TurnMod(UUID playerId, boolean skip) {
+        this.playerId = playerId;
+        if (skip)
+            this.skipTurn = true;
+        else
+            this.extraTurn = true;
+    }
 
-	public TurnMod(UUID playerId, UUID newControllerId) {
-		this.playerId = playerId;
-		this.newControllerId = newControllerId;
-	}
+    public TurnMod(UUID playerId, UUID newControllerId) {
+        this.playerId = playerId;
+        this.newControllerId = newControllerId;
+    }
 
-	public TurnMod(final TurnMod mod) {
-		this.playerId = mod.playerId;
-		this.newControllerId = mod.newControllerId;
-		this.extraTurn = mod.extraTurn;
-		this.skipTurn = mod.skipTurn;
-		this.extraPhase = mod.extraPhase;
-		this.skipPhase = mod.skipPhase;
-		if (mod.extraStep != null)
-			this.extraStep = mod.extraStep.copy();
-		this.skipStep = mod.skipStep;
-		this.afterPhase = mod.afterPhase;
-		this.afterStep = mod.afterStep;
-	}
+    public TurnMod(final TurnMod mod) {
+        this.playerId = mod.playerId;
+        this.newControllerId = mod.newControllerId;
+        this.extraTurn = mod.extraTurn;
+        this.skipTurn = mod.skipTurn;
+        this.extraPhase = mod.extraPhase;
+        this.skipPhase = mod.skipPhase;
+        if (mod.extraStep != null)
+            this.extraStep = mod.extraStep.copy();
+        this.skipStep = mod.skipStep;
+        this.afterPhase = mod.afterPhase;
+        this.afterStep = mod.afterStep;
+    }
 
-	/**
-	 *
-	 * @param playerId
-	 * @param phase
-	 * @param afterPhase - set to null if extraPhase is after the next phase
-	 */
-	public TurnMod(UUID playerId, TurnPhase phase, TurnPhase afterPhase, boolean skip) {
-		this.playerId = playerId;
-		if (skip)
-			this.skipPhase = phase;
-		else
-			this.extraPhase = phase;
-		this.afterPhase = afterPhase;
-	}
+    /**
+     *
+     * @param playerId
+     * @param phase
+     * @param afterPhase - set to null if extraPhase is after the next phase
+     */
+    public TurnMod(UUID playerId, TurnPhase phase, TurnPhase afterPhase, boolean skip) {
+        this.playerId = playerId;
+        if (skip)
+            this.skipPhase = phase;
+        else
+            this.extraPhase = phase;
+        this.afterPhase = afterPhase;
+    }
 
-	/**
-	 *
-	 * @param playerId
-	 * @param step
-	 * @param afterStep - set to null if extraStep is after the next step
-	 */
-	public TurnMod(UUID playerId, Step step, PhaseStep afterStep) {
-		this.playerId = playerId;
-		this.extraStep = step;
-		this.afterStep = afterStep;
-	}
+    /**
+     *
+     * @param playerId
+     * @param step
+     * @param afterStep - set to null if extraStep is after the next step
+     */
+    public TurnMod(UUID playerId, Step step, PhaseStep afterStep) {
+        this.playerId = playerId;
+        this.extraStep = step;
+        this.afterStep = afterStep;
+    }
 
-	public TurnMod(UUID playerId, PhaseStep step) {
-		this.playerId = playerId;
-		this.skipStep = step;
-	}	
+    public TurnMod(UUID playerId, PhaseStep step) {
+        this.playerId = playerId;
+        this.skipStep = step;
+    }    
 
-	public UUID getPlayerId() {
-		return playerId;
-	}
+    public UUID getPlayerId() {
+        return playerId;
+    }
 
-	public boolean isExtraTurn() {
-		return extraTurn;
-	}
+    public boolean isExtraTurn() {
+        return extraTurn;
+    }
 
-	public boolean isSkipTurn() {
-		return skipTurn;
-	}
+    public boolean isSkipTurn() {
+        return skipTurn;
+    }
 
-	public TurnPhase getExtraPhase() {
-		return extraPhase;
-	}
+    public TurnPhase getExtraPhase() {
+        return extraPhase;
+    }
 
-	public Step getExtraStep() {
-		return extraStep;
-	}
+    public Step getExtraStep() {
+        return extraStep;
+    }
 
-	public TurnPhase getSkipPhase() {
-		return skipPhase;
-	}
+    public TurnPhase getSkipPhase() {
+        return skipPhase;
+    }
 
-	public PhaseStep getSkipStep() {
-		return skipStep;
-	}
+    public PhaseStep getSkipStep() {
+        return skipStep;
+    }
 
-	public TurnPhase getAfterPhase() {
-		return afterPhase;
-	}
+    public TurnPhase getAfterPhase() {
+        return afterPhase;
+    }
 
-	public PhaseStep getAfterStep() {
-		return afterStep;
-	}
+    public PhaseStep getAfterStep() {
+        return afterStep;
+    }
 
-	public UUID getNewControllerId() {
-		return newControllerId;
-	}
+    public UUID getNewControllerId() {
+        return newControllerId;
+    }
 
-	public TurnMod copy() {
-		return new TurnMod(this);
-	}
+    public TurnMod copy() {
+        return new TurnMod(this);
+    }
 }

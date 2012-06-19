@@ -46,8 +46,8 @@ public class BullCerodon extends CardImpl<BullCerodon> {
         super(ownerId, 161, "Bull Cerodon", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}{W}");
         this.expansionSetCode = "ALA";
         this.subtype.add("Beast");
-		this.color.setRed(true);
-		this.color.setWhite(true);
+        this.color.setRed(true);
+        this.color.setWhite(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
         this.addAbility(VigilanceAbility.getInstance());

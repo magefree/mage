@@ -41,27 +41,27 @@ import mage.game.draft.Draft;
 public class DraftView implements Serializable {
     private static final long serialVersionUID = 1L;
 
-	private List<String> sets = new ArrayList<String>();
-	private int boosterNum;
-	private int cardNum;
+    private List<String> sets = new ArrayList<String>();
+    private int boosterNum;
+    private int cardNum;
 
-	public DraftView(Draft draft) {
-		for (ExpansionSet set: draft.getSets()) {
-			sets.add(set.getName());
-		}
-		this.boosterNum = draft.getBoosterNum();
-		this.cardNum = draft.getCardNum();
-	}
+    public DraftView(Draft draft) {
+        for (ExpansionSet set: draft.getSets()) {
+            sets.add(set.getName());
+        }
+        this.boosterNum = draft.getBoosterNum();
+        this.cardNum = draft.getCardNum();
+    }
 
-	public List<String> getSets() {
-		return sets;
-	}
+    public List<String> getSets() {
+        return sets;
+    }
 
-	public int getBoosterNum() {
-		return boosterNum;
-	}
+    public int getBoosterNum() {
+        return boosterNum;
+    }
 
-	public int getCardNum() {
-		return cardNum;
-	}
+    public int getCardNum() {
+        return cardNum;
+    }
 }

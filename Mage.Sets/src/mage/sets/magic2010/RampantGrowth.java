@@ -42,20 +42,20 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class RampantGrowth extends CardImpl<RampantGrowth> {
 
-	public RampantGrowth(UUID ownerId){
-		super(ownerId, 201, "Rampant Growth", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
-		this.expansionSetCode = "M10";
-		this.color.setGreen(true);
-		TargetCardInLibrary target = new TargetCardInLibrary(new FilterBasicLandCard());
-		this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(target, true));
-	}
+    public RampantGrowth(UUID ownerId){
+        super(ownerId, 201, "Rampant Growth", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
+        this.expansionSetCode = "M10";
+        this.color.setGreen(true);
+        TargetCardInLibrary target = new TargetCardInLibrary(new FilterBasicLandCard());
+        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(target, true));
+    }
 
-	public RampantGrowth(final RampantGrowth card) {
-		super(card);
-	}
+    public RampantGrowth(final RampantGrowth card) {
+        super(card);
+    }
 
-	@Override
-	public RampantGrowth copy() {
-		return new RampantGrowth(this);
-	}
+    @Override
+    public RampantGrowth copy() {
+        return new RampantGrowth(this);
+    }
 }

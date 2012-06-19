@@ -59,7 +59,7 @@ public class HazeFrog extends CardImpl<HazeFrog> {
 
         // Flash
         this.addAbility(FlashAbility.getInstance());
-        
+
         // When Haze Frog enters the battlefield, prevent all combat damage that other creatures would deal this turn.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new HazeFrogEffect()));
     }

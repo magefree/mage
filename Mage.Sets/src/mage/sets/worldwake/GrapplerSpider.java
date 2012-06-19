@@ -45,7 +45,7 @@ public class GrapplerSpider extends CardImpl<GrapplerSpider> {
         super(ownerId, 102, "Grappler Spider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.expansionSetCode = "WWK";
         this.subtype.add("Spider");
-		this.color.setGreen(true);        
+        this.color.setGreen(true);        
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         this.addAbility(ReachAbility.getInstance());

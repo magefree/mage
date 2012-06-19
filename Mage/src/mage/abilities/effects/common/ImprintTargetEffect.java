@@ -42,21 +42,21 @@ import mage.game.permanent.Permanent;
  */
 public class ImprintTargetEffect extends OneShotEffect<ImprintTargetEffect> {
 
-	public ImprintTargetEffect() {
-		super(Outcome.Neutral);
-	}
+    public ImprintTargetEffect() {
+        super(Outcome.Neutral);
+    }
 
-	public ImprintTargetEffect(final ImprintTargetEffect effect) {
-		super(effect);
-	}
+    public ImprintTargetEffect(final ImprintTargetEffect effect) {
+        super(effect);
+    }
 
     @Override
-	public ImprintTargetEffect copy() {
-		return new ImprintTargetEffect(this);
-	}
+    public ImprintTargetEffect copy() {
+        return new ImprintTargetEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (sourcePermanent != null) {
             Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
@@ -71,7 +71,7 @@ public class ImprintTargetEffect extends OneShotEffect<ImprintTargetEffect> {
         }
 
         return true;
-	}
+    }
 
     @Override
     public String getText(Mode mode) {

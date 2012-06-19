@@ -47,7 +47,7 @@ public class ControlsBiggestOrTiedCreatureCondition implements Condition {
 
     private static ControlsBiggestOrTiedCreatureCondition fInstance = new ControlsBiggestOrTiedCreatureCondition();
 
-	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     public static Condition getInstance() {
         return fInstance;

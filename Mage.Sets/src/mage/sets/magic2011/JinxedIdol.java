@@ -50,49 +50,49 @@ import java.util.UUID;
  */
 public class JinxedIdol extends CardImpl<JinxedIdol> {
 
-	public JinxedIdol(UUID ownerId) {
-		super(ownerId, 208, "Jinxed Idol", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
-		this.expansionSetCode = "M11";
-		this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new DamageControllerEffect(2)));
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new JinxedIdolEffect(), new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
-		ability.addTarget(new TargetOpponent());
-		this.addAbility(ability);
-	}
+    public JinxedIdol(UUID ownerId) {
+        super(ownerId, 208, "Jinxed Idol", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
+        this.expansionSetCode = "M11";
+        this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new DamageControllerEffect(2)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new JinxedIdolEffect(), new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        ability.addTarget(new TargetOpponent());
+        this.addAbility(ability);
+    }
 
-	public JinxedIdol(final JinxedIdol card) {
-		super(card);
-	}
+    public JinxedIdol(final JinxedIdol card) {
+        super(card);
+    }
 
-	@Override
-	public JinxedIdol copy() {
-		return new JinxedIdol(this);
-	}
+    @Override
+    public JinxedIdol copy() {
+        return new JinxedIdol(this);
+    }
 
 }
 
 class JinxedIdolEffect extends ContinuousEffectImpl<JinxedIdolEffect> {
 
-	public JinxedIdolEffect() {
-		super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
-		staticText = "Target opponent gains control of {this}";
-	}
+    public JinxedIdolEffect() {
+        super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
+        staticText = "Target opponent gains control of {this}";
+    }
 
-	public JinxedIdolEffect(final JinxedIdolEffect effect) {
-		super(effect);
-	}
+    public JinxedIdolEffect(final JinxedIdolEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public JinxedIdolEffect copy() {
-		return new JinxedIdolEffect(this);
-	}
+    @Override
+    public JinxedIdolEffect copy() {
+        return new JinxedIdolEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getSourceId());
-		if (permanent != null) {
-			return permanent.changeControllerId(source.getFirstTarget(), game);
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            return permanent.changeControllerId(source.getFirstTarget(), game);
+        }
+        return false;
+    }
 
 }

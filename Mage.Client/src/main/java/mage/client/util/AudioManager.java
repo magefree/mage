@@ -26,7 +26,7 @@ public class AudioManager {
             audioManager = new AudioManager();
             audioManager.nextPageClip = audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnPrevPage.wav"); //sounds better than OnNextPage
             audioManager.prevPageClip = audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnPrevPage.wav");
-			audioManager.anotherTabClip = audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnNextPage.wav");
+            audioManager.anotherTabClip = audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnNextPage.wav");
             audioManager.nextPhaseClip = audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnNextPhase.wav");
             audioManager.endTurnClip = audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnEndTurn.wav");
             audioManager.tapPermanentClip = audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnTapPermanent.wav");
@@ -52,7 +52,7 @@ public class AudioManager {
         checkAndPlayClip(getManager().prevPageClip);
     }
 
-	public static void playAnotherTab() {
+    public static void playAnotherTab() {
         checkAndPlayClip(getManager().anotherTabClip);
     }
 
@@ -151,7 +151,7 @@ public class AudioManager {
 
     private Clip nextPageClip = null;
     private Clip prevPageClip = null;
-	private Clip anotherTabClip = null;
+    private Clip anotherTabClip = null;
     private Clip nextPhaseClip = null;
     private Clip endTurnClip = null;
     private Clip tapPermanentClip = null;

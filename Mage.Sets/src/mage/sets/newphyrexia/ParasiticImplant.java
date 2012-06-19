@@ -59,10 +59,10 @@ public class ParasiticImplant extends CardImpl<ParasiticImplant> {
         this.color.setBlack(true);
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Sacrifice));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		this.addAbility(ability);
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Sacrifice));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
         ability = new BeginningOfUpkeepTriggeredAbility(new ParasiticImplantEffect(), Constants.TargetController.YOU, false);
         ability.addEffect(new CreateTokenEffect(new MyrToken()));
         this.addAbility(ability);
@@ -92,8 +92,8 @@ class ParasiticImplantEffect extends OneShotEffect<ParasiticImplantEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent enchantment = game.getPermanent(source.getSourceId());
-		if (enchantment != null && enchantment.getAttachedTo() != null) {
-			Permanent creature = game.getPermanent(enchantment.getAttachedTo());
+        if (enchantment != null && enchantment.getAttachedTo() != null) {
+            Permanent creature = game.getPermanent(enchantment.getAttachedTo());
             if (creature != null) {
                 return creature.sacrifice(source.getSourceId(), game);
             }

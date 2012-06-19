@@ -37,22 +37,22 @@ import mage.filter.FilterPermanent;
  */
 public class FilterEquipment extends FilterPermanent<FilterEquipment> {
 
-	public FilterEquipment() {
-		this("equipment");
-	}
+    public FilterEquipment() {
+        this("equipment");
+    }
 
-	public FilterEquipment(String name) {
-		super(name);
-		this.cardType.add(CardType.ARTIFACT);
-		this.getSubtype().add("Equipment");
-	}
+    public FilterEquipment(String name) {
+        super(name);
+        this.cardType.add(CardType.ARTIFACT);
+        this.getSubtype().add("Equipment");
+    }
 
-	public FilterEquipment(final FilterEquipment filter) {
-		super(filter);
-	}
+    public FilterEquipment(final FilterEquipment filter) {
+        super(filter);
+    }
 
-	@Override
-	public FilterEquipment copy() {
-		return new FilterEquipment(this);
-	}
+    @Override
+    public FilterEquipment copy() {
+        return new FilterEquipment(this);
+    }
 }

@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class WhiteKnight extends mage.sets.magic2010.WhiteKnight {
 
-	public WhiteKnight(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 39;
-		this.expansionSetCode = "M11";
-	}
+    public WhiteKnight(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 39;
+        this.expansionSetCode = "M11";
+    }
 
-	public WhiteKnight(final WhiteKnight card) {
-		super(card);
-	}
+    public WhiteKnight(final WhiteKnight card) {
+        super(card);
+    }
 
-	@Override
-	public WhiteKnight copy() {
-		return new WhiteKnight(this);
-	}
+    @Override
+    public WhiteKnight copy() {
+        return new WhiteKnight(this);
+    }
 
 }

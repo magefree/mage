@@ -45,37 +45,37 @@ import java.util.UUID;
  */
 public class TargetSpell extends TargetObject<TargetSpell> {
 
-	protected FilterSpell filter;
+    protected FilterSpell filter;
 
-	public TargetSpell() {
-		this(1, 1, new FilterSpell());
-	}
+    public TargetSpell() {
+        this(1, 1, new FilterSpell());
+    }
 
-	public TargetSpell(FilterSpell filter) {
-		this(1, 1, filter);
-	}
+    public TargetSpell(FilterSpell filter) {
+        this(1, 1, filter);
+    }
 
-	public TargetSpell(int numTargets, FilterSpell filter) {
-		this(numTargets, numTargets, filter);
-	}
+    public TargetSpell(int numTargets, FilterSpell filter) {
+        this(numTargets, numTargets, filter);
+    }
 
-	public TargetSpell(int minNumTargets, int maxNumTargets, FilterSpell filter) {
-		this.minNumberOfTargets = minNumTargets;
-		this.maxNumberOfTargets = maxNumTargets;
-		this.zone = Zone.STACK;
-		this.filter = filter;
-		this.targetName = filter.getMessage();
-	}
+    public TargetSpell(int minNumTargets, int maxNumTargets, FilterSpell filter) {
+        this.minNumberOfTargets = minNumTargets;
+        this.maxNumberOfTargets = maxNumTargets;
+        this.zone = Zone.STACK;
+        this.filter = filter;
+        this.targetName = filter.getMessage();
+    }
 
-	public TargetSpell(final TargetSpell target) {
-		super(target);
-		this.filter = target.filter.copy();
-	}
+    public TargetSpell(final TargetSpell target) {
+        super(target);
+        this.filter = target.filter.copy();
+    }
 
-	@Override
-	public FilterSpell getFilter() {
-		return filter;
-	}
+    @Override
+    public FilterSpell getFilter() {
+        return filter;
+    }
 
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
@@ -90,43 +90,43 @@ public class TargetSpell extends TargetObject<TargetSpell> {
         return false;
     }
 
-	@Override
-	public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-		return canChoose(sourceControllerId, game);
-	}
+    @Override
+    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+        return canChoose(sourceControllerId, game);
+    }
 
-	@Override
-	public boolean canChoose(UUID sourceControllerId, Game game) {
-		int count = 0;
-		for (StackObject stackObject: game.getStack()) {
-			if (stackObject instanceof Spell && game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match((Spell)stackObject, game)) {
-				count++;
-				if (count >= this.minNumberOfTargets)
-					return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean canChoose(UUID sourceControllerId, Game game) {
+        int count = 0;
+        for (StackObject stackObject: game.getStack()) {
+            if (stackObject instanceof Spell && game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match((Spell)stackObject, game)) {
+                count++;
+                if (count >= this.minNumberOfTargets)
+                    return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-		return possibleTargets(sourceControllerId, game);
-	}
+    @Override
+    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+        return possibleTargets(sourceControllerId, game);
+    }
 
-	@Override
-	public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
-		Set<UUID> possibleTargets = new HashSet<UUID>();
-		for (StackObject stackObject: game.getStack()) {
-			if (stackObject instanceof Spell && game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match((Spell)stackObject, game)) {
-				possibleTargets.add(stackObject.getId());
-			}
-		}
-		return possibleTargets;
-	}
+    @Override
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
+        Set<UUID> possibleTargets = new HashSet<UUID>();
+        for (StackObject stackObject: game.getStack()) {
+            if (stackObject instanceof Spell && game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match((Spell)stackObject, game)) {
+                possibleTargets.add(stackObject.getId());
+            }
+        }
+        return possibleTargets;
+    }
 
-	@Override
-	public TargetSpell copy() {
-		return new TargetSpell(this);
-	}
+    @Override
+    public TargetSpell copy() {
+        return new TargetSpell(this);
+    }
 
 }

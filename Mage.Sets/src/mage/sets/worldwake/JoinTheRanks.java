@@ -44,7 +44,7 @@ public class JoinTheRanks extends CardImpl<JoinTheRanks> {
     public JoinTheRanks (UUID ownerId) {
         super(ownerId, 9, "Join the Ranks", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{W}");
         this.expansionSetCode = "WWK";
-		this.color.setWhite(true);        
+        this.color.setWhite(true);        
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SoldierToken(), 2));
     }
 

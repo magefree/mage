@@ -42,25 +42,25 @@ import java.util.UUID;
  */
 public class RallyThePeasants extends CardImpl<RallyThePeasants> {
 
-	public RallyThePeasants(UUID ownerId) {
-		super(ownerId, 28, "Rally the Peasants", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
-		this.expansionSetCode = "ISD";
+    public RallyThePeasants(UUID ownerId) {
+        super(ownerId, 28, "Rally the Peasants", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
+        this.expansionSetCode = "ISD";
 
-		this.color.setWhite(true);
+        this.color.setWhite(true);
 
-		// Creatures you control get +2/+0 until end of turn.
-		this.getSpellAbility().addEffect(new BoostControlledEffect(2, 0, Constants.Duration.EndOfTurn));
+        // Creatures you control get +2/+0 until end of turn.
+        this.getSpellAbility().addEffect(new BoostControlledEffect(2, 0, Constants.Duration.EndOfTurn));
 
-		// Flashback {2}{R}
-		this.addAbility(new FlashbackAbility(new ManaCostsImpl("{2}{R}"), Constants.TimingRule.INSTANT));
-	}
+        // Flashback {2}{R}
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{2}{R}"), Constants.TimingRule.INSTANT));
+    }
 
-	public RallyThePeasants(final RallyThePeasants card) {
-		super(card);
-	}
+    public RallyThePeasants(final RallyThePeasants card) {
+        super(card);
+    }
 
-	@Override
-	public RallyThePeasants copy() {
-		return new RallyThePeasants(this);
-	}
+    @Override
+    public RallyThePeasants copy() {
+        return new RallyThePeasants(this);
+    }
 }

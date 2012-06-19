@@ -45,7 +45,7 @@ public class LastKiss extends CardImpl<LastKiss> {
     public LastKiss (UUID ownerId) {
         super(ownerId, 116, "Last Kiss", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
         this.expansionSetCode = "ROE";
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addEffect(new GainLifeEffect(2));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

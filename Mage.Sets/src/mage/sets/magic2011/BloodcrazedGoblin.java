@@ -49,26 +49,26 @@ import mage.watchers.common.BloodthirstWatcher;
  */
 public class BloodcrazedGoblin extends CardImpl<BloodcrazedGoblin> {
 
-	public BloodcrazedGoblin(UUID ownerId) {
-		super(ownerId, 125, "Bloodcrazed Goblin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Goblin");
-		this.subtype.add("Berserker");
-		this.color.setRed(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+    public BloodcrazedGoblin(UUID ownerId) {
+        super(ownerId, 125, "Bloodcrazed Goblin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Goblin");
+        this.subtype.add("Berserker");
+        this.color.setRed(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BloodcrazedGoblinEffect()));
-	}
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BloodcrazedGoblinEffect()));
+    }
 
-	public BloodcrazedGoblin(final BloodcrazedGoblin card) {
-		super(card);
-	}
+    public BloodcrazedGoblin(final BloodcrazedGoblin card) {
+        super(card);
+    }
 
-	@Override
-	public BloodcrazedGoblin copy() {
-		return new BloodcrazedGoblin(this);
-	}
+    @Override
+    public BloodcrazedGoblin copy() {
+        return new BloodcrazedGoblin(this);
+    }
 
 }
 

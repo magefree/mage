@@ -32,183 +32,183 @@ import java.util.*;
 
 public class Plugins implements MagePlugins {
 
-	private final static MagePlugins fINSTANCE =  new Plugins();
-	private final static Logger logger = Logger.getLogger(Plugins.class);
-	private static PluginManager pm;
-	
-	private ThemePlugin themePlugin = null;
-	private CardPlugin cardPlugin = null;
-	private CounterPlugin counterPlugin = null;
-	private static final MageActionCallback mageActionCallback = new MageActionCallback();
-	private Map<String, String> sortingOptions = new HashMap<String, String>();
-	
-	public static MagePlugins getInstance() {
-		return fINSTANCE;
-	}
-	
-	@Override
-	public void loadPlugins() {
-		logger.info("Loading plugins...");
-		pm = PluginManagerFactory.createPluginManager();
-		pm.addPluginsFrom(new File(Constants.PLUGINS_DIRECTORY).toURI());
-		this.cardPlugin = new CardPluginImpl();
-		this.counterPlugin = pm.getPlugin(CounterPlugin.class);
-		this.themePlugin = pm.getPlugin(ThemePlugin.class);
-		logger.info("Done.");
-	}
-	
-	@Override
-	public void shutdown() {
-		if (pm != null) pm.shutdown();
-	}
+    private final static MagePlugins fINSTANCE =  new Plugins();
+    private final static Logger logger = Logger.getLogger(Plugins.class);
+    private static PluginManager pm;
 
-	@Override
-	public void updateGamePanel(Map<String, JComponent> ui) {
-		if (MageFrame.isLite() || MageFrame.isGray() || themePlugin == null) return;
-		themePlugin.applyInGame(ui);
-	}
+    private ThemePlugin themePlugin = null;
+    private CardPlugin cardPlugin = null;
+    private CounterPlugin counterPlugin = null;
+    private static final MageActionCallback mageActionCallback = new MageActionCallback();
+    private Map<String, String> sortingOptions = new HashMap<String, String>();
 
-	@Override
-	public JComponent updateTablePanel(Map<String, JComponent> ui) {
-		if (MageFrame.isLite() || MageFrame.isGray() || themePlugin == null) return null;
-		return themePlugin.updateTable(ui);
-	}
-	
-	@Override
-	public MagePermanent getMagePermanent(PermanentView card, BigCard bigCard, Dimension dimension, UUID gameId, boolean loadImage) {
-		if (cardPlugin != null) {
-			mageActionCallback.refreshSession();
-			mageActionCallback.setCardPreviewComponent(bigCard);
-			return cardPlugin.getMagePermanent(card, dimension, gameId, mageActionCallback, false, !MageFrame.isLite() && loadImage);
-		} else {
-			return new Permanent(card, bigCard, Config.dimensions, gameId);
-		}
-	}
-	
-	@Override
-	public MageCard getMageCard(CardView card, BigCard bigCard, Dimension dimension, UUID gameId, boolean loadImage) {
-		if (cardPlugin != null) {
-			mageActionCallback.refreshSession();
-			mageActionCallback.setCardPreviewComponent(bigCard);
-			return cardPlugin.getMageCard(card, dimension, gameId, mageActionCallback, false, !MageFrame.isLite() && loadImage);
-		} else {
-			return new Card(card, bigCard, Config.dimensions, gameId);
-		}
-	}
+    public static MagePlugins getInstance() {
+        return fINSTANCE;
+    }
+
+    @Override
+    public void loadPlugins() {
+        logger.info("Loading plugins...");
+        pm = PluginManagerFactory.createPluginManager();
+        pm.addPluginsFrom(new File(Constants.PLUGINS_DIRECTORY).toURI());
+        this.cardPlugin = new CardPluginImpl();
+        this.counterPlugin = pm.getPlugin(CounterPlugin.class);
+        this.themePlugin = pm.getPlugin(ThemePlugin.class);
+        logger.info("Done.");
+    }
+
+    @Override
+    public void shutdown() {
+        if (pm != null) pm.shutdown();
+    }
+
+    @Override
+    public void updateGamePanel(Map<String, JComponent> ui) {
+        if (MageFrame.isLite() || MageFrame.isGray() || themePlugin == null) return;
+        themePlugin.applyInGame(ui);
+    }
+
+    @Override
+    public JComponent updateTablePanel(Map<String, JComponent> ui) {
+        if (MageFrame.isLite() || MageFrame.isGray() || themePlugin == null) return null;
+        return themePlugin.updateTable(ui);
+    }
+
+    @Override
+    public MagePermanent getMagePermanent(PermanentView card, BigCard bigCard, Dimension dimension, UUID gameId, boolean loadImage) {
+        if (cardPlugin != null) {
+            mageActionCallback.refreshSession();
+            mageActionCallback.setCardPreviewComponent(bigCard);
+            return cardPlugin.getMagePermanent(card, dimension, gameId, mageActionCallback, false, !MageFrame.isLite() && loadImage);
+        } else {
+            return new Permanent(card, bigCard, Config.dimensions, gameId);
+        }
+    }
+
+    @Override
+    public MageCard getMageCard(CardView card, BigCard bigCard, Dimension dimension, UUID gameId, boolean loadImage) {
+        if (cardPlugin != null) {
+            mageActionCallback.refreshSession();
+            mageActionCallback.setCardPreviewComponent(bigCard);
+            return cardPlugin.getMageCard(card, dimension, gameId, mageActionCallback, false, !MageFrame.isLite() && loadImage);
+        } else {
+            return new Card(card, bigCard, Config.dimensions, gameId);
+        }
+    }
 
 
-	
-	@Override
-	public boolean isCardPluginLoaded() {
-		return this.cardPlugin != null;
-	}
 
-	@Override
-	public int sortPermanents(Map<String, JComponent> ui, Collection<MagePermanent> permanents) {
-		sortingOptions.put("nonLandPermanentsInOnePile", PreferencesDialog.getCachedValue("nonLandPermanentsInOnePile", "false"));
-		if (this.cardPlugin != null) return this.cardPlugin.sortPermanents(ui, permanents, sortingOptions);
+    @Override
+    public boolean isCardPluginLoaded() {
+        return this.cardPlugin != null;
+    }
+
+    @Override
+    public int sortPermanents(Map<String, JComponent> ui, Collection<MagePermanent> permanents) {
+        sortingOptions.put("nonLandPermanentsInOnePile", PreferencesDialog.getCachedValue("nonLandPermanentsInOnePile", "false"));
+        if (this.cardPlugin != null) return this.cardPlugin.sortPermanents(ui, permanents, sortingOptions);
         return -1;
-	}
+    }
 
-	@Override
-	public boolean newImage(Set<mage.cards.Card> allCards) {
+    @Override
+    public boolean newImage(Set<mage.cards.Card> allCards) {
         String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
         String path = useDefault.equals("true") ? null : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
-		return this.cardPlugin.newImages(allCards, path);
-	}
-    
-	@Override
-	public void downloadImage(Set<mage.cards.Card> allCards) {
+        return this.cardPlugin.newImages(allCards, path);
+    }
+
+    @Override
+    public void downloadImage(Set<mage.cards.Card> allCards) {
         String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
         String path = useDefault.equals("true") ? null : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
-		if (this.cardPlugin != null) this.cardPlugin.downloadImages(allCards, path);
-	}
-	
-	@Override
-	public void downloadSymbols() {
+        if (this.cardPlugin != null) this.cardPlugin.downloadImages(allCards, path);
+    }
+
+    @Override
+    public void downloadSymbols() {
         String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
         String path = useDefault.equals("true") ? null : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
-		if (this.cardPlugin != null) this.cardPlugin.downloadSymbols(path);
-	}
+        if (this.cardPlugin != null) this.cardPlugin.downloadSymbols(path);
+    }
 
-	@Override
-	public int getGamesPlayed() {
-		if (this.counterPlugin != null) {
-			synchronized(Plugins.class) {
-				try {
-					return this.counterPlugin.getGamePlayed();
-				} catch (PluginException e) {
-					logger.fatal(e.getMessage());
-					throw new RuntimeException(e);
-				}
-			}
-		}
-		return -1;
-	}
+    @Override
+    public int getGamesPlayed() {
+        if (this.counterPlugin != null) {
+            synchronized(Plugins.class) {
+                try {
+                    return this.counterPlugin.getGamePlayed();
+                } catch (PluginException e) {
+                    logger.fatal(e.getMessage());
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+        return -1;
+    }
 
-	@Override
-	public void addGamesPlayed() {
-		if (this.counterPlugin != null) {
-			synchronized(Plugins.class) {
-				try {
-					this.counterPlugin.addGamePlayed();
-				} catch (PluginException e) {
-					logger.fatal(e.getMessage());
-					throw new RuntimeException(e);
-				}
-			}
-		}
-	}
+    @Override
+    public void addGamesPlayed() {
+        if (this.counterPlugin != null) {
+            synchronized(Plugins.class) {
+                try {
+                    this.counterPlugin.addGamePlayed();
+                } catch (PluginException e) {
+                    logger.fatal(e.getMessage());
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+    }
 
-	@Override
-	public boolean isCounterPluginLoaded() {
-		return this.counterPlugin != null;
-	}
-	
-	@Override
-	public boolean isThemePluginLoaded() {
-		return this.themePlugin != null;
-	}
-	
-	@Override
-	public Image getManaSymbolImage(String symbol) {
-		if (this.cardPlugin != null) {
-			return this.cardPlugin.getManaSymbolImage(symbol);
-		}
-		return null;
-	}
+    @Override
+    public boolean isCounterPluginLoaded() {
+        return this.counterPlugin != null;
+    }
 
-	@Override
-	public void onAddCard(MagePermanent card, int count) {
-		if (this.cardPlugin != null) {
-			this.cardPlugin.onAddCard(card, count);
-		}
-	}
+    @Override
+    public boolean isThemePluginLoaded() {
+        return this.themePlugin != null;
+    }
 
-	@Override
-	public void onRemoveCard(MagePermanent card, int count) {
-		if (this.cardPlugin != null) {
-			this.cardPlugin.onRemoveCard(card, count);
-		}
-	}
+    @Override
+    public Image getManaSymbolImage(String symbol) {
+        if (this.cardPlugin != null) {
+            return this.cardPlugin.getManaSymbolImage(symbol);
+        }
+        return null;
+    }
+
+    @Override
+    public void onAddCard(MagePermanent card, int count) {
+        if (this.cardPlugin != null) {
+            this.cardPlugin.onAddCard(card, count);
+        }
+    }
+
+    @Override
+    public void onRemoveCard(MagePermanent card, int count) {
+        if (this.cardPlugin != null) {
+            this.cardPlugin.onRemoveCard(card, count);
+        }
+    }
 
     @Override
     public JComponent getCardInfoPane() {
         if (this.cardPlugin != null) {
-			return this.cardPlugin.getCardInfoPane();
-		}
+            return this.cardPlugin.getCardInfoPane();
+        }
         return null;
     }
 
-	@Override
-	public BufferedImage getOriginalImage(CardView card) {
-		if (this.cardPlugin != null) {
-			return this.cardPlugin.getOriginalImage(card);
-		}
+    @Override
+    public BufferedImage getOriginalImage(CardView card) {
+        if (this.cardPlugin != null) {
+            return this.cardPlugin.getOriginalImage(card);
+        }
         return null;
-	}
+    }
 
-	public ActionCallback getActionCallback() {
-		return mageActionCallback;
-	}
+    public ActionCallback getActionCallback() {
+        return mageActionCallback;
+    }
 }

@@ -45,7 +45,7 @@ public class StrokeOfGenius extends CardImpl<StrokeOfGenius> {
     public StrokeOfGenius (UUID ownerId) {
         super(ownerId, 100, "Stroke Of Genius", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{2}{U}");
         this.expansionSetCode = "USG";
-	this.color.setBlue(true);
+    this.color.setBlue(true);
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(new ManacostVariableValue()));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }

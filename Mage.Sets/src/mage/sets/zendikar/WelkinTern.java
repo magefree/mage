@@ -48,11 +48,11 @@ public class WelkinTern extends CardImpl<WelkinTern> {
         super(ownerId, 76, "Welkin Tern", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.expansionSetCode = "ZEN";
         this.subtype.add("Bird");
-        
-		this.color.setBlue(true);
+
+        this.color.setBlue(true);
         this.power = new MageInt(2 );
         this.toughness = new MageInt( 1);
-        
+
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockOnlyFlyingEffect()));
     }

@@ -37,21 +37,21 @@ import mage.filter.FilterCard;
  */
 public class FilterCreatureCard extends FilterCard<FilterCreatureCard> {
 
-	public FilterCreatureCard() {
-		this("creature card");
-	}
+    public FilterCreatureCard() {
+        this("creature card");
+    }
 
-	public FilterCreatureCard(String name) {
-		super(name);
-		cardType.add(CardType.CREATURE);
-	}
+    public FilterCreatureCard(String name) {
+        super(name);
+        cardType.add(CardType.CREATURE);
+    }
 
-	public FilterCreatureCard(final FilterCreatureCard filter) {
-		super(filter);
-	}
+    public FilterCreatureCard(final FilterCreatureCard filter) {
+        super(filter);
+    }
 
-	@Override
-	public FilterCreatureCard copy() {
-		return new FilterCreatureCard(this);
-	}
+    @Override
+    public FilterCreatureCard copy() {
+        return new FilterCreatureCard(this);
+    }
 }

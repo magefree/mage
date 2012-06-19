@@ -47,29 +47,29 @@ import mage.filter.FilterCard;
  */
 public class TowerGeist extends CardImpl<TowerGeist> {
 
-	public TowerGeist(UUID ownerId) {
-		super(ownerId, 53, "Tower Geist", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
-		this.expansionSetCode = "DKA";
-		this.subtype.add("Spirit");
+    public TowerGeist(UUID ownerId) {
+        super(ownerId, 53, "Tower Geist", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
+        this.expansionSetCode = "DKA";
+        this.subtype.add("Spirit");
 
-		this.color.setBlue(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+        this.color.setBlue(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-		// Flying
-		this.addAbility(FlyingAbility.getInstance());
-		
-		// When Tower Geist enters the battlefield, look at the top two cards of your library. Put one of them into your hand and the other into your graveyard.
-		this.addAbility(new EntersBattlefieldTriggeredAbility(
-				new LookLibraryAndPickControllerEffect(new StaticValue(2), false, new StaticValue(1), new FilterCard(), Zone.GRAVEYARD, false, false)));
-	}
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
 
-	public TowerGeist(final TowerGeist card) {
-		super(card);
-	}
+        // When Tower Geist enters the battlefield, look at the top two cards of your library. Put one of them into your hand and the other into your graveyard.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new LookLibraryAndPickControllerEffect(new StaticValue(2), false, new StaticValue(1), new FilterCard(), Zone.GRAVEYARD, false, false)));
+    }
 
-	@Override
-	public TowerGeist copy() {
-		return new TowerGeist(this);
-	}
+    public TowerGeist(final TowerGeist card) {
+        super(card);
+    }
+
+    @Override
+    public TowerGeist copy() {
+        return new TowerGeist(this);
+    }
 }

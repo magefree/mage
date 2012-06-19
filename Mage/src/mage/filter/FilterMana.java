@@ -34,74 +34,74 @@ import java.io.Serializable;
  */
 public class FilterMana implements Serializable {
 
-	protected boolean black;
-	protected boolean green;
-	protected boolean white;
-	protected boolean red;
-	protected boolean blue;
-	protected boolean colorless;
+    protected boolean black;
+    protected boolean green;
+    protected boolean white;
+    protected boolean red;
+    protected boolean blue;
+    protected boolean colorless;
 
-	public FilterMana() {
-	}
+    public FilterMana() {
+    }
 
-	public FilterMana(FilterMana filter) {
-		black = filter.black;
-		green = filter.green;
-		white = filter.white;
-		red = filter.red;
-		blue = filter.blue;
-		colorless = filter.colorless;
-	}
+    public FilterMana(FilterMana filter) {
+        black = filter.black;
+        green = filter.green;
+        white = filter.white;
+        red = filter.red;
+        blue = filter.blue;
+        colorless = filter.colorless;
+    }
 
-	public boolean isBlack() {
-		return black;
-	}
+    public boolean isBlack() {
+        return black;
+    }
 
-	public void setBlack(boolean black) {
-		this.black = black;
-	}
+    public void setBlack(boolean black) {
+        this.black = black;
+    }
 
-	public boolean isGreen() {
-		return green;
-	}
+    public boolean isGreen() {
+        return green;
+    }
 
-	public void setGreen(boolean green) {
-		this.green = green;
-	}
+    public void setGreen(boolean green) {
+        this.green = green;
+    }
 
-	public boolean isWhite() {
-		return white;
-	}
+    public boolean isWhite() {
+        return white;
+    }
 
-	public void setWhite(boolean white) {
-		this.white = white;
-	}
+    public void setWhite(boolean white) {
+        this.white = white;
+    }
 
-	public boolean isRed() {
-		return red;
-	}
+    public boolean isRed() {
+        return red;
+    }
 
-	public void setRed(boolean red) {
-		this.red = red;
-	}
+    public void setRed(boolean red) {
+        this.red = red;
+    }
 
-	public boolean isBlue() {
-		return blue;
-	}
+    public boolean isBlue() {
+        return blue;
+    }
 
-	public void setBlue(boolean blue) {
-		this.blue = blue;
-	}
+    public void setBlue(boolean blue) {
+        this.blue = blue;
+    }
 
-	public boolean isColorless() {
-		return colorless;
-	}
+    public boolean isColorless() {
+        return colorless;
+    }
 
-	public void setColorless(boolean colorless) {
-		this.colorless = colorless;
-	}
+    public void setColorless(boolean colorless) {
+        this.colorless = colorless;
+    }
 
-	public FilterMana copy() {
-		return new FilterMana(this);
-	}
+    public FilterMana copy() {
+        return new FilterMana(this);
+    }
 }

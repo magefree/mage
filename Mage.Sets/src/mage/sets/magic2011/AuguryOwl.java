@@ -43,25 +43,25 @@ import mage.cards.CardImpl;
  */
 public class AuguryOwl extends CardImpl<AuguryOwl> {
 
-	public AuguryOwl(UUID ownerId) {
-		super(ownerId, 45, "Augury Owl", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Bird");
-		this.color.setBlue(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
+    public AuguryOwl(UUID ownerId) {
+        super(ownerId, 45, "Augury Owl", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Bird");
+        this.color.setBlue(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-		this.addAbility(FlyingAbility.getInstance());
-		this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(3)));
-	}
+        this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(3)));
+    }
 
-	public AuguryOwl(final AuguryOwl card) {
-		super(card);
-	}
+    public AuguryOwl(final AuguryOwl card) {
+        super(card);
+    }
 
-	@Override
-	public AuguryOwl copy() {
-		return new AuguryOwl(this);
-	}
+    @Override
+    public AuguryOwl copy() {
+        return new AuguryOwl(this);
+    }
 
 }

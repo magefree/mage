@@ -45,130 +45,130 @@ import java.util.*;
  */
 public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 
-	protected Map<UUID, Integer> targets = new LinkedHashMap<UUID, Integer>();
+    protected Map<UUID, Integer> targets = new LinkedHashMap<UUID, Integer>();
     protected Map<UUID, Integer> zoneChangeCounters = new HashMap<UUID, Integer>();
-    
-	protected String targetName;
-	protected Zone zone;
-	protected int maxNumberOfTargets;
-	protected int minNumberOfTargets;
-	protected boolean required = false;
-	protected boolean chosen = false;
-	protected boolean notTarget = false;
 
-	@Override
-	public abstract T copy();
+    protected String targetName;
+    protected Zone zone;
+    protected int maxNumberOfTargets;
+    protected int minNumberOfTargets;
+    protected boolean required = false;
+    protected boolean chosen = false;
+    protected boolean notTarget = false;
 
-	public TargetImpl() {
-		this(false);
-	}
+    @Override
+    public abstract T copy();
 
-	public TargetImpl(boolean notTarget) {
-		this.notTarget = notTarget;
-	}
+    public TargetImpl() {
+        this(false);
+    }
 
-	public TargetImpl(final TargetImpl<T> target) {
-		this.targetName = target.targetName;
-		this.zone = target.zone;
-		this.maxNumberOfTargets = target.maxNumberOfTargets;
-		this.minNumberOfTargets = target.minNumberOfTargets;
-		this.required = target.required;
-		this.chosen = target.chosen;
+    public TargetImpl(boolean notTarget) {
+        this.notTarget = notTarget;
+    }
+
+    public TargetImpl(final TargetImpl<T> target) {
+        this.targetName = target.targetName;
+        this.zone = target.zone;
+        this.maxNumberOfTargets = target.maxNumberOfTargets;
+        this.minNumberOfTargets = target.minNumberOfTargets;
+        this.required = target.required;
+        this.chosen = target.chosen;
         this.targets.putAll(target.targets);
         this.zoneChangeCounters.putAll(target.zoneChangeCounters);
-	}
+    }
 
-	@Override
-	public int getNumberOfTargets() {
-		return this.minNumberOfTargets;
-	}
+    @Override
+    public int getNumberOfTargets() {
+        return this.minNumberOfTargets;
+    }
 
-	@Override
-	public int getMaxNumberOfTargets() {
-		return this.maxNumberOfTargets;
-	}
+    @Override
+    public int getMaxNumberOfTargets() {
+        return this.maxNumberOfTargets;
+    }
 
-	@Override
-	public String getMessage() {
-		if (maxNumberOfTargets != 1) {
-			StringBuilder sb = new StringBuilder();
-			sb.append("Select ").append(targetName);
-			if (maxNumberOfTargets > 0 && maxNumberOfTargets != Integer.MAX_VALUE) {
-				sb.append(" (").append(targets.size()).append("/").append(maxNumberOfTargets).append(")");
-			} else {
-				sb.append(" (").append(targets.size()).append(")");
-			}
-			return sb.toString();
-		}
-		if (targetName.startsWith("another")) {
-			return "Select " + targetName;
-		}
-		return "Select a " + targetName;
-	}
+    @Override
+    public String getMessage() {
+        if (maxNumberOfTargets != 1) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("Select ").append(targetName);
+            if (maxNumberOfTargets > 0 && maxNumberOfTargets != Integer.MAX_VALUE) {
+                sb.append(" (").append(targets.size()).append("/").append(maxNumberOfTargets).append(")");
+            } else {
+                sb.append(" (").append(targets.size()).append(")");
+            }
+            return sb.toString();
+        }
+        if (targetName.startsWith("another")) {
+            return "Select " + targetName;
+        }
+        return "Select a " + targetName;
+    }
 
-	@Override
-	public boolean isNotTarget() {
-		return notTarget;
-	}
+    @Override
+    public boolean isNotTarget() {
+        return notTarget;
+    }
 
-	@Override
-	public String getTargetName() {
-		return targetName;
-	}
+    @Override
+    public String getTargetName() {
+        return targetName;
+    }
 
-	@Override
-	public void setTargetName(String name) {
-		this.targetName = name;
-	}
+    @Override
+    public void setTargetName(String name) {
+        this.targetName = name;
+    }
 
-	@Override
-	public Zone getZone() {
-		return zone;
-	}
+    @Override
+    public Zone getZone() {
+        return zone;
+    }
 
-	@Override
-	public boolean isRequired() {
-		return required;
-	}
+    @Override
+    public boolean isRequired() {
+        return required;
+    }
 
-	@Override
-	public void setRequired(boolean required) {
-		this.required = required;
-	}
+    @Override
+    public void setRequired(boolean required) {
+        this.required = required;
+    }
 
-	@Override
-	public boolean isChosen() {
+    @Override
+    public boolean isChosen() {
         if (maxNumberOfTargets == 0 && minNumberOfTargets == 0)
             return true;
-		if (maxNumberOfTargets != 0 && targets.size() == maxNumberOfTargets)
-			return true;
-		return chosen;
-	}
+        if (maxNumberOfTargets != 0 && targets.size() == maxNumberOfTargets)
+            return true;
+        return chosen;
+    }
 
-	@Override
-	public boolean doneChosing() {
-		if (maxNumberOfTargets == 0)
-			return false;
-		return targets.size() == maxNumberOfTargets;
-	}
+    @Override
+    public boolean doneChosing() {
+        if (maxNumberOfTargets == 0)
+            return false;
+        return targets.size() == maxNumberOfTargets;
+    }
 
-	@Override
-	public void clearChosen() {
-		targets.clear();
+    @Override
+    public void clearChosen() {
+        targets.clear();
         zoneChangeCounters.clear();
-		chosen = false;
-	}
+        chosen = false;
+    }
 
-	@Override
-	public void add(UUID id, Game game) {
-		if (maxNumberOfTargets == 0 || targets.size() < maxNumberOfTargets) {
-			if (!targets.containsKey(id)) {
-				targets.put(id, 0);
+    @Override
+    public void add(UUID id, Game game) {
+        if (maxNumberOfTargets == 0 || targets.size() < maxNumberOfTargets) {
+            if (!targets.containsKey(id)) {
+                targets.put(id, 0);
                 rememberZoneChangeCounter(id, game);
-			}
-		}
-	}
-    
+            }
+        }
+    }
+
     @Override
     public void remove(UUID id) {
         if (targets.containsKey(id)) {
@@ -177,31 +177,31 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
         }
     }
 
-	@Override
-	public void addTarget(UUID id, Ability source, Game game) {
+    @Override
+    public void addTarget(UUID id, Ability source, Game game) {
         addTarget(id, source, game, false);
-	}
+    }
 
-	@Override
-	public void addTarget(UUID id, Ability source, Game game, boolean skipEvent) {
-		//20100423 - 113.3
-		if (maxNumberOfTargets == 0 || targets.size() < maxNumberOfTargets) {
-			if (!targets.containsKey(id)) {
-				if (source != null) {
-					if (!game.replaceEvent(GameEvent.getEvent(EventType.TARGET, id, source.getId(), source.getControllerId()))) {
-						targets.put(id, 0);
+    @Override
+    public void addTarget(UUID id, Ability source, Game game, boolean skipEvent) {
+        //20100423 - 113.3
+        if (maxNumberOfTargets == 0 || targets.size() < maxNumberOfTargets) {
+            if (!targets.containsKey(id)) {
+                if (source != null) {
+                    if (!game.replaceEvent(GameEvent.getEvent(EventType.TARGET, id, source.getId(), source.getControllerId()))) {
+                        targets.put(id, 0);
                         rememberZoneChangeCounter(id, game);
-						chosen = targets.size() >= minNumberOfTargets;
+                        chosen = targets.size() >= minNumberOfTargets;
                         if (!skipEvent)
                             game.fireEvent(GameEvent.getEvent(EventType.TARGETED, id, source.getId(), source.getControllerId()));
-					}
-				}
-				else {
-					targets.put(id, 0);
-				}
-			}
-		}
-	}
+                    }
+                }
+                else {
+                    targets.put(id, 0);
+                }
+            }
+        }
+    }
 
     private void rememberZoneChangeCounter(UUID id, Game game) {
         Card card = game.getCard(id);
@@ -211,59 +211,59 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
     }
 
     @Override
-	public void addTarget(UUID id, int amount, Ability source, Game game) {
+    public void addTarget(UUID id, int amount, Ability source, Game game) {
         addTarget(id, amount, source, game, false);
-	}
+    }
 
     @Override
-	public void addTarget(UUID id, int amount, Ability source, Game game, boolean skipEvent) {
-		if (targets.containsKey(id)) {
-			amount += targets.get(id);
-		}
-		if (source != null) {
-			if (!game.replaceEvent(GameEvent.getEvent(EventType.TARGET, id, source.getId(), source.getControllerId()))) {
-				targets.put(id, amount);
+    public void addTarget(UUID id, int amount, Ability source, Game game, boolean skipEvent) {
+        if (targets.containsKey(id)) {
+            amount += targets.get(id);
+        }
+        if (source != null) {
+            if (!game.replaceEvent(GameEvent.getEvent(EventType.TARGET, id, source.getId(), source.getControllerId()))) {
+                targets.put(id, amount);
                 rememberZoneChangeCounter(id, game);
-				chosen = targets.size() >= minNumberOfTargets;
+                chosen = targets.size() >= minNumberOfTargets;
                 if (!skipEvent)
                     game.fireEvent(GameEvent.getEvent(EventType.TARGETED, id, source.getId(), source.getControllerId()));
-			}
-		}
-		else {
-			targets.put(id, amount);
+            }
+        }
+        else {
+            targets.put(id, amount);
             rememberZoneChangeCounter(id, game);
-		}
-	}
-    
-	@Override
-	public boolean choose(Outcome outcome, UUID playerId, UUID sourceId, Game game) {
-		Player player = game.getPlayer(playerId);
-		while (!isChosen() && !doneChosing()) {
-			chosen = targets.size() >= minNumberOfTargets;
-			if (!player.choose(outcome, this, sourceId, game)) {
-				return chosen;
-			}
-			chosen = targets.size() >= minNumberOfTargets;
-		}
-		return chosen = true;
-	}
+        }
+    }
 
-	@Override
-	public boolean chooseTarget(Outcome outcome, UUID playerId, Ability source, Game game) {
-		Player player = game.getPlayer(playerId);
-		while (!isChosen() && !doneChosing()) {
-			chosen = targets.size() >= minNumberOfTargets;
-			if (!player.chooseTarget(outcome, this, source, game)) {
-				return chosen;
-			}
-			chosen = targets.size() >= minNumberOfTargets;
-		}
-		return chosen = true;
-	}
+    @Override
+    public boolean choose(Outcome outcome, UUID playerId, UUID sourceId, Game game) {
+        Player player = game.getPlayer(playerId);
+        while (!isChosen() && !doneChosing()) {
+            chosen = targets.size() >= minNumberOfTargets;
+            if (!player.choose(outcome, this, sourceId, game)) {
+                return chosen;
+            }
+            chosen = targets.size() >= minNumberOfTargets;
+        }
+        return chosen = true;
+    }
 
-	@Override
-	public boolean isLegal(Ability source, Game game) {
-		//20101001 - 608.2b
+    @Override
+    public boolean chooseTarget(Outcome outcome, UUID playerId, Ability source, Game game) {
+        Player player = game.getPlayer(playerId);
+        while (!isChosen() && !doneChosing()) {
+            chosen = targets.size() >= minNumberOfTargets;
+            if (!player.chooseTarget(outcome, this, source, game)) {
+                return chosen;
+            }
+            chosen = targets.size() >= minNumberOfTargets;
+        }
+        return chosen = true;
+    }
+
+    @Override
+    public boolean isLegal(Ability source, Game game) {
+        //20101001 - 608.2b
         for (UUID targetId: targets.keySet()) {
             Card card = game.getCard(targetId);
             if (card != null) {
@@ -271,13 +271,13 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
                     continue; // it's not legal so continue to have a look at other targeted cards
                 }
             }
-			if (game.replaceEvent(GameEvent.getEvent(EventType.TARGET, targetId, source.getId(), source.getControllerId())))
-				continue;
-			if (canTarget(targetId, source, game))
-				return true;
-		}
+            if (game.replaceEvent(GameEvent.getEvent(EventType.TARGET, targetId, source.getId(), source.getControllerId())))
+                continue;
+            if (canTarget(targetId, source, game))
+                return true;
+        }
         return false;
-	}
+    }
 
     @Override
     public List<T> getTargetOptions(Ability source, Game game) {
@@ -302,35 +302,35 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
         }        
         return options;
     }
-    
-	@Override
-	public List<UUID> getTargets() {
-		return new ArrayList<UUID>(targets.keySet());
-	}
 
-	@Override
-	public int getTargetAmount(UUID targetId) {
-		if (targets.containsKey(targetId))
-			return targets.get(targetId);
-		return 0;
-	}
+    @Override
+    public List<UUID> getTargets() {
+        return new ArrayList<UUID>(targets.keySet());
+    }
 
-//	@Override
-//	public UUID getLastTarget() {
-//		if (targets.size() > 0)
-//			return targets.keySet().iterator().next();
-//		return null;
-//	}
+    @Override
+    public int getTargetAmount(UUID targetId) {
+        if (targets.containsKey(targetId))
+            return targets.get(targetId);
+        return 0;
+    }
 
-	@Override
-	public UUID getFirstTarget() {
-		if (targets.size() > 0)
-			return targets.keySet().iterator().next();
-		return null;
-	}
+//    @Override
+//    public UUID getLastTarget() {
+//        if (targets.size() > 0)
+//            return targets.keySet().iterator().next();
+//        return null;
+//    }
 
-	@Override
-	public void setNotTarget(boolean notTarget) {
-		this.notTarget = notTarget;
-	}
+    @Override
+    public UUID getFirstTarget() {
+        if (targets.size() > 0)
+            return targets.keySet().iterator().next();
+        return null;
+    }
+
+    @Override
+    public void setNotTarget(boolean notTarget) {
+        this.notTarget = notTarget;
+    }
 }

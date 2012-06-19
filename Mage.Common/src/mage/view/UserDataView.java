@@ -11,19 +11,19 @@ import java.io.Serializable;
  */
 public class UserDataView implements Serializable {
 
-	protected int avatarId;
-	protected int userGroup;
+    protected int avatarId;
+    protected int userGroup;
 
-	public UserDataView(int avatarId) {
-		this.avatarId = avatarId;
-	}
+    public UserDataView(int avatarId) {
+        this.avatarId = avatarId;
+    }
 
-	public UserDataView(UserData userData) {
-		this.avatarId = userData.getAvatarId();
-		this.userGroup = userData.getGroupId();
-	}
+    public UserDataView(UserData userData) {
+        this.avatarId = userData.getAvatarId();
+        this.userGroup = userData.getGroupId();
+    }
 
-	public int getAvatarId() {
-		return avatarId;
-	}
+    public int getAvatarId() {
+        return avatarId;
+    }
 }

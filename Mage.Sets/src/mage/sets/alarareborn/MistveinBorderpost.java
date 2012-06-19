@@ -64,8 +64,8 @@ public class MistveinBorderpost extends CardImpl<MistveinBorderpost> {
     public MistveinBorderpost (UUID ownerId) {
         super(ownerId, 27, "Mistvein Borderpost", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}{U}{B}");
         this.expansionSetCode = "ARB";
-		this.color.setBlue(true);
-		this.color.setBlack(true);
+        this.color.setBlue(true);
+        this.color.setBlack(true);
         Cost cost = new CompositeCost(new GenericManaCost(1), new ReturnToHandTargetCost(new TargetControlledPermanent(filter)), COST_DESCRIPTION);
         this.getSpellAbility().addAlternativeCost(new AlternativeCostImpl(ALTERNATIVE_COST_DESCRIPTION, cost));
         this.addAbility(new EntersBattlefieldTappedAbility());

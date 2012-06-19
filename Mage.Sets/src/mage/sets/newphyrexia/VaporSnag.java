@@ -46,7 +46,7 @@ public class VaporSnag extends CardImpl<VaporSnag> {
     public VaporSnag (UUID ownerId) {
         super(ownerId, 48, "Vapor Snag", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "NPH";
-		this.color.setBlue(true);
+        this.color.setBlue(true);
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addEffect(new LoseLifeControllerEffect(1));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

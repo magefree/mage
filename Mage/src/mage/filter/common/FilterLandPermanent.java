@@ -37,21 +37,21 @@ import mage.filter.FilterPermanent;
  */
 public class FilterLandPermanent extends FilterPermanent<FilterLandPermanent> {
 
-	public FilterLandPermanent() {
-		this("land");
-	}
+    public FilterLandPermanent() {
+        this("land");
+    }
 
-	public FilterLandPermanent(String name) {
-		super(name);
-		cardType.add(CardType.LAND);
-	}
+    public FilterLandPermanent(String name) {
+        super(name);
+        cardType.add(CardType.LAND);
+    }
 
-	public FilterLandPermanent(final FilterLandPermanent filter) {
-		super(filter);
-	}
+    public FilterLandPermanent(final FilterLandPermanent filter) {
+        super(filter);
+    }
 
-	@Override
-	public FilterLandPermanent copy() {
-		return new FilterLandPermanent(this);
-	}
+    @Override
+    public FilterLandPermanent copy() {
+        return new FilterLandPermanent(this);
+    }
 }

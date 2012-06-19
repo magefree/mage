@@ -47,7 +47,7 @@ public class NecrogenScudder extends CardImpl<NecrogenScudder> {
         super(ownerId, 71, "Necrogen Scudder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Horror");
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(new EntersBattlefieldTriggeredAbility(new LoseLifeSourceEffect(3)));

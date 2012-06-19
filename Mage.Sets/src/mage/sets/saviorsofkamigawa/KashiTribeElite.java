@@ -48,9 +48,9 @@ import mage.filter.common.FilterControlledPermanent;
  * @author LevelX
  */
 public class KashiTribeElite extends CardImpl<KashiTribeElite> {
-        
+
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("Legendary Snakes");
-    
+
     static {
         filter.getSupertype().add("Legendary");
         filter.setScopeSupertype(Filter.ComparisonScope.Any);
@@ -76,7 +76,7 @@ public class KashiTribeElite extends CardImpl<KashiTribeElite> {
         ability = new DealsCombatDamageToACreatureTriggeredAbility(new TapTargetEffect("that creature"), false, true);
         ability.addEffect(new SkipNextUntapTargetEffect("and it"));
         this.addAbility(ability);
-        
+
     }
 
     public KashiTribeElite(final KashiTribeElite card) {

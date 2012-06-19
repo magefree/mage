@@ -58,58 +58,58 @@ public class InquisitionOfKozilek extends CardImpl<InquisitionOfKozilek> {
         this.getSpellAbility().addEffect(new InquisitionOfKozilekEffect());
     }
 
-	public InquisitionOfKozilek(final InquisitionOfKozilek card) {
-		super(card);
-	}
+    public InquisitionOfKozilek(final InquisitionOfKozilek card) {
+        super(card);
+    }
 
-	@Override
-	public InquisitionOfKozilek copy() {
-		return new InquisitionOfKozilek(this);
-	}
+    @Override
+    public InquisitionOfKozilek copy() {
+        return new InquisitionOfKozilek(this);
+    }
 }
 
 class InquisitionOfKozilekEffect extends OneShotEffect<InquisitionOfKozilekEffect> {
 
-	private static final FilterCard filter = new FilterCard("nonland card with converted mana cost 3 or less");
+    private static final FilterCard filter = new FilterCard("nonland card with converted mana cost 3 or less");
 
-	static {
-		filter.getNotCardType().add(CardType.LAND);
-		
-		filter.setConvertedManaCost(4);
-		filter.setConvertedManaCostComparison(ComparisonType.LessThan);
-	}
+    static {
+        filter.getNotCardType().add(CardType.LAND);
 
-	public InquisitionOfKozilekEffect() {
-		super(Outcome.Discard);
-		staticText = "Target player reveals his or her hand. You choose a nonland card from it with converted mana cost 3 or less. That player discards that card";
-	}
+        filter.setConvertedManaCost(4);
+        filter.setConvertedManaCostComparison(ComparisonType.LessThan);
+    }
 
-	public InquisitionOfKozilekEffect(final InquisitionOfKozilekEffect effect) {
-		super(effect);
-	}
+    public InquisitionOfKozilekEffect() {
+        super(Outcome.Discard);
+        staticText = "Target player reveals his or her hand. You choose a nonland card from it with converted mana cost 3 or less. That player discards that card";
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getFirstTarget());
-		if (player != null) {
-			player.revealCards("Inquisition of Kozilek", player.getHand(), game);
-			Player you = game.getPlayer(source.getControllerId());
-			if (you != null) {
-				TargetCard target = new TargetCard(Zone.PICK, filter);
-				if (you.choose(Outcome.Benefit, player.getHand(), target, game)) {
-					Card card = player.getHand().get(target.getFirstTarget(), game);
-					if (card != null) {
-						return player.discard(card, source, game);
-					}
-				}
-			}
-		}
-		return false;
-	}
+    public InquisitionOfKozilekEffect(final InquisitionOfKozilekEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public InquisitionOfKozilekEffect copy() {
-		return new InquisitionOfKozilekEffect(this);
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getFirstTarget());
+        if (player != null) {
+            player.revealCards("Inquisition of Kozilek", player.getHand(), game);
+            Player you = game.getPlayer(source.getControllerId());
+            if (you != null) {
+                TargetCard target = new TargetCard(Zone.PICK, filter);
+                if (you.choose(Outcome.Benefit, player.getHand(), target, game)) {
+                    Card card = player.getHand().get(target.getFirstTarget(), game);
+                    if (card != null) {
+                        return player.discard(card, source, game);
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public InquisitionOfKozilekEffect copy() {
+        return new InquisitionOfKozilekEffect(this);
+    }
 
 }

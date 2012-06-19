@@ -38,36 +38,36 @@ import mage.game.permanent.Permanent;
  */
 public class FilterCreatureForAttack extends FilterCreaturePermanent<FilterCreatureForAttack> {
 
-	public FilterCreatureForAttack() {
-		this("");
-	}
-	
-	public FilterCreatureForAttack(String name) {
-		super(name);
-		this.attacking = false;
-		this.useAttacking = true;
-		this.blocking = false;
-		this.useBlocking = true;
-		this.tapped = false;
-		this.useTapped = true;
-		this.abilities.add(DefenderAbility.getInstance());
-		this.notAbilities = true;
-	}
+    public FilterCreatureForAttack() {
+        this("");
+    }
 
-	public FilterCreatureForAttack(final FilterCreatureForAttack filter) {
-		super(filter);
-	}
+    public FilterCreatureForAttack(String name) {
+        super(name);
+        this.attacking = false;
+        this.useAttacking = true;
+        this.blocking = false;
+        this.useBlocking = true;
+        this.tapped = false;
+        this.useTapped = true;
+        this.abilities.add(DefenderAbility.getInstance());
+        this.notAbilities = true;
+    }
 
-	@Override
-	public boolean match(Permanent permanent, Game game) {
-		if (!super.match(permanent, game))
-			return notFilter;
+    public FilterCreatureForAttack(final FilterCreatureForAttack filter) {
+        super(filter);
+    }
 
-		return permanent.canTap();
-	}
+    @Override
+    public boolean match(Permanent permanent, Game game) {
+        if (!super.match(permanent, game))
+            return notFilter;
 
-	@Override
-	public FilterCreatureForAttack copy() {
-		return new FilterCreatureForAttack(this);
-	}
+        return permanent.canTap();
+    }
+
+    @Override
+    public FilterCreatureForAttack copy() {
+        return new FilterCreatureForAttack(this);
+    }
 }

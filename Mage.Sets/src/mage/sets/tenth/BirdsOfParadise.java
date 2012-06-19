@@ -42,26 +42,26 @@ import mage.cards.CardImpl;
  */
 public class BirdsOfParadise extends CardImpl<BirdsOfParadise> {
 
-	public BirdsOfParadise(UUID ownerId) {
-		super(ownerId, 252, "Birds of Paradise", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}");
-		this.expansionSetCode = "10E";
-		this.subtype.add("Bird");
+    public BirdsOfParadise(UUID ownerId) {
+        super(ownerId, 252, "Birds of Paradise", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}");
+        this.expansionSetCode = "10E";
+        this.subtype.add("Bird");
 
-		this.color.setGreen(true);
-		this.power = new MageInt(0);
-		this.toughness = new MageInt(1);
+        this.color.setGreen(true);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(1);
 
-		this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(FlyingAbility.getInstance());
         this.addAbility(new AnyColorManaAbility());
-	}
+    }
 
-	public BirdsOfParadise(final BirdsOfParadise card) {
-		super(card);
-	}
+    public BirdsOfParadise(final BirdsOfParadise card) {
+        super(card);
+    }
 
-	@Override
-	public BirdsOfParadise copy() {
-		return new BirdsOfParadise(this);
-	}
+    @Override
+    public BirdsOfParadise copy() {
+        return new BirdsOfParadise(this);
+    }
 
 }

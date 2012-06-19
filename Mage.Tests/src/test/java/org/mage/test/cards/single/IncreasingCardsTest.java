@@ -26,7 +26,7 @@ public class IncreasingCardsTest extends CardTestPlayerBase {
 
         setStopAt(3, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
-        
+
         assertLife(playerA, 20);
         assertLife(playerB, 20);
         assertGraveyardCount(playerA, 0);
@@ -45,7 +45,7 @@ public class IncreasingCardsTest extends CardTestPlayerBase {
 
         setStopAt(3, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
-        
+
         assertLife(playerA, 20);
         assertLife(playerB, 20);
         assertGraveyardCount(playerA, 0);
@@ -53,7 +53,7 @@ public class IncreasingCardsTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, 9);
 
     }
- 
+
     @Test
     public void testIncreasingDevotion() {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 9);
@@ -64,7 +64,7 @@ public class IncreasingCardsTest extends CardTestPlayerBase {
 
         setStopAt(3, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
-        
+
         assertLife(playerA, 20);
         assertLife(playerB, 20);
         assertGraveyardCount(playerA, 0);
@@ -72,7 +72,7 @@ public class IncreasingCardsTest extends CardTestPlayerBase {
         assertExileCount("Increasing Devotion", 1);
 
     }
-    
+
     @Test
     public void testIncreasingSavagery() {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 7);
@@ -84,7 +84,7 @@ public class IncreasingCardsTest extends CardTestPlayerBase {
 
         setStopAt(3, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
-        
+
         assertLife(playerA, 20);
         assertLife(playerB, 20);
         assertGraveyardCount(playerA, 0);
@@ -106,12 +106,12 @@ public class IncreasingCardsTest extends CardTestPlayerBase {
 
         setStopAt(3, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
-        
+
         assertLife(playerA, 20);
         assertLife(playerB, 5);
         assertGraveyardCount(playerA, 2);
         assertExileCount("Increasing Vengeance", 1);
 
     }
-    
+
 }

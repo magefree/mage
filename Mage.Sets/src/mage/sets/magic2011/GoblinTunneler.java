@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class GoblinTunneler extends mage.sets.riseoftheeldrazi.GoblinTunneler {
 
-	public GoblinTunneler(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 143;
-		this.expansionSetCode = "M11";
-	}
+    public GoblinTunneler(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 143;
+        this.expansionSetCode = "M11";
+    }
 
-	public GoblinTunneler(final GoblinTunneler card) {
-		super(card);
-	}
+    public GoblinTunneler(final GoblinTunneler card) {
+        super(card);
+    }
 
-	@Override
-	public GoblinTunneler copy() {
-		return new GoblinTunneler(this);
-	}
+    @Override
+    public GoblinTunneler copy() {
+        return new GoblinTunneler(this);
+    }
 
 }

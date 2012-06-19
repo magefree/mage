@@ -47,10 +47,10 @@ public class TwistedImage extends CardImpl<TwistedImage> {
     public TwistedImage (UUID ownerId) {
         super(ownerId, 50, "Twisted Image", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "SOM";
-    	this.color.setBlue(true);
-		this.getSpellAbility().addEffect(new SwitchPowerToughnessTargetEffect(Constants.Duration.EndOfTurn));
-		this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
-		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.color.setBlue(true);
+        this.getSpellAbility().addEffect(new SwitchPowerToughnessTargetEffect(Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public TwistedImage (final TwistedImage card) {

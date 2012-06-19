@@ -46,7 +46,7 @@ public class AccorderPaladin extends CardImpl<AccorderPaladin> {
         this.expansionSetCode = "MBS";
         this.subtype.add("Human");
         this.subtype.add("Knight");
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
         this.addAbility(new BattleCryAbility());

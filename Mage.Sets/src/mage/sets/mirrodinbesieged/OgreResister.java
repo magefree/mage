@@ -44,7 +44,7 @@ public class OgreResister extends CardImpl<OgreResister> {
         super(ownerId, 72, "Ogre Resister", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
         this.expansionSetCode = "MBS";
         this.subtype.add("Ogre");
-		this.color.setRed(true);
+        this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
     }

@@ -34,8 +34,8 @@ package mage.game.tournament;
  */
 public class TournamentSealedOptions extends TournamentOptions {
 
-	public TournamentSealedOptions(String name) {
-		super(name);
-	}
+    public TournamentSealedOptions(String name) {
+        super(name);
+    }
 
 }

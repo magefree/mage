@@ -44,52 +44,52 @@ import mage.game.permanent.Permanent;
  */
 public class RegenerateTargetEffect  extends ReplacementEffectImpl<RegenerateTargetEffect> {
 
-	public RegenerateTargetEffect ( ) {
-		super(Duration.EndOfTurn, Outcome.Regenerate);
-	}
+    public RegenerateTargetEffect ( ) {
+        super(Duration.EndOfTurn, Outcome.Regenerate);
+    }
 
-	public RegenerateTargetEffect(final RegenerateTargetEffect effect) {
-		super(effect);
-	}
+    public RegenerateTargetEffect(final RegenerateTargetEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		//20110204 - 701.11
-		Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
-		if (permanent != null && permanent.regenerate(this.getId(), game)) {
-			this.used = true;
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        //20110204 - 701.11
+        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        if (permanent != null && permanent.regenerate(this.getId(), game)) {
+            this.used = true;
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public RegenerateTargetEffect copy() {
-		return new RegenerateTargetEffect(this);
-	}
+    @Override
+    public RegenerateTargetEffect copy() {
+        return new RegenerateTargetEffect(this);
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		return apply(game, source);
-	}
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        return apply(game, source);
+    }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		//20110204 - 701.11c - event.getAmount() is used to signal if regeneration is allowed
-		if (event.getType() == EventType.DESTROY_PERMANENT && event.getAmount() == 0 && event.getTargetId().equals(targetPointer.getFirst(game, source)) && !this.used) {
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        //20110204 - 701.11c - event.getAmount() is used to signal if regeneration is allowed
+        if (event.getType() == EventType.DESTROY_PERMANENT && event.getAmount() == 0 && event.getTargetId().equals(targetPointer.getFirst(game, source)) && !this.used) {
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public String getText(Mode mode) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("Regenerate target ");
-		if ( mode != null ) {
-		  sb.append(mode.getTargets().get(0).getTargetName());
-		}
-		return sb.toString();
-	}
+    @Override
+    public String getText(Mode mode) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Regenerate target ");
+        if ( mode != null ) {
+          sb.append(mode.getTargets().get(0).getTargetName());
+        }
+        return sb.toString();
+    }
 
 }

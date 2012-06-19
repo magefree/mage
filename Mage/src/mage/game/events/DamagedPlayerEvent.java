@@ -36,8 +36,8 @@ import java.util.UUID;
  */
 public class DamagedPlayerEvent extends DamagedEvent {
 
-	public DamagedPlayerEvent(UUID targetId, UUID sourceId, UUID playerId, int amount, boolean combat) {
-		super(EventType.DAMAGED_PLAYER, targetId, sourceId, playerId, amount, combat);
-	}
-	
+    public DamagedPlayerEvent(UUID targetId, UUID sourceId, UUID playerId, int amount, boolean combat) {
+        super(EventType.DAMAGED_PLAYER, targetId, sourceId, playerId, amount, combat);
+    }
+
 }

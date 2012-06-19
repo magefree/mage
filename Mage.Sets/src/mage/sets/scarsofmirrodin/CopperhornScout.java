@@ -50,86 +50,86 @@ import mage.game.permanent.Permanent;
  */
 public class CopperhornScout extends CardImpl<CopperhornScout> {
 
-	public CopperhornScout(UUID ownerId) {
-		super(ownerId, 116, "Copperhorn Scout", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
-		this.expansionSetCode = "SOM";
-		this.subtype.add("Elf");
-		this.subtype.add("Scout");
+    public CopperhornScout(UUID ownerId) {
+        super(ownerId, 116, "Copperhorn Scout", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
+        this.expansionSetCode = "SOM";
+        this.subtype.add("Elf");
+        this.subtype.add("Scout");
 
-		this.color.setGreen(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
+        this.color.setGreen(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-		this.addAbility(new CopperhornScoutTriggeredAbility());
-	}
+        this.addAbility(new CopperhornScoutTriggeredAbility());
+    }
 
-	public CopperhornScout(final CopperhornScout card) {
-		super(card);
-	}
+    public CopperhornScout(final CopperhornScout card) {
+        super(card);
+    }
 
-	@Override
-	public CopperhornScout copy() {
-		return new CopperhornScout(this);
-	}
+    @Override
+    public CopperhornScout copy() {
+        return new CopperhornScout(this);
+    }
 }
 
 class CopperhornScoutTriggeredAbility extends TriggeredAbilityImpl<CopperhornScoutTriggeredAbility> {
 
-	public CopperhornScoutTriggeredAbility() {
-		super(Zone.BATTLEFIELD, new CopperhornScoutUntapEffect(), false);
-	}
+    public CopperhornScoutTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new CopperhornScoutUntapEffect(), false);
+    }
 
-	public CopperhornScoutTriggeredAbility(final CopperhornScoutTriggeredAbility ability) {
-		super(ability);
-	}
+    public CopperhornScoutTriggeredAbility(final CopperhornScoutTriggeredAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public CopperhornScoutTriggeredAbility copy() {
-		return new CopperhornScoutTriggeredAbility(this);
-	}
+    @Override
+    public CopperhornScoutTriggeredAbility copy() {
+        return new CopperhornScoutTriggeredAbility(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "Whenever {this} attacks, untap each other creature you control.";
-	}
+    @Override
+    public String getRule() {
+        return "Whenever {this} attacks, untap each other creature you control.";
+    }
 }
 
 class CopperhornScoutUntapEffect extends OneShotEffect<CopperhornScoutUntapEffect> {
 
-	CopperhornScoutUntapEffect ( ) {
-		super(Outcome.Untap);
-	}
+    CopperhornScoutUntapEffect ( ) {
+        super(Outcome.Untap);
+    }
 
-	CopperhornScoutUntapEffect ( CopperhornScoutUntapEffect effect ) {
-		super(effect);
-	}
+    CopperhornScoutUntapEffect ( CopperhornScoutUntapEffect effect ) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
+    @Override
+    public boolean apply(Game game, Ability source) {
+        FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
-		List<Permanent> creatures = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
+        List<Permanent> creatures = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
 
-		for ( Permanent creature : creatures ) {
-			if ( !creature.getId().equals(source.getSourceId()) ) {
-				creature.untap(game);
-			}
-		}
+        for ( Permanent creature : creatures ) {
+            if ( !creature.getId().equals(source.getSourceId()) ) {
+                creature.untap(game);
+            }
+        }
 
-		return true;
-	}
+        return true;
+    }
 
-	@Override
-	public CopperhornScoutUntapEffect copy() {
-		return new CopperhornScoutUntapEffect(this);
-	}
+    @Override
+    public CopperhornScoutUntapEffect copy() {
+        return new CopperhornScoutUntapEffect(this);
+    }
 
 }

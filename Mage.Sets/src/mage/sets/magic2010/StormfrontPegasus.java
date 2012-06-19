@@ -41,24 +41,24 @@ import mage.cards.CardImpl;
  */
 public class StormfrontPegasus extends CardImpl<StormfrontPegasus> {
 
-	public StormfrontPegasus(UUID ownerId) {
-		super(ownerId, 35, "Stormfront Pegasus", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
-		this.expansionSetCode = "M10";
-		this.subtype.add("Pegasus");
-		this.color.setWhite(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(1);
+    public StormfrontPegasus(UUID ownerId) {
+        super(ownerId, 35, "Stormfront Pegasus", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        this.expansionSetCode = "M10";
+        this.subtype.add("Pegasus");
+        this.color.setWhite(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-		this.addAbility(FlyingAbility.getInstance());
-	}
+        this.addAbility(FlyingAbility.getInstance());
+    }
 
-	public StormfrontPegasus(final StormfrontPegasus card) {
-		super(card);
-	}
+    public StormfrontPegasus(final StormfrontPegasus card) {
+        super(card);
+    }
 
-	@Override
-	public StormfrontPegasus copy() {
-		return new StormfrontPegasus(this);
-	}
+    @Override
+    public StormfrontPegasus copy() {
+        return new StormfrontPegasus(this);
+    }
 
 }

@@ -39,22 +39,22 @@ import java.util.UUID;
  */
 public class WalkingCorpse extends CardImpl<WalkingCorpse> {
 
-	public WalkingCorpse(UUID ownerId) {
-		super(ownerId, 126, "Walking Corpse", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-		this.expansionSetCode = "ISD";
-		this.subtype.add("Zombie");
+    public WalkingCorpse(UUID ownerId) {
+        super(ownerId, 126, "Walking Corpse", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
+        this.expansionSetCode = "ISD";
+        this.subtype.add("Zombie");
 
-		this.color.setBlack(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
-	}
+        this.color.setBlack(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+    }
 
-	public WalkingCorpse(final WalkingCorpse card) {
-		super(card);
-	}
+    public WalkingCorpse(final WalkingCorpse card) {
+        super(card);
+    }
 
-	@Override
-	public WalkingCorpse copy() {
-		return new WalkingCorpse(this);
-	}
+    @Override
+    public WalkingCorpse copy() {
+        return new WalkingCorpse(this);
+    }
 }

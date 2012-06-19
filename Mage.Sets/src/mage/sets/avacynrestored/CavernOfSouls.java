@@ -64,7 +64,7 @@ import java.util.UUID;
 public class CavernOfSouls extends CardImpl<CavernOfSouls> {
 
     private static final String ruleText = "As Cavern of Souls enters the battlefield, choose a creature type";
-    
+
     public CavernOfSouls(UUID ownerId) {
         super(ownerId, 226, "Cavern of Souls", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "AVR";

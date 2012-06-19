@@ -64,14 +64,14 @@ public class CurseOfStalkedPrey extends CardImpl<CurseOfStalkedPrey> {
 
         // Enchant player
         TargetPlayer target = new TargetPlayer();
-		this.getSpellAbility().addTarget(target);
-		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.AddAbility));
-		Ability ability = new EnchantAbility(target.getTargetName());
-		this.addAbility(ability);
+        this.getSpellAbility().addTarget(target);
+        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.AddAbility));
+        Ability ability = new EnchantAbility(target.getTargetName());
+        this.addAbility(ability);
 
         // Whenever a creature deals combat damage to enchanted player, put a +1/+1 counter on that creature.
         this.addAbility(new CurseOfStalkedPreyTriggeredAbility());
-        
+
     }
 
     public CurseOfStalkedPrey(final CurseOfStalkedPrey card) {
@@ -86,37 +86,37 @@ public class CurseOfStalkedPrey extends CardImpl<CurseOfStalkedPrey> {
 
 class CurseOfStalkedPreyTriggeredAbility extends TriggeredAbilityImpl<CurseOfStalkedPreyTriggeredAbility> {
 
-	public CurseOfStalkedPreyTriggeredAbility() {
-		super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
-	}
+    public CurseOfStalkedPreyTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
+    }
 
-	public CurseOfStalkedPreyTriggeredAbility(final CurseOfStalkedPreyTriggeredAbility ability) {
-		super(ability);
-	}
+    public CurseOfStalkedPreyTriggeredAbility(final CurseOfStalkedPreyTriggeredAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public CurseOfStalkedPreyTriggeredAbility copy() {
-		return new CurseOfStalkedPreyTriggeredAbility(this);
-	}
+    @Override
+    public CurseOfStalkedPreyTriggeredAbility copy() {
+        return new CurseOfStalkedPreyTriggeredAbility(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.DAMAGED_PLAYER && ((DamagedPlayerEvent) event).isCombatDamage()) {
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.DAMAGED_PLAYER && ((DamagedPlayerEvent) event).isCombatDamage()) {
             Permanent enchantment = game.getPermanent(this.sourceId);
             if (enchantment != null && enchantment.getAttachedTo() != null) {
                 Player player = game.getPlayer(enchantment.getAttachedTo());
                 if (player != null && event.getTargetId().equals(player.getId())) {
                     getEffects().get(0).setTargetPointer(new FixedTarget(event.getSourceId()));
-           			return true;
+                       return true;
                 }
             }
-		}
-		return false;
-	}
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "Whenever a creature deals combat damage to enchanted player, put a +1/+1 counter on that creature";
-	}
+    @Override
+    public String getRule() {
+        return "Whenever a creature deals combat damage to enchanted player, put a +1/+1 counter on that creature";
+    }
 
 }

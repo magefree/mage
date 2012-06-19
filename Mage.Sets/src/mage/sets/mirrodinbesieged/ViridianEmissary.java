@@ -49,7 +49,7 @@ public class ViridianEmissary extends CardImpl<ViridianEmissary> {
         this.expansionSetCode = "MBS";
         this.subtype.add("Elf");
         this.subtype.add("Scout");
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         this.addAbility(new DiesTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterBasicLandCard()), true), true));

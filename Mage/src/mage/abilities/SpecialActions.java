@@ -38,24 +38,24 @@ import java.util.UUID;
  */
 public class SpecialActions extends AbilitiesImpl<SpecialAction> {
 
-	public SpecialActions() {}
-	
-	public SpecialActions(final SpecialActions actions) {
-		super(actions);
-	}
+    public SpecialActions() {}
 
-	public Map<UUID, SpecialAction> getControlledBy(UUID controllerId) {
-		HashMap<UUID, SpecialAction> controlledBy = new HashMap<UUID, SpecialAction>();
-		for (SpecialAction action: this) {
-			if (action.getControllerId().equals(controllerId))
-				controlledBy.put(action.id, action);
-		}
-		return controlledBy;
-	}
+    public SpecialActions(final SpecialActions actions) {
+        super(actions);
+    }
 
-	@Override
-	public SpecialActions copy() {
-		return new SpecialActions(this);
-	}
+    public Map<UUID, SpecialAction> getControlledBy(UUID controllerId) {
+        HashMap<UUID, SpecialAction> controlledBy = new HashMap<UUID, SpecialAction>();
+        for (SpecialAction action: this) {
+            if (action.getControllerId().equals(controllerId))
+                controlledBy.put(action.id, action);
+        }
+        return controlledBy;
+    }
+
+    @Override
+    public SpecialActions copy() {
+        return new SpecialActions(this);
+    }
 
 }

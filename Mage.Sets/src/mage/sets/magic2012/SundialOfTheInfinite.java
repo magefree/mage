@@ -54,10 +54,10 @@ public class SundialOfTheInfinite extends CardImpl<SundialOfTheInfinite> {
         this.expansionSetCode = "M12";
 
         // {1}, {tap}: End the turn. Activate this ability only during your turn.
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SundialOfTheInfiniteEffect(), new GenericManaCost(1));
-		ability.addCost(new TapSourceCost());
-		ability.addCost(new OnlyDuringYourTurnCost());
-		this.addAbility(ability);
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SundialOfTheInfiniteEffect(), new GenericManaCost(1));
+        ability.addCost(new TapSourceCost());
+        ability.addCost(new OnlyDuringYourTurnCost());
+        this.addAbility(ability);
     }
 
     public SundialOfTheInfinite(final SundialOfTheInfinite card) {
@@ -72,22 +72,22 @@ public class SundialOfTheInfinite extends CardImpl<SundialOfTheInfinite> {
 
 class SundialOfTheInfiniteEffect extends OneShotEffect<SundialOfTheInfiniteEffect> {
 
-	public SundialOfTheInfiniteEffect() {
-		super(Outcome.Detriment);
-		staticText = "End the turn (Exile all spells and abilities on the stack. Discard down to your maximum hand size. Damage wears off, and \"this turn\" and \"until end of turn\" effects end.)";
-	}
+    public SundialOfTheInfiniteEffect() {
+        super(Outcome.Detriment);
+        staticText = "End the turn (Exile all spells and abilities on the stack. Discard down to your maximum hand size. Damage wears off, and \"this turn\" and \"until end of turn\" effects end.)";
+    }
 
-	public SundialOfTheInfiniteEffect(SundialOfTheInfiniteEffect effect) {
-		super(effect);
-	}
+    public SundialOfTheInfiniteEffect(SundialOfTheInfiniteEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return game.endTurn(source.getControllerId());
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return game.endTurn(source.getControllerId());
+    }
 
-	@Override
-	public SundialOfTheInfiniteEffect copy() {
-		return new SundialOfTheInfiniteEffect(this);
-	}
+    @Override
+    public SundialOfTheInfiniteEffect copy() {
+        return new SundialOfTheInfiniteEffect(this);
+    }
 }

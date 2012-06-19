@@ -85,13 +85,13 @@ public class YoseiTheMorningStar extends CardImpl<YoseiTheMorningStar> {
 
  class YoseiTheMorningStarTarget extends TargetPermanent {
 
-	public YoseiTheMorningStarTarget() {
-		super(0, 5, new FilterPermanent("up to five target permanents that player controls that will be tapped"), false);
-	}
+    public YoseiTheMorningStarTarget() {
+        super(0, 5, new FilterPermanent("up to five target permanents that player controls that will be tapped"), false);
+    }
 
-	public YoseiTheMorningStarTarget(final YoseiTheMorningStarTarget target) {
-		super(target);
-	}
+    public YoseiTheMorningStarTarget(final YoseiTheMorningStarTarget target) {
+        super(target);
+    }
 
         @Override
         public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
@@ -101,50 +101,50 @@ public class YoseiTheMorningStar extends CardImpl<YoseiTheMorningStar> {
                     filter.getControllerId().add(player.getId());
                     return super.canTarget(controllerId, id, source, game);
                 }
-		return false;
-	}
-                
-	@Override
-	public YoseiTheMorningStarTarget copy() {
-		return new YoseiTheMorningStarTarget(this);
-	}
+        return false;
+    }
+
+    @Override
+    public YoseiTheMorningStarTarget copy() {
+        return new YoseiTheMorningStarTarget(this);
+    }
 
 }
 
 class YoseiTheMorningStarTapEffect extends OneShotEffect<YoseiTheMorningStarTapEffect> {
 
-	public YoseiTheMorningStarTapEffect() {
-		super(Outcome.Tap);
+    public YoseiTheMorningStarTapEffect() {
+        super(Outcome.Tap);
                 staticText = "Tap up to five target permanents that player controls";
-	}
+    }
 
-	public YoseiTheMorningStarTapEffect(final YoseiTheMorningStarTapEffect effect) {
-		super(effect);
-	}
+    public YoseiTheMorningStarTapEffect(final YoseiTheMorningStarTapEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public YoseiTheMorningStarTapEffect copy() {
-		return new YoseiTheMorningStarTapEffect(this);
-	}
+    @Override
+    public YoseiTheMorningStarTapEffect copy() {
+        return new YoseiTheMorningStarTapEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
                 Targets targets = source.getTargets();
                 Target target1 = targets.get(1);
                 for (UUID target: target1.getTargets()) {
-			Permanent permanent = game.getPermanent(target);
-			if (permanent != null) {
-				permanent.tap(game);
-			} else {
-				return false;
-			}
-		}
-		return true;
-	}
+            Permanent permanent = game.getPermanent(target);
+            if (permanent != null) {
+                permanent.tap(game);
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
 
-	@Override
-	public String getText(Mode mode) {
+    @Override
+    public String getText(Mode mode) {
             return staticText;
-	}
+    }
 
 }

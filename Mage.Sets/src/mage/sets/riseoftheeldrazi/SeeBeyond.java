@@ -48,59 +48,59 @@ import mage.target.TargetCard;
  */
 public class SeeBeyond extends CardImpl<SeeBeyond> {
 
-	public SeeBeyond(UUID ownerId) {
-		super(ownerId, 86, "See Beyond", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");
-		this.expansionSetCode = "ROE";
-		this.color.setBlue(true);
-		this.getSpellAbility().addEffect(new SeeBeyondEffect());
-	}
+    public SeeBeyond(UUID ownerId) {
+        super(ownerId, 86, "See Beyond", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");
+        this.expansionSetCode = "ROE";
+        this.color.setBlue(true);
+        this.getSpellAbility().addEffect(new SeeBeyondEffect());
+    }
 
-	public SeeBeyond(final SeeBeyond card) {
-		super(card);
-	}
+    public SeeBeyond(final SeeBeyond card) {
+        super(card);
+    }
 
-	@Override
-	public SeeBeyond copy() {
-		return new SeeBeyond(this);
-	}
+    @Override
+    public SeeBeyond copy() {
+        return new SeeBeyond(this);
+    }
 
 }
 
 class SeeBeyondEffect extends OneShotEffect<SeeBeyondEffect> {
 
-	private static FilterCard filter = new FilterCard("card to shuffle into your library");
+    private static FilterCard filter = new FilterCard("card to shuffle into your library");
 
-	public SeeBeyondEffect() {
-		super(Outcome.DrawCard);
-		staticText = "Draw two cards, then shuffle a card from your hand into your library";
-	}
+    public SeeBeyondEffect() {
+        super(Outcome.DrawCard);
+        staticText = "Draw two cards, then shuffle a card from your hand into your library";
+    }
 
-	public SeeBeyondEffect(SeeBeyondEffect effect) {
-		super(effect);
-	}
+    public SeeBeyondEffect(SeeBeyondEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-		player.drawCards(2, game);
-		if (player.getHand().size() > 0) {
-			TargetCard target = new TargetCard(Zone.HAND, filter);
-			target.setRequired(true);
-			player.choose(Outcome.Detriment, player.getHand(), target, game);
-			Card card = player.getHand().get(target.getFirstTarget(), game);
-			if (card != null) {
-				player.removeFromHand(card, game);
-				card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
-				player.shuffleLibrary(game);
-				return true;
-			}
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        player.drawCards(2, game);
+        if (player.getHand().size() > 0) {
+            TargetCard target = new TargetCard(Zone.HAND, filter);
+            target.setRequired(true);
+            player.choose(Outcome.Detriment, player.getHand(), target, game);
+            Card card = player.getHand().get(target.getFirstTarget(), game);
+            if (card != null) {
+                player.removeFromHand(card, game);
+                card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+                player.shuffleLibrary(game);
+                return true;
+            }
+        }
+        return true;
+    }
 
-	@Override
-	public SeeBeyondEffect copy() {
-		return new SeeBeyondEffect(this);
-	}
+    @Override
+    public SeeBeyondEffect copy() {
+        return new SeeBeyondEffect(this);
+    }
 
 }

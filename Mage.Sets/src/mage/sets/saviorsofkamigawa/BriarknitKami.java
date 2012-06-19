@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class BriarknitKami extends CardImpl<BriarknitKami> {
 
     private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
-    
+
     public BriarknitKami(UUID ownerId) {
         super(ownerId, 124, "Briarknit Kami", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
         this.expansionSetCode = "SOK";

@@ -52,102 +52,102 @@ import mage.game.events.ZoneChangeEvent;
  */
 public class UnearthAbility extends ActivatedAbilityImpl<UnearthAbility> {
 
-	protected boolean unearthed;
+    protected boolean unearthed;
 
-	public UnearthAbility(ManaCosts costs) {
-		super(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), costs);
-		this.timing = TimingRule.SORCERY;
-		this.addEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield));
-		this.addEffect(new CreateDelayedTriggeredAbilityEffect(new UnearthDelayedTriggeredAbility()));
-		this.addEffect(new UnearthLeavesBattlefieldEffect());
-	}
+    public UnearthAbility(ManaCosts costs) {
+        super(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), costs);
+        this.timing = TimingRule.SORCERY;
+        this.addEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield));
+        this.addEffect(new CreateDelayedTriggeredAbilityEffect(new UnearthDelayedTriggeredAbility()));
+        this.addEffect(new UnearthLeavesBattlefieldEffect());
+    }
 
-	public UnearthAbility(final UnearthAbility ability) {
-		super(ability);
-		this.unearthed = ability.unearthed;
-	}
+    public UnearthAbility(final UnearthAbility ability) {
+        super(ability);
+        this.unearthed = ability.unearthed;
+    }
 
-	@Override
-	public UnearthAbility copy() {
-		return new UnearthAbility(this);
-	}
+    @Override
+    public UnearthAbility copy() {
+        return new UnearthAbility(this);
+    }
 
-	public boolean isUnearthed() {
-		return unearthed;
-	}
+    public boolean isUnearthed() {
+        return unearthed;
+    }
 
-	@Override
-	public String getRule() {
-		return "Unearth " + super.getRule();
-	}
+    @Override
+    public String getRule() {
+        return "Unearth " + super.getRule();
+    }
 
 }
 
 class UnearthDelayedTriggeredAbility extends DelayedTriggeredAbility<UnearthDelayedTriggeredAbility> {
 
-	public UnearthDelayedTriggeredAbility() {
-		super(new ExileSourceEffect());
-	}
+    public UnearthDelayedTriggeredAbility() {
+        super(new ExileSourceEffect());
+    }
 
-	public UnearthDelayedTriggeredAbility(final UnearthDelayedTriggeredAbility ability) {
-		super(ability);
-	}
+    public UnearthDelayedTriggeredAbility(final UnearthDelayedTriggeredAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public UnearthDelayedTriggeredAbility copy() {
-		return new UnearthDelayedTriggeredAbility(this);
-	}
+    @Override
+    public UnearthDelayedTriggeredAbility copy() {
+        return new UnearthDelayedTriggeredAbility(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.END_TURN_STEP_PRE && event.getPlayerId().equals(this.controllerId)) {
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.END_TURN_STEP_PRE && event.getPlayerId().equals(this.controllerId)) {
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "Exile {this} at the beginning of the next end step";
-	}
+    @Override
+    public String getRule() {
+        return "Exile {this} at the beginning of the next end step";
+    }
 
 }
 
 class UnearthLeavesBattlefieldEffect extends ReplacementEffectImpl<UnearthLeavesBattlefieldEffect> {
 
-	public UnearthLeavesBattlefieldEffect() {
-		super(Duration.WhileOnBattlefield, Outcome.Exile);
-		staticText = "When {this} leaves the battlefield, exile it";
-	}
+    public UnearthLeavesBattlefieldEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Exile);
+        staticText = "When {this} leaves the battlefield, exile it";
+    }
 
-	public UnearthLeavesBattlefieldEffect(final UnearthLeavesBattlefieldEffect effect) {
-		super(effect);
-	}
+    public UnearthLeavesBattlefieldEffect(final UnearthLeavesBattlefieldEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public UnearthLeavesBattlefieldEffect copy() {
-		return new UnearthLeavesBattlefieldEffect(this);
-	}
+    @Override
+    public UnearthLeavesBattlefieldEffect copy() {
+        return new UnearthLeavesBattlefieldEffect(this);
+    }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(source.getSourceId())) {
-			ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-			if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() != Zone.EXILED)
-				return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(source.getSourceId())) {
+            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+            if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() != Zone.EXILED)
+                return true;
+        }
+        return false;
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		ExileSourceEffect effect = new ExileSourceEffect();
-		return effect.apply(game, source);
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        ExileSourceEffect effect = new ExileSourceEffect();
+        return effect.apply(game, source);
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		return apply(game, source);
-	}
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        return apply(game, source);
+    }
 
 }

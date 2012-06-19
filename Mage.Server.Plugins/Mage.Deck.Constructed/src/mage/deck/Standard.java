@@ -41,22 +41,22 @@ import mage.sets.Sets;
  */
 public class Standard extends Constructed {
 
-	public Standard() {
-		super("Constructed - Standard");
-		GregorianCalendar current = new GregorianCalendar();
-		GregorianCalendar cutoff;
-		if (current.get(Calendar.MONTH) > 9) {
-			cutoff = new GregorianCalendar(current.get(Calendar.YEAR) - 1, Calendar.SEPTEMBER, 1);
-		}
-		else {
-			cutoff = new GregorianCalendar(current.get(Calendar.YEAR) - 2, Calendar.SEPTEMBER, 1);
-		}
-		for (ExpansionSet set: Sets.getInstance().values()) {
-			if (set.getReleaseDate().after(cutoff.getTime()) && set.getSetType() != SetType.REPRINT) {
-				setCodes.add(set.getCode());
-			}
-		}
+    public Standard() {
+        super("Constructed - Standard");
+        GregorianCalendar current = new GregorianCalendar();
+        GregorianCalendar cutoff;
+        if (current.get(Calendar.MONTH) > 9) {
+            cutoff = new GregorianCalendar(current.get(Calendar.YEAR) - 1, Calendar.SEPTEMBER, 1);
+        }
+        else {
+            cutoff = new GregorianCalendar(current.get(Calendar.YEAR) - 2, Calendar.SEPTEMBER, 1);
+        }
+        for (ExpansionSet set: Sets.getInstance().values()) {
+            if (set.getReleaseDate().after(cutoff.getTime()) && set.getSetType() != SetType.REPRINT) {
+                setCodes.add(set.getCode());
+            }
+        }
         banned.add("Jace, the Mind Sculptor");
         banned.add("Stoneforge Mystic");
-	}
+    }
 }

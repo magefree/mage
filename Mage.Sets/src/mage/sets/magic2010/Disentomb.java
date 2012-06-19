@@ -42,23 +42,23 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class Disentomb extends CardImpl<Disentomb> {
 
-	private static FilterCreatureCard filter = new FilterCreatureCard("creature card from your graveyard");
+    private static FilterCreatureCard filter = new FilterCreatureCard("creature card from your graveyard");
 
-	public Disentomb(UUID ownerId) {
-		super(ownerId, 92, "Disentomb", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
-		this.expansionSetCode = "M10";
-		this.color.setBlack(true);
-		this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
-		this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-	}
+    public Disentomb(UUID ownerId) {
+        super(ownerId, 92, "Disentomb", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
+        this.expansionSetCode = "M10";
+        this.color.setBlack(true);
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
+        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+    }
 
-	public Disentomb(final Disentomb card) {
-		super(card);
-	}
+    public Disentomb(final Disentomb card) {
+        super(card);
+    }
 
-	@Override
-	public Disentomb copy() {
-		return new Disentomb(this);
-	}
+    @Override
+    public Disentomb copy() {
+        return new Disentomb(this);
+    }
 
 }

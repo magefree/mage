@@ -79,32 +79,32 @@ public class KamiOfTheHonoredDead extends CardImpl<KamiOfTheHonoredDead> {
 
 class KamiOfTheHonoredDeadTriggeredAbility extends TriggeredAbilityImpl<KamiOfTheHonoredDeadTriggeredAbility> {
 
-	public KamiOfTheHonoredDeadTriggeredAbility() {
-		super(Constants.Zone.BATTLEFIELD, new KamiOfTheHonoredDeadGainLifeEffect());
-	}
+    public KamiOfTheHonoredDeadTriggeredAbility() {
+        super(Constants.Zone.BATTLEFIELD, new KamiOfTheHonoredDeadGainLifeEffect());
+    }
 
-	public KamiOfTheHonoredDeadTriggeredAbility(final KamiOfTheHonoredDeadTriggeredAbility effect) {
-		super(effect);
-	}
+    public KamiOfTheHonoredDeadTriggeredAbility(final KamiOfTheHonoredDeadTriggeredAbility effect) {
+        super(effect);
+    }
 
-	@Override
-	public KamiOfTheHonoredDeadTriggeredAbility copy() {
-		return new KamiOfTheHonoredDeadTriggeredAbility(this);
-	}
+    @Override
+    public KamiOfTheHonoredDeadTriggeredAbility copy() {
+        return new KamiOfTheHonoredDeadTriggeredAbility(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE && event.getTargetId().equals(this.sourceId)) {
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE && event.getTargetId().equals(this.sourceId)) {
                         this.getEffects().get(0).setValue("damageAmount", event.getAmount());
                         return true;
-		}
-		return false;
-	}
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "Whenever {this} is dealt damage, " + super.getRule();
-	}
+    @Override
+    public String getRule() {
+        return "Whenever {this} is dealt damage, " + super.getRule();
+    }
 }
 
 
@@ -115,23 +115,23 @@ class KamiOfTheHonoredDeadGainLifeEffect extends OneShotEffect<KamiOfTheHonoredD
             staticText = "you gain that much life";
         }
 
-	public KamiOfTheHonoredDeadGainLifeEffect(final KamiOfTheHonoredDeadGainLifeEffect effect) {
-		super(effect);
-	}
+    public KamiOfTheHonoredDeadGainLifeEffect(final KamiOfTheHonoredDeadGainLifeEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public KamiOfTheHonoredDeadGainLifeEffect copy() {
-		return new KamiOfTheHonoredDeadGainLifeEffect(this);
-	}
+    @Override
+    public KamiOfTheHonoredDeadGainLifeEffect copy() {
+        return new KamiOfTheHonoredDeadGainLifeEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-		if (player != null) {
-			player.gainLife((Integer) this.getValue("damageAmount"), game);
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+            player.gainLife((Integer) this.getValue("damageAmount"), game);
+        }
+        return true;
+    }
 
 
 }

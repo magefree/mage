@@ -43,30 +43,30 @@ import mage.target.TargetSpell;
  */
 public class Flashfreeze extends CardImpl<Flashfreeze> {
 
-	private static final FilterSpell filter = new FilterSpell("red or green spell");
+    private static final FilterSpell filter = new FilterSpell("red or green spell");
 
-	static {
-		filter.getColor().setRed(true);
-		filter.getColor().setGreen(true);
-		filter.setScopeColor(ComparisonScope.Any);
-		filter.setUseColor(true);
-	}
+    static {
+        filter.getColor().setRed(true);
+        filter.getColor().setGreen(true);
+        filter.setScopeColor(ComparisonScope.Any);
+        filter.setUseColor(true);
+    }
 
-	public Flashfreeze(UUID ownerId) {
-		super(ownerId, 84, "Flashfreeze", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-		this.expansionSetCode = "10E";
-		this.color.setBlue(true);
-		this.getSpellAbility().addTarget(new TargetSpell(filter));
-		this.getSpellAbility().addEffect(new CounterTargetEffect());
-	}
+    public Flashfreeze(UUID ownerId) {
+        super(ownerId, 84, "Flashfreeze", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
+        this.expansionSetCode = "10E";
+        this.color.setBlue(true);
+        this.getSpellAbility().addTarget(new TargetSpell(filter));
+        this.getSpellAbility().addEffect(new CounterTargetEffect());
+    }
 
-	public Flashfreeze(final Flashfreeze card) {
-		super(card);
-	}
+    public Flashfreeze(final Flashfreeze card) {
+        super(card);
+    }
 
-	@Override
-	public Flashfreeze copy() {
-		return new Flashfreeze(this);
-	}
+    @Override
+    public Flashfreeze copy() {
+        return new Flashfreeze(this);
+    }
 
 }

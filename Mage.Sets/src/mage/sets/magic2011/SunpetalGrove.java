@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class SunpetalGrove extends mage.sets.magic2010.SunpetalGrove {
 
-	public SunpetalGrove(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 228;
-		this.expansionSetCode = "M11";
-	}
+    public SunpetalGrove(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 228;
+        this.expansionSetCode = "M11";
+    }
 
-	public SunpetalGrove(final SunpetalGrove card) {
-		super(card);
-	}
+    public SunpetalGrove(final SunpetalGrove card) {
+        super(card);
+    }
 
-	@Override
-	public SunpetalGrove copy() {
-		return new SunpetalGrove(this);
-	}
+    @Override
+    public SunpetalGrove copy() {
+        return new SunpetalGrove(this);
+    }
 
 }

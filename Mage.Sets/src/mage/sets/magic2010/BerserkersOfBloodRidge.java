@@ -41,24 +41,24 @@ import mage.cards.CardImpl;
  */
 public class BerserkersOfBloodRidge  extends CardImpl<BerserkersOfBloodRidge> {
 
-	public BerserkersOfBloodRidge(UUID ownerId) {
-		super(ownerId, 126, "Berserkers of Blood Ridge", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
-		this.expansionSetCode = "M10";
-		this.color.setRed(true);
-		this.subtype.add("Human");
-		this.subtype.add("Berserker");
-		this.power = new MageInt(4);
-		this.toughness = new MageInt(4);
-		this.addAbility(new AttacksEachTurnStaticAbility());
-	}
+    public BerserkersOfBloodRidge(UUID ownerId) {
+        super(ownerId, 126, "Berserkers of Blood Ridge", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
+        this.expansionSetCode = "M10";
+        this.color.setRed(true);
+        this.subtype.add("Human");
+        this.subtype.add("Berserker");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
+        this.addAbility(new AttacksEachTurnStaticAbility());
+    }
 
-	public BerserkersOfBloodRidge(final BerserkersOfBloodRidge card) {
-		super(card);
-	}
+    public BerserkersOfBloodRidge(final BerserkersOfBloodRidge card) {
+        super(card);
+    }
 
-	@Override
-	public BerserkersOfBloodRidge copy() {
-		return new BerserkersOfBloodRidge(this);
-	}
+    @Override
+    public BerserkersOfBloodRidge copy() {
+        return new BerserkersOfBloodRidge(this);
+    }
 
 }

@@ -53,7 +53,7 @@ public class EquippedHasSubtypeCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
-		if (permanent != null && permanent.getAttachedTo() != null) {
+        if (permanent != null && permanent.getAttachedTo() != null) {
             Permanent attachedTo = game.getBattlefield().getPermanent(permanent.getAttachedTo());
             if (attachedTo != null) {
                 if (subType != null) {
@@ -68,7 +68,7 @@ public class EquippedHasSubtypeCondition implements Condition {
                     }
                 }
             }
-		}
-		return false;
+        }
+        return false;
     }
 }

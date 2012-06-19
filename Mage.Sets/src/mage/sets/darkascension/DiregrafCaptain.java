@@ -52,7 +52,7 @@ import java.util.UUID;
  * @author Loki
  */
 public class DiregrafCaptain extends CardImpl<DiregrafCaptain> {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Zombie");
 
     static {
@@ -89,19 +89,19 @@ public class DiregrafCaptain extends CardImpl<DiregrafCaptain> {
 }
 
 class DiregrafCaptainTriggeredAbility extends TriggeredAbilityImpl<DiregrafCaptainTriggeredAbility> {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Zombie");
 
     static {
         filter.getSubtype().add("Zombie");
         filter.setScopeSubtype(Filter.ComparisonScope.Any);
     }
-    
+
     public DiregrafCaptainTriggeredAbility() {
         super(Constants.Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), false);
         this.addTarget(new TargetOpponent());
     }
-    
+
     public DiregrafCaptainTriggeredAbility(final DiregrafCaptainTriggeredAbility ability) {
         super(ability);
     }

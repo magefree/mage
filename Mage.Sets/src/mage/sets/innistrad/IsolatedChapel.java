@@ -49,32 +49,32 @@ import java.util.UUID;
  */
 public class IsolatedChapel extends CardImpl<IsolatedChapel> {
 
-	private static final FilterLandPermanent filter = new FilterLandPermanent();
+    private static final FilterLandPermanent filter = new FilterLandPermanent();
 
-	static {
-		filter.getSubtype().add("Plains");
-		filter.getSubtype().add("Swamp");
-		filter.setScopeSubtype(ComparisonScope.Any);
-		filter.setMessage("Plains or a Swamp");
-	}
+    static {
+        filter.getSubtype().add("Plains");
+        filter.getSubtype().add("Swamp");
+        filter.setScopeSubtype(ComparisonScope.Any);
+        filter.setMessage("Plains or a Swamp");
+    }
 
-	public IsolatedChapel(UUID ownerId) {
-		super(ownerId, 242, "Isolated Chapel", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-		this.expansionSetCode = "ISD";
+    public IsolatedChapel(UUID ownerId) {
+        super(ownerId, 242, "Isolated Chapel", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+        this.expansionSetCode = "ISD";
 
-		Condition controls = new UnlessCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0));
-		String abilityText = "tap it unless you control a " + filter.getMessage();
-		this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
-		this.addAbility(new WhiteManaAbility());
-		this.addAbility(new BlackManaAbility());
-	}
+        Condition controls = new UnlessCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0));
+        String abilityText = "tap it unless you control a " + filter.getMessage();
+        this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
+        this.addAbility(new WhiteManaAbility());
+        this.addAbility(new BlackManaAbility());
+    }
 
-	public IsolatedChapel(final IsolatedChapel card) {
-		super(card);
-	}
+    public IsolatedChapel(final IsolatedChapel card) {
+        super(card);
+    }
 
-	@Override
-	public IsolatedChapel copy() {
-		return new IsolatedChapel(this);
-	}
+    @Override
+    public IsolatedChapel copy() {
+        return new IsolatedChapel(this);
+    }
 }

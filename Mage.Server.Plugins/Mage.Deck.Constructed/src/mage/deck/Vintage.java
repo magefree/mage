@@ -36,9 +36,9 @@ import mage.cards.decks.Constructed;
  */
 public class Vintage extends Constructed {
 
-	public Vintage() {
-		super("Constructed - Vintage");
-        
+    public Vintage() {
+        super("Constructed - Vintage");
+
         banned.add("Amulet of Quoz");
         banned.add("Bronze Tablet");
         banned.add("Chaos Orb");
@@ -97,5 +97,5 @@ public class Vintage extends Constructed {
         restricted.add("Yawgmoth's Bargain");
         restricted.add("Yawgmoth's Will");
 
-	}
+    }
 }

@@ -70,16 +70,16 @@ public class LayBare extends CardImpl<LayBare> {
 }
 
 class LayBareEffect extends OneShotEffect<LayBareEffect> {
-    
+
     public LayBareEffect() {
         super(Outcome.Benefit);
         staticText = "Look at its controller's hand";
     }
-    
+
     public LayBareEffect(final LayBareEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
@@ -93,7 +93,7 @@ class LayBareEffect extends OneShotEffect<LayBareEffect> {
         }
         return false;
     }
-    
+
     @Override
     public LayBareEffect copy() {
         return new LayBareEffect(this);

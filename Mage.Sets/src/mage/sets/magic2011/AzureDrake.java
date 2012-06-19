@@ -41,24 +41,24 @@ import mage.cards.CardImpl;
  */
 public class AzureDrake extends CardImpl<AzureDrake> {
 
-	public AzureDrake(UUID ownerId) {
-		super(ownerId, 46, "Azure Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
-		this.expansionSetCode = "M11";
-		this.color.setBlue(true);
-		this.subtype.add("Drake");
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(4);
+    public AzureDrake(UUID ownerId) {
+        super(ownerId, 46, "Azure Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
+        this.expansionSetCode = "M11";
+        this.color.setBlue(true);
+        this.subtype.add("Drake");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(4);
 
-		this.addAbility(FlyingAbility.getInstance());
-	}
+        this.addAbility(FlyingAbility.getInstance());
+    }
 
-	public AzureDrake(final AzureDrake card) {
-		super(card);
-	}
+    public AzureDrake(final AzureDrake card) {
+        super(card);
+    }
 
-	@Override
-	public AzureDrake copy() {
-		return new AzureDrake(this);
-	}
+    @Override
+    public AzureDrake copy() {
+        return new AzureDrake(this);
+    }
 
 }

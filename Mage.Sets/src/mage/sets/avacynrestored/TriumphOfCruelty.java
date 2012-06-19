@@ -48,7 +48,7 @@ import java.util.UUID;
 public class TriumphOfCruelty extends CardImpl<TriumphOfCruelty> {
 
     private static final String ruleText = "target opponent discards a card if you control the creature with the greatest power or tied for the greatest power";
-    
+
     public TriumphOfCruelty(UUID ownerId) {
         super(ownerId, 122, "Triumph of Cruelty", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
         this.expansionSetCode = "AVR";

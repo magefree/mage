@@ -51,26 +51,26 @@ import mage.counters.common.QuestCounter;
  */
 public class SunspringExpedition extends CardImpl<SunspringExpedition> {
 
-	public SunspringExpedition(UUID ownerId) {
-		super(ownerId, 37, "Sunspring Expedition", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");
-		this.expansionSetCode = "ZEN";
-		this.color.setWhite(true);
+    public SunspringExpedition(UUID ownerId) {
+        super(ownerId, 37, "Sunspring Expedition", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");
+        this.expansionSetCode = "ZEN";
+        this.color.setWhite(true);
 
-		this.addAbility(new LandfallAbility(new AddCountersSourceEffect(new QuestCounter()), true));
-		Costs costs = new CostsImpl();
-		costs.add(new RemoveCountersSourceCost(CounterType.QUEST.createInstance(3)));
-		costs.add(new SacrificeSourceCost());
-		ActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(8), costs);
-		this.addAbility(ability);
-	}
+        this.addAbility(new LandfallAbility(new AddCountersSourceEffect(new QuestCounter()), true));
+        Costs costs = new CostsImpl();
+        costs.add(new RemoveCountersSourceCost(CounterType.QUEST.createInstance(3)));
+        costs.add(new SacrificeSourceCost());
+        ActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(8), costs);
+        this.addAbility(ability);
+    }
 
-	public SunspringExpedition(final SunspringExpedition card) {
-		super(card);
-	}
+    public SunspringExpedition(final SunspringExpedition card) {
+        super(card);
+    }
 
-	@Override
-	public SunspringExpedition copy() {
-		return new SunspringExpedition(this);
-	}
+    @Override
+    public SunspringExpedition copy() {
+        return new SunspringExpedition(this);
+    }
 
 }

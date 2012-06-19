@@ -12,28 +12,28 @@ import mage.cards.action.TransferData;
  */
 public class EmptyCallback implements ActionCallback {
 
-	@Override
-	public void mouseMoved(MouseEvent e, TransferData data) {
-	}
+    @Override
+    public void mouseMoved(MouseEvent e, TransferData data) {
+    }
 
-	@Override
-	public void mouseEntered(MouseEvent e, TransferData data) {
-	}
+    @Override
+    public void mouseEntered(MouseEvent e, TransferData data) {
+    }
 
-	@Override
-	public void mouseExited(MouseEvent e, TransferData data) {
-	}
+    @Override
+    public void mouseExited(MouseEvent e, TransferData data) {
+    }
 
-	@Override
-	public void hidePopup() {
-	}
+    @Override
+    public void hidePopup() {
+    }
 
-	@Override
-	public void mouseClicked(MouseEvent e, TransferData data) {
-	}
+    @Override
+    public void mouseClicked(MouseEvent e, TransferData data) {
+    }
 
-	@Override
-	public void mousePressed(MouseEvent e, TransferData data) {
-	}
+    @Override
+    public void mousePressed(MouseEvent e, TransferData data) {
+    }
 
 }

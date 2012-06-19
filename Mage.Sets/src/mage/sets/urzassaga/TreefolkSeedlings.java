@@ -57,7 +57,7 @@ public class TreefolkSeedlings extends CardImpl<TreefolkSeedlings> {
         super(ownerId, 278, "Treefolk Seedlings", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.expansionSetCode = "USG";
         this.subtype.add("Treefolk");
-	this.color.setGreen(true);
+    this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(0);
 

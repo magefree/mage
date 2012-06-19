@@ -60,7 +60,7 @@ public class ChancellorOfTheTangle extends CardImpl<ChancellorOfTheTangle> {
 
         // You may reveal this card from your opening hand. If you do, at the beginning of your first main phase, add {G} to your mana pool.
         this.addAbility(new ChancellorAbility(new ChancellorOfTheTangleDelayedTriggeredAbility(), abilityText));
-        
+
         this.addAbility(VigilanceAbility.getInstance());
         this.addAbility(ReachAbility.getInstance());
     }
@@ -77,23 +77,23 @@ public class ChancellorOfTheTangle extends CardImpl<ChancellorOfTheTangle> {
 
 class ChancellorOfTheTangleDelayedTriggeredAbility extends DelayedTriggeredAbility<ChancellorOfTheTangleDelayedTriggeredAbility> {
 
-	ChancellorOfTheTangleDelayedTriggeredAbility () {
-		super(new BasicManaEffect(Mana.GreenMana));
-	}
+    ChancellorOfTheTangleDelayedTriggeredAbility () {
+        super(new BasicManaEffect(Mana.GreenMana));
+    }
 
-	ChancellorOfTheTangleDelayedTriggeredAbility(ChancellorOfTheTangleDelayedTriggeredAbility ability) {
-		super(ability);
-	}
+    ChancellorOfTheTangleDelayedTriggeredAbility(ChancellorOfTheTangleDelayedTriggeredAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == GameEvent.EventType.PRECOMBAT_MAIN_PHASE_PRE && game.getActivePlayerId().equals(controllerId)) {
-			return true;
-		}
-		return false;
-	}
-	@Override
-	public ChancellorOfTheTangleDelayedTriggeredAbility copy() {
-		return new ChancellorOfTheTangleDelayedTriggeredAbility(this);
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.PRECOMBAT_MAIN_PHASE_PRE && game.getActivePlayerId().equals(controllerId)) {
+            return true;
+        }
+        return false;
+    }
+    @Override
+    public ChancellorOfTheTangleDelayedTriggeredAbility copy() {
+        return new ChancellorOfTheTangleDelayedTriggeredAbility(this);
+    }
 }

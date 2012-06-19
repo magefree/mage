@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class Assassinate extends mage.sets.tenth.Assassinate {
 
-	public Assassinate(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 84;
-		this.expansionSetCode = "M10";
-	}
+    public Assassinate(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 84;
+        this.expansionSetCode = "M10";
+    }
 
-	public Assassinate(final Assassinate card) {
-		super(card);
-	}
+    public Assassinate(final Assassinate card) {
+        super(card);
+    }
 
-	@Override
-	public Assassinate copy() {
-		return new Assassinate(this);
-	}
+    @Override
+    public Assassinate copy() {
+        return new Assassinate(this);
+    }
 
 }

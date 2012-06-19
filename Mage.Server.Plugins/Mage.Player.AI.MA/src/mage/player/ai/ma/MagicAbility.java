@@ -14,38 +14,38 @@ import java.util.zip.Inflater;
  */
 public class MagicAbility {
 
-	private static Map<String, Integer> scores = new HashMap<String, Integer>() {{
-		put(DeathtouchAbility.getInstance().getRule(), 60);
-		put(DefenderAbility.getInstance().getRule(), -100);
-		put(DoubleStrikeAbility.getInstance().getRule(), 100);
-		put(DoubleStrikeAbility.getInstance().getRule(), 100);
-		put(new ExaltedAbility().getRule(), 10);
-		put(FirstStrikeAbility.getInstance().getRule(), 50);
-		put(FlashAbility.getInstance().getRule(), 0);
-		put(FlyingAbility.getInstance().getRule(), 50);
-		put(new ForestwalkAbility().getRule(), 10);
-		put(HasteAbility.getInstance().getRule(), 0);
-		put(IndestructibleAbility.getInstance().getRule(), 150);
-		put(InfectAbility.getInstance().getRule(), 60);
-		put(IntimidateAbility.getInstance().getRule(), 50);
-		put(new IslandwalkAbility().getRule(), 10);
-		put(new MountainwalkAbility().getRule(), 10);
-		put(new PlainswalkAbility().getRule(), 10);
-		put(ReachAbility.getInstance().getRule(), 20);
-		put(ShroudAbility.getInstance().getRule(), 60);
-		put(new SwampwalkAbility().getRule(), 10);
-		put(TrampleAbility.getInstance().getRule(), 30);
-		put(UnblockableAbility.getInstance().getRule(), 100);
-		put(VigilanceAbility.getInstance().getRule(), 20);
-		put(WitherAbility.getInstance().getRule(), 30);
-	}};
+    private static Map<String, Integer> scores = new HashMap<String, Integer>() {{
+        put(DeathtouchAbility.getInstance().getRule(), 60);
+        put(DefenderAbility.getInstance().getRule(), -100);
+        put(DoubleStrikeAbility.getInstance().getRule(), 100);
+        put(DoubleStrikeAbility.getInstance().getRule(), 100);
+        put(new ExaltedAbility().getRule(), 10);
+        put(FirstStrikeAbility.getInstance().getRule(), 50);
+        put(FlashAbility.getInstance().getRule(), 0);
+        put(FlyingAbility.getInstance().getRule(), 50);
+        put(new ForestwalkAbility().getRule(), 10);
+        put(HasteAbility.getInstance().getRule(), 0);
+        put(IndestructibleAbility.getInstance().getRule(), 150);
+        put(InfectAbility.getInstance().getRule(), 60);
+        put(IntimidateAbility.getInstance().getRule(), 50);
+        put(new IslandwalkAbility().getRule(), 10);
+        put(new MountainwalkAbility().getRule(), 10);
+        put(new PlainswalkAbility().getRule(), 10);
+        put(ReachAbility.getInstance().getRule(), 20);
+        put(ShroudAbility.getInstance().getRule(), 60);
+        put(new SwampwalkAbility().getRule(), 10);
+        put(TrampleAbility.getInstance().getRule(), 30);
+        put(UnblockableAbility.getInstance().getRule(), 100);
+        put(VigilanceAbility.getInstance().getRule(), 20);
+        put(WitherAbility.getInstance().getRule(), 30);
+    }};
 
-	public static int getAbilityScore(Ability ability) {
-		if (!scores.containsKey(ability.getRule())) {
-			//System.err.println("Couldn't find ability score: " + ability.getRule());
-			//TODO: add handling protection from ..., levelup, kicker, etc. abilities
-			return 0;
-		}
-		return scores.get(ability.getRule());
-	}
+    public static int getAbilityScore(Ability ability) {
+        if (!scores.containsKey(ability.getRule())) {
+            //System.err.println("Couldn't find ability score: " + ability.getRule());
+            //TODO: add handling protection from ..., levelup, kicker, etc. abilities
+            return 0;
+        }
+        return scores.get(ability.getRule());
+    }
 }

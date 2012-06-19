@@ -45,7 +45,7 @@ public class AddCardTypeAttachedEffect extends ContinuousEffectImpl<AddCardTypeA
         super(duration, Constants.Layer.TypeChangingEffects_4, Constants.SubLayer.NA, Constants.Outcome.Benefit);
         this.addedCardType = addedCardType;
         this.attachmentType = attachmentType;
-		setText();
+        setText();
     }
 
     public AddCardTypeAttachedEffect(final AddCardTypeAttachedEffect effect) {

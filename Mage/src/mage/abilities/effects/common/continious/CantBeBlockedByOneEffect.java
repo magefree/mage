@@ -47,7 +47,7 @@ public class CantBeBlockedByOneEffect extends ContinuousEffectImpl<CantBeBlocked
     public CantBeBlockedByOneEffect(int amount) {
         this(amount, Duration.WhileOnBattlefield);
     }
-    
+
     public CantBeBlockedByOneEffect(int amount, Duration duration) {
         super(duration, Outcome.Benefit);
         this.amount = amount;

@@ -39,19 +39,19 @@ import mage.view.SimpleCardsView;
  * @author BetaSteward_at_googlemail.com
  */
 public class CardsViewUtil {
-    
+
     public static CardsView convertSimple(SimpleCardsView view) {
         CardsView cards = new CardsView();
-        
+
         for (SimpleCardView simple: view.values()) {
             mage.cards.Card card = Sets.findCard(simple.getExpansionSetCode(), simple.getCardNumber());
             if (card != null) {
-                
+
                 cards.put(simple.getId(), new CardView(card, simple.getId()));
             }
         }
-        
+
         return cards;
     }
-    
+
 }

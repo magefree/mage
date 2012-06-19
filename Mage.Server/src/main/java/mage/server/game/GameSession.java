@@ -56,206 +56,206 @@ import mage.view.SimpleCardsView;
  */
 public class GameSession extends GameWatcher {
 
-	private UUID playerId;
+    private UUID playerId;
     private boolean useTimeout;
 
-	private ScheduledFuture<?> futureTimeout;
-	protected static ScheduledExecutorService timeoutExecutor = ThreadExecutor.getInstance().getTimeoutExecutor();
+    private ScheduledFuture<?> futureTimeout;
+    protected static ScheduledExecutorService timeoutExecutor = ThreadExecutor.getInstance().getTimeoutExecutor();
 
-	private UserData userData;
+    private UserData userData;
 
-	public GameSession(Game game, UUID userId, UUID playerId, boolean useTimeout) {
-		super(userId, game);
-		this.playerId = playerId;
+    public GameSession(Game game, UUID userId, UUID playerId, boolean useTimeout) {
+        super(userId, game);
+        this.playerId = playerId;
         this.useTimeout = useTimeout;
-	}
+    }
 
-	public void ask(final String question)  {
-		if (!killed) {
-			setupTimeout();
-			User user = UserManager.getInstance().getUser(userId);
-			if (user != null) {
-				user.fireCallback(new ClientCallback("gameAsk", game.getId(), new GameClientMessage(getGameView(), question)));
-			}
-		}
-	}
+    public void ask(final String question)  {
+        if (!killed) {
+            setupTimeout();
+            User user = UserManager.getInstance().getUser(userId);
+            if (user != null) {
+                user.fireCallback(new ClientCallback("gameAsk", game.getId(), new GameClientMessage(getGameView(), question)));
+            }
+        }
+    }
 
-	public void target(final String question, final CardsView cardView, final Set<UUID> targets, final boolean required, final Map<String, Serializable> options) {
-		if (!killed) {
-			setupTimeout();
-			User user = UserManager.getInstance().getUser(userId);
-			if (user != null) {
-				user.fireCallback(new ClientCallback("gameTarget", game.getId(), new GameClientMessage(getGameView(), question, cardView, targets, required, options)));
-			}
-		}
-	}
+    public void target(final String question, final CardsView cardView, final Set<UUID> targets, final boolean required, final Map<String, Serializable> options) {
+        if (!killed) {
+            setupTimeout();
+            User user = UserManager.getInstance().getUser(userId);
+            if (user != null) {
+                user.fireCallback(new ClientCallback("gameTarget", game.getId(), new GameClientMessage(getGameView(), question, cardView, targets, required, options)));
+            }
+        }
+    }
 
-	public void select(final String message) {
-		if (!killed) {
-			setupTimeout();
-			User user = UserManager.getInstance().getUser(userId);
-			if (user != null) {
-				user.fireCallback(new ClientCallback("gameSelect", game.getId(), new GameClientMessage(getGameView(), message)));
-			}
-		}
-	}
+    public void select(final String message) {
+        if (!killed) {
+            setupTimeout();
+            User user = UserManager.getInstance().getUser(userId);
+            if (user != null) {
+                user.fireCallback(new ClientCallback("gameSelect", game.getId(), new GameClientMessage(getGameView(), message)));
+            }
+        }
+    }
 
-	public void chooseAbility(final AbilityPickerView abilities) {
-		if (!killed) {
-			setupTimeout();
-			User user = UserManager.getInstance().getUser(userId);
-			if (user != null) {
-				user.fireCallback(new ClientCallback("gameChooseAbility", game.getId(), abilities));
-			}
-		}
-	}
+    public void chooseAbility(final AbilityPickerView abilities) {
+        if (!killed) {
+            setupTimeout();
+            User user = UserManager.getInstance().getUser(userId);
+            if (user != null) {
+                user.fireCallback(new ClientCallback("gameChooseAbility", game.getId(), abilities));
+            }
+        }
+    }
 
-	public void choosePile(final String message, final CardsView pile1, final CardsView pile2) {
-		if (!killed) {
-			setupTimeout();
-			User user = UserManager.getInstance().getUser(userId);
-			if (user != null) {
+    public void choosePile(final String message, final CardsView pile1, final CardsView pile2) {
+        if (!killed) {
+            setupTimeout();
+            User user = UserManager.getInstance().getUser(userId);
+            if (user != null) {
                 List<CardsView> piles = new ArrayList<CardsView>();
                 piles.add(pile1);
                 piles.add(pile2);
-				user.fireCallback(new ClientCallback("gameChoosePile", game.getId(), new GameClientMessage(message, pile1, pile2)));
-			}
-		}
-	}
+                user.fireCallback(new ClientCallback("gameChoosePile", game.getId(), new GameClientMessage(message, pile1, pile2)));
+            }
+        }
+    }
 
-	public void choose(final String message, final Set<String> choices) {
-		if (!killed) {
-			setupTimeout();
-			User user = UserManager.getInstance().getUser(userId);
-			if (user != null) {
-				user.fireCallback(new ClientCallback("gameChoose", game.getId(), new GameClientMessage(choices.toArray(new String[0]), message)));
-			}
-		}
-	}
+    public void choose(final String message, final Set<String> choices) {
+        if (!killed) {
+            setupTimeout();
+            User user = UserManager.getInstance().getUser(userId);
+            if (user != null) {
+                user.fireCallback(new ClientCallback("gameChoose", game.getId(), new GameClientMessage(choices.toArray(new String[0]), message)));
+            }
+        }
+    }
 
-	public void playMana(final String message) {
-		if (!killed) {
-			setupTimeout();
-			User user = UserManager.getInstance().getUser(userId);
-			if (user != null) {
-				user.fireCallback(new ClientCallback("gamePlayMana", game.getId(), new GameClientMessage(getGameView(), message)));
-			}
-		}
-	}
+    public void playMana(final String message) {
+        if (!killed) {
+            setupTimeout();
+            User user = UserManager.getInstance().getUser(userId);
+            if (user != null) {
+                user.fireCallback(new ClientCallback("gamePlayMana", game.getId(), new GameClientMessage(getGameView(), message)));
+            }
+        }
+    }
 
-	public void playXMana(final String message) {
-		if (!killed) {
-			setupTimeout();
-			User user = UserManager.getInstance().getUser(userId);
-			if (user != null) {
-				user.fireCallback(new ClientCallback("gamePlayXMana", game.getId(), new GameClientMessage(getGameView(), message)));
-			}
-		}
-	}
+    public void playXMana(final String message) {
+        if (!killed) {
+            setupTimeout();
+            User user = UserManager.getInstance().getUser(userId);
+            if (user != null) {
+                user.fireCallback(new ClientCallback("gamePlayXMana", game.getId(), new GameClientMessage(getGameView(), message)));
+            }
+        }
+    }
 
-	public void getAmount(final String message, final int min, final int max) {
-		if (!killed) {
-			setupTimeout();
-			User user = UserManager.getInstance().getUser(userId);
-			if (user != null) {
-				user.fireCallback(new ClientCallback("gameSelectAmount", game.getId(), new GameClientMessage(message, min, max)));
-			}
-		}
-	}
+    public void getAmount(final String message, final int min, final int max) {
+        if (!killed) {
+            setupTimeout();
+            User user = UserManager.getInstance().getUser(userId);
+            if (user != null) {
+                user.fireCallback(new ClientCallback("gameSelectAmount", game.getId(), new GameClientMessage(message, min, max)));
+            }
+        }
+    }
 
-	public void revealCards(final String name, final CardsView cardView) {
-		if (!killed) {
-			User user = UserManager.getInstance().getUser(userId);
-			if (user != null) {
-				user.fireCallback(new ClientCallback("gameReveal", game.getId(), new GameClientMessage(cardView, name)));
-			}
-		}
-	}
+    public void revealCards(final String name, final CardsView cardView) {
+        if (!killed) {
+            User user = UserManager.getInstance().getUser(userId);
+            if (user != null) {
+                user.fireCallback(new ClientCallback("gameReveal", game.getId(), new GameClientMessage(cardView, name)));
+            }
+        }
+    }
 
-	private synchronized void setupTimeout() {
+    private synchronized void setupTimeout() {
         if (!useTimeout)
             return;
-		cancelTimeout();
-		futureTimeout = timeoutExecutor.schedule(
-			new Runnable() {
-				@Override
-				public void run() {
-					GameManager.getInstance().timeout(game.getId(), userId);
-				}
-			},
-			ConfigSettings.getInstance().getMaxSecondsIdle(), TimeUnit.SECONDS
-		);
-	}
+        cancelTimeout();
+        futureTimeout = timeoutExecutor.schedule(
+            new Runnable() {
+                @Override
+                public void run() {
+                    GameManager.getInstance().timeout(game.getId(), userId);
+                }
+            },
+            ConfigSettings.getInstance().getMaxSecondsIdle(), TimeUnit.SECONDS
+        );
+    }
 
-	private synchronized void cancelTimeout() {
-		if (futureTimeout != null) {
-			futureTimeout.cancel(false);
-		}
-	}
+    private synchronized void cancelTimeout() {
+        if (futureTimeout != null) {
+            futureTimeout.cancel(false);
+        }
+    }
 
-	public void sendPlayerUUID(UUID data) {
-		cancelTimeout();
-		game.getPlayer(playerId).setResponseUUID(data);
-	}
+    public void sendPlayerUUID(UUID data) {
+        cancelTimeout();
+        game.getPlayer(playerId).setResponseUUID(data);
+    }
 
-	public void sendPlayerString(String data) {
-		cancelTimeout();
-		game.getPlayer(playerId).setResponseString(data);
-	}
+    public void sendPlayerString(String data) {
+        cancelTimeout();
+        game.getPlayer(playerId).setResponseString(data);
+    }
 
-	public void sendPlayerBoolean(Boolean data) {
-		cancelTimeout();
-		game.getPlayer(playerId).setResponseBoolean(data);
-	}
+    public void sendPlayerBoolean(Boolean data) {
+        cancelTimeout();
+        game.getPlayer(playerId).setResponseBoolean(data);
+    }
 
-	public void sendPlayerInteger(Integer data) {
-		cancelTimeout();
-		game.getPlayer(playerId).setResponseInteger(data);
-	}
-	
-	@Override
-	public GameView getGameView() {
-		Player player = game.getPlayer(playerId);
-		player.setUserData(this.userData);
-		GameView gameView = new GameView(game.getState(), game);
-		gameView.setHand(new SimpleCardsView(player.getHand().getCards(game)));
+    public void sendPlayerInteger(Integer data) {
+        cancelTimeout();
+        game.getPlayer(playerId).setResponseInteger(data);
+    }
 
-		if (player.getPlayersUnderYourControl().size() > 0) {
-			Map<String, SimpleCardsView> handCards = new HashMap<String, SimpleCardsView>();
-			for (UUID playerId : player.getPlayersUnderYourControl()) {
-				Player opponent = game.getPlayer(playerId);
-				handCards.put(opponent.getName(), new SimpleCardsView(opponent.getHand().getCards(game)));
-			}
-			gameView.setOpponentHands(handCards);
-		}
+    @Override
+    public GameView getGameView() {
+        Player player = game.getPlayer(playerId);
+        player.setUserData(this.userData);
+        GameView gameView = new GameView(game.getState(), game);
+        gameView.setHand(new SimpleCardsView(player.getHand().getCards(game)));
 
-		//TODO: should player who controls another player's turn be able to look at all these cards?
+        if (player.getPlayersUnderYourControl().size() > 0) {
+            Map<String, SimpleCardsView> handCards = new HashMap<String, SimpleCardsView>();
+            for (UUID playerId : player.getPlayersUnderYourControl()) {
+                Player opponent = game.getPlayer(playerId);
+                handCards.put(opponent.getName(), new SimpleCardsView(opponent.getHand().getCards(game)));
+            }
+            gameView.setOpponentHands(handCards);
+        }
 
-		List<LookedAtView> list = new ArrayList<LookedAtView>();
-		for (Entry<String, Cards> entry : game.getState().getLookedAt(playerId).entrySet()) {
-			list.add(new LookedAtView(entry.getKey(), entry.getValue(), game));
-		}
-		gameView.setLookedAt(list);
+        //TODO: should player who controls another player's turn be able to look at all these cards?
+
+        List<LookedAtView> list = new ArrayList<LookedAtView>();
+        for (Entry<String, Cards> entry : game.getState().getLookedAt(playerId).entrySet()) {
+            list.add(new LookedAtView(entry.getKey(), entry.getValue(), game));
+        }
+        gameView.setLookedAt(list);
         game.getState().clearLookedAt();
 
-		return gameView;
-	}
+        return gameView;
+    }
 
-	public void removeGame() {
-		User user = UserManager.getInstance().getUser(userId);
-		if (user != null)
-			user.removeGame(playerId);
-	}
+    public void removeGame() {
+        User user = UserManager.getInstance().getUser(userId);
+        if (user != null)
+            user.removeGame(playerId);
+    }
 
-	public UUID getGameId() {
-		return game.getId();
-	}
-	
-	public void kill() {
-		game.quit(playerId);
-	}
+    public UUID getGameId() {
+        return game.getId();
+    }
 
-	public void setUserData(UserData userData) {
-		this.userData = userData;
-	}
+    public void kill() {
+        game.quit(playerId);
+    }
+
+    public void setUserData(UserData userData) {
+        this.userData = userData;
+    }
 }

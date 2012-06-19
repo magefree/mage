@@ -60,116 +60,116 @@ import org.apache.log4j.Logger;
  */
 public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
 
-	private final static Logger logger = Logger.getLogger(GamesRoomImpl.class);
-    
-	private static ScheduledExecutorService updateExecutor = Executors.newSingleThreadScheduledExecutor();
+    private final static Logger logger = Logger.getLogger(GamesRoomImpl.class);
+
+    private static ScheduledExecutorService updateExecutor = Executors.newSingleThreadScheduledExecutor();
     private static List<TableView> tableView = new ArrayList<TableView>();
     private static List<MatchView> matchView = new ArrayList<MatchView>();
     private static List<String> playersView = new ArrayList<String>();
-    
-	private ConcurrentHashMap<UUID, Table> tables = new ConcurrentHashMap<UUID, Table>();
 
-	public GamesRoomImpl() {
-		updateExecutor.scheduleAtFixedRate(new Runnable() {
-			@Override
-			public void run() {
-				update();
-			}
-		}, 2, 2, TimeUnit.SECONDS);
-	}
+    private ConcurrentHashMap<UUID, Table> tables = new ConcurrentHashMap<UUID, Table>();
+
+    public GamesRoomImpl() {
+        updateExecutor.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                update();
+            }
+        }, 2, 2, TimeUnit.SECONDS);
+    }
 
     @Override
-	public List<TableView> getTables() {
-		return tableView;
-	}
+    public List<TableView> getTables() {
+        return tableView;
+    }
 
-	private void update() {
-		ArrayList<TableView> tableList = new ArrayList<TableView>();
-		ArrayList<MatchView> matchList = new ArrayList<MatchView>();
+    private void update() {
+        ArrayList<TableView> tableList = new ArrayList<TableView>();
+        ArrayList<MatchView> matchList = new ArrayList<MatchView>();
         List<Table> t = new ArrayList<Table>(tables.values());
         Collections.sort(t, new TimestampSorter());
-		for (Table table: t) {
+        for (Table table: t) {
             if (table.getState() != TableState.FINISHED) {
                 tableList.add(new TableView(table));
             }
             else if (matchList.size() < 50) {
                 matchList.add(new MatchView(table.getMatch()));
             }
-		}
-		tableView = tableList;
-		matchView = matchList;
+        }
+        tableView = tableList;
+        matchView = matchList;
         List<String> players = new ArrayList<String>();
         for (User user : UserManager.getInstance().getUsers()) {
             players.add(user.getName());
         }
         playersView = players;
-	}
-    
-    @Override
-    public List<MatchView> getFinished() {
-		return matchView;
     }
 
     @Override
-	public boolean joinTable(UUID userId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList) throws MageException {
-		if (tables.containsKey(tableId)) {
-			return TableManager.getInstance().joinTable(userId, tableId, name, playerType, skill, deckList);
-		} else {
-			return false;
-		}
-	}
+    public List<MatchView> getFinished() {
+        return matchView;
+    }
 
-	@Override
-	public TableView createTable(UUID userId, MatchOptions options) {
-		Table table = TableManager.getInstance().createTable(this.getRoomId(), userId, options);
-		tables.put(table.getId(), table);
-		return new TableView(table);
-	}
+    @Override
+    public boolean joinTable(UUID userId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList) throws MageException {
+        if (tables.containsKey(tableId)) {
+            return TableManager.getInstance().joinTable(userId, tableId, name, playerType, skill, deckList);
+        } else {
+            return false;
+        }
+    }
 
-	@Override
-	public boolean joinTournamentTable(UUID userId, UUID tableId, String name, String playerType, int skill) throws GameException {
-		if (tables.containsKey(tableId)) {
-			return TableManager.getInstance().joinTournament(userId, tableId, name, playerType, skill);
-		} else {
-			return false;
-		}
-	}
+    @Override
+    public TableView createTable(UUID userId, MatchOptions options) {
+        Table table = TableManager.getInstance().createTable(this.getRoomId(), userId, options);
+        tables.put(table.getId(), table);
+        return new TableView(table);
+    }
 
-	@Override
-	public TableView createTournamentTable(UUID userId, TournamentOptions options) {
-		Table table = TableManager.getInstance().createTournamentTable(this.getRoomId(), userId, options);
-		tables.put(table.getId(), table);
-		return new TableView(table);
-	}
+    @Override
+    public boolean joinTournamentTable(UUID userId, UUID tableId, String name, String playerType, int skill) throws GameException {
+        if (tables.containsKey(tableId)) {
+            return TableManager.getInstance().joinTournament(userId, tableId, name, playerType, skill);
+        } else {
+            return false;
+        }
+    }
 
-	@Override
-	public TableView getTable(UUID tableId) {
-		if (tables.containsKey(tableId))
-			return new TableView(tables.get(tableId));
-		return null;
-	}
+    @Override
+    public TableView createTournamentTable(UUID userId, TournamentOptions options) {
+        Table table = TableManager.getInstance().createTournamentTable(this.getRoomId(), userId, options);
+        tables.put(table.getId(), table);
+        return new TableView(table);
+    }
 
-	@Override
-	public void removeTable(UUID userId, UUID tableId) {
-		tables.remove(tableId);
-	}
+    @Override
+    public TableView getTable(UUID tableId) {
+        if (tables.containsKey(tableId))
+            return new TableView(tables.get(tableId));
+        return null;
+    }
 
-	@Override
-	public void removeTable(UUID tableId) {
-		tables.remove(tableId);
-		if (logger.isDebugEnabled())
-			logger.debug("Table removed: " + tableId);
-	}
+    @Override
+    public void removeTable(UUID userId, UUID tableId) {
+        tables.remove(tableId);
+    }
 
-	@Override
-	public void leaveTable(UUID userId, UUID tableId) {
-		TableManager.getInstance().leaveTable(userId, tableId);
-	}
+    @Override
+    public void removeTable(UUID tableId) {
+        tables.remove(tableId);
+        if (logger.isDebugEnabled())
+            logger.debug("Table removed: " + tableId);
+    }
 
-	@Override
-	public boolean watchTable(UUID userId, UUID tableId) throws MageException {
-		return TableManager.getInstance().watchTable(userId, tableId);
-	}
+    @Override
+    public void leaveTable(UUID userId, UUID tableId) {
+        TableManager.getInstance().leaveTable(userId, tableId);
+    }
+
+    @Override
+    public boolean watchTable(UUID userId, UUID tableId) throws MageException {
+        return TableManager.getInstance().watchTable(userId, tableId);
+    }
 
     @Override
     public List<String> getPlayers() {
@@ -179,8 +179,8 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
 }
 
 class TimestampSorter implements Comparator<Table> {
-	@Override
-	public int compare(Table one, Table two) {
-		return one.getCreateTime().compareTo(two.getCreateTime());
-	}
+    @Override
+    public int compare(Table one, Table two) {
+        return one.getCreateTime().compareTo(two.getCreateTime());
+    }
 }

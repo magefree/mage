@@ -64,7 +64,7 @@ public class MirrorMadPhantasm extends CardImpl<MirrorMadPhantasm> {
         this.addAbility(FlyingAbility.getInstance());
         // {1}{U}: Mirror-Mad Phantasm's owner shuffles it into his or her library. If that player does, he or she reveals cards from the top of that library until a card named Mirror-Mad Phantasm is revealed. That player puts that card onto the battlefield and all other cards revealed this way into his or her graveyard.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new MirrorMadPhantasmEffect(), new ManaCostsImpl("{1}{U}")));
-        
+
     }
 
     public MirrorMadPhantasm(final MirrorMadPhantasm card) {
@@ -78,12 +78,12 @@ public class MirrorMadPhantasm extends CardImpl<MirrorMadPhantasm> {
 }
 
 class MirrorMadPhantasmEffect extends OneShotEffect<MirrorMadPhantasmEffect> {
-    
+
     public MirrorMadPhantasmEffect() {
         super(Outcome.Detriment);
         this.staticText = "{this}'s owner shuffles it into his or her library. If that player does, he or she reveals cards from the top of that library until a card named Mirror-Mad Phantasm is revealed. That player puts that card onto the battlefield and all other cards revealed this way into his or her graveyard";
     }
-    
+
     public MirrorMadPhantasmEffect(final MirrorMadPhantasmEffect effect) {
         super(effect);
     }
@@ -121,5 +121,5 @@ class MirrorMadPhantasmEffect extends OneShotEffect<MirrorMadPhantasmEffect> {
     public MirrorMadPhantasmEffect copy() {
         return new MirrorMadPhantasmEffect(this);
     }
-    
+
 }

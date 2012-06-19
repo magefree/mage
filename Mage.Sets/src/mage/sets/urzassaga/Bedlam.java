@@ -47,7 +47,7 @@ public class Bedlam extends CardImpl<Bedlam> {
     public Bedlam (UUID ownerId) {
         super(ownerId, 175, "Bedlam", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
         this.expansionSetCode = "USG";
-	this.color.setRed(true);
+    this.color.setRed(true);
         this.getSpellAbility().addEffect(new BedlamEffect());
     }
 

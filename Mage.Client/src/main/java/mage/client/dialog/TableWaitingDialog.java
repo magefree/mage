@@ -54,92 +54,92 @@ import org.apache.log4j.Logger;
  */
 public class TableWaitingDialog extends MageDialog {
 
-	private final static Logger logger = Logger.getLogger(TableWaitingDialog.class);
+    private final static Logger logger = Logger.getLogger(TableWaitingDialog.class);
 
-	private UUID tableId;
-	private UUID roomId;
-	private boolean isTournament;
-	private Session session;
-	private TableWaitModel tableWaitModel;
-	private UpdateSeatsTask updateTask;
+    private UUID tableId;
+    private UUID roomId;
+    private boolean isTournament;
+    private Session session;
+    private TableWaitModel tableWaitModel;
+    private UpdateSeatsTask updateTask;
 
     /** Creates new form TableWaitingDialog */
     public TableWaitingDialog() {
 
-		session = MageFrame.getSession();
-		tableWaitModel = new TableWaitModel();
+        session = MageFrame.getSession();
+        tableWaitModel = new TableWaitModel();
 
-		initComponents();
+        initComponents();
 
         chatPanel.useExtendedView(ChatPanel.VIEW_MODE.NONE);
-		tableSeats.createDefaultColumnsFromModel();
-		MageFrame.getUI().addButton(MageComponents.TABLE_WAITING_START_BUTTON, btnStart);
+        tableSeats.createDefaultColumnsFromModel();
+        MageFrame.getUI().addButton(MageComponents.TABLE_WAITING_START_BUTTON, btnStart);
     }
 
-	public void update(TableView table) {
-		try {
-			if (table != null) {
-				switch (table.getTableState()) {
-					case STARTING:
-						this.btnStart.setEnabled(true);
-						this.btnMoveDown.setEnabled(true);
-						this.btnMoveUp.setEnabled(true);
-						break;
-					case WAITING:
-						this.btnStart.setEnabled(false);
-						this.btnMoveDown.setEnabled(false);
-						this.btnMoveUp.setEnabled(false);
-						break;
-					default:
-						closeDialog();
-						return;
-				}
-				int row = this.tableSeats.getSelectedRow();
-				tableWaitModel.loadData(table);
-				this.tableSeats.repaint();
-				this.tableSeats.getSelectionModel().setSelectionInterval(row, row);
-			}
-			else {
-				closeDialog();
-			}
-		} catch (Exception ex) {
-			closeDialog();
-		}
-	}
+    public void update(TableView table) {
+        try {
+            if (table != null) {
+                switch (table.getTableState()) {
+                    case STARTING:
+                        this.btnStart.setEnabled(true);
+                        this.btnMoveDown.setEnabled(true);
+                        this.btnMoveUp.setEnabled(true);
+                        break;
+                    case WAITING:
+                        this.btnStart.setEnabled(false);
+                        this.btnMoveDown.setEnabled(false);
+                        this.btnMoveUp.setEnabled(false);
+                        break;
+                    default:
+                        closeDialog();
+                        return;
+                }
+                int row = this.tableSeats.getSelectedRow();
+                tableWaitModel.loadData(table);
+                this.tableSeats.repaint();
+                this.tableSeats.getSelectionModel().setSelectionInterval(row, row);
+            }
+            else {
+                closeDialog();
+            }
+        } catch (Exception ex) {
+            closeDialog();
+        }
+    }
 
-	public void showDialog(UUID roomId, UUID tableId, boolean isTournament) {
-		this.roomId = roomId;
-		this.tableId = tableId;
-		this.isTournament = isTournament;
-		session = MageFrame.getSession();
-		updateTask = new UpdateSeatsTask(session, roomId, tableId, this);
-		if (session.isTableOwner(roomId, tableId)) {
-			this.btnStart.setVisible(true);
-			this.btnMoveDown.setVisible(true);
-			this.btnMoveUp.setVisible(true);
-		} else {
-			this.btnStart.setVisible(false);
-			this.btnMoveDown.setVisible(false);
-			this.btnMoveUp.setVisible(false);
-		}
-		UUID chatId = session.getTableChatId(tableId);
-		if (chatId != null) {
-			this.chatPanel.connect(chatId);
-			updateTask.execute();
-			this.setModal(false);
-			this.setLocation(100, 100);
-			this.setVisible(true);
-		}
-		else {
-			closeDialog();
-		}
-	}
+    public void showDialog(UUID roomId, UUID tableId, boolean isTournament) {
+        this.roomId = roomId;
+        this.tableId = tableId;
+        this.isTournament = isTournament;
+        session = MageFrame.getSession();
+        updateTask = new UpdateSeatsTask(session, roomId, tableId, this);
+        if (session.isTableOwner(roomId, tableId)) {
+            this.btnStart.setVisible(true);
+            this.btnMoveDown.setVisible(true);
+            this.btnMoveUp.setVisible(true);
+        } else {
+            this.btnStart.setVisible(false);
+            this.btnMoveDown.setVisible(false);
+            this.btnMoveUp.setVisible(false);
+        }
+        UUID chatId = session.getTableChatId(tableId);
+        if (chatId != null) {
+            this.chatPanel.connect(chatId);
+            updateTask.execute();
+            this.setModal(false);
+            this.setLocation(100, 100);
+            this.setVisible(true);
+        }
+        else {
+            closeDialog();
+        }
+    }
 
-	public void closeDialog() {
-		if (updateTask != null)	updateTask.cancel(true);
-		this.chatPanel.disconnect();
-		this.hideDialog();
-	}
+    public void closeDialog() {
+        if (updateTask != null)    updateTask.cancel(true);
+        this.chatPanel.disconnect();
+        this.hideDialog();
+    }
 
 
 
@@ -239,44 +239,44 @@ public class TableWaitingDialog extends MageDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-	private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
-		closeDialog();
-		if (!isTournament)
-			session.startGame(roomId, tableId);
-		else
-			session.startTournament(roomId, tableId);
-	}//GEN-LAST:event_btnStartActionPerformed
+    private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
+        closeDialog();
+        if (!isTournament)
+            session.startGame(roomId, tableId);
+        else
+            session.startTournament(roomId, tableId);
+    }//GEN-LAST:event_btnStartActionPerformed
 
-	private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-		try {
-			if (session.isTableOwner(roomId, tableId)) {
-				session.removeTable(roomId, tableId);
-			} else {
-				session.leaveTable(roomId, tableId);
-			}
-		} catch (Exception e) {
-			//swallow exception
-			logger.error(e);
-		}
-		closeDialog();
-	}//GEN-LAST:event_btnCancelActionPerformed
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        try {
+            if (session.isTableOwner(roomId, tableId)) {
+                session.removeTable(roomId, tableId);
+            } else {
+                session.leaveTable(roomId, tableId);
+            }
+        } catch (Exception e) {
+            //swallow exception
+            logger.error(e);
+        }
+        closeDialog();
+    }//GEN-LAST:event_btnCancelActionPerformed
 
-	private void btnMoveDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveDownActionPerformed
-		int row = this.tableSeats.getSelectedRow();
-		if (row < this.tableSeats.getRowCount() - 1) {
-			session.swapSeats(roomId, tableId, row, row + 1);
-			this.tableSeats.getSelectionModel().setSelectionInterval(row + 1, row + 1);
-		}
+    private void btnMoveDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveDownActionPerformed
+        int row = this.tableSeats.getSelectedRow();
+        if (row < this.tableSeats.getRowCount() - 1) {
+            session.swapSeats(roomId, tableId, row, row + 1);
+            this.tableSeats.getSelectionModel().setSelectionInterval(row + 1, row + 1);
+        }
 
-	}//GEN-LAST:event_btnMoveDownActionPerformed
+    }//GEN-LAST:event_btnMoveDownActionPerformed
 
-	private void btnMoveUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveUpActionPerformed
-		int row = this.tableSeats.getSelectedRow();
-		if (row > 0) {
-			session.swapSeats(roomId, tableId, row, row - 1);
-			this.tableSeats.getSelectionModel().setSelectionInterval(row - 1, row - 1);
-		}
-	}//GEN-LAST:event_btnMoveUpActionPerformed
+    private void btnMoveUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveUpActionPerformed
+        int row = this.tableSeats.getSelectedRow();
+        if (row > 0) {
+            session.swapSeats(roomId, tableId, row, row - 1);
+            this.tableSeats.getSelectionModel().setSelectionInterval(row - 1, row - 1);
+        }
+    }//GEN-LAST:event_btnMoveUpActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -294,45 +294,45 @@ public class TableWaitingDialog extends MageDialog {
 
 class TableWaitModel extends AbstractTableModel {
     private String[] columnNames = new String[]{"Seat Num", "Player Name", "Player Type"};
-	private SeatView[] seats = new SeatView[0];
+    private SeatView[] seats = new SeatView[0];
 
-	public void loadData(TableView table) {
-		seats = table.getSeats().toArray(new SeatView[0]);
-		this.fireTableDataChanged();
-	}
+    public void loadData(TableView table) {
+        seats = table.getSeats().toArray(new SeatView[0]);
+        this.fireTableDataChanged();
+    }
 
-	@Override
-	public int getRowCount() {
-		return seats.length;
-	}
+    @Override
+    public int getRowCount() {
+        return seats.length;
+    }
 
-	@Override
-	public int getColumnCount() {
-		return columnNames.length;
-	}
+    @Override
+    public int getColumnCount() {
+        return columnNames.length;
+    }
 
-	@Override
-	public Object getValueAt(int arg0, int arg1) {
-		if (seats[arg0].getPlayerId() == null) {
-			if (arg1 == 0) {
-				return Integer.toString(arg0 + 1);
-			}
-		}
-		else {
-			switch (arg1) {
-				case 0:
-					return Integer.toString(arg0 + 1);
-				case 1:
-					return seats[arg0].getPlayerName();
-				case 2:
-					return seats[arg0].getPlayerType();
-			}
-		}
-		return "";
-	}
+    @Override
+    public Object getValueAt(int arg0, int arg1) {
+        if (seats[arg0].getPlayerId() == null) {
+            if (arg1 == 0) {
+                return Integer.toString(arg0 + 1);
+            }
+        }
+        else {
+            switch (arg1) {
+                case 0:
+                    return Integer.toString(arg0 + 1);
+                case 1:
+                    return seats[arg0].getPlayerName();
+                case 2:
+                    return seats[arg0].getPlayerType();
+            }
+        }
+        return "";
+    }
 
-	@Override
-	public String getColumnName(int columnIndex) {
+    @Override
+    public String getColumnName(int columnIndex) {
         String colName = "";
 
         if (columnIndex <= getColumnCount())
@@ -341,57 +341,57 @@ class TableWaitModel extends AbstractTableModel {
         return colName;
     }
 
-	@Override
+    @Override
     public Class getColumnClass(int columnIndex){
-		return String.class;
+        return String.class;
     }
 
-	@Override
+    @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-		return false;
+        return false;
     }
 
 }
 
 class UpdateSeatsTask extends SwingWorker<Void, TableView> {
 
-	private Session session;
-	private UUID roomId;
-	private UUID tableId;
-	private TableWaitingDialog dialog;
+    private Session session;
+    private UUID roomId;
+    private UUID tableId;
+    private TableWaitingDialog dialog;
 
-	private final static Logger logger = Logger.getLogger(TableWaitingDialog.class);
+    private final static Logger logger = Logger.getLogger(TableWaitingDialog.class);
 
-	UpdateSeatsTask(Session session, UUID roomId, UUID tableId, TableWaitingDialog dialog) {
-		this.session = session;
-		this.roomId = roomId;
-		this.tableId = tableId;
-		this.dialog = dialog;
-	}
+    UpdateSeatsTask(Session session, UUID roomId, UUID tableId, TableWaitingDialog dialog) {
+        this.session = session;
+        this.roomId = roomId;
+        this.tableId = tableId;
+        this.dialog = dialog;
+    }
 
-	@Override
-	protected Void doInBackground() throws Exception {
-		while (!isCancelled()) {
-			this.publish(session.getTable(roomId, tableId));
-			Thread.sleep(1000);
-		}
-		return null;
-	}
+    @Override
+    protected Void doInBackground() throws Exception {
+        while (!isCancelled()) {
+            this.publish(session.getTable(roomId, tableId));
+            Thread.sleep(1000);
+        }
+        return null;
+    }
 
-	@Override
-	protected void process(List<TableView> view) {
-		dialog.update(view.get(0));
-	}
+    @Override
+    protected void process(List<TableView> view) {
+        dialog.update(view.get(0));
+    }
 
-	@Override
-	protected void done() {
-		try {
-			get();
-		} catch (InterruptedException ex) {
-			logger.fatal("Update Seats Task error", ex);
-		} catch (ExecutionException ex) {
-			logger.fatal("Update Seats Task error", ex);
-		} catch (CancellationException ex) {}
-	}
+    @Override
+    protected void done() {
+        try {
+            get();
+        } catch (InterruptedException ex) {
+            logger.fatal("Update Seats Task error", ex);
+        } catch (ExecutionException ex) {
+            logger.fatal("Update Seats Task error", ex);
+        } catch (CancellationException ex) {}
+    }
 
 }

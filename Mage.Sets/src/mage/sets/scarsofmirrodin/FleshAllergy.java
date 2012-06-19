@@ -60,12 +60,12 @@ public class FleshAllergy extends CardImpl<FleshAllergy> {
     public FleshAllergy (UUID ownerId) {
         super(ownerId, 62, "Flesh Allergy", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
         this.expansionSetCode = "SOM";
-		this.color.setBlack(true);
-		this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
-		this.getSpellAbility().addEffect(new DestroyTargetEffect());
-		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-		this.getSpellAbility().addEffect(new FleshAllergyEffect());
-		this.addWatcher(new FleshAllergyWatcher());
+        this.color.setBlack(true);
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addEffect(new FleshAllergyEffect());
+        this.addWatcher(new FleshAllergyWatcher());
     }
 
     public FleshAllergy (final FleshAllergy card) {
@@ -80,57 +80,57 @@ public class FleshAllergy extends CardImpl<FleshAllergy> {
 
 class FleshAllergyWatcher extends WatcherImpl<FleshAllergyWatcher> {
 
-	public int creaturesDiedThisTurn = 0;
+    public int creaturesDiedThisTurn = 0;
 
-	public FleshAllergyWatcher() {
-		super("CreaturesDied", WatcherScope.GAME);
-	}
+    public FleshAllergyWatcher() {
+        super("CreaturesDied", WatcherScope.GAME);
+    }
 
-	public FleshAllergyWatcher(final FleshAllergyWatcher watcher) {
-		super(watcher);
-	}
+    public FleshAllergyWatcher(final FleshAllergyWatcher watcher) {
+        super(watcher);
+    }
 
-	@Override
-	public FleshAllergyWatcher copy() {
-		return new FleshAllergyWatcher(this);
-	}
+    @Override
+    public FleshAllergyWatcher copy() {
+        return new FleshAllergyWatcher(this);
+    }
 
-	@Override
-	public void watch(GameEvent event, Game game) {
-		if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
+    @Override
+    public void watch(GameEvent event, Game game) {
+        if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
             MageObject card = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             if (card != null && card.getCardType().contains(CardType.CREATURE)) {
                 creaturesDiedThisTurn++;
             }
-		}
-	}
+        }
+    }
 
-	@Override
-	public void reset() {
-		super.reset();
-		creaturesDiedThisTurn = 0;
-	}
+    @Override
+    public void reset() {
+        super.reset();
+        creaturesDiedThisTurn = 0;
+    }
 
 }
 
 class FleshAllergyEffect extends OneShotEffect<FleshAllergyEffect> {
 
-	public FleshAllergyEffect() {
-		super(Outcome.DestroyPermanent);
-		staticText = "Its controller loses life equal to the number of creatures that died this turn";
-	}
+    public FleshAllergyEffect() {
+        super(Outcome.DestroyPermanent);
+        staticText = "Its controller loses life equal to the number of creatures that died this turn";
+    }
 
-	public FleshAllergyEffect(final FleshAllergyEffect effect) {
-		super(effect);
-	}
+    public FleshAllergyEffect(final FleshAllergyEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public FleshAllergyEffect copy() {
-		return new FleshAllergyEffect(this);
-	}
+    @Override
+    public FleshAllergyEffect copy() {
+        return new FleshAllergyEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
         FleshAllergyWatcher watcher = (FleshAllergyWatcher) game.getState().getWatchers().get("CreaturesDied");
         MageObject card = game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
         if (card != null && watcher != null) {
@@ -143,7 +143,7 @@ class FleshAllergyEffect extends OneShotEffect<FleshAllergyEffect> {
                 }
             }
         }
-		return false;
-	}
+        return false;
+    }
 
 }

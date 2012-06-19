@@ -56,10 +56,10 @@ public class DeadlyAllure extends CardImpl<DeadlyAllure> {
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new MustBlockSourceEffect()), Constants.Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Constants.Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        
+
         // Flashback {G}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{G}"), Constants.TimingRule.SORCERY));
-        
+
     }
 
     public DeadlyAllure(final DeadlyAllure card) {

@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class FieryHellhound extends mage.sets.magic2010.FieryHellhound {
 
-	public FieryHellhound(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 136;
-		this.expansionSetCode = "M11";
-	}
+    public FieryHellhound(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 136;
+        this.expansionSetCode = "M11";
+    }
 
-	public FieryHellhound(final FieryHellhound card) {
-		super(card);
-	}
+    public FieryHellhound(final FieryHellhound card) {
+        super(card);
+    }
 
-	@Override
-	public FieryHellhound copy() {
-		return new FieryHellhound(this);
-	}
+    @Override
+    public FieryHellhound copy() {
+        return new FieryHellhound(this);
+    }
 
 }

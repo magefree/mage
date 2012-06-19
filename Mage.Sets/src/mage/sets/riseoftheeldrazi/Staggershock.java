@@ -41,22 +41,22 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class Staggershock extends CardImpl<Staggershock> {
 
-	public Staggershock(UUID ownerId) {
-		super(ownerId, 166, "Staggershock", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
-		this.expansionSetCode = "ROE";
+    public Staggershock(UUID ownerId) {
+        super(ownerId, 166, "Staggershock", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
+        this.expansionSetCode = "ROE";
 
-		this.color.setRed(true);
-		this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
-		this.getSpellAbility().addEffect(new DamageTargetEffect(2));
-		this.addAbility(new ReboundAbility());
-	}
+        this.color.setRed(true);
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addEffect(new DamageTargetEffect(2));
+        this.addAbility(new ReboundAbility());
+    }
 
-	public Staggershock(final Staggershock card) {
-		super(card);
-	}
+    public Staggershock(final Staggershock card) {
+        super(card);
+    }
 
-	@Override
-	public Staggershock copy() {
-		return new Staggershock(this);
-	}
+    @Override
+    public Staggershock copy() {
+        return new Staggershock(this);
+    }
 }

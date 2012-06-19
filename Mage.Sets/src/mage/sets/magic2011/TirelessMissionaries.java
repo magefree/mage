@@ -42,25 +42,25 @@ import mage.cards.CardImpl;
  */
 public class TirelessMissionaries extends CardImpl<TirelessMissionaries> {
 
-	public TirelessMissionaries(UUID ownerId) {
-		super(ownerId, 36, "Tireless Missionaries", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Human");
-		this.subtype.add("Cleric");
-		this.color.setWhite(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(3);
+    public TirelessMissionaries(UUID ownerId) {
+        super(ownerId, 36, "Tireless Missionaries", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Human");
+        this.subtype.add("Cleric");
+        this.color.setWhite(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
 
-		this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(3)));
-	}
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(3)));
+    }
 
-	public TirelessMissionaries(final TirelessMissionaries card) {
-		super(card);
-	}
+    public TirelessMissionaries(final TirelessMissionaries card) {
+        super(card);
+    }
 
-	@Override
-	public TirelessMissionaries copy() {
-		return new TirelessMissionaries(this);
-	}
+    @Override
+    public TirelessMissionaries copy() {
+        return new TirelessMissionaries(this);
+    }
 
 }

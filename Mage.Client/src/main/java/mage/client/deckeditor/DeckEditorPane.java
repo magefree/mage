@@ -54,26 +54,26 @@ public class DeckEditorPane extends MagePane {
 
     /** Creates new form TablesPane */
     public DeckEditorPane() {
-        
+
         boolean initialized = false;
         if (Plugins.getInstance().isThemePluginLoaded()) {
-        	Map<String, JComponent> ui = new HashMap<String, JComponent>();
-	        JComponent container = Plugins.getInstance().updateTablePanel(ui);
-			if (container != null) {
-				deckEditorPanel1 = new mage.client.deckeditor.DeckEditorPanel();
-				initComponents(container);
-    			container.add(deckEditorPanel1);
-    			container.setOpaque(false);
-    			deckEditorPanel1.setOpaque(false);
-				initialized = true;
-			}
+            Map<String, JComponent> ui = new HashMap<String, JComponent>();
+            JComponent container = Plugins.getInstance().updateTablePanel(ui);
+            if (container != null) {
+                deckEditorPanel1 = new mage.client.deckeditor.DeckEditorPanel();
+                initComponents(container);
+                container.add(deckEditorPanel1);
+                container.setOpaque(false);
+                deckEditorPanel1.setOpaque(false);
+                initialized = true;
+            }
         }
         if (!initialized) {
-        	initComponents();
+            initComponents();
         }
     }
 
-	public void show(DeckEditorMode mode, Deck deck, String name, UUID tableId, int time) {
+    public void show(DeckEditorMode mode, Deck deck, String name, UUID tableId, int time) {
         if (mode == DeckEditorMode.Sideboard || mode == DeckEditorMode.Limited)
             this.setTitle("Deck Editor - " + tableId.toString());
         else {
@@ -82,9 +82,9 @@ public class DeckEditorPane extends MagePane {
             else
                 this.setTitle("Deck Editor");
         }
-		this.deckEditorPanel1.showDeckEditor(mode, deck, tableId, time);
-		this.repaint();
-	}
+        this.deckEditorPanel1.showDeckEditor(mode, deck, tableId, time);
+        this.repaint();
+    }
 
 
     /** This method is called from within the constructor to

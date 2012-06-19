@@ -59,11 +59,11 @@ public class Weakness extends CardImpl<Weakness> {
         this.color.setBlack(true);
         this.subtype.add("Aura");
         TargetPermanent auraTarget = new TargetCreaturePermanent();
-	this.getSpellAbility().addTarget(auraTarget);
-	this.getSpellAbility().addEffect(new AttachEffect(Outcome.UnboostCreature));
+    this.getSpellAbility().addTarget(auraTarget);
+    this.getSpellAbility().addEffect(new AttachEffect(Outcome.UnboostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
-	this.addAbility(ability);
-	this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WeaknessEffect()));
+    this.addAbility(ability);
+    this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WeaknessEffect()));
     }
 
     public Weakness(final Weakness card) {
@@ -80,7 +80,7 @@ class WeaknessEffect extends ContinuousEffectImpl<WeaknessEffect> {
 
     public WeaknessEffect() {
         super(Duration.WhileOnBattlefield, Outcome.UnboostCreature);
-    	staticText = "Enchanted creature gets -2/-1";
+        staticText = "Enchanted creature gets -2/-1";
     }
 
     public WeaknessEffect(final WeaknessEffect effect) {
@@ -90,21 +90,21 @@ class WeaknessEffect extends ContinuousEffectImpl<WeaknessEffect> {
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Permanent enchantment = game.getPermanent(source.getSourceId());
-	if (enchantment != null && enchantment.getAttachedTo() != null) {
-		Permanent creature = game.getPermanent(enchantment.getAttachedTo());
-		if (creature != null) {
-			switch (layer) {
-				case PTChangingEffects_7:
-					if (sublayer == SubLayer.ModifyPT_7c) {
-						creature.addPower(-2);
-						creature.addToughness(-1);
-					}
-					break;
-			}
-			return true;
-		}
-	}
-	return false;
+    if (enchantment != null && enchantment.getAttachedTo() != null) {
+        Permanent creature = game.getPermanent(enchantment.getAttachedTo());
+        if (creature != null) {
+            switch (layer) {
+                case PTChangingEffects_7:
+                    if (sublayer == SubLayer.ModifyPT_7c) {
+                        creature.addPower(-2);
+                        creature.addToughness(-1);
+                    }
+                    break;
+            }
+            return true;
+        }
+    }
+    return false;
     }
 
     @Override
@@ -114,7 +114,7 @@ class WeaknessEffect extends ContinuousEffectImpl<WeaknessEffect> {
 
     @Override
     public boolean hasLayer(Layer layer) {
-	return layer == Layer.PTChangingEffects_7;
+    return layer == Layer.PTChangingEffects_7;
     }
 
     @Override

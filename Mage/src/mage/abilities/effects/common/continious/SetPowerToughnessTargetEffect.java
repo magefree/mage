@@ -46,48 +46,48 @@ import mage.game.permanent.Permanent;
  */
 public class SetPowerToughnessTargetEffect extends ContinuousEffectImpl<SetPowerToughnessTargetEffect> {
 
-	private DynamicValue power;
-	private DynamicValue toughness;
+    private DynamicValue power;
+    private DynamicValue toughness;
 
     public SetPowerToughnessTargetEffect(DynamicValue power, DynamicValue toughness, Duration duration) {
         super(duration, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
         this.power = power;
-		this.toughness = toughness;
+        this.toughness = toughness;
     }
 
-	public SetPowerToughnessTargetEffect(int power, int toughness, Duration duration) {
-		this(new StaticValue(power), new StaticValue(toughness), duration);
-	}
+    public SetPowerToughnessTargetEffect(int power, int toughness, Duration duration) {
+        this(new StaticValue(power), new StaticValue(toughness), duration);
+    }
 
-	public SetPowerToughnessTargetEffect(final SetPowerToughnessTargetEffect effect) {
-		super(effect);
-		this.power = effect.power;
-		this.toughness = effect.toughness;
-	}
+    public SetPowerToughnessTargetEffect(final SetPowerToughnessTargetEffect effect) {
+        super(effect);
+        this.power = effect.power;
+        this.toughness = effect.toughness;
+    }
 
-	@Override
-	public SetPowerToughnessTargetEffect copy() {
-		return new SetPowerToughnessTargetEffect(this);
-	}
+    @Override
+    public SetPowerToughnessTargetEffect copy() {
+        return new SetPowerToughnessTargetEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent target = game.getPermanent(source.getFirstTarget());
-		if (target != null) {
-			target.getPower().setValue(power.calculate(game, source));
-			target.getToughness().setValue(toughness.calculate(game, source));
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent target = game.getPermanent(source.getFirstTarget());
+        if (target != null) {
+            target.getPower().setValue(power.calculate(game, source));
+            target.getToughness().setValue(toughness.calculate(game, source));
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public String getText(Mode mode) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("target ").append(mode.getTargets().get(0).getTargetName()).append(" becomes ");
-		sb.append(power).append("/").append(toughness).append(" ").append(duration.toString());
-		return sb.toString();
-	}
+    @Override
+    public String getText(Mode mode) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("target ").append(mode.getTargets().get(0).getTargetName()).append(" becomes ");
+        sb.append(power).append("/").append(toughness).append(" ").append(duration.toString());
+        return sb.toString();
+    }
 
 
 }

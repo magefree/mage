@@ -44,54 +44,54 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class TapVariableTargetCost extends CostImpl<TapVariableTargetCost> implements VariableCost {
 
-	protected int amountPaid = 0;
-	protected TargetControlledPermanent target;
+    protected int amountPaid = 0;
+    protected TargetControlledPermanent target;
 
-	public TapVariableTargetCost(TargetControlledPermanent target) {
-		this.target = target;
-		this.text = "tap X " + target.getTargetName() + " you control";
-	}
+    public TapVariableTargetCost(TargetControlledPermanent target) {
+        this.target = target;
+        this.text = "tap X " + target.getTargetName() + " you control";
+    }
 
-	public TapVariableTargetCost(final TapVariableTargetCost cost) {
-		super(cost);
-		this.target = cost.target.copy();
-		this.amountPaid = cost.amountPaid;
-	}
+    public TapVariableTargetCost(final TapVariableTargetCost cost) {
+        super(cost);
+        this.target = cost.target.copy();
+        this.amountPaid = cost.amountPaid;
+    }
 
-	@Override
-	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-		return target.canChoose(controllerId, game);
-	}
+    @Override
+    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+        return target.canChoose(controllerId, game);
+    }
 
-	@Override
-	public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-		amountPaid = 0;
-		while (true) {
-			target.clearChosen();
-			if (target.canChoose(sourceId, controllerId, game) && target.choose(Outcome.Tap, controllerId, sourceId, game)) {
-				Permanent permanent = game.getPermanent(target.getFirstTarget());
-				if (permanent != null && permanent.tap(game)) {
-					amountPaid++;
-				}
-			}
-			else {
-				break;
-			}
-		}
-		paid = true;
-		return true;
-	}
+    @Override
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+        amountPaid = 0;
+        while (true) {
+            target.clearChosen();
+            if (target.canChoose(sourceId, controllerId, game) && target.choose(Outcome.Tap, controllerId, sourceId, game)) {
+                Permanent permanent = game.getPermanent(target.getFirstTarget());
+                if (permanent != null && permanent.tap(game)) {
+                    amountPaid++;
+                }
+            }
+            else {
+                break;
+            }
+        }
+        paid = true;
+        return true;
+    }
 
-	@Override
-	public void clearPaid() {
-		paid = false;
-		amountPaid = 0;
-	}
+    @Override
+    public void clearPaid() {
+        paid = false;
+        amountPaid = 0;
+    }
 
-	@Override
-	public int getAmount() {
-		return amountPaid;
-	}
+    @Override
+    public int getAmount() {
+        return amountPaid;
+    }
 
     @Override
     public void setAmount(int amount) {
@@ -99,12 +99,12 @@ public class TapVariableTargetCost extends CostImpl<TapVariableTargetCost> imple
     }
 
     @Override
-	public void setFilter(FilterMana filter) {
-	}
+    public void setFilter(FilterMana filter) {
+    }
 
-	@Override
-	public TapVariableTargetCost copy() {
-		return new TapVariableTargetCost(this);
-	}
+    @Override
+    public TapVariableTargetCost copy() {
+        return new TapVariableTargetCost(this);
+    }
 
 }

@@ -42,69 +42,69 @@ import java.util.UUID;
  */
 public class FilterPlayer extends FilterImpl<Player, FilterPlayer> implements Filter<Player> {
 
-	protected List<UUID> playerId = new ArrayList<UUID>();
-	protected boolean notPlayer;
-	protected TargetController playerTarget = TargetController.ANY;
+    protected List<UUID> playerId = new ArrayList<UUID>();
+    protected boolean notPlayer;
+    protected TargetController playerTarget = TargetController.ANY;
 
-	public FilterPlayer() {
-		super("player");
-	}
+    public FilterPlayer() {
+        super("player");
+    }
 
-	public FilterPlayer(FilterPlayer filter) {
-		super(filter);
+    public FilterPlayer(FilterPlayer filter) {
+        super(filter);
         this.playerId.addAll(filter.playerId);
-		this.notPlayer = filter.notPlayer;
-		this.playerTarget = filter.playerTarget;
-	}
+        this.notPlayer = filter.notPlayer;
+        this.playerTarget = filter.playerTarget;
+    }
 
-	@Override
-	public boolean match(Player player, Game game) {
+    @Override
+    public boolean match(Player player, Game game) {
 
-		if (playerId.size() > 0 && playerId.contains(player.getId()) == notPlayer)
-			return notFilter;
+        if (playerId.size() > 0 && playerId.contains(player.getId()) == notPlayer)
+            return notFilter;
 
-		return !notFilter;
-	}
+        return !notFilter;
+    }
 
-	public boolean match(Player player, UUID sourceId, UUID playerId, Game game) {
-		if (!this.match(player, game))
-			return notFilter;
+    public boolean match(Player player, UUID sourceId, UUID playerId, Game game) {
+        if (!this.match(player, game))
+            return notFilter;
 
-		if (playerTarget != TargetController.ANY && playerId != null) {
-			switch(playerTarget) {
-				case YOU:
-					if (!player.getId().equals(playerId))
-						return notFilter;
-					break;
-				case OPPONENT:
-					if (!game.getOpponents(playerId).contains(player.getId()))
-						return notFilter;
-					break;
-				case NOT_YOU:
-					if (player.getId().equals(playerId))
-						return notFilter;
-					break;
-			}
-		}
+        if (playerTarget != TargetController.ANY && playerId != null) {
+            switch(playerTarget) {
+                case YOU:
+                    if (!player.getId().equals(playerId))
+                        return notFilter;
+                    break;
+                case OPPONENT:
+                    if (!game.getOpponents(playerId).contains(player.getId()))
+                        return notFilter;
+                    break;
+                case NOT_YOU:
+                    if (player.getId().equals(playerId))
+                        return notFilter;
+                    break;
+            }
+        }
 
-		return !notFilter;
-	}
+        return !notFilter;
+    }
 
-	public List<UUID> getPlayerId() {
-		return playerId;
-	}
+    public List<UUID> getPlayerId() {
+        return playerId;
+    }
 
-	public void setNotPlayer(boolean notPlayer) {
-		this.notPlayer = notPlayer;
-	}
+    public void setNotPlayer(boolean notPlayer) {
+        this.notPlayer = notPlayer;
+    }
 
-	public void setPlayerTarget(TargetController playerTarget) {
-		this.playerTarget = playerTarget;
-	}
+    public void setPlayerTarget(TargetController playerTarget) {
+        this.playerTarget = playerTarget;
+    }
 
-	@Override
-	public FilterPlayer copy() {
-		return new FilterPlayer(this);
-	}
+    @Override
+    public FilterPlayer copy() {
+        return new FilterPlayer(this);
+    }
 
 }

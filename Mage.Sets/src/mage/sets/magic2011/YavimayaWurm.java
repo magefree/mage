@@ -41,24 +41,24 @@ import mage.cards.CardImpl;
  */
 public class YavimayaWurm extends CardImpl<YavimayaWurm> {
 
-	public YavimayaWurm(UUID ownerId) {
-		super(ownerId, 200, "Yavimaya Wurm", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Wurm");
-		this.color.setGreen(true);
-		this.power = new MageInt(6);
-		this.toughness = new MageInt(4);
+    public YavimayaWurm(UUID ownerId) {
+        super(ownerId, 200, "Yavimaya Wurm", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Wurm");
+        this.color.setGreen(true);
+        this.power = new MageInt(6);
+        this.toughness = new MageInt(4);
 
-		this.addAbility(TrampleAbility.getInstance());
-	}
+        this.addAbility(TrampleAbility.getInstance());
+    }
 
-	public YavimayaWurm(final YavimayaWurm card) {
-		super(card);
-	}
+    public YavimayaWurm(final YavimayaWurm card) {
+        super(card);
+    }
 
-	@Override
-	public YavimayaWurm copy() {
-		return new YavimayaWurm(this);
-	}
+    @Override
+    public YavimayaWurm copy() {
+        return new YavimayaWurm(this);
+    }
 
 }

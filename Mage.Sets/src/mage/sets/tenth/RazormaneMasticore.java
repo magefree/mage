@@ -59,10 +59,10 @@ public class RazormaneMasticore extends CardImpl<RazormaneMasticore> {
 
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
-        
+
         // At the beginning of your upkeep, sacrifice Razormane Masticore unless you discard a card.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Constants.Zone.BATTLEFIELD, new SacrificeSourceUnlessPaysEffect(new DiscardTargetCost(new TargetCardInHand())), Constants.TargetController.YOU, false));
-        
+
         // At the beginning of your draw step, you may have Razormane Masticore deal 3 damage to target creature.
         Ability ability = new BeginningOfDrawTriggeredAbility(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(3), Constants.TargetController.YOU, true);
         ability.addTarget(new TargetCreaturePermanent());

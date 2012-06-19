@@ -47,7 +47,7 @@ public class AssaultStrobe extends CardImpl<AssaultStrobe> {
     public AssaultStrobe (UUID ownerId) {
         super(ownerId, 82, "Assault Strobe", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");
         this.expansionSetCode = "SOM";
-		this.color.setRed(true);        
+        this.color.setRed(true);        
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

@@ -46,7 +46,7 @@ public class MarshThreader extends CardImpl<MarshThreader> {
         this.expansionSetCode = "WWK";
         this.subtype.add("Kor");
         this.subtype.add("Scout");
-		this.color.setWhite(true);        
+        this.color.setWhite(true);        
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         this.addAbility(new SwampwalkAbility());

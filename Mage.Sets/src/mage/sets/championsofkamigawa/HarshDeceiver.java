@@ -65,10 +65,10 @@ public class HarshDeceiver extends CardImpl<HarshDeceiver> {
         this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
-        
+
         // {1}: Look at the top card of your library.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryControllerEffect(), new GenericManaCost(1)));  
-        
+
         // {2}: Reveal the top card of your library. If it's a land card, untap {this} and it gets +1/+1 until end of turn.
         Ability ability = new FeralDeceiverAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl("{2}"));
         ability.addEffect(new BoostSourceEffect(1,1,Duration.EndOfTurn));
@@ -78,7 +78,7 @@ public class HarshDeceiver extends CardImpl<HarshDeceiver> {
     public HarshDeceiver(final HarshDeceiver card) {
         super(card);
     }
-    
+
     @Override
     public HarshDeceiver copy() {
         return new HarshDeceiver(this);
@@ -86,22 +86,22 @@ public class HarshDeceiver extends CardImpl<HarshDeceiver> {
 }
 
 class HarshDeceiverAbility extends ActivateOncePerTurnActivatedAbility {
-    	
+
         public HarshDeceiverAbility(Zone zone, Effect effect, Cost cost) {
-		super(zone, effect, cost);
-	}
+        super(zone, effect, cost);
+    }
 
         public HarshDeceiverAbility(HarshDeceiverAbility ability) {
-		super(ability);
-	}
-    
+        super(ability);
+    }
+
         @Override
         public HarshDeceiverAbility copy() {
                 return new HarshDeceiverAbility(this);
         }
-    
+
         @Override
-	public boolean checkIfClause(Game game) {
+    public boolean checkIfClause(Game game) {
                 Player player = game.getPlayer(this.getControllerId());
                 if (player != null) {
                     Cards cards = new CardsImpl();
@@ -112,11 +112,11 @@ class HarshDeceiverAbility extends ActivateOncePerTurnActivatedAbility {
                             return true;
                     }
                 }
-		return false;
+        return false;
         }
-    
+
         @Override
-	public String getRule() {
-		return "{2}: Reveal the top card of your library. If it's a land card, untap {this} and it gets +1/+1 until end of turn. Activate this ability only once each turn."; 
-	}
+    public String getRule() {
+        return "{2}: Reveal the top card of your library. If it's a land card, untap {this} and it gets +1/+1 until end of turn. Activate this ability only once each turn."; 
+    }
 }

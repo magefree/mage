@@ -48,7 +48,7 @@ public class SeizeTheInitiative extends CardImpl<SeizeTheInitiative> {
     public SeizeTheInitiative (UUID ownerId) {
         super(ownerId, 20, "Seize the Initiative", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "SOM";
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         this.getSpellAbility().addEffect(new BoostTargetEffect(1, 1, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

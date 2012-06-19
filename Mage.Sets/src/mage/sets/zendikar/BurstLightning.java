@@ -44,23 +44,23 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class BurstLightning extends CardImpl<BurstLightning> {
 
-	public BurstLightning(UUID ownerId) {
-		super(ownerId, 119, "Burst Lightning", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
-		this.expansionSetCode = "ZEN";
-		this.color.setRed(true);
+    public BurstLightning(UUID ownerId) {
+        super(ownerId, 119, "Burst Lightning", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
+        this.expansionSetCode = "ZEN";
+        this.color.setRed(true);
         this.getSpellAbility().addOptionalCost(new KickerManaCost("{4}"));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DamageTargetEffect(4),
                 new DamageTargetEffect(2), KickedCondition.getInstance(), "{this} deals 2 damage to target creature or player. If {this} was kicked, it deals 4 damage to that creature or player instead"));
-	}
+    }
 
-	public BurstLightning(final BurstLightning card) {
-		super(card);
-	}
+    public BurstLightning(final BurstLightning card) {
+        super(card);
+    }
 
-	@Override
-	public BurstLightning copy() {
-		return new BurstLightning(this);
-	}
+    @Override
+    public BurstLightning copy() {
+        return new BurstLightning(this);
+    }
 
 }

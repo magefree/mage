@@ -40,22 +40,22 @@ import mage.cards.CardImpl;
  */
 public class StoneGolem extends CardImpl<StoneGolem> {
 
-	public StoneGolem(UUID ownerId) {
-		super(ownerId, 215, "Stone Golem", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Golem");
-		this.power = new MageInt(4);
-		this.toughness = new MageInt(4);
+    public StoneGolem(UUID ownerId) {
+        super(ownerId, 215, "Stone Golem", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Golem");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
-	}
+    }
 
-	public StoneGolem(final StoneGolem card) {
-		super(card);
-	}
+    public StoneGolem(final StoneGolem card) {
+        super(card);
+    }
 
-	@Override
-	public StoneGolem copy() {
-		return new StoneGolem(this);
-	}
+    @Override
+    public StoneGolem copy() {
+        return new StoneGolem(this);
+    }
 
 }

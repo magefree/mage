@@ -44,38 +44,38 @@ import mage.game.permanent.Permanent;
  */
 public class SwitchPowerToughnessTargetEffect extends ContinuousEffectImpl<SwitchPowerToughnessTargetEffect> {
 
-	public SwitchPowerToughnessTargetEffect(Duration duration) {
-		super(duration, Layer.PTChangingEffects_7, SubLayer.SwitchPT_e, Outcome.BoostCreature);
-	}
+    public SwitchPowerToughnessTargetEffect(Duration duration) {
+        super(duration, Layer.PTChangingEffects_7, SubLayer.SwitchPT_e, Outcome.BoostCreature);
+    }
 
-	public SwitchPowerToughnessTargetEffect(final SwitchPowerToughnessTargetEffect effect) {
-		super(effect);
-	}
+    public SwitchPowerToughnessTargetEffect(final SwitchPowerToughnessTargetEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public SwitchPowerToughnessTargetEffect copy() {
-		return new SwitchPowerToughnessTargetEffect(this);
-	}
+    @Override
+    public SwitchPowerToughnessTargetEffect copy() {
+        return new SwitchPowerToughnessTargetEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent target = (Permanent) game.getPermanent(source.getFirstTarget());
-		if (target != null) {
-			int power = target.getPower().getValue();
-			target.getPower().setValue(target.getToughness().getValue());
-			target.getToughness().setValue(power);
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent target = (Permanent) game.getPermanent(source.getFirstTarget());
+        if (target != null) {
+            int power = target.getPower().getValue();
+            target.getPower().setValue(target.getToughness().getValue());
+            target.getToughness().setValue(power);
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public String getText(Mode mode) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("Switch target ").append(mode.getTargets().get(0).getTargetName()).append("'s power and toughness")
-			.append(" ").append(duration.toString());
-		return sb.toString();
-	}
+    @Override
+    public String getText(Mode mode) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Switch target ").append(mode.getTargets().get(0).getTargetName()).append("'s power and toughness")
+            .append(" ").append(duration.toString());
+        return sb.toString();
+    }
 
 
 }

@@ -47,7 +47,7 @@ public class Exsanguinate extends CardImpl<Exsanguinate> {
     public Exsanguinate (UUID ownerId) {
         super(ownerId, 61, "Exsanguinate", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{B}{B}");
         this.expansionSetCode = "SOM";
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.getSpellAbility().addEffect(new ExsanguinateEffect());
     }
 

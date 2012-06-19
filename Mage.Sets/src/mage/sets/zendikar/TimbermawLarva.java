@@ -50,7 +50,7 @@ public class TimbermawLarva extends CardImpl<TimbermawLarva> {
     static {
         filter.getSubtype().add("Forest");
         filter.setTargetController(TargetController.YOU);
-        
+
     }
 
     public TimbermawLarva(UUID ownerId) {

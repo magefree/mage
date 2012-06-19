@@ -54,8 +54,8 @@ public class BorosGuildmage extends CardImpl<BorosGuildmage> {
         this.expansionSetCode = "RAV";
         this.subtype.add("Human");
         this.subtype.add("Wizard");
-		this.color.setWhite(true);
-		this.color.setRed(true);
+        this.color.setWhite(true);
+        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainAbilityTargetEffect(HasteAbility.getInstance(), Constants.Duration.EndOfTurn), new ManaCostsImpl("{1}{R}"));

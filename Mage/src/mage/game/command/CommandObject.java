@@ -38,11 +38,11 @@ import java.util.UUID;
 */
 public interface CommandObject extends MageObject {
 
-	public UUID getSourceId();
-	public UUID getControllerId();
+    public UUID getSourceId();
+    public UUID getControllerId();
     public void assignNewId();
-//	public void checkTriggers(GameEvent event, Game game);
-	
-	@Override
-	public CommandObject copy();
+//    public void checkTriggers(GameEvent event, Game game);
+
+    @Override
+    public CommandObject copy();
 }

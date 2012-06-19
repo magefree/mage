@@ -55,20 +55,20 @@ public class HandOfThePraetors extends CardImpl<HandOfThePraetors> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with infect");
     private static final FilterSpell filterSpell = new FilterSpell("a creature spell with infect");
 
-	static {
-		filter.getAbilities().add(InfectAbility.getInstance());
-		filter.setNotAbilities(false);
+    static {
+        filter.getAbilities().add(InfectAbility.getInstance());
+        filter.setNotAbilities(false);
         filterSpell.getAbilities().add(InfectAbility.getInstance());
         filterSpell.getCardType().add(CardType.CREATURE);
         filterSpell.setScopeCardType(Filter.ComparisonScope.Any);
-	}
+    }
 
     public HandOfThePraetors (UUID ownerId) {
         super(ownerId, 66, "Hand of the Praetors", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Zombie");
 
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

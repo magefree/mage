@@ -37,22 +37,22 @@ import mage.filter.FilterCard;
  */
 public class FilterLandCard extends FilterCard<FilterLandCard> {
 
-	public FilterLandCard() {
-		this("land card");
-	}
+    public FilterLandCard() {
+        this("land card");
+    }
 
-	public FilterLandCard(String name) {
-		super(name);
-		cardType.add(CardType.LAND);
-	}
+    public FilterLandCard(String name) {
+        super(name);
+        cardType.add(CardType.LAND);
+    }
 
-	public FilterLandCard(final FilterLandCard filter) {
-		super(filter);
-	}
+    public FilterLandCard(final FilterLandCard filter) {
+        super(filter);
+    }
 
-	@Override
-	public FilterLandCard copy() {
-		return new FilterLandCard(this);
-	}
+    @Override
+    public FilterLandCard copy() {
+        return new FilterLandCard(this);
+    }
 
 }

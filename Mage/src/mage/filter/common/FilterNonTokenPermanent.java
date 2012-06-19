@@ -39,17 +39,17 @@ import mage.game.permanent.PermanentToken;
  */
 public class FilterNonTokenPermanent extends FilterPermanent<FilterNonTokenPermanent> {
 
-	public FilterNonTokenPermanent() {
-		this("nontoken permanent");
-	}
-	
-	public FilterNonTokenPermanent(String name) {
-		super(name);
-	}
+    public FilterNonTokenPermanent() {
+        this("nontoken permanent");
+    }
 
-	public FilterNonTokenPermanent(final FilterNonTokenPermanent filter) {
-		super(filter);
-	}
+    public FilterNonTokenPermanent(String name) {
+        super(name);
+    }
+
+    public FilterNonTokenPermanent(final FilterNonTokenPermanent filter) {
+        super(filter);
+    }
 
     @Override
     public boolean match(Permanent permanent, Game game) {
@@ -63,10 +63,10 @@ public class FilterNonTokenPermanent extends FilterPermanent<FilterNonTokenPerma
 
         return !notFilter;
     }
-    
-	@Override
-	public FilterNonTokenPermanent copy() {
-		return new FilterNonTokenPermanent(this);
-	}
+
+    @Override
+    public FilterNonTokenPermanent copy() {
+        return new FilterNonTokenPermanent(this);
+    }
 
 }

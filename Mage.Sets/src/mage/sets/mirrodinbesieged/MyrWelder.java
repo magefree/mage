@@ -58,79 +58,79 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class MyrWelder extends CardImpl<MyrWelder> {
 
-	public MyrWelder(UUID ownerId) {
-		super(ownerId, 118, "Myr Welder", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
-		this.expansionSetCode = "MBS";
-		this.subtype.add("Myr");
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(4);
+    public MyrWelder(UUID ownerId) {
+        super(ownerId, 118, "Myr Welder", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
+        this.expansionSetCode = "MBS";
+        this.subtype.add("Myr");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(4);
 
         // Imprint - {tap}: Exile target artifact card from a graveyard
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MyrWelderEffect(), new TapSourceCost());
         ability.addTarget(new TargetCardInGraveyard(new FilterArtifactCard("artifact card from a graveyard")));
         this.addAbility(ability);
-        
+
         // Myr Welder has all activated abilities of all cards exiled with it
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MyrWelderContinuousEffect()));
-        
-	}
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MyrWelderContinuousEffect()));
 
-	public MyrWelder(final MyrWelder card) {
-		super(card);
-	}
+    }
 
-	@Override
-	public MyrWelder copy() {
-		return new MyrWelder(this);
-	}
+    public MyrWelder(final MyrWelder card) {
+        super(card);
+    }
+
+    @Override
+    public MyrWelder copy() {
+        return new MyrWelder(this);
+    }
 
 }
 
 class MyrWelderEffect extends OneShotEffect<MyrWelderEffect> {
 
-	public MyrWelderEffect() {
-		super(Constants.Outcome.Exile);
-		staticText = "Exile target artifact card from a graveyard";
-	}
+    public MyrWelderEffect() {
+        super(Constants.Outcome.Exile);
+        staticText = "Exile target artifact card from a graveyard";
+    }
 
-	public MyrWelderEffect(MyrWelderEffect effect) {
-		super(effect);
-	}
+    public MyrWelderEffect(MyrWelderEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Card card = game.getCard(source.getFirstTarget());
-		Permanent permanent = game.getPermanent(source.getSourceId());
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Card card = game.getCard(source.getFirstTarget());
+        Permanent permanent = game.getPermanent(source.getSourceId());
         if (card != null && permanent != null) {
             card.moveToExile(getId(), "Myr Welder (Imprint)", source.getSourceId(), game);
             permanent.imprint(card.getId(), game);
             return true;
         }
-		return false;
-	}
+        return false;
+    }
 
-	@Override
-	public MyrWelderEffect copy() {
-		return new MyrWelderEffect(this);
-	}
+    @Override
+    public MyrWelderEffect copy() {
+        return new MyrWelderEffect(this);
+    }
 
 }
 
 class MyrWelderContinuousEffect extends ContinuousEffectImpl<MyrWelderContinuousEffect> {
 
-	public MyrWelderContinuousEffect() {
-		super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-		staticText = "{this} has all activated abilities of all cards exiled with it";
-	}
-	
-	public MyrWelderContinuousEffect(final MyrWelderContinuousEffect effect) {
-		super(effect);
-	}
-	
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent perm = game.getPermanent(source.getSourceId());
-		if (perm != null) {
+    public MyrWelderContinuousEffect() {
+        super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+        staticText = "{this} has all activated abilities of all cards exiled with it";
+    }
+
+    public MyrWelderContinuousEffect(final MyrWelderContinuousEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent perm = game.getPermanent(source.getSourceId());
+        if (perm != null) {
             for (UUID imprintedId: perm.getImprinted()) {
                 Card card = game.getCard(imprintedId);
                 if (card != null) {
@@ -141,13 +141,13 @@ class MyrWelderContinuousEffect extends ContinuousEffectImpl<MyrWelderContinuous
                     }
                 }
             }
-		}
-		return true;
-	}
+        }
+        return true;
+    }
 
-	@Override
-	public MyrWelderContinuousEffect copy() {
-		return new MyrWelderContinuousEffect(this);
-	}
-	
+    @Override
+    public MyrWelderContinuousEffect copy() {
+        return new MyrWelderContinuousEffect(this);
+    }
+
 }

@@ -43,38 +43,38 @@ import mage.game.permanent.Permanent;
  */
 public class GainProtectionFromColorTargetEffect extends GainAbilityTargetEffect {
 
-	FilterCard protectionFilter;
+    FilterCard protectionFilter;
 
-	public GainProtectionFromColorTargetEffect(Duration duration) {
-		super(new ProtectionAbility(new FilterCard()), duration);
-		protectionFilter = (FilterCard)((ProtectionAbility)ability).getFilter();
-		protectionFilter.setUseColor(true);
-		protectionFilter.setScopeColor(ComparisonScope.Any);
-		staticText = "target creature you control gains protection from the color of your choice " + duration.toString();
-	}
+    public GainProtectionFromColorTargetEffect(Duration duration) {
+        super(new ProtectionAbility(new FilterCard()), duration);
+        protectionFilter = (FilterCard)((ProtectionAbility)ability).getFilter();
+        protectionFilter.setUseColor(true);
+        protectionFilter.setScopeColor(ComparisonScope.Any);
+        staticText = "target creature you control gains protection from the color of your choice " + duration.toString();
+    }
 
-	public GainProtectionFromColorTargetEffect(final GainProtectionFromColorTargetEffect effect) {
-		super(effect);
-		this.protectionFilter = effect.protectionFilter.copy();
-	}
+    public GainProtectionFromColorTargetEffect(final GainProtectionFromColorTargetEffect effect) {
+        super(effect);
+        this.protectionFilter = effect.protectionFilter.copy();
+    }
 
-	@Override
-	public GainProtectionFromColorTargetEffect copy() {
-		return new GainProtectionFromColorTargetEffect(this);
-	}
+    @Override
+    public GainProtectionFromColorTargetEffect copy() {
+        return new GainProtectionFromColorTargetEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent creature = game.getPermanent(source.getFirstTarget());
-		if (creature != null) {
-			ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
-			protectionFilter.setColor(choice.getColor());
-			protectionFilter.setMessage(choice.getChoice());
-			((ProtectionAbility)ability).setFilter(protectionFilter);
-			creature.addAbility(ability, game);
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent creature = game.getPermanent(source.getFirstTarget());
+        if (creature != null) {
+            ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
+            protectionFilter.setColor(choice.getColor());
+            protectionFilter.setMessage(choice.getChoice());
+            ((ProtectionAbility)ability).setFilter(protectionFilter);
+            creature.addAbility(ability, game);
+            return true;
+        }
+        return false;
+    }
 
 }

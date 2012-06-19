@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class Duress extends mage.sets.magic2010.Duress {
 
-	public Duress(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 96;
-		this.expansionSetCode = "M11";
-	}
+    public Duress(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 96;
+        this.expansionSetCode = "M11";
+    }
 
-	public Duress(final Duress card) {
-		super(card);
-	}
+    public Duress(final Duress card) {
+        super(card);
+    }
 
-	@Override
-	public Duress copy() {
-		return new Duress(this);
-	}
+    @Override
+    public Duress copy() {
+        return new Duress(this);
+    }
 
 }

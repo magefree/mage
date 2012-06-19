@@ -44,107 +44,107 @@ import mage.game.tournament.TournamentPairing;
  */
 public class TableEvent extends EventObject implements ExternalEvent, Serializable {
 
-	public enum EventType {
-		UPDATE, INFO, REVEAL, LOOK, START_DRAFT, START_MATCH, SIDEBOARD, CONSTRUCT, SUBMIT_DECK, END, ERROR
-	}
+    public enum EventType {
+        UPDATE, INFO, REVEAL, LOOK, START_DRAFT, START_MATCH, SIDEBOARD, CONSTRUCT, SUBMIT_DECK, END, ERROR
+    }
 
-	private Game game;
-	private Draft draft;
-	private EventType eventType;
-	private String message;
+    private Game game;
+    private Draft draft;
+    private EventType eventType;
+    private String message;
     private Exception ex;
-	private Cards cards;
-	private UUID playerId;
-	private Deck deck;
-	private TournamentPairing pair;
-	private MatchOptions options;
-	private int timeout;
+    private Cards cards;
+    private UUID playerId;
+    private Deck deck;
+    private TournamentPairing pair;
+    private MatchOptions options;
+    private int timeout;
 
-	public TableEvent(EventType eventType) {
-		super(eventType);
-		this.eventType = eventType;
-	}
+    public TableEvent(EventType eventType) {
+        super(eventType);
+        this.eventType = eventType;
+    }
 
-	public TableEvent(EventType eventType, String message, Game game) {
-		super(game);
-		this.game = game;
-		this.message = message;
-		this.eventType = eventType;
-	}
+    public TableEvent(EventType eventType, String message, Game game) {
+        super(game);
+        this.game = game;
+        this.message = message;
+        this.eventType = eventType;
+    }
 
-	public TableEvent(EventType eventType, String message, Cards cards, Game game) {
+    public TableEvent(EventType eventType, String message, Cards cards, Game game) {
         this(eventType, message, game);
-		this.cards = cards;
-	}
+        this.cards = cards;
+    }
 
-	public TableEvent(EventType eventType, String message, Exception ex, Game game) {
+    public TableEvent(EventType eventType, String message, Exception ex, Game game) {
         this(eventType, message, game);
         this.ex = ex;
-	}
+    }
 
-	public TableEvent(EventType eventType, UUID playerId, Deck deck, int timeout) {
-		super(playerId);
-		this.playerId = playerId;
-		this.deck = deck;
-		this.eventType = eventType;
-		this.timeout = timeout;
-	}
+    public TableEvent(EventType eventType, UUID playerId, Deck deck, int timeout) {
+        super(playerId);
+        this.playerId = playerId;
+        this.deck = deck;
+        this.eventType = eventType;
+        this.timeout = timeout;
+    }
 
-	public TableEvent(EventType eventType, String message, Draft draft) {
-		super(draft);
-		this.draft = draft;
-		this.message = message;
-		this.eventType = eventType;
-	}
+    public TableEvent(EventType eventType, String message, Draft draft) {
+        super(draft);
+        this.draft = draft;
+        this.message = message;
+        this.eventType = eventType;
+    }
 
-	public TableEvent(EventType eventType, TournamentPairing pair, MatchOptions options) {
-		super(options);
-		this.pair = pair;
-		this.options = options;
-		this.eventType = eventType;
-	}
+    public TableEvent(EventType eventType, TournamentPairing pair, MatchOptions options) {
+        super(options);
+        this.pair = pair;
+        this.options = options;
+        this.eventType = eventType;
+    }
 
-	public Game getGame() {
-		return game;
-	}
+    public Game getGame() {
+        return game;
+    }
 
-	public Draft getDraft() {
-		return draft;
-	}
+    public Draft getDraft() {
+        return draft;
+    }
 
-	public EventType getEventType() {
-		return eventType;
-	}
+    public EventType getEventType() {
+        return eventType;
+    }
 
-	public String getMessage() {
-		return message;
-	}
-    
+    public String getMessage() {
+        return message;
+    }
+
     public Exception getException() {
         return ex;
     }
 
-	public Cards getCards() {
-		return cards;
-	}
+    public Cards getCards() {
+        return cards;
+    }
 
-	public UUID getPlayerId() {
-		return playerId;
-	}
+    public UUID getPlayerId() {
+        return playerId;
+    }
 
-	public Deck getDeck() {
-		return deck;
-	}
+    public Deck getDeck() {
+        return deck;
+    }
 
-	public TournamentPairing getPair() {
-		return pair;
-	}
+    public TournamentPairing getPair() {
+        return pair;
+    }
 
-	public MatchOptions getMatchOptions() {
-		return options;
-	}
+    public MatchOptions getMatchOptions() {
+        return options;
+    }
 
-	public int getTimeout() {
-		return timeout;
-	}
+    public int getTimeout() {
+        return timeout;
+    }
 }

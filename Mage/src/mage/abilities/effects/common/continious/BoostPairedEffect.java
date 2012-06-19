@@ -44,28 +44,28 @@ import mage.game.permanent.Permanent;
 public class BoostPairedEffect extends ContinuousEffectImpl<BoostPairedEffect> {
 
     private int power;
-	private int toughness;
+    private int toughness;
 
-	public BoostPairedEffect(int power, int toughness, String rule) {
+    public BoostPairedEffect(int power, int toughness, String rule) {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         this.power = power;
         this.toughness = toughness;
         staticText = rule;
     }
 
-	public BoostPairedEffect(final BoostPairedEffect effect) {
-		super(effect);
-		power = effect.power;
+    public BoostPairedEffect(final BoostPairedEffect effect) {
+        super(effect);
+        power = effect.power;
         toughness = effect.toughness;
-	}
+    }
 
-	@Override
-	public BoostPairedEffect copy() {
-		return new BoostPairedEffect(this);
-	}
+    @Override
+    public BoostPairedEffect copy() {
+        return new BoostPairedEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null && permanent.getPairedCard() != null) {
             Permanent paired = game.getPermanent(permanent.getPairedCard());
@@ -78,6 +78,6 @@ public class BoostPairedEffect extends ContinuousEffectImpl<BoostPairedEffect> {
             }
         }
         return false;
-	}
+    }
 
 }

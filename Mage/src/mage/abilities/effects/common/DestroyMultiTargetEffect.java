@@ -42,41 +42,41 @@ import mage.target.Target;
  * @author BetaSteward_at_googlemail.com
  */
 public class DestroyMultiTargetEffect extends OneShotEffect<DestroyMultiTargetEffect> {
-	protected boolean noRegen;
+    protected boolean noRegen;
 
-	public DestroyMultiTargetEffect() {
-		this(false);
-	}
-	
-	public DestroyMultiTargetEffect(boolean noRegen) {
-		super(Outcome.DestroyPermanent);
-		this.noRegen = noRegen;
-	}
+    public DestroyMultiTargetEffect() {
+        this(false);
+    }
 
-	public DestroyMultiTargetEffect(final DestroyMultiTargetEffect effect) {
-		super(effect);
-		this.noRegen = effect.noRegen;
-	}
+    public DestroyMultiTargetEffect(boolean noRegen) {
+        super(Outcome.DestroyPermanent);
+        this.noRegen = noRegen;
+    }
 
-	@Override
-	public DestroyMultiTargetEffect copy() {
-		return new DestroyMultiTargetEffect(this);
-	}
+    public DestroyMultiTargetEffect(final DestroyMultiTargetEffect effect) {
+        super(effect);
+        this.noRegen = effect.noRegen;
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public DestroyMultiTargetEffect copy() {
+        return new DestroyMultiTargetEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
         int affectedTargets = 0;
-		for (Target target: source.getTargets()) {
-			for (UUID permanentId: target.getTargets()) {
-				Permanent permanent = game.getPermanent(permanentId);
-				if (permanent != null) {
-					permanent.destroy(source.getId(), game, noRegen);
-					affectedTargets++;
-				}
-			}
-		}
-		return affectedTargets > 0;
-	}
+        for (Target target: source.getTargets()) {
+            for (UUID permanentId: target.getTargets()) {
+                Permanent permanent = game.getPermanent(permanentId);
+                if (permanent != null) {
+                    permanent.destroy(source.getId(), game, noRegen);
+                    affectedTargets++;
+                }
+            }
+        }
+        return affectedTargets > 0;
+    }
 
     @Override
     public String getText(Mode mode) {

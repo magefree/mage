@@ -40,14 +40,14 @@ import java.util.UUID;
 public abstract class LevelerCard<T extends LevelerCard<T>> extends CardImpl<T> {
 
     private int maxLevelCounters;
-    
-	public LevelerCard(UUID ownerId, int cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs) {
-		super(ownerId, cardNumber, name, rarity, cardTypes, costs);
-	}
 
-	public LevelerCard(LevelerCard card) {
-		super(card);
-	}
+    public LevelerCard(UUID ownerId, int cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs) {
+        super(ownerId, cardNumber, name, rarity, cardTypes, costs);
+    }
+
+    public LevelerCard(LevelerCard card) {
+        super(card);
+    }
 
     public int getMaxLevelCounters() {
         return maxLevelCounters;

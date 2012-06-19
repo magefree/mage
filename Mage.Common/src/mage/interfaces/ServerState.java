@@ -40,43 +40,43 @@ import mage.view.TournamentTypeView;
  */
 public class ServerState implements Serializable {
 
-	private List<GameTypeView> gameTypes;
-	private List<TournamentTypeView> tournamentTypes;
-	private String[] playerTypes;
-	private String[] deckTypes;
-	private boolean testMode;
-	private MageVersion version;
+    private List<GameTypeView> gameTypes;
+    private List<TournamentTypeView> tournamentTypes;
+    private String[] playerTypes;
+    private String[] deckTypes;
+    private boolean testMode;
+    private MageVersion version;
 
-	public ServerState(List<GameTypeView> gameTypes, List<TournamentTypeView> tournamentTypes, String[] playerTypes, String[] deckTypes, boolean testMode, MageVersion version) {
-		this.gameTypes = gameTypes;
-		this.tournamentTypes = tournamentTypes;
-		this.playerTypes = playerTypes;
-		this.deckTypes = deckTypes;
-		this.testMode = testMode;
-		this.version = version;
-	}
+    public ServerState(List<GameTypeView> gameTypes, List<TournamentTypeView> tournamentTypes, String[] playerTypes, String[] deckTypes, boolean testMode, MageVersion version) {
+        this.gameTypes = gameTypes;
+        this.tournamentTypes = tournamentTypes;
+        this.playerTypes = playerTypes;
+        this.deckTypes = deckTypes;
+        this.testMode = testMode;
+        this.version = version;
+    }
 
-	public List<GameTypeView> getGameTypes() {
-		return gameTypes;
-	}
+    public List<GameTypeView> getGameTypes() {
+        return gameTypes;
+    }
 
-	public List<TournamentTypeView> getTournamentTypes() {
-		return tournamentTypes;
-	}
+    public List<TournamentTypeView> getTournamentTypes() {
+        return tournamentTypes;
+    }
 
-	public String[] getPlayerTypes() {
-		return playerTypes;
-	}
+    public String[] getPlayerTypes() {
+        return playerTypes;
+    }
 
-	public String[] getDeckTypes() {
-		return deckTypes;
-	}
+    public String[] getDeckTypes() {
+        return deckTypes;
+    }
 
-	public boolean isTestMode() {
-		return testMode;
-	}
+    public boolean isTestMode() {
+        return testMode;
+    }
 
-	public MageVersion getVersion() {
-		return version;
-	}
+    public MageVersion getVersion() {
+        return version;
+    }
 }

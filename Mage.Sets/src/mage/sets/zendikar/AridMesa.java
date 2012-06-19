@@ -40,19 +40,19 @@ import mage.cards.CardImpl;
  */
 public class AridMesa extends CardImpl<AridMesa> {
 
-	public AridMesa(UUID ownerId) {
-		super(ownerId, 211, "Arid Mesa", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-		this.expansionSetCode = "ZEN";
-		this.addAbility(new FetchLandActivatedAbility(new String[] {"Mountain", "Plains"}));
-	}
+    public AridMesa(UUID ownerId) {
+        super(ownerId, 211, "Arid Mesa", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+        this.expansionSetCode = "ZEN";
+        this.addAbility(new FetchLandActivatedAbility(new String[] {"Mountain", "Plains"}));
+    }
 
-	public AridMesa(final AridMesa card) {
-		super(card);
-	}
+    public AridMesa(final AridMesa card) {
+        super(card);
+    }
 
-	@Override
-	public AridMesa copy() {
-		return new AridMesa(this);
-	}
+    @Override
+    public AridMesa copy() {
+        return new AridMesa(this);
+    }
 
 }

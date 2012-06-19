@@ -41,33 +41,33 @@ import mage.game.permanent.Permanent;
  */
 public class GainProtectionFromTypeTargetEffect extends GainAbilityTargetEffect {
 
-	private String typeName;
+    private String typeName;
 
-	public GainProtectionFromTypeTargetEffect(Duration duration, FilterCard protectionFrom) {
-		super(new ProtectionAbility(new FilterCard()), duration);
-		((ProtectionAbility)ability).setFilter(protectionFrom);
-		typeName = protectionFrom.getMessage();
-		staticText = "Target creature gains protection from " + typeName + " " + duration.toString();
-	}
+    public GainProtectionFromTypeTargetEffect(Duration duration, FilterCard protectionFrom) {
+        super(new ProtectionAbility(new FilterCard()), duration);
+        ((ProtectionAbility)ability).setFilter(protectionFrom);
+        typeName = protectionFrom.getMessage();
+        staticText = "Target creature gains protection from " + typeName + " " + duration.toString();
+    }
 
-	public GainProtectionFromTypeTargetEffect(final GainProtectionFromTypeTargetEffect effect) {
-		super(effect);
-		this.typeName = effect.typeName;
-	}
+    public GainProtectionFromTypeTargetEffect(final GainProtectionFromTypeTargetEffect effect) {
+        super(effect);
+        this.typeName = effect.typeName;
+    }
 
-	@Override
-	public GainProtectionFromTypeTargetEffect copy() {
-		return new GainProtectionFromTypeTargetEffect(this);
-	}
+    @Override
+    public GainProtectionFromTypeTargetEffect copy() {
+        return new GainProtectionFromTypeTargetEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent creature = game.getPermanent(source.getFirstTarget());
-		if (creature != null) {
-			creature.addAbility(ability, game);
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent creature = game.getPermanent(source.getFirstTarget());
+        if (creature != null) {
+            creature.addAbility(ability, game);
+            return true;
+        }
+        return false;
+    }
 
 }

@@ -60,12 +60,12 @@ public class ClingingMists extends CardImpl<ClingingMists> {
         this.color.setGreen(true);
 
         // Prevent all combat damage that would be dealt this turn.
-		this.getSpellAbility().addEffect(new PreventAllDamageEffect(filter, Constants.Duration.EndOfTurn, true));
-        
+        this.getSpellAbility().addEffect(new PreventAllDamageEffect(filter, Constants.Duration.EndOfTurn, true));
+
         // Fateful hour - If you have 5 or less life, tap all attacking creatures. Those creatures don't untap during their controller's next untap step.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new ClingingMistsEffect(),
                 FatefulHourCondition.getInstance(), "If you have 5 or less life, tap all attacking creatures. Those creatures don't untap during their controller's next untap step."));
-        
+
     }
 
     public ClingingMists(final ClingingMists card) {
@@ -83,68 +83,68 @@ class ClingingMistsEffect extends OneShotEffect<ClingingMistsEffect> {
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking creatures");
 
     public ClingingMistsEffect() {
-		super(Constants.Outcome.Tap);
-		staticText = "tap all attacking creatures. Those creatures don't untap during their controller's next untap step";
-	}
+        super(Constants.Outcome.Tap);
+        staticText = "tap all attacking creatures. Those creatures don't untap during their controller's next untap step";
+    }
 
-	public ClingingMistsEffect(final ClingingMistsEffect effect) {
-		super(effect);
-	}
+    public ClingingMistsEffect(final ClingingMistsEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
         for (Permanent creature: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
             creature.tap(game);
             game.addEffect(new ClingingMistsEffect2(creature.getId()), source);
         }
-		return true;
-	}
+        return true;
+    }
 
-	@Override
-	public ClingingMistsEffect copy() {
-		return new ClingingMistsEffect(this);
-	}
+    @Override
+    public ClingingMistsEffect copy() {
+        return new ClingingMistsEffect(this);
+    }
 
 }
 
 class ClingingMistsEffect2 extends ReplacementEffectImpl<ClingingMistsEffect2> {
 
-	protected UUID creatureId;
+    protected UUID creatureId;
 
-	public ClingingMistsEffect2(UUID creatureId) {
-		super(Constants.Duration.OneUse, Constants.Outcome.Detriment);
-		this.creatureId = creatureId;
-	}
+    public ClingingMistsEffect2(UUID creatureId) {
+        super(Constants.Duration.OneUse, Constants.Outcome.Detriment);
+        this.creatureId = creatureId;
+    }
 
-	public ClingingMistsEffect2(final ClingingMistsEffect2 effect) {
-		super(effect);
-		creatureId = effect.creatureId;
-	}
+    public ClingingMistsEffect2(final ClingingMistsEffect2 effect) {
+        super(effect);
+        creatureId = effect.creatureId;
+    }
 
-	@Override
-	public ClingingMistsEffect2 copy() {
-		return new ClingingMistsEffect2(this);
-	}
+    @Override
+    public ClingingMistsEffect2 copy() {
+        return new ClingingMistsEffect2(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		used = true;
-		return true;
-	}
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        used = true;
+        return true;
+    }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (game.getTurn().getStepType() == Constants.PhaseStep.UNTAP &&
-				event.getType() == GameEvent.EventType.UNTAP &&
-				event.getTargetId().equals(creatureId)) {
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (game.getTurn().getStepType() == Constants.PhaseStep.UNTAP &&
+                event.getType() == GameEvent.EventType.UNTAP &&
+                event.getTargetId().equals(creatureId)) {
+            return true;
+        }
+        return false;
+    }
 
 }

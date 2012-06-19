@@ -43,41 +43,41 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class ReturnToHandTargetCost extends CostImpl<ReturnToHandTargetCost> {
 
-	public ReturnToHandTargetCost(TargetControlledPermanent target) {
-		this.addTarget(target);
+    public ReturnToHandTargetCost(TargetControlledPermanent target) {
+        this.addTarget(target);
         if (target.getMaxNumberOfTargets() > 1 && target.getMaxNumberOfTargets() == target.getNumberOfTargets()) {
             this.text = "return " + target.getMaxNumberOfTargets() + " " + target.getTargetName() + " you control to it's owner's hand";
         } else {
-		    this.text = "return " + target.getTargetName() + " you control to it's owner's hand";
+            this.text = "return " + target.getTargetName() + " you control to it's owner's hand";
         }
-	}
+    }
 
-	public ReturnToHandTargetCost(ReturnToHandTargetCost cost) {
-		super(cost);
-	}
+    public ReturnToHandTargetCost(ReturnToHandTargetCost cost) {
+        super(cost);
+    }
 
-	@Override
-	public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-		if (targets.choose(Outcome.ReturnToHand, controllerId, sourceId, game)) {
-			for (UUID targetId: targets.get(0).getTargets()) {
-				Permanent permanent = game.getPermanent(targetId);
-				if (permanent == null)
-					return false;
-				paid |= permanent.moveToZone(Zone.HAND, sourceId, game, false);
-			}
-		}
-		return paid;
-	}
+    @Override
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+        if (targets.choose(Outcome.ReturnToHand, controllerId, sourceId, game)) {
+            for (UUID targetId: targets.get(0).getTargets()) {
+                Permanent permanent = game.getPermanent(targetId);
+                if (permanent == null)
+                    return false;
+                paid |= permanent.moveToZone(Zone.HAND, sourceId, game, false);
+            }
+        }
+        return paid;
+    }
 
-	@Override
-	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-		return targets.canChoose(controllerId, game);
-	}
+    @Override
+    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+        return targets.canChoose(controllerId, game);
+    }
 
-	@Override
-	public ReturnToHandTargetCost copy() {
-		return new ReturnToHandTargetCost(this);
-	}
+    @Override
+    public ReturnToHandTargetCost copy() {
+        return new ReturnToHandTargetCost(this);
+    }
 
 
 }

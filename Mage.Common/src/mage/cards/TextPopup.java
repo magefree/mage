@@ -45,9 +45,9 @@ public class TextPopup extends javax.swing.JPanel {
         initComponents();
     }
 
-	public void setText(String text) {
-		popupText.setText(text);
-	}
+    public void setText(String text) {
+        popupText.setText(text);
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.

@@ -23,7 +23,7 @@ public class HuntersInsightTest extends CardTestPlayerBase {
 
         setStopAt(3, Constants.PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        
+
         assertLife(playerA, 20);
         assertLife(playerB, 16);
 
@@ -31,5 +31,5 @@ public class HuntersInsightTest extends CardTestPlayerBase {
         // +4 in combat
         assertHandCount(playerA, 5);
     }
-    
+
 }

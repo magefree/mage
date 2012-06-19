@@ -46,37 +46,37 @@ import java.util.UUID;
  */
 public class LoseAllAbilitiesTargetEffect extends ContinuousEffectImpl {
 
-	public LoseAllAbilitiesTargetEffect(Duration duration) {
-		super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-	}
+    public LoseAllAbilitiesTargetEffect(Duration duration) {
+        super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+    }
 
-	public LoseAllAbilitiesTargetEffect(final LoseAllAbilitiesTargetEffect effect) {
-		super(effect);
-	}
+    public LoseAllAbilitiesTargetEffect(final LoseAllAbilitiesTargetEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public LoseAllAbilitiesTargetEffect copy() {
-		return new LoseAllAbilitiesTargetEffect(this);
-	}
+    @Override
+    public LoseAllAbilitiesTargetEffect copy() {
+        return new LoseAllAbilitiesTargetEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		int affectedTargets = 0;
-		for (UUID permanentId : targetPointer.getTargets(game, source)) {
-			Permanent permanent = game.getPermanent(permanentId);
-			if (permanent != null) {
-				permanent.getAbilities().clear();
-				affectedTargets++;
-			}
-		}
-		return affectedTargets > 0;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        int affectedTargets = 0;
+        for (UUID permanentId : targetPointer.getTargets(game, source)) {
+            Permanent permanent = game.getPermanent(permanentId);
+            if (permanent != null) {
+                permanent.getAbilities().clear();
+                affectedTargets++;
+            }
+        }
+        return affectedTargets > 0;
+    }
 
-	@Override
-	public String getText(Mode mode) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("Target ").append(mode.getTargets().get(0).getTargetName()).append(" loses all abilities ").append(duration.toString());
-		return sb.toString();
-	}
+    @Override
+    public String getText(Mode mode) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Target ").append(mode.getTargets().get(0).getTargetName()).append(" loses all abilities ").append(duration.toString());
+        return sb.toString();
+    }
 
 }

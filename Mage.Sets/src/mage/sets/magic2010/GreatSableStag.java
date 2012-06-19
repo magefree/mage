@@ -51,32 +51,32 @@ public class GreatSableStag extends CardImpl<GreatSableStag> {
     static {
         filter1.setUseColor(true);
         filter1.getColor().setBlue(true);
-		filter1.setScopeColor(ComparisonScope.Any);
+        filter1.setScopeColor(ComparisonScope.Any);
         filter2.setUseColor(true);
         filter2.getColor().setBlack(true);
-		filter2.setScopeColor(ComparisonScope.Any);
+        filter2.setScopeColor(ComparisonScope.Any);
     }
 
-	public GreatSableStag(UUID ownerId) {
-		super(ownerId, 186, "Great Sable Stag", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
-		this.expansionSetCode = "M10";
-		this.subtype.add("Elk");
-		this.color.setGreen(true);
-		this.power = new MageInt(3);
-		this.toughness = new MageInt(3);
+    public GreatSableStag(UUID ownerId) {
+        super(ownerId, 186, "Great Sable Stag", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
+        this.expansionSetCode = "M10";
+        this.subtype.add("Elk");
+        this.color.setGreen(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-		this.addAbility(new ProtectionAbility(filter1));
-		this.addAbility(new ProtectionAbility(filter2));
-		this.addAbility(new SimpleStaticAbility(Zone.STACK, new CantCounterSourceEffect()));
-	}
+        this.addAbility(new ProtectionAbility(filter1));
+        this.addAbility(new ProtectionAbility(filter2));
+        this.addAbility(new SimpleStaticAbility(Zone.STACK, new CantCounterSourceEffect()));
+    }
 
-	public GreatSableStag(final GreatSableStag card) {
-		super(card);
-	}
+    public GreatSableStag(final GreatSableStag card) {
+        super(card);
+    }
 
-	@Override
-	public GreatSableStag copy() {
-		return new GreatSableStag(this);
-	}
+    @Override
+    public GreatSableStag copy() {
+        return new GreatSableStag(this);
+    }
 
 }

@@ -37,21 +37,21 @@ import mage.filter.FilterCard;
  */
 public class FilterAuraCard extends FilterCard<FilterAuraCard> {
 
-	public FilterAuraCard() {
-		this("aura");
-	}
+    public FilterAuraCard() {
+        this("aura");
+    }
 
-	public FilterAuraCard(String name) {
-		super(name);
-		this.cardType.add(CardType.ENCHANTMENT);
-	}
+    public FilterAuraCard(String name) {
+        super(name);
+        this.cardType.add(CardType.ENCHANTMENT);
+    }
 
-	public FilterAuraCard(final FilterAuraCard filter) {
-		super(filter);
-	}
+    public FilterAuraCard(final FilterAuraCard filter) {
+        super(filter);
+    }
 
-	@Override
-	public FilterAuraCard copy() {
-		return new FilterAuraCard(this);
-	}
+    @Override
+    public FilterAuraCard copy() {
+        return new FilterAuraCard(this);
+    }
 }

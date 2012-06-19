@@ -49,8 +49,8 @@ public class FinalRevels extends CardImpl<FinalRevels> {
         this.color.setBlack(true);
         this.getSpellAbility().addEffect(new BoostAllEffect(2, 0, Constants.Duration.EndOfTurn, new FilterCreaturePermanent(), false));
         Mode mode = new Mode();
-		mode.getEffects().add(new BoostAllEffect(0, -2, Constants.Duration.EndOfTurn, new FilterCreaturePermanent(), false));
-		this.getSpellAbility().addMode(mode);
+        mode.getEffects().add(new BoostAllEffect(0, -2, Constants.Duration.EndOfTurn, new FilterCreaturePermanent(), false));
+        this.getSpellAbility().addMode(mode);
     }
 
     public FinalRevels(final FinalRevels card) {

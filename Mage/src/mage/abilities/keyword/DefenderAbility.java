@@ -38,28 +38,28 @@ import mage.abilities.StaticAbility;
  */
 public class DefenderAbility extends StaticAbility<DefenderAbility> {
 
-	private static final DefenderAbility fINSTANCE =  new DefenderAbility();
+    private static final DefenderAbility fINSTANCE =  new DefenderAbility();
 
-	private Object readResolve() throws ObjectStreamException {
-		return fINSTANCE;
-	}
+    private Object readResolve() throws ObjectStreamException {
+        return fINSTANCE;
+    }
 
-	public static DefenderAbility getInstance() {
-		return fINSTANCE;
-	}
+    public static DefenderAbility getInstance() {
+        return fINSTANCE;
+    }
 
-	private DefenderAbility() {
-		super(Zone.BATTLEFIELD, null);
-	}
+    private DefenderAbility() {
+        super(Zone.BATTLEFIELD, null);
+    }
 
-	@Override
-	public String getRule() {
-		return "Defender";
-	}
+    @Override
+    public String getRule() {
+        return "Defender";
+    }
 
-	@Override
-	public DefenderAbility copy() {
-		return fINSTANCE;
-	}
+    @Override
+    public DefenderAbility copy() {
+        return fINSTANCE;
+    }
 
 }

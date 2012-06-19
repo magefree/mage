@@ -49,32 +49,32 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class DrownedCatacomb extends CardImpl<DrownedCatacomb> {
 
-	private static final FilterLandPermanent filter = new FilterLandPermanent();
+    private static final FilterLandPermanent filter = new FilterLandPermanent();
 
-	static {
-		filter.getSubtype().add("Swamp");
-		filter.getSubtype().add("Island");
-		filter.setScopeSubtype(ComparisonScope.Any);
-		filter.setMessage("Island or a Swamp");
-	}
+    static {
+        filter.getSubtype().add("Swamp");
+        filter.getSubtype().add("Island");
+        filter.setScopeSubtype(ComparisonScope.Any);
+        filter.setMessage("Island or a Swamp");
+    }
 
-	public DrownedCatacomb(UUID ownerId) {
-		super(ownerId, 224, "Drowned Catacomb", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-		this.expansionSetCode = "M10";
+    public DrownedCatacomb(UUID ownerId) {
+        super(ownerId, 224, "Drowned Catacomb", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+        this.expansionSetCode = "M10";
 
-		Condition controls = new UnlessCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0));
-		String abilityText = "tap it unless you control a " + filter.getMessage();
-		this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
-		this.addAbility(new BlackManaAbility());
-		this.addAbility(new BlueManaAbility());
-	}
+        Condition controls = new UnlessCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0));
+        String abilityText = "tap it unless you control a " + filter.getMessage();
+        this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
+        this.addAbility(new BlackManaAbility());
+        this.addAbility(new BlueManaAbility());
+    }
 
-	public DrownedCatacomb(final DrownedCatacomb card) {
-		super(card);
-	}
+    public DrownedCatacomb(final DrownedCatacomb card) {
+        super(card);
+    }
 
-	@Override
-	public DrownedCatacomb copy() {
-		return new DrownedCatacomb(this);
-	}
+    @Override
+    public DrownedCatacomb copy() {
+        return new DrownedCatacomb(this);
+    }
 }

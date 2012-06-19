@@ -51,63 +51,63 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Pacifism extends CardImpl<Pacifism> {
 
-	public Pacifism(UUID ownerId) {
-		super(ownerId, 31, "Pacifism", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
-		this.expansionSetCode = "10E";
-		this.color.setWhite(true);
-		this.subtype.add("Aura");
+    public Pacifism(UUID ownerId) {
+        super(ownerId, 31, "Pacifism", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
+        this.expansionSetCode = "10E";
+        this.color.setWhite(true);
+        this.subtype.add("Aura");
 
-		TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Outcome.Removal));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		this.addAbility(ability);
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PacifismEffect()));
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Removal));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PacifismEffect()));
 
-	}
+    }
 
-	public Pacifism(final Pacifism card) {
-		super(card);
-	}
+    public Pacifism(final Pacifism card) {
+        super(card);
+    }
 
-	@Override
-	public Pacifism copy() {
-		return new Pacifism(this);
-	}
+    @Override
+    public Pacifism copy() {
+        return new Pacifism(this);
+    }
 }
 
 class PacifismEffect extends RestrictionEffect<PacifismEffect> {
 
-	public PacifismEffect() {
-		super(Duration.WhileOnBattlefield);
-		staticText = "Enchanted creature can't attack or block";
-	}
+    public PacifismEffect() {
+        super(Duration.WhileOnBattlefield);
+        staticText = "Enchanted creature can't attack or block";
+    }
 
-	public PacifismEffect(final PacifismEffect effect) {
-		super(effect);
-	}
+    public PacifismEffect(final PacifismEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean applies(Permanent permanent, Ability source, Game game) {
-		if (permanent.getAttachments().contains((source.getSourceId()))) {
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        if (permanent.getAttachments().contains((source.getSourceId()))) {
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public boolean canAttack(Game game) {
-		return false;
-	}
+    @Override
+    public boolean canAttack(Game game) {
+        return false;
+    }
 
-	@Override
-	public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-		return false;
-	}
+    @Override
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        return false;
+    }
 
-	@Override
-	public PacifismEffect copy() {
-		return new PacifismEffect(this);
-	}
+    @Override
+    public PacifismEffect copy() {
+        return new PacifismEffect(this);
+    }
 
 }

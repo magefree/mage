@@ -40,23 +40,23 @@ import mage.game.Game;
 public class ExileView extends SimpleCardsView {
     private static final long serialVersionUID = 1L;
 
-	private String name;
-	private UUID id;
+    private String name;
+    private UUID id;
 
-	public ExileView(ExileZone exileZone, Game game) {
-		this.name = exileZone.getName();
-		this.id = exileZone.getId();
-		for (Card card: exileZone.getCards(game)) {
-			this.put(card.getId(), new SimpleCardView(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.isFaceDown()));
-		}
-	}
+    public ExileView(ExileZone exileZone, Game game) {
+        this.name = exileZone.getName();
+        this.id = exileZone.getId();
+        for (Card card: exileZone.getCards(game)) {
+            this.put(card.getId(), new SimpleCardView(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.isFaceDown()));
+        }
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public UUID getId() {
-		return id;
-	}
-	
+    public UUID getId() {
+        return id;
+    }
+
 }

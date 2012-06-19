@@ -48,7 +48,7 @@ public class UnnaturalPredation extends CardImpl<UnnaturalPredation> {
     public UnnaturalPredation (UUID ownerId) {
         super(ownerId, 93, "Unnatural Predation", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "MBS";
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.getSpellAbility().addEffect(new BoostTargetEffect(1, 1, Constants.Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Constants.Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

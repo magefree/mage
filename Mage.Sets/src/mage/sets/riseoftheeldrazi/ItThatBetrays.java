@@ -43,7 +43,7 @@ import mage.abilities.common.OpponentSacrificesNonTokenPermanentTriggeredAbility
  * @author jeffwadsworth
  */
 public class ItThatBetrays extends CardImpl<ItThatBetrays> {
-    
+
     FilterNonTokenPermanent filter = new FilterNonTokenPermanent();
 
     public ItThatBetrays(UUID ownerId) {
@@ -55,7 +55,7 @@ public class ItThatBetrays extends CardImpl<ItThatBetrays> {
         this.toughness = new MageInt(11);
 
         this.addAbility(new AnnihilatorAbility(2));
-        
+
         // Whenever an opponent sacrifices a nontoken permanent, put that card onto the battlefield under your control.
         this.addAbility(new OpponentSacrificesNonTokenPermanentTriggeredAbility(new ReturnToBattlefieldUnderYourControlTargetEffect()));
     }

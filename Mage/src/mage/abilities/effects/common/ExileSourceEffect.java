@@ -41,33 +41,33 @@ import mage.game.permanent.Permanent;
  */
 public class ExileSourceEffect extends OneShotEffect<ExileSourceEffect> {
 
-	public ExileSourceEffect() {
-		super(Outcome.Exile);
-		staticText = "Exile {this}";
-	}
+    public ExileSourceEffect() {
+        super(Outcome.Exile);
+        staticText = "Exile {this}";
+    }
 
-	public ExileSourceEffect(final ExileSourceEffect effect) {
-		super(effect);
-	}
+    public ExileSourceEffect(final ExileSourceEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public ExileSourceEffect copy() {
-		return new ExileSourceEffect(this);
-	}
+    @Override
+    public ExileSourceEffect copy() {
+        return new ExileSourceEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getSourceId());
-		if (permanent != null) {
-			return permanent.moveToExile(null, "", source.getId(), game);
-		} else {
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            return permanent.moveToExile(null, "", source.getId(), game);
+        } else {
             // try to exile card
             Card card = game.getCard(source.getSourceId());
             if (card != null) {
                 return card.moveToExile(null, "", source.getId(), game);
             }
         }
-		return false;
-	}
+        return false;
+    }
 
 }

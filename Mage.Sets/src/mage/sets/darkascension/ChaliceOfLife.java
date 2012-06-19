@@ -50,11 +50,11 @@ public class ChaliceOfLife extends CardImpl<ChaliceOfLife> {
     public ChaliceOfLife(UUID ownerId) {
         super(ownerId, 146, "Chalice of Life", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "DKA";
-        
+
         this.canTransform = true;
         this.secondSideCard = new ChaliceOfDeath(ownerId);
         this.addAbility(new TransformAbility());
-        
+
 
         // {tap}: You gain 1 life. Then if you have at least 10 life more than your starting life total, transform Chalice of Life.
         this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ChaliceOfLifeEffect(), new TapSourceCost()));
@@ -86,7 +86,7 @@ class ChaliceOfLifeEffect extends OneShotEffect<ChaliceOfLifeEffect> {
             Player player = game.getPlayer(source.getControllerId());
             //gain 1 life
             player.gainLife(1, game);
-            
+
             // if you have at least 10 life more than your starting life total, transform Chalice of Life.
             if (player.getLife() >= game.getLife() + 10) {
                 permanent.transform(game);

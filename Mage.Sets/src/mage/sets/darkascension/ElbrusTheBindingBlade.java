@@ -54,7 +54,7 @@ public class ElbrusTheBindingBlade extends CardImpl<ElbrusTheBindingBlade> {
         this.expansionSetCode = "DKA";
         this.supertype.add("Legendary");
         this.subtype.add("Equipment");
-        
+
         this.canTransform = true;
         this.secondSideCard = new WithengarUnbound(ownerId);
         this.addAbility(new TransformAbility());

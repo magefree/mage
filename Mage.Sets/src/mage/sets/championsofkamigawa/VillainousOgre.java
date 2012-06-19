@@ -47,14 +47,14 @@ import mage.filter.common.FilterControlledPermanent;
  * @author LevelX
  */
 public class VillainousOgre extends CardImpl<VillainousOgre> {
-    
+
     private static final String rule = "As long as you control a Demon, {this} has {B}: Regenerate Villainous Ogre";
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Demon");
     static {
         filter.getSubtype().add("Demon");
         filter.setScopeSubtype(Filter.ComparisonScope.Any);
     }
-    
+
     public VillainousOgre(UUID ownerId) {
         super(ownerId, 148, "Villainous Ogre", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "CHK";
@@ -66,7 +66,7 @@ public class VillainousOgre extends CardImpl<VillainousOgre> {
         this.toughness = new MageInt(2);
 
         this.addAbility(CantBlockAbility.getInstance());
-        
+
         // As long as you control a Demon, Villainous Ogre has "{B}: Regenerate Villainous Ogre.
         this.addAbility( new ConditionalActivatedAbility(
                 Constants.Zone.BATTLEFIELD, 
@@ -84,5 +84,5 @@ public class VillainousOgre extends CardImpl<VillainousOgre> {
     public VillainousOgre copy() {
         return new VillainousOgre(this);
     }    
-     
+
 }

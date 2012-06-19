@@ -41,184 +41,184 @@ import java.util.UUID;
  * @author BetaSteward_at_googlemail.com
  */
 public class FilterPermanent<T extends FilterPermanent<T>> extends FilterObject<Permanent, FilterPermanent<T>> {
-	protected List<UUID> ownerId = new ArrayList<UUID>();
-	protected boolean notOwner;
-	protected List<UUID> controllerId = new ArrayList<UUID>();
-	protected boolean notController;
-	protected boolean useTapped;
-	protected boolean tapped;
-	protected boolean useFlipped;
-	protected boolean flipped;
-	protected boolean useFaceup;
-	protected boolean faceup;
-	protected boolean usePhased;
-	protected boolean phasedIn;
-	protected TargetController controller = TargetController.ANY;
+    protected List<UUID> ownerId = new ArrayList<UUID>();
+    protected boolean notOwner;
+    protected List<UUID> controllerId = new ArrayList<UUID>();
+    protected boolean notController;
+    protected boolean useTapped;
+    protected boolean tapped;
+    protected boolean useFlipped;
+    protected boolean flipped;
+    protected boolean useFaceup;
+    protected boolean faceup;
+    protected boolean usePhased;
+    protected boolean phasedIn;
+    protected TargetController controller = TargetController.ANY;
     protected TargetController owner = TargetController.ANY;
 
-	public FilterPermanent() {
-		super("permanent");
-	}
+    public FilterPermanent() {
+        super("permanent");
+    }
 
-	public FilterPermanent(final FilterPermanent<T> filter) {
-		super(filter);
+    public FilterPermanent(final FilterPermanent<T> filter) {
+        super(filter);
         this.ownerId = new ArrayList<UUID>(filter.ownerId);
-		this.notOwner = filter.notOwner;
+        this.notOwner = filter.notOwner;
         this.controllerId  = new ArrayList<UUID>(filter.controllerId);
-		this.notController = filter.notController;
-		this.useTapped = filter.useTapped;
-		this.tapped = filter.tapped;
-		this.useFlipped = filter.useFlipped;
-		this.flipped = filter.flipped;
-		this.useFaceup = filter.useFaceup;
-		this.faceup = filter.faceup;
-		this.usePhased = filter.usePhased;
-		this.phasedIn = filter.phasedIn;
-		this.controller = filter.controller;
+        this.notController = filter.notController;
+        this.useTapped = filter.useTapped;
+        this.tapped = filter.tapped;
+        this.useFlipped = filter.useFlipped;
+        this.flipped = filter.flipped;
+        this.useFaceup = filter.useFaceup;
+        this.faceup = filter.faceup;
+        this.usePhased = filter.usePhased;
+        this.phasedIn = filter.phasedIn;
+        this.controller = filter.controller;
         this.owner = filter.owner;
-	}
+    }
 
-	public FilterPermanent(String name) {
-		super(name);
-	}
+    public FilterPermanent(String name) {
+        super(name);
+    }
 
-	@Override
-	public boolean match(Permanent permanent, Game game) {
-		if (!super.match(permanent, game))
-			return notFilter;
+    @Override
+    public boolean match(Permanent permanent, Game game) {
+        if (!super.match(permanent, game))
+            return notFilter;
 
-		if (ownerId.size() > 0 && ownerId.contains(permanent.getOwnerId()) == notOwner)
-			return notFilter;
+        if (ownerId.size() > 0 && ownerId.contains(permanent.getOwnerId()) == notOwner)
+            return notFilter;
 
-		if (controllerId.size() > 0 && controllerId.contains(permanent.getControllerId()) == notController)
-			return notFilter;
+        if (controllerId.size() > 0 && controllerId.contains(permanent.getControllerId()) == notController)
+            return notFilter;
 
-		if (useTapped && permanent.isTapped() != tapped)
-			return notFilter;
+        if (useTapped && permanent.isTapped() != tapped)
+            return notFilter;
 
-		if (useFlipped && permanent.isFlipped() != flipped)
-			return notFilter;
+        if (useFlipped && permanent.isFlipped() != flipped)
+            return notFilter;
 
-		if (useFaceup && permanent.isFaceUp() != faceup)
-			return notFilter;
+        if (useFaceup && permanent.isFaceUp() != faceup)
+            return notFilter;
 
-		if (usePhased && permanent.isPhasedIn() != phasedIn)
-			return notFilter;
+        if (usePhased && permanent.isPhasedIn() != phasedIn)
+            return notFilter;
 
-		return !notFilter;
-	}
+        return !notFilter;
+    }
 
-	public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
-		if (!this.match(permanent, game))
-			return notFilter;
+    public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
+        if (!this.match(permanent, game))
+            return notFilter;
 
-		if (controller != TargetController.ANY && playerId != null) {
-			switch(controller) {
-				case YOU:
-					if (!permanent.getControllerId().equals(playerId))
-						return notFilter;
-					break;
-				case OPPONENT:
-					if (!game.getOpponents(playerId).contains(permanent.getControllerId()))
-						return notFilter;
-					break;
-				case NOT_YOU:
-					if (permanent.getControllerId().equals(playerId))
-						return notFilter;
-					break;
-			}
-		}
+        if (controller != TargetController.ANY && playerId != null) {
+            switch(controller) {
+                case YOU:
+                    if (!permanent.getControllerId().equals(playerId))
+                        return notFilter;
+                    break;
+                case OPPONENT:
+                    if (!game.getOpponents(playerId).contains(permanent.getControllerId()))
+                        return notFilter;
+                    break;
+                case NOT_YOU:
+                    if (permanent.getControllerId().equals(playerId))
+                        return notFilter;
+                    break;
+            }
+        }
 
-		if (owner != TargetController.ANY && playerId != null) {
-			switch(owner) {
-				case YOU:
-					if (!permanent.getOwnerId().equals(playerId))
-						return notFilter;
-					break;
-				case OPPONENT:
-					if (!game.getOpponents(playerId).contains(permanent.getOwnerId()))
-						return notFilter;
-					break;
-				case NOT_YOU:
-					if (permanent.getOwnerId().equals(playerId))
-						return notFilter;
-					break;
-			}
-		}
+        if (owner != TargetController.ANY && playerId != null) {
+            switch(owner) {
+                case YOU:
+                    if (!permanent.getOwnerId().equals(playerId))
+                        return notFilter;
+                    break;
+                case OPPONENT:
+                    if (!game.getOpponents(playerId).contains(permanent.getOwnerId()))
+                        return notFilter;
+                    break;
+                case NOT_YOU:
+                    if (permanent.getOwnerId().equals(playerId))
+                        return notFilter;
+                    break;
+            }
+        }
 
         if (another) {
-			// filter out itself
-			if (permanent.getId().equals(sourceId)) {
-				return notFilter;
-			}
-		}
+            // filter out itself
+            if (permanent.getId().equals(sourceId)) {
+                return notFilter;
+            }
+        }
 
-		return !notFilter;
-	}
+        return !notFilter;
+    }
 
-	public List<UUID> getOwnerId() {
-		return ownerId;
-	}
+    public List<UUID> getOwnerId() {
+        return ownerId;
+    }
 
-	public void setNotOwner(boolean notOwner) {
-		this.notOwner = notOwner;
-	}
+    public void setNotOwner(boolean notOwner) {
+        this.notOwner = notOwner;
+    }
 
-	public List<UUID> getControllerId() {
-		return controllerId;
-	}
+    public List<UUID> getControllerId() {
+        return controllerId;
+    }
 
-	public void setNotController(boolean notController) {
-		this.notController = notController;
-	}
+    public void setNotController(boolean notController) {
+        this.notController = notController;
+    }
 
-	public void setUseTapped(boolean useTapped) {
-		this.useTapped = useTapped;
-	}
+    public void setUseTapped(boolean useTapped) {
+        this.useTapped = useTapped;
+    }
 
-	public void setTapped(boolean tapped) {
-		this.tapped = tapped;
-	}
+    public void setTapped(boolean tapped) {
+        this.tapped = tapped;
+    }
 
-	public void setUseFlipped(boolean useFlipped) {
-		this.useFlipped = useFlipped;
-	}
+    public void setUseFlipped(boolean useFlipped) {
+        this.useFlipped = useFlipped;
+    }
 
-	public void setFlipped(boolean flipped) {
-		this.flipped = flipped;
-	}
+    public void setFlipped(boolean flipped) {
+        this.flipped = flipped;
+    }
 
-	public void setUseFaceup(boolean useFaceup) {
-		this.useFaceup = useFaceup;
-	}
+    public void setUseFaceup(boolean useFaceup) {
+        this.useFaceup = useFaceup;
+    }
 
-	public void setFaceup(boolean faceup) {
-		this.faceup = faceup;
-	}
+    public void setFaceup(boolean faceup) {
+        this.faceup = faceup;
+    }
 
-	public void setTargetController(TargetController controller) {
-		this.controller = controller;
-	}
+    public void setTargetController(TargetController controller) {
+        this.controller = controller;
+    }
 
     public void setTargetOwner(TargetController owner) {
-		this.owner = owner;
-	}
+        this.owner = owner;
+    }
 
-	public boolean matchOwner(UUID testOwnerId) {
-		if (ownerId.size() > 0 && ownerId.contains(testOwnerId) == notOwner)
-			return false;
-		return true;
-	}
+    public boolean matchOwner(UUID testOwnerId) {
+        if (ownerId.size() > 0 && ownerId.contains(testOwnerId) == notOwner)
+            return false;
+        return true;
+    }
 
-	public boolean matchController(UUID testControllerId) {
-		if (controllerId.size() > 0 && controllerId.contains(testControllerId) == notController)
-			return false;
-		return true;
-	}
+    public boolean matchController(UUID testControllerId) {
+        if (controllerId.size() > 0 && controllerId.contains(testControllerId) == notController)
+            return false;
+        return true;
+    }
 
-	@Override
-	public FilterPermanent<T> copy() {
-		return new FilterPermanent<T>(this);
-	}
+    @Override
+    public FilterPermanent<T> copy() {
+        return new FilterPermanent<T>(this);
+    }
 
 }

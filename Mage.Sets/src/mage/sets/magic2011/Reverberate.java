@@ -42,29 +42,29 @@ import mage.target.TargetSpell;
  * @author BetaSteward_at_googlemail.com
  */
 public class Reverberate extends CardImpl<Reverberate> {
-	
-	private static final FilterSpell filter = new FilterSpell();
-	
-	static {
-		filter.getCardType().add(CardType.INSTANT);
-		filter.getCardType().add(CardType.SORCERY);
-		filter.setScopeCardType(ComparisonScope.Any);
-	}
 
-	public Reverberate(UUID ownerId) {
-		super(ownerId, 155, "Reverberate", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{R}{R}");
-		this.expansionSetCode = "M11";
-		this.color.setRed(true);
-		this.getSpellAbility().addTarget(new TargetSpell(filter));
-		this.getSpellAbility().addEffect(new CopyTargetSpellEffect());
-	}
+    private static final FilterSpell filter = new FilterSpell();
 
-	public Reverberate(final Reverberate card) {
-		super(card);
-	}
+    static {
+        filter.getCardType().add(CardType.INSTANT);
+        filter.getCardType().add(CardType.SORCERY);
+        filter.setScopeCardType(ComparisonScope.Any);
+    }
 
-	@Override
-	public Reverberate copy() {
-		return new Reverberate(this);
-	}
+    public Reverberate(UUID ownerId) {
+        super(ownerId, 155, "Reverberate", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{R}{R}");
+        this.expansionSetCode = "M11";
+        this.color.setRed(true);
+        this.getSpellAbility().addTarget(new TargetSpell(filter));
+        this.getSpellAbility().addEffect(new CopyTargetSpellEffect());
+    }
+
+    public Reverberate(final Reverberate card) {
+        super(card);
+    }
+
+    @Override
+    public Reverberate copy() {
+        return new Reverberate(this);
+    }
 }

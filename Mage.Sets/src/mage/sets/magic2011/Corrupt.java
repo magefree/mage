@@ -49,73 +49,73 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class Corrupt extends CardImpl<Corrupt> {
 
-	public Corrupt(UUID ownerId) {
-		super(ownerId, 89, "Corrupt", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{5}{B}");
-		this.expansionSetCode = "M11";
-		this.color.setBlack(true);
-		this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
-		this.getSpellAbility().addEffect(new CorruptEffect());
-	}
+    public Corrupt(UUID ownerId) {
+        super(ownerId, 89, "Corrupt", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{5}{B}");
+        this.expansionSetCode = "M11";
+        this.color.setBlack(true);
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addEffect(new CorruptEffect());
+    }
 
-	public Corrupt(final Corrupt card) {
-		super(card);
-	}
+    public Corrupt(final Corrupt card) {
+        super(card);
+    }
 
-	@Override
-	public Corrupt copy() {
-		return new Corrupt(this);
-	}
+    @Override
+    public Corrupt copy() {
+        return new Corrupt(this);
+    }
 
 }
 
 class CorruptEffect extends OneShotEffect<CorruptEffect> {
 
-	private static final FilterLandPermanent filter = new FilterLandPermanent("Swamps");
+    private static final FilterLandPermanent filter = new FilterLandPermanent("Swamps");
 
-	static {
-		filter.getSubtype().add("Swamp");
-		filter.setScopeSubtype(ComparisonScope.Any);
-		filter.setTargetController(TargetController.YOU);
-	}
+    static {
+        filter.getSubtype().add("Swamp");
+        filter.setScopeSubtype(ComparisonScope.Any);
+        filter.setTargetController(TargetController.YOU);
+    }
 
-	public CorruptEffect() {
-		super(Outcome.Damage);
-		staticText = "{this} deals damage equal to the number of Swamps you control to target creature or player. You gain life equal to the damage dealt this way";
-	}
+    public CorruptEffect() {
+        super(Outcome.Damage);
+        staticText = "{this} deals damage equal to the number of Swamps you control to target creature or player. You gain life equal to the damage dealt this way";
+    }
 
-	public CorruptEffect(final CorruptEffect effect) {
-		super(effect);
-	}
+    public CorruptEffect(final CorruptEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		int amount = game.getBattlefield().count(filter, source.getControllerId(), game);
-		if (amount > 0) {
-			int damageDealt = amount;
-			Permanent permanent = game.getPermanent(source.getFirstTarget());
-			if (permanent != null) {
-				damageDealt = permanent.damage(amount, source.getSourceId(), game, true, false);
-			}
-			else {
-				Player player = game.getPlayer(source.getFirstTarget());
-				if (player != null) {
-					damageDealt = player.damage(amount, source.getSourceId(), game, false, true);
-				}
-				else
-					return false;
-			}
-			Player you = game.getPlayer(source.getControllerId());
-			if (you != null) {
-				you.gainLife(damageDealt, game);
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        int amount = game.getBattlefield().count(filter, source.getControllerId(), game);
+        if (amount > 0) {
+            int damageDealt = amount;
+            Permanent permanent = game.getPermanent(source.getFirstTarget());
+            if (permanent != null) {
+                damageDealt = permanent.damage(amount, source.getSourceId(), game, true, false);
+            }
+            else {
+                Player player = game.getPlayer(source.getFirstTarget());
+                if (player != null) {
+                    damageDealt = player.damage(amount, source.getSourceId(), game, false, true);
+                }
+                else
+                    return false;
+            }
+            Player you = game.getPlayer(source.getControllerId());
+            if (you != null) {
+                you.gainLife(damageDealt, game);
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public CorruptEffect copy() {
-		return new CorruptEffect(this);
-	}
+    @Override
+    public CorruptEffect copy() {
+        return new CorruptEffect(this);
+    }
 
 }

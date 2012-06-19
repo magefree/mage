@@ -57,100 +57,100 @@ import mage.players.Player;
  */
 public class StormtideLeviathan extends CardImpl<StormtideLeviathan> {
 
-	public StormtideLeviathan(UUID ownerId) {
-		super(ownerId, 74, "Stormtide Leviathan", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{U}{U}{U}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Leviathan");
-		this.color.setBlue(true);
-		this.power = new MageInt(8);
-		this.toughness = new MageInt(8);
+    public StormtideLeviathan(UUID ownerId) {
+        super(ownerId, 74, "Stormtide Leviathan", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{U}{U}{U}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Leviathan");
+        this.color.setBlue(true);
+        this.power = new MageInt(8);
+        this.toughness = new MageInt(8);
 
-		this.addAbility(new IslandwalkAbility());
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new StormtideLeviathanEffect()));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new StormtideLeviathanEffect2()));
+        this.addAbility(new IslandwalkAbility());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new StormtideLeviathanEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new StormtideLeviathanEffect2()));
 
-	}
+    }
 
-	public StormtideLeviathan(final StormtideLeviathan card) {
-		super(card);
-	}
+    public StormtideLeviathan(final StormtideLeviathan card) {
+        super(card);
+    }
 
-	@Override
-	public StormtideLeviathan copy() {
-		return new StormtideLeviathan(this);
-	}
+    @Override
+    public StormtideLeviathan copy() {
+        return new StormtideLeviathan(this);
+    }
 
 }
 
 class StormtideLeviathanEffect extends ContinuousEffectImpl<StormtideLeviathanEffect> {
 
-	public StormtideLeviathanEffect() {
-		super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Detriment);
-		staticText = "All lands are Islands in addition to their other types";
-	}
+    public StormtideLeviathanEffect() {
+        super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Detriment);
+        staticText = "All lands are Islands in addition to their other types";
+    }
 
-	public StormtideLeviathanEffect(final StormtideLeviathanEffect effect) {
-		super(effect);
-	}
+    public StormtideLeviathanEffect(final StormtideLeviathanEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public StormtideLeviathanEffect copy() {
-		return new StormtideLeviathanEffect(this);
-	}
+    @Override
+    public StormtideLeviathanEffect copy() {
+        return new StormtideLeviathanEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterLandPermanent(), source.getControllerId(), game)) {
-			if (!permanent.hasSubtype("Island"))
-				permanent.getSubtype().add("Island");
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterLandPermanent(), source.getControllerId(), game)) {
+            if (!permanent.hasSubtype("Island"))
+                permanent.getSubtype().add("Island");
+        }
+        return true;
+    }
 
 }
 
 class StormtideLeviathanEffect2 extends ReplacementEffectImpl<StormtideLeviathanEffect2> {
 
-	private static IslandwalkAbility islandwalk = new IslandwalkAbility();
+    private static IslandwalkAbility islandwalk = new IslandwalkAbility();
 
-	public StormtideLeviathanEffect2() {
-		super(Duration.WhileOnBattlefield, Outcome.Detriment);
-		staticText = "Creatures without flying or islandwalk can't attack";
-	}
+    public StormtideLeviathanEffect2() {
+        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        staticText = "Creatures without flying or islandwalk can't attack";
+    }
 
-	public StormtideLeviathanEffect2(final StormtideLeviathanEffect2 effect) {
-		super(effect);
-	}
+    public StormtideLeviathanEffect2(final StormtideLeviathanEffect2 effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
 
-	@Override
-	public StormtideLeviathanEffect2 copy() {
-		return new StormtideLeviathanEffect2(this);
-	}
+    @Override
+    public StormtideLeviathanEffect2 copy() {
+        return new StormtideLeviathanEffect2(this);
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		return true;
-	}
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        return true;
+    }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (event.getType() == EventType.DECLARE_ATTACKER) {
-			Permanent permanent = game.getPermanent(event.getSourceId());
-			if (permanent != null) {
-				Player player = game.getPlayer(source.getControllerId());
-				if (player.getInRange().contains(permanent.getControllerId())) {
-					if (!(permanent.getAbilities().containsKey(FlyingAbility.getInstance().getId()) ||
-						permanent.getAbilities().contains(islandwalk)))
-						return true;
-				}
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (event.getType() == EventType.DECLARE_ATTACKER) {
+            Permanent permanent = game.getPermanent(event.getSourceId());
+            if (permanent != null) {
+                Player player = game.getPlayer(source.getControllerId());
+                if (player.getInRange().contains(permanent.getControllerId())) {
+                    if (!(permanent.getAbilities().containsKey(FlyingAbility.getInstance().getId()) ||
+                        permanent.getAbilities().contains(islandwalk)))
+                        return true;
+                }
+            }
+        }
+        return false;
+    }
 
 }

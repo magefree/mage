@@ -126,11 +126,11 @@ class GutterGrimeEffect extends OneShotEffect<GutterGrimeEffect> {
     public GutterGrimeEffect() {
         super(Outcome.PutCreatureInPlay);
     }
-    
+
     public GutterGrimeEffect(final GutterGrimeEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         GutterGrimeToken token = new GutterGrimeToken(source.getSourceId());
@@ -142,26 +142,26 @@ class GutterGrimeEffect extends OneShotEffect<GutterGrimeEffect> {
     public GutterGrimeEffect copy() {
         return new GutterGrimeEffect(this);
     }
-    
+
 }
 
 class GutterGrimeToken extends Token {
 
-	public GutterGrimeToken(UUID sourceId) {
-		super("Ooze", "green Ooze creature token with \"This creature's power and toughness are each equal to the number of slime counters on Gutter Grime.\"");
-		cardType.add(CardType.CREATURE);
-		subtype.add("Ooze");
-		color.setGreen(true);
-		power = new MageInt(0);
-		toughness = new MageInt(0);
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(new GutterGrimeCounters(sourceId), Duration.WhileOnBattlefield)));
-	}
+    public GutterGrimeToken(UUID sourceId) {
+        super("Ooze", "green Ooze creature token with \"This creature's power and toughness are each equal to the number of slime counters on Gutter Grime.\"");
+        cardType.add(CardType.CREATURE);
+        subtype.add("Ooze");
+        color.setGreen(true);
+        power = new MageInt(0);
+        toughness = new MageInt(0);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(new GutterGrimeCounters(sourceId), Duration.WhileOnBattlefield)));
+    }
 }
 
 class GutterGrimeCounters implements DynamicValue {
-    
+
     private UUID sourceId;
-    
+
     public GutterGrimeCounters(UUID sourceId) {
         this.sourceId = sourceId;
     }

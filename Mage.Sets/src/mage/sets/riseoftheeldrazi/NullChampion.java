@@ -55,7 +55,7 @@ public class NullChampion extends LevelerCard<NullChampion> {
         this.expansionSetCode = "ROE";
         this.subtype.add("Zombie");
         this.subtype.add("Warrior");
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{3}")));

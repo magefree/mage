@@ -45,39 +45,39 @@ import mage.game.permanent.token.Token;
  */
 public class RocEgg extends CardImpl<RocEgg> {
 
-	private static RocEggToken rocEggToken = new RocEggToken();
+    private static RocEggToken rocEggToken = new RocEggToken();
 
-	public RocEgg(UUID ownerId) {
-		super(ownerId, 25, "Roc Egg", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Bird");
-		this.color.setWhite(true);
-		this.power = new MageInt(0);
-		this.toughness = new MageInt(3);
+    public RocEgg(UUID ownerId) {
+        super(ownerId, 25, "Roc Egg", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Bird");
+        this.color.setWhite(true);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(3);
 
-		this.addAbility(DefenderAbility.getInstance());
-		this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(rocEggToken, 1), false));
-	}
+        this.addAbility(DefenderAbility.getInstance());
+        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(rocEggToken, 1), false));
+    }
 
-	public RocEgg(final RocEgg card) {
-		super(card);
-	}
+    public RocEgg(final RocEgg card) {
+        super(card);
+    }
 
-	@Override
-	public RocEgg copy() {
-		return new RocEgg(this);
-	}
+    @Override
+    public RocEgg copy() {
+        return new RocEgg(this);
+    }
 
 }
 class RocEggToken extends Token {
 
-	public RocEggToken() {
-		super("Bird", "3/3 white Bird creature token with flying");
-		cardType.add(CardType.CREATURE);
-		subtype.add("Bird");
-		color.setWhite(true);
-		power = new MageInt(3);
-		toughness = new MageInt(3);
-		addAbility(FlyingAbility.getInstance());
-	}
+    public RocEggToken() {
+        super("Bird", "3/3 white Bird creature token with flying");
+        cardType.add(CardType.CREATURE);
+        subtype.add("Bird");
+        color.setWhite(true);
+        power = new MageInt(3);
+        toughness = new MageInt(3);
+        addAbility(FlyingAbility.getInstance());
+    }
 }

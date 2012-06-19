@@ -51,7 +51,7 @@ public class TrustyMachete extends CardImpl<TrustyMachete> {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Equipment");
         this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(2)));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 1)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 1)));
     }
 
     public TrustyMachete (final TrustyMachete card) {

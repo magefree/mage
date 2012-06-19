@@ -69,136 +69,136 @@ import java.util.*;
  */
 public class GameState implements Serializable, Copyable<GameState> {
 
-	private Players players;
-	private PlayerList playerList;
-	private UUID activePlayerId;
-	private UUID priorityPlayerId;
-	private Turn turn;
-	private SpellStack stack;
-	private Command command;
-	private Exile exile;
-	private Revealed revealed;
-	private Map<UUID, LookedAt> lookedAt = new HashMap<UUID, LookedAt>();
-	private Battlefield battlefield;
-	private int turnNum = 1;
-	private boolean gameOver;
+    private Players players;
+    private PlayerList playerList;
+    private UUID activePlayerId;
+    private UUID priorityPlayerId;
+    private Turn turn;
+    private SpellStack stack;
+    private Command command;
+    private Exile exile;
+    private Revealed revealed;
+    private Map<UUID, LookedAt> lookedAt = new HashMap<UUID, LookedAt>();
+    private Battlefield battlefield;
+    private int turnNum = 1;
+    private boolean gameOver;
     private boolean paused;
-//	private List<String> messages = new ArrayList<String>();
-	private ContinuousEffects effects;
+//    private List<String> messages = new ArrayList<String>();
+    private ContinuousEffects effects;
     private TriggeredAbilities triggers;
-	private List<TriggeredAbility> triggered = new ArrayList<TriggeredAbility>();
-	private DelayedTriggeredAbilities delayed;
-	private SpecialActions specialActions;
+    private List<TriggeredAbility> triggered = new ArrayList<TriggeredAbility>();
+    private DelayedTriggeredAbilities delayed;
+    private SpecialActions specialActions;
     private Map<UUID, Abilities<ActivatedAbility>> otherAbilities = new HashMap<UUID, Abilities<ActivatedAbility>>();
-	private Combat combat;
-	private TurnMods turnMods;
-	private Watchers watchers;
-	private Map<String, Object> values = new HashMap<String, Object>();
-	private Map<UUID, Zone> zones = new HashMap<UUID, Zone>();
+    private Combat combat;
+    private TurnMods turnMods;
+    private Watchers watchers;
+    private Map<String, Object> values = new HashMap<String, Object>();
+    private Map<UUID, Zone> zones = new HashMap<UUID, Zone>();
 
-	public GameState() {
-		players = new Players();
-		playerList = new PlayerList();
-		turn = new Turn();
-		stack = new SpellStack();
-		command = new Command();
-		exile = new Exile();
-		revealed = new Revealed();
-		battlefield = new Battlefield();
-		effects = new ContinuousEffects();
+    public GameState() {
+        players = new Players();
+        playerList = new PlayerList();
+        turn = new Turn();
+        stack = new SpellStack();
+        command = new Command();
+        exile = new Exile();
+        revealed = new Revealed();
+        battlefield = new Battlefield();
+        effects = new ContinuousEffects();
         triggers = new TriggeredAbilities();
-		delayed = new DelayedTriggeredAbilities();
-		specialActions = new SpecialActions();
-		combat = new Combat();
-		turnMods = new TurnMods();
-		watchers = new Watchers();
-	}
+        delayed = new DelayedTriggeredAbilities();
+        specialActions = new SpecialActions();
+        combat = new Combat();
+        turnMods = new TurnMods();
+        watchers = new Watchers();
+    }
 
-	public GameState(final GameState state) {
-		this.players = state.players.copy();
-		this.playerList = state.playerList.copy();
-		this.activePlayerId = state.activePlayerId;
-		this.priorityPlayerId = state.priorityPlayerId;
-		this.turn = state.turn.copy();
-		this.stack = state.stack.copy();
-		this.command = state.command.copy();
-		this.exile = state.exile.copy();
-		this.revealed = state.revealed.copy();
+    public GameState(final GameState state) {
+        this.players = state.players.copy();
+        this.playerList = state.playerList.copy();
+        this.activePlayerId = state.activePlayerId;
+        this.priorityPlayerId = state.priorityPlayerId;
+        this.turn = state.turn.copy();
+        this.stack = state.stack.copy();
+        this.command = state.command.copy();
+        this.exile = state.exile.copy();
+        this.revealed = state.revealed.copy();
         this.lookedAt.putAll(state.lookedAt);
-		this.battlefield = state.battlefield.copy();
-		this.turnNum = state.turnNum;
-		this.gameOver = state.gameOver;
-		this.effects = state.effects.copy();
+        this.battlefield = state.battlefield.copy();
+        this.turnNum = state.turnNum;
+        this.gameOver = state.gameOver;
+        this.effects = state.effects.copy();
         for (TriggeredAbility trigger: state.triggered) {
             this.triggered.add(trigger.copy());
         }
         this.triggers = state.triggers.copy();
-		this.delayed = state.delayed.copy();
-		this.specialActions = state.specialActions.copy();
-		this.combat = state.combat.copy();
-		this.turnMods = state.turnMods.copy();
-		this.watchers = state.watchers.copy();
+        this.delayed = state.delayed.copy();
+        this.specialActions = state.specialActions.copy();
+        this.combat = state.combat.copy();
+        this.turnMods = state.turnMods.copy();
+        this.watchers = state.watchers.copy();
         this.values.putAll(state.values);
         this.zones.putAll(state.zones);
-		for (Map.Entry<UUID, Abilities<ActivatedAbility>> entry: state.otherAbilities.entrySet()) {
-			otherAbilities.put(entry.getKey(), entry.getValue().copy());
-		}
+        for (Map.Entry<UUID, Abilities<ActivatedAbility>> entry: state.otherAbilities.entrySet()) {
+            otherAbilities.put(entry.getKey(), entry.getValue().copy());
+        }
         this.paused = state.paused;
-	}
+    }
 
-	@Override
-	public GameState copy() {
-		return new GameState(this);
-	}
+    @Override
+    public GameState copy() {
+        return new GameState(this);
+    }
 
-	public void addPlayer(Player player) {
-		players.put(player.getId(), player);
-		playerList.add(player.getId());
-	}
+    public void addPlayer(Player player) {
+        players.put(player.getId(), player);
+        playerList.add(player.getId());
+    }
 
-	public String getValue(boolean useHidden) {
-		StringBuilder sb = new StringBuilder(1024);
+    public String getValue(boolean useHidden) {
+        StringBuilder sb = new StringBuilder(1024);
 
-		sb.append(turnNum).append(turn.getPhaseType()).append(turn.getStepType()).append(activePlayerId).append(priorityPlayerId);
+        sb.append(turnNum).append(turn.getPhaseType()).append(turn.getStepType()).append(activePlayerId).append(priorityPlayerId);
 
-		for (Player player: players.values()) {
-			sb.append("player").append(player.getLife()).append("hand");
+        for (Player player: players.values()) {
+            sb.append("player").append(player.getLife()).append("hand");
             if (useHidden)
                 sb.append(player.getHand());
             else
                 sb.append(player.getHand().size());
             sb.append("library").append(player.getLibrary().size()).append("graveyard").append(player.getGraveyard());
-		}
+        }
 
         sb.append("permanents");
-		for (Permanent permanent: battlefield.getAllPermanents()) {
-			sb.append(permanent.getValue());
-		}
+        for (Permanent permanent: battlefield.getAllPermanents()) {
+            sb.append(permanent.getValue());
+        }
 
         sb.append("spells");
-		for (StackObject spell: stack) {
-			sb.append(spell.getControllerId()).append(spell.getName());
-		}
-        
+        for (StackObject spell: stack) {
+            sb.append(spell.getControllerId()).append(spell.getName());
+        }
+
         for (ExileZone zone: exile.getExileZones()) {
             sb.append("exile").append(zone.getName()).append(zone);
         }
-        
+
         sb.append("combat");
         for (CombatGroup group: combat.getGroups()) {
             sb.append(group.getDefenderId()).append(group.getAttackers()).append(group.getBlockers());
         }
 
-		return sb.toString();
-	}
+        return sb.toString();
+    }
 
-	public String getValue(boolean useHidden, Game game) {
-		StringBuilder sb = new StringBuilder(1024);
+    public String getValue(boolean useHidden, Game game) {
+        StringBuilder sb = new StringBuilder(1024);
 
-		sb.append(turnNum).append(turn.getPhaseType()).append(turn.getStepType()).append(activePlayerId).append(priorityPlayerId);
+        sb.append(turnNum).append(turn.getPhaseType()).append(turn.getStepType()).append(activePlayerId).append(priorityPlayerId);
 
-		for (Player player: players.values()) {
-			sb.append("player").append(player.isPassed()).append(player.getLife()).append("hand");
+        for (Player player: players.values()) {
+            sb.append("player").append(player.isPassed()).append(player.getLife()).append("hand");
             if (useHidden)
                 sb.append(player.getHand());
             else
@@ -208,19 +208,19 @@ public class GameState implements Serializable, Copyable<GameState> {
             for (Card card: player.getGraveyard().getCards(game)) {
                 sb.append(card.getName());
             }
-		}
+        }
 
         sb.append("permanents");
         List<String> perms = new ArrayList<String>();
-		for (Permanent permanent: battlefield.getAllPermanents()) {
-			perms.add(permanent.getValue());
-		}
+        for (Permanent permanent: battlefield.getAllPermanents()) {
+            perms.add(permanent.getValue());
+        }
         Collections.sort(perms);
         sb.append(perms);
 
         sb.append("spells");
-		for (StackObject spell: stack) {
-			sb.append(spell.getControllerId()).append(spell.getName());
+        for (StackObject spell: stack) {
+            sb.append(spell.getControllerId()).append(spell.getName());
             sb.append(spell.getStackAbility().toString());
             for (Mode mode: spell.getStackAbility().getModes().values()) {
                 if (!mode.getTargets().isEmpty()) {
@@ -236,195 +236,195 @@ public class GameState implements Serializable, Copyable<GameState> {
                     }
                 }
             }
-		}
-        
+        }
+
         for (ExileZone zone: exile.getExileZones()) {
             sb.append("exile").append(zone.getName()).append(zone);
         }
-        
+
         sb.append("combat");
         for (CombatGroup group: combat.getGroups()) {
             sb.append(group.getDefenderId()).append(group.getAttackers()).append(group.getBlockers());
         }
 
-		return sb.toString();
-	}
-    
-	public Players getPlayers() {
-		return players;
-	}
+        return sb.toString();
+    }
 
-	public Player getPlayer(UUID playerId) {
-		return players.get(playerId);
-	}
+    public Players getPlayers() {
+        return players;
+    }
 
-	public UUID getActivePlayerId() {
-		return activePlayerId;
-	}
+    public Player getPlayer(UUID playerId) {
+        return players.get(playerId);
+    }
 
-	public void setActivePlayerId(UUID activePlayerId) {
-		this.activePlayerId = activePlayerId;
-	}
+    public UUID getActivePlayerId() {
+        return activePlayerId;
+    }
 
-	public UUID getPriorityPlayerId() {
-		return priorityPlayerId;
-	}
+    public void setActivePlayerId(UUID activePlayerId) {
+        this.activePlayerId = activePlayerId;
+    }
 
-	public void setPriorityPlayerId(UUID priorityPlayerId) {
-		this.priorityPlayerId = priorityPlayerId;
-	}
+    public UUID getPriorityPlayerId() {
+        return priorityPlayerId;
+    }
 
-	public Battlefield getBattlefield() {
-		return this.battlefield;
-	}
+    public void setPriorityPlayerId(UUID priorityPlayerId) {
+        this.priorityPlayerId = priorityPlayerId;
+    }
 
-	public SpellStack getStack() {
-		return this.stack;
-	}
+    public Battlefield getBattlefield() {
+        return this.battlefield;
+    }
 
-	public Exile getExile() {
-		return exile;
-	}
+    public SpellStack getStack() {
+        return this.stack;
+    }
 
-	public Command getCommand() {
-		return command;
-	}
+    public Exile getExile() {
+        return exile;
+    }
 
-	public Revealed getRevealed() {
-		return revealed;
-	}
+    public Command getCommand() {
+        return command;
+    }
 
-	public LookedAt getLookedAt(UUID playerId) {
-		if (lookedAt.get(playerId) == null) {
-			LookedAt l = new LookedAt();
-			lookedAt.put(playerId, l);
-			return l;
-		}
-		return lookedAt.get(playerId);
-	}
+    public Revealed getRevealed() {
+        return revealed;
+    }
+
+    public LookedAt getLookedAt(UUID playerId) {
+        if (lookedAt.get(playerId) == null) {
+            LookedAt l = new LookedAt();
+            lookedAt.put(playerId, l);
+            return l;
+        }
+        return lookedAt.get(playerId);
+    }
 
     public void clearLookedAt() {
         lookedAt.clear();
     }
-    
-	public Turn getTurn() {
-		return turn;
-	}
 
-	public Combat getCombat() {
-		return combat;
-	}
+    public Turn getTurn() {
+        return turn;
+    }
 
-	public int getTurnNum() {
-		return turnNum;
-	}
+    public Combat getCombat() {
+        return combat;
+    }
 
-	public void setTurnNum(int turnNum) {
-		this.turnNum = turnNum;
-	}
+    public int getTurnNum() {
+        return turnNum;
+    }
 
-	public boolean isGameOver() {
-		return this.gameOver;
-	}
+    public void setTurnNum(int turnNum) {
+        this.turnNum = turnNum;
+    }
 
-	public TurnMods getTurnMods() {
-		return this.turnMods;
-	}
+    public boolean isGameOver() {
+        return this.gameOver;
+    }
 
-	public Watchers getWatchers() {
-		return this.watchers;
-	}
+    public TurnMods getTurnMods() {
+        return this.turnMods;
+    }
 
-	public SpecialActions getSpecialActions() {
-		return this.specialActions;
-	}
-	
-	public void endGame() {
-		this.gameOver = true;
-	}
+    public Watchers getWatchers() {
+        return this.watchers;
+    }
 
-	public void applyEffects(Game game) {
-		for (Player player: players.values()) {
-			player.reset();
-		}
-		battlefield.reset(game);
+    public SpecialActions getSpecialActions() {
+        return this.specialActions;
+    }
+
+    public void endGame() {
+        this.gameOver = true;
+    }
+
+    public void applyEffects(Game game) {
+        for (Player player: players.values()) {
+            player.reset();
+        }
+        battlefield.reset(game);
         resetOtherAbilities();
-		effects.apply(game);
-		battlefield.fireControlChangeEvents(game);
-	}
+        effects.apply(game);
+        battlefield.fireControlChangeEvents(game);
+    }
 
-	public void removeEotEffects(Game game) {
-		effects.removeEndOfTurnEffects();
+    public void removeEotEffects(Game game) {
+        effects.removeEndOfTurnEffects();
         delayed.removeEndOfTurnAbilities();
-		applyEffects(game);
-	}
+        applyEffects(game);
+    }
 
-	public void addEffect(ContinuousEffect effect, Ability source) {
-		effects.addEffect(effect, source);
-	}
+    public void addEffect(ContinuousEffect effect, Ability source) {
+        effects.addEffect(effect, source);
+    }
 
-//	public void addMessage(String message) {
-//		this.messages.add(message);
-//	}
+//    public void addMessage(String message) {
+//        this.messages.add(message);
+//    }
 
-	public PlayerList getPlayerList() {
-		return playerList;
-	}
+    public PlayerList getPlayerList() {
+        return playerList;
+    }
 
-	public PlayerList getPlayerList(UUID playerId) {
-		PlayerList newPlayerList = new PlayerList();
-		for (Player player: players.values()) {
-			if (!player.hasLeft() && !player.hasLost())
-				newPlayerList.add(player.getId());
-		}
-		newPlayerList.setCurrent(playerId);
-		return newPlayerList;
-	}
+    public PlayerList getPlayerList(UUID playerId) {
+        PlayerList newPlayerList = new PlayerList();
+        for (Player player: players.values()) {
+            if (!player.hasLeft() && !player.hasLost())
+                newPlayerList.add(player.getId());
+        }
+        newPlayerList.setCurrent(playerId);
+        return newPlayerList;
+    }
 
-	public Permanent getPermanent(UUID permanentId) {
+    public Permanent getPermanent(UUID permanentId) {
         if (permanentId != null && battlefield.containsPermanent(permanentId)) {
             Permanent permanent = battlefield.getPermanent(permanentId);
             setZone(permanent.getId(), Zone.BATTLEFIELD);
             return permanent;
         }
-		return null;
-	}
+        return null;
+    }
 
-	public Zone getZone(UUID id) {
-		if (id != null && zones.containsKey(id))
-			return zones.get(id);
-		return null;
-	}
+    public Zone getZone(UUID id) {
+        if (id != null && zones.containsKey(id))
+            return zones.get(id);
+        return null;
+    }
 
-	public void setZone(UUID id, Zone zone) {
-		zones.put(id, zone);
-	}
+    public void setZone(UUID id, Zone zone) {
+        zones.put(id, zone);
+    }
 
-	public void restore(GameState state) {
-		this.stack = state.stack;
-		this.command = state.command;
-		this.effects = state.effects;
+    public void restore(GameState state) {
+        this.stack = state.stack;
+        this.command = state.command;
+        this.effects = state.effects;
         this.triggers = state.triggers;
-		this.triggered = state.triggered;
-		this.combat = state.combat;
-		this.exile = state.exile;
-		this.battlefield = state.battlefield;
-		this.zones = state.zones;
-		for (Player copyPlayer: state.players.values()) {
-			Player origPlayer = players.get(copyPlayer.getId());
-			origPlayer.restore(copyPlayer);
-		}
-	}
+        this.triggered = state.triggered;
+        this.combat = state.combat;
+        this.exile = state.exile;
+        this.battlefield = state.battlefield;
+        this.zones = state.zones;
+        for (Player copyPlayer: state.players.values()) {
+            Player origPlayer = players.get(copyPlayer.getId());
+            origPlayer.restore(copyPlayer);
+        }
+    }
 
-	public void handleEvent(GameEvent event, Game game) {
-		watchers.watch(event, game);
+    public void handleEvent(GameEvent event, Game game) {
+        watchers.watch(event, game);
         delayed.checkTriggers(event, game);
         triggers.checkTriggers(event, game);
-	}
+    }
 
-	public boolean replaceEvent(GameEvent event, Game game) {
-		return effects.replaceEvent(event, game);
-	}
+    public boolean replaceEvent(GameEvent event, Game game) {
+        return effects.replaceEvent(event, game);
+    }
 
     public void addCard(Card card) {
         setZone(card.getId(), Zone.OUTSIDE);
@@ -437,8 +437,8 @@ public class GameState implements Serializable, Copyable<GameState> {
             addAbility(ability);
         }
     }
-    
-	public void addAbility(Ability ability) {
+
+    public void addAbility(Ability ability) {
         if (ability instanceof StaticAbility) {
             for (Mode mode: ability.getModes().values()) {
                 for (Effect effect: mode.getEffects()) {
@@ -451,7 +451,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         else if (ability instanceof TriggeredAbility) {
             this.triggers.add((TriggeredAbility)ability);
         }
-	}
+    }
 
     public void addEmblem(Emblem emblem) {
         getCommand().add(emblem);
@@ -461,50 +461,50 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public void addTriggeredAbility(TriggeredAbility ability) {
-		this.triggered.add(ability);
-	}
+        this.triggered.add(ability);
+    }
 
     public void removeTriggeredAbility(TriggeredAbility ability) {
-		this.triggered.remove(ability);
-	}
+        this.triggered.remove(ability);
+    }
 
     public void addDelayedTriggeredAbility(DelayedTriggeredAbility ability) {
-		this.delayed.add(ability);
-	}
+        this.delayed.add(ability);
+    }
 
-	public void removeDelayedTriggeredAbility(UUID abilityId) {
-		for (DelayedTriggeredAbility ability: delayed) {
-			if (ability.getId().equals(abilityId))  {
-				delayed.remove(ability);
-				break;
-			}
-		}
-	}
+    public void removeDelayedTriggeredAbility(UUID abilityId) {
+        for (DelayedTriggeredAbility ability: delayed) {
+            if (ability.getId().equals(abilityId))  {
+                delayed.remove(ability);
+                break;
+            }
+        }
+    }
 
-	public List<TriggeredAbility> getTriggered(UUID controllerId) {
+    public List<TriggeredAbility> getTriggered(UUID controllerId) {
         List<TriggeredAbility> triggereds = new ArrayList<TriggeredAbility>();
         for (TriggeredAbility ability: triggered) {
             if (ability.getControllerId().equals(controllerId))
                 triggereds.add(ability);
         }
-		return triggereds;
-	}
+        return triggereds;
+    }
 
     public DelayedTriggeredAbilities getDelayed() {
         return this.delayed;
     }
-    
-	public ContinuousEffects getContinuousEffects() {
-		return effects;
-	}
 
-	public Object getValue(String valueId) {
-		return values.get(valueId);
-	}
+    public ContinuousEffects getContinuousEffects() {
+        return effects;
+    }
 
-	public void setValue(String valueId, Object value) {
-		values.put(valueId, value);
-	}
+    public Object getValue(String valueId) {
+        return values.get(valueId);
+    }
+
+    public void setValue(String valueId, Object value) {
+        values.put(valueId, value);
+    }
 
     public Abilities<ActivatedAbility> getOtherAbilities(UUID objectId, Zone zone) {
         if (otherAbilities.containsKey(objectId)) {
@@ -512,20 +512,20 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
         return null;
     }
-    
+
     public void addOtherAbility(UUID objectId, ActivatedAbility ability) {
         if (!otherAbilities.containsKey(objectId)) {
             otherAbilities.put(objectId, new AbilitiesImpl());
         }
         otherAbilities.get(objectId).add(ability);
     }
-    
+
     private void resetOtherAbilities() {
         for (Abilities<ActivatedAbility> abilities: otherAbilities.values()) {
             abilities.clear();
         }
     }
-    
+
     public void clear() {
         battlefield.clear();
         effects.clear();
@@ -539,7 +539,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         lookedAt.clear();
         turnNum = 0;
         gameOver = false;
-    	specialActions.clear();
+        specialActions.clear();
         otherAbilities.clear();
         combat.clear();
         turnMods.clear();
@@ -551,11 +551,11 @@ public class GameState implements Serializable, Copyable<GameState> {
     public void pause() {
         this.paused = true;
     }
-    
+
     public void resume() {
         this.paused = false;
     }
-    
+
     public boolean isPaused() {
         return this.paused;
     }

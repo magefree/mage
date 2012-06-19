@@ -43,31 +43,31 @@ import mage.filter.FilterCard;
  */
 public class Guma extends CardImpl<Guma> {
 
-	private static final FilterCard filter = new FilterCard("Blue");
+    private static final FilterCard filter = new FilterCard("Blue");
 
-	static {
-		filter.setUseColor(true);
-		filter.getColor().setBlue(true);
-		filter.setScopeColor(ComparisonScope.Any);
-	}
+    static {
+        filter.setUseColor(true);
+        filter.getColor().setBlue(true);
+        filter.setScopeColor(ComparisonScope.Any);
+    }
 
-	public Guma(UUID ownerId) {
-		super(ownerId, 197, "Guma", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-		this.expansionSetCode = "USG";
-		this.subtype.add("Cat");
-		this.color.setRed(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
-		this.addAbility(new ProtectionAbility(filter));
+    public Guma(UUID ownerId) {
+        super(ownerId, 197, "Guma", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        this.expansionSetCode = "USG";
+        this.subtype.add("Cat");
+        this.color.setRed(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+        this.addAbility(new ProtectionAbility(filter));
         }
 
-	public Guma(final Guma card) {
-		super(card);
-	}
+    public Guma(final Guma card) {
+        super(card);
+    }
 
-	@Override
-	public Guma copy() {
-		return new Guma(this);
-	}
+    @Override
+    public Guma copy() {
+        return new Guma(this);
+    }
 
 }

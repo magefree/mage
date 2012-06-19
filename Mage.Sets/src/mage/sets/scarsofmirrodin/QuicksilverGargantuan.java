@@ -48,75 +48,75 @@ import java.util.UUID;
  */
 public class QuicksilverGargantuan extends CardImpl<QuicksilverGargantuan> {
 
-	private static final String text = "You may have {this} enter the battlefield as a copy of any creature on the battlefield, except it's still 7/7";
+    private static final String text = "You may have {this} enter the battlefield as a copy of any creature on the battlefield, except it's still 7/7";
 
-	public QuicksilverGargantuan(UUID ownerId) {
-		super(ownerId, 39, "Quicksilver Gargantuan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
-		this.expansionSetCode = "SOM";
-		this.subtype.add("Shapeshifter");
-		this.color.setBlue(true);
-		this.power = new MageInt(7);
-		this.toughness = new MageInt(7);
+    public QuicksilverGargantuan(UUID ownerId) {
+        super(ownerId, 39, "Quicksilver Gargantuan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
+        this.expansionSetCode = "SOM";
+        this.subtype.add("Shapeshifter");
+        this.color.setBlue(true);
+        this.power = new MageInt(7);
+        this.toughness = new MageInt(7);
 
-		Ability ability = new EntersBattlefieldAbility(new QuicksilverGargantuanCopyEffect(), text);
-		ability.addTarget(new TargetCreaturePermanent());
-		this.addAbility(ability);
-	}
+        Ability ability = new EntersBattlefieldAbility(new QuicksilverGargantuanCopyEffect(), text);
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
+    }
 
-	public QuicksilverGargantuan(final QuicksilverGargantuan card) {
-		super(card);
-	}
+    public QuicksilverGargantuan(final QuicksilverGargantuan card) {
+        super(card);
+    }
 
-	@Override
-	public QuicksilverGargantuan copy() {
-		return new QuicksilverGargantuan(this);
-	}
+    @Override
+    public QuicksilverGargantuan copy() {
+        return new QuicksilverGargantuan(this);
+    }
 
-	private class QuicksilverGargantuanCopyEffect extends ContinuousEffectImpl<QuicksilverGargantuanCopyEffect> {
+    private class QuicksilverGargantuanCopyEffect extends ContinuousEffectImpl<QuicksilverGargantuanCopyEffect> {
 
-		public QuicksilverGargantuanCopyEffect() {
-			super(Constants.Duration.WhileOnBattlefield, Constants.Layer.CopyEffects_1, Constants.SubLayer.NA, Constants.Outcome.BecomeCreature);
-			staticText =  "You may have {this} enter the battlefield as a copy of any creature on the battlefield, except it's still 7/7";
-		}
+        public QuicksilverGargantuanCopyEffect() {
+            super(Constants.Duration.WhileOnBattlefield, Constants.Layer.CopyEffects_1, Constants.SubLayer.NA, Constants.Outcome.BecomeCreature);
+            staticText =  "You may have {this} enter the battlefield as a copy of any creature on the battlefield, except it's still 7/7";
+        }
 
-		public QuicksilverGargantuanCopyEffect(final QuicksilverGargantuanCopyEffect effect) {
-			super(effect);
-		}
+        public QuicksilverGargantuanCopyEffect(final QuicksilverGargantuanCopyEffect effect) {
+            super(effect);
+        }
 
-		@Override
-		public boolean apply(Game game, Ability source) {
-			Card card = game.getCard(source.getFirstTarget());
-			Permanent permanent = game.getPermanent(source.getSourceId());
-			permanent.setName(card.getName());
-			permanent.getColor().setColor(card.getColor());
-			permanent.getManaCost().clear();
-			permanent.getManaCost().add(card.getManaCost());
-			permanent.getCardType().clear();
-			for (CardType type : card.getCardType()) {
-				permanent.getCardType().add(type);
-			}
-			permanent.getSubtype().clear();
-			for (String type : card.getSubtype()) {
-				permanent.getSubtype().add(type);
-			}
-			permanent.getSupertype().clear();
-			for (String type : card.getSupertype()) {
-				permanent.getSupertype().add(type);
-			}
-			permanent.setExpansionSetCode(card.getExpansionSetCode());
-			permanent.getAbilities().clear();
-			for (Ability ability : card.getAbilities()) {
-				permanent.addAbility(ability, game);
-			}
+        @Override
+        public boolean apply(Game game, Ability source) {
+            Card card = game.getCard(source.getFirstTarget());
+            Permanent permanent = game.getPermanent(source.getSourceId());
+            permanent.setName(card.getName());
+            permanent.getColor().setColor(card.getColor());
+            permanent.getManaCost().clear();
+            permanent.getManaCost().add(card.getManaCost());
+            permanent.getCardType().clear();
+            for (CardType type : card.getCardType()) {
+                permanent.getCardType().add(type);
+            }
+            permanent.getSubtype().clear();
+            for (String type : card.getSubtype()) {
+                permanent.getSubtype().add(type);
+            }
+            permanent.getSupertype().clear();
+            for (String type : card.getSupertype()) {
+                permanent.getSupertype().add(type);
+            }
+            permanent.setExpansionSetCode(card.getExpansionSetCode());
+            permanent.getAbilities().clear();
+            for (Ability ability : card.getAbilities()) {
+                permanent.addAbility(ability, game);
+            }
 
-			return true;
-		}
+            return true;
+        }
 
-		@Override
-		public QuicksilverGargantuanCopyEffect copy() {
-			return new QuicksilverGargantuanCopyEffect(this);
-		}
+        @Override
+        public QuicksilverGargantuanCopyEffect copy() {
+            return new QuicksilverGargantuanCopyEffect(this);
+        }
 
-	}
+    }
 
 }

@@ -48,23 +48,23 @@ public class TreasureMage extends CardImpl<TreasureMage> {
 
     private static FilterCard filter = new FilterCard("an artifact card with converted mana cost 6 or more");
 
-	static {
-		filter.getCardType().add(CardType.ARTIFACT);
-		filter.setConvertedManaCost(5);
-		filter.setConvertedManaCostComparison(Filter.ComparisonType.GreaterThan);
-	}
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.setConvertedManaCost(5);
+        filter.setConvertedManaCostComparison(Filter.ComparisonType.GreaterThan);
+    }
 
     public TreasureMage (UUID ownerId) {
         super(ownerId, 34, "Treasure Mage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.expansionSetCode = "MBS";
         this.subtype.add("Human");
         this.subtype.add("Wizard");
-		this.color.setBlue(true);
+        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         TargetCardInLibrary target = new TargetCardInLibrary(0, 1, filter);
-		SearchEffect effect = new SearchLibraryRevealPutInHandEffect(target, false);
-		this.addAbility(new EntersBattlefieldTriggeredAbility(effect, true));
+        SearchEffect effect = new SearchLibraryRevealPutInHandEffect(target, false);
+        this.addAbility(new EntersBattlefieldTriggeredAbility(effect, true));
     }
 
     public TreasureMage (final TreasureMage card) {

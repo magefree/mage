@@ -45,7 +45,7 @@ public class GraspOfDarkness extends CardImpl<GraspOfDarkness> {
     public GraspOfDarkness (UUID ownerId) {
         super(ownerId, 65, "Grasp of Darkness", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}{B}");
         this.expansionSetCode = "SOM";
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.getSpellAbility().addEffect(new BoostTargetEffect(-4, -4, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

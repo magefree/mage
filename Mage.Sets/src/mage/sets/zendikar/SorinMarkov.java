@@ -61,23 +61,23 @@ public class SorinMarkov extends CardImpl<SorinMarkov> {
 
         this.color.setBlack(true);
 
-		this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4))));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4))));
 
         // +2: Sorin Markov deals 2 damage to target creature or player and you gain 2 life.
-		LoyaltyAbility ability1 = new LoyaltyAbility(new DamageTargetEffect(2), 2);
-		ability1.addEffect(new GainLifeEffect(2));
-		ability1.addTarget(new TargetCreatureOrPlayer());
-		this.addAbility(ability1);
+        LoyaltyAbility ability1 = new LoyaltyAbility(new DamageTargetEffect(2), 2);
+        ability1.addEffect(new GainLifeEffect(2));
+        ability1.addTarget(new TargetCreatureOrPlayer());
+        this.addAbility(ability1);
 
         // -3: Target opponent's life total becomes 10.
-		LoyaltyAbility ability2 = new LoyaltyAbility(new SorinMarkovEffect(), -3);
-		ability2.addTarget(new TargetOpponent());
-		this.addAbility(ability2);
+        LoyaltyAbility ability2 = new LoyaltyAbility(new SorinMarkovEffect(), -3);
+        ability2.addTarget(new TargetOpponent());
+        this.addAbility(ability2);
 
         // -7: You control target player during that player's next turn.
-		LoyaltyAbility ability3 = new LoyaltyAbility(new ControlTargetPlayerNextTurnEffect(), -7);
-		ability3.addTarget(new TargetPlayer());
-		this.addAbility(ability3);
+        LoyaltyAbility ability3 = new LoyaltyAbility(new ControlTargetPlayerNextTurnEffect(), -7);
+        ability3.addTarget(new TargetPlayer());
+        this.addAbility(ability3);
     }
 
     public SorinMarkov(final SorinMarkov card) {
@@ -92,27 +92,27 @@ public class SorinMarkov extends CardImpl<SorinMarkov> {
 
 class SorinMarkovEffect extends OneShotEffect<SorinMarkovEffect> {
 
-	public SorinMarkovEffect() {
-		super(Constants.Outcome.Benefit);
-		staticText = "Target opponent's life total becomes 10";
-	}
+    public SorinMarkovEffect() {
+        super(Constants.Outcome.Benefit);
+        staticText = "Target opponent's life total becomes 10";
+    }
 
-	public SorinMarkovEffect(SorinMarkovEffect effect) {
-		super(effect);
-	}
+    public SorinMarkovEffect(SorinMarkovEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(targetPointer.getFirst(game, source));
-		if (player != null) {
-			player.setLife(10, game);
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        if (player != null) {
+            player.setLife(10, game);
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public SorinMarkovEffect copy() {
-		return new SorinMarkovEffect(this);
-	}
+    @Override
+    public SorinMarkovEffect copy() {
+        return new SorinMarkovEffect(this);
+    }
 }

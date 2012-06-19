@@ -52,32 +52,32 @@ public class BaneslayerAngel extends CardImpl<BaneslayerAngel> {
     static {
         filter1.getSubtype().add("Demon");
         filter2.getSubtype().add("Dragon");
-		filter1.setScopeSubtype(ComparisonScope.Any);
-		filter2.setScopeSubtype(ComparisonScope.Any);
+        filter1.setScopeSubtype(ComparisonScope.Any);
+        filter2.setScopeSubtype(ComparisonScope.Any);
     }
 
-	public BaneslayerAngel(UUID ownerId) {
-		super(ownerId, 4, "Baneslayer Angel", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
-		this.expansionSetCode = "M10";
-		this.subtype.add("Angel");
-		this.color.setWhite(true);
-		this.power = new MageInt(5);
-		this.toughness = new MageInt(5);
+    public BaneslayerAngel(UUID ownerId) {
+        super(ownerId, 4, "Baneslayer Angel", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
+        this.expansionSetCode = "M10";
+        this.subtype.add("Angel");
+        this.color.setWhite(true);
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(5);
 
-		this.addAbility(FlyingAbility.getInstance());
-		this.addAbility(FirstStrikeAbility.getInstance());
-		this.addAbility(LifelinkAbility.getInstance());
-		this.addAbility(new ProtectionAbility(filter1));
-		this.addAbility(new ProtectionAbility(filter2));
-	}
+        this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(FirstStrikeAbility.getInstance());
+        this.addAbility(LifelinkAbility.getInstance());
+        this.addAbility(new ProtectionAbility(filter1));
+        this.addAbility(new ProtectionAbility(filter2));
+    }
 
-	public BaneslayerAngel(final BaneslayerAngel card) {
-		super(card);
-	}
+    public BaneslayerAngel(final BaneslayerAngel card) {
+        super(card);
+    }
 
-	@Override
-	public BaneslayerAngel copy() {
-		return new BaneslayerAngel(this);
-	}
+    @Override
+    public BaneslayerAngel copy() {
+        return new BaneslayerAngel(this);
+    }
 
 }

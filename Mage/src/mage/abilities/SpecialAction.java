@@ -37,13 +37,13 @@ import mage.Constants.Zone;
  */
 public abstract class SpecialAction<T extends SpecialAction<T>> extends ActivatedAbilityImpl<T> {
 
-	public SpecialAction() {
-		super(AbilityType.SPECIAL_ACTION, Zone.ALL);
-		this.usesStack = false;
-	}
+    public SpecialAction() {
+        super(AbilityType.SPECIAL_ACTION, Zone.ALL);
+        this.usesStack = false;
+    }
 
-	public SpecialAction(final SpecialAction action) {
-		super(action);
-	}
+    public SpecialAction(final SpecialAction action) {
+        super(action);
+    }
 
 }

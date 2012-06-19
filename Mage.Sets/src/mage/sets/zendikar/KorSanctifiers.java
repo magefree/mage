@@ -61,7 +61,7 @@ public class KorSanctifiers extends CardImpl<KorSanctifiers> {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Kor");
         this.subtype.add("Cleric");
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
         this.getSpellAbility().addOptionalCost(new KickerManaCost("{W}"));

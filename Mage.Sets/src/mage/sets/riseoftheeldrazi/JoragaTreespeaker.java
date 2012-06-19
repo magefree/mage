@@ -57,28 +57,28 @@ import java.util.UUID;
  */
 public class JoragaTreespeaker extends LevelerCard<JoragaTreespeaker> {
 
-	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elves");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elves");
 
-	static {
-		filter.getSubtype().add("Elf");
-	}
+    static {
+        filter.getSubtype().add("Elf");
+    }
 
-	public JoragaTreespeaker(UUID ownerId) {
-		super(ownerId, 190, "Joraga Treespeaker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}");
-		this.expansionSetCode = "ROE";
-		this.subtype.add("Elf");
-		this.subtype.add("Druid");
-        
-		this.color.setGreen(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
+    public JoragaTreespeaker(UUID ownerId) {
+        super(ownerId, 190, "Joraga Treespeaker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}");
+        this.expansionSetCode = "ROE";
+        this.subtype.add("Elf");
+        this.subtype.add("Druid");
 
-		this.addAbility(new LevelUpAbility(new ManaCostsImpl("{1}{G}")));
-        
-		Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
-		abilities1.add(new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.GreenMana(2)), new TapSourceCost()));
+        this.color.setGreen(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-		Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
+        this.addAbility(new LevelUpAbility(new ManaCostsImpl("{1}{G}")));
+
+        Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
+        abilities1.add(new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.GreenMana(2)), new TapSourceCost()));
+
+        Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
         abilities2.add(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityControlledEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                     new BasicManaEffect(Mana.GreenMana(2)),
@@ -89,16 +89,16 @@ public class JoragaTreespeaker extends LevelerCard<JoragaTreespeaker> {
                 new LevelerCardBuilder.LevelAbility(1, 4, abilities1, 1, 2),
                 new LevelerCardBuilder.LevelAbility(5, -1, abilities2, 1, 4)
         );
-	}
+    }
 
-	public JoragaTreespeaker(final JoragaTreespeaker card) {
-		super(card);
-	}
+    public JoragaTreespeaker(final JoragaTreespeaker card) {
+        super(card);
+    }
 
-	@Override
-	public JoragaTreespeaker copy() {
-		return new JoragaTreespeaker(this);
-	}
+    @Override
+    public JoragaTreespeaker copy() {
+        return new JoragaTreespeaker(this);
+    }
 
 }
 

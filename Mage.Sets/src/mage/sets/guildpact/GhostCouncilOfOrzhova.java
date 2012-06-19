@@ -60,8 +60,8 @@ public class GhostCouncilOfOrzhova extends CardImpl<GhostCouncilOfOrzhova> {
         this.expansionSetCode = "GPT";
         this.supertype.add("Legendary");
         this.subtype.add("Spirit");
-		this.color.setWhite(true);
-		this.color.setBlack(true);
+        this.color.setWhite(true);
+        this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         Ability ability = new EntersBattlefieldTriggeredAbility(new GhostCouncilOfOrzhovaEffect());
@@ -113,37 +113,37 @@ class GhostCouncilOfOrzhovaEffect extends OneShotEffect<GhostCouncilOfOrzhovaEff
 
 class GhostCouncilOfOrzhovaRemovingEffect extends OneShotEffect<GhostCouncilOfOrzhovaRemovingEffect> {
 
-	private static final String effectText = "Exile {this}. Return it to the battlefield under its owner's control at the beginning of the next end step";
+    private static final String effectText = "Exile {this}. Return it to the battlefield under its owner's control at the beginning of the next end step";
 
-	GhostCouncilOfOrzhovaRemovingEffect () {
-		super(Outcome.Benefit);
-		staticText = effectText;
-	}
+    GhostCouncilOfOrzhovaRemovingEffect () {
+        super(Outcome.Benefit);
+        staticText = effectText;
+    }
 
-	GhostCouncilOfOrzhovaRemovingEffect(GhostCouncilOfOrzhovaRemovingEffect effect) {
-		super(effect);
-	}
+    GhostCouncilOfOrzhovaRemovingEffect(GhostCouncilOfOrzhovaRemovingEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getSourceId());
-		if (permanent != null) {
-			if (permanent.moveToExile(source.getSourceId(), " Ghost Council of Orzhova Exile", source.getId(), game)) {
-				//create delayed triggered ability
-				AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(
-						new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
-				delayedAbility.setSourceId(source.getSourceId());
-				delayedAbility.setControllerId(source.getControllerId());
-				game.addDelayedTriggeredAbility(delayedAbility);
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            if (permanent.moveToExile(source.getSourceId(), " Ghost Council of Orzhova Exile", source.getId(), game)) {
+                //create delayed triggered ability
+                AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(
+                        new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
+                delayedAbility.setSourceId(source.getSourceId());
+                delayedAbility.setControllerId(source.getControllerId());
+                game.addDelayedTriggeredAbility(delayedAbility);
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public GhostCouncilOfOrzhovaRemovingEffect copy() {
-		return new GhostCouncilOfOrzhovaRemovingEffect(this);
-	}
+    @Override
+    public GhostCouncilOfOrzhovaRemovingEffect copy() {
+        return new GhostCouncilOfOrzhovaRemovingEffect(this);
+    }
 
 }

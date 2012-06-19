@@ -44,34 +44,34 @@ import java.util.UUID;
  */
 public class DestroyTargetEffect extends OneShotEffect<DestroyTargetEffect> {
 
-	protected boolean noRegen;
+    protected boolean noRegen;
 
-	public DestroyTargetEffect() {
-		this(false);
-	}
+    public DestroyTargetEffect() {
+        this(false);
+    }
 
     public DestroyTargetEffect(String ruleText) {
         this(false);
         staticText = ruleText;
     }
-	
-	public DestroyTargetEffect(boolean noRegen) {
-		super(Outcome.DestroyPermanent);
-		this.noRegen = noRegen;
-	}
 
-	public DestroyTargetEffect(final DestroyTargetEffect effect) {
-		super(effect);
-		this.noRegen = effect.noRegen;
-	}
+    public DestroyTargetEffect(boolean noRegen) {
+        super(Outcome.DestroyPermanent);
+        this.noRegen = noRegen;
+    }
 
-	@Override
-	public DestroyTargetEffect copy() {
-		return new DestroyTargetEffect(this);
-	}
+    public DestroyTargetEffect(final DestroyTargetEffect effect) {
+        super(effect);
+        this.noRegen = effect.noRegen;
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public DestroyTargetEffect copy() {
+        return new DestroyTargetEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
         int affectedTargets = 0;
         if (source.getTargets().size() > 1) { // for Rain of Thorns
             for (Target target : source.getTargets()) {
@@ -85,19 +85,19 @@ public class DestroyTargetEffect extends OneShotEffect<DestroyTargetEffect> {
             }
         }
         else if (targetPointer.getTargets(game, source).size() > 0) {
-			for (UUID permanentId : targetPointer.getTargets(game, source)) {
-				Permanent permanent = game.getPermanent(permanentId);
-				if (permanent != null) {
-					permanent.destroy(source.getId(), game, noRegen);
-					affectedTargets++;
-				}
-			}
-		}
-		return affectedTargets > 0;
-	}
+            for (UUID permanentId : targetPointer.getTargets(game, source)) {
+                Permanent permanent = game.getPermanent(permanentId);
+                if (permanent != null) {
+                    permanent.destroy(source.getId(), game, noRegen);
+                    affectedTargets++;
+                }
+            }
+        }
+        return affectedTargets > 0;
+    }
 
-	@Override
-	public String getText(Mode mode) {
+    @Override
+    public String getText(Mode mode) {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
@@ -111,6 +111,6 @@ public class DestroyTargetEffect extends OneShotEffect<DestroyTargetEffect> {
         if (noRegen)
             sb.append(". It can't be regenerated");
         return sb.toString();
-	}
+    }
 
 }

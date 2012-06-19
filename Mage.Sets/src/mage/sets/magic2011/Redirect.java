@@ -41,20 +41,20 @@ import mage.target.TargetSpell;
  */
 public class Redirect extends CardImpl<Redirect> {
 
-	public Redirect(UUID ownerId) {
-		super(ownerId, 71, "Redirect", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}{U}");
-		this.expansionSetCode = "M11";
-		this.color.setBlue(true);
-		this.getSpellAbility().addTarget(new TargetSpell());
-		this.getSpellAbility().addEffect(new ChooseNewTargetsTargetEffect());
-	}
+    public Redirect(UUID ownerId) {
+        super(ownerId, 71, "Redirect", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}{U}");
+        this.expansionSetCode = "M11";
+        this.color.setBlue(true);
+        this.getSpellAbility().addTarget(new TargetSpell());
+        this.getSpellAbility().addEffect(new ChooseNewTargetsTargetEffect());
+    }
 
-	public Redirect(final Redirect card) {
-		super(card);
-	}
+    public Redirect(final Redirect card) {
+        super(card);
+    }
 
-	@Override
-	public Redirect copy() {
-		return new Redirect(this);
-	}
+    @Override
+    public Redirect copy() {
+        return new Redirect(this);
+    }
 }

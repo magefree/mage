@@ -47,7 +47,7 @@ public class ChaliceOfDeath extends CardImpl<ChaliceOfDeath> {
     public ChaliceOfDeath(UUID ownerId) {
         super(ownerId, 146, "Chalice of Death", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "");
         this.expansionSetCode = "DKA";
-        
+
         // this card is the second face of double-faced card
         this.nightCard = true;
         this.canTransform = true;

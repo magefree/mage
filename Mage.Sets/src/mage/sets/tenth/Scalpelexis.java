@@ -60,7 +60,7 @@ public class Scalpelexis extends CardImpl<Scalpelexis> {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // Whenever Scalpelexis deals combat damage to a player, that player exiles the top four cards of his or her library. If two or more of those cards have the same name, repeat this process.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ScalpelexisEffect(), false, true));
     }
@@ -76,7 +76,7 @@ public class Scalpelexis extends CardImpl<Scalpelexis> {
 }
 
 class ScalpelexisEffect extends OneShotEffect<ScalpelexisEffect> {
-    
+
     public ScalpelexisEffect() {
         super(Constants.Outcome.Exile);
         this.staticText = "that player exiles the top four cards of his or her library. If two or more of those cards have the same name, repeat this process";
@@ -90,13 +90,13 @@ class ScalpelexisEffect extends OneShotEffect<ScalpelexisEffect> {
     public ScalpelexisEffect copy() {
         return new ScalpelexisEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         List<String> namesFiltered = new ArrayList<String>();
         boolean doneOnce = false;
-        
+
         while (checkDuplicatedNames(namesFiltered) || !doneOnce) {
             doneOnce = true;
             namesFiltered.clear();
@@ -111,9 +111,9 @@ class ScalpelexisEffect extends OneShotEffect<ScalpelexisEffect> {
         }
         return true;
     }
-    
+
     public boolean checkDuplicatedNames(List<String> string) {
-	for (int i = 0; i < string.size()-1; i++) {
+    for (int i = 0; i < string.size()-1; i++) {
             String stringToCheck = string.get(i);
             if(stringToCheck == null) continue; //empty ignore
                 for (int j = i+1; j < string.size(); j++) {
@@ -122,7 +122,7 @@ class ScalpelexisEffect extends OneShotEffect<ScalpelexisEffect> {
                             return true;
                         }
                 }
-	}
-	return false;
+    }
+    return false;
     }
 }

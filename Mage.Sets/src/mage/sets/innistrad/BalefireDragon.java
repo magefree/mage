@@ -59,8 +59,8 @@ public class BalefireDragon extends CardImpl<BalefireDragon> {
 
         this.addAbility(FlyingAbility.getInstance());
         // Whenever Balefire Dragon deals combat damage to a player, it deals that much damage to each creature that player controls.
-		this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new BalefireDragonEffect(), false, true));
-        
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new BalefireDragonEffect(), false, true));
+
     }
 
     public BalefireDragon(final BalefireDragon card) {
@@ -75,33 +75,33 @@ public class BalefireDragon extends CardImpl<BalefireDragon> {
 
 class BalefireDragonEffect extends OneShotEffect<BalefireDragonEffect> {
 
-	public BalefireDragonEffect() {
-		super(Outcome.Damage);
-		staticText = "it deals that much damage to each creature that player controls";
-	}
+    public BalefireDragonEffect() {
+        super(Outcome.Damage);
+        staticText = "it deals that much damage to each creature that player controls";
+    }
 
-	public BalefireDragonEffect(final BalefireDragonEffect effect) {
-		super(effect);
-	}
+    public BalefireDragonEffect(final BalefireDragonEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(targetPointer.getFirst(game, source));
-		if (player != null) {
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        if (player != null) {
             int amount = (Integer)getValue("damage");
             if (amount > 0) {
                 for (Permanent creature: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game)) {
                     creature.damage(amount, source.getSourceId(), game, true, false);
                 }
             }
-			return true;
-		}
-		return false;
-	}
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public BalefireDragonEffect copy() {
-		return new BalefireDragonEffect(this);
-	}
+    @Override
+    public BalefireDragonEffect copy() {
+        return new BalefireDragonEffect(this);
+    }
 
 }

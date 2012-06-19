@@ -50,34 +50,34 @@ import mage.players.Player;
  */
 public class DarkTutelage extends CardImpl<DarkTutelage> {
 
-	public DarkTutelage(UUID ownerId) {
-		super(ownerId, 90, "Dark Tutelage", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
-		this.expansionSetCode = "M11";
-		this.getColor().setBlack(true);
-		this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new DarkTutelageEffect(), false));
-	}
+    public DarkTutelage(UUID ownerId) {
+        super(ownerId, 90, "Dark Tutelage", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
+        this.expansionSetCode = "M11";
+        this.getColor().setBlack(true);
+        this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new DarkTutelageEffect(), false));
+    }
 
-	public DarkTutelage(final DarkTutelage card) {
-		super(card);
-	}
+    public DarkTutelage(final DarkTutelage card) {
+        super(card);
+    }
 
-	@Override
-	public DarkTutelage copy() {
-		return new DarkTutelage(this);
-	}
+    @Override
+    public DarkTutelage copy() {
+        return new DarkTutelage(this);
+    }
 
 }
 
 class DarkTutelageEffect extends OneShotEffect<DarkTutelageEffect> {
 
-	public DarkTutelageEffect() {
-		super(Outcome.DrawCard);
-		staticText = "reveal the top card of your library and put that card into your hand. You lose life equal to its converted mana cost";
-	}
+    public DarkTutelageEffect() {
+        super(Outcome.DrawCard);
+        staticText = "reveal the top card of your library and put that card into your hand. You lose life equal to its converted mana cost";
+    }
 
-	public DarkTutelageEffect(final DarkTutelageEffect effect) {
-		super(effect);
-	}
+    public DarkTutelageEffect(final DarkTutelageEffect effect) {
+        super(effect);
+    }
 
     @Override
     public boolean apply(Game game, Ability source) {
@@ -96,9 +96,9 @@ class DarkTutelageEffect extends OneShotEffect<DarkTutelageEffect> {
         return false;
     }
 
-	@Override
-	public DarkTutelageEffect copy() {
-		return new DarkTutelageEffect(this);
-	}
+    @Override
+    public DarkTutelageEffect copy() {
+        return new DarkTutelageEffect(this);
+    }
 
 }

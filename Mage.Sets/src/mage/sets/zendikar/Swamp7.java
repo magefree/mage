@@ -36,18 +36,18 @@ import java.util.UUID;
  */
 public class Swamp7 extends mage.cards.basiclands.Swamp {
 
-	public Swamp7(UUID ownerId) {
-		super(ownerId, 260);
-		this.expansionSetCode = "ZEN";
-	}
+    public Swamp7(UUID ownerId) {
+        super(ownerId, 260);
+        this.expansionSetCode = "ZEN";
+    }
 
-	public Swamp7(final Swamp7 card) {
-		super(card);
-	}
+    public Swamp7(final Swamp7 card) {
+        super(card);
+    }
 
-	@Override
-	public Swamp7 copy() {
-		return new Swamp7(this);
-	}
+    @Override
+    public Swamp7 copy() {
+        return new Swamp7(this);
+    }
 
 }

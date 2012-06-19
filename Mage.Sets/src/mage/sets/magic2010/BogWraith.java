@@ -41,23 +41,23 @@ import mage.cards.CardImpl;
  */
 public class BogWraith extends CardImpl<BogWraith> {
 
-	public BogWraith(UUID ownerId) {
-		super(ownerId, 86, "Bog Wraith", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
-		this.expansionSetCode = "M10";
-		this.color.setBlack(true);
-		this.subtype.add("Wraith");
-		this.power = new MageInt(3);
-		this.toughness = new MageInt(3);
-		this.addAbility(new SwampwalkAbility());
-	}
+    public BogWraith(UUID ownerId) {
+        super(ownerId, 86, "Bog Wraith", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
+        this.expansionSetCode = "M10";
+        this.color.setBlack(true);
+        this.subtype.add("Wraith");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+        this.addAbility(new SwampwalkAbility());
+    }
 
-	public BogWraith(final BogWraith card) {
-		super(card);
-	}
+    public BogWraith(final BogWraith card) {
+        super(card);
+    }
 
-	@Override
-	public BogWraith copy() {
-		return new BogWraith(this);
-	}
+    @Override
+    public BogWraith copy() {
+        return new BogWraith(this);
+    }
 
 }

@@ -46,8 +46,8 @@ public class FlamebornHellion extends CardImpl<FlamebornHellion> {
         super(ownerId, 89, "Flameborn Hellion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{R}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Hellion");
-        
-		this.color.setRed(true);
+
+        this.color.setRed(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
         this.addAbility(HasteAbility.getInstance());

@@ -54,7 +54,7 @@ public class RevokeExistence extends CardImpl<RevokeExistence> {
     public RevokeExistence (UUID ownerId) {
         super(ownerId, 18, "Revoke Existence", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{W}");
         this.expansionSetCode = "SOM";
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         this.getSpellAbility().addEffect(new ExileTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }

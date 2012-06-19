@@ -48,29 +48,29 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class AbsoluteLaw extends CardImpl<AbsoluteLaw> {
 
-	private static final FilterCard filter = new FilterCard("Red");
+    private static final FilterCard filter = new FilterCard("Red");
 
-	static {
-		filter.setUseColor(true);
-		filter.getColor().setRed(true);
-		filter.setScopeColor(ComparisonScope.Any);
-	}
+    static {
+        filter.setUseColor(true);
+        filter.getColor().setRed(true);
+        filter.setScopeColor(ComparisonScope.Any);
+    }
 
-	public AbsoluteLaw(UUID ownerId) {
-		super(ownerId, 2, "Absolute Law", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
-		this.expansionSetCode = "USG";
-		this.color.setWhite(true);
-		Ability ability = new ProtectionAbility(filter);
+    public AbsoluteLaw(UUID ownerId) {
+        super(ownerId, 2, "Absolute Law", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
+        this.expansionSetCode = "USG";
+        this.color.setWhite(true);
+        Ability ability = new ProtectionAbility(filter);
                 this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false)));
-	}
+    }
 
-	public AbsoluteLaw(final AbsoluteLaw card) {
-		super(card);
-	}
+    public AbsoluteLaw(final AbsoluteLaw card) {
+        super(card);
+    }
 
-	@Override
-	public AbsoluteLaw copy() {
-		return new AbsoluteLaw(this);
-	}
+    @Override
+    public AbsoluteLaw copy() {
+        return new AbsoluteLaw(this);
+    }
 
 }

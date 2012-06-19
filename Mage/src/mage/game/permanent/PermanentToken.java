@@ -42,71 +42,71 @@ import java.util.UUID;
  */
 public class PermanentToken extends PermanentImpl<PermanentToken> {
 
-	protected Token token;
-	
-	public PermanentToken(Token token, UUID controllerId, String expansionSetCode) {
-		super(controllerId, controllerId, token.getName());
-		this.token = token;
-		this.expansionSetCode = expansionSetCode;
-	}
+    protected Token token;
 
-	public PermanentToken(final PermanentToken permanent) {
-		super(permanent);
-		this.token = permanent.token.copy();
-		this.expansionSetCode = permanent.expansionSetCode;
-	}
+    public PermanentToken(Token token, UUID controllerId, String expansionSetCode) {
+        super(controllerId, controllerId, token.getName());
+        this.token = token;
+        this.expansionSetCode = expansionSetCode;
+    }
 
-	@Override
-	public void reset(Game game) {
-		Token copy = token.copy();
-		copyFromToken(copy, game);
-		super.reset(game);
-	}
+    public PermanentToken(final PermanentToken permanent) {
+        super(permanent);
+        this.token = permanent.token.copy();
+        this.expansionSetCode = permanent.expansionSetCode;
+    }
 
-	protected void copyFromToken(Token token, Game game) {
-		this.name = token.getName();
-		this.abilities.clear();
-		for (Ability ability: token.getAbilities()) {
-			this.addAbility(ability, game);
-		}
-		this.cardType = token.getCardType();
-		this.color = token.getColor();
-		this.power = token.getPower();
-		this.toughness = token.getToughness();
-		this.subtype = token.getSubtype();
-	}
+    @Override
+    public void reset(Game game) {
+        Token copy = token.copy();
+        copyFromToken(copy, game);
+        super.reset(game);
+    }
 
-	@Override
-	public boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag) {
-		if (!game.replaceEvent(new ZoneChangeEvent(this, this.getControllerId(), Zone.BATTLEFIELD, zone))) {
-			game.rememberLKI(objectId, Zone.BATTLEFIELD, this);
-			if (game.getPlayer(controllerId).removeFromBattlefield(this, game)) {
-				game.fireEvent(new ZoneChangeEvent(this, this.getControllerId(), Zone.BATTLEFIELD, zone));
-				return true;
-			}
-		}
-		return false;
-	}
+    protected void copyFromToken(Token token, Game game) {
+        this.name = token.getName();
+        this.abilities.clear();
+        for (Ability ability: token.getAbilities()) {
+            this.addAbility(ability, game);
+        }
+        this.cardType = token.getCardType();
+        this.color = token.getColor();
+        this.power = token.getPower();
+        this.toughness = token.getToughness();
+        this.subtype = token.getSubtype();
+    }
 
-	@Override
-	public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game) {
-		if (!game.replaceEvent(new ZoneChangeEvent(this, sourceId, this.getControllerId(), Zone.BATTLEFIELD, Zone.EXILED))) {
-			game.rememberLKI(objectId, Zone.BATTLEFIELD, this);
-			if (game.getPlayer(controllerId).removeFromBattlefield(this, game)) {
-				game.fireEvent(new ZoneChangeEvent(this, sourceId, this.getControllerId(), Zone.BATTLEFIELD, Zone.EXILED));
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag) {
+        if (!game.replaceEvent(new ZoneChangeEvent(this, this.getControllerId(), Zone.BATTLEFIELD, zone))) {
+            game.rememberLKI(objectId, Zone.BATTLEFIELD, this);
+            if (game.getPlayer(controllerId).removeFromBattlefield(this, game)) {
+                game.fireEvent(new ZoneChangeEvent(this, this.getControllerId(), Zone.BATTLEFIELD, zone));
+                return true;
+            }
+        }
+        return false;
+    }
 
-	public Token getToken() {
-		return token;
-	}
+    @Override
+    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game) {
+        if (!game.replaceEvent(new ZoneChangeEvent(this, sourceId, this.getControllerId(), Zone.BATTLEFIELD, Zone.EXILED))) {
+            game.rememberLKI(objectId, Zone.BATTLEFIELD, this);
+            if (game.getPlayer(controllerId).removeFromBattlefield(this, game)) {
+                game.fireEvent(new ZoneChangeEvent(this, sourceId, this.getControllerId(), Zone.BATTLEFIELD, Zone.EXILED));
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public PermanentToken copy() {
-		return new PermanentToken(this);
-	}
+    public Token getToken() {
+        return token;
+    }
+
+    @Override
+    public PermanentToken copy() {
+        return new PermanentToken(this);
+    }
 
 }

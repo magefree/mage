@@ -45,32 +45,32 @@ import mage.filter.FilterCard;
  */
 public class VoiceOfGrace extends CardImpl<VoiceOfGrace> {
 
-	private static final FilterCard filter = new FilterCard("Black");
+    private static final FilterCard filter = new FilterCard("Black");
 
-	static {
-		filter.setUseColor(true);
-		filter.getColor().setBlack(true);
-		filter.setScopeColor(ComparisonScope.Any);
-	}
+    static {
+        filter.setUseColor(true);
+        filter.getColor().setBlack(true);
+        filter.setScopeColor(ComparisonScope.Any);
+    }
 
-	public VoiceOfGrace(UUID ownerId) {
-		super(ownerId, 54, "Voice Of Grace", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
-		this.expansionSetCode = "USG";
-		this.subtype.add("Angel");
-		this.color.setWhite(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+    public VoiceOfGrace(UUID ownerId) {
+        super(ownerId, 54, "Voice Of Grace", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
+        this.expansionSetCode = "USG";
+        this.subtype.add("Angel");
+        this.color.setWhite(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
                 this.addAbility(FlyingAbility.getInstance());
-		this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(new ProtectionAbility(filter));
         }
 
-	public VoiceOfGrace(final VoiceOfGrace card) {
-		super(card);
-	}
+    public VoiceOfGrace(final VoiceOfGrace card) {
+        super(card);
+    }
 
-	@Override
-	public VoiceOfGrace copy() {
-		return new VoiceOfGrace(this);
-	}
+    @Override
+    public VoiceOfGrace copy() {
+        return new VoiceOfGrace(this);
+    }
 
 }

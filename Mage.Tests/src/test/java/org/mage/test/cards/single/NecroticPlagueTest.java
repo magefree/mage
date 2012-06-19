@@ -18,12 +18,12 @@ public class NecroticPlagueTest extends CardTestPlayerBase {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Swamp", 4);
         addCard(Constants.Zone.HAND, playerA, "Necrotic Plague");
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Sejiri Merfolk");
-        
+
         castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Necrotic Plague", "Sejiri Merfolk");
 
         setStopAt(2, Constants.PhaseStep.PRECOMBAT_MAIN);
         execute();
-        
+
         assertLife(playerA, 20);
         assertLife(playerB, 20);
         assertPermanentCount(playerB, "Sejiri Merfolk", 0);
@@ -38,12 +38,12 @@ public class NecroticPlagueTest extends CardTestPlayerBase {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Goblin Deathraiders");
         addCard(Constants.Zone.HAND, playerA, "Necrotic Plague");
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Sejiri Merfolk");
-        
+
         castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Necrotic Plague", "Sejiri Merfolk");
 
         setStopAt(3, Constants.PhaseStep.PRECOMBAT_MAIN);
         execute();
-        
+
         assertLife(playerA, 20);
         assertLife(playerB, 20);
         assertPermanentCount(playerA, "Goblin Deathraiders", 0);
@@ -54,5 +54,5 @@ public class NecroticPlagueTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, 1);
         assertGraveyardCount(playerB, "Sejiri Merfolk", 1);
     }
-    
+
 }

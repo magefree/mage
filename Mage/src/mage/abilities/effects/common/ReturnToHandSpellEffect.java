@@ -38,9 +38,9 @@ public class ReturnToHandSpellEffect extends PostResolveEffect<ReturnToHandSpell
             return fINSTANCE;
         }
 
-	@Override
-	public void postResolve(Card card, Ability source, UUID controllerId, Game game) {
-		card.moveToZone(Zone.HAND, source.getId(), game, false);
-	}
+    @Override
+    public void postResolve(Card card, Ability source, UUID controllerId, Game game) {
+        card.moveToZone(Zone.HAND, source.getId(), game, false);
+    }
 }
 

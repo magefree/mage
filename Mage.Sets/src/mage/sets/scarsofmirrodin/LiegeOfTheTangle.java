@@ -64,11 +64,11 @@ public class LiegeOfTheTangle extends CardImpl<LiegeOfTheTangle> {
         super(ownerId, 123, "Liege of the Tangle", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{6}{G}{G}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Elemental");
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
-		this.addAbility(TrampleAbility.getInstance());
-		this.addAbility(new LiegeOfTheTangleTriggeredAbility());
+        this.addAbility(TrampleAbility.getInstance());
+        this.addAbility(new LiegeOfTheTangleTriggeredAbility());
     }
 
     public LiegeOfTheTangle (final LiegeOfTheTangle card) {
@@ -82,113 +82,113 @@ public class LiegeOfTheTangle extends CardImpl<LiegeOfTheTangle> {
 }
 
 class LiegeOfTheTangleTriggeredAbility extends TriggeredAbilityImpl<LiegeOfTheTangleTriggeredAbility> {
-	LiegeOfTheTangleTriggeredAbility() {
-		super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.AWAKENING.createInstance()));
-		this.addEffect(new LiegeOfTheTangleEffect());
-//		Ability ability  = new SimpleStaticAbility(Constants.Zone.BATTLEFIELD,
-//                        	new ConditionalContinousEffect(
+    LiegeOfTheTangleTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.AWAKENING.createInstance()));
+        this.addEffect(new LiegeOfTheTangleEffect());
+//        Ability ability  = new SimpleStaticAbility(Constants.Zone.BATTLEFIELD,
+//                            new ConditionalContinousEffect(
 //                                new BecomesCreatureSourceEOTEffect(new AwakeningLandToken(), "land"),
 //                                new HaveCounter(CounterType.AWAKENING),
 //                                "This land is an 8/8 green Elemental creature for as long as it has an awakening counter on it. It's still a land"));
 //        this.addEffect(new GainAbilityTargetEffect(ability, Constants.Duration.EndOfGame));
-		Target target = new TargetLandPermanent(0, Integer.MAX_VALUE, new FilterLandPermanent(), true);
-		this.addTarget(target);
-	}
+        Target target = new TargetLandPermanent(0, Integer.MAX_VALUE, new FilterLandPermanent(), true);
+        this.addTarget(target);
+    }
 
-	public LiegeOfTheTangleTriggeredAbility(final LiegeOfTheTangleTriggeredAbility ability) {
-		super(ability);
-	}
+    public LiegeOfTheTangleTriggeredAbility(final LiegeOfTheTangleTriggeredAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public LiegeOfTheTangleTriggeredAbility copy() {
-		return new LiegeOfTheTangleTriggeredAbility(this);
-	}
+    @Override
+    public LiegeOfTheTangleTriggeredAbility copy() {
+        return new LiegeOfTheTangleTriggeredAbility(this);
+    }
 
-	@Override
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event instanceof DamagedPlayerEvent) {
             DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
             Permanent p = game.getPermanent(event.getSourceId());
             if (damageEvent.isCombatDamage() && p != null && p.getId().equals(this.getSourceId())) {
-			    return true;
+                return true;
             }
         }
         return false;
     }
 
-	@Override
-	public String getRule() {
-		return "Whenever {this} deals combat damage to a player, you may choose any number of target lands you control and put an awakening counter on each of them. Each of those lands is an 8/8 green Elemental creature for as long as it has an awakening counter on it. They're still lands.";
-	}
+    @Override
+    public String getRule() {
+        return "Whenever {this} deals combat damage to a player, you may choose any number of target lands you control and put an awakening counter on each of them. Each of those lands is an 8/8 green Elemental creature for as long as it has an awakening counter on it. They're still lands.";
+    }
 }
 
 class LiegeOfTheTangleEffect extends ContinuousEffectImpl<LiegeOfTheTangleEffect> {
 
-	private static AwakeningLandToken token = new AwakeningLandToken();
+    private static AwakeningLandToken token = new AwakeningLandToken();
 
-	public LiegeOfTheTangleEffect() {
-		super(Duration.EndOfGame, Outcome.BecomeCreature);
-	}
+    public LiegeOfTheTangleEffect() {
+        super(Duration.EndOfGame, Outcome.BecomeCreature);
+    }
 
-	public LiegeOfTheTangleEffect(final LiegeOfTheTangleEffect effect) {
-		super(effect);
-	}
+    public LiegeOfTheTangleEffect(final LiegeOfTheTangleEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-		for (UUID permId: objects) {
-			Permanent perm = game.getPermanent(permId);
-			if (perm != null) {
-				if (perm.getCounters().getCount(CounterType.AWAKENING) > 0) {
-					switch (layer) {
-						case TypeChangingEffects_4:
-							if (sublayer == SubLayer.NA) {
-								perm.getCardType().addAll(token.getCardType());
-								perm.getSubtype().addAll(token.getSubtype());
-							}
-							break;
-						case ColorChangingEffects_5:
-							if (sublayer == SubLayer.NA) {
-								perm.getColor().setColor(token.getColor());
-							}
-							break;
-						case PTChangingEffects_7:
-							if (sublayer == SubLayer.SetPT_7b) {
-								perm.getPower().setValue(token.getPower().getValue());
-								perm.getToughness().setValue(token.getToughness().getValue());
-							}
-							break;
-					}
-				}
-			}
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        for (UUID permId: objects) {
+            Permanent perm = game.getPermanent(permId);
+            if (perm != null) {
+                if (perm.getCounters().getCount(CounterType.AWAKENING) > 0) {
+                    switch (layer) {
+                        case TypeChangingEffects_4:
+                            if (sublayer == SubLayer.NA) {
+                                perm.getCardType().addAll(token.getCardType());
+                                perm.getSubtype().addAll(token.getSubtype());
+                            }
+                            break;
+                        case ColorChangingEffects_5:
+                            if (sublayer == SubLayer.NA) {
+                                perm.getColor().setColor(token.getColor());
+                            }
+                            break;
+                        case PTChangingEffects_7:
+                            if (sublayer == SubLayer.SetPT_7b) {
+                                perm.getPower().setValue(token.getPower().getValue());
+                                perm.getToughness().setValue(token.getToughness().getValue());
+                            }
+                            break;
+                    }
+                }
+            }
+        }
+        return true;
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
 
-	@Override
-	public void init(Ability source, Game game) {
-		super.init(source, game);
-		if (this.affectedObjectsSet) {
-			for (UUID permId: targetPointer.getTargets(game, source)) {
-				objects.add(permId);
-			}
-		}
-	}
+    @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        if (this.affectedObjectsSet) {
+            for (UUID permId: targetPointer.getTargets(game, source)) {
+                objects.add(permId);
+            }
+        }
+    }
 
-	@Override
-	public LiegeOfTheTangleEffect copy() {
-		return new LiegeOfTheTangleEffect(this);
-	}
+    @Override
+    public LiegeOfTheTangleEffect copy() {
+        return new LiegeOfTheTangleEffect(this);
+    }
 
-	@Override
-	public boolean hasLayer(Layer layer) {
-		return layer == Layer.PTChangingEffects_7 || layer == Layer.ColorChangingEffects_5 || layer == layer.TypeChangingEffects_4;
-	}
+    @Override
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.PTChangingEffects_7 || layer == Layer.ColorChangingEffects_5 || layer == layer.TypeChangingEffects_4;
+    }
 
 }
 
@@ -197,10 +197,10 @@ class AwakeningLandToken extends Token {
     public AwakeningLandToken() {
         super("", "an 8/8 green Elemental creature");
         cardType.add(CardType.CREATURE);
-		color.setGreen(true);
-		subtype.add("Elemental");
-		power = new MageInt(8);
-		toughness = new MageInt(8);
+        color.setGreen(true);
+        subtype.add("Elemental");
+        power = new MageInt(8);
+        toughness = new MageInt(8);
     }
 }
 

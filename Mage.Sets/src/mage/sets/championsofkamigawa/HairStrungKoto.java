@@ -54,11 +54,11 @@ public class HairStrungKoto extends CardImpl<HairStrungKoto> {
         filter.setTapped(false);
         filter.setUseTapped(true);
     }
-    
+
         public HairStrungKoto (UUID ownerId) {
         super(ownerId, 252, "Hair-Strung Koto", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{6}");
         this.expansionSetCode = "CHK";
-        
+
         /* Tap an untapped creature you control: Target player puts the top 
          * card of his or her library into his or her graveyard. 
          */

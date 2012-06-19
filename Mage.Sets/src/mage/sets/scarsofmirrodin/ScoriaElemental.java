@@ -45,7 +45,7 @@ public class ScoriaElemental extends CardImpl<ScoriaElemental> {
         super(ownerId, 102, "Scoria Elemental", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Elemental");
-		this.color.setRed(true);        
+        this.color.setRed(true);        
         this.power = new MageInt(6);
         this.toughness = new MageInt(1);
     }

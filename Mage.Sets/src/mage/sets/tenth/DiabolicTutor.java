@@ -49,12 +49,12 @@ public class DiabolicTutor extends CardImpl<DiabolicTutor> {
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(target));
     }
 
-	public DiabolicTutor(final DiabolicTutor card) {
-		super(card);
-	}
+    public DiabolicTutor(final DiabolicTutor card) {
+        super(card);
+    }
 
-	@Override
-	public DiabolicTutor copy() {
-		return new DiabolicTutor(this);
-	}
+    @Override
+    public DiabolicTutor copy() {
+        return new DiabolicTutor(this);
+    }
 }

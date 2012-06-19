@@ -41,385 +41,385 @@ import java.io.Serializable;
  */
 public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
 
-	protected int red;
-	protected int green;
-	protected int blue;
-	protected int white;
-	protected int black;
-	protected int colorless;
-	protected int any;
+    protected int red;
+    protected int green;
+    protected int blue;
+    protected int white;
+    protected int black;
+    protected int colorless;
+    protected int any;
 
-	public static final Mana RedMana = RedMana(1);
-	public static final Mana GreenMana = GreenMana(1);
-	public static final Mana BlueMana = BlueMana(1);
-	public static final Mana WhiteMana = WhiteMana(1);
-	public static final Mana BlackMana = BlackMana(1);
-	public static final Mana ColorlessMana = ColorlessMana(1);
+    public static final Mana RedMana = RedMana(1);
+    public static final Mana GreenMana = GreenMana(1);
+    public static final Mana BlueMana = BlueMana(1);
+    public static final Mana WhiteMana = WhiteMana(1);
+    public static final Mana BlackMana = BlackMana(1);
+    public static final Mana ColorlessMana = ColorlessMana(1);
 
-	public Mana() {}
+    public Mana() {}
 
-	public Mana(final Mana mana) {
-		red = mana.red;
-		green = mana.green;
-		blue = mana.blue;
-		white = mana.white;
-		black = mana.black;
-		colorless = mana.colorless;
-		any = mana.any;
-	}
+    public Mana(final Mana mana) {
+        red = mana.red;
+        green = mana.green;
+        blue = mana.blue;
+        white = mana.white;
+        black = mana.black;
+        colorless = mana.colorless;
+        any = mana.any;
+    }
 
-	public Mana(ColoredManaSymbol color) {
-		switch (color) {
-			case G:
-				green = 1;
-				break;
-			case R:
-				red = 1;
-				break;
-			case B:
-				black = 1;
-				break;
-			case U:
-				blue = 1;
-				break;
-			case W:
-				white = 1;
-				break;
-		}
-	}
+    public Mana(ColoredManaSymbol color) {
+        switch (color) {
+            case G:
+                green = 1;
+                break;
+            case R:
+                red = 1;
+                break;
+            case B:
+                black = 1;
+                break;
+            case U:
+                blue = 1;
+                break;
+            case W:
+                white = 1;
+                break;
+        }
+    }
 
-	public static Mana RedMana(int num) {
-		return new Mana(num, 0, 0, 0, 0, 0, 0);
-	}
+    public static Mana RedMana(int num) {
+        return new Mana(num, 0, 0, 0, 0, 0, 0);
+    }
 
-	public static Mana GreenMana(int num) {
-		return new Mana(0, num, 0, 0, 0, 0, 0);
-	}
+    public static Mana GreenMana(int num) {
+        return new Mana(0, num, 0, 0, 0, 0, 0);
+    }
 
-	public static Mana BlueMana(int num) {
-		return new Mana(0, 0, num, 0, 0, 0, 0);
-	}
+    public static Mana BlueMana(int num) {
+        return new Mana(0, 0, num, 0, 0, 0, 0);
+    }
 
-	public static Mana WhiteMana(int num) {
-		return new Mana(0, 0, 0, num, 0, 0, 0);
-	}
+    public static Mana WhiteMana(int num) {
+        return new Mana(0, 0, 0, num, 0, 0, 0);
+    }
 
-	public static Mana BlackMana(int num) {
-		return new Mana(0, 0, 0, 0, num, 0, 0);
-	}
+    public static Mana BlackMana(int num) {
+        return new Mana(0, 0, 0, 0, num, 0, 0);
+    }
 
-	public static Mana ColorlessMana(int num) {
-		return new Mana(0, 0, 0, 0, 0, num, 0);
-	}
+    public static Mana ColorlessMana(int num) {
+        return new Mana(0, 0, 0, 0, 0, num, 0);
+    }
 
-	public Mana(int red, int green, int blue, int white, int black, int colorless, int any) {
-		this.red = red;
-		this.green = green;
-		this.blue = blue;
-		this.white = white;
-		this.black = black;
-		this.colorless = colorless;
-		this.any = any;
-	}
+    public Mana(int red, int green, int blue, int white, int black, int colorless, int any) {
+        this.red = red;
+        this.green = green;
+        this.blue = blue;
+        this.white = white;
+        this.black = black;
+        this.colorless = colorless;
+        this.any = any;
+    }
 
-	public void add(Mana mana) {
-		red += mana.getRed();
-		green += mana.getGreen();
-		blue += mana.getBlue();
-		white += mana.getWhite();
-		black += mana.getBlack();
-		colorless += mana.getColorless();
-		any += mana.getAny();
-	}
+    public void add(Mana mana) {
+        red += mana.getRed();
+        green += mana.getGreen();
+        blue += mana.getBlue();
+        white += mana.getWhite();
+        black += mana.getBlack();
+        colorless += mana.getColorless();
+        any += mana.getAny();
+    }
 
-	public void addRed() {
-		red++;
-	}
+    public void addRed() {
+        red++;
+    }
 
-	public void addGreen() {
-		green++;
-	}
+    public void addGreen() {
+        green++;
+    }
 
-	public void addBlue() {
-		blue++;
-	}
+    public void addBlue() {
+        blue++;
+    }
 
-	public void addWhite() {
-		white++;
-	}
+    public void addWhite() {
+        white++;
+    }
 
-	public void addBlack() {
-		black++;
-	}
+    public void addBlack() {
+        black++;
+    }
 
-	public void addColorless() {
-		colorless++;
-	}
+    public void addColorless() {
+        colorless++;
+    }
 
-	public void subtract(Mana mana) {
-		red -= mana.getRed();
-		green -= mana.getGreen();
-		blue -= mana.getBlue();
-		white -= mana.getWhite();
-		black -= mana.getBlack();
-		colorless -= mana.getColorless();
-		any -= mana.getAny();
-	}
+    public void subtract(Mana mana) {
+        red -= mana.getRed();
+        green -= mana.getGreen();
+        blue -= mana.getBlue();
+        white -= mana.getWhite();
+        black -= mana.getBlack();
+        colorless -= mana.getColorless();
+        any -= mana.getAny();
+    }
 
-	public int count() {
-		return red + green + blue + white + black + colorless + any;
-	}
+    public int count() {
+        return red + green + blue + white + black + colorless + any;
+    }
 
-	public int count(FilterMana filter) {
-		if (filter == null) {
-			return count();
-		}
-		int count = 0;
-		if (filter.isBlack()) count += black;
-		if (filter.isBlue()) count += blue;
-		if (filter.isWhite()) count += white;
-		if (filter.isGreen()) count += green;
-		if (filter.isRed()) count += red;
-		if (filter.isColorless()) count += colorless;
-		return count;
-	}
+    public int count(FilterMana filter) {
+        if (filter == null) {
+            return count();
+        }
+        int count = 0;
+        if (filter.isBlack()) count += black;
+        if (filter.isBlue()) count += blue;
+        if (filter.isWhite()) count += white;
+        if (filter.isGreen()) count += green;
+        if (filter.isRed()) count += red;
+        if (filter.isColorless()) count += colorless;
+        return count;
+    }
 
-	public void clear() {
-		red = 0;
-		green = 0;
-		blue = 0;
-		white = 0;
-		black = 0;
-		colorless = 0;
-		any = 0;
-	}
+    public void clear() {
+        red = 0;
+        green = 0;
+        blue = 0;
+        white = 0;
+        black = 0;
+        colorless = 0;
+        any = 0;
+    }
 
-	@Override
-	public String toString() {
-		StringBuilder sbMana = new StringBuilder();
+    @Override
+    public String toString() {
+        StringBuilder sbMana = new StringBuilder();
 
-		for (int i = 0; i < red; i++)
-			sbMana.append("{R}");
-		for (int i = 0; i < green; i++)
-			sbMana.append("{G}");
-		for (int i = 0; i < blue; i++)
-			sbMana.append("{U}");
-		for (int i = 0; i < black; i++)
-			sbMana.append("{B}");
-		for (int i = 0; i < white; i++)
-			sbMana.append("{W}");
+        for (int i = 0; i < red; i++)
+            sbMana.append("{R}");
+        for (int i = 0; i < green; i++)
+            sbMana.append("{G}");
+        for (int i = 0; i < blue; i++)
+            sbMana.append("{U}");
+        for (int i = 0; i < black; i++)
+            sbMana.append("{B}");
+        for (int i = 0; i < white; i++)
+            sbMana.append("{W}");
         for (int i = 0; i < any; i++)
             sbMana.append("{Any}");
-		if (colorless > 0) {
-			sbMana.append("{").append(Integer.toString(colorless)).append("}");
-		}
-		return sbMana.toString();
-	}
+        if (colorless > 0) {
+            sbMana.append("{").append(Integer.toString(colorless)).append("}");
+        }
+        return sbMana.toString();
+    }
 
-	@Override
-	public Mana copy() {
-		return new Mana(this);
-	}
+    @Override
+    public Mana copy() {
+        return new Mana(this);
+    }
 
-	public boolean enough(Mana avail) {
-		Mana compare = avail.copy();
-		compare.subtract(this);
-		if (compare.getRed() < 0) {
-			compare.setAny(compare.getAny() + compare.getRed());
-			if (compare.getAny() < 0)
-				return false;
-			compare.setRed(0);
-		}
-		if (compare.getGreen() < 0) {
-			compare.setAny(compare.getAny() + compare.getGreen());
-			if (compare.getAny() < 0)
-				return false;
-			compare.setGreen(0);
-		}
-		if (compare.getBlue() < 0) {
-			compare.setAny(compare.getAny() + compare.getBlue());
-			if (compare.getAny() < 0)
-				return false;
-			compare.setBlue(0);
-		}
-		if (compare.getBlack() < 0) {
-			compare.setAny(compare.getAny() + compare.getBlack());
-			if (compare.getAny() < 0)
-				return false;
-			compare.setBlack(0);
-		}
-		if (compare.getWhite() < 0) {
-			compare.setAny(compare.getAny() + compare.getWhite());
-			if (compare.getAny() < 0)
-				return false;
-			compare.setWhite(0);
-		}
-		if (compare.getColorless() < 0) {
-			int remaining = compare.getRed() + compare.getGreen() + compare.getBlack() + compare.getBlue() + compare.getWhite() + compare.getAny();
-			if (compare.getColorless() + remaining < 0)
-				return false;
-		}
-		return true;
-	}
+    public boolean enough(Mana avail) {
+        Mana compare = avail.copy();
+        compare.subtract(this);
+        if (compare.getRed() < 0) {
+            compare.setAny(compare.getAny() + compare.getRed());
+            if (compare.getAny() < 0)
+                return false;
+            compare.setRed(0);
+        }
+        if (compare.getGreen() < 0) {
+            compare.setAny(compare.getAny() + compare.getGreen());
+            if (compare.getAny() < 0)
+                return false;
+            compare.setGreen(0);
+        }
+        if (compare.getBlue() < 0) {
+            compare.setAny(compare.getAny() + compare.getBlue());
+            if (compare.getAny() < 0)
+                return false;
+            compare.setBlue(0);
+        }
+        if (compare.getBlack() < 0) {
+            compare.setAny(compare.getAny() + compare.getBlack());
+            if (compare.getAny() < 0)
+                return false;
+            compare.setBlack(0);
+        }
+        if (compare.getWhite() < 0) {
+            compare.setAny(compare.getAny() + compare.getWhite());
+            if (compare.getAny() < 0)
+                return false;
+            compare.setWhite(0);
+        }
+        if (compare.getColorless() < 0) {
+            int remaining = compare.getRed() + compare.getGreen() + compare.getBlack() + compare.getBlue() + compare.getWhite() + compare.getAny();
+            if (compare.getColorless() + remaining < 0)
+                return false;
+        }
+        return true;
+    }
 
-	public Mana needed(Mana avail) {
-		Mana compare = avail.copy();
-		compare.subtract(this);
-		if (compare.getRed() < 0 && compare.getAny() > 0) {
-			int diff = Math.min( compare.getAny(), Math.abs(compare.getRed()));
-			compare.setAny(compare.getAny() - diff);
-			compare.setRed(compare.getRed() + diff);
-		}
-		if (compare.getGreen() < 0 && compare.getAny() > 0) {
-			int diff = Math.min( compare.getAny(), Math.abs(compare.getGreen()));
-			compare.setAny(compare.getAny() - diff);
-			compare.setGreen(compare.getGreen() + diff);
-		}
-		if (compare.getBlue() < 0 && compare.getAny() > 0) {
-			int diff = Math.min( compare.getAny(), Math.abs(compare.getBlue()));
-			compare.setAny(compare.getAny() - diff);
-			compare.setBlue(compare.getBlue() + diff);
-		}
-		if (compare.getBlack() < 0 && compare.getAny() > 0) {
-			int diff = Math.min( compare.getAny(), Math.abs(compare.getBlack()));
-			compare.setAny(compare.getAny() - diff);
-			compare.setBlack(compare.getBlack() + diff);
-		}
-		if (compare.getWhite() < 0 && compare.getAny() > 0) {
-			int diff = Math.min( compare.getAny(), Math.abs(compare.getWhite()));
-			compare.setAny(compare.getAny() - diff);
-			compare.setWhite(compare.getWhite() + diff);
-		}
-		if (compare.getColorless() < 0) {
-			int remaining = 0;
-			remaining += Math.min(0,compare.getRed());
-			remaining += Math.min(0,compare.getWhite());
-			remaining += Math.min(0,compare.getGreen());
-			remaining += Math.min(0,compare.getBlack());
-			remaining += Math.min(0,compare.getBlue());
-			remaining += Math.min(0,compare.getAny());
-			if (remaining > 0) {
-				int diff = Math.min(remaining, Math.abs(compare.getColorless()));
-				compare.setColorless(compare.getColorless() + diff);
-			}
-		}
-		Mana needed = new Mana();
-		if (compare.getRed() < 0)
-			needed.setRed(Math.abs(compare.getRed()));
-		if (compare.getWhite() < 0)
-			needed.setWhite(Math.abs(compare.getWhite()));
-		if (compare.getGreen() < 0)
-			needed.setGreen(Math.abs(compare.getGreen()));
-		if (compare.getBlack() < 0)
-			needed.setBlack(Math.abs(compare.getBlack()));
-		if (compare.getBlue() < 0)
-			needed.setBlue(Math.abs(compare.getBlue()));
-		if (compare.getColorless() < 0)
-			needed.setColorless(Math.abs(compare.getColorless()));
-		return needed;
-	}
+    public Mana needed(Mana avail) {
+        Mana compare = avail.copy();
+        compare.subtract(this);
+        if (compare.getRed() < 0 && compare.getAny() > 0) {
+            int diff = Math.min( compare.getAny(), Math.abs(compare.getRed()));
+            compare.setAny(compare.getAny() - diff);
+            compare.setRed(compare.getRed() + diff);
+        }
+        if (compare.getGreen() < 0 && compare.getAny() > 0) {
+            int diff = Math.min( compare.getAny(), Math.abs(compare.getGreen()));
+            compare.setAny(compare.getAny() - diff);
+            compare.setGreen(compare.getGreen() + diff);
+        }
+        if (compare.getBlue() < 0 && compare.getAny() > 0) {
+            int diff = Math.min( compare.getAny(), Math.abs(compare.getBlue()));
+            compare.setAny(compare.getAny() - diff);
+            compare.setBlue(compare.getBlue() + diff);
+        }
+        if (compare.getBlack() < 0 && compare.getAny() > 0) {
+            int diff = Math.min( compare.getAny(), Math.abs(compare.getBlack()));
+            compare.setAny(compare.getAny() - diff);
+            compare.setBlack(compare.getBlack() + diff);
+        }
+        if (compare.getWhite() < 0 && compare.getAny() > 0) {
+            int diff = Math.min( compare.getAny(), Math.abs(compare.getWhite()));
+            compare.setAny(compare.getAny() - diff);
+            compare.setWhite(compare.getWhite() + diff);
+        }
+        if (compare.getColorless() < 0) {
+            int remaining = 0;
+            remaining += Math.min(0,compare.getRed());
+            remaining += Math.min(0,compare.getWhite());
+            remaining += Math.min(0,compare.getGreen());
+            remaining += Math.min(0,compare.getBlack());
+            remaining += Math.min(0,compare.getBlue());
+            remaining += Math.min(0,compare.getAny());
+            if (remaining > 0) {
+                int diff = Math.min(remaining, Math.abs(compare.getColorless()));
+                compare.setColorless(compare.getColorless() + diff);
+            }
+        }
+        Mana needed = new Mana();
+        if (compare.getRed() < 0)
+            needed.setRed(Math.abs(compare.getRed()));
+        if (compare.getWhite() < 0)
+            needed.setWhite(Math.abs(compare.getWhite()));
+        if (compare.getGreen() < 0)
+            needed.setGreen(Math.abs(compare.getGreen()));
+        if (compare.getBlack() < 0)
+            needed.setBlack(Math.abs(compare.getBlack()));
+        if (compare.getBlue() < 0)
+            needed.setBlue(Math.abs(compare.getBlue()));
+        if (compare.getColorless() < 0)
+            needed.setColorless(Math.abs(compare.getColorless()));
+        return needed;
+    }
 
-	public int getRed() {
-		return red;
-	}
+    public int getRed() {
+        return red;
+    }
 
-	public void setRed(int red) {
-		this.red = red;
-	}
+    public void setRed(int red) {
+        this.red = red;
+    }
 
-	public int getGreen() {
-		return green;
-	}
+    public int getGreen() {
+        return green;
+    }
 
-	public void setGreen(int green) {
-		this.green = green;
-	}
+    public void setGreen(int green) {
+        this.green = green;
+    }
 
-	public int getBlue() {
-		return blue;
-	}
+    public int getBlue() {
+        return blue;
+    }
 
-	public void setBlue(int blue) {
-		this.blue = blue;
-	}
+    public void setBlue(int blue) {
+        this.blue = blue;
+    }
 
-	public int getWhite() {
-		return white;
-	}
+    public int getWhite() {
+        return white;
+    }
 
-	public void setWhite(int white) {
-		this.white = white;
-	}
+    public void setWhite(int white) {
+        this.white = white;
+    }
 
-	public int getBlack() {
-		return black;
-	}
+    public int getBlack() {
+        return black;
+    }
 
-	public void setBlack(int black) {
-		this.black = black;
-	}
+    public void setBlack(int black) {
+        this.black = black;
+    }
 
-	public int getColorless() {
-		return colorless;
-	}
+    public int getColorless() {
+        return colorless;
+    }
 
-	public void setColorless(int colorless) {
-		this.colorless = colorless;
-	}
+    public void setColorless(int colorless) {
+        this.colorless = colorless;
+    }
 
-	public int getAny() {
-		return any;
-	}
+    public int getAny() {
+        return any;
+    }
 
-	public void setAny(int any) {
-		this.any = any;
-	}
+    public void setAny(int any) {
+        this.any = any;
+    }
 
-	@Override
-	public int compareTo(Mana o) {
-		return this.count() - o.count();
-	}
+    @Override
+    public int compareTo(Mana o) {
+        return this.count() - o.count();
+    }
 
-	/**
-	 *
-	 * @param mana
-	 * @return true if this contains any values that mana has
-	 */
-	public boolean contains(Mana mana) {
-		if (mana.black > 0 && this.black > 0)
-			return true;
-		if (mana.blue > 0 && this.blue > 0)
-			return true;
-		if (mana.red > 0 && this.red > 0)
-			return true;
-		if (mana.white > 0 && this.white > 0)
-			return true;
-		if (mana.green > 0 && this.green > 0)
-			return true;
-		if (mana.colorless > 0 && this.count() > 0)
-			return true;
-		
-		return false;
-	}
-	
-	public int getColor(ColoredManaSymbol color) {
-		if (color.equals(ColoredManaSymbol.G)) {
-			return getGreen();
-		}
-		if (color.equals(ColoredManaSymbol.R)) {
-			return getRed();
-		}
-		if (color.equals(ColoredManaSymbol.B)) {
-			return getBlack();
-		}
-		if (color.equals(ColoredManaSymbol.U)) {
-			return getBlue();
-		}
-		if (color.equals(ColoredManaSymbol.W)) {
-			return getWhite();
-		}
-		return 0;
-	}
+    /**
+     *
+     * @param mana
+     * @return true if this contains any values that mana has
+     */
+    public boolean contains(Mana mana) {
+        if (mana.black > 0 && this.black > 0)
+            return true;
+        if (mana.blue > 0 && this.blue > 0)
+            return true;
+        if (mana.red > 0 && this.red > 0)
+            return true;
+        if (mana.white > 0 && this.white > 0)
+            return true;
+        if (mana.green > 0 && this.green > 0)
+            return true;
+        if (mana.colorless > 0 && this.count() > 0)
+            return true;
+
+        return false;
+    }
+
+    public int getColor(ColoredManaSymbol color) {
+        if (color.equals(ColoredManaSymbol.G)) {
+            return getGreen();
+        }
+        if (color.equals(ColoredManaSymbol.R)) {
+            return getRed();
+        }
+        if (color.equals(ColoredManaSymbol.B)) {
+            return getBlack();
+        }
+        if (color.equals(ColoredManaSymbol.U)) {
+            return getBlue();
+        }
+        if (color.equals(ColoredManaSymbol.W)) {
+            return getWhite();
+        }
+        return 0;
+    }
 
     public int get(ManaType manaType) {
         switch(manaType) {

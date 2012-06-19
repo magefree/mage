@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class ElvishArchdruid extends mage.sets.magic2010.ElvishArchdruid {
 
-	public ElvishArchdruid(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 171;
-		this.expansionSetCode = "M11";
-	}
+    public ElvishArchdruid(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 171;
+        this.expansionSetCode = "M11";
+    }
 
-	public ElvishArchdruid(final ElvishArchdruid card) {
-		super(card);
-	}
+    public ElvishArchdruid(final ElvishArchdruid card) {
+        super(card);
+    }
 
-	@Override
-	public ElvishArchdruid copy() {
-		return new ElvishArchdruid(this);
-	}
+    @Override
+    public ElvishArchdruid copy() {
+        return new ElvishArchdruid(this);
+    }
 
 }

@@ -43,21 +43,21 @@ import mage.cards.CardImpl;
  */
 public class KabiraCrossroads extends CardImpl<KabiraCrossroads> {
 
-	public KabiraCrossroads(UUID ownerId) {
-		super(ownerId, 216, "Kabira Crossroads", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
-		this.expansionSetCode = "ZEN";
-		this.addAbility(new EntersBattlefieldTappedAbility());
-		this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(2), false));
-		this.addAbility(new WhiteManaAbility());
-	}
+    public KabiraCrossroads(UUID ownerId) {
+        super(ownerId, 216, "Kabira Crossroads", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
+        this.expansionSetCode = "ZEN";
+        this.addAbility(new EntersBattlefieldTappedAbility());
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(2), false));
+        this.addAbility(new WhiteManaAbility());
+    }
 
-	public KabiraCrossroads(final KabiraCrossroads card) {
-		super(card);
-	}
+    public KabiraCrossroads(final KabiraCrossroads card) {
+        super(card);
+    }
 
-	@Override
-	public KabiraCrossroads copy() {
-		return new KabiraCrossroads(this);
-	}
-    
+    @Override
+    public KabiraCrossroads copy() {
+        return new KabiraCrossroads(this);
+    }
+
 }

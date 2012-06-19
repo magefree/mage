@@ -45,31 +45,31 @@ import java.util.UUID;
  */
 public class VampiricFury extends CardImpl<VampiricFury> {
 
-	private static final FilterCreaturePermanent vampires = new FilterCreaturePermanent("Vampire creatures");
+    private static final FilterCreaturePermanent vampires = new FilterCreaturePermanent("Vampire creatures");
 
-	static {
-		vampires.getSubtype().add("Vampire");
-		vampires.setScopeSubtype(Filter.ComparisonScope.Any);
-		vampires.setTargetController(Constants.TargetController.YOU);
-	}
+    static {
+        vampires.getSubtype().add("Vampire");
+        vampires.setScopeSubtype(Filter.ComparisonScope.Any);
+        vampires.setTargetController(Constants.TargetController.YOU);
+    }
 
-	public VampiricFury(UUID ownerId) {
-		super(ownerId, 167, "Vampiric Fury", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
-		this.expansionSetCode = "ISD";
+    public VampiricFury(UUID ownerId) {
+        super(ownerId, 167, "Vampiric Fury", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
+        this.expansionSetCode = "ISD";
 
-		this.color.setRed(true);
+        this.color.setRed(true);
 
-		// Vampire creatures you control get +2/+0 and gain first strike until end of turn.
-		this.getSpellAbility().addEffect(new BoostControlledEffect(2, 0, Constants.Duration.EndOfTurn, vampires));
+        // Vampire creatures you control get +2/+0 and gain first strike until end of turn.
+        this.getSpellAbility().addEffect(new BoostControlledEffect(2, 0, Constants.Duration.EndOfTurn, vampires));
                 this.getSpellAbility().addEffect(new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, vampires));
-	}
+    }
 
-	public VampiricFury(final VampiricFury card) {
-		super(card);
-	}
+    public VampiricFury(final VampiricFury card) {
+        super(card);
+    }
 
-	@Override
-	public VampiricFury copy() {
-		return new VampiricFury(this);
-	}
+    @Override
+    public VampiricFury copy() {
+        return new VampiricFury(this);
+    }
 }

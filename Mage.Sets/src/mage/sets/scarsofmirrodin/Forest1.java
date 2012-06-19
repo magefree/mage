@@ -36,16 +36,16 @@ import java.util.UUID;
 public class Forest1 extends mage.cards.basiclands.Forest {
 
     public Forest1(UUID ownerId) {
-		super(ownerId, 246);
-		this.expansionSetCode = "SOM";
-	}
+        super(ownerId, 246);
+        this.expansionSetCode = "SOM";
+    }
 
-	public Forest1(final Forest1 card) {
-		super(card);
-	}
+    public Forest1(final Forest1 card) {
+        super(card);
+    }
 
-	@Override
-	public Forest1 copy() {
-		return new Forest1(this);
-	}
+    @Override
+    public Forest1 copy() {
+        return new Forest1(this);
+    }
 }

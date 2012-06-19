@@ -55,10 +55,10 @@ public class PredatorOoze extends CardImpl<PredatorOoze> {
 
         // Predator Ooze is indestructible.
         this.addAbility(IndestructibleAbility.getInstance());
-        
+
         // Whenever Predator Ooze attacks, put a +1/+1 counter on it.
        this.addAbility(new AttacksTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
-       
+
         // Whenever a creature dealt damage by Predator Ooze this turn dies, put a +1/+1 counter on Predator Ooze.
         this.addAbility(new DiesAndDealtDamageThisTurnTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
     }

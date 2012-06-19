@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class IceCage extends mage.sets.magic2010.IceCage {
 
-	public IceCage(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 57;
-		this.expansionSetCode = "M11";
-	}
+    public IceCage(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 57;
+        this.expansionSetCode = "M11";
+    }
 
-	public IceCage(final IceCage card) {
-		super(card);
-	}
+    public IceCage(final IceCage card) {
+        super(card);
+    }
 
-	@Override
-	public IceCage copy() {
-		return new IceCage(this);
-	}
+    @Override
+    public IceCage copy() {
+        return new IceCage(this);
+    }
 
 }

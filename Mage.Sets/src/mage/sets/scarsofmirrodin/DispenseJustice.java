@@ -50,11 +50,11 @@ public class DispenseJustice extends CardImpl<DispenseJustice> {
     public DispenseJustice (UUID ownerId) {
         super(ownerId, 5, "Dispense Justice", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "SOM";
-        
-		this.color.setWhite(true);
+
+        this.color.setWhite(true);
 
         this.getSpellAbility().addEffect(new DispenseJusticeEffect());
-		this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public DispenseJustice (final DispenseJustice card) {
@@ -70,39 +70,39 @@ public class DispenseJustice extends CardImpl<DispenseJustice> {
 
 class DispenseJusticeEffect extends OneShotEffect<DispenseJusticeEffect> {
 
-	private static final String effectText = "Target player sacrifices an attacking creature.\r\n\r\n"
-			+ "Metalcraft - That player sacrifices two attacking creatures instead if you control three or more artifacts";
+    private static final String effectText = "Target player sacrifices an attacking creature.\r\n\r\n"
+            + "Metalcraft - That player sacrifices two attacking creatures instead if you control three or more artifacts";
 
-	private static final FilterCreaturePermanent filter;
+    private static final FilterCreaturePermanent filter;
 
-	static {
-		filter = new FilterCreaturePermanent();
-		filter.setUseAttacking(true);
-		filter.setAttacking(true);
-	}
+    static {
+        filter = new FilterCreaturePermanent();
+        filter.setUseAttacking(true);
+        filter.setAttacking(true);
+    }
 
-	DispenseJusticeEffect ( ) {
-		super(Outcome.Sacrifice);
-		staticText = effectText;
-	}
+    DispenseJusticeEffect ( ) {
+        super(Outcome.Sacrifice);
+        staticText = effectText;
+    }
 
-	DispenseJusticeEffect ( DispenseJusticeEffect effect ) {
-		super(effect);
-	}
+    DispenseJusticeEffect ( DispenseJusticeEffect effect ) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		if ( MetalcraftCondition.getInstance().apply(game, source) ) {
-			return new SacrificeEffect(filter, 2, effectText).apply(game, source);
-		}
-		else {
-			return new SacrificeEffect(filter, 1, effectText).apply(game, source);
-		}
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        if ( MetalcraftCondition.getInstance().apply(game, source) ) {
+            return new SacrificeEffect(filter, 2, effectText).apply(game, source);
+        }
+        else {
+            return new SacrificeEffect(filter, 1, effectText).apply(game, source);
+        }
+    }
 
-	@Override
-	public DispenseJusticeEffect copy() {
-		return new DispenseJusticeEffect(this);
-	}
+    @Override
+    public DispenseJusticeEffect copy() {
+        return new DispenseJusticeEffect(this);
+    }
 
 }

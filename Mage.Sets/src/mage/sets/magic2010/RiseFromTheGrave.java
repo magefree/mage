@@ -50,72 +50,72 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class RiseFromTheGrave extends CardImpl<RiseFromTheGrave> {
 
-	public RiseFromTheGrave(UUID ownerId) {
-		super(ownerId, 109, "Rise from the Grave", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");
-		this.expansionSetCode = "M10";
-		this.color.setBlack(true);
-		this.getSpellAbility().addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
-		this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
-		this.getSpellAbility().addEffect(new RiseFromTheGraveEffect());
-	}
+    public RiseFromTheGrave(UUID ownerId) {
+        super(ownerId, 109, "Rise from the Grave", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");
+        this.expansionSetCode = "M10";
+        this.color.setBlack(true);
+        this.getSpellAbility().addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
+        this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
+        this.getSpellAbility().addEffect(new RiseFromTheGraveEffect());
+    }
 
-	public RiseFromTheGrave(final RiseFromTheGrave card) {
-		super(card);
-	}
+    public RiseFromTheGrave(final RiseFromTheGrave card) {
+        super(card);
+    }
 
-	@Override
-	public RiseFromTheGrave copy() {
-		return new RiseFromTheGrave(this);
-	}
+    @Override
+    public RiseFromTheGrave copy() {
+        return new RiseFromTheGrave(this);
+    }
 }
 
 class RiseFromTheGraveEffect extends ContinuousEffectImpl<RiseFromTheGraveEffect> {
 
-	public RiseFromTheGraveEffect() {
-		super(Duration.Custom, Outcome.Neutral);
-		staticText = "That creature is a black Zombie in addition to its other colors and types";
-	}
+    public RiseFromTheGraveEffect() {
+        super(Duration.Custom, Outcome.Neutral);
+        staticText = "That creature is a black Zombie in addition to its other colors and types";
+    }
 
-	public RiseFromTheGraveEffect(final RiseFromTheGraveEffect effect) {
-		super(effect);
-	}
+    public RiseFromTheGraveEffect(final RiseFromTheGraveEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public RiseFromTheGraveEffect copy() {
-		return new RiseFromTheGraveEffect(this);
-	}
+    @Override
+    public RiseFromTheGraveEffect copy() {
+        return new RiseFromTheGraveEffect(this);
+    }
 
-	@Override
-	public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-		Permanent creature = game.getPermanent(source.getFirstTarget());
-		if (creature != null) {
-			switch (layer) {
-				case TypeChangingEffects_4:
-					if (sublayer == SubLayer.NA) {
-						creature.getSubtype().add("Zombie");
-					}
-					break;
-				case ColorChangingEffects_5:
-					if (sublayer == SubLayer.NA) {
-						creature.getColor().setBlack(true);
-					}
-					break;
-			}
-			return true;
-		} else {
+    @Override
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        Permanent creature = game.getPermanent(source.getFirstTarget());
+        if (creature != null) {
+            switch (layer) {
+                case TypeChangingEffects_4:
+                    if (sublayer == SubLayer.NA) {
+                        creature.getSubtype().add("Zombie");
+                    }
+                    break;
+                case ColorChangingEffects_5:
+                    if (sublayer == SubLayer.NA) {
+                        creature.getColor().setBlack(true);
+                    }
+                    break;
+            }
+            return true;
+        } else {
             this.used = true;
         }
-		return false;
-	}
+        return false;
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
 
-	@Override
-	public boolean hasLayer(Layer layer) {
-		return layer == Layer.ColorChangingEffects_5 || layer == Layer.TypeChangingEffects_4;
-	}
+    @Override
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.ColorChangingEffects_5 || layer == Layer.TypeChangingEffects_4;
+    }
 
 }

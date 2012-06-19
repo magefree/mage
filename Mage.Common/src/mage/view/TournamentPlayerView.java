@@ -38,25 +38,25 @@ import mage.game.tournament.TournamentPlayer;
 public class TournamentPlayerView implements Serializable {
     private static final long serialVersionUID = 1L;
 
-	private String name;
-	private String results;
-	private int points;
+    private String name;
+    private String results;
+    private int points;
 
-	TournamentPlayerView(TournamentPlayer player) {
-		this.name = player.getPlayer().getName();
-		this.points = player.getPoints();
-		this.results = player.getResults();
-	}
+    TournamentPlayerView(TournamentPlayer player) {
+        this.name = player.getPlayer().getName();
+        this.points = player.getPoints();
+        this.results = player.getResults();
+    }
 
-	public String getName() {
-		return this.name;
-	}
+    public String getName() {
+        return this.name;
+    }
 
-	public int getPoints() {
-		return this.points;
-	}
+    public int getPoints() {
+        return this.points;
+    }
 
-	public String getResults() {
-		return results;
-	}
+    public String getResults() {
+        return results;
+    }
 }

@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class BlindingMage extends mage.sets.magic2010.BlindingMage {
 
-	public BlindingMage(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 8;
-		this.expansionSetCode = "M11";
-	}
+    public BlindingMage(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 8;
+        this.expansionSetCode = "M11";
+    }
 
-	public BlindingMage(final BlindingMage card) {
-		super(card);
-	}
+    public BlindingMage(final BlindingMage card) {
+        super(card);
+    }
 
-	@Override
-	public BlindingMage copy() {
-		return new BlindingMage(this);
-	}
+    @Override
+    public BlindingMage copy() {
+        return new BlindingMage(this);
+    }
 
 }

@@ -41,13 +41,13 @@ import java.util.zip.GZIPOutputStream;
  */
 public class Copier<T> {
 
-	private static ClassLoader loader;
+    private static ClassLoader loader;
 
-	public static void setLoader(ClassLoader loader) {
-		Copier.loader = loader;
-	}
+    public static void setLoader(ClassLoader loader) {
+        Copier.loader = loader;
+    }
 
-	public T copy(T obj) {
+    public T copy(T obj) {
         T copy = null;
         try {
             FastByteArrayOutputStream fbos = new FastByteArrayOutputStream();
@@ -71,9 +71,9 @@ public class Copier<T> {
         }
         return copy;
 
-	}
+    }
 
-	public byte[] copyCompressed(T obj) {
+    public byte[] copyCompressed(T obj) {
         try {
             FastByteArrayOutputStream fbos = new FastByteArrayOutputStream();
             ObjectOutputStream out= new ObjectOutputStream(new GZIPOutputStream(fbos));
@@ -83,21 +83,21 @@ public class Copier<T> {
             out.flush();
             out.close();
 
-			byte[] copy = new byte[fbos.getSize()];
+            byte[] copy = new byte[fbos.getSize()];
             System.arraycopy(fbos.getByteArray(), 0, copy, 0, fbos.getSize());
-			return copy;
+            return copy;
         }
         catch(IOException e) {
             e.printStackTrace();
         }
         return null;
-	}
+    }
 
-	public T uncompressCopy(byte[] buffer) {
+    public T uncompressCopy(byte[] buffer) {
         T copy = null;
         try {
-			ObjectInputStream in = new CopierObjectInputStream(loader, new GZIPInputStream(new ByteArrayInputStream(buffer)));
-			copy = (T) in.readObject();
+            ObjectInputStream in = new CopierObjectInputStream(loader, new GZIPInputStream(new ByteArrayInputStream(buffer)));
+            copy = (T) in.readObject();
         }
         catch(IOException e) {
             e.printStackTrace();
@@ -105,6 +105,6 @@ public class Copier<T> {
         catch(ClassNotFoundException cnfe) {
             cnfe.printStackTrace();
         }
-		return copy;
-	}
+        return copy;
+    }
 }

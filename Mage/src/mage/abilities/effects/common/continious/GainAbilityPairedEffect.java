@@ -43,26 +43,26 @@ import mage.game.permanent.Permanent;
  */
 public class GainAbilityPairedEffect extends ContinuousEffectImpl<GainAbilityPairedEffect> {
 
-	protected Ability ability;
+    protected Ability ability;
 
-	public GainAbilityPairedEffect(Ability ability, String rule) {
-		super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-		this.ability = ability;
+    public GainAbilityPairedEffect(Ability ability, String rule) {
+        super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+        this.ability = ability;
         staticText = rule;
-	}
+    }
 
-	public GainAbilityPairedEffect(final GainAbilityPairedEffect effect) {
-		super(effect);
-		this.ability = effect.ability.copy();
-	}
+    public GainAbilityPairedEffect(final GainAbilityPairedEffect effect) {
+        super(effect);
+        this.ability = effect.ability.copy();
+    }
 
-	@Override
-	public GainAbilityPairedEffect copy() {
-		return new GainAbilityPairedEffect(this);
-	}
+    @Override
+    public GainAbilityPairedEffect copy() {
+        return new GainAbilityPairedEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null && permanent.getPairedCard() != null) {
             Permanent paired = game.getPermanent(permanent.getPairedCard());
@@ -73,6 +73,6 @@ public class GainAbilityPairedEffect extends ContinuousEffectImpl<GainAbilityPai
             }
         }
         return false;
-	}
+    }
 
 }

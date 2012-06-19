@@ -20,14 +20,14 @@ public class FaithsShieldTest extends CardTestPlayerBase {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain");
         addCard(Constants.Zone.HAND, playerA, "Faith's Shield");
         addCard(Constants.Zone.HAND, playerA, "Lightning Bolt");
-        
+
         setChoice(playerA, "Red");
         castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Faith's Shield", "White Knight");
         castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "White Knight");
 
         setStopAt(1, Constants.PhaseStep.END_TURN);
         execute();
-        
+
         assertLife(playerA, 20);
         assertLife(playerB, 17);
         assertPermanentCount(playerA, "White Knight", 1);
@@ -41,14 +41,14 @@ public class FaithsShieldTest extends CardTestPlayerBase {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain");
         addCard(Constants.Zone.HAND, playerA, "Faith's Shield");
         addCard(Constants.Zone.HAND, playerA, "Lightning Bolt");
-        
+
         setChoice(playerA, "Red");
         castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Faith's Shield", "White Knight");
         castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerA);
 
         setStopAt(1, Constants.PhaseStep.END_TURN);
         execute();
-        
+
         assertLife(playerA, 5);
         assertLife(playerB, 20);
     }

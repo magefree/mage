@@ -90,12 +90,12 @@ public abstract class ManaCostImpl<T extends ManaCostImpl<T>> extends CostImpl<T
     public Filter getSourceFilter() {
         return this.sourceFilter;
     }
-    
+
     @Override
     public void setSourceFilter(Filter filter) {
         this.sourceFilter = filter;
     }
-    
+
     protected boolean assignColored(Ability ability, Game game, ManaPool pool, ColoredManaSymbol mana) {
         // first check special mana
         switch (mana) {

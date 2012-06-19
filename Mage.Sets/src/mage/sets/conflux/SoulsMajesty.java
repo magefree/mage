@@ -78,11 +78,11 @@ public class SoulsMajesty extends CardImpl<SoulsMajesty> {
         public boolean apply(Game game, Ability source) {
             Permanent target = game.getPermanent(source.getFirstTarget());
             Player player = game.getPlayer(source.getControllerId());
-		if (player != null && target != null) {
-			player.drawCards(target.getPower().getValue(), game);
-			return true;
-		}
-		return false;
+        if (player != null && target != null) {
+            player.drawCards(target.getPower().getValue(), game);
+            return true;
+        }
+        return false;
         }
 
         @Override

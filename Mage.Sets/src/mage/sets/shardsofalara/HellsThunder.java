@@ -47,28 +47,28 @@ import mage.game.events.GameEvent.EventType;
  */
 public class HellsThunder extends CardImpl<HellsThunder> {
 
-	public HellsThunder(UUID ownerId) {
-		super(ownerId, 103, "Hell's Thunder", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
-		this.expansionSetCode = "ALA";
-		this.subtype.add("Elemental");
-		this.color.setRed(true);
-		this.power = new MageInt(4);
-		this.toughness = new MageInt(4);
+    public HellsThunder(UUID ownerId) {
+        super(ownerId, 103, "Hell's Thunder", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
+        this.expansionSetCode = "ALA";
+        this.subtype.add("Elemental");
+        this.color.setRed(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
-		this.addAbility(FlyingAbility.getInstance());
-		this.addAbility(HasteAbility.getInstance());
-		this.addAbility(new OnEventTriggeredAbility(EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new SacrificeSourceEffect()));
-		this.addAbility(new UnearthAbility(new ManaCostsImpl("{4}{R}")));
+        this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(HasteAbility.getInstance());
+        this.addAbility(new OnEventTriggeredAbility(EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new SacrificeSourceEffect()));
+        this.addAbility(new UnearthAbility(new ManaCostsImpl("{4}{R}")));
 
-	}
+    }
 
-	public HellsThunder(final HellsThunder card) {
-		super(card);
-	}
+    public HellsThunder(final HellsThunder card) {
+        super(card);
+    }
 
-	@Override
-	public HellsThunder copy() {
-		return new HellsThunder(this);
-	}
+    @Override
+    public HellsThunder copy() {
+        return new HellsThunder(this);
+    }
 
 }

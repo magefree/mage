@@ -45,14 +45,14 @@ public class AboutDialog extends MageDialog {
     /** Creates new form AboutDialog */
     public AboutDialog() {
         initComponents();
-		this.modal = false;
+        this.modal = false;
     }
 
-	public void showDialog(MageVersion version) {
-		this.lblVersion.setText(version.toString());
-		this.setLocation(100, 100);
-		this.setVisible(true);
-	}
+    public void showDialog(MageVersion version) {
+        this.lblVersion.setText(version.toString());
+        this.setLocation(100, 100);
+        this.setVisible(true);
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -127,9 +127,9 @@ public class AboutDialog extends MageDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-	private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-		this.hideDialog();
-	}//GEN-LAST:event_btnOkActionPerformed
+    private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
+        this.hideDialog();
+    }//GEN-LAST:event_btnOkActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOk;

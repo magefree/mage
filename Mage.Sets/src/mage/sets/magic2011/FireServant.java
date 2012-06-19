@@ -49,67 +49,67 @@ import mage.game.stack.StackObject;
  */
 public class FireServant extends CardImpl<FireServant> {
 
-	public FireServant(UUID ownerId) {
-		super(ownerId, 137, "Fire Servant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Elemental");
-		this.color.setRed(true);
-		this.power = new MageInt(4);
-		this.toughness = new MageInt(3);
+    public FireServant(UUID ownerId) {
+        super(ownerId, 137, "Fire Servant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Elemental");
+        this.color.setRed(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(3);
 
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FireServantEffect()));
-	}
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FireServantEffect()));
+    }
 
-	public FireServant(final FireServant card) {
-		super(card);
-	}
+    public FireServant(final FireServant card) {
+        super(card);
+    }
 
-	@Override
-	public FireServant copy() {
-		return new FireServant(this);
-	}
+    @Override
+    public FireServant copy() {
+        return new FireServant(this);
+    }
 
 }
 
 class FireServantEffect extends ReplacementEffectImpl<FireServantEffect> {
 
-	public FireServantEffect() {
-		super(Duration.WhileOnBattlefield, Outcome.Damage);
-		staticText = "If a red instant or sorcery spell you control would deal damage, it deals double that damage instead";
-	}
+    public FireServantEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Damage);
+        staticText = "If a red instant or sorcery spell you control would deal damage, it deals double that damage instead";
+    }
 
-	public FireServantEffect(final FireServantEffect effect) {
-		super(effect);
-	}
+    public FireServantEffect(final FireServantEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public FireServantEffect copy() {
-		return new FireServantEffect(this);
-	}
+    @Override
+    public FireServantEffect copy() {
+        return new FireServantEffect(this);
+    }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		switch (event.getType()) {
-			case DAMAGE_CREATURE:
-			case DAMAGE_PLAYER:
-			case DAMAGE_PLANESWALKER:
-				StackObject spell = game.getStack().getStackObject(event.getSourceId());
-				if (spell != null && spell.getControllerId().equals(source.getControllerId()) && spell.getColor().isRed() &&
-						(spell.getCardType().contains(CardType.INSTANT) || spell.getCardType().contains(CardType.SORCERY))) {
-					event.setAmount(event.getAmount() * 2);
-				}
-		}
-		return false;
-	}
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        switch (event.getType()) {
+            case DAMAGE_CREATURE:
+            case DAMAGE_PLAYER:
+            case DAMAGE_PLANESWALKER:
+                StackObject spell = game.getStack().getStackObject(event.getSourceId());
+                if (spell != null && spell.getControllerId().equals(source.getControllerId()) && spell.getColor().isRed() &&
+                        (spell.getCardType().contains(CardType.INSTANT) || spell.getCardType().contains(CardType.SORCERY))) {
+                    event.setAmount(event.getAmount() * 2);
+                }
+        }
+        return false;
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		return apply(game, source);
-	}
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        return apply(game, source);
+    }
 
 }

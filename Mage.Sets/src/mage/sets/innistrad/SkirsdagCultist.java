@@ -48,30 +48,30 @@ import java.util.UUID;
  */
 public class SkirsdagCultist extends CardImpl<SkirsdagCultist> {
 
-	public SkirsdagCultist(UUID ownerId) {
-		super(ownerId, 163, "Skirsdag Cultist", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
-		this.expansionSetCode = "ISD";
-		this.subtype.add("Human");
-		this.subtype.add("Shaman");
+    public SkirsdagCultist(UUID ownerId) {
+        super(ownerId, 163, "Skirsdag Cultist", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
+        this.expansionSetCode = "ISD";
+        this.subtype.add("Human");
+        this.subtype.add("Shaman");
 
-		this.color.setRed(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+        this.color.setRed(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-		// {R}, {T}, Sacrifice a creature: Skirsdag Cultist deals 2 damage to target creature or player.
-		Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{R}"));
-		ability.addCost(new TapSourceCost());
-		ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
-		ability.addTarget(new TargetCreatureOrPlayer());
-		this.addAbility(ability);
-	}
+        // {R}, {T}, Sacrifice a creature: Skirsdag Cultist deals 2 damage to target creature or player.
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{R}"));
+        ability.addCost(new TapSourceCost());
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        ability.addTarget(new TargetCreatureOrPlayer());
+        this.addAbility(ability);
+    }
 
-	public SkirsdagCultist(final SkirsdagCultist card) {
-		super(card);
-	}
+    public SkirsdagCultist(final SkirsdagCultist card) {
+        super(card);
+    }
 
-	@Override
-	public SkirsdagCultist copy() {
-		return new SkirsdagCultist(this);
-	}
+    @Override
+    public SkirsdagCultist copy() {
+        return new SkirsdagCultist(this);
+    }
 }

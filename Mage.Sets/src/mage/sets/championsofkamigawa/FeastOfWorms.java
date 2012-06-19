@@ -60,8 +60,8 @@ public class FeastOfWorms extends CardImpl<FeastOfWorms> {
         super(ownerId, 216, "Feast of Worms", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
-	this.color.setGreen(true);
-        
+    this.color.setGreen(true);
+
         // Destroy target land. If that land was legendary, its controller sacrifices another land.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetLandPermanent());

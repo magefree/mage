@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class BerserkersOfBloodRidge extends mage.sets.magic2010.BerserkersOfBloodRidge {
 
-	public BerserkersOfBloodRidge(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 124;
-		this.expansionSetCode = "M11";
-	}
+    public BerserkersOfBloodRidge(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 124;
+        this.expansionSetCode = "M11";
+    }
 
-	public BerserkersOfBloodRidge(final BerserkersOfBloodRidge card) {
-		super(card);
-	}
+    public BerserkersOfBloodRidge(final BerserkersOfBloodRidge card) {
+        super(card);
+    }
 
-	@Override
-	public BerserkersOfBloodRidge copy() {
-		return new BerserkersOfBloodRidge(this);
-	}
+    @Override
+    public BerserkersOfBloodRidge copy() {
+        return new BerserkersOfBloodRidge(this);
+    }
 
 }

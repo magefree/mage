@@ -53,37 +53,37 @@ import java.util.UUID;
  */
 public class SuturedGhoul extends CardImpl<SuturedGhoul> {
 
-	private static final String staticText = "exile any number of creature cards from your graveyard";
-	private static final String staticText2 = "Sutured Ghoul's power is equal to the total power of the exiled cards and its toughness is equal to their total toughness";
+    private static final String staticText = "exile any number of creature cards from your graveyard";
+    private static final String staticText2 = "Sutured Ghoul's power is equal to the total power of the exiled cards and its toughness is equal to their total toughness";
 
-	public SuturedGhoul(UUID ownerId) {
-		super(ownerId, 112, "Sutured Ghoul", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{B}{B}");
-		this.expansionSetCode = "M12";
-		this.subtype.add("Zombie");
+    public SuturedGhoul(UUID ownerId) {
+        super(ownerId, 112, "Sutured Ghoul", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{B}{B}");
+        this.expansionSetCode = "M12";
+        this.subtype.add("Zombie");
 
-		this.color.setBlack(true);
-		this.power = new MageInt(0);
-		this.toughness = new MageInt(0);
+        this.color.setBlack(true);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(0);
 
-		this.addAbility(TrampleAbility.getInstance());
+        this.addAbility(TrampleAbility.getInstance());
 
-		// As Sutured Ghoul enters the battlefield, exile any number of creature cards from your graveyard.
-		this.addAbility(new EntersBattlefieldAbility(new SuturedGhoulEffect(), staticText));
+        // As Sutured Ghoul enters the battlefield, exile any number of creature cards from your graveyard.
+        this.addAbility(new EntersBattlefieldAbility(new SuturedGhoulEffect(), staticText));
 
-		// Sutured Ghoul's power is equal to the total power of the exiled cards and its toughness is equal to their total toughness.
-		BoostSourceEffect effect = new BoostSourceEffect(new SuturedGhoulPowerCount(), new SuturedGhoulToughnessCount(), Constants.Duration.WhileOnBattlefield);
-		effect.setRule(staticText2);
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect));
-	}
+        // Sutured Ghoul's power is equal to the total power of the exiled cards and its toughness is equal to their total toughness.
+        BoostSourceEffect effect = new BoostSourceEffect(new SuturedGhoulPowerCount(), new SuturedGhoulToughnessCount(), Constants.Duration.WhileOnBattlefield);
+        effect.setRule(staticText2);
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect));
+    }
 
-	public SuturedGhoul(final SuturedGhoul card) {
-		super(card);
-	}
+    public SuturedGhoul(final SuturedGhoul card) {
+        super(card);
+    }
 
-	@Override
-	public SuturedGhoul copy() {
-		return new SuturedGhoul(this);
-	}
+    @Override
+    public SuturedGhoul copy() {
+        return new SuturedGhoul(this);
+    }
 }
 
 class SuturedGhoulEffect extends OneShotEffect<SuturedGhoulEffect> {
@@ -148,14 +148,14 @@ class SuturedGhoulPowerCount implements DynamicValue {
     public int calculate(Game game, Ability sourceAbility) {
         int amount = 0;
         Permanent permanent = game.getPermanent(sourceAbility.getSourceId());
-		if (permanent != null) {
-			for (UUID uuid: permanent.getImprinted()) {
-				Card card = game.getCard(uuid);
-				if (card != null) {
-					amount += card.getPower().getValue();
-				}
-			}
-		}
+        if (permanent != null) {
+            for (UUID uuid: permanent.getImprinted()) {
+                Card card = game.getCard(uuid);
+                if (card != null) {
+                    amount += card.getPower().getValue();
+                }
+            }
+        }
         return amount;
     }
 
@@ -190,14 +190,14 @@ class SuturedGhoulToughnessCount implements DynamicValue {
     public int calculate(Game game, Ability sourceAbility) {
         int amount = 0;
         Permanent permanent = game.getPermanent(sourceAbility.getSourceId());
-		if (permanent != null) {
-			for (UUID uuid: permanent.getImprinted()) {
-				Card card = game.getCard(uuid);
-				if (card != null) {
-					amount += card.getToughness().getValue();
-				}
-			}
-		}
+        if (permanent != null) {
+            for (UUID uuid: permanent.getImprinted()) {
+                Card card = game.getCard(uuid);
+                if (card != null) {
+                    amount += card.getToughness().getValue();
+                }
+            }
+        }
         return amount;
     }
 

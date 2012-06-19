@@ -46,67 +46,67 @@ import java.util.UUID;
  */
 public class ConsumeSpirit extends CardImpl<ConsumeSpirit> {
 
-	public static final FilterMana filterBlack = new FilterMana();
+    public static final FilterMana filterBlack = new FilterMana();
 
-	static {
-		filterBlack.setBlack(true);
-	}
+    static {
+        filterBlack.setBlack(true);
+    }
 
-	public ConsumeSpirit(UUID ownerId) {
-		super(ownerId, 89, "Consume Spirit", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{1}{B}");
-		this.expansionSetCode = "M10";
+    public ConsumeSpirit(UUID ownerId) {
+        super(ownerId, 89, "Consume Spirit", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{1}{B}");
+        this.expansionSetCode = "M10";
 
-		this.color.setBlack(true);
+        this.color.setBlack(true);
 
-		// Spend only black mana on X.
-		// Consume Spirit deals X damage to target creature or player and you gain X life.
-		this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
-		this.getSpellAbility().addEffect(new ConsumeSpiritEffect());
-		this.getSpellAbility().getManaCostsToPay().getVariableCosts().get(0).setFilter(filterBlack);
-	}
+        // Spend only black mana on X.
+        // Consume Spirit deals X damage to target creature or player and you gain X life.
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addEffect(new ConsumeSpiritEffect());
+        this.getSpellAbility().getManaCostsToPay().getVariableCosts().get(0).setFilter(filterBlack);
+    }
 
-	public ConsumeSpirit(final ConsumeSpirit card) {
-		super(card);
-	}
+    public ConsumeSpirit(final ConsumeSpirit card) {
+        super(card);
+    }
 
-	@Override
-	public ConsumeSpirit copy() {
-		return new ConsumeSpirit(this);
-	}
+    @Override
+    public ConsumeSpirit copy() {
+        return new ConsumeSpirit(this);
+    }
 }
 
 class ConsumeSpiritEffect extends OneShotEffect<ConsumeSpiritEffect> {
 
-	public ConsumeSpiritEffect() {
-		super(Constants.Outcome.Damage);
-		staticText = "Consume Spirit deals X damage to target creature or player and you gain X life.Spend only black mana on X";
-	}
+    public ConsumeSpiritEffect() {
+        super(Constants.Outcome.Damage);
+        staticText = "Consume Spirit deals X damage to target creature or player and you gain X life.Spend only black mana on X";
+    }
 
-	public ConsumeSpiritEffect(final ConsumeSpiritEffect effect) {
-		super(effect);
-	}
+    public ConsumeSpiritEffect(final ConsumeSpiritEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		int damage = source.getManaCostsToPay().getX();
-		if (damage > 0) {
-			Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-			if (permanent != null) {
-				permanent.damage(damage, source.getSourceId(), game, true, false);
-			} else {
-				Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-				if (player != null) {
-					player.damage(damage, source.getSourceId(), game, false, true);
-				}
-			}
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        int damage = source.getManaCostsToPay().getX();
+        if (damage > 0) {
+            Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+            if (permanent != null) {
+                permanent.damage(damage, source.getSourceId(), game, true, false);
+            } else {
+                Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
+                if (player != null) {
+                    player.damage(damage, source.getSourceId(), game, false, true);
+                }
+            }
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public ConsumeSpiritEffect copy() {
-		return new ConsumeSpiritEffect(this);
-	}
+    @Override
+    public ConsumeSpiritEffect copy() {
+        return new ConsumeSpiritEffect(this);
+    }
 
 }

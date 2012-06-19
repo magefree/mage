@@ -40,16 +40,16 @@ import mage.game.match.MatchPlayer;
  * @author BetaSteward_at_googlemail.com
  */
 public class MatchView implements Serializable {
-    
-	private UUID matchId;
+
+    private UUID matchId;
     private String matchName;
     private String gameType;
     private String deckType;
-    
+
     private List<UUID> games = new ArrayList<UUID>();
- 	private String result;
-	private String players;
-    
+     private String result;
+    private String players;
+
     public MatchView(Match match) {
         this.matchId = match.getId();
         this.matchName = match.getName();
@@ -66,35 +66,35 @@ public class MatchView implements Serializable {
             players = sb1.substring(0, sb1.length() - 2);
             result = sb2.substring(0, sb2.length() - 2);
         }
-        
+
     }
-    
+
     public UUID getMatchId() {
         return matchId;
     }
-    
+
     public String getName() {
         return matchName;
     }
-    
+
     public String getGameType() {
         return gameType;
     }
-    
+
     public String getDeckType() {
         return deckType;
     }
-    
+
     public List<UUID> getGames() {
         return games;
     }
-    
+
     public String getResult() {
         return result;
     }
-    
+
     public String getPlayers() {
         return players;
     }
-   
+
 }

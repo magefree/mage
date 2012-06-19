@@ -52,7 +52,7 @@ public class PhyrexianRebirth extends CardImpl<PhyrexianRebirth> {
         super(ownerId, 15, "Phyrexian Rebirth", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}{W}");
         this.expansionSetCode = "MBS";
         this.color.setWhite(true);
-		this.getSpellAbility().addEffect(new PhyrexianRebirthEffect());
+        this.getSpellAbility().addEffect(new PhyrexianRebirthEffect());
     }
 
     public PhyrexianRebirth (final PhyrexianRebirth card) {
@@ -64,34 +64,34 @@ public class PhyrexianRebirth extends CardImpl<PhyrexianRebirth> {
         return new PhyrexianRebirth(this);
     }
 
-	class PhyrexianRebirthEffect extends OneShotEffect<PhyrexianRebirthEffect> {
+    class PhyrexianRebirthEffect extends OneShotEffect<PhyrexianRebirthEffect> {
 
-		public PhyrexianRebirthEffect() {
-			super(Constants.Outcome.DestroyPermanent);
+        public PhyrexianRebirthEffect() {
+            super(Constants.Outcome.DestroyPermanent);
             staticText = "Destroy all creatures, then put an X/X colorless Horror artifact creature token onto the battlefield, where X is the number of creatures destroyed this way";
-		}
+        }
 
-		public PhyrexianRebirthEffect(PhyrexianRebirthEffect ability) {
-			super(ability);
-		}
+        public PhyrexianRebirthEffect(PhyrexianRebirthEffect ability) {
+            super(ability);
+        }
 
-		@Override
-		public boolean apply(Game game, Ability source) {
-			int count = 0;
-			for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
-				count += permanent.destroy(source.getId(), game, false) ? 1 : 0;
-			}
-			HorrorToken horrorToken = new HorrorToken();
-			horrorToken.getPower().setValue(count);
-			horrorToken.getToughness().setValue(count);
-			horrorToken.putOntoBattlefield(1, game, source.getId(), source.getControllerId());
-			return true;
-		}
+        @Override
+        public boolean apply(Game game, Ability source) {
+            int count = 0;
+            for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
+                count += permanent.destroy(source.getId(), game, false) ? 1 : 0;
+            }
+            HorrorToken horrorToken = new HorrorToken();
+            horrorToken.getPower().setValue(count);
+            horrorToken.getToughness().setValue(count);
+            horrorToken.putOntoBattlefield(1, game, source.getId(), source.getControllerId());
+            return true;
+        }
 
-		@Override
-		public PhyrexianRebirthEffect copy() {
-			return new PhyrexianRebirthEffect(this);
-		}
+        @Override
+        public PhyrexianRebirthEffect copy() {
+            return new PhyrexianRebirthEffect(this);
+        }
 
     }
 
@@ -99,8 +99,8 @@ class HorrorToken extends Token {
     public HorrorToken() {
         super("Horror", "X/X colorless Horror artifact creature token");
         cardType.add(CardType.ARTIFACT);
-		cardType.add(CardType.CREATURE);
-		subtype.add("Horror");
+        cardType.add(CardType.CREATURE);
+        subtype.add("Horror");
         power = new MageInt(0);
         toughness = new MageInt(0);
     }

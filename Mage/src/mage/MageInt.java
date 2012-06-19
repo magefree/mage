@@ -33,56 +33,56 @@ import mage.util.Copyable;
 
 public class MageInt implements Serializable, Copyable<MageInt> {
 
-	public static MageInt EmptyMageInt = new MageInt(Integer.MIN_VALUE, null) {
+    public static MageInt EmptyMageInt = new MageInt(Integer.MIN_VALUE, null) {
 
         private static final String exceptionMessage = "MageInt.EmptyMageInt can't be modified.";
 
-		@Override
-		public void boostValue(int amount) {
-			throw new RuntimeException(exceptionMessage);
-		}
+        @Override
+        public void boostValue(int amount) {
+            throw new RuntimeException(exceptionMessage);
+        }
 
-		@Override
-		public void setValue(int value) {
-			throw new RuntimeException(exceptionMessage);
-		}
-	};
+        @Override
+        public void setValue(int value) {
+            throw new RuntimeException(exceptionMessage);
+        }
+    };
 
-	protected int baseValue;
-	protected String cardValue = "";
-	
-	public MageInt(int value) {
-		this.baseValue = value;
-		this.cardValue = Integer.toString(value);
-	}
+    protected int baseValue;
+    protected String cardValue = "";
 
-	public MageInt(int baseValue, String cardValue) {
-		this.baseValue = baseValue;
-		this.cardValue = cardValue;
-	}
+    public MageInt(int value) {
+        this.baseValue = value;
+        this.cardValue = Integer.toString(value);
+    }
 
-	@Override
-	public MageInt copy() {
-		if (this == EmptyMageInt)
-			return this;
-		return new MageInt(baseValue, cardValue);
-	}
-	
-	public int getValue() {
-		return baseValue;
-	}
-	
-	public void setValue(int value) {
-		this.baseValue = value;
-	}
-	
-	public void boostValue(int amount) {
-		this.baseValue += amount;
-	}
+    public MageInt(int baseValue, String cardValue) {
+        this.baseValue = baseValue;
+        this.cardValue = cardValue;
+    }
 
-	@Override
-	public String toString() {
-		return cardValue;
-	}
+    @Override
+    public MageInt copy() {
+        if (this == EmptyMageInt)
+            return this;
+        return new MageInt(baseValue, cardValue);
+    }
+
+    public int getValue() {
+        return baseValue;
+    }
+
+    public void setValue(int value) {
+        this.baseValue = value;
+    }
+
+    public void boostValue(int amount) {
+        this.baseValue += amount;
+    }
+
+    @Override
+    public String toString() {
+        return cardValue;
+    }
 
 }

@@ -13,29 +13,29 @@ import mage.watchers.WatcherImpl;
  */
 public class LandfallWatcher extends WatcherImpl<LandfallWatcher> {
 
-	public LandfallWatcher() {
-		super("LandPlayed", Constants.WatcherScope.PLAYER);
-	}
+    public LandfallWatcher() {
+        super("LandPlayed", Constants.WatcherScope.PLAYER);
+    }
 
-	public LandfallWatcher(final LandfallWatcher watcher) {
-		super(watcher);
-	}
+    public LandfallWatcher(final LandfallWatcher watcher) {
+        super(watcher);
+    }
 
-	@Override
-	public LandfallWatcher copy() {
-		return new LandfallWatcher(this);
-	}
+    @Override
+    public LandfallWatcher copy() {
+        return new LandfallWatcher(this);
+    }
 
-	@Override
-	public void watch(GameEvent event, Game game) {
+    @Override
+    public void watch(GameEvent event, Game game) {
         if (condition == true) //no need to check - condition has already occured
             return;
-		if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone() == Constants.Zone.BATTLEFIELD) {
-			Permanent permanent = game.getPermanent(event.getTargetId());
-			if (permanent.getCardType().contains(Constants.CardType.LAND) && permanent.getControllerId().equals(this.controllerId)) {
-				condition = true;
-			}
-		}
-	}
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone() == Constants.Zone.BATTLEFIELD) {
+            Permanent permanent = game.getPermanent(event.getTargetId());
+            if (permanent.getCardType().contains(Constants.CardType.LAND) && permanent.getControllerId().equals(this.controllerId)) {
+                condition = true;
+            }
+        }
+    }
 
 }

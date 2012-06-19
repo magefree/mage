@@ -66,61 +66,61 @@ import java.util.concurrent.ExecutorService;
  */
 public class MageServerImpl implements MageServer {
 
-	private final static Logger logger = Logger.getLogger(MageServerImpl.class);
-	private static ExecutorService callExecutor = ThreadExecutor.getInstance().getCallExecutor();
+    private final static Logger logger = Logger.getLogger(MageServerImpl.class);
+    private static ExecutorService callExecutor = ThreadExecutor.getInstance().getCallExecutor();
 
-	private String password;
-	private boolean testMode;
+    private String password;
+    private boolean testMode;
 
-	public MageServerImpl(String password, boolean testMode) {
-		this.password = password;
-		this.testMode = testMode;
-		ServerMessagesUtil.getInstance().getMessages();
-	}
+    public MageServerImpl(String password, boolean testMode) {
+        this.password = password;
+        this.testMode = testMode;
+        ServerMessagesUtil.getInstance().getMessages();
+    }
 
-	@Override
-	public boolean registerClient(String userName, String sessionId, MageVersion version) throws MageException {
-		try {
-			if (version.compareTo(Main.getVersion()) != 0) {
-				logger.info("MageVersionException: userName=" + userName + ", version=" + version);
+    @Override
+    public boolean registerClient(String userName, String sessionId, MageVersion version) throws MageException {
+        try {
+            if (version.compareTo(Main.getVersion()) != 0) {
+                logger.info("MageVersionException: userName=" + userName + ", version=" + version);
                 LogServiceImpl.instance.log(LogKeys.KEY_WRONG_VERSION, userName, version.toString(), Main.getVersion().toString(), sessionId);
-				throw new MageVersionException(version, Main.getVersion());
-			}
-			return SessionManager.getInstance().registerUser(sessionId, userName);
-		} catch (Exception ex) {
+                throw new MageVersionException(version, Main.getVersion());
+            }
+            return SessionManager.getInstance().registerUser(sessionId, userName);
+        } catch (Exception ex) {
             if (ex instanceof MageVersionException)
                 throw (MageVersionException)ex;
-			handleException(ex);
-		}
-		return false;
-	}
+            handleException(ex);
+        }
+        return false;
+    }
 
-	@Override
-	public boolean setUserData(final String userName, final String sessionId, final UserDataView userDataView) throws MageException {
+    @Override
+    public boolean setUserData(final String userName, final String sessionId, final UserDataView userDataView) throws MageException {
         return executeWithResult("setUserData", sessionId, new ActionWithBooleanResult() {
             public Boolean execute() throws MageException {
                 return SessionManager.getInstance().setUserData(userName, sessionId, userDataView);
             }
         });
-	}
+    }
 
-	@Override
-	public boolean registerAdmin(String password, String sessionId, MageVersion version) throws MageException {
-		try {
-			if (version.compareTo(Main.getVersion()) != 0)
-				throw new MageException("Wrong client version " + version + ", expecting version " + Main.getVersion());
-			if (!password.equals(this.password))
-				throw new MageException("Wrong password");
-			return SessionManager.getInstance().registerAdmin(sessionId);
-		} catch (Exception ex) {
-			handleException(ex);
-		}
-		return false;
-	}
+    @Override
+    public boolean registerAdmin(String password, String sessionId, MageVersion version) throws MageException {
+        try {
+            if (version.compareTo(Main.getVersion()) != 0)
+                throw new MageException("Wrong client version " + version + ", expecting version " + Main.getVersion());
+            if (!password.equals(this.password))
+                throw new MageException("Wrong password");
+            return SessionManager.getInstance().registerAdmin(sessionId);
+        } catch (Exception ex) {
+            handleException(ex);
+        }
+        return false;
+    }
 
-	@Override
-	public TableView createTable(final String sessionId, final UUID roomId, final MatchOptions options) throws MageException {
-		return executeWithResult("createTable", sessionId, new ActionWithTableViewResult() {
+    @Override
+    public TableView createTable(final String sessionId, final UUID roomId, final MatchOptions options) throws MageException {
+        return executeWithResult("createTable", sessionId, new ActionWithTableViewResult() {
             public TableView execute() throws MageException {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 TableView table = GamesRoomManager.getInstance().getRoom(roomId).createTable(userId, options);
@@ -129,10 +129,10 @@ public class MageServerImpl implements MageServer {
                 return table;
             }
         });
-	}
+    }
 
-	@Override
-	public TableView createTournamentTable(final String sessionId, final UUID roomId, final TournamentOptions options) throws MageException {
+    @Override
+    public TableView createTournamentTable(final String sessionId, final UUID roomId, final TournamentOptions options) throws MageException {
         return executeWithResult("createTournamentTable", sessionId, new ActionWithTableViewResult() {
             public TableView execute() throws MageException {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
@@ -142,21 +142,21 @@ public class MageServerImpl implements MageServer {
                 return table;
             }
         });
-	}
+    }
 
-	@Override
-	public void removeTable(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
+    @Override
+    public void removeTable(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
         execute("removeTable", sessionId, new Action() {
             public void execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 TableManager.getInstance().removeTable(userId, tableId);
             }
         });
-	}
+    }
 
-	@Override
-	public boolean joinTable(final String sessionId, final UUID roomId, final UUID tableId, final String name, final String playerType, final int skill, final DeckCardLists deckList) throws MageException, GameException {
-		return executeWithResult("joinTable", sessionId, new ActionWithBooleanResult() {
+    @Override
+    public boolean joinTable(final String sessionId, final UUID roomId, final UUID tableId, final String name, final String playerType, final int skill, final DeckCardLists deckList) throws MageException, GameException {
+        return executeWithResult("joinTable", sessionId, new ActionWithBooleanResult() {
             public Boolean execute() throws MageException {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 boolean ret = GamesRoomManager.getInstance().getRoom(roomId).joinTable(userId, tableId, name, playerType, skill, deckList);
@@ -164,11 +164,11 @@ public class MageServerImpl implements MageServer {
                 return ret;
             }
         });
-	}
+    }
 
-	@Override
-	public boolean joinTournamentTable(final String sessionId, final UUID roomId, final UUID tableId, final String name, final String playerType, final int skill) throws MageException, GameException {
-		return executeWithResult("joinTournamentTable", sessionId, new ActionWithBooleanResult() {
+    @Override
+    public boolean joinTournamentTable(final String sessionId, final UUID roomId, final UUID tableId, final String name, final String playerType, final int skill) throws MageException, GameException {
+        return executeWithResult("joinTournamentTable", sessionId, new ActionWithBooleanResult() {
             public Boolean execute() throws MageException {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 boolean ret = GamesRoomManager.getInstance().getRoom(roomId).joinTournamentTable(userId, tableId, name, playerType, skill);
@@ -176,106 +176,106 @@ public class MageServerImpl implements MageServer {
                 return ret;
             }
         });
-	}
+    }
 
-	@Override
-	public boolean submitDeck(final String sessionId, final UUID tableId, final DeckCardLists deckList) throws MageException, GameException {
+    @Override
+    public boolean submitDeck(final String sessionId, final UUID tableId, final DeckCardLists deckList) throws MageException, GameException {
         return executeWithResult("submitDeck", sessionId, new ActionWithBooleanResult() {
             public Boolean execute() throws MageException {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-				boolean ret = TableManager.getInstance().submitDeck(userId, tableId, deckList);
-				logger.info("Session " + sessionId + " submitted deck");
-				return ret;
+                boolean ret = TableManager.getInstance().submitDeck(userId, tableId, deckList);
+                logger.info("Session " + sessionId + " submitted deck");
+                return ret;
             }
         });
-	}
+    }
 
-	@Override
-	public void updateDeck(final String sessionId, final UUID tableId, final DeckCardLists deckList) throws MageException, GameException {
-		execute("updateDeck", sessionId, new Action() {
+    @Override
+    public void updateDeck(final String sessionId, final UUID tableId, final DeckCardLists deckList) throws MageException, GameException {
+        execute("updateDeck", sessionId, new Action() {
             public void execute() throws MageException {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 TableManager.getInstance().updateDeck(userId, tableId, deckList);
                 logger.debug("Session " + sessionId + " updated deck");
             }
         });
-	}
+    }
 
     @Override
     //FIXME: why no sessionId here???
-	public List<TableView> getTables(UUID roomId) throws MageException {
+    public List<TableView> getTables(UUID roomId) throws MageException {
         try {
-			return GamesRoomManager.getInstance().getRoom(roomId).getTables();
-		}
-		catch (Exception ex) {
-			handleException(ex);
-		}
-		return null;
-	}
-
-	@Override
-    //FIXME: why no sessionId here???
-	public List<MatchView> getFinishedMatches(UUID roomId) throws MageException {
-		try {
-			return GamesRoomManager.getInstance().getRoom(roomId).getFinished();
-		}
-		catch (Exception ex) {
-			handleException(ex);
-		}
-		return null;
-	}
+            return GamesRoomManager.getInstance().getRoom(roomId).getTables();
+        }
+        catch (Exception ex) {
+            handleException(ex);
+        }
+        return null;
+    }
 
     @Override
     //FIXME: why no sessionId here???
-	public List<String> getConnectedPlayers(UUID roomId) throws MageException {
-		try {
-			return GamesRoomManager.getInstance().getRoom(roomId).getPlayers();
-		}
-		catch (Exception ex) {
-			handleException(ex);
-		}
-		return null;
-	}
+    public List<MatchView> getFinishedMatches(UUID roomId) throws MageException {
+        try {
+            return GamesRoomManager.getInstance().getRoom(roomId).getFinished();
+        }
+        catch (Exception ex) {
+            handleException(ex);
+        }
+        return null;
+    }
 
-	@Override
+    @Override
     //FIXME: why no sessionId here???
-	public TableView getTable(UUID roomId, UUID tableId) throws MageException {
-		try {
-			return GamesRoomManager.getInstance().getRoom(roomId).getTable(tableId);
-		}
-		catch (Exception ex) {
-			handleException(ex);
-		}
-		return null;
-	}
-    
+    public List<String> getConnectedPlayers(UUID roomId) throws MageException {
+        try {
+            return GamesRoomManager.getInstance().getRoom(roomId).getPlayers();
+        }
+        catch (Exception ex) {
+            handleException(ex);
+        }
+        return null;
+    }
+
+    @Override
+    //FIXME: why no sessionId here???
+    public TableView getTable(UUID roomId, UUID tableId) throws MageException {
+        try {
+            return GamesRoomManager.getInstance().getRoom(roomId).getTable(tableId);
+        }
+        catch (Exception ex) {
+            handleException(ex);
+        }
+        return null;
+    }
+
     @Override
     public boolean ping(String sessionId) {
         return SessionManager.getInstance().extendUserSession(sessionId);
     }
 
-	@Override
-	public void deregisterClient(final String sessionId) throws MageException {
-		execute("deregisterClient", sessionId, new Action() {
+    @Override
+    public void deregisterClient(final String sessionId) throws MageException {
+        execute("deregisterClient", sessionId, new Action() {
             public void execute() {
                 SessionManager.getInstance().disconnect(sessionId, true);
                 logger.info("Client deregistered ...");
             }
         });
-	}
+    }
 
-	@Override
-	public void startMatch(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
+    @Override
+    public void startMatch(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
         execute("startMatch", sessionId, new Action() {
             public void execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-				TableManager.getInstance().startMatch(userId, roomId, tableId);
+                TableManager.getInstance().startMatch(userId, roomId, tableId);
             }
         });
-	}
+    }
 
-	@Override
-	public void startChallenge(final String sessionId, final UUID roomId, final UUID tableId, final UUID challengeId) throws MageException {
+    @Override
+    public void startChallenge(final String sessionId, final UUID roomId, final UUID tableId, final UUID challengeId) throws MageException {
         execute("startChallenge", sessionId, new Action() {
             public void execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
@@ -284,185 +284,185 @@ public class MageServerImpl implements MageServer {
         });
     }
 
-	@Override
-	public void startTournament(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
+    @Override
+    public void startTournament(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
         execute("startTournament", sessionId, new Action() {
             public void execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 TableManager.getInstance().startTournament(userId, roomId, tableId);
             }
         });
-	}
+    }
 
-	@Override
+    @Override
     //FIXME: why no sessionId here???
-	public TournamentView getTournament(UUID tournamentId) throws MageException {
-		try {
-			return TournamentManager.getInstance().getTournamentView(tournamentId);
-		}
-		catch (Exception ex) {
-			handleException(ex);
-		}
-		return null;
-	}
+    public TournamentView getTournament(UUID tournamentId) throws MageException {
+        try {
+            return TournamentManager.getInstance().getTournamentView(tournamentId);
+        }
+        catch (Exception ex) {
+            handleException(ex);
+        }
+        return null;
+    }
 
-	@Override
+    @Override
     //FIXME: why no sessionId here???
-	public void sendChatMessage(final UUID chatId, final String userName, final String message) throws MageException {
-		try {
-			callExecutor.execute(
-				new Runnable() {
-					@Override
-					public void run() {
-						ChatManager.getInstance().broadcast(chatId, userName, message, MessageColor.BLUE);
-					}
-				}
-			);
-		}
-		catch (Exception ex) {
-			handleException(ex);
-		}
-	}
+    public void sendChatMessage(final UUID chatId, final String userName, final String message) throws MageException {
+        try {
+            callExecutor.execute(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        ChatManager.getInstance().broadcast(chatId, userName, message, MessageColor.BLUE);
+                    }
+                }
+            );
+        }
+        catch (Exception ex) {
+            handleException(ex);
+        }
+    }
 
-	@Override
-	public void joinChat(final UUID chatId, final String sessionId, final String userName) throws MageException {
+    @Override
+    public void joinChat(final UUID chatId, final String sessionId, final String userName) throws MageException {
         execute("joinChat", sessionId, new Action() {
             public void execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 ChatManager.getInstance().joinChat(chatId, userId);
             }
         });
-	}
+    }
 
-	@Override
-	public void leaveChat(final UUID chatId, final String sessionId) throws MageException {
+    @Override
+    public void leaveChat(final UUID chatId, final String sessionId) throws MageException {
         execute("leaveChat", sessionId, new Action() {
             public void execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 ChatManager.getInstance().leaveChat(chatId, userId);
             }
         });
-	}
+    }
 
-	@Override
+    @Override
     //FIXME: why no sessionId here???
-	public UUID getMainRoomId() throws MageException {
-		try {
-			return GamesRoomManager.getInstance().getMainRoomId();
-		}
-		catch (Exception ex) {
-			handleException(ex);
-		}
-		return null;
-	}
+    public UUID getMainRoomId() throws MageException {
+        try {
+            return GamesRoomManager.getInstance().getMainRoomId();
+        }
+        catch (Exception ex) {
+            handleException(ex);
+        }
+        return null;
+    }
 
-	@Override
+    @Override
     //FIXME: why no sessionId here???
-	public UUID getRoomChatId(UUID roomId) throws MageException {
-		try {
-			return GamesRoomManager.getInstance().getRoom(roomId).getChatId();
-		}
-		catch (Exception ex) {
-			handleException(ex);
-		}
-		return null;
-	}
+    public UUID getRoomChatId(UUID roomId) throws MageException {
+        try {
+            return GamesRoomManager.getInstance().getRoom(roomId).getChatId();
+        }
+        catch (Exception ex) {
+            handleException(ex);
+        }
+        return null;
+    }
 
-	@Override
-	public boolean isTableOwner(final String sessionId, UUID roomId, final UUID tableId) throws MageException {
-		return executeWithResult("isTableOwner", sessionId, new ActionWithBooleanResult() {
+    @Override
+    public boolean isTableOwner(final String sessionId, UUID roomId, final UUID tableId) throws MageException {
+        return executeWithResult("isTableOwner", sessionId, new ActionWithBooleanResult() {
             public Boolean execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 return TableManager.getInstance().isTableOwner(tableId, userId);
             }
         });
-	}
+    }
 
-	@Override
-	public void swapSeats(final String sessionId, final UUID roomId, final UUID tableId, final int seatNum1, final int seatNum2) throws MageException {
+    @Override
+    public void swapSeats(final String sessionId, final UUID roomId, final UUID tableId, final int seatNum1, final int seatNum2) throws MageException {
         execute("swapSeats", sessionId, new Action() {
             public void execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 TableManager.getInstance().swapSeats(tableId, userId, seatNum1, seatNum2);
             }
         });
-	}
+    }
 
-	@Override
-	public void leaveTable(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
+    @Override
+    public void leaveTable(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
         execute("leaveTable", sessionId, new Action() {
             public void execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 GamesRoomManager.getInstance().getRoom(roomId).leaveTable(userId, tableId);
             }
         });
-	}
+    }
 
-	@Override
+    @Override
     //FIXME: why no sessionId here???
-	public UUID getTableChatId(UUID tableId) throws MageException {
-		try {
-			return TableManager.getInstance().getChatId(tableId);
-		}
-		catch (Exception ex) {
-			handleException(ex);
-		}
-		return null;
-	}
+    public UUID getTableChatId(UUID tableId) throws MageException {
+        try {
+            return TableManager.getInstance().getChatId(tableId);
+        }
+        catch (Exception ex) {
+            handleException(ex);
+        }
+        return null;
+    }
 
-	@Override
-	public void joinGame(final UUID gameId, final String sessionId) throws MageException {
+    @Override
+    public void joinGame(final UUID gameId, final String sessionId) throws MageException {
         execute("joinGame", sessionId, new Action() {
             public void execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 GameManager.getInstance().joinGame(gameId, userId);
             }
         });
-	}
+    }
 
-	@Override
-	public void joinDraft(final UUID draftId, final String sessionId) throws MageException {
+    @Override
+    public void joinDraft(final UUID draftId, final String sessionId) throws MageException {
         execute("joinDraft", sessionId, new Action() {
             public void execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 DraftManager.getInstance().joinDraft(draftId, userId);
             }
         });
-	}
+    }
 
-	@Override
-	public void joinTournament(final UUID tournamentId, final String sessionId) throws MageException {
+    @Override
+    public void joinTournament(final UUID tournamentId, final String sessionId) throws MageException {
         execute("joinTournament", sessionId, new Action() {
             public void execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 TournamentManager.getInstance().joinTournament(tournamentId, userId);
             }
         });
-	}
+    }
 
-	@Override
+    @Override
     //FIXME: why no sessionId here???
-	public UUID getGameChatId(UUID gameId) throws MageException {
-		try {
-			return GameManager.getInstance().getChatId(gameId);
-		}
-		catch (Exception ex) {
-			handleException(ex);
-		}
-		return null;
-	}
+    public UUID getGameChatId(UUID gameId) throws MageException {
+        try {
+            return GameManager.getInstance().getChatId(gameId);
+        }
+        catch (Exception ex) {
+            handleException(ex);
+        }
+        return null;
+    }
 
-	@Override
+    @Override
     //FIXME: why no sessionId here???
-	public UUID getTournamentChatId(UUID tournamentId) throws MageException {
-		try {
-			return TournamentManager.getInstance().getChatId(tournamentId);
-		}
-		catch (Exception ex) {
-			handleException(ex);
-		}
-		return null;
-	}
+    public UUID getTournamentChatId(UUID tournamentId) throws MageException {
+        try {
+            return TournamentManager.getInstance().getChatId(tournamentId);
+        }
+        catch (Exception ex) {
+            handleException(ex);
+        }
+        return null;
+    }
 
     @Override
     public void sendPlayerUUID(final UUID gameId, final String sessionId, final UUID data) throws MageException {
@@ -474,7 +474,7 @@ public class MageServerImpl implements MageServer {
         });
     }
 
-	@Override
+    @Override
     public void sendPlayerString(final UUID gameId, final String sessionId, final String data) throws MageException {
         execute("sendPlayerString", sessionId, new Action() {
             public void execute() {
@@ -482,20 +482,20 @@ public class MageServerImpl implements MageServer {
                 user.sendPlayerString(gameId, data);
             }
         });
-	}
+    }
 
-	@Override
-	public void sendPlayerBoolean(final UUID gameId, final String sessionId, final Boolean data) throws MageException {
+    @Override
+    public void sendPlayerBoolean(final UUID gameId, final String sessionId, final Boolean data) throws MageException {
         execute("sendPlayerBoolean", sessionId, new Action() {
             public void execute() {
                 User user = SessionManager.getInstance().getUser(sessionId);
                 user.sendPlayerBoolean(gameId, data);
             }
         });
-	}
+    }
 
-	@Override
-	public void sendPlayerInteger(final UUID gameId, final String sessionId, final Integer data) throws MageException {
+    @Override
+    public void sendPlayerInteger(final UUID gameId, final String sessionId, final Integer data) throws MageException {
         execute("sendPlayerInteger", sessionId, new Action() {
             public void execute() {
                 User user = SessionManager.getInstance().getUser(sessionId);
@@ -504,15 +504,15 @@ public class MageServerImpl implements MageServer {
         });
     }
 
-	@Override
-	public DraftPickView sendCardPick(final UUID draftId, final String sessionId, final UUID cardPick) throws MageException {
-		return executeWithResult("sendCardPick", sessionId, new ActionWithNullNegativeResult<DraftPickView>() {
+    @Override
+    public DraftPickView sendCardPick(final UUID draftId, final String sessionId, final UUID cardPick) throws MageException {
+        return executeWithResult("sendCardPick", sessionId, new ActionWithNullNegativeResult<DraftPickView>() {
             public DraftPickView execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-				return DraftManager.getInstance().sendCardPick(draftId, userId, cardPick);
+                return DraftManager.getInstance().sendCardPick(draftId, userId, cardPick);
             }
         });
-	}
+    }
 
     @Override
     public void concedeGame(final UUID gameId, final String sessionId) throws MageException {
@@ -524,15 +524,15 @@ public class MageServerImpl implements MageServer {
         });
     }
 
-	@Override
-	public boolean watchTable(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
-		return executeWithResult("setUserData", sessionId, new ActionWithBooleanResult() {
+    @Override
+    public boolean watchTable(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
+        return executeWithResult("setUserData", sessionId, new ActionWithBooleanResult() {
             public Boolean execute() throws MageException {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-				return GamesRoomManager.getInstance().getRoom(roomId).watchTable(userId, tableId);
+                return GamesRoomManager.getInstance().getRoom(roomId).watchTable(userId, tableId);
             }
         });
-	}
+    }
 
     @Override
     public void watchGame(final UUID gameId, final String sessionId) throws MageException {
@@ -554,15 +554,15 @@ public class MageServerImpl implements MageServer {
         });
     }
 
-	@Override
-	public void replayGame(final UUID gameId, final String sessionId) throws MageException {
+    @Override
+    public void replayGame(final UUID gameId, final String sessionId) throws MageException {
         execute("replayGame", sessionId, new Action() {
             public void execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 ReplayManager.getInstance().replayGame(gameId, userId);
             }
         });
-	}
+    }
 
     @Override
     public void startReplay(final UUID gameId, final String sessionId) throws MageException {
@@ -574,17 +574,17 @@ public class MageServerImpl implements MageServer {
         });
     }
 
-	@Override
-	public void stopReplay(final UUID gameId, final String sessionId) throws MageException {
+    @Override
+    public void stopReplay(final UUID gameId, final String sessionId) throws MageException {
         execute("stopReplay", sessionId, new Action() {
             public void execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 ReplayManager.getInstance().stopReplay(gameId, userId);
             }
         });
-	}
+    }
 
-	@Override
+    @Override
     public void nextPlay(final UUID gameId, final String sessionId) throws MageException {
         execute("nextPlay", sessionId, new Action() {
             public void execute() {
@@ -594,15 +594,15 @@ public class MageServerImpl implements MageServer {
         });
     }
 
-	@Override
-	public void previousPlay(final UUID gameId, final String sessionId) throws MageException {
+    @Override
+    public void previousPlay(final UUID gameId, final String sessionId) throws MageException {
         execute("previousPlay", sessionId, new Action() {
             public void execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 ReplayManager.getInstance().previousPlay(gameId, userId);
             }
         });
-	}
+    }
 
     @Override
     public void skipForward(final UUID gameId, final String sessionId, final int moves) throws MageException {
@@ -616,21 +616,21 @@ public class MageServerImpl implements MageServer {
 
     @Override
     //TODO: check how often it is used
-	public ServerState getServerState() throws MageException {
-		try {
-			return new ServerState(
-					GameFactory.getInstance().getGameTypes(),
-					TournamentFactory.getInstance().getTournamentTypes(),
-					PlayerFactory.getInstance().getPlayerTypes().toArray(new String[0]),
-					DeckValidatorFactory.getInstance().getDeckTypes().toArray(new String[0]),
-					testMode,
-					Main.getVersion());
-		}
-		catch (Exception ex) {
-			handleException(ex);
-		}
-		return null;
-	}
+    public ServerState getServerState() throws MageException {
+        try {
+            return new ServerState(
+                    GameFactory.getInstance().getGameTypes(),
+                    TournamentFactory.getInstance().getTournamentTypes(),
+                    PlayerFactory.getInstance().getPlayerTypes().toArray(new String[0]),
+                    DeckValidatorFactory.getInstance().getDeckTypes().toArray(new String[0]),
+                    testMode,
+                    Main.getVersion());
+        }
+        catch (Exception ex) {
+            handleException(ex);
+        }
+        return null;
+    }
 
     @Override
     public void cheat(final UUID gameId, final String sessionId, final UUID playerId, final DeckCardLists deckList) throws MageException {
@@ -645,7 +645,7 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
-	public boolean cheat(final UUID gameId, final String sessionId, final UUID playerId, final String cardName) throws MageException {
+    public boolean cheat(final UUID gameId, final String sessionId, final UUID playerId, final String cardName) throws MageException {
         return executeWithResult("cheatOne", sessionId, new ActionWithBooleanResult() {
             public Boolean execute() {
                 if (testMode) {
@@ -655,16 +655,16 @@ public class MageServerImpl implements MageServer {
                 return false;
             }
         });
- 	}
+     }
 
-	public void handleException(Exception ex) throws MageException {
-		logger.fatal("", ex);
-		throw new MageException("Server error: " + ex.getMessage());
-	}
+    public void handleException(Exception ex) throws MageException {
+        logger.fatal("", ex);
+        throw new MageException("Server error: " + ex.getMessage());
+    }
 
-	@Override
+    @Override
     public GameView getGameView(final UUID gameId, final String sessionId, final UUID playerId) throws MageException {
- 		return executeWithResult("getGameView", sessionId, new ActionWithNullNegativeResult<GameView>() {
+         return executeWithResult("getGameView", sessionId, new ActionWithNullNegativeResult<GameView>() {
              public GameView execute() throws MageException {
                  UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                  return GameManager.getInstance().getGameView(gameId, userId, playerId);
@@ -672,8 +672,8 @@ public class MageServerImpl implements MageServer {
         });
     }
 
-	@Override
-	public List<UserView> getUsers(String sessionId) throws MageException {
+    @Override
+    public List<UserView> getUsers(String sessionId) throws MageException {
         return executeWithResult("getUsers", sessionId, new ActionWithNullNegativeResult<List<UserView>>() {
             public List<UserView> execute() throws MageException {
                 List<UserView> users = new ArrayList<UserView>();
@@ -683,35 +683,35 @@ public class MageServerImpl implements MageServer {
                 return users;
             }
         }, true);
-	}
+    }
 
-	@Override
-	public void disconnectUser(final String sessionId, final String userSessionId) throws MageException {
+    @Override
+    public void disconnectUser(final String sessionId, final String userSessionId) throws MageException {
         execute("disconnectUser", sessionId, new Action() {
             public void execute() {
                 SessionManager.getInstance().disconnectUser(sessionId, userSessionId);
             }
         });
-	}
+    }
 
-	@Override
-	public void removeTable(final String sessionId, final UUID tableId) throws MageException {
+    @Override
+    public void removeTable(final String sessionId, final UUID tableId) throws MageException {
         execute("removeTable", sessionId, new Action() {
             public void execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 TableManager.getInstance().removeTable(userId, tableId);
             }
         });
-	}
+    }
 
-	@Override
-	public Object getServerMessagesCompressed(String sessionId) throws MageException {
-		return executeWithResult("getGameView", sessionId, new ActionWithNullNegativeResult<Object>() {
+    @Override
+    public Object getServerMessagesCompressed(String sessionId) throws MageException {
+        return executeWithResult("getGameView", sessionId, new ActionWithNullNegativeResult<Object>() {
              public Object execute() throws MageException {
                  return CompressUtil.compress(ServerMessagesUtil.getInstance().getMessages());
              }
         });
-	}
+    }
 
     @Override
     public void sendFeedbackMessage(final String sessionId, final String username, final String title, final String type, final String message, final String email) throws MageException {
@@ -754,11 +754,11 @@ public class MageServerImpl implements MageServer {
 
     protected void execute(final String actionName, final String sessionId, final Action action) throws MageException {
         if (SessionManager.getInstance().isValidSession(sessionId)) {
-			try {
-				callExecutor.execute(
-					new Runnable() {
-						@Override
-						public void run() {
+            try {
+                callExecutor.execute(
+                    new Runnable() {
+                        @Override
+                        public void run() {
                             if (SessionManager.getInstance().isValidSession(sessionId)) {
                                 try {
                                     action.execute();
@@ -768,14 +768,14 @@ public class MageServerImpl implements MageServer {
                             } else {
                                 LogServiceImpl.instance.log(LogKeys.KEY_NOT_VALID_SESSION_INTERNAL, actionName, sessionId);
                             }
-						}
-					}
-				);
-			}
-			catch (Exception ex) {
-				handleException(ex);
-			}
-		} else {
+                        }
+                    }
+                );
+            }
+            catch (Exception ex) {
+                handleException(ex);
+            }
+        } else {
             LogServiceImpl.instance.log(LogKeys.KEY_NOT_VALID_SESSION, actionName, sessionId);
         }
     }

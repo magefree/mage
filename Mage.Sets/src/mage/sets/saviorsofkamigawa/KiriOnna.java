@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class KiriOnna extends CardImpl<KiriOnna> {
 
     private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
-    
+
     public KiriOnna(UUID ownerId) {
         super(ownerId, 43, "Kiri-Onna", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
         this.expansionSetCode = "SOK";

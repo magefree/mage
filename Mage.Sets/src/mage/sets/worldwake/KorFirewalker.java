@@ -52,8 +52,8 @@ public class KorFirewalker extends CardImpl<KorFirewalker> {
 
     static {
         filter.setUseColor(true);
-		filter.getColor().setRed(true);
-		filter.setScopeColor(ComparisonScope.Any);
+        filter.getColor().setRed(true);
+        filter.setScopeColor(ComparisonScope.Any);
     }
 
     public KorFirewalker (UUID ownerId) {
@@ -61,12 +61,12 @@ public class KorFirewalker extends CardImpl<KorFirewalker> {
         this.expansionSetCode = "WWK";
         this.subtype.add("Kor");
         this.subtype.add("Soldier");
-		this.color.setWhite(true);
-		this.color.setWhite(true);        
+        this.color.setWhite(true);
+        this.color.setWhite(true);        
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-		this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(new ProtectionAbility(filter));
         this.addAbility(new KorFirewalkerAbility());
 
     }
@@ -84,32 +84,32 @@ public class KorFirewalker extends CardImpl<KorFirewalker> {
 
 class KorFirewalkerAbility extends TriggeredAbilityImpl<KorFirewalkerAbility> {
 
-	public KorFirewalkerAbility() {
-		super(Zone.BATTLEFIELD, new GainLifeEffect(1), true);
-	}
+    public KorFirewalkerAbility() {
+        super(Zone.BATTLEFIELD, new GainLifeEffect(1), true);
+    }
 
-	public KorFirewalkerAbility(final KorFirewalkerAbility ability) {
-		super(ability);
-	}
+    public KorFirewalkerAbility(final KorFirewalkerAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public KorFirewalkerAbility copy() {
-		return new KorFirewalkerAbility(this);
-	}
+    @Override
+    public KorFirewalkerAbility copy() {
+        return new KorFirewalkerAbility(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-			Spell spell = game.getStack().getSpell(event.getTargetId());
-			if (spell != null && spell.getColor().isRed()) {
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
+            Spell spell = game.getStack().getSpell(event.getTargetId());
+            if (spell != null && spell.getColor().isRed()) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "Whenever a player casts a red spell, you may gain 1 life.";
-	}
+    @Override
+    public String getRule() {
+        return "Whenever a player casts a red spell, you may gain 1 life.";
+    }
 }

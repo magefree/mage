@@ -46,7 +46,7 @@ public class Oculus extends CardImpl<Oculus> {
         super(ownerId, 29, "Oculus", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.expansionSetCode = "MBS";
         this.subtype.add("Homunculus");
-		this.color.setBlue(true);
+        this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(new DiesTriggeredAbility(new DrawCardControllerEffect(1), true));

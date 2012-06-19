@@ -45,94 +45,94 @@ import mage.game.permanent.token.Token;
  */
 public class BecomesCreatureSourceEffect extends ContinuousEffectImpl<BecomesCreatureSourceEffect> {
 
-	protected Token token;
-	protected String type;
+    protected Token token;
+    protected String type;
 
-	public BecomesCreatureSourceEffect(Token token, String type, Duration duration) {
-		super(duration, Outcome.BecomeCreature);
-		this.token = token;
-		this.type = type;
-		setText();
-	}
+    public BecomesCreatureSourceEffect(Token token, String type, Duration duration) {
+        super(duration, Outcome.BecomeCreature);
+        this.token = token;
+        this.type = type;
+        setText();
+    }
 
-	public BecomesCreatureSourceEffect(final BecomesCreatureSourceEffect effect) {
-		super(effect);
-		this.token = effect.token.copy();
-		this.type = effect.type;
-	}
+    public BecomesCreatureSourceEffect(final BecomesCreatureSourceEffect effect) {
+        super(effect);
+        this.token = effect.token.copy();
+        this.type = effect.type;
+    }
 
-	@Override
-	public BecomesCreatureSourceEffect copy() {
-		return new BecomesCreatureSourceEffect(this);
-	}
+    @Override
+    public BecomesCreatureSourceEffect copy() {
+        return new BecomesCreatureSourceEffect(this);
+    }
 
-	@Override
-	public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-		Permanent permanent = game.getPermanent(source.getSourceId());
-		if (permanent != null) {
-			switch (layer) {
-				case TypeChangingEffects_4:
-					if (sublayer == SubLayer.NA) {
-						if (token.getCardType().size() > 0) {
+    @Override
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            switch (layer) {
+                case TypeChangingEffects_4:
+                    if (sublayer == SubLayer.NA) {
+                        if (token.getCardType().size() > 0) {
                             for (Constants.CardType t : token.getCardType()) {
                                 if (!permanent.getCardType().contains(t)) {
                                     permanent.getCardType().add(t);
-								}
+                                }
                             }
-						}
-						if ("".equals(type) || type == null) {
-							permanent.getSubtype().clear();
-						}
-						if (token.getSubtype().size() > 0) {
-							permanent.getSubtype().addAll(token.getSubtype());
-						}
-					}
-					break;
-				case ColorChangingEffects_5:
-					if (sublayer == SubLayer.NA) {
-						if (token.getColor().hasColor())
-							permanent.getColor().setColor(token.getColor());
-					}
-					break;
-				case AbilityAddingRemovingEffects_6:
-					if (sublayer == SubLayer.NA) {
-						if (token.getAbilities().size() > 0) {
-							for (Ability ability: token.getAbilities()) {
-								permanent.addAbility(ability, game);
-							}
-						}
-					}
-					break;
-				case PTChangingEffects_7:
-					if (sublayer == SubLayer.SetPT_7b) {
-						int power = token.getPower().getValue();
-						int toughness = token.getToughness().getValue();
-						if (power != 0 && toughness != 0) {
-							permanent.getPower().setValue(power);
-							permanent.getToughness().setValue(toughness);
-						}
-					}
-			}
-			return true;
-		}
-		return false;
-	}
+                        }
+                        if ("".equals(type) || type == null) {
+                            permanent.getSubtype().clear();
+                        }
+                        if (token.getSubtype().size() > 0) {
+                            permanent.getSubtype().addAll(token.getSubtype());
+                        }
+                    }
+                    break;
+                case ColorChangingEffects_5:
+                    if (sublayer == SubLayer.NA) {
+                        if (token.getColor().hasColor())
+                            permanent.getColor().setColor(token.getColor());
+                    }
+                    break;
+                case AbilityAddingRemovingEffects_6:
+                    if (sublayer == SubLayer.NA) {
+                        if (token.getAbilities().size() > 0) {
+                            for (Ability ability: token.getAbilities()) {
+                                permanent.addAbility(ability, game);
+                            }
+                        }
+                    }
+                    break;
+                case PTChangingEffects_7:
+                    if (sublayer == SubLayer.SetPT_7b) {
+                        int power = token.getPower().getValue();
+                        int toughness = token.getToughness().getValue();
+                        if (power != 0 && toughness != 0) {
+                            permanent.getPower().setValue(power);
+                            permanent.getToughness().setValue(toughness);
+                        }
+                    }
+            }
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
 
-	private void setText() {
+    private void setText() {
         if (type.length() > 0)
-		    staticText = duration.toString() + " {this} becomes a " + token.getDescription() + " that's still a " + this.type;
+            staticText = duration.toString() + " {this} becomes a " + token.getDescription() + " that's still a " + this.type;
         else
             staticText = duration.toString() + " {this} becomes a " + token.getDescription();
-	}
+    }
 
-	@Override
-	public boolean hasLayer(Layer layer) {
-		return layer == Layer.PTChangingEffects_7 || layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.ColorChangingEffects_5 || layer == Layer.TypeChangingEffects_4;
-	}
+    @Override
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.PTChangingEffects_7 || layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.ColorChangingEffects_5 || layer == Layer.TypeChangingEffects_4;
+    }
 
 }

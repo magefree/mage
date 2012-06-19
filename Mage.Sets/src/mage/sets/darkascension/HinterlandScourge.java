@@ -61,8 +61,8 @@ public class HinterlandScourge extends CardImpl<HinterlandScourge> {
         this.toughness = new MageInt(2);
 
         // Hinterland Scourge must be blocked if able.
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new MustBlockSourceEffect()));
-        
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new MustBlockSourceEffect()));
+
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Hinterland Scourge.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), Constants.TargetController.ANY, false);
         this.addAbility(new ConditionalTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.getInstance(), TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));

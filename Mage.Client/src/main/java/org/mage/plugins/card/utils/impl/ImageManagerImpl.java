@@ -13,40 +13,40 @@ import java.net.URL;
 
 public class ImageManagerImpl implements ImageManager {
 
-	private static ImageManagerImpl fInstance = new ImageManagerImpl();
-	
-	public static ImageManagerImpl getInstance() {
-		return fInstance;
-	}
-	
-	@Override
-	public BufferedImage getSicknessImage() {
-		if (imageSickness == null) {
-			Image image = getImageFromResourceTransparent("/sickness.png", Color.WHITE, new Rectangle(296, 265));
-			Toolkit tk = Toolkit.getDefaultToolkit();
-			image = tk.createImage(new FilteredImageSource(image.getSource(), new CropImageFilter(0, 0, 200, 285)));
-			imageSickness = BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB);
-		}
-		return imageSickness;
-	}
+    private static ImageManagerImpl fInstance = new ImageManagerImpl();
 
-	@Override
-	public BufferedImage getDayImage() {
-		if (imageDay == null) {
-			Image image = getImageFromResourceTransparent("/card/day.png", Color.WHITE, new Rectangle(20, 20));
-			imageDay = BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB);
-		}
-		return imageDay;
-	}
+    public static ImageManagerImpl getInstance() {
+        return fInstance;
+    }
 
-	@Override
-	public BufferedImage getNightImage() {
-		if (imageNight == null) {
-			Image image = getImageFromResourceTransparent("/card/night.png", Color.WHITE, new Rectangle(20, 20));
-			imageNight = BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB);
-		}
-		return imageNight;
-	}
+    @Override
+    public BufferedImage getSicknessImage() {
+        if (imageSickness == null) {
+            Image image = getImageFromResourceTransparent("/sickness.png", Color.WHITE, new Rectangle(296, 265));
+            Toolkit tk = Toolkit.getDefaultToolkit();
+            image = tk.createImage(new FilteredImageSource(image.getSource(), new CropImageFilter(0, 0, 200, 285)));
+            imageSickness = BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB);
+        }
+        return imageSickness;
+    }
+
+    @Override
+    public BufferedImage getDayImage() {
+        if (imageDay == null) {
+            Image image = getImageFromResourceTransparent("/card/day.png", Color.WHITE, new Rectangle(20, 20));
+            imageDay = BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB);
+        }
+        return imageDay;
+    }
+
+    @Override
+    public BufferedImage getNightImage() {
+        if (imageNight == null) {
+            Image image = getImageFromResourceTransparent("/card/night.png", Color.WHITE, new Rectangle(20, 20));
+            imageNight = BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB);
+        }
+        return imageNight;
+    }
 
     @Override
     public Image getDlgCancelButtonImage() {
@@ -112,9 +112,9 @@ public class ImageManagerImpl implements ImageManager {
         return image;
     }
 
-	private static BufferedImage imageSickness;
-	private static BufferedImage imageDay;
-	private static BufferedImage imageNight;
+    private static BufferedImage imageSickness;
+    private static BufferedImage imageDay;
+    private static BufferedImage imageNight;
 
     private static BufferedImage imageDlgAcceptButton;
     private static BufferedImage imageDlgActiveAcceptButton;

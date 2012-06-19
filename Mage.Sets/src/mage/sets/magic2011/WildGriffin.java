@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class WildGriffin extends mage.sets.tenth.WildGriffin {
 
-	public WildGriffin(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 40;
-		this.expansionSetCode = "M11";
-	}
+    public WildGriffin(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 40;
+        this.expansionSetCode = "M11";
+    }
 
-	public WildGriffin(final WildGriffin card) {
-		super(card);
-	}
+    public WildGriffin(final WildGriffin card) {
+        super(card);
+    }
 
-	@Override
-	public WildGriffin copy() {
-		return new WildGriffin(this);
-	}
+    @Override
+    public WildGriffin copy() {
+        return new WildGriffin(this);
+    }
 
 }

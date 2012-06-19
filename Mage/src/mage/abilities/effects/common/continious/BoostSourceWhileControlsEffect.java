@@ -48,39 +48,39 @@ import java.util.List;
  */
 public class BoostSourceWhileControlsEffect extends WhileConditionContiniousEffect<BoostSourceWhileControlsEffect> {
 
-	private int power;
-	private int toughness;
+    private int power;
+    private int toughness;
     private List<String> filterDescription;
 
-	public BoostSourceWhileControlsEffect(FilterPermanent filter, int power, int toughness) {
-		super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, new ControlsPermanentCondition(filter), Outcome.BoostCreature);
-		this.power = power;
-		this.toughness = toughness;
+    public BoostSourceWhileControlsEffect(FilterPermanent filter, int power, int toughness) {
+        super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, new ControlsPermanentCondition(filter), Outcome.BoostCreature);
+        this.power = power;
+        this.toughness = toughness;
         this.filterDescription = filter.getName();
-		staticText = "{this} gets " + String.format("%1$+d/%2$+d", power, toughness) + " as long as you control a " + filterDescription;
-	}
+        staticText = "{this} gets " + String.format("%1$+d/%2$+d", power, toughness) + " as long as you control a " + filterDescription;
+    }
 
-	public BoostSourceWhileControlsEffect(final BoostSourceWhileControlsEffect effect) {
-		super(effect);
-		this.power = effect.power;
-		this.toughness = effect.toughness;
+    public BoostSourceWhileControlsEffect(final BoostSourceWhileControlsEffect effect) {
+        super(effect);
+        this.power = effect.power;
+        this.toughness = effect.toughness;
         this.filterDescription = new ArrayList<String>();
         this.filterDescription.addAll(effect.filterDescription);
-	}
+    }
 
-	@Override
-	public BoostSourceWhileControlsEffect copy() {
-		return new BoostSourceWhileControlsEffect(this);
-	}
+    @Override
+    public BoostSourceWhileControlsEffect copy() {
+        return new BoostSourceWhileControlsEffect(this);
+    }
 
-	@Override
-	public boolean applyEffect(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getSourceId());
-		if (permanent != null) {
-			permanent.addPower(power);
-			permanent.addToughness(toughness);
-		}
-		return true;
-	}
+    @Override
+    public boolean applyEffect(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            permanent.addPower(power);
+            permanent.addToughness(toughness);
+        }
+        return true;
+    }
 
 }

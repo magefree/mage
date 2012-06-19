@@ -49,49 +49,49 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class CyclopsGladiator extends CardImpl<CyclopsGladiator> {
 
-	public CyclopsGladiator(UUID ownerId) {
-		super(ownerId, 131, "Cyclops Gladiator", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{R}{R}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Cyclops");
-		this.subtype.add("Warrior");
-		this.color.setRed(true);
-		this.power = new MageInt(4);
-		this.toughness = new MageInt(4);
+    public CyclopsGladiator(UUID ownerId) {
+        super(ownerId, 131, "Cyclops Gladiator", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{R}{R}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Cyclops");
+        this.subtype.add("Warrior");
+        this.color.setRed(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
-		Ability ability = new AttacksTriggeredAbility(new CyclopsGladiatorEffect(), true);
-		this.addAbility(ability);
-	}
+        Ability ability = new AttacksTriggeredAbility(new CyclopsGladiatorEffect(), true);
+        this.addAbility(ability);
+    }
 
-	public CyclopsGladiator(final CyclopsGladiator card) {
-		super(card);
-	}
+    public CyclopsGladiator(final CyclopsGladiator card) {
+        super(card);
+    }
 
-	@Override
-	public CyclopsGladiator copy() {
-		return new CyclopsGladiator(this);
-	}
+    @Override
+    public CyclopsGladiator copy() {
+        return new CyclopsGladiator(this);
+    }
 
 }
 
 class CyclopsGladiatorEffect extends OneShotEffect<CyclopsGladiatorEffect> {
 
-	public CyclopsGladiatorEffect() {
-		super(Outcome.Damage);
-		staticText = "you may have it deal damage equal to its power to target creature defending player controls. If you do, that creature deals damage equal to its power to {this}";
-	}
+    public CyclopsGladiatorEffect() {
+        super(Outcome.Damage);
+        staticText = "you may have it deal damage equal to its power to target creature defending player controls. If you do, that creature deals damage equal to its power to {this}";
+    }
 
-	public CyclopsGladiatorEffect(final CyclopsGladiatorEffect effect) {
-		super(effect);
-	}
+    public CyclopsGladiatorEffect(final CyclopsGladiatorEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		UUID defenderId = game.getCombat().getDefendingPlayer(source.getSourceId());
-		if (defenderId != null) {
-			FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
-			filter.getControllerId().add(defenderId);
-			TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
-			Player player = game.getPlayer(source.getControllerId());
+    @Override
+    public boolean apply(Game game, Ability source) {
+        UUID defenderId = game.getCombat().getDefendingPlayer(source.getSourceId());
+        if (defenderId != null) {
+            FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
+            filter.getControllerId().add(defenderId);
+            TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
+            Player player = game.getPlayer(source.getControllerId());
             if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
                 if (player.chooseTarget(Outcome.Detriment, target, source, game)) {
                     Permanent permanent = game.getPermanent(target.getFirstTarget());
@@ -103,13 +103,13 @@ class CyclopsGladiatorEffect extends OneShotEffect<CyclopsGladiatorEffect> {
                     }
                 }
             }
-		}
-		return false;
-	}
+        }
+        return false;
+    }
 
-	@Override
-	public CyclopsGladiatorEffect copy() {
-		return new CyclopsGladiatorEffect(this);
-	}
+    @Override
+    public CyclopsGladiatorEffect copy() {
+        return new CyclopsGladiatorEffect(this);
+    }
 
 }

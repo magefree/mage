@@ -51,8 +51,8 @@ public class DarklitGargoyle extends CardImpl<DarklitGargoyle> {
         this.expansionSetCode = "CON";
         this.color.setWhite(true);
         this.subtype.add("Gargoyle");
-	this.power = new MageInt(1);
-	this.toughness = new MageInt(2);
+    this.power = new MageInt(1);
+    this.toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, -1, Duration.EndOfTurn), new ManaCostsImpl(("{B}"))));
     }

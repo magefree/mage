@@ -51,13 +51,13 @@ import java.util.UUID;
  */
 public class Immerwolf extends CardImpl<Immerwolf> {
 
-	private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Wolf and Werewolf creatures");
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Wolf and Werewolf creatures");
 
-	static {
-		filter.getSubtype().add("Wolf");
-		filter.getSubtype().add("Werewolf");
-		filter.setScopeSubtype(Filter.ComparisonScope.Any);
-	}
+    static {
+        filter.getSubtype().add("Wolf");
+        filter.getSubtype().add("Werewolf");
+        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+    }
 
     public Immerwolf(UUID ownerId) {
         super(ownerId, 141, "Immerwolf", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{G}");
@@ -70,13 +70,13 @@ public class Immerwolf extends CardImpl<Immerwolf> {
         this.toughness = new MageInt(2);
 
         this.addAbility(IntimidateAbility.getInstance());
-        
+
         // Other Wolf and Werewolf creatures you control get +1/+1.
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Constants.Duration.WhileOnBattlefield, filter, true)));
-        
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Constants.Duration.WhileOnBattlefield, filter, true)));
+
         // Non-Human Werewolves you control can't transform.
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ImmerwolfEffect()));
-        
+
     }
 
     public Immerwolf(final Immerwolf card) {
@@ -91,17 +91,17 @@ public class Immerwolf extends CardImpl<Immerwolf> {
 
 class ImmerwolfEffect extends ReplacementEffectImpl<ImmerwolfEffect> {
 
-	private final static FilterCreaturePermanent filterWerewolf = new FilterCreaturePermanent("Werewolf creature");
-	private final static FilterCreaturePermanent filterNonhuman = new FilterCreaturePermanent("Non-human creature");
+    private final static FilterCreaturePermanent filterWerewolf = new FilterCreaturePermanent("Werewolf creature");
+    private final static FilterCreaturePermanent filterNonhuman = new FilterCreaturePermanent("Non-human creature");
 
-	static {
-		filterWerewolf.getSubtype().add("Werewolf");
-		filterWerewolf.setScopeSubtype(Filter.ComparisonScope.Any);
+    static {
+        filterWerewolf.getSubtype().add("Werewolf");
+        filterWerewolf.setScopeSubtype(Filter.ComparisonScope.Any);
         filterNonhuman.getSubtype().add("Human");
         filterNonhuman.setScopeSubtype(Filter.ComparisonScope.Any);
         filterNonhuman.setNotFilter(true);
-	}
-    
+    }
+
     public ImmerwolfEffect() {
         super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Detriment);
         staticText = "Non-Human Werewolves you control can't transform";

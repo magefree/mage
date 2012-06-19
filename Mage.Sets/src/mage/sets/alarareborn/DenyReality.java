@@ -48,7 +48,7 @@ public class DenyReality extends CardImpl<DenyReality> {
         this.color.setBlue(true);
         this.color.setBlack(true);
         this.getSpellAbility().addTarget(new TargetPermanent());
-		this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.addAbility(new CascadeAbility());
     }
 

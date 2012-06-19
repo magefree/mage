@@ -46,52 +46,52 @@ import mage.game.stack.Spell;
  */
 public class KrakensEye extends CardImpl<KrakensEye> {
 
-	public KrakensEye(UUID ownerId) {
-		super(ownerId, 329, "Kraken's Eye", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-		this.expansionSetCode = "10E";
-		this.addAbility(new KrakensEyeAbility());
-	}
+    public KrakensEye(UUID ownerId) {
+        super(ownerId, 329, "Kraken's Eye", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
+        this.expansionSetCode = "10E";
+        this.addAbility(new KrakensEyeAbility());
+    }
 
-	public KrakensEye(final KrakensEye card) {
-		super(card);
-	}
+    public KrakensEye(final KrakensEye card) {
+        super(card);
+    }
 
-	@Override
-	public KrakensEye copy() {
-		return new KrakensEye(this);
-	}
+    @Override
+    public KrakensEye copy() {
+        return new KrakensEye(this);
+    }
 
 }
 
 class KrakensEyeAbility extends TriggeredAbilityImpl<KrakensEyeAbility> {
 
-	public KrakensEyeAbility() {
-		super(Zone.BATTLEFIELD, new GainLifeEffect(1), true);
-	}
+    public KrakensEyeAbility() {
+        super(Zone.BATTLEFIELD, new GainLifeEffect(1), true);
+    }
 
-	public KrakensEyeAbility(final KrakensEyeAbility ability) {
-		super(ability);
-	}
+    public KrakensEyeAbility(final KrakensEyeAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public KrakensEyeAbility copy() {
-		return new KrakensEyeAbility(this);
-	}
+    @Override
+    public KrakensEyeAbility copy() {
+        return new KrakensEyeAbility(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.SPELL_CAST) {
-			Spell spell = game.getStack().getSpell(event.getTargetId());
-			if (spell != null && spell.getColor().isBlue()) {
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.SPELL_CAST) {
+            Spell spell = game.getStack().getSpell(event.getTargetId());
+            if (spell != null && spell.getColor().isBlue()) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "Whenever a player casts a blue spell, you may gain 1 life.";
-	}
+    @Override
+    public String getRule() {
+        return "Whenever a player casts a blue spell, you may gain 1 life.";
+    }
 
 }

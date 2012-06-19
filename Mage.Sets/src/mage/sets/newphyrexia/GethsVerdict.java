@@ -46,7 +46,7 @@ public class GethsVerdict extends CardImpl<GethsVerdict> {
     public GethsVerdict (UUID ownerId) {
         super(ownerId, 61, "Geth's Verdict", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}{B}");
         this.expansionSetCode = "NPH";
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.getSpellAbility().addEffect(new SacrificeEffect(new FilterCreaturePermanent(), 1, "Target player"));
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(1));
         this.getSpellAbility().addTarget(new TargetPlayer());

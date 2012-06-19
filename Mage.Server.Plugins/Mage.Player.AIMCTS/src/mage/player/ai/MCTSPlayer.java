@@ -45,26 +45,26 @@ import org.apache.log4j.Logger;
  */
 public class MCTSPlayer extends ComputerPlayer<MCTSPlayer> {
 
- 	private final static transient Logger logger = Logger.getLogger(MCTSPlayer.class);
+     private final static transient Logger logger = Logger.getLogger(MCTSPlayer.class);
 
     protected PassAbility pass = new PassAbility();
-    
+
     private NextAction nextAction;
-    
+
     public enum NextAction {
         PRIORITY, SELECT_ATTACKERS, SELECT_BLOCKERS;
     }
 
     public MCTSPlayer(UUID id) {
-		super(id);
+        super(id);
         this.pass.setControllerId(id);
-	}
+    }
 
-	public MCTSPlayer(final MCTSPlayer player) {
-		super(player);
+    public MCTSPlayer(final MCTSPlayer player) {
+        super(player);
         this.pass = player.pass.copy();
         this.nextAction = player.nextAction;
-	}
+    }
 
     @Override
     public MCTSPlayer copy() {
@@ -76,90 +76,90 @@ public class MCTSPlayer extends ComputerPlayer<MCTSPlayer> {
         playables.add(pass);
         return playables;
     }
-    
+
     public List<Ability> getPlayableOptions(Game game) {
         List<Ability> all = new ArrayList<Ability>();
         List<Ability> playables = getPlayableAbilities(game);
-		for (Ability ability: playables) {
-			List<Ability> options = game.getPlayer(playerId).getPlayableOptions(ability, game);
-			if (options.isEmpty()) {
-				if (ability.getManaCosts().getVariableCosts().size() > 0) {
-					simulateVariableCosts(ability, all, game);
-				}
-				else {
-					all.add(ability);
-				}
+        for (Ability ability: playables) {
+            List<Ability> options = game.getPlayer(playerId).getPlayableOptions(ability, game);
+            if (options.isEmpty()) {
+                if (ability.getManaCosts().getVariableCosts().size() > 0) {
+                    simulateVariableCosts(ability, all, game);
+                }
+                else {
+                    all.add(ability);
+                }
             }
             else {
-				for (Ability option: options) {
-					if (ability.getManaCosts().getVariableCosts().size() > 0) {
-						simulateVariableCosts(option, all, game);
-					}
-					else {
-						all.add(option);
-					}
+                for (Ability option: options) {
+                    if (ability.getManaCosts().getVariableCosts().size() > 0) {
+                        simulateVariableCosts(option, all, game);
+                    }
+                    else {
+                        all.add(option);
+                    }
                 }
             }
         }
         return all;
     }
 
-	protected void simulateVariableCosts(Ability ability, List<Ability> options, Game game) {
-		int numAvailable = getAvailableManaProducers(game).size() - ability.getManaCosts().convertedManaCost();
-		int start = 0;
-		if (!(ability instanceof SpellAbility)) {
-			//only use x=0 on spell abilities
-			if (numAvailable == 0)
-				return;
-			else
-				start = 1;
-		}
-		for (int i = start; i < numAvailable; i++) {
-			Ability newAbility = ability.copy();
-			newAbility.getManaCostsToPay().add(new GenericManaCost(i));
-			options.add(newAbility);
-		}
-	}
+    protected void simulateVariableCosts(Ability ability, List<Ability> options, Game game) {
+        int numAvailable = getAvailableManaProducers(game).size() - ability.getManaCosts().convertedManaCost();
+        int start = 0;
+        if (!(ability instanceof SpellAbility)) {
+            //only use x=0 on spell abilities
+            if (numAvailable == 0)
+                return;
+            else
+                start = 1;
+        }
+        for (int i = start; i < numAvailable; i++) {
+            Ability newAbility = ability.copy();
+            newAbility.getManaCostsToPay().add(new GenericManaCost(i));
+            options.add(newAbility);
+        }
+    }
 
     public List<List<UUID>> getAttacks(Game game) {
-		List<List<UUID>> engagements = new ArrayList<List<UUID>>();
-		List<Permanent> attackersList = super.getAvailableAttackers(game);
-		//use binary digits to calculate powerset of attackers
-		int powerElements = (int) Math.pow(2, attackersList.size());
-		StringBuilder binary = new StringBuilder();
-		for (int i = powerElements - 1; i >= 0; i--) {
-			binary.setLength(0);
-			binary.append(Integer.toBinaryString(i));
-			while (binary.length() < attackersList.size()) {
-				binary.insert(0, "0");
-			}
-			List<UUID> engagement = new ArrayList<UUID>();
-			for (int j = 0; j < attackersList.size(); j++) {
-				if (binary.charAt(j) == '1')
+        List<List<UUID>> engagements = new ArrayList<List<UUID>>();
+        List<Permanent> attackersList = super.getAvailableAttackers(game);
+        //use binary digits to calculate powerset of attackers
+        int powerElements = (int) Math.pow(2, attackersList.size());
+        StringBuilder binary = new StringBuilder();
+        for (int i = powerElements - 1; i >= 0; i--) {
+            binary.setLength(0);
+            binary.append(Integer.toBinaryString(i));
+            while (binary.length() < attackersList.size()) {
+                binary.insert(0, "0");
+            }
+            List<UUID> engagement = new ArrayList<UUID>();
+            for (int j = 0; j < attackersList.size(); j++) {
+                if (binary.charAt(j) == '1')
                     engagement.add(attackersList.get(j).getId());
-			}
+            }
             engagements.add(engagement);
-		}
-		return engagements;
-	}
+        }
+        return engagements;
+    }
 
-	public List<List<List<UUID>>> getBlocks(Game game) {
-		List<List<List<UUID>>> engagements = new ArrayList<List<List<UUID>>>();
-		int numGroups = game.getCombat().getGroups().size();
-		if (numGroups == 0) return engagements;
+    public List<List<List<UUID>>> getBlocks(Game game) {
+        List<List<List<UUID>>> engagements = new ArrayList<List<List<UUID>>>();
+        int numGroups = game.getCombat().getGroups().size();
+        if (numGroups == 0) return engagements;
 
-		//add a node with no blockers
+        //add a node with no blockers
         List<List<UUID>> engagement = new ArrayList<List<UUID>>();
         for (int i = 0; i < numGroups; i++) {
             engagement.add(new ArrayList<UUID>());
         }
-		engagements.add(engagement);
+        engagements.add(engagement);
 
-		List<Permanent> blockers = getAvailableBlockers(game);
-		addBlocker(game, engagement, blockers, engagements);
+        List<Permanent> blockers = getAvailableBlockers(game);
+        addBlocker(game, engagement, blockers, engagements);
 
-		return engagements;
-	}
+        return engagements;
+    }
 
     private List<List<UUID>> copyEngagement(List<List<UUID>> engagement) {
         List<List<UUID>> newEngagement = new ArrayList<List<UUID>>();
@@ -168,27 +168,27 @@ public class MCTSPlayer extends ComputerPlayer<MCTSPlayer> {
         }
         return newEngagement;
     }
-    
-	protected void addBlocker(Game game, List<List<UUID>> engagement, List<Permanent> blockers, List<List<List<UUID>>> engagements) {
-		if (blockers.isEmpty())
-			return;
-		int numGroups = game.getCombat().getGroups().size();
-		//try to block each attacker with each potential blocker
-		Permanent blocker = blockers.get(0);
-//		if (logger.isDebugEnabled())
-//			logger.debug("simulating -- block:" + blocker);
-		List<Permanent> remaining = remove(blockers, blocker);
-		for (int i = 0; i < numGroups; i++) {
-			if (game.getCombat().getGroups().get(i).canBlock(blocker, game)) {
+
+    protected void addBlocker(Game game, List<List<UUID>> engagement, List<Permanent> blockers, List<List<List<UUID>>> engagements) {
+        if (blockers.isEmpty())
+            return;
+        int numGroups = game.getCombat().getGroups().size();
+        //try to block each attacker with each potential blocker
+        Permanent blocker = blockers.get(0);
+//        if (logger.isDebugEnabled())
+//            logger.debug("simulating -- block:" + blocker);
+        List<Permanent> remaining = remove(blockers, blocker);
+        for (int i = 0; i < numGroups; i++) {
+            if (game.getCombat().getGroups().get(i).canBlock(blocker, game)) {
                 List<List<UUID>>newEngagement = copyEngagement(engagement);
-				newEngagement.get(i).add(blocker.getId());
-				engagements.add(newEngagement);
-//					logger.debug("simulating -- found redundant block combination");
-				addBlocker(game, newEngagement, remaining, engagements);  // and recurse minus the used blocker
-			}
-		}
-		addBlocker(game, engagement, remaining, engagements);
-	}
+                newEngagement.get(i).add(blocker.getId());
+                engagements.add(newEngagement);
+//                    logger.debug("simulating -- found redundant block combination");
+                addBlocker(game, newEngagement, remaining, engagements);  // and recurse minus the used blocker
+            }
+        }
+        addBlocker(game, engagement, remaining, engagements);
+    }
 
     public NextAction getNextAction() {
         return nextAction;
@@ -197,7 +197,7 @@ public class MCTSPlayer extends ComputerPlayer<MCTSPlayer> {
     public void setNextAction(NextAction action) {
         this.nextAction = action;
     }
-    
+
     @Override
     public boolean priority(Game game) {
 //        logger.info("Paused for Priority for player:" + getName());
@@ -299,5 +299,5 @@ public class MCTSPlayer extends ComputerPlayer<MCTSPlayer> {
 //    public int getAmount(int min, int max, String message, Game game) {
 //        game.end();
 //    }
-    
+
 }

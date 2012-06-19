@@ -74,6 +74,6 @@ class ForbiddingWatchtowerToken extends Token {
         this.subtype.add("Soldier");
         color = ObjectColor.WHITE;
         power = new MageInt(1);
-		toughness = new MageInt(5);
+        toughness = new MageInt(5);
     }
 }

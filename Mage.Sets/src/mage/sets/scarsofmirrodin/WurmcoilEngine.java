@@ -76,9 +76,9 @@ class Wurm1Token extends Token {
         super("Wurm", "a 3/3 colorless Wurm artifact creature token with deathtouch");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
-		subtype.add("Wurm");
-		power = new MageInt(3);
-		toughness = new MageInt(3);
+        subtype.add("Wurm");
+        power = new MageInt(3);
+        toughness = new MageInt(3);
         this.addAbility(DeathtouchAbility.getInstance());
     }
 }
@@ -88,9 +88,9 @@ class Wurm2Token extends Token {
         super("Wurm", "a 3/3 colorless Wurm artifact creature token with lifelink");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
-		subtype.add("Wurm");
-		power = new MageInt(3);
-		toughness = new MageInt(3);
+        subtype.add("Wurm");
+        power = new MageInt(3);
+        toughness = new MageInt(3);
         this.addAbility(LifelinkAbility.getInstance());
 
         setTokenType(2); // for image

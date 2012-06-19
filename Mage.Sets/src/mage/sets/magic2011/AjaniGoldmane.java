@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class AjaniGoldmane extends mage.sets.magic2010.AjaniGoldmane {
 
-	public AjaniGoldmane(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 1;
-		this.expansionSetCode = "M11";
-	}
+    public AjaniGoldmane(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 1;
+        this.expansionSetCode = "M11";
+    }
 
-	public AjaniGoldmane(final AjaniGoldmane card) {
-		super(card);
-	}
+    public AjaniGoldmane(final AjaniGoldmane card) {
+        super(card);
+    }
 
-	@Override
-	public AjaniGoldmane copy() {
-		return new AjaniGoldmane(this);
-	}
+    @Override
+    public AjaniGoldmane copy() {
+        return new AjaniGoldmane(this);
+    }
 
 }

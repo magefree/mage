@@ -51,66 +51,66 @@ import java.util.UUID;
  * @author maurer.it_at_gmail.com
  */
 public class GlimmerpointStag extends CardImpl<GlimmerpointStag> {
-	
-	public GlimmerpointStag(UUID ownerId) {
-		super(ownerId, 9, "Glimmerpoint Stag", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-		this.expansionSetCode = "SOM";
-		this.subtype.add("Elk");
 
-		this.color.setWhite(true);
-		this.power = new MageInt(3);
-		this.toughness = new MageInt(3);
-		
-		this.addAbility(VigilanceAbility.getInstance());
-		Target etbTarget = new TargetPermanent();
-		etbTarget.setRequired(true);
-		Ability etbAbility = new EntersBattlefieldTriggeredAbility(new GlimmerpointStagEffect());
-		etbAbility.addTarget(etbTarget);
-		this.addAbility(etbAbility);
-	}
+    public GlimmerpointStag(UUID ownerId) {
+        super(ownerId, 9, "Glimmerpoint Stag", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
+        this.expansionSetCode = "SOM";
+        this.subtype.add("Elk");
 
-	public GlimmerpointStag(final GlimmerpointStag card) {
-		super(card);
-	}
+        this.color.setWhite(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-	@Override
-	public GlimmerpointStag copy() {
-		return new GlimmerpointStag(this);
-	}
+        this.addAbility(VigilanceAbility.getInstance());
+        Target etbTarget = new TargetPermanent();
+        etbTarget.setRequired(true);
+        Ability etbAbility = new EntersBattlefieldTriggeredAbility(new GlimmerpointStagEffect());
+        etbAbility.addTarget(etbTarget);
+        this.addAbility(etbAbility);
+    }
+
+    public GlimmerpointStag(final GlimmerpointStag card) {
+        super(card);
+    }
+
+    @Override
+    public GlimmerpointStag copy() {
+        return new GlimmerpointStag(this);
+    }
 }
 
 class GlimmerpointStagEffect extends OneShotEffect<GlimmerpointStagEffect> {
 
-	private static final String effectText = "exile another target permanent. Return that card to the battlefield under its owner's control at the beginning of the next end step";
+    private static final String effectText = "exile another target permanent. Return that card to the battlefield under its owner's control at the beginning of the next end step";
 
-	GlimmerpointStagEffect ( ) {
-		super(Outcome.Detriment);
-		staticText = effectText;
-	}
-	
-	GlimmerpointStagEffect(GlimmerpointStagEffect effect) {
-		super(effect);
-	}
+    GlimmerpointStagEffect ( ) {
+        super(Outcome.Detriment);
+        staticText = effectText;
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getFirstTarget());
-		if (permanent != null) {
-			if (permanent.moveToExile(source.getSourceId(), "Glimmerpoint Stag Exile", source.getId(), game)) {
-				//create delayed triggered ability
-				AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
-				delayedAbility.setSourceId(source.getSourceId());
-				delayedAbility.setControllerId(source.getControllerId());
-				game.addDelayedTriggeredAbility(delayedAbility);
-				return true;
-			}
-		}
-		return false;
-	}
+    GlimmerpointStagEffect(GlimmerpointStagEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public GlimmerpointStagEffect copy() {
-		return new GlimmerpointStagEffect(this);
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        if (permanent != null) {
+            if (permanent.moveToExile(source.getSourceId(), "Glimmerpoint Stag Exile", source.getId(), game)) {
+                //create delayed triggered ability
+                AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
+                delayedAbility.setSourceId(source.getSourceId());
+                delayedAbility.setControllerId(source.getControllerId());
+                game.addDelayedTriggeredAbility(delayedAbility);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public GlimmerpointStagEffect copy() {
+        return new GlimmerpointStagEffect(this);
+    }
 
 }

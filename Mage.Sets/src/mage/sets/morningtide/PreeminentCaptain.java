@@ -52,104 +52,104 @@ import mage.target.common.TargetDefender;
  */
 public class PreeminentCaptain extends CardImpl<PreeminentCaptain> {
 
-	final PreeminentCaptainEffect effect = new PreeminentCaptainEffect();
+    final PreeminentCaptainEffect effect = new PreeminentCaptainEffect();
 
-	public PreeminentCaptain(UUID ownerId) {
-		super(ownerId, 20, "Preeminent Captain", Rarity.RARE,
-				new CardType[] { CardType.CREATURE }, "{2}{W}");
-		this.expansionSetCode = "MOR";
-		this.subtype.add("Kithkin");
-		this.subtype.add("Soldier");
+    public PreeminentCaptain(UUID ownerId) {
+        super(ownerId, 20, "Preeminent Captain", Rarity.RARE,
+                new CardType[] { CardType.CREATURE }, "{2}{W}");
+        this.expansionSetCode = "MOR";
+        this.subtype.add("Kithkin");
+        this.subtype.add("Soldier");
 
-		this.color.setWhite(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+        this.color.setWhite(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-		this.addAbility(FirstStrikeAbility.getInstance());
-		// Whenever Preeminent Captain attacks, you may put a Soldier creature
-		// card from your hand onto the battlefield tapped and attacking.
-		this.addAbility(new AttacksTriggeredAbility(effect, true));
-	}
+        this.addAbility(FirstStrikeAbility.getInstance());
+        // Whenever Preeminent Captain attacks, you may put a Soldier creature
+        // card from your hand onto the battlefield tapped and attacking.
+        this.addAbility(new AttacksTriggeredAbility(effect, true));
+    }
 
-	public PreeminentCaptain(final PreeminentCaptain card) {
-		super(card);
-	}
+    public PreeminentCaptain(final PreeminentCaptain card) {
+        super(card);
+    }
 
-	@Override
-	public PreeminentCaptain copy() {
-		return new PreeminentCaptain(this);
-	}
+    @Override
+    public PreeminentCaptain copy() {
+        return new PreeminentCaptain(this);
+    }
 }
 
 class PreeminentCaptainEffect extends OneShotEffect<PreeminentCaptainEffect> {
 
-	public PreeminentCaptainEffect() {
-		super(Outcome.PutCreatureInPlay);
-		this.staticText = "put a Soldier creature card from your hand onto the battlefield tapped and attacking.";
-	}
+    public PreeminentCaptainEffect() {
+        super(Outcome.PutCreatureInPlay);
+        this.staticText = "put a Soldier creature card from your hand onto the battlefield tapped and attacking.";
+    }
 
-	public PreeminentCaptainEffect(final PreeminentCaptainEffect effect) {
-		super(effect);
-	}
+    public PreeminentCaptainEffect(final PreeminentCaptainEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-		TargetCardInHand target = new TargetCardInHand(new FilterSoldierCard());
-		if (target.canChoose(player.getId(), game) && target.choose(getOutcome(), player.getId(), source.getSourceId(), game)) {
-			if (target.getTargets().size() > 0) {
-				UUID cardId = target.getFirstTarget();
-				Card card = player.getHand().get(cardId, game);
-				if (card != null) {
-					if (card.putOntoBattlefield(game, Zone.HAND,
-							source.getId(), source.getControllerId())) {
-						Permanent permanent = game.getPermanent(card.getId());
-						permanent.setTapped(true);
-						TargetDefender def = new TargetDefender(game
-								.getCombat().getDefenders(), player.getId());
-						if (def.choose(getOutcome(), player.getId(), source.getSourceId(), game)) {
-							// TODO -> If only one option, don't ask, as for
-							// normal attacking.
-							if (def.getTargets().size() > 0) {
-								game.getCombat().declareAttacker(
-										permanent.getId(),
-										def.getFirstTarget(), game);
-							}
-						}
-					}
-				}
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        TargetCardInHand target = new TargetCardInHand(new FilterSoldierCard());
+        if (target.canChoose(player.getId(), game) && target.choose(getOutcome(), player.getId(), source.getSourceId(), game)) {
+            if (target.getTargets().size() > 0) {
+                UUID cardId = target.getFirstTarget();
+                Card card = player.getHand().get(cardId, game);
+                if (card != null) {
+                    if (card.putOntoBattlefield(game, Zone.HAND,
+                            source.getId(), source.getControllerId())) {
+                        Permanent permanent = game.getPermanent(card.getId());
+                        permanent.setTapped(true);
+                        TargetDefender def = new TargetDefender(game
+                                .getCombat().getDefenders(), player.getId());
+                        if (def.choose(getOutcome(), player.getId(), source.getSourceId(), game)) {
+                            // TODO -> If only one option, don't ask, as for
+                            // normal attacking.
+                            if (def.getTargets().size() > 0) {
+                                game.getCombat().declareAttacker(
+                                        permanent.getId(),
+                                        def.getFirstTarget(), game);
+                            }
+                        }
+                    }
+                }
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public PreeminentCaptainEffect copy() {
-		return new PreeminentCaptainEffect(this);
-	}
+    @Override
+    public PreeminentCaptainEffect copy() {
+        return new PreeminentCaptainEffect(this);
+    }
 
 }
 
 class FilterSoldierCard extends FilterCard<FilterSoldierCard> {
 
-	public FilterSoldierCard() {
-		this("a soldier creature card.");
-	}
+    public FilterSoldierCard() {
+        this("a soldier creature card.");
+    }
 
-	public FilterSoldierCard(String name) {
-		super(name);
-		cardType.add(CardType.CREATURE);
-		subtype.add("Soldier");
-	}
+    public FilterSoldierCard(String name) {
+        super(name);
+        cardType.add(CardType.CREATURE);
+        subtype.add("Soldier");
+    }
 
-	public FilterSoldierCard(final FilterSoldierCard filter) {
-		super(filter);
-	}
+    public FilterSoldierCard(final FilterSoldierCard filter) {
+        super(filter);
+    }
 
-	@Override
-	public FilterSoldierCard copy() {
-		return new FilterSoldierCard(this);
-	}
+    @Override
+    public FilterSoldierCard copy() {
+        return new FilterSoldierCard(this);
+    }
 
 }

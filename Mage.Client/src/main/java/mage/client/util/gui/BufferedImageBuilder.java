@@ -25,9 +25,9 @@ public class BufferedImageBuilder {
     }
 
     public static BufferedImage bufferImage(Image image, int type) {
-	    if (image == null) {
-		    return null;
-	    }
+        if (image == null) {
+            return null;
+        }
         BufferedImage bufferedImage = new BufferedImage(image.getWidth(null), image.getHeight(null), type);
         Graphics2D g = bufferedImage.createGraphics();
         g.drawImage(image, null, null);
@@ -35,15 +35,15 @@ public class BufferedImageBuilder {
         return bufferedImage;
     }
 
-	public static BufferedImage bufferImage(Image image, int type, Color color) {
-	    if (image == null) {
-		    return null;
-	    }
+    public static BufferedImage bufferImage(Image image, int type, Color color) {
+        if (image == null) {
+            return null;
+        }
         BufferedImage bufferedImage = new BufferedImage(image.getWidth(null), image.getHeight(null), type);
         Graphics2D g = bufferedImage.createGraphics();
         g.drawImage(image, null, null);
-		g.setColor(color);
-		g.fillRect(0, 0, image.getWidth(null), image.getHeight(null));
+        g.setColor(color);
+        g.fillRect(0, 0, image.getWidth(null), image.getHeight(null));
         return bufferedImage;
     }
 

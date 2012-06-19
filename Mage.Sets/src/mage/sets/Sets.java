@@ -49,25 +49,25 @@ import java.util.*;
  */
 public class Sets extends HashMap<String, ExpansionSet> {
 
-	private final static Logger logger = Logger.getLogger(Sets.class);
-	private static final Sets fINSTANCE =  new Sets();
-	private static Set<String> names;
-	private static Set<String> nonLandNames;
-	private static Set<String> creatureTypes;
-	private static List<Card> cards;
+    private final static Logger logger = Logger.getLogger(Sets.class);
+    private static final Sets fINSTANCE =  new Sets();
+    private static Set<String> names;
+    private static Set<String> nonLandNames;
+    private static Set<String> creatureTypes;
+    private static List<Card> cards;
     private static Map<String, Card> cardMap;
     protected static Random rnd = new Random();
 
-	public static Sets getInstance() {
-		return fINSTANCE;
-	}
+    public static Sets getInstance() {
+        return fINSTANCE;
+    }
 
-	private Sets() {
-		names = new TreeSet<String>();
-		nonLandNames = new TreeSet<String>();
-		cards = new ArrayList<Card>();
+    private Sets() {
+        names = new TreeSet<String>();
+        nonLandNames = new TreeSet<String>();
+        cards = new ArrayList<Card>();
         cardMap = new HashMap<String, Card>();
-		creatureTypes = new TreeSet<String>();
+        creatureTypes = new TreeSet<String>();
         this.addSet(AlaraReborn.getInstance());
         this.addSet(Apocalypse.getInstance());
         this.addSet(AvacynRestored.getInstance());
@@ -116,11 +116,11 @@ public class Sets extends HashMap<String, ExpansionSet> {
         this.addSet(Weatherlight.getInstance());
         this.addSet(Worldwake.getInstance());
         this.addSet(Zendikar.getInstance());
-	}
+    }
 
-	private void addSet(ExpansionSet set) {
-		this.put(set.getCode(), set);
-	}
+    private void addSet(ExpansionSet set) {
+        this.put(set.getCode(), set);
+    }
 
     private static void loadCards() {
         if (cards.isEmpty()) {
@@ -148,33 +148,33 @@ public class Sets extends HashMap<String, ExpansionSet> {
         }
     }
 
-	public static Set<String> getCardNames() {
+    public static Set<String> getCardNames() {
         if (names.isEmpty()) {
             loadCards();
         }
-		return names;
-	}
+        return names;
+    }
 
-	public static Set<String> getNonLandCardNames() {
+    public static Set<String> getNonLandCardNames() {
         if (nonLandNames.isEmpty()) {
             loadCards();
         }
-		return nonLandNames;
-	}
+        return nonLandNames;
+    }
 
-	public static Set<String> getCreatureTypes() {
+    public static Set<String> getCreatureTypes() {
         if (creatureTypes.isEmpty()) {
             loadCards();
         }
-		return creatureTypes;
-	}
+        return creatureTypes;
+    }
 
-	public static Card getRandomCard() {
+    public static Card getRandomCard() {
         if (cards.isEmpty()) {
             loadCards();
         }
-		return cards.get(rnd.nextInt(cards.size()));
-	}
+        return cards.get(rnd.nextInt(cards.size()));
+    }
 
     /**
      * Generates card pool of cardsCount cards that have manacost of allowed colors.
@@ -187,25 +187,25 @@ public class Sets extends HashMap<String, ExpansionSet> {
         List<Card> cardPool = new ArrayList<Card>();
 
         int count = 0;
-		int tries = 0;
-		while (count < cardsCount) {
-			Card card = getRandomCard();
-			if (!card.getCardType().contains(CardType.LAND)) {
-				if (cardFitsChosenColors(card, allowedColors)) {
-					cardPool.add(card);
-					count++;
-				}
-			}
-			tries++;
-			if (tries > 4096) { // to avoid infinite loop
-				throw new IllegalStateException("Not enough cards for chosen colors to generate deck: " + allowedColors);
-			}
-		}
+        int tries = 0;
+        while (count < cardsCount) {
+            Card card = getRandomCard();
+            if (!card.getCardType().contains(CardType.LAND)) {
+                if (cardFitsChosenColors(card, allowedColors)) {
+                    cardPool.add(card);
+                    count++;
+                }
+            }
+            tries++;
+            if (tries > 4096) { // to avoid infinite loop
+                throw new IllegalStateException("Not enough cards for chosen colors to generate deck: " + allowedColors);
+            }
+        }
 
         return cardPool;
     }
 
-	/**
+    /**
      * Check that card can be played using chosen (allowed) colors.
      *
      * @param card
@@ -213,64 +213,64 @@ public class Sets extends HashMap<String, ExpansionSet> {
      * @return
      */
     private static boolean cardFitsChosenColors(Card card, List<ColoredManaSymbol> allowedColors) {
-		if (card.getCardType().contains(CardType.LAND))  {
-			if (!card.getSupertype().contains("Basic")) {
-				int score = 0;
-				for (Mana mana : card.getMana()) {
-					for (ColoredManaSymbol color : allowedColors) {
-						score += mana.getColor(color);
-					}
-				}
-				if (score > 1) {
-					return true;
-				}
-			}
-		}
-		else {
-			for (String symbol : card.getManaCost().getSymbols()) {
-				boolean found = false;
-				symbol = symbol.replace("{", "").replace("}", "");
-				if (isColoredMana(symbol)) {
-					for (ColoredManaSymbol allowed : allowedColors) {
-						if (allowed.toString().equals(symbol)) {
-							found = true;
-							break;
-						}
-					}
-					if (!found) {
-						return false;
-					}
-				}
-	        }
-	        return true;
-		}
-		return false;
+        if (card.getCardType().contains(CardType.LAND))  {
+            if (!card.getSupertype().contains("Basic")) {
+                int score = 0;
+                for (Mana mana : card.getMana()) {
+                    for (ColoredManaSymbol color : allowedColors) {
+                        score += mana.getColor(color);
+                    }
+                }
+                if (score > 1) {
+                    return true;
+                }
+            }
+        }
+        else {
+            for (String symbol : card.getManaCost().getSymbols()) {
+                boolean found = false;
+                symbol = symbol.replace("{", "").replace("}", "");
+                if (isColoredMana(symbol)) {
+                    for (ColoredManaSymbol allowed : allowedColors) {
+                        if (allowed.toString().equals(symbol)) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        return false;
     }
 
     protected static boolean isColoredMana(String symbol) {
         return symbol.equals("W") || symbol.equals("G") || symbol.equals("U") || symbol.equals("B") || symbol.equals("R");
     }
 
-	public static Deck generateDeck() {
-		List<ColoredManaSymbol> allowedColors = new ArrayList<ColoredManaSymbol>();
-		int numColors = rnd.nextInt(2) + 1;
+    public static Deck generateDeck() {
+        List<ColoredManaSymbol> allowedColors = new ArrayList<ColoredManaSymbol>();
+        int numColors = rnd.nextInt(2) + 1;
         int cardPoolSize = 60;
         if (numColors > 2) {
             cardPoolSize += 20;
         }
-		Deck deck = new Deck();
+        Deck deck = new Deck();
 
-		return deck;
-	}
+        return deck;
+    }
 
-	public static Card findCard(String name) {
-		for (ExpansionSet set: fINSTANCE.values()) {
-			Card card = set.findCard(name);
-			if (card != null)
-				return card;
-		}
-		return null;
-	}
+    public static Card findCard(String name) {
+        for (ExpansionSet set: fINSTANCE.values()) {
+            Card card = set.findCard(name);
+            if (card != null)
+                return card;
+        }
+        return null;
+    }
 
     public static Card findCard(String name, boolean random) {
         if (!random) {
@@ -289,15 +289,15 @@ public class Sets extends HashMap<String, ExpansionSet> {
                 return CardImpl.createCard(cardClassName);
             }
         }
-		return null;
-	}
-    
+        return null;
+    }
+
     public static Card findCard(String expansionsetCode, int cardNum) {
         if (cardMap.containsKey(expansionsetCode + Integer.toString(cardNum))) {
             return cardMap.get(expansionsetCode + Integer.toString(cardNum));
         }
-		if (fINSTANCE.containsKey(expansionsetCode)) {
-			ExpansionSet set = fINSTANCE.get(expansionsetCode);
+        if (fINSTANCE.containsKey(expansionsetCode)) {
+            ExpansionSet set = fINSTANCE.get(expansionsetCode);
             Card card = set.findCard(cardNum);
             if (card != null) {
                 cardMap.put(expansionsetCode + Integer.toString(cardNum), card);
@@ -305,67 +305,67 @@ public class Sets extends HashMap<String, ExpansionSet> {
             }
         }
         logger.warn("Could not find card: set=" + expansionsetCode + "cardNum=" + Integer.toString(cardNum));
-		return null;
-        
+        return null;
+
     }
 
-	public static Card createCard(Class clazz) {
-		try {
-			Constructor<?> con = clazz.getConstructor(new Class[]{UUID.class});
-			return (Card) con.newInstance(new Object[] {null});
-		} catch (Exception ex) {
-			logger.fatal("Error creating card:" + clazz.getName(), ex);
-			return null;
-		}
-	}
+    public static Card createCard(Class clazz) {
+        try {
+            Constructor<?> con = clazz.getConstructor(new Class[]{UUID.class});
+            return (Card) con.newInstance(new Object[] {null});
+        } catch (Exception ex) {
+            logger.fatal("Error creating card:" + clazz.getName(), ex);
+            return null;
+        }
+    }
 
 
-	public static ExpansionSet findSet(String code) {
-		if (fINSTANCE.containsKey(code))
-			return fINSTANCE.get(code);
-		return null;
-	}
+    public static ExpansionSet findSet(String code) {
+        if (fINSTANCE.containsKey(code))
+            return fINSTANCE.get(code);
+        return null;
+    }
 
-	public static void saveDeck(String file, DeckCardLists deck) throws FileNotFoundException {
-		PrintWriter out = new PrintWriter(file);
-		Map<String, Integer> deckCards = new HashMap<String, Integer>();
-		Map<String, Integer> sideboard = new HashMap<String, Integer>();
-		try {
-			if (deck.getName() != null && deck.getName().length() > 0)
-				out.println("NAME:" + deck.getName());
-			if (deck.getAuthor() != null && deck.getAuthor().length() > 0)
-				out.println("AUTHOR:" + deck.getAuthor());
-			for (String cardClass: deck.getCards()) {
-				if (deckCards.containsKey(cardClass)) {
-					deckCards.put(cardClass, deckCards.get(cardClass) + 1);
-				}
-				else {
-					deckCards.put(cardClass, 1);
-				}
-			}
-			for (String cardClass: deck.getSideboard()) {
-				if (sideboard.containsKey(cardClass)) {
-					sideboard.put(cardClass, sideboard.get(cardClass) + 1);
-				}
-				else {
-					sideboard.put(cardClass, 1);
-				}
-			}
-			for (Map.Entry<String, Integer> entry: deckCards.entrySet()) {
-				Card card = CardImpl.createCard(entry.getKey());
-				if (card != null) {
-					out.printf("%d [%s:%d] %s%n", entry.getValue(), card.getExpansionSetCode(), card.getCardNumber(), card.getName());
-				}
-			}
-			for (Map.Entry<String, Integer> entry: sideboard.entrySet()) {
-				Card card = CardImpl.createCard(entry.getKey());
-				if (card != null) {
-					out.printf("SB: %d [%s:%d] %s%n", entry.getValue(), card.getExpansionSetCode(), card.getCardNumber(), card.getName());
-				}
-			}
-		}
-		finally {
-			out.close();
-		}
-	}
+    public static void saveDeck(String file, DeckCardLists deck) throws FileNotFoundException {
+        PrintWriter out = new PrintWriter(file);
+        Map<String, Integer> deckCards = new HashMap<String, Integer>();
+        Map<String, Integer> sideboard = new HashMap<String, Integer>();
+        try {
+            if (deck.getName() != null && deck.getName().length() > 0)
+                out.println("NAME:" + deck.getName());
+            if (deck.getAuthor() != null && deck.getAuthor().length() > 0)
+                out.println("AUTHOR:" + deck.getAuthor());
+            for (String cardClass: deck.getCards()) {
+                if (deckCards.containsKey(cardClass)) {
+                    deckCards.put(cardClass, deckCards.get(cardClass) + 1);
+                }
+                else {
+                    deckCards.put(cardClass, 1);
+                }
+            }
+            for (String cardClass: deck.getSideboard()) {
+                if (sideboard.containsKey(cardClass)) {
+                    sideboard.put(cardClass, sideboard.get(cardClass) + 1);
+                }
+                else {
+                    sideboard.put(cardClass, 1);
+                }
+            }
+            for (Map.Entry<String, Integer> entry: deckCards.entrySet()) {
+                Card card = CardImpl.createCard(entry.getKey());
+                if (card != null) {
+                    out.printf("%d [%s:%d] %s%n", entry.getValue(), card.getExpansionSetCode(), card.getCardNumber(), card.getName());
+                }
+            }
+            for (Map.Entry<String, Integer> entry: sideboard.entrySet()) {
+                Card card = CardImpl.createCard(entry.getKey());
+                if (card != null) {
+                    out.printf("SB: %d [%s:%d] %s%n", entry.getValue(), card.getExpansionSetCode(), card.getCardNumber(), card.getName());
+                }
+            }
+        }
+        finally {
+            out.close();
+        }
+    }
 }

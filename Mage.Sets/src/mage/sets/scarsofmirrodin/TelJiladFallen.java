@@ -48,11 +48,11 @@ public class TelJiladFallen extends CardImpl<TelJiladFallen> {
         this.expansionSetCode = "SOM";
         this.subtype.add("Elf");
         this.subtype.add("Warrior");
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
-	    this.addAbility(InfectAbility.getInstance());
-	    this.addAbility(new ProtectionAbility(new FilterArtifactCard("artifacts")));
+        this.addAbility(InfectAbility.getInstance());
+        this.addAbility(new ProtectionAbility(new FilterArtifactCard("artifacts")));
     }
 
     public TelJiladFallen (final TelJiladFallen card) {

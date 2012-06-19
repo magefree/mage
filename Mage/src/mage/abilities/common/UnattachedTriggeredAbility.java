@@ -42,32 +42,32 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class UnattachedTriggeredAbility extends TriggeredAbilityImpl<UnattachedTriggeredAbility> {
 
-	public UnattachedTriggeredAbility(Effect effect, boolean optional) {
-		super(Zone.BATTLEFIELD, effect, optional);
-	}
+    public UnattachedTriggeredAbility(Effect effect, boolean optional) {
+        super(Zone.BATTLEFIELD, effect, optional);
+    }
 
-	public UnattachedTriggeredAbility(final UnattachedTriggeredAbility ability) {
-		super(ability);
-	}
+    public UnattachedTriggeredAbility(final UnattachedTriggeredAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.UNATTACHED && event.getSourceId().equals(this.getSourceId()) ) {
-			getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.UNATTACHED && event.getSourceId().equals(this.getSourceId()) ) {
+            getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "Whenever {this} becomes unattached from a permanent, " + super.getRule();
-	}
+    @Override
+    public String getRule() {
+        return "Whenever {this} becomes unattached from a permanent, " + super.getRule();
+    }
 
-	@Override
-	public UnattachedTriggeredAbility copy() {
-		return new UnattachedTriggeredAbility(this);
-	}
+    @Override
+    public UnattachedTriggeredAbility copy() {
+        return new UnattachedTriggeredAbility(this);
+    }
 
 
 }

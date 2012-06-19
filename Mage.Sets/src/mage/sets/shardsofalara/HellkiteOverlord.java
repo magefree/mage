@@ -53,9 +53,9 @@ public class HellkiteOverlord extends CardImpl<HellkiteOverlord> {
         super(ownerId, 172, "Hellkite Overlord", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{B}{R}{R}{G}");
         this.expansionSetCode = "ALA";
         this.subtype.add("Dragon");
-		this.color.setBlack(true);
-		this.color.setRed(true);
-		this.color.setGreen(true);
+        this.color.setBlack(true);
+        this.color.setRed(true);
+        this.color.setGreen(true);
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
         this.addAbility(FlyingAbility.getInstance());

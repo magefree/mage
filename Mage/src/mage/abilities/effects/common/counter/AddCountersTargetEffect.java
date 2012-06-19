@@ -45,63 +45,63 @@ import mage.abilities.Mode;
  */
 public class AddCountersTargetEffect extends OneShotEffect<AddCountersTargetEffect> {
 
-	private Counter counter;
+    private Counter counter;
 
-	public AddCountersTargetEffect(Counter counter) {
-		this(counter, Outcome.Benefit);
- 	}
+    public AddCountersTargetEffect(Counter counter) {
+        this(counter, Outcome.Benefit);
+     }
 
         public AddCountersTargetEffect(Counter counter, Outcome outcome) {
-		super(outcome);
-		this.counter = counter;
- 	}
+        super(outcome);
+        this.counter = counter;
+     }
 
-	public AddCountersTargetEffect(final AddCountersTargetEffect effect) {
-		super(effect);
-		this.counter = effect.counter.copy();
-	}
+    public AddCountersTargetEffect(final AddCountersTargetEffect effect) {
+        super(effect);
+        this.counter = effect.counter.copy();
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		int affectedTargets = 0;
-		for (UUID uuid : targetPointer.getTargets(game, source)) {
-			Permanent permanent = game.getPermanent(uuid);
-			if (permanent != null) {
-				if (counter != null) {
-					permanent.addCounters(counter.copy(), game);
+    @Override
+    public boolean apply(Game game, Ability source) {
+        int affectedTargets = 0;
+        for (UUID uuid : targetPointer.getTargets(game, source)) {
+            Permanent permanent = game.getPermanent(uuid);
+            if (permanent != null) {
+                if (counter != null) {
+                    permanent.addCounters(counter.copy(), game);
                     affectedTargets ++;
-				}
-			} else {
-				Player player = game.getPlayer(uuid);
-				if (player != null) {
-					player.addCounters(counter.copy(), game);
+                }
+            } else {
+                Player player = game.getPlayer(uuid);
+                if (player != null) {
+                    player.addCounters(counter.copy(), game);
                     affectedTargets ++;
-				}
-			}
-		}
-		return affectedTargets > 0;
-	}
+                }
+            }
+        }
+        return affectedTargets > 0;
+    }
 
-	@Override
-	public String getText(Mode mode) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("put ");
-		if (counter.getCount() > 1) {
-			sb.append(Integer.toString(counter.getCount())).append(" ").append(counter.getName()).append(" counters on target ");
-		}
-		else {
-			sb.append("a ").append(counter.getName()).append(" counter on target ");
-		}
+    @Override
+    public String getText(Mode mode) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("put ");
+        if (counter.getCount() > 1) {
+            sb.append(Integer.toString(counter.getCount())).append(" ").append(counter.getName()).append(" counters on target ");
+        }
+        else {
+            sb.append("a ").append(counter.getName()).append(" counter on target ");
+        }
         // TODO add normal text infrastructure for target pointers
         if (mode.getTargets().size() > 0)
-		    sb.append(mode.getTargets().get(0).getTargetName());
-		return sb.toString();
-	}
+            sb.append(mode.getTargets().get(0).getTargetName());
+        return sb.toString();
+    }
 
-	@Override
-	public AddCountersTargetEffect copy() {
-		return new AddCountersTargetEffect(this);
-	}
+    @Override
+    public AddCountersTargetEffect copy() {
+        return new AddCountersTargetEffect(this);
+    }
 
 
 }

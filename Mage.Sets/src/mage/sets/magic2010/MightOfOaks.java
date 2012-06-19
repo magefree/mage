@@ -45,17 +45,17 @@ public class MightOfOaks extends CardImpl<MightOfOaks> {
     public MightOfOaks(UUID ownerId){
         super(ownerId, 192, "Might of Oaks", Rarity.RARE, new CardType[]{CardType.INSTANT},"{3}{G}");
         this.expansionSetCode = "M10";
-		this.color.setGreen(true);
-		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-		this.getSpellAbility().addEffect(new BoostTargetEffect(7, 7, Duration.EndOfTurn));
+        this.color.setGreen(true);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addEffect(new BoostTargetEffect(7, 7, Duration.EndOfTurn));
     }
 
-	public MightOfOaks(final MightOfOaks card) {
-		super(card);
-	}
+    public MightOfOaks(final MightOfOaks card) {
+        super(card);
+    }
 
-	@Override
-	public MightOfOaks copy() {
-		return new MightOfOaks(this);
-	}
+    @Override
+    public MightOfOaks copy() {
+        return new MightOfOaks(this);
+    }
 }

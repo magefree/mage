@@ -48,15 +48,15 @@ public class DraftPane extends MagePane {
         initComponents();
     }
 
-	public void showDraft(UUID draftId) {
-		this.setTitle("Draft - " + draftId);
-		this.draftPanel1.showDraft(draftId);
-	}
+    public void showDraft(UUID draftId) {
+        this.setTitle("Draft - " + draftId);
+        this.draftPanel1.showDraft(draftId);
+    }
 
-	public void hideDraft() {
+    public void hideDraft() {
         draftPanel1.hideDraft();
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

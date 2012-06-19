@@ -47,27 +47,27 @@ import mage.target.TargetPlayer;
  */
 public class AcolyteOfXathrid extends CardImpl {
 
-	public AcolyteOfXathrid(UUID ownerId) {
-		super(ownerId, 83, "Acolyte of Xathrid", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
-		this.expansionSetCode = "M10";
-		this.subtype.add("Human");
-		this.subtype.add("Cleric");
-		this.color.setBlack(true);
-		this.power = new MageInt(0);
-		this.toughness = new MageInt(1);
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), new ManaCostsImpl("{1}{B}"));
-		ability.addCost(new TapSourceCost());
-		ability.addTarget(new TargetPlayer());
-		this.addAbility(ability);
-	}
+    public AcolyteOfXathrid(UUID ownerId) {
+        super(ownerId, 83, "Acolyte of Xathrid", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
+        this.expansionSetCode = "M10";
+        this.subtype.add("Human");
+        this.subtype.add("Cleric");
+        this.color.setBlack(true);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(1);
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), new ManaCostsImpl("{1}{B}"));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetPlayer());
+        this.addAbility(ability);
+    }
 
-	public AcolyteOfXathrid(final AcolyteOfXathrid card) {
-		super(card);
-	}
+    public AcolyteOfXathrid(final AcolyteOfXathrid card) {
+        super(card);
+    }
 
-	@Override
-	public AcolyteOfXathrid copy() {
-		return new AcolyteOfXathrid(this);
-	}
+    @Override
+    public AcolyteOfXathrid copy() {
+        return new AcolyteOfXathrid(this);
+    }
 
 }

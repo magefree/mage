@@ -61,7 +61,7 @@ public class BackFromTheBrink extends CardImpl<BackFromTheBrink> {
 
         // Exile a creature card from your graveyard and pay its mana cost: Put a token onto the battlefield that's a copy of that card. Activate this ability only any time you could cast a sorcery.
         this.addAbility(new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new BackFromTheBrinkEffect(), new BackFromTheBrinkCost()));
-        
+
     }
 
     public BackFromTheBrink(final BackFromTheBrink card) {
@@ -80,11 +80,11 @@ class BackFromTheBrinkEffect extends OneShotEffect<BackFromTheBrinkEffect> {
         super(Outcome.PutCreatureInPlay);
         staticText = "Put a token onto the battlefield that's a copy of that card. Activate this ability only any time you could cast a sorcery";
     }
-    
+
     public BackFromTheBrinkEffect(final BackFromTheBrinkEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(this.targetPointer.getFirst(game, source));
@@ -101,7 +101,7 @@ class BackFromTheBrinkEffect extends OneShotEffect<BackFromTheBrinkEffect> {
     public BackFromTheBrinkEffect copy() {
         return new BackFromTheBrinkEffect(this);
     }
-    
+
 }
 
 class BackFromTheBrinkCost extends CostImpl<BackFromTheBrinkCost> {
@@ -110,11 +110,11 @@ class BackFromTheBrinkCost extends CostImpl<BackFromTheBrinkCost> {
         this.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
         this.text = "Exile a creature card from your graveyard and pay its mana cost";
     }
-    
+
     public BackFromTheBrinkCost(final BackFromTheBrinkCost cost) {
         super(cost);
     }
-    
+
     @Override
     public BackFromTheBrinkCost copy() {
         return new BackFromTheBrinkCost(this);
@@ -139,5 +139,5 @@ class BackFromTheBrinkCost extends CostImpl<BackFromTheBrinkCost> {
         }
         return paid;
     }
-    
+
 }

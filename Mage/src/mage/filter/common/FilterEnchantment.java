@@ -37,21 +37,21 @@ import mage.filter.FilterPermanent;
  */
 public class FilterEnchantment extends FilterPermanent<FilterEnchantment> {
 
-	public FilterEnchantment() {
-		this("enchantment");
-	}
+    public FilterEnchantment() {
+        this("enchantment");
+    }
 
-	public FilterEnchantment(String name) {
-		super(name);
-		this.cardType.add(CardType.ENCHANTMENT);
-	}
+    public FilterEnchantment(String name) {
+        super(name);
+        this.cardType.add(CardType.ENCHANTMENT);
+    }
 
-	public FilterEnchantment(final FilterEnchantment filter) {
-		super(filter);
-	}
+    public FilterEnchantment(final FilterEnchantment filter) {
+        super(filter);
+    }
 
-	@Override
-	public FilterEnchantment copy() {
-		return new FilterEnchantment(this);
-	}
+    @Override
+    public FilterEnchantment copy() {
+        return new FilterEnchantment(this);
+    }
 }

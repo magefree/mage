@@ -54,7 +54,7 @@ public class ServerMessagesUtil {
 
     private static final Logger log = Logger.getLogger(ServerMessagesUtil.class);
     private static final String SERVER_MSG_TXT_FILE = "server.msg.txt";
-	private static ScheduledExecutorService updateExecutor;
+    private static ScheduledExecutorService updateExecutor;
 
     private List<String> messages = new ArrayList<String>();
     private ReadWriteLock lock = new ReentrantReadWriteLock();
@@ -72,12 +72,12 @@ public class ServerMessagesUtil {
 
     public ServerMessagesUtil() {
         updateExecutor = Executors.newSingleThreadScheduledExecutor();
-		updateExecutor.scheduleAtFixedRate(new Runnable() {
-			@Override
-			public void run() {
-				reloadMessages();
-			}
-		}, 5, 5 * 60, TimeUnit.SECONDS);
+        updateExecutor.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                reloadMessages();
+            }
+        }, 5, 5 * 60, TimeUnit.SECONDS);
     }
 
     public static ServerMessagesUtil getInstance() {

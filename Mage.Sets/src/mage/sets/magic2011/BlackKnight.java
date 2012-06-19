@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class BlackKnight extends mage.sets.magic2010.BlackKnight {
 
-	public BlackKnight(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 83;
-		this.expansionSetCode = "M11";
-	}
+    public BlackKnight(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 83;
+        this.expansionSetCode = "M11";
+    }
 
-	public BlackKnight(final BlackKnight card) {
-		super(card);
-	}
+    public BlackKnight(final BlackKnight card) {
+        super(card);
+    }
 
-	@Override
-	public BlackKnight copy() {
-		return new BlackKnight(this);
-	}
+    @Override
+    public BlackKnight copy() {
+        return new BlackKnight(this);
+    }
 
 }

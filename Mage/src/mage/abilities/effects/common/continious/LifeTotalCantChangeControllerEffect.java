@@ -42,32 +42,32 @@ import mage.players.Player;
  */
 public class LifeTotalCantChangeControllerEffect extends ContinuousEffectImpl<LifeTotalCantChangeControllerEffect> {
 
-	public LifeTotalCantChangeControllerEffect(Duration duration) {
-		super(duration, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
-		setText();
-	}
+    public LifeTotalCantChangeControllerEffect(Duration duration) {
+        super(duration, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
+        setText();
+    }
 
-	public LifeTotalCantChangeControllerEffect(final LifeTotalCantChangeControllerEffect effect) {
-		super(effect);
-	}
+    public LifeTotalCantChangeControllerEffect(final LifeTotalCantChangeControllerEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public LifeTotalCantChangeControllerEffect copy() {
-		return new LifeTotalCantChangeControllerEffect(this);
-	}
+    @Override
+    public LifeTotalCantChangeControllerEffect copy() {
+        return new LifeTotalCantChangeControllerEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-		if (player != null) {
-			player.setLifeTotalCanChange(false);
-			return true;
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+            player.setLifeTotalCanChange(false);
+            return true;
+        }
+        return true;
+    }
 
-	private void setText() {
-		staticText = "Your life total can't change. (You can't gain or lose life. You can't pay any amount of life except 0.)";
-	}
+    private void setText() {
+        staticText = "Your life total can't change. (You can't gain or lose life. You can't pay any amount of life except 0.)";
+    }
 
 }

@@ -42,23 +42,23 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class BituminousBlast extends CardImpl<BituminousBlast> {
 
-	public BituminousBlast(UUID ownerId) {
-		super(ownerId, 34, "Bituminous Blast", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{B}{R}");
-		this.expansionSetCode = "ARB";
-		this.color.setBlack(true);
-		this.color.setRed(true);
-		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-		this.getSpellAbility().addEffect(new DamageTargetEffect(4));
-		this.addAbility(new CascadeAbility());
-	}
+    public BituminousBlast(UUID ownerId) {
+        super(ownerId, 34, "Bituminous Blast", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{B}{R}");
+        this.expansionSetCode = "ARB";
+        this.color.setBlack(true);
+        this.color.setRed(true);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addEffect(new DamageTargetEffect(4));
+        this.addAbility(new CascadeAbility());
+    }
 
-	public BituminousBlast(final BituminousBlast card) {
-		super(card);
-	}
+    public BituminousBlast(final BituminousBlast card) {
+        super(card);
+    }
 
-	@Override
-	public BituminousBlast copy() {
-		return new BituminousBlast(this);
-	}
+    @Override
+    public BituminousBlast copy() {
+        return new BituminousBlast(this);
+    }
 
 }

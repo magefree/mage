@@ -31,10 +31,10 @@ public class ManabarbsTest2 extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Elemental");
         attack(1, playerA, "Ball Lightning");
         attack(1, playerA, "Lightning Elemental");
-        
+
         setStopAt(2, Constants.PhaseStep.UNTAP);
         execute();
-        
+
         assertLife(playerA, 13); // burns from Manabarbs
         assertLife(playerB, 10); // ai should attack with 4/1 + 6/1
         assertPermanentCount(playerA, "Lightning Elemental", 1);

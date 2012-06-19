@@ -44,45 +44,45 @@ import java.util.UUID;
  */
 public class LookedAt extends HashMap<String, Cards> implements Serializable, Copyable<LookedAt> {
 
-	public LookedAt() {	}
+    public LookedAt() {    }
 
-	public LookedAt(final LookedAt lookedAt) {
+    public LookedAt(final LookedAt lookedAt) {
         for (Map.Entry<String, Cards> entry: lookedAt.entrySet()) {
             this.put(entry.getKey(), entry.getValue().copy());
-		}
-	}
+        }
+    }
 
-	public void add(String name, Card card) {
-		this.get(name).add(card);
-	}
+    public void add(String name, Card card) {
+        this.get(name).add(card);
+    }
 
-	public void add(String name, Cards cards) {
-		if (!this.containsKey(name))
-			createLookedAt(name);
-		this.put(name, cards.copy());
-	}
+    public void add(String name, Cards cards) {
+        if (!this.containsKey(name))
+            createLookedAt(name);
+        this.put(name, cards.copy());
+    }
 
-	public Cards createLookedAt(String name) {
-		if (!this.containsKey(name)) {
-			this.put(name, new CardsImpl());
-		}
-		return this.get(name);
-	}
+    public Cards createLookedAt(String name) {
+        if (!this.containsKey(name)) {
+            this.put(name, new CardsImpl());
+        }
+        return this.get(name);
+    }
 
-	public void reset() {
-		this.clear();
-	}
+    public void reset() {
+        this.clear();
+    }
 
-	public Card getCard(UUID cardId, Game game) {
-		for (Cards cards: this.values()) {
-			if (cards.contains(cardId))
-				return game.getCard(cardId);
-		}
-		return null;
-	}
+    public Card getCard(UUID cardId, Game game) {
+        for (Cards cards: this.values()) {
+            if (cards.contains(cardId))
+                return game.getCard(cardId);
+        }
+        return null;
+    }
 
-	@Override
-	public LookedAt copy() {
-		return new LookedAt(this);
-	}
+    @Override
+    public LookedAt copy() {
+        return new LookedAt(this);
+    }
 }

@@ -51,59 +51,59 @@ import java.util.UUID;
  */
 public class VolitionReins extends CardImpl<VolitionReins> {
 
-	public VolitionReins(UUID ownerId) {
-		super(ownerId, 53, "Volition Reins", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}{U}");
-		this.expansionSetCode = "SOM";
-		this.subtype.add("Aura");
-		this.color.setBlue(true);
+    public VolitionReins(UUID ownerId) {
+        super(ownerId, 53, "Volition Reins", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}{U}");
+        this.expansionSetCode = "SOM";
+        this.subtype.add("Aura");
+        this.color.setBlue(true);
 
-		TargetPermanent auraTarget = new TargetPermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Detriment));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		this.addAbility(ability);
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
-		this.addAbility(new EntersBattlefieldTriggeredAbility(new UntapVolitionReinsEffect()));
-	}
+        TargetPermanent auraTarget = new TargetPermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Detriment));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new UntapVolitionReinsEffect()));
+    }
 
-	public VolitionReins(final VolitionReins card) {
-		super(card);
-	}
+    public VolitionReins(final VolitionReins card) {
+        super(card);
+    }
 
-	@Override
-	public VolitionReins copy() {
-		return new VolitionReins(this);
-	}
+    @Override
+    public VolitionReins copy() {
+        return new VolitionReins(this);
+    }
 
-	public class UntapVolitionReinsEffect extends OneShotEffect<UntapVolitionReinsEffect> {
+    public class UntapVolitionReinsEffect extends OneShotEffect<UntapVolitionReinsEffect> {
 
-		public UntapVolitionReinsEffect() {
-			super(Constants.Outcome.Untap);
-			staticText = "if enchanted permanent is tapped, untap it";
-		}
+        public UntapVolitionReinsEffect() {
+            super(Constants.Outcome.Untap);
+            staticText = "if enchanted permanent is tapped, untap it";
+        }
 
-		public UntapVolitionReinsEffect(final UntapVolitionReinsEffect effect) {
-			super(effect);
-		}
+        public UntapVolitionReinsEffect(final UntapVolitionReinsEffect effect) {
+            super(effect);
+        }
 
-		@Override
-		public UntapVolitionReinsEffect copy() {
-			return new UntapVolitionReinsEffect(this);
-		}
+        @Override
+        public UntapVolitionReinsEffect copy() {
+            return new UntapVolitionReinsEffect(this);
+        }
 
-		@Override
-		public boolean apply(Game game, Ability source) {
-			Permanent enchantment = game.getPermanent(source.getSourceId());
-			if (enchantment != null && enchantment.getAttachedTo() != null) {
-				Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
-				if (permanent != null && permanent.isTapped()) {
-					permanent.untap(game);
-					return true;
-				}
-			}
-			return false;
-		}
+        @Override
+        public boolean apply(Game game, Ability source) {
+            Permanent enchantment = game.getPermanent(source.getSourceId());
+            if (enchantment != null && enchantment.getAttachedTo() != null) {
+                Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
+                if (permanent != null && permanent.isTapped()) {
+                    permanent.untap(game);
+                    return true;
+                }
+            }
+            return false;
+        }
 
-	}
+    }
 
 }

@@ -50,37 +50,37 @@ import mage.game.permanent.token.Token;
  */
 public class StirringWildwood extends CardImpl<StirringWildwood> {
 
-	public StirringWildwood(UUID ownerId) {
-		super(ownerId, 144, "Stirring Wildwood", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-		this.expansionSetCode = "WWK";
-		this.addAbility(new EntersBattlefieldTappedAbility());
-		this.addAbility(new GreenManaAbility());
-		this.addAbility(new WhiteManaAbility());
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new StirringWildwoodToken(), "land", Duration.EndOfTurn), new ManaCostsImpl("{1}{G}{W}")));
-	}
+    public StirringWildwood(UUID ownerId) {
+        super(ownerId, 144, "Stirring Wildwood", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+        this.expansionSetCode = "WWK";
+        this.addAbility(new EntersBattlefieldTappedAbility());
+        this.addAbility(new GreenManaAbility());
+        this.addAbility(new WhiteManaAbility());
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new StirringWildwoodToken(), "land", Duration.EndOfTurn), new ManaCostsImpl("{1}{G}{W}")));
+    }
 
-	public StirringWildwood(final StirringWildwood card) {
-		super(card);
-	}
+    public StirringWildwood(final StirringWildwood card) {
+        super(card);
+    }
 
-	@Override
-	public StirringWildwood copy() {
-		return new StirringWildwood(this);
-	}
+    @Override
+    public StirringWildwood copy() {
+        return new StirringWildwood(this);
+    }
 
 }
 
 class StirringWildwoodToken extends Token {
 
-	public StirringWildwoodToken() {
-		super("", "3/4 green and white Elemental creature with reach");
-		cardType.add(CardType.CREATURE);
-		subtype.add("Elemental");
-		color.setGreen(true);
-		color.setWhite(true);
-		power = new MageInt(3);
-		toughness = new MageInt(4);
-		addAbility(ReachAbility.getInstance());
-	}
+    public StirringWildwoodToken() {
+        super("", "3/4 green and white Elemental creature with reach");
+        cardType.add(CardType.CREATURE);
+        subtype.add("Elemental");
+        color.setGreen(true);
+        color.setWhite(true);
+        power = new MageInt(3);
+        toughness = new MageInt(4);
+        addAbility(ReachAbility.getInstance());
+    }
 
 }

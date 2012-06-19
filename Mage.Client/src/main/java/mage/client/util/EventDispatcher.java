@@ -38,25 +38,25 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 public abstract class EventDispatcher<E extends Event> implements Serializable {
 
-	private List<Listener<E>> listeners = new CopyOnWriteArrayList<Listener<E>>();
+    private List<Listener<E>> listeners = new CopyOnWriteArrayList<Listener<E>>();
 
-	public void addListener(Listener<E> listener) {
-		if (!listeners.contains(listener)) {
-			listeners.add(listener);
-		}
-	}
+    public void addListener(Listener<E> listener) {
+        if (!listeners.contains(listener)) {
+            listeners.add(listener);
+        }
+    }
 
-	public void removeListener(Listener<E> listener) {
-		listeners.remove(listener);
-	}
+    public void removeListener(Listener<E> listener) {
+        listeners.remove(listener);
+    }
 
-	public void fireEvent(E event) {
-		for (Listener<E> listener : listeners) {
-			listener.event(event);
-		}
-	}
+    public void fireEvent(E event) {
+        for (Listener<E> listener : listeners) {
+            listener.event(event);
+        }
+    }
 
-	public void clearListeners() {
-		listeners.clear();
-	}
+    public void clearListeners() {
+        listeners.clear();
+    }
 }

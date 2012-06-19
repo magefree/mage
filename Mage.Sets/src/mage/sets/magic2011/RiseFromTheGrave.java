@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class RiseFromTheGrave extends mage.sets.magic2010.RiseFromTheGrave {
 
-	public RiseFromTheGrave(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 114;
-		this.expansionSetCode = "M11";
-	}
+    public RiseFromTheGrave(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 114;
+        this.expansionSetCode = "M11";
+    }
 
-	public RiseFromTheGrave(final RiseFromTheGrave card) {
-		super(card);
-	}
+    public RiseFromTheGrave(final RiseFromTheGrave card) {
+        super(card);
+    }
 
-	@Override
-	public RiseFromTheGrave copy() {
-		return new RiseFromTheGrave(this);
-	}
+    @Override
+    public RiseFromTheGrave copy() {
+        return new RiseFromTheGrave(this);
+    }
 
 }

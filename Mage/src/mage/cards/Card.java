@@ -42,33 +42,33 @@ import java.util.UUID;
 
 public interface Card extends MageObject {
 
-	public UUID getOwnerId();
-	public int getCardNumber();
+    public UUID getOwnerId();
+    public int getCardNumber();
     public void setCardNumber(int cid);
-	public Rarity getRarity();
-	public void setRarity(Rarity rarity);
-	public void setControllerId(UUID controllerId);
-	public void setOwnerId(UUID ownerId);
-	public void addAbility(Ability ability);
-	public void addWatcher(Watcher watcher);
-	public SpellAbility getSpellAbility();
-	public List<String> getRules();
-	public List<Watcher> getWatchers();
-	public String getExpansionSetCode();
-	public void setExpansionSetCode(String expansionSetCode);
-	public void setFaceDown(boolean value);
-	public boolean isFaceDown();
+    public Rarity getRarity();
+    public void setRarity(Rarity rarity);
+    public void setControllerId(UUID controllerId);
+    public void setOwnerId(UUID ownerId);
+    public void addAbility(Ability ability);
+    public void addWatcher(Watcher watcher);
+    public SpellAbility getSpellAbility();
+    public List<String> getRules();
+    public List<Watcher> getWatchers();
+    public String getExpansionSetCode();
+    public void setExpansionSetCode(String expansionSetCode);
+    public void setFaceDown(boolean value);
+    public boolean isFaceDown();
     public boolean isFlipCard();
 
-	public boolean canTransform();
-	public Card getSecondCardFace();
+    public boolean canTransform();
+    public Card getSecondCardFace();
     public void setSecondCardFace(Card card);
-	public boolean isNightCard();
+    public boolean isNightCard();
 
-	public void assignNewId();
+    public void assignNewId();
 
     public int getZoneChangeCounter();
-    
+
     public void addInfo(String key, String value);
 
     /**
@@ -84,7 +84,7 @@ public interface Card extends MageObject {
      * </ul>
      * @return true if card was moved to zone
      */
-	public boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag);
+    public boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag);
 
     /**
      * Moves the card to an exile zone
@@ -94,11 +94,11 @@ public interface Card extends MageObject {
      * @param game
      * @return true if card was moved to zone
      */
-	public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game);
-	public boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId);
-	public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId);
-	public List<Mana> getMana();
+    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game);
+    public boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId);
+    public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId);
+    public List<Mana> getMana();
 
-	@Override
-	public Card copy();
+    @Override
+    public Card copy();
 }

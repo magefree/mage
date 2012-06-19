@@ -45,7 +45,7 @@ public class BladetuskBoar extends CardImpl<BladetuskBoar> {
         super(ownerId, 118, "Bladetusk Boar", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.expansionSetCode = "ZEN";
         this.subtype.add("Boar");
-		this.color.setRed(true);
+        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
         this.addAbility(IntimidateAbility.getInstance());

@@ -41,12 +41,12 @@ import mage.game.permanent.Permanent;
 public class TapEnchantedEffect extends OneShotEffect<TapEnchantedEffect> {
 
     public TapEnchantedEffect() {
-	super(Outcome.Tap);
- 	staticText = "tap enchanted creature";
+    super(Outcome.Tap);
+     staticText = "tap enchanted creature";
    }
 
     public TapEnchantedEffect(final TapEnchantedEffect effect) {
-	super(effect);
+    super(effect);
     }
 
     @Override

@@ -43,23 +43,23 @@ import java.util.UUID;
  */
 public class MoxOpal extends CardImpl<MoxOpal> {
 
-	public MoxOpal(UUID ownerId) {
-		super(ownerId, 179, "Mox Opal", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{0}");
-		this.supertype.add("Legendary");
-		this.expansionSetCode = "SOM";
+    public MoxOpal(UUID ownerId) {
+        super(ownerId, 179, "Mox Opal", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{0}");
+        this.supertype.add("Legendary");
+        this.expansionSetCode = "SOM";
 
-		Ability ability = new AnyColorManaAbility();
-		ability.addCost(new MetalcraftCost());
-		this.addAbility(ability);
-	}
+        Ability ability = new AnyColorManaAbility();
+        ability.addCost(new MetalcraftCost());
+        this.addAbility(ability);
+    }
 
-	public MoxOpal(final MoxOpal card) {
-		super(card);
-	}
+    public MoxOpal(final MoxOpal card) {
+        super(card);
+    }
 
-	@Override
-	public MoxOpal copy() {
-		return new MoxOpal(this);
-	}
+    @Override
+    public MoxOpal copy() {
+        return new MoxOpal(this);
+    }
 
 }

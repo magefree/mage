@@ -43,46 +43,46 @@ import mage.players.Player;
  */
 public class DrawCardTargetEffect extends OneShotEffect<DrawCardTargetEffect> {
 
-	protected DynamicValue amount;
+    protected DynamicValue amount;
 
     public DrawCardTargetEffect(int amount) {
         this(new StaticValue(amount));
     }
 
-	public DrawCardTargetEffect(DynamicValue amount) {
-		super(Outcome.DrawCard);
-		this.amount = amount.clone();
-	}
+    public DrawCardTargetEffect(DynamicValue amount) {
+        super(Outcome.DrawCard);
+        this.amount = amount.clone();
+    }
 
-	public DrawCardTargetEffect(final DrawCardTargetEffect effect) {
-		super(effect);
-		this.amount = effect.amount.clone();
-	}
+    public DrawCardTargetEffect(final DrawCardTargetEffect effect) {
+        super(effect);
+        this.amount = effect.amount.clone();
+    }
 
-	@Override
-	public DrawCardTargetEffect copy() {
-		return new DrawCardTargetEffect(this);
-	}
+    @Override
+    public DrawCardTargetEffect copy() {
+        return new DrawCardTargetEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(targetPointer.getFirst(game, source));
-		if (player != null) {
-			player.drawCards(amount.calculate(game, source), game);
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        if (player != null) {
+            player.drawCards(amount.calculate(game, source), game);
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public String getText(Mode mode) {
-		StringBuilder sb = new StringBuilder();
+    @Override
+    public String getText(Mode mode) {
+        StringBuilder sb = new StringBuilder();
         if (mode.getTargets().size() > 0) {
-		    sb.append("Target ").append(mode.getTargets().get(0).getTargetName());
+            sb.append("Target ").append(mode.getTargets().get(0).getTargetName());
         } else {
             sb.append("that player");
         }
-		sb.append(" draws ").append(amount).append(" card");
+        sb.append(" draws ").append(amount).append(" card");
         try {
             if (Integer.parseInt(amount.toString()) > 1) {
                 sb.append("s");
@@ -95,8 +95,8 @@ public class DrawCardTargetEffect extends OneShotEffect<DrawCardTargetEffect> {
             sb.append(" for each ");
         }
         sb.append(message);
-		return sb.toString();
-	}
+        return sb.toString();
+    }
 
 
 }

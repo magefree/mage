@@ -8,9 +8,9 @@ import java.util.GregorianCalendar;
 public class Apocalypse extends ExpansionSet {
     private static final Apocalypse fINSTANCE =  new Apocalypse();
 
-	public static Apocalypse getInstance() {
-		return fINSTANCE;
-	}
+    public static Apocalypse getInstance() {
+        return fINSTANCE;
+    }
 
     private Apocalypse() {
         super("Apocalypse", "APC", "", "mage.sets.apocalypse", new GregorianCalendar(2001, 5, 1).getTime(), Constants.SetType.EXPANSION);

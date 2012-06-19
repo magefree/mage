@@ -9,6 +9,6 @@ import mage.cards.Card;
  * @author nantuko
  */
 public interface RateCallback {
-	int rateCard(Card card);
-	Card getBestBasicLand(Constants.ColoredManaSymbol color);
+    int rateCard(Card card);
+    Card getBestBasicLand(Constants.ColoredManaSymbol color);
 }

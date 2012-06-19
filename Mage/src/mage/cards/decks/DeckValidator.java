@@ -37,8 +37,8 @@ import java.util.Map;
  */
 public interface DeckValidator extends Serializable {
 
-	public String getName();
-	public boolean validate(Deck deck);
-	public Map<String, String> getInvalid();
-	
+    public String getName();
+    public boolean validate(Deck deck);
+    public Map<String, String> getInvalid();
+
 }

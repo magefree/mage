@@ -47,28 +47,28 @@ import mage.cards.CardImpl;
  */
 public class AuriokEdgewright extends CardImpl<AuriokEdgewright> {
 
-	protected static String effectText = "Metalcraft - Auriok Edgewright has double strike as long as you control three or more artifacts.";
+    protected static String effectText = "Metalcraft - Auriok Edgewright has double strike as long as you control three or more artifacts.";
 
-	public AuriokEdgewright(UUID ownerId) {
-		super(ownerId, 3, "Auriok Edgewright", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{W}");
-		this.expansionSetCode = "SOM";
-		this.subtype.add("Human");
-		this.subtype.add("Soldier");
+    public AuriokEdgewright(UUID ownerId) {
+        super(ownerId, 3, "Auriok Edgewright", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{W}");
+        this.expansionSetCode = "SOM";
+        this.subtype.add("Human");
+        this.subtype.add("Soldier");
 
-		this.color.setWhite(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
-		
-		ContinuousEffect effect = new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield);
+        this.color.setWhite(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        ContinuousEffect effect = new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(effect, MetalcraftCondition.getInstance(), effectText)));
-	}
+    }
 
-	public AuriokEdgewright(final AuriokEdgewright card) {
-		super(card);
-	}
+    public AuriokEdgewright(final AuriokEdgewright card) {
+        super(card);
+    }
 
-	@Override
-	public AuriokEdgewright copy() {
-		return new AuriokEdgewright(this);
-	}
+    @Override
+    public AuriokEdgewright copy() {
+        return new AuriokEdgewright(this);
+    }
 }

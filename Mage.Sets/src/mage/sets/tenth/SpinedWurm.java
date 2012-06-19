@@ -40,23 +40,23 @@ import mage.cards.CardImpl;
  */
 public class SpinedWurm extends CardImpl<SpinedWurm> {
 
-	public SpinedWurm(UUID ownerId) {
-		super(ownerId, 298, "Spined Wurm", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
-		this.expansionSetCode = "10E";
-		this.subtype.add("Wurm");
-		this.color.setGreen(true);
-		this.power = new MageInt(5);
-		this.toughness = new MageInt(4);
+    public SpinedWurm(UUID ownerId) {
+        super(ownerId, 298, "Spined Wurm", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
+        this.expansionSetCode = "10E";
+        this.subtype.add("Wurm");
+        this.color.setGreen(true);
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(4);
 
-	}
+    }
 
-	public SpinedWurm(final SpinedWurm card) {
-		super(card);
-	}
+    public SpinedWurm(final SpinedWurm card) {
+        super(card);
+    }
 
-	@Override
-	public SpinedWurm copy() {
-		return new SpinedWurm(this);
-	}
+    @Override
+    public SpinedWurm copy() {
+        return new SpinedWurm(this);
+    }
 
 }

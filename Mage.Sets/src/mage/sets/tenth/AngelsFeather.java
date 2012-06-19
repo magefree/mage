@@ -46,52 +46,52 @@ import mage.game.stack.Spell;
  */
 public class AngelsFeather extends CardImpl<AngelsFeather> {
 
-	public AngelsFeather(UUID ownerId) {
-		super(ownerId, 311, "Angel's Feather", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-		this.expansionSetCode = "10E";
-		this.addAbility(new AngelsFeatherAbility());
-	}
+    public AngelsFeather(UUID ownerId) {
+        super(ownerId, 311, "Angel's Feather", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
+        this.expansionSetCode = "10E";
+        this.addAbility(new AngelsFeatherAbility());
+    }
 
-	public AngelsFeather(final AngelsFeather card) {
-		super(card);
-	}
+    public AngelsFeather(final AngelsFeather card) {
+        super(card);
+    }
 
-	@Override
-	public AngelsFeather copy() {
-		return new AngelsFeather(this);
-	}
+    @Override
+    public AngelsFeather copy() {
+        return new AngelsFeather(this);
+    }
 
 }
 
 class AngelsFeatherAbility extends TriggeredAbilityImpl<AngelsFeatherAbility> {
 
-	public AngelsFeatherAbility() {
-		super(Zone.BATTLEFIELD, new GainLifeEffect(1), true);
-	}
+    public AngelsFeatherAbility() {
+        super(Zone.BATTLEFIELD, new GainLifeEffect(1), true);
+    }
 
-	public AngelsFeatherAbility(final AngelsFeatherAbility ability) {
-		super(ability);
-	}
+    public AngelsFeatherAbility(final AngelsFeatherAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public AngelsFeatherAbility copy() {
-		return new AngelsFeatherAbility(this);
-	}
+    @Override
+    public AngelsFeatherAbility copy() {
+        return new AngelsFeatherAbility(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.SPELL_CAST) {
-			Spell spell = game.getStack().getSpell(event.getTargetId());
-			if (spell != null && spell.getColor().isWhite()) {
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.SPELL_CAST) {
+            Spell spell = game.getStack().getSpell(event.getTargetId());
+            if (spell != null && spell.getColor().isWhite()) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "Whenever a player casts a white spell, you may gain 1 life.";
-	}
+    @Override
+    public String getRule() {
+        return "Whenever a player casts a white spell, you may gain 1 life.";
+    }
 
 }

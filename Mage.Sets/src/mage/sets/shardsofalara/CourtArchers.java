@@ -47,7 +47,7 @@ public class CourtArchers extends CardImpl<CourtArchers> {
         this.expansionSetCode = "ALA";
         this.subtype.add("Human");
         this.subtype.add("Archer");
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
         this.addAbility(ReachAbility.getInstance());

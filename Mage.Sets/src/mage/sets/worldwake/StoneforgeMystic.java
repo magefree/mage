@@ -51,40 +51,40 @@ import java.util.UUID;
  */
 public class StoneforgeMystic extends CardImpl<StoneforgeMystic> {
 
-	private static final FilterCard filter = new FilterCard("an Equipment card");
+    private static final FilterCard filter = new FilterCard("an Equipment card");
 
-	static {
-		filter.getCardType().add(CardType.ARTIFACT);
-		filter.getSubtype().add("Equipment");
-	}
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.getSubtype().add("Equipment");
+    }
 
-	public StoneforgeMystic(UUID ownerId) {
-		super(ownerId, 20, "Stoneforge Mystic", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}");
-		this.expansionSetCode = "WWK";
-		this.color.setWhite(true);
-		this.subtype.add("Kor");
-		this.subtype.add("Artificer");
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(2);
+    public StoneforgeMystic(UUID ownerId) {
+        super(ownerId, 20, "Stoneforge Mystic", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        this.expansionSetCode = "WWK";
+        this.color.setWhite(true);
+        this.subtype.add("Kor");
+        this.subtype.add("Artificer");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(2);
 
-		// When Stoneforge Mystic enters the battlefield, you may search your library for an Equipment card, reveal it, put it into your hand, then shuffle your library.
+        // When Stoneforge Mystic enters the battlefield, you may search your library for an Equipment card, reveal it, put it into your hand, then shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary(1, 1, filter);
-		this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryRevealPutInHandEffect(target), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryRevealPutInHandEffect(target), true));
 
         // {1}{W}, {T}: You may put an Equipment card from your hand onto the battlefield.
-		SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PlayTargetWithoutPayingManaEffect(), new ManaCostsImpl("{1}{W}"));
-		ability.addCost(new TapSourceCost());
-		ability.addTarget(new TargetCardInHand(0, 1, filter));
-		this.addAbility(ability);
-	}
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PlayTargetWithoutPayingManaEffect(), new ManaCostsImpl("{1}{W}"));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetCardInHand(0, 1, filter));
+        this.addAbility(ability);
+    }
 
-	public StoneforgeMystic(final StoneforgeMystic card) {
-		super(card);
-	}
+    public StoneforgeMystic(final StoneforgeMystic card) {
+        super(card);
+    }
 
-	@Override
-	public StoneforgeMystic copy() {
-		return new StoneforgeMystic(this);
-	}
+    @Override
+    public StoneforgeMystic copy() {
+        return new StoneforgeMystic(this);
+    }
 
 }

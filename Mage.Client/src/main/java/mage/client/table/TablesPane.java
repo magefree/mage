@@ -51,36 +51,36 @@ public class TablesPane extends MagePane {
 
     /** Creates new form TablesPane */
     public TablesPane() {
-    	boolean initialized = false;
-    	if (Plugins.getInstance().isThemePluginLoaded()) {
-    		tablesPanel = new mage.client.table.TablesPanel();
-    		Map<String, JComponent> ui = tablesPanel.getUIComponents(); 
-    		JComponent container = Plugins.getInstance().updateTablePanel(ui);
-    		if (container != null) {
-    			initComponents(container);
-    			container.add(tablesPanel);
-    			container.setOpaque(false);
-    			initialized = true;
-    		}
-    	}
-    	if (!initialized) {
-    		initComponents();
-    	}
+        boolean initialized = false;
+        if (Plugins.getInstance().isThemePluginLoaded()) {
+            tablesPanel = new mage.client.table.TablesPanel();
+            Map<String, JComponent> ui = tablesPanel.getUIComponents(); 
+            JComponent container = Plugins.getInstance().updateTablePanel(ui);
+            if (container != null) {
+                initComponents(container);
+                container.add(tablesPanel);
+                container.setOpaque(false);
+                initialized = true;
+            }
+        }
+        if (!initialized) {
+            initComponents();
+        }
     }
-    
-	public void showTables() {
-		UUID roomId = MageFrame.getSession().getMainRoomId();
-		if (roomId != null) {
-			this.setTitle("Tables");
-			tablesPanel.showTables(roomId);
-			this.repaint();
-		}
 
-	}
+    public void showTables() {
+        UUID roomId = MageFrame.getSession().getMainRoomId();
+        if (roomId != null) {
+            this.setTitle("Tables");
+            tablesPanel.showTables(roomId);
+            this.repaint();
+        }
 
-	public void hideTables() {
-		tablesPanel.hideTables();
-	}
+    }
+
+    public void hideTables() {
+        tablesPanel.hideTables();
+    }
 
 
     /** This method is called from within the constructor to
@@ -107,7 +107,7 @@ public class TablesPane extends MagePane {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void initComponents(JComponent container) {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -127,13 +127,13 @@ public class TablesPane extends MagePane {
     private mage.client.table.TablesPanel tablesPanel;
     // End of variables declaration//GEN-END:variables
 
-	@Override
-	public void activated() {
-		tablesPanel.startTasks();
-	}
+    @Override
+    public void activated() {
+        tablesPanel.startTasks();
+    }
 
-	@Override
-	public void deactivated() {
-		tablesPanel.stopTasks();
-	}
+    @Override
+    public void deactivated() {
+        tablesPanel.stopTasks();
+    }
 }

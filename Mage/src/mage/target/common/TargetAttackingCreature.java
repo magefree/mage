@@ -36,26 +36,26 @@ import mage.filter.common.FilterAttackingCreature;
  */
 public class TargetAttackingCreature extends TargetCreaturePermanent<TargetAttackingCreature> {
 
-	public TargetAttackingCreature() {
-		this(1, 1, new FilterAttackingCreature(), false);
-	}
+    public TargetAttackingCreature() {
+        this(1, 1, new FilterAttackingCreature(), false);
+    }
 
-	public TargetAttackingCreature(int numTargets) {
-		this(numTargets, numTargets, new FilterAttackingCreature(), false);
-	}
+    public TargetAttackingCreature(int numTargets) {
+        this(numTargets, numTargets, new FilterAttackingCreature(), false);
+    }
 
-	public TargetAttackingCreature(int minNumTargets, int maxNumTargets, FilterAttackingCreature filter, boolean notTarget) {
-		super(minNumTargets, maxNumTargets, filter, notTarget);
-		this.targetName = filter.getMessage();
-	}
+    public TargetAttackingCreature(int minNumTargets, int maxNumTargets, FilterAttackingCreature filter, boolean notTarget) {
+        super(minNumTargets, maxNumTargets, filter, notTarget);
+        this.targetName = filter.getMessage();
+    }
 
-	public TargetAttackingCreature(final TargetAttackingCreature target) {
-		super(target);
-	}
+    public TargetAttackingCreature(final TargetAttackingCreature target) {
+        super(target);
+    }
 
-	@Override
-	public TargetAttackingCreature copy() {
-		return new TargetAttackingCreature(this);
-	}
+    @Override
+    public TargetAttackingCreature copy() {
+        return new TargetAttackingCreature(this);
+    }
 
 }

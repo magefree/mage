@@ -51,35 +51,35 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class MerfolkSovereign extends CardImpl<MerfolkSovereign> {
 
-	private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("Merfolk creatures");
-	private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Merfolk creature");
+    private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("Merfolk creatures");
+    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Merfolk creature");
 
-	static {
-		filter1.getSubtype().add("Merfolk");
-		filter2.getSubtype().add("Merfolk");
-	}
+    static {
+        filter1.getSubtype().add("Merfolk");
+        filter2.getSubtype().add("Merfolk");
+    }
 
-	public MerfolkSovereign(UUID ownerId) {
-		super(ownerId, 62, "Merfolk Sovereign", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
-		this.expansionSetCode = "M10";
-		this.subtype.add("Merfolk");
-		this.color.setBlue(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+    public MerfolkSovereign(UUID ownerId) {
+        super(ownerId, 62, "Merfolk Sovereign", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
+        this.expansionSetCode = "M10";
+        this.subtype.add("Merfolk");
+        this.color.setBlue(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter1, true)));
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(UnblockableAbility.getInstance(), Duration.EndOfTurn), new TapSourceCost());
-		ability.addTarget(new TargetCreaturePermanent(filter2));
-		this.addAbility(ability);
-	}
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter1, true)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(UnblockableAbility.getInstance(), Duration.EndOfTurn), new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent(filter2));
+        this.addAbility(ability);
+    }
 
-	public MerfolkSovereign(final MerfolkSovereign card) {
-		super(card);
-	}
+    public MerfolkSovereign(final MerfolkSovereign card) {
+        super(card);
+    }
 
-	@Override
-	public MerfolkSovereign copy() {
-		return new MerfolkSovereign(this);
-	}
+    @Override
+    public MerfolkSovereign copy() {
+        return new MerfolkSovereign(this);
+    }
 
 }

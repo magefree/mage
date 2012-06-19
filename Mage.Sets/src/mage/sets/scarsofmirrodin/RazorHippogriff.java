@@ -59,19 +59,19 @@ public class RazorHippogriff extends CardImpl<RazorHippogriff> {
         this.expansionSetCode = "SOM";
         this.subtype.add("Hippogriff");
 
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         this.power = new MageInt(3);
-      	this.toughness = new MageInt(3);
+          this.toughness = new MageInt(3);
 
-		this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(FlyingAbility.getInstance());
 
-		Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect());
-		TargetCard target = new TargetCardInYourGraveyard(new FilterArtifactCard("artifact card from your graveyard"));
-		target.setRequired(true);
-		ability.addTarget(target);
-		ability.addEffect(new RazorHippogriffGainLifeEffect());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect());
+        TargetCard target = new TargetCardInYourGraveyard(new FilterArtifactCard("artifact card from your graveyard"));
+        target.setRequired(true);
+        ability.addTarget(target);
+        ability.addEffect(new RazorHippogriffGainLifeEffect());
 
-		this.addAbility(ability);
+        this.addAbility(ability);
     }
 
     public RazorHippogriff (final RazorHippogriff card) {
@@ -83,37 +83,37 @@ public class RazorHippogriff extends CardImpl<RazorHippogriff> {
         return new RazorHippogriff(this);
     }
 
-	public class RazorHippogriffGainLifeEffect extends OneShotEffect<RazorHippogriffGainLifeEffect> {
+    public class RazorHippogriffGainLifeEffect extends OneShotEffect<RazorHippogriffGainLifeEffect> {
 
-		public RazorHippogriffGainLifeEffect() {
-			super(Constants.Outcome.GainLife);
-			staticText = "you gain life equal to that card's converted mana cost.";
-		}
+        public RazorHippogriffGainLifeEffect() {
+            super(Constants.Outcome.GainLife);
+            staticText = "you gain life equal to that card's converted mana cost.";
+        }
 
-		public RazorHippogriffGainLifeEffect(final RazorHippogriffGainLifeEffect effect) {
-			super(effect);
-		}
+        public RazorHippogriffGainLifeEffect(final RazorHippogriffGainLifeEffect effect) {
+            super(effect);
+        }
 
-		@Override
-		public RazorHippogriffGainLifeEffect copy() {
-			return new RazorHippogriffGainLifeEffect(this);
-		}
+        @Override
+        public RazorHippogriffGainLifeEffect copy() {
+            return new RazorHippogriffGainLifeEffect(this);
+        }
 
-		@Override
-		public boolean apply(Game game, Ability source) {
-			Player player = game.getPlayer(source.getControllerId());
-			if (player != null) {
-				Card card = player.getGraveyard().get(source.getFirstTarget(), game);
-				if (card == null) {
-					card = (Card)game.getLastKnownInformation(source.getFirstTarget(), Zone.GRAVEYARD);
-				}
-				if (card != null) {
-					player.gainLife(card.getManaCost().convertedManaCost(), game);
-				}
-			}
-			return true;
-		}
+        @Override
+        public boolean apply(Game game, Ability source) {
+            Player player = game.getPlayer(source.getControllerId());
+            if (player != null) {
+                Card card = player.getGraveyard().get(source.getFirstTarget(), game);
+                if (card == null) {
+                    card = (Card)game.getLastKnownInformation(source.getFirstTarget(), Zone.GRAVEYARD);
+                }
+                if (card != null) {
+                    player.gainLife(card.getManaCost().convertedManaCost(), game);
+                }
+            }
+            return true;
+        }
 
-	}
+    }
 
 }

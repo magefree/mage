@@ -58,13 +58,13 @@ public class RelicPutrescence extends CardImpl<RelicPutrescence> {
         super(ownerId, 77, "Relic Putrescence", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Aura");
-		this.color.setBlack(true);
-		TargetPermanent auraTarget = new TargetArtifactPermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Detriment));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		this.addAbility(ability);
-		this.addAbility(new RelicPutrescenceAbility());
+        this.color.setBlack(true);
+        TargetPermanent auraTarget = new TargetArtifactPermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Detriment));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+        this.addAbility(new RelicPutrescenceAbility());
     }
 
     public RelicPutrescence (final RelicPutrescence card) {
@@ -80,35 +80,35 @@ public class RelicPutrescence extends CardImpl<RelicPutrescence> {
 
 class RelicPutrescenceAbility extends TriggeredAbilityImpl<RelicPutrescenceAbility> {
 
-	public RelicPutrescenceAbility() {
-		super(Zone.BATTLEFIELD, new AddCountersControllerEffect(CounterType.POISON.createInstance(), true));
-	}
+    public RelicPutrescenceAbility() {
+        super(Zone.BATTLEFIELD, new AddCountersControllerEffect(CounterType.POISON.createInstance(), true));
+    }
 
-	public RelicPutrescenceAbility(final RelicPutrescenceAbility ability) {
-		super(ability);
-	}
+    public RelicPutrescenceAbility(final RelicPutrescenceAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public RelicPutrescenceAbility copy() {
-		return new RelicPutrescenceAbility(this);
-	}
+    @Override
+    public RelicPutrescenceAbility copy() {
+        return new RelicPutrescenceAbility(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.TAPPED) {
-			Permanent enchantment = game.getPermanent(sourceId);
-			if (enchantment != null && enchantment.getAttachedTo() != null) {
-				if (event.getTargetId().equals(enchantment.getAttachedTo())) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.TAPPED) {
+            Permanent enchantment = game.getPermanent(sourceId);
+            if (enchantment != null && enchantment.getAttachedTo() != null) {
+                if (event.getTargetId().equals(enchantment.getAttachedTo())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "Whenever enchanted artifact becomes tapped, its controller gets a poison counter.";
-	}
+    @Override
+    public String getRule() {
+        return "Whenever enchanted artifact becomes tapped, its controller gets a poison counter.";
+    }
 
 }

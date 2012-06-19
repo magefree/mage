@@ -46,7 +46,7 @@ import mage.game.permanent.token.Token;
 public class JadeIdol extends CardImpl<JadeIdol> {
 
     private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
-    
+
     public JadeIdol(UUID ownerId) {
         super(ownerId, 256, "Jade Idol", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
         this.expansionSetCode = "CHK";

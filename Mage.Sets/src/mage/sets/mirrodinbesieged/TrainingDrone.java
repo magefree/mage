@@ -82,18 +82,18 @@ class TrainingDroneEffect extends RestrictionEffect<TrainingDroneEffect> {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-		if (permanent.getId().equals(source.getSourceId())) {
-			List<UUID> attachments = permanent.getAttachments();
-			for (UUID uuid : attachments) {
-				Permanent attached = game.getBattlefield().getPermanent(uuid);
-				if (attached.getSubtype().contains("Equipment")) {
-					return false;
-				}
-			}
-			return true;
-		}
-		// don't apply for all other creatures!
-		return false;
+        if (permanent.getId().equals(source.getSourceId())) {
+            List<UUID> attachments = permanent.getAttachments();
+            for (UUID uuid : attachments) {
+                Permanent attached = game.getBattlefield().getPermanent(uuid);
+                if (attached.getSubtype().contains("Equipment")) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        // don't apply for all other creatures!
+        return false;
     }
 
     @Override

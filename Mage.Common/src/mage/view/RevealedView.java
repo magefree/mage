@@ -39,21 +39,21 @@ import mage.game.Game;
  */
 public class RevealedView implements Serializable {
 
-	private String name;
-	private SimpleCardsView cards = new SimpleCardsView();
+    private String name;
+    private SimpleCardsView cards = new SimpleCardsView();
 
-	public RevealedView(String name, Cards cards, Game game) {
-		this.name = name;
-		for (Card card: cards.getCards(game)) {
-			this.cards.put(card.getId(), new SimpleCardView(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.isFaceDown()));
-		}
-	}
+    public RevealedView(String name, Cards cards, Game game) {
+        this.name = name;
+        for (Card card: cards.getCards(game)) {
+            this.cards.put(card.getId(), new SimpleCardView(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.isFaceDown()));
+        }
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public SimpleCardsView getCards() {
-		return cards;
-	}
+    public SimpleCardsView getCards() {
+        return cards;
+    }
 }

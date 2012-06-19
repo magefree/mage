@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class BaneslayerAngel extends mage.sets.magic2010.BaneslayerAngel {
 
-	public BaneslayerAngel(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 7;
-		this.expansionSetCode = "M11";
-	}
+    public BaneslayerAngel(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 7;
+        this.expansionSetCode = "M11";
+    }
 
-	public BaneslayerAngel(final BaneslayerAngel card) {
-		super(card);
-	}
+    public BaneslayerAngel(final BaneslayerAngel card) {
+        super(card);
+    }
 
-	@Override
-	public BaneslayerAngel copy() {
-		return new BaneslayerAngel(this);
-	}
+    @Override
+    public BaneslayerAngel copy() {
+        return new BaneslayerAngel(this);
+    }
 
 }

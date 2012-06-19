@@ -47,33 +47,33 @@ import mage.game.permanent.token.Token;
  */
 public class DreadStatuary extends CardImpl<DreadStatuary> {
 
-	public DreadStatuary(UUID ownerId) {
-		super(ownerId, 135, "Dread Statuary", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);
-		this.expansionSetCode = "WWK";
-		this.addAbility(new ColorlessManaAbility());
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new DreadStatuaryToken(), "land", Duration.EndOfTurn), new ManaCostsImpl("{4}")));
-	}
+    public DreadStatuary(UUID ownerId) {
+        super(ownerId, 135, "Dread Statuary", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);
+        this.expansionSetCode = "WWK";
+        this.addAbility(new ColorlessManaAbility());
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new DreadStatuaryToken(), "land", Duration.EndOfTurn), new ManaCostsImpl("{4}")));
+    }
 
-	public DreadStatuary(final DreadStatuary card) {
-		super(card);
-	}
+    public DreadStatuary(final DreadStatuary card) {
+        super(card);
+    }
 
-	@Override
-	public DreadStatuary copy() {
-		return new DreadStatuary(this);
-	}
+    @Override
+    public DreadStatuary copy() {
+        return new DreadStatuary(this);
+    }
 
 }
 
 class DreadStatuaryToken extends Token {
 
-	public DreadStatuaryToken() {
-		super("", "4/2 Golem artifact creature");
-		cardType.add(CardType.CREATURE);
-		cardType.add(CardType.ARTIFACT);
-		subtype.add("Golem");
-		power = new MageInt(4);
-		toughness = new MageInt(2);
-	}
+    public DreadStatuaryToken() {
+        super("", "4/2 Golem artifact creature");
+        cardType.add(CardType.CREATURE);
+        cardType.add(CardType.ARTIFACT);
+        subtype.add("Golem");
+        power = new MageInt(4);
+        toughness = new MageInt(2);
+    }
 
 }

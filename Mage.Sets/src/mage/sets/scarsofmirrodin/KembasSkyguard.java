@@ -43,26 +43,26 @@ import mage.cards.CardImpl;
  */
 public class KembasSkyguard extends CardImpl<KembasSkyguard> {
 
-	public KembasSkyguard(UUID ownerId) {
-		super(ownerId, 13, "Kemba's Skyguard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
-		this.expansionSetCode = "SOM";
-		this.subtype.add("Cat");
-		this.subtype.add("Knight");
+    public KembasSkyguard(UUID ownerId) {
+        super(ownerId, 13, "Kemba's Skyguard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
+        this.expansionSetCode = "SOM";
+        this.subtype.add("Cat");
+        this.subtype.add("Knight");
 
-		this.color.setWhite(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+        this.color.setWhite(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-		this.addAbility(FlyingAbility.getInstance());
-		this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(2)));
-	}
+        this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(2)));
+    }
 
-	public KembasSkyguard(final KembasSkyguard card) {
-		super(card);
-	}
+    public KembasSkyguard(final KembasSkyguard card) {
+        super(card);
+    }
 
-	@Override
-	public KembasSkyguard copy() {
-		return new KembasSkyguard(this);
-	}
+    @Override
+    public KembasSkyguard copy() {
+        return new KembasSkyguard(this);
+    }
 }

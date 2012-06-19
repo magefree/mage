@@ -39,18 +39,18 @@ import java.util.UUID;
  * @author BetaSteward_at_googlemail.com
  */
 public class ManaPoolItem implements Serializable {
-    
-	private int red = 0;
-	private int green = 0;
-	private int blue = 0;
-	private int white = 0;
-	private int black = 0;
-	private int colorless = 0;
+
+    private int red = 0;
+    private int green = 0;
+    private int blue = 0;
+    private int white = 0;
+    private int black = 0;
+    private int colorless = 0;
     private ConditionalMana conditionalMana;
     private UUID sourceId;
-    
+
     public ManaPoolItem() {}
-    
+
     public ManaPoolItem(int red, int green, int blue, int white, int black, int colorless, UUID sourceId) {
         this.red = red;
         this.green = green;
@@ -60,33 +60,33 @@ public class ManaPoolItem implements Serializable {
         this.colorless = colorless;
         this.sourceId = sourceId;
     }
-    
+
     public ManaPoolItem(ConditionalMana conditionalMana, UUID sourceId) {
         this.conditionalMana = conditionalMana;
         this.sourceId = sourceId;
         this.conditionalMana.setManaProducerId(sourceId);
     }
-    
+
     public ManaPoolItem(final ManaPoolItem item) {
-		this.red = item.red;
-		this.green = item.green;
-		this.blue = item.blue;
-		this.white = item.white;
-		this.black = item.black;
-		this.colorless = item.colorless;
+        this.red = item.red;
+        this.green = item.green;
+        this.blue = item.blue;
+        this.white = item.white;
+        this.black = item.black;
+        this.colorless = item.colorless;
         if (item.conditionalMana != null)
             this.conditionalMana = item.conditionalMana.copy();
         this.sourceId = item.sourceId;
     }
-    
+
     public ManaPoolItem copy() {
         return new ManaPoolItem(this);
     }
-    
+
     public UUID getSourceId() {
         return sourceId;
     }
-    
+
     public int getRed() {
         return red;
     }
@@ -144,7 +144,7 @@ public class ManaPoolItem implements Serializable {
     public boolean isConditional() {
         return conditionalMana != null;
     }
-    
+
     public ConditionalMana getConditionalMana() {
         return conditionalMana;
     }

@@ -45,46 +45,46 @@ import org.apache.log4j.Logger;
  */
 public class GameFactory {
 
-	private final static GameFactory INSTANCE = new GameFactory();
-	private final static Logger logger = Logger.getLogger(GameFactory.class);
+    private final static GameFactory INSTANCE = new GameFactory();
+    private final static Logger logger = Logger.getLogger(GameFactory.class);
 
-	private Map<String, Class<Match>> games = new HashMap<String, Class<Match>>();
-	private Map<String, MatchType> gameTypes = new HashMap<String, MatchType>();
-	private List<GameTypeView> gameTypeViews = new ArrayList<GameTypeView>();
+    private Map<String, Class<Match>> games = new HashMap<String, Class<Match>>();
+    private Map<String, MatchType> gameTypes = new HashMap<String, MatchType>();
+    private List<GameTypeView> gameTypeViews = new ArrayList<GameTypeView>();
 
 
-	public static GameFactory getInstance() {
-		return INSTANCE;
-	}
+    public static GameFactory getInstance() {
+        return INSTANCE;
+    }
 
-	private GameFactory() {}
+    private GameFactory() {}
 
-	public Match createMatch(String gameType, MatchOptions options) {
+    public Match createMatch(String gameType, MatchOptions options) {
 
-		Match match;
-		Constructor<Match> con;
-		try {
-			con = games.get(gameType).getConstructor(new Class[]{MatchOptions.class});
-			match = con.newInstance(new Object[] {options});
-		} catch (Exception ex) {
-			logger.fatal("Error creating match - " + gameType, ex);
-			return null;
-		}
-		logger.info("Game created: " + gameType); // + game.getId().toString());
+        Match match;
+        Constructor<Match> con;
+        try {
+            con = games.get(gameType).getConstructor(new Class[]{MatchOptions.class});
+            match = con.newInstance(new Object[] {options});
+        } catch (Exception ex) {
+            logger.fatal("Error creating match - " + gameType, ex);
+            return null;
+        }
+        logger.info("Game created: " + gameType); // + game.getId().toString());
 
-		return match;
-	}
+        return match;
+    }
 
-	public List<GameTypeView> getGameTypes() {
-		return gameTypeViews;
-	}
+    public List<GameTypeView> getGameTypes() {
+        return gameTypeViews;
+    }
 
-	public void addGameType(String name, MatchType matchType, Class game) {
-		if (game != null) {
-			this.games.put(name, game);
-			this.gameTypes.put(name, matchType);
-			this.gameTypeViews.add(new GameTypeView(matchType));
-		}
-	}
+    public void addGameType(String name, MatchType matchType, Class game) {
+        if (game != null) {
+            this.games.put(name, game);
+            this.gameTypes.put(name, matchType);
+            this.gameTypeViews.add(new GameTypeView(matchType));
+        }
+    }
 
 }

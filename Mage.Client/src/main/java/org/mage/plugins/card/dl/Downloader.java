@@ -40,15 +40,15 @@ import org.mage.plugins.card.dl.lm.AbstractLaternaBean;
  * @author Clemens Koza
  */
 public class Downloader extends AbstractLaternaBean implements Disposable {
-	
-	private static final Logger log = Logger.getLogger(Downloader.class);
-	
+
+    private static final Logger log = Logger.getLogger(Downloader.class);
+
     private final List<DownloadJob>    jobs    = properties.list("jobs");
     private final Channel<DownloadJob> channel = new MemoryChannel<DownloadJob>();
-    
+
     private final ExecutorService      pool    = Executors.newCachedThreadPool();
     private final List<Fiber>          fibers  = new ArrayList<Fiber>();
-    
+
     public Downloader() {
         PoolFiberFactory f = new PoolFiberFactory(pool);
         //subscribe multiple fibers for parallel execution
@@ -59,7 +59,7 @@ public class Downloader extends AbstractLaternaBean implements Disposable {
             channel.subscribe(fiber, new DownloadCallback());
         }
     }
-    
+
     @Override
     public void dispose() {
         for(DownloadJob j:getJobs()) {
@@ -69,18 +69,18 @@ public class Downloader extends AbstractLaternaBean implements Disposable {
                     j.setState(State.ABORTED);
             }
         }
-        
+
         for(Fiber f:fibers)
             f.dispose();
         pool.shutdown();
     }
-    
+
     @Override
     protected void finalize() throws Throwable {
         dispose();
         super.finalize();
     }
-    
+
     public void add(DownloadJob job) {
         if(job.getState() == State.WORKING) throw new IllegalArgumentException("Job already running");
         if(job.getState() == State.FINISHED) throw new IllegalArgumentException("Job already finished");
@@ -88,11 +88,11 @@ public class Downloader extends AbstractLaternaBean implements Disposable {
         jobs.add(job);
         channel.publish(job);
     }
-    
+
     public List<DownloadJob> getJobs() {
         return jobs;
     }
-    
+
     /**
      * Performs the download job: Transfers data from {@link Source} to {@link Destination} and updates the
      * download job's state to reflect the progress.
@@ -109,7 +109,7 @@ public class Downloader extends AbstractLaternaBean implements Disposable {
                 Source src = job.getSource();
                 Destination dst = job.getDestination();
                 BoundedRangeModel progress = job.getProgress();
-                
+
                 if(dst.exists()) {
                     progress.setMaximum(1);
                     progress.setValue(1);

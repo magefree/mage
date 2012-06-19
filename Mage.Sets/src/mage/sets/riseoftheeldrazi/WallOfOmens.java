@@ -43,25 +43,25 @@ import mage.cards.CardImpl;
  */
 public class WallOfOmens extends CardImpl<WallOfOmens> {
 
-	public WallOfOmens(UUID ownerId) {
-		super(ownerId, 53, "Wall of Omens", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
-		this.expansionSetCode = "ROE";
-		this.subtype.add("Wall");
-		this.color.setWhite(true);
-		this.power = new MageInt(0);
-		this.toughness = new MageInt(4);
+    public WallOfOmens(UUID ownerId) {
+        super(ownerId, 53, "Wall of Omens", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        this.expansionSetCode = "ROE";
+        this.subtype.add("Wall");
+        this.color.setWhite(true);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(4);
 
-		this.addAbility(DefenderAbility.getInstance());
-		this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(1), false));
-	}
+        this.addAbility(DefenderAbility.getInstance());
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(1), false));
+    }
 
-	public WallOfOmens(final WallOfOmens card) {
-		super(card);
-	}
+    public WallOfOmens(final WallOfOmens card) {
+        super(card);
+    }
 
-	@Override
-	public WallOfOmens copy() {
-		return new WallOfOmens(this);
-	}
+    @Override
+    public WallOfOmens copy() {
+        return new WallOfOmens(this);
+    }
 
 }

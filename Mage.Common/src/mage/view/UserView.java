@@ -35,33 +35,33 @@ import java.util.Date;
  * @author BetaSteward_at_googlemail.com
  */
 public class UserView implements Serializable {
-	
-	private String userName;
-	private String host;
-	private String sessionId;
-	private Date timeConnected;
-	
-	public UserView(String userName, String host, String sessionId, Date timeConnected) {
-		this.userName = userName;
-		this.host = host;
-		this.sessionId = sessionId;
-		this.timeConnected = timeConnected;
-	}
 
-	public String getUserName() {
-		return userName;
-	}
+    private String userName;
+    private String host;
+    private String sessionId;
+    private Date timeConnected;
 
-	public String getHost() {
-		return host;
-	}
+    public UserView(String userName, String host, String sessionId, Date timeConnected) {
+        this.userName = userName;
+        this.host = host;
+        this.sessionId = sessionId;
+        this.timeConnected = timeConnected;
+    }
 
-	public String getSessionId() {
-		return sessionId;
-	}
-	
-	public Date getConnectionTime() {
-		return timeConnected;
-	}
-	
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getHost() {
+        return host;
+    }
+
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public Date getConnectionTime() {
+        return timeConnected;
+    }
+
 }

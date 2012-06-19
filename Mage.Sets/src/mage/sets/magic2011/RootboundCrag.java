@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class RootboundCrag extends mage.sets.magic2010.RootboundCrag {
 
-	public RootboundCrag(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 227;
-		this.expansionSetCode = "M11";
-	}
+    public RootboundCrag(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 227;
+        this.expansionSetCode = "M11";
+    }
 
-	public RootboundCrag(final RootboundCrag card) {
-		super(card);
-	}
+    public RootboundCrag(final RootboundCrag card) {
+        super(card);
+    }
 
-	@Override
-	public RootboundCrag copy() {
-		return new RootboundCrag(this);
-	}
+    @Override
+    public RootboundCrag copy() {
+        return new RootboundCrag(this);
+    }
 
 }

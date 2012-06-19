@@ -39,28 +39,28 @@ import mage.game.Seat;
 public class SeatView implements Serializable {
     private static final long serialVersionUID = 1L;
 
-	private UUID playerId;
-	private String playerName;
-	private String playerType;
-	
-	public SeatView(Seat seat) {
-		if (seat.getPlayer() != null) {
-			this.playerId = seat.getPlayer().getId();
-			this.playerName = seat.getPlayer().getName();
-		}
-		this.playerType = seat.getPlayerType();
-	}
+    private UUID playerId;
+    private String playerName;
+    private String playerType;
 
-	public UUID getPlayerId() {
-		return playerId;
-	}
+    public SeatView(Seat seat) {
+        if (seat.getPlayer() != null) {
+            this.playerId = seat.getPlayer().getId();
+            this.playerName = seat.getPlayer().getName();
+        }
+        this.playerType = seat.getPlayerType();
+    }
 
-	public String getPlayerName() {
-		return playerName;
-	}
+    public UUID getPlayerId() {
+        return playerId;
+    }
 
-	public String getPlayerType() {
-		return playerType;
-	}
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public String getPlayerType() {
+        return playerType;
+    }
 
 }

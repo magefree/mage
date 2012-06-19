@@ -60,10 +60,10 @@ public class Painsmith extends CardImpl<Painsmith> {
         this.subtype.add("Human");
         this.subtype.add("Artificer");
 
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        
+
         SpellCastTriggeredAbility ability = new SpellCastTriggeredAbility(new BoostTargetEffect(2, 0, Duration.EndOfTurn), filter, true);
         ability.addEffect(new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn));
         ability.addTarget(new TargetCreaturePermanent());

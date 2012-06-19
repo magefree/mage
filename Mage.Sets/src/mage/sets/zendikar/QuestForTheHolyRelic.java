@@ -65,7 +65,7 @@ public class QuestForTheHolyRelic extends CardImpl<QuestForTheHolyRelic> {
         filter.getCardType().add(CardType.CREATURE);
         filter.setScopeCardType(Filter.ComparisonScope.Any);
     }
-    
+
     public QuestForTheHolyRelic(UUID ownerId) {
         super(ownerId, 33, "Quest for the Holy Relic", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");
         this.expansionSetCode = "ZEN";

@@ -43,49 +43,49 @@ import mage.util.Copyable;
  */
 public class Revealed extends HashMap<String, Cards> implements Serializable, Copyable<Revealed> {
 
-	public Revealed() {	}
+    public Revealed() {    }
 
-	public Revealed(final Revealed revealed) {
+    public Revealed(final Revealed revealed) {
         for (Map.Entry<String, Cards> entry: revealed.entrySet()) {
             this.put(entry.getKey(), entry.getValue().copy());
-		}
-	}
+        }
+    }
 
-	public void add(String name, Card card) {
-		this.get(name).add(card);
-	}
+    public void add(String name, Card card) {
+        this.get(name).add(card);
+    }
 
-	public void add(String name, Cards cards) {
-		if (!this.containsKey(name))
-			createRevealed(name);
-		this.put(name, cards.copy());
-	}
+    public void add(String name, Cards cards) {
+        if (!this.containsKey(name))
+            createRevealed(name);
+        this.put(name, cards.copy());
+    }
 
-	public Cards createRevealed(String name) {
-		if (!this.containsKey(name)) {
-			this.put(name, new CardsImpl());
-		}
-		return this.get(name);
-	}
+    public Cards createRevealed(String name) {
+        if (!this.containsKey(name)) {
+            this.put(name, new CardsImpl());
+        }
+        return this.get(name);
+    }
 
-	public Cards getRevealed(String name) {
-		return this.get(name);
-	}
+    public Cards getRevealed(String name) {
+        return this.get(name);
+    }
 
-	public void reset() {
-		this.clear();
-	}
+    public void reset() {
+        this.clear();
+    }
 
-	public Card getCard(UUID cardId, Game game) {
-		for (Cards cards: this.values()) {
-			if (cards.contains(cardId))
-				return game.getCard(cardId);
-		}
-		return null;
-	}
+    public Card getCard(UUID cardId, Game game) {
+        for (Cards cards: this.values()) {
+            if (cards.contains(cardId))
+                return game.getCard(cardId);
+        }
+        return null;
+    }
 
-	@Override
-	public Revealed copy() {
-		return new Revealed(this);
-	}
+    @Override
+    public Revealed copy() {
+        return new Revealed(this);
+    }
 }

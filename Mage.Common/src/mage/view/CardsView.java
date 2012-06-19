@@ -45,46 +45,46 @@ import java.util.UUID;
  */
 public class CardsView extends LinkedHashMap<UUID, CardView> {
 
-	public CardsView() {}
+    public CardsView() {}
 
-	public CardsView(Collection<? extends Card> cards) {
-		for (Card card: cards) {
-			this.put(card.getId(), new CardView(card));
-		}
-	}
+    public CardsView(Collection<? extends Card> cards) {
+        for (Card card: cards) {
+            this.put(card.getId(), new CardView(card));
+        }
+    }
 
-	public CardsView ( Collection<? extends Ability> abilities, Game game ) {
-		for ( Ability ability : abilities ) {
-			Card sourceCard = null;
-			switch ( ability.getZone() ) {
-				case ALL:
-				case EXILED:
-				case GRAVEYARD:
-					sourceCard = game.getCard(ability.getSourceId());
-					break;
-				case BATTLEFIELD:
+    public CardsView ( Collection<? extends Ability> abilities, Game game ) {
+        for ( Ability ability : abilities ) {
+            Card sourceCard = null;
+            switch ( ability.getZone() ) {
+                case ALL:
+                case EXILED:
+                case GRAVEYARD:
+                    sourceCard = game.getCard(ability.getSourceId());
+                    break;
+                case BATTLEFIELD:
                     sourceCard = game.getPermanent(ability.getSourceId());
                     if (sourceCard == null)
-					    sourceCard = (Permanent)game.getLastKnownInformation(ability.getSourceId(), Zone.BATTLEFIELD);
-					break;
+                        sourceCard = (Permanent)game.getLastKnownInformation(ability.getSourceId(), Zone.BATTLEFIELD);
+                    break;
                 case COMMAND:
                     ability.newId();
                     this.put(ability.getId(), new AbilityView(ability, "Emblem", new CardView("Emblem")));
                     break;
-			}
-			if (sourceCard != null) {
-				this.put(ability.getId(), new AbilityView(ability, sourceCard.getName(), new CardView(sourceCard)));
-			}
-		}
-	}
+            }
+            if (sourceCard != null) {
+                this.put(ability.getId(), new AbilityView(ability, sourceCard.getName(), new CardView(sourceCard)));
+            }
+        }
+    }
 
-	public CardsView(Collection<? extends Ability> abilities, GameState state) {
-		for (Ability ability: abilities) {
-			Card sourceCard = state.getPermanent(ability.getSourceId());
-			if (sourceCard != null) {
-				this.put(ability.getId(), new AbilityView(ability, sourceCard.getName(), new CardView(sourceCard)));
-			}
-		}
-	}
+    public CardsView(Collection<? extends Ability> abilities, GameState state) {
+        for (Ability ability: abilities) {
+            Card sourceCard = state.getPermanent(ability.getSourceId());
+            if (sourceCard != null) {
+                this.put(ability.getId(), new AbilityView(ability, sourceCard.getName(), new CardView(sourceCard)));
+            }
+        }
+    }
 
 }

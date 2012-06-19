@@ -48,26 +48,26 @@ import mage.game.events.GameEvent.EventType;
  */
 public class MelirasKeepers extends CardImpl<MelirasKeepers> {
 
-	public MelirasKeepers(UUID ownerId) {
-		super(ownerId, 83, "Melira's Keepers", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
-		this.expansionSetCode = "MBS";
-		this.subtype.add("Human");
-		this.subtype.add("Warrior");
-		this.color.setGreen(true);
-		this.power = new MageInt(4);
-		this.toughness = new MageInt(4);
+    public MelirasKeepers(UUID ownerId) {
+        super(ownerId, 83, "Melira's Keepers", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
+        this.expansionSetCode = "MBS";
+        this.subtype.add("Human");
+        this.subtype.add("Warrior");
+        this.color.setGreen(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MelirasKeepersEffect()));
-	}
+    }
 
-	public MelirasKeepers(final MelirasKeepers card) {
-		super(card);
-	}
+    public MelirasKeepers(final MelirasKeepers card) {
+        super(card);
+    }
 
-	@Override
-	public MelirasKeepers copy() {
-		return new MelirasKeepers(this);
-	}
+    @Override
+    public MelirasKeepers copy() {
+        return new MelirasKeepers(this);
+    }
 
 }
 
@@ -77,11 +77,11 @@ class MelirasKeepersEffect extends ReplacementEffectImpl<MelirasKeepersEffect> {
         super(Duration.WhileOnBattlefield, Outcome.PreventDamage);
         staticText = "{this} can't have counters placed on it";
     }
-    
+
     public MelirasKeepersEffect(final MelirasKeepersEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         return true;
@@ -104,5 +104,5 @@ class MelirasKeepersEffect extends ReplacementEffectImpl<MelirasKeepersEffect> {
         }
         return false;
     }
-    
+
 }

@@ -60,11 +60,11 @@ public class PhyrexianUnlife extends CardImpl<PhyrexianUnlife> {
         this.color.setWhite(true);
 
         // You don't lose the game for having 0 or less life.
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhyrexianUnlifeEffect()));
-        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhyrexianUnlifeEffect()));
+
         // As long as you have 0 or less life, all damage is dealt to you as though its source had infect.
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhyrexianUnlifeEffect2()));
-        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhyrexianUnlifeEffect2()));
+
     }
 
     public PhyrexianUnlife(final PhyrexianUnlife card) {
@@ -107,9 +107,9 @@ class PhyrexianUnlifeEffect extends ReplacementEffectImpl<PhyrexianUnlifeEffect>
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == EventType.LOSES && event.getPlayerId().equals(source.getControllerId())) {
             Player player = game.getPlayer(event.getPlayerId());
-  			if (!player.hasLost() && (player.getLife() <= 0 && !player.isEmptyDraw() && player.getCounters().getCount(CounterType.POISON) < 10)) {
-				return true;
-			}
+              if (!player.hasLost() && (player.getLife() <= 0 && !player.isEmptyDraw() && player.getCounters().getCount(CounterType.POISON) < 10)) {
+                return true;
+            }
         }
         return false;
     }
@@ -158,9 +158,9 @@ class PhyrexianUnlifeEffect2 extends ReplacementEffectImpl<PhyrexianUnlifeEffect
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == EventType.DAMAGE_PLAYER && event.getPlayerId().equals(source.getControllerId())) {
             Player player = game.getPlayer(event.getPlayerId());
-  			if (player.getLife() <= 0) {
-				return true;
-			}
+              if (player.getLife() <= 0) {
+                return true;
+            }
         }
         return false;
     }

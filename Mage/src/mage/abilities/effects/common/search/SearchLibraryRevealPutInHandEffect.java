@@ -48,33 +48,33 @@ import mage.target.common.TargetCardInLibrary;
 public class SearchLibraryRevealPutInHandEffect extends SearchEffect<SearchLibraryRevealPutInHandEffect> {
 
     boolean forceShuffle;
-    
+
     public SearchLibraryRevealPutInHandEffect(TargetCardInLibrary target) {
-		this(target, true);
-	}
+        this(target, true);
+    }
 
     public SearchLibraryRevealPutInHandEffect(TargetCardInLibrary target, boolean forceShuffle) {
-		super(target, Outcome.DrawCard);
+        super(target, Outcome.DrawCard);
         this.forceShuffle = forceShuffle;
-		setText();
-	}
+        setText();
+    }
 
-	public SearchLibraryRevealPutInHandEffect(final SearchLibraryRevealPutInHandEffect effect) {
-		super(effect);
+    public SearchLibraryRevealPutInHandEffect(final SearchLibraryRevealPutInHandEffect effect) {
+        super(effect);
         this.forceShuffle = effect.forceShuffle;
-	}
+    }
 
-	@Override
-	public SearchLibraryRevealPutInHandEffect copy() {
-		return new SearchLibraryRevealPutInHandEffect(this);
-	}
+    @Override
+    public SearchLibraryRevealPutInHandEffect copy() {
+        return new SearchLibraryRevealPutInHandEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
         if (player == null)
             return false;
-		if (player.searchLibrary(target, game)) {
+        if (player.searchLibrary(target, game)) {
             if (target.getTargets().size() > 0) {
                 Cards revealed = new CardsImpl();
                 for (UUID cardId: (List<UUID>)target.getTargets()) {
@@ -92,23 +92,23 @@ public class SearchLibraryRevealPutInHandEffect extends SearchEffect<SearchLibra
         if (forceShuffle)
             player.shuffleLibrary(game);
         return false;
-	}
+    }
 
-	private void setText() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("Search your library for ");
-		if (target.getNumberOfTargets() == 0 && target.getMaxNumberOfTargets() > 0) {
-			sb.append("up to ").append(target.getMaxNumberOfTargets()).append(" ");
-			sb.append(target.getTargetName()).append(", reveal them, and put them into your hand");
-		}
-		else {
-			sb.append("a ").append(target.getTargetName()).append(", reveal that card, and put it into your hand");
-		}
+    private void setText() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Search your library for ");
+        if (target.getNumberOfTargets() == 0 && target.getMaxNumberOfTargets() > 0) {
+            sb.append("up to ").append(target.getMaxNumberOfTargets()).append(" ");
+            sb.append(target.getTargetName()).append(", reveal them, and put them into your hand");
+        }
+        else {
+            sb.append("a ").append(target.getTargetName()).append(", reveal that card, and put it into your hand");
+        }
         if (forceShuffle)
             sb.append(". Then shuffle your library");
         else
             sb.append(". If you do, shuffle your library");
 
-		staticText = sb.toString();
-	}
+        staticText = sb.toString();
+    }
 }

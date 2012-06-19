@@ -39,14 +39,14 @@ import mage.game.permanent.Permanent;
  */
 public class SetCardColorAttachedEffect extends ContinuousEffectImpl<SetCardColorAttachedEffect> {
 
-	private ObjectColor setColor;
+    private ObjectColor setColor;
     private Constants.AttachmentType attachmentType;
 
     public SetCardColorAttachedEffect(ObjectColor setColor, Constants.Duration duration, Constants.AttachmentType attachmentType) {
         super(duration, Constants.Layer.ColorChangingEffects_5, Constants.SubLayer.NA, Constants.Outcome.Benefit);
         this.setColor = setColor;
         this.attachmentType = attachmentType;
-		setText();
+        setText();
     }
 
     public SetCardColorAttachedEffect(final SetCardColorAttachedEffect effect) {

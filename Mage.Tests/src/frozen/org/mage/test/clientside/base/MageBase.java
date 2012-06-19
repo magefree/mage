@@ -65,13 +65,13 @@ public class MageBase {
             connect("player", "localhost", 17171);
             UUID roomId = server.getMainRoomId();
 
-			MatchOptions options = new MatchOptions("1", "Two Player Duel");
-			options.getPlayerTypes().add("Human");
-			options.getPlayerTypes().add("Computer - default");
-			options.setDeckType("Limited");
-			options.setAttackOption(MultiplayerAttackOption.LEFT);
-			options.setRange(RangeOfInfluence.ALL);
-			options.setWinsNeeded(1);
+            MatchOptions options = new MatchOptions("1", "Two Player Duel");
+            options.getPlayerTypes().add("Human");
+            options.getPlayerTypes().add("Computer - default");
+            options.setDeckType("Limited");
+            options.setAttackOption(MultiplayerAttackOption.LEFT);
+            options.setRange(RangeOfInfluence.ALL);
+            options.setWinsNeeded(1);
             TableView table = server.createTable(sessionId, roomId, options);
             System.out.println("Cards in the deck: " + Sets.loadDeck("UW Control.dck").getCards().size());
             server.joinTable(sessionId, roomId, table.getTableId(), "Human", "Human", Sets.loadDeck("UW Control.dck"));
@@ -108,8 +108,8 @@ public class MageBase {
                             server.joinGame(gameId, sessionId);
                         } else if (callback.getMethod().equals("gameInit")) {
                             server.ack("gameInit", sessionId);
-            			} else if (callback.getMethod().equals("gameAsk")) {
-				            GameClientMessage message = (GameClientMessage) callback.getData();
+                        } else if (callback.getMethod().equals("gameAsk")) {
+                            GameClientMessage message = (GameClientMessage) callback.getData();
                             logger.info("ASK >> " + message.getMessage());
                             if (message.getMessage().equals("Do you want to take a mulligan?")) {
                                 server.sendPlayerBoolean(gameId, sessionId, false);
@@ -117,7 +117,7 @@ public class MageBase {
                             synchronized (syncStart) {
                                 syncStart.notify();
                             }
-			            } else if (callback.getMethod().equals("gameTarget")) {
+                        } else if (callback.getMethod().equals("gameTarget")) {
                             GameClientMessage message = (GameClientMessage) callback.getData();
                             logger.info("TARGET >> " + message.getMessage() + " >> " + message.getTargets());
                             if (message.getMessage().equals("Select a starting player")) {
@@ -125,8 +125,8 @@ public class MageBase {
                                 server.sendPlayerUUID(gameId, sessionId, playerId);
                             }
                         } else if (callback.getMethod().equals("gameSelect")) {
-				            GameClientMessage message = (GameClientMessage) callback.getData();
-				            logger.info("SELECT >> " + message.getMessage());
+                            GameClientMessage message = (GameClientMessage) callback.getData();
+                            logger.info("SELECT >> " + message.getMessage());
                             if (phaseToWait == null) {
                                 synchronized (sync) {
                                     sync.wait();
@@ -178,7 +178,7 @@ public class MageBase {
                                 }
 
                             }  */
-			            }
+                        }
                     } catch (Exception e) {
                         logger.info(e.getMessage());
                     }

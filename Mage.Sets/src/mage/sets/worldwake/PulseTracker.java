@@ -46,58 +46,58 @@ import mage.players.Players;
  */
 public class PulseTracker extends CardImpl<PulseTracker> {
 
-	public PulseTracker(UUID ownerId) {
-		super(ownerId, 62, "Pulse Tracker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
-		this.expansionSetCode = "WWK";
-		this.subtype.add("Vampire");
-		this.subtype.add("Rogue");
+    public PulseTracker(UUID ownerId) {
+        super(ownerId, 62, "Pulse Tracker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
+        this.expansionSetCode = "WWK";
+        this.subtype.add("Vampire");
+        this.subtype.add("Rogue");
 
-		this.color.setBlack(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
+        this.color.setBlack(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-		this.addAbility(new AttacksTriggeredAbility(new PulseTrackerLoseLifeEffect(), false));
-	}
+        this.addAbility(new AttacksTriggeredAbility(new PulseTrackerLoseLifeEffect(), false));
+    }
 
-	public PulseTracker(final PulseTracker card) {
-		super(card);
-	}
+    public PulseTracker(final PulseTracker card) {
+        super(card);
+    }
 
-	@Override
-	public PulseTracker copy() {
-		return new PulseTracker(this);
-	}
+    @Override
+    public PulseTracker copy() {
+        return new PulseTracker(this);
+    }
 }
 
 class PulseTrackerLoseLifeEffect extends OneShotEffect<PulseTrackerLoseLifeEffect> {
 
-	private static final String effectText = "each opponent loses 1 life";
+    private static final String effectText = "each opponent loses 1 life";
 
-	PulseTrackerLoseLifeEffect ( ) {
-		super(Outcome.Damage);
-		staticText = effectText;
-	}
+    PulseTrackerLoseLifeEffect ( ) {
+        super(Outcome.Damage);
+        staticText = effectText;
+    }
 
-	PulseTrackerLoseLifeEffect ( PulseTrackerLoseLifeEffect effect ) {
-		super(effect);
-	}
+    PulseTrackerLoseLifeEffect ( PulseTrackerLoseLifeEffect effect ) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Players players = game.getPlayers();
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Players players = game.getPlayers();
 
-		for ( Player player : players.values() ) {
-			if ( !player.getId().equals(source.getControllerId()) ) {
-				player.loseLife(1, game);
-			}
-		}
+        for ( Player player : players.values() ) {
+            if ( !player.getId().equals(source.getControllerId()) ) {
+                player.loseLife(1, game);
+            }
+        }
 
-		return true;
-	}
+        return true;
+    }
 
-	@Override
-	public PulseTrackerLoseLifeEffect copy() {
-		return new PulseTrackerLoseLifeEffect(this);
-	}
+    @Override
+    public PulseTrackerLoseLifeEffect copy() {
+        return new PulseTrackerLoseLifeEffect(this);
+    }
 
 }

@@ -49,25 +49,25 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class BrittleEffigy extends CardImpl<BrittleEffigy> {
 
-	public BrittleEffigy(UUID ownerId) {
-		super(ownerId, 202, "Brittle Effigy", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}");
-		this.expansionSetCode = "M11";
-		Costs costs = new CostsImpl();
-		costs.add(new TapSourceCost());
-		costs.add(new ExileSourceCost());
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), costs);
+    public BrittleEffigy(UUID ownerId) {
+        super(ownerId, 202, "Brittle Effigy", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}");
+        this.expansionSetCode = "M11";
+        Costs costs = new CostsImpl();
+        costs.add(new TapSourceCost());
+        costs.add(new ExileSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), costs);
         ability.addManaCost(new GenericManaCost(4));
-		ability.addTarget(new TargetCreaturePermanent());
-		this.addAbility(ability);
-	}
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
+    }
 
-	public BrittleEffigy(final BrittleEffigy card) {
-		super(card);
-	}
+    public BrittleEffigy(final BrittleEffigy card) {
+        super(card);
+    }
 
-	@Override
-	public BrittleEffigy copy() {
-		return new BrittleEffigy(this);
-	}
+    @Override
+    public BrittleEffigy copy() {
+        return new BrittleEffigy(this);
+    }
 
 }

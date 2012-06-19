@@ -46,28 +46,28 @@ import mage.filter.FilterStackObject;
  */
 public class LeylineOfSanctity extends CardImpl<LeylineOfSanctity> {
 
-	private static final FilterStackObject filter = new FilterStackObject("spells or abilities your opponents control");
+    private static final FilterStackObject filter = new FilterStackObject("spells or abilities your opponents control");
 
-	static {
-		filter.setTargetController(TargetController.OPPONENT);
-	}
+    static {
+        filter.setTargetController(TargetController.OPPONENT);
+    }
 
-	public LeylineOfSanctity(UUID ownerId) {
-		super(ownerId, 21, "Leyline of Sanctity", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
-		this.expansionSetCode = "M11";
-		this.color.setWhite(true);
-		this.addAbility(LeylineAbility.getInstance());
+    public LeylineOfSanctity(UUID ownerId) {
+        super(ownerId, 21, "Leyline of Sanctity", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
+        this.expansionSetCode = "M11";
+        this.color.setWhite(true);
+        this.addAbility(LeylineAbility.getInstance());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControllerEffect(HexproofAbility.getInstance())));
-	}
+    }
 
-	public LeylineOfSanctity(final LeylineOfSanctity card) {
-		super(card);
-	}
+    public LeylineOfSanctity(final LeylineOfSanctity card) {
+        super(card);
+    }
 
-	@Override
-	public LeylineOfSanctity copy() {
-		return new LeylineOfSanctity(this);
-	}
+    @Override
+    public LeylineOfSanctity copy() {
+        return new LeylineOfSanctity(this);
+    }
 
 }
 

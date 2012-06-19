@@ -45,7 +45,7 @@ public class EssenceDrain extends CardImpl<EssenceDrain> {
     public EssenceDrain (UUID ownerId) {
         super(ownerId, 43, "Essence Drain", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");
         this.expansionSetCode = "DST";
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         this.getSpellAbility().addEffect(new GainLifeEffect(3));

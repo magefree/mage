@@ -57,12 +57,12 @@ public class CageOfHands extends CardImpl<CageOfHands> {
         super(ownerId, 3, "Cage of Hands", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Aura");
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Neutral));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		this.addAbility(ability);
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Neutral));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new CageOfHandsEffect()));
         this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ReturnToHandSourceEffect(), new ManaCostsImpl("{1}{W}")));
     }
@@ -79,36 +79,36 @@ public class CageOfHands extends CardImpl<CageOfHands> {
 
 class CageOfHandsEffect extends RestrictionEffect<CageOfHandsEffect> {
 
-	public CageOfHandsEffect() {
-		super(Constants.Duration.WhileOnBattlefield);
-		staticText = "Enchanted creature can't attack or block";
-	}
+    public CageOfHandsEffect() {
+        super(Constants.Duration.WhileOnBattlefield);
+        staticText = "Enchanted creature can't attack or block";
+    }
 
-	public CageOfHandsEffect(final CageOfHandsEffect effect) {
-		super(effect);
-	}
+    public CageOfHandsEffect(final CageOfHandsEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean applies(Permanent permanent, Ability source, Game game) {
-		if (permanent.getAttachments().contains((source.getSourceId()))) {
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        if (permanent.getAttachments().contains((source.getSourceId()))) {
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public boolean canAttack(Game game) {
-		return false;
-	}
+    @Override
+    public boolean canAttack(Game game) {
+        return false;
+    }
 
-	@Override
-	public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-		return false;
-	}
+    @Override
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        return false;
+    }
 
-	@Override
-	public CageOfHandsEffect copy() {
-		return new CageOfHandsEffect(this);
-	}
+    @Override
+    public CageOfHandsEffect copy() {
+        return new CageOfHandsEffect(this);
+    }
 
 }

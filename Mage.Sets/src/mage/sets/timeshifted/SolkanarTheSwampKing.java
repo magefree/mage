@@ -77,33 +77,33 @@ public class SolkanarTheSwampKing extends CardImpl<SolkanarTheSwampKing> {
 
 class SolkanarTheSwampKingAbility extends TriggeredAbilityImpl<SolkanarTheSwampKingAbility> {
 
-	public SolkanarTheSwampKingAbility() {
-		super(Constants.Zone.BATTLEFIELD, new GainLifeEffect(1), false);
-	}
+    public SolkanarTheSwampKingAbility() {
+        super(Constants.Zone.BATTLEFIELD, new GainLifeEffect(1), false);
+    }
 
-	public SolkanarTheSwampKingAbility(final SolkanarTheSwampKingAbility ability) {
-		super(ability);
-	}
+    public SolkanarTheSwampKingAbility(final SolkanarTheSwampKingAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public SolkanarTheSwampKingAbility copy() {
-		return new SolkanarTheSwampKingAbility(this);
-	}
+    @Override
+    public SolkanarTheSwampKingAbility copy() {
+        return new SolkanarTheSwampKingAbility(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-			Spell spell = game.getStack().getSpell(event.getTargetId());
-			if (spell != null && spell.getColor().isBlack()) {
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
+            Spell spell = game.getStack().getSpell(event.getTargetId());
+            if (spell != null && spell.getColor().isBlack()) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "Whenever a player casts a black spell, you gain 1 life.";
-	}
+    @Override
+    public String getRule() {
+        return "Whenever a player casts a black spell, you gain 1 life.";
+    }
 
 }

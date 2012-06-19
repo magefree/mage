@@ -50,7 +50,7 @@ public class ObNixilisTheFallen extends CardImpl<ObNixilisTheFallen> {
     public ObNixilisTheFallen (UUID ownerId) {
         super(ownerId, 107, "Ob Nixilis, the Fallen", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
         this.expansionSetCode = "ZEN";
-		this.supertype.add("Legendary");
+        this.supertype.add("Legendary");
         this.subtype.add("Demon");
         this.color.setBlack(true);
         this.power = new MageInt(3);

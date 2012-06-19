@@ -37,35 +37,35 @@ import mage.game.permanent.Permanent;
  */
 public class FilterCreatureForCombat extends FilterCreaturePermanent<FilterCreatureForCombat> {
 
-	public FilterCreatureForCombat() {
-		this("");
-	}
-	
-	public FilterCreatureForCombat(String name) {
-		super(name);
-		this.attacking = false;
-		this.useAttacking = true;
-		this.tapped = false;
-		this.useTapped = true;
-		this.phasedIn = true;
-		this.usePhased = true;
-	}
+    public FilterCreatureForCombat() {
+        this("");
+    }
 
-	public FilterCreatureForCombat(final FilterCreatureForCombat filter) {
-		super(filter);
-	}
+    public FilterCreatureForCombat(String name) {
+        super(name);
+        this.attacking = false;
+        this.useAttacking = true;
+        this.tapped = false;
+        this.useTapped = true;
+        this.phasedIn = true;
+        this.usePhased = true;
+    }
 
-	@Override
-	public boolean match(Permanent permanent, Game game) {
-		if (!super.match(permanent, game))
-			return notFilter;
+    public FilterCreatureForCombat(final FilterCreatureForCombat filter) {
+        super(filter);
+    }
 
-		return permanent.getMaxBlocks() == 0 || permanent.getBlocking() < permanent.getMaxBlocks();
-	}
+    @Override
+    public boolean match(Permanent permanent, Game game) {
+        if (!super.match(permanent, game))
+            return notFilter;
 
-	@Override
-	public FilterCreatureForCombat copy() {
-		return new FilterCreatureForCombat(this);
-	}
+        return permanent.getMaxBlocks() == 0 || permanent.getBlocking() < permanent.getMaxBlocks();
+    }
+
+    @Override
+    public FilterCreatureForCombat copy() {
+        return new FilterCreatureForCombat(this);
+    }
 
 }

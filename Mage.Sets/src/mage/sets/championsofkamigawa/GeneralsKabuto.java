@@ -62,13 +62,13 @@ public class GeneralsKabuto extends CardImpl<GeneralsKabuto> {
         super(ownerId, 251, "General's Kabuto", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Equipment");
-        
+
         // Equipped creature has shroud. (It can't be the target of spells or abilities.)
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ShroudAbility.getInstance(), Constants.AttachmentType.EQUIPMENT)));
 
         // Prevent all combat damage that would be dealt to equipped creature
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GeneralsKabutoEffect()));
-        
+
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.PreventDamage, new GenericManaCost(2)));
     }
@@ -85,49 +85,49 @@ public class GeneralsKabuto extends CardImpl<GeneralsKabuto> {
 
 class GeneralsKabutoEffect extends PreventionEffectImpl<GeneralsKabutoEffect> {
 
-	public GeneralsKabutoEffect() {
-		super(Duration.WhileOnBattlefield);
-		staticText = "Prevent all combat damage that would be dealt to equipped creature";
-	}
+    public GeneralsKabutoEffect() {
+        super(Duration.WhileOnBattlefield);
+        staticText = "Prevent all combat damage that would be dealt to equipped creature";
+    }
 
-	public GeneralsKabutoEffect(final GeneralsKabutoEffect effect) {
-		super(effect);
-	}
+    public GeneralsKabutoEffect(final GeneralsKabutoEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public GeneralsKabutoEffect copy() {
-		return new GeneralsKabutoEffect(this);
-	}
+    @Override
+    public GeneralsKabutoEffect copy() {
+        return new GeneralsKabutoEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		GameEvent preventEvent = new GameEvent(
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        GameEvent preventEvent = new GameEvent(
                         GameEvent.EventType.PREVENT_DAMAGE,
                         source.getFirstTarget(),
                         source.getId(),
                         source.getControllerId(),
                         event.getAmount(),
                         false);
-		if (!game.replaceEvent(preventEvent)) {
-			int damage = event.getAmount();
-			event.setAmount(0);
-			game.fireEvent(GameEvent.getEvent(
+        if (!game.replaceEvent(preventEvent)) {
+            int damage = event.getAmount();
+            event.setAmount(0);
+            game.fireEvent(GameEvent.getEvent(
                                 GameEvent.EventType.PREVENTED_DAMAGE,
                                 source.getFirstTarget(),
                                 source.getId(),
                                 source.getControllerId(),
                                 damage));
-		}
-		return false;
-	}
+        }
+        return false;
+    }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game) && event instanceof DamageEvent) {
             DamageEvent damageEvent = (DamageEvent) event;
             if (damageEvent.isCombatDamage()) {
@@ -140,7 +140,7 @@ class GeneralsKabutoEffect extends PreventionEffectImpl<GeneralsKabutoEffect> {
             }
         }
         return false;
-	}
+    }
 
 }
 

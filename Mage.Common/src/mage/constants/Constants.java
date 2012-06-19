@@ -34,44 +34,44 @@ package mage.constants;
  * @author BetaSteward_at_googlemail.com
  */
 public final class Constants {
-	private Constants() {
-		throw new AssertionError();
-	}
+    private Constants() {
+        throw new AssertionError();
+    }
 
-	public static final int FRAME_MAX_HEIGHT = 367;
-	public static final int FRAME_MAX_WIDTH = 256;
-	public static final int ART_MAX_HEIGHT = 168;
-	public static final int ART_MAX_WIDTH = 227;
-	public static final int SYMBOL_MAX_HEIGHT = 14;
-	public static final int SYMBOL_MAX_WIDTH = 14;
-	public static final int SYMBOL_MAX_XOFFSET = 27;
-	public static final int SYMBOL_MAX_YOFFSET = 15;
-	public static final int SYMBOL_MAX_SPACE = 14;
-	public static final int CONTENT_MAX_XOFFSET = 15;
-	public static final int ART_MAX_YOFFSET = 37;
-	public static final int NAME_MAX_YOFFSET = 28;
-	public static final int TYPE_MAX_YOFFSET = 223;
-	public static final int ICON_MAX_HEIGHT = 16;
-	public static final int ICON_MAX_WIDTH = 16;
-	public static final int ICON_MAX_XOFFSET = 238;
-	public static final int ICON_MAX_YOFFSET = 210;
-	public static final int TEXT_MAX_YOFFSET = 232;
-	public static final int TEXT_MAX_WIDTH = 227;
-	public static final int TEXT_MAX_HEIGHT = 105;
-	public static final int NAME_FONT_MAX_SIZE = 13;
-	public static final int TEXT_FONT_MAX_SIZE = 11;
-	public static final int POWBOX_MAX_TOP = 336;
-	public static final int POWBOX_MAX_LEFT = 202;
-	public static final int POWBOX_TEXT_MAX_TOP = 352;
-	public static final int POWBOX_TEXT_MAX_LEFT = 212;
-	public static final int DAMAGE_MAX_LEFT = 180;
+    public static final int FRAME_MAX_HEIGHT = 367;
+    public static final int FRAME_MAX_WIDTH = 256;
+    public static final int ART_MAX_HEIGHT = 168;
+    public static final int ART_MAX_WIDTH = 227;
+    public static final int SYMBOL_MAX_HEIGHT = 14;
+    public static final int SYMBOL_MAX_WIDTH = 14;
+    public static final int SYMBOL_MAX_XOFFSET = 27;
+    public static final int SYMBOL_MAX_YOFFSET = 15;
+    public static final int SYMBOL_MAX_SPACE = 14;
+    public static final int CONTENT_MAX_XOFFSET = 15;
+    public static final int ART_MAX_YOFFSET = 37;
+    public static final int NAME_MAX_YOFFSET = 28;
+    public static final int TYPE_MAX_YOFFSET = 223;
+    public static final int ICON_MAX_HEIGHT = 16;
+    public static final int ICON_MAX_WIDTH = 16;
+    public static final int ICON_MAX_XOFFSET = 238;
+    public static final int ICON_MAX_YOFFSET = 210;
+    public static final int TEXT_MAX_YOFFSET = 232;
+    public static final int TEXT_MAX_WIDTH = 227;
+    public static final int TEXT_MAX_HEIGHT = 105;
+    public static final int NAME_FONT_MAX_SIZE = 13;
+    public static final int TEXT_FONT_MAX_SIZE = 11;
+    public static final int POWBOX_MAX_TOP = 336;
+    public static final int POWBOX_MAX_LEFT = 202;
+    public static final int POWBOX_TEXT_MAX_TOP = 352;
+    public static final int POWBOX_TEXT_MAX_LEFT = 212;
+    public static final int DAMAGE_MAX_LEFT = 180;
 
-	public static final double SCALE_FACTOR = 0.5;
-	
-	public static final String PLUGINS_DIRECTORY = "plugins/";
-	
-	public enum SessionState {
-		DISCONNECTED, CONNECTED, CONNECTING, DISCONNECTING, SERVER_UNAVAILABLE, SERVER_STARTING;
-	}
+    public static final double SCALE_FACTOR = 0.5;
+
+    public static final String PLUGINS_DIRECTORY = "plugins/";
+
+    public enum SessionState {
+        DISCONNECTED, CONNECTED, CONNECTING, DISCONNECTING, SERVER_UNAVAILABLE, SERVER_STARTING;
+    }
 
 }

@@ -21,7 +21,7 @@ public class AffinityForArtifactsTest extends CardTestPlayerBase {
 
         setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
-        
+
        assertPermanentCount(playerA, "Myr Enforcer", 4);
     }
 

@@ -94,8 +94,8 @@ class ClockworkDragonEffect extends OneShotEffect<ClockworkDragonEffect> {
         if (p != null) {
             AtTheEndOfCombatDelayedTriggeredAbility ability = new AtTheEndOfCombatDelayedTriggeredAbility(new RemoveCounterSourceEffect(CounterType.P1P1.createInstance()));
             ability.setSourceId(source.getSourceId());
-			ability.setControllerId(source.getControllerId());
-			game.addDelayedTriggeredAbility(ability);
+            ability.setControllerId(source.getControllerId());
+            game.addDelayedTriggeredAbility(ability);
         }
         return false;
     }

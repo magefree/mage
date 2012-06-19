@@ -30,9 +30,9 @@ public class BloodArtistTest extends CardTestPlayerBase {
 
         setStopAt(1, Constants.PhaseStep.END_TURN);
         execute();
-        
+
         assertLife(playerA, 23);
         assertLife(playerB, 17);
     }
-    
+
 }

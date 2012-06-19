@@ -40,27 +40,27 @@ import mage.abilities.Ability;
 public class AbilityView extends CardView {
     private static final long serialVersionUID = 1L;
 
-	private String sourceName;
-	private CardView sourceCard;
+    private String sourceName;
+    private CardView sourceCard;
 
-	public AbilityView(Ability ability, String sourceName, CardView sourceCard) {
-		this.id = ability.getId();
-		this.name = "Ability";
-		this.sourceName = sourceName;
-		this.sourceCard = sourceCard;
-		this.rules = new ArrayList<String>();
-		rules.add(ability.getRule());
-		this.power = "";
-		this.toughness = "";
-		this.loyalty = "";
-		this.cardTypes = new ArrayList<CardType>();
-		this.subTypes = new ArrayList<String>();
-		this.superTypes = new ArrayList<String>();
-		this.color = new ObjectColor();
-		this.manaCost = ability.getManaCosts().getSymbols();
-	}
+    public AbilityView(Ability ability, String sourceName, CardView sourceCard) {
+        this.id = ability.getId();
+        this.name = "Ability";
+        this.sourceName = sourceName;
+        this.sourceCard = sourceCard;
+        this.rules = new ArrayList<String>();
+        rules.add(ability.getRule());
+        this.power = "";
+        this.toughness = "";
+        this.loyalty = "";
+        this.cardTypes = new ArrayList<CardType>();
+        this.subTypes = new ArrayList<String>();
+        this.superTypes = new ArrayList<String>();
+        this.color = new ObjectColor();
+        this.manaCost = ability.getManaCosts().getSymbols();
+    }
 
-	public CardView getSourceCard() {
-		return this.sourceCard;
-	}
+    public CardView getSourceCard() {
+        return this.sourceCard;
+    }
 }

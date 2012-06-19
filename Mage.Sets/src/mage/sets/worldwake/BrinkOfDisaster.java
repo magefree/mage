@@ -51,13 +51,13 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class BrinkOfDisaster extends CardImpl<BrinkOfDisaster> {
 
-	private static FilterPermanent filter = new FilterPermanent();
+    private static FilterPermanent filter = new FilterPermanent();
 
-	static {
-		filter.getCardType().add(CardType.CREATURE);
-		filter.getCardType().add(CardType.LAND);
-		filter.setScopeCardType(Filter.ComparisonScope.Any);
-	}
+    static {
+        filter.getCardType().add(CardType.CREATURE);
+        filter.getCardType().add(CardType.LAND);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
+    }
 
     public BrinkOfDisaster(UUID ownerId) {
         super(ownerId, 52, "Brink of Disaster", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
@@ -67,12 +67,12 @@ public class BrinkOfDisaster extends CardImpl<BrinkOfDisaster> {
         this.color.setBlack(true);
 
         // Enchant creature or land
-		TargetPermanent auraTarget = new TargetPermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.AddAbility));
+        TargetPermanent auraTarget = new TargetPermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.AddAbility));
 
         // When enchanted permanent becomes tapped, destroy it.
-		this.addAbility(new EnchantedBecomesTappedTriggeredAbility(new DestroyTargetEffect()));
+        this.addAbility(new EnchantedBecomesTappedTriggeredAbility(new DestroyTargetEffect()));
     }
 
     public BrinkOfDisaster(final BrinkOfDisaster card) {
@@ -102,16 +102,16 @@ class EnchantedBecomesTappedTriggeredAbility extends TriggeredAbilityImpl<Enchan
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == GameEvent.EventType.TAPPED) {
-			Permanent enchant = game.getPermanent(sourceId);
-			if (enchant != null && enchant.getAttachedTo() != null) {
-				if (event.getTargetId().equals(enchant.getAttachedTo())) {
-					getEffects().get(0).setTargetPointer(new FixedTarget(enchant.getAttachedTo()));
-					return true;
-				}
-			}
-		}
-		return false;
+        if (event.getType() == GameEvent.EventType.TAPPED) {
+            Permanent enchant = game.getPermanent(sourceId);
+            if (enchant != null && enchant.getAttachedTo() != null) {
+                if (event.getTargetId().equals(enchant.getAttachedTo())) {
+                    getEffects().get(0).setTargetPointer(new FixedTarget(enchant.getAttachedTo()));
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override

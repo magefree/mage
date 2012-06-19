@@ -47,7 +47,7 @@ public class WhiteSunsZenith extends CardImpl<WhiteSunsZenith> {
     public WhiteSunsZenith (UUID ownerId) {
         super(ownerId, 19, "White Sun's Zenith", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{W}{W}{W}");
         this.expansionSetCode = "MBS";
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         this.getSpellAbility().addEffect(new CreateTokenEffect(new CatToken(), new ManacostVariableValue()));
         this.getSpellAbility().addEffect(ShuffleSpellEffect.getInstance());
     }
@@ -66,9 +66,9 @@ class CatToken extends Token {
     public CatToken() {
         super("Cat", "2/2 white Cat creature token");
         cardType.add(CardType.CREATURE);
-		color = ObjectColor.WHITE;
-		subtype.add("Cat");
-		power = new MageInt(2);
-		toughness = new MageInt(2);
+        color = ObjectColor.WHITE;
+        subtype.add("Cat");
+        power = new MageInt(2);
+        toughness = new MageInt(2);
     }
 }

@@ -49,7 +49,7 @@ public class BlisterstickShaman extends CardImpl<BlisterstickShaman> {
         this.expansionSetCode = "MBS";
         this.subtype.add("Goblin");
         this.subtype.add("Shaman");
-		this.color.setRed(true);
+        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(1));

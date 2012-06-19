@@ -57,7 +57,7 @@ public class TenzaGodosMaul extends CardImpl<TenzaGodosMaul> {
 
     private static final String rule1 = "As long as it's legendary, it gets an additional +2/+2";
     private static final String rule2 = "As long as it's red, it has trample.";
-    
+
     private final static FilterCreaturePermanent legendaryFilter = new FilterCreaturePermanent("legendary");
     private final static FilterCreaturePermanent redFilter = new FilterCreaturePermanent("red");
 
@@ -74,9 +74,9 @@ public class TenzaGodosMaul extends CardImpl<TenzaGodosMaul> {
         this.expansionSetCode = "CHK";
         this.supertype.add("Legendary");
         this.subtype.add("Equipment");
-        
+
         // Equipped creature gets +1/+1.  
-	this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1)));
+    this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1)));
         // As long as it's legendary, it gets an additional +2/+2.
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(
                 new BoostEquippedEffect(2, 2), 
@@ -87,9 +87,9 @@ public class TenzaGodosMaul extends CardImpl<TenzaGodosMaul> {
                 new EquippedMatchesFilterCondition(redFilter), rule2)));
         // Equip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)
         this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(1), new TargetControlledCreaturePermanent()));
-        
+
     }
-    
+
     public TenzaGodosMaul(final TenzaGodosMaul card) {
         super(card);
     }
