@@ -24,7 +24,6 @@ import java.util.logging.Logger;
  */
 public class GameStateEvaluator2 {
 
-<<<<<<< HEAD
     private final static transient Logger logger = Logging.getLogger(GameStateEvaluator2.class.getName());
 
     static {
@@ -33,7 +32,6 @@ public class GameStateEvaluator2 {
 
     public static final int WIN_GAME_SCORE = 100000000;
     public static final int LOSE_GAME_SCORE = -WIN_GAME_SCORE;
-
 
     private static final int LIFE_FACTOR = Config2.evaluatorLifeFactor;
     private static final int PERMANENT_FACTOR = Config2.evaluatorPermanentFactor;
@@ -64,7 +62,7 @@ public class GameStateEvaluator2 {
         int permanentScore = 0;
         try {
             for (Permanent permanent: game.getBattlefield().getAllActivePermanents(playerId)) {
-                permanentScore += evaluatePermanent(permanent, game);
+                permanentScore += 10 * evaluatePermanent(permanent, game);
             }
             for (Permanent permanent: game.getBattlefield().getAllActivePermanents(opponent.getId())) {
                 permanentScore -= evaluatePermanent(permanent, game);
@@ -81,64 +79,7 @@ public class GameStateEvaluator2 {
         int score = lifeScore + permanentScore + handScore;
         //if (logger.isLoggable(Level.FINE))
             logger.fine("game state evaluated to- lifeScore:" + lifeScore + " permanentScore:" + permanentScore /*+ " handScore:" + handScore*/ + "total:" + score);
-=======
-	private final static transient Logger logger = Logging.getLogger(GameStateEvaluator2.class.getName());
 
-	static {
-		logger.setLevel(Level.ALL);
-	}
-
-	public static final int WIN_GAME_SCORE = 100000000;
-	public static final int LOSE_GAME_SCORE = -WIN_GAME_SCORE;
-
-
-	private static final int LIFE_FACTOR = Config2.evaluatorLifeFactor;
-	private static final int PERMANENT_FACTOR = Config2.evaluatorPermanentFactor;
-	private static final int CREATURE_FACTOR = Config2.evaluatorCreatureFactor;
-	private static final int HAND_FACTOR = Config2.evaluatorHandFactor;
-
-	public static int evaluate(UUID playerId, Game game) {
-		Player player = game.getPlayer(playerId);
-		Player opponent = game.getPlayer(game.getOpponents(playerId).iterator().next());
-		if (game.isGameOver()) {
-			if (player.hasLost() || opponent.hasWon())
-				return LOSE_GAME_SCORE;
-			if (opponent.hasLost() || player.hasWon())
-				return WIN_GAME_SCORE;
-		}
-		//int lifeScore = (player.getLife() - opponent.getLife()) * LIFE_FACTOR;
-
-		//int lifeScore = (ArtificialScoringSystem.getLifeScore(player.getLife()) - opponent.getLife()) * LIFE_FACTOR;
-		int lifeScore = 0;
-		if (player.getLife() <= 0) { // we don't want a tie
-			lifeScore = ArtificialScoringSystem.LOSE_GAME_SCORE;
-		} else if (opponent.getLife() <= 0) {
-			lifeScore = ArtificialScoringSystem.WIN_GAME_SCORE;
-		} else {
-			lifeScore = ArtificialScoringSystem.getLifeScore(player.getLife()) - ArtificialScoringSystem.getLifeScore(opponent.getLife());
-		}
-
-		int permanentScore = 0;
-		try {
-			for (Permanent permanent: game.getBattlefield().getAllActivePermanents(playerId)) {
-				permanentScore += 10 * evaluatePermanent(permanent, game);
-			}
-			for (Permanent permanent: game.getBattlefield().getAllActivePermanents(opponent.getId())) {
-				permanentScore -= evaluatePermanent(permanent, game);
-			}
-		} catch (Throwable t) {
-			t.printStackTrace();
-		}
-		//permanentScore *= PERMANENT_FACTOR;
-
-		int handScore = 0;
-		handScore = player.getHand().size() - opponent.getHand().size();
-		handScore *= 2;
-
-		int score = lifeScore + permanentScore + handScore;
-		//if (logger.isLoggable(Level.FINE))
-			logger.fine("game state evaluated to- lifeScore:" + lifeScore + " permanentScore:" + permanentScore /*+ " handScore:" + handScore*/ + "total:" + score);
->>>>>>> Changes in state evaluation (permanents more valuable). Fix in combat blocking.
         return score;
     }
 
