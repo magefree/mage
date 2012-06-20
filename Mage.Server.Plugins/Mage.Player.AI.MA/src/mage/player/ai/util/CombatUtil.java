@@ -187,8 +187,12 @@ public class CombatUtil {
         for (Permanent blocker : possibleBlockers) {
             SurviveInfo info = willItSurvive(game, attackerId, defenderId, attacker, blocker);
             //if (info.isAttackerDied() && !info.isBlockerDied()) {
-            if (info.isAttackerDied()) {
-                blockers.add(blocker);
+            if (info != null) {
+                if (info.isAttackerDied()) {
+                    blockers.add(blocker);
+                } else if (!info.isBlockerDied()) {
+                    blockers.add(blocker);
+                }
             }
         }
         return blockers;
