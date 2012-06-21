@@ -25,6 +25,6 @@ You will need to have the [Java Runtime Environment](http://java.com/en/) Versio
 ## Developer
 
 If you are interesting in developing MAGE here are a couple of links that might interest you:
-* [[Developer Getting Started]]
-* [[Developer Notes]]
-* [[Double Faced Cards]]
+* [Developer Getting Started](http://github.com/magefree/mage/wiki/Developer-Getting-Started)
+* [Developer Notes](http://github.com/magefree/mage/wiki/Developer-Notes)
+* [Double Faced Cards](http://github.com/magefree/mage/wiki/Double-Faced-Cards)
