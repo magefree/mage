@@ -45,7 +45,6 @@ import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
-import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -107,9 +106,8 @@ class UmezawasJitteAbility extends TriggeredAbilityImpl<UmezawasJitteAbility> {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event instanceof DamagedEvent) {
-            DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
             Permanent p = game.getPermanent(event.getSourceId());
-            if (damageEvent.isCombatDamage() && p != null && p.getAttachments().contains(this.getSourceId())) {
+            if (((DamagedEvent)event).isCombatDamage() && p != null && p.getAttachments().contains(this.getSourceId())) {
                 return true;
             }
         }
