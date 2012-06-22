@@ -86,7 +86,11 @@ class ArbiterOfKnollridgeEffect extends OneShotEffect<ArbiterOfKnollridgeEffect>
     @Override
     public boolean apply(Game game, Ability source) {
         int maxLife = 0;
-        for (UUID pid : game.getPlayerList()) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null)
+            return false;
+
+        for (UUID pid : controller.getInRange()) {
             Player p = game.getPlayer(pid);
             if (p != null) {
                 if (maxLife < p.getLife()) {
@@ -94,7 +98,7 @@ class ArbiterOfKnollridgeEffect extends OneShotEffect<ArbiterOfKnollridgeEffect>
                 }
             }
         }
-        for (UUID pid : game.getPlayerList()) {
+        for (UUID pid : controller.getInRange()) {
             Player p = game.getPlayer(pid);
             if (p != null) {
                 if (maxLife > p.getLife()) {
