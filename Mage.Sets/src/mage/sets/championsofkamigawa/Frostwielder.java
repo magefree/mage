@@ -73,14 +73,14 @@ public class Frostwielder extends CardImpl<Frostwielder> {
         this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
-        
+
         // {T}: Frostwielder deals 1 damage to target creature or player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetCreatureOrPlayer());
         // If a creature dealt damage by Frostwielder this turn would die, exile it instead.
         this.addAbility(ability);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FrostwielderEffect()));
-        
+
         this.addWatcher(new DamagedByWatcher());
     }
 
@@ -98,43 +98,43 @@ public class Frostwielder extends CardImpl<Frostwielder> {
 
 class FrostwielderEffect extends ReplacementEffectImpl<FrostwielderEffect> {
 
-	public FrostwielderEffect() {
-		super(Duration.EndOfTurn, Outcome.Exile);
-		staticText = "If a creature dealt damage by {this} this turn would die, exile it instead";
-	}
+    public FrostwielderEffect() {
+        super(Duration.EndOfTurn, Outcome.Exile);
+        staticText = "If a creature dealt damage by {this} this turn would die, exile it instead";
+    }
 
-	public FrostwielderEffect(final FrostwielderEffect effect) {
-		super(effect);
-	}
+    public FrostwielderEffect(final FrostwielderEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public FrostwielderEffect copy() {
-		return new FrostwielderEffect(this);
-	}
+    @Override
+    public FrostwielderEffect copy() {
+        return new FrostwielderEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent permanent = ((ZoneChangeEvent)event).getTarget();
         if (permanent != null) {
             return permanent.moveToExile(null, "", source.getId(), game);
         }
-		return false;
-	}
+        return false;
+    }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
                         DamagedByWatcher watcher = 
                                 (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", source.getSourceId());
                         if (watcher != null)
                                 return watcher.damagedCreatures.contains(event.getTargetId());
                         }
-		return false;
-	}
+        return false;
+    }
 
 }

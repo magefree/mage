@@ -49,33 +49,33 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class ElvishArchdruid extends CardImpl<ElvishArchdruid> {
 
-	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elf creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elf creatures");
     private static final FilterControlledCreaturePermanent filterCount = new FilterControlledCreaturePermanent("Elf you control");
 
-	static {
-		filter.getSubtype().add("Elf");
-		filterCount.getSubtype().add("Elf");
-	}
+    static {
+        filter.getSubtype().add("Elf");
+        filterCount.getSubtype().add("Elf");
+    }
 
-	public ElvishArchdruid(UUID ownerId) {
-		super(ownerId, 176, "Elvish Archdruid", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
-		this.expansionSetCode = "M10";
-		this.subtype.add("Elf");
-		this.subtype.add("Druid");
-		this.color.setGreen(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+    public ElvishArchdruid(UUID ownerId) {
+        super(ownerId, 176, "Elvish Archdruid", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
+        this.expansionSetCode = "M10";
+        this.subtype.add("Elf");
+        this.subtype.add("Druid");
+        this.color.setGreen(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
         this.addAbility(new DynamicManaAbility(Mana.GreenMana, new PermanentsOnBattlefieldCount(filterCount)));
-	}
+    }
 
-	public ElvishArchdruid(final ElvishArchdruid card) {
-		super(card);
-	}
+    public ElvishArchdruid(final ElvishArchdruid card) {
+        super(card);
+    }
 
-	@Override
-	public ElvishArchdruid copy() {
-		return new ElvishArchdruid(this);
-	}
+    @Override
+    public ElvishArchdruid copy() {
+        return new ElvishArchdruid(this);
+    }
 }

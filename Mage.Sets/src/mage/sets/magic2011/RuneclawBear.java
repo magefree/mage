@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class RuneclawBear extends mage.sets.magic2010.RuneclawBear {
 
-	public RuneclawBear(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 195;
-		this.expansionSetCode = "M11";
-	}
+    public RuneclawBear(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 195;
+        this.expansionSetCode = "M11";
+    }
 
-	public RuneclawBear(final RuneclawBear card) {
-		super(card);
-	}
+    public RuneclawBear(final RuneclawBear card) {
+        super(card);
+    }
 
-	@Override
-	public RuneclawBear copy() {
-		return new RuneclawBear(this);
-	}
+    @Override
+    public RuneclawBear copy() {
+        return new RuneclawBear(this);
+    }
 
 }

@@ -45,29 +45,29 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class Deprive extends CardImpl<Deprive> {
 
-	private static final FilterControlledPermanent filter = new FilterControlledPermanent("land");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("land");
 
-	static {
-		filter.getCardType().add(CardType.LAND);
-		filter.setScopeCardType(ComparisonScope.Any);
-	}
+    static {
+        filter.getCardType().add(CardType.LAND);
+        filter.setScopeCardType(ComparisonScope.Any);
+    }
 
-	public Deprive(UUID ownerId) {
-		super(ownerId, 59, "Deprive", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}{U}");
-		this.expansionSetCode = "ROE";
-		this.color.setBlue(true);
-		this.getSpellAbility().addCost(new ReturnToHandTargetCost(new TargetControlledPermanent(filter)));
-		this.getSpellAbility().addTarget(new TargetSpell());
-		this.getSpellAbility().addEffect(new CounterTargetEffect());
-	}
+    public Deprive(UUID ownerId) {
+        super(ownerId, 59, "Deprive", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}{U}");
+        this.expansionSetCode = "ROE";
+        this.color.setBlue(true);
+        this.getSpellAbility().addCost(new ReturnToHandTargetCost(new TargetControlledPermanent(filter)));
+        this.getSpellAbility().addTarget(new TargetSpell());
+        this.getSpellAbility().addEffect(new CounterTargetEffect());
+    }
 
-	public Deprive(final Deprive card) {
-		super(card);
-	}
+    public Deprive(final Deprive card) {
+        super(card);
+    }
 
-	@Override
-	public Deprive copy() {
-		return new Deprive(this);
-	}
+    @Override
+    public Deprive copy() {
+        return new Deprive(this);
+    }
 
 }

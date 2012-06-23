@@ -46,51 +46,51 @@ import java.util.UUID;
  */
 public class UnifiedWill extends CardImpl<UnifiedWill> {
 
-	public UnifiedWill(UUID ownerId) {
-		super(ownerId, 92, "Unified Will", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-		this.expansionSetCode = "ROE";
-		this.color.setBlue(true);
-		this.getSpellAbility().addTarget(new TargetSpell());
-		this.getSpellAbility().addEffect(new UnifiedWillEffect());
-	}
+    public UnifiedWill(UUID ownerId) {
+        super(ownerId, 92, "Unified Will", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
+        this.expansionSetCode = "ROE";
+        this.color.setBlue(true);
+        this.getSpellAbility().addTarget(new TargetSpell());
+        this.getSpellAbility().addEffect(new UnifiedWillEffect());
+    }
 
-	public UnifiedWill(final UnifiedWill card) {
-		super(card);
-	}
+    public UnifiedWill(final UnifiedWill card) {
+        super(card);
+    }
 
-	@Override
-	public UnifiedWill copy() {
-		return new UnifiedWill(this);
-	}
+    @Override
+    public UnifiedWill copy() {
+        return new UnifiedWill(this);
+    }
 
 }
 
 class UnifiedWillEffect extends CounterTargetEffect {
 
-	private static FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
-	public UnifiedWillEffect() {}
+    public UnifiedWillEffect() {}
 
-	public UnifiedWillEffect(final UnifiedWillEffect effect) {
-		super(effect);
-		staticText = "Counter target spell if you control more creatures than that spell's controller";
-	}
+    public UnifiedWillEffect(final UnifiedWillEffect effect) {
+        super(effect);
+        staticText = "Counter target spell if you control more creatures than that spell's controller";
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		StackObject stackObject = game.getStack().getStackObject(source.getFirstTarget());
-		if (stackObject != null) {
-			if (game.getBattlefield().countAll(filter, source.getControllerId(), game) > game.getBattlefield().countAll(filter, stackObject.getControllerId(), game)) {
-				return game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
-			}
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        StackObject stackObject = game.getStack().getStackObject(source.getFirstTarget());
+        if (stackObject != null) {
+            if (game.getBattlefield().countAll(filter, source.getControllerId(), game) > game.getBattlefield().countAll(filter, stackObject.getControllerId(), game)) {
+                return game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
+            }
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public UnifiedWillEffect copy() {
-		return new UnifiedWillEffect(this);
-	}
+    @Override
+    public UnifiedWillEffect copy() {
+        return new UnifiedWillEffect(this);
+    }
 
 }

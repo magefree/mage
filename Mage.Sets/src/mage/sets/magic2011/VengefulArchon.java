@@ -51,91 +51,91 @@ import mage.target.TargetPlayer;
  */
 public class VengefulArchon extends CardImpl<VengefulArchon> {
 
-	public VengefulArchon(UUID ownerId) {
-		super(ownerId, 37, "Vengeful Archon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{W}{W}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Archon");
-		this.color.setWhite(true);
-		this.power = new MageInt(7);
-		this.toughness = new MageInt(7);
+    public VengefulArchon(UUID ownerId) {
+        super(ownerId, 37, "Vengeful Archon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{W}{W}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Archon");
+        this.color.setWhite(true);
+        this.power = new MageInt(7);
+        this.toughness = new MageInt(7);
 
-		this.addAbility(FlyingAbility.getInstance());
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VengefulArchonEffect(), new ManaCostsImpl("{X}"));
-		ability.addTarget(new TargetPlayer());
-		this.addAbility(ability);
-	}
+        this.addAbility(FlyingAbility.getInstance());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VengefulArchonEffect(), new ManaCostsImpl("{X}"));
+        ability.addTarget(new TargetPlayer());
+        this.addAbility(ability);
+    }
 
-	public VengefulArchon(final VengefulArchon card) {
-		super(card);
-	}
+    public VengefulArchon(final VengefulArchon card) {
+        super(card);
+    }
 
-	@Override
-	public VengefulArchon copy() {
-		return new VengefulArchon(this);
-	}
+    @Override
+    public VengefulArchon copy() {
+        return new VengefulArchon(this);
+    }
 
 }
 
 class VengefulArchonEffect extends PreventionEffectImpl<VengefulArchonEffect> {
 
-	protected int amount = 0;
+    protected int amount = 0;
 
-	public VengefulArchonEffect() {
-		super(Duration.EndOfTurn);
-		staticText = "Prevent the next X damage that would be dealt to you this turn. If damage is prevented this way, {this} deals that much damage to target player";
-	}
+    public VengefulArchonEffect() {
+        super(Duration.EndOfTurn);
+        staticText = "Prevent the next X damage that would be dealt to you this turn. If damage is prevented this way, {this} deals that much damage to target player";
+    }
 
-	public VengefulArchonEffect(final VengefulArchonEffect effect) {
-		super(effect);
-		this.amount = effect.amount;
-	}
+    public VengefulArchonEffect(final VengefulArchonEffect effect) {
+        super(effect);
+        this.amount = effect.amount;
+    }
 
-	@Override
-	public VengefulArchonEffect copy() {
-		return new VengefulArchonEffect(this);
-	}
+    @Override
+    public VengefulArchonEffect copy() {
+        return new VengefulArchonEffect(this);
+    }
 
-	@Override
-	public void init(Ability source, Game game) {
-		super.init(source, game);
-		amount = source.getManaCostsToPay().getX();
-	}
+    @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        amount = source.getManaCostsToPay().getX();
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getControllerId(), source.getId(), source.getControllerId(), event.getAmount(), false);
-		if (!game.replaceEvent(preventEvent)) {
-			Player player = game.getPlayer(source.getFirstTarget());
-			if (player != null) {
-				if (event.getAmount() >= this.amount) {
-					int damage = event.getAmount();
-					event.setAmount(event.getAmount() - amount);
-					player.damage(amount, source.getSourceId(), game, false, true);
-					this.used = true;
-					game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getControllerId(), source.getId(), source.getControllerId(), damage));
-				} else {
-					int damage = event.getAmount();
-					event.setAmount(0);
-					amount -= damage;
-					player.damage(damage, source.getSourceId(), game, false, true);
-					game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getControllerId(), source.getId(), source.getControllerId(), damage));
-				}
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getControllerId(), source.getId(), source.getControllerId(), event.getAmount(), false);
+        if (!game.replaceEvent(preventEvent)) {
+            Player player = game.getPlayer(source.getFirstTarget());
+            if (player != null) {
+                if (event.getAmount() >= this.amount) {
+                    int damage = event.getAmount();
+                    event.setAmount(event.getAmount() - amount);
+                    player.damage(amount, source.getSourceId(), game, false, true);
+                    this.used = true;
+                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getControllerId(), source.getId(), source.getControllerId(), damage));
+                } else {
+                    int damage = event.getAmount();
+                    event.setAmount(0);
+                    amount -= damage;
+                    player.damage(damage, source.getSourceId(), game, false, true);
+                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getControllerId(), source.getId(), source.getControllerId(), damage));
+                }
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (!this.used && super.applies(event, source, game) && event.getTargetId().equals(source.getControllerId())) {
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (!this.used && super.applies(event, source, game) && event.getTargetId().equals(source.getControllerId())) {
+            return true;
+        }
+        return false;
+    }
 
 }

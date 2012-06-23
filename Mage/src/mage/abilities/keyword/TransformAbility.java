@@ -63,7 +63,7 @@ public class TransformAbility extends SimpleStaticAbility {
     }
 
     public static void transform(Permanent permanent, Card sourceCard, Game game) {
-        
+
         if (sourceCard == null) {
             return;
         }
@@ -127,7 +127,7 @@ class TransformEffect extends ContinuousEffectImpl<TransformEffect> {
         if (card == null) {
             return false;
         }
-        
+
         TransformAbility.transform(permanent, card, game);
 
         return true;

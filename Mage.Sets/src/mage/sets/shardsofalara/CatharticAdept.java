@@ -53,7 +53,7 @@ public class CatharticAdept extends CardImpl<CatharticAdept> {
         this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        
+
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new PutLibraryIntoGraveTargetEffect(1),
                 new TapSourceCost());

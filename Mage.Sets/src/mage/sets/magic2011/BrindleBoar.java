@@ -44,24 +44,24 @@ import mage.cards.CardImpl;
  */
 public class BrindleBoar extends CardImpl<BrindleBoar> {
 
-	public BrindleBoar(UUID ownerId) {
-		super(ownerId, 166, "Brindle Boar", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
-		this.expansionSetCode = "M11";
-		this.color.setGreen(true);
-		this.subtype.add("Boar");
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+    public BrindleBoar(UUID ownerId) {
+        super(ownerId, 166, "Brindle Boar", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
+        this.expansionSetCode = "M11";
+        this.color.setGreen(true);
+        this.subtype.add("Boar");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(4), new SacrificeSourceCost()));
-	}
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(4), new SacrificeSourceCost()));
+    }
 
-	public BrindleBoar(final BrindleBoar card) {
-		super(card);
-	}
+    public BrindleBoar(final BrindleBoar card) {
+        super(card);
+    }
 
-	@Override
-	public BrindleBoar copy() {
-		return new BrindleBoar(this);
-	}
+    @Override
+    public BrindleBoar copy() {
+        return new BrindleBoar(this);
+    }
 
 }

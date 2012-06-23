@@ -39,7 +39,7 @@ import mage.game.permanent.Permanent;
  * @author LevelX
  */
 public class UntapEnchantedEffect extends OneShotEffect<UntapEnchantedEffect> {
-    
+
     public UntapEnchantedEffect() {
         super(Outcome.Untap);
         staticText = "untap enchanted creature";

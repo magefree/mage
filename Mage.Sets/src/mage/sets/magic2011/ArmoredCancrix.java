@@ -40,22 +40,22 @@ import mage.cards.CardImpl;
  */
 public class ArmoredCancrix extends CardImpl<ArmoredCancrix> {
 
-	public ArmoredCancrix(UUID ownerId) {
-		super(ownerId, 44, "Armored Cancrix", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
-		this.expansionSetCode = "M11";
-		this.color.setBlue(true);
-		this.subtype.add("Crab");
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(5);
-	}
+    public ArmoredCancrix(UUID ownerId) {
+        super(ownerId, 44, "Armored Cancrix", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
+        this.expansionSetCode = "M11";
+        this.color.setBlue(true);
+        this.subtype.add("Crab");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(5);
+    }
 
-	public ArmoredCancrix(final ArmoredCancrix card) {
-		super(card);
-	}
+    public ArmoredCancrix(final ArmoredCancrix card) {
+        super(card);
+    }
 
-	@Override
-	public ArmoredCancrix copy() {
-		return new ArmoredCancrix(this);
-	}
+    @Override
+    public ArmoredCancrix copy() {
+        return new ArmoredCancrix(this);
+    }
 
 }

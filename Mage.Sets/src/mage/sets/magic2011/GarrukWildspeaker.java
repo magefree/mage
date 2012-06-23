@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class GarrukWildspeaker extends mage.sets.magic2010.GarrukWildspeaker {
 
-	public GarrukWildspeaker(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 175;
-		this.expansionSetCode = "M11";
-	}
+    public GarrukWildspeaker(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 175;
+        this.expansionSetCode = "M11";
+    }
 
-	public GarrukWildspeaker(final GarrukWildspeaker card) {
-		super(card);
-	}
+    public GarrukWildspeaker(final GarrukWildspeaker card) {
+        super(card);
+    }
 
-	@Override
-	public GarrukWildspeaker copy() {
-		return new GarrukWildspeaker(this);
-	}
+    @Override
+    public GarrukWildspeaker copy() {
+        return new GarrukWildspeaker(this);
+    }
 
 }

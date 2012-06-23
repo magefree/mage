@@ -44,7 +44,7 @@ public class LeatherbackBaloth extends CardImpl<LeatherbackBaloth> {
         super(ownerId, 107, "Leatherback Baloth", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}{G}{G}");
         this.expansionSetCode = "WWK";
         this.subtype.add("Beast");
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
     }

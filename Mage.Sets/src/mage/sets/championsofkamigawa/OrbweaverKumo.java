@@ -47,7 +47,7 @@ import mage.filter.common.FilterSpiritOrArcaneCard;
 public class OrbweaverKumo extends CardImpl<OrbweaverKumo> {
 
     private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
-    
+
     public OrbweaverKumo(UUID ownerId) {
         super(ownerId, 231, "Orbweaver Kumo", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
         this.expansionSetCode = "CHK";

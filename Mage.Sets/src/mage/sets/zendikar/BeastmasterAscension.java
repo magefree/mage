@@ -50,49 +50,49 @@ import java.util.UUID;
  */
 public class BeastmasterAscension extends CardImpl<BeastmasterAscension> {
 
-	public BeastmasterAscension(UUID ownerId) {
-		super(ownerId, 159, "Beastmaster Ascension", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
-		this.expansionSetCode = "ZEN";
-		this.color.setGreen(true);
+    public BeastmasterAscension(UUID ownerId) {
+        super(ownerId, 159, "Beastmaster Ascension", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
+        this.expansionSetCode = "ZEN";
+        this.color.setGreen(true);
 
-		this.addAbility(new AttacksCreatureYourControlTriggeredAbility(new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BeastmasterAscensionEffect()));
-	}
+        this.addAbility(new AttacksCreatureYourControlTriggeredAbility(new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BeastmasterAscensionEffect()));
+    }
 
-	public BeastmasterAscension(final BeastmasterAscension card) {
-		super(card);
-	}
+    public BeastmasterAscension(final BeastmasterAscension card) {
+        super(card);
+    }
 
-	@Override
-	public BeastmasterAscension copy() {
-		return new BeastmasterAscension(this);
-	}
+    @Override
+    public BeastmasterAscension copy() {
+        return new BeastmasterAscension(this);
+    }
 
 }
 
 class BeastmasterAscensionEffect extends BoostControlledEffect {
 
-	public BeastmasterAscensionEffect() {
-		super(5, 5, Duration.WhileOnBattlefield);
-		staticText = "As long as {this} has seven or more quest counters on it, creatures you control get +5/+5";
-	}
+    public BeastmasterAscensionEffect() {
+        super(5, 5, Duration.WhileOnBattlefield);
+        staticText = "As long as {this} has seven or more quest counters on it, creatures you control get +5/+5";
+    }
 
-	public BeastmasterAscensionEffect(final BeastmasterAscensionEffect effect) {
-		super(effect);
-	}
+    public BeastmasterAscensionEffect(final BeastmasterAscensionEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getSourceId());
-		if (permanent != null && permanent.getCounters().getCount(CounterType.QUEST) > 6) {
-			super.apply(game, source);
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null && permanent.getCounters().getCount(CounterType.QUEST) > 6) {
+            super.apply(game, source);
+        }
+        return false;
+    }
 
-	@Override
-	public BeastmasterAscensionEffect copy() {
-		return new BeastmasterAscensionEffect(this);
-	}
+    @Override
+    public BeastmasterAscensionEffect copy() {
+        return new BeastmasterAscensionEffect(this);
+    }
 
 }

@@ -41,20 +41,20 @@ import mage.sets.Sets;
  */
 public class Extended extends Constructed {
 
-	public Extended() {
-		super("Constructed - Extended");
-		GregorianCalendar current = new GregorianCalendar();
-		GregorianCalendar cutoff;
-		if (current.get(Calendar.MONTH) > 9) {
-			cutoff = new GregorianCalendar(current.get(Calendar.YEAR) - 3, Calendar.SEPTEMBER, 1);
-		}
-		else {
-			cutoff = new GregorianCalendar(current.get(Calendar.YEAR) - 4, Calendar.SEPTEMBER, 1);
-		}
-		for (ExpansionSet set: Sets.getInstance().values()) {
-			if (set.getReleaseDate().after(cutoff.getTime()) && set.getSetType() != SetType.REPRINT) {
-				setCodes.add(set.getCode());
-			}
-		}
-	}
+    public Extended() {
+        super("Constructed - Extended");
+        GregorianCalendar current = new GregorianCalendar();
+        GregorianCalendar cutoff;
+        if (current.get(Calendar.MONTH) > 9) {
+            cutoff = new GregorianCalendar(current.get(Calendar.YEAR) - 3, Calendar.SEPTEMBER, 1);
+        }
+        else {
+            cutoff = new GregorianCalendar(current.get(Calendar.YEAR) - 4, Calendar.SEPTEMBER, 1);
+        }
+        for (ExpansionSet set: Sets.getInstance().values()) {
+            if (set.getReleaseDate().after(cutoff.getTime()) && set.getSetType() != SetType.REPRINT) {
+                setCodes.add(set.getCode());
+            }
+        }
+    }
 }

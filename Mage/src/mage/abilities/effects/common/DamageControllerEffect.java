@@ -40,51 +40,51 @@ import mage.players.Player;
  */
 public class DamageControllerEffect extends OneShotEffect<DamageControllerEffect> {
 
-	protected int amount;
-	protected boolean preventable;
+    protected int amount;
+    protected boolean preventable;
 
-	public DamageControllerEffect(int amount) {
-		this(amount, true);
-	}
+    public DamageControllerEffect(int amount) {
+        this(amount, true);
+    }
 
-	public DamageControllerEffect(int amount, boolean preventable) {
-		super(Outcome.Damage);
-		this.amount = amount;
-		this.preventable = preventable;
-		setText();
-	}
+    public DamageControllerEffect(int amount, boolean preventable) {
+        super(Outcome.Damage);
+        this.amount = amount;
+        this.preventable = preventable;
+        setText();
+    }
 
-	public int getAmount() {
-		return amount;
-	}
+    public int getAmount() {
+        return amount;
+    }
 
-	public DamageControllerEffect(final DamageControllerEffect effect) {
-		super(effect);
-		this.amount = effect.amount;
-		this.preventable = effect.preventable;
-	}
+    public DamageControllerEffect(final DamageControllerEffect effect) {
+        super(effect);
+        this.amount = effect.amount;
+        this.preventable = effect.preventable;
+    }
 
-	@Override
-	public DamageControllerEffect copy() {
-		return new DamageControllerEffect(this);
-	}
+    @Override
+    public DamageControllerEffect copy() {
+        return new DamageControllerEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-		if (player != null) {
-			player.damage(amount, source.getId(), game, false, preventable);
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+            player.damage(amount, source.getId(), game, false, preventable);
+            return true;
+        }
+        return false;
+    }
 
-	private void setText() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("{source} deals ").append(Integer.toString(amount)).append(" damage to you");
-		if (!preventable)
-			sb.append(". The damage can't be prevented");
-		staticText = sb.toString();
-	}
+    private void setText() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("{source} deals ").append(Integer.toString(amount)).append(" damage to you");
+        if (!preventable)
+            sb.append(". The damage can't be prevented");
+        staticText = sb.toString();
+    }
 
 }

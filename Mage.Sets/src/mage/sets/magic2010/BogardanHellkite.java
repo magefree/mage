@@ -46,28 +46,28 @@ import mage.target.common.TargetCreatureOrPlayerAmount;
  */
 public class BogardanHellkite extends CardImpl<BogardanHellkite> {
 
-	public BogardanHellkite(UUID ownerId) {
-		super(ownerId, 127, "Bogardan Hellkite", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{6}{R}{R}");
-		this.expansionSetCode = "M10";
-		this.subtype.add("Dragon");
-		this.color.setRed(true);
-		this.power = new MageInt(5);
-		this.toughness = new MageInt(5);
+    public BogardanHellkite(UUID ownerId) {
+        super(ownerId, 127, "Bogardan Hellkite", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{6}{R}{R}");
+        this.expansionSetCode = "M10";
+        this.subtype.add("Dragon");
+        this.color.setRed(true);
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(5);
 
-		this.addAbility(FlashAbility.getInstance());
-		this.addAbility(FlyingAbility.getInstance());
-		Ability ability = new EntersBattlefieldTriggeredAbility(new DamageMultiEffect(5), false);
-		ability.addTarget(new TargetCreatureOrPlayerAmount(5));
-		this.addAbility(ability);
-	}
+        this.addAbility(FlashAbility.getInstance());
+        this.addAbility(FlyingAbility.getInstance());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageMultiEffect(5), false);
+        ability.addTarget(new TargetCreatureOrPlayerAmount(5));
+        this.addAbility(ability);
+    }
 
-	public BogardanHellkite(final BogardanHellkite card) {
-		super(card);
-	}
+    public BogardanHellkite(final BogardanHellkite card) {
+        super(card);
+    }
 
-	@Override
-	public BogardanHellkite copy() {
-		return new BogardanHellkite(this);
-	}
+    @Override
+    public BogardanHellkite copy() {
+        return new BogardanHellkite(this);
+    }
 
 }

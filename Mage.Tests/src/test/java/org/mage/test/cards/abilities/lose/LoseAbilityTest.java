@@ -26,7 +26,7 @@ public class LoseAbilityTest extends CardTestPlayerBase {
 
         setStopAt(2, Constants.PhaseStep.END_TURN);
         execute();
-        
+
         assertLife(playerA, 20);
         assertLife(playerB, 20);
 

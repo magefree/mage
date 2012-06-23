@@ -63,7 +63,7 @@ public class HisokaMinamoSensei extends CardImpl<HisokaMinamoSensei> {
         this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
-        
+
         // {2}{U}, Discard a card: Counter target spell if it has the same converted mana cost as the discarded card.
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new HisokaMinamoSenseiCounterEffect(), new ManaCostsImpl("{2}{U}"));
         ability.addTarget(new TargetSpell());
@@ -86,42 +86,42 @@ public class HisokaMinamoSensei extends CardImpl<HisokaMinamoSensei> {
 class HisokaMinamoSenseiDiscardTargetCost extends CostImpl<HisokaMinamoSenseiDiscardTargetCost> {
 
         protected int convertedManaCosts = 0;
-        
-	public HisokaMinamoSenseiDiscardTargetCost(TargetCardInHand target) {
-		this.addTarget(target);
-		this.text = "Discard " + target.getTargetName();
-	}
 
-	public HisokaMinamoSenseiDiscardTargetCost(HisokaMinamoSenseiDiscardTargetCost cost) {
-		super(cost);
-	}
+    public HisokaMinamoSenseiDiscardTargetCost(TargetCardInHand target) {
+        this.addTarget(target);
+        this.text = "Discard " + target.getTargetName();
+    }
 
-	@Override
-	public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-		if (targets.choose(Outcome.Discard, controllerId, sourceId, game)) {
-			Player player = game.getPlayer(controllerId);
-			for (UUID targetId: targets.get(0).getTargets()) {
-				Card card = player.getHand().get(targetId, game);
-				if (card == null)
-					return false;
-				convertedManaCosts = card.getManaCost().convertedManaCost();
+    public HisokaMinamoSenseiDiscardTargetCost(HisokaMinamoSenseiDiscardTargetCost cost) {
+        super(cost);
+    }
+
+    @Override
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+        if (targets.choose(Outcome.Discard, controllerId, sourceId, game)) {
+            Player player = game.getPlayer(controllerId);
+            for (UUID targetId: targets.get(0).getTargets()) {
+                Card card = player.getHand().get(targetId, game);
+                if (card == null)
+                    return false;
+                convertedManaCosts = card.getManaCost().convertedManaCost();
                                 paid |= player.discard(card, null, game);
-                                
-			}
-		}
-		return paid;
-	}
 
-	@Override
-	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-		return targets.canChoose(controllerId, game);
-	}
+            }
+        }
+        return paid;
+    }
 
-	@Override
-	public HisokaMinamoSenseiDiscardTargetCost copy() {
-		return new HisokaMinamoSenseiDiscardTargetCost(this);
-	}
-        
+    @Override
+    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+        return targets.canChoose(controllerId, game);
+    }
+
+    @Override
+    public HisokaMinamoSenseiDiscardTargetCost copy() {
+        return new HisokaMinamoSenseiDiscardTargetCost(this);
+    }
+
         public int getConvertedCosts() {
             return convertedManaCosts;
         }

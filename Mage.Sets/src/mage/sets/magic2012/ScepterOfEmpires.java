@@ -48,63 +48,63 @@ import java.util.UUID;
  */
 public class ScepterOfEmpires extends CardImpl<ScepterOfEmpires> {
 
-	public ScepterOfEmpires(UUID ownerId) {
-		super(ownerId, 216, "Scepter of Empires", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-		this.expansionSetCode = "M12";
+    public ScepterOfEmpires(UUID ownerId) {
+        super(ownerId, 216, "Scepter of Empires", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
+        this.expansionSetCode = "M12";
 
-		// {tap}: Scepter of Empires deals 1 damage to target player. It deals 3 damage to that player instead if you control artifacts named Crown of Empires and Throne of Empires.
-		Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ScepterOfEmpiresEffect(), new GenericManaCost(0));
-		ability.addCost(new TapSourceCost());
-		ability.addTarget(new TargetPlayer());
-		this.addAbility(ability);
-	}
+        // {tap}: Scepter of Empires deals 1 damage to target player. It deals 3 damage to that player instead if you control artifacts named Crown of Empires and Throne of Empires.
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ScepterOfEmpiresEffect(), new GenericManaCost(0));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetPlayer());
+        this.addAbility(ability);
+    }
 
-	public ScepterOfEmpires(final ScepterOfEmpires card) {
-		super(card);
-	}
+    public ScepterOfEmpires(final ScepterOfEmpires card) {
+        super(card);
+    }
 
-	@Override
-	public ScepterOfEmpires copy() {
-		return new ScepterOfEmpires(this);
-	}
+    @Override
+    public ScepterOfEmpires copy() {
+        return new ScepterOfEmpires(this);
+    }
 }
 
 class ScepterOfEmpiresEffect extends OneShotEffect<ScepterOfEmpiresEffect> {
 
-	public ScepterOfEmpiresEffect() {
-		super(Constants.Outcome.PutCreatureInPlay);
-		staticText = "Scepter of Empires deals 1 damage to target player. It deals 3 damage to that player instead if you control artifacts named Crown of Empires and Throne of Empires";
-	}
+    public ScepterOfEmpiresEffect() {
+        super(Constants.Outcome.PutCreatureInPlay);
+        staticText = "Scepter of Empires deals 1 damage to target player. It deals 3 damage to that player instead if you control artifacts named Crown of Empires and Throne of Empires";
+    }
 
-	public ScepterOfEmpiresEffect(ScepterOfEmpiresEffect effect) {
-		super(effect);
-	}
+    public ScepterOfEmpiresEffect(ScepterOfEmpiresEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		boolean throne = false;
-		boolean crown = false;
-		for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
-			if (permanent.getName().equals("Throne of Empires")) {
-				throne = true;
-			} else if (permanent.getName().equals("Crown of Empires")) {
-				crown = true;
-			}
-			if (throne && crown) break;
-		}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        boolean throne = false;
+        boolean crown = false;
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
+            if (permanent.getName().equals("Throne of Empires")) {
+                throne = true;
+            } else if (permanent.getName().equals("Crown of Empires")) {
+                crown = true;
+            }
+            if (throne && crown) break;
+        }
 
-		int amount = throne && crown ? 3 : 1;
+        int amount = throne && crown ? 3 : 1;
 
-		Player player = game.getPlayer(targetPointer.getFirst(game, source));
-		if (player != null) {
-			player.damage(amount, source.getSourceId(), game, false, true);
-			return true;
-		}
-		return false;
-	}
+        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        if (player != null) {
+            player.damage(amount, source.getSourceId(), game, false, true);
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public ScepterOfEmpiresEffect copy() {
-		return new ScepterOfEmpiresEffect(this);
-	}
+    @Override
+    public ScepterOfEmpiresEffect copy() {
+        return new ScepterOfEmpiresEffect(this);
+    }
 }

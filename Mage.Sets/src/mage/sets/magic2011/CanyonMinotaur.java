@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class CanyonMinotaur extends mage.sets.conflux.CanyonMinotaur {
 
-	public CanyonMinotaur(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 126;
-		this.expansionSetCode = "M11";
-	}
+    public CanyonMinotaur(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 126;
+        this.expansionSetCode = "M11";
+    }
 
-	public CanyonMinotaur(final CanyonMinotaur card) {
-		super(card);
-	}
+    public CanyonMinotaur(final CanyonMinotaur card) {
+        super(card);
+    }
 
-	@Override
-	public CanyonMinotaur copy() {
-		return new CanyonMinotaur(this);
-	}
+    @Override
+    public CanyonMinotaur copy() {
+        return new CanyonMinotaur(this);
+    }
 
 }

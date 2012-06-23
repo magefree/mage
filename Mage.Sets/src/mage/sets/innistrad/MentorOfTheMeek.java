@@ -57,10 +57,10 @@ public class MentorOfTheMeek extends CardImpl<MentorOfTheMeek> {
         this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        
+
         //Whenever another creature with power 2 or less enters the battlefield under your control, you may pay 1. If you do, draw a card.
         this.addAbility(new MentorOfTheMeekAbility());
-        
+
     }
 
     public MentorOfTheMeek(final MentorOfTheMeek card) {
@@ -92,20 +92,20 @@ class MentorOfTheMeekAbility extends TriggeredAbilityImpl<MentorOfTheMeekAbility
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && !event.getTargetId().equals(this.getSourceId())) {
-			ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-			if (zEvent.getToZone() == Constants.Zone.BATTLEFIELD) {
-				Permanent permanent = game.getPermanent(event.getTargetId());
-				if (permanent != null && permanent.getCardType().contains(CardType.CREATURE) && permanent.getControllerId().equals(this.getControllerId()) && permanent.getPower().getValue() <= 2) {
-					return true;
-				}
-			}
-		}
-		return false;
+            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+            if (zEvent.getToZone() == Constants.Zone.BATTLEFIELD) {
+                Permanent permanent = game.getPermanent(event.getTargetId());
+                if (permanent != null && permanent.getCardType().contains(CardType.CREATURE) && permanent.getControllerId().equals(this.getControllerId()) && permanent.getPower().getValue() <= 2) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override
     public String getRule() {
         return "Whenever another creature with power 2 or less enters the battlefield under your control, you may pay {1}. If you do, draw a card.";
     }
-	
+
 }

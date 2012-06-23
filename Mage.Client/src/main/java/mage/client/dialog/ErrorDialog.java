@@ -46,16 +46,16 @@ public class ErrorDialog extends MageDialog {
         initComponents();
     }
 
-	public void showDialog(String title, String message) {
-		this.setTitle(title);
-		this.lblMessage.setText(message);
+    public void showDialog(String title, String message) {
+        this.setTitle(title);
+        this.lblMessage.setText(message);
         this.lblMessage.setCaretPosition(0);
-		this.pack();
-		this.revalidate();
-		this.repaint();
-		this.setModal(true);
-		this.setVisible(true);
-	}
+        this.pack();
+        this.revalidate();
+        this.repaint();
+        this.setModal(true);
+        this.setVisible(true);
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -129,9 +129,9 @@ public class ErrorDialog extends MageDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-	private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
-		this.hideDialog();
-	}//GEN-LAST:event_btnOKActionPerformed
+    private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
+        this.hideDialog();
+    }//GEN-LAST:event_btnOKActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

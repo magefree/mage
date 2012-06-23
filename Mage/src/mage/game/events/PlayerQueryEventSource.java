@@ -42,79 +42,79 @@ import mage.game.permanent.Permanent;
  */
 public class PlayerQueryEventSource implements EventSource<PlayerQueryEvent>, Serializable {
 
-	protected final EventDispatcher<PlayerQueryEvent> dispatcher = new EventDispatcher<PlayerQueryEvent>() {};
+    protected final EventDispatcher<PlayerQueryEvent> dispatcher = new EventDispatcher<PlayerQueryEvent>() {};
 
-	@Override
-	public void addListener(Listener<PlayerQueryEvent> listener) {
-		dispatcher.addListener(listener);
-	}
+    @Override
+    public void addListener(Listener<PlayerQueryEvent> listener) {
+        dispatcher.addListener(listener);
+    }
 
-	public void ask(UUID playerId, String message) {
-		dispatcher.fireEvent(PlayerQueryEvent.askEvent(playerId, message));
-	}
+    public void ask(UUID playerId, String message) {
+        dispatcher.fireEvent(PlayerQueryEvent.askEvent(playerId, message));
+    }
 
-	public void select(UUID playerId, String message) {
-		dispatcher.fireEvent(PlayerQueryEvent.selectEvent(playerId, message));
-	}
+    public void select(UUID playerId, String message) {
+        dispatcher.fireEvent(PlayerQueryEvent.selectEvent(playerId, message));
+    }
 
-	public void chooseAbility(UUID playerId, String message, Collection<? extends ActivatedAbility> choices) {
-		dispatcher.fireEvent(PlayerQueryEvent.chooseAbilityEvent(playerId, message, choices));
-	}
+    public void chooseAbility(UUID playerId, String message, Collection<? extends ActivatedAbility> choices) {
+        dispatcher.fireEvent(PlayerQueryEvent.chooseAbilityEvent(playerId, message, choices));
+    }
 
-	public void choosePile(UUID playerId, String message, List<? extends Card> pile1, List<? extends Card> pile2) {
-		dispatcher.fireEvent(PlayerQueryEvent.choosePileEvent(playerId, message, pile1, pile2));
-	}
-    
-	public void chooseMode(UUID playerId, String message, Map<UUID, String> modes) {
-		dispatcher.fireEvent(PlayerQueryEvent.chooseModeEvent(playerId, message, modes));
-	}
+    public void choosePile(UUID playerId, String message, List<? extends Card> pile1, List<? extends Card> pile2) {
+        dispatcher.fireEvent(PlayerQueryEvent.choosePileEvent(playerId, message, pile1, pile2));
+    }
 
-	public void target(UUID playerId, String message, Set<UUID> targets, boolean required) {
-		dispatcher.fireEvent(PlayerQueryEvent.targetEvent(playerId, message, targets, required));
-	}
+    public void chooseMode(UUID playerId, String message, Map<UUID, String> modes) {
+        dispatcher.fireEvent(PlayerQueryEvent.chooseModeEvent(playerId, message, modes));
+    }
 
-	public void target(UUID playerId, String message, Set<UUID> targets, boolean required, Map<String, Serializable> options) {
-		dispatcher.fireEvent(PlayerQueryEvent.targetEvent(playerId, message, targets, required, options));
-	}
+    public void target(UUID playerId, String message, Set<UUID> targets, boolean required) {
+        dispatcher.fireEvent(PlayerQueryEvent.targetEvent(playerId, message, targets, required));
+    }
 
-	public void target(UUID playerId, String message, Cards cards, boolean required, Map<String, Serializable> options) {
-		dispatcher.fireEvent(PlayerQueryEvent.targetEvent(playerId, message, cards, required, options));
-	}
+    public void target(UUID playerId, String message, Set<UUID> targets, boolean required, Map<String, Serializable> options) {
+        dispatcher.fireEvent(PlayerQueryEvent.targetEvent(playerId, message, targets, required, options));
+    }
 
-	public void target(UUID playerId, String message, Cards cards) {
-		dispatcher.fireEvent(PlayerQueryEvent.lookEvent(playerId, message, cards));
-	}
+    public void target(UUID playerId, String message, Cards cards, boolean required, Map<String, Serializable> options) {
+        dispatcher.fireEvent(PlayerQueryEvent.targetEvent(playerId, message, cards, required, options));
+    }
 
-	public void target(UUID playerId, String message, List<TriggeredAbility> abilities) {
-		dispatcher.fireEvent(PlayerQueryEvent.targetEvent(playerId, message, abilities));
-	}
+    public void target(UUID playerId, String message, Cards cards) {
+        dispatcher.fireEvent(PlayerQueryEvent.lookEvent(playerId, message, cards));
+    }
 
-	public void target(UUID playerId, String message, List<Permanent> perms, boolean required) {
-		dispatcher.fireEvent(PlayerQueryEvent.targetEvent(playerId, message, perms, required));
-	}
+    public void target(UUID playerId, String message, List<TriggeredAbility> abilities) {
+        dispatcher.fireEvent(PlayerQueryEvent.targetEvent(playerId, message, abilities));
+    }
 
-	public void playMana(UUID playerId, String message) {
-		dispatcher.fireEvent(PlayerQueryEvent.playManaEvent(playerId, message));
-	}
+    public void target(UUID playerId, String message, List<Permanent> perms, boolean required) {
+        dispatcher.fireEvent(PlayerQueryEvent.targetEvent(playerId, message, perms, required));
+    }
 
-	public void amount(UUID playerId, String message, int min, int max) {
-		dispatcher.fireEvent(PlayerQueryEvent.amountEvent(playerId, message, min, max));
-	}
+    public void playMana(UUID playerId, String message) {
+        dispatcher.fireEvent(PlayerQueryEvent.playManaEvent(playerId, message));
+    }
 
-	public void choose(UUID playerId, String message, Set<String> choices) {
-		dispatcher.fireEvent(PlayerQueryEvent.chooseEvent(playerId, message, choices));
-	}
+    public void amount(UUID playerId, String message, int min, int max) {
+        dispatcher.fireEvent(PlayerQueryEvent.amountEvent(playerId, message, min, max));
+    }
 
-	public void playXMana(UUID playerId, String message) {
-		dispatcher.fireEvent(PlayerQueryEvent.playXManaEvent(playerId, message));
-	}
+    public void choose(UUID playerId, String message, Set<String> choices) {
+        dispatcher.fireEvent(PlayerQueryEvent.chooseEvent(playerId, message, choices));
+    }
 
-	public void pickCard(UUID playerId, String message, List<Card> booster, int time) {
-		dispatcher.fireEvent(PlayerQueryEvent.pickCard(playerId, message, booster, time));
-	}
+    public void playXMana(UUID playerId, String message) {
+        dispatcher.fireEvent(PlayerQueryEvent.playXManaEvent(playerId, message));
+    }
 
-	public void construct(UUID playerId, String message, int time) {
-		dispatcher.fireEvent(PlayerQueryEvent.construct(playerId, message, time));
-	}
+    public void pickCard(UUID playerId, String message, List<Card> booster, int time) {
+        dispatcher.fireEvent(PlayerQueryEvent.pickCard(playerId, message, booster, time));
+    }
+
+    public void construct(UUID playerId, String message, int time) {
+        dispatcher.fireEvent(PlayerQueryEvent.construct(playerId, message, time));
+    }
 
 }

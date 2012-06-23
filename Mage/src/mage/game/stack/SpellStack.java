@@ -40,25 +40,25 @@ import mage.game.events.GameEvent;
  */
 public class SpellStack extends ArrayDeque<StackObject> {
 
-	public SpellStack () {}
+    public SpellStack () {}
 
-	public SpellStack(final SpellStack stack) {
-		for (StackObject spell: stack) {
-			this.push(spell.copy());
-		}
-	}
+    public SpellStack(final SpellStack stack) {
+        for (StackObject spell: stack) {
+            this.push(spell.copy());
+        }
+    }
 
-	//resolve top StackObject
-	public void resolve(Game game) {
-		StackObject top = null;
-		try {
-			top = this.peek();
-			top.resolve(game);
-		} finally {
-			if (top != null)
-				this.remove(top);
-		}
-	}
+    //resolve top StackObject
+    public void resolve(Game game) {
+        StackObject top = null;
+        try {
+            top = this.peek();
+            top.resolve(game);
+        } finally {
+            if (top != null)
+                this.remove(top);
+        }
+    }
 
     public void remove(StackObject object) {
         for (StackObject spell: this) {
@@ -68,49 +68,49 @@ public class SpellStack extends ArrayDeque<StackObject> {
             }
         }
     }
-    
-	public boolean counter(UUID objectId, UUID sourceId, Game game) {
-		StackObject stackObject = getStackObject(objectId);
-		if (stackObject != null) {
-			if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER, objectId, sourceId, stackObject.getControllerId()))) {
-				if ( stackObject instanceof Spell ) {
-					game.rememberLKI(objectId, Zone.STACK, (Spell)stackObject);
-				}
-				this.remove(stackObject);
-				stackObject.counter(sourceId, game);
-				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTERED, objectId, sourceId, stackObject.getControllerId()));
-				return true;
-			}
-			return false;
-		}
-		return false;
-	}
 
-	public StackObject getStackObject(UUID id) {
-		for (StackObject stackObject: this) {
-			UUID objectId = stackObject.getId();
-			if (objectId.equals(id))
-				return stackObject;
-			UUID sourceId = stackObject.getSourceId();
-			if (sourceId.equals(id))
-				return stackObject;
-		}
-		return null;
-	}
+    public boolean counter(UUID objectId, UUID sourceId, Game game) {
+        StackObject stackObject = getStackObject(objectId);
+        if (stackObject != null) {
+            if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER, objectId, sourceId, stackObject.getControllerId()))) {
+                if ( stackObject instanceof Spell ) {
+                    game.rememberLKI(objectId, Zone.STACK, (Spell)stackObject);
+                }
+                this.remove(stackObject);
+                stackObject.counter(sourceId, game);
+                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTERED, objectId, sourceId, stackObject.getControllerId()));
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
 
-	public Spell getSpell(UUID id) {
-		for (StackObject stackObject: this) {
-			if (stackObject.getId().equals(id)) {
-				if (stackObject instanceof Spell)
-					return (Spell)stackObject;
-				else
-					return null;
-			}
-		}
-		return null;
-	}
+    public StackObject getStackObject(UUID id) {
+        for (StackObject stackObject: this) {
+            UUID objectId = stackObject.getId();
+            if (objectId.equals(id))
+                return stackObject;
+            UUID sourceId = stackObject.getSourceId();
+            if (sourceId.equals(id))
+                return stackObject;
+        }
+        return null;
+    }
 
-	public SpellStack copy() {
-		return new SpellStack(this);
-	}
+    public Spell getSpell(UUID id) {
+        for (StackObject stackObject: this) {
+            if (stackObject.getId().equals(id)) {
+                if (stackObject instanceof Spell)
+                    return (Spell)stackObject;
+                else
+                    return null;
+            }
+        }
+        return null;
+    }
+
+    public SpellStack copy() {
+        return new SpellStack(this);
+    }
 }

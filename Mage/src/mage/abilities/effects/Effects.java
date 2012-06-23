@@ -42,59 +42,59 @@ import java.util.Set;
  */
 public class Effects extends ArrayList<Effect> {
 
-	public Effects() {}
-	
-	public Effects(final Effects effects) {
-		for (Effect effect: effects) {
-			this.add(effect.copy());
-		}
-	}
+    public Effects() {}
 
-	public Effects copy() {
-		return new Effects(this);
-	}
+    public Effects(final Effects effects) {
+        for (Effect effect: effects) {
+            this.add(effect.copy());
+        }
+    }
 
-	public String getText(Mode mode) {
-		StringBuilder sbText = new StringBuilder();
-		for (Effect effect: this) {
+    public Effects copy() {
+        return new Effects(this);
+    }
+
+    public String getText(Mode mode) {
+        StringBuilder sbText = new StringBuilder();
+        for (Effect effect: this) {
             String rule = effect.getText(mode);
             if (rule != null) {
-			    sbText.append(effect.getText(mode)).append(". ");
+                sbText.append(effect.getText(mode)).append(". ");
             }
-		}
-		return sbText.toString();
-	}
+        }
+        return sbText.toString();
+    }
 
-	public boolean hasOutcome(Outcome outcome) {
-		for (Effect effect: this) {
-			if (effect.getOutcome() == outcome)
-				return true;
-		}
-		return false;
-	}
+    public boolean hasOutcome(Outcome outcome) {
+        for (Effect effect: this) {
+            if (effect.getOutcome() == outcome)
+                return true;
+        }
+        return false;
+    }
 
-	public List<Outcome> getOutcomes() {
-		Set<Outcome> outcomes = new HashSet<Outcome>();
-		for (Effect effect: this) {
-			outcomes.add(effect.getOutcome());
-		}
-		return new ArrayList(outcomes);
-	}
+    public List<Outcome> getOutcomes() {
+        Set<Outcome> outcomes = new HashSet<Outcome>();
+        for (Effect effect: this) {
+            outcomes.add(effect.getOutcome());
+        }
+        return new ArrayList(outcomes);
+    }
 
-	public int getOutcomeTotal() {
-		int total = 0;
-		for (Effect effect: this) {
-			if (effect.getOutcome().isGood())
-				total++;
-			else
-				total--;
-		}
-		return total;
-	}
+    public int getOutcomeTotal() {
+        int total = 0;
+        for (Effect effect: this) {
+            if (effect.getOutcome().isGood())
+                total++;
+            else
+                total--;
+        }
+        return total;
+    }
 
-	public void newId() {
-		for (Effect effect: this) {
-			effect.newId();
-		}
-	}
+    public void newId() {
+        for (Effect effect: this) {
+            effect.newId();
+        }
+    }
 }

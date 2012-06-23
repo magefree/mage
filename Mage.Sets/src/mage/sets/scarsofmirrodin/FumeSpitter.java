@@ -51,7 +51,7 @@ public class FumeSpitter extends CardImpl<FumeSpitter> {
         super(ownerId, 63, "Fume Spitter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Horror");
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.M1M1.createInstance()), new SacrificeSourceCost());

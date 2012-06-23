@@ -38,7 +38,7 @@ import mage.game.events.GameEvent;
  */
 public interface ReplacementEffect<T extends ReplacementEffect<T>> extends ContinuousEffect<T> {
 
-	public boolean replaceEvent(GameEvent event, Ability source, Game game);
-	public boolean applies(GameEvent event, Ability source, Game game);
+    public boolean replaceEvent(GameEvent event, Ability source, Game game);
+    public boolean applies(GameEvent event, Ability source, Game game);
 
 }

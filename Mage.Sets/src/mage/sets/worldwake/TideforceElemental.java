@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author Loki
  */
 public class TideforceElemental extends CardImpl<TideforceElemental> {
-    
+
   //  private final static String text = "You may tap or untap another target creature";
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
 

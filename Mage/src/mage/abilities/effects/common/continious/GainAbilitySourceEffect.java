@@ -43,40 +43,40 @@ import mage.game.permanent.Permanent;
  */
 public class GainAbilitySourceEffect extends ContinuousEffectImpl<GainAbilitySourceEffect> {
 
-	protected Ability ability;
+    protected Ability ability;
 
-	/**
-	 * Add ability with Duration.WhileOnBattlefield
-	 * @param ability
-	 */
-	public GainAbilitySourceEffect(Ability ability) {
-		this(ability, Duration.WhileOnBattlefield);
-	}
+    /**
+     * Add ability with Duration.WhileOnBattlefield
+     * @param ability
+     */
+    public GainAbilitySourceEffect(Ability ability) {
+        this(ability, Duration.WhileOnBattlefield);
+    }
 
-	public GainAbilitySourceEffect(Ability ability, Duration duration) {
-		super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-		this.ability = ability;
-		staticText = "{this} gains \"" + ability.getRule() + "\"" + duration.toString();
-	}
+    public GainAbilitySourceEffect(Ability ability, Duration duration) {
+        super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+        this.ability = ability;
+        staticText = "{this} gains \"" + ability.getRule() + "\"" + duration.toString();
+    }
 
-	public GainAbilitySourceEffect(final GainAbilitySourceEffect effect) {
-		super(effect);
-		this.ability = effect.ability.copy();
-	}
+    public GainAbilitySourceEffect(final GainAbilitySourceEffect effect) {
+        super(effect);
+        this.ability = effect.ability.copy();
+    }
 
-	@Override
-	public GainAbilitySourceEffect copy() {
-		return new GainAbilitySourceEffect(this);
-	}
+    @Override
+    public GainAbilitySourceEffect copy() {
+        return new GainAbilitySourceEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getSourceId());
-		if (permanent != null) {
-			permanent.addAbility(ability, game);
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            permanent.addAbility(ability, game);
+            return true;
+        }
+        return false;
+    }
 
 }

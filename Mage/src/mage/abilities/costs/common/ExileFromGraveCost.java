@@ -46,45 +46,45 @@ import java.util.UUID;
 public class ExileFromGraveCost extends CostImpl<ExileFromGraveCost> {
 
     public ExileFromGraveCost(TargetCardInYourGraveyard target) {
-		this.addTarget(target);
+        this.addTarget(target);
         if (target.getMaxNumberOfTargets() > 1)
             this.text = "Exile " + target.getMaxNumberOfTargets() + " " + target.getTargetName() + " from your graveyard";
         else
-		    this.text = "Exile " + target.getTargetName() + " from your graveyard";
-	}
+            this.text = "Exile " + target.getTargetName() + " from your graveyard";
+    }
 
     public ExileFromGraveCost(TargetCardInYourGraveyard target, String text) {
-		this(target);
-		this.text = text;
-	}
+        this(target);
+        this.text = text;
+    }
 
-	public ExileFromGraveCost(ExileFromGraveCost cost) {
-		super(cost);
-	}
+    public ExileFromGraveCost(ExileFromGraveCost cost) {
+        super(cost);
+    }
 
-	@Override
-	public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-		if (targets.choose(Outcome.Exile, controllerId, sourceId, game)) {
-			Player player = game.getPlayer(controllerId);
-			for (UUID targetId: targets.get(0).getTargets()) {
-				Card card = player.getGraveyard().get(targetId, game);
-				if (card == null) {
-					return false;
+    @Override
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+        if (targets.choose(Outcome.Exile, controllerId, sourceId, game)) {
+            Player player = game.getPlayer(controllerId);
+            for (UUID targetId: targets.get(0).getTargets()) {
+                Card card = player.getGraveyard().get(targetId, game);
+                if (card == null) {
+                    return false;
                 }
                 paid |= card.moveToZone(Constants.Zone.EXILED, sourceId, game, false);
-			}
-		}
-		return paid;
-	}
+            }
+        }
+        return paid;
+    }
 
-	@Override
-	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-		return targets.canChoose(controllerId, game);
-	}
+    @Override
+    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+        return targets.canChoose(controllerId, game);
+    }
 
-	@Override
-	public ExileFromGraveCost copy() {
-		return new ExileFromGraveCost(this);
-	}
+    @Override
+    public ExileFromGraveCost copy() {
+        return new ExileFromGraveCost(this);
+    }
 
 }

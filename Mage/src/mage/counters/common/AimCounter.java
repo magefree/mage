@@ -46,7 +46,7 @@ public class AimCounter extends Counter<AimCounter> {
         super("aim");
         this.count = amount;
     }
-    
+
 //    public AimCounter(DynamicValue amountDynamicValue) {
 //        super("aim");
 //        this.count = StaticValue(amountDynamicValue);

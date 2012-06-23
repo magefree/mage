@@ -41,25 +41,25 @@ import mage.cards.CardImpl;
  */
 public class AssaultGriffin extends CardImpl<AssaultGriffin> {
 
-	public AssaultGriffin(UUID ownerId) {
-		super(ownerId, 6, "Assault Griffin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
-		this.expansionSetCode = "M11";
-		this.color.setWhite(true);
-		this.subtype.add("Griffin");
-		this.power = new MageInt(3);
-		this.toughness = new MageInt(2);
+    public AssaultGriffin(UUID ownerId) {
+        super(ownerId, 6, "Assault Griffin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
+        this.expansionSetCode = "M11";
+        this.color.setWhite(true);
+        this.subtype.add("Griffin");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(2);
 
-		this.addAbility(FlyingAbility.getInstance());
-	}
+        this.addAbility(FlyingAbility.getInstance());
+    }
 
-	public AssaultGriffin(final AssaultGriffin card) {
-		super(card);
-	}
+    public AssaultGriffin(final AssaultGriffin card) {
+        super(card);
+    }
 
-	@Override
-	public AssaultGriffin copy() {
-		return new AssaultGriffin(this);
-	}
+    @Override
+    public AssaultGriffin copy() {
+        return new AssaultGriffin(this);
+    }
 
 }
 

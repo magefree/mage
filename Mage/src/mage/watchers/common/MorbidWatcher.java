@@ -50,7 +50,7 @@ public class MorbidWatcher extends WatcherImpl<MorbidWatcher> {
     public MorbidWatcher(final MorbidWatcher watcher) {
         super(watcher);
     }
-    
+
     @Override
     public void watch(GameEvent event, Game game) {
         if (condition == true) //no need to check - condition has already occured
@@ -67,5 +67,5 @@ public class MorbidWatcher extends WatcherImpl<MorbidWatcher> {
     public MorbidWatcher copy() {
         return new MorbidWatcher(this);
     }
-    
+
 }

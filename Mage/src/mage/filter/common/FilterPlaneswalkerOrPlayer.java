@@ -44,36 +44,36 @@ import java.util.UUID;
  */
 public class FilterPlaneswalkerOrPlayer extends FilterImpl<Object, FilterPlaneswalkerOrPlayer> implements Filter<Object> {
 
-	protected FilterPlaneswalkerPermanent planeswalkerFilter;
-	protected FilterPlayer playerFilter;
+    protected FilterPlaneswalkerPermanent planeswalkerFilter;
+    protected FilterPlayer playerFilter;
 
-	public FilterPlaneswalkerOrPlayer(Set<UUID> defenders) {
-		super("planeswalker or player");
-		planeswalkerFilter = new FilterPlaneswalkerPermanent();
-		planeswalkerFilter.getControllerId().addAll(defenders);
-		playerFilter = new FilterPlayer();
-		playerFilter.getPlayerId().addAll(defenders);
-	}
+    public FilterPlaneswalkerOrPlayer(Set<UUID> defenders) {
+        super("planeswalker or player");
+        planeswalkerFilter = new FilterPlaneswalkerPermanent();
+        planeswalkerFilter.getControllerId().addAll(defenders);
+        playerFilter = new FilterPlayer();
+        playerFilter.getPlayerId().addAll(defenders);
+    }
 
-	public FilterPlaneswalkerOrPlayer(final FilterPlaneswalkerOrPlayer filter) {
-		super(filter);
-		this.planeswalkerFilter = filter.planeswalkerFilter.copy();
-		this.playerFilter = filter.playerFilter.copy();
-	}
+    public FilterPlaneswalkerOrPlayer(final FilterPlaneswalkerOrPlayer filter) {
+        super(filter);
+        this.planeswalkerFilter = filter.planeswalkerFilter.copy();
+        this.playerFilter = filter.playerFilter.copy();
+    }
 
-	@Override
-	public boolean match(Object o, Game game) {
-		if (o instanceof Player) {
-			return playerFilter.match((Player)o, game);
-		}
-		else if (o instanceof Permanent) {
-			return planeswalkerFilter.match((Permanent)o, game);
-		}
-		return notFilter;
-	}
+    @Override
+    public boolean match(Object o, Game game) {
+        if (o instanceof Player) {
+            return playerFilter.match((Player)o, game);
+        }
+        else if (o instanceof Permanent) {
+            return planeswalkerFilter.match((Permanent)o, game);
+        }
+        return notFilter;
+    }
 
-	@Override
-	public FilterPlaneswalkerOrPlayer copy() {
-		return new FilterPlaneswalkerOrPlayer(this);
-	}
+    @Override
+    public FilterPlaneswalkerOrPlayer copy() {
+        return new FilterPlaneswalkerOrPlayer(this);
+    }
 }

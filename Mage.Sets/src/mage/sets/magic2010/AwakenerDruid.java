@@ -47,45 +47,45 @@ import mage.target.common.TargetLandPermanent;
  */
 public class AwakenerDruid extends CardImpl<AwakenerDruid> {
 
-	private static final FilterLandPermanent filter = new FilterLandPermanent("Forest");
+    private static final FilterLandPermanent filter = new FilterLandPermanent("Forest");
 
-	static {
-		filter.getSubtype().add("Forest");
-	}
+    static {
+        filter.getSubtype().add("Forest");
+    }
 
-	public AwakenerDruid(UUID ownerId) {
-		super(ownerId, 167, "Awakener Druid", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
-		this.expansionSetCode = "M10";
-		this.color.setGreen(true);
-		this.subtype.add("Human");
-		this.subtype.add("Druid");
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
-		Ability ability = new EntersBattlefieldTriggeredAbility(new BecomesCreatureTargetEffect(new AwakenerDruidToken(), "land", Duration.WhileOnBattlefield), false);
-		ability.addTarget(new TargetLandPermanent(filter));
-		this.addAbility(ability);
-	}
+    public AwakenerDruid(UUID ownerId) {
+        super(ownerId, 167, "Awakener Druid", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
+        this.expansionSetCode = "M10";
+        this.color.setGreen(true);
+        this.subtype.add("Human");
+        this.subtype.add("Druid");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new BecomesCreatureTargetEffect(new AwakenerDruidToken(), "land", Duration.WhileOnBattlefield), false);
+        ability.addTarget(new TargetLandPermanent(filter));
+        this.addAbility(ability);
+    }
 
 
-	public AwakenerDruid(final AwakenerDruid card) {
-		super(card);
-	}
+    public AwakenerDruid(final AwakenerDruid card) {
+        super(card);
+    }
 
-	@Override
-	public AwakenerDruid copy() {
-		return new AwakenerDruid(this);
-	}
+    @Override
+    public AwakenerDruid copy() {
+        return new AwakenerDruid(this);
+    }
 }
 
 class AwakenerDruidToken extends Token {
 
-	public AwakenerDruidToken() {
-		super("", "4/5 green Treefolk creature");
-		cardType.add(CardType.CREATURE);
-		subtype.add("Treefolk");
-		color.setGreen(true);
-		power = new MageInt(4);
-		toughness = new MageInt(5);
-	}
+    public AwakenerDruidToken() {
+        super("", "4/5 green Treefolk creature");
+        cardType.add(CardType.CREATURE);
+        subtype.add("Treefolk");
+        color.setGreen(true);
+        power = new MageInt(4);
+        toughness = new MageInt(5);
+    }
 
 }

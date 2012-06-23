@@ -47,68 +47,68 @@ import mage.game.permanent.Permanent;
  */
 public class Juggernaut extends CardImpl<Juggernaut> {
 
-	public Juggernaut(UUID ownerId) {
-		super(ownerId, 328, "Juggernaut", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
-		this.expansionSetCode = "10E";
-		this.subtype.add("Juggernaut");
-		this.power = new MageInt(5);
-		this.toughness = new MageInt(3);
+    public Juggernaut(UUID ownerId) {
+        super(ownerId, 328, "Juggernaut", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
+        this.expansionSetCode = "10E";
+        this.subtype.add("Juggernaut");
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(3);
 
-		this.addAbility(new AttacksEachTurnStaticAbility());
-		this.addAbility(new JuggernautAbility());
-	}
+        this.addAbility(new AttacksEachTurnStaticAbility());
+        this.addAbility(new JuggernautAbility());
+    }
 
-	public Juggernaut(final Juggernaut card) {
-		super(card);
-	}
+    public Juggernaut(final Juggernaut card) {
+        super(card);
+    }
 
-	@Override
-	public Juggernaut copy() {
-		return new Juggernaut(this);
-	}
+    @Override
+    public Juggernaut copy() {
+        return new Juggernaut(this);
+    }
 
 }
 
 class JuggernautAbility extends EvasionAbility<JuggernautAbility> {
 
-	public JuggernautAbility() {
-		this.addEffect(new JuggernautEffect());
-	}
+    public JuggernautAbility() {
+        this.addEffect(new JuggernautEffect());
+    }
 
-	public JuggernautAbility(final JuggernautAbility ability) {
-		super(ability);
-	}
+    public JuggernautAbility(final JuggernautAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public String getRule() {
-		return "{this} can't be blocked by Walls.";
-	}
+    @Override
+    public String getRule() {
+        return "{this} can't be blocked by Walls.";
+    }
 
-	@Override
-	public JuggernautAbility copy() {
-		return new JuggernautAbility(this);
-	}
+    @Override
+    public JuggernautAbility copy() {
+        return new JuggernautAbility(this);
+    }
 
 }
 
 class JuggernautEffect extends CantBlockSourceEffect {
 
-	public JuggernautEffect() {
-		super(Duration.WhileOnBattlefield);
-	}
+    public JuggernautEffect() {
+        super(Duration.WhileOnBattlefield);
+    }
 
-	public JuggernautEffect(final JuggernautEffect effect) {
-		super(effect);
-	}
+    public JuggernautEffect(final JuggernautEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-		return !blocker.hasSubtype("Wall");
-	}
+    @Override
+    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        return !blocker.hasSubtype("Wall");
+    }
 
-	@Override
-	public JuggernautEffect copy() {
-		return new JuggernautEffect(this);
-	}
+    @Override
+    public JuggernautEffect copy() {
+        return new JuggernautEffect(this);
+    }
 
 }

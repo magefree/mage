@@ -43,27 +43,27 @@ import mage.cards.CardImpl;
  */
 public class GoldenglowMoth extends CardImpl<GoldenglowMoth> {
 
-	public GoldenglowMoth(UUID ownerId) {
-		super(ownerId, 15, "Goldenglow Moth", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Insect");
-        
-		this.color.setWhite(true);
-		this.power = new MageInt(0);
-		this.toughness = new MageInt(1);
+    public GoldenglowMoth(UUID ownerId) {
+        super(ownerId, 15, "Goldenglow Moth", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Insect");
 
-		this.addAbility(FlyingAbility.getInstance());
-		this.addAbility(new BlocksTriggeredAbility(new GainLifeEffect(4), true));
+        this.color.setWhite(true);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(1);
 
-	}
+        this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(new BlocksTriggeredAbility(new GainLifeEffect(4), true));
 
-	public GoldenglowMoth(final GoldenglowMoth card) {
-		super(card);
-	}
+    }
 
-	@Override
-	public GoldenglowMoth copy() {
-		return new GoldenglowMoth(this);
-	}
+    public GoldenglowMoth(final GoldenglowMoth card) {
+        super(card);
+    }
+
+    @Override
+    public GoldenglowMoth copy() {
+        return new GoldenglowMoth(this);
+    }
 
 }

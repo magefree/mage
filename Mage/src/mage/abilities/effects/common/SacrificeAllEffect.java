@@ -47,62 +47,71 @@ import java.util.UUID;
  */
 public class SacrificeAllEffect extends OneShotEffect<SacrificeAllEffect> {
 
-	protected int amount;
-	protected FilterControlledPermanent filter;
+    protected int amount;
+    protected FilterControlledPermanent filter;
 
-	public SacrificeAllEffect(FilterControlledPermanent filter) {
-		this(1, filter);
-	}
+    public SacrificeAllEffect(FilterControlledPermanent filter) {
+        this(1, filter);
+    }
 
-	public SacrificeAllEffect(int amount, FilterControlledPermanent filter) {
-		super(Outcome.Sacrifice);
-		this.amount = amount;
-		this.filter = filter;
+    public SacrificeAllEffect(int amount, FilterControlledPermanent filter) {
+        super(Outcome.Sacrifice);
+        this.amount = amount;
+        this.filter = filter;
                 setText();
-	}
+    }
 
-	public SacrificeAllEffect(final SacrificeAllEffect effect) {
-		super(effect);
-		this.amount = effect.amount;
-		this.filter = effect.filter.copy();
-	}
+    public SacrificeAllEffect(final SacrificeAllEffect effect) {
+        super(effect);
+        this.amount = effect.amount;
+        this.filter = effect.filter.copy();
+    }
 
-	@Override
-	public SacrificeAllEffect copy() {
-		return new SacrificeAllEffect(this);
-	}
+    @Override
+    public SacrificeAllEffect copy() {
+        return new SacrificeAllEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		List<UUID> perms = new ArrayList<UUID>();
-		for (Player player: game.getPlayers().values()) {
-			int numTargets = Math.min(amount, game.getBattlefield().countAll(filter, player.getId(), game));
-			TargetControlledPermanent target = new TargetControlledPermanent(numTargets, numTargets, filter, false);
-            if (target.canChoose(player.getId(), game)) {
-				while (!target.isChosen()) {
-					player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
-				}
-				perms.addAll(target.getTargets());
-			}
-		}
-		for (UUID permID: perms) {
-			Permanent permanent = game.getPermanent(permID);
-			if (permanent != null)
-				permanent.sacrifice(source.getSourceId(), game);
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
 
-	private void setText() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("Each players sacrifices ");
-		if (amount > 1)
-			sb.append(amount).append(" ");
-		else
-			sb.append("a ");
-		sb.append(filter.getMessage());
-		staticText = sb.toString();
-	}
+        List<UUID> perms = new ArrayList<UUID>();
+        for (UUID playerId : controller.getInRange()) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                int numTargets = Math.min(amount, game.getBattlefield().countAll(filter, player.getId(), game));
+                TargetControlledPermanent target = new TargetControlledPermanent(numTargets, numTargets, filter, false);
+                if (target.canChoose(player.getId(), game)) {
+                    while (!target.isChosen()) {
+                        player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+                    }
+                    perms.addAll(target.getTargets());
+                }
+            }
+        }
+        for (UUID permID : perms) {
+            Permanent permanent = game.getPermanent(permID);
+            if (permanent != null) {
+                permanent.sacrifice(source.getSourceId(), game);
+            }
+        }
+        return true;
+    }
+
+    private void setText() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Each players sacrifices ");
+        if (amount > 1)
+            sb.append(amount).append(" ");
+        else
+            sb.append("a ");
+        sb.append(filter.getMessage());
+        staticText = sb.toString();
+    }
 
 
 }

@@ -43,35 +43,35 @@ import org.apache.log4j.Logger;
  */
 public class DeckUtil {
 
-	private static final transient Logger log = Logger.getLogger(DeckUtil.class);
+    private static final transient Logger log = Logger.getLogger(DeckUtil.class);
 
-	private DeckUtil() {
-	}
+    private DeckUtil() {
+    }
 
-	public static Deck construct(DeckView view) {
-		Deck deck = new Deck();
-		for (SimpleCardView cardView : view.getCards().values()) {
-			ExpansionSet set = Sets.findSet(cardView.getExpansionSetCode());
-			if (set != null) {
-				Card card = set.findCard(cardView.getCardNumber());
-				if (card != null) {
-					deck.getCards().add(card);
-				} else {
-					log.fatal("(Deck constructing) Couldn't find card: set=" + cardView.getExpansionSetCode() + ", cid=" + Integer.valueOf(cardView.getCardNumber()));
-				}
-			}
-		}
-		for (SimpleCardView cardView : view.getSideboard().values()) {
-			ExpansionSet set = Sets.findSet(cardView.getExpansionSetCode());
-			if (set != null) {
-				Card card = set.findCard(cardView.getCardNumber());
-				if (card != null) {
-					deck.getSideboard().add(card);
-				} else {
-					log.fatal("(Deck constructing) Couldn't find card: set=" + cardView.getExpansionSetCode() + ", cid=" + Integer.valueOf(cardView.getCardNumber()));
-				}
-			}
-		}
-		return deck;
-	}
+    public static Deck construct(DeckView view) {
+        Deck deck = new Deck();
+        for (SimpleCardView cardView : view.getCards().values()) {
+            ExpansionSet set = Sets.findSet(cardView.getExpansionSetCode());
+            if (set != null) {
+                Card card = set.findCard(cardView.getCardNumber());
+                if (card != null) {
+                    deck.getCards().add(card);
+                } else {
+                    log.fatal("(Deck constructing) Couldn't find card: set=" + cardView.getExpansionSetCode() + ", cid=" + Integer.valueOf(cardView.getCardNumber()));
+                }
+            }
+        }
+        for (SimpleCardView cardView : view.getSideboard().values()) {
+            ExpansionSet set = Sets.findSet(cardView.getExpansionSetCode());
+            if (set != null) {
+                Card card = set.findCard(cardView.getCardNumber());
+                if (card != null) {
+                    deck.getSideboard().add(card);
+                } else {
+                    log.fatal("(Deck constructing) Couldn't find card: set=" + cardView.getExpansionSetCode() + ", cid=" + Integer.valueOf(cardView.getCardNumber()));
+                }
+            }
+        }
+        return deck;
+    }
 }

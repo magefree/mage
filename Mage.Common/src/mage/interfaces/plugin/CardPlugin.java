@@ -25,9 +25,9 @@ import java.util.UUID;
  * @author nantuko
  */
 public interface CardPlugin extends Plugin {
-	MagePermanent getMagePermanent(PermanentView permanent, Dimension dimension, UUID gameId, ActionCallback callback, boolean canBeFoil, boolean loadImage);
-	MagePermanent getMageCard(CardView permanent, Dimension dimension, UUID gameId, ActionCallback callback, boolean canBeFoil, boolean loadImage);
-	int sortPermanents(Map<String, JComponent> ui, Collection<MagePermanent> cards, Map<String, String> options);
+    MagePermanent getMagePermanent(PermanentView permanent, Dimension dimension, UUID gameId, ActionCallback callback, boolean canBeFoil, boolean loadImage);
+    MagePermanent getMageCard(CardView permanent, Dimension dimension, UUID gameId, ActionCallback callback, boolean canBeFoil, boolean loadImage);
+    int sortPermanents(Map<String, JComponent> ui, Collection<MagePermanent> cards, Map<String, String> options);
 
     /**
      * Check for new images.
@@ -36,7 +36,7 @@ public interface CardPlugin extends Plugin {
      * @param imagesPath Path to check in. Can be null, in such case default path should be used.
      */
     public boolean newImages(Set<Card> allCards, String imagesPath);
-    
+
     /**
      * Download images.
      *
@@ -50,11 +50,11 @@ public interface CardPlugin extends Plugin {
      *
      * @param imagesPath Path to check in and store symbols to. Can be null, in such case default path should be used.
      */
-	void downloadSymbols(String imagesPath);
+    void downloadSymbols(String imagesPath);
 
-	Image getManaSymbolImage(String symbol);
-	void onAddCard(MagePermanent card, int count);
-	void onRemoveCard(MagePermanent card, int count);
+    Image getManaSymbolImage(String symbol);
+    void onAddCard(MagePermanent card, int count);
+    void onRemoveCard(MagePermanent card, int count);
     JComponent getCardInfoPane();
-	BufferedImage getOriginalImage(CardView card);
+    BufferedImage getOriginalImage(CardView card);
 }

@@ -56,13 +56,13 @@ public class DormantGomazoa extends CardImpl<DormantGomazoa> {
         this.toughness = new MageInt(5);
 
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // Dormant Gomazoa enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        
+
         // Dormant Gomazoa doesn't untap during your untap step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipUntapSourceEffect()));
-        
+
         // Whenever you become the target of a spell, you may untap Dormant Gomazoa.
         this.addAbility(new BecomesTargetControllerSpellTriggeredAbility(new UntapSourceEffect(), true));
     }

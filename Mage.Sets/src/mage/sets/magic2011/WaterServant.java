@@ -45,25 +45,25 @@ import mage.cards.CardImpl;
  */
 public class WaterServant extends CardImpl<WaterServant> {
 
-	public WaterServant(UUID ownerId) {
-		super(ownerId, 80, "Water Servant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Elemental");
-		this.color.setBlue(true);
-		this.power = new MageInt(3);
-		this.toughness = new MageInt(4);
+    public WaterServant(UUID ownerId) {
+        super(ownerId, 80, "Water Servant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Elemental");
+        this.color.setBlue(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(4);
 
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl("{U}")));
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(-1, 1, Duration.EndOfTurn), new ManaCostsImpl("{U}")));
-	}
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl("{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(-1, 1, Duration.EndOfTurn), new ManaCostsImpl("{U}")));
+    }
 
-	public WaterServant(final WaterServant card) {
-		super(card);
-	}
+    public WaterServant(final WaterServant card) {
+        super(card);
+    }
 
-	@Override
-	public WaterServant copy() {
-		return new WaterServant(this);
-	}
+    @Override
+    public WaterServant copy() {
+        return new WaterServant(this);
+    }
 
 }

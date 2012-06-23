@@ -45,23 +45,23 @@ import java.util.UUID;
  */
 public class BoneyardWurm extends CardImpl<BoneyardWurm> {
 
-	public BoneyardWurm(UUID ownerId) {
-		super(ownerId, 171, "Boneyard Wurm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-		this.expansionSetCode = "ISD";
-		this.subtype.add("Wurm");
-		this.color.setGreen(true);
+    public BoneyardWurm(UUID ownerId) {
+        super(ownerId, 171, "Boneyard Wurm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
+        this.expansionSetCode = "ISD";
+        this.subtype.add("Wurm");
+        this.color.setGreen(true);
 
-		// Boneyard Wurm's power and toughness are each equal to the number of creature cards in your graveyard.
-		DynamicValue value = new CardsInControllerGraveyardCount(new FilterCreatureCard());
-		this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(value, Constants.Duration.EndOfGame)));
-	}
+        // Boneyard Wurm's power and toughness are each equal to the number of creature cards in your graveyard.
+        DynamicValue value = new CardsInControllerGraveyardCount(new FilterCreatureCard());
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(value, Constants.Duration.EndOfGame)));
+    }
 
-	public BoneyardWurm(final BoneyardWurm card) {
-		super(card);
-	}
+    public BoneyardWurm(final BoneyardWurm card) {
+        super(card);
+    }
 
-	@Override
-	public BoneyardWurm copy() {
-		return new BoneyardWurm(this);
-	}
+    @Override
+    public BoneyardWurm copy() {
+        return new BoneyardWurm(this);
+    }
 }

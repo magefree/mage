@@ -46,7 +46,7 @@ public class DevotedRetainer extends CardImpl<DevotedRetainer> {
         this.expansionSetCode = "CHK";
         this.subtype.add("Human");
         this.subtype.add("Samurai");
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(new BushidoAbility(1));

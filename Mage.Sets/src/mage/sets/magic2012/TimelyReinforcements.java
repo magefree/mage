@@ -48,72 +48,72 @@ import java.util.UUID;
  */
 public class TimelyReinforcements extends CardImpl<TimelyReinforcements> {
 
-	public TimelyReinforcements(UUID ownerId) {
-		super(ownerId, 40, "Timely Reinforcements", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");
-		this.expansionSetCode = "M12";
-		this.color.setWhite(true);
+    public TimelyReinforcements(UUID ownerId) {
+        super(ownerId, 40, "Timely Reinforcements", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");
+        this.expansionSetCode = "M12";
+        this.color.setWhite(true);
 
-		// If you have less life than an opponent, you gain 6 life. If you control fewer creatures than an opponent, put three 1/1 white Soldier creature tokens onto the battlefield.
-		this.getSpellAbility().addEffect(new TimelyReinforcementsEffect());
-	}
+        // If you have less life than an opponent, you gain 6 life. If you control fewer creatures than an opponent, put three 1/1 white Soldier creature tokens onto the battlefield.
+        this.getSpellAbility().addEffect(new TimelyReinforcementsEffect());
+    }
 
-	public TimelyReinforcements(final TimelyReinforcements card) {
-		super(card);
-	}
+    public TimelyReinforcements(final TimelyReinforcements card) {
+        super(card);
+    }
 
-	@Override
-	public TimelyReinforcements copy() {
-		return new TimelyReinforcements(this);
-	}
+    @Override
+    public TimelyReinforcements copy() {
+        return new TimelyReinforcements(this);
+    }
 }
 
 class TimelyReinforcementsEffect extends OneShotEffect<TimelyReinforcementsEffect> {
 
-	public TimelyReinforcementsEffect() {
-		super(Constants.Outcome.Benefit);
-		staticText = "If you have less life than an opponent, you gain 6 life. If you control fewer creatures than an opponent, put three 1/1 white Soldier creature tokens onto the battlefield";
-	}
+    public TimelyReinforcementsEffect() {
+        super(Constants.Outcome.Benefit);
+        staticText = "If you have less life than an opponent, you gain 6 life. If you control fewer creatures than an opponent, put three 1/1 white Soldier creature tokens onto the battlefield";
+    }
 
-	public TimelyReinforcementsEffect(TimelyReinforcementsEffect effect) {
-		super(effect);
-	}
+    public TimelyReinforcementsEffect(TimelyReinforcementsEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player controller = game.getPlayer(source.getControllerId());
-		if (controller != null) {
-			boolean lessCreatures = false;
-			boolean lessLife = false;
-			FilterPermanent filter= new FilterCreaturePermanent();
-			int count = game.getBattlefield().countAll(filter, controller.getId(), game);
-			for (UUID uuid : game.getOpponents(controller.getId())) {
-				Player opponent = game.getPlayer(uuid);
-				if (opponent != null) {
-					if (opponent.getLife() > controller.getLife()) {
-						 lessLife = true;
-					}
-					if (game.getBattlefield().countAll(filter, uuid, game) > count) {
-						lessCreatures = true;
-					}
-				}
-				if ( lessLife && lessCreatures) { // no need to search further
-					break;
-				}
-			}
-			if (lessLife) {
-				controller.gainLife(6, game);
-			}
-			if (lessCreatures) {
-				Effect effect = new CreateTokenEffect(new SoldierToken(), 3);
-				effect.apply(game, source);
-			}
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            boolean lessCreatures = false;
+            boolean lessLife = false;
+            FilterPermanent filter= new FilterCreaturePermanent();
+            int count = game.getBattlefield().countAll(filter, controller.getId(), game);
+            for (UUID uuid : game.getOpponents(controller.getId())) {
+                Player opponent = game.getPlayer(uuid);
+                if (opponent != null) {
+                    if (opponent.getLife() > controller.getLife()) {
+                         lessLife = true;
+                    }
+                    if (game.getBattlefield().countAll(filter, uuid, game) > count) {
+                        lessCreatures = true;
+                    }
+                }
+                if ( lessLife && lessCreatures) { // no need to search further
+                    break;
+                }
+            }
+            if (lessLife) {
+                controller.gainLife(6, game);
+            }
+            if (lessCreatures) {
+                Effect effect = new CreateTokenEffect(new SoldierToken(), 3);
+                effect.apply(game, source);
+            }
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public TimelyReinforcementsEffect copy() {
-		return new TimelyReinforcementsEffect(this);
-	}
+    @Override
+    public TimelyReinforcementsEffect copy() {
+        return new TimelyReinforcementsEffect(this);
+    }
 }

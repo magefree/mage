@@ -49,32 +49,32 @@ public class EarthServant extends CardImpl<EarthServant> {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Mountain you control");
 
-	static {
-		filter.getSubtype().add("Mountain");
+    static {
+        filter.getSubtype().add("Mountain");
         filter.setTargetController(TargetController.YOU);
-	}
+    }
 
-	public EarthServant(UUID ownerId) {
-		super(ownerId, 134, "Earth Servant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{R}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Elemental");
+    public EarthServant(UUID ownerId) {
+        super(ownerId, 134, "Earth Servant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{R}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Elemental");
 
-		this.color.setRed(true);
-		this.power = new MageInt(4);
-		this.toughness = new MageInt(4);
+        this.color.setRed(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter, 0),
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter, 0),
                 new PermanentsOnBattlefieldCount(filter, 1),
                 Duration.WhileOnBattlefield)));
-	}
+    }
 
-	public EarthServant(final EarthServant card) {
-		super(card);
-	}
+    public EarthServant(final EarthServant card) {
+        super(card);
+    }
 
-	@Override
-	public EarthServant copy() {
-		return new EarthServant(this);
-	}
+    @Override
+    public EarthServant copy() {
+        return new EarthServant(this);
+    }
 
 }

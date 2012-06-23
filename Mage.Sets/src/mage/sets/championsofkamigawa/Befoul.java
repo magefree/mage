@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
 public class Befoul extends CardImpl<Befoul> {
 
     public static final FilterPermanent filter = new FilterPermanent("land or nonblack creature");
-    
+
     static {
         filter.getCardType().add(CardType.LAND);
         filter.getCardType().add(CardType.CREATURE);

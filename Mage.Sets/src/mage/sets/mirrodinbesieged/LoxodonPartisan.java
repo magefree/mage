@@ -46,7 +46,7 @@ public class LoxodonPartisan extends CardImpl<LoxodonPartisan> {
         this.expansionSetCode = "MBS";
         this.subtype.add("Elephant");
         this.subtype.add("Soldier");
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
         this.addAbility(new BattleCryAbility());

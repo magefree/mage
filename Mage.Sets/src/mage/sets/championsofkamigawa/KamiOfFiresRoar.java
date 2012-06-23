@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class KamiOfFiresRoar extends CardImpl<KamiOfFiresRoar> {
 
     private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
-    
+
     public KamiOfFiresRoar(UUID ownerId) {
         super(ownerId, 174, "Kami of Fire's Roar", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.expansionSetCode = "CHK";

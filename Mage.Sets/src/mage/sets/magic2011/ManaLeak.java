@@ -46,20 +46,20 @@ import mage.target.TargetSpell;
  */
 public class ManaLeak extends CardImpl<ManaLeak> {
 
-	public ManaLeak(UUID ownerId) {
-		super(ownerId, 62, "Mana Leak", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-		this.expansionSetCode = "M11";
-		this.color.setBlue(true);
-		this.getSpellAbility().addTarget(new TargetSpell());
-		this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(3)));
-	}
+    public ManaLeak(UUID ownerId) {
+        super(ownerId, 62, "Mana Leak", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
+        this.expansionSetCode = "M11";
+        this.color.setBlue(true);
+        this.getSpellAbility().addTarget(new TargetSpell());
+        this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(3)));
+    }
 
-	public ManaLeak(final ManaLeak card) {
-		super(card);
-	}
+    public ManaLeak(final ManaLeak card) {
+        super(card);
+    }
 
-	@Override
-	public ManaLeak copy() {
-		return new ManaLeak(this);
-	}
+    @Override
+    public ManaLeak copy() {
+        return new ManaLeak(this);
+    }
 }

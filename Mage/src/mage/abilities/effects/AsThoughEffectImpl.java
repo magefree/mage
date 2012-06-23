@@ -39,22 +39,22 @@ import mage.Constants.Outcome;
  */
 public abstract class AsThoughEffectImpl<T extends AsThoughEffectImpl<T>> extends ContinuousEffectImpl<T> implements AsThoughEffect<T> {
 
-	protected AsThoughEffectType type;
+    protected AsThoughEffectType type;
 
-	public AsThoughEffectImpl(AsThoughEffectType type, Duration duration, Outcome outcome) {
-		super(duration, outcome);
-		this.type = type;
-		this.effectType = EffectType.ASTHOUGH;
-	}
+    public AsThoughEffectImpl(AsThoughEffectType type, Duration duration, Outcome outcome) {
+        super(duration, outcome);
+        this.type = type;
+        this.effectType = EffectType.ASTHOUGH;
+    }
 
-	public AsThoughEffectImpl(final AsThoughEffectImpl effect) {
-		super(effect);
-		this.type = effect.type;
-	}
+    public AsThoughEffectImpl(final AsThoughEffectImpl effect) {
+        super(effect);
+        this.type = effect.type;
+    }
 
-	@Override
-	public AsThoughEffectType getAsThoughEffectType() {
-		return type;
-	}
+    @Override
+    public AsThoughEffectType getAsThoughEffectType() {
+        return type;
+    }
 
 }

@@ -40,36 +40,36 @@ import mage.players.Player;
  */
 public class LoseLifeSourceEffect extends OneShotEffect<LoseLifeSourceEffect> {
 
-	protected int amount;
+    protected int amount;
 
-	public LoseLifeSourceEffect(int amount) {
-		super(Outcome.Damage);
-		this.amount = amount;
-		staticText = "You lose " + Integer.toString(amount) + " life";
-	}
+    public LoseLifeSourceEffect(int amount) {
+        super(Outcome.Damage);
+        this.amount = amount;
+        staticText = "You lose " + Integer.toString(amount) + " life";
+    }
 
-	public int getAmount() {
-		return amount;
-	}
+    public int getAmount() {
+        return amount;
+    }
 
-	public LoseLifeSourceEffect(final LoseLifeSourceEffect effect) {
-		super(effect);
-		this.amount = effect.amount;
-	}
+    public LoseLifeSourceEffect(final LoseLifeSourceEffect effect) {
+        super(effect);
+        this.amount = effect.amount;
+    }
 
-	@Override
-	public LoseLifeSourceEffect copy() {
-		return new LoseLifeSourceEffect(this);
-	}
+    @Override
+    public LoseLifeSourceEffect copy() {
+        return new LoseLifeSourceEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-		if (player != null) {
-			player.loseLife(amount, game);
-			return true;
-		}
-		return false;
-	}
+        if (player != null) {
+            player.loseLife(amount, game);
+            return true;
+        }
+        return false;
+    }
 
 }

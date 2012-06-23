@@ -45,23 +45,23 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class SunblastAngel extends CardImpl<SunblastAngel> {
 
-	private static final FilterPermanent tappedFilter = new FilterCreaturePermanent("tapped creatures");
+    private static final FilterPermanent tappedFilter = new FilterCreaturePermanent("tapped creatures");
 
-	static {
-		tappedFilter.setUseTapped(true);
-		tappedFilter.setTapped(true);
-	}
+    static {
+        tappedFilter.setUseTapped(true);
+        tappedFilter.setTapped(true);
+    }
 
     public SunblastAngel (UUID ownerId) {
         super(ownerId, 22, "Sunblast Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Angel");
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         this.power = new MageInt(4);
-    	this.toughness = new MageInt(5);
+        this.toughness = new MageInt(5);
 
-		addAbility(FlyingAbility.getInstance());
-		addAbility(new EntersBattlefieldTriggeredAbility(new DestroyAllEffect(tappedFilter), false));
+        addAbility(FlyingAbility.getInstance());
+        addAbility(new EntersBattlefieldTriggeredAbility(new DestroyAllEffect(tappedFilter), false));
     }
 
     public SunblastAngel (final SunblastAngel card) {

@@ -59,7 +59,7 @@ public class IncreasingAmbition extends CardImpl<IncreasingAmbition> {
 
         // Search your library for a card and put that card into your hand. If Increasing Ambition was cast from a graveyard, instead search your library for two cards and put those cards into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new IncreasingAmbitionEffect());
-        
+
         // Flashback {7}{B}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{7}{B}"), Constants.TimingRule.SORCERY));
     }
@@ -77,18 +77,18 @@ public class IncreasingAmbition extends CardImpl<IncreasingAmbition> {
 class IncreasingAmbitionEffect extends SearchEffect<IncreasingAmbitionEffect> {
 
     public IncreasingAmbitionEffect() {
-		super(new TargetCardInLibrary(), Constants.Outcome.DrawCard);
-		staticText = "Search your library for a card and put that card into your hand. If Increasing Ambition was cast from a graveyard, instead search your library for two cards and put those cards into your hand. Then shuffle your library";
+        super(new TargetCardInLibrary(), Constants.Outcome.DrawCard);
+        staticText = "Search your library for a card and put that card into your hand. If Increasing Ambition was cast from a graveyard, instead search your library for two cards and put those cards into your hand. Then shuffle your library";
     }
 
-	public IncreasingAmbitionEffect(final IncreasingAmbitionEffect effect) {
-		super(effect);
-	}
+    public IncreasingAmbitionEffect(final IncreasingAmbitionEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public IncreasingAmbitionEffect copy() {
-		return new IncreasingAmbitionEffect(this);
-	}
+    @Override
+    public IncreasingAmbitionEffect copy() {
+        return new IncreasingAmbitionEffect(this);
+    }
 
     @Override
     public boolean apply(Game game, Ability source) {

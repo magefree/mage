@@ -105,21 +105,21 @@ public class ManaSymbols {
             }
         }
 
-		File file;
-		for (String set : CardsStorage.getSetCodes()) {
-			file = new File(Constants.RESOURCE_PATH_SET_SMALL);
-			if (!file.exists()) {
-				break;
-			}
-			file = new File(Constants.RESOURCE_PATH_SET_SMALL + set + "-C.png");
-			try {
-				Image image = UI.getImageIcon(file.getAbsolutePath()).getImage();
-				int width = image.getWidth(null);
-				int height = image.getHeight(null);
-				setImagesExist.put(set, new Dimension(width, height));
-			} catch (Exception e) {
-			}
-		}
+        File file;
+        for (String set : CardsStorage.getSetCodes()) {
+            file = new File(Constants.RESOURCE_PATH_SET_SMALL);
+            if (!file.exists()) {
+                break;
+            }
+            file = new File(Constants.RESOURCE_PATH_SET_SMALL + set + "-C.png");
+            try {
+                Image image = UI.getImageIcon(file.getAbsolutePath()).getImage();
+                int width = image.getWidth(null);
+                int height = image.getHeight(null);
+                setImagesExist.put(set, new Dimension(width, height));
+            } catch (Exception e) {
+            }
+        }
     }
 
     static public Image getManaSymbolImage(String symbol) {
@@ -164,23 +164,23 @@ public class ManaSymbols {
         return width;
     }
 
-	public enum Type {
-		CARD,
-		TOOLTIP,
-		PAY
-	}
+    public enum Type {
+        CARD,
+        TOOLTIP,
+        PAY
+    }
 
     static public synchronized String replaceSymbolsWithHTML(String value, Type type) {
         if (type.equals(Type.TOOLTIP)) {
             return replaceSymbolsPattern.matcher(value).replaceAll("<img src='file:plugins/images/symbols/small/$1$2.jpg' alt='$1$2' width=11 height=11>");
         } else if (type.equals(Type.CARD)) {
-	    	value = value.replace("{slash}", "<img src='file:plugins/images/symbols/medium/slash.jpg' alt='slash' width=10 height=13>");
+            value = value.replace("{slash}", "<img src='file:plugins/images/symbols/medium/slash.jpg' alt='slash' width=10 height=13>");
             return replaceSymbolsPattern.matcher(value).replaceAll("<img src='file:plugins/images/symbols/medium/$1$2.jpg' alt='$1$2' width=12 height=12>");
         } else if (type.equals(Type.PAY)) {
-	    	value = value.replace("{slash}", "<img src='file:plugins/images/symbols/medium/slash.jpg' alt='slash' width=10 height=13>");
+            value = value.replace("{slash}", "<img src='file:plugins/images/symbols/medium/slash.jpg' alt='slash' width=10 height=13>");
             return replaceSymbolsPattern.matcher(value).replaceAll("<img src='file:plugins/images/symbols/medium/$1$2.jpg' alt='$1$2' width=15 height=15>");
         }
-		return value;
+        return value;
     }
 
     static public String replaceSetCodeWithHTML(String set, String rarity) {

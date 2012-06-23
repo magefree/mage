@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class Condemn extends mage.sets.tenth.Condemn {
 
-	public Condemn(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 11;
-		this.expansionSetCode = "M11";
-	}
+    public Condemn(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 11;
+        this.expansionSetCode = "M11";
+    }
 
-	public Condemn(final Condemn card) {
-		super(card);
-	}
+    public Condemn(final Condemn card) {
+        super(card);
+    }
 
-	@Override
-	public Condemn copy() {
-		return new Condemn(this);
-	}
+    @Override
+    public Condemn copy() {
+        return new Condemn(this);
+    }
 
 }

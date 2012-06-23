@@ -44,24 +44,24 @@ import mage.cards.CardImpl;
  */
 public class CudgelTroll extends CardImpl<CudgelTroll> {
 
-	public CudgelTroll(UUID ownerId) {
-		super(ownerId, 174, "Cudgel Troll", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-		this.expansionSetCode = "M10";
-		this.color.setGreen(true);
-		this.subtype.add("Troll");
-		this.power = new MageInt(4);
-		this.toughness = new MageInt(3);
+    public CudgelTroll(UUID ownerId) {
+        super(ownerId, 174, "Cudgel Troll", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
+        this.expansionSetCode = "M10";
+        this.color.setGreen(true);
+        this.subtype.add("Troll");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(3);
 
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{G}")));
-	}
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{G}")));
+    }
 
-	public CudgelTroll(final CudgelTroll card) {
-		super(card);
-	}
+    public CudgelTroll(final CudgelTroll card) {
+        super(card);
+    }
 
-	@Override
-	public CudgelTroll copy() {
-		return new CudgelTroll(this);
-	}
+    @Override
+    public CudgelTroll copy() {
+        return new CudgelTroll(this);
+    }
 
 }

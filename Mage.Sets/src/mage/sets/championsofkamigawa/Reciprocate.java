@@ -122,7 +122,7 @@ class ReciprocateTarget<T extends TargetCreaturePermanent<T>> extends TargetPerm
         }
         return false;
     }
-    
+
     @Override
     public ReciprocateTarget copy() {
         return new ReciprocateTarget(this);

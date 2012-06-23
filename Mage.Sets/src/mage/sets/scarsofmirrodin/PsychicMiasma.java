@@ -48,85 +48,85 @@ import mage.target.common.TargetDiscard;
  */
 public class PsychicMiasma extends CardImpl<PsychicMiasma> {
 
-	public PsychicMiasma(UUID ownerId) {
-		super(ownerId, 76, "Psychic Miasma", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
-		this.expansionSetCode = "SOM";
-		this.color.setBlack(true);
-		this.getSpellAbility().addTarget(new TargetPlayer());
-		PsychicMiasmaEffect1 effect1 = new PsychicMiasmaEffect1();
-		this.getSpellAbility().addEffect(effect1);
-		this.getSpellAbility().addEffect(new PsychicMiasmaEffect2());
-	}
+    public PsychicMiasma(UUID ownerId) {
+        super(ownerId, 76, "Psychic Miasma", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
+        this.expansionSetCode = "SOM";
+        this.color.setBlack(true);
+        this.getSpellAbility().addTarget(new TargetPlayer());
+        PsychicMiasmaEffect1 effect1 = new PsychicMiasmaEffect1();
+        this.getSpellAbility().addEffect(effect1);
+        this.getSpellAbility().addEffect(new PsychicMiasmaEffect2());
+    }
 
-	public PsychicMiasma(final PsychicMiasma card) {
-		super(card);
-	}
+    public PsychicMiasma(final PsychicMiasma card) {
+        super(card);
+    }
 
-	@Override
-	public PsychicMiasma copy() {
-		return new PsychicMiasma(this);
-	}
+    @Override
+    public PsychicMiasma copy() {
+        return new PsychicMiasma(this);
+    }
 
 }
 
 class PsychicMiasmaEffect1 extends OneShotEffect<PsychicMiasmaEffect1> {
 
-	public PsychicMiasmaEffect1() {
-		super(Outcome.Discard);
-		staticText = "Target player discards a card";
-	}
-	
-	public PsychicMiasmaEffect1(final PsychicMiasmaEffect1 effect) {
-		super(effect);
-	}
-	
-	@Override
-	public boolean apply(Game game, Ability source) {
+    public PsychicMiasmaEffect1() {
+        super(Outcome.Discard);
+        staticText = "Target player discards a card";
+    }
+
+    public PsychicMiasmaEffect1(final PsychicMiasmaEffect1 effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
-			TargetDiscard target = new TargetDiscard(player.getId());
-			player.choose(Outcome.Discard, target, source.getSourceId(), game);
-			Card card = player.getHand().get(target.getFirstTarget(), game);
-			if (card != null) {
-				player.discard(card, source, game);
-				game.getState().setValue(source.getId().toString(), card);
-				return true;
-			}
+            TargetDiscard target = new TargetDiscard(player.getId());
+            player.choose(Outcome.Discard, target, source.getSourceId(), game);
+            Card card = player.getHand().get(target.getFirstTarget(), game);
+            if (card != null) {
+                player.discard(card, source, game);
+                game.getState().setValue(source.getId().toString(), card);
+                return true;
+            }
         }
         return false;
-	}
+    }
 
-	@Override
-	public PsychicMiasmaEffect1 copy() {
-		return new PsychicMiasmaEffect1(this);
-	}
-		
+    @Override
+    public PsychicMiasmaEffect1 copy() {
+        return new PsychicMiasmaEffect1(this);
+    }
+
 }
 
 class PsychicMiasmaEffect2 extends PostResolveEffect<PsychicMiasmaEffect2> {
 
-	public PsychicMiasmaEffect2() {
-		staticText = "If a land card is discarded this way, return {this} to its owner's hand";
-	}
-	
-	public PsychicMiasmaEffect2(final PsychicMiasmaEffect2 effect) {
-		super(effect);
-	}
-	
-	@Override
-	public PsychicMiasmaEffect2 copy() {
-		return new PsychicMiasmaEffect2(this);
-	}
+    public PsychicMiasmaEffect2() {
+        staticText = "If a land card is discarded this way, return {this} to its owner's hand";
+    }
 
-	@Override
-	public void postResolve(Card card, Ability source, UUID controllerId, Game game) {
-		Card discard = (Card) game.getState().getValue(source.getId().toString());
-		if (discard != null && discard.getCardType().contains(CardType.LAND)) {
-			card.moveToZone(Zone.HAND, source.getId(), game, false);
-		}
-		else {
-			card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
-		}
-	}
-	
+    public PsychicMiasmaEffect2(final PsychicMiasmaEffect2 effect) {
+        super(effect);
+    }
+
+    @Override
+    public PsychicMiasmaEffect2 copy() {
+        return new PsychicMiasmaEffect2(this);
+    }
+
+    @Override
+    public void postResolve(Card card, Ability source, UUID controllerId, Game game) {
+        Card discard = (Card) game.getState().getValue(source.getId().toString());
+        if (discard != null && discard.getCardType().contains(CardType.LAND)) {
+            card.moveToZone(Zone.HAND, source.getId(), game, false);
+        }
+        else {
+            card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
+        }
+    }
+
 }

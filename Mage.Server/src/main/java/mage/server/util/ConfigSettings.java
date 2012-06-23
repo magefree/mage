@@ -44,59 +44,59 @@ import org.apache.log4j.Logger;
  */
 public class ConfigSettings {
 
-	private final static Logger logger = Logger.getLogger(ConfigSettings.class);
-	private final static ConfigSettings INSTANCE = new ConfigSettings();
-	
-	private Config config;
+    private final static Logger logger = Logger.getLogger(ConfigSettings.class);
+    private final static ConfigSettings INSTANCE = new ConfigSettings();
 
-	public static ConfigSettings getInstance() {
-		return INSTANCE;
-	}
+    private Config config;
 
-	private ConfigSettings() {
-		try {
-			JAXBContext jaxbContext = JAXBContext.newInstance("mage.server.util.config");
-			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-			config = (Config) unmarshaller.unmarshal(new File("config/config.xml"));
-		} catch (JAXBException ex) {
-			logger.fatal("ConfigSettings error", ex);
-		}
-	}
+    public static ConfigSettings getInstance() {
+        return INSTANCE;
+    }
 
-	public String getServerAddress() {
-		return config.getServer().getServerAddress();
-	}
+    private ConfigSettings() {
+        try {
+            JAXBContext jaxbContext = JAXBContext.newInstance("mage.server.util.config");
+            Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+            config = (Config) unmarshaller.unmarshal(new File("config/config.xml"));
+        } catch (JAXBException ex) {
+            logger.fatal("ConfigSettings error", ex);
+        }
+    }
 
-	public String getServerName() {
-		return config.getServer().getServerName();
-	}
+    public String getServerAddress() {
+        return config.getServer().getServerAddress();
+    }
 
-	public int getPort() {
-		return config.getServer().getPort().intValue();
-	}
+    public String getServerName() {
+        return config.getServer().getServerName();
+    }
 
-	public int getMaxGameThreads() {
-		return config.getServer().getMaxGameThreads().intValue();
-	}
+    public int getPort() {
+        return config.getServer().getPort().intValue();
+    }
 
-	public int getMaxSecondsIdle() {
-		return config.getServer().getMaxSecondsIdle().intValue();
-	}
+    public int getMaxGameThreads() {
+        return config.getServer().getMaxGameThreads().intValue();
+    }
 
-	public List<Plugin> getPlayerTypes() {
-		return config.getPlayerTypes().getPlayerType();
-	}
+    public int getMaxSecondsIdle() {
+        return config.getServer().getMaxSecondsIdle().intValue();
+    }
 
-	public List<GamePlugin> getGameTypes() {
-		return config.getGameTypes().getGameType();
-	}
+    public List<Plugin> getPlayerTypes() {
+        return config.getPlayerTypes().getPlayerType();
+    }
 
-	public List<GamePlugin> getTournamentTypes() {
-		return config.getTournamentTypes().getTournamentType();
-	}
+    public List<GamePlugin> getGameTypes() {
+        return config.getGameTypes().getGameType();
+    }
 
-	public List<Plugin> getDeckTypes() {
-		return config.getDeckTypes().getDeckType();
-	}
+    public List<GamePlugin> getTournamentTypes() {
+        return config.getTournamentTypes().getTournamentType();
+    }
+
+    public List<Plugin> getDeckTypes() {
+        return config.getDeckTypes().getDeckType();
+    }
 
 }

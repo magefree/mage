@@ -39,7 +39,7 @@ public class OneControlledCreatureCondition implements Condition {
 
     private static OneControlledCreatureCondition fInstance = new OneControlledCreatureCondition();
 
-	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     public static Condition getInstance() {
         return fInstance;
@@ -47,6 +47,6 @@ public class OneControlledCreatureCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-		return game.getBattlefield().countAll(filter, source.getControllerId(), game) == 1;
+        return game.getBattlefield().countAll(filter, source.getControllerId(), game) == 1;
     }
 }

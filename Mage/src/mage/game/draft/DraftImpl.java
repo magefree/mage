@@ -51,204 +51,204 @@ import mage.players.PlayerList;
  */
 public abstract class DraftImpl<T extends DraftImpl<T>> implements Draft {
 
-	protected final UUID id;
-	protected Map<UUID, DraftPlayer> players = new HashMap<UUID, DraftPlayer>();
-	protected PlayerList table = new PlayerList();
-	protected List<ExpansionSet> sets;
-	protected List<String> setCodes;
-	protected int boosterNum = 0;
-	protected int cardNum = 0;
-	protected TimingOption timing;
-	protected int[] times = {75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5};
+    protected final UUID id;
+    protected Map<UUID, DraftPlayer> players = new HashMap<UUID, DraftPlayer>();
+    protected PlayerList table = new PlayerList();
+    protected List<ExpansionSet> sets;
+    protected List<String> setCodes;
+    protected int boosterNum = 0;
+    protected int cardNum = 0;
+    protected TimingOption timing;
+    protected int[] times = {75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5};
 
-	protected transient TableEventSource tableEventSource = new TableEventSource();
-	protected transient PlayerQueryEventSource playerQueryEventSource = new PlayerQueryEventSource();
+    protected transient TableEventSource tableEventSource = new TableEventSource();
+    protected transient PlayerQueryEventSource playerQueryEventSource = new PlayerQueryEventSource();
 
-	public DraftImpl(DraftOptions options, List<ExpansionSet> sets) {
-		id = UUID.randomUUID();
-		this.setCodes = options.getSetCodes();
-		this.timing = options.getTiming();
-		this.sets = sets;
-	}
+    public DraftImpl(DraftOptions options, List<ExpansionSet> sets) {
+        id = UUID.randomUUID();
+        this.setCodes = options.getSetCodes();
+        this.timing = options.getTiming();
+        this.sets = sets;
+    }
 
-	@Override
-	public UUID getId() {
-		return id;
-	}
+    @Override
+    public UUID getId() {
+        return id;
+    }
 
-	@Override
-	public void addPlayer(Player player) {
-		DraftPlayer draftPlayer = new DraftPlayer(player);
-		players.put(player.getId(), draftPlayer);
-		table.add(player.getId());
-	}
+    @Override
+    public void addPlayer(Player player) {
+        DraftPlayer draftPlayer = new DraftPlayer(player);
+        players.put(player.getId(), draftPlayer);
+        table.add(player.getId());
+    }
 
-	@Override
-	public Collection<DraftPlayer> getPlayers() {
-		return players.values();
-	}
+    @Override
+    public Collection<DraftPlayer> getPlayers() {
+        return players.values();
+    }
 
-	@Override
-	public DraftPlayer getPlayer(UUID playerId) {
-		return players.get(playerId);
-	}
+    @Override
+    public DraftPlayer getPlayer(UUID playerId) {
+        return players.get(playerId);
+    }
 
-	@Override
-	public List<ExpansionSet> getSets() {
-		return sets;
-	}
+    @Override
+    public List<ExpansionSet> getSets() {
+        return sets;
+    }
 
-	@Override
-	public int getBoosterNum() {
-		return boosterNum;
-	}
+    @Override
+    public int getBoosterNum() {
+        return boosterNum;
+    }
 
-	@Override
-	public int getCardNum() {
-		return cardNum;
-	}
+    @Override
+    public int getCardNum() {
+        return cardNum;
+    }
 
-	@Override
-	public void leave(UUID playerId) {
-		//TODO: implement this
-	}
+    @Override
+    public void leave(UUID playerId) {
+        //TODO: implement this
+    }
 
-	@Override
-	public void autoPick(UUID playerId) {
-		this.addPick(playerId, players.get(playerId).getBooster().get(0).getId());
-	}
+    @Override
+    public void autoPick(UUID playerId) {
+        this.addPick(playerId, players.get(playerId).getBooster().get(0).getId());
+    }
 
-	protected void passLeft() {
-		UUID startId = table.get(0);
-		UUID currentId = startId;
-		UUID nextId = table.getNext();
-		DraftPlayer current = players.get(currentId);
-		DraftPlayer next = players.get(nextId);
-		List<Card> currentBooster = current.booster;
-		while (true) {
-			List<Card> nextBooster = next.booster;
-			next.setBooster(currentBooster);
-			if (nextId == startId)
-				break;
-			currentBooster = nextBooster;
-			current = next;
-			currentId = nextId;
-			nextId = table.getNext();
-			next = players.get(nextId);
-		}
-	}
+    protected void passLeft() {
+        UUID startId = table.get(0);
+        UUID currentId = startId;
+        UUID nextId = table.getNext();
+        DraftPlayer current = players.get(currentId);
+        DraftPlayer next = players.get(nextId);
+        List<Card> currentBooster = current.booster;
+        while (true) {
+            List<Card> nextBooster = next.booster;
+            next.setBooster(currentBooster);
+            if (nextId == startId)
+                break;
+            currentBooster = nextBooster;
+            current = next;
+            currentId = nextId;
+            nextId = table.getNext();
+            next = players.get(nextId);
+        }
+    }
 
-	protected void passRight() {
-		UUID startId = table.get(0);
-		UUID currentId = startId;
-		UUID prevId = table.getPrevious();
-		DraftPlayer current = players.get(currentId);
-		DraftPlayer prev = players.get(prevId);
-		List<Card> currentBooster = current.booster;
-		while (true) {
-			List<Card> prevBooster = prev.booster;
-			prev.setBooster(currentBooster);
-			if (prevId == startId)
-				break;
-			currentBooster = prevBooster;
-			current = prev;
-			currentId = prevId;
-			prevId = table.getPrevious();
-			prev = players.get(prevId);
-		}
-	}
+    protected void passRight() {
+        UUID startId = table.get(0);
+        UUID currentId = startId;
+        UUID prevId = table.getPrevious();
+        DraftPlayer current = players.get(currentId);
+        DraftPlayer prev = players.get(prevId);
+        List<Card> currentBooster = current.booster;
+        while (true) {
+            List<Card> prevBooster = prev.booster;
+            prev.setBooster(currentBooster);
+            if (prevId == startId)
+                break;
+            currentBooster = prevBooster;
+            current = prev;
+            currentId = prevId;
+            prevId = table.getPrevious();
+            prev = players.get(prevId);
+        }
+    }
 
-	protected void openBooster() {
-		if (boosterNum < sets.size()) {
-			for (DraftPlayer player: players.values()) {
-				player.setBooster(sets.get(boosterNum).createBooster());
-			}
-		}
-		boosterNum++;
-		cardNum = 1;
-		fireUpdatePlayersEvent();
-	}
+    protected void openBooster() {
+        if (boosterNum < sets.size()) {
+            for (DraftPlayer player: players.values()) {
+                player.setBooster(sets.get(boosterNum).createBooster());
+            }
+        }
+        boosterNum++;
+        cardNum = 1;
+        fireUpdatePlayersEvent();
+    }
 
-	protected boolean pickCards() {
-		cardNum++;
-		for (DraftPlayer player: players.values()) {
-			if (player.getBooster().size() == 0)
-				return false;
-			player.setPicking();
-			player.getPlayer().pickCard(player.getBooster(), player.getDeck(), this);
-		}
-		synchronized(this) {
-			while (!donePicking()) {
-				try {
-					this.wait();
-				} catch (InterruptedException ex) { }
-			}
-		}
-		return true;
-	}
+    protected boolean pickCards() {
+        cardNum++;
+        for (DraftPlayer player: players.values()) {
+            if (player.getBooster().size() == 0)
+                return false;
+            player.setPicking();
+            player.getPlayer().pickCard(player.getBooster(), player.getDeck(), this);
+        }
+        synchronized(this) {
+            while (!donePicking()) {
+                try {
+                    this.wait();
+                } catch (InterruptedException ex) { }
+            }
+        }
+        return true;
+    }
 
-	protected boolean donePicking() {
-		for (DraftPlayer player: players.values()) {
-			if (player.isPicking())
-				return false;
-		}
-		return true;
-	}
+    protected boolean donePicking() {
+        for (DraftPlayer player: players.values()) {
+            if (player.isPicking())
+                return false;
+        }
+        return true;
+    }
 
-	@Override
-	public boolean allJoined() {
-		for (DraftPlayer player: this.players.values()) {
-			if (!player.isJoined())
-				return false;
-		}
-		return true;
-	}
+    @Override
+    public boolean allJoined() {
+        for (DraftPlayer player: this.players.values()) {
+            if (!player.isJoined())
+                return false;
+        }
+        return true;
+    }
 
-	@Override
-	public void addTableEventListener(Listener<TableEvent> listener) {
-		tableEventSource.addListener(listener);
-	}
+    @Override
+    public void addTableEventListener(Listener<TableEvent> listener) {
+        tableEventSource.addListener(listener);
+    }
 
-	@Override
-	public void fireUpdatePlayersEvent() {
-		tableEventSource.fireTableEvent(EventType.UPDATE, null, this);
-	}
+    @Override
+    public void fireUpdatePlayersEvent() {
+        tableEventSource.fireTableEvent(EventType.UPDATE, null, this);
+    }
 
-	@Override
-	public void fireEndDraftEvent() {
-		tableEventSource.fireTableEvent(EventType.END, null, this);
-	}
+    @Override
+    public void fireEndDraftEvent() {
+        tableEventSource.fireTableEvent(EventType.END, null, this);
+    }
 
-	@Override
-	public void addPlayerQueryEventListener(Listener<PlayerQueryEvent> listener) {
-		playerQueryEventSource.addListener(listener);
-	}
+    @Override
+    public void addPlayerQueryEventListener(Listener<PlayerQueryEvent> listener) {
+        playerQueryEventSource.addListener(listener);
+    }
 
-	@Override
-	public void firePickCardEvent(UUID playerId) {
-		DraftPlayer player = players.get(playerId);
-		if (cardNum > 15)
-			cardNum = 15;
-		int time = times[cardNum - 1] * timing.getFactor();
-		playerQueryEventSource.pickCard(playerId, "Pick card", player.getBooster(), time);
-	}
+    @Override
+    public void firePickCardEvent(UUID playerId) {
+        DraftPlayer player = players.get(playerId);
+        if (cardNum > 15)
+            cardNum = 15;
+        int time = times[cardNum - 1] * timing.getFactor();
+        playerQueryEventSource.pickCard(playerId, "Pick card", player.getBooster(), time);
+    }
 
-	@Override
-	public boolean addPick(UUID playerId, UUID cardId) {
-		DraftPlayer player = players.get(playerId);
-		if (player.isPicking()) {
-			for (Card card: player.booster) {
-				if (card.getId().equals(cardId)) {
-					player.addPick(card);
-					player.booster.remove(card);
-					break;
-				}
-			}
-			synchronized(this) {
-				this.notifyAll();
-			}
-		}
-		return !player.isPicking();
-	}
+    @Override
+    public boolean addPick(UUID playerId, UUID cardId) {
+        DraftPlayer player = players.get(playerId);
+        if (player.isPicking()) {
+            for (Card card: player.booster) {
+                if (card.getId().equals(cardId)) {
+                    player.addPick(card);
+                    player.booster.remove(card);
+                    break;
+                }
+            }
+            synchronized(this) {
+                this.notifyAll();
+            }
+        }
+        return !player.isPicking();
+    }
 
 }

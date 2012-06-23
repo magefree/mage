@@ -36,13 +36,13 @@ import mage.game.tournament.TournamentType;
  */
 public class BoosterDraftEliminationTournamentType extends TournamentType<BoosterDraftEliminationTournamentType> {
 
-	public BoosterDraftEliminationTournamentType() {
-		this.name = "Elimination Booster Draft";
-		this.maxPlayers = 16;
-		this.minPlayers = 4;
-		this.numBoosters = 3;
-		this.draft = true;
-		this.limited = true;
-	}
+    public BoosterDraftEliminationTournamentType() {
+        this.name = "Elimination Booster Draft";
+        this.maxPlayers = 16;
+        this.minPlayers = 4;
+        this.numBoosters = 3;
+        this.draft = true;
+        this.limited = true;
+    }
 
 }

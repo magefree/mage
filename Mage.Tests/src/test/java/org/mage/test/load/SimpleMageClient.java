@@ -18,7 +18,7 @@ public class SimpleMageClient implements MageClient {
 
     private UUID clientId;
     private final static MageVersion version = new MageVersion(0, 8, 4, "");
-    
+
     private static final transient Logger log = Logger.getLogger(SimpleMageClient.class);
 
     private CallbackClient callbackClient;
@@ -62,11 +62,11 @@ public class SimpleMageClient implements MageClient {
     public void processCallback(ClientCallback callback) {
         callbackClient.processCallback(callback);
     }
-    
+
     public void setSession(Session session) {
         ((LoadCallbackClient)callbackClient).setSession(session);
     }
-    
+
     public boolean isGameOver() {
         return ((LoadCallbackClient)callbackClient).isGameOver();
     }

@@ -59,7 +59,7 @@ public class ButchersCleaver extends CardImpl<ButchersCleaver> {
 
         // As long as equipped creature is a Human, it has lifelink.
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), Constants.AttachmentType.EQUIPMENT), new EquippedHasSubtypeCondition("Human"), staticText)));
- 
+
         // Equip {3}
         this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(3)));
 

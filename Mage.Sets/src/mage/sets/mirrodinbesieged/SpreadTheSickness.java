@@ -45,7 +45,7 @@ public class SpreadTheSickness extends CardImpl<SpreadTheSickness> {
     public SpreadTheSickness (UUID ownerId) {
         super(ownerId, 56, "Spread the Sickness", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");
         this.expansionSetCode = "MBS";
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new ProliferateEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

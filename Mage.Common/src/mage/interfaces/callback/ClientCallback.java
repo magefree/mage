@@ -37,58 +37,58 @@ import java.util.UUID;
  */
 public class ClientCallback implements Serializable {
 
-	private UUID objectId;
-	private Object data;
-	private String method;
-	private int messageId;
+    private UUID objectId;
+    private Object data;
+    private String method;
+    private int messageId;
 
-	public ClientCallback() {}
+    public ClientCallback() {}
 
-	public ClientCallback(String method, UUID objectId, Object data) {
-		this.method = method;
-		this.objectId = objectId;
-		this.data = data;
-	}
+    public ClientCallback(String method, UUID objectId, Object data) {
+        this.method = method;
+        this.objectId = objectId;
+        this.data = data;
+    }
 
-	public ClientCallback(String method, UUID objectId) {
-		this(method, objectId, null);
-	}
+    public ClientCallback(String method, UUID objectId) {
+        this(method, objectId, null);
+    }
 
-	public void clear() {
-		method = null;
-		data = null;
-	}
+    public void clear() {
+        method = null;
+        data = null;
+    }
 
-	public UUID getObjectId() {
-		return objectId;
-	}
+    public UUID getObjectId() {
+        return objectId;
+    }
 
-	public void setObjectId(UUID objectId) {
-		this.objectId = objectId;
-	}
+    public void setObjectId(UUID objectId) {
+        this.objectId = objectId;
+    }
 
-	public Object getData() {
-		return data;
-	}
+    public Object getData() {
+        return data;
+    }
 
-	public void setData(Object data) {
-		this.data = data;
-	}
+    public void setData(Object data) {
+        this.data = data;
+    }
 
-	public String getMethod() {
-		return method;
-	}
+    public String getMethod() {
+        return method;
+    }
 
-	public void setMethod(String method) {
-		this.method = method;
-	}
+    public void setMethod(String method) {
+        this.method = method;
+    }
 
-	public void setMessageId(int messageId) {
-		this.messageId = messageId;
-	}
+    public void setMessageId(int messageId) {
+        this.messageId = messageId;
+    }
 
-	public int getMessageId() {
-		return messageId;
-	}
+    public int getMessageId() {
+        return messageId;
+    }
 
 }

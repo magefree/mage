@@ -45,7 +45,7 @@ public class MossKami extends CardImpl<MossKami> {
         super(ownerId, 228, "Moss Kami", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Spirit");
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
         this.addAbility(TrampleAbility.getInstance());

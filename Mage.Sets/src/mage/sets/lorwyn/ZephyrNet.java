@@ -56,10 +56,10 @@ public class ZephyrNet extends CardImpl<ZephyrNet> {
         this.color.setBlue(true);
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		this.addAbility(ability);
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
         // Enchanted creature has defender and flying.
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(DefenderAbility.getInstance(), Constants.AttachmentType.AURA)));
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), Constants.AttachmentType.AURA)));

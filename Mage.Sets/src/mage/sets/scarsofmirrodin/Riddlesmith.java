@@ -56,7 +56,7 @@ public class Riddlesmith extends CardImpl<Riddlesmith> {
         this.subtype.add("Human");
         this.subtype.add("Artificer");
 
-		this.color.setBlue(true);
+        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

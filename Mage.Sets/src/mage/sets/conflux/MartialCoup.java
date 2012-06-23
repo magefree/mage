@@ -47,51 +47,51 @@ import mage.game.permanent.token.SoldierToken;
  */
 public class MartialCoup extends CardImpl<MartialCoup> {
 
-	public MartialCoup(UUID ownerId) {
-		super(ownerId, 11, "Martial Coup", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{W}{W}");
-		this.expansionSetCode = "CON";
-		this.color.setWhite(true);
-		this.getSpellAbility().addEffect(new MartialCoupEffect());
-	}
+    public MartialCoup(UUID ownerId) {
+        super(ownerId, 11, "Martial Coup", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{W}{W}");
+        this.expansionSetCode = "CON";
+        this.color.setWhite(true);
+        this.getSpellAbility().addEffect(new MartialCoupEffect());
+    }
 
-	public MartialCoup(final MartialCoup card) {
-		super(card);
-	}
+    public MartialCoup(final MartialCoup card) {
+        super(card);
+    }
 
-	@Override
-	public MartialCoup copy() {
-		return new MartialCoup(this);
-	}
+    @Override
+    public MartialCoup copy() {
+        return new MartialCoup(this);
+    }
 }
 
 class MartialCoupEffect extends OneShotEffect<MartialCoupEffect> {
 
-	private static SoldierToken token = new SoldierToken();
+    private static SoldierToken token = new SoldierToken();
 
-	public MartialCoupEffect() {
-		super(Outcome.PutCreatureInPlay);
-		staticText = "Put X 1/1 white Soldier creature tokens onto the battlefield. If X is 5 or more, destroy all other creatures";
-	}
+    public MartialCoupEffect() {
+        super(Outcome.PutCreatureInPlay);
+        staticText = "Put X 1/1 white Soldier creature tokens onto the battlefield. If X is 5 or more, destroy all other creatures";
+    }
 
-	public MartialCoupEffect(final MartialCoupEffect effect) {
-		super(effect);
-	}
+    public MartialCoupEffect(final MartialCoupEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public MartialCoupEffect copy() {
-		return new MartialCoupEffect(this);
-	}
+    @Override
+    public MartialCoupEffect copy() {
+        return new MartialCoupEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		int amount = source.getManaCostsToPay().getX();
-		if (amount > 4) {
-			for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
-				permanent.destroy(source.getSourceId(), game, false);
-			}
-		}
-		token.putOntoBattlefield(amount, game, source.getId(), source.getControllerId());
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        int amount = source.getManaCostsToPay().getX();
+        if (amount > 4) {
+            for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
+                permanent.destroy(source.getSourceId(), game, false);
+            }
+        }
+        token.putOntoBattlefield(amount, game, source.getId(), source.getControllerId());
+        return true;
+    }
 
 }

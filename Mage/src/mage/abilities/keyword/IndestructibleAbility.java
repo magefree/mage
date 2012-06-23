@@ -38,28 +38,28 @@ import mage.abilities.StaticAbility;
  */
 public class IndestructibleAbility extends StaticAbility<IndestructibleAbility> {
 
-	private static final IndestructibleAbility fINSTANCE =  new IndestructibleAbility();
+    private static final IndestructibleAbility fINSTANCE =  new IndestructibleAbility();
 
-	private Object readResolve() throws ObjectStreamException {
-		return fINSTANCE;
-	}
+    private Object readResolve() throws ObjectStreamException {
+        return fINSTANCE;
+    }
 
-	public static IndestructibleAbility getInstance() {
-		return fINSTANCE;
-	}
+    public static IndestructibleAbility getInstance() {
+        return fINSTANCE;
+    }
 
-	private IndestructibleAbility() {
-		super(Zone.BATTLEFIELD, null);
-	}
+    private IndestructibleAbility() {
+        super(Zone.BATTLEFIELD, null);
+    }
 
-	@Override
-	public String getRule() {
-		return "Indestructible";
-	}
+    @Override
+    public String getRule() {
+        return "Indestructible";
+    }
 
-	@Override
-	public IndestructibleAbility copy() {
-		return fINSTANCE;
-	}
+    @Override
+    public IndestructibleAbility copy() {
+        return fINSTANCE;
+    }
 
 }

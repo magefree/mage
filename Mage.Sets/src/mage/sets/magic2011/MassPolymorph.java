@@ -52,66 +52,66 @@ import java.util.UUID;
  */
 public class MassPolymorph extends CardImpl<MassPolymorph> {
 
-	public MassPolymorph(UUID ownerId) {
-		super(ownerId, 64, "Mass Polymorph", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{U}");
-		this.expansionSetCode = "M11";
-		this.color.setBlue(true);
-		this.getSpellAbility().addEffect(new MassPolymorphEffect());
-	}
+    public MassPolymorph(UUID ownerId) {
+        super(ownerId, 64, "Mass Polymorph", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{U}");
+        this.expansionSetCode = "M11";
+        this.color.setBlue(true);
+        this.getSpellAbility().addEffect(new MassPolymorphEffect());
+    }
 
-	public MassPolymorph(final MassPolymorph card) {
-		super(card);
-	}
+    public MassPolymorph(final MassPolymorph card) {
+        super(card);
+    }
 
-	@Override
-	public MassPolymorph copy() {
-		return new MassPolymorph(this);
-	}
+    @Override
+    public MassPolymorph copy() {
+        return new MassPolymorph(this);
+    }
 }
 
 class MassPolymorphEffect extends OneShotEffect<MassPolymorphEffect> {
 
-	public MassPolymorphEffect() {
-		super(Outcome.PutCreatureInPlay);
-		staticText = "Exile all creatures you control, then reveal cards from the top of your library until you reveal that many creature cards. Put all creature cards revealed this way onto the battlefield, then shuffle the rest of the revealed cards into your library";
-	}
+    public MassPolymorphEffect() {
+        super(Outcome.PutCreatureInPlay);
+        staticText = "Exile all creatures you control, then reveal cards from the top of your library until you reveal that many creature cards. Put all creature cards revealed this way onto the battlefield, then shuffle the rest of the revealed cards into your library";
+    }
 
-	public MassPolymorphEffect(final MassPolymorphEffect effect) {
-		super(effect);
-	}
+    public MassPolymorphEffect(final MassPolymorphEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		int count;
-		List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game);
-		count = creatures.size();
-		for (Permanent creature: creatures) {
-			creature.moveToExile(null, null, source.getId(), game);
-		}
-		Cards revealed = new CardsImpl();
-		Cards creatureCards = new CardsImpl();
-		Cards nonCreatureCards = new CardsImpl();
-		Player player = game.getPlayer(source.getControllerId());
-		while (creatureCards.size() < count && player.getLibrary().size() > 0) {
-			Card card = player.getLibrary().removeFromTop(game);
-			revealed.add(card);
-			if (card.getCardType().contains(CardType.CREATURE))
-				creatureCards.add(card);
-			else
-				nonCreatureCards.add(card);
-		}
-		player.revealCards("Mass Polymorph", revealed, game);
-		for (Card creatureCard: creatureCards.getCards(game)) {
-			creatureCard.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), source.getControllerId());
-		}
-		player.getLibrary().addAll(nonCreatureCards.getCards(game), game);
-		player.shuffleLibrary(game);
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        int count;
+        List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game);
+        count = creatures.size();
+        for (Permanent creature: creatures) {
+            creature.moveToExile(null, null, source.getId(), game);
+        }
+        Cards revealed = new CardsImpl();
+        Cards creatureCards = new CardsImpl();
+        Cards nonCreatureCards = new CardsImpl();
+        Player player = game.getPlayer(source.getControllerId());
+        while (creatureCards.size() < count && player.getLibrary().size() > 0) {
+            Card card = player.getLibrary().removeFromTop(game);
+            revealed.add(card);
+            if (card.getCardType().contains(CardType.CREATURE))
+                creatureCards.add(card);
+            else
+                nonCreatureCards.add(card);
+        }
+        player.revealCards("Mass Polymorph", revealed, game);
+        for (Card creatureCard: creatureCards.getCards(game)) {
+            creatureCard.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), source.getControllerId());
+        }
+        player.getLibrary().addAll(nonCreatureCards.getCards(game), game);
+        player.shuffleLibrary(game);
+        return true;
+    }
 
-	@Override
-	public MassPolymorphEffect copy() {
-		return new MassPolymorphEffect(this);
-	}
+    @Override
+    public MassPolymorphEffect copy() {
+        return new MassPolymorphEffect(this);
+    }
 
 }

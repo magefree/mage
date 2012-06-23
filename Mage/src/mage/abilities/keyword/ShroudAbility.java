@@ -38,28 +38,28 @@ import mage.abilities.StaticAbility;
  */
 public class ShroudAbility extends StaticAbility<ShroudAbility> {
 
-	private static final ShroudAbility fINSTANCE =  new ShroudAbility();
+    private static final ShroudAbility fINSTANCE =  new ShroudAbility();
 
-	private Object readResolve() throws ObjectStreamException {
-		return fINSTANCE;
-	}
+    private Object readResolve() throws ObjectStreamException {
+        return fINSTANCE;
+    }
 
-	public static ShroudAbility getInstance() {
-		return fINSTANCE;
-	}
+    public static ShroudAbility getInstance() {
+        return fINSTANCE;
+    }
 
-	private ShroudAbility() {
-		super(Zone.BATTLEFIELD, null);
-	}
+    private ShroudAbility() {
+        super(Zone.BATTLEFIELD, null);
+    }
 
-	@Override
-	public String getRule() {
-		return "Shroud";
-	}
+    @Override
+    public String getRule() {
+        return "Shroud";
+    }
 
-	@Override
-	public ShroudAbility copy() {
-		return fINSTANCE;
-	}
+    @Override
+    public ShroudAbility copy() {
+        return fINSTANCE;
+    }
 
 }

@@ -47,11 +47,11 @@ public class SilentAttendant extends CardImpl<SilentAttendant> {
     public SilentAttendant (UUID ownerId) {
         super(ownerId, 51, "Silent Attendant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.expansionSetCode = "USG";
-	this.subtype.add("Human");
-	this.subtype.add("Cleric");
-	this.color.setWhite(true);
-	this.power = new MageInt(0);
-	this.toughness = new MageInt(2);
+    this.subtype.add("Human");
+    this.subtype.add("Cleric");
+    this.color.setWhite(true);
+    this.power = new MageInt(0);
+    this.toughness = new MageInt(2);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), new TapSourceCost()));
     }
 

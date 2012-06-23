@@ -40,28 +40,28 @@ import java.util.concurrent.Callable;
  */
 public class GameWorker implements Callable {
 
-	private final static Logger logger = Logger.getLogger(GameWorker.class);
+    private final static Logger logger = Logger.getLogger(GameWorker.class);
 
-	private GameCallback result;
-	private Game game;
-	private UUID choosingPlayerId;
+    private GameCallback result;
+    private Game game;
+    private UUID choosingPlayerId;
 
-	public GameWorker(Game game, UUID choosingPlayerId, GameCallback result) {
-		this.game = game;
-		this.choosingPlayerId = choosingPlayerId;
-		this.result = result;
-	}
+    public GameWorker(Game game, UUID choosingPlayerId, GameCallback result) {
+        this.game = game;
+        this.choosingPlayerId = choosingPlayerId;
+        this.result = result;
+    }
 
-	@Override
-	public Object call() {
-		try {
-			game.start(choosingPlayerId);
-			game.fireUpdatePlayersEvent();
-			result.gameResult(game.getWinner());
-		} catch (Exception ex) {
-			logger.fatal("GameWorker error ", ex);
-		}
-		return null;
-	}
+    @Override
+    public Object call() {
+        try {
+            game.start(choosingPlayerId);
+            game.fireUpdatePlayersEvent();
+            result.gameResult(game.getWinner());
+        } catch (Exception ex) {
+            logger.fatal("GameWorker error ", ex);
+        }
+        return null;
+    }
 
 }

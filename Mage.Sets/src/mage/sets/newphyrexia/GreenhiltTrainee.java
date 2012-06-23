@@ -55,7 +55,7 @@ public class GreenhiltTrainee extends CardImpl<GreenhiltTrainee> {
         this.expansionSetCode = "NPH";
         this.subtype.add("Elf");
         this.subtype.add("Warrior");
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostTargetEffect(4, 4, Constants.Duration.EndOfTurn), new TapSourceCost());

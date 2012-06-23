@@ -45,10 +45,10 @@ public class SpellCastTriggeredAbility extends TriggeredAbilityImpl<SpellCastTri
     private static final FilterSpell spellCard = new FilterSpell("a spell");
     protected FilterSpell filter;
 
-	/**
-	 * If true, the source that triggered the ability will be set as target to effect.
-	 */
-	protected boolean rememberSource = false;
+    /**
+     * If true, the source that triggered the ability will be set as target to effect.
+     */
+    protected boolean rememberSource = false;
 
     public SpellCastTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
@@ -59,16 +59,16 @@ public class SpellCastTriggeredAbility extends TriggeredAbilityImpl<SpellCastTri
         this(effect, filter, optional, false);
     }
 
-	public SpellCastTriggeredAbility(Effect effect, FilterSpell filter, boolean optional, boolean rememberSource) {
+    public SpellCastTriggeredAbility(Effect effect, FilterSpell filter, boolean optional, boolean rememberSource) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
-		this.rememberSource = rememberSource;
+        this.rememberSource = rememberSource;
     }
 
     public SpellCastTriggeredAbility(final SpellCastTriggeredAbility ability) {
         super(ability);
         filter = ability.filter;
-		this.rememberSource = ability.rememberSource;
+        this.rememberSource = ability.rememberSource;
     }
 
     @Override
@@ -76,9 +76,9 @@ public class SpellCastTriggeredAbility extends TriggeredAbilityImpl<SpellCastTri
         if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getPlayerId().equals(this.getControllerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null && filter.match(spell, game)) {
-				if (rememberSource) {
-					this.getEffects().get(0).setTargetPointer(new FixedTarget(spell.getId()));
-				}
+                if (rememberSource) {
+                    this.getEffects().get(0).setTargetPointer(new FixedTarget(spell.getId()));
+                }
                 return true;
             }
         }

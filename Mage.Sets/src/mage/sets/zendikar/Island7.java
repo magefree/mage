@@ -36,18 +36,18 @@ import java.util.UUID;
  */
 public class Island7 extends mage.cards.basiclands.Island {
 
-	public Island7(UUID ownerId) {
-		super(ownerId, 256);
-		this.expansionSetCode = "ZEN";
-	}
+    public Island7(UUID ownerId) {
+        super(ownerId, 256);
+        this.expansionSetCode = "ZEN";
+    }
 
-	public Island7(final Island7 card) {
-		super(card);
-	}
+    public Island7(final Island7 card) {
+        super(card);
+    }
 
-	@Override
-	public Island7 copy() {
-		return new Island7(this);
-	}
+    @Override
+    public Island7 copy() {
+        return new Island7(this);
+    }
 
 }

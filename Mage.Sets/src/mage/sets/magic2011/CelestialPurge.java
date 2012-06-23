@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class CelestialPurge extends mage.sets.conflux.CelestialPurge {
 
-	public CelestialPurge(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 9;
-		this.expansionSetCode = "M11";
-	}
+    public CelestialPurge(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 9;
+        this.expansionSetCode = "M11";
+    }
 
-	public CelestialPurge(final CelestialPurge card) {
-		super(card);
-	}
+    public CelestialPurge(final CelestialPurge card) {
+        super(card);
+    }
 
-	@Override
-	public CelestialPurge copy() {
-		return new CelestialPurge(this);
-	}
+    @Override
+    public CelestialPurge copy() {
+        return new CelestialPurge(this);
+    }
 
 }

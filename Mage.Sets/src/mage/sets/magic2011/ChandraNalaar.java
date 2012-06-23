@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class ChandraNalaar extends mage.sets.magic2010.ChandraNalaar {
 
-	public ChandraNalaar(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 127;
-		this.expansionSetCode = "M11";
-	}
+    public ChandraNalaar(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 127;
+        this.expansionSetCode = "M11";
+    }
 
-	public ChandraNalaar(final ChandraNalaar card) {
-		super(card);
-	}
+    public ChandraNalaar(final ChandraNalaar card) {
+        super(card);
+    }
 
-	@Override
-	public ChandraNalaar copy() {
-		return new ChandraNalaar(this);
-	}
+    @Override
+    public ChandraNalaar copy() {
+        return new ChandraNalaar(this);
+    }
 
 }

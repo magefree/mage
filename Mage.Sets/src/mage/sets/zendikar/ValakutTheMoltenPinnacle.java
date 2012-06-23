@@ -51,68 +51,68 @@ import mage.target.common.TargetCreatureOrPlayer;
  * @author Viserion
  */
 public class ValakutTheMoltenPinnacle extends CardImpl<ValakutTheMoltenPinnacle> {
-	
-	static final FilterLandPermanent filter = new FilterLandPermanent("Mountain");
 
-	static {
-	    filter.getSubtype().add("Mountain");
-	    filter.setScopeSubtype(ComparisonScope.Any);
-	}
-	
-	public ValakutTheMoltenPinnacle(UUID ownerId) {
-		super(ownerId, 228, "Valakut, the Molten Pinnacle", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-		this.expansionSetCode = "ZEN";
-		this.addAbility(new EntersBattlefieldTappedAbility());
-		this.addAbility(new ValakutTheMoltenPinnacleTriggeredAbility());
-		this.addAbility(new RedManaAbility());
+    static final FilterLandPermanent filter = new FilterLandPermanent("Mountain");
 
-	}
+    static {
+        filter.getSubtype().add("Mountain");
+        filter.setScopeSubtype(ComparisonScope.Any);
+    }
 
-	public ValakutTheMoltenPinnacle(final ValakutTheMoltenPinnacle card) {
-		super(card);
-	}
+    public ValakutTheMoltenPinnacle(UUID ownerId) {
+        super(ownerId, 228, "Valakut, the Molten Pinnacle", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+        this.expansionSetCode = "ZEN";
+        this.addAbility(new EntersBattlefieldTappedAbility());
+        this.addAbility(new ValakutTheMoltenPinnacleTriggeredAbility());
+        this.addAbility(new RedManaAbility());
 
-	@Override
-	public ValakutTheMoltenPinnacle copy() {
-		return new ValakutTheMoltenPinnacle(this);
-	}
+    }
+
+    public ValakutTheMoltenPinnacle(final ValakutTheMoltenPinnacle card) {
+        super(card);
+    }
+
+    @Override
+    public ValakutTheMoltenPinnacle copy() {
+        return new ValakutTheMoltenPinnacle(this);
+    }
 }
 
 class ValakutTheMoltenPinnacleTriggeredAbility extends TriggeredAbilityImpl<ValakutTheMoltenPinnacleTriggeredAbility> {
 
-	ValakutTheMoltenPinnacleTriggeredAbility () {
-		super(Zone.BATTLEFIELD, new DamageTargetEffect(3));
-		this.addTarget(new TargetCreatureOrPlayer());
-	}
+    ValakutTheMoltenPinnacleTriggeredAbility () {
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(3));
+        this.addTarget(new TargetCreatureOrPlayer());
+    }
 
-	ValakutTheMoltenPinnacleTriggeredAbility(ValakutTheMoltenPinnacleTriggeredAbility ability) {
-		super(ability);
-	}
+    ValakutTheMoltenPinnacleTriggeredAbility(ValakutTheMoltenPinnacleTriggeredAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		
-		if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone() == Zone.BATTLEFIELD) {
-			Permanent permanent = game.getPermanent(event.getTargetId());
-			if (permanent.getCardType().contains(CardType.LAND) && permanent.getControllerId().equals(this.controllerId)) {
-				if(permanent.hasSubtype("Mountain")){
-					
-					int count = game.getBattlefield().count(ValakutTheMoltenPinnacle.filter, permanent.getControllerId(), game);
-					
-					if(count > 5){
-						return true;
-					}
-				}
-			}
-		}
-		return false;
-	}
-	@Override
-	public ValakutTheMoltenPinnacleTriggeredAbility copy() {
-		return new ValakutTheMoltenPinnacleTriggeredAbility(this);
-	}
-	
-	@Override
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+
+        if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone() == Zone.BATTLEFIELD) {
+            Permanent permanent = game.getPermanent(event.getTargetId());
+            if (permanent.getCardType().contains(CardType.LAND) && permanent.getControllerId().equals(this.controllerId)) {
+                if(permanent.hasSubtype("Mountain")){
+
+                    int count = game.getBattlefield().count(ValakutTheMoltenPinnacle.filter, permanent.getControllerId(), game);
+
+                    if(count > 5){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    @Override
+    public ValakutTheMoltenPinnacleTriggeredAbility copy() {
+        return new ValakutTheMoltenPinnacleTriggeredAbility(this);
+    }
+
+    @Override
     public String getRule() {
         return "Whenever a Mountain enters the battlefield under your control, if you control at least five other Mountains, you may have {this} deal 3 damage to target creature or player.";
     }

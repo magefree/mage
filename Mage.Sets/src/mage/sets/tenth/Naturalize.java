@@ -43,28 +43,28 @@ import mage.target.TargetPermanent;
  */
 public class Naturalize extends CardImpl<Naturalize> {
 
-	private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
+    private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
 
-	static {
-		filter.getCardType().add(CardType.ARTIFACT);
-		filter.getCardType().add(CardType.ENCHANTMENT);
-		filter.setScopeCardType(ComparisonScope.Any);
-	}
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.getCardType().add(CardType.ENCHANTMENT);
+        filter.setScopeCardType(ComparisonScope.Any);
+    }
 
-	public Naturalize(UUID ownerId){
-		super(ownerId, 282, "Naturalize", Rarity.COMMON, new CardType[]{CardType.INSTANT},"{1}{G}");
-		this.expansionSetCode = "10E";
-		this.color.setGreen(true);
-		this.getSpellAbility().addTarget(new TargetPermanent(filter));
-		this.getSpellAbility().addEffect(new DestroyTargetEffect());
-	}
+    public Naturalize(UUID ownerId){
+        super(ownerId, 282, "Naturalize", Rarity.COMMON, new CardType[]{CardType.INSTANT},"{1}{G}");
+        this.expansionSetCode = "10E";
+        this.color.setGreen(true);
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+    }
 
-	public Naturalize(final Naturalize card) {
-		super(card);
-	}
+    public Naturalize(final Naturalize card) {
+        super(card);
+    }
 
-	@Override
-	public Naturalize copy() {
-		return new Naturalize(this);
-	}
+    @Override
+    public Naturalize copy() {
+        return new Naturalize(this);
+    }
 }

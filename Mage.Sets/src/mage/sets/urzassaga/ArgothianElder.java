@@ -47,26 +47,26 @@ import mage.target.common.TargetLandPermanent;
  */
 public class ArgothianElder extends CardImpl<ArgothianElder> {
 
-	public ArgothianElder(UUID ownerId) {
-		super(ownerId, 233, "Argothian Elder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
-		this.expansionSetCode = "USG";
-		this.subtype.add("Elf");
-		this.subtype.add("Druid");
-		this.color.setGreen(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
-		ability.addTarget(new TargetLandPermanent(2));
+    public ArgothianElder(UUID ownerId) {
+        super(ownerId, 233, "Argothian Elder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
+        this.expansionSetCode = "USG";
+        this.subtype.add("Elf");
+        this.subtype.add("Druid");
+        this.color.setGreen(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
+        ability.addTarget(new TargetLandPermanent(2));
                 this.addAbility(ability);
         }
 
-	public ArgothianElder(final ArgothianElder card) {
-		super(card);
-	}
+    public ArgothianElder(final ArgothianElder card) {
+        super(card);
+    }
 
-	@Override
-	public ArgothianElder copy() {
-		return new ArgothianElder(this);
-	}
+    @Override
+    public ArgothianElder copy() {
+        return new ArgothianElder(this);
+    }
 
 }

@@ -41,22 +41,22 @@ import mage.game.permanent.Permanent;
 public class UntapSourceEffect extends OneShotEffect<UntapSourceEffect> {
 
     public UntapSourceEffect() {
-	super(Outcome.Untap);
- 	staticText = "untap {this}";
+    super(Outcome.Untap);
+     staticText = "untap {this}";
    }
 
     public UntapSourceEffect(final UntapSourceEffect effect) {
-	super(effect);
+    super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-		if (permanent != null) {
-				permanent.untap(game);
-				return true;
-		}
-		return false;
+        if (permanent != null) {
+                permanent.untap(game);
+                return true;
+        }
+        return false;
     }
 
     @Override

@@ -40,39 +40,39 @@ import mage.game.permanent.Permanent;
  */
 public class AttacksIfAbleSourceEffect extends RequirementEffect<AttacksIfAbleSourceEffect> {
 
-	public AttacksIfAbleSourceEffect(Duration duration) {
-		super(duration);
-		if (this.duration == Duration.EndOfTurn)
-			staticText = "{this} attacks this turn if able";
-		else
-			staticText = "{this} attacks each turn if able";
-	}
+    public AttacksIfAbleSourceEffect(Duration duration) {
+        super(duration);
+        if (this.duration == Duration.EndOfTurn)
+            staticText = "{this} attacks this turn if able";
+        else
+            staticText = "{this} attacks each turn if able";
+    }
 
-	public AttacksIfAbleSourceEffect(final AttacksIfAbleSourceEffect effect) {
-		super(effect);
-	}
+    public AttacksIfAbleSourceEffect(final AttacksIfAbleSourceEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public AttacksIfAbleSourceEffect copy() {
-		return new AttacksIfAbleSourceEffect(this);
-	}
+    @Override
+    public AttacksIfAbleSourceEffect copy() {
+        return new AttacksIfAbleSourceEffect(this);
+    }
 
-	@Override
-	public boolean applies(Permanent permanent, Ability source, Game game) {
-		if (permanent.getId().equals(source.getSourceId())) {
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        if (permanent.getId().equals(source.getSourceId())) {
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public boolean mustAttack(Game game) {
-		return true;
-	}
+    @Override
+    public boolean mustAttack(Game game) {
+        return true;
+    }
 
-	@Override
-	public boolean mustBlock(Game game) {
-		return false;
-	}
+    @Override
+    public boolean mustBlock(Game game) {
+        return false;
+    }
 
 }

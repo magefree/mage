@@ -52,7 +52,7 @@ public class DevoutLightcaster extends CardImpl<DevoutLightcaster> {
     static {
         filterProtection.setUseColor(true);
         filterProtection.getColor().setBlack(true);
-		filterProtection.setScopeColor(ComparisonScope.Any);
+        filterProtection.setScopeColor(ComparisonScope.Any);
         filterTarget.setUseColor(true);
         filterTarget.getColor().setBlack(true);
     }

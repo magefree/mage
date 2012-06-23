@@ -36,20 +36,20 @@ import java.util.UUID;
  */
 public class GiantSpider extends mage.sets.tenth.GiantSpider {
 
-	public GiantSpider(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 179;
-		this.expansionSetCode = "M11";
-	}
+    public GiantSpider(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 179;
+        this.expansionSetCode = "M11";
+    }
 
-	public GiantSpider(final GiantSpider card) {
-		super(card);
-	}
+    public GiantSpider(final GiantSpider card) {
+        super(card);
+    }
 
-	@Override
-	public GiantSpider copy() {
-		return new GiantSpider(this);
-	}
+    @Override
+    public GiantSpider copy() {
+        return new GiantSpider(this);
+    }
 
 }
 

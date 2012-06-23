@@ -61,11 +61,11 @@ public class BlanchwoodArmor extends CardImpl<BlanchwoodArmor> {
         this.subtype.add("Aura");
         this.color.setGreen(true);
         TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		this.addAbility(ability);
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEnchantedEffect(new PermanentsOnBattlefieldCount(filter), new PermanentsOnBattlefieldCount(filter), Constants.Duration.WhileOnBattlefield)));
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEnchantedEffect(new PermanentsOnBattlefieldCount(filter), new PermanentsOnBattlefieldCount(filter), Constants.Duration.WhileOnBattlefield)));
     }
 
     public BlanchwoodArmor(final BlanchwoodArmor card) {

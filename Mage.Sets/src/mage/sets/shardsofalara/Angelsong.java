@@ -43,21 +43,21 @@ import mage.cards.CardImpl;
  */
 public class Angelsong extends CardImpl<Angelsong> {
 
-	public Angelsong(UUID ownerId) {
-		super(ownerId, 4, "Angelsong", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-		this.expansionSetCode = "ALA";
-		this.color.setWhite(true);
-		this.getSpellAbility().addEffect(new PreventAllDamageEffect(Duration.EndOfTurn, true));
-		this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
-	}
+    public Angelsong(UUID ownerId) {
+        super(ownerId, 4, "Angelsong", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
+        this.expansionSetCode = "ALA";
+        this.color.setWhite(true);
+        this.getSpellAbility().addEffect(new PreventAllDamageEffect(Duration.EndOfTurn, true));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+    }
 
-	public Angelsong(final Angelsong card) {
-		super(card);
-	}
+    public Angelsong(final Angelsong card) {
+        super(card);
+    }
 
-	@Override
-	public Angelsong copy() {
-		return new Angelsong(this);
-	}
+    @Override
+    public Angelsong copy() {
+        return new Angelsong(this);
+    }
 
 }

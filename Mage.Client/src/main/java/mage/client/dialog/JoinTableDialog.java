@@ -40,26 +40,26 @@ import org.apache.log4j.Logger;
  */
 public class JoinTableDialog extends MageDialog {
 
-	private final static Logger logger = Logger.getLogger(JoinTableDialog.class);
+    private final static Logger logger = Logger.getLogger(JoinTableDialog.class);
 
-	private UUID tableId;
-	private UUID roomId;
-	private boolean joined = false;
+    private UUID tableId;
+    private UUID roomId;
+    private boolean joined = false;
 
     /** Creates new form JoinTableDialog */
     public JoinTableDialog() {
         initComponents();
-		newPlayerPanel.showLevel(false);
+        newPlayerPanel.showLevel(false);
     }
 
-	public void showDialog(UUID roomId, UUID tableId) {
-		this.roomId = roomId;
-		this.tableId = tableId;
-		this.newPlayerPanel.setPlayerName(MageFrame.getSession().getUserName());
-		this.setModal(true);
-		this.setLocation(100, 100);
-		this.setVisible(true);
-	}
+    public void showDialog(UUID roomId, UUID tableId) {
+        this.roomId = roomId;
+        this.tableId = tableId;
+        this.newPlayerPanel.setPlayerName(MageFrame.getSession().getUserName());
+        this.setModal(true);
+        this.setLocation(100, 100);
+        this.setVisible(true);
+    }
 
 
     /** This method is called from within the constructor to
@@ -120,32 +120,32 @@ public class JoinTableDialog extends MageDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-	private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-		this.joined = false;
-		this.hideDialog();
-	}//GEN-LAST:event_btnCancelActionPerformed
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        this.joined = false;
+        this.hideDialog();
+    }//GEN-LAST:event_btnCancelActionPerformed
 
-	private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
-		Session session = MageFrame.getSession();
-		try {
-			joined = session.joinTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), "Human", 1, DeckImporterUtil.importDeck(this.newPlayerPanel.getDeckFile()));
-		} catch (Exception ex) {
-			handleError(ex);
-		}
-		this.hideDialog();
-	}//GEN-LAST:event_btnOKActionPerformed
+    private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
+        Session session = MageFrame.getSession();
+        try {
+            joined = session.joinTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), "Human", 1, DeckImporterUtil.importDeck(this.newPlayerPanel.getDeckFile()));
+        } catch (Exception ex) {
+            handleError(ex);
+        }
+        this.hideDialog();
+    }//GEN-LAST:event_btnOKActionPerformed
 
-	/**
-	 * @return the joined
-	 */
-	public boolean isJoined() {
-		return joined;
-	}
+    /**
+     * @return the joined
+     */
+    public boolean isJoined() {
+        return joined;
+    }
 
-	private void handleError(Exception ex) {
-		logger.fatal("Error loading deck", ex);
-		JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error loading deck.", "Error", JOptionPane.ERROR_MESSAGE);
-	}
+    private void handleError(Exception ex) {
+        logger.fatal("Error loading deck", ex);
+        JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error loading deck.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

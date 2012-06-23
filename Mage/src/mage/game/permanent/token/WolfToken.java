@@ -38,13 +38,13 @@ import mage.ObjectColor;
  */
 public class WolfToken extends Token {
 
-	public WolfToken() {
-		super("Wolf", "2/2 green Wolf creature token");
-		cardType.add(CardType.CREATURE);
-		color = ObjectColor.GREEN;
-		subtype.add("Wolf");
-		power = new MageInt(2);
-		toughness = new MageInt(2);
-	}
+    public WolfToken() {
+        super("Wolf", "2/2 green Wolf creature token");
+        cardType.add(CardType.CREATURE);
+        color = ObjectColor.GREEN;
+        subtype.add("Wolf");
+        power = new MageInt(2);
+        toughness = new MageInt(2);
+    }
 
 }

@@ -147,7 +147,7 @@ public final class CollectionViewerPanel extends JPanel {
             }
         });
 
-		jPanel1.add(Box.createVerticalGlue());
+        jPanel1.add(Box.createVerticalGlue());
 
         bigCard.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         bigCard.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -182,14 +182,14 @@ public final class CollectionViewerPanel extends JPanel {
 
     }
 
-	private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {
-		Component c = this.getParent();
-		while (c != null && !(c instanceof CollectionViewerPane)) {
-			c = c.getParent();
-		}
-		if (c != null)
-			c.setVisible(false);
-	}
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {
+        Component c = this.getParent();
+        while (c != null && !(c instanceof CollectionViewerPane)) {
+            c = c.getParent();
+        }
+        if (c != null)
+            c.setVisible(false);
+    }
 
     private final class MageBookContainer extends JPanel {
         public MageBookContainer() {
@@ -218,7 +218,7 @@ public final class CollectionViewerPanel extends JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private mage.client.cards.BigCard bigCard;
-	private javax.swing.JButton btnExit;
+    private javax.swing.JButton btnExit;
     private JComboBox formats;
     private MageBook mageBook;
     private JRadioButton small3x3;

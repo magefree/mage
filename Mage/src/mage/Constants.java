@@ -29,429 +29,429 @@
 package mage;
 
 public final class Constants {
-	
-	public enum ColoredManaSymbol {
-		W("W"), U("U"), B("B"), R("R"), G("G");
 
-		private String text;
+    public enum ColoredManaSymbol {
+        W("W"), U("U"), B("B"), R("R"), G("G");
 
-		ColoredManaSymbol(String text) {
-			this.text = text;
-		}
+        private String text;
 
-		@Override
-		public String toString() {
-			return text;
-		}
+        ColoredManaSymbol(String text) {
+            this.text = text;
+        }
 
-		public static ColoredManaSymbol lookup(char c) {
-			switch (c) {
-				case 'W':
-					return W;
-				case 'R':
-					return R;
-				case 'G':
-					return G;
-				case 'B':
-					return B;
-				case 'U':
-					return U;
-			}
-			return null;
-		}
+        @Override
+        public String toString() {
+            return text;
+        }
 
-	}
+        public static ColoredManaSymbol lookup(char c) {
+            switch (c) {
+                case 'W':
+                    return W;
+                case 'R':
+                    return R;
+                case 'G':
+                    return G;
+                case 'B':
+                    return B;
+                case 'U':
+                    return U;
+            }
+            return null;
+        }
+
+    }
 
     public enum ManaType {
         BLACK, BLUE, GREEN, RED, WHITE, COLORLESS
     }
-    
-	public enum CardType {
-		ARTIFACT ("Artifact"),
-		CREATURE ("Creature"),
-		ENCHANTMENT ("Enchantment"),
-		INSTANT ("Instant"),
-		LAND ("Land"),
-		PLANESWALKER ("Planeswalker"),
-		SORCERY ("Sorcery"),
-		TRIBAL ("Tribal");
 
-		private String text;
+    public enum CardType {
+        ARTIFACT ("Artifact"),
+        CREATURE ("Creature"),
+        ENCHANTMENT ("Enchantment"),
+        INSTANT ("Instant"),
+        LAND ("Land"),
+        PLANESWALKER ("Planeswalker"),
+        SORCERY ("Sorcery"),
+        TRIBAL ("Tribal");
 
-		CardType(String text) {
-			this.text = text;
-		}
+        private String text;
 
-		@Override
-		public String toString() {
-			return text;
-		}
-		
-	}
+        CardType(String text) {
+            this.text = text;
+        }
 
-	public enum Rarity {
+        @Override
+        public String toString() {
+            return text;
+        }
 
-		NA ("na", "na", "N", 0),
-		LAND ("Land", "common", "C", 1),
-		COMMON ("Common", "common", "C", 1),
-		UNCOMMON ("Uncommon", "uncommon", "U", 2),
-		RARE ("Rare", "rare", "R", 3),
-		MYTHIC ("Mythic", "mythic", "M", 3);
+    }
 
-		private String text;
-		private String symbolCode;
-		private String code;
-		private int rating;
+    public enum Rarity {
 
-		Rarity(String text, String symbolCode, String code, int rating) {
-			this.text = text;
-			this.symbolCode = symbolCode;
-			this.code = code;
-			this.rating = rating;
-		}
+        NA ("na", "na", "N", 0),
+        LAND ("Land", "common", "C", 1),
+        COMMON ("Common", "common", "C", 1),
+        UNCOMMON ("Uncommon", "uncommon", "U", 2),
+        RARE ("Rare", "rare", "R", 3),
+        MYTHIC ("Mythic", "mythic", "M", 3);
 
-		@Override
-		public String toString() {
-			return text;
-		}
+        private String text;
+        private String symbolCode;
+        private String code;
+        private int rating;
 
-		public String getSymbolCode() {
-			return symbolCode;
-		}
+        Rarity(String text, String symbolCode, String code, int rating) {
+            this.text = text;
+            this.symbolCode = symbolCode;
+            this.code = code;
+            this.rating = rating;
+        }
 
-		public String getCode() {
-			return code;
-		}
+        @Override
+        public String toString() {
+            return text;
+        }
 
-		public int getRating() {
-			return rating;
-		}
-	}
+        public String getSymbolCode() {
+            return symbolCode;
+        }
 
-	public enum AbilityType {
-		PLAY_LAND("Play land"),
-		MANA("Mana"),
-		SPELL("Spell"),
-		ACTIVATED("Activated"),
-		STATIC("Static"),
-		TRIGGERED("Triggered"),
-		EVASION("Evasion"),
-		LOYALTY("Loyalty"),
-		SPECIAL_ACTION("Special Action");
+        public String getCode() {
+            return code;
+        }
 
-		private String text;
+        public int getRating() {
+            return rating;
+        }
+    }
 
-		AbilityType(String text) {
-			this.text = text;
-		}
+    public enum AbilityType {
+        PLAY_LAND("Play land"),
+        MANA("Mana"),
+        SPELL("Spell"),
+        ACTIVATED("Activated"),
+        STATIC("Static"),
+        TRIGGERED("Triggered"),
+        EVASION("Evasion"),
+        LOYALTY("Loyalty"),
+        SPECIAL_ACTION("Special Action");
 
-		@Override
-		public String toString() {
-			return text;
-		}
-	}
+        private String text;
 
-	public enum EffectType {
+        AbilityType(String text) {
+            this.text = text;
+        }
 
-		ONESHOT("One Shot Effect"),
-		CONTINUOUS("Continuous Effect"),
-		REPLACEMENT("Replacement Effect"),
-		PREVENTION("Prevention Effect"),
-		REDIRECTION("Redirection Effect"),
-		ASTHOUGH("As Though Effect"), 
-		RESTRICTION("Restriction Effect"),
-		REQUIREMENT("Requirement Effect"),
-		COSTMODIFICATION("Cost Modification Effect");
+        @Override
+        public String toString() {
+            return text;
+        }
+    }
 
-		private String text;
+    public enum EffectType {
 
-		EffectType(String text) {
-			this.text = text;
-		}
+        ONESHOT("One Shot Effect"),
+        CONTINUOUS("Continuous Effect"),
+        REPLACEMENT("Replacement Effect"),
+        PREVENTION("Prevention Effect"),
+        REDIRECTION("Redirection Effect"),
+        ASTHOUGH("As Though Effect"), 
+        RESTRICTION("Restriction Effect"),
+        REQUIREMENT("Requirement Effect"),
+        COSTMODIFICATION("Cost Modification Effect");
 
-		@Override
-		public String toString() {
-			return text;
-		}
-	}
+        private String text;
 
-	public enum AsThoughEffectType {
-		BLOCK,
-		BE_BLOCKED,
-		ATTACK,
-		CAST,
-		TARGET,
-		PAY,
-		DAMAGE
-	}
+        EffectType(String text) {
+            this.text = text;
+        }
 
-	public enum Duration {
-		OneUse(""),
-		EndOfGame("for the rest of the game"),
-		WhileOnBattlefield(""),
-		WhileOnStack(""),
+        @Override
+        public String toString() {
+            return text;
+        }
+    }
+
+    public enum AsThoughEffectType {
+        BLOCK,
+        BE_BLOCKED,
+        ATTACK,
+        CAST,
+        TARGET,
+        PAY,
+        DAMAGE
+    }
+
+    public enum Duration {
+        OneUse(""),
+        EndOfGame("for the rest of the game"),
+        WhileOnBattlefield(""),
+        WhileOnStack(""),
         WhileInGraveyard(""),
-		EndOfTurn("until end of turn"),
-		EndOfCombat("until end of combat"),
-		Custom("");
+        EndOfTurn("until end of turn"),
+        EndOfCombat("until end of combat"),
+        Custom("");
 
-		private String text;
+        private String text;
 
-		Duration(String text) {
-			this.text = text;
-		}
+        Duration(String text) {
+            this.text = text;
+        }
 
-		@Override
-		public String toString() {
-			return text;
-		}
+        @Override
+        public String toString() {
+            return text;
+        }
 
-	}
+    }
 
-	public enum Layer {
-		CopyEffects_1,
-		ControlChangingEffects_2,
-		TextChangingEffects_3,
-		TypeChangingEffects_4,
-		ColorChangingEffects_5,
-		AbilityAddingRemovingEffects_6,
-		PTChangingEffects_7,
-		PlayerEffects,
-		RulesEffects
-	}
+    public enum Layer {
+        CopyEffects_1,
+        ControlChangingEffects_2,
+        TextChangingEffects_3,
+        TypeChangingEffects_4,
+        ColorChangingEffects_5,
+        AbilityAddingRemovingEffects_6,
+        PTChangingEffects_7,
+        PlayerEffects,
+        RulesEffects
+    }
 
-	public enum SubLayer {
-		CharacteristicDefining_7a,
-		SetPT_7b,
-		ModifyPT_7c,
-		Counters_7d,
-		SwitchPT_e,
-		NA
-	}
+    public enum SubLayer {
+        CharacteristicDefining_7a,
+        SetPT_7b,
+        ModifyPT_7c,
+        Counters_7d,
+        SwitchPT_e,
+        NA
+    }
 
-	public enum TableState {
-		WAITING ("Waiting for players"),
-		STARTING ("Waiting to start"),
-		DRAFTING ("Drafting"),
-		DUELING ("Dueling"),
-		SIDEBOARDING ("Sideboarding"),
-		CONSTRUCTING ("Constructing"),
-		FINISHED ("Finished");
+    public enum TableState {
+        WAITING ("Waiting for players"),
+        STARTING ("Waiting to start"),
+        DRAFTING ("Drafting"),
+        DUELING ("Dueling"),
+        SIDEBOARDING ("Sideboarding"),
+        CONSTRUCTING ("Constructing"),
+        FINISHED ("Finished");
 
-		private String text;
+        private String text;
 
-		TableState(String text) {
-			this.text = text;
-		}
+        TableState(String text) {
+            this.text = text;
+        }
 
-		@Override
-		public String toString() {
-			return text;
-		}
+        @Override
+        public String toString() {
+            return text;
+        }
 
-	}
+    }
 
-	public enum TurnPhase {
-		BEGINNING ("Beginning"),
-		PRECOMBAT_MAIN ("Precombat Main"),
-		COMBAT ("Combat"),
-		POSTCOMBAT_MAIN ("Postcombat Main"),
-		END ("End");
+    public enum TurnPhase {
+        BEGINNING ("Beginning"),
+        PRECOMBAT_MAIN ("Precombat Main"),
+        COMBAT ("Combat"),
+        POSTCOMBAT_MAIN ("Postcombat Main"),
+        END ("End");
 
-		private String text;
+        private String text;
 
-		TurnPhase(String text) {
-			this.text = text;
-		}
+        TurnPhase(String text) {
+            this.text = text;
+        }
 
-		@Override
-		public String toString() {
-			return text;
-		}
+        @Override
+        public String toString() {
+            return text;
+        }
 
-	}
+    }
 
-	public enum PhaseStep {
-		UNTAP ("Untap", 0),
-		UPKEEP ("Upkeep", 1),
-		DRAW ("Draw", 2),
-		PRECOMBAT_MAIN ("Precombat Main", 3),
-		BEGIN_COMBAT ("Begin Combat", 4),
-		DECLARE_ATTACKERS ("Declare Attackers", 5),
-		DECLARE_BLOCKERS ("Declare Blockers", 6),
-		FIRST_COMBAT_DAMAGE ("First Combat Damage", 7),
-		COMBAT_DAMAGE ("Combat Damage", 8),
-		END_COMBAT ("End Combat", 9),
-		POSTCOMBAT_MAIN ("Postcombat Main", 10),
-		END_TURN ("End Turn", 11),
-		CLEANUP ("Cleanup", 12);
+    public enum PhaseStep {
+        UNTAP ("Untap", 0),
+        UPKEEP ("Upkeep", 1),
+        DRAW ("Draw", 2),
+        PRECOMBAT_MAIN ("Precombat Main", 3),
+        BEGIN_COMBAT ("Begin Combat", 4),
+        DECLARE_ATTACKERS ("Declare Attackers", 5),
+        DECLARE_BLOCKERS ("Declare Blockers", 6),
+        FIRST_COMBAT_DAMAGE ("First Combat Damage", 7),
+        COMBAT_DAMAGE ("Combat Damage", 8),
+        END_COMBAT ("End Combat", 9),
+        POSTCOMBAT_MAIN ("Postcombat Main", 10),
+        END_TURN ("End Turn", 11),
+        CLEANUP ("Cleanup", 12);
 
-		private String text;
+        private String text;
 
         /**
          * Index is used for game state scoring system.
          */
         private int index;
 
-		PhaseStep(String text, int index) {
-			this.text = text;
+        PhaseStep(String text, int index) {
+            this.text = text;
             this.index = index;
-		}
+        }
 
         public int getIndex() {
             return index;
         }
 
-		@Override
-		public String toString() {
-			return text;
-		}
+        @Override
+        public String toString() {
+            return text;
+        }
 
-	}
+    }
 
-	public enum Outcome {
-		Damage(false),
-		DestroyPermanent(false),
-		BoostCreature(true),
-		UnboostCreature(false),
-		AddAbility(true),
-		LoseAbility(false),
-		GainLife(true),
-		LoseLife(false),
+    public enum Outcome {
+        Damage(false),
+        DestroyPermanent(false),
+        BoostCreature(true),
+        UnboostCreature(false),
+        AddAbility(true),
+        LoseAbility(false),
+        GainLife(true),
+        LoseLife(false),
         ExtraTurn(true),
-		BecomeCreature(true),
-		PutCreatureInPlay(true),
-		PutCardInPlay(true),
-		PutLandInPlay(true),
-		GainControl(false),
-		DrawCard(true),
-		Discard(false),
-		Sacrifice(false),
-		PlayForFree(true),
-		ReturnToHand(false),
-		Exile(false),
-		Protect(true),
-		PutManaInPool(true),
-		Regenerate(true),
-		PreventDamage(true),
-		RedirectDamage(true),
-		Tap(false),
-		Transform(true),
-		Untap(true),
-		Win(true),
-		Copy(true, true),
-		Benefit(true),
-		Detriment(false),
-		Neutral(true),
-		Removal(true);
+        BecomeCreature(true),
+        PutCreatureInPlay(true),
+        PutCardInPlay(true),
+        PutLandInPlay(true),
+        GainControl(false),
+        DrawCard(true),
+        Discard(false),
+        Sacrifice(false),
+        PlayForFree(true),
+        ReturnToHand(false),
+        Exile(false),
+        Protect(true),
+        PutManaInPool(true),
+        Regenerate(true),
+        PreventDamage(true),
+        RedirectDamage(true),
+        Tap(false),
+        Transform(true),
+        Untap(true),
+        Win(true),
+        Copy(true, true),
+        Benefit(true),
+        Detriment(false),
+        Neutral(true),
+        Removal(true);
 
-		private boolean good;
+        private boolean good;
         private boolean canTargetAll;
 
-		Outcome(boolean good) {
-			this.good = good;
-		}
+        Outcome(boolean good) {
+            this.good = good;
+        }
 
         Outcome(boolean good, boolean canTargetAll) {
-			this.good = good;
+            this.good = good;
             this.canTargetAll = canTargetAll;
-		}
+        }
 
-		public boolean isGood() {
-			return good;
-		}
+        public boolean isGood() {
+            return good;
+        }
 
         public boolean isCanTargetAll() {
             return canTargetAll;
         }
     }
 
-	public enum Zone {
-		HAND, GRAVEYARD, LIBRARY, BATTLEFIELD, STACK, EXILED, ALL, OUTSIDE, PICK, COMMAND;
-		
-		public boolean match(Zone zone) {
-			return (this == zone || this == ALL || zone == ALL);
-		}
-	}
+    public enum Zone {
+        HAND, GRAVEYARD, LIBRARY, BATTLEFIELD, STACK, EXILED, ALL, OUTSIDE, PICK, COMMAND;
 
-	public enum TimingRule {
-		INSTANT, SORCERY
-	}
+        public boolean match(Zone zone) {
+            return (this == zone || this == ALL || zone == ALL);
+        }
+    }
 
-	public enum TargetController {
-		ANY, YOU, NOT_YOU, OPPONENT
-	}
+    public enum TimingRule {
+        INSTANT, SORCERY
+    }
 
-	public enum RangeOfInfluence {
-		ONE(1),
-		TWO(2),
-		ALL(0);
+    public enum TargetController {
+        ANY, YOU, NOT_YOU, OPPONENT
+    }
 
-		private int range;
+    public enum RangeOfInfluence {
+        ONE(1),
+        TWO(2),
+        ALL(0);
 
-		RangeOfInfluence(int range) {
-			this.range = range;
-		}
+        private int range;
 
-		public int getRange() {
-			return range;
-		}
-	}
+        RangeOfInfluence(int range) {
+            this.range = range;
+        }
 
-	public enum MultiplayerAttackOption {
-		MULTIPLE("Attack Multiple Players"),
-		LEFT("Attack Left"),
-		RIGHT("Attack Right");
+        public int getRange() {
+            return range;
+        }
+    }
 
-		private String text;
+    public enum MultiplayerAttackOption {
+        MULTIPLE("Attack Multiple Players"),
+        LEFT("Attack Left"),
+        RIGHT("Attack Right");
 
-		MultiplayerAttackOption(String text) {
-			this.text = text;
-		}
+        private String text;
 
-		@Override
-		public String toString() {
-			return text;
-		}
-	}
+        MultiplayerAttackOption(String text) {
+            this.text = text;
+        }
 
-	public enum SetType {
-		CORE("Core"),
-		EXPANSION("Expansion"),
-		REPRINT("Reprint");
+        @Override
+        public String toString() {
+            return text;
+        }
+    }
 
-		private String text;
+    public enum SetType {
+        CORE("Core"),
+        EXPANSION("Expansion"),
+        REPRINT("Reprint");
 
-		SetType(String text) {
-			this.text = text;
-		}
+        private String text;
 
-		@Override
-		public String toString() {
-			return text;
-		}
-	}
+        SetType(String text) {
+            this.text = text;
+        }
+
+        @Override
+        public String toString() {
+            return text;
+        }
+    }
 
     public enum AttachmentType {
         EQUIPMENT,
         AURA
     }
-    
+
     public enum WatcherScope {
         GAME,
         PLAYER,
         CARD
     }
 
-/*	public static final List<String> PlaneswalkerTypes = new ArrayList<String>()
-		{{add("Ajani"); add("Bolas"); add("Chandra"); add("Elspeth");
-		  add("Garruk"); add("Jace"); add("Liliana"); add("Nissa");
-		  add("Sarkhan"); add("Sorin"); add("Tezzeret"); add("Karn");
-		  add("Venser"); add("Gideon"); add("Koth");}};
+/*    public static final List<String> PlaneswalkerTypes = new ArrayList<String>()
+        {{add("Ajani"); add("Bolas"); add("Chandra"); add("Elspeth");
+          add("Garruk"); add("Jace"); add("Liliana"); add("Nissa");
+          add("Sarkhan"); add("Sorin"); add("Tezzeret"); add("Karn");
+          add("Venser"); add("Gideon"); add("Koth");}};
 */
 
-	private Constants() {
-		throw new AssertionError();
-	}
-	
+    private Constants() {
+        throw new AssertionError();
+    }
+
 }

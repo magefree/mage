@@ -69,40 +69,40 @@ public class ParallelLives extends CardImpl<ParallelLives> {
 
 class ParallelLivesEffect extends ReplacementEffectImpl<ParallelLivesEffect> {
 
-	public ParallelLivesEffect() {
-		super(Duration.WhileOnBattlefield, Outcome.Copy);
-		staticText = "If an effect would put one or more tokens onto the battlefield under your control, it puts twice that many of those tokens onto the battlefield instead";
-	}
+    public ParallelLivesEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Copy);
+        staticText = "If an effect would put one or more tokens onto the battlefield under your control, it puts twice that many of those tokens onto the battlefield instead";
+    }
 
-	public ParallelLivesEffect(final ParallelLivesEffect effect) {
-		super(effect);
-	}
+    public ParallelLivesEffect(final ParallelLivesEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public ParallelLivesEffect copy() {
-		return new ParallelLivesEffect(this);
-	}
+    @Override
+    public ParallelLivesEffect copy() {
+        return new ParallelLivesEffect(this);
+    }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		switch (event.getType()) {
-			case CREATE_TOKEN:
-				StackObject spell = game.getStack().getStackObject(event.getSourceId());
-				if (spell != null && spell.getControllerId().equals(source.getControllerId())) {
-					event.setAmount(event.getAmount() * 2);
-				}
-		}
-		return false;
-	}
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        switch (event.getType()) {
+            case CREATE_TOKEN:
+                StackObject spell = game.getStack().getStackObject(event.getSourceId());
+                if (spell != null && spell.getControllerId().equals(source.getControllerId())) {
+                    event.setAmount(event.getAmount() * 2);
+                }
+        }
+        return false;
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		return apply(game, source);
-	}
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        return apply(game, source);
+    }
 
 }

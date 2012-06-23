@@ -20,7 +20,7 @@ public class GatekeeperOfMalakirTest extends CardTestPlayerBase {
 
         setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
-        
+
         assertLife(playerA, 20);
         assertLife(playerB, 20);
         assertPermanentCount(playerA, "Gatekeeper of Malakir", 1);
@@ -28,5 +28,5 @@ public class GatekeeperOfMalakirTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, 1);
     }
 
-    
+
 }

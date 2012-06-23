@@ -74,41 +74,41 @@ public class CradleOfVitality extends CardImpl<CradleOfVitality> {
 
 
 class CradleOfVitalityGainLifeTriggeredAbility extends TriggeredAbilityImpl<CradleOfVitalityGainLifeTriggeredAbility> {
-	
-	public CradleOfVitalityGainLifeTriggeredAbility() {
-		super(Zone.BATTLEFIELD, new CradleOfVitalityEffect(), false);
-		addManaCost(new ManaCostsImpl("{1}{W}"));
-	}
 
-	public CradleOfVitalityGainLifeTriggeredAbility(final CradleOfVitalityGainLifeTriggeredAbility ability) {
-		super(ability);
-	}
+    public CradleOfVitalityGainLifeTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new CradleOfVitalityEffect(), false);
+        addManaCost(new ManaCostsImpl("{1}{W}"));
+    }
 
-	@Override
-	public CradleOfVitalityGainLifeTriggeredAbility copy() {
-		return new CradleOfVitalityGainLifeTriggeredAbility(this);
-	}
+    public CradleOfVitalityGainLifeTriggeredAbility(final CradleOfVitalityGainLifeTriggeredAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.GAINED_LIFE && event.getPlayerId().equals(this.controllerId)) {
-			this.getEffects().get(0).setValue("amount", event.getAmount());
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public CradleOfVitalityGainLifeTriggeredAbility copy() {
+        return new CradleOfVitalityGainLifeTriggeredAbility(this);
+    }
 
-	@Override
-	public String getRule() {
-		return "Whenever you gain life, you may pay {1}{W}. If you do, put a +1/+1 counter on target creature for each 1 life you gained";
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.GAINED_LIFE && event.getPlayerId().equals(this.controllerId)) {
+            this.getEffects().get(0).setValue("amount", event.getAmount());
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever you gain life, you may pay {1}{W}. If you do, put a +1/+1 counter on target creature for each 1 life you gained";
+    }
 }
 
 class CradleOfVitalityEffect extends OneShotEffect<CradleOfVitalityEffect> {
 
     public CradleOfVitalityEffect() {
-    	super(Outcome.Benefit);
-    	staticText = "Put a +1/+1 counter on target creature for each 1 life you gained";
+        super(Outcome.Benefit);
+        staticText = "Put a +1/+1 counter on target creature for each 1 life you gained";
     }
 
     public CradleOfVitalityEffect(final CradleOfVitalityEffect effect) {
@@ -122,13 +122,13 @@ class CradleOfVitalityEffect extends OneShotEffect<CradleOfVitalityEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-    	int affectedTargets = 0;
-    	Integer amount = (Integer) getValue("amount");
-		for (UUID uuid : targetPointer.getTargets(game, source)) {
-			Permanent permanent = game.getPermanent(uuid);
-			permanent.addCounters(CounterType.P1P1.createInstance(amount), game);
-			affectedTargets ++;
-		}
-		return affectedTargets > 0;
+        int affectedTargets = 0;
+        Integer amount = (Integer) getValue("amount");
+        for (UUID uuid : targetPointer.getTargets(game, source)) {
+            Permanent permanent = game.getPermanent(uuid);
+            permanent.addCounters(CounterType.P1P1.createInstance(amount), game);
+            affectedTargets ++;
+        }
+        return affectedTargets > 0;
     }
 }

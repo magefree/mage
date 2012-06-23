@@ -58,7 +58,7 @@ public class SenseiGoldenTail extends CardImpl<SenseiGoldenTail> {
         this.expansionSetCode = "CHK";
         this.subtype.add("Fox");
         this.subtype.add("Samurai");
-	this.color.setWhite(true);
+    this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         // Bushido 1 (When this blocks or becomes blocked, it gets +1/+1 until end of turn.)

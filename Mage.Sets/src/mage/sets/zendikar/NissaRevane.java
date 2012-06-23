@@ -51,74 +51,74 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class NissaRevane extends CardImpl<NissaRevane> {
 
-	private static final FilterCard nissasChosenFilter = new FilterCard();
-	private static final FilterCard elfFilter = new FilterCard();
+    private static final FilterCard nissasChosenFilter = new FilterCard();
+    private static final FilterCard elfFilter = new FilterCard();
 
-	static {
-		nissasChosenFilter.getName().add("Nissa's Chosen");
-		nissasChosenFilter.setMessage("card named Nissa's Chosen");
-		elfFilter.getSubtype().add("Elf");
-		elfFilter.setMessage("Elf creature cards");
-	}
+    static {
+        nissasChosenFilter.getName().add("Nissa's Chosen");
+        nissasChosenFilter.setMessage("card named Nissa's Chosen");
+        elfFilter.getSubtype().add("Elf");
+        elfFilter.setMessage("Elf creature cards");
+    }
 
-	public NissaRevane(UUID ownerId) {
-		super(ownerId, 170, "Nissa Revane", Rarity.MYTHIC, new CardType[]{ CardType.PLANESWALKER }, "{2}{G}{G}");
-		this.expansionSetCode = "ZEN";
-		this.subtype.add("Nissa");
-		this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(2)), ""));
+    public NissaRevane(UUID ownerId) {
+        super(ownerId, 170, "Nissa Revane", Rarity.MYTHIC, new CardType[]{ CardType.PLANESWALKER }, "{2}{G}{G}");
+        this.expansionSetCode = "ZEN";
+        this.subtype.add("Nissa");
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(2)), ""));
 
-		this.color.setGreen(true);
+        this.color.setGreen(true);
 
-		LoyaltyAbility ability1 = new LoyaltyAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(1, nissasChosenFilter)), 1);
-		this.addAbility(ability1);
+        LoyaltyAbility ability1 = new LoyaltyAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(1, nissasChosenFilter)), 1);
+        this.addAbility(ability1);
 
-		LoyaltyAbility ability2 = new LoyaltyAbility(new NissaRevaneGainLifeEffect(), 1);
-		this.addAbility(ability2);
+        LoyaltyAbility ability2 = new LoyaltyAbility(new NissaRevaneGainLifeEffect(), 1);
+        this.addAbility(ability2);
 
-		LoyaltyAbility ability3 = new LoyaltyAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, Integer.MAX_VALUE, elfFilter)), -7);
-		this.addAbility(ability3);
-	}
+        LoyaltyAbility ability3 = new LoyaltyAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, Integer.MAX_VALUE, elfFilter)), -7);
+        this.addAbility(ability3);
+    }
 
-	public NissaRevane(final NissaRevane card) {
-		super(card);
-	}
+    public NissaRevane(final NissaRevane card) {
+        super(card);
+    }
 
-	@Override
-	public NissaRevane copy() {
-		return new NissaRevane(this);
-	}
+    @Override
+    public NissaRevane copy() {
+        return new NissaRevane(this);
+    }
 }
 
 class NissaRevaneGainLifeEffect extends OneShotEffect<NissaRevaneGainLifeEffect> {
 
-	private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
-	static {
-		filter.getSubtype().add("Elf");
-	}
+    static {
+        filter.getSubtype().add("Elf");
+    }
 
-	public NissaRevaneGainLifeEffect() {
-		super(Outcome.GainLife);
-		staticText = "You gain 2 life for each Elf you control";
-	}
+    public NissaRevaneGainLifeEffect() {
+        super(Outcome.GainLife);
+        staticText = "You gain 2 life for each Elf you control";
+    }
 
-	public NissaRevaneGainLifeEffect(final NissaRevaneGainLifeEffect effect) {
-		super(effect);
-	}
+    public NissaRevaneGainLifeEffect(final NissaRevaneGainLifeEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public NissaRevaneGainLifeEffect copy() {
-		return new NissaRevaneGainLifeEffect(this);
-	}
+    @Override
+    public NissaRevaneGainLifeEffect copy() {
+        return new NissaRevaneGainLifeEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-		int life = 2 * game.getBattlefield().countAll(filter, game);
-		if (player != null) {
-			player.gainLife(life, game);
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        int life = 2 * game.getBattlefield().countAll(filter, game);
+        if (player != null) {
+            player.gainLife(life, game);
+        }
+        return true;
+    }
 
 }

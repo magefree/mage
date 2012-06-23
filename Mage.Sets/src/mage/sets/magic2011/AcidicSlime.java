@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class AcidicSlime extends mage.sets.magic2010.AcidicSlime {
 
-	public AcidicSlime(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 161;
-		this.expansionSetCode = "M11";
-	}
+    public AcidicSlime(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 161;
+        this.expansionSetCode = "M11";
+    }
 
-	public AcidicSlime(final AcidicSlime card) {
-		super(card);
-	}
+    public AcidicSlime(final AcidicSlime card) {
+        super(card);
+    }
 
-	@Override
-	public AcidicSlime copy() {
-		return new AcidicSlime(this);
-	}
+    @Override
+    public AcidicSlime copy() {
+        return new AcidicSlime(this);
+    }
 
 }

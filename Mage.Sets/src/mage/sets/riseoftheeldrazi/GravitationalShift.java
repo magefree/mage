@@ -43,7 +43,7 @@ import mage.Constants.Zone;
  * @author jeffwadsworth
  */
 public class GravitationalShift extends CardImpl<GravitationalShift> {
-   
+
     private final static FilterCreaturePermanent filter1 = new FilterCreaturePermanent("Creatures with flying");
     private final static FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Creatures without flying");
 
@@ -61,7 +61,7 @@ public class GravitationalShift extends CardImpl<GravitationalShift> {
 
         // Creatures with flying get +2/+0.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(2, 0, Duration.WhileOnBattlefield, filter1, false)));
-        
+
         // Creatures without flying get -2/-0.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(-2, 0, Duration.WhileOnBattlefield, filter2, false)));
     }

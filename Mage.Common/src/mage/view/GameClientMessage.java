@@ -40,108 +40,108 @@ import java.util.UUID;
 public class GameClientMessage implements Serializable {
     private static final long serialVersionUID = 1L;
 
-	private GameView gameView;
-	private CardsView cardsView;
-	private CardsView cardsView2;
-	private String message;
-	private AbilityPickerView abilityView;
-	private boolean flag;
-	private boolean cancel;
-	private String[] strings;
-	private Set<UUID> targets;
-	private int min;
-	private int max;
-	private Map<String, Serializable> options;
+    private GameView gameView;
+    private CardsView cardsView;
+    private CardsView cardsView2;
+    private String message;
+    private AbilityPickerView abilityView;
+    private boolean flag;
+    private boolean cancel;
+    private String[] strings;
+    private Set<UUID> targets;
+    private int min;
+    private int max;
+    private Map<String, Serializable> options;
 
-	public GameClientMessage(GameView gameView) {
-		this.gameView = gameView;
-	}
+    public GameClientMessage(GameView gameView) {
+        this.gameView = gameView;
+    }
 
-	public GameClientMessage(GameView gameView, String message) {
-		this.gameView = gameView;
-		this.message = message;
-	}
+    public GameClientMessage(GameView gameView, String message) {
+        this.gameView = gameView;
+        this.message = message;
+    }
 
-	private GameClientMessage(GameView gameView, String question, CardsView cardView, Set<UUID> targets, boolean required) {
-		this.gameView = gameView;
-		this.message = question;
-		this.cardsView = cardView;
-		this.targets = targets;
-		this.flag = required;
-	}
+    private GameClientMessage(GameView gameView, String question, CardsView cardView, Set<UUID> targets, boolean required) {
+        this.gameView = gameView;
+        this.message = question;
+        this.cardsView = cardView;
+        this.targets = targets;
+        this.flag = required;
+    }
 
-	public GameClientMessage(GameView gameView, String question, CardsView cardView, Set<UUID> targets, boolean required, Map<String, Serializable> options) {
-		this(gameView, question, cardView, targets, required);
-		this.options = options;
-	}
+    public GameClientMessage(GameView gameView, String question, CardsView cardView, Set<UUID> targets, boolean required, Map<String, Serializable> options) {
+        this(gameView, question, cardView, targets, required);
+        this.options = options;
+    }
 
-	public GameClientMessage(String[] choices, String message) {
-		this.strings = choices;
-		this.message = message;
-	}
+    public GameClientMessage(String[] choices, String message) {
+        this.strings = choices;
+        this.message = message;
+    }
 
-	public GameClientMessage(String message, int min, int max) {
-		this.message = message;
-		this.min = min;
-		this.max = max;
-	}
-	
-	public GameClientMessage(String message, CardsView pile1, CardsView pile2) {
-		this.message = message;
-		this.cardsView = pile1;
-		this.cardsView2 = pile2;
-	}
+    public GameClientMessage(String message, int min, int max) {
+        this.message = message;
+        this.min = min;
+        this.max = max;
+    }
 
-	public GameClientMessage(CardsView cardView, String name) {
-		this.cardsView = cardView;
-		this.message = name;
-	}
+    public GameClientMessage(String message, CardsView pile1, CardsView pile2) {
+        this.message = message;
+        this.cardsView = pile1;
+        this.cardsView2 = pile2;
+    }
 
-	public GameView getGameView() {
-		return gameView;
-	}
+    public GameClientMessage(CardsView cardView, String name) {
+        this.cardsView = cardView;
+        this.message = name;
+    }
 
-	public CardsView getCardsView() {
-		return cardsView;
-	}
+    public GameView getGameView() {
+        return gameView;
+    }
 
-	public String getMessage() {
-		return message;
-	}
+    public CardsView getCardsView() {
+        return cardsView;
+    }
 
-	public AbilityPickerView getAbilityView() {
-		return abilityView;
-	}
+    public String getMessage() {
+        return message;
+    }
 
-	public boolean isFlag() {
-		return flag;
-	}
+    public AbilityPickerView getAbilityView() {
+        return abilityView;
+    }
 
-	public String[] getStrings() {
-		return strings;
-	}
+    public boolean isFlag() {
+        return flag;
+    }
 
-	public Set<UUID> getTargets() {
-		return targets;
-	}
+    public String[] getStrings() {
+        return strings;
+    }
 
-	public CardsView getPile1() {
-		return cardsView;
-	}
-	
-	public CardsView getPile2() {
-		return cardsView2;
-	}
-	
-	public int getMin() {
-		return min;
-	}
+    public Set<UUID> getTargets() {
+        return targets;
+    }
 
-	public int getMax() {
-		return max;
-	}
+    public CardsView getPile1() {
+        return cardsView;
+    }
 
-	public Map<String, Serializable> getOptions() {
-		return options;
-	}
+    public CardsView getPile2() {
+        return cardsView2;
+    }
+
+    public int getMin() {
+        return min;
+    }
+
+    public int getMax() {
+        return max;
+    }
+
+    public Map<String, Serializable> getOptions() {
+        return options;
+    }
 }

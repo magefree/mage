@@ -46,72 +46,72 @@ import mage.game.stack.Spell;
  */
 public class CantCounterControlledEffect extends ReplacementEffectImpl<CantCounterControlledEffect> {
 
-	private FilterSpell filterTarget;
-	private FilterObject filterSource;
+    private FilterSpell filterTarget;
+    private FilterObject filterSource;
 
-	public CantCounterControlledEffect(FilterSpell filterTarget, FilterObject filterSource, Duration duration) {
-		super(duration, Outcome.Benefit);
-		this.filterTarget = filterTarget;
-		this.filterSource = filterSource;
-		setText();
-	}
+    public CantCounterControlledEffect(FilterSpell filterTarget, FilterObject filterSource, Duration duration) {
+        super(duration, Outcome.Benefit);
+        this.filterTarget = filterTarget;
+        this.filterSource = filterSource;
+        setText();
+    }
 
-	public CantCounterControlledEffect(FilterSpell filterTarget, Duration duration) {
-		this(filterTarget, null, duration);
-	}
+    public CantCounterControlledEffect(FilterSpell filterTarget, Duration duration) {
+        this(filterTarget, null, duration);
+    }
 
-	public CantCounterControlledEffect(final CantCounterControlledEffect effect) {
-		super(effect);
-		if (effect.filterTarget != null)
-			this.filterTarget = effect.filterTarget.copy();
-		if (effect.filterSource != null)
-			this.filterSource = effect.filterSource.copy();
-	}
+    public CantCounterControlledEffect(final CantCounterControlledEffect effect) {
+        super(effect);
+        if (effect.filterTarget != null)
+            this.filterTarget = effect.filterTarget.copy();
+        if (effect.filterSource != null)
+            this.filterSource = effect.filterSource.copy();
+    }
 
-	@Override
-	public CantCounterControlledEffect copy() {
-		return new CantCounterControlledEffect(this);
-	}
+    @Override
+    public CantCounterControlledEffect copy() {
+        return new CantCounterControlledEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		return true;
-	}
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        return true;
+    }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (event.getType() == EventType.COUNTER) {
-			filterTarget.getControllerId().clear();
-			filterTarget.getControllerId().add(source.getControllerId());
-			Spell spell = game.getStack().getSpell(event.getTargetId());
-			if (spell != null) {
-				if (filterTarget.match(spell, game)) {
-					if (filterSource == null)
-						return true;
-					else {
-						MageObject sourceObject = game.getObject(source.getSourceId());
-						if (sourceObject != null && filterSource.match(sourceObject, game)) {
-							return true;
-						}
-					}
-				}
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (event.getType() == EventType.COUNTER) {
+            filterTarget.getControllerId().clear();
+            filterTarget.getControllerId().add(source.getControllerId());
+            Spell spell = game.getStack().getSpell(event.getTargetId());
+            if (spell != null) {
+                if (filterTarget.match(spell, game)) {
+                    if (filterSource == null)
+                        return true;
+                    else {
+                        MageObject sourceObject = game.getObject(source.getSourceId());
+                        if (sourceObject != null && filterSource.match(sourceObject, game)) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
 
-	private void setText() {
-		StringBuilder sb = new StringBuilder();
-		sb.append(filterTarget.getMessage()).append(" can't be countered");
-		if (filterSource != null) {
-			sb.append(" by ").append(filterSource.getMessage());
-		}
-		staticText = sb.toString();
-	}
+    private void setText() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(filterTarget.getMessage()).append(" can't be countered");
+        if (filterSource != null) {
+            sb.append(" by ").append(filterSource.getMessage());
+        }
+        staticText = sb.toString();
+    }
 
 }

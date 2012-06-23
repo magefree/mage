@@ -42,21 +42,21 @@ import mage.target.TargetPlayer;
  */
 public class SignInBlood extends CardImpl<SignInBlood> {
 
-	public SignInBlood(UUID ownerId) {
-		super(ownerId, 112, "Sign in Blood", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}{B}");
-		this.expansionSetCode = "M10";
-		this.color.setBlack(true);
-		this.getSpellAbility().addTarget(new TargetPlayer());
-		this.getSpellAbility().addEffect(new DrawCardTargetEffect(2));
-		this.getSpellAbility().addEffect(new LoseLifeTargetEffect(2));
-	}
+    public SignInBlood(UUID ownerId) {
+        super(ownerId, 112, "Sign in Blood", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}{B}");
+        this.expansionSetCode = "M10";
+        this.color.setBlack(true);
+        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addEffect(new DrawCardTargetEffect(2));
+        this.getSpellAbility().addEffect(new LoseLifeTargetEffect(2));
+    }
 
-	public SignInBlood(final SignInBlood card) {
-		super(card);
-	}
+    public SignInBlood(final SignInBlood card) {
+        super(card);
+    }
 
-	@Override
-	public SignInBlood copy() {
-		return new SignInBlood(this);
-	}
+    @Override
+    public SignInBlood copy() {
+        return new SignInBlood(this);
+    }
 }

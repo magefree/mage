@@ -40,23 +40,23 @@ import mage.util.Logging;
  */
 public class SimulateBlockWorker implements Callable {
 
-	private final static Logger logger = Logging.getLogger(SimulationWorker.class.getName());
+    private final static Logger logger = Logging.getLogger(SimulationWorker.class.getName());
 
-	private SimulationNode node;
-	private ComputerPlayer3 player;
+    private SimulationNode node;
+    private ComputerPlayer3 player;
 
-	public SimulateBlockWorker(ComputerPlayer3 player, SimulationNode node) {
-		this.player = player;
-		this.node = node;
-	}
+    public SimulateBlockWorker(ComputerPlayer3 player, SimulationNode node) {
+        this.player = player;
+        this.node = node;
+    }
 
-	@Override
-	public Object call() {
-		try {
-//			player.simulateBlock(node);
-		} catch (Exception ex) {
-			logger.log(Level.SEVERE, null, ex);
-		}
-		return null;
-	}
+    @Override
+    public Object call() {
+        try {
+//            player.simulateBlock(node);
+        } catch (Exception ex) {
+            logger.log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }

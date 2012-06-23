@@ -49,14 +49,14 @@ public class NulltreadGargantuan extends CardImpl<NulltreadGargantuan> {
         super(ownerId, 102, "Nulltread Gargantuan", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{U}");
         this.expansionSetCode = "ARB";
         this.subtype.add("Beast");
-		this.color.setGreen(true);
-		this.color.setBlue(true);
+        this.color.setGreen(true);
+        this.color.setBlue(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
         Ability ability = new EntersBattlefieldTriggeredAbility(new PutOnLibraryTargetEffect(true), false);
-		Target target = new TargetControlledCreaturePermanent();
-		target.setRequired(true);
-		target.setNotTarget(true);
+        Target target = new TargetControlledCreaturePermanent();
+        target.setRequired(true);
+        target.setNotTarget(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

@@ -46,7 +46,7 @@ public class HundredTalonKami extends CardImpl<HundredTalonKami> {
         super(ownerId, 16, "Hundred-Talon Kami", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Spirit");
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());

@@ -51,7 +51,7 @@ public class Sickleslicer extends CardImpl<Sickleslicer> {
         this.expansionSetCode = "NPH";
         this.subtype.add("Equipment");
         this.addAbility(new EquipAbility(Constants.Outcome.BoostCreature, new GenericManaCost(4)));
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
         this.addAbility(new LivingWeaponAbility());
     }
 

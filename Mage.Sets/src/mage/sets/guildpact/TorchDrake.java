@@ -51,7 +51,7 @@ public class TorchDrake extends CardImpl<TorchDrake> {
         super(ownerId, 38, "Torch Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.expansionSetCode = "GPT";
         this.subtype.add("Drake");
-		this.color.setBlue(true);
+        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());

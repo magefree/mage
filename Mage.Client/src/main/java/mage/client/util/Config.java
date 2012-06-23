@@ -42,38 +42,38 @@ import org.apache.log4j.Logger;
  */
 public class Config {
 
-	private final static Logger logger = Logger.getLogger(Config.class);
+    private final static Logger logger = Logger.getLogger(Config.class);
 
-	public static final String remoteServer;
-	public static final String serverName;
-	public static final int port;
-	public static final double cardScalingFactor;
+    public static final String remoteServer;
+    public static final String serverName;
+    public static final int port;
+    public static final double cardScalingFactor;
     public static final double handScalingFactor;
-	public static final CardDimensions dimensions;
-	
-	public static final String defaultGameType;
-	public static final String defaultDeckPath;
-	public static final String defaultOtherPlayerIndex;
-	public static final String defaultComputerName;
+    public static final CardDimensions dimensions;
 
-	static {
-		Properties p = new Properties();
-		try {
-			p.load(new FileInputStream(new File("config/config.properties")));
-		} catch (IOException ex) {
-			logger.fatal("Config error ", ex);
-		}
-		serverName = p.getProperty("server-name");
-		port = Integer.parseInt(p.getProperty("port"));
-		remoteServer = p.getProperty("remote-server");
-		cardScalingFactor = Double.valueOf(p.getProperty("card-scaling-factor"));
+    public static final String defaultGameType;
+    public static final String defaultDeckPath;
+    public static final String defaultOtherPlayerIndex;
+    public static final String defaultComputerName;
+
+    static {
+        Properties p = new Properties();
+        try {
+            p.load(new FileInputStream(new File("config/config.properties")));
+        } catch (IOException ex) {
+            logger.fatal("Config error ", ex);
+        }
+        serverName = p.getProperty("server-name");
+        port = Integer.parseInt(p.getProperty("port"));
+        remoteServer = p.getProperty("remote-server");
+        cardScalingFactor = Double.valueOf(p.getProperty("card-scaling-factor"));
         handScalingFactor = Double.valueOf(p.getProperty("hand-scaling-factor"));
-		defaultGameType = p.getProperty("default-game-type", "Human");
-		defaultDeckPath = p.getProperty("default-deck-path");
-		defaultOtherPlayerIndex = p.getProperty("default-other-player-index");
-		defaultComputerName = p.getProperty("default-computer-name");
-		
-		dimensions = new CardDimensions(cardScalingFactor);
-	}
+        defaultGameType = p.getProperty("default-game-type", "Human");
+        defaultDeckPath = p.getProperty("default-deck-path");
+        defaultOtherPlayerIndex = p.getProperty("default-other-player-index");
+        defaultComputerName = p.getProperty("default-computer-name");
+
+        dimensions = new CardDimensions(cardScalingFactor);
+    }
 
 }

@@ -46,7 +46,7 @@ public class LostLeonin extends CardImpl<LostLeonin> {
         this.expansionSetCode = "NPH";
         this.subtype.add("Cat");
         this.subtype.add("Soldier");
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         this.addAbility(InfectAbility.getInstance());

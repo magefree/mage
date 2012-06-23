@@ -41,41 +41,41 @@ import mage.game.permanent.Permanent;
  */
 public class AddPlusOneCountersAttachedEffect extends OneShotEffect<AddPlusOneCountersAttachedEffect> {
 
-	private int amount;
+    private int amount;
 
-	public AddPlusOneCountersAttachedEffect(int amount) {
-		super(Outcome.BoostCreature);
-		this.amount = amount;
-		setText();
-	}
+    public AddPlusOneCountersAttachedEffect(int amount) {
+        super(Outcome.BoostCreature);
+        this.amount = amount;
+        setText();
+    }
 
-	public AddPlusOneCountersAttachedEffect(final AddPlusOneCountersAttachedEffect effect) {
-		super(effect);
-		this.amount = effect.amount;
-	}
+    public AddPlusOneCountersAttachedEffect(final AddPlusOneCountersAttachedEffect effect) {
+        super(effect);
+        this.amount = effect.amount;
+    }
 
-	@Override
-	public AddPlusOneCountersAttachedEffect copy() {
-		return new AddPlusOneCountersAttachedEffect(this);
-	}
+    @Override
+    public AddPlusOneCountersAttachedEffect copy() {
+        return new AddPlusOneCountersAttachedEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent enchantment = game.getPermanent(source.getSourceId());
-		if (enchantment != null && enchantment.getAttachedTo() != null) {
-			Permanent creature = game.getPermanent(enchantment.getAttachedTo());
-			if (creature != null) {
-				creature.addCounters(new PlusOneCounter(amount), game);
-			}
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent enchantment = game.getPermanent(source.getSourceId());
+        if (enchantment != null && enchantment.getAttachedTo() != null) {
+            Permanent creature = game.getPermanent(enchantment.getAttachedTo());
+            if (creature != null) {
+                creature.addCounters(new PlusOneCounter(amount), game);
+            }
+        }
+        return true;
+    }
 
     private void setText() {
-		if (amount > 1)
-			staticText = "put " + Integer.toString(amount) + " +1/+1 counters on enchanted creature";
-		else
-			staticText = "put a +1/+1 counter on enchanted creature";
-	}
+        if (amount > 1)
+            staticText = "put " + Integer.toString(amount) + " +1/+1 counters on enchanted creature";
+        else
+            staticText = "put a +1/+1 counter on enchanted creature";
+    }
 
 }

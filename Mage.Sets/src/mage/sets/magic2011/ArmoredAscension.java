@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class ArmoredAscension extends mage.sets.magic2010.ArmoredAscension {
 
-	public ArmoredAscension(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 5;
-		this.expansionSetCode = "M11";
-	}
+    public ArmoredAscension(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 5;
+        this.expansionSetCode = "M11";
+    }
 
-	public ArmoredAscension(final ArmoredAscension card) {
-		super(card);
-	}
+    public ArmoredAscension(final ArmoredAscension card) {
+        super(card);
+    }
 
-	@Override
-	public ArmoredAscension copy() {
-		return new ArmoredAscension(this);
-	}
+    @Override
+    public ArmoredAscension copy() {
+        return new ArmoredAscension(this);
+    }
 
 }

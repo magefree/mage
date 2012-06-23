@@ -40,7 +40,7 @@ import javax.swing.*;
  */
 public class FeedbackDialog extends javax.swing.JDialog {
 
-	private static final transient Logger log = Logger.getLogger(PreferencesDialog.class);
+    private static final transient Logger log = Logger.getLogger(PreferencesDialog.class);
 
     private String[] feedbackTypes = {"", "Bug or \"something doesn't work\"",
         "Feature or \"I need that function\"",
@@ -51,7 +51,7 @@ public class FeedbackDialog extends javax.swing.JDialog {
     public FeedbackDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-		cbFeedbackType.setModel(new DefaultComboBoxModel(feedbackTypes));
+        cbFeedbackType.setModel(new DefaultComboBoxModel(feedbackTypes));
     }
 
     /** This method is called from within the constructor to
@@ -282,26 +282,26 @@ public class FeedbackDialog extends javax.swing.JDialog {
     }
 
     private void reset() {
-	    cbFeedbackType.setSelectedIndex(0);
+        cbFeedbackType.setSelectedIndex(0);
         txtIdeaTitle.setText("");
         txtFeedbackMessage.setText("");
         txtEmail.setText("");
-	}
+    }
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				if (!dialog.isVisible()) {
-					dialog.setLocation(300, 200);
-					dialog.setVisible(true);
-				} else {
-					dialog.requestFocus();
-				}
-			}
-		});
+            public void run() {
+                if (!dialog.isVisible()) {
+                    dialog.setLocation(300, 200);
+                    dialog.setVisible(true);
+                } else {
+                    dialog.requestFocus();
+                }
+            }
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

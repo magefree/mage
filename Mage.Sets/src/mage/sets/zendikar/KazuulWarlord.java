@@ -50,7 +50,7 @@ public class KazuulWarlord extends CardImpl<KazuulWarlord> {
 
     static {
         filter.getSubtype().add("Ally");
-		filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.setScopeSubtype(Filter.ComparisonScope.Any);
         filter.setTargetController(TargetController.YOU);
     }
 

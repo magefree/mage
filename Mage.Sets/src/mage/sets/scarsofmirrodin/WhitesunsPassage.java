@@ -44,7 +44,7 @@ public class WhitesunsPassage extends CardImpl<WhitesunsPassage> {
     public WhitesunsPassage (UUID ownerId) {
         super(ownerId, 27, "Whitesun's Passage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "SOM";
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         this.getSpellAbility().addEffect(new GainLifeEffect(5));
     }
 

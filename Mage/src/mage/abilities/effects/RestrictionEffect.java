@@ -41,36 +41,36 @@ import mage.game.permanent.Permanent;
  */
 public abstract class RestrictionEffect<T extends RestrictionEffect<T>> extends ContinuousEffectImpl<T> {
 
-	public RestrictionEffect(Duration duration) {
-		super(duration, Outcome.Detriment);
-		this.effectType = EffectType.RESTRICTION;
-	}
+    public RestrictionEffect(Duration duration) {
+        super(duration, Outcome.Detriment);
+        this.effectType = EffectType.RESTRICTION;
+    }
 
-	public RestrictionEffect(final RestrictionEffect effect) {
-		super(effect);
-	}
+    public RestrictionEffect(final RestrictionEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		throw new UnsupportedOperationException("Not supported.");
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        throw new UnsupportedOperationException("Not supported.");
+    }
 
-	public abstract boolean applies(Permanent permanent, Ability source, Game game);
+    public abstract boolean applies(Permanent permanent, Ability source, Game game);
 
-	public boolean canAttack(Game game) {
-		return true;
-	}
+    public boolean canAttack(Game game) {
+        return true;
+    }
 
-	public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-		return true;
-	}
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        return true;
+    }
 
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-		return true;
-	}
+        return true;
+    }
 
-	public boolean canBeUntapped(Permanent permanent, Game game) {
-		return true;
-	}
-	
+    public boolean canBeUntapped(Permanent permanent, Game game) {
+        return true;
+    }
+
 }

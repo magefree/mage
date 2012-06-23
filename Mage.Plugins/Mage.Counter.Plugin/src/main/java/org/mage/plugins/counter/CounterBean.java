@@ -9,22 +9,22 @@ import java.io.Serializable;
  * @author nantuko
  */
 public class CounterBean implements Serializable {
-	
-	private static final long serialVersionUID = 6382055182568871761L;
 
-	private int gamesPlayed;
-	
-	private int version = 1;
-	
-	public int getGamesPlayed() {
-		return gamesPlayed;
-	}
+    private static final long serialVersionUID = 6382055182568871761L;
 
-	public void setGamesPlayed(int gamesPlayed) {
-		this.gamesPlayed = gamesPlayed;
-	}
+    private int gamesPlayed;
 
-	public final int getVersion() {
-		return version;
-	}
+    private int version = 1;
+
+    public int getGamesPlayed() {
+        return gamesPlayed;
+    }
+
+    public void setGamesPlayed(int gamesPlayed) {
+        this.gamesPlayed = gamesPlayed;
+    }
+
+    public final int getVersion() {
+        return version;
+    }
 }

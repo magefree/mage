@@ -45,92 +45,92 @@ import java.util.UUID;
  */
 public class TargetCard<T extends TargetCard<T>> extends TargetObject<TargetCard<T>> {
 
-	protected FilterCard filter;
+    protected FilterCard filter;
 
-	protected TargetCard(Zone zone) {
-		this(1, 1, zone, new FilterCard());
-	}
-	
-	public TargetCard(Zone zone, FilterCard filter) {
-		this(1, 1, zone, filter);
-	}
+    protected TargetCard(Zone zone) {
+        this(1, 1, zone, new FilterCard());
+    }
 
-	public TargetCard(int numTargets, Zone zone, FilterCard filter) {
-		this(numTargets, numTargets, zone, filter);
-	}
+    public TargetCard(Zone zone, FilterCard filter) {
+        this(1, 1, zone, filter);
+    }
 
-	public TargetCard(int minNumTargets, int maxNumTargets, Zone zone, FilterCard filter) {
-		this.minNumberOfTargets = minNumTargets;
-		this.maxNumberOfTargets = maxNumTargets;
-		this.zone = zone;
-		this.filter = filter;
-		this.targetName = filter.getMessage();
-	}
+    public TargetCard(int numTargets, Zone zone, FilterCard filter) {
+        this(numTargets, numTargets, zone, filter);
+    }
 
-	public TargetCard(final TargetCard target) {
-		super(target);
-		this.filter = target.filter.copy();
-	}
+    public TargetCard(int minNumTargets, int maxNumTargets, Zone zone, FilterCard filter) {
+        this.minNumberOfTargets = minNumTargets;
+        this.maxNumberOfTargets = maxNumTargets;
+        this.zone = zone;
+        this.filter = filter;
+        this.targetName = filter.getMessage();
+    }
 
-	@Override
-	public FilterCard getFilter() {
-		return this.filter;
-	}
+    public TargetCard(final TargetCard target) {
+        super(target);
+        this.filter = target.filter.copy();
+    }
 
-	/**
-	 * Checks if there are enough {@link Card} that can be chosen.
-	 *
-	 * @param sourceId - the target event source
-	 * @param sourceControllerId - controller of the target event source
-	 * @param game
-	 * @return - true if enough valid {@link Card} exist
-	 */
-	@Override
-	public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-		return canChoose(sourceControllerId, game);
-	}
+    @Override
+    public FilterCard getFilter() {
+        return this.filter;
+    }
 
-	/**
-	 * Checks if there are enough {@link Card} that can be selected.
-	 *
-	 * @param sourceControllerId - controller of the select event
-	 * @param game
-	 * @return - true if enough valid {@link Card} exist
-	 */
-	@Override
-	public boolean canChoose(UUID sourceControllerId, Game game) {
-		for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
-			if (filter.matchOwner(playerId)) {
-				Player player = game.getPlayer(playerId);
-				if (player != null) {
-					switch (zone) {
-						case HAND:
-							if (player.getHand().count(filter, player.getId(), game) >= this.minNumberOfTargets)
-								return true;
-							break;
-						case GRAVEYARD:
-							if (player.getGraveyard().count(filter, player.getId(), game) >= this.minNumberOfTargets)
-								return true;
-							break;
-						case LIBRARY:
-							if (player.getLibrary().count(filter, game) >= this.minNumberOfTargets)
-								return true;
-							break;
+    /**
+     * Checks if there are enough {@link Card} that can be chosen.
+     *
+     * @param sourceId - the target event source
+     * @param sourceControllerId - controller of the target event source
+     * @param game
+     * @return - true if enough valid {@link Card} exist
+     */
+    @Override
+    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+        return canChoose(sourceControllerId, game);
+    }
+
+    /**
+     * Checks if there are enough {@link Card} that can be selected.
+     *
+     * @param sourceControllerId - controller of the select event
+     * @param game
+     * @return - true if enough valid {@link Card} exist
+     */
+    @Override
+    public boolean canChoose(UUID sourceControllerId, Game game) {
+        for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
+            if (filter.matchOwner(playerId)) {
+                Player player = game.getPlayer(playerId);
+                if (player != null) {
+                    switch (zone) {
+                        case HAND:
+                            if (player.getHand().count(filter, player.getId(), game) >= this.minNumberOfTargets)
+                                return true;
+                            break;
+                        case GRAVEYARD:
+                            if (player.getGraveyard().count(filter, player.getId(), game) >= this.minNumberOfTargets)
+                                return true;
+                            break;
+                        case LIBRARY:
+                            if (player.getLibrary().count(filter, game) >= this.minNumberOfTargets)
+                                return true;
+                            break;
                         case EXILED:
                             if (game.getExile().getPermanentExile().count(filter, player.getId(), game) >= this.minNumberOfTargets)
                                 return true;
                             break;
-					}
-				}
-			}
-		}
-		return false;
-	}
+                    }
+                }
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-		return possibleTargets(sourceControllerId, game);
-	}
+    @Override
+    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+        return possibleTargets(sourceControllerId, game);
+    }
 
     public Set<UUID> possibleTargets(UUID sourceControllerId, Cards cards, Game game) {
         Set<UUID> possibleTargets = new HashSet<UUID>();
@@ -139,54 +139,54 @@ public class TargetCard<T extends TargetCard<T>> extends TargetObject<TargetCard
         }
         return possibleTargets;
     }
-    
-	@Override
-	public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
-		Set<UUID> possibleTargets = new HashSet<UUID>();
-		for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
-			if (filter.matchOwner(playerId)) {
-				Player player = game.getPlayer(playerId);
-				if (player != null) {
-					switch (zone) {
-						case HAND:
-							for (Card card: player.getHand().getCards(filter, game)) {
-								possibleTargets.add(card.getId());
-							}
-							break;
-						case GRAVEYARD:
-							for (Card card: player.getGraveyard().getCards(filter, game)) {
-								possibleTargets.add(card.getId());
-							}
-							break;
-						case LIBRARY:
-							for (Card card: player.getLibrary().getUniqueCards(game)) {
-								if (filter.match(card, game))
-									possibleTargets.add(card.getId());
-							}
-							break;
-						case EXILED:
-							for (Card card: game.getExile().getPermanentExile().getUniqueCards(game)) {
-								if (filter.match(card, player.getId(), game))
-									possibleTargets.add(card.getId());
-							}
-							break;
-					}
-				}
-			}
-		}
-		return possibleTargets;
-	}
 
-	public boolean canTarget(UUID id, Cards cards, Game game) {
-		Card card = cards.get(id, game);
-		if (card != null)
-			return filter.match(card, game);
-		return false;
-	}
+    @Override
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
+        Set<UUID> possibleTargets = new HashSet<UUID>();
+        for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
+            if (filter.matchOwner(playerId)) {
+                Player player = game.getPlayer(playerId);
+                if (player != null) {
+                    switch (zone) {
+                        case HAND:
+                            for (Card card: player.getHand().getCards(filter, game)) {
+                                possibleTargets.add(card.getId());
+                            }
+                            break;
+                        case GRAVEYARD:
+                            for (Card card: player.getGraveyard().getCards(filter, game)) {
+                                possibleTargets.add(card.getId());
+                            }
+                            break;
+                        case LIBRARY:
+                            for (Card card: player.getLibrary().getUniqueCards(game)) {
+                                if (filter.match(card, game))
+                                    possibleTargets.add(card.getId());
+                            }
+                            break;
+                        case EXILED:
+                            for (Card card: game.getExile().getPermanentExile().getUniqueCards(game)) {
+                                if (filter.match(card, player.getId(), game))
+                                    possibleTargets.add(card.getId());
+                            }
+                            break;
+                    }
+                }
+            }
+        }
+        return possibleTargets;
+    }
 
-	@Override
-	public TargetCard copy() {
-		return new TargetCard(this);
-	}
+    public boolean canTarget(UUID id, Cards cards, Game game) {
+        Card card = cards.get(id, game);
+        if (card != null)
+            return filter.match(card, game);
+        return false;
+    }
+
+    @Override
+    public TargetCard copy() {
+        return new TargetCard(this);
+    }
 
 }

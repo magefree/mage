@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class TomeScour extends mage.sets.magic2010.TomeScour {
 
-	public TomeScour(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 76;
-		this.expansionSetCode = "M11";
-	}
+    public TomeScour(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 76;
+        this.expansionSetCode = "M11";
+    }
 
-	public TomeScour(final TomeScour card) {
-		super(card);
-	}
+    public TomeScour(final TomeScour card) {
+        super(card);
+    }
 
-	@Override
-	public TomeScour copy() {
-		return new TomeScour(this);
-	}
+    @Override
+    public TomeScour copy() {
+        return new TomeScour(this);
+    }
 
 }

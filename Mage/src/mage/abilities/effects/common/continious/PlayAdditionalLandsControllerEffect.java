@@ -43,39 +43,39 @@ import mage.players.Player;
  */
 public class PlayAdditionalLandsControllerEffect extends ContinuousEffectImpl<PlayAdditionalLandsControllerEffect> {
 
-	protected int additionalCards;
+    protected int additionalCards;
 
-	public PlayAdditionalLandsControllerEffect(int additionalCards, Duration duration) {
-		super(duration, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
-		this.additionalCards = additionalCards;
-		setText();
-	}
+    public PlayAdditionalLandsControllerEffect(int additionalCards, Duration duration) {
+        super(duration, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
+        this.additionalCards = additionalCards;
+        setText();
+    }
 
-	public PlayAdditionalLandsControllerEffect(final PlayAdditionalLandsControllerEffect effect) {
-		super(effect);
-		this.additionalCards = effect.additionalCards;
-	}
+    public PlayAdditionalLandsControllerEffect(final PlayAdditionalLandsControllerEffect effect) {
+        super(effect);
+        this.additionalCards = effect.additionalCards;
+    }
 
-	@Override
-	public PlayAdditionalLandsControllerEffect copy() {
-		return new PlayAdditionalLandsControllerEffect(this);
-	}
+    @Override
+    public PlayAdditionalLandsControllerEffect copy() {
+        return new PlayAdditionalLandsControllerEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-		if (player != null) {
-			player.setLandsPerTurn(player.getLandsPerTurn() + this.additionalCards);
-			return true;
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+            player.setLandsPerTurn(player.getLandsPerTurn() + this.additionalCards);
+            return true;
+        }
+        return true;
+    }
 
-	private void setText() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("You may play ").append(Integer.toString(additionalCards)).append(" additional land").append((additionalCards == 1?"":"s"));
-		sb.append((duration==Duration.EndOfTurn?" this turn":""));
-		staticText = sb.toString();
-	}
+    private void setText() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("You may play ").append(Integer.toString(additionalCards)).append(" additional land").append((additionalCards == 1?"":"s"));
+        sb.append((duration==Duration.EndOfTurn?" this turn":""));
+        staticText = sb.toString();
+    }
 
 }

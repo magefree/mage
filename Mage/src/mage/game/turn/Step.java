@@ -41,68 +41,68 @@ import mage.game.events.GameEvent.EventType;
  */
 public abstract class Step<T extends Step<T>> implements Serializable {
 
-	private PhaseStep type;
-	private boolean hasPriority;
-	protected EventType stepEvent;
-	protected EventType preStepEvent;
-	protected EventType postStepEvent;
+    private PhaseStep type;
+    private boolean hasPriority;
+    protected EventType stepEvent;
+    protected EventType preStepEvent;
+    protected EventType postStepEvent;
     protected StepPart stepPart;
-    
+
     public enum StepPart {
         PRE, PRIORITY, POST;
     }
 
-	public abstract T copy();
+    public abstract T copy();
 
-	public Step(PhaseStep type, boolean hasPriority) {
-		this.type = type;
-		this.hasPriority = hasPriority;
-	}
+    public Step(PhaseStep type, boolean hasPriority) {
+        this.type = type;
+        this.hasPriority = hasPriority;
+    }
 
-	public Step(final Step step) {
-		this.type = step.type;
-		this.hasPriority = step.hasPriority;
-		this.stepEvent = step.stepEvent;
-		this.preStepEvent = step.preStepEvent;
-		this.postStepEvent = step.postStepEvent;
+    public Step(final Step step) {
+        this.type = step.type;
+        this.hasPriority = step.hasPriority;
+        this.stepEvent = step.stepEvent;
+        this.preStepEvent = step.preStepEvent;
+        this.postStepEvent = step.postStepEvent;
         this.stepPart = step.stepPart;
-	}
+    }
 
-	public PhaseStep getType() {
-		return type;
-	}
+    public PhaseStep getType() {
+        return type;
+    }
 
-	public void beginStep(Game game, UUID activePlayerId) {
+    public void beginStep(Game game, UUID activePlayerId) {
         stepPart = StepPart.PRE;
-		game.fireEvent(new GameEvent(preStepEvent, null, null, activePlayerId));
-	}
-    
+        game.fireEvent(new GameEvent(preStepEvent, null, null, activePlayerId));
+    }
+
     public void resumeBeginStep(Game game, UUID activePlayerId) {
         stepPart = StepPart.PRE;
     }
 
-	public void priority(Game game, UUID activePlayerId, boolean resuming) {
-		if (hasPriority) {
+    public void priority(Game game, UUID activePlayerId, boolean resuming) {
+        if (hasPriority) {
             stepPart = StepPart.PRIORITY;
-			game.playPriority(activePlayerId, resuming);
+            game.playPriority(activePlayerId, resuming);
         }
-	}
+    }
 
-	public void endStep(Game game, UUID activePlayerId) {
+    public void endStep(Game game, UUID activePlayerId) {
         stepPart = StepPart.POST;
-		game.fireEvent(new GameEvent(postStepEvent, null, null, activePlayerId));
-	}
+        game.fireEvent(new GameEvent(postStepEvent, null, null, activePlayerId));
+    }
 
-	public boolean skipStep(Game game, UUID activePlayerId) {
-		return game.replaceEvent(new GameEvent(stepEvent, null, null, activePlayerId));
-	}
+    public boolean skipStep(Game game, UUID activePlayerId) {
+        return game.replaceEvent(new GameEvent(stepEvent, null, null, activePlayerId));
+    }
 
-	public boolean getHasPriority() {
-		return this.hasPriority;
-	}
+    public boolean getHasPriority() {
+        return this.hasPriority;
+    }
 
     public StepPart getStepPart() {
         return stepPart;
     }
-    
+
 }

@@ -43,30 +43,30 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Deathmark extends CardImpl<Deathmark> {
 
-	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("green or white creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("green or white creature");
 
-	static {
-		filter.getColor().setGreen(true);
-		filter.getColor().setWhite(true);
-		filter.setUseColor(true);
-		filter.setScopeColor(Filter.ComparisonScope.Any);
-	}
+    static {
+        filter.getColor().setGreen(true);
+        filter.getColor().setWhite(true);
+        filter.setUseColor(true);
+        filter.setScopeColor(Filter.ComparisonScope.Any);
+    }
 
-	public Deathmark(UUID ownerId) {
-		super(ownerId, 134, "Deathmark", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{B}");
-		this.expansionSetCode = "10E";
-		this.color.setBlack(true);
-		this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-		this.getSpellAbility().addEffect(new DestroyTargetEffect());
-	}
+    public Deathmark(UUID ownerId) {
+        super(ownerId, 134, "Deathmark", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{B}");
+        this.expansionSetCode = "10E";
+        this.color.setBlack(true);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+    }
 
-	public Deathmark(final Deathmark card) {
-		super(card);
-	}
+    public Deathmark(final Deathmark card) {
+        super(card);
+    }
 
-	@Override
-	public Deathmark copy() {
-		return new Deathmark(this);
-	}
+    @Override
+    public Deathmark copy() {
+        return new Deathmark(this);
+    }
 
 }

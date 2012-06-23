@@ -52,7 +52,7 @@ public class CunningSparkmage extends CardImpl<CunningSparkmage> {
         this.expansionSetCode = "WWK";
         this.subtype.add("Human");
         this.subtype.add("Shaman");
-		this.color.setRed(true);        
+        this.color.setRed(true);        
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
         this.addAbility(HasteAbility.getInstance());

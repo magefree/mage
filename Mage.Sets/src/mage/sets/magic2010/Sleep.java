@@ -52,93 +52,93 @@ import mage.target.TargetPlayer;
  */
 public class Sleep extends CardImpl<Sleep> {
 
-	public Sleep(UUID ownerId) {
-		super(ownerId, 71, "Sleep", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");
-		this.expansionSetCode = "M10";
-		this.color.setBlue(true);
-		this.getSpellAbility().addTarget(new TargetPlayer());
-		this.getSpellAbility().addEffect(new SleepEffect());
-	}
+    public Sleep(UUID ownerId) {
+        super(ownerId, 71, "Sleep", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");
+        this.expansionSetCode = "M10";
+        this.color.setBlue(true);
+        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addEffect(new SleepEffect());
+    }
 
-	public Sleep(final Sleep card) {
-		super(card);
-	}
+    public Sleep(final Sleep card) {
+        super(card);
+    }
 
-	@Override
-	public Sleep copy() {
-		return new Sleep(this);
-	}
+    @Override
+    public Sleep copy() {
+        return new Sleep(this);
+    }
 }
 
 class SleepEffect extends OneShotEffect<SleepEffect> {
 
-	public SleepEffect() {
-		super(Outcome.Tap);
-		staticText = "Tap all creatures target player controls. Those creatures don't untap during that player's next untap step";
-	}
+    public SleepEffect() {
+        super(Outcome.Tap);
+        staticText = "Tap all creatures target player controls. Those creatures don't untap during that player's next untap step";
+    }
 
-	public SleepEffect(final SleepEffect effect) {
-		super(effect);
-	}
+    public SleepEffect(final SleepEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getFirstTarget());
-		if (player != null) {
-			for (Permanent creature: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game)) {
-				creature.tap(game);
-				game.addEffect(new SleepEffect2(creature.getId()), source);
-			}
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getFirstTarget());
+        if (player != null) {
+            for (Permanent creature: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game)) {
+                creature.tap(game);
+                game.addEffect(new SleepEffect2(creature.getId()), source);
+            }
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public SleepEffect copy() {
-		return new SleepEffect(this);
-	}
+    @Override
+    public SleepEffect copy() {
+        return new SleepEffect(this);
+    }
 
 }
 
 class SleepEffect2 extends ReplacementEffectImpl<SleepEffect2> {
 
-	protected UUID creatureId;
+    protected UUID creatureId;
 
-	public SleepEffect2(UUID creatureId) {
-		super(Duration.OneUse, Outcome.Detriment);
-		this.creatureId = creatureId;
-	}
+    public SleepEffect2(UUID creatureId) {
+        super(Duration.OneUse, Outcome.Detriment);
+        this.creatureId = creatureId;
+    }
 
-	public SleepEffect2(final SleepEffect2 effect) {
-		super(effect);
-		creatureId = effect.creatureId;
-	}
+    public SleepEffect2(final SleepEffect2 effect) {
+        super(effect);
+        creatureId = effect.creatureId;
+    }
 
-	@Override
-	public SleepEffect2 copy() {
-		return new SleepEffect2(this);
-	}
+    @Override
+    public SleepEffect2 copy() {
+        return new SleepEffect2(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		used = true;
-		return true;
-	}
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        used = true;
+        return true;
+    }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (game.getTurn().getStepType() == PhaseStep.UNTAP &&
-				event.getType() == EventType.UNTAP &&
-				event.getTargetId().equals(creatureId)) {
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (game.getTurn().getStepType() == PhaseStep.UNTAP &&
+                event.getType() == EventType.UNTAP &&
+                event.getTargetId().equals(creatureId)) {
+            return true;
+        }
+        return false;
+    }
 
 }

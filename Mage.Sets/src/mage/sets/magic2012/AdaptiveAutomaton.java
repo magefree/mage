@@ -53,127 +53,127 @@ import java.util.UUID;
  */
 public class AdaptiveAutomaton extends CardImpl<AdaptiveAutomaton> {
 
-	public AdaptiveAutomaton(UUID ownerId) {
-		super(ownerId, 201, "Adaptive Automaton", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
-		this.expansionSetCode = "M12";
-		this.subtype.add("Construct");
+    public AdaptiveAutomaton(UUID ownerId) {
+        super(ownerId, 201, "Adaptive Automaton", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
+        this.expansionSetCode = "M12";
+        this.subtype.add("Construct");
 
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-		// As Adaptive Automaton enters the battlefield, choose a creature type.
-		this.addAbility(new EntersBattlefieldAbility(new AdaptiveAutomatonEffect()));
-		// Adaptive Automaton is the chosen type in addition to its other types.
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new AdaptiveAutomatonAddSubtypeEffect()));
-		// Other creatures you control of the chosen type get +1/+1.
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new AdaptiveAutomatonBoostControlledEffect()));
-	}
+        // As Adaptive Automaton enters the battlefield, choose a creature type.
+        this.addAbility(new EntersBattlefieldAbility(new AdaptiveAutomatonEffect()));
+        // Adaptive Automaton is the chosen type in addition to its other types.
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new AdaptiveAutomatonAddSubtypeEffect()));
+        // Other creatures you control of the chosen type get +1/+1.
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new AdaptiveAutomatonBoostControlledEffect()));
+    }
 
-	public AdaptiveAutomaton(final AdaptiveAutomaton card) {
-		super(card);
-	}
+    public AdaptiveAutomaton(final AdaptiveAutomaton card) {
+        super(card);
+    }
 
-	@Override
-	public AdaptiveAutomaton copy() {
-		return new AdaptiveAutomaton(this);
-	}
+    @Override
+    public AdaptiveAutomaton copy() {
+        return new AdaptiveAutomaton(this);
+    }
 }
 
 class AdaptiveAutomatonEffect extends OneShotEffect<AdaptiveAutomatonEffect> {
 
-	public AdaptiveAutomatonEffect() {
-		super(Constants.Outcome.BoostCreature);
-		staticText = "As {this} enters the battlefield, choose a creature type";
-	}
+    public AdaptiveAutomatonEffect() {
+        super(Constants.Outcome.BoostCreature);
+        staticText = "As {this} enters the battlefield, choose a creature type";
+    }
 
-	public AdaptiveAutomatonEffect(final AdaptiveAutomatonEffect effect) {
-		super(effect);
-	}
+    public AdaptiveAutomatonEffect(final AdaptiveAutomatonEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-		Permanent permanent = game.getPermanent(source.getSourceId());
-		if (player != null && permanent != null) {
-			Choice typeChoice = new ChoiceImpl(true);
-			typeChoice.setChoices(Sets.getCreatureTypes());
-			while (!player.choose(Constants.Outcome.BoostCreature, typeChoice, game)) {
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (player != null && permanent != null) {
+            Choice typeChoice = new ChoiceImpl(true);
+            typeChoice.setChoices(Sets.getCreatureTypes());
+            while (!player.choose(Constants.Outcome.BoostCreature, typeChoice, game)) {
                 game.debugMessage("player canceled choosing type. retrying.");
             }
-			game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + typeChoice.getChoice());
-		    game.getState().setValue(permanent.getId() + "_type", typeChoice.getChoice());
-		}
-		return false;
-	}
+            game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + typeChoice.getChoice());
+            game.getState().setValue(permanent.getId() + "_type", typeChoice.getChoice());
+        }
+        return false;
+    }
 
-	@Override
-	public AdaptiveAutomatonEffect copy() {
-		return new AdaptiveAutomatonEffect(this);
-	}
+    @Override
+    public AdaptiveAutomatonEffect copy() {
+        return new AdaptiveAutomatonEffect(this);
+    }
 
 }
 
 class AdaptiveAutomatonAddSubtypeEffect extends ContinuousEffectImpl<AdaptiveAutomatonAddSubtypeEffect> {
-	public AdaptiveAutomatonAddSubtypeEffect() {
-		super(Duration.WhileOnBattlefield, Constants.Layer.TypeChangingEffects_4, Constants.SubLayer.NA, Constants.Outcome.Benefit);
-		staticText = "{this} is the chosen type in addition to its other types";
-	}
+    public AdaptiveAutomatonAddSubtypeEffect() {
+        super(Duration.WhileOnBattlefield, Constants.Layer.TypeChangingEffects_4, Constants.SubLayer.NA, Constants.Outcome.Benefit);
+        staticText = "{this} is the chosen type in addition to its other types";
+    }
 
-	public AdaptiveAutomatonAddSubtypeEffect(final AdaptiveAutomatonAddSubtypeEffect effect) {
-		super(effect);
-	}
+    public AdaptiveAutomatonAddSubtypeEffect(final AdaptiveAutomatonAddSubtypeEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getSourceId());
-		if (permanent != null) {
-			String subtype = (String) game.getState().getValue(permanent.getId() + "_type");
-			if (subtype != null && !permanent.getSubtype().contains(subtype)) {
-				permanent.getSubtype().add(subtype);
-			}
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            String subtype = (String) game.getState().getValue(permanent.getId() + "_type");
+            if (subtype != null && !permanent.getSubtype().contains(subtype)) {
+                permanent.getSubtype().add(subtype);
+            }
+        }
+        return true;
+    }
 
-	@Override
-	public AdaptiveAutomatonAddSubtypeEffect copy() {
-		return new AdaptiveAutomatonAddSubtypeEffect(this);
-	}
+    @Override
+    public AdaptiveAutomatonAddSubtypeEffect copy() {
+        return new AdaptiveAutomatonAddSubtypeEffect(this);
+    }
 }
 
 class AdaptiveAutomatonBoostControlledEffect extends ContinuousEffectImpl<AdaptiveAutomatonBoostControlledEffect> {
 
-	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
-	public AdaptiveAutomatonBoostControlledEffect() {
-		super(Duration.WhileOnBattlefield, Constants.Layer.PTChangingEffects_7, Constants.SubLayer.ModifyPT_7c, Constants.Outcome.BoostCreature);
-		staticText = "Other creatures you control of the chosen type get +1/+1";
-	}
+    public AdaptiveAutomatonBoostControlledEffect() {
+        super(Duration.WhileOnBattlefield, Constants.Layer.PTChangingEffects_7, Constants.SubLayer.ModifyPT_7c, Constants.Outcome.BoostCreature);
+        staticText = "Other creatures you control of the chosen type get +1/+1";
+    }
 
-	public AdaptiveAutomatonBoostControlledEffect(final AdaptiveAutomatonBoostControlledEffect effect) {
-		super(effect);
-	}
+    public AdaptiveAutomatonBoostControlledEffect(final AdaptiveAutomatonBoostControlledEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public AdaptiveAutomatonBoostControlledEffect copy() {
-		return new AdaptiveAutomatonBoostControlledEffect(this);
-	}
+    @Override
+    public AdaptiveAutomatonBoostControlledEffect copy() {
+        return new AdaptiveAutomatonBoostControlledEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getSourceId());
-		if (permanent != null) {
-			String subtype = (String) game.getState().getValue(permanent.getId() + "_type");
-			if (subtype != null) {
-				for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
-					if (!perm.getId().equals(source.getSourceId()) && perm.hasSubtype(subtype)) {
-						perm.addPower(1);
-						perm.addToughness(1);
-					}
-				}
-			}
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            String subtype = (String) game.getState().getValue(permanent.getId() + "_type");
+            if (subtype != null) {
+                for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
+                    if (!perm.getId().equals(source.getSourceId()) && perm.hasSubtype(subtype)) {
+                        perm.addPower(1);
+                        perm.addToughness(1);
+                    }
+                }
+            }
+        }
+        return true;
+    }
 
 }

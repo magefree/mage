@@ -41,7 +41,7 @@ import mage.filter.common.FilterCreaturePermanent;
 public class MyrSuperion extends CardImpl<MyrSuperion> {
 
     private static FilterCreaturePermanent filter = new FilterCreaturePermanent();
-    
+
     public MyrSuperion(UUID ownerId) {
         super(ownerId, 146, "Myr Superion", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
         this.expansionSetCode = "NPH";

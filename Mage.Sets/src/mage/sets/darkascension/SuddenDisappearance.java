@@ -59,7 +59,7 @@ public class SuddenDisappearance extends CardImpl<SuddenDisappearance> {
         // Exile all nonland permanents target player controls. Return the exiled cards to the battlefield under their owner's control at the beginning of the next end step.
         this.getSpellAbility().addEffect(new SuddenDisappearanceEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
-        
+
     }
 
     public SuddenDisappearance(final SuddenDisappearance card) {
@@ -75,15 +75,15 @@ public class SuddenDisappearance extends CardImpl<SuddenDisappearance> {
 class SuddenDisappearanceEffect extends OneShotEffect<SuddenDisappearanceEffect> {
 
     private static FilterNonlandPermanent filter = new FilterNonlandPermanent();
-    
+
     public SuddenDisappearanceEffect() {
         super(Outcome.Exile);
     }
-    
+
     public SuddenDisappearanceEffect(final SuddenDisappearanceEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         List<Permanent> perms = game.getBattlefield().getAllActivePermanents(filter, source.getFirstTarget(), game);
@@ -104,5 +104,5 @@ class SuddenDisappearanceEffect extends OneShotEffect<SuddenDisappearanceEffect>
     public SuddenDisappearanceEffect copy() {
         return new SuddenDisappearanceEffect(this);
     }
-    
+
 }

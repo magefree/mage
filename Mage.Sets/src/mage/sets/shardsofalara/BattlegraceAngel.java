@@ -78,35 +78,35 @@ public class BattlegraceAngel extends CardImpl<BattlegraceAngel> {
 
 class BattlegraceAngelAbility extends TriggeredAbilityImpl<BattlegraceAngelAbility> {
 
-	public BattlegraceAngelAbility() {
-		super(Zone.BATTLEFIELD, new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn));
-	}
+    public BattlegraceAngelAbility() {
+        super(Zone.BATTLEFIELD, new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn));
+    }
 
-	public BattlegraceAngelAbility(final BattlegraceAngelAbility ability) {
-		super(ability);
-	}
+    public BattlegraceAngelAbility(final BattlegraceAngelAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public BattlegraceAngelAbility copy() {
-		return new BattlegraceAngelAbility(this);
-	}
+    @Override
+    public BattlegraceAngelAbility copy() {
+        return new BattlegraceAngelAbility(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == GameEvent.EventType.DECLARED_ATTACKERS && game.getActivePlayerId().equals(this.controllerId) ) {
-			if (game.getCombat().attacksAlone()) {
-				TargetCreaturePermanent target = new TargetCreaturePermanent();
-				this.addTarget(target);
-				this.getTargets().get(0).add(game.getCombat().getAttackers().get(0),game);
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.DECLARED_ATTACKERS && game.getActivePlayerId().equals(this.controllerId) ) {
+            if (game.getCombat().attacksAlone()) {
+                TargetCreaturePermanent target = new TargetCreaturePermanent();
+                this.addTarget(target);
+                this.getTargets().get(0).add(game.getCombat().getAttackers().get(0),game);
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "Whenever a creature you control attacks alone, it gains lifelink until end of turn.";
-	}
+    @Override
+    public String getRule() {
+        return "Whenever a creature you control attacks alone, it gains lifelink until end of turn.";
+    }
 
 }

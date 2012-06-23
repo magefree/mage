@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public abstract class DamagedEvent extends GameEvent {
 
-	protected boolean combat;
+    protected boolean combat;
 
-	public DamagedEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId, int amount, boolean combat) {
-		super(type, targetId, sourceId, playerId, amount, false);
-		this.combat = combat;
-	}
-	
-	public boolean isCombatDamage() {
-		return combat;
-	}
+    public DamagedEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId, int amount, boolean combat) {
+        super(type, targetId, sourceId, playerId, amount, false);
+        this.combat = combat;
+    }
 
-	public boolean isPreventable() {
-		return flag;
-	}
+    public boolean isCombatDamage() {
+        return combat;
+    }
+
+    public boolean isPreventable() {
+        return flag;
+    }
 
 }

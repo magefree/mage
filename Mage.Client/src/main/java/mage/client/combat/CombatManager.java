@@ -37,7 +37,7 @@ public class CombatManager {
     public void hideCombat() {
         ArrowBuilder.removeArrowsByType(ArrowBuilder.Type.COMBAT);
     }
-    
+
     private void displayArrows(List<CombatGroupView> combatView, UUID gameId) {
         parentPoint = null;
         for (CombatGroupView group : combatView) {
@@ -103,7 +103,7 @@ public class CombatManager {
             }
         }
     }
-    
+
     private Point getParentPoint(MagePermanent permanent) {
         if (parentPoint == null) {
             Component parentComponent = SwingUtilities.getRoot(permanent);

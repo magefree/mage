@@ -69,38 +69,38 @@ public class Manabarbs extends CardImpl<Manabarbs> {
 
 class ManabarbsTriggeredAbility extends TriggeredAbilityImpl<ManabarbsTriggeredAbility> {
 
-	private static final String staticText = "Whenever a player taps a land for mana, Manabarbs deals 1 damage to that player.";
+    private static final String staticText = "Whenever a player taps a land for mana, Manabarbs deals 1 damage to that player.";
 
-	public ManabarbsTriggeredAbility() {
-		super(Zone.BATTLEFIELD, new DamageTargetEffect(1));
-	}
+    public ManabarbsTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(1));
+    }
 
-	public ManabarbsTriggeredAbility(ManabarbsTriggeredAbility ability) {
-		super(ability);
-	}
+    public ManabarbsTriggeredAbility(ManabarbsTriggeredAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == GameEvent.EventType.TAPPED_FOR_MANA) {
-			Permanent permanent = game.getPermanent(event.getSourceId());
-			if (permanent == null) {
-				permanent = (Permanent) game.getLastKnownInformation(event.getSourceId(), Zone.BATTLEFIELD);
-			}
-			if (permanent != null && permanent.getCardType().contains(CardType.LAND)) {
-				getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getControllerId()));
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.TAPPED_FOR_MANA) {
+            Permanent permanent = game.getPermanent(event.getSourceId());
+            if (permanent == null) {
+                permanent = (Permanent) game.getLastKnownInformation(event.getSourceId(), Zone.BATTLEFIELD);
+            }
+            if (permanent != null && permanent.getCardType().contains(CardType.LAND)) {
+                getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getControllerId()));
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public ManabarbsTriggeredAbility copy() {
-		return new ManabarbsTriggeredAbility(this);
-	}
+    @Override
+    public ManabarbsTriggeredAbility copy() {
+        return new ManabarbsTriggeredAbility(this);
+    }
 
-	@Override
-	public String getRule() {
-		return staticText;
-	}
+    @Override
+    public String getRule() {
+        return staticText;
+    }
 }

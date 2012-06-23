@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class SafePassage extends mage.sets.magic2010.SafePassage {
 
-	public SafePassage(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 26;
-		this.expansionSetCode = "M11";
-	}
+    public SafePassage(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 26;
+        this.expansionSetCode = "M11";
+    }
 
-	public SafePassage(final SafePassage card) {
-		super(card);
-	}
+    public SafePassage(final SafePassage card) {
+        super(card);
+    }
 
-	@Override
-	public SafePassage copy() {
-		return new SafePassage(this);
-	}
+    @Override
+    public SafePassage copy() {
+        return new SafePassage(this);
+    }
 
 }

@@ -45,96 +45,96 @@ import java.util.UUID;
  */
 public class Turn implements Serializable {
 
-	private Phase currentPhase;
-	private UUID activePlayerId;
-	private List<Phase> phases = new ArrayList<Phase>();
+    private Phase currentPhase;
+    private UUID activePlayerId;
+    private List<Phase> phases = new ArrayList<Phase>();
 
-	public Turn() {
-		phases.add(new BeginningPhase());
-		phases.add(new PreCombatMainPhase());
-		phases.add(new CombatPhase());
-		phases.add(new PostCombatMainPhase());
-		phases.add(new EndPhase());
-	}
+    public Turn() {
+        phases.add(new BeginningPhase());
+        phases.add(new PreCombatMainPhase());
+        phases.add(new CombatPhase());
+        phases.add(new PostCombatMainPhase());
+        phases.add(new EndPhase());
+    }
 
-	public Turn(final Turn turn) {
-		if (turn.currentPhase != null)
-			this.currentPhase = turn.currentPhase.copy();
-		this.activePlayerId = turn.activePlayerId;
-		for (Phase phase: turn.phases) {
-			this.phases.add(phase.copy());
-		}
-		
-	}
+    public Turn(final Turn turn) {
+        if (turn.currentPhase != null)
+            this.currentPhase = turn.currentPhase.copy();
+        this.activePlayerId = turn.activePlayerId;
+        for (Phase phase: turn.phases) {
+            this.phases.add(phase.copy());
+        }
 
-	public TurnPhase getPhaseType() {
-		if (currentPhase != null)
-			return currentPhase.getType();
-		return null;
-	}
+    }
 
-	public Phase getPhase() {
-		return currentPhase;
-	}
+    public TurnPhase getPhaseType() {
+        if (currentPhase != null)
+            return currentPhase.getType();
+        return null;
+    }
 
-	public Phase getPhase(TurnPhase turnPhase) {
-		for (Phase phase: phases) {
-			if (phase.getType() == turnPhase) {
-				return phase;
-			}
-		}
-		return null;
-	}
+    public Phase getPhase() {
+        return currentPhase;
+    }
 
-	public void setPhase(Phase phase) {
-		this.currentPhase = phase;
-	}
+    public Phase getPhase(TurnPhase turnPhase) {
+        for (Phase phase: phases) {
+            if (phase.getType() == turnPhase) {
+                return phase;
+            }
+        }
+        return null;
+    }
 
-	public Step getStep() {
-		if (currentPhase != null)
-			return currentPhase.getStep();
-		return null;
-	}
+    public void setPhase(Phase phase) {
+        this.currentPhase = phase;
+    }
 
-	public PhaseStep getStepType() {
-		if (currentPhase != null && currentPhase.getStep() != null)
-			return currentPhase.getStep().getType();
-		return null;
-	}
+    public Step getStep() {
+        if (currentPhase != null)
+            return currentPhase.getStep();
+        return null;
+    }
+
+    public PhaseStep getStepType() {
+        if (currentPhase != null && currentPhase.getStep() != null)
+            return currentPhase.getStep().getType();
+        return null;
+    }
 
     public void play(Game game, UUID activePlayerId) {
-		if (game.isPaused() || game.isGameOver())
-			return;
+        if (game.isPaused() || game.isGameOver())
+            return;
 
-		if (game.getState().getTurnMods().skipTurn(activePlayerId))
-			return;
+        if (game.getState().getTurnMods().skipTurn(activePlayerId))
+            return;
 
-		checkTurnIsControlledByOtherPlayer(game, activePlayerId);
+        checkTurnIsControlledByOtherPlayer(game, activePlayerId);
 
-		this.activePlayerId = activePlayerId;
-		resetCounts();
-		game.getPlayer(activePlayerId).beginTurn(game);
-		for (Phase phase: phases) {
-			if (game.isPaused() || game.isGameOver())
-				return;
-			currentPhase = phase;
-			if (!game.getState().getTurnMods().skipPhase(activePlayerId, currentPhase.getType())) {
-				if (phase.play(game, activePlayerId)) {
-					//20091005 - 500.4/703.4n
-					game.emptyManaPools();
+        this.activePlayerId = activePlayerId;
+        resetCounts();
+        game.getPlayer(activePlayerId).beginTurn(game);
+        for (Phase phase: phases) {
+            if (game.isPaused() || game.isGameOver())
+                return;
+            currentPhase = phase;
+            if (!game.getState().getTurnMods().skipPhase(activePlayerId, currentPhase.getType())) {
+                if (phase.play(game, activePlayerId)) {
+                    //20091005 - 500.4/703.4n
+                    game.emptyManaPools();
 
-					//game.saveState();
+                    //game.saveState();
 
-					//20091005 - 500.8
-					playExtraPhases(game, phase.getType());
-				}
-			}
-			if (!currentPhase.equals(phase)) // phase was changed from the card
-				break;
-		}
-		//20091005 - 500.7
-		playExtraTurns(game);
-	}
+                    //20091005 - 500.8
+                    playExtraPhases(game, phase.getType());
+                }
+            }
+            if (!currentPhase.equals(phase)) // phase was changed from the card
+                break;
+        }
+        //20091005 - 500.7
+        playExtraTurns(game);
+    }
 
     public void resumePlay(Game game, boolean wasPaused) {
         activePlayerId = game.getActivePlayerId();
@@ -157,92 +157,92 @@ public class Turn implements Serializable {
         }
         while (it.hasNext()) {
             phase = it.next();
-			if (game.isPaused() || game.isGameOver())
-				return;
-			currentPhase = phase;
-			if (!game.getState().getTurnMods().skipPhase(activePlayerId, currentPhase.getType())) {
-				if (phase.play(game, activePlayerId)) {
-					//20091005 - 500.4/703.4n
-					game.emptyManaPools();
-					game.saveState();
-					//20091005 - 500.8
-					playExtraPhases(game, phase.getType());
-				}
-			}
-			if (!currentPhase.equals(phase)) // phase was changed from the card
-				break;
+            if (game.isPaused() || game.isGameOver())
+                return;
+            currentPhase = phase;
+            if (!game.getState().getTurnMods().skipPhase(activePlayerId, currentPhase.getType())) {
+                if (phase.play(game, activePlayerId)) {
+                    //20091005 - 500.4/703.4n
+                    game.emptyManaPools();
+                    game.saveState();
+                    //20091005 - 500.8
+                    playExtraPhases(game, phase.getType());
+                }
+            }
+            if (!currentPhase.equals(phase)) // phase was changed from the card
+                break;
         }
     }
 
-	private void checkTurnIsControlledByOtherPlayer(Game game, UUID activePlayerId) {
-		UUID newControllerId = game.getState().getTurnMods().controlsTurn(activePlayerId);
-		if (newControllerId != null && !newControllerId.equals(activePlayerId)) {
-			game.getPlayer(newControllerId).controlPlayersTurn(game, activePlayerId);
-		}
-	}
+    private void checkTurnIsControlledByOtherPlayer(Game game, UUID activePlayerId) {
+        UUID newControllerId = game.getState().getTurnMods().controlsTurn(activePlayerId);
+        if (newControllerId != null && !newControllerId.equals(activePlayerId)) {
+            game.getPlayer(newControllerId).controlPlayersTurn(game, activePlayerId);
+        }
+    }
 
-	private void resetCounts() {
-		for (Phase phase: phases) {
-			phase.resetCount();
-		}
-	}
+    private void resetCounts() {
+        for (Phase phase: phases) {
+            phase.resetCount();
+        }
+    }
 
-	private void playExtraPhases(Game game, TurnPhase afterPhase) {
-		TurnPhase extraPhase = game.getState().getTurnMods().extraPhase(activePlayerId, afterPhase);
-		if (extraPhase == null)
-			return;
-		Phase phase;
-		switch(extraPhase) {
-			case BEGINNING:
-				phase = new BeginningPhase();
-				break;
-			case PRECOMBAT_MAIN:
-				phase = new PreCombatMainPhase();
-				break;
-			case COMBAT:
-				phase = new CombatPhase();
-				break;
-			case POSTCOMBAT_MAIN:
-				phase = new PostCombatMainPhase();
-				break;
-			default:
-				phase = new EndPhase();
-		}
-		currentPhase = phase;
-		phase.play(game, activePlayerId);
-	}
+    private void playExtraPhases(Game game, TurnPhase afterPhase) {
+        TurnPhase extraPhase = game.getState().getTurnMods().extraPhase(activePlayerId, afterPhase);
+        if (extraPhase == null)
+            return;
+        Phase phase;
+        switch(extraPhase) {
+            case BEGINNING:
+                phase = new BeginningPhase();
+                break;
+            case PRECOMBAT_MAIN:
+                phase = new PreCombatMainPhase();
+                break;
+            case COMBAT:
+                phase = new CombatPhase();
+                break;
+            case POSTCOMBAT_MAIN:
+                phase = new PostCombatMainPhase();
+                break;
+            default:
+                phase = new EndPhase();
+        }
+        currentPhase = phase;
+        phase.play(game, activePlayerId);
+    }
 
-	private void playExtraTurns(Game game) {
-		while (game.getState().getTurnMods().extraTurn(activePlayerId)) {
-			this.play(game, activePlayerId);
-		}
-	}
+    private void playExtraTurns(Game game) {
+        while (game.getState().getTurnMods().extraTurn(activePlayerId)) {
+            this.play(game, activePlayerId);
+        }
+    }
 
-	public void endTurn(Game game, UUID activePlayerId) {
-		// Exile all spells and abilities on the stack
-		game.getStack().clear();
+    public void endTurn(Game game, UUID activePlayerId) {
+        // Exile all spells and abilities on the stack
+        game.getStack().clear();
 
-		// Discard down to your maximum hand size.
-		Player activePlayer = game.getPlayer(activePlayerId);
-		game.getState().setPriorityPlayerId(activePlayer.getId());
-		//20091005 - 514.1
-		if (!activePlayer.hasLeft() && !activePlayer.hasLost()) {
-			activePlayer.discardToMax(game);
-			activePlayer.setGameUnderYourControl(true);
-		}
+        // Discard down to your maximum hand size.
+        Player activePlayer = game.getPlayer(activePlayerId);
+        game.getState().setPriorityPlayerId(activePlayer.getId());
+        //20091005 - 514.1
+        if (!activePlayer.hasLeft() && !activePlayer.hasLost()) {
+            activePlayer.discardToMax(game);
+            activePlayer.setGameUnderYourControl(true);
+        }
 
-		// Damage wears off.
-		//20100423 - 514.2
-		game.getBattlefield().endOfTurn(activePlayerId, game);
-		game.getState().removeEotEffects(game);
+        // Damage wears off.
+        //20100423 - 514.2
+        game.getBattlefield().endOfTurn(activePlayerId, game);
+        game.getState().removeEotEffects(game);
 
-		Phase phase = new EndPhase();
-		phase.setStep(new CleanupStep());
-   		currentPhase = phase;
-		//phase.play(game, activePlayerId);
-	}
+        Phase phase = new EndPhase();
+        phase.setStep(new CleanupStep());
+           currentPhase = phase;
+        //phase.play(game, activePlayerId);
+    }
 
-	public Turn copy() {
-		return new Turn(this);
-	}
+    public Turn copy() {
+        return new Turn(this);
+    }
 }

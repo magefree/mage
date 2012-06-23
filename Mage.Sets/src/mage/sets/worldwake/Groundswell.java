@@ -51,45 +51,45 @@ import mage.watchers.common.LandfallWatcher;
  */
 public class Groundswell extends CardImpl<Groundswell> {
 
-	public Groundswell(UUID ownerId) {
-		super(ownerId, 104, "Groundswell", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
-		this.expansionSetCode = "WWK";
-		this.color.setGreen(true);
-		
-		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-		this.getSpellAbility().addEffect(new GroundswellEffect(Duration.EndOfTurn));
-		
-		this.addWatcher(new LandfallWatcher());
-	}
+    public Groundswell(UUID ownerId) {
+        super(ownerId, 104, "Groundswell", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
+        this.expansionSetCode = "WWK";
+        this.color.setGreen(true);
 
-	public Groundswell(final Groundswell card) {
-		super(card);
-	}
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addEffect(new GroundswellEffect(Duration.EndOfTurn));
 
-	@Override
-	public Groundswell copy() {
-		return new Groundswell(this);
-	}
+        this.addWatcher(new LandfallWatcher());
+    }
+
+    public Groundswell(final Groundswell card) {
+        super(card);
+    }
+
+    @Override
+    public Groundswell copy() {
+        return new Groundswell(this);
+    }
 }
 
 class GroundswellEffect extends ContinuousEffectImpl<GroundswellEffect> {
 
-	public GroundswellEffect(Duration duration) {
-		super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
-		staticText = "Target creature gets +2/+2 until end of turn.\nLandfall - If you had a land enter the battlefield under your control this turn, that creature gets +4/+4 until end of turn instead";
-	}
+    public GroundswellEffect(Duration duration) {
+        super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
+        staticText = "Target creature gets +2/+2 until end of turn.\nLandfall - If you had a land enter the battlefield under your control this turn, that creature gets +4/+4 until end of turn instead";
+    }
 
-	public GroundswellEffect(final GroundswellEffect effect) {
-		super(effect);
-	}
+    public GroundswellEffect(final GroundswellEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public GroundswellEffect copy() {
-		return new GroundswellEffect(this);
-	}
+    @Override
+    public GroundswellEffect copy() {
+        return new GroundswellEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
         Watcher watcher = game.getState().getWatchers().get("LandPlayed", source.getControllerId());
         Permanent target = (Permanent) game.getPermanent(source.getFirstTarget());
         if (target != null) {
@@ -103,7 +103,7 @@ class GroundswellEffect extends ContinuousEffectImpl<GroundswellEffect> {
             }
             return true;
         }
-		return false;
-	}
+        return false;
+    }
 
 }

@@ -50,7 +50,7 @@ public class Putrefax extends CardImpl<Putrefax> {
         super(ownerId, 126, "Putrefax", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Horror");
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);
         this.addAbility(TrampleAbility.getInstance());

@@ -36,22 +36,22 @@ import mage.game.match.MatchType;
  */
 public class TwoPlayerDuelType extends MatchType<TwoPlayerDuelType> {
 
-	public TwoPlayerDuelType() {
-		this.name = "Two Player Duel";
-		this.maxPlayers = 2;
-		this.minPlayers = 2;
-		this.numTeams = 0;
-		this.useAttackOption = false;
-		this.useRange = false;
-	}
+    public TwoPlayerDuelType() {
+        this.name = "Two Player Duel";
+        this.maxPlayers = 2;
+        this.minPlayers = 2;
+        this.numTeams = 0;
+        this.useAttackOption = false;
+        this.useRange = false;
+    }
 
-	protected TwoPlayerDuelType(final TwoPlayerDuelType matchType) {
-		super(matchType);
-	}
+    protected TwoPlayerDuelType(final TwoPlayerDuelType matchType) {
+        super(matchType);
+    }
 
-	@Override
-	public TwoPlayerDuelType copy() {
-		return new TwoPlayerDuelType(this);
-	}
+    @Override
+    public TwoPlayerDuelType copy() {
+        return new TwoPlayerDuelType(this);
+    }
 
 }

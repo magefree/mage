@@ -38,30 +38,30 @@ import mage.game.permanent.PermanentToken;
  */
 public class FilterToken<T extends FilterToken<T>> extends FilterCreaturePermanent<FilterToken<T>> {
 
-	public FilterToken() {
-		this("creature token");
-	}
+    public FilterToken() {
+        this("creature token");
+    }
 
-	public FilterToken(String name) {
-		super(name);
-	}
+    public FilterToken(String name) {
+        super(name);
+    }
 
-	public FilterToken(final FilterToken<T> filter) {
-		super(filter);
-	}
+    public FilterToken(final FilterToken<T> filter) {
+        super(filter);
+    }
 
-	@Override
-	public boolean match(Permanent permanent, Game game) {
+    @Override
+    public boolean match(Permanent permanent, Game game) {
         if (!(permanent instanceof PermanentToken))
             return notFilter;
-		if (!super.match(permanent, game))
-			return notFilter;
+        if (!super.match(permanent, game))
+            return notFilter;
 
-		return !notFilter;
-	}
+        return !notFilter;
+    }
 
-	@Override
-	public FilterToken<T> copy() {
-		return new FilterToken<T>(this);
-	}
+    @Override
+    public FilterToken<T> copy() {
+        return new FilterToken<T>(this);
+    }
 }

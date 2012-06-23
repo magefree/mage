@@ -41,71 +41,71 @@ import java.util.UUID;
  */
 public class TargetPermanentOrPlayerWithCounter extends TargetPermanentOrPlayer {
 
-	protected FilterPermanentOrPlayerWithCounter filter;
+    protected FilterPermanentOrPlayerWithCounter filter;
 
-	public TargetPermanentOrPlayerWithCounter() {
-		this(1, 1);
-	}
+    public TargetPermanentOrPlayerWithCounter() {
+        this(1, 1);
+    }
 
-	public TargetPermanentOrPlayerWithCounter(int numTargets) {
-		this(numTargets, numTargets);
-	}
+    public TargetPermanentOrPlayerWithCounter(int numTargets) {
+        this(numTargets, numTargets);
+    }
 
-	public TargetPermanentOrPlayerWithCounter(int minNumTargets, int maxNumTargets) {
-		super(minNumTargets, maxNumTargets);
-		this.filter = new FilterPermanentOrPlayerWithCounter();
-		this.targetName = filter.getMessage();
-		super.setFilter(this.filter);
-	}
+    public TargetPermanentOrPlayerWithCounter(int minNumTargets, int maxNumTargets) {
+        super(minNumTargets, maxNumTargets);
+        this.filter = new FilterPermanentOrPlayerWithCounter();
+        this.targetName = filter.getMessage();
+        super.setFilter(this.filter);
+    }
 
-	public TargetPermanentOrPlayerWithCounter(int minNumTargets, int maxNumTargets, boolean notTarget) {
-   		this(minNumTargets, maxNumTargets);
-		this.notTarget = notTarget;
-	}
+    public TargetPermanentOrPlayerWithCounter(int minNumTargets, int maxNumTargets, boolean notTarget) {
+           this(minNumTargets, maxNumTargets);
+        this.notTarget = notTarget;
+    }
 
-	public TargetPermanentOrPlayerWithCounter(final TargetPermanentOrPlayerWithCounter target) {
-		super(target);
-		this.filter = target.filter.copy();
-		super.setFilter(this.filter);
-	}
+    public TargetPermanentOrPlayerWithCounter(final TargetPermanentOrPlayerWithCounter target) {
+        super(target);
+        this.filter = target.filter.copy();
+        super.setFilter(this.filter);
+    }
 
-	@Override
-	public TargetPermanentOrPlayerWithCounter copy() {
-		return new TargetPermanentOrPlayerWithCounter(this);
-	}
+    @Override
+    public TargetPermanentOrPlayerWithCounter copy() {
+        return new TargetPermanentOrPlayerWithCounter(this);
+    }
 
-	@Override
-	public boolean canTarget(UUID id, Game game) {
-		Permanent permanent = game.getPermanent(id);
-		if (permanent != null) {
-			if (permanent.getCounters().size() == 0) {
-				return false;
-			}
-		}
-		Player player = game.getPlayer(id);
-		if (player != null) {
-			if (player.getCounters().size() == 0) {
-				return false;
-			}
-		}
-		return super.canTarget(id, game);
-	}
+    @Override
+    public boolean canTarget(UUID id, Game game) {
+        Permanent permanent = game.getPermanent(id);
+        if (permanent != null) {
+            if (permanent.getCounters().size() == 0) {
+                return false;
+            }
+        }
+        Player player = game.getPlayer(id);
+        if (player != null) {
+            if (player.getCounters().size() == 0) {
+                return false;
+            }
+        }
+        return super.canTarget(id, game);
+    }
 
-	@Override
-	public boolean canTarget(UUID id, Ability source, Game game) {
-		Permanent permanent = game.getPermanent(id);
-		if (permanent != null) {
-			if (permanent.getCounters().size() == 0) {
-				return false;
-			}
-		}
-		Player player = game.getPlayer(id);
-		if (player != null) {
-			if (player.getCounters().size() == 0) {
-				return false;
-			}
-		}
-		return super.canTarget(id, source, game);
-	}
+    @Override
+    public boolean canTarget(UUID id, Ability source, Game game) {
+        Permanent permanent = game.getPermanent(id);
+        if (permanent != null) {
+            if (permanent.getCounters().size() == 0) {
+                return false;
+            }
+        }
+        Player player = game.getPlayer(id);
+        if (player != null) {
+            if (player.getCounters().size() == 0) {
+                return false;
+            }
+        }
+        return super.canTarget(id, source, game);
+    }
 
 }

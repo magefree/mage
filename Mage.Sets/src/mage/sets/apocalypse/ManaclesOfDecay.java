@@ -57,11 +57,11 @@ public class ManaclesOfDecay extends CardImpl<ManaclesOfDecay> {
         this.subtype.add("Aura");
         this.color.setWhite(true);
         TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		this.addAbility(ability);
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ManaclesOfDecayFirstEffect()));
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ManaclesOfDecayFirstEffect()));
         this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostEnchantedEffect(-1, -1, Constants.Duration.EndOfTurn), new ColoredManaCost(Constants.ColoredManaSymbol.B)));
         this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ManaclesOfDecaySecondEffect(), new ColoredManaCost(Constants.ColoredManaSymbol.R)));
 
@@ -79,53 +79,53 @@ public class ManaclesOfDecay extends CardImpl<ManaclesOfDecay> {
 
 class ManaclesOfDecayFirstEffect extends RestrictionEffect<ManaclesOfDecayFirstEffect> {
 
-	public ManaclesOfDecayFirstEffect() {
-		super(Constants.Duration.WhileOnBattlefield);
-		staticText = "Enchanted creature can't attack";
-	}
+    public ManaclesOfDecayFirstEffect() {
+        super(Constants.Duration.WhileOnBattlefield);
+        staticText = "Enchanted creature can't attack";
+    }
 
-	public ManaclesOfDecayFirstEffect(final ManaclesOfDecayFirstEffect effect) {
-		super(effect);
-	}
+    public ManaclesOfDecayFirstEffect(final ManaclesOfDecayFirstEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean applies(Permanent permanent, Ability source, Game game) {
-		if (permanent.getAttachments().contains((source.getSourceId()))) {
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        if (permanent.getAttachments().contains((source.getSourceId()))) {
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public boolean canAttack(Game game) {
-		return false;
-	}
+    @Override
+    public boolean canAttack(Game game) {
+        return false;
+    }
 
-	@Override
-	public ManaclesOfDecayFirstEffect copy() {
-		return new ManaclesOfDecayFirstEffect(this);
-	}
+    @Override
+    public ManaclesOfDecayFirstEffect copy() {
+        return new ManaclesOfDecayFirstEffect(this);
+    }
 
 }
 
 class ManaclesOfDecaySecondEffect extends RestrictionEffect<ManaclesOfDecaySecondEffect> {
 
-	public ManaclesOfDecaySecondEffect() {
-		super(Constants.Duration.EndOfTurn);
-		staticText = "Enchanted creature can't block until end of turn";
-	}
+    public ManaclesOfDecaySecondEffect() {
+        super(Constants.Duration.EndOfTurn);
+        staticText = "Enchanted creature can't block until end of turn";
+    }
 
-	public ManaclesOfDecaySecondEffect(final ManaclesOfDecaySecondEffect effect) {
-		super(effect);
-	}
+    public ManaclesOfDecaySecondEffect(final ManaclesOfDecaySecondEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean applies(Permanent permanent, Ability source, Game game) {
-		if (permanent.getAttachments().contains((source.getSourceId()))) {
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        if (permanent.getAttachments().contains((source.getSourceId()))) {
+            return true;
+        }
+        return false;
+    }
 
     @Override
     public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
@@ -133,8 +133,8 @@ class ManaclesOfDecaySecondEffect extends RestrictionEffect<ManaclesOfDecaySecon
     }
 
     @Override
-	public ManaclesOfDecaySecondEffect copy() {
-		return new ManaclesOfDecaySecondEffect(this);
-	}
+    public ManaclesOfDecaySecondEffect copy() {
+        return new ManaclesOfDecaySecondEffect(this);
+    }
 
 }

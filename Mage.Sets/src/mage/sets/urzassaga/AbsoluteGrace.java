@@ -48,29 +48,29 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class AbsoluteGrace extends CardImpl<AbsoluteGrace> {
 
-	private static final FilterCard filter = new FilterCard("Black");
+    private static final FilterCard filter = new FilterCard("Black");
 
-	static {
-		filter.setUseColor(true);
-		filter.getColor().setBlack(true);
-		filter.setScopeColor(ComparisonScope.Any);
-	}
+    static {
+        filter.setUseColor(true);
+        filter.getColor().setBlack(true);
+        filter.setScopeColor(ComparisonScope.Any);
+    }
 
-	public AbsoluteGrace(UUID ownerId) {
-		super(ownerId, 1, "Absolute Grace", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
-		this.expansionSetCode = "USG";
-		this.color.setWhite(true);
-		Ability ability = new ProtectionAbility(filter);
+    public AbsoluteGrace(UUID ownerId) {
+        super(ownerId, 1, "Absolute Grace", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
+        this.expansionSetCode = "USG";
+        this.color.setWhite(true);
+        Ability ability = new ProtectionAbility(filter);
                 this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false)));
-	}
+    }
 
-	public AbsoluteGrace(final AbsoluteGrace card) {
-		super(card);
-	}
+    public AbsoluteGrace(final AbsoluteGrace card) {
+        super(card);
+    }
 
-	@Override
-	public AbsoluteGrace copy() {
-		return new AbsoluteGrace(this);
-	}
+    @Override
+    public AbsoluteGrace copy() {
+        return new AbsoluteGrace(this);
+    }
 
 }

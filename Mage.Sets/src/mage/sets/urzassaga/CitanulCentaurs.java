@@ -49,9 +49,9 @@ public class CitanulCentaurs extends CardImpl<CitanulCentaurs>{
         this.color.setGreen(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(3);
-        
-	this.addAbility(ShroudAbility.getInstance());
-	this.addAbility(new EchoAbility("{3}{G}"));
+
+    this.addAbility(ShroudAbility.getInstance());
+    this.addAbility(new EchoAbility("{3}{G}"));
     }
 
     public CitanulCentaurs(final CitanulCentaurs card) {

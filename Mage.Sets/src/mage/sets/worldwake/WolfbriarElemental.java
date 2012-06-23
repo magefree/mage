@@ -45,26 +45,26 @@ import mage.game.permanent.token.WolfToken;
  */
 public class WolfbriarElemental extends CardImpl<WolfbriarElemental> {
 
-	public WolfbriarElemental(UUID ownerId) {
-		super(ownerId, 118, "Wolfbriar Elemental", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-		this.expansionSetCode = "WWK";
-		this.subtype.add("Elemental");
-		this.color.setGreen(true);
-		this.power = new MageInt(4);
-		this.toughness = new MageInt(4);
+    public WolfbriarElemental(UUID ownerId) {
+        super(ownerId, 118, "Wolfbriar Elemental", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
+        this.expansionSetCode = "WWK";
+        this.subtype.add("Elemental");
+        this.color.setGreen(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
-		MultikickerAbility ability = new MultikickerAbility(new CreateTokenEffect(new WolfToken()), false);
-		ability.addManaCost(new ColoredManaCost(ColoredManaSymbol.G));
-		this.addAbility(ability);
-	}
+        MultikickerAbility ability = new MultikickerAbility(new CreateTokenEffect(new WolfToken()), false);
+        ability.addManaCost(new ColoredManaCost(ColoredManaSymbol.G));
+        this.addAbility(ability);
+    }
 
-	public WolfbriarElemental(final WolfbriarElemental card) {
-		super(card);
-	}
+    public WolfbriarElemental(final WolfbriarElemental card) {
+        super(card);
+    }
 
-	@Override
-	public WolfbriarElemental copy() {
-		return new WolfbriarElemental(this);
-	}
+    @Override
+    public WolfbriarElemental copy() {
+        return new WolfbriarElemental(this);
+    }
 
 }

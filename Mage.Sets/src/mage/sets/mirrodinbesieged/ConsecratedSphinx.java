@@ -51,11 +51,11 @@ public class ConsecratedSphinx extends CardImpl<ConsecratedSphinx> {
         super(ownerId, 21, "Consecrated Sphinx", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
         this.expansionSetCode = "MBS";
         this.subtype.add("Sphinx");
-		this.color.setBlue(true);
+        this.color.setBlue(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(6);
-		this.addAbility(FlyingAbility.getInstance());
-		this.addAbility(new ConsecratedSphinxTriggeredAbility());
+        this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(new ConsecratedSphinxTriggeredAbility());
     }
 
     public ConsecratedSphinx (final ConsecratedSphinx card) {
@@ -70,29 +70,29 @@ public class ConsecratedSphinx extends CardImpl<ConsecratedSphinx> {
 }
 
 class ConsecratedSphinxTriggeredAbility extends TriggeredAbilityImpl<ConsecratedSphinxTriggeredAbility> {
-	ConsecratedSphinxTriggeredAbility() {
-		super(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(2), true);
-	}
+    ConsecratedSphinxTriggeredAbility() {
+        super(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(2), true);
+    }
 
-	ConsecratedSphinxTriggeredAbility(final ConsecratedSphinxTriggeredAbility ability) {
-		super(ability);
-	}
+    ConsecratedSphinxTriggeredAbility(final ConsecratedSphinxTriggeredAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public ConsecratedSphinxTriggeredAbility copy() {
-		return new ConsecratedSphinxTriggeredAbility(this);
-	}
+    @Override
+    public ConsecratedSphinxTriggeredAbility copy() {
+        return new ConsecratedSphinxTriggeredAbility(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == GameEvent.EventType.DREW_CARD && game.getOpponents(this.getControllerId()).contains(event.getPlayerId())) {
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.DREW_CARD && game.getOpponents(this.getControllerId()).contains(event.getPlayerId())) {
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "Whenever an opponent draws a card, you may draw two cards";
-	}
+    @Override
+    public String getRule() {
+        return "Whenever an opponent draws a card, you may draw two cards";
+    }
 }

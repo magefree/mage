@@ -61,8 +61,8 @@ public class PistonSledge extends CardImpl<PistonSledge> {
         this.subtype.add("Equipment");
 
         Ability ability = new EntersBattlefieldTriggeredAbility(new AttachEffect(Outcome.BoostCreature, "attach it to target creature you control"), false);
-		ability.addTarget(new TargetControlledCreaturePermanent());
-		this.addAbility(ability);
+        ability.addTarget(new TargetControlledCreaturePermanent());
+        this.addAbility(ability);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 1)));
         this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new SacrificeTargetCost(new TargetControlledPermanent(filter))));
     }

@@ -49,7 +49,7 @@ public class PrimalBellow extends CardImpl<PrimalBellow> {
     static {
         filter.getSubtype().add("Forest");
         filter.setTargetController(TargetController.YOU);
-        
+
     }
 
     public PrimalBellow(UUID ownerId) {

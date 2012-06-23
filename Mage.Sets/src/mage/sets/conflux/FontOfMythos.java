@@ -47,52 +47,52 @@ import mage.target.TargetPlayer;
  */
 public class FontOfMythos extends CardImpl<FontOfMythos> {
 
-	public FontOfMythos(UUID ownerId) {
-		super(ownerId, 136, "Font of Mythos", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-		this.expansionSetCode = "CON";
-		this.addAbility(new FontOfMythosAbility());
-	}
+    public FontOfMythos(UUID ownerId) {
+        super(ownerId, 136, "Font of Mythos", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
+        this.expansionSetCode = "CON";
+        this.addAbility(new FontOfMythosAbility());
+    }
 
-	public FontOfMythos(final FontOfMythos card) {
-		super(card);
-	}
+    public FontOfMythos(final FontOfMythos card) {
+        super(card);
+    }
 
-	@Override
-	public FontOfMythos copy() {
-		return new FontOfMythos(this);
-	}
+    @Override
+    public FontOfMythos copy() {
+        return new FontOfMythos(this);
+    }
 
 }
 
 class FontOfMythosAbility extends TriggeredAbilityImpl<FontOfMythosAbility> {
 
-	public FontOfMythosAbility() {
-		super(Zone.BATTLEFIELD, new DrawCardTargetEffect(2));
-	}
+    public FontOfMythosAbility() {
+        super(Zone.BATTLEFIELD, new DrawCardTargetEffect(2));
+    }
 
-	public FontOfMythosAbility(final FontOfMythosAbility ability) {
-		super(ability);
-	}
+    public FontOfMythosAbility(final FontOfMythosAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public FontOfMythosAbility copy() {
-		return new FontOfMythosAbility(this);
-	}
+    @Override
+    public FontOfMythosAbility copy() {
+        return new FontOfMythosAbility(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.DRAW_STEP_PRE) {
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.DRAW_STEP_PRE) {
                         this.getTargets().clear();
-			this.addTarget(new TargetPlayer());
-			getTargets().get(0).add(event.getPlayerId(),game);
-			return true;
-		}
-		return false;
-	}
+            this.addTarget(new TargetPlayer());
+            getTargets().get(0).add(event.getPlayerId(),game);
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "At the beginning of each player's draw step, that player draws two additional cards.";
-	}
+    @Override
+    public String getRule() {
+        return "At the beginning of each player's draw step, that player draws two additional cards.";
+    }
 
 }

@@ -40,75 +40,75 @@ import java.util.Map;
  */
 public class Counters extends HashMap<String, Counter> implements Serializable {
 
-	public Counters() {}
-	
-	public Counters(final Counters counters) {
+    public Counters() {}
+
+    public Counters(final Counters counters) {
         for (Map.Entry<String, Counter> entry: counters.entrySet()) {
             this.put(entry.getKey(), entry.getValue().copy());
         }
-	}
+    }
 
-	public Counters copy() {
-		return new Counters(this);
-	}
+    public Counters copy() {
+        return new Counters(this);
+    }
 
-	public void addCounter(String name) {
-		if (!this.containsKey(name))
-			this.put(name, new Counter(name));
-		this.get(name).add();
-	}
+    public void addCounter(String name) {
+        if (!this.containsKey(name))
+            this.put(name, new Counter(name));
+        this.get(name).add();
+    }
 
-	public void addCounter(String name, int amount) {
-		if (!this.containsKey(name))
-			this.put(name, new Counter(name));
-		this.get(name).add(amount);
-	}
+    public void addCounter(String name, int amount) {
+        if (!this.containsKey(name))
+            this.put(name, new Counter(name));
+        this.get(name).add(amount);
+    }
 
-	public void addCounter(Counter counter) {
-		if (!this.containsKey(counter.name))
-			put(counter.name, counter);
-		else
-			get(counter.name).add(counter.getCount());
-	}
+    public void addCounter(Counter counter) {
+        if (!this.containsKey(counter.name))
+            put(counter.name, counter);
+        else
+            get(counter.name).add(counter.getCount());
+    }
 
-	public void removeCounter(String name) {
-		if (this.containsKey(name))
-			this.get(name).remove();
-	}
-	
-	public void removeCounter(CounterType counterType, int amount) {
-		if (this.containsKey(counterType.getName())) {
-			get(counterType.getName()).remove(amount);
-		}
-	}
+    public void removeCounter(String name) {
+        if (this.containsKey(name))
+            this.get(name).remove();
+    }
 
-	public void removeCounter(String name, int amount) {
-		if (this.containsKey(name))
-			this.get(name).remove(amount);
-	}
+    public void removeCounter(CounterType counterType, int amount) {
+        if (this.containsKey(counterType.getName())) {
+            get(counterType.getName()).remove(amount);
+        }
+    }
 
-	public int getCount(String name) {
-		if (this.containsKey(name))
-			return this.get(name).getCount();
-		return 0;
-	}
-	
-	public boolean containsKey(CounterType counterType) {
-		return getCount(counterType) > 0;
-	}
+    public void removeCounter(String name, int amount) {
+        if (this.containsKey(name))
+            this.get(name).remove(amount);
+    }
 
-	public int getCount(CounterType type) {
-		if (this.containsKey(type.getName()))
-			return this.get(type.getName()).getCount();
-		return 0;
-	}
+    public int getCount(String name) {
+        if (this.containsKey(name))
+            return this.get(name).getCount();
+        return 0;
+    }
 
-	public List<BoostCounter> getBoostCounters() {
-		List<BoostCounter> boosters = new ArrayList<BoostCounter>();
-		for (Counter counter: this.values()) {
-			if (counter instanceof BoostCounter)
-				boosters.add((BoostCounter)counter);
-		}
-		return boosters;
-	}
+    public boolean containsKey(CounterType counterType) {
+        return getCount(counterType) > 0;
+    }
+
+    public int getCount(CounterType type) {
+        if (this.containsKey(type.getName()))
+            return this.get(type.getName()).getCount();
+        return 0;
+    }
+
+    public List<BoostCounter> getBoostCounters() {
+        List<BoostCounter> boosters = new ArrayList<BoostCounter>();
+        for (Counter counter: this.values()) {
+            if (counter instanceof BoostCounter)
+                boosters.add((BoostCounter)counter);
+        }
+        return boosters;
+    }
 }

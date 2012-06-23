@@ -126,7 +126,7 @@ class RidersOfGavonyGainAbilityControlledEffect extends ContinuousEffectImpl<Rid
     static {
         filter.getSubtype().add("Human");
     }
-    
+
     protected FilterPermanent protectionFilter;
 
     public RidersOfGavonyGainAbilityControlledEffect() {

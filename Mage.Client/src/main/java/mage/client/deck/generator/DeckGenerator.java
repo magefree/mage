@@ -46,12 +46,12 @@ public class DeckGenerator {
 
     private static String colors = "GWUBR";
 
-	/**
-	 * Opens color chooser dialog. Generates deck.
-	 * Saves generated deck and use it as selected deck to play.
-	 *
-	 * @return
-	 */
+    /**
+     * Opens color chooser dialog. Generates deck.
+     * Saves generated deck and use it as selected deck to play.
+     *
+     * @return
+     */
     public static String generateDeck() {
         JPanel p0 = new JPanel();
         p0.setLayout(new BoxLayout(p0, BoxLayout.Y_AXIS));
@@ -61,7 +61,7 @@ public class DeckGenerator {
         p0.add(text);
 
         p0.add(Box.createVerticalStrut(5));
-	    String chosen = MageFrame.getPreferences().get("genDeckColor", "u");
+        String chosen = MageFrame.getPreferences().get("genDeckColor", "u");
         final ColorsChooser colorsChooser = new ColorsChooser(chosen);
         p0.add(colorsChooser);
 
@@ -89,7 +89,7 @@ public class DeckGenerator {
                 colorsChooser.setEnabled(false);
                 selectedColors = (String) colorsChooser.getSelectedItem();
                 dlg.setVisible(false);
-	            MageFrame.getPreferences().put("genDeckColor", selectedColors);
+                MageFrame.getPreferences().put("genDeckColor", selectedColors);
             }
         });
         final JButton btnCancel = new JButton("Cancel");
@@ -123,9 +123,9 @@ public class DeckGenerator {
         return selectedColors;
     }
 
-	/**
-	 * Generates card pool
-	 */
+    /**
+     * Generates card pool
+     */
     protected static void buildDeck() {
         List<ColoredManaSymbol> allowedColors = new ArrayList<ColoredManaSymbol>();
         selectedColors = selectedColors.toUpperCase();
@@ -157,14 +157,14 @@ public class DeckGenerator {
 
         final List<String> setsToUseFinal = setsToUse;
 
-	    deck = DeckBuilder.buildDeck(spellCardPool, allowedColors, landCardPool, new RateCallback() {
-		    @Override
-		    public int rateCard(Card card) {
-			    return CardsStorage.rateCard(card);
-		    }
-		    @Override
-		    public Card getBestBasicLand(ColoredManaSymbol color) {
-			    int tries = 100;
+        deck = DeckBuilder.buildDeck(spellCardPool, allowedColors, landCardPool, new RateCallback() {
+            @Override
+            public int rateCard(Card card) {
+                return CardsStorage.rateCard(card);
+            }
+            @Override
+            public Card getBestBasicLand(ColoredManaSymbol color) {
+                int tries = 100;
                 Card land;
                 do {
                     land = DeckGenerator.getBestBasicLand(color);
@@ -172,8 +172,8 @@ public class DeckGenerator {
                     if (tries < 0) break;
                 } while (!setsToUseFinal.contains(land.getExpansionSetCode()));
                 return land;
-		    }
-	    });
+            }
+        });
     }
 
     private static String getRandomColors(String _selectedColors) {
@@ -325,13 +325,13 @@ public class DeckGenerator {
         return false;
     }
 
-	/**
-	 * Get random basic land that can produce specified color mana.
-	 * Random here means random set and collector id for the same mana producing land.
-	 *
-	 * @param color
-	 * @return
-	 */
+    /**
+     * Get random basic land that can produce specified color mana.
+     * Random here means random set and collector id for the same mana producing land.
+     *
+     * @param color
+     * @return
+     */
     private static Card getBestBasicLand(ColoredManaSymbol color) {
         if (color.equals(ColoredManaSymbol.G)) {
             return Sets.findCard("Forest", GENERATE_RANDOM_BASIC_LAND);

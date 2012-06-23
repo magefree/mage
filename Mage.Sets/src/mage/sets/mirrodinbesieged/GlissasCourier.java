@@ -45,7 +45,7 @@ public class GlissasCourier extends CardImpl<GlissasCourier> {
         super(ownerId, 80, "Glissa's Courier", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
         this.expansionSetCode = "MBS";
         this.subtype.add("Horror");
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
         this.addAbility(new MountainwalkAbility());

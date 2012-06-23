@@ -37,48 +37,48 @@ import java.util.UUID;
  */
 public class PlayerResponse implements Serializable {
 
-	private String responseString;
-	private UUID responseUUID;
-	private Boolean responseBoolean;
-	private Integer responseInteger;
+    private String responseString;
+    private UUID responseUUID;
+    private Boolean responseBoolean;
+    private Integer responseInteger;
 
-	public void clear() {
-		responseString = null;
-		responseUUID = null;
-		responseBoolean = null;
-		responseInteger = null;
-	}
+    public void clear() {
+        responseString = null;
+        responseUUID = null;
+        responseBoolean = null;
+        responseInteger = null;
+    }
 
-	public String getString() {
-		return responseString;
-	}
+    public String getString() {
+        return responseString;
+    }
 
-	public void setString(String responseString) {
-		this.responseString = responseString;
-	}
+    public void setString(String responseString) {
+        this.responseString = responseString;
+    }
 
-	public UUID getUUID() {
-		return responseUUID;
-	}
+    public UUID getUUID() {
+        return responseUUID;
+    }
 
-	public void setUUID(UUID responseUUID) {
-		this.responseUUID = responseUUID;
-	}
+    public void setUUID(UUID responseUUID) {
+        this.responseUUID = responseUUID;
+    }
 
-	public Boolean getBoolean() {
-		return responseBoolean;
-	}
+    public Boolean getBoolean() {
+        return responseBoolean;
+    }
 
-	public void setBoolean(Boolean responseBoolean) {
-		this.responseBoolean = responseBoolean;
-	}
+    public void setBoolean(Boolean responseBoolean) {
+        this.responseBoolean = responseBoolean;
+    }
 
-	public Integer getInteger() {
-		return responseInteger;
-	}
+    public Integer getInteger() {
+        return responseInteger;
+    }
 
-	public void setInteger(Integer responseInteger) {
-		this.responseInteger = responseInteger;
-	}
+    public void setInteger(Integer responseInteger) {
+        this.responseInteger = responseInteger;
+    }
 
 }

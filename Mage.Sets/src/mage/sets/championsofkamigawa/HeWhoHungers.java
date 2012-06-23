@@ -63,7 +63,7 @@ public class HeWhoHungers extends CardImpl<HeWhoHungers> {
         filter.getSubtype().add("Spirit");
         filter.setScopeSubtype(Filter.ComparisonScope.Any);
     }
-    
+
     public HeWhoHungers(UUID ownerId) {
         super(ownerId, 114, "He Who Hungers", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}");
         this.expansionSetCode = "CHK";
@@ -72,17 +72,17 @@ public class HeWhoHungers extends CardImpl<HeWhoHungers> {
         this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
-        
+
         //Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         /* {1}, Sacrifice a Spirit: Target opponent reveals his or her hand. You choose a card from it. 
          * That player discards that card. Activate this ability only any time you could cast a sorcery. */
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DiscardCardYouChooseTargetOpponentEffect(), new ManaCostsImpl("{1}"));
         ability.addTarget(new TargetOpponent(true));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);
-        
+
         //Soulshift 4 (When this creature dies, you may return target Spirit card with converted mana cost 4 or less from your graveyard to your hand.)
         this.addAbility(new SoulshiftAbility(4));
     }

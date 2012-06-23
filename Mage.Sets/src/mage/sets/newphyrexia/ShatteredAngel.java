@@ -53,7 +53,7 @@ public class ShatteredAngel extends CardImpl<ShatteredAngel> {
         super(ownerId, 23, "Shattered Angel", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
         this.expansionSetCode = "NPH";
         this.subtype.add("Angel");
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());
@@ -88,12 +88,12 @@ class ShatteredAngelTriggeredAbility extends TriggeredAbilityImpl<ShatteredAngel
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone() == Constants.Zone.BATTLEFIELD) {
-			Permanent permanent = game.getPermanent(event.getTargetId());
-			if (permanent != null && permanent.getCardType().contains(CardType.LAND) && game.getOpponents(this.controllerId).contains(permanent.getControllerId())) {
-				return true;
-			}
-		}
-		return false;
+            Permanent permanent = game.getPermanent(event.getTargetId());
+            if (permanent != null && permanent.getCardType().contains(CardType.LAND) && game.getOpponents(this.controllerId).contains(permanent.getControllerId())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

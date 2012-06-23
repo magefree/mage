@@ -19,7 +19,7 @@ public class MassAppealTest extends CardTestPlayerBase {
 
         setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
-        
+
         assertLife(playerA, 20);
         assertLife(playerB, 20);
         assertHandCount(playerA, 0);

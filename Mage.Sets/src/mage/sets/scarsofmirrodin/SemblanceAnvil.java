@@ -54,109 +54,109 @@ import java.util.UUID;
  */
 public class SemblanceAnvil extends CardImpl<SemblanceAnvil> {
 
-	public SemblanceAnvil(UUID ownerId) {
-		super(ownerId, 201, "Semblance Anvil", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-		this.expansionSetCode = "SOM";
+    public SemblanceAnvil(UUID ownerId) {
+        super(ownerId, 201, "Semblance Anvil", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
+        this.expansionSetCode = "SOM";
 
-		// Imprint - When Semblance Anvil enters the battlefield, you may exile a nonland card from your hand.
-		this.addAbility(new EntersBattlefieldTriggeredAbility(new SemblanceAnvilEffect(), true));
+        // Imprint - When Semblance Anvil enters the battlefield, you may exile a nonland card from your hand.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SemblanceAnvilEffect(), true));
 
-		// Spells you cast that share a card type with the exiled card cost {2} less to cast.
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new SemblanceAnvilCostReductionEffect()));
-	}
+        // Spells you cast that share a card type with the exiled card cost {2} less to cast.
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new SemblanceAnvilCostReductionEffect()));
+    }
 
-	public SemblanceAnvil(final SemblanceAnvil card) {
-		super(card);
-	}
+    public SemblanceAnvil(final SemblanceAnvil card) {
+        super(card);
+    }
 
-	@Override
-	public SemblanceAnvil copy() {
-		return new SemblanceAnvil(this);
-	}
+    @Override
+    public SemblanceAnvil copy() {
+        return new SemblanceAnvil(this);
+    }
 }
 
 class SemblanceAnvilEffect extends OneShotEffect<SemblanceAnvilEffect> {
 
-	private static FilterCard filter = new FilterNonlandCard();
+    private static FilterCard filter = new FilterNonlandCard();
 
-	public SemblanceAnvilEffect() {
-		super(Constants.Outcome.Benefit);
-		staticText = "exile a nonland card from your hand";
-	}
+    public SemblanceAnvilEffect() {
+        super(Constants.Outcome.Benefit);
+        staticText = "exile a nonland card from your hand";
+    }
 
-	public SemblanceAnvilEffect(SemblanceAnvilEffect effect) {
-		super(effect);
-	}
+    public SemblanceAnvilEffect(SemblanceAnvilEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-		if (player.getHand().size() > 0) {
-			TargetCard target = new TargetCard(Constants.Zone.HAND, filter);
-			player.choose(Constants.Outcome.Benefit, player.getHand(), target, game);
-			Card card = player.getHand().get(target.getFirstTarget(), game);
-			if (card != null) {
-				card.moveToExile(getId(), "Semblance Anvil (Imprint)", source.getSourceId(), game);
-				Permanent permanent = game.getPermanent(source.getSourceId());
-				if (permanent != null) {
-					permanent.imprint(card.getId(), game);
-				}
-				return true;
-			}
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player.getHand().size() > 0) {
+            TargetCard target = new TargetCard(Constants.Zone.HAND, filter);
+            player.choose(Constants.Outcome.Benefit, player.getHand(), target, game);
+            Card card = player.getHand().get(target.getFirstTarget(), game);
+            if (card != null) {
+                card.moveToExile(getId(), "Semblance Anvil (Imprint)", source.getSourceId(), game);
+                Permanent permanent = game.getPermanent(source.getSourceId());
+                if (permanent != null) {
+                    permanent.imprint(card.getId(), game);
+                }
+                return true;
+            }
+        }
+        return true;
+    }
 
-	@Override
-	public SemblanceAnvilEffect copy() {
-		return new SemblanceAnvilEffect(this);
-	}
+    @Override
+    public SemblanceAnvilEffect copy() {
+        return new SemblanceAnvilEffect(this);
+    }
 
 }
 
 class SemblanceAnvilCostReductionEffect extends CostModificationEffectImpl<SemblanceAnvilCostReductionEffect> {
 
-	private static final String effectText = "Spells you cast that share a card type with the exiled card cost {2} less to cast";
+    private static final String effectText = "Spells you cast that share a card type with the exiled card cost {2} less to cast";
 
-	SemblanceAnvilCostReductionEffect() {
-		super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
-		staticText = effectText;
-	}
+    SemblanceAnvilCostReductionEffect() {
+        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        staticText = effectText;
+    }
 
-	SemblanceAnvilCostReductionEffect(SemblanceAnvilCostReductionEffect effect) {
-		super(effect);
-	}
+    SemblanceAnvilCostReductionEffect(SemblanceAnvilCostReductionEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source, Ability abilityToModify) {
-		SpellAbility spellAbility = (SpellAbility) abilityToModify;
-		CardUtil.adjustCost(spellAbility, 2);
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source, Ability abilityToModify) {
+        SpellAbility spellAbility = (SpellAbility) abilityToModify;
+        CardUtil.adjustCost(spellAbility, 2);
+        return true;
+    }
 
-	@Override
-	public boolean applies(Ability abilityToModify, Ability source, Game game) {
-		if (abilityToModify instanceof SpellAbility) {
-			Card sourceCard = game.getCard(((SpellAbility) abilityToModify).getSourceId());
-			if (sourceCard != null && sourceCard.getOwnerId().equals(source.getControllerId())) {
-				Permanent permanent = game.getPermanent(source.getSourceId());
-				if (permanent != null) {
-					List<UUID> imprinted = permanent.getImprinted();
-					if (imprinted.size() > 0) {
-						Card imprintedCard = game.getCard(imprinted.get(0));
-						if (imprintedCard != null && CardUtil.shareTypes(imprintedCard, sourceCard)) {
-							return true;
-						}
-					}
-				}
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean applies(Ability abilityToModify, Ability source, Game game) {
+        if (abilityToModify instanceof SpellAbility) {
+            Card sourceCard = game.getCard(((SpellAbility) abilityToModify).getSourceId());
+            if (sourceCard != null && sourceCard.getOwnerId().equals(source.getControllerId())) {
+                Permanent permanent = game.getPermanent(source.getSourceId());
+                if (permanent != null) {
+                    List<UUID> imprinted = permanent.getImprinted();
+                    if (imprinted.size() > 0) {
+                        Card imprintedCard = game.getCard(imprinted.get(0));
+                        if (imprintedCard != null && CardUtil.shareTypes(imprintedCard, sourceCard)) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public SemblanceAnvilCostReductionEffect copy() {
-		return new SemblanceAnvilCostReductionEffect(this);
-	}
+    @Override
+    public SemblanceAnvilCostReductionEffect copy() {
+        return new SemblanceAnvilCostReductionEffect(this);
+    }
 
 }

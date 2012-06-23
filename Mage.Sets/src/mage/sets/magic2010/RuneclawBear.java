@@ -40,23 +40,23 @@ import mage.cards.CardImpl;
  */
 public class RuneclawBear extends CardImpl<RuneclawBear> {
 
-	public RuneclawBear(UUID ownerId) {
-		super(ownerId, 203, "Runeclaw Bear", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-		this.expansionSetCode = "M10";
-		this.subtype.add("Bear");
-		this.color.setGreen(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+    public RuneclawBear(UUID ownerId) {
+        super(ownerId, 203, "Runeclaw Bear", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
+        this.expansionSetCode = "M10";
+        this.subtype.add("Bear");
+        this.color.setGreen(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-	}
+    }
 
-	public RuneclawBear(final RuneclawBear card) {
-		super(card);
-	}
+    public RuneclawBear(final RuneclawBear card) {
+        super(card);
+    }
 
-	@Override
-	public RuneclawBear copy() {
-		return new RuneclawBear(this);
-	}
+    @Override
+    public RuneclawBear copy() {
+        return new RuneclawBear(this);
+    }
 
 }

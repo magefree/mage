@@ -38,12 +38,12 @@ import mage.ObjectColor;
  */
 public class InsectToken extends Token {
 
-	public InsectToken() {
-		super("Insect", "1/1 green Insect creature token");
-		cardType.add(CardType.CREATURE);
-		color = ObjectColor.GREEN;
-		subtype.add("Insect");
-		power = new MageInt(1);
-		toughness = new MageInt(1);
-	}
+    public InsectToken() {
+        super("Insect", "1/1 green Insect creature token");
+        cardType.add(CardType.CREATURE);
+        color = ObjectColor.GREEN;
+        subtype.add("Insect");
+        power = new MageInt(1);
+        toughness = new MageInt(1);
+    }
 }

@@ -72,11 +72,11 @@ public class DialogManager extends JComponent implements MouseListener,
         /*if (h < 200) {
             h = 200;
         }*/
-        
+
         if (w > 800) {
-        	w = 800;
+            w = 800;
         }
-        
+
         int height = getHeight();
         int width = getWidth();
 
@@ -101,7 +101,7 @@ public class DialogManager extends JComponent implements MouseListener,
 
         setVisible(true);
     }
-    
+
     public void setDlgBounds(Rectangle r) {
         if (currentDialog == MTGDialogs.DialogContainer) {
             dialogContainer.setBounds(r.x, r.y, r.width, r.height);
@@ -109,7 +109,7 @@ public class DialogManager extends JComponent implements MouseListener,
     }
 
     public void fadeOut() {
-        
+
         if (dialogContainer != null) {
             dialogContainer.showDialog(false);
             removeAll();
@@ -123,8 +123,8 @@ public class DialogManager extends JComponent implements MouseListener,
     }
 
     public void fadeOut(DialogContainer dc) {
-    	//log.debug("start:fadeOut:"+dc.toString());
-    	
+        //log.debug("start:fadeOut:"+dc.toString());
+
         dc.showDialog(false);
         remove(dc);
 
@@ -135,7 +135,7 @@ public class DialogManager extends JComponent implements MouseListener,
                 bFound = true;
             }
         }
-        
+
         if (!bFound) {
             setVisible(false);
         }
@@ -176,18 +176,18 @@ public class DialogManager extends JComponent implements MouseListener,
     public void mouseExited(MouseEvent e) {
     }
 
-	public void mousePressed(MouseEvent e) {
-		if (e.getButton() == MouseEvent.BUTTON1) {
-			j = (JComponent) getComponentAt(e.getX(), e.getY());
+    public void mousePressed(MouseEvent e) {
+        if (e.getButton() == MouseEvent.BUTTON1) {
+            j = (JComponent) getComponentAt(e.getX(), e.getY());
 
-			if (j != null && j instanceof DialogContainer) {
-				rec = j.getBounds();
-				bDragged = true;
-				mx = e.getX();
-				my = e.getY();
-			}
-		}
-	}
+            if (j != null && j instanceof DialogContainer) {
+                rec = j.getBounds();
+                bDragged = true;
+                mx = e.getX();
+                my = e.getY();
+            }
+        }
+    }
 
     public void mouseReleased(MouseEvent e) {
         bDragged = false;
@@ -214,14 +214,14 @@ public class DialogManager extends JComponent implements MouseListener,
         j = null;
     }
 
-	public void mouseWheelMoved(MouseWheelEvent e) {
-		int notches = e.getWheelRotation();
-		System.out.println("outx:"+notches);
-		if (currentDialog != null && currentDialog.equals(MTGDialogs.ChooseCommonDialog)) {
-			System.out.println("out:"+1);
-		}
-	}
-	
+    public void mouseWheelMoved(MouseWheelEvent e) {
+        int notches = e.getWheelRotation();
+        System.out.println("outx:"+notches);
+        if (currentDialog != null && currentDialog.equals(MTGDialogs.ChooseCommonDialog)) {
+            System.out.println("out:"+1);
+        }
+    }
+
     /**
      * Default UID.
      */

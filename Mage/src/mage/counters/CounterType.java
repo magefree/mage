@@ -128,14 +128,14 @@ public enum CounterType {
                 return new AimCounter(amount);
             case EON:
                 return new EonCounter(amount);
-			case AWAKENING:
-				return new AwakeningCounter(amount);
+            case AWAKENING:
+                return new AwakeningCounter(amount);
             case DEVOTION:
-				return new DevotionCounter(amount);
+                return new DevotionCounter(amount);
             case DIVINITY:
                 return new DivinityCounter(amount);
-			case WISH:
-				return new WishCounter(amount);
+            case WISH:
+                return new WishCounter(amount);
             case HOOFPRINT:
                 return new HoofprintCounter(amount);
             case HATCHLING:

@@ -46,22 +46,22 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class BloodthroneVampire extends CardImpl<BloodthroneVampire> {
 
-	public BloodthroneVampire(UUID ownerId) {
-		super(ownerId, 98, "Bloodthrone Vampire", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-		this.expansionSetCode = "ROE";
-		this.color.setBlack(true);
-		this.subtype.add("Vampire");
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledCreaturePermanent())));
-	}
+    public BloodthroneVampire(UUID ownerId) {
+        super(ownerId, 98, "Bloodthrone Vampire", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
+        this.expansionSetCode = "ROE";
+        this.color.setBlack(true);
+        this.subtype.add("Vampire");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledCreaturePermanent())));
+    }
 
-	public BloodthroneVampire(final BloodthroneVampire card) {
-		super(card);
-	}
+    public BloodthroneVampire(final BloodthroneVampire card) {
+        super(card);
+    }
 
-	@Override
-	public BloodthroneVampire copy() {
-		return new BloodthroneVampire(this);
-	}
+    @Override
+    public BloodthroneVampire copy() {
+        return new BloodthroneVampire(this);
+    }
 }

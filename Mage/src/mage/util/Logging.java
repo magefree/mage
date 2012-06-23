@@ -46,57 +46,57 @@ import java.util.logging.Logger;
  */
 public class Logging {
 
-	public static Logger getLogger(String name) {
-		Logger logger = Logger.getLogger(name);
-		ConsoleHandler handler = new ConsoleHandler();
-		handler.setFormatter(new LogFormatter());
-		logger.addHandler(handler);
-		logger.setUseParentHandlers(false);
-		return logger;
-	}
+    public static Logger getLogger(String name) {
+        Logger logger = Logger.getLogger(name);
+        ConsoleHandler handler = new ConsoleHandler();
+        handler.setFormatter(new LogFormatter());
+        logger.addHandler(handler);
+        logger.setUseParentHandlers(false);
+        return logger;
+    }
 
-	public static Level getLevel(Logger logger) {
-		Level level = logger.getLevel();
-		while (level == null && logger.getParent() != null) {
-			logger = logger.getParent();
-			level = logger.getLevel();
-		}
-		return level;
-	}
+    public static Level getLevel(Logger logger) {
+        Level level = logger.getLevel();
+        while (level == null && logger.getParent() != null) {
+            logger = logger.getParent();
+            level = logger.getLevel();
+        }
+        return level;
+    }
 }
 
 class LogFormatter extends Formatter {
 
-	private static final DateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss.SSS");
+    private static final DateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss.SSS");
 
-	@Override
-	public String format(LogRecord record) {
+    @Override
+    public String format(LogRecord record) {
         StringBuilder builder = new StringBuilder(1000);
         builder.append(df.format(new Date(record.getMillis()))).append(" - ");
         builder.append("[").append(record.getSourceClassName()).append(".");
         builder.append(record.getSourceMethodName()).append("] - ");
         builder.append("[").append(record.getLevel()).append("] - ");
         builder.append(formatMessage(record));
-		if (record.getThrown() != null) {
-			try {
-				StringWriter sw = new StringWriter();
-				PrintWriter pw = new PrintWriter(sw);
-				record.getThrown().printStackTrace(pw);
-				pw.close();
-				builder.append(sw.toString());
-			} catch (Exception ex) {
-			}
-		}
+        if (record.getThrown() != null) {
+            try {
+                StringWriter sw = new StringWriter();
+                PrintWriter pw = new PrintWriter(sw);
+                record.getThrown().printStackTrace(pw);
+                pw.close();
+                builder.append(sw.toString());
+            } catch (Exception ex) {
+            }
+        }
         builder.append("\n");
         return builder.toString();
     }
 
-	@Override
+    @Override
     public String getHead(Handler h) {
         return super.getHead(h);
     }
 
-	@Override
+    @Override
     public String getTail(Handler h) {
         return super.getTail(h);
     }

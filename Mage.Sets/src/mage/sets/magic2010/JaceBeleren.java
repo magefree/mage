@@ -47,33 +47,33 @@ import mage.target.TargetPlayer;
  */
 public class JaceBeleren extends CardImpl<JaceBeleren> {
 
-	public JaceBeleren(UUID ownerId) {
-		super(ownerId, 58, "Jace Beleren", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{1}{U}{U}");
-		this.expansionSetCode = "M10";
-		this.subtype.add("Jace");
-		this.color.setBlue(true);
-		this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), ""));
+    public JaceBeleren(UUID ownerId) {
+        super(ownerId, 58, "Jace Beleren", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{1}{U}{U}");
+        this.expansionSetCode = "M10";
+        this.subtype.add("Jace");
+        this.color.setBlue(true);
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), ""));
 
 
-		this.addAbility(new LoyaltyAbility(new DrawCardAllEffect(1), 2));
+        this.addAbility(new LoyaltyAbility(new DrawCardAllEffect(1), 2));
 
-		LoyaltyAbility ability1 = new LoyaltyAbility(new DrawCardTargetEffect(1), -1);
-		ability1.addTarget(new TargetPlayer());
-		this.addAbility(ability1);
+        LoyaltyAbility ability1 = new LoyaltyAbility(new DrawCardTargetEffect(1), -1);
+        ability1.addTarget(new TargetPlayer());
+        this.addAbility(ability1);
 
-		LoyaltyAbility ability2 = new LoyaltyAbility(new PutLibraryIntoGraveTargetEffect(20), -10);
-		ability2.addTarget(new TargetPlayer());
-		this.addAbility(ability2);
+        LoyaltyAbility ability2 = new LoyaltyAbility(new PutLibraryIntoGraveTargetEffect(20), -10);
+        ability2.addTarget(new TargetPlayer());
+        this.addAbility(ability2);
 
-	}
+    }
 
-	public JaceBeleren(final JaceBeleren card) {
-		super(card);
-	}
+    public JaceBeleren(final JaceBeleren card) {
+        super(card);
+    }
 
-	@Override
-	public JaceBeleren copy() {
-		return new JaceBeleren(this);
-	}
+    @Override
+    public JaceBeleren copy() {
+        return new JaceBeleren(this);
+    }
 
 }

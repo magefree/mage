@@ -44,7 +44,7 @@ public class MastersCall extends CardImpl<MastersCall> {
     public MastersCall (UUID ownerId) {
         super(ownerId, 13, "Master's Call", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "MBS";
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         this.getSpellAbility().addEffect(new CreateTokenEffect(new MyrToken(), 2));
     }
 

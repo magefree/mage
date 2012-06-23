@@ -71,7 +71,7 @@ class NornsAnnexReplacementEffect extends ReplacementEffectImpl<NornsAnnexReplac
 
     NornsAnnexReplacementEffect() {
         super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
-		staticText = effectText;
+        staticText = effectText;
     }
 
     NornsAnnexReplacementEffect(NornsAnnexReplacementEffect effect) {

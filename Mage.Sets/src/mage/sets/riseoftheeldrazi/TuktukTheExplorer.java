@@ -49,11 +49,11 @@ public class TuktukTheExplorer extends CardImpl<TuktukTheExplorer> {
         this.expansionSetCode = "ROE";
         this.supertype.add("Legendary");
         this.subtype.add("Goblin");
-		this.color.setRed(true);
+        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-		this.addAbility(HasteAbility.getInstance());
-		this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new TuktukTheReturnedToken())));
+        this.addAbility(HasteAbility.getInstance());
+        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new TuktukTheReturnedToken())));
     }
 
     public TuktukTheExplorer (final TuktukTheExplorer card) {
@@ -68,13 +68,13 @@ public class TuktukTheExplorer extends CardImpl<TuktukTheExplorer> {
 }
 
 class TuktukTheReturnedToken extends Token {
-	TuktukTheReturnedToken() {
-		super("Tuktuk the Returned", "a legendary 5/5 colorless Goblin Golem artifact creature token");
-		cardType.add(CardType.ARTIFACT);
-		cardType.add(CardType.CREATURE);
-		supertype.add("Legendary");
-		subtype.add("Goblin");
-		power = new MageInt(5);
-		toughness = new MageInt(5);
-	}
+    TuktukTheReturnedToken() {
+        super("Tuktuk the Returned", "a legendary 5/5 colorless Goblin Golem artifact creature token");
+        cardType.add(CardType.ARTIFACT);
+        cardType.add(CardType.CREATURE);
+        supertype.add("Legendary");
+        subtype.add("Goblin");
+        power = new MageInt(5);
+        toughness = new MageInt(5);
+    }
 }

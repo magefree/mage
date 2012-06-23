@@ -47,8 +47,8 @@ public class SwallowingPlague extends CardImpl<SwallowingPlague> {
         super(ownerId, 146, "Swallowing Plague", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{B}{B}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
-		this.color.setBlack(true);
-		this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
+        this.color.setBlack(true);
+        this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
         this.getSpellAbility().addEffect(new GainLifeEffect(new ManacostVariableValue()));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

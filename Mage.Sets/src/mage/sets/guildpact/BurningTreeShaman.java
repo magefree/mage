@@ -54,8 +54,8 @@ public class BurningTreeShaman extends CardImpl<BurningTreeShaman> {
         this.expansionSetCode = "GPT";
         this.subtype.add("Centaur");
         this.subtype.add("Shaman");
-		this.color.setRed(true);
-		this.color.setGreen(true);
+        this.color.setRed(true);
+        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
         this.addAbility(new BurningTreeShamanTriggeredAbility());

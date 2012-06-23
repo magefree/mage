@@ -49,9 +49,9 @@ public class CradleGuard extends CardImpl<CradleGuard>{
         this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
-        
-	this.addAbility(TrampleAbility.getInstance());
-	this.addAbility(new EchoAbility("{1}{G}{G}"));
+
+    this.addAbility(TrampleAbility.getInstance());
+    this.addAbility(new EchoAbility("{1}{G}{G}"));
     }
 
     public CradleGuard(final CradleGuard card) {

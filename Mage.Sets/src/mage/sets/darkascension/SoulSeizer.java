@@ -66,7 +66,7 @@ public class SoulSeizer extends CardImpl<SoulSeizer> {
         this.toughness = new MageInt(3);
 
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // When Soul Seizer deals combat damage to a player, you may transform it. If you do, attach it to target creature that player controls.
         this.addAbility(new TransformAbility());
         this.addAbility(new SoulSeizerTriggeredAbility());
@@ -126,15 +126,15 @@ class SoulSeizerEffect extends OneShotEffect<SoulSeizerEffect> {
     public SoulSeizerEffect() {
         super(Outcome.GainControl);
     }
-    
+
     public SoulSeizerEffect(final SoulSeizerEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getSourceId());
-		if (permanent != null && permanent.canTransform()) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null && permanent.canTransform()) {
             if (permanent.transform(game)) {
                 Permanent attachTo = game.getPermanent(targetPointer.getFirst(game, source));
                 if (attachTo != null) {
@@ -149,5 +149,5 @@ class SoulSeizerEffect extends OneShotEffect<SoulSeizerEffect> {
     public SoulSeizerEffect copy() {
         return new SoulSeizerEffect(this);
     }
-    
+
 }

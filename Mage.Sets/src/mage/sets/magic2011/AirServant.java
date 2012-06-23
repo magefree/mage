@@ -48,32 +48,32 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class AirServant extends CardImpl<AirServant> {
 
-	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
 
-	static {
-		filter.getAbilities().add(FlyingAbility.getInstance());
-	}
+    static {
+        filter.getAbilities().add(FlyingAbility.getInstance());
+    }
 
-	public AirServant(UUID ownerId) {
-		super(ownerId, 42, "Air Servant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
-		this.expansionSetCode = "M11";
-		this.color.setBlue(true);
-		this.subtype.add("Elemental");
-		this.power = new MageInt(4);
-		this.toughness = new MageInt(3);
-		this.addAbility(FlyingAbility.getInstance());
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl("{2}{U}"));
-		ability.addTarget(new TargetCreaturePermanent(filter));
-		this.addAbility(ability);
-	}
+    public AirServant(UUID ownerId) {
+        super(ownerId, 42, "Air Servant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
+        this.expansionSetCode = "M11";
+        this.color.setBlue(true);
+        this.subtype.add("Elemental");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(3);
+        this.addAbility(FlyingAbility.getInstance());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl("{2}{U}"));
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
+    }
 
-	public AirServant(final AirServant card) {
-		super(card);
-	}
+    public AirServant(final AirServant card) {
+        super(card);
+    }
 
-	@Override
-	public AirServant copy() {
-		return new AirServant(this);
-	}
+    @Override
+    public AirServant copy() {
+        return new AirServant(this);
+    }
 
 }

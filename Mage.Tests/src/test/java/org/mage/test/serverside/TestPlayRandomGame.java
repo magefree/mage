@@ -26,7 +26,7 @@ import java.util.Random;
  */
 public class TestPlayRandomGame extends MageTestBase {
 
-	private static List<String> colorChoices = Arrays.asList("bu", "bg", "br", "bw", "ug", "ur", "uw", "gr", "gw", "rw", "bur", "buw", "bug", "brg", "brw", "bgw", "wur", "wug", "wrg", "rgu");
+    private static List<String> colorChoices = Arrays.asList("bu", "bg", "br", "bw", "ug", "ur", "uw", "gr", "gw", "rw", "bur", "buw", "bug", "brg", "brw", "bgw", "wur", "wug", "wrg", "rgu");
 
     @Test
     @Ignore
@@ -36,48 +36,48 @@ public class TestPlayRandomGame extends MageTestBase {
             playOneGame();
         }
     }
-    
-	private void playOneGame() throws GameException, FileNotFoundException, IllegalArgumentException {
-		Game game = new TwoPlayerDuel(Constants.MultiplayerAttackOption.LEFT, Constants.RangeOfInfluence.ALL);
 
-		Player computerA = createRandomPlayer("ComputerA");
-		Deck deck = generateRandomDeck();
+    private void playOneGame() throws GameException, FileNotFoundException, IllegalArgumentException {
+        Game game = new TwoPlayerDuel(Constants.MultiplayerAttackOption.LEFT, Constants.RangeOfInfluence.ALL);
 
-		if (deck.getCards().size() < 40) {
-			throw new IllegalArgumentException("Couldn't load deck, deck size=" + deck.getCards().size());
-		}
-		game.addPlayer(computerA, deck);
-		game.loadCards(deck.getCards(), computerA.getId());
+        Player computerA = createRandomPlayer("ComputerA");
+        Deck deck = generateRandomDeck();
 
-		Player computerB = createRandomPlayer("ComputerB");
-		Deck deck2 = generateRandomDeck();
-		if (deck2.getCards().size() < 40) {
-			throw new IllegalArgumentException("Couldn't load deck, deck size=" + deck2.getCards().size());
-		}
-		game.addPlayer(computerB, deck2);
-		game.loadCards(deck2.getCards(), computerB.getId());
+        if (deck.getCards().size() < 40) {
+            throw new IllegalArgumentException("Couldn't load deck, deck size=" + deck.getCards().size());
+        }
+        game.addPlayer(computerA, deck);
+        game.loadCards(deck.getCards(), computerA.getId());
 
-		boolean testMode = true;
+        Player computerB = createRandomPlayer("ComputerB");
+        Deck deck2 = generateRandomDeck();
+        if (deck2.getCards().size() < 40) {
+            throw new IllegalArgumentException("Couldn't load deck, deck size=" + deck2.getCards().size());
+        }
+        game.addPlayer(computerB, deck2);
+        game.loadCards(deck2.getCards(), computerB.getId());
 
-		long t1 = System.nanoTime();
-		GameOptions options = new GameOptions();
-		options.testMode = true;
-		game.start(computerA.getId(), options);
-		long t2 = System.nanoTime();
+        boolean testMode = true;
 
-		logger.info("Winner: " + game.getWinner());
-		logger.info("Time: " + (t2 - t1) / 1000000 + " ms");
-	}
+        long t1 = System.nanoTime();
+        GameOptions options = new GameOptions();
+        options.testMode = true;
+        game.start(computerA.getId(), options);
+        long t2 = System.nanoTime();
 
-	private Deck generateRandomDeck() {
-		String selectedColors = colorChoices.get(new Random().nextInt(colorChoices.size())).toUpperCase();
-		List<ColoredManaSymbol> allowedColors = new ArrayList<ColoredManaSymbol>();
-		logger.info("Building deck with colors: " + selectedColors);
-		for (int i = 0; i < selectedColors.length(); i++) {
-			char c = selectedColors.charAt(i);
-			allowedColors.add(ColoredManaSymbol.lookup(c));
-		}
-		List<Card> cardPool = Sets.generateRandomCardPool(45, allowedColors);
-		return ComputerPlayer.buildDeck(cardPool, allowedColors);
-	}
+        logger.info("Winner: " + game.getWinner());
+        logger.info("Time: " + (t2 - t1) / 1000000 + " ms");
+    }
+
+    private Deck generateRandomDeck() {
+        String selectedColors = colorChoices.get(new Random().nextInt(colorChoices.size())).toUpperCase();
+        List<ColoredManaSymbol> allowedColors = new ArrayList<ColoredManaSymbol>();
+        logger.info("Building deck with colors: " + selectedColors);
+        for (int i = 0; i < selectedColors.length(); i++) {
+            char c = selectedColors.charAt(i);
+            allowedColors.add(ColoredManaSymbol.lookup(c));
+        }
+        List<Card> cardPool = Sets.generateRandomCardPool(45, allowedColors);
+        return ComputerPlayer.buildDeck(cardPool, allowedColors);
+    }
 }

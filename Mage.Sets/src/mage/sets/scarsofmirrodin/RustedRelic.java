@@ -75,8 +75,8 @@ class RustedRelicToken extends Token {
     public RustedRelicToken() {
         super("Rusted Relic", "a 5/5 Golem artifact creature");
         cardType.add(Constants.CardType.CREATURE);
-		subtype.add("Golem");
-		power = new MageInt(5);
-		toughness = new MageInt(5);
+        subtype.add("Golem");
+        power = new MageInt(5);
+        toughness = new MageInt(5);
     }
 }

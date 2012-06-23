@@ -61,7 +61,7 @@ public class BladeTribeBerserkers extends CardImpl<BladeTribeBerserkers> {
 
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new BoostSourceEffect(3, 3, Duration.EndOfTurn), false);
         ability.addEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
-		this.addAbility(new ConditionalTriggeredAbility(ability, MetalcraftCondition.getInstance(), effectText));
+        this.addAbility(new ConditionalTriggeredAbility(ability, MetalcraftCondition.getInstance(), effectText));
     }
 
     public BladeTribeBerserkers(final BladeTribeBerserkers card) {

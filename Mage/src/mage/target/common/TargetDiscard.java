@@ -43,44 +43,44 @@ import java.util.UUID;
  */
 public class TargetDiscard extends TargetCard<TargetDiscard> {
 
-	private UUID playerId;
+    private UUID playerId;
 
-	public TargetDiscard(UUID playerId) {
-		this(1, 1, new FilterCard(), playerId);
-	}
+    public TargetDiscard(UUID playerId) {
+        this(1, 1, new FilterCard(), playerId);
+    }
 
-	public TargetDiscard(FilterCard filter, UUID playerId) {
-		this(1, 1, filter, playerId);
-	}
+    public TargetDiscard(FilterCard filter, UUID playerId) {
+        this(1, 1, filter, playerId);
+    }
 
-	public TargetDiscard(int numTargets, FilterCard filter, UUID playerId) {
-		this(numTargets, numTargets, filter, playerId);
-	}
+    public TargetDiscard(int numTargets, FilterCard filter, UUID playerId) {
+        this(numTargets, numTargets, filter, playerId);
+    }
 
-	public TargetDiscard(int minNumTargets, int maxNumTargets, FilterCard filter, UUID playerId) {
-		super(minNumTargets, maxNumTargets, Zone.HAND, filter);
-		this.filter.getOwnerId().add(playerId);
-		this.playerId = playerId;
-		this.required = true;
-		this.targetName = "card to discard";
-	}
+    public TargetDiscard(int minNumTargets, int maxNumTargets, FilterCard filter, UUID playerId) {
+        super(minNumTargets, maxNumTargets, Zone.HAND, filter);
+        this.filter.getOwnerId().add(playerId);
+        this.playerId = playerId;
+        this.required = true;
+        this.targetName = "card to discard";
+    }
 
-	public TargetDiscard(final TargetDiscard target) {
-		super(target);
-		this.playerId = target.playerId;
-	}
+    public TargetDiscard(final TargetDiscard target) {
+        super(target);
+        this.playerId = target.playerId;
+    }
 
-	@Override
-	public boolean canTarget(UUID id, Ability source, Game game) {
-		Card card = game.getPlayer(playerId).getHand().get(id, game);
-		if (card != null)
-			return filter.match(card, game);
-		return false;
-	}
+    @Override
+    public boolean canTarget(UUID id, Ability source, Game game) {
+        Card card = game.getPlayer(playerId).getHand().get(id, game);
+        if (card != null)
+            return filter.match(card, game);
+        return false;
+    }
 
-	@Override
-	public TargetDiscard copy() {
-		return new TargetDiscard(this);
-	}
+    @Override
+    public TargetDiscard copy() {
+        return new TargetDiscard(this);
+    }
 
 }

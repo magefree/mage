@@ -39,17 +39,17 @@ import java.util.UUID;
  */
 public class FilterNotPairedControlledCreaturePermanent extends FilterControlledCreaturePermanent<FilterNotPairedControlledCreaturePermanent> {
 
-	public FilterNotPairedControlledCreaturePermanent() {
-		this("not paired creature you control");
-	}
+    public FilterNotPairedControlledCreaturePermanent() {
+        this("not paired creature you control");
+    }
 
-	public FilterNotPairedControlledCreaturePermanent(String name) {
-		super(name);
-	}
+    public FilterNotPairedControlledCreaturePermanent(String name) {
+        super(name);
+    }
 
-	public FilterNotPairedControlledCreaturePermanent(final FilterNotPairedControlledCreaturePermanent filter) {
-		super(filter);
-	}
+    public FilterNotPairedControlledCreaturePermanent(final FilterNotPairedControlledCreaturePermanent filter) {
+        super(filter);
+    }
 
     @Override
     public boolean match(Permanent permanent, Game game) {
@@ -73,9 +73,9 @@ public class FilterNotPairedControlledCreaturePermanent extends FilterControlled
         return !notFilter;
     }
 
-	@Override
-	public FilterNotPairedControlledCreaturePermanent copy() {
-		return new FilterNotPairedControlledCreaturePermanent(this);
-	}
+    @Override
+    public FilterNotPairedControlledCreaturePermanent copy() {
+        return new FilterNotPairedControlledCreaturePermanent(this);
+    }
 
 }

@@ -52,11 +52,11 @@ public class LoyalSentry extends CardImpl<LoyalSentry> {
         this.expansionSetCode = "10E";
         this.subtype.add("Human");
         this.subtype.add("Soldier");
-        
-		this.color.setWhite(true);
+
+        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        
+
         this.addAbility(new BlocksTriggeredAbility(new LoyalSentryEffect(), false, true));
     }
 

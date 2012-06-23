@@ -42,20 +42,20 @@ import java.util.UUID;
  */
 public class CardEventSource implements EventSource<Event>, Serializable {
 
-	protected final EventDispatcher<Event> dispatcher = new EventDispatcher<Event>() {};
+    protected final EventDispatcher<Event> dispatcher = new EventDispatcher<Event>() {};
 
-	@Override
-	public void addListener(Listener<Event> listener) {
-		dispatcher.addListener(listener);
-	}
+    @Override
+    public void addListener(Listener<Event> listener) {
+        dispatcher.addListener(listener);
+    }
 
-	public void doubleClick(UUID cardId, String message) {
-		dispatcher.fireEvent(new Event(cardId, message));
-	}
+    public void doubleClick(UUID cardId, String message) {
+        dispatcher.fireEvent(new Event(cardId, message));
+    }
 
-	public void shiftDoubleClick(UUID cardId, String message) {
-		dispatcher.fireEvent(new Event(cardId, message));
-	}
+    public void shiftDoubleClick(UUID cardId, String message) {
+        dispatcher.fireEvent(new Event(cardId, message));
+    }
 
     public void removeFromMainEvent(String message) {
         dispatcher.fireEvent(new Event(null, message));
@@ -65,9 +65,9 @@ public class CardEventSource implements EventSource<Event>, Serializable {
         dispatcher.fireEvent(new Event(null, message));
     }
 
-	@Override
-	public void clearListeners() {
-		dispatcher.clearListeners();
-	}
+    @Override
+    public void clearListeners() {
+        dispatcher.clearListeners();
+    }
 
 }

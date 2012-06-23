@@ -53,8 +53,8 @@ public class StunSniper extends CardImpl<StunSniper> {
         this.expansionSetCode = "ARB";
         this.subtype.add("Human");
         this.subtype.add("Archer");
-		this.color.setRed(true);
-		this.color.setWhite(true);
+        this.color.setRed(true);
+        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new GenericManaCost(1));

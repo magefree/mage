@@ -41,20 +41,20 @@ import mage.filter.common.FilterArtifactPermanent;
  */
 public class CreepingCorrosion extends CardImpl<CreepingCorrosion> {
 
-	public CreepingCorrosion(UUID ownerId) {
-		super(ownerId, 78, "Creeping Corrosion", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");
-		this.expansionSetCode = "MBS";
-		this.color.setGreen(true);
-		this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterArtifactPermanent()));
-	}
+    public CreepingCorrosion(UUID ownerId) {
+        super(ownerId, 78, "Creeping Corrosion", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");
+        this.expansionSetCode = "MBS";
+        this.color.setGreen(true);
+        this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterArtifactPermanent()));
+    }
 
-	public CreepingCorrosion(final CreepingCorrosion card) {
-		super(card);
-	}
+    public CreepingCorrosion(final CreepingCorrosion card) {
+        super(card);
+    }
 
-	@Override
-	public CreepingCorrosion copy() {
-		return new CreepingCorrosion(this);
-	}
+    @Override
+    public CreepingCorrosion copy() {
+        return new CreepingCorrosion(this);
+    }
 
 }

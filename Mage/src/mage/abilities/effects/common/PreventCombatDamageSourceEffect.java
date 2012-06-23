@@ -41,27 +41,27 @@ import mage.game.events.GameEvent;
  */
 public class PreventCombatDamageSourceEffect extends PreventionEffectImpl<PreventCombatDamageSourceEffect> {
 
-	public PreventCombatDamageSourceEffect(Duration duration) {
+    public PreventCombatDamageSourceEffect(Duration duration) {
             super(duration);
             staticText = "Prevent all combat damage that would be dealt to {this} " + duration.toString();
-	}
+    }
 
-	public PreventCombatDamageSourceEffect(final PreventCombatDamageSourceEffect effect) {
+    public PreventCombatDamageSourceEffect(final PreventCombatDamageSourceEffect effect) {
             super(effect);
-	}
+    }
 
-	@Override
-	public PreventCombatDamageSourceEffect copy() {
+    @Override
+    public PreventCombatDamageSourceEffect copy() {
             return new PreventCombatDamageSourceEffect(this);
-	}
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
             return true;
-	}
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
             GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), event.getAmount(), false);
             if (!game.replaceEvent(preventEvent)) {
                 int damage = event.getAmount();
@@ -72,8 +72,8 @@ public class PreventCombatDamageSourceEffect extends PreventionEffectImpl<Preven
             return false;
         }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
             if (super.applies(event, source, game)) {
                 DamageEvent damageEvent = (DamageEvent) event;
                 if (event.getTargetId().equals(source.getSourceId()) && damageEvent.isCombatDamage()) {
@@ -81,7 +81,7 @@ public class PreventCombatDamageSourceEffect extends PreventionEffectImpl<Preven
                 }
             }
             return false;
-	}
+    }
 
 }
 

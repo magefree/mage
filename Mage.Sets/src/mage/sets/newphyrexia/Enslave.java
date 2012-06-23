@@ -57,12 +57,12 @@ public class Enslave extends CardImpl<Enslave> {
         super(ownerId, 58, "Enslave", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}{B}");
         this.expansionSetCode = "NPH";
         this.subtype.add("Aura");
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		this.addAbility(ability);
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ControlEnchantedEffect()));
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new EnslaveEffect(), Constants.TargetController.YOU, false));
     }

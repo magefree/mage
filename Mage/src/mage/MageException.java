@@ -35,13 +35,13 @@ package mage;
  */
 public class MageException extends Exception {
 
-	private static final long serialVersionUID = 8340806803178193696L;
+    private static final long serialVersionUID = 8340806803178193696L;
 
-	public MageException(String message) {
-		super(message);
-	}
+    public MageException(String message) {
+        super(message);
+    }
 
-	public MageException(Throwable t) {
-		super(t);
-	}
+    public MageException(Throwable t) {
+        super(t);
+    }
 }

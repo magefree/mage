@@ -52,16 +52,16 @@ public class BondsOfQuicksilver extends CardImpl<BondsOfQuicksilver> {
         super(ownerId, 29, "Bonds of Quicksilver", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Aura");
-       	this.color.setBlue(true);
+           this.color.setBlue(true);
 
-		this.addAbility(FlashAbility.getInstance());
-		TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Detriment));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		ability.addEffect(new SkipEnchantedUntapEffect());
-		this.addAbility(ability);
-	}
+        this.addAbility(FlashAbility.getInstance());
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Detriment));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        ability.addEffect(new SkipEnchantedUntapEffect());
+        this.addAbility(ability);
+    }
 
     public BondsOfQuicksilver (final BondsOfQuicksilver card) {
         super(card);

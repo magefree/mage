@@ -44,30 +44,30 @@ import mage.game.permanent.Permanent;
  */
 public class GainControlTargetEffect extends ContinuousEffectImpl<GainControlTargetEffect> {
 
-	public GainControlTargetEffect(Duration duration) {
-		super(duration, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
-	}
+    public GainControlTargetEffect(Duration duration) {
+        super(duration, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
+    }
 
-	public GainControlTargetEffect(final GainControlTargetEffect effect) {
-		super(effect);
-	}
+    public GainControlTargetEffect(final GainControlTargetEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public GainControlTargetEffect copy() {
-		return new GainControlTargetEffect(this);
-	}
+    @Override
+    public GainControlTargetEffect copy() {
+        return new GainControlTargetEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getFirstTarget());
-		if (permanent != null) {
-			return permanent.changeControllerId(source.getControllerId(), game);
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        if (permanent != null) {
+            return permanent.changeControllerId(source.getControllerId(), game);
+        }
+        return false;
+    }
 
-	@Override
-	public String getText(Mode mode) {
-		return "Gain control of target " + mode.getTargets().get(0).getTargetName() + " " + duration.toString();
-	}
+    @Override
+    public String getText(Mode mode) {
+        return "Gain control of target " + mode.getTargets().get(0).getTargetName() + " " + duration.toString();
+    }
 }

@@ -39,11 +39,11 @@ public class DamageDistributionTest extends CardTestPlayerBase {
     public void testDoubleStrikeUnblocked() {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Warren Instigator");
         setLife(playerB, 4);
-        
+
         attack(1, playerA, "Warren Instigator");
         setStopAt(1, Constants.PhaseStep.END_COMBAT);
         execute();
-        
+
         assertLife(playerB, 2);
     }
 
@@ -52,7 +52,7 @@ public class DamageDistributionTest extends CardTestPlayerBase {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Merfolk Looter");
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Warren Instigator");
         setLife(playerB, 4);
-        
+
         setStopAt(1, Constants.PhaseStep.END_COMBAT);
         execute();
 

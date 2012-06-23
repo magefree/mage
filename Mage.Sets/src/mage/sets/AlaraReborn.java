@@ -38,22 +38,22 @@ import mage.cards.ExpansionSet;
  */
 public class AlaraReborn extends ExpansionSet {
 
-	private static final AlaraReborn fINSTANCE =  new AlaraReborn();
+    private static final AlaraReborn fINSTANCE =  new AlaraReborn();
 
-	public static AlaraReborn getInstance() {
-		return fINSTANCE;
-	}
+    public static AlaraReborn getInstance() {
+        return fINSTANCE;
+    }
 
-	private AlaraReborn() {
-		super("Alara Reborn", "ARB", "seticon_mtgarb", "mage.sets.alarareborn", new GregorianCalendar(2009, 3, 25).getTime(), SetType.EXPANSION);
-		this.blockName = "Shards of Alara";
-		this.parentSet = ShardsOfAlara.getInstance();
-		this.hasBoosters = true;
-		this.numBoosterLands = 0;
-		this.numBoosterCommon = 11;
-		this.numBoosterUncommon = 3;
-		this.numBoosterRare = 1;
-		this.ratioBoosterMythic = 8;
-	}
+    private AlaraReborn() {
+        super("Alara Reborn", "ARB", "seticon_mtgarb", "mage.sets.alarareborn", new GregorianCalendar(2009, 3, 25).getTime(), SetType.EXPANSION);
+        this.blockName = "Shards of Alara";
+        this.parentSet = ShardsOfAlara.getInstance();
+        this.hasBoosters = true;
+        this.numBoosterLands = 0;
+        this.numBoosterCommon = 11;
+        this.numBoosterUncommon = 3;
+        this.numBoosterRare = 1;
+        this.ratioBoosterMythic = 8;
+    }
 
 }

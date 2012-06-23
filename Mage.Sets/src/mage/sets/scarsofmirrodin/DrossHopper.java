@@ -52,7 +52,7 @@ public class DrossHopper extends CardImpl<DrossHopper> {
         this.expansionSetCode = "SOM";
         this.subtype.add("Insect");
         this.subtype.add("Horror");
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,

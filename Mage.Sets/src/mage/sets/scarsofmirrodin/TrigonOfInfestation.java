@@ -54,33 +54,33 @@ import mage.abilities.costs.mana.GenericManaCost;
  */
 public class TrigonOfInfestation extends CardImpl<TrigonOfInfestation> {
 
-	private static InsectInfectToken insectToken = new InsectInfectToken();
+    private static InsectInfectToken insectToken = new InsectInfectToken();
 
-	public TrigonOfInfestation(UUID ownerId) {
-		super(ownerId, 214, "Trigon of Infestation", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
-		this.expansionSetCode = "SOM";
+    public TrigonOfInfestation(UUID ownerId) {
+        super(ownerId, 214, "Trigon of Infestation", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
+        this.expansionSetCode = "SOM";
 
-		this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(new ChargeCounter(3)), ""));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(new ChargeCounter(3)), ""));
 
-		Costs costs = new CostsImpl();
-		costs.add(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
-		costs.add(new TapSourceCost());
+        Costs costs = new CostsImpl();
+        costs.add(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
+        costs.add(new TapSourceCost());
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(insectToken), costs);
         ability.addManaCost(new GenericManaCost(2));
-		this.addAbility(ability);
+        this.addAbility(ability);
 
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new TapSourceCost());
         ability2.addManaCost(new ManaCostsImpl("{G}{G}"));
-		this.addAbility(ability2);
-	}
+        this.addAbility(ability2);
+    }
 
-	public TrigonOfInfestation(final TrigonOfInfestation card) {
-		super(card);
-	}
+    public TrigonOfInfestation(final TrigonOfInfestation card) {
+        super(card);
+    }
 
-	@Override
-	public TrigonOfInfestation copy() {
-		return new TrigonOfInfestation(this);
-	}
+    @Override
+    public TrigonOfInfestation copy() {
+        return new TrigonOfInfestation(this);
+    }
 
 }

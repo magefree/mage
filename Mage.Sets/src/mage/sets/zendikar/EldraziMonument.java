@@ -57,61 +57,61 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class EldraziMonument extends CardImpl<EldraziMonument> {
 
-	public EldraziMonument(UUID ownerId) {
-		super(ownerId, 199, "Eldrazi Monument", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{5}");
-		this.expansionSetCode = "ZEN";
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false)));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent())));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent())));
-		this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new EldraziMonumentEffect()));
-	}
+    public EldraziMonument(UUID ownerId) {
+        super(ownerId, 199, "Eldrazi Monument", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{5}");
+        this.expansionSetCode = "ZEN";
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent())));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent())));
+        this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new EldraziMonumentEffect()));
+    }
 
-	public EldraziMonument(final EldraziMonument card) {
-		super(card);
-	}
+    public EldraziMonument(final EldraziMonument card) {
+        super(card);
+    }
 
-	@Override
-	public EldraziMonument copy() {
-		return new EldraziMonument(this);
-	}
+    @Override
+    public EldraziMonument copy() {
+        return new EldraziMonument(this);
+    }
 
 }
 
 class EldraziMonumentEffect extends OneShotEffect<EldraziMonumentEffect> {
 
-	public EldraziMonumentEffect() {
-		super(Outcome.Sacrifice);
-		staticText = "sacrifice a creature. If you can't, sacrifice {this}";
-	}
+    public EldraziMonumentEffect() {
+        super(Outcome.Sacrifice);
+        staticText = "sacrifice a creature. If you can't, sacrifice {this}";
+    }
 
-	public EldraziMonumentEffect(final EldraziMonumentEffect ability) {
-		super(ability);
-	}
+    public EldraziMonumentEffect(final EldraziMonumentEffect ability) {
+        super(ability);
+    }
 
-	@Override
-	public EldraziMonumentEffect copy() {
-		return new EldraziMonumentEffect(this);
-	}
+    @Override
+    public EldraziMonumentEffect copy() {
+        return new EldraziMonumentEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		TargetControlledPermanent target = new TargetControlledCreaturePermanent();
-		target.setRequired(true);
-		Player player = game.getPlayer(source.getControllerId());
-		if (target.canChoose(source.getControllerId(), game)) {
-			player.choose(this.outcome, target, source.getSourceId(), game);
-			Permanent permanent = game.getPermanent(target.getFirstTarget());
-			if (permanent != null) {
-				return permanent.sacrifice(source.getSourceId(), game);
-			}
-		}
-		Permanent permanent = game.getPermanent(source.getSourceId());
-		if (permanent != null) {
-			return permanent.sacrifice(source.getSourceId(), game);
-		}
-		return false;
+    @Override
+    public boolean apply(Game game, Ability source) {
+        TargetControlledPermanent target = new TargetControlledCreaturePermanent();
+        target.setRequired(true);
+        Player player = game.getPlayer(source.getControllerId());
+        if (target.canChoose(source.getControllerId(), game)) {
+            player.choose(this.outcome, target, source.getSourceId(), game);
+            Permanent permanent = game.getPermanent(target.getFirstTarget());
+            if (permanent != null) {
+                return permanent.sacrifice(source.getSourceId(), game);
+            }
+        }
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            return permanent.sacrifice(source.getSourceId(), game);
+        }
+        return false;
 
-	}
+    }
 
 }
 

@@ -41,35 +41,35 @@ import mage.game.permanent.Permanent;
  */
 public class ExileSourceCost extends CostImpl<ExileSourceCost> {
 
-	public ExileSourceCost() {
-		this.text = "Exile {this}";
-	}
+    public ExileSourceCost() {
+        this.text = "Exile {this}";
+    }
 
-	public ExileSourceCost(ExileSourceCost cost) {
-		super(cost);
-	}
+    public ExileSourceCost(ExileSourceCost cost) {
+        super(cost);
+    }
 
-	@Override
-	public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-		Permanent permanent = game.getPermanent(sourceId);
-		if (permanent != null) {
-			paid = permanent.moveToExile(null, "", sourceId, game);
-		}
-		return paid;
-	}
+    @Override
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+        Permanent permanent = game.getPermanent(sourceId);
+        if (permanent != null) {
+            paid = permanent.moveToExile(null, "", sourceId, game);
+        }
+        return paid;
+    }
 
-	@Override
-	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-		Permanent permanent = game.getPermanent(sourceId);
-		if (permanent != null) {
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+        Permanent permanent = game.getPermanent(sourceId);
+        if (permanent != null) {
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public ExileSourceCost copy() {
-		return new ExileSourceCost(this);
-	}
+    @Override
+    public ExileSourceCost copy() {
+        return new ExileSourceCost(this);
+    }
 
 }

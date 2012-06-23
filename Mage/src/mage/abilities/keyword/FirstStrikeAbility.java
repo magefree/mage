@@ -38,28 +38,28 @@ import mage.abilities.StaticAbility;
  */
 public class FirstStrikeAbility extends StaticAbility<FirstStrikeAbility> {
 
-	private static final FirstStrikeAbility fINSTANCE =  new FirstStrikeAbility();
+    private static final FirstStrikeAbility fINSTANCE =  new FirstStrikeAbility();
 
-	private Object readResolve() throws ObjectStreamException {
-		return fINSTANCE;
-	}
+    private Object readResolve() throws ObjectStreamException {
+        return fINSTANCE;
+    }
 
-	public static FirstStrikeAbility getInstance() {
-		return fINSTANCE;
-	}
+    public static FirstStrikeAbility getInstance() {
+        return fINSTANCE;
+    }
 
-	private FirstStrikeAbility() {
-		super(Zone.BATTLEFIELD, null);
-	}
+    private FirstStrikeAbility() {
+        super(Zone.BATTLEFIELD, null);
+    }
 
-	@Override
-	public String getRule() {
-		return "First strike";
-	}
+    @Override
+    public String getRule() {
+        return "First strike";
+    }
 
-	@Override
-	public FirstStrikeAbility copy() {
-		return fINSTANCE;
-	}
+    @Override
+    public FirstStrikeAbility copy() {
+        return fINSTANCE;
+    }
 
 }

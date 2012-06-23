@@ -58,162 +58,162 @@ import java.util.UUID;
  */
 public class MimicVat extends CardImpl<MimicVat> {
 
-	public MimicVat(UUID ownerId) {
-		super(ownerId, 175, "Mimic Vat", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-		this.expansionSetCode = "SOM";
+    public MimicVat(UUID ownerId) {
+        super(ownerId, 175, "Mimic Vat", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
+        this.expansionSetCode = "SOM";
 
-		// Imprint - Whenever a nontoken creature dies, you may exile that card. If you do, return each other card exiled with Mimic Vat to its owner's graveyard.
-		this.addAbility(new MimicVatTriggeredAbility());
+        // Imprint - Whenever a nontoken creature dies, you may exile that card. If you do, return each other card exiled with Mimic Vat to its owner's graveyard.
+        this.addAbility(new MimicVatTriggeredAbility());
 
-		// {3}, {tap}: Put a token onto the battlefield that's a copy of the exiled card. It gains haste. Exile it at the beginning of the next end step.
-		Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new MimicVatCreateTokenEffect(), new GenericManaCost(3));
-		ability.addCost(new TapSourceCost());
-		this.addAbility(ability);
-	}
+        // {3}, {tap}: Put a token onto the battlefield that's a copy of the exiled card. It gains haste. Exile it at the beginning of the next end step.
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new MimicVatCreateTokenEffect(), new GenericManaCost(3));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
+    }
 
-	public MimicVat(final MimicVat card) {
-		super(card);
-	}
+    public MimicVat(final MimicVat card) {
+        super(card);
+    }
 
-	@Override
-	public MimicVat copy() {
-		return new MimicVat(this);
-	}
+    @Override
+    public MimicVat copy() {
+        return new MimicVat(this);
+    }
 }
 
 class MimicVatTriggeredAbility extends TriggeredAbilityImpl<MimicVatTriggeredAbility> {
 
-	MimicVatTriggeredAbility() {
-		super(Constants.Zone.BATTLEFIELD, new MimicVatEffect(), true);
-	}
+    MimicVatTriggeredAbility() {
+        super(Constants.Zone.BATTLEFIELD, new MimicVatEffect(), true);
+    }
 
-	MimicVatTriggeredAbility(MimicVatTriggeredAbility ability) {
-		super(ability);
-	}
+    MimicVatTriggeredAbility(MimicVatTriggeredAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public MimicVatTriggeredAbility copy() {
-		return new MimicVatTriggeredAbility(this);
-	}
+    @Override
+    public MimicVatTriggeredAbility copy() {
+        return new MimicVatTriggeredAbility(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
 
-			// make sure card is on battlefield
-			UUID sourceCardId = getSourceId();
-			if (game.getPermanent(sourceCardId) == null) {
-				// or it is being removed
-				if (game.getLastKnownInformation(sourceCardId, Constants.Zone.BATTLEFIELD) == null) {
-					return false;
-				}
-			}
+            // make sure card is on battlefield
+            UUID sourceCardId = getSourceId();
+            if (game.getPermanent(sourceCardId) == null) {
+                // or it is being removed
+                if (game.getLastKnownInformation(sourceCardId, Constants.Zone.BATTLEFIELD) == null) {
+                    return false;
+                }
+            }
 
-			ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-			Permanent permanent = zEvent.getTarget();
+            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+            Permanent permanent = zEvent.getTarget();
 
-			if (permanent != null &&
-					zEvent.getToZone() == Constants.Zone.GRAVEYARD &&
-					zEvent.getFromZone() == Constants.Zone.BATTLEFIELD &&
-					!(permanent instanceof PermanentToken) &&
-					permanent.getCardType().contains(CardType.CREATURE)) {
+            if (permanent != null &&
+                    zEvent.getToZone() == Constants.Zone.GRAVEYARD &&
+                    zEvent.getFromZone() == Constants.Zone.BATTLEFIELD &&
+                    !(permanent instanceof PermanentToken) &&
+                    permanent.getCardType().contains(CardType.CREATURE)) {
 
-				getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
-				return true;
-			}
-		}
-		return false;
-	}
+                getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "Whenever a nontoken creature dies, you may exile that card. If you do, return each other card exiled with Mimic Vat to its owner's graveyard";
-	}
+    @Override
+    public String getRule() {
+        return "Whenever a nontoken creature dies, you may exile that card. If you do, return each other card exiled with Mimic Vat to its owner's graveyard";
+    }
 }
 
 class MimicVatEffect extends OneShotEffect<MimicVatEffect> {
 
-	public MimicVatEffect() {
-		super(Constants.Outcome.Benefit);
-		staticText = "exile that card";
-	}
+    public MimicVatEffect() {
+        super(Constants.Outcome.Benefit);
+        staticText = "exile that card";
+    }
 
-	public MimicVatEffect(MimicVatEffect effect) {
-		super(effect);
-	}
+    public MimicVatEffect(MimicVatEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getSourceId());
-		if (permanent == null) return false;
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent == null) return false;
 
-		// return older cards to graveyard
-		for (UUID imprinted : permanent.getImprinted()) {
-			Card card = game.getCard(imprinted);
-			card.moveToZone(Constants.Zone.GRAVEYARD, source.getSourceId(), game, false);
-		}
-		permanent.clearImprinted(game);
+        // return older cards to graveyard
+        for (UUID imprinted : permanent.getImprinted()) {
+            Card card = game.getCard(imprinted);
+            card.moveToZone(Constants.Zone.GRAVEYARD, source.getSourceId(), game, false);
+        }
+        permanent.clearImprinted(game);
 
-		// Imprint a new one
-		UUID target = targetPointer.getFirst(game, source);
-		if (target != null) {
-			Card card = game.getCard(target);
-			card.moveToExile(getId(), "Mimic Vat (Imprint)", source.getSourceId(), game);
-			permanent.imprint(card.getId(), game);
-		}
+        // Imprint a new one
+        UUID target = targetPointer.getFirst(game, source);
+        if (target != null) {
+            Card card = game.getCard(target);
+            card.moveToExile(getId(), "Mimic Vat (Imprint)", source.getSourceId(), game);
+            permanent.imprint(card.getId(), game);
+        }
 
-		return true;
-	}
+        return true;
+    }
 
-	@Override
-	public MimicVatEffect copy() {
-		return new MimicVatEffect(this);
-	}
+    @Override
+    public MimicVatEffect copy() {
+        return new MimicVatEffect(this);
+    }
 
 }
 
 class MimicVatCreateTokenEffect extends OneShotEffect<MimicVatCreateTokenEffect> {
 
-	public MimicVatCreateTokenEffect() {
-		super(Constants.Outcome.PutCreatureInPlay);
-		this.staticText = "Put a token onto the battlefield that's a copy of the exiled card. It gains haste. Exile it at the beginning of the next end step";
-	}
+    public MimicVatCreateTokenEffect() {
+        super(Constants.Outcome.PutCreatureInPlay);
+        this.staticText = "Put a token onto the battlefield that's a copy of the exiled card. It gains haste. Exile it at the beginning of the next end step";
+    }
 
-	public MimicVatCreateTokenEffect(final MimicVatCreateTokenEffect effect) {
-		super(effect);
-	}
+    public MimicVatCreateTokenEffect(final MimicVatCreateTokenEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public MimicVatCreateTokenEffect copy() {
-		return new MimicVatCreateTokenEffect(this);
-	}
+    @Override
+    public MimicVatCreateTokenEffect copy() {
+        return new MimicVatCreateTokenEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getSourceId());
-		if (permanent == null) return false;
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent == null) return false;
 
-		if (permanent.getImprinted().size() > 0) {
-			Card card = game.getCard(permanent.getImprinted().get(0));
-			if (card != null) {
-				EmptyToken token = new EmptyToken();
-				CardUtil.copyTo(token).from(card);
+        if (permanent.getImprinted().size() > 0) {
+            Card card = game.getCard(permanent.getImprinted().get(0));
+            if (card != null) {
+                EmptyToken token = new EmptyToken();
+                CardUtil.copyTo(token).from(card);
 
-				token.addAbility(HasteAbility.getInstance());
-				token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+                token.addAbility(HasteAbility.getInstance());
+                token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
 
-				ExileTargetEffect exileEffect = new ExileTargetEffect();
-				exileEffect.setTargetPointer(new FixedTarget(token.getLastAddedToken()));
-				DelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(exileEffect);
-				delayedAbility.setSourceId(source.getSourceId());
-				delayedAbility.setControllerId(source.getControllerId());
-				game.addDelayedTriggeredAbility(delayedAbility);
+                ExileTargetEffect exileEffect = new ExileTargetEffect();
+                exileEffect.setTargetPointer(new FixedTarget(token.getLastAddedToken()));
+                DelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(exileEffect);
+                delayedAbility.setSourceId(source.getSourceId());
+                delayedAbility.setControllerId(source.getControllerId());
+                game.addDelayedTriggeredAbility(delayedAbility);
 
-				return true;
-			}
-		}
+                return true;
+            }
+        }
 
-		return false;
-	}
+        return false;
+    }
 
 }

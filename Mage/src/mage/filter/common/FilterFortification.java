@@ -37,22 +37,22 @@ import mage.filter.FilterPermanent;
  */
 public class FilterFortification extends FilterPermanent<FilterFortification> {
 
-	public FilterFortification() {
-		this("fortification");
-	}
+    public FilterFortification() {
+        this("fortification");
+    }
 
-	public FilterFortification(String name) {
-		super(name);
-		this.cardType.add(CardType.ARTIFACT);
-		this.getSubtype().add("Fortification");
-	}
+    public FilterFortification(String name) {
+        super(name);
+        this.cardType.add(CardType.ARTIFACT);
+        this.getSubtype().add("Fortification");
+    }
 
-	public FilterFortification(final FilterFortification filter) {
-		super(filter);
-	}
+    public FilterFortification(final FilterFortification filter) {
+        super(filter);
+    }
 
-	@Override
-	public FilterFortification copy() {
-		return new FilterFortification(this);
-	}
+    @Override
+    public FilterFortification copy() {
+        return new FilterFortification(this);
+    }
 }

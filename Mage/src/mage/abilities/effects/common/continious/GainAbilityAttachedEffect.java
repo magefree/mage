@@ -44,54 +44,54 @@ import mage.game.permanent.Permanent;
  */
 public class GainAbilityAttachedEffect extends ContinuousEffectImpl<GainAbilityAttachedEffect> {
 
-	protected Ability ability;
+    protected Ability ability;
     protected AttachmentType attachmentType;
 
-	public GainAbilityAttachedEffect(Ability ability, AttachmentType attachmentType) {
-		super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-		this.ability = ability;
+    public GainAbilityAttachedEffect(Ability ability, AttachmentType attachmentType) {
+        super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+        this.ability = ability;
         this.attachmentType = attachmentType;
-		setText();
-	}
+        setText();
+    }
 
-	public GainAbilityAttachedEffect(final GainAbilityAttachedEffect effect) {
-		super(effect);
-		this.ability = effect.ability.copy();
+    public GainAbilityAttachedEffect(final GainAbilityAttachedEffect effect) {
+        super(effect);
+        this.ability = effect.ability.copy();
         this.attachmentType = effect.attachmentType;
-	}
+    }
 
-	@Override
-	public GainAbilityAttachedEffect copy() {
-		return new GainAbilityAttachedEffect(this);
-	}
+    @Override
+    public GainAbilityAttachedEffect copy() {
+        return new GainAbilityAttachedEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent equipment = game.getPermanent(source.getSourceId());
-		if (equipment != null && equipment.getAttachedTo() != null) {
-			Permanent creature = game.getPermanent(equipment.getAttachedTo());
-			if (creature != null) {
-				creature.addAbility(ability, game);
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent equipment = game.getPermanent(source.getSourceId());
+        if (equipment != null && equipment.getAttachedTo() != null) {
+            Permanent creature = game.getPermanent(equipment.getAttachedTo());
+            if (creature != null) {
+                creature.addAbility(ability, game);
             }
-		}
-		return true;
-	}
+        }
+        return true;
+    }
 
-	private void setText() {
+    private void setText() {
         StringBuilder sb = new StringBuilder();
         if (attachmentType == AttachmentType.AURA) {
             sb.append("Enchanted"); 
-		} else if (attachmentType == AttachmentType.EQUIPMENT) {
+        } else if (attachmentType == AttachmentType.EQUIPMENT) {
             sb.append("Equipped");
-		}
-		sb.append(" creature ");
-		if (duration == Duration.WhileOnBattlefield) {
-			sb.append("has ");	
-		} else {
-			sb.append("gains ");	
-		}
-		sb.append(ability.getRule());	
-		staticText = sb.toString();
-	}
+        }
+        sb.append(" creature ");
+        if (duration == Duration.WhileOnBattlefield) {
+            sb.append("has ");    
+        } else {
+            sb.append("gains ");    
+        }
+        sb.append(ability.getRule());    
+        staticText = sb.toString();
+    }
 
 }

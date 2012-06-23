@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class StormfrontPegasus extends mage.sets.magic2010.StormfrontPegasus {
 
-	public StormfrontPegasus(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 34;
-		this.expansionSetCode = "M11";
-	}
+    public StormfrontPegasus(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 34;
+        this.expansionSetCode = "M11";
+    }
 
-	public StormfrontPegasus(final StormfrontPegasus card) {
-		super(card);
-	}
+    public StormfrontPegasus(final StormfrontPegasus card) {
+        super(card);
+    }
 
-	@Override
-	public StormfrontPegasus copy() {
-		return new StormfrontPegasus(this);
-	}
+    @Override
+    public StormfrontPegasus copy() {
+        return new StormfrontPegasus(this);
+    }
 
 }

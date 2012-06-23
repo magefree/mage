@@ -50,7 +50,7 @@ public class VulshokBattlegear extends CardImpl<VulshokBattlegear> {
         this.expansionSetCode = "MRD";
         this.subtype.add("Equipment");
         this.addAbility(new EquipAbility(Constants.Outcome.BoostCreature, new GenericManaCost(3)));
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEquippedEffect(3, 3)));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEquippedEffect(3, 3)));
     }
 
     public VulshokBattlegear (final VulshokBattlegear card) {

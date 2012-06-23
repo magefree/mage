@@ -44,7 +44,7 @@ public class KamiOfOldStone extends CardImpl<KamiOfOldStone> {
         super(ownerId, 22, "Kami of Old Stone", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Spirit");
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(7);
     }

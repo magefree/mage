@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class Deathmark extends mage.sets.magic2010.Deathmark {
 
-	public Deathmark(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 91;
-		this.expansionSetCode = "M11";
-	}
+    public Deathmark(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 91;
+        this.expansionSetCode = "M11";
+    }
 
-	public Deathmark(final Deathmark card) {
-		super(card);
-	}
+    public Deathmark(final Deathmark card) {
+        super(card);
+    }
 
-	@Override
-	public Deathmark copy() {
-		return new Deathmark(this);
-	}
+    @Override
+    public Deathmark copy() {
+        return new Deathmark(this);
+    }
 
 }

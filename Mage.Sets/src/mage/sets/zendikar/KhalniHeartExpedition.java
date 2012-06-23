@@ -51,26 +51,26 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class KhalniHeartExpedition extends CardImpl<KhalniHeartExpedition> {
 
-	public KhalniHeartExpedition(UUID ownerId) {
-		super(ownerId, 167, "Khalni Heart Expedition", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
-		this.expansionSetCode = "ZEN";
-		this.color.setGreen(true);
+    public KhalniHeartExpedition(UUID ownerId) {
+        super(ownerId, 167, "Khalni Heart Expedition", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
+        this.expansionSetCode = "ZEN";
+        this.color.setGreen(true);
 
-		this.addAbility(new LandfallAbility(new AddCountersSourceEffect(new QuestCounter()), true));
+        this.addAbility(new LandfallAbility(new AddCountersSourceEffect(new QuestCounter()), true));
         TargetCardInLibrary target = new TargetCardInLibrary(0, 2, new FilterBasicLandCard());
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new SearchLibraryPutInPlayEffect(target, true, Outcome.PutLandInPlay),
                 new RemoveCountersSourceCost(CounterType.QUEST.createInstance(3)));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
-	}
+    }
 
-	public KhalniHeartExpedition(final KhalniHeartExpedition card) {
-		super(card);
-	}
+    public KhalniHeartExpedition(final KhalniHeartExpedition card) {
+        super(card);
+    }
 
-	@Override
-	public KhalniHeartExpedition copy() {
-		return new KhalniHeartExpedition(this);
-	}
+    @Override
+    public KhalniHeartExpedition copy() {
+        return new KhalniHeartExpedition(this);
+    }
 }

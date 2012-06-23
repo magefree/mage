@@ -39,33 +39,33 @@ import mage.game.events.GameEvent.EventType;
  */
 public class DeclareBlockersStep extends Step<DeclareBlockersStep> {
 
-	public DeclareBlockersStep() {
-		super(PhaseStep.DECLARE_BLOCKERS, true);
-		this.stepEvent = EventType.DECLARE_BLOCKERS_STEP;
-		this.preStepEvent = EventType.DECLARE_BLOCKERS_STEP_PRE;
-		this.postStepEvent = EventType.DECLARE_BLOCKERS_STEP_POST;
-	}
+    public DeclareBlockersStep() {
+        super(PhaseStep.DECLARE_BLOCKERS, true);
+        this.stepEvent = EventType.DECLARE_BLOCKERS_STEP;
+        this.preStepEvent = EventType.DECLARE_BLOCKERS_STEP_PRE;
+        this.postStepEvent = EventType.DECLARE_BLOCKERS_STEP_POST;
+    }
 
-	public DeclareBlockersStep(final DeclareBlockersStep step) {
-		super(step);
-	}
+    public DeclareBlockersStep(final DeclareBlockersStep step) {
+        super(step);
+    }
 
-	@Override
-	public boolean skipStep(Game game, UUID activePlayerId) {
-		if (game.getCombat().noAttackers())
-			return true;
-		return super.skipStep(game, activePlayerId);
-	}
+    @Override
+    public boolean skipStep(Game game, UUID activePlayerId) {
+        if (game.getCombat().noAttackers())
+            return true;
+        return super.skipStep(game, activePlayerId);
+    }
 
-	@Override
-	public void beginStep(Game game, UUID activePlayerId) {
-		super.beginStep(game, activePlayerId);
-		game.getCombat().selectBlockers(game);
+    @Override
+    public void beginStep(Game game, UUID activePlayerId) {
+        super.beginStep(game, activePlayerId);
+        game.getCombat().selectBlockers(game);
         if (!game.isPaused()) {
             game.getCombat().checkBlockRestrictions(game);
             game.getCombat().damageAssignmentOrder(game);
         }
-	}
+    }
 
     @Override
     public void resumeBeginStep(Game game, UUID activePlayerId) {
@@ -74,10 +74,10 @@ public class DeclareBlockersStep extends Step<DeclareBlockersStep> {
         game.getCombat().checkBlockRestrictions(game);
         game.getCombat().damageAssignmentOrder(game);
     }
-    
-	@Override
-	public DeclareBlockersStep copy() {
-		return new DeclareBlockersStep(this);
-	}
+
+    @Override
+    public DeclareBlockersStep copy() {
+        return new DeclareBlockersStep(this);
+    }
 
 }

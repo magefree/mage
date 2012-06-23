@@ -59,150 +59,150 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SarkhanTheMad extends CardImpl<SarkhanTheMad> {
 
-	public SarkhanTheMad(UUID ownerId) {
-		super(ownerId, 214, "Sarkhan the Mad", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{R}");
-		this.expansionSetCode = "ROE";
-		this.subtype.add("Sarkhan");
-		this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(7)), ""));
+    public SarkhanTheMad(UUID ownerId) {
+        super(ownerId, 214, "Sarkhan the Mad", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{R}");
+        this.expansionSetCode = "ROE";
+        this.subtype.add("Sarkhan");
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(7)), ""));
 
-		this.color.setBlack(true);
-		this.color.setRed(true);
+        this.color.setBlack(true);
+        this.color.setRed(true);
 
-		this.addAbility(new LoyaltyAbility(new SarkhanTheMadRevealAndDrawEffect(), 0));
-		Target targetCreature = new TargetCreaturePermanent();
-		Ability sacAbility = new LoyaltyAbility(new SarkhanTheMadSacEffect(), -2);
-		sacAbility.addTarget(targetCreature);
-		this.addAbility(sacAbility);
-		Ability damageAbility = new LoyaltyAbility(new SarkhanTheMadDragonDamageEffect(), -4);
-		damageAbility.addTarget(new TargetPlayer());
-		this.addAbility(damageAbility);
-	}
+        this.addAbility(new LoyaltyAbility(new SarkhanTheMadRevealAndDrawEffect(), 0));
+        Target targetCreature = new TargetCreaturePermanent();
+        Ability sacAbility = new LoyaltyAbility(new SarkhanTheMadSacEffect(), -2);
+        sacAbility.addTarget(targetCreature);
+        this.addAbility(sacAbility);
+        Ability damageAbility = new LoyaltyAbility(new SarkhanTheMadDragonDamageEffect(), -4);
+        damageAbility.addTarget(new TargetPlayer());
+        this.addAbility(damageAbility);
+    }
 
-	public SarkhanTheMad(final SarkhanTheMad card) {
-		super(card);
-	}
+    public SarkhanTheMad(final SarkhanTheMad card) {
+        super(card);
+    }
 
-	@Override
-	public SarkhanTheMad copy() {
-		return new SarkhanTheMad(this);
-	}
+    @Override
+    public SarkhanTheMad copy() {
+        return new SarkhanTheMad(this);
+    }
 }
 
 class SarkhanTheMadRevealAndDrawEffect extends OneShotEffect<SarkhanTheMadRevealAndDrawEffect> {
 
-	private static final String effectText = "Reveal the top card of your library and put it into your hand.  {this} deals damage to himself equal to that card's converted mana cost";
+    private static final String effectText = "Reveal the top card of your library and put it into your hand.  {this} deals damage to himself equal to that card's converted mana cost";
 
-	SarkhanTheMadRevealAndDrawEffect ( ) {
-		super(Outcome.DrawCard);
-		staticText = effectText;
-	}
+    SarkhanTheMadRevealAndDrawEffect ( ) {
+        super(Outcome.DrawCard);
+        staticText = effectText;
+    }
 
-	SarkhanTheMadRevealAndDrawEffect ( SarkhanTheMadRevealAndDrawEffect effect ) {
-		super(effect);
-	}
+    SarkhanTheMadRevealAndDrawEffect ( SarkhanTheMadRevealAndDrawEffect effect ) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-		if (player != null && player.getLibrary().size() > 0) {
-			Card card = player.getLibrary().removeFromTop(game);
-			Permanent permanent = game.getPermanent(source.getSourceId());
-			if (card != null) {
-				card.moveToZone(Zone.HAND, source.getId(), game, false);
-				permanent.damage(card.getManaCost().convertedManaCost(), this.getId(), game, false, false);
-				Cards cards = new CardsImpl();
-				cards.add(card);
-				player.revealCards("Sarkhan the Mad", cards, game);
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null && player.getLibrary().size() > 0) {
+            Card card = player.getLibrary().removeFromTop(game);
+            Permanent permanent = game.getPermanent(source.getSourceId());
+            if (card != null) {
+                card.moveToZone(Zone.HAND, source.getId(), game, false);
+                permanent.damage(card.getManaCost().convertedManaCost(), this.getId(), game, false, false);
+                Cards cards = new CardsImpl();
+                cards.add(card);
+                player.revealCards("Sarkhan the Mad", cards, game);
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public SarkhanTheMadRevealAndDrawEffect copy() {
-		return new SarkhanTheMadRevealAndDrawEffect(this);
-	}
+    @Override
+    public SarkhanTheMadRevealAndDrawEffect copy() {
+        return new SarkhanTheMadRevealAndDrawEffect(this);
+    }
 
 }
 
 class SarkhanTheMadSacEffect extends OneShotEffect<SarkhanTheMadSacEffect> {
 
-	private static final String effectText = "Target creature's controller sacrifices it, then that player puts a 5/5 red Dragon creature token with flying onto the battlefield";
+    private static final String effectText = "Target creature's controller sacrifices it, then that player puts a 5/5 red Dragon creature token with flying onto the battlefield";
 
-	SarkhanTheMadSacEffect ( ) {
-		super(Outcome.Sacrifice);
-		staticText = effectText;
-	}
+    SarkhanTheMadSacEffect ( ) {
+        super(Outcome.Sacrifice);
+        staticText = effectText;
+    }
 
-	SarkhanTheMadSacEffect ( SarkhanTheMadSacEffect effect ) {
-		super(effect);
-	}
+    SarkhanTheMadSacEffect ( SarkhanTheMadSacEffect effect ) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getTargets().getFirstTarget());
-		if ( permanent != null ) {
-			Player player = game.getPlayer(permanent.getControllerId());
-			permanent.sacrifice(this.getId(), game);
-			Token dragonToken = new DragonToken();
-			dragonToken.putOntoBattlefield(1, game, this.getId(), player.getId());
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getTargets().getFirstTarget());
+        if ( permanent != null ) {
+            Player player = game.getPlayer(permanent.getControllerId());
+            permanent.sacrifice(this.getId(), game);
+            Token dragonToken = new DragonToken();
+            dragonToken.putOntoBattlefield(1, game, this.getId(), player.getId());
+        }
+        return false;
+    }
 
-	@Override
-	public SarkhanTheMadSacEffect copy() {
-		return new SarkhanTheMadSacEffect(this);
-	}
+    @Override
+    public SarkhanTheMadSacEffect copy() {
+        return new SarkhanTheMadSacEffect(this);
+    }
 
 }
 
 class SarkhanTheMadDragonDamageEffect extends OneShotEffect<SarkhanTheMadDragonDamageEffect> {
 
-	private static final String effectText = "Each Dragon creature you control deals damage equal to its power to target player";
-	private static final FilterControlledPermanent filter;
+    private static final String effectText = "Each Dragon creature you control deals damage equal to its power to target player";
+    private static final FilterControlledPermanent filter;
 
-	static {
-		filter = new FilterControlledPermanent();
-		filter.getCardType().add(CardType.CREATURE);
-		filter.getSubtype().add("Dragon");
-	}
+    static {
+        filter = new FilterControlledPermanent();
+        filter.getCardType().add(CardType.CREATURE);
+        filter.getSubtype().add("Dragon");
+    }
 
-	SarkhanTheMadDragonDamageEffect ( ) {
-		super(Outcome.Damage);
-		staticText = effectText;
-	}
+    SarkhanTheMadDragonDamageEffect ( ) {
+        super(Outcome.Damage);
+        staticText = effectText;
+    }
 
-	SarkhanTheMadDragonDamageEffect ( SarkhanTheMadDragonDamageEffect effect ) {
-		super(effect);
-	}
+    SarkhanTheMadDragonDamageEffect ( SarkhanTheMadDragonDamageEffect effect ) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		List<Permanent> dragons = game.getBattlefield().getAllActivePermanents(filter, game);
-		Player player = game.getPlayer(source.getTargets().getFirstTarget());
-		if ( player != null && dragons != null && !dragons.isEmpty() ) {
-			for ( Permanent dragon : dragons ) {
-				player.damage(dragon.getPower().getValue(), dragon.getId(), game, true, false);
-			}
-			return true;
-		}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        List<Permanent> dragons = game.getBattlefield().getAllActivePermanents(filter, game);
+        Player player = game.getPlayer(source.getTargets().getFirstTarget());
+        if ( player != null && dragons != null && !dragons.isEmpty() ) {
+            for ( Permanent dragon : dragons ) {
+                player.damage(dragon.getPower().getValue(), dragon.getId(), game, true, false);
+            }
+            return true;
+        }
 
-		return false;
-	}
+        return false;
+    }
 
-	@Override
-	public SarkhanTheMadDragonDamageEffect copy() {
-		return new SarkhanTheMadDragonDamageEffect(this);
-	}
+    @Override
+    public SarkhanTheMadDragonDamageEffect copy() {
+        return new SarkhanTheMadDragonDamageEffect(this);
+    }
 
 }
 
 class DragonToken extends mage.game.permanent.token.DragonToken {
-	DragonToken ( ) {
-		super();
-		this.power = new MageInt(5);
-		this.toughness = new MageInt(5);
-	}
+    DragonToken ( ) {
+        super();
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(5);
+    }
 }

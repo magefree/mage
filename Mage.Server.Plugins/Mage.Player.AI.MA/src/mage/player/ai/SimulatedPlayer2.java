@@ -55,45 +55,45 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  */
 public class SimulatedPlayer2 extends ComputerPlayer<SimulatedPlayer2> {
 
-	private final static transient Logger logger = Logger.getLogger(SimulatedPlayer2.class);
-	private boolean isSimulatedPlayer;
-	private transient ConcurrentLinkedQueue<Ability> allActions;
+    private final static transient Logger logger = Logger.getLogger(SimulatedPlayer2.class);
+    private boolean isSimulatedPlayer;
+    private transient ConcurrentLinkedQueue<Ability> allActions;
     private boolean forced;
-	private static PassAbility pass = new PassAbility();
+    private static PassAbility pass = new PassAbility();
 
     private List<String> suggested;
 
-	public SimulatedPlayer2(UUID id, boolean isSimulatedPlayer, List<String> suggested) {
-		super(id);
-		pass.setControllerId(playerId);
-		this.isSimulatedPlayer = isSimulatedPlayer;
+    public SimulatedPlayer2(UUID id, boolean isSimulatedPlayer, List<String> suggested) {
+        super(id);
+        pass.setControllerId(playerId);
+        this.isSimulatedPlayer = isSimulatedPlayer;
         this.suggested = suggested;
-	}
+    }
 
-	public SimulatedPlayer2(final SimulatedPlayer2 player) {
-		super(player);
-		this.isSimulatedPlayer = player.isSimulatedPlayer;
+    public SimulatedPlayer2(final SimulatedPlayer2 player) {
+        super(player);
+        this.isSimulatedPlayer = player.isSimulatedPlayer;
         this.suggested = new ArrayList<String>();
         for (String s : player.suggested) {
             this.suggested.add(s);
         }
 
-	}
+    }
 
-	@Override
-	public SimulatedPlayer2 copy() {
-		return new SimulatedPlayer2(this);
-	}
+    @Override
+    public SimulatedPlayer2 copy() {
+        return new SimulatedPlayer2(this);
+    }
 
-	public List<Ability> simulatePriority(Game game) {
-		allActions = new ConcurrentLinkedQueue<Ability>();
-		Game sim = game.copy();
+    public List<Ability> simulatePriority(Game game) {
+        allActions = new ConcurrentLinkedQueue<Ability>();
+        Game sim = game.copy();
 
         forced = false;
-		simulateOptions(sim);
+        simulateOptions(sim);
 
-		ArrayList<Ability> list = new ArrayList<Ability>(allActions);
-		Collections.reverse(list);
+        ArrayList<Ability> list = new ArrayList<Ability>(allActions);
+        Collections.reverse(list);
 
         if (!forced) {
             list.add(pass);
@@ -109,52 +109,52 @@ public class SimulatedPlayer2 extends ComputerPlayer<SimulatedPlayer2> {
             }
         }
 
-		return list;
-	}
+        return list;
+    }
 
-	protected void simulateOptions(Game game) {
-		List<Ability> playables = game.getPlayer(playerId).getPlayable(game, isSimulatedPlayer);
+    protected void simulateOptions(Game game) {
+        List<Ability> playables = game.getPlayer(playerId).getPlayable(game, isSimulatedPlayer);
         playables = filterAbilities(game, playables, suggested);
-		for (Ability ability: playables) {
-			List<Ability> options = game.getPlayer(playerId).getPlayableOptions(ability, game);
+        for (Ability ability: playables) {
+            List<Ability> options = game.getPlayer(playerId).getPlayableOptions(ability, game);
             options = filterOptions(game, options, ability, suggested);
-			if (options.isEmpty()) {
-				if (ability.getManaCosts().getVariableCosts().size() > 0) {
-					simulateVariableCosts(ability, game);
-				}
-				else {
-					allActions.add(ability);
-				}
-//				simulateAction(game, previousActions, ability);
-			}
-			else {
-//				ExecutorService simulationExecutor = Executors.newFixedThreadPool(4);
-				for (Ability option: options) {
-					if (ability.getManaCosts().getVariableCosts().size() > 0) {
-						simulateVariableCosts(option, game);
-					}
-					else {
-						allActions.add(option);
-					}
-//					SimulationWorker worker = new SimulationWorker(game, this, previousActions, option);
-//					simulationExecutor.submit(worker);
-				}
-//				simulationExecutor.shutdown();
-//				while(!simulationExecutor.isTerminated()) {}
-			}
-		}
-	}
+            if (options.isEmpty()) {
+                if (ability.getManaCosts().getVariableCosts().size() > 0) {
+                    simulateVariableCosts(ability, game);
+                }
+                else {
+                    allActions.add(ability);
+                }
+//                simulateAction(game, previousActions, ability);
+            }
+            else {
+//                ExecutorService simulationExecutor = Executors.newFixedThreadPool(4);
+                for (Ability option: options) {
+                    if (ability.getManaCosts().getVariableCosts().size() > 0) {
+                        simulateVariableCosts(option, game);
+                    }
+                    else {
+                        allActions.add(option);
+                    }
+//                    SimulationWorker worker = new SimulationWorker(game, this, previousActions, option);
+//                    simulationExecutor.submit(worker);
+                }
+//                simulationExecutor.shutdown();
+//                while(!simulationExecutor.isTerminated()) {}
+            }
+        }
+    }
 
-//	protected void simulateAction(Game game, SimulatedAction previousActions, Ability action) {
-//		List<Ability> actions = new ArrayList<Ability>(previousActions.getAbilities());
-//		actions.add(action);
-//		Game sim = game.copy();
-//		if (sim.getPlayer(playerId).activateAbility((ActivatedAbility) action.copy(), sim)) {
-//			sim.applyEffects();
-//			sim.getPlayers().resetPassed();
-//			allActions.add(new SimulatedAction(sim, actions));
-//		}
-//	}
+//    protected void simulateAction(Game game, SimulatedAction previousActions, Ability action) {
+//        List<Ability> actions = new ArrayList<Ability>(previousActions.getAbilities());
+//        actions.add(action);
+//        Game sim = game.copy();
+//        if (sim.getPlayer(playerId).activateAbility((ActivatedAbility) action.copy(), sim)) {
+//            sim.applyEffects();
+//            sim.getPlayers().resetPassed();
+//            allActions.add(new SimulatedAction(sim, actions));
+//        }
+//    }
 
     protected List<Ability> filterAbilities(Game game, List<Ability> playables, List<String> suggested) {
         if (playables.isEmpty()) {
@@ -221,57 +221,57 @@ public class SimulatedPlayer2 extends ComputerPlayer<SimulatedPlayer2> {
         return options;
     }
 
-	//add a generic mana cost for each amount possible
-	protected void simulateVariableCosts(Ability ability, Game game) {
-		int numAvailable = getAvailableManaProducers(game).size();
-		// Start with X = {1}
-		for (int i = 1; i < numAvailable; i++) {
-			Ability newAbility = ability.copy();
-			newAbility.getManaCostsToPay().add(new GenericManaCost(i));
-			allActions.add(newAbility);
-		}
-	}
+    //add a generic mana cost for each amount possible
+    protected void simulateVariableCosts(Ability ability, Game game) {
+        int numAvailable = getAvailableManaProducers(game).size();
+        // Start with X = {1}
+        for (int i = 1; i < numAvailable; i++) {
+            Ability newAbility = ability.copy();
+            newAbility.getManaCostsToPay().add(new GenericManaCost(i));
+            allActions.add(newAbility);
+        }
+    }
 
-	@Override
-	public boolean playXMana(VariableManaCost cost, ManaCosts<ManaCost> costs, Game game) {
-		//simulateVariableCosts method adds a generic mana cost for each option
-		for (ManaCost manaCost: costs) {
-			if (manaCost instanceof GenericManaCost) {
-				cost.setPayment(manaCost.getPayment());
-				logger.debug("simulating -- X = " + cost.getPayment().count());
-				break;
-			}
-		}
-		cost.setPaid();
-		return true;
-	}
+    @Override
+    public boolean playXMana(VariableManaCost cost, ManaCosts<ManaCost> costs, Game game) {
+        //simulateVariableCosts method adds a generic mana cost for each option
+        for (ManaCost manaCost: costs) {
+            if (manaCost instanceof GenericManaCost) {
+                cost.setPayment(manaCost.getPayment());
+                logger.debug("simulating -- X = " + cost.getPayment().count());
+                break;
+            }
+        }
+        cost.setPaid();
+        return true;
+    }
 
-	public List<Combat> addAttackers(Game game) {
-		Map<Integer, Combat> engagements = new HashMap<Integer, Combat>();
-		//useful only for two player games - will only attack first opponent
-		UUID defenderId = game.getOpponents(playerId).iterator().next();
-		List<Permanent> attackersList = super.getAvailableAttackers(game);
-		//use binary digits to calculate powerset of attackers
-		int powerElements = (int) Math.pow(2, attackersList.size());
-		StringBuilder binary = new StringBuilder();
-		for (int i = powerElements - 1; i >= 0; i--) {
-			Game sim = game.copy();
-			binary.setLength(0);
-			binary.append(Integer.toBinaryString(i));
-			while (binary.length() < attackersList.size()) {
-				binary.insert(0, "0");
-			}
-			for (int j = 0; j < attackersList.size(); j++) {
-				if (binary.charAt(j) == '1')
-					sim.getCombat().declareAttacker(attackersList.get(j).getId(), defenderId, sim);
-			}
-			if (engagements.put(sim.getCombat().getValue().hashCode(), sim.getCombat()) != null) {
-				logger.debug("simulating -- found redundant attack combination");
-			}
-			else {
-				logger.debug("simulating -- attack:" + sim.getCombat().getGroups().size());
-			}
-		}
+    public List<Combat> addAttackers(Game game) {
+        Map<Integer, Combat> engagements = new HashMap<Integer, Combat>();
+        //useful only for two player games - will only attack first opponent
+        UUID defenderId = game.getOpponents(playerId).iterator().next();
+        List<Permanent> attackersList = super.getAvailableAttackers(game);
+        //use binary digits to calculate powerset of attackers
+        int powerElements = (int) Math.pow(2, attackersList.size());
+        StringBuilder binary = new StringBuilder();
+        for (int i = powerElements - 1; i >= 0; i--) {
+            Game sim = game.copy();
+            binary.setLength(0);
+            binary.append(Integer.toBinaryString(i));
+            while (binary.length() < attackersList.size()) {
+                binary.insert(0, "0");
+            }
+            for (int j = 0; j < attackersList.size(); j++) {
+                if (binary.charAt(j) == '1')
+                    sim.getCombat().declareAttacker(attackersList.get(j).getId(), defenderId, sim);
+            }
+            if (engagements.put(sim.getCombat().getValue().hashCode(), sim.getCombat()) != null) {
+                logger.debug("simulating -- found redundant attack combination");
+            }
+            else {
+                logger.debug("simulating -- attack:" + sim.getCombat().getGroups().size());
+            }
+        }
         List list = new ArrayList<Combat>(engagements.values());
         Collections.sort(list, new Comparator<Combat>() {
             @Override
@@ -279,89 +279,89 @@ public class SimulatedPlayer2 extends ComputerPlayer<SimulatedPlayer2> {
                 return Integer.valueOf(o2.getGroups().size()).compareTo(Integer.valueOf(o1.getGroups().size()));
             }
         });
-		return list;
-	}
+        return list;
+    }
 
-	public List<Combat> addBlockers(Game game) {
-		Map<Integer, Combat> engagements = new HashMap<Integer, Combat>();
-		int numGroups = game.getCombat().getGroups().size();
-		if (numGroups == 0) return new ArrayList<Combat>();
+    public List<Combat> addBlockers(Game game) {
+        Map<Integer, Combat> engagements = new HashMap<Integer, Combat>();
+        int numGroups = game.getCombat().getGroups().size();
+        if (numGroups == 0) return new ArrayList<Combat>();
 
-		//add a node with no blockers
-		Game sim = game.copy();
-		engagements.put(sim.getCombat().getValue().hashCode(), sim.getCombat());
-		sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, playerId, playerId));
+        //add a node with no blockers
+        Game sim = game.copy();
+        engagements.put(sim.getCombat().getValue().hashCode(), sim.getCombat());
+        sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, playerId, playerId));
 
-		List<Permanent> blockers = getAvailableBlockers(game);
-		addBlocker(game, blockers, engagements);
+        List<Permanent> blockers = getAvailableBlockers(game);
+        addBlocker(game, blockers, engagements);
 
-		return new ArrayList<Combat>(engagements.values());
-	}
+        return new ArrayList<Combat>(engagements.values());
+    }
 
-	protected void addBlocker(Game game, List<Permanent> blockers, Map<Integer, Combat> engagements) {
-		if (blockers.isEmpty())
-			return;
-		int numGroups = game.getCombat().getGroups().size();
-		//try to block each attacker with each potential blocker
-		Permanent blocker = blockers.get(0);
-		logger.debug("simulating -- block:" + blocker);
-		List<Permanent> remaining = remove(blockers, blocker);
-		for (int i = 0; i < numGroups; i++) {
-			if (game.getCombat().getGroups().get(i).canBlock(blocker, game)) {
-				Game sim = game.copy();
-				sim.getCombat().getGroups().get(i).addBlocker(blocker.getId(), playerId, sim);
-				if (engagements.put(sim.getCombat().getValue().hashCode(), sim.getCombat()) != null)
-					logger.debug("simulating -- found redundant block combination");
-				addBlocker(sim, remaining, engagements);  // and recurse minus the used blocker
-			}
-		}
-		addBlocker(game, remaining, engagements);
-	}
+    protected void addBlocker(Game game, List<Permanent> blockers, Map<Integer, Combat> engagements) {
+        if (blockers.isEmpty())
+            return;
+        int numGroups = game.getCombat().getGroups().size();
+        //try to block each attacker with each potential blocker
+        Permanent blocker = blockers.get(0);
+        logger.debug("simulating -- block:" + blocker);
+        List<Permanent> remaining = remove(blockers, blocker);
+        for (int i = 0; i < numGroups; i++) {
+            if (game.getCombat().getGroups().get(i).canBlock(blocker, game)) {
+                Game sim = game.copy();
+                sim.getCombat().getGroups().get(i).addBlocker(blocker.getId(), playerId, sim);
+                if (engagements.put(sim.getCombat().getValue().hashCode(), sim.getCombat()) != null)
+                    logger.debug("simulating -- found redundant block combination");
+                addBlocker(sim, remaining, engagements);  // and recurse minus the used blocker
+            }
+        }
+        addBlocker(game, remaining, engagements);
+    }
 
-	@Override
-	public boolean triggerAbility(TriggeredAbility source, Game game) {
-		Ability ability = source.copy();
-		List<Ability> options = getPlayableOptions(ability, game);
-		if (options.isEmpty()) {
-			logger.debug("simulating -- triggered ability:" + ability);
-			game.getStack().push(new StackAbility(ability, playerId));
-			ability.activate(game, false);
-			game.applyEffects();
-			game.getPlayers().resetPassed();
-		}
-		else {
-			SimulationNode2 parent = (SimulationNode2) game.getCustomData();
-			int depth = parent.getDepth() - 1;
-			if (depth == 0) return true;
-			logger.debug("simulating -- triggered ability - adding children:" + options.size());
-			for (Ability option: options) {
-				addAbilityNode(parent, option, depth, game);
-			}
-		}
-		return true;
-	}
+    @Override
+    public boolean triggerAbility(TriggeredAbility source, Game game) {
+        Ability ability = source.copy();
+        List<Ability> options = getPlayableOptions(ability, game);
+        if (options.isEmpty()) {
+            logger.debug("simulating -- triggered ability:" + ability);
+            game.getStack().push(new StackAbility(ability, playerId));
+            ability.activate(game, false);
+            game.applyEffects();
+            game.getPlayers().resetPassed();
+        }
+        else {
+            SimulationNode2 parent = (SimulationNode2) game.getCustomData();
+            int depth = parent.getDepth() - 1;
+            if (depth == 0) return true;
+            logger.debug("simulating -- triggered ability - adding children:" + options.size());
+            for (Ability option: options) {
+                addAbilityNode(parent, option, depth, game);
+            }
+        }
+        return true;
+    }
 
-	protected void addAbilityNode(SimulationNode2 parent, Ability ability, int depth, Game game) {
-		Game sim = game.copy();
-		sim.getStack().push(new StackAbility(ability, playerId));
-		ability.activate(sim, false);
-		sim.applyEffects();
-		SimulationNode2 newNode = new SimulationNode2(parent, sim, depth, playerId);
-		logger.debug("simulating -- node #:" + SimulationNode2.getCount() + " triggered ability option");
-		for (Target target: ability.getTargets()) {
-			for (UUID targetId: target.getTargets()) {
-				newNode.getTargets().add(targetId);
-			}
-		}
-		for (Choice choice: ability.getChoices()) {
-			newNode.getChoices().add(choice.getChoice());
-		}
-		parent.children.add(newNode);
-	}
+    protected void addAbilityNode(SimulationNode2 parent, Ability ability, int depth, Game game) {
+        Game sim = game.copy();
+        sim.getStack().push(new StackAbility(ability, playerId));
+        ability.activate(sim, false);
+        sim.applyEffects();
+        SimulationNode2 newNode = new SimulationNode2(parent, sim, depth, playerId);
+        logger.debug("simulating -- node #:" + SimulationNode2.getCount() + " triggered ability option");
+        for (Target target: ability.getTargets()) {
+            for (UUID targetId: target.getTargets()) {
+                newNode.getTargets().add(targetId);
+            }
+        }
+        for (Choice choice: ability.getChoices()) {
+            newNode.getChoices().add(choice.getChoice());
+        }
+        parent.children.add(newNode);
+    }
 
-	@Override
-	public boolean priority(Game game) {
-		//should never get here
+    @Override
+    public boolean priority(Game game) {
+        //should never get here
         return false;
-	}
+    }
 }

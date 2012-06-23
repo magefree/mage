@@ -37,22 +37,22 @@ import mage.filter.FilterPermanent;
  */
 public class FilterControlledPermanent<T extends FilterControlledPermanent<T>> extends FilterPermanent<FilterControlledPermanent<T>> {
 
-	public FilterControlledPermanent() {
-		this("permanent you control");
-	}
+    public FilterControlledPermanent() {
+        this("permanent you control");
+    }
 
-	public FilterControlledPermanent(String name) {
-		super(name);
-		this.controller = TargetController.YOU;
-	}
+    public FilterControlledPermanent(String name) {
+        super(name);
+        this.controller = TargetController.YOU;
+    }
 
-	public FilterControlledPermanent(final FilterControlledPermanent filter) {
-		super(filter);
-	}
+    public FilterControlledPermanent(final FilterControlledPermanent filter) {
+        super(filter);
+    }
 
-	@Override
-	public FilterControlledPermanent copy() {
-		return new FilterControlledPermanent(this);
-	}
+    @Override
+    public FilterControlledPermanent copy() {
+        return new FilterControlledPermanent(this);
+    }
 
 }

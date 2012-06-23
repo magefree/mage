@@ -55,7 +55,7 @@ import mage.game.permanent.Permanent;
  * @author jeffwadsworth
  */
 public class CrownOfConvergence extends CardImpl<CrownOfConvergence> {
-    
+
     private static final String rule1 = "As long as the top card of your library is a creature card, creatures you control that share a color with that card get +1/+1";
 
     public CrownOfConvergence(UUID ownerId) {
@@ -64,11 +64,11 @@ public class CrownOfConvergence extends CardImpl<CrownOfConvergence> {
 
         // Play with the top card of your library revealed.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithTheTopCardRevealedEffect()));
-        
+
         // As long as the top card of your library is a creature card, creatures you control that share a color with that card get +1/+1.
         ConditionalContinousEffect effect = new ConditionalContinousEffect(new CrownOfConvergenceColorBoostEffect(), new TopLibraryCardTypeCondition(CREATURE), rule1);
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect));
-        
+
         // {G}{W}: Put the top card of your library on the bottom of your library.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CrownOfConvergenceEffect(), new ManaCostsImpl("{G}{W}")));
     }
@@ -84,18 +84,18 @@ public class CrownOfConvergence extends CardImpl<CrownOfConvergence> {
 }
 
 class CrownOfConvergenceColorBoostEffect extends BoostAllEffect  {
-    
+
     private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures you control");
 
     private static final String effectText = "creatures you control that share a color with that card get +1/+1";
-        
+
     CrownOfConvergenceColorBoostEffect() {
-	super(1,1, Constants.Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false);
-	staticText = effectText;
+    super(1,1, Constants.Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false);
+    staticText = effectText;
     }
 
     CrownOfConvergenceColorBoostEffect(CrownOfConvergenceColorBoostEffect effect) {
-	super(effect);
+    super(effect);
     }
 
     @Override
@@ -123,10 +123,10 @@ class CrownOfConvergenceColorBoostEffect extends BoostAllEffect  {
 }
 
 class CrownOfConvergenceEffect extends OneShotEffect<CrownOfConvergenceEffect> {
-    
+
     public CrownOfConvergenceEffect() {
-	super(Constants.Outcome.Neutral);
-	staticText = "Put the top card of your library on the bottom of your library";
+    super(Constants.Outcome.Neutral);
+    staticText = "Put the top card of your library on the bottom of your library";
     }
 
     public CrownOfConvergenceEffect(final CrownOfConvergenceEffect effect) {
@@ -150,5 +150,5 @@ class CrownOfConvergenceEffect extends OneShotEffect<CrownOfConvergenceEffect> {
         }
         return false;
     }
-	
+
 }

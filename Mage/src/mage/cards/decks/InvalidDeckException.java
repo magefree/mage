@@ -38,17 +38,17 @@ import mage.game.GameException;
  */
 public class InvalidDeckException extends GameException {
 
-	Map<String, String> invalid;
+    Map<String, String> invalid;
 
-	public InvalidDeckException (String message, Map<String, String> invalid) {
-		super(message);
-		this.invalid = invalid;
-	}
+    public InvalidDeckException (String message, Map<String, String> invalid) {
+        super(message);
+        this.invalid = invalid;
+    }
 
-	public Map<String, String> getInvalid() {
-		return invalid;
-	}
-    
+    public Map<String, String> getInvalid() {
+        return invalid;
+    }
+
     @Override
     public String getMessage() {
         StringBuilder sb = new StringBuilder();

@@ -37,20 +37,20 @@ import mage.game.events.GameEvent.EventType;
  */
 public class PostCombatMainStep extends Step<PostCombatMainStep> {
 
-	public PostCombatMainStep() {
-		super(PhaseStep.POSTCOMBAT_MAIN, true);
-		this.stepEvent = EventType.POSTCOMBAT_MAIN_STEP;
-		this.preStepEvent = EventType.POSTCOMBAT_MAIN_STEP_PRE;
-		this.postStepEvent = EventType.POSTCOMBAT_MAIN_STEP_POST;
-	}
+    public PostCombatMainStep() {
+        super(PhaseStep.POSTCOMBAT_MAIN, true);
+        this.stepEvent = EventType.POSTCOMBAT_MAIN_STEP;
+        this.preStepEvent = EventType.POSTCOMBAT_MAIN_STEP_PRE;
+        this.postStepEvent = EventType.POSTCOMBAT_MAIN_STEP_POST;
+    }
 
-	public PostCombatMainStep(final PostCombatMainStep step) {
-		super(step);
-	}
+    public PostCombatMainStep(final PostCombatMainStep step) {
+        super(step);
+    }
 
-	@Override
-	public PostCombatMainStep copy() {
-		return new PostCombatMainStep(this);
-	}
+    @Override
+    public PostCombatMainStep copy() {
+        return new PostCombatMainStep(this);
+    }
 
 }

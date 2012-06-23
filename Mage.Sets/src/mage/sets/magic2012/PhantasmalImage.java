@@ -66,7 +66,7 @@ public class PhantasmalImage extends CardImpl<PhantasmalImage> {
         this.toughness = new MageInt(0);
 
         Ability ability = new EntersBattlefieldAbility(new EntersBattlefieldEffect(new PhantasmalImageCopyEffect(), abilityText));
-		this.addAbility(ability);
+        this.addAbility(ability);
     }
 
     public PhantasmalImage(final PhantasmalImage card) {
@@ -82,7 +82,7 @@ public class PhantasmalImage extends CardImpl<PhantasmalImage> {
 class PhantasmalImageCopyEffect extends OneShotEffect<PhantasmalImageCopyEffect> {
 
     public PhantasmalImageCopyEffect() {
-		super(Outcome.Copy);
+        super(Outcome.Copy);
     }
 
     public PhantasmalImageCopyEffect(final PhantasmalImageCopyEffect effect) {
@@ -91,10 +91,10 @@ class PhantasmalImageCopyEffect extends OneShotEffect<PhantasmalImageCopyEffect>
 
     @Override
     public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
+        Player player = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (player != null && sourcePermanent != null) {
-			Target target = new TargetPermanent(new FilterCreaturePermanent());
+            Target target = new TargetPermanent(new FilterCreaturePermanent());
             if (target.canChoose(source.getControllerId(), game)) {
                 target.setRequired(true);
                 target.setNotTarget(true);
@@ -111,11 +111,11 @@ class PhantasmalImageCopyEffect extends OneShotEffect<PhantasmalImageCopyEffect>
                         }
                     });
 
-					return true;
+                    return true;
                 }
             }
-		}
-		return false;
+        }
+        return false;
     }
 
     @Override

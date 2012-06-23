@@ -49,61 +49,61 @@ import mage.game.permanent.token.ZombieToken;
  */
 public class GraveTitan extends CardImpl<GraveTitan> {
 
-	public GraveTitan(UUID ownerId) {
-		super(ownerId, 97, "Grave Titan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Giant");
-		this.color.setBlack(true);
-		this.power = new MageInt(6);
-		this.toughness = new MageInt(6);
+    public GraveTitan(UUID ownerId) {
+        super(ownerId, 97, "Grave Titan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Giant");
+        this.color.setBlack(true);
+        this.power = new MageInt(6);
+        this.toughness = new MageInt(6);
 
-		this.addAbility(DeathtouchAbility.getInstance());
-		this.addAbility(new GraveTitanAbility());
-	}
+        this.addAbility(DeathtouchAbility.getInstance());
+        this.addAbility(new GraveTitanAbility());
+    }
 
-	public GraveTitan(final GraveTitan card) {
-		super(card);
-	}
+    public GraveTitan(final GraveTitan card) {
+        super(card);
+    }
 
-	@Override
-	public GraveTitan copy() {
-		return new GraveTitan(this);
-	}
+    @Override
+    public GraveTitan copy() {
+        return new GraveTitan(this);
+    }
 
 }
 
 class GraveTitanAbility extends TriggeredAbilityImpl<GraveTitanAbility> {
 
-	public GraveTitanAbility() {
-		super(Zone.BATTLEFIELD, new CreateTokenEffect(new ZombieToken(), 2), false);
-	}
+    public GraveTitanAbility() {
+        super(Zone.BATTLEFIELD, new CreateTokenEffect(new ZombieToken(), 2), false);
+    }
 
-	public GraveTitanAbility(final GraveTitanAbility ability) {
-		super(ability);
-	}
+    public GraveTitanAbility(final GraveTitanAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public GraveTitanAbility copy() {
-		return new GraveTitanAbility(this);
-	}
+    @Override
+    public GraveTitanAbility copy() {
+        return new GraveTitanAbility(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
-			return true;
-		}
-		if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId()) ) {
-			ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-			if (zEvent.getToZone() == Zone.BATTLEFIELD) {
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
+            return true;
+        }
+        if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId()) ) {
+            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+            if (zEvent.getToZone() == Zone.BATTLEFIELD) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "Whenever {this} enters the battlefield or attacks, put two 2/2 black Zombie creature tokens onto the battlefield";
-	}
+    @Override
+    public String getRule() {
+        return "Whenever {this} enters the battlefield or attacks, put two 2/2 black Zombie creature tokens onto the battlefield";
+    }
 
 }

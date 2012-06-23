@@ -45,7 +45,7 @@ public class SorinsVengeance extends CardImpl<SorinsVengeance> {
     public SorinsVengeance (UUID ownerId) {
         super(ownerId, 111, "Sorin's Vengeance", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{B}{B}{B}");
         this.expansionSetCode = "M12";
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.getSpellAbility().addEffect(new DamageTargetEffect(10));
         this.getSpellAbility().addEffect(new GainLifeEffect(10));
         this.getSpellAbility().addTarget(new TargetPlayer());

@@ -61,7 +61,7 @@ public class CurseOfDeathsHold extends CardImpl<CurseOfDeathsHold> {
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.UnboostCreature));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
-        
+
         // Creatures enchanted player controls get -1/-1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CurseOfDeathsHoldEffect()));
     }
@@ -86,13 +86,13 @@ class CurseOfDeathsHoldEffect extends ContinuousEffectImpl<CurseOfDeathsHoldEffe
     public CurseOfDeathsHoldEffect(final CurseOfDeathsHoldEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
-		Permanent enchantment = game.getPermanent(source.getSourceId());
-		if (enchantment != null && enchantment.getAttachedTo() != null) {
-			Player player = game.getPlayer(enchantment.getAttachedTo());
-			if (player != null) {
+        Permanent enchantment = game.getPermanent(source.getSourceId());
+        if (enchantment != null && enchantment.getAttachedTo() != null) {
+            Player player = game.getPlayer(enchantment.getAttachedTo());
+            if (player != null) {
                 for (Permanent perm: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game)) {
                     perm.addPower(-1);
                     perm.addToughness(-1);
@@ -100,7 +100,7 @@ class CurseOfDeathsHoldEffect extends ContinuousEffectImpl<CurseOfDeathsHoldEffe
                 return true;
             }
         }
-		return false;
+        return false;
     }
 
     @Override

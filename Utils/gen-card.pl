@@ -105,7 +105,7 @@ if (!exists $cards{$cardName}) {
 
 # Check if card is already implemented
 foreach my $setName (keys %{$cards{$cardName}}) {
-	if (exists $knownSets{$setName}) {
+    if (exists $knownSets{$setName}) {
         my $fileName = "../Mage.Sets/src/mage/sets/" . $knownSets{$setName} . "/" . toCamelCase($cardName) . ".java";
         if(-e $fileName) {
             die "$cardName is already implemented (set found in: $setName).\n";
@@ -128,7 +128,7 @@ if ($simpleOnly ne 'true') {
 }
 my $baseRarity = '';
 foreach my $setName (keys %{$cards{$cardName}}) {
-	if (exists $knownSets{$setName}) {
+    if (exists $knownSets{$setName}) {
         my $fileName = "../Mage.Sets/src/mage/sets/" . $knownSets{$setName} . "/" . toCamelCase($cardName) . ".java";
         my $result;
 
@@ -144,26 +144,26 @@ foreach my $setName (keys %{$cards{$cardName}}) {
             $vars{'power'} = $cards{$cardName}{$setName}[6];
             $vars{'toughness'} = $cards{$cardName}{$setName}[7];
 
-			my @types;
+            my @types;
             $vars{'subType'} = '';
-			my $type = $cards{$cardName}{$setName}[5];
-			while ($type =~ m/([a-zA-Z]+)( )*/g) {
+            my $type = $cards{$cardName}{$setName}[5];
+            while ($type =~ m/([a-zA-Z]+)( )*/g) {
                 if (exists($cardTypes{$1})) {
                     push(@types, $cardTypes{$1});
-				} else {
+                } else {
                     if (@types) {
                         $vars{'subType'} .= "\n        this.subtype.add(\"$1\");";
                     } else {
                         $vars{'subType'} .= "\n        this.supertype.add(\"$1\");";
                     }
-				}
-			}
+                }
+            }
             $vars{'type'} = join(', ', @types);
 
             my %colors;
             while ($vars{'manaCost'} =~ m/([BUGRW])/g) {
                 $colors{$manaToColor{$1}} = 1;
-			}
+            }
 
             $vars{'colors'} = '';
             foreach my $color (keys %colors) {
@@ -246,5 +246,5 @@ foreach my $setName (keys %{$cards{$cardName}}) {
         close CARD;
 
         print "$vars{'set'}.$vars{'className'}\n";
-	}
+    }
 }

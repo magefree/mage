@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class Fireball extends mage.sets.magic2010.Fireball {
 
-	public Fireball(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 138;
-		this.expansionSetCode = "M11";
-	}
+    public Fireball(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 138;
+        this.expansionSetCode = "M11";
+    }
 
-	public Fireball(final Fireball card) {
-		super(card);
-	}
+    public Fireball(final Fireball card) {
+        super(card);
+    }
 
-	@Override
-	public Fireball copy() {
-		return new Fireball(this);
-	}
+    @Override
+    public Fireball copy() {
+        return new Fireball(this);
+    }
 
 }

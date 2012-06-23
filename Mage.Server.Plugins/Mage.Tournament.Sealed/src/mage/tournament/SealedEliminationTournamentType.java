@@ -36,13 +36,13 @@ import mage.game.tournament.TournamentType;
  */
 public class SealedEliminationTournamentType extends TournamentType<SealedEliminationTournamentType> {
 
-	public SealedEliminationTournamentType() {
-		this.name = "Sealed Elimination";
-		this.maxPlayers = 16;
-		this.minPlayers = 4;
-		this.numBoosters = 6;
-		this.draft = false;
-		this.limited = true;
-	}
+    public SealedEliminationTournamentType() {
+        this.name = "Sealed Elimination";
+        this.maxPlayers = 16;
+        this.minPlayers = 4;
+        this.numBoosters = 6;
+        this.draft = false;
+        this.limited = true;
+    }
 
 }

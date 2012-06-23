@@ -41,24 +41,24 @@ import mage.cards.CardImpl;
  */
 public class ChildOfNight extends CardImpl<ChildOfNight> {
 
-	public ChildOfNight(UUID ownerId) {
-		super(ownerId, 88, "Child of Night", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-		this.expansionSetCode = "M10";
-		this.color.setBlack(true);
-		this.subtype.add("Vampire");
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(1);
+    public ChildOfNight(UUID ownerId) {
+        super(ownerId, 88, "Child of Night", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
+        this.expansionSetCode = "M10";
+        this.color.setBlack(true);
+        this.subtype.add("Vampire");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-		this.addAbility(LifelinkAbility.getInstance());
-	}
+        this.addAbility(LifelinkAbility.getInstance());
+    }
 
-	public ChildOfNight(final ChildOfNight card) {
-		super(card);
-	}
+    public ChildOfNight(final ChildOfNight card) {
+        super(card);
+    }
 
-	@Override
-	public ChildOfNight copy() {
-		return new ChildOfNight(this);
-	}
+    @Override
+    public ChildOfNight copy() {
+        return new ChildOfNight(this);
+    }
 
 }

@@ -19,9 +19,9 @@ public class IntimidateAbility extends EvasionAbility<IntimidateAbility> {
     }
 
     @Override
-	public String getRule() {
-		return "Intimidate";
-	}
+    public String getRule() {
+        return "Intimidate";
+    }
 
     @Override
     public IntimidateAbility copy() {
@@ -41,20 +41,20 @@ class IntimidateEffect extends RestrictionEffect<IntimidateEffect> {
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (permanent.getAbilities().containsKey(IntimidateAbility.getInstance().getId())) {
-			return true;
-		}
-		return false;
+            return true;
+        }
+        return false;
     }
 
     @Override
-	public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
+    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
         boolean result = false;
-		if (blocker.getCardType().contains(Constants.CardType.ARTIFACT) && (blocker.getCardType().contains(Constants.CardType.CREATURE)))
-			result = true;
+        if (blocker.getCardType().contains(Constants.CardType.ARTIFACT) && (blocker.getCardType().contains(Constants.CardType.CREATURE)))
+            result = true;
         if (attacker.getColor().shares(blocker.getColor()))
             result = true;
-		return result;
-	}
+        return result;
+    }
 
     @Override
     public IntimidateEffect copy() {

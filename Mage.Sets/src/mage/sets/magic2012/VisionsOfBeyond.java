@@ -51,7 +51,7 @@ public class VisionsOfBeyond extends CardImpl<VisionsOfBeyond> {
         this.color.setBlue(true);
 
         // Draw a card. If a graveyard has twenty or more cards in it, draw three cards instead.
-		this.getSpellAbility().addEffect(new VisionsOfBeyondEffect());
+        this.getSpellAbility().addEffect(new VisionsOfBeyondEffect());
     }
 
     public VisionsOfBeyond(final VisionsOfBeyond card) {
@@ -66,34 +66,34 @@ public class VisionsOfBeyond extends CardImpl<VisionsOfBeyond> {
 
 class VisionsOfBeyondEffect extends OneShotEffect<VisionsOfBeyondEffect> {
 
-	public VisionsOfBeyondEffect() {
-		super(Constants.Outcome.DrawCard);
-		staticText = "Draw a card. If a graveyard has twenty or more cards in it, draw three cards instead";
-	}
+    public VisionsOfBeyondEffect() {
+        super(Constants.Outcome.DrawCard);
+        staticText = "Draw a card. If a graveyard has twenty or more cards in it, draw three cards instead";
+    }
 
-	public VisionsOfBeyondEffect(VisionsOfBeyondEffect effect) {
-		super(effect);
-	}
+    public VisionsOfBeyondEffect(VisionsOfBeyondEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player sourcePlayer = game.getPlayer(source.getControllerId());
-		int count = 1;
-		for (UUID playerId: sourcePlayer.getInRange()) {
-			Player player = game.getPlayer(playerId);
-			if (player != null) {
-				if (player.getGraveyard().size() >= 20) {
-					count = 3;
-					break;
-				}
-			}
-		}
-		sourcePlayer.drawCards(count, game);
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player sourcePlayer = game.getPlayer(source.getControllerId());
+        int count = 1;
+        for (UUID playerId: sourcePlayer.getInRange()) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                if (player.getGraveyard().size() >= 20) {
+                    count = 3;
+                    break;
+                }
+            }
+        }
+        sourcePlayer.drawCards(count, game);
+        return true;
+    }
 
-	@Override
-	public VisionsOfBeyondEffect copy() {
-		return new VisionsOfBeyondEffect(this);
-	}
+    @Override
+    public VisionsOfBeyondEffect copy() {
+        return new VisionsOfBeyondEffect(this);
+    }
 }

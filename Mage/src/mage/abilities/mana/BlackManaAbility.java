@@ -37,18 +37,18 @@ import mage.abilities.effects.common.BasicManaEffect;
  */
 public class BlackManaAbility extends BasicManaAbility<BlackManaAbility> {
 
-	public BlackManaAbility() {
-		super(new BasicManaEffect(Mana.BlackMana));
-		this.netMana.setBlack(1);
-	}
+    public BlackManaAbility() {
+        super(new BasicManaEffect(Mana.BlackMana));
+        this.netMana.setBlack(1);
+    }
 
-	public BlackManaAbility(BlackManaAbility ability) {
-		super(ability);
-	}
+    public BlackManaAbility(BlackManaAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public BlackManaAbility copy() {
-		return new BlackManaAbility(this);
-	}
+    @Override
+    public BlackManaAbility copy() {
+        return new BlackManaAbility(this);
+    }
 
 }

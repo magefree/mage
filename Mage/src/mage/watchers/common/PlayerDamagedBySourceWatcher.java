@@ -44,34 +44,34 @@ import mage.watchers.WatcherImpl;
 public class PlayerDamagedBySourceWatcher extends WatcherImpl<PlayerDamagedBySourceWatcher> {
 
     public List<UUID> damageSources = new ArrayList<UUID>();
-    
+
     public PlayerDamagedBySourceWatcher(UUID playerId) {
-		super("PlayerDamagedBySource", WatcherScope.PLAYER);
+        super("PlayerDamagedBySource", WatcherScope.PLAYER);
                 setControllerId(playerId);
-	}
+    }
 
-	public PlayerDamagedBySourceWatcher(final PlayerDamagedBySourceWatcher watcher) {
-		super(watcher);
+    public PlayerDamagedBySourceWatcher(final PlayerDamagedBySourceWatcher watcher) {
+        super(watcher);
         this.damageSources = watcher.damageSources;
-	}
+    }
 
-	@Override
-	public PlayerDamagedBySourceWatcher copy() {
-		return new PlayerDamagedBySourceWatcher(this);
-	}
+    @Override
+    public PlayerDamagedBySourceWatcher copy() {
+        return new PlayerDamagedBySourceWatcher(this);
+    }
 
-	@Override
-	public void watch(GameEvent event, Game game) {
-		if (event.getType() == EventType.DAMAGED_PLAYER) {
+    @Override
+    public void watch(GameEvent event, Game game) {
+        if (event.getType() == EventType.DAMAGED_PLAYER) {
                         if (event.getTargetId().equals(controllerId) && !damageSources.contains(event.getSourceId())) {
                                 damageSources.add(event.getSourceId());
                         }
                 }
-	}
-    
-	@Override
-	public void reset() {
-		super.reset();
-		damageSources.clear();
-	}
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        damageSources.clear();
+    }
 }

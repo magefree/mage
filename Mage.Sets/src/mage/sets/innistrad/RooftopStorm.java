@@ -56,8 +56,8 @@ public class RooftopStorm extends CardImpl<RooftopStorm> {
         this.color.setBlue(true);
 
         // You may pay {0} rather than pay the mana cost for Zombie creature spells you cast.
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new RooftopStormCostReductionEffect()));
-        
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new RooftopStormCostReductionEffect()));
+
     }
 
     public RooftopStorm(final RooftopStorm card) {
@@ -100,29 +100,29 @@ public class RooftopStorm extends CardImpl<RooftopStorm> {
 
 class RooftopStormCostReductionEffect extends CostModificationEffectImpl<RooftopStormCostReductionEffect> {
 
-	private static final String effectText = "You may pay {0} rather than pay the mana cost for Zombie creature spells you cast";
+    private static final String effectText = "You may pay {0} rather than pay the mana cost for Zombie creature spells you cast";
 
-	RooftopStormCostReductionEffect() {
-		super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
-		staticText = effectText;
-	}
+    RooftopStormCostReductionEffect() {
+        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        staticText = effectText;
+    }
 
-	RooftopStormCostReductionEffect(RooftopStormCostReductionEffect effect) {
-		super(effect);
-	}
+    RooftopStormCostReductionEffect(RooftopStormCostReductionEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source, Ability abilityToModify) {
-		SpellAbility spellAbility = (SpellAbility) abilityToModify;
-		CardUtil.adjustCost(spellAbility, 2);
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source, Ability abilityToModify) {
+        SpellAbility spellAbility = (SpellAbility) abilityToModify;
+        CardUtil.adjustCost(spellAbility, 2);
+        return true;
+    }
 
-	@Override
-	public boolean applies(Ability abilityToModify, Ability source, Game game) {
-		if (abilityToModify instanceof SpellAbility) {
+    @Override
+    public boolean applies(Ability abilityToModify, Ability source, Game game) {
+        if (abilityToModify instanceof SpellAbility) {
             SpellAbility spell = (SpellAbility) abilityToModify;
-			if (spell.getControllerId().equals(source.getControllerId())) {
+            if (spell.getControllerId().equals(source.getControllerId())) {
                 Card sourceCard = game.getCard(spell.getSourceId());
                 if (sourceCard != null && sourceCard.getSubtype().contains("Zombie")) {
                     Player player = game.getPlayer(spell.getControllerId());
@@ -133,13 +133,13 @@ class RooftopStormCostReductionEffect extends CostModificationEffectImpl<Rooftop
                     }
                 }
             }
-		}
-		return false;
-	}
+        }
+        return false;
+    }
 
-	@Override
-	public RooftopStormCostReductionEffect copy() {
-		return new RooftopStormCostReductionEffect(this);
-	}
+    @Override
+    public RooftopStormCostReductionEffect copy() {
+        return new RooftopStormCostReductionEffect(this);
+    }
 
 }

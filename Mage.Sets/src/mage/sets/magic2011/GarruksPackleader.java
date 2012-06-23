@@ -48,60 +48,60 @@ import mage.game.permanent.Permanent;
  */
 public class GarruksPackleader extends CardImpl<GarruksPackleader> {
 
-	public GarruksPackleader(UUID ownerId) {
-		super(ownerId, 177, "Garruk's Packleader", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Beast");
-		this.color.setGreen(true);
-		this.power = new MageInt(4);
-		this.toughness = new MageInt(4);
+    public GarruksPackleader(UUID ownerId) {
+        super(ownerId, 177, "Garruk's Packleader", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Beast");
+        this.color.setGreen(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
-		this.addAbility(new GarruksPackleaderAbility());
-	}
+        this.addAbility(new GarruksPackleaderAbility());
+    }
 
-	public GarruksPackleader(final GarruksPackleader card) {
-		super(card);
-	}
+    public GarruksPackleader(final GarruksPackleader card) {
+        super(card);
+    }
 
-	@Override
-	public GarruksPackleader copy() {
-		return new GarruksPackleader(this);
-	}
+    @Override
+    public GarruksPackleader copy() {
+        return new GarruksPackleader(this);
+    }
 
 }
 
 class GarruksPackleaderAbility extends TriggeredAbilityImpl<GarruksPackleaderAbility> {
 
-	public GarruksPackleaderAbility() {
-		super(Zone.BATTLEFIELD, new DrawCardControllerEffect(1), true);
-	}
+    public GarruksPackleaderAbility() {
+        super(Zone.BATTLEFIELD, new DrawCardControllerEffect(1), true);
+    }
 
-	public GarruksPackleaderAbility(final GarruksPackleaderAbility ability) {
-		super(ability);
-	}
+    public GarruksPackleaderAbility(final GarruksPackleaderAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public GarruksPackleaderAbility copy() {
-		return new GarruksPackleaderAbility(this);
-	}
+    @Override
+    public GarruksPackleaderAbility copy() {
+        return new GarruksPackleaderAbility(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.ZONE_CHANGE && !event.getTargetId().equals(this.getSourceId())) {
-			ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-			if (zEvent.getToZone() == Zone.BATTLEFIELD) {
-				Permanent permanent = game.getPermanent(event.getTargetId());
-				if (permanent != null && permanent.getCardType().contains(CardType.CREATURE) && permanent.getControllerId().equals(this.getControllerId()) && permanent.getPower().getValue() > 2) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.ZONE_CHANGE && !event.getTargetId().equals(this.getSourceId())) {
+            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+            if (zEvent.getToZone() == Zone.BATTLEFIELD) {
+                Permanent permanent = game.getPermanent(event.getTargetId());
+                if (permanent != null && permanent.getCardType().contains(CardType.CREATURE) && permanent.getControllerId().equals(this.getControllerId()) && permanent.getPower().getValue() > 2) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "Whenever another creature with power 3 or greater enters the battlefield under your control, you may draw a card";
-	}
+    @Override
+    public String getRule() {
+        return "Whenever another creature with power 3 or greater enters the battlefield under your control, you may draw a card";
+    }
 
 }

@@ -49,9 +49,9 @@ public class VugLizard extends CardImpl<VugLizard>{
         this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
-        
-	this.addAbility(new MountainwalkAbility());
-	this.addAbility(new EchoAbility("{1}{R}{R}"));
+
+    this.addAbility(new MountainwalkAbility());
+    this.addAbility(new EchoAbility("{1}{R}{R}"));
     }
 
     public VugLizard(final VugLizard card) {

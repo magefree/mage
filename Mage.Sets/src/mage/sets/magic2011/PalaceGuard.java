@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class PalaceGuard extends mage.sets.magic2010.PalaceGuard {
 
-	public PalaceGuard(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 24;
-		this.expansionSetCode = "M11";
-	}
+    public PalaceGuard(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 24;
+        this.expansionSetCode = "M11";
+    }
 
-	public PalaceGuard(final PalaceGuard card) {
-		super(card);
-	}
+    public PalaceGuard(final PalaceGuard card) {
+        super(card);
+    }
 
-	@Override
-	public PalaceGuard copy() {
-		return new PalaceGuard(this);
-	}
+    @Override
+    public PalaceGuard copy() {
+        return new PalaceGuard(this);
+    }
 
 }

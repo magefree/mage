@@ -14,57 +14,57 @@ import java.awt.*;
  */
 public class ColorPane extends JTextPane {
 
-	/**
-	 * This method solves the known issue with Nimbus LAF background transparency and background color.
-	 * @param color
-	 */
-	public void setExtBackgroundColor(Color color) {
-		setBackground(new Color(0,0,0,0));
-		JPanel jPanel = new JPanel();
-		jPanel.setBackground(color);
-		setLayout(new BorderLayout());
-		add(jPanel);
-	}
+    /**
+     * This method solves the known issue with Nimbus LAF background transparency and background color.
+     * @param color
+     */
+    public void setExtBackgroundColor(Color color) {
+        setBackground(new Color(0,0,0,0));
+        JPanel jPanel = new JPanel();
+        jPanel.setBackground(color);
+        setLayout(new BorderLayout());
+        add(jPanel);
+    }
 
     public void append(Color color, String s) {
-		if (color == null) {
-			return;
-		}
+        if (color == null) {
+            return;
+        }
 
         try {
-	    	setEditable(true);
-	        
-	        StyleContext sc = StyleContext.getDefaultStyleContext();
-	        AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, color);
+            setEditable(true);
 
-	        int len = getDocument().getLength();
+            StyleContext sc = StyleContext.getDefaultStyleContext();
+            AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, color);
 
-	        setCaretPosition(len);
-	        setCharacterAttributes(aset, false);
-	        replaceSelection(s);
+            int len = getDocument().getLength();
 
-			setEditable(false);
+            setCaretPosition(len);
+            setCharacterAttributes(aset, false);
+            replaceSelection(s);
+
+            setEditable(false);
         } catch (Exception e) {
-        	e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
-	/**
-	 * A little trick to paint black background under the text.
-	 *
-	 * @param g
-	 */
-	public void paintChildren(Graphics g) {
-		super.paintComponent(g);
-	}
+    /**
+     * A little trick to paint black background under the text.
+     *
+     * @param g
+     */
+    public void paintChildren(Graphics g) {
+        super.paintComponent(g);
+    }
 
-	/**
-	 * A little trick to paint black background under the text.
-	 *
-	 * @param g
-	 */
-	public void paintComponent(Graphics g) {
-		super.paintChildren(g);
-	}
+    /**
+     * A little trick to paint black background under the text.
+     *
+     * @param g
+     */
+    public void paintComponent(Graphics g) {
+        super.paintChildren(g);
+    }
 
 }

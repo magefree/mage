@@ -57,7 +57,7 @@ public class HeartbeatOfSpring extends CardImpl<HeartbeatOfSpring> {
     public HeartbeatOfSpring (UUID ownerId) {
         super(ownerId, 212, "Heartbeat of Spring", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         this.expansionSetCode = "CHK";
-	this.color.setGreen(true);
+    this.color.setGreen(true);
         // Whenever a player taps a land for mana, that player adds one mana to his or her mana pool of any type that land produced.
         this.addAbility(new HeartbeatOfSpringAbility());
     }
@@ -75,40 +75,40 @@ public class HeartbeatOfSpring extends CardImpl<HeartbeatOfSpring> {
 
 class HeartbeatOfSpringAbility extends TriggeredManaAbility<HeartbeatOfSpringAbility> {
 
-	private static final String staticText = "Whenever a player taps a land for mana, that player adds one mana to his or her mana pool of any type that land produced.";
+    private static final String staticText = "Whenever a player taps a land for mana, that player adds one mana to his or her mana pool of any type that land produced.";
 
-	public HeartbeatOfSpringAbility() {
-		super(Zone.BATTLEFIELD, new HeartbeatOfSpringEffect());
-	}
+    public HeartbeatOfSpringAbility() {
+        super(Zone.BATTLEFIELD, new HeartbeatOfSpringEffect());
+    }
 
-	public HeartbeatOfSpringAbility(HeartbeatOfSpringAbility ability) {
-		super(ability);
-	}
+    public HeartbeatOfSpringAbility(HeartbeatOfSpringAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == GameEvent.EventType.TAPPED_FOR_MANA ) {
-			Permanent permanent = game.getPermanent(event.getSourceId());
-			if (permanent == null) {
-				permanent = (Permanent) game.getLastKnownInformation(event.getSourceId(), Zone.BATTLEFIELD);
-			}
-			if (permanent != null && permanent.getCardType().contains(CardType.LAND)) {
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.TAPPED_FOR_MANA ) {
+            Permanent permanent = game.getPermanent(event.getSourceId());
+            if (permanent == null) {
+                permanent = (Permanent) game.getLastKnownInformation(event.getSourceId(), Zone.BATTLEFIELD);
+            }
+            if (permanent != null && permanent.getCardType().contains(CardType.LAND)) {
                                 getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
                                 return true;
-			}
-		}
-		return false;
-	}
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public HeartbeatOfSpringAbility copy() {
-		return new HeartbeatOfSpringAbility(this);
-	}
+    @Override
+    public HeartbeatOfSpringAbility copy() {
+        return new HeartbeatOfSpringAbility(this);
+    }
 
-	@Override
-	public String getRule() {
-		return staticText;
-	}
+    @Override
+    public String getRule() {
+        return staticText;
+    }
 }
 
 class HeartbeatOfSpringEffect extends ManaEffect<HeartbeatOfSpringEffect> {
@@ -117,11 +117,11 @@ class HeartbeatOfSpringEffect extends ManaEffect<HeartbeatOfSpringEffect> {
         super();
         staticText = "that player adds one mana to his or her mana pool of any type that land produced";
     }
-    
+
     public HeartbeatOfSpringEffect(final HeartbeatOfSpringEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent land = game.getPermanent(this.targetPointer.getFirst(game, source));
@@ -182,5 +182,5 @@ class HeartbeatOfSpringEffect extends ManaEffect<HeartbeatOfSpringEffect> {
     public HeartbeatOfSpringEffect copy() {
         return new HeartbeatOfSpringEffect(this);
     }
-    
+
 }

@@ -42,21 +42,21 @@ import org.apache.log4j.Logger;
  */
 public class PlayerFactory {
 
-	private final static PlayerFactory INSTANCE = new PlayerFactory();
-	private final static Logger logger = Logger.getLogger(PlayerFactory.class);
+    private final static PlayerFactory INSTANCE = new PlayerFactory();
+    private final static Logger logger = Logger.getLogger(PlayerFactory.class);
 
-	private Map<String, Class> playerTypes = new LinkedHashMap<String, Class>();
+    private Map<String, Class> playerTypes = new LinkedHashMap<String, Class>();
 
-	public static PlayerFactory getInstance() {
-		return INSTANCE;
-	}
+    public static PlayerFactory getInstance() {
+        return INSTANCE;
+    }
 
-	private PlayerFactory() {}
+    private PlayerFactory() {}
 
-	public Player createPlayer(String playerType, String name, RangeOfInfluence range, int skill) {
-		Player player;
-		Constructor<?> con;
-		try {
+    public Player createPlayer(String playerType, String name, RangeOfInfluence range, int skill) {
+        Player player;
+        Constructor<?> con;
+        try {
             Class playerTypeClass = playerTypes.get(playerType);
             if (playerTypeClass != null) {
                 con = playerTypeClass.getConstructor(new Class[]{String.class, RangeOfInfluence.class, int.class});
@@ -67,19 +67,19 @@ public class PlayerFactory {
             else {
                 logger.fatal("Unknown player type: " + playerType);
             }
-		} catch (Exception ex) {
-			logger.fatal("PlayerFactory error ", ex);
-		}
-		return null;
-	}
+        } catch (Exception ex) {
+            logger.fatal("PlayerFactory error ", ex);
+        }
+        return null;
+    }
 
-	public Set<String> getPlayerTypes() {
-		return playerTypes.keySet();
-	}
+    public Set<String> getPlayerTypes() {
+        return playerTypes.keySet();
+    }
 
-	public void addPlayerType(String name, Class playerType) {
-		if (playerType != null)
-			this.playerTypes.put(name, playerType);
-	}
+    public void addPlayerType(String name, Class playerType) {
+        if (playerType != null)
+            this.playerTypes.put(name, playerType);
+    }
 
 }

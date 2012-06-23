@@ -38,31 +38,31 @@ import mage.game.Game;
  */
 public class SimulatedAction {
 
-	private Game game;
-	private List<Ability> abilities;
+    private Game game;
+    private List<Ability> abilities;
 
-	public SimulatedAction(Game game, List<Ability> abilities) {
-		this.game = game;
-		this.abilities = abilities;
-	}
+    public SimulatedAction(Game game, List<Ability> abilities) {
+        this.game = game;
+        this.abilities = abilities;
+    }
 
-	public Game getGame() {
-		return this.game;
-	}
+    public Game getGame() {
+        return this.game;
+    }
 
-	public List<Ability> getAbilities() {
-		return this.abilities;
-	}
+    public List<Ability> getAbilities() {
+        return this.abilities;
+    }
 
-	@Override
-	public String toString() {
-		return this.abilities.toString();
-	}
+    @Override
+    public String toString() {
+        return this.abilities.toString();
+    }
 
-	public boolean usesStack() {
-		if (abilities != null && abilities.size() > 0) {
-			return abilities.get(abilities.size() -1).isUsesStack();
-		}
-		return true;
-	}
+    public boolean usesStack() {
+        if (abilities != null && abilities.size() > 0) {
+            return abilities.get(abilities.size() -1).isUsesStack();
+        }
+        return true;
+    }
 }

@@ -39,7 +39,7 @@ import mage.game.Game;
  */
 public interface AsThoughEffect<T extends AsThoughEffect<T>> extends ContinuousEffect<T> {
 
-	public boolean applies(UUID sourceId, Ability source, Game game);
-	public AsThoughEffectType getAsThoughEffectType();
+    public boolean applies(UUID sourceId, Ability source, Game game);
+    public AsThoughEffectType getAsThoughEffectType();
 
 }

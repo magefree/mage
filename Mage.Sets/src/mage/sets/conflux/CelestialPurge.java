@@ -44,30 +44,30 @@ import mage.target.TargetPermanent;
  */
 public class CelestialPurge extends CardImpl<CelestialPurge> {
 
-	private static final FilterPermanent filter = new FilterPermanent("black or red permanent");
+    private static final FilterPermanent filter = new FilterPermanent("black or red permanent");
 
-	static {
-		filter.setUseColor(true);
-		filter.setScopeColor(ComparisonScope.Any);
-		filter.getColor().setBlack(true);
-		filter.getColor().setRed(true);
-	}
+    static {
+        filter.setUseColor(true);
+        filter.setScopeColor(ComparisonScope.Any);
+        filter.getColor().setBlack(true);
+        filter.getColor().setRed(true);
+    }
 
-	public CelestialPurge(UUID ownerId) {
-		super(ownerId, 5, "Celestial Purge", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-		this.expansionSetCode = "CON";
-		this.color.setWhite(true);
-		this.getSpellAbility().addTarget(new TargetPermanent(filter));
-		this.getSpellAbility().addEffect(new ExileTargetEffect());
-	}
+    public CelestialPurge(UUID ownerId) {
+        super(ownerId, 5, "Celestial Purge", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
+        this.expansionSetCode = "CON";
+        this.color.setWhite(true);
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addEffect(new ExileTargetEffect());
+    }
 
-	public CelestialPurge(final CelestialPurge card) {
-		super(card);
-	}
+    public CelestialPurge(final CelestialPurge card) {
+        super(card);
+    }
 
-	@Override
-	public CelestialPurge copy() {
-		return new CelestialPurge(this);
-	}
+    @Override
+    public CelestialPurge copy() {
+        return new CelestialPurge(this);
+    }
 
 }

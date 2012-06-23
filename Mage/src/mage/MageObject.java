@@ -12,24 +12,24 @@ import java.util.List;
 
 public interface MageObject extends MageItem, Serializable {
 
-	public String getName();
-	public void setName(String name);
+    public String getName();
+    public void setName(String name);
 
-	public List<CardType> getCardType();
-	public List<String> getSubtype();
-	public boolean hasSubtype(String subtype);
-	public List<String> getSupertype();
+    public List<CardType> getCardType();
+    public List<String> getSubtype();
+    public boolean hasSubtype(String subtype);
+    public List<String> getSupertype();
 
-	public Abilities<Ability> getAbilities();
-	public ObjectColor getColor();
-	public ManaCosts<ManaCost> getManaCost();
-	
-	public MageInt getPower();
-	public MageInt getToughness();
+    public Abilities<Ability> getAbilities();
+    public ObjectColor getColor();
+    public ManaCosts<ManaCost> getManaCost();
 
-	public void adjustCosts(Ability ability, Game game);
+    public MageInt getPower();
+    public MageInt getToughness();
 
-	public MageObject copy();
+    public void adjustCosts(Ability ability, Game game);
+
+    public MageObject copy();
 
     /**
      * Defines that MageObject is a copy of another object

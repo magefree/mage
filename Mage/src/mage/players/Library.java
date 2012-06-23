@@ -42,183 +42,183 @@ import java.util.*;
  */
 public class Library implements Serializable {
 
-	private static Random rnd = new Random();
+    private static Random rnd = new Random();
 
-	private boolean emptyDraw;
-	private Deque<UUID> library = new ArrayDeque<UUID>();
-	private UUID playerId;
+    private boolean emptyDraw;
+    private Deque<UUID> library = new ArrayDeque<UUID>();
+    private UUID playerId;
 
-	public Library(UUID playerId) {
-		this.playerId = playerId;
-	}
+    public Library(UUID playerId) {
+        this.playerId = playerId;
+    }
 
-	public Library(final Library lib) {
-		this.emptyDraw = lib.emptyDraw;
-		this.playerId = lib.playerId;
-		for (UUID id: lib.library) {
-			this.library.addLast(id);
-		}
-	}
+    public Library(final Library lib) {
+        this.emptyDraw = lib.emptyDraw;
+        this.playerId = lib.playerId;
+        for (UUID id: lib.library) {
+            this.library.addLast(id);
+        }
+    }
 
-	public void shuffle() {
-		UUID[] shuffled = library.toArray(new UUID[0]);
-		for (int n = shuffled.length - 1; n > 0; n--) {
-			int r = rnd.nextInt(n);
-			UUID temp = shuffled[n];
-			shuffled[n] = shuffled[r];
-			shuffled[r] = temp;
-		}
-		library.clear();
+    public void shuffle() {
+        UUID[] shuffled = library.toArray(new UUID[0]);
+        for (int n = shuffled.length - 1; n > 0; n--) {
+            int r = rnd.nextInt(n);
+            UUID temp = shuffled[n];
+            shuffled[n] = shuffled[r];
+            shuffled[r] = temp;
+        }
+        library.clear();
         library.addAll(Arrays.asList(shuffled));
-	}
+    }
 
-	/**
-	 * Removes the top card of the Library and returns it
-	 * 
-	 * @param game
-	 * @return Card
-	 * @see Card
-	 */
-	public Card removeFromTop(Game game) {
-		UUID cardId = library.pollFirst();
-		Card card = game.getCard(cardId);
-		if (card == null) {
-			emptyDraw = true;
-		}
-		return card;
-	}
+    /**
+     * Removes the top card of the Library and returns it
+     * 
+     * @param game
+     * @return Card
+     * @see Card
+     */
+    public Card removeFromTop(Game game) {
+        UUID cardId = library.pollFirst();
+        Card card = game.getCard(cardId);
+        if (card == null) {
+            emptyDraw = true;
+        }
+        return card;
+    }
 
-	/**
-	 * Removes the bottom card of the Library and returns it
-	 *
-	 * @param game
-	 * @return Card
-	 * @see Card
-	 */
-	public Card removeFromBottom(Game game) {
-		UUID cardId = library.pollLast();
-		Card card = game.getCard(cardId);
-		if (card == null) {
-			emptyDraw = true;
-		}
-		return card;
-	}
+    /**
+     * Removes the bottom card of the Library and returns it
+     *
+     * @param game
+     * @return Card
+     * @see Card
+     */
+    public Card removeFromBottom(Game game) {
+        UUID cardId = library.pollLast();
+        Card card = game.getCard(cardId);
+        if (card == null) {
+            emptyDraw = true;
+        }
+        return card;
+    }
 
-	/**
-	 * Returns the top card of the Library without removing it
-	 *
-	 * @param game
-	 * @return Card
-	 * @see Card
-	 */
-	public Card getFromTop(Game game) {
-		return game.getCard(library.peekFirst());
-	}
+    /**
+     * Returns the top card of the Library without removing it
+     *
+     * @param game
+     * @return Card
+     * @see Card
+     */
+    public Card getFromTop(Game game) {
+        return game.getCard(library.peekFirst());
+    }
 
-	public void putOnTop(Card card, Game game) {
-		if (card.getOwnerId().equals(playerId)) {
-			game.setZone(card.getId(), Zone.LIBRARY);
-			library.addFirst(card.getId());
-		}
-		else {
-			game.getPlayer(card.getOwnerId()).getLibrary().putOnTop(card, game);
-		}
-	}
+    public void putOnTop(Card card, Game game) {
+        if (card.getOwnerId().equals(playerId)) {
+            game.setZone(card.getId(), Zone.LIBRARY);
+            library.addFirst(card.getId());
+        }
+        else {
+            game.getPlayer(card.getOwnerId()).getLibrary().putOnTop(card, game);
+        }
+    }
 
-	public void putOnBottom(Card card, Game game) {
-		if (card.getOwnerId().equals(playerId)) {
-			game.setZone(card.getId(), Zone.LIBRARY);
+    public void putOnBottom(Card card, Game game) {
+        if (card.getOwnerId().equals(playerId)) {
+            game.setZone(card.getId(), Zone.LIBRARY);
             if (library.contains(card.getId())) {
                 library.remove(card.getId());
             }
-			library.add(card.getId());
-		}
-		else {
-			game.getPlayer(card.getOwnerId()).getLibrary().putOnBottom(card, game);
-		}
-	}
+            library.add(card.getId());
+        }
+        else {
+            game.getPlayer(card.getOwnerId()).getLibrary().putOnBottom(card, game);
+        }
+    }
 
-	public Library copy() {
-		return new Library(this);
-	}
+    public Library copy() {
+        return new Library(this);
+    }
 
-	public void clear() {
-		library.clear();
-	}
+    public void clear() {
+        library.clear();
+    }
 
-	public int size() {
-		return library.size();
-	}
-	
-	public void set(Library newLibrary) {
-		library.clear();
-		for (UUID card: newLibrary.getCardList()) {
-			library.add(card);
-		}
-	}
+    public int size() {
+        return library.size();
+    }
 
-	public List<UUID> getCardList() {
-		return new ArrayList(library);
-	}
+    public void set(Library newLibrary) {
+        library.clear();
+        for (UUID card: newLibrary.getCardList()) {
+            library.add(card);
+        }
+    }
 
-	public List<Card> getCards(Game game) {
-		List<Card> cards = new ArrayList<Card>();
-		for (UUID cardId: library) {
-			cards.add(game.getCard(cardId));
-		}
-		return cards;
-	}
+    public List<UUID> getCardList() {
+        return new ArrayList(library);
+    }
 
-	public Collection<Card> getUniqueCards(Game game) {
-		Map<String, Card> cards = new HashMap<String, Card>();
-		for (UUID cardId: library) {
-			Card card = game.getCard(cardId);
-			if (!cards.containsKey(card.getName())) {
-				cards.put(card.getName(), card);
-			}
-		}
-		return cards.values();
-	}
+    public List<Card> getCards(Game game) {
+        List<Card> cards = new ArrayList<Card>();
+        for (UUID cardId: library) {
+            cards.add(game.getCard(cardId));
+        }
+        return cards;
+    }
 
-	public int count(FilterCard filter, Game game) {
-		int result = 0;
-		for (UUID card: library) {
-			if (filter.match(game.getCard(card), game))
-				result++;
-		}
-		return result;
-	}
+    public Collection<Card> getUniqueCards(Game game) {
+        Map<String, Card> cards = new HashMap<String, Card>();
+        for (UUID cardId: library) {
+            Card card = game.getCard(cardId);
+            if (!cards.containsKey(card.getName())) {
+                cards.put(card.getName(), card);
+            }
+        }
+        return cards.values();
+    }
+
+    public int count(FilterCard filter, Game game) {
+        int result = 0;
+        for (UUID card: library) {
+            if (filter.match(game.getCard(card), game))
+                result++;
+        }
+        return result;
+    }
 
 
-	public boolean isEmptyDraw() {
-		return emptyDraw;
-	}
+    public boolean isEmptyDraw() {
+        return emptyDraw;
+    }
 
-	public void addAll(Set<Card> cards, Game game) {
-		for (Card card: cards) {
-			game.setZone(card.getId(), Zone.LIBRARY);
-			library.add(card.getId());
-		}
-	}
+    public void addAll(Set<Card> cards, Game game) {
+        for (Card card: cards) {
+            game.setZone(card.getId(), Zone.LIBRARY);
+            library.add(card.getId());
+        }
+    }
 
-	public Card getCard(UUID cardId, Game game) {
-		for (UUID card: library) {
-			if (card.equals(cardId))
-				return game.getCard(card);
-		}
-		return null;
-	}
+    public Card getCard(UUID cardId, Game game) {
+        for (UUID card: library) {
+            if (card.equals(cardId))
+                return game.getCard(card);
+        }
+        return null;
+    }
 
-	public Card remove(UUID cardId, Game game) {
-		Iterator<UUID> it = library.iterator();
-		while(it.hasNext()) {
-			UUID card = it.next();
-			if (card.equals(cardId)) {
-				it.remove();
-				return game.getCard(card);
-			}
-		}
-		return null;
-	}
+    public Card remove(UUID cardId, Game game) {
+        Iterator<UUID> it = library.iterator();
+        while(it.hasNext()) {
+            UUID card = it.next();
+            if (card.equals(cardId)) {
+                it.remove();
+                return game.getCard(card);
+            }
+        }
+        return null;
+    }
 
 }

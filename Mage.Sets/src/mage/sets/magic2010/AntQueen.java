@@ -45,27 +45,27 @@ import mage.game.permanent.token.InsectToken;
  */
 public class AntQueen extends CardImpl<AntQueen> {
 
-	private static InsectToken insectToken = new InsectToken();
+    private static InsectToken insectToken = new InsectToken();
 
-	public AntQueen(UUID ownerId) {
-		super(ownerId, 166, "Ant Queen", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
-		this.expansionSetCode = "M10";
-		this.subtype.add("Insect");
-		this.color.setGreen(true);
-//		this.art = "122179_typ_reg_sty_010.jpg";
-		this.power = new MageInt(5);
-		this.toughness = new MageInt(5);
+    public AntQueen(UUID ownerId) {
+        super(ownerId, 166, "Ant Queen", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
+        this.expansionSetCode = "M10";
+        this.subtype.add("Insect");
+        this.color.setGreen(true);
+//        this.art = "122179_typ_reg_sty_010.jpg";
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(5);
 
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(insectToken), new ManaCostsImpl("{1}{G}")));
-	}
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(insectToken), new ManaCostsImpl("{1}{G}")));
+    }
 
-	public AntQueen(final AntQueen card) {
-		super(card);
-	}
+    public AntQueen(final AntQueen card) {
+        super(card);
+    }
 
-	@Override
-	public AntQueen copy() {
-		return new AntQueen(this);
-	}
+    @Override
+    public AntQueen copy() {
+        return new AntQueen(this);
+    }
 
 }

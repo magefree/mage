@@ -106,5 +106,5 @@ public class CavernOfSoulsTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Azure Drake", 0);
         assertPermanentCount(playerA, "Azure Drake", 1);
     }
-    
+
 }

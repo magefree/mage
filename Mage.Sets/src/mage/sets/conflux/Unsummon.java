@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class Unsummon extends mage.sets.tenth.Unsummon {
 
-	public Unsummon(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 37;
-		this.expansionSetCode = "CON";
-	}
+    public Unsummon(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 37;
+        this.expansionSetCode = "CON";
+    }
 
-	public Unsummon(final Unsummon card) {
-		super(card);
-	}
+    public Unsummon(final Unsummon card) {
+        super(card);
+    }
 
-	@Override
-	public Unsummon copy() {
-		return new Unsummon(this);
-	}
+    @Override
+    public Unsummon copy() {
+        return new Unsummon(this);
+    }
 
 }

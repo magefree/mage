@@ -51,37 +51,37 @@ import java.util.Map.Entry;
  */
 public class Cards extends javax.swing.JPanel {
 
-	private Map<UUID, MageCard> cards = new LinkedHashMap<UUID, MageCard>();
-	private boolean dontDisplayTapped = false;
-	private static final int GAP_X = 5;
+    private Map<UUID, MageCard> cards = new LinkedHashMap<UUID, MageCard>();
+    private boolean dontDisplayTapped = false;
+    private static final int GAP_X = 5;
     private String zone;
-	
-	/**
-	 * Defines whether component should be visible whenever there is no objects within.
-	 * True by default.
-	 */
-	private boolean isVisibleIfEmpty = true;
 
-	private Dimension cardDimension;
+    /**
+     * Defines whether component should be visible whenever there is no objects within.
+     * True by default.
+     */
+    private boolean isVisibleIfEmpty = true;
 
-	/** Creates new form Cards */
+    private Dimension cardDimension;
+
+    /** Creates new form Cards */
     public Cards() {
-    	this(false);
+        this(false);
     }
 
-	public Cards(boolean skipAddingScrollPane) {
-		initComponents(skipAddingScrollPane);
+    public Cards(boolean skipAddingScrollPane) {
+        initComponents(skipAddingScrollPane);
         setOpaque(false);
-		//cardArea.setOpaque(false);
+        //cardArea.setOpaque(false);
         setBackgroundColor(new Color(0,0,0,100));
         if (!skipAddingScrollPane) {
-			jScrollPane1.setOpaque(false);
-			jScrollPane1.getViewport().setOpaque(false);
-		}
-        if (Plugins.getInstance().isCardPluginLoaded()) {
-        	cardArea.setLayout(null);
+            jScrollPane1.setOpaque(false);
+            jScrollPane1.getViewport().setOpaque(false);
         }
-	}
+        if (Plugins.getInstance().isCardPluginLoaded()) {
+            cardArea.setLayout(null);
+        }
+    }
 
     /**
      * Sets components background color
@@ -91,112 +91,112 @@ public class Cards extends javax.swing.JPanel {
         cardArea.setOpaque(true);
         cardArea.setBackground(color);
     }
-    
-	public void setVisibleIfEmpty(boolean isVisibleIfEmpty) {
-		this.isVisibleIfEmpty = isVisibleIfEmpty;
-	}
 
-	public void setBorder(Border border) {
-		super.setBorder(border);
-		if (jScrollPane1 != null) {
-			jScrollPane1.setViewportBorder(border);
-			jScrollPane1.setBorder(border);
-		}
-	}
+    public void setVisibleIfEmpty(boolean isVisibleIfEmpty) {
+        this.isVisibleIfEmpty = isVisibleIfEmpty;
+    }
+
+    public void setBorder(Border border) {
+        super.setBorder(border);
+        if (jScrollPane1 != null) {
+            jScrollPane1.setViewportBorder(border);
+            jScrollPane1.setBorder(border);
+        }
+    }
 
     public boolean loadCards(SimpleCardsView cardsView, BigCard bigCard, UUID gameId) {        
         return loadCards(CardsViewUtil.convertSimple(cardsView), bigCard, gameId, null);
     }
-    
-	public boolean loadCards(CardsView cardsView, BigCard bigCard, UUID gameId, java.util.List<UUID> order) {
-		boolean changed = false;
-		
-		for (Iterator<Entry<UUID, MageCard>> i = cards.entrySet().iterator(); i.hasNext();) {
-			Entry<UUID, MageCard> entry = i.next();
-			if (!cardsView.containsKey(entry.getKey())) {
-				removeCard(entry.getKey());
-				i.remove();
-				changed = true;
-			}
-		}
+
+    public boolean loadCards(CardsView cardsView, BigCard bigCard, UUID gameId, java.util.List<UUID> order) {
+        boolean changed = false;
+
+        for (Iterator<Entry<UUID, MageCard>> i = cards.entrySet().iterator(); i.hasNext();) {
+            Entry<UUID, MageCard> entry = i.next();
+            if (!cardsView.containsKey(entry.getKey())) {
+                removeCard(entry.getKey());
+                i.remove();
+                changed = true;
+            }
+        }
 
         java.util.List<CardView> orderedList = new ArrayList<CardView>();
         for (CardView card: cardsView.values()) {
             orderedList.add(0, card);
         }
-        
+
         for (CardView card: orderedList) {
-			if (dontDisplayTapped) {
-				if (card instanceof PermanentView) {
-					((PermanentView)card).overrideTapped(false);
-				}
-			}
-			if (card instanceof StackAbilityView) {
-				CardView tmp = ((StackAbilityView)card).getSourceCard();
-				tmp.overrideRules(card.getRules());
-				tmp.setIsAbility(true);
-				tmp.overrideTargets(card.getTargets());
-				tmp.overrideId(card.getId());
-				card = tmp;
-			}
-			if (!cards.containsKey(card.getId())) {
-				addCard(card, bigCard, gameId);
-				changed = true;
-			}
-			cards.get(card.getId()).update(card);
-		}
-		
-		if (changed) {
-			layoutCards(getCardDimension(), cards, order);
-		}
+            if (dontDisplayTapped) {
+                if (card instanceof PermanentView) {
+                    ((PermanentView)card).overrideTapped(false);
+                }
+            }
+            if (card instanceof StackAbilityView) {
+                CardView tmp = ((StackAbilityView)card).getSourceCard();
+                tmp.overrideRules(card.getRules());
+                tmp.setIsAbility(true);
+                tmp.overrideTargets(card.getTargets());
+                tmp.overrideId(card.getId());
+                card = tmp;
+            }
+            if (!cards.containsKey(card.getId())) {
+                addCard(card, bigCard, gameId);
+                changed = true;
+            }
+            cards.get(card.getId()).update(card);
+        }
+
+        if (changed) {
+            layoutCards(getCardDimension(), cards, order);
+        }
 
         if (!isVisibleIfEmpty) {
-        	cardArea.setVisible(cards.size() > 0);
+            cardArea.setVisible(cards.size() > 0);
         }
         sizeCards(getCardDimension());
-		this.revalidate();
-		this.repaint();
-		
-		return changed;
-	}
+        this.revalidate();
+        this.repaint();
+
+        return changed;
+    }
 
     public void sizeCards(Dimension cardDimension) {
-		cardArea.setPreferredSize(new Dimension((int)(cards.size() * (cardDimension.getWidth() + GAP_X)) + 5, (int)(cardDimension.getHeight()) + 20));
-		cardArea.revalidate();
-		cardArea.repaint();
+        cardArea.setPreferredSize(new Dimension((int)(cards.size() * (cardDimension.getWidth() + GAP_X)) + 5, (int)(cardDimension.getHeight()) + 20));
+        cardArea.revalidate();
+        cardArea.repaint();
     }
-    
-	private Dimension getCardDimension() {
-	   	if (cardDimension == null) {
-			cardDimension = new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
-		}
-		return cardDimension;
-	}
 
-	private void addCard(CardView card, BigCard bigCard, UUID gameId) {
-		MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, getCardDimension(), gameId, true);
-        if (zone != null) cardImg.setZone(zone);
-		cards.put(card.getId(), cardImg);
-		cardArea.add(cardImg);
-	}
-	
-	private void removeCard(UUID cardId) {
-        for (Component comp: cardArea.getComponents()) {
-        	if (comp instanceof Card) {
-        		if (((Card)comp).getCardId().equals(cardId)) {
-					cardArea.remove(comp);
-        		}
-        	} else if (comp instanceof MageCard) {
-        		if (((MageCard)comp).getOriginal().getId().equals(cardId)) {
-					cardArea.remove(comp);
-        		}
-        	}
+    private Dimension getCardDimension() {
+           if (cardDimension == null) {
+            cardDimension = new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
         }
-	}
-	
-	private void layoutCards(Dimension dimension, Map<UUID, MageCard> cards, java.util.List<UUID> order) {
-		if (Plugins.getInstance().isCardPluginLoaded()) {
-			int dx = GAP_X;
+        return cardDimension;
+    }
+
+    private void addCard(CardView card, BigCard bigCard, UUID gameId) {
+        MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, getCardDimension(), gameId, true);
+        if (zone != null) cardImg.setZone(zone);
+        cards.put(card.getId(), cardImg);
+        cardArea.add(cardImg);
+    }
+
+    private void removeCard(UUID cardId) {
+        for (Component comp: cardArea.getComponents()) {
+            if (comp instanceof Card) {
+                if (((Card)comp).getCardId().equals(cardId)) {
+                    cardArea.remove(comp);
+                }
+            } else if (comp instanceof MageCard) {
+                if (((MageCard)comp).getOriginal().getId().equals(cardId)) {
+                    cardArea.remove(comp);
+                }
+            }
+        }
+    }
+
+    private void layoutCards(Dimension dimension, Map<UUID, MageCard> cards, java.util.List<UUID> order) {
+        if (Plugins.getInstance().isCardPluginLoaded()) {
+            int dx = GAP_X;
             if (order != null) {
                 for (UUID cardId : order) {
                     MageCard card = cards.get(cardId);
@@ -215,8 +215,8 @@ public class Cards extends javax.swing.JPanel {
                     dx += dimension.width + GAP_X;
                 }
             }
-		}
-	}
+        }
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -229,17 +229,17 @@ public class Cards extends javax.swing.JPanel {
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0, 0)));
         setLayout(new java.awt.BorderLayout());
 
-		cardArea = new javax.swing.JPanel();
-		cardArea.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 0));
+        cardArea = new javax.swing.JPanel();
+        cardArea.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 0));
 
-		if (skipAddingScrollPane) {
-			add(cardArea, java.awt.BorderLayout.CENTER);
-		} else{
-			jScrollPane1 = new javax.swing.JScrollPane();
-			jScrollPane1.setViewportView(cardArea);
-			jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-			add(jScrollPane1, java.awt.BorderLayout.CENTER);
-		}
+        if (skipAddingScrollPane) {
+            add(cardArea, java.awt.BorderLayout.CENTER);
+        } else{
+            jScrollPane1 = new javax.swing.JScrollPane();
+            jScrollPane1.setViewportView(cardArea);
+            jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+            add(jScrollPane1, java.awt.BorderLayout.CENTER);
+        }
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -249,23 +249,23 @@ public class Cards extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     public void setDontDisplayTapped(boolean dontDisplayTapped) {
-		this.dontDisplayTapped = dontDisplayTapped;
-	}
-    
-    public void setHScrollSpeed(int unitIncrement) {
-    	if (jScrollPane1 != null) {
-			jScrollPane1.getHorizontalScrollBar().setUnitIncrement(unitIncrement);
-		}
-    }
-    
-    public void setVScrollSpeed(int unitIncrement) {
-    	if (jScrollPane1 != null) {
-			jScrollPane1.getVerticalScrollBar().setUnitIncrement(unitIncrement);
-		}
+        this.dontDisplayTapped = dontDisplayTapped;
     }
 
-	public void setCardDimension(Dimension dimension) {
-		this.cardDimension = dimension;
+    public void setHScrollSpeed(int unitIncrement) {
+        if (jScrollPane1 != null) {
+            jScrollPane1.getHorizontalScrollBar().setUnitIncrement(unitIncrement);
+        }
+    }
+
+    public void setVScrollSpeed(int unitIncrement) {
+        if (jScrollPane1 != null) {
+            jScrollPane1.getVerticalScrollBar().setUnitIncrement(unitIncrement);
+        }
+    }
+
+    public void setCardDimension(Dimension dimension) {
+        this.cardDimension = dimension;
         layoutCards(cardDimension, cards, null);
     }
 

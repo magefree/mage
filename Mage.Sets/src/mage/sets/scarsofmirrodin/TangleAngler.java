@@ -46,27 +46,27 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class TangleAngler extends CardImpl<TangleAngler> {
 
-	public TangleAngler(UUID ownerId) {
-		super(ownerId, 128, "Tangle Angler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
-		this.expansionSetCode = "SOM";
-		this.subtype.add("Horror");
-		this.color.setGreen(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(5);
+    public TangleAngler(UUID ownerId) {
+        super(ownerId, 128, "Tangle Angler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
+        this.expansionSetCode = "SOM";
+        this.subtype.add("Horror");
+        this.color.setGreen(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(5);
 
-		this.addAbility(InfectAbility.getInstance());
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MustBlockSourceTargetEffect(), new ManaCostsImpl("{G}"));
-		ability.addTarget(new TargetCreaturePermanent());
-		this.addAbility(ability);
-	}
+        this.addAbility(InfectAbility.getInstance());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MustBlockSourceTargetEffect(), new ManaCostsImpl("{G}"));
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
+    }
 
-	public TangleAngler(final TangleAngler card) {
-		super(card);
-	}
+    public TangleAngler(final TangleAngler card) {
+        super(card);
+    }
 
-	@Override
-	public TangleAngler copy() {
-		return new TangleAngler(this);
-	}
+    @Override
+    public TangleAngler copy() {
+        return new TangleAngler(this);
+    }
 
 }

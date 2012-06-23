@@ -38,18 +38,18 @@ import mage.cards.ExpansionSet;
 public class Invasion extends ExpansionSet {
     private static final Invasion fINSTANCE =  new Invasion();
 
-	public static Invasion getInstance() {
-		return fINSTANCE;
-	}
+    public static Invasion getInstance() {
+        return fINSTANCE;
+    }
 
     private Invasion() {
         super("Invasion", "INV", "", "mage.sets.invasion", new GregorianCalendar(2000, 9, 2).getTime(), SetType.EXPANSION);
         this.blockName = "Invasion";
-		this.hasBoosters = true;
-		this.numBoosterLands = 1;
-		this.numBoosterCommon = 10;
-		this.numBoosterUncommon = 3;
-		this.numBoosterRare = 1;
-		this.ratioBoosterMythic = 8;
+        this.hasBoosters = true;
+        this.numBoosterLands = 1;
+        this.numBoosterCommon = 10;
+        this.numBoosterUncommon = 3;
+        this.numBoosterRare = 1;
+        this.ratioBoosterMythic = 8;
     }
 }

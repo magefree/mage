@@ -39,14 +39,14 @@ import mage.game.permanent.Permanent;
  */
 public class Attackers extends TreeMap<Integer, List<Permanent>> {
 
-	public List<Permanent> getAttackers() {
-		List<Permanent> attackers = new ArrayList<Permanent>();
-		for (List<Permanent> l: this.values()) {
-			for (Permanent permanent: l) {
-				attackers.add(permanent);
-			}
-		}
-		return attackers;
-	}
+    public List<Permanent> getAttackers() {
+        List<Permanent> attackers = new ArrayList<Permanent>();
+        for (List<Permanent> l: this.values()) {
+            for (Permanent permanent: l) {
+                attackers.add(permanent);
+            }
+        }
+        return attackers;
+    }
 
 }

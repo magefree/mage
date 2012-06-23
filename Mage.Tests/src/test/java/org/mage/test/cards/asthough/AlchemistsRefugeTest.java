@@ -25,7 +25,7 @@ public class AlchemistsRefugeTest extends CardTestPlayerBase {
 
         setStopAt(2, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
-        
+
         assertLife(playerA, 20);
         assertLife(playerB, 20);
         assertPermanentCount(playerA, "Elite Vanguard", 1);

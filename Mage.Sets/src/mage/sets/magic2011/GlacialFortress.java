@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class GlacialFortress extends mage.sets.magic2010.GlacialFortress {
 
-	public GlacialFortress(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 225;
-		this.expansionSetCode = "M11";
-	}
+    public GlacialFortress(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 225;
+        this.expansionSetCode = "M11";
+    }
 
-	public GlacialFortress(final GlacialFortress card) {
-		super(card);
-	}
+    public GlacialFortress(final GlacialFortress card) {
+        super(card);
+    }
 
-	@Override
-	public GlacialFortress copy() {
-		return new GlacialFortress(this);
-	}
+    @Override
+    public GlacialFortress copy() {
+        return new GlacialFortress(this);
+    }
 
 }

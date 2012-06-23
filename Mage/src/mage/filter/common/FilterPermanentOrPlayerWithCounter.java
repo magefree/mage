@@ -41,60 +41,60 @@ import java.util.UUID;
  */
 public class FilterPermanentOrPlayerWithCounter extends FilterPermanentOrPlayer {
 
-	protected FilterPermanent permanentFilter;
-	protected FilterPlayer playerFilter;
+    protected FilterPermanent permanentFilter;
+    protected FilterPlayer playerFilter;
 
-	public FilterPermanentOrPlayerWithCounter() {
-		this("player or permanent with counters on them");
-	}
+    public FilterPermanentOrPlayerWithCounter() {
+        this("player or permanent with counters on them");
+    }
 
-	public FilterPermanentOrPlayerWithCounter(String name, UUID controllerId) {
-		super(name);
-		permanentFilter = new FilterPermanent();
-		playerFilter = new FilterPlayer();
-		permanentFilter.getControllerId().add(controllerId);
-		playerFilter.getPlayerId().add(controllerId);
-	}
+    public FilterPermanentOrPlayerWithCounter(String name, UUID controllerId) {
+        super(name);
+        permanentFilter = new FilterPermanent();
+        playerFilter = new FilterPlayer();
+        permanentFilter.getControllerId().add(controllerId);
+        playerFilter.getPlayerId().add(controllerId);
+    }
 
-	public FilterPermanentOrPlayerWithCounter(String name) {
-		super(name);
-		permanentFilter = new FilterPermanent();
-		playerFilter = new FilterPlayer();
-	}
+    public FilterPermanentOrPlayerWithCounter(String name) {
+        super(name);
+        permanentFilter = new FilterPermanent();
+        playerFilter = new FilterPlayer();
+    }
 
-	public FilterPermanentOrPlayerWithCounter(final FilterPermanentOrPlayerWithCounter filter) {
-		super(filter);
-		this.permanentFilter = filter.permanentFilter.copy();
-		this.playerFilter = filter.playerFilter.copy();
-	}
+    public FilterPermanentOrPlayerWithCounter(final FilterPermanentOrPlayerWithCounter filter) {
+        super(filter);
+        this.permanentFilter = filter.permanentFilter.copy();
+        this.playerFilter = filter.playerFilter.copy();
+    }
 
-	@Override
-	public boolean match(Object o, Game game) {
-		if (o instanceof Player) {
-			if (((Player)o).getCounters().size() == 0) {
-				return false;
-			}
-		} else if (o instanceof Permanent) {
-			if (((Permanent)o).getCounters().size() == 0) {
-				return false;
-			}
-		}
-		return super.match(o, game);
-	}
+    @Override
+    public boolean match(Object o, Game game) {
+        if (o instanceof Player) {
+            if (((Player)o).getCounters().size() == 0) {
+                return false;
+            }
+        } else if (o instanceof Permanent) {
+            if (((Permanent)o).getCounters().size() == 0) {
+                return false;
+            }
+        }
+        return super.match(o, game);
+    }
 
-	@Override
-	public boolean match(Object o, UUID sourceId, UUID playerId, Game game) {
-		if (o instanceof Player) {
-			return playerFilter.match((Player) o, sourceId, playerId, game);
-		} else if (o instanceof Permanent) {
-			return permanentFilter.match((Permanent) o, sourceId, playerId, game);
-		}
-		return notFilter;
-	}
+    @Override
+    public boolean match(Object o, UUID sourceId, UUID playerId, Game game) {
+        if (o instanceof Player) {
+            return playerFilter.match((Player) o, sourceId, playerId, game);
+        } else if (o instanceof Permanent) {
+            return permanentFilter.match((Permanent) o, sourceId, playerId, game);
+        }
+        return notFilter;
+    }
 
-	@Override
-	public FilterPermanentOrPlayerWithCounter copy() {
-		return new FilterPermanentOrPlayerWithCounter(this);
-	}
+    @Override
+    public FilterPermanentOrPlayerWithCounter copy() {
+        return new FilterPermanentOrPlayerWithCounter(this);
+    }
 
 }

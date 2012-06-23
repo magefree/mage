@@ -46,7 +46,7 @@ public class KothsCourier extends CardImpl<KothsCourier> {
         this.expansionSetCode = "MBS";
         this.subtype.add("Human");
         this.subtype.add("Rogue");
-		this.color.setRed(true);
+        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
         this.addAbility(new ForestwalkAbility());

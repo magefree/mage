@@ -54,27 +54,27 @@ import mage.sets.Sets;
  */
 public class Nevermore extends CardImpl<Nevermore> {
 
-	public Nevermore(UUID ownerId) {
-		super(ownerId, 25, "Nevermore", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{W}");
-		this.expansionSetCode = "ISD";
-		this.color.setWhite(true);
-        
-		//As Nevermore enters the battlefield, name a nonland card.
-		this.addAbility(new EntersBattlefieldTriggeredAbility(new NevermoreEffect1()));
-        
+    public Nevermore(UUID ownerId) {
+        super(ownerId, 25, "Nevermore", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{W}");
+        this.expansionSetCode = "ISD";
+        this.color.setWhite(true);
+
+        //As Nevermore enters the battlefield, name a nonland card.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new NevermoreEffect1()));
+
         //The named card can't be cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NevermoreEffect2()));
-        
-	}
 
-	public Nevermore(final Nevermore card) {
-		super(card);
-	}
+    }
 
-	@Override
-	public Nevermore copy() {
-		return new Nevermore(this);
-	}
+    public Nevermore(final Nevermore card) {
+        super(card);
+    }
+
+    @Override
+    public Nevermore copy() {
+        return new Nevermore(this);
+    }
 
 }
 class NevermoreEffect1 extends OneShotEffect<NevermoreEffect1> {
@@ -83,14 +83,14 @@ class NevermoreEffect1 extends OneShotEffect<NevermoreEffect1> {
         super(Outcome.Detriment);
         staticText = "name a nonland card";
     }
-    
+
     public NevermoreEffect1(final NevermoreEffect1 effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
-		Player controller = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Choice cardChoice = new ChoiceImpl();
             cardChoice.setChoices(Sets.getNonLandCardNames());
@@ -109,7 +109,7 @@ class NevermoreEffect1 extends OneShotEffect<NevermoreEffect1> {
     public NevermoreEffect1 copy() {
         return new NevermoreEffect1(this);
     }
-    
+
 }
 
 class NevermoreEffect2 extends ReplacementEffectImpl<NevermoreEffect2> {
@@ -118,11 +118,11 @@ class NevermoreEffect2 extends ReplacementEffectImpl<NevermoreEffect2> {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "The named card can't be cast";
     }
-    
+
     public NevermoreEffect2(final NevermoreEffect2 effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         return true;
@@ -148,5 +148,5 @@ class NevermoreEffect2 extends ReplacementEffectImpl<NevermoreEffect2> {
         }
         return false;
     }
-    
+
 }

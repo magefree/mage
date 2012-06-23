@@ -54,10 +54,10 @@ public class WardenOfTheWall extends CardImpl<WardenOfTheWall> {
 
         // Warden of the Wall enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        
+
         // {tap}: Add {1} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
-        
+
         // As long as it's not your turn, Warden of the Wall is a 2/3 Gargoyle artifact creature with flying.
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(new BecomesCreatureSourceEffect(new GargoyleToken(), "", Constants.Duration.WhileOnBattlefield), NotMyTurnCondition.getInstance(), "As long as it's not your turn, Warden of the Wall is a 2/3 Gargoyle artifact creature with flying")));
     }
@@ -74,14 +74,14 @@ public class WardenOfTheWall extends CardImpl<WardenOfTheWall> {
 
 class GargoyleToken extends Token {
 
-	public GargoyleToken() {
-		super("", "2/3 Gargoyle artifact creature with flying");
-		cardType.add(CardType.CREATURE);
+    public GargoyleToken() {
+        super("", "2/3 Gargoyle artifact creature with flying");
+        cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
-		subtype.add("Gargoyle");
-		power = new MageInt(2);
-		toughness = new MageInt(3);
-		addAbility(FlyingAbility.getInstance());
-	}
+        subtype.add("Gargoyle");
+        power = new MageInt(2);
+        toughness = new MageInt(3);
+        addAbility(FlyingAbility.getInstance());
+    }
 
 }

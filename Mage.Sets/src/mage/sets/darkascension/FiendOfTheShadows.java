@@ -64,7 +64,7 @@ public class FiendOfTheShadows extends CardImpl<FiendOfTheShadows> {
         filter.getSubtype().add("Human");
         filter.setScopeSubtype(Filter.ComparisonScope.Any);
     }
-    
+
     public FiendOfTheShadows(UUID ownerId) {
         super(ownerId, 62, "Fiend of the Shadows", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
         this.expansionSetCode = "DKA";
@@ -78,8 +78,8 @@ public class FiendOfTheShadows extends CardImpl<FiendOfTheShadows> {
         this.addAbility(FlyingAbility.getInstance());
         // Whenever Fiend of the Shadows deals combat damage to a player, that player exiles a card from his or her hand. You may play that card for as long as it remains exiled.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ExileFromZoneTargetEffect(Constants.Zone.HAND, exileId, "Fiend of the Shadows", new FilterCard()), false, true));
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, new FiendOfTheShadowsEffect(exileId)));
-        
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, new FiendOfTheShadowsEffect(exileId)));
+
         // Sacrifice a Human: Regenerate Fiend of the Shadows.
         this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new RegenerateSourceEffect(), new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false))));
     }
@@ -97,39 +97,39 @@ public class FiendOfTheShadows extends CardImpl<FiendOfTheShadows> {
 class FiendOfTheShadowsEffect extends AsThoughEffectImpl<FiendOfTheShadowsEffect> {
 
     private UUID exileId;
-    
-	public FiendOfTheShadowsEffect(UUID exileId) {
-		super(Constants.AsThoughEffectType.CAST, Constants.Duration.EndOfGame, Constants.Outcome.Benefit);
+
+    public FiendOfTheShadowsEffect(UUID exileId) {
+        super(Constants.AsThoughEffectType.CAST, Constants.Duration.EndOfGame, Constants.Outcome.Benefit);
         this.exileId = exileId;
-		staticText = "You may play that card for as long as it remains exiled";
-	}
+        staticText = "You may play that card for as long as it remains exiled";
+    }
 
-	public FiendOfTheShadowsEffect(final FiendOfTheShadowsEffect effect) {
-		super(effect);
+    public FiendOfTheShadowsEffect(final FiendOfTheShadowsEffect effect) {
+        super(effect);
         this.exileId = effect.exileId;
-	}
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
 
-	@Override
-	public FiendOfTheShadowsEffect copy() {
-		return new FiendOfTheShadowsEffect(this);
-	}
+    @Override
+    public FiendOfTheShadowsEffect copy() {
+        return new FiendOfTheShadowsEffect(this);
+    }
 
-	@Override
-	public boolean applies(UUID sourceId, Ability source, Game game) {
-		Card card = game.getCard(sourceId);
-		if (card != null) {
+    @Override
+    public boolean applies(UUID sourceId, Ability source, Game game) {
+        Card card = game.getCard(sourceId);
+        if (card != null) {
             ExileZone zone = game.getExile().getExileZone(exileId);
             if (zone != null && zone.contains(card.getId())) {
                 card.setControllerId(source.getControllerId());
                 return true;
             }
-		}
-		return false;
-	}
+        }
+        return false;
+    }
 
 }

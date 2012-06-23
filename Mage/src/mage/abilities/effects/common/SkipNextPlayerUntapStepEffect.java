@@ -44,21 +44,21 @@ import mage.players.Player;
  */
 public class SkipNextPlayerUntapStepEffect extends OneShotEffect<SkipNextPlayerUntapStepEffect> {
 
-	public SkipNextPlayerUntapStepEffect() {
-		super(Constants.Outcome.Detriment);
-	}
+    public SkipNextPlayerUntapStepEffect() {
+        super(Constants.Outcome.Detriment);
+    }
 
         public SkipNextPlayerUntapStepEffect(String text) {
                 this();
                 staticText = text;
-	}
+    }
 
-	public SkipNextPlayerUntapStepEffect(SkipNextPlayerUntapStepEffect effect) {
-		super(effect);
-	}
+    public SkipNextPlayerUntapStepEffect(SkipNextPlayerUntapStepEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
                 if (targetPointer != null) {
                         Player player = game.getPlayer(targetPointer.getFirst(game, source));
                         if (player != null) {
@@ -66,16 +66,16 @@ public class SkipNextPlayerUntapStepEffect extends OneShotEffect<SkipNextPlayerU
                                 return true;
                         }
                 }
-		return false;
-	}
+        return false;
+    }
 
-	@Override
-	public SkipNextPlayerUntapStepEffect copy() {
-		return new SkipNextPlayerUntapStepEffect(this);
-	}
-        
-       	@Override
-	public String getText(Mode mode) {
+    @Override
+    public SkipNextPlayerUntapStepEffect copy() {
+        return new SkipNextPlayerUntapStepEffect(this);
+    }
+
+           @Override
+    public String getText(Mode mode) {
             StringBuilder sb = new StringBuilder();
             if (staticText.length() > 0) {
                 sb.append(staticText);
@@ -85,5 +85,5 @@ public class SkipNextPlayerUntapStepEffect extends OneShotEffect<SkipNextPlayerU
             }
             sb.append("player skips his or her next untap step");    
             return sb.toString();
-	}
+    }
 }

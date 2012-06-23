@@ -23,7 +23,7 @@ public class RotcrownGhoulTest extends CardTestPlayerBase {
 
         setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
-        
+
         assertLife(playerA, 20);
         assertLife(playerB, 20);
         // Lightning Bolt + 5 cards
@@ -51,5 +51,5 @@ public class RotcrownGhoulTest extends CardTestPlayerBase {
         // Rotcrown Ghoul
         assertGraveyardCount(playerB, 1);
     }
-    
+
 }

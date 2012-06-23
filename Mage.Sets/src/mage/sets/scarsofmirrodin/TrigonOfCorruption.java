@@ -60,23 +60,23 @@ public class TrigonOfCorruption extends CardImpl<TrigonOfCorruption> {
     public TrigonOfCorruption (UUID ownerId) {
         super(ownerId, 213, "Trigon of Corruption", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
         this.expansionSetCode = "SOM";
-        
+
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(new ChargeCounter(3)), ""));
 
-		Costs costs = new CostsImpl();
-		costs.add(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
-		costs.add(new TapSourceCost());
-	    Effect putCounterEffect = new AddCountersTargetEffect(CounterType.M1M1.createInstance());
-	    Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, putCounterEffect, costs);
+        Costs costs = new CostsImpl();
+        costs.add(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
+        costs.add(new TapSourceCost());
+        Effect putCounterEffect = new AddCountersTargetEffect(CounterType.M1M1.createInstance());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, putCounterEffect, costs);
         ability.addManaCost(new GenericManaCost(2));
-	    Target target = new TargetCreaturePermanent();
+        Target target = new TargetCreaturePermanent();
         target.setRequired(true);
         ability.addTarget(target);
-		this.addAbility(ability);
+        this.addAbility(ability);
 
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new TapSourceCost());
         ability2.addManaCost(new ManaCostsImpl("{B}{B}"));
-		this.addAbility(ability2);
+        this.addAbility(ability2);
     }
 
     public TrigonOfCorruption (final TrigonOfCorruption card) {

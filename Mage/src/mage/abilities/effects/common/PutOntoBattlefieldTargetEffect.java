@@ -43,7 +43,7 @@ import java.util.UUID;
  * @author LevelX
  */
 public class PutOntoBattlefieldTargetEffect extends OneShotEffect<PutOntoBattlefieldTargetEffect> {
-    
+
     boolean tapped;
 
     public PutOntoBattlefieldTargetEffect(boolean tapped) {

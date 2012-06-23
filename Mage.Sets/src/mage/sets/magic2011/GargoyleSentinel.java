@@ -54,73 +54,73 @@ import mage.game.permanent.Permanent;
  */
 public class GargoyleSentinel extends CardImpl<GargoyleSentinel> {
 
-	public GargoyleSentinel(UUID ownerId) {
-		super(ownerId, 207, "Gargoyle Sentinel", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Gargoyle");
-		this.power = new MageInt(3);
-		this.toughness = new MageInt(3);
+    public GargoyleSentinel(UUID ownerId) {
+        super(ownerId, 207, "Gargoyle Sentinel", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Gargoyle");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-		this.addAbility(DefenderAbility.getInstance());
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GargoyleSentinelEffect(), new ManaCostsImpl("{3}")));
-	}
+        this.addAbility(DefenderAbility.getInstance());
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GargoyleSentinelEffect(), new ManaCostsImpl("{3}")));
+    }
 
-	public GargoyleSentinel(final GargoyleSentinel card) {
-		super(card);
-	}
+    public GargoyleSentinel(final GargoyleSentinel card) {
+        super(card);
+    }
 
-	@Override
-	public GargoyleSentinel copy() {
-		return new GargoyleSentinel(this);
-	}
+    @Override
+    public GargoyleSentinel copy() {
+        return new GargoyleSentinel(this);
+    }
 
 }
 
 class GargoyleSentinelEffect extends ContinuousEffectImpl<GargoyleSentinelEffect> {
 
-	public GargoyleSentinelEffect() {
-		super(Duration.EndOfTurn, Outcome.AddAbility);
-		staticText = "Until end of turn, {this} loses defender and gains flying";
-	}
+    public GargoyleSentinelEffect() {
+        super(Duration.EndOfTurn, Outcome.AddAbility);
+        staticText = "Until end of turn, {this} loses defender and gains flying";
+    }
 
-	public GargoyleSentinelEffect(final GargoyleSentinelEffect effect) {
-		super(effect);
-	}
+    public GargoyleSentinelEffect(final GargoyleSentinelEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public GargoyleSentinelEffect copy() {
-		return new GargoyleSentinelEffect(this);
-	}
+    @Override
+    public GargoyleSentinelEffect copy() {
+        return new GargoyleSentinelEffect(this);
+    }
 
-	@Override
-	public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-		Permanent permanent = game.getPermanent(source.getSourceId());
-		if (permanent != null) {
-			switch (layer) {
-				case AbilityAddingRemovingEffects_6:
-					if (sublayer == SubLayer.NA) {
-						for (Iterator<Ability> i = permanent.getAbilities().iterator(); i.hasNext();) {
-							Ability entry = i.next();
-							if (entry.getId().equals(DefenderAbility.getInstance().getId()))
-								i.remove();
-						}
-						permanent.getAbilities().add(FlyingAbility.getInstance());
-					}
-					break;
-			}
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            switch (layer) {
+                case AbilityAddingRemovingEffects_6:
+                    if (sublayer == SubLayer.NA) {
+                        for (Iterator<Ability> i = permanent.getAbilities().iterator(); i.hasNext();) {
+                            Ability entry = i.next();
+                            if (entry.getId().equals(DefenderAbility.getInstance().getId()))
+                                i.remove();
+                        }
+                        permanent.getAbilities().add(FlyingAbility.getInstance());
+                    }
+                    break;
+            }
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
 
-	@Override
-	public boolean hasLayer(Layer layer) {
-		return layer == Layer.AbilityAddingRemovingEffects_6;
-	}
+    @Override
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.AbilityAddingRemovingEffects_6;
+    }
 
 }

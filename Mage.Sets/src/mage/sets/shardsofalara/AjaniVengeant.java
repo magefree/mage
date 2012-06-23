@@ -57,39 +57,39 @@ public class AjaniVengeant extends CardImpl<AjaniVengeant> {
         filter.getCardType().add(CardType.LAND);
     }
 
-	public AjaniVengeant(UUID ownerId) {
-		super(ownerId, 154, "Ajani Vengeant", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{W}");
-		this.expansionSetCode = "ALA";
-		this.subtype.add("Ajani");
-		this.color.setRed(true);
-		this.color.setWhite(true);
-		this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), ""));
+    public AjaniVengeant(UUID ownerId) {
+        super(ownerId, 154, "Ajani Vengeant", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{W}");
+        this.expansionSetCode = "ALA";
+        this.subtype.add("Ajani");
+        this.color.setRed(true);
+        this.color.setWhite(true);
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), ""));
 
 
-		LoyaltyAbility ability1 = new LoyaltyAbility(new SkipNextUntapTargetEffect(), 1);
-		ability1.addTarget(new TargetPermanent());
-		this.addAbility(ability1);
+        LoyaltyAbility ability1 = new LoyaltyAbility(new SkipNextUntapTargetEffect(), 1);
+        ability1.addTarget(new TargetPermanent());
+        this.addAbility(ability1);
 
-		Effects effects1 = new Effects();
-		effects1.add(new DamageTargetEffect(3));
-		effects1.add(new GainLifeEffect(3));
-		LoyaltyAbility ability2 = new LoyaltyAbility(effects1, -2);
-		ability2.addTarget(new TargetCreatureOrPlayer());
-		this.addAbility(ability2);
+        Effects effects1 = new Effects();
+        effects1.add(new DamageTargetEffect(3));
+        effects1.add(new GainLifeEffect(3));
+        LoyaltyAbility ability2 = new LoyaltyAbility(effects1, -2);
+        ability2.addTarget(new TargetCreatureOrPlayer());
+        this.addAbility(ability2);
 
-		LoyaltyAbility ability3 = new LoyaltyAbility(new DestroyAllControlledTargetEffect(filter), -7);
-		ability3.addTarget(new TargetPlayer());
-		this.addAbility(ability3);
+        LoyaltyAbility ability3 = new LoyaltyAbility(new DestroyAllControlledTargetEffect(filter), -7);
+        ability3.addTarget(new TargetPlayer());
+        this.addAbility(ability3);
 
 
-	}
+    }
 
-	public AjaniVengeant(final AjaniVengeant card) {
-		super(card);
-	}
+    public AjaniVengeant(final AjaniVengeant card) {
+        super(card);
+    }
 
-	@Override
-	public AjaniVengeant copy() {
-		return new AjaniVengeant(this);
-	}
+    @Override
+    public AjaniVengeant copy() {
+        return new AjaniVengeant(this);
+    }
 }

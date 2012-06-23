@@ -42,47 +42,47 @@ import mage.game.permanent.Permanent;
  */
 public class SacrificeTargetEffect extends OneShotEffect<SacrificeTargetEffect> {
 
-	public SacrificeTargetEffect() {
-		super(Outcome.Sacrifice);
-	}
+    public SacrificeTargetEffect() {
+        super(Outcome.Sacrifice);
+    }
 
-	public SacrificeTargetEffect(String text) {
-		this();
-		staticText = text;
-	}
+    public SacrificeTargetEffect(String text) {
+        this();
+        staticText = text;
+    }
 
-	public SacrificeTargetEffect(final SacrificeTargetEffect effect) {
-		super(effect);
-	}
+    public SacrificeTargetEffect(final SacrificeTargetEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public SacrificeTargetEffect copy() {
-		return new SacrificeTargetEffect(this);
-	}
+    @Override
+    public SacrificeTargetEffect copy() {
+        return new SacrificeTargetEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		int affectedTargets = 0;
-		for (UUID permanentId : targetPointer.getTargets(game, source)) {
-			Permanent permanent = game.getPermanent(permanentId);
-			if (permanent != null) {
-				permanent.sacrifice(source.getSourceId(), game);
-				affectedTargets++;
-			}
-		}
-		return affectedTargets > 0;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        int affectedTargets = 0;
+        for (UUID permanentId : targetPointer.getTargets(game, source)) {
+            Permanent permanent = game.getPermanent(permanentId);
+            if (permanent != null) {
+                permanent.sacrifice(source.getSourceId(), game);
+                affectedTargets++;
+            }
+        }
+        return affectedTargets > 0;
+    }
 
-	@Override
-	public String getText(Mode mode) {
-		if ("".equals(staticText) && !mode.getTargets().isEmpty()) {
-			if (mode.getTargets().get(0).getNumberOfTargets() == 1) {
-				return "The controller of target " + mode.getTargets().get(0).getTargetName() + " sacrifices it";
-			} else {
-				return "The controller of " + mode.getTargets().get(0).getNumberOfTargets() + " target " + mode.getTargets().get(0).getTargetName() + " sacrifices it";
-			}
-		}
-		return staticText;
-	}
+    @Override
+    public String getText(Mode mode) {
+        if ("".equals(staticText) && !mode.getTargets().isEmpty()) {
+            if (mode.getTargets().get(0).getNumberOfTargets() == 1) {
+                return "The controller of target " + mode.getTargets().get(0).getTargetName() + " sacrifices it";
+            } else {
+                return "The controller of " + mode.getTargets().get(0).getNumberOfTargets() + " target " + mode.getTargets().get(0).getTargetName() + " sacrifices it";
+            }
+        }
+        return staticText;
+    }
 
 }

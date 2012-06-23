@@ -39,18 +39,18 @@ import mage.game.events.GameEvent;
  */
  public class DelayedTriggeredAbilities extends AbilitiesImpl<DelayedTriggeredAbility> {
 
-	 public DelayedTriggeredAbilities() {}
+     public DelayedTriggeredAbilities() {}
 
-	 public DelayedTriggeredAbilities(final DelayedTriggeredAbilities abilities) {
-		super(abilities);
-	}
+     public DelayedTriggeredAbilities(final DelayedTriggeredAbilities abilities) {
+        super(abilities);
+    }
 
-	@Override
-	public DelayedTriggeredAbilities copy() {
-		return new DelayedTriggeredAbilities(this);
-	}
-    
-	public void checkTriggers(GameEvent event, Game game) {
+    @Override
+    public DelayedTriggeredAbilities copy() {
+        return new DelayedTriggeredAbilities(this);
+    }
+
+    public void checkTriggers(GameEvent event, Game game) {
         if (this.size() > 0) {
             for (Iterator<DelayedTriggeredAbility> it = this.iterator();it.hasNext();) {
                 DelayedTriggeredAbility ability = it.next();
@@ -60,7 +60,7 @@ import mage.game.events.GameEvent;
                 }
             }
         }
-	}
+    }
 
     public void removeEndOfTurnAbilities() {
         for (Iterator<DelayedTriggeredAbility> it = this.iterator();it.hasNext();) {

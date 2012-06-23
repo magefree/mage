@@ -75,7 +75,7 @@ class ApeToken extends Token {
         this.subtype.add("Ape");
         color = ObjectColor.GREEN;
         power = new MageInt(3);
-		toughness = new MageInt(3);
+        toughness = new MageInt(3);
         this.addAbility(TrampleAbility.getInstance());
     }
 }

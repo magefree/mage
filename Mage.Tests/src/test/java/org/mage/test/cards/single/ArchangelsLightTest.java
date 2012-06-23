@@ -21,7 +21,7 @@ public class ArchangelsLightTest extends CardTestPlayerBase {
 
         setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
-        
+
         assertLife(playerA, 32);
         assertLife(playerB, 20);
         assertGraveyardCount(playerA, 1);
@@ -29,5 +29,5 @@ public class ArchangelsLightTest extends CardTestPlayerBase {
         Assert.assertEquals(currentGame.getPlayer(playerA.getId()).getLibrary().size(), 77);
     }
 
-    
+
 }

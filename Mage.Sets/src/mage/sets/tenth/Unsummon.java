@@ -41,20 +41,20 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Unsummon extends CardImpl<Unsummon> {
 
-	public Unsummon(UUID ownerId) {
-		super(ownerId, 122, "Unsummon", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
-		this.expansionSetCode = "10E";
-		this.color.setBlue(true);
-		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-		this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-	}
+    public Unsummon(UUID ownerId) {
+        super(ownerId, 122, "Unsummon", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
+        this.expansionSetCode = "10E";
+        this.color.setBlue(true);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+    }
 
-	public Unsummon(final Unsummon card) {
-		super(card);
-	}
+    public Unsummon(final Unsummon card) {
+        super(card);
+    }
 
-	@Override
-	public Unsummon copy() {
-		return new Unsummon(this);
-	}
+    @Override
+    public Unsummon copy() {
+        return new Unsummon(this);
+    }
 }

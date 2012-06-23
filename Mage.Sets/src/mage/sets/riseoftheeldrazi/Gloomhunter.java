@@ -45,7 +45,7 @@ public class Gloomhunter extends CardImpl<Gloomhunter> {
         super(ownerId, 111, "Gloomhunter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "ROE";
         this.subtype.add("Bat");
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());

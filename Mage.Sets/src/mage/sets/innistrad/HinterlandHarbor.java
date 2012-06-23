@@ -49,32 +49,32 @@ import java.util.UUID;
  */
 public class HinterlandHarbor extends CardImpl<HinterlandHarbor> {
 
-	private static final FilterLandPermanent filter = new FilterLandPermanent();
+    private static final FilterLandPermanent filter = new FilterLandPermanent();
 
-	static {
-		filter.getSubtype().add("Forest");
-		filter.getSubtype().add("Island");
-		filter.setScopeSubtype(ComparisonScope.Any);
-		filter.setMessage("Forest or an Island");
-	}
+    static {
+        filter.getSubtype().add("Forest");
+        filter.getSubtype().add("Island");
+        filter.setScopeSubtype(ComparisonScope.Any);
+        filter.setMessage("Forest or an Island");
+    }
 
-	public HinterlandHarbor(UUID ownerId) {
-		super(ownerId, 241, "Hinterland Harbor", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-		this.expansionSetCode = "ISD";
+    public HinterlandHarbor(UUID ownerId) {
+        super(ownerId, 241, "Hinterland Harbor", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+        this.expansionSetCode = "ISD";
 
-		Condition controls = new UnlessCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0));
-		String abilityText = "tap it unless you control a " + filter.getMessage();
-		this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
-		this.addAbility(new GreenManaAbility());
-		this.addAbility(new BlueManaAbility());
-	}
+        Condition controls = new UnlessCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0));
+        String abilityText = "tap it unless you control a " + filter.getMessage();
+        this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
+        this.addAbility(new GreenManaAbility());
+        this.addAbility(new BlueManaAbility());
+    }
 
-	public HinterlandHarbor(final HinterlandHarbor card) {
-		super(card);
-	}
+    public HinterlandHarbor(final HinterlandHarbor card) {
+        super(card);
+    }
 
-	@Override
-	public HinterlandHarbor copy() {
-		return new HinterlandHarbor(this);
-	}
+    @Override
+    public HinterlandHarbor copy() {
+        return new HinterlandHarbor(this);
+    }
 }

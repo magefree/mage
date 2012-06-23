@@ -22,7 +22,7 @@ public class DlgParams {
     public BigCard bigCard;
     public FeedbackPanel feedbackPanel;
     public UUID gameId;
-    
+
     private int playerID;
 
     private CardsView cards;
@@ -30,16 +30,16 @@ public class DlgParams {
     //private ArrayList<DeckInfo> deckList;
     private ArrayList<Object> objectList;
 
-	private String title;
+    private String title;
     private int opponentID;
     boolean isOptional = false;
     boolean isChooseAbility = false;
     boolean isCancelStopsPlaying = true;
 
     boolean isAI = false;
-    
-	public HashSet<String> manaChoices = new HashSet<String>();
-    
+
+    public HashSet<String> manaChoices = new HashSet<String>();
+
     public int getPlayerID() {
         return playerID;
     }
@@ -55,7 +55,7 @@ public class DlgParams {
     public void setOpponentID(int opponentID) {
         this.opponentID = opponentID;
     }
-   
+
     public String getTitle() {
         return title;
     }
@@ -73,7 +73,7 @@ public class DlgParams {
     public void setMessage(String message) {
         this.message = message;
     }
-    
+
     public HashSet<String> getManaChoices() {
         return manaChoices;
     }
@@ -81,7 +81,7 @@ public class DlgParams {
     public void setManaChoices(HashSet<String> manaChoices) {
         this.manaChoices = manaChoices;
     }
-    
+
     public boolean isOptional() {
         return isOptional;
     }
@@ -90,53 +90,53 @@ public class DlgParams {
         this.isOptional = isOptional;
     }
 
-	public boolean isChooseAbility() {
-		return isChooseAbility;
-	}
+    public boolean isChooseAbility() {
+        return isChooseAbility;
+    }
 
-	public void setChooseAbility(boolean isChooseAbility) {
-		this.isChooseAbility = isChooseAbility;
-	}
-	
+    public void setChooseAbility(boolean isChooseAbility) {
+        this.isChooseAbility = isChooseAbility;
+    }
+
     public ArrayList<String> getStringList() {
-		return stringList;
-	}
+        return stringList;
+    }
 
-	public void setStringList(ArrayList<String> stringList) {
-		this.stringList = stringList;
-	}
+    public void setStringList(ArrayList<String> stringList) {
+        this.stringList = stringList;
+    }
 
-	/*public ArrayList<DeckInfo> getDeckList() {
-		return deckList;
-	}
+    /*public ArrayList<DeckInfo> getDeckList() {
+        return deckList;
+    }
 
-	public void setDeckList(ArrayList<DeckInfo> deckList) {
-		this.deckList = deckList;
-	}*/
-	
-	public ArrayList<Object> getObjectList() {
-		return objectList;
-	}
+    public void setDeckList(ArrayList<DeckInfo> deckList) {
+        this.deckList = deckList;
+    }*/
 
-	public void setObjectList(ArrayList<Object> objectList) {
-		this.objectList = objectList;
-	}
+    public ArrayList<Object> getObjectList() {
+        return objectList;
+    }
+
+    public void setObjectList(ArrayList<Object> objectList) {
+        this.objectList = objectList;
+    }
 
     public boolean isAI() {
-		return isAI;
-	}
+        return isAI;
+    }
 
-	public void setAI(boolean isAI) {
-		this.isAI = isAI;
-	}
-	
+    public void setAI(boolean isAI) {
+        this.isAI = isAI;
+    }
+
     public boolean isCancelStopsPlaying() {
-		return isCancelStopsPlaying;
-	}
+        return isCancelStopsPlaying;
+    }
 
-	public void setCancelStopsPlaying(boolean isCancelStopsPlaying) {
-		this.isCancelStopsPlaying = isCancelStopsPlaying;
-	}
+    public void setCancelStopsPlaying(boolean isCancelStopsPlaying) {
+        this.isCancelStopsPlaying = isCancelStopsPlaying;
+    }
 
     public CardsView getCards() {
         return cards;

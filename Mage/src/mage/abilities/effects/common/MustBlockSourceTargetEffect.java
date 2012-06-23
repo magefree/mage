@@ -41,46 +41,46 @@ import mage.game.permanent.Permanent;
  */
 public class MustBlockSourceTargetEffect extends RequirementEffect<MustBlockSourceTargetEffect> {
 
-	public MustBlockSourceTargetEffect() {
-		this(Duration.EndOfTurn);
-	}
+    public MustBlockSourceTargetEffect() {
+        this(Duration.EndOfTurn);
+    }
 
-	public MustBlockSourceTargetEffect(Duration duration) {
-		super(duration);
-		staticText = "Target creature blocks {this} this turn if able";
-	}
+    public MustBlockSourceTargetEffect(Duration duration) {
+        super(duration);
+        staticText = "Target creature blocks {this} this turn if able";
+    }
 
-	public MustBlockSourceTargetEffect(final MustBlockSourceTargetEffect effect) {
-		super(effect);
-	}
+    public MustBlockSourceTargetEffect(final MustBlockSourceTargetEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean applies(Permanent permanent, Ability source, Game game) {
-		Permanent creature = game.getPermanent(source.getFirstTarget());
-		if (creature != null && creature.getId().equals(permanent.getId())) {
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        Permanent creature = game.getPermanent(source.getFirstTarget());
+        if (creature != null && creature.getId().equals(permanent.getId())) {
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public boolean mustAttack(Game game) {
-		return false;
-	}
+    @Override
+    public boolean mustAttack(Game game) {
+        return false;
+    }
 
-	@Override
-	public boolean mustBlock(Game game) {
-		return true;
-	}
+    @Override
+    public boolean mustBlock(Game game) {
+        return true;
+    }
 
-	@Override
-	public UUID mustBlockAttacker(Ability source, Game game) {
-		return source.getSourceId();
-	}
+    @Override
+    public UUID mustBlockAttacker(Ability source, Game game) {
+        return source.getSourceId();
+    }
 
-	@Override
-	public MustBlockSourceTargetEffect copy() {
-		return new MustBlockSourceTargetEffect(this);
-	}
+    @Override
+    public MustBlockSourceTargetEffect copy() {
+        return new MustBlockSourceTargetEffect(this);
+    }
 
 }

@@ -55,10 +55,10 @@ public class ViridianHarvest extends CardImpl<ViridianHarvest> {
         this.color.setGreen(true);
 
         TargetPermanent auraTarget = new TargetArtifactPermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Benefit));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		this.addAbility(ability);
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Benefit));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
 
         this.addAbility(new DiesAttachedTriggeredAbility(new GainLifeEffect(6), "enchanted artifact"));
     }

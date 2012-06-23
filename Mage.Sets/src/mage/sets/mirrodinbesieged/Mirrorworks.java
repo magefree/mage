@@ -54,20 +54,20 @@ import mage.util.CardUtil;
  */
 public class Mirrorworks extends CardImpl<Mirrorworks> {
 
-	public Mirrorworks(UUID ownerId) {
-		super(ownerId, 114, "Mirrorworks", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");
-		this.expansionSetCode = "MBS";
-		this.addAbility(new MirrorworksAbility());
-	}
+    public Mirrorworks(UUID ownerId) {
+        super(ownerId, 114, "Mirrorworks", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");
+        this.expansionSetCode = "MBS";
+        this.addAbility(new MirrorworksAbility());
+    }
 
-	public Mirrorworks(final Mirrorworks card) {
-		super(card);
-	}
+    public Mirrorworks(final Mirrorworks card) {
+        super(card);
+    }
 
-	@Override
-	public Mirrorworks copy() {
-		return new Mirrorworks(this);
-	}
+    @Override
+    public Mirrorworks copy() {
+        return new Mirrorworks(this);
+    }
 
 }
 
@@ -89,64 +89,64 @@ class MirrorworksAbility extends TriggeredAbilityImpl<MirrorworksAbility> {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && !event.getTargetId().equals(this.getSourceId())) {
-			ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-			if (zEvent.getToZone() == Constants.Zone.BATTLEFIELD) {
-				Permanent permanent = game.getPermanent(event.getTargetId());
-				if (permanent != null && !(permanent instanceof PermanentToken) && permanent.getCardType().contains(CardType.ARTIFACT)) {
-					getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
-					return true;
-				}
-			}
-		}
-		return false;
+            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+            if (zEvent.getToZone() == Constants.Zone.BATTLEFIELD) {
+                Permanent permanent = game.getPermanent(event.getTargetId());
+                if (permanent != null && !(permanent instanceof PermanentToken) && permanent.getCardType().contains(CardType.ARTIFACT)) {
+                    getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override
     public String getRule() {
         return "Whenever another nontoken artifact enters the battlefield under your control, you may pay {2}. If you do, put a token that's a copy of that artifact onto the battlefield";
     }
-	
+
 }
 
 class MirrorworksEffect extends OneShotEffect<MirrorworksEffect> {
 
-	public MirrorworksEffect() {
-		super(Constants.Outcome.PutCreatureInPlay);
-		this.staticText = "put a token that's a copy of that artifact onto the battlefield";
-	}
+    public MirrorworksEffect() {
+        super(Constants.Outcome.PutCreatureInPlay);
+        this.staticText = "put a token that's a copy of that artifact onto the battlefield";
+    }
 
-	public MirrorworksEffect(final MirrorworksEffect effect) {
-		super(effect);
-	}
+    public MirrorworksEffect(final MirrorworksEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public MirrorworksEffect copy() {
-		return new MirrorworksEffect(this);
-	}
+    @Override
+    public MirrorworksEffect copy() {
+        return new MirrorworksEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-		if (player != null) {
-			Cost cost = new ManaCostsImpl("{2}");
-			if (player.chooseUse(outcome, "Pay " + cost.getText() + " and " + staticText, game)) {
-				cost.clearPaid();
-				if (cost.pay(source, game, source.getId(), source.getControllerId(), false)) {
-					UUID targetId = targetPointer.getFirst(game, source);
-					if (targetId != null) {
-						MageObject target = game.getLastKnownInformation(targetId, Constants.Zone.BATTLEFIELD);
-						if (target != null && target instanceof Permanent) {
-							EmptyToken token = new EmptyToken();
-							CardUtil.copyTo(token).from((Permanent)target);
-							token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
-							return true;
-						}
-					}
-				}
-			}
-		}
-		return false;
-	}
+        if (player != null) {
+            Cost cost = new ManaCostsImpl("{2}");
+            if (player.chooseUse(outcome, "Pay " + cost.getText() + " and " + staticText, game)) {
+                cost.clearPaid();
+                if (cost.pay(source, game, source.getId(), source.getControllerId(), false)) {
+                    UUID targetId = targetPointer.getFirst(game, source);
+                    if (targetId != null) {
+                        MageObject target = game.getLastKnownInformation(targetId, Constants.Zone.BATTLEFIELD);
+                        if (target != null && target instanceof Permanent) {
+                            EmptyToken token = new EmptyToken();
+                            CardUtil.copyTo(token).from((Permanent)target);
+                            token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
 
 }
 

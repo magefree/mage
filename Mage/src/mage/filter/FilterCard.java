@@ -40,53 +40,53 @@ import java.util.*;
  */
 public class FilterCard<T extends FilterCard<T>> extends FilterObject<Card, FilterCard<T>> {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	protected List<UUID> ownerId = new ArrayList<UUID>();
-	protected boolean notOwner;
-	protected List<String> expansionSetCode = new ArrayList<String>();
-	protected boolean notExpansionSetCode;
+    protected List<UUID> ownerId = new ArrayList<UUID>();
+    protected boolean notOwner;
+    protected List<String> expansionSetCode = new ArrayList<String>();
+    protected boolean notExpansionSetCode;
     protected TargetController owner = TargetController.ANY;
 
-	/**
-	 * Text that appears on card.
-	 * At the moment only card name and rules are checked.
-	 */
-	protected String text = "";
+    /**
+     * Text that appears on card.
+     * At the moment only card name and rules are checked.
+     */
+    protected String text = "";
 
-	public FilterCard() {
-		super("card");
-	}
+    public FilterCard() {
+        super("card");
+    }
 
-	public FilterCard(String name) {
-		super(name);
-	}
+    public FilterCard(String name) {
+        super(name);
+    }
 
-	public FilterCard(FilterCard<T> filter) {
-		super(filter);
+    public FilterCard(FilterCard<T> filter) {
+        super(filter);
         this.ownerId.addAll(filter.ownerId);
-		this.notOwner = filter.notOwner;
+        this.notOwner = filter.notOwner;
         this.expansionSetCode.addAll(filter.expansionSetCode);
-		this.notExpansionSetCode = filter.notExpansionSetCode;
+        this.notExpansionSetCode = filter.notExpansionSetCode;
         this.owner = filter.owner;
-	}
+    }
 
-	@Override
-	public boolean match(Card card, Game game) {
-		if (!super.match(card, game))
-			return notFilter;
+    @Override
+    public boolean match(Card card, Game game) {
+        if (!super.match(card, game))
+            return notFilter;
 
-		if (ownerId.size() > 0 && ownerId.contains(card.getOwnerId()) == notOwner)
-			return notFilter;
+        if (ownerId.size() > 0 && ownerId.contains(card.getOwnerId()) == notOwner)
+            return notFilter;
 
-		if (expansionSetCode.size() > 0 && expansionSetCode.contains(card.getExpansionSetCode()) == notExpansionSetCode)
-			return notFilter;
+        if (expansionSetCode.size() > 0 && expansionSetCode.contains(card.getExpansionSetCode()) == notExpansionSetCode)
+            return notFilter;
 
-		if (text.length() > 0) {
-			// first check in card name
-			boolean filterOut = !card.getName().toLowerCase().contains(text.toLowerCase());
-			// if couldn't find
-			if (filterOut) {
+        if (text.length() > 0) {
+            // first check in card name
+            boolean filterOut = !card.getName().toLowerCase().contains(text.toLowerCase());
+            // if couldn't find
+            if (filterOut) {
                 //separate by spaces
                 String[] tokens = text.toLowerCase().split(" ");
                 int count = 0;
@@ -113,81 +113,81 @@ public class FilterCard<T extends FilterCard<T>> extends FilterObject<Card, Filt
                     }
                 }
 
-				if (found < count)
-					return notFilter;
-			}
+                if (found < count)
+                    return notFilter;
+            }
 
-		}
-		
-		return !notFilter;
-	}
-    
-	public boolean match(Card card, UUID playerId, Game game) {
-		if (!this.match(card, game))
-			return notFilter;
+        }
 
-		if (owner != TargetController.ANY && playerId != null) {
-			switch(owner) {
-				case YOU:
-					if (!card.getOwnerId().equals(playerId))
-						return notFilter;
-					break;
-				case OPPONENT:
-					if (!game.getOpponents(playerId).contains(card.getOwnerId()))
-						return notFilter;
-					break;
-				case NOT_YOU:
-					if (card.getOwnerId().equals(playerId))
-						return notFilter;
-					break;
-			}
-		}
+        return !notFilter;
+    }
 
-		return !notFilter;
-	}
+    public boolean match(Card card, UUID playerId, Game game) {
+        if (!this.match(card, game))
+            return notFilter;
 
-	public List<UUID> getOwnerId() {
-		return ownerId;
-	}
+        if (owner != TargetController.ANY && playerId != null) {
+            switch(owner) {
+                case YOU:
+                    if (!card.getOwnerId().equals(playerId))
+                        return notFilter;
+                    break;
+                case OPPONENT:
+                    if (!game.getOpponents(playerId).contains(card.getOwnerId()))
+                        return notFilter;
+                    break;
+                case NOT_YOU:
+                    if (card.getOwnerId().equals(playerId))
+                        return notFilter;
+                    break;
+            }
+        }
 
-	public void setNotOwner(boolean notOwner) {
-		this.notOwner = notOwner;
-	}
-	
-	public List<String> getExpansionSetCode() {
-		return expansionSetCode;
-	}
+        return !notFilter;
+    }
 
-	public void setNotExpansionSetCode(boolean notExpansionSetCode) {
-		this.notExpansionSetCode = notExpansionSetCode;
-	}
+    public List<UUID> getOwnerId() {
+        return ownerId;
+    }
 
-	public void setText(String text) {
-		this.text = text;
-	}
+    public void setNotOwner(boolean notOwner) {
+        this.notOwner = notOwner;
+    }
+
+    public List<String> getExpansionSetCode() {
+        return expansionSetCode;
+    }
+
+    public void setNotExpansionSetCode(boolean notExpansionSetCode) {
+        this.notExpansionSetCode = notExpansionSetCode;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
 
     public void setTargetOwner(TargetController owner) {
-		this.owner = owner;
-	}
+        this.owner = owner;
+    }
 
-	public boolean matchOwner(UUID testOwnerId) {
-		if (ownerId.size() > 0 && ownerId.contains(testOwnerId) == notOwner)
-			return false;
-		return true;
-	}
+    public boolean matchOwner(UUID testOwnerId) {
+        if (ownerId.size() > 0 && ownerId.contains(testOwnerId) == notOwner)
+            return false;
+        return true;
+    }
 
-	public Set<Card> filter(Set<Card> cards, Game game) {
-		Set<Card> filtered = new HashSet<Card>();
-		for (Card card: cards) {
-			if (match(card, game)) {
-				filtered.add(card);
-			}
-		}
-		return filtered;
-	}
+    public Set<Card> filter(Set<Card> cards, Game game) {
+        Set<Card> filtered = new HashSet<Card>();
+        for (Card card: cards) {
+            if (match(card, game)) {
+                filtered.add(card);
+            }
+        }
+        return filtered;
+    }
 
-	@Override
-	public FilterCard<T> copy() {
-		return new FilterCard<T>(this);
-	}
+    @Override
+    public FilterCard<T> copy() {
+        return new FilterCard<T>(this);
+    }
 }

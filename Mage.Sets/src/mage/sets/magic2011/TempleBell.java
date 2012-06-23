@@ -43,19 +43,19 @@ import mage.cards.CardImpl;
  */
 public class TempleBell extends CardImpl<TempleBell> {
 
-	public TempleBell(UUID ownerId) {
-		super(ownerId, 217, "Temple Bell", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-		this.expansionSetCode = "M11";
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardAllEffect(1), new TapSourceCost()));
-	}
+    public TempleBell(UUID ownerId) {
+        super(ownerId, 217, "Temple Bell", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
+        this.expansionSetCode = "M11";
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardAllEffect(1), new TapSourceCost()));
+    }
 
-	public TempleBell(final TempleBell card) {
-		super(card);
-	}
+    public TempleBell(final TempleBell card) {
+        super(card);
+    }
 
-	@Override
-	public TempleBell copy() {
-		return new TempleBell(this);
-	}
+    @Override
+    public TempleBell copy() {
+        return new TempleBell(this);
+    }
 
 }

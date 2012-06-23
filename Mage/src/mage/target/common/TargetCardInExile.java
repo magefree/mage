@@ -44,26 +44,26 @@ import java.util.UUID;
 public class TargetCardInExile extends TargetCard<TargetCardInExile> {
 
     private UUID zoneId;
-    
+
     public TargetCardInExile(FilterCard filter, UUID zoneId) {
         this(1, 1, filter, zoneId);
     }
 
-	public TargetCardInExile(int minNumTargets, int maxNumTargets, FilterCard filter, UUID zoneId) {
-		super(minNumTargets, maxNumTargets, Zone.EXILED, filter);
+    public TargetCardInExile(int minNumTargets, int maxNumTargets, FilterCard filter, UUID zoneId) {
+        super(minNumTargets, maxNumTargets, Zone.EXILED, filter);
         this.zoneId = zoneId;
-		this.targetName = filter.getMessage();
-	}
+        this.targetName = filter.getMessage();
+    }
 
     public TargetCardInExile(final TargetCardInExile target) {
         super(target);
         this.zoneId = target.zoneId;
     }
 
-   	@Override
-	public boolean canTarget(UUID id, Ability source, Game game) {
-		Card card = game.getCard(id);
-		if (card != null && game.getState().getZone(card.getId()) == Zone.EXILED) {
+       @Override
+    public boolean canTarget(UUID id, Ability source, Game game) {
+        Card card = game.getCard(id);
+        if (card != null && game.getState().getZone(card.getId()) == Zone.EXILED) {
             ExileZone exile;
             if (zoneId != null) {
                 exile = game.getExile().getExileZone(zoneId);
@@ -71,11 +71,11 @@ public class TargetCardInExile extends TargetCard<TargetCardInExile> {
                 exile = game.getExile().getPermanentExile();
             }
             if (exile != null && exile.contains(id)) {
-    			return filter.match(card, game);
+                return filter.match(card, game);
             }
         }
-		return false;
-	}
+        return false;
+    }
 
     @Override
     public TargetCardInExile copy() {

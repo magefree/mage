@@ -49,8 +49,8 @@ public class TowerOfEons extends CardImpl<TowerOfEons> {
     public TowerOfEons (UUID ownerId) {
         super(ownerId, 266, "Tower of Eons", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
         this.expansionSetCode = "MRD";
-		Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainLifeEffect(10), new GenericManaCost(8));
-		ability.addCost(new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainLifeEffect(10), new GenericManaCost(8));
+        ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
 

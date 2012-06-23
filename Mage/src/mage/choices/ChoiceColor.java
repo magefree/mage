@@ -36,38 +36,38 @@ import mage.ObjectColor;
  */
 public class ChoiceColor extends ChoiceImpl<ChoiceColor> {
 
-	public ChoiceColor() {
+    public ChoiceColor() {
         super(true);
-		this.choices.add("Black");
-		this.choices.add("Blue");
-		this.choices.add("Green");
-		this.choices.add("Red");
-		this.choices.add("White");
-		this.message = "Choose color";
-	}
+        this.choices.add("Black");
+        this.choices.add("Blue");
+        this.choices.add("Green");
+        this.choices.add("Red");
+        this.choices.add("White");
+        this.message = "Choose color";
+    }
 
-	public ChoiceColor(final ChoiceColor choice) {
-		super(choice);
-	}
+    public ChoiceColor(final ChoiceColor choice) {
+        super(choice);
+    }
 
-	@Override
-	public ChoiceColor copy() {
-		return new ChoiceColor(this);
-	}
+    @Override
+    public ChoiceColor copy() {
+        return new ChoiceColor(this);
+    }
 
-	public ObjectColor getColor() {
-		ObjectColor color = new ObjectColor();
-		if (choice.equals("Black"))
-			color.setBlack(true);
-		else if (choice.equals("Blue"))
-			color.setBlue(true);
-		else if (choice.equals("Green"))
-			color.setGreen(true);
-		else if (choice.equals("Red"))
-			color.setRed(true);
-		else if (choice.equals("White"))
-			color.setWhite(true);
-		return color;
-	}
+    public ObjectColor getColor() {
+        ObjectColor color = new ObjectColor();
+        if (choice.equals("Black"))
+            color.setBlack(true);
+        else if (choice.equals("Blue"))
+            color.setBlue(true);
+        else if (choice.equals("Green"))
+            color.setGreen(true);
+        else if (choice.equals("Red"))
+            color.setRed(true);
+        else if (choice.equals("White"))
+            color.setWhite(true);
+        return color;
+    }
 
 }

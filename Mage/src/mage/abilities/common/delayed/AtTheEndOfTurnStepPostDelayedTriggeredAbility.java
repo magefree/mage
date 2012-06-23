@@ -37,13 +37,13 @@ import mage.game.events.GameEvent;
  */
 public class AtTheEndOfTurnStepPostDelayedTriggeredAbility extends DelayedTriggeredAbility<AtTheEndOfTurnStepPostDelayedTriggeredAbility> {
 
-	public AtTheEndOfTurnStepPostDelayedTriggeredAbility(Effect effect) {
+    public AtTheEndOfTurnStepPostDelayedTriggeredAbility(Effect effect) {
         super(effect);
     }
 
-	public AtTheEndOfTurnStepPostDelayedTriggeredAbility(Effect effect, boolean usesStack) {
+    public AtTheEndOfTurnStepPostDelayedTriggeredAbility(Effect effect, boolean usesStack) {
         super(effect);
-		this.usesStack = usesStack;
+        this.usesStack = usesStack;
     }
 
 

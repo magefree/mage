@@ -38,18 +38,18 @@ import mage.filter.Filter.ComparisonScope;
  */
 public class ListComparer<T> {
 
-	public boolean compare(List<T> list1, List<T> list2, ComparisonScope scope, boolean negate) {
-		if (scope == ComparisonScope.All) {
-			if (list2.containsAll(list1) == negate) {
-				return false;
-			}
-		}
-		else {
-			List<T> check = new ArrayList<T>(list1);
-			if (check.removeAll(list2) == negate) {
-				return false;
-			}
-		}
-		return true;
-	}
+    public boolean compare(List<T> list1, List<T> list2, ComparisonScope scope, boolean negate) {
+        if (scope == ComparisonScope.All) {
+            if (list2.containsAll(list1) == negate) {
+                return false;
+            }
+        }
+        else {
+            List<T> check = new ArrayList<T>(list1);
+            if (check.removeAll(list2) == negate) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

@@ -39,32 +39,32 @@ import mage.cards.Card;
  */
 public abstract class DeckValidatorImpl implements DeckValidator {
 
-	protected String name;
+    protected String name;
 
-	protected Map<String, String> invalid = new HashMap<String, String>();
+    protected Map<String, String> invalid = new HashMap<String, String>();
 
-	public DeckValidatorImpl(String name) {
-		this.name = name;
-	}
+    public DeckValidatorImpl(String name) {
+        this.name = name;
+    }
 
-	@Override
-	public String getName() {
-		return name;
-	}
+    @Override
+    public String getName() {
+        return name;
+    }
 
-	protected void countCards(Map<String, Integer> counts, Collection<Card> cards) {
-		for (Card card: cards) {
-			if (counts.containsKey(card.getName())) {
-				counts.put(card.getName(), counts.get(card.getName()) + 1);
-			}
-			else {
-				counts.put(card.getName(), 1);
-			}
-		}
-	}
+    protected void countCards(Map<String, Integer> counts, Collection<Card> cards) {
+        for (Card card: cards) {
+            if (counts.containsKey(card.getName())) {
+                counts.put(card.getName(), counts.get(card.getName()) + 1);
+            }
+            else {
+                counts.put(card.getName(), 1);
+            }
+        }
+    }
 
-	@Override
-	public Map<String, String> getInvalid() {
-		return invalid;
-	}
+    @Override
+    public Map<String, String> getInvalid() {
+        return invalid;
+    }
 }

@@ -55,7 +55,7 @@ public class KuldothaRebirth extends CardImpl<KuldothaRebirth> {
     public KuldothaRebirth (UUID ownerId) {
         super(ownerId, 96, "Kuldotha Rebirth", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");
         this.expansionSetCode = "SOM";
-		this.color.setRed(true);
+        this.color.setRed(true);
         this.getSpellAbility().addEffect(new CreateTokenEffect(new GoblinToken(), 3));
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
     }

@@ -37,29 +37,29 @@ import mage.players.Player;
  */
 public class Seat implements Serializable {
 
-//	private final static Logger logger = Logger.getLogger(Seat.class);
+//    private final static Logger logger = Logger.getLogger(Seat.class);
 
-	private String playerType;
-	private Player player;
+    private String playerType;
+    private Player player;
 
-	public Seat(String playerType) {
-		this.playerType = playerType;
-	}
+    public Seat(String playerType) {
+        this.playerType = playerType;
+    }
 
-	public String getPlayerType() {
-		return playerType;
-	}
+    public String getPlayerType() {
+        return playerType;
+    }
 
-	public void setPlayerType(String playerType) {
-		this.playerType = playerType;
-	}
+    public void setPlayerType(String playerType) {
+        this.playerType = playerType;
+    }
 
-	public Player getPlayer() {
-		return player;
-	}
+    public Player getPlayer() {
+        return player;
+    }
 
-	public void setPlayer(Player player) {
-		this.player = player;
-	}
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
 
 }

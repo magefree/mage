@@ -54,11 +54,11 @@ public class GraftedExoskeleton extends CardImpl<GraftedExoskeleton> {
         this.subtype.add("Equipment");
 
         this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(2)));
-		// Equipped creature gets +2/+2 and has infect.
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(InfectAbility.getInstance(), Constants.AttachmentType.EQUIPMENT)));
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
-		// Whenever Grafted Exoskeleton becomes unattached from a permanent, sacrifice that permanent.
-		this.addAbility(new UnattachedTriggeredAbility(new SacrificeEquippedEffect(), false));
+        // Equipped creature gets +2/+2 and has infect.
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(InfectAbility.getInstance(), Constants.AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
+        // Whenever Grafted Exoskeleton becomes unattached from a permanent, sacrifice that permanent.
+        this.addAbility(new UnattachedTriggeredAbility(new SacrificeEquippedEffect(), false));
     }
 
     public GraftedExoskeleton(final GraftedExoskeleton card) {

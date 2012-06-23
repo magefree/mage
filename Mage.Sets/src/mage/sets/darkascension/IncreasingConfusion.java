@@ -73,7 +73,7 @@ public class IncreasingConfusion extends CardImpl<IncreasingConfusion> {
 }
 
 class IncreasingConfusionEffect extends OneShotEffect<IncreasingConfusionEffect> {
-    
+
     public IncreasingConfusionEffect() {
         super(Constants.Outcome.Detriment);
         staticText = "Target player puts the top X cards of his or her library into his or her graveyard. If Increasing Confusion was cast from a graveyard, that player puts twice that many cards into his or her graveyard instead";

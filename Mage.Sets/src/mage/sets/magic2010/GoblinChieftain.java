@@ -48,33 +48,33 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class GoblinChieftain extends CardImpl<GoblinChieftain> {
 
-	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblin creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblin creatures");
 
-	static {
-		filter.getSubtype().add("Goblin");
+    static {
+        filter.getSubtype().add("Goblin");
         filter.setScopeSupertype(Filter.ComparisonScope.Any);
-	}
+    }
 
-	public GoblinChieftain(UUID ownerId) {
-		super(ownerId, 139, "Goblin Chieftain", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
-		this.expansionSetCode = "M10";
-		this.subtype.add("Goblin");
-		this.color.setRed(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+    public GoblinChieftain(UUID ownerId) {
+        super(ownerId, 139, "Goblin Chieftain", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
+        this.expansionSetCode = "M10";
+        this.subtype.add("Goblin");
+        this.color.setRed(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-		this.addAbility(HasteAbility.getInstance());
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter, true)));
-	}
+        this.addAbility(HasteAbility.getInstance());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter, true)));
+    }
 
-	public GoblinChieftain(final GoblinChieftain card) {
-		super(card);
-	}
+    public GoblinChieftain(final GoblinChieftain card) {
+        super(card);
+    }
 
-	@Override
-	public GoblinChieftain copy() {
-		return new GoblinChieftain(this);
-	}
+    @Override
+    public GoblinChieftain copy() {
+        return new GoblinChieftain(this);
+    }
 
 }

@@ -35,12 +35,12 @@ import mage.game.Game;
 
 public interface StackObject extends MageObject {
 
-//	public Card getCard();
-	public boolean resolve(Game game);
-	public UUID getSourceId();
-	public UUID getControllerId();
-	public void counter(UUID sourceId, Game game);
-	public Ability getStackAbility();
-	@Override
-	public StackObject copy();
+//    public Card getCard();
+    public boolean resolve(Game game);
+    public UUID getSourceId();
+    public UUID getControllerId();
+    public void counter(UUID sourceId, Game game);
+    public Ability getStackAbility();
+    @Override
+    public StackObject copy();
 }

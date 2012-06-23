@@ -41,24 +41,24 @@ import mage.cards.CardImpl;
  */
 public class GarruksCompanion extends CardImpl<GarruksCompanion> {
 
-	public GarruksCompanion(UUID ownerId) {
-		super(ownerId, 176, "Garruk's Companion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}{G}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Beast");
-		this.color.setGreen(true);
-		this.power = new MageInt(3);
-		this.toughness = new MageInt(2);
+    public GarruksCompanion(UUID ownerId) {
+        super(ownerId, 176, "Garruk's Companion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}{G}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Beast");
+        this.color.setGreen(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(2);
 
-		this.addAbility(TrampleAbility.getInstance());
-	}
+        this.addAbility(TrampleAbility.getInstance());
+    }
 
-	public GarruksCompanion(final GarruksCompanion card) {
-		super(card);
-	}
+    public GarruksCompanion(final GarruksCompanion card) {
+        super(card);
+    }
 
-	@Override
-	public GarruksCompanion copy() {
-		return new GarruksCompanion(this);
-	}
+    @Override
+    public GarruksCompanion copy() {
+        return new GarruksCompanion(this);
+    }
 
 }

@@ -92,71 +92,71 @@ public class AfflictedDeserter extends CardImpl<AfflictedDeserter> {
 
 class WerewolfRansackerAbility extends TriggeredAbilityImpl<WerewolfRansackerAbility> {
 
-	private static final FilterPermanent filter = new FilterPermanent("artifact");
+    private static final FilterPermanent filter = new FilterPermanent("artifact");
 
-	static {
-		filter.getCardType().add(CardType.ARTIFACT);
-		filter.setScopeCardType(Filter.ComparisonScope.Any);
-	}
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
+    }
 
     public WerewolfRansackerAbility() {
-		super(Constants.Zone.BATTLEFIELD, new WerewolfRansackerEffect(), true);
-		Target target = new TargetPermanent(filter);
-		target.setRequired(true);
-		this.addTarget(target);
-	}
+        super(Constants.Zone.BATTLEFIELD, new WerewolfRansackerEffect(), true);
+        Target target = new TargetPermanent(filter);
+        target.setRequired(true);
+        this.addTarget(target);
+    }
 
-	public WerewolfRansackerAbility(final WerewolfRansackerAbility ability) {
-		super(ability);
-	}
+    public WerewolfRansackerAbility(final WerewolfRansackerAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public WerewolfRansackerAbility copy() {
-		return new WerewolfRansackerAbility(this);
-	}
+    @Override
+    public WerewolfRansackerAbility copy() {
+        return new WerewolfRansackerAbility(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == GameEvent.EventType.TRANSFORMED) {
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.TRANSFORMED) {
             if (event.getTargetId().equals(sourceId)) {
                 Permanent permanent = game.getPermanent(sourceId);
                 if (permanent != null && permanent.isTransformed())
                     return true;
             }
-		}
-		return false;
-	}
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "Whenever this creature transforms into Werewolf Ransacker, you may destroy target artifact. If that artifact is put into a graveyard this way, Werewolf Ransacker deals 3 damage to that artifact's controller.";
-	}
+    @Override
+    public String getRule() {
+        return "Whenever this creature transforms into Werewolf Ransacker, you may destroy target artifact. If that artifact is put into a graveyard this way, Werewolf Ransacker deals 3 damage to that artifact's controller.";
+    }
 
 }
 
 class WerewolfRansackerEffect extends OneShotEffect<WerewolfRansackerEffect> {
 
-	public WerewolfRansackerEffect() {
-		super(Constants.Outcome.DestroyPermanent);
-	}
+    public WerewolfRansackerEffect() {
+        super(Constants.Outcome.DestroyPermanent);
+    }
 
-	public WerewolfRansackerEffect(final WerewolfRansackerEffect effect) {
-		super(effect);
-	}
+    public WerewolfRansackerEffect(final WerewolfRansackerEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public WerewolfRansackerEffect copy() {
-		return new WerewolfRansackerEffect(this);
-	}
+    @Override
+    public WerewolfRansackerEffect copy() {
+        return new WerewolfRansackerEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
         int affectedTargets = 0;
-		if (targetPointer.getTargets(game, source).size() > 0) {
-			for (UUID permanentId : targetPointer.getTargets(game, source)) {
-				Permanent permanent = game.getPermanent(permanentId);
-				if (permanent != null) {
-					if (permanent.destroy(source.getId(), game, false)) {
+        if (targetPointer.getTargets(game, source).size() > 0) {
+            for (UUID permanentId : targetPointer.getTargets(game, source)) {
+                Permanent permanent = game.getPermanent(permanentId);
+                if (permanent != null) {
+                    if (permanent.destroy(source.getId(), game, false)) {
                         affectedTargets++;
                         if (game.getState().getZone(permanent.getId()) == Zone.GRAVEYARD) {
                             Player player = game.getPlayer(permanent.getControllerId());
@@ -164,10 +164,10 @@ class WerewolfRansackerEffect extends OneShotEffect<WerewolfRansackerEffect> {
                                 player.damage(3, source.getSourceId(), game, false, true);
                         }
                     }
-				}
-			}
-		}
-		return affectedTargets > 0;
-	}
+                }
+            }
+        }
+        return affectedTargets > 0;
+    }
 
 }

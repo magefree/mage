@@ -46,52 +46,52 @@ import mage.game.stack.Spell;
  */
 public class DragonsClaw extends CardImpl<DragonsClaw> {
 
-	public DragonsClaw(UUID ownerId) {
-		super(ownerId, 322, "Dragon's Claw", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-		this.expansionSetCode = "10E";
-		this.addAbility(new DragonsClawAbility());
-	}
+    public DragonsClaw(UUID ownerId) {
+        super(ownerId, 322, "Dragon's Claw", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
+        this.expansionSetCode = "10E";
+        this.addAbility(new DragonsClawAbility());
+    }
 
-	public DragonsClaw(final DragonsClaw card) {
-		super(card);
-	}
+    public DragonsClaw(final DragonsClaw card) {
+        super(card);
+    }
 
-	@Override
-	public DragonsClaw copy() {
-		return new DragonsClaw(this);
-	}
+    @Override
+    public DragonsClaw copy() {
+        return new DragonsClaw(this);
+    }
 
 }
 
 class DragonsClawAbility extends TriggeredAbilityImpl<DragonsClawAbility> {
 
-	public DragonsClawAbility() {
-		super(Zone.BATTLEFIELD, new GainLifeEffect(1), true);
-	}
+    public DragonsClawAbility() {
+        super(Zone.BATTLEFIELD, new GainLifeEffect(1), true);
+    }
 
-	public DragonsClawAbility(final DragonsClawAbility ability) {
-		super(ability);
-	}
+    public DragonsClawAbility(final DragonsClawAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public DragonsClawAbility copy() {
-		return new DragonsClawAbility(this);
-	}
+    @Override
+    public DragonsClawAbility copy() {
+        return new DragonsClawAbility(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.SPELL_CAST) {
-			Spell spell = game.getStack().getSpell(event.getTargetId());
-			if (spell != null && spell.getColor().isRed()) {
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.SPELL_CAST) {
+            Spell spell = game.getStack().getSpell(event.getTargetId());
+            if (spell != null && spell.getColor().isRed()) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "Whenever a player casts a red spell, you may gain 1 life.";
-	}
+    @Override
+    public String getRule() {
+        return "Whenever a player casts a red spell, you may gain 1 life.";
+    }
 
 }

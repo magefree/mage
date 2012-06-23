@@ -28,9 +28,9 @@ public class BeginningOfYourEndStepTriggeredAbility extends TriggeredAbilityImpl
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.END_PHASE_PRE && event.getPlayerId().equals(this.controllerId)) {
-			return true;
-		}
-		return false;
+            return true;
+        }
+        return false;
     }
 
     @Override

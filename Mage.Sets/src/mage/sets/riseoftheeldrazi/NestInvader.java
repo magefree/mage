@@ -43,25 +43,25 @@ import mage.game.permanent.token.EldraziSpawnToken;
  */
 public class NestInvader extends CardImpl<NestInvader> {
 
-	public NestInvader(UUID ownerId) {
-		super(ownerId, 201, "Nest Invader", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-		this.expansionSetCode = "ROE";
-		this.subtype.add("Eldrazi");
-		this.subtype.add("Drone");
-		this.color.setGreen(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+    public NestInvader(UUID ownerId) {
+        super(ownerId, 201, "Nest Invader", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
+        this.expansionSetCode = "ROE";
+        this.subtype.add("Eldrazi");
+        this.subtype.add("Drone");
+        this.color.setGreen(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-		this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new EldraziSpawnToken()), false));
-	}
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new EldraziSpawnToken()), false));
+    }
 
-	public NestInvader(final NestInvader card) {
-		super(card);
-	}
+    public NestInvader(final NestInvader card) {
+        super(card);
+    }
 
-	@Override
-	public NestInvader copy() {
-		return new NestInvader(this);
-	}
+    @Override
+    public NestInvader copy() {
+        return new NestInvader(this);
+    }
 
 }

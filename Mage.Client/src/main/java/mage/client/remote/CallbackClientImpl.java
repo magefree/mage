@@ -53,308 +53,308 @@ import java.util.UUID;
  */
 public class CallbackClientImpl implements CallbackClient {
 
-	private final static Logger logger = Logger.getLogger(CallbackClientImpl.class);
+    private final static Logger logger = Logger.getLogger(CallbackClientImpl.class);
 
-	private UUID clientId;
-	private MageFrame frame;
-	private int messageId = 0;
+    private UUID clientId;
+    private MageFrame frame;
+    private int messageId = 0;
 
-	public CallbackClientImpl(MageFrame frame) {
+    public CallbackClientImpl(MageFrame frame) {
 
-		this.clientId = UUID.randomUUID();
-		this.frame = frame;
+        this.clientId = UUID.randomUUID();
+        this.frame = frame;
 
-	}
+    }
 
-	@Override
-	public synchronized void processCallback(final ClientCallback callback) {
-		logger.info(callback.getMessageId() + " - " + callback.getMethod());
-		SaveObjectUtil.saveObject(callback.getData(), callback.getMethod());
-		callback.setData(CompressUtil.decompress(callback.getData()));
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					logger.info(callback.getMessageId() + " -- " + callback.getMethod());
-					if (callback.getMethod().equals("startGame")) {
-						TableClientMessage message = (TableClientMessage) callback.getData();
-						GameManager.getInstance().setCurrentPlayerUUID(message.getPlayerId());
-						gameStarted(message.getGameId(), message.getPlayerId());
-					}
-					else if(callback.getMethod().equals("startTournament")) {
-						TableClientMessage message = (TableClientMessage) callback.getData();
-						tournamentStarted(message.getGameId(), message.getPlayerId());
-					}
-					else if(callback.getMethod().equals("startDraft")) {
-						TableClientMessage message = (TableClientMessage) callback.getData();
-						draftStarted(message.getGameId(), message.getPlayerId());
-					}
-					else if (callback.getMethod().equals("replayGame")) {
-						replayGame(callback.getObjectId());
-					}
-					else if (callback.getMethod().equals("watchGame")) {
-						watchGame((UUID) callback.getObjectId());
-					}
-					else if (callback.getMethod().equals("chatMessage")) {
-						ChatMessage message = (ChatMessage) callback.getData();
-						ChatPanel panel = frame.getChat(callback.getObjectId());
-						if (panel != null) {
-							if (message.isUserMessage() && panel.getConnectedChat() != null) {
-								panel.getConnectedChat().receiveMessage(message.getUsername(), message.getMessage(), message.getTime(), ChatMessage.MessageColor.BLACK);
-							} else {
-								panel.receiveMessage(message.getUsername(), message.getMessage(), message.getTime(), message.getColor());
-							}
-						}
-					} else if (callback.getMethod().equals("serverMessage")) {
+    @Override
+    public synchronized void processCallback(final ClientCallback callback) {
+        logger.info(callback.getMessageId() + " - " + callback.getMethod());
+        SaveObjectUtil.saveObject(callback.getData(), callback.getMethod());
+        callback.setData(CompressUtil.decompress(callback.getData()));
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    logger.info(callback.getMessageId() + " -- " + callback.getMethod());
+                    if (callback.getMethod().equals("startGame")) {
+                        TableClientMessage message = (TableClientMessage) callback.getData();
+                        GameManager.getInstance().setCurrentPlayerUUID(message.getPlayerId());
+                        gameStarted(message.getGameId(), message.getPlayerId());
+                    }
+                    else if(callback.getMethod().equals("startTournament")) {
+                        TableClientMessage message = (TableClientMessage) callback.getData();
+                        tournamentStarted(message.getGameId(), message.getPlayerId());
+                    }
+                    else if(callback.getMethod().equals("startDraft")) {
+                        TableClientMessage message = (TableClientMessage) callback.getData();
+                        draftStarted(message.getGameId(), message.getPlayerId());
+                    }
+                    else if (callback.getMethod().equals("replayGame")) {
+                        replayGame(callback.getObjectId());
+                    }
+                    else if (callback.getMethod().equals("watchGame")) {
+                        watchGame((UUID) callback.getObjectId());
+                    }
+                    else if (callback.getMethod().equals("chatMessage")) {
+                        ChatMessage message = (ChatMessage) callback.getData();
+                        ChatPanel panel = frame.getChat(callback.getObjectId());
+                        if (panel != null) {
+                            if (message.isUserMessage() && panel.getConnectedChat() != null) {
+                                panel.getConnectedChat().receiveMessage(message.getUsername(), message.getMessage(), message.getTime(), ChatMessage.MessageColor.BLACK);
+                            } else {
+                                panel.receiveMessage(message.getUsername(), message.getMessage(), message.getTime(), message.getColor());
+                            }
+                        }
+                    } else if (callback.getMethod().equals("serverMessage")) {
                         if (callback.getData() != null) {
-						    ChatMessage message = (ChatMessage) callback.getData();
+                            ChatMessage message = (ChatMessage) callback.getData();
                             if (message.getColor().equals(ChatMessage.MessageColor.RED)) {
                                 JOptionPane.showMessageDialog(null, message.getMessage(), "Server message", JOptionPane.WARNING_MESSAGE);
                             } else {
                                 JOptionPane.showMessageDialog(null, message.getMessage(), "Server message", JOptionPane.INFORMATION_MESSAGE);
                             }
                         }
-					} else if (callback.getMethod().equals("joinedTable")) {
+                    } else if (callback.getMethod().equals("joinedTable")) {
                         TableClientMessage message = (TableClientMessage) callback.getData();
                         joinedTable(message.getRoomId(), message.getTableId(), message.getFlag());
-					}
-					else if (callback.getMethod().equals("replayInit")) {
-						GamePanel panel = frame.getGame(callback.getObjectId());
-						if (panel != null)
-							panel.init((GameView) callback.getData());
-					}
-					else if (callback.getMethod().equals("replayDone")) {
-						GamePanel panel = frame.getGame(callback.getObjectId());
-						if (panel != null) {
-							panel.endMessage((String) callback.getData());
-						}
-					}
-					else if (callback.getMethod().equals("replayUpdate")) {
-						GamePanel panel = frame.getGame(callback.getObjectId());
-						if (panel != null)
-							panel.updateGame((GameView) callback.getData());
-					}
-					else if (callback.getMethod().equals("gameInit")) {
-						GamePanel panel = frame.getGame(callback.getObjectId());
-						if (panel != null) {
-							panel.init((GameView) callback.getData());
+                    }
+                    else if (callback.getMethod().equals("replayInit")) {
+                        GamePanel panel = frame.getGame(callback.getObjectId());
+                        if (panel != null)
+                            panel.init((GameView) callback.getData());
+                    }
+                    else if (callback.getMethod().equals("replayDone")) {
+                        GamePanel panel = frame.getGame(callback.getObjectId());
+                        if (panel != null) {
+                            panel.endMessage((String) callback.getData());
+                        }
+                    }
+                    else if (callback.getMethod().equals("replayUpdate")) {
+                        GamePanel panel = frame.getGame(callback.getObjectId());
+                        if (panel != null)
+                            panel.updateGame((GameView) callback.getData());
+                    }
+                    else if (callback.getMethod().equals("gameInit")) {
+                        GamePanel panel = frame.getGame(callback.getObjectId());
+                        if (panel != null) {
+                            panel.init((GameView) callback.getData());
 
-						}
-					}
-					else if (callback.getMethod().equals("gameOver")) {
-						GamePanel panel = frame.getGame(callback.getObjectId());
-						if (panel != null) {
-							panel.endMessage((String) callback.getData());
-						}
-					}
-					else if (callback.getMethod().equals("gameError")) {
+                        }
+                    }
+                    else if (callback.getMethod().equals("gameOver")) {
+                        GamePanel panel = frame.getGame(callback.getObjectId());
+                        if (panel != null) {
+                            panel.endMessage((String) callback.getData());
+                        }
+                    }
+                    else if (callback.getMethod().equals("gameError")) {
                         frame.showErrorDialog("Game Error", (String) callback.getData());
-					}
-					else if (callback.getMethod().equals("gameAsk")) {
-						GameClientMessage message = (GameClientMessage) callback.getData();
-						GamePanel panel = frame.getGame(callback.getObjectId());
-						if (panel != null)
-							panel.ask(message.getMessage(), message.getGameView());
-					}
-					else if (callback.getMethod().equals("gameTarget")) {
-						GameClientMessage message = (GameClientMessage) callback.getData();
-						GamePanel panel = frame.getGame(callback.getObjectId());
-						if (panel != null)
-							panel.pickTarget(message.getMessage(), message.getCardsView(), message.getGameView(), message.getTargets(), message.isFlag(), message.getOptions());
-					}
-					else if (callback.getMethod().equals("gameSelect")) {
-						GameClientMessage message = (GameClientMessage) callback.getData();
-						GamePanel panel = frame.getGame(callback.getObjectId());
-						if (panel != null)
-							panel.select(message.getMessage(), message.getGameView());
-					}
-					else if (callback.getMethod().equals("gameChooseAbility")) {
-						GamePanel panel = frame.getGame(callback.getObjectId());
-						if (panel != null)
-							panel.pickAbility((AbilityPickerView) callback.getData());
-					}
-					else if (callback.getMethod().equals("gameChoosePile")) {
-						GameClientMessage message = (GameClientMessage) callback.getData();
-						GamePanel panel = frame.getGame(callback.getObjectId());
-						if (panel != null)
-							panel.pickPile(message.getMessage(), message.getPile1(), message.getPile2());
-					}
-					else if (callback.getMethod().equals("gameChoose")) {
-						GameClientMessage message = (GameClientMessage) callback.getData();
-						GamePanel panel = frame.getGame(callback.getObjectId());
-						if (panel != null)
-							panel.getChoice(message.getMessage(), message.getStrings());
-					}
-					else if (callback.getMethod().equals("gamePlayMana")) {
-						GameClientMessage message = (GameClientMessage) callback.getData();
-						GamePanel panel = frame.getGame(callback.getObjectId());
-						if (panel != null)
-							panel.playMana(message.getMessage(), message.getGameView());
-					}
-					else if (callback.getMethod().equals("gamePlayXMana")) {
-						GameClientMessage message = (GameClientMessage) callback.getData();
-						GamePanel panel = frame.getGame(callback.getObjectId());
-						if (panel != null)
-							panel.playXMana(message.getMessage(), message.getGameView());
-					}
-					else if (callback.getMethod().equals("gameSelectAmount")) {
-						GameClientMessage message = (GameClientMessage) callback.getData();
-						GamePanel panel = frame.getGame(callback.getObjectId());
-						if (panel != null)
-							panel.getAmount(message.getMin(), message.getMax(), message.getMessage());
-					}
-					else if (callback.getMethod().equals("gameUpdate")) {
-						GamePanel panel = frame.getGame(callback.getObjectId());
-						if (panel != null)
-							panel.updateGame((GameView) callback.getData());
-					}
-					else if (callback.getMethod().equals("gameInform")) {
-						
-						if (callback.getMessageId() > messageId) {
-							GameClientMessage message = (GameClientMessage) callback.getData();
-							GamePanel panel = frame.getGame(callback.getObjectId());
-							if (panel != null)
-								panel.inform(message.getMessage(), message.getGameView());
-						}
-						else {
-							logger.warn("message out of sequence - ignoring");
-						}
-					}
-					else if (callback.getMethod().equals("sideboard")) {
-						TableClientMessage message = (TableClientMessage) callback.getData();
-						DeckView deckView = message.getDeck();
-						Deck deck = DeckUtil.construct(deckView);
+                    }
+                    else if (callback.getMethod().equals("gameAsk")) {
+                        GameClientMessage message = (GameClientMessage) callback.getData();
+                        GamePanel panel = frame.getGame(callback.getObjectId());
+                        if (panel != null)
+                            panel.ask(message.getMessage(), message.getGameView());
+                    }
+                    else if (callback.getMethod().equals("gameTarget")) {
+                        GameClientMessage message = (GameClientMessage) callback.getData();
+                        GamePanel panel = frame.getGame(callback.getObjectId());
+                        if (panel != null)
+                            panel.pickTarget(message.getMessage(), message.getCardsView(), message.getGameView(), message.getTargets(), message.isFlag(), message.getOptions());
+                    }
+                    else if (callback.getMethod().equals("gameSelect")) {
+                        GameClientMessage message = (GameClientMessage) callback.getData();
+                        GamePanel panel = frame.getGame(callback.getObjectId());
+                        if (panel != null)
+                            panel.select(message.getMessage(), message.getGameView());
+                    }
+                    else if (callback.getMethod().equals("gameChooseAbility")) {
+                        GamePanel panel = frame.getGame(callback.getObjectId());
+                        if (panel != null)
+                            panel.pickAbility((AbilityPickerView) callback.getData());
+                    }
+                    else if (callback.getMethod().equals("gameChoosePile")) {
+                        GameClientMessage message = (GameClientMessage) callback.getData();
+                        GamePanel panel = frame.getGame(callback.getObjectId());
+                        if (panel != null)
+                            panel.pickPile(message.getMessage(), message.getPile1(), message.getPile2());
+                    }
+                    else if (callback.getMethod().equals("gameChoose")) {
+                        GameClientMessage message = (GameClientMessage) callback.getData();
+                        GamePanel panel = frame.getGame(callback.getObjectId());
+                        if (panel != null)
+                            panel.getChoice(message.getMessage(), message.getStrings());
+                    }
+                    else if (callback.getMethod().equals("gamePlayMana")) {
+                        GameClientMessage message = (GameClientMessage) callback.getData();
+                        GamePanel panel = frame.getGame(callback.getObjectId());
+                        if (panel != null)
+                            panel.playMana(message.getMessage(), message.getGameView());
+                    }
+                    else if (callback.getMethod().equals("gamePlayXMana")) {
+                        GameClientMessage message = (GameClientMessage) callback.getData();
+                        GamePanel panel = frame.getGame(callback.getObjectId());
+                        if (panel != null)
+                            panel.playXMana(message.getMessage(), message.getGameView());
+                    }
+                    else if (callback.getMethod().equals("gameSelectAmount")) {
+                        GameClientMessage message = (GameClientMessage) callback.getData();
+                        GamePanel panel = frame.getGame(callback.getObjectId());
+                        if (panel != null)
+                            panel.getAmount(message.getMin(), message.getMax(), message.getMessage());
+                    }
+                    else if (callback.getMethod().equals("gameUpdate")) {
+                        GamePanel panel = frame.getGame(callback.getObjectId());
+                        if (panel != null)
+                            panel.updateGame((GameView) callback.getData());
+                    }
+                    else if (callback.getMethod().equals("gameInform")) {
+
+                        if (callback.getMessageId() > messageId) {
+                            GameClientMessage message = (GameClientMessage) callback.getData();
+                            GamePanel panel = frame.getGame(callback.getObjectId());
+                            if (panel != null)
+                                panel.inform(message.getMessage(), message.getGameView());
+                        }
+                        else {
+                            logger.warn("message out of sequence - ignoring");
+                        }
+                    }
+                    else if (callback.getMethod().equals("sideboard")) {
+                        TableClientMessage message = (TableClientMessage) callback.getData();
+                        DeckView deckView = message.getDeck();
+                        Deck deck = DeckUtil.construct(deckView);
                         if (message.getFlag())
                             construct(deck, message.getTableId(), message.getTime());
                         else 
                             sideboard(deck, message.getTableId(), message.getTime());
-					}
-					else if (callback.getMethod().equals("construct")) {
-						TableClientMessage message = (TableClientMessage) callback.getData();
-						DeckView deckView = message.getDeck();
-						Deck deck = DeckUtil.construct(deckView);
-						construct(deck, message.getTableId(), message.getTime());
-					}
-					else if (callback.getMethod().equals("draftOver")) {
-						DraftPanel panel = frame.getDraft(callback.getObjectId());
-						if (panel != null)
-							panel.hideDraft();
-					}
-					else if (callback.getMethod().equals("draftPick")) {
-						DraftClientMessage message = (DraftClientMessage) callback.getData();
-						DraftPanel panel = frame.getDraft(callback.getObjectId());
-						if (panel != null)
-							panel.loadBooster(message.getDraftPickView());
-					}
-					else if (callback.getMethod().equals("draftUpdate")) {
-						DraftPanel panel = frame.getDraft(callback.getObjectId());
-						if (panel != null)
-							panel.updateDraft((DraftView) callback.getData());
-					}
-					else if (callback.getMethod().equals("draftInform")) {
-						if (callback.getMessageId() > messageId) {
-							DraftClientMessage message = (DraftClientMessage) callback.getData();
-						}
-						else {
-							logger.warn("message out of sequence - ignoring");
-						}
-					}
-					else if (callback.getMethod().equals("draftInit")) {
-						DraftClientMessage message = (DraftClientMessage) callback.getData();
-						DraftPanel panel = frame.getDraft(callback.getObjectId());
-						if (panel != null)
-							panel.loadBooster(message.getDraftPickView());
-					}
-					else if (callback.getMethod().equals("tournamentInit")) {
+                    }
+                    else if (callback.getMethod().equals("construct")) {
+                        TableClientMessage message = (TableClientMessage) callback.getData();
+                        DeckView deckView = message.getDeck();
+                        Deck deck = DeckUtil.construct(deckView);
+                        construct(deck, message.getTableId(), message.getTime());
+                    }
+                    else if (callback.getMethod().equals("draftOver")) {
+                        DraftPanel panel = frame.getDraft(callback.getObjectId());
+                        if (panel != null)
+                            panel.hideDraft();
+                    }
+                    else if (callback.getMethod().equals("draftPick")) {
+                        DraftClientMessage message = (DraftClientMessage) callback.getData();
+                        DraftPanel panel = frame.getDraft(callback.getObjectId());
+                        if (panel != null)
+                            panel.loadBooster(message.getDraftPickView());
+                    }
+                    else if (callback.getMethod().equals("draftUpdate")) {
+                        DraftPanel panel = frame.getDraft(callback.getObjectId());
+                        if (panel != null)
+                            panel.updateDraft((DraftView) callback.getData());
+                    }
+                    else if (callback.getMethod().equals("draftInform")) {
+                        if (callback.getMessageId() > messageId) {
+                            DraftClientMessage message = (DraftClientMessage) callback.getData();
+                        }
+                        else {
+                            logger.warn("message out of sequence - ignoring");
+                        }
+                    }
+                    else if (callback.getMethod().equals("draftInit")) {
+                        DraftClientMessage message = (DraftClientMessage) callback.getData();
+                        DraftPanel panel = frame.getDraft(callback.getObjectId());
+                        if (panel != null)
+                            panel.loadBooster(message.getDraftPickView());
+                    }
+                    else if (callback.getMethod().equals("tournamentInit")) {
 
-					}
-					messageId = callback.getMessageId();
-				}
-				catch (Exception ex) {
-					handleException(ex);
-				}
-			}
-		});
-	}
+                    }
+                    messageId = callback.getMessageId();
+                }
+                catch (Exception ex) {
+                    handleException(ex);
+                }
+            }
+        });
+    }
 
-	public UUID getId() {
-		return clientId;
-	}
+    public UUID getId() {
+        return clientId;
+    }
 
     private void joinedTable(UUID roomId, UUID tableId, boolean isTournament) {
         try {
             frame.showTableWaitingDialog(roomId, tableId, isTournament);
         }
- 		catch (Exception ex) {
-			handleException(ex);
-		}
+         catch (Exception ex) {
+            handleException(ex);
+        }
    }
-            
-	protected void gameStarted(final UUID gameId, final UUID playerId) {
-		try {
-			frame.showGame(gameId, playerId);
-			logger.info("Game " + gameId + " started for player " + playerId);
-		}
-		catch (Exception ex) {
-			handleException(ex);
-		}
 
-		if (Plugins.getInstance().isCounterPluginLoaded()) {
-			Plugins.getInstance().addGamesPlayed();
-		}
-	}
+    protected void gameStarted(final UUID gameId, final UUID playerId) {
+        try {
+            frame.showGame(gameId, playerId);
+            logger.info("Game " + gameId + " started for player " + playerId);
+        }
+        catch (Exception ex) {
+            handleException(ex);
+        }
 
-	protected void draftStarted(UUID draftId, UUID playerId) {
-		try {
-			frame.showDraft(draftId);
-			logger.info("Draft " + draftId + " started for player " + playerId);
-		}
-		catch (Exception ex) {
-			handleException(ex);
-		}
-	}
+        if (Plugins.getInstance().isCounterPluginLoaded()) {
+            Plugins.getInstance().addGamesPlayed();
+        }
+    }
 
-	protected void tournamentStarted(UUID tournamentId, UUID playerId) {
-		try {
-			frame.showTournament(tournamentId);
-			logger.info("Tournament " + tournamentId + " started for player " + playerId);
-		}
-		catch (Exception ex) {
-			handleException(ex);
-		}
-	}
+    protected void draftStarted(UUID draftId, UUID playerId) {
+        try {
+            frame.showDraft(draftId);
+            logger.info("Draft " + draftId + " started for player " + playerId);
+        }
+        catch (Exception ex) {
+            handleException(ex);
+        }
+    }
 
-	protected void watchGame(UUID gameId) {
-		try {
-			frame.watchGame(gameId);
-			logger.info("Watching game " + gameId);
-		}
-		catch (Exception ex) {
-			handleException(ex);
-		}
-	}
+    protected void tournamentStarted(UUID tournamentId, UUID playerId) {
+        try {
+            frame.showTournament(tournamentId);
+            logger.info("Tournament " + tournamentId + " started for player " + playerId);
+        }
+        catch (Exception ex) {
+            handleException(ex);
+        }
+    }
 
-	protected void replayGame(UUID gameId) {
-		try {
-			frame.replayGame(gameId);
-			logger.info("Replaying game");
-		}
-		catch (Exception ex) {
-			handleException(ex);
-		}
-	}
+    protected void watchGame(UUID gameId) {
+        try {
+            frame.watchGame(gameId);
+            logger.info("Watching game " + gameId);
+        }
+        catch (Exception ex) {
+            handleException(ex);
+        }
+    }
 
-	protected void sideboard(Deck deck, UUID tableId, int time) {
-		frame.showDeckEditor(DeckEditorMode.Sideboard, deck, tableId, time);
-	}
+    protected void replayGame(UUID gameId) {
+        try {
+            frame.replayGame(gameId);
+            logger.info("Replaying game");
+        }
+        catch (Exception ex) {
+            handleException(ex);
+        }
+    }
 
-	protected void construct(Deck deck, UUID tableId, int time) {
-		frame.showDeckEditor(DeckEditorMode.Limited, deck, tableId, time);
-	}
+    protected void sideboard(Deck deck, UUID tableId, int time) {
+        frame.showDeckEditor(DeckEditorMode.Sideboard, deck, tableId, time);
+    }
 
-	private void handleException(Exception ex) {
-		logger.fatal("Client error\n", ex);
-		frame.showError("Error: " + ex.getMessage());
-	}
+    protected void construct(Deck deck, UUID tableId, int time) {
+        frame.showDeckEditor(DeckEditorMode.Limited, deck, tableId, time);
+    }
+
+    private void handleException(Exception ex) {
+        logger.fatal("Client error\n", ex);
+        frame.showError("Error: " + ex.getMessage());
+    }
 
 }

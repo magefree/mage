@@ -50,72 +50,72 @@ import mage.game.events.ZoneChangeEvent;
  */
 public class NissasChosen extends CardImpl<NissasChosen> {
 
-	public NissasChosen(UUID ownerId) {
-		super(ownerId, 171, "Nissa's Chosen", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}{G}");
-		this.expansionSetCode = "ZEN";
-		this.subtype.add("Elf");
-		this.subtype.add("Warrior");
+    public NissasChosen(UUID ownerId) {
+        super(ownerId, 171, "Nissa's Chosen", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}{G}");
+        this.expansionSetCode = "ZEN";
+        this.subtype.add("Elf");
+        this.subtype.add("Warrior");
 
-		this.color.setGreen(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(3);
+        this.color.setGreen(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
 
-		this.addAbility(new SimpleStaticAbility(Zone.ALL, new NissasChosenEffect()));
-	}
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new NissasChosenEffect()));
+    }
 
-	public NissasChosen(final NissasChosen card) {
-		super(card);
-	}
+    public NissasChosen(final NissasChosen card) {
+        super(card);
+    }
 
-	@Override
-	public NissasChosen copy() {
-		return new NissasChosen(this);
-	}
+    @Override
+    public NissasChosen copy() {
+        return new NissasChosen(this);
+    }
 }
 
 class NissasChosenEffect extends ReplacementEffectImpl<NissasChosenEffect> {
 
-	boolean onTop = false;
+    boolean onTop = false;
 
-	public NissasChosenEffect() {
-		super(Duration.WhileOnBattlefield, Outcome.Benefit);
-		staticText = "If {this} would be put into a graveyard from the battlefield, put it on the bottom of its owner's library instead";
-	}
+    public NissasChosenEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        staticText = "If {this} would be put into a graveyard from the battlefield, put it on the bottom of its owner's library instead";
+    }
 
-	public NissasChosenEffect(final NissasChosenEffect effect) {
-		super(effect);
-		this.onTop = effect.onTop;
-	}
+    public NissasChosenEffect(final NissasChosenEffect effect) {
+        super(effect);
+        this.onTop = effect.onTop;
+    }
 
-	@Override
-	public NissasChosenEffect copy() {
-		return new NissasChosenEffect(this);
-	}
+    @Override
+    public NissasChosenEffect copy() {
+        return new NissasChosenEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		Card card = game.getCard(event.getTargetId());
-		if ( card != null && event.getTargetId().equals(source.getSourceId()) ) {
-			return card.moveToZone(Zone.LIBRARY, source.getId(), game, onTop);
-		}
-		return false;
-	}
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        Card card = game.getCard(event.getTargetId());
+        if ( card != null && event.getTargetId().equals(source.getSourceId()) ) {
+            return card.moveToZone(Zone.LIBRARY, source.getId(), game, onTop);
+        }
+        return false;
+    }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		if ( event.getType() == EventType.ZONE_CHANGE )
-		{
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if ( event.getType() == EventType.ZONE_CHANGE )
+        {
                     ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
                     if ( zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD ) {
                         return true;
                     }
-		}
-		return false;
-	}
+        }
+        return false;
+    }
 
 }

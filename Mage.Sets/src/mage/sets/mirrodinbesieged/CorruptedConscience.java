@@ -54,7 +54,7 @@ public class CorruptedConscience extends CardImpl<CorruptedConscience> {
         super(ownerId, 22, "Corrupted Conscience", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
         this.expansionSetCode = "MBS";
         this.subtype.add("Aura");
-		this.color.setBlue(true);
+        this.color.setBlue(true);
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.AddAbility));

@@ -48,7 +48,7 @@ public class RavenousRats extends CardImpl<RavenousRats> {
         super(ownerId, 171, "Ravenous Rats", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.expansionSetCode = "10E";
         this.subtype.add("Rat");
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         Ability ability = new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(1));

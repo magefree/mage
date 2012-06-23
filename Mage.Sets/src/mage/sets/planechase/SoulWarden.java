@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class SoulWarden extends mage.sets.magic2010.SoulWarden {
 
-	public SoulWarden(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 7;
-		this.expansionSetCode = "HOP";
-	}
+    public SoulWarden(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 7;
+        this.expansionSetCode = "HOP";
+    }
 
-	public SoulWarden(final SoulWarden card) {
-		super(card);
-	}
+    public SoulWarden(final SoulWarden card) {
+        super(card);
+    }
 
-	@Override
-	public SoulWarden copy() {
-		return new SoulWarden(this);
-	}
+    @Override
+    public SoulWarden copy() {
+        return new SoulWarden(this);
+    }
 
 }

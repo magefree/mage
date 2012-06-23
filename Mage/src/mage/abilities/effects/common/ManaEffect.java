@@ -37,12 +37,12 @@ import mage.abilities.effects.OneShotEffect;
  */
 public abstract class ManaEffect<T extends ManaEffect<T>> extends OneShotEffect<T> {
 
-	public ManaEffect() {
-		super(Outcome.PutManaInPool);
-	}
+    public ManaEffect() {
+        super(Outcome.PutManaInPool);
+    }
 
-	public ManaEffect(final ManaEffect effect) {
-		super(effect);
-	}
+    public ManaEffect(final ManaEffect effect) {
+        super(effect);
+    }
 
 }

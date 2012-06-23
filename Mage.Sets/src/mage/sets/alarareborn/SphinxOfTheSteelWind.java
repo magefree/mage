@@ -45,8 +45,8 @@ public class SphinxOfTheSteelWind extends CardImpl<SphinxOfTheSteelWind> {
      private static FilterCard filter = new FilterCard("red and from green");
 
     static {
-    	filter.setUseColor(true);
-	    filter.getColor().setRed(true);
+        filter.setUseColor(true);
+        filter.getColor().setRed(true);
         filter.getColor().setGreen(true);
         filter.setScopeColor(Filter.ComparisonScope.Any);
     }
@@ -55,9 +55,9 @@ public class SphinxOfTheSteelWind extends CardImpl<SphinxOfTheSteelWind> {
         super(ownerId, 110, "Sphinx of the Steel Wind", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}{W}{U}{B}");
         this.expansionSetCode = "ARB";
         this.subtype.add("Sphinx");
-		this.color.setWhite(true);
-		this.color.setBlue(true);
-		this.color.setBlack(true);
+        this.color.setWhite(true);
+        this.color.setBlue(true);
+        this.color.setBlack(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
         this.addAbility(FlyingAbility.getInstance());

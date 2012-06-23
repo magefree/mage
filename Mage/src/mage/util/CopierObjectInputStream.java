@@ -46,12 +46,12 @@ public class CopierObjectInputStream extends ObjectInputStream {
         myLoader = newLoader;
     }
 
-	@Override
+    @Override
     protected Class resolveClass(ObjectStreamClass osc) throws IOException, ClassNotFoundException
     {
         Class theClass = null;
 
-		try {
+        try {
             theClass = Class.forName(osc.getName(), true, myLoader);
         }
         catch (Exception e) {

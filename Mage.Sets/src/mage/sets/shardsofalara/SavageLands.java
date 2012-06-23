@@ -43,22 +43,22 @@ import mage.cards.CardImpl;
  */
 public class SavageLands extends CardImpl<SavageLands> {
 
-	public SavageLands(UUID ownerId) {
-		super(ownerId, 228, "Savage Lands", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);
-		this.expansionSetCode = "ALA";
-		this.addAbility(new EntersBattlefieldTappedAbility());
-		this.addAbility(new RedManaAbility());
-		this.addAbility(new GreenManaAbility());
-		this.addAbility(new BlackManaAbility());
-	}
+    public SavageLands(UUID ownerId) {
+        super(ownerId, 228, "Savage Lands", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);
+        this.expansionSetCode = "ALA";
+        this.addAbility(new EntersBattlefieldTappedAbility());
+        this.addAbility(new RedManaAbility());
+        this.addAbility(new GreenManaAbility());
+        this.addAbility(new BlackManaAbility());
+    }
 
-	public SavageLands(final SavageLands card) {
-		super(card);
-	}
+    public SavageLands(final SavageLands card) {
+        super(card);
+    }
 
-	@Override
-	public SavageLands copy() {
-		return new SavageLands(this);
-	}
+    @Override
+    public SavageLands copy() {
+        return new SavageLands(this);
+    }
 
 }

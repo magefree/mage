@@ -36,7 +36,7 @@ import java.io.Serializable;
  */
 public interface EventSource<E extends Event> extends Serializable {
 
-	void addListener(Listener<E> listener);
-	void clearListeners();
-	
+    void addListener(Listener<E> listener);
+    void clearListeners();
+
 }

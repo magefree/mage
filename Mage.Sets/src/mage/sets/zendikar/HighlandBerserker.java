@@ -51,8 +51,8 @@ public class HighlandBerserker extends CardImpl<HighlandBerserker> {
 
     static {
         filter.getSubtype().add("Ally");
-		filter.setScopeSubtype(Filter.ComparisonScope.Any);
-		filter.setTargetController(Constants.TargetController.YOU);
+        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.setTargetController(Constants.TargetController.YOU);
    }
 
     public HighlandBerserker(UUID ownerId) {

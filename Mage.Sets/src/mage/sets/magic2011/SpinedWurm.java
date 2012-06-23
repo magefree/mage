@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class SpinedWurm extends mage.sets.tenth.SpinedWurm {
 
-	public SpinedWurm(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 197;
-		this.expansionSetCode = "M11";
-	}
+    public SpinedWurm(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 197;
+        this.expansionSetCode = "M11";
+    }
 
-	public SpinedWurm(final SpinedWurm card) {
-		super(card);
-	}
+    public SpinedWurm(final SpinedWurm card) {
+        super(card);
+    }
 
-	@Override
-	public SpinedWurm copy() {
-		return new SpinedWurm(this);
-	}
+    @Override
+    public SpinedWurm copy() {
+        return new SpinedWurm(this);
+    }
 
 }

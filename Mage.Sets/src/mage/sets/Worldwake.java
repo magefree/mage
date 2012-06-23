@@ -38,22 +38,22 @@ import mage.cards.ExpansionSet;
  */
 public class Worldwake extends ExpansionSet {
 
-	private static final Worldwake fINSTANCE =  new Worldwake();
+    private static final Worldwake fINSTANCE =  new Worldwake();
 
-	public static Worldwake getInstance() {
-		return fINSTANCE;
-	}
+    public static Worldwake getInstance() {
+        return fINSTANCE;
+    }
 
-	private Worldwake() {
-		super("Worldwake", "WWK", "seticon_WWK", "mage.sets.worldwake", new GregorianCalendar(2010, 0, 30).getTime(), SetType.EXPANSION);
-		this.blockName = "Zendikar";
-		this.parentSet = Zendikar.getInstance();
-		this.hasBoosters = true;
-		this.numBoosterLands = 0;
-		this.numBoosterCommon = 11;
-		this.numBoosterUncommon = 3;
-		this.numBoosterRare = 1;
-		this.ratioBoosterMythic = 8;
-	}
+    private Worldwake() {
+        super("Worldwake", "WWK", "seticon_WWK", "mage.sets.worldwake", new GregorianCalendar(2010, 0, 30).getTime(), SetType.EXPANSION);
+        this.blockName = "Zendikar";
+        this.parentSet = Zendikar.getInstance();
+        this.hasBoosters = true;
+        this.numBoosterLands = 0;
+        this.numBoosterCommon = 11;
+        this.numBoosterUncommon = 3;
+        this.numBoosterRare = 1;
+        this.ratioBoosterMythic = 8;
+    }
 
 }

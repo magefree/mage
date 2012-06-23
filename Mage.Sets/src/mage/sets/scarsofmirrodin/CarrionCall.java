@@ -47,7 +47,7 @@ public class CarrionCall extends CardImpl<CarrionCall> {
     public CarrionCall (UUID ownerId) {
         super(ownerId, 115, "Carrion Call", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
         this.expansionSetCode = "SOM";
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.getSpellAbility().addEffect(new CreateTokenEffect(new InsectToken(), 2));
     }
 
@@ -65,11 +65,11 @@ class InsectToken extends Token {
 
     public InsectToken() {
         super("Insect", "1/1 green Insect creature tokens with infect");
-		cardType.add(CardType.CREATURE);
-		color = ObjectColor.GREEN;
-		subtype.add("Insect");
-		power = new MageInt(1);
-		toughness = new MageInt(1);
+        cardType.add(CardType.CREATURE);
+        color = ObjectColor.GREEN;
+        subtype.add("Insect");
+        power = new MageInt(1);
+        toughness = new MageInt(1);
         this.addAbility(InfectAbility.getInstance());
     }
 }

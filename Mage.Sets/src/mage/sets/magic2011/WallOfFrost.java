@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class WallOfFrost extends mage.sets.magic2010.WallOfFrost {
 
-	public WallOfFrost(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 79;
-		this.expansionSetCode = "M11";
-	}
+    public WallOfFrost(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 79;
+        this.expansionSetCode = "M11";
+    }
 
-	public WallOfFrost(final WallOfFrost card) {
-		super(card);
-	}
+    public WallOfFrost(final WallOfFrost card) {
+        super(card);
+    }
 
-	@Override
-	public WallOfFrost copy() {
-		return new WallOfFrost(this);
-	}
+    @Override
+    public WallOfFrost copy() {
+        return new WallOfFrost(this);
+    }
 
 }

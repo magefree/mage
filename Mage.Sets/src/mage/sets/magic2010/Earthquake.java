@@ -47,58 +47,58 @@ import mage.players.Player;
  */
 public class Earthquake extends CardImpl<Earthquake> {
 
-	public Earthquake(UUID ownerId) {
-		super(ownerId, 134, "Earthquake", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{R}");
-		this.expansionSetCode = "M10";
-		this.color.setRed(true);
-		this.getSpellAbility().addEffect(new EarthquakeEffect());
-	}
+    public Earthquake(UUID ownerId) {
+        super(ownerId, 134, "Earthquake", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{R}");
+        this.expansionSetCode = "M10";
+        this.color.setRed(true);
+        this.getSpellAbility().addEffect(new EarthquakeEffect());
+    }
 
-	public Earthquake(final Earthquake card) {
-		super(card);
-	}
+    public Earthquake(final Earthquake card) {
+        super(card);
+    }
 
-	@Override
-	public Earthquake copy() {
-		return new Earthquake(this);
-	}
+    @Override
+    public Earthquake copy() {
+        return new Earthquake(this);
+    }
 }
 
 class EarthquakeEffect extends OneShotEffect<EarthquakeEffect> {
 
-	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
-	static {
-		filter.getAbilities().add(FlyingAbility.getInstance());
-		filter.setNotAbilities(true);
-	}
+    static {
+        filter.getAbilities().add(FlyingAbility.getInstance());
+        filter.setNotAbilities(true);
+    }
 
-	public EarthquakeEffect() {
-		super(Outcome.Damage);
-		staticText = "{this} deals X damage to each creature without flying and each player";
-	}
+    public EarthquakeEffect() {
+        super(Outcome.Damage);
+        staticText = "{this} deals X damage to each creature without flying and each player";
+    }
 
-	public EarthquakeEffect(final EarthquakeEffect effect) {
-		super(effect);
-	}
+    public EarthquakeEffect(final EarthquakeEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public EarthquakeEffect copy() {
-		return new EarthquakeEffect(this);
-	}
+    @Override
+    public EarthquakeEffect copy() {
+        return new EarthquakeEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		int amount = source.getManaCostsToPay().getX();
-		for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
-			permanent.damage(amount, source.getId(), game, true, false);
-		}
-		for (UUID playerId: game.getPlayer(source.getControllerId()).getInRange()) {
-			Player player = game.getPlayer(playerId);
-			if (player != null)
-				player.damage(amount, source.getSourceId(), game, false, true);
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        int amount = source.getManaCostsToPay().getX();
+        for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
+            permanent.damage(amount, source.getId(), game, true, false);
+        }
+        for (UUID playerId: game.getPlayer(source.getControllerId()).getInRange()) {
+            Player player = game.getPlayer(playerId);
+            if (player != null)
+                player.damage(amount, source.getSourceId(), game, false, true);
+        }
+        return true;
+    }
 
 }

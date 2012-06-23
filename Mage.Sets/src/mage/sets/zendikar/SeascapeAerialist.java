@@ -52,7 +52,7 @@ public class SeascapeAerialist extends CardImpl<SeascapeAerialist> {
     static {
         filter.getSubtype().add("Ally");
         filter.setScopeSubtype(Filter.ComparisonScope.Any);
-		filter.setTargetController(Constants.TargetController.YOU);
+        filter.setTargetController(Constants.TargetController.YOU);
     }
 
     public SeascapeAerialist(UUID ownerId) {

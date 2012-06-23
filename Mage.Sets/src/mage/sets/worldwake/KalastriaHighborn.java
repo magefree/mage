@@ -51,78 +51,78 @@ import java.util.UUID;
  */
 public class KalastriaHighborn extends CardImpl<KalastriaHighborn> {
 
-	public KalastriaHighborn(UUID ownerId) {
-		super(ownerId, 59, "Kalastria Highborn", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{B}");
-		this.expansionSetCode = "WWK";
-		this.subtype.add("Vampire");
-		this.subtype.add("Shaman");
+    public KalastriaHighborn(UUID ownerId) {
+        super(ownerId, 59, "Kalastria Highborn", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{B}");
+        this.expansionSetCode = "WWK";
+        this.subtype.add("Vampire");
+        this.subtype.add("Shaman");
 
-		this.color.setBlack(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+        this.color.setBlack(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-		this.addAbility(new KalastriaHighbornTriggeredAbility());
-	}
+        this.addAbility(new KalastriaHighbornTriggeredAbility());
+    }
 
-	public KalastriaHighborn(final KalastriaHighborn card) {
-		super(card);
-	}
+    public KalastriaHighborn(final KalastriaHighborn card) {
+        super(card);
+    }
 
-	@Override
-	public KalastriaHighborn copy() {
-		return new KalastriaHighborn(this);
-	}
+    @Override
+    public KalastriaHighborn copy() {
+        return new KalastriaHighborn(this);
+    }
 }
 
 class KalastriaHighbornTriggeredAbility extends TriggeredAbilityImpl<KalastriaHighbornTriggeredAbility> {
-	KalastriaHighbornTriggeredAbility ( ) {
-		super(Zone.ALL, new LoseLifeTargetEffect(2), false);
-		this.addCost(new ManaCostsImpl("{B}"));
-		this.addTarget(new TargetPlayer());
-		this.getEffects().add(new GainLifeEffect(2));
-	}
+    KalastriaHighbornTriggeredAbility ( ) {
+        super(Zone.ALL, new LoseLifeTargetEffect(2), false);
+        this.addCost(new ManaCostsImpl("{B}"));
+        this.addTarget(new TargetPlayer());
+        this.getEffects().add(new GainLifeEffect(2));
+    }
 
-	KalastriaHighbornTriggeredAbility ( KalastriaHighbornTriggeredAbility ability ) {
-		super(ability);
-	}
+    KalastriaHighbornTriggeredAbility ( KalastriaHighbornTriggeredAbility ability ) {
+        super(ability);
+    }
 
-	@Override
-	public KalastriaHighbornTriggeredAbility copy() {
-		return new KalastriaHighbornTriggeredAbility(this);
-	}
+    @Override
+    public KalastriaHighbornTriggeredAbility copy() {
+        return new KalastriaHighbornTriggeredAbility(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if ( event.getType() == EventType.ZONE_CHANGE ) {
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if ( event.getType() == EventType.ZONE_CHANGE ) {
 
-			// ayrat: make sure Kalastria Highborn is on battlefield
-			UUID sourceId = getSourceId();
-			if (game.getPermanent(sourceId) == null) {
-				// or it is being removed
-				if (game.getLastKnownInformation(sourceId, Zone.BATTLEFIELD) == null) {
-					return false;
-				}
-			}
+            // ayrat: make sure Kalastria Highborn is on battlefield
+            UUID sourceId = getSourceId();
+            if (game.getPermanent(sourceId) == null) {
+                // or it is being removed
+                if (game.getLastKnownInformation(sourceId, Zone.BATTLEFIELD) == null) {
+                    return false;
+                }
+            }
 
-			ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-			Permanent permanent = zEvent.getTarget();
-			
-			if (permanent != null &&
-				zEvent.getToZone() == Zone.GRAVEYARD &&
-				zEvent.getFromZone() == Zone.BATTLEFIELD &&
-				(permanent.getControllerId().equals(this.getControllerId()) &&
-				permanent.hasSubtype("Vampire") || permanent.getId().equals(this.getSourceId())))
-			{
-				return true;
-			}
-		}
-		return false;
-	}
+            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+            Permanent permanent = zEvent.getTarget();
 
-	@Override
-	public String getRule() {
-		return "Whenever {this} or another Vampire you control is put"
-				+ " into a graveyard from the battlefield, you may pay {B}. If you"
-				+ " do, target player loses 2 life and you gain 2 life.";
-	}
+            if (permanent != null &&
+                zEvent.getToZone() == Zone.GRAVEYARD &&
+                zEvent.getFromZone() == Zone.BATTLEFIELD &&
+                (permanent.getControllerId().equals(this.getControllerId()) &&
+                permanent.hasSubtype("Vampire") || permanent.getId().equals(this.getSourceId())))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever {this} or another Vampire you control is put"
+                + " into a graveyard from the battlefield, you may pay {B}. If you"
+                + " do, target player loses 2 life and you gain 2 life.";
+    }
 }

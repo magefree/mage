@@ -38,36 +38,36 @@ import mage.sets.Sets;
  */
 public class TxtDeckImporter extends DeckImporterImpl {
 
-	private boolean sideboard = false;
+    private boolean sideboard = false;
 
-	@Override
-	protected void readLine(String line, DeckCardLists deckList) {
-		if (line.length() == 0 || line.startsWith("//")) return;
-		if (line.startsWith("Sideboard")) {
-			sideboard = true;
-			return;
-		}
-		int delim = line.indexOf(' ');
-		String lineNum = line.substring(0, delim).trim();
-		String lineName = line.substring(delim).trim();
-		try {
-			int num = Integer.parseInt(lineNum);
-			Card card = Sets.findCard(lineName);
-			if (card == null)
-				sbMessage.append("Could not find card: '").append(lineName).append("' at line ").append(lineCount).append("\n");
-			else {
-				String cardName = card.getClass().getCanonicalName();
-				for (int i = 0; i < num; i++) {
-					if (!sideboard)
-						deckList.getCards().add(cardName);
-					else
-						deckList.getSideboard().add(cardName);
-				}
-			}
-		}
-		catch (NumberFormatException nfe) {
-			sbMessage.append("Invalid number: ").append(lineNum).append(" at line ").append(lineCount).append("\n");
-		}
-	}
+    @Override
+    protected void readLine(String line, DeckCardLists deckList) {
+        if (line.length() == 0 || line.startsWith("//")) return;
+        if (line.startsWith("Sideboard")) {
+            sideboard = true;
+            return;
+        }
+        int delim = line.indexOf(' ');
+        String lineNum = line.substring(0, delim).trim();
+        String lineName = line.substring(delim).trim();
+        try {
+            int num = Integer.parseInt(lineNum);
+            Card card = Sets.findCard(lineName);
+            if (card == null)
+                sbMessage.append("Could not find card: '").append(lineName).append("' at line ").append(lineCount).append("\n");
+            else {
+                String cardName = card.getClass().getCanonicalName();
+                for (int i = 0; i < num; i++) {
+                    if (!sideboard)
+                        deckList.getCards().add(cardName);
+                    else
+                        deckList.getSideboard().add(cardName);
+                }
+            }
+        }
+        catch (NumberFormatException nfe) {
+            sbMessage.append("Invalid number: ").append(lineNum).append(" at line ").append(lineCount).append("\n");
+        }
+    }
 
 }

@@ -36,78 +36,78 @@ import mage.game.GameException;
 
 public class Deck implements Serializable {
 
-	private String name;
-	private Set<Card> cards = new LinkedHashSet<Card>();
-	private Set<Card> sideboard = new LinkedHashSet<Card>();
+    private String name;
+    private Set<Card> cards = new LinkedHashSet<Card>();
+    private Set<Card> sideboard = new LinkedHashSet<Card>();
 
-	public static Deck load(DeckCardLists deckCardLists) throws GameException {
-		return Deck.load(deckCardLists, false);
-	}
+    public static Deck load(DeckCardLists deckCardLists) throws GameException {
+        return Deck.load(deckCardLists, false);
+    }
 
-	public static Deck load(DeckCardLists deckCardLists, boolean ignoreErrors) throws GameException {
-		Deck deck = new Deck();
-		deck.setName(deckCardLists.getName());
-		for (String cardName: deckCardLists.getCards()) {
-			Card card = CardImpl.createCard(cardName);
-			if (card != null)
-				deck.cards.add(CardImpl.createCard(cardName));
-			else {
-				if (!ignoreErrors)
-					throw new GameException("Error loading card - " + cardName + " for deck - " + deck.getName());
-			}
-		}
-		for (String cardName: deckCardLists.getSideboard()) {
-			Card card = CardImpl.createCard(cardName);
-			if (card != null)
-				deck.sideboard.add(CardImpl.createCard(cardName));
-			else {
-				if (!ignoreErrors)
-					throw new GameException("Error loading card - " + cardName + " for deck - " + deck.getName());
-			}
-		}
+    public static Deck load(DeckCardLists deckCardLists, boolean ignoreErrors) throws GameException {
+        Deck deck = new Deck();
+        deck.setName(deckCardLists.getName());
+        for (String cardName: deckCardLists.getCards()) {
+            Card card = CardImpl.createCard(cardName);
+            if (card != null)
+                deck.cards.add(CardImpl.createCard(cardName));
+            else {
+                if (!ignoreErrors)
+                    throw new GameException("Error loading card - " + cardName + " for deck - " + deck.getName());
+            }
+        }
+        for (String cardName: deckCardLists.getSideboard()) {
+            Card card = CardImpl.createCard(cardName);
+            if (card != null)
+                deck.sideboard.add(CardImpl.createCard(cardName));
+            else {
+                if (!ignoreErrors)
+                    throw new GameException("Error loading card - " + cardName + " for deck - " + deck.getName());
+            }
+        }
 
-		return deck;
-	}
+        return deck;
+    }
 
-	public DeckCardLists getDeckCardLists() {
-		DeckCardLists deckCardLists = new DeckCardLists();
+    public DeckCardLists getDeckCardLists() {
+        DeckCardLists deckCardLists = new DeckCardLists();
 
-		deckCardLists.setName(name);
-		for (Card card: cards) {
-			deckCardLists.getCards().add(card.getClass().getCanonicalName());
-		}
-		for (Card card: sideboard) {
-			deckCardLists.getSideboard().add(card.getClass().getCanonicalName());
-		}
-		
-		return deckCardLists;
-	}
+        deckCardLists.setName(name);
+        for (Card card: cards) {
+            deckCardLists.getCards().add(card.getClass().getCanonicalName());
+        }
+        for (Card card: sideboard) {
+            deckCardLists.getSideboard().add(card.getClass().getCanonicalName());
+        }
 
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
+        return deckCardLists;
+    }
 
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
 
-	/**
-	 * @return the cards
-	 */
-	public Set<Card> getCards() {
-		return cards;
-	}
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	/**
-	 * @return the sideboard
-	 */
-	public Set<Card> getSideboard() {
-		return sideboard;
-	}
+    /**
+     * @return the cards
+     */
+    public Set<Card> getCards() {
+        return cards;
+    }
+
+    /**
+     * @return the sideboard
+     */
+    public Set<Card> getSideboard() {
+        return sideboard;
+    }
 }

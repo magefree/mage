@@ -39,13 +39,13 @@ import mage.abilities.keyword.InfectAbility;
  */
 public class InsectInfectToken extends Token {
 
-	public InsectInfectToken() {
-		super("Insect", "1/1 green Insect creature token with infect");
-		cardType.add(CardType.CREATURE);
-		color = ObjectColor.GREEN;
-		subtype.add("Insect");
-		power = new MageInt(1);
-		toughness = new MageInt(1);
-		addAbility(InfectAbility.getInstance());
-	}
+    public InsectInfectToken() {
+        super("Insect", "1/1 green Insect creature token with infect");
+        cardType.add(CardType.CREATURE);
+        color = ObjectColor.GREEN;
+        subtype.add("Insect");
+        power = new MageInt(1);
+        toughness = new MageInt(1);
+        addAbility(InfectAbility.getInstance());
+    }
 }

@@ -56,7 +56,7 @@ public class MassacreWurm extends CardImpl<MassacreWurm> {
         super(ownerId, 46, "Massacre Wurm", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{B}");
         this.expansionSetCode = "MBS";
         this.subtype.add("Wurm");
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BoostOpponentsEffect(-2, -2, Constants.Duration.EndOfTurn)));

@@ -45,22 +45,22 @@ import mage.players.Player;
  */
 public interface Draft extends MageItem, Serializable {
 
-	public void addPlayer(Player player);
-	public Collection<DraftPlayer> getPlayers();
-	public DraftPlayer getPlayer(UUID playerId);
-	public List<ExpansionSet> getSets();
-	public int getBoosterNum();
-	public int getCardNum();
-	public boolean addPick(UUID playerId, UUID cardId);
-	public void start();
-	public boolean allJoined();
-	public void leave(UUID playerId);
-	public void autoPick(UUID playerId);
+    public void addPlayer(Player player);
+    public Collection<DraftPlayer> getPlayers();
+    public DraftPlayer getPlayer(UUID playerId);
+    public List<ExpansionSet> getSets();
+    public int getBoosterNum();
+    public int getCardNum();
+    public boolean addPick(UUID playerId, UUID cardId);
+    public void start();
+    public boolean allJoined();
+    public void leave(UUID playerId);
+    public void autoPick(UUID playerId);
 
-	public void addTableEventListener(Listener<TableEvent> listener);
-	public void fireUpdatePlayersEvent();
-	public void fireEndDraftEvent();
-	public void addPlayerQueryEventListener(Listener<PlayerQueryEvent> listener);
-	public void firePickCardEvent(UUID playerId);
+    public void addTableEventListener(Listener<TableEvent> listener);
+    public void fireUpdatePlayersEvent();
+    public void fireEndDraftEvent();
+    public void addPlayerQueryEventListener(Listener<PlayerQueryEvent> listener);
+    public void firePickCardEvent(UUID playerId);
 
 }

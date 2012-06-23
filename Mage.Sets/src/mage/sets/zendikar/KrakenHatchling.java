@@ -40,23 +40,23 @@ import mage.cards.CardImpl;
  */
 public class KrakenHatchling extends CardImpl<KrakenHatchling> {
 
-	public KrakenHatchling(UUID ownerId) {
-		super(ownerId, 50, "Kraken Hatchling", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
-		this.expansionSetCode = "ZEN";
-		this.subtype.add("Kraken");
-		this.color.setBlue(true);
-		this.power = new MageInt(0);
-		this.toughness = new MageInt(4);
+    public KrakenHatchling(UUID ownerId) {
+        super(ownerId, 50, "Kraken Hatchling", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
+        this.expansionSetCode = "ZEN";
+        this.subtype.add("Kraken");
+        this.color.setBlue(true);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(4);
 
-	}
+    }
 
-	public KrakenHatchling(final KrakenHatchling card) {
-		super(card);
-	}
+    public KrakenHatchling(final KrakenHatchling card) {
+        super(card);
+    }
 
-	@Override
-	public KrakenHatchling copy() {
-		return new KrakenHatchling(this);
-	}
+    @Override
+    public KrakenHatchling copy() {
+        return new KrakenHatchling(this);
+    }
 
 }

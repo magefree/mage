@@ -36,18 +36,18 @@ import java.util.UUID;
  */
 public class Mountain4 extends mage.cards.basiclands.Mountain {
 
-	public Mountain4(UUID ownerId) {
-		super(ownerId, 379);
-		this.expansionSetCode = "10E";
-	}
+    public Mountain4(UUID ownerId) {
+        super(ownerId, 379);
+        this.expansionSetCode = "10E";
+    }
 
-	public Mountain4(final Mountain4 card) {
-		super(card);
-	}
+    public Mountain4(final Mountain4 card) {
+        super(card);
+    }
 
-	@Override
-	public Mountain4 copy() {
-		return new Mountain4(this);
-	}
+    @Override
+    public Mountain4 copy() {
+        return new Mountain4(this);
+    }
 
 }

@@ -68,7 +68,7 @@ public class DreamstoneHedron extends CardImpl<DreamstoneHedron> {
     public DreamstoneHedron copy() {
         return new DreamstoneHedron(this);
     }
-    
+
     class DreamstoneHedronFirstManaAbility extends BasicManaAbility<DreamstoneHedronFirstManaAbility> {
 
     public DreamstoneHedronFirstManaAbility() {

@@ -38,23 +38,23 @@ import org.apache.log4j.Logger;
  */
 public class EDTExceptionHandler implements Thread.UncaughtExceptionHandler {
 
-	private final static Logger logger = Logger.getLogger(EDTExceptionHandler.class);
+    private final static Logger logger = Logger.getLogger(EDTExceptionHandler.class);
 
-	@Override
-	public void uncaughtException(Thread t, Throwable e) {
-		handle(e);
-	}
+    @Override
+    public void uncaughtException(Thread t, Throwable e) {
+        handle(e);
+    }
 
-	public void handle(Throwable throwable) {
-		try {
-			logger.fatal(null, throwable);
-			JOptionPane.showMessageDialog(MageFrame.getDesktop(), throwable, "MAGE Client UI error", JOptionPane.ERROR_MESSAGE);
-		} catch (Throwable t) {}
-	}
+    public void handle(Throwable throwable) {
+        try {
+            logger.fatal(null, throwable);
+            JOptionPane.showMessageDialog(MageFrame.getDesktop(), throwable, "MAGE Client UI error", JOptionPane.ERROR_MESSAGE);
+        } catch (Throwable t) {}
+    }
 
-	public static void registerExceptionHandler() {
-		Thread.setDefaultUncaughtExceptionHandler(new EDTExceptionHandler());
-		System.setProperty("sun.awt.exception.handler", EDTExceptionHandler.class.getName());
-	}
+    public static void registerExceptionHandler() {
+        Thread.setDefaultUncaughtExceptionHandler(new EDTExceptionHandler());
+        System.setProperty("sun.awt.exception.handler", EDTExceptionHandler.class.getName());
+    }
 
 }

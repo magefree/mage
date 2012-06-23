@@ -41,27 +41,27 @@ import mage.game.Game;
  */
 public class ExileSpellEffect extends PostResolveEffect<ExileSpellEffect> {
 
-	private static final ExileSpellEffect fINSTANCE =  new ExileSpellEffect();
+    private static final ExileSpellEffect fINSTANCE =  new ExileSpellEffect();
 
-	private Object readResolve() throws ObjectStreamException {
-		return fINSTANCE;
-	}
+    private Object readResolve() throws ObjectStreamException {
+        return fINSTANCE;
+    }
 
-	private ExileSpellEffect() {
-		staticText = "Exile {this}";
-	}
-	
-	public static ExileSpellEffect getInstance() {
-		return fINSTANCE;
-	}
+    private ExileSpellEffect() {
+        staticText = "Exile {this}";
+    }
 
-	@Override
-	public ExileSpellEffect copy() {
-		return fINSTANCE;
-	}
+    public static ExileSpellEffect getInstance() {
+        return fINSTANCE;
+    }
 
-	@Override
-	public void postResolve(Card card, Ability source, UUID controllerId, Game game) {
+    @Override
+    public ExileSpellEffect copy() {
+        return fINSTANCE;
+    }
+
+    @Override
+    public void postResolve(Card card, Ability source, UUID controllerId, Game game) {
         card.moveToExile(null, "", source.getSourceId(), game);
-	}
+    }
 }

@@ -53,7 +53,7 @@ public class MentalMisstep extends CardImpl<MentalMisstep> {
         public MentalMisstep (UUID ownerId) {
         super(ownerId, 38, "Mental Misstep", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{UP}");
         this.expansionSetCode = "NPH";
-		this.color.setBlue(true);
+        this.color.setBlue(true);
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addTarget(new TargetSpell(filter));
     }

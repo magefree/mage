@@ -50,7 +50,7 @@ public class VulshokHeartstoker extends CardImpl<VulshokHeartstoker> {
         this.expansionSetCode = "SOM";
         this.subtype.add("Human");
         this.subtype.add("Shaman");
-		this.color.setRed(true);
+        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(2, 0, Duration.EndOfTurn));

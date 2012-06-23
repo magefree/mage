@@ -46,25 +46,25 @@ import mage.cards.CardImpl;
  */
 public class PutridLeech extends CardImpl<PutridLeech> {
 
-	public PutridLeech(UUID ownerId) {
-		super(ownerId, 95, "Putrid Leech", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}{G}");
-		this.expansionSetCode = "ARB";
-		this.color.setBlack(true);
-		this.color.setGreen(true);
-		this.subtype.add("Zombie");
-		this.subtype.add("Leech");
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
-		this.addAbility(new ActivateOncePerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new PayLifeCost(2)));
-	}
+    public PutridLeech(UUID ownerId) {
+        super(ownerId, 95, "Putrid Leech", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}{G}");
+        this.expansionSetCode = "ARB";
+        this.color.setBlack(true);
+        this.color.setGreen(true);
+        this.subtype.add("Zombie");
+        this.subtype.add("Leech");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+        this.addAbility(new ActivateOncePerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new PayLifeCost(2)));
+    }
 
-	public PutridLeech(final PutridLeech card) {
-		super(card);
-	}
+    public PutridLeech(final PutridLeech card) {
+        super(card);
+    }
 
-	@Override
-	public PutridLeech copy() {
-		return new PutridLeech(this);
-	}
+    @Override
+    public PutridLeech copy() {
+        return new PutridLeech(this);
+    }
 
 }

@@ -55,38 +55,38 @@ import java.util.UUID;
  */
 public class ChandraNalaar extends CardImpl<ChandraNalaar> {
 
-	public ChandraNalaar(UUID ownerId) {
-		super(ownerId, 132, "Chandra Nalaar", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{R}{R}");
-		this.expansionSetCode = "M10";
-		this.subtype.add("Chandra");
-		this.color.setRed(true);
-		this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(6)), ""));
+    public ChandraNalaar(UUID ownerId) {
+        super(ownerId, 132, "Chandra Nalaar", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{R}{R}");
+        this.expansionSetCode = "M10";
+        this.subtype.add("Chandra");
+        this.color.setRed(true);
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(6)), ""));
 
 
-		LoyaltyAbility ability1 = new LoyaltyAbility(new DamageTargetEffect(1), 1);
-		ability1.addTarget(new TargetPlayer());
-		this.addAbility(ability1);
+        LoyaltyAbility ability1 = new LoyaltyAbility(new DamageTargetEffect(1), 1);
+        ability1.addTarget(new TargetPlayer());
+        this.addAbility(ability1);
 
-		LoyaltyAbility ability2 = new LoyaltyAbility(new DamageTargetEffect(ChandraNalaarXValue.getDefault()));
-		ability2.addTarget(new TargetCreaturePermanent());
-		this.addAbility(ability2);
+        LoyaltyAbility ability2 = new LoyaltyAbility(new DamageTargetEffect(ChandraNalaarXValue.getDefault()));
+        ability2.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability2);
 
-		Effects effects1 = new Effects();
-		effects1.add(new DamageTargetEffect(10));
-		effects1.add(new DamageAllControlledTargetEffect(10, new FilterCreaturePermanent()));
-		LoyaltyAbility ability3 = new LoyaltyAbility(effects1, -8);
-		ability3.addTarget(new TargetPlayer());
-		this.addAbility(ability3);
-	}
+        Effects effects1 = new Effects();
+        effects1.add(new DamageTargetEffect(10));
+        effects1.add(new DamageAllControlledTargetEffect(10, new FilterCreaturePermanent()));
+        LoyaltyAbility ability3 = new LoyaltyAbility(effects1, -8);
+        ability3.addTarget(new TargetPlayer());
+        this.addAbility(ability3);
+    }
 
-	public ChandraNalaar(final ChandraNalaar card) {
-		super(card);
-	}
+    public ChandraNalaar(final ChandraNalaar card) {
+        super(card);
+    }
 
-	@Override
-	public ChandraNalaar copy() {
-		return new ChandraNalaar(this);
-	}
+    @Override
+    public ChandraNalaar copy() {
+        return new ChandraNalaar(this);
+    }
 }
 
 class ChandraNalaarXValue implements DynamicValue {

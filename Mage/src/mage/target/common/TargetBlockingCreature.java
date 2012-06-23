@@ -36,26 +36,26 @@ import mage.filter.common.FilterBlockingCreature;
 
 public class TargetBlockingCreature extends TargetCreaturePermanent<TargetBlockingCreature> {
 
-	public TargetBlockingCreature() {
-		this(1, 1, new FilterBlockingCreature(), false);
-	}
+    public TargetBlockingCreature() {
+        this(1, 1, new FilterBlockingCreature(), false);
+    }
 
-	public TargetBlockingCreature(int numTargets) {
-		this(numTargets, numTargets, new FilterBlockingCreature(), false);
-	}
+    public TargetBlockingCreature(int numTargets) {
+        this(numTargets, numTargets, new FilterBlockingCreature(), false);
+    }
 
-	public TargetBlockingCreature(int minNumTargets, int maxNumTargets, FilterBlockingCreature filter, boolean notTarget) {
-		super(minNumTargets, maxNumTargets, filter, notTarget);
-		this.targetName = filter.getMessage();
-	}
+    public TargetBlockingCreature(int minNumTargets, int maxNumTargets, FilterBlockingCreature filter, boolean notTarget) {
+        super(minNumTargets, maxNumTargets, filter, notTarget);
+        this.targetName = filter.getMessage();
+    }
 
-	public TargetBlockingCreature(final TargetBlockingCreature target) {
-		super(target);
-	}
+    public TargetBlockingCreature(final TargetBlockingCreature target) {
+        super(target);
+    }
 
-	@Override
-	public TargetBlockingCreature copy() {
-		return new TargetBlockingCreature(this);
-	}
+    @Override
+    public TargetBlockingCreature copy() {
+        return new TargetBlockingCreature(this);
+    }
 
 }

@@ -67,7 +67,7 @@ public class CurseOfThirst extends CardImpl<CurseOfThirst> {
 
         // At the beginning of enchanted player's upkeep, Curse of Thirst deals damage to that player equal to the number of Curses attached to him or her.
         this.addAbility(new CurseOfThirstAbility());
-        
+
     }
 
     public CurseOfThirst(final CurseOfThirst card) {
@@ -82,38 +82,38 @@ public class CurseOfThirst extends CardImpl<CurseOfThirst> {
 
 class CurseOfThirstAbility extends TriggeredAbilityImpl<CurseOfThirstAbility> {
 
-	public CurseOfThirstAbility() {
-		super(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(new CursesAttachedCount()));
-	}
+    public CurseOfThirstAbility() {
+        super(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(new CursesAttachedCount()));
+    }
 
-	public CurseOfThirstAbility(final CurseOfThirstAbility ability) {
-		super(ability);
-	}
+    public CurseOfThirstAbility(final CurseOfThirstAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public CurseOfThirstAbility copy() {
-		return new CurseOfThirstAbility(this);
-	}
+    @Override
+    public CurseOfThirstAbility copy() {
+        return new CurseOfThirstAbility(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE) {
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE) {
             Permanent enchantment = game.getPermanent(this.sourceId);
             if (enchantment != null && enchantment.getAttachedTo() != null) {
                 Player player = game.getPlayer(enchantment.getAttachedTo());
                 if (player != null && game.getActivePlayerId().equals(player.getId())) {
                     this.getEffects().get(0).setTargetPointer(new FixedTarget(player.getId()));
-        			return true;
+                    return true;
                 }
             }
-		}
-		return false;
-	}
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "At the beginning of enchanted player's upkeep, Curse of Thirst deals damage to that player equal to the number of Curses attached to him or her.";
-	}
+    @Override
+    public String getRule() {
+        return "At the beginning of enchanted player's upkeep, Curse of Thirst deals damage to that player equal to the number of Curses attached to him or her.";
+    }
 
 }
 

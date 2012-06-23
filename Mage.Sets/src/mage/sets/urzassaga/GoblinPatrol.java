@@ -48,8 +48,8 @@ public class GoblinPatrol extends CardImpl<GoblinPatrol>{
         this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-		
-		this.addAbility(new EchoAbility("{R}"));
+
+        this.addAbility(new EchoAbility("{R}"));
     }
 
     public GoblinPatrol(final GoblinPatrol card) {

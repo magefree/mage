@@ -44,64 +44,64 @@ import mage.game.Game;
  */
 public class SpellAbility extends ActivatedAbilityImpl<SpellAbility> {
 
-	public SpellAbility(ManaCost cost, String cardName) {
-		super(AbilityType.SPELL, Zone.HAND);
-		this.addManaCost(cost);
-		this.name = "Cast " + cardName;
-	}
+    public SpellAbility(ManaCost cost, String cardName) {
+        super(AbilityType.SPELL, Zone.HAND);
+        this.addManaCost(cost);
+        this.name = "Cast " + cardName;
+    }
 
-	public SpellAbility(SpellAbility ability) {
-		super(ability);
-	}
+    public SpellAbility(SpellAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public boolean canActivate(UUID playerId, Game game) {
-		MageObject object = game.getObject(sourceId);
-		if ((object.getCardType().contains(CardType.INSTANT) ||
-				object.getAbilities().containsKey(FlashAbility.getInstance().getId()) ||
-				game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST, game) ||
-				game.canPlaySorcery(playerId))) {
-			if (costs.canPay(sourceId, controllerId, game) && canChooseTarget(game)) {
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean canActivate(UUID playerId, Game game) {
+        MageObject object = game.getObject(sourceId);
+        if ((object.getCardType().contains(CardType.INSTANT) ||
+                object.getAbilities().containsKey(FlashAbility.getInstance().getId()) ||
+                game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST, game) ||
+                game.canPlaySorcery(playerId))) {
+            if (costs.canPay(sourceId, controllerId, game) && canChooseTarget(game)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public String getActivatedMessage(Game game) {
-		return " casts " + getMessageText(game);
-	}
+    @Override
+    public String getActivatedMessage(Game game) {
+        return " casts " + getMessageText(game);
+    }
 
-	@Override
-	public String getRule(boolean all) {
-		if (all) {
-			return super.getRule(all) + name;
-		}
-		return super.getRule(false);
-	}
+    @Override
+    public String getRule(boolean all) {
+        if (all) {
+            return super.getRule(all) + name;
+        }
+        return super.getRule(false);
+    }
 
-	public void clear() {
-		getChoices().clearChosen();
-		getTargets().clearChosen();
-		this.manaCosts.clearPaid();
-		this.costs.clearPaid();
-	}
+    public void clear() {
+        getChoices().clearChosen();
+        getTargets().clearChosen();
+        this.manaCosts.clearPaid();
+        this.costs.clearPaid();
+    }
 
-	@Override
-	public String toString() {
-		return this.name;
-	}
+    @Override
+    public String toString() {
+        return this.name;
+    }
 
-	@Override
-	public SpellAbility copy() {
-		return new SpellAbility(this);
-	}
+    @Override
+    public SpellAbility copy() {
+        return new SpellAbility(this);
+    }
 
-	public SpellAbility copySpell() {
-		SpellAbility spell = new SpellAbility(this);
-		spell.id = UUID.randomUUID();
-		return spell;
-	}
-	
+    public SpellAbility copySpell() {
+        SpellAbility spell = new SpellAbility(this);
+        spell.id = UUID.randomUUID();
+        return spell;
+    }
+
 }

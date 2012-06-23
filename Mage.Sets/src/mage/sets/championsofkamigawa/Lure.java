@@ -55,12 +55,12 @@ public class Lure extends CardImpl<Lure> {
         super(ownerId, 226, "Lure", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Aura");
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		this.addAbility(ability);
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBlockSourceEffect()), AttachmentType.AURA)));
     }
 

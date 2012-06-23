@@ -39,30 +39,30 @@ import mage.game.events.GameEvent.EventType;
  */
 public class BeginningPhase extends Phase<BeginningPhase> {
 
-	public BeginningPhase() {
-		this.type = TurnPhase.BEGINNING;
-		this.event = EventType.BEGINNING_PHASE;
-		this.preEvent = EventType.BEGINNING_PHASE_PRE;
-		this.postEvent = EventType.BEGINNING_PHASE_POST;
-		this.steps.add(new UntapStep());
-		this.steps.add(new UpkeepStep());
-		this.steps.add(new DrawStep());
-	}
+    public BeginningPhase() {
+        this.type = TurnPhase.BEGINNING;
+        this.event = EventType.BEGINNING_PHASE;
+        this.preEvent = EventType.BEGINNING_PHASE_PRE;
+        this.postEvent = EventType.BEGINNING_PHASE_POST;
+        this.steps.add(new UntapStep());
+        this.steps.add(new UpkeepStep());
+        this.steps.add(new DrawStep());
+    }
 
     @Override
-	public boolean beginPhase(Game game, UUID activePlayerId) {
+    public boolean beginPhase(Game game, UUID activePlayerId) {
         game.getBattlefield().beginningOfTurn(game);
         return super.beginPhase(game, activePlayerId);
-	}
-    
-    
-	public BeginningPhase(final BeginningPhase phase) {
-		super(phase);
-	}
+    }
 
-	@Override
-	public BeginningPhase copy() {
-		return new BeginningPhase(this);
-	}
+
+    public BeginningPhase(final BeginningPhase phase) {
+        super(phase);
+    }
+
+    @Override
+    public BeginningPhase copy() {
+        return new BeginningPhase(this);
+    }
 
 }

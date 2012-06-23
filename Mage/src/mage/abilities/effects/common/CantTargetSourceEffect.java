@@ -44,51 +44,51 @@ import mage.game.stack.StackObject;
  */
 public class CantTargetSourceEffect extends ReplacementEffectImpl<CantTargetSourceEffect> {
 
-	private FilterStackObject filterSource;
+    private FilterStackObject filterSource;
 
-	public CantTargetSourceEffect(FilterStackObject filterSource, Duration duration) {
-		super(duration, Outcome.Benefit);
-		this.filterSource = filterSource;
-		setText();
-	}
+    public CantTargetSourceEffect(FilterStackObject filterSource, Duration duration) {
+        super(duration, Outcome.Benefit);
+        this.filterSource = filterSource;
+        setText();
+    }
 
-	public CantTargetSourceEffect(final CantTargetSourceEffect effect) {
-		super(effect);
-		this.filterSource = effect.filterSource.copy();
-	}
+    public CantTargetSourceEffect(final CantTargetSourceEffect effect) {
+        super(effect);
+        this.filterSource = effect.filterSource.copy();
+    }
 
-	@Override
-	public CantTargetSourceEffect copy() {
-		return new CantTargetSourceEffect(this);
-	}
+    @Override
+    public CantTargetSourceEffect copy() {
+        return new CantTargetSourceEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		return true;
-	}
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        return true;
+    }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (event.getType() == EventType.TARGET && event.getTargetId().equals(source.getSourceId())) {
-			StackObject sourceObject = game.getStack().getStackObject(event.getSourceId());
-			if (sourceObject != null && filterSource.match(sourceObject, source.getControllerId(), game)) {
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (event.getType() == EventType.TARGET && event.getTargetId().equals(source.getSourceId())) {
+            StackObject sourceObject = game.getStack().getStackObject(event.getSourceId());
+            if (sourceObject != null && filterSource.match(sourceObject, source.getControllerId(), game)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	private void setText() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("{this} can't be the target of ");
-		sb.append(filterSource.getMessage());
-		sb.append(" ").append(duration.toString());
-		staticText = sb.toString();
-	}
+    private void setText() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("{this} can't be the target of ");
+        sb.append(filterSource.getMessage());
+        sb.append(" ").append(duration.toString());
+        staticText = sb.toString();
+    }
 
 }

@@ -67,7 +67,7 @@ public class CurseOfEchoes extends CardImpl<CurseOfEchoes> {
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Damage));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
-        
+
         // Whenever enchanted player casts an instant or sorcery spell, each other player may copy that spell and may choose new targets for the copy he or she controls.
         this.addAbility(new CurseOfEchoesCopyTriggeredAbility());
     }
@@ -83,33 +83,33 @@ public class CurseOfEchoes extends CardImpl<CurseOfEchoes> {
 }
 
 class CurseOfEchoesCopyTriggeredAbility extends TriggeredAbilityImpl<CurseOfEchoesCopyTriggeredAbility> {
-	
-	private static final FilterSpell filter = new FilterSpell();
-	
-	static {
-		filter.getCardType().add(CardType.INSTANT);
-		filter.getCardType().add(CardType.SORCERY);
-		filter.setScopeCardType(Filter.ComparisonScope.Any);
-	}
-	
-	public CurseOfEchoesCopyTriggeredAbility() {
-		super(Constants.Zone.BATTLEFIELD, new CurseOfEchoesEffect(), false);
-		this.addTarget(new TargetSpell(filter));
-	}
 
-	public CurseOfEchoesCopyTriggeredAbility(final CurseOfEchoesCopyTriggeredAbility ability) {
-		super(ability);
-	}
+    private static final FilterSpell filter = new FilterSpell();
 
-	@Override
-	public CurseOfEchoesCopyTriggeredAbility copy() {
-		return new CurseOfEchoesCopyTriggeredAbility(this);
-	}
+    static {
+        filter.getCardType().add(CardType.INSTANT);
+        filter.getCardType().add(CardType.SORCERY);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-			Spell spell = game.getStack().getSpell(event.getTargetId());
+    public CurseOfEchoesCopyTriggeredAbility() {
+        super(Constants.Zone.BATTLEFIELD, new CurseOfEchoesEffect(), false);
+        this.addTarget(new TargetSpell(filter));
+    }
+
+    public CurseOfEchoesCopyTriggeredAbility(final CurseOfEchoesCopyTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public CurseOfEchoesCopyTriggeredAbility copy() {
+        return new CurseOfEchoesCopyTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
+            Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null && spell.getCardType().contains(CardType.INSTANT) || spell.getCardType().contains(CardType.SORCERY)) {
                 Permanent enchantment = game.getPermanent(sourceId);
                 if (enchantment != null && enchantment.getAttachedTo() != null) {
@@ -120,30 +120,30 @@ class CurseOfEchoesCopyTriggeredAbility extends TriggeredAbilityImpl<CurseOfEcho
                     }
                 }
             }
-		}
-		return false;
-	}
-	
-	@Override
-	public String getRule() {
-		return "Whenever enchanted player casts an instant or sorcery spell, each other player may copy that spell and may choose new targets for the copy he or she controls.";
-	}
+        }
+        return false;
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever enchanted player casts an instant or sorcery spell, each other player may copy that spell and may choose new targets for the copy he or she controls.";
+    }
 }
 
 class CurseOfEchoesEffect extends OneShotEffect<CurseOfEchoesEffect> {
 
-	public CurseOfEchoesEffect() {
-		super(Constants.Outcome.Copy);
-	}
-	
-	public CurseOfEchoesEffect(final CurseOfEchoesEffect effect) {
-		super(effect);
-	}
+    public CurseOfEchoesEffect() {
+        super(Constants.Outcome.Copy);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
-		if (spell != null) {
+    public CurseOfEchoesEffect(final CurseOfEchoesEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+        if (spell != null) {
             String chooseMessage = "Copy target spell?  You may choose new targets for the copy.";
             for (UUID playerId: game.getPlayerList()) {
                 if (!playerId.equals(spell.getControllerId())) {
@@ -157,15 +157,15 @@ class CurseOfEchoesEffect extends OneShotEffect<CurseOfEchoesEffect> {
                     }
                 }
             }
-			return true;
-		}
-		return false;
-	}
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public CurseOfEchoesEffect copy() {
-		return new CurseOfEchoesEffect(this);
-	}
+    @Override
+    public CurseOfEchoesEffect copy() {
+        return new CurseOfEchoesEffect(this);
+    }
 
    @Override
     public String getText(Mode mode) {

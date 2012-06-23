@@ -42,22 +42,22 @@ import mage.game.permanent.Permanent;
  */
 public class ReturnToBattlefieldUnderYourControlAttachedEffect extends OneShotEffect<ReturnToBattlefieldUnderYourControlAttachedEffect> {
 
-	public ReturnToBattlefieldUnderYourControlAttachedEffect() {
-		super(Outcome.Benefit);
+    public ReturnToBattlefieldUnderYourControlAttachedEffect() {
+        super(Outcome.Benefit);
         staticText = "return that card to the battlefield under your control";
-	}
+    }
 
-	public ReturnToBattlefieldUnderYourControlAttachedEffect(final ReturnToBattlefieldUnderYourControlAttachedEffect effect) {
-		super(effect);
-	}
+    public ReturnToBattlefieldUnderYourControlAttachedEffect(final ReturnToBattlefieldUnderYourControlAttachedEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public ReturnToBattlefieldUnderYourControlAttachedEffect copy() {
-		return new ReturnToBattlefieldUnderYourControlAttachedEffect(this);
-	}
+    @Override
+    public ReturnToBattlefieldUnderYourControlAttachedEffect copy() {
+        return new ReturnToBattlefieldUnderYourControlAttachedEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
         Object object = getValue("attachedTo");
         if (object != null && object instanceof Permanent) {
             Card card = game.getCard(((Permanent)object).getId());
@@ -69,7 +69,7 @@ public class ReturnToBattlefieldUnderYourControlAttachedEffect extends OneShotEf
             }
         }
 
-		return false;
-	}
+        return false;
+    }
 
 }

@@ -41,20 +41,20 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class DayOfJudgment extends CardImpl<DayOfJudgment> {
 
-	public DayOfJudgment(UUID ownerId) {
-		super(ownerId, 9, "Day of Judgment", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
-		this.expansionSetCode = "ZEN";
-		this.color.setWhite(true);
-		this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterCreaturePermanent()));
-	}
+    public DayOfJudgment(UUID ownerId) {
+        super(ownerId, 9, "Day of Judgment", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
+        this.expansionSetCode = "ZEN";
+        this.color.setWhite(true);
+        this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterCreaturePermanent()));
+    }
 
-	public DayOfJudgment(final DayOfJudgment card) {
-		super(card);
-	}
+    public DayOfJudgment(final DayOfJudgment card) {
+        super(card);
+    }
 
-	@Override
-	public DayOfJudgment copy() {
-		return new DayOfJudgment(this);
-	}
+    @Override
+    public DayOfJudgment copy() {
+        return new DayOfJudgment(this);
+    }
 
 }

@@ -39,28 +39,28 @@ import java.io.ObjectStreamException;
  */
 public class ChangelingAbility extends StaticAbility<ChangelingAbility> {
 
-	private static final ChangelingAbility fINSTANCE =  new ChangelingAbility();
+    private static final ChangelingAbility fINSTANCE =  new ChangelingAbility();
 
-	private Object readResolve() throws ObjectStreamException {
-		return fINSTANCE;
-	}
+    private Object readResolve() throws ObjectStreamException {
+        return fINSTANCE;
+    }
 
-	public static ChangelingAbility getInstance() {
-		return fINSTANCE;
-	}
+    public static ChangelingAbility getInstance() {
+        return fINSTANCE;
+    }
 
-	private ChangelingAbility() {
-		super(Zone.BATTLEFIELD, null);
-	}
+    private ChangelingAbility() {
+        super(Zone.BATTLEFIELD, null);
+    }
 
-	@Override
-	public String getRule() {
-		return "Changeling (This card is every creature type at all times.)";
-	}
+    @Override
+    public String getRule() {
+        return "Changeling (This card is every creature type at all times.)";
+    }
 
-	@Override
-	public ChangelingAbility copy() {
-		return fINSTANCE;
-	}
+    @Override
+    public ChangelingAbility copy() {
+        return fINSTANCE;
+    }
 
 }

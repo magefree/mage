@@ -46,31 +46,31 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Combust extends CardImpl<Combust> {
 
-	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("white or blue creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("white or blue creature");
 
-	static {
-		filter.getColor().setWhite(true);
-		filter.getColor().setBlue(true);
-		filter.setUseColor(true);
-		filter.setScopeColor(ComparisonScope.Any);
-	}
+    static {
+        filter.getColor().setWhite(true);
+        filter.getColor().setBlue(true);
+        filter.setUseColor(true);
+        filter.setScopeColor(ComparisonScope.Any);
+    }
 
-	public Combust(UUID ownerId) {
-		super(ownerId, 130, "Combust", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
-		this.expansionSetCode = "M11";
-		this.color.setRed(true);
-		this.getSpellAbility().addEffect(new DamageTargetEffect(5, false));
-		this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-		this.addAbility(new SimpleStaticAbility(Zone.STACK, new CantCounterSourceEffect()));
-	}
+    public Combust(UUID ownerId) {
+        super(ownerId, 130, "Combust", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
+        this.expansionSetCode = "M11";
+        this.color.setRed(true);
+        this.getSpellAbility().addEffect(new DamageTargetEffect(5, false));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(new SimpleStaticAbility(Zone.STACK, new CantCounterSourceEffect()));
+    }
 
-	public Combust(final Combust card) {
-		super(card);
-	}
+    public Combust(final Combust card) {
+        super(card);
+    }
 
-	@Override
-	public Combust copy() {
-		return new Combust(this);
-	}
+    @Override
+    public Combust copy() {
+        return new Combust(this);
+    }
 
 }

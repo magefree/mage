@@ -58,7 +58,7 @@ public class FlameblastDragon extends CardImpl<FlameblastDragon> {
         this.color.setRed(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
-		this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(FlyingAbility.getInstance());
         Ability ability = new AttacksTriggeredAbility(new FlameblastDragonEffect(), false);
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
@@ -93,7 +93,7 @@ class FlameblastDragonEffect extends OneShotEffect<FlameblastDragonEffect> {
                 cost.clearPaid();
                 if (cost.pay(source, game, source.getId(), source.getControllerId(), false)) {
                     int costX = cost.getX();
-					Permanent permanent = game.getPermanent(source.getFirstTarget());
+                    Permanent permanent = game.getPermanent(source.getFirstTarget());
                     if (permanent != null) {
                         permanent.damage(costX, source.getId(), game, true, false);
                         return true;

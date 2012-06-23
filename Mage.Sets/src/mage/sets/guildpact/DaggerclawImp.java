@@ -46,7 +46,7 @@ public class DaggerclawImp extends CardImpl<DaggerclawImp> {
         super(ownerId, 48, "Daggerclaw Imp", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "GPT";
         this.subtype.add("Imp");
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());

@@ -46,7 +46,7 @@ public class VeteransReflexes extends CardImpl<VeteransReflexes> {
     public VeteransReflexes (UUID ownerId) {
         super(ownerId, 23, "Veteran's Reflexes", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "WWK";
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         this.getSpellAbility().addEffect(new BoostTargetEffect(1, 1, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new UntapTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

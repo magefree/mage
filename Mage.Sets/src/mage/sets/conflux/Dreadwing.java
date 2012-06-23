@@ -53,7 +53,7 @@ public class Dreadwing extends CardImpl<Dreadwing> {
         this.subtype.add("Zombie");
         this.color.setBlack(true);
         this.power = new MageInt(1);
-	this.toughness = new MageInt(1);
+    this.toughness = new MageInt(1);
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(3, 0, Duration.EndOfTurn), new ManaCostsImpl(("{1}{U}{B}")));
         ability.getEffects().add(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
         this.addAbility(ability);

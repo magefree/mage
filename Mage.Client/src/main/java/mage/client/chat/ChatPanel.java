@@ -53,175 +53,175 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ChatPanel extends javax.swing.JPanel {
 
-	private UUID chatId;
-	private Session session;
+    private UUID chatId;
+    private Session session;
 
-	private List<String> players = new ArrayList<String>();
-	private TableModel tableModel;
+    private List<String> players = new ArrayList<String>();
+    private TableModel tableModel;
 
-	/**
-	 * Chat message color for opponents.
-	 */
-	private static final Color OPPONENT_COLOR = new Color(0, 230, 64);
+    /**
+     * Chat message color for opponents.
+     */
+    private static final Color OPPONENT_COLOR = new Color(0, 230, 64);
 
-	/**
-	 * Chat message color for client player.
-	 */
-	private static final Color MY_COLOR = new Color(0, 230, 64);
+    /**
+     * Chat message color for client player.
+     */
+    private static final Color MY_COLOR = new Color(0, 230, 64);
 
-	/**
-	 * Chat message color for timestamps.
-	 */
-	private static final Color TIMESTAMP_COLOR = new Color(255, 255, 0, 120);
+    /**
+     * Chat message color for timestamps.
+     */
+    private static final Color TIMESTAMP_COLOR = new Color(255, 255, 0, 120);
 
-	/**
-	 * Chat message color for messages.
-	 */
-	private static final Color MESSAGE_COLOR = Color.white;
+    /**
+     * Chat message color for messages.
+     */
+    private static final Color MESSAGE_COLOR = Color.white;
 
-	/**
-	 * This will be a chat that will be connected to {this} and will handle redirected messages;
-	 * Mostly used to redirect user messages to another window.
-	 */
-	private ChatPanel connectedChat;
+    /**
+     * This will be a chat that will be connected to {this} and will handle redirected messages;
+     * Mostly used to redirect user messages to another window.
+     */
+    private ChatPanel connectedChat;
 
-	/**
-	 * Parent chat this chat connected to.
-	 * Used to send messages using parent chat as it is the only one connected to server.
-	 */
-	private ChatPanel parentChatRef;
+    /**
+     * Parent chat this chat connected to.
+     * Used to send messages using parent chat as it is the only one connected to server.
+     */
+    private ChatPanel parentChatRef;
 
-	/**
-	 * Selected extended view mode.
-	 */
-	private VIEW_MODE extendedViewMode = VIEW_MODE.NONE;
+    /**
+     * Selected extended view mode.
+     */
+    private VIEW_MODE extendedViewMode = VIEW_MODE.NONE;
 
-	public enum VIEW_MODE {
-		NONE, GAME, CHAT
-	}
-
-	/**
-	 * Maps message colors to {@link Color}.
-	 */
-	private static final Map<MessageColor, Color> colorMap = new EnumMap<MessageColor, Color>(MessageColor.class);
-
-	static {
-		colorMap.put(MessageColor.BLACK, Color.black);
-		colorMap.put(MessageColor.GREEN, Color.green);
-		colorMap.put(MessageColor.ORANGE, Color.orange);
-		colorMap.put(MessageColor.BLUE, Color.blue);
-		colorMap.put(MessageColor.RED, Color.red);
-	}
-
-	/** Creates new form ChatPanel */
-    public ChatPanel() {
-	    this(false);
+    public enum VIEW_MODE {
+        NONE, GAME, CHAT
     }
 
-	/**
-	 * @param addPlayersTab if true, adds chat/players tabs
-	 */
+    /**
+     * Maps message colors to {@link Color}.
+     */
+    private static final Map<MessageColor, Color> colorMap = new EnumMap<MessageColor, Color>(MessageColor.class);
+
+    static {
+        colorMap.put(MessageColor.BLACK, Color.black);
+        colorMap.put(MessageColor.GREEN, Color.green);
+        colorMap.put(MessageColor.ORANGE, Color.orange);
+        colorMap.put(MessageColor.BLUE, Color.blue);
+        colorMap.put(MessageColor.RED, Color.red);
+    }
+
+    /** Creates new form ChatPanel */
+    public ChatPanel() {
+        this(false);
+    }
+
+    /**
+     * @param addPlayersTab if true, adds chat/players tabs
+     */
     /** Creates new form ChatPanel */
     public ChatPanel(boolean addPlayersTab) {
-	    tableModel = new TableModel();
+        tableModel = new TableModel();
         initComponents();
-	    if (!addPlayersTab) simplifyComponents();
+        if (!addPlayersTab) simplifyComponents();
     }
 
-	public void connect(UUID chatId) {
-		session = MageFrame.getSession();
-		this.chatId = chatId;
-		if (session.joinChat(chatId)) {
-			MageFrame.addChat(chatId, this);
-		}
-	}
+    public void connect(UUID chatId) {
+        session = MageFrame.getSession();
+        this.chatId = chatId;
+        if (session.joinChat(chatId)) {
+            MageFrame.addChat(chatId, this);
+        }
+    }
 
-	public void disconnect() {
-		if (session != null)
-			session.leaveChat(chatId);
-	}
+    public void disconnect() {
+        if (session != null)
+            session.leaveChat(chatId);
+    }
 
-	/**
-	 * Display message in the chat.
-	 * Use different colors for timestamp, username and message.
-	 *
-	 * @param username message sender
-	 * @param message message itself
-	 * @param time timestamp
-	 * @param color Preferred color. Not used.
-	 */
-	public void receiveMessage(String username, String message, String time, MessageColor color) {
-		if (extendedViewMode.equals(VIEW_MODE.GAME)) {
-			this.txtConversation.append(TIMESTAMP_COLOR, time + " ");
-			this.txtConversation.append(MESSAGE_COLOR, (username.isEmpty() ? "" : username + ":") + message + "\n");
-		} else {
-			this.txtConversation.append(TIMESTAMP_COLOR, time + " ");
-			Color userColor;
-			if (parentChatRef != null) {
-				userColor = parentChatRef.session.getUserName().equals(username) ? MY_COLOR : OPPONENT_COLOR;
-			} else {
-				userColor = session.getUserName().equals(username) ? MY_COLOR : OPPONENT_COLOR;
-			}
-			this.txtConversation.append(userColor, username + ": ");
-			this.txtConversation.append(MESSAGE_COLOR, message + "\n");
-		}
-	}
+    /**
+     * Display message in the chat.
+     * Use different colors for timestamp, username and message.
+     *
+     * @param username message sender
+     * @param message message itself
+     * @param time timestamp
+     * @param color Preferred color. Not used.
+     */
+    public void receiveMessage(String username, String message, String time, MessageColor color) {
+        if (extendedViewMode.equals(VIEW_MODE.GAME)) {
+            this.txtConversation.append(TIMESTAMP_COLOR, time + " ");
+            this.txtConversation.append(MESSAGE_COLOR, (username.isEmpty() ? "" : username + ":") + message + "\n");
+        } else {
+            this.txtConversation.append(TIMESTAMP_COLOR, time + " ");
+            Color userColor;
+            if (parentChatRef != null) {
+                userColor = parentChatRef.session.getUserName().equals(username) ? MY_COLOR : OPPONENT_COLOR;
+            } else {
+                userColor = session.getUserName().equals(username) ? MY_COLOR : OPPONENT_COLOR;
+            }
+            this.txtConversation.append(userColor, username + ": ");
+            this.txtConversation.append(MESSAGE_COLOR, message + "\n");
+        }
+    }
 
-	public ChatPanel getConnectedChat() {
-		return connectedChat;
-	}
+    public ChatPanel getConnectedChat() {
+        return connectedChat;
+    }
 
-	public void setConnectedChat(ChatPanel connectedChat) {
-		this.connectedChat = connectedChat;
-	}
+    public void setConnectedChat(ChatPanel connectedChat) {
+        this.connectedChat = connectedChat;
+    }
 
-	public void setParentChat(ChatPanel parentChatRef) {
-		this.parentChatRef = parentChatRef;
-	}
+    public void setParentChat(ChatPanel parentChatRef) {
+        this.parentChatRef = parentChatRef;
+    }
 
-	public void disableInput() {
-		this.txtMessage.setVisible(false);
-	}
+    public void disableInput() {
+        this.txtMessage.setVisible(false);
+    }
 
-	public JTextField getTxtMessageInputComponent() {
-		return this.txtMessage;
-	}
+    public JTextField getTxtMessageInputComponent() {
+        return this.txtMessage;
+    }
 
-	public void useExtendedView(VIEW_MODE extendedViewMode) {
-		this.extendedViewMode = extendedViewMode;
-		this.txtConversation.setExtBackgroundColor(new Color(0,0,0,100));
-		this.txtConversation.setBackground(new Color(0,0,0,0));
-		this.txtConversation.setForeground(new Color(255,255,255));
-		this.jScrollPane1.setOpaque(false);
-		this.jScrollPane1.getViewport().setOpaque(false);
-	}
+    public void useExtendedView(VIEW_MODE extendedViewMode) {
+        this.extendedViewMode = extendedViewMode;
+        this.txtConversation.setExtBackgroundColor(new Color(0,0,0,100));
+        this.txtConversation.setBackground(new Color(0,0,0,0));
+        this.txtConversation.setForeground(new Color(255,255,255));
+        this.jScrollPane1.setOpaque(false);
+        this.jScrollPane1.getViewport().setOpaque(false);
+    }
 
 class TableModel extends AbstractTableModel {
     private String[] columnNames = new String[]{"Players"};
-	private List<String> players = new ArrayList<String>(0);
+    private List<String> players = new ArrayList<String>(0);
 
-	public void loadData(List<String> players) {
-		this.players = players;
-		this.fireTableDataChanged();
-	}
+    public void loadData(List<String> players) {
+        this.players = players;
+        this.fireTableDataChanged();
+    }
 
-	@Override
-	public int getRowCount() {
-		return players.size();
-	}
+    @Override
+    public int getRowCount() {
+        return players.size();
+    }
 
-	@Override
-	public int getColumnCount() {
-		return columnNames.length;
-	}
+    @Override
+    public int getColumnCount() {
+        return columnNames.length;
+    }
 
-	@Override
-	public Object getValueAt(int arg0, int arg1) {
-		return players.get(arg0);
-	}
+    @Override
+    public Object getValueAt(int arg0, int arg1) {
+        return players.get(arg0);
+    }
 
-	@Override
-	public String getColumnName(int columnIndex) {
+    @Override
+    public String getColumnName(int columnIndex) {
         String colName = "";
 
         if (columnIndex <= getColumnCount())
@@ -230,22 +230,22 @@ class TableModel extends AbstractTableModel {
         return colName;
     }
 
-	@Override
+    @Override
     public Class getColumnClass(int columnIndex){
-		return String.class;
+        return String.class;
     }
 
-	@Override
+    @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-		return false;
+        return false;
     }
 
 }
 
-	public void clear() {
-		this.txtConversation.selectAll();
-		this.txtConversation.replaceSelection("");
-	}
+    public void clear() {
+        this.txtConversation.selectAll();
+        this.txtConversation.replaceSelection("");
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -273,14 +273,14 @@ class TableModel extends AbstractTableModel {
         jSplitPane1.setResizeWeight(0.25);
 
 //        txtConversation.setColumns(20);
-		txtConversation.setOpaque(false);
+        txtConversation.setOpaque(false);
 //        txtConversation.setEditable(false);
         txtConversation.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 //        txtConversation.setLineWrap(true);
 //        txtConversation.setRows(5);
 //        txtConversation.setWrapStyleWord(true);
         jScrollPane1.setViewportView(txtConversation);
-		jScrollPane1.setBorder(new EmptyBorder(0,0,0,0));
+        jScrollPane1.setBorder(new EmptyBorder(0,0,0,0));
 
         jSplitPane1.setLeftComponent(jScrollPane2);
 
@@ -290,7 +290,7 @@ class TableModel extends AbstractTableModel {
         jScrollPane2.setViewportView(jTable1);
 
         jSplitPane1.setBottomComponent(jScrollPane1);
-		jSplitPane1.setDividerLocation(150 + jSplitPane1.getInsets().bottom);
+        jSplitPane1.setDividerLocation(150 + jSplitPane1.getInsets().bottom);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -308,8 +308,8 @@ class TableModel extends AbstractTableModel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-	private void simplifyComponents() {
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+    private void simplifyComponents() {
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -324,50 +324,50 @@ class TableModel extends AbstractTableModel {
                 .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-		jTable1 = null;
-		jScrollPane2 = null;
-	}
+        jTable1 = null;
+        jScrollPane2 = null;
+    }
 
-	private void txtMessageKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMessageKeyTyped
-		if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
-			if (parentChatRef != null) {
-				parentChatRef.session.sendChatMessage(parentChatRef.chatId, this.txtMessage.getText());
-			} else {
-				session.sendChatMessage(chatId, this.txtMessage.getText());
-			}
-			this.txtMessage.setText("");
-			this.txtMessage.repaint();
-		}
+    private void txtMessageKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMessageKeyTyped
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+            if (parentChatRef != null) {
+                parentChatRef.session.sendChatMessage(parentChatRef.chatId, this.txtMessage.getText());
+            } else {
+                session.sendChatMessage(chatId, this.txtMessage.getText());
+            }
+            this.txtMessage.setText("");
+            this.txtMessage.repaint();
+        }
 }//GEN-LAST:event_txtMessageKeyTyped
 
-	public void setPlayers(Collection<String> players) {
-		if (players != null) {
-			boolean update = false;
-			int size = players.size();
-			List<String> list = new ArrayList<String>(players);
-			Collections.sort(list);
-			if (size != this.players.size()) {
-				update = true;
-			} else {
-				update = true;
-				for (int i = 0; i < size; i++) {
-					if (!list.get(i).equals(this.players.get(i))) {
-						update = false;
-						break;
-					}
-				}
-			}
-			if (update && list != null) {
-				synchronized (tableModel) {
-					this.players = list;
-					tableModel.loadData(this.players);
-				}
-			}
+    public void setPlayers(Collection<String> players) {
+        if (players != null) {
+            boolean update = false;
+            int size = players.size();
+            List<String> list = new ArrayList<String>(players);
+            Collections.sort(list);
+            if (size != this.players.size()) {
+                update = true;
+            } else {
+                update = true;
+                for (int i = 0; i < size; i++) {
+                    if (!list.get(i).equals(this.players.get(i))) {
+                        update = false;
+                        break;
+                    }
+                }
+            }
+            if (update && list != null) {
+                synchronized (tableModel) {
+                    this.players = list;
+                    tableModel.loadData(this.players);
+                }
+            }
 
-		} else {
-			this.players.clear();
-		}
-	}
+        } else {
+            this.players.clear();
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;

@@ -38,28 +38,28 @@ import mage.abilities.StaticAbility;
  */
 public class FlashAbility extends StaticAbility<FlashAbility> {
 
-	private static final FlashAbility fINSTANCE =  new FlashAbility();
+    private static final FlashAbility fINSTANCE =  new FlashAbility();
 
-	private Object readResolve() throws ObjectStreamException {
-		return fINSTANCE;
-	}
+    private Object readResolve() throws ObjectStreamException {
+        return fINSTANCE;
+    }
 
-	public static FlashAbility getInstance() {
-		return fINSTANCE;
-	}
+    public static FlashAbility getInstance() {
+        return fINSTANCE;
+    }
 
-	private FlashAbility() {
-		super(Zone.BATTLEFIELD, null);
-	}
+    private FlashAbility() {
+        super(Zone.BATTLEFIELD, null);
+    }
 
-	@Override
-	public String getRule() {
-		return "Flash";
-	}
+    @Override
+    public String getRule() {
+        return "Flash";
+    }
 
-	@Override
-	public FlashAbility copy() {
-		return fINSTANCE;
-	}
+    @Override
+    public FlashAbility copy() {
+        return fINSTANCE;
+    }
 
 }

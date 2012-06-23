@@ -42,69 +42,69 @@ import mage.players.Player;
  */
 public class DraftPlayer {
 
-	protected UUID id;
-	protected Player player;
-	protected Deck deck;
-	protected List<Card> booster;
-	protected boolean picking;
-	protected boolean joined = false;
+    protected UUID id;
+    protected Player player;
+    protected Deck deck;
+    protected List<Card> booster;
+    protected boolean picking;
+    protected boolean joined = false;
 
-	public DraftPlayer(Player player) {
-		id = UUID.randomUUID();
-		this.player = player;
-		this.deck = new Deck();
-	}
+    public DraftPlayer(Player player) {
+        id = UUID.randomUUID();
+        this.player = player;
+        this.deck = new Deck();
+    }
 
-	public UUID getId() {
-		return id;
-	}
+    public UUID getId() {
+        return id;
+    }
 
-	public Player getPlayer() {
-		return player;
-	}
+    public Player getPlayer() {
+        return player;
+    }
 
-	public Deck getDeck() {
-		return deck;
-	}
+    public Deck getDeck() {
+        return deck;
+    }
 
-	public void addPick(Card card) {
-		deck.getSideboard().add(card);
-		synchronized(booster) {
-			booster.remove(card);
-		}
-		picking = false;
-	}
+    public void addPick(Card card) {
+        deck.getSideboard().add(card);
+        synchronized(booster) {
+            booster.remove(card);
+        }
+        picking = false;
+    }
 
-	public void openBooster(ExpansionSet set) {
-		synchronized(booster) {
-			booster = set.createBooster();
-		}
-	}
+    public void openBooster(ExpansionSet set) {
+        synchronized(booster) {
+            booster = set.createBooster();
+        }
+    }
 
-	public void setBooster(List<Card> booster) {
-		this.booster = booster;
-	}
+    public void setBooster(List<Card> booster) {
+        this.booster = booster;
+    }
 
-	public List<Card> getBooster() {
-		synchronized(booster) {
-			return new ArrayList<Card>(booster);
-		}
-	}
+    public List<Card> getBooster() {
+        synchronized(booster) {
+            return new ArrayList<Card>(booster);
+        }
+    }
 
-	public void setPicking() {
-		picking = true;
-	}
+    public void setPicking() {
+        picking = true;
+    }
 
-	public boolean isPicking() {
-		return picking;
-	}
+    public boolean isPicking() {
+        return picking;
+    }
 
-	public boolean isJoined() {
-		return joined;
-	}
+    public boolean isJoined() {
+        return joined;
+    }
 
-	public void setJoined() {
-		this.joined = true;
-	}
+    public void setJoined() {
+        this.joined = true;
+    }
 
 }

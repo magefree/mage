@@ -37,38 +37,38 @@ import mage.game.tournament.LimitedOptions;
  */
 public class DraftOptions extends LimitedOptions implements Serializable {
 
-	protected String draftType;
-	protected TimingOption timing;
+    protected String draftType;
+    protected TimingOption timing;
 
-	public enum TimingOption {
-		REGULAR (1),
-		BEGINNER (2),
-		NONE (0);
-		
-		private int factor;
+    public enum TimingOption {
+        REGULAR (1),
+        BEGINNER (2),
+        NONE (0);
 
-		TimingOption(int factor) {
-			this.factor = factor;
-		}
+        private int factor;
 
-		public int getFactor() {
-			return this.factor;
-		}
-	}
+        TimingOption(int factor) {
+            this.factor = factor;
+        }
 
-	public String getDraftType() {
-		return draftType;
-	}
+        public int getFactor() {
+            return this.factor;
+        }
+    }
 
-	public void setDraftType(String draftType) {
-		this.draftType = draftType;
-	}
+    public String getDraftType() {
+        return draftType;
+    }
 
-	public TimingOption getTiming() {
-		return timing;
-	}
+    public void setDraftType(String draftType) {
+        this.draftType = draftType;
+    }
 
-	public void setTiming(TimingOption timing) {
-		this.timing = timing;
-	}
+    public TimingOption getTiming() {
+        return timing;
+    }
+
+    public void setTiming(TimingOption timing) {
+        this.timing = timing;
+    }
 }

@@ -71,20 +71,20 @@ public class Millstone extends CardImpl<Millstone> {
 }
 
 class MillstoneEffect extends OneShotEffect<MillstoneEffect> {
-    
+
     int count = 0;
-    
+
     public MillstoneEffect(final MillstoneEffect effect) {
         super(effect);
         this.count = effect.count;
     }
-    
+
     public MillstoneEffect(final int count) {
         super(Constants.Outcome.Detriment);
         this.count = count;
         this.staticText = "Target player puts the top " + count + " cards of his or her library into his or her graveyard";
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
@@ -101,7 +101,7 @@ class MillstoneEffect extends OneShotEffect<MillstoneEffect> {
         }
         return false;
     }
-    
+
     @Override
     public MillstoneEffect copy() {
         return new MillstoneEffect(this);

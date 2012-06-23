@@ -43,28 +43,28 @@ import java.util.UUID;
  */
 public class StitchedDrake extends CardImpl<StitchedDrake> {
 
-	public StitchedDrake(UUID ownerId) {
-		super(ownerId, 80, "Stitched Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
-		this.expansionSetCode = "ISD";
-		this.subtype.add("Zombie");
-		this.subtype.add("Drake");
+    public StitchedDrake(UUID ownerId) {
+        super(ownerId, 80, "Stitched Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
+        this.expansionSetCode = "ISD";
+        this.subtype.add("Zombie");
+        this.subtype.add("Drake");
 
-		this.color.setBlue(true);
-		this.power = new MageInt(3);
-		this.toughness = new MageInt(4);
+        this.color.setBlue(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(4);
 
-		this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(FlyingAbility.getInstance());
 
-		// As an addition cost to cast Stitched Drake, exile a creature card from your graveyard.
-		this.getSpellAbility().addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard"))));
-	}
+        // As an addition cost to cast Stitched Drake, exile a creature card from your graveyard.
+        this.getSpellAbility().addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard"))));
+    }
 
-	public StitchedDrake(final StitchedDrake card) {
-		super(card);
-	}
+    public StitchedDrake(final StitchedDrake card) {
+        super(card);
+    }
 
-	@Override
-	public StitchedDrake copy() {
-		return new StitchedDrake(this);
-	}
+    @Override
+    public StitchedDrake copy() {
+        return new StitchedDrake(this);
+    }
 }

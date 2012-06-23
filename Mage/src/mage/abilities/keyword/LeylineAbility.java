@@ -38,28 +38,28 @@ import mage.abilities.StaticAbility;
  */
 public class LeylineAbility extends StaticAbility<LeylineAbility>{
 
-	private static final LeylineAbility fINSTANCE =  new LeylineAbility();
+    private static final LeylineAbility fINSTANCE =  new LeylineAbility();
 
-	private Object readResolve() throws ObjectStreamException {
-		return fINSTANCE;
-	}
+    private Object readResolve() throws ObjectStreamException {
+        return fINSTANCE;
+    }
 
-	public static LeylineAbility getInstance() {
-		return fINSTANCE;
-	}
+    public static LeylineAbility getInstance() {
+        return fINSTANCE;
+    }
 
-	private LeylineAbility() {
-		super(Zone.HAND, null);
-	}
+    private LeylineAbility() {
+        super(Zone.HAND, null);
+    }
 
-	@Override
-	public String getRule() {
-		return "If {this} is in your opening hand, you may begin the game with it on the battlefield.";
-	}
+    @Override
+    public String getRule() {
+        return "If {this} is in your opening hand, you may begin the game with it on the battlefield.";
+    }
 
-	@Override
-	public LeylineAbility copy() {
-		return fINSTANCE;
-	}
+    @Override
+    public LeylineAbility copy() {
+        return fINSTANCE;
+    }
 
 }

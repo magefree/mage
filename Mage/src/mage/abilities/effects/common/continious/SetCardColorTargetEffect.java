@@ -44,13 +44,13 @@ import mage.game.stack.StackObject;
  * @author LevelX
  */
 public class SetCardColorTargetEffect extends ContinuousEffectImpl<SetCardColorTargetEffect> {
-    
+
     private ObjectColor setColor;
 
     public SetCardColorTargetEffect(ObjectColor setColor, Constants.Duration duration, String text) {
         super(duration, Constants.Layer.ColorChangingEffects_5, Constants.SubLayer.NA, Constants.Outcome.Benefit);
         this.setColor = setColor;
-	staticText = text;
+    staticText = text;
     }
 
     public SetCardColorTargetEffect(ObjectColor setColor, Constants.Duration duration) {
@@ -62,7 +62,7 @@ public class SetCardColorTargetEffect extends ContinuousEffectImpl<SetCardColorT
         super(effect);
         this.setColor = effect.setColor;
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject o = game.getObject(source.getTargets().getFirstTarget());
@@ -70,7 +70,7 @@ public class SetCardColorTargetEffect extends ContinuousEffectImpl<SetCardColorT
             if (o instanceof Permanent || o instanceof StackObject)
                 o.getColor().setColor(setColor);
         }
-            
+
 //        Permanent target = game.getCard(id)Permanent();
 //        if (target != null) {
 //            if (target != null) {
@@ -80,7 +80,7 @@ public class SetCardColorTargetEffect extends ContinuousEffectImpl<SetCardColorT
 //        }
         return false;
     }
-    
+
     @Override
     public SetCardColorTargetEffect copy() {
         return new SetCardColorTargetEffect(this);

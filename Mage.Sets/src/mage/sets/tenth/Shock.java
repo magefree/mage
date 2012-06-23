@@ -44,7 +44,7 @@ public class Shock extends CardImpl<Shock> {
     public Shock (UUID ownerId) {
         super(ownerId, 232, "Shock", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "10E";
-		this.color.setRed(true);
+        this.color.setRed(true);
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }

@@ -44,30 +44,30 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class PriestOfTitania extends CardImpl<PriestOfTitania> {
 
-	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elf creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elf creatures");
 
-	static {
-		filter.getSubtype().add("Elf");
-	}
+    static {
+        filter.getSubtype().add("Elf");
+    }
 
-	public PriestOfTitania(UUID ownerId) {
-		super(ownerId, 270, "Priest of Titania", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-		this.expansionSetCode = "USG";
-		this.subtype.add("Elf");
-		this.subtype.add("Druid");
-		this.color.setGreen(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
+    public PriestOfTitania(UUID ownerId) {
+        super(ownerId, 270, "Priest of Titania", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
+        this.expansionSetCode = "USG";
+        this.subtype.add("Elf");
+        this.subtype.add("Druid");
+        this.color.setGreen(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
                 this.addAbility(new DynamicManaAbility(Mana.GreenMana, new PermanentsOnBattlefieldCount(filter)));
-	}
+    }
 
-	public PriestOfTitania(final PriestOfTitania card) {
-		super(card);
-	}
+    public PriestOfTitania(final PriestOfTitania card) {
+        super(card);
+    }
 
-	@Override
-	public PriestOfTitania copy() {
-		return new PriestOfTitania(this);
-	}
+    @Override
+    public PriestOfTitania copy() {
+        return new PriestOfTitania(this);
+    }
 }

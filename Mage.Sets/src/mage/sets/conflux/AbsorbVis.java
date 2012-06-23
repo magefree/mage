@@ -47,7 +47,7 @@ public class AbsorbVis extends CardImpl<AbsorbVis> {
     public AbsorbVis (UUID ownerId) {
         super(ownerId, 40, "Absorb Vis", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{6}{B}");
         this.expansionSetCode = "CON";
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(4));
         this.getSpellAbility().addEffect(new GainLifeEffect(4));
         this.getSpellAbility().addTarget(new TargetPlayer());

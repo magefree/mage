@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
  */
 public class DiregrafGhoul extends CardImpl<DiregrafGhoul> {
 
-	private static final String staticText = "{this} enters the battlefield tapped";
+    private static final String staticText = "{this} enters the battlefield tapped";
 
     public DiregrafGhoul(UUID ownerId) {
         super(ownerId, 97, "Diregraf Ghoul", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}");
@@ -53,7 +53,7 @@ public class DiregrafGhoul extends CardImpl<DiregrafGhoul> {
         this.toughness = new MageInt(2);
 
         // Diregraf Ghoul enters the battlefield tapped.
-		this.addAbility(new EntersBattlefieldAbility(new TapSourceEffect(), staticText));
+        this.addAbility(new EntersBattlefieldAbility(new TapSourceEffect(), staticText));
     }
 
     public DiregrafGhoul(final DiregrafGhoul card) {

@@ -45,9 +45,9 @@ public class VedalkenOutlander extends CardImpl<VedalkenOutlander> {
     private static final FilterCard filter = new FilterCard("red");
 
     static {
-    	filter.setUseColor(true);
-    	filter.getColor().setRed(true);
-		filter.setScopeColor(ComparisonScope.Any);
+        filter.setUseColor(true);
+        filter.getColor().setRed(true);
+        filter.setScopeColor(ComparisonScope.Any);
     }
 
     public VedalkenOutlander(UUID ownerId) {
@@ -58,7 +58,7 @@ public class VedalkenOutlander extends CardImpl<VedalkenOutlander> {
         this.subtype.add("Vedalken");
         this.subtype.add("Scout");
         this.power = new MageInt(2);
-	this.toughness = new MageInt(2);
+    this.toughness = new MageInt(2);
         this.addAbility(new ProtectionAbility(filter));
     }
 

@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class Fog extends mage.sets.magic2010.Fog {
 
-	public Fog(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 173;
-		this.expansionSetCode = "M11";
-	}
+    public Fog(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 173;
+        this.expansionSetCode = "M11";
+    }
 
-	public Fog(final Fog card) {
-		super(card);
-	}
+    public Fog(final Fog card) {
+        super(card);
+    }
 
-	@Override
-	public Fog copy() {
-		return new Fog(this);
-	}
+    @Override
+    public Fog copy() {
+        return new Fog(this);
+    }
 
 }

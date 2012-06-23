@@ -54,59 +54,59 @@ import java.util.UUID;
  */
 public class OracleOfMulDaya extends CardImpl<OracleOfMulDaya> {
 
-	public OracleOfMulDaya(UUID ownerId) {
-		super(ownerId, 172, "Oracle of Mul Daya", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}");
-		this.expansionSetCode = "ZEN";
-		this.subtype.add("Elf");
-		this.subtype.add("Shaman");
-		this.color.setGreen(true);
+    public OracleOfMulDaya(UUID ownerId) {
+        super(ownerId, 172, "Oracle of Mul Daya", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}");
+        this.expansionSetCode = "ZEN";
+        this.subtype.add("Elf");
+        this.subtype.add("Shaman");
+        this.color.setGreen(true);
 
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-		// You may play an additional land on each of your turns.
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OracleOfMulDayaEffect1()));
-		// Play with the top card of your library revealed.
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithTheTopCardRevealedEffect()));
-		// You may play the top card of your library if it's a land card.
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayTheTopCardEffect(new FilterLandCard())));
-	}
+        // You may play an additional land on each of your turns.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OracleOfMulDayaEffect1()));
+        // Play with the top card of your library revealed.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithTheTopCardRevealedEffect()));
+        // You may play the top card of your library if it's a land card.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayTheTopCardEffect(new FilterLandCard())));
+    }
 
-	public OracleOfMulDaya(final OracleOfMulDaya card) {
-		super(card);
-	}
+    public OracleOfMulDaya(final OracleOfMulDaya card) {
+        super(card);
+    }
 
-	@Override
-	public OracleOfMulDaya copy() {
-		return new OracleOfMulDaya(this);
-	}
+    @Override
+    public OracleOfMulDaya copy() {
+        return new OracleOfMulDaya(this);
+    }
 
 }
 
 class OracleOfMulDayaEffect1 extends ContinuousEffectImpl<OracleOfMulDayaEffect1> {
 
-	public OracleOfMulDayaEffect1() {
-		super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.PutLandInPlay);
-		staticText = "You may play an additional land on each of your turns";
-	}
+    public OracleOfMulDayaEffect1() {
+        super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.PutLandInPlay);
+        staticText = "You may play an additional land on each of your turns";
+    }
 
-	public OracleOfMulDayaEffect1(final OracleOfMulDayaEffect1 effect) {
-		super(effect);
-	}
+    public OracleOfMulDayaEffect1(final OracleOfMulDayaEffect1 effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-		if (player != null) {
-			player.setLandsPerTurn(player.getLandsPerTurn() + 1);
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+            player.setLandsPerTurn(player.getLandsPerTurn() + 1);
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public OracleOfMulDayaEffect1 copy() {
-		return new OracleOfMulDayaEffect1(this);
-	}
+    @Override
+    public OracleOfMulDayaEffect1 copy() {
+        return new OracleOfMulDayaEffect1(this);
+    }
 
 }

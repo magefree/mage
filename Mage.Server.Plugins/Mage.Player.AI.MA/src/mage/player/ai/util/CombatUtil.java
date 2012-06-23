@@ -187,8 +187,12 @@ public class CombatUtil {
         for (Permanent blocker : possibleBlockers) {
             SurviveInfo info = willItSurvive(game, attackerId, defenderId, attacker, blocker);
             //if (info.isAttackerDied() && !info.isBlockerDied()) {
-            if (info.isAttackerDied()) {
-                blockers.add(blocker);
+            if (info != null) {
+                if (info.isAttackerDied()) {
+                    blockers.add(blocker);
+                } else if (!info.isBlockerDied()) {
+                    blockers.add(blocker);
+                }
             }
         }
         return blockers;
@@ -216,8 +220,8 @@ public class CombatUtil {
         sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARE_BLOCKERS_STEP_POST, sim.getActivePlayerId(), sim.getActivePlayerId()));
 
         simulateStep(sim, new FirstCombatDamageStep());
-		simulateStep(sim, new CombatDamageStep());
-		simulateStep(sim, new EndOfCombatStep());
+        simulateStep(sim, new CombatDamageStep());
+        simulateStep(sim, new EndOfCombatStep());
 
         sim.checkStateAndTriggered();
         while (!sim.getStack().isEmpty()) {
@@ -249,8 +253,8 @@ public class CombatUtil {
         sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARE_BLOCKERS_STEP_POST, sim.getActivePlayerId(), sim.getActivePlayerId()));
 
         simulateStep(sim, new FirstCombatDamageStep());
-		simulateStep(sim, new CombatDamageStep());
-		simulateStep(sim, new EndOfCombatStep());
+        simulateStep(sim, new CombatDamageStep());
+        simulateStep(sim, new EndOfCombatStep());
 
         sim.checkStateAndTriggered();
         while (!sim.getStack().isEmpty()) {
@@ -273,7 +277,7 @@ public class CombatUtil {
             }
             step.endStep(game, game.getActivePlayerId());
         }
-	}
+    }
 
     public static boolean canBlock(Game game, Permanent blocker) {
         boolean canBlock = true;

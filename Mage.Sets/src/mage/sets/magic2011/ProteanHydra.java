@@ -37,20 +37,20 @@ import mage.Constants.Rarity;
  */
 public class ProteanHydra extends mage.sets.magic2010.ProteanHydra {
 
-	public ProteanHydra(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 194;
-		this.expansionSetCode = "M11";
-		this.rarity = Rarity.RARE;
-	}
+    public ProteanHydra(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 194;
+        this.expansionSetCode = "M11";
+        this.rarity = Rarity.RARE;
+    }
 
-	public ProteanHydra(final ProteanHydra card) {
-		super(card);
-	}
+    public ProteanHydra(final ProteanHydra card) {
+        super(card);
+    }
 
-	@Override
-	public ProteanHydra copy() {
-		return new ProteanHydra(this);
-	}
+    @Override
+    public ProteanHydra copy() {
+        return new ProteanHydra(this);
+    }
 
 }

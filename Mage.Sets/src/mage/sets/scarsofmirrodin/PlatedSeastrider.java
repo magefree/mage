@@ -45,7 +45,7 @@ public class PlatedSeastrider extends CardImpl<PlatedSeastrider> {
         super(ownerId, 38, "Plated Seastrider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}{U}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Beast");
-		this.color.setBlue(true);
+        this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
     }

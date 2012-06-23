@@ -37,18 +37,18 @@ import mage.abilities.effects.common.BasicManaEffect;
  */
 public class GreenManaAbility extends BasicManaAbility<GreenManaAbility> {
 
-	public GreenManaAbility() {
-		super(new BasicManaEffect(Mana.GreenMana));
-		this.netMana.setGreen(1);
-	}
+    public GreenManaAbility() {
+        super(new BasicManaEffect(Mana.GreenMana));
+        this.netMana.setGreen(1);
+    }
 
-	public GreenManaAbility(GreenManaAbility ability) {
-		super(ability);
-	}
+    public GreenManaAbility(GreenManaAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public GreenManaAbility copy() {
-		return new GreenManaAbility(this);
-	}
+    @Override
+    public GreenManaAbility copy() {
+        return new GreenManaAbility(this);
+    }
 
 }

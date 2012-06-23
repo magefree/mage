@@ -48,7 +48,7 @@ public class PhyrexianRager extends CardImpl<PhyrexianRager> {
         super(ownerId, 167, "Phyrexian Rager", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "10E";
         this.subtype.add("Horror");
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(1), false);

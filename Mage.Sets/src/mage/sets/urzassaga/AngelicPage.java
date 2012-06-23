@@ -65,7 +65,7 @@ public class AngelicPage extends CardImpl<AngelicPage> {
         this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        
+
         this.addAbility(FlyingAbility.getInstance());
 
         //{T}: Target attacking or blocking creature gets +1/+1 until end of turn.

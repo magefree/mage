@@ -43,25 +43,25 @@ import mage.game.Game;
  */
 //20101001 - 601.2e/613.10
 public interface CostModificationEffect<T extends CostModificationEffect<T>> extends ContinuousEffect<T> {
-	/**
-	 * Called by the {@link ContinuousEffects#costModification(java.util.UUID, mage.abilities.Ability, mage.game.Game) ContinuousEffects.costModification}
-	 * method.
-	 *
-	 * @param game The game for which this effect should be applied.
-	 * @param source The source ability of this effect.
-	 * @param abilityToModify The {@link mage.abilities.SpellAbility} or {@link Ability} which should be modified.
-	 * @return
-	 */
-	public boolean apply ( Game game, Ability source, Ability abilityToModify );
+    /**
+     * Called by the {@link ContinuousEffects#costModification(java.util.UUID, mage.abilities.Ability, mage.game.Game) ContinuousEffects.costModification}
+     * method.
+     *
+     * @param game The game for which this effect should be applied.
+     * @param source The source ability of this effect.
+     * @param abilityToModify The {@link mage.abilities.SpellAbility} or {@link Ability} which should be modified.
+     * @return
+     */
+    public boolean apply ( Game game, Ability source, Ability abilityToModify );
 
-	/**
-	 * Called by the {@link ContinuousEffects#costModification(mage.abilities.Ability, mage.game.Game) ContinuousEffects.costModification}
-	 * method.
-	 * 
-	 * @param abilityToModify The ability to possibly modify.
-	 * @param source The source ability of this effect.
-	 * @param game The game for which this effect shoul dbe applied.
-	 * @return
-	 */
-	public boolean applies(Ability abilityToModify, Ability source, Game game);
+    /**
+     * Called by the {@link ContinuousEffects#costModification(mage.abilities.Ability, mage.game.Game) ContinuousEffects.costModification}
+     * method.
+     * 
+     * @param abilityToModify The ability to possibly modify.
+     * @param source The source ability of this effect.
+     * @param game The game for which this effect shoul dbe applied.
+     * @return
+     */
+    public boolean applies(Ability abilityToModify, Ability source, Game game);
 }

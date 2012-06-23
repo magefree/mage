@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class HowlingBanshee extends mage.sets.magic2010.HowlingBanshee {
 
-	public HowlingBanshee(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 100;
-		this.expansionSetCode = "M11";
-	}
+    public HowlingBanshee(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 100;
+        this.expansionSetCode = "M11";
+    }
 
-	public HowlingBanshee(final HowlingBanshee card) {
-		super(card);
-	}
+    public HowlingBanshee(final HowlingBanshee card) {
+        super(card);
+    }
 
-	@Override
-	public HowlingBanshee copy() {
-		return new HowlingBanshee(this);
-	}
+    @Override
+    public HowlingBanshee copy() {
+        return new HowlingBanshee(this);
+    }
 
 }

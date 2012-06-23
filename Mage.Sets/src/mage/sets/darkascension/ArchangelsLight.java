@@ -53,7 +53,7 @@ public class ArchangelsLight extends CardImpl<ArchangelsLight> {
 
         // You gain 2 life for each card in your graveyard, then shuffle your graveyard into your library.
         this.getSpellAbility().addEffect(new ArchangelsLightEffect());
-        
+
     }
 
     public ArchangelsLight(final ArchangelsLight card) {
@@ -68,32 +68,32 @@ public class ArchangelsLight extends CardImpl<ArchangelsLight> {
 
 class ArchangelsLightEffect extends OneShotEffect<ArchangelsLightEffect> {
 
-	public ArchangelsLightEffect() {
-		super(Constants.Outcome.GainLife);
-		staticText = "You gain 2 life for each card in your graveyard, then shuffle your graveyard into your library";
-	}
+    public ArchangelsLightEffect() {
+        super(Constants.Outcome.GainLife);
+        staticText = "You gain 2 life for each card in your graveyard, then shuffle your graveyard into your library";
+    }
 
-	public ArchangelsLightEffect(final ArchangelsLightEffect effect) {
-		super(effect);
-	}
+    public ArchangelsLightEffect(final ArchangelsLightEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
         DynamicValue value = new CardsInControllerGraveyardCount();
-		if (player != null) {
-			player.gainLife(value.calculate(game, source) * 2, game);
-			player.getLibrary().addAll(player.getGraveyard().getCards(game), game);
-			player.getGraveyard().clear();
-			player.shuffleLibrary(game);
-			return true;
-		}
-		return false;
-	}
+        if (player != null) {
+            player.gainLife(value.calculate(game, source) * 2, game);
+            player.getLibrary().addAll(player.getGraveyard().getCards(game), game);
+            player.getGraveyard().clear();
+            player.shuffleLibrary(game);
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public ArchangelsLightEffect copy() {
-		return new ArchangelsLightEffect(this);
-	}
+    @Override
+    public ArchangelsLightEffect copy() {
+        return new ArchangelsLightEffect(this);
+    }
 
 }

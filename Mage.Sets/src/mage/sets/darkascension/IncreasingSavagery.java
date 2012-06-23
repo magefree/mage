@@ -57,7 +57,7 @@ public class IncreasingSavagery extends CardImpl<IncreasingSavagery> {
         // Put five +1/+1 counters on target creature. If Increasing Savagery was cast from a graveyard, put ten +1/+1 counters on that creature instead.
         this.getSpellAbility().addEffect(new IncreasingSavageryEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        
+
         // Flashback {5}{G}{G}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{G}{G}"), Constants.TimingRule.SORCERY));
     }
@@ -73,7 +73,7 @@ public class IncreasingSavagery extends CardImpl<IncreasingSavagery> {
 }
 
 class IncreasingSavageryEffect extends OneShotEffect<IncreasingSavageryEffect> {
-        
+
     public IncreasingSavageryEffect() {
         super(Constants.Outcome.BoostCreature);
         staticText = "Put five +1/+1 counters on target creature. If Increasing Savagery was cast from a graveyard, put ten +1/+1 counters on that creature instead";

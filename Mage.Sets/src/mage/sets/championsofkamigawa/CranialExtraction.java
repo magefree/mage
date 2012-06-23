@@ -50,80 +50,80 @@ import mage.target.TargetPlayer;
  */
 public class CranialExtraction extends CardImpl<CranialExtraction> {
 
-	public CranialExtraction(UUID ownerId) {
-		super(ownerId, 105, "Cranial Extraction", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}");
-		this.expansionSetCode = "CHK";
+    public CranialExtraction(UUID ownerId) {
+        super(ownerId, 105, "Cranial Extraction", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}");
+        this.expansionSetCode = "CHK";
                 this.subtype.add("Arcane");
-		this.color.setBlack(true);
+        this.color.setBlack(true);
 
                 /* Name a nonland card. Search target player's graveyard, hand, and library for 
                  * all cards with that name and exile them. Then that player shuffles his or her library. */
-		this.getSpellAbility().addTarget(new TargetPlayer());
-		this.getSpellAbility().addEffect(new CranialExtractionEffect());
-	}
+        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addEffect(new CranialExtractionEffect());
+    }
 
-	public CranialExtraction(final CranialExtraction card) {
-		super(card);
-	}
+    public CranialExtraction(final CranialExtraction card) {
+        super(card);
+    }
 
-	@Override
-	public CranialExtraction copy() {
-		return new CranialExtraction(this);
-	}
+    @Override
+    public CranialExtraction copy() {
+        return new CranialExtraction(this);
+    }
 
 }
 
 class CranialExtractionEffect extends OneShotEffect<CranialExtractionEffect> {
-	
-	public CranialExtractionEffect() {
-		super(Outcome.Exile);
-		staticText = "Name a nonland card. Search target player's graveyard, hand, and library for all cards with that name and exile them. Then that player shuffles his or her library";
-	}
-	
-	public CranialExtractionEffect(final CranialExtractionEffect effect) {
-		super(effect);
-	}
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(targetPointer.getFirst(game, source));
-		Player controller = game.getPlayer(source.getControllerId());
-		if (player != null && controller != null) {
-			Choice cardChoice = new ChoiceImpl();
-			cardChoice.setChoices(Sets.getNonLandCardNames());
-			cardChoice.clearChoice();
+    public CranialExtractionEffect() {
+        super(Outcome.Exile);
+        staticText = "Name a nonland card. Search target player's graveyard, hand, and library for all cards with that name and exile them. Then that player shuffles his or her library";
+    }
+
+    public CranialExtractionEffect(final CranialExtractionEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player controller = game.getPlayer(source.getControllerId());
+        if (player != null && controller != null) {
+            Choice cardChoice = new ChoiceImpl();
+            cardChoice.setChoices(Sets.getNonLandCardNames());
+            cardChoice.clearChoice();
 
             while (!controller.choose(Outcome.Exile, cardChoice, game)) {
                 game.debugMessage("player canceled choosing name. retrying.");
             }
 
-			String cardName = cardChoice.getChoice();
+            String cardName = cardChoice.getChoice();
             game.informPlayers("CranialExtraction, named card: [" + cardName + "]");
-			for (Card card: player.getGraveyard().getCards(game)) {
-				if (card.getName().equals(cardName)) {
-					card.moveToExile(null, "", source.getId(), game);					
-				}
-			}
-			for (Card card: player.getHand().getCards(game)) {
-				if (card.getName().equals(cardName)) {
-					card.moveToExile(null, "", source.getId(), game);					
-				}
-			}
-			for (Card card: player.getLibrary().getCards(game)) {
-				if (card.getName().equals(cardName)) {
-					card.moveToExile(null, "", source.getId(), game);					
-				}
-			}
-			controller.lookAtCards("CranialExtraction Hand", player.getHand(), game);
-			controller.lookAtCards("CranialExtraction Library", new CardsImpl(Zone.PICK, player.getLibrary().getCards(game)), game);
-			player.shuffleLibrary(game);
-		}
-		return true;
-	}
+            for (Card card: player.getGraveyard().getCards(game)) {
+                if (card.getName().equals(cardName)) {
+                    card.moveToExile(null, "", source.getId(), game);                    
+                }
+            }
+            for (Card card: player.getHand().getCards(game)) {
+                if (card.getName().equals(cardName)) {
+                    card.moveToExile(null, "", source.getId(), game);                    
+                }
+            }
+            for (Card card: player.getLibrary().getCards(game)) {
+                if (card.getName().equals(cardName)) {
+                    card.moveToExile(null, "", source.getId(), game);                    
+                }
+            }
+            controller.lookAtCards("CranialExtraction Hand", player.getHand(), game);
+            controller.lookAtCards("CranialExtraction Library", new CardsImpl(Zone.PICK, player.getLibrary().getCards(game)), game);
+            player.shuffleLibrary(game);
+        }
+        return true;
+    }
 
-	@Override
-	public CranialExtractionEffect copy() {
-		return new CranialExtractionEffect(this);
-	}
-	
+    @Override
+    public CranialExtractionEffect copy() {
+        return new CranialExtractionEffect(this);
+    }
+
 }

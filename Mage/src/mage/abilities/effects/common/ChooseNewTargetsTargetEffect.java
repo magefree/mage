@@ -41,30 +41,30 @@ import mage.game.stack.Spell;
  */
 public class ChooseNewTargetsTargetEffect extends OneShotEffect<ChooseNewTargetsTargetEffect> {
 
-	public ChooseNewTargetsTargetEffect() {
-		super(Outcome.Benefit);
-	}
+    public ChooseNewTargetsTargetEffect() {
+        super(Outcome.Benefit);
+    }
 
-	public ChooseNewTargetsTargetEffect(final ChooseNewTargetsTargetEffect effect) {
-		super(effect);
-	}
-	
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Spell spell = game.getStack().getSpell(source.getFirstTarget());
-		if (spell != null) {
-			return spell.chooseNewTargets(game, source.getControllerId());
-		}
-		return false;
-	}
+    public ChooseNewTargetsTargetEffect(final ChooseNewTargetsTargetEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public ChooseNewTargetsTargetEffect copy() {
-		return new ChooseNewTargetsTargetEffect(this);
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Spell spell = game.getStack().getSpell(source.getFirstTarget());
+        if (spell != null) {
+            return spell.chooseNewTargets(game, source.getControllerId());
+        }
+        return false;
+    }
 
-	@Override
-	public String getText(Mode mode) {
-		return "You may choose new targets for target " + mode.getTargets().get(0).getTargetName();
-	}
+    @Override
+    public ChooseNewTargetsTargetEffect copy() {
+        return new ChooseNewTargetsTargetEffect(this);
+    }
+
+    @Override
+    public String getText(Mode mode) {
+        return "You may choose new targets for target " + mode.getTargets().get(0).getTargetName();
+    }
 }

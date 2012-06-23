@@ -62,28 +62,28 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
     private List<PlayerAction> actions = new ArrayList<PlayerAction>();
     private List<String> choices = new ArrayList<String>();
     private List<String> targets = new ArrayList<String>();
-    
+
     public TestPlayer(String name, Constants.RangeOfInfluence range) {
-		super(name, range);
-		human = false;
-	}
+        super(name, range);
+        human = false;
+    }
 
     public TestPlayer(final TestPlayer player) {
-		super(player);
-	}
+        super(player);
+    }
 
     public void addAction(int turnNum, PhaseStep step, String action) {
         actions.add(new PlayerAction(turnNum, step, action));
     }
-    
+
     public void addChoice(String choice) {
         choices.add(choice);
     }
-    
+
     public void addTarget(String target) {
         targets.add(target);
     }
-    
+
     @Override
     public TestPlayer copy() {
         return new TestPlayer(this);
@@ -165,9 +165,9 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
             }
         }
     }
-    
-	@Override
-	public boolean choose(Constants.Outcome outcome, Choice choice, Game game) {
+
+    @Override
+    public boolean choose(Constants.Outcome outcome, Choice choice, Game game) {
         if (!choices.isEmpty()) {
             for (String choose1: choice.getChoices()) {
                 for (String choose2: choices) {
@@ -180,7 +180,7 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
             }
         }
         return super.choose(outcome, choice, game);
-	}
+    }
 
     @Override
     public boolean choose(Constants.Outcome outcome, Target target, UUID sourceId, Game game, Map<String, Serializable> options) {
@@ -248,7 +248,7 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
         }
         return true;
     }
-    
+
     protected Permanent findPermanent(FilterPermanent filter, UUID controllerId, Game game) {
         List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(filter, controllerId, game);
         if (permanents.size() > 0)
@@ -303,5 +303,5 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
             }
         }
     }
-    
+
 }

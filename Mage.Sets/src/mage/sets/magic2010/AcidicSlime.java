@@ -48,38 +48,38 @@ import mage.target.TargetPermanent;
  */
 public class AcidicSlime extends CardImpl<AcidicSlime> {
 
-	private static final FilterPermanent filter = new FilterPermanent("artifact, enchantment, or land");
+    private static final FilterPermanent filter = new FilterPermanent("artifact, enchantment, or land");
 
-	static {
-		filter.getCardType().add(CardType.ARTIFACT);
-		filter.getCardType().add(CardType.ENCHANTMENT);
-		filter.getCardType().add(CardType.LAND);
-		filter.setScopeCardType(ComparisonScope.Any);
-	}
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.getCardType().add(CardType.ENCHANTMENT);
+        filter.getCardType().add(CardType.LAND);
+        filter.setScopeCardType(ComparisonScope.Any);
+    }
 
-	public AcidicSlime(UUID ownerId) {
-		super(ownerId, 165, "Acidic Slime", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
-		this.expansionSetCode = "M10";
-		this.subtype.add("Ooze");
-		this.color.setGreen(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+    public AcidicSlime(UUID ownerId) {
+        super(ownerId, 165, "Acidic Slime", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
+        this.expansionSetCode = "M10";
+        this.subtype.add("Ooze");
+        this.color.setGreen(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-		this.addAbility(DeathtouchAbility.getInstance());
-		Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
-		Target target = new TargetPermanent(filter);
-		target.setRequired(true);
-		ability.addTarget(target);
-		this.addAbility(ability);
-	}
+        this.addAbility(DeathtouchAbility.getInstance());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
+        Target target = new TargetPermanent(filter);
+        target.setRequired(true);
+        ability.addTarget(target);
+        this.addAbility(ability);
+    }
 
-	public AcidicSlime(final AcidicSlime card) {
-		super(card);
-	}
+    public AcidicSlime(final AcidicSlime card) {
+        super(card);
+    }
 
-	@Override
-	public AcidicSlime copy() {
-		return new AcidicSlime(this);
-	}
+    @Override
+    public AcidicSlime copy() {
+        return new AcidicSlime(this);
+    }
 
 }

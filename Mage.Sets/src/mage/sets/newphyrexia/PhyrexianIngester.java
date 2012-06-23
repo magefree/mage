@@ -56,12 +56,12 @@ import mage.target.TargetPermanent;
 public class PhyrexianIngester extends CardImpl<PhyrexianIngester> {
 
     private static final FilterNonTokenPermanent filter = new FilterNonTokenPermanent("nontoken creature");
-    
+
     static {
         filter.getCardType().add(CardType.CREATURE);
         filter.setScopeCardType(Filter.ComparisonScope.Any);
     }
-    
+
     public PhyrexianIngester(UUID ownerId) {
         super(ownerId, 41, "Phyrexian Ingester", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{U}");
         this.expansionSetCode = "NPH";

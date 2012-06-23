@@ -80,8 +80,8 @@ class GolemToken extends Token {
         super("Golem", "a 3/3 colorless Golem artifact creature token");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
-		subtype.add("Golem");
-		power = new MageInt(3);
-		toughness = new MageInt(3);
+        subtype.add("Golem");
+        power = new MageInt(3);
+        toughness = new MageInt(3);
     }
 }

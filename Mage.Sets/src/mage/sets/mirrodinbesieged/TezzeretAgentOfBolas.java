@@ -64,52 +64,52 @@ import mage.target.common.TargetArtifactPermanent;
  */
 public class TezzeretAgentOfBolas extends CardImpl<TezzeretAgentOfBolas> {
 
-	public TezzeretAgentOfBolas(UUID ownerId) {
-		super(ownerId, 97, "Tezzeret, Agent of Bolas", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{B}");
-		this.expansionSetCode = "MBS";
-		this.subtype.add("Tezzeret");
-		this.color.setBlue(true);
-		this.color.setBlack(true);
-		this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), ""));
+    public TezzeretAgentOfBolas(UUID ownerId) {
+        super(ownerId, 97, "Tezzeret, Agent of Bolas", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{B}");
+        this.expansionSetCode = "MBS";
+        this.subtype.add("Tezzeret");
+        this.color.setBlue(true);
+        this.color.setBlack(true);
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), ""));
 
-		this.addAbility(new LoyaltyAbility(new TezzeretAgentOfBolasEffect1(), 1));
+        this.addAbility(new LoyaltyAbility(new TezzeretAgentOfBolasEffect1(), 1));
 
-		LoyaltyAbility ability1 = new LoyaltyAbility(new BecomesCreatureTargetEffect(new ArtifactCreatureToken(), "", Duration.EndOfGame), -1);
-		ability1.addTarget(new TargetArtifactPermanent());
-		this.addAbility(ability1);
+        LoyaltyAbility ability1 = new LoyaltyAbility(new BecomesCreatureTargetEffect(new ArtifactCreatureToken(), "", Duration.EndOfGame), -1);
+        ability1.addTarget(new TargetArtifactPermanent());
+        this.addAbility(ability1);
 
-		LoyaltyAbility ability2 = new LoyaltyAbility(new TezzeretAgentOfBolasEffect2(), -4);
-		ability2.addTarget(new TargetPlayer());
-		this.addAbility(ability2);
+        LoyaltyAbility ability2 = new LoyaltyAbility(new TezzeretAgentOfBolasEffect2(), -4);
+        ability2.addTarget(new TargetPlayer());
+        this.addAbility(ability2);
 
-	}
+    }
 
-	public TezzeretAgentOfBolas(final TezzeretAgentOfBolas card) {
-		super(card);
-	}
+    public TezzeretAgentOfBolas(final TezzeretAgentOfBolas card) {
+        super(card);
+    }
 
-	@Override
-	public TezzeretAgentOfBolas copy() {
-		return new TezzeretAgentOfBolas(this);
-	}
+    @Override
+    public TezzeretAgentOfBolas copy() {
+        return new TezzeretAgentOfBolas(this);
+    }
 
 }
 
 class TezzeretAgentOfBolasEffect1 extends OneShotEffect<TezzeretAgentOfBolasEffect1> {
 
-	public TezzeretAgentOfBolasEffect1() {
-		super(Outcome.DrawCard);
-		staticText = "Look at the top five cards of your library. You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in any order";
-	}
+    public TezzeretAgentOfBolasEffect1() {
+        super(Outcome.DrawCard);
+        staticText = "Look at the top five cards of your library. You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in any order";
+    }
 
-	public TezzeretAgentOfBolasEffect1(final TezzeretAgentOfBolasEffect1 effect) {
-		super(effect);
-	}
+    public TezzeretAgentOfBolasEffect1(final TezzeretAgentOfBolasEffect1 effect) {
+        super(effect);
+    }
 
-	@Override
-	public TezzeretAgentOfBolasEffect1 copy() {
-		return new TezzeretAgentOfBolasEffect1(this);
-	}
+    @Override
+    public TezzeretAgentOfBolasEffect1 copy() {
+        return new TezzeretAgentOfBolasEffect1(this);
+    }
 
     @Override
     public boolean apply(Game game, Ability source) {
@@ -163,20 +163,20 @@ class TezzeretAgentOfBolasEffect1 extends OneShotEffect<TezzeretAgentOfBolasEffe
             Card card = cards.get(cards.iterator().next(), game);
             card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
         }
-        
+
         return true;
     }
 }
 
 class ArtifactCreatureToken extends Token {
 
-	public ArtifactCreatureToken() {
-		super("", "5/5 artifact creature");
-		this.cardType.add(CardType.CREATURE);
+    public ArtifactCreatureToken() {
+        super("", "5/5 artifact creature");
+        this.cardType.add(CardType.CREATURE);
 
-		this.power = new MageInt(5);
-		this.toughness = new MageInt(5);
-	}
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(5);
+    }
 }
 
 class TezzeretAgentOfBolasEffect2 extends OneShotEffect<TezzeretAgentOfBolasEffect2> {
@@ -188,34 +188,34 @@ class TezzeretAgentOfBolasEffect2 extends OneShotEffect<TezzeretAgentOfBolasEffe
         filter.setScopeCardType(Filter.ComparisonScope.Any);
     }
 
-	public TezzeretAgentOfBolasEffect2() {
-		super(Outcome.DrawCard);
-		staticText = "Target player loses X life and you gain X life, where X is twice the number of artifacts you control";
-	}
+    public TezzeretAgentOfBolasEffect2() {
+        super(Outcome.DrawCard);
+        staticText = "Target player loses X life and you gain X life, where X is twice the number of artifacts you control";
+    }
 
-	public TezzeretAgentOfBolasEffect2(final TezzeretAgentOfBolasEffect2 effect) {
-		super(effect);
-	}
+    public TezzeretAgentOfBolasEffect2(final TezzeretAgentOfBolasEffect2 effect) {
+        super(effect);
+    }
 
-	@Override
-	public TezzeretAgentOfBolasEffect2 copy() {
-		return new TezzeretAgentOfBolasEffect2(this);
-	}
+    @Override
+    public TezzeretAgentOfBolasEffect2 copy() {
+        return new TezzeretAgentOfBolasEffect2(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		DynamicValue value = new PermanentsOnBattlefieldCount(filter);
-		int count = value.calculate(game, source) * 2;
-		
-		Player player = game.getPlayer(source.getFirstTarget());
-		if (player != null) {
-			player.loseLife(count, game);
-		}
-		Player controller = game.getPlayer(source.getControllerId());
-		if (controller != null) {
-			controller.gainLife(count, game);
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        DynamicValue value = new PermanentsOnBattlefieldCount(filter);
+        int count = value.calculate(game, source) * 2;
+
+        Player player = game.getPlayer(source.getFirstTarget());
+        if (player != null) {
+            player.loseLife(count, game);
+        }
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            controller.gainLife(count, game);
+        }
+        return true;
+    }
 
 }

@@ -62,9 +62,9 @@ import java.util.UUID;
  * @author nantuko
  */
 public class MageBook extends JComponent {
-    
+
     public static final String LAYOUT_3x3 = "small";
-    
+
     public static final String LAYOUT_4x4 = "big";
 
     public MageBook(BigCard bigCard) {

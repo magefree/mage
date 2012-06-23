@@ -42,39 +42,39 @@ import mage.target.TargetCard;
  */
 public class TargetCardInHand extends TargetCard<TargetCardInHand> {
 
-	public TargetCardInHand() {
-		this(1, 1, new FilterCard());
-	}
+    public TargetCardInHand() {
+        this(1, 1, new FilterCard());
+    }
 
-	public TargetCardInHand(FilterCard filter) {
-		this(1, 1, filter);
-	}
+    public TargetCardInHand(FilterCard filter) {
+        this(1, 1, filter);
+    }
 
-	public TargetCardInHand(int numTargets, FilterCard filter) {
-		this(numTargets, numTargets, filter);
-	}
+    public TargetCardInHand(int numTargets, FilterCard filter) {
+        this(numTargets, numTargets, filter);
+    }
 
-	public TargetCardInHand(int minNumTargets, int maxNumTargets, FilterCard filter) {
-		super(minNumTargets, maxNumTargets, Zone.HAND, filter);
-		this.targetName = filter.getMessage();
-	}
+    public TargetCardInHand(int minNumTargets, int maxNumTargets, FilterCard filter) {
+        super(minNumTargets, maxNumTargets, Zone.HAND, filter);
+        this.targetName = filter.getMessage();
+    }
 
-	public TargetCardInHand(final TargetCardInHand target) {
-		super(target);
-	}
+    public TargetCardInHand(final TargetCardInHand target) {
+        super(target);
+    }
 
-	@Override
-	public boolean canTarget(UUID id, Ability source, Game game) {
-		Card card = game.getPlayer(source.getControllerId()).getHand().get(id, game);
-		if (card != null)
-			return filter.match(card, game);
-		return false;
-	}
+    @Override
+    public boolean canTarget(UUID id, Ability source, Game game) {
+        Card card = game.getPlayer(source.getControllerId()).getHand().get(id, game);
+        if (card != null)
+            return filter.match(card, game);
+        return false;
+    }
 
-	@Override
-	public TargetCardInHand copy() {
-		return new TargetCardInHand(this);
-	}
+    @Override
+    public TargetCardInHand copy() {
+        return new TargetCardInHand(this);
+    }
 
     @Override
     public String getTargetedName(Game game) {

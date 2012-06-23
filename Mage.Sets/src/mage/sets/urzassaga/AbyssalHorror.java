@@ -49,7 +49,7 @@ public class AbyssalHorror extends CardImpl<AbyssalHorror> {
         super(ownerId, 115, "Abyssal Horror", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
         this.expansionSetCode = "USG";
         this.subtype.add("Horror");
-	    this.color.setBlack(true);
+        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());

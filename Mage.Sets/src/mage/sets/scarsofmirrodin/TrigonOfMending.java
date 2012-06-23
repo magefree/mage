@@ -53,31 +53,31 @@ import mage.abilities.costs.mana.GenericManaCost;
  */
 public class TrigonOfMending extends CardImpl<TrigonOfMending> {
 
-	public TrigonOfMending(UUID ownerId) {
-		super(ownerId, 215, "Trigon of Mending", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-		this.expansionSetCode = "SOM";
+    public TrigonOfMending(UUID ownerId) {
+        super(ownerId, 215, "Trigon of Mending", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
+        this.expansionSetCode = "SOM";
 
-		this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(new ChargeCounter(3)), ""));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(new ChargeCounter(3)), ""));
 
-		Costs costs = new CostsImpl();
-		costs.add(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
-		costs.add(new TapSourceCost());
+        Costs costs = new CostsImpl();
+        costs.add(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
+        costs.add(new TapSourceCost());
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(3), costs);
         ability.addManaCost(new GenericManaCost(2));
-		this.addAbility(ability);
+        this.addAbility(ability);
 
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new TapSourceCost());
         ability2.addManaCost(new ManaCostsImpl("{W}{W}"));
-		this.addAbility(ability2);
-	}
+        this.addAbility(ability2);
+    }
 
-	public TrigonOfMending(final TrigonOfMending card) {
-		super(card);
-	}
+    public TrigonOfMending(final TrigonOfMending card) {
+        super(card);
+    }
 
-	@Override
-	public TrigonOfMending copy() {
-		return new TrigonOfMending(this);
-	}
+    @Override
+    public TrigonOfMending copy() {
+        return new TrigonOfMending(this);
+    }
 
 }

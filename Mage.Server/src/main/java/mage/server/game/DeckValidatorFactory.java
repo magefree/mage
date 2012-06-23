@@ -41,40 +41,40 @@ import org.apache.log4j.Logger;
  */
 public class DeckValidatorFactory {
 
-	private final static DeckValidatorFactory INSTANCE = new DeckValidatorFactory();
-	private final static Logger logger = Logger.getLogger(DeckValidatorFactory.class);
+    private final static DeckValidatorFactory INSTANCE = new DeckValidatorFactory();
+    private final static Logger logger = Logger.getLogger(DeckValidatorFactory.class);
 
-	private Map<String, Class> deckTypes = new HashMap<String, Class>();
+    private Map<String, Class> deckTypes = new HashMap<String, Class>();
 
-	public static DeckValidatorFactory getInstance() {
-		return INSTANCE;
-	}
+    public static DeckValidatorFactory getInstance() {
+        return INSTANCE;
+    }
 
-	private DeckValidatorFactory() {}
+    private DeckValidatorFactory() {}
 
-	public DeckValidator createDeckValidator(String deckType) {
+    public DeckValidator createDeckValidator(String deckType) {
 
-		DeckValidator validator;
-		Constructor<?> con;
-		try {
-			con = deckTypes.get(deckType).getConstructor(new Class[]{});
-			validator = (DeckValidator)con.newInstance(new Object[] {});
-		} catch (Exception ex) {
-			logger.fatal("DeckValidatorFactory error", ex);
-			return null;
-		}
-		logger.info("Deck validator created: " + validator.getName());
+        DeckValidator validator;
+        Constructor<?> con;
+        try {
+            con = deckTypes.get(deckType).getConstructor(new Class[]{});
+            validator = (DeckValidator)con.newInstance(new Object[] {});
+        } catch (Exception ex) {
+            logger.fatal("DeckValidatorFactory error", ex);
+            return null;
+        }
+        logger.info("Deck validator created: " + validator.getName());
 
-		return validator;
-	}
+        return validator;
+    }
 
-	public Set<String> getDeckTypes() {
-		return deckTypes.keySet();
-	}
+    public Set<String> getDeckTypes() {
+        return deckTypes.keySet();
+    }
 
-	public void addDeckType(String name, Class deckType) {
-		if (deckType != null)
-			this.deckTypes.put(name, deckType);
-	}
+    public void addDeckType(String name, Class deckType) {
+        if (deckType != null)
+            this.deckTypes.put(name, deckType);
+    }
 
 }

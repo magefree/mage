@@ -47,7 +47,7 @@ import mage.target.TargetSpell;
  */
 public class FrightfulDelusion extends CardImpl<FrightfulDelusion> {
 
-	public FrightfulDelusion(UUID ownerId) {
+    public FrightfulDelusion(UUID ownerId) {
         super(ownerId, 57, "Frightful Delusion", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "ISD";
 
@@ -55,54 +55,54 @@ public class FrightfulDelusion extends CardImpl<FrightfulDelusion> {
 
         // Counter target spell unless its controller pays {1}. That player discards a card.
         this.getSpellAbility().addTarget(new TargetSpell());
-		this.getSpellAbility().addEffect(new FrightfulDelusionEffect());
+        this.getSpellAbility().addEffect(new FrightfulDelusionEffect());
     }
 
-	public FrightfulDelusion(final FrightfulDelusion card) {
-		super(card);
-	}
+    public FrightfulDelusion(final FrightfulDelusion card) {
+        super(card);
+    }
 
-	@Override
-	public FrightfulDelusion copy() {
-		return new FrightfulDelusion(this);
-	}
+    @Override
+    public FrightfulDelusion copy() {
+        return new FrightfulDelusion(this);
+    }
 }
 
 class FrightfulDelusionEffect extends OneShotEffect<FrightfulDelusionEffect> {
 
-	public FrightfulDelusionEffect() {
-		super(Outcome.Detriment);
-		this.staticText = "Counter target spell unless its controller pays {1}. That player discards a card.";
-	}
+    public FrightfulDelusionEffect() {
+        super(Outcome.Detriment);
+        this.staticText = "Counter target spell unless its controller pays {1}. That player discards a card.";
+    }
 
-	public FrightfulDelusionEffect(final FrightfulDelusionEffect effect) {
-		super(effect);
-	}
+    public FrightfulDelusionEffect(final FrightfulDelusionEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public FrightfulDelusionEffect copy() {
-		return new FrightfulDelusionEffect(this);
-	}
+    @Override
+    public FrightfulDelusionEffect copy() {
+        return new FrightfulDelusionEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		StackObject spell = game.getStack().getStackObject(
-				targetPointer.getFirst(game, source));
-		Cost cost = new GenericManaCost(1);
-		if (spell != null) {
-			Player player = game.getPlayer(spell.getControllerId());
-			if (player != null) {
-				cost.clearPaid();
-				game.getPlayer(spell.getControllerId()).discard(
-						1, source, game);
-				if (!cost.pay(source, game, spell.getControllerId(),
-						spell.getControllerId(), false)) {
-					return game.getStack().counter(source.getFirstTarget(),
-							source.getSourceId(), game);
-				}
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        StackObject spell = game.getStack().getStackObject(
+                targetPointer.getFirst(game, source));
+        Cost cost = new GenericManaCost(1);
+        if (spell != null) {
+            Player player = game.getPlayer(spell.getControllerId());
+            if (player != null) {
+                cost.clearPaid();
+                game.getPlayer(spell.getControllerId()).discard(
+                        1, source, game);
+                if (!cost.pay(source, game, spell.getControllerId(),
+                        spell.getControllerId(), false)) {
+                    return game.getStack().counter(source.getFirstTarget(),
+                            source.getSourceId(), game);
+                }
+            }
+        }
+        return false;
+    }
 
 }

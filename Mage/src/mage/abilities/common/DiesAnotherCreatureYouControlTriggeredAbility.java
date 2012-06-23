@@ -54,7 +54,7 @@ public class DiesAnotherCreatureYouControlTriggeredAbility extends TriggeredAbil
     public DiesAnotherCreatureYouControlTriggeredAbility(Effect effect, boolean optional, boolean nontoken) {
         this(effect, optional, new FilterCreaturePermanent(), nontoken);
     }
-    
+
     public DiesAnotherCreatureYouControlTriggeredAbility(Effect effect, boolean optional, FilterCreaturePermanent filter) {
         this(effect, optional, filter, false);
     }

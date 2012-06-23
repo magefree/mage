@@ -52,7 +52,7 @@ public class PersonalSanctuary extends CardImpl<PersonalSanctuary> {
         this.color.setWhite(true);
 
         // During your turn, prevent all damage that would be dealt to you.
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new PersonalSanctuaryEffect()));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new PersonalSanctuaryEffect()));
     }
 
     public PersonalSanctuary(final PersonalSanctuary card) {
@@ -67,43 +67,43 @@ public class PersonalSanctuary extends CardImpl<PersonalSanctuary> {
 
 class PersonalSanctuaryEffect extends PreventionEffectImpl<PersonalSanctuaryEffect> {
 
-	public PersonalSanctuaryEffect() {
-		super(Constants.Duration.WhileOnBattlefield);
-		staticText = "During your turn, prevent all damage that would be dealt to you";
-	}
+    public PersonalSanctuaryEffect() {
+        super(Constants.Duration.WhileOnBattlefield);
+        staticText = "During your turn, prevent all damage that would be dealt to you";
+    }
 
-	public PersonalSanctuaryEffect(PersonalSanctuaryEffect effect) {
-		super(effect);
-	}
+    public PersonalSanctuaryEffect(PersonalSanctuaryEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), event.getAmount(), false);
-		if (!game.replaceEvent(preventEvent)) {
-			int damage = event.getAmount();
-			event.setAmount(0);
-			game.informPlayers("Damage has been prevented: " + damage);
-			game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), damage));
-		}
-		return false;
-	}
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), event.getAmount(), false);
+        if (!game.replaceEvent(preventEvent)) {
+            int damage = event.getAmount();
+            event.setAmount(0);
+            game.informPlayers("Damage has been prevented: " + damage);
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), damage));
+        }
+        return false;
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (event.getType().equals(GameEvent.EventType.DAMAGE_PLAYER)) {
-			if (event.getTargetId().equals(source.getControllerId()) && game.getActivePlayerId().equals(source.getControllerId()))
-				return super.applies(event, source, game);
-		}
-		return false;
-	}
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (event.getType().equals(GameEvent.EventType.DAMAGE_PLAYER)) {
+            if (event.getTargetId().equals(source.getControllerId()) && game.getActivePlayerId().equals(source.getControllerId()))
+                return super.applies(event, source, game);
+        }
+        return false;
+    }
 
-	@Override
-	public PersonalSanctuaryEffect copy() {
-		return new PersonalSanctuaryEffect(this);
-	}
+    @Override
+    public PersonalSanctuaryEffect copy() {
+        return new PersonalSanctuaryEffect(this);
+    }
 }

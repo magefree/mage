@@ -40,15 +40,15 @@ import mage.cards.CardImpl;
  */
 public abstract class BasicLand<T extends BasicLand<T>> extends CardImpl<T> {
 
-	public BasicLand(UUID ownerId, int cardNumber, String name, ManaAbility mana) {
-		super(ownerId, cardNumber, name, Rarity.LAND, new CardType[]{CardType.LAND}, null);
-		this.supertype.add("Basic");
-		this.subtype.add(name);
-		this.addAbility(mana);
-	}
+    public BasicLand(UUID ownerId, int cardNumber, String name, ManaAbility mana) {
+        super(ownerId, cardNumber, name, Rarity.LAND, new CardType[]{CardType.LAND}, null);
+        this.supertype.add("Basic");
+        this.subtype.add(name);
+        this.addAbility(mana);
+    }
 
-	public BasicLand(BasicLand land) {
-		super(land);
-	}
-	
+    public BasicLand(BasicLand land) {
+        super(land);
+    }
+
 }

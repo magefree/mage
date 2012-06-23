@@ -102,7 +102,7 @@ class HammerOfRuinTriggeredAbility extends TriggeredAbilityImpl<HammerOfRuinTrig
                 FilterPermanent filter = (FilterPermanent)getTargets().get(0).getFilter();
                 filter.getControllerId().clear();
                 filter.getControllerId().add(event.getPlayerId());
-			    return true;
+                return true;
             }
         }
         return false;

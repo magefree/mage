@@ -42,27 +42,27 @@ import mage.cards.CardImpl;
  */
 public class VampireNighthawk extends CardImpl<VampireNighthawk> {
 
-	public VampireNighthawk(UUID ownerId) {
-		super(ownerId, 116, "Vampire Nighthawk", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
-		this.expansionSetCode = "ZEN";
-		this.subtype.add("Vampire");
-		this.subtype.add("Shaman");
+    public VampireNighthawk(UUID ownerId) {
+        super(ownerId, 116, "Vampire Nighthawk", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
+        this.expansionSetCode = "ZEN";
+        this.subtype.add("Vampire");
+        this.subtype.add("Shaman");
 
-		this.color.setBlack(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(3);
+        this.color.setBlack(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
 
-		this.addAbility(FlyingAbility.getInstance());
-		this.addAbility(DeathtouchAbility.getInstance());
-		this.addAbility(LifelinkAbility.getInstance());
-	}
+        this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(DeathtouchAbility.getInstance());
+        this.addAbility(LifelinkAbility.getInstance());
+    }
 
-	public VampireNighthawk(final VampireNighthawk card) {
-		super(card);
-	}
+    public VampireNighthawk(final VampireNighthawk card) {
+        super(card);
+    }
 
-	@Override
-	public VampireNighthawk copy() {
-		return new VampireNighthawk(this);
-	}
+    @Override
+    public VampireNighthawk copy() {
+        return new VampireNighthawk(this);
+    }
 }

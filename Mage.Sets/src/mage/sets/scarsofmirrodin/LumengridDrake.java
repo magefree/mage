@@ -51,7 +51,7 @@ public class LumengridDrake extends CardImpl<LumengridDrake> {
         super(ownerId, 36, "Lumengrid Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Drake");
-        
+
         this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

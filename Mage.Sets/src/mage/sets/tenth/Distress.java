@@ -47,69 +47,69 @@ import java.util.UUID;
  */
 public class Distress extends CardImpl<Distress> {
 
-	public Distress(UUID ownerId) {
-		super(ownerId, 136, "Distress", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}{B}");
-		this.expansionSetCode = "10E";
+    public Distress(UUID ownerId) {
+        super(ownerId, 136, "Distress", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}{B}");
+        this.expansionSetCode = "10E";
 
-		this.color.setBlack(true);
+        this.color.setBlack(true);
 
-		// Target player reveals his or her hand. You choose a nonland card from it. That player discards that card.
-		this.getSpellAbility().addTarget(new TargetPlayer());
-		this.getSpellAbility().addEffect(new DistressEffect());
-	}
+        // Target player reveals his or her hand. You choose a nonland card from it. That player discards that card.
+        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addEffect(new DistressEffect());
+    }
 
-	public Distress(final Distress card) {
-		super(card);
-	}
+    public Distress(final Distress card) {
+        super(card);
+    }
 
-	@Override
-	public Distress copy() {
-		return new Distress(this);
-	}
+    @Override
+    public Distress copy() {
+        return new Distress(this);
+    }
 }
 
 class DistressEffect extends OneShotEffect<DistressEffect> {
 
-	private static final FilterCard filter = new FilterCard("nonland card");
+    private static final FilterCard filter = new FilterCard("nonland card");
 
-	static {
-		filter.getNotCardType().add(CardType.LAND);
-	}
+    static {
+        filter.getNotCardType().add(CardType.LAND);
+    }
 
-	public DistressEffect() {
-		super(Constants.Outcome.Discard);
-		staticText = "Target player reveals his or her hand. You choose a nonland card from it. That player discards that card";
-	}
+    public DistressEffect() {
+        super(Constants.Outcome.Discard);
+        staticText = "Target player reveals his or her hand. You choose a nonland card from it. That player discards that card";
+    }
 
-	public DistressEffect(final DistressEffect effect) {
-		super(effect);
-	}
+    public DistressEffect(final DistressEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getFirstTarget());
-		if (player != null) {
-			player.revealCards("Distress", player.getHand(), game);
-			Player you = game.getPlayer(source.getControllerId());
-			if (you != null) {
-				TargetCard target = new TargetCard(Constants.Zone.PICK, filter);
-				target.setRequired(true);
-				if (you.choose(Constants.Outcome.Benefit, player.getHand(), target, game)) {
-					Card card = player.getHand().get(target.getFirstTarget(), game);
-					if (card != null) {
-						return player.discard(card, source, game);
-					}
-				}
-			}
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getFirstTarget());
+        if (player != null) {
+            player.revealCards("Distress", player.getHand(), game);
+            Player you = game.getPlayer(source.getControllerId());
+            if (you != null) {
+                TargetCard target = new TargetCard(Constants.Zone.PICK, filter);
+                target.setRequired(true);
+                if (you.choose(Constants.Outcome.Benefit, player.getHand(), target, game)) {
+                    Card card = player.getHand().get(target.getFirstTarget(), game);
+                    if (card != null) {
+                        return player.discard(card, source, game);
+                    }
+                }
+            }
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public DistressEffect copy() {
-		return new DistressEffect(this);
-	}
+    @Override
+    public DistressEffect copy() {
+        return new DistressEffect(this);
+    }
 
 }
 

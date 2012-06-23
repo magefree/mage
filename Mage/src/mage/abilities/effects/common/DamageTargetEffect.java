@@ -45,21 +45,21 @@ import mage.players.Player;
  */
 public class DamageTargetEffect extends OneShotEffect<DamageTargetEffect> {
 
-	protected DynamicValue amount;
-	protected boolean preventable;
+    protected DynamicValue amount;
+    protected boolean preventable;
     protected String targetDescription;
 
-	public DamageTargetEffect(int amount) {
-		 this(new StaticValue(amount), true);
-	}
+    public DamageTargetEffect(int amount) {
+         this(new StaticValue(amount), true);
+    }
 
-	public DamageTargetEffect(int amount, boolean preventable) {
-		this(new StaticValue(amount), preventable);
-	}
+    public DamageTargetEffect(int amount, boolean preventable) {
+        this(new StaticValue(amount), preventable);
+    }
 
     public DamageTargetEffect(int amount, boolean preventable, String targetDescription) {
-		this(new StaticValue(amount), preventable, targetDescription);
-	}
+        this(new StaticValue(amount), preventable, targetDescription);
+    }
 
     public DamageTargetEffect(DynamicValue amount) {
         this(amount, true);
@@ -71,49 +71,49 @@ public class DamageTargetEffect extends OneShotEffect<DamageTargetEffect> {
 
     public DamageTargetEffect(DynamicValue amount, boolean preventable, String targetDescription) {
         super(Outcome.Damage);
-		this.amount = amount;
-		this.preventable = preventable;
+        this.amount = amount;
+        this.preventable = preventable;
         this.targetDescription = targetDescription;
     }
 
-	public int getAmount() {
+    public int getAmount() {
         if (amount instanceof StaticValue) {
             return amount.calculate(null, null);
         } else {
             return 0;
         }
-	}
+    }
 
     public void setAmount(DynamicValue amount) {
         this.amount = amount;
     }
 
-	public DamageTargetEffect(final DamageTargetEffect effect) {
-		super(effect);
-		this.amount = effect.amount.clone();
-		this.preventable = effect.preventable;
+    public DamageTargetEffect(final DamageTargetEffect effect) {
+        super(effect);
+        this.amount = effect.amount.clone();
+        this.preventable = effect.preventable;
         this.targetDescription = effect.targetDescription;
-	}
+    }
 
-	@Override
-	public DamageTargetEffect copy() {
-		return new DamageTargetEffect(this);
-	}
+    @Override
+    public DamageTargetEffect copy() {
+        return new DamageTargetEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
-		if (permanent != null) {
-			permanent.damage(amount.calculate(game, source), source.getSourceId(), game, preventable, false);
-			return true;
-		}
-		Player player = game.getPlayer(targetPointer.getFirst(game, source));
-		if (player != null) {
-			player.damage(amount.calculate(game, source), source.getSourceId(), game, false, preventable);
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        if (permanent != null) {
+            permanent.damage(amount.calculate(game, source), source.getSourceId(), game, preventable, false);
+            return true;
+        }
+        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        if (player != null) {
+            player.damage(amount.calculate(game, source), source.getSourceId(), game, false, preventable);
+            return true;
+        }
+        return false;
+    }
 
     @Override
     public String getText(Mode mode) {

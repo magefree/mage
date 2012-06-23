@@ -63,7 +63,7 @@ public class MyrMatrix extends CardImpl<MyrMatrix> {
         this.addAbility(IndestructibleAbility.getInstance());
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Constants.Duration.WhileOnBattlefield, filter, false)));
         this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CreateTokenEffect(new MyrToken()), new GenericManaCost(5)));
-        
+
     }
 
     public MyrMatrix (final MyrMatrix card) {

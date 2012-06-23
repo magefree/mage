@@ -39,38 +39,38 @@ import org.apache.log4j.Logger;
  */
 public class GameStates implements Serializable {
 
-	private final static transient Logger logger = Logger.getLogger(GameStates.class);
+    private final static transient Logger logger = Logger.getLogger(GameStates.class);
 
-//	private List<byte[]> states = new LinkedList<byte[]>();
-	private List<GameState> states = new LinkedList<GameState>();
+//    private List<byte[]> states = new LinkedList<byte[]>();
+    private List<GameState> states = new LinkedList<GameState>();
 
-	public void save(GameState gameState) {
-//		states.add(new Copier<GameState>().copyCompressed(gameState));
-		states.add(gameState.copy());
-		logger.debug("Saved game state: " + states.size());
-	}
+    public void save(GameState gameState) {
+//        states.add(new Copier<GameState>().copyCompressed(gameState));
+        states.add(gameState.copy());
+        logger.debug("Saved game state: " + states.size());
+    }
 
-	public int getSize() {
-		return states.size();
-	}
+    public int getSize() {
+        return states.size();
+    }
 
-	public GameState rollback(int index) {
-		if (states.size() > 0 && index < states.size()) {
-			while (states.size() > index + 1) {
-				states.remove(states.size() - 1);
-			}
-//			return new Copier<GameState>().uncompressCopy(states.get(index));
-			logger.debug("Rolling back state: " + index);
-			return states.get(index);
-		}
-		return null;
-	}
+    public GameState rollback(int index) {
+        if (states.size() > 0 && index < states.size()) {
+            while (states.size() > index + 1) {
+                states.remove(states.size() - 1);
+            }
+//            return new Copier<GameState>().uncompressCopy(states.get(index));
+            logger.debug("Rolling back state: " + index);
+            return states.get(index);
+        }
+        return null;
+    }
 
-	public GameState get(int index) {
-		if (index < states.size())
-//			return new Copier<GameState>().uncompressCopy(states.get(index));
-			return states.get(index);
-		return null;
-	}
+    public GameState get(int index) {
+        if (index < states.size())
+//            return new Copier<GameState>().uncompressCopy(states.get(index));
+            return states.get(index);
+        return null;
+    }
 
 }

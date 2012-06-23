@@ -50,7 +50,7 @@ public class EmberFistZubera extends CardImpl<EmberFistZubera> {
         this.expansionSetCode = "CHK";
         this.subtype.add("Zubera");
         this.subtype.add("Spirit");
-		this.color.setRed(true);
+        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
         Ability ability = new DiesTriggeredAbility(new DamageTargetEffect(new ZuberasDiedDynamicValue()));

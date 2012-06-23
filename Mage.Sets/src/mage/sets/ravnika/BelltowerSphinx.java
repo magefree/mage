@@ -48,63 +48,63 @@ import java.util.UUID;
  */
 public class BelltowerSphinx extends CardImpl<BelltowerSphinx> {
 
-	public BelltowerSphinx(UUID ownerId) {
-		super(ownerId, 38, "Belltower Sphinx", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
-		this.expansionSetCode = "RAV";
-		this.subtype.add("Sphinx");
+    public BelltowerSphinx(UUID ownerId) {
+        super(ownerId, 38, "Belltower Sphinx", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
+        this.expansionSetCode = "RAV";
+        this.subtype.add("Sphinx");
 
-		this.color.setBlue(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(5);
+        this.color.setBlue(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(5);
 
-		this.addAbility(FlyingAbility.getInstance());
-		// Whenever a source deals damage to Belltower Sphinx, that source's controller puts that many cards from the top of his or her library into his or her graveyard.
-		this.addAbility(new BelltowerSphinxEffect());
-	}
+        this.addAbility(FlyingAbility.getInstance());
+        // Whenever a source deals damage to Belltower Sphinx, that source's controller puts that many cards from the top of his or her library into his or her graveyard.
+        this.addAbility(new BelltowerSphinxEffect());
+    }
 
-	public BelltowerSphinx(final BelltowerSphinx card) {
-		super(card);
-	}
+    public BelltowerSphinx(final BelltowerSphinx card) {
+        super(card);
+    }
 
-	@Override
-	public BelltowerSphinx copy() {
-		return new BelltowerSphinx(this);
-	}
+    @Override
+    public BelltowerSphinx copy() {
+        return new BelltowerSphinx(this);
+    }
 }
 
 class BelltowerSphinxEffect extends TriggeredAbilityImpl<BelltowerSphinxEffect> {
 
-	public BelltowerSphinxEffect() {
-		super(Constants.Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(0));
-	}
+    public BelltowerSphinxEffect() {
+        super(Constants.Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(0));
+    }
 
-	public BelltowerSphinxEffect(BelltowerSphinxEffect effect) {
-		super(effect);
-	}
+    public BelltowerSphinxEffect(BelltowerSphinxEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public BelltowerSphinxEffect copy() {
-		return new BelltowerSphinxEffect(this);
-	}
+    @Override
+    public BelltowerSphinxEffect copy() {
+        return new BelltowerSphinxEffect(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE && event.getTargetId().equals(this.sourceId)) {
-			UUID controller = game.getControllerId(event.getSourceId());
-			if (controller != null) {
-				Player player = game.getPlayer(controller);
-				if (player != null) {
-					getEffects().get(0).setTargetPointer(new FixedTarget(player.getId()));
-					((PutLibraryIntoGraveTargetEffect) getEffects().get(0)).setAmount(new StaticValue(event.getAmount()));
-					return true;
-				}
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE && event.getTargetId().equals(this.sourceId)) {
+            UUID controller = game.getControllerId(event.getSourceId());
+            if (controller != null) {
+                Player player = game.getPlayer(controller);
+                if (player != null) {
+                    getEffects().get(0).setTargetPointer(new FixedTarget(player.getId()));
+                    ((PutLibraryIntoGraveTargetEffect) getEffects().get(0)).setAmount(new StaticValue(event.getAmount()));
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "Whenever a source deals damage to {this}, that source's controller puts that many cards from the top of his or her library into his or her graveyard.";
-	}
+    @Override
+    public String getRule() {
+        return "Whenever a source deals damage to {this}, that source's controller puts that many cards from the top of his or her library into his or her graveyard.";
+    }
 }

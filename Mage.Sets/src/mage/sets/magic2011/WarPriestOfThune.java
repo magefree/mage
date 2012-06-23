@@ -47,36 +47,36 @@ import mage.target.TargetPermanent;
  */
 public class WarPriestOfThune extends CardImpl<WarPriestOfThune> {
 
-	private static final FilterPermanent filter = new FilterPermanent("enchantment");
+    private static final FilterPermanent filter = new FilterPermanent("enchantment");
 
-	static {
-		filter.getCardType().add(CardType.ENCHANTMENT);
-		filter.setScopeCardType(ComparisonScope.Any);
-	}
+    static {
+        filter.getCardType().add(CardType.ENCHANTMENT);
+        filter.setScopeCardType(ComparisonScope.Any);
+    }
 
-	public WarPriestOfThune(UUID ownerId) {
-		super(ownerId, 38, "War Priest of Thune", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Human");
-		this.subtype.add("Cleric");
-		this.color.setWhite(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+    public WarPriestOfThune(UUID ownerId) {
+        super(ownerId, 38, "War Priest of Thune", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Human");
+        this.subtype.add("Cleric");
+        this.color.setWhite(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-		Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
-		Target target = new TargetPermanent(filter);
-		target.setRequired(true);
-		ability.addTarget(target);
-		this.addAbility(ability);
-	}
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
+        Target target = new TargetPermanent(filter);
+        target.setRequired(true);
+        ability.addTarget(target);
+        this.addAbility(ability);
+    }
 
-	public WarPriestOfThune(final WarPriestOfThune card) {
-		super(card);
-	}
+    public WarPriestOfThune(final WarPriestOfThune card) {
+        super(card);
+    }
 
-	@Override
-	public WarPriestOfThune copy() {
-		return new WarPriestOfThune(this);
-	}
+    @Override
+    public WarPriestOfThune copy() {
+        return new WarPriestOfThune(this);
+    }
 
 }

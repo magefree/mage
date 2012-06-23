@@ -59,28 +59,28 @@ public class SearchLibraryPutInHandEffect extends SearchEffect<SearchLibraryPutI
     }
 
     public SearchLibraryPutInHandEffect(TargetCardInLibrary target, boolean revealCards, boolean forceShuffle) {
-		super(target, Outcome.DrawCard);
+        super(target, Outcome.DrawCard);
         this.revealCards = revealCards;
         this.forceShuffle = forceShuffle;
-		setText();
+        setText();
     }
 
-	public SearchLibraryPutInHandEffect(final SearchLibraryPutInHandEffect effect) {
-		super(effect);
+    public SearchLibraryPutInHandEffect(final SearchLibraryPutInHandEffect effect) {
+        super(effect);
         this.revealCards = effect.revealCards;
-	}
+    }
 
-	@Override
-	public SearchLibraryPutInHandEffect copy() {
-		return new SearchLibraryPutInHandEffect(this);
-	}
+    @Override
+    public SearchLibraryPutInHandEffect copy() {
+        return new SearchLibraryPutInHandEffect(this);
+    }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player == null)
             return false;
-		if (player.searchLibrary(target, game)) {
+        if (player.searchLibrary(target, game)) {
             if (target.getTargets().size() > 0) {
                 Cards cards = new CardsImpl();
                 for (UUID cardId: (List<UUID>)target.getTargets()) {
@@ -113,18 +113,18 @@ public class SearchLibraryPutInHandEffect extends SearchEffect<SearchLibraryPutI
         StringBuilder sb = new StringBuilder();
         sb.append("Search your library for ");
         if (target.getNumberOfTargets() == 0 && target.getMaxNumberOfTargets() > 0) {
-			sb.append("up to ").append(target.getMaxNumberOfTargets()).append(" ");
-			sb.append(target.getTargetName()).append(revealCards ? ", reveal them, " : "").append(" and put them into your hand");
-		}
-		else {
-			sb.append("a ").append(target.getTargetName()).append(revealCards ? ", reveal it, " : "").append(" and put that card into your hand");
-		}
+            sb.append("up to ").append(target.getMaxNumberOfTargets()).append(" ");
+            sb.append(target.getTargetName()).append(revealCards ? ", reveal them, " : "").append(" and put them into your hand");
+        }
+        else {
+            sb.append("a ").append(target.getTargetName()).append(revealCards ? ", reveal it, " : "").append(" and put that card into your hand");
+        }
         if (forceShuffle)
             sb.append(". Then shuffle your library");
         else
             sb.append(". If you do, shuffle your library");
 
-		staticText = sb.toString();
+        staticText = sb.toString();
     }
 
 }

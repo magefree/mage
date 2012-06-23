@@ -52,94 +52,94 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class AncientHellkite extends CardImpl<AncientHellkite> {
 
-	public AncientHellkite(UUID ownerId) {
-		super(ownerId, 122, "Ancient Hellkite", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{R}{R}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Dragon");
-		this.color.setRed(true);
-		this.power = new MageInt(6);
-		this.toughness = new MageInt(6);
+    public AncientHellkite(UUID ownerId) {
+        super(ownerId, 122, "Ancient Hellkite", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{R}{R}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Dragon");
+        this.color.setRed(true);
+        this.power = new MageInt(6);
+        this.toughness = new MageInt(6);
 
-		this.addAbility(FlyingAbility.getInstance());
-		this.addAbility(new AncientHellkiteAbility());
-	}
+        this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(new AncientHellkiteAbility());
+    }
 
-	public AncientHellkite(final AncientHellkite card) {
-		super(card);
-	}
+    public AncientHellkite(final AncientHellkite card) {
+        super(card);
+    }
 
-	@Override
-	public AncientHellkite copy() {
-		return new AncientHellkite(this);
-	}
+    @Override
+    public AncientHellkite copy() {
+        return new AncientHellkite(this);
+    }
 
 }
 
 class AncientHellkiteAbility extends ActivatedAbilityImpl<AncientHellkiteAbility> {
 
-	private FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
+    private FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
 
-	public AncientHellkiteAbility() {
-		super(Zone.BATTLEFIELD, new DamageTargetEffect(1));
-		addCost(new AncientHellkiteCost());
-		addTarget(new TargetCreaturePermanent(filter));
-		addManaCost(new ColoredManaCost(ColoredManaSymbol.R));
-	}
+    public AncientHellkiteAbility() {
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(1));
+        addCost(new AncientHellkiteCost());
+        addTarget(new TargetCreaturePermanent(filter));
+        addManaCost(new ColoredManaCost(ColoredManaSymbol.R));
+    }
 
-	public AncientHellkiteAbility(final AncientHellkiteAbility ability) {
-		super(ability);
-		this.filter = ability.filter;
-	}
+    public AncientHellkiteAbility(final AncientHellkiteAbility ability) {
+        super(ability);
+        this.filter = ability.filter;
+    }
 
-	@Override
-	public AncientHellkiteAbility copy() {
-		return new AncientHellkiteAbility(this);
-	}
+    @Override
+    public AncientHellkiteAbility copy() {
+        return new AncientHellkiteAbility(this);
+    }
 
-	@Override
-	public boolean activate(Game game, boolean noMana) {
-		UUID defenderId = game.getCombat().getDefendingPlayer(sourceId);
-		if (defenderId != null) {
+    @Override
+    public boolean activate(Game game, boolean noMana) {
+        UUID defenderId = game.getCombat().getDefendingPlayer(sourceId);
+        if (defenderId != null) {
             getTargets().clear();
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
             filter.getControllerId().add(defenderId);
             TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
             target.setRequired(true);
             this.addTarget(target);
-			return super.activate(game, noMana);
-		}
-		return false;
-	}
+            return super.activate(game, noMana);
+        }
+        return false;
+    }
 }
 
 class AncientHellkiteCost extends CostImpl<AncientHellkiteCost> {
 
-	public AncientHellkiteCost() {
-		this.text = "Activate this ability only if Ancient Hellkite is attacking";
-	}
+    public AncientHellkiteCost() {
+        this.text = "Activate this ability only if Ancient Hellkite is attacking";
+    }
 
-	public AncientHellkiteCost(final AncientHellkiteCost cost) {
-		super(cost);
-	}
+    public AncientHellkiteCost(final AncientHellkiteCost cost) {
+        super(cost);
+    }
 
-	@Override
-	public AncientHellkiteCost copy() {
-		return new AncientHellkiteCost(this);
-	}
+    @Override
+    public AncientHellkiteCost copy() {
+        return new AncientHellkiteCost(this);
+    }
 
-	@Override
-	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-		Permanent permanent = game.getPermanent(sourceId);
-		if (permanent != null && permanent.isAttacking()) {
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+        Permanent permanent = game.getPermanent(sourceId);
+        if (permanent != null && permanent.isAttacking()) {
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-		this.paid = true;
-		return paid;
-	}
+    @Override
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+        this.paid = true;
+        return paid;
+    }
 
 }

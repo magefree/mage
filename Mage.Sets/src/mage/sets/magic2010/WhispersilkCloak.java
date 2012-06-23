@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class WhispersilkCloak extends mage.sets.tenth.WhispersilkCloak {
 
-	public WhispersilkCloak(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 221;
-		this.expansionSetCode = "M10";
-	}
+    public WhispersilkCloak(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 221;
+        this.expansionSetCode = "M10";
+    }
 
-	public WhispersilkCloak(final WhispersilkCloak card) {
-		super(card);
-	}
+    public WhispersilkCloak(final WhispersilkCloak card) {
+        super(card);
+    }
 
-	@Override
-	public WhispersilkCloak copy() {
-		return new WhispersilkCloak(this);
-	}
+    @Override
+    public WhispersilkCloak copy() {
+        return new WhispersilkCloak(this);
+    }
 
 }

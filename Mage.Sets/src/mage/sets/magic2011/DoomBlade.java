@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class DoomBlade extends mage.sets.magic2010.DoomBlade {
 
-	public DoomBlade(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 95;
-		this.expansionSetCode = "M11";
-	}
+    public DoomBlade(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 95;
+        this.expansionSetCode = "M11";
+    }
 
-	public DoomBlade(final DoomBlade card) {
-		super(card);
-	}
+    public DoomBlade(final DoomBlade card) {
+        super(card);
+    }
 
-	@Override
-	public DoomBlade copy() {
-		return new DoomBlade(this);
-	}
+    @Override
+    public DoomBlade copy() {
+        return new DoomBlade(this);
+    }
 
 }

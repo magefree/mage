@@ -44,7 +44,7 @@ public class LagacLizard extends CardImpl<LagacLizard> {
         super(ownerId, 154, "Lagac Lizard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.expansionSetCode = "ROE";
         this.subtype.add("Lizard");
-		this.color.setRed(true);
+        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
     }

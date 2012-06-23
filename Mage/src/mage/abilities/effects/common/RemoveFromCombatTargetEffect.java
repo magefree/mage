@@ -44,11 +44,11 @@ public class RemoveFromCombatTargetEffect extends OneShotEffect<RemoveFromCombat
     public RemoveFromCombatTargetEffect() {
         super(Outcome.Detriment);
     }
-    
+
     public RemoveFromCombatTargetEffect(final RemoveFromCombatTargetEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
@@ -62,7 +62,7 @@ public class RemoveFromCombatTargetEffect extends OneShotEffect<RemoveFromCombat
     public RemoveFromCombatTargetEffect copy() {
         return new RemoveFromCombatTargetEffect(this);
     }
-    
+
     @Override
     public String getText(Mode mode) {
         return "Remove target " + mode.getTargets().get(0).getTargetName() + " from combat";

@@ -49,67 +49,67 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class ConsumingVapors extends CardImpl<ConsumingVapors> {
 
-	
 
-	public ConsumingVapors(UUID ownerId) {
-		super(ownerId, 101, "Consuming Vapors", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}");
-		this.expansionSetCode = "ROE";
 
-		this.color.setBlack(true);
-		this.getSpellAbility().addEffect(new ConsumingVaporsEffect());
-		this.getSpellAbility().addTarget(new TargetPlayer());
-		this.addAbility(new ReboundAbility());
-	}
+    public ConsumingVapors(UUID ownerId) {
+        super(ownerId, 101, "Consuming Vapors", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}");
+        this.expansionSetCode = "ROE";
 
-	public ConsumingVapors(final ConsumingVapors card) {
-		super(card);
-	}
+        this.color.setBlack(true);
+        this.getSpellAbility().addEffect(new ConsumingVaporsEffect());
+        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.addAbility(new ReboundAbility());
+    }
 
-	@Override
-	public ConsumingVapors copy() {
-		return new ConsumingVapors(this);
-	}
+    public ConsumingVapors(final ConsumingVapors card) {
+        super(card);
+    }
+
+    @Override
+    public ConsumingVapors copy() {
+        return new ConsumingVapors(this);
+    }
 }
 
 class ConsumingVaporsEffect extends OneShotEffect<ConsumingVaporsEffect> {
 
-	ConsumingVaporsEffect ( ) {
-		super(Outcome.Sacrifice);
-		staticText = "Target player sacrifices a creature. You gain life equal to that creature's toughness";
-	}
+    ConsumingVaporsEffect ( ) {
+        super(Outcome.Sacrifice);
+        staticText = "Target player sacrifices a creature. You gain life equal to that creature's toughness";
+    }
 
-	ConsumingVaporsEffect ( ConsumingVaporsEffect effect ) {
-		super(effect);
-	}
+    ConsumingVaporsEffect ( ConsumingVaporsEffect effect ) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getTargets().getFirstTarget());
-		Player controller = game.getPlayer(source.getControllerId());
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getTargets().getFirstTarget());
+        Player controller = game.getPlayer(source.getControllerId());
 
-		FilterControlledPermanent filter = new FilterControlledPermanent("creature");
-		filter.getCardType().add(CardType.CREATURE);
-		filter.setTargetController(TargetController.YOU);
-		TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, false);
+        FilterControlledPermanent filter = new FilterControlledPermanent("creature");
+        filter.getCardType().add(CardType.CREATURE);
+        filter.setTargetController(TargetController.YOU);
+        TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, false);
 
-		//A spell or ability could have removed the only legal target this player
-		//had, if thats the case this ability should fizzle.
-		if (target.canChoose(player.getId(), game)) {
-			player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+        //A spell or ability could have removed the only legal target this player
+        //had, if thats the case this ability should fizzle.
+        if (target.canChoose(player.getId(), game)) {
+            player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
 
-			Permanent permanent = game.getPermanent(target.getFirstTarget());
-			if ( permanent != null ) {
-				controller.gainLife(permanent.getToughness().getValue(), game);
-				return permanent.sacrifice(source.getId(), game);
-			}
-			return true;
-		}
-		return false;
-	}
+            Permanent permanent = game.getPermanent(target.getFirstTarget());
+            if ( permanent != null ) {
+                controller.gainLife(permanent.getToughness().getValue(), game);
+                return permanent.sacrifice(source.getId(), game);
+            }
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public ConsumingVaporsEffect copy() {
-		return new ConsumingVaporsEffect(this);
-	}
+    @Override
+    public ConsumingVaporsEffect copy() {
+        return new ConsumingVaporsEffect(this);
+    }
 
 }

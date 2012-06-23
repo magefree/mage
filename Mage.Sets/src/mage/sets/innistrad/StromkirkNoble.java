@@ -64,7 +64,7 @@ public class StromkirkNoble extends CardImpl<StromkirkNoble> {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new StromkirkEffect()));
         // Whenever Stromkirk Noble deals combat damage to a player, put a +1/+1 counter on it.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
-        
+
     }
 
     public StromkirkNoble(final StromkirkNoble card) {
@@ -79,30 +79,30 @@ public class StromkirkNoble extends CardImpl<StromkirkNoble> {
 
 class StromkirkEffect extends RestrictionEffect<StromkirkEffect> {
 
-	public StromkirkEffect() {
-		super(Duration.WhileOnBattlefield);
-	}
+    public StromkirkEffect() {
+        super(Duration.WhileOnBattlefield);
+    }
 
-	public StromkirkEffect(final StromkirkEffect effect) {
-		super(effect);
-	}
+    public StromkirkEffect(final StromkirkEffect effect) {
+        super(effect);
+    }
 
     @Override
-	public boolean applies(Permanent permanent, Ability source, Game game) {
-		if (permanent.getId().equals(source.getSourceId())) {
-			return true;
-		}
-		return false;
-	}
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        if (permanent.getId().equals(source.getSourceId())) {
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-		return !blocker.hasSubtype("Human");
-	}
+    @Override
+    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        return !blocker.hasSubtype("Human");
+    }
 
-	@Override
-	public StromkirkEffect copy() {
-		return new StromkirkEffect(this);
-	}
+    @Override
+    public StromkirkEffect copy() {
+        return new StromkirkEffect(this);
+    }
 
 }

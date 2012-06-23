@@ -55,77 +55,77 @@ import mage.players.Player;
  */
 public class ObstinateBaloth extends CardImpl<ObstinateBaloth> {
 
-	public ObstinateBaloth(UUID ownerId) {
-		super(ownerId, 188, "Obstinate Baloth", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Beast");
-		this.color.setGreen(true);
-		this.power = new MageInt(4);
-		this.toughness = new MageInt(4);
+    public ObstinateBaloth(UUID ownerId) {
+        super(ownerId, 188, "Obstinate Baloth", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Beast");
+        this.color.setGreen(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
-		this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(4), false));
-		this.addAbility(new SimpleStaticAbility(Zone.HAND, new ObstinateBalothEffect()));
-	}
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(4), false));
+        this.addAbility(new SimpleStaticAbility(Zone.HAND, new ObstinateBalothEffect()));
+    }
 
-	public ObstinateBaloth(final ObstinateBaloth card) {
-		super(card);
-	}
+    public ObstinateBaloth(final ObstinateBaloth card) {
+        super(card);
+    }
 
-	@Override
-	public ObstinateBaloth copy() {
-		return new ObstinateBaloth(this);
-	}
+    @Override
+    public ObstinateBaloth copy() {
+        return new ObstinateBaloth(this);
+    }
 
 }
 
 class ObstinateBalothEffect extends ReplacementEffectImpl<ObstinateBalothEffect> {
 
-	public ObstinateBalothEffect() {
-		super(Duration.EndOfGame, Outcome.PutCardInPlay);
-		staticText = "If a spell or ability an opponent controls causes you to discard {this}, put it onto the battlefield instead of putting it into your graveyard";
-	}
+    public ObstinateBalothEffect() {
+        super(Duration.EndOfGame, Outcome.PutCardInPlay);
+        staticText = "If a spell or ability an opponent controls causes you to discard {this}, put it onto the battlefield instead of putting it into your graveyard";
+    }
 
-	public ObstinateBalothEffect(final ObstinateBalothEffect effect) {
-		super(effect);
-	}
+    public ObstinateBalothEffect(final ObstinateBalothEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public ObstinateBalothEffect copy() {
-		return new ObstinateBalothEffect(this);
-	}
+    @Override
+    public ObstinateBalothEffect copy() {
+        return new ObstinateBalothEffect(this);
+    }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(source.getSourceId())) {
-			ZoneChangeEvent zcEvent = (ZoneChangeEvent) event;
-			if (zcEvent.getFromZone() == Zone.HAND && zcEvent.getToZone() == Zone.GRAVEYARD) {
-				StackObject spell = game.getStack().getStackObject(event.getSourceId());
-				if (spell != null && game.getOpponents(source.getControllerId()).contains(spell.getControllerId())) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(source.getSourceId())) {
+            ZoneChangeEvent zcEvent = (ZoneChangeEvent) event;
+            if (zcEvent.getFromZone() == Zone.HAND && zcEvent.getToZone() == Zone.GRAVEYARD) {
+                StackObject spell = game.getStack().getStackObject(event.getSourceId());
+                if (spell != null && game.getOpponents(source.getControllerId()).contains(spell.getControllerId())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Card card = game.getCard(source.getSourceId());
-		if (card != null) {
-			Player player = game.getPlayer(card.getOwnerId());
-			if (player != null) {
-				if (card.putOntoBattlefield(game, Zone.HAND, source.getId(), player.getId())) {
-					game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DISCARDED_CARD, card.getId(), source.getId(), player.getId()));
-					return true;
-				}
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Card card = game.getCard(source.getSourceId());
+        if (card != null) {
+            Player player = game.getPlayer(card.getOwnerId());
+            if (player != null) {
+                if (card.putOntoBattlefield(game, Zone.HAND, source.getId(), player.getId())) {
+                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DISCARDED_CARD, card.getId(), source.getId(), player.getId()));
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		return apply(game, source);
-	}
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        return apply(game, source);
+    }
 
 }

@@ -49,26 +49,26 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class HolyStrength extends CardImpl<HolyStrength> {
 
-	public HolyStrength(UUID ownerId) {
-		super(ownerId, 22, "Holy Strength", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");
-		this.expansionSetCode = "10E";
-		this.color.setWhite(true);
-		this.subtype.add("Aura");
+    public HolyStrength(UUID ownerId) {
+        super(ownerId, 22, "Holy Strength", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");
+        this.expansionSetCode = "10E";
+        this.color.setWhite(true);
+        this.subtype.add("Aura");
 
-		TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		this.addAbility(ability);
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 2, Duration.WhileOnBattlefield)));
-	}
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 2, Duration.WhileOnBattlefield)));
+    }
 
-	public HolyStrength(final HolyStrength card) {
-		super(card);
-	}
+    public HolyStrength(final HolyStrength card) {
+        super(card);
+    }
 
-	@Override
-	public HolyStrength copy() {
-		return new HolyStrength(this);
-	}
+    @Override
+    public HolyStrength copy() {
+        return new HolyStrength(this);
+    }
 }

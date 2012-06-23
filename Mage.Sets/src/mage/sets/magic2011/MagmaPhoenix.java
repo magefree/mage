@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class MagmaPhoenix extends mage.sets.magic2010.MagmaPhoenix {
 
-	public MagmaPhoenix(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 150;
-		this.expansionSetCode = "M11";
-	}
+    public MagmaPhoenix(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 150;
+        this.expansionSetCode = "M11";
+    }
 
-	public MagmaPhoenix(final MagmaPhoenix card) {
-		super(card);
-	}
+    public MagmaPhoenix(final MagmaPhoenix card) {
+        super(card);
+    }
 
-	@Override
-	public MagmaPhoenix copy() {
-		return new MagmaPhoenix(this);
-	}
+    @Override
+    public MagmaPhoenix copy() {
+        return new MagmaPhoenix(this);
+    }
 
 }

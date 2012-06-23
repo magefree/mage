@@ -47,7 +47,7 @@ public class LeoninSkyhunter extends CardImpl<LeoninSkyhunter> {
         this.subtype.add("Cat");
         this.subtype.add("Knight");
 
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());

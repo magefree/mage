@@ -56,7 +56,7 @@ public class AerieMystics extends CardImpl<AerieMystics> {
         this.subtype.add("Bird");
         this.subtype.add("Wizard");
         this.power = new MageInt(3);
-	this.toughness = new MageInt(4);
+    this.toughness = new MageInt(4);
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(ShroudAbility.getInstance(), Duration.EndOfTurn, filter), new ManaCostsImpl("{1}{G}{U}")));
     }

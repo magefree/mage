@@ -45,32 +45,32 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class SquadronHawk extends CardImpl<SquadronHawk> {
 
-	private static final FilterCard filter = new FilterCard("cards named Squadron Hawk");
+    private static final FilterCard filter = new FilterCard("cards named Squadron Hawk");
 
-	static {
-		filter.getName().add("Squadron Hawk");
-	}
+    static {
+        filter.getName().add("Squadron Hawk");
+    }
 
-	public SquadronHawk(UUID ownerId) {
-		super(ownerId, 33, "Squadron Hawk", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Bird");
-		this.color.setWhite(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
+    public SquadronHawk(UUID ownerId) {
+        super(ownerId, 33, "Squadron Hawk", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Bird");
+        this.color.setWhite(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-		this.addAbility(FlyingAbility.getInstance());
-		TargetCardInLibrary target = new TargetCardInLibrary(0, 3, filter);
-		this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryRevealPutInHandEffect(target), true));
-	}
+        this.addAbility(FlyingAbility.getInstance());
+        TargetCardInLibrary target = new TargetCardInLibrary(0, 3, filter);
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryRevealPutInHandEffect(target), true));
+    }
 
-	public SquadronHawk(final SquadronHawk card) {
-		super(card);
-	}
+    public SquadronHawk(final SquadronHawk card) {
+        super(card);
+    }
 
-	@Override
-	public SquadronHawk copy() {
-		return new SquadronHawk(this);
-	}
+    @Override
+    public SquadronHawk copy() {
+        return new SquadronHawk(this);
+    }
 
 }

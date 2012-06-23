@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class ChildOfNight extends mage.sets.magic2010.ChildOfNight {
 
-	public ChildOfNight(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 88;
-		this.expansionSetCode = "M11";
-	}
+    public ChildOfNight(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 88;
+        this.expansionSetCode = "M11";
+    }
 
-	public ChildOfNight(final ChildOfNight card) {
-		super(card);
-	}
+    public ChildOfNight(final ChildOfNight card) {
+        super(card);
+    }
 
-	@Override
-	public ChildOfNight copy() {
-		return new ChildOfNight(this);
-	}
+    @Override
+    public ChildOfNight copy() {
+        return new ChildOfNight(this);
+    }
 
 }

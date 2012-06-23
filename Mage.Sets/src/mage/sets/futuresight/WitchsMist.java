@@ -51,7 +51,7 @@ public class WitchsMist extends CardImpl<WitchsMist> {
         filter.setUseDamageDealt(true);
         filter.setDamageDealt(true);
     }
-    
+
     public WitchsMist(UUID ownerId) {
         super(ownerId, 92, "Witch's Mist", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
         this.expansionSetCode = "FUT";

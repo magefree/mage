@@ -52,7 +52,7 @@ public class BeginningOfDrawTriggeredAbility extends TriggeredAbilityImpl<Beginn
                         }
                         return true;
                     }
-		    break;
+            break;
                 case ANY:
                     if (getTargets().size() == 0) {
                         for (Effect effect : this.getEffects()) {

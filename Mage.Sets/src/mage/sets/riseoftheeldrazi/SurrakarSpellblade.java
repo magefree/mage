@@ -46,7 +46,7 @@ import mage.abilities.dynamicvalue.common.CountersCount;
  * @author jeffwadsworth
  */
 public class SurrakarSpellblade extends CardImpl<SurrakarSpellblade> {
-    
+
     private static final FilterSpell filter = new FilterSpell("instant or sorcery card");
 
     static {
@@ -66,7 +66,7 @@ public class SurrakarSpellblade extends CardImpl<SurrakarSpellblade> {
 
         // Whenever you cast an instant or sorcery spell, you may put a charge counter on Surrakar Spellblade.
         this.addAbility(new SpellCastTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), filter, true));
-        
+
         // Whenever Surrakar Spellblade deals combat damage to a player, you may draw X cards, where X is the number of charge counters on it.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardControllerEffect(new CountersCount(CounterType.CHARGE)), true));
     }

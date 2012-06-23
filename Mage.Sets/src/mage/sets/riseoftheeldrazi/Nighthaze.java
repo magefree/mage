@@ -48,7 +48,7 @@ public class Nighthaze extends CardImpl<Nighthaze> {
     public Nighthaze (UUID ownerId) {
         super(ownerId, 118, "Nighthaze", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
         this.expansionSetCode = "ROE";
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(new SwampwalkAbility(), Constants.Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

@@ -45,48 +45,48 @@ import mage.players.Player;
  */
 public class CyclingAbility extends ActivatedAbilityImpl<CyclingAbility> {
 
-	public CyclingAbility(ManaCosts costs) {
-		super(Zone.HAND, new CycleEffect(), costs);
-		this.addCost(new DiscardSourceCost());
-	}
+    public CyclingAbility(ManaCosts costs) {
+        super(Zone.HAND, new CycleEffect(), costs);
+        this.addCost(new DiscardSourceCost());
+    }
 
-	public CyclingAbility(final CyclingAbility ability) {
-		super(ability);
-	}
+    public CyclingAbility(final CyclingAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public CyclingAbility copy() {
-		return new CyclingAbility(this);
-	}
+    @Override
+    public CyclingAbility copy() {
+        return new CyclingAbility(this);
+    }
 
-	@Override
-	public String getRule() {
-		return "Cycling " + super.getRule();
-	}
+    @Override
+    public String getRule() {
+        return "Cycling " + super.getRule();
+    }
 
 }
 
 class CycleEffect extends OneShotEffect<CycleEffect> {
 
-	public CycleEffect() {
-		super(Outcome.DrawCard);
-		staticText = "Draw a card";
-	}
+    public CycleEffect() {
+        super(Outcome.DrawCard);
+        staticText = "Draw a card";
+    }
 
-	public CycleEffect(final CycleEffect effect) {
-		super(effect);
-	}
+    public CycleEffect(final CycleEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public CycleEffect copy() {
-		return new CycleEffect(this);
-	}
+    @Override
+    public CycleEffect copy() {
+        return new CycleEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-		player.drawCards(1, game);
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        player.drawCards(1, game);
+        return true;
+    }
 
 }

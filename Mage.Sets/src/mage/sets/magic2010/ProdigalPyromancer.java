@@ -37,20 +37,20 @@ import mage.Constants.Rarity;
  */
 public class ProdigalPyromancer extends mage.sets.tenth.ProdigalPyromancer {
 
-	public ProdigalPyromancer(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 151;
-		this.expansionSetCode = "M10";
-		this.rarity = Rarity.UNCOMMON;
-	}
+    public ProdigalPyromancer(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 151;
+        this.expansionSetCode = "M10";
+        this.rarity = Rarity.UNCOMMON;
+    }
 
-	public ProdigalPyromancer(final ProdigalPyromancer card) {
-		super(card);
-	}
+    public ProdigalPyromancer(final ProdigalPyromancer card) {
+        super(card);
+    }
 
-	@Override
-	public ProdigalPyromancer copy() {
-		return new ProdigalPyromancer(this);
-	}
+    @Override
+    public ProdigalPyromancer copy() {
+        return new ProdigalPyromancer(this);
+    }
 
 }

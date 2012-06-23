@@ -63,7 +63,7 @@ public class LoyalCathar extends CardImpl<LoyalCathar> {
         this.toughness = new MageInt(2);
 
         this.addAbility(VigilanceAbility.getInstance());
-        
+
         // When Loyal Cathar dies, return it to the battlefield transformed under your control at the beginning of the next end step.
         this.addAbility(new TransformAbility());
         this.addAbility(new DiesTriggeredAbility(new LoyalCatharEffect()));
@@ -81,56 +81,56 @@ public class LoyalCathar extends CardImpl<LoyalCathar> {
 
 class LoyalCatharEffect extends OneShotEffect<LoyalCatharEffect> {
 
-	private static final String effectText = "return it to the battlefield transformed under your control at the beginning of the next end step";
+    private static final String effectText = "return it to the battlefield transformed under your control at the beginning of the next end step";
 
-	LoyalCatharEffect ( ) {
-		super(Constants.Outcome.Benefit);
-		staticText = effectText;
-	}
+    LoyalCatharEffect ( ) {
+        super(Constants.Outcome.Benefit);
+        staticText = effectText;
+    }
 
-	LoyalCatharEffect(LoyalCatharEffect effect) {
-		super(effect);
-	}
+    LoyalCatharEffect(LoyalCatharEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
         //create delayed triggered ability
         AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(new ReturnLoyalCatharEffect(source.getSourceId()));
         delayedAbility.setSourceId(source.getSourceId());
         delayedAbility.setControllerId(source.getControllerId());
         game.addDelayedTriggeredAbility(delayedAbility);
         return true;
-	}
+    }
 
-	@Override
-	public LoyalCatharEffect copy() {
-		return new LoyalCatharEffect(this);
-	}
+    @Override
+    public LoyalCatharEffect copy() {
+        return new LoyalCatharEffect(this);
+    }
 
 }
 
 class ReturnLoyalCatharEffect extends OneShotEffect<ReturnLoyalCatharEffect> {
 
-	private UUID cardId;
+    private UUID cardId;
 
-	public ReturnLoyalCatharEffect(UUID cardId) {
-		super(Constants.Outcome.PutCardInPlay);
-		this.cardId = cardId;
+    public ReturnLoyalCatharEffect(UUID cardId) {
+        super(Constants.Outcome.PutCardInPlay);
+        this.cardId = cardId;
         this.staticText = "return it to the battlefield transformed under your control";
-	}
+    }
 
-	public ReturnLoyalCatharEffect(final ReturnLoyalCatharEffect effect) {
-		super(effect);
-		this.cardId = effect.cardId;
-	}
+    public ReturnLoyalCatharEffect(final ReturnLoyalCatharEffect effect) {
+        super(effect);
+        this.cardId = effect.cardId;
+    }
 
-	@Override
-	public ReturnLoyalCatharEffect copy() {
-		return new ReturnLoyalCatharEffect(this);
-	}
+    @Override
+    public ReturnLoyalCatharEffect copy() {
+        return new ReturnLoyalCatharEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
         Card card = game.getCard(cardId);
         if (card != null) {
             card.putOntoBattlefield(game, Constants.Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
@@ -141,6 +141,6 @@ class ReturnLoyalCatharEffect extends OneShotEffect<ReturnLoyalCatharEffect> {
             }
         }
         return false;
-	}
+    }
 
 }

@@ -42,22 +42,22 @@ import mage.target.TargetPlayer;
  */
 public class Blightning extends CardImpl<Blightning> {
 
-	public Blightning(UUID ownerId) {
-		super(ownerId, 156, "Blightning", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{R}");
-		this.expansionSetCode = "ALA";
-		this.color.setBlack(true);
-		this.color.setRed(true);
-		this.getSpellAbility().addTarget(new TargetPlayer());
-		this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-		this.getSpellAbility().addEffect(new DiscardTargetEffect(2));
-	}
+    public Blightning(UUID ownerId) {
+        super(ownerId, 156, "Blightning", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{R}");
+        this.expansionSetCode = "ALA";
+        this.color.setBlack(true);
+        this.color.setRed(true);
+        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addEffect(new DamageTargetEffect(3));
+        this.getSpellAbility().addEffect(new DiscardTargetEffect(2));
+    }
 
-	public Blightning(final Blightning card) {
-		super(card);
-	}
+    public Blightning(final Blightning card) {
+        super(card);
+    }
 
-	@Override
-	public Blightning copy() {
-		return new Blightning(this);
-	}
+    @Override
+    public Blightning copy() {
+        return new Blightning(this);
+    }
 }

@@ -184,9 +184,9 @@ public class MageActionCallback implements ActionCallback {
                         SwingUtilities.invokeLater(new Runnable() {
                             @Override
                             public void run() {
-								if (!state) {
-									return;
-								}
+                                if (!state) {
+                                    return;
+                                }
                                 popupContainer.setVisible(true);
                                 c.repaint();
                             }

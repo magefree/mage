@@ -19,11 +19,11 @@ public class CursesTest extends CardTestPlayerBase {
         castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Curse of Bloodletting", playerB);
         castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerA);
-        
+
 
         setStopAt(1, Constants.PhaseStep.END_TURN);
         execute();
-        
+
         assertLife(playerA, 17);
         assertLife(playerB, 14);
     }
@@ -40,7 +40,7 @@ public class CursesTest extends CardTestPlayerBase {
 
         setStopAt(1, Constants.PhaseStep.END_TURN);
         execute();
-        
+
         assertHandCount(playerA, 3);
         assertHandCount(playerB, 3);
     }
@@ -55,11 +55,11 @@ public class CursesTest extends CardTestPlayerBase {
         castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Curse of Exhaustion", playerB);
         castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", playerA);
         castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", playerA);
-        
+
 
         setStopAt(1, Constants.PhaseStep.END_TURN);
         execute();
-        
+
         assertLife(playerB, 20);
         assertLife(playerA, 17);
     }
@@ -74,11 +74,11 @@ public class CursesTest extends CardTestPlayerBase {
         castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Curse of Exhaustion", playerB);
         castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
-        
+
 
         setStopAt(1, Constants.PhaseStep.END_TURN);
         execute();
-        
+
         assertLife(playerA, 20);
         assertLife(playerB, 14);
     }
@@ -92,7 +92,7 @@ public class CursesTest extends CardTestPlayerBase {
 
         setStopAt(2, Constants.PhaseStep.DRAW);
         execute();
-        
+
         assertLife(playerA, 20);
         assertLife(playerB, 19);
     }
@@ -109,11 +109,11 @@ public class CursesTest extends CardTestPlayerBase {
 
         setStopAt(2, Constants.PhaseStep.DRAW);
         execute();
-        
+
         assertLife(playerA, 20);
         assertLife(playerB, 16);
     }
-    
+
     @Test
     public void testCurseOfMisfortune1() {
         removeAllCardsFromLibrary(playerA);
@@ -125,7 +125,7 @@ public class CursesTest extends CardTestPlayerBase {
 
         setStopAt(3, Constants.PhaseStep.DRAW);
         execute();
-        
+
         assertLife(playerA, 20);
         assertLife(playerB, 20);
         assertPermanentCount(playerA, "Curse of Misfortunes", 1);
@@ -142,7 +142,7 @@ public class CursesTest extends CardTestPlayerBase {
 
         setStopAt(3, Constants.PhaseStep.DRAW);
         execute();
-        
+
         assertLife(playerA, 20);
         assertLife(playerB, 20);
         assertPermanentCount(playerA, "Curse of Misfortunes", 1);

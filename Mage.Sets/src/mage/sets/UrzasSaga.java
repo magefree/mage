@@ -38,20 +38,20 @@ import mage.cards.ExpansionSet;
  */
 public class UrzasSaga extends ExpansionSet {
 
-	private static final UrzasSaga fINSTANCE =  new UrzasSaga();
+    private static final UrzasSaga fINSTANCE =  new UrzasSaga();
 
-	public static UrzasSaga getInstance() {
-		return fINSTANCE;
-	}
+    public static UrzasSaga getInstance() {
+        return fINSTANCE;
+    }
 
-	private UrzasSaga() {
-		super("Urza's Saga", "USG", "exp_symbol_mtgusg", "mage.sets.urzassaga", new GregorianCalendar(1998, 10, 1).getTime(), SetType.EXPANSION);
-		this.hasBoosters = true;
-		this.numBoosterLands = 1;
-		this.numBoosterCommon = 10;
-		this.numBoosterUncommon = 3;
-		this.numBoosterRare = 1;
-		this.ratioBoosterMythic = 0;
-	}
+    private UrzasSaga() {
+        super("Urza's Saga", "USG", "exp_symbol_mtgusg", "mage.sets.urzassaga", new GregorianCalendar(1998, 10, 1).getTime(), SetType.EXPANSION);
+        this.hasBoosters = true;
+        this.numBoosterLands = 1;
+        this.numBoosterCommon = 10;
+        this.numBoosterUncommon = 3;
+        this.numBoosterRare = 1;
+        this.ratioBoosterMythic = 0;
+    }
 
 }

@@ -51,7 +51,7 @@ public class TurnToSlag extends CardImpl<TurnToSlag> {
     public TurnToSlag (UUID ownerId) {
         super(ownerId, 106, "Turn to Slag", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
         this.expansionSetCode = "SOM";
-		this.color.setRed(true);
+        this.color.setRed(true);
         this.getSpellAbility().addEffect(new TurnToSlagEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
@@ -83,11 +83,11 @@ class TurnToSlagEffect extends OneShotEffect<TurnToSlagEffect> {
         if (target != null) {
             List<Permanent> attachments = new ArrayList<Permanent>();
             for (UUID uuid : target.getAttachments()) {
-				Permanent attached = game.getBattlefield().getPermanent(uuid);
-				if (attached.getSubtype().contains("Equipment")) {
+                Permanent attached = game.getBattlefield().getPermanent(uuid);
+                if (attached.getSubtype().contains("Equipment")) {
                     attachments.add(attached);
-				}
-			}
+                }
+            }
             for (Permanent p : attachments) {
                 p.destroy(source.getId(), game, false);
             }

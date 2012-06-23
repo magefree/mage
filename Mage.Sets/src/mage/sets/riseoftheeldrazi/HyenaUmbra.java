@@ -59,9 +59,9 @@ public class HyenaUmbra extends CardImpl<HyenaUmbra> {
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // Enchanted creature gets +1/+1 and has first strike.
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Constants.Duration.WhileOnBattlefield)));

@@ -43,40 +43,40 @@ import mage.players.Player;
  */
 public class CounterUnlessPaysEffect extends OneShotEffect<CounterUnlessPaysEffect> {
 
-	protected Cost cost;
+    protected Cost cost;
 
-	public CounterUnlessPaysEffect(Cost cost) {
-		super(Outcome.Detriment);
-		this.cost = cost;
-	}
+    public CounterUnlessPaysEffect(Cost cost) {
+        super(Outcome.Detriment);
+        this.cost = cost;
+    }
 
-	public CounterUnlessPaysEffect(final CounterUnlessPaysEffect effect) {
-		super(effect);
-		this.cost = effect.cost.copy();
-	}
+    public CounterUnlessPaysEffect(final CounterUnlessPaysEffect effect) {
+        super(effect);
+        this.cost = effect.cost.copy();
+    }
 
-	@Override
-	public CounterUnlessPaysEffect copy() {
-		return new CounterUnlessPaysEffect(this);
-	}
+    @Override
+    public CounterUnlessPaysEffect copy() {
+        return new CounterUnlessPaysEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		StackObject spell = game.getStack().getStackObject(targetPointer.getFirst(game, source));
-		if (spell != null) {
-			Player player = game.getPlayer(spell.getControllerId());
-			if (player != null) {
-				cost.clearPaid();
-				if (!cost.pay(source, game, spell.getControllerId(), spell.getControllerId(), false)) {
-					return game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
-				}
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        StackObject spell = game.getStack().getStackObject(targetPointer.getFirst(game, source));
+        if (spell != null) {
+            Player player = game.getPlayer(spell.getControllerId());
+            if (player != null) {
+                cost.clearPaid();
+                if (!cost.pay(source, game, spell.getControllerId(), spell.getControllerId(), false)) {
+                    return game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
+                }
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public String getText(Mode mode) {
+    @Override
+    public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
         if (mode.getTargets().size() == 0) {
             sb.append("counter it");
@@ -85,7 +85,7 @@ public class CounterUnlessPaysEffect extends OneShotEffect<CounterUnlessPaysEffe
             sb.append("Counter target ").append(mode.getTargets().get(0).getTargetName());
         }
         sb.append(" unless its controller pays ").append(cost.getText());
-		return sb.toString();
-	}
+        return sb.toString();
+    }
 
 }

@@ -37,26 +37,26 @@ import mage.game.events.GameEvent.EventType;
  */
 public class CombatPhase extends Phase<CombatPhase> {
 
-	public CombatPhase() {
-		this.type = TurnPhase.COMBAT;
-		this.event = EventType.COMBAT_PHASE;
-		this.preEvent = EventType.COMBAT_PHASE_PRE;
-		this.postEvent = EventType.COMBAT_PHASE_POST;
-		this.steps.add(new BeginCombatStep());
-		this.steps.add(new DeclareAttackersStep());
-		this.steps.add(new DeclareBlockersStep());
-		this.steps.add(new FirstCombatDamageStep());
-		this.steps.add(new CombatDamageStep());
-		this.steps.add(new EndOfCombatStep());
-	}
+    public CombatPhase() {
+        this.type = TurnPhase.COMBAT;
+        this.event = EventType.COMBAT_PHASE;
+        this.preEvent = EventType.COMBAT_PHASE_PRE;
+        this.postEvent = EventType.COMBAT_PHASE_POST;
+        this.steps.add(new BeginCombatStep());
+        this.steps.add(new DeclareAttackersStep());
+        this.steps.add(new DeclareBlockersStep());
+        this.steps.add(new FirstCombatDamageStep());
+        this.steps.add(new CombatDamageStep());
+        this.steps.add(new EndOfCombatStep());
+    }
 
-	public CombatPhase(final CombatPhase phase) {
-		super(phase);
-	}
+    public CombatPhase(final CombatPhase phase) {
+        super(phase);
+    }
 
-	@Override
-	public CombatPhase copy() {
-		return new CombatPhase(this);
-	}
+    @Override
+    public CombatPhase copy() {
+        return new CombatPhase(this);
+    }
 
 }

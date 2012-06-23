@@ -55,51 +55,51 @@ import mage.filter.common.FilterNonlandPermanent;
  */
 public class SteelHellkite extends CardImpl<SteelHellkite> {
 
-	public SteelHellkite(UUID ownerId) {
-		super(ownerId, 205, "Steel Hellkite", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
-		this.expansionSetCode = "SOM";
-		this.subtype.add("Dragon");
+    public SteelHellkite(UUID ownerId) {
+        super(ownerId, 205, "Steel Hellkite", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
+        this.expansionSetCode = "SOM";
+        this.subtype.add("Dragon");
 
-		this.power = new MageInt(5);
-		this.toughness = new MageInt(5);
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(5);
 
-		this.addAbility(FlyingAbility.getInstance());
-		// {2}: Steel Hellkite gets +1/+0 until end of turn.
-		this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Constants.Duration.EndOfTurn), new GenericManaCost(2)));
-		// {X}: Destroy each nonland permanent with converted mana cost X whose controller was dealt combat damage by Steel Hellkite this turn. Activate this ability only once each turn.
-		this.addAbility(new ActivateOncePerTurnActivatedAbility(Constants.Zone.BATTLEFIELD, new SteelHellkiteDestroyEffect(), new ManaCostsImpl("{X}")));
+        this.addAbility(FlyingAbility.getInstance());
+        // {2}: Steel Hellkite gets +1/+0 until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Constants.Duration.EndOfTurn), new GenericManaCost(2)));
+        // {X}: Destroy each nonland permanent with converted mana cost X whose controller was dealt combat damage by Steel Hellkite this turn. Activate this ability only once each turn.
+        this.addAbility(new ActivateOncePerTurnActivatedAbility(Constants.Zone.BATTLEFIELD, new SteelHellkiteDestroyEffect(), new ManaCostsImpl("{X}")));
 
-		this.addWatcher(new SteelHellkiteWatcher());
-	}
+        this.addWatcher(new SteelHellkiteWatcher());
+    }
 
-	public SteelHellkite(final SteelHellkite card) {
-		super(card);
-	}
+    public SteelHellkite(final SteelHellkite card) {
+        super(card);
+    }
 
-	@Override
-	public SteelHellkite copy() {
-		return new SteelHellkite(this);
-	}
+    @Override
+    public SteelHellkite copy() {
+        return new SteelHellkite(this);
+    }
 }
 
 class SteelHellkiteDestroyEffect extends OneShotEffect {
 
-	public SteelHellkiteDestroyEffect() {
-		super(Constants.Outcome.DestroyPermanent);
-		staticText = "Destroy each nonland permanent with converted mana cost X whose controller was dealt combat damage by Steel Hellkite this turn";
-	}
+    public SteelHellkiteDestroyEffect() {
+        super(Constants.Outcome.DestroyPermanent);
+        staticText = "Destroy each nonland permanent with converted mana cost X whose controller was dealt combat damage by Steel Hellkite this turn";
+    }
 
-	public SteelHellkiteDestroyEffect(final SteelHellkiteDestroyEffect effect) {
-		super(effect);
-	}
+    public SteelHellkiteDestroyEffect(final SteelHellkiteDestroyEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public SteelHellkiteDestroyEffect copy() {
-		return new SteelHellkiteDestroyEffect(this);
-	}
+    @Override
+    public SteelHellkiteDestroyEffect copy() {
+        return new SteelHellkiteDestroyEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
         SteelHellkiteWatcher watcher = (SteelHellkiteWatcher) game.getState().getWatchers().get("SteelHellkiteWatcher", source.getSourceId());
         if (watcher != null) {
             int xValue = source.getManaCostsToPay().getX();
@@ -112,47 +112,47 @@ class SteelHellkiteDestroyEffect extends OneShotEffect {
             }
         }
         return true;
-	}
+    }
 }
 
 class SteelHellkiteWatcher extends WatcherImpl<SteelHellkiteWatcher> {
 
-	public List<UUID> damagedPlayers = new ArrayList<UUID>();
+    public List<UUID> damagedPlayers = new ArrayList<UUID>();
 
-	public SteelHellkiteWatcher() {
-		super("SteelHellkiteWatcher", WatcherScope.CARD);
-	}
+    public SteelHellkiteWatcher() {
+        super("SteelHellkiteWatcher", WatcherScope.CARD);
+    }
 
-	public SteelHellkiteWatcher(final SteelHellkiteWatcher watcher) {
-		super(watcher);
+    public SteelHellkiteWatcher(final SteelHellkiteWatcher watcher) {
+        super(watcher);
         for (UUID playerId: watcher.damagedPlayers) {
             damagedPlayers.add(playerId);
         }
-	}
+    }
 
-	@Override
-	public SteelHellkiteWatcher copy() {
-		return new SteelHellkiteWatcher(this);
-	}
+    @Override
+    public SteelHellkiteWatcher copy() {
+        return new SteelHellkiteWatcher(this);
+    }
 
-	@Override
-	public void watch(GameEvent event, Game game) {
-		if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
+    @Override
+    public void watch(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
             DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
-			UUID sourceId = damageEvent.getSourceId();
-			Permanent permanent = game.getPermanent(sourceId);
-			if (sourceId != null && permanent != null && permanent.getName().equals("Steel Hellkite")) {
+            UUID sourceId = damageEvent.getSourceId();
+            Permanent permanent = game.getPermanent(sourceId);
+            if (sourceId != null && permanent != null && permanent.getName().equals("Steel Hellkite")) {
                 if (!damagedPlayers.contains(event.getTargetId())) {
                     damagedPlayers.add(event.getTargetId());
                 }
-			}
+            }
         }
-	}
+    }
 
-	@Override
-	public void reset() {
-		super.reset();
-		damagedPlayers.clear();
-	}
+    @Override
+    public void reset() {
+        super.reset();
+        damagedPlayers.clear();
+    }
 
 }

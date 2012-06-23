@@ -56,7 +56,7 @@ public class AltarOfTheLost extends CardImpl<AltarOfTheLost> {
 
         // Altar of the Lost enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        
+
         // {tap}: Add two mana in any combination of colors to your mana pool. Spend this mana only to cast spells with flashback from a graveyard.
         this.addAbility(new ConditionalAnyColorManaAbility(2, new AltarOfTheLostManaBuilder()));
 
@@ -103,23 +103,23 @@ class AltarOfTheLostManaBuilder extends ConditionalManaBuilder {
 
 class AltarOfTheLostConditionalMana extends ConditionalMana {
 
-	public AltarOfTheLostConditionalMana(Mana mana) {
-		super(mana);
-		staticText = "Spend this mana only to cast spells with flashback from a graveyard";
-		addCondition(new AltarOfTheLostManaCondition());
-	}
+    public AltarOfTheLostConditionalMana(Mana mana) {
+        super(mana);
+        staticText = "Spend this mana only to cast spells with flashback from a graveyard";
+        addCondition(new AltarOfTheLostManaCondition());
+    }
 }
 
 class AltarOfTheLostManaCondition implements Condition {
-	@Override
-	public boolean apply(Game game, Ability source) {
-		MageObject object = game.getObject(source.getSourceId());
-		if (object != null && game.getState().getZone(object.getId()) == Zone.GRAVEYARD) {
+    @Override
+    public boolean apply(Game game, Ability source) {
+        MageObject object = game.getObject(source.getSourceId());
+        if (object != null && game.getState().getZone(object.getId()) == Zone.GRAVEYARD) {
             for (Ability ability: object.getAbilities()) {
                 if (ability instanceof FlashbackAbility)
                     return true;
             }
-		}
-		return false;
-	}
+        }
+        return false;
+    }
 }

@@ -66,72 +66,72 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class GrandArchitect extends CardImpl<GrandArchitect> {
 
-	private static final FilterCreaturePermanent boostFilter = new FilterCreaturePermanent("blue creatures");
-	private static final FilterCreaturePermanent targetFilter = new FilterCreaturePermanent("artifact creature");
+    private static final FilterCreaturePermanent boostFilter = new FilterCreaturePermanent("blue creatures");
+    private static final FilterCreaturePermanent targetFilter = new FilterCreaturePermanent("artifact creature");
 
-	static {
-		boostFilter.getColor().setBlue(true);
-		boostFilter.setUseColor(true);
-		targetFilter.getCardType().add(CardType.ARTIFACT);
-		targetFilter.setScopeCardType(ComparisonScope.All);
-	}
+    static {
+        boostFilter.getColor().setBlue(true);
+        boostFilter.setUseColor(true);
+        targetFilter.getCardType().add(CardType.ARTIFACT);
+        targetFilter.setScopeCardType(ComparisonScope.All);
+    }
 
-	public GrandArchitect(UUID ownerId) {
-		super(ownerId, 33, "Grand Architect", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
-		this.expansionSetCode = "SOM";
-		this.subtype.add("Vedalken");
-		this.subtype.add("Artificer");
-		this.color.setBlue(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(3);
+    public GrandArchitect(UUID ownerId) {
+        super(ownerId, 33, "Grand Architect", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
+        this.expansionSetCode = "SOM";
+        this.subtype.add("Vedalken");
+        this.subtype.add("Artificer");
+        this.color.setBlue(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(3);
 
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, boostFilter, true)));
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GrandArchitectEffect(), new ManaCostsImpl("{U}"));
-		ability.addTarget(new TargetPermanent(targetFilter));
-		this.addAbility(ability);
-		this.addAbility(new GrandArchitectManaAbility());
-	}
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, boostFilter, true)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GrandArchitectEffect(), new ManaCostsImpl("{U}"));
+        ability.addTarget(new TargetPermanent(targetFilter));
+        this.addAbility(ability);
+        this.addAbility(new GrandArchitectManaAbility());
+    }
 
-	public GrandArchitect(final GrandArchitect card) {
-		super(card);
-	}
+    public GrandArchitect(final GrandArchitect card) {
+        super(card);
+    }
 
-	@Override
-	public GrandArchitect copy() {
-		return new GrandArchitect(this);
-	}
+    @Override
+    public GrandArchitect copy() {
+        return new GrandArchitect(this);
+    }
 
 }
 
 class GrandArchitectEffect extends ContinuousEffectImpl<GrandArchitectEffect> {
 
-	public GrandArchitectEffect() {
-		super(Duration.EndOfTurn, Layer.ColorChangingEffects_5, SubLayer.NA, Outcome.Detriment);
-		staticText = "Target artifact creature becomes blue until end of turn";
-	}
+    public GrandArchitectEffect() {
+        super(Duration.EndOfTurn, Layer.ColorChangingEffects_5, SubLayer.NA, Outcome.Detriment);
+        staticText = "Target artifact creature becomes blue until end of turn";
+    }
 
-	public GrandArchitectEffect(final GrandArchitectEffect effect) {
-		super(effect);
-	}
+    public GrandArchitectEffect(final GrandArchitectEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public GrandArchitectEffect copy() {
-		return new GrandArchitectEffect(this);
-	}
+    @Override
+    public GrandArchitectEffect copy() {
+        return new GrandArchitectEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getFirstTarget());
-		if (permanent != null) {
-			permanent.getColor().setRed(false);
-			permanent.getColor().setWhite(false);
-			permanent.getColor().setGreen(false);
-			permanent.getColor().setBlue(true);
-			permanent.getColor().setBlack(false);
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        if (permanent != null) {
+            permanent.getColor().setRed(false);
+            permanent.getColor().setWhite(false);
+            permanent.getColor().setGreen(false);
+            permanent.getColor().setBlue(true);
+            permanent.getColor().setBlack(false);
+            return true;
+        }
+        return false;
+    }
 
 }
 
@@ -139,13 +139,13 @@ class GrandArchitectManaAbility extends ManaAbility<GrandArchitectManaAbility> {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped blue creature");
 
-	static {
-		filter.getColor().setBlue(true);
-		filter.setUseColor(true);
-		filter.setTapped(false);
-		filter.setUseTapped(true);
-	}
-	
+    static {
+        filter.getColor().setBlue(true);
+        filter.setUseColor(true);
+        filter.setTapped(false);
+        filter.setUseTapped(true);
+    }
+
     GrandArchitectManaAbility ( ) {
         super(Zone.BATTLEFIELD, new BasicManaEffect(new GrandArchitectConditionalMana()), new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true)));
         this.netMana.setColorless(2);
@@ -163,20 +163,20 @@ class GrandArchitectManaAbility extends ManaAbility<GrandArchitectManaAbility> {
 
 class GrandArchitectConditionalMana extends ConditionalMana {
 
-	public GrandArchitectConditionalMana() {
-		super(Mana.ColorlessMana(2));
-		staticText = "Spend this mana only to cast artifact spells or activate abilities of artifacts";
-		addCondition(new GrandArchitectManaCondition());
-	}
+    public GrandArchitectConditionalMana() {
+        super(Mana.ColorlessMana(2));
+        staticText = "Spend this mana only to cast artifact spells or activate abilities of artifacts";
+        addCondition(new GrandArchitectManaCondition());
+    }
 }
 
 class GrandArchitectManaCondition implements Condition {
-	@Override
-	public boolean apply(Game game, Ability source) {
-		MageObject object = game.getObject(source.getSourceId());
-		if (object != null && object.getCardType().contains(CardType.ARTIFACT)) {
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        MageObject object = game.getObject(source.getSourceId());
+        if (object != null && object.getCardType().contains(CardType.ARTIFACT)) {
+            return true;
+        }
+        return false;
+    }
 }

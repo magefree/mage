@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class AlluringSiren extends mage.sets.magic2010.AlluringSiren {
 
-	public AlluringSiren(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 43;
-		this.expansionSetCode = "M11";
-	}
+    public AlluringSiren(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 43;
+        this.expansionSetCode = "M11";
+    }
 
-	public AlluringSiren(final AlluringSiren card) {
-		super(card);
-	}
+    public AlluringSiren(final AlluringSiren card) {
+        super(card);
+    }
 
-	@Override
-	public AlluringSiren copy() {
-		return new AlluringSiren(this);
-	}
+    @Override
+    public AlluringSiren copy() {
+        return new AlluringSiren(this);
+    }
 
 }

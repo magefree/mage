@@ -36,77 +36,77 @@ import mage.players.ManaPool;
 
 public class MonoHybridManaCost extends ManaCostImpl<MonoHybridManaCost> {
 
-	private ColoredManaSymbol mana;
-	private int mana2 = 2;
+    private ColoredManaSymbol mana;
+    private int mana2 = 2;
 
-	public MonoHybridManaCost(ColoredManaSymbol mana) {
-		this.mana = mana;
-		this.cost = new Mana(mana);
-		this.cost.add(Mana.ColorlessMana(2));
-		addColoredOption(mana);
-		options.add(Mana.ColorlessMana(2));
-	}
+    public MonoHybridManaCost(ColoredManaSymbol mana) {
+        this.mana = mana;
+        this.cost = new Mana(mana);
+        this.cost.add(Mana.ColorlessMana(2));
+        addColoredOption(mana);
+        options.add(Mana.ColorlessMana(2));
+    }
 
-	public MonoHybridManaCost(MonoHybridManaCost manaCost) {
-		super(manaCost);
-		this.mana = manaCost.mana;
-		this.mana2 = manaCost.mana2;
-	}
+    public MonoHybridManaCost(MonoHybridManaCost manaCost) {
+        super(manaCost);
+        this.mana = manaCost.mana;
+        this.mana2 = manaCost.mana2;
+    }
 
-	@Override
-	public int convertedManaCost() {
-		return 2;
-	}
+    @Override
+    public int convertedManaCost() {
+        return 2;
+    }
 
-	@Override
-	public boolean isPaid() {
-		if (paid || isColoredPaid(this.mana))
-			return true;
-		return isColorlessPaid(this.mana2);
-	}
+    @Override
+    public boolean isPaid() {
+        if (paid || isColoredPaid(this.mana))
+            return true;
+        return isColorlessPaid(this.mana2);
+    }
 
-	@Override
-	public void assignPayment(Game game, Ability ability, ManaPool pool) {
-		if (!assignColored(ability, game, pool, mana)) {
-			assignColorless(ability, game, pool, mana2);
-		}
-	}
+    @Override
+    public void assignPayment(Game game, Ability ability, ManaPool pool) {
+        if (!assignColored(ability, game, pool, mana)) {
+            assignColorless(ability, game, pool, mana2);
+        }
+    }
 
-	@Override
-	public String getText() {
-		return "{2/" + mana.toString() + "}";
-	}
+    @Override
+    public String getText() {
+        return "{2/" + mana.toString() + "}";
+    }
 
-	@Override
-	public MonoHybridManaCost getUnpaid() {
-		return this;
-	}
+    @Override
+    public MonoHybridManaCost getUnpaid() {
+        return this;
+    }
 
-	@Override
-	public boolean testPay(Mana testMana) {
-		switch (mana) {
-			case B:
-				if (testMana.getBlack() > 0)
-					return true;
-			case U:
-				if (testMana.getBlue() > 0)
-					return true;
-			case R:
-				if (testMana.getRed() > 0)
-					return true;
-			case W:
-				if (testMana.getWhite() > 0)
-					return true;
-			case G:
-				if  (testMana.getGreen() > 0)
-					return true;
-		}
-		return testMana.count() > 0;
-	}
+    @Override
+    public boolean testPay(Mana testMana) {
+        switch (mana) {
+            case B:
+                if (testMana.getBlack() > 0)
+                    return true;
+            case U:
+                if (testMana.getBlue() > 0)
+                    return true;
+            case R:
+                if (testMana.getRed() > 0)
+                    return true;
+            case W:
+                if (testMana.getWhite() > 0)
+                    return true;
+            case G:
+                if  (testMana.getGreen() > 0)
+                    return true;
+        }
+        return testMana.count() > 0;
+    }
 
-	@Override
-	public MonoHybridManaCost copy() {
-		return new MonoHybridManaCost(this);
-	}
+    @Override
+    public MonoHybridManaCost copy() {
+        return new MonoHybridManaCost(this);
+    }
 
 }

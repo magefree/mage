@@ -53,7 +53,7 @@ public class NezumiBoneReader extends CardImpl<NezumiBoneReader> {
         this.expansionSetCode = "CHK";
         this.subtype.add("Rat");
         this.subtype.add("Shaman");
-	this.color.setBlack(true);
+    this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         // {B}, Sacrifice a creature: Target player discards a card. Activate this ability only any time you could cast a sorcery.

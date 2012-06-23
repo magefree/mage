@@ -66,12 +66,12 @@ public class StalkingStones extends CardImpl<StalkingStones> {
 
 class StalkingStonesToken extends Token {
 
-	public StalkingStonesToken() {
-		super("Elemental", "3/3 Elemental artifact");
-		this.cardType.add(CardType.CREATURE);
-		this.cardType.add(CardType.ARTIFACT);
+    public StalkingStonesToken() {
+        super("Elemental", "3/3 Elemental artifact");
+        this.cardType.add(CardType.CREATURE);
+        this.cardType.add(CardType.ARTIFACT);
 
-		this.power = new MageInt(3);
-		this.toughness = new MageInt(3);
-	}
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+    }
 }

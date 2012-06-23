@@ -41,21 +41,21 @@ import mage.target.TargetSpell;
  */
 public class Cancel extends CardImpl<Cancel> {
 
-	public Cancel(UUID ownerId) {
-		super(ownerId, 71, "Cancel", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
-		this.expansionSetCode = "10E";
-		this.color.setBlue(true);
-		this.getSpellAbility().addTarget(new TargetSpell());
-		this.getSpellAbility().addEffect(new CounterTargetEffect());
-	}
+    public Cancel(UUID ownerId) {
+        super(ownerId, 71, "Cancel", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
+        this.expansionSetCode = "10E";
+        this.color.setBlue(true);
+        this.getSpellAbility().addTarget(new TargetSpell());
+        this.getSpellAbility().addEffect(new CounterTargetEffect());
+    }
 
-	public Cancel(final Cancel card) {
-		super(card);
-	}
+    public Cancel(final Cancel card) {
+        super(card);
+    }
 
-	@Override
-	public Cancel copy() {
-		return new Cancel(this);
-	}
+    @Override
+    public Cancel copy() {
+        return new Cancel(this);
+    }
 
 }

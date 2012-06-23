@@ -38,17 +38,17 @@ import mage.abilities.effects.Effect;
  */
 public abstract class StaticAbility<T extends StaticAbility<T>> extends AbilityImpl<T> {
 
-	protected StaticAbility(AbilityType abilityType, Zone zone) {
-		super(abilityType, zone);
-	}
+    protected StaticAbility(AbilityType abilityType, Zone zone) {
+        super(abilityType, zone);
+    }
 
-	public StaticAbility(Zone zone, Effect effect) {
-		super(AbilityType.STATIC, zone);
-		if (effect != null)
-			this.addEffect(effect);
-	}
+    public StaticAbility(Zone zone, Effect effect) {
+        super(AbilityType.STATIC, zone);
+        if (effect != null)
+            this.addEffect(effect);
+    }
 
-	public StaticAbility(StaticAbility ability) {
-		super(ability);
-	}
+    public StaticAbility(StaticAbility ability) {
+        super(ability);
+    }
 }

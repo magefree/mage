@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class NaturesSpiral extends mage.sets.magic2010.NaturesSpiral {
 
-	public NaturesSpiral(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 187;
-		this.expansionSetCode = "M11";
-	}
+    public NaturesSpiral(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 187;
+        this.expansionSetCode = "M11";
+    }
 
-	public NaturesSpiral(final NaturesSpiral card) {
-		super(card);
-	}
+    public NaturesSpiral(final NaturesSpiral card) {
+        super(card);
+    }
 
-	@Override
-	public NaturesSpiral copy() {
-		return new NaturesSpiral(this);
-	}
+    @Override
+    public NaturesSpiral copy() {
+        return new NaturesSpiral(this);
+    }
 
 }

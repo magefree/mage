@@ -36,53 +36,53 @@ import java.io.Serializable;
  */
 public class Counter<T extends Counter<T>> implements Serializable {
 
-	protected String name;
-	protected int count;
+    protected String name;
+    protected int count;
 
-	public Counter(String name) {
-		this.name = name;
+    public Counter(String name) {
+        this.name = name;
         this.count = 1;
-	}
+    }
 
     public Counter(String name, int count) {
         this.name = name;
         this.count = count;
     }
 
-	public Counter(Counter counter) {
-		this.name = counter.name;
-		this.count = counter.count;
-	}
+    public Counter(Counter counter) {
+        this.name = counter.name;
+        this.count = counter.count;
+    }
 
-	public void add() {
-		count++;
-	}
+    public void add() {
+        count++;
+    }
 
-	public void add(int amount) {
-		count += amount;
-	}
+    public void add(int amount) {
+        count += amount;
+    }
 
-	public void remove() {
-		if (count > 0)
-			count--;
-	}
+    public void remove() {
+        if (count > 0)
+            count--;
+    }
 
-	public void remove(int amount) {
-		if (count > amount)
-			count -= amount;
-		else
-			count = 0;
-	}
+    public void remove(int amount) {
+        if (count > amount)
+            count -= amount;
+        else
+            count = 0;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public int getCount() {
-		return count;
-	}
+    public int getCount() {
+        return count;
+    }
 
-	public T copy() {
-		return (T)new Counter(this);
-	}
+    public T copy() {
+        return (T)new Counter(this);
+    }
 }

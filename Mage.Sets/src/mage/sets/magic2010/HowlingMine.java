@@ -45,55 +45,55 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class HowlingMine extends CardImpl<HowlingMine> {
 
-	public HowlingMine(UUID ownerId) {
-		super(ownerId, 212, "Howling Mine", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
-		this.expansionSetCode = "M10";
-		this.addAbility(new HowlingMineAbility());
-	}
+    public HowlingMine(UUID ownerId) {
+        super(ownerId, 212, "Howling Mine", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
+        this.expansionSetCode = "M10";
+        this.addAbility(new HowlingMineAbility());
+    }
 
-	public HowlingMine(final HowlingMine card) {
-		super(card);
-	}
+    public HowlingMine(final HowlingMine card) {
+        super(card);
+    }
 
-	@Override
-	public HowlingMine copy() {
-		return new HowlingMine(this);
-	}
+    @Override
+    public HowlingMine copy() {
+        return new HowlingMine(this);
+    }
 
 }
 
 class HowlingMineAbility extends TriggeredAbilityImpl<HowlingMineAbility> {
 
-	public HowlingMineAbility() {
-		super(Zone.BATTLEFIELD, new DrawCardTargetEffect(1));
-	}
+    public HowlingMineAbility() {
+        super(Zone.BATTLEFIELD, new DrawCardTargetEffect(1));
+    }
 
-	public HowlingMineAbility(final HowlingMineAbility ability) {
-		super(ability);
-	}
+    public HowlingMineAbility(final HowlingMineAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public HowlingMineAbility copy() {
-		return new HowlingMineAbility(this);
-	}
+    @Override
+    public HowlingMineAbility copy() {
+        return new HowlingMineAbility(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.DRAW_STEP_PRE) {
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.DRAW_STEP_PRE) {
             this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
-			return true;
-		}
-		return false;
-	}
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public boolean checkInterveningIfClause(Game game) {
-		return !game.getPermanent(this.sourceId).isTapped();
-	}
+    @Override
+    public boolean checkInterveningIfClause(Game game) {
+        return !game.getPermanent(this.sourceId).isTapped();
+    }
 
-	@Override
-	public String getRule() {
-		return "At the beginning of each player's draw step, if {this} is untapped, that player draws an additional card.";
-	}
+    @Override
+    public String getRule() {
+        return "At the beginning of each player's draw step, if {this} is untapped, that player draws an additional card.";
+    }
 
 }

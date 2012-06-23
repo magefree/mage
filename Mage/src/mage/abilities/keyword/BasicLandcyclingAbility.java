@@ -59,6 +59,6 @@ public class BasicLandcyclingAbility extends ActivatedAbilityImpl<BasicLandcycli
 
     @Override
     public String getRule() {
-	return "Basic landcycling " + super.getRule();
+    return "Basic landcycling " + super.getRule();
     }
 }

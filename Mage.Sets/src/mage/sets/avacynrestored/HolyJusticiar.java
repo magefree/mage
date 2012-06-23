@@ -64,7 +64,7 @@ public class HolyJusticiar extends CardImpl<HolyJusticiar> {
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
-        
+
     }
 
     public HolyJusticiar(final HolyJusticiar card) {
@@ -78,16 +78,16 @@ public class HolyJusticiar extends CardImpl<HolyJusticiar> {
 }
 
 class HolyJusticiarEffect extends OneShotEffect<HolyJusticiarEffect> {
-    
+
     public HolyJusticiarEffect() {
         super(Outcome.Detriment);
         staticText = "Tap target creature.  If that creature is a Zombie, exile it";
     }
-    
+
     public HolyJusticiarEffect(final HolyJusticiarEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent creature = game.getPermanent(source.getFirstTarget());
@@ -102,7 +102,7 @@ class HolyJusticiarEffect extends OneShotEffect<HolyJusticiarEffect> {
         }
         return false; 
     }
-    
+
     @Override
     public HolyJusticiarEffect copy() {
         return new HolyJusticiarEffect(this);

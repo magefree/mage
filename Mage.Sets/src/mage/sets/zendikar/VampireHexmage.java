@@ -50,66 +50,66 @@ import mage.target.TargetPermanent;
  */
 public class VampireHexmage extends CardImpl<VampireHexmage> {
 
-	public VampireHexmage(UUID ownerId) {
-		super(ownerId, 114, "Vampire Hexmage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}{B}");
-		this.expansionSetCode = "ZEN";
-		this.subtype.add("Vampire");
-		this.subtype.add("Shaman");
+    public VampireHexmage(UUID ownerId) {
+        super(ownerId, 114, "Vampire Hexmage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}{B}");
+        this.expansionSetCode = "ZEN";
+        this.subtype.add("Vampire");
+        this.subtype.add("Shaman");
 
-		this.color.setBlack(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(1);
+        this.color.setBlack(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-		this.addAbility(FirstStrikeAbility.getInstance());
-		
-		SimpleActivatedAbility vampireHexmageAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VampireHexmageEffect(), new SacrificeSourceCost());
-		vampireHexmageAbility.addTarget(new TargetPermanent());
-		this.addAbility(vampireHexmageAbility);
-	}
+        this.addAbility(FirstStrikeAbility.getInstance());
 
-	public VampireHexmage(final VampireHexmage card) {
-		super(card);
-	}
+        SimpleActivatedAbility vampireHexmageAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VampireHexmageEffect(), new SacrificeSourceCost());
+        vampireHexmageAbility.addTarget(new TargetPermanent());
+        this.addAbility(vampireHexmageAbility);
+    }
 
-	@Override
-	public VampireHexmage copy() {
-		return new VampireHexmage(this);
-	}
+    public VampireHexmage(final VampireHexmage card) {
+        super(card);
+    }
+
+    @Override
+    public VampireHexmage copy() {
+        return new VampireHexmage(this);
+    }
 }
 
 class VampireHexmageEffect extends OneShotEffect<VampireHexmageEffect> {
 
-	VampireHexmageEffect ( ) {
-		super(Outcome.Benefit);
-		staticText = "Remove all counters from target permanent";
-	}
+    VampireHexmageEffect ( ) {
+        super(Outcome.Benefit);
+        staticText = "Remove all counters from target permanent";
+    }
 
-	VampireHexmageEffect ( VampireHexmageEffect effect ) {
-		super(effect);
-	}
+    VampireHexmageEffect ( VampireHexmageEffect effect ) {
+        super(effect);
+    }
 
-	@Override
-	public VampireHexmageEffect copy() {
-		return new VampireHexmageEffect(this);
-	}
+    @Override
+    public VampireHexmageEffect copy() {
+        return new VampireHexmageEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		TargetPermanent target = (TargetPermanent)source.getTargets().get(0);
+    @Override
+    public boolean apply(Game game, Ability source) {
+        TargetPermanent target = (TargetPermanent)source.getTargets().get(0);
 
-		Permanent permanent = game.getPermanent(target.getFirstTarget());
+        Permanent permanent = game.getPermanent(target.getFirstTarget());
 
-		if (permanent != null) {
-			String[] counterNames = permanent.getCounters().keySet().toArray(new String[0]);
+        if (permanent != null) {
+            String[] counterNames = permanent.getCounters().keySet().toArray(new String[0]);
 
-			for (String counterName : counterNames) {
-				permanent.getCounters().remove(counterName);
-			}
+            for (String counterName : counterNames) {
+                permanent.getCounters().remove(counterName);
+            }
 
-			return true;
-		}
+            return true;
+        }
 
-		return false;
-	}
+        return false;
+    }
 
 }

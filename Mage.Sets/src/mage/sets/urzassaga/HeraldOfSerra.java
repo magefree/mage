@@ -50,10 +50,10 @@ public class HeraldOfSerra extends CardImpl<HeraldOfSerra>{
         this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
-		
-		this.addAbility(FlyingAbility.getInstance());
-		this.addAbility(VigilanceAbility.getInstance());
-		this.addAbility(new EchoAbility("{2}{W}{W}"));
+
+        this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(VigilanceAbility.getInstance());
+        this.addAbility(new EchoAbility("{2}{W}{W}"));
     }
 
     public HeraldOfSerra(final HeraldOfSerra card) {

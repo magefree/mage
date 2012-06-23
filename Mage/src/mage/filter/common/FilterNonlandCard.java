@@ -37,21 +37,21 @@ import mage.filter.FilterCard;
  */
 public class FilterNonlandCard extends FilterCard<FilterNonlandCard> {
 
-	public FilterNonlandCard() {
-		this("nonland card");
-	}
+    public FilterNonlandCard() {
+        this("nonland card");
+    }
 
-	public FilterNonlandCard(String name) {
-		super(name);
-		this.notCardTypeList.add(CardType.LAND);
-	}
+    public FilterNonlandCard(String name) {
+        super(name);
+        this.notCardTypeList.add(CardType.LAND);
+    }
 
-	public FilterNonlandCard(final FilterNonlandCard filter) {
-		super(filter);
-	}
+    public FilterNonlandCard(final FilterNonlandCard filter) {
+        super(filter);
+    }
 
-	@Override
-	public FilterNonlandCard copy() {
-		return new FilterNonlandCard(this);
-	}
+    @Override
+    public FilterNonlandCard copy() {
+        return new FilterNonlandCard(this);
+    }
 }

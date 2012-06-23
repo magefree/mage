@@ -36,11 +36,11 @@ import mage.cards.decks.Constructed;
  */
 public class ScarsOfMirrodinBlock extends Constructed {
 
-	public ScarsOfMirrodinBlock() {
-		super("Constructed - Scars of Mirrodin Block");
-		setCodes.add("SOM");
-		setCodes.add("MBS");
-		setCodes.add("NPH");
-	}
+    public ScarsOfMirrodinBlock() {
+        super("Constructed - Scars of Mirrodin Block");
+        setCodes.add("SOM");
+        setCodes.add("MBS");
+        setCodes.add("NPH");
+    }
 
 }

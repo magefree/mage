@@ -46,7 +46,7 @@ public class SmolderingButcher extends CardImpl<SmolderingButcher> {
         this.expansionSetCode = "EVE";
         this.subtype.add("Elemental");
         this.subtype.add("Warrior");
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
         this.addAbility(WitherAbility.getInstance());

@@ -41,22 +41,22 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Terminate extends CardImpl<Terminate> {
 
-	public Terminate(UUID ownerId) {
-		super(ownerId, 46, "Terminate", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}{R}");
-		this.expansionSetCode = "ARB";
-		this.color.setBlack(true);
-		this.color.setRed(true);
-		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-		this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
-	}
+    public Terminate(UUID ownerId) {
+        super(ownerId, 46, "Terminate", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}{R}");
+        this.expansionSetCode = "ARB";
+        this.color.setBlack(true);
+        this.color.setRed(true);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
+    }
 
-	public Terminate(final Terminate card) {
-		super(card);
-	}
+    public Terminate(final Terminate card) {
+        super(card);
+    }
 
-	@Override
-	public Terminate copy() {
-		return new Terminate(this);
-	}
+    @Override
+    public Terminate copy() {
+        return new Terminate(this);
+    }
 
 }

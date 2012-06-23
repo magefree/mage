@@ -45,10 +45,10 @@ public class EyeOfNowhere extends CardImpl<EyeOfNowhere> {
         super(ownerId, 59, "Eye of Nowhere", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}{U}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
-		this.color.setBlue(true);
+        this.color.setBlue(true);
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent());
-        
+
     }
 
     public EyeOfNowhere (final EyeOfNowhere card) {

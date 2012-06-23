@@ -50,28 +50,28 @@ import mage.cards.CardImpl;
  */
 public class Thornling extends CardImpl<Thornling> {
 
-	public Thornling(UUID ownerId) {
-		super(ownerId, 95, "Thornling", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
-		this.expansionSetCode = "CON";
-		this.color.setGreen(true);
-		this.subtype.add("Elemental");
-		this.subtype.add("Shapeshifter");
-		this.power = new MageInt(4);
-		this.toughness = new MageInt(4);
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{G}")));
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{G}")));
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{G}")));
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl("{1}")));
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(-1, 1, Duration.EndOfTurn), new ManaCostsImpl("{1}")));
-	}
+    public Thornling(UUID ownerId) {
+        super(ownerId, 95, "Thornling", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
+        this.expansionSetCode = "CON";
+        this.color.setGreen(true);
+        this.subtype.add("Elemental");
+        this.subtype.add("Shapeshifter");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl("{1}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(-1, 1, Duration.EndOfTurn), new ManaCostsImpl("{1}")));
+    }
 
-	public Thornling(final Thornling card) {
-		super(card);
-	}
+    public Thornling(final Thornling card) {
+        super(card);
+    }
 
-	@Override
-	public Thornling copy() {
-		return new Thornling(this);
-	}
+    @Override
+    public Thornling copy() {
+        return new Thornling(this);
+    }
 
 }

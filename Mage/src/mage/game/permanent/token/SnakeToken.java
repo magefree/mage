@@ -38,13 +38,13 @@ import mage.ObjectColor;
  */
 public class SnakeToken extends Token {
 
-	public SnakeToken() {
-		super("Snake", "1/1 green Snake creature token");
-		cardType.add(CardType.CREATURE);
-		color = ObjectColor.GREEN;
-		subtype.add("Snake");
-		power = new MageInt(1);
-		toughness = new MageInt(1);
-	}
+    public SnakeToken() {
+        super("Snake", "1/1 green Snake creature token");
+        cardType.add(CardType.CREATURE);
+        color = ObjectColor.GREEN;
+        subtype.add("Snake");
+        power = new MageInt(1);
+        toughness = new MageInt(1);
+    }
 
 }

@@ -40,28 +40,28 @@ import java.util.UUID;
  */
 public class ControlTargetPlayerNextTurnEffect extends OneShotEffect<ControlTargetPlayerNextTurnEffect>  {
 
-	public ControlTargetPlayerNextTurnEffect() {
-		super(Constants.Outcome.Benefit);
-		staticText = "You control target player during that player's next turn. (You see all cards that player could see and make all decisions for the player.)";
-	}
+    public ControlTargetPlayerNextTurnEffect() {
+        super(Constants.Outcome.Benefit);
+        staticText = "You control target player during that player's next turn. (You see all cards that player could see and make all decisions for the player.)";
+    }
 
-	public ControlTargetPlayerNextTurnEffect(ControlTargetPlayerNextTurnEffect effect) {
-		super(effect);
-	}
+    public ControlTargetPlayerNextTurnEffect(ControlTargetPlayerNextTurnEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		UUID targetId = source.getFirstTarget();
-		UUID controllerId = source.getControllerId();
-		if (targetId != null && controllerId != null && !targetId.equals(controllerId)) {
-			game.getState().getTurnMods().add(new TurnMod(targetId, controllerId));
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        UUID targetId = source.getFirstTarget();
+        UUID controllerId = source.getControllerId();
+        if (targetId != null && controllerId != null && !targetId.equals(controllerId)) {
+            game.getState().getTurnMods().add(new TurnMod(targetId, controllerId));
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public ControlTargetPlayerNextTurnEffect copy() {
-		return new ControlTargetPlayerNextTurnEffect();
-	}
+    @Override
+    public ControlTargetPlayerNextTurnEffect copy() {
+        return new ControlTargetPlayerNextTurnEffect();
+    }
 }

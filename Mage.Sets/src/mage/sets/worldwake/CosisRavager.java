@@ -48,7 +48,7 @@ public class CosisRavager extends CardImpl<CosisRavager> {
         super(ownerId, 77, "Cosi's Ravager", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.expansionSetCode = "WWK";
         this.subtype.add("Elemental");
-		this.color.setRed(true);        
+        this.color.setRed(true);        
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new LandfallAbility(new DamageTargetEffect(1), false);

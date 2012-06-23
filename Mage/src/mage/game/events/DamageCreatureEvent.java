@@ -36,8 +36,8 @@ import java.util.UUID;
  */
 public class DamageCreatureEvent extends DamageEvent {
 
-	public DamageCreatureEvent(UUID targetId, UUID sourceId, UUID playerId, int amount, boolean preventable, boolean combat) {
-		super(EventType.DAMAGE_CREATURE, targetId, sourceId, playerId, amount, preventable, combat);
-	}
+    public DamageCreatureEvent(UUID targetId, UUID sourceId, UUID playerId, int amount, boolean preventable, boolean combat) {
+        super(EventType.DAMAGE_CREATURE, targetId, sourceId, playerId, amount, preventable, combat);
+    }
 
 }

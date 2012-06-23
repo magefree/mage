@@ -41,20 +41,20 @@ import mage.cards.CardImpl;
  */
 public class Foresee extends CardImpl<Foresee> {
 
-	public Foresee(UUID ownerId) {
-		super(ownerId, 54, "Foresee", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");
-		this.expansionSetCode = "M11";
-		this.color.setBlue(true);
-		this.getSpellAbility().addEffect(new ScryEffect(4));
-		this.getSpellAbility().addEffect(new DrawCardControllerEffect(2));
-	}
+    public Foresee(UUID ownerId) {
+        super(ownerId, 54, "Foresee", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");
+        this.expansionSetCode = "M11";
+        this.color.setBlue(true);
+        this.getSpellAbility().addEffect(new ScryEffect(4));
+        this.getSpellAbility().addEffect(new DrawCardControllerEffect(2));
+    }
 
-	public Foresee(final Foresee card) {
-		super(card);
-	}
+    public Foresee(final Foresee card) {
+        super(card);
+    }
 
-	@Override
-	public Foresee copy() {
-		return new Foresee(this);
-	}
+    @Override
+    public Foresee copy() {
+        return new Foresee(this);
+    }
 }

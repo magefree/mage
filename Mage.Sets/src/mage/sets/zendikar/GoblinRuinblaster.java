@@ -51,30 +51,30 @@ import mage.target.common.TargetNonBasicLandPermanent;
  */
 public class GoblinRuinblaster extends CardImpl<GoblinRuinblaster> {
 
-	public GoblinRuinblaster(UUID ownerId) {
-		super(ownerId, 127, "Goblin Ruinblaster", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-		this.expansionSetCode = "ZEN";
-		this.color.setRed(true);
-		this.subtype.add("Goblin");
-		this.subtype.add("Shaman");
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(1);
-		this.addAbility(HasteAbility.getInstance());
-		Ability ability1 = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
-		ability1.addTarget(new TargetNonBasicLandPermanent());
-		KickerAbility ability2 = new KickerAbility(new GainAbilitySourceEffect(ability1, Duration.WhileOnBattlefield), false);
-		ability2.addManaCost(new ColoredManaCost(ColoredManaSymbol.R));
-		this.addAbility(ability2);
+    public GoblinRuinblaster(UUID ownerId) {
+        super(ownerId, 127, "Goblin Ruinblaster", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        this.expansionSetCode = "ZEN";
+        this.color.setRed(true);
+        this.subtype.add("Goblin");
+        this.subtype.add("Shaman");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
+        this.addAbility(HasteAbility.getInstance());
+        Ability ability1 = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
+        ability1.addTarget(new TargetNonBasicLandPermanent());
+        KickerAbility ability2 = new KickerAbility(new GainAbilitySourceEffect(ability1, Duration.WhileOnBattlefield), false);
+        ability2.addManaCost(new ColoredManaCost(ColoredManaSymbol.R));
+        this.addAbility(ability2);
 
-	}
+    }
 
-	public GoblinRuinblaster(final GoblinRuinblaster card) {
-		super(card);
-	}
+    public GoblinRuinblaster(final GoblinRuinblaster card) {
+        super(card);
+    }
 
-	@Override
-	public GoblinRuinblaster copy() {
-		return new GoblinRuinblaster(this);
-	}
+    @Override
+    public GoblinRuinblaster copy() {
+        return new GoblinRuinblaster(this);
+    }
 }
 

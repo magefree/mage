@@ -55,21 +55,21 @@ public class ClawsOfValakut extends CardImpl<ClawsOfValakut> {
 
      private static final FilterLandPermanent filter = new FilterLandPermanent("Mountain you control");
 
-	static {
-		filter.getSubtype().add("Mountain");
+    static {
+        filter.getSubtype().add("Mountain");
         filter.setTargetController(Constants.TargetController.YOU);
-	}
+    }
 
     public ClawsOfValakut (UUID ownerId) {
         super(ownerId, 75, "Claws of Valakut", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{R}");
         this.expansionSetCode = "WWK";
         this.subtype.add("Aura");
-		this.color.setRed(true);
+        this.color.setRed(true);
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
-		this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
+        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
         SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(new PermanentsOnBattlefieldCount(filter, 1),
                 new PermanentsOnBattlefieldCount(filter, 0),
                 Duration.WhileOnBattlefield));

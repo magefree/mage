@@ -45,7 +45,7 @@ import mage.filter.common.FilterSpiritOrArcaneCard;
 public class KamiOfTheHunt extends CardImpl<KamiOfTheHunt> {
 
     private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
-    
+
     public KamiOfTheHunt(UUID ownerId) {
         super(ownerId, 219, "Kami of the Hunt", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.expansionSetCode = "CHK";

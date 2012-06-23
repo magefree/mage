@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../Config.xsd">
-	<server serverAddress="0.0.0.0" serverName="mage-server" port="17171" maxGameThreads="10" maxSecondsIdle="600"/>
-	<playerTypes>
-		<playerType name="Human" jar="Mage.Player.Human.jar" className="mage.player.human.HumanPlayer"/>
-		<playerType name="Computer - default" jar="Mage.Player.AI.jar" className="mage.player.ai.ComputerPlayer"/>
-	</playerTypes>
-	<gameTypes>
-		<gameType name="Two Player Duel" jar="Mage.Game.TwoPlayerDuel.jar" className="mage.game.TwoPlayerDuel" typeName="mage.game.TwoPlayerDuelType"/>
-	</gameTypes>
-	<deckTypes>
-		<deckType name="Constructed" jar="Mage.Deck.Constructed.jar" className="mage.deck.Constructed"/>
-	</deckTypes>
+    <server serverAddress="0.0.0.0" serverName="mage-server" port="17171" maxGameThreads="10" maxSecondsIdle="600"/>
+    <playerTypes>
+        <playerType name="Human" jar="Mage.Player.Human.jar" className="mage.player.human.HumanPlayer"/>
+        <playerType name="Computer - default" jar="Mage.Player.AI.jar" className="mage.player.ai.ComputerPlayer"/>
+    </playerTypes>
+    <gameTypes>
+        <gameType name="Two Player Duel" jar="Mage.Game.TwoPlayerDuel.jar" className="mage.game.TwoPlayerDuel" typeName="mage.game.TwoPlayerDuelType"/>
+    </gameTypes>
+    <deckTypes>
+        <deckType name="Constructed" jar="Mage.Deck.Constructed.jar" className="mage.deck.Constructed"/>
+    </deckTypes>
 </config>

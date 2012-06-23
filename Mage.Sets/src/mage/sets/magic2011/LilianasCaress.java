@@ -46,52 +46,52 @@ import mage.target.TargetPlayer;
  */
 public class LilianasCaress extends CardImpl<LilianasCaress> {
 
-	public LilianasCaress(UUID ownerId) {
-		super(ownerId, 103, "Liliana's Caress", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
-		this.expansionSetCode = "M11";
-		this.color.setBlack(true);
-		this.addAbility(new LilianasCaressAbility());
-	}
+    public LilianasCaress(UUID ownerId) {
+        super(ownerId, 103, "Liliana's Caress", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
+        this.expansionSetCode = "M11";
+        this.color.setBlack(true);
+        this.addAbility(new LilianasCaressAbility());
+    }
 
-	public LilianasCaress(final LilianasCaress card) {
-		super(card);
-	}
+    public LilianasCaress(final LilianasCaress card) {
+        super(card);
+    }
 
-	@Override
-	public LilianasCaress copy() {
-		return new LilianasCaress(this);
-	}
+    @Override
+    public LilianasCaress copy() {
+        return new LilianasCaress(this);
+    }
 
 }
 
 class LilianasCaressAbility extends TriggeredAbilityImpl<LilianasCaressAbility> {
 
-	public LilianasCaressAbility() {
-		super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2), false);
-	}
+    public LilianasCaressAbility() {
+        super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2), false);
+    }
 
-	public LilianasCaressAbility(final LilianasCaressAbility ability) {
-		super(ability);
-	}
+    public LilianasCaressAbility(final LilianasCaressAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public LilianasCaressAbility copy() {
-		return new LilianasCaressAbility(this);
-	}
+    @Override
+    public LilianasCaressAbility copy() {
+        return new LilianasCaressAbility(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.DISCARDED_CARD && game.getOpponents(controllerId).contains(event.getPlayerId())) {
-			this.addTarget(new TargetPlayer());
-			getTargets().get(0).add(event.getPlayerId(), game);
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.DISCARDED_CARD && game.getOpponents(controllerId).contains(event.getPlayerId())) {
+            this.addTarget(new TargetPlayer());
+            getTargets().get(0).add(event.getPlayerId(), game);
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "Whenever an opponent discards a card, that player loses 2 life.";
-	}
+    @Override
+    public String getRule() {
+        return "Whenever an opponent discards a card, that player loses 2 life.";
+    }
 
 }

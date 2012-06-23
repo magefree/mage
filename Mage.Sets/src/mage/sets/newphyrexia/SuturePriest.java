@@ -55,7 +55,7 @@ public class SuturePriest extends CardImpl<SuturePriest> {
         super(ownerId, 25, "Suture Priest", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.expansionSetCode = "NPH";
         this.subtype.add("Cleric");
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(new SuturePriestFirstTriggeredAbility());
@@ -89,13 +89,13 @@ class SuturePriestFirstTriggeredAbility extends TriggeredAbilityImpl<SuturePries
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && !event.getTargetId().equals(this.getSourceId()) && event.getPlayerId().equals(this.controllerId)) {
-			ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
             Card card = zEvent.getTarget();
-			if (zEvent.getToZone() == Constants.Zone.BATTLEFIELD && card != null && card.getCardType().contains(CardType.CREATURE)) {
-				return true;
-			}
-		}
-		return false;
+            if (zEvent.getToZone() == Constants.Zone.BATTLEFIELD && card != null && card.getCardType().contains(CardType.CREATURE)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -121,16 +121,16 @@ class SuturePriestSecondTriggeredAbility extends TriggeredAbilityImpl<SuturePrie
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
-			ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
             Card card = zEvent.getTarget();
-			if (zEvent.getToZone() == Constants.Zone.BATTLEFIELD && card != null && card.getCardType().contains(CardType.CREATURE)) {
+            if (zEvent.getToZone() == Constants.Zone.BATTLEFIELD && card != null && card.getCardType().contains(CardType.CREATURE)) {
                 for (Effect effect : this.getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                 }
-				return true;
-			}
-		}
-		return false;
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

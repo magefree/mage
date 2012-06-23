@@ -37,43 +37,43 @@ import org.apache.log4j.Logger;
  * @author BetaSteward_at_googlemail.com
  */
 public class MCTSExecutor implements Callable<Boolean> {
-    
+
     protected transient MCTSNode root;
     protected int thinkTime;
     protected UUID playerId;
-    
- 	private final static transient Logger logger = Logger.getLogger(ComputerPlayerMCTS.class);
-    
+
+     private final static transient Logger logger = Logger.getLogger(ComputerPlayerMCTS.class);
+
     public MCTSExecutor(Game sim, UUID playerId, int thinkTime) {
         this.playerId = playerId;
         this.thinkTime = thinkTime;
         root = new MCTSNode(sim);
     }
-    
+
     @Override
     public Boolean call() {
         int simCount = 0;
-		long startTime = System.nanoTime();
+        long startTime = System.nanoTime();
         long endTime = startTime + (thinkTime * 1000000000l);
         MCTSNode current;
-        
-        
+
+
         while (true) {
             long currentTime = System.nanoTime();
             if (currentTime > endTime)
                 break;
             current = root;
-            
+
             // Selection
             while (!current.isLeaf()) {
                 current = current.select(this.playerId);
             }
-            
+
             int result;
             if (!current.isTerminal()) {
                 // Expansion
                 current.expand();
-                
+
                 // only run simulations for nodes that have siblings
                 if (current.getNumChildren() > 1) {
                     // Simulation
@@ -99,9 +99,9 @@ public class MCTSExecutor implements Callable<Boolean> {
     public MCTSNode getRoot() {
         return root;
     }
-    
+
     public void clear() {
         root = null;
     }
-    
+
 }

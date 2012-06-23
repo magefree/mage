@@ -22,9 +22,9 @@ public class MikaeusTheLunarchTest extends CardTestPlayerBase {
 
         setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
-        
+
         assertPermanentCount(playerA, "Mikaeus, the Lunarch", 1);
     }
 
-    
+
 }

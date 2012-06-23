@@ -57,15 +57,15 @@ public class SerpentSkin extends CardImpl<SerpentSkin> {
         super(ownerId, 240, "Serpent Skin", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Aura");
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.addAbility(FlashAbility.getInstance());
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		this.addAbility(ability);
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Constants.Duration.WhileOnBattlefield)));
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Constants.Duration.WhileOnBattlefield)));
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ColoredManaCost(Constants.ColoredManaSymbol.G)), Constants.AttachmentType.AURA)));
     }
 

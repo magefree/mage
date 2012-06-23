@@ -53,7 +53,7 @@ public class DeathlessAngel extends CardImpl<DeathlessAngel> {
         super(ownerId, 17, "Deathless Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
         this.expansionSetCode = "ROE";
         this.subtype.add("Angel");
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(7);
         this.addAbility(FlyingAbility.getInstance());

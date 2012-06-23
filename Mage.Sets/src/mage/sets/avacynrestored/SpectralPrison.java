@@ -63,7 +63,7 @@ public class SpectralPrison extends CardImpl<SpectralPrison> {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Detriment));
-        
+
         // Enchanted creature doesn't untap during its controller's untap step.
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);

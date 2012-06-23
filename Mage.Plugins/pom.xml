@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	
-	<modelVersion>4.0.0</modelVersion>
-	
-	<parent>
-		<groupId>org.mage</groupId>
-		<artifactId>mage-root</artifactId>
-		<version>0.8.6</version>
-	</parent>
-	
-	<artifactId>mage-plugins</artifactId>
-	<packaging>pom</packaging>
-	<name>Mage Plugins</name>	
-	<description>Mage Plugins POM</description>
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-	<modules>
-		<module>Mage.Theme.Plugin</module>
-		<module>Mage.Counter.Plugin</module>
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.mage</groupId>
+        <artifactId>mage-root</artifactId>
+        <version>0.8.6</version>
+    </parent>
+
+    <artifactId>mage-plugins</artifactId>
+    <packaging>pom</packaging>
+    <name>Mage Plugins</name>    
+    <description>Mage Plugins POM</description>
+
+    <modules>
+        <module>Mage.Theme.Plugin</module>
+        <module>Mage.Counter.Plugin</module>
         <module>Mage.Rating.Plugin</module>
-	</modules>
-	
+    </modules>
+
 </project>

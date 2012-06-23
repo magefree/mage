@@ -40,23 +40,23 @@ import mage.cards.CardImpl;
  */
 public class SiegeMastodon extends CardImpl<SiegeMastodon> {
 
-	public SiegeMastodon(UUID ownerId) {
-		super(ownerId, 30, "Siege Mastodon", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");
-		this.expansionSetCode = "M10";
-		this.subtype.add("Elephant");
-		this.color.setWhite(true);
-		this.power = new MageInt(3);
-		this.toughness = new MageInt(5);
+    public SiegeMastodon(UUID ownerId) {
+        super(ownerId, 30, "Siege Mastodon", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");
+        this.expansionSetCode = "M10";
+        this.subtype.add("Elephant");
+        this.color.setWhite(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(5);
 
-	}
+    }
 
-	public SiegeMastodon(final SiegeMastodon card) {
-		super(card);
-	}
+    public SiegeMastodon(final SiegeMastodon card) {
+        super(card);
+    }
 
-	@Override
-	public SiegeMastodon copy() {
-		return new SiegeMastodon(this);
-	}
+    @Override
+    public SiegeMastodon copy() {
+        return new SiegeMastodon(this);
+    }
 
 }

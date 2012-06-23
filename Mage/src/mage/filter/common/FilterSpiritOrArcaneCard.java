@@ -6,22 +6,22 @@ import mage.filter.FilterSpell;
 public class FilterSpiritOrArcaneCard extends FilterSpell {
 
     public FilterSpiritOrArcaneCard() {
-		this("a Spirit or Arcane spell");
-	}
+        this("a Spirit or Arcane spell");
+    }
 
-	public FilterSpiritOrArcaneCard(String name) {
-		super(name);
-		this.getSubtype().add("Spirit");
+    public FilterSpiritOrArcaneCard(String name) {
+        super(name);
+        this.getSubtype().add("Spirit");
         this.getSubtype().add("Arcane");
         this.setScopeSubtype(Filter.ComparisonScope.Any);
-	}
+    }
 
-	public FilterSpiritOrArcaneCard(final FilterSpiritOrArcaneCard filter) {
-		super(filter);
-	}
+    public FilterSpiritOrArcaneCard(final FilterSpiritOrArcaneCard filter) {
+        super(filter);
+    }
 
-	@Override
-	public FilterSpiritOrArcaneCard copy() {
-		return new FilterSpiritOrArcaneCard(this);
-	}
+    @Override
+    public FilterSpiritOrArcaneCard copy() {
+        return new FilterSpiritOrArcaneCard(this);
+    }
 }

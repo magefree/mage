@@ -39,17 +39,17 @@ import mage.abilities.effects.common.AttacksIfAbleSourceEffect;
  */
 public class AttacksEachTurnStaticAbility extends StaticAbility<AttacksEachTurnStaticAbility> {
 
-	public AttacksEachTurnStaticAbility() {
-		super(Zone.BATTLEFIELD, new AttacksIfAbleSourceEffect(Duration.WhileOnBattlefield));
-	}
+    public AttacksEachTurnStaticAbility() {
+        super(Zone.BATTLEFIELD, new AttacksIfAbleSourceEffect(Duration.WhileOnBattlefield));
+    }
 
-	public AttacksEachTurnStaticAbility(AttacksEachTurnStaticAbility ability) {
-		super(ability);
-	}
+    public AttacksEachTurnStaticAbility(AttacksEachTurnStaticAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public AttacksEachTurnStaticAbility copy() {
-		return new AttacksEachTurnStaticAbility(this);
-	}
-	
+    @Override
+    public AttacksEachTurnStaticAbility copy() {
+        return new AttacksEachTurnStaticAbility(this);
+    }
+
 }

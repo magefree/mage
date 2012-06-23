@@ -52,7 +52,7 @@ public class Shatter extends CardImpl<Shatter> {
     public Shatter (UUID ownerId) {
         super(ownerId, 105, "Shatter", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "MRD";
-		this.color.setRed(true);
+        this.color.setRed(true);
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }

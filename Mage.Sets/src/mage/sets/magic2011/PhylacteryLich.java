@@ -56,100 +56,100 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class PhylacteryLich extends CardImpl<PhylacteryLich> {
 
-	public PhylacteryLich(UUID ownerId) {
-		super(ownerId, 110, "Phylactery Lich", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{B}{B}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Zombie");
-		this.color.setBlack(true);
-		this.power = new MageInt(5);
-		this.toughness = new MageInt(5);
+    public PhylacteryLich(UUID ownerId) {
+        super(ownerId, 110, "Phylactery Lich", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{B}{B}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Zombie");
+        this.color.setBlack(true);
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(5);
 
-		this.addAbility(new EntersBattlefieldAbility(new PhylacteryLichEffect(), "put a phylactery counter on an artifact you control"));
-		this.addAbility(IndestructibleAbility.getInstance());
-		this.addAbility(new PhylacteryLichAbility());
-	}
+        this.addAbility(new EntersBattlefieldAbility(new PhylacteryLichEffect(), "put a phylactery counter on an artifact you control"));
+        this.addAbility(IndestructibleAbility.getInstance());
+        this.addAbility(new PhylacteryLichAbility());
+    }
 
-	public PhylacteryLich(final PhylacteryLich card) {
-		super(card);
-	}
+    public PhylacteryLich(final PhylacteryLich card) {
+        super(card);
+    }
 
-	@Override
-	public PhylacteryLich copy() {
-		return new PhylacteryLich(this);
-	}
+    @Override
+    public PhylacteryLich copy() {
+        return new PhylacteryLich(this);
+    }
 
-	class PhylacteryLichAbility extends StateTriggeredAbility<PhylacteryLichAbility> {
+    class PhylacteryLichAbility extends StateTriggeredAbility<PhylacteryLichAbility> {
 
-		public PhylacteryLichAbility() {
-			super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
-		}
+        public PhylacteryLichAbility() {
+            super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
+        }
 
-		public PhylacteryLichAbility(final PhylacteryLichAbility ability) {
-			super(ability);
-		}
+        public PhylacteryLichAbility(final PhylacteryLichAbility ability) {
+            super(ability);
+        }
 
-		@Override
-		public PhylacteryLichAbility copy() {
-			return new PhylacteryLichAbility(this);
-		}
+        @Override
+        public PhylacteryLichAbility copy() {
+            return new PhylacteryLichAbility(this);
+        }
 
-		@Override
-		public boolean checkTrigger(GameEvent event, Game game) {
-			for (Permanent perm: game.getBattlefield().getAllActivePermanents(controllerId)) {
-				if (perm.getCounters().getCount("phylactery") > 0)
-					return false;
-			}
-			return true;
-		}
-		
-		@Override
-		public String getRule() {
-			return "When you control no permanents with phylactery counters on them, sacrifice {this}.";
-		}
+        @Override
+        public boolean checkTrigger(GameEvent event, Game game) {
+            for (Permanent perm: game.getBattlefield().getAllActivePermanents(controllerId)) {
+                if (perm.getCounters().getCount("phylactery") > 0)
+                    return false;
+            }
+            return true;
+        }
 
-	}
+        @Override
+        public String getRule() {
+            return "When you control no permanents with phylactery counters on them, sacrifice {this}.";
+        }
+
+    }
 
 }
 
 class PhylacteryLichEffect extends OneShotEffect<PhylacteryLichEffect> {
 
-	private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact");
 
-	static {
-		filter.getCardType().add(CardType.ARTIFACT);
-		filter.setScopeCardType(ComparisonScope.Any);
-	}
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.setScopeCardType(ComparisonScope.Any);
+    }
 
-	public PhylacteryLichEffect() {
-		super(Outcome.Neutral);
-		staticText = "put a phylactery counter on an artifact you control";
-	}
+    public PhylacteryLichEffect() {
+        super(Outcome.Neutral);
+        staticText = "put a phylactery counter on an artifact you control";
+    }
 
-	public PhylacteryLichEffect(final PhylacteryLichEffect effect) {
-		super(effect);
-	}
+    public PhylacteryLichEffect(final PhylacteryLichEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-		if (player != null) {
-			TargetControlledPermanent target = new TargetControlledPermanent(filter);
-			if (target.canChoose(source.getControllerId(), game)) {
-				target.setRequired(true);
-				if (player.choose(Outcome.Neutral, target, source.getSourceId(), game)) {
-					Permanent permanent = game.getPermanent(target.getFirstTarget());
-					if (permanent != null) {
-						permanent.addCounters(new Counter("phylactery"), game);
-					}
-				}
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+            TargetControlledPermanent target = new TargetControlledPermanent(filter);
+            if (target.canChoose(source.getControllerId(), game)) {
+                target.setRequired(true);
+                if (player.choose(Outcome.Neutral, target, source.getSourceId(), game)) {
+                    Permanent permanent = game.getPermanent(target.getFirstTarget());
+                    if (permanent != null) {
+                        permanent.addCounters(new Counter("phylactery"), game);
+                    }
+                }
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public PhylacteryLichEffect copy() {
-		return new PhylacteryLichEffect(this);
-	}
+    @Override
+    public PhylacteryLichEffect copy() {
+        return new PhylacteryLichEffect(this);
+    }
 
 }

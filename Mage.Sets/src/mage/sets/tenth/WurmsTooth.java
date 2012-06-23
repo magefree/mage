@@ -46,52 +46,52 @@ import mage.game.stack.Spell;
  */
 public class WurmsTooth extends CardImpl<WurmsTooth> {
 
-	public WurmsTooth(UUID ownerId) {
-		super(ownerId, 346, "Wurm's Tooth", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-		this.expansionSetCode = "10E";
-		this.addAbility(new WurmsToothAbility());
-	}
+    public WurmsTooth(UUID ownerId) {
+        super(ownerId, 346, "Wurm's Tooth", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
+        this.expansionSetCode = "10E";
+        this.addAbility(new WurmsToothAbility());
+    }
 
-	public WurmsTooth(final WurmsTooth card) {
-		super(card);
-	}
+    public WurmsTooth(final WurmsTooth card) {
+        super(card);
+    }
 
-	@Override
-	public WurmsTooth copy() {
-		return new WurmsTooth(this);
-	}
+    @Override
+    public WurmsTooth copy() {
+        return new WurmsTooth(this);
+    }
 
 }
 
 class WurmsToothAbility extends TriggeredAbilityImpl<WurmsToothAbility> {
 
-	public WurmsToothAbility() {
-		super(Zone.BATTLEFIELD, new GainLifeEffect(1), true);
-	}
+    public WurmsToothAbility() {
+        super(Zone.BATTLEFIELD, new GainLifeEffect(1), true);
+    }
 
-	public WurmsToothAbility(final WurmsToothAbility ability) {
-		super(ability);
-	}
+    public WurmsToothAbility(final WurmsToothAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public WurmsToothAbility copy() {
-		return new WurmsToothAbility(this);
-	}
+    @Override
+    public WurmsToothAbility copy() {
+        return new WurmsToothAbility(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.SPELL_CAST) {
-			Spell spell = game.getStack().getSpell(event.getTargetId());
-			if (spell != null && spell.getColor().isGreen()) {
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.SPELL_CAST) {
+            Spell spell = game.getStack().getSpell(event.getTargetId());
+            if (spell != null && spell.getColor().isGreen()) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "Whenever a player casts a green spell, you may gain 1 life.";
-	}
+    @Override
+    public String getRule() {
+        return "Whenever a player casts a green spell, you may gain 1 life.";
+    }
 
 }

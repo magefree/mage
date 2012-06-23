@@ -35,89 +35,89 @@ import mage.game.Game;
 import mage.players.ManaPool;
 
 public class HybridManaCost extends ManaCostImpl<HybridManaCost> {
-	private ColoredManaSymbol mana1;
-	private ColoredManaSymbol mana2;
+    private ColoredManaSymbol mana1;
+    private ColoredManaSymbol mana2;
 
-	public HybridManaCost(ColoredManaSymbol mana1, ColoredManaSymbol mana2) {
-		this.mana1 = mana1;
-		this.mana2 = mana2;
-		this.cost = new Mana(mana1);
-		this.cost.add(new Mana(mana2));
-		addColoredOption(mana1);
-		addColoredOption(mana2);
-	}
+    public HybridManaCost(ColoredManaSymbol mana1, ColoredManaSymbol mana2) {
+        this.mana1 = mana1;
+        this.mana2 = mana2;
+        this.cost = new Mana(mana1);
+        this.cost.add(new Mana(mana2));
+        addColoredOption(mana1);
+        addColoredOption(mana2);
+    }
 
-	public HybridManaCost(HybridManaCost manaCost) {
-		super(manaCost);
-		this.mana1 = manaCost.mana1;
-		this.mana2 = manaCost.mana2;
-	}
+    public HybridManaCost(HybridManaCost manaCost) {
+        super(manaCost);
+        this.mana1 = manaCost.mana1;
+        this.mana2 = manaCost.mana2;
+    }
 
-	@Override
-	public int convertedManaCost() {
-		return 1;
-	}
+    @Override
+    public int convertedManaCost() {
+        return 1;
+    }
 
-	@Override
-	public boolean isPaid() {
-		if (paid || isColoredPaid(this.mana1) || isColoredPaid(this.mana2))
-			return true;
-		return false;
-	}
+    @Override
+    public boolean isPaid() {
+        if (paid || isColoredPaid(this.mana1) || isColoredPaid(this.mana2))
+            return true;
+        return false;
+    }
 
-	@Override
-	public void assignPayment(Game game, Ability ability, ManaPool pool) {
-		if (assignColored(ability, game, pool, this.mana1))
-			return;
-		assignColored(ability, game, pool, this.mana2);
-	}
+    @Override
+    public void assignPayment(Game game, Ability ability, ManaPool pool) {
+        if (assignColored(ability, game, pool, this.mana1))
+            return;
+        assignColored(ability, game, pool, this.mana2);
+    }
 
-	@Override
-	public String getText() {
-		return "{" + mana1.toString() + "/" + mana2.toString() + "}";
-	}
+    @Override
+    public String getText() {
+        return "{" + mana1.toString() + "/" + mana2.toString() + "}";
+    }
 
-	@Override
-	public HybridManaCost getUnpaid() {
-		return this;
-	}
+    @Override
+    public HybridManaCost getUnpaid() {
+        return this;
+    }
 
-	@Override
-	public boolean testPay(Mana testMana) {
-		switch (mana1) {
-			case B:
-				if (testMana.getBlack() > 0)
-					return true;
-			case U:
-				if (testMana.getBlue() >0)
-					return true;
-			case R:
-				if (testMana.getRed() > 0)
-					return true;
-			case W:
-				if (testMana.getWhite() > 0)
-					return true;
-			case G:
-				if  (testMana.getGreen() > 0)
-					return true;
-		}
-		switch (mana2) {
-			case B:
-				return testMana.getBlack() > 0;
-			case U:
-				return testMana.getBlue() > 0;
-			case R:
-				return testMana.getRed() > 0;
-			case W:
-				return testMana.getWhite() > 0;
-			case G:
-				return testMana.getGreen() > 0;
-		}
-		return false;
-	}
+    @Override
+    public boolean testPay(Mana testMana) {
+        switch (mana1) {
+            case B:
+                if (testMana.getBlack() > 0)
+                    return true;
+            case U:
+                if (testMana.getBlue() >0)
+                    return true;
+            case R:
+                if (testMana.getRed() > 0)
+                    return true;
+            case W:
+                if (testMana.getWhite() > 0)
+                    return true;
+            case G:
+                if  (testMana.getGreen() > 0)
+                    return true;
+        }
+        switch (mana2) {
+            case B:
+                return testMana.getBlack() > 0;
+            case U:
+                return testMana.getBlue() > 0;
+            case R:
+                return testMana.getRed() > 0;
+            case W:
+                return testMana.getWhite() > 0;
+            case G:
+                return testMana.getGreen() > 0;
+        }
+        return false;
+    }
 
-	@Override
-	public HybridManaCost copy() {
-		return new HybridManaCost(this);
-	}
+    @Override
+    public HybridManaCost copy() {
+        return new HybridManaCost(this);
+    }
 }

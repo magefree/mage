@@ -40,68 +40,68 @@ import mage.Constants.RangeOfInfluence;
  */
 public class MatchOptions implements Serializable {
 
-	protected String name;
-	protected MultiplayerAttackOption attackOption;
-	protected RangeOfInfluence range;
-	protected int winsNeeded;
-	protected String gameType;
-	protected String deckType;
+    protected String name;
+    protected MultiplayerAttackOption attackOption;
+    protected RangeOfInfluence range;
+    protected int winsNeeded;
+    protected String gameType;
+    protected String deckType;
     protected boolean limited;
-	protected List<String> playerTypes = new ArrayList<String>();
+    protected List<String> playerTypes = new ArrayList<String>();
 
-	public MatchOptions(String name, String gameType) {
-		this.name = name;
-		this.gameType = gameType;
-	}
+    public MatchOptions(String name, String gameType) {
+        this.name = name;
+        this.gameType = gameType;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public MultiplayerAttackOption getAttackOption() {
-		return attackOption;
-	}
+    public MultiplayerAttackOption getAttackOption() {
+        return attackOption;
+    }
 
-	public void setAttackOption(MultiplayerAttackOption attackOption) {
-		this.attackOption = attackOption;
-	}
+    public void setAttackOption(MultiplayerAttackOption attackOption) {
+        this.attackOption = attackOption;
+    }
 
-	public RangeOfInfluence getRange() {
-		return range;
-	}
+    public RangeOfInfluence getRange() {
+        return range;
+    }
 
-	public void setRange(RangeOfInfluence range) {
-		this.range = range;
-	}
+    public void setRange(RangeOfInfluence range) {
+        this.range = range;
+    }
 
-	public int getWinsNeeded() {
-		return winsNeeded;
-	}
+    public int getWinsNeeded() {
+        return winsNeeded;
+    }
 
-	public void setWinsNeeded(int winsNeeded) {
-		this.winsNeeded = winsNeeded;
-	}
+    public void setWinsNeeded(int winsNeeded) {
+        this.winsNeeded = winsNeeded;
+    }
 
-	public String getGameType() {
-		return gameType;
-	}
+    public String getGameType() {
+        return gameType;
+    }
 
-	public void setGameType(String gameType) {
-		this.gameType = gameType;
-	}
+    public void setGameType(String gameType) {
+        this.gameType = gameType;
+    }
 
-	public String getDeckType() {
-		return deckType;
-	}
+    public String getDeckType() {
+        return deckType;
+    }
 
-	public void setDeckType(String deckType) {
-		this.deckType = deckType;
-	}
+    public void setDeckType(String deckType) {
+        this.deckType = deckType;
+    }
 
-	public List<String> getPlayerTypes() {
-		return playerTypes;
-	}
-    
+    public List<String> getPlayerTypes() {
+        return playerTypes;
+    }
+
     public boolean isLimited() {
         return limited;
     }

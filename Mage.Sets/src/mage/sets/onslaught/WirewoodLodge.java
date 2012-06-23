@@ -62,9 +62,9 @@ public class WirewoodLodge extends CardImpl<WirewoodLodge> {
         costs.add(new TapSourceCost());
         costs.add(new ManaCostsImpl("{G}"));
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new UntapTargetEffect(), costs);
-	TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
-	ability.addTarget(target);
-	this.addAbility(ability);
+    TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
+    ability.addTarget(target);
+    this.addAbility(ability);
     }
 
     public WirewoodLodge(final WirewoodLodge card) {

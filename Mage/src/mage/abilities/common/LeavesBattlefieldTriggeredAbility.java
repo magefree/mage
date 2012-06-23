@@ -37,17 +37,17 @@ import mage.abilities.effects.Effect;
  */
 public class LeavesBattlefieldTriggeredAbility extends ZoneChangeTriggeredAbility<LeavesBattlefieldTriggeredAbility> {
 
-	public LeavesBattlefieldTriggeredAbility(Effect effect, boolean optional) {
-		super(Zone.BATTLEFIELD, null, effect, "When {this} leaves the battlefield, ", optional);
-	}
+    public LeavesBattlefieldTriggeredAbility(Effect effect, boolean optional) {
+        super(Zone.BATTLEFIELD, null, effect, "When {this} leaves the battlefield, ", optional);
+    }
 
-	public LeavesBattlefieldTriggeredAbility(LeavesBattlefieldTriggeredAbility ability) {
-		super(ability);
-	}
+    public LeavesBattlefieldTriggeredAbility(LeavesBattlefieldTriggeredAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public LeavesBattlefieldTriggeredAbility copy() {
-		return new LeavesBattlefieldTriggeredAbility(this);
-	}
+    @Override
+    public LeavesBattlefieldTriggeredAbility copy() {
+        return new LeavesBattlefieldTriggeredAbility(this);
+    }
 
 }

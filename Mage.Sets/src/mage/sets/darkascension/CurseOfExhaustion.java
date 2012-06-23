@@ -58,8 +58,8 @@ public class CurseOfExhaustion extends CardImpl<CurseOfExhaustion> {
         this.subtype.add("Curse");
 
         this.color.setWhite(true);
-		this.addWatcher(new CurseOfExhaustionWatcher());
-        
+        this.addWatcher(new CurseOfExhaustionWatcher());
+
         // Enchant player
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
@@ -82,24 +82,24 @@ public class CurseOfExhaustion extends CardImpl<CurseOfExhaustion> {
 
 class CurseOfExhaustionWatcher extends WatcherImpl<CurseOfExhaustionWatcher> {
 
-	public CurseOfExhaustionWatcher() {
-		super("SpellCast", Constants.WatcherScope.PLAYER);
-	}
+    public CurseOfExhaustionWatcher() {
+        super("SpellCast", Constants.WatcherScope.PLAYER);
+    }
 
-	public CurseOfExhaustionWatcher(final CurseOfExhaustionWatcher watcher) {
-		super(watcher);
-	}
+    public CurseOfExhaustionWatcher(final CurseOfExhaustionWatcher watcher) {
+        super(watcher);
+    }
 
-	@Override
-	public CurseOfExhaustionWatcher copy() {
-		return new CurseOfExhaustionWatcher(this);
-	}
+    @Override
+    public CurseOfExhaustionWatcher copy() {
+        return new CurseOfExhaustionWatcher(this);
+    }
 
-	@Override
-	public void watch(GameEvent event, Game game) {
+    @Override
+    public void watch(GameEvent event, Game game) {
         if (condition == true) //no need to check - condition has already occured
             return;
-		if (event.getType() == GameEvent.EventType.SPELL_CAST ) {
+        if (event.getType() == GameEvent.EventType.SPELL_CAST ) {
             Permanent enchantment = game.getPermanent(this.sourceId);
             if (enchantment != null && enchantment.getAttachedTo() != null) {
                 Player player = game.getPlayer(enchantment.getAttachedTo());
@@ -108,39 +108,39 @@ class CurseOfExhaustionWatcher extends WatcherImpl<CurseOfExhaustionWatcher> {
                 }
             }
         }
-	}
+    }
 
 }
 
 class CurseOfExhaustionEffect extends ReplacementEffectImpl<CurseOfExhaustionEffect> {
 
-	public CurseOfExhaustionEffect() {
-		super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
-		staticText = "Enchanted player can't cast more than one spell each turn.";
-	}
+    public CurseOfExhaustionEffect() {
+        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        staticText = "Enchanted player can't cast more than one spell each turn.";
+    }
 
-	public CurseOfExhaustionEffect(final CurseOfExhaustionEffect effect) {
-		super(effect);
-	}
+    public CurseOfExhaustionEffect(final CurseOfExhaustionEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public CurseOfExhaustionEffect copy() {
-		return new CurseOfExhaustionEffect(this);
-	}
+    @Override
+    public CurseOfExhaustionEffect copy() {
+        return new CurseOfExhaustionEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		return true;
-	}
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        return true;
+    }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (event.getType() == GameEvent.EventType.CAST_SPELL) {
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (event.getType() == GameEvent.EventType.CAST_SPELL) {
             Permanent enchantment = game.getPermanent(source.getSourceId());
             if (enchantment != null && enchantment.getAttachedTo() != null) {
                 Player player = game.getPlayer(enchantment.getAttachedTo());
@@ -150,8 +150,8 @@ class CurseOfExhaustionEffect extends ReplacementEffectImpl<CurseOfExhaustionEff
                         return true;
                 }
             }
-		}
-		return false;
-	}
+        }
+        return false;
+    }
 
 }

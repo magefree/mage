@@ -42,80 +42,80 @@ import mage.cards.Card;
  */
 public class Constructed extends DeckValidatorImpl {
 
-	protected List<String> banned = new ArrayList<String>();
-	protected List<String> restricted = new ArrayList<String>();
-	protected List<String> setCodes = new ArrayList<String>();
+    protected List<String> banned = new ArrayList<String>();
+    protected List<String> restricted = new ArrayList<String>();
+    protected List<String> setCodes = new ArrayList<String>();
 
-	public Constructed() {
-		super("Constructed");
-	}
+    public Constructed() {
+        super("Constructed");
+    }
 
-	protected Constructed(String name) {
-		super(name);
-	}
+    protected Constructed(String name) {
+        super(name);
+    }
 
-	@Override
-	public boolean validate(Deck deck) {
-		boolean valid = true;
-		//20091005 - 100.2a
-		if (deck.getCards().size() < 60) {
-			invalid.put("Deck", "Must contain at least 60 cards: has only " + deck.getCards().size() + " cards");
-			valid = false;
-		}
-		//20091005 - 100.4a
-		if (!deck.getSideboard().isEmpty() && deck.getSideboard().size() != 15) {
-			invalid.put("Sideboard", "Must have 0 or 15 cards: has " + deck.getSideboard().size() + " cards");
-			valid = false;
-		}
+    @Override
+    public boolean validate(Deck deck) {
+        boolean valid = true;
+        //20091005 - 100.2a
+        if (deck.getCards().size() < 60) {
+            invalid.put("Deck", "Must contain at least 60 cards: has only " + deck.getCards().size() + " cards");
+            valid = false;
+        }
+        //20091005 - 100.4a
+        if (!deck.getSideboard().isEmpty() && deck.getSideboard().size() != 15) {
+            invalid.put("Sideboard", "Must have 0 or 15 cards: has " + deck.getSideboard().size() + " cards");
+            valid = false;
+        }
 
-		List<String> basicLandNames = new ArrayList<String>(Arrays.asList("Forest", "Island", "Mountain", "Swamp", "Plains"));
-		Map<String, Integer> counts = new HashMap<String, Integer>();
-		countCards(counts, deck.getCards());
-		countCards(counts, deck.getSideboard());
-		for (Entry<String, Integer> entry: counts.entrySet()) {
-			if (entry.getValue() > 4) {
-				if (!basicLandNames.contains(entry.getKey()) && !entry.getKey().equals("Relentless Rats")) {
-					invalid.put(entry.getKey(), "Too many: " + entry.getValue());
-					valid = false;
-				}
-			}
-		}
-		for (String bannedCard: banned) {
-			if (counts.containsKey(bannedCard)) {
-				invalid.put(bannedCard, "Banned");
-				valid = false;
-			}
-		}
+        List<String> basicLandNames = new ArrayList<String>(Arrays.asList("Forest", "Island", "Mountain", "Swamp", "Plains"));
+        Map<String, Integer> counts = new HashMap<String, Integer>();
+        countCards(counts, deck.getCards());
+        countCards(counts, deck.getSideboard());
+        for (Entry<String, Integer> entry: counts.entrySet()) {
+            if (entry.getValue() > 4) {
+                if (!basicLandNames.contains(entry.getKey()) && !entry.getKey().equals("Relentless Rats")) {
+                    invalid.put(entry.getKey(), "Too many: " + entry.getValue());
+                    valid = false;
+                }
+            }
+        }
+        for (String bannedCard: banned) {
+            if (counts.containsKey(bannedCard)) {
+                invalid.put(bannedCard, "Banned");
+                valid = false;
+            }
+        }
 
-		for (String restrictedCard: restricted) {
-			if (counts.containsKey(restrictedCard)) {
-				int count = counts.get(restrictedCard);
-				if (count > 1) {
-					invalid.put(restrictedCard, "Restricted: " + count);
-					valid = false;
-				}
-			}
-		}
-		if (!setCodes.isEmpty()) {
-			for (Card card: deck.getCards()) {
-				if (!setCodes.contains(card.getExpansionSetCode())) {
-					if (!invalid.containsKey(card.getName())) {
-						invalid.put(card.getName(), "Invalid set: " + card.getExpansionSetCode());
-						valid = false;
-					}
-				}
-			}
-			for (Card card: deck.getSideboard()) {
-				if (!setCodes.contains(card.getExpansionSetCode())) {
-					if (!invalid.containsKey(card.getName())) {
-						invalid.put(card.getName(), "Invalid set: " + card.getExpansionSetCode());
-						valid = false;
-					}
-				}
-			}
-		}
+        for (String restrictedCard: restricted) {
+            if (counts.containsKey(restrictedCard)) {
+                int count = counts.get(restrictedCard);
+                if (count > 1) {
+                    invalid.put(restrictedCard, "Restricted: " + count);
+                    valid = false;
+                }
+            }
+        }
+        if (!setCodes.isEmpty()) {
+            for (Card card: deck.getCards()) {
+                if (!setCodes.contains(card.getExpansionSetCode())) {
+                    if (!invalid.containsKey(card.getName())) {
+                        invalid.put(card.getName(), "Invalid set: " + card.getExpansionSetCode());
+                        valid = false;
+                    }
+                }
+            }
+            for (Card card: deck.getSideboard()) {
+                if (!setCodes.contains(card.getExpansionSetCode())) {
+                    if (!invalid.containsKey(card.getName())) {
+                        invalid.put(card.getName(), "Invalid set: " + card.getExpansionSetCode());
+                        valid = false;
+                    }
+                }
+            }
+        }
 
-		return valid;
-	}
+        return valid;
+    }
 
 }

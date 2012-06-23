@@ -42,6 +42,10 @@ public class DealsDamageToOpponentTriggeredAbility extends TriggeredAbilityImpl<
     public DealsDamageToOpponentTriggeredAbility(Effect effect) {
         super(Constants.Zone.BATTLEFIELD, effect);
     }
+    
+    public DealsDamageToOpponentTriggeredAbility(Effect effect, boolean optional) {
+        super(Constants.Zone.BATTLEFIELD, effect, optional);
+    }
 
     public DealsDamageToOpponentTriggeredAbility(final DealsDamageToOpponentTriggeredAbility ability) {
         super(ability);

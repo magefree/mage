@@ -39,30 +39,30 @@ import java.util.UUID;
  */
 public class OnlyDuringYourTurnCost extends CostImpl<OnlyDuringYourTurnCost> {
 
-	public OnlyDuringYourTurnCost() {
-		text = "Activate this ability only during your turn";
-	}
+    public OnlyDuringYourTurnCost() {
+        text = "Activate this ability only during your turn";
+    }
 
-	public OnlyDuringYourTurnCost(final OnlyDuringYourTurnCost cost) {
-		super(cost);
-	}
-	
-	@Override
-	public OnlyDuringYourTurnCost copy() {
-		return new OnlyDuringYourTurnCost(this);
-	}
+    public OnlyDuringYourTurnCost(final OnlyDuringYourTurnCost cost) {
+        super(cost);
+    }
 
-	@Override
-	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-		if (game.getActivePlayerId().equals(controllerId))
-			return true;
-		return false;
-	}
+    @Override
+    public OnlyDuringYourTurnCost copy() {
+        return new OnlyDuringYourTurnCost(this);
+    }
 
-	@Override
-	public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-		this.paid = true;
-		return paid;
-	}
-	
+    @Override
+    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+        if (game.getActivePlayerId().equals(controllerId))
+            return true;
+        return false;
+    }
+
+    @Override
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+        this.paid = true;
+        return paid;
+    }
+
 }

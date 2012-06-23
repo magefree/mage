@@ -45,7 +45,7 @@ public class AlphaTyrranax extends CardImpl<AlphaTyrranax> {
         super(ownerId, 109, "Alpha Tyrranax", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Beast");
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);
     }

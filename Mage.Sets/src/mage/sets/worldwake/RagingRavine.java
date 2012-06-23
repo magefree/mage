@@ -52,36 +52,36 @@ import mage.game.permanent.token.Token;
  */
 public class RagingRavine extends CardImpl<RagingRavine> {
 
-	public RagingRavine(UUID ownerId) {
-		super(ownerId, 141, "Raging Ravine", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-		this.expansionSetCode = "WWK";
-		this.addAbility(new EntersBattlefieldTappedAbility());
-		this.addAbility(new GreenManaAbility());
-		this.addAbility(new RedManaAbility());
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new RagingRavineToken(), "land", Duration.EndOfTurn), new ManaCostsImpl("{2}{R}{G}")));
-	}
+    public RagingRavine(UUID ownerId) {
+        super(ownerId, 141, "Raging Ravine", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+        this.expansionSetCode = "WWK";
+        this.addAbility(new EntersBattlefieldTappedAbility());
+        this.addAbility(new GreenManaAbility());
+        this.addAbility(new RedManaAbility());
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new RagingRavineToken(), "land", Duration.EndOfTurn), new ManaCostsImpl("{2}{R}{G}")));
+    }
 
-	public RagingRavine(final RagingRavine card) {
-		super(card);
-	}
+    public RagingRavine(final RagingRavine card) {
+        super(card);
+    }
 
-	@Override
-	public RagingRavine copy() {
-		return new RagingRavine(this);
-	}
+    @Override
+    public RagingRavine copy() {
+        return new RagingRavine(this);
+    }
 
 }
 
 class RagingRavineToken extends Token {
 
-	public RagingRavineToken() {
-		super("", "3/3 red and green Elemental creature with \"Whenever this creature attacks, put a +1/+1 counter on it.\"");
-		cardType.add(CardType.CREATURE);
-		subtype.add("Elemental");
-		color.setRed(true);
-		color.setGreen(true);
-		power = new MageInt(3);
-		toughness = new MageInt(3);
-		addAbility(new AttacksTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
-	}
+    public RagingRavineToken() {
+        super("", "3/3 red and green Elemental creature with \"Whenever this creature attacks, put a +1/+1 counter on it.\"");
+        cardType.add(CardType.CREATURE);
+        subtype.add("Elemental");
+        color.setRed(true);
+        color.setGreen(true);
+        power = new MageInt(3);
+        toughness = new MageInt(3);
+        addAbility(new AttacksTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
+    }
 }

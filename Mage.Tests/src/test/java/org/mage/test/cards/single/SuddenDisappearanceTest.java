@@ -17,12 +17,12 @@ public class SuddenDisappearanceTest extends CardTestPlayerBase {
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Air Elemental", 1);
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Horned Turtle", 4);
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Altar of the Lost", 1);
-        
+
         castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Sudden Disappearance", playerB);
 
         setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
-        
+
         assertLife(playerA, 20);
         assertLife(playerB, 20);
         assertPermanentCount(playerB, "Air Elemental", 0);
@@ -33,7 +33,7 @@ public class SuddenDisappearanceTest extends CardTestPlayerBase {
         assertExileCount("Altar of the Lost", 1);
     }
 
-    
+
     @Test
     public void testCard1() {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 6);
@@ -41,12 +41,12 @@ public class SuddenDisappearanceTest extends CardTestPlayerBase {
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Air Elemental", 1);
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Horned Turtle", 4);
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Altar of the Lost", 1);
-        
+
         castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Sudden Disappearance", playerB);
 
         setStopAt(2, Constants.PhaseStep.UPKEEP);
         execute();
-        
+
         assertLife(playerA, 20);
         assertLife(playerB, 20);
         assertPermanentCount(playerB, "Air Elemental", 1);
@@ -56,5 +56,5 @@ public class SuddenDisappearanceTest extends CardTestPlayerBase {
         assertExileCount("Horned Turtle", 0);
         assertExileCount("Altar of the Lost", 0);
     }
-    
+
 }

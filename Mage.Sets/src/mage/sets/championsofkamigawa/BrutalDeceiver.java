@@ -66,10 +66,10 @@ public class BrutalDeceiver extends CardImpl<BrutalDeceiver> {
         this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        
+
         // {1}: Look at the top card of your library.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryControllerEffect(), new GenericManaCost(1)));  
-        
+
         // {2}: Reveal the top card of your library. If it's a land card, {this} gets +1/+0 and gains first strike until end of turn.
         Ability ability = new BrutalDeceiverAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1,0,Duration.EndOfTurn), new ManaCostsImpl("{2}"));
         ability.addEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(),Duration.EndOfTurn));
@@ -79,7 +79,7 @@ public class BrutalDeceiver extends CardImpl<BrutalDeceiver> {
     public BrutalDeceiver(final BrutalDeceiver card) {
         super(card);
     }
-    
+
     @Override
     public BrutalDeceiver copy() {
         return new BrutalDeceiver(this);
@@ -87,22 +87,22 @@ public class BrutalDeceiver extends CardImpl<BrutalDeceiver> {
 }
 
 class BrutalDeceiverAbility extends ActivateOncePerTurnActivatedAbility {
-    	
+
         public BrutalDeceiverAbility(Zone zone, Effect effect, Cost cost) {
-		super(zone, effect, cost);
-	}
+        super(zone, effect, cost);
+    }
 
         public BrutalDeceiverAbility(BrutalDeceiverAbility ability) {
-		super(ability);
-	}
-    
+        super(ability);
+    }
+
         @Override
         public BrutalDeceiverAbility copy() {
                 return new BrutalDeceiverAbility(this);
         }
-    
+
         @Override
-	public boolean checkIfClause(Game game) {
+    public boolean checkIfClause(Game game) {
                 Player player = game.getPlayer(this.getControllerId());
                 if (player != null) {
                     Cards cards = new CardsImpl();
@@ -113,11 +113,11 @@ class BrutalDeceiverAbility extends ActivateOncePerTurnActivatedAbility {
                             return true;
                     }
                 }
-		return false;
+        return false;
         }
-    
+
         @Override
-	public String getRule() {
-		return "{2}: Reveal the top card of your library. If it's a land card, {this} gets +1/+0 and gains first strike until end of turn. Activate this ability only once each turn."; 
-	}
+    public String getRule() {
+        return "{2}: Reveal the top card of your library. If it's a land card, {this} gets +1/+0 and gains first strike until end of turn. Activate this ability only once each turn."; 
+    }
 }

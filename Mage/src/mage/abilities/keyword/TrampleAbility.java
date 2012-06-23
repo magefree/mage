@@ -38,28 +38,28 @@ import mage.abilities.StaticAbility;
  */
 public class TrampleAbility extends StaticAbility<TrampleAbility> {
 
-	private static final TrampleAbility fINSTANCE =  new TrampleAbility();
+    private static final TrampleAbility fINSTANCE =  new TrampleAbility();
 
-	private Object readResolve() throws ObjectStreamException {
-		return fINSTANCE;
-	}
+    private Object readResolve() throws ObjectStreamException {
+        return fINSTANCE;
+    }
 
-	public static TrampleAbility getInstance() {
-		return fINSTANCE;
-	}
+    public static TrampleAbility getInstance() {
+        return fINSTANCE;
+    }
 
-	private TrampleAbility() {
-		super(Zone.BATTLEFIELD, null);
-	}
+    private TrampleAbility() {
+        super(Zone.BATTLEFIELD, null);
+    }
 
-	@Override
-	public String getRule() {
-		return "Trample";
-	}
+    @Override
+    public String getRule() {
+        return "Trample";
+    }
 
-	@Override
-	public TrampleAbility copy() {
-		return fINSTANCE;
-	}
+    @Override
+    public TrampleAbility copy() {
+        return fINSTANCE;
+    }
 
 }

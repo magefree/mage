@@ -42,31 +42,31 @@ import mage.filter.common.FilterCreaturePermanent;
 public class HarmlessAssault extends CardImpl<HarmlessAssault> {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking creatures");
-    
+
     static {
         filter.setAttacking(true);
         filter.setUseAttacking(true);
     }
-    
-	public HarmlessAssault(UUID ownerId) {
-		super(ownerId, 24, "Harmless Assault", Rarity.COMMON,
-				new CardType[] { CardType.INSTANT }, "{2}{W}{W}");
-		this.expansionSetCode = "ROE";
 
-		this.color.setWhite(true);
+    public HarmlessAssault(UUID ownerId) {
+        super(ownerId, 24, "Harmless Assault", Rarity.COMMON,
+                new CardType[] { CardType.INSTANT }, "{2}{W}{W}");
+        this.expansionSetCode = "ROE";
 
-		// Prevent all combat damage that would be dealt this turn by attacking
-		// creatures.
-		this.getSpellAbility().addEffect(
-				new PreventAllDamageEffect(filter, Duration.EndOfTurn, true));
-	}
+        this.color.setWhite(true);
 
-	public HarmlessAssault(final HarmlessAssault card) {
-		super(card);
-	}
+        // Prevent all combat damage that would be dealt this turn by attacking
+        // creatures.
+        this.getSpellAbility().addEffect(
+                new PreventAllDamageEffect(filter, Duration.EndOfTurn, true));
+    }
 
-	@Override
-	public HarmlessAssault copy() {
-		return new HarmlessAssault(this);
-	}
+    public HarmlessAssault(final HarmlessAssault card) {
+        super(card);
+    }
+
+    @Override
+    public HarmlessAssault copy() {
+        return new HarmlessAssault(this);
+    }
 }

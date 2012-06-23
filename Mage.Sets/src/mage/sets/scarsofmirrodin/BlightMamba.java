@@ -49,7 +49,7 @@ public class BlightMamba extends CardImpl<BlightMamba> {
         super(ownerId, 112, "Blight Mamba", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Snake");
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(InfectAbility.getInstance());

@@ -50,54 +50,54 @@ public class AddCountersControllerEffect extends OneShotEffect<AddCountersContro
      * 
      * @param counter Counter to add. Includes type and amount.
      * @param enchantedEquipped If true, not source controller will get counter, 
-     * 	but permanent's controller that source enchants or equippes.
+     *     but permanent's controller that source enchants or equippes.
      */
-	public AddCountersControllerEffect(Counter counter, boolean enchantedEquipped) {
-		super(Outcome.Benefit);
-		this.counter = counter.copy();
-		this.enchantedEquipped = enchantedEquipped;
-		setText();
-	}
+    public AddCountersControllerEffect(Counter counter, boolean enchantedEquipped) {
+        super(Outcome.Benefit);
+        this.counter = counter.copy();
+        this.enchantedEquipped = enchantedEquipped;
+        setText();
+    }
 
-	public AddCountersControllerEffect(final AddCountersControllerEffect effect) {
-		super(effect);
-		if (effect.counter != null)
-			this.counter = effect.counter.copy();
-		this.enchantedEquipped = effect.enchantedEquipped;
-	}
+    public AddCountersControllerEffect(final AddCountersControllerEffect effect) {
+        super(effect);
+        if (effect.counter != null)
+            this.counter = effect.counter.copy();
+        this.enchantedEquipped = effect.enchantedEquipped;
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		UUID uuid = source.getControllerId();
-		if (this.enchantedEquipped) {
-			Permanent enchantment = game.getPermanent(source.getSourceId());
-			if (enchantment != null && enchantment.getAttachedTo() != null) {
-				UUID eUuid = enchantment.getAttachedTo();
-				Permanent permanent = game.getPermanent(eUuid);
-				if (permanent != null) {
-					uuid = permanent.getControllerId();
-				} else return false;
-			} else return false;
-		}
-		Player player = game.getPlayer(uuid);
-		if (player != null) {
-			player.addCounters(counter, game);
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        UUID uuid = source.getControllerId();
+        if (this.enchantedEquipped) {
+            Permanent enchantment = game.getPermanent(source.getSourceId());
+            if (enchantment != null && enchantment.getAttachedTo() != null) {
+                UUID eUuid = enchantment.getAttachedTo();
+                Permanent permanent = game.getPermanent(eUuid);
+                if (permanent != null) {
+                    uuid = permanent.getControllerId();
+                } else return false;
+            } else return false;
+        }
+        Player player = game.getPlayer(uuid);
+        if (player != null) {
+            player.addCounters(counter, game);
+            return true;
+        }
+        return false;
+    }
 
     private void setText() {
-		if (counter.getCount() > 1) {
-			StringBuilder sb = new StringBuilder();
-			sb.append("its controller gets ").append(Integer.toString(counter.getCount())).append(" ").append(counter.getName()).append(" counters");
-			staticText = sb.toString();
-		} else
-			staticText = "its controller gets a " + counter.getName() + " counter";
-	}
+        if (counter.getCount() > 1) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("its controller gets ").append(Integer.toString(counter.getCount())).append(" ").append(counter.getName()).append(" counters");
+            staticText = sb.toString();
+        } else
+            staticText = "its controller gets a " + counter.getName() + " counter";
+    }
 
-	@Override
-	public AddCountersControllerEffect copy() {
-		return new AddCountersControllerEffect(this);
-	}
+    @Override
+    public AddCountersControllerEffect copy() {
+        return new AddCountersControllerEffect(this);
+    }
 }

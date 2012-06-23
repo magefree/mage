@@ -44,15 +44,15 @@ import mage.players.Player;
 public class DiscardTargetEffect extends OneShotEffect<DiscardTargetEffect> {
 
     protected DynamicValue amount;
-	protected boolean randomDiscard;
+    protected boolean randomDiscard;
 
     public DiscardTargetEffect(DynamicValue amount) {
         this(amount, false);
     }
 
-	public DiscardTargetEffect(DynamicValue amount, boolean randomDiscard) {
+    public DiscardTargetEffect(DynamicValue amount, boolean randomDiscard) {
         super(Outcome.Discard);
-		this.randomDiscard = randomDiscard;
+        this.randomDiscard = randomDiscard;
         this.amount = amount;
     }
 
@@ -67,7 +67,7 @@ public class DiscardTargetEffect extends OneShotEffect<DiscardTargetEffect> {
     public DiscardTargetEffect(final DiscardTargetEffect effect) {
         super(effect);
         this.amount = effect.amount.clone();
-		this.randomDiscard = effect.randomDiscard;
+        this.randomDiscard = effect.randomDiscard;
     }
 
     @Override
@@ -79,32 +79,32 @@ public class DiscardTargetEffect extends OneShotEffect<DiscardTargetEffect> {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
-			if (randomDiscard) {
-				int maxAmount = Math.min(amount.calculate(game, source), player.getHand().size());
-				for (int i = 0; i < maxAmount; i++) {
-					Card card = player.getHand().getRandom(game);
-					if (card != null) {
-						player.discard(card, source, game);
-					}
-				}
-			} else {
-				player.discard(amount.calculate(game, source), source, game);
-			}
-            
+            if (randomDiscard) {
+                int maxAmount = Math.min(amount.calculate(game, source), player.getHand().size());
+                for (int i = 0; i < maxAmount; i++) {
+                    Card card = player.getHand().getRandom(game);
+                    if (card != null) {
+                        player.discard(card, source, game);
+                    }
+                }
+            } else {
+                player.discard(amount.calculate(game, source), source, game);
+            }
+
             return true;
         }
         return false;
     }
 
-	@Override
-	public String getText(Mode mode) {
+    @Override
+    public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
-		if(mode.getTargets().isEmpty()){
-			sb.append("that player");
-		} else {
-			sb.append("Target ").append(mode.getTargets().get(0).getTargetName());
-		}
-		sb.append(" discards ");
+        if(mode.getTargets().isEmpty()){
+            sb.append("that player");
+        } else {
+            sb.append("Target ").append(mode.getTargets().get(0).getTargetName());
+        }
+        sb.append(" discards ");
         sb.append(amount).append(" card");
         try {
             if (Integer.parseInt(amount.toString()) > 1) {
@@ -113,14 +113,14 @@ public class DiscardTargetEffect extends OneShotEffect<DiscardTargetEffect> {
         } catch (Exception e) {
             sb.append("s");
         }
-		if (randomDiscard) {
-			sb.append(" at random");
-		}
+        if (randomDiscard) {
+            sb.append(" at random");
+        }
         String message = amount.getMessage();
         if (message.length() > 0) {
             sb.append(" for each ");
         }
         sb.append(message);
         return sb.toString();
-	}
+    }
 }

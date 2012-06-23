@@ -49,7 +49,7 @@ import mage.filter.common.FilterControlledPermanent;
  * @author LevelX
  */
 public class KondasHatamoto extends CardImpl<KondasHatamoto>{
-    
+
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Legendary Samurai");
     private static final String rule1 = "As long as you control a legendary Samurai, {this} gets +1/+2";
     private static final String rule2 = "As long as you control a legendary Samurai, {this} has vigilance";
@@ -60,7 +60,7 @@ public class KondasHatamoto extends CardImpl<KondasHatamoto>{
         filter.getSubtype().add("Samurai");
         filter.setScopeSubtype(Filter.ComparisonScope.Any);
     }
-    
+
     public KondasHatamoto (UUID ownerId) {
         super(ownerId, 31, "Konda's Hatamoto", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.expansionSetCode = "CHK";
@@ -69,14 +69,14 @@ public class KondasHatamoto extends CardImpl<KondasHatamoto>{
         this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
-        
+
         this.addAbility(new BushidoAbility(1));
-        
+
         ConditionalContinousEffect effect1 = new ConditionalContinousEffect(new BoostSourceEffect(1, 2, Duration.WhileOnBattlefield), new ControlsPermanentCondition(filter), rule1);
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect1));
         ConditionalContinousEffect effect2 = new ConditionalContinousEffect(new GainAbilitySourceEffect(VigilanceAbility.getInstance()), new ControlsPermanentCondition(filter), rule2);
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect2));
-        
+
     }
 
     public KondasHatamoto (final KondasHatamoto card) {

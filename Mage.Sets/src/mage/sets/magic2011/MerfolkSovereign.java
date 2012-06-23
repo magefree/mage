@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class MerfolkSovereign extends mage.sets.magic2010.MerfolkSovereign {
 
-	public MerfolkSovereign(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 65;
-		this.expansionSetCode = "M11";
-	}
+    public MerfolkSovereign(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 65;
+        this.expansionSetCode = "M11";
+    }
 
-	public MerfolkSovereign(final MerfolkSovereign card) {
-		super(card);
-	}
+    public MerfolkSovereign(final MerfolkSovereign card) {
+        super(card);
+    }
 
-	@Override
-	public MerfolkSovereign copy() {
-		return new MerfolkSovereign(this);
-	}
+    @Override
+    public MerfolkSovereign copy() {
+        return new MerfolkSovereign(this);
+    }
 
 }

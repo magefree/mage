@@ -57,7 +57,7 @@ public class Mindblaze extends CardImpl<Mindblaze> {
     public Mindblaze (UUID ownerId) {
         super(ownerId, 180, "Mindblaze", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{R}");
         this.expansionSetCode = "CHK";
-		this.color.setRed(true);
+        this.color.setRed(true);
 
         // Name a nonland card and choose a number greater than 0. Target player reveals his or her library.
         // If that library contains exactly the chosen number of the named card,
@@ -94,7 +94,7 @@ class MindblazeEffect extends OneShotEffect<MindblazeEffect> {
         Player playerControls = game.getPlayer(source.getControllerId());
         if (player != null && playerControls != null) {
             Choice cardChoice = new ChoiceImpl();
-		    cardChoice.setChoices(Sets.getNonLandCardNames());
+            cardChoice.setChoices(Sets.getNonLandCardNames());
             cardChoice.clearChoice();
             Choice numberChoice = new ChoiceImpl();
             numberChoice.setMessage("Choose a number greater than 0");

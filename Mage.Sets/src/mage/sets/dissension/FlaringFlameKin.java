@@ -66,7 +66,7 @@ public class FlaringFlameKin extends CardImpl<FlaringFlameKin> {
         SimpleActivatedAbility grantedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BoostSourceEffect(1, 0, Duration.EndOfTurn),
                 new ManaCostsImpl("{R}"));
-        
+
         ConditionalContinousEffect effect1 = new ConditionalContinousEffect(new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), EnchantedCondition.getInstance(), rule1);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect1));
         ConditionalContinousEffect effect2 = new ConditionalContinousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance()), EnchantedCondition.getInstance(), rule2);

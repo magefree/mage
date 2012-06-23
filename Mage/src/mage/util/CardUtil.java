@@ -45,101 +45,101 @@ import mage.util.functions.CopyTokenFunction;
  */
 public class CardUtil {
 
-	/**
-	 * Checks whether two cards share card types.
-	 *
-	 * @param card1
-	 * @param card2
-	 * @return
-	 */
-	public static boolean shareTypes(Card card1, Card card2) {
+    /**
+     * Checks whether two cards share card types.
+     *
+     * @param card1
+     * @param card2
+     * @return
+     */
+    public static boolean shareTypes(Card card1, Card card2) {
 
-		if (card1 == null || card2 == null)
-			throw new IllegalArgumentException("Params can't be null");
+        if (card1 == null || card2 == null)
+            throw new IllegalArgumentException("Params can't be null");
 
-		for (Constants.CardType type : card1.getCardType()) {
-			if (card2.getCardType().contains(type)) {
-				return true;
-			}
-		}
+        for (Constants.CardType type : card1.getCardType()) {
+            if (card2.getCardType().contains(type)) {
+                return true;
+            }
+        }
 
-		return false;
-	}
-	/**
-	 * Checks whether two cards share card subtypes.
-	 *
-	 * @param card1
-	 * @param card2
-	 * @return
-	 */
-	public static boolean shareSubtypes(Card card1, Card card2) {
+        return false;
+    }
+    /**
+     * Checks whether two cards share card subtypes.
+     *
+     * @param card1
+     * @param card2
+     * @return
+     */
+    public static boolean shareSubtypes(Card card1, Card card2) {
 
-		if (card1 == null || card2 == null)
-			throw new IllegalArgumentException("Params can't be null");
+        if (card1 == null || card2 == null)
+            throw new IllegalArgumentException("Params can't be null");
 
-		for (String subtype : card1.getSubtype()) {
-			if (card2.getSubtype().contains(subtype)) {
-				return true;
-			}
-		}
+        for (String subtype : card1.getSubtype()) {
+            if (card2.getSubtype().contains(subtype)) {
+                return true;
+            }
+        }
 
-		return false;
-	}
-        
-	/**
-	 * Adjusts spell or ability cost to be paid.
-	 *
-	 * @param spellAbility
-	 * @param reduceCount
-	 */
-	public static void adjustCost(SpellAbility spellAbility, int reduceCount) {
-		ManaCosts<ManaCost> previousCost = spellAbility.getManaCostsToPay();
-		ManaCosts<ManaCost> adjustedCost = new ManaCostsImpl<ManaCost>();
-		boolean reduced = false;
-		for (ManaCost manaCost : previousCost) {
-			Mana mana = manaCost.getOptions().get(0);
-			int colorless = mana.getColorless();
-			if (!reduced && mana != null && colorless > 0) {
-				if ((colorless - reduceCount) > 0) {
-					int newColorless = colorless - reduceCount;
-					adjustedCost.add(new GenericManaCost(newColorless));
-				}
-				reduced = true;
-			} else {
-				adjustedCost.add(manaCost);
-			}
-		}
-		spellAbility.getManaCostsToPay().clear();
-		spellAbility.getManaCostsToPay().addAll(adjustedCost);
-	}
+        return false;
+    }
 
-	/**
-	 * Returns function that copies params\abilities from one card to another.
-	 *
-	 * @param target
-	 */
-	public static CopyFunction copyTo(Card target) {
-		return new CopyFunction(target);
-	}
+    /**
+     * Adjusts spell or ability cost to be paid.
+     *
+     * @param spellAbility
+     * @param reduceCount
+     */
+    public static void adjustCost(SpellAbility spellAbility, int reduceCount) {
+        ManaCosts<ManaCost> previousCost = spellAbility.getManaCostsToPay();
+        ManaCosts<ManaCost> adjustedCost = new ManaCostsImpl<ManaCost>();
+        boolean reduced = false;
+        for (ManaCost manaCost : previousCost) {
+            Mana mana = manaCost.getOptions().get(0);
+            int colorless = mana.getColorless();
+            if (!reduced && mana != null && colorless > 0) {
+                if ((colorless - reduceCount) > 0) {
+                    int newColorless = colorless - reduceCount;
+                    adjustedCost.add(new GenericManaCost(newColorless));
+                }
+                reduced = true;
+            } else {
+                adjustedCost.add(manaCost);
+            }
+        }
+        spellAbility.getManaCostsToPay().clear();
+        spellAbility.getManaCostsToPay().addAll(adjustedCost);
+    }
 
-	/**
-	 * Returns function that copies params\abilities from one card to {@link Token}.
-	 *
-	 * @param target
-	 */
-	public static CopyTokenFunction copyTo(Token target) {
-		return new CopyTokenFunction(target);
-	}
+    /**
+     * Returns function that copies params\abilities from one card to another.
+     *
+     * @param target
+     */
+    public static CopyFunction copyTo(Card target) {
+        return new CopyFunction(target);
+    }
 
-	public static boolean isPermanentCard ( Card card )  {
-		boolean permanent = false;
-		
-		permanent |= card.getCardType().contains(Constants.CardType.ARTIFACT);
-		permanent |= card.getCardType().contains(Constants.CardType.CREATURE);
-		permanent |= card.getCardType().contains(Constants.CardType.ENCHANTMENT);
-		permanent |= card.getCardType().contains(Constants.CardType.LAND);
-		permanent |= card.getCardType().contains(Constants.CardType.PLANESWALKER);
-		
-		return permanent;
-	}
+    /**
+     * Returns function that copies params\abilities from one card to {@link Token}.
+     *
+     * @param target
+     */
+    public static CopyTokenFunction copyTo(Token target) {
+        return new CopyTokenFunction(target);
+    }
+
+    public static boolean isPermanentCard ( Card card )  {
+        boolean permanent = false;
+
+        permanent |= card.getCardType().contains(Constants.CardType.ARTIFACT);
+        permanent |= card.getCardType().contains(Constants.CardType.CREATURE);
+        permanent |= card.getCardType().contains(Constants.CardType.ENCHANTMENT);
+        permanent |= card.getCardType().contains(Constants.CardType.LAND);
+        permanent |= card.getCardType().contains(Constants.CardType.PLANESWALKER);
+
+        return permanent;
+    }
 }

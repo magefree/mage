@@ -45,24 +45,24 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ActOfTreason extends CardImpl<ActOfTreason> {
 
-	public ActOfTreason(UUID ownerId) {
-		super(ownerId, 124, "Act of Treason", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
-		this.expansionSetCode = "M10";
-		this.color.setRed(true);
-		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-		this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));
-		this.getSpellAbility().addEffect(new UntapTargetEffect());
-		this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
+    public ActOfTreason(UUID ownerId) {
+        super(ownerId, 124, "Act of Treason", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
+        this.expansionSetCode = "M10";
+        this.color.setRed(true);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new UntapTargetEffect());
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
 
-	}
+    }
 
-	public ActOfTreason(final ActOfTreason card) {
-		super(card);
-	}
+    public ActOfTreason(final ActOfTreason card) {
+        super(card);
+    }
 
-	@Override
-	public ActOfTreason copy() {
-		return new ActOfTreason(this);
-	}
+    @Override
+    public ActOfTreason copy() {
+        return new ActOfTreason(this);
+    }
 
 }

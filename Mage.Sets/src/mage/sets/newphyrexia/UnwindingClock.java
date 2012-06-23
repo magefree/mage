@@ -72,7 +72,7 @@ public class UnwindingClock extends CardImpl<UnwindingClock> {
 class UnwindingClockEffect extends ContinuousEffectImpl<UnwindingClockEffect> {
 
     private static FilterArtifactPermanent filter = new FilterArtifactPermanent();
-    
+
     public UnwindingClockEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Untap all artifacts you control during each other player's untap step";

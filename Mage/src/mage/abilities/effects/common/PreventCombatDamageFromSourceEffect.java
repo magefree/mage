@@ -41,27 +41,27 @@ import mage.game.events.GameEvent;
  */
 public class PreventCombatDamageFromSourceEffect extends PreventionEffectImpl<PreventCombatDamageFromSourceEffect> {
 
-	public PreventCombatDamageFromSourceEffect(Duration duration) {
+    public PreventCombatDamageFromSourceEffect(Duration duration) {
             super(duration);
             staticText = "Prevent all combat damage that would be dealt by {this} " + duration.toString();
-	}
+    }
 
-	public PreventCombatDamageFromSourceEffect(final PreventCombatDamageFromSourceEffect effect) {
+    public PreventCombatDamageFromSourceEffect(final PreventCombatDamageFromSourceEffect effect) {
             super(effect);
-	}
+    }
 
-	@Override
-	public PreventCombatDamageFromSourceEffect copy() {
+    @Override
+    public PreventCombatDamageFromSourceEffect copy() {
             return new PreventCombatDamageFromSourceEffect(this);
-	}
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
             return true;
-	}
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
             GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getSourceId(), source.getFirstTarget(), source.getControllerId(), event.getAmount(), false);
             if (!game.replaceEvent(preventEvent)) {
                 int damage = event.getAmount();
@@ -72,8 +72,8 @@ public class PreventCombatDamageFromSourceEffect extends PreventionEffectImpl<Pr
             return false;
         }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
             if (super.applies(event, source, game)) {
                 DamageEvent damageEvent = (DamageEvent) event;
                 if (event.getSourceId().equals(source.getSourceId()) && damageEvent.isCombatDamage()) {
@@ -81,6 +81,6 @@ public class PreventCombatDamageFromSourceEffect extends PreventionEffectImpl<Pr
                 }
             }
             return false;
-	}
+    }
 
 }

@@ -43,30 +43,30 @@ import mage.target.common.TargetNonBasicLandPermanent;
  */
 public class FissureVent extends CardImpl<FissureVent> {
 
-	public FissureVent(UUID ownerId) {
-		super(ownerId, 144, "Fissure Vent", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
-		this.expansionSetCode = "ROE";
-		this.color.setRed(true);
-		this.getSpellAbility().addTarget(new TargetArtifactPermanent());
-		this.getSpellAbility().addEffect(new DestroyTargetEffect());
-		Mode mode1 = new Mode();
-		mode1.getTargets().add(new TargetNonBasicLandPermanent());
-		mode1.getEffects().add(new DestroyTargetEffect());
-		this.getSpellAbility().addMode(mode1);
-		Mode mode2 = new Mode();
-		mode2.getTargets().add(new TargetArtifactPermanent());
-		mode2.getTargets().add(new TargetNonBasicLandPermanent());
-		mode2.getEffects().add(new DestroyMultiTargetEffect());
-		this.getSpellAbility().addMode(mode2);
-	}
+    public FissureVent(UUID ownerId) {
+        super(ownerId, 144, "Fissure Vent", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
+        this.expansionSetCode = "ROE";
+        this.color.setRed(true);
+        this.getSpellAbility().addTarget(new TargetArtifactPermanent());
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        Mode mode1 = new Mode();
+        mode1.getTargets().add(new TargetNonBasicLandPermanent());
+        mode1.getEffects().add(new DestroyTargetEffect());
+        this.getSpellAbility().addMode(mode1);
+        Mode mode2 = new Mode();
+        mode2.getTargets().add(new TargetArtifactPermanent());
+        mode2.getTargets().add(new TargetNonBasicLandPermanent());
+        mode2.getEffects().add(new DestroyMultiTargetEffect());
+        this.getSpellAbility().addMode(mode2);
+    }
 
-	public FissureVent(final FissureVent card) {
-		super(card);
-	}
+    public FissureVent(final FissureVent card) {
+        super(card);
+    }
 
-	@Override
-	public FissureVent copy() {
-		return new FissureVent(this);
-	}
+    @Override
+    public FissureVent copy() {
+        return new FissureVent(this);
+    }
 
 }

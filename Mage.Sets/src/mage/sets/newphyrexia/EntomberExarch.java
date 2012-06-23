@@ -102,21 +102,21 @@ class EntomberExarchEffect extends OneShotEffect<EntomberExarchEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getFirstTarget());
-		if (player != null) {
-			player.revealCards("Entomber Exarch", player.getHand(), game);
-			Player you = game.getPlayer(source.getControllerId());
-			if (you != null) {
-				TargetCard target = new TargetCard(Constants.Zone.PICK, filter);
+        if (player != null) {
+            player.revealCards("Entomber Exarch", player.getHand(), game);
+            Player you = game.getPlayer(source.getControllerId());
+            if (you != null) {
+                TargetCard target = new TargetCard(Constants.Zone.PICK, filter);
                 target.setRequired(true);
-				if (you.choose(Constants.Outcome.Benefit, player.getHand(), target, game)) {
-					Card card = player.getHand().get(target.getFirstTarget(), game);
-					if (card != null) {
-						return player.discard(card, source, game);
-					}
-				}
-			}
-		}
-		return false;
+                if (you.choose(Constants.Outcome.Benefit, player.getHand(), target, game)) {
+                    Card card = player.getHand().get(target.getFirstTarget(), game);
+                    if (card != null) {
+                        return player.discard(card, source, game);
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     @Override

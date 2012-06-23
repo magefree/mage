@@ -46,19 +46,19 @@ public class PickChoiceDialog extends MageDialog {
     /** Creates new form PickNumberDialog */
     public PickChoiceDialog() {
         initComponents();
-		this.setModal(true);
+        this.setModal(true);
     }
 
-	public void showDialog(String message, String[] choices) {
-		this.lblMessage.setText(message);
-		this.lstChoices.setListData(choices);
-		MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
-		this.setVisible(true);
-	}
+    public void showDialog(String message, String[] choices) {
+        this.lblMessage.setText(message);
+        this.lstChoices.setListData(choices);
+        MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
+        this.setVisible(true);
+    }
 
-	public String getChoice() {
-		return (String)this.lstChoices.getSelectedValue();
-	}
+    public String getChoice() {
+        return (String)this.lstChoices.getSelectedValue();
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -131,13 +131,13 @@ public class PickChoiceDialog extends MageDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-	private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-		this.hideDialog();
-	}//GEN-LAST:event_btnOkActionPerformed
+    private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
+        this.hideDialog();
+    }//GEN-LAST:event_btnOkActionPerformed
 
-	private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-		this.hideDialog();
-	}//GEN-LAST:event_btnCancelActionPerformed
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        this.hideDialog();
+    }//GEN-LAST:event_btnCancelActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;

@@ -42,25 +42,25 @@ import mage.cards.CardImpl;
  */
 public class ScrollThief extends CardImpl<ScrollThief> {
 
-	public ScrollThief(UUID ownerId) {
-		super(ownerId, 72, "Scroll Thief", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Merfolk");
-		this.subtype.add("Rogue");
-		this.color.setBlue(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(3);
+    public ScrollThief(UUID ownerId) {
+        super(ownerId, 72, "Scroll Thief", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Merfolk");
+        this.subtype.add("Rogue");
+        this.color.setBlue(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(3);
 
-		this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardControllerEffect(1), false));
-	}
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardControllerEffect(1), false));
+    }
 
-	public ScrollThief(final ScrollThief card) {
-		super(card);
-	}
+    public ScrollThief(final ScrollThief card) {
+        super(card);
+    }
 
-	@Override
-	public ScrollThief copy() {
-		return new ScrollThief(this);
-	}
+    @Override
+    public ScrollThief copy() {
+        return new ScrollThief(this);
+    }
 
 }

@@ -47,8 +47,8 @@ public class WingedCoatl extends CardImpl<WingedCoatl> {
         super(ownerId, 105, "Winged Coatl", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{U}");
         this.expansionSetCode = "ARB";
         this.subtype.add("Snake");
-		this.color.setGreen(true);
-		this.color.setBlue(true);
+        this.color.setGreen(true);
+        this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(FlashAbility.getInstance());

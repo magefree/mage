@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class BirdsOfParadise extends mage.sets.tenth.BirdsOfParadise {
 
-	public BirdsOfParadise(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 165;
-		this.expansionSetCode = "M11";
-	}
+    public BirdsOfParadise(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 165;
+        this.expansionSetCode = "M11";
+    }
 
-	public BirdsOfParadise(final BirdsOfParadise card) {
-		super(card);
-	}
+    public BirdsOfParadise(final BirdsOfParadise card) {
+        super(card);
+    }
 
-	@Override
-	public BirdsOfParadise copy() {
-		return new BirdsOfParadise(this);
-	}
+    @Override
+    public BirdsOfParadise copy() {
+        return new BirdsOfParadise(this);
+    }
 
 }

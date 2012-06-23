@@ -41,65 +41,65 @@ import mage.game.events.GameEvent;
  */
 public class PreventDamageTargetEffect extends PreventionEffectImpl<PreventDamageTargetEffect> {
 
-	private int amount;
+    private int amount;
 
-	public PreventDamageTargetEffect(Duration duration, int amount) {
-		super(duration);
-		this.amount = amount;
-	}
+    public PreventDamageTargetEffect(Duration duration, int amount) {
+        super(duration);
+        this.amount = amount;
+    }
 
-	public PreventDamageTargetEffect(final PreventDamageTargetEffect effect) {
-		super(effect);
-		this.amount = effect.amount;
-	}
+    public PreventDamageTargetEffect(final PreventDamageTargetEffect effect) {
+        super(effect);
+        this.amount = effect.amount;
+    }
 
-	@Override
-	public PreventDamageTargetEffect copy() {
-		return new PreventDamageTargetEffect(this);
-	}
+    @Override
+    public PreventDamageTargetEffect copy() {
+        return new PreventDamageTargetEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), event.getAmount(), false);
-		if (!game.replaceEvent(preventEvent)) {
-			if (event.getAmount() >= this.amount) {
-				int damage = amount;
-				event.setAmount(event.getAmount() - amount);
-				this.used = true;
-				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), damage));
-			} else {
-				int damage = event.getAmount();
-				event.setAmount(0);
-				amount -= damage;
-				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), damage));
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), event.getAmount(), false);
+        if (!game.replaceEvent(preventEvent)) {
+            if (event.getAmount() >= this.amount) {
+                int damage = amount;
+                event.setAmount(event.getAmount() - amount);
+                this.used = true;
+                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), damage));
+            } else {
+                int damage = event.getAmount();
+                event.setAmount(0);
+                amount -= damage;
+                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), damage));
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (!this.used && super.applies(event, source, game) && event.getTargetId().equals(source.getFirstTarget())) {
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (!this.used && super.applies(event, source, game) && event.getTargetId().equals(source.getFirstTarget())) {
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public String getText(Mode mode) {
-		StringBuilder sb = new StringBuilder();
+    @Override
+    public String getText(Mode mode) {
+        StringBuilder sb = new StringBuilder();
         if (amount == Integer.MAX_VALUE) {
             sb.append("Prevent all damage that would be dealt to target ");
         } else {
             sb.append("Prevent the next ").append(amount).append(" damage that would be dealt to target ");
         }
-		sb.append(mode.getTargets().get(0).getTargetName()).append(" ").append(duration.toString());
-		return sb.toString();
-	}
+        sb.append(mode.getTargets().get(0).getTargetName()).append(" ").append(duration.toString());
+        return sb.toString();
+    }
 
 }

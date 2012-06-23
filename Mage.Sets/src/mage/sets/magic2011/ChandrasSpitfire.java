@@ -48,58 +48,58 @@ import mage.game.events.GameEvent;
  */
 public class ChandrasSpitfire extends CardImpl<ChandrasSpitfire> {
 
-	public ChandrasSpitfire(UUID ownerId) {
-		super(ownerId, 129, "Chandra's Spitfire", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Elemental");
-		this.color.setRed(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(3);
+    public ChandrasSpitfire(UUID ownerId) {
+        super(ownerId, 129, "Chandra's Spitfire", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Elemental");
+        this.color.setRed(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(3);
 
-		this.addAbility(FlyingAbility.getInstance());
-		this.addAbility(new ChandrasSpitfireAbility());
-	}
+        this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(new ChandrasSpitfireAbility());
+    }
 
-	public ChandrasSpitfire(final ChandrasSpitfire card) {
-		super(card);
-	}
+    public ChandrasSpitfire(final ChandrasSpitfire card) {
+        super(card);
+    }
 
-	@Override
-	public ChandrasSpitfire copy() {
-		return new ChandrasSpitfire(this);
-	}
+    @Override
+    public ChandrasSpitfire copy() {
+        return new ChandrasSpitfire(this);
+    }
 
 }
 
 class ChandrasSpitfireAbility extends TriggeredAbilityImpl<ChandrasSpitfireAbility> {
 
-	public ChandrasSpitfireAbility() {
-		super(Zone.BATTLEFIELD, new BoostSourceEffect(3, 0, Duration.EndOfTurn), false);
-	}
+    public ChandrasSpitfireAbility() {
+        super(Zone.BATTLEFIELD, new BoostSourceEffect(3, 0, Duration.EndOfTurn), false);
+    }
 
-	public ChandrasSpitfireAbility(final ChandrasSpitfireAbility ability) {
-		super(ability);
-	}
+    public ChandrasSpitfireAbility(final ChandrasSpitfireAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event instanceof DamagedPlayerEvent) {
-			DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
-			if (!damageEvent.isCombatDamage() && game.getOpponents(controllerId).contains(event.getTargetId())) {
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event instanceof DamagedPlayerEvent) {
+            DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
+            if (!damageEvent.isCombatDamage() && game.getOpponents(controllerId).contains(event.getTargetId())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "Whenever an opponent is dealt noncombat damage, {this} gets +3/+0 until end of turn.";
-	}
+    @Override
+    public String getRule() {
+        return "Whenever an opponent is dealt noncombat damage, {this} gets +3/+0 until end of turn.";
+    }
 
-	@Override
-	public ChandrasSpitfireAbility copy() {
-		return new ChandrasSpitfireAbility(this);
-	}
+    @Override
+    public ChandrasSpitfireAbility copy() {
+        return new ChandrasSpitfireAbility(this);
+    }
 
 }

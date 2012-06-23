@@ -46,7 +46,7 @@ public class Dismember extends CardImpl<Dismember> {
     public Dismember (UUID ownerId) {
         super(ownerId, 57, "Dismember", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{BP}{BP}");
         this.expansionSetCode = "NPH";
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.getSpellAbility().addEffect(new BoostTargetEffect(-5, -5, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

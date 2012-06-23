@@ -47,121 +47,121 @@ import org.apache.log4j.Logger;
  * @author BetaSteward_at_googlemail.com
  */
 public class TournamentSession {
-	protected final static Logger logger = Logger.getLogger(TournamentSession.class);
+    protected final static Logger logger = Logger.getLogger(TournamentSession.class);
 
-	protected UUID userId;
-	protected UUID playerId;
-	protected UUID tableId;
-	protected Tournament tournament;
-	protected boolean killed = false;
+    protected UUID userId;
+    protected UUID playerId;
+    protected UUID tableId;
+    protected Tournament tournament;
+    protected boolean killed = false;
 
-	private ScheduledFuture<?> futureTimeout;
-	protected static ScheduledExecutorService timeoutExecutor = ThreadExecutor.getInstance().getTimeoutExecutor();
+    private ScheduledFuture<?> futureTimeout;
+    protected static ScheduledExecutorService timeoutExecutor = ThreadExecutor.getInstance().getTimeoutExecutor();
 
-	public TournamentSession(Tournament tournament, UUID userId, UUID tableId, UUID playerId) {
-		this.userId = userId;
-		this.tournament = tournament;
-		this.playerId = playerId;
-		this.tableId = tableId;
-	}
+    public TournamentSession(Tournament tournament, UUID userId, UUID tableId, UUID playerId) {
+        this.userId = userId;
+        this.tournament = tournament;
+        this.playerId = playerId;
+        this.tableId = tableId;
+    }
 
-	public boolean init() {
-		if (!killed) {
-			User user = UserManager.getInstance().getUser(userId);
-			if (user != null) {
-				user.fireCallback(new ClientCallback("tournamentInit", tournament.getId(), getTournamentView()));
-				return true;
-			}
-		}
-		return false;
-	}
+    public boolean init() {
+        if (!killed) {
+            User user = UserManager.getInstance().getUser(userId);
+            if (user != null) {
+                user.fireCallback(new ClientCallback("tournamentInit", tournament.getId(), getTournamentView()));
+                return true;
+            }
+        }
+        return false;
+    }
 
-	public void update() {
-		if (!killed) {
-			User user = UserManager.getInstance().getUser(userId);
-			if (user != null) {
-				user.fireCallback(new ClientCallback("tournamentUpdate", tournament.getId(), getTournamentView()));
-			}
-		}
-	}
+    public void update() {
+        if (!killed) {
+            User user = UserManager.getInstance().getUser(userId);
+            if (user != null) {
+                user.fireCallback(new ClientCallback("tournamentUpdate", tournament.getId(), getTournamentView()));
+            }
+        }
+    }
 
-	public void gameOver(final String message) {
-		if (!killed) {
-			User user = UserManager.getInstance().getUser(userId);
-			if (user != null) {
-				user.fireCallback(new ClientCallback("tournamentOver", tournament.getId(), message));
-			}
-		}
-	}
+    public void gameOver(final String message) {
+        if (!killed) {
+            User user = UserManager.getInstance().getUser(userId);
+            if (user != null) {
+                user.fireCallback(new ClientCallback("tournamentOver", tournament.getId(), message));
+            }
+        }
+    }
 
-	public void construct(int timeout) {
-		if (!killed) {
-			setupTimeout(timeout);
-			User user = UserManager.getInstance().getUser(userId);
-			if (user != null) {
+    public void construct(int timeout) {
+        if (!killed) {
+            setupTimeout(timeout);
+            User user = UserManager.getInstance().getUser(userId);
+            if (user != null) {
                 int remaining = (int) futureTimeout.getDelay(TimeUnit.SECONDS);
-				user.construct(tournament.getPlayer(playerId).getDeck(), tableId, remaining);
-			}
-		}
-	}
+                user.construct(tournament.getPlayer(playerId).getDeck(), tableId, remaining);
+            }
+        }
+    }
 
-	public void submitDeck(Deck deck) {
-		cancelTimeout();
-		tournament.submitDeck(playerId, deck);
-	}
+    public void submitDeck(Deck deck) {
+        cancelTimeout();
+        tournament.submitDeck(playerId, deck);
+    }
 
-	public void updateDeck(Deck deck) {
-		tournament.updateDeck(playerId, deck);
-	}
+    public void updateDeck(Deck deck) {
+        tournament.updateDeck(playerId, deck);
+    }
 
     protected void handleRemoteException(RemoteException ex) {
-		logger.fatal("TournamentSession error ", ex);
-		TournamentManager.getInstance().kill(tournament.getId(), userId);
-	}
+        logger.fatal("TournamentSession error ", ex);
+        TournamentManager.getInstance().kill(tournament.getId(), userId);
+    }
 
-	public void setKilled() {
-		killed = true;
-	}
+    public void setKilled() {
+        killed = true;
+    }
 
-	private synchronized void setupTimeout(int seconds) {
+    private synchronized void setupTimeout(int seconds) {
         if (futureTimeout != null && !futureTimeout.isDone())
             return;
-		cancelTimeout();
-		if (seconds > 0) {
-			futureTimeout = timeoutExecutor.schedule(
-				new Runnable() {
-					@Override
-					public void run() {
-						TournamentManager.getInstance().timeout(tournament.getId(), userId);
-					}
-				},
-				seconds, TimeUnit.SECONDS
-			);
-		}
-	}
+        cancelTimeout();
+        if (seconds > 0) {
+            futureTimeout = timeoutExecutor.schedule(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        TournamentManager.getInstance().timeout(tournament.getId(), userId);
+                    }
+                },
+                seconds, TimeUnit.SECONDS
+            );
+        }
+    }
 
-	private synchronized void cancelTimeout() {
-		if (futureTimeout != null) {
-			futureTimeout.cancel(false);
-		}
-	}
+    private synchronized void cancelTimeout() {
+        if (futureTimeout != null) {
+            futureTimeout.cancel(false);
+        }
+    }
 
-	public void removeTournament() {
-		User user = UserManager.getInstance().getUser(userId);
-		if (user != null)
-			user.removeTournament(playerId);
-	}
-	
-	private TournamentView getTournamentView() {
-		return new TournamentView(tournament);
-	}
+    public void removeTournament() {
+        User user = UserManager.getInstance().getUser(userId);
+        if (user != null)
+            user.removeTournament(playerId);
+    }
 
-	public UUID getTournamentId() {
-		return tournament.getId();
-	}
+    private TournamentView getTournamentView() {
+        return new TournamentView(tournament);
+    }
 
-	void tournamentOver() {
-		//TODO: implement this
-	}
+    public UUID getTournamentId() {
+        return tournament.getId();
+    }
+
+    void tournamentOver() {
+        //TODO: implement this
+    }
 
 }

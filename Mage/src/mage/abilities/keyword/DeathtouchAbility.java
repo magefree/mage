@@ -38,29 +38,29 @@ import mage.abilities.StaticAbility;
  */
 public class DeathtouchAbility extends StaticAbility<DeathtouchAbility> {
 
-	private static final DeathtouchAbility fINSTANCE =  new DeathtouchAbility();
+    private static final DeathtouchAbility fINSTANCE =  new DeathtouchAbility();
 
-	private Object readResolve() throws ObjectStreamException {
-		return fINSTANCE;
-	}
+    private Object readResolve() throws ObjectStreamException {
+        return fINSTANCE;
+    }
 
-	public static DeathtouchAbility getInstance() {
-		return fINSTANCE;
-	}
+    public static DeathtouchAbility getInstance() {
+        return fINSTANCE;
+    }
 
-	private DeathtouchAbility() {
-		super(Zone.ALL, null);
-	}
+    private DeathtouchAbility() {
+        super(Zone.ALL, null);
+    }
 
-	@Override
-	public String getRule() {
-		return "Deathtouch";
-	}
+    @Override
+    public String getRule() {
+        return "Deathtouch";
+    }
 
-	@Override
-	public DeathtouchAbility copy() {
-		return fINSTANCE;
-	}
+    @Override
+    public DeathtouchAbility copy() {
+        return fINSTANCE;
+    }
 
 
 

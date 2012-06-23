@@ -36,18 +36,18 @@ import java.util.UUID;
  */
 public class LilianaVess extends mage.sets.magic2010.LilianaVess {
 
-	public LilianaVess(UUID ownerId) {
-		super(ownerId);this.cardNumber = 102;
-		this.expansionSetCode = "M11";
-	}
+    public LilianaVess(UUID ownerId) {
+        super(ownerId);this.cardNumber = 102;
+        this.expansionSetCode = "M11";
+    }
 
-	public LilianaVess(final LilianaVess card) {
-		super(card);
-	}
+    public LilianaVess(final LilianaVess card) {
+        super(card);
+    }
 
-	@Override
-	public LilianaVess copy() {
-		return new LilianaVess(this);
-	}
+    @Override
+    public LilianaVess copy() {
+        return new LilianaVess(this);
+    }
 
 }

@@ -47,7 +47,7 @@ public class SkyEelSchool extends CardImpl<SkyEelSchool> {
         super(ownerId, 44, "Sky-Eel School", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Fish");
-		this.color.setBlue(true);
+        this.color.setBlue(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());

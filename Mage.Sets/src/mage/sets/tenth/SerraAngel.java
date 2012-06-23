@@ -42,25 +42,25 @@ import mage.cards.CardImpl;
  */
 public class SerraAngel extends CardImpl<SerraAngel> {
 
-	public SerraAngel(UUID ownerId) {
-		super(ownerId, 39, "Serra Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
-		this.expansionSetCode = "10E";
-		this.subtype.add("Angel");
-		this.color.setWhite(true);
-		this.power = new MageInt(4);
-		this.toughness = new MageInt(4);
+    public SerraAngel(UUID ownerId) {
+        super(ownerId, 39, "Serra Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
+        this.expansionSetCode = "10E";
+        this.subtype.add("Angel");
+        this.color.setWhite(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
-		this.addAbility(FlyingAbility.getInstance());
-		this.addAbility(VigilanceAbility.getInstance());
-	}
+        this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(VigilanceAbility.getInstance());
+    }
 
-	public SerraAngel(final SerraAngel card) {
-		super(card);
-	}
+    public SerraAngel(final SerraAngel card) {
+        super(card);
+    }
 
-	@Override
-	public SerraAngel copy() {
-		return new SerraAngel(this);
-	}
+    @Override
+    public SerraAngel copy() {
+        return new SerraAngel(this);
+    }
 
 }

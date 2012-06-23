@@ -50,36 +50,36 @@ import java.util.UUID;
  */
 public class AbunaAcolyte extends CardImpl<AbunaAcolyte> {
 
-	final static FilterCreaturePermanent filter = new FilterCreaturePermanent("artifact creature");
+    final static FilterCreaturePermanent filter = new FilterCreaturePermanent("artifact creature");
 
-	static {
-		filter.getCardType().add(CardType.ARTIFACT);
-		filter.setScopeCardType(ComparisonScope.All);
-	}
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.setScopeCardType(ComparisonScope.All);
+    }
 
-	public AbunaAcolyte(UUID ownerId) {
-		super(ownerId, 1, "Abuna Acolyte", Rarity.UNCOMMON,  new CardType[]{CardType.CREATURE}, "{1}{W}");
-		this.expansionSetCode = "SOM";
-		this.subtype.add("Cat");
-		this.subtype.add("Cleric");
-		this.color.setWhite(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
-		Ability ability1 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageTargetEffect(Duration.EndOfTurn, 1), new TapSourceCost());
-		ability1.addTarget(new TargetCreatureOrPlayer());
-		Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageTargetEffect(Duration.EndOfTurn, 2), new TapSourceCost());
-		ability2.addTarget(new TargetCreaturePermanent(filter));
-		this.addAbility(ability1);
-		this.addAbility(ability2);
-	}
+    public AbunaAcolyte(UUID ownerId) {
+        super(ownerId, 1, "Abuna Acolyte", Rarity.UNCOMMON,  new CardType[]{CardType.CREATURE}, "{1}{W}");
+        this.expansionSetCode = "SOM";
+        this.subtype.add("Cat");
+        this.subtype.add("Cleric");
+        this.color.setWhite(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+        Ability ability1 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageTargetEffect(Duration.EndOfTurn, 1), new TapSourceCost());
+        ability1.addTarget(new TargetCreatureOrPlayer());
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageTargetEffect(Duration.EndOfTurn, 2), new TapSourceCost());
+        ability2.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability1);
+        this.addAbility(ability2);
+    }
 
-	public AbunaAcolyte(final AbunaAcolyte card) {
-		super(card);
-	}
+    public AbunaAcolyte(final AbunaAcolyte card) {
+        super(card);
+    }
 
-	@Override
-	public AbunaAcolyte copy() {
-		return new AbunaAcolyte(this);
-	}
+    @Override
+    public AbunaAcolyte copy() {
+        return new AbunaAcolyte(this);
+    }
 
 }

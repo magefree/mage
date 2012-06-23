@@ -52,71 +52,71 @@ import mage.game.permanent.Permanent;
  */
 public class LeylineOfTheVoid extends CardImpl<LeylineOfTheVoid> {
 
-	public LeylineOfTheVoid(UUID ownerId) {
-		super(ownerId, 101, "Leyline of the Void", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
-		this.expansionSetCode = "M11";
-		this.color.setBlack(true);
-		this.addAbility(LeylineAbility.getInstance());
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LeylineOfTheVoidEffect()));
-	}
+    public LeylineOfTheVoid(UUID ownerId) {
+        super(ownerId, 101, "Leyline of the Void", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
+        this.expansionSetCode = "M11";
+        this.color.setBlack(true);
+        this.addAbility(LeylineAbility.getInstance());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LeylineOfTheVoidEffect()));
+    }
 
-	public LeylineOfTheVoid(final LeylineOfTheVoid card) {
-		super(card);
-	}
+    public LeylineOfTheVoid(final LeylineOfTheVoid card) {
+        super(card);
+    }
 
-	@Override
-	public LeylineOfTheVoid copy() {
-		return new LeylineOfTheVoid(this);
-	}
+    @Override
+    public LeylineOfTheVoid copy() {
+        return new LeylineOfTheVoid(this);
+    }
 
 }
 
 class LeylineOfTheVoidEffect extends ReplacementEffectImpl<LeylineOfTheVoidEffect> {
 
-	public LeylineOfTheVoidEffect() {
-		super(Duration.WhileOnBattlefield, Outcome.Benefit);
-		staticText = "If a card would be put into an opponent's graveyard from anywhere, exile it instead";
-	}
+    public LeylineOfTheVoidEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        staticText = "If a card would be put into an opponent's graveyard from anywhere, exile it instead";
+    }
 
-	public LeylineOfTheVoidEffect(final LeylineOfTheVoidEffect effect) {
-		super(effect);
-	}
+    public LeylineOfTheVoidEffect(final LeylineOfTheVoidEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public LeylineOfTheVoidEffect copy() {
-		return new LeylineOfTheVoidEffect(this);
-	}
+    @Override
+    public LeylineOfTheVoidEffect copy() {
+        return new LeylineOfTheVoidEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		if (((ZoneChangeEvent)event).getFromZone() == Zone.BATTLEFIELD) {
-			Permanent permanent = ((ZoneChangeEvent)event).getTarget();
-			if (permanent != null) {
-				return permanent.moveToExile(null, "", source.getId(), game);
-			}
-		}
-		else {
-			Card card = game.getCard(event.getTargetId());
-			if (card != null) {
-				return card.moveToExile(null, "", source.getId(), game);
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        if (((ZoneChangeEvent)event).getFromZone() == Zone.BATTLEFIELD) {
+            Permanent permanent = ((ZoneChangeEvent)event).getTarget();
+            if (permanent != null) {
+                return permanent.moveToExile(null, "", source.getId(), game);
+            }
+        }
+        else {
+            Card card = game.getCard(event.getTargetId());
+            if (card != null) {
+                return card.moveToExile(null, "", source.getId(), game);
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone() == Zone.GRAVEYARD) {
-			if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone() == Zone.GRAVEYARD) {
+            if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

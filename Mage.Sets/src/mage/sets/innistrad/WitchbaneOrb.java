@@ -55,7 +55,7 @@ public class WitchbaneOrb extends CardImpl<WitchbaneOrb> {
 
         // When Witchbane Orb enters the battlefield, destroy all Curses attached to you.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new WitchbaneOrbEffect()));
-        
+
         // You have hexproof.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControllerEffect(HexproofAbility.getInstance())));
 
@@ -76,11 +76,11 @@ class WitchbaneOrbEffect extends OneShotEffect<WitchbaneOrbEffect> {
     public WitchbaneOrbEffect() {
         super(Outcome.Protect);
     }
-    
+
     public WitchbaneOrbEffect(final WitchbaneOrbEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
@@ -100,5 +100,5 @@ class WitchbaneOrbEffect extends OneShotEffect<WitchbaneOrbEffect> {
     public WitchbaneOrbEffect copy() {
         return new WitchbaneOrbEffect(this);
     }
-    
+
 }

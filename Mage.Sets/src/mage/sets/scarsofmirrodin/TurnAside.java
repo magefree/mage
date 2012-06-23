@@ -51,125 +51,125 @@ import java.util.UUID;
  */
 public class TurnAside extends CardImpl<TurnAside> {
 
-	private static FilterSpell filter = new FilterSpell("spell that targets a permanent you control");
+    private static FilterSpell filter = new FilterSpell("spell that targets a permanent you control");
 
-	public TurnAside(UUID ownerId) {
-		super(ownerId, 49, "Turn Aside", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
-		this.expansionSetCode = "SOM";
-		this.color.setBlue(true);
-		this.getSpellAbility().addEffect(new CounterTargetEffect());
-		this.getSpellAbility().addTarget(new CustomTargetSpell(filter));
-	}
+    public TurnAside(UUID ownerId) {
+        super(ownerId, 49, "Turn Aside", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
+        this.expansionSetCode = "SOM";
+        this.color.setBlue(true);
+        this.getSpellAbility().addEffect(new CounterTargetEffect());
+        this.getSpellAbility().addTarget(new CustomTargetSpell(filter));
+    }
 
-	public TurnAside(final TurnAside card) {
-		super(card);
-	}
+    public TurnAside(final TurnAside card) {
+        super(card);
+    }
 
-	@Override
-	public TurnAside copy() {
-		return new TurnAside(this);
-	}
+    @Override
+    public TurnAside copy() {
+        return new TurnAside(this);
+    }
 
-	private class CustomTargetSpell extends TargetObject<CustomTargetSpell> {
+    private class CustomTargetSpell extends TargetObject<CustomTargetSpell> {
 
-		protected FilterSpell filter;
+        protected FilterSpell filter;
 
-		public CustomTargetSpell() {
-			this(1, 1, new FilterSpell());
-		}
+        public CustomTargetSpell() {
+            this(1, 1, new FilterSpell());
+        }
 
-		public CustomTargetSpell(FilterSpell filter) {
-			this(1, 1, filter);
-		}
+        public CustomTargetSpell(FilterSpell filter) {
+            this(1, 1, filter);
+        }
 
-		public CustomTargetSpell(int numTargets, FilterSpell filter) {
-			this(numTargets, numTargets, filter);
-		}
+        public CustomTargetSpell(int numTargets, FilterSpell filter) {
+            this(numTargets, numTargets, filter);
+        }
 
-		public CustomTargetSpell(int minNumTargets, int maxNumTargets, FilterSpell filter) {
-			this.minNumberOfTargets = minNumTargets;
-			this.maxNumberOfTargets = maxNumTargets;
-			this.zone = Constants.Zone.STACK;
-			this.filter = filter;
-			this.targetName = filter.getMessage();
-		}
+        public CustomTargetSpell(int minNumTargets, int maxNumTargets, FilterSpell filter) {
+            this.minNumberOfTargets = minNumTargets;
+            this.maxNumberOfTargets = maxNumTargets;
+            this.zone = Constants.Zone.STACK;
+            this.filter = filter;
+            this.targetName = filter.getMessage();
+        }
 
-		public CustomTargetSpell(final CustomTargetSpell target) {
-			super(target);
-			this.filter = target.filter.copy();
-		}
+        public CustomTargetSpell(final CustomTargetSpell target) {
+            super(target);
+            this.filter = target.filter.copy();
+        }
 
-		@Override
-		public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-			return canChoose(sourceControllerId, game);
-		}
+        @Override
+        public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+            return canChoose(sourceControllerId, game);
+        }
 
-		@Override
-		public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-			return possibleTargets(sourceControllerId, game);
-		}
+        @Override
+        public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+            return possibleTargets(sourceControllerId, game);
+        }
 
-		@Override
-		public boolean canTarget(UUID id, Ability source, Game game) {
-			if (super.canTarget(id, source, game)) {
-				if (targetsMyPermanent(id, source.getControllerId(), game)) {
-					return true;
-				}
-			}
-			return false;
-		}
+        @Override
+        public boolean canTarget(UUID id, Ability source, Game game) {
+            if (super.canTarget(id, source, game)) {
+                if (targetsMyPermanent(id, source.getControllerId(), game)) {
+                    return true;
+                }
+            }
+            return false;
+        }
 
-		@Override
-		public boolean canChoose(UUID sourceControllerId, Game game) {
-			int count = 0;
-			for (StackObject stackObject : game.getStack()) {
-				if (stackObject instanceof Spell && game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match((Spell) stackObject, game)) {
-					if (targetsMyPermanent(stackObject.getId(), sourceControllerId, game)) {
-						count++;
-						if (count >= this.minNumberOfTargets)
-							return true;
-					}
-				}
-			}
-			return false;
-		}
+        @Override
+        public boolean canChoose(UUID sourceControllerId, Game game) {
+            int count = 0;
+            for (StackObject stackObject : game.getStack()) {
+                if (stackObject instanceof Spell && game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match((Spell) stackObject, game)) {
+                    if (targetsMyPermanent(stackObject.getId(), sourceControllerId, game)) {
+                        count++;
+                        if (count >= this.minNumberOfTargets)
+                            return true;
+                    }
+                }
+            }
+            return false;
+        }
 
-		@Override
-		public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
-			Set<UUID> possibleTargets = new HashSet<UUID>();
-			for (StackObject stackObject : game.getStack()) {
-				if (stackObject instanceof Spell && game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match((Spell) stackObject, game)) {
-					if (targetsMyPermanent(stackObject.getId(), sourceControllerId, game)) {
+        @Override
+        public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
+            Set<UUID> possibleTargets = new HashSet<UUID>();
+            for (StackObject stackObject : game.getStack()) {
+                if (stackObject instanceof Spell && game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match((Spell) stackObject, game)) {
+                    if (targetsMyPermanent(stackObject.getId(), sourceControllerId, game)) {
 
-						possibleTargets.add(stackObject.getId());
-					}
-				}
-			}
-			return possibleTargets;
-		}
+                        possibleTargets.add(stackObject.getId());
+                    }
+                }
+            }
+            return possibleTargets;
+        }
 
-		@Override
-		public Filter getFilter() {
-			return filter;
-		}
+        @Override
+        public Filter getFilter() {
+            return filter;
+        }
 
-		private boolean targetsMyPermanent(UUID id, UUID controllerId, Game game) {
-			StackObject spell = game.getStack().getStackObject(id);
-			if (spell != null) {
-				Ability ability = spell.getStackAbility();
-				for (UUID permanentId : ability.getTargets().get(0).getTargets()) {
-					Permanent permanent = game.getPermanent(permanentId);
-					if (permanent != null && permanent.getControllerId().equals(controllerId)) {
-						return true;
-					}
-				}
-			}
-			return false;
-		}
+        private boolean targetsMyPermanent(UUID id, UUID controllerId, Game game) {
+            StackObject spell = game.getStack().getStackObject(id);
+            if (spell != null) {
+                Ability ability = spell.getStackAbility();
+                for (UUID permanentId : ability.getTargets().get(0).getTargets()) {
+                    Permanent permanent = game.getPermanent(permanentId);
+                    if (permanent != null && permanent.getControllerId().equals(controllerId)) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
 
-		@Override
-		public CustomTargetSpell copy() {
-			return new CustomTargetSpell(this);
-		}
-	}
+        @Override
+        public CustomTargetSpell copy() {
+            return new CustomTargetSpell(this);
+        }
+    }
 }

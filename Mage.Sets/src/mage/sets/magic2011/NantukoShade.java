@@ -45,25 +45,25 @@ import mage.cards.CardImpl;
  */
 public class NantukoShade extends CardImpl<NantukoShade> {
 
-	public NantukoShade(UUID ownerId) {
-		super(ownerId, 106, "Nantuko Shade", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{B}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Insect");
-		this.subtype.add("Shade");
-		this.color.setBlack(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(1);
+    public NantukoShade(UUID ownerId) {
+        super(ownerId, 106, "Nantuko Shade", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{B}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Insect");
+        this.subtype.add("Shade");
+        this.color.setBlack(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{B}")));
-	}
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{B}")));
+    }
 
-	public NantukoShade(final NantukoShade card) {
-		super(card);
-	}
+    public NantukoShade(final NantukoShade card) {
+        super(card);
+    }
 
-	@Override
-	public NantukoShade copy() {
-		return new NantukoShade(this);
-	}
+    @Override
+    public NantukoShade copy() {
+        return new NantukoShade(this);
+    }
 
 }

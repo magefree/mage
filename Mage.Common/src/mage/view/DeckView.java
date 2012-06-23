@@ -36,25 +36,25 @@ import java.io.Serializable;
  */
 public class DeckView implements Serializable {
 
-	private String name;
-	private SimpleCardsView cards;
-	private SimpleCardsView sideboard;
+    private String name;
+    private SimpleCardsView cards;
+    private SimpleCardsView sideboard;
 
-	public DeckView(Deck deck) {
-		name = deck.getName();
-		cards = new SimpleCardsView(deck.getCards());
-		sideboard = new SimpleCardsView(deck.getSideboard());
-	}
+    public DeckView(Deck deck) {
+        name = deck.getName();
+        cards = new SimpleCardsView(deck.getCards());
+        sideboard = new SimpleCardsView(deck.getSideboard());
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public SimpleCardsView getCards() {
-		return cards;
-	}
+    public SimpleCardsView getCards() {
+        return cards;
+    }
 
-	public SimpleCardsView getSideboard() {
-		return sideboard;
-	}
+    public SimpleCardsView getSideboard() {
+        return sideboard;
+    }
 }

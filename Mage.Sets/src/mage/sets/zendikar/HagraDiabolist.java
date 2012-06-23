@@ -52,8 +52,8 @@ public class HagraDiabolist extends CardImpl<HagraDiabolist> {
 
     static {
         filter.getSubtype().add("Ally");
-		filter.setScopeSubtype(Filter.ComparisonScope.Any);
-		filter.setTargetController(Constants.TargetController.YOU);
+        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.setTargetController(Constants.TargetController.YOU);
     }
 
     public HagraDiabolist(UUID ownerId) {

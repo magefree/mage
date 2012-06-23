@@ -38,41 +38,41 @@ import mage.view.CardView;
  * @author nantuko
  */
 public class CardHelper {
-	private CardHelper() {
-	}
-	
-	public static String getColor(CardView c) {
-		if (c.getColor().getColorCount() == 0) return "Colorless";
-		else if (c.getColor().getColorCount() > 1) return "Gold";
-		else if (c.getColor().isBlack()) return "Black";
-		else if (c.getColor().isBlue()) return "Blue";
-		else if (c.getColor().isWhite()) return "White";
-		else if (c.getColor().isGreen()) return "Green";
-		else if (c.getColor().isRed()) return "Red";
-		return "";
-	}
-	
-	public static String getType(CardView c) {
-		StringBuilder type = new StringBuilder();
-		for (String superType : c.getSuperTypes()) {
-			type.append(superType);
-			type.append(" ");
-		}
-		for (CardType cardType : c.getCardTypes()) {
-			type.append(cardType.toString());
-			type.append(" ");
-		}
-		if (c.getSubTypes().size() > 0) {
-			type.append("- ");
-			for (String subType : c.getSubTypes()) {
-				type.append(subType);
-				type.append(" ");
-			}
-		}
-		return type.toString();
-	}
-	
-	public static boolean isCreature(CardView c) {
-		return c.getCardTypes().contains(CardType.CREATURE);
-	}
+    private CardHelper() {
+    }
+
+    public static String getColor(CardView c) {
+        if (c.getColor().getColorCount() == 0) return "Colorless";
+        else if (c.getColor().getColorCount() > 1) return "Gold";
+        else if (c.getColor().isBlack()) return "Black";
+        else if (c.getColor().isBlue()) return "Blue";
+        else if (c.getColor().isWhite()) return "White";
+        else if (c.getColor().isGreen()) return "Green";
+        else if (c.getColor().isRed()) return "Red";
+        return "";
+    }
+
+    public static String getType(CardView c) {
+        StringBuilder type = new StringBuilder();
+        for (String superType : c.getSuperTypes()) {
+            type.append(superType);
+            type.append(" ");
+        }
+        for (CardType cardType : c.getCardTypes()) {
+            type.append(cardType.toString());
+            type.append(" ");
+        }
+        if (c.getSubTypes().size() > 0) {
+            type.append("- ");
+            for (String subType : c.getSubTypes()) {
+                type.append(subType);
+                type.append(" ");
+            }
+        }
+        return type.toString();
+    }
+
+    public static boolean isCreature(CardView c) {
+        return c.getCardTypes().contains(CardType.CREATURE);
+    }
 }

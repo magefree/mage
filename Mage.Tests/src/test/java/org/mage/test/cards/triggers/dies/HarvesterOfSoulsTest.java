@@ -32,12 +32,12 @@ public class HarvesterOfSoulsTest extends CardTestPlayerBase {
 
         setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
-        
+
         assertLife(playerA, 20);
         assertLife(playerB, 20);
 
         assertHandCount(playerA, 2);
         assertHandCount(playerB, 0);
     }
-    
+
 }

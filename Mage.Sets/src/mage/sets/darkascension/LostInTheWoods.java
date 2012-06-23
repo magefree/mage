@@ -77,11 +77,11 @@ class LostInTheWoodsEffect extends OneShotEffect<LostInTheWoodsEffect> {
     public LostInTheWoodsEffect() {
         super(Outcome.PreventDamage);
     }
-    
+
     public LostInTheWoodsEffect(final LostInTheWoodsEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());

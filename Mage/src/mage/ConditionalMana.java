@@ -44,93 +44,93 @@ import java.util.UUID;
  */
 public class ConditionalMana extends Mana implements Serializable {
 
-	/**
-	 * Conditions that should be met (all or any depending on comparison scope) to allow spending {@link Mana} mana.
-	 */
-	private List<Condition> conditions = new ArrayList<Condition>();
+    /**
+     * Conditions that should be met (all or any depending on comparison scope) to allow spending {@link Mana} mana.
+     */
+    private List<Condition> conditions = new ArrayList<Condition>();
 
-	/**
-	 * Text displayed as a description for conditional mana.
-	 * Usually includes the conditions that should be met to use this mana.
-	 */
-	protected String staticText = "Conditional mana.";
+    /**
+     * Text displayed as a description for conditional mana.
+     * Usually includes the conditions that should be met to use this mana.
+     */
+    protected String staticText = "Conditional mana.";
 
-	/**
-	 * By default all conditions should be met
-	 */
-	private Filter.ComparisonScope scope = Filter.ComparisonScope.All;
+    /**
+     * By default all conditions should be met
+     */
+    private Filter.ComparisonScope scope = Filter.ComparisonScope.All;
 
     /**
      * UUID of source for mana.
      */
     private UUID manaProducerId;
 
-	public ConditionalMana(Mana mana) {
-		super(mana);
-	}
+    public ConditionalMana(Mana mana) {
+        super(mana);
+    }
 
-	public ConditionalMana(ConditionalMana conditionalMana) {
-		super(conditionalMana);
-		conditions = conditionalMana.conditions;
-		scope = conditionalMana.scope;
-		staticText = conditionalMana.staticText;
-	}
+    public ConditionalMana(ConditionalMana conditionalMana) {
+        super(conditionalMana);
+        conditions = conditionalMana.conditions;
+        scope = conditionalMana.scope;
+        staticText = conditionalMana.staticText;
+    }
 
-	public void addCondition(Condition condition) {
-		this.conditions.add(condition);
-	}
+    public void addCondition(Condition condition) {
+        this.conditions.add(condition);
+    }
 
-	public void setComparisonScope(Filter.ComparisonScope scope) {
-		this.scope = scope;
-	}
+    public void setComparisonScope(Filter.ComparisonScope scope) {
+        this.scope = scope;
+    }
 
-	public boolean apply(Ability ability, Game game, UUID manaProducerId) {
-		if (conditions.size() == 0) {
-			throw new IllegalStateException("Conditional mana should contain at least one Condition");
-		}
-		for (Condition condition : conditions) {
+    public boolean apply(Ability ability, Game game, UUID manaProducerId) {
+        if (conditions.size() == 0) {
+            throw new IllegalStateException("Conditional mana should contain at least one Condition");
+        }
+        for (Condition condition : conditions) {
             boolean applied = (condition instanceof ManaCondition) ?
                     ((ManaCondition)condition).apply(game, ability, manaProducerId) : condition.apply(game, ability);
 
             if (!applied) {
-				// if one condition fails, return false only if All conditions should be met
-				// otherwise it may happen that Any other condition will be ok
-				if (scope.equals(Filter.ComparisonScope.All)) {
-					return false;
-				}
-			} else {
-				// if one condition succeeded, return true only if Any conditions should be met
-				// otherwise it may happen that any other condition will fail
-				if (scope.equals(Filter.ComparisonScope.Any)) {
-					return true;
-				}
-			}
-		}
-		// we are here
-		// if All conditions should be met, then it's Ok (return true)
-		// if Any, then it should have already returned true, so returning false here
-		return scope.equals(Filter.ComparisonScope.All);
-	}
+                // if one condition fails, return false only if All conditions should be met
+                // otherwise it may happen that Any other condition will be ok
+                if (scope.equals(Filter.ComparisonScope.All)) {
+                    return false;
+                }
+            } else {
+                // if one condition succeeded, return true only if Any conditions should be met
+                // otherwise it may happen that any other condition will fail
+                if (scope.equals(Filter.ComparisonScope.Any)) {
+                    return true;
+                }
+            }
+        }
+        // we are here
+        // if All conditions should be met, then it's Ok (return true)
+        // if Any, then it should have already returned true, so returning false here
+        return scope.equals(Filter.ComparisonScope.All);
+    }
 
-	@Override
-	public ConditionalMana copy() {
-		return new ConditionalMana(this);
-	}
+    @Override
+    public ConditionalMana copy() {
+        return new ConditionalMana(this);
+    }
 
-	public String getDescription() {
-		return staticText;
-	}
+    public String getDescription() {
+        return staticText;
+    }
 
     public void removeAll(FilterMana filter) {
-		if (filter == null) {
-			return;
-		}
-		if (filter.isBlack()) black = 0;
-		if (filter.isBlue()) blue = 0;
-		if (filter.isWhite()) white = 0;
-		if (filter.isGreen()) green = 0;
-		if (filter.isRed()) red = 0;
-		if (filter.isColorless()) colorless = 0;
+        if (filter == null) {
+            return;
+        }
+        if (filter.isBlack()) black = 0;
+        if (filter.isBlue()) blue = 0;
+        if (filter.isWhite()) white = 0;
+        if (filter.isGreen()) green = 0;
+        if (filter.isRed()) red = 0;
+        if (filter.isColorless()) colorless = 0;
     }
 
     public UUID getManaProducerId() {

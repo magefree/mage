@@ -37,21 +37,21 @@ import mage.game.events.GameEvent.EventType;
  */
 public class PostCombatMainPhase extends Phase<PostCombatMainPhase> {
 
-	public PostCombatMainPhase() {
-		this.type = TurnPhase.POSTCOMBAT_MAIN;
-		this.event = EventType.POSTCOMBAT_MAIN_PHASE;
-		this.preEvent = EventType.POSTCOMBAT_MAIN_PHASE_PRE;
-		this.postEvent = EventType.POSTCOMBAT_MAIN_STEP_POST;
-		this.steps.add(new PostCombatMainStep());
-	}
+    public PostCombatMainPhase() {
+        this.type = TurnPhase.POSTCOMBAT_MAIN;
+        this.event = EventType.POSTCOMBAT_MAIN_PHASE;
+        this.preEvent = EventType.POSTCOMBAT_MAIN_PHASE_PRE;
+        this.postEvent = EventType.POSTCOMBAT_MAIN_STEP_POST;
+        this.steps.add(new PostCombatMainStep());
+    }
 
-	public PostCombatMainPhase(final PostCombatMainPhase phase) {
-		super(phase);
-	}
+    public PostCombatMainPhase(final PostCombatMainPhase phase) {
+        super(phase);
+    }
 
-	@Override
-	public PostCombatMainPhase copy() {
-		return new PostCombatMainPhase(this);
-	}
+    @Override
+    public PostCombatMainPhase copy() {
+        return new PostCombatMainPhase(this);
+    }
 
 }

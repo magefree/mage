@@ -41,22 +41,22 @@ package mage.client.dialog;
  */
 public class QuestionDialog extends MageDialog {
 
-	private boolean answer;
+    private boolean answer;
 
     /** Creates new form QuestionDialog */
     public QuestionDialog() {
         initComponents();
     }
 
-	public void showDialog(String question) {
-		this.lblQuestion.setText(question);
-		this.setModal(true);
-		this.setVisible(true);
-	}
+    public void showDialog(String question) {
+        this.lblQuestion.setText(question);
+        this.setModal(true);
+        this.setVisible(true);
+    }
 
-	public boolean getAnswer() {
-		return answer;
-	}
+    public boolean getAnswer() {
+        return answer;
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -117,15 +117,15 @@ public class QuestionDialog extends MageDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-	private void btnYesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYesActionPerformed
-		this.answer = true;
-		this.hideDialog();
-	}//GEN-LAST:event_btnYesActionPerformed
+    private void btnYesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYesActionPerformed
+        this.answer = true;
+        this.hideDialog();
+    }//GEN-LAST:event_btnYesActionPerformed
 
-	private void btnNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoActionPerformed
-		this.answer = false;
-		this.hideDialog();
-	}//GEN-LAST:event_btnNoActionPerformed
+    private void btnNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoActionPerformed
+        this.answer = false;
+        this.hideDialog();
+    }//GEN-LAST:event_btnNoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

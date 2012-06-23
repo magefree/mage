@@ -43,57 +43,57 @@ import mage.game.events.ZoneChangeEvent;
  */
 public class ZoneChangeTriggeredAbility<T extends ZoneChangeTriggeredAbility<T>> extends TriggeredAbilityImpl<T> {
 
-	protected Zone fromZone;
-	protected Zone toZone;
-	protected String rule;
+    protected Zone fromZone;
+    protected Zone toZone;
+    protected String rule;
 
-	public ZoneChangeTriggeredAbility(Zone fromZone, Zone toZone, Effect effect, String rule, boolean optional) {
-		super(fromZone, effect, optional);
-		this.fromZone = fromZone;
-		this.toZone = toZone;
-		this.rule = rule;
-	}
+    public ZoneChangeTriggeredAbility(Zone fromZone, Zone toZone, Effect effect, String rule, boolean optional) {
+        super(fromZone, effect, optional);
+        this.fromZone = fromZone;
+        this.toZone = toZone;
+        this.rule = rule;
+    }
 
-	public ZoneChangeTriggeredAbility(Zone toZone, Effect effect, String rule, boolean optional) {
-		super(toZone, effect, optional);
-		this.fromZone = null;
-		this.toZone = toZone;
-		this.rule = rule;
-	}
+    public ZoneChangeTriggeredAbility(Zone toZone, Effect effect, String rule, boolean optional) {
+        super(toZone, effect, optional);
+        this.fromZone = null;
+        this.toZone = toZone;
+        this.rule = rule;
+    }
 
-	public ZoneChangeTriggeredAbility(ZoneChangeTriggeredAbility ability) {
-		super(ability);
-		this.fromZone = ability.fromZone;
-		this.toZone = ability.toZone;
-		this.rule = ability.rule;
-	}
+    public ZoneChangeTriggeredAbility(ZoneChangeTriggeredAbility ability) {
+        super(ability);
+        this.fromZone = ability.fromZone;
+        this.toZone = ability.toZone;
+        this.rule = ability.rule;
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId())) {
-			ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-			if ((fromZone == null || zEvent.getFromZone() == fromZone) && (toZone == null || zEvent.getToZone() == toZone)) {
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId())) {
+            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+            if ((fromZone == null || zEvent.getFromZone() == fromZone) && (toZone == null || zEvent.getToZone() == toZone)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return rule + super.getRule();
-	}
+    @Override
+    public String getRule() {
+        return rule + super.getRule();
+    }
 
-	@Override
-	public T copy() {
-		return (T)new ZoneChangeTriggeredAbility(this);
-	}
+    @Override
+    public T copy() {
+        return (T)new ZoneChangeTriggeredAbility(this);
+    }
 
-	public Zone getFromZone() {
-		return fromZone;
-	}
+    public Zone getFromZone() {
+        return fromZone;
+    }
 
-	public Zone getToZone() {
-		return toZone;
-	}
+    public Zone getToZone() {
+        return toZone;
+    }
 }

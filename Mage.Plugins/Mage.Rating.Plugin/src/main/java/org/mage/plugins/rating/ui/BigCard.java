@@ -59,73 +59,73 @@ import org.jdesktop.swingx.JXPanel;
  */
 public class BigCard extends javax.swing.JPanel {
 
-	protected Image bigImage;
-	protected UUID cardId;
-	protected JXPanel panel;
-	protected boolean initState;
+    protected Image bigImage;
+    protected UUID cardId;
+    protected JXPanel panel;
+    protected boolean initState;
 
-	public BigCard() {
+    public BigCard() {
         initComponents();
     }
-	
-	protected void initBounds() {
-    	initState = true;
+
+    protected void initBounds() {
+        initState = true;
         scrollPane.setBounds(20, 230, 210, 120);
         scrollPane.setBounds(new Rectangle(CONTENT_MAX_XOFFSET, TEXT_MAX_YOFFSET, TEXT_MAX_WIDTH, TEXT_MAX_HEIGHT));
-	}
-    
-	public void setCard(UUID cardId, Image image, List<String> strings) {
-		if (this.cardId == null || !this.cardId.equals(cardId)) {
-			if (this.panel != null) remove(this.panel);
-			this.cardId = cardId;
-			bigImage = image;
-			this.repaint();
-			drawText(strings);
-		}
-	}
+    }
+
+    public void setCard(UUID cardId, Image image, List<String> strings) {
+        if (this.cardId == null || !this.cardId.equals(cardId)) {
+            if (this.panel != null) remove(this.panel);
+            this.cardId = cardId;
+            bigImage = image;
+            this.repaint();
+            drawText(strings);
+        }
+    }
 
     public UUID getCardId() {
-		return cardId;
-	}
-    
-	private void drawText(java.util.List<String> strings) {
-		text.setText("");
-		StyledDocument doc = text.getStyledDocument();
+        return cardId;
+    }
 
-		try {
-			for (String line: strings) {
-				doc.insertString(doc.getLength(), line + "\n", doc.getStyle("regular"));
-			}
-		} catch (BadLocationException ble) { }
-		text.setCaretPosition(0);
-	}
+    private void drawText(java.util.List<String> strings) {
+        text.setText("");
+        StyledDocument doc = text.getStyledDocument();
 
-	@Override
-	public void paintComponent(Graphics graphics) {
-		if (bigImage != null)
-			graphics.drawImage(bigImage, 0, 0, this);
-		super.paintComponent(graphics);
- 	}
+        try {
+            for (String line: strings) {
+                doc.insertString(doc.getLength(), line + "\n", doc.getStyle("regular"));
+            }
+        } catch (BadLocationException ble) { }
+        text.setCaretPosition(0);
+    }
+
+    @Override
+    public void paintComponent(Graphics graphics) {
+        if (bigImage != null)
+            graphics.drawImage(bigImage, 0, 0, this);
+        super.paintComponent(graphics);
+     }
 
     public void hideTextComponent() {
-    	this.scrollPane.setVisible(false);
+        this.scrollPane.setVisible(false);
     }
 
     public void showTextComponent() {
-    	if (!initState) {initBounds();}
-    	this.scrollPane.setVisible(true);
+        if (!initState) {initBounds();}
+        this.scrollPane.setVisible(true);
     }
 
     public void addJXPanel(UUID cardId, JXPanel jxPanel) {
-    	bigImage = null;
-		synchronized (this) {
-			if (this.panel != null) remove(this.panel);
-			this.panel = jxPanel;
-			add(jxPanel);	
-		}
-		this.repaint();
+        bigImage = null;
+        synchronized (this) {
+            if (this.panel != null) remove(this.panel);
+            this.panel = jxPanel;
+            add(jxPanel);    
+        }
+        this.repaint();
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.

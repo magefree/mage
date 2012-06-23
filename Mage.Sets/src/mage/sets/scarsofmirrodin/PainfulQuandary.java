@@ -51,83 +51,83 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class PainfulQuandary extends CardImpl<PainfulQuandary> {
 
-	public PainfulQuandary(UUID ownerId) {
-		super(ownerId, 73, "Painful Quandary", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
-		this.expansionSetCode = "SOM";
-		this.color.setBlack(true);
-		this.addAbility(new PainfulQuandryAbility());
-	}
+    public PainfulQuandary(UUID ownerId) {
+        super(ownerId, 73, "Painful Quandary", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
+        this.expansionSetCode = "SOM";
+        this.color.setBlack(true);
+        this.addAbility(new PainfulQuandryAbility());
+    }
 
-	public PainfulQuandary(final PainfulQuandary card) {
-		super(card);
-	}
+    public PainfulQuandary(final PainfulQuandary card) {
+        super(card);
+    }
 
-	@Override
-	public PainfulQuandary copy() {
-		return new PainfulQuandary(this);
-	}
+    @Override
+    public PainfulQuandary copy() {
+        return new PainfulQuandary(this);
+    }
 
 }
 
 class PainfulQuandryAbility extends TriggeredAbilityImpl<PainfulQuandryAbility> {
 
-	public PainfulQuandryAbility() {
-		super(Zone.BATTLEFIELD, new PainfulQuandryEffect());
-	}
-	
-	public PainfulQuandryAbility(final PainfulQuandryAbility ability) {
-		super(ability);
-	}
-	
-	@Override
-	public PainfulQuandryAbility copy() {
-		return new PainfulQuandryAbility(this);
-	}
+    public PainfulQuandryAbility() {
+        super(Zone.BATTLEFIELD, new PainfulQuandryEffect());
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.SPELL_CAST && game.getOpponents(controllerId).contains(event.getPlayerId())) {
+    public PainfulQuandryAbility(final PainfulQuandryAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public PainfulQuandryAbility copy() {
+        return new PainfulQuandryAbility(this);
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.SPELL_CAST && game.getOpponents(controllerId).contains(event.getPlayerId())) {
             this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
-			return true;
-		}
-		return false;
-	}
-	
-	@Override
-	public String getRule() {
-		return "Whenever an opponent casts a spell, that player loses 5 life unless he or she discards a card.";
-	}
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever an opponent casts a spell, that player loses 5 life unless he or she discards a card.";
+    }
 }
 
 class PainfulQuandryEffect extends OneShotEffect<PainfulQuandryEffect> {
 
-	public PainfulQuandryEffect() {
-		super(Outcome.Damage);
-		staticText = "player loses 5 life unless he or she discards a card";
-	}
+    public PainfulQuandryEffect() {
+        super(Outcome.Damage);
+        staticText = "player loses 5 life unless he or she discards a card";
+    }
 
-	public PainfulQuandryEffect(final PainfulQuandryEffect effect) {
-		super(effect);
-	}
+    public PainfulQuandryEffect(final PainfulQuandryEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public PainfulQuandryEffect copy() {
-		return new PainfulQuandryEffect(this);
-	}
+    @Override
+    public PainfulQuandryEffect copy() {
+        return new PainfulQuandryEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(targetPointer.getFirst(game, source));
-		if (player != null) {
-			Cost cost = new DiscardTargetCost(new TargetCardInHand());
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        if (player != null) {
+            Cost cost = new DiscardTargetCost(new TargetCardInHand());
             if (cost.canPay(player.getId(), player.getId(), game)) {
                 if (!cost.pay(source, game, player.getId(), player.getId(), false)) {
                     player.loseLife(5, game);
                 }
-    			return true;
+                return true;
             }
-		}
-		return false;
-	}
+        }
+        return false;
+    }
 
 }

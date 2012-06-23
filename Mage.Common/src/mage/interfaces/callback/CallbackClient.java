@@ -34,6 +34,6 @@ package mage.interfaces.callback;
  */
 public interface CallbackClient {
 
-	public void processCallback(ClientCallback callback);
+    public void processCallback(ClientCallback callback);
 
 }

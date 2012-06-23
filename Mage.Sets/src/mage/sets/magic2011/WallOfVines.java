@@ -42,26 +42,26 @@ import mage.cards.CardImpl;
  */
 public class WallOfVines extends CardImpl<WallOfVines> {
 
-	public WallOfVines(UUID ownerId) {
-		super(ownerId, 199, "Wall of Vines", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Plant");
-		this.subtype.add("Wall");
-		this.color.setGreen(true);
-		this.power = new MageInt(0);
-		this.toughness = new MageInt(3);
+    public WallOfVines(UUID ownerId) {
+        super(ownerId, 199, "Wall of Vines", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Plant");
+        this.subtype.add("Wall");
+        this.color.setGreen(true);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(3);
 
-		this.addAbility(DefenderAbility.getInstance());
-		this.addAbility(ReachAbility.getInstance());
-	}
+        this.addAbility(DefenderAbility.getInstance());
+        this.addAbility(ReachAbility.getInstance());
+    }
 
-	public WallOfVines(final WallOfVines card) {
-		super(card);
-	}
+    public WallOfVines(final WallOfVines card) {
+        super(card);
+    }
 
-	@Override
-	public WallOfVines copy() {
-		return new WallOfVines(this);
-	}
+    @Override
+    public WallOfVines copy() {
+        return new WallOfVines(this);
+    }
 
 }

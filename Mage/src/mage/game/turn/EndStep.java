@@ -37,20 +37,20 @@ import mage.game.events.GameEvent.EventType;
  */
 public class EndStep extends Step<EndStep> {
 
-	public EndStep() {
-		super(PhaseStep.END_TURN, true);
-		this.stepEvent = EventType.END_TURN_STEP;
-		this.preStepEvent = EventType.END_TURN_STEP_PRE;
-		this.postStepEvent = EventType.END_TURN_STEP_POST;
-	}
+    public EndStep() {
+        super(PhaseStep.END_TURN, true);
+        this.stepEvent = EventType.END_TURN_STEP;
+        this.preStepEvent = EventType.END_TURN_STEP_PRE;
+        this.postStepEvent = EventType.END_TURN_STEP_POST;
+    }
 
-	public EndStep(final EndStep step) {
-		super(step);
-	}
+    public EndStep(final EndStep step) {
+        super(step);
+    }
 
-	@Override
-	public EndStep copy() {
-		return new EndStep(this);
-	}
+    @Override
+    public EndStep copy() {
+        return new EndStep(this);
+    }
 
 }

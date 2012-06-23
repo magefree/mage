@@ -42,26 +42,26 @@ import mage.cards.CardImpl;
  */
 public class CloudCrusader extends CardImpl<CloudCrusader> {
 
-	public CloudCrusader(UUID ownerId) {
-		super(ownerId, 10, "Cloud Crusader", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Human");
-		this.subtype.add("Knight");
-		this.color.setWhite(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(3);
+    public CloudCrusader(UUID ownerId) {
+        super(ownerId, 10, "Cloud Crusader", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Human");
+        this.subtype.add("Knight");
+        this.color.setWhite(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
 
-		this.addAbility(FlyingAbility.getInstance());
-		this.addAbility(FirstStrikeAbility.getInstance());
-	}
+        this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(FirstStrikeAbility.getInstance());
+    }
 
-	public CloudCrusader(final CloudCrusader card) {
-		super(card);
-	}
+    public CloudCrusader(final CloudCrusader card) {
+        super(card);
+    }
 
-	@Override
-	public CloudCrusader copy() {
-		return new CloudCrusader(this);
-	}
+    @Override
+    public CloudCrusader copy() {
+        return new CloudCrusader(this);
+    }
 
 }

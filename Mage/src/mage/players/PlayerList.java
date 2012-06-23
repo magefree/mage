@@ -38,41 +38,41 @@ import mage.util.CircularList;
  */
 public class PlayerList extends CircularList<UUID> {
 
-	public PlayerList() {}
+    public PlayerList() {}
 
-	public PlayerList(final PlayerList list) {
-		super(list);
-	}
+    public PlayerList(final PlayerList list) {
+        super(list);
+    }
 
-	public Player getNext(Game game) {
-		Player player;
-		UUID start = this.get();
-		while (true) {
-			player = game.getPlayer(super.getNext());
-			if (!player.hasLeft() && !player.hasLost())
-				break;
-			if (player.getId().equals(start))
-				return null;
-		}
-		return player;
-	}
+    public Player getNext(Game game) {
+        Player player;
+        UUID start = this.get();
+        while (true) {
+            player = game.getPlayer(super.getNext());
+            if (!player.hasLeft() && !player.hasLost())
+                break;
+            if (player.getId().equals(start))
+                return null;
+        }
+        return player;
+    }
 
-	public Player getPrevious(Game game) {
-		Player player;
-		UUID start = this.get();
-		while (true) {
-			player = game.getPlayer(super.getPrevious());
-			if (!player.hasLeft() && !player.hasLost())
-				break;
-			if (player.getId().equals(start))
-				return null;
-		}
-		return player;
-	}
+    public Player getPrevious(Game game) {
+        Player player;
+        UUID start = this.get();
+        while (true) {
+            player = game.getPlayer(super.getPrevious());
+            if (!player.hasLeft() && !player.hasLost())
+                break;
+            if (player.getId().equals(start))
+                return null;
+        }
+        return player;
+    }
 
-	@Override
-	public PlayerList copy() {
-		return new PlayerList(this);
-	}
+    @Override
+    public PlayerList copy() {
+        return new PlayerList(this);
+    }
 
 }

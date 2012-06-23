@@ -43,60 +43,60 @@ import org.apache.log4j.Logger;
  */
 public class ReplaySession implements GameCallback {
 
-	private final static Logger logger = Logger.getLogger(ReplaySession.class);
-	private GameReplay replay;
-	protected UUID userId;
+    private final static Logger logger = Logger.getLogger(ReplaySession.class);
+    private GameReplay replay;
+    protected UUID userId;
 
-	ReplaySession(UUID gameId, UUID userId) {
-		this.replay = new GameReplay(gameId);
-		this.userId = userId;
-	}
+    ReplaySession(UUID gameId, UUID userId) {
+        this.replay = new GameReplay(gameId);
+        this.userId = userId;
+    }
 
-	public void replay() {
-		replay.start();
-		User user = UserManager.getInstance().getUser(userId);
-		if (user != null) {
-			user.fireCallback(new ClientCallback("replayInit", replay.getGame().getId(), new GameView(replay.next(), replay.getGame())));
-		}
-	}
+    public void replay() {
+        replay.start();
+        User user = UserManager.getInstance().getUser(userId);
+        if (user != null) {
+            user.fireCallback(new ClientCallback("replayInit", replay.getGame().getId(), new GameView(replay.next(), replay.getGame())));
+        }
+    }
 
-	public void stop() {
-		gameResult("stopped replay");
-	}
+    public void stop() {
+        gameResult("stopped replay");
+    }
 
-	public synchronized void next() {
-		updateGame(replay.next(), replay.getGame());
-	}
+    public synchronized void next() {
+        updateGame(replay.next(), replay.getGame());
+    }
 
-	public synchronized void next(int moves) {
+    public synchronized void next(int moves) {
         for (int i = 0; i < moves; i++) {
             replay.next();
         }
-		updateGame(replay.next(), replay.getGame());
-	}
+        updateGame(replay.next(), replay.getGame());
+    }
 
     public synchronized void previous() {
-		updateGame(replay.previous(), replay.getGame());
-	}
+        updateGame(replay.previous(), replay.getGame());
+    }
 
-	@Override
-	public void gameResult(final String result) {
-		User user = UserManager.getInstance().getUser(userId);
-		if (user != null) {
-			user.fireCallback(new ClientCallback("replayDone", replay.getGame().getId(), result));
-		}
-	}
+    @Override
+    public void gameResult(final String result) {
+        User user = UserManager.getInstance().getUser(userId);
+        if (user != null) {
+            user.fireCallback(new ClientCallback("replayDone", replay.getGame().getId(), result));
+        }
+    }
 
-	private void updateGame(final GameState state, Game game) {
-		if (state == null) {
-			gameResult("game ended");
-		}
-		else {
-			User user = UserManager.getInstance().getUser(userId);
-			if (user != null) {
-				user.fireCallback(new ClientCallback("replayUpdate", replay.getGame().getId(), new GameView(state, game)));
-			}
-		}
-	}
+    private void updateGame(final GameState state, Game game) {
+        if (state == null) {
+            gameResult("game ended");
+        }
+        else {
+            User user = UserManager.getInstance().getUser(userId);
+            if (user != null) {
+                user.fireCallback(new ClientCallback("replayUpdate", replay.getGame().getId(), new GameView(state, game)));
+            }
+        }
+    }
 
 }

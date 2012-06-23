@@ -81,18 +81,18 @@ class InameDeathAspectEffect extends SearchEffect<InameDeathAspectEffect> {
     }
 
     public InameDeathAspectEffect() {
-		super(new TargetCardInLibrary(0, Integer.MAX_VALUE, filter), Constants.Outcome.Neutral);
-		staticText = "search your library for any number of Spirit cards and put them into your graveyard. If you do, shuffle your library";
+        super(new TargetCardInLibrary(0, Integer.MAX_VALUE, filter), Constants.Outcome.Neutral);
+        staticText = "search your library for any number of Spirit cards and put them into your graveyard. If you do, shuffle your library";
     }
 
-	public InameDeathAspectEffect(final InameDeathAspectEffect effect) {
-		super(effect);
-	}
+    public InameDeathAspectEffect(final InameDeathAspectEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public InameDeathAspectEffect copy() {
-		return new InameDeathAspectEffect(this);
-	}
+    @Override
+    public InameDeathAspectEffect copy() {
+        return new InameDeathAspectEffect(this);
+    }
 
     @Override
     public boolean apply(Game game, Ability source) {

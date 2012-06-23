@@ -38,28 +38,28 @@ import mage.abilities.StaticAbility;
  */
 public class LifelinkAbility extends StaticAbility<LifelinkAbility> {
 
-	private static final LifelinkAbility fINSTANCE =  new LifelinkAbility();
+    private static final LifelinkAbility fINSTANCE =  new LifelinkAbility();
 
-	private Object readResolve() throws ObjectStreamException {
-		return fINSTANCE;
-	}
+    private Object readResolve() throws ObjectStreamException {
+        return fINSTANCE;
+    }
 
-	public static LifelinkAbility getInstance() {
-		return fINSTANCE;
-	}
+    public static LifelinkAbility getInstance() {
+        return fINSTANCE;
+    }
 
-	private LifelinkAbility() {
-		super(Zone.ALL, null);
-	}
+    private LifelinkAbility() {
+        super(Zone.ALL, null);
+    }
 
-	@Override
-	public String getRule() {
-		return "Lifelink";
-	}
+    @Override
+    public String getRule() {
+        return "Lifelink";
+    }
 
-	@Override
-	public LifelinkAbility copy() {
-		return fINSTANCE;
-	}
+    @Override
+    public LifelinkAbility copy() {
+        return fINSTANCE;
+    }
 
 }

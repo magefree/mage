@@ -60,9 +60,9 @@ class GermToken extends Token {
     public GermToken() {
         super("Germ", "a 0/0 black Germ creature token");
         cardType.add(Constants.CardType.CREATURE);
-		color = ObjectColor.BLACK;
-		subtype.add("Germ");
-		power = new MageInt(0);
-		toughness = new MageInt(0);
+        color = ObjectColor.BLACK;
+        subtype.add("Germ");
+        power = new MageInt(0);
+        toughness = new MageInt(0);
     }
 }

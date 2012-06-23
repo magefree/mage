@@ -47,7 +47,7 @@ public class VulshokRefugee extends CardImpl<VulshokRefugee> {
     static {
         filter.setUseColor(true);
         filter.getColor().setRed(true);
-		filter.setScopeColor(ComparisonScope.Any);
+        filter.setScopeColor(ComparisonScope.Any);
     }
 
     public VulshokRefugee(UUID ownerId) {

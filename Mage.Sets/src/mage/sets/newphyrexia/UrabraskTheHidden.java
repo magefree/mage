@@ -99,9 +99,9 @@ class UrabraskTheHiddenEffect extends ReplacementEffectImpl<UrabraskTheHiddenEff
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             Card c = game.getCard(event.getTargetId());
             if (c != null && c.getCardType().contains(CardType.CREATURE))
-			    return true;
-		}
-		return false;
+                return true;
+        }
+        return false;
     }
 
     @Override

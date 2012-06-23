@@ -38,33 +38,33 @@ import mage.game.Game;
  */
 public class TenOrLessLifeCondition implements Condition {
 
-	public static enum CheckType { AN_OPPONENT, CONTROLLER, TARGET_OPPONENT };
+    public static enum CheckType { AN_OPPONENT, CONTROLLER, TARGET_OPPONENT };
 
-	private CheckType type;
+    private CheckType type;
 
-	public TenOrLessLifeCondition ( CheckType type ) {
-		this.type = type;
-	}
+    public TenOrLessLifeCondition ( CheckType type ) {
+        this.type = type;
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		boolean conditionApplies = false;
+    @Override
+    public boolean apply(Game game, Ability source) {
+        boolean conditionApplies = false;
 
-		switch ( this.type ) {
-			case AN_OPPONENT:
-				for ( UUID opponentUUID : game.getOpponents(source.getControllerId()) ) {
-					conditionApplies |= game.getPlayer(opponentUUID).getLife() <= 10;
-				}
-				break;
-			case CONTROLLER:
-				conditionApplies |= game.getPlayer(source.getControllerId()).getLife() <= 10;
-				break;
-			case TARGET_OPPONENT:
-				//TODO: Implement this.
-				break;
-		}
+        switch ( this.type ) {
+            case AN_OPPONENT:
+                for ( UUID opponentUUID : game.getOpponents(source.getControllerId()) ) {
+                    conditionApplies |= game.getPlayer(opponentUUID).getLife() <= 10;
+                }
+                break;
+            case CONTROLLER:
+                conditionApplies |= game.getPlayer(source.getControllerId()).getLife() <= 10;
+                break;
+            case TARGET_OPPONENT:
+                //TODO: Implement this.
+                break;
+        }
 
-		return conditionApplies;
-	}
+        return conditionApplies;
+    }
 
 }

@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	
-	<modelVersion>4.0.0</modelVersion>
-	
-	<parent>
-		<groupId>org.mage</groupId>
-		<artifactId>mage-root</artifactId>
-		<version>0.8.6</version>
-	</parent>
-	
-	<artifactId>mage-server-plugins</artifactId>
-	<packaging>pom</packaging>
-	<name>Mage Server Plugins</name>
-	<description>Mage Server Plugins POM</description>
 
-	<modules>
-		<module>Mage.Deck.Constructed</module>
-		<module>Mage.Deck.Limited</module>
-		<module>Mage.Game.FreeForAll</module>
-		<module>Mage.Game.TwoPlayerDuel</module>
-		<module>Mage.Player.AI</module>
-		<module>Mage.Player.AIMinimax</module>
-		<module>Mage.Player.AI.MA</module>
-		<module>Mage.Player.AIMCTS</module>
-		<module>Mage.Player.Human</module>
-		<module>Mage.Tournament.BoosterDraft</module>
-		<module>Mage.Tournament.Sealed</module>
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.mage</groupId>
+        <artifactId>mage-root</artifactId>
+        <version>0.8.6</version>
+    </parent>
+
+    <artifactId>mage-server-plugins</artifactId>
+    <packaging>pom</packaging>
+    <name>Mage Server Plugins</name>
+    <description>Mage Server Plugins POM</description>
+
+    <modules>
+        <module>Mage.Deck.Constructed</module>
+        <module>Mage.Deck.Limited</module>
+        <module>Mage.Game.FreeForAll</module>
+        <module>Mage.Game.TwoPlayerDuel</module>
+        <module>Mage.Player.AI</module>
+        <module>Mage.Player.AIMinimax</module>
+        <module>Mage.Player.AI.MA</module>
+        <module>Mage.Player.AIMCTS</module>
+        <module>Mage.Player.Human</module>
+        <module>Mage.Tournament.BoosterDraft</module>
+        <module>Mage.Tournament.Sealed</module>
   </modules>
-	
+
 </project>

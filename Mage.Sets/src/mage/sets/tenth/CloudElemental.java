@@ -47,7 +47,7 @@ public class CloudElemental extends CardImpl<CloudElemental> {
         super(ownerId, 74, "Cloud Elemental", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.expansionSetCode = "10E";
         this.subtype.add("Elemental");
-        
+
         this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

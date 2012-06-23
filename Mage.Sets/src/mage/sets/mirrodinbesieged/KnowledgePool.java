@@ -54,23 +54,23 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class KnowledgePool extends CardImpl<KnowledgePool> {
 
-	public KnowledgePool(UUID ownerId) {
-		super(ownerId, 111, "Knowledge Pool", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{6}");
-		this.expansionSetCode = "MBS";
-		// Imprint - When Knowledge Pool enters the battlefield, each player exiles the top three cards of his or her library
-		this.addAbility(new EntersBattlefieldTriggeredAbility(new KnowledgePoolEffect1(), false));
+    public KnowledgePool(UUID ownerId) {
+        super(ownerId, 111, "Knowledge Pool", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{6}");
+        this.expansionSetCode = "MBS";
+        // Imprint - When Knowledge Pool enters the battlefield, each player exiles the top three cards of his or her library
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new KnowledgePoolEffect1(), false));
         // Whenever a player casts a spell from his or her hand, that player exiles it. If the player does, he or she may cast another nonland card exiled with Knowledge Pool without paying that card's mana cost.
-		this.addAbility(new KnowledgePoolAbility());
-	}
+        this.addAbility(new KnowledgePoolAbility());
+    }
 
-	public KnowledgePool(final KnowledgePool card) {
-		super(card);
-	}
+    public KnowledgePool(final KnowledgePool card) {
+        super(card);
+    }
 
-	@Override
-	public KnowledgePool copy() {
-		return new KnowledgePool(this);
-	}
+    @Override
+    public KnowledgePool copy() {
+        return new KnowledgePool(this);
+    }
 
 }
 
@@ -80,17 +80,17 @@ class KnowledgePoolEffect1 extends OneShotEffect<KnowledgePoolEffect1> {
         super(Outcome.Neutral);
         staticText = "each player exiles the top three cards of his or her library";
     }
-    
+
     public KnowledgePoolEffect1(final KnowledgePoolEffect1 effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
-		Player sourcePlayer = game.getPlayer(source.getControllerId());
-		for (UUID playerId: sourcePlayer.getInRange()) {
-			Player player = game.getPlayer(playerId);
-			if (player != null) {
+        Player sourcePlayer = game.getPlayer(source.getControllerId());
+        for (UUID playerId: sourcePlayer.getInRange()) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
                 int amount = Math.min(3, player.getLibrary().size());
                 for (int i = 0; i < amount; i++) {
                     player.getLibrary().removeFromTop(game).moveToExile(source.getSourceId(), "Knowledge Pool Exile", source.getId(), game);
@@ -104,53 +104,53 @@ class KnowledgePoolEffect1 extends OneShotEffect<KnowledgePoolEffect1> {
     public KnowledgePoolEffect1 copy() {
         return new KnowledgePoolEffect1(this);
     }
-    
+
 }
 
 class KnowledgePoolAbility extends TriggeredAbilityImpl<KnowledgePoolAbility> {
 
-	public KnowledgePoolAbility() {
-		super(Zone.BATTLEFIELD, new KnowledgePoolEffect2(), false);
-	}
+    public KnowledgePoolAbility() {
+        super(Zone.BATTLEFIELD, new KnowledgePoolEffect2(), false);
+    }
 
-	public KnowledgePoolAbility(final KnowledgePoolAbility ability) {
-		super(ability);
-	}
+    public KnowledgePoolAbility(final KnowledgePoolAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public KnowledgePoolAbility copy() {
-		return new KnowledgePoolAbility(this);
-	}
+    @Override
+    public KnowledgePoolAbility copy() {
+        return new KnowledgePoolAbility(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.SPELL_CAST && event.getZone() == Zone.HAND) {            
-			Spell spell = game.getStack().getSpell(event.getTargetId());
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.SPELL_CAST && event.getZone() == Zone.HAND) {            
+            Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null) {
                 for (Effect effect : this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                 }
                 return true;
             }
-		}
-		return false;
-	}
+        }
+        return false;
+    }
 
 }
 
 class KnowledgePoolEffect2 extends OneShotEffect<KnowledgePoolEffect2> {
 
     private static FilterNonlandCard filter = new FilterNonlandCard("nonland card exiled with Knowledge Pool");
-    
+
     public KnowledgePoolEffect2() {
         super(Outcome.Neutral);
         staticText = "Whenever a player casts a spell from his or her hand, that player exiles it. If the player does, he or she may cast another nonland card exiled with {this} without paying that card's mana cost";
     }
-    
+
     public KnowledgePoolEffect2(final KnowledgePoolEffect2 effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
@@ -178,5 +178,5 @@ class KnowledgePoolEffect2 extends OneShotEffect<KnowledgePoolEffect2> {
     public KnowledgePoolEffect2 copy() {
         return new KnowledgePoolEffect2(this);
     }
-    
+
 }

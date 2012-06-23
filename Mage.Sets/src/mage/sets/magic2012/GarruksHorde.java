@@ -45,28 +45,28 @@ import java.util.UUID;
  */
 public class GarruksHorde extends CardImpl<GarruksHorde> {
 
-	public GarruksHorde(UUID ownerId) {
-		super(ownerId, 176, "Garruk's Horde", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
-		this.expansionSetCode = "M12";
-		this.subtype.add("Beast");
+    public GarruksHorde(UUID ownerId) {
+        super(ownerId, 176, "Garruk's Horde", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
+        this.expansionSetCode = "M12";
+        this.subtype.add("Beast");
 
-		this.color.setGreen(true);
-		this.power = new MageInt(7);
-		this.toughness = new MageInt(7);
+        this.color.setGreen(true);
+        this.power = new MageInt(7);
+        this.toughness = new MageInt(7);
 
-		this.addAbility(TrampleAbility.getInstance());
-		// Play with the top card of your library revealed.
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new PlayWithTheTopCardRevealedEffect()));
-		// You may cast the top card of your library if it's a creature card.
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new PlayTheTopCardEffect(new FilterCreatureCard())));
-	}
+        this.addAbility(TrampleAbility.getInstance());
+        // Play with the top card of your library revealed.
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new PlayWithTheTopCardRevealedEffect()));
+        // You may cast the top card of your library if it's a creature card.
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new PlayTheTopCardEffect(new FilterCreatureCard())));
+    }
 
-	public GarruksHorde(final GarruksHorde card) {
-		super(card);
-	}
+    public GarruksHorde(final GarruksHorde card) {
+        super(card);
+    }
 
-	@Override
-	public GarruksHorde copy() {
-		return new GarruksHorde(this);
-	}
+    @Override
+    public GarruksHorde copy() {
+        return new GarruksHorde(this);
+    }
 }

@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class SignInBlood extends mage.sets.magic2010.SignInBlood {
 
-	public SignInBlood(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 117;
-		this.expansionSetCode = "M11";
-	}
+    public SignInBlood(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 117;
+        this.expansionSetCode = "M11";
+    }
 
-	public SignInBlood(final SignInBlood card) {
-		super(card);
-	}
+    public SignInBlood(final SignInBlood card) {
+        super(card);
+    }
 
-	@Override
-	public SignInBlood copy() {
-		return new SignInBlood(this);
-	}
+    @Override
+    public SignInBlood copy() {
+        return new SignInBlood(this);
+    }
 
 }

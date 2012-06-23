@@ -50,62 +50,62 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class RafiqOfTheMany extends CardImpl<RafiqOfTheMany> {
 
-	public RafiqOfTheMany(UUID ownerId) {
-		super(ownerId, 185, "Rafiq of the Many", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{G}{W}{U}");
-		this.expansionSetCode = "ALA";
-		this.color.setGreen(true);
-		this.color.setWhite(true);
-		this.color.setBlue(true);
-		this.supertype.add("Legendary");
-		this.subtype.add("Human");
-		this.subtype.add("Knight");
-		this.power = new MageInt(3);
-		this.toughness = new MageInt(3);
-		this.addAbility(new ExaltedAbility());
-		this.addAbility(new RafiqOfTheManyAbility());
-	}
+    public RafiqOfTheMany(UUID ownerId) {
+        super(ownerId, 185, "Rafiq of the Many", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{G}{W}{U}");
+        this.expansionSetCode = "ALA";
+        this.color.setGreen(true);
+        this.color.setWhite(true);
+        this.color.setBlue(true);
+        this.supertype.add("Legendary");
+        this.subtype.add("Human");
+        this.subtype.add("Knight");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+        this.addAbility(new ExaltedAbility());
+        this.addAbility(new RafiqOfTheManyAbility());
+    }
 
-	public RafiqOfTheMany(final RafiqOfTheMany card) {
-		super(card);
-	}
+    public RafiqOfTheMany(final RafiqOfTheMany card) {
+        super(card);
+    }
 
-	@Override
-	public RafiqOfTheMany copy() {
-		return new RafiqOfTheMany(this);
-	}
+    @Override
+    public RafiqOfTheMany copy() {
+        return new RafiqOfTheMany(this);
+    }
 
 }
 
 class RafiqOfTheManyAbility extends TriggeredAbilityImpl<RafiqOfTheManyAbility> {
 
-	public RafiqOfTheManyAbility() {
-		super(Zone.BATTLEFIELD, new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn));
-	}
+    public RafiqOfTheManyAbility() {
+        super(Zone.BATTLEFIELD, new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn));
+    }
 
-	public RafiqOfTheManyAbility(final RafiqOfTheManyAbility ability) {
-		super(ability);
-	}
+    public RafiqOfTheManyAbility(final RafiqOfTheManyAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public RafiqOfTheManyAbility copy() {
-		return new RafiqOfTheManyAbility(this);
-	}
+    @Override
+    public RafiqOfTheManyAbility copy() {
+        return new RafiqOfTheManyAbility(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.DECLARED_ATTACKERS && game.getActivePlayerId().equals(this.controllerId) ) {
-			if (game.getCombat().attacksAlone()) {
-				this.addTarget(new TargetCreaturePermanent());
-				getTargets().get(0).add(game.getCombat().getAttackers().get(0), game);
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.DECLARED_ATTACKERS && game.getActivePlayerId().equals(this.controllerId) ) {
+            if (game.getCombat().attacksAlone()) {
+                this.addTarget(new TargetCreaturePermanent());
+                getTargets().get(0).add(game.getCombat().getAttackers().get(0), game);
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "Whenever a creature you control attacks alone, it gains double strike until end of turn.";
-	}
+    @Override
+    public String getRule() {
+        return "Whenever a creature you control attacks alone, it gains double strike until end of turn.";
+    }
 
 }

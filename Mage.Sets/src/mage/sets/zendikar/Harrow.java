@@ -45,29 +45,29 @@ import mage.target.common.TargetControlledPermanent;
  * @author Viserion
  */
 public class Harrow extends CardImpl<Harrow> {
-	
-	private static final FilterControlledPermanent filter = new FilterControlledPermanent("a land.");
-	
-	static{
-		filter.getCardType().add(CardType.LAND);
-	}
 
-	public Harrow(UUID ownerId){
-		super(ownerId, 165, "Harrow", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
-		this.expansionSetCode = "ZEN";
-		this.color.setGreen(true);		
-		
-		this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
-		TargetCardInLibrary target = new TargetCardInLibrary(0, 2, new FilterBasicLandCard());
-		this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(target, false, Outcome.PutLandInPlay));
-	}
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a land.");
 
-	public Harrow(final Harrow card) {
-		super(card);
-	}
+    static{
+        filter.getCardType().add(CardType.LAND);
+    }
 
-	@Override
-	public Harrow copy() {
-		return new Harrow(this);
-	}
+    public Harrow(UUID ownerId){
+        super(ownerId, 165, "Harrow", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
+        this.expansionSetCode = "ZEN";
+        this.color.setGreen(true);        
+
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        TargetCardInLibrary target = new TargetCardInLibrary(0, 2, new FilterBasicLandCard());
+        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(target, false, Outcome.PutLandInPlay));
+    }
+
+    public Harrow(final Harrow card) {
+        super(card);
+    }
+
+    @Override
+    public Harrow copy() {
+        return new Harrow(this);
+    }
 }

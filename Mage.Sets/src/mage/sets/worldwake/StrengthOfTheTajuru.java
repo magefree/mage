@@ -58,7 +58,7 @@ public class StrengthOfTheTajuru extends CardImpl<StrengthOfTheTajuru> {
         //MultikickerAbility ability = new MultikickerAbility(new EmptyEffect(""), false);
         //ability.addManaCost(new GenericManaCost(1));
         //this.addAbility(ability);
-        
+
         this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, new EmptyEffect("Multikicker {1}")));
 
         // Choose target creature, then choose another target creature for each time Strength of the Tajuru was kicked. Put X +1/+1 counters on each of them.

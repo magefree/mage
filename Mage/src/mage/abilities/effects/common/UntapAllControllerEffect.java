@@ -45,32 +45,32 @@ public class UntapAllControllerEffect extends OneShotEffect<UntapAllControllerEf
 
     private FilterPermanent filter;
 
-	public UntapAllControllerEffect(FilterPermanent filter, String rule) {
-		super(Outcome.Untap);
-		staticText = rule;
+    public UntapAllControllerEffect(FilterPermanent filter, String rule) {
+        super(Outcome.Untap);
+        staticText = rule;
         this.filter = filter;
-	}
+    }
 
-	public UntapAllControllerEffect(final UntapAllControllerEffect effect) {
-		super(effect);
+    public UntapAllControllerEffect(final UntapAllControllerEffect effect) {
+        super(effect);
         this.filter = effect.filter;
-	}
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-		if (player != null) {
-			for (Permanent land: game.getBattlefield().getAllActivePermanents(filter, player.getId(), game)) {
-				land.untap(game);
-			}
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+            for (Permanent land: game.getBattlefield().getAllActivePermanents(filter, player.getId(), game)) {
+                land.untap(game);
+            }
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public UntapAllControllerEffect copy() {
-		return new UntapAllControllerEffect(this);
-	}
+    @Override
+    public UntapAllControllerEffect copy() {
+        return new UntapAllControllerEffect(this);
+    }
 
 }

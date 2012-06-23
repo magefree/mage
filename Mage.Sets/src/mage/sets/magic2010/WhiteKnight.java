@@ -44,34 +44,34 @@ import mage.filter.FilterCard;
  */
 public class WhiteKnight extends CardImpl<WhiteKnight> {
 
-	private static final FilterCard filter = new FilterCard("Black");
+    private static final FilterCard filter = new FilterCard("Black");
 
-	static {
-		filter.setUseColor(true);
-		filter.getColor().setBlack(true);
-		filter.setScopeColor(ComparisonScope.Any);
-	}
+    static {
+        filter.setUseColor(true);
+        filter.getColor().setBlack(true);
+        filter.setScopeColor(ComparisonScope.Any);
+    }
 
-	public WhiteKnight(UUID ownerId) {
-		super(ownerId, 41, "White Knight", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{W}");
-		this.expansionSetCode = "M10";
-		this.subtype.add("Human");
-		this.subtype.add("Knight");
-		this.color.setWhite(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+    public WhiteKnight(UUID ownerId) {
+        super(ownerId, 41, "White Knight", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{W}");
+        this.expansionSetCode = "M10";
+        this.subtype.add("Human");
+        this.subtype.add("Knight");
+        this.color.setWhite(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-		this.addAbility(FirstStrikeAbility.getInstance());
-		this.addAbility(new ProtectionAbility(filter));
-	}
+        this.addAbility(FirstStrikeAbility.getInstance());
+        this.addAbility(new ProtectionAbility(filter));
+    }
 
-	public WhiteKnight(final WhiteKnight card) {
-		super(card);
-	}
+    public WhiteKnight(final WhiteKnight card) {
+        super(card);
+    }
 
-	@Override
-	public WhiteKnight copy() {
-		return new WhiteKnight(this);
-	}
+    @Override
+    public WhiteKnight copy() {
+        return new WhiteKnight(this);
+    }
 
 }

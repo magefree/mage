@@ -37,23 +37,23 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class ForestwalkAbility extends LandwalkAbility {
 
-	private static final FilterLandPermanent filter = new FilterLandPermanent("Forest");
+    private static final FilterLandPermanent filter = new FilterLandPermanent("Forest");
 
-	static {
-		filter.getSubtype().add("Forest");
-		filter.setScopeSubtype(ComparisonScope.Any);
-	}
+    static {
+        filter.getSubtype().add("Forest");
+        filter.setScopeSubtype(ComparisonScope.Any);
+    }
 
-	public ForestwalkAbility() {
-		super(filter);
-	}
+    public ForestwalkAbility() {
+        super(filter);
+    }
 
-	public ForestwalkAbility(final ForestwalkAbility ability) {
-		super(ability);
-	}
+    public ForestwalkAbility(final ForestwalkAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public ForestwalkAbility copy() {
-		return new ForestwalkAbility(this);
-	}
+    @Override
+    public ForestwalkAbility copy() {
+        return new ForestwalkAbility(this);
+    }
 }

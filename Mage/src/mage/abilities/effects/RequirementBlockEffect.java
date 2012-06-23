@@ -41,26 +41,26 @@ import mage.game.events.GameEvent.EventType;
  */
 public abstract class RequirementBlockEffect<T extends RequirementBlockEffect<T>> extends ReplacementEffectImpl<T> {
 
-	public RequirementBlockEffect(Duration duration) {
-		super(duration, Outcome.Detriment);
-	}
+    public RequirementBlockEffect(Duration duration) {
+        super(duration, Outcome.Detriment);
+    }
 
-	public RequirementBlockEffect(final RequirementBlockEffect effect) {
-		super(effect);
-	}
+    public RequirementBlockEffect(final RequirementBlockEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		apply(game, source);
-		return false;
-	}
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        apply(game, source);
+        return false;
+    }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (event.getType().equals(EventType.DECLARE_BLOCKERS_STEP_PRE))
-			return true;
-		return false;
-	}
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (event.getType().equals(EventType.DECLARE_BLOCKERS_STEP_PRE))
+            return true;
+        return false;
+    }
 
 
 }

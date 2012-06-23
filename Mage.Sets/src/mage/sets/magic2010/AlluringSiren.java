@@ -49,31 +49,31 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class AlluringSiren extends CardImpl<AlluringSiren> {
 
-	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 
-	static {
-		filter.setTargetController(TargetController.OPPONENT);
-	}
+    static {
+        filter.setTargetController(TargetController.OPPONENT);
+    }
 
-	public AlluringSiren(UUID ownerId) {
-		super(ownerId, 43, "Alluring Siren", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-		this.expansionSetCode = "M10";
-		this.color.setBlue(true);
-		this.subtype.add("Siren");
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AttacksIfAbleTargetEffect(Duration.EndOfTurn), new TapSourceCost());
-		ability.addTarget(new TargetCreaturePermanent(filter));
-		this.addAbility(ability);
-	}
+    public AlluringSiren(UUID ownerId) {
+        super(ownerId, 43, "Alluring Siren", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
+        this.expansionSetCode = "M10";
+        this.color.setBlue(true);
+        this.subtype.add("Siren");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AttacksIfAbleTargetEffect(Duration.EndOfTurn), new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
+    }
 
-	public AlluringSiren(final AlluringSiren card) {
-		super(card);
-	}
+    public AlluringSiren(final AlluringSiren card) {
+        super(card);
+    }
 
-	@Override
-	public AlluringSiren copy() {
-		return new AlluringSiren(this);
-	}
+    @Override
+    public AlluringSiren copy() {
+        return new AlluringSiren(this);
+    }
 
 }

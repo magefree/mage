@@ -46,14 +46,14 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  */
 public class ShisatoWhisperingHunter extends CardImpl<ShisatoWhisperingHunter> {
 
-    
+
     private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Snake");
 
     static {
         filter.getSubtype().add("Snake");
         filter.setTargetController(TargetController.YOU);
     }
-    
+
     public ShisatoWhisperingHunter(UUID ownerId) {
         super(ownerId, 242, "Shisato, Whispering Hunter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.expansionSetCode = "CHK";

@@ -45,34 +45,34 @@ import java.util.UUID;
  */
 public class BattlegroundGeist extends CardImpl<BattlegroundGeist> {
 
-	private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Spirit creatures");
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Spirit creatures");
 
-	static {
-		filter.getSubtype().add("Spirit");
-		filter.setScopeSubtype(Filter.ComparisonScope.Any);
-	}
+    static {
+        filter.getSubtype().add("Spirit");
+        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+    }
 
-	public BattlegroundGeist(UUID ownerId) {
-		super(ownerId, 45, "Battleground Geist", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
-		this.expansionSetCode = "ISD";
-		this.subtype.add("Spirit");
+    public BattlegroundGeist(UUID ownerId) {
+        super(ownerId, 45, "Battleground Geist", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
+        this.expansionSetCode = "ISD";
+        this.subtype.add("Spirit");
 
-		this.color.setBlue(true);
-		this.power = new MageInt(3);
-		this.toughness = new MageInt(3);
+        this.color.setBlue(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-		this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(FlyingAbility.getInstance());
 
-		// Other Spirit creatures you control get +1/+0.
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Constants.Duration.WhileOnBattlefield, filter, true)));
-	}
+        // Other Spirit creatures you control get +1/+0.
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Constants.Duration.WhileOnBattlefield, filter, true)));
+    }
 
-	public BattlegroundGeist(final BattlegroundGeist card) {
-		super(card);
-	}
+    public BattlegroundGeist(final BattlegroundGeist card) {
+        super(card);
+    }
 
-	@Override
-	public BattlegroundGeist copy() {
-		return new BattlegroundGeist(this);
-	}
+    @Override
+    public BattlegroundGeist copy() {
+        return new BattlegroundGeist(this);
+    }
 }

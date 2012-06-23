@@ -51,74 +51,74 @@ import mage.target.TargetPermanent;
  */
 public class GlintHawk extends CardImpl<GlintHawk> {
 
-	public GlintHawk(UUID ownerId) {
-		super(ownerId, 10, "Glint Hawk", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
-		this.expansionSetCode = "SOM";
-		this.subtype.add("Bird");
+    public GlintHawk(UUID ownerId) {
+        super(ownerId, 10, "Glint Hawk", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
+        this.expansionSetCode = "SOM";
+        this.subtype.add("Bird");
 
-		this.color.setWhite(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+        this.color.setWhite(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-		this.addAbility(FlyingAbility.getInstance());
-		this.addAbility(new EntersBattlefieldTriggeredAbility(new GlintHawkEffect()));
-	}
+        this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new GlintHawkEffect()));
+    }
 
-	public GlintHawk(final GlintHawk card) {
-		super(card);
-	}
+    public GlintHawk(final GlintHawk card) {
+        super(card);
+    }
 
-	@Override
-	public GlintHawk copy() {
-		return new GlintHawk(this);
-	}
+    @Override
+    public GlintHawk copy() {
+        return new GlintHawk(this);
+    }
 }
 
 class GlintHawkEffect extends OneShotEffect<GlintHawkEffect> {
 
-	private static final FilterControlledPermanent filter;
-	private static final String effectText = "When {this} enters the battlefield, sacrifice it unless you return an artifact you control to its owner's hand";
+    private static final FilterControlledPermanent filter;
+    private static final String effectText = "When {this} enters the battlefield, sacrifice it unless you return an artifact you control to its owner's hand";
 
-	static {
-		filter = new FilterControlledPermanent();
-		filter.getCardType().add(CardType.ARTIFACT);
-	}
-	
-	GlintHawkEffect ( ) {
-		super(Outcome.Sacrifice);
-		staticText = effectText;
-	}
+    static {
+        filter = new FilterControlledPermanent();
+        filter.getCardType().add(CardType.ARTIFACT);
+    }
 
-	GlintHawkEffect ( GlintHawkEffect effect ) {
-		super(effect);
-	}
+    GlintHawkEffect ( ) {
+        super(Outcome.Sacrifice);
+        staticText = effectText;
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		boolean targetChosen = false;
-		Player player = game.getPlayer(source.getControllerId());
-		TargetPermanent target = new TargetPermanent(1, 1, filter, false);
+    GlintHawkEffect ( GlintHawkEffect effect ) {
+        super(effect);
+    }
 
-		if (target.canChoose(player.getId(), game)) {
-			player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
-			Permanent permanent = game.getPermanent(target.getFirstTarget());
+    @Override
+    public boolean apply(Game game, Ability source) {
+        boolean targetChosen = false;
+        Player player = game.getPlayer(source.getControllerId());
+        TargetPermanent target = new TargetPermanent(1, 1, filter, false);
 
-			if ( permanent != null ) {
-				targetChosen = true;
-				permanent.moveToZone(Zone.HAND, this.getId(), game, false);
-			}
-		}
+        if (target.canChoose(player.getId(), game)) {
+            player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+            Permanent permanent = game.getPermanent(target.getFirstTarget());
 
-		if ( !targetChosen ) {
-			new SacrificeSourceEffect().apply(game, source);
-		}
+            if ( permanent != null ) {
+                targetChosen = true;
+                permanent.moveToZone(Zone.HAND, this.getId(), game, false);
+            }
+        }
 
-		return false;
-	}
+        if ( !targetChosen ) {
+            new SacrificeSourceEffect().apply(game, source);
+        }
 
-	@Override
-	public GlintHawkEffect copy() {
-		return new GlintHawkEffect(this);
-	}
+        return false;
+    }
+
+    @Override
+    public GlintHawkEffect copy() {
+        return new GlintHawkEffect(this);
+    }
 
 }

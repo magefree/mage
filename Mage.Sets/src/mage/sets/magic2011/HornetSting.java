@@ -41,20 +41,20 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class HornetSting extends CardImpl<HornetSting> {
 
-	public HornetSting(UUID ownerId) {
-		super(ownerId, 181, "Hornet Sting", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
-		this.expansionSetCode = "M11";
-		this.color.setGreen(true);
-		this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
-		this.getSpellAbility().addEffect(new DamageTargetEffect(1));
-	}
+    public HornetSting(UUID ownerId) {
+        super(ownerId, 181, "Hornet Sting", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
+        this.expansionSetCode = "M11";
+        this.color.setGreen(true);
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addEffect(new DamageTargetEffect(1));
+    }
 
-	public HornetSting(final HornetSting card) {
-		super(card);
-	}
+    public HornetSting(final HornetSting card) {
+        super(card);
+    }
 
-	@Override
-	public HornetSting copy() {
-		return new HornetSting(this);
-	}
+    @Override
+    public HornetSting copy() {
+        return new HornetSting(this);
+    }
 }

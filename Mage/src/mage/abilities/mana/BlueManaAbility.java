@@ -37,18 +37,18 @@ import mage.abilities.effects.common.BasicManaEffect;
  */
 public class BlueManaAbility extends BasicManaAbility<BlueManaAbility> {
 
-	public BlueManaAbility() {
-		super(new BasicManaEffect(Mana.BlueMana));
-		this.netMana.setBlue(1);
-	}
+    public BlueManaAbility() {
+        super(new BasicManaEffect(Mana.BlueMana));
+        this.netMana.setBlue(1);
+    }
 
-	public BlueManaAbility(BlueManaAbility ability) {
-		super(ability);
-	}
+    public BlueManaAbility(BlueManaAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public BlueManaAbility copy() {
-		return new BlueManaAbility(this);
-	}
+    @Override
+    public BlueManaAbility copy() {
+        return new BlueManaAbility(this);
+    }
 
 }

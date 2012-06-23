@@ -37,40 +37,40 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class GamesRoomManager {
 
-	private final static GamesRoomManager INSTANCE = new GamesRoomManager();
-//	private final static Logger logger = Logger.getLogger(GamesRoomManager.class);
+    private final static GamesRoomManager INSTANCE = new GamesRoomManager();
+//    private final static Logger logger = Logger.getLogger(GamesRoomManager.class);
 
-	private ConcurrentHashMap<UUID, GamesRoom> rooms = new ConcurrentHashMap<UUID, GamesRoom>();
-	private UUID mainRoomId;
+    private ConcurrentHashMap<UUID, GamesRoom> rooms = new ConcurrentHashMap<UUID, GamesRoom>();
+    private UUID mainRoomId;
 
-	public static GamesRoomManager getInstance() {
-		return INSTANCE;
-	}
+    public static GamesRoomManager getInstance() {
+        return INSTANCE;
+    }
 
-	private GamesRoomManager() {
-		GamesRoom mainRoom = new GamesRoomImpl();
-		mainRoomId = mainRoom.getRoomId();
-		rooms.put(mainRoomId, mainRoom);
-	}
+    private GamesRoomManager() {
+        GamesRoom mainRoom = new GamesRoomImpl();
+        mainRoomId = mainRoom.getRoomId();
+        rooms.put(mainRoomId, mainRoom);
+    }
 
-	public UUID createRoom() {
-		GamesRoom room = new GamesRoomImpl();
-		rooms.put(room.getRoomId(), room);
-		return room.getRoomId();
-	}
+    public UUID createRoom() {
+        GamesRoom room = new GamesRoomImpl();
+        rooms.put(room.getRoomId(), room);
+        return room.getRoomId();
+    }
 
-	public UUID getMainRoomId() {
-		return mainRoomId;
-	}
+    public UUID getMainRoomId() {
+        return mainRoomId;
+    }
 
-	public GamesRoom getRoom(UUID roomId) {
-		return rooms.get(roomId);
-	}
-	
-	public void removeTable(UUID tableId) {
-		for (GamesRoom room: rooms.values()) {
-			room.removeTable(tableId);
-		}
-	}
+    public GamesRoom getRoom(UUID roomId) {
+        return rooms.get(roomId);
+    }
+
+    public void removeTable(UUID tableId) {
+        for (GamesRoom room: rooms.values()) {
+            room.removeTable(tableId);
+        }
+    }
 
 }

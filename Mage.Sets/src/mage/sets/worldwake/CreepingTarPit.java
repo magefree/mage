@@ -78,7 +78,7 @@ class CreepingTarPitToken extends Token {
         color.setBlue(true);
         color.setBlack(true);
         power = new MageInt(3);
-		toughness = new MageInt(2);
+        toughness = new MageInt(2);
         this.addAbility(UnblockableAbility.getInstance());
     }
 }

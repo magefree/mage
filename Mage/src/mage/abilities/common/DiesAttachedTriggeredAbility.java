@@ -40,8 +40,8 @@ public class DiesAttachedTriggeredAbility extends TriggeredAbilityImpl<DiesAttac
                 }
                 return true;
             }
-		}
-		return false;
+        }
+        return false;
     }
 
     @Override

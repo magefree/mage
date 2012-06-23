@@ -47,7 +47,7 @@ public class FleetingDistraction extends CardImpl<FleetingDistraction> {
     public FleetingDistraction (UUID ownerId) {
         super(ownerId, 67, "Fleeting Distraction", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "ROE";
-		this.color.setBlue(true);
+        this.color.setBlue(true);
         this.getSpellAbility().addEffect(new BoostTargetEffect(-1, 0, Constants.Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

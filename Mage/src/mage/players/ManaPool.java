@@ -50,33 +50,33 @@ public class ManaPool implements Serializable {
 
     private List<ManaPoolItem> manaItems = new ArrayList<ManaPoolItem>();
 
-	public ManaPool() {}
+    public ManaPool() {}
 
-	public ManaPool(final ManaPool pool) {
+    public ManaPool(final ManaPool pool) {
         for (ManaPoolItem item: pool.manaItems) {
             manaItems.add(item.copy());
         }
-	}
-    
-	public int getRed() {
-		return get(ManaType.RED);
-	}
+    }
 
-	public int getGreen() {
-		return get(ManaType.GREEN);
-	}
+    public int getRed() {
+        return get(ManaType.RED);
+    }
+
+    public int getGreen() {
+        return get(ManaType.GREEN);
+    }
 
     public int getBlue() {
-		return get(ManaType.BLUE);
-	}
+        return get(ManaType.BLUE);
+    }
 
     public int getWhite() {
-		return get(ManaType.WHITE);
-	}
+        return get(ManaType.WHITE);
+    }
 
     public int getBlack() {
-		return get(ManaType.BLACK);
-	}
+        return get(ManaType.BLACK);
+    }
 
     public boolean pay(ManaType manaType, Ability ability, Filter filter, Game game) {
         if (getConditional(manaType, ability, filter, game) > 0) {
@@ -95,47 +95,47 @@ public class ManaPool implements Serializable {
         return false;
     }
 
-	public int get(ManaType manaType) {
-		return getMana().get(manaType);
-	}
-    
-	private int getConditional(ManaType manaType, Ability ability, Filter filter, Game game) {
-		if (ability == null || getConditionalMana().isEmpty()) {
-			return 0;
-		}
-		for (ManaPoolItem mana : manaItems) {
-			if (mana.isConditional() && mana.getConditionalMana().get(manaType) > 0 && mana.getConditionalMana().apply(ability, game, mana.getSourceId())) {
+    public int get(ManaType manaType) {
+        return getMana().get(manaType);
+    }
+
+    private int getConditional(ManaType manaType, Ability ability, Filter filter, Game game) {
+        if (ability == null || getConditionalMana().isEmpty()) {
+            return 0;
+        }
+        for (ManaPoolItem mana : manaItems) {
+            if (mana.isConditional() && mana.getConditionalMana().get(manaType) > 0 && mana.getConditionalMana().apply(ability, game, mana.getSourceId())) {
                 if (filter == null || filter.match(game.getObject(mana.getSourceId()), game))
                     return mana.getConditionalMana().get(manaType);
-			}
-		}
-		return 0;
-	}
+            }
+        }
+        return 0;
+    }
 
-	public int getConditionalCount(Ability ability, Game game, FilterMana filter) {
-		if (ability == null || getConditionalMana().isEmpty()) {
-			return 0;
-		}
-		int count = 0;
-		for (ConditionalMana mana : getConditionalMana()) {
-			if (mana.apply(ability, game, mana.getManaProducerId())) {
-				count += mana.count(filter);
-			}
-		}
-		return count;
-	}
+    public int getConditionalCount(Ability ability, Game game, FilterMana filter) {
+        if (ability == null || getConditionalMana().isEmpty()) {
+            return 0;
+        }
+        int count = 0;
+        for (ConditionalMana mana : getConditionalMana()) {
+            if (mana.apply(ability, game, mana.getManaProducerId())) {
+                count += mana.count(filter);
+            }
+        }
+        return count;
+    }
 
     public int getColorless() {
-		return get(ManaType.COLORLESS);
-	}
+        return get(ManaType.COLORLESS);
+    }
 
-	public int emptyPool() {
-		int total = count();
+    public int emptyPool() {
+        int total = count();
         manaItems.clear();
-		return total;
-	}
+        return total;
+    }
 
-	private int payX(Ability ability, Game game) {
+    private int payX(Ability ability, Game game) {
         int total = 0;
         Iterator<ManaPoolItem> it = manaItems.iterator();
         while (it.hasNext()) {
@@ -153,7 +153,7 @@ public class ManaPool implements Serializable {
             }
         }
         return total;
-	}
+    }
 
     /**
      * remove all mana from pool that applies and that matches filter
@@ -162,10 +162,10 @@ public class ManaPool implements Serializable {
      * @param filter
      * @return 
      */
-	public int payX(Ability ability, Game game, FilterMana filter) {
-		if (filter == null) {
-			return payX(ability, game);
-		}
+    public int payX(Ability ability, Game game, FilterMana filter) {
+        if (filter == null) {
+            return payX(ability, game);
+        }
         int total = 0;
         Iterator<ManaPoolItem> it = manaItems.iterator();
         while (it.hasNext()) {
@@ -212,77 +212,77 @@ public class ManaPool implements Serializable {
             }
         }
         return total;
-	}
+    }
 
-	public Mana getMana() {
-		Mana m = new Mana();
+    public Mana getMana() {
+        Mana m = new Mana();
         for (ManaPoolItem item: manaItems) {
             m.add(item.getMana());
         }
-		return m;
-	}
+        return m;
+    }
 
-	public Mana getMana(FilterMana filter) {
-		if (filter == null) {
-			return getMana();
-		}
-		Mana test = getMana();
+    public Mana getMana(FilterMana filter) {
+        if (filter == null) {
+            return getMana();
+        }
+        Mana test = getMana();
         Mana m = new Mana();
-		if (filter.isBlack()) m.setBlack(test.getBlack());
-		if (filter.isBlue()) m.setBlue(test.getBlue());
-		if (filter.isColorless()) m.setColorless(test.getColorless());
-		if (filter.isGreen()) m.setGreen(test.getGreen());
-		if (filter.isRed()) m.setRed(test.getRed());
-		if (filter.isWhite()) m.setWhite(test.getWhite());
-		return m;
-	}
+        if (filter.isBlack()) m.setBlack(test.getBlack());
+        if (filter.isBlue()) m.setBlue(test.getBlue());
+        if (filter.isColorless()) m.setColorless(test.getColorless());
+        if (filter.isGreen()) m.setGreen(test.getGreen());
+        if (filter.isRed()) m.setRed(test.getRed());
+        if (filter.isWhite()) m.setWhite(test.getWhite());
+        return m;
+    }
 
-	public Mana getAllConditionalMana(Ability ability, Game game, FilterMana filter) {
-		Mana m = new Mana();
-		m.setColorless(getConditionalCount(ability, game, filter));
-		return m;
-	}
+    public Mana getAllConditionalMana(Ability ability, Game game, FilterMana filter) {
+        Mana m = new Mana();
+        m.setColorless(getConditionalCount(ability, game, filter));
+        return m;
+    }
 
-	public void addMana(Mana mana, Game game, Ability source) {
-		if (mana instanceof ConditionalMana) {
+    public void addMana(Mana mana, Game game, Ability source) {
+        if (mana instanceof ConditionalMana) {
             this.manaItems.add(new ManaPoolItem((ConditionalMana)mana, source.getSourceId()));
-		} else {
+        } else {
             this.manaItems.add(new ManaPoolItem(mana.getRed(), mana.getGreen(), mana.getBlue(), mana.getWhite(), mana.getBlack(), mana.getColorless(), source.getSourceId()));
-		}
+        }
         GameEvent event = GameEvent.getEvent(GameEvent.EventType.MANA_ADDED, source.getSourceId(), source.getId(), source.getControllerId());
         event.setData(mana.toString());
         game.fireEvent(event);
-	}
+    }
 
-	public List<ConditionalMana> getConditionalMana() {
+    public List<ConditionalMana> getConditionalMana() {
         List<ConditionalMana> conditionalMana = new ArrayList<ConditionalMana>();
         for (ManaPoolItem item: manaItems) {
             if (item.isConditional()) {
                 conditionalMana.add(item.getConditionalMana());
             }
         }
-		return conditionalMana;
-	}
+        return conditionalMana;
+    }
 
-	public int count() {
+    public int count() {
         int x = 0;
         for (ManaPoolItem item: manaItems) {
             x += item.count();
         }
         return x;
-	}
+    }
 
-	public ManaPool copy() {
-		return new ManaPool(this);
-	}
+    public ManaPool copy() {
+        return new ManaPool(this);
+    }
 
-	private void removeConditional(ManaType manaType, Ability ability, Game game) {
-		for (ConditionalMana mana : getConditionalMana()) {
-			if (mana.get(manaType) > 0 && mana.apply(ability, game, mana.getManaProducerId())) {
-				mana.set(manaType, mana.get(manaType) - 1);
+    private void removeConditional(ManaType manaType, Ability ability, Game game) {
+        for (ConditionalMana mana : getConditionalMana()) {
+            if (mana.get(manaType) > 0 && mana.apply(ability, game, mana.getManaProducerId())) {
+                mana.set(manaType, mana.get(manaType) - 1);
                 game.fireEvent(new GameEvent(GameEvent.EventType.MANA_PAYED, ability.getId(), mana.getManaProducerId(), ability.getControllerId()));
                 break;
-			}
-		}
-	}
+            }
+        }
+    }
 }

@@ -53,26 +53,26 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class KhalniGem extends CardImpl<KhalniGem> {
 
-	private static final FilterControlledPermanent filter;
+    private static final FilterControlledPermanent filter;
 
-	static {
-		filter = new FilterControlledPermanent("land you control");
-		filter.getCardType().add(CardType.LAND);
-	}
+    static {
+        filter = new FilterControlledPermanent("land you control");
+        filter.getCardType().add(CardType.LAND);
+    }
 
     public KhalniGem (UUID ownerId) {
         super(ownerId, 205, "Khalni Gem", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
         this.expansionSetCode = "ZEN";
-        
+
         Ability etbAbility = new EntersBattlefieldTriggeredAbility(new KhalniGemReturnToHandTargetEffect());
-		Target target = new TargetControlledPermanent(2, 2, filter, false);
-		etbAbility.addTarget(target);
-		this.addAbility(etbAbility);
-		this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(new Mana(2, 0, 0, 0, 0, 0, 0)), new TapSourceCost()));
-		this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 2, 0, 0, 0, 0, 0)), new TapSourceCost()));
-		this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 0, 2, 0, 0, 0, 0)), new TapSourceCost()));
-		this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 0, 0, 2, 0, 0, 0)), new TapSourceCost()));
-		this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 0, 0, 0, 2, 0, 0)), new TapSourceCost()));
+        Target target = new TargetControlledPermanent(2, 2, filter, false);
+        etbAbility.addTarget(target);
+        this.addAbility(etbAbility);
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(new Mana(2, 0, 0, 0, 0, 0, 0)), new TapSourceCost()));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 2, 0, 0, 0, 0, 0)), new TapSourceCost()));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 0, 2, 0, 0, 0, 0)), new TapSourceCost()));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 0, 0, 2, 0, 0, 0)), new TapSourceCost()));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 0, 0, 0, 2, 0, 0)), new TapSourceCost()));
     }
 
     public KhalniGem (final KhalniGem card) {
@@ -88,31 +88,31 @@ public class KhalniGem extends CardImpl<KhalniGem> {
 
 class KhalniGemReturnToHandTargetEffect extends OneShotEffect<KhalniGemReturnToHandTargetEffect> {
 
-	private static final String effectText = "return two lands you control to their owner's hand";
+    private static final String effectText = "return two lands you control to their owner's hand";
 
-	KhalniGemReturnToHandTargetEffect ( ) {
-		super(Outcome.ReturnToHand);
-		staticText = effectText;
-	}
+    KhalniGemReturnToHandTargetEffect ( ) {
+        super(Outcome.ReturnToHand);
+        staticText = effectText;
+    }
 
-	KhalniGemReturnToHandTargetEffect ( KhalniGemReturnToHandTargetEffect effect ) {
-		super(effect);
-	}
+    KhalniGemReturnToHandTargetEffect ( KhalniGemReturnToHandTargetEffect effect ) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		for ( UUID target : targetPointer.getTargets(game, source) ) {
-			Permanent permanent = game.getPermanent(target);
-			if ( permanent != null ) {
-				permanent.moveToZone(Zone.HAND, source.getId(), game, true);
-			}
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        for ( UUID target : targetPointer.getTargets(game, source) ) {
+            Permanent permanent = game.getPermanent(target);
+            if ( permanent != null ) {
+                permanent.moveToZone(Zone.HAND, source.getId(), game, true);
+            }
+        }
+        return true;
+    }
 
-	@Override
-	public KhalniGemReturnToHandTargetEffect copy() {
-		return new KhalniGemReturnToHandTargetEffect(this);
-	}
+    @Override
+    public KhalniGemReturnToHandTargetEffect copy() {
+        return new KhalniGemReturnToHandTargetEffect(this);
+    }
 
 }

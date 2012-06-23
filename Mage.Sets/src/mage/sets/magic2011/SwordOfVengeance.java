@@ -53,25 +53,25 @@ import mage.cards.CardImpl;
  */
 public class SwordOfVengeance extends CardImpl<SwordOfVengeance> {
 
-	public SwordOfVengeance(UUID ownerId) {
-		super(ownerId, 216, "Sword of Vengeance", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Equipment");
-		this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT)));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.EQUIPMENT)));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.EQUIPMENT)));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.EQUIPMENT)));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 0)));
-	}
+    public SwordOfVengeance(UUID ownerId) {
+        super(ownerId, 216, "Sword of Vengeance", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Equipment");
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 0)));
+    }
 
-	protected SwordOfVengeance(SwordOfVengeance me) {
-		super(me);
-	}
+    protected SwordOfVengeance(SwordOfVengeance me) {
+        super(me);
+    }
 
-	@Override
-	public SwordOfVengeance copy() {
-		return new SwordOfVengeance(this);
-	}
+    @Override
+    public SwordOfVengeance copy() {
+        return new SwordOfVengeance(this);
+    }
 
 }

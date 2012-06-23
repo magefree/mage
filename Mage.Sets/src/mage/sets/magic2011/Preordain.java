@@ -41,20 +41,20 @@ import mage.cards.CardImpl;
  */
 public class Preordain extends CardImpl<Preordain> {
 
-	public Preordain(UUID ownerId) {
-		super(ownerId, 70, "Preordain", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}");
-		this.expansionSetCode = "M11";
-		this.color.setBlue(true);
-		this.getSpellAbility().addEffect(new ScryEffect(2));
-		this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
-	}
+    public Preordain(UUID ownerId) {
+        super(ownerId, 70, "Preordain", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}");
+        this.expansionSetCode = "M11";
+        this.color.setBlue(true);
+        this.getSpellAbility().addEffect(new ScryEffect(2));
+        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+    }
 
-	public Preordain(final Preordain card) {
-		super(card);
-	}
+    public Preordain(final Preordain card) {
+        super(card);
+    }
 
-	@Override
-	public Preordain copy() {
-		return new Preordain(this);
-	}
+    @Override
+    public Preordain copy() {
+        return new Preordain(this);
+    }
 }

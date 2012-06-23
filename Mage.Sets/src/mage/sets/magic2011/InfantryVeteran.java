@@ -47,27 +47,27 @@ import mage.target.common.TargetAttackingCreature;
  */
 public class InfantryVeteran extends CardImpl<InfantryVeteran> {
 
-	public InfantryVeteran(UUID ownerId) {
-		super(ownerId, 18, "Infantry Veteran", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Human");
-		this.subtype.add("Soldier");
-		this.color.setWhite(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
+    public InfantryVeteran(UUID ownerId) {
+        super(ownerId, 18, "Infantry Veteran", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Human");
+        this.subtype.add("Soldier");
+        this.color.setWhite(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Duration.EndOfTurn), new TapSourceCost());
-		ability.addTarget(new TargetAttackingCreature());
-		this.addAbility(ability);
-	}
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Duration.EndOfTurn), new TapSourceCost());
+        ability.addTarget(new TargetAttackingCreature());
+        this.addAbility(ability);
+    }
 
-	public InfantryVeteran(final InfantryVeteran card) {
-		super(card);
-	}
+    public InfantryVeteran(final InfantryVeteran card) {
+        super(card);
+    }
 
-	@Override
-	public InfantryVeteran copy() {
-		return new InfantryVeteran(this);
-	}
+    @Override
+    public InfantryVeteran copy() {
+        return new InfantryVeteran(this);
+    }
 
 }

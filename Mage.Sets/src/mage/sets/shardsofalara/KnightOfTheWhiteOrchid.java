@@ -50,63 +50,63 @@ import java.util.UUID;
  */
 public class KnightOfTheWhiteOrchid extends CardImpl<KnightOfTheWhiteOrchid> {
 
-	public KnightOfTheWhiteOrchid(UUID ownerId) {
-		super(ownerId, 16, "Knight of the White Orchid", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{W}");
-		this.expansionSetCode = "ALA";
-		this.subtype.add("Human");
-		this.subtype.add("Knight");
-		this.color.setWhite(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+    public KnightOfTheWhiteOrchid(UUID ownerId) {
+        super(ownerId, 16, "Knight of the White Orchid", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{W}");
+        this.expansionSetCode = "ALA";
+        this.subtype.add("Human");
+        this.subtype.add("Knight");
+        this.color.setWhite(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-		this.addAbility(new KnightOfTheWhiteOrchidAbility());
-		this.addAbility(FirstStrikeAbility.getInstance());
-	}
+        this.addAbility(new KnightOfTheWhiteOrchidAbility());
+        this.addAbility(FirstStrikeAbility.getInstance());
+    }
 
-	public KnightOfTheWhiteOrchid(final KnightOfTheWhiteOrchid card) {
-		super(card);
-	}
+    public KnightOfTheWhiteOrchid(final KnightOfTheWhiteOrchid card) {
+        super(card);
+    }
 
-	@Override
-	public KnightOfTheWhiteOrchid copy() {
-		return new KnightOfTheWhiteOrchid(this);
-	}
+    @Override
+    public KnightOfTheWhiteOrchid copy() {
+        return new KnightOfTheWhiteOrchid(this);
+    }
 
 }
 
 class KnightOfTheWhiteOrchidAbility extends ZoneChangeTriggeredAbility<KnightOfTheWhiteOrchidAbility> {
 
-	private static final FilterCard filter1 = new FilterCard("Plains");
-	private static final FilterLandPermanent filter2 = new FilterLandPermanent();
+    private static final FilterCard filter1 = new FilterCard("Plains");
+    private static final FilterLandPermanent filter2 = new FilterLandPermanent();
 
-	static {
-		filter1.getName().add("Plains");
-	}
+    static {
+        filter1.getName().add("Plains");
+    }
 
-	public KnightOfTheWhiteOrchidAbility() {
-		super(Zone.BATTLEFIELD, null, "When {this} enters the battlefield, if an opponent controls more lands than you, you may ", true);
-		TargetCardInLibrary target = new TargetCardInLibrary(filter1);
-		addEffect(new SearchLibraryPutInPlayEffect(target, false, Outcome.PutLandInPlay));
-	}
+    public KnightOfTheWhiteOrchidAbility() {
+        super(Zone.BATTLEFIELD, null, "When {this} enters the battlefield, if an opponent controls more lands than you, you may ", true);
+        TargetCardInLibrary target = new TargetCardInLibrary(filter1);
+        addEffect(new SearchLibraryPutInPlayEffect(target, false, Outcome.PutLandInPlay));
+    }
 
-	public KnightOfTheWhiteOrchidAbility(final KnightOfTheWhiteOrchidAbility ability) {
-		super(ability);
-	}
+    public KnightOfTheWhiteOrchidAbility(final KnightOfTheWhiteOrchidAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public KnightOfTheWhiteOrchidAbility copy() {
-		return new KnightOfTheWhiteOrchidAbility(this);
-	}
+    @Override
+    public KnightOfTheWhiteOrchidAbility copy() {
+        return new KnightOfTheWhiteOrchidAbility(this);
+    }
 
-	@Override
-	public boolean checkInterveningIfClause(Game game) {
-		int numLands = game.getBattlefield().countAll(filter2, this.controllerId, game);
-		for (UUID opponentId: game.getOpponents(this.controllerId)) {
-			if (numLands < game.getBattlefield().countAll(filter2, opponentId, game)) {
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean checkInterveningIfClause(Game game) {
+        int numLands = game.getBattlefield().countAll(filter2, this.controllerId, game);
+        for (UUID opponentId: game.getOpponents(this.controllerId)) {
+            if (numLands < game.getBattlefield().countAll(filter2, opponentId, game)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

@@ -69,13 +69,13 @@ public class MeliraSylvokOutcast extends CardImpl<MeliraSylvokOutcast> {
 
         // You can't get poison counters.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MeliraSylvokOutcastEffect()));
-        
+
         // Creatures you control can't have -1/-1 counters placed on them.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MeliraSylvokOutcastEffect2()));
-         
+
         // Creatures your opponents control lose infect.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MeliraSylvokOutcastEffect3()));
-        
+
     }
 
     public MeliraSylvokOutcast(final MeliraSylvokOutcast card) {
@@ -94,11 +94,11 @@ class MeliraSylvokOutcastEffect extends ReplacementEffectImpl<MeliraSylvokOutcas
         super(Duration.WhileOnBattlefield, Outcome.PreventDamage);
         staticText = "You can't get poison counters";
     }
-    
+
     public MeliraSylvokOutcastEffect(final MeliraSylvokOutcastEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         return true;
@@ -121,7 +121,7 @@ class MeliraSylvokOutcastEffect extends ReplacementEffectImpl<MeliraSylvokOutcas
         }
         return false;
     }
-    
+
 }
 
 class MeliraSylvokOutcastEffect2 extends ReplacementEffectImpl<MeliraSylvokOutcastEffect2> {
@@ -130,11 +130,11 @@ class MeliraSylvokOutcastEffect2 extends ReplacementEffectImpl<MeliraSylvokOutca
         super(Duration.WhileOnBattlefield, Outcome.PreventDamage);
         staticText = "Creatures you control can't have -1/-1 counters placed on them";
     }
-    
+
     public MeliraSylvokOutcastEffect2(final MeliraSylvokOutcastEffect2 effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         return true;
@@ -159,36 +159,36 @@ class MeliraSylvokOutcastEffect2 extends ReplacementEffectImpl<MeliraSylvokOutca
         }
         return false;
     }
-    
+
 }
 
 class MeliraSylvokOutcastEffect3 extends ContinuousEffectImpl<MeliraSylvokOutcastEffect3> {
 
     private static FilterCreaturePermanent filter = new FilterCreaturePermanent();
-    
-	public MeliraSylvokOutcastEffect3() {
-		super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.LoseAbility);
+
+    public MeliraSylvokOutcastEffect3() {
+        super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.LoseAbility);
         staticText = "Creatures your opponents control lose infect";
-	}
+    }
 
-	public MeliraSylvokOutcastEffect3(final MeliraSylvokOutcastEffect3 effect) {
-		super(effect);
-	}
+    public MeliraSylvokOutcastEffect3(final MeliraSylvokOutcastEffect3 effect) {
+        super(effect);
+    }
 
-	@Override
-	public MeliraSylvokOutcastEffect3 copy() {
-		return new MeliraSylvokOutcastEffect3(this);
-	}
+    @Override
+    public MeliraSylvokOutcastEffect3 copy() {
+        return new MeliraSylvokOutcastEffect3(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
         Set<UUID> opponents = game.getOpponents(source.getControllerId());
-		for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
-			if (opponents.contains(perm.getControllerId())) {
+        for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
+            if (opponents.contains(perm.getControllerId())) {
                 perm.getAbilities().remove(InfectAbility.getInstance());
-			}
-		}
-		return true;
-	}
+            }
+        }
+        return true;
+    }
 
 }

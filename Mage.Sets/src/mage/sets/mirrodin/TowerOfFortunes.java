@@ -49,8 +49,8 @@ public class TowerOfFortunes extends CardImpl<TowerOfFortunes> {
     public TowerOfFortunes (UUID ownerId) {
         super(ownerId, 267, "Tower of Fortunes", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
         this.expansionSetCode = "MRD";
-		Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(4), new GenericManaCost(8));
-		ability.addCost(new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(4), new GenericManaCost(8));
+        ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
 

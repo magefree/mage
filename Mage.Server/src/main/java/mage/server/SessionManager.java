@@ -45,107 +45,107 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class SessionManager {
 
-	private final static Logger logger = Logger.getLogger(SessionManager.class);
-	private final static SessionManager INSTANCE = new SessionManager();
+    private final static Logger logger = Logger.getLogger(SessionManager.class);
+    private final static SessionManager INSTANCE = new SessionManager();
 
-	public static SessionManager getInstance() {
-		return INSTANCE;
-	}
+    public static SessionManager getInstance() {
+        return INSTANCE;
+    }
 
-	private ConcurrentHashMap<String, Session> sessions = new ConcurrentHashMap<String, Session>();
+    private ConcurrentHashMap<String, Session> sessions = new ConcurrentHashMap<String, Session>();
 
-	public Session getSession(String sessionId) {
-		if (sessions == null || sessionId == null) return null;
-		return sessions.get(sessionId);
-	}
+    public Session getSession(String sessionId) {
+        if (sessions == null || sessionId == null) return null;
+        return sessions.get(sessionId);
+    }
 
-	public void createSession(String sessionId, InvokerCallbackHandler callbackHandler) {
-		Session session = new Session(sessionId, callbackHandler);
-		sessions.put(sessionId, session);
-	}
-	
-	public boolean registerUser(String sessionId, String userName) throws MageException {
-		Session session = sessions.get(sessionId);
-		if (session != null) {
-			session.registerUser(userName);
+    public void createSession(String sessionId, InvokerCallbackHandler callbackHandler) {
+        Session session = new Session(sessionId, callbackHandler);
+        sessions.put(sessionId, session);
+    }
+
+    public boolean registerUser(String sessionId, String userName) throws MageException {
+        Session session = sessions.get(sessionId);
+        if (session != null) {
+            session.registerUser(userName);
             LogServiceImpl.instance.log(LogKeys.KEY_USER_CONNECTED, userName, session.getHost(), sessionId);
-			logger.info("User " + userName + " connected from " + session.getHost() + " sessionId: " + sessionId);
-			return true;
-		}
-		return false;
-	}
-	
-	public boolean registerAdmin(String sessionId) {
-		Session session = sessions.get(sessionId);
-		if (session != null) {
-			session.registerAdmin();
-            LogServiceImpl.instance.log(LogKeys.KEY_ADMIN_CONNECTED, "Admin", session.getHost(), sessionId);
-			logger.info("Admin connected from " + session.getHost());
-			return true;
-		}
-		return false;
-	}
+            logger.info("User " + userName + " connected from " + session.getHost() + " sessionId: " + sessionId);
+            return true;
+        }
+        return false;
+    }
 
-	public boolean setUserData(String userName, String sessionId, UserDataView userDataView) throws MageException {
-		Session session = sessions.get(sessionId);
-		if (session != null) {
-			session.setUserData(userName, userDataView);
-			return true;
-		}
-		return false;
-	}
-	
-	public synchronized void disconnect(String sessionId, boolean voluntary) {
-		Session session = sessions.get(sessionId);
-   		sessions.remove(sessionId);
-		if (session != null) {
-			if (voluntary) {
-				session.kill();
+    public boolean registerAdmin(String sessionId) {
+        Session session = sessions.get(sessionId);
+        if (session != null) {
+            session.registerAdmin();
+            LogServiceImpl.instance.log(LogKeys.KEY_ADMIN_CONNECTED, "Admin", session.getHost(), sessionId);
+            logger.info("Admin connected from " + session.getHost());
+            return true;
+        }
+        return false;
+    }
+
+    public boolean setUserData(String userName, String sessionId, UserDataView userDataView) throws MageException {
+        Session session = sessions.get(sessionId);
+        if (session != null) {
+            session.setUserData(userName, userDataView);
+            return true;
+        }
+        return false;
+    }
+
+    public synchronized void disconnect(String sessionId, boolean voluntary) {
+        Session session = sessions.get(sessionId);
+           sessions.remove(sessionId);
+        if (session != null) {
+            if (voluntary) {
+                session.kill();
                 LogServiceImpl.instance.log(LogKeys.KEY_SESSION_KILLED, sessionId);
             } else {
-				session.disconnect();
+                session.disconnect();
                 LogServiceImpl.instance.log(LogKeys.KEY_SESSION_DISCONNECTED, sessionId);
             }
-		} else {
+        } else {
             logger.info("could not find session with id " + sessionId);
         }
-	}
-	
-	public Map<String, Session> getSessions() {
-		Map<String, Session> map = new HashMap<String, Session>();
-		for (Map.Entry<String, Session> entry : sessions.entrySet()) {
-			 map.put(entry.getKey(), entry.getValue());
-		}
-		return map;
-	}
+    }
 
-	public void disconnectUser(String sessionId, String userSessionId) {
-		if (isAdmin(sessionId)) {
-			disconnect(userSessionId, true);
+    public Map<String, Session> getSessions() {
+        Map<String, Session> map = new HashMap<String, Session>();
+        for (Map.Entry<String, Session> entry : sessions.entrySet()) {
+             map.put(entry.getKey(), entry.getValue());
+        }
+        return map;
+    }
+
+    public void disconnectUser(String sessionId, String userSessionId) {
+        if (isAdmin(sessionId)) {
+            disconnect(userSessionId, true);
             LogServiceImpl.instance.log(LogKeys.KEY_SESSION_DISCONNECTED_BY_ADMIN, sessionId, userSessionId);
-		}
-	}
+        }
+    }
 
-	public boolean isAdmin(String sessionId) {
-		Session admin = sessions.get(sessionId);
-		if (admin != null) {
-			return admin.isAdmin();
-		}
-		return false;
-	}
+    public boolean isAdmin(String sessionId) {
+        Session admin = sessions.get(sessionId);
+        if (admin != null) {
+            return admin.isAdmin();
+        }
+        return false;
+    }
 
-	public boolean isValidSession(String sessionId) {
-		if (sessions.containsKey(sessionId))
-			return true;
-		return false;
-	}
+    public boolean isValidSession(String sessionId) {
+        if (sessions.containsKey(sessionId))
+            return true;
+        return false;
+    }
 
-	public User getUser(String sessionId) {
-		if (sessions.containsKey(sessionId)) {
-			return UserManager.getInstance().getUser(sessions.get(sessionId).getUserId());
-		}
-		return null;
-	}
+    public User getUser(String sessionId) {
+        if (sessions.containsKey(sessionId)) {
+            return UserManager.getInstance().getUser(sessions.get(sessionId).getUserId());
+        }
+        return null;
+    }
 
     public boolean extendUserSession(String sessionId) {
         if (sessions.containsKey(sessionId)) {

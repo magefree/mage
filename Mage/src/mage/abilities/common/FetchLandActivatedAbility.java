@@ -47,33 +47,33 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class FetchLandActivatedAbility extends ActivatedAbilityImpl<FetchLandActivatedAbility> {
 
-	public FetchLandActivatedAbility(String[] subTypes) {
-		super(Zone.BATTLEFIELD, null);
-		addCost(new TapSourceCost());
-		addCost(new PayLifeCost(1));
-		addCost(new SacrificeSourceCost());
-		FilterCard filter = new FilterCard(subTypeNames(subTypes));
-		filter.getCardType().add(CardType.LAND);
+    public FetchLandActivatedAbility(String[] subTypes) {
+        super(Zone.BATTLEFIELD, null);
+        addCost(new TapSourceCost());
+        addCost(new PayLifeCost(1));
+        addCost(new SacrificeSourceCost());
+        FilterCard filter = new FilterCard(subTypeNames(subTypes));
+        filter.getCardType().add(CardType.LAND);
         filter.getSubtype().addAll(Arrays.asList(subTypes));
-		filter.setScopeSubtype(ComparisonScope.Any);
-		TargetCardInLibrary target = new TargetCardInLibrary(filter);
-		addEffect(new SearchLibraryPutInPlayEffect(target, false, true, Outcome.PutLandInPlay));
-	}
+        filter.setScopeSubtype(ComparisonScope.Any);
+        TargetCardInLibrary target = new TargetCardInLibrary(filter);
+        addEffect(new SearchLibraryPutInPlayEffect(target, false, true, Outcome.PutLandInPlay));
+    }
 
-	public FetchLandActivatedAbility(FetchLandActivatedAbility ability) {
-		super(ability);
-	}
+    public FetchLandActivatedAbility(FetchLandActivatedAbility ability) {
+        super(ability);
+    }
 
-	private String subTypeNames(String[] subTypes) {
-		StringBuilder sb = new StringBuilder();
-		for (String subType: subTypes) {
-			sb.append(subType).append(" or ");
-		}
-		return sb.substring(0, sb.length() - 4);
-	}
+    private String subTypeNames(String[] subTypes) {
+        StringBuilder sb = new StringBuilder();
+        for (String subType: subTypes) {
+            sb.append(subType).append(" or ");
+        }
+        return sb.substring(0, sb.length() - 4);
+    }
 
-	@Override
-	public FetchLandActivatedAbility copy() {
-		return new FetchLandActivatedAbility(this);
-	}
+    @Override
+    public FetchLandActivatedAbility copy() {
+        return new FetchLandActivatedAbility(this);
+    }
 }

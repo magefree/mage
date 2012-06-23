@@ -42,95 +42,95 @@ import mage.game.combat.Combat;
  */
 public class SimulationNode implements Serializable {
 
-	protected static int nodeCount;
+    protected static int nodeCount;
 
-	protected Game game;
-	protected int gameValue;
-	protected List<Ability> abilities;
-	protected int depth;
-	protected List<SimulationNode> children = new ArrayList<SimulationNode>();
-	protected SimulationNode parent;
-	protected List<UUID> targets = new ArrayList<UUID>();
-	protected List<String> choices = new ArrayList<String>();
-	protected UUID playerId;
-	protected Combat combat;
+    protected Game game;
+    protected int gameValue;
+    protected List<Ability> abilities;
+    protected int depth;
+    protected List<SimulationNode> children = new ArrayList<SimulationNode>();
+    protected SimulationNode parent;
+    protected List<UUID> targets = new ArrayList<UUID>();
+    protected List<String> choices = new ArrayList<String>();
+    protected UUID playerId;
+    protected Combat combat;
 
-	public SimulationNode(SimulationNode parent, Game game, UUID playerId) {
-		this.parent = parent;
-		this.game = game;
-		if (parent == null)
-			this.depth = 1;
-		else
-			this.depth = parent.getDepth() + 1;
-		this.playerId = playerId;
-		game.setCustomData(this);
-		nodeCount++;
-	}
+    public SimulationNode(SimulationNode parent, Game game, UUID playerId) {
+        this.parent = parent;
+        this.game = game;
+        if (parent == null)
+            this.depth = 1;
+        else
+            this.depth = parent.getDepth() + 1;
+        this.playerId = playerId;
+        game.setCustomData(this);
+        nodeCount++;
+    }
 
-	public SimulationNode(SimulationNode parent, Game game, List<Ability> abilities, UUID playerId) {
-		this(parent, game, playerId);
-		this.abilities = abilities;
-	}
+    public SimulationNode(SimulationNode parent, Game game, List<Ability> abilities, UUID playerId) {
+        this(parent, game, playerId);
+        this.abilities = abilities;
+    }
 
-	public SimulationNode(SimulationNode parent, Game game, Ability ability, UUID playerId) {
-		this(parent, game, playerId);
-		this.abilities = new ArrayList<Ability>();
-		abilities.add(ability);
-	}
+    public SimulationNode(SimulationNode parent, Game game, Ability ability, UUID playerId) {
+        this(parent, game, playerId);
+        this.abilities = new ArrayList<Ability>();
+        abilities.add(ability);
+    }
 
-	public static void resetCount() {
-		nodeCount = 0;
-	}
+    public static void resetCount() {
+        nodeCount = 0;
+    }
 
-	public static int getCount() {
-		return nodeCount;
-	}
+    public static int getCount() {
+        return nodeCount;
+    }
 
-	public Game getGame() {
-		return this.game;
-	}
+    public Game getGame() {
+        return this.game;
+    }
 
-	public int getGameValue() {
-		return this.gameValue;
-	}
+    public int getGameValue() {
+        return this.gameValue;
+    }
 
-	public void setGameValue(int value) {
-		this.gameValue = value;
-	}
+    public void setGameValue(int value) {
+        this.gameValue = value;
+    }
 
-	public List<Ability> getAbilities() {
-		return this.abilities;
-	}
+    public List<Ability> getAbilities() {
+        return this.abilities;
+    }
 
-	public SimulationNode getParent() {
-		return this.parent;
-	}
+    public SimulationNode getParent() {
+        return this.parent;
+    }
 
-	public List<SimulationNode> getChildren() {
-		return this.children;
-	}
+    public List<SimulationNode> getChildren() {
+        return this.children;
+    }
 
-	public int getDepth() {
-		return this.depth;
-	}
+    public int getDepth() {
+        return this.depth;
+    }
 
-	public UUID getPlayerId() {
-		return this.playerId;
-	}
+    public UUID getPlayerId() {
+        return this.playerId;
+    }
 
-	public Combat getCombat() {
-		return this.combat;
-	}
+    public Combat getCombat() {
+        return this.combat;
+    }
 
-	public void setCombat(Combat combat) {
-		this.combat = combat;
-	}
+    public void setCombat(Combat combat) {
+        this.combat = combat;
+    }
 
-	public List<UUID> getTargets() {
-		return this.targets;
-	}
+    public List<UUID> getTargets() {
+        return this.targets;
+    }
 
-	public List<String> getChoices() {
-		return this.choices;
-	}
+    public List<String> getChoices() {
+        return this.choices;
+    }
 }

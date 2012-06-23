@@ -43,22 +43,22 @@ import mage.cards.CardImpl;
  */
 public class CrumblingNecropolis extends CardImpl<CrumblingNecropolis> {
 
-	public CrumblingNecropolis(UUID ownerId) {
-		super(ownerId, 222, "Crumbling Necropolis", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);
-		this.expansionSetCode = "ALA";
-		this.addAbility(new EntersBattlefieldTappedAbility());
-		this.addAbility(new RedManaAbility());
-		this.addAbility(new BlueManaAbility());
-		this.addAbility(new BlackManaAbility());
-	}
+    public CrumblingNecropolis(UUID ownerId) {
+        super(ownerId, 222, "Crumbling Necropolis", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);
+        this.expansionSetCode = "ALA";
+        this.addAbility(new EntersBattlefieldTappedAbility());
+        this.addAbility(new RedManaAbility());
+        this.addAbility(new BlueManaAbility());
+        this.addAbility(new BlackManaAbility());
+    }
 
-	public CrumblingNecropolis(final CrumblingNecropolis card) {
-		super(card);
-	}
+    public CrumblingNecropolis(final CrumblingNecropolis card) {
+        super(card);
+    }
 
-	@Override
-	public CrumblingNecropolis copy() {
-		return new CrumblingNecropolis(this);
-	}
+    @Override
+    public CrumblingNecropolis copy() {
+        return new CrumblingNecropolis(this);
+    }
 
 }

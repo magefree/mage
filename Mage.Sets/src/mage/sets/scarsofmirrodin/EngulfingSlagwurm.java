@@ -53,7 +53,7 @@ public class EngulfingSlagwurm extends CardImpl<EngulfingSlagwurm> {
         super(ownerId, 118, "Engulfing Slagwurm", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Wurm");
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 

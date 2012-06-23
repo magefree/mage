@@ -63,7 +63,7 @@ public class ShrineOfBoundlessGrowth extends CardImpl<ShrineOfBoundlessGrowth> {
     public ShrineOfBoundlessGrowth (UUID ownerId) {
         super(ownerId, 152, "Shrine of Boundless Growth", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "NPH";
-        
+
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), TargetController.YOU, false));
         this.addAbility(new SpellCastTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), filter, false));
 

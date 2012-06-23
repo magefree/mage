@@ -50,61 +50,61 @@ import mage.game.events.GameEvent.EventType;
  */
 public class PlatinumAngel extends CardImpl<PlatinumAngel> {
 
-	public PlatinumAngel(UUID ownerId) {
-		super(ownerId, 339, "Platinum Angel", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");
-		this.expansionSetCode = "10E";
-		this.subtype.add("Angel");
-		this.power = new MageInt(4);
-		this.toughness = new MageInt(4);
+    public PlatinumAngel(UUID ownerId) {
+        super(ownerId, 339, "Platinum Angel", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");
+        this.expansionSetCode = "10E";
+        this.subtype.add("Angel");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
-		this.addAbility(FlyingAbility.getInstance());
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlatinumAngelEffect()));
-	}
+        this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlatinumAngelEffect()));
+    }
 
-	public PlatinumAngel(final PlatinumAngel card) {
-		super(card);
-	}
+    public PlatinumAngel(final PlatinumAngel card) {
+        super(card);
+    }
 
-	@Override
-	public PlatinumAngel copy() {
-		return new PlatinumAngel(this);
-	}
+    @Override
+    public PlatinumAngel copy() {
+        return new PlatinumAngel(this);
+    }
 
-	class PlatinumAngelEffect extends ReplacementEffectImpl<PlatinumAngelEffect> {
+    class PlatinumAngelEffect extends ReplacementEffectImpl<PlatinumAngelEffect> {
 
-		public PlatinumAngelEffect() {
-			super(Duration.WhileOnBattlefield, Outcome.Benefit);
-			staticText = "You can't lose the game and your opponents can't win the game";
-		}
+        public PlatinumAngelEffect() {
+            super(Duration.WhileOnBattlefield, Outcome.Benefit);
+            staticText = "You can't lose the game and your opponents can't win the game";
+        }
 
-		public PlatinumAngelEffect(final PlatinumAngelEffect effect) {
-			super(effect);
-		}
+        public PlatinumAngelEffect(final PlatinumAngelEffect effect) {
+            super(effect);
+        }
 
-		@Override
-		public PlatinumAngelEffect copy() {
-			return new PlatinumAngelEffect(this);
-		}
+        @Override
+        public PlatinumAngelEffect copy() {
+            return new PlatinumAngelEffect(this);
+        }
 
-		@Override
-		public boolean apply(Game game, Ability source) {
-			return true;
-		}
+        @Override
+        public boolean apply(Game game, Ability source) {
+            return true;
+        }
 
-		@Override
-		public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-			return true;
-		}
+        @Override
+        public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+            return true;
+        }
 
-		@Override
-		public boolean applies(GameEvent event, Ability source, Game game) {
-			if ((event.getType() == EventType.WINS && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) ||
-				(event.getType() == EventType.LOSES && event.getPlayerId().equals(source.getControllerId()))) {
-				return true;
-			}
-			return false;
-		}
+        @Override
+        public boolean applies(GameEvent event, Ability source, Game game) {
+            if ((event.getType() == EventType.WINS && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) ||
+                (event.getType() == EventType.LOSES && event.getPlayerId().equals(source.getControllerId()))) {
+                return true;
+            }
+            return false;
+        }
 
-	}
+    }
 
 }

@@ -55,8 +55,8 @@ public class IndomitableArchangel extends CardImpl<IndomitableArchangel> {
     private static FilterPermanent filter = new FilterPermanent("Artifacts");
 
     static {
-		filter.getCardType().add(CardType.ARTIFACT);
-	}
+        filter.getCardType().add(CardType.ARTIFACT);
+    }
 
     public IndomitableArchangel(UUID ownerId) {
         super(ownerId, 11, "Indomitable Archangel", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");

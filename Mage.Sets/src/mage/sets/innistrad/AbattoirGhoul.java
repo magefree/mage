@@ -66,7 +66,7 @@ public class AbattoirGhoul extends CardImpl<AbattoirGhoul> {
         this.addAbility(FirstStrikeAbility.getInstance());
         // Whenever a creature dealt damage by Abattoir Ghoul this turn dies, you gain life equal to that creature's toughness.
         AbattoirGhoulEffect effect = new AbattoirGhoulEffect();
-        
+
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
         this.addWatcher(new DamagedByWatcher());
     }
@@ -83,48 +83,48 @@ public class AbattoirGhoul extends CardImpl<AbattoirGhoul> {
 
 class AbattoirGhoulEffect extends ReplacementEffectImpl<AbattoirGhoulEffect> {
 
-	public AbattoirGhoulEffect() {
-		super(Duration.EndOfTurn, Outcome.GainLife);
-		staticText = "Whenever a creature dealt damage by Abattoir Ghoul this turn dies, you gain life equal to that creature's toughness";
-	}
+    public AbattoirGhoulEffect() {
+        super(Duration.EndOfTurn, Outcome.GainLife);
+        staticText = "Whenever a creature dealt damage by Abattoir Ghoul this turn dies, you gain life equal to that creature's toughness";
+    }
 
-	public AbattoirGhoulEffect(final AbattoirGhoulEffect effect) {
-		super(effect);
-	}
+    public AbattoirGhoulEffect(final AbattoirGhoulEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public AbattoirGhoulEffect copy() {
-		return new AbattoirGhoulEffect(this);
-	}
+    @Override
+    public AbattoirGhoulEffect copy() {
+        return new AbattoirGhoulEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent permanent = ((ZoneChangeEvent)event).getTarget();
         if (permanent != null) {
-        	MageInt toughness = permanent.getToughness();
-        	Player player = (Player)this.getValue("player");
-        	player.gainLife(toughness.getValue(), game);
+            MageInt toughness = permanent.getToughness();
+            Player player = (Player)this.getValue("player");
+            player.gainLife(toughness.getValue(), game);
             return true;
         }
-		return false;
-	}
+        return false;
+    }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
             Permanent p = game.getPermanent(source.getSourceId());
             if (p != null) {
                 DamagedByWatcher watcher = (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", source.getSourceId());
                 if (watcher != null)
                     return watcher.damagedCreatures.contains(event.getTargetId());
             }
-		}
-		return false;
-	}
+        }
+        return false;
+    }
 
 }

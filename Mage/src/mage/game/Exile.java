@@ -41,60 +41,60 @@ import java.util.Map.Entry;
  */
 public class Exile implements Serializable, Copyable<Exile> {
 
-	private static final UUID PERMANENT = UUID.randomUUID();
+    private static final UUID PERMANENT = UUID.randomUUID();
 
-	private Map<UUID, ExileZone> exileZones = new HashMap<UUID, ExileZone>();
+    private Map<UUID, ExileZone> exileZones = new HashMap<UUID, ExileZone>();
 
-	public Exile() {
-		createZone(PERMANENT, "Permanent");
-	}
+    public Exile() {
+        createZone(PERMANENT, "Permanent");
+    }
 
-	public Exile(final Exile exile) {
-		for (Entry<UUID, ExileZone> entry: exile.exileZones.entrySet()) {
-			exileZones.put(entry.getKey(), entry.getValue().copy());
-		}
-	}
+    public Exile(final Exile exile) {
+        for (Entry<UUID, ExileZone> entry: exile.exileZones.entrySet()) {
+            exileZones.put(entry.getKey(), entry.getValue().copy());
+        }
+    }
 
-	public Collection<ExileZone> getExileZones() {
-		return exileZones.values();
-	}
+    public Collection<ExileZone> getExileZones() {
+        return exileZones.values();
+    }
 
-	public ExileZone getPermanentExile() {
-		return exileZones.get(PERMANENT);
-	}
+    public ExileZone getPermanentExile() {
+        return exileZones.get(PERMANENT);
+    }
 
-	public void add(UUID id, String name, Card card) {
-		createZone(id, name).add(card);
-	}
-	
-	public void add(Card card) {
-		exileZones.get(PERMANENT).add(card);
-	}
+    public void add(UUID id, String name, Card card) {
+        createZone(id, name).add(card);
+    }
 
-	public ExileZone createZone(UUID id, String name) {
-		return createZone(id, name + " - Exile", false);
-	}
+    public void add(Card card) {
+        exileZones.get(PERMANENT).add(card);
+    }
 
-	public ExileZone createZone(UUID id, String name, boolean hidden) {
-		if (!exileZones.containsKey(id)) {
-			ExileZone exile = new ExileZone(id, name, hidden);
-			exileZones.put(id, exile);
-		}
-		return exileZones.get(id);
-	}
+    public ExileZone createZone(UUID id, String name) {
+        return createZone(id, name + " - Exile", false);
+    }
 
-	public ExileZone getExileZone(UUID id) {
-		return exileZones.get(id);
-	}
+    public ExileZone createZone(UUID id, String name, boolean hidden) {
+        if (!exileZones.containsKey(id)) {
+            ExileZone exile = new ExileZone(id, name, hidden);
+            exileZones.put(id, exile);
+        }
+        return exileZones.get(id);
+    }
 
-	public Card getCard(UUID cardId, Game game) {
-		for (ExileZone exile: exileZones.values()) {
-			if (exile.contains(cardId))
-				return game.getCard(cardId);
-		}
-		return null;
-	}
-    
+    public ExileZone getExileZone(UUID id) {
+        return exileZones.get(id);
+    }
+
+    public Card getCard(UUID cardId, Game game) {
+        for (ExileZone exile: exileZones.values()) {
+            if (exile.contains(cardId))
+                return game.getCard(cardId);
+        }
+        return null;
+    }
+
     public List<Card> getAllCards(Game game) {
         List<Card> cards = new ArrayList<Card>();
         for (ExileZone exile: exileZones.values()) {
@@ -104,16 +104,16 @@ public class Exile implements Serializable, Copyable<Exile> {
     }
 
     public void removeCard(Card card, Game game) {
-		for (ExileZone exile: exileZones.values()) {
-			if (exile.contains(card.getId()))
-				exile.remove(card);
-		}
+        for (ExileZone exile: exileZones.values()) {
+            if (exile.contains(card.getId()))
+                exile.remove(card);
+        }
     }
-    
-	@Override
-	public Exile copy() {
-		return new Exile(this);
-	}
+
+    @Override
+    public Exile copy() {
+        return new Exile(this);
+    }
 
     public void clear() {
         for (ExileZone exile: exileZones.values()) {

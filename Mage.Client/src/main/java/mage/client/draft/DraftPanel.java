@@ -56,98 +56,98 @@ import java.util.UUID;
  */
 public class DraftPanel extends javax.swing.JPanel {
 
-	private UUID draftId;
-	private Session session;
-	private Timer countdown;
-	private int timeout;
-	private boolean picked;
+    private UUID draftId;
+    private Session session;
+    private Timer countdown;
+    private int timeout;
+    private boolean picked;
 
-	private static CardsView emptyView = new CardsView();
-	
+    private static CardsView emptyView = new CardsView();
+
     /** Creates new form DraftPanel */
     public DraftPanel() {
         initComponents();
-		countdown = new Timer(1000,
-			new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					if (--timeout > 0) {
-						setTimeout(Integer.toString(timeout));
-					}
-					else {
-						setTimeout("0");
-						countdown.stop();
-					}
-				}
-			}
-		);
+        countdown = new Timer(1000,
+            new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (--timeout > 0) {
+                        setTimeout(Integer.toString(timeout));
+                    }
+                    else {
+                        setTimeout("0");
+                        countdown.stop();
+                    }
+                }
+            }
+        );
     }
 
-	public synchronized void showDraft(UUID draftId) {
-		this.draftId = draftId;
-		session = MageFrame.getSession();
-		MageFrame.addDraft(draftId, this);
-		if (!session.joinDraft(draftId))
-			hideDraft();
-	}
-	
-	public void updateDraft(DraftView draftView) {		
-		this.txtPack1.setText(draftView.getSets().get(0));
-		this.txtPack2.setText(draftView.getSets().get(1));
-		this.txtPack3.setText(draftView.getSets().get(2));
-		this.chkPack1.setSelected(draftView.getBoosterNum() > 0);
-		this.chkPack2.setSelected(draftView.getBoosterNum() > 1);
-		this.chkPack3.setSelected(draftView.getBoosterNum() > 2);
-		this.txtCardNo.setText(Integer.toString(draftView.getCardNum()));
-	}
+    public synchronized void showDraft(UUID draftId) {
+        this.draftId = draftId;
+        session = MageFrame.getSession();
+        MageFrame.addDraft(draftId, this);
+        if (!session.joinDraft(draftId))
+            hideDraft();
+    }
 
-	public void loadBooster(DraftPickView draftPickView) {
-		draftBooster.loadBooster(CardsViewUtil.convertSimple(draftPickView.getBooster()), bigCard);
-		draftPicks.loadCards(CardsViewUtil.convertSimple(draftPickView.getPicks()), bigCard, null);
-		this.draftBooster.clearCardEventListeners();
-		this.draftBooster.addCardEventListener(
-			new Listener<Event> () {
-				@Override
-				public void event(Event event) {
-					if (event.getEventName().equals("pick-a-card")) {
-						DraftPickView view = session.sendCardPick(draftId, (UUID)event.getSource());
-						if (view != null) {
-							//draftBooster.loadBooster(view.getBooster(), bigCard);
-							draftBooster.loadBooster(emptyView, bigCard);
-							draftPicks.loadCards(CardsViewUtil.convertSimple(view.getPicks()), bigCard, null);
-							Plugins.getInstance().getActionCallback().hidePopup();
-							setMessage("Waiting for other players");
-						}
-					}
-				}
-			}
-		);
-		setMessage("Pick a card");
-		countdown.stop();
-		this.timeout = draftPickView.getTimeout();
-		setTimeout(Integer.toString(timeout));
-		if (timeout != 0) {
-			countdown.start();
-		}
-	}
+    public void updateDraft(DraftView draftView) {        
+        this.txtPack1.setText(draftView.getSets().get(0));
+        this.txtPack2.setText(draftView.getSets().get(1));
+        this.txtPack3.setText(draftView.getSets().get(2));
+        this.chkPack1.setSelected(draftView.getBoosterNum() > 0);
+        this.chkPack2.setSelected(draftView.getBoosterNum() > 1);
+        this.chkPack3.setSelected(draftView.getBoosterNum() > 2);
+        this.txtCardNo.setText(Integer.toString(draftView.getCardNum()));
+    }
 
-	private void setTimeout(String text) {
-		this.txtTimeRemaining.setText(text);
-	}
+    public void loadBooster(DraftPickView draftPickView) {
+        draftBooster.loadBooster(CardsViewUtil.convertSimple(draftPickView.getBooster()), bigCard);
+        draftPicks.loadCards(CardsViewUtil.convertSimple(draftPickView.getPicks()), bigCard, null);
+        this.draftBooster.clearCardEventListeners();
+        this.draftBooster.addCardEventListener(
+            new Listener<Event> () {
+                @Override
+                public void event(Event event) {
+                    if (event.getEventName().equals("pick-a-card")) {
+                        DraftPickView view = session.sendCardPick(draftId, (UUID)event.getSource());
+                        if (view != null) {
+                            //draftBooster.loadBooster(view.getBooster(), bigCard);
+                            draftBooster.loadBooster(emptyView, bigCard);
+                            draftPicks.loadCards(CardsViewUtil.convertSimple(view.getPicks()), bigCard, null);
+                            Plugins.getInstance().getActionCallback().hidePopup();
+                            setMessage("Waiting for other players");
+                        }
+                    }
+                }
+            }
+        );
+        setMessage("Pick a card");
+        countdown.stop();
+        this.timeout = draftPickView.getTimeout();
+        setTimeout(Integer.toString(timeout));
+        if (timeout != 0) {
+            countdown.start();
+        }
+    }
 
-	public void hideDraft() {
-		Component c = this.getParent();
-		while (c != null && !(c instanceof DraftPane)) {
-			c = c.getParent();
-		}
-		if (c != null) {
-			((DraftPane)c).hideFrame();
-		}
-	}
+    private void setTimeout(String text) {
+        this.txtTimeRemaining.setText(text);
+    }
 
-	protected void setMessage(String message) {
-		this.lblMessage.setText(message);
-	}
+    public void hideDraft() {
+        Component c = this.getParent();
+        while (c != null && !(c instanceof DraftPane)) {
+            c = c.getParent();
+        }
+        if (c != null) {
+            ((DraftPane)c).hideFrame();
+        }
+    }
+
+    protected void setMessage(String message) {
+        this.lblMessage.setText(message);
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.

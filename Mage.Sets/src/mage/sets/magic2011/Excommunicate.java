@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class Excommunicate extends mage.sets.shardsofalara.Excommunicate {
 
-	public Excommunicate(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 14;
-		this.expansionSetCode = "M11";
-	}
+    public Excommunicate(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 14;
+        this.expansionSetCode = "M11";
+    }
 
-	public Excommunicate(final Excommunicate card) {
-		super(card);
-	}
+    public Excommunicate(final Excommunicate card) {
+        super(card);
+    }
 
-	@Override
-	public Excommunicate copy() {
-		return new Excommunicate(this);
-	}
+    @Override
+    public Excommunicate copy() {
+        return new Excommunicate(this);
+    }
 
 }

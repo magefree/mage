@@ -54,13 +54,13 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LevelX
  */
 public class BloodthirstyOgre extends CardImpl<BloodthirstyOgre> {
-    
+
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Demon");
     static {
         filter.getSubtype().add("Demon");
         filter.setScopeSubtype(Filter.ComparisonScope.Any);
     }
-    
+
     public BloodthirstyOgre(UUID ownerId) {
         super(ownerId, 104, "Bloodthirsty Ogre", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "CHK";
@@ -91,5 +91,5 @@ public class BloodthirstyOgre extends CardImpl<BloodthirstyOgre> {
     public BloodthirstyOgre copy() {
         return new BloodthirstyOgre(this);
     }    
-     
+
 }

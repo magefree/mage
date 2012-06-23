@@ -46,34 +46,34 @@ import java.util.UUID;
  */
 public class TrinketMage extends CardImpl<TrinketMage> {
 
-	private static FilterCard filter = new FilterCard("an artifact card with converted mana cost 1 or less");
+    private static FilterCard filter = new FilterCard("an artifact card with converted mana cost 1 or less");
 
-	static {
-		filter.getCardType().add(CardType.ARTIFACT);
-		filter.setConvertedManaCost(2);
-		filter.setConvertedManaCostComparison(Filter.ComparisonType.LessThan);
-	}
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.setConvertedManaCost(2);
+        filter.setConvertedManaCostComparison(Filter.ComparisonType.LessThan);
+    }
 
-	public TrinketMage(UUID ownerId) {
-		super(ownerId, 48, "Trinket Mage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
-		this.expansionSetCode = "SOM";
-		this.subtype.add("Human");
-		this.subtype.add("Wizard");
-		this.color.setBlue(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
-	   	TargetCardInLibrary target = new TargetCardInLibrary(0, 1, filter);
-		SearchEffect effect = new SearchLibraryRevealPutInHandEffect(target, false);
-		this.addAbility(new EntersBattlefieldTriggeredAbility(effect, true));
-	}
+    public TrinketMage(UUID ownerId) {
+        super(ownerId, 48, "Trinket Mage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
+        this.expansionSetCode = "SOM";
+        this.subtype.add("Human");
+        this.subtype.add("Wizard");
+        this.color.setBlue(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+           TargetCardInLibrary target = new TargetCardInLibrary(0, 1, filter);
+        SearchEffect effect = new SearchLibraryRevealPutInHandEffect(target, false);
+        this.addAbility(new EntersBattlefieldTriggeredAbility(effect, true));
+    }
 
-	public TrinketMage(final TrinketMage card) {
-		super(card);
-	}
+    public TrinketMage(final TrinketMage card) {
+        super(card);
+    }
 
-	@Override
-	public TrinketMage copy() {
-		return new TrinketMage(this);
-	}
+    @Override
+    public TrinketMage copy() {
+        return new TrinketMage(this);
+    }
 
 }

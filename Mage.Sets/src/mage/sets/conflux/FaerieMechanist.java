@@ -49,15 +49,15 @@ public class FaerieMechanist extends CardImpl<FaerieMechanist> {
     static {
             filter.getCardType().add(CardType.ARTIFACT);
     }
-    
+
     public FaerieMechanist(UUID ownerId) {
         super(ownerId, 27, "Faerie Mechanist", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{U}");
         this.expansionSetCode = "CON";
         this.color.setBlue(true);
         this.subtype.add("Faerie");
         this.subtype.add("Artificer");
-	this.power = new MageInt(2);
-	this.toughness = new MageInt(2);
+    this.power = new MageInt(2);
+    this.toughness = new MageInt(2);
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Faerie Mechanist enters the battlefield, look at the top three cards of your library. 

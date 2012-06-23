@@ -43,30 +43,30 @@ import mage.players.Player;
 
 public class UntapAllLandsControllerEffect extends OneShotEffect<UntapAllLandsControllerEffect> {
 
-	public UntapAllLandsControllerEffect() {
-		super(Outcome.Untap);
-		staticText = "Untap all lands you control";
-	}
+    public UntapAllLandsControllerEffect() {
+        super(Outcome.Untap);
+        staticText = "Untap all lands you control";
+    }
 
-	public UntapAllLandsControllerEffect(final UntapAllLandsControllerEffect effect) {
-		super(effect);
-	}
+    public UntapAllLandsControllerEffect(final UntapAllLandsControllerEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-		if (player != null) {
-			for (Permanent land: game.getBattlefield().getAllActivePermanents(new FilterLandPermanent(), player.getId(), game)) {
-				land.untap(game);
-			}
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+            for (Permanent land: game.getBattlefield().getAllActivePermanents(new FilterLandPermanent(), player.getId(), game)) {
+                land.untap(game);
+            }
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public UntapAllLandsControllerEffect copy() {
-		return new UntapAllLandsControllerEffect(this);
-	}
+    @Override
+    public UntapAllLandsControllerEffect copy() {
+        return new UntapAllLandsControllerEffect(this);
+    }
 
 }

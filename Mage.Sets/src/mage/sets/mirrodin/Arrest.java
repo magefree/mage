@@ -58,13 +58,13 @@ public class Arrest extends CardImpl<Arrest> {
         super(ownerId, 2, "Arrest", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
         this.expansionSetCode = "MRD";
         this.subtype.add("Aura");
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Detriment));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		this.addAbility(ability);
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ArrestEffect()));
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Detriment));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ArrestEffect()));
     }
 
     public Arrest (final Arrest card) {
@@ -80,32 +80,32 @@ public class Arrest extends CardImpl<Arrest> {
 
 class ArrestEffect extends ReplacementEffectImpl<ArrestEffect> {
 
-	public ArrestEffect() {
-		super(Duration.WhileOnBattlefield, Constants.Outcome.Detriment);
-		staticText = "Enchanted creature can't attack or block, and its activated abilities can't be activated";
-	}
+    public ArrestEffect() {
+        super(Duration.WhileOnBattlefield, Constants.Outcome.Detriment);
+        staticText = "Enchanted creature can't attack or block, and its activated abilities can't be activated";
+    }
 
-	public ArrestEffect(final ArrestEffect effect) {
-		super(effect);
-	}
+    public ArrestEffect(final ArrestEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public ArrestEffect copy() {
-		return new ArrestEffect(this);
-	}
+    @Override
+    public ArrestEffect copy() {
+        return new ArrestEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		return true;
-	}
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        return true;
+    }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == EventType.DECLARE_ATTACKER || event.getType() == EventType.DECLARE_BLOCKER || event.getType() == EventType.ACTIVATE_ABILITY) {
             Permanent enchantment = game.getPermanent(source.getSourceId());
             if (enchantment != null && enchantment.getAttachedTo() != null) {
@@ -115,6 +115,6 @@ class ArrestEffect extends ReplacementEffectImpl<ArrestEffect> {
             }
         }
         return false;
-	}
+    }
 
 }

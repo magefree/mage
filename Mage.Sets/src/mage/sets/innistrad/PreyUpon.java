@@ -44,11 +44,11 @@ import mage.target.common.TargetCreaturePermanent;
 public class PreyUpon extends CardImpl<PreyUpon> {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
-    
+
     static {
         filter.setTargetController(TargetController.NOT_YOU);
     }
-    
+
     public PreyUpon(UUID ownerId) {
         super(ownerId, 200, "Prey Upon", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{G}");
         this.expansionSetCode = "ISD";

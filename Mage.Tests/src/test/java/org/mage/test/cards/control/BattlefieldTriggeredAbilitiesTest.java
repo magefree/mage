@@ -25,7 +25,7 @@ public class BattlefieldTriggeredAbilitiesTest extends CardTestPlayerBase {
 
         setStopAt(4, Constants.PhaseStep.END_TURN);
         execute();
-        
+
         assertLife(playerA, 14);
         assertLife(playerB, 20);
 

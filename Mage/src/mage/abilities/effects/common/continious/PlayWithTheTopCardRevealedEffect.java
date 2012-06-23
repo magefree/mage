@@ -39,28 +39,28 @@ import mage.players.Player;
  */
 public class PlayWithTheTopCardRevealedEffect extends ContinuousEffectImpl<PlayWithTheTopCardRevealedEffect> {
 
-	public PlayWithTheTopCardRevealedEffect() {
-		super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Detriment);
-		staticText = "Play with the top card of your library revealed";
-	}
+    public PlayWithTheTopCardRevealedEffect() {
+        super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Detriment);
+        staticText = "Play with the top card of your library revealed";
+    }
 
-	public PlayWithTheTopCardRevealedEffect(final PlayWithTheTopCardRevealedEffect effect) {
-		super(effect);
-	}
+    public PlayWithTheTopCardRevealedEffect(final PlayWithTheTopCardRevealedEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-		if (player != null) {
-			player.setTopCardRevealed(true);
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+            player.setTopCardRevealed(true);
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public PlayWithTheTopCardRevealedEffect copy() {
-		return new PlayWithTheTopCardRevealedEffect(this);
-	}
+    @Override
+    public PlayWithTheTopCardRevealedEffect copy() {
+        return new PlayWithTheTopCardRevealedEffect(this);
+    }
 
 }

@@ -36,37 +36,37 @@ import java.util.concurrent.*;
  */
 public class ThreadExecutor {
 
-	private static final ExecutorService callExecutor = Executors.newCachedThreadPool();
-	private static final ExecutorService gameExecutor = Executors.newFixedThreadPool(ConfigSettings.getInstance().getMaxGameThreads());
-	private static final ScheduledExecutorService timeoutExecutor = Executors.newScheduledThreadPool(5);
+    private static final ExecutorService callExecutor = Executors.newCachedThreadPool();
+    private static final ExecutorService gameExecutor = Executors.newFixedThreadPool(ConfigSettings.getInstance().getMaxGameThreads());
+    private static final ScheduledExecutorService timeoutExecutor = Executors.newScheduledThreadPool(5);
 
-	static {
-		((ThreadPoolExecutor)callExecutor).setKeepAliveTime(60, TimeUnit.SECONDS);
-		((ThreadPoolExecutor)callExecutor).allowCoreThreadTimeOut(true);
-		((ThreadPoolExecutor)gameExecutor).setKeepAliveTime(60, TimeUnit.SECONDS);
-		((ThreadPoolExecutor)gameExecutor).allowCoreThreadTimeOut(true);
-		((ThreadPoolExecutor)timeoutExecutor).setKeepAliveTime(60, TimeUnit.SECONDS);
-		((ThreadPoolExecutor)timeoutExecutor).allowCoreThreadTimeOut(true);
-	}
+    static {
+        ((ThreadPoolExecutor)callExecutor).setKeepAliveTime(60, TimeUnit.SECONDS);
+        ((ThreadPoolExecutor)callExecutor).allowCoreThreadTimeOut(true);
+        ((ThreadPoolExecutor)gameExecutor).setKeepAliveTime(60, TimeUnit.SECONDS);
+        ((ThreadPoolExecutor)gameExecutor).allowCoreThreadTimeOut(true);
+        ((ThreadPoolExecutor)timeoutExecutor).setKeepAliveTime(60, TimeUnit.SECONDS);
+        ((ThreadPoolExecutor)timeoutExecutor).allowCoreThreadTimeOut(true);
+    }
 
-	private final static ThreadExecutor INSTANCE = new ThreadExecutor();
+    private final static ThreadExecutor INSTANCE = new ThreadExecutor();
 
-	public static ThreadExecutor getInstance() {
-		return INSTANCE;
-	}
+    public static ThreadExecutor getInstance() {
+        return INSTANCE;
+    }
 
-	private ThreadExecutor() {}
+    private ThreadExecutor() {}
 
-	public ExecutorService getCallExecutor() {
-		return callExecutor;
-	}
+    public ExecutorService getCallExecutor() {
+        return callExecutor;
+    }
 
-	public ExecutorService getGameExecutor() {
-		return gameExecutor;
-	}
+    public ExecutorService getGameExecutor() {
+        return gameExecutor;
+    }
 
-	public ScheduledExecutorService getTimeoutExecutor() {
-		return timeoutExecutor;
-	}
+    public ScheduledExecutorService getTimeoutExecutor() {
+        return timeoutExecutor;
+    }
 
 }

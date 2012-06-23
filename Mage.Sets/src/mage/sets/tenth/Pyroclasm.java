@@ -41,19 +41,19 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class Pyroclasm extends CardImpl<Pyroclasm> {
 
-	public Pyroclasm(UUID ownerId) {
-		super(ownerId, 222, "Pyroclasm", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
-		this.expansionSetCode = "10E";
-		this.color.setRed(true);
-		this.getSpellAbility().addEffect(new DamageAllEffect(2, new FilterCreaturePermanent()));
-	}
+    public Pyroclasm(UUID ownerId) {
+        super(ownerId, 222, "Pyroclasm", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
+        this.expansionSetCode = "10E";
+        this.color.setRed(true);
+        this.getSpellAbility().addEffect(new DamageAllEffect(2, new FilterCreaturePermanent()));
+    }
 
-	public Pyroclasm(final Pyroclasm card) {
-		super(card);
-	}
+    public Pyroclasm(final Pyroclasm card) {
+        super(card);
+    }
 
-	@Override
-	public Pyroclasm copy() {
-		return new Pyroclasm(this);
-	}
+    @Override
+    public Pyroclasm copy() {
+        return new Pyroclasm(this);
+    }
 }

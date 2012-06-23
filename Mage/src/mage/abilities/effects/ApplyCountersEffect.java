@@ -44,28 +44,28 @@ import mage.game.permanent.Permanent;
  */
 public class ApplyCountersEffect extends ContinuousEffectImpl<ApplyCountersEffect> {
 
-	public ApplyCountersEffect() {
-		super(Duration.EndOfGame, Layer.PTChangingEffects_7, SubLayer.Counters_7d, Outcome.BoostCreature);
-	}
+    public ApplyCountersEffect() {
+        super(Duration.EndOfGame, Layer.PTChangingEffects_7, SubLayer.Counters_7d, Outcome.BoostCreature);
+    }
 
-	public ApplyCountersEffect(ApplyCountersEffect effect) {
-		super(effect);
-	}
+    public ApplyCountersEffect(ApplyCountersEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		for (Permanent permanent: game.getBattlefield().getAllActivePermanents(CardType.CREATURE)) {
-			for (BoostCounter counter: permanent.getCounters().getBoostCounters()) {
-				permanent.addPower(counter.getPower() * counter.getCount());
-				permanent.addToughness(counter.getToughness() * counter.getCount());
-			}
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        for (Permanent permanent: game.getBattlefield().getAllActivePermanents(CardType.CREATURE)) {
+            for (BoostCounter counter: permanent.getCounters().getBoostCounters()) {
+                permanent.addPower(counter.getPower() * counter.getCount());
+                permanent.addToughness(counter.getToughness() * counter.getCount());
+            }
+        }
+        return true;
+    }
 
-	@Override
-	public ApplyCountersEffect copy() {
-		return new ApplyCountersEffect(this);
-	}
+    @Override
+    public ApplyCountersEffect copy() {
+        return new ApplyCountersEffect(this);
+    }
 
 }

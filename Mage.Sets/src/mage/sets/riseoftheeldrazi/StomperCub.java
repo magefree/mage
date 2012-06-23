@@ -45,7 +45,7 @@ public class StomperCub extends CardImpl<StomperCub> {
         super(ownerId, 210, "Stomper Cub", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
         this.expansionSetCode = "ROE";
         this.subtype.add("Beast");
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);
         this.addAbility(TrampleAbility.getInstance());

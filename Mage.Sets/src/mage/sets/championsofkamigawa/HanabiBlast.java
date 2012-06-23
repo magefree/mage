@@ -51,7 +51,7 @@ public class HanabiBlast extends CardImpl<HanabiBlast> {
     public HanabiBlast (UUID ownerId) {
         super(ownerId, 170, "Hanabi Blast", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}{R}");
         this.expansionSetCode = "CHK";
-		this.color.setRed(true);
+        this.color.setRed(true);
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         this.getSpellAbility().addEffect(ReturnToHandSpellEffect.getInstance());
@@ -71,31 +71,31 @@ public class HanabiBlast extends CardImpl<HanabiBlast> {
 
 class HanabiBlastDiscardEffect extends OneShotEffect<HanabiBlastDiscardEffect> {
 
-	private static final String effectText = "discard a card at random";
+    private static final String effectText = "discard a card at random";
 
-	HanabiBlastDiscardEffect () {
-		super(Constants.Outcome.Discard);
-		staticText = effectText;
-	}
+    HanabiBlastDiscardEffect () {
+        super(Constants.Outcome.Discard);
+        staticText = effectText;
+    }
 
-	HanabiBlastDiscardEffect(HanabiBlastDiscardEffect effect) {
-		super(effect);
-	}
+    HanabiBlastDiscardEffect(HanabiBlastDiscardEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             player.discard(player.getHand().getRandom(game), source, game);
             return true;
         }
-		return false;
-	}
+        return false;
+    }
 
-	@Override
-	public HanabiBlastDiscardEffect copy() {
-		return new HanabiBlastDiscardEffect(this);
-	}
+    @Override
+    public HanabiBlastDiscardEffect copy() {
+        return new HanabiBlastDiscardEffect(this);
+    }
 
 }
 

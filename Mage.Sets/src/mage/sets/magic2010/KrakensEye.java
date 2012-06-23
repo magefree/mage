@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class KrakensEye extends mage.sets.tenth.KrakensEye {
 
-	public KrakensEye(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 213;
-		this.expansionSetCode = "M10";
-	}
+    public KrakensEye(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 213;
+        this.expansionSetCode = "M10";
+    }
 
-	public KrakensEye(final KrakensEye card) {
-		super(card);
-	}
+    public KrakensEye(final KrakensEye card) {
+        super(card);
+    }
 
-	@Override
-	public KrakensEye copy() {
-		return new KrakensEye(this);
-	}
+    @Override
+    public KrakensEye copy() {
+        return new KrakensEye(this);
+    }
 
 }

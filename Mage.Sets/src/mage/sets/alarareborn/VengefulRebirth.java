@@ -50,66 +50,66 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class VengefulRebirth extends CardImpl<VengefulRebirth> {
 
-	public VengefulRebirth(UUID ownerId) {
-		super(ownerId, 62, "Vengeful Rebirth", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}{G}");
-		this.expansionSetCode = "ARB";
-		this.color.setRed(true);
-		this.color.setGreen(true);
-		this.getSpellAbility().addTarget(new TargetCardInYourGraveyard());
-		this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
-		this.getSpellAbility().addEffect(new VengefulRebirthEffect());
-		this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
-	}
+    public VengefulRebirth(UUID ownerId) {
+        super(ownerId, 62, "Vengeful Rebirth", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}{G}");
+        this.expansionSetCode = "ARB";
+        this.color.setRed(true);
+        this.color.setGreen(true);
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addEffect(new VengefulRebirthEffect());
+        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+    }
 
-	public VengefulRebirth(final VengefulRebirth card) {
-		super(card);
-	}
+    public VengefulRebirth(final VengefulRebirth card) {
+        super(card);
+    }
 
-	@Override
-	public VengefulRebirth copy() {
-		return new VengefulRebirth(this);
-	}
+    @Override
+    public VengefulRebirth copy() {
+        return new VengefulRebirth(this);
+    }
 
 }
 
 class VengefulRebirthEffect extends OneShotEffect<VengefulRebirthEffect> {
 
-	public VengefulRebirthEffect() {
-		super(Outcome.DrawCard);
-		staticText = "Return target card from your graveyard to your hand. If you return a nonland card to your hand this way, {this} deals damage equal to that card's converted mana cost to target creature or player";
-	}
+    public VengefulRebirthEffect() {
+        super(Outcome.DrawCard);
+        staticText = "Return target card from your graveyard to your hand. If you return a nonland card to your hand this way, {this} deals damage equal to that card's converted mana cost to target creature or player";
+    }
 
-	public VengefulRebirthEffect(final VengefulRebirthEffect effect) {
-		super(effect);
-	}
+    public VengefulRebirthEffect(final VengefulRebirthEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public VengefulRebirthEffect copy() {
-		return new VengefulRebirthEffect(this);
-	}
+    @Override
+    public VengefulRebirthEffect copy() {
+        return new VengefulRebirthEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-		Card card = (Card)game.getObject(source.getFirstTarget());
-		if (player.removeFromGraveyard(card, game)) {
-			card.moveToZone(Zone.HAND, source.getId(), game, false);
-			int damage = card.getManaCost().convertedManaCost();
-			if (!card.getCardType().contains(CardType.LAND)) {
-				Permanent permanent = game.getPermanent(source.getTargets().get(1).getTargets().get(0));
-				if (permanent != null) {
-					permanent.damage(damage, source.getSourceId(), game, true, false);
-					return true;
-				}
-				Player targetPlayer = game.getPlayer(source.getTargets().get(1).getTargets().get(0));
-				if (targetPlayer != null) {
-					targetPlayer.damage(damage, source.getSourceId(), game, false, true);
-					return true;
-				}
-				return false;
-			}
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        Card card = (Card)game.getObject(source.getFirstTarget());
+        if (player.removeFromGraveyard(card, game)) {
+            card.moveToZone(Zone.HAND, source.getId(), game, false);
+            int damage = card.getManaCost().convertedManaCost();
+            if (!card.getCardType().contains(CardType.LAND)) {
+                Permanent permanent = game.getPermanent(source.getTargets().get(1).getTargets().get(0));
+                if (permanent != null) {
+                    permanent.damage(damage, source.getSourceId(), game, true, false);
+                    return true;
+                }
+                Player targetPlayer = game.getPlayer(source.getTargets().get(1).getTargets().get(0));
+                if (targetPlayer != null) {
+                    targetPlayer.damage(damage, source.getSourceId(), game, false, true);
+                    return true;
+                }
+                return false;
+            }
+        }
+        return true;
+    }
 
 }

@@ -46,25 +46,25 @@ import mage.cards.CardImpl;
  */
 public class NightwingShade extends CardImpl<NightwingShade> {
 
-	public NightwingShade(UUID ownerId) {
-		super(ownerId, 109, "Nightwing Shade", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Shade");
-		this.color.setBlack(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+    public NightwingShade(UUID ownerId) {
+        super(ownerId, 109, "Nightwing Shade", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Shade");
+        this.color.setBlack(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-		this.addAbility(FlyingAbility.getInstance());
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{1}{B}")));
-	}
+        this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{1}{B}")));
+    }
 
-	public NightwingShade(final NightwingShade card) {
-		super(card);
-	}
+    public NightwingShade(final NightwingShade card) {
+        super(card);
+    }
 
-	@Override
-	public NightwingShade copy() {
-		return new NightwingShade(this);
-	}
+    @Override
+    public NightwingShade copy() {
+        return new NightwingShade(this);
+    }
 
 }

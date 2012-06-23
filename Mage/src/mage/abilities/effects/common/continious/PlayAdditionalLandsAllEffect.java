@@ -41,28 +41,28 @@ import mage.players.Player;
  */
 public class PlayAdditionalLandsAllEffect extends ContinuousEffectImpl<PlayAdditionalLandsAllEffect> {
 
-	public PlayAdditionalLandsAllEffect() {
-		super(Constants.Duration.WhileOnBattlefield, Constants.Layer.PlayerEffects, Constants.SubLayer.NA, Constants.Outcome.Benefit);
-		staticText = "Each player may play an additional land on each of his or her turns";
-	}
+    public PlayAdditionalLandsAllEffect() {
+        super(Constants.Duration.WhileOnBattlefield, Constants.Layer.PlayerEffects, Constants.SubLayer.NA, Constants.Outcome.Benefit);
+        staticText = "Each player may play an additional land on each of his or her turns";
+    }
 
-	public PlayAdditionalLandsAllEffect(final PlayAdditionalLandsAllEffect effect) {
-		super(effect);
-	}
+    public PlayAdditionalLandsAllEffect(final PlayAdditionalLandsAllEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public PlayAdditionalLandsAllEffect copy() {
-		return new PlayAdditionalLandsAllEffect(this);
-	}
+    @Override
+    public PlayAdditionalLandsAllEffect copy() {
+        return new PlayAdditionalLandsAllEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(game.getActivePlayerId());
-		if (player != null) {
-			player.setLandsPerTurn(player.getLandsPerTurn() + 1);
-			return true;
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(game.getActivePlayerId());
+        if (player != null) {
+            player.setLandsPerTurn(player.getLandsPerTurn() + 1);
+            return true;
+        }
+        return true;
+    }
 
 }

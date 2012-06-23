@@ -51,99 +51,99 @@ import mage.watchers.WatcherImpl;
  */
 public class Vengevine extends CardImpl<Vengevine> {
 
-	public Vengevine(UUID ownerId) {
-		super(ownerId, 212, "Vengevine", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-		this.expansionSetCode = "ROE";
-		this.subtype.add("Elemental");
-		this.color.setGreen(true);
-		this.power = new MageInt(4);
-		this.toughness = new MageInt(3);
+    public Vengevine(UUID ownerId) {
+        super(ownerId, 212, "Vengevine", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
+        this.expansionSetCode = "ROE";
+        this.subtype.add("Elemental");
+        this.color.setGreen(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(3);
 
-		this.addAbility(HasteAbility.getInstance());
-		this.addAbility(new VengevineAbility());
-		this.addWatcher(new VengevineWatcher());
-	}
+        this.addAbility(HasteAbility.getInstance());
+        this.addAbility(new VengevineAbility());
+        this.addWatcher(new VengevineWatcher());
+    }
 
-	public Vengevine(final Vengevine card) {
-		super(card);
-	}
+    public Vengevine(final Vengevine card) {
+        super(card);
+    }
 
-	@Override
-	public Vengevine copy() {
-		return new Vengevine(this);
-	}
+    @Override
+    public Vengevine copy() {
+        return new Vengevine(this);
+    }
 
 }
 
 class VengevineAbility extends TriggeredAbilityImpl<VengevineAbility> {
 
-	public VengevineAbility() {
-		super(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), true);
-	}
+    public VengevineAbility() {
+        super(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), true);
+    }
 
-	public VengevineAbility(final VengevineAbility ability) {
-		super(ability);
-	}
+    public VengevineAbility(final VengevineAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public VengevineAbility copy() {
-		return new VengevineAbility(this);
-	}
+    @Override
+    public VengevineAbility copy() {
+        return new VengevineAbility(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.SPELL_CAST && event.getPlayerId().equals(controllerId)) {
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.SPELL_CAST && event.getPlayerId().equals(controllerId)) {
             Watcher watcher = game.getState().getWatchers().get("CreatureCast", controllerId);
             if (watcher != null && watcher.conditionMet()) {
                 return true;
             }
-		}
-		return false;
-	}
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "Whenever you cast a spell, if it's the second creature spell you cast this turn, you may return {this} from your graveyard to the battlefield.";
-	}
+    @Override
+    public String getRule() {
+        return "Whenever you cast a spell, if it's the second creature spell you cast this turn, you may return {this} from your graveyard to the battlefield.";
+    }
 
 }
 
 
 class VengevineWatcher extends WatcherImpl<VengevineWatcher> {
 
-	int creatureSpellCount = 0;
+    int creatureSpellCount = 0;
 
-	public VengevineWatcher() {
-		super("CreatureCast", WatcherScope.PLAYER);
-	}
+    public VengevineWatcher() {
+        super("CreatureCast", WatcherScope.PLAYER);
+    }
 
-	public VengevineWatcher(final VengevineWatcher watcher) {
-		super(watcher);
+    public VengevineWatcher(final VengevineWatcher watcher) {
+        super(watcher);
         this.creatureSpellCount = watcher.creatureSpellCount;
-	}
+    }
 
-	@Override
-	public VengevineWatcher copy() {
-		return new VengevineWatcher(this);
-	}
+    @Override
+    public VengevineWatcher copy() {
+        return new VengevineWatcher(this);
+    }
 
-	@Override
-	public void watch(GameEvent event, Game game) {
-		condition = false;
-		if (event.getType() == EventType.SPELL_CAST && event.getPlayerId().equals(controllerId)) {
-			Spell spell = game.getStack().getSpell(event.getTargetId());
-			if (spell != null && spell.getCardType().contains(CardType.CREATURE)) {
-				creatureSpellCount++;
-				if (creatureSpellCount == 2)
-					condition = true;
-			}
-		}
-	}
+    @Override
+    public void watch(GameEvent event, Game game) {
+        condition = false;
+        if (event.getType() == EventType.SPELL_CAST && event.getPlayerId().equals(controllerId)) {
+            Spell spell = game.getStack().getSpell(event.getTargetId());
+            if (spell != null && spell.getCardType().contains(CardType.CREATURE)) {
+                creatureSpellCount++;
+                if (creatureSpellCount == 2)
+                    condition = true;
+            }
+        }
+    }
 
-	@Override
-	public void reset() {
-		super.reset();
-		creatureSpellCount = 0;
-	}
+    @Override
+    public void reset() {
+        super.reset();
+        creatureSpellCount = 0;
+    }
 
 }

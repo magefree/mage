@@ -69,10 +69,10 @@ public class ZombieApocalypse extends CardImpl<ZombieApocalypse> {
 }
 
 class ZombieApocalypseEffect extends OneShotEffect<ZombieApocalypseEffect> {
-    
+
     private static final FilterCreatureCard filterZombie = new FilterCreatureCard();
     private static final FilterCreaturePermanent filterHuman = new FilterCreaturePermanent();
-    
+
     static {
         filterZombie.getSubtype().add("Zombie");
         filterZombie.setScopeSubtype(Filter.ComparisonScope.Any);

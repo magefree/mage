@@ -46,30 +46,30 @@ import mage.remote.Session;
  */
 public class TournamentPlayerPanel extends javax.swing.JPanel {
 
-	private Session session;
+    private Session session;
 
-	/** Creates new form TournamentPlayerPanel */
+    /** Creates new form TournamentPlayerPanel */
     public TournamentPlayerPanel() {
         initComponents();
-		this.pnlPlayerName.setVisible(false);
+        this.pnlPlayerName.setVisible(false);
     }
 
-	public void init(int playerNum) {
-		session = MageFrame.getSession();
-		cbPlayerType.setModel(new DefaultComboBoxModel(session.getPlayerTypes()));
-		this.lblPlayerNum.setText("Player " + playerNum);
-	}
+    public void init(int playerNum) {
+        session = MageFrame.getSession();
+        cbPlayerType.setModel(new DefaultComboBoxModel(session.getPlayerTypes()));
+        this.lblPlayerNum.setText("Player " + playerNum);
+    }
 
-	public JComboBox getPlayerType() {
-		return this.cbPlayerType;
-	}
+    public JComboBox getPlayerType() {
+        return this.cbPlayerType;
+    }
 
-	public boolean joinTournamentTable(UUID roomId, UUID tableId) {
-		if (!this.cbPlayerType.getSelectedItem().equals("Human")) {
-			return session.joinTournamentTable(roomId, tableId, this.txtPlayerName.getText(), (String)this.cbPlayerType.getSelectedItem(), Integer.valueOf((String)this.cbLevel.getSelectedItem()));
- 		}
-		return true;
-	}
+    public boolean joinTournamentTable(UUID roomId, UUID tableId) {
+        if (!this.cbPlayerType.getSelectedItem().equals("Human")) {
+            return session.joinTournamentTable(roomId, tableId, this.txtPlayerName.getText(), (String)this.cbPlayerType.getSelectedItem(), Integer.valueOf((String)this.cbLevel.getSelectedItem()));
+         }
+        return true;
+    }
 
 
     /** This method is called from within the constructor to
@@ -155,19 +155,19 @@ public class TournamentPlayerPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-	private void cbPlayerTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPlayerTypeActionPerformed
-		if (!this.cbPlayerType.getSelectedItem().equals("Human")) {
-			this.pnlPlayerName.setVisible(true);
-			if (this.txtPlayerName.getText().length() == 0) {
-				this.txtPlayerName.setText("Computer " + this.lblPlayerNum.getText());
-			}
-		}
-		else {
-			this.pnlPlayerName.setVisible(false);
-		}
-		this.revalidate();
-		this.repaint();
-	}//GEN-LAST:event_cbPlayerTypeActionPerformed
+    private void cbPlayerTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPlayerTypeActionPerformed
+        if (!this.cbPlayerType.getSelectedItem().equals("Human")) {
+            this.pnlPlayerName.setVisible(true);
+            if (this.txtPlayerName.getText().length() == 0) {
+                this.txtPlayerName.setText("Computer " + this.lblPlayerNum.getText());
+            }
+        }
+        else {
+            this.pnlPlayerName.setVisible(false);
+        }
+        this.revalidate();
+        this.repaint();
+    }//GEN-LAST:event_cbPlayerTypeActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

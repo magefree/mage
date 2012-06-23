@@ -47,25 +47,25 @@ import mage.target.common.TargetCardInLibrary;
 public class SearchLibraryPutOnLibraryEffect extends SearchEffect<SearchLibraryPutOnLibraryEffect> {
 
     public SearchLibraryPutOnLibraryEffect(TargetCardInLibrary target) {
-		super(target, Outcome.DrawCard);
-		setText();
+        super(target, Outcome.DrawCard);
+        setText();
     }
 
-	public SearchLibraryPutOnLibraryEffect(final SearchLibraryPutOnLibraryEffect effect) {
-		super(effect);
-	}
+    public SearchLibraryPutOnLibraryEffect(final SearchLibraryPutOnLibraryEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public SearchLibraryPutOnLibraryEffect copy() {
-		return new SearchLibraryPutOnLibraryEffect(this);
-	}
+    @Override
+    public SearchLibraryPutOnLibraryEffect copy() {
+        return new SearchLibraryPutOnLibraryEffect(this);
+    }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player == null)
             return false;
-		if (player.searchLibrary(target, game)) {
+        if (player.searchLibrary(target, game)) {
             List<Card> cards = new ArrayList<Card>();
             for (UUID cardId: (List<UUID>)target.getTargets()) {
                 Card card = player.getLibrary().remove(cardId, game);
@@ -86,7 +86,7 @@ public class SearchLibraryPutOnLibraryEffect extends SearchEffect<SearchLibraryP
     private void setText() {
         StringBuilder sb = new StringBuilder();
         sb.append("Search your library for a ").append(target.getTargetName()).append(", then shuffle your library and put that card on top of it");
-		staticText = sb.toString();
+        staticText = sb.toString();
     }
 
 }

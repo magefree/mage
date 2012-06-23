@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class RelentlessRats extends mage.sets.tenth.RelentlessRats {
 
-	public RelentlessRats(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 108;
-		this.expansionSetCode = "M10";
-	}
+    public RelentlessRats(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 108;
+        this.expansionSetCode = "M10";
+    }
 
-	public RelentlessRats(final RelentlessRats card) {
-		super(card);
-	}
+    public RelentlessRats(final RelentlessRats card) {
+        super(card);
+    }
 
-	@Override
-	public RelentlessRats copy() {
-		return new RelentlessRats(this);
-	}
+    @Override
+    public RelentlessRats copy() {
+        return new RelentlessRats(this);
+    }
 
 }

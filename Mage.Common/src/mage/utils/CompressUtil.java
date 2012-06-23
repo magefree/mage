@@ -14,7 +14,7 @@ public class CompressUtil {
      * Defines should data be compressed or not. True by default.
      * Read from system property:
      */
-	private static boolean compressData = true;
+    private static boolean compressData = true;
 
     /**
      * Defines the system property name to disable any compressing.

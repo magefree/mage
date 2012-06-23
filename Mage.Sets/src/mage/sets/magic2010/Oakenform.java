@@ -60,11 +60,11 @@ public class Oakenform extends CardImpl<Oakenform> {
         this.subtype.add("Aura");
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();
-	this.getSpellAbility().addTarget(auraTarget);
+    this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-	Ability ability = new EnchantAbility(auraTarget.getTargetName());
-	this.addAbility(ability);
-	this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OakenformEffect()));
+    Ability ability = new EnchantAbility(auraTarget.getTargetName());
+    this.addAbility(ability);
+    this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OakenformEffect()));
     }
 
     public Oakenform(final Oakenform card) {
@@ -82,7 +82,7 @@ class OakenformEffect extends ContinuousEffectImpl<OakenformEffect> {
 
     public OakenformEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
-    	staticText = "Enchanted creature gets +3/+3";
+        staticText = "Enchanted creature gets +3/+3";
     }
 
     public OakenformEffect(final OakenformEffect effect) {
@@ -96,27 +96,27 @@ class OakenformEffect extends ContinuousEffectImpl<OakenformEffect> {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-	Permanent enchantment = game.getPermanent(source.getSourceId());
-    	if (enchantment != null && enchantment.getAttachedTo() != null) {
-		Permanent creature = game.getPermanent(enchantment.getAttachedTo());
-		if (creature != null) {
-			switch (layer) {
-				case PTChangingEffects_7:
-					if (sublayer == SubLayer.ModifyPT_7c) {
-						creature.addPower(3);
-						creature.addToughness(3);
-					}
-					break;
-			}
-			return true;
-		}
-	}
-	return false;
+    Permanent enchantment = game.getPermanent(source.getSourceId());
+        if (enchantment != null && enchantment.getAttachedTo() != null) {
+        Permanent creature = game.getPermanent(enchantment.getAttachedTo());
+        if (creature != null) {
+            switch (layer) {
+                case PTChangingEffects_7:
+                    if (sublayer == SubLayer.ModifyPT_7c) {
+                        creature.addPower(3);
+                        creature.addToughness(3);
+                    }
+                    break;
+            }
+            return true;
+        }
+    }
+    return false;
     }
 
     @Override
     public boolean hasLayer(Layer layer) {
-	return layer == Layer.PTChangingEffects_7;
+    return layer == Layer.PTChangingEffects_7;
     }
 
     @Override

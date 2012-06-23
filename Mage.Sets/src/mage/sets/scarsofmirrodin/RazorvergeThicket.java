@@ -49,22 +49,22 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class RazorvergeThicket extends CardImpl<RazorvergeThicket> {
 
-	private static FilterLandPermanent filter = new FilterLandPermanent();
+    private static FilterLandPermanent filter = new FilterLandPermanent();
 
-	static {
-		filter.setScopeSubtype(ComparisonScope.Any);
-		filter.setMessage("lands");
-	}
-	
+    static {
+        filter.setScopeSubtype(ComparisonScope.Any);
+        filter.setMessage("lands");
+    }
+
     public RazorvergeThicket (UUID ownerId) {
         super(ownerId, 228, "Razorverge Thicket", Rarity.RARE, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "SOM";
 
         Condition controls = new UnlessCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.FEWER_THAN, 4));
-		String abilityText = "tap it unless you control fewer than 3 " + filter.getMessage();
-		this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
-		this.addAbility(new GreenManaAbility());
-		this.addAbility(new WhiteManaAbility());
+        String abilityText = "tap it unless you control fewer than 3 " + filter.getMessage();
+        this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
+        this.addAbility(new GreenManaAbility());
+        this.addAbility(new WhiteManaAbility());
     }
 
     public RazorvergeThicket (final RazorvergeThicket card) {

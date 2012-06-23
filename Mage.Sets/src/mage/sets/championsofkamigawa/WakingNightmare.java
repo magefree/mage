@@ -45,7 +45,7 @@ public class WakingNightmare extends CardImpl<WakingNightmare> {
         super(ownerId, 149, "Waking Nightmare", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.getSpellAbility().addEffect(new DiscardTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }

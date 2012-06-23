@@ -46,9 +46,9 @@ public class MarisisTwinclaws extends CardImpl<MarisisTwinclaws> {
         this.expansionSetCode = "ARB";
         this.subtype.add("Cat");
         this.subtype.add("Warrior");
-		this.color.setWhite(true);
-		this.color.setRed(true);
-		this.color.setGreen(true);
+        this.color.setWhite(true);
+        this.color.setRed(true);
+        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
         this.addAbility(DoubleStrikeAbility.getInstance());

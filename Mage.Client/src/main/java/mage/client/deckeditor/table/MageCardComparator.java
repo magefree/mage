@@ -38,64 +38,64 @@ import mage.view.CardView;
  * @author nantuko
  */
 public class MageCardComparator implements Comparator<CardView> {
-	private final int column;
-	private boolean ascending;
+    private final int column;
+    private boolean ascending;
 
-	public MageCardComparator(int column, boolean ascending) {
-		this.column = column;
-		this.ascending = ascending;
-	}
+    public MageCardComparator(int column, boolean ascending) {
+        this.column = column;
+        this.ascending = ascending;
+    }
 
-	public int compare(CardView a, CardView b) {
-		Comparable aCom = null;
-		Comparable bCom = null;
+    public int compare(CardView a, CardView b) {
+        Comparable aCom = null;
+        Comparable bCom = null;
 
-		if (column == 0)// #skip
-		{
-			aCom = Integer.valueOf(1);
-			bCom = Integer.valueOf(1);
-		} else if (column == 1)// Name
-		{
-			aCom = a.getName();
-			bCom = b.getName();
-			if (aCom.equals(bCom) && a.getExpansionSetCode().equals(b.getExpansionSetCode())) {
-				aCom = a.getCardNumber();
-				bCom = b.getCardNumber();
-			}
-		} else if (column == 2)// Cost
-		{
-			aCom = a.getConvertedManaCost();
-			bCom = b.getConvertedManaCost();
-		} else if (column == 3)// Color
-		{
-			aCom = CardHelper.getColor(a);
-			bCom = CardHelper.getColor(b);
-		} else if (column == 4)// Type
-		{
-			aCom = CardHelper.getType(a);
-			bCom = CardHelper.getType(b);
-		} else if (column == 5)// Stats, attack and defense
-		{
-			aCom = new Float(-1);
-			bCom = new Float(-1);
+        if (column == 0)// #skip
+        {
+            aCom = Integer.valueOf(1);
+            bCom = Integer.valueOf(1);
+        } else if (column == 1)// Name
+        {
+            aCom = a.getName();
+            bCom = b.getName();
+            if (aCom.equals(bCom) && a.getExpansionSetCode().equals(b.getExpansionSetCode())) {
+                aCom = a.getCardNumber();
+                bCom = b.getCardNumber();
+            }
+        } else if (column == 2)// Cost
+        {
+            aCom = a.getConvertedManaCost();
+            bCom = b.getConvertedManaCost();
+        } else if (column == 3)// Color
+        {
+            aCom = CardHelper.getColor(a);
+            bCom = CardHelper.getColor(b);
+        } else if (column == 4)// Type
+        {
+            aCom = CardHelper.getType(a);
+            bCom = CardHelper.getType(b);
+        } else if (column == 5)// Stats, attack and defense
+        {
+            aCom = new Float(-1);
+            bCom = new Float(-1);
 
-			if (CardHelper.isCreature(a))
-				aCom = new Float(a.getPower() + "." + a.getToughness());
-			if (CardHelper.isCreature(b))
-				bCom = new Float(b.getPower() + "." + b.getToughness());
-		} else if (column == 6)// Rarity
-		{
-			aCom = a.getRarity().toString();
-			bCom = b.getRarity().toString();
-		} else if (column == 7)// Set name
-		{
-			aCom = a.getExpansionSetCode();
-			bCom = b.getExpansionSetCode();
-		}
+            if (CardHelper.isCreature(a))
+                aCom = new Float(a.getPower() + "." + a.getToughness());
+            if (CardHelper.isCreature(b))
+                bCom = new Float(b.getPower() + "." + b.getToughness());
+        } else if (column == 6)// Rarity
+        {
+            aCom = a.getRarity().toString();
+            bCom = b.getRarity().toString();
+        } else if (column == 7)// Set name
+        {
+            aCom = a.getExpansionSetCode();
+            bCom = b.getExpansionSetCode();
+        }
 
-		if (ascending)
-			return aCom.compareTo(bCom);
-		else
-			return bCom.compareTo(aCom);
-	}// compare()
+        if (ascending)
+            return aCom.compareTo(bCom);
+        else
+            return bCom.compareTo(aCom);
+    }// compare()
 }

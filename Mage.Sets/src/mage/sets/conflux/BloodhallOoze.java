@@ -56,7 +56,7 @@ public class BloodhallOoze extends CardImpl<BloodhallOoze> {
         this.color.setRed(true);
         this.subtype.add("Ooze");
         this.power = new MageInt(1);
-	this.toughness = new MageInt(1);
+    this.toughness = new MageInt(1);
         this.addAbility(new BloodhallOozeTriggeredAbility1());
         this.addAbility(new BloodhallOozeTriggeredAbility2());
     }

@@ -39,58 +39,58 @@ import mage.game.events.GameEvent;
  * @author BetaSteward_at_googlemail.com
  */
 public class Watchers extends HashMap<String, Watcher> {
-    
+
     public Watchers() {}
-    
+
     public Watchers(final Watchers watchers) {
-		for (Map.Entry<String, Watcher> entry: watchers.entrySet()) {
-			this.put(entry.getKey(), entry.getValue().copy());
-		}
+        for (Map.Entry<String, Watcher> entry: watchers.entrySet()) {
+            this.put(entry.getKey(), entry.getValue().copy());
+        }
     }
-    
-	public Watchers copy() {
-		return new Watchers(this);
-	}
-    
+
+    public Watchers copy() {
+        return new Watchers(this);
+    }
+
     public void add(Watcher watcher) {
         if (!this.containsKey(watcher.getKey()))
             this.put(watcher.getKey(), watcher);
     }
-    
-	public void watch(GameEvent event, Game game) {
-		for (Watcher watcher: this.values()) {
-			watcher.watch(event, game);
-		}
-	}
 
-	public void reset() {
-		for (Watcher watcher: this.values()) {
-			watcher.reset();
-		}
-	}
+    public void watch(GameEvent event, Game game) {
+        for (Watcher watcher: this.values()) {
+            watcher.watch(event, game);
+        }
+    }
+
+    public void reset() {
+        for (Watcher watcher: this.values()) {
+            watcher.reset();
+        }
+    }
 
 //    public void setSourceId(UUID sourceId) {
-//		for (Watcher watcher: this.values()) {
-//			watcher.setSourceId(sourceId);
-//		}
+//        for (Watcher watcher: this.values()) {
+//            watcher.setSourceId(sourceId);
+//        }
 //    }
 //    
 //    public void setControllerId(UUID controllerId) {
-//		for (Watcher watcher: this.values()) {
-//			watcher.setControllerId(controllerId);
-//		}
+//        for (Watcher watcher: this.values()) {
+//            watcher.setControllerId(controllerId);
+//        }
 //    }
-    
+
     public Watcher get(String key, UUID id) {
         return this.get(id + key);
     }
-    
-//	public Watcher get(UUID controllerId, UUID sourceId, String key) {
-//		for (Watcher watcher: this) {
-//			if ((watcher.getControllerId() == null || watcher.getControllerId().equals(controllerId)) && watcher.getKey().equals(key) && watcher.getSourceId().equals(sourceId))
-//				return watcher;
-//		}
-//		return null;
-//	}
+
+//    public Watcher get(UUID controllerId, UUID sourceId, String key) {
+//        for (Watcher watcher: this) {
+//            if ((watcher.getControllerId() == null || watcher.getControllerId().equals(controllerId)) && watcher.getKey().equals(key) && watcher.getSourceId().equals(sourceId))
+//                return watcher;
+//        }
+//        return null;
+//    }
 
 }

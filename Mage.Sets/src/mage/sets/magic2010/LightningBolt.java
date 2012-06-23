@@ -41,21 +41,21 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class LightningBolt extends CardImpl<LightningBolt> {
 
-	public LightningBolt(UUID ownerId) {
-		super(ownerId, 146, "Lightning Bolt", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
-		this.expansionSetCode = "M10";
-		this.color.setRed(true);
-		this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
-		this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-	}
+    public LightningBolt(UUID ownerId) {
+        super(ownerId, 146, "Lightning Bolt", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
+        this.expansionSetCode = "M10";
+        this.color.setRed(true);
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addEffect(new DamageTargetEffect(3));
+    }
 
-	public LightningBolt(final LightningBolt card) {
-		super(card);
-	}
+    public LightningBolt(final LightningBolt card) {
+        super(card);
+    }
 
-	@Override
-	public LightningBolt copy() {
-		return new LightningBolt(this);
-	}
+    @Override
+    public LightningBolt copy() {
+        return new LightningBolt(this);
+    }
 
 }

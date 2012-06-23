@@ -56,140 +56,140 @@ import org.apache.log4j.Logger;
  */
 public class FeedbackPanel extends javax.swing.JPanel {
 
-	private final static Logger logger = Logger.getLogger(FeedbackPanel.class);
+    private final static Logger logger = Logger.getLogger(FeedbackPanel.class);
 
-	public enum FeedbackMode {
-		INFORM, QUESTION, CONFIRM, CANCEL, SELECT, END
-	}
+    public enum FeedbackMode {
+        INFORM, QUESTION, CONFIRM, CANCEL, SELECT, END
+    }
 
-	private boolean selected = false;
-	private UUID gameId;
-	private Session session;
-	private FeedbackMode mode;
-	private MageDialog connectedDialog;
-	private ChatPanel connectedChatPanel;
+    private boolean selected = false;
+    private UUID gameId;
+    private Session session;
+    private FeedbackMode mode;
+    private MageDialog connectedDialog;
+    private ChatPanel connectedChatPanel;
 
-	/** Creates new form FeedbackPanel */
-	public FeedbackPanel() {
-		//initComponents();
-		customInitComponents();
-	}
+    /** Creates new form FeedbackPanel */
+    public FeedbackPanel() {
+        //initComponents();
+        customInitComponents();
+    }
 
-	public void init(UUID gameId) {
-		this.gameId = gameId;
-		session = MageFrame.getSession();
-	}
+    public void init(UUID gameId) {
+        this.gameId = gameId;
+        session = MageFrame.getSession();
+    }
 
-	public void getFeedback(FeedbackMode mode, String message, boolean special, Map<String, Serializable> options) {
-		logger.info("text: " + message);
-		this.lblMessage.setText(message);
-		this.selected = false;
-		this.mode = mode;
-		switch (this.mode) {
-			case INFORM:
-				this.btnLeft.setVisible(false);
-				this.btnRight.setVisible(false);
-				this.helper.setState("", false, "", false);
-				break;
-			case QUESTION:
-				this.btnLeft.setVisible(true);
-				this.btnLeft.setText("Yes");
-				this.btnRight.setVisible(true);
-				this.btnRight.setText("No");
-				this.helper.setState("Yes", true, "Yes", true);
-				break;
-			case CONFIRM:
-				this.btnLeft.setVisible(true);
-				this.btnLeft.setText("OK");
-				this.btnRight.setVisible(true);
-				this.btnRight.setText("Cancel");
-				this.helper.setState("Ok", true, "Cancel", true);
-				break;
-			case CANCEL:
-				this.btnLeft.setVisible(false);
-				this.btnRight.setVisible(true);
-				this.btnRight.setText("Cancel");
-				this.helper.setState("", false, "Cancel", true);
-				break;
-			case SELECT:
-				this.btnLeft.setVisible(false);
-				this.btnRight.setVisible(true);
-				this.btnRight.setText("Done");
-				this.helper.setState("", false, "Done", true);
-				break;
+    public void getFeedback(FeedbackMode mode, String message, boolean special, Map<String, Serializable> options) {
+        logger.info("text: " + message);
+        this.lblMessage.setText(message);
+        this.selected = false;
+        this.mode = mode;
+        switch (this.mode) {
+            case INFORM:
+                this.btnLeft.setVisible(false);
+                this.btnRight.setVisible(false);
+                this.helper.setState("", false, "", false);
+                break;
+            case QUESTION:
+                this.btnLeft.setVisible(true);
+                this.btnLeft.setText("Yes");
+                this.btnRight.setVisible(true);
+                this.btnRight.setText("No");
+                this.helper.setState("Yes", true, "Yes", true);
+                break;
+            case CONFIRM:
+                this.btnLeft.setVisible(true);
+                this.btnLeft.setText("OK");
+                this.btnRight.setVisible(true);
+                this.btnRight.setText("Cancel");
+                this.helper.setState("Ok", true, "Cancel", true);
+                break;
+            case CANCEL:
+                this.btnLeft.setVisible(false);
+                this.btnRight.setVisible(true);
+                this.btnRight.setText("Cancel");
+                this.helper.setState("", false, "Cancel", true);
+                break;
+            case SELECT:
+                this.btnLeft.setVisible(false);
+                this.btnRight.setVisible(true);
+                this.btnRight.setText("Done");
+                this.helper.setState("", false, "Done", true);
+                break;
             case END:
-				this.btnLeft.setVisible(false);
-				this.btnRight.setVisible(true);
-				this.btnRight.setText("OK");
-				this.helper.setState("", false, "Done", true);
-				break;
-		}
-		this.btnSpecial.setVisible(special);
-		this.btnSpecial.setText("Special");
-		this.helper.setSpecial("Special", special);
-		if (message.contains("P}")) {
-			this.btnSpecial.setVisible(true);
-			this.btnSpecial.setText("Pay 2 life");
-			this.helper.setSpecial("Pay 2 life", true);
-		}
+                this.btnLeft.setVisible(false);
+                this.btnRight.setVisible(true);
+                this.btnRight.setText("OK");
+                this.helper.setState("", false, "Done", true);
+                break;
+        }
+        this.btnSpecial.setVisible(special);
+        this.btnSpecial.setText("Special");
+        this.helper.setSpecial("Special", special);
+        if (message.contains("P}")) {
+            this.btnSpecial.setVisible(true);
+            this.btnSpecial.setText("Pay 2 life");
+            this.helper.setSpecial("Pay 2 life", true);
+        }
 
-		requestFocusIfPossible();
-		handleOptions(options);
+        requestFocusIfPossible();
+        handleOptions(options);
 
-		this.revalidate();
-		this.repaint();
-		this.helper.setLinks(btnLeft, btnRight, btnSpecial);
-//		if (modal) {
-//			this.helper.setVisible(false);
-//			startModal();
-//		} else {
-			this.helper.setVisible(true);
-//		}
-	}
+        this.revalidate();
+        this.repaint();
+        this.helper.setLinks(btnLeft, btnRight, btnSpecial);
+//        if (modal) {
+//            this.helper.setVisible(false);
+//            startModal();
+//        } else {
+            this.helper.setVisible(true);
+//        }
+    }
 
-	private void handleOptions(Map<String, Serializable> options) {
-		if (options != null) {
-			if (options.containsKey("UI.right.btn.text")) {
-				this.btnRight.setText((String)options.get("UI.right.btn.text"));
-				this.helper.setRight((String)options.get("UI.right.btn.text"), true);
-			}
-			if (options.containsKey("dialog")) {
-				connectedDialog = (MageDialog) options.get("dialog");
-			}
-		}
-	}
+    private void handleOptions(Map<String, Serializable> options) {
+        if (options != null) {
+            if (options.containsKey("UI.right.btn.text")) {
+                this.btnRight.setText((String)options.get("UI.right.btn.text"));
+                this.helper.setRight((String)options.get("UI.right.btn.text"), true);
+            }
+            if (options.containsKey("dialog")) {
+                connectedDialog = (MageDialog) options.get("dialog");
+            }
+        }
+    }
 
-	// Issue 256: Chat+Feedback panel: request focus prevents players from chatting
-	private void requestFocusIfPossible() {
-		boolean requestFocusAllowed = true;
-		if (connectedChatPanel != null && connectedChatPanel.getTxtMessageInputComponent() != null) {
-			if (connectedChatPanel.getTxtMessageInputComponent().hasFocus()) {
-				requestFocusAllowed = false;
-			}
-		}
-		if (requestFocusAllowed) {
-			this.btnRight.requestFocus();
-		}
-	}
+    // Issue 256: Chat+Feedback panel: request focus prevents players from chatting
+    private void requestFocusIfPossible() {
+        boolean requestFocusAllowed = true;
+        if (connectedChatPanel != null && connectedChatPanel.getTxtMessageInputComponent() != null) {
+            if (connectedChatPanel.getTxtMessageInputComponent().hasFocus()) {
+                requestFocusAllowed = false;
+            }
+        }
+        if (requestFocusAllowed) {
+            this.btnRight.requestFocus();
+        }
+    }
 
     public void doClick() {
         this.btnRight.doClick();
     }
 
-	public void clear() {
-//		stopModal();
-		this.btnLeft.setVisible(false);
-		this.btnRight.setVisible(false);
-		this.btnSpecial.setVisible(false);
-		this.lblMessage.setText("");
-		logger.debug("feedback - clear");
-	}
+    public void clear() {
+//        stopModal();
+        this.btnLeft.setVisible(false);
+        this.btnRight.setVisible(false);
+        this.btnSpecial.setVisible(false);
+        this.lblMessage.setText("");
+        logger.debug("feedback - clear");
+    }
 
-//	public void clear0() {
-//		stopModal();
-//	}
+//    public void clear0() {
+//        stopModal();
+//    }
 
-//	private synchronized void startModal() {
+//    private synchronized void startModal() {
 //
 //        try {
 //            if (SwingUtilities.isEventDispatchThread()) {
@@ -215,7 +215,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
 //                        } else if (source instanceof MenuComponent) {
 //                            ((MenuComponent) source).dispatchEvent(event);
 //                        } else {
-//							logger.warn("Unable to dispatch: " + event);
+//                            logger.warn("Unable to dispatch: " + event);
 //                        }
 //                    }
 //                }
@@ -232,7 +232,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
 //    private synchronized void stopModal() {
 //        notifyAll();
 //    }
-	
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -365,42 +365,42 @@ public class FeedbackPanel extends javax.swing.JPanel {
         add(jlabel2, BorderLayout.PAGE_END);
     }
 
-	private void btnRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRightActionPerformed
-		this.selected = true;
-//		clear0();
-		if (connectedDialog != null) {
-			connectedDialog.hideDialog();
-		}
-		if (mode == FeedbackMode.SELECT && (evt.getModifiers() & ActionEvent.CTRL_MASK) == ActionEvent.CTRL_MASK) {
-			session.sendPlayerInteger(gameId, 0);
+    private void btnRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRightActionPerformed
+        this.selected = true;
+//        clear0();
+        if (connectedDialog != null) {
+            connectedDialog.hideDialog();
+        }
+        if (mode == FeedbackMode.SELECT && (evt.getModifiers() & ActionEvent.CTRL_MASK) == ActionEvent.CTRL_MASK) {
+            session.sendPlayerInteger(gameId, 0);
         } else if (mode == FeedbackMode.END) {
             MageFrame.getGame(gameId).hideGame();
-		} else {
-			session.sendPlayerBoolean(gameId, false);
-		}
-	}//GEN-LAST:event_btnRightActionPerformed
+        } else {
+            session.sendPlayerBoolean(gameId, false);
+        }
+    }//GEN-LAST:event_btnRightActionPerformed
 
-	private void btnLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeftActionPerformed
-		this.selected = true;
-//		clear0();
-		session.sendPlayerBoolean(gameId, true);
-	}//GEN-LAST:event_btnLeftActionPerformed
+    private void btnLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeftActionPerformed
+        this.selected = true;
+//        clear0();
+        session.sendPlayerBoolean(gameId, true);
+    }//GEN-LAST:event_btnLeftActionPerformed
 
-	private void btnSpecialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpecialActionPerformed
-		session.sendPlayerString(gameId, "special");
-	}//GEN-LAST:event_btnSpecialActionPerformed
+    private void btnSpecialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpecialActionPerformed
+        session.sendPlayerString(gameId, "special");
+    }//GEN-LAST:event_btnSpecialActionPerformed
 
     public void setHelperPanel(HelperPanel helper) {
         this.helper = helper;
     }
 
-	public FeedbackMode getMode() {
-		return this.mode;
-	}
+    public FeedbackMode getMode() {
+        return this.mode;
+    }
 
-	public void setConnectedChatPanel(ChatPanel chatPanel) {
-		this.connectedChatPanel = chatPanel;
-	}
+    public void setConnectedChatPanel(ChatPanel chatPanel) {
+        this.connectedChatPanel = chatPanel;
+    }
 
     private javax.swing.JButton btnLeft;
     private javax.swing.JButton btnRight;

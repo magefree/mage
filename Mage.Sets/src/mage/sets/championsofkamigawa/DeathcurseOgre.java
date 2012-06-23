@@ -48,7 +48,7 @@ public class DeathcurseOgre extends CardImpl<DeathcurseOgre> {
         this.expansionSetCode = "CHK";
         this.subtype.add("Ogre");
         this.subtype.add("Warrior");
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(new DiesTriggeredAbility(new LoseLifePlayersEffect(3)));

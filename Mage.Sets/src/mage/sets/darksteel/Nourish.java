@@ -43,7 +43,7 @@ public class Nourish extends CardImpl<Nourish> {
     public Nourish (UUID ownerId) {
         super(ownerId, 78, "Nourish", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}{G}");
         this.expansionSetCode = "DST";
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.getSpellAbility().addEffect(new GainLifeEffect(6));
     }
 

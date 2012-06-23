@@ -54,92 +54,92 @@ import mage.target.TargetPermanent;
  */
 public class UlamogTheInfiniteGyre extends CardImpl<UlamogTheInfiniteGyre> {
 
-	private static final String effectText = "When Ulamog is put into a graveyard from anywhere, its owner shuffles his or her graveyard into his or her library";
+    private static final String effectText = "When Ulamog is put into a graveyard from anywhere, its owner shuffles his or her graveyard into his or her library";
 
-	public UlamogTheInfiniteGyre(UUID ownerId) {
-		super(ownerId, 12, "Ulamog, the Infinite Gyre", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{11}");
-		this.expansionSetCode = "ROE";
-		this.supertype.add("Legendary");
-		this.subtype.add("Eldrazi");
+    public UlamogTheInfiniteGyre(UUID ownerId) {
+        super(ownerId, 12, "Ulamog, the Infinite Gyre", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{11}");
+        this.expansionSetCode = "ROE";
+        this.supertype.add("Legendary");
+        this.subtype.add("Eldrazi");
 
-		this.power = new MageInt(10);
-		this.toughness = new MageInt(10);
+        this.power = new MageInt(10);
+        this.toughness = new MageInt(10);
 
-		this.addAbility(new UlamogTheInfiniteGyreDestroyOnCastAbility());
-		this.addAbility(new AnnihilatorAbility(4));
-		this.addAbility(IndestructibleAbility.getInstance());
-		this.addAbility(new ZoneChangeTriggeredAbility(Zone.GRAVEYARD, new UlamogTheInfiniteGyreEnterGraveyardEffect(), effectText, false));
-	}
+        this.addAbility(new UlamogTheInfiniteGyreDestroyOnCastAbility());
+        this.addAbility(new AnnihilatorAbility(4));
+        this.addAbility(IndestructibleAbility.getInstance());
+        this.addAbility(new ZoneChangeTriggeredAbility(Zone.GRAVEYARD, new UlamogTheInfiniteGyreEnterGraveyardEffect(), effectText, false));
+    }
 
-	public UlamogTheInfiniteGyre(final UlamogTheInfiniteGyre card) {
-		super(card);
-	}
+    public UlamogTheInfiniteGyre(final UlamogTheInfiniteGyre card) {
+        super(card);
+    }
 
-	@Override
-	public UlamogTheInfiniteGyre copy() {
-		return new UlamogTheInfiniteGyre(this);
-	}
+    @Override
+    public UlamogTheInfiniteGyre copy() {
+        return new UlamogTheInfiniteGyre(this);
+    }
 }
 
 class UlamogTheInfiniteGyreDestroyOnCastAbility extends TriggeredAbilityImpl<UlamogTheInfiniteGyreDestroyOnCastAbility> {
 
-	private static final String abilityText = "When you cast {this}, destroy target permanent";
+    private static final String abilityText = "When you cast {this}, destroy target permanent";
 
-	UlamogTheInfiniteGyreDestroyOnCastAbility ( ) {
-		super(Zone.STACK, new DestroyTargetEffect());
-		this.addTarget(new TargetPermanent());
-	}
+    UlamogTheInfiniteGyreDestroyOnCastAbility ( ) {
+        super(Zone.STACK, new DestroyTargetEffect());
+        this.addTarget(new TargetPermanent());
+    }
 
-	UlamogTheInfiniteGyreDestroyOnCastAbility(UlamogTheInfiniteGyreDestroyOnCastAbility ability) {
-		super(ability);
-	}
+    UlamogTheInfiniteGyreDestroyOnCastAbility(UlamogTheInfiniteGyreDestroyOnCastAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if ( event.getType() == EventType.SPELL_CAST ) {
-			Spell spell = (Spell)game.getObject(event.getTargetId());
-			if ( this.getSourceId().equals(spell.getSourceId())) {
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if ( event.getType() == EventType.SPELL_CAST ) {
+            Spell spell = (Spell)game.getObject(event.getTargetId());
+            if ( this.getSourceId().equals(spell.getSourceId())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public UlamogTheInfiniteGyreDestroyOnCastAbility copy() {
-		return new UlamogTheInfiniteGyreDestroyOnCastAbility(this);
-	}
+    @Override
+    public UlamogTheInfiniteGyreDestroyOnCastAbility copy() {
+        return new UlamogTheInfiniteGyreDestroyOnCastAbility(this);
+    }
 
-	@Override
-	public String getRule() {
-		return abilityText;
-	}
+    @Override
+    public String getRule() {
+        return abilityText;
+    }
 }
 
 class UlamogTheInfiniteGyreEnterGraveyardEffect extends OneShotEffect<UlamogTheInfiniteGyreEnterGraveyardEffect> {
 
-	UlamogTheInfiniteGyreEnterGraveyardEffect ( ) {
-		super(Outcome.Benefit);
-	}
+    UlamogTheInfiniteGyreEnterGraveyardEffect ( ) {
+        super(Outcome.Benefit);
+    }
 
-	UlamogTheInfiniteGyreEnterGraveyardEffect(UlamogTheInfiniteGyreEnterGraveyardEffect effect) {
-		super(effect);
-	}
+    UlamogTheInfiniteGyreEnterGraveyardEffect(UlamogTheInfiniteGyreEnterGraveyardEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-		if (player != null) {
-			player.getLibrary().addAll(player.getGraveyard().getCards(game), game);
-			player.getGraveyard().clear();
-			player.shuffleLibrary(game);
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+            player.getLibrary().addAll(player.getGraveyard().getCards(game), game);
+            player.getGraveyard().clear();
+            player.shuffleLibrary(game);
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public UlamogTheInfiniteGyreEnterGraveyardEffect copy() {
-		return new UlamogTheInfiniteGyreEnterGraveyardEffect(this);
-	}
+    @Override
+    public UlamogTheInfiniteGyreEnterGraveyardEffect copy() {
+        return new UlamogTheInfiniteGyreEnterGraveyardEffect(this);
+    }
 }

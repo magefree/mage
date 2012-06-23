@@ -54,13 +54,13 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class SnapcasterMage extends CardImpl<SnapcasterMage> {
 
-	private static final FilterCard filter = new FilterCard("instant or sorcery card in your graveyard");
+    private static final FilterCard filter = new FilterCard("instant or sorcery card in your graveyard");
 
-	static {
-		filter.getCardType().add(CardType.INSTANT);
-		filter.getCardType().add(CardType.SORCERY);
-		filter.setScopeCardType(ComparisonScope.Any);
-	}
+    static {
+        filter.getCardType().add(CardType.INSTANT);
+        filter.getCardType().add(CardType.SORCERY);
+        filter.setScopeCardType(ComparisonScope.Any);
+    }
 
     public SnapcasterMage(UUID ownerId) {
         super(ownerId, 78, "Snapcaster Mage", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}");
@@ -77,7 +77,7 @@ public class SnapcasterMage extends CardImpl<SnapcasterMage> {
         Ability ability = new EntersBattlefieldTriggeredAbility(new SnapcasterMageEffect());
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
-        
+
     }
 
     public SnapcasterMage(final SnapcasterMage card) {
@@ -92,24 +92,24 @@ public class SnapcasterMage extends CardImpl<SnapcasterMage> {
 
 class SnapcasterMageEffect extends ContinuousEffectImpl<SnapcasterMageEffect> {
 
-	public SnapcasterMageEffect() {
-		super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+    public SnapcasterMageEffect() {
+        super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.staticText = "target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost";
-	}
+    }
 
-	public SnapcasterMageEffect(final SnapcasterMageEffect effect) {
-		super(effect);
-	}
+    public SnapcasterMageEffect(final SnapcasterMageEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public SnapcasterMageEffect copy() {
-		return new SnapcasterMageEffect(this);
-	}
+    @Override
+    public SnapcasterMageEffect copy() {
+        return new SnapcasterMageEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Card card = game.getCard(targetPointer.getFirst(game, source));
-		if (card != null) {
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Card card = game.getCard(targetPointer.getFirst(game, source));
+        if (card != null) {
             FlashbackAbility ability;
             if (card.getCardType().contains(CardType.INSTANT))
                 ability = new FlashbackAbility(card.getManaCost(), TimingRule.INSTANT);
@@ -119,7 +119,7 @@ class SnapcasterMageEffect extends ContinuousEffectImpl<SnapcasterMageEffect> {
             ability.setControllerId(card.getOwnerId());
             game.getState().addOtherAbility(card.getId(), ability);
             return true;
-		}
-		return false;
-	}
+        }
+        return false;
+    }
 }

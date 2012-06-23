@@ -37,12 +37,12 @@ import mage.Constants.Zone;
  */
 public abstract class EvasionAbility<T extends EvasionAbility<T>> extends StaticAbility<T> {
 
-	public EvasionAbility() {
-		super(AbilityType.EVASION, Zone.BATTLEFIELD);
-	}
+    public EvasionAbility() {
+        super(AbilityType.EVASION, Zone.BATTLEFIELD);
+    }
 
-	public EvasionAbility(final EvasionAbility ability) {
-		super(ability);
-	}
+    public EvasionAbility(final EvasionAbility ability) {
+        super(ability);
+    }
 
 }

@@ -43,24 +43,24 @@ import mage.cards.CardImpl;
  */
 public class SteppeLynx extends CardImpl<SteppeLynx> {
 
-	public SteppeLynx(UUID ownerId) {
-		super(ownerId, 36, "Steppe Lynx", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
-		this.expansionSetCode = "ZEN";
-		this.subtype.add("Cat");
-		this.color.setWhite(true);
-		this.power = new MageInt(0);
-		this.toughness = new MageInt(1);
+    public SteppeLynx(UUID ownerId) {
+        super(ownerId, 36, "Steppe Lynx", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
+        this.expansionSetCode = "ZEN";
+        this.subtype.add("Cat");
+        this.color.setWhite(true);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(1);
 
-		this.addAbility(new LandfallAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), false));
-	}
+        this.addAbility(new LandfallAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), false));
+    }
 
-	public SteppeLynx(final SteppeLynx card) {
-		super(card);
-	}
+    public SteppeLynx(final SteppeLynx card) {
+        super(card);
+    }
 
-	@Override
-	public SteppeLynx copy() {
-		return new SteppeLynx(this);
-	}
+    @Override
+    public SteppeLynx copy() {
+        return new SteppeLynx(this);
+    }
 
 }

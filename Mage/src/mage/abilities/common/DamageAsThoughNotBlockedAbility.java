@@ -38,28 +38,28 @@ import static mage.Constants.*;
  */
 public class DamageAsThoughNotBlockedAbility extends StaticAbility<DamageAsThoughNotBlockedAbility> {
 
-	private static final DamageAsThoughNotBlockedAbility fINSTANCE =  new DamageAsThoughNotBlockedAbility();
+    private static final DamageAsThoughNotBlockedAbility fINSTANCE =  new DamageAsThoughNotBlockedAbility();
 
-	private Object readResolve() throws ObjectStreamException {
-		return fINSTANCE;
-	}
+    private Object readResolve() throws ObjectStreamException {
+        return fINSTANCE;
+    }
 
-	public static DamageAsThoughNotBlockedAbility getInstance() {
-		return fINSTANCE;
-	}
+    public static DamageAsThoughNotBlockedAbility getInstance() {
+        return fINSTANCE;
+    }
 
-	private DamageAsThoughNotBlockedAbility() {
-		super(AbilityType.STATIC, Zone.BATTLEFIELD);
-	}
+    private DamageAsThoughNotBlockedAbility() {
+        super(AbilityType.STATIC, Zone.BATTLEFIELD);
+    }
 
-	@Override
-	public String getRule() {
-		return "You may have {this} assign its combat damage as though it weren't blocked.";
-	}
+    @Override
+    public String getRule() {
+        return "You may have {this} assign its combat damage as though it weren't blocked.";
+    }
 
-	@Override
-	public DamageAsThoughNotBlockedAbility copy() {
-		return fINSTANCE;
-	}
+    @Override
+    public DamageAsThoughNotBlockedAbility copy() {
+        return fINSTANCE;
+    }
 
 }

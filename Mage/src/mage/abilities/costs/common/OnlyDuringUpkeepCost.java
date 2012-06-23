@@ -39,30 +39,30 @@ import mage.game.Game;
  */
 public class OnlyDuringUpkeepCost extends CostImpl<OnlyDuringUpkeepCost> {
 
-	public OnlyDuringUpkeepCost() {
-		text = "Activate this ability only during your upkeep";
-	}
-	
-	public OnlyDuringUpkeepCost(final OnlyDuringUpkeepCost cost) {
-		super(cost);
-	}
-	
-	@Override
-	public OnlyDuringUpkeepCost copy() {
-		return new OnlyDuringUpkeepCost(this);
-	}
+    public OnlyDuringUpkeepCost() {
+        text = "Activate this ability only during your upkeep";
+    }
 
-	@Override
-	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-		if (game.getActivePlayerId().equals(controllerId) && game.getStep().getType() == PhaseStep.UPKEEP)
-			return true;
-		return false;
-	}
+    public OnlyDuringUpkeepCost(final OnlyDuringUpkeepCost cost) {
+        super(cost);
+    }
 
-	@Override
-	public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-		this.paid = true;
-		return paid;
-	}
-	
+    @Override
+    public OnlyDuringUpkeepCost copy() {
+        return new OnlyDuringUpkeepCost(this);
+    }
+
+    @Override
+    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+        if (game.getActivePlayerId().equals(controllerId) && game.getStep().getType() == PhaseStep.UPKEEP)
+            return true;
+        return false;
+    }
+
+    @Override
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+        this.paid = true;
+        return paid;
+    }
+
 }

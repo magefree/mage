@@ -38,7 +38,7 @@ import mage.game.Game;
 public class NoCreatureCondition implements Condition {
     private static NoCreatureCondition fInstance = new NoCreatureCondition();
 
-	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     public static Condition getInstance() {
         return fInstance;
@@ -46,6 +46,6 @@ public class NoCreatureCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-		return game.getBattlefield().countAll(filter, game) == 0;
+        return game.getBattlefield().countAll(filter, game) == 0;
     }
 }

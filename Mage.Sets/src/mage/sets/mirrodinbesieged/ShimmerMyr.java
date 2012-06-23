@@ -71,34 +71,34 @@ public class ShimmerMyr extends CardImpl<ShimmerMyr> {
 
 class ShimmerMyrEffect extends AsThoughEffectImpl<ShimmerMyrEffect> {
 
-	public ShimmerMyrEffect() {
-		super(Constants.AsThoughEffectType.CAST, Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
-		staticText = "You may cast artifact cards as though they had flash";
-	}
+    public ShimmerMyrEffect() {
+        super(Constants.AsThoughEffectType.CAST, Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        staticText = "You may cast artifact cards as though they had flash";
+    }
 
-	public ShimmerMyrEffect(final ShimmerMyrEffect effect) {
-		super(effect);
-	}
+    public ShimmerMyrEffect(final ShimmerMyrEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
 
-	@Override
-	public ShimmerMyrEffect copy() {
-		return new ShimmerMyrEffect(this);
-	}
+    @Override
+    public ShimmerMyrEffect copy() {
+        return new ShimmerMyrEffect(this);
+    }
 
-	@Override
-	public boolean applies(UUID sourceId, Ability source, Game game) {
-		Card card = game.getCard(sourceId);
-		if (card != null) {
-			if (card.getCardType().contains(CardType.ARTIFACT) && card.getOwnerId().equals(source.getControllerId())) {
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean applies(UUID sourceId, Ability source, Game game) {
+        Card card = game.getCard(sourceId);
+        if (card != null) {
+            if (card.getCardType().contains(CardType.ARTIFACT) && card.getOwnerId().equals(source.getControllerId())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

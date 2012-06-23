@@ -47,36 +47,36 @@ import mage.target.TargetPermanent;
  */
 public class ManicVandal extends CardImpl<ManicVandal> {
 
-	private static final FilterPermanent filter = new FilterPermanent("artifact");
+    private static final FilterPermanent filter = new FilterPermanent("artifact");
 
-	static {
-		filter.getCardType().add(CardType.ARTIFACT);
-		filter.setScopeCardType(ComparisonScope.Any);
-	}
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.setScopeCardType(ComparisonScope.Any);
+    }
 
-	public ManicVandal(UUID ownerId) {
-		super(ownerId, 151, "Manic Vandal", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Human");
-		this.subtype.add("Warrior");
-		this.color.setRed(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+    public ManicVandal(UUID ownerId) {
+        super(ownerId, 151, "Manic Vandal", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Human");
+        this.subtype.add("Warrior");
+        this.color.setRed(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-		Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
-		Target target = new TargetPermanent(filter);
-		target.setRequired(true);
-		ability.addTarget(target);
-		this.addAbility(ability);
-	}
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
+        Target target = new TargetPermanent(filter);
+        target.setRequired(true);
+        ability.addTarget(target);
+        this.addAbility(ability);
+    }
 
-	public ManicVandal(final ManicVandal card) {
-		super(card);
-	}
+    public ManicVandal(final ManicVandal card) {
+        super(card);
+    }
 
-	@Override
-	public ManicVandal copy() {
-		return new ManicVandal(this);
-	}
+    @Override
+    public ManicVandal copy() {
+        return new ManicVandal(this);
+    }
 
 }

@@ -37,21 +37,21 @@ import mage.game.events.GameEvent.EventType;
  */
 public class PreCombatMainPhase extends Phase<PreCombatMainPhase> {
 
-	public PreCombatMainPhase() {
-		this.type = TurnPhase.PRECOMBAT_MAIN;
-		this.event = EventType.PRECOMBAT_MAIN_PHASE;
-		this.preEvent = EventType.PRECOMBAT_MAIN_PHASE_PRE;
-		this.postEvent = EventType.PRECOMBAT_MAIN_PHASE_POST;
-		this.steps.add(new PreCombatMainStep());
-	}
+    public PreCombatMainPhase() {
+        this.type = TurnPhase.PRECOMBAT_MAIN;
+        this.event = EventType.PRECOMBAT_MAIN_PHASE;
+        this.preEvent = EventType.PRECOMBAT_MAIN_PHASE_PRE;
+        this.postEvent = EventType.PRECOMBAT_MAIN_PHASE_POST;
+        this.steps.add(new PreCombatMainStep());
+    }
 
-	public PreCombatMainPhase(final PreCombatMainPhase phase) {
-		super(phase);
-	}
+    public PreCombatMainPhase(final PreCombatMainPhase phase) {
+        super(phase);
+    }
 
-	@Override
-	public PreCombatMainPhase copy() {
-		return new PreCombatMainPhase(this);
-	}
+    @Override
+    public PreCombatMainPhase copy() {
+        return new PreCombatMainPhase(this);
+    }
 
 }

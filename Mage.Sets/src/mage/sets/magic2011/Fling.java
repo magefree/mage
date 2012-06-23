@@ -49,63 +49,63 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class Fling extends CardImpl<Fling> {
 
-	public Fling(UUID ownerId) {
-		super(ownerId, 139, "Fling", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
-		this.expansionSetCode = "M11";
-		this.color.setRed(true);
-		this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
-		this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
-		this.getSpellAbility().addEffect(new FlingEffect());
-	}
+    public Fling(UUID ownerId) {
+        super(ownerId, 139, "Fling", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
+        this.expansionSetCode = "M11";
+        this.color.setRed(true);
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addEffect(new FlingEffect());
+    }
 
-	public Fling(final Fling card) {
-		super(card);
-	}
+    public Fling(final Fling card) {
+        super(card);
+    }
 
-	@Override
-	public Fling copy() {
-		return new Fling(this);
-	}
+    @Override
+    public Fling copy() {
+        return new Fling(this);
+    }
 }
 
 class FlingEffect extends OneShotEffect<FlingEffect> {
 
-	public FlingEffect() {
-		super(Outcome.Damage);
-		staticText = "{this} deals damage equal to the sacrificed creature's power to target creature or player";
-	}
+    public FlingEffect() {
+        super(Outcome.Damage);
+        staticText = "{this} deals damage equal to the sacrificed creature's power to target creature or player";
+    }
 
-	public FlingEffect(final FlingEffect effect) {
-		super(effect);
-	}
+    public FlingEffect(final FlingEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		int amount = 0;
-		for (Cost cost: source.getCosts()) {
-			if (cost instanceof SacrificeTargetCost && ((SacrificeTargetCost)cost).getPermanents().size() > 0) {
-				amount = ((SacrificeTargetCost)cost).getPermanents().get(0).getPower().getValue();
-				break;
-			}
-		}
-		if (amount > 0) {
-			Permanent permanent = game.getPermanent(source.getFirstTarget());
-			if (permanent != null) {
-				permanent.damage(amount, source.getSourceId(), game, true, false);
-				return true;
-			}
-			Player player = game.getPlayer(source.getFirstTarget());
-			if (player != null) {
-				player.damage(amount, source.getSourceId(), game, false, true);
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        int amount = 0;
+        for (Cost cost: source.getCosts()) {
+            if (cost instanceof SacrificeTargetCost && ((SacrificeTargetCost)cost).getPermanents().size() > 0) {
+                amount = ((SacrificeTargetCost)cost).getPermanents().get(0).getPower().getValue();
+                break;
+            }
+        }
+        if (amount > 0) {
+            Permanent permanent = game.getPermanent(source.getFirstTarget());
+            if (permanent != null) {
+                permanent.damage(amount, source.getSourceId(), game, true, false);
+                return true;
+            }
+            Player player = game.getPlayer(source.getFirstTarget());
+            if (player != null) {
+                player.damage(amount, source.getSourceId(), game, false, true);
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public FlingEffect copy() {
-		return new FlingEffect(this);
-	}
+    @Override
+    public FlingEffect copy() {
+        return new FlingEffect(this);
+    }
 
 }

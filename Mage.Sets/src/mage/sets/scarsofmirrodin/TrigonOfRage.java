@@ -57,35 +57,35 @@ import mage.abilities.costs.mana.GenericManaCost;
  */
 public class TrigonOfRage extends CardImpl<TrigonOfRage> {
 
-	public TrigonOfRage(UUID ownerId) {
-		super(ownerId, 216, "Trigon of Rage", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-		this.expansionSetCode = "SOM";
+    public TrigonOfRage(UUID ownerId) {
+        super(ownerId, 216, "Trigon of Rage", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
+        this.expansionSetCode = "SOM";
 
-		this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(new ChargeCounter(3)), ""));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(new ChargeCounter(3)), ""));
 
-		Costs costs = new CostsImpl();
-		costs.add(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
-		costs.add(new TapSourceCost());
-		Effect pumpEffect = new BoostTargetEffect(3, 0, Duration.EndOfTurn);
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, pumpEffect, costs);
+        Costs costs = new CostsImpl();
+        costs.add(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
+        costs.add(new TapSourceCost());
+        Effect pumpEffect = new BoostTargetEffect(3, 0, Duration.EndOfTurn);
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, pumpEffect, costs);
         ability.addManaCost(new GenericManaCost(2));
-		Target target = new TargetCreaturePermanent();
-		target.setRequired(true);
-		ability.addTarget(target);
-		this.addAbility(ability);
+        Target target = new TargetCreaturePermanent();
+        target.setRequired(true);
+        ability.addTarget(target);
+        this.addAbility(ability);
 
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new TapSourceCost());
         ability2.addManaCost(new ManaCostsImpl("{R}{R}"));
-		this.addAbility(ability2);
-	}
+        this.addAbility(ability2);
+    }
 
-	public TrigonOfRage(final TrigonOfRage card) {
-		super(card);
-	}
+    public TrigonOfRage(final TrigonOfRage card) {
+        super(card);
+    }
 
-	@Override
-	public TrigonOfRage copy() {
-		return new TrigonOfRage(this);
-	}
+    @Override
+    public TrigonOfRage copy() {
+        return new TrigonOfRage(this);
+    }
 
 }

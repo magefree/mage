@@ -41,24 +41,24 @@ import mage.cards.CardImpl;
  */
 public class GiantSpider extends CardImpl<GiantSpider> {
 
-	public GiantSpider(UUID ownerId) {
-		super(ownerId, 267, "Giant Spider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
-		this.expansionSetCode = "10E";
-		this.subtype.add("Spider");
-		this.color.setGreen(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(4);
+    public GiantSpider(UUID ownerId) {
+        super(ownerId, 267, "Giant Spider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
+        this.expansionSetCode = "10E";
+        this.subtype.add("Spider");
+        this.color.setGreen(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(4);
 
-		this.addAbility(ReachAbility.getInstance());
-	}
+        this.addAbility(ReachAbility.getInstance());
+    }
 
-	public GiantSpider(final GiantSpider card) {
-		super(card);
-	}
+    public GiantSpider(final GiantSpider card) {
+        super(card);
+    }
 
-	@Override
-	public GiantSpider copy() {
-		return new GiantSpider(this);
-	}
+    @Override
+    public GiantSpider copy() {
+        return new GiantSpider(this);
+    }
 
 }

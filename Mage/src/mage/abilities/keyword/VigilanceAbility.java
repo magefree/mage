@@ -38,28 +38,28 @@ import mage.abilities.StaticAbility;
  */
 public class VigilanceAbility extends StaticAbility<VigilanceAbility> {
 
-	private static final VigilanceAbility fINSTANCE =  new VigilanceAbility();
+    private static final VigilanceAbility fINSTANCE =  new VigilanceAbility();
 
-	private Object readResolve() throws ObjectStreamException {
-		return fINSTANCE;
-	}
+    private Object readResolve() throws ObjectStreamException {
+        return fINSTANCE;
+    }
 
-	public static VigilanceAbility getInstance() {
-		return fINSTANCE;
-	}
+    public static VigilanceAbility getInstance() {
+        return fINSTANCE;
+    }
 
-	private VigilanceAbility() {
-		super(Zone.BATTLEFIELD, null);
-	}
+    private VigilanceAbility() {
+        super(Zone.BATTLEFIELD, null);
+    }
 
-	@Override
-	public String getRule() {
-		return "Vigilance";
-	}
+    @Override
+    public String getRule() {
+        return "Vigilance";
+    }
 
-	@Override
-	public VigilanceAbility copy() {
-		return fINSTANCE;
-	}
+    @Override
+    public VigilanceAbility copy() {
+        return fINSTANCE;
+    }
 
 }

@@ -47,11 +47,11 @@ public class Slagstorm extends CardImpl<Slagstorm> {
     public Slagstorm (UUID ownerId) {
         super(ownerId, 75, "Slagstorm", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
         this.expansionSetCode = "MBS";
-		this.color.setRed(true);
+        this.color.setRed(true);
         this.getSpellAbility().addEffect(new DamageAllEffect(3, new FilterCreaturePermanent()));
-		Mode mode = new Mode();
-		mode.getEffects().add(new DamagePlayersEffect(3));
-		this.getSpellAbility().addMode(mode);
+        Mode mode = new Mode();
+        mode.getEffects().add(new DamagePlayersEffect(3));
+        this.getSpellAbility().addMode(mode);
     }
 
     public Slagstorm (final Slagstorm card) {

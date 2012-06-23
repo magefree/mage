@@ -40,24 +40,24 @@ import mage.cards.CardImpl;
  */
 public class WoollyThoctar extends CardImpl<WoollyThoctar> {
 
-	public WoollyThoctar(UUID ownerId) {
-		super(ownerId, 209, "Woolly Thoctar", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}{G}{W}");
-		this.expansionSetCode = "ALA";
-		this.color.setRed(true);
-		this.color.setGreen(true);
-		this.color.setWhite(true);
-		this.subtype.add("Beast");
-		this.power = new MageInt(5);
-		this.toughness = new MageInt(4);
-	}
+    public WoollyThoctar(UUID ownerId) {
+        super(ownerId, 209, "Woolly Thoctar", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}{G}{W}");
+        this.expansionSetCode = "ALA";
+        this.color.setRed(true);
+        this.color.setGreen(true);
+        this.color.setWhite(true);
+        this.subtype.add("Beast");
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(4);
+    }
 
-	public WoollyThoctar(final WoollyThoctar card) {
-		super(card);
-	}
+    public WoollyThoctar(final WoollyThoctar card) {
+        super(card);
+    }
 
-	@Override
-	public WoollyThoctar copy() {
-		return new WoollyThoctar(this);
-	}
+    @Override
+    public WoollyThoctar copy() {
+        return new WoollyThoctar(this);
+    }
 
 }

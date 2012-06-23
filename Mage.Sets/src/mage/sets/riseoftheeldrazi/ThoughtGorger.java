@@ -60,11 +60,11 @@ public class ThoughtGorger extends CardImpl<ThoughtGorger> {
         this.toughness = new MageInt(2);
 
         this.addAbility(TrampleAbility.getInstance());
-        
+
         // When Thought Gorger enters the battlefield, put a +1/+1 counter on it for each card in your hand. If you do, discard your hand.
         Ability ability1 = new EntersBattlefieldTriggeredAbility(new ThoughtGorgerEffectEnters());
         this.addAbility(ability1);
-        
+
         // When Thought Gorger leaves the battlefield, draw a card for each +1/+1 counter on it.
         Ability ability2 = new LeavesBattlefieldTriggeredAbility(new ThoughtGorgerEffectLeaves(), false);
         this.addAbility(ability2);
@@ -78,7 +78,7 @@ public class ThoughtGorger extends CardImpl<ThoughtGorger> {
     public ThoughtGorger copy() {
         return new ThoughtGorger(this);
     }
-    
+
 }
 
 class ThoughtGorgerEffectEnters extends OneShotEffect<ThoughtGorgerEffectEnters> {
@@ -112,21 +112,21 @@ class ThoughtGorgerEffectEnters extends OneShotEffect<ThoughtGorgerEffectEnters>
 }
 
 class ThoughtGorgerEffectLeaves extends OneShotEffect<ThoughtGorgerEffectLeaves> {
-    
+
     public ThoughtGorgerEffectLeaves() {
         super(Outcome.Neutral);
         this.staticText = "draw a card for each +1/+1 counter on it.";
     }
-    
+
     public ThoughtGorgerEffectLeaves(final ThoughtGorgerEffectLeaves effect) {
         super(effect);
     }
-    
+
     @Override
     public ThoughtGorgerEffectLeaves copy() {
         return new ThoughtGorgerEffectLeaves(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());

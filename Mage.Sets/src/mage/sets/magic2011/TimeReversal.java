@@ -45,55 +45,55 @@ import mage.players.Player;
  */
 public class TimeReversal extends CardImpl<TimeReversal> {
 
-	public TimeReversal(UUID ownerId) {
-		super(ownerId, 75, "Time Reversal", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
-		this.expansionSetCode = "M11";
-		this.color.setBlue(true);
-		this.getSpellAbility().addEffect(new TimeReversalEffect());
-		this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
-	}
+    public TimeReversal(UUID ownerId) {
+        super(ownerId, 75, "Time Reversal", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
+        this.expansionSetCode = "M11";
+        this.color.setBlue(true);
+        this.getSpellAbility().addEffect(new TimeReversalEffect());
+        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+    }
 
-	public TimeReversal(final TimeReversal card) {
-		super(card);
-	}
+    public TimeReversal(final TimeReversal card) {
+        super(card);
+    }
 
-	@Override
-	public TimeReversal copy() {
-		return new TimeReversal(this);
-	}
+    @Override
+    public TimeReversal copy() {
+        return new TimeReversal(this);
+    }
 }
 
 class TimeReversalEffect extends OneShotEffect<TimeReversalEffect> {
 
-	public TimeReversalEffect() {
-		super(Outcome.Neutral);
-		staticText = "Each player shuffles his or her hand and graveyard into his or her library, then draws seven cards";
-	}
+    public TimeReversalEffect() {
+        super(Outcome.Neutral);
+        staticText = "Each player shuffles his or her hand and graveyard into his or her library, then draws seven cards";
+    }
 
-	public TimeReversalEffect(final TimeReversalEffect effect) {
-		super(effect);
-	}
-	
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player sourcePlayer = game.getPlayer(source.getControllerId());
-		for (UUID playerId: sourcePlayer.getInRange()) {
-			Player player = game.getPlayer(playerId);
-			if (player != null) {
-				player.getLibrary().addAll(player.getHand().getCards(game), game);
-				player.getLibrary().addAll(player.getGraveyard().getCards(game), game);
-				player.shuffleLibrary(game);
-				player.getHand().clear();
-				player.getGraveyard().clear();
-				player.drawCards(7, game);
-			}
-		}
-		return true;
-	}
+    public TimeReversalEffect(final TimeReversalEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public TimeReversalEffect copy() {
-		return new TimeReversalEffect(this);
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player sourcePlayer = game.getPlayer(source.getControllerId());
+        for (UUID playerId: sourcePlayer.getInRange()) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                player.getLibrary().addAll(player.getHand().getCards(game), game);
+                player.getLibrary().addAll(player.getGraveyard().getCards(game), game);
+                player.shuffleLibrary(game);
+                player.getHand().clear();
+                player.getGraveyard().clear();
+                player.drawCards(7, game);
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public TimeReversalEffect copy() {
+        return new TimeReversalEffect(this);
+    }
 
 }

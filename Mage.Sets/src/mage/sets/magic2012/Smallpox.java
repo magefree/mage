@@ -56,7 +56,7 @@ public class Smallpox extends CardImpl<Smallpox> {
         this.color.setBlack(true);
 
         // Each player loses 1 life, discards a card, sacrifices a creature, then sacrifices a land.
-		this.getSpellAbility().addEffect(new SmallpoxEffect());
+        this.getSpellAbility().addEffect(new SmallpoxEffect());
     }
 
     public Smallpox(final Smallpox card) {
@@ -71,17 +71,17 @@ public class Smallpox extends CardImpl<Smallpox> {
 
 class SmallpoxEffect extends OneShotEffect<SmallpoxEffect> {
 
-	private static FilterPermanent filterCreature = new FilterPermanent("a creature you control");
-	private static FilterPermanent filterLand = new FilterPermanent("a land you control");
+    private static FilterPermanent filterCreature = new FilterPermanent("a creature you control");
+    private static FilterPermanent filterLand = new FilterPermanent("a land you control");
 
-	static {
-		filterCreature.getCardType().add(CardType.CREATURE);
-		filterCreature.setScopeCardType(Filter.ComparisonScope.Any);
-		filterCreature.setTargetController(Constants.TargetController.YOU);
-		filterLand.getCardType().add(CardType.LAND);
-		filterLand.setScopeCardType(Filter.ComparisonScope.Any);
-		filterLand.setTargetController(Constants.TargetController.YOU);
-	}
+    static {
+        filterCreature.getCardType().add(CardType.CREATURE);
+        filterCreature.setScopeCardType(Filter.ComparisonScope.Any);
+        filterCreature.setTargetController(Constants.TargetController.YOU);
+        filterLand.getCardType().add(CardType.LAND);
+        filterLand.setScopeCardType(Filter.ComparisonScope.Any);
+        filterLand.setTargetController(Constants.TargetController.YOU);
+    }
 
     SmallpoxEffect() {
         super(Constants.Outcome.DestroyPermanent);
@@ -97,11 +97,11 @@ class SmallpoxEffect extends OneShotEffect<SmallpoxEffect> {
         for (UUID playerId : game.getPlayerList()) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-				player.loseLife(1, game);
+                player.loseLife(1, game);
             }
         }
 
-		for (UUID playerId : game.getPlayerList()) {
+        for (UUID playerId : game.getPlayerList()) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 player.discard(1, source, game);
@@ -109,17 +109,17 @@ class SmallpoxEffect extends OneShotEffect<SmallpoxEffect> {
         }
 
 
-		for (UUID playerId : game.getPlayerList()) {
+        for (UUID playerId : game.getPlayerList()) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-				sacrifice(game, source, player, filterCreature);
+                sacrifice(game, source, player, filterCreature);
             }
         }
 
-		for (UUID playerId : game.getPlayerList()) {
+        for (UUID playerId : game.getPlayerList()) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-				sacrifice(game, source, player, filterLand);
+                sacrifice(game, source, player, filterLand);
             }
         }
 
@@ -131,21 +131,21 @@ class SmallpoxEffect extends OneShotEffect<SmallpoxEffect> {
         return new SmallpoxEffect(this);
     }
 
-	private void sacrifice(Game game, Ability source, Player player, FilterPermanent filter) {
-		Target target = new TargetControlledPermanent(1, 1, filter, false);
-		if (target.canChoose(player.getId(), game)) {
-			while (!target.isChosen() && target.canChoose(player.getId(), game)) {
-				player.choose(Constants.Outcome.Sacrifice, target, source.getSourceId(), game);
-			}
+    private void sacrifice(Game game, Ability source, Player player, FilterPermanent filter) {
+        Target target = new TargetControlledPermanent(1, 1, filter, false);
+        if (target.canChoose(player.getId(), game)) {
+            while (!target.isChosen() && target.canChoose(player.getId(), game)) {
+                player.choose(Constants.Outcome.Sacrifice, target, source.getSourceId(), game);
+            }
 
-			for ( int idx = 0; idx < target.getTargets().size(); idx++) {
-				Permanent permanent = game.getPermanent((UUID)target.getTargets().get(idx));
+            for ( int idx = 0; idx < target.getTargets().size(); idx++) {
+                Permanent permanent = game.getPermanent((UUID)target.getTargets().get(idx));
 
-				if ( permanent != null ) {
-					permanent.sacrifice(source.getSourceId(), game);
-				}
-			}
-		}
-	}
+                if ( permanent != null ) {
+                    permanent.sacrifice(source.getSourceId(), game);
+                }
+            }
+        }
+    }
 
 }

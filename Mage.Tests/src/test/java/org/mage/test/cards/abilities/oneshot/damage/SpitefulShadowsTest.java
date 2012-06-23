@@ -21,13 +21,13 @@ public class SpitefulShadowsTest extends CardTestPlayerBase {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 2);
         addCard(Constants.Zone.HAND, playerA, "Spiteful Shadows");
         addCard(Constants.Zone.HAND, playerA, "Lightning Bolt");
-        
+
         castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Spiteful Shadows", "Glistener Elf");
         castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "Glistener Elf");
 
         setStopAt(1, Constants.PhaseStep.END_TURN);
         execute();
-        
+
         assertLife(playerA, 20);
         assertLife(playerB, 20);
         assertCounterCount(playerA, CounterType.POISON, 3);
@@ -40,13 +40,13 @@ public class SpitefulShadowsTest extends CardTestPlayerBase {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 2);
         addCard(Constants.Zone.HAND, playerA, "Spiteful Shadows");
         addCard(Constants.Zone.HAND, playerA, "Lightning Bolt");
-        
+
         castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Spiteful Shadows", "Craw Wurm");
         castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "Craw Wurm");
 
         setStopAt(1, Constants.PhaseStep.END_TURN);
         execute();
-        
+
         assertLife(playerA, 17);
         assertLife(playerB, 20);
         assertCounterCount(playerA, CounterType.POISON, 0);

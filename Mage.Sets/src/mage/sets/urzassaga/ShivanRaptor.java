@@ -50,10 +50,10 @@ public class ShivanRaptor extends CardImpl<ShivanRaptor>{
         this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
-        
-	this.addAbility(FirstStrikeAbility.getInstance());
-	this.addAbility(HasteAbility.getInstance());
-	this.addAbility(new EchoAbility("{2}{R}"));
+
+    this.addAbility(FirstStrikeAbility.getInstance());
+    this.addAbility(HasteAbility.getInstance());
+    this.addAbility(new EchoAbility("{2}{R}"));
     }
 
     public ShivanRaptor(final ShivanRaptor card) {

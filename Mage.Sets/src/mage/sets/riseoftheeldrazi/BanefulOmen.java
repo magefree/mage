@@ -68,22 +68,22 @@ public class BanefulOmen extends CardImpl<BanefulOmen> {
     public BanefulOmen copy() {
         return new BanefulOmen(this);
     }
-    
+
     class BanefulOmenTriggeredAbility extends TriggeredAbilityImpl<BanefulOmenTriggeredAbility> {
-        
+
         public BanefulOmenTriggeredAbility() {
             super(Zone.BATTLEFIELD, new BanefulOmenEffect(), true);
         }
-        
+
         public BanefulOmenTriggeredAbility(BanefulOmenTriggeredAbility ability) {
             super(ability);
         }
-        
+
         @Override
         public BanefulOmenTriggeredAbility copy() {
             return new BanefulOmenTriggeredAbility(this);
         }
-        
+
         @Override
         public boolean checkTrigger(GameEvent event, Game game) {
             if (event.getType() == GameEvent.EventType.END_PHASE_PRE && event.getPlayerId().equals(this.controllerId)) {
@@ -91,23 +91,23 @@ public class BanefulOmen extends CardImpl<BanefulOmen> {
             }
             return false;
         }
-        
+
         @Override
         public String getRule() {
             return "At the beginning of your end step, you may reveal the top card of your library. If you do, each opponent loses life equal to that card's converted mana cost.";
         }
     }
-    
+
     class BanefulOmenEffect extends OneShotEffect<BanefulOmenEffect> {
-        
+
         public BanefulOmenEffect() {
             super(Outcome.Benefit);
         }
-    
+
         public BanefulOmenEffect(final BanefulOmenEffect effect) {
             super(effect);
         }
-        
+
         @Override
         public boolean apply(Game game, Ability source) {
             Player player = game.getPlayer(source.getControllerId());

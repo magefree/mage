@@ -58,8 +58,8 @@ public class GlissaTheTraitor extends CardImpl<GlissaTheTraitor> {
         this.supertype.add("Legendary");
         this.subtype.add("Zombie");
         this.subtype.add("Elf");
-		this.color.setBlack(true);
-		this.color.setGreen(true);
+        this.color.setBlack(true);
+        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         // First strike, 

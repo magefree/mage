@@ -38,26 +38,26 @@ import java.util.UUID;
  */
 public class Players extends LinkedHashMap<UUID, Player> {
 
-	public Players() {}
+    public Players() {}
 
-	public Players(final Players players) {
-		for (Entry<UUID, Player> entry: players.entrySet()) {
-			this.put(entry.getKey(), entry.getValue().copy());
-		}
-	}
+    public Players(final Players players) {
+        for (Entry<UUID, Player> entry: players.entrySet()) {
+            this.put(entry.getKey(), entry.getValue().copy());
+        }
+    }
 
-	public void addPlayer(Player player) {
-		this.put(player.getId(), player);
-	}
+    public void addPlayer(Player player) {
+        this.put(player.getId(), player);
+    }
 
-	public void resetPassed() {
-		for (Player player: this.values()) {
-			player.resetPassed();
-		}
-	}
+    public void resetPassed() {
+        for (Player player: this.values()) {
+            player.resetPassed();
+        }
+    }
 
-	public Players copy() {
-		return new Players(this);
-	}
+    public Players copy() {
+        return new Players(this);
+    }
 
 }

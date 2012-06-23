@@ -53,12 +53,12 @@ import mage.util.CardUtil;
  */
 
 public class LongForgottenGohei extends CardImpl<LongForgottenGohei> {
-    
+
     private final static FilterCreaturePermanent spiritFilter = new FilterCreaturePermanent("Spirits");
     static {
         spiritFilter.getSubtype().add("Spirit");
     }
-    
+
     public LongForgottenGohei(UUID ownerId) {
             super(ownerId, 261, "Long-Forgotten Gohei", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
             this.expansionSetCode = "CHK";
@@ -79,38 +79,38 @@ public class LongForgottenGohei extends CardImpl<LongForgottenGohei> {
 
 class LongForgottenGoheiCostReductionEffect extends CostModificationEffectImpl<LongForgottenGoheiCostReductionEffect> {
 
-	LongForgottenGoheiCostReductionEffect ( ) {
-		super(Duration.WhileOnBattlefield, Outcome.Benefit);
-		staticText = "Arcane spells you cast cost {1} less to cast.";
-	}
+    LongForgottenGoheiCostReductionEffect ( ) {
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        staticText = "Arcane spells you cast cost {1} less to cast.";
+    }
 
-	LongForgottenGoheiCostReductionEffect(LongForgottenGoheiCostReductionEffect effect) {
-		super(effect);
-	}
+    LongForgottenGoheiCostReductionEffect(LongForgottenGoheiCostReductionEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source, Ability abilityToModify) {
-		SpellAbility spellAbility = (SpellAbility) abilityToModify;
-		CardUtil.adjustCost(spellAbility, 1);
-		return true;
-	}
-	
-	@Override
-	public boolean applies(Ability abilityToModify, Ability source, Game game) {
-		if ( abilityToModify instanceof SpellAbility ) {
-			Card sourceCard = game.getCard(((SpellAbility)abilityToModify).getSourceId());
-			if ( sourceCard != null && 
+    @Override
+    public boolean apply(Game game, Ability source, Ability abilityToModify) {
+        SpellAbility spellAbility = (SpellAbility) abilityToModify;
+        CardUtil.adjustCost(spellAbility, 1);
+        return true;
+    }
+
+    @Override
+    public boolean applies(Ability abilityToModify, Ability source, Game game) {
+        if ( abilityToModify instanceof SpellAbility ) {
+            Card sourceCard = game.getCard(((SpellAbility)abilityToModify).getSourceId());
+            if ( sourceCard != null && 
                              sourceCard.getSubtype().contains("Arcane") && 
                              sourceCard.getOwnerId().equals(source.getControllerId()) ) {
                                     return true;
-			}
-		}
-		return false;
-	}
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public LongForgottenGoheiCostReductionEffect copy() {
-		return new LongForgottenGoheiCostReductionEffect(this);
-	}
+    @Override
+    public LongForgottenGoheiCostReductionEffect copy() {
+        return new LongForgottenGoheiCostReductionEffect(this);
+    }
 
 }

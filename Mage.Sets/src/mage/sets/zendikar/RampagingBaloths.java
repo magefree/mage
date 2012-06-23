@@ -44,35 +44,35 @@ import mage.game.permanent.token.Token;
  */
 public class RampagingBaloths extends CardImpl<RampagingBaloths> {
 
-	public RampagingBaloths(UUID ownerId) {
-		super(ownerId, 178, "Rampaging Baloths", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
-		this.expansionSetCode = "ZEN";
-		this.subtype.add("Beast");
-		this.color.setGreen(true);
-		this.power = new MageInt(6);
-		this.toughness = new MageInt(6);
-		this.addAbility(TrampleAbility.getInstance());
-		this.addAbility(new LandfallAbility(new CreateTokenEffect(new RampagingBalothsToken()), true));
-	}
+    public RampagingBaloths(UUID ownerId) {
+        super(ownerId, 178, "Rampaging Baloths", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
+        this.expansionSetCode = "ZEN";
+        this.subtype.add("Beast");
+        this.color.setGreen(true);
+        this.power = new MageInt(6);
+        this.toughness = new MageInt(6);
+        this.addAbility(TrampleAbility.getInstance());
+        this.addAbility(new LandfallAbility(new CreateTokenEffect(new RampagingBalothsToken()), true));
+    }
 
-	public RampagingBaloths(final RampagingBaloths card) {
-		super(card);
-	}
+    public RampagingBaloths(final RampagingBaloths card) {
+        super(card);
+    }
 
-	@Override
-	public RampagingBaloths copy() {
-		return new RampagingBaloths(this);
-	}
+    @Override
+    public RampagingBaloths copy() {
+        return new RampagingBaloths(this);
+    }
 
 }
 
 class RampagingBalothsToken extends Token {
 
-	public RampagingBalothsToken() {
-		super("Beast", "4/4 green Beast creature token");
-		cardType.add(CardType.CREATURE);
-		subtype.add("Beast");
-		power = new MageInt(4);
-		toughness = new MageInt(4);
-	}
+    public RampagingBalothsToken() {
+        super("Beast", "4/4 green Beast creature token");
+        cardType.add(CardType.CREATURE);
+        subtype.add("Beast");
+        power = new MageInt(4);
+        toughness = new MageInt(4);
+    }
 }

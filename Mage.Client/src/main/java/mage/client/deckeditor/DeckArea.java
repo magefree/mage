@@ -54,35 +54,35 @@ public class DeckArea extends javax.swing.JPanel {
         jSplitPane1.setOpaque(false);
         deckList.setOpaque(false);
         sideboardList.setOpaque(false);
-		deckList.setDisplayNoCopies(true);
-		sideboardList.setDisplayNoCopies(true);
+        deckList.setDisplayNoCopies(true);
+        sideboardList.setDisplayNoCopies(true);
     }
 
-	public void showSideboard(boolean show) {
-		this.sideboardList.setVisible(show);
-	}
+    public void showSideboard(boolean show) {
+        this.sideboardList.setVisible(show);
+    }
 
-	public void loadDeck(Deck deck, BigCard bigCard) {
-		deckList.loadCards(new CardsView(deck.getCards()), bigCard, null);
-		if (sideboardList.isVisible())
-			sideboardList.loadCards(new CardsView(deck.getSideboard()), bigCard, null);
-	}
+    public void loadDeck(Deck deck, BigCard bigCard) {
+        deckList.loadCards(new CardsView(deck.getCards()), bigCard, null);
+        if (sideboardList.isVisible())
+            sideboardList.loadCards(new CardsView(deck.getSideboard()), bigCard, null);
+    }
 
-	public void addDeckEventListener(Listener<Event> listener) {
-		deckList.addCardEventListener(listener);
-	}
+    public void addDeckEventListener(Listener<Event> listener) {
+        deckList.addCardEventListener(listener);
+    }
 
-	public void clearDeckEventListeners() {
-		deckList.clearCardEventListeners();
-	}
+    public void clearDeckEventListeners() {
+        deckList.clearCardEventListeners();
+    }
 
-	public void addSideboardEventListener(Listener<Event> listener) {
-		sideboardList.addCardEventListener(listener);
-	}
+    public void addSideboardEventListener(Listener<Event> listener) {
+        sideboardList.addCardEventListener(listener);
+    }
 
-	public void clearSideboardEventListeners() {
-		sideboardList.clearCardEventListeners();
-	}
+    public void clearSideboardEventListeners() {
+        sideboardList.clearCardEventListeners();
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.

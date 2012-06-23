@@ -39,21 +39,21 @@ import mage.players.Players;
  */
 public class Team implements MageItem {
 
-	private UUID teamId;
-	private String name;
-	private Players players = new Players();
+    private UUID teamId;
+    private String name;
+    private Players players = new Players();
 
-	public Team (String name) {
-		teamId = UUID.randomUUID();
-		this.name = name;
-	}
+    public Team (String name) {
+        teamId = UUID.randomUUID();
+        this.name = name;
+    }
 
-	public UUID getId() {
-		return teamId;
-	}
+    public UUID getId() {
+        return teamId;
+    }
 
-	public void addPlayer(Player player) {
-		players.addPlayer(player);
-	}
+    public void addPlayer(Player player) {
+        players.addPlayer(player);
+    }
 
 }

@@ -45,7 +45,7 @@ public class SorinsThirst extends CardImpl<SorinsThirst> {
     public SorinsThirst (UUID ownerId) {
         super(ownerId, 110, "Sorin's Thirst", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}{B}");
         this.expansionSetCode = "M12";
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addEffect(new GainLifeEffect(2));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

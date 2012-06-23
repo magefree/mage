@@ -40,21 +40,21 @@ import mage.client.util.Listener;
  */
 public class PlayerTypeEventSource implements EventSource<Event>, Serializable {
 
-	protected final EventDispatcher<Event> dispatcher = new EventDispatcher<Event>() {};
+    protected final EventDispatcher<Event> dispatcher = new EventDispatcher<Event>() {};
 
-	@Override
-	public void addListener(Listener<Event> listener) {
-		dispatcher.addListener(listener);
-	}
+    @Override
+    public void addListener(Listener<Event> listener) {
+        dispatcher.addListener(listener);
+    }
 
-	public void playerTypeChanged() {
-		dispatcher.fireEvent(new Event(null, "playerTypeChanged"));
-	}
+    public void playerTypeChanged() {
+        dispatcher.fireEvent(new Event(null, "playerTypeChanged"));
+    }
 
-	@Override
-	public void clearListeners() {
-		dispatcher.clearListeners();
-	}
+    @Override
+    public void clearListeners() {
+        dispatcher.clearListeners();
+    }
 
 }
 

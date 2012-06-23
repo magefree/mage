@@ -59,7 +59,7 @@ public class DemonicAppetite extends CardImpl<DemonicAppetite> {
         TargetPermanent auraTarget = new TargetControlledCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
-        
+
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3, Constants.Duration.WhileOnBattlefield)));
@@ -83,15 +83,15 @@ public class DemonicAppetite extends CardImpl<DemonicAppetite> {
 }
 
     class DemonicAppetiteEffect extends SacrificeTargetEffect {
-            
+
         DemonicAppetiteEffect() {
                 super();
                 staticText = "sacrifice a creature";
         }
-        
+
         @Override
         public DemonicAppetiteEffect copy() {
                 return new DemonicAppetiteEffect();
         }
- 
+
 }  

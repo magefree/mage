@@ -26,7 +26,7 @@ public class SelhoffOccultistTest extends CardTestPlayerBase {
 
         setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
-        
+
         assertLife(playerA, 20);
         assertLife(playerB, 20);
         // Lightning Bolt + 1 card
@@ -84,5 +84,5 @@ public class SelhoffOccultistTest extends CardTestPlayerBase {
         // Selhoff Occultist + Ana Disciple
         assertGraveyardCount(playerB, 2);
     }
-    
+
 }

@@ -48,7 +48,7 @@ import mage.Constants.Zone;
  * @author jeffwadsworth
  */
 public class ChampionsDrake extends CardImpl<ChampionsDrake> {
-    
+
     private static final String rule = "{this} gets +3/+3 as long as you control a creature with three or more level counters on it.";
 
     public ChampionsDrake(UUID ownerId) {
@@ -62,7 +62,7 @@ public class ChampionsDrake extends CardImpl<ChampionsDrake> {
         this.toughness = new MageInt(1);
 
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // Champion's Drake gets +3/+3 as long as you control a creature with three or more level counters on it.
         ConditionalContinousEffect effect = new ConditionalContinousEffect(new BoostSourceEffect(3, 3, Duration.WhileOnBattlefield), new PermanentHasCounterCondition(CounterType.LEVEL, 2, new FilterCreaturePermanent(), PermanentHasCounterCondition.CountType.MORE_THAN), rule);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));

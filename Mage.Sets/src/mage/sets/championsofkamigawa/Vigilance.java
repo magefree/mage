@@ -51,11 +51,11 @@ public class Vigilance extends CardImpl<Vigilance> {
         super(ownerId, 49, "Vigilance", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Aura");
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.AddAbility));
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), Constants.AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), Constants.AttachmentType.AURA)));
     }
 
     public Vigilance (final Vigilance card) {

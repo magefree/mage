@@ -87,8 +87,8 @@ class AngelicChorusTriggeredAbility extends TriggeredAbilityImpl<AngelicChorusTr
             if (((ZoneChangeEvent) event).getToZone() == Zone.BATTLEFIELD
                     && permanent.getCardType().contains(CardType.CREATURE)
                     && permanent.getControllerId().equals(this.controllerId)) {
-				Effect effect = this.getEffects().get(0);
-				effect.setValue("lifeSource", event.getTargetId());
+                Effect effect = this.getEffects().get(0);
+                effect.setValue("lifeSource", event.getTargetId());
                 return true;
             }
         }
@@ -133,7 +133,7 @@ class AngelicChorusEffect extends OneShotEffect<AngelicChorusEffect> {
             int amount = creature.getToughness().getValue();
             Player player = game.getPlayer(source.getControllerId());
             if (player != null) {
-		player.gainLife(amount, game);
+        player.gainLife(amount, game);
             }
             return true;
         }

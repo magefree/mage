@@ -57,86 +57,86 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class CaptivatingVampire extends CardImpl<CaptivatingVampire> {
 
-	private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("Vampire creatures");
-	private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("untapped Vampires you control");
+    private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("Vampire creatures");
+    private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("untapped Vampires you control");
 
-	static {
-		filter1.getSubtype().add("Vampire");
-		filter2.getSubtype().add("Vampire");
-		filter2.setTapped(false);
-		filter2.setUseTapped(true);
-	}
+    static {
+        filter1.getSubtype().add("Vampire");
+        filter2.getSubtype().add("Vampire");
+        filter2.setTapped(false);
+        filter2.setUseTapped(true);
+    }
 
-	public CaptivatingVampire(UUID ownerId) {
-		super(ownerId, 87, "Captivating Vampire", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
-		this.expansionSetCode = "M11";
-		this.color.setBlack(true);
-		this.subtype.add("Vampire");
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+    public CaptivatingVampire(UUID ownerId) {
+        super(ownerId, 87, "Captivating Vampire", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
+        this.expansionSetCode = "M11";
+        this.color.setBlack(true);
+        this.subtype.add("Vampire");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter1, true)));
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CaptivatingVampireEffect(), new TapTargetCost(new TargetControlledCreaturePermanent(5, 5, filter2, true)));
-		ability.addTarget(new TargetCreaturePermanent());
-		this.addAbility(ability);
-	}
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter1, true)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CaptivatingVampireEffect(), new TapTargetCost(new TargetControlledCreaturePermanent(5, 5, filter2, true)));
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
+    }
 
-	public CaptivatingVampire(final CaptivatingVampire card) {
-		super(card);
-	}
+    public CaptivatingVampire(final CaptivatingVampire card) {
+        super(card);
+    }
 
-	@Override
-	public CaptivatingVampire copy() {
-		return new CaptivatingVampire(this);
-	}
+    @Override
+    public CaptivatingVampire copy() {
+        return new CaptivatingVampire(this);
+    }
 
 }
 
 class CaptivatingVampireEffect extends ContinuousEffectImpl<CaptivatingVampireEffect> {
 
-	public CaptivatingVampireEffect() {
-		super(Duration.WhileOnBattlefield, Outcome.Detriment);
-		staticText = "Gain control of target creature. It becomes a Vampire in addition to its other types";
-	}
+    public CaptivatingVampireEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        staticText = "Gain control of target creature. It becomes a Vampire in addition to its other types";
+    }
 
-	public CaptivatingVampireEffect(final CaptivatingVampireEffect effect) {
-		super(effect);
-	}
+    public CaptivatingVampireEffect(final CaptivatingVampireEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public CaptivatingVampireEffect copy() {
-		return new CaptivatingVampireEffect(this);
-	}
+    @Override
+    public CaptivatingVampireEffect copy() {
+        return new CaptivatingVampireEffect(this);
+    }
 
-	@Override
-	public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-		Permanent permanent = game.getPermanent(source.getFirstTarget());
-		if (permanent != null) {
-			switch (layer) {
-				case ControlChangingEffects_2:
-					if (sublayer == SubLayer.NA) {
-						permanent.changeControllerId(source.getControllerId(), game);
-					}
-					break;
-				case TypeChangingEffects_4:
-					if (sublayer == SubLayer.NA) {
-						permanent.getSubtype().add("Vampire");
-					}
-					break;
-			}
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        if (permanent != null) {
+            switch (layer) {
+                case ControlChangingEffects_2:
+                    if (sublayer == SubLayer.NA) {
+                        permanent.changeControllerId(source.getControllerId(), game);
+                    }
+                    break;
+                case TypeChangingEffects_4:
+                    if (sublayer == SubLayer.NA) {
+                        permanent.getSubtype().add("Vampire");
+                    }
+                    break;
+            }
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
 
-	@Override
-	public boolean hasLayer(Layer layer) {
-		return layer == Layer.ControlChangingEffects_2 || layer == layer.TypeChangingEffects_4;
-	}
+    @Override
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.ControlChangingEffects_2 || layer == layer.TypeChangingEffects_4;
+    }
 
 }

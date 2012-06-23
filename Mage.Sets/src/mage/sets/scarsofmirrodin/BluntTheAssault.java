@@ -54,7 +54,7 @@ public class BluntTheAssault extends CardImpl<BluntTheAssault> {
     public BluntTheAssault (UUID ownerId) {
         super(ownerId, 113, "Blunt the Assault", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
         this.expansionSetCode = "SOM";
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.getSpellAbility().addEffect(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter)));
         this.getSpellAbility().addEffect(new PreventAllDamageEffect(Constants.Duration.EndOfTurn, true));
     }

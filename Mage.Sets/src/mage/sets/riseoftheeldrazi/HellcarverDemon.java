@@ -51,7 +51,7 @@ import mage.game.Game;
  */
 
 public class HellcarverDemon extends CardImpl<HellcarverDemon> {
-    
+
     public HellcarverDemon(UUID ownerId) {
         super(ownerId, 113, "Hellcarver Demon", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{B}");
         this.expansionSetCode = "ROE";
@@ -62,7 +62,7 @@ public class HellcarverDemon extends CardImpl<HellcarverDemon> {
         this.toughness = new MageInt(6);
 
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // Whenever Hellcarver Demon deals combat damage to a player, sacrifice all other permanents you control and discard your hand. Exile the top six cards of your library. You may cast any number of nonland cards exiled this way without paying their mana costs.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new HellcarverDemonEffect(), false));
     }
@@ -78,42 +78,42 @@ public class HellcarverDemon extends CardImpl<HellcarverDemon> {
 }
 
 class HellcarverDemonEffect extends OneShotEffect<HellcarverDemonEffect> {
-    
+
     private final static FilterControlledPermanent filterPermanents = new FilterControlledPermanent("Permanent");
     private static FilterNonlandCard filter = new FilterNonlandCard("nonland card exiled with Hellcarver Demon");
-    
+
     public HellcarverDemonEffect() {
         super(Outcome.PlayForFree);
         staticText = "sacrifice all other permanents you control and discard your hand. Exile the top six cards of your library. You may cast any number of nonland cards exiled this way without paying their mana costs.";
     }
-    
+
     public HellcarverDemonEffect(final HellcarverDemonEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
-	Player player = game.getPlayer(source.getControllerId());
+    Player player = game.getPlayer(source.getControllerId());
         Permanent hellcarverDemon = game.getPermanent(source.getSourceId());
-                
+
         for (Permanent permanent: game.getBattlefield().getActivePermanents(filterPermanents, source.getControllerId(), game)) {
             if (permanent != hellcarverDemon) {
                 permanent.sacrifice(source.getSourceId(), game);
             }
         }
-                
+
         if (player != null && player.getHand().size() > 0) {
             int cardsInHand = player.getHand().size();
             player.discard(cardsInHand, source, game);
         }
-        
+
         for (int i = 0; i < 6; i++) {
             if (player != null && player.getLibrary().size() > 0) {
                 Card topCard = player.getLibrary().getFromTop(game);
                 topCard.moveToExile(source.getSourceId(), "Cards exiled by Hellcarver Demon", source.getId(), game);
             }
         }
-                
+
         while (player != null && player.chooseUse(Outcome.PlayForFree, "Cast another nonland card exiled with Hellcarver Demon without paying that card's mana cost?", game)) {
             TargetCardInExile target = new TargetCardInExile(filter, source.getSourceId());
             while (player.choose(Outcome.PlayForFree, game.getExile().getExileZone(source.getSourceId()), target, game)) {
@@ -131,6 +131,6 @@ class HellcarverDemonEffect extends OneShotEffect<HellcarverDemonEffect> {
 
     @Override
     public HellcarverDemonEffect copy() {
-	return new HellcarverDemonEffect(this);
+    return new HellcarverDemonEffect(this);
     }
 }

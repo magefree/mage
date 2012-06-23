@@ -51,7 +51,7 @@ public class GhostlyPrison extends CardImpl<GhostlyPrison> {
     public GhostlyPrison (UUID ownerId) {
         super(ownerId, 10, "Ghostly Prison", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
         this.expansionSetCode = "CHK";
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GhostlyPrisonReplacementEffect()));
     }
 
@@ -68,52 +68,52 @@ public class GhostlyPrison extends CardImpl<GhostlyPrison> {
 
 class GhostlyPrisonReplacementEffect extends ReplacementEffectImpl<GhostlyPrisonReplacementEffect> {
 
-	private static final String effectText = "Creatures can't attack you unless their controller pays {2} for each creature he or she controls that's attacking you";
+    private static final String effectText = "Creatures can't attack you unless their controller pays {2} for each creature he or she controls that's attacking you";
 
-	GhostlyPrisonReplacementEffect ( ) {
-		super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Neutral);
-		staticText = effectText;
-	}
+    GhostlyPrisonReplacementEffect ( ) {
+        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Neutral);
+        staticText = effectText;
+    }
 
-	GhostlyPrisonReplacementEffect ( GhostlyPrisonReplacementEffect effect ) {
-		super(effect);
-	}
+    GhostlyPrisonReplacementEffect ( GhostlyPrisonReplacementEffect effect ) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		throw new UnsupportedOperationException("Not supported.");
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        throw new UnsupportedOperationException("Not supported.");
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		if ( event.getType() == GameEvent.EventType.DECLARE_ATTACKER) {
-			Player player = game.getPlayer(event.getPlayerId());
-			if ( player != null && event.getTargetId().equals(source.getControllerId())) {
-				ManaCostsImpl propagandaTax = new ManaCostsImpl("{2}");
-				if ( propagandaTax.canPay(source.getSourceId(), event.getPlayerId(), game) &&
-					 player.chooseUse(Constants.Outcome.Benefit, "Pay {2} to declare attacker?", game) ) {
-					if (propagandaTax.payOrRollback(source, game, this.getId(), event.getPlayerId())) {
-						return false;
-					}
-				}
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        if ( event.getType() == GameEvent.EventType.DECLARE_ATTACKER) {
+            Player player = game.getPlayer(event.getPlayerId());
+            if ( player != null && event.getTargetId().equals(source.getControllerId())) {
+                ManaCostsImpl propagandaTax = new ManaCostsImpl("{2}");
+                if ( propagandaTax.canPay(source.getSourceId(), event.getPlayerId(), game) &&
+                     player.chooseUse(Constants.Outcome.Benefit, "Pay {2} to declare attacker?", game) ) {
+                    if (propagandaTax.payOrRollback(source, game, this.getId(), event.getPlayerId())) {
+                        return false;
+                    }
+                }
                 return true;
-			}
-		}
-		return false;
-	}
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		if ( event.getType() == GameEvent.EventType.DECLARE_ATTACKER && event.getTargetId().equals(source.getControllerId()) ) {
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if ( event.getType() == GameEvent.EventType.DECLARE_ATTACKER && event.getTargetId().equals(source.getControllerId()) ) {
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public GhostlyPrisonReplacementEffect copy() {
-		return new GhostlyPrisonReplacementEffect(this);
-	}
+    @Override
+    public GhostlyPrisonReplacementEffect copy() {
+        return new GhostlyPrisonReplacementEffect(this);
+    }
 
 }
 

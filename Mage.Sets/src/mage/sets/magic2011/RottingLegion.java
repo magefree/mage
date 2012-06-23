@@ -41,24 +41,24 @@ import mage.cards.CardImpl;
  */
 public class RottingLegion extends CardImpl<RottingLegion> {
 
-	public RottingLegion(UUID ownerId) {
-		super(ownerId, 115, "Rotting Legion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Zombie");
-		this.color.setBlack(true);
-		this.power = new MageInt(4);
-		this.toughness = new MageInt(5);
+    public RottingLegion(UUID ownerId) {
+        super(ownerId, 115, "Rotting Legion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Zombie");
+        this.color.setBlack(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(5);
 
-		this.addAbility(new EntersBattlefieldTappedAbility());
-	}
+        this.addAbility(new EntersBattlefieldTappedAbility());
+    }
 
-	public RottingLegion(final RottingLegion card) {
-		super(card);
-	}
+    public RottingLegion(final RottingLegion card) {
+        super(card);
+    }
 
-	@Override
-	public RottingLegion copy() {
-		return new RottingLegion(this);
-	}
+    @Override
+    public RottingLegion copy() {
+        return new RottingLegion(this);
+    }
 
 }

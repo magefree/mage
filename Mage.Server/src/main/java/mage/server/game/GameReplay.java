@@ -46,61 +46,61 @@ import org.apache.log4j.Logger;
  */
 public class GameReplay {
 
-	private final static Logger logger = Logger.getLogger(GameReplay.class);
+    private final static Logger logger = Logger.getLogger(GameReplay.class);
 
-	private GameStates savedGame;
-	private Game game;
-	private int stateIndex;
+    private GameStates savedGame;
+    private Game game;
+    private int stateIndex;
 
-	public GameReplay(UUID gameId) {
-		this.game = loadGame(gameId);
-		this.savedGame = game.getGameStates();
-	}
+    public GameReplay(UUID gameId) {
+        this.game = loadGame(gameId);
+        this.savedGame = game.getGameStates();
+    }
 
-	public void start() {
-		this.stateIndex = 0;
-	}
+    public void start() {
+        this.stateIndex = 0;
+    }
 
-	public GameState next() {
-		if (this.stateIndex < savedGame.getSize()) {
-			return savedGame.get(stateIndex++);
-		}
-		return null;
-	}
+    public GameState next() {
+        if (this.stateIndex < savedGame.getSize()) {
+            return savedGame.get(stateIndex++);
+        }
+        return null;
+    }
 
-	public GameState previous() {
-		if (this.stateIndex > 0) {
-			return savedGame.get(--stateIndex);
-		}
-		return null;
-	}
+    public GameState previous() {
+        if (this.stateIndex > 0) {
+            return savedGame.get(--stateIndex);
+        }
+        return null;
+    }
 
-	public Game getGame() {
-		return this.game;
-	}
+    public Game getGame() {
+        return this.game;
+    }
 
-	private Game loadGame(UUID gameId) {
-		try{
-			InputStream file = new FileInputStream("saved/" + gameId.toString() + ".game");
-			InputStream buffer = new BufferedInputStream(file);
-			ObjectInput input = new CopierObjectInputStream(Main.classLoader, new GZIPInputStream(buffer));
-			try {
-				Game loadGame = (Game)input.readObject();
-				GameStates states = (GameStates)input.readObject();
-				loadGame.loadGameStates(states);
-				return loadGame;
-			}
-			finally {
-				input.close();
-			}
-		}
-		catch(ClassNotFoundException ex) {
-			logger.fatal("Cannot load game. Class not found.", ex);
-		}
-		catch(IOException ex) {
-			logger.fatal("Cannot load game:" + gameId, ex);
-		}
-		return null;
-	}
+    private Game loadGame(UUID gameId) {
+        try{
+            InputStream file = new FileInputStream("saved/" + gameId.toString() + ".game");
+            InputStream buffer = new BufferedInputStream(file);
+            ObjectInput input = new CopierObjectInputStream(Main.classLoader, new GZIPInputStream(buffer));
+            try {
+                Game loadGame = (Game)input.readObject();
+                GameStates states = (GameStates)input.readObject();
+                loadGame.loadGameStates(states);
+                return loadGame;
+            }
+            finally {
+                input.close();
+            }
+        }
+        catch(ClassNotFoundException ex) {
+            logger.fatal("Cannot load game. Class not found.", ex);
+        }
+        catch(IOException ex) {
+            logger.fatal("Cannot load game:" + gameId, ex);
+        }
+        return null;
+    }
 
 }

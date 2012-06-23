@@ -89,8 +89,8 @@ class WarstormSurgeTriggeredAbility extends TriggeredAbilityImpl<WarstormSurgeTr
             if (((ZoneChangeEvent) event).getToZone() == Zone.BATTLEFIELD
                     && permanent.getCardType().contains(CardType.CREATURE)
                     && permanent.getControllerId().equals(this.controllerId)) {
-				Effect effect = this.getEffects().get(0);
-				effect.setValue("damageSource", event.getTargetId());
+                Effect effect = this.getEffects().get(0);
+                effect.setValue("damageSource", event.getTargetId());
                 return true;
             }
         }

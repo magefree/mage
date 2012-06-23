@@ -58,26 +58,26 @@ import mage.game.permanent.Permanent;
  */
 public class ContestedWarZone extends CardImpl<ContestedWarZone> {
 
-	private static final FilterAttackingCreature filter = new FilterAttackingCreature("Attacking creatures");
+    private static final FilterAttackingCreature filter = new FilterAttackingCreature("Attacking creatures");
 
-	public ContestedWarZone(UUID ownerId) {
-		super(ownerId, 144, "Contested War Zone", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-		this.expansionSetCode = "MBS";
-		this.addAbility(new ColorlessManaAbility());
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 0, Duration.EndOfTurn, filter, false), new ManaCostsImpl("{1}"));
-		ability.addCost(new TapSourceCost());
-		this.addAbility(ability);
-		this.addAbility(new ContestedWarZoneAbility());
-	}
+    public ContestedWarZone(UUID ownerId) {
+        super(ownerId, 144, "Contested War Zone", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+        this.expansionSetCode = "MBS";
+        this.addAbility(new ColorlessManaAbility());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 0, Duration.EndOfTurn, filter, false), new ManaCostsImpl("{1}"));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
+        this.addAbility(new ContestedWarZoneAbility());
+    }
 
-	public ContestedWarZone(final ContestedWarZone card) {
-		super(card);
-	}
+    public ContestedWarZone(final ContestedWarZone card) {
+        super(card);
+    }
 
-	@Override
-	public ContestedWarZone copy() {
-		return new ContestedWarZone(this);
-	}
+    @Override
+    public ContestedWarZone copy() {
+        return new ContestedWarZone(this);
+    }
 
 }
 
@@ -102,8 +102,8 @@ class ContestedWarZoneAbility extends TriggeredAbilityImpl<ContestedWarZoneAbili
             DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
             Permanent p = game.getPermanent(event.getSourceId());
             if (damageEvent.getPlayerId().equals(controllerId) && damageEvent.isCombatDamage() && p != null && p.getCardType().contains(CardType.CREATURE)) {
-				game.getState().setValue(sourceId.toString(), p.getControllerId());
-			    return true;
+                game.getState().setValue(sourceId.toString(), p.getControllerId());
+                return true;
             }
         }
         return false;
@@ -113,36 +113,36 @@ class ContestedWarZoneAbility extends TriggeredAbilityImpl<ContestedWarZoneAbili
     public String getRule() {
         return "Whenever a creature deals combat damage to you, that creature's controller gains control of {this}";
     }
-	
+
 }
 
 class ContestedWarZoneEffect extends ContinuousEffectImpl<ContestedWarZoneEffect> {
 
-	public ContestedWarZoneEffect() {
-		super(Duration.EndOfGame, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
-	}
+    public ContestedWarZoneEffect() {
+        super(Duration.EndOfGame, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
+    }
 
-	public ContestedWarZoneEffect(final ContestedWarZoneEffect effect) {
-		super(effect);
-	}
+    public ContestedWarZoneEffect(final ContestedWarZoneEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public ContestedWarZoneEffect copy() {
-		return new ContestedWarZoneEffect(this);
-	}
+    @Override
+    public ContestedWarZoneEffect copy() {
+        return new ContestedWarZoneEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getSourceId());
-		UUID controllerId = (UUID) game.getState().getValue(source.getSourceId().toString());
-		if (permanent != null && controllerId != null) {
-			return permanent.changeControllerId(controllerId, game);
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        UUID controllerId = (UUID) game.getState().getValue(source.getSourceId().toString());
+        if (permanent != null && controllerId != null) {
+            return permanent.changeControllerId(controllerId, game);
+        }
+        return false;
+    }
 
-	@Override
-	public String getText(Mode mode) {
-		return "Gain control of {this}";
-	}
+    @Override
+    public String getText(Mode mode) {
+        return "Gain control of {this}";
+    }
 }

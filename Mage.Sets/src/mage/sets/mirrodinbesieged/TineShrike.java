@@ -46,7 +46,7 @@ public class TineShrike extends CardImpl<TineShrike> {
         super(ownerId, 17, "Tine Shrike", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.expansionSetCode = "MBS";
         this.subtype.add("Bird");
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());

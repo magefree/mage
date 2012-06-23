@@ -38,75 +38,75 @@ import mage.players.Player;
  * @author BetaSteward_at_googlemail.com
  */
 public class Modes extends HashMap<UUID, Mode> {
-	
-	private UUID modeId;
-	
-	public Modes() {
-		Mode mode = new Mode();
-		this.put(mode.getId(), mode);
-		this.modeId = mode.getId();
-	}
-	
-	public Modes(Modes modes) {
-		this.modeId = modes.modeId;
+
+    private UUID modeId;
+
+    public Modes() {
+        Mode mode = new Mode();
+        this.put(mode.getId(), mode);
+        this.modeId = mode.getId();
+    }
+
+    public Modes(Modes modes) {
+        this.modeId = modes.modeId;
         for (Map.Entry<UUID, Mode> entry: modes.entrySet()) {
             this.put(entry.getKey(), entry.getValue().copy());
-		}
-	}
-	
-	public Modes copy() {
-		return new Modes(this);
-	}
-	
-	public Mode getMode() {
-		return get(modeId);
-	}
-	
-	public void setMode(Mode mode) {
-		if (this.containsKey(mode.getId()))
-			this.modeId = mode.getId();
-	}
-	
-	public void addMode(Mode mode) {
-		this.put(mode.getId(), mode);
-	}
-	
-	public boolean choose(Game game, Ability source) {
-		if (this.size() > 1) {
-			Player player = game.getPlayer(source.getControllerId());
-			Mode choice = player.chooseMode(this, source, game);
-			if (choice == null)
-				return false;
-			setMode(choice);
-			return true;
-		}
-		this.modeId = this.values().iterator().next().getId();
-		return true;
-	}
-	
-	public String getText() {
-		StringBuilder sb = new StringBuilder();
-		if (this.size() > 1)
-			sb.append("Choose one - ");
-		for (Mode mode: this.values()) {
-			sb.append(mode.getEffects().getText(mode)).append("; or ");
-		}
-		sb.delete(sb.length() - 5, sb.length());
-		return sb.toString();
-	}
+        }
+    }
 
-	public String getText(String sourceName) {
-		StringBuilder sb = new StringBuilder();
-		if (this.size() > 1)
-			sb.append("Choose one - ");
-		for (Mode mode: this.values()) {
-			sb.append(mode.getEffects().getText(mode)).append("; or ");
-		}
-		sb.delete(sb.length() - 5, sb.length());
-		String text = sb.toString();
-		text = text.replace("{this}", sourceName);
-		text = text.replace("{source}", sourceName);
-		return text;
-	}
+    public Modes copy() {
+        return new Modes(this);
+    }
+
+    public Mode getMode() {
+        return get(modeId);
+    }
+
+    public void setMode(Mode mode) {
+        if (this.containsKey(mode.getId()))
+            this.modeId = mode.getId();
+    }
+
+    public void addMode(Mode mode) {
+        this.put(mode.getId(), mode);
+    }
+
+    public boolean choose(Game game, Ability source) {
+        if (this.size() > 1) {
+            Player player = game.getPlayer(source.getControllerId());
+            Mode choice = player.chooseMode(this, source, game);
+            if (choice == null)
+                return false;
+            setMode(choice);
+            return true;
+        }
+        this.modeId = this.values().iterator().next().getId();
+        return true;
+    }
+
+    public String getText() {
+        StringBuilder sb = new StringBuilder();
+        if (this.size() > 1)
+            sb.append("Choose one - ");
+        for (Mode mode: this.values()) {
+            sb.append(mode.getEffects().getText(mode)).append("; or ");
+        }
+        sb.delete(sb.length() - 5, sb.length());
+        return sb.toString();
+    }
+
+    public String getText(String sourceName) {
+        StringBuilder sb = new StringBuilder();
+        if (this.size() > 1)
+            sb.append("Choose one - ");
+        for (Mode mode: this.values()) {
+            sb.append(mode.getEffects().getText(mode)).append("; or ");
+        }
+        sb.delete(sb.length() - 5, sb.length());
+        String text = sb.toString();
+        text = text.replace("{this}", sourceName);
+        text = text.replace("{source}", sourceName);
+        return text;
+    }
 
 }

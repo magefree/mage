@@ -37,23 +37,23 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class PlainswalkAbility extends LandwalkAbility {
 
-	private static final FilterLandPermanent filter = new FilterLandPermanent("Plains");
+    private static final FilterLandPermanent filter = new FilterLandPermanent("Plains");
 
-	static {
-		filter.getSubtype().add("Plains");
-		filter.setScopeSubtype(ComparisonScope.Any);
-	}
+    static {
+        filter.getSubtype().add("Plains");
+        filter.setScopeSubtype(ComparisonScope.Any);
+    }
 
-	public PlainswalkAbility() {
-		super(filter);
-	}
+    public PlainswalkAbility() {
+        super(filter);
+    }
 
-	public PlainswalkAbility(final PlainswalkAbility ability) {
-		super(ability);
-	}
+    public PlainswalkAbility(final PlainswalkAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public PlainswalkAbility copy() {
-		return new PlainswalkAbility(this);
-	}
+    @Override
+    public PlainswalkAbility copy() {
+        return new PlainswalkAbility(this);
+    }
 }

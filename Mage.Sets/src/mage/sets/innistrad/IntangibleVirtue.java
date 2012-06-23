@@ -45,7 +45,7 @@ import mage.filter.common.FilterToken;
 public class IntangibleVirtue extends CardImpl<IntangibleVirtue> {
 
     private final static FilterToken filter = new FilterToken();
-    
+
     public IntangibleVirtue(UUID ownerId) {
         super(ownerId, 19, "Intangible Virtue", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "ISD";
@@ -55,7 +55,7 @@ public class IntangibleVirtue extends CardImpl<IntangibleVirtue> {
         // Creature tokens you control get +1/+1 and have vigilance.
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Constants.Duration.WhileOnBattlefield, filter)));
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Constants.Duration.WhileOnBattlefield, filter)));
-        
+
     }
 
     public IntangibleVirtue(final IntangibleVirtue card) {

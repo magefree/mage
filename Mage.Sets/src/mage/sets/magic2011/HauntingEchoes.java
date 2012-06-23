@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class HauntingEchoes extends mage.sets.magic2010.HauntingEchoes {
 
-	public HauntingEchoes(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 99;
-		this.expansionSetCode = "M11";
-	}
+    public HauntingEchoes(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 99;
+        this.expansionSetCode = "M11";
+    }
 
-	public HauntingEchoes(final HauntingEchoes card) {
-		super(card);
-	}
+    public HauntingEchoes(final HauntingEchoes card) {
+        super(card);
+    }
 
-	@Override
-	public HauntingEchoes copy() {
-		return new HauntingEchoes(this);
-	}
+    @Override
+    public HauntingEchoes copy() {
+        return new HauntingEchoes(this);
+    }
 
 }

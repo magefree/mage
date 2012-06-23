@@ -37,15 +37,15 @@ import mage.watchers.Watcher;
  */
 public class MorbidCondition implements Condition {
 
-	private static MorbidCondition fInstance = new MorbidCondition();
+    private static MorbidCondition fInstance = new MorbidCondition();
 
-	public static Condition getInstance() {
-		return fInstance;
-	}
+    public static Condition getInstance() {
+        return fInstance;
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Watcher watcher = game.getState().getWatchers().get("Morbid");
-		return watcher.conditionMet();
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Watcher watcher = game.getState().getWatchers().get("Morbid");
+        return watcher.conditionMet();
+    }
 }

@@ -43,33 +43,33 @@ import mage.util.Logging;
  */
 public class Config2 {
 
-	private final static Logger logger = Logging.getLogger(Config2.class.getName());
+    private final static Logger logger = Logging.getLogger(Config2.class.getName());
 
-//	public static final int maxDepth;
-	public static final int maxNodes;
-	public static final int evaluatorLifeFactor;
-	public static final int evaluatorPermanentFactor;
-	public static final int evaluatorCreatureFactor;
-	public static final int evaluatorHandFactor;
-//	public static final int maxThinkSeconds;
+//    public static final int maxDepth;
+    public static final int maxNodes;
+    public static final int evaluatorLifeFactor;
+    public static final int evaluatorPermanentFactor;
+    public static final int evaluatorCreatureFactor;
+    public static final int evaluatorHandFactor;
+//    public static final int maxThinkSeconds;
 
-	static {
-		Properties p = new Properties();
-		try {
-			File file = new File(Config2.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath());
-			p.load(new FileInputStream(new File(file.getParent() + File.separator + "AIMinimax.properties")));
-		} catch (IOException ex) {
-			logger.log(Level.SEVERE, null, ex);
-		} catch (URISyntaxException ex) {
-			Logger.getLogger(Config2.class.getName()).log(Level.SEVERE, null, ex);
-		}
-//		maxDepth = Integer.parseInt(p.getProperty("maxDepth"));
-		maxNodes = Integer.parseInt(p.getProperty("maxNodes"));
-		evaluatorLifeFactor = Integer.parseInt(p.getProperty("evaluatorLifeFactor"));
-		evaluatorPermanentFactor = Integer.parseInt(p.getProperty("evaluatorPermanentFactor"));
-		evaluatorCreatureFactor = Integer.parseInt(p.getProperty("evaluatorCreatureFactor"));
-		evaluatorHandFactor = Integer.parseInt(p.getProperty("evaluatorHandFactor"));
-//		maxThinkSeconds = Integer.parseInt(p.getProperty("maxThinkSeconds"));
-	}
+    static {
+        Properties p = new Properties();
+        try {
+            File file = new File(Config2.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath());
+            p.load(new FileInputStream(new File(file.getParent() + File.separator + "AIMinimax.properties")));
+        } catch (IOException ex) {
+            logger.log(Level.SEVERE, null, ex);
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(Config2.class.getName()).log(Level.SEVERE, null, ex);
+        }
+//        maxDepth = Integer.parseInt(p.getProperty("maxDepth"));
+        maxNodes = Integer.parseInt(p.getProperty("maxNodes"));
+        evaluatorLifeFactor = Integer.parseInt(p.getProperty("evaluatorLifeFactor"));
+        evaluatorPermanentFactor = Integer.parseInt(p.getProperty("evaluatorPermanentFactor"));
+        evaluatorCreatureFactor = Integer.parseInt(p.getProperty("evaluatorCreatureFactor"));
+        evaluatorHandFactor = Integer.parseInt(p.getProperty("evaluatorHandFactor"));
+//        maxThinkSeconds = Integer.parseInt(p.getProperty("maxThinkSeconds"));
+    }
 
 }

@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class SolemnOffering extends mage.sets.magic2010.SolemnOffering {
 
-	public SolemnOffering(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 32;
-		this.expansionSetCode = "M11";
-	}
+    public SolemnOffering(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 32;
+        this.expansionSetCode = "M11";
+    }
 
-	public SolemnOffering(final SolemnOffering card) {
-		super(card);
-	}
+    public SolemnOffering(final SolemnOffering card) {
+        super(card);
+    }
 
-	@Override
-	public SolemnOffering copy() {
-		return new SolemnOffering(this);
-	}
+    @Override
+    public SolemnOffering copy() {
+        return new SolemnOffering(this);
+    }
 
 }

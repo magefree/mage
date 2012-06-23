@@ -42,9 +42,9 @@ import java.util.UUID;
  *
  */
 public interface ICardGrid {
-	void clearCardEventListeners();
-	void addCardEventListener(Listener<Event> listener);
-	void drawCards(Constants.SortBy sortBy, boolean piles);
-	void loadCards(CardsView showCards, Constants.SortBy sortBy, boolean piles, BigCard bigCard, UUID gameId);
-	void refresh();
+    void clearCardEventListeners();
+    void addCardEventListener(Listener<Event> listener);
+    void drawCards(Constants.SortBy sortBy, boolean piles);
+    void loadCards(CardsView showCards, Constants.SortBy sortBy, boolean piles, BigCard bigCard, UUID gameId);
+    void refresh();
 }

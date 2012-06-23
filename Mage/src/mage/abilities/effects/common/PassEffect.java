@@ -40,24 +40,24 @@ import mage.players.Player;
  */
 public class PassEffect extends OneShotEffect<PassEffect> {
 
-	public PassEffect() {
-		super(Outcome.Neutral);
-	}
+    public PassEffect() {
+        super(Outcome.Neutral);
+    }
 
-	public PassEffect(final PassEffect effect) {
-		super(effect);
-	}
+    public PassEffect(final PassEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         player.pass();
-		return true;
-	}
+        return true;
+    }
 
-	@Override
-	public PassEffect copy() {
-		return new PassEffect(this);
-	}
+    @Override
+    public PassEffect copy() {
+        return new PassEffect(this);
+    }
 
 }

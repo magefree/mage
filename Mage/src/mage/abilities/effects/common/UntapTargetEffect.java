@@ -43,32 +43,32 @@ import mage.target.Target;
  */
 public class UntapTargetEffect extends OneShotEffect<UntapTargetEffect> {
 
-	public UntapTargetEffect() {
-		super(Outcome.Untap);
-	}
+    public UntapTargetEffect() {
+        super(Outcome.Untap);
+    }
 
-	public UntapTargetEffect(final UntapTargetEffect effect) {
-		super(effect);
-	}
+    public UntapTargetEffect(final UntapTargetEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public UntapTargetEffect copy() {
-		return new UntapTargetEffect(this);
-	}
+    @Override
+    public UntapTargetEffect copy() {
+        return new UntapTargetEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		for (UUID target: targetPointer.getTargets(game, source)) {
-			Permanent permanent = game.getPermanent(target);
-			if (permanent != null) {
-				permanent.untap(game);
-			}
-			else {
-				return false;
-			}
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        for (UUID target: targetPointer.getTargets(game, source)) {
+            Permanent permanent = game.getPermanent(target);
+            if (permanent != null) {
+                permanent.untap(game);
+            }
+            else {
+                return false;
+            }
+        }
+        return true;
+    }
 
     @Override
     public String getText(Mode mode) {

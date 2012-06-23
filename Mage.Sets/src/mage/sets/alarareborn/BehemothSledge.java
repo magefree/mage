@@ -51,25 +51,25 @@ import mage.cards.CardImpl;
  */
 public class BehemothSledge extends CardImpl<BehemothSledge> {
 
-	public BehemothSledge(UUID ownerId) {
-		super(ownerId, 65, "Behemoth Sledge", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}{G}{W}");
-		this.expansionSetCode = "ARB";
-		this.subtype.add("Equipment");
-		this.color.setGreen(true);
-		this.color.setWhite(true);
-		this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), Constants.AttachmentType.EQUIPMENT)));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(TrampleAbility.getInstance(), Constants.AttachmentType.EQUIPMENT)));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
-	}
+    public BehemothSledge(UUID ownerId) {
+        super(ownerId, 65, "Behemoth Sledge", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}{G}{W}");
+        this.expansionSetCode = "ARB";
+        this.subtype.add("Equipment");
+        this.color.setGreen(true);
+        this.color.setWhite(true);
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), Constants.AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(TrampleAbility.getInstance(), Constants.AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
+    }
 
-	protected BehemothSledge(BehemothSledge me) {
-		super(me);
-	}
+    protected BehemothSledge(BehemothSledge me) {
+        super(me);
+    }
 
-	@Override
-	public BehemothSledge copy() {
-		return new BehemothSledge(this);
-	}
+    @Override
+    public BehemothSledge copy() {
+        return new BehemothSledge(this);
+    }
 
 }

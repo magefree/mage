@@ -38,13 +38,13 @@ import mage.ObjectColor;
  */
 public class ZombieToken extends Token {
 
-	public ZombieToken() {
-		super("Zombie", "2/2 black Zombie creature token");
-		cardType.add(CardType.CREATURE);
-		color = ObjectColor.BLACK;
-		subtype.add("Zombie");
-		power = new MageInt(2);
-		toughness = new MageInt(2);
-	}
+    public ZombieToken() {
+        super("Zombie", "2/2 black Zombie creature token");
+        cardType.add(CardType.CREATURE);
+        color = ObjectColor.BLACK;
+        subtype.add("Zombie");
+        power = new MageInt(2);
+        toughness = new MageInt(2);
+    }
 
 }

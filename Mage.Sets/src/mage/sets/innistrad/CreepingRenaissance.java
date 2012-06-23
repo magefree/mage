@@ -78,14 +78,14 @@ class CreepingRenaissanceEffect extends OneShotEffect<CreepingRenaissanceEffect>
         super(Constants.Outcome.Detriment);
         staticText = "Choose a permanent type. Return all cards of the chosen type from your graveyard to your hand";
     }
-    
+
     public CreepingRenaissanceEffect(final CreepingRenaissanceEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
-		Player controller = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Choice typeChoice = new ChoiceImpl();
             typeChoice.setMessage("Choose permanent type");
@@ -121,5 +121,5 @@ class CreepingRenaissanceEffect extends OneShotEffect<CreepingRenaissanceEffect>
     public CreepingRenaissanceEffect copy() {
         return new CreepingRenaissanceEffect(this);
     }
-    
+
 }

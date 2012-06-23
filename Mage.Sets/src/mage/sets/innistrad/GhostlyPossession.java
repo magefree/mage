@@ -62,10 +62,10 @@ public class GhostlyPossession extends CardImpl<GhostlyPossession> {
         this.color.setWhite(true);
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.AddAbility));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		this.addAbility(ability);
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.AddAbility));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
 
         //Enchanted creature has flying
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), Constants.AttachmentType.AURA)));
@@ -86,38 +86,38 @@ public class GhostlyPossession extends CardImpl<GhostlyPossession> {
 
 class GhostlyPossessionEffect extends PreventionEffectImpl<GhostlyPossessionEffect> {
 
-	public GhostlyPossessionEffect() {
-		super(Duration.WhileOnBattlefield);
-		staticText = "Prevent all combat damage that would be dealt to and dealt by enchanted creature";
-	}
+    public GhostlyPossessionEffect() {
+        super(Duration.WhileOnBattlefield);
+        staticText = "Prevent all combat damage that would be dealt to and dealt by enchanted creature";
+    }
 
-	public GhostlyPossessionEffect(final GhostlyPossessionEffect effect) {
-		super(effect);
-	}
+    public GhostlyPossessionEffect(final GhostlyPossessionEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public GhostlyPossessionEffect copy() {
-		return new GhostlyPossessionEffect(this);
-	}
+    @Override
+    public GhostlyPossessionEffect copy() {
+        return new GhostlyPossessionEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), event.getAmount(), false);
-		if (!game.replaceEvent(preventEvent)) {
-			int damage = event.getAmount();
-			event.setAmount(0);
-			game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), damage));
-		}
-		return false;
-	}
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), event.getAmount(), false);
+        if (!game.replaceEvent(preventEvent)) {
+            int damage = event.getAmount();
+            event.setAmount(0);
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), damage));
+        }
+        return false;
+    }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game) && event instanceof DamageEvent) {
             DamageEvent damageEvent = (DamageEvent) event;
             if (damageEvent.isCombatDamage()) {
@@ -130,6 +130,6 @@ class GhostlyPossessionEffect extends PreventionEffectImpl<GhostlyPossessionEffe
             }
         }
         return false;
-	}
+    }
 
 }

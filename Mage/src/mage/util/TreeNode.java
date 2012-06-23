@@ -69,9 +69,9 @@ public class TreeNode<T> {
         children.add(child);
     }
 
-	public void addChild(T child) {
-		children.add(new TreeNode<T>(child));
-	}
+    public void addChild(T child) {
+        children.add(new TreeNode<T>(child));
+    }
 
     public void addChildAt(int index, TreeNode<T> child) throws IndexOutOfBoundsException {
         children.add(index, child);
@@ -98,28 +98,28 @@ public class TreeNode<T> {
     }
 
     @Override
-	public String toString() {
+    public String toString() {
         return getData().toString();
     }
 
     @Override
-	public int hashCode() {
+    public int hashCode() {
         return getData().hashCode();
     }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		final TreeNode<T> other = (TreeNode<T>) obj;
-		if (this.data != other.data && (this.data == null || !this.data.equals(other.data))) {
-			return false;
-		}
-		return true;
-	}
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final TreeNode<T> other = (TreeNode<T>) obj;
+        if (this.data != other.data && (this.data == null || !this.data.equals(other.data))) {
+            return false;
+        }
+        return true;
+    }
 
 }

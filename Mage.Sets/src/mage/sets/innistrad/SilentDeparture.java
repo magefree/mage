@@ -52,7 +52,7 @@ public class SilentDeparture extends CardImpl<SilentDeparture> {
 
         // Return target creature to its owner's hand.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-		this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
 
         // Flashback {4}{U}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{4}{U}"), Constants.TimingRule.SORCERY));

@@ -40,50 +40,50 @@ import mage.game.events.GameEvent.EventType;
  */
 public class CombatDamageStep extends Step<CombatDamageStep> {
 
-	public CombatDamageStep() {
-		super(PhaseStep.COMBAT_DAMAGE, true);
-		this.stepEvent = EventType.COMBAT_DAMAGE_STEP;
-		this.preStepEvent = EventType.COMBAT_DAMAGE_STEP_PRE;
-		this.postStepEvent = EventType.COMBAT_DAMAGE_STEP_POST;
-	}
+    public CombatDamageStep() {
+        super(PhaseStep.COMBAT_DAMAGE, true);
+        this.stepEvent = EventType.COMBAT_DAMAGE_STEP;
+        this.preStepEvent = EventType.COMBAT_DAMAGE_STEP_PRE;
+        this.postStepEvent = EventType.COMBAT_DAMAGE_STEP_POST;
+    }
 
-	public CombatDamageStep(final CombatDamageStep step) {
-		super(step);
-	}
+    public CombatDamageStep(final CombatDamageStep step) {
+        super(step);
+    }
 
-	@Override
-	public boolean skipStep(Game game, UUID activePlayerId) {
-		if (game.getCombat().noAttackers())
-			return true;
-		return super.skipStep(game, activePlayerId);
-	}
+    @Override
+    public boolean skipStep(Game game, UUID activePlayerId) {
+        if (game.getCombat().noAttackers())
+            return true;
+        return super.skipStep(game, activePlayerId);
+    }
 
-	@Override
-	public void beginStep(Game game, UUID activePlayerId) {
-		super.beginStep(game, activePlayerId);
-		for (CombatGroup group: game.getCombat().getGroups()) {
-			group.assignDamageToBlockers(false, game);
-		}
-		for (CombatGroup group : game.getCombat().getBlockingGroups()) {
-			group.assignDamageToAttackers(false, game);
-		}
+    @Override
+    public void beginStep(Game game, UUID activePlayerId) {
+        super.beginStep(game, activePlayerId);
+        for (CombatGroup group: game.getCombat().getGroups()) {
+            group.assignDamageToBlockers(false, game);
+        }
+        for (CombatGroup group : game.getCombat().getBlockingGroups()) {
+            group.assignDamageToAttackers(false, game);
+        }
 
-		for (CombatGroup group: game.getCombat().getGroups()) {
-			group.applyDamage(game);
-		}
+        for (CombatGroup group: game.getCombat().getGroups()) {
+            group.applyDamage(game);
+        }
 
-		for (CombatGroup group : game.getCombat().getBlockingGroups()) {
-			group.applyDamage(game);
-		}
-	}
+        for (CombatGroup group : game.getCombat().getBlockingGroups()) {
+            group.applyDamage(game);
+        }
+    }
 
-	public boolean getFirst() {
-		return false;
-	}
+    public boolean getFirst() {
+        return false;
+    }
 
-	@Override
-	public CombatDamageStep copy() {
-		return new CombatDamageStep(this);
-	}
+    @Override
+    public CombatDamageStep copy() {
+        return new CombatDamageStep(this);
+    }
 
 }

@@ -40,23 +40,23 @@ import mage.cards.CardImpl;
  */
 public class SilvercoatLion extends CardImpl<SilvercoatLion> {
 
-	public SilvercoatLion(UUID ownerId) {
-		super(ownerId, 32, "Silvercoat Lion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
-		this.expansionSetCode = "M10";
-		this.subtype.add("Cat");
-		this.color.setWhite(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+    public SilvercoatLion(UUID ownerId) {
+        super(ownerId, 32, "Silvercoat Lion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        this.expansionSetCode = "M10";
+        this.subtype.add("Cat");
+        this.color.setWhite(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-	}
+    }
 
-	public SilvercoatLion(final SilvercoatLion card) {
-		super(card);
-	}
+    public SilvercoatLion(final SilvercoatLion card) {
+        super(card);
+    }
 
-	@Override
-	public SilvercoatLion copy() {
-		return new SilvercoatLion(this);
-	}
+    @Override
+    public SilvercoatLion copy() {
+        return new SilvercoatLion(this);
+    }
 
 }

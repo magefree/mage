@@ -50,10 +50,10 @@ public class TowerOfChampions extends CardImpl<TowerOfChampions> {
     public TowerOfChampions (UUID ownerId) {
         super(ownerId, 265, "Tower of Champions", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
         this.expansionSetCode = "MRD";
-		Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostTargetEffect(6, 6, Constants.Duration.EndOfTurn), new GenericManaCost(8));
-		ability.addCost(new TapSourceCost());
-		ability.addTarget(new TargetCreaturePermanent());
-		this.addAbility(ability);
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostTargetEffect(6, 6, Constants.Duration.EndOfTurn), new GenericManaCost(8));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
     public TowerOfChampions (final TowerOfChampions card) {

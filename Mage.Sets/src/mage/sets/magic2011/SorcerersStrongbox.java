@@ -49,55 +49,55 @@ import mage.players.Player;
  */
 public class SorcerersStrongbox extends CardImpl<SorcerersStrongbox> {
 
-	public SorcerersStrongbox(UUID ownerId) {
-		super(ownerId, 213, "Sorcerer's Strongbox", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
-		this.expansionSetCode = "M11";
+    public SorcerersStrongbox(UUID ownerId) {
+        super(ownerId, 213, "Sorcerer's Strongbox", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
+        this.expansionSetCode = "M11";
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SorcerersStrongboxEffect(), new TapSourceCost());
         ability.addManaCost(new GenericManaCost(2));
-		this.addAbility(ability);
-	}
+        this.addAbility(ability);
+    }
 
-	public SorcerersStrongbox(final SorcerersStrongbox card) {
-		super(card);
-	}
+    public SorcerersStrongbox(final SorcerersStrongbox card) {
+        super(card);
+    }
 
-	@Override
-	public SorcerersStrongbox copy() {
-		return new SorcerersStrongbox(this);
-	}
+    @Override
+    public SorcerersStrongbox copy() {
+        return new SorcerersStrongbox(this);
+    }
 
 }
 
 class SorcerersStrongboxEffect extends OneShotEffect<SorcerersStrongboxEffect> {
 
-	public SorcerersStrongboxEffect() {
-		super(Outcome.DrawCard);
-		staticText = "Flip a coin. If you win the flip, sacrifice {this} and draw three cards";
-	}
+    public SorcerersStrongboxEffect() {
+        super(Outcome.DrawCard);
+        staticText = "Flip a coin. If you win the flip, sacrifice {this} and draw three cards";
+    }
 
-	public SorcerersStrongboxEffect(final SorcerersStrongboxEffect effect) {
-		super(effect);
-	}
+    public SorcerersStrongboxEffect(final SorcerersStrongboxEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-		if (player != null) {
-			if (player.flipCoin(game)) {
-				Permanent perm = game.getPermanent(source.getSourceId());
-				if (perm != null) {
-					perm.sacrifice(source.getId(), game);
-				}
-				player.drawCards(3, game);
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+            if (player.flipCoin(game)) {
+                Permanent perm = game.getPermanent(source.getSourceId());
+                if (perm != null) {
+                    perm.sacrifice(source.getId(), game);
+                }
+                player.drawCards(3, game);
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public SorcerersStrongboxEffect copy() {
-		return new SorcerersStrongboxEffect(this);
-	}
+    @Override
+    public SorcerersStrongboxEffect copy() {
+        return new SorcerersStrongboxEffect(this);
+    }
 
 }

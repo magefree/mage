@@ -55,7 +55,7 @@ public class ViralDrake extends CardImpl<ViralDrake> {
         this.toughness = new MageInt(4);
 
         this.addAbility(FlyingAbility.getInstance());
-		this.addAbility(InfectAbility.getInstance());
+        this.addAbility(InfectAbility.getInstance());
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ProliferateEffect(), new ManaCostsImpl("{3}{U}")));
     }
 

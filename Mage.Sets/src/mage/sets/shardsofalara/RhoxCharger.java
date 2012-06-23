@@ -47,7 +47,7 @@ public class RhoxCharger extends CardImpl<RhoxCharger> {
         this.expansionSetCode = "ALA";
         this.subtype.add("Rhino");
         this.subtype.add("Soldier");
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(TrampleAbility.getInstance());

@@ -27,21 +27,21 @@ public abstract class AbstractProperties implements Properties {
     public <T> Property<T> property(String name, T value) {
         return property(name, new BasicProperty<T>(value));
     }
-    
+
     public <T> Property<T> property(String name) {
         return property(name, new BasicProperty<T>());
     }
-    
+
     public <E> List<E> list(String name) {
         return list(name, new ArrayList<E>());
     }
-    
+
     public <E> Set<E> set(String name) {
         return set(name, new HashSet<E>());
     }
-    
+
     public <K, V> Map<K, V> map(String name) {
         return map(name, new HashMap<K, V>());
     }
-    
+
 }

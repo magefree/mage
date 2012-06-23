@@ -64,13 +64,13 @@ public class MageRoundPane extends JPanel {
         g2.dispose();
     }
 
-	public void setXOffset(int x_offset) {
-		X_OFFSET = x_offset;
-	}
+    public void setXOffset(int x_offset) {
+        X_OFFSET = x_offset;
+    }
 
-	public void setYOffset(int y_offset) {
-		Y_OFFSET = y_offset;
-	}
+    public void setYOffset(int y_offset) {
+        Y_OFFSET = y_offset;
+    }
 
     @Override
     public void setBounds(int x, int y, int width, int height) {

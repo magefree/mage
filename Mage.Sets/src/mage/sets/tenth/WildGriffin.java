@@ -41,24 +41,24 @@ import mage.cards.CardImpl;
  */
 public class WildGriffin extends CardImpl<WildGriffin> {
 
-	public WildGriffin(UUID ownerId) {
-		super(ownerId, 59, "Wild Griffin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
-		this.expansionSetCode = "10E";
-		this.subtype.add("Griffin");
-		this.color.setWhite(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+    public WildGriffin(UUID ownerId) {
+        super(ownerId, 59, "Wild Griffin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
+        this.expansionSetCode = "10E";
+        this.subtype.add("Griffin");
+        this.color.setWhite(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-		this.addAbility(FlyingAbility.getInstance());
-	}
+        this.addAbility(FlyingAbility.getInstance());
+    }
 
-	public WildGriffin(final WildGriffin card) {
-		super(card);
-	}
+    public WildGriffin(final WildGriffin card) {
+        super(card);
+    }
 
-	@Override
-	public WildGriffin copy() {
-		return new WildGriffin(this);
-	}
+    @Override
+    public WildGriffin copy() {
+        return new WildGriffin(this);
+    }
 
 }

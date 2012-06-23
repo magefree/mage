@@ -45,9 +45,9 @@ public class GoblinOutlander extends CardImpl<GoblinOutlander> {
     private static final FilterCard filter = new FilterCard("white");
 
     static {
-    	filter.setUseColor(true);
-    	filter.getColor().setWhite(true);
-		filter.setScopeColor(ComparisonScope.Any);
+        filter.setUseColor(true);
+        filter.getColor().setWhite(true);
+        filter.setScopeColor(ComparisonScope.Any);
     }
 
     public GoblinOutlander(UUID ownerId) {
@@ -58,7 +58,7 @@ public class GoblinOutlander extends CardImpl<GoblinOutlander> {
         this.subtype.add("Goblin");
         this.subtype.add("Scout");
         this.power = new MageInt(2);
-	this.toughness = new MageInt(2);
+    this.toughness = new MageInt(2);
         this.addAbility(new ProtectionAbility(filter));
     }
 

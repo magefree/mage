@@ -46,11 +46,11 @@ public class Flensermite extends CardImpl<Flensermite> {
         super(ownerId, 41, "Flensermite", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.expansionSetCode = "MBS";
         this.subtype.add("Gremlin");
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-		this.addAbility(InfectAbility.getInstance());
-		this.addAbility(LifelinkAbility.getInstance());
+        this.addAbility(InfectAbility.getInstance());
+        this.addAbility(LifelinkAbility.getInstance());
     }
 
     public Flensermite (final Flensermite card) {

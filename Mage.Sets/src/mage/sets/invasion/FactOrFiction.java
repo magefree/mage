@@ -96,7 +96,7 @@ class FactOrFictionEffect extends OneShotEffect<FactOrFictionEffect> {
         }
 
         Cards cards = new CardsImpl(Zone.PICK);
-		int count = Math.min(player.getLibrary().size(), 5);
+        int count = Math.min(player.getLibrary().size(), 5);
         for (int i = 0; i < count; i++) {
             Card card = player.getLibrary().removeFromTop(game);
             if (card != null) {

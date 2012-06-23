@@ -45,49 +45,49 @@ import org.apache.log4j.Logger;
  * @author BetaSteward_at_googlemail.com
  */
 public class TournamentFactory {
-	private final static TournamentFactory INSTANCE = new TournamentFactory();
-	private final static Logger logger = Logger.getLogger(TournamentFactory.class);
+    private final static TournamentFactory INSTANCE = new TournamentFactory();
+    private final static Logger logger = Logger.getLogger(TournamentFactory.class);
 
-	private Map<String, Class<Tournament>> tournaments = new HashMap<String, Class<Tournament>>();
-	private Map<String, TournamentType> tournamentTypes = new HashMap<String, TournamentType>();
-	private List<TournamentTypeView> tournamentTypeViews = new ArrayList<TournamentTypeView>();
+    private Map<String, Class<Tournament>> tournaments = new HashMap<String, Class<Tournament>>();
+    private Map<String, TournamentType> tournamentTypes = new HashMap<String, TournamentType>();
+    private List<TournamentTypeView> tournamentTypeViews = new ArrayList<TournamentTypeView>();
 
-	public static TournamentFactory getInstance() {
-		return INSTANCE;
-	}
+    public static TournamentFactory getInstance() {
+        return INSTANCE;
+    }
 
-	private TournamentFactory() {}
+    private TournamentFactory() {}
 
-	public Tournament createTournament(String tournamentType, TournamentOptions options) {
+    public Tournament createTournament(String tournamentType, TournamentOptions options) {
 
-		Tournament tournament;
-		Constructor<Tournament> con;
-		try {
-			con = tournaments.get(tournamentType).getConstructor(new Class[]{TournamentOptions.class});
-			tournament = con.newInstance(new Object[] {options});
-			for (String setCode: options.getLimitedOptions().getSetCodes()) {
-				tournament.getSets().add(Sets.findSet(setCode));
-			}
-		} catch (Exception ex) {
-			logger.fatal("TournamentFactory error ", ex);
-			return null;
-		}
-		logger.info("Tournament created: " + tournamentType); // + game.getId().toString());
+        Tournament tournament;
+        Constructor<Tournament> con;
+        try {
+            con = tournaments.get(tournamentType).getConstructor(new Class[]{TournamentOptions.class});
+            tournament = con.newInstance(new Object[] {options});
+            for (String setCode: options.getLimitedOptions().getSetCodes()) {
+                tournament.getSets().add(Sets.findSet(setCode));
+            }
+        } catch (Exception ex) {
+            logger.fatal("TournamentFactory error ", ex);
+            return null;
+        }
+        logger.info("Tournament created: " + tournamentType); // + game.getId().toString());
 
-		return tournament;
-	}
+        return tournament;
+    }
 
-	public List<TournamentTypeView> getTournamentTypes() {
-		return tournamentTypeViews;
-	}
+    public List<TournamentTypeView> getTournamentTypes() {
+        return tournamentTypeViews;
+    }
 
 
-	public void addTournamentType(String name, TournamentType tournamentType, Class tournament) {
-		if (tournament != null) {
-			this.tournaments.put(name, tournament);
-			this.tournamentTypes.put(name, tournamentType);
-			this.tournamentTypeViews.add(new TournamentTypeView(tournamentType));
-		}
-	}
+    public void addTournamentType(String name, TournamentType tournamentType, Class tournament) {
+        if (tournament != null) {
+            this.tournaments.put(name, tournament);
+            this.tournamentTypes.put(name, tournamentType);
+            this.tournamentTypeViews.add(new TournamentTypeView(tournamentType));
+        }
+    }
 
 }

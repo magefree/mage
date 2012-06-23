@@ -54,7 +54,7 @@ import java.util.UUID;
 public class HowlpackAlpha extends CardImpl<HowlpackAlpha> {
 
     private static final String ruleText = "At the beginning of your end step, put a 2/2 green Wolf creature token onto the battlefield";
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Werewolf and Wolf creatures");
 
     static {

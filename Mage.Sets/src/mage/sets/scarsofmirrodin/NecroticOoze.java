@@ -52,78 +52,78 @@ import mage.players.Player;
  */
 public class NecroticOoze extends CardImpl<NecroticOoze> {
 
-	public NecroticOoze(UUID ownerId) {
-		super(ownerId, 72, "Necrotic Ooze", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-		this.expansionSetCode = "SOM";
-		this.subtype.add("Ooze");
-		this.color.setBlack(true);
-		this.power = new MageInt(4);
-		this.toughness = new MageInt(3);
+    public NecroticOoze(UUID ownerId) {
+        super(ownerId, 72, "Necrotic Ooze", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
+        this.expansionSetCode = "SOM";
+        this.subtype.add("Ooze");
+        this.color.setBlack(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(3);
 
-		this.addAbility(new NecroticOozeAbility());
-	}
+        this.addAbility(new NecroticOozeAbility());
+    }
 
-	public NecroticOoze(final NecroticOoze card) {
-		super(card);
-	}
+    public NecroticOoze(final NecroticOoze card) {
+        super(card);
+    }
 
-	@Override
-	public NecroticOoze copy() {
-		return new NecroticOoze(this);
-	}
+    @Override
+    public NecroticOoze copy() {
+        return new NecroticOoze(this);
+    }
 
 }
 
 class NecroticOozeAbility extends StaticAbility<NecroticOozeAbility> {
 
-	public NecroticOozeAbility() {
-		super(Zone.BATTLEFIELD, new NecroticOozeEffect());
-	}
-	
-	public NecroticOozeAbility(final NecroticOozeAbility ability) {
-		super(ability);
-	}
-	
-	@Override
-	public NecroticOozeAbility copy() {
-		return new NecroticOozeAbility(this);
-	}
-	
+    public NecroticOozeAbility() {
+        super(Zone.BATTLEFIELD, new NecroticOozeEffect());
+    }
+
+    public NecroticOozeAbility(final NecroticOozeAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public NecroticOozeAbility copy() {
+        return new NecroticOozeAbility(this);
+    }
+
 }
 
 class NecroticOozeEffect extends ContinuousEffectImpl<NecroticOozeEffect> {
 
-	public NecroticOozeEffect() {
-		super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-		staticText = "As long as {this} is on the battlefield, it has all activated abilities of all creature cards in all graveyards";
-	}
-	
-	public NecroticOozeEffect(final NecroticOozeEffect effect) {
-		super(effect);
-	}
-	
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent perm = game.getPermanent(source.getSourceId());
-		if (perm != null) {
-			for (Player player: game.getPlayers().values()) {
-				for (Card card: player.getGraveyard().getCards(game)) {
-					if (card.getCardType().contains(CardType.CREATURE)) {
-						for (Ability ability: card.getAbilities()) {
-							if (ability instanceof ActivatedAbility) {
-								perm.addAbility(ability, game);
-							}
-						}
-					}
-				}
-			}
-		}
-		return true;
-	}
+    public NecroticOozeEffect() {
+        super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+        staticText = "As long as {this} is on the battlefield, it has all activated abilities of all creature cards in all graveyards";
+    }
 
-	@Override
-	public NecroticOozeEffect copy() {
-		return new NecroticOozeEffect(this);
-	}
-	
+    public NecroticOozeEffect(final NecroticOozeEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent perm = game.getPermanent(source.getSourceId());
+        if (perm != null) {
+            for (Player player: game.getPlayers().values()) {
+                for (Card card: player.getGraveyard().getCards(game)) {
+                    if (card.getCardType().contains(CardType.CREATURE)) {
+                        for (Ability ability: card.getAbilities()) {
+                            if (ability instanceof ActivatedAbility) {
+                                perm.addAbility(ability, game);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public NecroticOozeEffect copy() {
+        return new NecroticOozeEffect(this);
+    }
+
 }

@@ -49,10 +49,10 @@ public class RoyalAssassin extends CardImpl<RoyalAssassin> {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
 
-	static {
-		filter.setUseTapped(true);
-		filter.setTapped(true);
-	}
+    static {
+        filter.setUseTapped(true);
+        filter.setTapped(true);
+    }
 
     public RoyalAssassin(UUID ownerId){
         super(ownerId, 174, "Royal Assassin", Rarity.RARE, new CardType[]{CardType.CREATURE},"{1}{B}{B}");
@@ -63,17 +63,17 @@ public class RoyalAssassin extends CardImpl<RoyalAssassin> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
-		ability.addTarget(new TargetCreaturePermanent(filter));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
 
-	public RoyalAssassin(final RoyalAssassin card) {
-		super(card);
-	}
+    public RoyalAssassin(final RoyalAssassin card) {
+        super(card);
+    }
 
-	@Override
-	public RoyalAssassin copy() {
-		return new RoyalAssassin(this);
-	}
+    @Override
+    public RoyalAssassin copy() {
+        return new RoyalAssassin(this);
+    }
 }

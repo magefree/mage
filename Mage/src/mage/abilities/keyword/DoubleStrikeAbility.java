@@ -38,28 +38,28 @@ import mage.abilities.StaticAbility;
  */
 public class DoubleStrikeAbility extends StaticAbility<DoubleStrikeAbility> {
 
-	private static final DoubleStrikeAbility fINSTANCE =  new DoubleStrikeAbility();
+    private static final DoubleStrikeAbility fINSTANCE =  new DoubleStrikeAbility();
 
-	private Object readResolve() throws ObjectStreamException {
-		return fINSTANCE;
-	}
+    private Object readResolve() throws ObjectStreamException {
+        return fINSTANCE;
+    }
 
-	public static DoubleStrikeAbility getInstance() {
-		return fINSTANCE;
-	}
+    public static DoubleStrikeAbility getInstance() {
+        return fINSTANCE;
+    }
 
-	private DoubleStrikeAbility() {
-		super(Zone.BATTLEFIELD, null);
-	}
+    private DoubleStrikeAbility() {
+        super(Zone.BATTLEFIELD, null);
+    }
 
-	@Override
-	public String getRule() {
-		return "Double Strike";
-	}
+    @Override
+    public String getRule() {
+        return "Double Strike";
+    }
 
-	@Override
-	public DoubleStrikeAbility copy() {
-		return fINSTANCE;
-	}
+    @Override
+    public DoubleStrikeAbility copy() {
+        return fINSTANCE;
+    }
 
 }

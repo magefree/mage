@@ -42,23 +42,23 @@ import mage.target.TargetSpell;
  */
 public class Discombobulate extends CardImpl<Discombobulate> {
 
-	public Discombobulate(UUID ownerId) {
-		super(ownerId, 81, "Discombobulate", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
-		this.expansionSetCode = "10E";
-		this.color.setBlue(true);
+    public Discombobulate(UUID ownerId) {
+        super(ownerId, 81, "Discombobulate", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
+        this.expansionSetCode = "10E";
+        this.color.setBlue(true);
                 // Counter target spell. Look at the top four cards of your library, then put them back in any order.
-		this.getSpellAbility().addTarget(new TargetSpell());
-		this.getSpellAbility().addEffect(new CounterTargetEffect());
+        this.getSpellAbility().addTarget(new TargetSpell());
+        this.getSpellAbility().addEffect(new CounterTargetEffect());
                 this.getSpellAbility().addEffect(new LookLibraryControllerEffect(4));
-	}
+    }
 
-	public Discombobulate(final Discombobulate card) {
-		super(card);
-	}
+    public Discombobulate(final Discombobulate card) {
+        super(card);
+    }
 
-	@Override
-	public Discombobulate copy() {
-		return new Discombobulate(this);
-	}
+    @Override
+    public Discombobulate copy() {
+        return new Discombobulate(this);
+    }
 
 }

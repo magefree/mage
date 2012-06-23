@@ -45,7 +45,7 @@ import mage.filter.common.FilterSpiritOrArcaneCard;
 public class ScaledHulk extends CardImpl<ScaledHulk> {
 
     private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
-    
+
     public ScaledHulk(UUID ownerId) {
         super(ownerId, 143, "Scaled Hulk", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}");
         this.expansionSetCode = "BOK";

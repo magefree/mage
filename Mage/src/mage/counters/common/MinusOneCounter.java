@@ -36,21 +36,21 @@ import mage.counters.BoostCounter;
  */
 public class MinusOneCounter extends BoostCounter<MinusOneCounter> {
 
-	public MinusOneCounter() {
-		super(-1, -1);
-	}
+    public MinusOneCounter() {
+        super(-1, -1);
+    }
 
-	public MinusOneCounter(int amount) {
-		super(-1, -1);
-		this.count = amount;
-	}
+    public MinusOneCounter(int amount) {
+        super(-1, -1);
+        this.count = amount;
+    }
 
-	public MinusOneCounter(final MinusOneCounter counter) {
-		super(counter);
-	}
+    public MinusOneCounter(final MinusOneCounter counter) {
+        super(counter);
+    }
 
-	@Override
-	public MinusOneCounter copy() {
-		return new MinusOneCounter(this);
-	}
+    @Override
+    public MinusOneCounter copy() {
+        return new MinusOneCounter(this);
+    }
 }

@@ -41,28 +41,28 @@ import java.util.UUID;
  */
 public class VampireInterloper extends CardImpl<VampireInterloper> {
 
-	public VampireInterloper(UUID ownerId) {
-		super(ownerId, 123, "Vampire Interloper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-		this.expansionSetCode = "ISD";
-		this.subtype.add("Vampire");
-		this.subtype.add("Scout");
+    public VampireInterloper(UUID ownerId) {
+        super(ownerId, 123, "Vampire Interloper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
+        this.expansionSetCode = "ISD";
+        this.subtype.add("Vampire");
+        this.subtype.add("Scout");
 
-		this.color.setBlack(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(1);
+        this.color.setBlack(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-		this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(FlyingAbility.getInstance());
 
-		// Vampire Interloper can't block.
-		this.addAbility(CantBlockAbility.getInstance());
-	}
+        // Vampire Interloper can't block.
+        this.addAbility(CantBlockAbility.getInstance());
+    }
 
-	public VampireInterloper(final VampireInterloper card) {
-		super(card);
-	}
+    public VampireInterloper(final VampireInterloper card) {
+        super(card);
+    }
 
-	@Override
-	public VampireInterloper copy() {
-		return new VampireInterloper(this);
-	}
+    @Override
+    public VampireInterloper copy() {
+        return new VampireInterloper(this);
+    }
 }

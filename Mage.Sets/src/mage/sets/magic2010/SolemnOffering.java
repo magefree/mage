@@ -44,29 +44,29 @@ import mage.target.TargetPermanent;
  */
 public class SolemnOffering extends CardImpl<SolemnOffering> {
 
-	private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
+    private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
 
-	static {
-		filter.getCardType().add(CardType.ARTIFACT);
-		filter.getCardType().add(CardType.ENCHANTMENT);
-		filter.setScopeCardType(ComparisonScope.Any);
-	}
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.getCardType().add(CardType.ENCHANTMENT);
+        filter.setScopeCardType(ComparisonScope.Any);
+    }
 
-	public SolemnOffering(UUID ownerId) {
-		super(ownerId, 33, "Solemn Offering", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");
-		this.expansionSetCode = "M10";
-		this.color.setWhite(true);
-		this.getSpellAbility().addTarget(new TargetPermanent(filter));
-		this.getSpellAbility().addEffect(new DestroyTargetEffect());
-		this.getSpellAbility().addEffect(new GainLifeEffect(4));
-	}
+    public SolemnOffering(UUID ownerId) {
+        super(ownerId, 33, "Solemn Offering", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");
+        this.expansionSetCode = "M10";
+        this.color.setWhite(true);
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getSpellAbility().addEffect(new GainLifeEffect(4));
+    }
 
-	public SolemnOffering(final SolemnOffering card) {
-		super(card);
-	}
+    public SolemnOffering(final SolemnOffering card) {
+        super(card);
+    }
 
-	@Override
-	public SolemnOffering copy() {
-		return new SolemnOffering(this);
-	}
+    @Override
+    public SolemnOffering copy() {
+        return new SolemnOffering(this);
+    }
 }

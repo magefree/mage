@@ -50,30 +50,30 @@ import mage.cards.CardImpl;
  */
 public class Bloodghast extends CardImpl<Bloodghast> {
 
-	public Bloodghast(UUID ownerId) {
-		super(ownerId, 83, "Bloodghast", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{B}");
-		this.expansionSetCode = "ZEN";
-		this.subtype.add("Vampire");
-		this.subtype.add("Spirit");
+    public Bloodghast(UUID ownerId) {
+        super(ownerId, 83, "Bloodghast", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{B}");
+        this.expansionSetCode = "ZEN";
+        this.subtype.add("Vampire");
+        this.subtype.add("Spirit");
 
-		this.color.setBlack(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(1);
+        this.color.setBlack(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-		this.addAbility(CantBlockAbility.getInstance());
-		this.addAbility(new LandfallAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), true));
-		ContinuousEffect effect = new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield);
+        this.addAbility(CantBlockAbility.getInstance());
+        this.addAbility(new LandfallAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), true));
+        ContinuousEffect effect = new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(effect,
                 new TenOrLessLifeCondition(TenOrLessLifeCondition.CheckType.AN_OPPONENT),
                 "Bloodghast has haste as long as an opponent has 10 or less life.")));
-	}
+    }
 
-	public Bloodghast(final Bloodghast card) {
-		super(card);
-	}
+    public Bloodghast(final Bloodghast card) {
+        super(card);
+    }
 
-	@Override
-	public Bloodghast copy() {
-		return new Bloodghast(this);
-	}
+    @Override
+    public Bloodghast copy() {
+        return new Bloodghast(this);
+    }
 }

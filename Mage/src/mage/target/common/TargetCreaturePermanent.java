@@ -37,44 +37,44 @@ import mage.target.TargetPermanent;
  */
 public class TargetCreaturePermanent<T extends TargetCreaturePermanent<T>> extends TargetPermanent<TargetCreaturePermanent<T>> {
 
-	public TargetCreaturePermanent() {
-		this(1, 1, new FilterCreaturePermanent(), false);
-	}
+    public TargetCreaturePermanent() {
+        this(1, 1, new FilterCreaturePermanent(), false);
+    }
 
     public TargetCreaturePermanent(boolean required) {
         this();
         setRequired(required);
     }
 
-	public TargetCreaturePermanent(FilterCreaturePermanent filter) {
-		this(1, 1, filter, false);
-	}
+    public TargetCreaturePermanent(FilterCreaturePermanent filter) {
+        this(1, 1, filter, false);
+    }
 
-	public TargetCreaturePermanent(int numTargets) {
-		this(numTargets, numTargets, new FilterCreaturePermanent(), false);
-	}
+    public TargetCreaturePermanent(int numTargets) {
+        this(numTargets, numTargets, new FilterCreaturePermanent(), false);
+    }
 
     public TargetCreaturePermanent(int numTargets, boolean required) {
-		this(numTargets);
+        this(numTargets);
         setRequired(required);
-	}
+    }
 
-	public TargetCreaturePermanent(int minNumTargets, int maxNumTargets) {
-		this(minNumTargets, maxNumTargets, new FilterCreaturePermanent(), false);
-	}
+    public TargetCreaturePermanent(int minNumTargets, int maxNumTargets) {
+        this(minNumTargets, maxNumTargets, new FilterCreaturePermanent(), false);
+    }
 
-	public TargetCreaturePermanent(int minNumTargets, int maxNumTargets, FilterCreaturePermanent filter, boolean notTarget) {
-		super(minNumTargets, maxNumTargets, filter, notTarget);
-		this.targetName = filter.getMessage();
-	}
+    public TargetCreaturePermanent(int minNumTargets, int maxNumTargets, FilterCreaturePermanent filter, boolean notTarget) {
+        super(minNumTargets, maxNumTargets, filter, notTarget);
+        this.targetName = filter.getMessage();
+    }
 
-	public TargetCreaturePermanent(final TargetCreaturePermanent target) {
-		super(target);
-	}
+    public TargetCreaturePermanent(final TargetCreaturePermanent target) {
+        super(target);
+    }
 
-	@Override
-	public TargetCreaturePermanent copy() {
-		return new TargetCreaturePermanent(this);
-	}
+    @Override
+    public TargetCreaturePermanent copy() {
+        return new TargetCreaturePermanent(this);
+    }
 
 }

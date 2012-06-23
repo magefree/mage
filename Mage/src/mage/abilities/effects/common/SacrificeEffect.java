@@ -48,32 +48,32 @@ import java.util.UUID;
  */
 public class SacrificeEffect extends OneShotEffect<SacrificeEffect>{
 
-	private FilterPermanent filter;
-	private String preText;
-	private DynamicValue count;
+    private FilterPermanent filter;
+    private String preText;
+    private DynamicValue count;
 
-	public SacrificeEffect ( FilterPermanent filter, DynamicValue count, String preText ) {
-		super(Outcome.Sacrifice);
-		this.filter = filter;
-		this.count = count;
-		this.preText = preText;
-		setText();
-	}
+    public SacrificeEffect ( FilterPermanent filter, DynamicValue count, String preText ) {
+        super(Outcome.Sacrifice);
+        this.filter = filter;
+        this.count = count;
+        this.preText = preText;
+        setText();
+    }
 
     public SacrificeEffect ( FilterPermanent filter, int count, String preText ) {
         this(filter, new StaticValue(count), preText);
     }
 
-	public SacrificeEffect ( SacrificeEffect effect ) {
-		super(effect);
-		this.filter = effect.filter;
-		this.count = effect.count;
-		this.preText = effect.preText;
-	}
-	
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(targetPointer.getFirst(game, source));
+    public SacrificeEffect ( SacrificeEffect effect ) {
+        super(effect);
+        this.filter = effect.filter;
+        this.count = effect.count;
+        this.preText = effect.preText;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(targetPointer.getFirst(game, source));
 
         if (player == null) {
             return false;
@@ -83,43 +83,43 @@ public class SacrificeEffect extends OneShotEffect<SacrificeEffect>{
 
         int amount = count.calculate(game, source);
         int realCount = game.getBattlefield().countAll(filter, player.getId(), game);
-		amount = Math.min(amount, realCount);
+        amount = Math.min(amount, realCount);
 
         Target target = new TargetControlledPermanent(amount, amount, filter, false);
         target.setRequired(true);
 
-		//A spell or ability could have removed the only legal target this player
-		//had, if thats the case this ability should fizzle.
-		if (amount > 0 && target.canChoose(source.getSourceId(), player.getId(), game)) {
-			boolean abilityApplied = false;
-			while (!target.isChosen() && target.canChoose(player.getId(), game)) {
-				player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
-			}
+        //A spell or ability could have removed the only legal target this player
+        //had, if thats the case this ability should fizzle.
+        if (amount > 0 && target.canChoose(source.getSourceId(), player.getId(), game)) {
+            boolean abilityApplied = false;
+            while (!target.isChosen() && target.canChoose(player.getId(), game)) {
+                player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+            }
 
-			for ( int idx = 0; idx < target.getTargets().size(); idx++) {
-				Permanent permanent = game.getPermanent((UUID)target.getTargets().get(idx));
+            for ( int idx = 0; idx < target.getTargets().size(); idx++) {
+                Permanent permanent = game.getPermanent((UUID)target.getTargets().get(idx));
 
-				if ( permanent != null ) {
-					abilityApplied |= permanent.sacrifice(source.getSourceId(), game);
-				}
-			}
+                if ( permanent != null ) {
+                    abilityApplied |= permanent.sacrifice(source.getSourceId(), game);
+                }
+            }
 
-			return abilityApplied;
-		}
-		return false;
-	}
+            return abilityApplied;
+        }
+        return false;
+    }
 
     public void setAmount(DynamicValue amount) {
         this.count = amount;
     }
 
-	@Override
-	public SacrificeEffect copy() {
-		return new SacrificeEffect(this);
-	}
+    @Override
+    public SacrificeEffect copy() {
+        return new SacrificeEffect(this);
+    }
 
-	private void setText() {
-		StringBuilder sb = new StringBuilder();
+    private void setText() {
+        StringBuilder sb = new StringBuilder();
         sb.append(preText);
         if (preText.contains("player")) {
             sb.append(" sacrifices ");
@@ -130,6 +130,6 @@ public class SacrificeEffect extends OneShotEffect<SacrificeEffect>{
             sb.append(count).append(" ");
         }
         sb.append(filter.getMessage());
-		staticText = sb.toString();
-	}
+        staticText = sb.toString();
+    }
 }

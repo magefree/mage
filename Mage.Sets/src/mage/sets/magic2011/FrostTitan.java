@@ -52,97 +52,97 @@ import mage.target.TargetStackObject;
  */
 public class FrostTitan extends CardImpl<FrostTitan> {
 
-	public FrostTitan(UUID ownerId) {
-		super(ownerId, 55, "Frost Titan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Giant");
-		this.color.setBlue(true);
-		this.power = new MageInt(6);
-		this.toughness = new MageInt(6);
+    public FrostTitan(UUID ownerId) {
+        super(ownerId, 55, "Frost Titan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Giant");
+        this.color.setBlue(true);
+        this.power = new MageInt(6);
+        this.toughness = new MageInt(6);
 
-		this.addAbility(new FrostTitanAbility1());
-		this.addAbility(new FrostTitanAbility2());
-	}
+        this.addAbility(new FrostTitanAbility1());
+        this.addAbility(new FrostTitanAbility2());
+    }
 
-	public FrostTitan(final FrostTitan card) {
-		super(card);
-	}
+    public FrostTitan(final FrostTitan card) {
+        super(card);
+    }
 
-	@Override
-	public FrostTitan copy() {
-		return new FrostTitan(this);
-	}
+    @Override
+    public FrostTitan copy() {
+        return new FrostTitan(this);
+    }
 
 }
 
 class FrostTitanAbility1 extends TriggeredAbilityImpl<FrostTitanAbility1> {
 
-	public FrostTitanAbility1() {
-		super(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new GenericManaCost(2)), false);
-	}
+    public FrostTitanAbility1() {
+        super(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new GenericManaCost(2)), false);
+    }
 
-	public FrostTitanAbility1(final FrostTitanAbility1 ability) {
-		super(ability);
-	}
+    public FrostTitanAbility1(final FrostTitanAbility1 ability) {
+        super(ability);
+    }
 
-	@Override
-	public FrostTitanAbility1 copy() {
-		return new FrostTitanAbility1(this);
-	}
+    @Override
+    public FrostTitanAbility1 copy() {
+        return new FrostTitanAbility1(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.TARGETED && event.getTargetId().equals(this.getSourceId()) && game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
-			this.getTargets().clear();
-			TargetStackObject target = new TargetStackObject();
-			target.add(event.getSourceId(), game);
-			this.addTarget(target);
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.TARGETED && event.getTargetId().equals(this.getSourceId()) && game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
+            this.getTargets().clear();
+            TargetStackObject target = new TargetStackObject();
+            target.add(event.getSourceId(), game);
+            this.addTarget(target);
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "Whenever {this} becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays {2}";
-	}
+    @Override
+    public String getRule() {
+        return "Whenever {this} becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays {2}";
+    }
 
 }
 
 class FrostTitanAbility2 extends TriggeredAbilityImpl<FrostTitanAbility2> {
 
-	public FrostTitanAbility2() {
-		super(Zone.BATTLEFIELD, new TapTargetEffect(), false);
-		this.addEffect(new SkipNextUntapTargetEffect());
-		this.addTarget(new TargetPermanent());
-	}
+    public FrostTitanAbility2() {
+        super(Zone.BATTLEFIELD, new TapTargetEffect(), false);
+        this.addEffect(new SkipNextUntapTargetEffect());
+        this.addTarget(new TargetPermanent());
+    }
 
-	public FrostTitanAbility2(final FrostTitanAbility2 ability) {
-		super(ability);
-	}
+    public FrostTitanAbility2(final FrostTitanAbility2 ability) {
+        super(ability);
+    }
 
-	@Override
-	public FrostTitanAbility2 copy() {
-		return new FrostTitanAbility2(this);
-	}
+    @Override
+    public FrostTitanAbility2 copy() {
+        return new FrostTitanAbility2(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
-			return true;
-		}
-		if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId()) ) {
-			ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-			if (zEvent.getToZone() == Zone.BATTLEFIELD) {
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
+            return true;
+        }
+        if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId()) ) {
+            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+            if (zEvent.getToZone() == Zone.BATTLEFIELD) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "Whenever {this} enters the battlefield or attacks, tap target permanent. It doesn't untap during its controller's next untap step";
-	}
+    @Override
+    public String getRule() {
+        return "Whenever {this} enters the battlefield or attacks, tap target permanent. It doesn't untap during its controller's next untap step";
+    }
 
 }

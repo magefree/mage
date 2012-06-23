@@ -55,7 +55,7 @@ public class AkkiCoalflinger extends CardImpl<AkkiCoalflinger> {
         this.expansionSetCode = "CHK";
         this.subtype.add("Goblin");
         this.subtype.add("Shaman");
-		this.color.setRed(true);
+        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(FirstStrikeAbility.getInstance());

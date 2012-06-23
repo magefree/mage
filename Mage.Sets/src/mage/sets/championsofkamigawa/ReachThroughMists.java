@@ -45,7 +45,7 @@ public class ReachThroughMists extends CardImpl<ReachThroughMists> {
         super(ownerId, 81, "Reach Through Mists", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
-		this.color.setBlue(true);
+        this.color.setBlue(true);
         this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
     }
 

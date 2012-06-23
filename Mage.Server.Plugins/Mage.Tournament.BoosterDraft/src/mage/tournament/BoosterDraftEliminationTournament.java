@@ -42,50 +42,50 @@ import mage.game.tournament.TournamentSingleElimination;
  */
 public class BoosterDraftEliminationTournament extends TournamentSingleElimination {
 
-	protected enum TournamentStep {
-		START, DRAFT, CONSTRUCT, COMPETE, WINNERS
-	}
+    protected enum TournamentStep {
+        START, DRAFT, CONSTRUCT, COMPETE, WINNERS
+    }
 
-	protected TournamentStep currentStep;
+    protected TournamentStep currentStep;
 
-	public BoosterDraftEliminationTournament(TournamentOptions options) {
-		super(options);
-		currentStep = TournamentStep.START;
-	}
+    public BoosterDraftEliminationTournament(TournamentOptions options) {
+        super(options);
+        currentStep = TournamentStep.START;
+    }
 
-	protected void draft() {
-		Draft draft = new BoosterDraft((DraftOptions) options.getLimitedOptions(), getSets());
-		for (TournamentPlayer player: players.values()) {
-			draft.addPlayer(player.getPlayer());
-		}
-		tableEventSource.fireTableEvent(EventType.START_DRAFT, null, draft);
-	}
+    protected void draft() {
+        Draft draft = new BoosterDraft((DraftOptions) options.getLimitedOptions(), getSets());
+        for (TournamentPlayer player: players.values()) {
+            draft.addPlayer(player.getPlayer());
+        }
+        tableEventSource.fireTableEvent(EventType.START_DRAFT, null, draft);
+    }
 
-	protected void winners() {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
+    protected void winners() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-	@Override
-	public void nextStep() {
-		switch (currentStep) {
-			case START:
-				currentStep = TournamentStep.DRAFT;
-				draft();
-				break;
-			case DRAFT:
-				currentStep = TournamentStep.CONSTRUCT;
-				construct();
-				break;
-			case CONSTRUCT:
-				currentStep = TournamentStep.COMPETE;
-				runTournament();
-				break;
-			case COMPETE:
-				currentStep = TournamentStep.WINNERS;
-				winners();
-				break;
-		}
-	}
+    @Override
+    public void nextStep() {
+        switch (currentStep) {
+            case START:
+                currentStep = TournamentStep.DRAFT;
+                draft();
+                break;
+            case DRAFT:
+                currentStep = TournamentStep.CONSTRUCT;
+                construct();
+                break;
+            case CONSTRUCT:
+                currentStep = TournamentStep.COMPETE;
+                runTournament();
+                break;
+            case COMPETE:
+                currentStep = TournamentStep.WINNERS;
+                winners();
+                break;
+        }
+    }
 
 
 }

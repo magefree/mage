@@ -41,25 +41,25 @@ import mage.cards.CardImpl;
  */
 public class DuskdaleWurm extends CardImpl<DuskdaleWurm> {
 
-	public DuskdaleWurm(UUID ownerId) {
-		super(ownerId, 170, "Duskdale Wurm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Wurm");
-		this.color.setGreen(true);
-		this.power = new MageInt(7);
-		this.toughness = new MageInt(7);
+    public DuskdaleWurm(UUID ownerId) {
+        super(ownerId, 170, "Duskdale Wurm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Wurm");
+        this.color.setGreen(true);
+        this.power = new MageInt(7);
+        this.toughness = new MageInt(7);
 
-		this.addAbility(TrampleAbility.getInstance());
-	}
+        this.addAbility(TrampleAbility.getInstance());
+    }
 
-	public DuskdaleWurm(final DuskdaleWurm card) {
-		super(card);
-	}
+    public DuskdaleWurm(final DuskdaleWurm card) {
+        super(card);
+    }
 
-	@Override
-	public DuskdaleWurm copy() {
-		return new DuskdaleWurm(this);
-	}
+    @Override
+    public DuskdaleWurm copy() {
+        return new DuskdaleWurm(this);
+    }
 
 }
 

@@ -63,7 +63,7 @@ public class HollowhengeSpirit extends CardImpl<HollowhengeSpirit> {
         target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
-        
+
     }
 
     public HollowhengeSpirit(final HollowhengeSpirit card) {

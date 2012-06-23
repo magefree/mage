@@ -44,74 +44,74 @@ import mage.game.permanent.Permanent;
  */
 public class GainAbilityAllEffect extends ContinuousEffectImpl<GainAbilityAllEffect> {
 
-	protected Ability ability;
-	protected boolean excludeSource;
-	protected FilterPermanent filter;
+    protected Ability ability;
+    protected boolean excludeSource;
+    protected FilterPermanent filter;
 
-	public GainAbilityAllEffect(Ability ability, Duration duration) {
-		this(ability, duration, new FilterPermanent());
-	}
+    public GainAbilityAllEffect(Ability ability, Duration duration) {
+        this(ability, duration, new FilterPermanent());
+    }
 
-	public GainAbilityAllEffect(Ability ability, Duration duration, FilterPermanent filter) {
-		this(ability, duration, filter, false);
-	}
+    public GainAbilityAllEffect(Ability ability, Duration duration, FilterPermanent filter) {
+        this(ability, duration, filter, false);
+    }
 
-	public GainAbilityAllEffect(Ability ability, Duration duration, FilterPermanent filter, boolean excludeSource) {
-		super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-		this.ability = ability;
-		this.filter = filter;
-		this.excludeSource = excludeSource;
-		setText();
-	}
+    public GainAbilityAllEffect(Ability ability, Duration duration, FilterPermanent filter, boolean excludeSource) {
+        super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+        this.ability = ability;
+        this.filter = filter;
+        this.excludeSource = excludeSource;
+        setText();
+    }
 
-	public GainAbilityAllEffect(final GainAbilityAllEffect effect) {
-		super(effect);
-		this.ability = effect.ability.copy();
-		this.filter = effect.filter.copy();
-		this.excludeSource = effect.excludeSource;
-	}
+    public GainAbilityAllEffect(final GainAbilityAllEffect effect) {
+        super(effect);
+        this.ability = effect.ability.copy();
+        this.filter = effect.filter.copy();
+        this.excludeSource = effect.excludeSource;
+    }
 
-	@Override
-	public void init(Ability source, Game game) {
-		super.init(source, game);
-		if (this.affectedObjectsSet) {
+    @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        if (this.affectedObjectsSet) {
             for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                 if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
                     objects.add(perm.getId());
                 }
             }
-		}
-	}
+        }
+    }
 
-	@Override
-	public GainAbilityAllEffect copy() {
-		return new GainAbilityAllEffect(this);
-	}
+    @Override
+    public GainAbilityAllEffect copy() {
+        return new GainAbilityAllEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
-			if (!this.affectedObjectsSet || objects.contains(perm.getId())) {
-				if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
-					perm.addAbility(ability, game);
-				}
-			}
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
+            if (!this.affectedObjectsSet || objects.contains(perm.getId())) {
+                if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
+                    perm.addAbility(ability, game);
+                }
+            }
+        }
+        return true;
+    }
 
-	private void setText() {
-		StringBuilder sb = new StringBuilder();
-		if (excludeSource)
-			sb.append("Other ");
+    private void setText() {
+        StringBuilder sb = new StringBuilder();
+        if (excludeSource)
+            sb.append("Other ");
                 sb.append(filter.getMessage());
                 if (duration.equals(Duration.WhileOnBattlefield))
                     sb.append(" have ");
                 else
                     sb.append(" gain ");
-		sb.append(ability.getRule());
-		sb.append(" ").append(duration.toString());
-		staticText = sb.toString();
-	}
+        sb.append(ability.getRule());
+        sb.append(" ").append(duration.toString());
+        staticText = sb.toString();
+    }
 
 }

@@ -58,7 +58,7 @@ public class Scrambleverse extends CardImpl<Scrambleverse> {
         this.color.setRed(true);
 
         // For each nonland permanent, choose a player at random. Then each player gains control of each permanent for which he or she was chosen. Untap those permanents.
-		this.getSpellAbility().addEffect(new ScrambleverseEffect());
+        this.getSpellAbility().addEffect(new ScrambleverseEffect());
     }
 
     public Scrambleverse(final Scrambleverse card) {
@@ -73,67 +73,67 @@ public class Scrambleverse extends CardImpl<Scrambleverse> {
 
 class ScrambleverseEffect extends OneShotEffect<ScrambleverseEffect> {
 
-	public ScrambleverseEffect() {
-		super(Constants.Outcome.Damage);
-		staticText = "For each nonland permanent, choose a player at random. Then each player gains control of each permanent for which he or she was chosen. Untap those permanents";
-	}
+    public ScrambleverseEffect() {
+        super(Constants.Outcome.Damage);
+        staticText = "For each nonland permanent, choose a player at random. Then each player gains control of each permanent for which he or she was chosen. Untap those permanents";
+    }
 
-	public ScrambleverseEffect(ScrambleverseEffect effect) {
-		super(effect);
-	}
+    public ScrambleverseEffect(ScrambleverseEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Random random = new Random();
-		PlayerList players = game.getPlayerList();
-		int count = players.size();
-		if (count > 1) {
-			FilterNonlandPermanent nonLand = new FilterNonlandPermanent();
-			for (Permanent permanent : game.getBattlefield().getAllActivePermanents(nonLand, game)) {
-				ContinuousEffect effect = new ScrambleverseControlEffect(players.get(random.nextInt(count)));
-				effect.setTargetPointer(new FixedTarget(permanent.getId()));
-				game.addEffect(effect, source);
-			}
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Random random = new Random();
+        PlayerList players = game.getPlayerList();
+        int count = players.size();
+        if (count > 1) {
+            FilterNonlandPermanent nonLand = new FilterNonlandPermanent();
+            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(nonLand, game)) {
+                ContinuousEffect effect = new ScrambleverseControlEffect(players.get(random.nextInt(count)));
+                effect.setTargetPointer(new FixedTarget(permanent.getId()));
+                game.addEffect(effect, source);
+            }
+        }
+        return true;
+    }
 
-	@Override
-	public ScrambleverseEffect copy() {
-		return new ScrambleverseEffect(this);
-	}
+    @Override
+    public ScrambleverseEffect copy() {
+        return new ScrambleverseEffect(this);
+    }
 }
 
 class ScrambleverseControlEffect extends ContinuousEffectImpl<ScrambleverseControlEffect> {
 
-	private UUID controllerId;
+    private UUID controllerId;
 
-	public ScrambleverseControlEffect(UUID controllerId) {
-		super(Constants.Duration.EndOfGame, Constants.Layer.ControlChangingEffects_2, Constants.SubLayer.NA, Constants.Outcome.GainControl);
-		this.controllerId = controllerId;
-	}
+    public ScrambleverseControlEffect(UUID controllerId) {
+        super(Constants.Duration.EndOfGame, Constants.Layer.ControlChangingEffects_2, Constants.SubLayer.NA, Constants.Outcome.GainControl);
+        this.controllerId = controllerId;
+    }
 
-	public ScrambleverseControlEffect(final ScrambleverseControlEffect effect) {
-		super(effect);
-		this.controllerId = effect.controllerId;
-	}
+    public ScrambleverseControlEffect(final ScrambleverseControlEffect effect) {
+        super(effect);
+        this.controllerId = effect.controllerId;
+    }
 
-	@Override
-	public ScrambleverseControlEffect copy() {
-		return new ScrambleverseControlEffect(this);
-	}
+    @Override
+    public ScrambleverseControlEffect copy() {
+        return new ScrambleverseControlEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
-		if (permanent != null && controllerId != null) {
-			return permanent.changeControllerId(controllerId, game);
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        if (permanent != null && controllerId != null) {
+            return permanent.changeControllerId(controllerId, game);
+        }
+        return false;
+    }
 
-	@Override
-	public String getText(Mode mode) {
-		return "Gain control of {this}";
-	}
+    @Override
+    public String getText(Mode mode) {
+        return "Gain control of {this}";
+    }
 }

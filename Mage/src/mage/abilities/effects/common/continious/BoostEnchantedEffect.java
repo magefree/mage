@@ -45,55 +45,55 @@ import mage.game.permanent.Permanent;
  */
 public class BoostEnchantedEffect extends ContinuousEffectImpl<BoostEnchantedEffect> {
 
-	private DynamicValue power;
-	private DynamicValue toughness;
+    private DynamicValue power;
+    private DynamicValue toughness;
 
     public BoostEnchantedEffect(int power, int toughness) {
-		this(power, toughness, Duration.WhileOnBattlefield);
-	}
+        this(power, toughness, Duration.WhileOnBattlefield);
+    }
 
     public BoostEnchantedEffect(int power, int toughness, Duration duration) {
         this(new StaticValue(power), new StaticValue(toughness), duration);
-	}
+    }
 
-	public BoostEnchantedEffect(DynamicValue power, DynamicValue toughness) {
-		this(power, toughness, Duration.WhileOnBattlefield);
-	}
+    public BoostEnchantedEffect(DynamicValue power, DynamicValue toughness) {
+        this(power, toughness, Duration.WhileOnBattlefield);
+    }
 
-	public BoostEnchantedEffect(DynamicValue power, DynamicValue toughness, Duration duration) {
-		super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
-		this.power = power;
-		this.toughness = toughness;
-		setText();
-	}
+    public BoostEnchantedEffect(DynamicValue power, DynamicValue toughness, Duration duration) {
+        super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
+        this.power = power;
+        this.toughness = toughness;
+        setText();
+    }
 
-	public BoostEnchantedEffect(final BoostEnchantedEffect effect) {
-		super(effect);
-		this.power = effect.power.clone();
-		this.toughness = effect.toughness.clone();
-	}
+    public BoostEnchantedEffect(final BoostEnchantedEffect effect) {
+        super(effect);
+        this.power = effect.power.clone();
+        this.toughness = effect.toughness.clone();
+    }
 
-	@Override
-	public BoostEnchantedEffect copy() {
-		return new BoostEnchantedEffect(this);
-	}
+    @Override
+    public BoostEnchantedEffect copy() {
+        return new BoostEnchantedEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent enchantment = game.getPermanent(source.getSourceId());
-		if (enchantment != null && enchantment.getAttachedTo() != null) {
-			Permanent creature = game.getPermanent(enchantment.getAttachedTo());
-			if (creature != null) {
-				creature.addPower(power.calculate(game, source));
-				creature.addToughness(toughness.calculate(game, source));
-			}
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent enchantment = game.getPermanent(source.getSourceId());
+        if (enchantment != null && enchantment.getAttachedTo() != null) {
+            Permanent creature = game.getPermanent(enchantment.getAttachedTo());
+            if (creature != null) {
+                creature.addPower(power.calculate(game, source));
+                creature.addToughness(toughness.calculate(game, source));
+            }
+        }
+        return true;
+    }
 
-	private void setText() {
+    private void setText() {
         StringBuilder sb = new StringBuilder();
-		sb.append("Enchanted creature gets ");
+        sb.append("Enchanted creature gets ");
         String p = power.toString();
         if(!p.startsWith("-"))
             sb.append("+");
@@ -106,14 +106,14 @@ public class BoostEnchantedEffect extends ContinuousEffectImpl<BoostEnchantedEff
                 sb.append("+");
         }
         sb.append(t);
-		if (duration != Duration.WhileOnBattlefield)
-			sb.append(" ").append(duration.toString());
+        if (duration != Duration.WhileOnBattlefield)
+            sb.append(" ").append(duration.toString());
         String message = power.getMessage();
         if (message.length() > 0) {
             sb.append(" for each ");
         }
         sb.append(message);
-		staticText = sb.toString();
-	}
+        staticText = sb.toString();
+    }
 
 }

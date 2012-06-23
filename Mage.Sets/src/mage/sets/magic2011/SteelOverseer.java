@@ -48,32 +48,32 @@ import mage.filter.FilterPermanent;
  */
 public class SteelOverseer extends CardImpl<SteelOverseer> {
 
-	private static final FilterPermanent filter = new FilterPermanent("artifact creature you control");
+    private static final FilterPermanent filter = new FilterPermanent("artifact creature you control");
 
-	static {
-		filter.getCardType().add(CardType.ARTIFACT);
-		filter.getCardType().add(CardType.CREATURE);
-		filter.setScopeCardType(ComparisonScope.All);
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.getCardType().add(CardType.CREATURE);
+        filter.setScopeCardType(ComparisonScope.All);
         filter.setTargetController(TargetController.YOU);
-	}
+    }
 
-	public SteelOverseer(UUID ownerId) {
-		super(ownerId, 214, "Steel Overseer", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Construct");
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
+    public SteelOverseer(UUID ownerId) {
+        super(ownerId, 214, "Steel Overseer", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Construct");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), new TapSourceCost()));
-	}
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), new TapSourceCost()));
+    }
 
-	public SteelOverseer(final SteelOverseer card) {
-		super(card);
-	}
+    public SteelOverseer(final SteelOverseer card) {
+        super(card);
+    }
 
-	@Override
-	public SteelOverseer copy() {
-		return new SteelOverseer(this);
-	}
+    @Override
+    public SteelOverseer copy() {
+        return new SteelOverseer(this);
+    }
 
 }

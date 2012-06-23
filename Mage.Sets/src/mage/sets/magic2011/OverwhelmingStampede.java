@@ -45,72 +45,72 @@ import java.util.UUID;
  */
 public class OverwhelmingStampede extends CardImpl<OverwhelmingStampede> {
 
-	public OverwhelmingStampede(UUID ownerId) {
-		super(ownerId, 189, "Overwhelming Stampede", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
-		this.expansionSetCode = "M11";
-		this.color.setGreen(true);
-		this.getSpellAbility().addEffect(new OverwhelmingStampedeEffect());
-	}
+    public OverwhelmingStampede(UUID ownerId) {
+        super(ownerId, 189, "Overwhelming Stampede", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
+        this.expansionSetCode = "M11";
+        this.color.setGreen(true);
+        this.getSpellAbility().addEffect(new OverwhelmingStampedeEffect());
+    }
 
-	public OverwhelmingStampede(final OverwhelmingStampede card) {
-		super(card);
-	}
+    public OverwhelmingStampede(final OverwhelmingStampede card) {
+        super(card);
+    }
 
-	@Override
-	public OverwhelmingStampede copy() {
-		return new OverwhelmingStampede(this);
-	}
+    @Override
+    public OverwhelmingStampede copy() {
+        return new OverwhelmingStampede(this);
+    }
 }
 
 class OverwhelmingStampedeEffect extends ContinuousEffectImpl<OverwhelmingStampedeEffect> {
 
-	public OverwhelmingStampedeEffect() {
-		super(Duration.EndOfTurn, Outcome.AddAbility);
-		staticText = "Until end of turn, creatures you control gain trample and get +X/+X, where X is the greatest power among creatures you control.";
-	}
+    public OverwhelmingStampedeEffect() {
+        super(Duration.EndOfTurn, Outcome.AddAbility);
+        staticText = "Until end of turn, creatures you control gain trample and get +X/+X, where X is the greatest power among creatures you control.";
+    }
 
-	public OverwhelmingStampedeEffect(final OverwhelmingStampedeEffect effect) {
-		super(effect);
-	}
+    public OverwhelmingStampedeEffect(final OverwhelmingStampedeEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public OverwhelmingStampedeEffect copy() {
-		return new OverwhelmingStampedeEffect(this);
-	}
+    @Override
+    public OverwhelmingStampedeEffect copy() {
+        return new OverwhelmingStampedeEffect(this);
+    }
 
-	@Override
-	public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-		int maxPower = 0;
-		for (Permanent perm: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
-			if (perm.getPower().getValue() > maxPower)
-				maxPower = perm.getPower().getValue();
-		}
-		for (Permanent perm: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
-			switch (layer) {
-				case PTChangingEffects_7:
-					if (sublayer == SubLayer.ModifyPT_7c) {
-						perm.addPower(maxPower);
-						perm.addToughness(maxPower);
-					}
-					break;
-				case AbilityAddingRemovingEffects_6:
-					if (sublayer == SubLayer.NA) {
-						perm.addAbility(TrampleAbility.getInstance(), game);
-					}
-					break;
-			}
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        int maxPower = 0;
+        for (Permanent perm: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
+            if (perm.getPower().getValue() > maxPower)
+                maxPower = perm.getPower().getValue();
+        }
+        for (Permanent perm: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
+            switch (layer) {
+                case PTChangingEffects_7:
+                    if (sublayer == SubLayer.ModifyPT_7c) {
+                        perm.addPower(maxPower);
+                        perm.addToughness(maxPower);
+                    }
+                    break;
+                case AbilityAddingRemovingEffects_6:
+                    if (sublayer == SubLayer.NA) {
+                        perm.addAbility(TrampleAbility.getInstance(), game);
+                    }
+                    break;
+            }
+        }
+        return true;
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
 
-	@Override
-	public boolean hasLayer(Layer layer) {
-		return layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.PTChangingEffects_7;
-	}
+    @Override
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.PTChangingEffects_7;
+    }
 
 }

@@ -52,24 +52,24 @@ import mage.target.TargetPermanent;
  * @author Loki
  */
 public class HoardSmelterDragon extends CardImpl<HoardSmelterDragon> {
-	private static FilterPermanent filter = new FilterPermanent("artifact");
+    private static FilterPermanent filter = new FilterPermanent("artifact");
 
-	static {
-		filter.getCardType().add(CardType.ARTIFACT);
-	}
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+    }
 
     public HoardSmelterDragon (UUID ownerId) {
         super(ownerId, 93, "Hoard-Smelter Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Dragon");
-		this.color.setRed(true);
+        this.color.setRed(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
-		this.addAbility(FlyingAbility.getInstance());
-		Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{3}{R}"));
-		ability.addTarget(new TargetPermanent(filter));
-		ability.addEffect(new HoardSmelterEffect());
-		this.addAbility(ability);
+        this.addAbility(FlyingAbility.getInstance());
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{3}{R}"));
+        ability.addTarget(new TargetPermanent(filter));
+        ability.addEffect(new HoardSmelterEffect());
+        this.addAbility(ability);
     }
 
     public HoardSmelterDragon (final HoardSmelterDragon card) {
@@ -83,39 +83,39 @@ public class HoardSmelterDragon extends CardImpl<HoardSmelterDragon> {
 }
 
 class HoardSmelterEffect extends ContinuousEffectImpl<HoardSmelterEffect> {
-	private int costValue = 0;
+    private int costValue = 0;
 
-	HoardSmelterEffect() {
-		super(Constants.Duration.EndOfTurn, Constants.Layer.PTChangingEffects_7, Constants.SubLayer.ModifyPT_7c, Constants.Outcome.BoostCreature);
-		staticText = "{this} gets +X/+0 until end of turn, where X is that artifact's converted mana cost";
-	}
+    HoardSmelterEffect() {
+        super(Constants.Duration.EndOfTurn, Constants.Layer.PTChangingEffects_7, Constants.SubLayer.ModifyPT_7c, Constants.Outcome.BoostCreature);
+        staticText = "{this} gets +X/+0 until end of turn, where X is that artifact's converted mana cost";
+    }
 
-	HoardSmelterEffect(final HoardSmelterEffect effect) {
-		super(effect);
-		this.costValue = effect.costValue;
-	}
+    HoardSmelterEffect(final HoardSmelterEffect effect) {
+        super(effect);
+        this.costValue = effect.costValue;
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent target = game.getPermanent(source.getSourceId());
-		if (target != null) {
-			target.addPower(costValue);
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent target = game.getPermanent(source.getSourceId());
+        if (target != null) {
+            target.addPower(costValue);
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public void init(Ability source, Game game) {
-		Card targeted = game.getCard(source.getFirstTarget());
-		if (targeted != null) {
-			costValue = targeted.getManaCost().convertedManaCost();
-		}
-	}
+    @Override
+    public void init(Ability source, Game game) {
+        Card targeted = game.getCard(source.getFirstTarget());
+        if (targeted != null) {
+            costValue = targeted.getManaCost().convertedManaCost();
+        }
+    }
 
-	@Override
-	public HoardSmelterEffect copy() {
-		return new HoardSmelterEffect(this);
-	}
+    @Override
+    public HoardSmelterEffect copy() {
+        return new HoardSmelterEffect(this);
+    }
 
 }

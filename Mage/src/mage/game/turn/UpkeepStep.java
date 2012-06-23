@@ -37,20 +37,20 @@ import mage.game.events.GameEvent.EventType;
  */
 public class UpkeepStep extends Step<UpkeepStep> {
 
-	public UpkeepStep() {
-		super(PhaseStep.UPKEEP, true);
-		this.stepEvent = EventType.UPKEEP_STEP;
-		this.preStepEvent = EventType.UPKEEP_STEP_PRE;
-		this.postStepEvent = EventType.UPKEEP_STEP_POST;
-	}
+    public UpkeepStep() {
+        super(PhaseStep.UPKEEP, true);
+        this.stepEvent = EventType.UPKEEP_STEP;
+        this.preStepEvent = EventType.UPKEEP_STEP_PRE;
+        this.postStepEvent = EventType.UPKEEP_STEP_POST;
+    }
 
-	public UpkeepStep(final UpkeepStep step) {
-		super(step);
-	}
+    public UpkeepStep(final UpkeepStep step) {
+        super(step);
+    }
 
-	@Override
-	public UpkeepStep copy() {
-		return new UpkeepStep(this);
-	}
+    @Override
+    public UpkeepStep copy() {
+        return new UpkeepStep(this);
+    }
 
 }

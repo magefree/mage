@@ -1,18 +1,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  
+
     <modelVersion>4.0.0</modelVersion>
-	
-	<parent>
+
+    <parent>
         <groupId>org.mage</groupId>
         <artifactId>mage-root</artifactId>
         <version>0.8.6</version>
     </parent> 
-	
+
     <artifactId>mage-tests</artifactId>
     <packaging>jar</packaging>
     <name>Mage Tests</name>
-	
+
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -45,13 +45,13 @@
             <version>${project.version}</version>
             <scope>compile</scope>
         </dependency>
-		<dependency>
+        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mage-player-ai</artifactId>
             <version>${project.version}</version>
             <scope>compile</scope>
         </dependency>
-		
+
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
@@ -59,7 +59,7 @@
             <type>jar</type>
         </dependency>
     </dependencies>
-	
+
     <build>
         <plugins>
             <plugin>
@@ -78,10 +78,10 @@
                 </configuration>
             </plugin>
         </plugins>
-    
+
         <finalName>mage-tests</finalName>
     </build>
-  
+
     <properties/>
-	
+
 </project>

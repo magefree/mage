@@ -48,7 +48,7 @@ import mage.target.common.TargetOpponent;
 public class ThiefOfHope extends CardImpl<ThiefOfHope> {
 
     private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
-    
+
     public ThiefOfHope(UUID ownerId) {
         super(ownerId, 147, "Thief of Hope", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "CHK";

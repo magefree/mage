@@ -37,21 +37,21 @@ import mage.filter.FilterCard;
  */
 public class FilterArtifactCard extends FilterCard<FilterArtifactCard> {
 
-	public FilterArtifactCard() {
-		this("artifact");
-	}
+    public FilterArtifactCard() {
+        this("artifact");
+    }
 
-	public FilterArtifactCard(String name) {
-		super(name);
-		this.cardType.add(CardType.ARTIFACT);
-	}
+    public FilterArtifactCard(String name) {
+        super(name);
+        this.cardType.add(CardType.ARTIFACT);
+    }
 
-	public FilterArtifactCard(final FilterArtifactCard filter) {
-		super(filter);
-	}
+    public FilterArtifactCard(final FilterArtifactCard filter) {
+        super(filter);
+    }
 
-	@Override
-	public FilterArtifactCard copy() {
-		return new FilterArtifactCard(this);
-	}
+    @Override
+    public FilterArtifactCard copy() {
+        return new FilterArtifactCard(this);
+    }
 }

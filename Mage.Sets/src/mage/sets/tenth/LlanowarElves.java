@@ -41,24 +41,24 @@ import mage.cards.CardImpl;
  */
 public class LlanowarElves extends CardImpl<LlanowarElves> {
 
-	public LlanowarElves(UUID ownerId) {
-		super(ownerId, 274, "Llanowar Elves", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
-		this.expansionSetCode = "10E";
-		this.subtype.add("Elf");
-		this.subtype.add("Druid");
-		this.color.setGreen(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
-		this.addAbility(new GreenManaAbility());
-	}
+    public LlanowarElves(UUID ownerId) {
+        super(ownerId, 274, "Llanowar Elves", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
+        this.expansionSetCode = "10E";
+        this.subtype.add("Elf");
+        this.subtype.add("Druid");
+        this.color.setGreen(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+        this.addAbility(new GreenManaAbility());
+    }
 
-	public LlanowarElves(final LlanowarElves card) {
-		super(card);
-	}
+    public LlanowarElves(final LlanowarElves card) {
+        super(card);
+    }
 
-	@Override
-	public LlanowarElves copy() {
-		return new LlanowarElves(this);
-	}
+    @Override
+    public LlanowarElves copy() {
+        return new LlanowarElves(this);
+    }
 
 }

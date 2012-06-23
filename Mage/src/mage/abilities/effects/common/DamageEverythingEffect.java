@@ -44,36 +44,36 @@ import mage.players.Player;
  */
 public class DamageEverythingEffect extends OneShotEffect<DamageEverythingEffect> {
 
-	private int amount;
+    private int amount;
 
-	public DamageEverythingEffect(int amount) {
-		super(Outcome.Damage);
-		this.amount = amount;
-		staticText = "{source} deals " + Integer.toString(amount) + " damage to each creature and each player";
-	}
+    public DamageEverythingEffect(int amount) {
+        super(Outcome.Damage);
+        this.amount = amount;
+        staticText = "{source} deals " + Integer.toString(amount) + " damage to each creature and each player";
+    }
 
-	public DamageEverythingEffect(final DamageEverythingEffect effect) {
-		super(effect);
-		this.amount = effect.amount;
-	}
+    public DamageEverythingEffect(final DamageEverythingEffect effect) {
+        super(effect);
+        this.amount = effect.amount;
+    }
 
-	@Override
-	public DamageEverythingEffect copy() {
-		return new DamageEverythingEffect(this);
-	}
+    @Override
+    public DamageEverythingEffect copy() {
+        return new DamageEverythingEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game);
-		for (Permanent permanent: permanents) {
-			permanent.damage(amount, source.getId(), game, true, false);
-		}
-		for (UUID playerId: game.getPlayer(source.getControllerId()).getInRange()) {
-			Player player = game.getPlayer(playerId);
-			if (player != null)
-				player.damage(amount, source.getId(), game, false, true);
-		}
-		return true;
-	}
+        for (Permanent permanent: permanents) {
+            permanent.damage(amount, source.getId(), game, true, false);
+        }
+        for (UUID playerId: game.getPlayer(source.getControllerId()).getInRange()) {
+            Player player = game.getPlayer(playerId);
+            if (player != null)
+                player.damage(amount, source.getId(), game, false, true);
+        }
+        return true;
+    }
 
 }

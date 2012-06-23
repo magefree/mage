@@ -96,15 +96,15 @@ class MoltenTailMasticoreAbility extends TriggeredAbilityImpl<MoltenTailMasticor
     }
 
     @Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE && event.getPlayerId().equals(this.controllerId)) {
-			return true;
-		}
-		return false;
-	}
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE && event.getPlayerId().equals(this.controllerId)) {
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "At the beginning of your upkeep, sacrifice {this} unless you discard a card.";
-	}
+    @Override
+    public String getRule() {
+        return "At the beginning of your upkeep, sacrifice {this} unless you discard a card.";
+    }
 }

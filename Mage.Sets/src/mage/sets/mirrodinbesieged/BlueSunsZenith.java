@@ -46,7 +46,7 @@ public class BlueSunsZenith extends CardImpl<BlueSunsZenith> {
     public BlueSunsZenith (UUID ownerId) {
         super(ownerId, 20, "Blue Sun's Zenith", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{U}{U}{U}");
         this.expansionSetCode = "MBS";
-		this.color.setBlue(true);
+        this.color.setBlue(true);
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(new ManacostVariableValue()));
         this.getSpellAbility().addEffect(ShuffleSpellEffect.getInstance());
         this.getSpellAbility().addTarget(new TargetPlayer());

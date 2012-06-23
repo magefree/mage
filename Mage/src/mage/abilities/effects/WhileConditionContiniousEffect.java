@@ -10,9 +10,9 @@ public abstract class WhileConditionContiniousEffect<T extends WhileConditionCon
 
     public WhileConditionContiniousEffect(Constants.Duration duration, Constants.Layer layer, Constants.SubLayer sublayer, Condition condition, Constants.Outcome outcome) {
         super(duration, outcome);
-		this.condition = condition;
-		this.layer = layer;
-		this.sublayer = sublayer;
+        this.condition = condition;
+        this.layer = layer;
+        this.sublayer = sublayer;
     }
 
     public WhileConditionContiniousEffect(final WhileConditionContiniousEffect effect) {
@@ -21,12 +21,12 @@ public abstract class WhileConditionContiniousEffect<T extends WhileConditionCon
     }
 
     @Override
-	public boolean apply(Game game, Ability source) {
-		if (condition.apply(game, source)) {
-			return applyEffect(game, source);
-		}
-		return false;
-	}
+    public boolean apply(Game game, Ability source) {
+        if (condition.apply(game, source)) {
+            return applyEffect(game, source);
+        }
+        return false;
+    }
 
-	protected abstract boolean applyEffect(Game game, Ability source);
+    protected abstract boolean applyEffect(Game game, Ability source);
 }

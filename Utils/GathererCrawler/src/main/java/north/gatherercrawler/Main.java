@@ -56,7 +56,7 @@ public class Main {
                 }
             }
         }
-        
+
         readCardsFromFile();
 
         StringBuilder sb = new StringBuilder();

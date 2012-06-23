@@ -38,18 +38,18 @@ import mage.target.targetpointer.FixedTarget;
 import mage.game.permanent.PermanentToken;
 
 public class OpponentSacrificesNonTokenPermanentTriggeredAbility extends TriggeredAbilityImpl<OpponentSacrificesNonTokenPermanentTriggeredAbility> {
-    
+
     public OpponentSacrificesNonTokenPermanentTriggeredAbility(Effect effect) {
         super(Constants.Zone.BATTLEFIELD, effect, false);
     }
-    
+
     public OpponentSacrificesNonTokenPermanentTriggeredAbility(final OpponentSacrificesNonTokenPermanentTriggeredAbility ability) {
         super(ability);
     }
-    
+
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-	if (event.getType() == GameEvent.EventType.SACRIFICED_PERMANENT && game.getOpponents(controllerId).contains(event.getPlayerId())) {
+    if (event.getType() == GameEvent.EventType.SACRIFICED_PERMANENT && game.getOpponents(controllerId).contains(event.getPlayerId())) {
             MageObject object = game.getLastKnownInformation(event.getTargetId(), Constants.Zone.BATTLEFIELD);
             if (object instanceof Permanent && !(object instanceof PermanentToken) ) {
                 for (Effect effect : getEffects()) {
@@ -60,7 +60,7 @@ public class OpponentSacrificesNonTokenPermanentTriggeredAbility extends Trigger
         }
         return false;
     }
-    
+
     @Override
     public String getRule() {
         return "Whenever an opponent sacrifices a nontoken permanent, " + super.getRule();
@@ -70,5 +70,5 @@ public class OpponentSacrificesNonTokenPermanentTriggeredAbility extends Trigger
     public OpponentSacrificesNonTokenPermanentTriggeredAbility copy() {
         return new OpponentSacrificesNonTokenPermanentTriggeredAbility(this);
     }
-    
+
 }

@@ -70,7 +70,7 @@ public class ArmoredAscension extends CardImpl<ArmoredAscension> {
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
-        
+
         PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(filter, 1);
         SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(amount, amount, Duration.WhileOnBattlefield));
         ability.addEffect(new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA));

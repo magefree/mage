@@ -45,7 +45,7 @@ public class GoblinRoughrider extends CardImpl<GoblinRoughrider> {
         this.expansionSetCode = "WWK";
         this.subtype.add("Goblin");
         this.subtype.add("Knight");
-		this.color.setRed(true);        
+        this.color.setRed(true);        
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
     }

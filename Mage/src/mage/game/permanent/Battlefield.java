@@ -44,93 +44,93 @@ import java.util.Map.Entry;
  */
 public class Battlefield implements Serializable {
 
-	private Map<UUID, Permanent> field = new LinkedHashMap<UUID, Permanent>();
+    private Map<UUID, Permanent> field = new LinkedHashMap<UUID, Permanent>();
 
-	public Battlefield () {}
+    public Battlefield () {}
 
-	public Battlefield(final Battlefield battlefield) {
-		for (Entry<UUID, Permanent> entry: battlefield.field.entrySet()) {
-			field.put(entry.getKey(), entry.getValue().copy());
-		}
-	}
+    public Battlefield(final Battlefield battlefield) {
+        for (Entry<UUID, Permanent> entry: battlefield.field.entrySet()) {
+            field.put(entry.getKey(), entry.getValue().copy());
+        }
+    }
 
-	public Battlefield copy() {
-		return new Battlefield(this);
-	}
+    public Battlefield copy() {
+        return new Battlefield(this);
+    }
 
-	public void reset(Game game) {
-		for (Permanent perm: field.values()) {
-			perm.reset(game);
-		}
-	}
+    public void reset(Game game) {
+        for (Permanent perm: field.values()) {
+            perm.reset(game);
+        }
+    }
 
-	public void clear() {
-		field.clear();
-	}
+    public void clear() {
+        field.clear();
+    }
 
-	/**
-	 * Returns a count of all {@link Permanent} that match the filter.
-	 * This method ignores the range of influence.
-	 *
-	 * @param filter
-	 * @return count
-	 */
-	public int countAll(FilterPermanent filter, Game game) {
-		int count = 0;
-		for (Permanent permanent: field.values()) {
-			if (filter.match(permanent, game)) {
-				count++;
-			}
-		}
-		return count;
-	}
+    /**
+     * Returns a count of all {@link Permanent} that match the filter.
+     * This method ignores the range of influence.
+     *
+     * @param filter
+     * @return count
+     */
+    public int countAll(FilterPermanent filter, Game game) {
+        int count = 0;
+        for (Permanent permanent: field.values()) {
+            if (filter.match(permanent, game)) {
+                count++;
+            }
+        }
+        return count;
+    }
 
-	/**
-	 * Returns a count of all {@link Permanent} that match the filter and are controlled by controllerId.
-	 * This method ignores the range of influence.
-	 *
-	 * @param filter
-	 * @param controllerId
-	 * @return count
-	 */
-	public int countAll(FilterPermanent filter, UUID controllerId, Game game) {
-		int count = 0;
-		for (Permanent permanent: field.values()) {
-			if (permanent.getControllerId().equals(controllerId) && filter.match(permanent, game)) {
-				count++;
-			}
-		}
-		return count;
-	}
+    /**
+     * Returns a count of all {@link Permanent} that match the filter and are controlled by controllerId.
+     * This method ignores the range of influence.
+     *
+     * @param filter
+     * @param controllerId
+     * @return count
+     */
+    public int countAll(FilterPermanent filter, UUID controllerId, Game game) {
+        int count = 0;
+        for (Permanent permanent: field.values()) {
+            if (permanent.getControllerId().equals(controllerId) && filter.match(permanent, game)) {
+                count++;
+            }
+        }
+        return count;
+    }
 
-	/**
-	 * Returns a count of all {@link Permanent} that are within the range of influence  of the specified player id
-	 * and that match the supplied filter.
-	 *
-	 * @param filter
-	 * @param sourcePlayerId
-	 * @param game
-	 * @return count
-	 */
-	public int count(FilterPermanent filter, UUID sourcePlayerId, Game game) {
-		int count = 0;
-		if (game.getRangeOfInfluence() == RangeOfInfluence.ALL) {
-			for (Permanent permanent: field.values()) {
-				if (filter.match(permanent, null, sourcePlayerId, game)) {
-					count++;
-				}
-			}
-		}
-		else {
-			Set<UUID> range = game.getPlayer(sourcePlayerId).getInRange();
-			for (Permanent permanent: field.values()) {
-				if (range.contains(permanent.getControllerId()) && filter.match(permanent, null, sourcePlayerId, game)) {
-					count++;
-				}
-			}
-		}
-		return count;
-	}
+    /**
+     * Returns a count of all {@link Permanent} that are within the range of influence  of the specified player id
+     * and that match the supplied filter.
+     *
+     * @param filter
+     * @param sourcePlayerId
+     * @param game
+     * @return count
+     */
+    public int count(FilterPermanent filter, UUID sourcePlayerId, Game game) {
+        int count = 0;
+        if (game.getRangeOfInfluence() == RangeOfInfluence.ALL) {
+            for (Permanent permanent: field.values()) {
+                if (filter.match(permanent, null, sourcePlayerId, game)) {
+                    count++;
+                }
+            }
+        }
+        else {
+            Set<UUID> range = game.getPlayer(sourcePlayerId).getInRange();
+            for (Permanent permanent: field.values()) {
+                if (range.contains(permanent.getControllerId()) && filter.match(permanent, null, sourcePlayerId, game)) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
 
     public int count(FilterPermanent filter, UUID sourceId, UUID sourcePlayerId, Game game) {
         int count = 0;
@@ -152,280 +152,280 @@ public class Battlefield implements Serializable {
         return count;
     }
 
-	/**
-	 * Returns true if the battlefield contains at least 1 {@link Permanent}
-	 * that matches the filter.
-	 * This method ignores the range of influence.
-	 *
-	 * @param filter
-	 * @return boolean
-	 */
-	public boolean contains(FilterPermanent filter, int num, Game game) {
-		int count = 0;
-		for (Permanent permanent: field.values()) {
-			if (filter.match(permanent, game)) {
-				count++;
-				if (num == count)
-					return true;
-			}
-		}
-		return false;
-	}
+    /**
+     * Returns true if the battlefield contains at least 1 {@link Permanent}
+     * that matches the filter.
+     * This method ignores the range of influence.
+     *
+     * @param filter
+     * @return boolean
+     */
+    public boolean contains(FilterPermanent filter, int num, Game game) {
+        int count = 0;
+        for (Permanent permanent: field.values()) {
+            if (filter.match(permanent, game)) {
+                count++;
+                if (num == count)
+                    return true;
+            }
+        }
+        return false;
+    }
 
-	/**
-	 * Returns true if the battlefield contains num or more {@link Permanent}
-	 * that matches the filter and is controlled by controllerId.
-	 * This method ignores the range of influence.
-	 *
-	 * @param filter
-	 * @param controllerId
-	 * @return boolean
-	 */
-	public boolean contains(FilterPermanent filter, UUID controllerId, int num, Game game) {
-		int count = 0;
-		for (Permanent permanent: field.values()) {
-			if (permanent.getControllerId().equals(controllerId) && filter.match(permanent, game)) {
-				count++;
-				if (num == count)
-					return true;
-			}
-		}
-		return false;
-	}
+    /**
+     * Returns true if the battlefield contains num or more {@link Permanent}
+     * that matches the filter and is controlled by controllerId.
+     * This method ignores the range of influence.
+     *
+     * @param filter
+     * @param controllerId
+     * @return boolean
+     */
+    public boolean contains(FilterPermanent filter, UUID controllerId, int num, Game game) {
+        int count = 0;
+        for (Permanent permanent: field.values()) {
+            if (permanent.getControllerId().equals(controllerId) && filter.match(permanent, game)) {
+                count++;
+                if (num == count)
+                    return true;
+            }
+        }
+        return false;
+    }
 
-	/**
-	 * Returns true if the battlefield contains num or more {@link Permanent}
-	 * that is within the range of influence of the specified player id
-	 * and that matches the supplied filter.
-	 *
-	 * @param filter
-	 * @param sourcePlayerId
-	 * @param game
-	 * @return boolean
-	 */
-	public boolean contains(FilterPermanent filter, UUID sourcePlayerId, Game game, int num) {
-		int count = 0;
-		if (game.getRangeOfInfluence() == RangeOfInfluence.ALL) {
-			for (Permanent permanent: field.values()) {
-				if (filter.match(permanent, null, sourcePlayerId, game)) {
-					count++;
-					if (num == count)
-						return true;
-				}
-			}
-		}
-		else {
-			Set<UUID> range = game.getPlayer(sourcePlayerId).getInRange();
-			for (Permanent permanent: field.values()) {
-				if (range.contains(permanent.getControllerId()) && filter.match(permanent, null, sourcePlayerId, game)) {
-					count++;
-					if (num == count)
-						return true;
-				}
-			}
-		}
-		return false;
-	}
+    /**
+     * Returns true if the battlefield contains num or more {@link Permanent}
+     * that is within the range of influence of the specified player id
+     * and that matches the supplied filter.
+     *
+     * @param filter
+     * @param sourcePlayerId
+     * @param game
+     * @return boolean
+     */
+    public boolean contains(FilterPermanent filter, UUID sourcePlayerId, Game game, int num) {
+        int count = 0;
+        if (game.getRangeOfInfluence() == RangeOfInfluence.ALL) {
+            for (Permanent permanent: field.values()) {
+                if (filter.match(permanent, null, sourcePlayerId, game)) {
+                    count++;
+                    if (num == count)
+                        return true;
+                }
+            }
+        }
+        else {
+            Set<UUID> range = game.getPlayer(sourcePlayerId).getInRange();
+            for (Permanent permanent: field.values()) {
+                if (range.contains(permanent.getControllerId()) && filter.match(permanent, null, sourcePlayerId, game)) {
+                    count++;
+                    if (num == count)
+                        return true;
+                }
+            }
+        }
+        return false;
+    }
 
-	public void addPermanent(Permanent permanent) {
-		field.put(permanent.getId(), permanent);
-	}
+    public void addPermanent(Permanent permanent) {
+        field.put(permanent.getId(), permanent);
+    }
 
-	public Permanent getPermanent(UUID key) {
-		return field.get(key);
-	}
+    public Permanent getPermanent(UUID key) {
+        return field.get(key);
+    }
 
-	public void removePermanent(UUID key) {
-		field.remove(key);
-	}
+    public void removePermanent(UUID key) {
+        field.remove(key);
+    }
 
-	public boolean containsPermanent(UUID key) {
-		return field.containsKey(key);
-	}
+    public boolean containsPermanent(UUID key) {
+        return field.containsKey(key);
+    }
 
     public void beginningOfTurn(Game game) {
-		for (Permanent perm: field.values()) {
-			perm.beginningOfTurn(game);
-		}
+        for (Permanent perm: field.values()) {
+            perm.beginningOfTurn(game);
+        }
     }
-    
+
     public void endOfTurn(UUID controllerId, Game game) {
-		for (Permanent perm: field.values()) {
-			perm.endOfTurn(game);
-		}
-	}
+        for (Permanent perm: field.values()) {
+            perm.endOfTurn(game);
+        }
+    }
 
-	public Collection<Permanent> getAllPermanents() {
-		return field.values();
-	}
+    public Collection<Permanent> getAllPermanents() {
+        return field.values();
+    }
 
-	public Set<UUID> getAllPermanentIds() {
-		return field.keySet();
-	}
+    public Set<UUID> getAllPermanentIds() {
+        return field.keySet();
+    }
 
-	public List<Permanent> getAllActivePermanents() {
-		List<Permanent> active = new ArrayList<Permanent>();
-		for (Permanent perm: field.values()) {
-			if (perm.isPhasedIn())
-				active.add(perm);
-		}
-		return active;
-	}
+    public List<Permanent> getAllActivePermanents() {
+        List<Permanent> active = new ArrayList<Permanent>();
+        for (Permanent perm: field.values()) {
+            if (perm.isPhasedIn())
+                active.add(perm);
+        }
+        return active;
+    }
 
-	/**
-	 * Returns all {@link Permanent} on the battlefield that are controlled by the specified
-	 * player id.  The method ignores the range of influence.
-	 * 
-	 * @param controllerId
-	 * @return a list of {@link Permanent}
-	 * @see Permanent
-	 */
-	public List<Permanent> getAllActivePermanents(UUID controllerId) {
-		List<Permanent> active = new ArrayList<Permanent>();
-		for (Permanent perm: field.values()) {
-			if (perm.isPhasedIn() && perm.getControllerId().equals(controllerId))
-				active.add(perm);
-		}
-		return active;
-	}
+    /**
+     * Returns all {@link Permanent} on the battlefield that are controlled by the specified
+     * player id.  The method ignores the range of influence.
+     * 
+     * @param controllerId
+     * @return a list of {@link Permanent}
+     * @see Permanent
+     */
+    public List<Permanent> getAllActivePermanents(UUID controllerId) {
+        List<Permanent> active = new ArrayList<Permanent>();
+        for (Permanent perm: field.values()) {
+            if (perm.isPhasedIn() && perm.getControllerId().equals(controllerId))
+                active.add(perm);
+        }
+        return active;
+    }
 
-	/**
-	 * Returns all {@link Permanent} on the battlefield that match the specified {@link CardType}.
-	 * This method ignores the range of influence.
-	 * 
-	 * @param type
-	 * @return a list of {@link Permanent}
-	 * @see Permanent
-	 */
-	public List<Permanent> getAllActivePermanents(CardType type) {
-		List<Permanent> active = new ArrayList<Permanent>();
-		for (Permanent perm: field.values()) {
-			if (perm.isPhasedIn() && perm.getCardType().contains(type))
-				active.add(perm);
-		}
-		return active;
-	}
+    /**
+     * Returns all {@link Permanent} on the battlefield that match the specified {@link CardType}.
+     * This method ignores the range of influence.
+     * 
+     * @param type
+     * @return a list of {@link Permanent}
+     * @see Permanent
+     */
+    public List<Permanent> getAllActivePermanents(CardType type) {
+        List<Permanent> active = new ArrayList<Permanent>();
+        for (Permanent perm: field.values()) {
+            if (perm.isPhasedIn() && perm.getCardType().contains(type))
+                active.add(perm);
+        }
+        return active;
+    }
 
-	/**
-	 * Returns all {@link Permanent} on the battlefield that match the supplied filter.
-	 * This method ignores the range of influence.
-	 * 
-	 *
+    /**
+     * Returns all {@link Permanent} on the battlefield that match the supplied filter.
+     * This method ignores the range of influence.
+     * 
+     *
      * @param filter
      * @return a list of {@link Permanent}
-	 * @see Permanent
-	 */
-	public List<Permanent> getAllActivePermanents(FilterPermanent filter, Game game) {
-		List<Permanent> active = new ArrayList<Permanent>();
-		for (Permanent perm: field.values()) {
-			if (perm.isPhasedIn() && filter.match(perm, game))
-				active.add(perm);
-		}
-		return active;
-	}
+     * @see Permanent
+     */
+    public List<Permanent> getAllActivePermanents(FilterPermanent filter, Game game) {
+        List<Permanent> active = new ArrayList<Permanent>();
+        for (Permanent perm: field.values()) {
+            if (perm.isPhasedIn() && filter.match(perm, game))
+                active.add(perm);
+        }
+        return active;
+    }
 
-	/**
-	 * Returns all {@link Permanent} that match the filter and are controlled by controllerId.
-	 * This method ignores the range of influence.
-	 *
-	 * @param filter
-	 * @param controllerId
-	 * @return a list of {@link Permanent}
-	 * @see Permanent
-	 */
-	public List<Permanent> getAllActivePermanents(FilterPermanent filter, UUID controllerId, Game game) {
-		List<Permanent> active = new ArrayList<Permanent>();
-		for (Permanent perm: field.values()) {
-			if (perm.isPhasedIn() && perm.getControllerId().equals(controllerId) && filter.match(perm, game))
-				active.add(perm);
-		}
-		return active;
-	}
+    /**
+     * Returns all {@link Permanent} that match the filter and are controlled by controllerId.
+     * This method ignores the range of influence.
+     *
+     * @param filter
+     * @param controllerId
+     * @return a list of {@link Permanent}
+     * @see Permanent
+     */
+    public List<Permanent> getAllActivePermanents(FilterPermanent filter, UUID controllerId, Game game) {
+        List<Permanent> active = new ArrayList<Permanent>();
+        for (Permanent perm: field.values()) {
+            if (perm.isPhasedIn() && perm.getControllerId().equals(controllerId) && filter.match(perm, game))
+                active.add(perm);
+        }
+        return active;
+    }
 
     public List<Permanent> getActivePermanents(FilterPermanent filter, UUID sourcePlayerId, Game game) {
         return getActivePermanents(filter, sourcePlayerId, null, game);
     }
 
-	/**
-	 * Returns all {@link Permanent} that are within the range of influence  of the specified player id
-	 * and that match the supplied filter.
-	 * 
-	 * @param filter
-	 * @param sourcePlayerId
-	 * @param game
-	 * @return a list of {@link Permanent}
-	 * @see Permanent
-	 */
-	public List<Permanent> getActivePermanents(FilterPermanent filter, UUID sourcePlayerId, UUID sourceId, Game game) {
-		List<Permanent> active = new ArrayList<Permanent>();
-		if (game.getRangeOfInfluence() == RangeOfInfluence.ALL) {
-			for (Permanent perm: field.values()) {
-				if (perm.isPhasedIn() && filter.match(perm, sourceId, sourcePlayerId, game))
-					active.add(perm);
-			}
-		}
-		else {
-			Set<UUID> range = game.getPlayer(sourcePlayerId).getInRange();
-			for (Permanent perm: field.values()) {
-				if (perm.isPhasedIn() && range.contains(perm.getControllerId()) && filter.match(perm, sourceId, sourcePlayerId, game))
-					active.add(perm);
-			}
-		}
-		return active;
-	}
+    /**
+     * Returns all {@link Permanent} that are within the range of influence  of the specified player id
+     * and that match the supplied filter.
+     * 
+     * @param filter
+     * @param sourcePlayerId
+     * @param game
+     * @return a list of {@link Permanent}
+     * @see Permanent
+     */
+    public List<Permanent> getActivePermanents(FilterPermanent filter, UUID sourcePlayerId, UUID sourceId, Game game) {
+        List<Permanent> active = new ArrayList<Permanent>();
+        if (game.getRangeOfInfluence() == RangeOfInfluence.ALL) {
+            for (Permanent perm: field.values()) {
+                if (perm.isPhasedIn() && filter.match(perm, sourceId, sourcePlayerId, game))
+                    active.add(perm);
+            }
+        }
+        else {
+            Set<UUID> range = game.getPlayer(sourcePlayerId).getInRange();
+            for (Permanent perm: field.values()) {
+                if (perm.isPhasedIn() && range.contains(perm.getControllerId()) && filter.match(perm, sourceId, sourcePlayerId, game))
+                    active.add(perm);
+            }
+        }
+        return active;
+    }
 
-	/**
-	 * Returns all {@link Permanent} that are within the range of influence  of the specified player id.
-	 * 
-	 * @param sourcePlayerId
-	 * @param game
-	 * @return a list of {@link Permanent}
-	 * @see Permanent
-	 */
-	public List<Permanent> getActivePermanents(UUID sourcePlayerId, Game game) {
-		if (game.getRangeOfInfluence() == RangeOfInfluence.ALL) {
-			return getAllActivePermanents();
-		}
-		else {
-			List<Permanent> active = new ArrayList<Permanent>();
-			Set<UUID> range = game.getPlayer(sourcePlayerId).getInRange();
-			for (Permanent perm: field.values()) {
-				if (perm.isPhasedIn() && range.contains(perm.getControllerId()))
-					active.add(perm);
-			}
-			return active;
-		}
-	}
+    /**
+     * Returns all {@link Permanent} that are within the range of influence  of the specified player id.
+     * 
+     * @param sourcePlayerId
+     * @param game
+     * @return a list of {@link Permanent}
+     * @see Permanent
+     */
+    public List<Permanent> getActivePermanents(UUID sourcePlayerId, Game game) {
+        if (game.getRangeOfInfluence() == RangeOfInfluence.ALL) {
+            return getAllActivePermanents();
+        }
+        else {
+            List<Permanent> active = new ArrayList<Permanent>();
+            Set<UUID> range = game.getPlayer(sourcePlayerId).getInRange();
+            for (Permanent perm: field.values()) {
+                if (perm.isPhasedIn() && range.contains(perm.getControllerId()))
+                    active.add(perm);
+            }
+            return active;
+        }
+    }
 
-	public List<Permanent> getPhasedIn(UUID controllerId) {
-		List<Permanent> phasedIn = new ArrayList<Permanent>();
-		for (Permanent perm: field.values()) {
-			if (perm.getAbilities().containsKey(PhasingAbility.getInstance().getId()) && perm.isPhasedIn() && perm.getControllerId().equals(controllerId))
-				phasedIn.add(perm);
-		}
-		return phasedIn;
-	}
+    public List<Permanent> getPhasedIn(UUID controllerId) {
+        List<Permanent> phasedIn = new ArrayList<Permanent>();
+        for (Permanent perm: field.values()) {
+            if (perm.getAbilities().containsKey(PhasingAbility.getInstance().getId()) && perm.isPhasedIn() && perm.getControllerId().equals(controllerId))
+                phasedIn.add(perm);
+        }
+        return phasedIn;
+    }
 
-	public List<Permanent> getPhasedOut(UUID controllerId) {
-		List<Permanent> phasedOut = new ArrayList<Permanent>();
-		for (Permanent perm: field.values()) {
-			if (!perm.isPhasedIn() && perm.getControllerId().equals(controllerId))
-				phasedOut.add(perm);
-		}
-		return phasedOut;
-	}
+    public List<Permanent> getPhasedOut(UUID controllerId) {
+        List<Permanent> phasedOut = new ArrayList<Permanent>();
+        for (Permanent perm: field.values()) {
+            if (!perm.isPhasedIn() && perm.getControllerId().equals(controllerId))
+                phasedOut.add(perm);
+        }
+        return phasedOut;
+    }
 
-	/**
-	 * since control could change several times during applyEvents we only want to fire
-	 * control changed events after all control change effects have been applied
-	 * 
-	 * @param game 
-	 */
-	public void fireControlChangeEvents(Game game) {
-		for (Permanent perm: field.values()) {
-			if (perm.isPhasedIn())
-				perm.checkControlChanged(game);
-		}
-	}
+    /**
+     * since control could change several times during applyEvents we only want to fire
+     * control changed events after all control change effects have been applied
+     * 
+     * @param game 
+     */
+    public void fireControlChangeEvents(Game game) {
+        for (Permanent perm: field.values()) {
+            if (perm.isPhasedIn())
+                perm.checkControlChanged(game);
+        }
+    }
 
 }

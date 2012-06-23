@@ -36,18 +36,18 @@ import java.util.UUID;
  */
 public class Plains5 extends mage.cards.basiclands.Plains {
 
-	public Plains5(UUID ownerId) {
-		super(ownerId, 250);
-		this.expansionSetCode = "ZEN";
-	}
+    public Plains5(UUID ownerId) {
+        super(ownerId, 250);
+        this.expansionSetCode = "ZEN";
+    }
 
-	public Plains5(final Plains5 card) {
-		super(card);
-	}
+    public Plains5(final Plains5 card) {
+        super(card);
+    }
 
-	@Override
-	public Plains5 copy() {
-		return new Plains5(this);
-	}
+    @Override
+    public Plains5 copy() {
+        return new Plains5(this);
+    }
 
 }

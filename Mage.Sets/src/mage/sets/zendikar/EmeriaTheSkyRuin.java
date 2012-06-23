@@ -103,10 +103,10 @@ class EmeriaTheSkyRuinTriggeredAbility extends TriggeredAbilityImpl<EmeriaTheSky
         }
         return false;
     }
-    
+
     @Override
     public boolean checkInterveningIfClause(Game game) {
-	return game.getBattlefield().countAll(filter, this.controllerId, game) >= 7;
+    return game.getBattlefield().countAll(filter, this.controllerId, game) >= 7;
     }
 
     @Override

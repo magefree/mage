@@ -44,7 +44,7 @@ public class Regress extends CardImpl<Regress> {
     public Regress (UUID ownerId) {
         super(ownerId, 48, "Regress", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "MRD";
-		this.color.setBlue(true);
+        this.color.setBlue(true);
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent());
     }

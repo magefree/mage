@@ -56,7 +56,7 @@ import mage.game.events.GameEvent;
  * @author jeffwadsworth
  */
 public class LoneRevenant extends CardImpl<LoneRevenant> {
-    
+
     public LoneRevenant(UUID ownerId) {
         super(ownerId, 64, "Lone Revenant", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
         this.expansionSetCode = "AVR";
@@ -67,7 +67,7 @@ public class LoneRevenant extends CardImpl<LoneRevenant> {
         this.toughness = new MageInt(4);
 
         this.addAbility(HexproofAbility.getInstance());
-        
+
         // Whenever Lone Revenant deals combat damage to a player, if you control no other creatures, look at the top four cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
         this.addAbility(new LoneRevenantTriggeredAbility());
     }
@@ -83,13 +83,13 @@ public class LoneRevenant extends CardImpl<LoneRevenant> {
 }
 
 class LoneRevenantTriggeredAbility extends TriggeredAbilityImpl<LoneRevenantTriggeredAbility> {
-    
+
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-    
+
     public LoneRevenantTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LoneRevenantEffect());
     }
-    
+
     public LoneRevenantTriggeredAbility(final LoneRevenantTriggeredAbility ability) {
         super(ability);
     }
@@ -105,7 +105,7 @@ class LoneRevenantTriggeredAbility extends TriggeredAbilityImpl<LoneRevenantTrig
         && ((DamagedPlayerEvent) event).isCombatDamage()) {
             Permanent permanent = game.getPermanent(event.getSourceId());
             int number = game.getBattlefield().countAll(filter, controllerId, game);
-                
+
             if (permanent != null && number != 1) {
                 return false;
             }
@@ -119,7 +119,7 @@ class LoneRevenantTriggeredAbility extends TriggeredAbilityImpl<LoneRevenantTrig
 }
 
 class LoneRevenantEffect extends OneShotEffect<LoneRevenantEffect> {
-    
+
     public LoneRevenantEffect() {
         super(Constants.Outcome.DrawCard);
         this.staticText = "Whenever Lone Revenant deals combat damage to a player, if you control no other creatures, look at the top four cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order";

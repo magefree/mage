@@ -53,79 +53,79 @@ import mage.players.Player;
  */
 public class SerraAscendant extends CardImpl<SerraAscendant> {
 
-	public SerraAscendant(UUID ownerId) {
-		super(ownerId, 28, "Serra Ascendant", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Human");
-		this.subtype.add("Monk");
-		this.color.setWhite(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
+    public SerraAscendant(UUID ownerId) {
+        super(ownerId, 28, "Serra Ascendant", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Human");
+        this.subtype.add("Monk");
+        this.color.setWhite(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-		this.addAbility(LifelinkAbility.getInstance());
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SerraAscendantEffect()));
-	}
+        this.addAbility(LifelinkAbility.getInstance());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SerraAscendantEffect()));
+    }
 
-	public SerraAscendant(final SerraAscendant card) {
-		super(card);
-	}
+    public SerraAscendant(final SerraAscendant card) {
+        super(card);
+    }
 
-	@Override
-	public SerraAscendant copy() {
-		return new SerraAscendant(this);
-	}
+    @Override
+    public SerraAscendant copy() {
+        return new SerraAscendant(this);
+    }
 
 }
 
 class SerraAscendantEffect extends ContinuousEffectImpl<SerraAscendantEffect> {
 
-	public SerraAscendantEffect() {
-		super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
-		staticText = "As long as you have 30 or more life, {this} gets +5/+5 and has flying";
-	}
+    public SerraAscendantEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
+        staticText = "As long as you have 30 or more life, {this} gets +5/+5 and has flying";
+    }
 
-	public SerraAscendantEffect(final SerraAscendantEffect effect) {
-		super(effect);
-	}
+    public SerraAscendantEffect(final SerraAscendantEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public SerraAscendantEffect copy() {
-		return new SerraAscendantEffect(this);
-	}
+    @Override
+    public SerraAscendantEffect copy() {
+        return new SerraAscendantEffect(this);
+    }
 
-	@Override
-	public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-		Permanent creature = game.getPermanent(source.getSourceId());
-		if (creature != null) {
-			Player player = game.getPlayer(creature.getControllerId());
-			if (player != null && player.getLife() >= 30) {
-				switch (layer) {
-					case PTChangingEffects_7:
-						if (sublayer == SubLayer.ModifyPT_7c) {
-							creature.addPower(5);
-							creature.addToughness(5);
-						}
-						break;
-					case AbilityAddingRemovingEffects_6:
-						if (sublayer == SubLayer.NA) {
-							creature.addAbility(FlyingAbility.getInstance(), game);
-						}
-						break;
-				}
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        Permanent creature = game.getPermanent(source.getSourceId());
+        if (creature != null) {
+            Player player = game.getPlayer(creature.getControllerId());
+            if (player != null && player.getLife() >= 30) {
+                switch (layer) {
+                    case PTChangingEffects_7:
+                        if (sublayer == SubLayer.ModifyPT_7c) {
+                            creature.addPower(5);
+                            creature.addToughness(5);
+                        }
+                        break;
+                    case AbilityAddingRemovingEffects_6:
+                        if (sublayer == SubLayer.NA) {
+                            creature.addAbility(FlyingAbility.getInstance(), game);
+                        }
+                        break;
+                }
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
 
-	@Override
-	public boolean hasLayer(Layer layer) {
-		return layer == Layer.AbilityAddingRemovingEffects_6 || layer == layer.PTChangingEffects_7;
-	}
+    @Override
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.AbilityAddingRemovingEffects_6 || layer == layer.PTChangingEffects_7;
+    }
 
 }

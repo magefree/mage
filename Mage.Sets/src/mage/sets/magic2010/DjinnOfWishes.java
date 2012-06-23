@@ -56,7 +56,7 @@ import mage.players.Player;
  */
 public class DjinnOfWishes extends CardImpl<DjinnOfWishes> {
 
-	private static final String ruleText = "Djinn of Wishes enters the battlefield with three wish counters on it";
+    private static final String ruleText = "Djinn of Wishes enters the battlefield with three wish counters on it";
 
     public DjinnOfWishes(UUID ownerId) {
         super(ownerId, 50, "Djinn of Wishes", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
@@ -69,12 +69,12 @@ public class DjinnOfWishes extends CardImpl<DjinnOfWishes> {
 
         this.addAbility(FlyingAbility.getInstance());
         // Djinn of Wishes enters the battlefield with three wish counters on it.
-		this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.WISH.createInstance(3)), ruleText));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.WISH.createInstance(3)), ruleText));
 
         // {2}{U}{U}, Remove a wish counter from Djinn of Wishes: Reveal the top card of your library. You may play that card without paying its mana cost. If you don't, exile it.
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DjinnOfWishesEffect(), new ManaCostsImpl("{2}{U}{U}"));
-		ability.addCost(new RemoveCountersSourceCost(CounterType.WISH.createInstance()));
-		this.addAbility(ability);
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DjinnOfWishesEffect(), new ManaCostsImpl("{2}{U}{U}"));
+        ability.addCost(new RemoveCountersSourceCost(CounterType.WISH.createInstance()));
+        this.addAbility(ability);
     }
 
     public DjinnOfWishes(final DjinnOfWishes card) {
@@ -89,52 +89,52 @@ public class DjinnOfWishes extends CardImpl<DjinnOfWishes> {
 
 class DjinnOfWishesEffect extends OneShotEffect<DjinnOfWishesEffect> {
 
-	public DjinnOfWishesEffect() {
-		super(Outcome.PlayForFree);
-		staticText = "Reveal the top card of your library. You may play that card without paying its mana cost. If you don't, exile it";
-	}
+    public DjinnOfWishesEffect() {
+        super(Outcome.PlayForFree);
+        staticText = "Reveal the top card of your library. You may play that card without paying its mana cost. If you don't, exile it";
+    }
 
-	public DjinnOfWishesEffect(final DjinnOfWishesEffect effect) {
-		super(effect);
-	}
+    public DjinnOfWishesEffect(final DjinnOfWishesEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-		if (player != null && player.getLibrary().size() > 0) {
-			Card card = player.getLibrary().getFromTop(game);
-			Cards cards = new CardsImpl();
-			cards.add(card);
-			player.revealCards("Djinn Of Wishes", cards, game);
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null && player.getLibrary().size() > 0) {
+            Card card = player.getLibrary().getFromTop(game);
+            Cards cards = new CardsImpl();
+            cards.add(card);
+            player.revealCards("Djinn Of Wishes", cards, game);
 
-			player.getLibrary().removeFromTop(game);
+            player.getLibrary().removeFromTop(game);
 
-			boolean used = false;
-			if (player.chooseUse(Outcome.PlayForFree, "Play " + card.getName() + " without paying its mana cost?", game)) {
-				if (card.getCardType().contains(CardType.LAND)) {
-					// If the revealed card is a land, you can play it only if it's your turn and you haven't yet played a land this turn.
-					if (game.getActivePlayerId().equals(player.getId()) && player.getLandsPlayed() < player.getLandsPerTurn()) {
-						used = true;
-						player.playLand(card, game);
-					}
-				} else {
-					used = true;
-					player.cast(card.getSpellAbility(), game, true);
-				}
+            boolean used = false;
+            if (player.chooseUse(Outcome.PlayForFree, "Play " + card.getName() + " without paying its mana cost?", game)) {
+                if (card.getCardType().contains(CardType.LAND)) {
+                    // If the revealed card is a land, you can play it only if it's your turn and you haven't yet played a land this turn.
+                    if (game.getActivePlayerId().equals(player.getId()) && player.getLandsPlayed() < player.getLandsPerTurn()) {
+                        used = true;
+                        player.playLand(card, game);
+                    }
+                } else {
+                    used = true;
+                    player.cast(card.getSpellAbility(), game, true);
+                }
             }
 
-			if (!used) {
-				card.moveToZone(Zone.EXILED, source.getSourceId(), game, false);
-			}
+            if (!used) {
+                card.moveToZone(Zone.EXILED, source.getSourceId(), game, false);
+            }
 
-			return true;
-		}
-		return false;
-	}
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public DjinnOfWishesEffect copy() {
-		return new DjinnOfWishesEffect(this);
-	}
+    @Override
+    public DjinnOfWishesEffect copy() {
+        return new DjinnOfWishesEffect(this);
+    }
 
 }

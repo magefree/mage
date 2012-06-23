@@ -46,207 +46,207 @@ import java.util.UUID;
  */
 public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Abilities<T> {
 
-	public AbilitiesImpl() {}
+    public AbilitiesImpl() {}
 
     public AbilitiesImpl(T... abilities) {
         for (T ability : abilities) {
             add(ability);
         }
     }
-	
-	public AbilitiesImpl(final AbilitiesImpl<T> abilities) {
-		for (T ability: abilities) {
-			this.add((T)ability.copy());
-		}
-	}
 
-	@Override
-	public AbilitiesImpl<T> copy() {
-		return new AbilitiesImpl<T>(this);
-	}
+    public AbilitiesImpl(final AbilitiesImpl<T> abilities) {
+        for (T ability: abilities) {
+            this.add((T)ability.copy());
+        }
+    }
 
-	@Override
-	public List<String> getRules(String source) {
-		List<String> rules = new ArrayList<String>();
+    @Override
+    public AbilitiesImpl<T> copy() {
+        return new AbilitiesImpl<T>(this);
+    }
 
-		for (T ability:this) {
-			if (!(ability instanceof SpellAbility || ability instanceof PlayLandAbility))
-				rules.add(ability.getRule());
-		}
+    @Override
+    public List<String> getRules(String source) {
+        List<String> rules = new ArrayList<String>();
 
-		return rules;
-	}
+        for (T ability:this) {
+            if (!(ability instanceof SpellAbility || ability instanceof PlayLandAbility))
+                rules.add(ability.getRule());
+        }
 
-	@Override
-	public Abilities<ActivatedAbility> getActivatedAbilities(Zone zone) {
-		Abilities<ActivatedAbility> zonedAbilities = new AbilitiesImpl<ActivatedAbility>();
-		for (T ability: this) {
-			if (ability instanceof ActivatedAbility && ability.getZone().match(zone)) {
-				zonedAbilities.add((ActivatedAbility)ability);
-			}
-		}
-		return zonedAbilities;
-	}
+        return rules;
+    }
 
-	@Override
-	public Abilities<ManaAbility> getManaAbilities(Zone zone) {
-		Abilities<ManaAbility> abilities = new AbilitiesImpl<ManaAbility>();
-		for (T ability: this) {
-			if (ability instanceof ManaAbility && ability.getZone().match(zone)) {
-				abilities.add((ManaAbility)ability);
-			}
-		}
-		return abilities;
-	}
+    @Override
+    public Abilities<ActivatedAbility> getActivatedAbilities(Zone zone) {
+        Abilities<ActivatedAbility> zonedAbilities = new AbilitiesImpl<ActivatedAbility>();
+        for (T ability: this) {
+            if (ability instanceof ActivatedAbility && ability.getZone().match(zone)) {
+                zonedAbilities.add((ActivatedAbility)ability);
+            }
+        }
+        return zonedAbilities;
+    }
 
-	@Override
-	public Abilities<ManaAbility> getAvailableManaAbilities(Zone zone, Game game) {
-		Abilities<ManaAbility> abilities = new AbilitiesImpl<ManaAbility>();
-		for (T ability: this) {
-			if (ability instanceof ManaAbility && ability.getZone().match(zone)) {
+    @Override
+    public Abilities<ManaAbility> getManaAbilities(Zone zone) {
+        Abilities<ManaAbility> abilities = new AbilitiesImpl<ManaAbility>();
+        for (T ability: this) {
+            if (ability instanceof ManaAbility && ability.getZone().match(zone)) {
+                abilities.add((ManaAbility)ability);
+            }
+        }
+        return abilities;
+    }
+
+    @Override
+    public Abilities<ManaAbility> getAvailableManaAbilities(Zone zone, Game game) {
+        Abilities<ManaAbility> abilities = new AbilitiesImpl<ManaAbility>();
+        for (T ability: this) {
+            if (ability instanceof ManaAbility && ability.getZone().match(zone)) {
                 if ((((ManaAbility)ability).canActivate(ability.getControllerId(), game)))
                     abilities.add((ManaAbility)ability);
-			}
-		}
-		return abilities;
-	}
+            }
+        }
+        return abilities;
+    }
 
     @Override
-	public Abilities<EvasionAbility> getEvasionAbilities() {
-		Abilities<EvasionAbility> abilities = new AbilitiesImpl<EvasionAbility>();
-		for (T ability: this) {
-			if (ability instanceof EvasionAbility) {
-				abilities.add((EvasionAbility)ability);
-			}
-		}
-		return abilities;
-	}
-
-	@Override
-	public Abilities<StaticAbility> getStaticAbilities(Zone zone) {
-		Abilities<StaticAbility> zonedAbilities = new AbilitiesImpl<StaticAbility>();
-		for (T ability: this) {
-			if (ability instanceof StaticAbility && ability.getZone().match(zone)) {
-				zonedAbilities.add((StaticAbility)ability);
-			}
-		}
-		return zonedAbilities;
-	}
-
-	@Override
-	public Abilities<TriggeredAbility> getTriggeredAbilities(Zone zone) {
-		Abilities<TriggeredAbility> zonedAbilities = new AbilitiesImpl<TriggeredAbility>();
-		for (T ability: this) {
-			if (ability instanceof TriggeredAbility && ability.getZone().match(zone)) {
-				zonedAbilities.add((TriggeredAbility)ability);
-			}
-			else if (ability instanceof ZoneChangeTriggeredAbility) {
-				ZoneChangeTriggeredAbility zcAbility = (ZoneChangeTriggeredAbility)ability;
-				if (zcAbility.getToZone() != null && zcAbility.getToZone().match(zone)) {
-					zonedAbilities.add((ZoneChangeTriggeredAbility)ability);
-				}
-			}
-		}
-		return zonedAbilities;
-	}
-    
-    @Override
-	public Abilities<ProtectionAbility> getProtectionAbilities() {
-		Abilities<ProtectionAbility> abilities = new AbilitiesImpl<ProtectionAbility>();
-		for (T ability: this) {
-			if (ability instanceof ProtectionAbility) {
-				abilities.add((ProtectionAbility)ability);
-			}
-		}
-		return abilities;
-	}
-
-	@Override
-	public Abilities<KickerAbility> getKickerAbilities() {
-		Abilities<KickerAbility> abilities = new AbilitiesImpl<KickerAbility>();
-		for (T ability: this) {
-			if (ability instanceof KickerAbility) {
-				abilities.add((KickerAbility)ability);
-			}
-		}
-		return abilities;
-	}
-
-	@Override
-	public void setControllerId(UUID controllerId) {
-		for (Ability ability: this) {
-			ability.setControllerId(controllerId);
-		}
-	}
-
-	@Override
-	public void setSourceId(UUID sourceId) {
-		for (Ability ability: this) {
-			ability.setSourceId(sourceId);
-		}
-	}
-
-	@Override
-	public void newId() {
-		for (Ability ability: this) {
-			ability.newId();
-		}
-	}
-
-	@Override
-	public void newOriginalId() {
-		for (Ability ability: this) {
-			ability.newOriginalId();
-		}
-	}
+    public Abilities<EvasionAbility> getEvasionAbilities() {
+        Abilities<EvasionAbility> abilities = new AbilitiesImpl<EvasionAbility>();
+        for (T ability: this) {
+            if (ability instanceof EvasionAbility) {
+                abilities.add((EvasionAbility)ability);
+            }
+        }
+        return abilities;
+    }
 
     @Override
-	public boolean contains(T ability) {
-		for (T test: this) {
-			if (ability.getId().equals(test.getId()) || ability.getRule().equals(test.getRule())) {
-				return true;
-			}
-		}
-		return false;
-	}
+    public Abilities<StaticAbility> getStaticAbilities(Zone zone) {
+        Abilities<StaticAbility> zonedAbilities = new AbilitiesImpl<StaticAbility>();
+        for (T ability: this) {
+            if (ability instanceof StaticAbility && ability.getZone().match(zone)) {
+                zonedAbilities.add((StaticAbility)ability);
+            }
+        }
+        return zonedAbilities;
+    }
 
-	@Override
-	public boolean containsAll(Abilities<T> abilities) {
-		if (this.size() < abilities.size())
-			return false;
-		for (T ability: abilities) {
-			if (!contains(ability))
-				return false;
-		}
-		return true;
-	}
+    @Override
+    public Abilities<TriggeredAbility> getTriggeredAbilities(Zone zone) {
+        Abilities<TriggeredAbility> zonedAbilities = new AbilitiesImpl<TriggeredAbility>();
+        for (T ability: this) {
+            if (ability instanceof TriggeredAbility && ability.getZone().match(zone)) {
+                zonedAbilities.add((TriggeredAbility)ability);
+            }
+            else if (ability instanceof ZoneChangeTriggeredAbility) {
+                ZoneChangeTriggeredAbility zcAbility = (ZoneChangeTriggeredAbility)ability;
+                if (zcAbility.getToZone() != null && zcAbility.getToZone().match(zone)) {
+                    zonedAbilities.add((ZoneChangeTriggeredAbility)ability);
+                }
+            }
+        }
+        return zonedAbilities;
+    }
 
-	@Override
-	public boolean containsKey(UUID abilityId) {
-		for (T ability: this) {
-			if (ability.getId().equals(abilityId))
-				return true;
-		}
-		return false;
-	}
+    @Override
+    public Abilities<ProtectionAbility> getProtectionAbilities() {
+        Abilities<ProtectionAbility> abilities = new AbilitiesImpl<ProtectionAbility>();
+        for (T ability: this) {
+            if (ability instanceof ProtectionAbility) {
+                abilities.add((ProtectionAbility)ability);
+            }
+        }
+        return abilities;
+    }
 
-	@Override
-	public T get(UUID abilityId) {
-		for (T ability: this) {
-			if (ability.getId().equals(abilityId))
-				return ability;
-		}
-		return null;
-	}
+    @Override
+    public Abilities<KickerAbility> getKickerAbilities() {
+        Abilities<KickerAbility> abilities = new AbilitiesImpl<KickerAbility>();
+        for (T ability: this) {
+            if (ability instanceof KickerAbility) {
+                abilities.add((KickerAbility)ability);
+            }
+        }
+        return abilities;
+    }
 
-	@Override
-	public int getOutcomeTotal() {
-		int total = 0;
-		for (T ability: this) {
-			total += ability.getEffects().getOutcomeTotal();
-		}
-		return total;
-	}
+    @Override
+    public void setControllerId(UUID controllerId) {
+        for (Ability ability: this) {
+            ability.setControllerId(controllerId);
+        }
+    }
+
+    @Override
+    public void setSourceId(UUID sourceId) {
+        for (Ability ability: this) {
+            ability.setSourceId(sourceId);
+        }
+    }
+
+    @Override
+    public void newId() {
+        for (Ability ability: this) {
+            ability.newId();
+        }
+    }
+
+    @Override
+    public void newOriginalId() {
+        for (Ability ability: this) {
+            ability.newOriginalId();
+        }
+    }
+
+    @Override
+    public boolean contains(T ability) {
+        for (T test: this) {
+            if (ability.getId().equals(test.getId()) || ability.getRule().equals(test.getRule())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean containsAll(Abilities<T> abilities) {
+        if (this.size() < abilities.size())
+            return false;
+        for (T ability: abilities) {
+            if (!contains(ability))
+                return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean containsKey(UUID abilityId) {
+        for (T ability: this) {
+            if (ability.getId().equals(abilityId))
+                return true;
+        }
+        return false;
+    }
+
+    @Override
+    public T get(UUID abilityId) {
+        for (T ability: this) {
+            if (ability.getId().equals(abilityId))
+                return ability;
+        }
+        return null;
+    }
+
+    @Override
+    public int getOutcomeTotal() {
+        int total = 0;
+        for (T ability: this) {
+            total += ability.getEffects().getOutcomeTotal();
+        }
+        return total;
+    }
 
     @Override
     public String getValue() {

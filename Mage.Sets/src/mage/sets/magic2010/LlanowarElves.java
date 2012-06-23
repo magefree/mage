@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class LlanowarElves extends mage.sets.tenth.LlanowarElves {
 
-	public LlanowarElves(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 189;
-		this.expansionSetCode = "M10";
-	}
+    public LlanowarElves(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 189;
+        this.expansionSetCode = "M10";
+    }
 
-	public LlanowarElves(final LlanowarElves card) {
-		super(card);
-	}
+    public LlanowarElves(final LlanowarElves card) {
+        super(card);
+    }
 
-	@Override
-	public LlanowarElves copy() {
-		return new LlanowarElves(this);
-	}
+    @Override
+    public LlanowarElves copy() {
+        return new LlanowarElves(this);
+    }
 
 }

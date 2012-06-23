@@ -97,9 +97,9 @@ class CryptoplasmTransformEffect extends ContinuousEffectImpl<CryptoplasmTransfo
         if (card == null || permanent == null)
             return false;
 
-		CardUtil.copyTo(permanent).from(card, game);
+        CardUtil.copyTo(permanent).from(card, game);
 
-		Ability upkeepAbility = new BeginningOfUpkeepTriggeredAbility(new CryptoplasmTransformEffect(), Constants.TargetController.YOU, true);
+        Ability upkeepAbility = new BeginningOfUpkeepTriggeredAbility(new CryptoplasmTransformEffect(), Constants.TargetController.YOU, true);
         upkeepAbility.addTarget(new TargetCreaturePermanent());
         permanent.addAbility(upkeepAbility, game);
 

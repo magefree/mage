@@ -24,10 +24,10 @@ public class GolemSkinGauntletsTest extends CardTestPlayerBase {
 
         activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {4}", "Elite Vanguard");
         activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {2}", "Elite Vanguard");
-        
+
         setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
-        
+
         assertLife(playerA, 20);
         assertLife(playerB, 20);
 

@@ -49,7 +49,7 @@ import mage.game.events.GameEvent;
 public class ChancellorOfTheDross extends CardImpl<ChancellorOfTheDross> {
 
     private static String abilityText = "at the beginning of the first upkeep, each opponent loses 3 life, then you gain life equal to the life lost this way";
-    
+
     public ChancellorOfTheDross(UUID ownerId) {
         super(ownerId, 54, "Chancellor of the Dross", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{B}{B}");
         this.expansionSetCode = "NPH";
@@ -61,7 +61,7 @@ public class ChancellorOfTheDross extends CardImpl<ChancellorOfTheDross> {
 
         // You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, each opponent loses 3 life, then you gain life equal to the life lost this way.
         this.addAbility(new ChancellorAbility(new ChancellorOfTheDrossDelayedTriggeredAbility(), abilityText));
-        
+
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(LifelinkAbility.getInstance());
     }
@@ -78,40 +78,40 @@ public class ChancellorOfTheDross extends CardImpl<ChancellorOfTheDross> {
 
 class ChancellorOfTheDrossDelayedTriggeredAbility extends DelayedTriggeredAbility<ChancellorOfTheDrossDelayedTriggeredAbility> {
 
-	ChancellorOfTheDrossDelayedTriggeredAbility () {
-		super(new ChancellorOfTheDrossEffect());
-	}
+    ChancellorOfTheDrossDelayedTriggeredAbility () {
+        super(new ChancellorOfTheDrossEffect());
+    }
 
-	ChancellorOfTheDrossDelayedTriggeredAbility(ChancellorOfTheDrossDelayedTriggeredAbility ability) {
-		super(ability);
-	}
+    ChancellorOfTheDrossDelayedTriggeredAbility(ChancellorOfTheDrossDelayedTriggeredAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE) {
-			return true;
-		}
-		return false;
-	}
-	@Override
-	public ChancellorOfTheDrossDelayedTriggeredAbility copy() {
-		return new ChancellorOfTheDrossDelayedTriggeredAbility(this);
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE) {
+            return true;
+        }
+        return false;
+    }
+    @Override
+    public ChancellorOfTheDrossDelayedTriggeredAbility copy() {
+        return new ChancellorOfTheDrossDelayedTriggeredAbility(this);
+    }
 }
 
 class ChancellorOfTheDrossEffect extends OneShotEffect<ChancellorOfTheDrossEffect> {
 
-	ChancellorOfTheDrossEffect () {
-		super(Outcome.Benefit);
-		staticText = "each opponent loses 3 life, then you gain life equal to the life lost this way";
-	}
+    ChancellorOfTheDrossEffect () {
+        super(Outcome.Benefit);
+        staticText = "each opponent loses 3 life, then you gain life equal to the life lost this way";
+    }
 
-	ChancellorOfTheDrossEffect(ChancellorOfTheDrossEffect effect) {
-		super(effect);
-	}
+    ChancellorOfTheDrossEffect(ChancellorOfTheDrossEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
         int loseLife = 0;
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             loseLife += game.getPlayer(opponentId).loseLife(3, game);
@@ -119,11 +119,11 @@ class ChancellorOfTheDrossEffect extends OneShotEffect<ChancellorOfTheDrossEffec
         if (loseLife > 0)
             game.getPlayer(source.getControllerId()).gainLife(loseLife, game);
         return true;
-	}
+    }
 
-	@Override
-	public ChancellorOfTheDrossEffect copy() {
-		return new ChancellorOfTheDrossEffect(this);
-	}
+    @Override
+    public ChancellorOfTheDrossEffect copy() {
+        return new ChancellorOfTheDrossEffect(this);
+    }
 
 }

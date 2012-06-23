@@ -53,69 +53,69 @@ import java.util.UUID;
  */
 public class MyrReservoir extends CardImpl<MyrReservoir> {
 
-	private static final FilterCard myrCardFilter = new FilterCard("Myr card from your graveyard");
+    private static final FilterCard myrCardFilter = new FilterCard("Myr card from your graveyard");
 
-	static {
-		myrCardFilter.getSubtype().add("Myr");
-	}
+    static {
+        myrCardFilter.getSubtype().add("Myr");
+    }
 
-	public MyrReservoir(UUID ownerId) {
-		super(ownerId, 183, "Myr Reservoir", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-		this.expansionSetCode = "SOM";
+    public MyrReservoir(UUID ownerId) {
+        super(ownerId, 183, "Myr Reservoir", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
+        this.expansionSetCode = "SOM";
 
-		// {tap}: Add {2} to your mana pool. Spend this mana only to cast Myr spells or activate abilities of Myr.
-		this.addAbility(new MyrReservoirManaAbility());
+        // {tap}: Add {2} to your mana pool. Spend this mana only to cast Myr spells or activate abilities of Myr.
+        this.addAbility(new MyrReservoirManaAbility());
 
-		// {3}, {tap}: Return target Myr card from your graveyard to your hand.
-		Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new GenericManaCost(3));
-		ability.addCost(new TapSourceCost());
-		ability.addTarget(new TargetCardInYourGraveyard(myrCardFilter));
-		this.addAbility(ability);
-	}
+        // {3}, {tap}: Return target Myr card from your graveyard to your hand.
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new GenericManaCost(3));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetCardInYourGraveyard(myrCardFilter));
+        this.addAbility(ability);
+    }
 
-	public MyrReservoir(final MyrReservoir card) {
-		super(card);
-	}
+    public MyrReservoir(final MyrReservoir card) {
+        super(card);
+    }
 
-	@Override
-	public MyrReservoir copy() {
-		return new MyrReservoir(this);
-	}
+    @Override
+    public MyrReservoir copy() {
+        return new MyrReservoir(this);
+    }
 }
 
 class MyrReservoirManaAbility extends BasicManaAbility<MyrReservoirManaAbility> {
 
-	MyrReservoirManaAbility() {
-		super(new BasicManaEffect(new MyrConditionalMana()));
-		this.netMana.setColorless(2);
-	}
+    MyrReservoirManaAbility() {
+        super(new BasicManaEffect(new MyrConditionalMana()));
+        this.netMana.setColorless(2);
+    }
 
-	MyrReservoirManaAbility(MyrReservoirManaAbility ability) {
-		super(ability);
-	}
+    MyrReservoirManaAbility(MyrReservoirManaAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public MyrReservoirManaAbility copy() {
-		return new MyrReservoirManaAbility(this);
-	}
+    @Override
+    public MyrReservoirManaAbility copy() {
+        return new MyrReservoirManaAbility(this);
+    }
 }
 
 class MyrConditionalMana extends ConditionalMana {
 
-	public MyrConditionalMana() {
-		super(Mana.ColorlessMana(2));
-		staticText = "Spend this mana only to cast Myr spells or activate abilities of Myr";
-		addCondition(new MyrManaCondition());
-	}
+    public MyrConditionalMana() {
+        super(Mana.ColorlessMana(2));
+        staticText = "Spend this mana only to cast Myr spells or activate abilities of Myr";
+        addCondition(new MyrManaCondition());
+    }
 }
 
 class MyrManaCondition implements Condition {
-	@Override
-	public boolean apply(Game game, Ability source) {
-		MageObject object = game.getObject(source.getSourceId());
-		if (object != null && object.hasSubtype("Myr")) {
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        MageObject object = game.getObject(source.getSourceId());
+        if (object != null && object.hasSubtype("Myr")) {
+            return true;
+        }
+        return false;
+    }
 }

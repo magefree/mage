@@ -40,46 +40,46 @@ import mage.game.Game;
  */
 public class CardsInHandCondition implements Condition {
 
-	public static enum CountType { MORE_THAN, FEWER_THAN, EQUAL_TO };
-	private Condition condition;
-	private CountType type;
-	private int count;
+    public static enum CountType { MORE_THAN, FEWER_THAN, EQUAL_TO };
+    private Condition condition;
+    private CountType type;
+    private int count;
 
         public CardsInHandCondition() {
             this(CountType.EQUAL_TO, 0);
         }
 
-	public CardsInHandCondition (CountType type, int count ) {
-		this.type = type;
-		this.count = count;
-	}
+    public CardsInHandCondition (CountType type, int count ) {
+        this.type = type;
+        this.count = count;
+    }
 
-	public CardsInHandCondition (CountType type, int count, Condition conditionToDecorate ) {
+    public CardsInHandCondition (CountType type, int count, Condition conditionToDecorate ) {
                 this(type, count);
-		this.condition = conditionToDecorate;
-	}
+        this.condition = conditionToDecorate;
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		boolean conditionApplies = false;
+    @Override
+    public boolean apply(Game game, Ability source) {
+        boolean conditionApplies = false;
 
-		switch ( this.type ) {
-			case FEWER_THAN:
-				conditionApplies = game.getPlayer(source.getControllerId()).getHand().size() < this.count;
-				break;
-			case MORE_THAN:
-				conditionApplies = game.getPlayer(source.getControllerId()).getHand().size()  > this.count;
-				break;
-			case EQUAL_TO:
-				conditionApplies = game.getPlayer(source.getControllerId()).getHand().size()  == this.count;
-				break;
-		}
+        switch ( this.type ) {
+            case FEWER_THAN:
+                conditionApplies = game.getPlayer(source.getControllerId()).getHand().size() < this.count;
+                break;
+            case MORE_THAN:
+                conditionApplies = game.getPlayer(source.getControllerId()).getHand().size()  > this.count;
+                break;
+            case EQUAL_TO:
+                conditionApplies = game.getPlayer(source.getControllerId()).getHand().size()  == this.count;
+                break;
+        }
 
-		//If a decorated condition exists, check it as well and apply them together.
-		if ( this.condition != null ) {
-			conditionApplies = conditionApplies && this.condition.apply(game, source);
-		}
+        //If a decorated condition exists, check it as well and apply them together.
+        if ( this.condition != null ) {
+            conditionApplies = conditionApplies && this.condition.apply(game, source);
+        }
 
-		return conditionApplies;
-	}
+        return conditionApplies;
+    }
 }

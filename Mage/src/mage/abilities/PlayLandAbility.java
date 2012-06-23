@@ -39,40 +39,40 @@ import mage.game.Game;
  */
 public class PlayLandAbility extends ActivatedAbilityImpl<PlayLandAbility> {
 
-	public PlayLandAbility(String cardName) {
-		super(AbilityType.PLAY_LAND, Zone.HAND);
-		this.usesStack = false;
-		this.name = "Play " + cardName;
-	}
+    public PlayLandAbility(String cardName) {
+        super(AbilityType.PLAY_LAND, Zone.HAND);
+        this.usesStack = false;
+        this.name = "Play " + cardName;
+    }
 
-	public PlayLandAbility(PlayLandAbility ability) {
-		super(ability);
-	}
+    public PlayLandAbility(PlayLandAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public boolean canActivate(UUID playerId, Game game) {
-		if (!controlsAbility(playerId, game))
-			return false;
-		//20091005 - 114.2a
-		if (game.canPlaySorcery(playerId)) {
-			return game.getPlayer(playerId).canPlayLand();
-		}
-		return false;
-	}
+    @Override
+    public boolean canActivate(UUID playerId, Game game) {
+        if (!controlsAbility(playerId, game))
+            return false;
+        //20091005 - 114.2a
+        if (game.canPlaySorcery(playerId)) {
+            return game.getPlayer(playerId).canPlayLand();
+        }
+        return false;
+    }
 
-	@Override
-	public String getActivatedMessage(Game game) {
-		return " plays " + getMessageText(game);
-	}
+    @Override
+    public String getActivatedMessage(Game game) {
+        return " plays " + getMessageText(game);
+    }
 
-	@Override
-	public String toString() {
-		return this.name;
-	}
+    @Override
+    public String toString() {
+        return this.name;
+    }
 
-	@Override
-	public PlayLandAbility copy() {
-		return new PlayLandAbility(this);
-	}
+    @Override
+    public PlayLandAbility copy() {
+        return new PlayLandAbility(this);
+    }
 
 }

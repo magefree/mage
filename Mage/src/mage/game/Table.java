@@ -47,171 +47,171 @@ import mage.players.Player;
  */
 public class Table implements Serializable {
 
-	private UUID tableId;
-	private UUID roomId;
-	private String name;
-	private String controllerName;
-	private String gameType;
-	private Date createTime;
-	private Seat[] seats;
-	private int numSeats;
-	private boolean isTournament;
-	private DeckValidator validator;
-	private TableState state = TableState.WAITING;
-	private Match match;
-	private Tournament tournament;
+    private UUID tableId;
+    private UUID roomId;
+    private String name;
+    private String controllerName;
+    private String gameType;
+    private Date createTime;
+    private Seat[] seats;
+    private int numSeats;
+    private boolean isTournament;
+    private DeckValidator validator;
+    private TableState state = TableState.WAITING;
+    private Match match;
+    private Tournament tournament;
 
-	protected TableEventSource tableEventSource = new TableEventSource();
+    protected TableEventSource tableEventSource = new TableEventSource();
 
-	public Table(UUID roomId, String gameType, String name, String controllerName, DeckValidator validator, List<String> playerTypes, Tournament tournament) {
-		this(roomId, gameType, name, controllerName, validator, playerTypes);
-		this.tournament = tournament;
-		this.isTournament = true;
-	}
+    public Table(UUID roomId, String gameType, String name, String controllerName, DeckValidator validator, List<String> playerTypes, Tournament tournament) {
+        this(roomId, gameType, name, controllerName, validator, playerTypes);
+        this.tournament = tournament;
+        this.isTournament = true;
+    }
 
-	public Table(UUID roomId, String gameType, String name, String controllerName, DeckValidator validator, List<String> playerTypes, Match match) {
-		this(roomId, gameType, name, controllerName, validator, playerTypes);
-		this.match = match;
-		this.isTournament = false;
-	}
+    public Table(UUID roomId, String gameType, String name, String controllerName, DeckValidator validator, List<String> playerTypes, Match match) {
+        this(roomId, gameType, name, controllerName, validator, playerTypes);
+        this.match = match;
+        this.isTournament = false;
+    }
 
-	protected Table(UUID roomId, String gameType, String name, String controllerName, DeckValidator validator, List<String> playerTypes) {
-		tableId = UUID.randomUUID();
-		this.roomId = roomId;
-		this.numSeats = playerTypes.size();
-		this.gameType = gameType;
-		this.name = name;
-		this.controllerName = controllerName;
-		this.createTime = new Date();
-		createSeats(playerTypes);
-		this.validator = validator;
-	}
+    protected Table(UUID roomId, String gameType, String name, String controllerName, DeckValidator validator, List<String> playerTypes) {
+        tableId = UUID.randomUUID();
+        this.roomId = roomId;
+        this.numSeats = playerTypes.size();
+        this.gameType = gameType;
+        this.name = name;
+        this.controllerName = controllerName;
+        this.createTime = new Date();
+        createSeats(playerTypes);
+        this.validator = validator;
+    }
 
-	private void createSeats(List<String> playerTypes) {
-		int i = 0;
-		seats = new Seat[numSeats];
-		for(String playerType: playerTypes) {
-			seats[i] = new Seat(playerType);
-			i++;
-		}
-	}
+    private void createSeats(List<String> playerTypes) {
+        int i = 0;
+        seats = new Seat[numSeats];
+        for(String playerType: playerTypes) {
+            seats[i] = new Seat(playerType);
+            i++;
+        }
+    }
 
-	public UUID getId() {
-		return tableId;
-	}
+    public UUID getId() {
+        return tableId;
+    }
 
-	public UUID getRoomId() {
-		return roomId;
-	}
+    public UUID getRoomId() {
+        return roomId;
+    }
 
-	public void initGame() {
-		state = TableState.DUELING;
-	}
+    public void initGame() {
+        state = TableState.DUELING;
+    }
 
-	public void initTournament() {
-		state = TableState.DUELING;
-	}
+    public void initTournament() {
+        state = TableState.DUELING;
+    }
 
-	public void initDraft() {
-		state = TableState.DRAFTING;
-	}
+    public void initDraft() {
+        state = TableState.DRAFTING;
+    }
 
-	public void construct() {
-		state = TableState.CONSTRUCTING;
-	}
+    public void construct() {
+        state = TableState.CONSTRUCTING;
+    }
 
-	public void endGame() {
-		state = TableState.FINISHED;
-	}
+    public void endGame() {
+        state = TableState.FINISHED;
+    }
 
-	public String getGameType() {
-		return gameType;
-	}
+    public String getGameType() {
+        return gameType;
+    }
 
-	public String getDeckType() {
-		return validator.getName();
-	}
+    public String getDeckType() {
+        return validator.getName();
+    }
 
-	public Date getCreateTime() {
-		return createTime;
-	}
-	
-	public boolean isTournament() {
-		return this.isTournament;
-	}
+    public Date getCreateTime() {
+        return createTime;
+    }
 
-	public UUID joinTable(Player player, Seat seat) throws GameException {
-		if (seat.getPlayer() != null) {
-			throw new GameException("Seat is occupied.");
-		}
-		seat.setPlayer(player);
-		if (isReady())
-			state = TableState.STARTING;
-		return seat.getPlayer().getId();
-	}
+    public boolean isTournament() {
+        return this.isTournament;
+    }
 
-	private boolean isReady() {
-		for (int i = 0; i < numSeats; i++ ) {
-			if (seats[i].getPlayer() == null)
-				return false;
-		}
-		return true;
-	}
+    public UUID joinTable(Player player, Seat seat) throws GameException {
+        if (seat.getPlayer() != null) {
+            throw new GameException("Seat is occupied.");
+        }
+        seat.setPlayer(player);
+        if (isReady())
+            state = TableState.STARTING;
+        return seat.getPlayer().getId();
+    }
 
-	public Seat[] getSeats() {
-		return seats;
-	}
+    private boolean isReady() {
+        for (int i = 0; i < numSeats; i++ ) {
+            if (seats[i].getPlayer() == null)
+                return false;
+        }
+        return true;
+    }
 
-	public Seat getNextAvailableSeat(String playerType) {
-		for (int i = 0; i < numSeats; i++ ) {
-			if (seats[i].getPlayer() == null && seats[i].getPlayerType().equals(playerType))
-				return seats[i];
-		}
-		return null;
-	}
+    public Seat[] getSeats() {
+        return seats;
+    }
 
-	public void leaveTable(UUID playerId) {
-		for (int i = 0; i < numSeats; i++ ) {
+    public Seat getNextAvailableSeat(String playerType) {
+        for (int i = 0; i < numSeats; i++ ) {
+            if (seats[i].getPlayer() == null && seats[i].getPlayerType().equals(playerType))
+                return seats[i];
+        }
+        return null;
+    }
+
+    public void leaveTable(UUID playerId) {
+        for (int i = 0; i < numSeats; i++ ) {
             Player player = seats[i].getPlayer();
-			if (player != null && player.getId().equals(playerId)) {
-				seats[i].setPlayer(null);
-				if (state == TableState.STARTING)
-					state = TableState.WAITING;
-				break;
-			}
-		}
-	}
+            if (player != null && player.getId().equals(playerId)) {
+                seats[i].setPlayer(null);
+                if (state == TableState.STARTING)
+                    state = TableState.WAITING;
+                break;
+            }
+        }
+    }
 
-	public TableState getState() {
-		return state;
-	}
+    public TableState getState() {
+        return state;
+    }
 
-	public DeckValidator getValidator() {
-		return this.validator;
-	}
+    public DeckValidator getValidator() {
+        return this.validator;
+    }
 
-	public void sideboard() {
-		state = TableState.SIDEBOARDING;
-	}
+    public void sideboard() {
+        state = TableState.SIDEBOARDING;
+    }
 
-	public String getName() {
-		return this.name;
-	}
+    public String getName() {
+        return this.name;
+    }
 
-	public void addTableEventListener(Listener<TableEvent> listener) {
-		tableEventSource.addListener(listener);
-	}
+    public void addTableEventListener(Listener<TableEvent> listener) {
+        tableEventSource.addListener(listener);
+    }
 
-	public Match getMatch() {
-		return match;
-	}
+    public Match getMatch() {
+        return match;
+    }
 
-	public Tournament getTournament() {
-		return tournament;
-	}
+    public Tournament getTournament() {
+        return tournament;
+    }
 
-	public String getControllerName() {
-		return controllerName;
-	}
+    public String getControllerName() {
+        return controllerName;
+    }
 
 }

@@ -64,7 +64,7 @@ public class GiltspireAvenger extends CardImpl<GiltspireAvenger> {
         this.color.setGreen(true);
         this.color.setWhite(true);
         this.color.setBlue(true);
-        
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
@@ -75,8 +75,8 @@ public class GiltspireAvenger extends CardImpl<GiltspireAvenger> {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
         ability.addTarget(new GiltspireAvengerTarget());
         this.addAbility(ability);
-        
-    
+
+
     }
 
     public GiltspireAvenger(final GiltspireAvenger card) {
@@ -141,7 +141,7 @@ class GiltspireAvengerTarget<T extends TargetCreaturePermanent<T>> extends Targe
         }
         return false;
     }
-    
+
     @Override
     public GiltspireAvengerTarget copy() {
         return new GiltspireAvengerTarget(this);

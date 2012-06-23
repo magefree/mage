@@ -52,78 +52,78 @@ import mage.target.TargetCard;
  */
 public class SeaGateOracle extends CardImpl<SeaGateOracle> {
 
-	public SeaGateOracle(UUID ownerId) {
-		super(ownerId, 85, "Sea Gate Oracle", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
-		this.expansionSetCode = "ROE";
-		this.color.setBlue(true);
-		this.subtype.add("Human");
-		this.subtype.add("Wizard");
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(3);
-		this.addAbility(new EntersBattlefieldTriggeredAbility(new SeaGateOracleEffect(), false));
-	}
+    public SeaGateOracle(UUID ownerId) {
+        super(ownerId, 85, "Sea Gate Oracle", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
+        this.expansionSetCode = "ROE";
+        this.color.setBlue(true);
+        this.subtype.add("Human");
+        this.subtype.add("Wizard");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(3);
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SeaGateOracleEffect(), false));
+    }
 
 
-	public SeaGateOracle(final SeaGateOracle card) {
-		super(card);
-	}
+    public SeaGateOracle(final SeaGateOracle card) {
+        super(card);
+    }
 
-	@Override
-	public SeaGateOracle copy() {
-		return new SeaGateOracle(this);
-	}
+    @Override
+    public SeaGateOracle copy() {
+        return new SeaGateOracle(this);
+    }
 }
 
 class SeaGateOracleEffect extends OneShotEffect<SeaGateOracleEffect> {
 
-	private static FilterCard filter = new FilterCard("card to put in hand");
+    private static FilterCard filter = new FilterCard("card to put in hand");
 
-	public SeaGateOracleEffect() {
-		super(Outcome.DrawCard);
-		staticText = "look at the top two cards of your library. Put one of them into your hand and the other on the bottom of your library";
-	}
+    public SeaGateOracleEffect() {
+        super(Outcome.DrawCard);
+        staticText = "look at the top two cards of your library. Put one of them into your hand and the other on the bottom of your library";
+    }
 
-	public SeaGateOracleEffect(SeaGateOracleEffect effect) {
-		super(effect);
-	}
+    public SeaGateOracleEffect(SeaGateOracleEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-		if (player.getLibrary().size() > 0) {
-			if (player.getLibrary().size() == 1) {
-				Card card = player.getLibrary().removeFromTop(game);
-				card.moveToZone(Zone.HAND, source.getId(), game, false);
-			}
-			else {
-				Cards cards = new CardsImpl(Zone.PICK);
-				Card card = player.getLibrary().removeFromTop(game);
-				cards.add(card);
-				game.setZone(card.getId(), Zone.PICK);
-				card = player.getLibrary().removeFromTop(game);
-				cards.add(card);
-				game.setZone(card.getId(), Zone.PICK);
-				TargetCard target = new TargetCard(Zone.PICK, filter);
-				target.setRequired(true);
-				player.lookAtCards("Sea Gate Oracle", cards, game);
-				player.choose(Outcome.Benefit, cards, target, game);
-				card = cards.get(target.getFirstTarget(), game);
-				if (card != null) {
-					card.moveToZone(Zone.HAND, source.getId(), game, false);
-					cards.remove(card);
-				}
-				for (Card card1: cards.getCards(game)) {
-					card1.moveToZone(Zone.LIBRARY, source.getId(), game, false);
-				}
-			}
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player.getLibrary().size() > 0) {
+            if (player.getLibrary().size() == 1) {
+                Card card = player.getLibrary().removeFromTop(game);
+                card.moveToZone(Zone.HAND, source.getId(), game, false);
+            }
+            else {
+                Cards cards = new CardsImpl(Zone.PICK);
+                Card card = player.getLibrary().removeFromTop(game);
+                cards.add(card);
+                game.setZone(card.getId(), Zone.PICK);
+                card = player.getLibrary().removeFromTop(game);
+                cards.add(card);
+                game.setZone(card.getId(), Zone.PICK);
+                TargetCard target = new TargetCard(Zone.PICK, filter);
+                target.setRequired(true);
+                player.lookAtCards("Sea Gate Oracle", cards, game);
+                player.choose(Outcome.Benefit, cards, target, game);
+                card = cards.get(target.getFirstTarget(), game);
+                if (card != null) {
+                    card.moveToZone(Zone.HAND, source.getId(), game, false);
+                    cards.remove(card);
+                }
+                for (Card card1: cards.getCards(game)) {
+                    card1.moveToZone(Zone.LIBRARY, source.getId(), game, false);
+                }
+            }
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public SeaGateOracleEffect copy() {
-		return new SeaGateOracleEffect(this);
-	}
+    @Override
+    public SeaGateOracleEffect copy() {
+        return new SeaGateOracleEffect(this);
+    }
 
 }

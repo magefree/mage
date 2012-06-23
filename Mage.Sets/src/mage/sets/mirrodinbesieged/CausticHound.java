@@ -47,10 +47,10 @@ public class CausticHound extends CardImpl<CausticHound> {
         super(ownerId, 40, "Caustic Hound", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{B}");
         this.expansionSetCode = "MBS";
         this.subtype.add("Hound");
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
-		this.addAbility(new DiesTriggeredAbility(new LoseLifePlayersEffect(4)));
+        this.addAbility(new DiesTriggeredAbility(new LoseLifePlayersEffect(4)));
     }
 
     public CausticHound (final CausticHound card) {

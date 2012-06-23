@@ -37,20 +37,20 @@ import mage.Constants.Rarity;
  */
 public class PlatinumAngel extends mage.sets.tenth.PlatinumAngel {
 
-	public PlatinumAngel(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 218;
-		this.expansionSetCode = "M10";
-		this.rarity = Rarity.MYTHIC;
-	}
+    public PlatinumAngel(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 218;
+        this.expansionSetCode = "M10";
+        this.rarity = Rarity.MYTHIC;
+    }
 
-	public PlatinumAngel(final PlatinumAngel card) {
-		super(card);
-	}
+    public PlatinumAngel(final PlatinumAngel card) {
+        super(card);
+    }
 
-	@Override
-	public PlatinumAngel copy() {
-		return new PlatinumAngel(this);
-	}
+    @Override
+    public PlatinumAngel copy() {
+        return new PlatinumAngel(this);
+    }
 
 }

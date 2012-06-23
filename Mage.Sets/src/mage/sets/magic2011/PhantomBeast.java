@@ -43,25 +43,25 @@ import mage.cards.CardImpl;
  */
 public class PhantomBeast extends CardImpl<PhantomBeast> {
 
-	public PhantomBeast(UUID ownerId) {
-		super(ownerId, 69, "Phantom Beast", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Illusion");
-		this.subtype.add("Beast");
-        
-		this.color.setBlue(true);
-		this.power = new MageInt(4);
-		this.toughness = new MageInt(5);
+    public PhantomBeast(UUID ownerId) {
+        super(ownerId, 69, "Phantom Beast", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Illusion");
+        this.subtype.add("Beast");
 
-		this.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
-	}
+        this.color.setBlue(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(5);
 
-	public PhantomBeast(final PhantomBeast card) {
-		super(card);
-	}
+        this.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
+    }
 
-	@Override
-	public PhantomBeast copy() {
-		return new PhantomBeast(this);
-	}
+    public PhantomBeast(final PhantomBeast card) {
+        super(card);
+    }
+
+    @Override
+    public PhantomBeast copy() {
+        return new PhantomBeast(this);
+    }
 }

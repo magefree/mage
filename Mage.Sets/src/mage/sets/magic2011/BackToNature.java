@@ -41,26 +41,26 @@ import mage.filter.FilterPermanent;
  */
 public class BackToNature extends CardImpl<BackToNature> {
 
-	private static final FilterPermanent filter = new FilterPermanent("enchantments");
+    private static final FilterPermanent filter = new FilterPermanent("enchantments");
 
-	static {
-		filter.getCardType().add(CardType.ENCHANTMENT);
-	}
+    static {
+        filter.getCardType().add(CardType.ENCHANTMENT);
+    }
 
-	public BackToNature(UUID ownerId) {
-		super(ownerId, 164, "Back to Nature", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
-		this.expansionSetCode = "M11";
-		this.color.setGreen(true);
-		this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
-	}
+    public BackToNature(UUID ownerId) {
+        super(ownerId, 164, "Back to Nature", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
+        this.expansionSetCode = "M11";
+        this.color.setGreen(true);
+        this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
+    }
 
-	public BackToNature(final BackToNature card) {
-		super(card);
-	}
+    public BackToNature(final BackToNature card) {
+        super(card);
+    }
 
-	@Override
-	public BackToNature copy() {
-		return new BackToNature(this);
-	}
+    @Override
+    public BackToNature copy() {
+        return new BackToNature(this);
+    }
 
 }

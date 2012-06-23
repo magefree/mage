@@ -48,29 +48,29 @@ import mage.target.TargetPermanent;
  */
 public class VoltaicKey extends CardImpl<VoltaicKey> {
 
-	private static final FilterPermanent filter = new FilterPermanent("artifact");
+    private static final FilterPermanent filter = new FilterPermanent("artifact");
 
-	static {
-		filter.getCardType().add(CardType.ARTIFACT);
-		filter.setScopeCardType(ComparisonScope.Any);
-	}
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.setScopeCardType(ComparisonScope.Any);
+    }
 
-	public VoltaicKey(UUID ownerId) {
-		super(ownerId, 219, "Voltaic Key", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-		this.expansionSetCode = "M11";
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
+    public VoltaicKey(UUID ownerId) {
+        super(ownerId, 219, "Voltaic Key", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
+        this.expansionSetCode = "M11";
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
         ability.addManaCost(new GenericManaCost(1));
-		ability.addTarget(new TargetPermanent(filter));
-		this.addAbility(ability);
-	}
+        ability.addTarget(new TargetPermanent(filter));
+        this.addAbility(ability);
+    }
 
-	public VoltaicKey(final VoltaicKey card) {
-		super(card);
-	}
+    public VoltaicKey(final VoltaicKey card) {
+        super(card);
+    }
 
-	@Override
-	public VoltaicKey copy() {
-		return new VoltaicKey(this);
-	}
+    @Override
+    public VoltaicKey copy() {
+        return new VoltaicKey(this);
+    }
 
 }

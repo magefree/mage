@@ -9,28 +9,28 @@ import java.io.Serializable;
  */
 public class UserData implements Serializable {
 
-	protected int groupId;
-	protected int avatarId;
-	protected String privateKey;
+    protected int groupId;
+    protected int avatarId;
+    protected String privateKey;
 
-	public UserData(UserGroup userGroup, int avatarId) {
-		this.groupId = userGroup.getGroupId();
-		this.avatarId = avatarId;
-	}
+    public UserData(UserGroup userGroup, int avatarId) {
+        this.groupId = userGroup.getGroupId();
+        this.avatarId = avatarId;
+    }
 
-	public void setGroupId(int groupId) {
-		this.groupId = groupId;
-	}
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
+    }
 
-	public int getGroupId() {
-		return groupId;
-	}
+    public int getGroupId() {
+        return groupId;
+    }
 
-	public int getAvatarId() {
-		return avatarId;
-	}
+    public int getAvatarId() {
+        return avatarId;
+    }
 
-	public void setAvatarId(int avatarId) {
-		this.avatarId = avatarId;
-	}
+    public void setAvatarId(int avatarId) {
+        this.avatarId = avatarId;
+    }
 }

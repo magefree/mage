@@ -41,19 +41,19 @@ import mage.counters.common.LevelCounter;
  */
 public class LevelUpAbility extends ActivatedAbilityImpl<LevelUpAbility> {
 
-	public LevelUpAbility(ManaCosts costs) {
-		super(Zone.BATTLEFIELD, new AddCountersSourceEffect(new LevelCounter()), costs);
-		this.timing = TimingRule.SORCERY;
-	}
+    public LevelUpAbility(ManaCosts costs) {
+        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(new LevelCounter()), costs);
+        this.timing = TimingRule.SORCERY;
+    }
 
-	public LevelUpAbility(final LevelUpAbility ability) {
-		super(ability);
-	}
+    public LevelUpAbility(final LevelUpAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public LevelUpAbility copy() {
-		return new LevelUpAbility(this);
-	}
+    @Override
+    public LevelUpAbility copy() {
+        return new LevelUpAbility(this);
+    }
 
     @Override
     public String getRule() {

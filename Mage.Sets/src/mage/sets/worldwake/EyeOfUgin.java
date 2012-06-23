@@ -55,13 +55,13 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class EyeOfUgin extends CardImpl<EyeOfUgin> {
 
-	private static final FilterCreatureCard filter;
+    private static final FilterCreatureCard filter;
 
-	static {
-		filter = new FilterCreatureCard();
-		filter.setColorless(true);
-		filter.setUseColorless(true);
-	}
+    static {
+        filter = new FilterCreatureCard();
+        filter.setColorless(true);
+        filter.setUseColorless(true);
+    }
 
     public EyeOfUgin (UUID ownerId) {
         super(ownerId, 136, "Eye of Ugin", Rarity.MYTHIC, new CardType[]{CardType.LAND}, null);
@@ -69,9 +69,9 @@ public class EyeOfUgin extends CardImpl<EyeOfUgin> {
         this.supertype.add("Legendary");
         this.subtype.add("Land");
 
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EyeOfUginCostReductionEffect()));
-		Ability searchAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryRevealPutInHandEffect(new TargetCardInLibrary(filter)), new TapSourceCost());
-		searchAbility.addCost(new ManaCostsImpl("{7}"));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EyeOfUginCostReductionEffect()));
+        Ability searchAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryRevealPutInHandEffect(new TargetCardInLibrary(filter)), new TapSourceCost());
+        searchAbility.addCost(new ManaCostsImpl("{7}"));
         this.addAbility(searchAbility);
     }
 
@@ -87,44 +87,44 @@ public class EyeOfUgin extends CardImpl<EyeOfUgin> {
 
 class EyeOfUginCostReductionEffect extends CostModificationEffectImpl<EyeOfUginCostReductionEffect> {
 
-	private static final String effectText = "Colorless Eldrazi spells you cast cost {2} less to cast";
+    private static final String effectText = "Colorless Eldrazi spells you cast cost {2} less to cast";
 
-	EyeOfUginCostReductionEffect ( ) {
-		super(Duration.WhileOnBattlefield, Outcome.Benefit);
-		staticText = effectText;
-	}
+    EyeOfUginCostReductionEffect ( ) {
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        staticText = effectText;
+    }
 
-	EyeOfUginCostReductionEffect(EyeOfUginCostReductionEffect effect) {
-		super(effect);
-	}
+    EyeOfUginCostReductionEffect(EyeOfUginCostReductionEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source, Ability abilityToModify) {
-		SpellAbility spellAbility = (SpellAbility)abilityToModify;
-		int previousCost = spellAbility.getManaCostsToPay().convertedManaCost();
-		int adjustedCost = 0;
-		if ( (previousCost - 2) > 0 ) {
-			adjustedCost = previousCost - 2;
-		}
-		spellAbility.getManaCostsToPay().load("{" + adjustedCost + "}");
+    @Override
+    public boolean apply(Game game, Ability source, Ability abilityToModify) {
+        SpellAbility spellAbility = (SpellAbility)abilityToModify;
+        int previousCost = spellAbility.getManaCostsToPay().convertedManaCost();
+        int adjustedCost = 0;
+        if ( (previousCost - 2) > 0 ) {
+            adjustedCost = previousCost - 2;
+        }
+        spellAbility.getManaCostsToPay().load("{" + adjustedCost + "}");
 
-		return true;
-	}
-	
-	@Override
-	public boolean applies(Ability abilityToModify, Ability source, Game game) {
-		if ( abilityToModify instanceof SpellAbility ) {
-			Card sourceCard = game.getCard(((SpellAbility)abilityToModify).getSourceId());
-			if ( sourceCard != null && sourceCard.hasSubtype("Eldrazi") && sourceCard.getOwnerId().equals(source.getControllerId()) ) {
-				return true;
-			}
-		}
-		return false;
-	}
+        return true;
+    }
 
-	@Override
-	public EyeOfUginCostReductionEffect copy() {
-		return new EyeOfUginCostReductionEffect(this);
-	}
+    @Override
+    public boolean applies(Ability abilityToModify, Ability source, Game game) {
+        if ( abilityToModify instanceof SpellAbility ) {
+            Card sourceCard = game.getCard(((SpellAbility)abilityToModify).getSourceId());
+            if ( sourceCard != null && sourceCard.hasSubtype("Eldrazi") && sourceCard.getOwnerId().equals(source.getControllerId()) ) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public EyeOfUginCostReductionEffect copy() {
+        return new EyeOfUginCostReductionEffect(this);
+    }
 
 }

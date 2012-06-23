@@ -39,21 +39,21 @@ import java.util.GregorianCalendar;
  */
 public class MirrodinBesieged extends ExpansionSet {
 
-	private static final MirrodinBesieged fINSTANCE =  new MirrodinBesieged();
+    private static final MirrodinBesieged fINSTANCE =  new MirrodinBesieged();
 
-	public static MirrodinBesieged getInstance() {
-		return fINSTANCE;
-	}
+    public static MirrodinBesieged getInstance() {
+        return fINSTANCE;
+    }
 
-	private MirrodinBesieged() {
-		super("Mirrodin Besieged", "MBS", "seticon_mtgmbs", "mage.sets.mirrodinbesieged", new GregorianCalendar(2011, 1, 4).getTime(), SetType.EXPANSION);
-		this.blockName = "Mirrodin Besieged";
-		this.hasBoosters = true;
-		this.numBoosterLands = 1;
-		this.numBoosterCommon = 10;
-		this.numBoosterUncommon = 3;
-		this.numBoosterRare = 1;
-		this.ratioBoosterMythic = 8;
-	}
+    private MirrodinBesieged() {
+        super("Mirrodin Besieged", "MBS", "seticon_mtgmbs", "mage.sets.mirrodinbesieged", new GregorianCalendar(2011, 1, 4).getTime(), SetType.EXPANSION);
+        this.blockName = "Mirrodin Besieged";
+        this.hasBoosters = true;
+        this.numBoosterLands = 1;
+        this.numBoosterCommon = 10;
+        this.numBoosterUncommon = 3;
+        this.numBoosterRare = 1;
+        this.ratioBoosterMythic = 8;
+    }
 
 }

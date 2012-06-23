@@ -34,24 +34,24 @@ public class StackDialog extends IDialogPanel {
 
     private JLayeredPane jLayeredPane;
     private FeedbackPanel feedbackPanel;
-    
+
     private class CustomLabel extends JLabel {
 
-    	@Override
-    	public void paintComponent(Graphics g) {
-    		Graphics2D g2D = (Graphics2D)g;
-    		g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+        @Override
+        public void paintComponent(Graphics g) {
+            Graphics2D g2D = (Graphics2D)g;
+            g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                     RenderingHints.VALUE_ANTIALIAS_ON);
-    		
-    		g2D.setColor(Color.black);
-    		g2D.drawString(getText(), 1, 11);
-    		g2D.setColor(Color.white);
-    		g2D.drawString(getText(), 0, 10);
-    	}
-		
-		private static final long serialVersionUID = 1L;
+
+            g2D.setColor(Color.black);
+            g2D.drawString(getText(), 1, 11);
+            g2D.setColor(Color.white);
+            g2D.drawString(getText(), 0, 10);
+        }
+
+        private static final long serialVersionUID = 1L;
     };
-    
+
     /**
      * This is the default constructor
      */
@@ -69,15 +69,15 @@ public class StackDialog extends IDialogPanel {
      */
     private void initialize() {
 
-    	int w = getDlgParams().rect.width;
+        int w = getDlgParams().rect.width;
         int h = getDlgParams().rect.height;
 
-    	jLayeredPane = new JLayeredPane();
+        jLayeredPane = new JLayeredPane();
         add(jLayeredPane);
         jLayeredPane.setSize(w, h);
         jLayeredPane.setVisible(true);
         jLayeredPane.setOpaque(false);
-    	
+
         jTitle = new CustomLabel();
         jTitle.setBounds(new Rectangle(5, 3, w, 16));
         jTitle.setFont(new Font("Dialog", Font.BOLD, 14));
@@ -90,7 +90,7 @@ public class StackDialog extends IDialogPanel {
 
         this.setLayout(null);
         jLayeredPane.setLayout(null);
-        
+
         jLayeredPane.add(jTitle, null);
         //jLayeredPane.add(jTitle2, null);
         jLayeredPane.add(getJButtonAccept(), null);
@@ -98,19 +98,19 @@ public class StackDialog extends IDialogPanel {
 
         makeTransparent(jLayeredPane);
     }
-    
+
     private void displayStack(CardsView cards, UUID gameId, BigCard bigCard) {
 
         if (cards == null || cards.size() == 0) {
             return;
         }
-        
+
         /**
          * Display spells and theis targets above them
          */
         int dx = (SettingsManager.getInstance().getCardSize().width + 15) * (cards.size() - 1);
         int dy = 30;
-        
+
         for (CardView card : cards.values()) {
 
             if (card instanceof StackAbilityView) {
@@ -127,7 +127,7 @@ public class StackDialog extends IDialogPanel {
             cardImg.setLocation(dx, dy);
 
             jLayeredPane.add(cardImg, JLayeredPane.DEFAULT_LAYER, 1);
-            
+
             dx -= (SettingsManager.getInstance().getCardSize().width + 15);
         }
     }
@@ -138,7 +138,7 @@ public class StackDialog extends IDialogPanel {
         }
         return cardDimension;
     }
-    
+
     private HoverButton getJButtonAccept() {
         if (jButtonAccept == null) {
             jButtonAccept = new HoverButton("", ImageManagerImpl.getInstance().getDlgAcceptButtonImage(),
@@ -149,11 +149,11 @@ public class StackDialog extends IDialogPanel {
             int h = getDlgParams().rect.height - 90;
             jButtonAccept.setBounds(new Rectangle(w / 2 - 80, h - 50, 60, 60));
             //jButtonAccept.setBorder(BorderFactory.createLineBorder(Color.red));
-            
+
             jButtonAccept.setObserver(new Command() {
                 @Override
                 public void execute() {
-                	DialogManager.getManager().fadeOut((DialogContainer)getParent());
+                    DialogManager.getManager().fadeOut((DialogContainer)getParent());
                     //GameManager.getInputControl().getInput().selectButtonOK();
                     StackDialog.this.feedbackPanel.doClick();
                 }
@@ -172,11 +172,11 @@ public class StackDialog extends IDialogPanel {
             int w = getDlgParams().rect.width - 90;
             int h = getDlgParams().rect.height - 90;
             jButtonResponse.setBounds(new Rectangle(w / 2 + 5, h - 48, 60, 60));
-            
+
             jButtonResponse.setObserver(new Command() {
                 @Override
                 public void execute() {
-                	DialogManager.getManager().fadeOut((DialogContainer)getParent());
+                    DialogManager.getManager().fadeOut((DialogContainer)getParent());
                 }
                 private static final long serialVersionUID = 1L;
             });

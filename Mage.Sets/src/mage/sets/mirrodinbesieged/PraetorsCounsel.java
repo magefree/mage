@@ -47,50 +47,50 @@ import mage.players.Player;
  */
 public class PraetorsCounsel extends CardImpl<PraetorsCounsel> {
 
-	public PraetorsCounsel(UUID ownerId) {
-		super(ownerId, 88, "Praetor's Counsel", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{5}{G}{G}{G}");
-		this.expansionSetCode = "MBS";
-		this.color.setGreen(true);
-		this.getSpellAbility().addEffect(new PraetorsCounselEffect());
-		this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
-		this.getSpellAbility().addEffect(new MaximumHandSizeControllerEffect(Integer.MAX_VALUE, Duration.EndOfGame, false));
-	}
+    public PraetorsCounsel(UUID ownerId) {
+        super(ownerId, 88, "Praetor's Counsel", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{5}{G}{G}{G}");
+        this.expansionSetCode = "MBS";
+        this.color.setGreen(true);
+        this.getSpellAbility().addEffect(new PraetorsCounselEffect());
+        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new MaximumHandSizeControllerEffect(Integer.MAX_VALUE, Duration.EndOfGame, false));
+    }
 
-	public PraetorsCounsel(final PraetorsCounsel card) {
-		super(card);
-	}
+    public PraetorsCounsel(final PraetorsCounsel card) {
+        super(card);
+    }
 
-	@Override
-	public PraetorsCounsel copy() {
-		return new PraetorsCounsel(this);
-	}
+    @Override
+    public PraetorsCounsel copy() {
+        return new PraetorsCounsel(this);
+    }
 
 }
 
 class PraetorsCounselEffect extends OneShotEffect<PraetorsCounselEffect> {
 
-	public PraetorsCounselEffect() {
-		super(Outcome.DrawCard);
-		this.staticText = "Return all cards from your graveyard to your hand";
-	}
+    public PraetorsCounselEffect() {
+        super(Outcome.DrawCard);
+        this.staticText = "Return all cards from your graveyard to your hand";
+    }
 
-	public PraetorsCounselEffect(final PraetorsCounselEffect effect) {
-		super(effect);
-	}
+    public PraetorsCounselEffect(final PraetorsCounselEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public PraetorsCounselEffect copy() {
-		return new PraetorsCounselEffect(this);
-	}
+    @Override
+    public PraetorsCounselEffect copy() {
+        return new PraetorsCounselEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-		for (Card card: player.getGraveyard().getCards(game)) {
-			player.putInHand(card, game);
-		}
-		player.getGraveyard().clear();
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        for (Card card: player.getGraveyard().getCards(game)) {
+            player.putInHand(card, game);
+        }
+        player.getGraveyard().clear();
+        return false;
+    }
 
 }

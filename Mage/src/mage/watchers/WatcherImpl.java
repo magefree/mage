@@ -39,47 +39,47 @@ import mage.Constants.WatcherScope;
  */
 public abstract class WatcherImpl<T extends WatcherImpl<T>> implements Watcher<T> {
 
-	protected UUID controllerId;
+    protected UUID controllerId;
     protected UUID sourceId;
-	protected String key;
-	protected boolean condition;
+    protected String key;
+    protected boolean condition;
     protected WatcherScope scope;
 
     public WatcherImpl(String key, WatcherScope scope) {
-		this.key = key;
+        this.key = key;
         this.scope = scope;
-	}
+    }
 
-	public WatcherImpl(final WatcherImpl watcher) {
-		this.condition = watcher.condition;
-		this.key = watcher.key;
-		this.controllerId = watcher.controllerId;
+    public WatcherImpl(final WatcherImpl watcher) {
+        this.condition = watcher.condition;
+        this.key = watcher.key;
+        this.controllerId = watcher.controllerId;
         this.sourceId = watcher.sourceId;
         this.scope = watcher.scope;
-	}
+    }
 
-	@Override
-	public UUID getControllerId() {
-		return controllerId;
-	}
+    @Override
+    public UUID getControllerId() {
+        return controllerId;
+    }
 
-	@Override
-	public void setControllerId(UUID controllerId) {
-		this.controllerId = controllerId;
-	}
+    @Override
+    public void setControllerId(UUID controllerId) {
+        this.controllerId = controllerId;
+    }
 
     @Override
     public UUID getSourceId() {
         return sourceId;
     }
-    
+
     @Override
     public void setSourceId(UUID sourceId) {
         this.sourceId = sourceId;
     }
-    
-	@Override
-	public String getKey() {
+
+    @Override
+    public String getKey() {
         switch (scope) {
             case GAME:
                 return key;
@@ -88,17 +88,17 @@ public abstract class WatcherImpl<T extends WatcherImpl<T>> implements Watcher<T
             case CARD:
                 return sourceId + key;
         }
-		return key;
-	}
+        return key;
+    }
 
-	@Override
-	public boolean conditionMet() {
-		return condition;
-	}
+    @Override
+    public boolean conditionMet() {
+        return condition;
+    }
 
-	@Override
-	public void reset() {
-		condition = false;
-	}
+    @Override
+    public void reset() {
+        condition = false;
+    }
 
 }

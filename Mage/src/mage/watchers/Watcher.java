@@ -39,14 +39,14 @@ import mage.game.events.GameEvent;
  */
 public interface Watcher<T extends Watcher<T>> extends Serializable {
 
-	public UUID getControllerId();
-	public void setControllerId(UUID controllerId);
+    public UUID getControllerId();
+    public void setControllerId(UUID controllerId);
     public UUID getSourceId();
     public void setSourceId(UUID sourceId);
-	public String getKey();
-	public void watch(GameEvent event, Game game);
-	public boolean conditionMet();
-	public void reset();
-	
-	public abstract T copy();
+    public String getKey();
+    public void watch(GameEvent event, Game game);
+    public boolean conditionMet();
+    public void reset();
+
+    public abstract T copy();
 }

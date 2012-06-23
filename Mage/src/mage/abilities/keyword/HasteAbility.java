@@ -38,28 +38,28 @@ import mage.abilities.StaticAbility;
  */
 public class HasteAbility extends StaticAbility<HasteAbility> {
 
-	private static final HasteAbility fINSTANCE =  new HasteAbility();
+    private static final HasteAbility fINSTANCE =  new HasteAbility();
 
-	private Object readResolve() throws ObjectStreamException {
-		return fINSTANCE;
-	}
+    private Object readResolve() throws ObjectStreamException {
+        return fINSTANCE;
+    }
 
-	public static HasteAbility getInstance() {
-		return fINSTANCE;
-	}
+    public static HasteAbility getInstance() {
+        return fINSTANCE;
+    }
 
-	private HasteAbility() {
-		super(Zone.BATTLEFIELD, null);
-	}
+    private HasteAbility() {
+        super(Zone.BATTLEFIELD, null);
+    }
 
-	@Override
-	public String getRule() {
-		return "Haste";
-	}
+    @Override
+    public String getRule() {
+        return "Haste";
+    }
 
-	@Override
-	public HasteAbility copy() {
-		return fINSTANCE;
-	}
+    @Override
+    public HasteAbility copy() {
+        return fINSTANCE;
+    }
 
 }

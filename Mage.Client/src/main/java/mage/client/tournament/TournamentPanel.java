@@ -59,94 +59,94 @@ import org.apache.log4j.Logger;
  */
 public class TournamentPanel extends javax.swing.JPanel {
 
-	private final static Logger logger = Logger.getLogger(TournamentPanel.class);
+    private final static Logger logger = Logger.getLogger(TournamentPanel.class);
 
-	private UUID tournamentId;
-	private Session session;
-	private TournamentPlayersTableModel playersModel;
-	private TournamentMatchesTableModel matchesModel;
-	private UpdateTournamentTask updateTask;
+    private UUID tournamentId;
+    private Session session;
+    private TournamentPlayersTableModel playersModel;
+    private TournamentMatchesTableModel matchesModel;
+    private UpdateTournamentTask updateTask;
 
-	/** Creates new form TournamentPanel */
+    /** Creates new form TournamentPanel */
     public TournamentPanel() {
-		playersModel = new TournamentPlayersTableModel();
-		matchesModel = new TournamentMatchesTableModel();
-		
-		initComponents();
+        playersModel = new TournamentPlayersTableModel();
+        matchesModel = new TournamentMatchesTableModel();
 
-		tablePlayers.createDefaultColumnsFromModel();
-		tableMatches.createDefaultColumnsFromModel();
+        initComponents();
 
-		chatPanel1.useExtendedView(ChatPanel.VIEW_MODE.NONE);
+        tablePlayers.createDefaultColumnsFromModel();
+        tableMatches.createDefaultColumnsFromModel();
 
-		Action action = new AbstractAction()
-		{
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				int modelRow = Integer.valueOf( e.getActionCommand() );
-				UUID gameId = UUID.fromString((String)tableMatches.getValueAt(modelRow, 3));
-				String state = (String)tableMatches.getValueAt(modelRow, 4);
+        chatPanel1.useExtendedView(ChatPanel.VIEW_MODE.NONE);
 
-				if (state.equals("Finished")) {
-					logger.info("Replaying game " + gameId);
-					session.replayGame(gameId);
-				}
-			}
-		};
+        Action action = new AbstractAction()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                int modelRow = Integer.valueOf( e.getActionCommand() );
+                UUID gameId = UUID.fromString((String)tableMatches.getValueAt(modelRow, 3));
+                String state = (String)tableMatches.getValueAt(modelRow, 4);
 
-		ButtonColumn buttonColumn = new ButtonColumn(tableMatches, action, 6);
+                if (state.equals("Finished")) {
+                    logger.info("Replaying game " + gameId);
+                    session.replayGame(gameId);
+                }
+            }
+        };
+
+        ButtonColumn buttonColumn = new ButtonColumn(tableMatches, action, 6);
 
     }
 
-	public synchronized void showTournament(UUID tournamentId) {
-		this.tournamentId = tournamentId;
-		session = MageFrame.getSession();
-		MageFrame.addTournament(tournamentId, this);
-		UUID chatRoomId = session.getTournamentChatId(tournamentId);
-		if (session.joinTournament(tournamentId) && chatRoomId != null) {
-			this.chatPanel1.connect(chatRoomId);
-			startTasks();
-			this.setVisible(true);
-			this.repaint();
-		}
-		else {
-			hideTournament();
-		}
-	}
+    public synchronized void showTournament(UUID tournamentId) {
+        this.tournamentId = tournamentId;
+        session = MageFrame.getSession();
+        MageFrame.addTournament(tournamentId, this);
+        UUID chatRoomId = session.getTournamentChatId(tournamentId);
+        if (session.joinTournament(tournamentId) && chatRoomId != null) {
+            this.chatPanel1.connect(chatRoomId);
+            startTasks();
+            this.setVisible(true);
+            this.repaint();
+        }
+        else {
+            hideTournament();
+        }
+    }
 
-	public void hideTournament() {
-		stopTasks();
-		this.chatPanel1.disconnect();
-		Component c = this.getParent();
-		while (c != null && !(c instanceof TournamentPane)) {
-			c = c.getParent();
-		}
-		if (c != null) {
-			((TournamentPane)c).hideFrame();
-		}
-	}
+    public void hideTournament() {
+        stopTasks();
+        this.chatPanel1.disconnect();
+        Component c = this.getParent();
+        while (c != null && !(c instanceof TournamentPane)) {
+            c = c.getParent();
+        }
+        if (c != null) {
+            ((TournamentPane)c).hideFrame();
+        }
+    }
 
-	public void update(TournamentView tournament) {
-		playersModel.loadData(tournament);
-		matchesModel.loadData(tournament);
-		this.tablePlayers.repaint();
-		this.tableMatches.repaint();
-	}
-	
-	public void startTasks() {
-		if (session != null) {
-			if (updateTask == null || updateTask.isDone()) {
-				updateTask = new UpdateTournamentTask(session, tournamentId, this);
-				updateTask.execute();
-			}
-		}
-	}
-	
-	public void stopTasks() {
-		if (updateTask != null)
-			updateTask.cancel(true);
-	}
+    public void update(TournamentView tournament) {
+        playersModel.loadData(tournament);
+        matchesModel.loadData(tournament);
+        this.tablePlayers.repaint();
+        this.tableMatches.repaint();
+    }
+
+    public void startTasks() {
+        if (session != null) {
+            if (updateTask == null || updateTask.isDone()) {
+                updateTask = new UpdateTournamentTask(session, tournamentId, this);
+                updateTask.execute();
+            }
+        }
+    }
+
+    public void stopTasks() {
+        if (updateTask != null)
+            updateTask.cancel(true);
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -203,38 +203,38 @@ public class TournamentPanel extends javax.swing.JPanel {
 
 class TournamentPlayersTableModel extends AbstractTableModel {
     private String[] columnNames = new String[]{"Player Name", "Points", "Results"};
-	private TournamentPlayerView[] players = new TournamentPlayerView[0];
+    private TournamentPlayerView[] players = new TournamentPlayerView[0];
 
-	public void loadData(TournamentView tournament) {
-		players = tournament.getPlayers().toArray(new TournamentPlayerView[0]);
-		this.fireTableDataChanged();
-	}
+    public void loadData(TournamentView tournament) {
+        players = tournament.getPlayers().toArray(new TournamentPlayerView[0]);
+        this.fireTableDataChanged();
+    }
 
-	@Override
-	public int getRowCount() {
-		return players.length;
-	}
+    @Override
+    public int getRowCount() {
+        return players.length;
+    }
 
-	@Override
-	public int getColumnCount() {
-		return columnNames.length;
-	}
+    @Override
+    public int getColumnCount() {
+        return columnNames.length;
+    }
 
-	@Override
-	public Object getValueAt(int arg0, int arg1) {
-		switch (arg1) {
-			case 0:
-				return players[arg0].getName();
-			case 1:
-				return Integer.toString(players[arg0].getPoints());
-			case 2:
-				return players[arg0].getResults();
-		}
-		return "";
-	}
+    @Override
+    public Object getValueAt(int arg0, int arg1) {
+        switch (arg1) {
+            case 0:
+                return players[arg0].getName();
+            case 1:
+                return Integer.toString(players[arg0].getPoints());
+            case 2:
+                return players[arg0].getResults();
+        }
+        return "";
+    }
 
-	@Override
-	public String getColumnName(int columnIndex) {
+    @Override
+    public String getColumnName(int columnIndex) {
         String colName = "";
 
         if (columnIndex <= getColumnCount())
@@ -243,69 +243,69 @@ class TournamentPlayersTableModel extends AbstractTableModel {
         return colName;
     }
 
-	@Override
+    @Override
     public Class getColumnClass(int columnIndex){
-		return String.class;
+        return String.class;
     }
 
-	@Override
+    @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-		return false;
+        return false;
     }
 
 }
 
 class TournamentMatchesTableModel extends AbstractTableModel {
     private String[] columnNames = new String[]{"Round Number", "Players", "Match Id", "Game Id", "State", "Result", "Action"};
-	private TournamentGameView[] games = new TournamentGameView[0];
+    private TournamentGameView[] games = new TournamentGameView[0];
 
-	public void loadData(TournamentView tournament) {
-		List<TournamentGameView> views = new ArrayList<TournamentGameView>();
-		for (RoundView round: tournament.getRounds()) {
-			for (TournamentGameView game: round.getGames()) {
-				views.add(game);
-			}
-		}
-		games = views.toArray(new TournamentGameView[0]);
-		this.fireTableDataChanged();
-	}
+    public void loadData(TournamentView tournament) {
+        List<TournamentGameView> views = new ArrayList<TournamentGameView>();
+        for (RoundView round: tournament.getRounds()) {
+            for (TournamentGameView game: round.getGames()) {
+                views.add(game);
+            }
+        }
+        games = views.toArray(new TournamentGameView[0]);
+        this.fireTableDataChanged();
+    }
 
-	@Override
-	public int getRowCount() {
-		return games.length;
-	}
+    @Override
+    public int getRowCount() {
+        return games.length;
+    }
 
-	@Override
-	public int getColumnCount() {
-		return columnNames.length;
-	}
+    @Override
+    public int getColumnCount() {
+        return columnNames.length;
+    }
 
-	@Override
-	public Object getValueAt(int arg0, int arg1) {
-		switch (arg1) {
-			case 0:
-				return Integer.toString(games[arg0].getRoundNum());
-			case 1:
-				return games[arg0].getPlayers();
-			case 2:
-				return games[arg0].getMatchId().toString();
-			case 3:
-				return games[arg0].getGameId().toString();
-			case 4:
-				return games[arg0].getState();
-			case 5:
-				return games[arg0].getResult();
-			case 6:
-				if (games[arg0].getState().equals("Finished")) {
-					return "Replay";
-				}
-				return "";
-		}
-		return "";
-	}
+    @Override
+    public Object getValueAt(int arg0, int arg1) {
+        switch (arg1) {
+            case 0:
+                return Integer.toString(games[arg0].getRoundNum());
+            case 1:
+                return games[arg0].getPlayers();
+            case 2:
+                return games[arg0].getMatchId().toString();
+            case 3:
+                return games[arg0].getGameId().toString();
+            case 4:
+                return games[arg0].getState();
+            case 5:
+                return games[arg0].getResult();
+            case 6:
+                if (games[arg0].getState().equals("Finished")) {
+                    return "Replay";
+                }
+                return "";
+        }
+        return "";
+    }
 
-	@Override
-	public String getColumnName(int columnIndex) {
+    @Override
+    public String getColumnName(int columnIndex) {
         String colName = "";
 
         if (columnIndex <= getColumnCount())
@@ -314,57 +314,57 @@ class TournamentMatchesTableModel extends AbstractTableModel {
         return colName;
     }
 
-	@Override
+    @Override
     public Class getColumnClass(int columnIndex){
-		return String.class;
+        return String.class;
     }
 
-	@Override
+    @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-		if (columnIndex != 6)
-			return false;
-		return true;
+        if (columnIndex != 6)
+            return false;
+        return true;
     }
 
 }
 
 class UpdateTournamentTask extends SwingWorker<Void, TournamentView> {
 
-	private Session session;
-	private UUID tournamentId;
-	private TournamentPanel panel;
+    private Session session;
+    private UUID tournamentId;
+    private TournamentPanel panel;
 
-	private final static Logger logger = Logger.getLogger(UpdateTournamentTask.class);
+    private final static Logger logger = Logger.getLogger(UpdateTournamentTask.class);
 
-	UpdateTournamentTask(Session session, UUID tournamentId, TournamentPanel panel) {
-		this.session = session;
-		this.tournamentId = tournamentId;
-		this.panel = panel;
-	}
+    UpdateTournamentTask(Session session, UUID tournamentId, TournamentPanel panel) {
+        this.session = session;
+        this.tournamentId = tournamentId;
+        this.panel = panel;
+    }
 
-	@Override
-	protected Void doInBackground() throws Exception {
-		while (!isCancelled()) {
-			this.publish(session.getTournament(tournamentId));	
-			Thread.sleep(1000);
-		}
-		return null;
-	}
+    @Override
+    protected Void doInBackground() throws Exception {
+        while (!isCancelled()) {
+            this.publish(session.getTournament(tournamentId));    
+            Thread.sleep(1000);
+        }
+        return null;
+    }
 
-	@Override
-	protected void process(List<TournamentView> view) {
-		panel.update(view.get(0));
-	}
-	
-	@Override
-	protected void done() {
-		try {
-			get();
-		} catch (InterruptedException ex) {
-			logger.fatal("Update Tournament Task error", ex);
-		} catch (ExecutionException ex) {
-			logger.fatal("Update Tournament Task error", ex);
-		} catch (CancellationException ex) {}
-	}
+    @Override
+    protected void process(List<TournamentView> view) {
+        panel.update(view.get(0));
+    }
+
+    @Override
+    protected void done() {
+        try {
+            get();
+        } catch (InterruptedException ex) {
+            logger.fatal("Update Tournament Task error", ex);
+        } catch (ExecutionException ex) {
+            logger.fatal("Update Tournament Task error", ex);
+        } catch (CancellationException ex) {}
+    }
 
 }

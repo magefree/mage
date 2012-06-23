@@ -646,7 +646,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
         }
         return 0;
     }
-    
+
     private int checkProtectionAbilities(GameEvent event, UUID sourceId, Game game) {
         MageObject source = game.getObject(sourceId);
         if (source != null && hasProtectionFrom(source, game)) {

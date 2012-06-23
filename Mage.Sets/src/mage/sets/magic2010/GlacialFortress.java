@@ -49,32 +49,32 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class GlacialFortress extends CardImpl<GlacialFortress> {
 
-	private static final FilterLandPermanent filter = new FilterLandPermanent();
+    private static final FilterLandPermanent filter = new FilterLandPermanent();
 
-	static {
-		filter.getSubtype().add("Plains");
-		filter.getSubtype().add("Island");
-		filter.setScopeSubtype(ComparisonScope.Any);
-		filter.setMessage("Plains or an Island");
-	}
+    static {
+        filter.getSubtype().add("Plains");
+        filter.getSubtype().add("Island");
+        filter.setScopeSubtype(ComparisonScope.Any);
+        filter.setMessage("Plains or an Island");
+    }
 
-	public GlacialFortress(UUID ownerId) {
-		super(ownerId, 226, "Glacial Fortress", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-		this.expansionSetCode = "M10";
+    public GlacialFortress(UUID ownerId) {
+        super(ownerId, 226, "Glacial Fortress", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+        this.expansionSetCode = "M10";
 
-		Condition controls = new UnlessCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0));
-		String abilityText = "tap it unless you control a " + filter.getMessage();
-		this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
-		this.addAbility(new BlueManaAbility());
-		this.addAbility(new WhiteManaAbility());
-	}
+        Condition controls = new UnlessCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0));
+        String abilityText = "tap it unless you control a " + filter.getMessage();
+        this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
+        this.addAbility(new BlueManaAbility());
+        this.addAbility(new WhiteManaAbility());
+    }
 
-	public GlacialFortress(final GlacialFortress card) {
-		super(card);
-	}
+    public GlacialFortress(final GlacialFortress card) {
+        super(card);
+    }
 
-	@Override
-	public GlacialFortress copy() {
-		return new GlacialFortress(this);
-	}
+    @Override
+    public GlacialFortress copy() {
+        return new GlacialFortress(this);
+    }
 }

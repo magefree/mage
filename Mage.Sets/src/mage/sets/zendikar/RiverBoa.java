@@ -45,24 +45,24 @@ import mage.cards.CardImpl;
  */
 public class RiverBoa extends CardImpl<RiverBoa> {
 
-	public RiverBoa(UUID ownerId) {
-		super(ownerId, 180, "River Boa", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-		this.expansionSetCode = "ZEN";
-		this.color.setGreen(true);
-		this.subtype.add("Snake");
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(1);
-		this.addAbility(new IslandwalkAbility());
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{G}")));
-	}
+    public RiverBoa(UUID ownerId) {
+        super(ownerId, 180, "River Boa", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
+        this.expansionSetCode = "ZEN";
+        this.color.setGreen(true);
+        this.subtype.add("Snake");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
+        this.addAbility(new IslandwalkAbility());
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{G}")));
+    }
 
-	public RiverBoa(final RiverBoa card) {
-		super(card);
-	}
+    public RiverBoa(final RiverBoa card) {
+        super(card);
+    }
 
-	@Override
-	public RiverBoa copy() {
-		return new RiverBoa(this);
-	}
+    @Override
+    public RiverBoa copy() {
+        return new RiverBoa(this);
+    }
 
 }

@@ -49,89 +49,89 @@ import mage.view.CardsView;
 */
 public class PickPileDialog extends MageDialog {
 
-	private CardArea pile1;
-	private CardArea pile2;
-	
-	private boolean pickedPile1 = false;
-	
-	/**
-	 * Create the frame.
-	 */
+    private CardArea pile1;
+    private CardArea pile2;
+
+    private boolean pickedPile1 = false;
+
+    /**
+     * Create the frame.
+     */
     public PickPileDialog() {
-		getContentPane().setLayout(new BorderLayout(0, 0));
-		
-		JPanel panel = new JPanel();
-		getContentPane().add(panel, BorderLayout.WEST);
-		panel.setLayout(new BorderLayout(0, 0));
-		
-		pile1 = new CardArea();
-		panel.add(pile1, BorderLayout.CENTER);
-		
-		JButton btnChoosePile1 = new JButton("Pile 1");
-		btnChoosePile1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				btnPile1ActionPerformed(e);
-			}
-		});
-		panel.add(btnChoosePile1, BorderLayout.NORTH);
-		
-		JPanel panel_1 = new JPanel();
-		getContentPane().add(panel_1, BorderLayout.EAST);
-		panel_1.setLayout(new BorderLayout(0, 0));
-		
-		pile2 = new CardArea();
-		panel_1.add(pile2, BorderLayout.CENTER);
-		
-		JButton btnChoosePile2 = new JButton("Pile 2");
-		btnChoosePile2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				btnPile2ActionPerformed(e);
-			}
-		});
-		panel_1.add(btnChoosePile2, BorderLayout.NORTH);
+        getContentPane().setLayout(new BorderLayout(0, 0));
+
+        JPanel panel = new JPanel();
+        getContentPane().add(panel, BorderLayout.WEST);
+        panel.setLayout(new BorderLayout(0, 0));
+
+        pile1 = new CardArea();
+        panel.add(pile1, BorderLayout.CENTER);
+
+        JButton btnChoosePile1 = new JButton("Pile 1");
+        btnChoosePile1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                btnPile1ActionPerformed(e);
+            }
+        });
+        panel.add(btnChoosePile1, BorderLayout.NORTH);
+
+        JPanel panel_1 = new JPanel();
+        getContentPane().add(panel_1, BorderLayout.EAST);
+        panel_1.setLayout(new BorderLayout(0, 0));
+
+        pile2 = new CardArea();
+        panel_1.add(pile2, BorderLayout.CENTER);
+
+        JButton btnChoosePile2 = new JButton("Pile 2");
+        btnChoosePile2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                btnPile2ActionPerformed(e);
+            }
+        });
+        panel_1.add(btnChoosePile2, BorderLayout.NORTH);
     }
-    
+
     public void loadCards(String name, CardsView pile1, CardsView pile2, BigCard bigCard, CardDimensions dimension, UUID gameId) {
-		this.title = name;
-		this.pile1.loadCardsNarrow(pile1, bigCard, dimension, gameId, null);
-		this.pile2.loadCardsNarrow(pile2, bigCard, dimension, gameId, null);
-		
-		if (getParent() != MageFrame.getDesktop() /*|| this.isClosed*/) {
-			MageFrame.getDesktop().add(this, JLayeredPane.POPUP_LAYER);
-		}
-		pack();
+        this.title = name;
+        this.pile1.loadCardsNarrow(pile1, bigCard, dimension, gameId, null);
+        this.pile2.loadCardsNarrow(pile2, bigCard, dimension, gameId, null);
 
-		this.revalidate();
-		this.repaint();
-		this.setModal(true);
-		this.setVisible(true);
+        if (getParent() != MageFrame.getDesktop() /*|| this.isClosed*/) {
+            MageFrame.getDesktop().add(this, JLayeredPane.POPUP_LAYER);
+        }
+        pack();
 
-//		SwingUtilities.invokeLater(new Runnable() {
-//			@Override
-//			public void run() {
-//				int width = PickPileDialog.this.getWidth();
-//				int height = PickPileDialog.this.getWidth();
-//				if (width > 0 && height > 0) {
-//					Point centered = SettingsManager.getInstance().getComponentPosition(width, height);
-//					PickPileDialog.this.setLocation(centered.x, centered.y);
-//					GuiDisplayUtil.keepComponentInsideScreen(centered.x, centered.y, PickPileDialog.this);
-//				}
-//				PickPileDialog.this.setVisible(true);
-//			}
-//		});
-	}
-    
+        this.revalidate();
+        this.repaint();
+        this.setModal(true);
+        this.setVisible(true);
+
+//        SwingUtilities.invokeLater(new Runnable() {
+//            @Override
+//            public void run() {
+//                int width = PickPileDialog.this.getWidth();
+//                int height = PickPileDialog.this.getWidth();
+//                if (width > 0 && height > 0) {
+//                    Point centered = SettingsManager.getInstance().getComponentPosition(width, height);
+//                    PickPileDialog.this.setLocation(centered.x, centered.y);
+//                    GuiDisplayUtil.keepComponentInsideScreen(centered.x, centered.y, PickPileDialog.this);
+//                }
+//                PickPileDialog.this.setVisible(true);
+//            }
+//        });
+    }
+
     private void btnPile1ActionPerformed(java.awt.event.ActionEvent evt) {
-    	pickedPile1 = true;
-    	this.hideDialog();
+        pickedPile1 = true;
+        this.hideDialog();
     }
-    
+
     private void btnPile2ActionPerformed(java.awt.event.ActionEvent evt) {
-    	pickedPile1 = false;
-    	this.hideDialog();
+        pickedPile1 = false;
+        this.hideDialog();
     }
-    
+
     public boolean isPickedPile1() {
-    	return this.pickedPile1;
+        return this.pickedPile1;
     }
 }

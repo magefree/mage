@@ -42,48 +42,48 @@ import java.util.UUID;
  */
 public class PhyrexianManaCost extends ColoredManaCost {
 
-	public PhyrexianManaCost(ColoredManaSymbol mana) {
-		super(mana);
+    public PhyrexianManaCost(ColoredManaSymbol mana) {
+        super(mana);
         options.add(Mana.ColorlessMana(0));
-	}
+    }
 
-	public PhyrexianManaCost(PhyrexianManaCost manaCost) {
-		super(manaCost);
-	}
+    public PhyrexianManaCost(PhyrexianManaCost manaCost) {
+        super(manaCost);
+    }
 
-	@Override
-	public void assignPayment(Game game, Ability ability, ManaPool pool) {
-		if (assignColored(ability, game, pool, this.mana))
-			return;
-	}
+    @Override
+    public void assignPayment(Game game, Ability ability, ManaPool pool) {
+        if (assignColored(ability, game, pool, this.mana))
+            return;
+    }
 
-	@Override
-	public String getText() {
-		return "{" + mana.toString() + "P}";
-	}
+    @Override
+    public String getText() {
+        return "{" + mana.toString() + "P}";
+    }
 
-	@Override
-	public PhyrexianManaCost getUnpaid() {
-		return this;
-	}
+    @Override
+    public PhyrexianManaCost getUnpaid() {
+        return this;
+    }
 
-	@Override
-	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-		if (!game.getPlayer(controllerId).isLifeTotalCanChange()) {
-			return false;
-		}
-		return game.getPlayer(controllerId).getLife() >= 2;
-	}
+    @Override
+    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+        if (!game.getPlayer(controllerId).isLifeTotalCanChange()) {
+            return false;
+        }
+        return game.getPlayer(controllerId).getLife() >= 2;
+    }
 
-	@Override
-	public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-		this.paid = game.getPlayer(controllerId).loseLife(2, game) == 2;
-		return paid;
-	}
+    @Override
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+        this.paid = game.getPlayer(controllerId).loseLife(2, game) == 2;
+        return paid;
+    }
 
-	@Override
-	public PhyrexianManaCost copy() {
-		return new PhyrexianManaCost(this);
-	}
+    @Override
+    public PhyrexianManaCost copy() {
+        return new PhyrexianManaCost(this);
+    }
 }
 

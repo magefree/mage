@@ -47,52 +47,52 @@ import mage.players.Player;
  */
 public class LilianasSpecter extends CardImpl<LilianasSpecter> {
 
-	public LilianasSpecter(UUID ownerId) {
-		super(ownerId, 104, "Liliana's Specter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Specter");
-		this.color.setBlack(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(1);
+    public LilianasSpecter(UUID ownerId) {
+        super(ownerId, 104, "Liliana's Specter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Specter");
+        this.color.setBlack(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-		this.addAbility(FlyingAbility.getInstance());
-		this.addAbility(new EntersBattlefieldTriggeredAbility(new LilianasSpecterEffect(), false));
-	}
+        this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new LilianasSpecterEffect(), false));
+    }
 
-	public LilianasSpecter(final LilianasSpecter card) {
-		super(card);
-	}
+    public LilianasSpecter(final LilianasSpecter card) {
+        super(card);
+    }
 
-	@Override
-	public LilianasSpecter copy() {
-		return new LilianasSpecter(this);
-	}
+    @Override
+    public LilianasSpecter copy() {
+        return new LilianasSpecter(this);
+    }
 
 }
 
 class LilianasSpecterEffect extends OneShotEffect<LilianasSpecterEffect> {
 
-	public LilianasSpecterEffect() {
-		super(Outcome.Discard);
-		staticText = "each opponent discards a card";
-	}
+    public LilianasSpecterEffect() {
+        super(Outcome.Discard);
+        staticText = "each opponent discards a card";
+    }
 
-	public LilianasSpecterEffect(final LilianasSpecterEffect effect) {
-		super(effect);
-	}
+    public LilianasSpecterEffect(final LilianasSpecterEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		for (UUID playerId: game.getOpponents(source.getControllerId())) {
-			Player player = game.getPlayer(playerId);
-			player.discard(1, source, game);
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        for (UUID playerId: game.getOpponents(source.getControllerId())) {
+            Player player = game.getPlayer(playerId);
+            player.discard(1, source, game);
+        }
+        return true;
+    }
 
-	@Override
-	public LilianasSpecterEffect copy() {
-		return new LilianasSpecterEffect(this);
-	}
+    @Override
+    public LilianasSpecterEffect copy() {
+        return new LilianasSpecterEffect(this);
+    }
 
 }

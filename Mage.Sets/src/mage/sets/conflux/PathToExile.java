@@ -51,49 +51,49 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class PathToExile extends CardImpl<PathToExile> {
 
-	public PathToExile(UUID ownerId) {
-		super(ownerId, 15, "Path to Exile", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
-		this.expansionSetCode = "CON";
-		this.color.setWhite(true);
-		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-		this.getSpellAbility().addEffect(new PathToExileEffect());
-	}
+    public PathToExile(UUID ownerId) {
+        super(ownerId, 15, "Path to Exile", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
+        this.expansionSetCode = "CON";
+        this.color.setWhite(true);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addEffect(new PathToExileEffect());
+    }
 
-	public PathToExile(final PathToExile card) {
-		super(card);
-	}
+    public PathToExile(final PathToExile card) {
+        super(card);
+    }
 
-	@Override
-	public PathToExile copy() {
-		return new PathToExile(this);
-	}
+    @Override
+    public PathToExile copy() {
+        return new PathToExile(this);
+    }
 }
 
 class PathToExileEffect extends OneShotEffect {
 
-	public PathToExileEffect() {
-		super(Outcome.Exile);
-		staticText = "Exile target creature. Its controller may search his or her library for a basic land card, put that card onto the battlefield tapped, then shuffle his or her library";
-	}
+    public PathToExileEffect() {
+        super(Outcome.Exile);
+        staticText = "Exile target creature. Its controller may search his or her library for a basic land card, put that card onto the battlefield tapped, then shuffle his or her library";
+    }
 
-	public PathToExileEffect(final PathToExileEffect effect) {
-		super(effect);
-	}
+    public PathToExileEffect(final PathToExileEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public PathToExileEffect copy() {
-		return new PathToExileEffect(this);
-	}
+    @Override
+    public PathToExileEffect copy() {
+        return new PathToExileEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getFirstTarget());
-		if (permanent != null) {
-			Player player = game.getPlayer(permanent.getControllerId());
-			if (permanent.moveToZone(Zone.EXILED, source.getId(), game, false)) {
-				if (player.chooseUse(Outcome.PutCardInPlay, "Use Path to Exile effect?", game)) {
-					TargetCardInLibrary target = new TargetCardInLibrary(new FilterBasicLandCard());
-					if (player.searchLibrary(target, game)) {
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        if (permanent != null) {
+            Player player = game.getPlayer(permanent.getControllerId());
+            if (permanent.moveToZone(Zone.EXILED, source.getId(), game, false)) {
+                if (player.chooseUse(Outcome.PutCardInPlay, "Use Path to Exile effect?", game)) {
+                    TargetCardInLibrary target = new TargetCardInLibrary(new FilterBasicLandCard());
+                    if (player.searchLibrary(target, game)) {
                         Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
                         if (card != null) {
                             if (card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), permanent.getControllerId())) {
@@ -103,12 +103,12 @@ class PathToExileEffect extends OneShotEffect {
                             }
                         }
                     }
-					player.shuffleLibrary(game);
-				}
-				return true;
-			}
-		}
-		return false;
-	}
+                    player.shuffleLibrary(game);
+                }
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

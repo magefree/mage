@@ -41,32 +41,32 @@ import mage.game.Game;
  */
 public class RemoveSpecialActionEffect extends OneShotEffect<RemoveSpecialActionEffect> {
 
-	protected UUID actionId;
+    protected UUID actionId;
 
-	public RemoveSpecialActionEffect(UUID actionId) {
-		super(Outcome.Neutral);
-		this.actionId = actionId;
-	}
+    public RemoveSpecialActionEffect(UUID actionId) {
+        super(Outcome.Neutral);
+        this.actionId = actionId;
+    }
 
-	public RemoveSpecialActionEffect(final RemoveSpecialActionEffect effect) {
-		super(effect);
-		this.actionId = effect.actionId;
-	}
+    public RemoveSpecialActionEffect(final RemoveSpecialActionEffect effect) {
+        super(effect);
+        this.actionId = effect.actionId;
+    }
 
-	@Override
-	public RemoveSpecialActionEffect copy() {
-		return new RemoveSpecialActionEffect(this);
-	}
+    @Override
+    public RemoveSpecialActionEffect copy() {
+        return new RemoveSpecialActionEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		for (SpecialAction action: game.getState().getSpecialActions()) {
-			if (action.getId().equals(actionId)) {
-				game.getState().getSpecialActions().remove(action);
-				break;
-			}
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        for (SpecialAction action: game.getState().getSpecialActions()) {
+            if (action.getId().equals(actionId)) {
+                game.getState().getSpecialActions().remove(action);
+                break;
+            }
+        }
+        return true;
+    }
 
 }

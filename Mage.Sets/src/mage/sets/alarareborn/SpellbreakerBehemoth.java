@@ -47,33 +47,33 @@ import mage.filter.FilterSpell;
  */
 public class SpellbreakerBehemoth extends CardImpl<SpellbreakerBehemoth> {
 
-	private static FilterSpell filter = new FilterSpell("Creature spells you control with power 5 or greater");
+    private static FilterSpell filter = new FilterSpell("Creature spells you control with power 5 or greater");
 
-	static {
-		filter.getCardType().add(CardType.CREATURE);
-		filter.setPower(5);
-	}
+    static {
+        filter.getCardType().add(CardType.CREATURE);
+        filter.setPower(5);
+    }
 
-	public SpellbreakerBehemoth(UUID ownerId) {
-		super(ownerId, 60, "Spellbreaker Behemoth", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{G}{G}");
-		this.expansionSetCode = "ARB";
-		this.color.setRed(true);
-		this.color.setGreen(true);
-		this.subtype.add("Beast");
-		this.power = new MageInt(5);
-		this.toughness = new MageInt(5);
+    public SpellbreakerBehemoth(UUID ownerId) {
+        super(ownerId, 60, "Spellbreaker Behemoth", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{G}{G}");
+        this.expansionSetCode = "ARB";
+        this.color.setRed(true);
+        this.color.setGreen(true);
+        this.subtype.add("Beast");
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(5);
 
-		this.addAbility(new SimpleStaticAbility(Zone.STACK, new CantCounterSourceEffect()));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantCounterControlledEffect(filter, Duration.WhileOnBattlefield)));
-	}
+        this.addAbility(new SimpleStaticAbility(Zone.STACK, new CantCounterSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantCounterControlledEffect(filter, Duration.WhileOnBattlefield)));
+    }
 
-	public SpellbreakerBehemoth(final SpellbreakerBehemoth card) {
-		super(card);
-	}
+    public SpellbreakerBehemoth(final SpellbreakerBehemoth card) {
+        super(card);
+    }
 
-	@Override
-	public SpellbreakerBehemoth copy() {
-		return new SpellbreakerBehemoth(this);
-	}
-	
+    @Override
+    public SpellbreakerBehemoth copy() {
+        return new SpellbreakerBehemoth(this);
+    }
+
 }

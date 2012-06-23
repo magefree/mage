@@ -41,23 +41,23 @@ import mage.cards.CardImpl;
  */
 public class CanyonMinotaur extends CardImpl<CanyonMinotaur> {
 
-	public CanyonMinotaur(UUID ownerId) {
-		super(ownerId, 60, "Canyon Minotaur", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
-		this.expansionSetCode = "CON";
-		this.color.setRed(true);
-		this.subtype.add("Minotaur");
-		this.subtype.add("Warrior");
-		this.power = new MageInt(3);
-		this.toughness = new MageInt(3);
-	}
+    public CanyonMinotaur(UUID ownerId) {
+        super(ownerId, 60, "Canyon Minotaur", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
+        this.expansionSetCode = "CON";
+        this.color.setRed(true);
+        this.subtype.add("Minotaur");
+        this.subtype.add("Warrior");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+    }
 
-	public CanyonMinotaur(final CanyonMinotaur card) {
-		super(card);
-	}
+    public CanyonMinotaur(final CanyonMinotaur card) {
+        super(card);
+    }
 
-	@Override
-	public CanyonMinotaur copy() {
-		return new CanyonMinotaur(this);
-	}
+    @Override
+    public CanyonMinotaur copy() {
+        return new CanyonMinotaur(this);
+    }
 
 }

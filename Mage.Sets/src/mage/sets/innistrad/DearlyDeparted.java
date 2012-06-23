@@ -54,7 +54,7 @@ public class DearlyDeparted extends CardImpl<DearlyDeparted> {
     private static final FilterCreaturePermanent filterHuman = new FilterCreaturePermanent("Human creatures");
 
     private static final String ruleText = "As long as Dearly Departed is in your graveyard, each Human creature you control enters the battlefield with an additional +1/+1 counter on it";
-    
+
     static {
         filterHuman.getSubtype().add("Human");
         filterHuman.setScopeSubtype(Filter.ComparisonScope.Any);

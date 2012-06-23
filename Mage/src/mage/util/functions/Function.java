@@ -31,5 +31,5 @@ package mage.util.functions;
  * @author nantuko
  */
 public interface Function<X, Y> {
-	public X apply(Y in);
+    public X apply(Y in);
 }

@@ -46,7 +46,7 @@ public class SamuraiEnforcers extends CardImpl<SamuraiEnforcers> {
         this.expansionSetCode = "CHK";
         this.subtype.add("Human");
         this.subtype.add("Samurai");
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         this.addAbility(new BushidoAbility(2));

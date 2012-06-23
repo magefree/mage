@@ -57,7 +57,7 @@ public class ArgentSphinx extends CardImpl<ArgentSphinx> {
         super(ownerId, 28, "Argent Sphinx", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Sphinx");
-		this.color.setBlue(true);
+        this.color.setBlue(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());
@@ -79,36 +79,36 @@ public class ArgentSphinx extends CardImpl<ArgentSphinx> {
 
 class ArgentSphinxEffect extends OneShotEffect<ArgentSphinxEffect> {
 
-	private static final String effectText = "Exile {this}. Return it to the battlefield under your control at the beginning of the next end step";
+    private static final String effectText = "Exile {this}. Return it to the battlefield under your control at the beginning of the next end step";
 
-	ArgentSphinxEffect ( ) {
-		super(Constants.Outcome.Benefit);
-		staticText = effectText;
-	}
+    ArgentSphinxEffect ( ) {
+        super(Constants.Outcome.Benefit);
+        staticText = effectText;
+    }
 
-	ArgentSphinxEffect(ArgentSphinxEffect effect) {
-		super(effect);
-	}
+    ArgentSphinxEffect(ArgentSphinxEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getSourceId());
-		if (permanent != null) {
-			if (permanent.moveToExile(source.getSourceId(), "Argent Sphinx Exile", source.getId(), game)) {
-				//create delayed triggered ability
-				AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
-				delayedAbility.setSourceId(source.getSourceId());
-				delayedAbility.setControllerId(source.getControllerId());
-				game.addDelayedTriggeredAbility(delayedAbility);
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            if (permanent.moveToExile(source.getSourceId(), "Argent Sphinx Exile", source.getId(), game)) {
+                //create delayed triggered ability
+                AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
+                delayedAbility.setSourceId(source.getSourceId());
+                delayedAbility.setControllerId(source.getControllerId());
+                game.addDelayedTriggeredAbility(delayedAbility);
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public ArgentSphinxEffect copy() {
-		return new ArgentSphinxEffect(this);
-	}
+    @Override
+    public ArgentSphinxEffect copy() {
+        return new ArgentSphinxEffect(this);
+    }
 
 }

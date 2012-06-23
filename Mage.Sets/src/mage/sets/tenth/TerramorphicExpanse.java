@@ -47,40 +47,40 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class TerramorphicExpanse extends CardImpl<TerramorphicExpanse> {
 
-	public TerramorphicExpanse(UUID ownerId) {
-		super(ownerId, 360, "Terramorphic Expanse", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
-		this.expansionSetCode = "10E";
-		this.addAbility(new TerramorphicExpanseAbility());
-	}
+    public TerramorphicExpanse(UUID ownerId) {
+        super(ownerId, 360, "Terramorphic Expanse", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
+        this.expansionSetCode = "10E";
+        this.addAbility(new TerramorphicExpanseAbility());
+    }
 
-	public TerramorphicExpanse(final TerramorphicExpanse card) {
-		super(card);
-	}
+    public TerramorphicExpanse(final TerramorphicExpanse card) {
+        super(card);
+    }
 
-	@Override
-	public TerramorphicExpanse copy() {
-		return new TerramorphicExpanse(this);
-	}
+    @Override
+    public TerramorphicExpanse copy() {
+        return new TerramorphicExpanse(this);
+    }
 
 }
 
 class TerramorphicExpanseAbility extends ActivatedAbilityImpl<TerramorphicExpanseAbility> {
 
-	public TerramorphicExpanseAbility() {
-		super(Zone.BATTLEFIELD, null);
-		addCost(new TapSourceCost());
-		addCost(new SacrificeSourceCost());
-		TargetCardInLibrary target = new TargetCardInLibrary(new FilterBasicLandCard());
-		addEffect(new SearchLibraryPutInPlayEffect(target, true, Outcome.PutLandInPlay));
-	}
+    public TerramorphicExpanseAbility() {
+        super(Zone.BATTLEFIELD, null);
+        addCost(new TapSourceCost());
+        addCost(new SacrificeSourceCost());
+        TargetCardInLibrary target = new TargetCardInLibrary(new FilterBasicLandCard());
+        addEffect(new SearchLibraryPutInPlayEffect(target, true, Outcome.PutLandInPlay));
+    }
 
-	public TerramorphicExpanseAbility(final TerramorphicExpanseAbility ability) {
-		super(ability);
-	}
+    public TerramorphicExpanseAbility(final TerramorphicExpanseAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public TerramorphicExpanseAbility copy() {
-		return new TerramorphicExpanseAbility(this);
-	}
+    @Override
+    public TerramorphicExpanseAbility copy() {
+        return new TerramorphicExpanseAbility(this);
+    }
 
 }

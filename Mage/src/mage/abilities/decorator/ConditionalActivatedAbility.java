@@ -22,59 +22,59 @@ import mage.game.Game;
  * @author LevelX
  */
 public class ConditionalActivatedAbility extends ActivatedAbilityImpl<ConditionalActivatedAbility> {
-    
-    	private Condition condition;
-	private String staticText = "";
-        
+
+        private Condition condition;
+    private String staticText = "";
+
         private static final Effects emptyEffects = new Effects();
-        
-    	public ConditionalActivatedAbility(Zone zone, Effect effect, ManaCosts cost, Condition condition, String rule) {
-		super(zone, effect, cost);
-		this.condition = condition;
-		this.staticText = rule;
-	}
 
-	public ConditionalActivatedAbility(Zone zone, Effect effect, Costs costs, Condition condition, String rule) {
-		super(zone, effect, costs);
+        public ConditionalActivatedAbility(Zone zone, Effect effect, ManaCosts cost, Condition condition, String rule) {
+        super(zone, effect, cost);
+        this.condition = condition;
+        this.staticText = rule;
+    }
+
+    public ConditionalActivatedAbility(Zone zone, Effect effect, Costs costs, Condition condition, String rule) {
+        super(zone, effect, costs);
                 this.condition = condition;
-		this.staticText = rule;
-	}
+        this.staticText = rule;
+    }
 
-	public ConditionalActivatedAbility(Zone zone, Effect effect, Cost cost, Condition condition, String rule) {
-		super(zone, effect, cost);
+    public ConditionalActivatedAbility(Zone zone, Effect effect, Cost cost, Condition condition, String rule) {
+        super(zone, effect, cost);
                 this.condition = condition;
-		this.staticText = rule;
-	}
+        this.staticText = rule;
+    }
 
-	public ConditionalActivatedAbility(ConditionalActivatedAbility ability) {
-		super(ability);
+    public ConditionalActivatedAbility(ConditionalActivatedAbility ability) {
+        super(ability);
                 this.condition = ability.condition;
-		this.staticText = ability.staticText;
-	}
+        this.staticText = ability.staticText;
+    }
 
         @Override
-	public Effects getEffects(Game game, Constants.EffectType effectType) {
-		if (!condition.apply(game, this)) {
-			return emptyEffects;
-		}
-		return super.getEffects(game, effectType);
-	}
-        
+    public Effects getEffects(Game game, Constants.EffectType effectType) {
+        if (!condition.apply(game, this)) {
+            return emptyEffects;
+        }
+        return super.getEffects(game, effectType);
+    }
+
         @Override
         public boolean canActivate(UUID playerId, Game game) {
-		if (!condition.apply(game, this)) {
-			return false;
-		}
-		return super.canActivate(playerId, game);
-	}
-        
-	@Override
-	public ConditionalActivatedAbility copy() {
-		return new ConditionalActivatedAbility(this);
-	}
+        if (!condition.apply(game, this)) {
+            return false;
+        }
+        return super.canActivate(playerId, game);
+    }
+
+    @Override
+    public ConditionalActivatedAbility copy() {
+        return new ConditionalActivatedAbility(this);
+    }
 
         @Override
-	public String getRule() {
-		return staticText;
-	}
+    public String getRule() {
+        return staticText;
+    }
 }

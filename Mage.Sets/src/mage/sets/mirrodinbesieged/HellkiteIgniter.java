@@ -54,7 +54,7 @@ public class HellkiteIgniter extends CardImpl<HellkiteIgniter> {
         super(ownerId, 65, "Hellkite Igniter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");
         this.expansionSetCode = "MBS";
         this.subtype.add("Dragon");
-		this.color.setRed(true);
+        this.color.setRed(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
         this.addAbility(FlyingAbility.getInstance());

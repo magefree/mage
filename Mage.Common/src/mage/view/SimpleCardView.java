@@ -37,9 +37,9 @@ import java.util.UUID;
  */
 public class SimpleCardView implements Serializable {
     protected UUID id;
-	protected String expansionSetCode;
-	protected int cardNumber;
-	protected boolean faceDown;
+    protected String expansionSetCode;
+    protected int cardNumber;
+    protected boolean faceDown;
 
     public SimpleCardView(UUID id, String expansionSetCode, int cardNumber, boolean faceDown) {
         this.id = id;
@@ -47,19 +47,19 @@ public class SimpleCardView implements Serializable {
         this.cardNumber = cardNumber;
         this.faceDown = faceDown;
     }
-    
+
     public UUID getId() {
         return id;
     }
-    
+
     public String getExpansionSetCode() {
         return expansionSetCode;
     }
-    
+
     public int getCardNumber() {
         return cardNumber;
     }
-    
+
     public boolean isFaceDown() {
         return faceDown;
     }

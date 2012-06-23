@@ -50,7 +50,7 @@ public class AddCountersAllEffect extends OneShotEffect<AddCountersAllEffect> {
         super(Outcome.Benefit);
         this.counter = counter;
         this.filter = filter;
-		setText();
+        setText();
     }
 
     public AddCountersAllEffect(final AddCountersAllEffect effect) {

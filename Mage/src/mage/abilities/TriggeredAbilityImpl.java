@@ -42,60 +42,60 @@ import mage.players.Player;
  */
 public abstract class TriggeredAbilityImpl<T extends TriggeredAbilityImpl<T>> extends AbilityImpl<T> implements TriggeredAbility {
 
-	protected boolean optional;
+    protected boolean optional;
 
-	public TriggeredAbilityImpl(Zone zone, Effect effect) {
-		this(zone, effect, false);
-	}
-	
-	public TriggeredAbilityImpl(Zone zone, Effect effect, boolean optional) {
-		super(AbilityType.TRIGGERED, zone);
-		if (effect != null)
-			addEffect(effect);
-		this.optional = optional;
-	}
+    public TriggeredAbilityImpl(Zone zone, Effect effect) {
+        this(zone, effect, false);
+    }
 
-	public TriggeredAbilityImpl(final TriggeredAbilityImpl ability) {
-		super(ability);
-		this.optional = ability.optional;
-	}
+    public TriggeredAbilityImpl(Zone zone, Effect effect, boolean optional) {
+        super(AbilityType.TRIGGERED, zone);
+        if (effect != null)
+            addEffect(effect);
+        this.optional = optional;
+    }
 
-	@Override
-	public void trigger(Game game, UUID controllerId) {
-		//20091005 - 603.4
-		if (checkInterveningIfClause(game)) {
-			this.controllerId = controllerId;
-			game.addTriggeredAbility(this);
-		}
-	}
+    public TriggeredAbilityImpl(final TriggeredAbilityImpl ability) {
+        super(ability);
+        this.optional = ability.optional;
+    }
 
-	@Override
-	public boolean checkInterveningIfClause(Game game) {
-		return true;
-	}
+    @Override
+    public void trigger(Game game, UUID controllerId) {
+        //20091005 - 603.4
+        if (checkInterveningIfClause(game)) {
+            this.controllerId = controllerId;
+            game.addTriggeredAbility(this);
+        }
+    }
 
-	@Override
-	public boolean resolve(Game game) {
-		if (optional) {
-			Player player = game.getPlayer(this.getControllerId());
-			MageObject object = game.getObject(sourceId);
-			StringBuilder sb = new StringBuilder();
-			if (object != null) {
-				sb.append("Use the following ability from ").append(object.getName()).append("? ");
-				sb.append(this.getRule(object.getName()));
-			}
-			else {
-				sb.append("Use the following ability? ").append(this.getRule());
-			}
-			if (!player.chooseUse(getEffects().get(0).getOutcome(), sb.toString(), game)) {
-				return false;
-			}
-		}
-		//20091005 - 603.4
-		if (checkInterveningIfClause(game))
-			return super.resolve(game);
-		return false;
-	}
+    @Override
+    public boolean checkInterveningIfClause(Game game) {
+        return true;
+    }
+
+    @Override
+    public boolean resolve(Game game) {
+        if (optional) {
+            Player player = game.getPlayer(this.getControllerId());
+            MageObject object = game.getObject(sourceId);
+            StringBuilder sb = new StringBuilder();
+            if (object != null) {
+                sb.append("Use the following ability from ").append(object.getName()).append("? ");
+                sb.append(this.getRule(object.getName()));
+            }
+            else {
+                sb.append("Use the following ability? ").append(this.getRule());
+            }
+            if (!player.chooseUse(getEffects().get(0).getOutcome(), sb.toString(), game)) {
+                return false;
+            }
+        }
+        //20091005 - 603.4
+        if (checkInterveningIfClause(game))
+            return super.resolve(game);
+        return false;
+    }
 
     @Override
     public String getRule() {

@@ -44,7 +44,7 @@ public class WanderingOnes extends CardImpl<WanderingOnes> {
         super(ownerId, 100, "Wandering Ones", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Spirit");
-		this.color.setBlue(true);
+        this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
     }

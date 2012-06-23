@@ -47,14 +47,14 @@ public class SetCardSubtypeAttachedEffect extends ContinuousEffectImpl<SetCardSu
         super(duration, Constants.Layer.TypeChangingEffects_4, Constants.SubLayer.NA, Constants.Outcome.Benefit);
         this.setSubtypes.add(setSubtype);
         this.attachmentType = attachmentType;
-	setText();
+    setText();
     }
 
     public SetCardSubtypeAttachedEffect(List<String> setSubtypes, Constants.Duration duration, Constants.AttachmentType attachmentType) {
         super(duration, Constants.Layer.TypeChangingEffects_4, Constants.SubLayer.NA, Constants.Outcome.Benefit);
         this.setSubtypes.addAll(setSubtypes);
         this.attachmentType = attachmentType;
-	setText();
+    setText();
     }
 
     public SetCardSubtypeAttachedEffect(final SetCardSubtypeAttachedEffect effect) {
@@ -68,10 +68,10 @@ public class SetCardSubtypeAttachedEffect extends ContinuousEffectImpl<SetCardSu
         Permanent equipment = game.getPermanent(source.getSourceId());
         if (equipment != null && equipment.getAttachedTo() != null) {
             Permanent target = game.getPermanent(equipment.getAttachedTo());
-			if (target != null) {
-				target.getSubtype().clear();
+            if (target != null) {
+                target.getSubtype().clear();
                                 target.getSubtype().addAll(setSubtypes);
-			}
+            }
         }
         return true;
     }

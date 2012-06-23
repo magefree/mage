@@ -51,11 +51,11 @@ public class ExileFromZoneTargetEffect extends OneShotEffect<ExileFromZoneTarget
     private UUID exileId;
     private String exileName;
     private int amount;
-    
+
     public ExileFromZoneTargetEffect(Zone zone, UUID exileId, String exileName, FilterCard filter) {
         this(zone, exileId, exileName, filter, 1);
     }
-    
+
     public ExileFromZoneTargetEffect(Zone zone, UUID exileId, String exileName, FilterCard filter, int amount) {
         super(Outcome.Exile);
         this.zone = zone;
@@ -65,7 +65,7 @@ public class ExileFromZoneTargetEffect extends OneShotEffect<ExileFromZoneTarget
         this.amount = amount;
         setText();
     }
-    
+
     public ExileFromZoneTargetEffect(final ExileFromZoneTargetEffect effect) {
         super(effect);
         this.zone = effect.zone;
@@ -74,9 +74,9 @@ public class ExileFromZoneTargetEffect extends OneShotEffect<ExileFromZoneTarget
         this.exileName = effect.exileName;
         this.amount = effect.amount;
     }
-    
-	@Override
-	public boolean apply(Game game, Ability source) {
+
+    @Override
+    public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
             Target target = null;
@@ -101,18 +101,18 @@ public class ExileFromZoneTargetEffect extends OneShotEffect<ExileFromZoneTarget
             }
         }
         return false;
-	}
+    }
 
     @Override
     public ExileFromZoneTargetEffect copy() {
         return new ExileFromZoneTargetEffect(this);
     }
-    
-	private void setText() {
+
+    private void setText() {
         if (amount == 1)
             staticText = "Target player exiles a " + filter.getMessage() + " from his or her " + zone.toString();
         else
             staticText = "Target player exiles " + amount + " " + filter.getMessage() + " from his or her " + zone.toString();
     }
-    
+
 }

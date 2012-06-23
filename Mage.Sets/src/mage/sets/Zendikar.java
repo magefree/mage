@@ -38,21 +38,21 @@ import mage.cards.ExpansionSet;
  */
 public class Zendikar extends ExpansionSet {
 
-	private static final Zendikar fINSTANCE =  new Zendikar();
+    private static final Zendikar fINSTANCE =  new Zendikar();
 
-	public static Zendikar getInstance() {
-		return fINSTANCE;
-	}
+    public static Zendikar getInstance() {
+        return fINSTANCE;
+    }
 
-	private Zendikar() {
-		super("Zendikar", "ZEN", "seticon_ZEN", "mage.sets.zendikar", new GregorianCalendar(2009, 8, 26).getTime(), SetType.EXPANSION);
-		this.blockName = "Zendikar";
-		this.hasBoosters = true;
-		this.numBoosterLands = 1;
-		this.numBoosterCommon = 10;
-		this.numBoosterUncommon = 3;
-		this.numBoosterRare = 1;
-		this.ratioBoosterMythic = 8;
-	}
+    private Zendikar() {
+        super("Zendikar", "ZEN", "seticon_ZEN", "mage.sets.zendikar", new GregorianCalendar(2009, 8, 26).getTime(), SetType.EXPANSION);
+        this.blockName = "Zendikar";
+        this.hasBoosters = true;
+        this.numBoosterLands = 1;
+        this.numBoosterCommon = 10;
+        this.numBoosterUncommon = 3;
+        this.numBoosterRare = 1;
+        this.ratioBoosterMythic = 8;
+    }
 
 }

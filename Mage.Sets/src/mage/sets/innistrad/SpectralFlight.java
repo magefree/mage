@@ -58,14 +58,14 @@ public class SpectralFlight extends CardImpl<SpectralFlight> {
 
         // Enchant creature
         TargetPermanent target = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(target);
-		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.AddAbility));
-		Ability ability = new EnchantAbility(target.getTargetName());
-		this.addAbility(ability);
-        
+        this.getSpellAbility().addTarget(target);
+        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.AddAbility));
+        Ability ability = new EnchantAbility(target.getTargetName());
+        this.addAbility(ability);
+
         // Enchanted creature gets +2/+2 and has flying.
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Constants.Duration.WhileOnBattlefield)));
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), Constants.AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Constants.Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), Constants.AttachmentType.AURA)));
     }
 
     public SpectralFlight(final SpectralFlight card) {

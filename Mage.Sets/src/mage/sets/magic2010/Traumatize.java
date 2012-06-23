@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class Traumatize extends mage.sets.tenth.Traumatize {
 
-	public Traumatize(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 77;
-		this.expansionSetCode = "M10";
-	}
+    public Traumatize(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 77;
+        this.expansionSetCode = "M10";
+    }
 
-	public Traumatize(final Traumatize card) {
-		super(card);
-	}
+    public Traumatize(final Traumatize card) {
+        super(card);
+    }
 
-	@Override
-	public Traumatize copy() {
-		return new Traumatize(this);
-	}
+    @Override
+    public Traumatize copy() {
+        return new Traumatize(this);
+    }
 
 }

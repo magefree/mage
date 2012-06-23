@@ -37,42 +37,42 @@ import mage.game.match.Match;
  */
 public class TournamentPairing {
 
-	UUID id = UUID.randomUUID();
-	Match match;
-	TournamentPlayer player1;
-	TournamentPlayer player2;
+    UUID id = UUID.randomUUID();
+    Match match;
+    TournamentPlayer player1;
+    TournamentPlayer player2;
 
-	public TournamentPairing(TournamentPlayer player1, TournamentPlayer player2) {
-		this.player1 = player1;
-		this.player2 = player2;
-	}
+    public TournamentPairing(TournamentPlayer player1, TournamentPlayer player2) {
+        this.player1 = player1;
+        this.player2 = player2;
+    }
 
-	public UUID getId() {
-		return id;
-	}
+    public UUID getId() {
+        return id;
+    }
 
-	public TournamentPlayer getPlayer1() {
-		return this.player1;
-	}
+    public TournamentPlayer getPlayer1() {
+        return this.player1;
+    }
 
-	public TournamentPlayer getPlayer2() {
-		return this.player2;
-	}
+    public TournamentPlayer getPlayer2() {
+        return this.player2;
+    }
 
-	public Match getMatch() {
-		return match;
-	}
+    public Match getMatch() {
+        return match;
+    }
 
-	public void setMatch(Match match) {
-		this.match = match;
-	}
+    public void setMatch(Match match) {
+        this.match = match;
+    }
 
-	public void eliminatePlayers() {
-		if (match.getPlayer(player1.getPlayer().getId()).getWins() < match.getWinsNeeded()) {
-			player1.setEliminated();
-		}
-		if (match.getPlayer(player2.getPlayer().getId()).getWins() < match.getWinsNeeded()) {
-			player2.setEliminated();
-		}
-	}
+    public void eliminatePlayers() {
+        if (match.getPlayer(player1.getPlayer().getId()).getWins() < match.getWinsNeeded()) {
+            player1.setEliminated();
+        }
+        if (match.getPlayer(player2.getPlayer().getId()).getWins() < match.getWinsNeeded()) {
+            player2.setEliminated();
+        }
+    }
 }

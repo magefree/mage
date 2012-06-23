@@ -38,20 +38,20 @@ import mage.cards.ExpansionSet;
  */
 public class Tenth extends ExpansionSet {
 
-	private static final Tenth fINSTANCE =  new Tenth();
+    private static final Tenth fINSTANCE =  new Tenth();
 
-	public static Tenth getInstance() {
-		return fINSTANCE;
-	}
+    public static Tenth getInstance() {
+        return fINSTANCE;
+    }
 
-	private Tenth() {
-		super("Tenth Edition", "10E", "exp_symbol_mtg10e", "mage.sets.tenth", new GregorianCalendar(2007, 6, 14).getTime(), SetType.CORE);
-		this.hasBoosters = true;
-		this.numBoosterLands = 1;
-		this.numBoosterCommon = 10;
-		this.numBoosterUncommon = 3;
-		this.numBoosterRare = 1;
-		this.ratioBoosterMythic = 0;
-	}
+    private Tenth() {
+        super("Tenth Edition", "10E", "exp_symbol_mtg10e", "mage.sets.tenth", new GregorianCalendar(2007, 6, 14).getTime(), SetType.CORE);
+        this.hasBoosters = true;
+        this.numBoosterLands = 1;
+        this.numBoosterCommon = 10;
+        this.numBoosterUncommon = 3;
+        this.numBoosterRare = 1;
+        this.ratioBoosterMythic = 0;
+    }
 
 }

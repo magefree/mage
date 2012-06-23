@@ -69,37 +69,37 @@ import org.apache.log4j.Logger;
  * @author BetaSteward_at_googlemail.com
  */
 public class SimulatedPlayerMCTS extends MCTSPlayer {
-    
-	private boolean isSimulatedPlayer;
+
+    private boolean isSimulatedPlayer;
     private static Random rnd = new Random();
     private int actionCount = 0;
- 	private final static transient Logger logger = Logger.getLogger(SimulatedPlayerMCTS.class);
+     private final static transient Logger logger = Logger.getLogger(SimulatedPlayerMCTS.class);
 
     public SimulatedPlayerMCTS(UUID id, boolean isSimulatedPlayer) {
-		super(id);
-		this.isSimulatedPlayer = isSimulatedPlayer;
-	}
+        super(id);
+        this.isSimulatedPlayer = isSimulatedPlayer;
+    }
 
-	public SimulatedPlayerMCTS(final SimulatedPlayerMCTS player) {
-		super(player);
-		this.isSimulatedPlayer = player.isSimulatedPlayer;
-	}
+    public SimulatedPlayerMCTS(final SimulatedPlayerMCTS player) {
+        super(player);
+        this.isSimulatedPlayer = player.isSimulatedPlayer;
+    }
 
-	@Override
-	public SimulatedPlayerMCTS copy() {
-		return new SimulatedPlayerMCTS(this);
-	}
+    @Override
+    public SimulatedPlayerMCTS copy() {
+        return new SimulatedPlayerMCTS(this);
+    }
 
     public boolean isSimulatedPlayer() {
         return this.isSimulatedPlayer;
     }
-    
+
     public int getActionCount() {
         return actionCount;
     }
-    
-   	@Override
-	public boolean priority(Game game) {
+
+       @Override
+    public boolean priority(Game game) {
 //        logger.info("priority");
         boolean didSomething = false;
         Ability ability = getAction(game);
@@ -108,7 +108,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
             didSomething = true;
 
         activateAbility((ActivatedAbility) ability, game);
-            
+
         actionCount++;
         return didSomething;
     }
@@ -153,9 +153,9 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
         }
         return ability;
     }
-    
+
     @Override
-	public boolean triggerAbility(TriggeredAbility source, Game game) {
+    public boolean triggerAbility(TriggeredAbility source, Game game) {
 //        logger.info("trigger");
         if (source != null && source.canChooseTarget(game)) {
             Ability ability;
@@ -169,33 +169,33 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
                 else
                     ability = options.get(rnd.nextInt(options.size()));
             }
-			if (ability.isUsesStack()) {
-				game.getStack().push(new StackAbility(ability, playerId));
-				if (ability.activate(game, false)) {
+            if (ability.isUsesStack()) {
+                game.getStack().push(new StackAbility(ability, playerId));
+                if (ability.activate(game, false)) {
                     actionCount++;
-					return true;
-				}
-			} else {
-				if (ability.activate(game, false)) {
-					ability.resolve(game);
+                    return true;
+                }
+            } else {
+                if (ability.activate(game, false)) {
+                    ability.resolve(game);
                     actionCount++;
-					return true;
-				}
-			}
+                    return true;
+                }
+            }
         }
         return false;
-	}
+    }
 
     @Override
     public void selectAttackers(Game game) {
-		//useful only for two player games - will only attack first opponent
+        //useful only for two player games - will only attack first opponent
 //        logger.info("select attackers");
-		UUID defenderId = game.getOpponents(playerId).iterator().next();
-		List<Permanent> attackersList = super.getAvailableAttackers(game);
-		//use binary digits to calculate powerset of attackers
-		int powerElements = (int) Math.pow(2, attackersList.size());
+        UUID defenderId = game.getOpponents(playerId).iterator().next();
+        List<Permanent> attackersList = super.getAvailableAttackers(game);
+        //use binary digits to calculate powerset of attackers
+        int powerElements = (int) Math.pow(2, attackersList.size());
         int value = rnd.nextInt(powerElements);
-		StringBuilder binary = new StringBuilder();
+        StringBuilder binary = new StringBuilder();
         binary.append(Integer.toBinaryString(value));
         while (binary.length() < attackersList.size()) {
             binary.insert(0, "0");  //pad with zeros
@@ -210,10 +210,10 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
     @Override
     public void selectBlockers(Game game) {
 //        logger.info("select blockers");
-		int numGroups = game.getCombat().getGroups().size();
-		if (numGroups == 0) return;
+        int numGroups = game.getCombat().getGroups().size();
+        if (numGroups == 0) return;
 
-		List<Permanent> blockers = getAvailableBlockers(game);
+        List<Permanent> blockers = getAvailableBlockers(game);
         for (Permanent blocker: blockers) {
             int check = rnd.nextInt(numGroups + 1);
             if (check < numGroups) {
@@ -223,7 +223,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
             }
         }
         actionCount++;
-	}
+    }
 
     @Override
     public void abort() {
@@ -252,7 +252,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
         target.add(targetId, game);
         return true;
     }
-    
+
     protected boolean chooseRandomTarget(Target target, Ability source, Game game) {
         Set<UUID> possibleTargets = target.possibleTargets(source==null?null:source.getSourceId(), playerId, game);
         if (possibleTargets.isEmpty())
@@ -366,7 +366,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
             return rnd.nextBoolean();
         return super.choosePile(outcome, message, pile1, pile2, game);
     }
-    
+
     @Override
     public boolean choose(Outcome outcome, Choice choice, Game game) {
         if (this.isHuman()) {
@@ -384,20 +384,20 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
 
     @Override
     public boolean playXMana(VariableManaCost cost, ManaCosts<ManaCost> costs, Game game) {
-		for (Permanent perm: this.getAvailableManaProducers(game)) {
-			for (ManaAbility ability: perm.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
+        for (Permanent perm: this.getAvailableManaProducers(game)) {
+            for (ManaAbility ability: perm.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
                 if (rnd.nextBoolean())
                     activateAbility(ability, game);
-			}
-		}
+            }
+        }
 
-		// don't allow X=0
-		if (getManaPool().count() == 0) {
-			return false;
-		}
+        // don't allow X=0
+        if (getManaPool().count() == 0) {
+            return false;
+        }
 
-		cost.setPaid();
-		return true;
+        cost.setPaid();
+        return true;
     }
 
     @Override

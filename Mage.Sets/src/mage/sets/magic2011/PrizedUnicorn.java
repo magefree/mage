@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class PrizedUnicorn extends mage.sets.magic2010.PrizedUnicorn {
 
-	public PrizedUnicorn(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 193;
-		this.expansionSetCode = "M11";
-	}
+    public PrizedUnicorn(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 193;
+        this.expansionSetCode = "M11";
+    }
 
-	public PrizedUnicorn(final PrizedUnicorn card) {
-		super(card);
-	}
+    public PrizedUnicorn(final PrizedUnicorn card) {
+        super(card);
+    }
 
-	@Override
-	public PrizedUnicorn copy() {
-		return new PrizedUnicorn(this);
-	}
+    @Override
+    public PrizedUnicorn copy() {
+        return new PrizedUnicorn(this);
+    }
 
 }

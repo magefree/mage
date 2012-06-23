@@ -51,7 +51,7 @@ public class KiteShield extends CardImpl<KiteShield> {
         this.subtype.add("Equipment");
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEquippedEffect(0, 3)));
         this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(3)));
-        
+
     }
 
     public KiteShield (final KiteShield card) {

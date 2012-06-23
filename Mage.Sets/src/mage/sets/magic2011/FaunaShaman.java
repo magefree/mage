@@ -54,30 +54,30 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class FaunaShaman extends CardImpl<FaunaShaman> {
 
-	public FaunaShaman(UUID ownerId) {
-		super(ownerId, 172, "Fauna Shaman", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Elf");
-		this.subtype.add("Shaman");
-		this.color.setGreen(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+    public FaunaShaman(UUID ownerId) {
+        super(ownerId, 172, "Fauna Shaman", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Elf");
+        this.subtype.add("Shaman");
+        this.color.setGreen(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-		Costs<Cost> costs = new CostsImpl();
-		costs.add(new TapSourceCost());
-		costs.add(new DiscardTargetCost(new TargetCardInHand(new FilterCreatureCard())));
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryRevealPutInHandEffect(new TargetCardInLibrary(new FilterCreatureCard())), costs);
+        Costs<Cost> costs = new CostsImpl();
+        costs.add(new TapSourceCost());
+        costs.add(new DiscardTargetCost(new TargetCardInHand(new FilterCreatureCard())));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryRevealPutInHandEffect(new TargetCardInLibrary(new FilterCreatureCard())), costs);
         ability.addManaCost(new ColoredManaCost(ColoredManaSymbol.G));
-		this.addAbility(ability);
-	}
+        this.addAbility(ability);
+    }
 
-	public FaunaShaman(final FaunaShaman card) {
-		super(card);
-	}
+    public FaunaShaman(final FaunaShaman card) {
+        super(card);
+    }
 
-	@Override
-	public FaunaShaman copy() {
-		return new FaunaShaman(this);
-	}
+    @Override
+    public FaunaShaman copy() {
+        return new FaunaShaman(this);
+    }
 
 }

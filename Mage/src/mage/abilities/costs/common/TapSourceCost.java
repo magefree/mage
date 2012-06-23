@@ -42,37 +42,37 @@ import mage.game.permanent.Permanent;
  */
 public class TapSourceCost extends CostImpl<TapSourceCost> {
 
-	public TapSourceCost() {
-		this.text = "{T}";
-	}
+    public TapSourceCost() {
+        this.text = "{T}";
+    }
 
-	public TapSourceCost(TapSourceCost cost) {
-		super(cost);
-	}
+    public TapSourceCost(TapSourceCost cost) {
+        super(cost);
+    }
 
-	@Override
-	public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-		Permanent permanent = game.getPermanent(sourceId);
-		if (permanent != null) {
-			paid = permanent.tap(game);
-			if (paid && ability instanceof ManaAbility) {
-				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.TAPPED_FOR_MANA, sourceId, sourceId, controllerId));
-			}
-		}
-		return paid;
-	}
+    @Override
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+        Permanent permanent = game.getPermanent(sourceId);
+        if (permanent != null) {
+            paid = permanent.tap(game);
+            if (paid && ability instanceof ManaAbility) {
+                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.TAPPED_FOR_MANA, sourceId, sourceId, controllerId));
+            }
+        }
+        return paid;
+    }
 
-	@Override
-	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-		Permanent permanent = game.getPermanent(sourceId);
-		if (permanent != null) {
-			return !permanent.isTapped() && permanent.canTap();
-		}
-		return false;
-	}
+    @Override
+    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+        Permanent permanent = game.getPermanent(sourceId);
+        if (permanent != null) {
+            return !permanent.isTapped() && permanent.canTap();
+        }
+        return false;
+    }
 
-	@Override
-	public TapSourceCost copy() {
-		return new TapSourceCost(this);
-	}
+    @Override
+    public TapSourceCost copy() {
+        return new TapSourceCost(this);
+    }
 }

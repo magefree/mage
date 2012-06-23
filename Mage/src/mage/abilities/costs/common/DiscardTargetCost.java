@@ -43,37 +43,37 @@ import mage.target.common.TargetCardInHand;
  */
 public class DiscardTargetCost extends CostImpl<DiscardTargetCost> {
 
-	public DiscardTargetCost(TargetCardInHand target) {
-		this.addTarget(target);
-		this.text = "Discard " + target.getTargetName();
-	}
+    public DiscardTargetCost(TargetCardInHand target) {
+        this.addTarget(target);
+        this.text = "Discard " + target.getTargetName();
+    }
 
-	public DiscardTargetCost(DiscardTargetCost cost) {
-		super(cost);
-	}
+    public DiscardTargetCost(DiscardTargetCost cost) {
+        super(cost);
+    }
 
-	@Override
-	public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-		if (targets.choose(Outcome.Discard, controllerId, sourceId, game)) {
-			Player player = game.getPlayer(controllerId);
-			for (UUID targetId: targets.get(0).getTargets()) {
-				Card card = player.getHand().get(targetId, game);
-				if (card == null)
-					return false;
-				paid |= player.discard(card, null, game);
-			}
-		}
-		return paid;
-	}
+    @Override
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+        if (targets.choose(Outcome.Discard, controllerId, sourceId, game)) {
+            Player player = game.getPlayer(controllerId);
+            for (UUID targetId: targets.get(0).getTargets()) {
+                Card card = player.getHand().get(targetId, game);
+                if (card == null)
+                    return false;
+                paid |= player.discard(card, null, game);
+            }
+        }
+        return paid;
+    }
 
-	@Override
-	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-		return targets.canChoose(controllerId, game);
-	}
+    @Override
+    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+        return targets.canChoose(controllerId, game);
+    }
 
-	@Override
-	public DiscardTargetCost copy() {
-		return new DiscardTargetCost(this);
-	}
+    @Override
+    public DiscardTargetCost copy() {
+        return new DiscardTargetCost(this);
+    }
 
 }

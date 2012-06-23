@@ -64,163 +64,163 @@ import mage.view.CardsView;
  */
 public class CardGrid extends javax.swing.JLayeredPane implements MouseListener, ICardGrid {
 
-	protected CardEventSource cardEventSource = new CardEventSource();
-	protected BigCard bigCard;
-	protected UUID gameId;
-	private Map<UUID, MageCard> cards = new HashMap<UUID, MageCard>();
-	private Dimension cardDimension;
+    protected CardEventSource cardEventSource = new CardEventSource();
+    protected BigCard bigCard;
+    protected UUID gameId;
+    private Map<UUID, MageCard> cards = new HashMap<UUID, MageCard>();
+    private Dimension cardDimension;
 
-	/**
-	 * Max amount of cards in card grid for which card images will be drawn.
-	 * Done so to solve issue with memory for big piles of cards.
-	 */
-	private static final int MAX_IMAGES = 250;
+    /**
+     * Max amount of cards in card grid for which card images will be drawn.
+     * Done so to solve issue with memory for big piles of cards.
+     */
+    private static final int MAX_IMAGES = 250;
 
-	public CardGrid() {
+    public CardGrid() {
         initComponents();
         setOpaque(false);
     }
 
-	public void loadCards(CardsView showCards, SortBy sortBy, boolean piles, BigCard bigCard, UUID gameId) {
-		boolean drawImage = showCards.size() < MAX_IMAGES;
-		this.bigCard = bigCard;
-		this.gameId = gameId;
-		for (CardView card: showCards.values()) {
-			if (!cards.containsKey(card.getId())) {
-				addCard(card, bigCard, gameId, drawImage);
-			}
-		}
-		for (Iterator<Entry<UUID, MageCard>> i = cards.entrySet().iterator(); i.hasNext();) {
-			Entry<UUID, MageCard> entry = i.next();
-			if (!showCards.containsKey(entry.getKey())) {
-				removeCardImg(entry.getKey());
-				i.remove();
-			}
-		}
-		System.gc();
-		drawCards(sortBy, piles);
-		this.setVisible(true);
-	}
-	
-	private void addCard(CardView card, BigCard bigCard, UUID gameId, boolean drawImage) {
-		if (cardDimension == null) {
-			cardDimension = new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
-		}
-		MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, cardDimension, gameId, drawImage);
-		cards.put(card.getId(), cardImg);
-		cardImg.addMouseListener(this);
-		add(cardImg);
-		cardImg.update(card);
-		cards.put(card.getId(), cardImg);
-	}
-
-	public void drawCards(SortBy sortBy, boolean piles) {
-		int maxWidth = this.getParent().getWidth();
-		int numColumns = maxWidth / Config.dimensions.frameWidth;
-		int curColumn = 0;
-		int curRow = 0;
-		if (cards.size() > 0) {
-			Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
-			List<MageCard> sortedCards = new ArrayList<MageCard>(cards.values());
-			switch (sortBy) {
-				case NAME:
-					Collections.sort(sortedCards, new CardNameComparator());
-					break;
-				case RARITY:
-					Collections.sort(sortedCards, new CardRarityComparator());
-					break;
-				case COLOR:
-					Collections.sort(sortedCards, new CardColorComparator());
-					break;
-				case CASTING_COST:
-					Collections.sort(sortedCards, new CardCostComparator());
-					break;
-			}
-			MageCard lastCard = null;
-			for (MageCard cardImg: sortedCards) {
-				if (piles) {
-					if (lastCard == null)
-						lastCard = cardImg;
-					switch (sortBy) {
-						case NAME:
-							if (!cardImg.getOriginal().getName().equals(lastCard.getOriginal().getName())) {
-								curColumn++;
-								curRow = 0;
-							}
-							break;
-						case RARITY:
-							if (!cardImg.getOriginal().getRarity().equals(lastCard.getOriginal().getRarity())) {
-								curColumn++;
-								curRow = 0;
-							}
-							break;
-						case COLOR:
-							if (cardImg.getOriginal().getColor().compareTo(lastCard.getOriginal().getColor()) != 0) {
-								curColumn++;
-								curRow = 0;
-							}
-							break;
-						case CASTING_COST:
-							if (cardImg.getOriginal().getConvertedManaCost() != lastCard.getOriginal().getConvertedManaCost()) {
-								curColumn++;
-								curRow = 0;
-							}
-							break;
-					}
-					rectangle.setLocation(curColumn * Config.dimensions.frameWidth, curRow * 20);
-					cardImg.setBounds(rectangle);
-					cardImg.setCardBounds(rectangle.x, rectangle.y, Config.dimensions.frameWidth, Config.dimensions.frameHeight);
-					moveToFront(cardImg);
-					curRow++;
-					lastCard = cardImg;
-				}
-				else {
-					rectangle.setLocation(curColumn * Config.dimensions.frameWidth, curRow * 20);
-					cardImg.setBounds(rectangle);
-					cardImg.setCardBounds(rectangle.x, rectangle.y, Config.dimensions.frameWidth, Config.dimensions.frameHeight);
-					moveToFront(cardImg);
-					curColumn++;
-					if (curColumn == numColumns) {
-						curColumn = 0;
-						curRow++;
-					}
-				}
-			}
-		}
-		resizeArea();
-       	revalidate();
-       	repaint();
-	}
-
-	private void removeCardImg(UUID cardId) {
-        for (Component comp: getComponents()) {
-        	if (comp instanceof Card) {
-        		if (((Card)comp).getCardId().equals(cardId)) {
-					remove(comp);
-			        comp = null;
-        		}
-        	} else if (comp instanceof MageCard) {
-        		if (((MageCard)comp).getOriginal().getId().equals(cardId)) {
-					remove(comp);
-			        comp = null;
-        		}
-        	}
+    public void loadCards(CardsView showCards, SortBy sortBy, boolean piles, BigCard bigCard, UUID gameId) {
+        boolean drawImage = showCards.size() < MAX_IMAGES;
+        this.bigCard = bigCard;
+        this.gameId = gameId;
+        for (CardView card: showCards.values()) {
+            if (!cards.containsKey(card.getId())) {
+                addCard(card, bigCard, gameId, drawImage);
+            }
         }
-	}
+        for (Iterator<Entry<UUID, MageCard>> i = cards.entrySet().iterator(); i.hasNext();) {
+            Entry<UUID, MageCard> entry = i.next();
+            if (!showCards.containsKey(entry.getKey())) {
+                removeCardImg(entry.getKey());
+                i.remove();
+            }
+        }
+        System.gc();
+        drawCards(sortBy, piles);
+        this.setVisible(true);
+    }
 
-	public void removeCard(UUID cardId) {
-		removeCardImg(cardId);
-		cards.remove(cardId);
-	}
+    private void addCard(CardView card, BigCard bigCard, UUID gameId, boolean drawImage) {
+        if (cardDimension == null) {
+            cardDimension = new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
+        }
+        MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, cardDimension, gameId, drawImage);
+        cards.put(card.getId(), cardImg);
+        cardImg.addMouseListener(this);
+        add(cardImg);
+        cardImg.update(card);
+        cards.put(card.getId(), cardImg);
+    }
+
+    public void drawCards(SortBy sortBy, boolean piles) {
+        int maxWidth = this.getParent().getWidth();
+        int numColumns = maxWidth / Config.dimensions.frameWidth;
+        int curColumn = 0;
+        int curRow = 0;
+        if (cards.size() > 0) {
+            Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
+            List<MageCard> sortedCards = new ArrayList<MageCard>(cards.values());
+            switch (sortBy) {
+                case NAME:
+                    Collections.sort(sortedCards, new CardNameComparator());
+                    break;
+                case RARITY:
+                    Collections.sort(sortedCards, new CardRarityComparator());
+                    break;
+                case COLOR:
+                    Collections.sort(sortedCards, new CardColorComparator());
+                    break;
+                case CASTING_COST:
+                    Collections.sort(sortedCards, new CardCostComparator());
+                    break;
+            }
+            MageCard lastCard = null;
+            for (MageCard cardImg: sortedCards) {
+                if (piles) {
+                    if (lastCard == null)
+                        lastCard = cardImg;
+                    switch (sortBy) {
+                        case NAME:
+                            if (!cardImg.getOriginal().getName().equals(lastCard.getOriginal().getName())) {
+                                curColumn++;
+                                curRow = 0;
+                            }
+                            break;
+                        case RARITY:
+                            if (!cardImg.getOriginal().getRarity().equals(lastCard.getOriginal().getRarity())) {
+                                curColumn++;
+                                curRow = 0;
+                            }
+                            break;
+                        case COLOR:
+                            if (cardImg.getOriginal().getColor().compareTo(lastCard.getOriginal().getColor()) != 0) {
+                                curColumn++;
+                                curRow = 0;
+                            }
+                            break;
+                        case CASTING_COST:
+                            if (cardImg.getOriginal().getConvertedManaCost() != lastCard.getOriginal().getConvertedManaCost()) {
+                                curColumn++;
+                                curRow = 0;
+                            }
+                            break;
+                    }
+                    rectangle.setLocation(curColumn * Config.dimensions.frameWidth, curRow * 20);
+                    cardImg.setBounds(rectangle);
+                    cardImg.setCardBounds(rectangle.x, rectangle.y, Config.dimensions.frameWidth, Config.dimensions.frameHeight);
+                    moveToFront(cardImg);
+                    curRow++;
+                    lastCard = cardImg;
+                }
+                else {
+                    rectangle.setLocation(curColumn * Config.dimensions.frameWidth, curRow * 20);
+                    cardImg.setBounds(rectangle);
+                    cardImg.setCardBounds(rectangle.x, rectangle.y, Config.dimensions.frameWidth, Config.dimensions.frameHeight);
+                    moveToFront(cardImg);
+                    curColumn++;
+                    if (curColumn == numColumns) {
+                        curColumn = 0;
+                        curRow++;
+                    }
+                }
+            }
+        }
+        resizeArea();
+           revalidate();
+           repaint();
+    }
+
+    private void removeCardImg(UUID cardId) {
+        for (Component comp: getComponents()) {
+            if (comp instanceof Card) {
+                if (((Card)comp).getCardId().equals(cardId)) {
+                    remove(comp);
+                    comp = null;
+                }
+            } else if (comp instanceof MageCard) {
+                if (((MageCard)comp).getOriginal().getId().equals(cardId)) {
+                    remove(comp);
+                    comp = null;
+                }
+            }
+        }
+    }
+
+    public void removeCard(UUID cardId) {
+        removeCardImg(cardId);
+        cards.remove(cardId);
+    }
 
 
-	public void addCardEventListener(Listener<Event> listener) {
-		cardEventSource.addListener(listener);
-	}
+    public void addCardEventListener(Listener<Event> listener) {
+        cardEventSource.addListener(listener);
+    }
 
-	public void clearCardEventListeners() {
-		cardEventSource.clearListeners();
-	}
+    public void clearCardEventListeners() {
+        cardEventSource.clearListeners();
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -247,106 +247,106 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		if (e.getClickCount() == 2 && !e.isConsumed()) {
-			e.consume();
-			Object obj = e.getSource();
-			if (obj instanceof Card) {
-				cardEventSource.doubleClick(((Card)obj).getCardId(), "double-click");
-			} else if (obj instanceof MageCard) {
-				cardEventSource.doubleClick(((MageCard)obj).getOriginal().getId(), "double-click");
-			}
-		}
-	}
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        if (e.getClickCount() == 2 && !e.isConsumed()) {
+            e.consume();
+            Object obj = e.getSource();
+            if (obj instanceof Card) {
+                cardEventSource.doubleClick(((Card)obj).getCardId(), "double-click");
+            } else if (obj instanceof MageCard) {
+                cardEventSource.doubleClick(((MageCard)obj).getOriginal().getId(), "double-click");
+            }
+        }
+    }
 
-	@Override
-	public void mousePressed(MouseEvent e) {}
+    @Override
+    public void mousePressed(MouseEvent e) {}
 
-	@Override
-	public void mouseReleased(MouseEvent e) {}
+    @Override
+    public void mouseReleased(MouseEvent e) {}
 
-	@Override
-	public void mouseEntered(MouseEvent e) {}
+    @Override
+    public void mouseEntered(MouseEvent e) {}
 
-	@Override
-	public void mouseExited(MouseEvent e) {}
+    @Override
+    public void mouseExited(MouseEvent e) {}
 
-	private void resizeArea() {
+    private void resizeArea() {
         Dimension area = new Dimension(0, 0);
         Dimension size = getPreferredSize();
 
         for (Component comp: getComponents()) {
-        	Rectangle r = comp.getBounds();
-        	if (r.x + r.width > area.width) {
-        		area.width = r.x + r.width;
-        	}
-        	if (r.y + r.height > area.height) {
-        		area.height = r.y + r.height;
-        	}
+            Rectangle r = comp.getBounds();
+            if (r.x + r.width > area.width) {
+                area.width = r.x + r.width;
+            }
+            if (r.y + r.height > area.height) {
+                area.height = r.y + r.height;
+            }
         }
         if (size.height != area.height || size.width != area.width) {
-        	setPreferredSize(area);
+            setPreferredSize(area);
        }
-	}
+    }
 
-	@Override
-	public void refresh() {
-		revalidate();
-       	repaint();
-	}
+    @Override
+    public void refresh() {
+        revalidate();
+           repaint();
+    }
 }
 
 class CardNameComparator implements Comparator<MageCard> {
 
-	@Override
-	public int compare(MageCard o1, MageCard o2) {
-		return o1.getOriginal().getName().compareTo(o2.getOriginal().getName());
-	}
+    @Override
+    public int compare(MageCard o1, MageCard o2) {
+        return o1.getOriginal().getName().compareTo(o2.getOriginal().getName());
+    }
 
 }
 
 class CardRarityComparator implements Comparator<MageCard> {
 
-	@Override
-	public int compare(MageCard o1, MageCard o2) {
-		int val = o1.getOriginal().getRarity().compareTo(o2.getOriginal().getRarity());
-		if (val == 0) {
-			return o1.getOriginal().getName().compareTo(o2.getOriginal().getName());
-		}
-		else {
-			return val;
-		}
-	}
+    @Override
+    public int compare(MageCard o1, MageCard o2) {
+        int val = o1.getOriginal().getRarity().compareTo(o2.getOriginal().getRarity());
+        if (val == 0) {
+            return o1.getOriginal().getName().compareTo(o2.getOriginal().getName());
+        }
+        else {
+            return val;
+        }
+    }
 
 }
 
 class CardCostComparator implements Comparator<MageCard> {
 
-	@Override
-	public int compare(MageCard o1, MageCard o2) {
-		int val = Integer.valueOf(o1.getOriginal().getConvertedManaCost()).compareTo(Integer.valueOf(o2.getOriginal().getConvertedManaCost()));
-		if (val == 0) {
-			return o1.getOriginal().getName().compareTo(o2.getOriginal().getName());
-		}
-		else {
-			return val;
-		}
-	}
+    @Override
+    public int compare(MageCard o1, MageCard o2) {
+        int val = Integer.valueOf(o1.getOriginal().getConvertedManaCost()).compareTo(Integer.valueOf(o2.getOriginal().getConvertedManaCost()));
+        if (val == 0) {
+            return o1.getOriginal().getName().compareTo(o2.getOriginal().getName());
+        }
+        else {
+            return val;
+        }
+    }
 
 }
 
 class CardColorComparator implements Comparator<MageCard> {
 
-	@Override
-	public int compare(MageCard o1, MageCard o2) {
-		int val = o1.getOriginal().getColor().compareTo(o2.getOriginal().getColor());
-		if (val == 0) {
-			return o1.getOriginal().getName().compareTo(o2.getOriginal().getName());
-		}
-		else {
-			return val;
-		}
-	}
+    @Override
+    public int compare(MageCard o1, MageCard o2) {
+        int val = o1.getOriginal().getColor().compareTo(o2.getOriginal().getColor());
+        if (val == 0) {
+            return o1.getOriginal().getName().compareTo(o2.getOriginal().getName());
+        }
+        else {
+            return val;
+        }
+    }
 
 }

@@ -44,74 +44,74 @@ import mage.game.Game;
  */
 public class ControlsPermanentCondition implements Condition {
 
-	public static enum CountType { MORE_THAN, FEWER_THAN, EQUAL_TO };
-	private FilterPermanent filter;
-	private Condition condition;
-	private CountType type;
-	private int count;
+    public static enum CountType { MORE_THAN, FEWER_THAN, EQUAL_TO };
+    private FilterPermanent filter;
+    private Condition condition;
+    private CountType type;
+    private int count;
 
-	/**
-	 * Applies a filter and delegates creation to
-	 * {@link #ControlsPermanent(mage.filter.FilterPermanent, mage.abilities.condition.common.ControlsPermanent.CountType, int)}
-	 * with {@link CountType#MORE_THAN}, and 0.
-	 * 
-	 * @param filter
-	 */
+    /**
+     * Applies a filter and delegates creation to
+     * {@link #ControlsPermanent(mage.filter.FilterPermanent, mage.abilities.condition.common.ControlsPermanent.CountType, int)}
+     * with {@link CountType#MORE_THAN}, and 0.
+     * 
+     * @param filter
+     */
     public ControlsPermanentCondition(FilterPermanent filter) {
         this(filter, CountType.MORE_THAN, 0);
     }
 
-	/**
-	 * Applies a filter, a {@link CountType}, and count to permanents on the
-	 * battlefield when checking the condition during the
-	 * {@link #apply(mage.game.Game, mage.abilities.Ability) apply} method invocation.
-	 *
-	 * @param filter
-	 */
-	public ControlsPermanentCondition ( FilterPermanent filter, CountType type, int count ) {
-		this.filter = filter;
-		this.type = type;
-		this.count = count;
-	}
+    /**
+     * Applies a filter, a {@link CountType}, and count to permanents on the
+     * battlefield when checking the condition during the
+     * {@link #apply(mage.game.Game, mage.abilities.Ability) apply} method invocation.
+     *
+     * @param filter
+     */
+    public ControlsPermanentCondition ( FilterPermanent filter, CountType type, int count ) {
+        this.filter = filter;
+        this.type = type;
+        this.count = count;
+    }
 
-	/**
-	 * Applies a filter, a {@link CountType}, and count to permanents on the
-	 * battlefield and calls the decorated condition to see if it
-	 * {@link #apply(mage.game.Game, mage.abilities.Ability) applies}
-	 * as well.  This will force both conditions to apply for this to be true.
-	 *
-	 * @param filter
-	 * @param conditionToDecorate
-	 */
-	public ControlsPermanentCondition ( FilterPermanent filter, CountType type, int count, Condition conditionToDecorate ) {
-		this(filter, type, count);
-		this.condition = conditionToDecorate;
-	}
+    /**
+     * Applies a filter, a {@link CountType}, and count to permanents on the
+     * battlefield and calls the decorated condition to see if it
+     * {@link #apply(mage.game.Game, mage.abilities.Ability) applies}
+     * as well.  This will force both conditions to apply for this to be true.
+     *
+     * @param filter
+     * @param conditionToDecorate
+     */
+    public ControlsPermanentCondition ( FilterPermanent filter, CountType type, int count, Condition conditionToDecorate ) {
+        this(filter, type, count);
+        this.condition = conditionToDecorate;
+    }
 
     /*
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean apply(Game game, Ability source) {
-		boolean conditionApplies = false;
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean apply(Game game, Ability source) {
+        boolean conditionApplies = false;
 
-		switch ( this.type ) {
-			case FEWER_THAN:
-				conditionApplies = game.getBattlefield().countAll(filter, source.getControllerId(), game) < this.count;
-				break;
-			case MORE_THAN:
-				conditionApplies = game.getBattlefield().countAll(filter, source.getControllerId(), game) > this.count;
-				break;
-			case EQUAL_TO:
-				conditionApplies = game.getBattlefield().countAll(filter, source.getControllerId(), game) == this.count;
-				break;
-		}
+        switch ( this.type ) {
+            case FEWER_THAN:
+                conditionApplies = game.getBattlefield().countAll(filter, source.getControllerId(), game) < this.count;
+                break;
+            case MORE_THAN:
+                conditionApplies = game.getBattlefield().countAll(filter, source.getControllerId(), game) > this.count;
+                break;
+            case EQUAL_TO:
+                conditionApplies = game.getBattlefield().countAll(filter, source.getControllerId(), game) == this.count;
+                break;
+        }
 
-		//If a decorated condition exists, check it as well and apply them together.
-		if ( this.condition != null ) {
-			conditionApplies = conditionApplies && this.condition.apply(game, source);
-		}
+        //If a decorated condition exists, check it as well and apply them together.
+        if ( this.condition != null ) {
+            conditionApplies = conditionApplies && this.condition.apply(game, source);
+        }
 
-		return conditionApplies;
-	}
+        return conditionApplies;
+    }
 }

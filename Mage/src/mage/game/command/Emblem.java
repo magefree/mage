@@ -47,111 +47,111 @@ import java.util.UUID;
  */
 public class Emblem implements CommandObject {
 
-	private static List emptyList = new ArrayList();
-	private static ObjectColor emptyColor = new ObjectColor();
-	private static ManaCosts emptyCost = new ManaCostsImpl();
+    private static List emptyList = new ArrayList();
+    private static ObjectColor emptyColor = new ObjectColor();
+    private static ManaCosts emptyCost = new ManaCostsImpl();
 
 
-	private UUID id;
-	private UUID controllerId;
-	private UUID sourceId;
-	private Abilities<Ability> abilites = new AbilitiesImpl<Ability>();
+    private UUID id;
+    private UUID controllerId;
+    private UUID sourceId;
+    private Abilities<Ability> abilites = new AbilitiesImpl<Ability>();
 
-	public Emblem() {
-		this.id = UUID.randomUUID();
-	}
+    public Emblem() {
+        this.id = UUID.randomUUID();
+    }
 
-	public Emblem(Emblem emblem) {
-		this.id = emblem.id;
-		this.controllerId = emblem.controllerId;
-		this.sourceId = emblem.sourceId;
-		this.abilites = emblem.abilites.copy();
-	}
+    public Emblem(Emblem emblem) {
+        this.id = emblem.id;
+        this.controllerId = emblem.controllerId;
+        this.sourceId = emblem.sourceId;
+        this.abilites = emblem.abilites.copy();
+    }
 
     @Override
     public void assignNewId() {
         this.id = UUID.randomUUID();
     }
 
-	@Override
-	public UUID getSourceId() {
-		return this.sourceId;
-	}
+    @Override
+    public UUID getSourceId() {
+        return this.sourceId;
+    }
 
-	@Override
-	public UUID getControllerId() {
-		return this.controllerId;
-	}
+    @Override
+    public UUID getControllerId() {
+        return this.controllerId;
+    }
 
     public void setControllerId(UUID controllerId) {
-	 	this.controllerId = controllerId;
+         this.controllerId = controllerId;
         this.abilites.setControllerId(controllerId);
-	}
+    }
 
-	public void setSourceId(UUID sourceId) {
-		this.sourceId = sourceId;
-	}
+    public void setSourceId(UUID sourceId) {
+        this.sourceId = sourceId;
+    }
 
-	@Override
-	public String getName() {
-		return "";
-	}
+    @Override
+    public String getName() {
+        return "";
+    }
 
-	@Override
-	public void setName(String name) {}
+    @Override
+    public void setName(String name) {}
 
-	@Override
-	public List<Constants.CardType> getCardType() {
-		return emptyList;
-	}
+    @Override
+    public List<Constants.CardType> getCardType() {
+        return emptyList;
+    }
 
-	@Override
-	public List<String> getSubtype() {
-		return emptyList;
-	}
+    @Override
+    public List<String> getSubtype() {
+        return emptyList;
+    }
 
-	@Override
-	public boolean hasSubtype(String subtype) {
-		return false;
-	}
+    @Override
+    public boolean hasSubtype(String subtype) {
+        return false;
+    }
 
-	@Override
-	public List<String> getSupertype() {
-		return emptyList;
-	}
+    @Override
+    public List<String> getSupertype() {
+        return emptyList;
+    }
 
-	@Override
-	public Abilities<Ability> getAbilities() {
-		return abilites;
-	}
+    @Override
+    public Abilities<Ability> getAbilities() {
+        return abilites;
+    }
 
-	@Override
-	public ObjectColor getColor() {
-		return emptyColor;
-	}
+    @Override
+    public ObjectColor getColor() {
+        return emptyColor;
+    }
 
-	@Override
-	public ManaCosts<ManaCost> getManaCost() {
-		return emptyCost;
-	}
+    @Override
+    public ManaCosts<ManaCost> getManaCost() {
+        return emptyCost;
+    }
 
-	@Override
-	public MageInt getPower() {
-		return MageInt.EmptyMageInt;
-	}
+    @Override
+    public MageInt getPower() {
+        return MageInt.EmptyMageInt;
+    }
 
-	@Override
-	public MageInt getToughness() {
-		return MageInt.EmptyMageInt;
-	}
+    @Override
+    public MageInt getToughness() {
+        return MageInt.EmptyMageInt;
+    }
 
-	@Override
-	public void adjustCosts(Ability ability, Game game) {}
+    @Override
+    public void adjustCosts(Ability ability, Game game) {}
 
-	@Override
-	public UUID getId() {
-		return this.id;
-	}
+    @Override
+    public UUID getId() {
+        return this.id;
+    }
 
     @Override
     public void setCopy(boolean isCopy) {
@@ -163,7 +163,7 @@ public class Emblem implements CommandObject {
     }
 
     @Override
-	public Emblem copy() {
-		return new Emblem(this);
-	}
+    public Emblem copy() {
+        return new Emblem(this);
+    }
 }

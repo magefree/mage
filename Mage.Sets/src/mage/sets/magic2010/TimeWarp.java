@@ -45,45 +45,45 @@ import mage.target.TargetPlayer;
  */
 public class TimeWarp extends CardImpl<TimeWarp> {
 
-	public TimeWarp(UUID ownerId) {
-		super(ownerId, 75, "Time Warp", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
-		this.expansionSetCode = "M10";
-		this.color.setBlue(true);
-		this.getSpellAbility().addTarget(new TargetPlayer());
-		this.getSpellAbility().addEffect(new TimeWarpEffect());
-	}
+    public TimeWarp(UUID ownerId) {
+        super(ownerId, 75, "Time Warp", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
+        this.expansionSetCode = "M10";
+        this.color.setBlue(true);
+        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addEffect(new TimeWarpEffect());
+    }
 
-	public TimeWarp(final TimeWarp card) {
-		super(card);
-	}
+    public TimeWarp(final TimeWarp card) {
+        super(card);
+    }
 
-	@Override
-	public TimeWarp copy() {
-		return new TimeWarp(this);
-	}
+    @Override
+    public TimeWarp copy() {
+        return new TimeWarp(this);
+    }
 
 }
 
 class TimeWarpEffect extends OneShotEffect<TimeWarpEffect> {
 
-	public TimeWarpEffect() {
-		super(Outcome.ExtraTurn);
-		staticText = "Target player takes an extra turn after this one";
-	}
+    public TimeWarpEffect() {
+        super(Outcome.ExtraTurn);
+        staticText = "Target player takes an extra turn after this one";
+    }
 
-	public TimeWarpEffect(final TimeWarpEffect effect) {
-		super(effect);
-	}
+    public TimeWarpEffect(final TimeWarpEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public TimeWarpEffect copy() {
-		return new TimeWarpEffect(this);
-	}
+    @Override
+    public TimeWarpEffect copy() {
+        return new TimeWarpEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		game.getState().getTurnMods().add(new TurnMod(source.getFirstTarget(), false));
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        game.getState().getTurnMods().add(new TurnMod(source.getFirstTarget(), false));
+        return true;
+    }
 
 }

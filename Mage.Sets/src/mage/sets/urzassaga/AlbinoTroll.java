@@ -52,7 +52,7 @@ public class AlbinoTroll extends CardImpl<AlbinoTroll>{
         this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
-		this.addAbility(new EchoAbility("{1}{G}"));
+        this.addAbility(new EchoAbility("{1}{G}"));
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{G}")));
     }
 

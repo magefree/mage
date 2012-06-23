@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class GiantGrowth extends mage.sets.tenth.GiantGrowth {
 
-	public GiantGrowth(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 184;
-		this.expansionSetCode = "M10";
-	}
+    public GiantGrowth(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 184;
+        this.expansionSetCode = "M10";
+    }
 
-	public GiantGrowth(final GiantGrowth card) {
-		super(card);
-	}
+    public GiantGrowth(final GiantGrowth card) {
+        super(card);
+    }
 
-	@Override
-	public GiantGrowth copy() {
-		return new GiantGrowth(this);
-	}
+    @Override
+    public GiantGrowth copy() {
+        return new GiantGrowth(this);
+    }
 
 }

@@ -69,13 +69,13 @@ public class GrimoireOfTheDead extends CardImpl<GrimoireOfTheDead> {
         ability1.addCost(new TapSourceCost());
         ability1.addCost(new DiscardTargetCost(new TargetCardInHand()));
         this.addAbility(ability1);
-        
+
         // {tap}, Remove three study counters from Grimoire of the Dead and sacrifice it: Put all creature cards from all graveyards onto the battlefield under your control. They're black Zombies in addition to their other colors and types.
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GrimoireOfTheDeadEffect(), new TapSourceCost());
         ability2.addCost(new RemoveCountersSourceCost(CounterType.STUDY.createInstance(3)));
         ability2.addCost(new SacrificeSourceCost());
         this.addAbility(ability2);
-        
+
     }
 
     public GrimoireOfTheDead(final GrimoireOfTheDead card) {
@@ -90,84 +90,84 @@ public class GrimoireOfTheDead extends CardImpl<GrimoireOfTheDead> {
 
 class GrimoireOfTheDeadEffect extends OneShotEffect<GrimoireOfTheDeadEffect> {
 
-	public GrimoireOfTheDeadEffect() {
-		super(Outcome.PutCreatureInPlay);
-		staticText = "Put all creature cards in all graveyards onto the battlefield under your control. They're black Zombies in addition to their other colors and types";
-	}
+    public GrimoireOfTheDeadEffect() {
+        super(Outcome.PutCreatureInPlay);
+        staticText = "Put all creature cards in all graveyards onto the battlefield under your control. They're black Zombies in addition to their other colors and types";
+    }
 
-	public GrimoireOfTheDeadEffect(final GrimoireOfTheDeadEffect effect) {
-		super(effect);
-	}
+    public GrimoireOfTheDeadEffect(final GrimoireOfTheDeadEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		for (Player player: game.getPlayers().values()) {
-			for (Card card: player.getGraveyard().getCards(game)) {
-				if (card.getCardType().contains(CardType.CREATURE)) {
-					card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), source.getControllerId());
+    @Override
+    public boolean apply(Game game, Ability source) {
+        for (Player player: game.getPlayers().values()) {
+            for (Card card: player.getGraveyard().getCards(game)) {
+                if (card.getCardType().contains(CardType.CREATURE)) {
+                    card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), source.getControllerId());
                     game.addEffect(new GrimoireOfTheDeadEffect2(card.getId()), source);
-				}
-			}
-		}
-		return true;
-	}
+                }
+            }
+        }
+        return true;
+    }
 
-	@Override
-	public GrimoireOfTheDeadEffect copy() {
-		return new GrimoireOfTheDeadEffect(this);
-	}
+    @Override
+    public GrimoireOfTheDeadEffect copy() {
+        return new GrimoireOfTheDeadEffect(this);
+    }
 
 }
 
 class GrimoireOfTheDeadEffect2 extends ContinuousEffectImpl<GrimoireOfTheDeadEffect2> {
 
     private UUID targetId;
-    
-	public GrimoireOfTheDeadEffect2(UUID targetId) {
-		super(Duration.EndOfGame, Outcome.Neutral);
+
+    public GrimoireOfTheDeadEffect2(UUID targetId) {
+        super(Duration.EndOfGame, Outcome.Neutral);
         this.targetId = targetId;
-		staticText = "Becomes a black Zombie in addition to its other colors and types";
-	}
+        staticText = "Becomes a black Zombie in addition to its other colors and types";
+    }
 
-	public GrimoireOfTheDeadEffect2(final GrimoireOfTheDeadEffect2 effect) {
-		super(effect);
+    public GrimoireOfTheDeadEffect2(final GrimoireOfTheDeadEffect2 effect) {
+        super(effect);
         this.targetId = effect.targetId;
-	}
+    }
 
-	@Override
-	public GrimoireOfTheDeadEffect2 copy() {
-		return new GrimoireOfTheDeadEffect2(this);
-	}
+    @Override
+    public GrimoireOfTheDeadEffect2 copy() {
+        return new GrimoireOfTheDeadEffect2(this);
+    }
 
-	@Override
-	public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-		Permanent permanent = game.getPermanent(targetId);
-		if (permanent != null) {
-			switch (layer) {
-				case ColorChangingEffects_5:
-					if (sublayer == SubLayer.NA) {
-						permanent.getColor().setBlack(true);
-					}
-					break;
-				case TypeChangingEffects_4:
-					if (sublayer == SubLayer.NA) {
-						permanent.getSubtype().add("Zombie");
-					}
-					break;
-			}
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        Permanent permanent = game.getPermanent(targetId);
+        if (permanent != null) {
+            switch (layer) {
+                case ColorChangingEffects_5:
+                    if (sublayer == SubLayer.NA) {
+                        permanent.getColor().setBlack(true);
+                    }
+                    break;
+                case TypeChangingEffects_4:
+                    if (sublayer == SubLayer.NA) {
+                        permanent.getSubtype().add("Zombie");
+                    }
+                    break;
+            }
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
 
-	@Override
-	public boolean hasLayer(Layer layer) {
-		return layer == Layer.ColorChangingEffects_5 || layer == Layer.TypeChangingEffects_4;
-	}
+    @Override
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.ColorChangingEffects_5 || layer == Layer.TypeChangingEffects_4;
+    }
 
 }

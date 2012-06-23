@@ -43,34 +43,34 @@ import mage.watchers.WatcherImpl;
 public class DamagedByWatcher extends WatcherImpl<DamagedByWatcher> {
 
     public List<UUID> damagedCreatures = new ArrayList<UUID>();
-    
+
     public DamagedByWatcher() {
-		super("DamagedByWatcher", WatcherScope.CARD);
-	}
+        super("DamagedByWatcher", WatcherScope.CARD);
+    }
 
-	public DamagedByWatcher(final DamagedByWatcher watcher) {
-		super(watcher);
+    public DamagedByWatcher(final DamagedByWatcher watcher) {
+        super(watcher);
         this.damagedCreatures = watcher.damagedCreatures;
-	}
+    }
 
-	@Override
-	public DamagedByWatcher copy() {
-		return new DamagedByWatcher(this);
-	}
+    @Override
+    public DamagedByWatcher copy() {
+        return new DamagedByWatcher(this);
+    }
 
-	@Override
-	public void watch(GameEvent event, Game game) {
-		if (event.getType() == EventType.DAMAGED_CREATURE) {
+    @Override
+    public void watch(GameEvent event, Game game) {
+        if (event.getType() == EventType.DAMAGED_CREATURE) {
             if (sourceId.equals(event.getSourceId()) && !damagedCreatures.contains(event.getTargetId())) {
                 damagedCreatures.add(event.getTargetId());
             }
         }
-	}
-    
-	@Override
-	public void reset() {
-		super.reset();
-		damagedCreatures.clear();
-	}
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        damagedCreatures.clear();
+    }
 
 }

@@ -51,60 +51,60 @@ import mage.game.Game;
 public class SpireSerpent extends CardImpl<SpireSerpent> {
 
     private static final String abilityText1 = "Metalcraft - As long as you control three or more artifacts, {this} gets +2/+2 and ";
-   
-	public SpireSerpent(UUID ownerId) {
-		super(ownerId, 32, "Spire Serpent", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
-		this.expansionSetCode = "MBS";
-		this.subtype.add("Serpent");
-		this.color.setBlue(true);
-		this.power = new MageInt(3);
-		this.toughness = new MageInt(5);
 
-		this.addAbility(DefenderAbility.getInstance());
+    public SpireSerpent(UUID ownerId) {
+        super(ownerId, 32, "Spire Serpent", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
+        this.expansionSetCode = "MBS";
+        this.subtype.add("Serpent");
+        this.color.setBlue(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(5);
+
+        this.addAbility(DefenderAbility.getInstance());
         ConditionalContinousEffect effect1 = new ConditionalContinousEffect(new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), MetalcraftCondition.getInstance(), abilityText1);
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect1);
         ability.addEffect(new SpireSerpentEffect());
         this.addAbility(ability);
-	}
+    }
 
-	public SpireSerpent(final SpireSerpent card) {
-		super(card);
-	}
+    public SpireSerpent(final SpireSerpent card) {
+        super(card);
+    }
 
-	@Override
-	public SpireSerpent copy() {
-		return new SpireSerpent(this);
-	}
+    @Override
+    public SpireSerpent copy() {
+        return new SpireSerpent(this);
+    }
 
 }
 
 class SpireSerpentEffect extends AsThoughEffectImpl<SpireSerpentEffect> {
 
-	public SpireSerpentEffect() {
-		super(Constants.AsThoughEffectType.ATTACK, Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
-		staticText = "{this} can attack as though it didn't have defender";
-	}
+    public SpireSerpentEffect() {
+        super(Constants.AsThoughEffectType.ATTACK, Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        staticText = "{this} can attack as though it didn't have defender";
+    }
 
-	public SpireSerpentEffect(final SpireSerpentEffect effect) {
-		super(effect);
-	}
+    public SpireSerpentEffect(final SpireSerpentEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
 
-	@Override
-	public SpireSerpentEffect copy() {
-		return new SpireSerpentEffect(this);
-	}
+    @Override
+    public SpireSerpentEffect copy() {
+        return new SpireSerpentEffect(this);
+    }
 
-	@Override
-	public boolean applies(UUID sourceId, Ability source, Game game) {
+    @Override
+    public boolean applies(UUID sourceId, Ability source, Game game) {
         if (sourceId.equals(source.getSourceId()) && MetalcraftCondition.getInstance().apply(game, source)) {
             return true;
         }
-		return false;
-	}
+        return false;
+    }
 
 }

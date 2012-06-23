@@ -14,22 +14,22 @@ import mage.filter.FilterStackObject;
  */
 public class HexproofAbility extends SimpleStaticAbility {
 
-	private static final HexproofAbility fINSTANCE;
+    private static final HexproofAbility fINSTANCE;
     private static final FilterStackObject filter;
- 
+
     static {
         filter = new FilterStackObject("spells or abilities your opponents control");
         filter.setTargetController(Constants.TargetController.OPPONENT);
         fINSTANCE = new HexproofAbility();
     }
- 
-	private Object readResolve() throws ObjectStreamException {
-		return fINSTANCE;
-	}
 
-	public static HexproofAbility getInstance() {
-		return fINSTANCE;
-	}
+    private Object readResolve() throws ObjectStreamException {
+        return fINSTANCE;
+    }
+
+    public static HexproofAbility getInstance() {
+        return fINSTANCE;
+    }
 
     private HexproofAbility() {
         super(Constants.Zone.BATTLEFIELD, new CantTargetSourceEffect(filter, Constants.Duration.WhileOnBattlefield));

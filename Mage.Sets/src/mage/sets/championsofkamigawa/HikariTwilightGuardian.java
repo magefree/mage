@@ -51,13 +51,13 @@ import mage.game.permanent.Permanent;
 public class HikariTwilightGuardian extends CardImpl<HikariTwilightGuardian> {
 
     private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
-    
+
     public HikariTwilightGuardian (UUID ownerId) {
         super(ownerId, 12, "Hikari, Twilight Guardian", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
         this.expansionSetCode = "CHK";
         this.supertype.add("Legendary");
         this.subtype.add("Spirit");
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         this.addAbility(FlyingAbility.getInstance());
@@ -77,37 +77,37 @@ public class HikariTwilightGuardian extends CardImpl<HikariTwilightGuardian> {
 
 class HikariTwilightGuardianEffect extends OneShotEffect<HikariTwilightGuardianEffect> {
 
-	private static final String effectText = "Exile {this}. Return it to the battlefield under your control at the beginning of the next end step";
+    private static final String effectText = "Exile {this}. Return it to the battlefield under your control at the beginning of the next end step";
 
-	HikariTwilightGuardianEffect ( ) {
-		super(Constants.Outcome.Benefit);
-		staticText = effectText;
-	}
+    HikariTwilightGuardianEffect ( ) {
+        super(Constants.Outcome.Benefit);
+        staticText = effectText;
+    }
 
-	HikariTwilightGuardianEffect(HikariTwilightGuardianEffect effect) {
-		super(effect);
-	}
+    HikariTwilightGuardianEffect(HikariTwilightGuardianEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getSourceId());
-		if (permanent != null) {
-			if (permanent.moveToExile(source.getSourceId(), "Hikari, Twilight Guardian", source.getId(), game)) {
-				//create delayed triggered ability
-				AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(
-						new ReturnFromExileEffect(source.getSourceId(), Constants.Zone.BATTLEFIELD));
-				delayedAbility.setSourceId(source.getSourceId());
-				delayedAbility.setControllerId(source.getControllerId());
-				game.addDelayedTriggeredAbility(delayedAbility);
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            if (permanent.moveToExile(source.getSourceId(), "Hikari, Twilight Guardian", source.getId(), game)) {
+                //create delayed triggered ability
+                AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(
+                        new ReturnFromExileEffect(source.getSourceId(), Constants.Zone.BATTLEFIELD));
+                delayedAbility.setSourceId(source.getSourceId());
+                delayedAbility.setControllerId(source.getControllerId());
+                game.addDelayedTriggeredAbility(delayedAbility);
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public HikariTwilightGuardianEffect copy() {
-		return new HikariTwilightGuardianEffect(this);
-	}
+    @Override
+    public HikariTwilightGuardianEffect copy() {
+        return new HikariTwilightGuardianEffect(this);
+    }
 
 }

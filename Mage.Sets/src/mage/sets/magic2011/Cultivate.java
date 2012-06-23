@@ -54,48 +54,48 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class Cultivate extends CardImpl<Cultivate> {
 
-	public Cultivate(UUID ownerId) {
-		super(ownerId, 168, "Cultivate", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
-		this.expansionSetCode = "M11";
-		this.color.setGreen(true);
-		this.getSpellAbility().addEffect(new CultivateEffect());
+    public Cultivate(UUID ownerId) {
+        super(ownerId, 168, "Cultivate", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
+        this.expansionSetCode = "M11";
+        this.color.setGreen(true);
+        this.getSpellAbility().addEffect(new CultivateEffect());
 
-	}
+    }
 
-	public Cultivate(final Cultivate card) {
-		super(card);
-	}
+    public Cultivate(final Cultivate card) {
+        super(card);
+    }
 
-	@Override
-	public Cultivate copy() {
-		return new Cultivate(this);
-	}
+    @Override
+    public Cultivate copy() {
+        return new Cultivate(this);
+    }
 
 }
 
 class CultivateEffect extends OneShotEffect<CultivateEffect> {
 
-	protected static final FilterCard filter = new FilterCard("card to put on the battlefield tapped");
+    protected static final FilterCard filter = new FilterCard("card to put on the battlefield tapped");
 
-	public CultivateEffect() {
-		super(Outcome.PutLandInPlay);
-		staticText = "Search your library for up to two basic land cards, reveal those cards, and put one onto the battlefield tapped and the other into your hand. Then shuffle your library";
-	}
+    public CultivateEffect() {
+        super(Outcome.PutLandInPlay);
+        staticText = "Search your library for up to two basic land cards, reveal those cards, and put one onto the battlefield tapped and the other into your hand. Then shuffle your library";
+    }
 
-	public CultivateEffect(final CultivateEffect effect) {
-		super(effect);
-	}
+    public CultivateEffect(final CultivateEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public CultivateEffect copy() {
-		return new CultivateEffect(this);
-	}
+    @Override
+    public CultivateEffect copy() {
+        return new CultivateEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		TargetCardInLibrary target = new TargetCardInLibrary(0, 2, new FilterBasicLandCard());
-		Player player = game.getPlayer(source.getControllerId());
-		if (player.searchLibrary(target, game)) {
+    @Override
+    public boolean apply(Game game, Ability source) {
+        TargetCardInLibrary target = new TargetCardInLibrary(0, 2, new FilterBasicLandCard());
+        Player player = game.getPlayer(source.getControllerId());
+        if (player.searchLibrary(target, game)) {
             if (target.getTargets().size() > 0) {
                 Cards revealed = new CardsImpl();
                 for (UUID cardId: (List<UUID>)target.getTargets()) {
@@ -131,6 +131,6 @@ class CultivateEffect extends OneShotEffect<CultivateEffect> {
         player.shuffleLibrary(game);
         return false;
 
-	}
+    }
 
 }

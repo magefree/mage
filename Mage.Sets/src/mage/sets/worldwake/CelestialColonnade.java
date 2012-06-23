@@ -51,38 +51,38 @@ import mage.game.permanent.token.Token;
  */
 public class CelestialColonnade extends CardImpl<CelestialColonnade> {
 
-	public CelestialColonnade(UUID ownerId) {
-		super(ownerId, 133, "Celestial Colonnade", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-		this.expansionSetCode = "WWK";
-		this.addAbility(new EntersBattlefieldTappedAbility());
-		this.addAbility(new BlueManaAbility());
-		this.addAbility(new WhiteManaAbility());
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new CelestialColonnadeToken(), "land", Duration.EndOfTurn), new ManaCostsImpl("{3}{W}{U}")));
-	}
+    public CelestialColonnade(UUID ownerId) {
+        super(ownerId, 133, "Celestial Colonnade", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+        this.expansionSetCode = "WWK";
+        this.addAbility(new EntersBattlefieldTappedAbility());
+        this.addAbility(new BlueManaAbility());
+        this.addAbility(new WhiteManaAbility());
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new CelestialColonnadeToken(), "land", Duration.EndOfTurn), new ManaCostsImpl("{3}{W}{U}")));
+    }
 
-	public CelestialColonnade(final CelestialColonnade card) {
-		super(card);
-	}
+    public CelestialColonnade(final CelestialColonnade card) {
+        super(card);
+    }
 
-	@Override
-	public CelestialColonnade copy() {
-		return new CelestialColonnade(this);
-	}
+    @Override
+    public CelestialColonnade copy() {
+        return new CelestialColonnade(this);
+    }
 
 }
 
 class CelestialColonnadeToken extends Token {
 
-	public CelestialColonnadeToken() {
-		super("", "4/4 white and blue Elemental creature with flying and vigilance");
-		cardType.add(CardType.CREATURE);
-		subtype.add("Elemental");
-		color.setBlue(true);
-		color.setWhite(true);
-		power = new MageInt(4);
-		toughness = new MageInt(4);
-		addAbility(FlyingAbility.getInstance());
-		addAbility(VigilanceAbility.getInstance());
-	}
+    public CelestialColonnadeToken() {
+        super("", "4/4 white and blue Elemental creature with flying and vigilance");
+        cardType.add(CardType.CREATURE);
+        subtype.add("Elemental");
+        color.setBlue(true);
+        color.setWhite(true);
+        power = new MageInt(4);
+        toughness = new MageInt(4);
+        addAbility(FlyingAbility.getInstance());
+        addAbility(VigilanceAbility.getInstance());
+    }
 
 }

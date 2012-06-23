@@ -42,45 +42,45 @@ import mage.game.permanent.Permanent;
  */
 public class PayLoyaltyCost extends CostImpl<PayLoyaltyCost> {
 
-	private int amount;
+    private int amount;
 
-	public PayLoyaltyCost(int amount) {
-		this.amount = amount;
-		this.text = Integer.toString(amount);
-		if (amount >= 0) this.text = "+" + this.text;
-	}
+    public PayLoyaltyCost(int amount) {
+        this.amount = amount;
+        this.text = Integer.toString(amount);
+        if (amount >= 0) this.text = "+" + this.text;
+    }
 
-	public PayLoyaltyCost(PayLoyaltyCost cost) {
-		super(cost);
-		this.amount = cost.amount;
-	}
+    public PayLoyaltyCost(PayLoyaltyCost cost) {
+        super(cost);
+        this.amount = cost.amount;
+    }
 
-	@Override
-	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-		Permanent planeswalker = game.getPermanent(sourceId);
-		if (planeswalker.getCounters().getCount(CounterType.LOYALTY) + amount >= 0 && !planeswalker.isLoyaltyUsed())
-			return true;
-		return false;
-	}
+    @Override
+    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+        Permanent planeswalker = game.getPermanent(sourceId);
+        if (planeswalker.getCounters().getCount(CounterType.LOYALTY) + amount >= 0 && !planeswalker.isLoyaltyUsed())
+            return true;
+        return false;
+    }
 
-	@Override
-	public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-		Permanent planeswalker = game.getPermanent(sourceId);
-		if (planeswalker.getCounters().getCount(CounterType.LOYALTY) + amount >= 0 && !planeswalker.isLoyaltyUsed()) {
-			if (amount > 0) {
-				planeswalker.getCounters().addCounter(CounterType.LOYALTY.createInstance(amount));
-			} else if (amount < 0) {
-				planeswalker.getCounters().removeCounter(CounterType.LOYALTY, Math.abs(amount));
-			}
-			planeswalker.setLoyaltyUsed(true);
-			this.paid = true;
-		}
-		return paid;
-	}
+    @Override
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+        Permanent planeswalker = game.getPermanent(sourceId);
+        if (planeswalker.getCounters().getCount(CounterType.LOYALTY) + amount >= 0 && !planeswalker.isLoyaltyUsed()) {
+            if (amount > 0) {
+                planeswalker.getCounters().addCounter(CounterType.LOYALTY.createInstance(amount));
+            } else if (amount < 0) {
+                planeswalker.getCounters().removeCounter(CounterType.LOYALTY, Math.abs(amount));
+            }
+            planeswalker.setLoyaltyUsed(true);
+            this.paid = true;
+        }
+        return paid;
+    }
 
-	@Override
-	public PayLoyaltyCost copy() {
-		return new PayLoyaltyCost(this);
-	}
+    @Override
+    public PayLoyaltyCost copy() {
+        return new PayLoyaltyCost(this);
+    }
 
 }

@@ -52,7 +52,7 @@ public class PlaguemawBeast extends CardImpl<PlaguemawBeast> {
         super(ownerId, 87, "Plaguemaw Beast", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
         this.expansionSetCode = "MBS";
         this.subtype.add("Beast");
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ProliferateEffect(), new TapSourceCost());

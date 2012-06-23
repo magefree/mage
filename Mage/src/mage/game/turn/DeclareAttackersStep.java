@@ -39,39 +39,39 @@ import mage.game.events.GameEvent.EventType;
  */
 public class DeclareAttackersStep extends Step<DeclareAttackersStep> {
 
-	public DeclareAttackersStep() {
-		super(PhaseStep.DECLARE_ATTACKERS, true);
-		this.stepEvent = EventType.DECLARE_ATTACKERS_STEP;
-		this.preStepEvent = EventType.DECLARE_ATTACKERS_STEP_PRE;
-		this.postStepEvent = EventType.DECLARE_ATTACKERS_STEP_POST;
-	}
+    public DeclareAttackersStep() {
+        super(PhaseStep.DECLARE_ATTACKERS, true);
+        this.stepEvent = EventType.DECLARE_ATTACKERS_STEP;
+        this.preStepEvent = EventType.DECLARE_ATTACKERS_STEP_PRE;
+        this.postStepEvent = EventType.DECLARE_ATTACKERS_STEP_POST;
+    }
 
-	public DeclareAttackersStep(final DeclareAttackersStep step) {
-		super(step);
-	}
+    public DeclareAttackersStep(final DeclareAttackersStep step) {
+        super(step);
+    }
 
-	@Override
-	public boolean skipStep(Game game, UUID activePlayerId) {
-		if (game.getPlayer(activePlayerId).getAvailableAttackers(game).isEmpty())
-			return true;
-		return super.skipStep(game, activePlayerId);
-	}
+    @Override
+    public boolean skipStep(Game game, UUID activePlayerId) {
+        if (game.getPlayer(activePlayerId).getAvailableAttackers(game).isEmpty())
+            return true;
+        return super.skipStep(game, activePlayerId);
+    }
 
-	@Override
-	public void beginStep(Game game, UUID activePlayerId) {
-		super.beginStep(game, activePlayerId);
-		game.getCombat().selectAttackers(game);
-	}
+    @Override
+    public void beginStep(Game game, UUID activePlayerId) {
+        super.beginStep(game, activePlayerId);
+        game.getCombat().selectAttackers(game);
+    }
 
     @Override
     public void resumeBeginStep(Game game, UUID activePlayerId) {
         super.resumeBeginStep(game, activePlayerId);
         game.getCombat().resumeSelectAttackers(game);
     }    
-    
-	@Override
-	public DeclareAttackersStep copy() {
-		return new DeclareAttackersStep(this);
-	}
+
+    @Override
+    public DeclareAttackersStep copy() {
+        return new DeclareAttackersStep(this);
+    }
 
 }

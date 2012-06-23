@@ -62,7 +62,7 @@ public class HelperPanel extends JPanel {
                     setState("",false,"",false);
                     setSpecial("", false);
                     linkLeft.doClick();
-		        }}
+                }}
             }
         });
 

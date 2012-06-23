@@ -37,18 +37,18 @@ import mage.watchers.common.PlayerDamagedBySourceWatcher;
  * @author LevelX
  */
 public class DealtDamageToAnOpponent implements Condition {
-    
-	public DealtDamageToAnOpponent() {
-	}
-	
-	@Override
-	public boolean apply(Game game, Ability source) {
+
+    public DealtDamageToAnOpponent() {
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
                 for (UUID opponentId: game.getOpponents(source.getControllerId())) {
                         PlayerDamagedBySourceWatcher watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get("PlayerDamagedBySource", opponentId);
                         if (watcher != null && watcher.damageSources.contains(source.getSourceId()))
                                     return true;
                 }
-		return false;
-	}
+        return false;
+    }
 }
 

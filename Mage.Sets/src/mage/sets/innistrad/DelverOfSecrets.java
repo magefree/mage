@@ -59,7 +59,7 @@ public class DelverOfSecrets extends CardImpl<DelverOfSecrets> {
         this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        
+
         this.canTransform = true;
         this.secondSideCard = new InsectileAberration(ownerId);
 
@@ -96,19 +96,19 @@ class DelverOfSecretsAbility extends TriggeredAbilityImpl<DelverOfSecretsAbility
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE && event.getPlayerId().equals(this.controllerId)) {
-        	Player player = game.getPlayer(this.controllerId);
-        	if (player != null && player.getLibrary().size() > 0) {
+            Player player = game.getPlayer(this.controllerId);
+            if (player != null && player.getLibrary().size() > 0) {
                 Card card = player.getLibrary().getFromTop(game);
                 Cards cards = new CardsImpl();
                 cards.add(card);
                 player.lookAtCards("This card", cards, game);
                 if (player.chooseUse(Outcome.DrawCard, "Do you wish to reveal the card at the top of the liberary?", game))
                 {
-		            player.revealCards("Delver of Secrets", cards, game);
-		            if ((card.getCardType().contains(CardType.INSTANT) || card.getCardType().contains(CardType.SORCERY))) {
-		                return true;
-		            }
-	            }
+                    player.revealCards("Delver of Secrets", cards, game);
+                    if ((card.getCardType().contains(CardType.INSTANT) || card.getCardType().contains(CardType.SORCERY))) {
+                        return true;
+                    }
+                }
             }
         }
         return false;

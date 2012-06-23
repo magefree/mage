@@ -58,7 +58,7 @@ public class HeartlessSummoning extends CardImpl<HeartlessSummoning> {
 
         // Creature spells you cast cost {2} less to cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HeartlessSummoningCostReductionEffect()));
-        
+
         // Creatures you control get -1/-1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(-1, -1, Constants.Duration.WhileOnBattlefield)));
     }
@@ -75,36 +75,36 @@ public class HeartlessSummoning extends CardImpl<HeartlessSummoning> {
 
 class HeartlessSummoningCostReductionEffect extends CostModificationEffectImpl<HeartlessSummoningCostReductionEffect> {
 
-	HeartlessSummoningCostReductionEffect ( ) {
-		super(Duration.WhileOnBattlefield, Outcome.Benefit);
-		staticText = "Creature spells you cast cost {2} less to cast";
-	}
+    HeartlessSummoningCostReductionEffect ( ) {
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        staticText = "Creature spells you cast cost {2} less to cast";
+    }
 
-	HeartlessSummoningCostReductionEffect(HeartlessSummoningCostReductionEffect effect) {
-		super(effect);
-	}
+    HeartlessSummoningCostReductionEffect(HeartlessSummoningCostReductionEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source, Ability abilityToModify) {
-		SpellAbility spellAbility = (SpellAbility) abilityToModify;
-		CardUtil.adjustCost(spellAbility, 2);
-		return true;
-	}
-	
-	@Override
-	public boolean applies(Ability abilityToModify, Ability source, Game game) {
-		if ( abilityToModify instanceof SpellAbility ) {
-			Card sourceCard = game.getCard(((SpellAbility)abilityToModify).getSourceId());
-			if ( sourceCard != null && sourceCard.getCardType().contains(CardType.CREATURE) && sourceCard.getOwnerId().equals(source.getControllerId()) ) {
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source, Ability abilityToModify) {
+        SpellAbility spellAbility = (SpellAbility) abilityToModify;
+        CardUtil.adjustCost(spellAbility, 2);
+        return true;
+    }
 
-	@Override
-	public HeartlessSummoningCostReductionEffect copy() {
-		return new HeartlessSummoningCostReductionEffect(this);
-	}
+    @Override
+    public boolean applies(Ability abilityToModify, Ability source, Game game) {
+        if ( abilityToModify instanceof SpellAbility ) {
+            Card sourceCard = game.getCard(((SpellAbility)abilityToModify).getSourceId());
+            if ( sourceCard != null && sourceCard.getCardType().contains(CardType.CREATURE) && sourceCard.getOwnerId().equals(source.getControllerId()) ) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public HeartlessSummoningCostReductionEffect copy() {
+        return new HeartlessSummoningCostReductionEffect(this);
+    }
 
 }

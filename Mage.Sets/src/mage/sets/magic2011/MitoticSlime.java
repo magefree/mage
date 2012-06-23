@@ -43,49 +43,49 @@ import mage.game.permanent.token.Token;
  */
 public class MitoticSlime extends CardImpl<MitoticSlime> {
 
-	public MitoticSlime(UUID ownerId) {
-		super(ownerId, 185, "Mitotic Slime", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Ooze");
-		this.color.setGreen(true);
-		this.power = new MageInt(4);
-		this.toughness = new MageInt(4);
+    public MitoticSlime(UUID ownerId) {
+        super(ownerId, 185, "Mitotic Slime", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Ooze");
+        this.color.setGreen(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
-		this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new Ooze2Token(), 2), false));
-	}
+        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new Ooze2Token(), 2), false));
+    }
 
-	public MitoticSlime(final MitoticSlime card) {
-		super(card);
-	}
+    public MitoticSlime(final MitoticSlime card) {
+        super(card);
+    }
 
-	@Override
-	public MitoticSlime copy() {
-		return new MitoticSlime(this);
-	}
+    @Override
+    public MitoticSlime copy() {
+        return new MitoticSlime(this);
+    }
 
 }
 
 class Ooze2Token extends Token {
 
-	public Ooze2Token() {
-		super("Ooze", "2/2 green Ooze creature tokens with \"When this creature is put into a graveyard, put two 1/1 green Ooze creature tokens onto the battlefield.\"");
-		cardType.add(CardType.CREATURE);
-		subtype.add("Ooze");
-		color.setGreen(true);
-		power = new MageInt(2);
-		toughness = new MageInt(2);
-		this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new Ooze1Token(), 2), false));
-	}
+    public Ooze2Token() {
+        super("Ooze", "2/2 green Ooze creature tokens with \"When this creature is put into a graveyard, put two 1/1 green Ooze creature tokens onto the battlefield.\"");
+        cardType.add(CardType.CREATURE);
+        subtype.add("Ooze");
+        color.setGreen(true);
+        power = new MageInt(2);
+        toughness = new MageInt(2);
+        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new Ooze1Token(), 2), false));
+    }
 }
 
 class Ooze1Token extends Token {
 
-	public Ooze1Token() {
-		super("Ooze", "1/1 green Ooze creature tokens");
-		cardType.add(CardType.CREATURE);
-		subtype.add("Ooze");
-		color.setGreen(true);
-		power = new MageInt(1);
-		toughness = new MageInt(1);
-	}
+    public Ooze1Token() {
+        super("Ooze", "1/1 green Ooze creature tokens");
+        cardType.add(CardType.CREATURE);
+        subtype.add("Ooze");
+        color.setGreen(true);
+        power = new MageInt(1);
+        toughness = new MageInt(1);
+    }
 }

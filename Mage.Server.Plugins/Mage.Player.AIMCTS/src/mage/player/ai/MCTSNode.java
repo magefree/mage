@@ -50,11 +50,11 @@ import org.apache.log4j.Logger;
  * @author BetaSteward_at_googlemail.com
  */
 public class MCTSNode {
-    
+
     private static final double selectionCoefficient = 1.0;
     private static final double passRatioTolerance = 0.0;
- 	private final static transient Logger logger = Logger.getLogger(MCTSNode.class);
-   
+     private final static transient Logger logger = Logger.getLogger(MCTSNode.class);
+
     private int visits = 0;
     private int wins = 0;
     private MCTSNode parent;
@@ -65,9 +65,9 @@ public class MCTSNode {
     private String stateValue;
     private UUID playerId;
     private boolean terminal = false;
-    
+
     private static int nodeCount;
-    
+
     public MCTSNode(Game game) {
         this.game = game;
         this.stateValue = game.getState().getValue(false, game);
@@ -75,7 +75,7 @@ public class MCTSNode {
         setPlayer();
         nodeCount = 1;
     }    
-    
+
     protected MCTSNode(MCTSNode parent, Game game, Ability action) {
         this.game = game;
         this.stateValue = game.getState().getValue(false, game);
@@ -85,7 +85,7 @@ public class MCTSNode {
         setPlayer();
         nodeCount++;
     }
-    
+
     protected MCTSNode(MCTSNode parent, Game game, Combat combat) {
         this.game = game;
         this.combat = combat;
@@ -106,7 +106,7 @@ public class MCTSNode {
                 playerId = game.getActivePlayerId();
         }
     }
-    
+
     public MCTSNode select(UUID targetPlayerId) {
         double bestValue = Double.NEGATIVE_INFINITY;
         boolean isTarget = playerId.equals(targetPlayerId);
@@ -131,7 +131,7 @@ public class MCTSNode {
         }
         return bestChild;
     }
-    
+
     public void expand() {
         MCTSPlayer player = (MCTSPlayer) game.getPlayer(playerId);
         if (player.getNextAction() == null) {
@@ -185,7 +185,7 @@ public class MCTSNode {
         }
         game = null;
     }
-        
+
     public int simulate(UUID playerId) {
 //        long startTime = System.nanoTime();
         Game sim = createSimulation(game, playerId);
@@ -193,7 +193,7 @@ public class MCTSNode {
 //        long duration = System.nanoTime() - startTime;
         int retVal = -1;  //anything other than a win is a loss
         for (Player simPlayer: sim.getPlayers().values()) {
-//			logger.info(simPlayer.getName() + " calculated " + ((SimulatedPlayerMCTS)simPlayer).getActionCount() + " actions in " + duration/1000000000.0 + "s");
+//            logger.info(simPlayer.getName() + " calculated " + ((SimulatedPlayerMCTS)simPlayer).getActionCount() + " actions in " + duration/1000000000.0 + "s");
             if (simPlayer.getId().equals(playerId) && simPlayer.hasWon()) {
 //                logger.info("AI won the simulation");
                 retVal = 1;
@@ -201,7 +201,7 @@ public class MCTSNode {
         }
         return retVal;
     }
-    
+
     public void backpropagate(int result) {
         if (result == 0)
             return;
@@ -250,30 +250,30 @@ public class MCTSNode {
         }
         return bestChild;
     }
-    
+
     public void emancipate() {
         if (parent != null) {
             this.parent.children.remove(this);
             this.parent = null;
         }
     }
-    
+
     public Ability getAction() {
         return action;
     }
-    
+
     public int getNumChildren() {
         return children.size();
     }
-    
+
     public MCTSNode getParent() {
         return parent;
     }
-    
+
     public Combat getCombat() {
         return combat;
     }
-    
+
     public int getNodeCount() {
         return nodeCount;
     }
@@ -281,37 +281,37 @@ public class MCTSNode {
     public String getStateValue() {
         return stateValue;
     }
-    
+
     public double getWinRatio() {
         if (visits > 0)
             return wins/(visits * 1.0);
         return -1.0;
     }
-    
+
     public int getVisits() {
         return visits;
     }
-    
-    /**
-	 * Copies game and replaces all players in copy with simulated players
-     * Shuffles each players library so that there is no knowledge of its order
-	 *
-	 * @param game
-	 * @return a new game object with simulated players
-	 */
-	protected Game createSimulation(Game game, UUID playerId) {
-		Game sim = game.copy();
 
-		for (Player copyPlayer: sim.getState().getPlayers().values()) {
-			Player origPlayer = game.getState().getPlayers().get(copyPlayer.getId()).copy();
-			SimulatedPlayerMCTS newPlayer = new SimulatedPlayerMCTS(copyPlayer.getId(), true);
-			newPlayer.restore(origPlayer);
-			sim.getState().getPlayers().put(copyPlayer.getId(), newPlayer);
-		}
+    /**
+     * Copies game and replaces all players in copy with simulated players
+     * Shuffles each players library so that there is no knowledge of its order
+     *
+     * @param game
+     * @return a new game object with simulated players
+     */
+    protected Game createSimulation(Game game, UUID playerId) {
+        Game sim = game.copy();
+
+        for (Player copyPlayer: sim.getState().getPlayers().values()) {
+            Player origPlayer = game.getState().getPlayers().get(copyPlayer.getId()).copy();
+            SimulatedPlayerMCTS newPlayer = new SimulatedPlayerMCTS(copyPlayer.getId(), true);
+            newPlayer.restore(origPlayer);
+            sim.getState().getPlayers().put(copyPlayer.getId(), newPlayer);
+        }
         randomizePlayers(sim, playerId);
-		sim.setSimulation(true);
-		return sim;
-	}
+        sim.setSimulation(true);
+        return sim;
+    }
 
     /*
      * Shuffles each players library so that there is no knowledge of its order
@@ -336,7 +336,7 @@ public class MCTSNode {
             }
         }
     }
-    
+
     public boolean isTerminal() {
         return terminal;
     }
@@ -372,13 +372,13 @@ public class MCTSNode {
         }
         return null;
     }
-    
+
     public void merge(MCTSNode merge) {
         if (!stateValue.equals(merge.stateValue)) {
             logger.info("mismatched merge states");
             return;
         }
-            
+
         this.visits += merge.visits;
         this.wins += merge.wins;
 
@@ -386,7 +386,7 @@ public class MCTSNode {
         for (MCTSNode child: merge.children) {
             mergeChildren.add(child);
         }
-        
+
         for (MCTSNode child: children) {
             for (MCTSNode mergeChild: mergeChildren) {
                 if (mergeChild.action != null && child.action != null) {
@@ -424,7 +424,7 @@ public class MCTSNode {
             }
         }
     }
-    
+
 //    public void print(int depth) {
 //        String indent = String.format("%1$-" + depth + "s", "");
 //        StringBuilder sb = new StringBuilder();
@@ -437,7 +437,7 @@ public class MCTSNode {
 //            child.print(depth + 1);
 //        }
 //    }
-    
+
     public int size() {
         int num = 1;
         for (MCTSNode child: children) {

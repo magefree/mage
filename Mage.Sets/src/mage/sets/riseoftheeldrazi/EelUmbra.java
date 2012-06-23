@@ -59,9 +59,9 @@ public class EelUmbra extends CardImpl<EelUmbra> {
         this.addAbility(FlashAbility.getInstance());
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // Enchanted creature gets +1/+1.
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Constants.Duration.WhileOnBattlefield)));

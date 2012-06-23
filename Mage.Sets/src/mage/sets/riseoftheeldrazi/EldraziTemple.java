@@ -85,20 +85,20 @@ class EldraziTempleManaAbility extends BasicManaAbility<EldraziTempleManaAbility
 
 class EldraziConditionalMana extends ConditionalMana {
 
-	public EldraziConditionalMana() {
-		super(Mana.ColorlessMana(2));
-		staticText = "Spend this mana only to cast colorless Eldrazi spells or activate abilities of colorless Eldrazi";
-		addCondition(new EldraziManaCondition());
-	}
+    public EldraziConditionalMana() {
+        super(Mana.ColorlessMana(2));
+        staticText = "Spend this mana only to cast colorless Eldrazi spells or activate abilities of colorless Eldrazi";
+        addCondition(new EldraziManaCondition());
+    }
 }
 
 class EldraziManaCondition implements Condition {
-	@Override
-	public boolean apply(Game game, Ability source) {
-		MageObject object = game.getObject(source.getSourceId());
-		if (object != null && object.hasSubtype("Eldrazi") && !object.getColor().hasColor()) {
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        MageObject object = game.getObject(source.getSourceId());
+        if (object != null && object.hasSubtype("Eldrazi") && !object.getColor().hasColor()) {
+            return true;
+        }
+        return false;
+    }
 }

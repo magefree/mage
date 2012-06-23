@@ -50,13 +50,13 @@ import mage.target.targetpointer.FixedTarget;
  * @author LevelX
  */
 public class HorobiDeathsWail extends CardImpl<HorobiDeathsWail> {
-    
+
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Demon");
     static {
         filter.getSubtype().add("Demon");
         filter.setScopeSubtype(Filter.ComparisonScope.Any);
     }
-    
+
     public HorobiDeathsWail(UUID ownerId) {
         super(ownerId, 117, "Horobi Death's Wail", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
         this.expansionSetCode = "CHK";
@@ -81,7 +81,7 @@ public class HorobiDeathsWail extends CardImpl<HorobiDeathsWail> {
     public HorobiDeathsWail copy() {
         return new HorobiDeathsWail(this);
     }    
-     
+
 }
 
 class HorobiDeathsWailAbility extends TriggeredAbilityImpl<HorobiDeathsWailAbility> {

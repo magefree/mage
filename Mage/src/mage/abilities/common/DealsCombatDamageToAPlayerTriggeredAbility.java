@@ -44,28 +44,28 @@ import mage.target.targetpointer.FixedTarget;
 public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbilityImpl<DealsCombatDamageToAPlayerTriggeredAbility> {
     private boolean setTargetPointer;
 
-	public DealsCombatDamageToAPlayerTriggeredAbility(Effect effect, boolean optional) {
-		this(effect, optional, false);
-	}
+    public DealsCombatDamageToAPlayerTriggeredAbility(Effect effect, boolean optional) {
+        this(effect, optional, false);
+    }
 
     public DealsCombatDamageToAPlayerTriggeredAbility(Effect effect, boolean optional, boolean setTargetPointer) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.setTargetPointer = setTargetPointer;
     }
 
-	public DealsCombatDamageToAPlayerTriggeredAbility(final DealsCombatDamageToAPlayerTriggeredAbility ability) {
-		super(ability);
+    public DealsCombatDamageToAPlayerTriggeredAbility(final DealsCombatDamageToAPlayerTriggeredAbility ability) {
+        super(ability);
         this.setTargetPointer = ability.setTargetPointer;
-	}
+    }
 
-	@Override
-	public DealsCombatDamageToAPlayerTriggeredAbility copy() {
-		return new DealsCombatDamageToAPlayerTriggeredAbility(this);
-	}
+    @Override
+    public DealsCombatDamageToAPlayerTriggeredAbility copy() {
+        return new DealsCombatDamageToAPlayerTriggeredAbility(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.DAMAGED_PLAYER && event.getSourceId().equals(this.sourceId)
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.DAMAGED_PLAYER && event.getSourceId().equals(this.sourceId)
                 && ((DamagedPlayerEvent) event).isCombatDamage()) {
             if (setTargetPointer) {
                 for (Effect effect : this.getEffects()) {
@@ -73,14 +73,14 @@ public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
                         effect.setValue("damage", event.getAmount());
                 }
             }
-			return true;
-		}
-		return false;
-	}
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "Whenever {this} deals combat damage to a player, " + super.getRule();
-	}
+    @Override
+    public String getRule() {
+        return "Whenever {this} deals combat damage to a player, " + super.getRule();
+    }
 
 }

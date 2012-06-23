@@ -103,10 +103,10 @@ public class CardPluginImpl implements CardPlugin {
     @Override
     public int sortPermanents(Map<String, JComponent> ui, Collection<MagePermanent> permanents, Map<String, String> options) {
         //TODO: add caching
-		//requires to find out is position have been changed that includes:
-		//adding/removing permanents, type change
+        //requires to find out is position have been changed that includes:
+        //adding/removing permanents, type change
 
-		if (ui == null)
+        if (ui == null)
             throw new RuntimeException("Error: no components");
         //JComponent component = ui.get("jScrollPane");
         JComponent component2 = ui.get("battlefieldPanel");
@@ -164,14 +164,14 @@ public class CardPluginImpl implements CardPlugin {
         Row allCreatures = new Row(permanents, RowType.creature);
         Row allOthers = new Row(permanents, RowType.other);
 
-		boolean othersOnTheRight = true;
-		if (options != null && options.containsKey("nonLandPermanentsInOnePile")) {
-			if (options.get("nonLandPermanentsInOnePile").equals("true")) {
-				othersOnTheRight = false;
-			   	allCreatures.addAll(allOthers);
-				allOthers.clear();
-			}
-		}
+        boolean othersOnTheRight = true;
+        if (options != null && options.containsKey("nonLandPermanentsInOnePile")) {
+            if (options.get("nonLandPermanentsInOnePile").equals("true")) {
+                othersOnTheRight = false;
+                   allCreatures.addAll(allOthers);
+                allOthers.clear();
+            }
+        }
 
         cardWidth = cardWidthMax;
         Rectangle rect = battlefieldPanel.getVisibleRect();
@@ -214,7 +214,7 @@ public class CardPluginImpl implements CardPlugin {
             if (creatures.isEmpty() && lands.isEmpty() && others.isEmpty())
                 break;
             //cardWidth = (int)(cardWidth / 1.2);
-			//FIXME: -1 is too slow. why not binary search?
+            //FIXME: -1 is too slow. why not binary search?
             cardWidth -= 3;
         }
 
@@ -255,13 +255,13 @@ public class CardPluginImpl implements CardPlugin {
                     int panelX = x + (stackPosition * stackSpacingX);
                     int panelY = y + (stackPosition * stackSpacingY);
                     //panel.setLocation(panelX, panelY);
-					try {
-						// may cause:
-						// java.lang.IllegalArgumentException: illegal component position 26 should be less then 26
+                    try {
+                        // may cause:
+                        // java.lang.IllegalArgumentException: illegal component position 26 should be less then 26
                         battlefieldPanel.moveToFront(panel);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     panel.setCardBounds(panelX, panelY, cardWidth, cardHeight);
                 }
                 rowBottom = Math.max(rowBottom, y + stack.getHeight());
@@ -366,7 +366,7 @@ public class CardPluginImpl implements CardPlugin {
             for (MagePermanent panel : permanents) {
                 if (!type.isType(panel)) {
                     continue;
-				}
+                }
                 Stack stack = new Stack();
                 stack.add(panel);
                 add(stack);
@@ -425,7 +425,7 @@ public class CardPluginImpl implements CardPlugin {
     public boolean newImages(Set<Card> allCards, String imagesPath) {
         return DownloadPictures.checkForNewCards(allCards, imagesPath);
     }
-    
+
     /**
      * Download images.
      *
@@ -453,9 +453,9 @@ public class CardPluginImpl implements CardPlugin {
         }
 
         it = new GathererSets(imagesPath);
-	    for(DownloadJob job:it) {
-	            g.getDownloader().add(job);
-	    }
+        for(DownloadJob job:it) {
+                g.getDownloader().add(job);
+        }
 
         JDialog d = new JDialog((Frame) null, "Download pictures", false);
         d.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -510,7 +510,7 @@ public class CardPluginImpl implements CardPlugin {
     }
 
     @Override
-	public BufferedImage getOriginalImage(CardView card) {
-		return ImageCache.getImageOriginal(card);
-	}
+    public BufferedImage getOriginalImage(CardView card) {
+        return ImageCache.getImageOriginal(card);
+    }
 }

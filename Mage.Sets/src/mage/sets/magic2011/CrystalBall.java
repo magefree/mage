@@ -45,22 +45,22 @@ import mage.cards.CardImpl;
  */
 public class CrystalBall extends CardImpl<CrystalBall> {
 
-	public CrystalBall(UUID ownerId) {
-		super(ownerId, 203, "Crystal Ball", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-		this.expansionSetCode = "M11";
+    public CrystalBall(UUID ownerId) {
+        super(ownerId, 203, "Crystal Ball", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
+        this.expansionSetCode = "M11";
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(2), new TapSourceCost());
         ability.addManaCost(new GenericManaCost(1));
-		this.addAbility(ability);
-	}
+        this.addAbility(ability);
+    }
 
-	public CrystalBall(final CrystalBall card) {
-		super(card);
-	}
+    public CrystalBall(final CrystalBall card) {
+        super(card);
+    }
 
-	@Override
-	public CrystalBall copy() {
-		return new CrystalBall(this);
-	}
+    @Override
+    public CrystalBall copy() {
+        return new CrystalBall(this);
+    }
 
 }
 

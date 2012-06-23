@@ -45,8 +45,8 @@ public class SigiledBehemoth extends CardImpl<SigiledBehemoth> {
         super(ownerId, 79, "Sigiled Behemoth", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}{W}");
         this.expansionSetCode = "ARB";
         this.subtype.add("Beast");
-		this.color.setGreen(true);
-		this.color.setWhite(true);
+        this.color.setGreen(true);
+        this.color.setWhite(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
         this.addAbility(new ExaltedAbility());

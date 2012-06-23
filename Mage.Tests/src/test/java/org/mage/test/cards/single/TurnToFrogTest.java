@@ -21,14 +21,14 @@ public class TurnToFrogTest extends CardTestPlayerBase {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Raging Ravine");
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Island", 2);
         addCard(Constants.Zone.HAND, playerB, "Turn to Frog");
-        
+
         activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{R}{G}: until end of turn {this} becomes a 3/3 red and green Elemental creature with \"Whenever this creature attacks, put a +1/+1 counter on it.\" that's still a land. ");
         castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerB, "Turn to Frog", "Raging Ravine");
         attack(1, playerA, "Raging Ravine");
 
         setStopAt(1, Constants.PhaseStep.END_COMBAT);
         execute();
-        
+
         assertLife(playerA, 20);
         assertLife(playerB, 19);
         assertPowerToughness(playerA, "Raging Ravine", 1, 1, Filter.ComparisonScope.Any);
@@ -42,7 +42,7 @@ public class TurnToFrogTest extends CardTestPlayerBase {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Raging Ravine");
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Island", 2);
         addCard(Constants.Zone.HAND, playerB, "Turn to Frog");
-        
+
         activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{R}{G}: until end of turn {this} becomes a 3/3 red and green Elemental creature with \"Whenever this creature attacks, put a +1/+1 counter on it.\" that's still a land. ");
         castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerB, "Turn to Frog", "Raging Ravine");
 
@@ -51,7 +51,7 @@ public class TurnToFrogTest extends CardTestPlayerBase {
 
         setStopAt(3, Constants.PhaseStep.END_COMBAT);
         execute();
-        
+
         assertLife(playerA, 20);
         assertLife(playerB, 16);
         assertPowerToughness(playerA, "Raging Ravine", 4, 4, Filter.ComparisonScope.Any);

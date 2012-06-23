@@ -43,29 +43,29 @@ import mage.target.TargetPermanent;
  */
 public class Demolish extends CardImpl<Demolish> {
 
-	private static final FilterPermanent filter = new FilterPermanent("artifact or land");
+    private static final FilterPermanent filter = new FilterPermanent("artifact or land");
 
-	static {
-		filter.getCardType().add(CardType.ARTIFACT);
-		filter.getCardType().add(CardType.LAND);
-		filter.setScopeCardType(ComparisonScope.Any);
-	}
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.getCardType().add(CardType.LAND);
+        filter.setScopeCardType(ComparisonScope.Any);
+    }
 
-	public Demolish(UUID ownerId) {
-		super(ownerId, 196, "Demolish", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
-		this.expansionSetCode = "10E";
-		this.color.setRed(true);
-		this.getSpellAbility().addTarget(new TargetPermanent(filter));
-		this.getSpellAbility().addEffect(new DestroyTargetEffect());
-	}
+    public Demolish(UUID ownerId) {
+        super(ownerId, 196, "Demolish", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
+        this.expansionSetCode = "10E";
+        this.color.setRed(true);
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+    }
 
-	public Demolish(final Demolish card) {
-		super(card);
-	}
+    public Demolish(final Demolish card) {
+        super(card);
+    }
 
-	@Override
-	public Demolish copy() {
-		return new Demolish(this);
-	}
+    @Override
+    public Demolish copy() {
+        return new Demolish(this);
+    }
 
 }

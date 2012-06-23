@@ -40,26 +40,26 @@ import mage.game.Game;
 public class AddContinuousEffectToGame extends OneShotEffect<AddContinuousEffectToGame> {
 
     private ContinuousEffect effect;
-    
-	public AddContinuousEffectToGame(ContinuousEffect effect) {
-		super(Outcome.Benefit);
-		this.effect = effect;
-	}
 
-	public AddContinuousEffectToGame(final AddContinuousEffectToGame effect) {
-		super(effect);
-		this.effect = effect.effect;
-	}
+    public AddContinuousEffectToGame(ContinuousEffect effect) {
+        super(Outcome.Benefit);
+        this.effect = effect;
+    }
 
-	@Override
-	public AddContinuousEffectToGame copy() {
-		return new AddContinuousEffectToGame(this);
-	}
+    public AddContinuousEffectToGame(final AddContinuousEffectToGame effect) {
+        super(effect);
+        this.effect = effect.effect;
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public AddContinuousEffectToGame copy() {
+        return new AddContinuousEffectToGame(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
         ContinuousEffect effectToAdd = (ContinuousEffect) effect.copy();
-		game.addEffect(effectToAdd, source);
+        game.addEffect(effectToAdd, source);
         return true;
-	}
+    }
 }

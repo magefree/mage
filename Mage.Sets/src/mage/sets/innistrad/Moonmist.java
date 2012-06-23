@@ -48,14 +48,14 @@ import mage.game.permanent.Permanent;
 public class Moonmist extends CardImpl<Moonmist> {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures other than Werewolves and Wolves");
-    
+
     static {
         filter.getSubtype().add("Werewolf");
         filter.getSubtype().add("Wolf");
         filter.setScopeSubtype(ComparisonScope.Any);
         filter.setNotFilter(true);
     }
-    
+
     public Moonmist(UUID ownerId) {
         super(ownerId, 195, "Moonmist", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "ISD";
@@ -80,19 +80,19 @@ public class Moonmist extends CardImpl<Moonmist> {
 class MoonmistEffect extends OneShotEffect<MoonmistEffect> {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("humans");
-    
+
     static {
         filter.getSubtype().add("Human");
     }
-    
+
     public MoonmistEffect() {
         super(Outcome.PreventDamage);
     }
-    
+
     public MoonmistEffect(final MoonmistEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {

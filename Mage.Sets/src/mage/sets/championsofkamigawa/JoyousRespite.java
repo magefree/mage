@@ -52,7 +52,7 @@ public class JoyousRespite extends CardImpl<JoyousRespite> {
         super(ownerId, 216, "Joyous Respite", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.getSpellAbility().addEffect(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter)));
     }
 

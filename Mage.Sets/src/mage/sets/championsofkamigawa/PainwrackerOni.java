@@ -56,10 +56,10 @@ public class PainwrackerOni extends CardImpl<PainwrackerOni> {
         this.expansionSetCode = "CHK";
         this.subtype.add("Demon");
         this.subtype.add("Spirit");
-	this.color.setBlack(true);
+    this.color.setBlack(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
-        
+
         // Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)
         this.addAbility(FearAbility.getInstance());
         // At the beginning of your upkeep, sacrifice a creature if you don't control an Ogre.

@@ -40,24 +40,24 @@ import mage.cards.CardImpl;
  * @author BetaSteward_at_googlemail.com
  */
 public class SacredWolf extends CardImpl<SacredWolf> {
-	public SacredWolf(UUID ownerId) {
-		super(ownerId, 196, "Sacred Wolf", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Wolf");
-		this.color.setGreen(true);
-		this.power = new MageInt(3);
-		this.toughness = new MageInt(1);
-		this.addAbility(HexproofAbility.getInstance());
-	}
+    public SacredWolf(UUID ownerId) {
+        super(ownerId, 196, "Sacred Wolf", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Wolf");
+        this.color.setGreen(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(1);
+        this.addAbility(HexproofAbility.getInstance());
+    }
 
-	public SacredWolf(final SacredWolf card) {
-		super(card);
-	}
+    public SacredWolf(final SacredWolf card) {
+        super(card);
+    }
 
-	@Override
-	public SacredWolf copy() {
-		return new SacredWolf(this);
-	}
+    @Override
+    public SacredWolf copy() {
+        return new SacredWolf(this);
+    }
 
 }
 

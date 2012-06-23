@@ -38,22 +38,22 @@ import mage.cards.ExpansionSet;
  */
 public class Conflux extends ExpansionSet {
 
-	private static final Conflux fINSTANCE =  new Conflux();
+    private static final Conflux fINSTANCE =  new Conflux();
 
-	public static Conflux getInstance() {
-		return fINSTANCE;
-	}
+    public static Conflux getInstance() {
+        return fINSTANCE;
+    }
 
-	private Conflux() {
-		super("Conflux", "CON", "seticon_conflux", "mage.sets.conflux", new GregorianCalendar(2009, 0, 31).getTime(), SetType.EXPANSION);
-		this.blockName = "Shards of Alara";
-		this.parentSet = ShardsOfAlara.getInstance();
-		this.hasBoosters = true;
-		this.numBoosterLands = 0;
-		this.numBoosterCommon = 11;
-		this.numBoosterUncommon = 3;
-		this.numBoosterRare = 1;
-		this.ratioBoosterMythic = 8;
-	}
+    private Conflux() {
+        super("Conflux", "CON", "seticon_conflux", "mage.sets.conflux", new GregorianCalendar(2009, 0, 31).getTime(), SetType.EXPANSION);
+        this.blockName = "Shards of Alara";
+        this.parentSet = ShardsOfAlara.getInstance();
+        this.hasBoosters = true;
+        this.numBoosterLands = 0;
+        this.numBoosterCommon = 11;
+        this.numBoosterUncommon = 3;
+        this.numBoosterRare = 1;
+        this.ratioBoosterMythic = 8;
+    }
 
 }

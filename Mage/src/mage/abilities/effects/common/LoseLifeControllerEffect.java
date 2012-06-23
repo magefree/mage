@@ -49,12 +49,12 @@ public class LoseLifeControllerEffect extends OneShotEffect<LoseLifeControllerEf
     public LoseLifeControllerEffect(int amount) {
         super(Outcome.Damage);
         this.amount = amount;
-		staticText = "Its controller loses " + amount + " life";
+        staticText = "Its controller loses " + amount + " life";
     }
 
     public LoseLifeControllerEffect(final LoseLifeControllerEffect effect) {
         super(effect);
-		this.amount = effect.amount;
+        this.amount = effect.amount;
     }
 
     @Override
@@ -65,32 +65,32 @@ public class LoseLifeControllerEffect extends OneShotEffect<LoseLifeControllerEf
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject targetCard = game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.BATTLEFIELD);
-		
-		if ( targetCard == null ) {
-			MageObject obj = game.getObject(targetPointer.getFirst(game, source));
-			if ( obj instanceof Card ) {
-				targetCard = (Card)obj;
-			}
-		}
-		
+
+        if ( targetCard == null ) {
+            MageObject obj = game.getObject(targetPointer.getFirst(game, source));
+            if ( obj instanceof Card ) {
+                targetCard = (Card)obj;
+            }
+        }
+
         if ( targetCard != null ) {
-			Player controller = null;
-			
-			//Handles interaction with permanents that were on the battlefield.
-			if ( targetCard instanceof Permanent ) {
-				Permanent targetPermanent = (Permanent)targetCard;
-				controller = game.getPlayer(targetPermanent.getControllerId());
-			}
-			//Handles interaction with spells that were on the stack.
-			else if ( targetCard instanceof Spell ) {
-				Spell targetSpell = (Spell)targetCard;
-				controller = game.getPlayer(targetSpell.getControllerId());
-			}
-			
-			if ( controller != null ) {
-				controller.loseLife(amount, game);
-				return true;
-			}
+            Player controller = null;
+
+            //Handles interaction with permanents that were on the battlefield.
+            if ( targetCard instanceof Permanent ) {
+                Permanent targetPermanent = (Permanent)targetCard;
+                controller = game.getPlayer(targetPermanent.getControllerId());
+            }
+            //Handles interaction with spells that were on the stack.
+            else if ( targetCard instanceof Spell ) {
+                Spell targetSpell = (Spell)targetCard;
+                controller = game.getPlayer(targetSpell.getControllerId());
+            }
+
+            if ( controller != null ) {
+                controller.loseLife(amount, game);
+                return true;
+            }
         }
         return false;
     }

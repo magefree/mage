@@ -45,7 +45,7 @@ public class GoliathSphinx extends CardImpl<GoliathSphinx> {
         super(ownerId, 28, "Goliath Sphinx", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
         this.expansionSetCode = "WWK";
         this.subtype.add("Sphinx");
-		this.color.setBlue(true);
+        this.color.setBlue(true);
         this.power = new MageInt(8);
         this.toughness = new MageInt(7);
         this.addAbility(FlyingAbility.getInstance());

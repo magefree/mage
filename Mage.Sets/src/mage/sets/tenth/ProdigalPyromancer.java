@@ -46,27 +46,27 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class ProdigalPyromancer extends CardImpl<ProdigalPyromancer> {
 
-	public ProdigalPyromancer(UUID ownerId) {
-		super(ownerId, 221, "Prodigal Pyromancer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-		this.expansionSetCode = "10E";
-		this.subtype.add("Human");
-		this.subtype.add("Wizard");
-		this.color.setRed(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
+    public ProdigalPyromancer(UUID ownerId) {
+        super(ownerId, 221, "Prodigal Pyromancer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        this.expansionSetCode = "10E";
+        this.subtype.add("Human");
+        this.subtype.add("Wizard");
+        this.color.setRed(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
-		ability.addTarget(new TargetCreatureOrPlayer());
-		this.addAbility(ability);
-	}
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        ability.addTarget(new TargetCreatureOrPlayer());
+        this.addAbility(ability);
+    }
 
-	public ProdigalPyromancer(final ProdigalPyromancer card) {
-		super(card);
-	}
+    public ProdigalPyromancer(final ProdigalPyromancer card) {
+        super(card);
+    }
 
-	@Override
-	public ProdigalPyromancer copy() {
-		return new ProdigalPyromancer(this);
-	}
+    @Override
+    public ProdigalPyromancer copy() {
+        return new ProdigalPyromancer(this);
+    }
 
 }

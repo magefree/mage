@@ -36,7 +36,7 @@ import mage.cards.decks.DeckCardLists;
  */
 public interface DeckImporter {
 
-	public DeckCardLists importDeck(String file);
-	public String getErrors();
+    public DeckCardLists importDeck(String file);
+    public String getErrors();
 
 }

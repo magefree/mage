@@ -47,27 +47,27 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class EmberHauler extends CardImpl<EmberHauler> {
 
-	public EmberHauler(UUID ownerId) {
-		super(ownerId, 135, "Ember Hauler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}{R}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Goblin");
-		this.color.setRed(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+    public EmberHauler(UUID ownerId) {
+        super(ownerId, 135, "Ember Hauler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}{R}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Goblin");
+        this.color.setRed(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new SacrificeSourceCost());
         ability.addManaCost(new GenericManaCost(1));
-		ability.addTarget(new TargetCreatureOrPlayer());
-		this.addAbility(ability);
-	}
+        ability.addTarget(new TargetCreatureOrPlayer());
+        this.addAbility(ability);
+    }
 
-	public EmberHauler(final EmberHauler card) {
-		super(card);
-	}
+    public EmberHauler(final EmberHauler card) {
+        super(card);
+    }
 
-	@Override
-	public EmberHauler copy() {
-		return new EmberHauler(this);
-	}
+    @Override
+    public EmberHauler copy() {
+        return new EmberHauler(this);
+    }
 
 }

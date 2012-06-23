@@ -52,7 +52,7 @@ import mage.game.permanent.token.SpiritToken;
 public class BakuAltar extends CardImpl<BakuAltar> {
 
     private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
-    
+
     public BakuAltar(UUID ownerId) {
         super(ownerId, 152, "Baku Altar", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "BOK";

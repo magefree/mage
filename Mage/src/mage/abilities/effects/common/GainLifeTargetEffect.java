@@ -41,33 +41,33 @@ import mage.players.Player;
  */
 public class GainLifeTargetEffect extends OneShotEffect<GainLifeTargetEffect> {
 
-	private int life;
+    private int life;
 
-	public GainLifeTargetEffect(int life) {
-		super(Outcome.GainLife);
-		this.life = life;
-		staticText = "target players each gain " + Integer.toString(life) + " life";
-	}
+    public GainLifeTargetEffect(int life) {
+        super(Outcome.GainLife);
+        this.life = life;
+        staticText = "target players each gain " + Integer.toString(life) + " life";
+    }
 
-	public GainLifeTargetEffect(final GainLifeTargetEffect effect) {
-		super(effect);
-		this.life = effect.life;
-	}
+    public GainLifeTargetEffect(final GainLifeTargetEffect effect) {
+        super(effect);
+        this.life = effect.life;
+    }
 
-	@Override
-	public GainLifeTargetEffect copy() {
-		return new GainLifeTargetEffect(this);
-	}
+    @Override
+    public GainLifeTargetEffect copy() {
+        return new GainLifeTargetEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		for (UUID playerId: targetPointer.getTargets(game, source)) {
-			Player player = game.getPlayer(playerId);
-			if (player != null) {
-				player.gainLife(life, game);
-			}
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        for (UUID playerId: targetPointer.getTargets(game, source)) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                player.gainLife(life, game);
+            }
+        }
+        return true;
+    }
 
 }

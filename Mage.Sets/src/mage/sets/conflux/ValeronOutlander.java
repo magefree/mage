@@ -45,9 +45,9 @@ public class ValeronOutlander extends CardImpl<ValeronOutlander> {
     private static final FilterCard filter = new FilterCard("black");
 
     static {
-    	filter.setUseColor(true);
-    	filter.getColor().setBlack(true);
-		filter.setScopeColor(ComparisonScope.Any);
+        filter.setUseColor(true);
+        filter.getColor().setBlack(true);
+        filter.setScopeColor(ComparisonScope.Any);
     }
 
     public ValeronOutlander(UUID ownerId) {
@@ -58,7 +58,7 @@ public class ValeronOutlander extends CardImpl<ValeronOutlander> {
         this.subtype.add("Human");
         this.subtype.add("Scout");
         this.power = new MageInt(2);
-    	this.toughness = new MageInt(2);
+        this.toughness = new MageInt(2);
         this.addAbility(new ProtectionAbility(filter));
     }
 

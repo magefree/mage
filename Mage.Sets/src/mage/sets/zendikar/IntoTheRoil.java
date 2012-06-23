@@ -44,24 +44,24 @@ import mage.target.common.TargetNonlandPermanent;
  */
 public class IntoTheRoil extends CardImpl<IntoTheRoil> {
 
-	public IntoTheRoil(UUID ownerId) {
-		super(ownerId, 48, "Into the Roil", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-		this.expansionSetCode = "ZEN";
-		this.color.setBlue(true);
-		this.getSpellAbility().addTarget(new TargetNonlandPermanent());
-		this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-		KickerAbility ability = new KickerAbility(new DrawCardControllerEffect(1), false);
-		ability.addManaCost(new ManaCostsImpl("{1}{U}"));
-		this.addAbility(ability);
-	}
+    public IntoTheRoil(UUID ownerId) {
+        super(ownerId, 48, "Into the Roil", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
+        this.expansionSetCode = "ZEN";
+        this.color.setBlue(true);
+        this.getSpellAbility().addTarget(new TargetNonlandPermanent());
+        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        KickerAbility ability = new KickerAbility(new DrawCardControllerEffect(1), false);
+        ability.addManaCost(new ManaCostsImpl("{1}{U}"));
+        this.addAbility(ability);
+    }
 
-	public IntoTheRoil(final IntoTheRoil card) {
-		super(card);
-	}
+    public IntoTheRoil(final IntoTheRoil card) {
+        super(card);
+    }
 
-	@Override
-	public IntoTheRoil copy() {
-		return new IntoTheRoil(this);
-	}
+    @Override
+    public IntoTheRoil copy() {
+        return new IntoTheRoil(this);
+    }
 
 }

@@ -43,17 +43,17 @@ import mage.cards.decks.DeckValidatorImpl;
  */
 public class Limited extends DeckValidatorImpl {
 
-	public Limited() {
-		super("Limited");
-	}
+    public Limited() {
+        super("Limited");
+    }
 
-	@Override
-	public boolean validate(Deck deck) {
-		//20091005 - 100.2b
-		if (deck.getCards().size() < 40)
-			return false;
+    @Override
+    public boolean validate(Deck deck) {
+        //20091005 - 100.2b
+        if (deck.getCards().size() < 40)
+            return false;
 
-		return true;
-	}
+        return true;
+    }
 
 }

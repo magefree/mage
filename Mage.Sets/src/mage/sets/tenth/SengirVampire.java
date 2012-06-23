@@ -43,29 +43,29 @@ import java.util.UUID;
  */
 public class SengirVampire extends CardImpl<SengirVampire> {
 
-	public SengirVampire(UUID ownerId) {
-		super(ownerId, 176, "Sengir Vampire", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
-		this.expansionSetCode = "10E";
-		this.subtype.add("Vampire");
+    public SengirVampire(UUID ownerId) {
+        super(ownerId, 176, "Sengir Vampire", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
+        this.expansionSetCode = "10E";
+        this.subtype.add("Vampire");
 
-		this.color.setBlack(true);
-		this.power = new MageInt(4);
-		this.toughness = new MageInt(4);
+        this.color.setBlack(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
-		this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(FlyingAbility.getInstance());
 
-		// Whenever a creature dealt damage by Sengir Vampire this turn dies, put a +1/+1 counter on Sengir Vampire.
-		this.addAbility(new DiesAndDealtDamageThisTurnTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
-	}
+        // Whenever a creature dealt damage by Sengir Vampire this turn dies, put a +1/+1 counter on Sengir Vampire.
+        this.addAbility(new DiesAndDealtDamageThisTurnTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
+    }
 
-	public SengirVampire(final SengirVampire card) {
-		super(card);
-	}
+    public SengirVampire(final SengirVampire card) {
+        super(card);
+    }
 
-	@Override
-	public SengirVampire copy() {
-		return new SengirVampire(this);
-	}
+    @Override
+    public SengirVampire copy() {
+        return new SengirVampire(this);
+    }
 }
 
 

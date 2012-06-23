@@ -39,65 +39,65 @@ import mage.game.permanent.Permanent;
  */
 public class FilterArtifactPermanent<T extends FilterArtifactPermanent<T>> extends FilterPermanent<FilterArtifactPermanent<T>> {
 
-	protected boolean useAttacking;
-	protected boolean attacking;
-	protected boolean useBlocking;
-	protected boolean blocking;
+    protected boolean useAttacking;
+    protected boolean attacking;
+    protected boolean useBlocking;
+    protected boolean blocking;
 
-	public FilterArtifactPermanent() {
-		this("artifact");
-	}
+    public FilterArtifactPermanent() {
+        this("artifact");
+    }
 
-	public FilterArtifactPermanent(String name) {
-		super(name);
-		cardType.add(CardType.ARTIFACT);
-	}
+    public FilterArtifactPermanent(String name) {
+        super(name);
+        cardType.add(CardType.ARTIFACT);
+    }
 
-	public FilterArtifactPermanent(final FilterArtifactPermanent<T> filter) {
-		super(filter);
-		this.useAttacking = filter.useAttacking;
-		this.attacking = filter.attacking;
-		this.useBlocking = filter.useBlocking;
-		this.blocking = filter.blocking;
-		this.useTapped = filter.useTapped;
-		this.tapped = filter.tapped;
-	}
+    public FilterArtifactPermanent(final FilterArtifactPermanent<T> filter) {
+        super(filter);
+        this.useAttacking = filter.useAttacking;
+        this.attacking = filter.attacking;
+        this.useBlocking = filter.useBlocking;
+        this.blocking = filter.blocking;
+        this.useTapped = filter.useTapped;
+        this.tapped = filter.tapped;
+    }
 
-	@Override
-	public boolean match(Permanent permanent, Game game) {
-		if (!super.match(permanent, game))
-			return notFilter;
+    @Override
+    public boolean match(Permanent permanent, Game game) {
+        if (!super.match(permanent, game))
+            return notFilter;
 
-		if (useAttacking && permanent.isAttacking() != attacking)
-			return notFilter;
+        if (useAttacking && permanent.isAttacking() != attacking)
+            return notFilter;
 
-		if (useBlocking && (permanent.getBlocking() > 0) != blocking)
-			return notFilter;
+        if (useBlocking && (permanent.getBlocking() > 0) != blocking)
+            return notFilter;
 
-		if (useTapped && permanent.isTapped() != tapped)
-			return notFilter;
+        if (useTapped && permanent.isTapped() != tapped)
+            return notFilter;
 
-		return !notFilter;
-	}
+        return !notFilter;
+    }
 
-	public void setUseAttacking ( boolean useAttacking ) {
-		this.useAttacking = useAttacking;
-	}
+    public void setUseAttacking ( boolean useAttacking ) {
+        this.useAttacking = useAttacking;
+    }
 
-	public void setAttacking ( boolean attacking ) {
-		this.attacking = attacking;
-	}
+    public void setAttacking ( boolean attacking ) {
+        this.attacking = attacking;
+    }
 
-	public void setUseBlocking ( boolean useBlocking ) {
-		this.useBlocking = useBlocking;
-	}
+    public void setUseBlocking ( boolean useBlocking ) {
+        this.useBlocking = useBlocking;
+    }
 
-	public void setBlocking ( boolean blocking ) {
-		this.blocking = blocking;
-	}
+    public void setBlocking ( boolean blocking ) {
+        this.blocking = blocking;
+    }
 
-	@Override
-	public FilterArtifactPermanent<T> copy() {
-		return new FilterArtifactPermanent<T>(this);
-	}
+    @Override
+    public FilterArtifactPermanent<T> copy() {
+        return new FilterArtifactPermanent<T>(this);
+    }
 }

@@ -55,7 +55,7 @@ public class SkithiryxTheBlightDragon extends CardImpl<SkithiryxTheBlightDragon>
         this.supertype.add("Legendary");
         this.subtype.add("Dragon");
         this.subtype.add("Skeleton");
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         this.addAbility(FlyingAbility.getInstance());

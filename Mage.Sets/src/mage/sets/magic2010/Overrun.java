@@ -47,18 +47,18 @@ public class Overrun extends CardImpl<Overrun> {
     public Overrun(UUID ownerId) {
         super(ownerId, 198, "Overrun", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY},"{2}{G}{G}{G}");
         this.expansionSetCode = "M10";
-		this.color.setGreen(true);
+        this.color.setGreen(true);
 
         this.getSpellAbility().addEffect(new BoostControlledEffect(3, 3, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent()));
     }
 
-	public Overrun(final Overrun card) {
-		super(card);
-	}
+    public Overrun(final Overrun card) {
+        super(card);
+    }
 
-	@Override
-	public Overrun copy() {
-		return new Overrun(this);
-	}
+    @Override
+    public Overrun copy() {
+        return new Overrun(this);
+    }
 }

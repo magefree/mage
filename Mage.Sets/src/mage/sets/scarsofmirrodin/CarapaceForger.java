@@ -53,7 +53,7 @@ public class CarapaceForger extends CardImpl<CarapaceForger> {
         this.expansionSetCode = "SOM";
         this.subtype.add("Elf");
         this.subtype.add("Artificer");
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         ContinuousEffect boostSource = new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield);

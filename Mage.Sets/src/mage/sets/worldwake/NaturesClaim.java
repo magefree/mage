@@ -59,7 +59,7 @@ public class NaturesClaim extends CardImpl<NaturesClaim> {
     public NaturesClaim (UUID ownerId) {
         super(ownerId, 108, "Nature's Claim", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "WWK";
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new NaturesClaimEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));

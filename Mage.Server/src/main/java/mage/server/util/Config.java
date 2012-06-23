@@ -38,24 +38,24 @@ import org.apache.log4j.Logger;
  */
 public class Config {
 
-	private final static Logger logger = Logger.getLogger(Config.class);
+    private final static Logger logger = Logger.getLogger(Config.class);
 
-	static {
-		Properties p = new Properties();
-		try {
-			p.load(Config.class.getResourceAsStream("resources/config.properties"));
-		} catch (IOException ex) {
-			logger.fatal("Config error", ex);
-		}
-		port = Integer.parseInt(p.getProperty("port"));
-		remoteServer = p.getProperty("remote-server");
-		maxGameThreads = Integer.parseInt(p.getProperty("max-game-threads"));
-		maxSecondsIdle = Integer.parseInt(p.getProperty("max-seconds-idle"));
-	}
+    static {
+        Properties p = new Properties();
+        try {
+            p.load(Config.class.getResourceAsStream("resources/config.properties"));
+        } catch (IOException ex) {
+            logger.fatal("Config error", ex);
+        }
+        port = Integer.parseInt(p.getProperty("port"));
+        remoteServer = p.getProperty("remote-server");
+        maxGameThreads = Integer.parseInt(p.getProperty("max-game-threads"));
+        maxSecondsIdle = Integer.parseInt(p.getProperty("max-seconds-idle"));
+    }
 
-	public static final String remoteServer;
-	public static final int port;
-	public static final int maxGameThreads;
-	public static final int maxSecondsIdle;
+    public static final String remoteServer;
+    public static final int port;
+    public static final int maxGameThreads;
+    public static final int maxSecondsIdle;
 
 }

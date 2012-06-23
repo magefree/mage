@@ -48,28 +48,28 @@ public class MorkrutBanshee extends CardImpl<MorkrutBanshee> {
 
     private final static String staticText = "Morbid - When {this} enters the battlefield, if a creature died this turn, target creature gets -4/-4 until end of turn.";
 
-	public MorkrutBanshee(UUID ownerId) {
-		super(ownerId, 110, "Morkrut Banshee", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
-		this.expansionSetCode = "ISD";
-		this.subtype.add("Spirit");
+    public MorkrutBanshee(UUID ownerId) {
+        super(ownerId, 110, "Morkrut Banshee", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
+        this.expansionSetCode = "ISD";
+        this.subtype.add("Spirit");
 
-		this.color.setBlack(true);
-		this.power = new MageInt(4);
-		this.toughness = new MageInt(4);
+        this.color.setBlack(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
-		// Morbid - When Morkut Banshee enters the battlefield, if a creature died this turn, target creature gets -4/-4 until end of turn.
+        // Morbid - When Morkut Banshee enters the battlefield, if a creature died this turn, target creature gets -4/-4 until end of turn.
         TriggeredAbility triggeredAbility = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(-4, -4, Duration.EndOfTurn));
-		TriggeredAbility ability = new ConditionalTriggeredAbility(triggeredAbility, MorbidCondition.getInstance(), staticText);
-		ability.addTarget(new TargetCreaturePermanent());
-		this.addAbility(ability);
-	}
+        TriggeredAbility ability = new ConditionalTriggeredAbility(triggeredAbility, MorbidCondition.getInstance(), staticText);
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
+    }
 
-	public MorkrutBanshee(final MorkrutBanshee card) {
-		super(card);
-	}
+    public MorkrutBanshee(final MorkrutBanshee card) {
+        super(card);
+    }
 
-	@Override
-	public MorkrutBanshee copy() {
-		return new MorkrutBanshee(this);
-	}
+    @Override
+    public MorkrutBanshee copy() {
+        return new MorkrutBanshee(this);
+    }
 }

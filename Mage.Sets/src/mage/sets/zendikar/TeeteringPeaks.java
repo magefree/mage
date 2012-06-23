@@ -46,23 +46,23 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class TeeteringPeaks extends CardImpl<TeeteringPeaks> {
 
-	public TeeteringPeaks(UUID ownerId) {
-		super(ownerId, 226, "Teetering Peaks", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
-		this.expansionSetCode = "ZEN";
-		this.addAbility(new EntersBattlefieldTappedAbility());
-		Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(2, 0, Duration.EndOfTurn), false);
-		ability.addTarget(new TargetCreaturePermanent());
-		this.addAbility(ability);
-		this.addAbility(new RedManaAbility());
-	}
+    public TeeteringPeaks(UUID ownerId) {
+        super(ownerId, 226, "Teetering Peaks", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
+        this.expansionSetCode = "ZEN";
+        this.addAbility(new EntersBattlefieldTappedAbility());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(2, 0, Duration.EndOfTurn), false);
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
+        this.addAbility(new RedManaAbility());
+    }
 
-	public TeeteringPeaks(final TeeteringPeaks card) {
-		super(card);
-	}
+    public TeeteringPeaks(final TeeteringPeaks card) {
+        super(card);
+    }
 
-	@Override
-	public TeeteringPeaks copy() {
-		return new TeeteringPeaks(this);
-	}
+    @Override
+    public TeeteringPeaks copy() {
+        return new TeeteringPeaks(this);
+    }
 
 }

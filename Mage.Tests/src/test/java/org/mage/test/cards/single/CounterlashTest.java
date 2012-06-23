@@ -23,7 +23,7 @@ public class CounterlashTest extends CardTestPlayerBase {
 
         setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
-        
+
         assertLife(playerA, 20);
         assertLife(playerB, 40);
         assertGraveyardCount(playerA, 1);
@@ -31,5 +31,5 @@ public class CounterlashTest extends CardTestPlayerBase {
 
     }
 
-    
+
 }

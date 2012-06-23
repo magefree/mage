@@ -35,61 +35,61 @@ import java.util.UUID;
 
 public abstract class CostImpl<T extends CostImpl<T>> implements Cost {
 
-	protected UUID id;
-	protected String text;
-	protected boolean paid;
-	protected Targets targets;
+    protected UUID id;
+    protected String text;
+    protected boolean paid;
+    protected Targets targets;
 
-	@Override
-	public abstract T copy();
+    @Override
+    public abstract T copy();
 
-	public CostImpl() {
-		id = UUID.randomUUID();
-		paid = false;
-		targets = new Targets();
-	}
+    public CostImpl() {
+        id = UUID.randomUUID();
+        paid = false;
+        targets = new Targets();
+    }
 
-	public CostImpl(final CostImpl cost) {
-		this.id = cost.id;
-		this.text = cost.text;
-		this.paid = cost.paid;
-		this.targets = cost.targets.copy();
-	}
+    public CostImpl(final CostImpl cost) {
+        this.id = cost.id;
+        this.text = cost.text;
+        this.paid = cost.paid;
+        this.targets = cost.targets.copy();
+    }
 
-	@Override
-	public String getText() {
-		return text;
-	}
-	
-	public void addTarget(Target target) {
-		if (target != null) {
-			this.targets.add(target);
-		}
-	}
+    @Override
+    public String getText() {
+        return text;
+    }
 
-	@Override
-	public Targets getTargets() {
-		return this.targets;
-	}
+    public void addTarget(Target target) {
+        if (target != null) {
+            this.targets.add(target);
+        }
+    }
 
-	@Override
-	public boolean isPaid() {
-		return paid;
-	}
+    @Override
+    public Targets getTargets() {
+        return this.targets;
+    }
 
-	@Override
-	public void clearPaid() {
-		paid = false;
-	}
+    @Override
+    public boolean isPaid() {
+        return paid;
+    }
 
-	@Override
-	public void setPaid() {
-		paid = true;
-	}
+    @Override
+    public void clearPaid() {
+        paid = false;
+    }
 
-	@Override
-	public UUID getId() {
-		return this.id;
-	}
+    @Override
+    public void setPaid() {
+        paid = true;
+    }
+
+    @Override
+    public UUID getId() {
+        return this.id;
+    }
 
 }

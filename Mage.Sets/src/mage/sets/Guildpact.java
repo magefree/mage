@@ -42,9 +42,9 @@ import java.util.GregorianCalendar;
 public class Guildpact extends ExpansionSet {
     private static final Guildpact fINSTANCE =  new Guildpact();
 
-	public static Guildpact getInstance() {
-		return fINSTANCE;
-	}
+    public static Guildpact getInstance() {
+        return fINSTANCE;
+    }
 
     private Guildpact() {
         super("Guildpact", "GPT", "", "mage.sets.guildpact", new GregorianCalendar(2006, 1, 3).getTime(), Constants.SetType.EXPANSION);

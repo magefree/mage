@@ -41,54 +41,54 @@ import mage.game.events.GameEvent.EventType;
  */
 public class OnEventTriggeredAbility extends TriggeredAbilityImpl<OnEventTriggeredAbility> {
 
-	private EventType eventType;
-	private String eventName;
-	private boolean allPlayers = false;
+    private EventType eventType;
+    private String eventName;
+    private boolean allPlayers = false;
 
-	public OnEventTriggeredAbility(EventType eventType, String eventName, Effect effect) {
-		super(Zone.BATTLEFIELD, effect);
-		this.eventType = eventType;
-		this.eventName = eventName;
-	}
+    public OnEventTriggeredAbility(EventType eventType, String eventName, Effect effect) {
+        super(Zone.BATTLEFIELD, effect);
+        this.eventType = eventType;
+        this.eventName = eventName;
+    }
 
-	public OnEventTriggeredAbility(EventType eventType, String eventName, Effect effect, boolean optional) {
-		super(Zone.BATTLEFIELD, effect, optional);
-		this.eventType = eventType;
-		this.eventName = eventName;
-	}
+    public OnEventTriggeredAbility(EventType eventType, String eventName, Effect effect, boolean optional) {
+        super(Zone.BATTLEFIELD, effect, optional);
+        this.eventType = eventType;
+        this.eventName = eventName;
+    }
 
-	public OnEventTriggeredAbility(EventType eventType, String eventName, boolean allPlayers, Effect effect) {
-		super(Zone.BATTLEFIELD, effect);
-		this.eventType = eventType;
-		this.eventName = eventName;
-		this.allPlayers = allPlayers;
-	}
+    public OnEventTriggeredAbility(EventType eventType, String eventName, boolean allPlayers, Effect effect) {
+        super(Zone.BATTLEFIELD, effect);
+        this.eventType = eventType;
+        this.eventName = eventName;
+        this.allPlayers = allPlayers;
+    }
 
-	public OnEventTriggeredAbility(OnEventTriggeredAbility ability) {
-		super(ability);
-		this.eventType = ability.eventType;
-		this.eventName = ability.eventName;
-		this.allPlayers = ability.allPlayers;
-	}
+    public OnEventTriggeredAbility(OnEventTriggeredAbility ability) {
+        super(ability);
+        this.eventType = ability.eventType;
+        this.eventName = ability.eventName;
+        this.allPlayers = ability.allPlayers;
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == eventType) {
-			if (allPlayers || event.getPlayerId().equals(this.controllerId) ) {
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == eventType) {
+            if (allPlayers || event.getPlayerId().equals(this.controllerId) ) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "At the " + eventName + ", " + super.getRule();
-	}
+    @Override
+    public String getRule() {
+        return "At the " + eventName + ", " + super.getRule();
+    }
 
-	@Override
-	public OnEventTriggeredAbility copy() {
-		return new OnEventTriggeredAbility(this);
-	}
+    @Override
+    public OnEventTriggeredAbility copy() {
+        return new OnEventTriggeredAbility(this);
+    }
 
 }

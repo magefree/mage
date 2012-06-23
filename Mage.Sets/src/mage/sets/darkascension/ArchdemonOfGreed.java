@@ -50,19 +50,19 @@ import mage.target.common.TargetControlledPermanent;
  * @author anonymous
  */
 public class ArchdemonOfGreed extends CardImpl<ArchdemonOfGreed> {
-    
+
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Human");
 
     static {
         filter.getSubtype().add("Human");
         filter.setTargetController(Constants.TargetController.YOU);
     }
-    
+
     public ArchdemonOfGreed(UUID ownerId) {
         super(ownerId, 71, "Archdemon of Greed", Rarity.RARE, new CardType[]{CardType.CREATURE}, "");
         this.expansionSetCode = "DKA";
         this.subtype.add("Demon");
-        
+
         this.nightCard = true;
         this.canTransform = true;
 
@@ -83,7 +83,7 @@ public class ArchdemonOfGreed extends CardImpl<ArchdemonOfGreed> {
     public ArchdemonOfGreed copy() {
         return new ArchdemonOfGreed(this);
     }
-    
+
     class ArchdemonOfGreedEffect extends OneShotEffect<ArchdemonOfGreedEffect> {
 
         public ArchdemonOfGreedEffect() {
@@ -103,7 +103,7 @@ public class ArchdemonOfGreed extends CardImpl<ArchdemonOfGreed> {
         @Override
         public boolean apply(Game game, Ability source) {
             Permanent permanent = game.getPermanent(source.getSourceId());
-            
+
             if (permanent != null) {
                 // create cost for sacrificing a human
                 Player player = game.getPlayer(source.getControllerId());

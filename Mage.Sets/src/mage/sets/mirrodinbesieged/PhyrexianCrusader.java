@@ -44,17 +44,17 @@ import mage.filter.FilterCard;
  */
 public class PhyrexianCrusader extends CardImpl<PhyrexianCrusader> {
 
-	private static final FilterCard filter = new FilterCard("Red");
-	private static final FilterCard filter2 = new FilterCard("White");
+    private static final FilterCard filter = new FilterCard("Red");
+    private static final FilterCard filter2 = new FilterCard("White");
 
-	static {
-		filter.setUseColor(true);
-		filter.getColor().setRed(true);
-		
-		filter2.setUseColor(true);
-		filter2.getColor().setWhite(true);
-	}
-	
+    static {
+        filter.setUseColor(true);
+        filter.getColor().setRed(true);
+
+        filter2.setUseColor(true);
+        filter2.getColor().setWhite(true);
+    }
+
     public PhyrexianCrusader (UUID ownerId) {
         super(ownerId, 50, "Phyrexian Crusader", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
         this.expansionSetCode = "MBS";

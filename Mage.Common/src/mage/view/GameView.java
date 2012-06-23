@@ -58,35 +58,35 @@ import java.util.UUID;
 public class GameView implements Serializable {
     private static final long serialVersionUID = 1L;
 
-	private List<PlayerView> players = new ArrayList<PlayerView>();
-	private SimpleCardsView hand;
-	private Map<String, SimpleCardsView> opponentHands;
-	private CardsView stack = new CardsView();
+    private List<PlayerView> players = new ArrayList<PlayerView>();
+    private SimpleCardsView hand;
+    private Map<String, SimpleCardsView> opponentHands;
+    private CardsView stack = new CardsView();
     //private List<UUID> stackOrder = new ArrayList<UUID>();
-	private List<ExileView> exiles = new ArrayList<ExileView>();
-	private List<RevealedView> revealed = new ArrayList<RevealedView>();
-	private List<LookedAtView> lookedAt = new ArrayList<LookedAtView>();
-	private List<CombatGroupView> combat = new ArrayList<CombatGroupView>();
-	private TurnPhase phase;
-	private PhaseStep step;
-	private String activePlayerName = "";
-	private String priorityPlayerName = "";
-	private int turn;
-	private boolean special = false;
+    private List<ExileView> exiles = new ArrayList<ExileView>();
+    private List<RevealedView> revealed = new ArrayList<RevealedView>();
+    private List<LookedAtView> lookedAt = new ArrayList<LookedAtView>();
+    private List<CombatGroupView> combat = new ArrayList<CombatGroupView>();
+    private TurnPhase phase;
+    private PhaseStep step;
+    private String activePlayerName = "";
+    private String priorityPlayerName = "";
+    private int turn;
+    private boolean special = false;
 
-	public GameView(GameState state, Game game) {
-		for (Player player: state.getPlayers().values()) {
-			players.add(new PlayerView(player, state, game));
-		}
-		for (StackObject stackObject: state.getStack()) {
-			if (stackObject instanceof StackAbility) {
-				MageObject object = game.getObject(stackObject.getSourceId());
-				Card card = game.getCard(stackObject.getSourceId());
-				if (card != null) {
-					if (object != null) {
-						stack.put(stackObject.getId(), new StackAbilityView((StackAbility)stackObject, object.getName(), new CardView(card)));
+    public GameView(GameState state, Game game) {
+        for (Player player: state.getPlayers().values()) {
+            players.add(new PlayerView(player, state, game));
+        }
+        for (StackObject stackObject: state.getStack()) {
+            if (stackObject instanceof StackAbility) {
+                MageObject object = game.getObject(stackObject.getSourceId());
+                Card card = game.getCard(stackObject.getSourceId());
+                if (card != null) {
+                    if (object != null) {
+                        stack.put(stackObject.getId(), new StackAbilityView((StackAbility)stackObject, object.getName(), new CardView(card)));
                     } else {
-						stack.put(stackObject.getId(), new StackAbilityView((StackAbility)stackObject, "", new CardView(card)));
+                        stack.put(stackObject.getId(), new StackAbilityView((StackAbility)stackObject, "", new CardView(card)));
                     }
                     if (card.canTransform()) {
                         updateLatestCardView(game, card, stackObject.getId());
@@ -104,39 +104,39 @@ public class GameView implements Serializable {
                         }
                     }
 
-					stack.put(stackObject.getId(), new CardView(stackAbility));
+                    stack.put(stackObject.getId(), new CardView(stackAbility));
                     checkPaid(stackObject.getId(), stackAbility);
-				}
-			}
-			else {
-				stack.put(stackObject.getId(), new CardView((Spell)stackObject));
+                }
+            }
+            else {
+                stack.put(stackObject.getId(), new CardView((Spell)stackObject));
                 checkPaid(stackObject.getId(), (Spell)stackObject);
-			}
+            }
             //stackOrder.add(stackObject.getId());
-		}
+        }
         //Collections.reverse(stackOrder);
-		for (ExileZone exileZone: state.getExile().getExileZones()) {
-			exiles.add(new ExileView(exileZone, game));
-		}
-		for (String name: state.getRevealed().keySet()) {
-			revealed.add(new RevealedView(name, state.getRevealed().get(name), game));
-		}
-		this.phase = state.getTurn().getPhaseType();
-		this.step = state.getTurn().getStepType();
-		this.turn = state.getTurnNum();
-		if (state.getActivePlayerId() != null)
-			this.activePlayerName = state.getPlayer(state.getActivePlayerId()).getName();
-		else
-			this.activePlayerName = "";
-		if (state.getPriorityPlayerId() != null)
-			this.priorityPlayerName = state.getPlayer(state.getPriorityPlayerId()).getName();
-		else
-			this.priorityPlayerName = "";
-		for (CombatGroup combatGroup: state.getCombat().getGroups()) {
-			combat.add(new CombatGroupView(combatGroup, game));
-		}
-		this.special = state.getSpecialActions().getControlledBy(state.getPriorityPlayerId()).size() > 0;
-	}
+        for (ExileZone exileZone: state.getExile().getExileZones()) {
+            exiles.add(new ExileView(exileZone, game));
+        }
+        for (String name: state.getRevealed().keySet()) {
+            revealed.add(new RevealedView(name, state.getRevealed().get(name), game));
+        }
+        this.phase = state.getTurn().getPhaseType();
+        this.step = state.getTurn().getStepType();
+        this.turn = state.getTurnNum();
+        if (state.getActivePlayerId() != null)
+            this.activePlayerName = state.getPlayer(state.getActivePlayerId()).getName();
+        else
+            this.activePlayerName = "";
+        if (state.getPriorityPlayerId() != null)
+            this.priorityPlayerName = state.getPlayer(state.getPriorityPlayerId()).getName();
+        else
+            this.priorityPlayerName = "";
+        for (CombatGroup combatGroup: state.getCombat().getGroups()) {
+            combat.add(new CombatGroupView(combatGroup, game));
+        }
+        this.special = state.getSpecialActions().getControlledBy(state.getPriorityPlayerId()).size() > 0;
+    }
 
     private void checkPaid(UUID uuid, StackAbility stackAbility) {
         for (Cost cost : stackAbility.getManaCostsToPay()) {
@@ -179,73 +179,73 @@ public class GameView implements Serializable {
         }
     }
 
-	public List<PlayerView> getPlayers() {
-		return players;
-	}
+    public List<PlayerView> getPlayers() {
+        return players;
+    }
 
-	public SimpleCardsView getHand() {
-		return hand;
-	}
+    public SimpleCardsView getHand() {
+        return hand;
+    }
 
-	public void setHand(SimpleCardsView hand) {
-		this.hand = hand;
-	}
+    public void setHand(SimpleCardsView hand) {
+        this.hand = hand;
+    }
 
-	public Map<String, SimpleCardsView> getOpponentHands() {
-		return opponentHands;
-	}
+    public Map<String, SimpleCardsView> getOpponentHands() {
+        return opponentHands;
+    }
 
-	public void setOpponentHands(Map<String, SimpleCardsView> opponentHands) {
-		this.opponentHands = opponentHands;
-	}
+    public void setOpponentHands(Map<String, SimpleCardsView> opponentHands) {
+        this.opponentHands = opponentHands;
+    }
 
-	public TurnPhase getPhase() {
-		return phase;
-	}
+    public TurnPhase getPhase() {
+        return phase;
+    }
 
-	public PhaseStep getStep() {
-		return step;
-	}
+    public PhaseStep getStep() {
+        return step;
+    }
 
-	public CardsView getStack() {
-		return stack;
-	}
+    public CardsView getStack() {
+        return stack;
+    }
 
-	public List<ExileView> getExile() {
-		return exiles;
-	}
+    public List<ExileView> getExile() {
+        return exiles;
+    }
 
-	public List<RevealedView> getRevealed() {
-		return revealed;
-	}
+    public List<RevealedView> getRevealed() {
+        return revealed;
+    }
 
-	public List<LookedAtView> getLookedAt() {
-		return lookedAt;
-	}
+    public List<LookedAtView> getLookedAt() {
+        return lookedAt;
+    }
 
-	public void setLookedAt(List<LookedAtView> list) {
-		this.lookedAt = list;
-	}
+    public void setLookedAt(List<LookedAtView> list) {
+        this.lookedAt = list;
+    }
 
-	public List<CombatGroupView> getCombat() {
-		return combat;
-	}
+    public List<CombatGroupView> getCombat() {
+        return combat;
+    }
 
-	public int getTurn() {
-		return this.turn;
-	}
+    public int getTurn() {
+        return this.turn;
+    }
 
-	public String getActivePlayerName() {
-		return activePlayerName;
-	}
+    public String getActivePlayerName() {
+        return activePlayerName;
+    }
 
-	public String getPriorityPlayerName() {
-		return priorityPlayerName;
-	}
+    public String getPriorityPlayerName() {
+        return priorityPlayerName;
+    }
 
-	public boolean getSpecial() {
-		return special;
-	}
+    public boolean getSpecial() {
+        return special;
+    }
 
     /*public List<UUID> getStackOrder() {
         return stackOrder;

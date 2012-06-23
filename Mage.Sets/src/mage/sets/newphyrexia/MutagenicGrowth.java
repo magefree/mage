@@ -46,8 +46,8 @@ public class MutagenicGrowth extends CardImpl<MutagenicGrowth> {
         super(ownerId, 116, "Mutagenic Growth", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{GP}");
         this.expansionSetCode = "NPH";
         this.color.setGreen(true);
-		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-		this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
     }
 
     public MutagenicGrowth (final MutagenicGrowth card) {

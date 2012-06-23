@@ -47,7 +47,7 @@ import mage.cards.CardImpl;
  * @author LevelX
  */
 public class MatsuTribeBirdstalker extends CardImpl<MatsuTribeBirdstalker> {
-        
+
     public MatsuTribeBirdstalker(UUID ownerId) {
         super(ownerId, 137, "Matsu-Tribe Birdstalker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
         this.expansionSetCode = "SOK";
@@ -63,7 +63,7 @@ public class MatsuTribeBirdstalker extends CardImpl<MatsuTribeBirdstalker> {
         ability = new DealsCombatDamageToACreatureTriggeredAbility(new TapTargetEffect("that creature"), false, true);
         ability.addEffect(new SkipNextUntapTargetEffect("and it"));
         this.addAbility(ability);
-        
+
         // {G}: Matsu-Tribe Birdstalker gains reach until end of turn. (It can block creatures with flying.)
         this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD,
                 new GainAbilitySourceEffect(ReachAbility.getInstance(), Constants.Duration.EndOfTurn),

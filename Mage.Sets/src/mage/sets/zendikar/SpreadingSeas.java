@@ -56,82 +56,82 @@ import mage.target.common.TargetLandPermanent;
  */
 public class SpreadingSeas extends CardImpl<SpreadingSeas> {
 
-	public SpreadingSeas(UUID ownerId) {
-		super(ownerId, 70, "Spreading Seas", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-		this.expansionSetCode = "ZEN";
-		this.color.setBlue(true);
-		this.subtype.add("Aura");
+    public SpreadingSeas(UUID ownerId) {
+        super(ownerId, 70, "Spreading Seas", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
+        this.expansionSetCode = "ZEN";
+        this.color.setBlue(true);
+        this.subtype.add("Aura");
 
-		TargetPermanent auraTarget = new TargetLandPermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		this.addAbility(ability);
-		this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(1), false));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpreadingSeasEffect()));
+        TargetPermanent auraTarget = new TargetLandPermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(1), false));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpreadingSeasEffect()));
 
-	}
+    }
 
-	public SpreadingSeas(final SpreadingSeas card) {
-		super(card);
-	}
+    public SpreadingSeas(final SpreadingSeas card) {
+        super(card);
+    }
 
-	@Override
-	public SpreadingSeas copy() {
-		return new SpreadingSeas(this);
-	}
+    @Override
+    public SpreadingSeas copy() {
+        return new SpreadingSeas(this);
+    }
 }
 
 class SpreadingSeasEffect extends ContinuousEffectImpl<SpreadingSeasEffect> {
 
-	public SpreadingSeasEffect() {
-		super(Duration.WhileOnBattlefield, Outcome.Detriment);
-		staticText = "Enchanted land is an Island";
-	}
+    public SpreadingSeasEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        staticText = "Enchanted land is an Island";
+    }
 
-	public SpreadingSeasEffect(final SpreadingSeasEffect effect) {
-		super(effect);
-	}
+    public SpreadingSeasEffect(final SpreadingSeasEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public SpreadingSeasEffect copy() {
-		return new SpreadingSeasEffect(this);
-	}
+    @Override
+    public SpreadingSeasEffect copy() {
+        return new SpreadingSeasEffect(this);
+    }
 
-	@Override
-	public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-		Permanent enchantment = game.getPermanent(source.getSourceId());
-		if (enchantment != null && enchantment.getAttachedTo() != null) {
-			Permanent land = game.getPermanent(enchantment.getAttachedTo());
-			if (land != null) {
-				switch (layer) {
-					case TypeChangingEffects_4:
-						if (sublayer == SubLayer.NA) {
-							land.getSubtype().clear();
-							land.getSubtype().add("Island");
-						}
-						break;
-					case AbilityAddingRemovingEffects_6:
-						if (sublayer == SubLayer.NA) {
-							land.getAbilities().clear();
-							land.addAbility(new BlueManaAbility(), game);
-						}
-						break;
-				}
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        Permanent enchantment = game.getPermanent(source.getSourceId());
+        if (enchantment != null && enchantment.getAttachedTo() != null) {
+            Permanent land = game.getPermanent(enchantment.getAttachedTo());
+            if (land != null) {
+                switch (layer) {
+                    case TypeChangingEffects_4:
+                        if (sublayer == SubLayer.NA) {
+                            land.getSubtype().clear();
+                            land.getSubtype().add("Island");
+                        }
+                        break;
+                    case AbilityAddingRemovingEffects_6:
+                        if (sublayer == SubLayer.NA) {
+                            land.getAbilities().clear();
+                            land.addAbility(new BlueManaAbility(), game);
+                        }
+                        break;
+                }
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
 
-	@Override
-	public boolean hasLayer(Layer layer) {
-		return layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.TypeChangingEffects_4;
-	}
+    @Override
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.TypeChangingEffects_4;
+    }
 
 }

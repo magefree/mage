@@ -44,7 +44,7 @@ public class NoxiousRevival extends CardImpl<NoxiousRevival> {
     public NoxiousRevival (UUID ownerId) {
         super(ownerId, 118, "Noxious Revival", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{GP}");
         this.expansionSetCode = "NPH";
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
         this.getSpellAbility().addTarget(new TargetCardInGraveyard());
     }

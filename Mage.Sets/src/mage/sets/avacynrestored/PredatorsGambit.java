@@ -52,7 +52,7 @@ import java.util.UUID;
 public class PredatorsGambit extends CardImpl<PredatorsGambit> {
 
     private static final String rule = "Enchanted creature has intimidate as long as its controller controls no other creatures";
-    
+
     public PredatorsGambit(UUID ownerId) {
         super(ownerId, 117, "Predator's Gambit", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
         this.expansionSetCode = "AVR";

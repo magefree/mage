@@ -40,30 +40,30 @@ import mage.game.permanent.Permanent;
  */
 public class CantBlockSourceEffect extends RestrictionEffect<CantBlockSourceEffect> {
 
-	public CantBlockSourceEffect(Duration duration) {
-		super(duration);
-	}
+    public CantBlockSourceEffect(Duration duration) {
+        super(duration);
+    }
 
-	public CantBlockSourceEffect(final CantBlockSourceEffect effect) {
-		super(effect);
-	}
+    public CantBlockSourceEffect(final CantBlockSourceEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean applies(Permanent permanent, Ability source, Game game) {
-		if (permanent.getId().equals(source.getSourceId())) {
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        if (permanent.getId().equals(source.getSourceId())) {
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-		return false;
-	}
+    @Override
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        return false;
+    }
 
-	@Override
-	public CantBlockSourceEffect copy() {
-		return new CantBlockSourceEffect(this);
-	}
+    @Override
+    public CantBlockSourceEffect copy() {
+        return new CantBlockSourceEffect(this);
+    }
 
 }

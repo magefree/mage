@@ -48,7 +48,7 @@ public class PlatedGeopede extends CardImpl<PlatedGeopede> {
         super(ownerId, 141, "Plated Geopede", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.expansionSetCode = "ZEN";
         this.subtype.add("Insect");
-		this.color.setRed(true);
+        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(FirstStrikeAbility.getInstance());

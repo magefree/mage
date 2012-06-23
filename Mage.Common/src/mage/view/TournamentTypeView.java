@@ -38,48 +38,48 @@ import mage.game.tournament.TournamentType;
 public class TournamentTypeView implements Serializable {
     private static final long serialVersionUID = 1L;
 
-	private String name;
-	private int minPlayers;
-	private int maxPlayers;
-	private int numBoosters;
-	private boolean draft;
-	private boolean limited;
+    private String name;
+    private int minPlayers;
+    private int maxPlayers;
+    private int numBoosters;
+    private boolean draft;
+    private boolean limited;
 
-	public TournamentTypeView(TournamentType tournamentType) {
-		this.name = tournamentType.getName();
-		this.minPlayers = tournamentType.getMinPlayers();
-		this.maxPlayers = tournamentType.getMaxPlayers();
-		this.numBoosters = tournamentType.getNumBoosters();
-		this.draft = tournamentType.isDraft();
-		this.limited = tournamentType.isLimited();
-	}
+    public TournamentTypeView(TournamentType tournamentType) {
+        this.name = tournamentType.getName();
+        this.minPlayers = tournamentType.getMinPlayers();
+        this.maxPlayers = tournamentType.getMaxPlayers();
+        this.numBoosters = tournamentType.getNumBoosters();
+        this.draft = tournamentType.isDraft();
+        this.limited = tournamentType.isLimited();
+    }
 
-	@Override
-	public String toString() {
-		return name;
-	}
+    @Override
+    public String toString() {
+        return name;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public int getMinPlayers() {
-		return minPlayers;
-	}
+    public int getMinPlayers() {
+        return minPlayers;
+    }
 
-	public int getMaxPlayers() {
-		return maxPlayers;
-	}
+    public int getMaxPlayers() {
+        return maxPlayers;
+    }
 
-	public int getNumBoosters() {
-		return numBoosters;
-	}
+    public int getNumBoosters() {
+        return numBoosters;
+    }
 
-	public boolean isDraft() {
-		return draft;
-	}
+    public boolean isDraft() {
+        return draft;
+    }
 
-	public boolean isLimited() {
-		return limited;
-	}
+    public boolean isLimited() {
+        return limited;
+    }
 }

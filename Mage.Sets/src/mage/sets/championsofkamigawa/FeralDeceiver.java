@@ -66,10 +66,10 @@ public class FeralDeceiver extends CardImpl<FeralDeceiver> {
         this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
-        
+
         // {1}: Look at the top card of your library.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryControllerEffect(), new GenericManaCost(1)));  
-        
+
         // {2}: Reveal the top card of your library. If it's a land card, {this} gets +2/+2 and gains trample until end of turn.
         Ability ability = new FeralDeceiverAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2,2,Duration.EndOfTurn), new ManaCostsImpl("{2}"));
         ability.addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(),Duration.EndOfTurn));
@@ -79,7 +79,7 @@ public class FeralDeceiver extends CardImpl<FeralDeceiver> {
     public FeralDeceiver(final FeralDeceiver card) {
         super(card);
     }
-    
+
     @Override
     public FeralDeceiver copy() {
         return new FeralDeceiver(this);
@@ -87,22 +87,22 @@ public class FeralDeceiver extends CardImpl<FeralDeceiver> {
 }
 
 class FeralDeceiverAbility extends ActivateOncePerTurnActivatedAbility {
-    	
+
         public FeralDeceiverAbility(Zone zone, Effect effect, Cost cost) {
-		super(zone, effect, cost);
-	}
+        super(zone, effect, cost);
+    }
 
         public FeralDeceiverAbility(FeralDeceiverAbility ability) {
-		super(ability);
-	}
-    
+        super(ability);
+    }
+
         @Override
         public FeralDeceiverAbility copy() {
                 return new FeralDeceiverAbility(this);
         }
-    
+
         @Override
-	public boolean checkIfClause(Game game) {
+    public boolean checkIfClause(Game game) {
                 Player player = game.getPlayer(this.getControllerId());
                 if (player != null) {
                     Cards cards = new CardsImpl();
@@ -113,11 +113,11 @@ class FeralDeceiverAbility extends ActivateOncePerTurnActivatedAbility {
                             return true;
                     }
                 }
-		return false;
+        return false;
         }
-    
+
         @Override
-	public String getRule() {
-		return "{2}: Reveal the top card of your library. If it's a land card, {this} gets +2/+2 and gains trample until end of turn. Activate this ability only once each turn."; 
-	}
+    public String getRule() {
+        return "{2}: Reveal the top card of your library. If it's a land card, {this} gets +2/+2 and gains trample until end of turn. Activate this ability only once each turn."; 
+    }
 }

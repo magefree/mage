@@ -56,7 +56,7 @@ public class WhirlingDervish extends CardImpl<WhirlingDervish> {
         filter.setColor(ObjectColor.BLACK);
         filter.setUseColor(true);
     }
-    
+
     public WhirlingDervish(UUID ownerId) {
         super(ownerId, 90, "Whirling Dervish", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}{G}");
         this.expansionSetCode = "TSB";
@@ -66,12 +66,12 @@ public class WhirlingDervish extends CardImpl<WhirlingDervish> {
         this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        
+
         // Protection from black
         this.addAbility(new ProtectionAbility(filter));
         // At the beginning of each end step, if Whirling Dervish dealt damage to an opponent this turn, put a +1/+1 counter on it.
         TriggeredAbility triggered = new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of each end step", true, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
-	this.addAbility(new ConditionalTriggeredAbility(triggered, new DealtDamageToAnOpponent(), ruleText));
+    this.addAbility(new ConditionalTriggeredAbility(triggered, new DealtDamageToAnOpponent(), ruleText));
     }
 
     public WhirlingDervish(final WhirlingDervish card) {

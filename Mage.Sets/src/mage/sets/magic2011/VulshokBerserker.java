@@ -41,25 +41,25 @@ import mage.cards.CardImpl;
  */
 public class VulshokBerserker extends CardImpl<VulshokBerserker> {
 
-	public VulshokBerserker(UUID ownerId) {
-		super(ownerId, 159, "Vulshok Berserker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Human");
-		this.subtype.add("Berserker");
-		this.color.setRed(true);
-		this.power = new MageInt(3);
-		this.toughness = new MageInt(2);
+    public VulshokBerserker(UUID ownerId) {
+        super(ownerId, 159, "Vulshok Berserker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
+        this.expansionSetCode = "M11";
+        this.subtype.add("Human");
+        this.subtype.add("Berserker");
+        this.color.setRed(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(2);
 
-		this.addAbility(HasteAbility.getInstance());
-	}
+        this.addAbility(HasteAbility.getInstance());
+    }
 
-	public VulshokBerserker(final VulshokBerserker card) {
-		super(card);
-	}
+    public VulshokBerserker(final VulshokBerserker card) {
+        super(card);
+    }
 
-	@Override
-	public VulshokBerserker copy() {
-		return new VulshokBerserker(this);
-	}
+    @Override
+    public VulshokBerserker copy() {
+        return new VulshokBerserker(this);
+    }
 
 }

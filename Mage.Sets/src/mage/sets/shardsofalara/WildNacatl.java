@@ -45,34 +45,34 @@ import mage.filter.FilterPermanent;
  */
 public class WildNacatl extends CardImpl<WildNacatl> {
 
-	private static final FilterPermanent filter1 = new FilterPermanent("Mountain");
-	private static final FilterPermanent filter2 = new FilterPermanent("Plains");
+    private static final FilterPermanent filter1 = new FilterPermanent("Mountain");
+    private static final FilterPermanent filter2 = new FilterPermanent("Plains");
 
-	static {
-		filter1.getSubtype().add("Mountain");
-		filter1.setScopeSubtype(ComparisonScope.Any);
-		filter2.getSubtype().add("Plains");
-		filter2.setScopeSubtype(ComparisonScope.Any);
-	}
+    static {
+        filter1.getSubtype().add("Mountain");
+        filter1.setScopeSubtype(ComparisonScope.Any);
+        filter2.getSubtype().add("Plains");
+        filter2.setScopeSubtype(ComparisonScope.Any);
+    }
 
-	public WildNacatl(UUID ownerId) {
-		super(ownerId, 152, "Wild Nacatl", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
-		this.expansionSetCode = "ALA";
-		this.color.setGreen(true);
-		this.subtype.add("Cat");
-		this.subtype.add("Warrior");
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceWhileControlsEffect(filter1, 1, 1)));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceWhileControlsEffect(filter2, 1, 1)));
-	}
+    public WildNacatl(UUID ownerId) {
+        super(ownerId, 152, "Wild Nacatl", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
+        this.expansionSetCode = "ALA";
+        this.color.setGreen(true);
+        this.subtype.add("Cat");
+        this.subtype.add("Warrior");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceWhileControlsEffect(filter1, 1, 1)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceWhileControlsEffect(filter2, 1, 1)));
+    }
 
-	public WildNacatl(final WildNacatl card) {
-		super(card);
-	}
+    public WildNacatl(final WildNacatl card) {
+        super(card);
+    }
 
-	@Override
-	public WildNacatl copy() {
-		return new WildNacatl(this);
-	}
+    @Override
+    public WildNacatl copy() {
+        return new WildNacatl(this);
+    }
 }

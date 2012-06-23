@@ -42,80 +42,80 @@ import mage.game.stack.Spell;
  */
 public class EntersBattlefieldEffect extends ReplacementEffectImpl<EntersBattlefieldEffect> {
 
-	protected Effects baseEffects = new Effects();
-	protected String text;
+    protected Effects baseEffects = new Effects();
+    protected String text;
 
     public static final String SOURCE_CAST_SPELL_ABILITY = "sourceCastSpellAbility";
 
-	public EntersBattlefieldEffect(Effect baseEffect) {
-		this(baseEffect, "");
-	}
+    public EntersBattlefieldEffect(Effect baseEffect) {
+        this(baseEffect, "");
+    }
 
-	public EntersBattlefieldEffect(Effect baseEffect, String text) {
-		super(Duration.OneUse, baseEffect.getOutcome());
-		this.baseEffects.add(baseEffect);
-		this.text = text;
-	}
+    public EntersBattlefieldEffect(Effect baseEffect, String text) {
+        super(Duration.OneUse, baseEffect.getOutcome());
+        this.baseEffects.add(baseEffect);
+        this.text = text;
+    }
 
-	public EntersBattlefieldEffect(EntersBattlefieldEffect effect) {
-		super(effect);
-		this.baseEffects = effect.baseEffects.copy();
-		this.text = effect.text;
-	}
+    public EntersBattlefieldEffect(EntersBattlefieldEffect effect) {
+        super(effect);
+        this.baseEffects = effect.baseEffects.copy();
+        this.text = effect.text;
+    }
 
     public void addEffect(Effect effect) {
         baseEffects.add(effect);
     }
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD && event.getTargetId().equals(source.getSourceId())) {
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD && event.getTargetId().equals(source.getSourceId())) {
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		Spell spell = game.getStack().getSpell(event.getSourceId());
-		for (Effect effect: baseEffects) {
-			if (source.activate(game, false)) {
-				if (effect instanceof ContinuousEffect) {
-					game.addEffect((ContinuousEffect) effect, source);
-				}
-				else {
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        Spell spell = game.getStack().getSpell(event.getSourceId());
+        for (Effect effect: baseEffects) {
+            if (source.activate(game, false)) {
+                if (effect instanceof ContinuousEffect) {
+                    game.addEffect((ContinuousEffect) effect, source);
+                }
+                else {
                     // noxx: commented it out because of resulting in a bug
                     // with CopyEffect (PhantasmalImageTest.java)
-					/*if (spell != null)
-						effect.apply(game, spell.getSpellAbility());
-					else
-						effect.apply(game, source);*/
+                    /*if (spell != null)
+                        effect.apply(game, spell.getSpellAbility());
+                    else
+                        effect.apply(game, source);*/
                     if (spell != null) {
                         effect.setValue(SOURCE_CAST_SPELL_ABILITY, spell.getSpellAbility());
                     }
                     effect.apply(game, source);
-				}
-			}
-		}
-		return false;
-	}
+                }
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public String getText(Mode mode) {
-		if (text == null || text.length() == 0)
-			return "{this} enters the battlefield " + baseEffects.getText(mode);
-		else
-			return text;
-	}
+    @Override
+    public String getText(Mode mode) {
+        if (text == null || text.length() == 0)
+            return "{this} enters the battlefield " + baseEffects.getText(mode);
+        else
+            return text;
+    }
 
-	@Override
-	public EntersBattlefieldEffect copy() {
-		return new EntersBattlefieldEffect(this);
-	}
+    @Override
+    public EntersBattlefieldEffect copy() {
+        return new EntersBattlefieldEffect(this);
+    }
 
 }

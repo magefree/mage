@@ -54,7 +54,7 @@ public class BanishmentDecree extends CardImpl<BanishmentDecree> {
     public BanishmentDecree (UUID ownerId) {
         super(ownerId, 3, "Banishment Decree", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{W}{W}");
         this.expansionSetCode = "MBS";
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }

@@ -50,28 +50,28 @@ public class TransformSourceEffect extends OneShotEffect<TransformSourceEffect> 
         this(fromDayToNight, false);
     }
 
-	private TransformSourceEffect(boolean fromDayToNight, boolean withoutTrigger) {
-		super(Outcome.Transform);
+    private TransformSourceEffect(boolean fromDayToNight, boolean withoutTrigger) {
+        super(Outcome.Transform);
         this.withoutTrigger = withoutTrigger;
         this.fromDayToNight = fromDayToNight;
-		staticText = "transform {this}";
-	}
+        staticText = "transform {this}";
+    }
 
-	public TransformSourceEffect(final TransformSourceEffect effect) {
-		super(effect);
+    public TransformSourceEffect(final TransformSourceEffect effect) {
+        super(effect);
         this.withoutTrigger = effect.withoutTrigger;
         this.fromDayToNight = effect.fromDayToNight;
-	}
+    }
 
-	@Override
-	public TransformSourceEffect copy() {
-		return new TransformSourceEffect(this);
-	}
+    @Override
+    public TransformSourceEffect copy() {
+        return new TransformSourceEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getSourceId());
-		if (permanent != null) {
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
             if (permanent.canTransform()) {
                 // check not to transform twice the same side
                 if (permanent.isTransformed() != fromDayToNight) {
@@ -82,9 +82,9 @@ public class TransformSourceEffect extends OneShotEffect<TransformSourceEffect> 
                     }
                 }
             }
-			return true;
-		}
-		return false;
-	}
+            return true;
+        }
+        return false;
+    }
 
 }

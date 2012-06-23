@@ -53,90 +53,90 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class PrimalCocoon extends CardImpl<PrimalCocoon> {
 
-	public PrimalCocoon(UUID ownerId) {
-		super(ownerId, 191, "Primal Cocoon", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");
-		this.expansionSetCode = "M11";
-		this.color.setGreen(true);
-		this.subtype.add("Aura");
+    public PrimalCocoon(UUID ownerId) {
+        super(ownerId, 191, "Primal Cocoon", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");
+        this.expansionSetCode = "M11";
+        this.color.setGreen(true);
+        this.subtype.add("Aura");
 
-		TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		this.addAbility(ability);
-		this.addAbility(new PrimalCocoonAbility1());
-		this.addAbility(new PrimalCocoonAbility2());
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+        this.addAbility(new PrimalCocoonAbility1());
+        this.addAbility(new PrimalCocoonAbility2());
 
-	}
+    }
 
-	public PrimalCocoon(final PrimalCocoon card) {
-		super(card);
-	}
+    public PrimalCocoon(final PrimalCocoon card) {
+        super(card);
+    }
 
-	@Override
-	public PrimalCocoon copy() {
-		return new PrimalCocoon(this);
-	}
+    @Override
+    public PrimalCocoon copy() {
+        return new PrimalCocoon(this);
+    }
 }
 
 class PrimalCocoonAbility1 extends TriggeredAbilityImpl<PrimalCocoonAbility1> {
 
-	public PrimalCocoonAbility1() {
-		super(Zone.BATTLEFIELD, new AddPlusOneCountersAttachedEffect(1));
-	}
+    public PrimalCocoonAbility1() {
+        super(Zone.BATTLEFIELD, new AddPlusOneCountersAttachedEffect(1));
+    }
 
-	public PrimalCocoonAbility1(final PrimalCocoonAbility1 ability) {
-		super(ability);
-	}
+    public PrimalCocoonAbility1(final PrimalCocoonAbility1 ability) {
+        super(ability);
+    }
 
-	@Override
-	public PrimalCocoonAbility1 copy() {
-		return new PrimalCocoonAbility1(this);
-	}
+    @Override
+    public PrimalCocoonAbility1 copy() {
+        return new PrimalCocoonAbility1(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.UPKEEP_STEP_PRE && event.getPlayerId().equals(this.controllerId)) {
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.UPKEEP_STEP_PRE && event.getPlayerId().equals(this.controllerId)) {
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "At the beginning of your upkeep, put a +1/+1 counter on enchanted creature.";
-	}
+    @Override
+    public String getRule() {
+        return "At the beginning of your upkeep, put a +1/+1 counter on enchanted creature.";
+    }
 }
 
 class PrimalCocoonAbility2 extends TriggeredAbilityImpl<PrimalCocoonAbility2> {
 
-	public PrimalCocoonAbility2() {
-		super(Zone.BATTLEFIELD, new DestroySourceEffect());
-	}
+    public PrimalCocoonAbility2() {
+        super(Zone.BATTLEFIELD, new DestroySourceEffect());
+    }
 
-	public PrimalCocoonAbility2(final PrimalCocoonAbility2 ability) {
-		super(ability);
-	}
+    public PrimalCocoonAbility2(final PrimalCocoonAbility2 ability) {
+        super(ability);
+    }
 
-	@Override
-	public PrimalCocoonAbility2 copy() {
-		return new PrimalCocoonAbility2(this);
-	}
+    @Override
+    public PrimalCocoonAbility2 copy() {
+        return new PrimalCocoonAbility2(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.ATTACKER_DECLARED || event.getType() == EventType.BLOCKER_DECLARED) {
-			Permanent enchantment = game.getPermanent(sourceId);
-			if (enchantment != null && enchantment.getAttachedTo() != null && event.getSourceId() != null && event.getSourceId().equals(enchantment.getAttachedTo())) {
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.ATTACKER_DECLARED || event.getType() == EventType.BLOCKER_DECLARED) {
+            Permanent enchantment = game.getPermanent(sourceId);
+            if (enchantment != null && enchantment.getAttachedTo() != null && event.getSourceId() != null && event.getSourceId().equals(enchantment.getAttachedTo())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "When enchanted creature attacks or blocks, sacrifice {this}.";
-	}
+    @Override
+    public String getRule() {
+        return "When enchanted creature attacks or blocks, sacrifice {this}.";
+    }
 
 }

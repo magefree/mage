@@ -40,18 +40,18 @@ import mage.game.Game;
  */
 public class UnlessCondition implements Condition {
 
-	private Condition condition;
+    private Condition condition;
 
-	public UnlessCondition ( Condition condition ) {
-		this.condition = condition;
-	}
+    public UnlessCondition ( Condition condition ) {
+        this.condition = condition;
+    }
 
-	/*
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return !condition.apply(game, source);
-	}
+    /*
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return !condition.apply(game, source);
+    }
 
 }

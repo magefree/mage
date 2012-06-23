@@ -13,11 +13,11 @@ import mage.cards.decks.Constructed;
  */
 public class ZendikarBlock extends Constructed {
 
-	public ZendikarBlock() {
-		super("Constructed - Zendikar Block");
-		setCodes.add("ZEN");
-		setCodes.add("WWK");
-		setCodes.add("ROE");
-	}
+    public ZendikarBlock() {
+        super("Constructed - Zendikar Block");
+        setCodes.add("ZEN");
+        setCodes.add("WWK");
+        setCodes.add("ROE");
+    }
 
 }

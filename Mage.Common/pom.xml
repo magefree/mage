@@ -1,19 +1,19 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  
+
     <modelVersion>4.0.0</modelVersion>
-  
+
     <parent>
         <groupId>org.mage</groupId>
         <artifactId>mage-root</artifactId>
         <version>0.8.6</version>
     </parent>
-    
+
     <artifactId>mage-common</artifactId>
     <packaging>jar</packaging>
     <name>Mage Common Classes</name>
-	
+
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -25,11 +25,11 @@
             <artifactId>jspf-core</artifactId>
             <version>${jspf-version}</version>
         </dependency>
-		<dependency>
-			<groupId>org.jboss.remoting</groupId>
-			<artifactId>jboss-remoting</artifactId>
-			<version>2.5.4.SP3</version>
-		</dependency>
+        <dependency>
+            <groupId>org.jboss.remoting</groupId>
+            <artifactId>jboss-remoting</artifactId>
+            <version>2.5.4.SP3</version>
+        </dependency>
         <dependency>
             <groupId>jboss</groupId>
             <artifactId>jboss-common-core</artifactId>
@@ -58,7 +58,7 @@
         </dependency>
 
     </dependencies>
-	
+
     <build>
         <sourceDirectory>src</sourceDirectory>
         <plugins>
@@ -80,10 +80,10 @@
             </plugin>
 
         </plugins>
-    
+
         <finalName>mage-common</finalName>
     </build>
-  
+
     <properties>
         <jspf-version>0.9.1</jspf-version>
     </properties>

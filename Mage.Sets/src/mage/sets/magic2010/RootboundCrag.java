@@ -49,32 +49,32 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class RootboundCrag extends CardImpl<RootboundCrag> {
 
-	private static final FilterLandPermanent filter = new FilterLandPermanent();
+    private static final FilterLandPermanent filter = new FilterLandPermanent();
 
-	static {
-		filter.getSubtype().add("Mountain");
-		filter.getSubtype().add("Forest");
-		filter.setScopeSubtype(ComparisonScope.Any);
-		filter.setMessage("Mountain or a Forest");
-	}
+    static {
+        filter.getSubtype().add("Mountain");
+        filter.getSubtype().add("Forest");
+        filter.setScopeSubtype(ComparisonScope.Any);
+        filter.setMessage("Mountain or a Forest");
+    }
 
-	public RootboundCrag(UUID ownerId) {
-		super(ownerId, 227, "Rootbound Crag", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-		this.expansionSetCode = "M10";
+    public RootboundCrag(UUID ownerId) {
+        super(ownerId, 227, "Rootbound Crag", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+        this.expansionSetCode = "M10";
 
-		Condition controls = new UnlessCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0));
-		String abilityText = "tap it unless you control a " + filter.getMessage();
-		this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
-		this.addAbility(new RedManaAbility());
-		this.addAbility(new GreenManaAbility());
-	}
+        Condition controls = new UnlessCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0));
+        String abilityText = "tap it unless you control a " + filter.getMessage();
+        this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
+        this.addAbility(new RedManaAbility());
+        this.addAbility(new GreenManaAbility());
+    }
 
-	public RootboundCrag(final RootboundCrag card) {
-		super(card);
-	}
+    public RootboundCrag(final RootboundCrag card) {
+        super(card);
+    }
 
-	@Override
-	public RootboundCrag copy() {
-		return new RootboundCrag(this);
-	}
+    @Override
+    public RootboundCrag copy() {
+        return new RootboundCrag(this);
+    }
 }

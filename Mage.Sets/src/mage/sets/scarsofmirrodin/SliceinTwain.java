@@ -45,16 +45,16 @@ import mage.target.TargetPermanent;
 public class SliceinTwain extends CardImpl<SliceinTwain> {
     private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
 
-	static {
-		filter.getCardType().add(CardType.ARTIFACT);
-		filter.getCardType().add(CardType.ENCHANTMENT);
-		filter.setScopeCardType(Filter.ComparisonScope.Any);
-	}
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.getCardType().add(CardType.ENCHANTMENT);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
+    }
 
     public SliceinTwain (UUID ownerId) {
         super(ownerId, 127, "Slice in Twain", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{G}{G}");
         this.expansionSetCode = "SOM";
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
         this.getSpellAbility().addTarget(new TargetPermanent(filter));

@@ -51,48 +51,48 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class EzuriRenegadeLeader extends CardImpl<EzuriRenegadeLeader> {
 
-	private static final FilterCreaturePermanent elfFilter = new FilterCreaturePermanent();
-	private static final FilterControlledCreaturePermanent notEzuri = new FilterControlledCreaturePermanent();
+    private static final FilterCreaturePermanent elfFilter = new FilterCreaturePermanent();
+    private static final FilterControlledCreaturePermanent notEzuri = new FilterControlledCreaturePermanent();
 
-	static {
-		elfFilter.getSubtype().add("Elf");
-		elfFilter.setMessage("Elf creatures");
+    static {
+        elfFilter.getSubtype().add("Elf");
+        elfFilter.setMessage("Elf creatures");
 
-		notEzuri.getSubtype().add("Elf");
-		notEzuri.getName().add("Ezuri, Renegade Leader");
-		notEzuri.setNotName(true);
-	}
+        notEzuri.getSubtype().add("Elf");
+        notEzuri.getName().add("Ezuri, Renegade Leader");
+        notEzuri.setNotName(true);
+    }
 
-	public EzuriRenegadeLeader(UUID ownerId) {
-		super(ownerId, 119, "Ezuri, Renegade Leader", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
-		this.expansionSetCode = "SOM";
-		this.supertype.add("Legendary");
-		this.subtype.add("Elf");
-		this.subtype.add("Warrior");
+    public EzuriRenegadeLeader(UUID ownerId) {
+        super(ownerId, 119, "Ezuri, Renegade Leader", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
+        this.expansionSetCode = "SOM";
+        this.supertype.add("Legendary");
+        this.subtype.add("Elf");
+        this.subtype.add("Warrior");
 
-		this.color.setGreen(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+        this.color.setGreen(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-		Ability ezuriRegen = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ManaCostsImpl("{G}"));
-		TargetControlledCreaturePermanent regenTarget = new TargetControlledCreaturePermanent(1, 1, notEzuri, false);
-		regenTarget.setTargetName("another target Elf");
-		ezuriRegen.addTarget(regenTarget);
-		this.addAbility(ezuriRegen);
+        Ability ezuriRegen = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ManaCostsImpl("{G}"));
+        TargetControlledCreaturePermanent regenTarget = new TargetControlledCreaturePermanent(1, 1, notEzuri, false);
+        regenTarget.setTargetName("another target Elf");
+        ezuriRegen.addTarget(regenTarget);
+        this.addAbility(ezuriRegen);
 
-		Ability ezuriBoost = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-					new BoostControlledEffect(3, 3, Duration.EndOfTurn, elfFilter, false),
-						new ManaCostsImpl("{2}{G}{G}{G}"));
-		ezuriBoost.addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, elfFilter));
-		this.addAbility(ezuriBoost);
-	}
+        Ability ezuriBoost = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                    new BoostControlledEffect(3, 3, Duration.EndOfTurn, elfFilter, false),
+                        new ManaCostsImpl("{2}{G}{G}{G}"));
+        ezuriBoost.addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, elfFilter));
+        this.addAbility(ezuriBoost);
+    }
 
-	public EzuriRenegadeLeader(final EzuriRenegadeLeader card) {
-		super(card);
-	}
+    public EzuriRenegadeLeader(final EzuriRenegadeLeader card) {
+        super(card);
+    }
 
-	@Override
-	public EzuriRenegadeLeader copy() {
-		return new EzuriRenegadeLeader(this);
-	}
+    @Override
+    public EzuriRenegadeLeader copy() {
+        return new EzuriRenegadeLeader(this);
+    }
 }

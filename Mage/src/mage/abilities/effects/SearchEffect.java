@@ -38,19 +38,19 @@ import mage.target.common.TargetCardInLibrary;
  */
 public abstract class SearchEffect<T extends SearchEffect<T>> extends OneShotEffect<T> {
 
-	protected TargetCardInLibrary target;
+    protected TargetCardInLibrary target;
 
-	public SearchEffect(TargetCardInLibrary target, Outcome outcome) {
-		super(outcome);
-		this.target = target;
-	}
+    public SearchEffect(TargetCardInLibrary target, Outcome outcome) {
+        super(outcome);
+        this.target = target;
+    }
 
-	public SearchEffect(SearchEffect effect) {
-		super(effect);
-		this.target = effect.target.copy();
-	}
+    public SearchEffect(SearchEffect effect) {
+        super(effect);
+        this.target = effect.target.copy();
+    }
 
-	public TargetCard getTarget() {
-		return target;
-	}
+    public TargetCard getTarget() {
+        return target;
+    }
 }

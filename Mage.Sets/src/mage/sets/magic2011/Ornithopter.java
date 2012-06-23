@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class Ornithopter extends mage.sets.magic2010.Ornithopter {
 
-	public Ornithopter(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 211;
-		this.expansionSetCode = "M11";
-	}
+    public Ornithopter(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 211;
+        this.expansionSetCode = "M11";
+    }
 
-	public Ornithopter(final Ornithopter card) {
-		super(card);
-	}
+    public Ornithopter(final Ornithopter card) {
+        super(card);
+    }
 
-	@Override
-	public Ornithopter copy() {
-		return new Ornithopter(this);
-	}
+    @Override
+    public Ornithopter copy() {
+        return new Ornithopter(this);
+    }
 
 }

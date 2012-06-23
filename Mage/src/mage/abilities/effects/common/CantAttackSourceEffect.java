@@ -40,30 +40,30 @@ import mage.game.permanent.Permanent;
  */
 public class CantAttackSourceEffect extends RestrictionEffect<CantAttackSourceEffect> {
 
-	public CantAttackSourceEffect(Duration duration) {
-		super(duration);
-	}
+    public CantAttackSourceEffect(Duration duration) {
+        super(duration);
+    }
 
-	public CantAttackSourceEffect(final CantAttackSourceEffect effect) {
-		super(effect);
-	}
+    public CantAttackSourceEffect(final CantAttackSourceEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean applies(Permanent permanent, Ability source, Game game) {
-		if (permanent.getId().equals(source.getSourceId())) {
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        if (permanent.getId().equals(source.getSourceId())) {
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public boolean canAttack(Game game) {
-		return false;
-	}
+    @Override
+    public boolean canAttack(Game game) {
+        return false;
+    }
 
-	@Override
-	public CantAttackSourceEffect copy() {
-		return new CantAttackSourceEffect(this);
-	}
+    @Override
+    public CantAttackSourceEffect copy() {
+        return new CantAttackSourceEffect(this);
+    }
 
 }

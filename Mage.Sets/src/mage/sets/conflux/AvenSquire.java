@@ -49,7 +49,7 @@ public class AvenSquire extends CardImpl<AvenSquire> {
         this.subtype.add("Bird");
         this.subtype.add("Soldier");
         this.power = new MageInt(1);
-	this.toughness = new MageInt(1);
+    this.toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(new ExaltedAbility());
     }

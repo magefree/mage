@@ -45,34 +45,34 @@ public class TapSourceEffect extends OneShotEffect<TapSourceEffect> {
         this(false);
     }
 
-	public TapSourceEffect(boolean withoutTrigger) {
-		super(Outcome.Tap);
+    public TapSourceEffect(boolean withoutTrigger) {
+        super(Outcome.Tap);
         this.withoutTrigger = withoutTrigger;
-		staticText = "tap {this}";
-	}
+        staticText = "tap {this}";
+    }
 
-	public TapSourceEffect(final TapSourceEffect effect) {
-		super(effect);
+    public TapSourceEffect(final TapSourceEffect effect) {
+        super(effect);
         this.withoutTrigger = effect.withoutTrigger;
-	}
+    }
 
-	@Override
-	public TapSourceEffect copy() {
-		return new TapSourceEffect(this);
-	}
+    @Override
+    public TapSourceEffect copy() {
+        return new TapSourceEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getSourceId());
-		if (permanent != null) {
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
             if (withoutTrigger) {
                 permanent.setTapped(true);
             } else {
-			    permanent.tap(game);
+                permanent.tap(game);
             }
-			return true;
-		}
-		return false;
-	}
+            return true;
+        }
+        return false;
+    }
 
 }

@@ -60,10 +60,10 @@ public class CurseOfWizardry extends CardImpl<CurseOfWizardry> {
 
         // As Curse of Wizardry enters the battlefield, choose a color.
         this.addAbility(new EntersBattlefieldAbility(new CurseOfWizardryChooseColorEffect()));
-        
+
         // Whenever a player casts a spell of the chosen color, that player loses 1 life.
         this.addAbility(new CurseOfWizardryPlayerCastsSpellChosenColorTriggeredAbility());
-        
+
     }
 
     public CurseOfWizardry(final CurseOfWizardry card) {
@@ -77,49 +77,49 @@ public class CurseOfWizardry extends CardImpl<CurseOfWizardry> {
 }
 
 class CurseOfWizardryChooseColorEffect extends OneShotEffect<CurseOfWizardryChooseColorEffect> {
-    
+
     public CurseOfWizardryChooseColorEffect() {
         super(Constants.Outcome.Detriment);
-	staticText = "As {this} enters the battlefield, choose a color";
+    staticText = "As {this} enters the battlefield, choose a color";
     }
 
     public CurseOfWizardryChooseColorEffect(final CurseOfWizardryChooseColorEffect effect) {
-	super(effect);
+    super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-	Player player = game.getPlayer(source.getControllerId());
-	Permanent curseOfWizardry = game.getPermanent(source.getSourceId());
-	if (player != null && curseOfWizardry != null) {
+    Player player = game.getPlayer(source.getControllerId());
+    Permanent curseOfWizardry = game.getPermanent(source.getSourceId());
+    if (player != null && curseOfWizardry != null) {
             ChoiceColor colorChoice = new ChoiceColor();
             if (player.choose(Constants.Outcome.Detriment, colorChoice, game)) {
-		game.informPlayers(curseOfWizardry.getName() + ": " + player.getName() + " has chosen " + colorChoice.getChoice());
-		game.getState().setValue(curseOfWizardry.getId() + "_color", colorChoice.getColor());
+        game.informPlayers(curseOfWizardry.getName() + ": " + player.getName() + " has chosen " + colorChoice.getChoice());
+        game.getState().setValue(curseOfWizardry.getId() + "_color", colorChoice.getColor());
             }
-	}
-	return false;
+    }
+    return false;
     }
 
     @Override
     public CurseOfWizardryChooseColorEffect copy() {
-	return new CurseOfWizardryChooseColorEffect(this);
+    return new CurseOfWizardryChooseColorEffect(this);
     }
 }
 
 class CurseOfWizardryPlayerCastsSpellChosenColorTriggeredAbility extends TriggeredAbilityImpl<CurseOfWizardryPlayerCastsSpellChosenColorTriggeredAbility> {
-	
+
     public CurseOfWizardryPlayerCastsSpellChosenColorTriggeredAbility() {
-	super(Constants.Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), false);
+    super(Constants.Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), false);
     }
 
     public CurseOfWizardryPlayerCastsSpellChosenColorTriggeredAbility(final CurseOfWizardryPlayerCastsSpellChosenColorTriggeredAbility ability) {
-	super(ability);
+    super(ability);
     }
 
     @Override
     public CurseOfWizardryPlayerCastsSpellChosenColorTriggeredAbility copy() {
-	return new CurseOfWizardryPlayerCastsSpellChosenColorTriggeredAbility(this);
+    return new CurseOfWizardryPlayerCastsSpellChosenColorTriggeredAbility(this);
     }
 
     @Override
@@ -139,9 +139,9 @@ class CurseOfWizardryPlayerCastsSpellChosenColorTriggeredAbility extends Trigger
         }
         return false;
     }
-	
+
     @Override
     public String getRule() {
-	return "Whenever a player casts a spell of the chosen color, that player loses 1 life.";
+    return "Whenever a player casts a spell of the chosen color, that player loses 1 life.";
     }
 }

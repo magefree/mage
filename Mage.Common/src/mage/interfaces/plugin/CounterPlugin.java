@@ -10,6 +10,6 @@ import net.xeoh.plugins.base.Plugin;
  * @author nantuko
  */
 public interface CounterPlugin extends Plugin {
-	void addGamePlayed() throws PluginException;
-	int getGamePlayed() throws PluginException;
+    void addGamePlayed() throws PluginException;
+    int getGamePlayed() throws PluginException;
 }

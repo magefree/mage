@@ -46,11 +46,11 @@ public class SoulParry extends CardImpl<SoulParry> {
     public SoulParry (UUID ownerId) {
         super(ownerId, 21, "Soul Parry", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "SOM";
-		this.color.setWhite(true);
-	    Target target = new TargetCreaturePermanent(1,2);
-		target.setTargetName("one or two creatures");
-	    this.getSpellAbility().addEffect(new PreventDamageFromTargetEffect(Duration.EndOfTurn, true));
-	    this.getSpellAbility().addTarget(target);
+        this.color.setWhite(true);
+        Target target = new TargetCreaturePermanent(1,2);
+        target.setTargetName("one or two creatures");
+        this.getSpellAbility().addEffect(new PreventDamageFromTargetEffect(Duration.EndOfTurn, true));
+        this.getSpellAbility().addTarget(target);
     }
 
     public SoulParry (final SoulParry card) {

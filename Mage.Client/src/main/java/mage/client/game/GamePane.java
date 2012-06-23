@@ -48,34 +48,34 @@ public class GamePane extends MagePane {
     /** Creates new form GamePane */
     public GamePane() {
         initComponents();
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				gamePanel.setJLayeredPane(getLayeredPane());
-				gamePanel.installComponents();
-			}
-		});
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                gamePanel.setJLayeredPane(getLayeredPane());
+                gamePanel.installComponents();
+            }
+        });
 
     }
 
-	public void showGame(UUID gameId, UUID playerId) {
-		this.setTitle("Game " + gameId);
-		gamePanel.showGame(gameId, playerId);
-	}
+    public void showGame(UUID gameId, UUID playerId) {
+        this.setTitle("Game " + gameId);
+        gamePanel.showGame(gameId, playerId);
+    }
 
-	public void hideGame() {
-		gamePanel.hideGame();
-	}
-	
-	public void watchGame(UUID gameId) {
-		this.setTitle("Watching " + gameId);
-		gamePanel.watchGame(gameId);
-	}
+    public void hideGame() {
+        gamePanel.hideGame();
+    }
 
-	public void replayGame(UUID gameId) {
-		this.setTitle("Replaying " + gameId);
-		gamePanel.replayGame(gameId);
-	}
+    public void watchGame(UUID gameId) {
+        this.setTitle("Watching " + gameId);
+        gamePanel.watchGame(gameId);
+    }
+
+    public void replayGame(UUID gameId) {
+        this.setTitle("Replaying " + gameId);
+        gamePanel.replayGame(gameId);
+    }
 
     @SuppressWarnings("unchecked")
     private void initComponents() {

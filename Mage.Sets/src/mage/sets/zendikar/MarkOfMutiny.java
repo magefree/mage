@@ -50,13 +50,13 @@ public class MarkOfMutiny extends CardImpl<MarkOfMutiny> {
     public MarkOfMutiny (UUID ownerId) {
         super(ownerId, 137, "Mark of Mutiny", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
         this.expansionSetCode = "ZEN";
-        
-		this.color.setRed(true);
-		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+
+        this.color.setRed(true);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));
-		this.getSpellAbility().addEffect(new AddCountersTargetEffect(new PlusOneCounter()));
-		this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
-		this.getSpellAbility().addEffect(new UntapTargetEffect());
+        this.getSpellAbility().addEffect(new AddCountersTargetEffect(new PlusOneCounter()));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new UntapTargetEffect());
     }
 
     public MarkOfMutiny (final MarkOfMutiny card) {

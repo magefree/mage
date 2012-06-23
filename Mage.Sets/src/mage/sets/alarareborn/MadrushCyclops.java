@@ -51,9 +51,9 @@ public class MadrushCyclops extends CardImpl<MadrushCyclops> {
         this.expansionSetCode = "ARB";
         this.subtype.add("Cyclops");
         this.subtype.add("Warrior");
-		this.color.setBlack(true);
-		this.color.setRed(true);
-		this.color.setGreen(true);
+        this.color.setBlack(true);
+        this.color.setRed(true);
+        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent())));

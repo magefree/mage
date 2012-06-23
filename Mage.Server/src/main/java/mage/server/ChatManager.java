@@ -39,59 +39,59 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class ChatManager {
 
-	private final static ChatManager INSTANCE = new ChatManager();
+    private final static ChatManager INSTANCE = new ChatManager();
 
-	public static ChatManager getInstance() {
-		return INSTANCE;
-	}
+    public static ChatManager getInstance() {
+        return INSTANCE;
+    }
 
-	private ChatManager() {}
+    private ChatManager() {}
 
-	private ConcurrentHashMap<UUID, ChatSession> chatSessions = new ConcurrentHashMap<UUID, ChatSession>();
+    private ConcurrentHashMap<UUID, ChatSession> chatSessions = new ConcurrentHashMap<UUID, ChatSession>();
 
-	public UUID createChatSession() {
-		ChatSession chatSession = new ChatSession();
-		chatSessions.put(chatSession.getChatId(), chatSession);
-		return chatSession.getChatId();
-	}
+    public UUID createChatSession() {
+        ChatSession chatSession = new ChatSession();
+        chatSessions.put(chatSession.getChatId(), chatSession);
+        return chatSession.getChatId();
+    }
 
-	public void joinChat(UUID chatId, UUID userId) {
-		chatSessions.get(chatId).join(userId);
-	}
+    public void joinChat(UUID chatId, UUID userId) {
+        chatSessions.get(chatId).join(userId);
+    }
 
-	public void leaveChat(UUID chatId, UUID userId) {
-		chatSessions.get(chatId).kill(userId);
-	}
+    public void leaveChat(UUID chatId, UUID userId) {
+        chatSessions.get(chatId).kill(userId);
+    }
 
-	public void destroyChatSession(UUID chatId) {
-		chatSessions.remove(chatId);
-	}
+    public void destroyChatSession(UUID chatId) {
+        chatSessions.remove(chatId);
+    }
 
-	public void broadcast(UUID chatId, String userName, String message, MessageColor color) {
-		chatSessions.get(chatId).broadcast(userName, message, color);
-	}
+    public void broadcast(UUID chatId, String userName, String message, MessageColor color) {
+        chatSessions.get(chatId).broadcast(userName, message, color);
+    }
 
-	/**
-	 * 
-	 * use mainly for announcing that a user connection was lost or that a user has reconnected
-	 * 
-	 * @param userId
-	 * @param message
-	 * @param color 
-	 */
-	public void broadcast(UUID userId, String message, MessageColor color) {
-		User user = UserManager.getInstance().getUser(userId);
-		if (user != null) {
-			for (ChatSession chat: chatSessions.values()) {
-				if (chat.hasUser(userId))
-					chat.broadcast(user.getName(), message, color);
-			}
-		}
-	}
+    /**
+     * 
+     * use mainly for announcing that a user connection was lost or that a user has reconnected
+     * 
+     * @param userId
+     * @param message
+     * @param color 
+     */
+    public void broadcast(UUID userId, String message, MessageColor color) {
+        User user = UserManager.getInstance().getUser(userId);
+        if (user != null) {
+            for (ChatSession chat: chatSessions.values()) {
+                if (chat.hasUser(userId))
+                    chat.broadcast(user.getName(), message, color);
+            }
+        }
+    }
 
-	public void removeUser(UUID userId) {
-		for (ChatSession chat: chatSessions.values()) {
-			chat.kill(userId);
-		}
-	}
+    public void removeUser(UUID userId) {
+        for (ChatSession chat: chatSessions.values()) {
+            chat.kill(userId);
+        }
+    }
 }

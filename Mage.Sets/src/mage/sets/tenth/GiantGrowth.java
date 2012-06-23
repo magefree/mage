@@ -42,20 +42,20 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class GiantGrowth extends CardImpl<GiantGrowth> {
 
-	public GiantGrowth(UUID ownerId) {
-		super(ownerId, 266, "Giant Growth", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
-		this.expansionSetCode = "10E";
-		this.color.setGreen(true);
-		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-		this.getSpellAbility().addEffect(new BoostTargetEffect(3, 3, Duration.EndOfTurn));
-	}
+    public GiantGrowth(UUID ownerId) {
+        super(ownerId, 266, "Giant Growth", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
+        this.expansionSetCode = "10E";
+        this.color.setGreen(true);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addEffect(new BoostTargetEffect(3, 3, Duration.EndOfTurn));
+    }
 
-	public GiantGrowth(final GiantGrowth card) {
-		super(card);
-	}
+    public GiantGrowth(final GiantGrowth card) {
+        super(card);
+    }
 
-	@Override
-	public GiantGrowth copy() {
-		return new GiantGrowth(this);
-	}
+    @Override
+    public GiantGrowth copy() {
+        return new GiantGrowth(this);
+    }
 }

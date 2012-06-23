@@ -44,21 +44,21 @@ import mage.cards.CardImpl;
  */
 public class SejiriRefuge extends CardImpl<SejiriRefuge> {
 
-	public SejiriRefuge(UUID ownerId) {
-		super(ownerId, 224, "Sejiri Refuge", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);
-		this.expansionSetCode = "ZEN";
-		this.addAbility(new EntersBattlefieldTappedAbility());
-		this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(1), false));
-		this.addAbility(new WhiteManaAbility());
-		this.addAbility(new BlueManaAbility());
-	}
+    public SejiriRefuge(UUID ownerId) {
+        super(ownerId, 224, "Sejiri Refuge", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);
+        this.expansionSetCode = "ZEN";
+        this.addAbility(new EntersBattlefieldTappedAbility());
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(1), false));
+        this.addAbility(new WhiteManaAbility());
+        this.addAbility(new BlueManaAbility());
+    }
 
-	public SejiriRefuge(final SejiriRefuge card) {
-		super(card);
-	}
+    public SejiriRefuge(final SejiriRefuge card) {
+        super(card);
+    }
 
-	@Override
-	public SejiriRefuge copy() {
-		return new SejiriRefuge(this);
-	}
+    @Override
+    public SejiriRefuge copy() {
+        return new SejiriRefuge(this);
+    }
 }

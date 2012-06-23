@@ -39,59 +39,59 @@ import mage.game.turn.TurnMod;
 
 public class TwoPlayerDuel extends GameImpl<TwoPlayerDuel> {
 
-	public TwoPlayerDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range) {
-		super(attackOption, range);
-	}
+    public TwoPlayerDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range) {
+        super(attackOption, range);
+    }
 
-	public TwoPlayerDuel(final TwoPlayerDuel game) {
-		super(game);
-	}
+    public TwoPlayerDuel(final TwoPlayerDuel game) {
+        super(game);
+    }
 
-	@Override
-	public MatchType getGameType() {
-		return new TwoPlayerDuelType();
-	}
+    @Override
+    public MatchType getGameType() {
+        return new TwoPlayerDuelType();
+    }
 
-	@Override
-	public int getNumPlayers() {
-		return 2;
-	}
+    @Override
+    public int getNumPlayers() {
+        return 2;
+    }
 
-	@Override
-	public int getLife() {
-		return 20;
-	}
+    @Override
+    public int getLife() {
+        return 20;
+    }
 
-	@Override
-	protected void init(UUID choosingPlayerId, GameOptions gameOptions) {
-		super.init(choosingPlayerId, gameOptions);
-		state.getTurnMods().add(new TurnMod(startingPlayerId, PhaseStep.DRAW));
-	}
+    @Override
+    protected void init(UUID choosingPlayerId, GameOptions gameOptions) {
+        super.init(choosingPlayerId, gameOptions);
+        state.getTurnMods().add(new TurnMod(startingPlayerId, PhaseStep.DRAW));
+    }
 
-	@Override
-	public void quit(UUID playerId) {
-		super.quit(playerId);
-		end();
-	}
+    @Override
+    public void quit(UUID playerId) {
+        super.quit(playerId);
+        end();
+    }
 
-	@Override
-	public Set<UUID> getOpponents(UUID playerId) {
-		Set<UUID> opponents = new HashSet<UUID>();
-		for (UUID opponentId: this.getPlayer(playerId).getInRange()) {
-			if (!opponentId.equals(playerId))
-				opponents.add(opponentId);
-		}
-		return opponents;
-	}
+    @Override
+    public Set<UUID> getOpponents(UUID playerId) {
+        Set<UUID> opponents = new HashSet<UUID>();
+        for (UUID opponentId: this.getPlayer(playerId).getInRange()) {
+            if (!opponentId.equals(playerId))
+                opponents.add(opponentId);
+        }
+        return opponents;
+    }
 
-	@Override
-	public void leave(UUID playerId) {
-		
-	}
+    @Override
+    public void leave(UUID playerId) {
 
-	@Override
-	public TwoPlayerDuel copy() {
-		return new TwoPlayerDuel(this);
-	}
+    }
+
+    @Override
+    public TwoPlayerDuel copy() {
+        return new TwoPlayerDuel(this);
+    }
 
 }

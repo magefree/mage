@@ -38,19 +38,19 @@ import mage.counters.Counter;
 public class CounterView implements Serializable {
     private static final long serialVersionUID = 1L;
 
-	private String name;
-	private int count;
+    private String name;
+    private int count;
 
-	public CounterView(Counter counter) {
-		this.name = counter.getName();
-		this.count = counter.getCount();
-	}
+    public CounterView(Counter counter) {
+        this.name = counter.getName();
+        this.count = counter.getCount();
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public int getCount() {
-		return count;
-	}
+    public int getCount() {
+        return count;
+    }
 }

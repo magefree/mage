@@ -36,19 +36,19 @@ import java.util.UUID;
  */
 public class Silence extends mage.sets.magic2010.Silence {
 
-	public Silence(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 30;
-		this.expansionSetCode = "M11";
-	}
+    public Silence(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 30;
+        this.expansionSetCode = "M11";
+    }
 
-	public Silence(final Silence card) {
-		super(card);
-	}
+    public Silence(final Silence card) {
+        super(card);
+    }
 
-	@Override
-	public Silence copy() {
-		return new Silence(this);
-	}
+    @Override
+    public Silence copy() {
+        return new Silence(this);
+    }
 
 }

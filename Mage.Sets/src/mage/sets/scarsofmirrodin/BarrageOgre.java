@@ -62,7 +62,7 @@ public class BarrageOgre extends CardImpl<BarrageOgre> {
         this.expansionSetCode = "SOM";
         this.subtype.add("Ogre");
         this.subtype.add("Warrior");
-		this.color.setRed(true);        
+        this.color.setRed(true);        
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());

@@ -51,8 +51,8 @@ public class NoDachi extends CardImpl<NoDachi> {
         this.expansionSetCode = "CHK";
         this.subtype.add("Equipment");
         this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(3)));
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), Constants.AttachmentType.EQUIPMENT)));
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEquippedEffect(2, 0)));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), Constants.AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEquippedEffect(2, 0)));
     }
 
     public NoDachi (final NoDachi card) {

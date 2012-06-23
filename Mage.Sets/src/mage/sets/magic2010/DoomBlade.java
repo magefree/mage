@@ -44,11 +44,11 @@ public class DoomBlade extends CardImpl<DoomBlade> {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
 
-	static {
-		filter.setUseColor(true);
-		filter.getColor().setBlack(true);
-		filter.setNotColor(true);
-	}
+    static {
+        filter.setUseColor(true);
+        filter.getColor().setBlack(true);
+        filter.setNotColor(true);
+    }
 
     public DoomBlade(UUID ownerId){
         super(ownerId, 93, "Doom Blade", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{B}");
@@ -58,12 +58,12 @@ public class DoomBlade extends CardImpl<DoomBlade> {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 
-	public DoomBlade(final DoomBlade card) {
-		super(card);
-	}
+    public DoomBlade(final DoomBlade card) {
+        super(card);
+    }
 
-	@Override
-	public DoomBlade copy() {
-		return new DoomBlade(this);
-	}
+    @Override
+    public DoomBlade copy() {
+        return new DoomBlade(this);
+    }
 }

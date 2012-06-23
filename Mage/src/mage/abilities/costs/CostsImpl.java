@@ -43,13 +43,13 @@ import mage.target.Targets;
  */
 public class CostsImpl<T extends Cost> extends ArrayList<T> implements Costs<T> {
 
-	public CostsImpl() {}
-	
-	public CostsImpl(final CostsImpl<T> costs) {
-		for (Cost cost: costs) {
-			this.add((T)cost.copy());
-		}
-	}
+    public CostsImpl() {}
+
+    public CostsImpl(final CostsImpl<T> costs) {
+        for (Cost cost: costs) {
+            this.add((T)cost.copy());
+        }
+    }
 
     @Override
     public UUID getId() {
@@ -57,105 +57,105 @@ public class CostsImpl<T extends Cost> extends ArrayList<T> implements Costs<T> 
     }
 
     @Override
-	public String getText() {
-		if (this.size() == 0)
-			return "";
+    public String getText() {
+        if (this.size() == 0)
+            return "";
 
-		StringBuilder sbText = new StringBuilder();
-		for (T cost: this) {
-			sbText.append(cost.getText()).append(", ");
-		}
-		sbText.setLength(sbText.length() - 2);
-		return sbText.toString();
-	}
+        StringBuilder sbText = new StringBuilder();
+        for (T cost: this) {
+            sbText.append(cost.getText()).append(", ");
+        }
+        sbText.setLength(sbText.length() - 2);
+        return sbText.toString();
+    }
 
-	@Override
-	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-		for (T cost: this) {
-			if (!cost.canPay(sourceId, controllerId, game))
-				return false;
-		}
-		return true;
-	}
+    @Override
+    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+        for (T cost: this) {
+            if (!cost.canPay(sourceId, controllerId, game))
+                return false;
+        }
+        return true;
+    }
 
-	@Override
-	public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-		if (this.size() > 0) {
-			while (!isPaid()) {
-				T cost = getFirstUnpaid();
-				if (!cost.pay(ability, game, sourceId, controllerId, noMana))
-					return false;
-			}
-		}
-		return true;
-	}
+    @Override
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+        if (this.size() > 0) {
+            while (!isPaid()) {
+                T cost = getFirstUnpaid();
+                if (!cost.pay(ability, game, sourceId, controllerId, noMana))
+                    return false;
+            }
+        }
+        return true;
+    }
 
-	@Override
-	public boolean isPaid() {
-		for (T cost: this) {
-			if (!((T)cost instanceof VariableManaCost) && !cost.isPaid())
-				return false;
-		}
-		return true;
-	}
+    @Override
+    public boolean isPaid() {
+        for (T cost: this) {
+            if (!((T)cost instanceof VariableManaCost) && !cost.isPaid())
+                return false;
+        }
+        return true;
+    }
 
-	@Override
-	public void clearPaid() {
-		for (T cost: this) {
-			cost.clearPaid();
-		}
-	}
+    @Override
+    public void clearPaid() {
+        for (T cost: this) {
+            cost.clearPaid();
+        }
+    }
 
-	@Override
-	public void setPaid() {
-		for (T cost: this) {
-			cost.setPaid();
-		}
-	}
+    @Override
+    public void setPaid() {
+        for (T cost: this) {
+            cost.setPaid();
+        }
+    }
 
-	@Override
-	public Costs<T> getUnpaid() {
-		Costs<T> unpaid = new CostsImpl<T>();
-		for (T cost: this) {
-			if (!cost.isPaid())
-				unpaid.add(cost);
-		}
-		return unpaid;
-	}
+    @Override
+    public Costs<T> getUnpaid() {
+        Costs<T> unpaid = new CostsImpl<T>();
+        for (T cost: this) {
+            if (!cost.isPaid())
+                unpaid.add(cost);
+        }
+        return unpaid;
+    }
 
-	protected T getFirstUnpaid() {
-		Costs<T> unpaid = getUnpaid();
-		if (unpaid.size() > 0) {
-			return unpaid.get(0);
-		}
-		return null;
- 	}
+    protected T getFirstUnpaid() {
+        Costs<T> unpaid = getUnpaid();
+        if (unpaid.size() > 0) {
+            return unpaid.get(0);
+        }
+        return null;
+     }
 
-	@Override
-	public List<VariableCost> getVariableCosts() {
-		List<VariableCost> variableCosts = new ArrayList<VariableCost>();
-		for (T cost: this) {
-			if (cost instanceof VariableCost)
-				variableCosts.add((VariableCost) cost);
-			if (cost instanceof ManaCosts) {
-				variableCosts.addAll(((ManaCosts)cost).getVariableCosts());
-			}
-		}
-		return variableCosts;
-	}
+    @Override
+    public List<VariableCost> getVariableCosts() {
+        List<VariableCost> variableCosts = new ArrayList<VariableCost>();
+        for (T cost: this) {
+            if (cost instanceof VariableCost)
+                variableCosts.add((VariableCost) cost);
+            if (cost instanceof ManaCosts) {
+                variableCosts.addAll(((ManaCosts)cost).getVariableCosts());
+            }
+        }
+        return variableCosts;
+    }
 
-	@Override
-	public Targets getTargets() {
-		Targets targets = new Targets();
-		for (T cost: this) {
-			targets.addAll(cost.getTargets());
-		}
-		return targets;
-	}
+    @Override
+    public Targets getTargets() {
+        Targets targets = new Targets();
+        for (T cost: this) {
+            targets.addAll(cost.getTargets());
+        }
+        return targets;
+    }
 
-	@Override
-	public Costs<T> copy() {
-		return new CostsImpl(this);
-	}
+    @Override
+    public Costs<T> copy() {
+        return new CostsImpl(this);
+    }
 
 }

@@ -44,43 +44,43 @@ import java.util.UUID;
  */
 public class StoicRebuttal extends CardImpl<StoicRebuttal> {
 
-	public StoicRebuttal(UUID ownerId) {
-		super(ownerId, 46, "Stoic Rebuttal", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
-		this.expansionSetCode = "SOM";
-		this.color.setBlue(true);
-		this.getSpellAbility().addTarget(new TargetSpell());
-		this.getSpellAbility().addEffect(new CounterTargetEffect());
-	}
+    public StoicRebuttal(UUID ownerId) {
+        super(ownerId, 46, "Stoic Rebuttal", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
+        this.expansionSetCode = "SOM";
+        this.color.setBlue(true);
+        this.getSpellAbility().addTarget(new TargetSpell());
+        this.getSpellAbility().addEffect(new CounterTargetEffect());
+    }
 
-	public StoicRebuttal(final StoicRebuttal card) {
-		super(card);
-	}
+    public StoicRebuttal(final StoicRebuttal card) {
+        super(card);
+    }
 
-	@Override
-	public void adjustCosts(Ability ability, Game game) {
-		if (MetalcraftCondition.getInstance().apply(game, ability)) {
-			/*ManaCosts<ManaCost> previousCost = ability.getManaCostsToPay();
-			ManaCosts<ManaCost> adjustedCost = new ManaCostsImpl<ManaCost>();
-			boolean reduced = false;
-			for (ManaCost manaCost : previousCost) {
-				Mana mana = manaCost.getOptions().get(0);
-				if (!reduced && mana != null && mana.getColorless() > 0) {
-					mana.setColorless(0);
-					adjustedCost.add(manaCost);
-					reduced = true;
-				} else {
-					adjustedCost.add(manaCost);
-				}
-			}
-			ability.getManaCostsToPay().clear();
-			ability.getManaCostsToPay().addAll(adjustedCost);*/
-			ability.getManaCostsToPay().clear();
-			ability.getManaCostsToPay().load("{U}{U}");
-		}
-	}
+    @Override
+    public void adjustCosts(Ability ability, Game game) {
+        if (MetalcraftCondition.getInstance().apply(game, ability)) {
+            /*ManaCosts<ManaCost> previousCost = ability.getManaCostsToPay();
+            ManaCosts<ManaCost> adjustedCost = new ManaCostsImpl<ManaCost>();
+            boolean reduced = false;
+            for (ManaCost manaCost : previousCost) {
+                Mana mana = manaCost.getOptions().get(0);
+                if (!reduced && mana != null && mana.getColorless() > 0) {
+                    mana.setColorless(0);
+                    adjustedCost.add(manaCost);
+                    reduced = true;
+                } else {
+                    adjustedCost.add(manaCost);
+                }
+            }
+            ability.getManaCostsToPay().clear();
+            ability.getManaCostsToPay().addAll(adjustedCost);*/
+            ability.getManaCostsToPay().clear();
+            ability.getManaCostsToPay().load("{U}{U}");
+        }
+    }
 
-	@Override
-	public StoicRebuttal copy() {
-		return new StoicRebuttal(this);
-	}
+    @Override
+    public StoicRebuttal copy() {
+        return new StoicRebuttal(this);
+    }
 }

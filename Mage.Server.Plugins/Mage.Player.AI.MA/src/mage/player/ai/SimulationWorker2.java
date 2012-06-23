@@ -41,29 +41,29 @@ import mage.util.Logging;
  */
 public class SimulationWorker2 implements Callable {
 
-	private final static Logger logger = Logging.getLogger(SimulationWorker2.class.getName());
+    private final static Logger logger = Logging.getLogger(SimulationWorker2.class.getName());
 
-	private Game game;
-	private SimulatedAction2 previousActions;
-	private Ability action;
-	private SimulatedPlayer2 player;
+    private Game game;
+    private SimulatedAction2 previousActions;
+    private Ability action;
+    private SimulatedPlayer2 player;
 
-	public SimulationWorker2(Game game, SimulatedPlayer2 player, SimulatedAction2 previousActions, Ability action) {
-		this.game = game;
-		this.player = player;
-		this.previousActions = previousActions;
-		this.action = action;
-	}
+    public SimulationWorker2(Game game, SimulatedPlayer2 player, SimulatedAction2 previousActions, Ability action) {
+        this.game = game;
+        this.player = player;
+        this.previousActions = previousActions;
+        this.action = action;
+    }
 
-	@Override
-	public Object call() {
-		try {
-//			player.simulateAction(game, previousActions, action);
-		} catch (Exception ex) {
-			logger.log(Level.SEVERE, null, ex);
-		}
-		return null;
-	}
+    @Override
+    public Object call() {
+        try {
+//            player.simulateAction(game, previousActions, action);
+        } catch (Exception ex) {
+            logger.log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 
 }
 

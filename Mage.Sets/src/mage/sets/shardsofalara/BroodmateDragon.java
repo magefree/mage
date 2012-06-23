@@ -44,29 +44,29 @@ import mage.game.permanent.token.DragonToken;
  */
 public class BroodmateDragon extends CardImpl<BroodmateDragon> {
 
-	private static DragonToken dragonToken = new DragonToken();
+    private static DragonToken dragonToken = new DragonToken();
 
-	public BroodmateDragon(UUID ownerId) {
-		super(ownerId, 160, "Broodmate Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{R}{G}");
-		this.expansionSetCode = "ALA";
-		this.subtype.add("Dragon");
-		this.color.setRed(true);
-		this.color.setGreen(true);
-		this.color.setBlack(true);
-		this.power = new MageInt(4);
-		this.toughness = new MageInt(4);
+    public BroodmateDragon(UUID ownerId) {
+        super(ownerId, 160, "Broodmate Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{R}{G}");
+        this.expansionSetCode = "ALA";
+        this.subtype.add("Dragon");
+        this.color.setRed(true);
+        this.color.setGreen(true);
+        this.color.setBlack(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
-		this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(dragonToken), false));
-		this.addAbility(FlyingAbility.getInstance());
-	}
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(dragonToken), false));
+        this.addAbility(FlyingAbility.getInstance());
+    }
 
-	public BroodmateDragon(final BroodmateDragon card) {
-		super(card);
-	}
+    public BroodmateDragon(final BroodmateDragon card) {
+        super(card);
+    }
 
-	@Override
-	public BroodmateDragon copy() {
-		return new BroodmateDragon(this);
-	}
+    @Override
+    public BroodmateDragon copy() {
+        return new BroodmateDragon(this);
+    }
 
 }

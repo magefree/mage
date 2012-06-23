@@ -46,26 +46,26 @@ import java.util.UUID;
  */
 public class StensiaBloodhall extends CardImpl<StensiaBloodhall> {
 
-	public StensiaBloodhall(UUID ownerId) {
-		super(ownerId, 247, "Stensia Bloodhall", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-		this.expansionSetCode = "ISD";
+    public StensiaBloodhall(UUID ownerId) {
+        super(ownerId, 247, "Stensia Bloodhall", Rarity.RARE, new CardType[]{CardType.LAND}, "");
+        this.expansionSetCode = "ISD";
 
-		// {T}: Add {1} to your mana pool.
-		this.addAbility(new ColorlessManaAbility());
+        // {T}: Add {1} to your mana pool.
+        this.addAbility(new ColorlessManaAbility());
 
-		// {3}{B}{R}, {T}: Stensia Bloodhall deals 2 damage to target player.
-		Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{3}{B}{R}"));
-		ability.addCost(new TapSourceCost());
-		ability.addTarget(new TargetPlayer());
-		this.addAbility(ability);
-	}
+        // {3}{B}{R}, {T}: Stensia Bloodhall deals 2 damage to target player.
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{3}{B}{R}"));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetPlayer());
+        this.addAbility(ability);
+    }
 
-	public StensiaBloodhall(final StensiaBloodhall card) {
-		super(card);
-	}
+    public StensiaBloodhall(final StensiaBloodhall card) {
+        super(card);
+    }
 
-	@Override
-	public StensiaBloodhall copy() {
-		return new StensiaBloodhall(this);
-	}
+    @Override
+    public StensiaBloodhall copy() {
+        return new StensiaBloodhall(this);
+    }
 }

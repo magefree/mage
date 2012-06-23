@@ -57,7 +57,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
     private static Session session;
     private ConnectDialog connectDialog;
     private static Preferences prefs = Preferences.userNodeForPackage(ConsoleFrame.class);
-	private final static MageVersion version = new MageVersion(0, 8, 6, "r2");
+    private final static MageVersion version = new MageVersion(0, 8, 6, "r2");
 
     /**
      * @return the session
@@ -70,36 +70,36 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
         return prefs;
     }
 
-	@Override
-	public MageVersion getVersion() {
-		return version;
-	}
+    @Override
+    public MageVersion getVersion() {
+        return version;
+    }
 
-	/** Creates new form ConsoleFrame */
+    /** Creates new form ConsoleFrame */
     public ConsoleFrame() {
-		initComponents();
-		try {
-			UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
-			session = new SessionImpl(this);
-			connectDialog = new ConnectDialog();
-		} catch (Exception ex) {
-			logger.fatal("", ex);
-		}
+        initComponents();
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+            session = new SessionImpl(this);
+            connectDialog = new ConnectDialog();
+        } catch (Exception ex) {
+            logger.fatal("", ex);
+        }
     }
 
    public boolean connect(Connection connection) {
         if (session.connect(connection)) {
-			this.consolePanel1.start();
-			return true;
-		}
-		return false;
+            this.consolePanel1.start();
+            return true;
+        }
+        return false;
     }
 
-	public void setStatusText(String status) {
+    public void setStatusText(String status) {
         this.lblStatus.setText(status);
     }
 
-	public void enableButtons() {
+    public void enableButtons() {
         btnConnect.setEnabled(true);
         btnConnect.setText("Disconnect");
         btnSendMessage.setEnabled(true);
@@ -177,16 +177,16 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-	private void btnConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnectActionPerformed
+    private void btnConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnectActionPerformed
         if (session.isConnected()) {
             if (JOptionPane.showConfirmDialog(this, "Are you sure you want to disconnect?", "Confirm disconnect", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-				this.consolePanel1.stop();
+                this.consolePanel1.stop();
                 session.disconnect(false);
             }
         } else {
             connectDialog.showDialog(this);
         }
-	}//GEN-LAST:event_btnConnectActionPerformed
+    }//GEN-LAST:event_btnConnectActionPerformed
 
     private void btnSendMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendMessageActionPerformed
         String message = JOptionPane.showInputDialog(null, "Type message to send", "Broadcast message", JOptionPane.INFORMATION_MESSAGE);
@@ -205,10 +205,10 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
             }
         });
     }
-	
-	private ConsoleFrame getFrame() {
-		return this;
-	}
+
+    private ConsoleFrame getFrame() {
+        return this;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConnect;
@@ -218,79 +218,79 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
     private javax.swing.JLabel lblStatus;
     // End of variables declaration//GEN-END:variables
 
-	@Override
-	public UUID getId() {
-		return null;
-	}
+    @Override
+    public UUID getId() {
+        return null;
+    }
 
-	@Override
-	public void connected(final String message) {
-		if (SwingUtilities.isEventDispatchThread()) {
-			setStatusText(message);
-			enableButtons();			
-		}
-		else {
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					setStatusText(message);
-					enableButtons();
-				}
-			});
-		}
-	}
+    @Override
+    public void connected(final String message) {
+        if (SwingUtilities.isEventDispatchThread()) {
+            setStatusText(message);
+            enableButtons();            
+        }
+        else {
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    setStatusText(message);
+                    enableButtons();
+                }
+            });
+        }
+    }
 
-	@Override
-	public void disconnected() {
-		if (SwingUtilities.isEventDispatchThread()) {
-			consolePanel1.stop();
-			setStatusText("Not connected");
-			disableButtons();
-		}
-		else {
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					consolePanel1.stop();
-					setStatusText("Not connected");
-					disableButtons();
-				}
-			});
-		}
-	}
+    @Override
+    public void disconnected() {
+        if (SwingUtilities.isEventDispatchThread()) {
+            consolePanel1.stop();
+            setStatusText("Not connected");
+            disableButtons();
+        }
+        else {
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    consolePanel1.stop();
+                    setStatusText("Not connected");
+                    disableButtons();
+                }
+            });
+        }
+    }
 
-	@Override
-	public void showMessage(final String message) {
-		if (SwingUtilities.isEventDispatchThread()) {
-			JOptionPane.showMessageDialog(this, message);
-		}
-		else {
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					JOptionPane.showMessageDialog(getFrame(), message);
-				}
-			});
-		}
-	}
+    @Override
+    public void showMessage(final String message) {
+        if (SwingUtilities.isEventDispatchThread()) {
+            JOptionPane.showMessageDialog(this, message);
+        }
+        else {
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    JOptionPane.showMessageDialog(getFrame(), message);
+                }
+            });
+        }
+    }
 
-	@Override
-	public void showError(final String message) {
-		if (SwingUtilities.isEventDispatchThread()) {
-			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
-		}
-		else {
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					JOptionPane.showMessageDialog(getFrame(), message, "Error", JOptionPane.ERROR_MESSAGE);
-				}
-			});
-		}
-	}
+    @Override
+    public void showError(final String message) {
+        if (SwingUtilities.isEventDispatchThread()) {
+            JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        else {
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    JOptionPane.showMessageDialog(getFrame(), message, "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            });
+        }
+    }
 
-	@Override
-	public void processCallback(ClientCallback callback) {
-	}
+    @Override
+    public void processCallback(ClientCallback callback) {
+    }
 
 }

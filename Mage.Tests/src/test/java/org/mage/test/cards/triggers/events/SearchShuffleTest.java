@@ -11,7 +11,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class SearchShuffleTest extends CardTestPlayerBase {
 
-    
+
     /**
      * even though Leonin Arbiter prevents searching, the library should still 
      * get shuffled and Cosi's Trickster will still get a counter
@@ -21,12 +21,12 @@ public class SearchShuffleTest extends CardTestPlayerBase {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Cosi's Trickster");
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Leonin Arbiter");
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Arid Mesa");
-        
+
         activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{T}, Pay 1 life");
 
         setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
-        
+
         assertLife(playerA, 19);
         assertLife(playerB, 20);
         assertPermanentCount(playerA, "Arid Mesa", 0);

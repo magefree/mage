@@ -47,14 +47,14 @@ public class ManaPool extends javax.swing.JPanel {
         initComponents();
     }
 
-	public void update(ManaPoolView pool) {
-		this.btnBlack.setText(Integer.toString(pool.getBlack()));
-		this.btnRed.setText(Integer.toString(pool.getRed()));
-		this.btnWhite.setText(Integer.toString(pool.getWhite()));
-		this.btnGreen.setText(Integer.toString(pool.getGreen()));
-		this.btnBlue.setText(Integer.toString(pool.getBlue()));
-		this.btnColorless.setText(Integer.toString(pool.getColorless()));
-	} 
+    public void update(ManaPoolView pool) {
+        this.btnBlack.setText(Integer.toString(pool.getBlack()));
+        this.btnRed.setText(Integer.toString(pool.getRed()));
+        this.btnWhite.setText(Integer.toString(pool.getWhite()));
+        this.btnGreen.setText(Integer.toString(pool.getGreen()));
+        this.btnBlue.setText(Integer.toString(pool.getBlue()));
+        this.btnColorless.setText(Integer.toString(pool.getColorless()));
+    } 
 
     /** This method is called from within the constructor to
      * initialize the form.

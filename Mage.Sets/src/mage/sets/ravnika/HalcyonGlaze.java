@@ -52,7 +52,7 @@ public class HalcyonGlaze extends CardImpl<HalcyonGlaze> {
         filter.getCardType().add(CardType.CREATURE);
         filter.setScopeCardType(Filter.ComparisonScope.Any);
     }
-    
+
     public HalcyonGlaze(UUID ownerId) {
         super(ownerId, 54, "Halcyon Glaze", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}{U}");
         this.expansionSetCode = "RAV";

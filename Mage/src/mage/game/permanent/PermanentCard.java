@@ -81,7 +81,7 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
         copyFromCard(card, game);
         super.reset(game);
     }
-    
+
     protected void copyFromCard(Card card) {
         this.name = card.getName();
         this.abilities.clear();
@@ -164,7 +164,7 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
     public Card getCard() {
         return card;
     }
-    
+
     @Override
     public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag) {
         Zone fromZone = game.getState().getZone(objectId);

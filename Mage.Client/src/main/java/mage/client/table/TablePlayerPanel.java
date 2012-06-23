@@ -51,48 +51,48 @@ import mage.remote.Session;
  */
 public class TablePlayerPanel extends javax.swing.JPanel {
 
-	protected PlayerTypeEventSource playerTypeEventSource = new PlayerTypeEventSource();
+    protected PlayerTypeEventSource playerTypeEventSource = new PlayerTypeEventSource();
 
-	private Session session;
+    private Session session;
 
     /** Creates new form TablePlayerPanel */
     public TablePlayerPanel() {
         initComponents();
-		this.newPlayerPanel.setVisible(false);
+        this.newPlayerPanel.setVisible(false);
     }
 
-	public void init(int playerNum) {
-		session = MageFrame.getSession();
-		cbPlayerType.setModel(new DefaultComboBoxModel(session.getPlayerTypes()));
-		this.lblPlayerNum.setText("Player " + playerNum);
-		if (Config.defaultOtherPlayerIndex != null) {
-			if (Integer.valueOf(Config.defaultOtherPlayerIndex) >= cbPlayerType.getItemCount())
-				cbPlayerType.setSelectedIndex(cbPlayerType.getItemCount() - 1);
-			else {
-				Integer index = Integer.parseInt(Config.defaultOtherPlayerIndex); 
-				cbPlayerType.setSelectedIndex(index);
-			}
-		}
-	}
+    public void init(int playerNum) {
+        session = MageFrame.getSession();
+        cbPlayerType.setModel(new DefaultComboBoxModel(session.getPlayerTypes()));
+        this.lblPlayerNum.setText("Player " + playerNum);
+        if (Config.defaultOtherPlayerIndex != null) {
+            if (Integer.valueOf(Config.defaultOtherPlayerIndex) >= cbPlayerType.getItemCount())
+                cbPlayerType.setSelectedIndex(cbPlayerType.getItemCount() - 1);
+            else {
+                Integer index = Integer.parseInt(Config.defaultOtherPlayerIndex); 
+                cbPlayerType.setSelectedIndex(index);
+            }
+        }
+    }
 
-	public boolean joinTable(UUID roomId, UUID tableId) throws FileNotFoundException, IOException, ClassNotFoundException {
-		if (!this.cbPlayerType.getSelectedItem().equals("Human")) {
-			return session.joinTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), (String)this.cbPlayerType.getSelectedItem(), this.newPlayerPanel.getLevel(), DeckImporterUtil.importDeck(this.newPlayerPanel.getDeckFile()));
- 		}
-		return true;
-	}
+    public boolean joinTable(UUID roomId, UUID tableId) throws FileNotFoundException, IOException, ClassNotFoundException {
+        if (!this.cbPlayerType.getSelectedItem().equals("Human")) {
+            return session.joinTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), (String)this.cbPlayerType.getSelectedItem(), this.newPlayerPanel.getLevel(), DeckImporterUtil.importDeck(this.newPlayerPanel.getDeckFile()));
+         }
+        return true;
+    }
 
-	public String getPlayerType() {
-		return (String) this.cbPlayerType.getSelectedItem();
-	}
+    public String getPlayerType() {
+        return (String) this.cbPlayerType.getSelectedItem();
+    }
 
-	public void addPlayerTypeEventListener(Listener<Event> listener) {
-		playerTypeEventSource.addListener(listener);
-	}
+    public void addPlayerTypeEventListener(Listener<Event> listener) {
+        playerTypeEventSource.addListener(listener);
+    }
 
-	public void clearPlayerTypeEventListeners() {
-		playerTypeEventSource.clearListeners();
-	}
+    public void clearPlayerTypeEventListeners() {
+        playerTypeEventSource.clearListeners();
+    }
 
 
     /** This method is called from within the constructor to
@@ -150,17 +150,17 @@ public class TablePlayerPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-	private void cbPlayerTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPlayerTypeActionPerformed
-		if (!this.cbPlayerType.getSelectedItem().equals("Human")) {
-			this.newPlayerPanel.setVisible(true);
-		}
-		else {
-			this.newPlayerPanel.setVisible(false);
-		}
-		this.revalidate();
-		this.repaint();
-		this.playerTypeEventSource.playerTypeChanged();
-	}//GEN-LAST:event_cbPlayerTypeActionPerformed
+    private void cbPlayerTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPlayerTypeActionPerformed
+        if (!this.cbPlayerType.getSelectedItem().equals("Human")) {
+            this.newPlayerPanel.setVisible(true);
+        }
+        else {
+            this.newPlayerPanel.setVisible(false);
+        }
+        this.revalidate();
+        this.repaint();
+        this.playerTypeEventSource.playerTypeChanged();
+    }//GEN-LAST:event_cbPlayerTypeActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

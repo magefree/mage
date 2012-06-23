@@ -44,40 +44,40 @@ import mage.game.permanent.Permanent;
  */
 public class DamageAllEffect extends OneShotEffect<DamageAllEffect> {
 
-	private FilterCreaturePermanent filter;
-	private DynamicValue amount;
+    private FilterCreaturePermanent filter;
+    private DynamicValue amount;
 
-	public DamageAllEffect(int amount, FilterCreaturePermanent filter) {
-		this(new StaticValue(amount), filter);
-	}
-	public DamageAllEffect(DynamicValue amount, FilterCreaturePermanent filter) {
-		super(Outcome.Damage);
-		this.amount = amount;
-		this.filter = filter;
-		setText();
-	}
+    public DamageAllEffect(int amount, FilterCreaturePermanent filter) {
+        this(new StaticValue(amount), filter);
+    }
+    public DamageAllEffect(DynamicValue amount, FilterCreaturePermanent filter) {
+        super(Outcome.Damage);
+        this.amount = amount;
+        this.filter = filter;
+        setText();
+    }
 
-	public DamageAllEffect(final DamageAllEffect effect) {
-		super(effect);
-		this.amount = effect.amount;
-		this.filter = effect.filter.copy();
-	}
+    public DamageAllEffect(final DamageAllEffect effect) {
+        super(effect);
+        this.amount = effect.amount;
+        this.filter = effect.filter.copy();
+    }
 
-	@Override
-	public DamageAllEffect copy() {
-		return new DamageAllEffect(this);
-	}
+    @Override
+    public DamageAllEffect copy() {
+        return new DamageAllEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game);
-		for (Permanent permanent: permanents) {
-			permanent.damage(amount.calculate(game, source), source.getSourceId(), game, true, false);
-		}
-		return true;
-	}
+        for (Permanent permanent: permanents) {
+            permanent.damage(amount.calculate(game, source), source.getSourceId(), game, true, false);
+        }
+        return true;
+    }
 
-	private void setText() {
+    private void setText() {
         StringBuilder sb = new StringBuilder();
         sb.append("{source} deals ").append(amount.toString()).append(" damage to each ").append(filter.getMessage());
         String message = amount.getMessage();
@@ -86,6 +86,6 @@ public class DamageAllEffect extends OneShotEffect<DamageAllEffect> {
         }
         sb.append(message);
         staticText = sb.toString();
-	}
+    }
 
 }

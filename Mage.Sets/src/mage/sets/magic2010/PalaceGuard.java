@@ -50,67 +50,67 @@ import mage.game.permanent.Permanent;
  */
 public class PalaceGuard extends CardImpl<PalaceGuard> {
 
-	public PalaceGuard(UUID ownerId) {
-		super(ownerId, 23, "Palace Guard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
-		this.expansionSetCode = "M10";
-		this.subtype.add("Human");
-		this.subtype.add("Soldier");
-		this.color.setWhite(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(4);
+    public PalaceGuard(UUID ownerId) {
+        super(ownerId, 23, "Palace Guard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
+        this.expansionSetCode = "M10";
+        this.subtype.add("Human");
+        this.subtype.add("Soldier");
+        this.color.setWhite(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(4);
 
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PalaceGuardEffect()));
-	}
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PalaceGuardEffect()));
+    }
 
-	public PalaceGuard(final PalaceGuard card) {
-		super(card);
-	}
+    public PalaceGuard(final PalaceGuard card) {
+        super(card);
+    }
 
-	@Override
-	public PalaceGuard copy() {
-		return new PalaceGuard(this);
-	}
+    @Override
+    public PalaceGuard copy() {
+        return new PalaceGuard(this);
+    }
 
-	class PalaceGuardEffect extends ContinuousEffectImpl<PalaceGuardEffect> {
+    class PalaceGuardEffect extends ContinuousEffectImpl<PalaceGuardEffect> {
 
-		public PalaceGuardEffect() {
-			super(Duration.WhileOnBattlefield, Outcome.Benefit);
-			staticText = "{this} can block any number of creatures";
-		}
+        public PalaceGuardEffect() {
+            super(Duration.WhileOnBattlefield, Outcome.Benefit);
+            staticText = "{this} can block any number of creatures";
+        }
 
-		public PalaceGuardEffect(final PalaceGuardEffect effect) {
-			super(effect);
-		}
+        public PalaceGuardEffect(final PalaceGuardEffect effect) {
+            super(effect);
+        }
 
-		@Override
-		public PalaceGuardEffect copy() {
-			return new PalaceGuardEffect(this);
-		}
+        @Override
+        public PalaceGuardEffect copy() {
+            return new PalaceGuardEffect(this);
+        }
 
-		@Override
-		public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-			Permanent perm = game.getPermanent(source.getSourceId());
-			if (perm != null) {
-				switch (layer) {
-					case RulesEffects:
-						perm.setMaxBlocks(0);
-						break;
-				}
-				return true;
-			}
-			return false;
-		}
+        @Override
+        public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+            Permanent perm = game.getPermanent(source.getSourceId());
+            if (perm != null) {
+                switch (layer) {
+                    case RulesEffects:
+                        perm.setMaxBlocks(0);
+                        break;
+                }
+                return true;
+            }
+            return false;
+        }
 
-		@Override
-		public boolean apply(Game game, Ability source) {
-			return false;
-		}
+        @Override
+        public boolean apply(Game game, Ability source) {
+            return false;
+        }
 
-		@Override
-		public boolean hasLayer(Layer layer) {
-			return layer == Layer.RulesEffects;
-		}
+        @Override
+        public boolean hasLayer(Layer layer) {
+            return layer == Layer.RulesEffects;
+        }
 
-	}
+    }
 }
 

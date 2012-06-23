@@ -42,27 +42,27 @@ import mage.target.TargetSpell;
  */
 public class Negate extends CardImpl<Negate> {
 
-	private static final FilterSpell filter = new FilterSpell("noncreature spell");
+    private static final FilterSpell filter = new FilterSpell("noncreature spell");
 
-	static {
-		filter.getNotCardType().add(CardType.CREATURE);
-	}
+    static {
+        filter.getNotCardType().add(CardType.CREATURE);
+    }
 
-	public Negate(UUID ownerId) {
-		super(ownerId, 65, "Negate", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-		this.expansionSetCode = "M10";
-		this.color.setBlue(true);
-		this.getSpellAbility().addTarget(new TargetSpell(filter));
-		this.getSpellAbility().addEffect(new CounterTargetEffect());
-	}
+    public Negate(UUID ownerId) {
+        super(ownerId, 65, "Negate", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
+        this.expansionSetCode = "M10";
+        this.color.setBlue(true);
+        this.getSpellAbility().addTarget(new TargetSpell(filter));
+        this.getSpellAbility().addEffect(new CounterTargetEffect());
+    }
 
-	public Negate(final Negate card) {
-		super(card);
-	}
+    public Negate(final Negate card) {
+        super(card);
+    }
 
-	@Override
-	public Negate copy() {
-		return new Negate(this);
-	}
+    @Override
+    public Negate copy() {
+        return new Negate(this);
+    }
 
 }

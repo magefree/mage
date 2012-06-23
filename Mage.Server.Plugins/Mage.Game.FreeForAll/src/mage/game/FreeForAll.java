@@ -44,69 +44,69 @@ import mage.players.Player;
  */
 public class FreeForAll extends GameImpl<FreeForAll> {
 
-	private int numPlayers;
-	private List<UUID> mulliganed = new ArrayList<UUID>();
+    private int numPlayers;
+    private List<UUID> mulliganed = new ArrayList<UUID>();
 
-	public FreeForAll(MultiplayerAttackOption attackOption, RangeOfInfluence range) {
-		super(attackOption, range);
-	}
+    public FreeForAll(MultiplayerAttackOption attackOption, RangeOfInfluence range) {
+        super(attackOption, range);
+    }
 
-	public FreeForAll(final FreeForAll game) {
-		super(game);
-		this.numPlayers = game.numPlayers;
-		for (UUID playerId: game.mulliganed) {
-			mulliganed.add(playerId);
-		}
-	}
+    public FreeForAll(final FreeForAll game) {
+        super(game);
+        this.numPlayers = game.numPlayers;
+        for (UUID playerId: game.mulliganed) {
+            mulliganed.add(playerId);
+        }
+    }
 
-	@Override
-	public MatchType getGameType() {
-		return new FreeForAllType();
-	}
+    @Override
+    public MatchType getGameType() {
+        return new FreeForAllType();
+    }
 
-	@Override
-	public int getNumPlayers() {
-		return numPlayers;
-	}
+    @Override
+    public int getNumPlayers() {
+        return numPlayers;
+    }
 
-	public void setNumPlayers(int numPlayers) {
-		this.numPlayers = numPlayers;
-	}
+    public void setNumPlayers(int numPlayers) {
+        this.numPlayers = numPlayers;
+    }
 
-	@Override
-	public int getLife() {
-		return 20;
-	}
+    @Override
+    public int getLife() {
+        return 20;
+    }
 
-	@Override
-	public Set<UUID> getOpponents(UUID playerId) {
-		Set<UUID> opponents = new HashSet<UUID>();
-		for (UUID opponentId: this.getPlayer(playerId).getInRange()) {
-			if (!opponentId.equals(playerId))
-				opponents.add(opponentId);
-		}
-		return opponents;
-	}
+    @Override
+    public Set<UUID> getOpponents(UUID playerId) {
+        Set<UUID> opponents = new HashSet<UUID>();
+        for (UUID opponentId: this.getPlayer(playerId).getInRange()) {
+            if (!opponentId.equals(playerId))
+                opponents.add(opponentId);
+        }
+        return opponents;
+    }
 
-	@Override
-	public void mulligan(UUID playerId) {
-		Player player = getPlayer(playerId);
-		int numCards = player.getHand().size();
-		//record first mulligan and increment card count
-		if (!mulliganed.contains(playerId)) {
-			numCards += 1;
-			mulliganed.add(playerId);
-		}
-		player.getLibrary().addAll(player.getHand().getCards(this), this);
-		player.getHand().clear();
-		player.shuffleLibrary(this);
-		player.drawCards(numCards - 1, this);
-		fireInformEvent(player.getName() + " mulligans down to " + Integer.toString(numCards - 1) + " cards");
-	}
+    @Override
+    public void mulligan(UUID playerId) {
+        Player player = getPlayer(playerId);
+        int numCards = player.getHand().size();
+        //record first mulligan and increment card count
+        if (!mulliganed.contains(playerId)) {
+            numCards += 1;
+            mulliganed.add(playerId);
+        }
+        player.getLibrary().addAll(player.getHand().getCards(this), this);
+        player.getHand().clear();
+        player.shuffleLibrary(this);
+        player.drawCards(numCards - 1, this);
+        fireInformEvent(player.getName() + " mulligans down to " + Integer.toString(numCards - 1) + " cards");
+    }
 
-	@Override
-	public FreeForAll copy() {
-		return new FreeForAll(this);
-	}
+    @Override
+    public FreeForAll copy() {
+        return new FreeForAll(this);
+    }
 
 }

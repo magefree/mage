@@ -68,21 +68,21 @@ public class VinelasherKudzu extends CardImpl<VinelasherKudzu> {
 
 class VinelasherKudzuAbility extends LandfallAbility {
 
-	VinelasherKudzuAbility() {
-		super(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
-	}
+    VinelasherKudzuAbility() {
+        super(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
+    }
 
-	public VinelasherKudzuAbility(final VinelasherKudzuAbility ability) {
-		super(ability);
-	}
+    public VinelasherKudzuAbility(final VinelasherKudzuAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public String getRule() {
-		return "Whenever a land enters the battlefield under your control, put a +1/+1 counter on {this}.";
-	}
+    @Override
+    public String getRule() {
+        return "Whenever a land enters the battlefield under your control, put a +1/+1 counter on {this}.";
+    }
 
-	@Override
-	public LandfallAbility copy() {
-		return new VinelasherKudzuAbility(this);
-	}
+    @Override
+    public LandfallAbility copy() {
+        return new VinelasherKudzuAbility(this);
+    }
 }

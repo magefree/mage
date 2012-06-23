@@ -47,11 +47,11 @@ import java.util.UUID;
  */
 public class AlphaBrawl extends CardImpl<AlphaBrawl> {
 
-	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 
-	static {
-		filter.setTargetController(Constants.TargetController.OPPONENT);
-	}
+    static {
+        filter.setTargetController(Constants.TargetController.OPPONENT);
+    }
 
     public AlphaBrawl(UUID ownerId) {
         super(ownerId, 82, "Alpha Brawl", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{6}{R}{R}");
@@ -62,7 +62,7 @@ public class AlphaBrawl extends CardImpl<AlphaBrawl> {
         // Target creature an opponent controls deals damage equal to its power to each other creature that player controls, then each of those creatures deals damage equal to its power to that creature.
         this.getSpellAbility().addEffect(new AlphaBrawlEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-        
+
     }
 
     public AlphaBrawl(final AlphaBrawl card) {
@@ -77,19 +77,19 @@ public class AlphaBrawl extends CardImpl<AlphaBrawl> {
 
 class AlphaBrawlEffect extends OneShotEffect<AlphaBrawlEffect> {
 
-	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     public AlphaBrawlEffect() {
-		super(Constants.Outcome.Damage);
-		staticText = "Target creature an opponent controls deals damage equal to its power to each other creature that player controls, then each of those creatures deals damage equal to its power to that creature";
-	}
+        super(Constants.Outcome.Damage);
+        staticText = "Target creature an opponent controls deals damage equal to its power to each other creature that player controls, then each of those creatures deals damage equal to its power to that creature";
+    }
 
-	public AlphaBrawlEffect(final AlphaBrawlEffect effect) {
-		super(effect);
-	}
+    public AlphaBrawlEffect(final AlphaBrawlEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
+    @Override
+    public boolean apply(Game game, Ability source) {
         Permanent creature = game.getPermanent(source.getFirstTarget());
         if (creature != null) {
             Player player = game.getPlayer(creature.getControllerId());
@@ -104,12 +104,12 @@ class AlphaBrawlEffect extends OneShotEffect<AlphaBrawlEffect> {
                 return true;
             }
         }
-		return false;
-	}
+        return false;
+    }
 
-	@Override
-	public AlphaBrawlEffect copy() {
-		return new AlphaBrawlEffect(this);
-	}
+    @Override
+    public AlphaBrawlEffect copy() {
+        return new AlphaBrawlEffect(this);
+    }
 
 }

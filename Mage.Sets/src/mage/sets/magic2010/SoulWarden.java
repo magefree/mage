@@ -49,57 +49,57 @@ import java.util.UUID;
  */
 public class SoulWarden extends CardImpl<SoulWarden> {
 
-	public SoulWarden(UUID ownerId) {
-		super(ownerId, 34, "Soul Warden", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
-		this.expansionSetCode = "M10";
-		this.subtype.add("Human");
-		this.subtype.add("Cleric");
-		this.color.setWhite(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
-		this.addAbility(new SoulWardenAbility());
-	}
+    public SoulWarden(UUID ownerId) {
+        super(ownerId, 34, "Soul Warden", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
+        this.expansionSetCode = "M10";
+        this.subtype.add("Human");
+        this.subtype.add("Cleric");
+        this.color.setWhite(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+        this.addAbility(new SoulWardenAbility());
+    }
 
-	public SoulWarden(final SoulWarden card) {
-		super(card);
-	}
+    public SoulWarden(final SoulWarden card) {
+        super(card);
+    }
 
-	@Override
-	public SoulWarden copy() {
-		return new SoulWarden(this);
-	}
+    @Override
+    public SoulWarden copy() {
+        return new SoulWarden(this);
+    }
 
 }
 
 class SoulWardenAbility extends TriggeredAbilityImpl<SoulWardenAbility> {
 
-	public SoulWardenAbility() {
-		super(Zone.BATTLEFIELD, new GainLifeEffect(1));
-	}
+    public SoulWardenAbility() {
+        super(Zone.BATTLEFIELD, new GainLifeEffect(1));
+    }
 
-	public SoulWardenAbility(final SoulWardenAbility ability) {
-		super(ability);
-	}
+    public SoulWardenAbility(final SoulWardenAbility ability) {
+        super(ability);
+    }
 
-	@Override
-	public SoulWardenAbility copy() {
-		return new SoulWardenAbility(this);
-	}
+    @Override
+    public SoulWardenAbility copy() {
+        return new SoulWardenAbility(this);
+    }
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone() == Zone.BATTLEFIELD) {
-			Permanent permanent = game.getPermanent(event.getTargetId());
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone() == Zone.BATTLEFIELD) {
+            Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent.getCardType().contains(CardType.CREATURE) && !permanent.getId().equals(this.getSourceId())) {
-				return true;
-			}
-		}
-		return false;
-	}
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public String getRule() {
-		return "Whenever another creature enters the battlefield, " + super.getRule();
-	}
+    @Override
+    public String getRule() {
+        return "Whenever another creature enters the battlefield, " + super.getRule();
+    }
 
 }

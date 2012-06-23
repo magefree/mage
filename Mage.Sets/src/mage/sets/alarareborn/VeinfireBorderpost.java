@@ -64,8 +64,8 @@ public class VeinfireBorderpost extends CardImpl<VeinfireBorderpost> {
     public VeinfireBorderpost (UUID ownerId) {
         super(ownerId, 48, "Veinfire Borderpost", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}{B}{R}");
         this.expansionSetCode = "ARB";
-		this.color.setBlack(true);
-		this.color.setRed(true);
+        this.color.setBlack(true);
+        this.color.setRed(true);
         Cost cost = new CompositeCost(new GenericManaCost(1), new ReturnToHandTargetCost(new TargetControlledPermanent(filter)), COST_DESCRIPTION);
         this.getSpellAbility().addAlternativeCost(new AlternativeCostImpl(ALTERNATIVE_COST_DESCRIPTION, cost));
         this.addAbility(new EntersBattlefieldTappedAbility());

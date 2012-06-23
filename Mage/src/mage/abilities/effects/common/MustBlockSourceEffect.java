@@ -41,42 +41,42 @@ import mage.game.permanent.Permanent;
  */
 public class MustBlockSourceEffect extends RequirementEffect<MustBlockSourceEffect> {
 
-	public MustBlockSourceEffect() {
-		this(Duration.WhileOnBattlefield);
-	}
+    public MustBlockSourceEffect() {
+        this(Duration.WhileOnBattlefield);
+    }
 
-	public MustBlockSourceEffect(Duration duration) {
-		super(duration);
-		staticText = "All creatures able to block {this} do so";
-	}
+    public MustBlockSourceEffect(Duration duration) {
+        super(duration);
+        staticText = "All creatures able to block {this} do so";
+    }
 
-	public MustBlockSourceEffect(final MustBlockSourceEffect effect) {
-		super(effect);
-	}
+    public MustBlockSourceEffect(final MustBlockSourceEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public boolean applies(Permanent permanent, Ability source, Game game) {
-		return true;
-	}
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        return true;
+    }
 
-	@Override
-	public boolean mustAttack(Game game) {
-		return false;
-	}
+    @Override
+    public boolean mustAttack(Game game) {
+        return false;
+    }
 
-	@Override
-	public boolean mustBlock(Game game) {
-		return true;
-	}
+    @Override
+    public boolean mustBlock(Game game) {
+        return true;
+    }
 
-	@Override
-	public UUID mustBlockAttacker(Ability source, Game game) {
-		return source.getSourceId();
-	}
+    @Override
+    public UUID mustBlockAttacker(Ability source, Game game) {
+        return source.getSourceId();
+    }
 
-	@Override
-	public MustBlockSourceEffect copy() {
-		return new MustBlockSourceEffect(this);
-	}
+    @Override
+    public MustBlockSourceEffect copy() {
+        return new MustBlockSourceEffect(this);
+    }
 
 }

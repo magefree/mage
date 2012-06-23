@@ -112,16 +112,16 @@ class ArrogantBloodlordTriggeredAbility extends TriggeredAbilityImpl<ArrogantBlo
 }
 
 class ArrogantBloodlordEffect extends OneShotEffect<ArrogantBloodlordEffect> {
-    
+
     ArrogantBloodlordEffect() {
         super(Outcome.Detriment);
         staticText = "Destroy {this} at the end of combat";
     }
-    
+
     ArrogantBloodlordEffect(final ArrogantBloodlordEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
@@ -135,11 +135,11 @@ class ArrogantBloodlordEffect extends OneShotEffect<ArrogantBloodlordEffect> {
         }
         return false;
     }
-    
+
     @Override
     public ArrogantBloodlordEffect copy() {
         return new ArrogantBloodlordEffect(this);
     }
 }
-    
-    
+
+

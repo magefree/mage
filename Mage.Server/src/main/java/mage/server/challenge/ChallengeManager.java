@@ -13,15 +13,15 @@ import java.util.UUID;
  */
 public class ChallengeManager {
 
-	public static final ChallengeManager fInstance = new ChallengeManager();
+    public static final ChallengeManager fInstance = new ChallengeManager();
 
-	public static ChallengeManager getInstance() {
-		return fInstance;
-	}
+    public static ChallengeManager getInstance() {
+        return fInstance;
+    }
 
-	public void prepareChallenge(UUID playerId, Match match) {
-		Map<Constants.Zone, String> commands = new HashMap<Constants.Zone, String>();
-		commands.put(Constants.Zone.OUTSIDE, "life:3");
-		match.getGame().cheat(playerId, commands);
-	}
+    public void prepareChallenge(UUID playerId, Match match) {
+        Map<Constants.Zone, String> commands = new HashMap<Constants.Zone, String>();
+        commands.put(Constants.Zone.OUTSIDE, "life:3");
+        match.getGame().cheat(playerId, commands);
+    }
 }

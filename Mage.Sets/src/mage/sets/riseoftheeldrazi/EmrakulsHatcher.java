@@ -43,25 +43,25 @@ import mage.game.permanent.token.EldraziSpawnToken;
  */
 public class EmrakulsHatcher extends CardImpl<EmrakulsHatcher> {
 
-	public EmrakulsHatcher(UUID ownerId) {
-		super(ownerId, 142, "Emrakul's Hatcher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
-		this.expansionSetCode = "ROE";
-		this.subtype.add("Eldrazi");
-		this.subtype.add("Drone");
-		this.color.setRed(true);
-		this.power = new MageInt(3);
-		this.toughness = new MageInt(3);
+    public EmrakulsHatcher(UUID ownerId) {
+        super(ownerId, 142, "Emrakul's Hatcher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
+        this.expansionSetCode = "ROE";
+        this.subtype.add("Eldrazi");
+        this.subtype.add("Drone");
+        this.color.setRed(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-		this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new EldraziSpawnToken(), 3), false));
-	}
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new EldraziSpawnToken(), 3), false));
+    }
 
-	public EmrakulsHatcher(final EmrakulsHatcher card) {
-		super(card);
-	}
+    public EmrakulsHatcher(final EmrakulsHatcher card) {
+        super(card);
+    }
 
-	@Override
-	public EmrakulsHatcher copy() {
-		return new EmrakulsHatcher(this);
-	}
+    @Override
+    public EmrakulsHatcher copy() {
+        return new EmrakulsHatcher(this);
+    }
 
 }

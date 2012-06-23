@@ -61,7 +61,7 @@ public class KitsuneDiviner extends CardImpl<KitsuneDiviner> {
         this.expansionSetCode = "CHK";
         this.subtype.add("Fox");
         this.subtype.add("Cleric");
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new TapTargetEffect(), new TapSourceCost());

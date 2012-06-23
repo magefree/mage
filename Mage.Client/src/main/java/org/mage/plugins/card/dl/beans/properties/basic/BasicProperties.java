@@ -25,15 +25,15 @@ public class BasicProperties extends AbstractProperties {
     public <T> Property<T> property(String name, Property<T> value) {
         return value;
     }
-    
+
     public <E> List<E> list(String name, List<E> list) {
         return list;
     }
-    
+
     public <E> Set<E> set(String name, Set<E> set) {
         return set;
     }
-    
+
     public <K, V> Map<K, V> map(String name, Map<K, V> map) {
         return map;
     }
