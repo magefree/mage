@@ -77,19 +77,19 @@ public abstract class ExpansionSet implements Serializable {
         this.releaseDate = releaseDate;
         this.setType = setType;
         this.packageName = packageName;
-        //this.cards = getCardClassesForPackage(packageName);
-        //this.rarities = getCardsByRarity();
+        this.cards = getCardClassesForPackage(packageName);
+        this.rarities = getCardsByRarity();
     }
 
     public List<Card> getCards() {
-        if (cards == null) {
+        /*if (cards == null) {
             synchronized (this) {
                 if (cards == null) {
                     this.cards = getCardClassesForPackage(packageName);
                     this.rarities = getCardsByRarity();
                 }
             }
-        }
+        }*/
         return cards;
     }
 
@@ -301,7 +301,7 @@ public abstract class ExpansionSet implements Serializable {
     private Map<Rarity, List<Card>> getCardsByRarity() {
         Map<Rarity, List<Card>> cardsByRarity = new HashMap<Rarity, List<Card>>();
 
-        for (Card card : cards) {
+        for (Card card : getCards()) {
             if (!cardsByRarity.containsKey(card.getRarity()))
                 cardsByRarity.put(card.getRarity(), new ArrayList<Card>());
             cardsByRarity.get(card.getRarity()).add(card);
@@ -426,7 +426,7 @@ public abstract class ExpansionSet implements Serializable {
     }
 
     protected Card getRandom(Rarity rarity) {
-        if (!rarities.containsKey(rarity))
+        if (rarities.containsKey(rarity))
             return null;
         int size = rarities.get(rarity).size();
         if (size > 0) {
@@ -451,5 +451,12 @@ public abstract class ExpansionSet implements Serializable {
             return card;
         }
         return null;
+    }
+
+    public Map<Rarity, List<Card>> getRarities() {
+        /*if (rarities == null) {
+            this.rarities = getCardsByRarity();
+        }*/
+        return rarities;
     }
 }
