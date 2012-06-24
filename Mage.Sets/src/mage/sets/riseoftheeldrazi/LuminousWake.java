@@ -25,43 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.condition.common;
+package mage.sets.riseoftheeldrazi;
 
-import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import java.util.UUID;
+import mage.Constants;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.abilities.Ability;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.keyword.EnchantAbility;
+import mage.cards.CardImpl;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
+import mage.abilities.common.AttacksOrBlocksEnchantedTriggeredAbility;
 
 /**
- * Condition for:
- *   - if you control the creature with the greatest power or tied for the greatest power
  *
- * @author noxx
+ * @author jeffwadsworth
  */
-public class ControlsBiggestOrTiedCreatureCondition implements Condition {
+public class LuminousWake extends CardImpl<LuminousWake> {
 
-    private static ControlsBiggestOrTiedCreatureCondition fInstance = new ControlsBiggestOrTiedCreatureCondition();
+    public LuminousWake(UUID ownerId) {
+        super(ownerId, 35, "Luminous Wake", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
+        this.expansionSetCode = "ROE";
+        this.subtype.add("Aura");
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+        this.color.setWhite(true);
 
-    public static Condition getInstance() {
-        return fInstance;
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+        
+        // Whenever enchanted creature attacks or blocks, you gain 4 life.
+        Ability ability2 = new AttacksOrBlocksEnchantedTriggeredAbility(Constants.Zone.BATTLEFIELD, new GainLifeEffect(4));
+        this.addAbility(ability2);
+    }
+
+    public LuminousWake(final LuminousWake card) {
+        super(card);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        UUID controller = null;
-        int maxPower = -1;
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
-            if (permanent != null) {
-                if (maxPower == -1 || permanent.getPower().getValue() >= maxPower) {
-                    maxPower = permanent.getPower().getValue();
-                    controller = (permanent.getControllerId());
-                }
-            }
-        }
-        return controller != null && controller.equals(source.getControllerId());
+    public LuminousWake copy() {
+        return new LuminousWake(this);
     }
 }
+
