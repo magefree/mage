@@ -32,6 +32,10 @@ import mage.abilities.condition.Condition;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -52,16 +56,24 @@ public class ControlsBiggestOrTiedCreatureCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID controller = null;
-        int maxPower = -1;
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
-            if (permanent != null) {
-                if (maxPower == -1 || permanent.getPower().getValue() >= maxPower) {
-                    maxPower = permanent.getPower().getValue();
-                    controller = (permanent.getControllerId());
-                }
+        Set<UUID> controllers = new HashSet<UUID>();
+        Integer maxPower = null;
+
+        List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getId(), game);
+        for (Permanent permanent : permanents) {
+            if (permanent == null) {
+                continue;
+            }
+
+            int power = permanent.getPower().getValue();
+            if (maxPower == null || power > maxPower) {
+                maxPower = permanent.getPower().getValue();
+                controllers.clear();
+            }
+            if (power == maxPower) {
+                controllers.add(permanent.getControllerId());
             }
         }
-        return controller != null && controller.equals(source.getControllerId());
+        return controllers.contains(source.getControllerId());
     }
 }
