@@ -21,7 +21,7 @@ public class ReboundTest extends CardTestPlayerBase{
         
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Memnite", 1);
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Distortion Strike");
+        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Distortion Strike", "Memnite");
 
         setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
