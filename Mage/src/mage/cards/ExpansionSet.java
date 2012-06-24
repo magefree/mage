@@ -426,7 +426,7 @@ public abstract class ExpansionSet implements Serializable {
     }
 
     protected Card getRandom(Rarity rarity) {
-        if (rarities.containsKey(rarity))
+        if (!rarities.containsKey(rarity))
             return null;
         int size = rarities.get(rarity).size();
         if (size > 0) {
