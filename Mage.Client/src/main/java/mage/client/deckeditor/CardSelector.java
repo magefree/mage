@@ -149,14 +149,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         this.btnBooster.setVisible(true);
         this.btnClear.setVisible(true);
         this.cbExpansionSet.setVisible(true);
-        Object[] l = Sets.getInstance().values().toArray();
-        Arrays.sort(l, new Comparator<Object>() {
-            @Override
-            public int compare(Object o1, Object o2) {
-                return ((ExpansionSet)o2).getReleaseDate().compareTo(((ExpansionSet)o1).getReleaseDate());
-            }
-        });
-        cbExpansionSet.setModel(new DefaultComboBoxModel(l));
+        cbExpansionSet.setModel(new DefaultComboBoxModel(Sets.getInstance().getSortedByReleaseDate()));
         cbExpansionSet.insertItemAt("-- All sets", 0);
         cbExpansionSet.insertItemAt("-- Standard", 1);
         cbExpansionSet.setSelectedIndex(0);

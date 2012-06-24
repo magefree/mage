@@ -384,4 +384,15 @@ public class Sets extends HashMap<String, ExpansionSet> {
             out.close();
         }
     }
+
+    public ExpansionSet[] getSortedByReleaseDate() {
+        ExpansionSet[] sets = Sets.getInstance().values().toArray(new ExpansionSet[0]);
+        Arrays.sort(sets, new Comparator<ExpansionSet>() {
+            @Override
+            public int compare(ExpansionSet o1, ExpansionSet o2) {
+                return o2.getReleaseDate().compareTo(o1.getReleaseDate());
+            }
+        });
+        return sets;
+    }
 }

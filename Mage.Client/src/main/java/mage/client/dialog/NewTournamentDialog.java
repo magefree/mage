@@ -34,13 +34,6 @@
 
 package mage.client.dialog;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
-import javax.swing.SpinnerNumberModel;
 import mage.Constants.MultiplayerAttackOption;
 import mage.Constants.RangeOfInfluence;
 import mage.cards.ExpansionSet;
@@ -55,6 +48,11 @@ import mage.sets.Sets;
 import mage.view.TableView;
 import mage.view.TournamentTypeView;
 import org.apache.log4j.Logger;
+
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -364,7 +362,7 @@ public class NewTournamentDialog extends MageDialog {
         }
         while (packs.size() < numPacks) {
             JComboBox pack = new JComboBox();
-            pack.setModel(new DefaultComboBoxModel(Sets.getInstance().values().toArray()));
+            pack.setModel(new DefaultComboBoxModel(Sets.getInstance().getSortedByReleaseDate()));
             pnlPacks.add(pack);
             packs.add(pack);
             pack.addActionListener(new java.awt.event.ActionListener() {
