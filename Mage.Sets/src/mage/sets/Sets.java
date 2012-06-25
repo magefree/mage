@@ -31,6 +31,8 @@ package mage.sets;
 import mage.Constants.CardType;
 import mage.Constants.ColoredManaSymbol;
 import mage.Mana;
+import mage.cache.Cache;
+import mage.cache.CacheDataHelper;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.ExpansionSet;
@@ -57,6 +59,15 @@ public class Sets extends HashMap<String, ExpansionSet> {
     private static List<Card> cards;
     private static Map<String, Card> cardMap;
     protected static Random rnd = new Random();
+
+    private static final String NAMES_CACHE_OBJECT_NAME = "card_names";
+    private static final String NAMES_KEY = "card_names_key";
+    private static final String CREATURE_TYPES_CACHE_OBJECT_NAME = "creature_types";
+    private static final String CREATURE_TYPES_KEY = "creature_types_key";
+    private static final String NONLAND_NAMES_CACHE_OBJECT_NAME = "nonland_names";
+    private static final String NONLAND_NAMES_KEY = "nonland_names_key";
+
+    private static final int CACHE_VERSION = 1;
 
     public static Sets getInstance() {
         return fINSTANCE;
@@ -116,11 +127,15 @@ public class Sets extends HashMap<String, ExpansionSet> {
         this.addSet(Weatherlight.getInstance());
         this.addSet(Worldwake.getInstance());
         this.addSet(Zendikar.getInstance());
+        loadCardNames();
+        loadCreatureTypes();
+        loadNonLandNames();
     }
 
 	private void addSet(ExpansionSet set) {
 		this.put(set.getCode(), set);
         cards.addAll(set.getCards());
+        /*
         for (Card card : set.getCards()) {
             names.add(card.getName());
             if (card.getCardType().contains(CardType.CREATURE)) {
@@ -135,8 +150,60 @@ public class Sets extends HashMap<String, ExpansionSet> {
         }
         if (creatureTypes.contains("")) {
             creatureTypes.remove("");
-        }
+        }*/
 	}
+
+    private void loadCardNames() {
+        Cache cache = CacheDataHelper.getCachedObject(NAMES_CACHE_OBJECT_NAME);
+        if (cache == null || cache.getVersion() != CACHE_VERSION) {
+            for (Card card : cards) {
+                names.add(card.getName());
+            }
+            cache = new Cache(NAMES_CACHE_OBJECT_NAME, CACHE_VERSION);
+            cache.getCacheObjects().put(NAMES_KEY, names);
+            CacheDataHelper.cacheObject(cache, NAMES_CACHE_OBJECT_NAME);
+        } else {
+            Set<String> cachedNames = (Set<String>) cache.getCacheObjects().get(NAMES_KEY);
+            names.addAll(cachedNames);
+        }
+    }
+
+    private void loadCreatureTypes() {
+        Cache cache = CacheDataHelper.getCachedObject(CREATURE_TYPES_CACHE_OBJECT_NAME);
+        if (cache == null || cache.getVersion() != CACHE_VERSION) {
+            for (Card card : cards) {
+                if (card.getCardType().contains(CardType.CREATURE)) {
+                    for (String type : card.getSubtype()) {
+                        creatureTypes.add(type);
+                        if (type.equals("")) {
+                            throw new IllegalStateException("Card with empty subtype: " + card.getName());
+                        }
+                    }
+                }
+            }
+            cache = new Cache(CREATURE_TYPES_CACHE_OBJECT_NAME, CACHE_VERSION);
+            cache.getCacheObjects().put(CREATURE_TYPES_KEY, creatureTypes);
+            CacheDataHelper.cacheObject(cache, CREATURE_TYPES_CACHE_OBJECT_NAME);
+        } else {
+            Set<String> cachedCreatureTypes = (Set<String>) cache.getCacheObjects().get(CREATURE_TYPES_KEY);
+            creatureTypes.addAll(cachedCreatureTypes);
+        }
+    }
+
+    private void loadNonLandNames() {
+        Cache cache = CacheDataHelper.getCachedObject(NONLAND_NAMES_CACHE_OBJECT_NAME);
+        if (cache == null || cache.getVersion() != CACHE_VERSION) {
+            for (Card card : cards) {
+                if (!card.getCardType().contains(CardType.LAND)) nonLandNames.add(card.getName());
+            }
+            cache = new Cache(NONLAND_NAMES_CACHE_OBJECT_NAME, CACHE_VERSION);
+            cache.getCacheObjects().put(NONLAND_NAMES_KEY, nonLandNames);
+            CacheDataHelper.cacheObject(cache, NONLAND_NAMES_CACHE_OBJECT_NAME);
+        } else {
+            Set<String> cachedNonLandNames = (Set<String>) cache.getCacheObjects().get(NONLAND_NAMES_KEY);
+            nonLandNames.addAll(cachedNonLandNames);
+        }
+    }
 
     /*private static void loadCards() {
         if (cards.isEmpty()) {
