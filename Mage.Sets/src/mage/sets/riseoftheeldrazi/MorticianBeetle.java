@@ -27,11 +27,11 @@
  */
 package mage.sets.riseoftheeldrazi;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -40,6 +40,8 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+
+import java.util.UUID;
 
 /**
  *
@@ -56,6 +58,7 @@ public class MorticianBeetle extends CardImpl<MorticianBeetle> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
+        // Whenever a player sacrifices a creature, you may put a +1/+1 counter on Mortician Beetle.
         this.addAbility(new PlayerSacrificesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true));
     }
 
@@ -81,9 +84,11 @@ class PlayerSacrificesCreatureTriggeredAbility extends TriggeredAbilityImpl<Play
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.SACRIFICE_PERMANENT
-                && game.getPermanent(event.getTargetId()).getCardType().contains(CardType.CREATURE)) {
-            return true;
+        if (event.getType() == EventType.SACRIFICED_PERMANENT) {
+            MageObject mageObject = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
+            if (mageObject != null && mageObject.getCardType().contains(CardType.CREATURE)) {
+                return true;
+            }
         }
         return false;
     }
