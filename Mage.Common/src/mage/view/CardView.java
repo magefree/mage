@@ -160,11 +160,11 @@ public class CardView extends SimpleCardView {
         }
         if (this.rarity == null && card instanceof StackAbility) {
             StackAbility stackAbility = (StackAbility)card;
+            this.rarity = Rarity.NA;
+            this.rules = new ArrayList<String>();
+            this.rules.add(stackAbility.getRule());
             if (stackAbility.getZone().equals(Constants.Zone.COMMAND)) {
-                this.rarity = Rarity.NA;
                 this.expansionSetCode = stackAbility.getExpansionSetCode();
-                this.rules = new ArrayList<String>();
-                this.rules.add(stackAbility.getRule());
             }
         }
     }

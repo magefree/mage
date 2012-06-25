@@ -28,7 +28,6 @@
 
 package mage.abilities.keyword;
 
-import java.util.UUID;
 import mage.Constants.Duration;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
@@ -46,7 +45,10 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * This ability has no effect by default and will always return false on the call
@@ -66,20 +68,20 @@ import mage.players.Player;
  * ability follows the rules for paying alternative costs in rules 601.2b and 601.2e-g.
  * <p/>
  * 702.85c Multiple instances of rebound on the same spell are redundant.
-
- * @author maurer.it_at_gmail.com
+ *
+ * @author maurer.it_at_gmail.com, noxx
  */
 public class ReboundAbility extends TriggeredAbilityImpl<ReboundAbility> {
     //20101001 - 702.85
     private boolean installReboundEffect;
     private static String reboundText = "Rebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)";
 
-    public ReboundAbility ( ) {
+    public ReboundAbility() {
         super(Zone.STACK, null);
         this.installReboundEffect = false;
     }
 
-    public ReboundAbility ( final ReboundAbility ability ) {
+    public ReboundAbility(final ReboundAbility ability) {
         super(ability);
         this.installReboundEffect = ability.installReboundEffect;
     }
@@ -87,20 +89,19 @@ public class ReboundAbility extends TriggeredAbilityImpl<ReboundAbility> {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         //Something hit the stack from the hand, see if its a spell with this ability.
-        if ( event.getType() == EventType.ZONE_CHANGE &&
-             ((ZoneChangeEvent)event).getFromZone() == Zone.HAND &&
-             ((ZoneChangeEvent)event).getToZone() == Zone.STACK )
-        {
-            Card card = (Card)game.getObject(event.getTargetId());
+        if (event.getType() == EventType.ZONE_CHANGE &&
+                ((ZoneChangeEvent) event).getFromZone() == Zone.HAND &&
+                ((ZoneChangeEvent) event).getToZone() == Zone.STACK) {
+            Card card = (Card) game.getObject(event.getTargetId());
 
-            if ( card.getAbilities().contains(this) ) {
+            if (card.getAbilities().contains(this)) {
                 this.installReboundEffect = true;
             }
         }
 
         //Only 'install' the effect on a successfully cast spell otherwise the user
         //may cancel before paying its costs and potentially having two copies rebound
-        if ( event.getType() == EventType.SPELL_CAST && this.installReboundEffect ) {
+        if (event.getType() == EventType.SPELL_CAST && this.installReboundEffect) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null && spell.getSourceId().equals(this.getSourceId())) {
                 spell.getSpellAbility().addEffect(new ReboundEffect());
@@ -135,23 +136,22 @@ class ReboundEffect extends OneShotEffect<ReboundEffect> {
         super(Outcome.Benefit);
     }
 
-    public ReboundEffect ( ReboundEffect effect ) {
+    public ReboundEffect(ReboundEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell sourceSpell = (Spell)game.getObject(source.getId());
-        if ( sourceSpell != null && sourceSpell.isCopiedSpell() ) {
+        Spell sourceSpell = (Spell) game.getObject(source.getId());
+        if (sourceSpell != null && sourceSpell.isCopiedSpell()) {
             return false;
-        }
-        else {
-            Card sourceCard = (Card)game.getObject(source.getSourceId());
-            ReboundEffectCastFromExileDelayedTrigger trigger = new ReboundEffectCastFromExileDelayedTrigger(sourceCard.getId(), sourceCard.getId());
+        } else {
+            StackObject sourceCard = (StackObject) game.getObject(source.getSourceId());
+            ReboundEffectCastFromExileDelayedTrigger trigger = new ReboundEffectCastFromExileDelayedTrigger(sourceCard.getSourceId(), sourceCard.getSourceId());
             trigger.setControllerId(source.getControllerId());
             game.addDelayedTriggeredAbility(trigger);
 
-            game.getContinuousEffects().addEffect(new ReboundCastFromHandReplacementEffect(sourceCard.getId()), source);
+            game.getContinuousEffects().addEffect(new ReboundCastFromHandReplacementEffect(source.getSourceId()), source);
             return true;
         }
     }
@@ -175,13 +175,13 @@ class ReboundCastFromHandReplacementEffect extends ReplacementEffectImpl<Rebound
     private static String replacementText = "Rebound - If you cast {this} from your hand, exile it as it resolves";
     private UUID cardId;
 
-    ReboundCastFromHandReplacementEffect ( UUID cardId ) {
+    ReboundCastFromHandReplacementEffect(UUID cardId) {
         super(Duration.OneUse, Outcome.Exile);
         this.cardId = cardId;
         this.staticText = replacementText;
     }
 
-    ReboundCastFromHandReplacementEffect ( ReboundCastFromHandReplacementEffect effect ) {
+    ReboundCastFromHandReplacementEffect(ReboundCastFromHandReplacementEffect effect) {
         super(effect);
         this.cardId = effect.cardId;
     }
@@ -198,15 +198,14 @@ class ReboundCastFromHandReplacementEffect extends ReplacementEffectImpl<Rebound
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Spell sourceSpell = (Spell)game.getObject(source.getId());
-        if ( sourceSpell != null && sourceSpell.isCopiedSpell() ) {
+        Spell sourceSpell = (Spell) game.getObject(source.getId());
+        if (sourceSpell != null && sourceSpell.isCopiedSpell()) {
             return false;
-        }
-        else {
-            Card sourceCard = (Card)game.getObject(source.getSourceId());
+        } else {
+            Card sourceCard = (Card) game.getObject(source.getSourceId());
             Player player = game.getPlayer(sourceCard.getOwnerId());
 
-            sourceCard.moveToExile(source.getSourceId(), player.getName() + " Rebound Exile", source.getId(), game);
+            sourceCard.moveToExile(this.cardId, player.getName() + " Rebound Exile", source.getId(), game);
             this.used = true;
 
             return true;
@@ -215,11 +214,10 @@ class ReboundCastFromHandReplacementEffect extends ReplacementEffectImpl<Rebound
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if ( event.getType() == EventType.ZONE_CHANGE &&
-             ((ZoneChangeEvent)event).getFromZone() == Zone.STACK &&
-             ((ZoneChangeEvent)event).getToZone() == Zone.GRAVEYARD &&
-             source.getSourceId() == this.cardId )
-        {
+        if (event.getType() == EventType.ZONE_CHANGE &&
+                ((ZoneChangeEvent) event).getFromZone() == Zone.STACK &&
+                ((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD &&
+                source.getSourceId() == this.cardId) {
             return true;
         }
         return false;
@@ -237,13 +235,13 @@ class ReboundCastFromHandReplacementEffect extends ReplacementEffectImpl<Rebound
  */
 class ReboundEffectCastFromExileDelayedTrigger extends DelayedTriggeredAbility<ReboundEffectCastFromExileDelayedTrigger> {
 
-    ReboundEffectCastFromExileDelayedTrigger ( UUID cardId, UUID sourceId ) {
+    ReboundEffectCastFromExileDelayedTrigger(UUID cardId, UUID sourceId) {
         super(new ReboundCastSpellFromExileEffect(cardId));
         setSourceId(sourceId);
         this.optional = true;
     }
 
-    ReboundEffectCastFromExileDelayedTrigger ( ReboundEffectCastFromExileDelayedTrigger ability ) {
+    ReboundEffectCastFromExileDelayedTrigger(ReboundEffectCastFromExileDelayedTrigger ability) {
         super(ability);
     }
 
@@ -254,7 +252,7 @@ class ReboundEffectCastFromExileDelayedTrigger extends DelayedTriggeredAbility<R
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if ( event.getType() == EventType.UPKEEP_STEP_PRE && MyTurnCondition.getInstance().apply(game, this) ) {
+        if (event.getType() == EventType.UPKEEP_STEP_PRE && MyTurnCondition.getInstance().apply(game, this)) {
             return true;
         }
         return false;
@@ -272,13 +270,13 @@ class ReboundCastSpellFromExileEffect extends OneShotEffect<ReboundCastSpellFrom
     private static String castFromExileText = "Rebound - You may cast {this} from exile without paying its mana cost";
     private UUID cardId;
 
-    ReboundCastSpellFromExileEffect ( UUID cardId ) {
+    ReboundCastSpellFromExileEffect(UUID cardId) {
         super(Outcome.Benefit);
         this.cardId = cardId;
         staticText = castFromExileText;
     }
 
-    ReboundCastSpellFromExileEffect ( ReboundCastSpellFromExileEffect effect ) {
+    ReboundCastSpellFromExileEffect(ReboundCastSpellFromExileEffect effect) {
         super(effect);
         this.cardId = effect.cardId;
     }

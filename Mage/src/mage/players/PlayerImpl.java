@@ -488,7 +488,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                 card.cast(game, fromZone, ability, playerId);
 
                 Ability spellAbility = game.getStack().getSpell(ability.getId()).getSpellAbility();
-                   if (spellAbility.activate(game, noMana)) {
+                if (spellAbility.activate(game, noMana)) {
                     for (KickerAbility kicker: card.getAbilities().getKickerAbilities()) {
                         if (kicker.getCosts().canPay(ability.getSourceId(), playerId, game) && kicker.canChooseTarget(game))
                             kicker.activate(game, false);
