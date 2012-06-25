@@ -49,7 +49,22 @@ public class Token extends MageObjectImpl<Token> {
     protected String description;
     private UUID lastAddedTokenId;
     private int tokenType;
-
+    
+    public enum Type {
+        FIRST(1),
+        SECOND(2);
+        
+        int code;
+        
+        Type(int code) {
+            this.code = code;    
+        }
+        
+        int getCode() {
+            return this.code;
+        }
+    }
+    
     public Token(String name, String description) {
         this.name = name;
         this.description = description;
