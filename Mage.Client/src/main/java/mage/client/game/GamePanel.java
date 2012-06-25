@@ -406,7 +406,6 @@ public class GamePanel extends javax.swing.JPanel {
             }
         }
 
-        this.stack.loadCards(game.getStack(), bigCard, gameId, null);
         GameManager.getInstance().setStackSize(game.getStack().size());
         displayStack(game, bigCard, feedbackPanel, gameId);
 
@@ -434,7 +433,9 @@ public class GamePanel extends javax.swing.JPanel {
     }
 
     private void displayStack(GameView game, BigCard bigCard, FeedbackPanel feedbackPanel, UUID gameId) {
-        if (game.getStack().size() > 0) {
+        this.stack.loadCards(game.getStack(), bigCard, gameId, null);
+
+        /*if (game.getStack().size() > 0) {
             if (game.getStack().size() != cachedStackSize) {
                 boolean allPaid = true;
                 for (CardView cardView : game.getStack().values()) {
@@ -454,7 +455,7 @@ public class GamePanel extends javax.swing.JPanel {
         } else {
             cachedStackSize = game.getStack().size();
             DialogManager.getManager().fadeOut();
-        }
+        }*/
     }
 
     /**
