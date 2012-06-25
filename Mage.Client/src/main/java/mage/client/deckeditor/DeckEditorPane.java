@@ -34,17 +34,16 @@
 
 package mage.client.deckeditor;
 
-import java.awt.Component;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
-import javax.swing.JComponent;
 import mage.cards.decks.Deck;
-
 import mage.client.MagePane;
 import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.plugins.impl.Plugins;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  *

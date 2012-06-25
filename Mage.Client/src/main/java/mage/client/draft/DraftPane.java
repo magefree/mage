@@ -34,8 +34,14 @@
 
 package mage.client.draft;
 
-import java.util.UUID;
 import mage.client.MagePane;
+import mage.client.plugins.impl.Plugins;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  *
@@ -45,7 +51,22 @@ public class DraftPane extends MagePane {
 
     /** Creates new form DraftPane */
     public DraftPane() {
-        initComponents();
+        boolean initialized = false;
+        if (Plugins.getInstance().isThemePluginLoaded()) {
+            Map<String, JComponent> ui = new HashMap<String, JComponent>();
+            JComponent container = Plugins.getInstance().updateTablePanel(ui);
+            if (container != null) {
+                draftPanel1 = new mage.client.draft.DraftPanel();
+                initComponents(container);
+                container.add(draftPanel1);
+                container.setOpaque(false);
+                draftPanel1.setOpaque(false);
+                initialized = true;
+            }
+        }
+        if (!initialized) {
+            initComponents();
+        }
     }
 
     public void showDraft(UUID draftId) {
@@ -85,6 +106,21 @@ public class DraftPane extends MagePane {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void initComponents(Component container) {
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(container, javax.swing.GroupLayout.DEFAULT_SIZE, 885, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(container, javax.swing.GroupLayout.DEFAULT_SIZE, 626, Short.MAX_VALUE)
+        );
+
+        pack();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     mage.client.draft.DraftPanel draftPanel1;

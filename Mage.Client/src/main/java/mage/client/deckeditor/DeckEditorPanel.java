@@ -90,7 +90,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         deckArea.setOpaque(false);
         jPanel1.setOpaque(false);
         jSplitPane1.setOpaque(false);
-         countdown = new Timer(1000,
+        countdown = new Timer(1000,
             new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {

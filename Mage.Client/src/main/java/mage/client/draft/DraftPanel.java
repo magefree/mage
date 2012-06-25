@@ -67,6 +67,11 @@ public class DraftPanel extends javax.swing.JPanel {
     /** Creates new form DraftPanel */
     public DraftPanel() {
         initComponents();
+
+        draftBooster.setOpaque(false);
+        draftPicks.setOpaque(false);
+        jPanel1.setOpaque(false);
+
         countdown = new Timer(1000,
             new ActionListener() {
                 @Override
