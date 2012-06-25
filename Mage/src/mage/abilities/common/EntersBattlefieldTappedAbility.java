@@ -39,16 +39,27 @@ import mage.abilities.effects.common.TapSourceEffect;
  */
 public class EntersBattlefieldTappedAbility extends StaticAbility<EntersBattlefieldTappedAbility> {
 
+    private String ruleText;
+    
     public EntersBattlefieldTappedAbility() {
         super(Zone.BATTLEFIELD, new EntersBattlefieldEffect(new TapSourceEffect(true)));
     }
 
+    public EntersBattlefieldTappedAbility(String ruleText) {
+        this();
+        this.ruleText = ruleText;
+    }
+
     public EntersBattlefieldTappedAbility(final EntersBattlefieldTappedAbility ability) {
         super(ability);
+        this.ruleText = ability.ruleText;
     }
 
     @Override
     public String getRule() {
+        if (ruleText != null) {
+            return ruleText;
+        }
         return "{this} enters the battlefield tapped";
     }
 

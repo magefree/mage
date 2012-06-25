@@ -27,32 +27,35 @@
  */
 package mage.sets.mirrodinbesieged;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
+import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 
+import java.util.UUID;
+
 /**
  *
- * @author North, Loki
+ * @author North, Loki, noxx
  */
 public class SphereOfTheSuns extends CardImpl<SphereOfTheSuns> {
 
+    private static final String ruleText = "Sphere of the Suns enters the battlefield tapped and with three charge counters on it.";
+    
     public SphereOfTheSuns(UUID ownerId) {
         super(ownerId, 134, "Sphere of the Suns", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "MBS";
 
-        Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(3)),
-                "Sphere of the Suns enters the battlefield tapped and with three charge counters on it.");
+        // Sphere of the Suns enters the battlefield tapped and with three charge counters on it.
+        Ability ability = new EntersBattlefieldTappedAbility(ruleText);
+        ((EntersBattlefieldEffect)ability.getEffects().get(0)).addEffect(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(3)));
         this.addAbility(ability);
-        this.addAbility(new EntersBattlefieldTappedAbility());
 
         RemoveCountersSourceCost removeCounterCost = new RemoveCountersSourceCost(CounterType.CHARGE.createInstance());
         ability = new AnyColorManaAbility();
