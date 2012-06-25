@@ -28,6 +28,12 @@
             <version>1.2.14</version>
             <type>jar</type>
         </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.2</version>
+        </dependency>
     </dependencies>
 
     <build>
