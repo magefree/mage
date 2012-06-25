@@ -47,4 +47,9 @@ public class WolfToken extends Token {
         toughness = new MageInt(2);
     }
 
+    public WolfToken(Token.Type type) {
+        this();
+        setTokenType(type.getCode());
+    }
+
 }

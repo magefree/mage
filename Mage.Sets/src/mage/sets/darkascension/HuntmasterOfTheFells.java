@@ -27,9 +27,6 @@
  */
 package mage.sets.darkascension;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -53,12 +50,17 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.Token;
 import mage.game.permanent.token.WolfToken;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetOpponent;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -105,7 +107,7 @@ public class HuntmasterOfTheFells extends CardImpl<HuntmasterOfTheFells> {
 class HuntmasterOfTheFellsAbility extends TriggeredAbilityImpl<HuntmasterOfTheFellsAbility> {
 
     public HuntmasterOfTheFellsAbility() {
-        super(Constants.Zone.BATTLEFIELD, new CreateTokenEffect(new WolfToken()), true);
+        super(Constants.Zone.BATTLEFIELD, new CreateTokenEffect(new WolfToken(Token.Type.SECOND)), true);
         this.addEffect(new GainLifeEffect(2));
     }
 
