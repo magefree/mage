@@ -59,6 +59,8 @@ public class Sets extends HashMap<String, ExpansionSet> {
     private static Map<String, Card> cardMap;
     protected static Random rnd = new Random();
 
+    private boolean useCachedCards = false;
+
     public static Sets getInstance() {
         return fINSTANCE;
     }
@@ -117,6 +119,9 @@ public class Sets extends HashMap<String, ExpansionSet> {
         this.addSet(Weatherlight.getInstance());
         this.addSet(Worldwake.getInstance());
         this.addSet(Zendikar.getInstance());
+        if (useCachedCards) {
+            cards = CacheService.loadCards(this.values());
+        }
         names = CacheService.loadCardNames(cards);
         creatureTypes = CacheService.loadCreatureTypes(cards);
         nonLandNames = CacheService.loadNonLandNames(cards);
@@ -124,7 +129,9 @@ public class Sets extends HashMap<String, ExpansionSet> {
 
 	private void addSet(ExpansionSet set) {
 		this.put(set.getCode(), set);
-        cards.addAll(set.getCards());
+        if (!useCachedCards) { // cards will be read from cache later
+            cards.addAll(set.getCards());
+        }
 	}
 
 	public static Set<String> getCardNames() {

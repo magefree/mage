@@ -2,11 +2,10 @@ package mage.cache;
 
 import mage.Constants;
 import mage.cards.Card;
+import mage.cards.ExpansionSet;
 import org.apache.log4j.Logger;
 
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * @author noxx
@@ -14,7 +13,9 @@ import java.util.TreeSet;
 public class CacheService {
 
     private static final Logger log = Logger.getLogger(CacheService.class);
-    
+
+    private static final String CARDS_CACHE_OBJECT_NAME = "cards";
+    private static final String CARDS_KEY = "cards_key";
     private static final String NAMES_CACHE_OBJECT_NAME = "card_names";
     private static final String NAMES_KEY = "card_names_key";
     private static final String CARD_COUNT_KEY = "card_count_key";
@@ -24,6 +25,25 @@ public class CacheService {
     private static final String NONLAND_NAMES_KEY = "nonland_names_key";
 
     private static final int CACHE_VERSION = 1;
+
+    public static List<Card> loadCards(Collection<ExpansionSet> sets) {
+        Cache cache = CacheDataHelper.getCachedObject(CARDS_CACHE_OBJECT_NAME);
+        List<Card> cards =  new ArrayList<Card>();
+        if (cache == null || cache.getVersion() != CACHE_VERSION) {
+            for (ExpansionSet set : sets) {
+                cards.addAll(set.getCards());
+            }
+            cache = new Cache(CARDS_CACHE_OBJECT_NAME, CACHE_VERSION);
+            cache.getCacheObjects().put(CARDS_KEY, cards);
+            cache.getCacheObjects().put(CARD_COUNT_KEY, cards.size());
+            CacheDataHelper.cacheObject(cache, CARDS_CACHE_OBJECT_NAME);
+        } else {
+            cards = (List<Card>) cache.getCacheObjects().get(CARDS_KEY);
+            log.debug("Loaded cards from cache.");
+        }
+
+        return cards;
+    }
 
     public static Set<String> loadCardNames(List<Card> cards) {
         Cache cache = CacheDataHelper.getCachedObject(NAMES_CACHE_OBJECT_NAME);
