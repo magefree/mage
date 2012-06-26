@@ -1,6 +1,11 @@
 package org.mage.test.cards.abilities.flicker;
 
 import mage.Constants;
+import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.IntimidateAbility;
+import mage.abilities.keyword.LifelinkAbility;
+import mage.game.permanent.Permanent;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -30,5 +35,35 @@ public class CloudshiftTest extends CardTestPlayerBase {
 
         // should be alive because of Cloudshift
         assertPermanentCount(playerA, "Elite Vanguard", 1);
+    }
+
+    /**
+     * Tests that copy effect is discarded and Clone can enter as a copy of another creature.
+     * Also tests that copy two creature won't 'collect' abilities, after 'Cloudshift' effect Clone should enter as a copy of another creature.
+     */
+    @Test
+    public void testCopyEffectDiscarded() {
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 4);
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 4);
+
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Knight of Meadowgrain");
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Heirs of Stromkirk");
+
+        addCard(Constants.Zone.HAND, playerA, "Clone");
+        addCard(Constants.Zone.HAND, playerA, "Cloudshift");
+
+        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Clone");
+        setChoice(playerA, "Knight of Meadowgrain");
+        castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Cloudshift", "Clone");
+        setChoice(playerA, "Heirs of Stromkirk");
+
+        setStopAt(1, Constants.PhaseStep.END_TURN);
+        execute();
+
+        Permanent clone = getPermanent("Heirs of Stromkirk", playerA.getId());
+        Assert.assertNotNull(clone);
+        Assert.assertTrue(clone.getAbilities().contains(IntimidateAbility.getInstance()));
+        Assert.assertFalse(clone.getAbilities().contains(LifelinkAbility.getInstance()));
+        Assert.assertFalse(clone.getAbilities().contains(FirstStrikeAbility.getInstance()));
     }
 }
