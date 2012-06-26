@@ -165,6 +165,7 @@ public interface Game extends MageItem, Serializable {
     public void emptyManaPools();
     public void addEffect(ContinuousEffect continuousEffect, Ability source);
     public void addEmblem(Emblem emblem, Ability source);
+    public void addPermanent(Permanent permanent);
 
     /**
      * This version supports copying of copies of any depth.

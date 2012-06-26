@@ -274,7 +274,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                     break;
                 case BATTLEFIELD:
                     PermanentCard permanent = new PermanentCard(this, ownerId);
-                    game.getBattlefield().addPermanent(permanent);
+                    game.addPermanent(permanent);
                     permanent.entersBattlefield(sourceId, game);
                     game.applyEffects();
                     if (flag)
@@ -386,7 +386,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
             }
             updateZoneChangeCounter();
             PermanentCard permanent = new PermanentCard(this, controllerId);
-            game.getBattlefield().addPermanent(permanent);
+            game.addPermanent(permanent);
             game.setZone(objectId, Zone.BATTLEFIELD);
             game.applyEffects();
             permanent.entersBattlefield(sourceId, game);

@@ -774,6 +774,11 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     }
 
     @Override
+    public void addPermanent(Permanent permanent) {
+        getBattlefield().addPermanent(permanent);
+    }
+
+    @Override
     public void copyPermanent(Permanent copyFromPermanent, Permanent copyToPermanent, Ability source, ApplyToPermanent applier) {
         Permanent permanent = copyFromPermanent.copy();
 
