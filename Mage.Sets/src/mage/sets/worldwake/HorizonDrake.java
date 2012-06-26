@@ -40,19 +40,18 @@ import mage.filter.FilterCard;
 import java.util.UUID;
 
 /**
- *
  * @author Loki
  */
 public class HorizonDrake extends CardImpl<HorizonDrake> {
 
-     private static FilterCard filter = new FilterCard("lands");
+    private static FilterCard filter = new FilterCard("lands");
 
     static {
         filter.getCardType().add(CardType.LAND);
         filter.setScopeCardType(ComparisonScope.Any);
     }
 
-    public HorizonDrake (UUID ownerId) {
+    public HorizonDrake(UUID ownerId) {
         super(ownerId, 30, "Horizon Drake", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
         this.expansionSetCode = "WWK";
         this.subtype.add("Drake");
@@ -63,7 +62,7 @@ public class HorizonDrake extends CardImpl<HorizonDrake> {
         this.addAbility(new ProtectionAbility(filter));
     }
 
-    public HorizonDrake (final HorizonDrake card) {
+    public HorizonDrake(final HorizonDrake card) {
         super(card);
     }
 
