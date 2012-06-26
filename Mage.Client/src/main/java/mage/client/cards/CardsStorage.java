@@ -1,7 +1,5 @@
 package mage.client.cards;
 
-import java.io.InputStream;
-import java.util.*;
 import mage.Constants;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -9,6 +7,9 @@ import mage.cards.ExpansionSet;
 import mage.sets.Sets;
 import mage.utils.CardUtil;
 import org.apache.log4j.Logger;
+
+import java.io.InputStream;
+import java.util.*;
 
 /**
  * Stores all implemented cards on client side.
@@ -25,6 +26,8 @@ public class CardsStorage {
     private static Map<String, Integer> ratings;
     private static Integer min = Integer.MAX_VALUE, max = 0;
     private static List<Card> notImplementedCards;
+    
+    private static boolean loaded;
 
     /**
      * Rating that is given for new cards.
@@ -43,19 +46,33 @@ public class CardsStorage {
             setCodes.add(set.getCode());
         }
 
-        for (ExpansionSet set : sets) {
-            List<Card> cards = set.getCards();
-            Collections.sort(cards, new CardComparator());
-            allCards.addAll(cards);
-            for (Card card : cards) {
-                if (CardUtil.isLand(card) && !CardUtil.isBasicLand(card)) {
-                    nonBasicLandCards.add(card);
+    }
+
+    private static void loadLazily() {
+        if (!loaded) {
+            synchronized (CardsStorage.class) {
+                if (!loaded) {
+                    List<ExpansionSet> sets = new ArrayList<ExpansionSet>(Sets.getInstance().values());
+                    for (ExpansionSet set : sets) {
+                        List<Card> cards = set.getCards();
+                        Collections.sort(cards, new CardComparator());
+                        allCards.addAll(cards);
+                        for (Card card : cards) {
+                            if (CardUtil.isLand(card) && !CardUtil.isBasicLand(card)) {
+                                nonBasicLandCards.add(card);
+                            }
+                        }
+                    }
+                    loaded = true;
                 }
             }
         }
     }
 
     public static List<Card> getAllCards() {
+        if (!loaded) {
+            loadLazily();
+        }
         return allCards;
     }
 
@@ -73,10 +90,10 @@ public class CardsStorage {
         List<Card> cards = new ArrayList<Card>();
         List<Card> pool;
         if (set == null) {
-            pool = allCards;
+            pool = getAllCards();
         } else {
             pool = new ArrayList<Card>();
-            for (Card card : allCards) {
+            for (Card card : getAllCards()) {
                 if (card.getExpansionSetCode().equals(set)) {
                     pool.add(card);
                 }
@@ -97,7 +114,7 @@ public class CardsStorage {
     }
 
     public static int getCardsCount() {
-        return allCards.size();
+        return getAllCards().size();
     }
 
     public static List<String> getSetCodes() {
@@ -105,6 +122,9 @@ public class CardsStorage {
     }
 
     public static Set<Card> getNonBasicLandCards() {
+        if (!loaded) {
+            loadLazily();
+        }
         return nonBasicLandCards;
     }
 
@@ -165,12 +185,12 @@ public class CardsStorage {
     public static List<Card> getNotImplementedCards() {
         List<Card> cards = new ArrayList<Card>();
         if (notImplementedCards == null) {
-            if (allCards.isEmpty()) {
+            if (getAllCards().isEmpty()) {
                 return cards;
             }
 
             Set<String> names = new HashSet<String>();
-            for (Card card : allCards) {
+            for (Card card : getAllCards()) {
                 names.add(card.getExpansionSetCode() + card.getName());
             }
 

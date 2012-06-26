@@ -135,13 +135,6 @@ public class MageBook extends JComponent {
         add(jPanelRight, BorderLayout.LINE_END);
 
         cardDimensions = new CardDimensions(0.45d);
-
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                showCards();
-            }
-        });
     }
 
     private void addLeftRightPageButtons() {
@@ -212,7 +205,7 @@ public class MageBook extends JComponent {
         }
     }
 
-    private void showCards() {
+    public void showCards() {
         jLayeredPane.removeAll();
         addLeftRightPageButtons();
 

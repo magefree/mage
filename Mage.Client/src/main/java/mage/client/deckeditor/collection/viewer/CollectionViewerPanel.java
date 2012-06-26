@@ -215,6 +215,12 @@ public final class CollectionViewerPanel extends JPanel {
         private javax.swing.JScrollPane jScrollPane1;
     }
 
+    public void showCards() {
+        if (mageBook != null) {
+            mageBook.showCards();
+        }
+    }
+
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private mage.client.cards.BigCard bigCard;

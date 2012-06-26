@@ -59,7 +59,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
     private static Map<String, Card> cardMap;
     protected static Random rnd = new Random();
 
-    private boolean useCachedCards = false;
+    private static boolean loaded;
 
     public static Sets getInstance() {
         return fINSTANCE;
@@ -119,34 +119,46 @@ public class Sets extends HashMap<String, ExpansionSet> {
         this.addSet(Weatherlight.getInstance());
         this.addSet(Worldwake.getInstance());
         this.addSet(Zendikar.getInstance());
-        if (useCachedCards) {
-            cards = CacheService.loadCards(this.values());
-        }
-        names = CacheService.loadCardNames(cards);
-        creatureTypes = CacheService.loadCreatureTypes(cards);
-        nonLandNames = CacheService.loadNonLandNames(cards);
     }
 
 	private void addSet(ExpansionSet set) {
 		this.put(set.getCode(), set);
-        if (!useCachedCards) { // cards will be read from cache later
-            cards.addAll(set.getCards());
-        }
+        //cards.addAll(set.getCards());
 	}
 
+    private static void loadCards() {
+        if (!loaded) {
+            synchronized (Sets.class) {
+                if (!loaded) {
+                    for (ExpansionSet set : getInstance().values()) {
+                        cards.addAll(set.getCards());
+                    }
+                    names = CacheService.loadCardNames(cards);
+                    creatureTypes = CacheService.loadCreatureTypes(cards);
+                    nonLandNames = CacheService.loadNonLandNames(cards);
+                    loaded = true;
+                }
+            }
+        }
+    }
+
 	public static Set<String> getCardNames() {
+        loadCards();
 		return names;
 	}
 
 	public static Set<String> getNonLandCardNames() {
+        loadCards();
 		return nonLandNames;
 	}
 
 	public static Set<String> getCreatureTypes() {
+        loadCards();
 		return creatureTypes;
 	}
 
 	public static Card getRandomCard() {
+        loadCards();
 		return cards.get(rnd.nextInt(cards.size()));
 	}
 

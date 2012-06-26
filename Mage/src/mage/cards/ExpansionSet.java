@@ -77,20 +77,26 @@ public abstract class ExpansionSet implements Serializable {
         this.releaseDate = releaseDate;
         this.setType = setType;
         this.packageName = packageName;
-        this.cards = getCardClassesForPackage(packageName);
-        this.rarities = getCardsByRarity();
+        //this.cards = getCardClassesForPackage(packageName);
+        //this.rarities = getCardsByRarity();
     }
 
     public List<Card> getCards() {
-        /*if (cards == null) {
-            synchronized (this) {
-                if (cards == null) {
-                    this.cards = getCardClassesForPackage(packageName);
-                    this.rarities = getCardsByRarity();
-                }
-            }
-        }*/
+        if (cards == null) {
+            loadLazily();
+        }
         return cards;
+    }
+
+    private void loadLazily() {
+        synchronized (this) {
+            if (cards == null) {
+                this.cards = getCardClassesForPackage(packageName);
+            }
+            if (rarities == null) {
+                this.rarities = getCardsByRarity();
+            }
+        }
     }
 
     public String getName() {
@@ -426,11 +432,11 @@ public abstract class ExpansionSet implements Serializable {
     }
 
     protected Card getRandom(Rarity rarity) {
-        if (!rarities.containsKey(rarity))
+        if (!getRarities().containsKey(rarity))
             return null;
-        int size = rarities.get(rarity).size();
+        int size = getRarities().get(rarity).size();
         if (size > 0) {
-            return rarities.get(rarity).get(rnd.nextInt(size)).copy();
+            return getRarities().get(rarity).get(rnd.nextInt(size)).copy();
         }
         return null;
     }
@@ -454,9 +460,9 @@ public abstract class ExpansionSet implements Serializable {
     }
 
     public Map<Rarity, List<Card>> getRarities() {
-        /*if (rarities == null) {
-            this.rarities = getCardsByRarity();
-        }*/
+        if (rarities == null) {
+            loadLazily();
+        }
         return rarities;
     }
 }

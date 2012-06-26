@@ -27,12 +27,13 @@
 */
 package mage.client.deckeditor.collection.viewer;
 
-import java.awt.Component;
-import java.util.HashMap;
-import java.util.Map;
-import javax.swing.JComponent;
 import mage.client.MagePane;
 import mage.client.plugins.impl.Plugins;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Collection viewer pane.
@@ -77,6 +78,14 @@ public class CollectionViewerPane extends MagePane {
         );
 
         pack();
+    }
+
+    @Override
+    public void setVisible(boolean aFlag) {
+        super.setVisible(aFlag);
+        if (collectionViewerPanel != null) {
+            collectionViewerPanel.showCards();
+        }
     }
 
     private CollectionViewerPanel collectionViewerPanel;
