@@ -10,7 +10,7 @@ import java.io.*;
 public class CacheDataHelper {
 
     private static final Logger log = Logger.getLogger(CacheDataHelper.class);
-    
+
     /**
      * Save object on disk.
      *
@@ -93,4 +93,24 @@ public class CacheDataHelper {
         }
     }
 
+    /**
+     * Validates cache for being consistent.
+     *
+     * @param cache
+     * @return
+     */
+    public static boolean validateCache(Cache cache, int cacheVersion, int cardCount, String countKey) {
+        if (cache == null || cache.getVersion() != cacheVersion) {
+            return false;
+        }
+        Object object = cache.getCacheObjects().get(countKey);
+        if (object == null || !(object instanceof Integer)) {
+            return false;
+        }
+        Integer count = (Integer) object;
+        if (!count.equals(cardCount)) {
+            return false;
+        }
+        return true;
+    }
 }
