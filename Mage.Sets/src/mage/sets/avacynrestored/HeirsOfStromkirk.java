@@ -27,15 +27,16 @@
  */
 package mage.sets.avacynrestored;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.DealsCombatDamageToACreatureTriggeredAbility;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
+
+import java.util.UUID;
 
 /**
  *
@@ -54,7 +55,7 @@ public class HeirsOfStromkirk extends CardImpl<HeirsOfStromkirk> {
 
         this.addAbility(IntimidateAbility.getInstance());
         // Whenever Heirs of Stromkirk deals combat damage to a player, put a +1/+1 counter on it.
-        this.addAbility(new DealsCombatDamageToACreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
     }
 
     public HeirsOfStromkirk(final HeirsOfStromkirk card) {
