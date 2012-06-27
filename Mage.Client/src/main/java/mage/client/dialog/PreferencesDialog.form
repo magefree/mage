@@ -106,7 +106,7 @@
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="showToolTipsInHand" min="-2" max="-2" attributes="0"/>
+                              <Component id="showToolTipsInAnyZone" min="-2" max="-2" attributes="0"/>
                               <Component id="displayBigCardsInHand" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="161" max="32767" attributes="0"/>
@@ -116,7 +116,7 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="showToolTipsInHand" min="-2" max="-2" attributes="0"/>
+                          <Component id="showToolTipsInAnyZone" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="displayBigCardsInHand" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
@@ -125,13 +125,13 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JCheckBox" name="showToolTipsInHand">
+                <Component class="javax.swing.JCheckBox" name="showToolTipsInAnyZone">
                   <Properties>
                     <Property name="selected" type="boolean" value="true"/>
                     <Property name="text" type="java.lang.String" value="Show tooltips"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="showToolTipsInHandActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="showToolTipsInAnyZoneActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="displayBigCardsInHand">
@@ -1016,7 +1016,7 @@
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Tahoma" size="11" style="1"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Locked avatars:"/>
+                        <Property name="text" type="java.lang.String" value="New avatars:"/>
                       </Properties>
                     </Component>
                     <Container class="javax.swing.JPanel" name="jPanel16">

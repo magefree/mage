@@ -105,6 +105,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
         availableAvatars.add(30);
         availableAvatars.add(25);
 
+        availableAvatars.add(22);
+        availableAvatars.add(77);
+        availableAvatars.add(62);
     }
 
     private final JFileChooser fc = new JFileChooser();
@@ -213,7 +216,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         showToolTipsInAnyZone.setText("Show tooltips");
         showToolTipsInAnyZone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                showToolTipsInHandActionPerformed(evt);
+                showToolTipsInAnyZoneActionPerformed(evt);
             }
         });
 
@@ -714,8 +717,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 11));
-        jLabel13.setText("Locked avatars:");
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel13.setText("New avatars:");
 
         jPanel16.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
 
@@ -974,8 +977,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         dialog.setVisible(false);
     }//GEN-LAST:event_exitButtonActionPerformed
 
-    private void showToolTipsInHandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showToolTipsInHandActionPerformed
-    }//GEN-LAST:event_showToolTipsInHandActionPerformed
+    private void showToolTipsInAnyZoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showToolTipsInAnyZoneActionPerformed
+    }//GEN-LAST:event_showToolTipsInAnyZoneActionPerformed
 
     private void displayBigCardsInHandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_displayBigCardsInHandActionPerformed
     }//GEN-LAST:event_displayBigCardsInHandActionPerformed
@@ -1255,9 +1258,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
             addAvatar(jPanel20, 30, false, false);
             addAvatar(jPanel21, 25, false, false);
 
-            addAvatar(jPanel16, 22, false, true);
-            addAvatar(jPanel17, 77, false, true);
-            addAvatar(jPanel18, 62, false, true);
+            addAvatar(jPanel16, 22, false, false);
+            addAvatar(jPanel17, 77, false, false);
+            addAvatar(jPanel18, 62, false, false);
         } catch (Exception e) {
             log.error(e, e);
         }
