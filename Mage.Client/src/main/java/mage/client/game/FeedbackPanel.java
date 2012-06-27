@@ -95,7 +95,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
                 this.btnLeft.setText("Yes");
                 this.btnRight.setVisible(true);
                 this.btnRight.setText("No");
-                this.helper.setState("Yes", true, "Yes", true);
+                this.helper.setState("Yes", true, "No", true);
                 break;
             case CONFIRM:
                 this.btnLeft.setVisible(true);
@@ -120,7 +120,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
                 this.btnLeft.setVisible(false);
                 this.btnRight.setVisible(true);
                 this.btnRight.setText("OK");
-                this.helper.setState("", false, "Done", true);
+                this.helper.setState("", false, "OK", true);
                 ArrowBuilder.removeAllArrows();
                 break;
         }

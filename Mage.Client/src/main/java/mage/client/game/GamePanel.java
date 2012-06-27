@@ -852,8 +852,8 @@ public class GamePanel extends javax.swing.JPanel {
             }
         });
 
-        endButtonTip = new JLabel("<-- Press this button to end the turn");
-        endButtonTip.setForeground(Color.white);
+        //endButtonTip = new JLabel("<-- Press this button to end the turn");
+        //endButtonTip.setForeground(Color.white);
 
         jPhases.add(untap);
         jPhases.add(upkeep);
@@ -864,10 +864,19 @@ public class GamePanel extends javax.swing.JPanel {
         jPhases.add(combatButton);
         jPhases.add(main2);
         jPhases.add(endOfTurn);
-        jPhases.add(endButtonTip);
+        //jPhases.add(endButtonTip);
 
         pnlReplay.setOpaque(false);
         HelperPanel helper = new HelperPanel();
+        helper.setPreferredSize(new Dimension(100, 30));
+        helper.addEndTurnListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if (feedbackPanel != null && FeedbackMode.SELECT.equals(feedbackPanel.getMode())) {
+                    session.sendPlayerInteger(gameId, 0);
+                }
+            }
+        });
         feedbackPanel.setHelperPanel(helper);
 
         jSplitPane2.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
@@ -884,18 +893,20 @@ public class GamePanel extends javax.swing.JPanel {
                     .addGroup(gl_jPanel3.createParallelGroup(Alignment.LEADING)
                         .addComponent(handContainer, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPhases, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(helper, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(gl_jPanel3.createSequentialGroup()
-                            .addComponent(pnlBattlefield, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                            )))
+                                .addComponent(pnlBattlefield, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                        )))
         );
         gl_jPanel3.setVerticalGroup(
-            gl_jPanel3.createParallelGroup(Alignment.TRAILING)
-                .addGroup(gl_jPanel3.createSequentialGroup()
-                    .addComponent(pnlBattlefield, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                    .addPreferredGap(ComponentPlacement.RELATED)
-                    .addComponent(handContainer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPhases, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                .addComponent(pnlGameInfo, GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+                gl_jPanel3.createParallelGroup(Alignment.TRAILING)
+                        .addGroup(gl_jPanel3.createSequentialGroup()
+                                .addComponent(pnlBattlefield, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                .addPreferredGap(ComponentPlacement.RELATED)
+                                .addComponent(helper, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(handContainer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jPhases, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                        .addComponent(pnlGameInfo, GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
         jPanel3.setLayout(gl_jPanel3);
 

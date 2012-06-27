@@ -29,6 +29,8 @@
 package mage.client.game;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseListener;
 
 /**
  * Panel with buttons that copy the state of feedback panel.
@@ -40,21 +42,35 @@ public class HelperPanel extends JPanel {
     private javax.swing.JButton btnLeft;
     private javax.swing.JButton btnRight;
     private javax.swing.JButton btnSpecial;
+    private javax.swing.JButton btnEndTurn;
+    //private javax.swing.JButton btnStopTimer;
 
     private javax.swing.JButton linkLeft;
     private javax.swing.JButton linkRight;
     private javax.swing.JButton linkSpecial;
 
     public HelperPanel() {
+        setBackground(new Color(0, 0, 0, 100));
+        setLayout(new GridBagLayout());
+        setOpaque(false);
+
         btnSpecial = new JButton("Special");
         btnSpecial.setVisible(false);
         add(btnSpecial);
         btnLeft = new JButton("OK");
-        btnLeft.setVisible(false);
+        btnLeft.setEnabled(false);
         add(btnLeft);
         btnRight = new JButton("Cancel");
-        btnRight.setVisible(false);
+        btnRight.setEnabled(false);
         add(btnRight);
+
+        //btnStopTimer = new JButton("Stop timer");
+        //btnStopTimer.setToolTipText("Stop auto phase skipping timer");
+        //add(btnStopTimer);
+
+        btnEndTurn = new JButton("End Turn");
+        btnEndTurn.setToolTipText("End The Turn");
+        add(btnEndTurn);
 
         btnLeft.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,10 +104,14 @@ public class HelperPanel extends JPanel {
     }
 
     public void setState(String txtLeft, boolean leftVisible, String txtRight, boolean rightVisible) {
-        this.btnLeft.setVisible(leftVisible);
-        this.btnLeft.setText(txtLeft);
-        this.btnRight.setVisible(rightVisible);
-        this.btnRight.setText(txtRight);
+        this.btnLeft.setEnabled(leftVisible);
+        if (!txtLeft.isEmpty()) {
+            this.btnLeft.setText(txtLeft);
+        }
+        this.btnRight.setEnabled(rightVisible);
+        if (!txtRight.isEmpty()) {
+            this.btnRight.setText(txtRight);
+        }
     }
 
     public void setSpecial(String txtSpecial, boolean specialVisible) {
@@ -100,13 +120,19 @@ public class HelperPanel extends JPanel {
     }
 
     public void setRight(String txtRight, boolean rightVisible) {
-        this.btnRight.setVisible(rightVisible);
-        this.btnRight.setText(txtRight);
+        this.btnRight.setEnabled(rightVisible);
+        if (!txtRight.isEmpty()) {
+            this.btnRight.setText(txtRight);
+        }
     }
 
     public void setLinks(JButton left, JButton right, JButton special) {
         this.linkLeft = left;
         this.linkRight = right;
         this.linkSpecial = special;
+    }
+
+    public void addEndTurnListener(MouseListener mouseListener) {
+        this.btnEndTurn.addMouseListener(mouseListener);
     }
 }
