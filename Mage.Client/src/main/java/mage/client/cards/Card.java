@@ -503,4 +503,8 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
     @Override
     public void showCardTitle() {
     }
+
+    @Override
+    public void setSelected(boolean selected) {
+    }
 }

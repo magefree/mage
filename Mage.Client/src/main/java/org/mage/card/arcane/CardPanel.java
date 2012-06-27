@@ -316,8 +316,10 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         this.isAnimationPanel = isAnimationPanel;
     }
 
+    @Override
     public void setSelected(boolean isSelected) {
         this.isSelected = isSelected;
+        this.titleText.setGlowColor(Color.green);
         repaint();
     }
 
@@ -376,7 +378,8 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         g2d.fillRoundRect(cardXOffset, cardYOffset, cardWidth, cardHeight, cornerSize, cornerSize);
         if (isSelected) {
             //g2d.setColor(new Color(0,250,0,200));
-            g2d.setColor(new Color(200, 120, 40, 200));
+            //g2d.setColor(new Color(200, 120, 40, 200));
+            g2d.setColor(Color.green);
             g2d.fillRoundRect(cardXOffset + 1, cardYOffset + 1, cardWidth - 2, cardHeight - 2, cornerSize, cornerSize);
         }
 

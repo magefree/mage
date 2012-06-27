@@ -1,11 +1,7 @@
 package org.mage.card.arcane;
 
-import java.awt.AlphaComposite;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.font.FontRenderContext;
 import java.awt.font.LineBreakMeasurer;
 import java.awt.font.TextAttribute;
@@ -14,8 +10,6 @@ import java.text.AttributedCharacterIterator;
 import java.text.AttributedString;
 import java.text.BreakIterator;
 import java.util.Locale;
-
-import javax.swing.JLabel;
 
 public class GlowText extends JLabel {
     private static final long serialVersionUID = 1827677946939348001L;
@@ -98,5 +92,9 @@ public class GlowText extends JLabel {
 
     public int getLineCount() {
         return this.lineCount;
+    }
+
+    public void setGlowColor(Color glowColor) {
+        this.glowColor = glowColor;
     }
 }

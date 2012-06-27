@@ -48,6 +48,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.Serializable;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -70,9 +72,20 @@ public class ShowCardsDialog extends MageDialog implements MouseListener {
     }
 
     public void loadCards(String name, CardsView showCards, BigCard bigCard, CardDimensions dimension, UUID gameId, boolean modal) {
+        loadCards(name, showCards, bigCard, dimension, gameId, modal, null);
+    }
+    
+    public void loadCards(String name, CardsView showCards, BigCard bigCard, CardDimensions dimension, UUID gameId, boolean modal, Map<String, Serializable> options) {
         this.reloaded = true;
         this.title = name;
         cardArea.loadCards(showCards, bigCard, dimension, gameId, this);
+        if (options != null) {
+            if (options.containsKey("chosen")) {
+                java.util.List<UUID> chosenCards = (java.util.List<UUID>)options.get("chosen");
+                cardArea.selectCards(chosenCards);
+            }
+        }
+
         if (getParent() != MageFrame.getDesktop() /*|| this.isClosed*/) {
             MageFrame.getDesktop().add(this, JLayeredPane.DEFAULT_LAYER);
         }

@@ -268,7 +268,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
         return false;
     }
 
-    private Map getOptions(Target target) {
+    private Map<String, Serializable> getOptions(Target target) {
         return target.getNumberOfTargets() != target.getMaxNumberOfTargets() ? staticOptions : null;
     }
 
@@ -284,7 +284,15 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
                 int count = cards.count(target.getFilter(), game);
                 if (count == 0) required = false;
             }
-            game.fireSelectTargetEvent(playerId, target.getMessage(), cards, required, getOptions(target));
+            Map<String, Serializable> options = getOptions(target);
+            if (target.getTargets().size() > 0) {
+                if (options == null) {
+                    options = new HashMap<String, Serializable>(1);
+                }
+                List<UUID> chosen = (List<UUID>)target.getTargets();
+                options.put("chosen", (Serializable)chosen);
+            }
+            game.fireSelectTargetEvent(playerId, target.getMessage(), cards, required, options);
             waitForResponse();
             if (response.getUUID() != null) {
                 if (target.canTarget(response.getUUID(), cards, game)) {

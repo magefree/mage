@@ -530,7 +530,7 @@ public class GamePanel extends javax.swing.JPanel {
         updateGame(gameView);
         Map<String, Serializable> options0 = options == null ? new HashMap<String, Serializable>() : options;
         if (cardView != null && cardView.size() > 0) {
-            ShowCardsDialog dialog = showCards(message, cardView, required);
+            ShowCardsDialog dialog = showCards(message, cardView, required, options0);
             options0.put("dialog", dialog);
         }
         this.feedbackPanel.getFeedback(required?FeedbackMode.INFORM:FeedbackMode.CANCEL, message, gameView.getSpecial(), options0);
@@ -589,9 +589,9 @@ public class GamePanel extends javax.swing.JPanel {
         this.abilityPicker.show(choices, MageFrame.getDesktop().getMousePosition());
     }
 
-    private ShowCardsDialog showCards(String title, CardsView cards, boolean required) {
+    private ShowCardsDialog showCards(String title, CardsView cards, boolean required, Map<String, Serializable> options) {
         ShowCardsDialog showCards = new ShowCardsDialog();
-        showCards.loadCards(title, cards, bigCard, Config.dimensionsEnlarged, gameId, required);
+        showCards.loadCards(title, cards, bigCard, Config.dimensionsEnlarged, gameId, required, options);
         return showCards;
     }
 

@@ -41,7 +41,8 @@ import mage.view.SimpleCardsView;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseListener;
-import java.util.UUID;
+import java.util.*;
+import java.util.List;
 
 public class CardArea extends JPanel {
 
@@ -148,6 +149,17 @@ public class CardArea extends JPanel {
 
     public void clearReloaded() {
         this.reloaded = false;
-    }    
+    }
+    
+    public void selectCards(List<UUID> selected) {
+        for (Component component : cardArea.getComponents()) {
+            if (component instanceof MageCard) {
+                MageCard mageCard = (MageCard)component;
+                if (selected.contains(mageCard.getOriginal().getId())) {
+                    mageCard.setSelected(true);
+                }
+            }
+        }
+    }
 
 }

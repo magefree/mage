@@ -29,4 +29,5 @@ public abstract class MageCard extends JPanel {
     abstract public void toggleTransformed();
     abstract public boolean isTransformed();
     abstract public void showCardTitle();
+    abstract public void setSelected(boolean selected);
 }
