@@ -52,7 +52,7 @@ public class RateCard {
             return rated.get(card.getName());
         }
         int type = 0;
-        if (card.getCardType().contains(Constants.CardType.CREATURE)) {
+        if (card.getCardType().contains(Constants.CardType.PLANESWALKER)) {
             type = 15;
         } if (card.getCardType().contains(Constants.CardType.CREATURE)) {
             type = 10;
