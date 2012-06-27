@@ -214,8 +214,8 @@ public class GamePanel extends javax.swing.JPanel {
         DialogManager.getManager().setScreenHeight(rect.height);
         DialogManager.getManager().setBounds(0, 0, rect.width, rect.height);
 
-        //helper.setPreferredSize(new Dimension(rect.width, 80));
-        //helper.setMaximumSize(new Dimension(rect.width, 80));
+        //helper.setPreferredSize(new Dimension(rect.width, 90));
+        //helper.setMaximumSize(new Dimension(rect.width, 90));
     }
 
     public synchronized void showGame(UUID gameId, UUID playerId) {
@@ -556,7 +556,16 @@ public class GamePanel extends javax.swing.JPanel {
 
     public void select(String message, GameView gameView) {
         updateGame(gameView);
-        this.feedbackPanel.getFeedback(FeedbackMode.SELECT, message, gameView.getSpecial(), null);
+        String messageToDisplay = message;
+        for (PlayerView playerView : gameView.getPlayers()) {
+            if (playerView.getPlayerId().equals(playerId)) {
+                if (playerView.isActive()) {
+                    messageToDisplay = message + " <div style='font-size:11pt'>Your turn</div>";
+                }
+                break;
+            }
+        }
+        this.feedbackPanel.getFeedback(FeedbackMode.SELECT, messageToDisplay, gameView.getSpecial(), null);
         if (PhaseManager.getInstance().isSkip(gameView, message)) {
             this.feedbackPanel.doClick();
         }
@@ -872,7 +881,7 @@ public class GamePanel extends javax.swing.JPanel {
 
         pnlReplay.setOpaque(false);
         helper = new HelperPanel();
-        helper.setPreferredSize(new Dimension(100, 80));
+        helper.setPreferredSize(new Dimension(100, 90));
         helper.addEndTurnListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
