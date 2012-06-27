@@ -34,21 +34,20 @@
 
 package mage.client.game;
 
+import mage.client.MageFrame;
+import mage.client.chat.ChatPanel;
+import mage.client.components.MageTextArea;
+import mage.client.dialog.MageDialog;
+import mage.client.util.gui.ArrowBuilder;
+import mage.remote.Session;
+import org.apache.log4j.Logger;
+
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.Serializable;
 import java.util.Map;
 import java.util.UUID;
-
-import javax.swing.*;
-
-import mage.client.MageFrame;
-import mage.client.chat.ChatPanel;
-import mage.client.components.MageTextArea;
-import mage.client.dialog.MageDialog;
-import mage.remote.Session;
-
-import org.apache.log4j.Logger;
 
 /**
  *
@@ -122,6 +121,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
                 this.btnRight.setVisible(true);
                 this.btnRight.setText("OK");
                 this.helper.setState("", false, "Done", true);
+                ArrowBuilder.removeAllArrows();
                 break;
         }
         this.btnSpecial.setVisible(special);
