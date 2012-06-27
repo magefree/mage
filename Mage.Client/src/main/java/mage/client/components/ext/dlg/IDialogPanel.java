@@ -1,6 +1,7 @@
 package mage.client.components.ext.dlg;
 
 import mage.client.components.ImageButton;
+import mage.client.util.Config;
 import org.jdesktop.swingx.JXPanel;
 
 import javax.swing.*;
@@ -12,6 +13,7 @@ import java.awt.*;
 abstract public class IDialogPanel extends JXPanel {
 
     private DlgParams params;
+    private Dimension cardDimension;
 
     public DlgParams getDlgParams() {
         return params;
@@ -65,6 +67,13 @@ abstract public class IDialogPanel extends JXPanel {
                 ((AbstractButton) c).setContentAreaFilled(false);    
             }
         }
+    }
+
+    protected Dimension getCardDimension() {
+        if (cardDimension == null) {
+            cardDimension = new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
+        }
+        return cardDimension;
     }
 
     /**

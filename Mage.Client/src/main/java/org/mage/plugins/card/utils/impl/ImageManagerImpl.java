@@ -80,6 +80,38 @@ public class ImageManagerImpl implements ImageManager {
         return imageDlgActiveAcceptButton;
     }
 
+    @Override
+    public Image getDlgPrevButtonImage() {
+        if (imageDlgPrevButton == null) {
+            imageDlgPrevButton = getBufferedImageFromResource("/dlg/dlg.prev.png");
+        }
+        return imageDlgPrevButton;
+    }
+
+    @Override
+    public Image getDlgActivePrevButtonImage() {
+        if (imageDlgActivePrevButton == null) {
+            imageDlgActivePrevButton = getBufferedImageFromResource("/dlg/dlg.prev.hover.png");
+        }
+        return imageDlgActivePrevButton;
+    }
+
+    @Override
+    public Image getDlgNextButtonImage() {
+        if (imageDlgNextButton == null) {
+            imageDlgNextButton = getBufferedImageFromResource("/dlg/dlg.next.png");
+        }
+        return imageDlgNextButton;
+    }
+
+    @Override
+    public Image getDlgActiveNextButtonImage() {
+        if (imageDlgActiveNextButton == null) {
+            imageDlgActiveNextButton = getBufferedImageFromResource("/dlg/dlg.next.hover.png");
+        }
+        return imageDlgActiveNextButton;
+    }
+
     protected static Image getImageFromResourceTransparent(String path, Color mask, Rectangle rec) {
         BufferedImage image = null;
         Image imageCardTransparent = null;
@@ -120,4 +152,8 @@ public class ImageManagerImpl implements ImageManager {
     private static BufferedImage imageDlgActiveAcceptButton;
     private static BufferedImage imageDlgCancelButton;
     private static BufferedImage imageDlgActiveCancelButton;
+    private static BufferedImage imageDlgPrevButton;
+    private static BufferedImage imageDlgActivePrevButton;
+    private static BufferedImage imageDlgNextButton;
+    private static BufferedImage imageDlgActiveNextButton;
 }

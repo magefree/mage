@@ -10,7 +10,6 @@ import mage.client.components.ext.dlg.IDialogPanel;
 import mage.client.game.FeedbackPanel;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.Command;
-import mage.client.util.Config;
 import mage.client.util.SettingsManager;
 import mage.view.CardView;
 import mage.view.CardsView;
@@ -132,13 +131,6 @@ public class StackDialog extends IDialogPanel {
         }
     }
 
-    private Dimension getCardDimension() {
-        if (cardDimension == null) {
-            cardDimension = new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
-        }
-        return cardDimension;
-    }
-
     private HoverButton getJButtonAccept() {
         if (jButtonAccept == null) {
             jButtonAccept = new HoverButton("", ImageManagerImpl.getInstance().getDlgAcceptButtonImage(),
@@ -183,6 +175,4 @@ public class StackDialog extends IDialogPanel {
         }
         return jButtonResponse;
     }
-
-    private Dimension cardDimension;
  }

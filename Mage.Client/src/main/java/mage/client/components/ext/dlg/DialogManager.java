@@ -102,6 +102,36 @@ public class DialogManager extends JComponent implements MouseListener,
         setVisible(true);
     }
 
+    public void showChoiceDialog(CardsView cards, BigCard bigCard, UUID gameId) {
+
+        int w = 720;
+        int h = 550;
+
+        int height = getHeight();
+        int width = getWidth();
+
+        int x = ((width - w) / 2);
+        int y = ((height - h) / 2);
+
+        DlgParams params = new DlgParams();
+        params.rect = new Rectangle(x, y, w, h);
+        params.bigCard = bigCard;
+        params.gameId = gameId;
+        //params.feedbackPanel = feedbackPanel;
+        params.setCards(cards);
+        dialogContainer = new DialogContainer(MTGDialogs.ChoiceDialog, params);
+        dialogContainer.setVisible(true);
+        add(dialogContainer);
+
+        this.currentDialog = MTGDialogs.DialogContainer;
+
+        setDlgBounds(new Rectangle(x, y, w, h));
+
+        dialogContainer.showDialog(true);
+
+        setVisible(true);
+    }
+
     public void setDlgBounds(Rectangle r) {
         if (currentDialog == MTGDialogs.DialogContainer) {
             dialogContainer.setBounds(r.x, r.y, r.width, r.height);

@@ -11,4 +11,8 @@ public interface ImageManager {
     public Image getDlgActiveAcceptButtonImage();
     public Image getDlgCancelButtonImage();
     public Image getDlgActiveCancelButtonImage();
+    public Image getDlgPrevButtonImage();
+    public Image getDlgActivePrevButtonImage();
+    public Image getDlgNextButtonImage();
+    public Image getDlgActiveNextButtonImage();
 }

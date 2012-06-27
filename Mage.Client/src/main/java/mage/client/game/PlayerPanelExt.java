@@ -41,11 +41,12 @@ import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.components.HoverButton;
 import mage.client.components.MageRoundPane;
+import mage.client.components.ext.dlg.DialogManager;
 import mage.client.dialog.ShowCardsDialog;
 import mage.client.plugins.adapters.MageActionCallback;
 import mage.client.plugins.impl.Plugins;
+import mage.client.util.CardsViewUtil;
 import mage.client.util.Command;
-import mage.client.util.Config;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
 import mage.components.ImagePanel;
@@ -513,7 +514,8 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         if (graveyard == null) {
             graveyard = new ShowCardsDialog();
         }
-        graveyard.loadCards(player.getName() + " graveyard", player.getGraveyard(), bigCard, Config.dimensions, gameId, false);
+        //graveyard.loadCards(player.getName() + " graveyard", player.getGraveyard(), bigCard, Config.dimensions, gameId, false);
+        DialogManager.getManager().showChoiceDialog(CardsViewUtil.convertSimple(player.getGraveyard()), bigCard, gameId);
     }
 
     private void btnCheatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheatActionPerformed

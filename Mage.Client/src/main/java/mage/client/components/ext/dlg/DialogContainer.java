@@ -1,6 +1,7 @@
 package mage.client.components.ext.dlg;
 
 import mage.client.components.ext.MessageDlg;
+import mage.client.components.ext.dlg.impl.ChoiceDialog;
 import mage.client.components.ext.dlg.impl.StackDialog;
 
 import javax.swing.*;
@@ -69,24 +70,24 @@ public class DialogContainer extends JPanel {
             dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
             dlg.updateSize(params.rect.width - 80, params.rect.height - 80);
 
-        } else if (dialogType == DialogManager.MTGDialogs.ChoiceDialog) {
+        }*/ else if (dialogType == DialogManager.MTGDialogs.ChoiceDialog) {
 
             //backgroundColor = new Color(200, 200, 172, 120);
             //backgroundColor = new Color(180, 150, 200, 120);
             //backgroundColor = new Color(0, 255, 0, 60);
 
-            //latest:
-            backgroundColor = new Color(139, 46, 173, 20);
+            //backgroundColor = new Color(139, 46, 173, 20);
+            backgroundColor = new Color(0, 0, 0, 110);
             //backgroundColor = new Color(139, 46, 173, 0);
 
             alpha = 0;
             ChoiceDialog dlg = new ChoiceDialog(params);
             add(dlg);
-            GameManager.getManager().setCurrentChoiceDlg(dlg);
+            //GameManager.getManager().setCurrentChoiceDlg(dlg);
             dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
             dlg.updateSize(params.rect.width - 80, params.rect.height - 80);
 
-        } else if (dialogType == DialogManager.MTGDialogs.GraveDialog) {
+        } /*else if (dialogType == DialogManager.MTGDialogs.GraveDialog) {
             backgroundColor = new Color(20, 20, 20, 120);
             alpha = 0;
             GraveDialog dlg = new GraveDialog(params);
