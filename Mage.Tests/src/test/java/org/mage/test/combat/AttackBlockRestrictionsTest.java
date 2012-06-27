@@ -201,7 +201,7 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
 
         assertPowerToughness(playerB, "Champion of Lambholt", 2, 2);
 
-        assertLife(playerA, 17);
+        assertLife(playerA, 18);
         assertLife(playerB, 20);
     }
 
