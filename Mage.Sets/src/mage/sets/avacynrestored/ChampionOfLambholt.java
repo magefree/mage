@@ -101,7 +101,7 @@ class ChampionOfLambholtEffect extends RestrictionEffect<ChampionOfLambholtEffec
             Permanent sourcePermanent = game.getPermanent(source.getSourceId());
             if (sourcePermanent != null) {
                 return attacker.getControllerId().equals(sourcePermanent.getControllerId())
-                    && blocker.getPower().getValue() > attacker.getPower().getValue();
+                    && blocker.getPower().getValue() >= attacker.getPower().getValue();
             }
         }
         return true;
