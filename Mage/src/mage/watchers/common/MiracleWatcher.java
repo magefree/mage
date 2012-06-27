@@ -71,6 +71,9 @@ public class MiracleWatcher extends WatcherImpl<MiracleWatcher> {
 
     @Override
     public void watch(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.UNTAP_STEP_PRE) {
+            reset();
+        }
         if (event.getType() == GameEvent.EventType.DREW_CARD) {
             UUID playerId = event.getPlayerId();
             if (playerId != null) {
