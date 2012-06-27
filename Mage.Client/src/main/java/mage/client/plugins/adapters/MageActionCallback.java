@@ -162,7 +162,7 @@ public class MageActionCallback implements ActionCallback {
             ThreadUtils.threadPool2.submit(new Runnable() {
                 @Override
                 public void run() {
-                    ThreadUtils.sleep(700);
+                    ThreadUtils.sleep(300);
 
                     if (popupCard == null || !popupCard.equals(data.card)) {
                         return;
