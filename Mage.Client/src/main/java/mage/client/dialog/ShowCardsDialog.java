@@ -34,14 +34,6 @@
 
 package mage.client.dialog;
 
-import java.awt.Point;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.UUID;
-
-import javax.swing.JLayeredPane;
-import javax.swing.SwingUtilities;
-
 import mage.cards.CardDimensions;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
@@ -51,6 +43,12 @@ import mage.client.util.SettingsManager;
 import mage.client.util.gui.GuiDisplayUtil;
 import mage.view.CardsView;
 import mage.view.SimpleCardsView;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -76,7 +74,7 @@ public class ShowCardsDialog extends MageDialog implements MouseListener {
         this.title = name;
         cardArea.loadCards(showCards, bigCard, dimension, gameId, this);
         if (getParent() != MageFrame.getDesktop() /*|| this.isClosed*/) {
-            MageFrame.getDesktop().add(this, JLayeredPane.POPUP_LAYER);
+            MageFrame.getDesktop().add(this, JLayeredPane.DEFAULT_LAYER);
         }
         pack();
 
