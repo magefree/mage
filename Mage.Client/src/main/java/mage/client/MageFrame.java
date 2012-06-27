@@ -503,8 +503,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             if (frame.isVisible()) {
                 int z = desktopPane.getComponentZOrder(frame);
                 if (z < best) {
-                    best = z;
-                    topmost = (MagePane) frame;
+                    if (frame instanceof MagePane) {
+                        best = z;
+                        topmost = (MagePane) frame;
+                    }
                 }
             }
         }
