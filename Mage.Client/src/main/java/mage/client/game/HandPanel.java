@@ -1,22 +1,17 @@
 package mage.client.game;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridBagLayout;
-import java.util.UUID;
-
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
-
 import mage.Constants;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.Config;
 import mage.view.SimpleCardsView;
+
+import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.util.UUID;
 
 public class HandPanel extends JPanel {
 
@@ -78,11 +73,11 @@ public class HandPanel extends JPanel {
 
     public void sizeHand(double factor, boolean smallMode) {
         this.smallMode = smallMode;
-        int width = (int)(factor * CARD_WIDTH);
-        int bigWidth = (int)(Config.handScalingFactor * CARD_WIDTH);
-        handCardDimension = new Dimension(width, (int)(width * ASPECT_RATIO));
-        handCardDimensionBig = new Dimension(bigWidth, (int)(bigWidth * ASPECT_RATIO));
-           hand.setCardDimension(getHandCardDimension());
+        int width = (int) (factor * CARD_WIDTH);
+        int bigWidth = (int) (Config.handScalingFactor * CARD_WIDTH);
+        handCardDimension = new Dimension(width, (int) (width * ASPECT_RATIO));
+        handCardDimensionBig = new Dimension(bigWidth, (int) (bigWidth * ASPECT_RATIO));
+        hand.setCardDimension(getHandCardDimension());
         hand.sizeCards(getHandCardDimension());
     }
 

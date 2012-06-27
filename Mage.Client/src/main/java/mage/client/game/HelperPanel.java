@@ -28,6 +28,8 @@
 
 package mage.client.game;
 
+import mage.client.components.MageTextArea;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseListener;
@@ -45,24 +47,55 @@ public class HelperPanel extends JPanel {
     private javax.swing.JButton btnEndTurn;
     //private javax.swing.JButton btnStopTimer;
 
+    private MageTextArea textArea;
+    private javax.swing.JScrollPane jScrollPane1;
+
     private javax.swing.JButton linkLeft;
     private javax.swing.JButton linkRight;
     private javax.swing.JButton linkSpecial;
 
     public HelperPanel() {
+        initComponents();
+    }
+
+    private void initComponents() {
         setBackground(new Color(0, 0, 0, 100));
-        setLayout(new GridBagLayout());
+        //setLayout(new GridBagLayout());
+        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         setOpaque(false);
 
+        JPanel container = new JPanel();
+        container.setPreferredSize(new Dimension(100, 30));
+        container.setLayout(new GridBagLayout());
+        container.setOpaque(false);
+
+        JPanel jPanel = new JPanel();
+
+        textArea = new MageTextArea();
+        textArea.setText("<Empty>");
+
+        //jScrollPane1 = new javax.swing.JScrollPane();
+        //jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        //jScrollPane1.setViewportView(textArea);
+        //jScrollPane1.setBorder(null);
+
+        jPanel.setOpaque(false);
+        jPanel.setBackground(new Color(0, 0, 0, 80));
+        //jPanel.add(jScrollPane1);
+        jPanel.add(textArea);
+        add(jPanel);
+
+        add(container);
+        
         btnSpecial = new JButton("Special");
         btnSpecial.setVisible(false);
-        add(btnSpecial);
+        container.add(btnSpecial);
         btnLeft = new JButton("OK");
         btnLeft.setEnabled(false);
-        add(btnLeft);
+        container.add(btnLeft);
         btnRight = new JButton("Cancel");
         btnRight.setEnabled(false);
-        add(btnRight);
+        container.add(btnRight);
 
         //btnStopTimer = new JButton("Stop timer");
         //btnStopTimer.setToolTipText("Stop auto phase skipping timer");
@@ -70,7 +103,7 @@ public class HelperPanel extends JPanel {
 
         btnEndTurn = new JButton("End Turn");
         btnEndTurn.setToolTipText("End The Turn");
-        add(btnEndTurn);
+        container.add(btnEndTurn);
 
         btnLeft.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,5 +167,13 @@ public class HelperPanel extends JPanel {
 
     public void addEndTurnListener(MouseListener mouseListener) {
         this.btnEndTurn.addMouseListener(mouseListener);
+    }
+    
+    public void setMessage(String message) {
+        if (message.contains("Use")) {
+            textArea.setText("Use ability?");
+        } else {
+            textArea.setText(message);
+        }
     }
 }

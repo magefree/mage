@@ -89,7 +89,7 @@ public class GamePanel extends javax.swing.JPanel {
     private String chosenHandKey = "You";
     private boolean smallMode = false;
 
-    private int cachedStackSize;
+    private HelperPanel helper;
 
     /** Creates new form GamePanel */
     public GamePanel() {
@@ -213,6 +213,9 @@ public class GamePanel extends javax.swing.JPanel {
         DialogManager.getManager().setScreenWidth(rect.width);
         DialogManager.getManager().setScreenHeight(rect.height);
         DialogManager.getManager().setBounds(0, 0, rect.width, rect.height);
+
+        //helper.setPreferredSize(new Dimension(rect.width, 80));
+        //helper.setMaximumSize(new Dimension(rect.width, 80));
     }
 
     public synchronized void showGame(UUID gameId, UUID playerId) {
@@ -721,6 +724,7 @@ public class GamePanel extends javax.swing.JPanel {
         });
 
         stack.setPreferredSize(new java.awt.Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight + 25));
+        stack.setBackground(new Color(0,0,0,0));
 
         btnStopReplay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/control_stop.png"))); // NOI18N
         btnStopReplay.addActionListener(new java.awt.event.ActionListener() {
@@ -794,7 +798,7 @@ public class GamePanel extends javax.swing.JPanel {
                                 .addComponent(btnStopWatching)
                                 .addContainerGap(62, Short.MAX_VALUE))
                         .addComponent(bigCard, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-                        .addComponent(feedbackPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+                                //.addComponent(feedbackPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
                         .addComponent(stack, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
                         .addGroup(gl_pnlGameInfo.createSequentialGroup()
                                 .addContainerGap()
@@ -804,17 +808,17 @@ public class GamePanel extends javax.swing.JPanel {
         gl_pnlGameInfo.setVerticalGroup(
             gl_pnlGameInfo.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(gl_pnlGameInfo.createSequentialGroup()
-                .addComponent(bigCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
-                .addComponent(feedbackPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(stack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 164, Short.MAX_VALUE)
-                .addComponent(pnlReplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(gl_pnlGameInfo.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnConcede)
-                    .addComponent(btnSwitchHands)
-                    .addComponent(btnStopWatching)))
+                    .addComponent(bigCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(1, 1, 1)
+                            //.addComponent(feedbackPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 164, Short.MAX_VALUE)
+                    .addComponent(pnlReplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(gl_pnlGameInfo.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnConcede)
+                            .addComponent(btnSwitchHands)
+                            .addComponent(btnStopWatching)))
         );
 
         pnlBattlefield.setLayout(new java.awt.GridBagLayout());
@@ -867,8 +871,8 @@ public class GamePanel extends javax.swing.JPanel {
         //jPhases.add(endButtonTip);
 
         pnlReplay.setOpaque(false);
-        HelperPanel helper = new HelperPanel();
-        helper.setPreferredSize(new Dimension(100, 30));
+        helper = new HelperPanel();
+        helper.setPreferredSize(new Dimension(100, 80));
         helper.addEndTurnListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -891,12 +895,12 @@ public class GamePanel extends javax.swing.JPanel {
                     .addComponent(pnlGameInfo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addGap(0)
                     .addGroup(gl_jPanel3.createParallelGroup(Alignment.LEADING)
-                        .addComponent(handContainer, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPhases, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(helper, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(gl_jPanel3.createSequentialGroup()
-                                .addComponent(pnlBattlefield, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                        )))
+                            .addComponent(handContainer, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    //.addComponent(jPhases, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(helper, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(gl_jPanel3.createSequentialGroup()
+                                    .addComponent(pnlBattlefield, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            )))
         );
         gl_jPanel3.setVerticalGroup(
                 gl_jPanel3.createParallelGroup(Alignment.TRAILING)
@@ -905,7 +909,8 @@ public class GamePanel extends javax.swing.JPanel {
                                 .addPreferredGap(ComponentPlacement.RELATED)
                                 .addComponent(helper, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 .addComponent(handContainer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jPhases, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                //.addComponent(jPhases, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        )
                         .addComponent(pnlGameInfo, GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
         jPanel3.setLayout(gl_jPanel3);

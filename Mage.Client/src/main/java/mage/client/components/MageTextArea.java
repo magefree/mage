@@ -1,6 +1,5 @@
 package mage.client.components;
 
-import mage.view.CardView;
 import org.mage.card.arcane.ManaSymbols;
 import org.mage.card.arcane.UI;
 
@@ -20,18 +19,16 @@ public class MageTextArea extends JEditorPane {
         setEditable(false);
         setBackground(new Color(0, 0, 0, 0)); // transparent background
         setFocusable(false);
-        setBorder(BorderFactory.createLineBorder(Color.red));
+        //setBorder(BorderFactory.createLineBorder(Color.red));
         //setSelectionColor(new Color(0, 0, 0, 0));
     }
 
     public void setText(String text) {
-        setText(text, null);
+        setText(text, 16);
     }
 
-    public void setText(String text, CardView source) {
+    public void setText(String text, int fontSize) {
         if (text == null) return;
-
-        int fontSize = 16;
 
         String fontFamily = "arial";
 
