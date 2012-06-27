@@ -94,6 +94,8 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     private boolean animationInProgress = false;
     private JButton dayNightButton;
 
+    private boolean displayTitleAnyway;
+
     public CardPanel(CardView newGameCard, UUID gameId, final boolean loadImage, ActionCallback callback, final boolean foil) {
         this.gameCard = newGameCard;
         this.callback = callback;
@@ -197,6 +199,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
                     if (gameCard.isTransformed()) {
                         toggleTransformed();
                     }
+                    setText(gameCard);
                 } catch (Exception e) {
                     e.printStackTrace();
                 } catch (Error err) {
@@ -207,6 +210,11 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     }
 
     private void setText(CardView card) {
+        if (displayTitleAnyway) {
+            titleText.setText(card.getName());
+            return;
+        }
+
         if (hasImage) {
             titleText.setText("");
         } else {
@@ -593,6 +601,12 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
             return gameCard.isTransformed();
         }
         return false;
+    }
+
+    @Override
+    public void showCardTitle() {
+        displayTitleAnyway = true;
+        setText(gameCard);
     }
 
     @Override

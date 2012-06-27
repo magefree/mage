@@ -276,7 +276,7 @@ public class BigCard extends JComponent {
     }// </editor-fold>//GEN-END:initComponents
 
     public void setDefaultImage() {
-           bigImage = ImageHelper.getImageFromResources("/empty.png");
+        bigImage = ImageHelper.getImageFromResources("/empty.png");
         bigImage = ImageHelper.getResizedImage((BufferedImage) bigImage, getWidth(), getHeight());
     }
 

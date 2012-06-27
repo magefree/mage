@@ -28,13 +28,13 @@
 
 package mage.client.util;
 
+import mage.cards.CardDimensions;
+import org.apache.log4j.Logger;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
-
-import mage.cards.CardDimensions;
-import org.apache.log4j.Logger;
 
 /**
  *
@@ -48,8 +48,10 @@ public class Config {
     public static final String serverName;
     public static final int port;
     public static final double cardScalingFactor;
+    public static final double cardScalingFactorEnlarged;
     public static final double handScalingFactor;
     public static final CardDimensions dimensions;
+    public static final CardDimensions dimensionsEnlarged;
 
     public static final String defaultGameType;
     public static final String defaultDeckPath;
@@ -67,6 +69,7 @@ public class Config {
         port = Integer.parseInt(p.getProperty("port"));
         remoteServer = p.getProperty("remote-server");
         cardScalingFactor = Double.valueOf(p.getProperty("card-scaling-factor"));
+        cardScalingFactorEnlarged = Double.valueOf(p.getProperty("card-scaling-factor-enlarged"));
         handScalingFactor = Double.valueOf(p.getProperty("hand-scaling-factor"));
         defaultGameType = p.getProperty("default-game-type", "Human");
         defaultDeckPath = p.getProperty("default-deck-path");
@@ -74,6 +77,7 @@ public class Config {
         defaultComputerName = p.getProperty("default-computer-name");
 
         dimensions = new CardDimensions(cardScalingFactor);
+        dimensionsEnlarged = new CardDimensions(cardScalingFactorEnlarged);
     }
 
 }

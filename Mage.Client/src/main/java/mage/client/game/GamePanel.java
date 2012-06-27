@@ -591,7 +591,7 @@ public class GamePanel extends javax.swing.JPanel {
 
     private ShowCardsDialog showCards(String title, CardsView cards, boolean required) {
         ShowCardsDialog showCards = new ShowCardsDialog();
-        showCards.loadCards(title, cards, bigCard, Config.dimensions, gameId, required);
+        showCards.loadCards(title, cards, bigCard, Config.dimensionsEnlarged, gameId, required);
         return showCards;
     }
 

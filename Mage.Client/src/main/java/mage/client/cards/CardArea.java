@@ -28,16 +28,6 @@
 
 package mage.client.cards;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Rectangle;
-import java.awt.event.MouseListener;
-import java.util.UUID;
-
-import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-
 import mage.cards.CardDimensions;
 import mage.cards.MageCard;
 import mage.client.plugins.impl.Plugins;
@@ -47,6 +37,11 @@ import mage.view.AbilityView;
 import mage.view.CardView;
 import mage.view.CardsView;
 import mage.view.SimpleCardsView;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseListener;
+import java.util.UUID;
 
 public class CardArea extends JPanel {
 
@@ -78,7 +73,7 @@ public class CardArea extends JPanel {
         if (showCards != null && showCards.size() < 10)
             loadCardsFew(showCards, bigCard, gameId, listener);
         else
-            loadCardsMany(showCards, bigCard, gameId, listener);
+            loadCardsMany(showCards, bigCard, gameId, listener, dimension);
         cardArea.revalidate();
 
         this.revalidate();
@@ -88,7 +83,7 @@ public class CardArea extends JPanel {
     public void loadCardsNarrow(CardsView showCards, BigCard bigCard, CardDimensions dimension, UUID gameId, MouseListener listener) {
         this.reloaded = true;
         cardArea.removeAll();
-        loadCardsMany(showCards, bigCard, gameId, listener);
+        loadCardsMany(showCards, bigCard, gameId, listener, dimension);
         cardArea.revalidate();
 
         this.revalidate();
@@ -99,13 +94,13 @@ public class CardArea extends JPanel {
         Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
         Dimension dimension = new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
         for (CardView card : showCards.values()) {
-            addCard(card, bigCard, gameId, rectangle, dimension, listener);
+            addCard(card, bigCard, gameId, rectangle, dimension, Config.dimensions, listener);
             rectangle.translate(Config.dimensions.frameWidth, 0);
         }
         cardArea.setPreferredSize(new Dimension(Config.dimensions.frameWidth * showCards.size(), Config.dimensions.frameHeight));
     }
 
-    private void addCard(CardView card, BigCard bigCard, UUID gameId, Rectangle rectangle, Dimension dimension, MouseListener listener) {
+    private void addCard(CardView card, BigCard bigCard, UUID gameId, Rectangle rectangle, Dimension dimension, CardDimensions cardDimensions, MouseListener listener) {
         if (card instanceof AbilityView) {
             CardView tmp = ((AbilityView) card).getSourceCard();
             tmp.overrideRules(card.getRules());
@@ -115,25 +110,27 @@ public class CardArea extends JPanel {
             card = tmp;
         }
         MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, dimension, gameId, true);
+
         cardImg.setBounds(rectangle);
         if (listener != null)
             cardImg.addMouseListener(listener);
         cardArea.add(cardImg);
         cardArea.moveToFront(cardImg);
         cardImg.update(card);
-        cardImg.setCardBounds(rectangle.x, rectangle.y, Config.dimensions.frameWidth, Config.dimensions.frameHeight);
+        cardImg.setCardBounds(rectangle.x, rectangle.y, cardDimensions.frameWidth, cardDimensions.frameHeight);
+        cardImg.showCardTitle();
     }
 
-    private void loadCardsMany(CardsView showCards, BigCard bigCard, UUID gameId, MouseListener listener) {
+    private void loadCardsMany(CardsView showCards, BigCard bigCard, UUID gameId, MouseListener listener, CardDimensions cardDimensions) {
         int columns = 1;
         if (showCards != null && showCards.size() > 0) {
-            Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
-            Dimension dimension = new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
+            Rectangle rectangle = new Rectangle(cardDimensions.frameWidth, cardDimensions.frameHeight);
+            Dimension dimension = new Dimension(cardDimensions.frameWidth, cardDimensions.frameHeight);
             int count = 0;
             for (CardView card : showCards.values()) {
-                addCard(card, bigCard, gameId, rectangle, dimension, listener);
+                addCard(card, bigCard, gameId, rectangle, dimension, cardDimensions, listener);
                 if (count >= 20) {
-                    rectangle.translate(Config.dimensions.frameWidth, -400);
+                    rectangle.translate(cardDimensions.frameWidth, -400);
                     columns++;
                     count = 0;
                 } else {
@@ -142,7 +139,7 @@ public class CardArea extends JPanel {
                 }
             }
         }
-        cardArea.setPreferredSize(new Dimension(Config.dimensions.frameWidth * columns, Config.dimensions.frameHeight + 400));
+        cardArea.setPreferredSize(new Dimension(cardDimensions.frameWidth * columns, cardDimensions.frameHeight + 400));
     }
 
     public boolean isReloaded() {

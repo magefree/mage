@@ -1,12 +1,11 @@
 package mage.cards;
 
-import java.awt.Image;
-import java.util.UUID;
-
-import javax.swing.JPanel;
-
 import mage.cards.action.ActionCallback;
 import mage.view.CardView;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.UUID;
 
 public abstract class MageCard extends JPanel {
     private static final long serialVersionUID = 6089945326434301879L;
@@ -29,4 +28,5 @@ public abstract class MageCard extends JPanel {
     abstract public void updateCallback(ActionCallback callback, UUID gameId);
     abstract public void toggleTransformed();
     abstract public boolean isTransformed();
+    abstract public void showCardTitle();
 }

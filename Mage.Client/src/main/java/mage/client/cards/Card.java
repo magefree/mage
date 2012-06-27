@@ -499,4 +499,8 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
     public boolean isTransformed() {
         return false;
     }
+
+    @Override
+    public void showCardTitle() {
+    }
 }
