@@ -499,7 +499,11 @@ public class MageServerImpl implements MageServer {
         execute("sendPlayerInteger", sessionId, new Action() {
             public void execute() {
                 User user = SessionManager.getInstance().getUser(sessionId);
-                user.sendPlayerInteger(gameId, data);
+                if (user != null) {
+                    user.sendPlayerInteger(gameId, data);
+                } else {
+                    logger.warn("Your session expired: gameId=" + gameId + ", sessionId=" + sessionId);
+                }
             }
         });
     }
