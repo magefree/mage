@@ -103,6 +103,7 @@ public class HelperPanel extends JPanel {
 
         btnEndTurn = new JButton("End Turn");
         btnEndTurn.setToolTipText("End The Turn");
+        btnEndTurn.setFocusable(false);
         container.add(btnEndTurn);
 
         btnLeft.addActionListener(new java.awt.event.ActionListener() {
@@ -183,5 +184,9 @@ public class HelperPanel extends JPanel {
         } else {
             btnEndTurn.setVisible(false);
         }
+    }
+
+    public void requestFocus() {
+        this.btnRight.requestFocus();
     }
 }

@@ -169,6 +169,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
         }
         if (requestFocusAllowed) {
             this.btnRight.requestFocus();
+            this.helper.requestFocus();
         }
     }
 
