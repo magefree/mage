@@ -53,6 +53,8 @@ public class RateCard {
         }
         int type = 0;
         if (card.getCardType().contains(Constants.CardType.CREATURE)) {
+            type = 15;
+        } if (card.getCardType().contains(Constants.CardType.CREATURE)) {
             type = 10;
         } else if (card.getSubtype().contains("Equipment")) {
             type = 8;
