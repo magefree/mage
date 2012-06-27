@@ -88,6 +88,7 @@ public class Cards extends javax.swing.JPanel {
      * @param color
      */
     public void setBackgroundColor(Color color) {
+        setBackground(color);
         cardArea.setOpaque(true);
         cardArea.setBackground(color);
     }

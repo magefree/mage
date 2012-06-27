@@ -724,7 +724,7 @@ public class GamePanel extends javax.swing.JPanel {
         });
 
         stack.setPreferredSize(new java.awt.Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight + 25));
-        stack.setBackground(new Color(0,0,0,0));
+        stack.setBackgroundColor(new Color(0,0,0,0));
 
         btnStopReplay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/control_stop.png"))); // NOI18N
         btnStopReplay.addActionListener(new java.awt.event.ActionListener() {
