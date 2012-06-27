@@ -176,4 +176,12 @@ public class HelperPanel extends JPanel {
             textArea.setText(message);
         }
     }
+    
+    public void setYourTurn(boolean yourTurn) {
+        if (yourTurn) {
+            btnEndTurn.setVisible(true);
+        } else {
+            btnEndTurn.setVisible(false);
+        }
+    }
 }

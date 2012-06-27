@@ -557,15 +557,18 @@ public class GamePanel extends javax.swing.JPanel {
     public void select(String message, GameView gameView) {
         updateGame(gameView);
         String messageToDisplay = message;
+        Map<String, Serializable> options = null;
         for (PlayerView playerView : gameView.getPlayers()) {
             if (playerView.getPlayerId().equals(playerId)) {
                 if (playerView.isActive()) {
+                    options = new HashMap<String, Serializable>();
+                    options.put("your_turn", true);
                     messageToDisplay = message + " <div style='font-size:11pt'>Your turn</div>";
                 }
                 break;
             }
         }
-        this.feedbackPanel.getFeedback(FeedbackMode.SELECT, messageToDisplay, gameView.getSpecial(), null);
+        this.feedbackPanel.getFeedback(FeedbackMode.SELECT, messageToDisplay, gameView.getSpecial(), options);
         if (PhaseManager.getInstance().isSkip(gameView, message)) {
             this.feedbackPanel.doClick();
         }
