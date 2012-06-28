@@ -1,16 +1,16 @@
 /*
- *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
- * 
+ *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
- * 
+ *
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
- * 
+ *
  *     2. Redistributions in binary form must reproduce the above copyright notice, this list
  *        of conditions and the following disclaimer in the documentation and/or other materials
  *        provided with the distribution.
- * 
+ *
  *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
@@ -20,70 +20,49 @@
  *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.game.tournament;
+package mage.player.ai;
 
-import mage.game.match.Match;
-
-import java.util.UUID;
+import mage.Constants.RangeOfInfluence;
+import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author nantuko
  */
-public class TournamentPairing {
+public class ComputerDraftPlayer extends ComputerPlayer<ComputerDraftPlayer> implements Player {
 
-    UUID id = UUID.randomUUID();
-    Match match;
-    TournamentPlayer player1;
-    TournamentPlayer player2;
-
-    public TournamentPairing(TournamentPlayer player1, TournamentPlayer player2) {
-        this.player1 = player1;
-        this.player2 = player2;
+    public ComputerDraftPlayer(String name, RangeOfInfluence range) {
+        super(name, range);
     }
 
-    public UUID getId() {
-        return id;
+    public ComputerDraftPlayer(String name, RangeOfInfluence range, int skill) {
+        super(name, range);
     }
 
-    public TournamentPlayer getPlayer1() {
-        return this.player1;
+    public ComputerDraftPlayer(final ComputerDraftPlayer player) {
+        super(player);
     }
 
-    public TournamentPlayer getPlayer2() {
-        return this.player2;
+    @Override
+    public ComputerDraftPlayer copy() {
+        return new ComputerDraftPlayer(this);
     }
 
-    public Match getMatch() {
-        return match;
+    @Override
+    public boolean autoLoseGame() {
+        return true;
     }
 
-    public void setMatch(Match match) {
-        this.match = match;
-    }
-
-    public void eliminatePlayers() {
-        if (match.getPlayer(player1.getPlayer().getId()).getWins() < match.getWinsNeeded()) {
-            player1.setEliminated();
-        }
-        if (match.getPlayer(player2.getPlayer().getId()).getWins() < match.getWinsNeeded()) {
-            player2.setEliminated();
-        }
-    }
-
-    public void eliminateComputer() {
-        if (!player1.getPlayer().isHuman()) {
-            player1.setEliminated();
-            return;
-        }
-        if (!player2.getPlayer().isHuman()) {
-            player2.setEliminated();
-        }
+    @Override
+    public boolean priority(Game game) {
+        game.concede(playerId);
+        return true;
     }
 }

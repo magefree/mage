@@ -110,6 +110,7 @@ public interface Player extends MageItem, Copyable<Player> {
     public UserData getUserData();
     public void setUserData(UserData userData);
     public boolean canLose(Game game);
+    public boolean autoLoseGame();
 
     /**
      * Returns a set of players which turns under you control.

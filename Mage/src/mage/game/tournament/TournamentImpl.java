@@ -28,26 +28,17 @@
 
 package mage.game.tournament;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.UUID;
-import java.util.concurrent.CopyOnWriteArrayList;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.cards.decks.Deck;
-import mage.game.events.Listener;
-import mage.game.events.PlayerQueryEvent;
-import mage.game.events.PlayerQueryEventSource;
-import mage.game.events.TableEvent;
+import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
-import mage.game.events.TableEventSource;
 import mage.game.match.Match;
 import mage.players.Player;
 import org.apache.log4j.Logger;
+
+import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  *
@@ -177,6 +168,7 @@ public abstract class TournamentImpl implements Tournament {
     protected void updateResults() {
         for (TournamentPlayer player: players.values()) {
             player.setResults("");
+            player.setPoints(0);
         }
         for (Round round: rounds) {
             for (TournamentPairing pair: round.getPairs()) {
@@ -193,6 +185,18 @@ public abstract class TournamentImpl implements Tournament {
                 sb2.append("-").append(match.getPlayer(player1Id).getWins()).append(") ");
                 players.get(player1Id).setResults(sb1.toString());
                 players.get(player2Id).setResults(sb2.toString());
+                if (match.getPlayer(player1Id).getWins() > match.getPlayer(player2Id).getWins()) {
+                    int points = players.get(player1Id).getPoints();
+                    players.get(player1Id).setPoints(points + 3);
+                } else if (match.getPlayer(player1Id).getWins() < match.getPlayer(player2Id).getWins()) {
+                    int points = players.get(player2Id).getPoints();
+                    players.get(player2Id).setPoints(points + 3);
+                } else {
+                    int points = players.get(player1Id).getPoints();
+                    players.get(player1Id).setPoints(points + 1);
+                    points = players.get(player2Id).getPoints();
+                    players.get(player2Id).setPoints(points + 1);
+                }
             }
         }
 

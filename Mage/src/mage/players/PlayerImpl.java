@@ -1440,4 +1440,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     public void setCanPaySacrificeCost(boolean canPaySacrificeCost) {
         this.canPaySacrificeCost = canPaySacrificeCost;
     }
+
+    @Override
+    public boolean autoLoseGame() {
+        return false;
+    }
 }

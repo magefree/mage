@@ -28,6 +28,9 @@
 
 package mage.game.tournament;
 
+import java.util.Map;
+import java.util.UUID;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
@@ -40,6 +43,14 @@ public abstract class TournamentSingleElimination extends TournamentImpl {
 
     @Override
     protected void runTournament() {
+
+        for (Map.Entry<UUID, TournamentPlayer> entry: players.entrySet()) {
+            if (entry.getValue().getPlayer().autoLoseGame()) {
+                entry.getValue().setEliminated();
+                entry.getValue().setResults("Auto Eliminated");
+            }
+        }
+        
         while (this.getActivePlayers().size() > 1) {
             Round round = createRoundRandom();
             playRound(round);

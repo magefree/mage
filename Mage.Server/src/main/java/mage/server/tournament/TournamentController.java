@@ -28,9 +28,6 @@
 
 package mage.server.tournament;
 
-import java.util.Map.Entry;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 import mage.MageException;
 import mage.cards.decks.Deck;
 import mage.game.GameException;
@@ -51,6 +48,10 @@ import mage.server.util.ThreadExecutor;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.TournamentView;
 import org.apache.log4j.Logger;
+
+import java.util.Map.Entry;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  *
