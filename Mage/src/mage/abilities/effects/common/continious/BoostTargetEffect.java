@@ -34,6 +34,8 @@ import mage.Constants.SubLayer;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.DomainValue;
+import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
@@ -64,7 +66,7 @@ public class BoostTargetEffect extends ContinuousEffectImpl<BoostTargetEffect> {
      * @param lockedIn if true, power and toughness will be calculated only once, when the ability resolves
      */
     public BoostTargetEffect(DynamicValue power, DynamicValue toughness, Duration duration, boolean lockedIn) {
-        super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
+        super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, isCanKill(toughness) ? Outcome.UnboostCreature : Outcome.BoostCreature);
         this.power = power;
         this.toughness = toughness;
         this.lockedIn = lockedIn;
@@ -75,6 +77,20 @@ public class BoostTargetEffect extends ContinuousEffectImpl<BoostTargetEffect> {
         this.power = effect.power.clone();
         this.toughness = effect.toughness.clone();
         this.lockedIn = effect.lockedIn;
+    }
+
+    private static boolean isCanKill(DynamicValue toughness) {
+        if (toughness instanceof StaticValue) {
+            return toughness.calculate(null, null) < 0;
+        }
+        if (toughness instanceof SignInversionDynamicValue) {
+            // count this class as used for "-{something_positive}"
+            return true;
+        }
+        if (toughness instanceof DomainValue) {
+            return ((DomainValue)toughness).getAmount() < 0;
+        }
+        return false;
     }
 
     @Override

@@ -58,6 +58,9 @@ public class DomainValue implements DynamicValue {
         return amount.toString();
     }
 
+    public Integer getAmount() {
+        return amount;
+    }
 
     @Override
     public String getMessage() {
