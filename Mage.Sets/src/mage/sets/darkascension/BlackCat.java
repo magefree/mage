@@ -29,7 +29,6 @@
  */
 package mage.sets.darkascension;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
@@ -38,6 +37,8 @@ import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  *
@@ -57,7 +58,7 @@ public class BlackCat extends CardImpl<BlackCat> {
 
         // When Black Cat dies, target opponent discards a card at random.
         Ability ability = new DiesTriggeredAbility(new DiscardTargetEffect(1, true),false);
-        ability.addTarget(new TargetOpponent());
+        ability.addTarget(new TargetOpponent(true));
         this.addAbility(ability);
     }
 
