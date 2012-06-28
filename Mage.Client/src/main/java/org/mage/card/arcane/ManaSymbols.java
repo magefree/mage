@@ -1,9 +1,13 @@
 package org.mage.card.arcane;
 
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Rectangle;
+import mage.client.cards.CardsStorage;
+import mage.client.util.ImageHelper;
+import mage.client.util.gui.BufferedImageBuilder;
+import org.apache.log4j.Logger;
+import org.mage.plugins.card.constants.Constants;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.HashMap;
@@ -11,12 +15,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
-import javax.imageio.ImageIO;
-import mage.client.cards.CardsStorage;
-import mage.client.util.ImageHelper;
-import mage.client.util.gui.BufferedImageBuilder;
-import org.apache.log4j.Logger;
-import org.mage.plugins.card.constants.Constants;
 
 public class ManaSymbols {
 
@@ -171,16 +169,23 @@ public class ManaSymbols {
     }
 
     static public synchronized String replaceSymbolsWithHTML(String value, Type type) {
-        if (type.equals(Type.TOOLTIP)) {
-            return replaceSymbolsPattern.matcher(value).replaceAll("<img src='file:plugins/images/symbols/small/$1$2.jpg' alt='$1$2' width=11 height=11>");
-        } else if (type.equals(Type.CARD)) {
-            value = value.replace("{slash}", "<img src='file:plugins/images/symbols/medium/slash.jpg' alt='slash' width=10 height=13>");
-            return replaceSymbolsPattern.matcher(value).replaceAll("<img src='file:plugins/images/symbols/medium/$1$2.jpg' alt='$1$2' width=12 height=12>");
-        } else if (type.equals(Type.PAY)) {
-            value = value.replace("{slash}", "<img src='file:plugins/images/symbols/medium/slash.jpg' alt='slash' width=10 height=13>");
-            return replaceSymbolsPattern.matcher(value).replaceAll("<img src='file:plugins/images/symbols/medium/$1$2.jpg' alt='$1$2' width=15 height=15>");
+        value = value.replace("{source}", "|source|");
+        value = value.replace("{this}", "|this|");
+        String replaced = value;
+        if (!manaImages.isEmpty()) {
+            if (type.equals(Type.TOOLTIP)) {
+                replaced = replaceSymbolsPattern.matcher(value).replaceAll("<img src='file:plugins/images/symbols/small/$1$2.jpg' alt='$1$2' width=11 height=11>");
+            } else if (type.equals(Type.CARD)) {
+                value = value.replace("{slash}", "<img src='file:plugins/images/symbols/medium/slash.jpg' alt='slash' width=10 height=13>");
+                replaced = replaceSymbolsPattern.matcher(value).replaceAll("<img src='file:plugins/images/symbols/medium/$1$2.jpg' alt='$1$2' width=12 height=12>");
+            } else if (type.equals(Type.PAY)) {
+                value = value.replace("{slash}", "<img src='file:plugins/images/symbols/medium/slash.jpg' alt='slash' width=10 height=13>");
+                replaced = replaceSymbolsPattern.matcher(value).replaceAll("<img src='file:plugins/images/symbols/medium/$1$2.jpg' alt='$1$2' width=15 height=15>");
+            }
         }
-        return value;
+        replaced = replaced.replace("|source|", "{source}");
+        replaced = replaced.replace("|this|", "{this}");
+        return replaced;
     }
 
     static public String replaceSetCodeWithHTML(String set, String rarity) {

@@ -9,14 +9,14 @@ import org.apache.log4j.Logger;
 import org.jdesktop.layout.GroupLayout;
 import org.jdesktop.layout.LayoutStyle;
 import org.jdesktop.swingx.JXPanel;
+import org.mage.card.arcane.ManaSymbols;
+import org.mage.card.arcane.UI;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 /**
  * Dialog for choosing abilities.
@@ -226,12 +226,87 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
         action.actionPerformed(null);
     }
 
+    public class ImageRenderer2 extends JEditorPane implements ListCellRenderer {
+
+        public final Map<String, String> cache = new HashMap<String, String>();
+        
+        public Component getListCellRendererComponent(
+                javax.swing.JList list,
+                Object value,
+                int index,
+                boolean isSelected,
+                boolean cellHasFocus
+        ) {
+
+            setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 6));
+
+            UI.setHTMLEditorKit(this);
+
+            setOpaque(false);
+            setBackground(new Color(0,0,0,0));
+
+            String text = value.toString();
+
+            if (cache.containsKey(text)) {
+                text = cache.get(text);
+            } else {
+                StringBuilder buffer = getHtmlForText(isSelected, text);
+                String rendered = buffer.toString();
+                cache.put(text, rendered);
+                text = rendered;
+            }
+
+            final String finalText = text;
+            System.out.println(finalText);
+
+            ImageRenderer2.super.setText(finalText);
+            setCaretPosition(0);
+
+            return this;
+        }
+
+        private StringBuilder getHtmlForText(boolean isSelected, String text) {
+            int fontSize = 16;
+
+            String fontFamily = "arial";
+
+            final StringBuilder buffer = new StringBuilder(512);
+            buffer.append("<html><body style='font-family:");
+            buffer.append(fontFamily);
+            buffer.append(";font-size:");
+            buffer.append(fontSize);
+            buffer.append("pt;margin:3px 3px 3px 3px;");
+            if (isSelected) {
+                buffer.append("color: #4093D0'>");
+            } else {
+                buffer.append("color: #FFFFFF'>");
+            }
+            buffer.append("<b>");
+
+            text = text.replaceAll("#([^#]+)#", "<i>$1</i>");
+            text = text.replaceAll("\\s*//\\s*", "<hr width='50%'>");
+            text = text.replace("\r\n", "<div style='font-size:5pt'></div>");
+            //text += "<br>";
+
+            if (text.length() > 0) {
+                buffer.append(ManaSymbols.replaceSymbolsWithHTML(text, ManaSymbols.Type.PAY));
+            }
+
+            buffer.append("</b></body></html>");
+            return buffer;
+        }
+
+
+    }
+
+
     class ImageRenderer extends DefaultListCellRenderer {
 
         public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
             Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
 
             JLabel label = ((JLabel) c);
+
             label.setOpaque(false);
             label.setForeground(Color.white);
 
@@ -316,8 +391,8 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
 
         List<Object> objectList = new ArrayList<Object>();
         objectList.add("T: add {R} to your mana pool. 111111111111111111111111111");
-        objectList.add("T: add {B} to your mana pool");
-        objectList.add("T: add {B} to your mana pool");
+        objectList.add("T: add {B} to your mana pool. {source} deals 1 damage to you.");
+        objectList.add("{T}: add {B} to your mana pool");
         objectList.add("T: add {B} to your mana pool");
         objectList.add("T: add {B} to your mana pool");
         objectList.add("T: add {B} to your mana pool");

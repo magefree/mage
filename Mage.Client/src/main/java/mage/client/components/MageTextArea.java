@@ -30,9 +30,9 @@ public class MageTextArea extends JEditorPane {
     public void setText(String text, int fontSize) {
         if (text == null) return;
 
-        String fontFamily = "arial";
+        String fontFamily = "times";
 
-        final StringBuffer buffer = new StringBuffer(512);
+        final StringBuilder buffer = new StringBuilder(512);
         buffer.append("<html><body style='font-family:");
         buffer.append(fontFamily);
         buffer.append(";font-size:");
