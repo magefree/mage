@@ -91,10 +91,10 @@ public class HelperPanel extends JPanel {
         btnSpecial.setVisible(false);
         container.add(btnSpecial);
         btnLeft = new JButton("OK");
-        btnLeft.setEnabled(false);
+        btnLeft.setVisible(false);
         container.add(btnLeft);
         btnRight = new JButton("Cancel");
-        btnRight.setEnabled(false);
+        btnRight.setVisible(false);
         container.add(btnRight);
 
         //btnStopTimer = new JButton("Stop timer");
@@ -138,11 +138,11 @@ public class HelperPanel extends JPanel {
     }
 
     public void setState(String txtLeft, boolean leftVisible, String txtRight, boolean rightVisible) {
-        this.btnLeft.setEnabled(leftVisible);
+        this.btnLeft.setVisible(leftVisible);
         if (!txtLeft.isEmpty()) {
             this.btnLeft.setText(txtLeft);
         }
-        this.btnRight.setEnabled(rightVisible);
+        this.btnRight.setVisible(rightVisible);
         if (!txtRight.isEmpty()) {
             this.btnRight.setText(txtRight);
         }
@@ -154,7 +154,7 @@ public class HelperPanel extends JPanel {
     }
 
     public void setRight(String txtRight, boolean rightVisible) {
-        this.btnRight.setEnabled(rightVisible);
+        this.btnRight.setVisible(rightVisible);
         if (!txtRight.isEmpty()) {
             this.btnRight.setText(txtRight);
         }
