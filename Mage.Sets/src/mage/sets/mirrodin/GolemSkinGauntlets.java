@@ -27,19 +27,20 @@
  */
 package mage.sets.mirrodin;
 
-import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.Constants.*;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.dynamicvalue.common.EquipmentAttachedCount;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -52,7 +53,7 @@ public class GolemSkinGauntlets extends CardImpl<GolemSkinGauntlets> {
         this.expansionSetCode = "MRD";
         this.subtype.add("Equipment");
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(new EquipmentAttachedCount(), new StaticValue(0), Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(new GolemSkinGauntletsAttachedCount(), new StaticValue(0), Duration.WhileOnBattlefield)));
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
     }
 
@@ -63,5 +64,51 @@ public class GolemSkinGauntlets extends CardImpl<GolemSkinGauntlets> {
     @Override
     public GolemSkinGauntlets copy() {
         return new GolemSkinGauntlets(this);
+    }
+}
+
+// we can't use GolemSkinGauntletsAttachedCount
+// compare to Goblin Gaveleer
+class GolemSkinGauntletsAttachedCount implements DynamicValue {
+
+    public GolemSkinGauntletsAttachedCount() {
+    }
+
+    public GolemSkinGauntletsAttachedCount(final GolemSkinGauntletsAttachedCount dynamicValue) {
+    }
+
+    @Override
+    public int calculate(Game game, Ability source) {
+        int count = 0;
+        Permanent equipment = game.getPermanent(source.getSourceId());
+        if (equipment != null) {
+            Permanent permanent = game.getPermanent(equipment.getAttachedTo());
+            if (permanent != null) {
+                List<UUID> attachments = permanent.getAttachments();
+                for (UUID attachmentId : attachments) {
+                    Permanent attached = game.getPermanent(attachmentId);
+                    if (attached != null && attached.getSubtype().contains("Equipment")) {
+                        count++;
+                    }
+                }
+            }
+
+        }
+        return count;
+    }
+
+    @Override
+    public DynamicValue clone() {
+        return new GolemSkinGauntletsAttachedCount(this);
+    }
+
+    @Override
+    public String toString() {
+        return "1";
+    }
+
+    @Override
+    public String getMessage() {
+        return "Equipment attached to it";
     }
 }
