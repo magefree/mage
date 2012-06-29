@@ -28,7 +28,7 @@ public class PersistAbility extends DiesTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (super.checkTrigger(event, game)) {
             Permanent p = (Permanent) game.getLastKnownInformation(event.getTargetId(), Constants.Zone.BATTLEFIELD);
-            if (!p.getCounters().containsKey(CounterType.P1P1) || p.getCounters().getCount(CounterType.M1M1) == 0) {
+            if (p.getCounters().getCount(CounterType.M1M1) == 0) {
                 return true;
             }
         }
