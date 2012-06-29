@@ -254,6 +254,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                 }
                 game.rememberLKI(objectId, event.getFromZone(), this);
             }
+            updateZoneChangeCounter();
             switch (event.getToZone()) {
                 case GRAVEYARD:
                     game.getPlayer(ownerId).putInGraveyard(this, game, !flag);
@@ -276,6 +277,8 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                 case BATTLEFIELD:
                     PermanentCard permanent = new PermanentCard(this, ownerId);
                     game.addPermanent(permanent);
+                    game.setZone(objectId, Zone.BATTLEFIELD);
+                    game.applyEffects();
                     permanent.entersBattlefield(sourceId, game);
                     game.applyEffects();
                     if (flag)
@@ -287,7 +290,6 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                     return false;
             }
             setControllerId(ownerId);
-            updateZoneChangeCounter();
             game.setZone(objectId, event.getToZone());
             game.fireEvent(event);
             return game.getState().getZone(objectId) == toZone;

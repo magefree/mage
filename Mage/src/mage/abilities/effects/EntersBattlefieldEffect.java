@@ -69,8 +69,10 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl<EntersBattlef
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD && event.getTargetId().equals(source.getSourceId())) {
-            return true;
+        if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD) {
+            if (event.getTargetId().equals(source.getSourceId())) {
+                return true;
+            }
         }
         return false;
     }
