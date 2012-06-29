@@ -298,7 +298,9 @@ public class Sets extends HashMap<String, ExpansionSet> {
     public static Card createCard(Class clazz) {
         try {
             Constructor<?> con = clazz.getConstructor(new Class[]{UUID.class});
-            return (Card) con.newInstance(new Object[] {null});
+            Card card = (Card) con.newInstance(new Object[] {null});
+            card.build();
+            return card;
         } catch (Exception ex) {
             logger.fatal("Error creating card:" + clazz.getName(), ex);
             return null;
