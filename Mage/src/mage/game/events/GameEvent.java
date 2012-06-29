@@ -124,6 +124,7 @@ public class GameEvent {
         GAIN_CONTROL, GAINED_CONTROL,
         CREATE_TOKEN,
         REGENERATE, REGENERATED,
+        CHANGE_COLOR, COLOR_CHANGED,
 
         //combat events
         COMBAT_DAMAGE_APPLIED,
