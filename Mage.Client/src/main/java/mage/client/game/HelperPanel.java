@@ -104,6 +104,7 @@ public class HelperPanel extends JPanel {
         btnEndTurn = new JButton("End Turn");
         btnEndTurn.setToolTipText("End The Turn");
         btnEndTurn.setFocusable(false);
+        btnEndTurn.setVisible(false);
         container.add(btnEndTurn);
 
         btnLeft.addActionListener(new java.awt.event.ActionListener() {
