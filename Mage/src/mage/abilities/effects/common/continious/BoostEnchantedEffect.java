@@ -80,20 +80,6 @@ public class BoostEnchantedEffect extends ContinuousEffectImpl<BoostEnchantedEff
         return new BoostEnchantedEffect(this);
     }
 
-    private static boolean isCanKill(DynamicValue toughness) {
-        if (toughness instanceof StaticValue) {
-            return toughness.calculate(null, null) < 0;
-        }
-        if (toughness instanceof SignInversionDynamicValue) {
-            // count this class as used for "-{something_positive}"
-            return true;
-        }
-        if (toughness instanceof DomainValue) {
-            return ((DomainValue) toughness).getAmount() < 0;
-        }
-        return false;
-    }
-
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent enchantment = game.getPermanent(source.getSourceId());
