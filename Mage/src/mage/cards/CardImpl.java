@@ -124,6 +124,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
             Class<?> theClass = Class.forName(name);
             Constructor<?> con = theClass.getConstructor(new Class[]{UUID.class});
             Card card = (Card) con.newInstance(new Object[]{null});
+            card.build();
             return card;
         } catch (Exception e) {
             logger.fatal("Error loading card: " + name, e);
@@ -453,4 +454,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
         }
         info.put(key, value);
     }
+
+    @Override
+    public void build() {}
 }

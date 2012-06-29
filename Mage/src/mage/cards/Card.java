@@ -99,6 +99,8 @@ public interface Card extends MageObject {
     public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId);
     public List<Mana> getMana();
 
+    public void build();
+
     @Override
     public Card copy();
 }

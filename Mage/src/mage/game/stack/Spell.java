@@ -468,5 +468,8 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
     public boolean isCopy() {
         return isCopiedSpell();
     }
+
+    @Override
+    public void build() {}
 }
 
