@@ -58,19 +58,15 @@ public class EquipmentAttachedCount implements DynamicValue {
     @Override
     public int calculate(Game game, Ability source) {
         int count = 0;
-        Permanent equipment = game.getPermanent(source.getSourceId());
-        if (equipment != null) {
-            Permanent permanent = game.getPermanent(equipment.getAttachedTo());
-            if (permanent != null) {
+        Permanent permanent = game.getPermanent(source.getSourceId()); // don't change this - may affect other cards
+        if (permanent != null) {
             List<UUID> attachments = permanent.getAttachments();
-                for (UUID attachmentId : attachments) {
-                    Permanent attached = game.getPermanent(attachmentId);
-                    if (attached != null && attached.getSubtype().contains("Equipment")) {
-                        count++;
-                    }
+            for (UUID attachmentId : attachments) {
+                Permanent attached = game.getPermanent(attachmentId);
+                if (attached != null && attached.getSubtype().contains("Equipment")) {
+                    count++;
                 }
             }
-
         }
         return amount * count;
     }
