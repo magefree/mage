@@ -1,12 +1,14 @@
 package org.mage.test.cards.single;
 
 import mage.Constants;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 public class ArbiterOfKnollridgeTest extends CardTestPlayerBase {
 
     @Test
+    @Ignore
     public void testCard() {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 6);
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 6);
