@@ -20,7 +20,7 @@ public class BoostOpponentsEffect extends ContinuousEffectImpl<BoostOpponentsEff
     }
 
     public BoostOpponentsEffect(int power, int toughness, Constants.Duration duration, FilterCreaturePermanent filter) {
-        super(duration, Constants.Layer.PTChangingEffects_7, Constants.SubLayer.ModifyPT_7c, Constants.Outcome.BoostCreature);
+        super(duration, Constants.Layer.PTChangingEffects_7, Constants.SubLayer.ModifyPT_7c, toughness < 0 ? Constants.Outcome.UnboostCreature : Constants.Outcome.BoostCreature);
         this.power = power;
         this.toughness = toughness;
         this.filter = filter;

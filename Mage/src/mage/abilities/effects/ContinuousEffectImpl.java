@@ -32,6 +32,10 @@ import mage.Constants.*;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.TriggeredAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.DomainValue;
+import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.game.Game;
 
 import java.util.*;
@@ -155,6 +159,20 @@ public abstract class ContinuousEffectImpl<T extends ContinuousEffectImpl<T>> ex
     @Override
     public void overrideRuleText(String text) {
         this.staticText = text;
+    }
+
+    protected static boolean isCanKill(DynamicValue toughness) {
+        if (toughness instanceof StaticValue) {
+            return toughness.calculate(null, null) < 0;
+        }
+        if (toughness instanceof SignInversionDynamicValue) {
+            // count this class as used for "-{something_positive}"
+            return true;
+        }
+        if (toughness instanceof DomainValue) {
+            return ((DomainValue)toughness).getAmount() < 0;
+        }
+        return false;
     }
 
 }

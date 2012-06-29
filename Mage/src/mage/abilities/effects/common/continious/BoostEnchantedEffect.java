@@ -34,6 +34,8 @@ import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.DomainValue;
+import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
@@ -61,7 +63,7 @@ public class BoostEnchantedEffect extends ContinuousEffectImpl<BoostEnchantedEff
     }
 
     public BoostEnchantedEffect(DynamicValue power, DynamicValue toughness, Duration duration) {
-        super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
+        super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, isCanKill(toughness) ? Outcome.UnboostCreature : Outcome.BoostCreature);
         this.power = power;
         this.toughness = toughness;
         setText();
@@ -76,6 +78,20 @@ public class BoostEnchantedEffect extends ContinuousEffectImpl<BoostEnchantedEff
     @Override
     public BoostEnchantedEffect copy() {
         return new BoostEnchantedEffect(this);
+    }
+
+    private static boolean isCanKill(DynamicValue toughness) {
+        if (toughness instanceof StaticValue) {
+            return toughness.calculate(null, null) < 0;
+        }
+        if (toughness instanceof SignInversionDynamicValue) {
+            // count this class as used for "-{something_positive}"
+            return true;
+        }
+        if (toughness instanceof DomainValue) {
+            return ((DomainValue) toughness).getAmount() < 0;
+        }
+        return false;
     }
 
     @Override
