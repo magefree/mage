@@ -1,3 +1,2 @@
-Welcome! You are playing Mage version 0.8.2.
-Find what was changed since 0.8.1 on project Wiki.
+Welcome! You are playing Mage version 0.8.7.
 Contact us on www.slightlymagic.net.
