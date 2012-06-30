@@ -54,6 +54,9 @@ public class ConditionalContinousEffect extends ContinuousEffectImpl<Conditional
             otherwiseEffect.setTargetPointer(this.targetPointer);
             return otherwiseEffect.apply(layer, sublayer, source, game);
         }
+        if (!condition.apply(game, source) && effect.getDuration() == duration.OneUse) {
+            used = true;
+        }
         return false;
     }
 
@@ -65,6 +68,9 @@ public class ConditionalContinousEffect extends ContinuousEffectImpl<Conditional
         } else if (otherwiseEffect != null) {
             otherwiseEffect.setTargetPointer(this.targetPointer);
             return otherwiseEffect.apply(game, source);
+        }
+        if (!condition.apply(game, source) && effect.getDuration() == duration.OneUse) {
+            used = true;
         }
         return false;
     }
