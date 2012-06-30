@@ -75,10 +75,12 @@ public class TamiyoTheMoonSage extends CardImpl<TamiyoTheMoonSage> {
         ability.addEffect(new SkipNextUntapTargetEffect());
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
+
         // -2: Draw a card for each tapped creature target player controls.
         ability = new LoyaltyAbility(new DrawCardControllerEffect(new TappedCreaturesControlledByTargetCount()), -2);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
+
         // -8: You get an emblem with "You have no maximum hand size" and "Whenever a card is put into your graveyard from anywhere, you may return it to your hand."
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new TamiyoTheMoonSageEmblem()), -8));
     }
