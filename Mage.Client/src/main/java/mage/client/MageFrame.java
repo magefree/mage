@@ -415,19 +415,21 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         MagePaneMenuItem menuItem;
 
         for (int i = 0; i < windows.length; i++) {
-            MagePane window = (MagePane) windows[i];
-            if (window.isVisible()) {
-                menuItem = new MagePaneMenuItem(window);
-                menuItem.setState(i == 0);
-                menuItem.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent ae) {
-                        MagePane frame = ((MagePaneMenuItem) ae.getSource()).getFrame();
-                        setActive(frame);
-                    }
-                });
-                menuItem.setIcon(window.getFrameIcon());
-                menu.add(menuItem);
+            if (windows[i] instanceof MagePane) {
+                MagePane window = (MagePane) windows[i];
+                if (window.isVisible()) {
+                    menuItem = new MagePaneMenuItem(window);
+                    menuItem.setState(i == 0);
+                    menuItem.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent ae) {
+                            MagePane frame = ((MagePaneMenuItem) ae.getSource()).getFrame();
+                            setActive(frame);
+                        }
+                    });
+                    menuItem.setIcon(window.getFrameIcon());
+                    menu.add(menuItem);
+                }
             }
         }
 
