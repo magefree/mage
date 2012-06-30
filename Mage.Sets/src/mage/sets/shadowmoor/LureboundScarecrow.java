@@ -27,7 +27,6 @@
  */
 package mage.sets.shadowmoor;
 
-import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -39,6 +38,7 @@ import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
 import mage.game.Game;
@@ -46,7 +46,8 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.players.Player;
-import mage.cards.Card;
+
+import java.util.UUID;
 
 /**
  *
@@ -147,20 +148,22 @@ class LureboundScarecrowTriggeredAbility extends StateTriggeredAbility<Lurebound
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Card card = game.getCard(this.getSourceId());
-        if (card != null) {
-            ObjectColor color = (ObjectColor) game.getState().getValue(card.getId() + "_color");
-            if (color != null) {
-                for (Permanent perm: game.getBattlefield().getAllActivePermanents(controllerId)) {
-                    if (perm.getColor().contains(color))
-                        return false;
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE  || event.getType() == GameEvent.EventType.LOST_CONTROL
+                || event.getType() == GameEvent.EventType.COLOR_CHANGED
+                || event.getType() == GameEvent.EventType.SPELL_CAST) {
+            Card card = game.getCard(this.getSourceId());
+            if (card != null) {
+                ObjectColor color = (ObjectColor) game.getState().getValue(card.getId() + "_color");
+                if (color != null) {
+                    for (Permanent perm: game.getBattlefield().getAllActivePermanents(controllerId)) {
+                        if (perm.getColor().contains(color))
+                            return false;
+                    }
+                    return true;
                 }
             }
-            if (color == null) {
-                return false;
-            }
         }
-        return true;  
+        return false;
     }
 
     @Override
