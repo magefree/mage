@@ -1,13 +1,8 @@
-1. Go to folder trunk\Mage.Sets\src\mage\sets
-2. Run command for revision or range of revisions:
+1. Go to Mage Repository
+2. Run command exemplified below:
 
-Examples:
-
-For cards added since r1494 till head revision:
-hg status --rev 1494 -a --exclude "*\Island[0-9].java" --exclude "*\Mountain[0-9].java" --exclude "*\Swamp[0-9].java" --exclude "*\Plains[0-9].java" --exclude "*\Forest[0-9].java" --include "*\*.java" > added_cards.txt
-
-For cards added since r1494 till r1550:
-just use --rev 1494:1550 instead
+For cards added since tagOrSha1 till head revision (you can replace HEAD with another tagOrSha1):
+git log tagOrSha1..HEAD --diff-filter=A --name-status | sed -ne 's/^A[^u]Mage.Sets\/src\/mage\/sets\///p' | sort -u > added_cards.txt
 
 3. Copy added_cards.txt to trunk\Utils folder
 4. Run script:

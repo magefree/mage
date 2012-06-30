@@ -45,24 +45,26 @@ close(DATA);
 open CARDS, "< added_cards.txt" or die;
 while (<CARDS>) {
     my $line = $_;
-    if ( $line =~/A Mage.Sets\\src\\mage\\sets\\(\w.*)\\(\w.*)\.java/ ) {
-        $cards_count++;
+    if ( $line =~/(\w.*)\/(\w.*)\.java/ ) {
         my $set = $1;
         my $card = $2;
-        if (!exists($cards{$set})) {
-            $cards{$set} = [];
-        }
+        if ($2 ne "Swamp" and $2 ne "Mountain" and $2 ne "Island" and $2 ne "Plains" and $2 ne "Forest") {
+            $cards_count++;
+            if (!exists($cards{$set})) {
+                $cards{$set} = [];
+            }
 
-        push @{$cards{$set}}, $card;
+            push @{$cards{$set}}, $card;
+        }
     }
 }
 
 open REPORT, "> added_cards_in_wiki_format.txt";
-print REPORT " * Added cards ($cards_count):\n";
+print REPORT "* Added cards ($cards_count):\n";
 foreach my $set (keys(%cards)) {
     if ($set ne "tokens") {
         if (exists $knownSets{$set}) {
-            print REPORT "   * $sets{$knownSets{$set}}: ";
+            print REPORT " * $sets{$knownSets{$set}}: ";
         } else {
             print REPORT " $set: ";
         }
