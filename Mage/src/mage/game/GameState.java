@@ -33,6 +33,7 @@ import mage.abilities.*;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.effects.Effect;
+import mage.abilities.keyword.KickerAbility;
 import mage.cards.Card;
 import mage.choices.Choice;
 import mage.game.combat.Combat;
@@ -440,6 +441,9 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public void addAbility(Ability ability) {
         if (ability instanceof StaticAbility) {
+            if (ability instanceof KickerAbility) {
+                return;
+            }
             for (Mode mode: ability.getModes().values()) {
                 for (Effect effect: mode.getEffects()) {
                     if (effect instanceof ContinuousEffect) {

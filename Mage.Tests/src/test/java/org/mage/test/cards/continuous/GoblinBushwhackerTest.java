@@ -9,6 +9,21 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class GoblinBushwhackerTest extends CardTestPlayerBase {
 
+    @Test
+    public void testKicker() {
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        addCard(Constants.Zone.HAND, playerA, "Goblin Bushwhacker");
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Elite Vanguard");
+
+        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Goblin Bushwhacker");
+
+        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Elite Vanguard", 1);
+        assertPowerToughness(playerA, "Elite Vanguard", 3, 1);
+    }
+    
     /**
      * Tests doesn't work in library and in hand
      */
