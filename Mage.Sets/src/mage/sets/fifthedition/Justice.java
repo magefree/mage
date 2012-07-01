@@ -27,7 +27,6 @@
  */
 package mage.sets.fifthedition;
 
-import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -48,6 +47,8 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
  *
  * @author jeffwadsworth
@@ -55,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
 public class Justice extends CardImpl<Justice> {
 
     public Justice(UUID ownerId) {
-        super(ownerId, 6, "Justice", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
+        super(ownerId, 317, "Justice", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
         this.expansionSetCode = "5ED";
 
         this.color.setWhite(true);
