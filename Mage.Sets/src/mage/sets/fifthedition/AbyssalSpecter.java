@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.effects.common.DealsDamageToOpponentTriggeredAbility;
+import mage.abilities.common.DealsDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.common.DiscardTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -55,7 +55,7 @@ public class AbyssalSpecter extends CardImpl<AbyssalSpecter> {
         this.addAbility(FlyingAbility.getInstance());
         
         // Whenever Abyssal Specter deals damage to a player, that player discards a card.
-        this.addAbility(new DealsDamageToOpponentTriggeredAbility(new DiscardTargetEffect(1, false)));
+        this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new DiscardTargetEffect(1, false), false));
     }
 
     public AbyssalSpecter(final AbyssalSpecter card) {
