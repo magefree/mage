@@ -57,7 +57,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
     private static Session session;
     private ConnectDialog connectDialog;
     private static Preferences prefs = Preferences.userNodeForPackage(ConsoleFrame.class);
-    private final static MageVersion version = new MageVersion(0, 8, 7, "");
+    private final static MageVersion version = new MageVersion(0, 8, 7, "r2");
 
     /**
      * @return the session
