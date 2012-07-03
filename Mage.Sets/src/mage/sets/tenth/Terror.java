@@ -33,7 +33,6 @@ import mage.Constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -58,9 +57,7 @@ public class Terror extends CardImpl<Terror> {
         this.color.setBlack(true);
 
         // Destroy target nonartifact, nonblack creature. It can't be regenerated.
-        Target target = new TargetCreaturePermanent(filter);
-        target.setTargetName("nonartifact, nonblack creature");
-        this.getSpellAbility().addTarget(target);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
     }
 
