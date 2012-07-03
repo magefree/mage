@@ -45,12 +45,12 @@ import mage.players.Player;
 public class SkipNextPlayerUntapStepEffect extends OneShotEffect<SkipNextPlayerUntapStepEffect> {
 
     public SkipNextPlayerUntapStepEffect() {
-        super(Constants.Outcome.Detriment);
+        this("");
     }
 
-        public SkipNextPlayerUntapStepEffect(String text) {
-                this();
-                staticText = text;
+    public SkipNextPlayerUntapStepEffect(String text) {
+        super(Constants.Outcome.Detriment);
+        this.staticText = text;
     }
 
     public SkipNextPlayerUntapStepEffect(SkipNextPlayerUntapStepEffect effect) {
@@ -59,13 +59,13 @@ public class SkipNextPlayerUntapStepEffect extends OneShotEffect<SkipNextPlayerU
 
     @Override
     public boolean apply(Game game, Ability source) {
-                if (targetPointer != null) {
-                        Player player = game.getPlayer(targetPointer.getFirst(game, source));
-                        if (player != null) {
-                                game.getState().getTurnMods().add(new TurnMod(player.getId(), PhaseStep.UNTAP));
-                                return true;
-                        }
-                }
+        if (targetPointer != null) {
+            Player player = game.getPlayer(targetPointer.getFirst(game, source));
+            if (player != null) {
+                game.getState().getTurnMods().add(new TurnMod(player.getId(), PhaseStep.UNTAP));
+                return true;
+            }
+        }
         return false;
     }
 
@@ -74,16 +74,15 @@ public class SkipNextPlayerUntapStepEffect extends OneShotEffect<SkipNextPlayerU
         return new SkipNextPlayerUntapStepEffect(this);
     }
 
-           @Override
+    @Override
     public String getText(Mode mode) {
-            StringBuilder sb = new StringBuilder();
-            if (staticText.length() > 0) {
-                sb.append(staticText);
-            }
-            else {
-                sb.append("target");
-            }
-            sb.append("player skips his or her next untap step");    
-            return sb.toString();
+        StringBuilder sb = new StringBuilder();
+        if (staticText.length() > 0) {
+            sb.append(staticText);
+        } else {
+            sb.append("target");
+        }
+        sb.append("player skips his or her next untap step");
+        return sb.toString();
     }
 }
