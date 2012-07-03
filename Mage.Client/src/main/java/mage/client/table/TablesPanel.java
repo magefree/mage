@@ -510,14 +510,14 @@ public class TablesPanel extends javax.swing.JPanel {
             try {
                 MatchOptions options = new MatchOptions("1", "Two Player Duel");
                 options.getPlayerTypes().add("Human");
-                options.getPlayerTypes().add("Computer - minimax");
+                options.getPlayerTypes().add("Computer - mad");
                 options.setDeckType("Limited");
                 options.setAttackOption(MultiplayerAttackOption.LEFT);
                 options.setRange(RangeOfInfluence.ALL);
                 options.setWinsNeeded(1);
                 table = session.createTable(roomId,    options);
                 session.joinTable(roomId, table.getTableId(), "Human", "Human", 1, DeckImporterUtil.importDeck("test.dck"));
-                session.joinTable(roomId, table.getTableId(), "Computer", "Computer - minimax", 5, DeckImporterUtil.importDeck("test.dck"));
+                session.joinTable(roomId, table.getTableId(), "Computer", "Computer - mad", 5, DeckImporterUtil.importDeck("test.dck"));
                 session.startGame(roomId, table.getTableId());
             } catch (Exception ex) {
                 handleError(ex);
