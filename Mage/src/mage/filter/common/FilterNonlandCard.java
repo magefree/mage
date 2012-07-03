@@ -43,7 +43,7 @@ public class FilterNonlandCard extends FilterCard<FilterNonlandCard> {
 
     public FilterNonlandCard(String name) {
         super(name);
-        this.notCardTypeList.add(CardType.LAND);
+        this.notCardType.add(CardType.LAND);
     }
 
     public FilterNonlandCard(final FilterNonlandCard filter) {

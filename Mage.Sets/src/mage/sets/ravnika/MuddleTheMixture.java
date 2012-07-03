@@ -47,7 +47,7 @@ public class MuddleTheMixture extends CardImpl<MuddleTheMixture> {
     static {
         filter.getCardType().add(CardType.INSTANT);
         filter.getCardType().add(CardType.SORCERY);
-        filter.setNotScopeCardType(Filter.ComparisonScope.Any);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
     }
 
     public MuddleTheMixture(UUID ownerId) {

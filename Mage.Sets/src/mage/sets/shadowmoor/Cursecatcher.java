@@ -52,7 +52,7 @@ public class Cursecatcher extends CardImpl<Cursecatcher> {
     static {
         filter.getCardType().add(CardType.INSTANT);
         filter.getCardType().add(CardType.SORCERY);
-        filter.setNotScopeCardType(ComparisonScope.Any);
+        filter.setScopeCardType(ComparisonScope.Any);
     }
 
     public Cursecatcher(UUID ownerId) {

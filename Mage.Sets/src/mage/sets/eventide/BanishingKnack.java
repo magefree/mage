@@ -38,8 +38,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterNonlandPermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -49,13 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class BanishingKnack extends CardImpl<BanishingKnack> {
 
-    private final static FilterPermanent filter = new FilterPermanent("nonland permanent");
-
-        static {
-            filter.getCardType().add(CardType.LAND);
-            filter.setNotCardType(true);
-            filter.setScopeCardType(Filter.ComparisonScope.Any);
-        }
+    private final static FilterPermanent filter = new FilterNonlandPermanent();
 
         public BanishingKnack(UUID ownerId) {
         super(ownerId, 17, "Banishing Knack", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");

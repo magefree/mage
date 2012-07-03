@@ -51,8 +51,7 @@ public class Magmaw extends CardImpl<Magmaw> {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("nonland permanent");
 
     static {
-        filter.getCardType().add(CardType.LAND);
-        filter.setNotCardType(true);
+        filter.getNotCardType().add(CardType.LAND);
     }
 
     public Magmaw(UUID ownerId) {

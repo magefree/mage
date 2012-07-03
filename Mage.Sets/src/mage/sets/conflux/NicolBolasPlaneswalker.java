@@ -56,7 +56,6 @@ public class NicolBolasPlaneswalker extends CardImpl<NicolBolasPlaneswalker> {
 
     static {
         filter.getNotCardType().add(CardType.CREATURE);
-        filter.setNotCardType(true);
     }
 
     public NicolBolasPlaneswalker(UUID ownerId) {

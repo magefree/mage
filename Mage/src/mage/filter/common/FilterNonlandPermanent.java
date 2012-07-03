@@ -43,8 +43,7 @@ public class FilterNonlandPermanent extends FilterPermanent<FilterNonlandPermane
 
     public FilterNonlandPermanent(String name) {
         super(name);
-        notCardType = true;
-        cardType.add(CardType.LAND);
+        notCardType.add(CardType.LAND);
     }
 
     public FilterNonlandPermanent(final FilterNonlandPermanent filter) {

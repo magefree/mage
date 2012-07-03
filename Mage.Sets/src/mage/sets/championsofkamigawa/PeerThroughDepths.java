@@ -47,7 +47,7 @@ public class PeerThroughDepths extends CardImpl<PeerThroughDepths> {
     static {
             filter.getCardType().add(CardType.SORCERY);
             filter.getCardType().add(CardType.INSTANT);
-            filter.setNotScopeCardType(ComparisonScope.Any);
+            filter.setScopeCardType(ComparisonScope.Any);
         }
 
 

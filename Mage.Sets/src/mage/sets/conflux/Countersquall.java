@@ -46,7 +46,6 @@ public class Countersquall extends CardImpl<Countersquall> {
 
     static {
         filter.getNotCardType().add(CardType.CREATURE);
-        filter.setNotCardType(true);
     }
 
     public Countersquall(UUID ownerId) {

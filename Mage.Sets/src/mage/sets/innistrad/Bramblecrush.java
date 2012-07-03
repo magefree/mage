@@ -45,7 +45,6 @@ public class Bramblecrush extends CardImpl<Bramblecrush> {
 
     static {
         filter.getNotCardType().add(CardType.CREATURE);
-        filter.setNotCardType(true);
     }
 
     public Bramblecrush(UUID ownerId) {

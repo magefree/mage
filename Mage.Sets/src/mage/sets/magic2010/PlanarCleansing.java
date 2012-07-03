@@ -35,8 +35,8 @@ import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterNonlandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -50,8 +50,9 @@ public class PlanarCleansing extends CardImpl<PlanarCleansing> {
         super(ownerId, 24, "Planar Cleansing", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{W}{W}{W}");
         this.expansionSetCode = "M10";
         this.color.setWhite(true);
-        this.getSpellAbility().addEffect(new PlanarCleansingEffect());
+
         // Destroy all nonland permanents.
+        this.getSpellAbility().addEffect(new PlanarCleansingEffect());
     }
 
     public PlanarCleansing(final PlanarCleansing card) {
@@ -66,13 +67,7 @@ public class PlanarCleansing extends CardImpl<PlanarCleansing> {
 
 class PlanarCleansingEffect extends OneShotEffect<PlanarCleansingEffect> {
 
-    private final static FilterPermanent filter = new FilterPermanent("");
-
-    static {
-        filter.getCardType().add(CardType.LAND);
-        filter.setNotCardType(true);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
-    }
+    private final static FilterPermanent filter = new FilterNonlandPermanent();
 
     public PlanarCleansingEffect() {
         super(Constants.Outcome.DestroyPermanent);

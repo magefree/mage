@@ -49,9 +49,8 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
     protected boolean notAbilities;
     protected List<CardType> cardType = new ArrayList<CardType>();
     protected ComparisonScope scopeCardType = ComparisonScope.Any;
-    protected List<CardType> notCardTypeList = new ArrayList<CardType>();
-    protected ComparisonScope notScopeCardType = ComparisonScope.Any;
-    protected boolean notCardType;
+    protected List<CardType> notCardType = new ArrayList<CardType>();
+    protected ComparisonScope scopeNotCardType = ComparisonScope.Any;
     protected boolean colorless;
     protected boolean useColorless;
     protected boolean useColor;
@@ -94,10 +93,9 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
         this.abilities = filter.abilities.copy();
         this.notAbilities = filter.notAbilities;
         this.cardType.addAll(filter.cardType);
-        this.notCardTypeList.addAll(filter.notCardTypeList);
+        this.notCardType.addAll(filter.notCardType);
         this.scopeCardType = filter.scopeCardType;
-        this.notCardType = filter.notCardType;
-        this.notScopeCardType = filter.notScopeCardType;
+        this.scopeNotCardType = filter.scopeNotCardType;
         this.colorless = filter.colorless;
         this.useColorless = filter.useColorless;
         this.useColor = filter.useColor;
@@ -151,12 +149,12 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
         }
 
         if (cardType.size() > 0) {
-            if (!compCardType.compare(cardType, object.getCardType(), scopeCardType, notCardType))
+            if (!compCardType.compare(cardType, object.getCardType(), scopeCardType, false))
                 return notFilter;
         }
 
-        if (notCardTypeList.size() > 0) {
-            if (compCardType.compare(notCardTypeList, object.getCardType(), notScopeCardType, false))
+        if (notCardType.size() > 0) {
+            if (compCardType.compare(notCardType, object.getCardType(), scopeNotCardType, false))
                 return notFilter;
         }
 
@@ -217,19 +215,15 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
     }
 
     public List<CardType> getNotCardType() {
-        return this.notCardTypeList;
+        return this.notCardType;
     }
 
     public void setScopeCardType(ComparisonScope scopeCardType) {
         this.scopeCardType = scopeCardType;
     }
 
-    public void setNotScopeCardType(ComparisonScope notScopeCardType) {
-        this.notScopeCardType = notScopeCardType;
-    }
-
-    public void setNotCardType(boolean notCardTypeList) {
-        this.notCardType = notCardTypeList;
+    public void setScopeNotCardType(ComparisonScope scopeNotCardType) {
+        this.scopeNotCardType = scopeNotCardType;
     }
 
     public void setColor(ObjectColor color) {

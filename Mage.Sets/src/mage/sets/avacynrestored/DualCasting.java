@@ -58,7 +58,7 @@ public class DualCasting extends CardImpl<DualCasting> {
     static {
         filter.getCardType().add(CardType.INSTANT);
         filter.getCardType().add(CardType.SORCERY);
-        filter.setNotScopeCardType(Filter.ComparisonScope.Any);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
     }
 
     public DualCasting(UUID ownerId) {
