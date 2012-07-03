@@ -28,25 +28,23 @@
 package mage.sets.avacynrestored;
 
 import mage.Constants.CardType;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.Target;
-import mage.target.common.TargetControlledPermanent;
-
 import java.util.UUID;
+import mage.abilities.effects.common.SacrificeAllEffect;
+import mage.filter.common.FilterControlledPermanent;
 
 /**
  *
  * @author North
  */
 public class BarterInBlood extends CardImpl<BarterInBlood> {
+    
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("creature");
+    
+    static {
+        filter.getCardType().add(CardType.CREATURE);
+    }
 
     public BarterInBlood(UUID ownerId) {
         super(ownerId, 85, "Barter in Blood", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
@@ -55,7 +53,7 @@ public class BarterInBlood extends CardImpl<BarterInBlood> {
         this.color.setBlack(true);
 
         // Each player sacrifices two creatures.
-        this.getSpellAbility().addEffect(new BarterInBloodEffect());
+        this.getSpellAbility().addEffect(new SacrificeAllEffect(2, filter));
     }
 
     public BarterInBlood(final BarterInBlood card) {
@@ -65,49 +63,5 @@ public class BarterInBlood extends CardImpl<BarterInBlood> {
     @Override
     public BarterInBlood copy() {
         return new BarterInBlood(this);
-    }
-}
-
-class BarterInBloodEffect extends OneShotEffect<BarterInBloodEffect> {
-
-    public BarterInBloodEffect() {
-        super(Outcome.Sacrifice);
-        this.staticText = "Each player sacrifices two creatures";
-    }
-
-    public BarterInBloodEffect(final BarterInBloodEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public BarterInBloodEffect copy() {
-        return new BarterInBloodEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            FilterCreaturePermanent filter = new FilterCreaturePermanent();
-            for (UUID playerId : controller.getInRange()) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    int amount = Math.min(2, game.getBattlefield().countAll(filter, player.getId(), game));
-                    Target target = new TargetControlledPermanent(amount, amount, filter, false);
-                    target.setRequired(true);
-                    if (amount > 0 && target.canChoose(player.getId(), game)
-                            && player.choose(Outcome.Sacrifice, target, source.getSourceId(), game)) {
-                        for (UUID targetId : target.getTargets()) {
-                            Permanent permanent = game.getPermanent(targetId);
-                            if (permanent != null) {
-                                permanent.sacrifice(source.getSourceId(), game);
-                            }
-                        }
-                    }
-                }
-            }
-            return true;
-        }
-        return false;
     }
 }
