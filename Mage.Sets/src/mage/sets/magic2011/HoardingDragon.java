@@ -35,14 +35,14 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromExileEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
+import mage.filter.common.FilterArtifactCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -53,12 +53,6 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class HoardingDragon extends CardImpl<HoardingDragon> {
 
-    private static final FilterCard filter = new FilterCard();
-
-    static {
-        filter.getCardType().add(CardType.ARTIFACT);
-    }
-
     public HoardingDragon(UUID ownerId) {
         super(ownerId, 144, "Hoarding Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
         this.expansionSetCode = "M11";
@@ -68,8 +62,12 @@ public class HoardingDragon extends CardImpl<HoardingDragon> {
         this.toughness = new MageInt(4);
 
         this.addAbility(FlyingAbility.getInstance());
+
+        // When Hoarding Dragon enters the battlefield, you may search your library for an artifact card, exile it, then shuffle your library.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new HoardingDragonEffect(this.getId()), true));
-        this.addAbility(new DiesTriggeredAbility(new ReturnFromExileEffect(this.getId(), Zone.BATTLEFIELD), false));
+
+        // When Hoarding Dragon dies, you may put the exiled card into its owner's hand.
+        this.addAbility(new DiesTriggeredAbility(new ReturnFromExileEffect(this.getId(), Zone.HAND), false));
     }
 
     public HoardingDragon(final HoardingDragon card) {
@@ -85,31 +83,30 @@ public class HoardingDragon extends CardImpl<HoardingDragon> {
 
 class HoardingDragonEffect extends OneShotEffect<HoardingDragonEffect> {
 
-    protected UUID exileId;
-    protected TargetCardInLibrary target;
+    private UUID exileId;
 
     public HoardingDragonEffect(UUID exileId) {
         super(Outcome.Exile);
         this.exileId = exileId;
-        target = new TargetCardInLibrary();
-        staticText = "When {this} enters the battlefield, you may search your library for an artifact card, exile it, then shuffle your library";
+        this.staticText = "When {this} enters the battlefield, you may search your library for an artifact card, exile it, then shuffle your library";
     }
 
     public HoardingDragonEffect(final HoardingDragonEffect effect) {
         super(effect);
         this.exileId = effect.exileId;
-        this.target = effect.target.copy();
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
+            TargetCardInLibrary target = new TargetCardInLibrary(new FilterArtifactCard());
             if (player.searchLibrary(target, game)) {
                 if (target.getTargets().size() > 0) {
                     Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
-                    if (card != null)
+                    if (card != null) {
                         card.moveToExile(exileId, "Hoarding Dragon exile", source.getSourceId(), game);
+                    }
                 }
             }
             player.shuffleLibrary(game);
