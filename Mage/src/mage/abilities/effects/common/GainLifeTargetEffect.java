@@ -31,6 +31,8 @@ package mage.abilities.effects.common;
 import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.players.Player;
@@ -41,12 +43,16 @@ import mage.players.Player;
  */
 public class GainLifeTargetEffect extends OneShotEffect<GainLifeTargetEffect> {
 
-    private int life;
+    private DynamicValue life;
 
     public GainLifeTargetEffect(int life) {
+        this(new StaticValue(life));
+    }
+
+    public GainLifeTargetEffect(DynamicValue life) {
         super(Outcome.GainLife);
         this.life = life;
-        staticText = "target players each gain " + Integer.toString(life) + " life";
+        setText();
     }
 
     public GainLifeTargetEffect(final GainLifeTargetEffect effect) {
@@ -64,10 +70,26 @@ public class GainLifeTargetEffect extends OneShotEffect<GainLifeTargetEffect> {
         for (UUID playerId: targetPointer.getTargets(game, source)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                player.gainLife(life, game);
+                player.gainLife(life.calculate(game, source), game);
             }
         }
         return true;
+    }
+
+    private void setText() {
+        StringBuilder sb = new StringBuilder();
+        String message = life.getMessage();
+
+        sb.append("target players each gain ");
+        if (message.isEmpty() || !message.equals("1")) {
+            sb.append(life).append(" ");
+        }
+        sb.append("life");
+        if (message.length() > 0) {
+            sb.append(message.equals("1") ? " equal to the number of " : " for each ");
+            sb.append(message);
+        }
+        staticText = sb.toString();
     }
 
 }
