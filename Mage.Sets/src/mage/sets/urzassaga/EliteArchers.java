@@ -25,28 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planechase;
+package mage.sets.urzassaga;
 
 import java.util.UUID;
+
+import mage.Constants;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.cards.CardImpl;
+import mage.target.common.TargetAttackingOrBlockingCreature;
 
 /**
  *
  * @author Loki
  */
-public class Congregate extends mage.sets.urzassaga.Congregate {
+public class EliteArchers extends CardImpl<EliteArchers> {
 
-    public Congregate(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 2;
-        this.expansionSetCode = "HOP";
+    public EliteArchers(UUID ownerId) {
+        super(ownerId, 13, "Elite Archers", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{W}");
+        this.expansionSetCode = "USG";
+        this.subtype.add("Human");
+        this.subtype.add("Soldier");
+        this.subtype.add("Archer");
+
+        this.color.setWhite(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+
+        // {tap}: Elite Archers deals 3 damage to target attacking or blocking creature.
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(3), new TapSourceCost());
+        ability.addTarget(new TargetAttackingOrBlockingCreature());
+        this.addAbility(ability);
     }
 
-    public Congregate(final Congregate card) {
+    public EliteArchers(final EliteArchers card) {
         super(card);
     }
 
     @Override
-    public Congregate copy() {
-        return new Congregate(this);
+    public EliteArchers copy() {
+        return new EliteArchers(this);
     }
 }

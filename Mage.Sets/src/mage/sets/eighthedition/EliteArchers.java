@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planechase;
+package mage.sets.eighthedition;
 
 import java.util.UUID;
 
@@ -33,20 +33,20 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class Congregate extends mage.sets.urzassaga.Congregate {
+public class EliteArchers extends mage.sets.urzassaga.EliteArchers {
 
-    public Congregate(UUID ownerId) {
+    public EliteArchers(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 2;
-        this.expansionSetCode = "HOP";
+        this.cardNumber = 18;
+        this.expansionSetCode = "8ED";
     }
 
-    public Congregate(final Congregate card) {
+    public EliteArchers(final EliteArchers card) {
         super(card);
     }
 
     @Override
-    public Congregate copy() {
-        return new Congregate(this);
+    public EliteArchers copy() {
+        return new EliteArchers(this);
     }
 }
