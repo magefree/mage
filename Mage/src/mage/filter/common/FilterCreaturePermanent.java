@@ -43,8 +43,8 @@ public class FilterCreaturePermanent<T extends FilterCreaturePermanent<T>> exten
     protected boolean attacking;
     protected boolean useBlocking;
     protected boolean blocking;
-        protected boolean useDamageDealt;
-        protected boolean damageDealt;
+    protected boolean useDamageDealt;
+    protected boolean damageDealt;
 
     public FilterCreaturePermanent() {
         this("creature");
@@ -61,8 +61,8 @@ public class FilterCreaturePermanent<T extends FilterCreaturePermanent<T>> exten
         this.attacking = filter.attacking;
         this.useBlocking = filter.useBlocking;
         this.blocking = filter.blocking;
-                this.useDamageDealt = filter.useDamageDealt;
-                this.damageDealt = filter.damageDealt;
+        this.useDamageDealt = filter.useDamageDealt;
+        this.damageDealt = filter.damageDealt;
         this.useTapped = filter.useTapped;
         this.tapped = filter.tapped;
     }
@@ -85,17 +85,18 @@ public class FilterCreaturePermanent<T extends FilterCreaturePermanent<T>> exten
                     return notFilter;
                 }
             }
-                        return !notFilter;
-                }
+            return !notFilter;
+        }
 
         if (useBlocking && (permanent.getBlocking() > 0) != blocking)
             return notFilter;
 
-                if (useDamageDealt) {
-                    // use this instead of getDamage() because damage is reset in case of regeneration
-                    if (permanent.getDealtDamageByThisTurn().isEmpty()) 
-                        return notFilter;
-                }
+        if (useDamageDealt) {
+            // use this instead of getDamage() because damage is reset in case of regeneration
+            if (permanent.getDealtDamageByThisTurn().isEmpty()) {
+                return notFilter;
+            }
+        }
         return !notFilter;
     }
 
@@ -114,21 +115,23 @@ public class FilterCreaturePermanent<T extends FilterCreaturePermanent<T>> exten
     public void setBlocking ( boolean blocking ) {
         this.blocking = blocking;
     }
-        /**
-         * Select creatures dependant if they already got damage
-         * during the current turn. Works also if the creature
-         * was meanwhile regenerated during the turn.
-         * 
-         * @param useDamageDealt
-         */
-          public void setUseDamageDealt ( boolean useDamageDealt ) {
+
+    /**
+     * Select creatures dependant if they already got damage during the current turn. Works also if the creature was
+     * meanwhile regenerated during the turn.
+     *
+     * @param useDamageDealt
+     */
+    public void setUseDamageDealt(boolean useDamageDealt) {
         this.useDamageDealt = useDamageDealt;
     }
-        /**
-         * Select creatures that got damage dealt to this turn. 
-         * @param damageDealt 
-         */
-        public void setDamageDealt ( boolean damageDealt ) {
+
+    /**
+     * Select creatures that got damage dealt to this turn.
+     *
+     * @param damageDealt
+     */
+    public void setDamageDealt(boolean damageDealt) {
         this.damageDealt = damageDealt;
     }
 
