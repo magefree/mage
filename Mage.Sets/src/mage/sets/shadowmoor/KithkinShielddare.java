@@ -38,6 +38,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterBlockingCreature;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -47,12 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class KithkinShielddare extends CardImpl<KithkinShielddare> {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("blocking creature");
-
-    static {
-        filter.setBlocking(true);
-        filter.setUseBlocking(true);
-    }
+    private static final FilterCreaturePermanent filter = new FilterBlockingCreature("blocking creature");
 
     public KithkinShielddare(UUID ownerId) {
         super(ownerId, 10, "Kithkin Shielddare", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

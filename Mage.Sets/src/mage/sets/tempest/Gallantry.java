@@ -29,12 +29,13 @@ package mage.sets.tempest;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterBlockingCreature;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -44,19 +45,17 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Gallantry extends CardImpl<Gallantry> {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("blocking creature");
-
-    static {
-        filter.setUseBlocking(true);
-        filter.setBlocking(true);
-    }
+    private final static FilterCreaturePermanent filter = new FilterBlockingCreature("blocking creature");
 
     public Gallantry(UUID ownerId) {
         super(ownerId, 232, "Gallantry", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "TMP";
         this.color.setWhite(true);
-        this.getSpellAbility().addEffect(new BoostTargetEffect(4, 4, Constants.Duration.EndOfTurn));
+
+        // Target blocking creature gets +4/+4 until end of turn.
+        this.getSpellAbility().addEffect(new BoostTargetEffect(4, 4, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
     }
 

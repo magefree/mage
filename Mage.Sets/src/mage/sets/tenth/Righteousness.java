@@ -33,6 +33,7 @@ import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterBlockingCreature;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -42,12 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Righteousness extends CardImpl<Righteousness> {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("blocking creature");
-
-    static {
-        filter.setBlocking(true);
-        filter.setUseBlocking(true);
-    }
+    private static final FilterCreaturePermanent filter = new FilterBlockingCreature("blocking creature");
 
     public Righteousness(UUID ownerId) {
         super(ownerId, 36, "Righteousness", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{W}");
