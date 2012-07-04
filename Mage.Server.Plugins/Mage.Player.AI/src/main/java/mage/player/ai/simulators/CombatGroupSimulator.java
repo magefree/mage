@@ -86,7 +86,7 @@ public class CombatGroupSimulator implements Serializable {
     }
 
     private void assignDamage(boolean first) {
-        if (blockers.size() == 0) {
+        if (blockers.isEmpty()) {
             if (canDamage(attacker, first))
                 unblockedDamage += attacker.power;
         }
