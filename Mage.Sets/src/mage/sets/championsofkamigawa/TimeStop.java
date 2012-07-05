@@ -25,45 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
-import static mage.Constants.Zone;
-
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.OnlyDuringYourTurnCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.cards.CardImpl;
-import mage.abilities.effects.common.EndTurnEffect;
-
 /**
  *
- * @author nantuko
+ * @author jeff
  */
-public class SundialOfTheInfinite extends CardImpl<SundialOfTheInfinite> {
+public class TimeStop extends mage.sets.tenth.TimeStop {
 
-    public SundialOfTheInfinite(UUID ownerId) {
-        super(ownerId, 218, "Sundial of the Infinite", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "M12";
-
-        // {1}, {tap}: End the turn. Activate this ability only during your turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new EndTurnEffect(), new GenericManaCost(1));
-        ability.addCost(new TapSourceCost());
-        ability.addCost(new OnlyDuringYourTurnCost());
-        this.addAbility(ability);
+    public TimeStop(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 97;
+        this.expansionSetCode = "CHK";
     }
 
-    public SundialOfTheInfinite(final SundialOfTheInfinite card) {
+    public TimeStop(final TimeStop card) {
         super(card);
     }
 
     @Override
-    public SundialOfTheInfinite copy() {
-        return new SundialOfTheInfinite(this);
+    public TimeStop copy() {
+        return new TimeStop(this);
     }
 }
