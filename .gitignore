@@ -23,6 +23,7 @@ Mage.Server.Plugins/Mage.Player.Human/target
 Mage.Server.Plugins/Mage.Draft.8PlayerBooster/target
 Mage.Server.Plugins/Mage.Tournament.BoosterDraft/target
 Mage.Server.Plugins/Mage.Tournament.Sealed/target
+Mage.Server.Plugins/Mage.Player.AI.DraftBot/target
 Mage.Server/config/init.txt
 Mage.Server/saved
 Mage.Server/target
