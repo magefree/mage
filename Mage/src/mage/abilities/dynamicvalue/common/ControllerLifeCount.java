@@ -24,4 +24,9 @@ public class ControllerLifeCount implements DynamicValue {
     public String getMessage() {
         return "your life total";
     }
+
+    @Override
+    public String toString() {
+        return "1";
+    }
 }
