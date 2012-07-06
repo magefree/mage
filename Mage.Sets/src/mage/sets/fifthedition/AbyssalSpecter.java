@@ -55,7 +55,7 @@ public class AbyssalSpecter extends CardImpl<AbyssalSpecter> {
         this.addAbility(FlyingAbility.getInstance());
         
         // Whenever Abyssal Specter deals damage to a player, that player discards a card.
-        this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new DiscardTargetEffect(1, false), false));
+        this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new DiscardTargetEffect(1, false), false, true));
     }
 
     public AbyssalSpecter(final AbyssalSpecter card) {
