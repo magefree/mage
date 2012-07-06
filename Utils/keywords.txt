@@ -11,7 +11,6 @@ Battle cry|new|
 Cascade|new|
 Exalted|new|
 Forestwalk|new|
-Hexproof|new|
 Islandwalk|new|
 Living weapon|new|
 Mountainwalk|new|
@@ -29,6 +28,7 @@ First strike|instance|
 Flash|instance|
 Flying|instance|
 Haste|instance|
+Hexproof|instance|
 Indestructible|instance|
 Infect|instance|
 Intimidate|instance|
