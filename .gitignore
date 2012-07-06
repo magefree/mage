@@ -36,7 +36,6 @@ Mage.Tests/watchdog.log
 Mage/target
 Mage.Updater/target
 mage.updater.client/target
-Utils/GathererCrawler/target
 
 releases
 Utils/author.txt
