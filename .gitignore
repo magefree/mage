@@ -4,8 +4,6 @@ Mage.Client/db/*.db
 Mage.Client/mageclient.log
 Mage.Client/plugins/images
 Mage.Client/plugins/plugin.data
-Mage.Server/saved
-Mage.Server/config/init.txt
 Mage.Client/target
 Mage.Common/target
 Mage.Plugins/Mage.Card.Plugin/target
@@ -25,8 +23,11 @@ Mage.Server.Plugins/Mage.Player.Human/target
 Mage.Server.Plugins/Mage.Draft.8PlayerBooster/target
 Mage.Server.Plugins/Mage.Tournament.BoosterDraft/target
 Mage.Server.Plugins/Mage.Tournament.Sealed/target
+Mage.Server/config/init.txt
+Mage.Server/saved
 Mage.Server/target
 Mage.Server/db
+Mage.Server/cache
 Mage.Server/mageserver.log
 Mage.Sets/target
 Mage.Tests/target
