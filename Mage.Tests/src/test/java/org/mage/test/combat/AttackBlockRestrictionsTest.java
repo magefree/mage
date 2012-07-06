@@ -226,4 +226,22 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
 
         assertCounterCount(playerA, CounterType.POISON, 1);
     }
+    
+    @Test
+    public void testUnblockableTormentedSoul() {
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Tormented Soul");
+        
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Memnite");
+        
+        attack(2, playerB, "Tormented Soul");
+        block(2, playerA, "Tormented Soul", "Memnite");
+        
+        setStopAt(2, Constants.PhaseStep.END_TURN);
+        execute();
+        
+        assertPermanentCount(playerA, "Memnite", 1);
+        assertPermanentCount(playerB, "Tormented Soul", 1);
+        
+        assertLife(playerA, 19);
+    }
 }
