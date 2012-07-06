@@ -197,7 +197,7 @@ public class CardsStorage {
             readUnimplemented("ZEN", "/zen.txt", names, cards);
             readUnimplemented("WWK", "/wwk.txt", names, cards);
             readUnimplemented("ROE", "/roe.txt", names, cards);
-            readUnimplemented("AVR", "/avr.txt", names, cards);
+            readUnimplemented("M13", "/m13.txt", names, cards);
 
             names.clear();
         }

@@ -393,7 +393,7 @@ public class MageBook extends JComponent {
     private HoverButton pageRight;
 
     private int currentPage = 0;
-    private String currentSet = "AVR";
+    private String currentSet = "M13";
 
     private static CardDimensions cardDimensions = new CardDimensions(1.2d);
     private static final Logger log = Logger.getLogger(MageBook.class);

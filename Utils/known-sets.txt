@@ -5,6 +5,7 @@ Tenth Edition|tenth|
 Magic 2010|magic2010|
 Magic 2011|magic2011|
 Magic 2012|magic2012|
+Magic 2013|magic2013|
 Planechase|planechase|
 Duel Decks: Elspeth vs. Tezzeret|elspethvstezzeret|
 Tempest|tempest|
