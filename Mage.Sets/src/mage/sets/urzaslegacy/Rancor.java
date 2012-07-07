@@ -31,7 +31,7 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.PutIntoGraveFromBattlefield;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
@@ -40,10 +40,6 @@ import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -73,7 +69,7 @@ public class Rancor extends CardImpl<Rancor> {
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(TrampleAbility.getInstance(), Constants.AttachmentType.AURA)));
 
         // When Rancor is put into a graveyard from the battlefield, return Rancor to its owner's hand.
-        this.addAbility(new RancorTriggeredAbility());
+        this.addAbility(new PutIntoGraveFromBattlefield(new ReturnToHandSourceEffect()));
     }
 
     public Rancor(final Rancor card) {
@@ -83,43 +79,5 @@ public class Rancor extends CardImpl<Rancor> {
     @Override
     public Rancor copy() {
         return new Rancor(this);
-    }
-}
-
-class RancorTriggeredAbility extends TriggeredAbilityImpl<RancorTriggeredAbility> {
-
-    public RancorTriggeredAbility() {
-        super(Constants.Zone.ALL, new ReturnToHandSourceEffect(), false);
-    }
-
-    RancorTriggeredAbility(RancorTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public RancorTriggeredAbility copy() {
-        return new RancorTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
-
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            Permanent permanent = zEvent.getTarget();
-
-            if (permanent != null &&
-                    zEvent.getToZone() == Constants.Zone.GRAVEYARD &&
-                    zEvent.getFromZone() == Constants.Zone.BATTLEFIELD &&
-                    permanent.getId().equals(this.getSourceId())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "When {this} is put into a graveyard from the battlefield, return {this} to its owner's hand";
     }
 }
