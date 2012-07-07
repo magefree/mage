@@ -31,6 +31,7 @@ package mage.abilities.keyword;
 import mage.Constants.Duration;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.SpellAbility;
@@ -143,17 +144,19 @@ class ReboundEffect extends OneShotEffect<ReboundEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Spell sourceSpell = (Spell) game.getObject(source.getId());
-        if (sourceSpell != null && sourceSpell.isCopiedSpell()) {
-            return false;
-        } else {
-            StackObject sourceCard = (StackObject) game.getObject(source.getSourceId());
-            ReboundEffectCastFromExileDelayedTrigger trigger = new ReboundEffectCastFromExileDelayedTrigger(sourceCard.getSourceId(), sourceCard.getSourceId());
-            trigger.setControllerId(source.getControllerId());
-            game.addDelayedTriggeredAbility(trigger);
+        if (sourceSpell == null || !sourceSpell.isCopiedSpell()) {
+            MageObject mageObject = game.getObject(source.getSourceId());
+            if (mageObject instanceof StackObject) {
+                StackObject sourceCard = (StackObject) mageObject;
+                ReboundEffectCastFromExileDelayedTrigger trigger = new ReboundEffectCastFromExileDelayedTrigger(sourceCard.getSourceId(), sourceCard.getSourceId());
+                trigger.setControllerId(source.getControllerId());
+                game.addDelayedTriggeredAbility(trigger);
 
-            game.getContinuousEffects().addEffect(new ReboundCastFromHandReplacementEffect(source.getSourceId()), source);
-            return true;
+                game.getContinuousEffects().addEffect(new ReboundCastFromHandReplacementEffect(source.getSourceId()), source);
+                return true;
+            }
         }
+        return false;
     }
 
     @Override
