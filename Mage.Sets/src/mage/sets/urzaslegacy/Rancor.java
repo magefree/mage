@@ -31,7 +31,7 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.common.PutIntoGraveFromBattlefield;
+import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
@@ -69,7 +69,7 @@ public class Rancor extends CardImpl<Rancor> {
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(TrampleAbility.getInstance(), Constants.AttachmentType.AURA)));
 
         // When Rancor is put into a graveyard from the battlefield, return Rancor to its owner's hand.
-        this.addAbility(new PutIntoGraveFromBattlefield(new ReturnToHandSourceEffect()));
+        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new ReturnToHandSourceEffect()));
     }
 
     public Rancor(final Rancor card) {

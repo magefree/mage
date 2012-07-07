@@ -11,23 +11,23 @@ import mage.game.permanent.Permanent;
 /**
  * @author nantuko, loki
  */
-public class PutIntoGraveFromBattlefield extends TriggeredAbilityImpl<PutIntoGraveFromBattlefield> {
+public class PutIntoGraveFromBattlefieldTriggeredAbility extends TriggeredAbilityImpl<PutIntoGraveFromBattlefieldTriggeredAbility> {
 
-    public PutIntoGraveFromBattlefield(Effect effect) {
+    public PutIntoGraveFromBattlefieldTriggeredAbility(Effect effect) {
         this(effect, false);
     }
 
-    public PutIntoGraveFromBattlefield(Effect effect, boolean optional) {
+    public PutIntoGraveFromBattlefieldTriggeredAbility(Effect effect, boolean optional) {
         super(Constants.Zone.ALL, effect, optional);
     }
 
-    PutIntoGraveFromBattlefield(PutIntoGraveFromBattlefield ability) {
+    PutIntoGraveFromBattlefieldTriggeredAbility(PutIntoGraveFromBattlefieldTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public PutIntoGraveFromBattlefield copy() {
-        return new PutIntoGraveFromBattlefield(this);
+    public PutIntoGraveFromBattlefieldTriggeredAbility copy() {
+        return new PutIntoGraveFromBattlefieldTriggeredAbility(this);
     }
 
     @Override
@@ -49,6 +49,6 @@ public class PutIntoGraveFromBattlefield extends TriggeredAbilityImpl<PutIntoGra
 
     @Override
     public String getRule() {
-        return "When {this} is put into a graveyard from the battlefield, return {this} to its owner's hand";
+        return "When {this} is put into a graveyard from the battlefield, " + super.getRule();
     }
 }
