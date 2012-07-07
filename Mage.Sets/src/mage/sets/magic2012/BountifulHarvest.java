@@ -42,7 +42,7 @@ import mage.filter.common.FilterControlledPermanent;
  */
 public class BountifulHarvest extends CardImpl<BountifulHarvest> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("land");
+    private final static FilterControlledPermanent filter = new FilterControlledPermanent("land you control");
 
     static {
         filter.getCardType().add(CardType.LAND);

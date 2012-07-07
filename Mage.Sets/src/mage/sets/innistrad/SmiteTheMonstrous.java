@@ -31,17 +31,23 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
+import mage.filter.Filter;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  * @author nantuko
  */
 public class SmiteTheMonstrous extends CardImpl<SmiteTheMonstrous> {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 4 or greater");
+
+    static {
+        filter.setPower(3);
+        filter.setPowerComparison(Filter.ComparisonType.GreaterThan);
+    }
 
     public SmiteTheMonstrous(UUID ownerId) {
         super(ownerId, 33, "Smite the Monstrous", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{W}");
@@ -51,7 +57,7 @@ public class SmiteTheMonstrous extends CardImpl<SmiteTheMonstrous> {
 
         // Destroy target creature with power 4 or greater.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(new FilterTheMonstrous()));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
     public SmiteTheMonstrous(final SmiteTheMonstrous card) {
@@ -61,35 +67,5 @@ public class SmiteTheMonstrous extends CardImpl<SmiteTheMonstrous> {
     @Override
     public SmiteTheMonstrous copy() {
         return new SmiteTheMonstrous(this);
-    }
-}
-
-class FilterTheMonstrous extends FilterPermanent<FilterTheMonstrous> {
-
-    public FilterTheMonstrous() {
-        super("creature with power 4 or greater");
-    }
-
-    public FilterTheMonstrous(FilterTheMonstrous filter) {
-        super(filter);
-    }
-
-    @Override
-    public boolean match(Permanent permanent, Game game) {
-        if (!super.match(permanent, game))
-            return notFilter;
-
-        if (!permanent.getCardType().contains(CardType.CREATURE))
-            return notFilter;
-
-        if (permanent.getPower().getValue() < 4)
-            return notFilter;
-
-        return !notFilter;
-    }
-
-    @Override
-    public FilterTheMonstrous copy() {
-        return new FilterTheMonstrous(this);
     }
 }
