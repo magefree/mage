@@ -39,7 +39,7 @@ import java.util.GregorianCalendar;
  */
 public class UrzasLegacy extends ExpansionSet {
 
-    private static final UrzasLegacy fINSTANCE =  new UrzasLegacy();
+    private static final UrzasLegacy fINSTANCE = new UrzasLegacy();
 
     public static UrzasLegacy getInstance() {
         return fINSTANCE;
@@ -47,6 +47,7 @@ public class UrzasLegacy extends ExpansionSet {
 
     private UrzasLegacy() {
         super("Urza's Legacy", "ULG", "exp_symbol_mtgulg", "mage.sets.urzaslegacy", new GregorianCalendar(1999, 2, 6).getTime(), SetType.EXPANSION);
+        this.blockName = "Urza";
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
@@ -54,5 +55,4 @@ public class UrzasLegacy extends ExpansionSet {
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
     }
-
 }

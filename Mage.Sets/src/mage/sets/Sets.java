@@ -118,6 +118,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
         this.addSet(TimeSpiralTimeshifted.getInstance());
         this.addSet(UrzasSaga.getInstance());
         this.addSet(UrzasLegacy.getInstance());
+        this.addSet(UrzasDestiny.getInstance());
         this.addSet(Weatherlight.getInstance());
         this.addSet(Worldwake.getInstance());
         this.addSet(Zendikar.getInstance());

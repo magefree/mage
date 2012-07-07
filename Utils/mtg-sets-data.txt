@@ -92,12 +92,12 @@ Starter 1999|S99|
 Stronghold|STH|
 Tempest|TMP|
 Torment|TOR|
-Time Spiral "Timeshifted"|TSB|
 Time Spiral|TSP|
-Urza's Destiny|UDS|
+Time Spiral "Timeshifted"|TSB|
 Unglued|UGL|
-Urza's Legacy|ULG|
 Unhinged|UNH|
+Urza's Destiny|UDS|
+Urza's Legacy|ULG|
 Urza's Saga|USG|
 Vanguard Set 1|VG1|
 Vanguard Set 2|VG2|

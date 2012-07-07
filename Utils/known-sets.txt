@@ -11,9 +11,11 @@ Duel Decks: Elspeth vs. Tezzeret|elspethvstezzeret|
 Tempest|tempest|
 Urza's Saga|urzassaga|
 Urza's Legacy|urzaslegacy|
+Urza's Destiny|urzasdestiny|
 Invasion|invasion|
 Planeshift|planeshift|
 Apocalypse|apocalypse|
+Judgment|judgment|
 Onslaught|onslaught|
 Mirrodin|mirrodin|
 Darksteel|darksteel|
