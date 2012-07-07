@@ -25,71 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.urzassaga;
+package mage.sets.onslaught;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.RestrictionEffect;
-import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
  * @author Backfir3
  */
-public class Bedlam extends CardImpl<Bedlam> {
+public class LayWaste extends mage.sets.urzassaga.LayWaste {
 
-    public Bedlam(UUID ownerId) {
-        super(ownerId, 175, "Bedlam", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
-        this.expansionSetCode = "USG";
-        this.color.setRed(true);
-
-        // Creatures can't block.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BedlamEffect()));
+    public LayWaste(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 216;
+        this.expansionSetCode = "ONS";
     }
 
-    public Bedlam(final Bedlam card) {
+    public LayWaste(final LayWaste card) {
         super(card);
     }
 
     @Override
-    public Bedlam copy() {
-        return new Bedlam(this);
-    }
-}
-
-class BedlamEffect extends RestrictionEffect<BedlamEffect> {
-
-    BedlamEffect() {
-        super(Constants.Duration.WhileOnBattlefield);
-        staticText = "Creatures can't block";
-    }
-
-    BedlamEffect(final BedlamEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getCardType().contains(CardType.CREATURE)) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public BedlamEffect copy() {
-        return new BedlamEffect(this);
-    }
-
-    @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return false;
+    public LayWaste copy() {
+        return new LayWaste(this);
     }
 }

@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.urzassaga;
 
 import java.util.UUID;
@@ -33,9 +32,12 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -43,53 +45,55 @@ import mage.game.permanent.Permanent;
  *
  * @author Backfir3
  */
-public class Bedlam extends CardImpl<Bedlam> {
+public class Hush extends CardImpl<Hush> {
 
-    public Bedlam(UUID ownerId) {
-        super(ownerId, 175, "Bedlam", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
+    public Hush(UUID ownerId) {
+        super(ownerId, 266, "Hush", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
         this.expansionSetCode = "USG";
-        this.color.setRed(true);
+        this.color.setGreen(true);
 
-        // Creatures can't block.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BedlamEffect()));
+        this.getSpellAbility().addEffect(new HushEffect());
+        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public Bedlam(final Bedlam card) {
+    public Hush(final Hush card) {
         super(card);
     }
 
     @Override
-    public Bedlam copy() {
-        return new Bedlam(this);
+    public Hush copy() {
+        return new Hush(this);
     }
 }
 
-class BedlamEffect extends RestrictionEffect<BedlamEffect> {
+class HushEffect extends OneShotEffect<HushEffect> {
 
-    BedlamEffect() {
-        super(Constants.Duration.WhileOnBattlefield);
-        staticText = "Creatures can't block";
+    private final static FilterPermanent filter = new FilterPermanent("");
+
+    static {
+        filter.getCardType().add(CardType.ENCHANTMENT);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
     }
 
-    BedlamEffect(final BedlamEffect effect) {
+    public HushEffect() {
+        super(Constants.Outcome.DestroyPermanent);
+        staticText = "Destroy all enchantments";
+    }
+
+    public HushEffect(final HushEffect effect) {
         super(effect);
     }
 
     @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getCardType().contains(CardType.CREATURE)) {
-            return true;
+    public boolean apply(Game game, Ability source) {
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
+            permanent.destroy(source.getId(), game, false);
         }
-        return false;
+        return true;
     }
 
     @Override
-    public BedlamEffect copy() {
-        return new BedlamEffect(this);
-    }
-
-    @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return false;
+    public HushEffect copy() {
+        return new HushEffect(this);
     }
 }

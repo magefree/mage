@@ -25,71 +25,67 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.urzassaga;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
  * @author Backfir3
  */
-public class Bedlam extends CardImpl<Bedlam> {
+public class Catalog extends CardImpl<Catalog> {
 
-    public Bedlam(UUID ownerId) {
-        super(ownerId, 175, "Bedlam", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
+    public Catalog(UUID ownerId) {
+        super(ownerId, 64, "Catalog", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "USG";
-        this.color.setRed(true);
+        this.color.setBlue(true);
 
-        // Creatures can't block.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BedlamEffect()));
+        // Draw two cards, then discard a card.
+        this.getSpellAbility().addEffect(new CatalogEffect());
     }
 
-    public Bedlam(final Bedlam card) {
+    public Catalog(final Catalog card) {
         super(card);
     }
 
     @Override
-    public Bedlam copy() {
-        return new Bedlam(this);
+    public Catalog copy() {
+        return new Catalog(this);
     }
 }
 
-class BedlamEffect extends RestrictionEffect<BedlamEffect> {
+class CatalogEffect extends OneShotEffect<CatalogEffect> {
 
-    BedlamEffect() {
-        super(Constants.Duration.WhileOnBattlefield);
-        staticText = "Creatures can't block";
+    public CatalogEffect() {
+        super(Outcome.DrawCard);
+        this.staticText = "Draw two cards, then discard a card";
     }
 
-    BedlamEffect(final BedlamEffect effect) {
+    public CatalogEffect(final CatalogEffect effect) {
         super(effect);
     }
 
     @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getCardType().contains(CardType.CREATURE)) {
+    public CatalogEffect copy() {
+        return new CatalogEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+            player.drawCards(2, game);
+            player.discard(1, source, game);
             return true;
         }
-        return false;
-    }
-
-    @Override
-    public BedlamEffect copy() {
-        return new BedlamEffect(this);
-    }
-
-    @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
         return false;
     }
 }

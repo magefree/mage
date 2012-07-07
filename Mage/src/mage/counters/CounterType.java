@@ -64,7 +64,8 @@ public enum CounterType {
     EYEBALL(new EyeballCounter().name),
     ELIXIR(new ElixirCounter().name),
     PAIN(new PainCounter().name),
-    DESPAIR(new DespairCounter().name);
+    DESPAIR(new DespairCounter().name),
+    PAGE(new PageCounter().name);
 
     private String name;
 
@@ -156,6 +157,8 @@ public enum CounterType {
                 return new PainCounter(amount);
             case DESPAIR:
                 return new DespairCounter(amount);
+            case PAGE:
+                return new PageCounter(amount);
         }
         return null;
     }

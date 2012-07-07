@@ -25,71 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.urzassaga;
+package mage.sets.urzaslegacy;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.RestrictionEffect;
+import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.abilities.keyword.EchoAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.filter.common.FilterBasicLandCard;
+import mage.target.common.TargetCardInLibrary;
 
 /**
  *
  * @author Backfir3
  */
-public class Bedlam extends CardImpl<Bedlam> {
+public class YavimayaGranger extends CardImpl<YavimayaGranger> {
 
-    public Bedlam(UUID ownerId) {
-        super(ownerId, 175, "Bedlam", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
-        this.expansionSetCode = "USG";
-        this.color.setRed(true);
+    private final static FilterBasicLandCard filter = new FilterBasicLandCard();
 
-        // Creatures can't block.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BedlamEffect()));
+    public YavimayaGranger(UUID ownerId) {
+        super(ownerId, 118, "Yavimaya Granger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
+        this.expansionSetCode = "ULG";
+        this.subtype.add("Elf");
+        this.color.setGreen(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        this.addAbility(new EchoAbility("{2}{G}"));
+        //When Yavimaya Granger enters the battlefield, you may search your library for a basic land card,
+        //put that card onto the battlefield tapped, then shuffle your library.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true), true));
     }
 
-    public Bedlam(final Bedlam card) {
+    public YavimayaGranger(final YavimayaGranger card) {
         super(card);
     }
 
     @Override
-    public Bedlam copy() {
-        return new Bedlam(this);
-    }
-}
-
-class BedlamEffect extends RestrictionEffect<BedlamEffect> {
-
-    BedlamEffect() {
-        super(Constants.Duration.WhileOnBattlefield);
-        staticText = "Creatures can't block";
-    }
-
-    BedlamEffect(final BedlamEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getCardType().contains(CardType.CREATURE)) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public BedlamEffect copy() {
-        return new BedlamEffect(this);
-    }
-
-    @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return false;
+    public YavimayaGranger copy() {
+        return new YavimayaGranger(this);
     }
 }

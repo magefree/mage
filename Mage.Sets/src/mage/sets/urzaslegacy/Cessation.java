@@ -25,71 +25,86 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.urzassaga;
+package mage.sets.urzaslegacy;
 
 import java.util.UUID;
+
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.ReturnToHandSourceEffect;
+import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author Backfir3
  */
-public class Bedlam extends CardImpl<Bedlam> {
+public class Cessation extends CardImpl<Cessation> {
 
-    public Bedlam(UUID ownerId) {
-        super(ownerId, 175, "Bedlam", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
-        this.expansionSetCode = "USG";
-        this.color.setRed(true);
+    public Cessation(UUID ownerId) {
+        super(ownerId, 4, "Cessation", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
+        this.expansionSetCode = "ULG";
+        this.subtype.add("Aura");
+        this.color.setWhite(true);
 
-        // Creatures can't block.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BedlamEffect()));
+        //Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Detriment));
+        //Enchanted creature can't attack.
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new CessationEffect()));
+        //When Cessation is put into a graveyard from the battlefield, return Cessation to its owner's hand.
+        this.addAbility(new DiesTriggeredAbility(new ReturnToHandSourceEffect()));
     }
 
-    public Bedlam(final Bedlam card) {
+    public Cessation(final Cessation card) {
         super(card);
     }
 
     @Override
-    public Bedlam copy() {
-        return new Bedlam(this);
+    public Cessation copy() {
+        return new Cessation(this);
     }
 }
 
-class BedlamEffect extends RestrictionEffect<BedlamEffect> {
+class CessationEffect extends RestrictionEffect<CessationEffect> {
 
-    BedlamEffect() {
+    public CessationEffect() {
         super(Constants.Duration.WhileOnBattlefield);
-        staticText = "Creatures can't block";
+        staticText = "Enchanted creature can't attack";
     }
 
-    BedlamEffect(final BedlamEffect effect) {
+    public CessationEffect(final CessationEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getCardType().contains(CardType.CREATURE)) {
+        if (permanent.getAttachments().contains((source.getSourceId()))) {
             return true;
         }
         return false;
     }
 
     @Override
-    public BedlamEffect copy() {
-        return new BedlamEffect(this);
+    public boolean canAttack(Game game) {
+        return false;
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return false;
+    public CessationEffect copy() {
+        return new CessationEffect(this);
     }
 }

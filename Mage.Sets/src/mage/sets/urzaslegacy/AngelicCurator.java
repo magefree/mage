@@ -25,71 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.urzassaga;
+package mage.sets.urzaslegacy;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.RestrictionEffect;
+import mage.MageInt;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.filter.common.FilterArtifactCard;
 
 /**
  *
  * @author Backfir3
  */
-public class Bedlam extends CardImpl<Bedlam> {
+public class AngelicCurator extends CardImpl<AngelicCurator> {
 
-    public Bedlam(UUID ownerId) {
-        super(ownerId, 175, "Bedlam", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
-        this.expansionSetCode = "USG";
-        this.color.setRed(true);
+    public AngelicCurator(UUID ownerId) {
+        super(ownerId, 1, "Angelic Curator", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        this.expansionSetCode = "ULG";
+        this.subtype.add("Angel");
+        this.subtype.add("Spirit");
+        this.color.setWhite(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        // Creatures can't block.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BedlamEffect()));
+        this.addAbility(FlyingAbility.getInstance());
+        // Protection from artifacts
+        this.addAbility(new ProtectionAbility(new FilterArtifactCard("artifacts")));
     }
 
-    public Bedlam(final Bedlam card) {
+    public AngelicCurator(final AngelicCurator card) {
         super(card);
     }
 
     @Override
-    public Bedlam copy() {
-        return new Bedlam(this);
-    }
-}
-
-class BedlamEffect extends RestrictionEffect<BedlamEffect> {
-
-    BedlamEffect() {
-        super(Constants.Duration.WhileOnBattlefield);
-        staticText = "Creatures can't block";
-    }
-
-    BedlamEffect(final BedlamEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getCardType().contains(CardType.CREATURE)) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public BedlamEffect copy() {
-        return new BedlamEffect(this);
-    }
-
-    @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return false;
+    public AngelicCurator copy() {
+        return new AngelicCurator(this);
     }
 }

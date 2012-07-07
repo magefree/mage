@@ -25,71 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.urzassaga;
+package mage.sets.urzaslegacy;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.keyword.EchoAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.target.common.TargetLandPermanent;
 
 /**
  *
  * @author Backfir3
  */
-public class Bedlam extends CardImpl<Bedlam> {
+public class AvalancheRiders extends CardImpl<AvalancheRiders> {
 
-    public Bedlam(UUID ownerId) {
-        super(ownerId, 175, "Bedlam", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
-        this.expansionSetCode = "USG";
+    public AvalancheRiders(UUID ownerId) {
+        super(ownerId, 74, "Avalanche Riders", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
+        this.expansionSetCode = "ULG";
+        this.subtype.add("Human");
+        this.subtype.add("Nomad");
         this.color.setRed(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        // Creatures can't block.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BedlamEffect()));
+        this.addAbility(new EchoAbility("{3}{R}"));
+        //When Avalanche Riders enters the battlefield, destroy target land.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
+        ability.addTarget(new TargetLandPermanent());
+        this.addAbility(ability);
     }
 
-    public Bedlam(final Bedlam card) {
+    public AvalancheRiders(final AvalancheRiders card) {
         super(card);
     }
 
     @Override
-    public Bedlam copy() {
-        return new Bedlam(this);
-    }
-}
-
-class BedlamEffect extends RestrictionEffect<BedlamEffect> {
-
-    BedlamEffect() {
-        super(Constants.Duration.WhileOnBattlefield);
-        staticText = "Creatures can't block";
-    }
-
-    BedlamEffect(final BedlamEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getCardType().contains(CardType.CREATURE)) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public BedlamEffect copy() {
-        return new BedlamEffect(this);
-    }
-
-    @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return false;
+    public AvalancheRiders copy() {
+        return new AvalancheRiders(this);
     }
 }

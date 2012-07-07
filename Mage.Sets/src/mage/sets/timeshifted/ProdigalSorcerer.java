@@ -25,71 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.urzassaga;
+package mage.sets.timeshifted;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.RestrictionEffect;
+import mage.Constants.Zone;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
  * @author Backfir3
  */
-public class Bedlam extends CardImpl<Bedlam> {
+public class ProdigalSorcerer extends CardImpl<ProdigalSorcerer> {
 
-    public Bedlam(UUID ownerId) {
-        super(ownerId, 175, "Bedlam", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
-        this.expansionSetCode = "USG";
-        this.color.setRed(true);
+    public ProdigalSorcerer(UUID ownerId) {
+        super(ownerId, 29, "Prodigal Sorcerer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
+        this.expansionSetCode = "TSB";
+        this.subtype.add("Human");
+        this.subtype.add("Wizard");
+        this.color.setBlue(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        // Creatures can't block.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BedlamEffect()));
+        //{T}: Prodigal Sorcerer deals 1 damage to target creature or player.
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        ability.addTarget(new TargetCreatureOrPlayer());
+        this.addAbility(ability);
     }
 
-    public Bedlam(final Bedlam card) {
+    public ProdigalSorcerer(final ProdigalSorcerer card) {
         super(card);
     }
 
     @Override
-    public Bedlam copy() {
-        return new Bedlam(this);
-    }
-}
-
-class BedlamEffect extends RestrictionEffect<BedlamEffect> {
-
-    BedlamEffect() {
-        super(Constants.Duration.WhileOnBattlefield);
-        staticText = "Creatures can't block";
-    }
-
-    BedlamEffect(final BedlamEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getCardType().contains(CardType.CREATURE)) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public BedlamEffect copy() {
-        return new BedlamEffect(this);
-    }
-
-    @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return false;
+    public ProdigalSorcerer copy() {
+        return new ProdigalSorcerer(this);
     }
 }

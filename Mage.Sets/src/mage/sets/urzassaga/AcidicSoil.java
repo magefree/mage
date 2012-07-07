@@ -25,71 +25,78 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.urzassaga;
 
+import java.util.List;
 import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
  * @author Backfir3
  */
-public class Bedlam extends CardImpl<Bedlam> {
+public class AcidicSoil extends CardImpl<AcidicSoil> {
 
-    public Bedlam(UUID ownerId) {
-        super(ownerId, 175, "Bedlam", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
+    public AcidicSoil(UUID ownerId) {
+        super(ownerId, 172, "Acidic Soil", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
         this.expansionSetCode = "USG";
         this.color.setRed(true);
 
-        // Creatures can't block.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BedlamEffect()));
+        //Acidic Soil deals damage to each player equal to the number of lands he or she controls.
+        this.getSpellAbility().addEffect(new AcidicSoilEffect());
     }
 
-    public Bedlam(final Bedlam card) {
+    public AcidicSoil(final AcidicSoil card) {
         super(card);
     }
 
     @Override
-    public Bedlam copy() {
-        return new Bedlam(this);
+    public AcidicSoil copy() {
+        return new AcidicSoil(this);
     }
 }
 
-class BedlamEffect extends RestrictionEffect<BedlamEffect> {
+class AcidicSoilEffect extends OneShotEffect<AcidicSoilEffect> {
 
-    BedlamEffect() {
-        super(Constants.Duration.WhileOnBattlefield);
-        staticText = "Creatures can't block";
+    AcidicSoilEffect() {
+        super(Constants.Outcome.Damage);
+        staticText = "Acidic Soil deals damage to each player equal to the number of lands he or she controls";
     }
 
-    BedlamEffect(final BedlamEffect effect) {
+    AcidicSoilEffect(final AcidicSoilEffect effect) {
         super(effect);
     }
 
     @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getCardType().contains(CardType.CREATURE)) {
-            return true;
+    public boolean apply(Game game, Ability source) {
+        List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(CardType.LAND);
+        for (UUID playerId : game.getPlayerList()) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                int amount = 0;
+                for (Permanent permanent : permanents) {
+                    if (permanent.getControllerId().equals(playerId)) {
+                        amount++;
+                    }
+                }
+                if (amount > 0) {
+                    player.damage(amount, source.getId(), game, false, true);
+                }
+            }
         }
-        return false;
+        return true;
     }
 
     @Override
-    public BedlamEffect copy() {
-        return new BedlamEffect(this);
-    }
-
-    @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return false;
+    public AcidicSoilEffect copy() {
+        return new AcidicSoilEffect(this);
     }
 }

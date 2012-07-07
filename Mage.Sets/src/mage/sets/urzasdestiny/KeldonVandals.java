@@ -25,71 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.urzassaga;
+package mage.sets.urzasdestiny;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.keyword.EchoAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.filter.Filter;
+import mage.filter.FilterPermanent;
+import mage.target.TargetPermanent;
 
 /**
  *
  * @author Backfir3
  */
-public class Bedlam extends CardImpl<Bedlam> {
+public class KeldonVandals extends CardImpl<KeldonVandals> {
 
-    public Bedlam(UUID ownerId) {
-        super(ownerId, 175, "Bedlam", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
-        this.expansionSetCode = "USG";
-        this.color.setRed(true);
+    private static final FilterPermanent filter = new FilterPermanent("artifact");
 
-        // Creatures can't block.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BedlamEffect()));
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
     }
 
-    public Bedlam(final Bedlam card) {
+    public KeldonVandals(UUID ownerId) {
+        super(ownerId, 91, "Keldon Vandals", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        this.expansionSetCode = "UDS";
+        this.subtype.add("Human");
+        this.subtype.add("Rogue");
+
+        this.color.setRed(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(1);
+
+        this.addAbility(new EchoAbility("{2}{R}"));
+        // When Keldon Vandals enters the battlefield, destroy target artifact.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
+        ability.addTarget(new TargetPermanent(filter));
+        this.addAbility(ability);
+    }
+
+    public KeldonVandals(final KeldonVandals card) {
         super(card);
     }
 
     @Override
-    public Bedlam copy() {
-        return new Bedlam(this);
-    }
-}
-
-class BedlamEffect extends RestrictionEffect<BedlamEffect> {
-
-    BedlamEffect() {
-        super(Constants.Duration.WhileOnBattlefield);
-        staticText = "Creatures can't block";
-    }
-
-    BedlamEffect(final BedlamEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getCardType().contains(CardType.CREATURE)) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public BedlamEffect copy() {
-        return new BedlamEffect(this);
-    }
-
-    @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return false;
+    public KeldonVandals copy() {
+        return new KeldonVandals(this);
     }
 }

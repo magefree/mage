@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.urzassaga;
 
 import java.util.UUID;
@@ -33,63 +32,35 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
  * @author Backfir3
  */
-public class Bedlam extends CardImpl<Bedlam> {
+public class ClawsOfGix extends CardImpl<ClawsOfGix> {
 
-    public Bedlam(UUID ownerId) {
-        super(ownerId, 175, "Bedlam", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
+    public ClawsOfGix(UUID ownerId) {
+        super(ownerId, 290, "Claws of Gix", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{0}");
         this.expansionSetCode = "USG";
-        this.color.setRed(true);
 
-        // Creatures can't block.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BedlamEffect()));
+        //{1}, Sacrifice a permanent: You gain 1 life.
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainLifeEffect(1), new GenericManaCost(1));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent()));
+        this.addAbility(ability);
     }
 
-    public Bedlam(final Bedlam card) {
+    public ClawsOfGix(final ClawsOfGix card) {
         super(card);
     }
 
     @Override
-    public Bedlam copy() {
-        return new Bedlam(this);
-    }
-}
-
-class BedlamEffect extends RestrictionEffect<BedlamEffect> {
-
-    BedlamEffect() {
-        super(Constants.Duration.WhileOnBattlefield);
-        staticText = "Creatures can't block";
-    }
-
-    BedlamEffect(final BedlamEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getCardType().contains(CardType.CREATURE)) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public BedlamEffect copy() {
-        return new BedlamEffect(this);
-    }
-
-    @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return false;
+    public ClawsOfGix copy() {
+        return new ClawsOfGix(this);
     }
 }
