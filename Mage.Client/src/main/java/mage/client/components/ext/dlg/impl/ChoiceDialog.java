@@ -86,7 +86,7 @@ public class ChoiceDialog extends IDialogPanel {
      * @return void
      */
     private void initialize() {
-        jTitle = new ShadowLabel("Choose a card (by double-click), chosen card: none", 14);
+        jTitle = new ShadowLabel("Graveyard", 14);
         jTitle.setBounds(new Rectangle(5, 3, 500, 16));
         jTitle.setFont(new Font("Dialog", Font.BOLD, 14));
 
