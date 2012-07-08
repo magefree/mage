@@ -33,18 +33,18 @@ import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
 import mage.abilities.Ability;
+import mage.abilities.CompoundAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class GainAbilityControlledEffect extends ContinuousEffectImpl<GainAbilityControlledEffect> {
 
-    protected Ability ability;
+    protected CompoundAbility ability;
     protected boolean excludeSource;
     protected FilterPermanent filter;
 
@@ -52,11 +52,23 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl<GainAbilit
         this(ability, duration, new FilterPermanent());
     }
 
+    public GainAbilityControlledEffect(CompoundAbility ability, Duration duration) {
+        this(ability, duration, new FilterPermanent());
+    }
+
     public GainAbilityControlledEffect(Ability ability, Duration duration, FilterPermanent filter) {
         this(ability, duration, filter, false);
     }
 
+    public GainAbilityControlledEffect(CompoundAbility ability, Duration duration, FilterPermanent filter) {
+        this(ability, duration, filter, false);
+    }
+
     public GainAbilityControlledEffect(Ability ability, Duration duration, FilterPermanent filter, boolean excludeSource) {
+        this(new CompoundAbility(ability), duration, filter, excludeSource);
+    }
+
+    public GainAbilityControlledEffect(CompoundAbility ability, Duration duration, FilterPermanent filter, boolean excludeSource) {
         super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.ability = ability;
         this.filter = filter;
@@ -75,7 +87,7 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl<GainAbilit
     public void init(Ability source, Game game) {
         super.init(source, game);
         if (this.affectedObjectsSet) {
-            for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
+            for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                 if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
                     objects.add(perm.getId());
                 }
@@ -90,14 +102,24 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl<GainAbilit
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
+        for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
             if (!this.affectedObjectsSet || objects.contains(perm.getId())) {
                 if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
-                    perm.addAbility(ability, game);
+                    for (Ability abilityToAdd : ability) {
+                        perm.addAbility(abilityToAdd, game);
+                    }
                 }
             }
         }
         return true;
+    }
+
+    public void setAbility(Ability ability) {
+        this.ability = new CompoundAbility(ability);
+    }
+
+    public Ability getFirstAbility() {
+        return ability.get(0);
     }
 
     private void setText() {
@@ -105,10 +127,10 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl<GainAbilit
         if (excludeSource)
             sb.append("Other ");
         sb.append(filter.getMessage()).append(" you control ");
-                if (duration.equals(Duration.WhileOnBattlefield))
-                    sb.append("have ");
-                else
-                    sb.append("gain ");
+        if (duration.equals(Duration.WhileOnBattlefield))
+            sb.append("have ");
+        else
+            sb.append("gain ");
         sb.append(ability.getRule()).append(" ").append(duration.toString());
         staticText = sb.toString();
     }
