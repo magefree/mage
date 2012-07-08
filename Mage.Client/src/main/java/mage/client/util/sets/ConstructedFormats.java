@@ -31,7 +31,7 @@ public class ConstructedFormats {
 
     public static List<String> getSetsByFormat(String format) {
         if (format.equals("M13")) {
-            return innistradBlock;
+            return m13;
         }
         if (format.equals("ISD\\DKA\\AVR")) {
             return innistradBlock;
@@ -54,7 +54,7 @@ public class ConstructedFormats {
             if (set.getReleaseDate().after(m13Date)) {
                 m13.add(set.getCode());
             }
-            if (set.getReleaseDate().after(innistradBlockDate)) {
+            if (set.getReleaseDate().after(innistradBlockDate) && set.getReleaseDate().before(m13Date)) {
                 innistradBlock.add(set.getCode());
             }
             if (set.getReleaseDate().after(standardDate)) {
