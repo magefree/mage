@@ -67,8 +67,6 @@ public class TapTargetEffect extends OneShotEffect<TapTargetEffect> {
             Permanent permanent = game.getPermanent(target);
             if (permanent != null) {
                 permanent.tap(game);
-            } else {
-                return false;
             }
         }
         return true;
@@ -76,17 +74,20 @@ public class TapTargetEffect extends OneShotEffect<TapTargetEffect> {
 
     @Override
     public String getText(Mode mode) {
-        if (staticText.length() > 0)
+        if (staticText.length() > 0) {
             return "tap " + staticText;
+        }
 
         Target target = mode.getTargets().get(0);
-        if (target.getMaxNumberOfTargets() > 1)
-            if (target.getMaxNumberOfTargets() == target.getNumberOfTargets())
+        if (target.getMaxNumberOfTargets() > 1) {
+            if (target.getMaxNumberOfTargets() == target.getNumberOfTargets()) {
                 return "tap " + target.getNumberOfTargets() + " target " + target.getTargetName() + "s";
-            else
+            } else {
                 return "tap up to " + target.getMaxNumberOfTargets() + " target " + target.getTargetName() + "s";
-        else
+            }
+        } else {
             return "tap target " + mode.getTargets().get(0).getTargetName();
+        }
     }
 
 }
