@@ -27,22 +27,20 @@
  */
 package mage.sets.mirrodinbesieged;
 
-import mage.Constants.*;
+import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Outcome;
+import mage.Constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.common.CantBlockAbility;
 import mage.abilities.condition.common.MetalcraftCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPlayer;
-
-import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -56,9 +54,12 @@ public class ConcussiveBolt extends CardImpl<ConcussiveBolt> {
 
         this.color.setRed(true);
 
+        // Concussive Bolt deals 4 damage to target player.
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
-        this.getSpellAbility().addEffect(new ConditionalContinousEffect(new ConcussiveBoltEffect(), MetalcraftCondition.getInstance(), "Metalcraft - If you control three or more artifacts, creatures that player controls can't block this turn"));
+        // Metalcraft - If you control three or more artifacts, creatures that player controls can't block this turn.
+        this.getSpellAbility().addEffect(new ConcussiveBoltEffect());
+        this.getSpellAbility().addEffect(new ConcussiveBoltRestrictionEffect());
     }
 
     public ConcussiveBolt(final ConcussiveBolt card) {
@@ -71,11 +72,11 @@ public class ConcussiveBolt extends CardImpl<ConcussiveBolt> {
     }
 }
 
-class ConcussiveBoltEffect extends ContinuousEffectImpl {
+class ConcussiveBoltEffect extends OneShotEffect<ConcussiveBoltEffect> {
 
     public ConcussiveBoltEffect() {
-        super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-        this.staticText = "creatures target player controls can't block this turn";
+        super(Outcome.Benefit);
+        this.staticText = "Metalcraft - If you control three or more artifacts, creatures that player controls can't block this turn";
     }
 
     public ConcussiveBoltEffect(final ConcussiveBoltEffect effect) {
@@ -89,15 +90,37 @@ class ConcussiveBoltEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int affectedTargets = 0;
-        Player player = game.getPlayer(source.getFirstTarget());
-        if (player != null) {
-            List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game);
-            for (Permanent permanent : permanents) {
-                permanent.addAbility(CantBlockAbility.getInstance(), game);
-                affectedTargets++;
-            }
+        source.getEffects().get(2).setValue("MetalcraftConcussiveBolt", MetalcraftCondition.getInstance().apply(game, source));
+        return true;
+    }
+}
+
+class ConcussiveBoltRestrictionEffect extends RestrictionEffect<ConcussiveBoltRestrictionEffect> {
+
+    public ConcussiveBoltRestrictionEffect() {
+        super(Duration.EndOfTurn);
+    }
+
+    public ConcussiveBoltRestrictionEffect(final ConcussiveBoltRestrictionEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public ConcussiveBoltRestrictionEffect copy() {
+        return new ConcussiveBoltRestrictionEffect(this);
+    }
+
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        Boolean metalcraft = (Boolean) this.getValue("MetalcraftConcussiveBolt");
+        if (metalcraft && permanent.getControllerId().equals(source.getFirstTarget())) {
+            return true;
         }
-        return affectedTargets > 0;
+        return false;
+    }
+
+    @Override
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        return false;
     }
 }
