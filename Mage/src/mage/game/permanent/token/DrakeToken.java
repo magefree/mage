@@ -44,8 +44,8 @@ public class DrakeToken extends Token {
         this.subtype.add("Drake");
 
         this.color = ObjectColor.BLUE;
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
         this.addAbility(FlyingAbility.getInstance());
     }
