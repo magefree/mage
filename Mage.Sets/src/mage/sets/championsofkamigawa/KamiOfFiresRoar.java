@@ -30,14 +30,13 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.CantBlockAbility;
 import mage.abilities.common.SpellCastTriggeredAbility;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.effects.common.CantBlockTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterSpiritOrArcaneCard;
 import mage.target.common.TargetCreaturePermanent;
@@ -56,7 +55,9 @@ public class KamiOfFiresRoar extends CardImpl<KamiOfFiresRoar> {
         this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
-        Ability ability = new SpellCastTriggeredAbility(new GainAbilityTargetEffect(CantBlockAbility.getInstance(), Constants.Duration.EndOfTurn), filter, false);
+
+        // Whenever you cast a Spirit or Arcane spell, target creature can't block this turn.
+        Ability ability = new SpellCastTriggeredAbility(new CantBlockTargetEffect(Duration.EndOfTurn), filter, false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

@@ -29,9 +29,11 @@ package mage.abilities.effects.common;
 
 import mage.Constants.Duration;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.RestrictionEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.Target;
 
 /**
  *
@@ -41,7 +43,6 @@ public class CantBlockTargetEffect extends RestrictionEffect<CantBlockTargetEffe
 
     public CantBlockTargetEffect(Duration duration) {
         super(duration);
-        this.staticText = "target creature can't block this turn";
     }
 
     public CantBlockTargetEffect(final CantBlockTargetEffect effect) {
@@ -50,7 +51,7 @@ public class CantBlockTargetEffect extends RestrictionEffect<CantBlockTargetEffe
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getId().equals(source.getFirstTarget())) {
+        if (this.targetPointer.getTargets(game, source).contains(permanent.getId())) {
             return true;
         }
         return false;
@@ -64,5 +65,32 @@ public class CantBlockTargetEffect extends RestrictionEffect<CantBlockTargetEffe
     @Override
     public CantBlockTargetEffect copy() {
         return new CantBlockTargetEffect(this);
+    }
+
+    @Override
+    public String getText(Mode mode) {
+        if (mode.getTargets().isEmpty()) {
+            return "";
+        }
+
+        StringBuilder sb = new StringBuilder();
+        Target target = mode.getTargets().get(0);
+        if (target.getMaxNumberOfTargets() > 1) {
+            if (target.getMaxNumberOfTargets() != target.getNumberOfTargets()) {
+                sb.append("up to ");
+            }
+            sb.append(target.getMaxNumberOfTargets()).append(" ");
+        }
+        sb.append("target ").append(mode.getTargets().get(0).getTargetName());
+        if (target.getMaxNumberOfTargets() > 1) {
+            sb.append("s");
+        }
+
+        sb.append(" can't block");
+        if (Duration.EndOfTurn.equals(this.duration)) {
+            sb.append(" this turn");
+        }
+
+        return sb.toString();
     }
 }

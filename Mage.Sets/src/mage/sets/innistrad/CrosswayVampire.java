@@ -33,9 +33,8 @@ import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.CantBlockAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.effects.common.CantBlockTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -55,7 +54,7 @@ public class CrosswayVampire extends CardImpl<CrosswayVampire> {
         this.toughness = new MageInt(2);
 
         // When Crossway Vampire enters the battlefield, target creature can't block this turn.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new GainAbilityTargetEffect(CantBlockAbility.getInstance(), Duration.EndOfTurn));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new CantBlockTargetEffect(Duration.EndOfTurn));
         ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }

@@ -31,9 +31,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.abilities.Mode;
-import mage.abilities.common.CantBlockAbility;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.effects.common.CantBlockTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -50,7 +48,7 @@ public class PanicAttack extends CardImpl<PanicAttack> {
         this.color.setRed(true);
 
         // Up to three target creatures can't block this turn.
-        this.getSpellAbility().addEffect(new PanicAttackEffect());
+        this.getSpellAbility().addEffect(new CantBlockTargetEffect(Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 3));
     }
 
@@ -61,27 +59,5 @@ public class PanicAttack extends CardImpl<PanicAttack> {
     @Override
     public PanicAttack copy() {
         return new PanicAttack(this);
-    }
-}
-
-class PanicAttackEffect extends GainAbilityTargetEffect {
-
-    public PanicAttackEffect() {
-        super(CantBlockAbility.getInstance(), Duration.EndOfTurn);
-        staticText = "Up to three target creatures can't block this turn";
-    }
-
-    public PanicAttackEffect(final PanicAttackEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public PanicAttackEffect copy() {
-        return new PanicAttackEffect(this);
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return staticText;
     }
 }

@@ -32,10 +32,8 @@ import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Mode;
-import mage.abilities.common.CantBlockAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.effects.common.CantBlockTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;
@@ -58,7 +56,7 @@ public class MarkovWarlord extends CardImpl<MarkovWarlord> {
 
         this.addAbility(HasteAbility.getInstance());
         // When Markov Warlord enters the battlefield, up to two target creatures can't block this turn.
-        EntersBattlefieldAbility ability = new EntersBattlefieldAbility(new MarkovWarlordEffect());
+        EntersBattlefieldAbility ability = new EntersBattlefieldAbility(new CantBlockTargetEffect(Duration.EndOfTurn));
         ability.addTarget(new TargetCreaturePermanent(0, 2));
         this.addAbility(ability);
 
@@ -71,27 +69,5 @@ public class MarkovWarlord extends CardImpl<MarkovWarlord> {
     @Override
     public MarkovWarlord copy() {
         return new MarkovWarlord(this);
-    }
-}
-
-class MarkovWarlordEffect extends GainAbilityTargetEffect {
-
-    public MarkovWarlordEffect() {
-        super(CantBlockAbility.getInstance(), Duration.EndOfTurn);
-        staticText = "Up to two target creatures can't block this turn";
-    }
-
-    public MarkovWarlordEffect(final MarkovWarlordEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public MarkovWarlordEffect copy() {
-        return new MarkovWarlordEffect(this);
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return staticText;
     }
 }

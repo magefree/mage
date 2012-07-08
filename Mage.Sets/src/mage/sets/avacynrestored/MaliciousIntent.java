@@ -31,13 +31,12 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.common.CantBlockAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.CantBlockTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.target.TargetPermanent;
@@ -67,7 +66,7 @@ public class MaliciousIntent extends CardImpl<MaliciousIntent> {
         this.addAbility(ability);
 
         // Enchanted creature has "{tap}: Target creature can't block this turn."
-        Ability gainedAbility = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainAbilityTargetEffect(CantBlockAbility.getInstance(), Constants.Duration.EndOfTurn), new TapSourceCost());
+        Ability gainedAbility = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CantBlockTargetEffect(Constants.Duration.EndOfTurn), new TapSourceCost());
         gainedAbility.addTarget(new TargetCreaturePermanent());
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, Constants.AttachmentType.AURA)));
     }

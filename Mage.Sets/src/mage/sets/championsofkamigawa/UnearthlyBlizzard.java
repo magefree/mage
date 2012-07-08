@@ -30,14 +30,11 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.abilities.Mode;
-import mage.abilities.common.CantBlockAbility;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.effects.common.CantBlockTargetEffect;
 import mage.cards.CardImpl;
-import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -51,12 +48,9 @@ public class UnearthlyBlizzard extends CardImpl<UnearthlyBlizzard> {
         this.subtype.add("Arcane");
         this.color.setRed(true);
 
-        Target target = new TargetCreaturePermanent(0, 3);
-        target.setTargetName("Select up to three creatures that can't block this turn.");
-
         // Up to three target creatures can't block this turn.
-        this.getSpellAbility().addEffect(new UnearthlyBlizzardEffect());
-        this.getSpellAbility().addTarget(target);
+        this.getSpellAbility().addEffect(new CantBlockTargetEffect(Duration.EndOfTurn));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 3));
 
     }
 
@@ -67,27 +61,5 @@ public class UnearthlyBlizzard extends CardImpl<UnearthlyBlizzard> {
     @Override
     public UnearthlyBlizzard copy() {
         return new UnearthlyBlizzard(this);
-    }
-}
-
-class UnearthlyBlizzardEffect extends GainAbilityTargetEffect {
-
-    public UnearthlyBlizzardEffect() {
-        super(CantBlockAbility.getInstance(), Constants.Duration.EndOfTurn);
-        staticText = "Up to three target creatures can't block this turn";
-    }
-
-    public UnearthlyBlizzardEffect(final UnearthlyBlizzardEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public UnearthlyBlizzardEffect copy() {
-        return new UnearthlyBlizzardEffect(this);
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return staticText;
     }
 }

@@ -33,9 +33,8 @@ import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.CantBlockAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.effects.common.CantBlockTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -55,7 +54,8 @@ public class GoblinShortcutter extends CardImpl<GoblinShortcutter> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        Ability ability = new EntersBattlefieldTriggeredAbility(new GainAbilityTargetEffect(CantBlockAbility.getInstance(), Duration.EndOfTurn));
+        // When Goblin Shortcutter enters the battlefield, target creature can't block this turn.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new CantBlockTargetEffect(Duration.EndOfTurn));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
