@@ -28,7 +28,6 @@
 
 package mage.sets.tenth;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
@@ -37,6 +36,8 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  *
@@ -52,7 +53,7 @@ public class RavenousRats extends CardImpl<RavenousRats> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         Ability ability = new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(1));
-        ability.addTarget(new TargetOpponent());
+        ability.addTarget(new TargetOpponent(true));
         this.addAbility(ability);
     }
 
