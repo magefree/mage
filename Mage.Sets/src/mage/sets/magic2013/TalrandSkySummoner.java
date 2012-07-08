@@ -34,6 +34,8 @@ import mage.MageInt;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
+import mage.filter.FilterSpell;
 import mage.game.permanent.token.DrakeToken;
 
 /**
@@ -41,6 +43,14 @@ import mage.game.permanent.token.DrakeToken;
  * @author North
  */
 public class TalrandSkySummoner extends CardImpl<TalrandSkySummoner> {
+
+    private static final FilterSpell filter = new FilterSpell("instant or sorcery card");
+
+    static {
+        filter.getCardType().add(CardType.INSTANT);
+        filter.getCardType().add(CardType.SORCERY);
+        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+    }
 
     public TalrandSkySummoner(UUID ownerId) {
         super(ownerId, 72, "Talrand, Sky Summoner", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
@@ -54,7 +64,7 @@ public class TalrandSkySummoner extends CardImpl<TalrandSkySummoner> {
         this.toughness = new MageInt(2);
 
         // Whenever you cast an instant or sorcery spell, put a 2/2 blue Drake creature token with flying onto the battlefield.
-        this.addAbility(new SpellCastTriggeredAbility(new CreateTokenEffect(new DrakeToken()), false));
+        this.addAbility(new SpellCastTriggeredAbility(new CreateTokenEffect(new DrakeToken()), filter, false));
     }
 
     public TalrandSkySummoner(final TalrandSkySummoner card) {
