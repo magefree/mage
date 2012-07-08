@@ -56,10 +56,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.io.Serializable;
 import java.util.*;
 import java.util.concurrent.CancellationException;
@@ -732,6 +729,17 @@ public class GamePanel extends javax.swing.JPanel {
         btnEndTurn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
+                btnEndTurnActionPerformed(null);
+            }
+        });
+
+        int c = JComponent.WHEN_IN_FOCUSED_WINDOW;
+        KeyStroke ks = KeyStroke.getKeyStroke(KeyEvent.VK_F4, 0);
+
+        this.getInputMap(c).put(ks, "PRESS");
+        this.getActionMap().put("PRESS", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
                 btnEndTurnActionPerformed(null);
             }
         });

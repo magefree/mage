@@ -73,14 +73,8 @@ public class HelperPanel extends JPanel {
         textArea = new MageTextArea();
         textArea.setText("<Empty>");
 
-        //jScrollPane1 = new javax.swing.JScrollPane();
-        //jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        //jScrollPane1.setViewportView(textArea);
-        //jScrollPane1.setBorder(null);
-
         jPanel.setOpaque(false);
         jPanel.setBackground(new Color(0, 0, 0, 80));
-        //jPanel.add(jScrollPane1);
         jPanel.add(textArea);
         add(jPanel);
 
@@ -95,18 +89,6 @@ public class HelperPanel extends JPanel {
         btnRight = new JButton("Cancel");
         btnRight.setVisible(false);
         container.add(btnRight);
-
-        //btnStopTimer = new JButton("Stop timer");
-        //btnStopTimer.setToolTipText("Stop auto phase skipping timer");
-        //add(btnStopTimer);
-
-        /*
-        btnEndTurn = new JButton("End Turn");
-        btnEndTurn.setToolTipText("End The Turn");
-        btnEndTurn.setFocusable(false);
-        btnEndTurn.setVisible(false);
-        container.add(btnEndTurn);
-        */
 
         btnLeft.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
