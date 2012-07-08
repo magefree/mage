@@ -28,7 +28,6 @@
 
 package mage.sets.zendikar;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
@@ -41,6 +40,8 @@ import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  *
@@ -81,7 +82,7 @@ class BraveTheElementsEffect extends GainAbilityControlledEffect {
 
     public BraveTheElementsEffect() {
         super(new ProtectionAbility(new FilterCard()), Duration.EndOfTurn, filter1);
-        filter2 = (FilterCard)((ProtectionAbility)ability).getFilter();
+        filter2 = (FilterCard)((ProtectionAbility)getFirstAbility()).getFilter();
         filter2.setUseColor(true);
         filter2.setScopeColor(ComparisonScope.Any);
         staticText = "Choose a color. White creatures you control gain protection from the chosen color until end of turn";
@@ -102,7 +103,7 @@ class BraveTheElementsEffect extends GainAbilityControlledEffect {
         ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
         filter2.setColor(choice.getColor());
         filter2.setMessage(choice.getChoice());
-        ability = new ProtectionAbility(new FilterCard(filter2));
+        setAbility(new ProtectionAbility(new FilterCard(filter2)));
         return super.apply(game, source);
     }
 

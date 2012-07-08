@@ -27,11 +27,10 @@
  */
 package mage.sets.magic2013;
 
-import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.abilities.CompoundAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.*;
@@ -40,9 +39,10 @@ import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
- * @author Loki
+ * @author Loki, noxx
  */
 public class AkromasMemorial extends CardImpl<AkromasMemorial> {
     private static final FilterCard filterBlack = new FilterCard("Black");
@@ -66,13 +66,8 @@ public class AkromasMemorial extends CardImpl<AkromasMemorial> {
     @Override
     public void build() {
         // Creatures you control have flying, first strike, vigilance, trample, haste, and protection from black and from red.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(FlyingAbility.getInstance(), Constants.Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("Creatures you control"))));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Constants.Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("Creatures you control"))));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Constants.Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("Creatures you control"))));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(TrampleAbility.getInstance(), Constants.Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("Creatures you control"))));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(HasteAbility.getInstance(), Constants.Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("Creatures you control"))));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(new ProtectionAbility(filterBlack), Constants.Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("Creatures you control"))));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(new ProtectionAbility(filterRed), Constants.Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("Creatures you control"))));
+        CompoundAbility abilities = new CompoundAbility(FlyingAbility.getInstance(), FirstStrikeAbility.getInstance(), VigilanceAbility.getInstance(), TrampleAbility.getInstance(), HasteAbility.getInstance(), new ProtectionAbility(filterBlack), new ProtectionAbility(filterRed));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(abilities, Constants.Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("Creatures you control"))));
     }
 
     public AkromasMemorial(final AkromasMemorial card) {
