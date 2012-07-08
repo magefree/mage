@@ -134,7 +134,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
             this.helper.setSpecial("Pay 2 life", true);
         }
 
-        boolean yourTurn = options != null && options.containsKey("your_turn");
+        //boolean yourTurn = options != null && options.containsKey("your_turn");
 
         requestFocusIfPossible();
         handleOptions(options);
@@ -142,7 +142,6 @@ public class FeedbackPanel extends javax.swing.JPanel {
         this.revalidate();
         this.repaint();
         this.helper.setLinks(btnLeft, btnRight, btnSpecial);
-        this.helper.setYourTurn(yourTurn);
 
         this.helper.setVisible(true);
     }

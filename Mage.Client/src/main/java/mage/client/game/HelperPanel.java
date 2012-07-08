@@ -32,7 +32,6 @@ import mage.client.components.MageTextArea;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseListener;
 
 /**
  * Panel with buttons that copy the state of feedback panel.
@@ -44,7 +43,7 @@ public class HelperPanel extends JPanel {
     private javax.swing.JButton btnLeft;
     private javax.swing.JButton btnRight;
     private javax.swing.JButton btnSpecial;
-    private javax.swing.JButton btnEndTurn;
+    //private javax.swing.JButton btnEndTurn;
     //private javax.swing.JButton btnStopTimer;
 
     private MageTextArea textArea;
@@ -101,11 +100,13 @@ public class HelperPanel extends JPanel {
         //btnStopTimer.setToolTipText("Stop auto phase skipping timer");
         //add(btnStopTimer);
 
+        /*
         btnEndTurn = new JButton("End Turn");
         btnEndTurn.setToolTipText("End The Turn");
         btnEndTurn.setFocusable(false);
         btnEndTurn.setVisible(false);
         container.add(btnEndTurn);
+        */
 
         btnLeft.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,24 +167,12 @@ public class HelperPanel extends JPanel {
         this.linkRight = right;
         this.linkSpecial = special;
     }
-
-    public void addEndTurnListener(MouseListener mouseListener) {
-        this.btnEndTurn.addMouseListener(mouseListener);
-    }
     
     public void setMessage(String message) {
         if (message.contains("Use")) {
             textArea.setText("Use ability?");
         } else {
             textArea.setText(message);
-        }
-    }
-    
-    public void setYourTurn(boolean yourTurn) {
-        if (yourTurn) {
-            btnEndTurn.setVisible(true);
-        } else {
-            btnEndTurn.setVisible(false);
         }
     }
 

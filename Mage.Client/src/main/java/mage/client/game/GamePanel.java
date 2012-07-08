@@ -227,6 +227,7 @@ public class GamePanel extends javax.swing.JPanel {
         this.feedbackPanel.clear();
         this.abilityPicker.init(session, gameId);
         this.btnConcede.setVisible(true);
+        this.btnEndTurn.setVisible(true);
         this.btnSwitchHands.setVisible(false);
         this.pnlReplay.setVisible(false);
         this.btnStopWatching.setVisible(false);
@@ -244,6 +245,7 @@ public class GamePanel extends javax.swing.JPanel {
         this.feedbackPanel.init(gameId);
         this.feedbackPanel.clear();
         this.btnConcede.setVisible(false);
+        this.btnEndTurn.setVisible(false);
         this.btnSwitchHands.setVisible(false);
         this.btnStopWatching.setVisible(true);
         this.pnlReplay.setVisible(false);
@@ -261,6 +263,7 @@ public class GamePanel extends javax.swing.JPanel {
         this.feedbackPanel.init(gameId);
         this.feedbackPanel.clear();
         this.btnConcede.setVisible(false);
+        this.btnEndTurn.setVisible(false);
         this.btnSwitchHands.setVisible(false);
         this.btnStopWatching.setVisible(false);
         this.pnlReplay.setVisible(true);
@@ -641,6 +644,7 @@ public class GamePanel extends javax.swing.JPanel {
         lblPriority = new javax.swing.JLabel();
         feedbackPanel = new mage.client.game.FeedbackPanel();
         btnConcede = new javax.swing.JButton();
+        btnEndTurn = new javax.swing.JButton();
         btnSwitchHands = new javax.swing.JButton();
         btnStopWatching = new javax.swing.JButton();
         bigCard = new mage.client.cards.BigCard();
@@ -713,10 +717,22 @@ public class GamePanel extends javax.swing.JPanel {
         bigCard.setBorder(new LineBorder(Color.black, 1, true));
 
         btnConcede.setText("Concede");
+        btnConcede.setToolTipText("Concede the current game");
+        btnConcede.setFocusable(false);
         btnConcede.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
                 btnConcedeActionPerformed(null);
+            }
+        });
+
+        btnEndTurn.setText("End Turn (F4)");
+        btnEndTurn.setToolTipText("End This Turn");
+        btnEndTurn.setFocusable(false);
+        btnEndTurn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                btnEndTurnActionPerformed(null);
             }
         });
 
@@ -805,6 +821,8 @@ public class GamePanel extends javax.swing.JPanel {
                                 .addGap(10, 10, 10)
                                 .addComponent(btnConcede)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnEndTurn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnSwitchHands)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnStopWatching)
@@ -829,6 +847,7 @@ public class GamePanel extends javax.swing.JPanel {
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(gl_pnlGameInfo.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnConcede)
+                            .addComponent(btnEndTurn)
                             .addComponent(btnSwitchHands)
                             .addComponent(btnStopWatching)))
         );
@@ -885,14 +904,6 @@ public class GamePanel extends javax.swing.JPanel {
         pnlReplay.setOpaque(false);
         helper = new HelperPanel();
         helper.setPreferredSize(new Dimension(100, 90));
-        helper.addEndTurnListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                if (feedbackPanel != null && FeedbackMode.SELECT.equals(feedbackPanel.getMode())) {
-                    session.sendPlayerInteger(gameId, 0);
-                }
-            }
-        });
         feedbackPanel.setHelperPanel(helper);
 
         jSplitPane2.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
@@ -948,6 +959,12 @@ public class GamePanel extends javax.swing.JPanel {
     private void btnConcedeActionPerformed(java.awt.event.ActionEvent evt) {
         if (modalQuestion("Are you sure you want to concede?", "Confirm concede") == JOptionPane.YES_OPTION) {
             session.concedeGame(gameId);
+        }
+    }
+
+    private void btnEndTurnActionPerformed(java.awt.event.ActionEvent evt) {
+        if (feedbackPanel != null && FeedbackMode.SELECT.equals(feedbackPanel.getMode())) {
+            session.sendPlayerInteger(gameId, 0);
         }
     }
 
@@ -1018,6 +1035,7 @@ public class GamePanel extends javax.swing.JPanel {
     private mage.client.components.ability.AbilityPicker abilityPicker;
     private mage.client.cards.BigCard bigCard;
     private javax.swing.JButton btnConcede;
+    private javax.swing.JButton btnEndTurn;
     private javax.swing.JButton btnSwitchHands;
     private javax.swing.JButton btnNextPlay;
     private javax.swing.JButton btnPlay;
