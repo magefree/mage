@@ -1,6 +1,7 @@
 package mage.abilities.decorator;
 
 import mage.Constants;
+import mage.Constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.ContinuousEffect;
@@ -54,7 +55,7 @@ public class ConditionalContinousEffect extends ContinuousEffectImpl<Conditional
             otherwiseEffect.setTargetPointer(this.targetPointer);
             return otherwiseEffect.apply(layer, sublayer, source, game);
         }
-        if (!condition.apply(game, source) && effect.getDuration() == duration.OneUse) {
+        if (!condition.apply(game, source) && effect.getDuration() == Duration.OneUse) {
             used = true;
         }
         return false;
@@ -69,7 +70,7 @@ public class ConditionalContinousEffect extends ContinuousEffectImpl<Conditional
             otherwiseEffect.setTargetPointer(this.targetPointer);
             return otherwiseEffect.apply(game, source);
         }
-        if (!condition.apply(game, source) && effect.getDuration() == duration.OneUse) {
+        if (!condition.apply(game, source) && effect.getDuration() == Duration.OneUse) {
             used = true;
         }
         return false;
