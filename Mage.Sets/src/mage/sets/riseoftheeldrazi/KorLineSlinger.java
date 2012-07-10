@@ -39,6 +39,7 @@ import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -50,8 +51,7 @@ public class KorLineSlinger extends CardImpl<KorLineSlinger> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 3 or less");
 
     static {
-        filter.setPower(4);
-        filter.setPowerComparison(ComparisonType.LessThan);
+        filter.add(new PowerPredicate(ComparisonType.LessThan, 4));
     }
 
     public KorLineSlinger(UUID ownerId) {

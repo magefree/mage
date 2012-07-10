@@ -40,6 +40,8 @@ import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.PowerPredicate;
+import mage.filter.predicate.mageobject.ToughnessPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -47,13 +49,11 @@ import mage.target.common.TargetCreaturePermanent;
  * @author Loki
  */
 public class Pendelhaven extends CardImpl<Pendelhaven> {
-    private static FilterCreaturePermanent filter = new FilterCreaturePermanent("1/1 creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("1/1 creature");
 
     static {
-        filter.setPower(1);
-        filter.setPowerComparison(Filter.ComparisonType.Equal);
-        filter.setToughness(1);
-        filter.setToughnessComparison(Filter.ComparisonType.Equal);
+        filter.add(new PowerPredicate(Filter.ComparisonType.Equal, 1));
+        filter.add(new ToughnessPredicate(Filter.ComparisonType.Equal, 1));
     }
 
     public Pendelhaven(UUID ownerId) {

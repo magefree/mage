@@ -42,6 +42,7 @@ import mage.abilities.keyword.UnblockableAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -50,11 +51,10 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class GoblinTunneler extends CardImpl<GoblinTunneler> {
 
-    private static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 2 or less");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 2 or less");
 
     static {
-        filter.setPower(3);
-        filter.setPowerComparison(ComparisonType.LessThan);
+        filter.add(new PowerPredicate(ComparisonType.LessThan, 3));
     }
 
     public GoblinTunneler(UUID ownerId) {

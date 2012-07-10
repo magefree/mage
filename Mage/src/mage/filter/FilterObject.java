@@ -64,10 +64,6 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
     protected List<String> supertype = new ArrayList<String>();
     protected ComparisonScope scopeSupertype = ComparisonScope.Any;
     protected boolean notSupertype;
-    protected int power;
-    protected ComparisonType powerComparison;
-    protected int toughness;
-    protected ComparisonType toughnessComparison;
 
     /**
      * Indicates that filter shouldn't match the source.
@@ -105,10 +101,6 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
         this.supertype.addAll(filter.supertype);
         this.scopeSupertype = filter.scopeSupertype;
         this.notSupertype = filter.notSupertype;
-        this.power = filter.power;
-        this.powerComparison = filter.powerComparison;
-        this.toughness = filter.toughness;
-        this.toughnessComparison = filter.toughnessComparison;
         this.another = filter.another;
     }
 
@@ -172,16 +164,6 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
                 }
             }
             if (test.isEmpty() == notAbilities)
-                return notFilter;
-        }
-
-        if (powerComparison != null) {
-            if (!compareInts(object.getPower().getValue(), power, powerComparison))
-                return notFilter;
-        }
-
-        if (toughnessComparison != null) {
-            if (!compareInts(object.getToughness().getValue(), toughness, toughnessComparison))
                 return notFilter;
         }
 
@@ -250,22 +232,6 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
 
     public void setNotSupertype(boolean notSupertype) {
         this.notSupertype = notSupertype;
-    }
-
-    public void setPower(int power) {
-        this.power = power;
-    }
-
-    public void setPowerComparison(ComparisonType powerComparison) {
-        this.powerComparison = powerComparison;
-    }
-
-    public void setToughness(int toughness) {
-        this.toughness = toughness;
-    }
-
-    public void setToughnessComparison(ComparisonType toughnessComparison) {
-        this.toughnessComparison = toughnessComparison;
     }
 
     public void setUseColor(boolean useColor) {

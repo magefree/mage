@@ -27,15 +27,15 @@
  */
 package mage.sets.innistrad;
 
+import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.target.TargetPermanent;
-
-import java.util.UUID;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.PowerPredicate;
+import mage.target.TargetPermanent;
 
 /**
  * @author nantuko
@@ -45,8 +45,7 @@ public class SmiteTheMonstrous extends CardImpl<SmiteTheMonstrous> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 4 or greater");
 
     static {
-        filter.setPower(3);
-        filter.setPowerComparison(Filter.ComparisonType.GreaterThan);
+        filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 3));
     }
 
     public SmiteTheMonstrous(UUID ownerId) {

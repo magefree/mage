@@ -34,6 +34,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -49,8 +50,7 @@ public class PuncturingLight extends CardImpl<PuncturingLight> {
         filter.setUseAttacking(true);
         filter.setBlocking(true);
         filter.setUseBlocking(true);
-        filter.setPower(4);
-        filter.setPowerComparison(ComparisonType.LessThan);
+        filter.add(new PowerPredicate(ComparisonType.LessThan, 4));
     }
 
     public PuncturingLight(UUID ownerId) {

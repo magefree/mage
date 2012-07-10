@@ -36,6 +36,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -47,8 +48,7 @@ public class BalaGedScorpion extends CardImpl<BalaGedScorpion> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 1 or less");
 
     static {
-        filter.setPower(2);
-        filter.setPowerComparison(ComparisonType.LessThan);
+        filter.add(new PowerPredicate(ComparisonType.LessThan, 2));
     }
 
     public BalaGedScorpion(UUID ownerId) {

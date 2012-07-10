@@ -61,24 +61,6 @@ public abstract class FilterImpl<E, T extends FilterImpl<E, T>> implements Filte
         this.predicates = new LinkedList<Predicate>(filter.predicates);
     }
 
-    protected boolean compareInts(int int1, int int2, ComparisonType type) {
-        switch (type) {
-            case Equal:
-                if (int1 != int2)
-                    return false;
-                break;
-            case GreaterThan:
-                if (int1 <= int2)
-                    return false;
-                break;
-            case LessThan:
-                if (int1 >= int2)
-                    return false;
-                break;
-        }
-        return true;
-    }
-
     @Override
     public boolean match(E e, Game game) {
         for (int i = 0; i < predicates.size(); i++) {
