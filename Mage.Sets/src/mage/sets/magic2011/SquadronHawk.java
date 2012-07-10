@@ -37,6 +37,7 @@ import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -48,7 +49,7 @@ public class SquadronHawk extends CardImpl<SquadronHawk> {
     private static final FilterCard filter = new FilterCard("cards named Squadron Hawk");
 
     static {
-        filter.getName().add("Squadron Hawk");
+        filter.add(new NamePredicate("Squadron Hawk"));
     }
 
     public SquadronHawk(UUID ownerId) {

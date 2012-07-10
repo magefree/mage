@@ -45,6 +45,7 @@ import mage.target.common.TargetCardInLibrary;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.filter.predicate.mageobject.NamePredicate;
 
 /**
  *
@@ -105,7 +106,7 @@ class DoublingChantEffect extends OneShotEffect<DoublingChantEffect> {
 
                 if (player.chooseUse(Outcome.PutCreatureInPlay, sb.toString(), game)) {
                     FilterCreatureCard filter = new FilterCreatureCard("creature card named" + creatureName);
-                    filter.getName().add(creatureName);
+                    filter.add(new NamePredicate(creatureName));
                     TargetCardInLibrary target = new TargetCardInLibrary(filter);
 
                     if (player.searchLibrary(target, game)) {

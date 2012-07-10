@@ -43,6 +43,7 @@ import java.util.List;
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @author North
  */
 public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> extends FilterImpl<E, T> implements Filter<E> {
     protected Abilities<Ability> abilities;
@@ -57,8 +58,6 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
     protected ObjectColor color;
     protected ComparisonScope scopeColor = ComparisonScope.Any;
     protected boolean notColor;
-    protected List<String> name = new ArrayList<String>();
-    protected boolean notName;
     protected List<String> subtype = new ArrayList<String>();
     protected ComparisonScope scopeSubtype = ComparisonScope.All;
     protected boolean notSubtype;
@@ -102,8 +101,6 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
         this.color = filter.color.copy();
         this.scopeColor = filter.scopeColor;
         this.notColor = filter.notColor;
-        this.name.addAll(filter.name);
-        this.notName = filter.notName;
         this.subtype.addAll(filter.subtype);
         this.scopeSubtype = filter.scopeSubtype;
         this.notSubtype = filter.notSubtype;
@@ -121,10 +118,8 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
 
     @Override
     public boolean match(E object, Game game) {
-
-        if (name.size() > 0) {
-            if (name.contains(object.getName()) == notName)
-                return notFilter;
+        if (!super.match(object, game)) {
+            return notFilter;
         }
 
         if (useColor) {
@@ -240,14 +235,6 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
 
     public void setNotColor(boolean notColor) {
         this.notColor = notColor;
-    }
-
-    public List<String> getName() {
-        return this.name;
-    }
-
-    public void setNotName(boolean notName) {
-        this.notName = notName;
     }
 
     public List<String> getSubtype() {

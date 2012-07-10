@@ -36,13 +36,15 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
-import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -59,8 +61,7 @@ public class EzuriRenegadeLeader extends CardImpl<EzuriRenegadeLeader> {
         elfFilter.setMessage("Elf creatures");
 
         notEzuri.getSubtype().add("Elf");
-        notEzuri.getName().add("Ezuri, Renegade Leader");
-        notEzuri.setNotName(true);
+        notEzuri.add(Predicates.not(new NamePredicate("Ezuri, Renegade Leader")));
     }
 
     public EzuriRenegadeLeader(UUID ownerId) {

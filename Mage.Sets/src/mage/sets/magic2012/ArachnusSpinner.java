@@ -42,6 +42,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -115,7 +116,7 @@ class ArachnusSpinnerEffect extends OneShotEffect<ArachnusSpinnerEffect> {
         }
 
         FilterCard filter = new FilterCard("card named Arachnus Web");
-        filter.getName().add("Arachnus Web");
+        filter.add(new NamePredicate("Arachnus Web"));
 
         Card card = null;
         Zone zone = null;

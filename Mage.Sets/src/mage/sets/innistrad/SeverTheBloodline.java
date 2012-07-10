@@ -39,6 +39,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -93,7 +94,7 @@ class SeverTheBloodlineEffect extends OneShotEffect<SeverTheBloodlineEffect> {
         Permanent targetPermanent = game.getPermanent(targetPointer.getFirst(game, source));
         if (targetPermanent != null) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
-            filter.getName().add(targetPermanent.getName());
+            filter.add(new NamePredicate(targetPermanent.getName()));
             List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getId(), game);
             for (Permanent permanent : permanents) {
                 permanent.moveToExile(null, "", source.getId(), game);

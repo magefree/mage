@@ -45,6 +45,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandCard;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -132,7 +133,7 @@ class SameNameAsExiledCountValue implements DynamicValue {
         Permanent permanent = game.getPermanent(sourceAbility.getSourceId());
         if (permanent != null && permanent.getImprinted().size() > 0) {
             FilterPermanent filterPermanent = new FilterPermanent();
-            filterPermanent.getName().add(game.getCard(permanent.getImprinted().get(0)).getName());
+            filterPermanent.add(new NamePredicate(game.getCard(permanent.getImprinted().get(0)).getName()));
             value = game.getBattlefield().countAll(filterPermanent, game);
         }
         return value;

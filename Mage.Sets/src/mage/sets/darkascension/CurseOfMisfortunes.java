@@ -39,6 +39,8 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -105,8 +107,7 @@ class CurseOfMisfortunesEffect extends OneShotEffect<CurseOfMisfortunesEffect> {
                 for (UUID attachmentId: targetPlayer.getAttachments()) {
                     Permanent attachment = game.getPermanent(attachmentId);
                     if (attachment != null && attachment.getSubtype().contains("Curse")) {
-                        filter.getName().add(attachment.getName());
-                        filter.setNotName(true);
+                        filter.add(Predicates.not(new NamePredicate(attachment.getName())));
                     }
                 }
 

@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -91,8 +92,10 @@ class MitoticManipulationEffect extends OneShotEffect<MitoticManipulationEffect>
     public boolean apply(Game game, Ability source) {
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(source.getControllerId(), game);
         HashSet<String> permanentNames = new HashSet<String>();
+        FilterCard filter = new FilterCard("card to put onto the battlefield");
         for (Permanent permanent : permanents) {
             permanentNames.add(permanent.getName());
+            filter.add(new NamePredicate(permanent.getName()));
         }
 
         Player player = game.getPlayer(source.getControllerId());
@@ -116,8 +119,6 @@ class MitoticManipulationEffect extends OneShotEffect<MitoticManipulationEffect>
         player.lookAtCards("Mitotic Manipulation", cards, game);
 
         if (!cardsFound.isEmpty() && player.chooseUse(Outcome.PutCardInPlay, "Do you wish to put a card on the battlefield?", game)) {
-            FilterCard filter = new FilterCard("card to put onto the battlefield");
-            filter.getName().add(permanentNames);
             TargetCard target = new TargetCard(Zone.PICK, filter);
 
             if (player.choose(Outcome.PutCardInPlay, cardsFound, target, game)) {

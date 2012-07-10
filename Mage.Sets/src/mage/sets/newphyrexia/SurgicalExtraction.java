@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
@@ -104,7 +105,7 @@ class SurgicalExtractionEffect extends OneShotEffect<SurgicalExtractionEffect> {
             Player targetPlayer = game.getPlayer(card.getOwnerId());
             if (targetPlayer != null) {
                 FilterCard filter = new FilterCard("card named " + card.getName());
-                filter.getName().add(card.getName());
+                filter.add(new NamePredicate(card.getName()));
 
                 Cards cardsInLibrary = new CardsImpl(Zone.LIBRARY);
                 cardsInLibrary.addAll(targetPlayer.getLibrary().getCards(game));

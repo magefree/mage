@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -51,14 +52,12 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class NissaRevane extends CardImpl<NissaRevane> {
 
-    private static final FilterCard nissasChosenFilter = new FilterCard();
-    private static final FilterCard elfFilter = new FilterCard();
+    private static final FilterCard nissasChosenFilter = new FilterCard("card named Nissa's Chosen");
+    private static final FilterCard elfFilter = new FilterCard("Elf creature cards");
 
     static {
-        nissasChosenFilter.getName().add("Nissa's Chosen");
-        nissasChosenFilter.setMessage("card named Nissa's Chosen");
+        nissasChosenFilter.add(new NamePredicate("Nissa's Chosen"));
         elfFilter.getSubtype().add("Elf");
-        elfFilter.setMessage("Elf creature cards");
     }
 
     public NissaRevane(UUID ownerId) {

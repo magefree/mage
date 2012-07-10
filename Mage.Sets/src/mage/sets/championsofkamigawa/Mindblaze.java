@@ -42,6 +42,7 @@ import mage.cards.CardsImpl;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.sets.Sets;
@@ -119,7 +120,7 @@ class MindblazeEffect extends OneShotEffect<MindblazeEffect> {
             cards.addAll(player.getLibrary().getCards(game));
             playerControls.revealCards("Library", cards, game);
             FilterCard filter = new FilterCard();
-            filter.getName().add(cardChoice.getChoice());
+            filter.add(new NamePredicate(cardChoice.getChoice()));
             int count = Integer.parseInt(numberChoice.getChoice());
             if (player.getLibrary().count(filter, game) == count) {
                 player.damage(8, source.getSourceId(), game.copy(), false, true);

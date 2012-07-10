@@ -28,6 +28,7 @@
 
 package mage.sets.shardsofalara;
 
+import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
@@ -39,10 +40,9 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
-
-import java.util.UUID;
 
 /**
  *
@@ -80,7 +80,7 @@ class KnightOfTheWhiteOrchidAbility extends ZoneChangeTriggeredAbility<KnightOfT
     private static final FilterLandPermanent filter2 = new FilterLandPermanent();
 
     static {
-        filter1.getName().add("Plains");
+        filter1.add(new NamePredicate("Plains"));
     }
 
     public KnightOfTheWhiteOrchidAbility() {

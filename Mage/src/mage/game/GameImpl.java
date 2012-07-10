@@ -28,7 +28,12 @@
 
 package mage.game;
 
-import mage.Constants.*;
+import mage.Constants.CardType;
+import mage.Constants.MultiplayerAttackOption;
+import mage.Constants.Outcome;
+import mage.Constants.PhaseStep;
+import mage.Constants.RangeOfInfluence;
+import mage.Constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
@@ -52,6 +57,7 @@ import mage.counters.CounterType;
 import mage.filter.Filter;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.*;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.combat.Combat;
 import mage.game.command.CommandObject;
 import mage.game.command.Emblem;
@@ -1045,7 +1051,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         if (legendary.size() > 1) {  //don't bother checking if less than 2 legends in play
             for (Permanent legend: legendary) {
                 FilterLegendaryPermanent filterLegendName = new FilterLegendaryPermanent();
-                filterLegendName.getName().add(legend.getName());
+                filterLegendName.add(new NamePredicate(legend.getName()));
                 if (getBattlefield().contains(filterLegendName, legend.getControllerId(), this, 2)) {
                     for (Permanent dupLegend: getBattlefield().getActivePermanents(filterLegendName, legend.getControllerId(), this)) {
                         dupLegend.moveToZone(Zone.GRAVEYARD, null, this, false);

@@ -42,6 +42,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -63,10 +64,8 @@ public class AngelsHerald extends CardImpl<AngelsHerald> {
         filterWhite.setUseColor(true);
         filterBlue.getColor().setBlue(true);
         filterBlue.setUseColor(true);
-    }
 
-    static {
-        filter.getName().add("Empyrial Archangel");
+        filter.add(new NamePredicate("Empyrial Archangel"));
     }
 
     public AngelsHerald(UUID ownerId) {
