@@ -38,6 +38,7 @@ import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -46,12 +47,11 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class TreasureMage extends CardImpl<TreasureMage> {
 
-    private static FilterCard filter = new FilterCard("an artifact card with converted mana cost 6 or more");
+    private static final FilterCard filter = new FilterCard("an artifact card with converted mana cost 6 or more");
 
     static {
         filter.getCardType().add(CardType.ARTIFACT);
-        filter.setConvertedManaCost(5);
-        filter.setConvertedManaCostComparison(Filter.ComparisonType.GreaterThan);
+        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.GreaterThan, 5));
     }
 
     public TreasureMage (UUID ownerId) {

@@ -36,6 +36,7 @@ import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffec
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreatureCard;
+import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -49,8 +50,7 @@ public class DriverOfTheDead extends CardImpl<DriverOfTheDead> {
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature card with converted mana cost 2 or less from your graveyard to the battlefield");
 
     static {
-        filter.setConvertedManaCost(3);
-        filter.setConvertedManaCostComparison(Filter.ComparisonType.LessThan);
+        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 3));
     }
 
     public DriverOfTheDead(UUID ownerId) {

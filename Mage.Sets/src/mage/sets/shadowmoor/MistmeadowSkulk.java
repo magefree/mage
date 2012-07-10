@@ -36,6 +36,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 
 /**
  *
@@ -46,8 +47,7 @@ public class MistmeadowSkulk extends CardImpl<MistmeadowSkulk> {
     private static final FilterCard filter = new FilterCard("converted mana cost 3 or greater");
 
     static {
-        filter.setConvertedManaCost(2);
-        filter.setConvertedManaCostComparison(ComparisonType.GreaterThan);
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.GreaterThan, 2));
     }
 
     public MistmeadowSkulk(UUID ownerId) {

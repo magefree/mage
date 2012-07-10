@@ -34,6 +34,7 @@ import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 
 /**
  *
@@ -43,8 +44,7 @@ public class CullingSun extends CardImpl<CullingSun> {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with converted mana cost 3 or less");
 
     static {
-        filter.setConvertedManaCost(4);
-        filter.setConvertedManaCostComparison(Filter.ComparisonType.LessThan);
+        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 4));
     }
 
     public CullingSun(UUID ownerId) {

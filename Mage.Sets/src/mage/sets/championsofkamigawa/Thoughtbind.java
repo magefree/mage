@@ -36,6 +36,7 @@ import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.target.TargetSpell;
 
 /**
@@ -46,8 +47,7 @@ public class Thoughtbind extends CardImpl<Thoughtbind> {
     private final static FilterSpell filter = new FilterSpell("spell with converted mana cost 4 or less");
 
     static {
-        filter.setConvertedManaCost(5);
-        filter.setConvertedManaCostComparison(Filter.ComparisonType.LessThan);
+        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 5));
     }
 
     public Thoughtbind(UUID ownerId) {

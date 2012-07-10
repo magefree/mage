@@ -34,6 +34,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -45,8 +46,7 @@ public class Smother extends CardImpl<Smother> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with converted mana cost 3 or less");
 
     static {
-        filter.setConvertedManaCost(4);
-        filter.setConvertedManaCostComparison(ComparisonType.LessThan);
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, 4));
     }
 
     public Smother(UUID ownerId) {

@@ -43,6 +43,7 @@ import mage.counters.CounterType;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterArtifactPermanent;
+import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -117,8 +118,7 @@ class TezzeretTheSeekerEffect2 extends OneShotEffect<TezzeretTheSeekerEffect2> {
         }
 
         FilterArtifactCard filter = new FilterArtifactCard("artifact card with converted mana cost " + cmc);
-        filter.setConvertedManaCost(cmc);
-        filter.setConvertedManaCostComparison(ComparisonType.Equal);
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.Equal, cmc));
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
 
         if (player.searchLibrary(target, game)) {

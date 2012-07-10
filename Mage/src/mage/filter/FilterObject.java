@@ -64,8 +64,6 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
     protected List<String> supertype = new ArrayList<String>();
     protected ComparisonScope scopeSupertype = ComparisonScope.Any;
     protected boolean notSupertype;
-    protected int convertedManaCost;
-    protected ComparisonType convertedManaCostComparison;
     protected int power;
     protected ComparisonType powerComparison;
     protected int toughness;
@@ -107,8 +105,6 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
         this.supertype.addAll(filter.supertype);
         this.scopeSupertype = filter.scopeSupertype;
         this.notSupertype = filter.notSupertype;
-        this.convertedManaCost = filter.convertedManaCost;
-        this.convertedManaCostComparison = filter.convertedManaCostComparison;
         this.power = filter.power;
         this.powerComparison = filter.powerComparison;
         this.toughness = filter.toughness;
@@ -176,11 +172,6 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
                 }
             }
             if (test.isEmpty() == notAbilities)
-                return notFilter;
-        }
-
-        if (convertedManaCostComparison != null) {
-            if (!compareInts(object.getManaCost().convertedManaCost(), convertedManaCost, convertedManaCostComparison))
                 return notFilter;
         }
 
@@ -259,14 +250,6 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
 
     public void setNotSupertype(boolean notSupertype) {
         this.notSupertype = notSupertype;
-    }
-
-    public void setConvertedManaCost(int convertedManaCost) {
-        this.convertedManaCost = convertedManaCost;
-    }
-
-    public void setConvertedManaCostComparison(ComparisonType convertedManaCostComparison) {
-        this.convertedManaCostComparison = convertedManaCostComparison;
     }
 
     public void setPower(int power) {

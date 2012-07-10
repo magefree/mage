@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -86,8 +87,7 @@ class SunTitanAbility extends TriggeredAbilityImpl<SunTitanAbility> {
         filter.getCardType().add(CardType.LAND);
         filter.getCardType().add(CardType.PLANESWALKER);
         filter.setScopeCardType(ComparisonScope.Any);
-        filter.setConvertedManaCost(4);
-        filter.setConvertedManaCostComparison(ComparisonType.LessThan);
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, 4));
     }
 
     public SunTitanAbility() {

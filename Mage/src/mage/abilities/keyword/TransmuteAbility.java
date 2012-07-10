@@ -11,6 +11,7 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -58,8 +59,7 @@ class TransmuteEffect extends OneShotEffect<TransmuteEffect> {
 
         if (sourceCard != null && player != null) {
             FilterCard filter = new FilterCard("card with converted mana cost " + sourceCard.getManaCost().convertedManaCost());
-            filter.setConvertedManaCost(sourceCard.getManaCost().convertedManaCost());
-            filter.setConvertedManaCostComparison(Filter.ComparisonType.Equal);
+            filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, sourceCard.getManaCost().convertedManaCost()));
             TargetCardInLibrary target = new TargetCardInLibrary(1, filter);
             if (player.searchLibrary(target, game)) {
                 if (target.getTargets().size() > 0) {
