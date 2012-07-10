@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -58,8 +59,7 @@ public class Earthcraft extends CardImpl<Earthcraft> {
         filterCreature.setScopeSubtype(Filter.ComparisonScope.Any);
         filterLand.getCardType().add(CardType.LAND);
         filterLand.setScopeCardType(Filter.ComparisonScope.Any);
-        filterLand.getSupertype().add("Basic");
-        filterLand.setScopeSupertype(Filter.ComparisonScope.Any);
+        filterLand.add(new SupertypePredicate("Basic"));
     }
 
     public Earthcraft(UUID ownerId) {

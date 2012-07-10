@@ -37,6 +37,7 @@ import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -47,7 +48,7 @@ public class PilgrimsEye extends CardImpl<PilgrimsEye> {
     private static final FilterCard filter = new FilterCard("basic land card");
 
     static {
-        filter.getSupertype().add("Basic");
+        filter.add(new SupertypePredicate("Basic"));
         filter.getCardType().add(CardType.LAND);
     }
 

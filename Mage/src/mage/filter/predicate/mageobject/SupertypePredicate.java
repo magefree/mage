@@ -35,11 +35,11 @@ import mage.game.Game;
  *
  * @author North
  */
-public class Supertype<T extends MageObject> implements Predicate<T> {
+public class SupertypePredicate<T extends MageObject> implements Predicate<T> {
 
     private final String supertype;
 
-    public Supertype(String supertype) {
+    public SupertypePredicate(String supertype) {
         this.supertype = supertype;
     }
 

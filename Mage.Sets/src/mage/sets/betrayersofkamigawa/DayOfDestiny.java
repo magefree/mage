@@ -35,8 +35,8 @@ import mage.Constants.Rarity;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SupertypePredicate;
 
 /**
  *
@@ -47,8 +47,7 @@ public class DayOfDestiny extends CardImpl<DayOfDestiny> {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Legendary creatures");
 
     static {
-        filter.getSupertype().add("Legendary");
-        filter.setScopeSupertype(Filter.ComparisonScope.Any);
+        filter.add(new SupertypePredicate("Legendary"));
     }
 
     public DayOfDestiny(UUID ownerId) {

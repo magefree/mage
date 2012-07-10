@@ -61,9 +61,6 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
     protected List<String> subtype = new ArrayList<String>();
     protected ComparisonScope scopeSubtype = ComparisonScope.All;
     protected boolean notSubtype;
-    protected List<String> supertype = new ArrayList<String>();
-    protected ComparisonScope scopeSupertype = ComparisonScope.Any;
-    protected boolean notSupertype;
 
     /**
      * Indicates that filter shouldn't match the source.
@@ -98,9 +95,6 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
         this.subtype.addAll(filter.subtype);
         this.scopeSubtype = filter.scopeSubtype;
         this.notSubtype = filter.notSubtype;
-        this.supertype.addAll(filter.supertype);
-        this.scopeSupertype = filter.scopeSupertype;
-        this.notSupertype = filter.notSupertype;
         this.another = filter.another;
     }
 
@@ -146,11 +140,6 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
                 if (!compString.compare(subtype, object.getSubtype(), scopeSubtype, notSubtype))
                     return notFilter;
             }
-        }
-
-        if (supertype.size() > 0) {
-            if (!compString.compare(supertype, object.getSupertype(), scopeSupertype, notSupertype))
-                return notFilter;
         }
 
         if (abilities.size() > 0) {
@@ -220,18 +209,6 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
 
     public void setNotSubtype(boolean notSubtype) {
         this.notSubtype = notSubtype;
-    }
-
-    public List<String> getSupertype() {
-        return this.supertype;
-    }
-
-    public void setScopeSupertype(ComparisonScope scopeSupertype) {
-        this.scopeSupertype = scopeSupertype;
-    }
-
-    public void setNotSupertype(boolean notSupertype) {
-        this.notSupertype = notSupertype;
     }
 
     public void setUseColor(boolean useColor) {

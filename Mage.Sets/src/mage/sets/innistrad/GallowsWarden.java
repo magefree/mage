@@ -35,7 +35,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 
 import java.util.UUID;
@@ -49,7 +48,6 @@ public class GallowsWarden extends CardImpl<GallowsWarden> {
 
     static {
         filter.getSubtype().add("Spirit");
-        filter.setScopeSupertype(Filter.ComparisonScope.Any);
     }
 
     public GallowsWarden(UUID ownerId) {

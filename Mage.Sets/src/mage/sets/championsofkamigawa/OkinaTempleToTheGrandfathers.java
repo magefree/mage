@@ -40,8 +40,8 @@ import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -52,8 +52,7 @@ public class OkinaTempleToTheGrandfathers extends CardImpl<OkinaTempleToTheGrand
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("legendary creature");
 
     static {
-        filter.getSupertype().add("Legendary");
-        filter.setScopeSupertype(Filter.ComparisonScope.Any);
+        filter.add(new SupertypePredicate("Legendary"));
     }
 
     public OkinaTempleToTheGrandfathers(UUID ownerId) {

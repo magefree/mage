@@ -34,8 +34,8 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -47,9 +47,7 @@ public class TimeOfNeed extends CardImpl<TimeOfNeed> {
 
     static {
         filter.getCardType().add(CardType.CREATURE);
-        filter.getSupertype().add("Legendary");
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
-        filter.setScopeSupertype(Filter.ComparisonScope.Any);
+        filter.add(new SupertypePredicate("Legendary"));
     }
 
     public TimeOfNeed(UUID ownerId) {

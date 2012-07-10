@@ -39,8 +39,9 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterLandCard;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -48,11 +49,10 @@ import mage.target.common.TargetLandPermanent;
  * @author Loki
  */
 public class Wasteland extends CardImpl<Wasteland> {
-    private static FilterLandPermanent filter = new FilterLandPermanent("nonbasic land");
+    private static final FilterLandPermanent filter = new FilterLandPermanent("nonbasic land");
 
     static {
-        filter.getSupertype().add("Basic");
-        filter.setNotSupertype(true);
+        filter.add(Predicates.not(new SupertypePredicate("Basic")));
     }
 
     public Wasteland(UUID ownerId) {

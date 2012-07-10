@@ -40,6 +40,8 @@ import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.LandwalkAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SupertypePredicate;
 
 /**
  *
@@ -73,7 +75,7 @@ class NonbasicLandwalkAbility extends LandwalkAbility {
     private static final FilterLandPermanent filter = new FilterLandPermanent("nonbasic land");
 
     static {
-        filter.getSupertype().add("Basic");
+        filter.add(Predicates.not(new SupertypePredicate("Basic")));
     }
 
     public NonbasicLandwalkAbility() {

@@ -42,6 +42,7 @@ import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -54,7 +55,7 @@ public class GrixisPanorama extends CardImpl<GrixisPanorama> {
 
     static {
         filter.getCardType().add(CardType.LAND);
-        filter.getSupertype().add("Basic");
+        filter.add(new SupertypePredicate("Basic"));
         filter.getSubtype().add("Island");
         filter.getSubtype().add("Swamp");
         filter.getSubtype().add("Mountain");

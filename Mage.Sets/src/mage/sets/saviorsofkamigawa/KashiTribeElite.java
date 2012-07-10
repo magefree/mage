@@ -42,6 +42,7 @@ import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SupertypePredicate;
 
 /**
  *
@@ -52,8 +53,7 @@ public class KashiTribeElite extends CardImpl<KashiTribeElite> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("Legendary Snakes");
 
     static {
-        filter.getSupertype().add("Legendary");
-        filter.setScopeSupertype(Filter.ComparisonScope.Any);
+        filter.add(new SupertypePredicate("Legendary"));
         filter.getSubtype().add("Snake");
         filter.setScopeSubtype(Filter.ComparisonScope.Any);
     }

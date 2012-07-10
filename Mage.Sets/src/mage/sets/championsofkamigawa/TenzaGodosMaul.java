@@ -46,6 +46,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -62,8 +63,7 @@ public class TenzaGodosMaul extends CardImpl<TenzaGodosMaul> {
     private final static FilterCreaturePermanent redFilter = new FilterCreaturePermanent("red");
 
     static {
-        legendaryFilter.getSupertype().add("Legendary");
-        legendaryFilter.setScopeSupertype(Filter.ComparisonScope.Any);
+        legendaryFilter.add(new SupertypePredicate("Legendary"));
         redFilter.getColor().setRed(true);
         redFilter.setUseColor(true);
         redFilter.setScopeColor(Filter.ComparisonScope.Any);

@@ -40,9 +40,9 @@ import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -58,8 +58,7 @@ public class KondasBanner extends CardImpl<KondasBanner> {
     private final static FilterControlledCreaturePermanent legendaryFilter = new FilterControlledCreaturePermanent("Legendary creatures");
 
     static {
-        legendaryFilter.getSupertype().add("Legendary");
-        legendaryFilter.setScopeSupertype(Filter.ComparisonScope.Any);
+        legendaryFilter.add(new SupertypePredicate("Legendary"));
     }
 
     public KondasBanner(UUID ownerId) {

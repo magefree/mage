@@ -31,6 +31,7 @@ package mage.target.common;
 import mage.Constants.CardType;
 import mage.Constants.Zone;
 import mage.filter.Filter.ComparisonScope;
+import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.TargetCard;
 
 /**
@@ -41,8 +42,7 @@ public class TargetBasicLandCard extends TargetCard<TargetBasicLandCard> {
 
     public TargetBasicLandCard(Zone zone) {
         super(zone);
-        filter.getSupertype().add("Basic");
-        filter.setScopeSupertype(ComparisonScope.Any);
+        filter.add(new SupertypePredicate("Basic"));
         filter.getCardType().add(CardType.LAND);
         filter.setScopeCardType(ComparisonScope.Any);
     }

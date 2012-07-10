@@ -38,8 +38,9 @@ import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continious.GainControlTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -51,9 +52,7 @@ public class BlindWithAnger extends CardImpl<BlindWithAnger> {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("nonlegendary creature");
 
     static {
-        filter.getSupertype().add("Legendary");
-        filter.setNotSupertype(true);
-        filter.setScopeSupertype(Filter.ComparisonScope.Any);
+        filter.add(Predicates.not(new SupertypePredicate("Legendary")));
     }
 
     public BlindWithAnger(UUID ownerId) {

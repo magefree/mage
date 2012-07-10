@@ -80,7 +80,6 @@ class HammerOfRuinTriggeredAbility extends TriggeredAbilityImpl<HammerOfRuinTrig
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(), true);
         FilterPermanent filter = new FilterPermanent("Equipment that player controls");
         filter.getSubtype().add("Equipment");
-        filter.setScopeSupertype(mage.filter.Filter.ComparisonScope.Any);
         this.addTarget(new TargetPermanent(filter));
     }
 
