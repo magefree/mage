@@ -37,7 +37,7 @@ import mage.game.Game;
  *
  * @author North
  */
-public class AbilityPredicate<T extends MageObject> implements Predicate<T> {
+public class AbilityPredicate implements Predicate<MageObject> {
 
     private final Class<?> abilityClass;
 
@@ -46,7 +46,7 @@ public class AbilityPredicate<T extends MageObject> implements Predicate<T> {
     }
 
     @Override
-    public boolean apply(T input, Game game) {
+    public boolean apply(MageObject input, Game game) {
         Abilities<Ability> abilities = input.getAbilities();
         for (int i = 0; i < abilities.size(); i++) {
             if (abilityClass.equals(abilities.get(i).getClass())) {

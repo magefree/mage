@@ -36,7 +36,7 @@ import mage.game.Game;
  *
  * @author North
  */
-public class ColorPredicate<T extends MageObject> implements Predicate<T> {
+public class ColorPredicate implements Predicate<MageObject> {
 
     private final ObjectColor color;
 
@@ -45,7 +45,7 @@ public class ColorPredicate<T extends MageObject> implements Predicate<T> {
     }
 
     @Override
-    public boolean apply(T input, Game game) {
+    public boolean apply(MageObject input, Game game) {
         return input.getColor().contains(color);
     }
 

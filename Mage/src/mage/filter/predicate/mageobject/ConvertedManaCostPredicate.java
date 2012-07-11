@@ -35,14 +35,14 @@ import mage.filter.predicate.IntComparePredicate;
  *
  * @author North
  */
-public class ConvertedManaCostPredicate<T extends MageObject> extends IntComparePredicate<T> {
+public class ConvertedManaCostPredicate extends IntComparePredicate<MageObject> {
 
     public ConvertedManaCostPredicate(Filter.ComparisonType type, int value) {
         super(type, value);
     }
 
     @Override
-    protected int getInputValue(T input) {
+    protected int getInputValue(MageObject input) {
         return input.getManaCost().convertedManaCost();
     }
 

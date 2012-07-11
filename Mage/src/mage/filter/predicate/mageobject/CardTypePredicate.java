@@ -36,7 +36,7 @@ import mage.game.Game;
  *
  * @author North
  */
-public class CardTypePredicate<T extends MageObject> implements Predicate<T> {
+public class CardTypePredicate implements Predicate<MageObject> {
 
     private final CardType cardType;
 
@@ -45,7 +45,7 @@ public class CardTypePredicate<T extends MageObject> implements Predicate<T> {
     }
 
     @Override
-    public boolean apply(T input, Game game) {
+    public boolean apply(MageObject input, Game game) {
         return input.getCardType().contains(cardType);
     }
 

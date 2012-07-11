@@ -35,14 +35,14 @@ import mage.filter.predicate.IntComparePredicate;
  *
  * @author North
  */
-public class ToughnessPredicate<T extends MageObject> extends IntComparePredicate<T> {
+public class ToughnessPredicate extends IntComparePredicate<MageObject> {
 
     public ToughnessPredicate(Filter.ComparisonType type, int value) {
         super(type, value);
     }
 
     @Override
-    protected int getInputValue(T input) {
+    protected int getInputValue(MageObject input) {
         return input.getToughness().getValue();
     }
 

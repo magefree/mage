@@ -35,14 +35,14 @@ import mage.filter.predicate.IntComparePredicate;
  *
  * @author North
  */
-public class PowerPredicate<T extends MageObject> extends IntComparePredicate<T> {
+public class PowerPredicate extends IntComparePredicate<MageObject> {
 
     public PowerPredicate(Filter.ComparisonType type, int value) {
         super(type, value);
     }
 
     @Override
-    protected int getInputValue(T input) {
+    protected int getInputValue(MageObject input) {
         return input.getPower().getValue();
     }
 

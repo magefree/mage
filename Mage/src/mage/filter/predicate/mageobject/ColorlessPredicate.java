@@ -35,10 +35,10 @@ import mage.game.Game;
  *
  * @author North
  */
-public class ColorlessPredicate<T extends MageObject> implements Predicate<T> {
+public class ColorlessPredicate implements Predicate<MageObject> {
 
     @Override
-    public boolean apply(T input, Game game) {
+    public boolean apply(MageObject input, Game game) {
         return input.getColor().isColorless();
     }
 

@@ -35,7 +35,7 @@ import mage.game.Game;
  *
  * @author North
  */
-public class NamePredicate<T extends MageObject> implements Predicate<T> {
+public class NamePredicate implements Predicate<MageObject> {
 
     private final String name;
 
@@ -44,7 +44,7 @@ public class NamePredicate<T extends MageObject> implements Predicate<T> {
     }
 
     @Override
-    public boolean apply(T input, Game game) {
+    public boolean apply(MageObject input, Game game) {
         return name.equals(input.getName());
     }
 

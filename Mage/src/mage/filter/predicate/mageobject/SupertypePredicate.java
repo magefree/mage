@@ -35,7 +35,7 @@ import mage.game.Game;
  *
  * @author North
  */
-public class SupertypePredicate<T extends MageObject> implements Predicate<T> {
+public class SupertypePredicate implements Predicate<MageObject> {
 
     private final String supertype;
 
@@ -44,7 +44,7 @@ public class SupertypePredicate<T extends MageObject> implements Predicate<T> {
     }
 
     @Override
-    public boolean apply(T input, Game game) {
+    public boolean apply(MageObject input, Game game) {
         return input.getSupertype().contains(supertype);
     }
 

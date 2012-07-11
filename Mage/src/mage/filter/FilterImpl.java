@@ -28,7 +28,7 @@
 
 package mage.filter;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import mage.Constants.CardType;
 import mage.filter.predicate.Predicate;
@@ -44,7 +44,7 @@ public abstract class FilterImpl<E, T extends FilterImpl<E, T>> implements Filte
     protected static ListComparer<CardType> compCardType = new ListComparer<CardType>();
     protected static ListComparer<String> compString = new ListComparer<String>();
 
-    protected List<Predicate> predicates = new LinkedList<Predicate>();
+    protected List<Predicate> predicates = new ArrayList<Predicate>();
     protected String message;
     protected boolean notFilter = false;
 
@@ -58,7 +58,7 @@ public abstract class FilterImpl<E, T extends FilterImpl<E, T>> implements Filte
     public FilterImpl(FilterImpl filter) {
         this.message = filter.message;
         this.notFilter = filter.notFilter;
-        this.predicates = new LinkedList<Predicate>(filter.predicates);
+        this.predicates = new ArrayList<Predicate>(filter.predicates);
     }
 
     @Override
