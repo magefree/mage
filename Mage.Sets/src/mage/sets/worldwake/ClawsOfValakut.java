@@ -44,6 +44,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -56,7 +57,7 @@ public class ClawsOfValakut extends CardImpl<ClawsOfValakut> {
      private static final FilterLandPermanent filter = new FilterLandPermanent("Mountain you control");
 
     static {
-        filter.getSubtype().add("Mountain");
+        filter.add(new SubtypePredicate("Mountain"));
         filter.setTargetController(Constants.TargetController.YOU);
     }
 

@@ -37,6 +37,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -51,7 +52,7 @@ public class KorOutfitter extends CardImpl<KorOutfitter> {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Equipment you control");
 
     static {
-        filter.getSubtype().add("Equipment");
+        filter.add(new SubtypePredicate("Equipment"));
     }
 
     public KorOutfitter(UUID ownerId) {

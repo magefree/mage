@@ -38,8 +38,8 @@ import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.abilities.keyword.MountainwalkAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  * @author Loki
@@ -49,8 +49,7 @@ public class GoblinKing extends CardImpl<GoblinKing> {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblin creatures");
 
     static {
-        filter.getSubtype().add("Goblin");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Goblin"));
     }
 
     public GoblinKing(UUID ownerId) {

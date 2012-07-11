@@ -44,8 +44,8 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetControlledPermanent;
 
@@ -58,8 +58,7 @@ public class Pentavus extends CardImpl<Pentavus> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("Pentavite");
 
     static {
-        filter.getSubtype().add("Pentavite");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Pentavite"));
     }
 
     public Pentavus(UUID ownerId) {

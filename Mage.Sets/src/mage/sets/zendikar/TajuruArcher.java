@@ -39,8 +39,8 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -53,8 +53,7 @@ public class TajuruArcher extends CardImpl<TajuruArcher> {
     private static final FilterCreaturePermanent filterTarget = new FilterCreaturePermanent("creature with flying");
 
     static {
-        filter.getSubtype().add("Ally");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Ally"));
         filter.setTargetController(Constants.TargetController.YOU);
         filterTarget.getAbilities().add(FlyingAbility.getInstance());
     }

@@ -42,8 +42,8 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -55,8 +55,7 @@ public class RhysTheExiled extends CardImpl<RhysTheExiled> {
     private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Elf");
 
     static {
-        filter.getSubtype().add("Elf");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Elf"));
     }
 
     public RhysTheExiled(UUID ownerId) {

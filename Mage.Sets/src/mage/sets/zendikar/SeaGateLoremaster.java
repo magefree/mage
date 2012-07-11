@@ -38,6 +38,7 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -48,7 +49,7 @@ public class SeaGateLoremaster extends CardImpl<SeaGateLoremaster> {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Ally you control");
 
     static {
-        filter.getSubtype().add("Ally");
+        filter.add(new SubtypePredicate("Ally"));
     }
 
     public SeaGateLoremaster(UUID ownerId) {

@@ -39,8 +39,8 @@ import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.KithkinToken;
 import mage.target.common.TargetControlledPermanent;
 
@@ -55,8 +55,7 @@ public class GuardianOfCloverdell extends CardImpl<GuardianOfCloverdell> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("Kithkin");
 
     static {
-        filter.getSubtype().add("Kithkin");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Kithkin"));
     }
 
     public GuardianOfCloverdell(UUID ownerId) {

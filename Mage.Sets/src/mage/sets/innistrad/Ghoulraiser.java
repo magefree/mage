@@ -39,8 +39,8 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -94,8 +94,7 @@ class GhoulraiserEffect extends OneShotEffect<GhoulraiserEffect> {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             FilterCard filter = new FilterCard("Zombie card");
-            filter.getSubtype().add("Zombie");
-            filter.setScopeSubtype(ComparisonScope.Any);
+            filter.add(new SubtypePredicate("Zombie"));
             Card[] cards = player.getGraveyard().getCards(filter, game).toArray(new Card[0]);
             if (cards.length > 0) {
                 Random rnd = new Random();

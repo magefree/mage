@@ -38,8 +38,8 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -51,8 +51,7 @@ public class NezumiShadowWatcher extends CardImpl<NezumiShadowWatcher> {
     private final static FilterPermanent filter = new FilterPermanent("Ninja");
 
     static {
-        filter.getSubtype().add("Ninja");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Ninja"));
     }
 
     public NezumiShadowWatcher(UUID ownerId) {

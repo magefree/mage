@@ -39,6 +39,7 @@ import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -48,7 +49,7 @@ public class NightmareLash extends CardImpl<NightmareLash> {
     private static final FilterLandPermanent filter = new FilterLandPermanent("Swamp you control");
 
     static {
-        filter.getSubtype().add("Swamp");
+        filter.add(new SubtypePredicate("Swamp"));
         filter.setTargetController(Constants.TargetController.YOU);
     }
 

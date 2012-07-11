@@ -39,6 +39,7 @@ import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -49,7 +50,7 @@ public class RhoxPikemaster extends CardImpl<RhoxPikemaster> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Soldier creatures");
 
     static {
-        filter.getSubtype().add("Soldier");
+        filter.add(new SubtypePredicate("Soldier"));
     }
 
     public RhoxPikemaster(UUID ownerId) {

@@ -38,8 +38,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.effects.common.continious.BoostSourceWhileControlsEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -50,8 +50,7 @@ public class CrimsonMuckwader extends CardImpl<CrimsonMuckwader> {
     private static final FilterPermanent filter = new FilterPermanent("Swamp");
 
     static {
-        filter.getSubtype().add("Swamp");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Swamp"));
     }
 
     public CrimsonMuckwader(UUID ownerId) {

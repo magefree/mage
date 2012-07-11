@@ -38,8 +38,8 @@ import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.*;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -52,8 +52,7 @@ public class AngelicOverseer extends CardImpl<AngelicOverseer> {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Human");
 
     static {
-        filter.getSubtype().add("Human");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Human"));
     }
 
     public AngelicOverseer(UUID ownerId) {

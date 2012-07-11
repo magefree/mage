@@ -85,6 +85,7 @@ import org.apache.log4j.Logger;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializable {
 
@@ -1036,8 +1037,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
             for (Permanent planeswalker: planeswalkers) {
                 for (String planeswalkertype: planeswalker.getSubtype()) {
                     FilterPlaneswalkerPermanent filterPlaneswalker = new FilterPlaneswalkerPermanent();
-                    filterPlaneswalker.getSubtype().add(planeswalkertype);
-                    filterPlaneswalker.setScopeSubtype(ComparisonScope.Any);
+                    filterPlaneswalker.add(new SubtypePredicate(planeswalkertype));
                     if (getBattlefield().contains(filterPlaneswalker, planeswalker.getControllerId(), this, 2)) {
                         for (Permanent perm: getBattlefield().getActivePermanents(filterPlaneswalker, planeswalker.getControllerId(), this)) {
                             perm.moveToZone(Zone.GRAVEYARD, null, this, false);

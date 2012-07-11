@@ -38,8 +38,8 @@ import mage.abilities.condition.common.ControlsPermanentCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -51,8 +51,7 @@ public class LoamLion extends CardImpl<LoamLion> {
     private static final FilterLandPermanent filter = new FilterLandPermanent("a Forest");
 
     static {
-        filter.getSubtype().add("Forest");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Forest"));
     }
 
     public LoamLion(UUID ownerId) {

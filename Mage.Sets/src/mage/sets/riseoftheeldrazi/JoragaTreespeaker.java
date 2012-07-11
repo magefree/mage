@@ -48,6 +48,7 @@ import mage.abilities.keyword.LevelerCardBuilder;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.LevelerCard;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
@@ -60,7 +61,7 @@ public class JoragaTreespeaker extends LevelerCard<JoragaTreespeaker> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elves");
 
     static {
-        filter.getSubtype().add("Elf");
+        filter.add(new SubtypePredicate("Elf"));
     }
 
     public JoragaTreespeaker(UUID ownerId) {

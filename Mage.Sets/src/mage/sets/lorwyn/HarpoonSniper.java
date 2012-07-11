@@ -38,8 +38,8 @@ import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetAttackingOrBlockingCreature;
 
 import java.util.UUID;
@@ -53,8 +53,7 @@ public class HarpoonSniper extends CardImpl<HarpoonSniper> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("Merfolk you control");
 
     static {
-        filter.getSubtype().add("Merfolk");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Merfolk"));
     }
 
     public HarpoonSniper(UUID ownerId) {

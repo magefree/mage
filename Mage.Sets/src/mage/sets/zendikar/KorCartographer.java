@@ -35,6 +35,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -46,7 +47,7 @@ public class KorCartographer extends CardImpl<KorCartographer> {
     private static final FilterCard filter = new FilterCard("Plains card");
 
     static {
-        filter.getSubtype().add("Plains");
+        filter.add(new SubtypePredicate("Plains"));
     }
 
     public KorCartographer(UUID ownerId) {

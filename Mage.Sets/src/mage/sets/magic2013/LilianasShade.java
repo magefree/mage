@@ -40,6 +40,7 @@ import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandCard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -51,7 +52,7 @@ public class LilianasShade extends CardImpl<LilianasShade> {
     private static final FilterLandCard filter = new FilterLandCard("Swamp");
 
     static {
-        filter.getSubtype().add("Swamp");
+        filter.add(new SubtypePredicate("Swamp"));
     }
 
     public LilianasShade(UUID ownerId) {

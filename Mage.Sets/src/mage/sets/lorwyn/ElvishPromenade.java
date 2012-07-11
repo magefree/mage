@@ -32,8 +32,8 @@ import mage.Constants.Rarity;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.ElfToken;
 
 import java.util.UUID;
@@ -47,8 +47,7 @@ public class ElvishPromenade extends CardImpl<ElvishPromenade> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("Elf you control");
 
     static {
-        filter.getSubtype().add("Elf");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Elf"));
     }
 
     public ElvishPromenade(UUID ownerId) {

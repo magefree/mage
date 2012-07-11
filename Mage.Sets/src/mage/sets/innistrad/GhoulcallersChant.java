@@ -33,9 +33,9 @@ import mage.Constants.Rarity;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -47,8 +47,7 @@ public class GhoulcallersChant extends CardImpl<GhoulcallersChant> {
     private static final FilterCard filter = new FilterCard("Zombie cards from your graveyard");
 
     static {
-        filter.getSubtype().add("Zombie");
-        filter.setScopeSubtype(ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Zombie"));
     }
 
     public GhoulcallersChant(UUID ownerId) {

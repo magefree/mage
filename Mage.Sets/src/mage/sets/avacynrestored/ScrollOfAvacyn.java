@@ -41,19 +41,18 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
  * @author Loki
  */
 public class ScrollOfAvacyn extends CardImpl<ScrollOfAvacyn> {
-    private static FilterPermanent filter = new FilterPermanent("an Angel");
+    private static final FilterPermanent filter = new FilterPermanent();
 
     static {
-        filter.getSubtype().add("Angel");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Angel"));
     }
 
     public ScrollOfAvacyn(UUID ownerId) {

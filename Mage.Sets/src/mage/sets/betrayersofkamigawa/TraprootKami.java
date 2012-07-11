@@ -40,8 +40,8 @@ import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -52,8 +52,7 @@ public class TraprootKami extends CardImpl<TraprootKami> {
     private final static FilterPermanent filter = new FilterPermanent("Forest");
 
     static {
-        filter.getSubtype().add("Forest");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Forest"));
     }
 
     public TraprootKami(UUID ownerId) {

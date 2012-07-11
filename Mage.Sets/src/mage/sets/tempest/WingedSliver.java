@@ -37,8 +37,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  * @author Loki
@@ -48,8 +48,7 @@ public class WingedSliver extends CardImpl<WingedSliver> {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("All sliver creatures");
 
     static {
-        filter.getSubtype().add("Sliver");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Sliver"));
     }
 
     public WingedSliver(UUID ownerId) {

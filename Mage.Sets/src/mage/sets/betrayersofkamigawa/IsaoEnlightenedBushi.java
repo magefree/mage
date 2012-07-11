@@ -40,8 +40,8 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.abilities.keyword.BushidoAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -53,8 +53,7 @@ public class IsaoEnlightenedBushi extends CardImpl<IsaoEnlightenedBushi> {
     private final static FilterPermanent filter = new FilterPermanent("Samurai");
 
     static {
-        filter.getSubtype().add("Samurai");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Samurai"));
     }
 
     public IsaoEnlightenedBushi(UUID ownerId) {
@@ -66,6 +65,7 @@ public class IsaoEnlightenedBushi extends CardImpl<IsaoEnlightenedBushi> {
         this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
+
         // Isao, Enlightened Bushi can't be countered.
         this.addAbility(new CantCounterAbility());
         this.addAbility(new BushidoAbility(2));

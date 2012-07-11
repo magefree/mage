@@ -40,6 +40,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -55,7 +56,7 @@ public class ArmamentMaster extends CardImpl<ArmamentMaster> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Other Kor creatures you control");
 
     static {
-        filter.getSubtype().add("Kor");
+        filter.add(new SubtypePredicate("Kor"));
     }
 
     public ArmamentMaster(UUID ownerId) {
@@ -86,7 +87,7 @@ class ArmamentMasterEffect extends ContinuousEffectImpl<ArmamentMasterEffect> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Other Kor creatures you control");
 
     static {
-        filter.getSubtype().add("Kor");
+        filter.add(new SubtypePredicate("Kor"));
     }
 
     public ArmamentMasterEffect() {

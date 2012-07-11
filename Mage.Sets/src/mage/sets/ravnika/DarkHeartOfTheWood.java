@@ -36,8 +36,8 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -49,8 +49,7 @@ public class DarkHeartOfTheWood extends CardImpl<DarkHeartOfTheWood> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("Forest");
 
     static {
-        filter.getSubtype().add("Forest");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Forest"));
     }
 
     public DarkHeartOfTheWood(UUID ownerId) {

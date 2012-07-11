@@ -36,8 +36,8 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
@@ -50,8 +50,7 @@ public class ElvishEulogist extends CardImpl<ElvishEulogist> {
     private final static FilterCard filter = new FilterCard("Elf");
 
     static {
-        filter.getSubtype().add("Elf");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Elf"));
     }
 
     public ElvishEulogist(UUID ownerId) {

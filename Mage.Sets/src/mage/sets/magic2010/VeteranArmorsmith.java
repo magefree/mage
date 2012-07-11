@@ -36,8 +36,8 @@ import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -48,8 +48,7 @@ public class VeteranArmorsmith extends CardImpl<VeteranArmorsmith> {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Soldier creatures");
 
     static {
-        filter.getSubtype().add("Soldier");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Soldier"));
     }
 
     public VeteranArmorsmith(UUID ownerId) {

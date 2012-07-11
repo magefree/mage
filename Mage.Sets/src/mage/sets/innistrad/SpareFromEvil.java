@@ -35,6 +35,8 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
@@ -46,8 +48,7 @@ public class SpareFromEvil extends CardImpl<SpareFromEvil> {
     private static final FilterCreatureCard filterNonHuman = new FilterCreatureCard("non-Human creatures");
 
     static {
-        filterNonHuman.getSubtype().add("Human");
-        filterNonHuman.setNotSubtype(true);
+        filterNonHuman.add(Predicates.not(new SubtypePredicate("Human")));
     }
 
     public SpareFromEvil(UUID ownerId) {

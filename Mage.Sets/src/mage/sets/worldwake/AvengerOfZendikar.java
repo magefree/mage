@@ -41,6 +41,7 @@ import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.PlantToken;
 
 /**
@@ -53,7 +54,7 @@ public class AvengerOfZendikar extends CardImpl<AvengerOfZendikar> {
 
     static {
         filter.getCardType().add(CardType.CREATURE);
-        filter.getSubtype().add("Plant");
+        filter.add(new SubtypePredicate("Plant"));
 
         filterLand.getCardType().add(CardType.LAND);
     }

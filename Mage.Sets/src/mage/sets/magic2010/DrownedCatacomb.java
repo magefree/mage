@@ -40,8 +40,9 @@ import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -52,10 +53,7 @@ public class DrownedCatacomb extends CardImpl<DrownedCatacomb> {
     private static final FilterLandPermanent filter = new FilterLandPermanent();
 
     static {
-        filter.getSubtype().add("Swamp");
-        filter.getSubtype().add("Island");
-        filter.setScopeSubtype(ComparisonScope.Any);
-        filter.setMessage("Island or a Swamp");
+        filter.add(Predicates.or(new SubtypePredicate("Swamp"), new SubtypePredicate("Island")));
     }
 
     public DrownedCatacomb(UUID ownerId) {
@@ -63,7 +61,7 @@ public class DrownedCatacomb extends CardImpl<DrownedCatacomb> {
         this.expansionSetCode = "M10";
 
         Condition controls = new UnlessCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0));
-        String abilityText = "tap it unless you control a " + filter.getMessage();
+        String abilityText = "tap it unless you control a Island or a Swamp";
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
         this.addAbility(new BlackManaAbility());
         this.addAbility(new BlueManaAbility());

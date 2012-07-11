@@ -37,8 +37,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -53,8 +53,7 @@ public class HorobiDeathsWail extends CardImpl<HorobiDeathsWail> {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Demon");
     static {
-        filter.getSubtype().add("Demon");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Demon"));
     }
 
     public HorobiDeathsWail(UUID ownerId) {

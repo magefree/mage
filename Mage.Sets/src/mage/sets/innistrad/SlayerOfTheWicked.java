@@ -35,8 +35,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -48,10 +49,10 @@ public class SlayerOfTheWicked extends CardImpl<SlayerOfTheWicked> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Vampire, Werewolf, or Zombie");
 
     static {
-        filter.getSubtype().add("Vampire");
-        filter.getSubtype().add("Werewolf");
-        filter.getSubtype().add("Zombie");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new SubtypePredicate("Vampire"),
+                new SubtypePredicate("Werewolf"),
+                new SubtypePredicate("Zombie")));
     }
 
     public SlayerOfTheWicked(UUID ownerId) {

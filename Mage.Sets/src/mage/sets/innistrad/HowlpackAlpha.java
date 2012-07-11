@@ -41,8 +41,9 @@ import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.WolfToken;
 
 import java.util.UUID;
@@ -58,9 +59,7 @@ public class HowlpackAlpha extends CardImpl<HowlpackAlpha> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Werewolf and Wolf creatures");
 
     static {
-        filter.getSubtype().add("Werewolf");
-        filter.getSubtype().add("Wolf");
-        filter.setScopeSubtype(ComparisonScope.Any);
+        filter.add(Predicates.or(new SubtypePredicate("Werewolf"), new SubtypePredicate("Wolf")));
     }
 
     public HowlpackAlpha(UUID ownerId) {

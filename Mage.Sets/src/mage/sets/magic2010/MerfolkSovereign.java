@@ -43,6 +43,7 @@ import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.UnblockableAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -55,8 +56,8 @@ public class MerfolkSovereign extends CardImpl<MerfolkSovereign> {
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Merfolk creature");
 
     static {
-        filter1.getSubtype().add("Merfolk");
-        filter2.getSubtype().add("Merfolk");
+        filter1.add(new SubtypePredicate("Merfolk"));
+        filter2.add(new SubtypePredicate("Merfolk"));
     }
 
     public MerfolkSovereign(UUID ownerId) {

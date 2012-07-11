@@ -36,6 +36,8 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.SacrificeAllEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -46,8 +48,7 @@ public class AnowonTheRuinSage extends CardImpl<AnowonTheRuinSage> {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("non-Vampire creature");
 
     static {
-        filter.getSubtype().add("Vampire");
-        filter.setNotSubtype(true);
+        filter.add(Predicates.not(new SubtypePredicate("Vampire")));
     }
 
     public AnowonTheRuinSage(UUID ownerId) {

@@ -39,6 +39,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.continious.BecomesCreatureTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetLandPermanent;
 
@@ -50,7 +51,7 @@ public class FendeepSummoner extends CardImpl<FendeepSummoner> {
     static final FilterLandPermanent filter = new FilterLandPermanent("Swamp");
 
     static {
-        filter.getSubtype().add("Swamp");
+        filter.add(new SubtypePredicate("Swamp"));
     }
 
     public FendeepSummoner(UUID ownerId) {

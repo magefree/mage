@@ -37,8 +37,8 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -50,8 +50,7 @@ public class TheUnspeakable extends CardImpl<TheUnspeakable> {
     private final static FilterCard filter = new FilterCard("Arcane card from your graveyard");
 
     static {
-        filter.getSubtype().add("Arcane");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Arcane"));
     }
 
     public TheUnspeakable(UUID ownerId) {

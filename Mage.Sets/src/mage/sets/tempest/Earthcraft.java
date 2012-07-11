@@ -55,8 +55,6 @@ public class Earthcraft extends CardImpl<Earthcraft> {
     static {
         filterCreature.setUseTapped(true);
         filterCreature.setTapped(false);
-        filterCreature.setScopeCardType(Filter.ComparisonScope.Any);
-        filterCreature.setScopeSubtype(Filter.ComparisonScope.Any);
         filterLand.getCardType().add(CardType.LAND);
         filterLand.setScopeCardType(Filter.ComparisonScope.Any);
         filterLand.add(new SupertypePredicate("Basic"));

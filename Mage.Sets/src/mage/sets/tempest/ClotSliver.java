@@ -39,8 +39,8 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  * @author Loki
@@ -50,8 +50,7 @@ public class ClotSliver extends CardImpl<ClotSliver> {
     private final static FilterPermanent filter = new FilterPermanent("Slivers");
 
     static {
-        filter.getSubtype().add("Sliver");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Sliver"));
     }
 
     public ClotSliver(UUID ownerId) {

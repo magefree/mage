@@ -38,8 +38,8 @@ import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.abilities.keyword.ForestwalkAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -50,8 +50,7 @@ public class ElvishChampion extends CardImpl<ElvishChampion> {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Elf creatures");
 
     static {
-        filter.getSubtype().add("Elf");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Elf"));
     }
 
     public ElvishChampion(UUID ownerId) {

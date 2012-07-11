@@ -34,7 +34,6 @@ import mage.MageInt;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterSpell;
 import mage.game.permanent.token.DrakeToken;
 
@@ -49,7 +48,6 @@ public class TalrandSkySummoner extends CardImpl<TalrandSkySummoner> {
     static {
         filter.getCardType().add(CardType.INSTANT);
         filter.getCardType().add(CardType.SORCERY);
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
     }
 
     public TalrandSkySummoner(UUID ownerId) {

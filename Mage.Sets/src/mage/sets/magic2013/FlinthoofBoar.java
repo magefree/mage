@@ -40,8 +40,8 @@ import mage.abilities.effects.common.continious.BoostSourceWhileControlsEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -52,8 +52,7 @@ public class FlinthoofBoar extends CardImpl<FlinthoofBoar> {
     private static final FilterPermanent filter = new FilterPermanent("Mountain");
 
     static {
-        filter.getSubtype().add("Mountain");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Mountain"));
     }
 
     public FlinthoofBoar(UUID ownerId) {

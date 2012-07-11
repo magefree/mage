@@ -41,8 +41,8 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  * @author Loki
@@ -52,8 +52,7 @@ public class MnemonicSliver extends CardImpl<MnemonicSliver> {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Sliver creatures");
 
     static {
-        filter.getSubtype().add("Sliver");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Sliver"));
     }
 
     public MnemonicSliver(UUID ownerId) {

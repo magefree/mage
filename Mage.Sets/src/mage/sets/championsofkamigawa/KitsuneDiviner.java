@@ -39,8 +39,8 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -52,8 +52,7 @@ public class KitsuneDiviner extends CardImpl<KitsuneDiviner> {
     private final static FilterPermanent filter = new FilterPermanent("Spirit");
 
         static {
-            filter.getSubtype().add("Spirit");
-            filter.setScopeSubtype(Filter.ComparisonScope.Any);
+            filter.add(new SubtypePredicate("Spirit"));
         }
 
         public KitsuneDiviner (UUID ownerId) {

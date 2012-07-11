@@ -35,6 +35,7 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -45,7 +46,7 @@ public class LandbindRitual extends CardImpl<LandbindRitual> {
     private static final FilterLandPermanent filter = new FilterLandPermanent("Plains you control");
 
     static {
-        filter.getSubtype().add("Plains");
+        filter.add(new SubtypePredicate("Plains"));
         filter.setTargetController(TargetController.YOU);
     }
 

@@ -34,6 +34,8 @@ import mage.Constants.Zone;
 import mage.abilities.effects.common.CounterTargetWithReplacementEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetSpell;
 
 /**
@@ -45,8 +47,7 @@ public class FaerieTrickery extends CardImpl<FaerieTrickery> {
     private static final FilterSpell filter = new FilterSpell("non-Faerie spell");
 
     static {
-        filter.getSubtype().add("Faerie");
-        filter.setNotSubtype(true);
+        filter.add(Predicates.not(new SubtypePredicate("Faerie")));
     }
 
     public FaerieTrickery(UUID ownerId) {

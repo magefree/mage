@@ -37,8 +37,8 @@ import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -56,8 +56,7 @@ public class DiregrafCaptain extends CardImpl<DiregrafCaptain> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Zombie");
 
     static {
-        filter.getSubtype().add("Zombie");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Zombie"));
     }
 
     public DiregrafCaptain(UUID ownerId) {
@@ -93,8 +92,7 @@ class DiregrafCaptainTriggeredAbility extends TriggeredAbilityImpl<DiregrafCapta
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Zombie");
 
     static {
-        filter.getSubtype().add("Zombie");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Zombie"));
     }
 
     public DiregrafCaptainTriggeredAbility() {

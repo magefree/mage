@@ -41,6 +41,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.GolemToken;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -54,7 +55,7 @@ public class VitalSplicer extends CardImpl<VitalSplicer> {
 
     static {
         filter.getCardType().add(CardType.CREATURE);
-        filter.getSubtype().add("Golem");
+        filter.add(new SubtypePredicate("Golem"));
         filter.setTargetController(TargetController.YOU);
     }
 

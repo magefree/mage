@@ -32,8 +32,9 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -45,11 +46,9 @@ public class VictimOfNight extends CardImpl<VictimOfNight> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Vampire, non-Werewolf, non-Zombie creature");
 
     static {
-        filter.getSubtype().add("Vampire");
-        filter.getSubtype().add("Werewolf");
-        filter.getSubtype().add("Zombie");
-        filter.setNotSubtype(true);
-        filter.setScopeSubtype(ComparisonScope.Any);
+        filter.add(Predicates.not(new SubtypePredicate("Vampire")));
+        filter.add(Predicates.not(new SubtypePredicate("Werewolf")));
+        filter.add(Predicates.not(new SubtypePredicate("Zombie")));
     }
 
     public VictimOfNight(UUID ownerId) {

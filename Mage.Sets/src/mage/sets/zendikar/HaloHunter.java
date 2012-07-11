@@ -37,6 +37,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -48,7 +49,7 @@ public class HaloHunter extends CardImpl<HaloHunter> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Angel");
 
     static {
-        filter.getSubtype().add("Angel");
+        filter.add(new SubtypePredicate("Angel"));
     }
 
     public HaloHunter(UUID ownerId) {

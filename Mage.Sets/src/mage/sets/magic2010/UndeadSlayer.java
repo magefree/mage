@@ -39,8 +39,9 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -52,10 +53,10 @@ public class UndeadSlayer extends CardImpl<UndeadSlayer> {
     private final static FilterPermanent filter = new FilterPermanent("Skeleton, Vampire, or Zombie");
 
     static {
-        filter.getSubtype().add("Skeleton");
-        filter.getSubtype().add("Vampire");
-        filter.getSubtype().add("Zombie");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new SubtypePredicate("Skeleton"),
+                new SubtypePredicate("Vampire"),
+                new SubtypePredicate("Zombie")));
     }
 
     public UndeadSlayer(UUID ownerId) {

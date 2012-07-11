@@ -37,8 +37,8 @@ import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -49,8 +49,7 @@ public class KazuulWarlord extends CardImpl<KazuulWarlord> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Ally creatures you control");
 
     static {
-        filter.getSubtype().add("Ally");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Ally"));
         filter.setTargetController(TargetController.YOU);
     }
 

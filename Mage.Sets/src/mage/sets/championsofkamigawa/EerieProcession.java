@@ -34,8 +34,8 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -46,8 +46,7 @@ public class EerieProcession extends CardImpl<EerieProcession> {
     private final static FilterCard filter = new FilterCard("Arcane card");
 
     static {
-        filter.getSubtype().add("Arcane");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Arcane"));
     }
 
     public EerieProcession(UUID ownerId) {

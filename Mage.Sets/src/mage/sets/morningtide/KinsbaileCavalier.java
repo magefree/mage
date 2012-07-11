@@ -29,16 +29,17 @@ package mage.sets.morningtide;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -49,8 +50,7 @@ public class KinsbaileCavalier extends CardImpl<KinsbaileCavalier> {
     private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Knight");
 
     static {
-        filter.getSubtype().add("Knight");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Knight"));
     }
 
     public KinsbaileCavalier(UUID ownerId) {
@@ -61,7 +61,7 @@ public class KinsbaileCavalier extends CardImpl<KinsbaileCavalier> {
         this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Constants.Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
     }
 
     public KinsbaileCavalier(final KinsbaileCavalier card) {

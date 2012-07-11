@@ -40,6 +40,7 @@ import mage.abilities.effects.common.continious.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -52,7 +53,7 @@ public class BlanchwoodArmor extends CardImpl<BlanchwoodArmor> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("Forest you control");
 
     static {
-        filter.getSubtype().add("Forest");
+        filter.add(new SubtypePredicate("Forest"));
     }
 
     public BlanchwoodArmor(UUID ownerId) {

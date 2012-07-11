@@ -39,8 +39,8 @@ import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -54,8 +54,7 @@ public class SejiriMerfolk extends CardImpl<SejiriMerfolk> {
 
     static {
         filter.getCardType().add(CardType.LAND);
-        filter.getSubtype().add("Plains");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Plains"));
     }
 
     public SejiriMerfolk(UUID ownerId) {

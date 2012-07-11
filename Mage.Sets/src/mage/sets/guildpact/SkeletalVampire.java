@@ -42,8 +42,8 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -56,8 +56,7 @@ public class SkeletalVampire extends CardImpl<SkeletalVampire> {
     private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Bat");
 
     static {
-        filter.getSubtype().add("Bat");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Bat"));
     }
 
     public SkeletalVampire(UUID ownerId) {

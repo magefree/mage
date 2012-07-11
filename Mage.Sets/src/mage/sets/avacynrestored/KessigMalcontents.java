@@ -36,6 +36,7 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPlayer;
 
 import java.util.UUID;
@@ -48,7 +49,7 @@ public class KessigMalcontents extends CardImpl<KessigMalcontents> {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Humans you control");
 
     static {
-        filter.getSubtype().add("Human");
+        filter.add(new SubtypePredicate("Human"));
     }
 
     public KessigMalcontents(UUID ownerId) {

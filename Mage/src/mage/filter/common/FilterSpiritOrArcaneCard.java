@@ -1,7 +1,8 @@
 package mage.filter.common;
 
-import mage.filter.Filter;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 public class FilterSpiritOrArcaneCard extends FilterSpell {
 
@@ -11,9 +12,7 @@ public class FilterSpiritOrArcaneCard extends FilterSpell {
 
     public FilterSpiritOrArcaneCard(String name) {
         super(name);
-        this.getSubtype().add("Spirit");
-        this.getSubtype().add("Arcane");
-        this.setScopeSubtype(Filter.ComparisonScope.Any);
+        this.add(Predicates.or(new SubtypePredicate("Spirit"),new SubtypePredicate("Arcane")));
     }
 
     public FilterSpiritOrArcaneCard(final FilterSpiritOrArcaneCard filter) {

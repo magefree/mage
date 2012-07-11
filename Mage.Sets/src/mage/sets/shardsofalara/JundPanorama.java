@@ -41,8 +41,9 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
@@ -57,10 +58,10 @@ public class JundPanorama extends CardImpl<JundPanorama> {
     static {
         filter.getCardType().add(CardType.LAND);
         filter.add(new SupertypePredicate("Basic"));
-        filter.getSubtype().add("Swamp");
-        filter.getSubtype().add("Mountain");
-        filter.getSubtype().add("Forest");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new SubtypePredicate("Swamp"),
+                new SubtypePredicate("Mountain"),
+                new SubtypePredicate("Forest")));
     }
 
     public JundPanorama(UUID ownerId) {

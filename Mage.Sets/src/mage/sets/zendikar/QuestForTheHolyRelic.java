@@ -47,6 +47,7 @@ import mage.counters.CounterType;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -114,7 +115,7 @@ class QuestForTheHolyRelicEffect extends OneShotEffect<QuestForTheHolyRelicEffec
         }
 
         FilterCard filter = new FilterCard("Equipment");
-        filter.getSubtype().add("Equipment");
+        filter.add(new SubtypePredicate("Equipment"));
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
         if (player.searchLibrary(target, game)) {
             Card card = player.getLibrary().getCard(target.getFirstTarget(), game);

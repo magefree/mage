@@ -37,8 +37,8 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -50,8 +50,7 @@ public class HondenOfInfiniteRage extends CardImpl<HondenOfInfiniteRage> {
     final static FilterControlledPermanent filter = new FilterControlledPermanent("Shrine");
 
         static {
-            filter.getSubtype().add("Shrine");
-            filter.setScopeCardType(Filter.ComparisonScope.Any);
+            filter.add(new SubtypePredicate("Shrine"));
         }
 
         public HondenOfInfiniteRage (UUID ownerId) {

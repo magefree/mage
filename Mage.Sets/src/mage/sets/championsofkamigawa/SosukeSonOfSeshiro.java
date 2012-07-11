@@ -41,8 +41,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.DamagedCreatureEvent;
 import mage.game.events.GameEvent;
@@ -58,8 +58,7 @@ public class SosukeSonOfSeshiro extends CardImpl<SosukeSonOfSeshiro> {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Snake creatures");
 
     static {
-            filter.getSubtype().add("Snake");
-            filter.setScopeSubtype(Filter.ComparisonScope.Any);
+            filter.add(new SubtypePredicate("Snake"));
     }
 
     public SosukeSonOfSeshiro(UUID ownerId) {

@@ -33,6 +33,7 @@ import mage.Constants.Rarity;
 import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -44,7 +45,7 @@ public class TrapmakersSnare extends CardImpl<TrapmakersSnare> {
     private static final FilterCard filter = new FilterCard("Trap card");
 
     static {
-        filter.getSubtype().add("Trap");
+        filter.add(new SubtypePredicate("Trap"));
     }
 
     public TrapmakersSnare(UUID ownerId) {

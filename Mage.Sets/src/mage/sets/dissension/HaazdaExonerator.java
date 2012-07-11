@@ -39,8 +39,8 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -52,8 +52,7 @@ public class HaazdaExonerator extends CardImpl<HaazdaExonerator> {
     private final static FilterPermanent filter = new FilterPermanent("Aura");
 
     static {
-        filter.getSubtype().add("Aura");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Aura"));
     }
 
     public HaazdaExonerator(UUID ownerId) {

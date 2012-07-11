@@ -43,6 +43,7 @@ import mage.abilities.keyword.LevelUpAbility;
 import mage.abilities.keyword.LevelerCardBuilder;
 import mage.cards.LevelerCard;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
@@ -55,7 +56,7 @@ public class CoralhelmCommander extends LevelerCard<CoralhelmCommander> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Merfolk creatures");
 
     static {
-        filter.getSubtype().add("Merfolk");
+        filter.add(new SubtypePredicate("Merfolk"));
     }
 
     public CoralhelmCommander(UUID ownerId) {

@@ -35,8 +35,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -48,8 +48,7 @@ public class RustsporeRam extends CardImpl<RustsporeRam> {
     private static final FilterPermanent filter = new FilterPermanent("Equipment");
 
     static {
-        filter.getSubtype().add("Equipment");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Equipment"));
     }
 
     public RustsporeRam(UUID ownerId) {

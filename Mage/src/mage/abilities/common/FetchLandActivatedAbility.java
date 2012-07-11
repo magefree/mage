@@ -28,17 +28,20 @@
 
 package mage.abilities.common;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
+import mage.MageObject;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
+import mage.filter.predicate.Predicate;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -47,15 +50,18 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class FetchLandActivatedAbility extends ActivatedAbilityImpl<FetchLandActivatedAbility> {
 
-    public FetchLandActivatedAbility(String[] subTypes) {
+    public FetchLandActivatedAbility(String[] subtypes) {
         super(Zone.BATTLEFIELD, null);
         addCost(new TapSourceCost());
         addCost(new PayLifeCost(1));
         addCost(new SacrificeSourceCost());
-        FilterCard filter = new FilterCard(subTypeNames(subTypes));
+        FilterCard filter = new FilterCard(subTypeNames(subtypes));
         filter.getCardType().add(CardType.LAND);
-        filter.getSubtype().addAll(Arrays.asList(subTypes));
-        filter.setScopeSubtype(ComparisonScope.Any);
+        ArrayList<Predicate<MageObject>> subtypePredicates = new ArrayList<Predicate<MageObject>>();
+        for(int i = 0; i < subtypes.length; i++){
+            subtypePredicates.add(new SubtypePredicate(subtypes[i]));
+        }
+        filter.add(Predicates.or(subtypePredicates));
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
         addEffect(new SearchLibraryPutInPlayEffect(target, false, true, Outcome.PutLandInPlay));
     }

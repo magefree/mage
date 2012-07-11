@@ -36,8 +36,8 @@ import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  * @author Loki
@@ -47,8 +47,7 @@ public class MuscleSliver extends CardImpl<MuscleSliver> {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("All Sliver creatures");
 
     static {
-        filter.getSubtype().add("Sliver");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Sliver"));
     }
 
     public MuscleSliver(UUID ownerId) {

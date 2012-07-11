@@ -7,8 +7,8 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -18,8 +18,7 @@ public class AngelOfFlightAlabaster extends CardImpl<AngelOfFlightAlabaster> {
     private static final FilterCard filter = new FilterCard("Spirit card from your graveyard");
 
     static {
-        filter.getSubtype().add("Spirit");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Spirit"));
     }
 
     public AngelOfFlightAlabaster(UUID ownerId) {

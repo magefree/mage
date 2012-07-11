@@ -47,7 +47,8 @@ import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterLandCard;
-
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
 
@@ -62,9 +63,7 @@ public class KnightOfTheReliquary extends CardImpl<KnightOfTheReliquary> {
     static {
         filter.getCardType().add(CardType.LAND);
         filter.setScopeCardType(ComparisonScope.Any);
-        filter.getSubtype().add("Forest");
-        filter.getSubtype().add("Plains");
-        filter.setScopeSubtype(ComparisonScope.Any);
+        filter.add(Predicates.or(new SubtypePredicate("Forest"), new SubtypePredicate("Plains")));
     }
 
     public KnightOfTheReliquary(UUID ownerId) {

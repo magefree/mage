@@ -38,6 +38,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
@@ -51,7 +52,7 @@ public class ScarredVinebreeder extends CardImpl<ScarredVinebreeder> {
     private static final FilterCard filter = new FilterCard("Elf card from your graveyard");
 
     static {
-        filter.getSubtype().add("Elf");
+        filter.add(new SubtypePredicate("Elf"));
     }
 
     public ScarredVinebreeder(UUID ownerId) {

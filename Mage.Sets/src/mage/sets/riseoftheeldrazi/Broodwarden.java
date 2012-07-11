@@ -36,8 +36,8 @@ import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -48,9 +48,8 @@ public class Broodwarden extends CardImpl<Broodwarden> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Eldrazi Spawn creatures you control");
 
     static {
-        filter.getSubtype().add("Eldrazi");
-        filter.getSubtype().add("Spawn");
-        filter.setScopeSubtype(ComparisonScope.All);
+        filter.add(new SubtypePredicate("Eldrazi"));
+        filter.add(new SubtypePredicate("Spawn"));
     }
 
     public Broodwarden(UUID ownerId) {

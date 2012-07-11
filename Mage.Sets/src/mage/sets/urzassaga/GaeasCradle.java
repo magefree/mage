@@ -35,7 +35,6 @@ import mage.Mana;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
 
 /**
@@ -49,7 +48,6 @@ public class GaeasCradle extends CardImpl<GaeasCradle> {
 
     static {
         filter.getCardType().add(CardType.CREATURE);
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
     }
 
     public GaeasCradle(UUID ownerId) {

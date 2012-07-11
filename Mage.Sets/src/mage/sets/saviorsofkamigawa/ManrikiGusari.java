@@ -42,8 +42,8 @@ import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -55,8 +55,7 @@ public class ManrikiGusari extends CardImpl<ManrikiGusari> {
     private final static FilterPermanent filter = new FilterPermanent("Equipment");
 
     static {
-        filter.getSubtype().add("Equipment");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Equipment"));
     }
 
     public ManrikiGusari(UUID ownerId) {

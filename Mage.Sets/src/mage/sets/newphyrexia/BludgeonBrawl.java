@@ -46,6 +46,8 @@ import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterArtifactPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -111,8 +113,7 @@ class BludgeonBrawlAddSubtypeEffect extends ContinuousEffectImpl<BludgeonBrawlAd
     public boolean apply(Game game, Ability source) {
         FilterArtifactPermanent filter = new FilterArtifactPermanent("noncreature, non-Equipment artifact");
         filter.getNotCardType().add(CardType.CREATURE);
-        filter.getSubtype().add("Equipment");
-        filter.setNotSubtype(true);
+        filter.add(Predicates.not(new SubtypePredicate("Equipment")));
 
         List<UUID> affectedPermanents = new ArrayList<UUID>();
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game);

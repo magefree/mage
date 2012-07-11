@@ -42,6 +42,7 @@ import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.GolemToken;
 
 /**
@@ -53,7 +54,7 @@ public class BladeSplicer extends CardImpl<BladeSplicer> {
 
     static {
         filter.getCardType().add(CardType.CREATURE);
-        filter.getSubtype().add("Golem");
+        filter.add(new SubtypePredicate("Golem"));
     }
 
     public BladeSplicer (UUID ownerId) {

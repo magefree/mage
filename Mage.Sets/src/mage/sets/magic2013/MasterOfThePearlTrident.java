@@ -39,6 +39,7 @@ import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.IslandwalkAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -49,7 +50,7 @@ public class MasterOfThePearlTrident extends CardImpl<MasterOfThePearlTrident> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Merfolk creatures");
 
     static {
-        filter.getSubtype().add("Merfolk");
+        filter.add(new SubtypePredicate("Merfolk"));
     }
 
     public MasterOfThePearlTrident(UUID ownerId) {

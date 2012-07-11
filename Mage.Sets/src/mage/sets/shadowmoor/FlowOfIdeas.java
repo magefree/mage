@@ -34,6 +34,7 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -44,7 +45,7 @@ public class FlowOfIdeas extends CardImpl<FlowOfIdeas> {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Island you control");
 
     static {
-        filter.getSubtype().add("Island");
+        filter.add(new SubtypePredicate("Island"));
     }
 
     public FlowOfIdeas(UUID ownerId) {

@@ -38,8 +38,8 @@ import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.BasicManaAbility;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -93,8 +93,7 @@ class HarabazDruidManaEffect extends ManaEffect<HarabazDruidManaEffect> {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
 
     static {
-        filter.getSubtype().add("Ally");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Ally"));
     }
 
     HarabazDruidManaEffect() {

@@ -38,8 +38,8 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -52,9 +52,7 @@ public class AzamiLadyOfScrolls extends CardImpl<AzamiLadyOfScrolls> {
     static {
         filter.setTapped(false);
         filter.setUseTapped(true);
-        filter.getSubtype().add("Wizard");
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Wizard"));
     }
 
     public AzamiLadyOfScrolls(UUID ownerId) {

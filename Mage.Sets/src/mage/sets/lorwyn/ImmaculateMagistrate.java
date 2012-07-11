@@ -39,6 +39,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -82,7 +83,7 @@ public class ImmaculateMagistrate extends CardImpl<ImmaculateMagistrate> {
 class ImmaculateMagistrateEffect extends OneShotEffect<ImmaculateMagistrateEffect> {
     static final FilterControlledPermanent filter = new FilterControlledPermanent("Elf");
     static {
-        filter.getSubtype().add("Elf");
+        filter.add(new SubtypePredicate("Elf"));
     }
     public ImmaculateMagistrateEffect() {
         super(Outcome.BoostCreature);

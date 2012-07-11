@@ -40,6 +40,7 @@ import mage.abilities.effects.common.PlayTargetWithoutPayingManaEffect;
 import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
 
@@ -55,7 +56,7 @@ public class StoneforgeMystic extends CardImpl<StoneforgeMystic> {
 
     static {
         filter.getCardType().add(CardType.ARTIFACT);
-        filter.getSubtype().add("Equipment");
+        filter.add(new SubtypePredicate("Equipment"));
     }
 
     public StoneforgeMystic(UUID ownerId) {

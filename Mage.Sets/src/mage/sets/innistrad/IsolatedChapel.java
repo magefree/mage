@@ -39,8 +39,9 @@ import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
@@ -52,10 +53,7 @@ public class IsolatedChapel extends CardImpl<IsolatedChapel> {
     private static final FilterLandPermanent filter = new FilterLandPermanent();
 
     static {
-        filter.getSubtype().add("Plains");
-        filter.getSubtype().add("Swamp");
-        filter.setScopeSubtype(ComparisonScope.Any);
-        filter.setMessage("Plains or a Swamp");
+        filter.add(Predicates.or(new SubtypePredicate("Plains"), new SubtypePredicate("Swamp")));
     }
 
     public IsolatedChapel(UUID ownerId) {
@@ -63,7 +61,7 @@ public class IsolatedChapel extends CardImpl<IsolatedChapel> {
         this.expansionSetCode = "ISD";
 
         Condition controls = new UnlessCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0));
-        String abilityText = "tap it unless you control a " + filter.getMessage();
+        String abilityText = "tap it unless you control a Plains or a Swamp";
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
         this.addAbility(new WhiteManaAbility());
         this.addAbility(new BlackManaAbility());

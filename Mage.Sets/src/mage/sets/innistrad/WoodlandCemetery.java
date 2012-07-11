@@ -39,8 +39,9 @@ import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
@@ -52,10 +53,7 @@ public class WoodlandCemetery extends CardImpl<WoodlandCemetery> {
     private static final FilterLandPermanent filter = new FilterLandPermanent();
 
     static {
-        filter.getSubtype().add("Forest");
-        filter.getSubtype().add("Swamp");
-        filter.setScopeSubtype(ComparisonScope.Any);
-        filter.setMessage("Swamp or a Forest");
+        filter.add(Predicates.or(new SubtypePredicate("Forest"), new SubtypePredicate("Swamp")));
     }
 
     public WoodlandCemetery(UUID ownerId) {
@@ -63,7 +61,7 @@ public class WoodlandCemetery extends CardImpl<WoodlandCemetery> {
         this.expansionSetCode = "ISD";
 
         Condition controls = new UnlessCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0));
-        String abilityText = "tap it unless you control a " + filter.getMessage();
+        String abilityText = "tap it unless you control a Swamp or a Forest";
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
         this.addAbility(new BlackManaAbility());
         this.addAbility(new GreenManaAbility());

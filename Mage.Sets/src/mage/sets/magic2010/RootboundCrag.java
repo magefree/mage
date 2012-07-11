@@ -40,8 +40,9 @@ import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -52,10 +53,7 @@ public class RootboundCrag extends CardImpl<RootboundCrag> {
     private static final FilterLandPermanent filter = new FilterLandPermanent();
 
     static {
-        filter.getSubtype().add("Mountain");
-        filter.getSubtype().add("Forest");
-        filter.setScopeSubtype(ComparisonScope.Any);
-        filter.setMessage("Mountain or a Forest");
+        filter.add(Predicates.or(new SubtypePredicate("Mountain"), new SubtypePredicate("Forest")));
     }
 
     public RootboundCrag(UUID ownerId) {
@@ -63,7 +61,7 @@ public class RootboundCrag extends CardImpl<RootboundCrag> {
         this.expansionSetCode = "M10";
 
         Condition controls = new UnlessCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0));
-        String abilityText = "tap it unless you control a " + filter.getMessage();
+        String abilityText = "tap it unless you control a Mountain or a Forest";
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
         this.addAbility(new RedManaAbility());
         this.addAbility(new GreenManaAbility());

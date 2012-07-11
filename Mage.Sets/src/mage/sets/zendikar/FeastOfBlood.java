@@ -35,8 +35,8 @@ import mage.abilities.costs.CostImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -75,8 +75,7 @@ class FeastOfBloodCost extends CostImpl<FeastOfBloodCost> {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
     static {
-        filter.getSubtype().add("Vampire");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Vampire"));
     }
 
     public FeastOfBloodCost() {

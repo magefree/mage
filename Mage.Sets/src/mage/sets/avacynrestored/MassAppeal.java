@@ -33,6 +33,7 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
@@ -45,7 +46,7 @@ public class MassAppeal extends CardImpl<MassAppeal> {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Human you control");
 
     static {
-        filter.getSubtype().add("Human");
+        filter.add(new SubtypePredicate("Human"));
     }
 
     public MassAppeal(UUID ownerId) {

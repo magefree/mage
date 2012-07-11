@@ -33,8 +33,9 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -45,9 +46,7 @@ public class KitsuneRiftwalker extends CardImpl<KitsuneRiftwalker> {
     private final static FilterCard filter = new FilterCard("Spirits and from Arcane");
 
     static {
-        filter.getSubtype().add("Arcane");
-        filter.getSubtype().add("Spirit");
-        filter.setScopeSubtype(ComparisonScope.Any);
+        filter.add(Predicates.or(new SubtypePredicate("Arcane"), new SubtypePredicate("Spirit")));
     }
 
     public KitsuneRiftwalker(UUID ownerId) {

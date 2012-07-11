@@ -37,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.Filter;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -47,8 +48,7 @@ public class ElvishHandservant extends CardImpl<ElvishHandservant> {
     private final static FilterSpell filter = new FilterSpell("Giant");
 
     static {
-        filter.getSubtype().add("Giant");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Giant"));
     }
 
     public ElvishHandservant(UUID ownerId) {

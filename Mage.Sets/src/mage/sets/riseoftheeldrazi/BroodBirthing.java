@@ -34,8 +34,8 @@ import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.token.EldraziSpawnToken;
 
@@ -83,9 +83,8 @@ class BroodBirthingEffect extends OneShotEffect<BroodBirthingEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Eldrazi Spawn");
-        filter.getSubtype().add("Eldrazi");
-        filter.getSubtype().add("Spawn");
-        filter.setScopeSubtype(ComparisonScope.All);
+        filter.add(new SubtypePredicate("Eldrazi"));
+        filter.add(new SubtypePredicate("Spawn"));
 
         EldraziSpawnToken token = new EldraziSpawnToken();
         int count = game.getBattlefield().countAll(filter, source.getControllerId(), game) > 0 ? 3 : 1;

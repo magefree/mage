@@ -58,9 +58,6 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
     protected ObjectColor color;
     protected ComparisonScope scopeColor = ComparisonScope.Any;
     protected boolean notColor;
-    protected List<String> subtype = new ArrayList<String>();
-    protected ComparisonScope scopeSubtype = ComparisonScope.All;
-    protected boolean notSubtype;
 
     /**
      * Indicates that filter shouldn't match the source.
@@ -92,9 +89,6 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
         this.color = filter.color.copy();
         this.scopeColor = filter.scopeColor;
         this.notColor = filter.notColor;
-        this.subtype.addAll(filter.subtype);
-        this.scopeSubtype = filter.scopeSubtype;
-        this.notSubtype = filter.notSubtype;
         this.another = filter.another;
     }
 
@@ -133,13 +127,6 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
         if (notCardType.size() > 0) {
             if (compCardType.compare(notCardType, object.getCardType(), scopeNotCardType, false))
                 return notFilter;
-        }
-
-        if (subtype.size() > 0) {
-            if (!object.getAbilities().contains(ChangelingAbility.getInstance())) {
-                if (!compString.compare(subtype, object.getSubtype(), scopeSubtype, notSubtype))
-                    return notFilter;
-            }
         }
 
         if (abilities.size() > 0) {
@@ -197,18 +184,6 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
 
     public void setNotColor(boolean notColor) {
         this.notColor = notColor;
-    }
-
-    public List<String> getSubtype() {
-        return this.subtype;
-    }
-
-    public void setScopeSubtype(ComparisonScope scopeSubtype) {
-        this.scopeSubtype = scopeSubtype;
-    }
-
-    public void setNotSubtype(boolean notSubtype) {
-        this.notSubtype = notSubtype;
     }
 
     public void setUseColor(boolean useColor) {

@@ -38,8 +38,8 @@ import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continious.GainControlTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -53,8 +53,7 @@ public class Goatnapper extends CardImpl<Goatnapper> {
     private final static FilterPermanent filter = new FilterPermanent("Goat");
 
     static {
-        filter.getSubtype().add("Goat");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Goat"));
     }
 
     public Goatnapper(UUID ownerId) {

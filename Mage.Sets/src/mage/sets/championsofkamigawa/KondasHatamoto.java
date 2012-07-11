@@ -41,8 +41,8 @@ import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.BushidoAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 
 /**
@@ -57,8 +57,7 @@ public class KondasHatamoto extends CardImpl<KondasHatamoto>{
 
     static {
         filter.add(new SupertypePredicate("Legendary"));
-        filter.getSubtype().add("Samurai");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Samurai"));
     }
 
     public KondasHatamoto (UUID ownerId) {

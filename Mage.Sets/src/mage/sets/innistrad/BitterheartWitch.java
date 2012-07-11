@@ -41,6 +41,7 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -86,7 +87,7 @@ class BitterheartWitchEffect extends OneShotEffect<BitterheartWitchEffect> {
     private final static FilterCard filter = new FilterCard("Curse card in your library");
 
     static {
-        filter.getSubtype().add("Curse");
+        filter.add(new SubtypePredicate("Curse"));
     }
 
     public BitterheartWitchEffect() {

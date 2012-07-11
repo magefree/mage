@@ -34,8 +34,9 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -47,9 +48,7 @@ public class RendFlesh extends CardImpl<RendFlesh> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Non-Spirit");
 
     static {
-        filter.getSubtype().add("Spirit");
-        filter.setNotSubtype(true);
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(Predicates.not(new SubtypePredicate("Spirit")));
     }
 
     public RendFlesh(UUID ownerId) {

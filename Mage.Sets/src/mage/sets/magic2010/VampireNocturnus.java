@@ -42,6 +42,7 @@ import mage.abilities.effects.common.continious.*;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 
 /**
@@ -80,7 +81,7 @@ class VampireNocturnusAbility extends StaticAbility<VampireNocturnusAbility> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.getSubtype().add("Vampire");
+        filter.add(new SubtypePredicate("Vampire"));
     }
 
     public VampireNocturnusAbility() {

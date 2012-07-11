@@ -34,8 +34,8 @@ import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
@@ -48,8 +48,7 @@ public class WizenedCenn extends CardImpl<WizenedCenn> {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Kithkin creatures");
 
     static {
-        filter.getSubtype().add("Kithkin");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Kithkin"));
     }
 
     public WizenedCenn(UUID ownerId) {

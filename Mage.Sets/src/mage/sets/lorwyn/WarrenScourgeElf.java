@@ -33,6 +33,7 @@ import mage.MageInt;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
@@ -45,7 +46,7 @@ public class WarrenScourgeElf extends CardImpl<WarrenScourgeElf> {
     private static final FilterCard filter = new FilterCard("Goblin");
 
     static {
-        filter.getSubtype().add("Goblin");
+        filter.add(new SubtypePredicate("Goblin"));
     }
 
     public WarrenScourgeElf(UUID ownerId) {

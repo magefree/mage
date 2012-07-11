@@ -40,8 +40,8 @@ import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -52,8 +52,7 @@ public class InspiredSprite extends CardImpl<InspiredSprite> {
     private final static FilterSpell filter = new FilterSpell("Wizard");
 
     static {
-        filter.getSubtype().add("Wizard");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Wizard"));
     }
 
     public InspiredSprite(UUID ownerId) {

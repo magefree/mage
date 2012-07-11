@@ -38,8 +38,8 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -69,11 +69,10 @@ public class Glimmerpost extends CardImpl<Glimmerpost> {
 }
 
 class GlimmerpostEffect extends OneShotEffect<GlimmerpostEffect> {
-    private static FilterPermanent filter = new FilterPermanent();
+    private static final FilterPermanent filter = new FilterPermanent();
 
     static {
-        filter.getSubtype().add("Locus");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Locus"));
     }
 
     public GlimmerpostEffect() {

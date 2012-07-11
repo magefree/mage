@@ -28,8 +28,8 @@
 
 package mage.abilities.keyword;
 
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -40,8 +40,7 @@ public class ForestwalkAbility extends LandwalkAbility {
     private static final FilterLandPermanent filter = new FilterLandPermanent("Forest");
 
     static {
-        filter.getSubtype().add("Forest");
-        filter.setScopeSubtype(ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Forest"));
     }
 
     public ForestwalkAbility() {

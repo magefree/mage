@@ -32,9 +32,9 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
@@ -48,8 +48,7 @@ public class MidnightDuelist extends CardImpl<MidnightDuelist> {
     private static final FilterPermanent filter = new FilterCreaturePermanent("Vampires");
 
     static {
-        filter.getSubtype().add("Vampire");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Vampire"));
     }
 
     public MidnightDuelist(UUID ownerId) {

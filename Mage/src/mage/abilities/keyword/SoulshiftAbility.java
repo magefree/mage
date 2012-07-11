@@ -5,6 +5,7 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 public class SoulshiftAbility extends DiesTriggeredAbility {
@@ -14,8 +15,7 @@ public class SoulshiftAbility extends DiesTriggeredAbility {
         super(new ReturnToHandTargetEffect());
         FilterCard filter = new FilterCard("Spirit card with converted mana cost " + amount + " or less from your graveyard");
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, amount + 1));
-        filter.getSubtype().add("Spirit");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Spirit"));
         this.addTarget(new TargetCardInYourGraveyard(filter));
         this.amount = amount;
     }

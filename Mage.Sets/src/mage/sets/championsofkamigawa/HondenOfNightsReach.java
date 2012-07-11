@@ -37,8 +37,8 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DiscardTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -49,8 +49,7 @@ public class HondenOfNightsReach extends CardImpl<HondenOfNightsReach> {
     final static FilterControlledPermanent filter = new FilterControlledPermanent("Shrine");
 
     static {
-        filter.getSubtype().add("Shrine");
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Shrine"));
     }
 
     public HondenOfNightsReach(UUID ownerId) {

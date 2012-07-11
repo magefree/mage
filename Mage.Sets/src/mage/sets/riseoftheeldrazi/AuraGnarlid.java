@@ -39,6 +39,7 @@ import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.CantBeBlockedByCreaturesWithLessPowerEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -49,7 +50,7 @@ public class AuraGnarlid extends CardImpl<AuraGnarlid> {
     private static final FilterPermanent filter = new FilterPermanent("Aura on the battlefield");
 
     static {
-        filter.getSubtype().add("Aura");
+        filter.add(new SubtypePredicate("Aura"));
     }
 
     public AuraGnarlid(UUID ownerId) {

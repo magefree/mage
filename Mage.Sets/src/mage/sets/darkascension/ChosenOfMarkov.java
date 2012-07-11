@@ -40,8 +40,8 @@ import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -54,8 +54,7 @@ public class ChosenOfMarkov extends CardImpl<ChosenOfMarkov> {
     static {
         filter.setUseTapped(true);
         filter.setTapped(false);
-        filter.getSubtype().add("Vampire");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Vampire"));
     }
 
     public ChosenOfMarkov(UUID ownerId) {

@@ -40,10 +40,10 @@ import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.MerfolkToken;
 import mage.target.common.TargetControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
@@ -58,8 +58,7 @@ public class Benthicore extends CardImpl<Benthicore> {
     static {
         filter.setTapped(false);
         filter.setUseTapped(true);
-        filter.getSubtype().add("Merfolk");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Merfolk"));
     }
 
     public Benthicore(UUID ownerId) {

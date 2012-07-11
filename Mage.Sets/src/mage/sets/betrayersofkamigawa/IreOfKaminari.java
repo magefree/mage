@@ -33,8 +33,8 @@ import mage.Constants.Rarity;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -46,8 +46,7 @@ public class IreOfKaminari extends CardImpl<IreOfKaminari> {
     private final static FilterCard filter = new FilterCard("Arcane");
 
     static {
-        filter.getSubtype().add("Arcane");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Arcane"));
     }
 
     public IreOfKaminari(UUID ownerId) {

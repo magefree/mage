@@ -39,6 +39,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -55,7 +56,7 @@ public class ReaperKing extends CardImpl<ReaperKing> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Scarecrow creatures");
 
     static {
-        filter.getSubtype().add("Scarecrow");
+        filter.add(new SubtypePredicate("Scarecrow"));
     }
 
     public ReaperKing(UUID ownerId) {

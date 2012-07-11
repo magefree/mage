@@ -41,6 +41,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -51,7 +52,7 @@ public class KnightExemplar extends CardImpl<KnightExemplar> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Knight creatures");
 
     static {
-        filter.getSubtype().add("Knight");
+        filter.add(new SubtypePredicate("Knight"));
     }
 
     public KnightExemplar(UUID ownerId) {

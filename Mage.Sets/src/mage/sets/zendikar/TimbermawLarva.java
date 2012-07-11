@@ -38,6 +38,7 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -48,7 +49,7 @@ public class TimbermawLarva extends CardImpl<TimbermawLarva> {
     private static final FilterLandPermanent filter = new FilterLandPermanent("Forest you control");
 
     static {
-        filter.getSubtype().add("Forest");
+        filter.add(new SubtypePredicate("Forest"));
         filter.setTargetController(TargetController.YOU);
 
     }

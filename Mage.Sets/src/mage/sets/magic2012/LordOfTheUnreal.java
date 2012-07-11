@@ -40,8 +40,8 @@ import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  * @author Loki
@@ -51,8 +51,7 @@ public class LordOfTheUnreal extends CardImpl<LordOfTheUnreal> {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Illusion creatures");
 
     static {
-        filter.getSubtype().add("Illusion");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Illusion"));
     }
 
     public LordOfTheUnreal(UUID ownerId) {

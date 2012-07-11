@@ -34,9 +34,9 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
@@ -50,12 +50,9 @@ public class EliteInquisitor extends CardImpl<EliteInquisitor> {
     private static final FilterPermanent filter3 = new FilterCreaturePermanent("Zombies");
 
     static {
-        filter1.getSubtype().add("Vampire");
-        filter2.getSubtype().add("Werewolf");
-        filter3.getSubtype().add("Zombie");
-        filter1.setScopeSubtype(Filter.ComparisonScope.Any);
-        filter2.setScopeSubtype(Filter.ComparisonScope.Any);
-        filter3.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter1.add(new SubtypePredicate("Vampire"));
+        filter2.add(new SubtypePredicate("Werewolf"));
+        filter3.add(new SubtypePredicate("Zombie"));
     }
 
     public EliteInquisitor(UUID ownerId) {

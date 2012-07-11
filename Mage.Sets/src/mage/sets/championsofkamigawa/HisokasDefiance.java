@@ -34,8 +34,9 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetSpell;
 
 /**
@@ -46,9 +47,7 @@ public class HisokasDefiance extends CardImpl<HisokasDefiance> {
     private final static FilterSpell filter = new FilterSpell("Spirit or Arcane spell");
 
     static {
-        filter.getSubtype().add("Spirit");
-        filter.getSubtype().add("Arcane");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(Predicates.or(new SubtypePredicate("Spirit"), new SubtypePredicate("Arcane")));
     }
 
     public HisokasDefiance(UUID ownerId) {

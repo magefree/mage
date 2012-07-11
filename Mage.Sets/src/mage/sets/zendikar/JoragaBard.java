@@ -38,8 +38,8 @@ import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -50,8 +50,7 @@ public class JoragaBard extends CardImpl<JoragaBard> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Ally creatures you control");
 
     static {
-        filter.getSubtype().add("Ally");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Ally"));
         filter.setTargetController(Constants.TargetController.YOU);
     }
 

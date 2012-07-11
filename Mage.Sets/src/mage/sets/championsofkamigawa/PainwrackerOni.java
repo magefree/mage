@@ -40,6 +40,7 @@ import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -56,7 +57,7 @@ public class PainwrackerOni extends CardImpl<PainwrackerOni> {
         this.expansionSetCode = "CHK";
         this.subtype.add("Demon");
         this.subtype.add("Spirit");
-    this.color.setBlack(true);
+        this.color.setBlack(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 
@@ -84,7 +85,7 @@ class PainwrackerOniTriggeredAbility1 extends TriggeredAbilityImpl<PainwrackerOn
     private final static FilterPermanent filter = new FilterPermanent();
 
     static {
-        filter.getSubtype().add("Ogre");
+        filter.add(new SubtypePredicate("Ogre"));
     }
 
     public PainwrackerOniTriggeredAbility1(Effect effect) {

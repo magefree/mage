@@ -37,8 +37,8 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  * @author Loki
@@ -48,8 +48,7 @@ public class HondenOfSeeingWinds extends CardImpl<HondenOfSeeingWinds> {
     final static FilterControlledPermanent filter = new FilterControlledPermanent("Shrine");
 
     static {
-        filter.getSubtype().add("Shrine");
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Shrine"));
     }
 
     public HondenOfSeeingWinds(UUID ownerId) {

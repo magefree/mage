@@ -40,8 +40,9 @@ import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -52,10 +53,7 @@ public class SunpetalGrove extends CardImpl<SunpetalGrove> {
     private static final FilterLandPermanent filter = new FilterLandPermanent();
 
     static {
-        filter.getSubtype().add("Forest");
-        filter.getSubtype().add("Plains");
-        filter.setScopeSubtype(ComparisonScope.Any);
-        filter.setMessage("Forest or a Plains");
+        filter.add(Predicates.or(new SubtypePredicate("Forest"), new SubtypePredicate("Plains")));
     }
 
     public SunpetalGrove(UUID ownerId) {
@@ -63,7 +61,7 @@ public class SunpetalGrove extends CardImpl<SunpetalGrove> {
         this.expansionSetCode = "M10";
 
         Condition controls = new UnlessCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0));
-        String abilityText = "tap it unless you control a " + filter.getMessage();
+        String abilityText = "tap it unless you control a Forest or a Plains";
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
         this.addAbility(new GreenManaAbility());
         this.addAbility(new WhiteManaAbility());

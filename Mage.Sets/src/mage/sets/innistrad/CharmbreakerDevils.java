@@ -60,7 +60,6 @@ public class CharmbreakerDevils extends CardImpl<CharmbreakerDevils> {
     static {
         filter.getCardType().add(CardType.INSTANT);
         filter.getCardType().add(CardType.SORCERY);
-        filter.setScopeSubtype(ComparisonScope.Any);
     }
 
     public CharmbreakerDevils(UUID ownerId) {
@@ -111,7 +110,6 @@ class CharmbreakerDevilsEffect extends OneShotEffect<CharmbreakerDevilsEffect> {
             FilterCard filter = new FilterCard("instant or sorcery card");
             filter.getCardType().add(CardType.INSTANT);
             filter.getCardType().add(CardType.SORCERY);
-            filter.setScopeSubtype(ComparisonScope.Any);
             Card[] cards = player.getGraveyard().getCards(filter, game).toArray(new Card[0]);
             if (cards.length > 0) {
                 Random rnd = new Random();

@@ -36,6 +36,7 @@ import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
@@ -47,7 +48,7 @@ public class GallowsWarden extends CardImpl<GallowsWarden> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Spirit creatures");
 
     static {
-        filter.getSubtype().add("Spirit");
+        filter.add(new SubtypePredicate("Spirit"));
     }
 
     public GallowsWarden(UUID ownerId) {

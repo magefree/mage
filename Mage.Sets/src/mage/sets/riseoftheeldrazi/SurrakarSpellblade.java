@@ -31,15 +31,14 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.filter.Filter;
 import mage.filter.FilterSpell;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.common.DrawCardControllerEffect;
-import mage.abilities.dynamicvalue.common.CountersCount;
 
 /**
  *
@@ -52,7 +51,6 @@ public class SurrakarSpellblade extends CardImpl<SurrakarSpellblade> {
     static {
         filter.getCardType().add(CardType.INSTANT);
         filter.getCardType().add(CardType.SORCERY);
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
     }
 
     public SurrakarSpellblade(UUID ownerId) {

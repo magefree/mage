@@ -36,9 +36,10 @@ import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
@@ -52,11 +53,8 @@ public class TimberProtector extends CardImpl<TimberProtector> {
     private final static FilterControlledPermanent filterBoth = new FilterControlledPermanent("Treefolk and Forests");
 
     static {
-        filterTreefolk.getSubtype().add("Treefolk");
-        filterTreefolk.setScopeSubtype(Filter.ComparisonScope.Any);
-        filterBoth.getSubtype().add("Treefolk");
-        filterBoth.getSubtype().add("Forest");
-        filterBoth.setScopeSubtype(Filter.ComparisonScope.Any);
+        filterTreefolk.add(new SubtypePredicate("Treefolk"));
+        filterBoth.add(Predicates.or(new SubtypePredicate("Treefolk"),new SubtypePredicate("Forest")));
 
     }
 

@@ -44,6 +44,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -55,8 +56,7 @@ public class PrizedElephant extends CardImpl<PrizedElephant> {
     private static final FilterLandPermanent filter = new FilterLandPermanent("a Forest");
     
     static {
-        filter.getSubtype().add("Forest");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Forest"));
     }
 
     public PrizedElephant(UUID ownerId) {

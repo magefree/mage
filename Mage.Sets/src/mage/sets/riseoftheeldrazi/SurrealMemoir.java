@@ -38,7 +38,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.ReboundAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -92,7 +91,6 @@ class SurrealMemoirEffect extends OneShotEffect<SurrealMemoirEffect> {
         if (player != null) {
             FilterCard filter = new FilterCard("instant card");
             filter.getCardType().add(CardType.INSTANT);
-            filter.setScopeSubtype(ComparisonScope.Any);
             Card[] cards = player.getGraveyard().getCards(filter, game).toArray(new Card[0]);
             if (cards.length > 0) {
                 Random rnd = new Random();

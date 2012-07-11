@@ -35,19 +35,20 @@ import mage.abilities.common.DiesAnotherCreatureYouControlTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.game.permanent.token.SpiritWhiteToken;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.game.permanent.token.SpiritWhiteToken;
 
 /**
  *
  * @author intimidatingant
  */
 public class RequiemAngel extends CardImpl<RequiemAngel> {
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Human creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Spirit creature");
 
     static {
-        filter.getSubtype().add("Spirit");
-        filter.setNotSubtype(true);
+        filter.add(Predicates.not(new SubtypePredicate("Spirit")));
     }
 
     public RequiemAngel(UUID ownerId) {

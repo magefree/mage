@@ -27,21 +27,25 @@
  */
 package mage.sets.avacynrestored;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardsImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.Predicate;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  *
@@ -96,8 +100,13 @@ class DescendantsPathEffect extends OneShotEffect<DescendantsPathEffect> {
                 player.revealCards("DescendantsPath", new CardsImpl(card), game);
                 if (card.getCardType().contains(CardType.CREATURE)) {
                     FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-                    filter.getSubtype().addAll(card.getSubtype());
-                    filter.setScopeSubtype(Filter.ComparisonScope.Any);
+
+                    ArrayList<Predicate<MageObject>> subtypes = new ArrayList<Predicate<MageObject>>();
+                    for (String subtype: card.getSubtype()) {
+                        subtypes.add(new SubtypePredicate(subtype));
+                    }
+                    filter.add(Predicates.or(subtypes));
+
                     int count = game.getBattlefield().getAllActivePermanents(filter, player.getId(), game).size();
                     if (count > 0) {
                         game.informPlayers("DescendantsPath: Found a creature that shares a creature type with the revealed card.");

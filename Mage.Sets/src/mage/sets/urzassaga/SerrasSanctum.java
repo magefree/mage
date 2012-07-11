@@ -35,7 +35,6 @@ import mage.Mana;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
 
 /**
@@ -49,7 +48,6 @@ public class SerrasSanctum extends CardImpl<SerrasSanctum> {
 
     static {
         filter.getCardType().add(CardType.ENCHANTMENT);
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
     }
 
     public SerrasSanctum(UUID ownerId) {

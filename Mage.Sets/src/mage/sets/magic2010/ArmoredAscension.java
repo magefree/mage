@@ -44,6 +44,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -56,7 +57,7 @@ public class ArmoredAscension extends CardImpl<ArmoredAscension> {
     private static final FilterLandPermanent filter = new FilterLandPermanent("Plains you control");
 
     static {
-        filter.getSubtype().add("Plains");
+        filter.add(new SubtypePredicate("Plains"));
         filter.setTargetController(TargetController.YOU);
     }
 
