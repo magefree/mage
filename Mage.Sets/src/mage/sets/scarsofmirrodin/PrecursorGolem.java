@@ -51,6 +51,8 @@ import mage.target.Target;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  * @author nantuko
@@ -87,9 +89,9 @@ class PrecursorGolemCopyTriggeredAbility extends TriggeredAbilityImpl<PrecursorG
     private static final FilterSpell filter = new FilterSpell();
 
     static {
-        filter.getCardType().add(CardType.INSTANT);
-        filter.getCardType().add(CardType.SORCERY);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.INSTANT),
+                new CardTypePredicate(CardType.SORCERY)));
     }
 
     PrecursorGolemCopyTriggeredAbility() {

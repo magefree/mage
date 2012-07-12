@@ -40,17 +40,16 @@ import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
+import mage.filter.common.FilterArtifactPermanent;
 
 /**
  *
  * @author Loki
  */
 public class DarksteelJuggernaut extends CardImpl<DarksteelJuggernaut> {
-    private static final FilterPermanent filter = new FilterPermanent("artifacts you control");
+    private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifacts you control");
 
     static {
-        filter.getCardType().add(Constants.CardType.ARTIFACT);
         filter.setTargetController(Constants.TargetController.YOU);
     }
 

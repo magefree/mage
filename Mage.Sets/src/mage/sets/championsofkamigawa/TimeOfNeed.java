@@ -35,6 +35,7 @@ import mage.Constants.Rarity;
 import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
@@ -46,7 +47,7 @@ public class TimeOfNeed extends CardImpl<TimeOfNeed> {
     private final static FilterCard filter = new FilterCard("legendary creature card");
 
     static {
-        filter.getCardType().add(CardType.CREATURE);
+        filter.add(new CardTypePredicate(CardType.CREATURE));
         filter.add(new SupertypePredicate("Legendary"));
     }
 

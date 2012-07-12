@@ -52,9 +52,9 @@ import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.mana.ManaAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -72,8 +72,7 @@ public class GrandArchitect extends CardImpl<GrandArchitect> {
     static {
         boostFilter.getColor().setBlue(true);
         boostFilter.setUseColor(true);
-        targetFilter.getCardType().add(CardType.ARTIFACT);
-        targetFilter.setScopeCardType(ComparisonScope.All);
+        targetFilter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public GrandArchitect(UUID ownerId) {

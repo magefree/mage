@@ -40,9 +40,10 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetSpell;
 import mage.target.common.TargetControlledPermanent;
 
@@ -55,9 +56,9 @@ public class UyoSilentProphet extends CardImpl<UyoSilentProphet> {
     private final static FilterSpell filter = new FilterSpell("instant or sorcery spell");
 
     static {
-        filter.getCardType().add(CardType.INSTANT);
-        filter.getCardType().add(CardType.SORCERY);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.INSTANT),
+                new CardTypePredicate(CardType.SORCERY)));
     }
 
     public UyoSilentProphet(UUID ownerId) {

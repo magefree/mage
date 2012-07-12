@@ -47,10 +47,10 @@ import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.counters.CounterType;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
@@ -184,8 +184,7 @@ class TezzeretAgentOfBolasEffect2 extends OneShotEffect<TezzeretAgentOfBolasEffe
     final static FilterControlledPermanent filter = new FilterControlledPermanent("artifacts");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public TezzeretAgentOfBolasEffect2() {

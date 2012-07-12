@@ -40,8 +40,8 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
@@ -57,8 +57,7 @@ public class VeinfireBorderpost extends CardImpl<VeinfireBorderpost> {
 
     static {
         filter.add(new SupertypePredicate("Basic"));
-        filter.getCardType().add(CardType.LAND);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new CardTypePredicate(CardType.LAND));
     }
 
     public VeinfireBorderpost (UUID ownerId) {

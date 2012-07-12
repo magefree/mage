@@ -42,6 +42,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -54,7 +55,7 @@ public class AjaniVengeant extends CardImpl<AjaniVengeant> {
     private static final FilterPermanent filter = new FilterPermanent("lands");
 
     static {
-        filter.getCardType().add(CardType.LAND);
+        filter.add(new CardTypePredicate(CardType.LAND));
     }
 
     public AjaniVengeant(UUID ownerId) {

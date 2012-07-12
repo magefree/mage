@@ -38,6 +38,7 @@ import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -70,8 +71,7 @@ class TranquilPathEffect extends OneShotEffect<TranquilPathEffect> {
     private final static FilterPermanent filter = new FilterPermanent("");
 
     static {
-        filter.getCardType().add(CardType.ENCHANTMENT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
 
     public TranquilPathEffect() {

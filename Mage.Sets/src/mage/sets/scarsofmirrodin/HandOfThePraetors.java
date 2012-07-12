@@ -43,9 +43,9 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.common.SpellCastTriggeredAbility;
-import mage.filter.Filter;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -59,8 +59,7 @@ public class HandOfThePraetors extends CardImpl<HandOfThePraetors> {
     static {
         filter.add(new AbilityPredicate(InfectAbility.class));
         filterSpell.add(new AbilityPredicate(InfectAbility.class));
-        filterSpell.getCardType().add(CardType.CREATURE);
-        filterSpell.setScopeCardType(Filter.ComparisonScope.Any);
+        filterSpell.add(new CardTypePredicate(CardType.CREATURE));
     }
 
     public HandOfThePraetors (UUID ownerId) {

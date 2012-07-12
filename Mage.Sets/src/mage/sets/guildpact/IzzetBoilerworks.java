@@ -41,6 +41,7 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
 
@@ -52,7 +53,7 @@ public class IzzetBoilerworks extends CardImpl<IzzetBoilerworks> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("land");
 
     static {
-        filter.getCardType().add(Constants.CardType.LAND);
+        filter.add(new CardTypePredicate(Constants.CardType.LAND));
     }
 
     public IzzetBoilerworks(UUID ownerId) {

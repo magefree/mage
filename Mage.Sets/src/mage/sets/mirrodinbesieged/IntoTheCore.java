@@ -33,6 +33,7 @@ import mage.Constants.Rarity;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -44,7 +45,7 @@ public class IntoTheCore extends CardImpl<IntoTheCore> {
     private static final FilterPermanent filter = new FilterPermanent("artifact");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public IntoTheCore(UUID ownerId) {

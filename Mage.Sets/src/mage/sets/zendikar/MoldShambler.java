@@ -36,6 +36,8 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -47,7 +49,7 @@ public class MoldShambler extends CardImpl<MoldShambler> {
     private static final FilterPermanent filter = new FilterPermanent("noncreature permanent");
 
     static {
-        filter.getNotCardType().add(CardType.CREATURE);
+        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
     }
 
     public MoldShambler(UUID ownerId) {

@@ -42,8 +42,9 @@ import mage.abilities.effects.common.PlayTargetWithoutPayingManaEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -60,9 +61,9 @@ public class ChancellorOfTheSpires extends CardImpl<ChancellorOfTheSpires> {
     private static final FilterCard filter = new FilterCard("instant or sorcery card from an opponent's graveyard");
 
     static {
-        filter.getCardType().add(CardType.INSTANT);
-        filter.getCardType().add(CardType.SORCERY);
-        filter.setScopeCardType(ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.INSTANT),
+                new CardTypePredicate(CardType.SORCERY)));
     }
 
     public ChancellorOfTheSpires(UUID ownerId) {

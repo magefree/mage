@@ -31,18 +31,17 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
+import mage.abilities.Ability;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.target.TargetPermanent;
-import mage.Constants.Zone;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.game.permanent.Permanent;
-import mage.abilities.Ability;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 
 /**
  *
@@ -51,10 +50,6 @@ import mage.game.Game;
 public class Narcolepsy extends CardImpl<Narcolepsy> {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature");
-
-    static {
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
-    }
 
     public Narcolepsy(UUID ownerId) {
         super(ownerId, 79, "Narcolepsy", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

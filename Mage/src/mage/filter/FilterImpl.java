@@ -30,7 +30,6 @@ package mage.filter;
 
 import java.util.ArrayList;
 import java.util.List;
-import mage.Constants.CardType;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 
@@ -40,9 +39,6 @@ import mage.game.Game;
  * @author North
  */
 public abstract class FilterImpl<E, T extends FilterImpl<E, T>> implements Filter<E> {
-
-    protected static ListComparer<CardType> compCardType = new ListComparer<CardType>();
-    protected static ListComparer<String> compString = new ListComparer<String>();
 
     protected List<Predicate> predicates = new ArrayList<Predicate>();
     protected String message;

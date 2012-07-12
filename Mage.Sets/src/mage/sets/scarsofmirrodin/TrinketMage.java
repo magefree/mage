@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
@@ -50,7 +51,7 @@ public class TrinketMage extends CardImpl<TrinketMage> {
     private static final FilterCard filter = new FilterCard("an artifact card with converted mana cost 1 or less");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 2));
     }
 

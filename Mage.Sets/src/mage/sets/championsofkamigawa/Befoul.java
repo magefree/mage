@@ -37,6 +37,9 @@ import mage.ObjectColor;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -48,10 +51,11 @@ public class Befoul extends CardImpl<Befoul> {
     public static final FilterPermanent filter = new FilterPermanent("land or nonblack creature");
 
     static {
-        filter.getCardType().add(CardType.LAND);
-        filter.getCardType().add(CardType.CREATURE);
-        filter.setNotColor(true);
-        filter.setColor(ObjectColor.BLACK);
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.LAND),
+                Predicates.and(
+                    Predicates.not(new ColorPredicate(ObjectColor.BLACK)),
+                    new CardTypePredicate(CardType.CREATURE))));
     }
     public Befoul (UUID ownerId) {
         super(ownerId, 102, "Befoul", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");

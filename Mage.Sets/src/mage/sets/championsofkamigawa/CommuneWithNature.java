@@ -35,6 +35,7 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -44,14 +45,14 @@ public class CommuneWithNature extends CardImpl<CommuneWithNature> {
 
     private final static FilterCard filter = new FilterCard("creature card");
     static {
-            filter.getCardType().add(CardType.CREATURE);
-        }
+        filter.add(new CardTypePredicate(CardType.CREATURE));
+    }
 
 
     public CommuneWithNature (UUID ownerId) {
         super(ownerId, 204, "Commune with Nature", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{G}");
         this.expansionSetCode = "CHK";
-    this.color.setGreen(true);
+        this.color.setGreen(true);
 
         // Look at the top five cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(new StaticValue(5), false, new StaticValue(1), filter, false));
@@ -67,4 +68,3 @@ public class CommuneWithNature extends CardImpl<CommuneWithNature> {
     }
 
 }
-

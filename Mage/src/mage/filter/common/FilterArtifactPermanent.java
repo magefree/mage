@@ -30,6 +30,7 @@ package mage.filter.common;
 
 import mage.Constants.CardType;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -50,7 +51,7 @@ public class FilterArtifactPermanent<T extends FilterArtifactPermanent<T>> exten
 
     public FilterArtifactPermanent(String name) {
         super(name);
-        cardType.add(CardType.ARTIFACT);
+        this.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public FilterArtifactPermanent(final FilterArtifactPermanent<T> filter) {

@@ -36,6 +36,7 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -47,7 +48,7 @@ public class SerrasSanctum extends CardImpl<SerrasSanctum> {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("enchantment you control");;
 
     static {
-        filter.getCardType().add(CardType.ENCHANTMENT);
+        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
 
     public SerrasSanctum(UUID ownerId) {

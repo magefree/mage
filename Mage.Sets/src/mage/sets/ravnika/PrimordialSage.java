@@ -34,8 +34,8 @@ import mage.MageInt;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -46,8 +46,7 @@ public class PrimordialSage extends CardImpl<PrimordialSage> {
     private static final FilterSpell filter = new FilterSpell("a creature spell");
 
     static {
-        filter.getCardType().add(CardType.CREATURE);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
     public PrimordialSage(UUID ownerId) {

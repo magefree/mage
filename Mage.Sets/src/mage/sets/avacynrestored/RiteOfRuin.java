@@ -38,6 +38,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceImpl;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -111,7 +112,7 @@ class RiteOfRuinEffect extends OneShotEffect<RiteOfRuinEffect> {
         int count = 1;
         for (CardType cardType : order) {
             FilterControlledPermanent filter = new FilterControlledPermanent(cardType + " permanent you control");
-            filter.getCardType().add(cardType);
+            filter.add(new CardTypePredicate(cardType));
 
             for (UUID playerId : controller.getInRange()) {
                 int amount = Math.min(count, game.getBattlefield().countAll(filter, playerId, game));

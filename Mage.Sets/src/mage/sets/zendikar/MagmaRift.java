@@ -34,6 +34,7 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -46,7 +47,7 @@ public class MagmaRift extends CardImpl<MagmaRift> {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("land");
 
     static {
-        filter.getCardType().add(CardType.LAND);
+        filter.add(new CardTypePredicate(CardType.LAND));
     }
 
     public MagmaRift(UUID ownerId) {

@@ -40,8 +40,8 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.filter.Filter;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.permanent.token.Token;
 
 /**
@@ -52,8 +52,7 @@ public class GolemFoundry extends CardImpl<GolemFoundry> {
 
     private static final FilterSpell filter = new FilterSpell("an artifact spell");
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public GolemFoundry (UUID ownerId) {

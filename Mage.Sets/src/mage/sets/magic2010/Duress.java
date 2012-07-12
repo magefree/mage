@@ -38,6 +38,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -72,8 +74,8 @@ class DuressEffect extends OneShotEffect<DuressEffect> {
     private static final FilterCard filter = new FilterCard("noncreature, nonland card");
 
     static {
-        filter.getNotCardType().add(CardType.CREATURE);
-        filter.getNotCardType().add(CardType.LAND);
+        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
     }
 
     public DuressEffect() {

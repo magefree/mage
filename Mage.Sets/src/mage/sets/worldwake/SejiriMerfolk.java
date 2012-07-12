@@ -40,6 +40,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
@@ -53,7 +54,7 @@ public class SejiriMerfolk extends CardImpl<SejiriMerfolk> {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Plains");
 
     static {
-        filter.getCardType().add(CardType.LAND);
+        filter.add(new CardTypePredicate(CardType.LAND));
         filter.add(new SubtypePredicate("Plains"));
     }
 

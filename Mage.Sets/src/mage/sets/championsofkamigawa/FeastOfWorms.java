@@ -38,6 +38,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -52,15 +53,15 @@ public class FeastOfWorms extends CardImpl<FeastOfWorms> {
 
     private final static FilterControlledPermanent filter = new FilterControlledPermanent();
     static {
-            filter.getCardType().add(CardType.LAND);
-        }
+        filter.add(new CardTypePredicate(CardType.LAND));
+    }
 
 
     public FeastOfWorms (UUID ownerId) {
         super(ownerId, 216, "Feast of Worms", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
-    this.color.setGreen(true);
+        this.color.setGreen(true);
 
         // Destroy target land. If that land was legendary, its controller sacrifices another land.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
@@ -103,7 +104,7 @@ class FeastOfWormsEffect extends OneShotEffect<FeastOfWormsEffect> {
         if (targetPlayer != null && permanent != null
                 && (permanent.getSupertype().get(0).toString().equals("Legendary"))) {
                 FilterControlledPermanent filter = new FilterControlledPermanent("land to sacrifice");
-                filter.getCardType().add(CardType.LAND);
+                filter.add(new CardTypePredicate(CardType.LAND));
                 filter.getControllerId().add(targetPlayer.getId());
                 filter.setNotController(false);
                 TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, false);

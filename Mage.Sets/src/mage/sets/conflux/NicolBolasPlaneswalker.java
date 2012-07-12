@@ -42,6 +42,8 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
@@ -55,7 +57,7 @@ public class NicolBolasPlaneswalker extends CardImpl<NicolBolasPlaneswalker> {
     private static final FilterPermanent filter = new FilterPermanent("noncreature permanent");
 
     static {
-        filter.getNotCardType().add(CardType.CREATURE);
+        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
     }
 
     public NicolBolasPlaneswalker(UUID ownerId) {

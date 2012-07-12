@@ -42,6 +42,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -229,8 +231,9 @@ class ChandraAblazeEffect5 extends OneShotEffect<ChandraAblazeEffect5> {
         if (player != null) {
             FilterCard filter = new FilterCard("red instant or sorcery card from your graveyard to play");
             filter.getColor().setRed(true);
-            filter.getCardType().add(CardType.INSTANT);
-            filter.getCardType().add(CardType.SORCERY);
+            filter.add(Predicates.or(
+                    new CardTypePredicate(CardType.INSTANT),
+                    new CardTypePredicate(CardType.SORCERY)));
 
             String message = "Play red instant or sorcery card from your graveyard without paying its mana cost?";
             Set<Card> cards = player.getGraveyard().getCards(filter, game);

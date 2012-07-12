@@ -42,6 +42,7 @@ import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
@@ -57,7 +58,7 @@ public class KhalniGem extends CardImpl<KhalniGem> {
 
     static {
         filter = new FilterControlledPermanent("land you control");
-        filter.getCardType().add(CardType.LAND);
+        filter.add(new CardTypePredicate(CardType.LAND));
     }
 
     public KhalniGem (UUID ownerId) {

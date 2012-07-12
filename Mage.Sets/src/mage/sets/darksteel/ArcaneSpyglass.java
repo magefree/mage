@@ -43,8 +43,8 @@ import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -56,8 +56,7 @@ public class ArcaneSpyglass extends CardImpl<ArcaneSpyglass> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("a land");
 
     static {
-        filter.getCardType().add(CardType.LAND);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new CardTypePredicate(CardType.LAND));
     }
 
     public ArcaneSpyglass (UUID ownerId) {

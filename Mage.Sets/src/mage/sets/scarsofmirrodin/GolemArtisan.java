@@ -44,8 +44,8 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -64,9 +64,8 @@ public class GolemArtisan extends CardImpl<GolemArtisan> {
     private static final FilterPermanent filter = new FilterPermanent("artifact creature");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.getCardType().add(CardType.CREATURE);
-        filter.setScopeCardType(Filter.ComparisonScope.All);
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
     public GolemArtisan(UUID ownerId) {

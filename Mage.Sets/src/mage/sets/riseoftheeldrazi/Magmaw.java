@@ -37,6 +37,8 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -51,7 +53,7 @@ public class Magmaw extends CardImpl<Magmaw> {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("nonland permanent");
 
     static {
-        filter.getNotCardType().add(CardType.LAND);
+        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
     }
 
     public Magmaw(UUID ownerId) {

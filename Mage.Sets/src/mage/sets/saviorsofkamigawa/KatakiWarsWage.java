@@ -40,8 +40,8 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -52,8 +52,7 @@ public class KatakiWarsWage extends CardImpl<KatakiWarsWage> {
     private final static FilterPermanent filter = new FilterPermanent("artifacts");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public KatakiWarsWage(UUID ownerId) {

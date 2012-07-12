@@ -39,6 +39,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -53,7 +54,7 @@ public class AltarOfDementia extends CardImpl<AltarOfDementia> {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("creature");
     
     static {
-        filter.getCardType().add(CardType.CREATURE);
+        filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
     public AltarOfDementia(UUID ownerId) {

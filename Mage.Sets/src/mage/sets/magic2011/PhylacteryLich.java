@@ -42,8 +42,8 @@ import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.counters.Counter;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -116,8 +116,7 @@ class PhylacteryLichEffect extends OneShotEffect<PhylacteryLichEffect> {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.setScopeCardType(ComparisonScope.Any);
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public PhylacteryLichEffect() {

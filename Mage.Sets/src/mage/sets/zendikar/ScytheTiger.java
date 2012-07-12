@@ -37,6 +37,7 @@ import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -57,8 +58,8 @@ public class ScytheTiger extends CardImpl<ScytheTiger> {
         this.addAbility(ShroudAbility.getInstance());
         // When Scythe Tiger enters the battlefield, sacrifice it unless you
         // sacrifice a land.
-        FilterControlledPermanent filter = new FilterControlledPermanent("a land.");
-        filter.getCardType().add(CardType.LAND);
+        FilterControlledPermanent filter = new FilterControlledPermanent("a land");
+        filter.add(new CardTypePredicate(CardType.LAND));
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(new TargetControlledPermanent(filter)))));
     }
 

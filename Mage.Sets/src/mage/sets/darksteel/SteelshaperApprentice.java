@@ -42,6 +42,7 @@ import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
@@ -53,7 +54,7 @@ public class SteelshaperApprentice extends CardImpl<SteelshaperApprentice> {
     private static final FilterCard filter = new FilterCard("Equipment card");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
         filter.add(new SubtypePredicate("Equipment"));
     }
 

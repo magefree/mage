@@ -41,6 +41,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
@@ -56,7 +57,7 @@ public class FetchLandActivatedAbility extends ActivatedAbilityImpl<FetchLandAct
         addCost(new PayLifeCost(1));
         addCost(new SacrificeSourceCost());
         FilterCard filter = new FilterCard(subTypeNames(subtypes));
-        filter.getCardType().add(CardType.LAND);
+        filter.add(new CardTypePredicate(CardType.LAND));
         ArrayList<Predicate<MageObject>> subtypePredicates = new ArrayList<Predicate<MageObject>>();
         for(int i = 0; i < subtypes.length; i++){
             subtypePredicates.add(new SubtypePredicate(subtypes[i]));

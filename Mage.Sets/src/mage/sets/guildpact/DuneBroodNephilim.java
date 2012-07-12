@@ -35,8 +35,8 @@ import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.permanent.token.Token;
 
 /**
@@ -47,8 +47,7 @@ public class DuneBroodNephilim extends CardImpl<DuneBroodNephilim> {
     final static FilterControlledPermanent filterLands = new FilterControlledPermanent("land you control");
 
     static {
-        filterLands.getCardType().add(CardType.LAND);
-        filterLands.setScopeCardType(Filter.ComparisonScope.Any);
+        filterLands.add(new CardTypePredicate(CardType.LAND));
     }
 
     public DuneBroodNephilim(UUID ownerId) {

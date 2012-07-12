@@ -35,8 +35,9 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 import java.util.UUID;
 
@@ -46,16 +47,16 @@ import java.util.UUID;
  */
 public class MaraxusOfKeld extends CardImpl<MaraxusOfKeld> {
 
-    private static FilterControlledPermanent filterUntapped = new FilterControlledPermanent("untapped artifacts, creatures, and lands you control");
+    private static final FilterControlledPermanent filterUntapped = new FilterControlledPermanent("untapped artifacts, creatures, and lands you control");
 
     static {
         filterUntapped.setUseTapped(true);
         filterUntapped.setTapped(false);
 
-        filterUntapped.getCardType().add(CardType.CREATURE);
-        filterUntapped.getCardType().add(CardType.ARTIFACT);
-        filterUntapped.getCardType().add(CardType.LAND);
-        filterUntapped.setScopeCardType(Filter.ComparisonScope.Any);
+        filterUntapped.add(Predicates.or(
+                new CardTypePredicate(CardType.ARTIFACT),
+                new CardTypePredicate(CardType.CREATURE),
+                new CardTypePredicate(CardType.LAND)));
     }
 
     public MaraxusOfKeld(UUID ownerId) {

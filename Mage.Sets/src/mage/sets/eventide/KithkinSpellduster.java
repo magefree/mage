@@ -42,6 +42,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.PersistAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -49,10 +50,10 @@ import mage.target.TargetPermanent;
  * @author Loki
  */
 public class KithkinSpellduster extends CardImpl<KithkinSpellduster> {
-    private static FilterPermanent filter = new FilterPermanent("enchantment");
+    private static final FilterPermanent filter = new FilterPermanent("enchantment");
 
     static {
-        filter.getCardType().add(CardType.ENCHANTMENT);
+        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
 
     public KithkinSpellduster(UUID ownerId) {

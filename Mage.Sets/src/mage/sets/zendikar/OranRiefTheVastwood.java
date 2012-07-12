@@ -43,6 +43,7 @@ import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -90,7 +91,7 @@ class OranRiefTheVastwoodEffect extends OneShotEffect<OranRiefTheVastwoodEffect>
     @Override
     public boolean apply(Game game, Ability source) {
         FilterPermanent filter = new FilterPermanent();
-        filter.getCardType().add(CardType.CREATURE);
+        filter.add(new CardTypePredicate(CardType.CREATURE));
         filter.getColor().setGreen(true);
         filter.setScopeColor(Filter.ComparisonScope.Any);
         filter.setUseColor(true);

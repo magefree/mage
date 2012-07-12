@@ -35,6 +35,7 @@ import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffec
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetControlledPermanent;
 
@@ -48,8 +49,8 @@ public class TrashForTreasure extends CardImpl<TrashForTreasure> {
     private static final FilterCard filterCard = new FilterCard("artifact card from your graveyard");
 
     static {
-        filterPermanent.getCardType().add(CardType.ARTIFACT);
-        filterCard.getCardType().add(CardType.ARTIFACT);
+        filterPermanent.add(new CardTypePredicate(CardType.ARTIFACT));
+        filterCard.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public TrashForTreasure(UUID ownerId) {

@@ -33,6 +33,7 @@ import mage.Constants.CardType;
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 
 /**
@@ -44,7 +45,7 @@ public class MetalcraftCost extends CostImpl<MetalcraftCost> {
     private static final FilterPermanent filter = new FilterPermanent("artifact");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public MetalcraftCost() {

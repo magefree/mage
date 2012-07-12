@@ -32,8 +32,8 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -46,8 +46,7 @@ public class Perish extends CardImpl<Perish> {
     static {
         filter.getColor().setGreen(true);
         filter.setUseColor(true);
-        filter.getCardType().add(CardType.CREATURE);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
     public Perish(UUID ownerId) {

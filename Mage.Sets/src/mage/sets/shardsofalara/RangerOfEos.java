@@ -37,6 +37,7 @@ import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.target.common.TargetCardInLibrary;
 
@@ -49,7 +50,7 @@ public class RangerOfEos extends CardImpl<RangerOfEos> {
     private static final FilterCard filter = new FilterCard("creature cards with converted mana cost 1 or less");
 
     static {
-        filter.getCardType().add(CardType.CREATURE);
+        filter.add(new CardTypePredicate(CardType.CREATURE));
         filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, 2));
     }
 

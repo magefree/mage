@@ -43,8 +43,9 @@ import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -57,9 +58,9 @@ public class SnapcasterMage extends CardImpl<SnapcasterMage> {
     private static final FilterCard filter = new FilterCard("instant or sorcery card in your graveyard");
 
     static {
-        filter.getCardType().add(CardType.INSTANT);
-        filter.getCardType().add(CardType.SORCERY);
-        filter.setScopeCardType(ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.INSTANT),
+                new CardTypePredicate(CardType.SORCERY)));
     }
 
     public SnapcasterMage(UUID ownerId) {

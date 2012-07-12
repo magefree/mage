@@ -44,6 +44,7 @@ import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  * @author Loki
@@ -87,8 +88,7 @@ class GreenSunsZenithSearchEffect extends OneShotEffect<GreenSunsZenithSearchEff
         FilterCard filter = new FilterCard("green creature card with converted mana cost X or less");
         filter.getColor().setGreen(true);
         filter.setUseColor(true);
-        filter.getCardType().add(CardType.CREATURE);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new CardTypePredicate(CardType.CREATURE));
         //Set the mana cost one higher to 'emulate' a less than or equal to comparison.
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, source.getManaCostsToPay().getX() + 1));
         TargetCardInLibrary target = new TargetCardInLibrary(filter);

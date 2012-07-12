@@ -38,8 +38,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -49,8 +49,7 @@ public class BellowingTanglewurm extends CardImpl<BellowingTanglewurm> {
     private static final FilterPermanent filter = new FilterPermanent("green creatures");
 
     static {
-        filter.getCardType().add(CardType.CREATURE);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new CardTypePredicate(CardType.CREATURE));
         filter.setUseColor(true);
         filter.getColor().setGreen(true);
     }

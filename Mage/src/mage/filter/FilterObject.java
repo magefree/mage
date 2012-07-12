@@ -28,13 +28,9 @@
 
 package mage.filter;
 
-import mage.Constants.CardType;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.game.Game;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -42,10 +38,6 @@ import java.util.List;
  * @author North
  */
 public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> extends FilterImpl<E, T> implements Filter<E> {
-    protected List<CardType> cardType = new ArrayList<CardType>();
-    protected ComparisonScope scopeCardType = ComparisonScope.Any;
-    protected List<CardType> notCardType = new ArrayList<CardType>();
-    protected ComparisonScope scopeNotCardType = ComparisonScope.Any;
     protected boolean colorless;
     protected boolean useColorless;
     protected boolean useColor;
@@ -70,10 +62,6 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
 
     public FilterObject(FilterObject filter) {
         super(filter);
-        this.cardType.addAll(filter.cardType);
-        this.notCardType.addAll(filter.notCardType);
-        this.scopeCardType = filter.scopeCardType;
-        this.scopeNotCardType = filter.scopeNotCardType;
         this.colorless = filter.colorless;
         this.useColorless = filter.useColorless;
         this.useColor = filter.useColor;
@@ -110,33 +98,7 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
             return notFilter;
         }
 
-        if (cardType.size() > 0) {
-            if (!compCardType.compare(cardType, object.getCardType(), scopeCardType, false))
-                return notFilter;
-        }
-
-        if (notCardType.size() > 0) {
-            if (compCardType.compare(notCardType, object.getCardType(), scopeNotCardType, false))
-                return notFilter;
-        }
-
         return !notFilter;
-    }
-
-    public List<CardType> getCardType() {
-        return this.cardType;
-    }
-
-    public List<CardType> getNotCardType() {
-        return this.notCardType;
-    }
-
-    public void setScopeCardType(ComparisonScope scopeCardType) {
-        this.scopeCardType = scopeCardType;
-    }
-
-    public void setScopeNotCardType(ComparisonScope scopeNotCardType) {
-        this.scopeNotCardType = scopeNotCardType;
     }
 
     public void setColor(ObjectColor color) {

@@ -43,6 +43,7 @@ import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCardInLibrary;
@@ -56,7 +57,7 @@ public class JundPanorama extends CardImpl<JundPanorama> {
      private static final FilterCard filter = new FilterCard("a basic Swamp, Mountain, or Forest card");
 
     static {
-        filter.getCardType().add(CardType.LAND);
+        filter.add(new CardTypePredicate(CardType.LAND));
         filter.add(new SupertypePredicate("Basic"));
         filter.add(Predicates.or(
                 new SubtypePredicate("Swamp"),

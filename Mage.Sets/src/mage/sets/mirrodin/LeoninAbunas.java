@@ -38,6 +38,7 @@ import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  * @author Loki
@@ -47,7 +48,7 @@ public class LeoninAbunas extends CardImpl<LeoninAbunas> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("Artifacts you control");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public LeoninAbunas(UUID ownerId) {

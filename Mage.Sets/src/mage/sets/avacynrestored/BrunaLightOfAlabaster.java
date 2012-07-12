@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterAura;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -91,7 +92,7 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect<BrunaLightOfAlabasterEff
 
     static {
         filterAuraCard.add(new SubtypePredicate("Aura"));
-        filterAuraCard.getCardType().add(CardType.ENCHANTMENT);
+        filterAuraCard.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
 
     public BrunaLightOfAlabasterEffect() {

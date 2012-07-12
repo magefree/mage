@@ -36,6 +36,7 @@ import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.SacrificeAllEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -45,7 +46,7 @@ public class AkkiBlizzardHerder extends CardImpl<AkkiBlizzardHerder> {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("land");
     static {
-        filter.getCardType().add(CardType.LAND);
+        filter.add(new CardTypePredicate(CardType.LAND));
     }
 
     public AkkiBlizzardHerder(UUID ownerId) {

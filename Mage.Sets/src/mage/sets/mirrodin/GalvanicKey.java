@@ -39,8 +39,8 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -52,8 +52,7 @@ public class GalvanicKey extends CardImpl<GalvanicKey> {
     private final static FilterPermanent filter = new FilterPermanent("artifact");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public GalvanicKey(UUID ownerId) {

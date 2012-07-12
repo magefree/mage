@@ -36,8 +36,8 @@ import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.permanent.token.Token;
 
 /**
@@ -49,8 +49,7 @@ public class HalcyonGlaze extends CardImpl<HalcyonGlaze> {
     private static final FilterSpell filter = new FilterSpell("a creature spell");
 
     static {
-        filter.getCardType().add(CardType.CREATURE);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
     public HalcyonGlaze(UUID ownerId) {

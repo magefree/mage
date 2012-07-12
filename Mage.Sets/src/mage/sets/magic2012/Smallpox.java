@@ -35,8 +35,8 @@ import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -71,15 +71,13 @@ public class Smallpox extends CardImpl<Smallpox> {
 
 class SmallpoxEffect extends OneShotEffect<SmallpoxEffect> {
 
-    private static FilterPermanent filterCreature = new FilterPermanent("a creature you control");
-    private static FilterPermanent filterLand = new FilterPermanent("a land you control");
+    private static final FilterPermanent filterCreature = new FilterPermanent("a creature you control");
+    private static final FilterPermanent filterLand = new FilterPermanent("a land you control");
 
     static {
-        filterCreature.getCardType().add(CardType.CREATURE);
-        filterCreature.setScopeCardType(Filter.ComparisonScope.Any);
+        filterCreature.add(new CardTypePredicate(CardType.CREATURE));
         filterCreature.setTargetController(Constants.TargetController.YOU);
-        filterLand.getCardType().add(CardType.LAND);
-        filterLand.setScopeCardType(Filter.ComparisonScope.Any);
+        filterLand.add(new CardTypePredicate(CardType.LAND));
         filterLand.setTargetController(Constants.TargetController.YOU);
     }
 

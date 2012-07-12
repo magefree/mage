@@ -36,6 +36,7 @@ import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -46,7 +47,7 @@ public class ArgothianEnchantress extends CardImpl<ArgothianEnchantress> {
     private static final FilterSpell filter = new FilterSpell("an Enchantment spell");
 
     static {
-        filter.getCardType().add(CardType.ENCHANTMENT);
+        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
 
     public ArgothianEnchantress(UUID ownerId) {

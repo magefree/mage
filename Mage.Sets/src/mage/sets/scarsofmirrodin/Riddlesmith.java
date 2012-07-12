@@ -35,8 +35,8 @@ import mage.MageInt;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -46,8 +46,7 @@ public class Riddlesmith extends CardImpl<Riddlesmith> {
 
     private static final FilterSpell filter = new FilterSpell("an artifact spell");
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public Riddlesmith (UUID ownerId) {

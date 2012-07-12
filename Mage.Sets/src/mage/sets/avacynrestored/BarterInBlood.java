@@ -27,12 +27,13 @@
  */
 package mage.sets.avacynrestored;
 
+import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.cards.CardImpl;
-import java.util.UUID;
 import mage.abilities.effects.common.SacrificeAllEffect;
+import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -43,7 +44,7 @@ public class BarterInBlood extends CardImpl<BarterInBlood> {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("creature");
     
     static {
-        filter.getCardType().add(CardType.CREATURE);
+        filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
     public BarterInBlood(UUID ownerId) {

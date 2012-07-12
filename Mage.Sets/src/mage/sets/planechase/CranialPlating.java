@@ -43,8 +43,8 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -55,8 +55,7 @@ public class CranialPlating extends CardImpl<CranialPlating> {
     private final static FilterControlledPermanent filterCounted = new FilterControlledPermanent("artifacts you control");
 
     static {
-        filterCounted.getCardType().add(CardType.ARTIFACT);
-        filterCounted.setScopeCardType(Filter.ComparisonScope.Any);
+        filterCounted.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public CranialPlating(UUID ownerId) {

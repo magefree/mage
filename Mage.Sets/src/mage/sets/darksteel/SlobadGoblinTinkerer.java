@@ -40,9 +40,9 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -55,10 +55,8 @@ public class SlobadGoblinTinkerer extends CardImpl<SlobadGoblinTinkerer> {
     private final static FilterControlledPermanent filterControlled = new FilterControlledPermanent("an artifact");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
-        filterControlled.getCardType().add(CardType.ARTIFACT);
-        filterControlled.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filterControlled.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public SlobadGoblinTinkerer(UUID ownerId) {

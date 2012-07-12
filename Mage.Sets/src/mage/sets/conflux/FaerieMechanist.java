@@ -38,6 +38,7 @@ import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -47,7 +48,7 @@ public class FaerieMechanist extends CardImpl<FaerieMechanist> {
 
     private final static FilterCard filter = new FilterCard("artifact card");
     static {
-            filter.getCardType().add(CardType.ARTIFACT);
+            filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public FaerieMechanist(UUID ownerId) {

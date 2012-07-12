@@ -38,8 +38,8 @@ import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -52,8 +52,7 @@ public class LodestoneMyr extends CardImpl<LodestoneMyr> {
     static {
         filter.setTapped(false);
         filter.setUseTapped(true);
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public LodestoneMyr(UUID ownerId) {

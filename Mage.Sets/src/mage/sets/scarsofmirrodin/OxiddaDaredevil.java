@@ -38,8 +38,8 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
@@ -49,11 +49,10 @@ import java.util.UUID;
  * @author Loki
  */
 public class OxiddaDaredevil extends CardImpl<OxiddaDaredevil> {
-     private static FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
+     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public OxiddaDaredevil (UUID ownerId) {

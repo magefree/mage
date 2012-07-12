@@ -35,8 +35,8 @@ import mage.Mana;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -48,8 +48,7 @@ public class TolarianAcademy extends CardImpl<TolarianAcademy> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("artifact you control");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public TolarianAcademy(UUID ownerId) {

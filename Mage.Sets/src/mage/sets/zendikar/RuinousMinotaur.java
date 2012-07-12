@@ -36,6 +36,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetControlledPermanent;
@@ -75,7 +76,7 @@ class RuinousMinotaurTriggeredAbility extends TriggeredAbilityImpl<RuinousMinota
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("land you control");
 
     static {
-        filter.getCardType().add(CardType.LAND);
+        filter.add(new CardTypePredicate(CardType.LAND));
     }
 
     public RuinousMinotaurTriggeredAbility() {

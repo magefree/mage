@@ -35,6 +35,7 @@ import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetSpell;
 import mage.target.common.TargetArtifactPermanent;
 
@@ -47,7 +48,7 @@ public class SteelSabotage extends CardImpl<SteelSabotage> {
     private static final FilterSpell filter = new FilterSpell("artifact spell");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public SteelSabotage(UUID ownerId) {

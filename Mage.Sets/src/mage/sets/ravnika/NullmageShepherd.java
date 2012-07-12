@@ -38,9 +38,10 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -56,9 +57,9 @@ public class NullmageShepherd extends CardImpl<NullmageShepherd> {
     static {
         filterCost.setTapped(false);
         filterCost.setUseTapped(true);
-        filterTarget.getCardType().add(CardType.ARTIFACT);
-        filterTarget.getCardType().add(CardType.ENCHANTMENT);
-        filterTarget.setScopeCardType(Filter.ComparisonScope.Any);
+        filterTarget.add(Predicates.or(
+                new CardTypePredicate(CardType.ARTIFACT),
+                new CardTypePredicate(CardType.ENCHANTMENT)));
     }
 
     public NullmageShepherd(UUID ownerId) {

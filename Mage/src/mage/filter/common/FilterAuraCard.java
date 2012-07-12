@@ -30,6 +30,7 @@ package mage.filter.common;
 
 import mage.Constants.CardType;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -43,7 +44,7 @@ public class FilterAuraCard extends FilterCard<FilterAuraCard> {
 
     public FilterAuraCard(String name) {
         super(name);
-        this.cardType.add(CardType.ENCHANTMENT);
+        this.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
 
     public FilterAuraCard(final FilterAuraCard filter) {

@@ -35,6 +35,8 @@ import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.permanent.token.DrakeToken;
 
 /**
@@ -46,8 +48,9 @@ public class TalrandSkySummoner extends CardImpl<TalrandSkySummoner> {
     private static final FilterSpell filter = new FilterSpell("instant or sorcery card");
 
     static {
-        filter.getCardType().add(CardType.INSTANT);
-        filter.getCardType().add(CardType.SORCERY);
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.INSTANT),
+                new CardTypePredicate(CardType.SORCERY)));
     }
 
     public TalrandSkySummoner(UUID ownerId) {

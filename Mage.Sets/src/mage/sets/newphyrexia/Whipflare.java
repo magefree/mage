@@ -27,13 +27,14 @@
  */
 package mage.sets.newphyrexia;
 
+import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
-
-import java.util.UUID;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -44,7 +45,7 @@ public class Whipflare extends CardImpl<Whipflare> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonartifact creature");
 
     static {
-        filter.getNotCardType().add(CardType.ARTIFACT);
+        filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
     }
 
     public Whipflare(UUID ownerId) {

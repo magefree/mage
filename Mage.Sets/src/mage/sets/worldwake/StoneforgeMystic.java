@@ -41,6 +41,7 @@ import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
 
@@ -55,7 +56,7 @@ public class StoneforgeMystic extends CardImpl<StoneforgeMystic> {
     private static final FilterCard filter = new FilterCard("an Equipment card");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
         filter.add(new SubtypePredicate("Equipment"));
     }
 

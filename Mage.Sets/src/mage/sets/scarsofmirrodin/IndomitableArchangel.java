@@ -44,18 +44,19 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  * @author nantuko
  */
 public class IndomitableArchangel extends CardImpl<IndomitableArchangel> {
 
-    private final String text = "Metalcraft - Artifacts you control have shroud as long as you control three or more artifacts.";
+    private static final String rule = "Metalcraft - Artifacts you control have shroud as long as you control three or more artifacts.";
 
-    private static FilterPermanent filter = new FilterPermanent("Artifacts");
+    private static final FilterPermanent filter = new FilterPermanent("Artifacts");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public IndomitableArchangel(UUID ownerId) {
@@ -67,7 +68,7 @@ public class IndomitableArchangel extends CardImpl<IndomitableArchangel> {
         this.toughness = new MageInt(4);
         this.addAbility(FlyingAbility.getInstance());
         ContinuousEffect gainAbilityEffect = new GainAbilityControlledEffect(ShroudAbility.getInstance(), Duration.WhileOnBattlefield, filter);
-        ConditionalContinousEffect effect = new ConditionalContinousEffect(gainAbilityEffect, MetalcraftCondition.getInstance(), text);
+        ConditionalContinousEffect effect = new ConditionalContinousEffect(gainAbilityEffect, MetalcraftCondition.getInstance(), rule);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 

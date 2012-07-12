@@ -41,6 +41,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -73,11 +74,10 @@ public class FiligreeAngel extends CardImpl<FiligreeAngel> {
 }
 
 class FiligreeAngelEffect extends OneShotEffect<FiligreeAngelEffect> {
-    private static FilterPermanent filter = new FilterPermanent();
+    private static final FilterPermanent filter = new FilterPermanent();
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.setScopeCardType(Filter.ComparisonScope.All);
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public FiligreeAngelEffect() {

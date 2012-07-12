@@ -37,6 +37,7 @@ import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  * @author Loki
@@ -46,8 +47,8 @@ public class MagneticFlux extends CardImpl<MagneticFlux> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("Artifact creatures");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.getCardType().add(CardType.CREATURE);
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
     public MagneticFlux(UUID ownerId) {

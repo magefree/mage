@@ -38,8 +38,8 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.counter.ProliferateEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -47,11 +47,10 @@ import mage.target.common.TargetControlledPermanent;
  * @author Loki
  */
 public class ThroneofGeth extends CardImpl<ThroneofGeth> {
-    private static FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public ThroneofGeth (UUID ownerId) {

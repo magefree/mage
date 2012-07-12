@@ -37,9 +37,10 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.FilterCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -81,12 +82,12 @@ class SunTitanAbility extends TriggeredAbilityImpl<SunTitanAbility> {
     private static final FilterCard filter = new FilterCard("permanent card with converted mana cost 3 or less from your graveyard");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.getCardType().add(CardType.CREATURE);
-        filter.getCardType().add(CardType.ENCHANTMENT);
-        filter.getCardType().add(CardType.LAND);
-        filter.getCardType().add(CardType.PLANESWALKER);
-        filter.setScopeCardType(ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.ARTIFACT),
+                new CardTypePredicate(CardType.CREATURE),
+                new CardTypePredicate(CardType.ENCHANTMENT),
+                new CardTypePredicate(CardType.LAND),
+                new CardTypePredicate(CardType.PLANESWALKER)));
         filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, 4));
     }
 

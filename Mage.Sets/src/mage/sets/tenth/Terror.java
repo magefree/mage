@@ -33,6 +33,8 @@ import mage.Constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -44,7 +46,7 @@ public class Terror extends CardImpl<Terror> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonartifact, nonblack creature");
 
     static {
-        filter.getNotCardType().add(CardType.ARTIFACT);
+        filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
         filter.getColor().setBlack(true);
         filter.setNotColor(true);
         filter.setUseColor(true);

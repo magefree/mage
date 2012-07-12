@@ -34,6 +34,7 @@ import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.LoseLifeControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetSpell;
 
 /**
@@ -45,7 +46,7 @@ public class PsychicBarrier extends CardImpl<PsychicBarrier> {
     private static final FilterSpell filter = new FilterSpell("creature spell");
 
     static {
-        filter.getCardType().add(CardType.CREATURE);
+        filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
     public PsychicBarrier(UUID ownerId) {

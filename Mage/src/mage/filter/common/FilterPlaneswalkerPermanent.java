@@ -30,6 +30,7 @@ package mage.filter.common;
 
 import mage.Constants.CardType;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -43,7 +44,7 @@ public class FilterPlaneswalkerPermanent extends FilterPermanent<FilterPlaneswal
 
     public FilterPlaneswalkerPermanent(String name) {
         super(name);
-        cardType.add(CardType.PLANESWALKER);
+        this.add(new CardTypePredicate(CardType.PLANESWALKER));
     }
 
     public FilterPlaneswalkerPermanent(final FilterPlaneswalkerPermanent filter) {

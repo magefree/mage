@@ -45,6 +45,7 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -166,7 +167,7 @@ class SarkhanTheMadDragonDamageEffect extends OneShotEffect<SarkhanTheMadDragonD
 
     static {
         filter = new FilterControlledPermanent();
-        filter.getCardType().add(CardType.CREATURE);
+        filter.add(new CardTypePredicate(CardType.CREATURE));
         filter.add(new SubtypePredicate("Dragon"));
     }
 

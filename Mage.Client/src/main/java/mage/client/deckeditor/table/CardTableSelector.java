@@ -29,6 +29,8 @@
 package mage.client.deckeditor.table;
 
 import mage.Constants.CardType;
+import mage.MageObject;
+import mage.ObjectColor;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.client.cards.BigCard;
@@ -37,8 +39,13 @@ import mage.client.cards.CardsStorage;
 import mage.client.cards.ICardGrid;
 import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.constants.Constants.SortBy;
-import mage.filter.Filter.ComparisonScope;
+import mage.client.util.sets.ConstructedFormats;
 import mage.filter.FilterCard;
+import mage.filter.predicate.Predicate;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.sets.Sets;
 import mage.view.CardsView;
 
@@ -59,7 +66,7 @@ import java.util.List;
 public class CardTableSelector extends javax.swing.JPanel implements ComponentListener {
 
     private final List<Card> cards = new ArrayList<Card>();
-    private final FilterCard filter = new FilterCard();
+    private FilterCard filter = new FilterCard();
     private BigCard bigCard;
     protected CardEventSource cardEventSource = new CardEventSource();
     private DeckEditorMode mode = DeckEditorMode.Constructed;
@@ -86,6 +93,64 @@ public class CardTableSelector extends javax.swing.JPanel implements ComponentLi
 
     }
 
+    private void buildFilter() {
+        filter = new FilterCard();
+        ArrayList<Predicate<MageObject>> predicates = new ArrayList<Predicate<MageObject>>();
+
+        if (this.rdoGreen.isSelected()) {
+            predicates.add(new ColorPredicate(ObjectColor.GREEN));
+        }
+        if (this.rdoRed.isSelected()) {
+            predicates.add(new ColorPredicate(ObjectColor.RED));
+        }
+        if (this.rdoBlack.isSelected()) {
+            predicates.add(new ColorPredicate(ObjectColor.BLACK));
+        }
+        if (this.rdoBlue.isSelected()) {
+            predicates.add(new ColorPredicate(ObjectColor.BLUE));
+        }
+        if (this.rdoWhite.isSelected()) {
+            predicates.add(new ColorPredicate(ObjectColor.WHITE));
+        }
+        if (this.rdoColorless.isSelected()) {
+            predicates.add(new ColorlessPredicate());
+        }
+        filter.add(Predicates.or(predicates));
+
+        predicates.clear();
+        if (this.rdoLand.isSelected()) {
+            predicates.add(new CardTypePredicate(CardType.LAND));
+        }
+        if (this.rdoArtifacts.isSelected()) {
+            predicates.add(new CardTypePredicate(CardType.ARTIFACT));
+        }
+        if (this.rdoCreatures.isSelected()) {
+            predicates.add(new CardTypePredicate(CardType.CREATURE));
+        }
+        if (this.rdoEnchantments.isSelected()) {
+            predicates.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        }
+        if (this.rdoInstants.isSelected()) {
+            predicates.add(new CardTypePredicate(CardType.INSTANT));
+        }
+        if (this.rdoSorceries.isSelected()) {
+            predicates.add(new CardTypePredicate(CardType.SORCERY));
+        }
+        if (this.rdoPlaneswalkers.isSelected()) {
+            predicates.add(new CardTypePredicate(CardType.PLANESWALKER));
+        }
+        filter.add(Predicates.or(predicates));
+
+        String name = jTextFieldSearch.getText().trim();
+        filter.setText(name);
+
+        if (this.cbExpansionSet.getSelectedItem() instanceof ExpansionSet) {
+            filter.getExpansionSetCode().add(((ExpansionSet) this.cbExpansionSet.getSelectedItem()).getCode());
+        } else if (this.cbExpansionSet.getSelectedItem().equals("-- Standard")) {
+            filter.getExpansionSetCode().addAll(ConstructedFormats.getSetsByFormat("Standard"));
+        }
+    }
+
     public void loadCards(List<Card> sideboard, BigCard bigCard, boolean construct) {
         this.bigCard = bigCard;
         this.btnBooster.setVisible(false);
@@ -95,7 +160,7 @@ public class CardTableSelector extends javax.swing.JPanel implements ComponentLi
         for (Card card: sideboard) {
             this.cards.add(card);
         }
-        initFilter();
+
         filterCards();
     }
 
@@ -114,35 +179,12 @@ public class CardTableSelector extends javax.swing.JPanel implements ComponentLi
         cbExpansionSet.setModel(new DefaultComboBoxModel(l));
         cbExpansionSet.insertItemAt("-- All sets -- ", 0);
         cbExpansionSet.setSelectedIndex(0);
-        initFilter();
-        if (this.cbExpansionSet.getSelectedItem() instanceof  ExpansionSet) {
-            filter.getExpansionSetCode().add(((ExpansionSet)this.cbExpansionSet.getSelectedItem()).getCode());
-        }
+
         filterCards();
     }
 
-    private void initFilter() {
-        filter.setUseColor(true);
-        filter.getColor().setBlack(true);
-        filter.getColor().setBlue(true);
-        filter.getColor().setGreen(true);
-        filter.getColor().setWhite(true);
-        filter.getColor().setRed(true);
-        filter.setColorless(true);
-        filter.setUseColorless(true);
-        filter.setNotColor(false);
-        filter.setScopeColor(ComparisonScope.Any);
-        filter.getCardType().add(CardType.LAND);
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.getCardType().add(CardType.CREATURE);
-        filter.getCardType().add(CardType.ENCHANTMENT);
-        filter.getCardType().add(CardType.INSTANT);
-        filter.getCardType().add(CardType.PLANESWALKER);
-        filter.getCardType().add(CardType.SORCERY);
-        filter.setScopeCardType(ComparisonScope.Any);
-    }
-
     private void filterCards() {
+        buildFilter();
         try {
             List<Card> filteredCards = new ArrayList<Card>();
             setCursor(new Cursor(Cursor.WAIT_CURSOR));
@@ -539,96 +581,58 @@ public class CardTableSelector extends javax.swing.JPanel implements ComponentLi
     }
 
     private void rdoGreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoGreenActionPerformed
-        filter.getColor().setGreen(this.rdoGreen.isSelected());
         filterCards();
     }//GEN-LAST:event_rdoGreenActionPerformed
 
     private void rdoBlackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoBlackActionPerformed
-        filter.getColor().setBlack(this.rdoBlack.isSelected());
         filterCards();
     }//GEN-LAST:event_rdoBlackActionPerformed
 
     private void rdoWhiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoWhiteActionPerformed
-        filter.getColor().setWhite(this.rdoWhite.isSelected());
         filterCards();
     }//GEN-LAST:event_rdoWhiteActionPerformed
 
     private void rdoRedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoRedActionPerformed
-        filter.getColor().setRed(this.rdoRed.isSelected());
         filterCards();
     }//GEN-LAST:event_rdoRedActionPerformed
 
     private void rdoBlueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoBlueActionPerformed
-        filter.getColor().setBlue(this.rdoBlue.isSelected());
         filterCards();
     }//GEN-LAST:event_rdoBlueActionPerformed
 
     private void rdoColorlessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoColorlessActionPerformed
-        filter.setColorless(this.rdoColorless.isSelected());
         filterCards();
     }//GEN-LAST:event_rdoColorlessActionPerformed
 
     private void rdoLandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoLandActionPerformed
-        if (this.rdoLand.isSelected())
-            filter.getCardType().add(CardType.LAND);
-        else
-            filter.getCardType().remove(CardType.LAND);
         filterCards();
     }//GEN-LAST:event_rdoLandActionPerformed
 
     private void rdoCreaturesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoCreaturesActionPerformed
-        if (this.rdoCreatures.isSelected())
-            filter.getCardType().add(CardType.CREATURE);
-        else
-            filter.getCardType().remove(CardType.CREATURE);
         filterCards();
     }//GEN-LAST:event_rdoCreaturesActionPerformed
 
     private void rdoArtifactsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoArtifactsActionPerformed
-        if (this.rdoArtifacts.isSelected())
-            filter.getCardType().add(CardType.ARTIFACT);
-        else
-            filter.getCardType().remove(CardType.ARTIFACT);
         filterCards();
     }//GEN-LAST:event_rdoArtifactsActionPerformed
 
     private void rdoEnchantmentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoEnchantmentsActionPerformed
-        if (this.rdoEnchantments.isSelected())
-            filter.getCardType().add(CardType.ENCHANTMENT);
-        else
-            filter.getCardType().remove(CardType.ENCHANTMENT);
         filterCards();
     }//GEN-LAST:event_rdoEnchantmentsActionPerformed
 
     private void rdoInstantsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoInstantsActionPerformed
-        if (this.rdoInstants.isSelected())
-            filter.getCardType().add(CardType.INSTANT);
-        else
-            filter.getCardType().remove(CardType.INSTANT);
         filterCards();
     }//GEN-LAST:event_rdoInstantsActionPerformed
 
     private void rdoSorceriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoSorceriesActionPerformed
-        if (this.rdoSorceries.isSelected())
-            filter.getCardType().add(CardType.SORCERY);
-        else
-            filter.getCardType().remove(CardType.SORCERY);
         filterCards();
     }//GEN-LAST:event_rdoSorceriesActionPerformed
 
     private void rdoPlaneswalkersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoPlaneswalkersActionPerformed
-        if (this.rdoPlaneswalkers.isSelected())
-            filter.getCardType().add(CardType.PLANESWALKER);
-        else
-            filter.getCardType().remove(CardType.PLANESWALKER);
         filterCards();
     }//GEN-LAST:event_rdoPlaneswalkersActionPerformed
 
     private void cbExpansionSetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbExpansionSetActionPerformed
-        filter.getExpansionSetCode().clear();
-        if (cbExpansionSet.getSelectedItem() instanceof ExpansionSet) {
-            filter.getExpansionSetCode().add(((ExpansionSet)this.cbExpansionSet.getSelectedItem()).getCode());
-        }
         filterCards();
     }//GEN-LAST:event_cbExpansionSetActionPerformed
 
@@ -690,14 +694,11 @@ public class CardTableSelector extends javax.swing.JPanel implements ComponentLi
     }
 
     private void jButtonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String name = jTextFieldSearch.getText().trim();
-        filter.setText(name);
         filterCards();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButtonCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         jTextFieldSearch.setText("");
-        filter.setText("");
         filterCards();
     }//GEN-LAST:event_jButton2ActionPerformed
 

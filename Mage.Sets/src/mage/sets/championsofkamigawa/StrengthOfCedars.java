@@ -36,8 +36,8 @@ import mage.Constants.Rarity;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -48,8 +48,7 @@ public class StrengthOfCedars extends CardImpl<StrengthOfCedars> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("land your control");
 
     static {
-        filter.getCardType().add(CardType.LAND);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new CardTypePredicate(CardType.LAND));
     }
 
     public StrengthOfCedars (UUID ownerId) {
