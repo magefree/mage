@@ -39,6 +39,7 @@ import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -53,7 +54,7 @@ public class LysAlanaBowmaster extends CardImpl<LysAlanaBowmaster> {
 
     static {
         filterElf.add(new SubtypePredicate("Elf"));
-        filterFlying.getAbilities().add(FlyingAbility.getInstance());
+        filterFlying.add(new AbilityPredicate(FlyingAbility.class));
     }
 
     public LysAlanaBowmaster(UUID ownerId) {

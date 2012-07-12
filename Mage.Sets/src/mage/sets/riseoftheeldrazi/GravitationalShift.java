@@ -29,14 +29,16 @@ package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continious.BoostAllEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.abilities.keyword.FlyingAbility;
-import mage.Constants.Duration;
-import mage.abilities.effects.common.continious.BoostAllEffect;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.Constants.Zone;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 
 /**
  *
@@ -48,9 +50,8 @@ public class GravitationalShift extends CardImpl<GravitationalShift> {
     private final static FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Creatures without flying");
 
     static {
-        filter1.getAbilities().add(FlyingAbility.getInstance());
-        filter2.getAbilities().add(FlyingAbility.getInstance());
-        filter2.setNotAbilities(true);
+        filter1.add(new AbilityPredicate(FlyingAbility.class));
+        filter2.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }
 
     public GravitationalShift(UUID ownerId) {

@@ -40,6 +40,7 @@ import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 
 /**
  *
@@ -50,7 +51,7 @@ public class OneEyedScarecrow extends CardImpl<OneEyedScarecrow> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures with flying your opponents control");
 
     static {
-        filter.getAbilities().add(FlyingAbility.getInstance());
+        filter.add(new AbilityPredicate(FlyingAbility.class));
         filter.setTargetController(TargetController.OPPONENT);
     }
 

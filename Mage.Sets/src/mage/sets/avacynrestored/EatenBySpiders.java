@@ -37,6 +37,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -50,7 +51,7 @@ public class EatenBySpiders extends CardImpl<EatenBySpiders> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
 
     static {
-        filter.getAbilities().add(FlyingAbility.getInstance());
+        filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
     public EatenBySpiders(UUID ownerId) {

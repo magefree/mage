@@ -40,6 +40,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -52,7 +53,7 @@ public class ThundermawHellkite extends CardImpl<ThundermawHellkite> {
     final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with flying your opponents control");
     
     static {
-        filter.getAbilities().add(FlyingAbility.getInstance());
+        filter.add(new AbilityPredicate(FlyingAbility.class));
         filter.setTargetController(Constants.TargetController.OPPONENT);
     }
 

@@ -40,6 +40,8 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -55,8 +57,7 @@ public class TiborAndLumia extends CardImpl<TiborAndLumia> {
     static {
         filterBlue.setUseColor(true);
         filterBlue.getColor().setBlue(true);
-        filter.getAbilities().add(FlyingAbility.getInstance());
-        filter.setNotAbilities(true);
+        filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
         filterRed.setUseColor(true);
         filterRed.getColor().setRed(true);
     }

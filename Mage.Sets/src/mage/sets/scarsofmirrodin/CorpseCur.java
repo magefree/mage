@@ -38,6 +38,7 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -49,9 +50,7 @@ public class CorpseCur extends CardImpl<CorpseCur> {
     private static final FilterCard filter = new FilterCard("creature card with infect from your graveyard");
 
     static {
-        filter.getAbilities().add(InfectAbility.getInstance());
-        filter.setNotAbilities(false);
-
+        filter.add(new AbilityPredicate(InfectAbility.class));
     }
 
     public CorpseCur (UUID ownerId) {

@@ -42,6 +42,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -56,7 +57,7 @@ public class GrotagSiegeRunner extends CardImpl<GrotagSiegeRunner> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with defender");
 
     static {
-        filter.getAbilities().add(DefenderAbility.getInstance());
+        filter.add(new AbilityPredicate(DefenderAbility.class));
     }
 
     public GrotagSiegeRunner(UUID ownerId) {

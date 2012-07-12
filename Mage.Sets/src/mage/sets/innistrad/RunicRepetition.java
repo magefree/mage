@@ -31,12 +31,11 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.TargetController;
-import mage.Constants.TimingRule;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.target.common.TargetCardInExile;
 
 /**
@@ -49,7 +48,7 @@ public class RunicRepetition extends CardImpl<RunicRepetition> {
 
     static {
         filter.setTargetOwner(TargetController.YOU);
-        filter.getAbilities().add(new FlashbackAbility(new ManaCostsImpl("{0}"), TimingRule.INSTANT));
+        filter.add(new AbilityPredicate(FlashbackAbility.class));
     }
 
     public RunicRepetition(UUID ownerId) {

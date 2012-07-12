@@ -41,6 +41,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -53,7 +54,7 @@ public class ElvishSkysweeper extends CardImpl<ElvishSkysweeper> {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
 
         static {
-            filter.getAbilities().add(FlyingAbility.getInstance());
+            filter.add(new AbilityPredicate(FlyingAbility.class));
         }
 
         public ElvishSkysweeper(UUID ownerId) {

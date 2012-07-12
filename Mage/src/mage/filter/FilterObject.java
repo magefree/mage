@@ -31,10 +31,6 @@ package mage.filter;
 import mage.Constants.CardType;
 import mage.MageObject;
 import mage.ObjectColor;
-import mage.abilities.Abilities;
-import mage.abilities.AbilitiesImpl;
-import mage.abilities.Ability;
-import mage.abilities.keyword.ChangelingAbility;
 import mage.game.Game;
 
 import java.util.ArrayList;
@@ -46,8 +42,6 @@ import java.util.List;
  * @author North
  */
 public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> extends FilterImpl<E, T> implements Filter<E> {
-    protected Abilities<Ability> abilities;
-    protected boolean notAbilities;
     protected List<CardType> cardType = new ArrayList<CardType>();
     protected ComparisonScope scopeCardType = ComparisonScope.Any;
     protected List<CardType> notCardType = new ArrayList<CardType>();
@@ -71,14 +65,11 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
 
     public FilterObject(String name) {
         super(name);
-        abilities = new AbilitiesImpl<Ability>();
         color = new ObjectColor();
     }
 
     public FilterObject(FilterObject filter) {
         super(filter);
-        this.abilities = filter.abilities.copy();
-        this.notAbilities = filter.notAbilities;
         this.cardType.addAll(filter.cardType);
         this.notCardType.addAll(filter.notCardType);
         this.scopeCardType = filter.scopeCardType;
@@ -129,29 +120,7 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
                 return notFilter;
         }
 
-        if (abilities.size() > 0) {
-            List<Ability> test = new ArrayList<Ability>(abilities);
-            for (Ability ability: object.getAbilities()) {
-                for (Ability abilityTest: test) {
-                    if (ability == abilityTest || ability.getClass().equals(abilityTest.getClass())) {
-                        test.remove(abilityTest);
-                        break;
-                    }
-                }
-            }
-            if (test.isEmpty() == notAbilities)
-                return notFilter;
-        }
-
         return !notFilter;
-    }
-
-    public Abilities getAbilities() {
-        return this.abilities;
-    }
-
-    public void setNotAbilities(boolean notAbilities) {
-        this.notAbilities = notAbilities;
     }
 
     public List<CardType> getCardType() {

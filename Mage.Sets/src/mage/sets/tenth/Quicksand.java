@@ -40,6 +40,8 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterAttackingCreature;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -51,8 +53,7 @@ public class Quicksand extends CardImpl<Quicksand> {
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking creature without flying");
 
     static {
-        filter.getAbilities().add(FlyingAbility.getInstance());
-        filter.setNotAbilities(true);
+        filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }
 
     public Quicksand(UUID ownerId) {

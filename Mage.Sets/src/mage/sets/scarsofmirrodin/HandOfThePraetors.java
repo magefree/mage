@@ -45,6 +45,7 @@ import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.filter.Filter;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 
 /**
  *
@@ -56,9 +57,8 @@ public class HandOfThePraetors extends CardImpl<HandOfThePraetors> {
     private static final FilterSpell filterSpell = new FilterSpell("a creature spell with infect");
 
     static {
-        filter.getAbilities().add(InfectAbility.getInstance());
-        filter.setNotAbilities(false);
-        filterSpell.getAbilities().add(InfectAbility.getInstance());
+        filter.add(new AbilityPredicate(InfectAbility.class));
+        filterSpell.add(new AbilityPredicate(InfectAbility.class));
         filterSpell.getCardType().add(CardType.CREATURE);
         filterSpell.setScopeCardType(Filter.ComparisonScope.Any);
     }
