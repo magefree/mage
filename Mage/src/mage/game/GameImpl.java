@@ -306,6 +306,15 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
             return null;
         return gameCards.get(cardId);
     }
+    
+    @Override
+    public Ability getAbility(UUID abilityId, UUID sourceId) {
+        MageObject object = getObject(sourceId);
+        if (object != null) {
+            return object.getAbilities().get(abilityId);
+        }
+        return null;
+    }
 
 //    @Override
 //    public Zone getZone(UUID objectId) {

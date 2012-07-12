@@ -85,6 +85,7 @@ public interface Game extends MageItem, Serializable {
     public UUID getControllerId(UUID objectId);
     public Permanent getPermanent(UUID permanentId);
     public Card getCard(UUID cardId);
+    public Ability getAbility(UUID abilityId, UUID sourceId);
     public void setZone(UUID objectId, Zone zone);
     public void addPlayer(Player player, Deck deck) throws GameException;
     public Player getPlayer(UUID playerId);
