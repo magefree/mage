@@ -142,7 +142,7 @@ public class MageActionCallback implements ActionCallback {
             //String zone = ((MageCard)(data.component)).getZone();
             //if (zone != null && zone.equals(Constants.Zone.HAND.toString())) {
                 // for performance getting cached value
-                String showTooltips = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_TOOLTIPS_ANY_ZONE, "false");
+                String showTooltips = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_TOOLTIPS_ANY_ZONE, "true");
                 if (showTooltips.equals("false")) {
                     return;
                 }
