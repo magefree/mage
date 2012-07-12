@@ -827,7 +827,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         if (!canLoseLife) return 0;
         GameEvent event = new GameEvent(GameEvent.EventType.LOSE_LIFE, playerId, playerId, playerId, amount, false);
         if (!game.replaceEvent(event)) {
-            this.life -= amount;
+            this.life -= event.getAmount();
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LOST_LIFE, playerId, playerId, playerId, amount));
             return amount;
         }
@@ -849,7 +849,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         if (!canGainLife) return 0;
         GameEvent event = new GameEvent(GameEvent.EventType.GAIN_LIFE, playerId, playerId, playerId, amount, false);
         if (!game.replaceEvent(event)) {
-            this.life += amount;
+            this.life += event.getAmount();
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.GAINED_LIFE, playerId, playerId, playerId, amount));
             return amount;
         }
