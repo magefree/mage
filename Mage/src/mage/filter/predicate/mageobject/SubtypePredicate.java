@@ -28,6 +28,7 @@
 package mage.filter.predicate.mageobject;
 
 import mage.MageObject;
+import mage.abilities.keyword.ChangelingAbility;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 
@@ -45,6 +46,10 @@ public class SubtypePredicate implements Predicate<MageObject> {
 
     @Override
     public boolean apply(MageObject input, Game game) {
+        if (input.getAbilities().contains(ChangelingAbility.getInstance())) {
+            return true;
+        }
+
         return input.getSubtype().contains(subtype);
     }
 
