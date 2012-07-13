@@ -31,10 +31,12 @@ package mage.sets.tenth;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.ObjectColor;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -46,10 +48,9 @@ public class Deathmark extends CardImpl<Deathmark> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("green or white creature");
 
     static {
-        filter.getColor().setGreen(true);
-        filter.getColor().setWhite(true);
-        filter.setUseColor(true);
-        filter.setScopeColor(Filter.ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new ColorPredicate(ObjectColor.GREEN),
+                new ColorPredicate(ObjectColor.WHITE)));
     }
 
     public Deathmark(UUID ownerId) {

@@ -31,6 +31,7 @@ package mage.sets.mirrodinbesieged;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ShuffleSpellEffect;
@@ -38,13 +39,14 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  * @author Loki
@@ -86,8 +88,7 @@ class GreenSunsZenithSearchEffect extends OneShotEffect<GreenSunsZenithSearchEff
         if (player == null)
             return false;
         FilterCard filter = new FilterCard("green creature card with converted mana cost X or less");
-        filter.getColor().setGreen(true);
-        filter.setUseColor(true);
+        filter.add(new ColorPredicate(ObjectColor.GREEN));
         filter.add(new CardTypePredicate(CardType.CREATURE));
         //Set the mana cost one higher to 'emulate' a less than or equal to comparison.
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, source.getManaCostsToPay().getX() + 1));

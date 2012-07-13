@@ -32,6 +32,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -44,6 +45,7 @@ import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -230,7 +232,7 @@ class ChandraAblazeEffect5 extends OneShotEffect<ChandraAblazeEffect5> {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             FilterCard filter = new FilterCard("red instant or sorcery card from your graveyard to play");
-            filter.getColor().setRed(true);
+            filter.add(new ColorPredicate(ObjectColor.RED));
             filter.add(Predicates.or(
                     new CardTypePredicate(CardType.INSTANT),
                     new CardTypePredicate(CardType.SORCERY)));

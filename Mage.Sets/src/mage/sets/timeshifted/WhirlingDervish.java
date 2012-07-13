@@ -41,6 +41,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.events.GameEvent;
 
 /**
@@ -53,8 +54,7 @@ public class WhirlingDervish extends CardImpl<WhirlingDervish> {
     private static final FilterCard filter = new FilterCard("black");
 
     static {
-        filter.setColor(ObjectColor.BLACK);
-        filter.setUseColor(true);
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
     public WhirlingDervish(UUID ownerId) {

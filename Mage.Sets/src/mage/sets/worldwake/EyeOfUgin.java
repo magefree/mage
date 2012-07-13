@@ -45,6 +45,7 @@ import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreatureCard;
+import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
 
@@ -59,8 +60,7 @@ public class EyeOfUgin extends CardImpl<EyeOfUgin> {
 
     static {
         filter = new FilterCreatureCard();
-        filter.setColorless(true);
-        filter.setUseColorless(true);
+        filter.add(new ColorlessPredicate());
     }
 
     public EyeOfUgin (UUID ownerId) {

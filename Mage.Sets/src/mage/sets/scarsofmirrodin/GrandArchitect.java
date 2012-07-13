@@ -41,6 +41,7 @@ import mage.Constants.Zone;
 import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -55,6 +56,7 @@ import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -70,8 +72,7 @@ public class GrandArchitect extends CardImpl<GrandArchitect> {
     private static final FilterCreaturePermanent targetFilter = new FilterCreaturePermanent("artifact creature");
 
     static {
-        boostFilter.getColor().setBlue(true);
-        boostFilter.setUseColor(true);
+        boostFilter.add(new ColorPredicate(ObjectColor.BLUE));
         targetFilter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
@@ -139,8 +140,7 @@ class GrandArchitectManaAbility extends ManaAbility<GrandArchitectManaAbility> {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped blue creature");
 
     static {
-        filter.getColor().setBlue(true);
-        filter.setUseColor(true);
+        filter.add(new ColorPredicate(ObjectColor.BLUE));
         filter.setTapped(false);
         filter.setUseTapped(true);
     }

@@ -33,11 +33,13 @@ import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -49,10 +51,8 @@ public class ThistledownLiege extends CardImpl<ThistledownLiege> {
     private static final FilterCreaturePermanent filterBlue = new FilterCreaturePermanent("blue creatures");
 
     static {
-        filterWhite.getColor().setWhite(true);
-        filterWhite.setUseColor(true);
-        filterBlue.getColor().setBlue(true);
-        filterBlue.setUseColor(true);
+        filterWhite.add(new ColorPredicate(ObjectColor.WHITE));
+        filterBlue.add(new ColorPredicate(ObjectColor.BLUE));
     }
 
     public ThistledownLiege(UUID ownerId) {

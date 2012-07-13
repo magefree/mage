@@ -35,6 +35,7 @@ import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
+import mage.ObjectColor;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -45,8 +46,9 @@ import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
@@ -61,10 +63,9 @@ public class SwordOfFireAndIce extends CardImpl<SwordOfFireAndIce> {
     private static final FilterCard filter = new FilterCard("red and from blue");
 
     static {
-        filter.setUseColor(true);
-        filter.getColor().setRed(true);
-        filter.getColor().setGreen(true);
-        filter.setScopeColor(Filter.ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new ColorPredicate(ObjectColor.RED),
+                new ColorPredicate(ObjectColor.BLUE)));
     }
 
 

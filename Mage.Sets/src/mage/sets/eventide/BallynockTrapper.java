@@ -41,6 +41,7 @@ import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -51,8 +52,7 @@ public class BallynockTrapper extends CardImpl<BallynockTrapper> {
     private final static FilterSpell filterWhiteSpell = new FilterSpell("a white spell");
 
     static {
-        filterWhiteSpell.setUseColor(true);
-        filterWhiteSpell.setColor(ObjectColor.WHITE);
+        filterWhiteSpell.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
     public BallynockTrapper(UUID ownerId) {

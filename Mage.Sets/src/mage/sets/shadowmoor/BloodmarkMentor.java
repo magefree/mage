@@ -33,11 +33,13 @@ import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -48,8 +50,7 @@ public class BloodmarkMentor extends CardImpl<BloodmarkMentor> {
     private static final FilterPermanent filter = new FilterPermanent("Red creatures");
 
     static {
-        filter.getColor().setRed(true);
-        filter.setUseColor(true);
+        filter.add(new ColorPredicate(ObjectColor.RED));
     }
 
     public BloodmarkMentor(UUID ownerId) {

@@ -30,11 +30,12 @@ package mage.sets.urzaslegacy;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 import java.util.UUID;
 
@@ -46,9 +47,7 @@ public class DefenderOfChaos extends CardImpl<DefenderOfChaos> {
     private static final FilterCard filter = new FilterCard("White");
 
     static {
-        filter.setUseColor(true);
-        filter.getColor().setWhite(true);
-        filter.setScopeColor(ComparisonScope.Any);
+        filter.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
     public DefenderOfChaos(UUID ownerId) {

@@ -35,6 +35,7 @@ import mage.Constants.AttachmentType;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
+import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.EquippedMatchesFilterCondition;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -44,8 +45,8 @@ import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -64,9 +65,7 @@ public class TenzaGodosMaul extends CardImpl<TenzaGodosMaul> {
 
     static {
         legendaryFilter.add(new SupertypePredicate("Legendary"));
-        redFilter.getColor().setRed(true);
-        redFilter.setUseColor(true);
-        redFilter.setScopeColor(Filter.ComparisonScope.Any);
+        redFilter.add(new ColorPredicate(ObjectColor.RED));
     }
 
     public TenzaGodosMaul(UUID ownerId) {

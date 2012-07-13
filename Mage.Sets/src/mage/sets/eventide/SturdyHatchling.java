@@ -44,6 +44,7 @@ import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  * @author Loki
@@ -54,10 +55,8 @@ public class SturdyHatchling extends CardImpl<SturdyHatchling> {
     private final static FilterSpell filterBlueSpell = new FilterSpell("a blue spell");
 
     static {
-        filterGreenSpell.setUseColor(true);
-        filterGreenSpell.setColor(ObjectColor.GREEN);
-        filterBlueSpell.setUseColor(true);
-        filterBlueSpell.setColor(ObjectColor.BLUE);
+        filterGreenSpell.add(new ColorPredicate(ObjectColor.GREEN));
+        filterBlueSpell.add(new ColorPredicate(ObjectColor.BLUE));
     }
 
     public SturdyHatchling(UUID ownerId) {

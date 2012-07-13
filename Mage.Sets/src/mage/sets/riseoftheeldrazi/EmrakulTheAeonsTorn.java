@@ -44,6 +44,8 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -59,8 +61,7 @@ public class EmrakulTheAeonsTorn extends CardImpl<EmrakulTheAeonsTorn> {
     private static final FilterSpell filter = new FilterSpell("colored spells");
 
     static {
-        filter.setColorless(false);
-        filter.setUseColorless(true);
+        filter.add(Predicates.not(new ColorlessPredicate()));
     }
 
     public EmrakulTheAeonsTorn(UUID ownerId) {

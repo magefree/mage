@@ -32,13 +32,15 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.ObjectColor;
 import mage.abilities.effects.common.CantCounterControlledEffect;
 import mage.abilities.effects.common.CantTargetControlledEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterSpell;
 import mage.filter.FilterStackObject;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -51,9 +53,9 @@ public class AutumnsVeil extends CardImpl<AutumnsVeil> {
     private static final FilterStackObject filterSource = new FilterStackObject("blue or black spells");
 
     static {
-        filterSource.getColor().setBlue(true);
-        filterSource.getColor().setBlack(true);
-        filterSource.setScopeColor(ComparisonScope.Any);
+        filterSource.add(Predicates.or(
+                new ColorPredicate(ObjectColor.BLUE),
+                new ColorPredicate(ObjectColor.BLACK)));
     }
 
     public AutumnsVeil(UUID ownerId) {

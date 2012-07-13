@@ -33,6 +33,7 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastTriggeredAbility;
@@ -42,6 +43,7 @@ import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -57,14 +59,10 @@ public class DeathbringerLiege extends CardImpl<DeathbringerLiege> {
     private final static FilterSpell filterBlackSpellCard = new FilterSpell("a black spell");
 
     static {
-        filterWhite.setUseColor(true);
-        filterWhite.getColor().setWhite(true);
-        filterBlack.setUseColor(true);
-        filterBlack.getColor().setBlack(true);
-        filterWhiteSpellCard.setUseColor(true);
-        filterWhiteSpellCard.getColor().setWhite(true);
-        filterBlackSpellCard.setUseColor(true);
-        filterBlackSpellCard.getColor().setBlack(true);
+        filterWhite.add(new ColorPredicate(ObjectColor.WHITE));
+        filterBlack.add(new ColorPredicate(ObjectColor.BLACK));
+        filterWhiteSpellCard.add(new ColorPredicate(ObjectColor.WHITE));
+        filterBlackSpellCard.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
     public DeathbringerLiege (UUID ownerId) {

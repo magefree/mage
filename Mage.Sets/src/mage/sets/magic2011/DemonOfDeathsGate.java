@@ -31,6 +31,7 @@ package mage.sets.magic2011;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.costs.AlternativeCostImpl;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -38,6 +39,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
@@ -76,8 +78,7 @@ class DemonOfDeathsGateAlternativeCost extends AlternativeCostImpl<DemonOfDeaths
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("black creature");
 
     static {
-        filter.getColor().setBlack(true);
-        filter.setUseColor(true);
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
     public DemonOfDeathsGateAlternativeCost() {

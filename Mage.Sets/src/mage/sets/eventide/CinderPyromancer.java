@@ -33,6 +33,7 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SpellCastTriggeredAbility;
@@ -41,6 +42,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.TargetPlayer;
 
 /**
@@ -51,8 +53,7 @@ public class CinderPyromancer extends CardImpl<CinderPyromancer> {
     private static final FilterSpell filter = new FilterSpell("a red spell");
 
     static {
-        filter.getColor().setRed(true);
-        filter.setUseColor(true);
+        filter.add(new ColorPredicate(ObjectColor.RED));
     }
 
     public CinderPyromancer (UUID ownerId) {

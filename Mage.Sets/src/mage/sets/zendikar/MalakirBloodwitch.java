@@ -33,6 +33,7 @@ import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -41,6 +42,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -54,8 +56,7 @@ public class MalakirBloodwitch extends CardImpl<MalakirBloodwitch> {
     private static final FilterCard filter = new FilterCard("white");
 
     static {
-        filter.setUseColor(true);
-        filter.getColor().setWhite(true);
+        filter.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
     public MalakirBloodwitch(UUID ownerId) {

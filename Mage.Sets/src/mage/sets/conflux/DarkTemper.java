@@ -30,10 +30,12 @@ package mage.sets.conflux;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -91,8 +93,7 @@ class DarkTemperEffect extends OneShotEffect<DarkTemperEffect> {
         }
 
         FilterPermanent filter = new FilterPermanent("black permanent");
-        filter.getColor().setBlack(true);
-        filter.setUseColor(true);
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
 
         if (game.getBattlefield().countAll(filter, source.getControllerId(), game) == 0) {
             permanent.damage(2, source.getSourceId(), game, true, false);

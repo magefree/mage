@@ -40,6 +40,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -50,8 +51,7 @@ public class HoofSkulkin extends CardImpl<HoofSkulkin> {
     private final static FilterCreaturePermanent filterGreenCreature = new FilterCreaturePermanent("green creature");
 
     static {
-        filterGreenCreature.setUseColor(true);
-        filterGreenCreature.setColor(ObjectColor.GREEN);
+        filterGreenCreature.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
     public HoofSkulkin(UUID ownerId) {

@@ -40,6 +40,7 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  * @author Loki
@@ -50,10 +51,8 @@ public class VoraciousHatchling extends CardImpl<VoraciousHatchling> {
     private final static FilterSpell filterBlackSpell = new FilterSpell("a black spell");
 
     static {
-        filterWhiteSpell.setUseColor(true);
-        filterWhiteSpell.setColor(ObjectColor.WHITE);
-        filterBlackSpell.setUseColor(true);
-        filterBlackSpell.setColor(ObjectColor.BLACK);
+        filterWhiteSpell.add(new ColorPredicate(ObjectColor.WHITE));
+        filterBlackSpell.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
     public VoraciousHatchling(UUID ownerId) {

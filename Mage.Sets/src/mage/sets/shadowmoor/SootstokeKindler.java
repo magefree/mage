@@ -33,13 +33,15 @@ import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -51,10 +53,9 @@ public class SootstokeKindler extends CardImpl<SootstokeKindler> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("black or red creature");
 
     static {
-        filter.getColor().setBlack(true);
-        filter.getColor().setRed(true);
-        filter.setUseColor(true);
-        filter.setScopeColor(ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new ColorPredicate(ObjectColor.BLACK),
+                new ColorPredicate(ObjectColor.RED)));
     }
 
     public SootstokeKindler(UUID ownerId) {

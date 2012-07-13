@@ -42,6 +42,7 @@ import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -54,8 +55,7 @@ public class MerrowLevitator extends CardImpl<MerrowLevitator> {
     private final static FilterSpell filterBlueSpell = new FilterSpell("a blue spell");
 
     static {
-        filterBlueSpell.setUseColor(true);
-        filterBlueSpell.setColor(ObjectColor.BLUE);
+        filterBlueSpell.add(new ColorPredicate(ObjectColor.BLUE));
     }
 
     public MerrowLevitator(UUID ownerId) {

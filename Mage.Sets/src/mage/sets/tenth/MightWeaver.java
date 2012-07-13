@@ -33,14 +33,16 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -52,10 +54,9 @@ public class MightWeaver extends CardImpl<MightWeaver> {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("red or white creature");
 
     static {
-        filter.setUseColor(true);
-        filter.getColor().setRed(true);
-        filter.getColor().setWhite(true);
-        filter.setScopeColor(Filter.ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new ColorPredicate(ObjectColor.RED),
+                new ColorPredicate(ObjectColor.WHITE)));
     }
 
     public MightWeaver(UUID ownerId) {

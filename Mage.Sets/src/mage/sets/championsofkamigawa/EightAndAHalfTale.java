@@ -43,6 +43,7 @@ import mage.abilities.effects.common.continious.SetCardColorTargetEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetSpellOrPermanent;
 
@@ -55,8 +56,7 @@ public class EightAndAHalfTale extends CardImpl<EightAndAHalfTale> {
     private final static FilterCard filter = new FilterCard("white");
 
     static {
-        filter.setUseColor(true);
-        filter.getColor().setWhite(true);
+        filter.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
     public EightAndAHalfTale(UUID ownerId) {

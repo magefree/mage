@@ -39,11 +39,11 @@ import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColorOrArtifact;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledPermanent;
@@ -103,9 +103,7 @@ class ApostlesBlessingEffect extends GainAbilityTargetEffect {
         if (choice.isArtifactSelected()) {
             protectionFilter.add(new CardTypePredicate(Constants.CardType.ARTIFACT));
         } else {
-            protectionFilter.setColor(choice.getColor());
-            protectionFilter.setUseColor(true);
-            protectionFilter.setScopeColor(ComparisonScope.Any);
+            protectionFilter.add(new ColorPredicate(choice.getColor()));
         }
 
         protectionFilter.setMessage(choice.getChoice());

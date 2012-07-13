@@ -33,6 +33,7 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -41,6 +42,7 @@ import mage.abilities.keyword.ChangelingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -53,8 +55,7 @@ public class ChameleonColossus extends CardImpl<ChameleonColossus> {
     private final static FilterCard filter = new FilterCard("black");
 
     static {
-        filter.setUseColor(true);
-        filter.getColor().setBlack(true);
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
     public ChameleonColossus(UUID ownerId) {

@@ -32,12 +32,14 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
@@ -94,10 +96,9 @@ class LightwielderPaladinTriggeredAbility extends TriggeredAbilityImpl<Lightwiel
         if (event.getType() == EventType.DAMAGED_PLAYER && event.getSourceId().equals(this.sourceId)
                 && ((DamagedPlayerEvent) event).isCombatDamage()) {
             FilterPermanent filter = new FilterPermanent("black or red permanent");
-            filter.getColor().setBlack(true);
-            filter.getColor().setRed(true);
-            filter.setUseColor(true);
-            filter.setScopeColor(ComparisonScope.Any);
+            filter.add(Predicates.or(
+                new ColorPredicate(ObjectColor.BLACK),
+                new ColorPredicate(ObjectColor.RED)));
             filter.getControllerId().add(event.getTargetId());
             filter.setNotController(false);
             this.getTargets().clear();

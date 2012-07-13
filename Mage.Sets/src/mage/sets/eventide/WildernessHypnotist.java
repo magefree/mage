@@ -33,12 +33,15 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -49,9 +52,9 @@ public class WildernessHypnotist extends CardImpl<WildernessHypnotist> {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("red or green creature");
 
     static {
-        filter.setUseColor(true);
-        filter.getColor().setRed(true);
-        filter.getColor().setGreen(true);
+        filter.add(Predicates.or(
+                new ColorPredicate(ObjectColor.RED),
+                new ColorPredicate(ObjectColor.GREEN)));
     }
 
     public WildernessHypnotist(UUID ownerId) {

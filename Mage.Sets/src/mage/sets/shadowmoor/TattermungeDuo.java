@@ -32,12 +32,14 @@ import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.ForestwalkAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -49,10 +51,8 @@ public class TattermungeDuo extends CardImpl<TattermungeDuo> {
     private static final FilterSpell greenFilter = new FilterSpell("a green spell");
 
     static {
-        redFilter.getColor().setRed(true);
-        redFilter.setUseColor(true);
-        greenFilter.getColor().setGreen(true);
-        greenFilter.setUseColor(true);
+        redFilter.add(new ColorPredicate(ObjectColor.RED));
+        greenFilter.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
     public TattermungeDuo(UUID ownerId) {

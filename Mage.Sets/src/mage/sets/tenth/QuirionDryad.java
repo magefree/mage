@@ -31,12 +31,14 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.filter.Filter;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -47,12 +49,11 @@ public class QuirionDryad extends CardImpl<QuirionDryad> {
     private final static FilterSpell filter = new FilterSpell("white, blue, black, or red spell");
 
     static {
-        filter.setUseColor(true);
-        filter.getColor().setWhite(true);
-        filter.getColor().setBlue(true);
-        filter.getColor().setBlack(true);
-        filter.getColor().setRed(true);
-        filter.setScopeColor(Filter.ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new ColorPredicate(ObjectColor.WHITE),
+                new ColorPredicate(ObjectColor.BLUE),
+                new ColorPredicate(ObjectColor.BLACK),
+                new ColorPredicate(ObjectColor.RED)));
     }
 
     public QuirionDryad(UUID ownerId) {

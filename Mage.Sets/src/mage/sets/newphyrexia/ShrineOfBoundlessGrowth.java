@@ -34,6 +34,7 @@ import mage.Constants.Rarity;
 import mage.Constants.TargetController;
 import mage.Constants.Zone;
 import mage.Mana;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -46,6 +47,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -56,8 +58,7 @@ public class ShrineOfBoundlessGrowth extends CardImpl<ShrineOfBoundlessGrowth> {
     private static final FilterSpell filter = new FilterSpell("a green spell");
 
     static {
-        filter.getColor().setGreen(true);
-        filter.setUseColor(true);
+        filter.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
     public ShrineOfBoundlessGrowth (UUID ownerId) {

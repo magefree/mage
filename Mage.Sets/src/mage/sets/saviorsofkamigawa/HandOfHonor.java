@@ -32,10 +32,12 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.keyword.BushidoAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  * @author anonymous
@@ -45,8 +47,7 @@ public class HandOfHonor extends CardImpl<HandOfHonor> {
     private final static FilterCard filter = new FilterCard("black");
 
     static {
-        filter.setUseColor(true);
-        filter.getColor().setBlack(true);
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
     public HandOfHonor(UUID ownerId) {

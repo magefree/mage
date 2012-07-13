@@ -31,10 +31,12 @@ package mage.sets.tenth;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.ObjectColor;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.TargetSpell;
 
 /**
@@ -46,10 +48,9 @@ public class Flashfreeze extends CardImpl<Flashfreeze> {
     private static final FilterSpell filter = new FilterSpell("red or green spell");
 
     static {
-        filter.getColor().setRed(true);
-        filter.getColor().setGreen(true);
-        filter.setScopeColor(ComparisonScope.Any);
-        filter.setUseColor(true);
+        filter.add(Predicates.or(
+                new ColorPredicate(ObjectColor.RED),
+                new ColorPredicate(ObjectColor.GREEN)));
     }
 
     public Flashfreeze(UUID ownerId) {

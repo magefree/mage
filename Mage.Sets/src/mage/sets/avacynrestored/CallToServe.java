@@ -32,6 +32,7 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
@@ -42,6 +43,8 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -50,12 +53,10 @@ import mage.target.common.TargetCreaturePermanent;
  * @author Loki
  */
 public class CallToServe extends CardImpl<CallToServe> {
-    private static FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
 
     static {
-        filter.setUseColor(true);
-        filter.setNotColor(true);
-        filter.getColor().setBlack(true);
+        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
     }
 
     public CallToServe(UUID ownerId) {

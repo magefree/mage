@@ -33,6 +33,7 @@ import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -41,9 +42,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -92,9 +93,7 @@ class OranRiefTheVastwoodEffect extends OneShotEffect<OranRiefTheVastwoodEffect>
     public boolean apply(Game game, Ability source) {
         FilterPermanent filter = new FilterPermanent();
         filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.getColor().setGreen(true);
-        filter.setScopeColor(Filter.ComparisonScope.Any);
-        filter.setUseColor(true);
+        filter.add(new ColorPredicate(ObjectColor.GREEN));
         for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
             if (permanent.getTurnsOnBattlefield() == 0) {
                 permanent.addCounters(CounterType.P1P1.createInstance(), game);

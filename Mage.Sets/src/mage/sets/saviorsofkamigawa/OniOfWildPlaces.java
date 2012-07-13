@@ -33,12 +33,14 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -50,8 +52,7 @@ public class OniOfWildPlaces extends CardImpl<OniOfWildPlaces> {
     private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("red creature you control");
 
     static {
-        filter.setUseColor(true);
-        filter.getColor().setRed(true);
+        filter.add(new ColorPredicate(ObjectColor.RED));
     }
 
     public OniOfWildPlaces(UUID ownerId) {

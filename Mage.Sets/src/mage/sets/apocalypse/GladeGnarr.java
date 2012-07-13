@@ -36,6 +36,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -73,8 +74,7 @@ class GladeGnarrTriggeredAbility extends TriggeredAbilityImpl<GladeGnarrTriggere
     private static final FilterCard filter = new FilterCard("a black spell");
 
     static {
-        filter.setUseColor(true);
-        filter.setColor(ObjectColor.BLACK);
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
     public GladeGnarrTriggeredAbility() {

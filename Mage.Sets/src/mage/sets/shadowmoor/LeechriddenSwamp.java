@@ -33,6 +33,7 @@ import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Mana;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -44,6 +45,7 @@ import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.players.Players;
@@ -86,8 +88,7 @@ class ControlTwoOrMoreBlackPermanentsCost extends CostImpl<ControlTwoOrMoreBlack
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
 
     static {
-        filter.getColor().setBlack(true);
-        filter.setUseColor(true);
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
     public ControlTwoOrMoreBlackPermanentsCost() {

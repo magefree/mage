@@ -33,6 +33,7 @@ import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.ControlsPermanentCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
@@ -40,6 +41,7 @@ import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -50,8 +52,7 @@ public class ToxicIguanar extends CardImpl<ToxicIguanar> {
     private static final FilterPermanent filter = new FilterPermanent("green");
 
     static {
-        filter.setUseColor(true);
-        filter.getColor().setGreen(true);
+        filter.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
     public ToxicIguanar(UUID ownerId) {

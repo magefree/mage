@@ -42,6 +42,7 @@ import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.TargetPlayer;
 
 /**
@@ -55,14 +56,10 @@ public class BalefireLiege extends CardImpl<BalefireLiege> {
     private final static FilterSpell filterWhiteSpell = new FilterSpell("a white spell");
 
     static {
-        filterRedCreature.setUseColor(true);
-        filterRedCreature.setColor(ObjectColor.RED);
-        filterWhiteCreature.setUseColor(true);
-        filterWhiteCreature.setColor(ObjectColor.WHITE);
-        filterRedSpell.setUseColor(true);
-        filterRedSpell.setColor(ObjectColor.RED);
-        filterWhiteSpell.setUseColor(true);
-        filterWhiteSpell.setColor(ObjectColor.WHITE);
+        filterRedCreature.add(new ColorPredicate(ObjectColor.RED));
+        filterWhiteCreature.add(new ColorPredicate(ObjectColor.WHITE));
+        filterRedSpell.add(new ColorPredicate(ObjectColor.RED));
+        filterWhiteSpell.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
     public BalefireLiege(UUID ownerId) {

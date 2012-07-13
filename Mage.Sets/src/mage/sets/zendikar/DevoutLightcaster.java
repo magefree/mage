@@ -31,13 +31,14 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -50,11 +51,8 @@ public class DevoutLightcaster extends CardImpl<DevoutLightcaster> {
     private static final FilterPermanent filterTarget = new FilterPermanent("Black");
 
     static {
-        filterProtection.setUseColor(true);
-        filterProtection.getColor().setBlack(true);
-        filterProtection.setScopeColor(ComparisonScope.Any);
-        filterTarget.setUseColor(true);
-        filterTarget.getColor().setBlack(true);
+        filterProtection.add(new ColorPredicate(ObjectColor.BLACK));
+        filterTarget.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
     public DevoutLightcaster(UUID ownerId) {

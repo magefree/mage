@@ -30,10 +30,12 @@ package mage.sets.shadowmoor;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.ObjectColor;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.TargetSpell;
 
 /**
@@ -46,8 +48,7 @@ public class GutturalResponse extends CardImpl<GutturalResponse> {
 
     static {
         filter.add(new CardTypePredicate(CardType.INSTANT));
-        filter.getColor().setBlue(true);
-        filter.setUseColor(true);
+        filter.add(new ColorPredicate(ObjectColor.BLUE));
     }
 
     public GutturalResponse(UUID ownerId) {

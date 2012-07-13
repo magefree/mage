@@ -33,14 +33,16 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -52,10 +54,9 @@ public class SkyWeaver extends CardImpl<SkyWeaver> {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("white or black creature");
 
     static {
-        filter.setUseColor(true);
-        filter.getColor().setWhite(true);
-        filter.getColor().setBlack(true);
-        filter.setScopeColor(Filter.ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new ColorPredicate(ObjectColor.WHITE),
+                new ColorPredicate(ObjectColor.BLACK)));
     }
 
     public SkyWeaver(UUID ownerId) {

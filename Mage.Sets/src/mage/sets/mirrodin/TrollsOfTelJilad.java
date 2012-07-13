@@ -33,12 +33,14 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -50,8 +52,7 @@ public class TrollsOfTelJilad extends CardImpl<TrollsOfTelJilad> {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("green creature");
 
     static {
-        filter.setUseColor(true);
-        filter.getColor().setGreen(true);
+        filter.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
     public TrollsOfTelJilad(UUID ownerId) {

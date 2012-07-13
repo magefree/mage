@@ -33,6 +33,7 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -41,6 +42,7 @@ import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -52,8 +54,7 @@ public class SkullCollector extends CardImpl<SkullCollector> {
     private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("black creature you control");
 
     static {
-        filter.setUseColor(true);
-        filter.getColor().setBlack(true);
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
     public SkullCollector(UUID ownerId) {

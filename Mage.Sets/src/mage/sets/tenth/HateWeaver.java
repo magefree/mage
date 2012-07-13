@@ -33,13 +33,15 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -51,10 +53,9 @@ public class HateWeaver extends CardImpl<HateWeaver> {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("blue or red creature");
 
     static {
-        filter.setUseColor(true);
-        filter.getColor().setBlue(true);
-        filter.getColor().setRed(true);
-        filter.setScopeColor(Filter.ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new ColorPredicate(ObjectColor.BLUE),
+                new ColorPredicate(ObjectColor.RED)));
     }
 
     public HateWeaver(UUID ownerId) {

@@ -32,6 +32,7 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -45,18 +46,18 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
- * @author <author>
+ * @author BetaSteward
  */
 public class ShrineOfBurningRage extends CardImpl<ShrineOfBurningRage> {
     private final static FilterSpell filter = new FilterSpell("a red spell");
 
     static {
-        filter.getColor().setRed(true);
-        filter.setUseColor(true);
+        filter.add(new ColorPredicate(ObjectColor.RED));
     }
 
     public ShrineOfBurningRage (UUID ownerId) {

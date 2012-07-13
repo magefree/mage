@@ -40,6 +40,7 @@ import mage.abilities.keyword.WitherAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -51,10 +52,8 @@ public class NoxiousHatchling extends CardImpl<NoxiousHatchling> {
     private final static FilterSpell filterGreenSpell = new FilterSpell("a green spell");
 
     static {
-        filterBlackSpell.setUseColor(true);
-        filterBlackSpell.setColor(ObjectColor.BLACK);
-        filterGreenSpell.setUseColor(true);
-        filterGreenSpell.setColor(ObjectColor.GREEN);
+        filterBlackSpell.add(new ColorPredicate(ObjectColor.BLACK));
+        filterGreenSpell.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
     public NoxiousHatchling(UUID ownerId) {

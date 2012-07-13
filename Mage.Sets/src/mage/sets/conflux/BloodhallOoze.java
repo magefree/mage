@@ -32,12 +32,14 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -56,7 +58,7 @@ public class BloodhallOoze extends CardImpl<BloodhallOoze> {
         this.color.setRed(true);
         this.subtype.add("Ooze");
         this.power = new MageInt(1);
-    this.toughness = new MageInt(1);
+        this.toughness = new MageInt(1);
         this.addAbility(new BloodhallOozeTriggeredAbility1());
         this.addAbility(new BloodhallOozeTriggeredAbility2());
     }
@@ -77,8 +79,7 @@ class BloodhallOozeTriggeredAbility1 extends TriggeredAbilityImpl<BloodhallOozeT
     private final static FilterPermanent filter = new FilterPermanent();
 
     static {
-        filter.getColor().setBlack(true);
-        filter.setUseColor(true);
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
     public BloodhallOozeTriggeredAbility1() {
@@ -118,8 +119,7 @@ class BloodhallOozeTriggeredAbility2 extends TriggeredAbilityImpl<BloodhallOozeT
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
 
     static {
-        filter.getColor().setGreen(true);
-        filter.setUseColor(true);
+        filter.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
     public BloodhallOozeTriggeredAbility2() {

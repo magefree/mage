@@ -32,6 +32,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.TargetController;
 import mage.Constants.Zone;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -45,6 +46,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.permanent.token.MyrToken;
 
 /**
@@ -56,8 +58,7 @@ public class ShrineOfLoyalLegions extends CardImpl<ShrineOfLoyalLegions> {
     private static final FilterSpell filter = new FilterSpell("a white spell");
 
     static {
-        filter.getColor().setWhite(true);
-        filter.setUseColor(true);
+        filter.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
     public ShrineOfLoyalLegions(UUID ownerId) {

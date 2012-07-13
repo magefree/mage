@@ -31,12 +31,14 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.common.OpponentCastsSpellTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -47,10 +49,9 @@ public class MoldAdder extends CardImpl<MoldAdder> {
     private static final FilterCard filter = new FilterCard("blue or black spell");
 
     static {
-        filter.getColor().setBlue(true);
-        filter.getColor().setBlack(true);
-        filter.setUseColor(true);
-        filter.setScopeColor(ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new ColorPredicate(ObjectColor.BLUE),
+                new ColorPredicate(ObjectColor.BLACK)));
     }
 
     public MoldAdder(UUID ownerId) {

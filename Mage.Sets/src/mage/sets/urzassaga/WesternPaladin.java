@@ -34,14 +34,15 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -53,9 +54,7 @@ public class WesternPaladin extends CardImpl<WesternPaladin> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("white creature");
 
     static {
-        filter.getColor().setWhite(true);
-        filter.setUseColor(true);
-        filter.setScopeColor(Filter.ComparisonScope.Any);
+        filter.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
     public WesternPaladin(UUID ownerId) {

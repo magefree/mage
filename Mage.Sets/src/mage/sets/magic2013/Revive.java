@@ -30,9 +30,11 @@ package mage.sets.magic2013;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.ObjectColor;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -44,8 +46,7 @@ public class Revive extends CardImpl<Revive> {
     private static final FilterCard filter = new FilterCard("green card from your graveyard");
 
     static {
-        filter.getColor().setGreen(true);
-        filter.setUseColor(true);
+        filter.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
     public Revive(UUID ownerId) {

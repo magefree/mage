@@ -32,12 +32,14 @@ import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -49,10 +51,8 @@ public class ThistledownDuo extends CardImpl<ThistledownDuo> {
     private static final FilterSpell blueFilter = new FilterSpell("a blue spell");
 
     static {
-        whiteFilter.getColor().setWhite(true);
-        whiteFilter.setUseColor(true);
-        blueFilter.getColor().setBlue(true);
-        blueFilter.setUseColor(true);
+        whiteFilter.add(new ColorPredicate(ObjectColor.WHITE));
+        blueFilter.add(new ColorPredicate(ObjectColor.BLUE));
     }
 
     public ThistledownDuo(UUID ownerId) {
