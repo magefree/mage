@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.ObjectColor;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -42,6 +43,7 @@ import mage.abilities.effects.common.counter.AddPlusOneCountersAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -52,8 +54,7 @@ public class RingOfXathrid extends CardImpl<RingOfXathrid> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     
     static {
-        filter.getColor().setBlack(true);
-        filter.setUseColor(true);
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
     public RingOfXathrid(UUID ownerId) {

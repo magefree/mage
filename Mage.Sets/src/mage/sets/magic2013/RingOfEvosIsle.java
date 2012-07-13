@@ -44,6 +44,7 @@ import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -54,8 +55,7 @@ public class RingOfEvosIsle extends CardImpl<RingOfEvosIsle> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     
     static {
-        filter.getColor().setBlue(true);
-        filter.setUseColor(true);
+        filter.add(new ColorPredicate(ObjectColor.BLUE));
     }
     
     

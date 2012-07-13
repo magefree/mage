@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.ObjectColor;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -43,6 +44,7 @@ import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -53,8 +55,7 @@ public class RingOfThune extends CardImpl<RingOfThune> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     
     static {
-        filter.getColor().setWhite(true);
-        filter.setUseColor(true);
+        filter.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
     public RingOfThune(UUID ownerId) {

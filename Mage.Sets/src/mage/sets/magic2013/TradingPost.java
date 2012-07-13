@@ -47,6 +47,7 @@ import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInHand;
@@ -62,8 +63,8 @@ public class TradingPost extends CardImpl<TradingPost> {
     final static FilterControlledPermanent filter2 = new FilterControlledPermanent("artifact");
     
     static {
-        filter.getCardType().add(CardType.CREATURE);
-        filter2.getCardType().add(CardType.ARTIFACT);
+        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter2.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public TradingPost(UUID ownerId) {

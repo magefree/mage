@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
@@ -38,9 +39,9 @@ import mage.abilities.keyword.EchoAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -52,9 +53,7 @@ public class KarmicGuide extends CardImpl<KarmicGuide> {
     private static final FilterCard filter = new FilterCard("Black");
 
     static {
-        filter.setUseColor(true);
-        filter.getColor().setBlack(true);
-        filter.setScopeColor(ComparisonScope.Any);
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
     public KarmicGuide(UUID ownerId) {
