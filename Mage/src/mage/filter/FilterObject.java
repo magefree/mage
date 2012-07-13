@@ -32,15 +32,9 @@ import mage.MageObject;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
  * @author North
  */
 public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> extends FilterImpl<E, T> {
-
-    /**
-     * Indicates that filter shouldn't match the source.
-     */
-    protected boolean another;
 
     @Override
     public FilterObject<E, T> copy() {
@@ -53,14 +47,5 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
 
     public FilterObject(FilterObject filter) {
         super(filter);
-        this.another = filter.another;
-    }
-
-    public boolean isAnother() {
-        return another;
-    }
-
-    public void setAnother(boolean another) {
-        this.another = another;
     }
 }
