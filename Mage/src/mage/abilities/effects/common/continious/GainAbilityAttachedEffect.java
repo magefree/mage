@@ -46,6 +46,14 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl<GainAbilityA
 
     protected Ability ability;
     protected AttachmentType attachmentType;
+    
+    public GainAbilityAttachedEffect(Ability ability, AttachmentType attachmentType, Duration duration) {
+        super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+        this.ability = ability;
+        this.attachmentType = attachmentType;
+        this.duration = duration;
+        setText();
+    }
 
     public GainAbilityAttachedEffect(Ability ability, AttachmentType attachmentType) {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
