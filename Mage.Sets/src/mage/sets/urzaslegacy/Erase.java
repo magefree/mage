@@ -33,6 +33,7 @@ import mage.Constants.Rarity;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -43,7 +44,7 @@ public class Erase extends CardImpl<Erase> {
     private static final FilterPermanent filter = new FilterPermanent("enchantment");
 
     static {
-        filter.getCardType().add(CardType.ENCHANTMENT);
+        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
 
     public Erase(UUID ownerId) {

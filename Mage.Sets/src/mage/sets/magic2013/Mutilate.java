@@ -36,6 +36,7 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -46,7 +47,7 @@ public class Mutilate extends CardImpl<Mutilate> {
     private static final FilterLandPermanent filter = new FilterLandPermanent("Swamp you control");
 
     static {
-        filter.getSubtype().add("Swamp");
+        filter.add(new SubtypePredicate("Swamp"));
         filter.setTargetController(Constants.TargetController.YOU);
     }
 

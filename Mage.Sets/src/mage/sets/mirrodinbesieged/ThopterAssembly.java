@@ -36,8 +36,8 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.Token;
@@ -91,8 +91,7 @@ class ThopterAssemblyTriggeredAbility extends TriggeredAbilityImpl<ThopterAssemb
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE && event.getPlayerId().equals(this.controllerId)) {
             FilterPermanent filter = new FilterPermanent();
-            filter.getSubtype().add("Thopter");
-            filter.setScopeSubtype(Filter.ComparisonScope.Any);
+            filter.add(new SubtypePredicate("Thopter"));
             filter.setAnother(true);
             if (!game.getBattlefield().contains(filter, controllerId, 1, game)) {
                 return true;

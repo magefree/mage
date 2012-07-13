@@ -39,8 +39,9 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -122,12 +123,12 @@ class PyromancerAscensionQuestTriggeredAbility extends TriggeredAbilityImpl<Pyro
 
 class PyromancerAscensionCopyTriggeredAbility extends TriggeredAbilityImpl<PyromancerAscensionCopyTriggeredAbility> {
 
-    private static FilterSpell filter = new FilterSpell();
+    private static final FilterSpell filter = new FilterSpell();
 
     static {
-        filter.getCardType().add(CardType.INSTANT);
-        filter.getCardType().add(CardType.SORCERY);
-        filter.setScopeCardType(ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.INSTANT),
+                new CardTypePredicate(CardType.SORCERY)));
     }
 
     PyromancerAscensionCopyTriggeredAbility() {

@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.TargetController;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -39,6 +38,7 @@ import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.abilities.effects.common.SkipNextPlayerUntapStepEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -50,8 +50,7 @@ public class ShisatoWhisperingHunter extends CardImpl<ShisatoWhisperingHunter> {
     private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Snake");
 
     static {
-        filter.getSubtype().add("Snake");
-        filter.setTargetController(TargetController.YOU);
+        filter.add(new SubtypePredicate("Snake"));
     }
 
     public ShisatoWhisperingHunter(UUID ownerId) {

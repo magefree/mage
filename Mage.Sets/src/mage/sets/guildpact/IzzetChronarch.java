@@ -35,8 +35,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -48,9 +49,9 @@ public class IzzetChronarch extends CardImpl<IzzetChronarch> {
     private final static FilterCard filter = new FilterCard("instant or sorcery card from your graveyard");
 
     static {
-        filter.getCardType().add(CardType.INSTANT);
-        filter.getCardType().add(CardType.SORCERY);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.INSTANT),
+                new CardTypePredicate(CardType.SORCERY)));
     }
 
     public IzzetChronarch(UUID ownerId) {

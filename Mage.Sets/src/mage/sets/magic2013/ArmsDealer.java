@@ -38,6 +38,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -50,7 +51,7 @@ public class ArmsDealer extends CardImpl<ArmsDealer> {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Goblin");
 
     static {
-        filter.getSubtype().add("Goblin");
+        filter.add(new SubtypePredicate("Goblin"));
     }
 
     public ArmsDealer(UUID ownerId) {

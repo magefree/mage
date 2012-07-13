@@ -32,12 +32,14 @@ import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -49,10 +51,8 @@ public class GravelgillDuo extends CardImpl<GravelgillDuo> {
     private static final FilterSpell blackFilter = new FilterSpell("a black spell");
 
     static {
-        blueFilter.getColor().setBlue(true);
-        blueFilter.setUseColor(true);
-        blackFilter.getColor().setBlack(true);
-        blackFilter.setUseColor(true);
+        blueFilter.add(new ColorPredicate(ObjectColor.BLUE));
+        blackFilter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
     public GravelgillDuo(UUID ownerId) {

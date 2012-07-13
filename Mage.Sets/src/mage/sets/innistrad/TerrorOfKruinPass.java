@@ -45,8 +45,8 @@ import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -57,8 +57,7 @@ public class TerrorOfKruinPass extends CardImpl<TerrorOfKruinPass> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Werewolf");
 
     static {
-        filter.getSubtype().add("Werewolf");
-        filter.setScopeSubtype(ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Werewolf"));
     }
 
     public TerrorOfKruinPass(UUID ownerId) {

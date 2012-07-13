@@ -42,6 +42,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 
 /**
@@ -54,8 +55,7 @@ public class KhalniHydra extends CardImpl<KhalniHydra> {
 
     static {
         filter = new FilterControlledCreaturePermanent();
-        filter.setUseColor(true);
-        filter.setColor(ObjectColor.GREEN);
+        filter.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
     public KhalniHydra(UUID ownerId) {

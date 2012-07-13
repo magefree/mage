@@ -37,8 +37,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.BushidoAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -74,11 +74,10 @@ public class TakenoSamuraiGeneral extends CardImpl<TakenoSamuraiGeneral> {
 }
 
 class TakenoSamuraiGeneralEffect extends ContinuousEffectImpl<TakenoSamuraiGeneralEffect> {
-    private static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
     static {
-        filter.getSubtype().add("Samurai");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Samurai"));
     }
 
     public TakenoSamuraiGeneralEffect() {

@@ -38,6 +38,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.continious.BecomesCreatureTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetLandPermanent;
 
@@ -50,7 +51,7 @@ public class AwakenerDruid extends CardImpl<AwakenerDruid> {
     private static final FilterLandPermanent filter = new FilterLandPermanent("Forest");
 
     static {
-        filter.getSubtype().add("Forest");
+        filter.add(new SubtypePredicate("Forest"));
     }
 
     public AwakenerDruid(UUID ownerId) {

@@ -31,11 +31,12 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.keyword.ExaltedAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -43,12 +44,10 @@ import mage.filter.FilterCard;
  */
 public class KnightOfGlory extends CardImpl<KnightOfGlory> {
     
-    private static FilterCard filter = new FilterCard("Black");
+    private static final FilterCard filter = new FilterCard("Black");
     
     static {
-        filter.setUseColor(true);
-        filter.getColor().setBlack(true);
-        filter.setScopeColor(Filter.ComparisonScope.Any);
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
     public KnightOfGlory(UUID ownerId) {

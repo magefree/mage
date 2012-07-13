@@ -41,9 +41,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -55,10 +55,8 @@ public class LordOfTheUndead extends CardImpl<LordOfTheUndead> {
     private final static FilterCard filterCard = new FilterCard("Zombie card from your graveyard");
 
     static {
-        filter.getSubtype().add("Zombie");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
-        filterCard.getSubtype().add("Zombie");
-        filterCard.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Zombie"));
+        filterCard.add(new SubtypePredicate("Zombie"));
     }
 
     public LordOfTheUndead(UUID ownerId) {

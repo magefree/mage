@@ -31,6 +31,7 @@ import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.PostResolveEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
@@ -38,6 +39,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -90,8 +92,7 @@ class ViewFromAboveEffect extends PostResolveEffect<ViewFromAboveEffect> {
     @Override
     public void postResolve(Card card, Ability source, UUID controllerId, Game game) {
         FilterPermanent filter = new FilterPermanent("white permanent");
-        filter.getColor().setWhite(true);
-        filter.setUseColor(true);
+        filter.add(new ColorPredicate(ObjectColor.WHITE));
 
         if (game.getBattlefield().countAll(filter, source.getControllerId(), game) > 0) {
             card.moveToZone(Zone.HAND, source.getId(), game, false);

@@ -32,12 +32,14 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
+import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CantCounterSourceEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -49,10 +51,9 @@ public class Combust extends CardImpl<Combust> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("white or blue creature");
 
     static {
-        filter.getColor().setWhite(true);
-        filter.getColor().setBlue(true);
-        filter.setUseColor(true);
-        filter.setScopeColor(ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new ColorPredicate(ObjectColor.WHITE),
+                new ColorPredicate(ObjectColor.BLUE)));
     }
 
     public Combust(UUID ownerId) {

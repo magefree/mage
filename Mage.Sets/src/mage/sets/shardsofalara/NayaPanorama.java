@@ -40,8 +40,11 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -53,12 +56,12 @@ public class NayaPanorama extends CardImpl<NayaPanorama> {
     private static final FilterCard filter = new FilterCard("a basic Mountain, Forest, or Plains card");
 
     static {
-        filter.getCardType().add(CardType.LAND);
-        filter.getSupertype().add("Basic");
-        filter.getSubtype().add("Mountain");
-        filter.getSubtype().add("Forest");
-        filter.getSubtype().add("Plains");
-        filter.setScopeSubtype(ComparisonScope.Any);
+        filter.add(new CardTypePredicate(CardType.LAND));
+        filter.add(new SupertypePredicate("Basic"));
+        filter.add(Predicates.or(
+                new SubtypePredicate("Mountain"),
+                new SubtypePredicate("Forest"),
+                new SubtypePredicate("Plains")));
     }
 
     public NayaPanorama(UUID ownerId) {

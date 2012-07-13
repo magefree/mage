@@ -39,8 +39,9 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -48,12 +49,12 @@ import mage.target.TargetPermanent;
  * @author Loki
  */
 public class SylvokReplica extends CardImpl<SylvokReplica> {
-    private static FilterPermanent filter = new FilterPermanent("artifact or enchantment");
+    private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.getCardType().add(CardType.ENCHANTMENT);
-        filter.setScopeCardType(ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.ARTIFACT),
+                new CardTypePredicate(CardType.ENCHANTMENT)));
     }
 
     public SylvokReplica (UUID ownerId) {

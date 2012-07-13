@@ -50,6 +50,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -155,7 +156,7 @@ class GigantiformEffect extends OneShotEffect<GigantiformEffect> {
     private static final FilterCard filter = new FilterCard("card named Gigantiform");
 
     static {
-        filter.getName().add("Gigantiform");
+        filter.add(new NamePredicate("Gigantiform"));
     }
 
     public GigantiformEffect() {

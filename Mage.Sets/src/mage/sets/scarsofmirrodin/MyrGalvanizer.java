@@ -44,8 +44,8 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -54,11 +54,10 @@ import mage.game.permanent.Permanent;
  * @author Loki
  */
 public class MyrGalvanizer extends CardImpl<MyrGalvanizer> {
-    static FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.getSubtype().add("Myr");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Myr"));
     }
 
     public MyrGalvanizer (UUID ownerId) {

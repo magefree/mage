@@ -33,12 +33,13 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CantCounterSourceEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -49,12 +50,8 @@ public class GreatSableStag extends CardImpl<GreatSableStag> {
     private static final FilterCard filter2 = new FilterCard("Black");
 
     static {
-        filter1.setUseColor(true);
-        filter1.getColor().setBlue(true);
-        filter1.setScopeColor(ComparisonScope.Any);
-        filter2.setUseColor(true);
-        filter2.getColor().setBlack(true);
-        filter2.setScopeColor(ComparisonScope.Any);
+        filter1.add(new ColorPredicate(ObjectColor.BLUE));
+        filter2.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
     public GreatSableStag(UUID ownerId) {

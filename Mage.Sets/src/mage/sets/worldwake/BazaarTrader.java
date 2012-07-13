@@ -41,8 +41,9 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -58,10 +59,10 @@ public class BazaarTrader extends CardImpl<BazaarTrader> {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact, creature, or land you control");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.getCardType().add(CardType.CREATURE);
-        filter.getCardType().add(CardType.LAND);
-        filter.setScopeCardType(ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.ARTIFACT),
+                new CardTypePredicate(CardType.CREATURE),
+                new CardTypePredicate(CardType.LAND)));
     }
 
     public BazaarTrader(UUID ownerId) {

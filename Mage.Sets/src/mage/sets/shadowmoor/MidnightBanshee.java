@@ -32,12 +32,15 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.abilities.keyword.WitherAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -48,9 +51,7 @@ public class MidnightBanshee extends CardImpl<MidnightBanshee> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
 
     static {
-        filter.getColor().setBlack(true);
-        filter.setUseColor(true);
-        filter.setNotColor(true);
+        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
     }
 
     public MidnightBanshee(UUID ownerId) {

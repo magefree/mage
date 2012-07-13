@@ -40,6 +40,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterAttackingCreature;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -51,7 +52,7 @@ public class FemerefArchers extends CardImpl<FemerefArchers> {
     private final static FilterAttackingCreature filter = new FilterAttackingCreature("attacking creature with flying");
 
     static {
-        filter.getAbilities().add(FlyingAbility.getInstance());
+        filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
     public FemerefArchers(UUID ownerId) {

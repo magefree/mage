@@ -38,8 +38,8 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -50,8 +50,7 @@ public class RustedSlasher extends CardImpl<RustedSlasher> {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public RustedSlasher (UUID ownerId) {

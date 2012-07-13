@@ -43,6 +43,7 @@ import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -86,8 +87,8 @@ class UnbreathingHordeEffect1 extends OneShotEffect<UnbreathingHordeEffect1> {
     private static final FilterCreatureCard filter2 = new FilterCreatureCard();
 
     static {
-        filter1.getSubtype().add("Zombie");
-        filter2.getSubtype().add("Zombie");
+        filter1.add(new SubtypePredicate("Zombie"));
+        filter2.add(new SubtypePredicate("Zombie"));
     }
 
     public UnbreathingHordeEffect1() {

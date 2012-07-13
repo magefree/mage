@@ -33,6 +33,7 @@ import mage.Constants.Rarity;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetSpell;
 
 /**
@@ -44,7 +45,7 @@ public class RemoveSoul extends CardImpl<RemoveSoul> {
     private static final FilterSpell filter = new FilterSpell("creature spell");
 
     static {
-        filter.getCardType().add(CardType.CREATURE);
+        filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
     public RemoveSoul(UUID ownerId) {

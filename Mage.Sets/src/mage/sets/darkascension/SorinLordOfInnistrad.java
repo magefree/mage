@@ -46,8 +46,9 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.permanent.Permanent;
@@ -66,9 +67,9 @@ public class SorinLordOfInnistrad extends CardImpl<SorinLordOfInnistrad> {
     private static final FilterPermanent filter = new FilterPermanent("creature or planeswalker");
 
     static {
-        filter.getCardType().add(CardType.CREATURE);
-        filter.getCardType().add(CardType.PLANESWALKER);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.CREATURE),
+                new CardTypePredicate(CardType.PLANESWALKER)));
     }
 
     public SorinLordOfInnistrad(UUID ownerId) {

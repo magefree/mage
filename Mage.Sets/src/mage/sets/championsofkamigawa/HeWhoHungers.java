@@ -45,8 +45,8 @@ import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetOpponentE
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.SoulshiftAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetOpponent;
 
@@ -60,8 +60,7 @@ public class HeWhoHungers extends CardImpl<HeWhoHungers> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("a Spirit");
 
     static {
-        filter.getSubtype().add("Spirit");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Spirit"));
     }
 
     public HeWhoHungers(UUID ownerId) {

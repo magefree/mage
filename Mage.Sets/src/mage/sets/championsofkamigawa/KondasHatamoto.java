@@ -41,8 +41,9 @@ import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.BushidoAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.mageobject.SupertypePredicate;
 
 /**
  *
@@ -55,10 +56,8 @@ public class KondasHatamoto extends CardImpl<KondasHatamoto>{
     private static final String rule2 = "As long as you control a legendary Samurai, {this} has vigilance";
 
     static {
-        filter.getSupertype().add("Legendary");
-        filter.setScopeSupertype(Filter.ComparisonScope.Any);
-        filter.getSubtype().add("Samurai");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SupertypePredicate("Legendary"));
+        filter.add(new SubtypePredicate("Samurai"));
     }
 
     public KondasHatamoto (UUID ownerId) {

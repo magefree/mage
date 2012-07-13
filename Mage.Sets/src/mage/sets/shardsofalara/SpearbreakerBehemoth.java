@@ -40,6 +40,7 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -51,8 +52,7 @@ public class SpearbreakerBehemoth extends CardImpl<SpearbreakerBehemoth> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 5 or greater");
 
     static {
-        filter.setPower(4);
-        filter.setPowerComparison(ComparisonType.GreaterThan);
+        filter.add(new PowerPredicate(ComparisonType.GreaterThan, 4));
     }
 
     public SpearbreakerBehemoth(UUID ownerId) {

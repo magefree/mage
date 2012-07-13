@@ -45,8 +45,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -65,8 +65,7 @@ public class KumanoMasterYamabushi extends CardImpl<KumanoMasterYamabushi> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("a land");
 
     static {
-        filter.getCardType().add(CardType.LAND);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new CardTypePredicate(CardType.LAND));
     }
 
     public KumanoMasterYamabushi(UUID ownerId) {
@@ -131,11 +130,11 @@ class KumanaoMasterYamabushiEffect extends ReplacementEffectImpl<KumanaoMasterYa
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
-                        DamagedByWatcher watcher = 
-                                (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", source.getSourceId());
-                        if (watcher != null)
-                                return watcher.damagedCreatures.contains(event.getTargetId());
-                        }
+            DamagedByWatcher watcher = (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", source.getSourceId());
+            if (watcher != null) {
+                return watcher.damagedCreatures.contains(event.getTargetId());
+            }
+        }
         return false;
     }
 

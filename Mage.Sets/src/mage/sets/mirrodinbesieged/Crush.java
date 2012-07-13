@@ -33,6 +33,8 @@ import mage.Constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterArtifactPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetArtifactPermanent;
 
 /**
@@ -44,7 +46,7 @@ public class Crush extends CardImpl<Crush> {
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("noncreature artifact");
 
     static {
-        filter.getNotCardType().add(CardType.CREATURE);
+        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
     }
 
     public Crush(UUID ownerId) {

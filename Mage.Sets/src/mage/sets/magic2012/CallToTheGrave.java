@@ -42,6 +42,8 @@ import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.events.GameEvent;
 
 /**
@@ -54,8 +56,7 @@ public class CallToTheGrave extends CardImpl<CallToTheGrave> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a non-Zombie creature");
 
     static {
-        filter.getSubtype().add("Zombie");
-        filter.setNotSubtype(true);
+        filter.add(Predicates.not(new SubtypePredicate("Zombie")));
     }
 
     public CallToTheGrave(UUID ownerId) {

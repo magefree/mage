@@ -42,8 +42,8 @@ import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -55,8 +55,7 @@ public class SoratamiRainshaper extends CardImpl<SoratamiRainshaper> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("a land");
 
     static {
-        filter.getCardType().add(CardType.LAND);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new CardTypePredicate(CardType.LAND));
     }
 
     public SoratamiRainshaper(UUID ownerId) {

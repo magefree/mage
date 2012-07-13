@@ -42,8 +42,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.UnblockableAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 
 /**
@@ -56,8 +56,7 @@ public class BouncingBeebles extends CardImpl<BouncingBeebles> {
     private static final FilterPermanent filter = new FilterPermanent();
 
     static {
-        filter.getCardType().add(Constants.CardType.ARTIFACT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new CardTypePredicate(Constants.CardType.ARTIFACT));
     }
 
     private class DefendingPlayerControlsArtifact implements Condition {

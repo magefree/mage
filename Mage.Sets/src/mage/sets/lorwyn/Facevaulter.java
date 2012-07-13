@@ -37,8 +37,8 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
@@ -52,8 +52,7 @@ public class Facevaulter extends CardImpl<Facevaulter> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("Goblin");
 
     static {
-        filter.getSubtype().add("Goblin");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Goblin"));
     }
 
     public Facevaulter(UUID ownerId) {

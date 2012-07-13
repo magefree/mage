@@ -48,8 +48,9 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SoldierToken;
@@ -99,11 +100,11 @@ class ElspethKnightErrantEffect extends ContinuousEffectImpl<ElspethKnightErrant
     private static final FilterPermanent filter = new FilterPermanent("artifacts, creatures, enchantments and lands");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.getCardType().add(CardType.CREATURE);
-        filter.getCardType().add(CardType.ENCHANTMENT);
-        filter.getCardType().add(CardType.LAND);
-        filter.setScopeCardType(ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.ARTIFACT),
+                new CardTypePredicate(CardType.CREATURE),
+                new CardTypePredicate(CardType.ENCHANTMENT),
+                new CardTypePredicate(CardType.LAND)));
     }
 
     public ElspethKnightErrantEffect() {

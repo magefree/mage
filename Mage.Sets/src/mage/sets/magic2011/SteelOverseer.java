@@ -39,8 +39,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -51,9 +51,8 @@ public class SteelOverseer extends CardImpl<SteelOverseer> {
     private static final FilterPermanent filter = new FilterPermanent("artifact creature you control");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.getCardType().add(CardType.CREATURE);
-        filter.setScopeCardType(ComparisonScope.All);
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(new CardTypePredicate(CardType.CREATURE));
         filter.setTargetController(TargetController.YOU);
     }
 

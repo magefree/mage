@@ -33,6 +33,8 @@ import mage.Constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -44,7 +46,7 @@ public class Bramblecrush extends CardImpl<Bramblecrush> {
     private static final FilterPermanent filter = new FilterPermanent("noncreature permanent");
 
     static {
-        filter.getNotCardType().add(CardType.CREATURE);
+        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
     }
 
     public Bramblecrush(UUID ownerId) {

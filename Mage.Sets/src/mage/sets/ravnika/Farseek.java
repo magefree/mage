@@ -34,8 +34,9 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -47,11 +48,11 @@ public class Farseek extends CardImpl<Farseek> {
     private final static FilterCard filter = new FilterCard("Plains, Island, Swamp, or Mountain card");
 
     static {
-        filter.getSubtype().add("Plains");
-        filter.getSubtype().add("Island");
-        filter.getSubtype().add("Swamp");
-        filter.getSubtype().add("Mountain");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new SubtypePredicate("Plains"),
+                new SubtypePredicate("Island"),
+                new SubtypePredicate("Swamp"),
+                new SubtypePredicate("Mountain")));
     }
 
     public Farseek(UUID ownerId) {

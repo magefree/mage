@@ -38,6 +38,7 @@ import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 
 /**
  *
@@ -48,7 +49,7 @@ public class StalwartShieldBearers extends CardImpl<StalwartShieldBearers> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with defender");
 
     static {
-        filter.getAbilities().add(DefenderAbility.getInstance());
+        filter.add(new AbilityPredicate(DefenderAbility.class));
     }
 
     public StalwartShieldBearers(UUID ownerId) {

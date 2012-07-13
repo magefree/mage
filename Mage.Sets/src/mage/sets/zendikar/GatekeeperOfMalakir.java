@@ -38,6 +38,7 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPlayer;
 
 import java.util.UUID;
@@ -51,9 +52,8 @@ public class GatekeeperOfMalakir extends CardImpl<GatekeeperOfMalakir> {
     private static final FilterControlledPermanent filter;
 
     static {
-        filter = new FilterControlledPermanent();
-        filter.getCardType().add(CardType.CREATURE);
-        filter.setMessage(" a creature");
+        filter = new FilterControlledPermanent(" a creature");
+        filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
     public GatekeeperOfMalakir(UUID ownerId) {

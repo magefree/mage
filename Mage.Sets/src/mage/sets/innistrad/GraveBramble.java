@@ -34,9 +34,9 @@ import mage.MageInt;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -47,8 +47,7 @@ public class GraveBramble extends CardImpl<GraveBramble> {
     private static final FilterPermanent filter = new FilterCreaturePermanent("Zombies");
 
     static {
-        filter.getSubtype().add("Zombie");
-        filter.setScopeSubtype(ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Zombie"));
     }
 
     public GraveBramble(UUID ownerId) {

@@ -32,12 +32,14 @@ import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -49,10 +51,8 @@ public class SafeholdDuo extends CardImpl<SafeholdDuo> {
     private static final FilterSpell greenFilter = new FilterSpell("a green spell");
 
     static {
-        whiteFilter.getColor().setWhite(true);
-        whiteFilter.setUseColor(true);
-        greenFilter.getColor().setGreen(true);
-        greenFilter.setUseColor(true);
+        whiteFilter.add(new ColorPredicate(ObjectColor.WHITE));
+        greenFilter.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
     public SafeholdDuo(UUID ownerId) {

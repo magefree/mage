@@ -36,6 +36,7 @@ import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -46,7 +47,7 @@ public class SculptingSteel extends CardImpl<SculptingSteel> {
     private static final FilterPermanent filter = new FilterPermanent("artifact");
     
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public SculptingSteel(UUID ownerId) {

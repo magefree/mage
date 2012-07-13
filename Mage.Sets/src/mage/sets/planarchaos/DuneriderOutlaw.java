@@ -41,6 +41,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.events.GameEvent;
 
 /**
@@ -53,8 +54,7 @@ public class DuneriderOutlaw extends CardImpl<DuneriderOutlaw> {
     private static final FilterCard filter = new FilterCard("green");
 
     static {
-        filter.setColor(ObjectColor.GREEN);
-        filter.setUseColor(true);
+        filter.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
     public DuneriderOutlaw(UUID ownerId) {

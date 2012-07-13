@@ -38,9 +38,9 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -55,11 +55,9 @@ public class MadAuntie extends CardImpl<MadAuntie> {
     private final static FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Goblin creatures");
 
     static {
-        filter1.getSubtype().add("Goblin");
+        filter1.add(new SubtypePredicate("Goblin"));
         filter1.setAnother(true);
-        filter1.setScopeSubtype(Filter.ComparisonScope.Any);
-        filter2.getSubtype().add("Goblin");
-        filter2.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter2.add(new SubtypePredicate("Goblin"));
     }
 
     public MadAuntie(UUID ownerId) {

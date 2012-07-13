@@ -32,11 +32,13 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.InfectAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -48,11 +50,9 @@ public class PhyrexianCrusader extends CardImpl<PhyrexianCrusader> {
     private static final FilterCard filter2 = new FilterCard("White");
 
     static {
-        filter.setUseColor(true);
-        filter.getColor().setRed(true);
+        filter.add(new ColorPredicate(ObjectColor.RED));
 
-        filter2.setUseColor(true);
-        filter2.getColor().setWhite(true);
+        filter2.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
     public PhyrexianCrusader (UUID ownerId) {

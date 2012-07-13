@@ -40,6 +40,7 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DynamicManaEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -50,7 +51,7 @@ public class CabalCoffers extends CardImpl<CabalCoffers> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("Swamp you control");
 
     static {
-        filter.getSubtype().add("Swamp");
+        filter.add(new SubtypePredicate("Swamp"));
     }
 
     public CabalCoffers(UUID ownerId) {

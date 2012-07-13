@@ -40,8 +40,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetAttackingCreature;
 
 /**
@@ -55,8 +55,7 @@ public class BenBenAkkiHermit extends CardImpl<BenBenAkkiHermit> {
        static {
            filter.setTapped(false);
            filter.setUseTapped(true);
-           filter.getSubtype().add("Mountain");
-           filter.setScopeSubtype(Filter.ComparisonScope.Any);
+           filter.add(new SubtypePredicate("Mountain"));
        }
 
        public BenBenAkkiHermit (UUID ownerId) {

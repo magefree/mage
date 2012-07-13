@@ -30,6 +30,8 @@ package mage.filter.common;
 
 import mage.Constants.CardType;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -43,8 +45,8 @@ public class FilterEquipment extends FilterPermanent<FilterEquipment> {
 
     public FilterEquipment(String name) {
         super(name);
-        this.cardType.add(CardType.ARTIFACT);
-        this.getSubtype().add("Equipment");
+        this.add(new CardTypePredicate(CardType.ARTIFACT));
+        this.add(new SubtypePredicate("Equipment"));
     }
 
     public FilterEquipment(final FilterEquipment filter) {

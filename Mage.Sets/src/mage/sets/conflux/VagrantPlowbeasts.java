@@ -38,6 +38,7 @@ import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -49,8 +50,7 @@ public class VagrantPlowbeasts extends CardImpl<VagrantPlowbeasts> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 5 or greater");
 
     static {
-        filter.setPower(4);
-        filter.setPowerComparison(ComparisonType.GreaterThan);
+        filter.add(new PowerPredicate(ComparisonType.GreaterThan, 4));
     }
 
     public VagrantPlowbeasts(UUID ownerId) {

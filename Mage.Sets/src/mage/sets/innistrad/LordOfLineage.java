@@ -29,9 +29,10 @@ package mage.sets.innistrad;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -40,8 +41,8 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -51,8 +52,7 @@ public class LordOfLineage extends CardImpl<LordOfLineage> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.getSubtype().add("Vampire");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Vampire"));
     }
 
     public LordOfLineage(UUID ownerId) {
@@ -69,10 +69,10 @@ public class LordOfLineage extends CardImpl<LordOfLineage> {
 
         this.addAbility(FlyingAbility.getInstance());
         // Other Vampire creatures you control get +2/+2.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Constants.Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter, true)));
         // {tap}: Put a 2/2 black Vampire creature token with flying onto the battlefield.
         // {tap}: Put a 2/2 black Vampire creature token with flying onto the battlefield.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CreateTokenEffect(new VampireToken()), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new VampireToken()), new TapSourceCost()));
     }
 
     public LordOfLineage(final LordOfLineage card) {

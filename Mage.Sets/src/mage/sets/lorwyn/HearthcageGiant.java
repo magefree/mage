@@ -38,9 +38,9 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -57,10 +57,8 @@ public class HearthcageGiant extends CardImpl<HearthcageGiant> {
     private final static FilterCreaturePermanent filterGiant = new FilterCreaturePermanent("Giant");
 
     static {
-        filterElemental.getSubtype().add("Elemental");
-        filterElemental.setScopeSubtype(Filter.ComparisonScope.Any);
-        filterGiant.getSubtype().add("Giant");
-        filterGiant.setScopeSubtype(Filter.ComparisonScope.Any);
+        filterElemental.add(new SubtypePredicate("Elemental"));
+        filterGiant.add(new SubtypePredicate("Giant"));
     }
 
     public HearthcageGiant(UUID ownerId) {

@@ -42,6 +42,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -59,7 +61,7 @@ public class ArachnusSpinner extends CardImpl<ArachnusSpinner> {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Spider");
 
     static {
-        filter.getSubtype().add("Spider");
+        filter.add(new SubtypePredicate("Spider"));
         filter.setTapped(false);
         filter.setUseTapped(true);
     }
@@ -115,7 +117,7 @@ class ArachnusSpinnerEffect extends OneShotEffect<ArachnusSpinnerEffect> {
         }
 
         FilterCard filter = new FilterCard("card named Arachnus Web");
-        filter.getName().add("Arachnus Web");
+        filter.add(new NamePredicate("Arachnus Web"));
 
         Card card = null;
         Zone zone = null;

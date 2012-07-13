@@ -36,8 +36,8 @@ import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -54,8 +54,7 @@ public class BloodTribute extends CardImpl<BloodTribute> {
     static {
         filter.setTapped(false);
         filter.setUseTapped(true);
-        filter.getSubtype().add("Vampire");
-        filter.setScopeSubtype(ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Vampire"));
     }
 
     public BloodTribute(UUID ownerId) {

@@ -43,8 +43,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.UnblockableAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 
 /**
@@ -53,13 +53,12 @@ import mage.game.Game;
  */
 public class ScrapdiverSerpent extends CardImpl<ScrapdiverSerpent> {
 
-    private static final String text = "Scrapdiver Serpent is unblockable as long as defending player controls an artifact";
+    private static final String rule = "Scrapdiver Serpent is unblockable as long as defending player controls an artifact";
 
     private static final FilterPermanent filter = new FilterPermanent();
 
     static {
-        filter.getCardType().add(Constants.CardType.ARTIFACT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new CardTypePredicate(Constants.CardType.ARTIFACT));
     }
 
     private class DefendingPlayerControlsArtifact implements Condition {
@@ -81,7 +80,7 @@ public class ScrapdiverSerpent extends CardImpl<ScrapdiverSerpent> {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
         ContinuousEffect gainAbility = new GainAbilitySourceEffect(UnblockableAbility.getInstance(), Constants.Duration.WhileOnBattlefield);
-        Effect effect = new ConditionalContinousEffect(gainAbility, new DefendingPlayerControlsArtifact(), text);
+        Effect effect = new ConditionalContinousEffect(gainAbility, new DefendingPlayerControlsArtifact(), rule);
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect));
     }
 

@@ -42,8 +42,9 @@ import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCreaturePermanent;
@@ -56,9 +57,9 @@ public class DualCasting extends CardImpl<DualCasting> {
     private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
 
     static {
-        filter.getCardType().add(CardType.INSTANT);
-        filter.getCardType().add(CardType.SORCERY);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.INSTANT),
+                new CardTypePredicate(CardType.SORCERY)));
     }
 
     public DualCasting(UUID ownerId) {

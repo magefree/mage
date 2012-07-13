@@ -37,6 +37,7 @@ import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 
 /**
  *
@@ -47,7 +48,7 @@ public class OvergrownBattlement extends CardImpl<OvergrownBattlement> {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature with defender you control");
 
     static {
-        filter.getAbilities().add(DefenderAbility.getInstance());
+        filter.add(new AbilityPredicate(DefenderAbility.class));
     }
 
     public OvergrownBattlement(UUID ownerId) {

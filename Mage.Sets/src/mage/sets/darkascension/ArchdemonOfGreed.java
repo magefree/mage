@@ -39,6 +39,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -54,7 +55,7 @@ public class ArchdemonOfGreed extends CardImpl<ArchdemonOfGreed> {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Human");
 
     static {
-        filter.getSubtype().add("Human");
+        filter.add(new SubtypePredicate("Human"));
         filter.setTargetController(Constants.TargetController.YOU);
     }
 

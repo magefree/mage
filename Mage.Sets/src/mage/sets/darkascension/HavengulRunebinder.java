@@ -40,9 +40,9 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.ZombieToken;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -56,8 +56,7 @@ public class HavengulRunebinder extends CardImpl<HavengulRunebinder> {
     private static final FilterControlledCreaturePermanent filterPermanent = new FilterControlledCreaturePermanent("Zombie creature you control");
 
     static {
-        filterPermanent.getSubtype().add("Zombie");
-        filterPermanent.setScopeSubtype(Filter.ComparisonScope.Any);
+        filterPermanent.add(new SubtypePredicate("Zombie"));
     }
 
     public HavengulRunebinder(UUID ownerId) {

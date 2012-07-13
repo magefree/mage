@@ -36,6 +36,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.target.TargetSpell;
@@ -51,7 +52,7 @@ public class GeistSnatch extends CardImpl<GeistSnatch> {
     private static final FilterSpell filter = new FilterSpell("creature spell");
 
     static {
-        filter.getCardType().add(CardType.CREATURE);
+        filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
     public GeistSnatch(UUID ownerId) {

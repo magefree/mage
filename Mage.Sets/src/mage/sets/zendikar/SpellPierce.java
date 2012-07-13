@@ -35,6 +35,8 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetSpell;
 
 /**
@@ -43,10 +45,10 @@ import mage.target.TargetSpell;
  */
 public class SpellPierce extends CardImpl<SpellPierce> {
 
-    private static FilterSpell filter = new FilterSpell("noncreature spell");
+    private static final FilterSpell filter = new FilterSpell("noncreature spell");
 
     static {
-            filter.getNotCardType().add(CardType.CREATURE);
+        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
     }
 
     public SpellPierce(UUID ownerId) {

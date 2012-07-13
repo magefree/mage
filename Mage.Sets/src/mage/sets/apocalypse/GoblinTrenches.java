@@ -39,8 +39,8 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetControlledPermanent;
 
@@ -53,8 +53,7 @@ public class GoblinTrenches extends CardImpl<GoblinTrenches> {
     final static FilterControlledPermanent filter = new FilterControlledPermanent("a land");
 
         static {
-            filter.getCardType().add(CardType.LAND);
-            filter.setScopeCardType(Filter.ComparisonScope.Any);
+            filter.add(new CardTypePredicate(CardType.LAND));
         }
 
         public GoblinTrenches(UUID ownerId) {

@@ -33,6 +33,7 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -41,6 +42,8 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.SoulshiftAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -52,9 +55,7 @@ public class PusKami extends CardImpl<PusKami> {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
 
     static {
-        filter.setUseColor(true);
-        filter.getColor().setBlack(true);
-        filter.setNotColor(true);
+        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
     }
 
     public PusKami(UUID ownerId) {

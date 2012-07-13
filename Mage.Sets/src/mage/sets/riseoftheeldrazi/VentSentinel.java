@@ -40,6 +40,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.target.TargetPlayer;
 
 /**
@@ -49,7 +50,7 @@ import mage.target.TargetPlayer;
 public class VentSentinel extends CardImpl<VentSentinel> {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures with defender you control");
     static{
-        filter.getAbilities().add(DefenderAbility.getInstance());
+        filter.add(new AbilityPredicate(DefenderAbility.class));
     }
 
     public VentSentinel(UUID ownerId) {

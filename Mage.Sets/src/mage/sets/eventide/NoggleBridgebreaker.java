@@ -36,8 +36,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -48,8 +48,7 @@ public class NoggleBridgebreaker extends CardImpl<NoggleBridgebreaker> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("land you control");
 
     static {
-        filter.getCardType().add(CardType.LAND);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new CardTypePredicate(CardType.LAND));
     }
 
     public NoggleBridgebreaker(UUID ownerId) {

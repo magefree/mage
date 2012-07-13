@@ -40,8 +40,8 @@ import mage.abilities.effects.common.continious.GainProtectionFromColorTargetEff
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.target.common.TargetControlledPermanent;
 
@@ -93,10 +93,8 @@ class FaithsShieldEffect extends OneShotEffect<FaithsShieldEffect> {
         if (FatefulHourCondition.getInstance().apply(game, source)) {
             ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
             FilterCard filter = new FilterCard();
-               filter.setUseColor(true);
-            filter.setColor(choice.getColor());
+            filter.add(new ColorPredicate(choice.getColor()));
             filter.setMessage(choice.getChoice());
-            filter.setScopeColor(Filter.ComparisonScope.Any);
 
             Ability ability = new ProtectionAbility(filter) ;
             game.addEffect(new GainAbilityControlledEffect(ability, Duration.EndOfTurn), source);

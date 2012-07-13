@@ -41,6 +41,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -56,7 +57,7 @@ public class BoshIronGolem extends CardImpl<BoshIronGolem> {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact");
     
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
     
     public BoshIronGolem(UUID ownerId) {

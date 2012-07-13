@@ -34,6 +34,8 @@ import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 
 /**
  *
@@ -44,8 +46,7 @@ public class SeismicShudder extends CardImpl<SeismicShudder> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature without flying");
 
     static {
-        filter.getAbilities().add(FlyingAbility.getInstance());
-        filter.setNotAbilities(true);
+        filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }
 
     public SeismicShudder(UUID ownerId) {

@@ -34,6 +34,7 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -45,7 +46,7 @@ public class SpittingEarth extends CardImpl<SpittingEarth> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("Mountain you control");
 
     static {
-        filter.getSubtype().add("Mountain");
+        filter.add(new SubtypePredicate("Mountain"));
     }
 
     public SpittingEarth(UUID ownerId) {

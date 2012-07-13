@@ -41,8 +41,8 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetControlledPermanent;
 
@@ -54,8 +54,7 @@ public class MelokuTheCloudedMirror extends CardImpl<MelokuTheCloudedMirror> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("a land");
 
     static {
-        filter.getCardType().add(CardType.LAND);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new CardTypePredicate(CardType.LAND));
     }
 
     public MelokuTheCloudedMirror(UUID ownerId) {

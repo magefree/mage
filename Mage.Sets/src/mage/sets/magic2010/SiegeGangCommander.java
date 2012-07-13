@@ -41,8 +41,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.GoblinToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -56,8 +56,7 @@ public class SiegeGangCommander extends CardImpl<SiegeGangCommander> {
     private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Goblin");
 
     static {
-        filter.getSubtype().add("Goblin");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Goblin"));
     }
 
     public SiegeGangCommander(UUID ownerId) {

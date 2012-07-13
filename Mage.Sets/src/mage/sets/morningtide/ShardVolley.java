@@ -33,8 +33,8 @@ import mage.Constants.Rarity;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -47,8 +47,7 @@ public class ShardVolley extends CardImpl<ShardVolley> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("land");
 
     static {
-        filter.getCardType().add(CardType.LAND);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new CardTypePredicate(CardType.LAND));
     }
 
     public ShardVolley(UUID ownerId) {

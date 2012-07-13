@@ -34,6 +34,7 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreatureOrPlayer;
 
 import java.util.UUID;
@@ -47,7 +48,7 @@ public class SpireBarrage extends CardImpl<SpireBarrage> {
     private static final FilterLandPermanent filter = new FilterLandPermanent("Mountains");
 
     static {
-        filter.getSubtype().add("Mountain");
+        filter.add(new SubtypePredicate("Mountain"));
         filter.setTargetController(TargetController.YOU);
     }
 

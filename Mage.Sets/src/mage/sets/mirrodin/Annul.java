@@ -32,8 +32,9 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetSpell;
 
 /**
@@ -45,9 +46,9 @@ public class Annul extends CardImpl<Annul> {
     private final static FilterSpell filter = new FilterSpell("artifact or enchantment spell");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.getCardType().add(CardType.ENCHANTMENT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.ARTIFACT),
+                new CardTypePredicate(CardType.ENCHANTMENT)));
     }
 
     public Annul(UUID ownerId) {

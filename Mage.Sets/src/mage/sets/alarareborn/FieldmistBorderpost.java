@@ -40,8 +40,9 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -49,16 +50,14 @@ import mage.target.common.TargetControlledPermanent;
  * @author Loki
  */
 public class FieldmistBorderpost extends CardImpl<FieldmistBorderpost> {
-    private static FilterControlledPermanent filter = new FilterControlledPermanent("basic land");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("basic land");
 
     private static final String COST_DESCRIPTION = "pay {1} and return a basic land you control to its owner's hand";
     private static final String ALTERNATIVE_COST_DESCRIPTION = "You may pay {1} and return a basic land you control to its owner's hand rather than pay Fieldmist Borderpost's mana cost";
 
     static {
-        filter.getSupertype().add("Basic");
-        filter.setScopeSupertype(Filter.ComparisonScope.Any);
-        filter.getCardType().add(CardType.LAND);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new SupertypePredicate("Basic"));
+        filter.add(new CardTypePredicate(CardType.LAND));
     }
 
     public FieldmistBorderpost (UUID ownerId) {

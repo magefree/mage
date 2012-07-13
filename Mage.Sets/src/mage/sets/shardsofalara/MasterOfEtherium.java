@@ -38,9 +38,9 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -52,10 +52,8 @@ public class MasterOfEtherium extends CardImpl<MasterOfEtherium> {
     private final static FilterCreaturePermanent filterBoosted = new FilterCreaturePermanent("artifact creatures you control");
 
     static {
-        filterCounted.getCardType().add(CardType.ARTIFACT);
-        filterCounted.setScopeCardType(Filter.ComparisonScope.Any);
-        filterBoosted.getCardType().add(CardType.ARTIFACT);
-        filterBoosted.setScopeCardType(Filter.ComparisonScope.All);
+        filterCounted.add(new CardTypePredicate(CardType.ARTIFACT));
+        filterBoosted.add(new CardTypePredicate(CardType.ARTIFACT));
         filterBoosted.setTargetController(Constants.TargetController.YOU);
     }
 

@@ -32,10 +32,11 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -46,9 +47,7 @@ public class Guma extends CardImpl<Guma> {
     private static final FilterCard filter = new FilterCard("Blue");
 
     static {
-        filter.setUseColor(true);
-        filter.getColor().setBlue(true);
-        filter.setScopeColor(ComparisonScope.Any);
+        filter.add(new ColorPredicate(ObjectColor.BLUE));
     }
 
     public Guma(UUID ownerId) {

@@ -36,8 +36,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterNonTokenPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.WolfToken;
@@ -76,8 +76,7 @@ class FeedThePackEffect extends OneShotEffect<FeedThePackEffect> {
     private static final FilterNonTokenPermanent filter = new FilterNonTokenPermanent("nontoken creature");
 
     static {
-        filter.getCardType().add(CardType.CREATURE);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new CardTypePredicate(CardType.CREATURE));
         filter.setTargetController(Constants.TargetController.YOU);
     }
 

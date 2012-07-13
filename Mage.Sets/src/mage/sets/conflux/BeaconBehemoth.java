@@ -42,6 +42,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -53,8 +54,7 @@ public class BeaconBehemoth extends CardImpl<BeaconBehemoth> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 5 or greater");
 
     static {        
-        filter.setPower(4);
-        filter.setPowerComparison(ComparisonType.GreaterThan);
+        filter.add(new PowerPredicate(ComparisonType.GreaterThan, 4));
     }
 
     public BeaconBehemoth (UUID ownerId) {

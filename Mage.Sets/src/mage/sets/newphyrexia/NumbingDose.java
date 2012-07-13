@@ -38,8 +38,9 @@ import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.SkipEnchantedUntapEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -55,9 +56,9 @@ public class NumbingDose extends CardImpl<NumbingDose> {
     private static final FilterPermanent filter = new FilterPermanent("artifact or creature");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.getCardType().add(CardType.CREATURE);
-        filter.setScopeCardType(ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.ARTIFACT),
+                new CardTypePredicate(CardType.CREATURE)));
     }
 
     public NumbingDose(UUID ownerId) {

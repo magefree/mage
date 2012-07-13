@@ -37,19 +37,18 @@ import mage.Constants.Rarity;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
  * @author Loki
  */
 public class TemperedSteel extends CardImpl<TemperedSteel> {
-    private static FilterCreaturePermanent filter = new FilterCreaturePermanent("Artifact creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Artifact creatures");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.setScopeCardType(Filter.ComparisonScope.All);
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public TemperedSteel (UUID ownerId) {

@@ -40,8 +40,8 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.MyrToken;
 
 /**
@@ -53,8 +53,7 @@ public class MyrMatrix extends CardImpl<MyrMatrix> {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Myr");
 
        static {
-           filter.getSubtype().add("Myr");
-           filter.setScopeSubtype(Filter.ComparisonScope.Any);
+           filter.add(new SubtypePredicate("Myr"));
        }
 
         public MyrMatrix (UUID ownerId) {

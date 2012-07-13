@@ -39,8 +39,8 @@ import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInHand;
 
 /**
@@ -51,8 +51,7 @@ public class NeurokProdigy extends CardImpl<NeurokProdigy> {
     private final static FilterCard filter = new FilterCard("an artifact card");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public NeurokProdigy(UUID ownerId) {

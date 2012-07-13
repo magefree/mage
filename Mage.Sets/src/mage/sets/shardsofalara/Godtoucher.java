@@ -41,6 +41,7 @@ import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetCreaturePermanent;
@@ -54,8 +55,7 @@ public class Godtoucher extends CardImpl<Godtoucher> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 5 or greater");
 
     static {
-        filter.setPower(4);
-        filter.setPowerComparison(ComparisonType.GreaterThan);
+        filter.add(new PowerPredicate(ComparisonType.GreaterThan, 4));
     }
 
     public Godtoucher(UUID ownerId) {

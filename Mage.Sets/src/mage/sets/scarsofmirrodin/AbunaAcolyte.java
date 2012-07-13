@@ -37,8 +37,8 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.PreventDamageTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -53,8 +53,7 @@ public class AbunaAcolyte extends CardImpl<AbunaAcolyte> {
     final static FilterCreaturePermanent filter = new FilterCreaturePermanent("artifact creature");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.setScopeCardType(ComparisonScope.All);
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public AbunaAcolyte(UUID ownerId) {

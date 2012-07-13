@@ -42,8 +42,8 @@ import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
@@ -58,8 +58,7 @@ public class MayorOfAvabruck extends CardImpl<MayorOfAvabruck> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Human creatures");
 
     static {
-        filter.getSubtype().add("Human");
-        filter.setScopeSubtype(ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Human"));
     }
 
     public MayorOfAvabruck(UUID ownerId) {

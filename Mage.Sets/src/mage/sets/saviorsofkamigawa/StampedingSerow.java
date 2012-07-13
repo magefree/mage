@@ -31,12 +31,14 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -50,8 +52,7 @@ public class StampedingSerow extends CardImpl<StampedingSerow> {
     private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("green creature you control");
 
     static {
-        filter.setUseColor(true);
-        filter.getColor().setGreen(true);
+        filter.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
     public StampedingSerow(UUID ownerId) {

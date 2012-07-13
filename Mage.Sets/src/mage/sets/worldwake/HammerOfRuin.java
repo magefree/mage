@@ -42,6 +42,7 @@ import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
@@ -79,8 +80,7 @@ class HammerOfRuinTriggeredAbility extends TriggeredAbilityImpl<HammerOfRuinTrig
     HammerOfRuinTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(), true);
         FilterPermanent filter = new FilterPermanent("Equipment that player controls");
-        filter.getSubtype().add("Equipment");
-        filter.setScopeSupertype(mage.filter.Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Equipment"));
         this.addTarget(new TargetPermanent(filter));
     }
 

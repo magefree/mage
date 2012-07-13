@@ -40,6 +40,7 @@ import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreatureCard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -129,7 +130,7 @@ class WarrenInstigatorEffect extends OneShotEffect<WarrenInstigatorEffect> {
         }
 
         FilterCreatureCard filter = new FilterCreatureCard("Goblin creature card from your hand");
-        filter.getSubtype().add("Goblin");
+        filter.add(new SubtypePredicate("Goblin"));
         TargetCardInHand target = new TargetCardInHand(filter);
         if (player.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
             Card card = game.getCard(target.getFirstTarget());

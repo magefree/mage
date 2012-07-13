@@ -44,9 +44,10 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -62,8 +63,7 @@ public class QuestForTheHolyRelic extends CardImpl<QuestForTheHolyRelic> {
 
     private static final FilterSpell filter = new FilterSpell("a creature spell");
     static {
-        filter.getCardType().add(CardType.CREATURE);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
     public QuestForTheHolyRelic(UUID ownerId) {
@@ -114,7 +114,7 @@ class QuestForTheHolyRelicEffect extends OneShotEffect<QuestForTheHolyRelicEffec
         }
 
         FilterCard filter = new FilterCard("Equipment");
-        filter.getSubtype().add("Equipment");
+        filter.add(new SubtypePredicate("Equipment"));
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
         if (player.searchLibrary(target, game)) {
             Card card = player.getLibrary().getCard(target.getFirstTarget(), game);

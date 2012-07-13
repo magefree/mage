@@ -41,6 +41,7 @@ import mage.abilities.keyword.UnblockableAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -52,8 +53,7 @@ public class CraftyPathmage extends CardImpl<CraftyPathmage> {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 2 or less");
 
     static {
-        filter.setPower(3);
-        filter.setPowerComparison(Filter.ComparisonType.LessThan);
+        filter.add(new PowerPredicate(Filter.ComparisonType.LessThan, 3));
     }
 
     public CraftyPathmage(UUID ownerId) {

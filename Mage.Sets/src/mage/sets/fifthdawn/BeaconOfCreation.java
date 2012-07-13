@@ -34,8 +34,8 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ShuffleSpellEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.InsectToken;
 
 /**
@@ -47,8 +47,7 @@ public class BeaconOfCreation extends CardImpl<BeaconOfCreation> {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Forest you control");
 
     static {
-        filter.getSubtype().add("Forest");
-        filter.setScopeSubtype(ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Forest"));
     }
 
     public BeaconOfCreation(UUID ownerId) {

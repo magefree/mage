@@ -39,8 +39,8 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.BasicManaAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -51,8 +51,7 @@ public class KrarkClanStoker extends CardImpl<KrarkClanStoker> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public KrarkClanStoker(UUID ownerId) {

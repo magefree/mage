@@ -30,10 +30,11 @@ package mage.sets.riseoftheeldrazi;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.abilities.effects.common.DestroyAllEffect;
+import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 
 /**
  *
@@ -44,8 +45,7 @@ public class ConsumeTheMeek extends CardImpl<ConsumeTheMeek> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with converted mana cost 3 or less");
 
     static {
-    filter.setConvertedManaCost(4);
-    filter.setConvertedManaCostComparison(Filter.ComparisonType.LessThan);
+    filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 4));
     }
 
     public ConsumeTheMeek(UUID ownerId) {

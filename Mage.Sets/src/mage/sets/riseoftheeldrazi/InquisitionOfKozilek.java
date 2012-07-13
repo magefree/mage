@@ -37,8 +37,11 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonType;
+import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -73,10 +76,8 @@ class InquisitionOfKozilekEffect extends OneShotEffect<InquisitionOfKozilekEffec
     private static final FilterCard filter = new FilterCard("nonland card with converted mana cost 3 or less");
 
     static {
-        filter.getNotCardType().add(CardType.LAND);
-
-        filter.setConvertedManaCost(4);
-        filter.setConvertedManaCostComparison(ComparisonType.LessThan);
+        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 4));
     }
 
     public InquisitionOfKozilekEffect() {

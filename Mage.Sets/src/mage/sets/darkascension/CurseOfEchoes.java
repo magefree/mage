@@ -38,8 +38,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -87,9 +88,9 @@ class CurseOfEchoesCopyTriggeredAbility extends TriggeredAbilityImpl<CurseOfEcho
     private static final FilterSpell filter = new FilterSpell();
 
     static {
-        filter.getCardType().add(CardType.INSTANT);
-        filter.getCardType().add(CardType.SORCERY);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.INSTANT),
+                new CardTypePredicate(CardType.SORCERY)));
     }
 
     public CurseOfEchoesCopyTriggeredAbility() {

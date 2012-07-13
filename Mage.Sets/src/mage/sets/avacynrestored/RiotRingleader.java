@@ -36,6 +36,7 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -46,7 +47,7 @@ public class RiotRingleader extends CardImpl<RiotRingleader> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Human creatures");
 
     static {
-        filter.getSubtype().add("Human");
+        filter.add(new SubtypePredicate("Human"));
     }
 
     public RiotRingleader(UUID ownerId) {

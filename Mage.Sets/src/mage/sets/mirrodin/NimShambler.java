@@ -41,8 +41,8 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -53,8 +53,7 @@ public class NimShambler extends CardImpl<NimShambler> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("artifact you control");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public NimShambler(UUID ownerId) {

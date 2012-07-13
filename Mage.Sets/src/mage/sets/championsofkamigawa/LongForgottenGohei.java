@@ -44,6 +44,7 @@ import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.util.CardUtil;
 
@@ -56,7 +57,7 @@ public class LongForgottenGohei extends CardImpl<LongForgottenGohei> {
 
     private final static FilterCreaturePermanent spiritFilter = new FilterCreaturePermanent("Spirits");
     static {
-        spiritFilter.getSubtype().add("Spirit");
+        spiritFilter.add(new SubtypePredicate("Spirit"));
     }
 
     public LongForgottenGohei(UUID ownerId) {

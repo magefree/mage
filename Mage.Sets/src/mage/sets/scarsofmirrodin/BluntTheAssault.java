@@ -37,7 +37,7 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.PreventAllDamageEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
@@ -45,11 +45,7 @@ import mage.filter.FilterPermanent;
  */
 public class BluntTheAssault extends CardImpl<BluntTheAssault> {
 
-    private static final FilterPermanent filter = new FilterPermanent("creature on the battlefield");
-
-    static {
-        filter.getCardType().add(Constants.CardType.CREATURE);
-    }
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature on the battlefield");
 
     public BluntTheAssault (UUID ownerId) {
         super(ownerId, 113, "Blunt the Assault", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");

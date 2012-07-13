@@ -34,6 +34,8 @@ import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.LoseLifeControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetSpell;
 
 /**
@@ -45,7 +47,7 @@ public class Countersquall extends CardImpl<Countersquall> {
     private static final FilterSpell filter = new FilterSpell("noncreature spell");
 
     static {
-        filter.getNotCardType().add(CardType.CREATURE);
+        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
     }
 
     public Countersquall(UUID ownerId) {

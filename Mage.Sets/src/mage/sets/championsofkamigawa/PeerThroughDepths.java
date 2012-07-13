@@ -34,8 +34,9 @@ import mage.Constants.Rarity;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -45,10 +46,10 @@ public class PeerThroughDepths extends CardImpl<PeerThroughDepths> {
 
     private final static FilterCard filter = new FilterCard("instant or sorcery card");
     static {
-            filter.getCardType().add(CardType.SORCERY);
-            filter.getCardType().add(CardType.INSTANT);
-            filter.setScopeCardType(ComparisonScope.Any);
-        }
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.SORCERY),
+                new CardTypePredicate(CardType.INSTANT)));
+    }
 
 
     public PeerThroughDepths (UUID ownerId) {

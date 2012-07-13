@@ -39,8 +39,8 @@ import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 //import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -51,8 +51,7 @@ public class VillainousOgre extends CardImpl<VillainousOgre> {
     private static final String rule = "As long as you control a Demon, {this} has {B}: Regenerate Villainous Ogre";
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Demon");
     static {
-        filter.getSubtype().add("Demon");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Demon"));
     }
 
     public VillainousOgre(UUID ownerId) {

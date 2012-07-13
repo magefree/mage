@@ -41,6 +41,7 @@ import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -51,8 +52,7 @@ public class JawboneSkulkin extends CardImpl<JawboneSkulkin> {
     private final static FilterCreaturePermanent filterRedCreature = new FilterCreaturePermanent("red creature");
 
     static {
-        filterRedCreature.setUseColor(true);
-        filterRedCreature.setColor(ObjectColor.RED);
+        filterRedCreature.add(new ColorPredicate(ObjectColor.RED));
     }
 
     public JawboneSkulkin(UUID ownerId) {

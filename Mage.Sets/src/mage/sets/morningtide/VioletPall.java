@@ -35,6 +35,8 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -46,9 +48,7 @@ public class VioletPall extends CardImpl<VioletPall> {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
 
     static {
-        filter.setUseColor(true);
-        filter.setColor(ObjectColor.BLACK);
-        filter.setNotColor(true);
+        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
     }
 
     public VioletPall(UUID ownerId) {

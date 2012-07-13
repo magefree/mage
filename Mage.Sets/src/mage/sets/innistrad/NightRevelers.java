@@ -43,6 +43,7 @@ import mage.game.Game;
 
 import java.util.Set;
 import java.util.UUID;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -83,7 +84,7 @@ class NightRevelersCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         boolean conditionApplies = false;
         FilterPermanent filter = new FilterPermanent();
-        filter.getSubtype().add("Human");
+        filter.add(new SubtypePredicate("Human"));
 
         Set<UUID> opponents = game.getOpponents(source.getControllerId());
         for (UUID opponentId : opponents) {

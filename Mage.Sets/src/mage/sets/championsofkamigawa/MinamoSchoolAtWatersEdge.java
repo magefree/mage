@@ -40,8 +40,8 @@ import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -53,8 +53,7 @@ public class MinamoSchoolAtWatersEdge extends CardImpl<MinamoSchoolAtWatersEdge>
     private final static FilterPermanent filter = new FilterPermanent("legendary permanent");
 
     static {
-        filter.getSupertype().add("Legendary");
-        filter.setScopeSupertype(Filter.ComparisonScope.Any);
+        filter.add(new SupertypePredicate("Legendary"));
     }
 
 

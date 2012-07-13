@@ -39,8 +39,9 @@ import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -54,9 +55,7 @@ public class NectarFaerie extends CardImpl<NectarFaerie> {
     private final static FilterPermanent filter = new FilterPermanent("Faerie or Elf");
 
     static {
-        filter.getSubtype().add("Faerie");
-        filter.getSubtype().add("Elf");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(Predicates.or(new SubtypePredicate("Faerie"),new SubtypePredicate("Elf")));
     }
 
     public NectarFaerie(UUID ownerId) {

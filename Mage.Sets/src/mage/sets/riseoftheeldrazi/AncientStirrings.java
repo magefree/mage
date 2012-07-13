@@ -34,6 +34,7 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ColorlessPredicate;
 
 import java.util.UUID;
 
@@ -45,8 +46,7 @@ public class AncientStirrings extends CardImpl<AncientStirrings> {
     private final static FilterCard filter = new FilterCard("colorless card");
 
     static {
-        filter.setColorless(true);
-        filter.setUseColorless(true);
+        filter.add(new ColorlessPredicate());
     }
 
 

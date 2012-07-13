@@ -42,6 +42,7 @@ import mage.abilities.keyword.KickerAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -53,7 +54,7 @@ public class OranRiefRecluse extends CardImpl<OranRiefRecluse> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
 
     static {
-        filter.getAbilities().add(FlyingAbility.getInstance());
+        filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
     public OranRiefRecluse(UUID ownerId) {

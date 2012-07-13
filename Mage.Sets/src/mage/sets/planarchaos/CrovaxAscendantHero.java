@@ -33,6 +33,7 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.PayLifeCost;
@@ -40,21 +41,20 @@ import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author Loki
  */
 public class CrovaxAscendantHero extends CardImpl<CrovaxAscendantHero> {
-    private static FilterCreaturePermanent filter1 = new FilterCreaturePermanent("white creatures");
-    private static FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Nonwhite creatures");
+    private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("white creatures");
+    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Nonwhite creatures");
 
     static {
-        filter1.getColor().setWhite(true);
-        filter1.setUseColor(true);
-        filter2.getColor().setWhite(true);
-        filter2.setUseColor(true);
-        filter2.setNotColor(true);
+        filter1.add(new ColorPredicate(ObjectColor.WHITE));
+        filter2.add(Predicates.not(new ColorPredicate(ObjectColor.WHITE)));
     }
 
     public CrovaxAscendantHero(UUID ownerId) {

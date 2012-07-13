@@ -41,8 +41,8 @@ import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.FearAbility;
 import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -53,8 +53,7 @@ public class ShizoDeathsStorehouse extends CardImpl<ShizoDeathsStorehouse> {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("legendary creature");
 
     static {
-        filter.getSupertype().add("Legendary");
-        filter.setScopeSupertype(Filter.ComparisonScope.Any);
+        filter.add(new SupertypePredicate("Legendary"));
     }
 
     public ShizoDeathsStorehouse(UUID ownerId) {

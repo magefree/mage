@@ -33,6 +33,7 @@ import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -40,6 +41,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -50,8 +52,7 @@ public class ResplendentMentor extends CardImpl<ResplendentMentor> {
     private static final FilterPermanent filter = new FilterPermanent("White creatures");
 
     static {
-        filter.getColor().setWhite(true);
-        filter.setUseColor(true);
+        filter.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
     public ResplendentMentor(UUID ownerId) {

@@ -36,8 +36,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -48,8 +48,7 @@ public class HannasCustody extends CardImpl<HannasCustody> {
     private final static FilterPermanent filter = new FilterPermanent("artifacts");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public HannasCustody(UUID ownerId) {

@@ -40,8 +40,8 @@ import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -53,8 +53,7 @@ public class SeethingPathblazer extends CardImpl<SeethingPathblazer> {
     private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Elemental");
 
     static {
-        filter.getSubtype().add("Elemental");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Elemental"));
     }
 
     public SeethingPathblazer(UUID ownerId) {

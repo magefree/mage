@@ -35,6 +35,7 @@ import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -45,7 +46,7 @@ public class MesaEnchantress extends CardImpl<MesaEnchantress> {
     private static final FilterSpell filter = new FilterSpell("an enchantment spell");
 
     static {
-        filter.getCardType().add(CardType.ENCHANTMENT);
+        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
 
     public MesaEnchantress(UUID ownerId) {

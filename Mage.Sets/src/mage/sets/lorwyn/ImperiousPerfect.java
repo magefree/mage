@@ -39,8 +39,8 @@ import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.ElfToken;
 
 import java.util.UUID;
@@ -54,8 +54,7 @@ public class ImperiousPerfect extends CardImpl<ImperiousPerfect> {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Elf creatures");
 
     static {
-        filter.getSubtype().add("Elf");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Elf"));
     }
 
     public ImperiousPerfect(UUID ownerId) {

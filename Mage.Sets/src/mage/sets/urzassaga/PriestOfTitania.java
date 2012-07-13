@@ -37,6 +37,7 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -47,7 +48,7 @@ public class PriestOfTitania extends CardImpl<PriestOfTitania> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elf creatures");
 
     static {
-        filter.getSubtype().add("Elf");
+        filter.add(new SubtypePredicate("Elf"));
     }
 
     public PriestOfTitania(UUID ownerId) {

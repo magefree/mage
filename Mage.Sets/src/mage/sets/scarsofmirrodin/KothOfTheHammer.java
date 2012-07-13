@@ -52,6 +52,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
@@ -67,9 +68,9 @@ public class KothOfTheHammer extends CardImpl<KothOfTheHammer> {
     private static final FilterLandPermanent filterCount = new FilterLandPermanent("Mountain you control");
 
     static {
-        filter.getSubtype().add("Mountain");
+        filter.add(new SubtypePredicate("Mountain"));
         filter.setTargetController(Constants.TargetController.YOU);
-        filterCount.getSubtype().add("Mountain");
+        filterCount.add(new SubtypePredicate("Mountain"));
         filterCount.setTargetController(Constants.TargetController.YOU);
     }
 

@@ -39,9 +39,11 @@ import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetSpell;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -56,11 +58,10 @@ public class SigilTracer extends CardImpl<SigilTracer> {
     static {
         filter.setTapped(false);
         filter.setUseTapped(true);
-        filter.getSubtype().add("Wizard");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
-        filterInstorSorc.getCardType().add(CardType.INSTANT);
-        filterInstorSorc.getCardType().add(CardType.SORCERY);
-        filterInstorSorc.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Wizard"));
+        filterInstorSorc.add(Predicates.or(
+                new CardTypePredicate(CardType.INSTANT),
+                new CardTypePredicate(CardType.SORCERY)));
     }
 
     public SigilTracer(UUID ownerId) {

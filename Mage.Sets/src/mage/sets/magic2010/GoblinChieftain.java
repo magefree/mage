@@ -39,8 +39,8 @@ import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -51,8 +51,7 @@ public class GoblinChieftain extends CardImpl<GoblinChieftain> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblin creatures");
 
     static {
-        filter.getSubtype().add("Goblin");
-        filter.setScopeSupertype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Goblin"));
     }
 
     public GoblinChieftain(UUID ownerId) {

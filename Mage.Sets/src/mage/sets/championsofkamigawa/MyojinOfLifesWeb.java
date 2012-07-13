@@ -50,6 +50,7 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInHand;
 import mage.watchers.common.CastFromHandWatcher;
 
@@ -60,7 +61,7 @@ public class MyojinOfLifesWeb extends CardImpl<MyojinOfLifesWeb> {
 
     private static final FilterCard filter = new FilterCard("any number of creature cards from your hand");
     static {
-        filter.getCardType().add(CardType.CREATURE);
+        filter.add(new CardTypePredicate(CardType.CREATURE));
         filter.setTargetOwner(TargetController.YOU);
     }
 

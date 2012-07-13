@@ -39,8 +39,8 @@ import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -52,10 +52,8 @@ public class DeathBaron extends CardImpl<DeathBaron> {
     private final static FilterCreaturePermanent filterZombie = new FilterCreaturePermanent("Zombie creatures");
 
     static {
-        filterSkeletons.getSubtype().add("Skeleton");
-        filterSkeletons.setScopeSubtype(Filter.ComparisonScope.Any);
-        filterZombie.getSubtype().add("Zombie");
-        filterZombie.setScopeSubtype(Filter.ComparisonScope.Any);
+        filterSkeletons.add(new SubtypePredicate("Skeleton"));
+        filterZombie.add(new SubtypePredicate("Zombie"));
     }
 
     public DeathBaron(UUID ownerId) {

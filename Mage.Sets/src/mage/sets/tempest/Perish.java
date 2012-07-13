@@ -30,10 +30,12 @@ package mage.sets.tempest;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.ObjectColor;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -44,10 +46,8 @@ public class Perish extends CardImpl<Perish> {
     private static final FilterPermanent filter = new FilterPermanent("green creatures");
     
     static {
-        filter.getColor().setGreen(true);
-        filter.setUseColor(true);
-        filter.getCardType().add(CardType.CREATURE);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new ColorPredicate(ObjectColor.GREEN));
+        filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
     public Perish(UUID ownerId) {

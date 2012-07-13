@@ -39,8 +39,8 @@ import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -53,8 +53,7 @@ public class ScarbladeElite extends CardImpl<ScarbladeElite> {
     private final static FilterCard filter = new FilterCard("Assassin card from your graveyard");
 
     static {
-        filter.getSubtype().add("Assassin");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Assassin"));
     }
 
     public ScarbladeElite(UUID ownerId) {

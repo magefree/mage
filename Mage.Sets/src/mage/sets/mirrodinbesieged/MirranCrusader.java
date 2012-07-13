@@ -32,28 +32,24 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author ayratn
  */
 public class MirranCrusader extends CardImpl<MirranCrusader> {
-    private static FilterCard filter = new FilterCard("Black");
-    private static FilterCard filter2 = new FilterCard("Green");
+    private static final FilterCard filter = new FilterCard("Black");
+    private static final FilterCard filter2 = new FilterCard("Green");
 
     static {
-        filter.setUseColor(true);
-        filter.getColor().setBlack(true);
-        filter.setScopeColor(ComparisonScope.Any);
-
-        filter2.setUseColor(true);
-        filter2.getColor().setGreen(true);
-        filter2.setScopeColor(ComparisonScope.Any);
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
+        filter2.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
     public MirranCrusader (UUID ownerId) {

@@ -36,6 +36,7 @@ import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 import java.util.UUID;
 
@@ -48,7 +49,7 @@ public class LunarMystic extends CardImpl<LunarMystic> {
     private static final FilterSpell filter = new FilterSpell("an instant spell");
 
     static {
-        filter.getCardType().add(CardType.INSTANT);
+        filter.add(new CardTypePredicate(CardType.INSTANT));
     }
 
     public LunarMystic(UUID ownerId) {

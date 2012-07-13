@@ -37,9 +37,11 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -53,9 +55,9 @@ public class DevoutChaplain extends CardImpl<DevoutChaplain> {
     private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.getCardType().add(CardType.ENCHANTMENT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.ARTIFACT),
+                new CardTypePredicate(CardType.ENCHANTMENT)));
     }
 
     private final static FilterControlledPermanent humanFilter = new FilterControlledPermanent("untapped Human you control");
@@ -63,8 +65,7 @@ public class DevoutChaplain extends CardImpl<DevoutChaplain> {
     static {
         humanFilter.setTapped(false);
         humanFilter.setUseTapped(true);
-        humanFilter.getSubtype().add("Human");
-        humanFilter.setScopeSubtype(Filter.ComparisonScope.Any);
+        humanFilter.add(new SubtypePredicate("Human"));
     }
 
     public DevoutChaplain(UUID ownerId) {

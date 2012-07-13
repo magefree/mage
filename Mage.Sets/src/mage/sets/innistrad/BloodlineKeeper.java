@@ -43,8 +43,8 @@ import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
 
@@ -102,8 +102,7 @@ class ControlFiveVampiresCost extends CostImpl<ControlFiveVampiresCost> {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
     static {
-        filter.getSubtype().add("Vampire");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Vampire"));
     }
 
     public ControlFiveVampiresCost() {

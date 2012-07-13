@@ -40,6 +40,7 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -50,7 +51,7 @@ public class EarthServant extends CardImpl<EarthServant> {
     private static final FilterLandPermanent filter = new FilterLandPermanent("Mountain you control");
 
     static {
-        filter.getSubtype().add("Mountain");
+        filter.add(new SubtypePredicate("Mountain"));
         filter.setTargetController(TargetController.YOU);
     }
 

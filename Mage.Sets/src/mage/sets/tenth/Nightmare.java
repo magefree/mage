@@ -39,6 +39,7 @@ import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -49,7 +50,7 @@ public class Nightmare extends CardImpl<Nightmare> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("Swamps you control");
 
     static {
-        filter.getSubtype().add("Swamp");
+        filter.add(new SubtypePredicate("Swamp"));
     }
 
     public Nightmare(UUID ownerId) {

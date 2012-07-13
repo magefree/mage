@@ -15,8 +15,8 @@ import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
@@ -90,8 +90,7 @@ class TokTokVolcanoBorn extends Token {
     private final static FilterCard filter = new FilterCard("red");
 
     static {
-        filter.setColor(ObjectColor.RED);
-        filter.setScopeColor(Filter.ComparisonScope.Any);
+        filter.add(new ColorPredicate(ObjectColor.RED));
     }
 
     TokTokVolcanoBorn() {

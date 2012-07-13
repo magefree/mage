@@ -33,6 +33,7 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -42,6 +43,8 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -57,16 +60,11 @@ public class AngelsHerald extends CardImpl<AngelsHerald> {
     private static final FilterControlledCreaturePermanent filterBlue = new FilterControlledCreaturePermanent("a blue creature");
 
     static {
-        filterGreen.getColor().setGreen(true);
-        filterGreen.setUseColor(true);
-        filterWhite.getColor().setWhite(true);
-        filterWhite.setUseColor(true);
-        filterBlue.getColor().setBlue(true);
-        filterBlue.setUseColor(true);
-    }
+        filterGreen.add(new ColorPredicate(ObjectColor.GREEN));
+        filterWhite.add(new ColorPredicate(ObjectColor.WHITE));
+        filterBlue.add(new ColorPredicate(ObjectColor.BLUE));
 
-    static {
-        filter.getName().add("Empyrial Archangel");
+        filter.add(new NamePredicate("Empyrial Archangel"));
     }
 
     public AngelsHerald(UUID ownerId) {

@@ -37,8 +37,8 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.keyword.BushidoAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -49,8 +49,7 @@ public class NagaoBoundByHonor extends CardImpl<NagaoBoundByHonor> {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Samurai creatures");
 
     static {
-        filter.getSubtype().add("Samurai");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Samurai"));
     }
 
     public NagaoBoundByHonor(UUID ownerId) {

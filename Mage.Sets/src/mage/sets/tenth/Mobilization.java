@@ -39,8 +39,8 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.SoldierToken;
 
 /**
@@ -52,8 +52,7 @@ public class Mobilization extends CardImpl<Mobilization> {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Soldier creatures");
 
     static {
-        filter.getSubtype().add("Soldier");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Soldier"));
     }
 
     public Mobilization(UUID ownerId) {

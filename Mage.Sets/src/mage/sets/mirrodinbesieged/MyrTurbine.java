@@ -39,6 +39,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreatureCard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.MyrToken;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
@@ -53,8 +54,8 @@ public class MyrTurbine extends CardImpl<MyrTurbine> {
     private static final FilterControlledPermanent filterMyr = new FilterControlledPermanent("Myr you control");
 
     static {
-        filterCard.getSubtype().add("Myr");
-        filterMyr.getSubtype().add("Myr");
+        filterCard.add(new SubtypePredicate("Myr"));
+        filterMyr.add(new SubtypePredicate("Myr"));
 
     }
 

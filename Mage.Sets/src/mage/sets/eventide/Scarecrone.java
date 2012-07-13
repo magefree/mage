@@ -41,8 +41,8 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -53,9 +53,8 @@ public class Scarecrone extends CardImpl<Scarecrone> {
     private final static FilterCard filter = new FilterCard("artifact creature card from your graveyard");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.getCardType().add(CardType.CREATURE);
-        filter.setScopeCardType(Filter.ComparisonScope.All);
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
     public Scarecrone(UUID ownerId) {

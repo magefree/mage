@@ -40,8 +40,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -59,8 +59,7 @@ public class NineRingedBo extends CardImpl<NineRingedBo> {
      private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("spirit");
 
     static {
-        filter.getSubtype().add("Spirit");
-        filter.setScopeSubtype(ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Spirit"));
     }
 
     public NineRingedBo(UUID ownerId) {

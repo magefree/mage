@@ -39,8 +39,8 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -52,8 +52,7 @@ public class Lifesmith extends CardImpl<Lifesmith> {
 
     private static final FilterSpell filter = new FilterSpell("an artifact spell");
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public Lifesmith (UUID ownerId) {

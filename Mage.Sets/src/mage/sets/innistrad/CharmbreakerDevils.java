@@ -42,9 +42,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
@@ -58,9 +59,9 @@ public class CharmbreakerDevils extends CardImpl<CharmbreakerDevils> {
     private static final FilterSpell filter = new FilterSpell("instant or sorcery card");
 
     static {
-        filter.getCardType().add(CardType.INSTANT);
-        filter.getCardType().add(CardType.SORCERY);
-        filter.setScopeSubtype(ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.INSTANT),
+                new CardTypePredicate(CardType.SORCERY)));
     }
 
     public CharmbreakerDevils(UUID ownerId) {
@@ -109,9 +110,9 @@ class CharmbreakerDevilsEffect extends OneShotEffect<CharmbreakerDevilsEffect> {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             FilterCard filter = new FilterCard("instant or sorcery card");
-            filter.getCardType().add(CardType.INSTANT);
-            filter.getCardType().add(CardType.SORCERY);
-            filter.setScopeSubtype(ComparisonScope.Any);
+            filter.add(Predicates.or(
+                    new CardTypePredicate(CardType.INSTANT),
+                    new CardTypePredicate(CardType.SORCERY)));
             Card[] cards = player.getGraveyard().getCards(filter, game).toArray(new Card[0]);
             if (cards.length > 0) {
                 Random rnd = new Random();

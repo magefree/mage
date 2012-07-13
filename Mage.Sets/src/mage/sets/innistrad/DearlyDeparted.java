@@ -41,8 +41,8 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
@@ -56,8 +56,7 @@ public class DearlyDeparted extends CardImpl<DearlyDeparted> {
     private static final String ruleText = "As long as Dearly Departed is in your graveyard, each Human creature you control enters the battlefield with an additional +1/+1 counter on it";
 
     static {
-        filterHuman.getSubtype().add("Human");
-        filterHuman.setScopeSubtype(Filter.ComparisonScope.Any);
+        filterHuman.add(new SubtypePredicate("Human"));
     }
 
     public DearlyDeparted(UUID ownerId) {

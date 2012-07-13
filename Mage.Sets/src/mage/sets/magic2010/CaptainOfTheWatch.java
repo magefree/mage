@@ -42,6 +42,7 @@ import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.SoldierToken;
 
 /**
@@ -52,7 +53,7 @@ public class CaptainOfTheWatch extends CardImpl<CaptainOfTheWatch> {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Soldier creatures");
 
     static {
-        filter.getSubtype().add("Soldier");
+        filter.add(new SubtypePredicate("Soldier"));
     }
 
     public CaptainOfTheWatch(UUID ownerId) {

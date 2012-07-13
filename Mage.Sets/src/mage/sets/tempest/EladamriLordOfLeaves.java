@@ -38,9 +38,9 @@ import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.abilities.keyword.ForestwalkAbility;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -52,10 +52,8 @@ public class EladamriLordOfLeaves extends CardImpl<EladamriLordOfLeaves> {
     private final static FilterPermanent filterPermanents = new FilterPermanent("Elves");
 
     static {
-        filterCreatures.getSubtype().add("Elf");
-        filterCreatures.setScopeSubtype(Filter.ComparisonScope.Any);
-        filterPermanents.getSubtype().add("Elf");
-        filterPermanents.setScopeSubtype(Filter.ComparisonScope.Any);
+        filterCreatures.add(new SubtypePredicate("Elf"));
+        filterPermanents.add(new SubtypePredicate("Elf"));
     }
 
     public EladamriLordOfLeaves(UUID ownerId) {

@@ -44,8 +44,8 @@ import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 
@@ -57,8 +57,7 @@ public class BlinkmothNexus extends CardImpl<BlinkmothNexus> {
     private final static FilterPermanent filter = new FilterPermanent("Blinkmoth");
 
     static {
-        filter.getSubtype().add("Blinkmoth");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Blinkmoth"));
     }
 
     public BlinkmothNexus(UUID ownerId) {

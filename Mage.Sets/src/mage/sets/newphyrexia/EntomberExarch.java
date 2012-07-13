@@ -42,6 +42,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -87,7 +89,7 @@ class EntomberExarchEffect extends OneShotEffect<EntomberExarchEffect> {
     private static final FilterCard filter = new FilterCard("noncreature card");
 
     static {
-        filter.getNotCardType().add(CardType.CREATURE);
+        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
     }
 
     EntomberExarchEffect() {

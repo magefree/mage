@@ -37,6 +37,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -48,8 +49,7 @@ public class GoblinGrenade extends CardImpl<GoblinGrenade> {
     private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Goblin");
 
     static {
-        filter.getSubtype().add("Goblin");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Goblin"));
     }
 
     public GoblinGrenade(UUID ownerId) {

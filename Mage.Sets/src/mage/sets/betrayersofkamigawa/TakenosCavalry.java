@@ -39,8 +39,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.BushidoAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterAttackingOrBlockingCreature;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetAttackingOrBlockingCreature;
 
 /**
@@ -52,8 +52,7 @@ public class TakenosCavalry extends CardImpl<TakenosCavalry> {
     private final static FilterAttackingOrBlockingCreature filter = new FilterAttackingOrBlockingCreature("attacking or blocking Spirit");
 
     static {
-        filter.getSubtype().add("Spirit");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Spirit"));
     }
 
     public TakenosCavalry(UUID ownerId) {

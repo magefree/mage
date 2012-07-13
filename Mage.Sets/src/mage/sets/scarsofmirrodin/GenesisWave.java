@@ -40,6 +40,7 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -91,8 +92,7 @@ class GenesisWaveEffect extends OneShotEffect<GenesisWaveEffect> {
             game.setZone(card.getId(), Zone.PICK);
         }
         FilterCard filter = new FilterCard("card with converted mana cost " + count + " or less to put onto the battlefield");
-        filter.setConvertedManaCost(count + 1);
-        filter.setConvertedManaCostComparison(ComparisonType.LessThan);
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, count + 1));
         TargetCard target1 = new TargetCard(Zone.PICK, filter);
         while (cards.size() > 0 && player.choose(Outcome.PutCardInPlay, cards, target1, game)) {
             Card card = cards.get(target1.getFirstTarget(), game);

@@ -39,8 +39,8 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetControlledPermanent;
 
@@ -53,8 +53,7 @@ public class WeirdingShaman extends CardImpl<WeirdingShaman> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("Goblin");
 
     static {
-        filter.getSubtype().add("Goblin");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Goblin"));
     }
 
     public WeirdingShaman(UUID ownerId) {

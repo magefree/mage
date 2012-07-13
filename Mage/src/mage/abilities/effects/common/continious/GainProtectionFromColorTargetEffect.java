@@ -32,8 +32,8 @@ import mage.Constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.choices.ChoiceColor;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -48,8 +48,6 @@ public class GainProtectionFromColorTargetEffect extends GainAbilityTargetEffect
     public GainProtectionFromColorTargetEffect(Duration duration) {
         super(new ProtectionAbility(new FilterCard()), duration);
         protectionFilter = (FilterCard)((ProtectionAbility)ability).getFilter();
-        protectionFilter.setUseColor(true);
-        protectionFilter.setScopeColor(ComparisonScope.Any);
         staticText = "target creature you control gains protection from the color of your choice " + duration.toString();
     }
 
@@ -68,7 +66,7 @@ public class GainProtectionFromColorTargetEffect extends GainAbilityTargetEffect
         Permanent creature = game.getPermanent(source.getFirstTarget());
         if (creature != null) {
             ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
-            protectionFilter.setColor(choice.getColor());
+            protectionFilter.add(new ColorPredicate(choice.getColor()));
             protectionFilter.setMessage(choice.getChoice());
             ((ProtectionAbility)ability).setFilter(protectionFilter);
             creature.addAbility(ability, game);

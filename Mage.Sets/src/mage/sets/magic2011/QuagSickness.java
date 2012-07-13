@@ -42,6 +42,7 @@ import mage.abilities.effects.common.continious.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -54,7 +55,7 @@ public class QuagSickness extends CardImpl<QuagSickness> {
     private static final FilterLandPermanent filter = new FilterLandPermanent("Swamp you control");
 
     static {
-        filter.getSubtype().add("Swamp");
+        filter.add(new SubtypePredicate("Swamp"));
         filter.setTargetController(TargetController.YOU);
     }
 

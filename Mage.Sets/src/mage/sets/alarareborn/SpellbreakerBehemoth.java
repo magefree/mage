@@ -40,6 +40,8 @@ import mage.abilities.effects.common.CantCounterSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.PowerPredicate;
 
 
 /**
@@ -51,9 +53,8 @@ public class SpellbreakerBehemoth extends CardImpl<SpellbreakerBehemoth> {
     private static final FilterSpell filter = new FilterSpell("Creature spells you control with power 5 or greater");
 
     static {
-        filter.getCardType().add(CardType.CREATURE);
-        filter.setPower(4);
-        filter.setPowerComparison(Filter.ComparisonType.GreaterThan);
+        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 4));
     }
 
     public SpellbreakerBehemoth(UUID ownerId) {

@@ -55,6 +55,7 @@ public class FilterPermanent<T extends FilterPermanent<T>> extends FilterObject<
     protected boolean phasedIn;
     protected TargetController controller = TargetController.ANY;
     protected TargetController owner = TargetController.ANY;
+    protected boolean another;
 
     public FilterPermanent() {
         super("permanent");
@@ -76,6 +77,7 @@ public class FilterPermanent<T extends FilterPermanent<T>> extends FilterObject<
         this.phasedIn = filter.phasedIn;
         this.controller = filter.controller;
         this.owner = filter.owner;
+        this.another = filter.another;
     }
 
     public FilterPermanent(String name) {
@@ -202,6 +204,14 @@ public class FilterPermanent<T extends FilterPermanent<T>> extends FilterObject<
 
     public void setTargetOwner(TargetController owner) {
         this.owner = owner;
+    }
+
+    public boolean isAnother() {
+        return another;
+    }
+
+    public void setAnother(boolean another) {
+        this.another = another;
     }
 
     public boolean matchOwner(UUID testOwnerId) {

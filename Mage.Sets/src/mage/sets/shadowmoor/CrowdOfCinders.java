@@ -33,12 +33,14 @@ import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -49,8 +51,7 @@ public class CrowdOfCinders extends CardImpl<CrowdOfCinders> {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("black permanents you control");
 
     static {
-        filter.getColor().setBlack(true);
-        filter.setUseColor(true);
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
     public CrowdOfCinders(UUID ownerId) {

@@ -41,6 +41,7 @@ import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.WitherAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -51,8 +52,7 @@ public class FangSkulkin extends CardImpl<FangSkulkin> {
     private final static FilterCreaturePermanent filterBlackCreature = new FilterCreaturePermanent("black creature");
 
     static {
-        filterBlackCreature.setUseColor(true);
-        filterBlackCreature.setColor(ObjectColor.BLACK);
+        filterBlackCreature.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
     public FangSkulkin(UUID ownerId) {

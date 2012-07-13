@@ -39,7 +39,6 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -54,7 +53,6 @@ public class SoldierReplica extends CardImpl<SoldierReplica> {
     static {
         filter.setBlocking(true);
         filter.setAttacking(true);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
     }
 
     public SoldierReplica(UUID ownerId) {

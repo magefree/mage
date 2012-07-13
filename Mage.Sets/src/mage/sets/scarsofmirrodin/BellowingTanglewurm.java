@@ -34,12 +34,14 @@ import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -49,10 +51,8 @@ public class BellowingTanglewurm extends CardImpl<BellowingTanglewurm> {
     private static final FilterPermanent filter = new FilterPermanent("green creatures");
 
     static {
-        filter.getCardType().add(CardType.CREATURE);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
-        filter.setUseColor(true);
-        filter.getColor().setGreen(true);
+        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
     public BellowingTanglewurm (UUID ownerId) {

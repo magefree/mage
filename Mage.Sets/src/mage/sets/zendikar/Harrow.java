@@ -37,6 +37,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterBasicLandCard;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
 
@@ -49,7 +50,7 @@ public class Harrow extends CardImpl<Harrow> {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a land.");
 
     static{
-        filter.getCardType().add(CardType.LAND);
+        filter.add(new CardTypePredicate(CardType.LAND));
     }
 
     public Harrow(UUID ownerId){

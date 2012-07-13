@@ -32,6 +32,7 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.DamageAllEffect;
@@ -40,6 +41,9 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -53,12 +57,9 @@ public class TiborAndLumia extends CardImpl<TiborAndLumia> {
     private final static FilterSpell filterRed = new FilterSpell("a red spell");
 
     static {
-        filterBlue.setUseColor(true);
-        filterBlue.getColor().setBlue(true);
-        filter.getAbilities().add(FlyingAbility.getInstance());
-        filter.setNotAbilities(true);
-        filterRed.setUseColor(true);
-        filterRed.getColor().setRed(true);
+        filterBlue.add(new ColorPredicate(ObjectColor.BLUE));
+        filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
+        filterRed.add(new ColorPredicate(ObjectColor.RED));
     }
 
     public TiborAndLumia(UUID ownerId) {

@@ -38,6 +38,8 @@ import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -52,8 +54,7 @@ public class RestorationAngel extends CardImpl<RestorationAngel> {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("non-Angel");
 
     static {
-        filter.getSubtype().add("Angel");
-        filter.setNotSubtype(true);
+        filter.add(Predicates.not(new SubtypePredicate("Angel")));
     }
 
     public RestorationAngel(UUID ownerId) {

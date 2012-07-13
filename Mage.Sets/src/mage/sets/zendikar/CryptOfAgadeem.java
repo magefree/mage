@@ -40,6 +40,7 @@ import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreatureCard;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -50,8 +51,7 @@ public class CryptOfAgadeem extends CardImpl<CryptOfAgadeem> {
     private static final FilterCreatureCard filter = new FilterCreatureCard("black creature card");
 
     static {
-        filter.setColor(ObjectColor.BLACK);
-        filter.setUseColor(true);
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
     public CryptOfAgadeem(UUID ownerId) {

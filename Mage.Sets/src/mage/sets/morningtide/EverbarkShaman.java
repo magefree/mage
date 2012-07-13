@@ -39,8 +39,9 @@ import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -54,9 +55,8 @@ public class EverbarkShaman extends CardImpl<EverbarkShaman> {
     private final static FilterCard filterTreefolk = new FilterCard("Treefolk from your graveyard");
 
     static {
-        filterForest.getName().add("Forest");
-        filterTreefolk.getSubtype().add("Treefolk");
-        filterTreefolk.setScopeSubtype(Filter.ComparisonScope.Any);
+        filterForest.add(new NamePredicate("Forest"));
+        filterTreefolk.add(new SubtypePredicate("Treefolk"));
     }
 
     public EverbarkShaman(UUID ownerId) {

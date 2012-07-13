@@ -40,6 +40,7 @@ import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -50,7 +51,7 @@ public class KorSpiritdancer extends CardImpl<KorSpiritdancer> {
     private static final FilterSpell filter = new FilterSpell("an Aura spell");
 
     static {
-        filter.getSubtype().add("Aura");
+        filter.add(new SubtypePredicate("Aura"));
     }
 
     public KorSpiritdancer(UUID ownerId) {

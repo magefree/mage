@@ -38,6 +38,7 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterAttackingCreature;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -49,10 +50,8 @@ public class AgrusKosWojekVeteran extends CardImpl<AgrusKosWojekVeteran> {
     private final static FilterAttackingCreature filterWhite = new FilterAttackingCreature("attacking white creatures");
 
     static {
-        filterRed.setUseColor(true);
-        filterRed.setColor(ObjectColor.RED);
-        filterWhite.setUseColor(true);
-        filterWhite.setColor(ObjectColor.WHITE);
+        filterRed.add(new ColorPredicate(ObjectColor.RED));
+        filterWhite.add(new ColorPredicate(ObjectColor.WHITE));
 
     }
 

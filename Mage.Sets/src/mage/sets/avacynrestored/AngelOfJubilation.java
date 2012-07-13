@@ -39,6 +39,8 @@ import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -52,9 +54,7 @@ public class AngelOfJubilation extends CardImpl<AngelOfJubilation> {
     private final static FilterCreaturePermanent filterNonBlack = new FilterCreaturePermanent("nonblack creatures");
 
     static {
-        filterNonBlack.setUseColor(true);
-        filterNonBlack.setColor(ObjectColor.BLACK);
-        filterNonBlack.setNotColor(true);
+        filterNonBlack.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
     }
 
     public AngelOfJubilation(UUID ownerId) {

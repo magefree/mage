@@ -36,8 +36,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -71,8 +71,7 @@ class HushEffect extends OneShotEffect<HushEffect> {
     private final static FilterPermanent filter = new FilterPermanent("");
 
     static {
-        filter.getCardType().add(CardType.ENCHANTMENT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
 
     public HushEffect() {

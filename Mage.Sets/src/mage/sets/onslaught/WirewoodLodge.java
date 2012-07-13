@@ -41,6 +41,7 @@ import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -50,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class WirewoodLodge extends CardImpl<WirewoodLodge> {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Elf");
     static {
-        filter.getSubtype().add("Elf");
+        filter.add(new SubtypePredicate("Elf"));
     }
 
     public WirewoodLodge(UUID ownerId) {

@@ -40,6 +40,7 @@ import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
@@ -53,7 +54,7 @@ public class SeshiroTheAnointed extends CardImpl<SeshiroTheAnointed> {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Snakes");
 
     static {
-        filter.getSubtype().add("Snake");
+        filter.add(new SubtypePredicate("Snake"));
     }
 
     public SeshiroTheAnointed(UUID ownerId) {

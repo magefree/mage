@@ -36,8 +36,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -49,8 +49,7 @@ public class ThorntoothWitch extends CardImpl<ThorntoothWitch> {
     private final static FilterSpell filter = new FilterSpell("Treefolk");
 
     static {
-        filter.getSubtype().add("Treefolk");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Treefolk"));
     }
 
     public ThorntoothWitch(UUID ownerId) {

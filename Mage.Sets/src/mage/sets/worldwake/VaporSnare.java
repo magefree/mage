@@ -41,6 +41,7 @@ import mage.abilities.effects.common.continious.ControlEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -91,7 +92,7 @@ class VaporSnareEffect extends OneShotEffect<VaporSnareEffect> {
 
     static {
         filter = new FilterControlledPermanent("land");
-        filter.getCardType().add(CardType.LAND);
+        filter.add(new CardTypePredicate(CardType.LAND));
     }
 
     VaporSnareEffect( ) {

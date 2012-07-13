@@ -37,8 +37,9 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -54,9 +55,7 @@ public class Immerwolf extends CardImpl<Immerwolf> {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Wolf and Werewolf creatures");
 
     static {
-        filter.getSubtype().add("Wolf");
-        filter.getSubtype().add("Werewolf");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(Predicates.or(new SubtypePredicate("Wolf"), new SubtypePredicate("Werewolf")));
     }
 
     public Immerwolf(UUID ownerId) {
@@ -95,11 +94,8 @@ class ImmerwolfEffect extends ReplacementEffectImpl<ImmerwolfEffect> {
     private final static FilterCreaturePermanent filterNonhuman = new FilterCreaturePermanent("Non-human creature");
 
     static {
-        filterWerewolf.getSubtype().add("Werewolf");
-        filterWerewolf.setScopeSubtype(Filter.ComparisonScope.Any);
-        filterNonhuman.getSubtype().add("Human");
-        filterNonhuman.setScopeSubtype(Filter.ComparisonScope.Any);
-        filterNonhuman.setNotFilter(true);
+        filterWerewolf.add(new SubtypePredicate("Werewolf"));
+        filterNonhuman.add(Predicates.not(new SubtypePredicate("Human")));
     }
 
     public ImmerwolfEffect() {

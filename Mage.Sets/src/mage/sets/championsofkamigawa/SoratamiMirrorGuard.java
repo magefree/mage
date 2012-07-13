@@ -45,6 +45,8 @@ import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -57,10 +59,8 @@ public class SoratamiMirrorGuard extends CardImpl<SoratamiMirrorGuard> {
     private final static FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("creature with power 2 or less");
 
     static {
-        filter.getCardType().add(CardType.LAND);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
-        filterCreature.setPower(3);
-        filterCreature.setPowerComparison(Filter.ComparisonType.LessThan);
+        filter.add(new CardTypePredicate(CardType.LAND));
+        filterCreature.add(new PowerPredicate(Filter.ComparisonType.LessThan, 3));
     }
 
     public SoratamiMirrorGuard(UUID ownerId) {

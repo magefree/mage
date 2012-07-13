@@ -33,8 +33,9 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -46,12 +47,12 @@ public class NaturesSpiral extends CardImpl<NaturesSpiral> {
     private static final FilterCard filter = new FilterCard("permanent card from your graveyard");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.getCardType().add(CardType.CREATURE);
-        filter.getCardType().add(CardType.ENCHANTMENT);
-        filter.getCardType().add(CardType.LAND);
-        filter.getCardType().add(CardType.PLANESWALKER);
-        filter.setScopeCardType(ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.ARTIFACT),
+                new CardTypePredicate(CardType.CREATURE),
+                new CardTypePredicate(CardType.ENCHANTMENT),
+                new CardTypePredicate(CardType.LAND),
+                new CardTypePredicate(CardType.PLANESWALKER)));
     }
 
     public NaturesSpiral(UUID ownerId) {

@@ -43,6 +43,7 @@ import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  * @author Loki
@@ -54,8 +55,8 @@ public class SachiDaughterOfSeshiro extends CardImpl<SachiDaughterOfSeshiro> {
     private final static FilterCreaturePermanent shamanFilter = new FilterCreaturePermanent("Shamans");
 
     static {
-        snakeFilter.getSubtype().add("Snake");
-        shamanFilter.getSubtype().add("Shaman");
+        snakeFilter.add(new SubtypePredicate("Snake"));
+        shamanFilter.add(new SubtypePredicate("Shaman"));
     }
 
     public SachiDaughterOfSeshiro(UUID ownerId) {

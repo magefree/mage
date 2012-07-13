@@ -42,6 +42,7 @@ import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
@@ -54,7 +55,7 @@ public class SerpentOfTheEndlessSea extends CardImpl<SerpentOfTheEndlessSea> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("Islands you control");
 
     static {
-        filter.getSubtype().add("Island");
+        filter.add(new SubtypePredicate("Island"));
     }
 
     public SerpentOfTheEndlessSea(UUID ownerId) {
@@ -112,7 +113,7 @@ class SerpentOfTheEndlessSeaEffect extends ReplacementEffectImpl<SerpentOfTheEnd
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.DECLARE_ATTACKER && source.getSourceId().equals(event.getSourceId())) {
             FilterPermanent filter = new FilterPermanent();
-            filter.getSubtype().add("Island");
+            filter.add(new SubtypePredicate("Island"));
 
             if (game.getBattlefield().countAll(filter, event.getTargetId(), game) == 0) {
                 return true;

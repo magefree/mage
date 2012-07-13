@@ -39,6 +39,7 @@ import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.IslandwalkAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -77,7 +78,7 @@ class HarborSerpentEffect extends RestrictionEffect<HarborSerpentEffect> {
 
     public HarborSerpentEffect() {
         super(Duration.WhileOnBattlefield);
-        filter.getSubtype().add("Island");
+        filter.add(new SubtypePredicate("Island"));
         staticText = "{this} can't attack unless there are five or more Islands on the battlefield";
     }
 

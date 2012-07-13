@@ -37,8 +37,8 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -46,11 +46,10 @@ import mage.target.TargetPermanent;
  * @author Loki
  */
 public class AcidWebSpider extends CardImpl<AcidWebSpider> {
-    private static FilterPermanent filter = new FilterPermanent("Equipment");
+    private static final FilterPermanent filter = new FilterPermanent("Equipment");
 
     static {
-        filter.getSubtype().add("Equipment");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Equipment"));
     }
 
     public AcidWebSpider (UUID ownerId) {

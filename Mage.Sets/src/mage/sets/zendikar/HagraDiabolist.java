@@ -38,8 +38,8 @@ import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPlayer;
 
 /**
@@ -51,8 +51,7 @@ public class HagraDiabolist extends CardImpl<HagraDiabolist> {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Allies you control");
 
     static {
-        filter.getSubtype().add("Ally");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Ally"));
         filter.setTargetController(Constants.TargetController.YOU);
     }
 

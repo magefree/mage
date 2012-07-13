@@ -32,8 +32,8 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -45,8 +45,7 @@ public class Fabricate extends CardImpl<Fabricate> {
     private final static FilterCard filter = new FilterCard("artifact");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public Fabricate(UUID ownerId) {

@@ -27,9 +27,12 @@
  */
 package mage.sets.lorwyn;
 
-import mage.Constants;
+import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.Constants.TargetController;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
@@ -38,11 +41,8 @@ import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-
-import java.util.UUID;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -50,14 +50,11 @@ import java.util.UUID;
  */
 public class ScionOfOona extends CardImpl<ScionOfOona> {
 
-    private final static FilterCreaturePermanent filter1 = new FilterCreaturePermanent("Faerie creatures");
-    private final static FilterControlledPermanent filter2 = new FilterControlledPermanent("Faeries");
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Faeries");
 
     static {
-        filter1.getSubtype().add("Faerie");
-        filter1.setScopeSubtype(Filter.ComparisonScope.Any);
-        filter2.getSubtype().add("Faerie");
-        filter2.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Faerie"));
+        filter.setTargetController(TargetController.YOU);
     }
 
     public ScionOfOona(UUID ownerId) {
@@ -70,10 +67,11 @@ public class ScionOfOona extends CardImpl<ScionOfOona> {
         this.toughness = new MageInt(1);
         this.addAbility(FlashAbility.getInstance());
         this.addAbility(FlyingAbility.getInstance());
+
         // Other Faerie creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Constants.Duration.WhileOnBattlefield, filter1, true)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
         // Other Faeries you control have shroud.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(ShroudAbility.getInstance(), Constants.Duration.EndOfTurn, filter2, true)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(ShroudAbility.getInstance(), Duration.EndOfTurn, filter, true)));
     }
 
     public ScionOfOona(final ScionOfOona card) {

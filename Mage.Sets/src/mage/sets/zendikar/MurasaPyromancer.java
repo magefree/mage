@@ -38,8 +38,8 @@ import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -51,8 +51,7 @@ public class MurasaPyromancer extends CardImpl<MurasaPyromancer> {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Ally you control");
 
     static {
-        filter.getSubtype().add("Ally");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Ally"));
         filter.setTargetController(Constants.TargetController.YOU);
     }
 

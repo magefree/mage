@@ -36,6 +36,7 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -47,7 +48,7 @@ public class PrimalBellow extends CardImpl<PrimalBellow> {
     private static final FilterLandPermanent filter = new FilterLandPermanent("Forest you control");
 
     static {
-        filter.getSubtype().add("Forest");
+        filter.add(new SubtypePredicate("Forest"));
         filter.setTargetController(TargetController.YOU);
 
     }

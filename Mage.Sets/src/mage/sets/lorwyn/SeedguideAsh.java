@@ -34,8 +34,8 @@ import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
@@ -49,8 +49,7 @@ public class SeedguideAsh extends CardImpl<SeedguideAsh> {
     private final static FilterCard filter = new FilterCard("Forest");
 
     static {
-        filter.getSubtype().add("Forest");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Forest"));
     }
 
     public SeedguideAsh(UUID ownerId) {

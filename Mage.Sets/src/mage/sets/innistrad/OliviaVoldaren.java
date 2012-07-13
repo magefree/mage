@@ -43,8 +43,8 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -53,14 +53,12 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class OliviaVoldaren extends CardImpl<OliviaVoldaren> {
 
-    private static FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
-    private static FilterCreaturePermanent vampireFilter = new FilterCreaturePermanent("Vampire");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
+    private static final FilterCreaturePermanent vampireFilter = new FilterCreaturePermanent("Vampire");
 
     static {
         filter.setAnother(true);
-        //
-        vampireFilter.getSubtype().add("Vampire");
-        vampireFilter.setScopeSubtype(Filter.ComparisonScope.Any);
+        vampireFilter.add(new SubtypePredicate("Vampire"));
     }
 
     public OliviaVoldaren(UUID ownerId) {

@@ -32,6 +32,8 @@ import java.util.UUID;
 
 import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
@@ -43,8 +45,8 @@ import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -57,8 +59,7 @@ public class PuresteelPaladin extends CardImpl<PuresteelPaladin> {
     private static final FilterPermanent filter = new FilterPermanent("Equipment");
 
     static {
-        filter.getSubtype().add("Equipment");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Equipment"));
     }
 
     public PuresteelPaladin(UUID ownerId) {
@@ -70,13 +71,10 @@ public class PuresteelPaladin extends CardImpl<PuresteelPaladin> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(new PuresteelPaladinTriggeredAbility());
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD,
-                                                new ConditionalContinousEffect(
-                                                        new GainAbilityControlledEffect(
-                                                                new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(0)),
-                                                                Constants.Duration.WhileOnBattlefield, filter),
-                                                        MetalcraftCondition.getInstance(),
-                                                        "Metalcraft - Equipment you control have equip {0} as long as you control three or more artifacts")));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(
+                new GainAbilityControlledEffect(new EquipAbility(Outcome.AddAbility, new GenericManaCost(0)), Duration.WhileOnBattlefield, filter),
+                MetalcraftCondition.getInstance(),
+                "Metalcraft - Equipment you control have equip {0} as long as you control three or more artifacts")));
     }
 
     public PuresteelPaladin(final PuresteelPaladin card) {

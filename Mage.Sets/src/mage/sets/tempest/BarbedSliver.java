@@ -39,8 +39,8 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -51,8 +51,7 @@ public class BarbedSliver extends CardImpl<BarbedSliver> {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Sliver creatures");
 
     static {
-        filter.getSubtype().add("Sliver");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Sliver"));
     }
 
     public BarbedSliver(UUID ownerId) {

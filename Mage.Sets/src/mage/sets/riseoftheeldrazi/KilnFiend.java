@@ -35,8 +35,9 @@ import mage.MageInt;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -46,9 +47,9 @@ public class KilnFiend extends CardImpl<KilnFiend> {
 
     private static final FilterSpell filter = new FilterSpell("an instant or sorcery spell");
     static {
-        filter.getCardType().add(CardType.INSTANT);
-        filter.getCardType().add(CardType.SORCERY);
-        filter.setScopeCardType(ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.INSTANT),
+                new CardTypePredicate(CardType.SORCERY)));
     }
 
     public KilnFiend(UUID ownerId) {

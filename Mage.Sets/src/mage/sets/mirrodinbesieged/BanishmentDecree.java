@@ -33,8 +33,9 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -42,13 +43,13 @@ import mage.target.TargetPermanent;
  * @author Loki
  */
 public class BanishmentDecree extends CardImpl<BanishmentDecree> {
-    private static FilterPermanent filter = new FilterPermanent("artifact, creature, or enchantment");
+    private static final FilterPermanent filter = new FilterPermanent("artifact, creature, or enchantment");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.getCardType().add(CardType.CREATURE);
-        filter.getCardType().add(CardType.ENCHANTMENT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.ARTIFACT),
+                new CardTypePredicate(CardType.CREATURE),
+                new CardTypePredicate(CardType.ENCHANTMENT)));
     }
 
     public BanishmentDecree (UUID ownerId) {

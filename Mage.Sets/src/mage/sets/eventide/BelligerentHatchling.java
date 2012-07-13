@@ -40,6 +40,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  * @author Loki
@@ -50,10 +51,8 @@ public class BelligerentHatchling extends CardImpl<BelligerentHatchling> {
     private final static FilterSpell filterWhiteSpell = new FilterSpell("a white spell");
 
     static {
-        filterRedSpell.setUseColor(true);
-        filterRedSpell.setColor(ObjectColor.RED);
-        filterWhiteSpell.setUseColor(true);
-        filterWhiteSpell.setColor(ObjectColor.WHITE);
+        filterRedSpell.add(new ColorPredicate(ObjectColor.RED));
+        filterWhiteSpell.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
     public BelligerentHatchling(UUID ownerId) {

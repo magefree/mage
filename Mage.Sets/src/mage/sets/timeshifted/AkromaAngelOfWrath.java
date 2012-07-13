@@ -31,27 +31,24 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.keyword.*;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author Loki
  */
 public class AkromaAngelOfWrath extends CardImpl<AkromaAngelOfWrath> {
-    private static FilterCard filter = new FilterCard("Black");
-    private static FilterCard filter2 = new FilterCard("Red");
+    private static final FilterCard filter = new FilterCard("Black");
+    private static final FilterCard filter2 = new FilterCard("Red");
 
     static {
-        filter.setUseColor(true);
-        filter.getColor().setBlack(true);
-        filter.setScopeColor(Filter.ComparisonScope.Any);
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
 
-        filter2.setUseColor(true);
-        filter2.getColor().setRed(true);
-        filter2.setScopeColor(Filter.ComparisonScope.Any);
+        filter2.add(new ColorPredicate(ObjectColor.RED));
     }
 
     public AkromaAngelOfWrath(UUID ownerId) {

@@ -40,6 +40,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.permanent.token.Token;
 
 /**
@@ -52,10 +53,8 @@ public class CreakwoodLiege extends CardImpl<CreakwoodLiege> {
         private final static FilterCreaturePermanent filterGreenCreature = new FilterCreaturePermanent("green creatures");
 
         static {
-            filterBlackCreature.setUseColor(true);
-            filterBlackCreature.setColor(ObjectColor.BLACK);
-            filterGreenCreature.setUseColor(true);
-            filterGreenCreature.setColor(ObjectColor.GREEN);
+            filterBlackCreature.add(new ColorPredicate(ObjectColor.BLACK));
+            filterGreenCreature.add(new ColorPredicate(ObjectColor.GREEN));
         }
 
 

@@ -32,6 +32,7 @@ import mage.Constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -44,7 +45,7 @@ public class HumanFrailty extends CardImpl<HumanFrailty> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Human creature");
 
     static {
-        filter.getSubtype().add("Human");
+        filter.add(new SubtypePredicate("Human"));
     }
 
     public HumanFrailty(UUID ownerId) {

@@ -45,8 +45,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -61,9 +62,9 @@ public class GethLordOfTheVault extends CardImpl<GethLordOfTheVault> {
     private static final FilterCard filter = new FilterCard("artifact or creature card from an opponent's graveyard");
 
     static {
-        filter.getCardType().add(CardType.CREATURE);
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.setScopeCardType(ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.ARTIFACT),
+                new CardTypePredicate(CardType.CREATURE)));
     }
 
     public GethLordOfTheVault (UUID ownerId) {

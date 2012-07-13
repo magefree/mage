@@ -33,6 +33,7 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.ControlsPermanentCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
@@ -42,6 +43,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  * @author Loki
@@ -50,8 +52,7 @@ public class EmberWeaver extends CardImpl<EmberWeaver> {
     private static final FilterPermanent redPermanentFilter = new FilterPermanent("red");
 
     static {
-        redPermanentFilter.setUseColor(true);
-        redPermanentFilter.getColor().setRed(true);
+        redPermanentFilter.add(new ColorPredicate(ObjectColor.RED));
     }
 
     public EmberWeaver(UUID ownerId) {

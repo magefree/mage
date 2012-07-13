@@ -36,6 +36,7 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.keyword.AnnihilatorAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -48,7 +49,7 @@ public class HandOfEmrakul extends CardImpl<HandOfEmrakul> {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Eldrazi Spawn");
 
     static {
-        filter.getName().add("Eldrazi Spawn");
+        filter.add(new NamePredicate("Eldrazi Spawn"));
     }
 
     public HandOfEmrakul(UUID ownerId) {

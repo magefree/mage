@@ -31,8 +31,9 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -46,9 +47,7 @@ public class EyeblightsEnding extends CardImpl<EyeblightsEnding> {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Elf creature");
 
     static {
-        filter.getSubtype().add("Elf");
-        filter.setNotSubtype(true);
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(Predicates.not(new SubtypePredicate("Elf")));
     }
 
     public EyeblightsEnding(UUID ownerId) {

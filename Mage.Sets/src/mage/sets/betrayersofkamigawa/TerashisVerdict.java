@@ -34,6 +34,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.common.FilterAttackingCreature;
+import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.common.TargetAttackingCreature;
 
 /**
@@ -45,8 +46,7 @@ public class TerashisVerdict extends CardImpl<TerashisVerdict> {
     private final static FilterAttackingCreature filter = new FilterAttackingCreature("attacking creature with power 3 or less");
 
     static {
-        filter.setPower(4);
-        filter.setPowerComparison(Filter.ComparisonType.LessThan);
+        filter.add(new PowerPredicate(Filter.ComparisonType.LessThan, 4));
     }
 
     public TerashisVerdict(UUID ownerId) {

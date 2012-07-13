@@ -35,9 +35,9 @@ import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -78,8 +78,7 @@ class EmeriaTheSkyRuinTriggeredAbility extends TriggeredAbilityImpl<EmeriaTheSky
     static final FilterLandPermanent filter = new FilterLandPermanent("Plains");
 
     static {
-        filter.getSubtype().add("Plains");
-        filter.setScopeSubtype(ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Plains"));
     }
 
     public EmeriaTheSkyRuinTriggeredAbility() {

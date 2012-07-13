@@ -31,11 +31,12 @@ package mage.sets.conflux;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.ObjectColor;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterPermanent;
-
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -47,10 +48,9 @@ public class CelestialPurge extends CardImpl<CelestialPurge> {
     private static final FilterPermanent filter = new FilterPermanent("black or red permanent");
 
     static {
-        filter.setUseColor(true);
-        filter.setScopeColor(ComparisonScope.Any);
-        filter.getColor().setBlack(true);
-        filter.getColor().setRed(true);
+        filter.add(Predicates.or(
+                new ColorPredicate(ObjectColor.BLACK),
+                new ColorPredicate(ObjectColor.RED)));
     }
 
     public CelestialPurge(UUID ownerId) {

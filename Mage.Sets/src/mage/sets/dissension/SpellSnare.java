@@ -34,6 +34,7 @@ import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.target.TargetSpell;
 
 /**
@@ -44,8 +45,7 @@ public class SpellSnare extends CardImpl<SpellSnare> {
     private final static FilterSpell filter = new FilterSpell("spell with converted mana cost 2");
 
     static {
-        filter.setConvertedManaCost(2);
-        filter.setConvertedManaCostComparison(Filter.ComparisonType.Equal);
+        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, 2));
     }
 
     public SpellSnare(UUID ownerId) {

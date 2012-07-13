@@ -32,12 +32,14 @@ import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -49,10 +51,8 @@ public class EmberstrikeDuo extends CardImpl<EmberstrikeDuo> {
     private static final FilterSpell redFilter = new FilterSpell("a red spell");
 
     static {
-        blackFilter.getColor().setBlack(true);
-        blackFilter.setUseColor(true);
-        redFilter.getColor().setRed(true);
-        redFilter.setUseColor(true);
+        blackFilter.add(new ColorPredicate(ObjectColor.BLACK));
+        redFilter.add(new ColorPredicate(ObjectColor.RED));
     }
 
     public EmberstrikeDuo(UUID ownerId) {

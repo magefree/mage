@@ -47,6 +47,7 @@ import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetControlledPermanent;
 
@@ -60,10 +61,11 @@ public class MarrowGnawer extends CardImpl<MarrowGnawer> {
     private static final FilterControlledCreaturePermanent filterSacrifice = new FilterControlledCreaturePermanent("a Rat");
     private static final FilterControlledCreaturePermanent filter3 = new FilterControlledCreaturePermanent("Rats you control");
 
-    static {
-        filterFear.getSubtype().add("Rat");
-        filterSacrifice.getSubtype().add("Rat");
-        filter3.getSubtype().add("Rat");
+    {
+        SubtypePredicate ratPredicate = new SubtypePredicate("Rat");
+        filterFear.add(ratPredicate);
+        filterSacrifice.add(ratPredicate);
+        filter3.add(ratPredicate);
     }
 
     public MarrowGnawer (UUID ownerId) {

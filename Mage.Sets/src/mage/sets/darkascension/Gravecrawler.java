@@ -38,8 +38,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 
 import java.util.UUID;
@@ -82,8 +82,7 @@ class GravecrawlerPlayEffect extends AsThoughEffectImpl<GravecrawlerPlayEffect> 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("zombie");
 
     static {
-        filter.getSubtype().add("Zombie");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Zombie"));
     }
 
     public GravecrawlerPlayEffect() {

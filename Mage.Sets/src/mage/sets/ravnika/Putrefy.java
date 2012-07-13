@@ -33,8 +33,9 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -42,12 +43,12 @@ import mage.target.TargetPermanent;
  * @author Loki
  */
 public class Putrefy extends CardImpl<Putrefy> {
-    private static FilterPermanent filter = new FilterPermanent("artifact or creature");
+    private static final FilterPermanent filter = new FilterPermanent("artifact or creature");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.getCardType().add(CardType.CREATURE);
-        filter.setScopeCardType(ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.ARTIFACT),
+                new CardTypePredicate(CardType.CREATURE)));
     }
 
     public Putrefy (UUID ownerId) {

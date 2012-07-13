@@ -41,7 +41,7 @@ import java.util.List;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FilterAbility<T extends Ability> extends FilterImpl<T, FilterAbility<T>> implements Filter<T> {
+public class FilterAbility<T extends Ability> extends FilterImpl<T, FilterAbility<T>> {
 
     protected static ListComparer<Outcome> compOutcome = new ListComparer<Outcome>();
 

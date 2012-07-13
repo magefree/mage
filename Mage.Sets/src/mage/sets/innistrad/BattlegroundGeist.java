@@ -35,8 +35,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
@@ -48,8 +48,7 @@ public class BattlegroundGeist extends CardImpl<BattlegroundGeist> {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Spirit creatures");
 
     static {
-        filter.getSubtype().add("Spirit");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Spirit"));
     }
 
     public BattlegroundGeist(UUID ownerId) {

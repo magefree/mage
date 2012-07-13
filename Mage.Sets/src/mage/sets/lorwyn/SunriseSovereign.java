@@ -36,8 +36,8 @@ import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
@@ -50,8 +50,7 @@ public class SunriseSovereign extends CardImpl<SunriseSovereign> {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Giant");
 
     static {
-        filter.getSubtype().add("Giant");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Giant"));
     }
 
     public SunriseSovereign(UUID ownerId) {

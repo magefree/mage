@@ -33,6 +33,7 @@ import mage.Constants.Rarity;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetSpell;
 
 /**
@@ -44,7 +45,7 @@ public class Dispel extends CardImpl<Dispel> {
     private static FilterSpell filter = new FilterSpell("instant spell");
 
     static {
-            filter.getCardType().add(CardType.INSTANT);
+            filter.add(new CardTypePredicate(CardType.INSTANT));
     }
 
     public Dispel(UUID ownerId) {

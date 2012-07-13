@@ -36,8 +36,8 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -51,8 +51,7 @@ public class BlackPoplarShaman extends CardImpl<BlackPoplarShaman> {
     private final static FilterPermanent filter = new FilterPermanent("Treefolk");
 
     static {
-        filter.getSubtype().add("Treefolk");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Treefolk"));
     }
 
     public BlackPoplarShaman(UUID ownerId) {

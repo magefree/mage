@@ -36,8 +36,9 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -75,9 +76,9 @@ class DespiseEffect extends OneShotEffect<DespiseEffect> {
     private static final FilterCard filter = new FilterCard("creature or planeswalker card");
 
     static {
-        filter.getCardType().add(CardType.CREATURE);
-        filter.getCardType().add(CardType.PLANESWALKER);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.CREATURE),
+                new CardTypePredicate(CardType.PLANESWALKER)));
     }
 
     public DespiseEffect() {

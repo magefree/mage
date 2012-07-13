@@ -35,22 +35,21 @@ import mage.MageInt;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.TransformSourceEffect;
-import mage.cards.CardImpl;
 import mage.abilities.keyword.TransformAbility;
-import mage.filter.Filter;
+import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
  *
- * @author anonymous
+ * @author intimidatingant
  */
 public class RavenousDemon extends CardImpl<RavenousDemon> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("Human");
 
     static {
-        filter.getSubtype().add("Human");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Human"));
     }
 
     public RavenousDemon(UUID ownerId) {

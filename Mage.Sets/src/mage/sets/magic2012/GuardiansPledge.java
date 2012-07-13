@@ -33,9 +33,11 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.ObjectColor;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -46,8 +48,7 @@ public class GuardiansPledge extends CardImpl<GuardiansPledge> {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("White creatures");
 
         static {
-            filter.setUseColor(true);
-            filter.getColor().setWhite(true);
+            filter.add(new ColorPredicate(ObjectColor.WHITE));
         }
 
         public GuardiansPledge (UUID ownerId) {

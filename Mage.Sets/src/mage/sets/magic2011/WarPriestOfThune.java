@@ -36,8 +36,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 
@@ -50,8 +50,7 @@ public class WarPriestOfThune extends CardImpl<WarPriestOfThune> {
     private static final FilterPermanent filter = new FilterPermanent("enchantment");
 
     static {
-        filter.getCardType().add(CardType.ENCHANTMENT);
-        filter.setScopeCardType(ComparisonScope.Any);
+        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
 
     public WarPriestOfThune(UUID ownerId) {

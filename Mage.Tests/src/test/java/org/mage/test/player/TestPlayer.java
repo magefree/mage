@@ -51,6 +51,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import mage.filter.predicate.mageobject.NamePredicate;
 
 /**
  *
@@ -134,7 +135,7 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
                 String command = action.getAction();
                 command = command.substring(command.indexOf("attack:") + 7);
                 FilterCreatureForCombat filter = new FilterCreatureForCombat();
-                filter.getName().add(command);
+                filter.add(new NamePredicate(command));
                 Permanent attacker = findPermanent(filter, playerId, game);
                 if (attacker != null && attacker.canAttack(game)) {
                     this.declareAttacker(attacker.getId(), opponentId, game);
@@ -152,11 +153,11 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
                 command = command.substring(command.indexOf("block:") + 6);
                 String[] groups = command.split(";");
                 FilterCreatureForCombat filterBlocker = new FilterCreatureForCombat();
-                filterBlocker.getName().add(groups[0]);
+                filterBlocker.add(new NamePredicate(groups[0]));
                 Permanent blocker = findPermanent(filterBlocker, playerId, game);
                 if (blocker != null) {
                     FilterAttackingCreature filterAttacker = new FilterAttackingCreature();
-                    filterAttacker.getName().add(groups[1]);
+                    filterAttacker.add(new NamePredicate(groups[1]));
                     Permanent attacker = findPermanent(filterAttacker, opponentId, game);
                     if (attacker != null) {
                         this.declareBlocker(blocker.getId(), attacker.getId(), game);

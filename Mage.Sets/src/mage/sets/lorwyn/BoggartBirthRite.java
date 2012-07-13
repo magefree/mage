@@ -31,9 +31,9 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
@@ -46,8 +46,7 @@ public class BoggartBirthRite extends CardImpl<BoggartBirthRite> {
     private final static FilterCard filter = new FilterCard("Goblin card from your graveyard");
 
     static {
-        filter.getSubtype().add("Goblin");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Goblin"));
     }
 
     public BoggartBirthRite(UUID ownerId) {

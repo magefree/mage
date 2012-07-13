@@ -41,6 +41,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.PreventAllDamageEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.SoldierToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -53,7 +54,7 @@ public class KnightCaptainOfEos extends CardImpl<KnightCaptainOfEos> {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Soldier");
 
     static {
-        filter.getSubtype().add("Soldier");
+        filter.add(new SubtypePredicate("Soldier"));
     }
 
     public KnightCaptainOfEos(UUID ownerId) {

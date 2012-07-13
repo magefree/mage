@@ -40,6 +40,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -52,7 +53,7 @@ public class SkirsdagFlayer extends CardImpl<SkirsdagFlayer> {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Human");
 
     static {
-        filter.getSubtype().add("Human");
+        filter.add(new SubtypePredicate("Human"));
     }
 
     public SkirsdagFlayer(UUID ownerId) {

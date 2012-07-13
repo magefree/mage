@@ -36,6 +36,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SaprolingToken;
@@ -72,7 +73,7 @@ class FungalSproutingEffect extends OneShotEffect<FungalSproutingEffect> {
     private final static FilterPermanent filter = new FilterPermanent();
     
     static {
-        filter.getCardType().add(CardType.CREATURE);
+        filter.add(new CardTypePredicate(CardType.CREATURE));
         filter.setTargetController(Constants.TargetController.YOU);
     }
 

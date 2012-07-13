@@ -39,8 +39,9 @@ import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.mana.RedManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
@@ -52,10 +53,7 @@ public class ClifftopRetreat extends CardImpl<ClifftopRetreat> {
     private static final FilterLandPermanent filter = new FilterLandPermanent();
 
     static {
-        filter.getSubtype().add("Mountain");
-        filter.getSubtype().add("Plains");
-        filter.setScopeSubtype(ComparisonScope.Any);
-        filter.setMessage("Mountain or a Plains");
+        filter.add(Predicates.or(new SubtypePredicate("Mountain"), new SubtypePredicate("Plains")));
     }
 
     public ClifftopRetreat(UUID ownerId) {
@@ -63,7 +61,7 @@ public class ClifftopRetreat extends CardImpl<ClifftopRetreat> {
         this.expansionSetCode = "ISD";
 
         Condition controls = new UnlessCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0));
-        String abilityText = "tap it unless you control a " + filter.getMessage();
+        String abilityText = "tap it unless you control a Mountain or a Plains";
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
         this.addAbility(new RedManaAbility());
         this.addAbility(new WhiteManaAbility());

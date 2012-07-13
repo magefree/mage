@@ -28,18 +28,33 @@
 
 package mage.filter;
 
-import mage.game.Game;
-
 import java.io.Serializable;
+import mage.filter.predicate.Predicate;
+import mage.game.Game;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @author North
  */
 public interface Filter<E> extends Serializable {
 
     public enum ComparisonType {
-        GreaterThan, Equal, LessThan
+
+        GreaterThan(">"),
+        Equal("=="),
+        LessThan("<");
+
+        private String text;
+
+        ComparisonType(String text) {
+            this.text = text;
+        }
+
+        @Override
+        public String toString() {
+            return text;
+        }
     }
 
     public enum ComparisonScope {
@@ -47,9 +62,10 @@ public interface Filter<E> extends Serializable {
     }
 
     public boolean match(E o, Game game);
+    public void add(Predicate predicate);
+
     public String getMessage();
     public void setMessage(String message);
-    public void setNotFilter(boolean notFilter);
 
     public Filter<E> copy();
 

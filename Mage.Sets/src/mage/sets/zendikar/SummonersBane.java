@@ -36,6 +36,7 @@ import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.permanent.token.Token;
 import mage.target.TargetSpell;
 
@@ -48,7 +49,7 @@ public class SummonersBane extends CardImpl<SummonersBane> {
     private static final FilterSpell filter = new FilterSpell("creature spell");
 
     static {
-        filter.getCardType().add(CardType.CREATURE);
+        filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
     public SummonersBane(UUID ownerId) {

@@ -34,6 +34,8 @@ import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 
 import java.util.UUID;
 
@@ -47,9 +49,8 @@ public class HurlyBurly extends CardImpl<HurlyBurly> {
     private final static FilterCreaturePermanent filterWithFlying = new FilterCreaturePermanent("creature with flying");
 
     static {
-        filterWithoutFlying.getAbilities().add(FlyingAbility.getInstance());
-        filterWithoutFlying.setNotAbilities(true);
-        filterWithFlying.getAbilities().add(FlyingAbility.getInstance());
+        filterWithoutFlying.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
+        filterWithFlying.add(new AbilityPredicate(FlyingAbility.class));
     }
 
     public HurlyBurly(UUID ownerId) {

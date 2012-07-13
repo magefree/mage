@@ -27,16 +27,20 @@
  */
 package mage.sets.darkascension;
 
+import java.util.ArrayList;
 import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.predicate.Predicate;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.stack.StackObject;
 import mage.players.Player;
@@ -94,11 +98,13 @@ class CounterlashEffect extends OneShotEffect<CounterlashEffect> {
             game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
             if (player.chooseUse(Constants.Outcome.PutCardInPlay, "Cast a nonland card in your hand that shares a card type with that spell without paying its mana cost?", game)) {
                 FilterCard filter = new FilterCard();
+                ArrayList<Predicate<MageObject>> types = new ArrayList<Predicate<MageObject>>();
                 for (CardType type: stackObject.getCardType()) {
-                    if (type != CardType.LAND)
-                        filter.getCardType().add(type);
+                    if (type != CardType.LAND) {
+                        types.add(new CardTypePredicate(type));
+                    }
                 }
-                filter.setScopeCardType(Filter.ComparisonScope.Any);
+                filter.add(Predicates.or(types));
                 TargetCardInHand target = new TargetCardInHand(filter);
                 if (player.choose(Constants.Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
                     Card card = player.getHand().get(target.getFirstTarget(), game);

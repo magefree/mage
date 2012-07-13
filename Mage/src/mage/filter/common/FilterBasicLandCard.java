@@ -30,6 +30,8 @@ package mage.filter.common;
 
 import mage.Constants.CardType;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.SupertypePredicate;
 
 /**
  *
@@ -39,10 +41,8 @@ public class FilterBasicLandCard extends FilterCard<FilterBasicLandCard> {
 
     public FilterBasicLandCard() {
         super("basic land card");
-        this.cardType.add(CardType.LAND);
-        this.setScopeCardType(ComparisonScope.Any);
-        this.supertype.add("Basic");
-        this.setScopeSupertype(ComparisonScope.Any);
+        this.add(new CardTypePredicate(CardType.LAND));
+        this.add(new SupertypePredicate("Basic"));
     }
 
     public FilterBasicLandCard(final FilterBasicLandCard filter) {

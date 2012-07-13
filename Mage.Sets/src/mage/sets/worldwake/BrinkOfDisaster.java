@@ -37,8 +37,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -51,12 +52,12 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class BrinkOfDisaster extends CardImpl<BrinkOfDisaster> {
 
-    private static FilterPermanent filter = new FilterPermanent();
+    private static final FilterPermanent filter = new FilterPermanent();
 
     static {
-        filter.getCardType().add(CardType.CREATURE);
-        filter.getCardType().add(CardType.LAND);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.CREATURE),
+                new CardTypePredicate(CardType.LAND)));
     }
 
     public BrinkOfDisaster(UUID ownerId) {

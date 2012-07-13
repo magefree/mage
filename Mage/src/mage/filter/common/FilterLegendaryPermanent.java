@@ -29,6 +29,7 @@
 package mage.filter.common;
 
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SupertypePredicate;
 
 /**
  *
@@ -42,7 +43,7 @@ public class FilterLegendaryPermanent extends FilterPermanent<FilterLegendaryPer
 
     public FilterLegendaryPermanent(String name) {
         super(name);
-        this.supertype.add("Legendary");
+        this.add(new SupertypePredicate("Legendary"));
     }
 
     public FilterLegendaryPermanent(final FilterLegendaryPermanent filter) {

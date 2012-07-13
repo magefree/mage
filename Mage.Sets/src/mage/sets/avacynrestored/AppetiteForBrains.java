@@ -38,6 +38,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -92,8 +93,7 @@ class AppetiteForBrainsEffect extends OneShotEffect<AppetiteForBrainsEffect> {
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         if (player != null && targetPlayer != null) {
             FilterCard filter = new FilterCard("with converted mana cost 4 or greater");
-            filter.setConvertedManaCost(3);
-            filter.setConvertedManaCostComparison(Filter.ComparisonType.GreaterThan);
+            filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.GreaterThan, 3));
 
             targetPlayer.revealCards("Appetite for Brains", targetPlayer.getHand(), game);
             TargetCard target = new TargetCard(Zone.PICK, filter);

@@ -43,6 +43,7 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.mana.BasicManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -56,7 +57,7 @@ public class MyrReservoir extends CardImpl<MyrReservoir> {
     private static final FilterCard myrCardFilter = new FilterCard("Myr card from your graveyard");
 
     static {
-        myrCardFilter.getSubtype().add("Myr");
+        myrCardFilter.add(new SubtypePredicate("Myr"));
     }
 
     public MyrReservoir(UUID ownerId) {

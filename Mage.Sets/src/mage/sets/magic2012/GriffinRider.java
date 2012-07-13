@@ -40,9 +40,9 @@ import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -55,8 +55,7 @@ public class GriffinRider extends CardImpl<GriffinRider> {
     private static final FilterPermanent filterGriffinCard = new FilterCreaturePermanent();
 
     static {
-        filterGriffinCard.getSubtype().add("Griffin");
-        filterGriffinCard.setScopeSubtype(Filter.ComparisonScope.Any);
+        filterGriffinCard.add(new SubtypePredicate("Griffin"));
     }
 
     public GriffinRider(UUID ownerId) {

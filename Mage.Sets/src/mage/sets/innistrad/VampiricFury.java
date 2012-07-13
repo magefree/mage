@@ -35,8 +35,8 @@ import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
@@ -48,8 +48,7 @@ public class VampiricFury extends CardImpl<VampiricFury> {
     private static final FilterCreaturePermanent vampires = new FilterCreaturePermanent("Vampire creatures");
 
     static {
-        vampires.getSubtype().add("Vampire");
-        vampires.setScopeSubtype(Filter.ComparisonScope.Any);
+        vampires.add(new SubtypePredicate("Vampire"));
         vampires.setTargetController(Constants.TargetController.YOU);
     }
 
@@ -61,7 +60,7 @@ public class VampiricFury extends CardImpl<VampiricFury> {
 
         // Vampire creatures you control get +2/+0 and gain first strike until end of turn.
         this.getSpellAbility().addEffect(new BoostControlledEffect(2, 0, Constants.Duration.EndOfTurn, vampires));
-                this.getSpellAbility().addEffect(new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, vampires));
+        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, vampires));
     }
 
     public VampiricFury(final VampiricFury card) {

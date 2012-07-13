@@ -32,11 +32,13 @@ import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.CantBlockTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -48,8 +50,7 @@ public class GoblinBattleJester extends CardImpl<GoblinBattleJester> {
     private static final FilterSpell filter = new FilterSpell("a red spell");
 
     static {
-        filter.getColor().setRed(true);
-        filter.setUseColor(true);
+        filter.add(new ColorPredicate(ObjectColor.RED));
     }
 
     public GoblinBattleJester(UUID ownerId) {

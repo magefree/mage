@@ -43,6 +43,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -103,10 +105,8 @@ class BirthingPodEffect extends OneShotEffect<BirthingPodEffect> {
         if (sacrificedPermanent != null && player != null) {
             int newConvertedCost = sacrificedPermanent.getManaCost().convertedManaCost() + 1;
             FilterCard filter = new FilterCard("creature card with converted mana cost " + newConvertedCost);
-            filter.setConvertedManaCost(newConvertedCost);
-            filter.setConvertedManaCostComparison(Filter.ComparisonType.Equal);
-            filter.getCardType().add(CardType.CREATURE);
-            filter.setScopeCardType(Filter.ComparisonScope.Any);
+            filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, newConvertedCost));
+            filter.add(new CardTypePredicate(CardType.CREATURE));
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
             if (player.searchLibrary(target, game)) {
                 for (UUID cardId : target.getTargets()) {

@@ -28,26 +28,27 @@
 package mage.sets.shadowmoor;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.cards.CardImpl;
-import mage.abilities.mana.SimpleManaAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.BasicManaEffect;
-import mage.Mana;
 import mage.Constants;
+import mage.Constants.CardType;
+import mage.Constants.Outcome;
+import mage.Constants.Rarity;
+import mage.Mana;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.CostImpl;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledPermanent;
-import mage.game.Game;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.BasicManaEffect;
+import mage.abilities.mana.SimpleManaAbility;
+import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.game.Game;
 import mage.players.Player;
 import mage.players.Players;
-import mage.Constants.Outcome;
 
 /**
  *
@@ -87,9 +88,7 @@ class ControlTwoOrMoreBlackPermanentsCost extends CostImpl<ControlTwoOrMoreBlack
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
 
     static {
-        filter.getColor().setBlack(true);
-        filter.setUseColor(true);
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
     public ControlTwoOrMoreBlackPermanentsCost() {

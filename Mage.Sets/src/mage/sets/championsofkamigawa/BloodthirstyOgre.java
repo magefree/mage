@@ -45,8 +45,8 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.counters.common.DevotionCounter;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -57,8 +57,7 @@ public class BloodthirstyOgre extends CardImpl<BloodthirstyOgre> {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Demon");
     static {
-        filter.getSubtype().add("Demon");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Demon"));
     }
 
     public BloodthirstyOgre(UUID ownerId) {

@@ -39,8 +39,8 @@ import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -50,8 +50,7 @@ public class DrogskolCaptain extends CardImpl<DrogskolCaptain> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Spirit");
 
     static {
-        filter.getSubtype().add("Spirit");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Spirit"));
     }
 
     public DrogskolCaptain(UUID ownerId) {

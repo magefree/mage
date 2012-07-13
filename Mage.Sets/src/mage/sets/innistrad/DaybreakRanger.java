@@ -46,6 +46,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -57,7 +58,7 @@ public class DaybreakRanger extends CardImpl<DaybreakRanger> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
 
     static {
-        filter.getAbilities().add(FlyingAbility.getInstance());
+        filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
     public DaybreakRanger(UUID ownerId) {

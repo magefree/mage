@@ -37,8 +37,8 @@ import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SpiritWhiteToken;
@@ -59,8 +59,7 @@ public class GallowsAtWillowHill extends CardImpl<GallowsAtWillowHill> {
     static {
         humanFilter.setTapped(false);
         humanFilter.setUseTapped(true);
-        humanFilter.getSubtype().add("Human");
-        humanFilter.setScopeSubtype(Filter.ComparisonScope.Any);
+        humanFilter.add(new SubtypePredicate("Human"));
     }
 
     public GallowsAtWillowHill(UUID ownerId) {

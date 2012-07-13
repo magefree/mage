@@ -40,6 +40,8 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -52,7 +54,7 @@ public class ExclusionRitual extends CardImpl<ExclusionRitual> {
     private static final FilterPermanent filter = new FilterPermanent("nonland permanent");
 
     static {
-        filter.getNotCardType().add(CardType.LAND);
+        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
     }
 
     public ExclusionRitual(UUID ownerId) {

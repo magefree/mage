@@ -45,9 +45,9 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterLandCard;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
@@ -137,8 +137,7 @@ class DokaiWeaverofLifeToken extends Token {
     final static FilterControlledPermanent filterLands = new FilterControlledPermanent("lands");
 
     static {
-        filterLands.getCardType().add(CardType.LAND);
-        filterLands.setScopeCardType(Filter.ComparisonScope.Any);
+        filterLands.add(new CardTypePredicate(CardType.LAND));
     }
 
     DokaiWeaverofLifeToken() {

@@ -35,8 +35,8 @@ import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -48,8 +48,7 @@ public class EchoingCalm extends CardImpl<EchoingCalm> {
     private final static FilterPermanent filter = new FilterPermanent("enchantment");
 
     static {
-        filter.getCardType().add(CardType.ENCHANTMENT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
 
     public EchoingCalm(UUID ownerId) {

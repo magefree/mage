@@ -41,6 +41,7 @@ import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -51,7 +52,7 @@ public class DungroveElder extends CardImpl<DungroveElder> {
     final static FilterControlledPermanent filterLands = new FilterControlledPermanent("Forests you control");
 
         static {
-            filterLands.getSubtype().add("Forest");
+            filterLands.add(new SubtypePredicate("Forest"));
         }
 
         public DungroveElder (UUID ownerId) {

@@ -34,8 +34,8 @@ import mage.Constants.Rarity;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetSpell;
 
 /**
@@ -47,8 +47,7 @@ public class HaltOrder extends CardImpl<HaltOrder> {
     private static final FilterSpell filter = new FilterSpell("artifact spell");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public HaltOrder (UUID ownerId) {

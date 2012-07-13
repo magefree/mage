@@ -36,8 +36,8 @@ import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.BoostSourceWhileControlsEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -49,10 +49,8 @@ public class WildNacatl extends CardImpl<WildNacatl> {
     private static final FilterPermanent filter2 = new FilterPermanent("Plains");
 
     static {
-        filter1.getSubtype().add("Mountain");
-        filter1.setScopeSubtype(ComparisonScope.Any);
-        filter2.getSubtype().add("Plains");
-        filter2.setScopeSubtype(ComparisonScope.Any);
+        filter1.add(new SubtypePredicate("Mountain"));
+        filter2.add(new SubtypePredicate("Plains"));
     }
 
     public WildNacatl(UUID ownerId) {

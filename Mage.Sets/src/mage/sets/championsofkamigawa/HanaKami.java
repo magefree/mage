@@ -40,8 +40,8 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -52,8 +52,7 @@ public class HanaKami extends CardImpl<HanaKami> {
     private final static FilterCard filter = new FilterCard("Arcane card from your graveyard");
 
     static {
-        filter.getSubtype().add("Arcane");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Arcane"));
     }
 
     public HanaKami(UUID ownerId) {

@@ -41,8 +41,8 @@ import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.BushidoAbility;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -54,8 +54,7 @@ public class IizukaTheRuthless extends CardImpl<IizukaTheRuthless> {
     private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Samurai");
 
     static {
-        filter.getSubtype().add("Samurai");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Samurai"));
     }
 
     public IizukaTheRuthless(UUID ownerId) {

@@ -39,8 +39,8 @@ import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -53,8 +53,7 @@ public class HonorWornShaku extends CardImpl<HonorWornShaku> {
     static {
         filter.setTapped(false);
         filter.setUseTapped(true);
-        filter.getSupertype().add("Legendary");
-        filter.setScopeSupertype(Filter.ComparisonScope.Any);
+        filter.add(new SupertypePredicate("Legendary"));
     }
 
     public HonorWornShaku(UUID ownerId) {

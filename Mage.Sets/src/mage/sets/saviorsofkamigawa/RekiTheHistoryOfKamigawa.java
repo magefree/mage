@@ -34,8 +34,8 @@ import mage.MageInt;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.SupertypePredicate;
 
 /**
  *
@@ -46,8 +46,7 @@ public class RekiTheHistoryOfKamigawa extends CardImpl<RekiTheHistoryOfKamigawa>
     private final static FilterSpell filter = new FilterSpell("legendary spell");
 
     static {
-        filter.getSupertype().add("Legendary");
-        filter.setScopeSupertype(Filter.ComparisonScope.Any);
+        filter.add(new SupertypePredicate("Legendary"));
     }
 
     public RekiTheHistoryOfKamigawa(UUID ownerId) {

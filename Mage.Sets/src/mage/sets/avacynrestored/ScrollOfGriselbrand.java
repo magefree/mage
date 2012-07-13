@@ -41,8 +41,8 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DiscardTargetEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -50,11 +50,10 @@ import mage.target.common.TargetOpponent;
  * @author Loki
  */
 public class ScrollOfGriselbrand extends CardImpl<ScrollOfGriselbrand> {
-    private static FilterPermanent filter = new FilterPermanent("a Demon");
+    private static final FilterPermanent filter = new FilterPermanent();
 
     static {
-        filter.getSubtype().add("Demon");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Demon"));
     }
 
     public ScrollOfGriselbrand(UUID ownerId) {

@@ -43,9 +43,9 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.ZombieToken;
 import mage.target.common.TargetCardInGraveyard;
 
@@ -56,8 +56,7 @@ public class CemeteryReaper extends CardImpl<CemeteryReaper> {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Zombie creatures");
     static {
-        filter.getSubtype().add("Zombie");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Zombie"));
     }
 
     public CemeteryReaper(UUID ownerId) {

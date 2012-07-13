@@ -32,11 +32,12 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -47,9 +48,7 @@ public class VoiceOfLaw extends CardImpl<VoiceOfLaw> {
     private static final FilterCard filter = new FilterCard("Red");
 
     static {
-        filter.setUseColor(true);
-        filter.getColor().setRed(true);
-        filter.setScopeColor(ComparisonScope.Any);
+        filter.add(new ColorPredicate(ObjectColor.RED));
     }
 
     public VoiceOfLaw(UUID ownerId) {

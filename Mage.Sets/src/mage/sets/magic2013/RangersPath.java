@@ -33,6 +33,7 @@ import mage.Constants.Rarity;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandCard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -44,7 +45,7 @@ public class RangersPath extends CardImpl<RangersPath> {
     private static final FilterLandCard filter = new FilterLandCard("Forest cards");
 
     static {
-        filter.getSubtype().add("Forest");
+        filter.add(new SubtypePredicate("Forest"));
     }
 
     public RangersPath(UUID ownerId) {

@@ -30,9 +30,12 @@ package mage.sets.guildpact;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.ObjectColor;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.TargetSpell;
 
 /**
@@ -43,9 +46,7 @@ public class Frazzle extends CardImpl<Frazzle> {
     private final static FilterSpell filter = new FilterSpell("nonblue spell");
 
     static {
-        filter.setUseColor(true);
-        filter.getColor().setBlue(true);
-        filter.setNotColor(true);
+        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLUE)));
     }
 
     public Frazzle(UUID ownerId) {

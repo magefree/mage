@@ -37,6 +37,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.ReboundAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -88,7 +89,7 @@ class ConsumingVaporsEffect extends OneShotEffect<ConsumingVaporsEffect> {
         Player controller = game.getPlayer(source.getControllerId());
 
         FilterControlledPermanent filter = new FilterControlledPermanent("creature");
-        filter.getCardType().add(CardType.CREATURE);
+        filter.add(new CardTypePredicate(CardType.CREATURE));
         filter.setTargetController(TargetController.YOU);
         TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, false);
 

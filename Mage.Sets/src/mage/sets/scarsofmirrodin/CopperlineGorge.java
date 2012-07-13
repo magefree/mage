@@ -40,7 +40,6 @@ import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterLandPermanent;
 
 /**
@@ -51,17 +50,12 @@ public class CopperlineGorge extends CardImpl<CopperlineGorge> {
 
     private static FilterLandPermanent filter = new FilterLandPermanent();
 
-    static {
-        filter.setScopeSubtype(ComparisonScope.Any);
-        filter.setMessage("lands");
-    }
-
     public CopperlineGorge (UUID ownerId) {
         super(ownerId, 225, "Copperline Gorge", Rarity.RARE, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "SOM";
 
         Condition controls = new UnlessCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.FEWER_THAN, 4));
-        String abilityText = "tap it unless you control fewer than 3 " + filter.getMessage();
+        String abilityText = "tap it unless you control fewer than 3 lands";
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
         this.addAbility(new RedManaAbility());
         this.addAbility(new GreenManaAbility());

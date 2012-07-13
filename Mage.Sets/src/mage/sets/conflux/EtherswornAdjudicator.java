@@ -41,8 +41,9 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -53,9 +54,9 @@ public class EtherswornAdjudicator extends CardImpl<EtherswornAdjudicator> {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("creature or enchantment");
 
     static {
-        filter.getCardType().add(CardType.CREATURE);
-        filter.getCardType().add(CardType.ENCHANTMENT);
-        filter.setScopeCardType(ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.CREATURE),
+                new CardTypePredicate(CardType.ENCHANTMENT)));
     }
 
     public EtherswornAdjudicator(UUID ownerId) {

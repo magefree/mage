@@ -43,6 +43,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -52,10 +53,10 @@ import mage.target.TargetPermanent;
  * @author Loki
  */
 public class HoardSmelterDragon extends CardImpl<HoardSmelterDragon> {
-    private static FilterPermanent filter = new FilterPermanent("artifact");
+    private static final FilterPermanent filter = new FilterPermanent("artifact");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public HoardSmelterDragon (UUID ownerId) {

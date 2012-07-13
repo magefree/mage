@@ -34,8 +34,7 @@ import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
-import mage.filter.FilterCard;
+import mage.filter.common.FilterLandCard;
 
 import java.util.UUID;
 
@@ -44,12 +43,7 @@ import java.util.UUID;
  */
 public class HorizonDrake extends CardImpl<HorizonDrake> {
 
-    private static FilterCard filter = new FilterCard("lands");
-
-    static {
-        filter.getCardType().add(CardType.LAND);
-        filter.setScopeCardType(ComparisonScope.Any);
-    }
+    private static FilterLandCard filter = new FilterLandCard("lands");
 
     public HorizonDrake(UUID ownerId) {
         super(ownerId, 30, "Horizon Drake", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");

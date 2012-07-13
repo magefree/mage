@@ -39,6 +39,7 @@ import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -50,7 +51,7 @@ public class DaruEncampment extends CardImpl<DaruEncampment> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Soldier creature");
 
     static {
-        filter.getSubtype().add("Soldier");
+        filter.add(new SubtypePredicate("Soldier"));
     }
 
     public DaruEncampment(UUID ownerId) {

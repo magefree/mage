@@ -39,8 +39,9 @@ import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
@@ -52,10 +53,7 @@ public class HinterlandHarbor extends CardImpl<HinterlandHarbor> {
     private static final FilterLandPermanent filter = new FilterLandPermanent();
 
     static {
-        filter.getSubtype().add("Forest");
-        filter.getSubtype().add("Island");
-        filter.setScopeSubtype(ComparisonScope.Any);
-        filter.setMessage("Forest or an Island");
+        filter.add(Predicates.or(new SubtypePredicate("Forest"), new SubtypePredicate("Island")));
     }
 
     public HinterlandHarbor(UUID ownerId) {
@@ -63,7 +61,7 @@ public class HinterlandHarbor extends CardImpl<HinterlandHarbor> {
         this.expansionSetCode = "ISD";
 
         Condition controls = new UnlessCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0));
-        String abilityText = "tap it unless you control a " + filter.getMessage();
+        String abilityText = "tap it unless you control a Forest or an Island";
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
         this.addAbility(new GreenManaAbility());
         this.addAbility(new BlueManaAbility());

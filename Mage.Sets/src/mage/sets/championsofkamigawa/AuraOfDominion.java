@@ -41,7 +41,6 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.UntapEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -57,7 +56,6 @@ public class AuraOfDominion extends CardImpl<AuraOfDominion> {
     static {
         filter.setTapped(false);
         filter.setUseTapped(true);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
     }
 
 

@@ -30,9 +30,12 @@ package mage.sets.magic2010;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.ObjectColor;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCreaturePermanentAmount;
 
 /**
@@ -44,9 +47,9 @@ public class IgniteDisorder extends CardImpl<IgniteDisorder> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("white and/or blue creatures");
 
     static {
-        filter.getColor().setWhite(true);
-        filter.getColor().setBlue(true);
-        filter.setUseColor(true);
+        filter.add(Predicates.or(
+                new ColorPredicate(ObjectColor.WHITE),
+                new ColorPredicate(ObjectColor.BLUE)));
     }
 
     public IgniteDisorder(UUID ownerId) {

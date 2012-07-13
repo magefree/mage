@@ -28,18 +28,19 @@
 
 package mage.filter;
 
-import mage.Constants.CardType;
-import mage.ObjectColor;
+import java.util.ArrayList;
+import java.util.List;
+import mage.filter.predicate.Predicate;
+import mage.game.Game;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @author North
  */
 public abstract class FilterImpl<E, T extends FilterImpl<E, T>> implements Filter<E> {
 
-    protected static ListComparer<CardType> compCardType = new ListComparer<CardType>();
-    protected static ListComparer<String> compString = new ListComparer<String>();
-
+    protected List<Predicate> predicates = new ArrayList<Predicate>();
     protected String message;
     protected boolean notFilter = false;
 
@@ -53,31 +54,22 @@ public abstract class FilterImpl<E, T extends FilterImpl<E, T>> implements Filte
     public FilterImpl(FilterImpl filter) {
         this.message = filter.message;
         this.notFilter = filter.notFilter;
+        this.predicates = new ArrayList<Predicate>(filter.predicates);
     }
 
-    protected boolean compareInts(int int1, int int2, ComparisonType type) {
-        switch (type) {
-            case Equal:
-                if (int1 != int2)
-                    return false;
-                break;
-            case GreaterThan:
-                if (int1 <= int2)
-                    return false;
-                break;
-            case LessThan:
-                if (int1 >= int2)
-                    return false;
-                break;
+    @Override
+    public boolean match(E e, Game game) {
+        for (int i = 0; i < predicates.size(); i++) {
+            if (!predicates.get(i).apply(e, game)) {
+                return false;
+            }
         }
         return true;
     }
 
-    protected boolean compareColors(ObjectColor color1, ObjectColor color2, ComparisonScope scope) {
-        if (scope == ComparisonScope.All)
-            return color2.equals(color1);
-        else
-            return color2.contains(color1);
+    @Override
+    public final void add(Predicate predicate) {
+        predicates.add(predicate);
     }
 
     @Override
@@ -90,7 +82,6 @@ public abstract class FilterImpl<E, T extends FilterImpl<E, T>> implements Filte
         this.message = message;
     }
 
-    @Override
     public void setNotFilter(boolean notFilter) {
         this.notFilter = notFilter;
     }

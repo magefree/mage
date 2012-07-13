@@ -38,6 +38,7 @@ import mage.abilities.keyword.SoulbondAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
@@ -51,7 +52,7 @@ public class DiregrafEscort extends CardImpl<DiregrafEscort> {
     private static final FilterPermanent filter = new FilterCreaturePermanent("Zombies");
 
     static {
-        filter.getSubtype().add("Zombie");
+        filter.add(new SubtypePredicate("Zombie"));
     }
 
     public DiregrafEscort(UUID ownerId) {

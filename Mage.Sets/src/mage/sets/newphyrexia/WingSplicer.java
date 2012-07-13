@@ -40,6 +40,8 @@ import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.GolemToken;
 
 /**
@@ -51,8 +53,8 @@ public class WingSplicer extends CardImpl<WingSplicer> {
     private static final FilterPermanent filter = new FilterPermanent("Golem creatures");
 
     static {
-        filter.getCardType().add(CardType.CREATURE);
-        filter.getSubtype().add("Golem");
+        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(new SubtypePredicate("Golem"));
     }
 
     public WingSplicer(UUID ownerId) {

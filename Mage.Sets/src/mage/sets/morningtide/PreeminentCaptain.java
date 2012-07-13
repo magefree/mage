@@ -39,7 +39,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
+import mage.filter.common.FilterCreatureCard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -83,6 +84,12 @@ public class PreeminentCaptain extends CardImpl<PreeminentCaptain> {
 
 class PreeminentCaptainEffect extends OneShotEffect<PreeminentCaptainEffect> {
 
+    private static final FilterCreatureCard filter = new FilterCreatureCard("a soldier creature card");
+
+    static {
+        filter.add(new SubtypePredicate("Soldier"));
+    }
+
     public PreeminentCaptainEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "put a Soldier creature card from your hand onto the battlefield tapped and attacking.";
@@ -95,7 +102,7 @@ class PreeminentCaptainEffect extends OneShotEffect<PreeminentCaptainEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        TargetCardInHand target = new TargetCardInHand(new FilterSoldierCard());
+        TargetCardInHand target = new TargetCardInHand(filter);
         if (target.canChoose(player.getId(), game) && target.choose(getOutcome(), player.getId(), source.getSourceId(), game)) {
             if (target.getTargets().size() > 0) {
                 UUID cardId = target.getFirstTarget();
@@ -127,29 +134,6 @@ class PreeminentCaptainEffect extends OneShotEffect<PreeminentCaptainEffect> {
     @Override
     public PreeminentCaptainEffect copy() {
         return new PreeminentCaptainEffect(this);
-    }
-
-}
-
-class FilterSoldierCard extends FilterCard<FilterSoldierCard> {
-
-    public FilterSoldierCard() {
-        this("a soldier creature card.");
-    }
-
-    public FilterSoldierCard(String name) {
-        super(name);
-        cardType.add(CardType.CREATURE);
-        subtype.add("Soldier");
-    }
-
-    public FilterSoldierCard(final FilterSoldierCard filter) {
-        super(filter);
-    }
-
-    @Override
-    public FilterSoldierCard copy() {
-        return new FilterSoldierCard(this);
     }
 
 }

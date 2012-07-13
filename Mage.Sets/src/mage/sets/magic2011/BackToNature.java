@@ -34,6 +34,7 @@ import mage.Constants.Rarity;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -44,7 +45,7 @@ public class BackToNature extends CardImpl<BackToNature> {
     private static final FilterPermanent filter = new FilterPermanent("enchantments");
 
     static {
-        filter.getCardType().add(CardType.ENCHANTMENT);
+        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
 
     public BackToNature(UUID ownerId) {

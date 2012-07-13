@@ -44,6 +44,7 @@ import mage.target.common.TargetCardInLibrary;
 
 import java.util.List;
 import java.util.UUID;
+import mage.filter.predicate.mageobject.NamePredicate;
 
 /**
  *
@@ -92,7 +93,7 @@ class HauntingEchoesEffect extends OneShotEffect<HauntingEchoesEffect> {
                     card.moveToExile(null, "", source.getId(), game);
 
                     FilterCard filterCard = new FilterCard("cards named " + card.getName());
-                    filterCard.getName().add(card.getName());
+                    filterCard.add(new NamePredicate(card.getName()));
                     int count = targetPlayer.getLibrary().count(filterCard, game);
                     TargetCardInLibrary target = new TargetCardInLibrary(count, count, filterCard);
                     target.setRequired(true);

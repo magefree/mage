@@ -40,8 +40,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -53,8 +53,7 @@ public class DerangedOutcast extends CardImpl<DerangedOutcast> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("a Human");
 
     static {
-        filter.getSubtype().add("Human");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Human"));
     }
 
     public DerangedOutcast(UUID ownerId) {

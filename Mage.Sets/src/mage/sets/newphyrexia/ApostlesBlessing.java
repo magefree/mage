@@ -39,9 +39,11 @@ import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColorOrArtifact;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledPermanent;
@@ -53,9 +55,9 @@ public class ApostlesBlessing extends CardImpl<ApostlesBlessing> {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact or creature you control");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.getCardType().add(CardType.CREATURE);
-        filter.setScopeCardType(mage.filter.Filter.ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.ARTIFACT),
+                new CardTypePredicate(CardType.CREATURE)));
     }
 
     public ApostlesBlessing(UUID ownerId) {
@@ -99,12 +101,9 @@ class ApostlesBlessingEffect extends GainAbilityTargetEffect {
         FilterCard protectionFilter = new FilterCard();
         ChoiceColorOrArtifact choice = (ChoiceColorOrArtifact) source.getChoices().get(0);
         if (choice.isArtifactSelected()) {
-            protectionFilter.getCardType().add(Constants.CardType.ARTIFACT);
-            protectionFilter.setScopeCardType(ComparisonScope.Any);
+            protectionFilter.add(new CardTypePredicate(Constants.CardType.ARTIFACT));
         } else {
-            protectionFilter.setColor(choice.getColor());
-            protectionFilter.setUseColor(true);
-            protectionFilter.setScopeColor(ComparisonScope.Any);
+            protectionFilter.add(new ColorPredicate(choice.getColor()));
         }
 
         protectionFilter.setMessage(choice.getChoice());

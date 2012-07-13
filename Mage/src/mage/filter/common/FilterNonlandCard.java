@@ -30,6 +30,8 @@ package mage.filter.common;
 
 import mage.Constants.CardType;
 import mage.filter.FilterCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -43,7 +45,7 @@ public class FilterNonlandCard extends FilterCard<FilterNonlandCard> {
 
     public FilterNonlandCard(String name) {
         super(name);
-        this.notCardType.add(CardType.LAND);
+        this.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
     }
 
     public FilterNonlandCard(final FilterNonlandCard filter) {

@@ -44,6 +44,7 @@ import mage.abilities.effects.common.continious.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -57,8 +58,7 @@ public class WurmweaverCoil extends CardImpl<WurmweaverCoil> {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("green creature");
 
     static {
-        filter.setUseColor(true);
-        filter.getColor().setGreen(true);
+        filter.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
     public WurmweaverCoil(UUID ownerId) {

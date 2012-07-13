@@ -42,6 +42,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -54,7 +55,7 @@ public class RelentlessRats extends CardImpl<RelentlessRats> {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.getName().add("Relentless Rats");
+        filter.add(new NamePredicate("Relentless Rats"));
     }
 
     public RelentlessRats(UUID ownerId) {

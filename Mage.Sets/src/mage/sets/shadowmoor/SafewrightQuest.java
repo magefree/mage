@@ -32,8 +32,9 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -45,9 +46,7 @@ public class SafewrightQuest extends CardImpl<SafewrightQuest> {
     private static final FilterCard filter = new FilterCard("Forest or Plains card");
 
     static {
-        filter.getSubtype().add("Forest");
-        filter.getSubtype().add("Plains");
-        filter.setScopeSubtype(ComparisonScope.Any);
+        filter.add(Predicates.or(new SubtypePredicate("Forest"), new SubtypePredicate("Plains")));
     }
 
     public SafewrightQuest(UUID ownerId) {

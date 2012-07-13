@@ -36,6 +36,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -49,7 +51,7 @@ public class AshesToAshes extends CardImpl<AshesToAshes> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonartifact creature");
 
     static {
-        filter.getNotCardType().add(CardType.ARTIFACT);
+        filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
     }
 
     public AshesToAshes(UUID ownerId) {

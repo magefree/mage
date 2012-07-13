@@ -42,6 +42,7 @@ import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -50,6 +51,8 @@ import mage.target.Target;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  * @author nantuko
@@ -83,12 +86,12 @@ public class PrecursorGolem extends CardImpl<PrecursorGolem> {
 
 class PrecursorGolemCopyTriggeredAbility extends TriggeredAbilityImpl<PrecursorGolemCopyTriggeredAbility> {
 
-    private static FilterSpell filter = new FilterSpell();
+    private static final FilterSpell filter = new FilterSpell();
 
     static {
-        filter.getCardType().add(CardType.INSTANT);
-        filter.getCardType().add(CardType.SORCERY);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.INSTANT),
+                new CardTypePredicate(CardType.SORCERY)));
     }
 
     PrecursorGolemCopyTriggeredAbility() {
@@ -153,11 +156,10 @@ class PrecursorGolemCopyTriggeredAbility extends TriggeredAbilityImpl<PrecursorG
 
 class PrecursorGolemCopySpellEffect extends OneShotEffect<PrecursorGolemCopySpellEffect> {
 
-    private static FilterPermanent filterGolem = new FilterPermanent();
+    private static final FilterPermanent filterGolem = new FilterPermanent();
 
     static {
-        filterGolem.getSubtype().add("Golem");
-        filterGolem.setScopeSubtype(Filter.ComparisonScope.Any);
+        filterGolem.add(new SubtypePredicate("Golem"));
     }
 
     public PrecursorGolemCopySpellEffect() {

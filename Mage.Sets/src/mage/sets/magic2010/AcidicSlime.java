@@ -37,8 +37,9 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 
@@ -51,10 +52,10 @@ public class AcidicSlime extends CardImpl<AcidicSlime> {
     private static final FilterPermanent filter = new FilterPermanent("artifact, enchantment, or land");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.getCardType().add(CardType.ENCHANTMENT);
-        filter.getCardType().add(CardType.LAND);
-        filter.setScopeCardType(ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.ARTIFACT),
+                new CardTypePredicate(CardType.ENCHANTMENT),
+                new CardTypePredicate(CardType.LAND)));
     }
 
     public AcidicSlime(UUID ownerId) {

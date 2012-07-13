@@ -33,6 +33,7 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.keyword.FlashAbility;
@@ -40,6 +41,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.SplitSecondAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -49,8 +51,7 @@ public class CelestialCrusader extends CardImpl<CelestialCrusader> {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("white creatures");
 
     static {
-        filter.setUseColor(true);
-        filter.getColor().setWhite(true);
+        filter.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
     public CelestialCrusader(UUID ownerId) {

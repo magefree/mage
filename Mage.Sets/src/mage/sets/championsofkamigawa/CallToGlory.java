@@ -37,8 +37,8 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -52,8 +52,7 @@ public class CallToGlory extends CardImpl<CallToGlory> {
 private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Samurai");
 
     static {
-        filter.getSubtype().add("Samurai");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Samurai"));
     }
 
         public CallToGlory(UUID ownerId) {

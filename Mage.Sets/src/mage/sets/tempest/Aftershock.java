@@ -33,8 +33,9 @@ import mage.Constants.Rarity;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -46,10 +47,10 @@ public class Aftershock extends CardImpl<Aftershock> {
     private final static FilterPermanent filter = new FilterPermanent("artifact, creature, or land");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.getCardType().add(CardType.CREATURE);
-        filter.getCardType().add(CardType.LAND);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.ARTIFACT),
+                new CardTypePredicate(CardType.CREATURE),
+                new CardTypePredicate(CardType.LAND)));
     }
 
     public Aftershock(UUID ownerId) {

@@ -33,11 +33,13 @@ import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -49,10 +51,8 @@ public class BoartuskLiege extends CardImpl<BoartuskLiege> {
     private static final FilterCreaturePermanent filterGreen = new FilterCreaturePermanent("green creatures");
 
     static {
-        filterRed.getColor().setRed(true);
-        filterRed.setUseColor(true);
-        filterGreen.getColor().setGreen(true);
-        filterGreen.setUseColor(true);
+        filterRed.add(new ColorPredicate(ObjectColor.RED));
+        filterGreen.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
     public BoartuskLiege(UUID ownerId) {

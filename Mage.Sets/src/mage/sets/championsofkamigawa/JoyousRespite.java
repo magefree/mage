@@ -35,6 +35,7 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -44,8 +45,8 @@ public class JoyousRespite extends CardImpl<JoyousRespite> {
 
     private final static FilterControlledPermanent filter = new FilterControlledPermanent();
     static {
-            filter.getCardType().add(CardType.LAND);
-        }
+        filter.add(new CardTypePredicate(CardType.LAND));
+    }
 
 
     public JoyousRespite (UUID ownerId) {

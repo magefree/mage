@@ -34,8 +34,9 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledPermanent;
@@ -50,10 +51,10 @@ public class GhostlyFlicker extends CardImpl<GhostlyFlicker> {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifacts, creatures, and/or lands you control");
 
     static {
-        filter.getCardType().add(CardType.CREATURE);
-        filter.getCardType().add(CardType.LAND);
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.CREATURE),
+                new CardTypePredicate(CardType.LAND),
+                new CardTypePredicate(CardType.ARTIFACT)));
     }
 
     public GhostlyFlicker(UUID ownerId) {

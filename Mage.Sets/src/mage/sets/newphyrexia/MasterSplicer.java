@@ -39,6 +39,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.GolemToken;
 
 /**
@@ -50,7 +51,7 @@ public class MasterSplicer extends CardImpl<MasterSplicer> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Golem creatures");
 
     static {
-        filter.getSubtype().add("Golem");
+        filter.add(new SubtypePredicate("Golem"));
     }
 
     public MasterSplicer(UUID ownerId) {

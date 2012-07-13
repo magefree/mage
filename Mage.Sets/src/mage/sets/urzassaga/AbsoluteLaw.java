@@ -33,14 +33,15 @@ import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -51,9 +52,7 @@ public class AbsoluteLaw extends CardImpl<AbsoluteLaw> {
     private static final FilterCard filter = new FilterCard("Red");
 
     static {
-        filter.setUseColor(true);
-        filter.getColor().setRed(true);
-        filter.setScopeColor(ComparisonScope.Any);
+        filter.add(new ColorPredicate(ObjectColor.RED));
     }
 
     public AbsoluteLaw(UUID ownerId) {

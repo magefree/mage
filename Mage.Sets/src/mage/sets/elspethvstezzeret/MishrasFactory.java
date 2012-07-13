@@ -41,6 +41,7 @@ import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -53,7 +54,7 @@ public class MishrasFactory extends CardImpl<MishrasFactory> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Assembly-Worker creature");
 
     static {
-        filter.getSubtype().add("Assembly-Worker");
+        filter.add(new SubtypePredicate("Assembly-Worker"));
     }
 
     public MishrasFactory(UUID ownerId) {

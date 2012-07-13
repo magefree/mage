@@ -40,8 +40,9 @@ import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -55,9 +56,9 @@ public class RunechantersPike extends CardImpl<RunechantersPike> {
     protected static final FilterCard filterCard = new FilterCard();
 
     static {
-        filterCard.getCardType().add(CardType.INSTANT);
-        filterCard.getCardType().add(CardType.SORCERY);
-        filterCard.setScopeCardType(Filter.ComparisonScope.Any);
+        filterCard.add(Predicates.or(
+                new CardTypePredicate(CardType.INSTANT),
+                new CardTypePredicate(CardType.SORCERY)));
     }
 
     public RunechantersPike(UUID ownerId) {

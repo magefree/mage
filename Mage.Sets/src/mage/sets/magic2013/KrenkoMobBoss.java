@@ -38,6 +38,7 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.GoblinToken;
 
 /**
@@ -49,7 +50,7 @@ public class KrenkoMobBoss extends CardImpl<KrenkoMobBoss> {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Goblin you control");
 
     static {
-        filter.getSubtype().add("Goblin");
+        filter.add(new SubtypePredicate("Goblin"));
     }
 
     public KrenkoMobBoss(UUID ownerId) {

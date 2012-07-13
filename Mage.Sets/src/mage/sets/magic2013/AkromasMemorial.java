@@ -30,14 +30,15 @@ package mage.sets.magic2013;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.ObjectColor;
 import mage.abilities.CompoundAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.*;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 import java.util.UUID;
 
@@ -49,12 +50,8 @@ public class AkromasMemorial extends CardImpl<AkromasMemorial> {
     private static final FilterCard filterRed = new FilterCard("Red");
 
     static {
-        filterBlack.setUseColor(true);
-        filterBlack.getColor().setBlack(true);
-        filterBlack.setScopeColor(Filter.ComparisonScope.Any);
-        filterRed.setUseColor(true);
-        filterRed.getColor().setRed(true);
-        filterRed.setScopeColor(Filter.ComparisonScope.Any);
+        filterBlack.add(new ColorPredicate(ObjectColor.BLACK));
+        filterRed.add(new ColorPredicate(ObjectColor.RED));
     }
 
     public AkromasMemorial(UUID ownerId) {

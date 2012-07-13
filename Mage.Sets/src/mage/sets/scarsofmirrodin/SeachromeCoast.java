@@ -40,7 +40,6 @@ import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterLandPermanent;
 
 /**
@@ -51,17 +50,12 @@ public class SeachromeCoast extends CardImpl<SeachromeCoast> {
 
     private static FilterLandPermanent filter = new FilterLandPermanent();
 
-    static {
-        filter.setScopeSubtype(ComparisonScope.Any);
-        filter.setMessage("lands");
-    }
-
     public SeachromeCoast (UUID ownerId) {
         super(ownerId, 229, "Seachrome Coast", Rarity.RARE, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "SOM";
 
         Condition controls = new UnlessCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.FEWER_THAN, 4));
-        String abilityText = "tap it unless you control fewer than 3 " + filter.getMessage();
+        String abilityText = "tap it unless you control fewer than 3 lands";
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
         this.addAbility(new WhiteManaAbility());
         this.addAbility(new BlueManaAbility());

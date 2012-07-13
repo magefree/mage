@@ -36,6 +36,7 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  * @author Loki
@@ -45,7 +46,7 @@ public class BountifulHarvest extends CardImpl<BountifulHarvest> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("land you control");
 
     static {
-        filter.getCardType().add(CardType.LAND);
+        filter.add(new CardTypePredicate(CardType.LAND));
     }
 
     public BountifulHarvest(UUID ownerId) {

@@ -27,11 +27,13 @@
  */
 package mage.sets.darkascension;
 
+import java.util.ArrayList;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -44,6 +46,9 @@ import mage.cards.CardsImpl;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
+import mage.filter.predicate.Predicate;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -129,11 +134,12 @@ class CallToTheKindredEffect extends OneShotEffect<CallToTheKindredEffect> {
 
         FilterCreatureCard filter = new FilterCreatureCard();
         StringBuilder sb = new StringBuilder("creature card with at least one subtype from: ");
-        for (String subType : creature.getSubtype()) {
-            filter.getSubtype().add(subType);
-            sb.append(subType).append(", ");
+        ArrayList<Predicate<MageObject>> subtypes = new ArrayList<Predicate<MageObject>>();
+        for (String subtype : creature.getSubtype()) {
+            subtypes.add(new SubtypePredicate(subtype));
+            sb.append(subtype).append(", ");
         }
-        filter.setScopeSubtype(ComparisonScope.Any);
+        filter.add(Predicates.or(subtypes));
         sb.delete(sb.length() - 2, sb.length());
         filter.setMessage(sb.toString());
 

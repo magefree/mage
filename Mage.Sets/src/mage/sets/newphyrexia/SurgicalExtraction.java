@@ -40,6 +40,9 @@ import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.filter.FilterCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
@@ -55,8 +58,7 @@ public class SurgicalExtraction extends CardImpl<SurgicalExtraction> {
     private static final FilterCard filter = new FilterCard("card in a graveyard other than a basic land card");
 
     static {
-        filter.getSupertype().add("Basic");
-        filter.setNotSupertype(true);
+        filter.add(Predicates.not(new SupertypePredicate("Basic")));
     }
 
     public SurgicalExtraction(UUID ownerId) {
@@ -104,7 +106,7 @@ class SurgicalExtractionEffect extends OneShotEffect<SurgicalExtractionEffect> {
             Player targetPlayer = game.getPlayer(card.getOwnerId());
             if (targetPlayer != null) {
                 FilterCard filter = new FilterCard("card named " + card.getName());
-                filter.getName().add(card.getName());
+                filter.add(new NamePredicate(card.getName()));
 
                 Cards cardsInLibrary = new CardsImpl(Zone.LIBRARY);
                 cardsInLibrary.addAll(targetPlayer.getLibrary().getCards(game));

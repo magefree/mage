@@ -33,8 +33,9 @@ import mage.Constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.LoseLifeControllerEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
-import mage.filter.common.FilterArtifactPermanent;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -43,11 +44,12 @@ import mage.target.TargetPermanent;
  */
 public class VictoriousDestruction extends CardImpl<VictoriousDestruction> {
 
-    private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact or land");
+    private final static FilterPermanent filter = new FilterPermanent("artifact or land");
 
     static {
-        filter.getCardType().add(CardType.LAND);
-        filter.setScopeCardType(ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.ARTIFACT),
+                new CardTypePredicate(CardType.LAND)));
     }
 
     public VictoriousDestruction(UUID ownerId) {

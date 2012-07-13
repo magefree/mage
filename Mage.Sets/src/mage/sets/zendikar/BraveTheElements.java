@@ -31,14 +31,15 @@ package mage.sets.zendikar;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 
 import java.util.UUID;
@@ -73,9 +74,7 @@ class BraveTheElementsEffect extends GainAbilityControlledEffect {
     private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent();
 
     static {
-        filter1.setUseColor(true);
-        filter1.getColor().setWhite(true);
-        filter1.setScopeColor(ComparisonScope.Any);
+        filter1.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
     FilterCard filter2;
@@ -83,8 +82,6 @@ class BraveTheElementsEffect extends GainAbilityControlledEffect {
     public BraveTheElementsEffect() {
         super(new ProtectionAbility(new FilterCard()), Duration.EndOfTurn, filter1);
         filter2 = (FilterCard)((ProtectionAbility)getFirstAbility()).getFilter();
-        filter2.setUseColor(true);
-        filter2.setScopeColor(ComparisonScope.Any);
         staticText = "Choose a color. White creatures you control gain protection from the chosen color until end of turn";
     }
 
@@ -101,7 +98,7 @@ class BraveTheElementsEffect extends GainAbilityControlledEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
-        filter2.setColor(choice.getColor());
+        filter2.add(new ColorPredicate(choice.getColor()));
         filter2.setMessage(choice.getChoice());
         setAbility(new ProtectionAbility(new FilterCard(filter2)));
         return super.apply(game, source);

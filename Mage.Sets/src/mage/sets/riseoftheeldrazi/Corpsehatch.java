@@ -30,10 +30,13 @@ package mage.sets.riseoftheeldrazi;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.ObjectColor;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.permanent.token.EldraziSpawnToken;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -46,9 +49,7 @@ public class Corpsehatch extends CardImpl<Corpsehatch> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
 
     static {
-        filter.setUseColor(true);
-        filter.getColor().setBlack(true);
-        filter.setNotColor(true);
+        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
     }
 
     public Corpsehatch(UUID ownerId) {

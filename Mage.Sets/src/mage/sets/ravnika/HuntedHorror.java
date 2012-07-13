@@ -40,6 +40,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.permanent.token.Token;
 import mage.target.Target;
 import mage.target.common.TargetOpponent;
@@ -83,8 +84,7 @@ class CentaurToken extends Token {
     private final static FilterCard filter = new FilterCard("black");
 
     static {
-        filter.setUseColor(true);
-        filter.setColor(ObjectColor.BLACK);
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
     CentaurToken() {

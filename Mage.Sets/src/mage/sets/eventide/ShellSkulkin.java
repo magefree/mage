@@ -41,6 +41,7 @@ import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -51,8 +52,7 @@ public class ShellSkulkin extends CardImpl<ShellSkulkin> {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("blue creature");
 
     static {
-        filter.setUseColor(true);
-        filter.setColor(ObjectColor.BLUE);
+        filter.add(new ColorPredicate(ObjectColor.BLUE));
     }
 
     public ShellSkulkin(UUID ownerId) {

@@ -39,6 +39,8 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetCreaturePermanent;
@@ -50,11 +52,10 @@ import mage.watchers.Watcher;
  */
 public class ReaperFromTheAbyss extends CardImpl<ReaperFromTheAbyss> {
 
-    private static FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Demon creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Demon creature");
 
     static {
-        filter.getSubtype().add("Demon");
-        filter.setNotSubtype(true);
+        filter.add(Predicates.not(new SubtypePredicate("Demon")));
     }
 
     public ReaperFromTheAbyss(UUID ownerId) {

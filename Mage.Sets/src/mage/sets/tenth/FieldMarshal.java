@@ -38,8 +38,8 @@ import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  * @author anonymous
@@ -49,8 +49,7 @@ public class FieldMarshal extends CardImpl<FieldMarshal> {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Soldier creatures");
 
     static {
-        filter.getSubtype().add("Soldier");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Soldier"));
     }
 
     public FieldMarshal(UUID ownerId) {

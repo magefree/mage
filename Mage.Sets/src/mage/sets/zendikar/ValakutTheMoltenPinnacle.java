@@ -37,8 +37,8 @@ import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -55,8 +55,7 @@ public class ValakutTheMoltenPinnacle extends CardImpl<ValakutTheMoltenPinnacle>
     static final FilterLandPermanent filter = new FilterLandPermanent("Mountain");
 
     static {
-        filter.getSubtype().add("Mountain");
-        filter.setScopeSubtype(ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Mountain"));
     }
 
     public ValakutTheMoltenPinnacle(UUID ownerId) {

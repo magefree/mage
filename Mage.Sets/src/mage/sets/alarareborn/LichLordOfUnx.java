@@ -43,8 +43,8 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPlayer;
 
@@ -56,8 +56,7 @@ public class LichLordOfUnx extends CardImpl<LichLordOfUnx> {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Zombies you control");
 
     static {
-        filter.getSubtype().add("Zombie");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Zombie"));
     }
 
     public LichLordOfUnx (UUID ownerId) {

@@ -33,6 +33,7 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.ControlsPermanentCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
@@ -41,6 +42,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -51,10 +53,8 @@ public class CliffrunnerBehemoth extends CardImpl<CliffrunnerBehemoth> {
     private static final FilterPermanent whitePermanentFilter = new FilterPermanent("white");
 
     static {
-        redPermanentFilter.setUseColor(true);
-        redPermanentFilter.getColor().setRed(true);
-        whitePermanentFilter.setUseColor(true);
-        whitePermanentFilter.getColor().setWhite(true);
+        redPermanentFilter.add(new ColorPredicate(ObjectColor.RED));
+        whitePermanentFilter.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
 

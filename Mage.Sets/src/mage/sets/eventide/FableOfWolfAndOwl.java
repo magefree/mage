@@ -37,6 +37,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.WolfToken;
 
@@ -49,10 +50,8 @@ public class FableOfWolfAndOwl extends CardImpl<FableOfWolfAndOwl> {
     private final static FilterSpell filterBlueSpell = new FilterSpell("a blue spell");
 
     static {
-        filterGreenSpell.setUseColor(true);
-        filterGreenSpell.setColor(ObjectColor.GREEN);
-        filterBlueSpell.setUseColor(true);
-        filterBlueSpell.setColor(ObjectColor.BLUE);
+        filterGreenSpell.add(new ColorPredicate(ObjectColor.GREEN));
+        filterBlueSpell.add(new ColorPredicate(ObjectColor.BLUE));
     }
 
     public FableOfWolfAndOwl(UUID ownerId) {

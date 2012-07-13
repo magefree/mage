@@ -42,6 +42,7 @@ import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.Target;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreaturePermanent;
@@ -55,7 +56,7 @@ public class WolfhuntersQuiver extends CardImpl<WolfhuntersQuiver> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Werewolf creature");
 
     static {
-        filter.getSubtype().add("Werewolf");
+        filter.add(new SubtypePredicate("Werewolf"));
     }
 
     public WolfhuntersQuiver(UUID ownerId) {

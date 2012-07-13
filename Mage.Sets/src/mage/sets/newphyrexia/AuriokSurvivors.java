@@ -38,8 +38,8 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -53,8 +53,7 @@ public class AuriokSurvivors extends CardImpl<AuriokSurvivors> {
     private static final FilterCard filter = new FilterCard("Equipment card from your graveyard");
 
     static {
-        filter.getSubtype().add("Equipment");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Equipment"));
     }
 
     public AuriokSurvivors(UUID ownerId) {

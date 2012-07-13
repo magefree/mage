@@ -31,15 +31,16 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.filter.Filter;
 import mage.filter.FilterSpell;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.common.DrawCardControllerEffect;
-import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -50,9 +51,9 @@ public class SurrakarSpellblade extends CardImpl<SurrakarSpellblade> {
     private static final FilterSpell filter = new FilterSpell("instant or sorcery card");
 
     static {
-        filter.getCardType().add(CardType.INSTANT);
-        filter.getCardType().add(CardType.SORCERY);
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.INSTANT),
+                new CardTypePredicate(CardType.SORCERY)));
     }
 
     public SurrakarSpellblade(UUID ownerId) {

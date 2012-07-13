@@ -35,6 +35,7 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPlayer;
 
 /**
@@ -46,7 +47,7 @@ public class MindSludge extends CardImpl<MindSludge> {
     private static final FilterLandPermanent filter = new FilterLandPermanent("Swamp you control");
 
     static {
-        filter.getSubtype().add("Swamp");
+        filter.add(new SubtypePredicate("Swamp"));
         filter.setTargetController(TargetController.YOU);
     }
 

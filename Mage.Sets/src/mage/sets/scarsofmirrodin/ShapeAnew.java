@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -55,7 +56,7 @@ public class ShapeAnew extends CardImpl<ShapeAnew> {
     private static final FilterPermanent filter = new FilterPermanent("an artifact");
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public ShapeAnew (UUID ownerId) {

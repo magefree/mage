@@ -38,6 +38,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -75,7 +76,7 @@ class MindlessNullEffect extends RestrictionEffect<MindlessNullEffect> {
 
     public MindlessNullEffect() {
         super(Duration.WhileOnBattlefield);
-        filter.getSubtype().add("Vampire");
+        filter.add(new SubtypePredicate("Vampire"));
         staticText = "{this} can't block unless you control a Vampire";
     }
 

@@ -42,6 +42,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -52,7 +53,7 @@ public class ArcticAven extends CardImpl<ArcticAven> {
     private static final FilterPermanent filter = new FilterPermanent("Plains");
 
     static {
-        filter.getSubtype().add("Plains");
+        filter.add(new SubtypePredicate("Plains"));
     }
 
     public ArcticAven(UUID ownerId) {

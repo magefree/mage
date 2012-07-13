@@ -33,8 +33,8 @@ import mage.Constants.Rarity;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -45,8 +45,7 @@ public class RibbonsOfTheReikai extends CardImpl<RibbonsOfTheReikai> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("Spirit you control");
 
     static {
-        filter.getSubtype().add("Spirit");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Spirit"));
     }
 
     public RibbonsOfTheReikai(UUID ownerId) {
@@ -54,6 +53,7 @@ public class RibbonsOfTheReikai extends CardImpl<RibbonsOfTheReikai> {
         this.expansionSetCode = "BOK";
         this.subtype.add("Arcane");
         this.color.setBlue(true);
+
         // Draw a card for each Spirit you control.
         this.getSpellAbility().addEffect(new DrawCardControllerEffect(new PermanentsOnBattlefieldCount(filter)));
     }

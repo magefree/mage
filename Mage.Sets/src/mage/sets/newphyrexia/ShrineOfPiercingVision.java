@@ -33,6 +33,7 @@ import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.TargetController;
 import mage.Constants.Zone;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -48,6 +49,7 @@ import mage.cards.CardsImpl;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -62,8 +64,7 @@ public class ShrineOfPiercingVision extends CardImpl<ShrineOfPiercingVision> {
     private static final FilterSpell filter = new FilterSpell("a blue spell");
 
     static {
-        filter.getColor().setBlue(true);
-        filter.setUseColor(true);
+        filter.add(new ColorPredicate(ObjectColor.BLUE));
     }
 
     public ShrineOfPiercingVision(UUID ownerId) {

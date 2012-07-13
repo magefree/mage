@@ -38,6 +38,7 @@ import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -48,7 +49,7 @@ public class Levitation extends CardImpl<Levitation> {
     private final static FilterPermanent filter = new FilterPermanent("creatures ");
 
         static {
-            filter.getCardType().add(CardType.CREATURE);
+            filter.add(new CardTypePredicate(CardType.CREATURE));
         }
 
     public Levitation (UUID ownerId) {

@@ -35,8 +35,8 @@ import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.MerfolkToken;
 import mage.target.common.TargetControlledPermanent;
 
@@ -53,8 +53,7 @@ public class SummonTheSchool extends CardImpl<SummonTheSchool> {
     static {
         filter.setUseTapped(true);
         filter.setTapped(false);
-        filter.getSubtype().add("Merfolk");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Merfolk"));
     }
 
     public SummonTheSchool(UUID ownerId) {

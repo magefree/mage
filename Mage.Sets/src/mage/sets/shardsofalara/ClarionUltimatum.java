@@ -39,6 +39,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -113,8 +114,8 @@ class ClarionUltimatumEffect extends OneShotEffect<ClarionUltimatumEffect> {
                 sb.append("Search for ").append(cardName).append(" in your library?");
 
                 if (player.chooseUse(Outcome.PutCardInPlay, sb.toString(), game)) {
-                    FilterCard filter = new FilterCard("card named" + cardName);
-                    filter.getName().add(cardName);
+                    FilterCard filter = new FilterCard("card named " + cardName);
+                    filter.add(new NamePredicate(cardName));
                     TargetCardInLibrary target = new TargetCardInLibrary(filter);
 
                     if (player.searchLibrary(target, game)) {

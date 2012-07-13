@@ -43,9 +43,9 @@ import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -61,8 +61,7 @@ public class FiendOfTheShadows extends CardImpl<FiendOfTheShadows> {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a human");
 
     static {
-        filter.getSubtype().add("Human");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Human"));
     }
 
     public FiendOfTheShadows(UUID ownerId) {

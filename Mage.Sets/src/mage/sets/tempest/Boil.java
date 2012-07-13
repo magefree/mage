@@ -33,6 +33,7 @@ import mage.Constants.Rarity;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.NamePredicate;
 
 /**
  *
@@ -43,7 +44,7 @@ public class Boil extends CardImpl<Boil> {
     private final static FilterPermanent filter = new FilterPermanent("islands");
 
     static {
-        filter.getName().add("Island");
+        filter.add(new NamePredicate("Island"));
     }
 
     public Boil(UUID ownerId) {

@@ -46,6 +46,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -87,7 +88,7 @@ class MyrBattlesphereAbility extends TriggeredAbilityImpl<MyrBattlesphereAbility
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Myr");
 
     static {
-        filter.getSubtype().add("Myr");
+        filter.add(new SubtypePredicate("Myr"));
         filter.setTapped(false);
         filter.setUseTapped(true);
     }

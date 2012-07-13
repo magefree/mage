@@ -34,12 +34,15 @@ import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CantCounterSourceEffect;
 import mage.abilities.effects.common.CantTargetSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterStackObject;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -50,9 +53,7 @@ public class GaeasRevenge extends CardImpl<GaeasRevenge> {
     private static final FilterStackObject filter = new FilterStackObject("nongreen spells or abilities from nongreen sources");
 
     static {
-        filter.getColor().setGreen(true);
-        filter.setNotColor(true);
-        filter.setUseColor(true);
+        filter.add(Predicates.not(new ColorPredicate(ObjectColor.GREEN)));
     }
 
     public GaeasRevenge(UUID ownerId) {

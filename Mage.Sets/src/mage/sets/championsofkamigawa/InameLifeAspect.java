@@ -36,8 +36,8 @@ import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -49,8 +49,7 @@ public class InameLifeAspect extends CardImpl<InameLifeAspect> {
     private final static FilterCard filter = new FilterCard("Spirit cards from your graveyard");
 
     static {
-        filter.getSubtype().add("Spirit");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.add(new SubtypePredicate("Spirit"));
     }
 
     public InameLifeAspect(UUID ownerId) {

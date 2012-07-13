@@ -37,8 +37,8 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -51,8 +51,7 @@ public class SilverchaseFox extends CardImpl<SilverchaseFox> {
     private static final FilterPermanent filter = new FilterPermanent("enchantment");
 
     static {
-        filter.getCardType().add(CardType.ENCHANTMENT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
 
     public SilverchaseFox(UUID ownerId) {

@@ -30,9 +30,12 @@ package mage.sets.shadowmoor;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.ObjectColor;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -43,9 +46,7 @@ public class MassCalcify extends CardImpl<MassCalcify> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonwhite creatures");
 
     static {
-        filter.getColor().setWhite(true);
-        filter.setUseColor(true);
-        filter.setNotColor(true);
+        filter.add(Predicates.not(new ColorPredicate(ObjectColor.WHITE)));
     }
 
     public MassCalcify(UUID ownerId) {

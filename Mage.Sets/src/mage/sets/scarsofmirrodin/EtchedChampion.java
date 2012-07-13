@@ -33,6 +33,7 @@ import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
@@ -40,8 +41,9 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -53,13 +55,12 @@ public class EtchedChampion extends CardImpl<EtchedChampion> {
     private static final FilterCard filter = new FilterCard("all colors");
 
     static {
-        filter.setUseColor(true);
-        filter.getColor().setBlack(true);
-        filter.getColor().setBlue(true);
-        filter.getColor().setGreen(true);
-        filter.getColor().setRed(true);
-        filter.getColor().setWhite(true);
-        filter.setScopeColor(ComparisonScope.Any);
+        filter.add(Predicates.or(
+                new ColorPredicate(ObjectColor.BLACK),
+                new ColorPredicate(ObjectColor.BLUE),
+                new ColorPredicate(ObjectColor.GREEN),
+                new ColorPredicate(ObjectColor.RED),
+                new ColorPredicate(ObjectColor.WHITE)));
     }
 
     public EtchedChampion(UUID ownerId) {
