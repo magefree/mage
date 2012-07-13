@@ -36,12 +36,10 @@ package mage.client;
 
 import mage.cards.Card;
 import mage.cards.decks.Deck;
+import mage.client.cards.BigCard;
 import mage.client.cards.CardsStorage;
 import mage.client.chat.ChatPanel;
-import mage.client.components.MageComponents;
-import mage.client.components.MageJDesktop;
-import mage.client.components.MageRoundPane;
-import mage.client.components.MageUI;
+import mage.client.components.*;
 import mage.client.components.ext.dlg.DialogManager;
 import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.deckeditor.DeckEditorPane;
@@ -337,6 +335,23 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
         ui.addComponent(MageComponents.CARD_INFO_PANE, cardInfoPane);
         ui.addComponent(MageComponents.POPUP_CONTAINER, popupContainer);
+
+        JPanel cardPreviewContainer = new JPanel();
+        cardPreviewContainer.setOpaque(false);
+        cardPreviewContainer.setLayout(null);
+        BigCard bigCard = new BigCard();
+        bigCard.setSize(320, 500);
+        bigCard.setLocation(40, 40);
+        bigCard.setBackground(new Color(0, 0, 0, 0));
+
+        cardPreviewContainer.add(bigCard);
+        cardPreviewContainer.setVisible(false);
+        cardPreviewContainer.setBounds(0, 0, 320 + 80, 500 + 30);
+
+        ui.addComponent(MageComponents.CARD_PREVIEW_PANE, bigCard);
+        ui.addComponent(MageComponents.CARD_PREVIEW_CONTAINER, cardPreviewContainer);
+
+        desktopPane.add(cardPreviewContainer, JLayeredPane.POPUP_LAYER);
     }
 
     private void setBackground() {

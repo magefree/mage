@@ -84,7 +84,6 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
                         }
                     }
 
-                    boolean smallImages = true;
                     int fontSize = 11;
 
                     String fontFamily = "tahoma";
@@ -94,7 +93,7 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
                                             fontFamily = "verdana";
                                         }*/
 
-                    final StringBuffer buffer = new StringBuffer(512);
+                    final StringBuilder buffer = new StringBuilder(512);
                     buffer.append("<html><body style='font-family:");
                     buffer.append(fontFamily);
                     buffer.append(";font-size:");

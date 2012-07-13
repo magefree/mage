@@ -35,6 +35,7 @@
 package mage.client.game;
 
 import mage.Constants;
+import mage.cards.action.ActionCallback;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.chat.ChatPanel;
@@ -43,6 +44,7 @@ import mage.client.components.MageComponents;
 import mage.client.components.ext.dlg.DialogManager;
 import mage.client.dialog.*;
 import mage.client.game.FeedbackPanel.FeedbackMode;
+import mage.client.plugins.adapters.MageActionCallback;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.Config;
 import mage.client.util.GameManager;
@@ -53,7 +55,6 @@ import org.apache.log4j.Logger;
 
 import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.*;
@@ -129,12 +130,12 @@ public class GamePanel extends javax.swing.JPanel {
             throw new RuntimeException(e);
         }
 
-        SwingUtilities.invokeLater(new Runnable() {
+        /*SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 bigCard.setDefaultImage();
             }
-        });
+        });*/
     }
 
     private Map<String, JComponent> getUIComponents(JLayeredPane jLayeredPane) {
@@ -736,11 +737,31 @@ public class GamePanel extends javax.swing.JPanel {
         int c = JComponent.WHEN_IN_FOCUSED_WINDOW;
         KeyStroke ks = KeyStroke.getKeyStroke(KeyEvent.VK_F4, 0);
 
-        this.getInputMap(c).put(ks, "PRESS");
-        this.getActionMap().put("PRESS", new AbstractAction() {
+        this.getInputMap(c).put(ks, "F4_PRESS");
+        this.getActionMap().put("F4_PRESS", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 btnEndTurnActionPerformed(null);
+            }
+        });
+
+        KeyStroke ksAltShift = KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.ALT_MASK);
+        this.getInputMap(c).put(ksAltShift, "ENLARGE");
+        this.getActionMap().put("ENLARGE", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                ActionCallback callback = Plugins.getInstance().getActionCallback();
+                ((MageActionCallback)callback).enlargeCard();
+            }
+        });
+
+        KeyStroke ksAltShiftReleased = KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.ALT_MASK, true);
+        this.getInputMap(c).put(ksAltShiftReleased, "ENLARGE_RELEASE");
+        this.getActionMap().put("ENLARGE_RELEASE", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                ActionCallback callback = Plugins.getInstance().getActionCallback();
+                ((MageActionCallback)callback).hideCard();
             }
         });
 
@@ -835,7 +856,7 @@ public class GamePanel extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnStopWatching)
                                 .addContainerGap(62, Short.MAX_VALUE))
-                        .addComponent(bigCard, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+                        //.addComponent(bigCard, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
                                 //.addComponent(feedbackPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
                         .addComponent(stack, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
                         .addGroup(gl_pnlGameInfo.createSequentialGroup()
@@ -846,8 +867,8 @@ public class GamePanel extends javax.swing.JPanel {
         gl_pnlGameInfo.setVerticalGroup(
             gl_pnlGameInfo.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(gl_pnlGameInfo.createSequentialGroup()
-                    .addComponent(bigCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(1, 1, 1)
+                    //.addComponent(bigCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    //.addGap(1, 1, 1)
                             //.addComponent(feedbackPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(stack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 164, Short.MAX_VALUE)
@@ -923,12 +944,19 @@ public class GamePanel extends javax.swing.JPanel {
         gl_jPanel3.setHorizontalGroup(
             gl_jPanel3.createParallelGroup(Alignment.LEADING)
                 .addGroup(gl_jPanel3.createSequentialGroup()
-                    .addComponent(pnlGameInfo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addGap(0)
+                    //.addComponent(pnlGameInfo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    //.addGap(0)
                     .addGroup(gl_jPanel3.createParallelGroup(Alignment.LEADING)
-                            .addComponent(handContainer, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(gl_jPanel3.createSequentialGroup()
+                                .addGroup(gl_jPanel3.createParallelGroup(Alignment.LEADING)
+                                    .addComponent(helper, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(handContainer, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                )
+                                .addComponent(stack, GroupLayout.DEFAULT_SIZE, 400, 400)
+
+                            )
+                            .addGap(0)
                                     //.addComponent(jPhases, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(helper, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(gl_jPanel3.createSequentialGroup()
                                     .addComponent(pnlBattlefield, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                             )))
@@ -937,16 +965,24 @@ public class GamePanel extends javax.swing.JPanel {
                 gl_jPanel3.createParallelGroup(Alignment.TRAILING)
                         .addGroup(gl_jPanel3.createSequentialGroup()
                                 .addComponent(pnlBattlefield, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                .addPreferredGap(ComponentPlacement.RELATED)
-                                .addComponent(helper, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(handContainer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                //.addPreferredGap(ComponentPlacement.RELATED)
+                                .addGroup(gl_jPanel3.createParallelGroup(Alignment.LEADING)
+                                    .addGroup(gl_jPanel3.createSequentialGroup()
+                                            .addGap(85)
+                                            .addComponent(stack, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                    )
+                                    .addGroup(gl_jPanel3.createSequentialGroup()
+                                            .addComponent(helper, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(handContainer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                    )
+                                )
                                 //.addComponent(jPhases, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         )
-                        .addComponent(pnlGameInfo, GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+                        //.addComponent(pnlGameInfo, GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
         jPanel3.setLayout(gl_jPanel3);
+        //helper.setBorder(BorderFactory.createLineBorder(Color.ORANGE));
 
-//        jPanel3.setMinimumSize(new Dimension(400, 400));
         jSplitPane1.setLeftComponent(jPanel3);
 
         gameChatPanel.setMinimumSize(new java.awt.Dimension(100, 48));
@@ -1092,6 +1128,7 @@ public class GamePanel extends javax.swing.JPanel {
     private JLabel endButtonTip;
 
 }
+
 class ReplayTask extends SwingWorker<Void, Collection<MatchView>> {
 
     private Session session;

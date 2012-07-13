@@ -80,6 +80,8 @@ public class BigCard extends JComponent {
             initBounds();
         }
         setDoubleBuffered(true);
+        setOpaque(true);
+        scrollPane.setOpaque(true);
     }
 
     protected void initBounds() {

@@ -7,7 +7,9 @@ public enum MageComponents {
     TABLE_WAITING_START_BUTTON("btnStart"),
     DESKTOP_PANE("desktopPane"),
     CARD_INFO_PANE("cardInfoPane"),
-    POPUP_CONTAINER("popupContainer");
+    POPUP_CONTAINER("popupContainer"),
+    CARD_PREVIEW_PANE("cardPreviewPane"),
+    CARD_PREVIEW_CONTAINER("cardPreviewContainer");
 
     private String name;
     MageComponents(String name) {

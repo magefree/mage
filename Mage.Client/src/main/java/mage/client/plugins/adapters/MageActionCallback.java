@@ -36,8 +36,10 @@ public class MageActionCallback implements ActionCallback {
     protected static DefaultActionCallback defaultCallback = DefaultActionCallback.getInstance();
     protected static Session session = MageFrame.getSession();
     private CardView popupCard;
+    private TransferData popupData;
     private JComponent cardInfoPane;
     private volatile boolean state = false;
+    private boolean enlarged = false;
 
     public MageActionCallback() {
     }
@@ -69,6 +71,7 @@ public class MageActionCallback implements ActionCallback {
     public void mouseEntered(MouseEvent e, final TransferData data) {
         hidePopup();
         this.popupCard = data.card;
+        this.popupData = data;
 
         Component parentComponent = SwingUtilities.getRoot(data.component);
         Point parentPoint = parentComponent.getLocationOnScreen();
@@ -79,7 +82,6 @@ public class MageActionCallback implements ActionCallback {
             Point me = new Point(data.locationOnScreen);
             me.translate(-parentPoint.x, -parentPoint.y);
             for (UUID uuid : targets) {
-                //System.out.println("Getting play area panel for uuid: " + uuid);
 
                 PlayAreaPanel p = MageFrame.getGame(data.gameId).getPlayers().get(uuid);
                 if (p != null) {
@@ -169,7 +171,7 @@ public class MageActionCallback implements ActionCallback {
                     }
 
                     try {
-                        if (session == null || !state) {
+                        if (session == null || !state || enlarged) {
                             return;
                         }
                         final Component popupContainer = MageFrame.getUI().getComponent(MageComponents.POPUP_CONTAINER);
@@ -184,7 +186,7 @@ public class MageActionCallback implements ActionCallback {
                         SwingUtilities.invokeLater(new Runnable() {
                             @Override
                             public void run() {
-                                if (!state) {
+                                if (!state || enlarged) {
                                     return;
                                 }
                                 popupContainer.setVisible(true);
@@ -212,30 +214,36 @@ public class MageActionCallback implements ActionCallback {
 
         MageCard card = (MageCard) data.component;
         if (!state || card.getOriginal().getId() != bigCard.getCardId()) {
-            synchronized (MageActionCallback.class) {
-                if (!state || card.getOriginal().getId() != bigCard.getCardId()) {
-                    if (!state) {
-                        bigCard.resetCardId();
-                    }
-                    state = true;
-                    Image image = card.getImage();
-                    if (image != null && image instanceof BufferedImage) {
-                        // XXX: scaled to fit width
-                        image = ImageHelper.getResizedImage((BufferedImage) image, bigCard.getWidth());
-                        bigCard.setCard(card.getOriginal().getId(), image, card.getOriginal().getRules(), card.isFoil());
-                        if (card.getOriginal().isAbility()) {
-                            bigCard.showTextComponent();
-                        } else {
-                            bigCard.hideTextComponent();
+            if (bigCard.getWidth() > 0) {
+                synchronized (MageActionCallback.class) {
+                    if (!state || card.getOriginal().getId() != bigCard.getCardId()) {
+                        if (!state) {
+                            bigCard.resetCardId();
                         }
-                    } else {
-                        JXPanel panel = GuiDisplayUtil.getDescription(card.getOriginal(), bigCard.getWidth(), bigCard.getHeight());
-                        panel.setVisible(true);
-                        bigCard.hideTextComponent();
-                        bigCard.addJXPanel(card.getOriginal().getId(), panel);
+                        Image image = card.getImage();
+                        if (image != null && image instanceof BufferedImage) {
+                            // XXX: scaled to fit width
+                            image = ImageHelper.getResizedImage((BufferedImage) image, bigCard.getWidth());
+                            bigCard.setCard(card.getOriginal().getId(), image, card.getOriginal().getRules(), card.isFoil());
+                            if (card.getOriginal().isAbility()) {
+                                bigCard.showTextComponent();
+                            } else {
+                                bigCard.hideTextComponent();
+                            }
+                        } else {
+                            JXPanel panel = GuiDisplayUtil.getDescription(card.getOriginal(), bigCard.getWidth(), bigCard.getHeight());
+                            panel.setVisible(true);
+                            bigCard.hideTextComponent();
+                            bigCard.addJXPanel(card.getOriginal().getId(), panel);
+                        }
                     }
                 }
+            } else {
+                state = true;
             }
+            displayCard(card.getOriginal(), data);
+        } else {
+            hideCard();
         }
     }
 
@@ -266,6 +274,103 @@ public class MageActionCallback implements ActionCallback {
         ArrowBuilder.removeArrowsByType(ArrowBuilder.Type.TARGET);
         ArrowBuilder.removeArrowsByType(ArrowBuilder.Type.PAIRED);
         ArrowBuilder.removeArrowsByType(ArrowBuilder.Type.SOURCE);
+    }
+
+    public void enlargeCard() {
+        if (!enlarged) {
+            enlarged = true;
+            CardView card = null;
+            if (popupData != null) {
+                card = popupData.card;
+
+            }
+            if (this.state) {
+                hidePopup();
+            }
+            if (card != null) {
+                displayCard(card, popupData);
+            }
+        }
+    }
+
+    public void hideCard() {
+        if (enlarged) {
+            enlarged = false;
+            try {
+                Component cardPreviewContainer = MageFrame.getUI().getComponent(MageComponents.CARD_PREVIEW_CONTAINER);
+                cardPreviewContainer.setVisible(false);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void displayCard(final CardView card, final TransferData data) {
+        if (!enlarged) {
+            return;
+
+        }
+
+        ThreadUtils.threadPool2.submit(new Runnable() {
+            @Override
+            public void run() {
+                if (card == null) {
+                    return;
+                }
+
+                try {
+                    if (!enlarged) {
+                        return;
+                    }
+
+                    Component parentComponent = SwingUtilities.getRoot(data.component);
+                    Point parentPoint = parentComponent.getLocationOnScreen();
+
+                    final Component popupContainer = MageFrame.getUI().getComponent(MageComponents.CARD_PREVIEW_CONTAINER);
+                    Component cardPreview = MageFrame.getUI().getComponent(MageComponents.CARD_PREVIEW_PANE);
+                    //((CardInfoPaneImplExt) cardPreview).setCard(data.card);
+                    Point location = new Point((int) data.locationOnScreen.getX() + data.popupOffsetX - 40, (int) data.locationOnScreen.getY() + data.popupOffsetY - 40);
+                    location = GuiDisplayUtil.keepComponentInsideParent(location, parentPoint, cardPreview, parentComponent);
+                    location.translate(-parentPoint.x, -parentPoint.y);
+                    popupContainer.setLocation(location);
+                    popupContainer.setVisible(true);
+
+                    MageCard card = (MageCard) data.component;
+                    Image image = card.getImage();
+                    BigCard bigCard = (BigCard)cardPreview;
+                    if (image != null && image instanceof BufferedImage) {
+                        // XXX: scaled to fit width
+                        image = ImageHelper.getResizedImage((BufferedImage) image, bigCard.getWidth());
+                        bigCard.setCard(card.getOriginal().getId(), image, card.getOriginal().getRules(), card.isFoil());
+                        if (card.getOriginal().isAbility()) {
+                            bigCard.showTextComponent();
+                        } else {
+                            bigCard.hideTextComponent();
+                        }
+                    } else {
+                        JXPanel panel = GuiDisplayUtil.getDescription(card.getOriginal(), bigCard.getWidth(), bigCard.getHeight());
+                        panel.setVisible(true);
+                        bigCard.hideTextComponent();
+                        bigCard.addJXPanel(card.getOriginal().getId(), panel);
+                    }
+
+                    /*final Component c = MageFrame.getUI().getComponent(MageComponents.DESKTOP_PANE);
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (!enlarged) {
+                                return;
+                            }
+                            popupContainer.setVisible(true);
+                            c.repaint();
+                        }
+                    }
+                    );*/
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
 }
