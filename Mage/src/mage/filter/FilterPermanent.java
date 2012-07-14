@@ -49,8 +49,6 @@ public class FilterPermanent extends FilterObject<Permanent> {
     protected boolean flipped;
     protected boolean useFaceup;
     protected boolean faceup;
-    protected boolean usePhased;
-    protected boolean phasedIn;
     protected TargetController controller = TargetController.ANY;
     protected TargetController owner = TargetController.ANY;
     protected boolean another;
@@ -69,8 +67,6 @@ public class FilterPermanent extends FilterObject<Permanent> {
         this.flipped = filter.flipped;
         this.useFaceup = filter.useFaceup;
         this.faceup = filter.faceup;
-        this.usePhased = filter.usePhased;
-        this.phasedIn = filter.phasedIn;
         this.controller = filter.controller;
         this.owner = filter.owner;
         this.another = filter.another;
@@ -95,9 +91,6 @@ public class FilterPermanent extends FilterObject<Permanent> {
             return notFilter;
 
         if (useFaceup && permanent.isFaceUp() != faceup)
-            return notFilter;
-
-        if (usePhased && permanent.isPhasedIn() != phasedIn)
             return notFilter;
 
         return !notFilter;
