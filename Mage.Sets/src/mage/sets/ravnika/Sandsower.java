@@ -39,6 +39,8 @@ import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -51,8 +53,7 @@ public class Sandsower extends CardImpl<Sandsower> {
     private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creatures you control");
 
     static {
-        filter.setTapped(false);
-        filter.setUseTapped(true);
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
     public Sandsower(UUID ownerId) {

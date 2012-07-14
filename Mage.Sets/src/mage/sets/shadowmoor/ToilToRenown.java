@@ -37,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.permanent.TappedPredicate;
 
 /**
  *
@@ -47,7 +48,7 @@ public class ToilToRenown extends CardImpl<ToilToRenown> {
     private static final FilterPermanent filter = new FilterPermanent("tapped artifact, creature, and land you control");
 
     static {
-        filter.setTapped(true);
+        filter.add(new TappedPredicate());
         filter.add(Predicates.or(
                 new CardTypePredicate(CardType.ARTIFACT),
                 new CardTypePredicate(CardType.CREATURE),

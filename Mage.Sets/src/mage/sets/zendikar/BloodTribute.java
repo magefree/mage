@@ -37,7 +37,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -52,8 +54,7 @@ public class BloodTribute extends CardImpl<BloodTribute> {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Vampire you control");
 
     static {
-        filter.setTapped(false);
-        filter.setUseTapped(true);
+        filter.add(Predicates.not(new TappedPredicate()));
         filter.add(new SubtypePredicate("Vampire"));
     }
 

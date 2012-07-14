@@ -45,8 +45,6 @@ public class FilterPermanent extends FilterObject<Permanent> {
     protected boolean notOwner;
     protected List<UUID> controllerId = new ArrayList<UUID>();
     protected boolean notController;
-    protected boolean useTapped;
-    protected boolean tapped;
     protected boolean useFlipped;
     protected boolean flipped;
     protected boolean useFaceup;
@@ -67,8 +65,6 @@ public class FilterPermanent extends FilterObject<Permanent> {
         this.notOwner = filter.notOwner;
         this.controllerId  = new ArrayList<UUID>(filter.controllerId);
         this.notController = filter.notController;
-        this.useTapped = filter.useTapped;
-        this.tapped = filter.tapped;
         this.useFlipped = filter.useFlipped;
         this.flipped = filter.flipped;
         this.useFaceup = filter.useFaceup;
@@ -93,9 +89,6 @@ public class FilterPermanent extends FilterObject<Permanent> {
             return notFilter;
 
         if (controllerId.size() > 0 && controllerId.contains(permanent.getControllerId()) == notController)
-            return notFilter;
-
-        if (useTapped && permanent.isTapped() != tapped)
             return notFilter;
 
         if (useFlipped && permanent.isFlipped() != flipped)
@@ -172,14 +165,6 @@ public class FilterPermanent extends FilterObject<Permanent> {
 
     public void setNotController(boolean notController) {
         this.notController = notController;
-    }
-
-    public void setUseTapped(boolean useTapped) {
-        this.useTapped = useTapped;
-    }
-
-    public void setTapped(boolean tapped) {
-        this.tapped = tapped;
     }
 
     public void setUseFlipped(boolean useFlipped) {

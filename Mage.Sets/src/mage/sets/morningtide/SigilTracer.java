@@ -44,6 +44,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.TargetSpell;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -56,8 +57,7 @@ public class SigilTracer extends CardImpl<SigilTracer> {
     private static final FilterSpell filterInstorSorc = new FilterSpell("instant or sorcery spell");
 
     static {
-        filter.setTapped(false);
-        filter.setUseTapped(true);
+        filter.add(Predicates.not(new TappedPredicate()));
         filter.add(new SubtypePredicate("Wizard"));
         filterInstorSorc.add(Predicates.or(
                 new CardTypePredicate(CardType.INSTANT),

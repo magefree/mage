@@ -42,6 +42,7 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -63,8 +64,7 @@ public class DevoutChaplain extends CardImpl<DevoutChaplain> {
     private final static FilterControlledPermanent humanFilter = new FilterControlledPermanent("untapped Human you control");
 
     static {
-        humanFilter.setTapped(false);
-        humanFilter.setUseTapped(true);
+        humanFilter.add(Predicates.not(new TappedPredicate()));
         humanFilter.add(new SubtypePredicate("Human"));
     }
 

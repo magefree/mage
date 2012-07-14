@@ -42,6 +42,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -55,8 +56,7 @@ public class NullmageShepherd extends CardImpl<NullmageShepherd> {
     private final static FilterPermanent filterTarget = new FilterPermanent("artifact or enchantment");
 
     static {
-        filterCost.setTapped(false);
-        filterCost.setUseTapped(true);
+        filterCost.add(Predicates.not(new TappedPredicate()));
         filterTarget.add(Predicates.or(
                 new CardTypePredicate(CardType.ARTIFACT),
                 new CardTypePredicate(CardType.ENCHANTMENT)));

@@ -55,8 +55,10 @@ import mage.abilities.mana.ManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -141,8 +143,7 @@ class GrandArchitectManaAbility extends ManaAbility<GrandArchitectManaAbility> {
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLUE));
-        filter.setTapped(false);
-        filter.setUseTapped(true);
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
     GrandArchitectManaAbility ( ) {

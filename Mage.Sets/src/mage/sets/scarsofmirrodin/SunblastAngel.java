@@ -38,6 +38,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.TappedPredicate;
 
 /**
  *
@@ -48,8 +49,7 @@ public class SunblastAngel extends CardImpl<SunblastAngel> {
     private static final FilterPermanent tappedFilter = new FilterCreaturePermanent("tapped creatures");
 
     static {
-        tappedFilter.setUseTapped(true);
-        tappedFilter.setTapped(true);
+        tappedFilter.add(new TappedPredicate());
     }
 
     public SunblastAngel (UUID ownerId) {

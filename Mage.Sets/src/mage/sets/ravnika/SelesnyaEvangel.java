@@ -41,6 +41,8 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.permanent.token.SaprolingToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -53,8 +55,7 @@ public class SelesnyaEvangel extends CardImpl<SelesnyaEvangel> {
     private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature you control");
 
     static {
-        filter.setTapped(false);
-        filter.setUseTapped(true);
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
     public SelesnyaEvangel(UUID ownerId) {

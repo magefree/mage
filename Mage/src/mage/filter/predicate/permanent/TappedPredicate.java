@@ -25,50 +25,25 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.filter.predicate.permanent;
 
-import java.util.UUID;
-
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.cards.CardImpl;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.TappedPredicate;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.filter.predicate.Predicate;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
- * @author Loki
+ *
+ * @author North
  */
-public class Telethopter extends CardImpl<Telethopter> {
+public class TappedPredicate implements Predicate<Permanent> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature you control");
-
-    static {
-        filter.add(Predicates.not(new TappedPredicate()));
-    }
-
-    public Telethopter(UUID ownerId) {
-        super(ownerId, 301, "Telethopter", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
-        this.expansionSetCode = "TMP";
-        this.subtype.add("Thopter");
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(1);
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Constants.Duration.EndOfTurn), new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false))));
-    }
-
-    public Telethopter(final Telethopter card) {
-        super(card);
+    @Override
+    public boolean apply(Permanent input, Game game) {
+        return input.isTapped();
     }
 
     @Override
-    public Telethopter copy() {
-        return new Telethopter(this);
+    public String toString() {
+        return "Tapped";
     }
 }

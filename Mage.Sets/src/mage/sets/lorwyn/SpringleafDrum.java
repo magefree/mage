@@ -34,6 +34,8 @@ import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -46,8 +48,7 @@ public class SpringleafDrum extends CardImpl<SpringleafDrum> {
     private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature");
 
     static {
-        filter.setUseTapped(true);
-        filter.setTapped(false);
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
     public SpringleafDrum(UUID ownerId) {

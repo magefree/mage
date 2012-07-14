@@ -40,7 +40,9 @@ import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SupertypePredicate;
+import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -51,8 +53,7 @@ public class HonorWornShaku extends CardImpl<HonorWornShaku> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("untapped legendary permanent");
 
     static {
-        filter.setTapped(false);
-        filter.setUseTapped(true);
+        filter.add(Predicates.not(new TappedPredicate()));
         filter.add(new SupertypePredicate("Legendary"));
     }
 

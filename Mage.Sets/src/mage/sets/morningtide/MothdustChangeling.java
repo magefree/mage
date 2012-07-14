@@ -40,6 +40,8 @@ import mage.abilities.keyword.ChangelingAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -50,8 +52,7 @@ public class MothdustChangeling extends CardImpl<MothdustChangeling> {
     private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature you control");
 
     static {
-        filter.setTapped(false);
-        filter.setUseTapped(true);
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
     public MothdustChangeling(UUID ownerId) {

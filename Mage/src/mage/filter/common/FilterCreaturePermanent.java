@@ -64,8 +64,6 @@ public class FilterCreaturePermanent extends FilterPermanent {
         this.blocking = filter.blocking;
         this.useDamageDealt = filter.useDamageDealt;
         this.damageDealt = filter.damageDealt;
-        this.useTapped = filter.useTapped;
-        this.tapped = filter.tapped;
     }
 
     @Override

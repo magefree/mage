@@ -39,7 +39,9 @@ import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -50,8 +52,7 @@ public class LodestoneMyr extends CardImpl<LodestoneMyr> {
     private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped artifact you control");
 
     static {
-        filter.setTapped(false);
-        filter.setUseTapped(true);
+        filter.add(Predicates.not(new TappedPredicate()));
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 

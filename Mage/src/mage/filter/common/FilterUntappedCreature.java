@@ -28,6 +28,9 @@
 
 package mage.filter.common;
 
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.TappedPredicate;
+
 /**
  *
  * @author noxx
@@ -40,8 +43,7 @@ public class FilterUntappedCreature extends FilterCreaturePermanent {
 
     public FilterUntappedCreature(String name) {
         super(name);
-        this.tapped = false;
-        this.useTapped = true;
+        this.add(Predicates.not(new TappedPredicate()));
     }
 
     public FilterUntappedCreature(final FilterUntappedCreature filter) {

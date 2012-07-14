@@ -41,7 +41,9 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetAttackingCreature;
 
 /**
@@ -53,8 +55,7 @@ public class BenBenAkkiHermit extends CardImpl<BenBenAkkiHermit> {
     private final static FilterLandPermanent filter = new FilterLandPermanent("untapped Mountain you control");
 
        static {
-           filter.setTapped(false);
-           filter.setUseTapped(true);
+           filter.add(Predicates.not(new TappedPredicate()));
            filter.add(new SubtypePredicate("Mountain"));
        }
 

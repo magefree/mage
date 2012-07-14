@@ -60,8 +60,6 @@ public class FilterArtifactPermanent extends FilterPermanent {
         this.attacking = filter.attacking;
         this.useBlocking = filter.useBlocking;
         this.blocking = filter.blocking;
-        this.useTapped = filter.useTapped;
-        this.tapped = filter.tapped;
     }
 
     @Override
@@ -73,9 +71,6 @@ public class FilterArtifactPermanent extends FilterPermanent {
             return notFilter;
 
         if (useBlocking && (permanent.getBlocking() > 0) != blocking)
-            return notFilter;
-
-        if (useTapped && permanent.isTapped() != tapped)
             return notFilter;
 
         return !notFilter;

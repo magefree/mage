@@ -38,6 +38,7 @@ import mage.abilities.effects.common.SkipEnchantedUntapEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -50,7 +51,7 @@ public class EntanglingVines extends CardImpl<EntanglingVines> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
 
     static {
-        filter.setTapped(true);
+        filter.add(new TappedPredicate());
     }
 
     public EntanglingVines(UUID ownerId) {

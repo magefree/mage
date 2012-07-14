@@ -28,6 +28,8 @@
 
 package mage.filter.common;
 
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -45,10 +47,9 @@ public class FilterCreatureForCombat extends FilterCreaturePermanent {
         super(name);
         this.attacking = false;
         this.useAttacking = true;
-        this.tapped = false;
-        this.useTapped = true;
         this.phasedIn = true;
         this.usePhased = true;
+        this.add(Predicates.not(new TappedPredicate()));
     }
 
     public FilterCreatureForCombat(final FilterCreatureForCombat filter) {

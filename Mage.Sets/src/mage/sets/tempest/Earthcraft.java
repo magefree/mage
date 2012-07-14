@@ -39,8 +39,10 @@ import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
+import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -53,8 +55,7 @@ public class Earthcraft extends CardImpl<Earthcraft> {
     private final static FilterControlledPermanent filterLand = new FilterControlledPermanent("basic land");
 
     static {
-        filterCreature.setUseTapped(true);
-        filterCreature.setTapped(false);
+        filterCreature.add(Predicates.not(new TappedPredicate()));
         filterLand.add(new CardTypePredicate(CardType.LAND));
         filterLand.add(new SupertypePredicate("Basic"));
     }

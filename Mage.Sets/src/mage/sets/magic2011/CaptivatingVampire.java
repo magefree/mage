@@ -46,7 +46,9 @@ import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -64,8 +66,7 @@ public class CaptivatingVampire extends CardImpl<CaptivatingVampire> {
     static {
         filter1.add(new SubtypePredicate("Vampire"));
         filter2.add(new SubtypePredicate("Vampire"));
-        filter2.setTapped(false);
-        filter2.setUseTapped(true);
+        filter2.add(Predicates.not(new TappedPredicate()));
     }
 
     public CaptivatingVampire(UUID ownerId) {

@@ -41,7 +41,9 @@ import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -52,8 +54,7 @@ public class ChosenOfMarkov extends CardImpl<ChosenOfMarkov> {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Vampire you control");
 
     static {
-        filter.setUseTapped(true);
-        filter.setTapped(false);
+        filter.add(Predicates.not(new TappedPredicate()));
         filter.add(new SubtypePredicate("Vampire"));
     }
 

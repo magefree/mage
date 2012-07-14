@@ -39,7 +39,9 @@ import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -50,8 +52,7 @@ public class AzamiLadyOfScrolls extends CardImpl<AzamiLadyOfScrolls> {
     private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Wizard you control");
 
     static {
-        filter.setTapped(false);
-        filter.setUseTapped(true);
+        filter.add(Predicates.not(new TappedPredicate()));
         filter.add(new SubtypePredicate("Wizard"));
     }
 

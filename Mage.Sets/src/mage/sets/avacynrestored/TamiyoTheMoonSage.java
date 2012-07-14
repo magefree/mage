@@ -45,6 +45,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
@@ -100,8 +101,7 @@ class TappedCreaturesControlledByTargetCount implements DynamicValue {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.setTapped(true);
-        filter.setUseTapped(true);
+        filter.add(new TappedPredicate());
     }
 
     @Override

@@ -41,9 +41,11 @@ import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.permanent.token.MerfolkToken;
 import mage.target.common.TargetControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
 
@@ -56,8 +58,7 @@ public class Benthicore extends CardImpl<Benthicore> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("untapped Merfolk you control");
 
     static {
-        filter.setTapped(false);
-        filter.setUseTapped(true);
+        filter.add(Predicates.not(new TappedPredicate()));
         filter.add(new SubtypePredicate("Merfolk"));
     }
 

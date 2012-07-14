@@ -39,7 +39,9 @@ import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -51,8 +53,7 @@ public class HeritageDruid extends CardImpl<HeritageDruid> {
     private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Elves you control");
 
     static {
-        filter.setTapped(false);
-        filter.setUseTapped(true);
+        filter.add(Predicates.not(new TappedPredicate()));
         filter.add(new SubtypePredicate("Elf"));
     }
 

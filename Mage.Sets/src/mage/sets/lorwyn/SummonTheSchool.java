@@ -36,7 +36,9 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.permanent.token.MerfolkToken;
 import mage.target.common.TargetControlledPermanent;
 
@@ -51,8 +53,7 @@ public class SummonTheSchool extends CardImpl<SummonTheSchool> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("untapped Merfolk you control");
 
     static {
-        filter.setUseTapped(true);
-        filter.setTapped(false);
+        filter.add(Predicates.not(new TappedPredicate()));
         filter.add(new SubtypePredicate("Merfolk"));
     }
 

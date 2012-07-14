@@ -39,6 +39,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -50,8 +51,7 @@ public class RoyalAssassin extends CardImpl<RoyalAssassin> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
 
     static {
-        filter.setUseTapped(true);
-        filter.setTapped(true);
+        filter.add(new TappedPredicate());
     }
 
     public RoyalAssassin(UUID ownerId){

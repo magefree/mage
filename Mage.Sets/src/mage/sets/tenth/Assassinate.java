@@ -34,6 +34,7 @@ import mage.Constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -45,8 +46,7 @@ public class Assassinate extends CardImpl<Assassinate> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
 
     static {
-        filter.setTapped(true);
-        filter.setUseTapped(true);
+        filter.add(new TappedPredicate());
     }
 
     public Assassinate(UUID ownerId) {

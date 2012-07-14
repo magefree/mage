@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.permanent.TappedPredicate;
 
 import java.util.UUID;
 
@@ -47,13 +48,11 @@ import java.util.UUID;
  */
 public class MaraxusOfKeld extends CardImpl<MaraxusOfKeld> {
 
-    private static final FilterControlledPermanent filterUntapped = new FilterControlledPermanent("untapped artifacts, creatures, and lands you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped artifacts, creatures, and lands you control");
 
     static {
-        filterUntapped.setUseTapped(true);
-        filterUntapped.setTapped(false);
-
-        filterUntapped.add(Predicates.or(
+        filter.add(Predicates.not(new TappedPredicate()));
+        filter.add(Predicates.or(
                 new CardTypePredicate(CardType.ARTIFACT),
                 new CardTypePredicate(CardType.CREATURE),
                 new CardTypePredicate(CardType.LAND)));
@@ -71,7 +70,7 @@ public class MaraxusOfKeld extends CardImpl<MaraxusOfKeld> {
         this.toughness = new MageInt(0);
 
         // Maraxus of Keld's power and toughness are each equal to the number of untapped artifacts, creatures, and lands you control.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filterUntapped), Constants.Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Constants.Duration.EndOfGame)));
     }
 
     public MaraxusOfKeld(final MaraxusOfKeld card) {

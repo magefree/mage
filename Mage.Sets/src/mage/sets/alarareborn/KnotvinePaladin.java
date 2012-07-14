@@ -38,17 +38,18 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.TappedPredicate;
 
 /**
  *
  * @author Loki
  */
 public class KnotvinePaladin extends CardImpl<KnotvinePaladin> {
-    private static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature you control");
 
     static {
-        filter.setUseTapped(true);
-        filter.setTapped(false);
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
 
