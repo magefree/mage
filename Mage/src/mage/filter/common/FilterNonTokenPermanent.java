@@ -37,7 +37,7 @@ import mage.game.permanent.PermanentToken;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FilterNonTokenPermanent extends FilterPermanent<FilterNonTokenPermanent> {
+public class FilterNonTokenPermanent extends FilterPermanent {
 
     public FilterNonTokenPermanent() {
         this("nontoken permanent");

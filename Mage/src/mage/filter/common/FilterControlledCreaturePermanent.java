@@ -35,7 +35,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FilterControlledCreaturePermanent<T extends FilterControlledCreaturePermanent> extends FilterControlledPermanent<FilterControlledCreaturePermanent<T>> {
+public class FilterControlledCreaturePermanent extends FilterControlledPermanent {
 
     public FilterControlledCreaturePermanent() {
         this("creature you control");

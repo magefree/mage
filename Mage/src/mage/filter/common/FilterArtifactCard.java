@@ -36,7 +36,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author nantuko
  */
-public class FilterArtifactCard extends FilterCard<FilterArtifactCard> {
+public class FilterArtifactCard extends FilterCard {
 
     public FilterArtifactCard() {
         this("artifact");

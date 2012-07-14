@@ -37,7 +37,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FilterAura extends FilterPermanent<FilterAura> {
+public class FilterAura extends FilterPermanent {
 
     public FilterAura() {
         this("aura");

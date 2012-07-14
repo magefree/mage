@@ -35,7 +35,7 @@ import mage.filter.FilterPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FilterControlledPermanent<T extends FilterControlledPermanent<T>> extends FilterPermanent<FilterControlledPermanent<T>> {
+public class FilterControlledPermanent extends FilterPermanent {
 
     public FilterControlledPermanent() {
         this("permanent you control");

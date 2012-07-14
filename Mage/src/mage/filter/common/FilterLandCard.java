@@ -36,7 +36,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FilterLandCard extends FilterCard<FilterLandCard> {
+public class FilterLandCard extends FilterCard {
 
     public FilterLandCard() {
         this("land card");

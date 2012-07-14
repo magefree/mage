@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author LevelX
  */
-public class FilterSpellOrPermanent extends FilterImpl<Object, FilterPermanentOrPlayer> implements FilterInPlay<Object> {
+public class FilterSpellOrPermanent extends FilterImpl<Object> implements FilterInPlay<Object> {
 
     protected FilterPermanent permanentFilter;
     protected FilterSpell spellFilter;

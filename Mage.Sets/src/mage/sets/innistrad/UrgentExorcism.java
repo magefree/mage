@@ -65,7 +65,7 @@ public class UrgentExorcism extends CardImpl<UrgentExorcism> {
     }
 }
 
-class FilterSpiritOrEnchantment extends FilterPermanent<FilterSpiritOrEnchantment> {
+class FilterSpiritOrEnchantment extends FilterPermanent {
 
     public FilterSpiritOrEnchantment() {
         super("Spirit or enchantment");

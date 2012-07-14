@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FilterCreatureOrPlayer extends FilterImpl<Object, FilterCreatureOrPlayer> implements FilterInPlay<Object> {
+public class FilterCreatureOrPlayer extends FilterImpl<Object> implements FilterInPlay<Object> {
 
     protected FilterCreaturePermanent creatureFilter;
     protected FilterPlayer playerFilter;

@@ -38,14 +38,14 @@ import mage.game.Game;
  * @author BetaSteward_at_googlemail.com
  * @author North
  */
-public abstract class FilterImpl<E, T extends FilterImpl<E, T>> implements Filter<E> {
+public abstract class FilterImpl<E> implements Filter<E> {
 
     protected List<Predicate> predicates = new ArrayList<Predicate>();
     protected String message;
     protected boolean notFilter = false;
 
     @Override
-    public abstract FilterImpl<E, T> copy();
+    public abstract FilterImpl<E> copy();
 
     public FilterImpl(String name) {
         this.message = name;

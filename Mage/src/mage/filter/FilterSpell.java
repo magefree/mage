@@ -39,7 +39,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FilterSpell<T extends FilterSpell<T>> extends FilterStackObject<FilterSpell<T>> {
+public class FilterSpell extends FilterStackObject {
 
     protected Zone fromZone = Zone.ALL;
     protected boolean notFromZone = false;    

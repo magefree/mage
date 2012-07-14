@@ -41,7 +41,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class FilterPermanentOrPlayer extends FilterImpl<Object, FilterPermanentOrPlayer> implements FilterInPlay<Object> {
+public class FilterPermanentOrPlayer extends FilterImpl<Object> implements FilterInPlay<Object> {
 
     protected FilterPermanent permanentFilter;
     protected FilterPlayer playerFilter;

@@ -35,7 +35,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class FilterBlockedCreature extends FilterCreaturePermanent<FilterBlockingCreature> {
+public class FilterBlockedCreature extends FilterCreaturePermanent {
 
     public FilterBlockedCreature() {
         this("blocked creature");

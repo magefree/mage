@@ -37,7 +37,7 @@ import java.util.UUID;
  *
  * @author noxx
  */
-public class FilterNotPairedControlledCreaturePermanent extends FilterControlledCreaturePermanent<FilterNotPairedControlledCreaturePermanent> {
+public class FilterNotPairedControlledCreaturePermanent extends FilterControlledCreaturePermanent {
 
     public FilterNotPairedControlledCreaturePermanent() {
         this("not paired creature you control");

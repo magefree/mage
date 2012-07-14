@@ -37,7 +37,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FilterNonlandPermanent extends FilterPermanent<FilterNonlandPermanent> {
+public class FilterNonlandPermanent extends FilterPermanent {
 
     public FilterNonlandPermanent() {
         this("nonland permanent");

@@ -36,7 +36,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author jeffwadsworth
  */
-public class FilterAuraCard extends FilterCard<FilterAuraCard> {
+public class FilterAuraCard extends FilterCard {
 
     public FilterAuraCard() {
         this("aura");

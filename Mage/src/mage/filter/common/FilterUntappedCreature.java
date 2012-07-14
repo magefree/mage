@@ -32,7 +32,7 @@ package mage.filter.common;
  *
  * @author noxx
  */
-public class FilterUntappedCreature extends FilterCreaturePermanent<FilterUntappedCreature> {
+public class FilterUntappedCreature extends FilterCreaturePermanent {
 
     public FilterUntappedCreature() {
         this("untapped creature");

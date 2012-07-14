@@ -37,7 +37,7 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FilterBasicLandCard extends FilterCard<FilterBasicLandCard> {
+public class FilterBasicLandCard extends FilterCard {
 
     public FilterBasicLandCard() {
         super("basic land card");

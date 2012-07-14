@@ -68,7 +68,7 @@ public class SecondGuess extends CardImpl<SecondGuess> {
     }
 }
 
-class FilterSecondSpell extends FilterSpell<FilterSecondSpell> {
+class FilterSecondSpell extends FilterSpell {
 
     public FilterSecondSpell() {
         super("spell that's the second spell cast this turn");
@@ -119,16 +119,14 @@ class FilterSecondSpell extends FilterSpell<FilterSecondSpell> {
         return new FilterSecondSpell(this);
     }
 
+    @Override
     public void setFromZone(Constants.Zone fromZone) {
         this.fromZone = fromZone;
     }
 
+    @Override
     public void setNotFromZone(boolean notFromZone) {
         this.notFromZone = notFromZone;
     }
 
 }
-
-
-
-

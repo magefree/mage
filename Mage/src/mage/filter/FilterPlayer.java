@@ -40,7 +40,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FilterPlayer extends FilterImpl<Player, FilterPlayer> implements Filter<Player> {
+public class FilterPlayer extends FilterImpl<Player> {
 
     protected List<UUID> playerId = new ArrayList<UUID>();
     protected boolean notPlayer;

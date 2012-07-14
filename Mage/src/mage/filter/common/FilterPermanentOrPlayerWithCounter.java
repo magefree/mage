@@ -28,8 +28,6 @@
 
 package mage.filter.common;
 
-import mage.filter.FilterPermanent;
-import mage.filter.FilterPlayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -41,31 +39,20 @@ import java.util.UUID;
  */
 public class FilterPermanentOrPlayerWithCounter extends FilterPermanentOrPlayer {
 
-    protected FilterPermanent permanentFilter;
-    protected FilterPlayer playerFilter;
-
     public FilterPermanentOrPlayerWithCounter() {
         this("player or permanent with counters on them");
     }
 
     public FilterPermanentOrPlayerWithCounter(String name, UUID controllerId) {
-        super(name);
-        permanentFilter = new FilterPermanent();
-        playerFilter = new FilterPlayer();
-        permanentFilter.getControllerId().add(controllerId);
-        playerFilter.getPlayerId().add(controllerId);
+        super(name, controllerId);
     }
 
     public FilterPermanentOrPlayerWithCounter(String name) {
         super(name);
-        permanentFilter = new FilterPermanent();
-        playerFilter = new FilterPlayer();
     }
 
     public FilterPermanentOrPlayerWithCounter(final FilterPermanentOrPlayerWithCounter filter) {
         super(filter);
-        this.permanentFilter = filter.permanentFilter.copy();
-        this.playerFilter = filter.playerFilter.copy();
     }
 
     @Override

@@ -38,7 +38,7 @@ import mage.game.permanent.Permanent;
  *
  * @author ayratn
  */
-public class FilterArtifactPermanent<T extends FilterArtifactPermanent<T>> extends FilterPermanent<FilterArtifactPermanent<T>> {
+public class FilterArtifactPermanent extends FilterPermanent {
 
     protected boolean useAttacking;
     protected boolean attacking;
@@ -54,7 +54,7 @@ public class FilterArtifactPermanent<T extends FilterArtifactPermanent<T>> exten
         this.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
-    public FilterArtifactPermanent(final FilterArtifactPermanent<T> filter) {
+    public FilterArtifactPermanent(final FilterArtifactPermanent filter) {
         super(filter);
         this.useAttacking = filter.useAttacking;
         this.attacking = filter.attacking;
@@ -98,7 +98,7 @@ public class FilterArtifactPermanent<T extends FilterArtifactPermanent<T>> exten
     }
 
     @Override
-    public FilterArtifactPermanent<T> copy() {
-        return new FilterArtifactPermanent<T>(this);
+    public FilterArtifactPermanent copy() {
+        return new FilterArtifactPermanent(this);
     }
 }

@@ -28,6 +28,7 @@
 
 package mage.filter.common;
 
+import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
@@ -36,7 +37,7 @@ import mage.game.permanent.PermanentToken;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FilterToken<T extends FilterToken<T>> extends FilterCreaturePermanent<FilterToken<T>> {
+public class FilterToken extends FilterCreaturePermanent {
 
     public FilterToken() {
         this("creature token");
@@ -44,24 +45,28 @@ public class FilterToken<T extends FilterToken<T>> extends FilterCreaturePermane
 
     public FilterToken(String name) {
         super(name);
+        this.add(new TokenPredicate());
     }
 
-    public FilterToken(final FilterToken<T> filter) {
+    public FilterToken(final FilterToken filter) {
         super(filter);
     }
 
     @Override
-    public boolean match(Permanent permanent, Game game) {
-        if (!(permanent instanceof PermanentToken))
-            return notFilter;
-        if (!super.match(permanent, game))
-            return notFilter;
-
-        return !notFilter;
+    public FilterToken copy() {
+        return new FilterToken(this);
     }
 
-    @Override
-    public FilterToken<T> copy() {
-        return new FilterToken<T>(this);
+    private static final class TokenPredicate implements Predicate<Permanent> {
+
+        @Override
+        public boolean apply(Permanent input, Game game) {
+            return input instanceof PermanentToken;
+        }
+
+        @Override
+        public String toString() {
+            return "Token";
+        }
     }
 }

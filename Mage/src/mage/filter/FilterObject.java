@@ -34,11 +34,11 @@ import mage.MageObject;
  *
  * @author North
  */
-public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> extends FilterImpl<E, T> {
+public class FilterObject<E extends MageObject> extends FilterImpl<E> {
 
     @Override
-    public FilterObject<E, T> copy() {
-        return new FilterObject<E, T>(this);
+    public FilterObject<E> copy() {
+        return new FilterObject<E>(this);
     }
 
     public FilterObject(String name) {

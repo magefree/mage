@@ -38,7 +38,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FilterCreatureForAttack extends FilterCreaturePermanent<FilterCreatureForAttack> {
+public class FilterCreatureForAttack extends FilterCreaturePermanent {
 
     public FilterCreatureForAttack() {
         this("");

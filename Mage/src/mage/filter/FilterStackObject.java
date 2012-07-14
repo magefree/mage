@@ -40,7 +40,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FilterStackObject<T extends FilterStackObject<T>> extends FilterObject<StackObject, FilterStackObject<T>> {
+public class FilterStackObject extends FilterObject<StackObject> {
 
     protected List<UUID> controllerId = new ArrayList<UUID>();
     protected boolean notController = false;
@@ -54,7 +54,7 @@ public class FilterStackObject<T extends FilterStackObject<T>> extends FilterObj
         super(name);
     }
 
-    public FilterStackObject(final FilterStackObject<T> filter) {
+    public FilterStackObject(final FilterStackObject filter) {
         super(filter);
         this.controllerId.addAll(filter.controllerId);
         this.notController = filter.notController;

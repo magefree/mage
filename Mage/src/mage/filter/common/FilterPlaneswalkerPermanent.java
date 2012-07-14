@@ -36,7 +36,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FilterPlaneswalkerPermanent extends FilterPermanent<FilterPlaneswalkerPermanent> {
+public class FilterPlaneswalkerPermanent extends FilterPermanent {
 
     public FilterPlaneswalkerPermanent() {
         this("planeswalker");

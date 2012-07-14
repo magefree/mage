@@ -36,7 +36,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author nantuko
  */
-public class FilterEnchantment extends FilterPermanent<FilterEnchantment> {
+public class FilterEnchantment extends FilterPermanent {
 
     public FilterEnchantment() {
         this("enchantment");

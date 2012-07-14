@@ -40,7 +40,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FilterPermanent<T extends FilterPermanent<T>> extends FilterObject<Permanent, FilterPermanent<T>> {
+public class FilterPermanent extends FilterObject<Permanent> {
     protected List<UUID> ownerId = new ArrayList<UUID>();
     protected boolean notOwner;
     protected List<UUID> controllerId = new ArrayList<UUID>();
@@ -61,7 +61,7 @@ public class FilterPermanent<T extends FilterPermanent<T>> extends FilterObject<
         super("permanent");
     }
 
-    public FilterPermanent(final FilterPermanent<T> filter) {
+    public FilterPermanent(final FilterPermanent filter) {
         super(filter);
         this.ownerId = new ArrayList<UUID>(filter.ownerId);
         this.notOwner = filter.notOwner;
@@ -227,8 +227,8 @@ public class FilterPermanent<T extends FilterPermanent<T>> extends FilterObject<
     }
 
     @Override
-    public FilterPermanent<T> copy() {
-        return new FilterPermanent<T>(this);
+    public FilterPermanent copy() {
+        return new FilterPermanent(this);
     }
 
 }

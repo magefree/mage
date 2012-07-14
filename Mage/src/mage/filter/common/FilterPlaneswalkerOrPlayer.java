@@ -28,7 +28,6 @@
 
 package mage.filter.common;
 
-import mage.filter.Filter;
 import mage.filter.FilterImpl;
 import mage.filter.FilterPlayer;
 import mage.game.Game;
@@ -42,7 +41,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FilterPlaneswalkerOrPlayer extends FilterImpl<Object, FilterPlaneswalkerOrPlayer> implements Filter<Object> {
+public class FilterPlaneswalkerOrPlayer extends FilterImpl<Object> {
 
     protected FilterPlaneswalkerPermanent planeswalkerFilter;
     protected FilterPlayer playerFilter;

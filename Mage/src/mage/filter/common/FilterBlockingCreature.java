@@ -32,7 +32,7 @@ package mage.filter.common;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FilterBlockingCreature extends FilterCreaturePermanent<FilterBlockingCreature> {
+public class FilterBlockingCreature extends FilterCreaturePermanent {
 
     public FilterBlockingCreature() {
         this("Blocking creature");

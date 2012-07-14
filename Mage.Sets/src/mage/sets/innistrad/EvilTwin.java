@@ -82,7 +82,7 @@ public class EvilTwin extends CardImpl<EvilTwin> {
     }
 }
 
-class EvilTwinFilter extends FilterCreaturePermanent<EvilTwinFilter> {
+class EvilTwinFilter extends FilterCreaturePermanent {
 
     public EvilTwinFilter() {
         super("creature with the same name as this creature");

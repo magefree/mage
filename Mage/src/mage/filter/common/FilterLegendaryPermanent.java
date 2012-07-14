@@ -35,7 +35,7 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FilterLegendaryPermanent extends FilterPermanent<FilterLegendaryPermanent> {
+public class FilterLegendaryPermanent extends FilterPermanent {
 
     public FilterLegendaryPermanent() {
         this("legend");

@@ -38,7 +38,7 @@ import java.util.*;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FilterCard<T extends FilterCard<T>> extends FilterObject<Card, FilterCard<T>> {
+public class FilterCard extends FilterObject<Card> {
 
     private static final long serialVersionUID = 1L;
 
@@ -62,7 +62,7 @@ public class FilterCard<T extends FilterCard<T>> extends FilterObject<Card, Filt
         super(name);
     }
 
-    public FilterCard(FilterCard<T> filter) {
+    public FilterCard(FilterCard filter) {
         super(filter);
         this.ownerId.addAll(filter.ownerId);
         this.notOwner = filter.notOwner;
@@ -187,7 +187,7 @@ public class FilterCard<T extends FilterCard<T>> extends FilterObject<Card, Filt
     }
 
     @Override
-    public FilterCard<T> copy() {
-        return new FilterCard<T>(this);
+    public FilterCard copy() {
+        return new FilterCard(this);
     }
 }

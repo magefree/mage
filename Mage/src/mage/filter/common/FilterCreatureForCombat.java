@@ -35,7 +35,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FilterCreatureForCombat extends FilterCreaturePermanent<FilterCreatureForCombat> {
+public class FilterCreatureForCombat extends FilterCreaturePermanent {
 
     public FilterCreatureForCombat() {
         this("");
