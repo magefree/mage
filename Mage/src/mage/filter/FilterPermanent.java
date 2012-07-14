@@ -41,14 +41,8 @@ import java.util.UUID;
  * @author BetaSteward_at_googlemail.com
  */
 public class FilterPermanent extends FilterObject<Permanent> {
-    protected List<UUID> ownerId = new ArrayList<UUID>();
-    protected boolean notOwner;
     protected List<UUID> controllerId = new ArrayList<UUID>();
     protected boolean notController;
-    protected boolean useFlipped;
-    protected boolean flipped;
-    protected boolean useFaceup;
-    protected boolean faceup;
     protected TargetController controller = TargetController.ANY;
     protected TargetController owner = TargetController.ANY;
     protected boolean another;
@@ -59,14 +53,8 @@ public class FilterPermanent extends FilterObject<Permanent> {
 
     public FilterPermanent(final FilterPermanent filter) {
         super(filter);
-        this.ownerId = new ArrayList<UUID>(filter.ownerId);
-        this.notOwner = filter.notOwner;
         this.controllerId  = new ArrayList<UUID>(filter.controllerId);
         this.notController = filter.notController;
-        this.useFlipped = filter.useFlipped;
-        this.flipped = filter.flipped;
-        this.useFaceup = filter.useFaceup;
-        this.faceup = filter.faceup;
         this.controller = filter.controller;
         this.owner = filter.owner;
         this.another = filter.another;
@@ -81,16 +69,7 @@ public class FilterPermanent extends FilterObject<Permanent> {
         if (!super.match(permanent, game))
             return notFilter;
 
-        if (ownerId.size() > 0 && ownerId.contains(permanent.getOwnerId()) == notOwner)
-            return notFilter;
-
         if (controllerId.size() > 0 && controllerId.contains(permanent.getControllerId()) == notController)
-            return notFilter;
-
-        if (useFlipped && permanent.isFlipped() != flipped)
-            return notFilter;
-
-        if (useFaceup && permanent.isFaceUp() != faceup)
             return notFilter;
 
         return !notFilter;
@@ -144,36 +123,12 @@ public class FilterPermanent extends FilterObject<Permanent> {
         return !notFilter;
     }
 
-    public List<UUID> getOwnerId() {
-        return ownerId;
-    }
-
-    public void setNotOwner(boolean notOwner) {
-        this.notOwner = notOwner;
-    }
-
     public List<UUID> getControllerId() {
         return controllerId;
     }
 
     public void setNotController(boolean notController) {
         this.notController = notController;
-    }
-
-    public void setUseFlipped(boolean useFlipped) {
-        this.useFlipped = useFlipped;
-    }
-
-    public void setFlipped(boolean flipped) {
-        this.flipped = flipped;
-    }
-
-    public void setUseFaceup(boolean useFaceup) {
-        this.useFaceup = useFaceup;
-    }
-
-    public void setFaceup(boolean faceup) {
-        this.faceup = faceup;
     }
 
     public void setTargetController(TargetController controller) {
@@ -190,12 +145,6 @@ public class FilterPermanent extends FilterObject<Permanent> {
 
     public void setAnother(boolean another) {
         this.another = another;
-    }
-
-    public boolean matchOwner(UUID testOwnerId) {
-        if (ownerId.size() > 0 && ownerId.contains(testOwnerId) == notOwner)
-            return false;
-        return true;
     }
 
     public boolean matchController(UUID testControllerId) {

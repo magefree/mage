@@ -50,14 +50,6 @@ public class FilterCreatureOrPlayer extends FilterImpl<Object> implements Filter
         this("player or creature");
     }
 
-    public FilterCreatureOrPlayer(String name, UUID controllerId) {
-        super(name);
-        creatureFilter = new FilterCreaturePermanent();
-        playerFilter = new FilterPlayer();
-        creatureFilter.getControllerId().add(controllerId);
-        playerFilter.getPlayerId().add(controllerId);
-    }
-
     public FilterCreatureOrPlayer(String name) {
         super(name);
         creatureFilter = new FilterCreaturePermanent();

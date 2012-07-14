@@ -52,14 +52,6 @@ public class FilterSpellOrPermanent extends FilterImpl<Object> implements Filter
         this("spell or permanent");
     }
 
-    public FilterSpellOrPermanent(String name, UUID controllerId) {
-        super(name);
-        permanentFilter = new FilterPermanent();
-        spellFilter = new FilterSpell();
-        permanentFilter.getControllerId().add(controllerId);
-        spellFilter.getControllerId().add(controllerId);
-    }
-
     public FilterSpellOrPermanent(String name) {
         super(name);
         permanentFilter = new FilterPermanent();

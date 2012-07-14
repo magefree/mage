@@ -43,10 +43,6 @@ public class FilterPermanentOrPlayerWithCounter extends FilterPermanentOrPlayer 
         this("player or permanent with counters on them");
     }
 
-    public FilterPermanentOrPlayerWithCounter(String name, UUID controllerId) {
-        super(name, controllerId);
-    }
-
     public FilterPermanentOrPlayerWithCounter(String name) {
         super(name);
     }

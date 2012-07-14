@@ -50,14 +50,6 @@ public class FilterPermanentOrPlayer extends FilterImpl<Object> implements Filte
         this("player or permanent");
     }
 
-    public FilterPermanentOrPlayer(String name, UUID controllerId) {
-        super(name);
-        permanentFilter = new FilterPermanent();
-        playerFilter = new FilterPlayer();
-        permanentFilter.getControllerId().add(controllerId);
-        playerFilter.getPlayerId().add(controllerId);
-    }
-
     public FilterPermanentOrPlayer(String name) {
         super(name);
         permanentFilter = new FilterPermanent();
