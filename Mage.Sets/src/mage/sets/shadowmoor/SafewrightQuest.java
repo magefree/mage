@@ -30,7 +30,7 @@ package mage.sets.shadowmoor;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -57,7 +57,7 @@ public class SafewrightQuest extends CardImpl<SafewrightQuest> {
         this.color.setWhite(true);
 
         // Search your library for a Forest or Plains card, reveal it, and put it into your hand. Then shuffle your library.
-        this.getSpellAbility().addEffect(new SearchLibraryRevealPutInHandEffect(new TargetCardInLibrary(filter)));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true));
     }
 
     public SafewrightQuest(final SafewrightQuest card) {

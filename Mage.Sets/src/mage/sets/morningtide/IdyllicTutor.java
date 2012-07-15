@@ -31,7 +31,7 @@ import java.util.UUID;
 
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -52,7 +52,9 @@ public class IdyllicTutor extends CardImpl<IdyllicTutor> {
         super(ownerId, 12, "Idyllic Tutor", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}");
         this.expansionSetCode = "MOR";
         this.color.setWhite(true);
-        this.getSpellAbility().addEffect(new SearchLibraryRevealPutInHandEffect(new TargetCardInLibrary(filter)));
+
+        // Search your library for an enchantment card, reveal it, and put it into your hand. Then shuffle your library.
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true));
     }
 
     public IdyllicTutor(final IdyllicTutor card) {

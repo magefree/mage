@@ -30,7 +30,7 @@ package mage.sets.magic2010;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -52,7 +52,9 @@ public class Fabricate extends CardImpl<Fabricate> {
         super(ownerId, 52, "Fabricate", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
         this.expansionSetCode = "M10";
         this.color.setBlue(true);
-        this.getSpellAbility().addEffect(new SearchLibraryRevealPutInHandEffect(new TargetCardInLibrary(1, filter)));
+
+        // Search your library for an artifact card, reveal it, and put it into your hand. Then shuffle your library.
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, filter), true));
     }
 
     public Fabricate(final Fabricate card) {

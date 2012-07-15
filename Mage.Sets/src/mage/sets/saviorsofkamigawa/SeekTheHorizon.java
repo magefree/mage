@@ -30,7 +30,7 @@ package mage.sets.saviorsofkamigawa;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;
@@ -46,7 +46,7 @@ public class SeekTheHorizon extends CardImpl<SeekTheHorizon> {
         this.expansionSetCode = "SOK";
         this.color.setGreen(true);
         // Search your library for up to three basic land cards, reveal them, and put them into your hand. Then shuffle your library.
-        this.getSpellAbility().addEffect(new SearchLibraryRevealPutInHandEffect(new TargetCardInLibrary(0, 3, new FilterBasicLandCard())));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 3, new FilterBasicLandCard()), true));
     }
 
     public SeekTheHorizon(final SeekTheHorizon card) {

@@ -32,7 +32,7 @@ import java.util.UUID;
 
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -55,8 +55,10 @@ public class TimeOfNeed extends CardImpl<TimeOfNeed> {
         super(ownerId, 247, "Time of Need", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
         this.expansionSetCode = "CHK";
         this.color.setGreen(true);
+
+        // Search your library for a legendary creature card, reveal it, and put it into your hand. Then shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
-        this.getSpellAbility().addEffect(new SearchLibraryRevealPutInHandEffect(target));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(target, true));
     }
 
     public TimeOfNeed(final TimeOfNeed card) {

@@ -83,7 +83,7 @@ public class LilianaOfTheDarkRealms extends CardImpl<LilianaOfTheDarkRealms> {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), ""));
 
         // +1: Search your library for a Swamp card, reveal it, and put it into your hand. Then shuffle your library.
-        this.addAbility(new LoyaltyAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true), 1));
+        this.addAbility(new LoyaltyAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true), 1));
         // -3: Target creature gets +X/+X or -X/-X until end of turn, where X is the number of Swamps you control.
         LoyaltyAbility ability = new LoyaltyAbility(new LilianaOfTheDarkRealmsEffect(), -3);
         ability.addTarget(new TargetCreaturePermanent());

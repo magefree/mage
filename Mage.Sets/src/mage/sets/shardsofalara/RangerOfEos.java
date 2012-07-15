@@ -33,7 +33,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.FilterCard;
@@ -63,8 +63,10 @@ public class RangerOfEos extends CardImpl<RangerOfEos> {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
+        // When Ranger of Eos enters the battlefield, you may search your library for up to two creature cards with converted mana cost 1 or less,
+        // reveal them, and put them into your hand. If you do, shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary(0, 2, filter);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryRevealPutInHandEffect(target, false), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(target, true, true), true));
     }
 
     public RangerOfEos(final RangerOfEos card) {

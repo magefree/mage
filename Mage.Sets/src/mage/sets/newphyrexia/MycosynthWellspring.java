@@ -30,9 +30,9 @@ package mage.sets.newphyrexia;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;
@@ -49,8 +49,10 @@ public class MycosynthWellspring extends CardImpl<MycosynthWellspring> {
         super(ownerId, 145, "Mycosynth Wellspring", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "NPH";
 
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryRevealPutInHandEffect(new TargetCardInLibrary(filter))));
-        this.addAbility(new DiesTriggeredAbility(new SearchLibraryRevealPutInHandEffect(new TargetCardInLibrary(filter))));
+        // When Mycosynth Wellspring enters the battlefield or is put into a graveyard from the battlefield,
+        // you may search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true), true));
+        this.addAbility(new DiesTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true), true));
     }
 
     public MycosynthWellspring(final MycosynthWellspring card) {

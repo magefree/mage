@@ -31,7 +31,7 @@ import java.util.UUID;
 
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;
@@ -47,7 +47,9 @@ public class LayOfTheLand extends CardImpl<LayOfTheLand> {
         super(ownerId, 81, "Lay of the Land", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{G}");
         this.expansionSetCode = "APC";
         this.color.setGreen(true);
-        this.getSpellAbility().addEffect(new SearchLibraryRevealPutInHandEffect(new TargetCardInLibrary(1, 1, filter)));
+
+        // Search your library for a basic land card, reveal that card, and put it into your hand. Then shuffle your library.
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, filter), true));
     }
 
     public LayOfTheLand(final LayOfTheLand card) {

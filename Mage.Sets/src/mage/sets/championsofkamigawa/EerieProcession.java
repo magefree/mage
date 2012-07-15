@@ -32,7 +32,7 @@ import java.util.UUID;
 
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -54,8 +54,9 @@ public class EerieProcession extends CardImpl<EerieProcession> {
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
         this.color.setBlue(true);
-        TargetCardInLibrary target = new TargetCardInLibrary(filter);
-        this.getSpellAbility().addEffect(new SearchLibraryRevealPutInHandEffect(target));
+
+        // Search your library for an Arcane card, reveal that card, and put it into your hand. Then shuffle your library.
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true));
     }
 
     public EerieProcession(final EerieProcession card) {

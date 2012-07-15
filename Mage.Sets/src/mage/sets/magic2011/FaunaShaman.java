@@ -36,13 +36,10 @@ import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInHand;
@@ -63,11 +60,12 @@ public class FaunaShaman extends CardImpl<FaunaShaman> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        Costs<Cost> costs = new CostsImpl();
-        costs.add(new TapSourceCost());
-        costs.add(new DiscardTargetCost(new TargetCardInHand(new FilterCreatureCard())));
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryRevealPutInHandEffect(new TargetCardInLibrary(new FilterCreatureCard())), costs);
-        ability.addManaCost(new ColoredManaCost(ColoredManaSymbol.G));
+        // {G}, {tap}, Discard a creature card: Search your library for a creature card, reveal it, and put it into your hand. Then shuffle your library.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(new FilterCreatureCard()), true),
+                new ColoredManaCost(ColoredManaSymbol.G));
+        ability.addCost(new TapSourceCost());
+        ability.addCost(new DiscardTargetCost(new TargetCardInHand(new FilterCreatureCard())));
         this.addAbility(ability);
     }
 

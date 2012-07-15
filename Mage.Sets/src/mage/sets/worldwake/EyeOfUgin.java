@@ -41,7 +41,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.CostModificationEffectImpl;
-import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreatureCard;
@@ -50,7 +50,6 @@ import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
 
 /**
- * TODO: Implement this better.
  *
  * @author maurer.it_at_gmail.com
  */
@@ -69,8 +68,12 @@ public class EyeOfUgin extends CardImpl<EyeOfUgin> {
         this.supertype.add("Legendary");
         this.subtype.add("Land");
 
+        // Colorless Eldrazi spells you cast cost {2} less to cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EyeOfUginCostReductionEffect()));
-        Ability searchAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryRevealPutInHandEffect(new TargetCardInLibrary(filter)), new TapSourceCost());
+        // {7}, {tap}: Search your library for a colorless creature card, reveal it, and put it into your hand. Then shuffle your library.
+        Ability searchAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true),
+                new TapSourceCost());
         searchAbility.addCost(new ManaCostsImpl("{7}"));
         this.addAbility(searchAbility);
     }

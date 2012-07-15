@@ -30,7 +30,7 @@ package mage.sets.tenth;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandCard;
 import mage.target.common.TargetCardInLibrary;
@@ -47,7 +47,9 @@ public class SylvanScrying extends CardImpl<SylvanScrying> {
         super(ownerId, 302, "Sylvan Scrying", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
         this.expansionSetCode = "10E";
         this.color.setGreen(true);
-        this.getSpellAbility().addEffect(new SearchLibraryRevealPutInHandEffect(new TargetCardInLibrary(filter)));
+
+        // Search your library for a land card, reveal it, and put it into your hand. Then shuffle your library.
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true));
     }
 
     public SylvanScrying(final SylvanScrying card) {

@@ -34,7 +34,7 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.SearchEffect;
-import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
@@ -63,8 +63,11 @@ public class TreasureMage extends CardImpl<TreasureMage> {
         this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
+
+        // When Treasure Mage enters the battlefield, you may search your library for an artifact card with converted mana cost 6 or greater,
+        // reveal that card, and put it into your hand. If you do, shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary(0, 1, filter);
-        SearchEffect effect = new SearchLibraryRevealPutInHandEffect(target, false);
+        SearchEffect effect = new SearchLibraryPutInHandEffect(target, true, true);
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, true));
     }
 
