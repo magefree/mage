@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
 public class NefaroxOverlordOfGrixis extends CardImpl<NefaroxOverlordOfGrixis> {
 
     public NefaroxOverlordOfGrixis(UUID ownerId) {
-        super(ownerId, 103, "Nefarox, Overlord of Grixis", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{B}");
+        super(ownerId, 103, "Nefarox, Overlord of Grixis", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
         this.expansionSetCode = "M13";
         this.supertype.add("Legendary");
         this.subtype.add("Demon");
