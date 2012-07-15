@@ -28,19 +28,22 @@
 
 package mage.filter;
 
-import mage.Constants.TargetController;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.Constants.TargetController;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.filter.predicate.Predicates;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class FilterPermanent extends FilterObject<Permanent> {
+    protected List<ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>>> extraPredicates = new ArrayList<ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>>>();
     protected List<UUID> controllerId = new ArrayList<UUID>();
     protected boolean notController;
     protected TargetController controller = TargetController.ANY;
@@ -58,6 +61,7 @@ public class FilterPermanent extends FilterObject<Permanent> {
         this.controller = filter.controller;
         this.owner = filter.owner;
         this.another = filter.another;
+        this.extraPredicates = new ArrayList<ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>>>(extraPredicates);
     }
 
     public FilterPermanent(String name) {
@@ -120,7 +124,11 @@ public class FilterPermanent extends FilterObject<Permanent> {
             }
         }
 
-        return !notFilter;
+        return Predicates.and(extraPredicates).apply(new ObjectSourcePlayer(permanent, sourceId, playerId), game);
+    }
+
+    public void add(ObjectSourcePlayerPredicate predicate) {
+        extraPredicates.add(predicate);
     }
 
     public List<UUID> getControllerId() {
