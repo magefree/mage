@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -56,7 +57,7 @@ public class MadAuntie extends CardImpl<MadAuntie> {
 
     static {
         filter1.add(new SubtypePredicate("Goblin"));
-        filter1.setAnother(true);
+        filter1.add(new AnotherPredicate());
         filter2.add(new SubtypePredicate("Goblin"));
     }
 

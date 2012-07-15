@@ -40,6 +40,7 @@ import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -68,7 +69,7 @@ public class HisokasGuard extends CardImpl<HisokasGuard> {
 
         // {1}{U}, {T}: Target creature you control other than Hisoka's Guard has shroud for as long as Hisoka's Guard remains tapped. (It can't be the target of spells or abilities.)
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-        filter.setAnother(true);
+        filter.add(new AnotherPredicate());
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HisokasGuardGainAbilityTargetEffect(), new ManaCostsImpl("{1}{U}"));
         ability.addCost(new TapSourceCost());
         Target target = new TargetControlledCreaturePermanent(1, 1, filter, true, true);

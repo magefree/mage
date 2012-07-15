@@ -48,7 +48,6 @@ public class FilterPermanent extends FilterObject<Permanent> {
     protected boolean notController;
     protected TargetController controller = TargetController.ANY;
     protected TargetController owner = TargetController.ANY;
-    protected boolean another;
 
     public FilterPermanent() {
         super("permanent");
@@ -60,7 +59,6 @@ public class FilterPermanent extends FilterObject<Permanent> {
         this.notController = filter.notController;
         this.controller = filter.controller;
         this.owner = filter.owner;
-        this.another = filter.another;
         this.extraPredicates = new ArrayList<ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>>>(extraPredicates);
     }
 
@@ -117,13 +115,6 @@ public class FilterPermanent extends FilterObject<Permanent> {
             }
         }
 
-        if (another) {
-            // filter out itself
-            if (permanent.getId().equals(sourceId)) {
-                return notFilter;
-            }
-        }
-
         return Predicates.and(extraPredicates).apply(new ObjectSourcePlayer(permanent, sourceId, playerId), game);
     }
 
@@ -145,14 +136,6 @@ public class FilterPermanent extends FilterObject<Permanent> {
 
     public void setTargetOwner(TargetController owner) {
         this.owner = owner;
-    }
-
-    public boolean isAnother() {
-        return another;
-    }
-
-    public void setAnother(boolean another) {
-        this.another = another;
     }
 
     public boolean matchController(UUID testControllerId) {

@@ -39,6 +39,7 @@ import mage.abilities.effects.common.ExileTargetForSourceEffect;
 import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 
@@ -53,7 +54,7 @@ public class JourneyToNowhere extends CardImpl<JourneyToNowhere> {
         this.expansionSetCode = "ZEN";
         this.color.setWhite(true);
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
-        filter.setAnother(true);
+        filter.add(new AnotherPredicate());
         Ability ability1 = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect("Journey to Nowhere exile"), false);
         Target target = new TargetPermanent(filter);
         target.setRequired(true);

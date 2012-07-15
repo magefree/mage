@@ -25,55 +25,26 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.filter.predicate.permanent;
 
-package mage.sets.magic2012;
-
-import java.util.UUID;
-
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.IndestructibleAbility;
-import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.target.Target;
-import mage.target.TargetPermanent;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
- * @author Loki
+ *
+ * @author North
  */
-public class AegisAngel extends CardImpl<AegisAngel> {
+public class AnotherPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
 
-    public AegisAngel(UUID ownerId) {
-        super(ownerId, 1, "Aegis Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
-        this.expansionSetCode = "M12";
-        this.subtype.add("Angel");
-        this.color.setWhite(true);
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
-        this.addAbility(FlyingAbility.getInstance());
-        FilterPermanent filter = new FilterPermanent("another target permanent");
-        filter.add(new AnotherPredicate());
-        Ability ability = new EntersBattlefieldTriggeredAbility(new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Constants.Duration.WhileOnBattlefield), false);
-        Target target = new TargetPermanent(filter);
-        target.setRequired(true);
-        ability.addTarget(target);
-        this.addAbility(ability);
-    }
-
-    public AegisAngel(final AegisAngel card) {
-        super(card);
+    @Override
+    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
+        return !input.getObject().getId().equals(input.getSourceId());
     }
 
     @Override
-    public AegisAngel copy() {
-        return new AegisAngel(this);
+    public String toString() {
+        return "Another";
     }
-
 }

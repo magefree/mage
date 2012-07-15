@@ -43,6 +43,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.token.Token;
 
 import java.util.UUID;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
@@ -92,7 +93,7 @@ class ThopterAssemblyTriggeredAbility extends TriggeredAbilityImpl<ThopterAssemb
         if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE && event.getPlayerId().equals(this.controllerId)) {
             FilterPermanent filter = new FilterPermanent();
             filter.add(new SubtypePredicate("Thopter"));
-            filter.setAnother(true);
+            filter.add(new AnotherPredicate());
             if (!game.getBattlefield().contains(filter, controllerId, 1, game)) {
                 return true;
             }

@@ -42,6 +42,7 @@ import mage.abilities.effects.common.MayTapOrUntapTargetEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -50,11 +51,10 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class TideforceElemental extends CardImpl<TideforceElemental> {
 
-  //  private final static String text = "You may tap or untap another target creature";
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
 
     static {
-        filter.setAnother(true);
+        filter.add(new AnotherPredicate());
     }
 
     public TideforceElemental(UUID ownerId) {

@@ -37,6 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.UndyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
@@ -46,10 +47,10 @@ import java.util.UUID;
  */
 public class DemonlordOfAshmouth extends CardImpl<DemonlordOfAshmouth> {
 
-    private static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(" another creature");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(" another creature");
 
     static {
-        filter.setAnother(true);
+        filter.add(new AnotherPredicate());
     }
 
     public DemonlordOfAshmouth(UUID ownerId) {

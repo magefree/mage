@@ -42,6 +42,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -107,7 +108,7 @@ class XathridDemonEffect extends OneShotEffect<XathridDemonEffect> {
         }
 
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature other than " + sourcePermanent.getName());
-        filter.setAnother(true);
+        filter.add(new AnotherPredicate());
 
         Target target = new TargetControlledCreaturePermanent(1, 1, filter, true, true);
         if (target.canChoose(source.getSourceId(), player.getId(), game)) {

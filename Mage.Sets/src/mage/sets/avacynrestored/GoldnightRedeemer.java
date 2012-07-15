@@ -36,6 +36,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 import java.util.UUID;
 
@@ -46,10 +47,10 @@ import java.util.UUID;
  */
 public class GoldnightRedeemer extends CardImpl<GoldnightRedeemer> {
 
-    private static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other creature you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other creature you control");
 
     static {
-        filter.setAnother(true);
+        filter.add(new AnotherPredicate());
     }
 
     public GoldnightRedeemer(UUID ownerId) {

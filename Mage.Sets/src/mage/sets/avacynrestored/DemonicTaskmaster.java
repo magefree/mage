@@ -37,6 +37,7 @@ import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 import java.util.UUID;
 
@@ -49,7 +50,7 @@ public class DemonicTaskmaster extends CardImpl<DemonicTaskmaster> {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a creature other than Demonic Taskmaster");
 
     static {
-        filter.setAnother(true);
+        filter.add(new AnotherPredicate());
     }
 
     public DemonicTaskmaster(UUID ownerId) {

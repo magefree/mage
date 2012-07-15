@@ -36,6 +36,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -77,7 +78,7 @@ class HavengulSkaabAbility extends TriggeredAbilityImpl<HavengulSkaabAbility> {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature you control");
 
     static {
-        filter.setAnother(true);
+        filter.add(new AnotherPredicate());
     }
 
     public HavengulSkaabAbility() {
