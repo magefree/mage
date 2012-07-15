@@ -25,105 +25,76 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.filter;
 
 import mage.Constants.AbilityType;
-import mage.Constants.Outcome;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
+import mage.filter.predicate.Predicate;
 import mage.game.Game;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author North
  */
-public class FilterAbility<T extends Ability> extends FilterImpl<T> {
-
-    protected static ListComparer<Outcome> compOutcome = new ListComparer<Outcome>();
-
-    protected List<Outcome> outcomes = new ArrayList<Outcome>();
-    protected ComparisonScope scopeOutcome = ComparisonScope.All;
-    protected boolean notOutcome;
-    protected List<AbilityType> types = new ArrayList<AbilityType>();
-    protected boolean notType;
-    protected Zone zone;
-    protected boolean notZone;
+public class FilterAbility extends FilterImpl<Ability> {
 
     public FilterAbility() {
         super("");
     }
 
-    public FilterAbility(FilterAbility<T> filter) {
+    public FilterAbility(FilterAbility filter) {
         super(filter);
-        for (Outcome outcome: filter.outcomes) {
-            this.outcomes.add(outcome);
-        }
-        this.scopeOutcome = filter.scopeOutcome;
-        this.notOutcome = filter.notOutcome;
-        for (AbilityType aType: filter.types) {
-            this.types.add(aType);
-        }
-        this.notType = filter.notType;
-        this.zone = filter.zone;
-        this.notZone = filter.notZone;
     }
 
     @Override
-    public boolean match(T object, Game game) {
+    public FilterAbility copy() {
+        return new FilterAbility(this);
+    }
 
-        if (zone != null) {
-            if (object.getZone().match(zone) == notZone)
-                return notFilter;
+    public static Predicate<Ability> zone(Zone zone) {
+        return new AbilityZonePredicate(zone);
+    }
+
+    public static Predicate<Ability> type(AbilityType type) {
+        return new AbilityTypePredicate(type);
+    }
+
+    private static final class AbilityZonePredicate implements Predicate<Ability> {
+
+        private Zone zone;
+
+        public AbilityZonePredicate(Zone zone) {
+            this.zone = zone;
         }
 
-        if (outcomes.size() > 0) {
-            if (!compOutcome.compare(outcomes, object.getEffects().getOutcomes(), scopeOutcome, notOutcome))
-                return notFilter;
+        @Override
+        public boolean apply(Ability input, Game game) {
+            return input.getZone().match(zone);
         }
 
-        if (types.size() > 0) {
-            if (types.contains(object.getAbilityType()) == notType)
-                return notFilter;
+        @Override
+        public String toString() {
+            return "Zone(" + zone.toString() + ")";
+        }
+    }
+
+    private static final class AbilityTypePredicate implements Predicate<Ability> {
+
+        private AbilityType type;
+
+        public AbilityTypePredicate(AbilityType type) {
+            this.type = type;
         }
 
-        return !notFilter;
-    }
+        @Override
+        public boolean apply(Ability input, Game game) {
+            return input.getAbilityType().equals(type);
+        }
 
-    public List<Outcome> getOutcomes() {
-        return this.outcomes;
+        @Override
+        public String toString() {
+            return "AbilityType(" + type + ')';
+        }
     }
-
-    public void setScopeOutcome(ComparisonScope scopeOutcome) {
-        this.scopeOutcome = scopeOutcome;
-    }
-
-    public void setNotOutcome(boolean notOutcome) {
-        this.notOutcome = notOutcome;
-    }
-
-    public List<AbilityType> getTypes() {
-        return types;
-    }
-
-    public void setNotType(boolean notType) {
-        this.notType = notType;
-    }
-
-    public void setZone(Zone zone) {
-        this.zone = zone;
-    }
-
-    public void setNotZone(boolean notZone) {
-        this.notZone = notZone;
-    }
-
-    @Override
-    public FilterAbility<T> copy() {
-        return new FilterAbility<T>(this);
-    }
-
 }
