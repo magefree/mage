@@ -35,7 +35,6 @@ import mage.Constants.Rarity;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
@@ -48,7 +47,9 @@ public class AncientTomb extends CardImpl<AncientTomb> {
     public AncientTomb(UUID ownerId) {
         super(ownerId, 305, "Ancient Tomb", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "TMP";
-        Ability ability = new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 0, 0, 0, 0, 2, 0)), new TapSourceCost());
+
+        // {tap}: Add  to your mana pool. Ancient Tomb deals 2 damage to you.
+        Ability ability = new SimpleManaAbility(Constants.Zone.BATTLEFIELD, Mana.ColorlessMana(2), new TapSourceCost());
         ability.addEffect(new DamageControllerEffect(2));
         this.addAbility(ability);
     }

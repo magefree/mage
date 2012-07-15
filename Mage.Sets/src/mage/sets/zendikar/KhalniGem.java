@@ -33,14 +33,14 @@ import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
-import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.BasicManaEffect;
+import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.choices.ChoiceColor;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
@@ -65,15 +65,15 @@ public class KhalniGem extends CardImpl<KhalniGem> {
         super(ownerId, 205, "Khalni Gem", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
         this.expansionSetCode = "ZEN";
 
+        // When Khalni Gem enters the battlefield, return two lands you control to their owner's hand.
         Ability etbAbility = new EntersBattlefieldTriggeredAbility(new KhalniGemReturnToHandTargetEffect());
         Target target = new TargetControlledPermanent(2, 2, filter, false);
         etbAbility.addTarget(target);
         this.addAbility(etbAbility);
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(new Mana(2, 0, 0, 0, 0, 0, 0)), new TapSourceCost()));
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 2, 0, 0, 0, 0, 0)), new TapSourceCost()));
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 0, 2, 0, 0, 0, 0)), new TapSourceCost()));
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 0, 0, 2, 0, 0, 0)), new TapSourceCost()));
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 0, 0, 0, 2, 0, 0)), new TapSourceCost()));
+        // {tap}: Add two mana of any one color to your mana pool.
+        SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(2), new TapSourceCost());
+        ability.addChoice(new ChoiceColor());
+        this.addAbility(ability);
     }
 
     public KhalniGem (final KhalniGem card) {

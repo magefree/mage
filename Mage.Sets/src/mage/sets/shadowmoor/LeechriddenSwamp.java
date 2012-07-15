@@ -41,7 +41,6 @@ import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
@@ -61,8 +60,8 @@ public class LeechriddenSwamp extends CardImpl<LeechriddenSwamp> {
         this.expansionSetCode = "SHM";
         this.subtype.add("Swamp");
 
-        // <i>({tap}: Add {B} to your mana pool.)</i>
-        this.addAbility(new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new BasicManaEffect(Mana.BlackMana), new TapSourceCost()));
+        // ({tap}: Add {B} to your mana pool.)
+        this.addAbility(new SimpleManaAbility(Constants.Zone.BATTLEFIELD, Mana.BlackMana, new TapSourceCost()));
 
         // Leechridden Swamp enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

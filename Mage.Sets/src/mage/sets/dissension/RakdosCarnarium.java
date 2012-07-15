@@ -37,7 +37,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
@@ -69,7 +68,7 @@ public class RakdosCarnarium extends CardImpl<RakdosCarnarium> {
         ability.addTarget(target);
         this.addAbility(ability);
         // {tap}: Add {B}{R} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new BasicManaEffect(new Mana(1, 0, 0, 0, 1, 0, 0)), new TapSourceCost()));
+        this.addAbility(new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new Mana(1, 0, 0, 0, 1, 0, 0), new TapSourceCost()));
     }
 
     public RakdosCarnarium(final RakdosCarnarium card) {

@@ -35,7 +35,6 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -65,7 +64,7 @@ public class HeritageDruid extends CardImpl<HeritageDruid> {
         this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.addAbility(new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 3, 0, 0, 0, 0, 0)), new TapTargetCost(new TargetControlledCreaturePermanent(3, 3, filter, false))));
+        this.addAbility(new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new Mana(0, 3, 0, 0, 0, 0, 0), new TapTargetCost(new TargetControlledCreaturePermanent(3, 3, filter, false))));
     }
 
     public HeritageDruid(final HeritageDruid card) {

@@ -35,7 +35,6 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 
@@ -51,7 +50,9 @@ public class CompositeGolem extends CardImpl<CompositeGolem> {
         this.subtype.add("Golem");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
-        this.addAbility(new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new BasicManaEffect(new Mana(1, 1, 1, 1, 1, 0, 0)), new SacrificeSourceCost()));
+
+        // Sacrifice Composite Golem: Add {W}{U}{B}{R}{G} to your mana pool.
+        this.addAbility(new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new Mana(1, 1, 1, 1, 1, 0, 0), new SacrificeSourceCost()));
     }
 
     public CompositeGolem(final CompositeGolem card) {

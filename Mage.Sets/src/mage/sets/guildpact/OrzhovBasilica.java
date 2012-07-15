@@ -36,7 +36,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
@@ -66,7 +65,7 @@ public class OrzhovBasilica extends CardImpl<OrzhovBasilica> {
         target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
-        this.addAbility(new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 0, 0, 1, 1, 0, 0)), new TapSourceCost()));
+        this.addAbility(new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new Mana(0, 0, 0, 1, 1, 0, 0), new TapSourceCost()));
     }
 
     public OrzhovBasilica(final OrzhovBasilica card) {

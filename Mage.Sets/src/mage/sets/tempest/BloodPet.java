@@ -35,7 +35,6 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 
@@ -52,7 +51,9 @@ public class BloodPet extends CardImpl<BloodPet> {
         this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.addAbility(new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 0, 0, 0, 1, 0, 0)), new SacrificeSourceCost()));
+
+        // Sacrifice Blood Pet: Add {B} to your mana pool.
+        this.addAbility(new SimpleManaAbility(Constants.Zone.BATTLEFIELD, Mana.BlackMana, new SacrificeSourceCost()));
     }
 
     public BloodPet(final BloodPet card) {

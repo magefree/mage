@@ -43,7 +43,6 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -162,7 +161,7 @@ class LilianaOfTheDarkRealmsEmblem extends Emblem {
     }
 
     public LilianaOfTheDarkRealmsEmblem() {
-        SimpleManaAbility manaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.BlackMana(4)), new TapSourceCost());
+        SimpleManaAbility manaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(4), new TapSourceCost());
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, new GainAbilityControlledEffect(manaAbility, Duration.WhileOnBattlefield, filter));
         this.getAbilities().add(ability);
     }

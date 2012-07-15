@@ -77,7 +77,7 @@ public class JoragaTreespeaker extends LevelerCard<JoragaTreespeaker> {
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{1}{G}")));
 
         Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
-        abilities1.add(new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.GreenMana(2)), new TapSourceCost()));
+        abilities1.add(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(2), new TapSourceCost()));
 
         Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
         abilities2.add(new SimpleStaticAbility(Zone.BATTLEFIELD,

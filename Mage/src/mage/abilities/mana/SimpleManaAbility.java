@@ -29,7 +29,9 @@
 package mage.abilities.mana;
 
 import mage.Constants.Zone;
+import mage.Mana;
 import mage.abilities.costs.Cost;
+import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.effects.common.ManaEffect;
 
 /**
@@ -40,6 +42,11 @@ public class SimpleManaAbility extends ManaAbility<SimpleManaAbility> {
 
     public SimpleManaAbility(Zone zone, ManaEffect effect, Cost cost) {
         super(zone, effect, cost);
+    }
+
+    public SimpleManaAbility(Zone zone, Mana mana, Cost cost) {
+        super(zone, new BasicManaEffect(mana), cost);
+        this.netMana = mana.copy();
     }
 
     public SimpleManaAbility(final SimpleManaAbility ability) {

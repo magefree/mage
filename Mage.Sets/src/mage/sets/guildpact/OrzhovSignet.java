@@ -35,7 +35,6 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 
@@ -48,7 +47,7 @@ public class OrzhovSignet extends CardImpl<OrzhovSignet> {
     public OrzhovSignet(UUID ownerId) {
         super(ownerId, 155, "Orzhov Signet", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "GPT";
-        Ability ability = new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 0, 0, 1, 1, 0, 0)), new GenericManaCost(1));
+        Ability ability = new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new Mana(0, 0, 0, 1, 1, 0, 0), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

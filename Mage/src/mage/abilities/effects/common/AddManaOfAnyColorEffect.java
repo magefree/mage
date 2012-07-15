@@ -42,14 +42,13 @@ public class AddManaOfAnyColorEffect extends ManaEffect<AddManaOfAnyColorEffect>
     protected int amount;
 
     public AddManaOfAnyColorEffect() {
-        super();
-        this.amount = 1;
-        staticText = "add one mana of any color to your mana pool";
+        this(1);
     }
 
     public AddManaOfAnyColorEffect(final int amount) {
         super();
         this.amount = amount;
+        this.staticText = "add " + amount + " mana of any color to your mana pool";
     }
 
     public AddManaOfAnyColorEffect(final AddManaOfAnyColorEffect effect) {
