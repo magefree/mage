@@ -65,7 +65,9 @@ public enum CounterType {
     ELIXIR(new ElixirCounter().name),
     PAIN(new PainCounter().name),
     DESPAIR(new DespairCounter().name),
-    PAGE(new PageCounter().name);
+    PAGE(new PageCounter().name),
+    PRESSURE(new PressureCounter().name),
+    PETRIFICATION(new PetrificationCounter().name);
 
     private String name;
 
@@ -159,6 +161,10 @@ public enum CounterType {
                 return new DespairCounter(amount);
             case PAGE:
                 return new PageCounter(amount);
+            case PRESSURE:
+                return new PressureCounter(amount);
+            case PETRIFICATION:
+                return new PetrificationCounter(amount);
         }
         return null;
     }
