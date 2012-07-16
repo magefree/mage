@@ -34,15 +34,12 @@
 
 package mage.client.dialog;
 
-import java.awt.AWTEvent;
-import java.awt.ActiveEvent;
-import java.awt.Component;
-import java.awt.EventQueue;
-import java.awt.MenuComponent;
+import org.apache.log4j.Logger;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.lang.reflect.InvocationTargetException;
-import javax.swing.SwingUtilities;
-import org.apache.log4j.Logger;
 
 /**
  *
@@ -110,7 +107,7 @@ public class MageDialog extends javax.swing.JInternalFrame {
                     Object source = event.getSource();
                     boolean dispatch = true;
 
-                    if (event instanceof MouseEvent) {
+                    if (event instanceof MouseEvent && event.getSource() instanceof Component) {
                         MouseEvent e = (MouseEvent) event;
                         MouseEvent m = SwingUtilities.convertMouseEvent((Component) e.getSource(), e, this);
                         if (!this.contains(m.getPoint()) && e.getID() != MouseEvent.MOUSE_DRAGGED) {

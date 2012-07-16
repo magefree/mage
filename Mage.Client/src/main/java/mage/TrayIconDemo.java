@@ -59,7 +59,7 @@ public class TrayIconDemo {
             ex.printStackTrace();
         }
         /* Turn off metal's use of bold fonts */
-        UIManager.put("swing.boldMetal", Boolean.FALSE);
+        //UIManager.put("swing.boldMetal", Boolean.FALSE);
         //Schedule a job for the event-dispatching thread:
         //adding TrayIcon.
         SwingUtilities.invokeLater(new Runnable() {
@@ -77,7 +77,8 @@ public class TrayIconDemo {
         }
         final PopupMenu popup = new PopupMenu();
         final TrayIcon trayIcon =
-                new TrayIcon(createImage("images/bulb.gif", "tray icon"));
+                new TrayIcon(createImage("images/icon-mage.png", "tray icon"));
+        trayIcon.setImageAutoSize(true);
         final SystemTray tray = SystemTray.getSystemTray();
 
         // Create a popup menu components
@@ -168,6 +169,22 @@ public class TrayIconDemo {
                     //type = TrayIcon.MessageType.INFO;
                     trayIcon.displayMessage("Sun TrayIcon Demo",
                             "This is an info message", TrayIcon.MessageType.INFO);
+
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                for (int i = 0; i < 15; i++) {
+                                    trayIcon.setImage(createImage(i % 2 == 0 ? "images/icon-mage.png" : "images/icon-mage-flashed.png", "tray icon"));
+                                    Thread.sleep(600);
+                                }
+                            } catch (InterruptedException e1) {
+                                e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                            }
+
+                        }
+                    }).start();
+
 
                 } else if ("None".equals(item.getLabel())) {
                     //type = TrayIcon.MessageType.NONE;

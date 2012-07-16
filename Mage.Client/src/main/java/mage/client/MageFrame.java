@@ -41,6 +41,7 @@ import mage.client.cards.CardsStorage;
 import mage.client.chat.ChatPanel;
 import mage.client.components.*;
 import mage.client.components.ext.dlg.DialogManager;
+import mage.client.components.tray.MageTray;
 import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.deckeditor.DeckEditorPane;
 import mage.client.deckeditor.collection.viewer.CollectionViewerPane;
@@ -70,6 +71,7 @@ import mage.server.Main;
 import mage.utils.MageVersion;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.ManaSymbols;
+import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -227,6 +229,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         setBackground();
         addMageLabel();
         setAppIcon();
+        MageTray.getInstance().install();
 
         //PlayerPanelNew n = new PlayerPanelNew();
         //n.setBounds(100,100,100,300);
@@ -397,17 +400,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     private void setAppIcon() {
-        String filename = "/icon-mage.png";
-        try {
-            InputStream is = this.getClass().getResourceAsStream(filename);
-
-            if (is != null) {
-                BufferedImage image = ImageIO.read(is);
-                setIconImage(image);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Image image = ImageManagerImpl.getInstance().getAppImage();
+        setIconImage(image);
     }
 
     private AbstractButton createWindowsButton() {

@@ -20,6 +20,33 @@ public class ImageManagerImpl implements ImageManager {
     }
 
     @Override
+    public Image getAppImage() {
+        if (appImage == null) {
+            Image image = getBufferedImageFromResource("/icon-mage.png");
+            appImage = BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB);
+        }
+        return appImage;
+    }
+
+    @Override
+    public Image getAppSmallImage() {
+        if (appSmallImage == null) {
+            Image image = getImageFromResourceTransparent("/icon-mage.png", Color.WHITE, new Rectangle(16, 16));
+            appSmallImage = BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB);
+        }
+        return appSmallImage;
+    }
+
+    @Override
+    public Image getAppFlashedImage() {
+        if (appImageFlashed == null) {
+            Image image = getImageFromResourceTransparent("/icon-mage-flashed.png", Color.WHITE, new Rectangle(16, 16));
+            appImageFlashed = BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB);
+        }
+        return appImageFlashed;
+    }
+
+    @Override
     public BufferedImage getSicknessImage() {
         if (imageSickness == null) {
             Image image = getImageFromResourceTransparent("/sickness.png", Color.WHITE, new Rectangle(296, 265));
@@ -143,6 +170,10 @@ public class ImageManagerImpl implements ImageManager {
 
         return image;
     }
+
+    private static BufferedImage appImage;
+    private static BufferedImage appSmallImage;
+    private static BufferedImage appImageFlashed;
 
     private static BufferedImage imageSickness;
     private static BufferedImage imageDay;
