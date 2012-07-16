@@ -294,4 +294,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
         this.add(jScrollPane);
     }
 
+    public JComponent getMainPanel() {
+        return jPanel;
+    }
 }

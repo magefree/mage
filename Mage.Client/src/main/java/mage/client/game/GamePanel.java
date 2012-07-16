@@ -130,12 +130,6 @@ public class GamePanel extends javax.swing.JPanel {
             throw new RuntimeException(e);
         }
 
-        /*SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                bigCard.setDefaultImage();
-            }
-        });*/
     }
 
     private Map<String, JComponent> getUIComponents(JLayeredPane jLayeredPane) {

@@ -36,6 +36,10 @@ import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.UUID;
 
 /**
@@ -51,15 +55,43 @@ public class PlayAreaPanel extends javax.swing.JPanel {
     public PlayAreaPanel() {
         initComponents();
         setOpaque(false);
-        //jScrollPane1.setOpaque(false);
-        //jScrollPane1.getViewport().setOpaque(false);
         battlefieldPanel.setOpaque(false);
+        addPopupMenu();
     }
 
     public PlayAreaPanel(PlayerView player, BigCard bigCard, UUID gameId, boolean me) {
         this();
         init(player, bigCard, gameId);
         update(player);
+    }
+
+    private void addPopupMenu() {
+        final JPopupMenu Pmenu;
+        JMenuItem menuItem;
+
+        Pmenu = new JPopupMenu();
+        menuItem = new JMenuItem("Concede");
+        Pmenu.add(menuItem);
+
+        // Concede
+        menuItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (JOptionPane.showConfirmDialog(PlayAreaPanel.this, "Are you sure you want to concede?", "Confirm concede", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    MageFrame.getSession().concedeGame(gameId);
+                }
+            }
+        });
+
+        menuItem = new JMenuItem("Cancel");
+        Pmenu.add(menuItem);
+
+        battlefieldPanel.getMainPanel().addMouseListener(new MouseAdapter() {
+            public void mouseReleased(MouseEvent Me) {
+                if (Me.isPopupTrigger()) {
+                    Pmenu.show(Me.getComponent(), Me.getX(), Me.getY());
+                }
+            }
+        });
     }
 
     public final void init(PlayerView player, BigCard bigCard, UUID gameId) {
