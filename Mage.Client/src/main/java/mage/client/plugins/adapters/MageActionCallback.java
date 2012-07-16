@@ -220,6 +220,7 @@ public class MageActionCallback implements ActionCallback {
                         if (!state) {
                             bigCard.resetCardId();
                         }
+                        state = true;
                         Image image = card.getImage();
                         if (image != null && image instanceof BufferedImage) {
                             // XXX: scaled to fit width
