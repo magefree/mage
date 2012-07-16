@@ -100,6 +100,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private final static String liteModeArg = "-lite";
     private final static String grayModeArg = "-gray";
 
+    private static MageFrame instance;
+
     private static Session session;
     private ConnectDialog connectDialog;
     private ErrorDialog errorDialog;
@@ -150,6 +152,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     @Override
     public MageVersion getVersion() {
         return version;
+    }
+
+    public static MageFrame getInstance() {
+        return instance;
     }
 
     /**
@@ -469,14 +475,14 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
     }
 
-    private void btnImagesActionPerformed(java.awt.event.ActionEvent evt) {
+    public void btnImagesActionPerformed(java.awt.event.ActionEvent evt) {
         HashSet<Card> cards = new HashSet<Card>(CardsStorage.getAllCards());
         List<Card> notImplemented = CardsStorage.getNotImplementedCards();
         cards.addAll(notImplemented);
         Plugins.getInstance().downloadImage(cards);
     }
 
-    private void btnSymbolsActionPerformed(java.awt.event.ActionEvent evt) {
+    public void btnSymbolsActionPerformed(java.awt.event.ActionEvent evt) {
         if (JOptionPane.showConfirmDialog(null, "Do you want to download mana symbols?") == JOptionPane.OK_OPTION) {
             Plugins.getInstance().downloadSymbols();
         }
@@ -818,7 +824,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
     }//GEN-LAST:event_btnConnectActionPerformed
 
-    private void btnAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAboutActionPerformed
+    public void btnAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAboutActionPerformed
         AboutDialog aboutDialog = new AboutDialog();
         desktopPane.add(aboutDialog, JLayeredPane.POPUP_LAYER);
         aboutDialog.showDialog(version);
@@ -828,11 +834,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         showCollectionViewer();
     }//GEN-LAST:event_btnCollectionViewerActionPerformed
 
-    private void btnPreferencesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreferencesActionPerformed
+    public void btnPreferencesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreferencesActionPerformed
         PreferencesDialog.main(new String[]{});
     }//GEN-LAST:event_btnPreferencesActionPerformed
 
-    private void btnSendFeedbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendFeedbackActionPerformed
+    public void btnSendFeedbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendFeedbackActionPerformed
         if (!session.isConnected()) {
             JOptionPane.showMessageDialog(null, "You may send us feedback only when connected to server.", "Information", JOptionPane.INFORMATION_MESSAGE);
             return;
@@ -982,7 +988,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                         splash.update();
                     }
                 }
-                new MageFrame().setVisible(true);
+                instance = new MageFrame();
+                instance.setVisible(true);
             }
         });
     }

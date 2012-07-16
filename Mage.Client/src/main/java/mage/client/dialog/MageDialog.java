@@ -107,6 +107,10 @@ public class MageDialog extends javax.swing.JInternalFrame {
                     Object source = event.getSource();
                     boolean dispatch = true;
 
+                    if (event.getSource() != null && event.getSource() instanceof TrayIcon) {
+                        return;
+                    }
+
                     if (event instanceof MouseEvent && event.getSource() instanceof Component) {
                         MouseEvent e = (MouseEvent) event;
                         MouseEvent m = SwingUtilities.convertMouseEvent((Component) e.getSource(), e, this);

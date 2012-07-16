@@ -34,19 +34,21 @@
 
 package mage.client.dialog;
 
-import java.util.List;
-import java.util.UUID;
-import java.util.concurrent.CancellationException;
-import java.util.concurrent.ExecutionException;
-import javax.swing.SwingWorker;
-import javax.swing.table.AbstractTableModel;
-import mage.client.*;
+import mage.client.MageFrame;
 import mage.client.chat.ChatPanel;
 import mage.client.components.MageComponents;
+import mage.client.components.tray.MageTray;
 import mage.remote.Session;
 import mage.view.SeatView;
 import mage.view.TableView;
 import org.apache.log4j.Logger;
+
+import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
+import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.ExecutionException;
 
 /**
  *
@@ -359,6 +361,7 @@ class UpdateSeatsTask extends SwingWorker<Void, TableView> {
     private UUID roomId;
     private UUID tableId;
     private TableWaitingDialog dialog;
+    private int count = 0;
 
     private final static Logger logger = Logger.getLogger(TableWaitingDialog.class);
 
@@ -380,8 +383,33 @@ class UpdateSeatsTask extends SwingWorker<Void, TableView> {
 
     @Override
     protected void process(List<TableView> view) {
-        dialog.update(view.get(0));
+        TableView tableView = view.get(0);
+        if (count == 0) {
+            count = getPlayersCount(tableView);
+        } else {
+            int current = getPlayersCount(tableView);
+            if (current != count) {
+                count = current;
+                if (count > 0) {
+                MageTray.getInstance().blink();
+                }
+            }
+        }
+        dialog.update(tableView);
     }
+
+    private int getPlayersCount(TableView tableView) {
+        int count = 0;
+        if (tableView != null) {
+            for (SeatView seatView: tableView.getSeats()) {
+                if (seatView.getPlayerId() != null && seatView.getPlayerType().equals("Human")) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
 
     @Override
     protected void done() {
