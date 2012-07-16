@@ -952,7 +952,7 @@ public class GamePanel extends javax.swing.JPanel {
                                     .addComponent(helper, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(handContainer, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 )
-                                .addComponent(stack, GroupLayout.DEFAULT_SIZE, 400, 400)
+                                .addComponent(stack, 400, 400, 400)
 
                             )
                             .addGap(0)
