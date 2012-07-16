@@ -38,6 +38,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -90,7 +91,7 @@ class YawningFissureEffect extends OneShotEffect<YawningFissureEffect> {
     public boolean apply(Game game, Ability source) {
         FilterControlledPermanent filter = new FilterControlledPermanent("land you control");
         filter.add(new CardTypePredicate(CardType.LAND));
-        filter.setTargetController(TargetController.YOU);
+        filter.add(new ControllerPredicate(TargetController.YOU));
 
         Set<UUID> opponents = game.getOpponents(source.getControllerId());
         for (UUID opponentId : opponents) {

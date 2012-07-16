@@ -27,6 +27,7 @@
  */
 package mage.sets.innistrad;
 
+import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -34,14 +35,13 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
-import mage.cards.CardImpl;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.target.Target;
-import mage.target.TargetPermanent;
-
-import java.util.UUID;
 import mage.abilities.effects.common.ExileTargetForSourceEffect;
 import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
+import mage.cards.CardImpl;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.target.Target;
+import mage.target.TargetPermanent;
 
 /**
  * @author nantuko
@@ -50,7 +50,7 @@ public class FiendHunter extends CardImpl<FiendHunter> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.setAnother(true);
+        filter.add(new AnotherPredicate());
     }
 
     public FiendHunter(UUID ownerId) {

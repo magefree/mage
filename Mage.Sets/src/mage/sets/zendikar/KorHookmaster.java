@@ -37,6 +37,7 @@ import mage.abilities.effects.common.SkipNextUntapTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -48,7 +49,7 @@ public class KorHookmaster extends CardImpl<KorHookmaster> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 
     static {
-        filter.setTargetController(TargetController.OPPONENT);
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
     public KorHookmaster(UUID ownerId) {

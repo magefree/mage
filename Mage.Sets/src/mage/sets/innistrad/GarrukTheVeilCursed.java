@@ -47,6 +47,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.WolfTokenWithDeathtouch;
@@ -136,7 +137,7 @@ class GarrukTheVeilCursedEffect extends OneShotEffect<GarrukTheVeilCursedEffect>
 
     static {
         filterCreature.add(new CardTypePredicate(CardType.CREATURE));
-        filterCreature.setTargetController(Constants.TargetController.YOU);
+        filterCreature.add(new ControllerPredicate(Constants.TargetController.YOU));
     }
 
     public GarrukTheVeilCursedEffect() {

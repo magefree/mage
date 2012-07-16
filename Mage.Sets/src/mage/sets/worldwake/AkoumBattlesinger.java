@@ -38,6 +38,7 @@ import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -49,7 +50,7 @@ public class AkoumBattlesinger extends CardImpl<AkoumBattlesinger> {
 
     static {
         filter.add(new SubtypePredicate("Ally"));
-        filter.setTargetController(TargetController.YOU);
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public AkoumBattlesinger(UUID ownerId) {

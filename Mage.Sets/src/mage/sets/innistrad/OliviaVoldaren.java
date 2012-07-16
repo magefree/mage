@@ -45,6 +45,7 @@ import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -57,7 +58,7 @@ public class OliviaVoldaren extends CardImpl<OliviaVoldaren> {
     private static final FilterCreaturePermanent vampireFilter = new FilterCreaturePermanent("Vampire");
 
     static {
-        filter.setAnother(true);
+        filter.add(new AnotherPredicate());
         vampireFilter.add(new SubtypePredicate("Vampire"));
     }
 

@@ -45,6 +45,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -58,7 +59,7 @@ public class ClawsOfValakut extends CardImpl<ClawsOfValakut> {
 
     static {
         filter.add(new SubtypePredicate("Mountain"));
-        filter.setTargetController(Constants.TargetController.YOU);
+        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
     }
 
     public ClawsOfValakut (UUID ownerId) {

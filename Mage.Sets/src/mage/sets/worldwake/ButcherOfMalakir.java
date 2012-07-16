@@ -40,6 +40,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -99,7 +100,7 @@ class ButcherOfMalakirEffect extends OneShotEffect<ButcherOfMalakirEffect> {
     public boolean apply(Game game, Ability source) {
         FilterControlledPermanent filter = new FilterControlledPermanent("creature you control");
         filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.setTargetController(Constants.TargetController.YOU);
+        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
 
         Set<UUID> opponents = game.getOpponents(source.getControllerId());
         for (UUID opponentId : opponents) {

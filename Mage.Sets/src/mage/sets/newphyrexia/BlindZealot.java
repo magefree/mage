@@ -39,6 +39,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
@@ -64,6 +65,7 @@ public class BlindZealot extends CardImpl<BlindZealot> {
         this.toughness = new MageInt(2);
 
         this.addAbility(IntimidateAbility.getInstance());
+        // Whenever Blind Zealot deals combat damage to a player, you may sacrifice it. If you do, destroy target creature that player controls.
         this.addAbility(new BlindZealotTriggeredAbility());
     }
 
@@ -106,11 +108,11 @@ class BlindZealotTriggeredAbility extends TriggeredAbilityImpl<BlindZealotTrigge
                 sb.append(" to destroy target creature controlled by ");
                 sb.append(game.getPlayer(event.getTargetId()).getName()).append("?");
                 if (player.chooseUse(Outcome.DestroyPermanent, sb.toString(), game)) {
-                    this.getTargets().clear();
                     FilterCreaturePermanent filter = new FilterCreaturePermanent();
-                    filter.getControllerId().add(event.getTargetId());
-                    filter.setNotController(false);
+                    filter.add(new ControllerIdPredicate(event.getTargetId()));
                     filter.setMessage("creature controlled by " + game.getPlayer(event.getTargetId()).getName());
+
+                    this.getTargets().clear();
                     this.addTarget(new TargetCreaturePermanent(filter));
                     return true;
                 }

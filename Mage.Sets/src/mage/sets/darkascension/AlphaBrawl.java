@@ -34,6 +34,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -50,7 +51,7 @@ public class AlphaBrawl extends CardImpl<AlphaBrawl> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 
     static {
-        filter.setTargetController(Constants.TargetController.OPPONENT);
+        filter.add(new ControllerPredicate(Constants.TargetController.OPPONENT));
     }
 
     public AlphaBrawl(UUID ownerId) {

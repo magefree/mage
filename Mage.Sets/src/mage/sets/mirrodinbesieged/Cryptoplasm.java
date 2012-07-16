@@ -40,6 +40,7 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -52,7 +53,7 @@ public class Cryptoplasm extends CardImpl<Cryptoplasm> {
     final static FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.setAnother(true);
+        filter.add(new AnotherPredicate());
     }
 
     public Cryptoplasm(UUID ownerId) {

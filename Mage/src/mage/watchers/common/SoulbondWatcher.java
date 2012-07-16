@@ -34,6 +34,7 @@ import mage.abilities.keyword.SoulbondAbility;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.filter.common.FilterNotPairedControlledCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -49,10 +50,10 @@ import mage.watchers.WatcherImpl;
  */
 public class SoulbondWatcher extends WatcherImpl<SoulbondWatcher> {
 
-    private static FilterNotPairedControlledCreaturePermanent filter = new FilterNotPairedControlledCreaturePermanent("another not paired creature you control");
+    private static final FilterNotPairedControlledCreaturePermanent filter = new FilterNotPairedControlledCreaturePermanent("another not paired creature you control");
 
     static {
-        filter.setAnother(true);
+        filter.add(new AnotherPredicate());
     }
 
     public SoulbondWatcher() {

@@ -37,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 
 /**
@@ -53,7 +54,7 @@ public class ToilToRenown extends CardImpl<ToilToRenown> {
                 new CardTypePredicate(CardType.ARTIFACT),
                 new CardTypePredicate(CardType.CREATURE),
                 new CardTypePredicate(CardType.LAND)));
-        filter.setTargetController(TargetController.YOU);
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public ToilToRenown(UUID ownerId) {

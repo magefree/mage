@@ -41,6 +41,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.Token;
@@ -55,7 +56,7 @@ public class ChancellorOfTheForge extends CardImpl<ChancellorOfTheForge> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control");
 
     static {
-        filter.setTargetController(TargetController.YOU);
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public ChancellorOfTheForge(UUID ownerId) {

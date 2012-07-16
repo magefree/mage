@@ -29,11 +29,8 @@
 package mage.player.ai;
 
 import mage.Constants;
-import mage.Constants.AbilityType;
 import mage.Constants.RangeOfInfluence;
-import mage.Constants.Zone;
 import mage.abilities.Ability;
-import mage.filter.FilterAbility;
 import mage.game.Game;
 import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
@@ -54,20 +51,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
 
     private static final transient Logger logger = Logger.getLogger(ComputerPlayer7.class);
 
-    private static FilterAbility filterLand = new FilterAbility();
-    private static FilterAbility filterNotLand = new FilterAbility();
-
     private boolean allowBadMoves;
-
-    static {
-        filterLand.getTypes().add(AbilityType.PLAY_LAND);
-        filterLand.setZone(Zone.HAND);
-
-        filterNotLand.getTypes().add(AbilityType.PLAY_LAND);
-        filterNotLand.setZone(Zone.HAND);
-        filterNotLand.setNotFilter(true);
-
-    }
 
     public ComputerPlayer7(String name, RangeOfInfluence range, int skill) {
         super(name, range, skill);

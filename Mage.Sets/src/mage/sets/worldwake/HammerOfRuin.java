@@ -43,6 +43,7 @@ import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
@@ -59,8 +60,12 @@ public class HammerOfRuin extends CardImpl<HammerOfRuin> {
         super(ownerId, 124, "Hammer of Ruin", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "WWK";
         this.subtype.add("Equipment");
+
+        // Equipped creature gets +2/+0.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 0)));
+        // Whenever equipped creature deals combat damage to a player, you may destroy target Equipment that player controls.
         this.addAbility(new HammerOfRuinTriggeredAbility());
+        // Equip {2}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
@@ -79,9 +84,6 @@ class HammerOfRuinTriggeredAbility extends TriggeredAbilityImpl<HammerOfRuinTrig
 
     HammerOfRuinTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(), true);
-        FilterPermanent filter = new FilterPermanent("Equipment that player controls");
-        filter.add(new SubtypePredicate("Equipment"));
-        this.addTarget(new TargetPermanent(filter));
     }
 
     HammerOfRuinTriggeredAbility(final HammerOfRuinTriggeredAbility ability) {
@@ -99,9 +101,13 @@ class HammerOfRuinTriggeredAbility extends TriggeredAbilityImpl<HammerOfRuinTrig
             DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
             Permanent p = game.getPermanent(event.getSourceId());
             if (damageEvent.isCombatDamage() && p != null && p.getAttachments().contains(this.getSourceId())) {
-                FilterPermanent filter = (FilterPermanent)getTargets().get(0).getFilter();
-                filter.getControllerId().clear();
-                filter.getControllerId().add(event.getPlayerId());
+                FilterPermanent filter = new FilterPermanent("Equipment that player controls");
+                filter.add(new SubtypePredicate("Equipment"));
+                filter.add(new ControllerIdPredicate(event.getPlayerId()));
+                filter.setMessage("creature controlled by " + game.getPlayer(event.getTargetId()).getName());
+
+                this.getTargets().clear();
+                this.addTarget(new TargetPermanent(filter));
                 return true;
             }
         }

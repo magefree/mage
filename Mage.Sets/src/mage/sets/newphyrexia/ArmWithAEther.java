@@ -38,6 +38,7 @@ import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -57,6 +58,7 @@ public class ArmWithAEther extends CardImpl<ArmWithAEther> {
 
         this.color.setBlue(true);
 
+        // Until end of turn, creatures you control gain "Whenever this creature deals damage to an opponent, you may return target creature that player controls to its owner's hand."
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(new ArmWithAEtherTriggeredAbility(), Duration.EndOfTurn, filter));
     }
 
@@ -89,9 +91,10 @@ class ArmWithAEtherTriggeredAbility extends TriggeredAbilityImpl<ArmWithAEtherTr
     public boolean checkTrigger(GameEvent event, Game game) {
         Player opponent = game.getPlayer(event.getPlayerId());
         if (opponent != null && event.getType() == GameEvent.EventType.DAMAGED_PLAYER && event.getSourceId().equals(this.sourceId)) {
-            this.getTargets().clear();
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creature " + opponent.getName() + " controls");
-            filter.getControllerId().add(opponent.getId());
+            filter.add(new ControllerIdPredicate(opponent.getId()));
+
+            this.getTargets().clear();
             this.addTarget(new TargetCreaturePermanent(filter));
             return true;
         }

@@ -42,6 +42,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -77,18 +78,14 @@ public class AncientHellkite extends CardImpl<AncientHellkite> {
 
 class AncientHellkiteAbility extends ActivatedAbilityImpl<AncientHellkiteAbility> {
 
-    private FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
-
     public AncientHellkiteAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(1));
         addCost(new AncientHellkiteCost());
-        addTarget(new TargetCreaturePermanent(filter));
         addManaCost(new ColoredManaCost(ColoredManaSymbol.R));
     }
 
     public AncientHellkiteAbility(final AncientHellkiteAbility ability) {
         super(ability);
-        this.filter = ability.filter;
     }
 
     @Override
@@ -100,9 +97,10 @@ class AncientHellkiteAbility extends ActivatedAbilityImpl<AncientHellkiteAbility
     public boolean activate(Game game, boolean noMana) {
         UUID defenderId = game.getCombat().getDefendingPlayer(sourceId);
         if (defenderId != null) {
-            getTargets().clear();
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
-            filter.getControllerId().add(defenderId);
+            filter.add(new ControllerIdPredicate(defenderId));
+
+            this.getTargets().clear();
             TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
             target.setRequired(true);
             this.addTarget(target);

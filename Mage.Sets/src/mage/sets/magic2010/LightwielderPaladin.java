@@ -40,10 +40,12 @@ import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.players.Player;
 import mage.target.TargetPermanent;
 
 /**
@@ -95,15 +97,18 @@ class LightwielderPaladinTriggeredAbility extends TriggeredAbilityImpl<Lightwiel
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == EventType.DAMAGED_PLAYER && event.getSourceId().equals(this.sourceId)
                 && ((DamagedPlayerEvent) event).isCombatDamage()) {
-            FilterPermanent filter = new FilterPermanent("black or red permanent");
-            filter.add(Predicates.or(
-                new ColorPredicate(ObjectColor.BLACK),
-                new ColorPredicate(ObjectColor.RED)));
-            filter.getControllerId().add(event.getTargetId());
-            filter.setNotController(false);
-            this.getTargets().clear();
-            this.addTarget(new TargetPermanent(filter));
-            return true;
+            Player player = game.getPlayer(event.getTargetId());
+            if (player != null) {
+                FilterPermanent filter = new FilterPermanent("black or red permanent controlled by " + player.getName());
+                filter.add(Predicates.or(
+                    new ColorPredicate(ObjectColor.BLACK),
+                    new ColorPredicate(ObjectColor.RED)));
+                filter.add(new ControllerIdPredicate(event.getTargetId()));
+
+                this.getTargets().clear();
+                this.addTarget(new TargetPermanent(filter));
+                return true;
+            }
         }
         return false;
     }

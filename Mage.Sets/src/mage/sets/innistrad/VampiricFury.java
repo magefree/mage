@@ -37,6 +37,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 import java.util.UUID;
 
@@ -49,7 +50,7 @@ public class VampiricFury extends CardImpl<VampiricFury> {
 
     static {
         vampires.add(new SubtypePredicate("Vampire"));
-        vampires.setTargetController(Constants.TargetController.YOU);
+        vampires.add(new ControllerPredicate(Constants.TargetController.YOU));
     }
 
     public VampiricFury(UUID ownerId) {

@@ -39,6 +39,7 @@ import mage.abilities.effects.common.ExileTargetForSourceEffect;
 import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterNonlandPermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 
@@ -48,10 +49,10 @@ import mage.target.TargetPermanent;
  */
 public class OblivionRing extends CardImpl<OblivionRing> {
 
-    private static FilterNonlandPermanent anotherNonlandPermanent = new FilterNonlandPermanent("another nonland permanent");
+    private static final FilterNonlandPermanent anotherNonlandPermanent = new FilterNonlandPermanent("another nonland permanent");
 
     static {
-         anotherNonlandPermanent.setAnother(true);
+         anotherNonlandPermanent.add(new AnotherPredicate());
     }
 
     public OblivionRing(UUID ownerId) {

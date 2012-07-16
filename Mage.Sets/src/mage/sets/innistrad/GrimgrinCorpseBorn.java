@@ -45,6 +45,8 @@ import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -59,7 +61,7 @@ public class GrimgrinCorpseBorn extends CardImpl<GrimgrinCorpseBorn> {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature");
 
     static {
-        filter.setAnother(true);
+        filter.add(new AnotherPredicate());
     }
 
     public GrimgrinCorpseBorn(UUID ownerId) {
@@ -112,7 +114,9 @@ class GrimgrinCorpseBornAbility extends TriggeredAbilityImpl<GrimgrinCorpseBornA
         if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
             UUID defenderId = game.getCombat().getDefendingPlayer(sourceId);
-            filter.getControllerId().add(defenderId);
+            filter.add(new ControllerIdPredicate(defenderId));
+
+            this.getTargets().clear();
             TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
             target.setRequired(true);
             this.addTarget(target);

@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -53,7 +54,7 @@ public class SteelOverseer extends CardImpl<SteelOverseer> {
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
         filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.setTargetController(TargetController.YOU);
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public SteelOverseer(UUID ownerId) {

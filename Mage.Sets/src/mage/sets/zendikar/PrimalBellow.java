@@ -37,6 +37,7 @@ import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -49,7 +50,7 @@ public class PrimalBellow extends CardImpl<PrimalBellow> {
 
     static {
         filter.add(new SubtypePredicate("Forest"));
-        filter.setTargetController(TargetController.YOU);
+        filter.add(new ControllerPredicate(TargetController.YOU));
 
     }
 

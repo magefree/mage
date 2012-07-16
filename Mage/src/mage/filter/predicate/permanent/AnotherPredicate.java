@@ -25,56 +25,26 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.filter.predicate.permanent;
 
-import java.util.UUID;
-
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.continious.GainAbilityAllEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.cards.CardImpl;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
  * @author North
  */
-public class SeascapeAerialist extends CardImpl<SeascapeAerialist> {
+public class AnotherPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Ally creatures you control");
-
-    static {
-        filter.add(new SubtypePredicate("Ally"));
-        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
-    }
-
-    public SeascapeAerialist(UUID ownerId) {
-        super(ownerId, 64, "Seascape Aerialist", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
-        this.expansionSetCode = "ZEN";
-        this.subtype.add("Merfolk");
-        this.subtype.add("Wizard");
-        this.subtype.add("Ally");
-
-        this.color.setBlue(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
-
-        this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new GainAbilityAllEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, filter), true));
-    }
-
-    public SeascapeAerialist(final SeascapeAerialist card) {
-        super(card);
+    @Override
+    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
+        return !input.getObject().getId().equals(input.getSourceId());
     }
 
     @Override
-    public SeascapeAerialist copy() {
-        return new SeascapeAerialist(this);
+    public String toString() {
+        return "Another";
     }
 }

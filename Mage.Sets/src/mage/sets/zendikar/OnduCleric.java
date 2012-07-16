@@ -39,6 +39,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -50,7 +51,7 @@ public class OnduCleric extends CardImpl<OnduCleric> {
 
     static {
         filter.add(new SubtypePredicate("Ally"));
-        filter.setTargetController(Constants.TargetController.YOU);
+        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
     }
 
     public OnduCleric(UUID ownerId) {

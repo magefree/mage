@@ -41,6 +41,7 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterArtifactPermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -50,7 +51,7 @@ public class DarksteelJuggernaut extends CardImpl<DarksteelJuggernaut> {
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifacts you control");
 
     static {
-        filter.setTargetController(Constants.TargetController.YOU);
+        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
     }
 
     public DarksteelJuggernaut (UUID ownerId) {

@@ -38,6 +38,7 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -51,7 +52,7 @@ public class TimberpackWolf extends CardImpl<TimberpackWolf> {
 
     static {
         filter.add(new NamePredicate("Timberpack Wolf"));
-        filter.setTargetController(Constants.TargetController.YOU);
+        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
     }
 
     public TimberpackWolf(UUID ownerId) {

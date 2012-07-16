@@ -41,6 +41,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -54,7 +55,7 @@ public class ThundermawHellkite extends CardImpl<ThundermawHellkite> {
     
     static {
         filter.add(new AbilityPredicate(FlyingAbility.class));
-        filter.setTargetController(Constants.TargetController.OPPONENT);
+        filter.add(new ControllerPredicate(Constants.TargetController.OPPONENT));
     }
 
     public ThundermawHellkite(UUID ownerId) {

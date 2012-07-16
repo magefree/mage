@@ -31,6 +31,7 @@ package mage.filter;
 import java.util.ArrayList;
 import java.util.List;
 import mage.filter.predicate.Predicate;
+import mage.filter.predicate.Predicates;
 import mage.game.Game;
 
 /**
@@ -40,7 +41,7 @@ import mage.game.Game;
  */
 public abstract class FilterImpl<E> implements Filter<E> {
 
-    protected List<Predicate> predicates = new ArrayList<Predicate>();
+    protected List<Predicate<Object>> predicates = new ArrayList<Predicate<Object>>();
     protected String message;
     protected boolean notFilter = false;
 
@@ -54,17 +55,12 @@ public abstract class FilterImpl<E> implements Filter<E> {
     public FilterImpl(FilterImpl filter) {
         this.message = filter.message;
         this.notFilter = filter.notFilter;
-        this.predicates = new ArrayList<Predicate>(filter.predicates);
+        this.predicates = new ArrayList<Predicate<Object>>(filter.predicates);
     }
 
     @Override
     public boolean match(E e, Game game) {
-        for (int i = 0; i < predicates.size(); i++) {
-            if (!predicates.get(i).apply(e, game)) {
-                return false;
-            }
-        }
-        return true;
+        return Predicates.and(predicates).apply(e, game);
     }
 
     @Override

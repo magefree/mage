@@ -40,6 +40,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
@@ -105,7 +106,8 @@ class SoulSeizerTriggeredAbility extends TriggeredAbilityImpl<SoulSeizerTriggere
                 Player opponent = game.getPlayer(event.getPlayerId());
                 if (opponent != null) {
                     FilterCreaturePermanent filter = new FilterCreaturePermanent("creature " + opponent.getName() + " controls");
-                    filter.getControllerId().add(opponent.getId());
+                    filter.add(new ControllerIdPredicate(opponent.getId()));
+
                     this.getTargets().clear();
                     this.addTarget(new TargetCreaturePermanent(filter));
                     return true;

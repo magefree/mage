@@ -38,6 +38,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
@@ -95,9 +96,10 @@ class AshlingTheExtinguisherTriggeredAbility extends TriggeredAbilityImpl<Ashlin
             if (damageEvent.isCombatDamage() && event.getSourceId().equals(this.getSourceId())) {
                 Player opponent = game.getPlayer(event.getPlayerId());
                 if (opponent != null) {
-                    this.getTargets().clear();
                     FilterCreaturePermanent filter = new FilterCreaturePermanent("creature " + opponent.getName() + " controls");
-                    filter.getControllerId().add(opponent.getId());
+                    filter.add(new ControllerIdPredicate(opponent.getId()));
+
+                    this.getTargets().clear();
                     this.addTarget(new TargetCreaturePermanent(filter));
                     return true;
                 }

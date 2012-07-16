@@ -25,51 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
-
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.TargetController;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.cards.CardImpl;
-import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.target.common.TargetCreatureOrPlayer;
-
-import java.util.UUID;
+package mage.filter.predicate;
 
 /**
  *
  * @author North
  */
-public class SpireBarrage extends CardImpl<SpireBarrage> {
-
-    private static final FilterLandPermanent filter = new FilterLandPermanent("Mountains");
-
-    static {
-        filter.add(new SubtypePredicate("Mountain"));
-        filter.add(new ControllerPredicate(TargetController.YOU));
-    }
-
-    public SpireBarrage(UUID ownerId) {
-        super(ownerId, 150, "Spire Barrage", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{R}");
-        this.expansionSetCode = "ZEN";
-
-        this.color.setRed(true);
-
-        // Spire Barrage deals damage to target creature or player equal to the number of Mountains you control.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
-    }
-
-    public SpireBarrage(final SpireBarrage card) {
-        super(card);
-    }
-
-    @Override
-    public SpireBarrage copy() {
-        return new SpireBarrage(this);
-    }
+public interface ObjectPlayerPredicate<T extends ObjectPlayer> extends Predicate<T> {
 }

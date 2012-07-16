@@ -40,6 +40,7 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterNonlandPermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -54,8 +55,8 @@ public class CapriciousEfreet extends CardImpl<CapriciousEfreet> {
     private static final FilterNonlandPermanent filterNotControlled = new FilterNonlandPermanent("nonland permanent you don't control");
 
     static {
-        filterControlled.setTargetController(TargetController.YOU);
-        filterNotControlled.setTargetController(TargetController.NOT_YOU);
+        filterControlled.add(new ControllerPredicate(TargetController.YOU));
+        filterNotControlled.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
 
     public CapriciousEfreet(UUID ownerId) {

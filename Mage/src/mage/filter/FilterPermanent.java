@@ -28,24 +28,22 @@
 
 package mage.filter;
 
-import mage.Constants.TargetController;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.filter.predicate.ObjectPlayer;
+import mage.filter.predicate.ObjectPlayerPredicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.Predicates;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author North
  */
 public class FilterPermanent extends FilterObject<Permanent> {
-    protected List<UUID> controllerId = new ArrayList<UUID>();
-    protected boolean notController;
-    protected TargetController controller = TargetController.ANY;
-    protected TargetController owner = TargetController.ANY;
-    protected boolean another;
+    protected List<ObjectPlayerPredicate<ObjectPlayer<Permanent>>> extraPredicates = new ArrayList<ObjectPlayerPredicate<ObjectPlayer<Permanent>>>();
 
     public FilterPermanent() {
         super("permanent");
@@ -53,104 +51,22 @@ public class FilterPermanent extends FilterObject<Permanent> {
 
     public FilterPermanent(final FilterPermanent filter) {
         super(filter);
-        this.controllerId  = new ArrayList<UUID>(filter.controllerId);
-        this.notController = filter.notController;
-        this.controller = filter.controller;
-        this.owner = filter.owner;
-        this.another = filter.another;
+        this.extraPredicates = new ArrayList<ObjectPlayerPredicate<ObjectPlayer<Permanent>>>(extraPredicates);
     }
 
     public FilterPermanent(String name) {
         super(name);
     }
 
-    @Override
-    public boolean match(Permanent permanent, Game game) {
-        if (!super.match(permanent, game))
-            return notFilter;
-
-        if (controllerId.size() > 0 && controllerId.contains(permanent.getControllerId()) == notController)
-            return notFilter;
-
-        return !notFilter;
-    }
-
     public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
         if (!this.match(permanent, game))
-            return notFilter;
-
-        if (controller != TargetController.ANY && playerId != null) {
-            switch(controller) {
-                case YOU:
-                    if (!permanent.getControllerId().equals(playerId))
-                        return notFilter;
-                    break;
-                case OPPONENT:
-                    if (!game.getOpponents(playerId).contains(permanent.getControllerId()))
-                        return notFilter;
-                    break;
-                case NOT_YOU:
-                    if (permanent.getControllerId().equals(playerId))
-                        return notFilter;
-                    break;
-            }
-        }
-
-        if (owner != TargetController.ANY && playerId != null) {
-            switch(owner) {
-                case YOU:
-                    if (!permanent.getOwnerId().equals(playerId))
-                        return notFilter;
-                    break;
-                case OPPONENT:
-                    if (!game.getOpponents(playerId).contains(permanent.getOwnerId()))
-                        return notFilter;
-                    break;
-                case NOT_YOU:
-                    if (permanent.getOwnerId().equals(playerId))
-                        return notFilter;
-                    break;
-            }
-        }
-
-        if (another) {
-            // filter out itself
-            if (permanent.getId().equals(sourceId)) {
-                return notFilter;
-            }
-        }
-
-        return !notFilter;
-    }
-
-    public List<UUID> getControllerId() {
-        return controllerId;
-    }
-
-    public void setNotController(boolean notController) {
-        this.notController = notController;
-    }
-
-    public void setTargetController(TargetController controller) {
-        this.controller = controller;
-    }
-
-    public void setTargetOwner(TargetController owner) {
-        this.owner = owner;
-    }
-
-    public boolean isAnother() {
-        return another;
-    }
-
-    public void setAnother(boolean another) {
-        this.another = another;
-    }
-
-    public boolean matchController(UUID testControllerId) {
-        if (controllerId.size() > 0 && controllerId.contains(testControllerId) == notController)
             return false;
-        return true;
+
+        return Predicates.and(extraPredicates).apply(new ObjectSourcePlayer(permanent, sourceId, playerId), game);
+    }
+
+    public void add(ObjectPlayerPredicate predicate) {
+        extraPredicates.add(predicate);
     }
 
     @Override

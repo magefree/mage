@@ -28,20 +28,24 @@
 
 package mage.filter;
 
-import mage.Constants.TargetController;
-import mage.game.Game;
-import mage.game.stack.StackObject;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.Constants.TargetController;
+import mage.filter.predicate.ObjectPlayer;
+import mage.filter.predicate.ObjectPlayerPredicate;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.game.stack.StackObject;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @author North
  */
 public class FilterStackObject extends FilterObject<StackObject> {
 
+    protected List<ObjectPlayerPredicate<ObjectPlayer<Permanent>>> extraPredicates = new ArrayList<ObjectPlayerPredicate<ObjectPlayer<Permanent>>>();
     protected List<UUID> controllerId = new ArrayList<UUID>();
     protected boolean notController = false;
     protected TargetController controller = TargetController.ANY;
@@ -59,6 +63,7 @@ public class FilterStackObject extends FilterObject<StackObject> {
         this.controllerId.addAll(filter.controllerId);
         this.notController = filter.notController;
         this.controller = filter.controller;
+        this.extraPredicates = new ArrayList<ObjectPlayerPredicate<ObjectPlayer<Permanent>>>(extraPredicates);
     }
 
     @Override
@@ -95,6 +100,10 @@ public class FilterStackObject extends FilterObject<StackObject> {
         }
 
         return !notFilter;
+    }
+
+    public void add(ObjectPlayerPredicate predicate) {
+        extraPredicates.add(predicate);
     }
 
     public List<UUID> getControllerId() {

@@ -34,6 +34,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -79,7 +80,7 @@ public class SacrificeEffect extends OneShotEffect<SacrificeEffect>{
             return false;
         }
 
-        filter.setTargetController(Constants.TargetController.YOU);
+        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
 
         int amount = count.calculate(game, source);
         int realCount = game.getBattlefield().countAll(filter, player.getId(), game);

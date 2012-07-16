@@ -38,6 +38,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -74,7 +75,7 @@ class CorruptEffect extends OneShotEffect<CorruptEffect> {
 
     static {
         filter.add(new SubtypePredicate("Swamp"));
-        filter.setTargetController(TargetController.YOU);
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public CorruptEffect() {

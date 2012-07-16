@@ -45,6 +45,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -58,7 +59,7 @@ public class MikaeusTheLunarch extends CardImpl<MikaeusTheLunarch> {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
     static {
-        filter.setAnother(true);
+        filter.add(new AnotherPredicate());
     }
 
     public MikaeusTheLunarch(UUID ownerId) {

@@ -40,6 +40,7 @@ import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -50,7 +51,7 @@ public class NightmareLash extends CardImpl<NightmareLash> {
 
     static {
         filter.add(new SubtypePredicate("Swamp"));
-        filter.setTargetController(Constants.TargetController.YOU);
+        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
     }
 
     public NightmareLash(UUID ownerId) {

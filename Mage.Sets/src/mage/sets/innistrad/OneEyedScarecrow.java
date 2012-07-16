@@ -41,6 +41,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -52,7 +53,7 @@ public class OneEyedScarecrow extends CardImpl<OneEyedScarecrow> {
 
     static {
         filter.add(new AbilityPredicate(FlyingAbility.class));
-        filter.setTargetController(TargetController.OPPONENT);
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
     public OneEyedScarecrow(UUID ownerId) {

@@ -51,6 +51,7 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.watchers.common.CastFromHandWatcher;
 
 /**
@@ -60,7 +61,7 @@ public class MyojinOfSeeingWinds extends CardImpl<MyojinOfSeeingWinds> {
 
     private static final FilterPermanent filter = new FilterPermanent("permanent you control");
     static {
-        filter.setTargetOwner(TargetController.YOU);
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public MyojinOfSeeingWinds(UUID ownerId) {

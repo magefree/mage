@@ -37,6 +37,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -93,7 +94,7 @@ class TributeToHungerEffect extends OneShotEffect<TributeToHungerEffect> {
 
         FilterControlledPermanent filter = new FilterControlledPermanent("creature");
         filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.setTargetController(TargetController.YOU);
+        filter.add(new ControllerPredicate(TargetController.YOU));
         TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, false);
 
         if (target.canChoose(player.getId(), game)) {

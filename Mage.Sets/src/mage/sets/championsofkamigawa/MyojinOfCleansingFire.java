@@ -48,6 +48,7 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.watchers.common.CastFromHandWatcher;
 
 /**
@@ -57,7 +58,7 @@ public class MyojinOfCleansingFire extends CardImpl<MyojinOfCleansingFire> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other creatures");
 
     static {
-        filter.setAnother(true);
+        filter.add(new AnotherPredicate());
     }
 
     public MyojinOfCleansingFire(UUID ownerId) {

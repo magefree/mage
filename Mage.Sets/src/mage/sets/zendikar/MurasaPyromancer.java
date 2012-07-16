@@ -40,6 +40,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -52,7 +53,7 @@ public class MurasaPyromancer extends CardImpl<MurasaPyromancer> {
 
     static {
         filter.add(new SubtypePredicate("Ally"));
-        filter.setTargetController(Constants.TargetController.YOU);
+        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
     }
 
     public MurasaPyromancer(UUID ownerId) {

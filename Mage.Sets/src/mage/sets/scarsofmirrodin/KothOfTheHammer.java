@@ -53,6 +53,7 @@ import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
@@ -69,9 +70,9 @@ public class KothOfTheHammer extends CardImpl<KothOfTheHammer> {
 
     static {
         filter.add(new SubtypePredicate("Mountain"));
-        filter.setTargetController(Constants.TargetController.YOU);
+        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
         filterCount.add(new SubtypePredicate("Mountain"));
-        filterCount.setTargetController(Constants.TargetController.YOU);
+        filterCount.add(new ControllerPredicate(Constants.TargetController.YOU));
     }
 
     public KothOfTheHammer (UUID ownerId) {
