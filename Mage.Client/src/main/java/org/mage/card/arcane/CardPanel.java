@@ -28,10 +28,10 @@ import java.util.UUID;
 /**
  * Main class for drawing Mage card object.
  *
- * @author arcane, nantuko
+ * @author arcane, nantuko, noxx
  */
 @SuppressWarnings({"unchecked", "rawtypes"})
-public class CardPanel extends MagePermanent implements MouseListener, MouseMotionListener {
+public class CardPanel extends MagePermanent implements MouseListener, MouseMotionListener, MouseWheelListener {
     private static final long serialVersionUID = -3272134219262184410L;
 
     private static final Logger log = Logger.getLogger(CardPanel.class);
@@ -146,6 +146,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
         addMouseListener(this);
         addMouseMotionListener(this);
+        addMouseWheelListener(this);
 
         titleText = new GlowText();
         setText(gameCard);
@@ -890,5 +891,12 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
             }
             updateImage();
         }
+    }
+
+    @Override
+    public void mouseWheelMoved(MouseWheelEvent e) {
+        if (gameCard.isFaceDown()) return;
+        data.component = this;
+        callback.mouseWheelMoved(e, data);
     }
 }

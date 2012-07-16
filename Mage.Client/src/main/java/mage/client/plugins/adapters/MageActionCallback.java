@@ -24,9 +24,14 @@ import org.jdesktop.swingx.JXPanel;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
 import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 public class MageActionCallback implements ActionCallback {
 
@@ -40,6 +45,9 @@ public class MageActionCallback implements ActionCallback {
     private JComponent cardInfoPane;
     private volatile boolean state = false;
     private boolean enlarged = false;
+
+    private static final ScheduledExecutorService timeoutExecutor = Executors.newScheduledThreadPool(1);
+    private ScheduledFuture<?> hideTimeout;
 
     public MageActionCallback() {
     }
@@ -70,6 +78,7 @@ public class MageActionCallback implements ActionCallback {
     @Override
     public void mouseEntered(MouseEvent e, final TransferData data) {
         hidePopup();
+        cancelTimeout();
         this.popupCard = data.card;
         this.popupData = data;
 
@@ -270,6 +279,7 @@ public class MageActionCallback implements ActionCallback {
     @Override
     public void mouseExited(MouseEvent e, final TransferData data) {
         hidePopup();
+        startHideTimeout();
         this.state = false;
         //ArrowBuilder.removeAllArrows();
         ArrowBuilder.removeArrowsByType(ArrowBuilder.Type.TARGET);
@@ -303,6 +313,15 @@ public class MageActionCallback implements ActionCallback {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public void mouseWheelMoved(MouseWheelEvent e, TransferData data) {
+        int notches = e.getWheelRotation();
+        if (notches < 0) {
+            enlargeCard();
+        } else {
+            hideCard();
         }
     }
 
@@ -374,4 +393,20 @@ public class MageActionCallback implements ActionCallback {
         });
     }
 
+    private synchronized void startHideTimeout() {
+        cancelTimeout();
+        hideTimeout = timeoutExecutor.schedule(new Runnable() {
+            @Override
+            public void run() {
+                hideCard();
+            }
+        }, 700, TimeUnit.MILLISECONDS);
+    }
+
+    private synchronized void cancelTimeout() {
+        if (hideTimeout != null) {
+            hideTimeout.cancel(false);
+        }
+    }
 }
+
