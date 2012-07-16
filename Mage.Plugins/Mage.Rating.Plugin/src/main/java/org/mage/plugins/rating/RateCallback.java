@@ -1,18 +1,18 @@
 package org.mage.plugins.rating;
 
-import java.awt.Image;
-import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-
 import mage.cards.Card;
 import mage.cards.MageCard;
 import mage.cards.action.ActionCallback;
 import mage.cards.action.TransferData;
-
 import org.jdesktop.swingx.JXPanel;
 import org.mage.plugins.rating.ui.BigCard;
 import org.mage.plugins.rating.ui.GuiDisplayUtil;
 import org.mage.plugins.rating.ui.ImageHelper;
+
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
+import java.awt.image.BufferedImage;
 
 public class RateCallback implements ActionCallback {
 
@@ -60,6 +60,10 @@ public class RateCallback implements ActionCallback {
 
     @Override
     public void mouseExited(MouseEvent arg0, TransferData arg1) {
+    }
+
+    @Override
+    public void mouseWheelMoved(MouseWheelEvent e, TransferData data) {
     }
 
     @Override
