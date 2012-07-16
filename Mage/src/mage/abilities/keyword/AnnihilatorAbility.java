@@ -35,6 +35,7 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -114,7 +115,7 @@ class AnnihilatorEffect extends OneShotEffect<AnnihilatorEffect> {
             player = game.getPlayer(permanent.getControllerId());
         }
 
-        filter.setTargetController(TargetController.YOU);
+        filter.add(new ControllerPredicate(TargetController.YOU));
         int amount = Math.min(count, game.getBattlefield().countAll(filter, player.getId(), game));
         Target target = new TargetControlledPermanent(amount, amount, filter, false);
 

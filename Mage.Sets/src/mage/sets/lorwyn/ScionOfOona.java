@@ -43,6 +43,7 @@ import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -54,7 +55,7 @@ public class ScionOfOona extends CardImpl<ScionOfOona> {
 
     static {
         filter.add(new SubtypePredicate("Faerie"));
-        filter.setTargetController(TargetController.YOU);
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public ScionOfOona(UUID ownerId) {

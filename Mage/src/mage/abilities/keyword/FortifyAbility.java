@@ -35,6 +35,7 @@ import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.common.AttachEffect;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -48,7 +49,7 @@ public class FortifyAbility extends ActivatedAbilityImpl<FortifyAbility> {
     private static final FilterLandPermanent filter = new FilterLandPermanent("land you control");
 
     static {
-        filter.setTargetController(TargetController.YOU);
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public FortifyAbility(Zone zone, AttachEffect effect, Cost cost) {

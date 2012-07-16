@@ -35,6 +35,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreatureOrPlayer;
 
 import java.util.UUID;
@@ -49,7 +50,7 @@ public class SpireBarrage extends CardImpl<SpireBarrage> {
 
     static {
         filter.add(new SubtypePredicate("Mountain"));
-        filter.setTargetController(TargetController.YOU);
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public SpireBarrage(UUID ownerId) {

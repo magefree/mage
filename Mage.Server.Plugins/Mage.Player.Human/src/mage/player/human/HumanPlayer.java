@@ -46,6 +46,7 @@ import mage.choices.ChoiceImpl;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterBlockingCreature;
 import mage.filter.common.FilterCreatureForCombat;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.draft.Draft;
 import mage.game.match.Match;
@@ -80,7 +81,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
     private static Map<String, Serializable> staticOptions = new HashMap<String, Serializable>();
 
     static {
-        filter.setTargetController(TargetController.YOU);
+        filter.add(new ControllerPredicate(TargetController.YOU));
         replacementEffectChoice.setMessage("Choose replacement effect");
         staticOptions.put("UI.right.btn.text", "Done");
     }

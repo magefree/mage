@@ -34,6 +34,7 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPlayer;
 
 import java.util.UUID;
@@ -48,7 +49,7 @@ public class Dreadwaters extends CardImpl<Dreadwaters> {
     private static final FilterLandPermanent filter = new FilterLandPermanent("lands you control");
 
     static {
-        filter.setTargetController(Constants.TargetController.YOU);
+        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
     }
 
     public Dreadwaters(UUID ownerId) {

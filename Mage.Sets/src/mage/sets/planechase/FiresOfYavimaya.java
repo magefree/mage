@@ -41,6 +41,7 @@ import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -52,7 +53,7 @@ public class FiresOfYavimaya extends CardImpl<FiresOfYavimaya> {
     private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Creatures you control");
 
     static {
-        filter.setTargetController(Constants.TargetController.YOU);
+        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
     }
 
     public FiresOfYavimaya(UUID ownerId) {

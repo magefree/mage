@@ -38,9 +38,9 @@ import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -79,7 +79,7 @@ class EmissaryOfHopeEffect extends OneShotEffect<EmissaryOfHopeEffect> {
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
-        filter.setTargetController(Constants.TargetController.YOU);
+        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
     }
 
     EmissaryOfHopeEffect() {

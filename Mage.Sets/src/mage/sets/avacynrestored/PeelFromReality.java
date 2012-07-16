@@ -37,6 +37,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -51,7 +52,7 @@ public class PeelFromReality extends CardImpl<PeelFromReality> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
 
     static {
-        filter.setTargetController(TargetController.NOT_YOU);
+        filter.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
 
     public PeelFromReality(UUID ownerId) {

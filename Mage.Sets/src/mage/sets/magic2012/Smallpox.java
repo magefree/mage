@@ -37,6 +37,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -76,9 +77,9 @@ class SmallpoxEffect extends OneShotEffect<SmallpoxEffect> {
 
     static {
         filterCreature.add(new CardTypePredicate(CardType.CREATURE));
-        filterCreature.setTargetController(Constants.TargetController.YOU);
+        filterCreature.add(new ControllerPredicate(Constants.TargetController.YOU));
         filterLand.add(new CardTypePredicate(CardType.LAND));
-        filterLand.setTargetController(Constants.TargetController.YOU);
+        filterLand.add(new ControllerPredicate(Constants.TargetController.YOU));
     }
 
     SmallpoxEffect() {

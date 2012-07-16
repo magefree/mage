@@ -40,6 +40,7 @@ import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -58,7 +59,7 @@ public class DungeonGeists extends CardImpl<DungeonGeists> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 
     static {
-        filter.setTargetController(Constants.TargetController.OPPONENT);
+        filter.add(new ControllerPredicate(Constants.TargetController.OPPONENT));
     }
 
     public DungeonGeists(UUID ownerId) {

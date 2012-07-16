@@ -40,6 +40,7 @@ import mage.abilities.effects.common.ExileTargetForSourceEffect;
 import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -52,7 +53,7 @@ public class Helvault extends CardImpl<Helvault> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
 
     static {
-        filter.setTargetController(TargetController.NOT_YOU);
+        filter.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
 
     public Helvault(UUID ownerId) {

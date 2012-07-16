@@ -42,6 +42,7 @@ import mage.abilities.keyword.LivingWeaponAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -53,7 +54,7 @@ public class Lashwrithe extends CardImpl<Lashwrithe> {
 
     static {
         filter.add(new SubtypePredicate("Swamp"));
-        filter.setTargetController(TargetController.YOU);
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public Lashwrithe(UUID ownerId) {

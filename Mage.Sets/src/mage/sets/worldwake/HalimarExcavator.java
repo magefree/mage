@@ -40,6 +40,7 @@ import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPlayer;
 
 /**
@@ -52,7 +53,7 @@ public class HalimarExcavator extends CardImpl<HalimarExcavator> {
 
     static {
         filter.add(new SubtypePredicate("Ally"));
-        filter.setTargetController(TargetController.YOU);
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public HalimarExcavator(UUID ownerId) {

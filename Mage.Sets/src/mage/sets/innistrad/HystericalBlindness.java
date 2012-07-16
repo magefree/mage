@@ -35,6 +35,7 @@ import mage.Constants.TargetController;
 import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -45,7 +46,7 @@ public class HystericalBlindness extends CardImpl<HystericalBlindness> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures your opponents control");
 
     static {
-        filter.setTargetController(TargetController.OPPONENT);
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
     public HystericalBlindness(UUID ownerId) {

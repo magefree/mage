@@ -36,6 +36,7 @@ import mage.abilities.effects.common.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPlayer;
 
 /**
@@ -48,7 +49,7 @@ public class MindSludge extends CardImpl<MindSludge> {
 
     static {
         filter.add(new SubtypePredicate("Swamp"));
-        filter.setTargetController(TargetController.YOU);
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public MindSludge(UUID ownerId) {

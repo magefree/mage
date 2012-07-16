@@ -37,6 +37,7 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -80,7 +81,7 @@ class DivineReckoningEffect extends OneShotEffect<DivineReckoningEffect> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control");
 
     static {
-        filter.setTargetController(Constants.TargetController.YOU);
+        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
     }
 
     public DivineReckoningEffect() {

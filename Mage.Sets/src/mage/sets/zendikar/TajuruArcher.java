@@ -42,6 +42,7 @@ import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -55,7 +56,7 @@ public class TajuruArcher extends CardImpl<TajuruArcher> {
 
     static {
         filter.add(new SubtypePredicate("Ally"));
-        filter.setTargetController(Constants.TargetController.YOU);
+        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
         filterTarget.add(new AbilityPredicate(FlyingAbility.class));
     }
 

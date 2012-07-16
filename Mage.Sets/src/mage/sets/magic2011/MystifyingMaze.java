@@ -44,6 +44,7 @@ import mage.abilities.effects.common.ReturnFromExileEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterAttackingCreature;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -57,7 +58,7 @@ public class MystifyingMaze extends CardImpl<MystifyingMaze> {
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking creature an opponent controls");
 
     static {
-        filter.setTargetController(TargetController.OPPONENT);
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
     public MystifyingMaze(UUID ownerId) {

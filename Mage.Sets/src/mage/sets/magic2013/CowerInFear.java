@@ -35,6 +35,7 @@ import mage.Constants.Rarity;
 import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -45,7 +46,7 @@ public class CowerInFear extends CardImpl<CowerInFear> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures your opponents control");
 
     static {
-        filter.setTargetController(Constants.TargetController.OPPONENT);
+        filter.add(new ControllerPredicate(Constants.TargetController.OPPONENT));
     }
 
     public CowerInFear(UUID ownerId) {

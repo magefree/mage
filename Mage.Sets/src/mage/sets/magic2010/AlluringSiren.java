@@ -41,6 +41,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.AttacksIfAbleTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -52,7 +53,7 @@ public class AlluringSiren extends CardImpl<AlluringSiren> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 
     static {
-        filter.setTargetController(TargetController.OPPONENT);
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
     public AlluringSiren(UUID ownerId) {

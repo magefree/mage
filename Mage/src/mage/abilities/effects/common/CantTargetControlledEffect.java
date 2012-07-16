@@ -35,6 +35,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterStackObject;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -87,7 +88,7 @@ public class CantTargetControlledEffect extends ReplacementEffectImpl<CantTarget
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == EventType.TARGET) {
-            filterTarget.setTargetController(TargetController.YOU);
+            filterTarget.add(new ControllerPredicate(TargetController.YOU));
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null && filterTarget.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
                 if (filterSource == null)

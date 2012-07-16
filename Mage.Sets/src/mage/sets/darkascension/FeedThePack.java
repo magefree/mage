@@ -38,6 +38,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterNonTokenPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.WolfToken;
@@ -77,7 +78,7 @@ class FeedThePackEffect extends OneShotEffect<FeedThePackEffect> {
 
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.setTargetController(Constants.TargetController.YOU);
+        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
     }
 
     public FeedThePackEffect() {

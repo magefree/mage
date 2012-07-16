@@ -39,6 +39,7 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -49,7 +50,7 @@ public class ScourgeOfGeierReach extends CardImpl<ScourgeOfGeierReach> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("");
 
     static {
-        filter.setTargetController(TargetController.OPPONENT);
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
     public ScourgeOfGeierReach(UUID ownerId) {

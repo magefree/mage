@@ -41,6 +41,7 @@ import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -52,7 +53,7 @@ public class EarthServant extends CardImpl<EarthServant> {
 
     static {
         filter.add(new SubtypePredicate("Mountain"));
-        filter.setTargetController(TargetController.YOU);
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public EarthServant(UUID ownerId) {

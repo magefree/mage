@@ -40,6 +40,7 @@ import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -52,7 +53,7 @@ public class DeceiverExarch extends CardImpl<DeceiverExarch> {
     private static final FilterPermanent filter = new FilterPermanent("permanent an opponent controls");
 
     static {
-        filter.setTargetController(TargetController.OPPONENT);
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
     public DeceiverExarch(UUID ownerId) {
