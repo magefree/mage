@@ -37,6 +37,8 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -51,8 +53,8 @@ public class DiscipleOfBolas extends CardImpl<DiscipleOfBolas> {
     final private static FilterCreaturePermanent filter = new FilterCreaturePermanent(" another creature");
 
     static {
-        filter.setAnother(true);
-        filter.setTargetController(Constants.TargetController.YOU);
+        filter.add(new AnotherPredicate());
+        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
     }
 
     public DiscipleOfBolas(UUID ownerId) {
