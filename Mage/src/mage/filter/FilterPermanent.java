@@ -40,12 +40,10 @@ import mage.game.permanent.Permanent;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author North
  */
 public class FilterPermanent extends FilterObject<Permanent> {
     protected List<ObjectPlayerPredicate<ObjectPlayer<Permanent>>> extraPredicates = new ArrayList<ObjectPlayerPredicate<ObjectPlayer<Permanent>>>();
-    protected List<UUID> controllerId = new ArrayList<UUID>();
-    protected boolean notController;
 
     public FilterPermanent() {
         super("permanent");
@@ -53,24 +51,11 @@ public class FilterPermanent extends FilterObject<Permanent> {
 
     public FilterPermanent(final FilterPermanent filter) {
         super(filter);
-        this.controllerId  = new ArrayList<UUID>(filter.controllerId);
-        this.notController = filter.notController;
         this.extraPredicates = new ArrayList<ObjectPlayerPredicate<ObjectPlayer<Permanent>>>(extraPredicates);
     }
 
     public FilterPermanent(String name) {
         super(name);
-    }
-
-    @Override
-    public boolean match(Permanent permanent, Game game) {
-        if (!super.match(permanent, game))
-            return notFilter;
-
-        if (controllerId.size() > 0 && controllerId.contains(permanent.getControllerId()) == notController)
-            return notFilter;
-
-        return !notFilter;
     }
 
     public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
@@ -82,14 +67,6 @@ public class FilterPermanent extends FilterObject<Permanent> {
 
     public void add(ObjectPlayerPredicate predicate) {
         extraPredicates.add(predicate);
-    }
-
-    public List<UUID> getControllerId() {
-        return controllerId;
-    }
-
-    public void setNotController(boolean notController) {
-        this.notController = notController;
     }
 
     @Override

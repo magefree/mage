@@ -40,6 +40,7 @@ import mage.abilities.effects.common.SkipNextPlayerUntapStepEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -85,8 +86,10 @@ public class YoseiTheMorningStar extends CardImpl<YoseiTheMorningStar> {
 
  class YoseiTheMorningStarTarget extends TargetPermanent {
 
+     private static final FilterPermanent filterTemplate = new FilterPermanent("up to five target permanents that player controls that will be tapped");
+
     public YoseiTheMorningStarTarget() {
-        super(0, 5, new FilterPermanent("up to five target permanents that player controls that will be tapped"), false);
+        super(0, 5, filterTemplate, false);
     }
 
     public YoseiTheMorningStarTarget(final YoseiTheMorningStarTarget target) {
@@ -97,8 +100,8 @@ public class YoseiTheMorningStar extends CardImpl<YoseiTheMorningStar> {
         public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
                 Player player = game.getPlayer(source.getFirstTarget());
                 if (player != null) {
-                    filter.getControllerId().clear();
-                    filter.getControllerId().add(player.getId());
+                    this.filter = filterTemplate.copy();
+                    this.filter.add(new ControllerIdPredicate(player.getId()));
                     return super.canTarget(controllerId, id, source, game);
                 }
         return false;

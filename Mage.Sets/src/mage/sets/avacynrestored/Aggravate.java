@@ -38,6 +38,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RequirementEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -95,7 +96,7 @@ class AggraveteEffect extends OneShotEffect<AggraveteEffect> {
         Player player = game.getPlayer(source.getFirstTarget());
         if (player != null) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
-            filter.getControllerId().add(player.getId());
+            filter.add(new ControllerIdPredicate(player.getId()));
             List<Permanent> creatures = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getId(), game);
             for (Permanent creature : creatures) {
                 creature.damage(1, source.getSourceId(), game, true, false);

@@ -38,6 +38,7 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -89,7 +90,7 @@ class CyclopsGladiatorEffect extends OneShotEffect<CyclopsGladiatorEffect> {
         UUID defenderId = game.getCombat().getDefendingPlayer(source.getSourceId());
         if (defenderId != null) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
-            filter.getControllerId().add(defenderId);
+            filter.add(new ControllerIdPredicate(defenderId));
             TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
             Player player = game.getPlayer(source.getControllerId());
             if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {

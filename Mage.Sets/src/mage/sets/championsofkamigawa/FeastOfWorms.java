@@ -39,6 +39,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -98,15 +99,13 @@ class FeastOfWormsEffect extends OneShotEffect<FeastOfWormsEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        //Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
         Player targetPlayer = game.getPlayer(permanent.getControllerId());
         if (targetPlayer != null && permanent != null
                 && (permanent.getSupertype().get(0).toString().equals("Legendary"))) {
                 FilterControlledPermanent filter = new FilterControlledPermanent("land to sacrifice");
                 filter.add(new CardTypePredicate(CardType.LAND));
-                filter.getControllerId().add(targetPlayer.getId());
-                filter.setNotController(false);
+                filter.add(new ControllerIdPredicate(targetPlayer.getId()));
                 TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, false);
 
                 if (target.canChoose(targetPlayer.getId(), game)) {
