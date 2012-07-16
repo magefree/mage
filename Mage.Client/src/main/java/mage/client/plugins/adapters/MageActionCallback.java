@@ -79,13 +79,53 @@ public class MageActionCallback implements ActionCallback {
     public void mouseEntered(MouseEvent e, final TransferData data) {
         hidePopup();
         cancelTimeout();
+
         this.popupCard = data.card;
         this.popupData = data;
 
         Component parentComponent = SwingUtilities.getRoot(data.component);
         Point parentPoint = parentComponent.getLocationOnScreen();
 
-        // Draw Arrows for targets
+        drawArrowsForTargets(data, parentPoint);
+        drawArrowsForSource(data, parentPoint);
+        drawArrowsForPairedCards(data, parentPoint);
+
+        showPopup(data, parentComponent, parentPoint);
+    }
+
+    private void drawArrowsForPairedCards(TransferData data, Point parentPoint) {
+        if (data.card.getPairedCard() != null) {
+            Point me = new Point(data.locationOnScreen);
+            me.translate(-parentPoint.x, -parentPoint.y);
+            UUID uuid = data.card.getPairedCard();
+            for (PlayAreaPanel pa : MageFrame.getGame(data.gameId).getPlayers().values()) {
+                MagePermanent permanent = pa.getBattlefieldPanel().getPermanents().get(uuid);
+                if (permanent != null) {
+                    Point target = permanent.getLocationOnScreen();
+                    target.translate(-parentPoint.x, -parentPoint.y);
+                    ArrowBuilder.addArrow((int) me.getX() + 35, (int) me.getY(), (int) target.getX() + 40, (int) target.getY() + 10, Color.green, ArrowBuilder.Type.PAIRED);
+                }
+            }
+        }
+    }
+
+    private void drawArrowsForSource(TransferData data, Point parentPoint) {
+        if (data.card.isAbility()) {
+            Point me = new Point(data.locationOnScreen);
+            me.translate(-parentPoint.x, -parentPoint.y);
+            UUID uuid = data.card.getParentId();
+            for (PlayAreaPanel pa : MageFrame.getGame(data.gameId).getPlayers().values()) {
+                MagePermanent permanent = pa.getBattlefieldPanel().getPermanents().get(uuid);
+                if (permanent != null) {
+                    Point source = permanent.getLocationOnScreen();
+                    source.translate(-parentPoint.x, -parentPoint.y);
+                    ArrowBuilder.addArrow((int) source.getX() + 40, (int) source.getY() + 10, (int) me.getX() + 35, (int) me.getY() + 20, Color.blue, ArrowBuilder.Type.SOURCE);
+                }
+            }
+        }
+    }
+
+    private void drawArrowsForTargets(TransferData data, Point parentPoint) {
         List<UUID> targets = data.card.getTargets();
         if (targets != null) {
             Point me = new Point(data.locationOnScreen);
@@ -109,38 +149,6 @@ public class MageActionCallback implements ActionCallback {
                 }
             }
         }
-
-        // Draw Arrows for source
-        if (data.card.isAbility()) {
-            Point me = new Point(data.locationOnScreen);
-            me.translate(-parentPoint.x, -parentPoint.y);
-            UUID uuid = data.card.getParentId();
-            for (PlayAreaPanel pa : MageFrame.getGame(data.gameId).getPlayers().values()) {
-                MagePermanent permanent = pa.getBattlefieldPanel().getPermanents().get(uuid);
-                if (permanent != null) {
-                    Point source = permanent.getLocationOnScreen();
-                    source.translate(-parentPoint.x, -parentPoint.y);
-                    ArrowBuilder.addArrow((int) source.getX() + 40, (int) source.getY() + 10, (int) me.getX() + 35, (int) me.getY() + 20, Color.blue, ArrowBuilder.Type.SOURCE);
-                }
-            }
-        }
-
-        // Draw Arrows for paired cards
-        if (data.card.getPairedCard() != null) {
-            Point me = new Point(data.locationOnScreen);
-            me.translate(-parentPoint.x, -parentPoint.y);
-            UUID uuid = data.card.getPairedCard();
-            for (PlayAreaPanel pa : MageFrame.getGame(data.gameId).getPlayers().values()) {
-                MagePermanent permanent = pa.getBattlefieldPanel().getPermanents().get(uuid);
-                if (permanent != null) {
-                    Point target = permanent.getLocationOnScreen();
-                    target.translate(-parentPoint.x, -parentPoint.y);
-                    ArrowBuilder.addArrow((int) me.getX() + 35, (int) me.getY(), (int) target.getX() + 40, (int) target.getY() + 10, Color.green, ArrowBuilder.Type.PAIRED);
-                }
-            }
-        }
-
-        showPopup(data, parentComponent, parentPoint);
     }
 
     private void showPopup(final TransferData data, final Component parentComponent, final Point parentPoint) {
@@ -150,14 +158,10 @@ public class MageActionCallback implements ActionCallback {
         }
 
         if (data.component instanceof MageCard) {
-            //String zone = ((MageCard)(data.component)).getZone();
-            //if (zone != null && zone.equals(Constants.Zone.HAND.toString())) {
-                // for performance getting cached value
-                String showTooltips = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_TOOLTIPS_ANY_ZONE, "true");
-                if (showTooltips.equals("false")) {
-                    return;
-                }
-            //}
+            String showTooltips = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_TOOLTIPS_ANY_ZONE, "true");
+            if (showTooltips.equals("false")) {
+                return;
+            }
         }
 
         if (cardInfoPane == null) {
@@ -169,47 +173,55 @@ public class MageActionCallback implements ActionCallback {
             popup = factory.getPopup(data.component, data.popupText, (int) data.locationOnScreen.getX() + data.popupOffsetX, (int) data.locationOnScreen.getY() + data.popupOffsetY + 40);
             popup.show();
         } else {
+            sumbitShowPopupTask(data, parentComponent, parentPoint);
+        }
+    }
 
-            ThreadUtils.threadPool2.submit(new Runnable() {
-                @Override
-                public void run() {
-                    ThreadUtils.sleep(300);
+    private void sumbitShowPopupTask(final TransferData data, final Component parentComponent, final Point parentPoint) {
+        ThreadUtils.threadPool2.submit(new Runnable() {
+            @Override
+            public void run() {
+                ThreadUtils.sleep(300);
 
-                    if (popupCard == null || !popupCard.equals(data.card)) {
+                if (popupCard == null || !popupCard.equals(data.card)) {
+                    return;
+                }
+
+                try {
+                    if (session == null || !state || enlarged) {
                         return;
                     }
 
-                    try {
-                        if (session == null || !state || enlarged) {
-                            return;
-                        }
-                        final Component popupContainer = MageFrame.getUI().getComponent(MageComponents.POPUP_CONTAINER);
-                        Component popup2 = MageFrame.getUI().getComponent(MageComponents.CARD_INFO_PANE);
-                        ((CardInfoPane) popup2).setCard(data.card);
-                        Point location = new Point((int) data.locationOnScreen.getX() + data.popupOffsetX - 40, (int) data.locationOnScreen.getY() + data.popupOffsetY - 40);
-                        location = GuiDisplayUtil.keepComponentInsideParent(location, parentPoint, popup2, parentComponent);
-                        location.translate(-parentPoint.x, -parentPoint.y);
-                        popupContainer.setLocation(location);
-                        ThreadUtils.sleep(200);
-                        final Component c = MageFrame.getUI().getComponent(MageComponents.DESKTOP_PANE);
-                        SwingUtilities.invokeLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                if (!state || enlarged) {
-                                    return;
-                                }
-                                popupContainer.setVisible(true);
-                                c.repaint();
-                            }
-                        }
-                        );
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
+                    final Component popupContainer = MageFrame.getUI().getComponent(MageComponents.POPUP_CONTAINER);
+                    Component popup2 = MageFrame.getUI().getComponent(MageComponents.CARD_INFO_PANE);
 
-        }
+                    ((CardInfoPane) popup2).setCard(data.card);
+
+                    Point location = new Point((int) data.locationOnScreen.getX() + data.popupOffsetX - 40, (int) data.locationOnScreen.getY() + data.popupOffsetY - 40);
+                    location = GuiDisplayUtil.keepComponentInsideParent(location, parentPoint, popup2, parentComponent);
+                    location.translate(-parentPoint.x, -parentPoint.y);
+                    popupContainer.setLocation(location);
+
+                    ThreadUtils.sleep(200);
+
+                    final Component c = MageFrame.getUI().getComponent(MageComponents.DESKTOP_PANE);
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (!state || enlarged) {
+                                return;
+                            }
+                            popupContainer.setVisible(true);
+                            c.repaint();
+                        }
+                    }
+                    );
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     @Override
@@ -231,21 +243,7 @@ public class MageActionCallback implements ActionCallback {
                         }
                         state = true;
                         Image image = card.getImage();
-                        if (image != null && image instanceof BufferedImage) {
-                            // XXX: scaled to fit width
-                            image = ImageHelper.getResizedImage((BufferedImage) image, bigCard.getWidth());
-                            bigCard.setCard(card.getOriginal().getId(), image, card.getOriginal().getRules(), card.isFoil());
-                            if (card.getOriginal().isAbility()) {
-                                bigCard.showTextComponent();
-                            } else {
-                                bigCard.hideTextComponent();
-                            }
-                        } else {
-                            JXPanel panel = GuiDisplayUtil.getDescription(card.getOriginal(), bigCard.getWidth(), bigCard.getHeight());
-                            panel.setVisible(true);
-                            bigCard.hideTextComponent();
-                            bigCard.addJXPanel(card.getOriginal().getId(), panel);
-                        }
+                        displayCardInfo(card, image, bigCard);
                     }
                 }
             } else {
@@ -358,39 +356,31 @@ public class MageActionCallback implements ActionCallback {
                     MageCard card = (MageCard) data.component;
                     Image image = card.getImage();
                     BigCard bigCard = (BigCard)cardPreview;
-                    if (image != null && image instanceof BufferedImage) {
-                        // XXX: scaled to fit width
-                        image = ImageHelper.getResizedImage((BufferedImage) image, bigCard.getWidth());
-                        bigCard.setCard(card.getOriginal().getId(), image, card.getOriginal().getRules(), card.isFoil());
-                        if (card.getOriginal().isAbility()) {
-                            bigCard.showTextComponent();
-                        } else {
-                            bigCard.hideTextComponent();
-                        }
-                    } else {
-                        JXPanel panel = GuiDisplayUtil.getDescription(card.getOriginal(), bigCard.getWidth(), bigCard.getHeight());
-                        panel.setVisible(true);
-                        bigCard.hideTextComponent();
-                        bigCard.addJXPanel(card.getOriginal().getId(), panel);
-                    }
+                    displayCardInfo(card, image, bigCard);
 
-                    /*final Component c = MageFrame.getUI().getComponent(MageComponents.DESKTOP_PANE);
-                    SwingUtilities.invokeLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (!enlarged) {
-                                return;
-                            }
-                            popupContainer.setVisible(true);
-                            c.repaint();
-                        }
-                    }
-                    );*/
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
+    }
+
+    private void displayCardInfo(MageCard card, Image image, BigCard bigCard) {
+        if (image != null && image instanceof BufferedImage) {
+            // XXX: scaled to fit width
+            image = ImageHelper.getResizedImage((BufferedImage) image, bigCard.getWidth());
+            bigCard.setCard(card.getOriginal().getId(), image, card.getOriginal().getRules(), card.isFoil());
+            if (card.getOriginal().isAbility()) {
+                bigCard.showTextComponent();
+            } else {
+                bigCard.hideTextComponent();
+            }
+        } else {
+            JXPanel panel = GuiDisplayUtil.getDescription(card.getOriginal(), bigCard.getWidth(), bigCard.getHeight());
+            panel.setVisible(true);
+            bigCard.hideTextComponent();
+            bigCard.addJXPanel(card.getOriginal().getId(), panel);
+        }
     }
 
     private synchronized void startHideTimeout() {
