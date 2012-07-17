@@ -28,7 +28,6 @@
 
 package mage.sets.conflux;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
@@ -36,13 +35,15 @@ import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.keyword.HasteAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.UnearthAbility;
 import mage.cards.CardImpl;
 import mage.game.events.GameEvent.EventType;
 
+import java.util.UUID;
+
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class HellsparkElemental extends CardImpl<HellsparkElemental> {
@@ -55,10 +56,10 @@ public class HellsparkElemental extends CardImpl<HellsparkElemental> {
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 
+        this.addAbility(TrampleAbility.getInstance());
         this.addAbility(HasteAbility.getInstance());
         this.addAbility(new OnEventTriggeredAbility(EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new SacrificeSourceEffect()));
         this.addAbility(new UnearthAbility(new ManaCostsImpl("{1}{R}")));
-
     }
 
     public HellsparkElemental(final HellsparkElemental card) {
