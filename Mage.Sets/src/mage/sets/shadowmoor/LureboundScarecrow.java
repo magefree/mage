@@ -34,8 +34,7 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.StateTriggeredAbility;
-import mage.abilities.common.ZoneChangeTriggeredAbility;
-import mage.abilities.effects.Effect;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.Card;
@@ -64,7 +63,7 @@ public class LureboundScarecrow extends CardImpl<LureboundScarecrow> {
         this.toughness = new MageInt(4);
 
         // As Lurebound Scarecrow enters the battlefield, choose a color.
-        this.addAbility(new AsEntersBattlefieldTriggeredAbility(new LureboundScarecrowChooseColorEffect()));
+        this.addAbility(new AsEntersBattlefieldAbility(new LureboundScarecrowChooseColorEffect()));
         
         // When you control no permanents of the chosen color, sacrifice Lurebound Scarecrow.
         this.addAbility(new LureboundScarecrowTriggeredAbility());
@@ -78,27 +77,6 @@ public class LureboundScarecrow extends CardImpl<LureboundScarecrow> {
     public LureboundScarecrow copy() {
         return new LureboundScarecrow(this);
     }
-}
-
-class AsEntersBattlefieldTriggeredAbility extends ZoneChangeTriggeredAbility<AsEntersBattlefieldTriggeredAbility> {
-
-    public AsEntersBattlefieldTriggeredAbility(Effect effect) {
-        this(effect, false);
-    }
-
-    public AsEntersBattlefieldTriggeredAbility(Effect effect, boolean optional) {
-        super(Constants.Zone.STACK, effect, "As this enters the battlefield, ", optional);
-    }
-
-    public AsEntersBattlefieldTriggeredAbility(AsEntersBattlefieldTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public AsEntersBattlefieldTriggeredAbility copy() {
-        return new AsEntersBattlefieldTriggeredAbility(this);
-    }
-
 }
 
 class LureboundScarecrowChooseColorEffect extends OneShotEffect<LureboundScarecrowChooseColorEffect> {

@@ -33,17 +33,17 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.Ability;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.AsEntersBattlefieldAbility;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
-import mage.abilities.common.EntersBattlefieldAbility;
 import mage.choices.ChoiceColor;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
+import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -59,7 +59,7 @@ public class CurseOfWizardry extends CardImpl<CurseOfWizardry> {
         this.color.setBlack(true);
 
         // As Curse of Wizardry enters the battlefield, choose a color.
-        this.addAbility(new EntersBattlefieldAbility(new CurseOfWizardryChooseColorEffect()));
+        this.addAbility(new AsEntersBattlefieldAbility(new CurseOfWizardryChooseColorEffect()));
 
         // Whenever a player casts a spell of the chosen color, that player loses 1 life.
         this.addAbility(new CurseOfWizardryPlayerCastsSpellChosenColorTriggeredAbility());
@@ -80,7 +80,7 @@ class CurseOfWizardryChooseColorEffect extends OneShotEffect<CurseOfWizardryChoo
 
     public CurseOfWizardryChooseColorEffect() {
         super(Constants.Outcome.Detriment);
-    staticText = "As {this} enters the battlefield, choose a color";
+        staticText = "choose a color";
     }
 
     public CurseOfWizardryChooseColorEffect(final CurseOfWizardryChooseColorEffect effect) {

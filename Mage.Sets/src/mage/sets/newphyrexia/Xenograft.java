@@ -37,7 +37,7 @@ import mage.Constants.Rarity;
 import mage.Constants.SubLayer;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -63,7 +63,7 @@ public class Xenograft extends CardImpl<Xenograft> {
         this.color.setBlue(true);
 
         // As Xenograft enters the battlefield, choose a creature type.
-        this.addAbility(new EntersBattlefieldAbility(new XenograftEffect()));
+        this.addAbility(new AsEntersBattlefieldAbility(new XenograftEffect()));
         // Each creature you control is the chosen type in addition to its other types.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new XenograftAddSubtypeEffect()));
     }
@@ -82,7 +82,7 @@ class XenograftEffect extends OneShotEffect<XenograftEffect> {
 
     public XenograftEffect() {
         super(Outcome.DrawCard);
-        staticText = "As {this} enters the battlefield, choose a creature type";
+        staticText = "choose a creature type";
     }
 
     public XenograftEffect(final XenograftEffect effect) {

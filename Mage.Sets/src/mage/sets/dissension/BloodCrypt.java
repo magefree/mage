@@ -31,7 +31,7 @@ package mage.sets.dissension;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
 import mage.abilities.mana.BlackManaAbility;
@@ -51,7 +51,7 @@ public class BloodCrypt extends CardImpl<BloodCrypt> {
         this.subtype.add("Mountain");
         this.addAbility(new BlackManaAbility());
         this.addAbility(new RedManaAbility());
-        this.addAbility(new EntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "As {this} enters the battlefield, you may pay 2 life. If you don't, {this} enters the battlefield tapped"));
+        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "you may pay 2 life. If you don't, {this} enters the battlefield tapped"));
     }
 
     public BloodCrypt (final BloodCrypt card) {

@@ -31,7 +31,7 @@ package mage.sets.guildpact;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
 import mage.abilities.mana.BlueManaAbility;
@@ -51,7 +51,7 @@ public class SteamVents extends CardImpl<SteamVents> {
         this.subtype.add("Mountain");
         this.addAbility(new BlueManaAbility());
         this.addAbility(new RedManaAbility());
-        this.addAbility(new EntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "As Steam Vents enters the battlefield, you may pay 2 life. If you don't, Steam Vents enters the battlefield tapped"));
+        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "you may pay 2 life. If you don't, Steam Vents enters the battlefield tapped"));
     }
 
     public SteamVents (final SteamVents card) {

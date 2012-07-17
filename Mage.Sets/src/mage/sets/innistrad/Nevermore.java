@@ -35,7 +35,7 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -60,7 +60,7 @@ public class Nevermore extends CardImpl<Nevermore> {
         this.color.setWhite(true);
 
         //As Nevermore enters the battlefield, name a nonland card.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new NevermoreEffect1()));
+        this.addAbility(new AsEntersBattlefieldAbility(new NevermoreEffect1()));
 
         //The named card can't be cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NevermoreEffect2()));

@@ -36,6 +36,7 @@ import mage.Constants.Zone;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -61,7 +62,7 @@ public class CagedSun extends CardImpl<CagedSun> {
         this.expansionSetCode = "NPH";
 
         // As Caged Sun enters the battlefield, choose a color.
-        this.addAbility(new EntersBattlefieldAbility(new CagedSunEffect1()));
+        this.addAbility(new AsEntersBattlefieldAbility(new CagedSunEffect1()));
 
         // Creatures you control of the chosen color get +1/+1.
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new CagedSunEffect2()));
@@ -84,7 +85,7 @@ class CagedSunEffect1 extends OneShotEffect<CagedSunEffect1> {
 
     public CagedSunEffect1() {
         super(Constants.Outcome.BoostCreature);
-        staticText = "As {this} enters the battlefield, choose a color";
+        staticText = "choose a color";
     }
 
     public CagedSunEffect1(final CagedSunEffect1 effect) {

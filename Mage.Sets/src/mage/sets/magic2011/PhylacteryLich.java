@@ -36,7 +36,7 @@ import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.StateTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
@@ -64,7 +64,7 @@ public class PhylacteryLich extends CardImpl<PhylacteryLich> {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
-        this.addAbility(new EntersBattlefieldAbility(new PhylacteryLichEffect(), "put a phylactery counter on an artifact you control"));
+        this.addAbility(new AsEntersBattlefieldAbility(new PhylacteryLichEffect(), "put a phylactery counter on an artifact you control"));
         this.addAbility(IndestructibleAbility.getInstance());
         this.addAbility(new PhylacteryLichAbility());
     }

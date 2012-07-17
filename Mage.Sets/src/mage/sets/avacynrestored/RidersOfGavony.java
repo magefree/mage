@@ -32,7 +32,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -69,7 +69,7 @@ public class RidersOfGavony extends CardImpl<RidersOfGavony> {
         this.addAbility(VigilanceAbility.getInstance());
 
         // As Riders of Gavony enters the battlefield, choose a creature type.
-        this.addAbility(new EntersBattlefieldAbility(new RidersOfGavonyEffect()));
+        this.addAbility(new AsEntersBattlefieldAbility(new RidersOfGavonyEffect()));
 
         // Human creatures you control have protection from creatures of the chosen type.
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new RidersOfGavonyGainAbilityControlledEffect()));
@@ -89,7 +89,7 @@ class RidersOfGavonyEffect extends OneShotEffect<RidersOfGavonyEffect> {
 
     public RidersOfGavonyEffect() {
         super(Constants.Outcome.BoostCreature);
-        staticText = "As {this} enters the battlefield, choose a creature type";
+        staticText = "choose a creature type";
     }
 
     public RidersOfGavonyEffect(final RidersOfGavonyEffect effect) {

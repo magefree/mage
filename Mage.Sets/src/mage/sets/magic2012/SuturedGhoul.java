@@ -32,7 +32,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.OneShotEffect;
@@ -68,7 +68,7 @@ public class SuturedGhoul extends CardImpl<SuturedGhoul> {
         this.addAbility(TrampleAbility.getInstance());
 
         // As Sutured Ghoul enters the battlefield, exile any number of creature cards from your graveyard.
-        this.addAbility(new EntersBattlefieldAbility(new SuturedGhoulEffect(), staticText));
+        this.addAbility(new AsEntersBattlefieldAbility(new SuturedGhoulEffect(), staticText));
 
         // Sutured Ghoul's power is equal to the total power of the exiled cards and its toughness is equal to their total toughness.
         BoostSourceEffect effect = new BoostSourceEffect(new SuturedGhoulPowerCount(), new SuturedGhoulToughnessCount(), Constants.Duration.WhileOnBattlefield);

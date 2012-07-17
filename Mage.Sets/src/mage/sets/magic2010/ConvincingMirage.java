@@ -37,7 +37,7 @@ import mage.Constants.Rarity;
 import mage.Constants.SubLayer;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -74,7 +74,7 @@ public class ConvincingMirage extends CardImpl<ConvincingMirage> {
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         // As Convincing Mirage enters the battlefield, choose a basic land type.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ConvincingMirageEffect(), false));
+        this.addAbility(new AsEntersBattlefieldAbility(new ConvincingMirageEffect()));
         // Enchanted land is the chosen type.
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);

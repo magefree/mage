@@ -34,7 +34,7 @@ import mage.Constants.Rarity;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -63,14 +63,14 @@ import java.util.UUID;
  */
 public class CavernOfSouls extends CardImpl<CavernOfSouls> {
 
-    private static final String ruleText = "As Cavern of Souls enters the battlefield, choose a creature type";
+    private static final String ruleText = "choose a creature type";
 
     public CavernOfSouls(UUID ownerId) {
         super(ownerId, 226, "Cavern of Souls", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "AVR";
 
         // As Cavern of Souls enters the battlefield, choose a creature type.
-        this.addAbility(new EntersBattlefieldAbility(new CavernOfSoulsEffect(), ruleText));
+        this.addAbility(new AsEntersBattlefieldAbility(new CavernOfSoulsEffect(), ruleText));
 
         // {tap}: Add {1} to your mana pool.
         this.addAbility(new ColorlessManaAbility());

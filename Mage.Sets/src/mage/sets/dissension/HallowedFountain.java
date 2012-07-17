@@ -31,7 +31,7 @@ package mage.sets.dissension;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
 import mage.abilities.mana.BlueManaAbility;
@@ -51,7 +51,7 @@ public class HallowedFountain extends CardImpl<HallowedFountain> {
         this.subtype.add("Island");
         this.addAbility(new WhiteManaAbility());
         this.addAbility(new BlueManaAbility());
-        this.addAbility(new EntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "As Hallowed Fountain enters the battlefield, you may pay 2 life. If you don't, Hallowed Fountain enters the battlefield tapped"));
+        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "you may pay 2 life. If you don't, Hallowed Fountain enters the battlefield tapped"));
     }
 
     public HallowedFountain (final HallowedFountain card) {

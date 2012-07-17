@@ -37,7 +37,7 @@ import mage.Constants.Zone;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -64,7 +64,7 @@ public class PhyrexianRevoker extends CardImpl<PhyrexianRevoker> {
         this.toughness = new MageInt(1);
 
         // As Phyrexian Revoker enters the battlefield, name a nonland card.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new PhyrexianRevokerEffect1()));
+        this.addAbility(new AsEntersBattlefieldAbility(new PhyrexianRevokerEffect1()));
 
         // Activated abilities of sources with the chosen name can't be activated.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhyrexianRevokerEffect2()));

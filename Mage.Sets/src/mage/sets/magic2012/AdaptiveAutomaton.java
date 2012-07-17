@@ -33,7 +33,7 @@ import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -62,7 +62,7 @@ public class AdaptiveAutomaton extends CardImpl<AdaptiveAutomaton> {
         this.toughness = new MageInt(2);
 
         // As Adaptive Automaton enters the battlefield, choose a creature type.
-        this.addAbility(new EntersBattlefieldAbility(new AdaptiveAutomatonEffect()));
+        this.addAbility(new AsEntersBattlefieldAbility(new AdaptiveAutomatonEffect()));
         // Adaptive Automaton is the chosen type in addition to its other types.
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new AdaptiveAutomatonAddSubtypeEffect()));
         // Other creatures you control of the chosen type get +1/+1.
@@ -83,7 +83,7 @@ class AdaptiveAutomatonEffect extends OneShotEffect<AdaptiveAutomatonEffect> {
 
     public AdaptiveAutomatonEffect() {
         super(Constants.Outcome.BoostCreature);
-        staticText = "As {this} enters the battlefield, choose a creature type";
+        staticText = "choose a creature type";
     }
 
     public AdaptiveAutomatonEffect(final AdaptiveAutomatonEffect effect) {

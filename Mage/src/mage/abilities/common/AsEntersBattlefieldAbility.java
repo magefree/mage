@@ -25,42 +25,38 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.abilities.common;
 
-package mage.sets.guildpact;
-
-import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.abilities.common.AsEntersBattlefieldAbility;
-import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
-import mage.abilities.mana.BlackManaAbility;
-import mage.abilities.mana.WhiteManaAbility;
-import mage.cards.CardImpl;
+import mage.Constants;
+import mage.abilities.StaticAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.EntersBattlefieldEffect;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class GodlessShrine extends CardImpl<GodlessShrine> {
+public class AsEntersBattlefieldAbility extends StaticAbility<AsEntersBattlefieldAbility> {
 
-    public GodlessShrine (UUID ownerId) {
-        super(ownerId, 157, "Godless Shrine", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "GPT";
-        this.subtype.add("Plains");
-        this.subtype.add("Swamp");
-        this.addAbility(new WhiteManaAbility());
-        this.addAbility(new BlackManaAbility());
-        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "you may pay 2 life. If you don't, Godless Shrine enters the battlefield tapped"));
+    public AsEntersBattlefieldAbility(Effect effect) {
+        super(Constants.Zone.BATTLEFIELD, new EntersBattlefieldEffect(effect));
     }
 
-    public GodlessShrine (final GodlessShrine card) {
-        super(card);
+    public AsEntersBattlefieldAbility(Effect effect, String text) {
+        super(Constants.Zone.BATTLEFIELD, new EntersBattlefieldEffect(effect, text));
+    }
+
+    public AsEntersBattlefieldAbility(AsEntersBattlefieldAbility ability) {
+        super(ability);
     }
 
     @Override
-    public GodlessShrine copy() {
-        return new GodlessShrine(this);
+    public AsEntersBattlefieldAbility copy() {
+        return new AsEntersBattlefieldAbility(this);
     }
 
+    @Override
+    public String getRule() {
+        return "As {this} enters the battlefield, " + super.getRule();
+    }
 }

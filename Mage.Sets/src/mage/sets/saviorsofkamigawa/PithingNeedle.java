@@ -33,7 +33,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -47,7 +47,7 @@ import mage.sets.Sets;
 
 /**
  *
- * @author noxx and jeffwadsworth
+ * @author jeffwadsworth, nox
  */
 public class PithingNeedle extends CardImpl<PithingNeedle> {
 
@@ -56,7 +56,7 @@ public class PithingNeedle extends CardImpl<PithingNeedle> {
         this.expansionSetCode = "SOK";
 
         // As Pithing Needle enters the battlefield, name a card.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new NameCard()));
+        this.addAbility(new AsEntersBattlefieldAbility(new NameCard()));
         
         // Activated abilities of sources with the chosen name can't be activated unless they're mana abilities.
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new PithingNeedleEffect()));
@@ -148,4 +148,3 @@ class PithingNeedleEffect extends ReplacementEffectImpl<PithingNeedleEffect> {
         return false;
     }
 }
-
