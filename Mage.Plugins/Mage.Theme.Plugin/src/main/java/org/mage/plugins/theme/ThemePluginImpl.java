@@ -1,22 +1,20 @@
 package org.mage.plugins.theme;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.util.Map;
-
-import javax.imageio.ImageIO;
-import javax.swing.JComponent;
-
 import mage.components.ImagePanel;
 import mage.interfaces.plugin.ThemePlugin;
 import net.xeoh.plugins.base.annotations.PluginImplementation;
 import net.xeoh.plugins.base.annotations.events.Init;
 import net.xeoh.plugins.base.annotations.events.PluginLoaded;
 import net.xeoh.plugins.base.annotations.meta.Author;
-
 import org.apache.log4j.Logger;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.Map;
 
 @PluginImplementation
 @Author(name = "nantuko")
@@ -39,7 +37,7 @@ public class ThemePluginImpl implements ThemePlugin {
     }
 
     public void applyInGame(Map<String, JComponent> ui) {
-        String filename = "/wood.png";
+        String filename = "/dragon.png";
         try {
             InputStream is = this.getClass().getResourceAsStream(filename);
 
