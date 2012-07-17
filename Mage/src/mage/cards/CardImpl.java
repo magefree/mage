@@ -154,16 +154,22 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 
     @Override
     public List<String> getRules() {
-        List<String> rules = abilities.getRules(this.name);
-        if (cardType.contains(CardType.INSTANT) || cardType.contains(CardType.SORCERY)) {
-            rules.add(0, getSpellAbility().getRule(this.name));
-        }
-        if (info != null) {
-            for (String data : info.values()) {
-                rules.add(data);
+        try {
+            List<String> rules = abilities.getRules(this.name);
+            if (cardType.contains(CardType.INSTANT) || cardType.contains(CardType.SORCERY)) {
+                rules.add(0, getSpellAbility().getRule(this.name));
             }
+            if (info != null) {
+                for (String data : info.values()) {
+                    rules.add(data);
+                }
+                return rules;
+            }
+        } catch (Exception e) {
+            System.out.println("Exception in rules generation for card: " + this.getName());
+            e.printStackTrace();
         }
-        return rules;
+        return new ArrayList<String>();
     }
 
     @Override
