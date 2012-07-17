@@ -157,4 +157,10 @@ public class MageTray {
             state = 3;
         }
     }
+
+    public void displayMessage(String message) {
+        if (trayIcon != null) {
+            trayIcon.displayMessage("Mage", message, TrayIcon.MessageType.INFO);
+        }
+    }
 }
