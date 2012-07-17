@@ -39,6 +39,7 @@ import mage.abilities.keyword.HexproofAbility;
 import mage.abilities.keyword.LeylineAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterStackObject;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -49,7 +50,7 @@ public class LeylineOfSanctity extends CardImpl<LeylineOfSanctity> {
     private static final FilterStackObject filter = new FilterStackObject("spells or abilities your opponents control");
 
     static {
-        filter.setTargetController(TargetController.OPPONENT);
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
     public LeylineOfSanctity(UUID ownerId) {

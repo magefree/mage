@@ -39,6 +39,7 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterStackObject;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -55,7 +56,7 @@ public class Asceticism extends CardImpl<Asceticism> {
     private static final FilterStackObject filter = new FilterStackObject("spells or abilities your opponents control");
 
     static {
-        filter.setTargetController(Constants.TargetController.OPPONENT);
+        filter.add(new ControllerPredicate(Constants.TargetController.OPPONENT));
     }
 
     public Asceticism(UUID ownerId) {

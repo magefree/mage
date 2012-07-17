@@ -28,13 +28,16 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.Predicate;
+import mage.game.Game;
+import mage.game.stack.Spell;
 
 /**
  *
@@ -45,7 +48,7 @@ public class SecretsOfTheDead extends CardImpl<SecretsOfTheDead> {
     private final static FilterSpell filter = new FilterSpell("a spell from your graveyard");
 
     static {
-        filter.setFromZone(Constants.Zone.GRAVEYARD);
+        filter.add(new SpellZonePredicate(Zone.GRAVEYARD));
     }
 
     public SecretsOfTheDead(UUID ownerId) {
@@ -65,5 +68,24 @@ public class SecretsOfTheDead extends CardImpl<SecretsOfTheDead> {
     @Override
     public SecretsOfTheDead copy() {
         return new SecretsOfTheDead(this);
+    }
+}
+
+class SpellZonePredicate implements Predicate<Spell> {
+
+    private final Zone zone;
+
+    public SpellZonePredicate(Zone zone) {
+        this.zone = zone;
+    }
+
+    @Override
+    public boolean apply(Spell input, Game game) {
+        return input.getFromZone().match(zone);
+    }
+
+    @Override
+    public String toString() {
+        return "SpellZone(" + zone + ')';
     }
 }

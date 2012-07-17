@@ -27,7 +27,6 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.effects.common.CounterTargetEffect;
@@ -35,7 +34,7 @@ import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
+import mage.filter.predicate.Predicate;
 import mage.target.TargetSpell;
 import mage.watchers.common.CastSpellLastTurnWatcher;
 
@@ -47,6 +46,12 @@ import java.util.UUID;
  */
 public class SecondGuess extends CardImpl<SecondGuess> {
 
+    private static final FilterSpell filter = new FilterSpell("spell that's the second spell cast this turn");
+
+    static {
+        filter.add(new SecondSpellPredicate());
+    }
+
     public SecondGuess(UUID ownerId) {
         super(ownerId, 74, "Second Guess", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "AVR";
@@ -55,7 +60,7 @@ public class SecondGuess extends CardImpl<SecondGuess> {
 
         // Counter target spell that's the second spell cast this turn.
         this.getSpellAbility().addEffect(new CounterTargetEffect());
-        this.getSpellAbility().addTarget(new TargetSpell(new FilterSecondSpell()));
+        this.getSpellAbility().addTarget(new TargetSpell(filter));
     }
 
     public SecondGuess(final SecondGuess card) {
@@ -68,65 +73,21 @@ public class SecondGuess extends CardImpl<SecondGuess> {
     }
 }
 
-class FilterSecondSpell extends FilterSpell {
-
-    public FilterSecondSpell() {
-        super("spell that's the second spell cast this turn");
-    }
-
-    public FilterSecondSpell(final FilterSecondSpell filter) {
-        super(filter);
-    }
+class SecondSpellPredicate implements Predicate<Spell> {
 
     @Override
-    public boolean match(StackObject spell, Game game) {
-        if (!super.match(spell, game))
-            return notFilter;
+    public boolean apply(Spell input, Game game) {
+        CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get("CastSpellLastTurnWatcher");
 
-        if (spell instanceof Spell) {
-            CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get("CastSpellLastTurnWatcher");
-
-            int index = watcher.getSpellOrder((Spell)spell);
-
-            if (index == 2) {
-                return !notFilter;
-            }
+        if (watcher.getSpellOrder(input) == 2) {
+            return true;
         }
 
-        return notFilter;
+        return false;
     }
 
     @Override
-    public boolean match(StackObject spell, UUID playerId, Game game) {
-        if (!super.match(spell, playerId, game))
-            return notFilter;
-
-        if (spell instanceof Spell) {
-            CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get("CastSpellLastTurnWatcher");
-
-            int index = watcher.getSpellOrder((Spell)spell);
-
-            if (index == 2) {
-                return notFilter;
-            }
-        }
-
-        return !notFilter;
+    public String toString() {
+        return "SecondSpellThisTurn";
     }
-
-    @Override
-    public FilterSecondSpell copy() {
-        return new FilterSecondSpell(this);
-    }
-
-    @Override
-    public void setFromZone(Constants.Zone fromZone) {
-        this.fromZone = fromZone;
-    }
-
-    @Override
-    public void setNotFromZone(boolean notFromZone) {
-        this.notFromZone = notFromZone;
-    }
-
 }

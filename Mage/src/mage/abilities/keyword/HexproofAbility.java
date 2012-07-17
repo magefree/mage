@@ -5,6 +5,7 @@ import mage.Constants;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CantTargetSourceEffect;
 import mage.filter.FilterStackObject;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  * Hexproof
@@ -19,7 +20,7 @@ public class HexproofAbility extends SimpleStaticAbility {
 
     static {
         filter = new FilterStackObject("spells or abilities your opponents control");
-        filter.setTargetController(Constants.TargetController.OPPONENT);
+        filter.add(new ControllerPredicate(Constants.TargetController.OPPONENT));
         fINSTANCE = new HexproofAbility();
     }
 

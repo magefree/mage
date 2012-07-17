@@ -31,24 +31,20 @@ package mage.filter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.Constants.TargetController;
 import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
+import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
  * @author North
  */
-public class FilterStackObject extends FilterObject<StackObject> {
+public class FilterStackObject<T extends StackObject> extends FilterObject<T> {
 
     protected List<ObjectPlayerPredicate<ObjectPlayer<Permanent>>> extraPredicates = new ArrayList<ObjectPlayerPredicate<ObjectPlayer<Permanent>>>();
-    protected List<UUID> controllerId = new ArrayList<UUID>();
-    protected boolean notController = false;
-    protected TargetController controller = TargetController.ANY;
 
     public FilterStackObject() {
         super("spell or ability");
@@ -60,62 +56,19 @@ public class FilterStackObject extends FilterObject<StackObject> {
 
     public FilterStackObject(final FilterStackObject filter) {
         super(filter);
-        this.controllerId.addAll(filter.controllerId);
-        this.notController = filter.notController;
-        this.controller = filter.controller;
         this.extraPredicates = new ArrayList<ObjectPlayerPredicate<ObjectPlayer<Permanent>>>(extraPredicates);
     }
 
-    @Override
-    public boolean match(StackObject spell, Game game) {
-
-        if (!super.match(spell, game))
-            return notFilter;
-
-        if (controllerId.size() > 0 && controllerId.contains(spell.getControllerId()) == notController)
-            return notFilter;
-
-        return !notFilter;
-    }
-
-    public boolean match(StackObject spell, UUID playerId, Game game) {
-        if (!this.match(spell, game))
-            return notFilter;
-
-        if (controller != TargetController.ANY && playerId != null) {
-            switch(controller) {
-                case YOU:
-                    if (!spell.getControllerId().equals(playerId))
-                        return notFilter;
-                    break;
-                case OPPONENT:
-                    if (!game.getOpponents(playerId).contains(spell.getControllerId()))
-                        return notFilter;
-                    break;
-                case NOT_YOU:
-                    if (spell.getControllerId().equals(playerId))
-                        return notFilter;
-                    break;
-            }
+    public boolean match(T stackObject, UUID playerId, Game game) {
+        if (!this.match(stackObject, game)) {
+            return false;
         }
 
-        return !notFilter;
+        return Predicates.and(extraPredicates).apply(new ObjectPlayer(stackObject, playerId), game);
     }
 
     public void add(ObjectPlayerPredicate predicate) {
         extraPredicates.add(predicate);
-    }
-
-    public List<UUID> getControllerId() {
-        return controllerId;
-    }
-
-    public void setNotController(boolean notController) {
-        this.notController = notController;
-    }
-
-    public void setTargetController(TargetController controller) {
-        this.controller = controller;
     }
 
     @Override
