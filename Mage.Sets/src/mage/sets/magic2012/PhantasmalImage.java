@@ -27,13 +27,15 @@
  */
 package mage.sets.magic2012;
 
+import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesTargetTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
@@ -45,8 +47,6 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.util.functions.ApplyToPermanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -65,7 +65,7 @@ public class PhantasmalImage extends CardImpl<PhantasmalImage> {
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
-        Ability ability = new EntersBattlefieldAbility(new EntersBattlefieldEffect(new PhantasmalImageCopyEffect(), abilityText));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(new PhantasmalImageCopyEffect(), abilityText));
         this.addAbility(ability);
     }
 

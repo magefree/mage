@@ -31,9 +31,10 @@ package mage.sets.tenth;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.cards.CardImpl;
@@ -52,7 +53,7 @@ public class Clone extends CardImpl<Clone> {
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
-        Ability ability = new EntersBattlefieldAbility(new EntersBattlefieldEffect(new CopyPermanentEffect()), "You may have {this} enter the battlefield as a copy of any creature on the battlefield");
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(new CopyPermanentEffect(), "You may have {this} enter the battlefield as a copy of any creature on the battlefield"));
         this.addAbility(ability);
     }
 

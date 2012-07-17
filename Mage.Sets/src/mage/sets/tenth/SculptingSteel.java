@@ -30,8 +30,9 @@ package mage.sets.tenth;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.cards.CardImpl;
@@ -55,7 +56,7 @@ public class SculptingSteel extends CardImpl<SculptingSteel> {
         this.expansionSetCode = "10E";
 
         // You may have Sculpting Steel enter the battlefield as a copy of any artifact on the battlefield.
-        Ability ability = new EntersBattlefieldAbility(new EntersBattlefieldEffect(new CopyPermanentEffect(filter)), "You may have {this} enter the battlefield as a copy of any artifact on the battlefield");
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(new CopyPermanentEffect(filter), "You may have {this} enter the battlefield as a copy of any artifact on the battlefield"));
         this.addAbility(ability);
     }
 

@@ -33,8 +33,8 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.EntersBattlefieldEffect;
@@ -64,7 +64,7 @@ public class EvilTwin extends CardImpl<EvilTwin> {
         this.toughness = new MageInt(0);
 
         // You may have Evil Twin enter the battlefield as a copy of any creature on the battlefield except it gains "{U}{B}, {T}: Destroy target creature with the same name as this creature.
-        Ability ability1 = new EntersBattlefieldAbility(new EntersBattlefieldEffect(new CopyPermanentEffect()), "You may have {this} enter the battlefield as a copy of any creature on the battlefield except it gains {U}{B}, {T}: Destroy target creature with the same name as this creature");
+        Ability ability1 = new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(new CopyPermanentEffect(), "You may have {this} enter the battlefield as a copy of any creature on the battlefield except it gains {U}{B}, {T}: Destroy target creature with the same name as this creature"));
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{U}{B}"));
         ability2.addCost(new TapSourceCost());
         ability2.addTarget(new TargetCreaturePermanent(new EvilTwinFilter()));

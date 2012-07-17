@@ -28,12 +28,14 @@
 
 package mage.sets.newphyrexia;
 
+import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -46,8 +48,6 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.util.functions.ApplyToPermanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -62,7 +62,7 @@ public class PhyrexianMetamorph extends CardImpl<PhyrexianMetamorph> {
         this.color.setBlue(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
-        Ability ability = new EntersBattlefieldAbility(new EntersBattlefieldEffect(new PhyrexianMetamorphEffect()), "You may have {this} enter the battlefield as a copy of any artifact or creature on the battlefield, except it's an artifact in addition to its other types");
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(new PhyrexianMetamorphEffect(), "You may have {this} enter the battlefield as a copy of any artifact or creature on the battlefield, except it's an artifact in addition to its other types"));
         this.addAbility(ability);
     }
 
