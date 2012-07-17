@@ -78,10 +78,13 @@ public class AncientHellkite extends CardImpl<AncientHellkite> {
 
 class AncientHellkiteAbility extends ActivatedAbilityImpl<AncientHellkiteAbility> {
 
+    private static final FilterCreaturePermanent filterTemplate = new FilterCreaturePermanent("creature defending player controls");
+
     public AncientHellkiteAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(1));
         addCost(new AncientHellkiteCost());
         addManaCost(new ColoredManaCost(ColoredManaSymbol.R));
+        addTarget(new TargetCreaturePermanent(filterTemplate));
     }
 
     public AncientHellkiteAbility(final AncientHellkiteAbility ability) {
@@ -97,7 +100,7 @@ class AncientHellkiteAbility extends ActivatedAbilityImpl<AncientHellkiteAbility
     public boolean activate(Game game, boolean noMana) {
         UUID defenderId = game.getCombat().getDefendingPlayer(sourceId);
         if (defenderId != null) {
-            FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
+            FilterCreaturePermanent filter = filterTemplate.copy();
             filter.add(new ControllerIdPredicate(defenderId));
 
             this.getTargets().clear();
