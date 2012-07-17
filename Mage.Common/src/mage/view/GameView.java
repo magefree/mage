@@ -40,6 +40,7 @@ import mage.game.GameState;
 import mage.game.combat.CombatGroup;
 import mage.game.command.CommandObject;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentToken;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
@@ -93,19 +94,25 @@ public class GameView implements Serializable {
                     }
                     checkPaid(stackObject.getId(), (StackAbility)stackObject);
                 } else if (object != null) {
-                    StackAbility stackAbility = ((StackAbility)object);
-                    stackAbility.newId();
-                    MageObject emblem = game.getEmblem(stackAbility.getSourceId());
-                    if (emblem != null) {
-                        Card sourceCard = game.getCard(((CommandObject)emblem).getSourceId());
-                        if (sourceCard != null) {
-                            stackAbility.setName("Emblem " + sourceCard.getName());
-                            stackAbility.setExpansionSetCode(sourceCard.getExpansionSetCode());
+                    if (object instanceof PermanentToken) {
+                        PermanentToken token = (PermanentToken)object;
+                        stack.put(stackObject.getId(), new CardView(token));
+                        checkPaid(stackObject.getId(), (StackAbility)stackObject);
+                    } else {
+                        StackAbility stackAbility = ((StackAbility)object);
+                        stackAbility.newId();
+                        MageObject emblem = game.getEmblem(stackAbility.getSourceId());
+                        if (emblem != null) {
+                            Card sourceCard = game.getCard(((CommandObject)emblem).getSourceId());
+                            if (sourceCard != null) {
+                                stackAbility.setName("Emblem " + sourceCard.getName());
+                                stackAbility.setExpansionSetCode(sourceCard.getExpansionSetCode());
+                            }
                         }
-                    }
 
-                    stack.put(stackObject.getId(), new CardView(stackAbility));
-                    checkPaid(stackObject.getId(), stackAbility);
+                        stack.put(stackObject.getId(), new CardView(stackAbility));
+                        checkPaid(stackObject.getId(), stackAbility);
+                    }
                 }
             }
             else {
