@@ -539,6 +539,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         Assert.assertEquals("(Graveyard) Card counts are not equal (" + cardName + ")", count, actualCount);
     }
 
+    public Permanent getPermanent(String cardName, Player player) {
+        return getPermanent(cardName, player.getId());
+    }
+
     public Permanent getPermanent(String cardName, UUID controller) {
         Permanent permanent0 = null;
         int count = 0;
