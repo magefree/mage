@@ -56,7 +56,7 @@ public class FilterStackObject<T extends StackObject> extends FilterObject<T> {
 
     public FilterStackObject(final FilterStackObject filter) {
         super(filter);
-        this.extraPredicates = new ArrayList<ObjectPlayerPredicate<ObjectPlayer<Permanent>>>(extraPredicates);
+        this.extraPredicates = new ArrayList<ObjectPlayerPredicate<ObjectPlayer<Permanent>>>(filter.extraPredicates);
     }
 
     public boolean match(T stackObject, UUID playerId, Game game) {

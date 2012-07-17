@@ -75,7 +75,7 @@ public class TargetPermanent<T extends TargetPermanent<T>> extends TargetObject<
 
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
-        return canTarget(null, id, source, game);
+        return canTarget(source.getControllerId(), id, source, game);
     }
 
     public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {

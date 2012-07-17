@@ -70,7 +70,7 @@ public class ControllerPredicate implements ObjectPlayerPredicate<ObjectPlayer<P
                 break;
         }
 
-        return true;
+        return false;
     }
 
     @Override
