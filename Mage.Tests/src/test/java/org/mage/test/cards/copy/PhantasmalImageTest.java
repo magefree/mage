@@ -36,7 +36,7 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
      * Tests that copy effect will copy EntersBattlefieldTriggeredAbility and it will be applied.
      */
     @Test
-    public void testCopiedEntersBattlefieldTriggeredAbility() {
+    public void testCopyEntersBattlefieldTriggeredAbility() {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 2);
         addCard(Constants.Zone.HAND, playerA, "Phantasmal Image");
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Howling Banshee");
@@ -164,6 +164,52 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
 
         // Tests: When Geralf's Messenger enters the battlefield, target opponent loses 2 life.
         assertLife(playerB, 18);
+    }
+
+
+    /**
+     * Tests that copy effect will copy AsEntersBattlefieldAbility and will choose another color.
+     * As there is no permanent of the second color, copy of Lurebound Scarecrow will be sacrificed.
+     */
+    @Test
+    public void testCopyAsEntersBattlefieldAbility() {
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 5);
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Llanowar Elves");
+        addCard(Constants.Zone.HAND, playerA, "Phantasmal Image");
+        addCard(Constants.Zone.HAND, playerA, "Lurebound Scarecrow");
+
+        setChoice(playerA, "Green");
+        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Lurebound Scarecrow");
+        setChoice(playerA, "Red");
+        castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Phantasmal Image");
+
+        setStopAt(1, Constants.PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Lurebound Scarecrow", 1);
+    }
+
+    /**
+     * Tests that copy effect will copy AsEntersBattlefieldAbility and will choose another color.
+     * Both Lurebound Scarecrow cards should stay on battlefield.
+     */
+    @Test
+    public void testCopyAsEntersBattlefieldAbility2() {
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 5);
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Llanowar Elves");
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Raging Goblin");
+        addCard(Constants.Zone.HAND, playerA, "Phantasmal Image");
+        addCard(Constants.Zone.HAND, playerA, "Lurebound Scarecrow");
+
+        setChoice(playerA, "Green");
+        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Lurebound Scarecrow");
+        setChoice(playerA, "Red");
+        castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Phantasmal Image");
+
+        setStopAt(1, Constants.PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Lurebound Scarecrow", 2);
     }
 
 }
