@@ -451,29 +451,48 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
             PlayerList players = state.getPlayerList(nextPlayerId);
             Player player = getPlayer(players.get());
             while (!isPaused() && !isGameOver()) {
-//                if (simulation)
-//                    logger.info("Turn " + Integer.toString(state.getTurnNum()));
-                fireInformEvent("Turn " + Integer.toString(state.getTurnNum()));
-                if (checkStopOnTurnOption()) return;
-                state.setActivePlayerId(player.getId());
-                player.becomesActivePlayer();
-                state.getTurn().play(this, player.getId());
-                if (isPaused() || isGameOver())
+
+                if (!playTurn(player)) {
                     break;
-                endOfTurn();
-                player = players.getNext(this);
+                }
+
                 state.setTurnNum(state.getTurnNum() + 1);
+
+                //20091005 - 500.7
+                while (getState().getTurnMods().extraTurn(player.getId())) {
+                    playTurn(player);
+                    state.setTurnNum(state.getTurnNum() + 1);
+                }
+
+                player = players.getNext(this);
             }
         }
         if (isGameOver())
             winnerId = findWinnersAndLosers();
     }
 
+    private boolean playTurn(Player player) {
+        fireInformEvent("Turn " + Integer.toString(state.getTurnNum()));
+        if (checkStopOnTurnOption()) {
+            return false;
+        }
+        state.setActivePlayerId(player.getId());
+        player.becomesActivePlayer();
+        state.getTurn().play(this, player.getId());
+        if (isPaused() || isGameOver()) {
+            return false;
+        }
+        endOfTurn();
+
+        return true;
+    }
+
+
     private boolean checkStopOnTurnOption() {
         if (gameOptions.stopOnTurn != null && gameOptions.stopAtStep == PhaseStep.UNTAP) {
             if (gameOptions.stopOnTurn.equals(state.getTurnNum())) {
                 winnerId = null; //DRAW
-                saveState();
+                //saveState();
                 return true;
             }
         }
@@ -1556,4 +1575,5 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     public void setStateCheckRequired() {
         stateCheckRequired = true;
     }
+
 }

@@ -132,8 +132,7 @@ public class Turn implements Serializable {
             if (!currentPhase.equals(phase)) // phase was changed from the card
                 break;
         }
-        //20091005 - 500.7
-        playExtraTurns(game);
+
     }
 
     public void resumePlay(Game game, boolean wasPaused) {
@@ -212,11 +211,11 @@ public class Turn implements Serializable {
         phase.play(game, activePlayerId);
     }
 
-    private void playExtraTurns(Game game) {
+    /*protected void playExtraTurns(Game game) {
         while (game.getState().getTurnMods().extraTurn(activePlayerId)) {
             this.play(game, activePlayerId);
         }
-    }
+    }*/
 
     public void endTurn(Game game, UUID activePlayerId) {
         // Exile all spells and abilities on the stack
@@ -238,7 +237,7 @@ public class Turn implements Serializable {
 
         Phase phase = new EndPhase();
         phase.setStep(new CleanupStep());
-           currentPhase = phase;
+        currentPhase = phase;
         //phase.play(game, activePlayerId);
     }
 
