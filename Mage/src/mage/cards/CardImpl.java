@@ -163,13 +163,15 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                 for (String data : info.values()) {
                     rules.add(data);
                 }
-                return rules;
             }
+            return rules;
         } catch (Exception e) {
             System.out.println("Exception in rules generation for card: " + this.getName());
             e.printStackTrace();
         }
-        return new ArrayList<String>();
+        ArrayList<String> rules = new ArrayList<String>();
+        rules.add("Exception occured in rulge generation");
+        return rules;
     }
 
     @Override
