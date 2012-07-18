@@ -28,12 +28,7 @@
 
 package mage.game;
 
-import mage.Constants.CardType;
-import mage.Constants.MultiplayerAttackOption;
-import mage.Constants.Outcome;
-import mage.Constants.PhaseStep;
-import mage.Constants.RangeOfInfluence;
-import mage.Constants.Zone;
+import mage.Constants.*;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
@@ -55,9 +50,9 @@ import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.counters.CounterType;
 import mage.filter.Filter;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.*;
 import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.combat.Combat;
 import mage.game.command.CommandObject;
 import mage.game.command.Emblem;
@@ -85,7 +80,6 @@ import org.apache.log4j.Logger;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializable {
 
@@ -462,6 +456,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                 fireInformEvent("Turn " + Integer.toString(state.getTurnNum()));
                 if (checkStopOnTurnOption()) return;
                 state.setActivePlayerId(player.getId());
+                player.becomesActivePlayer();
                 state.getTurn().play(this, player.getId());
                 if (isPaused() || isGameOver())
                     break;

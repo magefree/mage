@@ -97,6 +97,11 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     protected ManaPool manaPool;
     protected boolean passed;
     protected boolean passedTurn;
+    /**
+     * This indicates that player passed all turns until his own turn starts.
+     * Note! This differs from passedTurn as it doesn't care about spells and abilities in the stack and will pass them as well.
+     */
+    protected boolean passedAllTurns;
     protected boolean left;
     protected RangeOfInfluence range;
     protected Set<UUID> inRange = new HashSet<UUID>();
@@ -152,6 +157,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.manaPool = player.manaPool.copy();
         this.passed = player.passed;
         this.passedTurn = player.passedTurn;
+        this.passedAllTurns = player.passedAllTurns;
         this.left = player.left;
         this.range = player.range;
         this.canGainLife = player.canGainLife;
@@ -188,6 +194,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.left = false;
         this.passed = false;
         this.passedTurn = false;
+        this.passedAllTurns = false;
         this.canGainLife = true;
         this.canLoseLife = true;
         game.getState().getWatchers().add(new BloodthirstWatcher(playerId));
@@ -1444,5 +1451,10 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     @Override
     public boolean autoLoseGame() {
         return false;
+    }
+
+    @Override
+    public void becomesActivePlayer() {
+        this.passedAllTurns = false;
     }
 }

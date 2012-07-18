@@ -256,4 +256,9 @@ public interface Player extends MageItem, Copyable<Player> {
     public List<UUID> getAttachments();
     public boolean addAttachment(UUID permanentId, Game game);
     public boolean removeAttachment(UUID permanentId, Game game);
+
+    /**
+     * Signals that the player becomes active player in this turn.
+     */
+    public void becomesActivePlayer();
 }

@@ -739,6 +739,17 @@ public class GamePanel extends javax.swing.JPanel {
             }
         });
 
+        KeyStroke ks8 = KeyStroke.getKeyStroke(KeyEvent.VK_F9, 0);
+        this.getInputMap(c).put(ks8, "F9_PRESS");
+        this.getActionMap().put("F9_PRESS", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (feedbackPanel != null && FeedbackMode.SELECT.equals(feedbackPanel.getMode())) {
+                    session.sendPlayerInteger(gameId, -9999);
+                }
+            }
+        });
+
         KeyStroke ksAltShift = KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.ALT_MASK);
         this.getInputMap(c).put(ksAltShift, "ENLARGE");
         this.getActionMap().put("ENLARGE", new AbstractAction() {

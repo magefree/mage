@@ -371,6 +371,10 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
     public boolean priority(Game game) {
         passed = false;
         if (!abort) {
+            if (passedAllTurns) {
+                pass();
+                return false;
+            }
             if (passedTurn && game.getStack().isEmpty()) {
                 pass();
                 return false;
@@ -382,6 +386,9 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
                 pass();
                 return false;
             } else if (response.getInteger() != null) {
+                if (response.getInteger() == -9999) {
+                    passedAllTurns = true;
+                }
                 pass();
                 passedTurn = true;
                 return false;
