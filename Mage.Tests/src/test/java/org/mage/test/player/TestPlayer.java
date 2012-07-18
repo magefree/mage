@@ -38,6 +38,7 @@ import mage.counters.Counter;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterCreatureForCombat;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.player.ai.ComputerPlayer;
@@ -51,7 +52,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import mage.filter.predicate.mageobject.NamePredicate;
 
 /**
  *
@@ -170,8 +170,8 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
     @Override
     public boolean choose(Constants.Outcome outcome, Choice choice, Game game) {
         if (!choices.isEmpty()) {
-            for (String choose1: choice.getChoices()) {
-                for (String choose2: choices) {
+            for (String choose2: choices) {
+                for (String choose1: choice.getChoices()) {
                     if (choose1.equals(choose2)) {
                         choice.setChoice(choose2);
                         choices.remove(choose2);
