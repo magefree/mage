@@ -30,7 +30,6 @@ package mage.player.human;
 
 import mage.Constants.Outcome;
 import mage.Constants.RangeOfInfluence;
-import mage.Constants.TargetController;
 import mage.Constants.Zone;
 import mage.MageObject;
 import mage.abilities.*;
@@ -46,7 +45,7 @@ import mage.choices.ChoiceImpl;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterBlockingCreature;
 import mage.filter.common.FilterCreatureForCombat;
-import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.draft.Draft;
 import mage.game.match.Match;
@@ -74,7 +73,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 
     private final transient PlayerResponse response = new PlayerResponse();
 
-    protected static FilterCreatureForCombat filter = new FilterCreatureForCombat();
+    protected static FilterCreatureForCombat filterCreatureForCombat = new FilterCreatureForCombat();
     protected static FilterAttackingCreature filterAttack = new FilterAttackingCreature();
     protected static FilterBlockingCreature filterBlock = new FilterBlockingCreature();
     protected static Choice replacementEffectChoice = new ChoiceImpl(true);
@@ -83,7 +82,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
     private static final Logger log = Logger.getLogger(HumanPlayer.class);
 
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        //filter.add(new ControllerPredicate(TargetController.YOU));
         replacementEffectChoice.setMessage("Choose replacement effect");
         staticOptions.put("UI.right.btn.text", "Done");
     }
@@ -491,8 +490,10 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
     }
 
     @Override
-    public void selectAttackers(Game game) {
+    public void selectAttackers(Game game, UUID attackingPlayerId) {
         updateGameStatePriority("selectAttackers", game);
+        FilterCreatureForCombat filter = filterCreatureForCombat.copy();
+        filter.add(new ControllerIdPredicate(attackingPlayerId));
         while (!abort) {
             if (passedAllTurns || passedTurn) {
                 return;
@@ -510,7 +511,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
             } else if (response.getUUID() != null) {
                 Permanent attacker = game.getPermanent(response.getUUID());
                 if (attacker != null) {
-                    if (filter.match(attacker, null, playerId, game)) {
+                    if (filterCreatureForCombat.match(attacker, null, playerId, game)) {
                         selectDefender(game.getCombat().getDefenders(), attacker.getId(), game);
                     }
                     else if (filterAttack.match(attacker, null, playerId, game) && game.getStack().isEmpty()) {
@@ -538,8 +539,10 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
     }
 
     @Override
-    public void selectBlockers(Game game) {
+    public void selectBlockers(Game game, UUID defendingPlayerId) {
         updateGameStatePriority("selectBlockers", game);
+        FilterCreatureForCombat filter = filterCreatureForCombat.copy();
+        filter.add(new ControllerIdPredicate(defendingPlayerId));
         while (!abort) {
             game.fireSelectEvent(playerId, "Select blockers");
             waitForResponse();

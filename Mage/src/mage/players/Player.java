@@ -229,8 +229,8 @@ public interface Player extends MageItem, Copyable<Player> {
     public abstract int chooseEffect(List<ReplacementEffect> rEffects, Game game);
     public abstract TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game);
     public abstract Mode chooseMode(Modes modes, Ability source, Game game);
-    public abstract void selectAttackers(Game game);
-    public abstract void selectBlockers(Game game);
+    public abstract void selectAttackers(Game game, UUID attackingPlayerId);
+    public abstract void selectBlockers(Game game, UUID defendingPlayerId);
     public abstract UUID chooseAttackerOrder(List<Permanent> attacker, Game game);
     public abstract UUID chooseBlockerOrder(List<Permanent> blockers, Game game);
     public abstract void assignDamage(int damage, List<UUID> targets, String singleTargetName, UUID sourceId, Game game);

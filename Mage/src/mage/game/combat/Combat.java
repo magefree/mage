@@ -125,7 +125,7 @@ public class Combat implements Serializable, Copyable<Combat> {
             Player player = game.getPlayer(attackerId);
             //20101001 - 508.1d
             checkAttackRequirements(player, game);
-            player.selectAttackers(game);
+            player.selectAttackers(game, attackerId);
             if (game.isPaused() || game.isGameOver())
                 return;
             resumeSelectAttackers(game);
@@ -173,7 +173,7 @@ public class Combat implements Serializable, Copyable<Combat> {
             //20101001 - 509.1c
             checkBlockRequirements(player, game);
             for (UUID defenderId : getPlayerDefenders(game)) {
-                game.getPlayer(defenderId).selectBlockers(game);
+                game.getPlayer(defenderId).selectBlockers(game, defenderId);
                 if (game.isPaused() || game.isGameOver())
                     return;
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, defenderId, defenderId));
@@ -188,7 +188,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         }
     }
 
-    protected void checkBlockRequirements(Player player, Game game) {
+    public void checkBlockRequirements(Player player, Game game) {
         //20101001 - 509.1c
         //TODO: handle case where more than one attacker must be blocked
         for (Permanent creature : game.getBattlefield().getActivePermanents(filterBlockers, player.getId(), game)) {
@@ -381,7 +381,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         return defenderId;
     }
 
-    private Set<UUID> getPlayerDefenders(Game game) {
+    public Set<UUID> getPlayerDefenders(Game game) {
         Set<UUID> playerDefenders = new HashSet<UUID>();
         for (CombatGroup group : groups) {
             if (group.defenderIsPlaneswalker) {

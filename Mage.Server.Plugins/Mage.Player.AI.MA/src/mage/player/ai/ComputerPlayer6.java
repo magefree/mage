@@ -1187,7 +1187,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
     }
 
     @Override
-    public void selectAttackers(Game game) {
+    public void selectAttackers(Game game, UUID attackingPlayerId) {
         logger.debug("selectAttackers");
         declareAttackers(game, playerId);
         /*if (combat != null) {
@@ -1206,7 +1206,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
     }
 
     @Override
-    public void selectBlockers(Game game) {
+    public void selectBlockers(Game game, UUID defendingPlayerId) {
         logger.debug("selectBlockers");
         if (combat != null && combat.getGroups().size() > 0) {
             List<CombatGroup> groups = game.getCombat().getGroups();

@@ -27,10 +27,6 @@
  */
 package mage.player.ai;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.PassAbility;
@@ -38,6 +34,10 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import org.apache.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -269,13 +269,13 @@ public class MCTSPlayer extends ComputerPlayer<MCTSPlayer> {
 //    }
 
     @Override
-    public void selectAttackers(Game game) {
+    public void selectAttackers(Game game, UUID attackingPlayerId) {
         game.pause();
         nextAction = NextAction.SELECT_ATTACKERS;
     }
 
     @Override
-    public void selectBlockers(Game game) {
+    public void selectBlockers(Game game, UUID defendingPlayerId) {
         game.pause();
         nextAction = NextAction.SELECT_BLOCKERS;
     }

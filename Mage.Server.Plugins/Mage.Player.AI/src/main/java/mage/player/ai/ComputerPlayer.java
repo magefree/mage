@@ -978,7 +978,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
     }
 
     @Override
-    public void selectAttackers(Game game) {
+    public void selectAttackers(Game game, UUID attackingPlayerId) {
         log.debug("selectAttackers");
         UUID opponentId = game.getCombat().getDefenders().iterator().next();
         Attackers attackers = getPotentialAttackers(game);
@@ -1005,7 +1005,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
     }
 
     @Override
-    public void selectBlockers(Game game) {
+    public void selectBlockers(Game game, UUID defendingPlayerId) {
         log.debug("selectBlockers");
 
         List<Permanent> blockers = getAvailableBlockers(game);

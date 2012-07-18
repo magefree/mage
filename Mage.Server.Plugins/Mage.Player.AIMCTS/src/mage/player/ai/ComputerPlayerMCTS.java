@@ -214,7 +214,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer<ComputerPlayerMCTS> imple
 //    }
 
     @Override
-    public void selectAttackers(Game game) {
+    public void selectAttackers(Game game, UUID attackingPlayerId) {
         getNextAction(game, NextAction.SELECT_ATTACKERS);
         Combat combat = root.getCombat();
         UUID opponentId = game.getCombat().getDefenders().iterator().next();
@@ -224,7 +224,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer<ComputerPlayerMCTS> imple
     }
 
     @Override
-    public void selectBlockers(Game game) {
+    public void selectBlockers(Game game, UUID defendingPlayerId) {
         getNextAction(game, NextAction.SELECT_BLOCKERS);
         Combat combat = root.getCombat();
         List<CombatGroup> groups = game.getCombat().getGroups();

@@ -27,21 +27,9 @@
  */
 package mage.player.ai;
 
-import java.io.Serializable;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
-import mage.abilities.Mode;
-import mage.abilities.Modes;
-import mage.abilities.TriggeredAbilities;
-import mage.abilities.TriggeredAbility;
+import mage.abilities.*;
 import mage.abilities.common.PassAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCost;
@@ -61,6 +49,9 @@ import mage.target.Target;
 import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import org.apache.log4j.Logger;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
  *
@@ -187,7 +178,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
     }
 
     @Override
-    public void selectAttackers(Game game) {
+    public void selectAttackers(Game game, UUID attackingPlayerId) {
         //useful only for two player games - will only attack first opponent
 //        logger.info("select attackers");
         UUID defenderId = game.getOpponents(playerId).iterator().next();
@@ -208,7 +199,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
     }
 
     @Override
-    public void selectBlockers(Game game) {
+    public void selectBlockers(Game game, UUID defendingPlayerId) {
 //        logger.info("select blockers");
         int numGroups = game.getCombat().getGroups().size();
         if (numGroups == 0) return;
