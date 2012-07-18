@@ -54,9 +54,7 @@ public class OnlyDuringYourTurnCost extends CostImpl<OnlyDuringYourTurnCost> {
 
     @Override
     public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-        if (game.getActivePlayerId().equals(controllerId))
-            return true;
-        return false;
+        return game.getActivePlayerId().equals(controllerId);
     }
 
     @Override
