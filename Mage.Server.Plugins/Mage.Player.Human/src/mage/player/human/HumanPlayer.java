@@ -488,9 +488,18 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
     public void selectAttackers(Game game) {
         game.getState().setPriorityPlayerId(getId());
         while (!abort) {
+            if (passedAllTurns || passedTurn) {
+                return;
+            }
             game.fireSelectEvent(playerId, "Select attackers");
             waitForResponse();
             if (response.getBoolean() != null) {
+                return;
+            } else if (response.getInteger() != null) {
+                if (response.getInteger() == -9999) {
+                    passedAllTurns = true;
+                }
+                passedTurn = true;
                 return;
             } else if (response.getUUID() != null) {
                 Permanent attacker = game.getPermanent(response.getUUID());
@@ -529,6 +538,12 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
             game.fireSelectEvent(playerId, "Select blockers");
             waitForResponse();
             if (response.getBoolean() != null) {
+                return;
+            } else if (response.getInteger() != null) {
+                if (response.getInteger() == -9999) {
+                    passedAllTurns = true;
+                }
+                passedTurn = true;
                 return;
             } else if (response.getUUID() != null) {
                 Permanent blocker = game.getPermanent(response.getUUID());
