@@ -58,4 +58,24 @@ public class TurnToFrogTest extends CardTestPlayerBase {
         assertCounterCount("Raging Ravine", CounterType.P1P1, 1);
     }
 
+    @Test
+    public void testCard3() {
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 6);
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Swamp", 6);
+        addCard(Constants.Zone.HAND, playerA, "Public Execution");
+        addCard(Constants.Zone.HAND, playerA, "Turn to Frog");
+
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Llanowar Elves");
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Craw Wurm");
+
+        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Public Executio", "Llanowar Elves");
+        castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Turn to Frog", "Craw Wurm");
+
+        setStopAt(1, Constants.PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerB, "Llanowar Elves", 0);
+        assertPowerToughness(playerB, "Craw Wurm", -1, 1);
+    }
+
 }

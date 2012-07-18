@@ -68,4 +68,25 @@ public class CloneTest extends CardTestPlayerBase {
         assertLife(playerA, 18);
         assertLife(playerB, 20);
     }
+
+    @Test
+    public void testCard3() {
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 6);
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Swamp", 6);
+        addCard(Constants.Zone.HAND, playerA, "Public Execution");
+        addCard(Constants.Zone.HAND, playerA, "Clone");
+
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Llanowar Elves");
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Craw Wurm");
+
+        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Public Executio", "Llanowar Elves");
+        castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Clone");
+
+        setStopAt(1, Constants.PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerB, "Llanowar Elves", 0);
+        assertPowerToughness(playerB, "Craw Wurm", 4, 4);
+        assertPowerToughness(playerA, "Craw Wurm", 6, 4);
+    }
 }
