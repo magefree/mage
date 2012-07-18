@@ -28,9 +28,6 @@
 
 package mage.game.match;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.cards.decks.Deck;
 import mage.game.Game;
 import mage.game.GameException;
@@ -39,6 +36,8 @@ import mage.game.events.TableEvent;
 import mage.game.events.TableEvent.EventType;
 import mage.game.events.TableEventSource;
 import mage.players.Player;
+
+import java.util.*;
 
 /**
  *
@@ -132,12 +131,17 @@ public abstract class MatchImpl implements Match {
     }
 
     protected void initGame(Game game) throws GameException {
+        shufflePlayers();
         for (MatchPlayer matchPlayer: this.players) {
             matchPlayer.getPlayer().init(game);
             game.loadCards(matchPlayer.getDeck().getCards(), matchPlayer.getPlayer().getId());
             game.loadCards(matchPlayer.getDeck().getSideboard(), matchPlayer.getPlayer().getId());
             game.addPlayer(matchPlayer.getPlayer(), matchPlayer.getDeck());
         }
+    }
+
+    protected void shufflePlayers() {
+        Collections.shuffle(this.players, new Random());
     }
 
     @Override
