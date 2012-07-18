@@ -33,8 +33,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.CantBlockSourceEffect;
+import mage.abilities.common.CantBlockAbility;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -58,7 +57,7 @@ public class VeilbornGhoul extends CardImpl<VeilbornGhoul> {
         this.toughness = new MageInt(1);
 
         // Veilborn Ghoul can't block.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new CantBlockSourceEffect(Constants.Duration.WhileOnBattlefield)));
+        this.addAbility(CantBlockAbility.getInstance());
         
         // Whenever a Swamp enters the battlefield under your control, you may return Veilborn Ghoul from your graveyard to your hand.
         this.addAbility(new VeilbornGhoulTriggeredAbility());
