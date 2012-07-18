@@ -261,4 +261,6 @@ public interface Player extends MageItem, Copyable<Player> {
      * Signals that the player becomes active player in this turn.
      */
     public void becomesActivePlayer();
+
+    public int getTurns();
 }

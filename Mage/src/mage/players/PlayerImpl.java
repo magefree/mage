@@ -97,6 +97,8 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     protected ManaPool manaPool;
     protected boolean passed;
     protected boolean passedTurn;
+    protected int turns;
+
     /**
      * This indicates that player passed all turns until his own turn starts.
      * Note! This differs from passedTurn as it doesn't care about spells and abilities in the stack and will pass them as well.
@@ -158,6 +160,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.passed = player.passed;
         this.passedTurn = player.passedTurn;
         this.passedAllTurns = player.passedAllTurns;
+        this.turns = player.turns;
         this.left = player.left;
         this.range = player.range;
         this.canGainLife = player.canGainLife;
@@ -1456,5 +1459,12 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     @Override
     public void becomesActivePlayer() {
         this.passedAllTurns = false;
+        this.turns++;
     }
+
+    @Override
+    public int getTurns() {
+        return turns;
+    }
+
 }
