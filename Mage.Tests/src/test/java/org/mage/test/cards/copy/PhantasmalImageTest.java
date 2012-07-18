@@ -212,4 +212,28 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Lurebound Scarecrow", 2);
     }
 
+    @Test
+    public void testCopiedFlyingWorks() {
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Constants.Zone.HAND, playerA, "Phantasmal Image");
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Fervor");
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Elite Vanguard");
+
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Azure Drake");
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Llanowar Elves");
+
+        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image");
+        attack(1, playerA, "Azure Drake");
+        block(1, playerB, "Llanowar Elves", "Azure Drake");
+
+        attack(2, playerB, "Azure Drake");
+        block(2, playerA, "Elite Vanguard", "Azure Drake");
+
+        setStopAt(2, Constants.PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerB, 18);
+        assertLife(playerA, 18);
+    }
+
 }
