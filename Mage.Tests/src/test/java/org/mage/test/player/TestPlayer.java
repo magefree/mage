@@ -128,7 +128,7 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
     }
 
     @Override
-    public void selectAttackers(Game game) {
+    public void selectAttackers(Game game, UUID attackingPlayerId) {
         UUID opponentId = game.getCombat().getDefenders().iterator().next();
         for (PlayerAction action: actions) {
             if (action.getTurnNum() == game.getTurnNum() && action.getAction().startsWith("attack:")) {
@@ -145,7 +145,7 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
     }
 
     @Override
-    public void selectBlockers(Game game) {
+    public void selectBlockers(Game game, UUID defendingPlayerId) {
         UUID opponentId = game.getOpponents(playerId).iterator().next();
         for (PlayerAction action: actions) {
             if (action.getTurnNum() == game.getTurnNum() && action.getAction().startsWith("block:")) {
