@@ -74,6 +74,7 @@ public class PhaseManager {
         if (activePlayer == null) {
             throw new IllegalStateException("No active player found.");
         }
+
         for (Map.Entry<String, String> entry : map.entrySet()) {
             if (message.equals(entry.getKey())) {
                 Preferences prefs = MageFrame.getPreferences();
@@ -81,6 +82,6 @@ public class PhaseManager {
                 return !prop.equals(PHASE_ON);
             }
         }
-         return false;
+        return false;
     }
 }

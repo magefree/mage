@@ -38,6 +38,7 @@ import mage.client.MageFrame;
 import mage.client.chat.ChatPanel;
 import mage.client.components.MageTextArea;
 import mage.client.dialog.MageDialog;
+import mage.client.util.AudioManager;
 import mage.client.util.gui.ArrowBuilder;
 import mage.remote.Session;
 import org.apache.log4j.Logger;
@@ -378,12 +379,14 @@ public class FeedbackPanel extends javax.swing.JPanel {
         } else {
             session.sendPlayerBoolean(gameId, false);
         }
+        //AudioManager.playButtonOk();
     }//GEN-LAST:event_btnRightActionPerformed
 
     private void btnLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeftActionPerformed
         this.selected = true;
 //        clear0();
         session.sendPlayerBoolean(gameId, true);
+        AudioManager.playButtonCancel();
     }//GEN-LAST:event_btnLeftActionPerformed
 
     private void btnSpecialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpecialActionPerformed

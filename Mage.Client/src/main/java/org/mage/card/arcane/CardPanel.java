@@ -5,6 +5,7 @@ import mage.cards.MagePermanent;
 import mage.cards.TextPopup;
 import mage.cards.action.ActionCallback;
 import mage.cards.action.TransferData;
+import mage.client.util.AudioManager;
 import mage.components.ImagePanel;
 import mage.utils.CardUtil;
 import mage.view.AbilityView;
@@ -630,6 +631,9 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
             boolean needsFlipping = isFlipped() != ((PermanentView) card).isFlipped();
             if (needsTapping || needsFlipping) {
                 Animation.tapCardToggle(this, this, needsTapping, needsFlipping);
+            }
+            if (needsTapping && ((PermanentView) card).isTapped()) {
+                AudioManager.playTapPermanent();
             }
             boolean needsTranforming = isTransformed() != card.isTransformed();
             if (needsTranforming) {

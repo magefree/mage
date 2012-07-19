@@ -3,6 +3,7 @@ package mage.client.combat;
 import mage.cards.MagePermanent;
 import mage.client.MageFrame;
 import mage.client.game.PlayAreaPanel;
+import mage.client.util.AudioManager;
 import mage.client.util.SettingsManager;
 import mage.client.util.gui.ArrowBuilder;
 import mage.view.CardView;
@@ -10,7 +11,9 @@ import mage.view.CombatGroupView;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -19,6 +22,10 @@ import java.util.UUID;
 public class CombatManager {
 
     private static CombatManager combatManager;
+
+    private Map<UUID, Integer> combatAttackers = new HashMap<UUID, Integer>();
+    private Map<UUID, Integer> combatBlockers = new HashMap<UUID, Integer>();
+    private int globalBlockersCount; // we need global counter as there are several combat groups
 
     public static CombatManager getInstance() {
         if (combatManager == null) {
@@ -34,17 +41,35 @@ public class CombatManager {
         displayArrows(combatView, gameId);
     }
 
-    public void hideCombat() {
+    public void hideCombat(UUID gameId) {
         ArrowBuilder.removeArrowsByType(ArrowBuilder.Type.COMBAT);
+        combatAttackers.remove(gameId);
+        combatBlockers.remove(gameId);
     }
 
     private void displayArrows(List<CombatGroupView> combatView, UUID gameId) {
         parentPoint = null;
+        int count = 0;
+        globalBlockersCount = 0;
         for (CombatGroupView group : combatView) {
             for (CardView attacker : group.getAttackers().values()) {
                 drawAttacker(group, attacker, gameId);
+                count++;
             }
         }
+        playAddAttackersSound(gameId, count);
+        playAddBlockersSound(gameId, globalBlockersCount);
+    }
+
+    private void playAddAttackersSound(UUID gameId, int count) {
+        int prevCount = 0;
+        if (combatAttackers.containsKey(gameId)) {
+            prevCount = combatAttackers.get(gameId);
+        }
+        if (prevCount < count) {
+            AudioManager.playAttack();
+        }
+        combatAttackers.put(gameId, count);
     }
 
     private void drawAttacker(CombatGroupView group, CardView attacker, UUID gameId) {
@@ -99,9 +124,21 @@ public class CombatManager {
                     double xRateB = (blockerCard.getSize().width / SettingsManager.getInstance().getCardSize().width);
                     ArrowBuilder.addArrow((int) blockerPoint.getX() + (int)(55*xRateB), (int) blockerPoint.getY() + (int)(25*xRateB),
                             (int) attackerPoint.getX() + (int)(70*xRateA), (int) attackerPoint.getY() + (int)(25*yRateA), Color.blue, ArrowBuilder.Type.COMBAT);
+                    globalBlockersCount++;
                 }
             }
         }
+    }
+
+    private void playAddBlockersSound(UUID gameId, int count) {
+        int prevCount = 0;
+        if (combatBlockers.containsKey(gameId)) {
+            prevCount = combatBlockers.get(gameId);
+        }
+        if (prevCount < count) {
+            AudioManager.playBlock();
+        }
+        combatBlockers.put(gameId, count);
     }
 
     private Point getParentPoint(MagePermanent permanent) {

@@ -31,6 +31,7 @@ public class AudioManager {
             audioManager.endTurnClip = audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnEndTurn.wav");
             audioManager.tapPermanentClip = audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnTapPermanent.wav");
             audioManager.summonClip = audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnSummon.wav");
+            audioManager.diedCreatureClip = audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnSummon-.wav");
             audioManager.drawClip = audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnDraw.wav");
             audioManager.buttonOkClip = audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnButtonOk.wav");
             audioManager.buttonCancelClip = audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnButtonCancel.wav");
@@ -70,6 +71,10 @@ public class AudioManager {
 
     public static void playSummon() {
         checkAndPlayClip(getManager().summonClip);
+    }
+
+    public static void playDiedCreature() {
+        checkAndPlayClip(getManager().diedCreatureClip);
     }
 
     public static void playDraw() {
@@ -156,6 +161,7 @@ public class AudioManager {
     private Clip endTurnClip = null;
     private Clip tapPermanentClip = null;
     private Clip summonClip = null;
+    private Clip diedCreatureClip = null;
     private Clip drawClip = null;
     private Clip buttonOkClip = null;
     private Clip buttonCancelClip = null;

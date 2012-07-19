@@ -46,6 +46,7 @@ import mage.client.dialog.*;
 import mage.client.game.FeedbackPanel.FeedbackMode;
 import mage.client.plugins.adapters.MageActionCallback;
 import mage.client.plugins.impl.Plugins;
+import mage.client.util.AudioManager;
 import mage.client.util.Config;
 import mage.client.util.GameManager;
 import mage.client.util.PhaseManager;
@@ -380,10 +381,16 @@ public class GamePanel extends javax.swing.JPanel {
                 }
             }
         }
-        if (game.getPhase() != null)
+
+        if (game.getPhase() != null) {
             this.txtPhase.setText(game.getPhase().toString());
-        else
+        } else {
             this.txtPhase.setText("");
+        }
+        if (game.getPhase() != null && game.getPhase().toString().equals("End") && game.getStep().toString().equals("End Turn")) {
+            AudioManager.playEndTurn();
+        }
+
         if (game.getStep() != null)
             this.txtStep.setText(game.getStep().toString());
         else
@@ -423,7 +430,7 @@ public class GamePanel extends javax.swing.JPanel {
             CombatManager.getInstance().showCombat(game.getCombat(), gameId);
         } else {
             //combat.hideDialog();
-            CombatManager.getInstance().hideCombat();
+            CombatManager.getInstance().hideCombat(gameId);
         }
         updatePhases(game.getStep());
         this.revalidate();

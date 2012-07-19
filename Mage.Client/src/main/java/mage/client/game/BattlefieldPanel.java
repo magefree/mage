@@ -34,10 +34,12 @@
 
 package mage.client.game;
 
+import mage.Constants;
 import mage.cards.MagePermanent;
 import mage.client.cards.BigCard;
 import mage.client.cards.Permanent;
 import mage.client.plugins.impl.Plugins;
+import mage.client.util.AudioManager;
 import mage.client.util.Config;
 import mage.view.PermanentView;
 
@@ -70,6 +72,12 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
     private int width;
 
     private static int i = 0;
+
+    private boolean addedPermanent;
+    private boolean addedArtifact;
+    private boolean addedCreature;
+
+    private boolean removedCreature;
 
     /** Creates new form BattlefieldPanel */
     public BattlefieldPanel() {
@@ -114,10 +122,23 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
                 permanents.get(permanent.getId()).update(permanent);
             }
         }
+
+        addedArtifact = addedCreature = addedPermanent = false;
+
         int count = permanentsToAdd.size();
         for (PermanentView permanent : permanentsToAdd) {
             addPermanent(permanent, count);
         }
+
+        if (addedArtifact) {
+            AudioManager.playAddArtifact();
+        } else if (addedCreature) {
+            AudioManager.playSummon();
+        } else if (addedPermanent) {
+            AudioManager.playAddPermanent();
+        }
+
+        removedCreature = false;
 
         for (Iterator<Entry<UUID, MagePermanent>> i = permanents.entrySet().iterator(); i.hasNext();) {
             Entry<UUID, MagePermanent> entry = i.next();
@@ -126,6 +147,10 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
                 i.remove();
                 changed = true;
             }
+        }
+
+        if (removedCreature) {
+            AudioManager.playDiedCreature();
         }
 
         if (changed) {
@@ -182,6 +207,14 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
             synchronized (this) {
                 threads.add(t);
             }*/
+        }
+
+        if (permanent.getCardTypes().contains(Constants.CardType.ARTIFACT)) {
+            addedArtifact = true;
+        } else if (permanent.getCardTypes().contains(Constants.CardType.CREATURE)) {
+            addedCreature = true;
+        } else {
+            addedPermanent = true;
         }
     }
 
@@ -240,6 +273,9 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
                         }
                     });
                     t.start();
+                }
+                if (((MagePermanent)comp).getOriginal().getCardTypes().contains(Constants.CardType.CREATURE)) {
+                    removedCreature = true;
                 }
             }
         }
