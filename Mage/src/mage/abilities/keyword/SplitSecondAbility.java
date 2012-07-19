@@ -2,6 +2,7 @@ package mage.abilities.keyword;
 
 import mage.Constants;
 import mage.abilities.Ability;
+import mage.abilities.MageSingleton;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.game.Game;
@@ -11,7 +12,7 @@ import mage.game.events.GameEvent;
  * Split Second
  * As long as this spell is on the stack, players can't cast other spells or activate abilities that aren't mana abilities.
  */
-public class SplitSecondAbility extends SimpleStaticAbility {
+public class SplitSecondAbility extends SimpleStaticAbility implements MageSingleton {
     private static final SplitSecondAbility ability = new SplitSecondAbility();
 
     public static SplitSecondAbility getInstance() {
@@ -33,7 +34,7 @@ public class SplitSecondAbility extends SimpleStaticAbility {
     }
 }
 
-class SplitSecondEffect extends ReplacementEffectImpl<SplitSecondEffect> {
+class SplitSecondEffect extends ReplacementEffectImpl<SplitSecondEffect> implements MageSingleton {
     SplitSecondEffect() {
         super(Constants.Duration.WhileOnStack, Constants.Outcome.Detriment);
     }

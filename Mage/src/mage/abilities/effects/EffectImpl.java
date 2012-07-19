@@ -30,6 +30,7 @@ package mage.abilities.effects;
 
 import mage.Constants.EffectType;
 import mage.Constants.Outcome;
+import mage.abilities.MageSingleton;
 import mage.abilities.Mode;
 import mage.target.targetpointer.FirstTargetPointer;
 import mage.target.targetpointer.TargetPointer;
@@ -103,7 +104,9 @@ public abstract class EffectImpl<T extends Effect<T>> implements Effect<T> {
 
     @Override
     public void newId() {
-        this.id = UUID.randomUUID();
+        if (!(this instanceof MageSingleton)) {
+            this.id = UUID.randomUUID();
+        }
     }
 
     @Override

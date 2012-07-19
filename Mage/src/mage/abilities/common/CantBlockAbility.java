@@ -5,19 +5,21 @@
 
 package mage.abilities.common;
 
-import java.io.ObjectStreamException;
 import mage.Constants.Duration;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
+import mage.abilities.MageSingleton;
 import mage.abilities.effects.RestrictionEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.io.ObjectStreamException;
 
 /**
  *
  * @author maurer.it_at_gmail.com
  */
-public class CantBlockAbility extends SimpleStaticAbility {
+public class CantBlockAbility extends SimpleStaticAbility implements MageSingleton  {
 
     private static final CantBlockAbility fINSTANCE =  new CantBlockAbility();
 
@@ -45,7 +47,7 @@ public class CantBlockAbility extends SimpleStaticAbility {
 
 }
 
-class CantBlockEffect extends RestrictionEffect<CantBlockEffect> {
+class CantBlockEffect extends RestrictionEffect<CantBlockEffect> implements MageSingleton {
 
     public CantBlockEffect() {
         super(Duration.WhileOnBattlefield);

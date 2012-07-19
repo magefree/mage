@@ -28,21 +28,22 @@
 
 package mage.abilities.effects.common;
 
+import mage.Constants.Zone;
 import mage.abilities.Ability;
+import mage.abilities.MageSingleton;
+import mage.abilities.effects.PostResolveEffect;
 import mage.cards.Card;
 import mage.game.Game;
+import mage.players.Player;
 
 import java.io.ObjectStreamException;
 import java.util.UUID;
-import mage.Constants.Zone;
-import mage.abilities.effects.PostResolveEffect;
-import mage.players.Player;
 
 /**
  *
  * @author nantuko
  */
-public class ShuffleSpellEffect extends PostResolveEffect<ShuffleSpellEffect> {
+public class ShuffleSpellEffect extends PostResolveEffect<ShuffleSpellEffect> implements MageSingleton {
 
     private static final ShuffleSpellEffect fINSTANCE =  new ShuffleSpellEffect();
 

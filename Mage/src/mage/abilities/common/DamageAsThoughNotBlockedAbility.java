@@ -27,16 +27,18 @@
  */
 package mage.abilities.common;
 
-import java.io.ObjectStreamException;
+import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
 
+import java.io.ObjectStreamException;
 
-import static mage.Constants.*;
+import static mage.Constants.AbilityType;
+import static mage.Constants.Zone;
 
 /**
  * @author BetaSteward
  */
-public class DamageAsThoughNotBlockedAbility extends StaticAbility<DamageAsThoughNotBlockedAbility> {
+public class DamageAsThoughNotBlockedAbility extends StaticAbility<DamageAsThoughNotBlockedAbility> implements MageSingleton {
 
     private static final DamageAsThoughNotBlockedAbility fINSTANCE =  new DamageAsThoughNotBlockedAbility();
 

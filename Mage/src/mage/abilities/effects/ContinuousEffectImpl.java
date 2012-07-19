@@ -31,6 +31,7 @@ package mage.abilities.effects;
 import mage.Constants.*;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
+import mage.abilities.MageSingleton;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.DomainValue;
@@ -104,7 +105,9 @@ public abstract class ContinuousEffectImpl<T extends ContinuousEffectImpl<T>> ex
 
     @Override
     public void newId() {
-        this.id = UUID.randomUUID();
+        if (!(this instanceof MageSingleton)) {
+            this.id = UUID.randomUUID();
+        }
     }
 
     @Override

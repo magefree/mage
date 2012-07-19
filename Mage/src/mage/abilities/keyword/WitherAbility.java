@@ -29,6 +29,7 @@
 package mage.abilities.keyword;
 
 import mage.Constants.Zone;
+import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
 
 import java.io.ObjectStreamException;
@@ -46,7 +47,7 @@ import java.io.ObjectStreamException;
  *
  *  @author nantuko
  */
-public class WitherAbility extends StaticAbility<WitherAbility> {
+public class WitherAbility extends StaticAbility<WitherAbility> implements MageSingleton {
 
     private static final WitherAbility fINSTANCE =  new WitherAbility();
 

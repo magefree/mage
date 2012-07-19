@@ -28,15 +28,17 @@
 
 package mage.abilities.keyword;
 
-import java.io.ObjectStreamException;
 import mage.Constants.Zone;
+import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
+
+import java.io.ObjectStreamException;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class IndestructibleAbility extends StaticAbility<IndestructibleAbility> {
+public class IndestructibleAbility extends StaticAbility<IndestructibleAbility> implements MageSingleton {
 
     private static final IndestructibleAbility fINSTANCE =  new IndestructibleAbility();
 

@@ -3,11 +3,12 @@ package mage.abilities.keyword;
 import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.EvasionAbility;
+import mage.abilities.MageSingleton;
 import mage.abilities.effects.RestrictionEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-public class IntimidateAbility extends EvasionAbility<IntimidateAbility> {
+public class IntimidateAbility extends EvasionAbility<IntimidateAbility> implements MageSingleton  {
     private static final IntimidateAbility fInstance = new IntimidateAbility();
 
     public static IntimidateAbility getInstance() {
@@ -29,7 +30,7 @@ public class IntimidateAbility extends EvasionAbility<IntimidateAbility> {
     }
 }
 
-class IntimidateEffect extends RestrictionEffect<IntimidateEffect> {
+class IntimidateEffect extends RestrictionEffect<IntimidateEffect> implements MageSingleton {
     public IntimidateEffect() {
         super(Constants.Duration.WhileOnBattlefield);
     }

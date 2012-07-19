@@ -310,7 +310,9 @@ public class StackAbility implements StackObject, Ability {
 
     @Override
     public void newId() {
-        this.ability.newId();
+        if (!(this instanceof MageSingleton)) {
+            this.ability.newId();
+        }
     }
 
     @Override

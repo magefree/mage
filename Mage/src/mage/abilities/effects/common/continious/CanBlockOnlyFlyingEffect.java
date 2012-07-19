@@ -30,6 +30,7 @@ package mage.abilities.effects.common.continious;
 import mage.Constants.Duration;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
+import mage.abilities.MageSingleton;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.game.Game;
@@ -41,7 +42,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class CanBlockOnlyFlyingEffect extends ReplacementEffectImpl<CanBlockOnlyFlyingEffect> {
+public class CanBlockOnlyFlyingEffect extends ReplacementEffectImpl<CanBlockOnlyFlyingEffect> implements MageSingleton {
 
     public CanBlockOnlyFlyingEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

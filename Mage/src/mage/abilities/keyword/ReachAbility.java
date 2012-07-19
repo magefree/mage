@@ -28,15 +28,17 @@
 
 package mage.abilities.keyword;
 
-import java.io.ObjectStreamException;
 import mage.Constants.Zone;
+import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
+
+import java.io.ObjectStreamException;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ReachAbility extends StaticAbility<ReachAbility> {
+public class ReachAbility extends StaticAbility<ReachAbility> implements MageSingleton {
 
     private static final ReachAbility fINSTANCE =  new ReachAbility();
 

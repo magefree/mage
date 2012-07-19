@@ -1,19 +1,20 @@
 package mage.abilities.effects.common;
 
-import java.util.UUID;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
+import mage.abilities.MageSingleton;
+import mage.abilities.effects.PostResolveEffect;
 import mage.cards.Card;
 import mage.game.Game;
 
 import java.io.ObjectStreamException;
-import mage.Constants.Zone;
-import mage.abilities.effects.PostResolveEffect;
+import java.util.UUID;
 
 /**
  *
  * @author Loki
  */
-public class ReturnToHandSpellEffect extends PostResolveEffect<ReturnToHandSpellEffect> {
+public class ReturnToHandSpellEffect extends PostResolveEffect<ReturnToHandSpellEffect> implements MageSingleton {
     private static final ReturnToHandSpellEffect fINSTANCE =  new ReturnToHandSpellEffect();
 
         private Object readResolve() throws ObjectStreamException {

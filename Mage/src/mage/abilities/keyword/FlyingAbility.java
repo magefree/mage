@@ -31,6 +31,7 @@ package mage.abilities.keyword;
 import mage.Constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.EvasionAbility;
+import mage.abilities.MageSingleton;
 import mage.abilities.effects.RestrictionEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -41,7 +42,7 @@ import java.io.ObjectStreamException;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FlyingAbility extends EvasionAbility<FlyingAbility> {
+public class FlyingAbility extends EvasionAbility<FlyingAbility> implements MageSingleton {
 
     private static final FlyingAbility fINSTANCE =  new FlyingAbility();
 
@@ -69,7 +70,7 @@ public class FlyingAbility extends EvasionAbility<FlyingAbility> {
 
 }
 
-class FlyingEffect extends RestrictionEffect<FlyingEffect> {
+class FlyingEffect extends RestrictionEffect<FlyingEffect> implements MageSingleton {
 
     public FlyingEffect() {
         super(Duration.EndOfGame);
@@ -77,11 +78,6 @@ class FlyingEffect extends RestrictionEffect<FlyingEffect> {
 
     public FlyingEffect(final FlyingEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public void newId() {
-        // do nothing
     }
 
     @Override

@@ -29,6 +29,7 @@
 package mage.abilities.keyword;
 
 import mage.Constants.Zone;
+import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
 
 import java.io.ObjectStreamException;
@@ -36,7 +37,7 @@ import java.io.ObjectStreamException;
 /**
  * @author noxx
  */
-public class SoulbondAbility extends StaticAbility<SoulbondAbility> {
+public class SoulbondAbility extends StaticAbility<SoulbondAbility> implements MageSingleton {
 
     private static final SoulbondAbility fINSTANCE = new SoulbondAbility();
 

@@ -28,9 +28,11 @@
 
 package mage.abilities.keyword;
 
-import java.io.ObjectStreamException;
 import mage.Constants.Zone;
+import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
+
+import java.io.ObjectStreamException;
 
 /**
  *   702.87. Infect
@@ -55,7 +57,7 @@ import mage.abilities.StaticAbility;
  *
  *  @author nantuko
  */
-public class InfectAbility extends StaticAbility<InfectAbility> {
+public class InfectAbility extends StaticAbility<InfectAbility> implements MageSingleton {
 
     private static final InfectAbility fINSTANCE =  new InfectAbility();
 

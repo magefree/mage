@@ -31,6 +31,7 @@ package mage.abilities.keyword;
 import mage.Constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.EvasionAbility;
+import mage.abilities.MageSingleton;
 import mage.abilities.effects.RestrictionEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -40,7 +41,7 @@ import java.io.ObjectStreamException;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class UnblockableAbility extends EvasionAbility<UnblockableAbility> {
+public class UnblockableAbility extends EvasionAbility<UnblockableAbility> implements MageSingleton {
 
     private static final UnblockableAbility fINSTANCE = new UnblockableAbility();
 
@@ -68,7 +69,7 @@ public class UnblockableAbility extends EvasionAbility<UnblockableAbility> {
 
 }
 
-class UnblockableEffect extends RestrictionEffect<UnblockableEffect> {
+class UnblockableEffect extends RestrictionEffect<UnblockableEffect> implements MageSingleton {
 
     public UnblockableEffect() {
         super(Duration.EndOfGame);
@@ -76,11 +77,6 @@ class UnblockableEffect extends RestrictionEffect<UnblockableEffect> {
 
     public UnblockableEffect(final UnblockableEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public void newId() {
-        // do nothing
     }
 
     @Override

@@ -28,18 +28,20 @@
 
 package mage.abilities.effects.common;
 
-import java.io.ObjectStreamException;
-import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.MageSingleton;
 import mage.abilities.effects.PostResolveEffect;
 import mage.cards.Card;
 import mage.game.Game;
+
+import java.io.ObjectStreamException;
+import java.util.UUID;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ExileSpellEffect extends PostResolveEffect<ExileSpellEffect> {
+public class ExileSpellEffect extends PostResolveEffect<ExileSpellEffect> implements MageSingleton {
 
     private static final ExileSpellEffect fINSTANCE =  new ExileSpellEffect();
 

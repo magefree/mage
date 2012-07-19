@@ -29,6 +29,7 @@
 package mage.abilities.keyword;
 
 import mage.Constants.Zone;
+import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
 
 import java.io.ObjectStreamException;
@@ -37,7 +38,7 @@ import java.io.ObjectStreamException;
  *
  * @author nantuko
  */
-public class ChangelingAbility extends StaticAbility<ChangelingAbility> {
+public class ChangelingAbility extends StaticAbility<ChangelingAbility> implements MageSingleton {
 
     private static final ChangelingAbility fINSTANCE =  new ChangelingAbility();
 

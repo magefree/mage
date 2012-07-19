@@ -28,21 +28,22 @@
 
 package mage.abilities.keyword;
 
-import java.io.ObjectStreamException;
-
 import mage.Constants;
 import mage.Constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.EvasionAbility;
+import mage.abilities.MageSingleton;
 import mage.abilities.effects.RestrictionEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.io.ObjectStreamException;
 
 /**
  *
  * @author Loki
  */
-public class FearAbility extends EvasionAbility<FearAbility> {
+public class FearAbility extends EvasionAbility<FearAbility> implements MageSingleton {
 
     private static final FearAbility fINSTANCE =  new FearAbility();
 
@@ -70,7 +71,7 @@ public class FearAbility extends EvasionAbility<FearAbility> {
 
 }
 
-class FearEffect extends RestrictionEffect<FearEffect> {
+class FearEffect extends RestrictionEffect<FearEffect> implements MageSingleton {
 
     public FearEffect() {
         super(Duration.WhileOnBattlefield);
