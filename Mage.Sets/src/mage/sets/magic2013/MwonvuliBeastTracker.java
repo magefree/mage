@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -52,6 +53,7 @@ public class MwonvuliBeastTracker extends CardImpl<MwonvuliBeastTracker> {
     private final static FilterCard filter = new FilterCard("creature card with deathtouch, hexproof, reach, or trample in your library");
 
     static {
+        filter.add(new CardTypePredicate(CardType.CREATURE));
         filter.add(Predicates.or(
         new AbilityPredicate(DeathtouchAbility.class),
         new AbilityPredicate(HexproofAbility.class),
