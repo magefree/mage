@@ -6,18 +6,20 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.game.permanent.Permanent;
 import org.junit.Test;
-import org.mage.test.serverside.base.CardTestBase;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  * @author ayrat
  */
-public class SejiriMerfolkTest extends CardTestBase {
+public class SejiriMerfolkTest extends CardTestPlayerBase {
 
     @Test
     public void testWithoutPlains() {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Sejiri Merfolk");
+
         setStopAt(1, Constants.PhaseStep.DRAW);
         execute();
+
         Permanent merfolk = getPermanent("Sejiri Merfolk", playerA.getId());
         Assert.assertNotNull(merfolk);
         Assert.assertFalse(merfolk.getAbilities().contains(FirstStrikeAbility.getInstance()));
@@ -28,8 +30,10 @@ public class SejiriMerfolkTest extends CardTestBase {
     public void testWithPlains() {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Sejiri Merfolk");
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains");
+
         setStopAt(1, Constants.PhaseStep.DRAW);
         execute();
+
         Permanent merfolk = getPermanent("Sejiri Merfolk", playerA.getId());
         Assert.assertNotNull(merfolk);
         Assert.assertTrue(merfolk.getAbilities().contains(FirstStrikeAbility.getInstance()));
