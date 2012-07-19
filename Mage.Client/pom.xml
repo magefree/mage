@@ -64,7 +64,7 @@
         <dependency>
             <groupId>org.jetlang</groupId>
             <artifactId>jetlang</artifactId>
-            <version>0.2.4</version>
+            <version>0.2.9</version>
         </dependency>
         <dependency>
             <groupId>com.jgoodies</groupId>
@@ -77,14 +77,14 @@
             <version>7.0.3</version>
         </dependency>
         <!--
-          <dependency>
-              <groupId>junit</groupId>
-              <artifactId>junit</artifactId>
-              <version>4.8.2</version>
-              <type>jar</type>
-              <scope>test</scope>
-          </dependency>
-           -->
+       <dependency>
+           <groupId>junit</groupId>
+           <artifactId>junit</artifactId>
+           <version>4.8.2</version>
+           <type>jar</type>
+           <scope>test</scope>
+       </dependency>
+        -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mage-theme-plugin</artifactId>
@@ -139,7 +139,7 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
                     <archive>
-						<manifestFile>${manifest.file}</manifestFile>
+                        <manifestFile>${manifest.file}</manifestFile>
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <mainClass>mage.client.MageFrame</mainClass>
@@ -156,62 +156,14 @@
                     </descriptors>
                 </configuration>
             </plugin>
-
-<!--
-            <plugin>
-                <groupId>com.akathist.maven.plugins.launch4j</groupId>
-                <artifactId>launch4j-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>l4j-mage-client</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>launch4j</goal>
-                        </goals>
-                        <configuration>
-                            <headerType>gui</headerType>
-                            <outfile>target/mage-client-${project.version}.exe</outfile>
-                            <jar>target/mage-client.jar</jar>
-                            <errTitle>Mage Client</errTitle>
-                            <icon>./src/main/resources/icon-mage.ico</icon>
-                            <classPath>
-                                <mainClass>mage.client.MageFrame</mainClass>
-                                <addDependencies>true</addDependencies>
-                                <preCp>anything</preCp>
-                                <jarLocation>lib/</jarLocation>
-                            </classPath>
-                            <jre>
-                                <minVersion>1.5.0</minVersion>
-                                <opts>
-                                    <opt>-Djava.security.policy=./config/security.policy</opt>
-                                    <opt>-Djava.util.logging.config.file=./config/logging.config</opt>
-                                    <opt>-Xms256M</opt>
-                                    <opt>-Xmx1024M</opt>
-                                </opts>
-                            </jre>
-                            <versionInfo>
-                                <fileVersion>0.8.4.0</fileVersion>
-                                <txtFileVersion>MAGE Client</txtFileVersion>
-                                <fileDescription>Mage Client</fileDescription>
-                                <copyright>(C) Mage Development Team</copyright>
-                                <productVersion>0.8.4.0</productVersion>
-                                <txtProductVersion>MAGE Client</txtProductVersion>
-                                <productName>MAGE</productName>
-                                <internalName>Mage-Client</internalName>
-                                <originalFilename>mage-client.exe</originalFilename>
-                            </versionInfo>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>-->
         </plugins>
 
         <finalName>mage-client</finalName>
     </build>
 	
-	<properties>
-		<manifest.file>src/main/resources/META-INF/MANIFEST.MF</manifest.file>
-	</properties>
+    <properties>
+        <manifest.file>src/main/resources/META-INF/MANIFEST.MF</manifest.file>
+    </properties>
 
     <repositories>
         <repository>

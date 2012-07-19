@@ -1,2 +1,1 @@
-mvn install:install-file -DgroupId=org.sqlite -DartifactId=sqlite -Dversion=0.5.6 -Dpackaging=jar -Dfile=./org/sqlite/sqlitejdbc-v056.jar
 mvn install:install-file -DgroupId=com.googlecode.jspf -DartifactId=jspf-core -Dversion=0.9.1 -Dpackaging=jar -Dfile=./com/googlecode/jspf/jspf-core/0.9.1/jspf-core-0.9.1.jar

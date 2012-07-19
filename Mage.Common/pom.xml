@@ -31,9 +31,9 @@
             <version>2.5.4.SP3</version>
         </dependency>
         <dependency>
-            <groupId>jboss</groupId>
+            <groupId>org.jboss</groupId>
             <artifactId>jboss-common-core</artifactId>
-            <version>2.2.16.GA</version>
+            <version>2.2.9.GA</version>
         </dependency>
         <dependency>
             <groupId>jboss</groupId>
@@ -52,9 +52,9 @@
         </dependency>
 
         <dependency>
-            <groupId>org.sqlite</groupId>
-            <artifactId>sqlite</artifactId>
-            <version>0.5.6</version>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>3.7.2</version>
         </dependency>
 
     </dependencies>
@@ -65,7 +65,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.0.2</version>
                 <configuration>
                     <source>1.6</source>
                     <target>1.6</target>
@@ -73,7 +72,6 @@
             </plugin>
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>2.4.3</version>
                 <configuration>
                     <encoding>UTF-8</encoding>
                 </configuration>

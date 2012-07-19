@@ -39,7 +39,7 @@
             <artifactId>jaxb-impl</artifactId>
             <version>2.1.12</version>
         </dependency>
-       <dependency>
+        <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.14</version>
@@ -169,51 +169,6 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
-                <!--<plugin>
-                <groupId>com.akathist.maven.plugins.launch4j</groupId>
-                <artifactId>launch4j-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>l4j-mage-server</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>launch4j</goal>
-                        </goals>
-                        <configuration>
-                            <headerType>console</headerType>
-                            <outfile>target/mage-server-${project.version}.exe</outfile>
-                            <jar>target/mage-server.jar</jar>
-                            <errTitle>Mage Server</errTitle>
-                            <icon>../Mage.Client/src/main/resources/icon-mage.ico</icon>
-                            <classPath>
-                                <mainClass>mage.server.Main</mainClass>
-                                <addDependencies>true</addDependencies>
-                                <preCp>anything</preCp>
-                                <jarLocation>lib/</jarLocation>
-                            </classPath>
-                            <jre>
-                                <minVersion>1.5.0</minVersion>
-                                <opts>
-                                    <opt>-Djava.security.policy=./config/security.policy</opt>
-                                    <opt>-Djava.util.logging.config.file=./config/logging.config</opt>
-                                    <opt>-Dlog4j.configuration=file:./config/log4j.properties</opt>
-                                </opts>
-                            </jre>
-                            <versionInfo>
-                                <fileVersion>0.8.4.0</fileVersion>
-                                <txtFileVersion>MAGE Server</txtFileVersion>
-                                <fileDescription>Mage Server</fileDescription>
-                                <copyright>(C) Mage Development Team</copyright>
-                                <productVersion>0.8.4.0</productVersion>
-                                <txtProductVersion>MAGE Server</txtProductVersion>
-                                <productName>MAGE</productName>
-                                <internalName>Mage-Server</internalName>
-                                <originalFilename>mage-server.exe</originalFilename>
-                            </versionInfo>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>-->
         </plugins>
 
         <finalName>mage-server</finalName>
