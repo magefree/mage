@@ -43,7 +43,7 @@ import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CantBlockSourceEffect;
+import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
@@ -105,7 +105,8 @@ class BlazingTorchEvasionAbility extends EvasionAbility<BlazingTorchEvasionAbili
     }
 }
 
-class BlazingTorchEvasionEffect extends CantBlockSourceEffect {
+
+class BlazingTorchEvasionEffect extends RestrictionEffect<BlazingTorchEvasionEffect> {
 
     public BlazingTorchEvasionEffect() {
         super(Duration.WhileOnBattlefield);
@@ -113,6 +114,14 @@ class BlazingTorchEvasionEffect extends CantBlockSourceEffect {
 
     public BlazingTorchEvasionEffect(final BlazingTorchEvasionEffect effect) {
         super(effect);
+    }
+
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        if (permanent.getId().equals(source.getSourceId())) {
+            return true;
+        }
+        return false;
     }
 
     @Override
