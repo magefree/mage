@@ -155,6 +155,9 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             List<Card> cards = getCardList(gameZone, player);
             for (int i = 0; i < count; i++) {
                 Card card = Sets.findCard(cardName, true);
+                if (card == null) {
+                    throw new AssertionError("Couldn't find a card: " + cardName);
+                }
                 cards.add(card);
             }
         }
@@ -185,7 +188,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                 return libraryCardsB;
             }
         }
-        return null;
+        throw new AssertionError("Zone is not supported by test framework: " + gameZone);
     }
 
     /**
