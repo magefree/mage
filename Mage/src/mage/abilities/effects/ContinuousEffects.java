@@ -263,17 +263,37 @@ public class ContinuousEffects implements Serializable {
     }
 
     public boolean asThough(UUID objectId, AsThoughEffectType type, Game game) {
-        for (AsThoughEffect entry: asThoughEffects) {
-            AsThoughEffect effect = entry;
+        List<AsThoughEffect> asThoughEffectsList = getApplicableAsThoughEffects(game);
+
+        for (AsThoughEffect effect: asThoughEffectsList) {
             if (effect.getAsThoughEffectType() == type) {
-                if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
-                    if (effect.applies(objectId, asThoughEffects.getAbility(entry.getId()), game)) {
-                        return true;
-                    }
+                if (effect.applies(objectId, asThoughEffects.getAbility(effect.getId()), game)) {
+                    return true;
                 }
             }
         }
         return false;
+    }
+
+    /**
+     * Filters out asThough effects that are not active.
+     *
+     * @param game
+     * @return
+     */
+    private List<AsThoughEffect> getApplicableAsThoughEffects(Game game) {
+        List<AsThoughEffect> asThoughEffectsList = new ArrayList<AsThoughEffect>();
+
+        for (AsThoughEffect effect: asThoughEffects) {
+            Ability ability = asThoughEffects.getAbility(effect.getId());
+            if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, false)) {
+                if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
+                    asThoughEffectsList.add(effect);
+                }
+            }
+        }
+
+        return asThoughEffectsList;
     }
 
     /**
