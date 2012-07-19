@@ -33,7 +33,7 @@
         <dependency>
             <groupId>org.jboss</groupId>
             <artifactId>jboss-common-core</artifactId>
-            <version>2.2.9.GA</version>
+            <version>2.2.19.GA</version>
         </dependency>
         <dependency>
             <groupId>jboss</groupId>
