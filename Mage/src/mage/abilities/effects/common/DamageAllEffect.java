@@ -34,7 +34,7 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -44,13 +44,13 @@ import mage.game.permanent.Permanent;
  */
 public class DamageAllEffect extends OneShotEffect<DamageAllEffect> {
 
-    private FilterCreaturePermanent filter;
+    private FilterPermanent filter;
     private DynamicValue amount;
 
-    public DamageAllEffect(int amount, FilterCreaturePermanent filter) {
+    public DamageAllEffect(int amount, FilterPermanent filter) {
         this(new StaticValue(amount), filter);
     }
-    public DamageAllEffect(DynamicValue amount, FilterCreaturePermanent filter) {
+    public DamageAllEffect(DynamicValue amount, FilterPermanent filter) {
         super(Outcome.Damage);
         this.amount = amount;
         this.filter = filter;
@@ -70,7 +70,7 @@ public class DamageAllEffect extends OneShotEffect<DamageAllEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game);
+        List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getId(), game);
         for (Permanent permanent: permanents) {
             permanent.damage(amount.calculate(game, source), source.getSourceId(), game, true, false);
         }
