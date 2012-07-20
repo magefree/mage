@@ -33,7 +33,6 @@ import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
 import mage.game.Controllable;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 import java.util.UUID;
 
@@ -41,7 +40,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class ControllerPredicate implements ObjectPlayerPredicate<ObjectPlayer<Permanent>> {
+public class ControllerPredicate implements ObjectPlayerPredicate<ObjectPlayer<Controllable>> {
 
     private Constants.TargetController controller;
 
@@ -50,7 +49,7 @@ public class ControllerPredicate implements ObjectPlayerPredicate<ObjectPlayer<P
     }
 
     @Override
-    public boolean apply(ObjectPlayer<Permanent> input, Game game) {
+    public boolean apply(ObjectPlayer<Controllable> input, Game game) {
         Controllable object = input.getObject();
         UUID playerId = input.getPlayerId();
 
