@@ -152,6 +152,7 @@ class OdricMasterTacticianEffect extends ReplacementEffectImpl<OdricMasterTactic
             if (game.isPaused() || game.isGameOver()) {
                 return true;
             }
+            game.getCombat().checkBlockRestrictions(game.getPlayer(defenderId), game);
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, defenderId, defenderId));
         }
 

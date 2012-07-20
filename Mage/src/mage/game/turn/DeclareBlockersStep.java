@@ -28,10 +28,11 @@
 
 package mage.game.turn;
 
-import java.util.UUID;
 import mage.Constants.PhaseStep;
 import mage.game.Game;
 import mage.game.events.GameEvent.EventType;
+
+import java.util.UUID;
 
 /**
  *
@@ -62,7 +63,7 @@ public class DeclareBlockersStep extends Step<DeclareBlockersStep> {
         super.beginStep(game, activePlayerId);
         game.getCombat().selectBlockers(game);
         if (!game.isPaused()) {
-            game.getCombat().checkBlockRestrictions(game);
+            game.getCombat().acceptBlockers(game);
             game.getCombat().damageAssignmentOrder(game);
         }
     }
@@ -71,7 +72,7 @@ public class DeclareBlockersStep extends Step<DeclareBlockersStep> {
     public void resumeBeginStep(Game game, UUID activePlayerId) {
         super.resumeBeginStep(game, activePlayerId);
         game.getCombat().resumeSelectBlockers(game);
-        game.getCombat().checkBlockRestrictions(game);
+        game.getCombat().acceptBlockers(game);
         game.getCombat().damageAssignmentOrder(game);
     }
 

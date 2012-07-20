@@ -30,6 +30,7 @@ package mage.game.combat;
 
 import mage.Constants.Outcome;
 import mage.abilities.effects.RequirementEffect;
+import mage.abilities.keyword.CantAttackAloneAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.filter.common.FilterCreatureForCombat;
 import mage.filter.common.FilterPlaneswalkerPermanent;
@@ -128,6 +129,7 @@ public class Combat implements Serializable, Copyable<Combat> {
             player.selectAttackers(game, attackerId);
             if (game.isPaused() || game.isGameOver())
                 return;
+            checkAttackRestrictions(player, game);
             resumeSelectAttackers(game);
         }
     }
@@ -167,6 +169,28 @@ public class Combat implements Serializable, Copyable<Combat> {
         }
     }
 
+    protected void checkAttackRestrictions(Player player, Game game) {
+        int count = 0;
+        for (CombatGroup group: groups) {
+            count += group.getAttackers().size();
+        }
+        if (count == 1) {
+            for (CombatGroup group: groups) {
+                List<UUID> tobeRemoved = new ArrayList<UUID>();
+                for (UUID attackerId: group.getAttackers()) {
+                    Permanent attacker = game.getPermanent(attackerId);
+                    if (attacker != null && attacker.getAbilities().containsKey(CantAttackAloneAbility.getInstance().getId())) {
+                        game.informPlayers(attacker.getName() + " can't attack alone. Removing it from combat.");
+                        tobeRemoved.add(attackerId);
+                    }
+                }
+                for (UUID attackerId : tobeRemoved) {
+                    group.remove(attackerId);
+                }
+            }
+        }
+    }
+
     public void selectBlockers(Game game) {
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_BLOCKERS, attackerId, attackerId))) {
             Player player = game.getPlayer(attackerId);
@@ -176,8 +200,25 @@ public class Combat implements Serializable, Copyable<Combat> {
                 game.getPlayer(defenderId).selectBlockers(game, defenderId);
                 if (game.isPaused() || game.isGameOver())
                     return;
+                checkBlockRestrictions(game.getPlayer(defenderId), game);
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, defenderId, defenderId));
             }
+        }
+    }
+
+    public void checkBlockRestrictions(Player player, Game game) {
+        int count = 0;
+        for (CombatGroup group: groups) {
+            count += group.getBlockers().size();
+        }
+        for (CombatGroup group : groups) {
+            group.checkBlockRestrictions(game, count);
+        }
+    }
+
+    public void acceptBlockers(Game game) {
+        for (CombatGroup group : groups) {
+            group.acceptBlockers(game);
         }
     }
 
@@ -203,12 +244,6 @@ public class Combat implements Serializable, Copyable<Combat> {
                     }
                 }
             }
-        }
-    }
-
-    public void checkBlockRestrictions(Game game) {
-        for (CombatGroup group : groups) {
-            group.checkBlockRestrictions(game);
         }
     }
 

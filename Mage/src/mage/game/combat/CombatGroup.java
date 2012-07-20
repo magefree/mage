@@ -30,10 +30,7 @@ package mage.game.combat;
 
 import mage.Constants.Outcome;
 import mage.abilities.common.DamageAsThoughNotBlockedAbility;
-import mage.abilities.keyword.DeathtouchAbility;
-import mage.abilities.keyword.DoubleStrikeAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.keyword.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -492,9 +489,41 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         }
     }
 
-    public void checkBlockRestrictions(Game game) {
+    public void acceptBlockers(Game game) {
         if (attackers.isEmpty()) {
             return;
+        }
+        for (UUID blockerId : blockers) {
+            for (UUID attackerId: attackers) {
+                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BLOCKER_DECLARED, attackerId, blockerId, players.get(blockerId)));
+            }
+        }
+        if(!blockers.isEmpty()) {
+            for (UUID attackerId: attackers) {
+                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_BLOCKED, attackerId, null));
+            }
+        }
+    }
+
+    public void checkBlockRestrictions(Game game, int blockersCount) {
+        if (attackers.isEmpty()) {
+            return;
+        }
+        if (blockersCount == 1) {
+            List<UUID> toBeRemoved = new ArrayList<UUID>();
+            for (UUID blockerId: getBlockers()) {
+                Permanent blocker = game.getPermanent(blockerId);
+                if (blocker != null && blocker.getAbilities().containsKey(CantBlockAloneAbility.getInstance().getId())) {
+                    game.informPlayers(blocker.getName() + " can't block alone. Removing it from combat.");
+                    toBeRemoved.add(blockerId);
+                }
+            }
+            for (UUID blockerId : toBeRemoved) {
+                remove(blockerId);
+            }
+            if (blockers.size() == 0) {
+                this.blocked = false;
+            }
         }
         for (UUID uuid : attackers) {
             Permanent attacker = game.getPermanent(uuid);
@@ -510,16 +539,6 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 this.blocked = false;
                 game.informPlayers(attacker.getName() + " can't be blocked except by " + attacker.getMinBlockedBy() + " or more creatures. Blockers discarded.");
                 return;
-            }
-        }
-        for (UUID blockerId : blockers) {
-            for (UUID attackerId: attackers) {
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BLOCKER_DECLARED, attackerId, blockerId, players.get(blockerId)));
-            }
-        }
-        if(!blockers.isEmpty()) {
-            for (UUID attackerId: attackers) {
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_BLOCKED, attackerId, null));
             }
         }
     }
