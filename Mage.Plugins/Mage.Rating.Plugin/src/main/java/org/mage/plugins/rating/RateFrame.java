@@ -1,23 +1,16 @@
 package org.mage.plugins.rating;
 
-import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-
 import org.apache.log4j.Logger;
 import org.mage.plugins.rating.cards.CardsStorage;
 import org.mage.plugins.rating.results.ResultHandler;
 import org.mage.plugins.rating.ui.BigCard;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class RateFrame extends JFrame {
 
@@ -34,12 +27,16 @@ public class RateFrame extends JFrame {
             log.error(ex.getMessage(), ex);
         }
 
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                if (JOptionPane.showConfirmDialog(null, "Do you want to save recent compares?", "Save before exit", JOptionPane.YES_NO_OPTION) == JOptionPane.OK_OPTION) {
+                //if (JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?", "Exit", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     RateThread.getInstance().forceSave();
-                }
+                    //dispose();
+                    //System.exit(0);
+                //}
             }
         });
 
@@ -82,7 +79,7 @@ public class RateFrame extends JFrame {
 
     public void startRating() {
         CardsStorage.getAllCards();
-        label.setText("The results are stored for every 10 compare.");
+        label.setText("The results are stored automatically for every 10 compare.");
         RateThread.getInstance().start(this, this.bigCard);
     }
 

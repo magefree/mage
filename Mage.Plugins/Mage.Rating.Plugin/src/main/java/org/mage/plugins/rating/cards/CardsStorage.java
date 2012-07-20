@@ -1,13 +1,13 @@
 package org.mage.plugins.rating.cards;
 
+import mage.cards.Card;
+import mage.cards.ExpansionSet;
+import mage.sets.Sets;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import mage.cards.Card;
-import mage.cards.ExpansionSet;
-import mage.sets.Sets;
 
 public class CardsStorage {
     private static List<Card> allCards = new ArrayList<Card>();
@@ -15,7 +15,9 @@ public class CardsStorage {
 
     static {
         for (ExpansionSet set: Sets.getInstance().values()) {
-            allCards.addAll(set.getCards());
+            if (set.getName().equals("Magic 2013")) {
+                allCards.addAll(set.getCards());
+            }
         }
         Set<String> names = new HashSet<String>();
         for (Card card : allCards) {
