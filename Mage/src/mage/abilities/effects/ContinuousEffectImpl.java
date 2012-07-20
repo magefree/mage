@@ -52,6 +52,7 @@ public abstract class ContinuousEffectImpl<T extends ContinuousEffectImpl<T>> ex
     protected SubLayer sublayer;
     protected Date timestamp;
     protected boolean used = false;
+    protected boolean discarded = false; // for manual effect discard
     protected boolean affectedObjectsSet = false;
     protected List<UUID> objects = new ArrayList<UUID>();
     protected Map<UUID, Integer> metadata = new HashMap<UUID, Integer>();
@@ -76,6 +77,7 @@ public abstract class ContinuousEffectImpl<T extends ContinuousEffectImpl<T>> ex
         this.sublayer = effect.sublayer;
         this.timestamp = new Date(effect.timestamp.getTime());
         this.used = effect.used;
+        this.discarded = effect.discarded;
         this.affectedObjectsSet = effect.affectedObjectsSet;
         this.objects.addAll(effect.objects);
     }
@@ -118,6 +120,11 @@ public abstract class ContinuousEffectImpl<T extends ContinuousEffectImpl<T>> ex
     @Override
     public boolean isUsed() {
         return used;
+    }
+
+    @Override
+    public boolean isDiscarded() {
+        return discarded;
     }
 
     @Override

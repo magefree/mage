@@ -43,6 +43,7 @@ import java.util.Date;
 public interface ContinuousEffect<T extends ContinuousEffect<T>> extends Effect<T> {
 
     public boolean isUsed();
+    public boolean isDiscarded();
     public Duration getDuration();
     public Date getTimestamp();
     public void setTimestamp();

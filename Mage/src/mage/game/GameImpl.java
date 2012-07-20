@@ -726,6 +726,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                     }
                     catch (Exception ex) {
                         logger.fatal("Game exception ", ex);
+                        ex.printStackTrace();
                         this.fireErrorEvent("Game exception occurred: ", ex);
                         //restoreState(bookmark);
                         bookmark = 0;

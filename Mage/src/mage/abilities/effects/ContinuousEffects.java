@@ -130,7 +130,6 @@ public class ContinuousEffects implements Serializable {
         restrictionEffects.removeInactiveEffects(game);
         asThoughEffects.removeInactiveEffects(game);
         costModificationEffects.removeInactiveEffects(game);
-
     }
 
     public List<ContinuousEffect> getLayeredEffects(Game game) {

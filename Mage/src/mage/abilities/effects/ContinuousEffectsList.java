@@ -27,10 +27,11 @@
 */
 package mage.abilities.effects;
 
-import java.util.*;
 import mage.Constants;
 import mage.abilities.Ability;
 import mage.game.Game;
+
+import java.util.*;
 
 /**
  *
@@ -80,9 +81,13 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
         Ability ability = abilityMap.get(effect.getId());
         if (ability == null)
             return true;
+
+        if (effect.isDiscarded())
+            return true;
+
         switch(effect.getDuration()) {
             case WhileOnBattlefield:
-                if (game.getObject(ability.getSourceId()) == null)
+                if (game.getObject(ability.getSourceId()) == null) //TODO: does this really works?? object is returned across the game
                     return (true);
             case OneUse:
                 return effect.isUsed();
