@@ -36,6 +36,8 @@ import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.SearchEffect;
 import mage.cards.Card;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -45,14 +47,25 @@ import mage.target.common.TargetCardInLibrary;
  * @author BetaSteward_at_googlemail.com
  */
 public class SearchLibraryPutOnLibraryEffect extends SearchEffect<SearchLibraryPutOnLibraryEffect> {
+    
+    private boolean reveal;
+    private boolean forceShuffle;
 
     public SearchLibraryPutOnLibraryEffect(TargetCardInLibrary target) {
+        this(target, false, true);
+        setText();
+    }
+    
+    public SearchLibraryPutOnLibraryEffect(TargetCardInLibrary target, boolean reveal, boolean forceShuffle) {
         super(target, Outcome.DrawCard);
+        this.reveal = reveal;
+        this.forceShuffle = forceShuffle;
         setText();
     }
 
     public SearchLibraryPutOnLibraryEffect(final SearchLibraryPutOnLibraryEffect effect) {
         super(effect);
+        this.reveal = effect.reveal;
     }
 
     @Override
@@ -72,14 +85,22 @@ public class SearchLibraryPutOnLibraryEffect extends SearchEffect<SearchLibraryP
                 if (card != null)
                     cards.add(card);
             }
-            player.shuffleLibrary(game);
+            Cards foundCards = new CardsImpl();
+            foundCards.addAll(cards);
+            if (reveal) {
+                player.revealCards("Revealed", foundCards, game);
+            }
+            if (forceShuffle) {
+                player.shuffleLibrary(game);
+            }
             for (Card card: cards) {
                 card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
             }
             return true;
         }
-        // shuffle anyway
-        player.shuffleLibrary(game);
+        // shuffle
+        if (forceShuffle)
+            player.shuffleLibrary(game);
         return false;
     }
 

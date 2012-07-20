@@ -72,7 +72,7 @@ public class MwonvuliBeastTracker extends CardImpl<MwonvuliBeastTracker> {
         this.toughness = new MageInt(1);
 
         // When Mwonvuli Beast Tracker enters the battlefield, search your library for a creature card with deathtouch, hexproof, reach, or trample and reveal it. Shuffle your library and put that card on top of it.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(filter))));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(filter), true, true)));
     }
 
     public MwonvuliBeastTracker(final MwonvuliBeastTracker card) {
