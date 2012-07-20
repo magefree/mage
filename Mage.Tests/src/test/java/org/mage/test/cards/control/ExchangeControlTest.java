@@ -79,9 +79,10 @@ public class ExchangeControlTest extends CardTestPlayerBase {
         setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
 
+        assertGraveyardCount(playerB, "Elite Vanguard", 1);
+
         // check nothing happened
         assertPermanentCount(playerA, "Llanowar Elves", 1);
-        assertPermanentCount(playerB, "Elite Vanguard", 1);
     }
 
     /**
@@ -107,8 +108,9 @@ public class ExchangeControlTest extends CardTestPlayerBase {
         setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
 
+        assertGraveyardCount(playerA, "Llanowar Elves", 1);
+
         // check nothing happened
-        assertPermanentCount(playerA, "Llanowar Elves", 1);
         assertPermanentCount(playerB, "Elite Vanguard", 1);
     }
 
