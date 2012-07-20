@@ -38,10 +38,7 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author magenoxx_at_googlemail.com
@@ -49,6 +46,7 @@ import java.util.UUID;
 public class ExchangeControlTargetEffect extends ContinuousEffectImpl<ExchangeControlTargetEffect> {
 
     private String rule;
+    private Map<UUID, UUID> lockedControllers;
 
     public ExchangeControlTargetEffect(Duration duration, String rule) {
         super(duration, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
@@ -66,7 +64,7 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl<ExchangeCo
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public void init(Ability source, Game game) {
         Set<UUID> controllers = new HashSet<UUID>();
         for (UUID permanentId : targetPointer.getTargets(game, source)) {
             Permanent permanent = game.getPermanent(permanentId);
@@ -78,8 +76,10 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl<ExchangeCo
         if (controllers.size() != 2) {
             // discard effect
             this.discarded = true;
-            return false;
+            return;
         }
+
+        this.lockedControllers = new HashMap<UUID, UUID>();
 
         Iterator<UUID> it = controllers.iterator();
         UUID firstController = it.next();
@@ -88,7 +88,20 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl<ExchangeCo
         for (UUID permanentId : targetPointer.getTargets(game, source)) {
             Permanent permanent = game.getPermanent(permanentId);
             if (permanent != null) {
-                permanent.changeControllerId(permanent.getControllerId().equals(firstController) ? secondController : firstController, game);
+                this.lockedControllers.put(permanent.getId(), permanent.getControllerId().equals(firstController) ? secondController : firstController);
+            }
+        }
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        for (UUID permanentId : targetPointer.getTargets(game, source)) {
+            Permanent permanent = game.getPermanent(permanentId);
+            if (permanent != null) {
+                UUID controllerId = this.lockedControllers.get(permanent.getId());
+                if (controllerId != null) {
+                    permanent.changeControllerId(controllerId, game);
+                }
             }
         }
 
