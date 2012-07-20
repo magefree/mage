@@ -109,7 +109,7 @@ public class GamePanel extends javax.swing.JPanel {
             final JLayeredPane j = new JLayeredPane();
             j.setSize(1024,768);
             this.add(j);
-            j.add(jSplitPane1, JLayeredPane.DEFAULT_LAYER);
+            j.add(jSplitPane0, JLayeredPane.DEFAULT_LAYER);
 
             Map<String, JComponent> ui = getUIComponents(j);
             Plugins.getInstance().updateGamePanel(ui);
@@ -121,7 +121,7 @@ public class GamePanel extends javax.swing.JPanel {
                     int width = ((JComponent)e.getSource()).getWidth();
                     int height = ((JComponent)e.getSource()).getHeight();
                     j.setSize(width, height);
-                    jSplitPane1.setSize(width, height);
+                    jSplitPane0.setSize(width, height);
                     sizeToScreen();
                 }
             });
@@ -629,6 +629,8 @@ public class GamePanel extends javax.swing.JPanel {
 
         abilityPicker = new mage.client.components.ability.AbilityPicker();
         jSplitPane1 = new javax.swing.JSplitPane();
+        jSplitPane0 = new javax.swing.JSplitPane();
+        jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         pnlGameInfo = new javax.swing.JPanel();
         lblPhase = new javax.swing.JLabel();
@@ -662,6 +664,7 @@ public class GamePanel extends javax.swing.JPanel {
         userChatPanel.useExtendedView(ChatPanel.VIEW_MODE.CHAT);
         gameChatPanel.setConnectedChat(userChatPanel);
         gameChatPanel.disableInput();
+        gameChatPanel.setMinimumSize(new java.awt.Dimension(100, 48));
         jSplitPane2 = new javax.swing.JSplitPane();
         handContainer = new HandPanel();
 
@@ -672,6 +675,12 @@ public class GamePanel extends javax.swing.JPanel {
         jSplitPane1.setResizeWeight(1.0);
         jSplitPane1.setOneTouchExpandable(true);
         jSplitPane1.setMinimumSize(new java.awt.Dimension(26, 48));
+
+        jSplitPane0.setBorder(null);
+        jSplitPane0.setDividerSize(7);
+        jSplitPane0.setResizeWeight(1.0);
+        jSplitPane0.setOneTouchExpandable(true);
+
         pnlGameInfo.setOpaque(false);
 
         lblPhase.setLabelFor(txtPhase);
@@ -757,13 +766,28 @@ public class GamePanel extends javax.swing.JPanel {
             }
         });
 
-        KeyStroke ksAltShift = KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.ALT_MASK);
-        this.getInputMap(c).put(ksAltShift, "ENLARGE");
+        KeyStroke ksAltE = KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.ALT_MASK);
+        this.getInputMap(c).put(ksAltE, "ENLARGE");
         this.getActionMap().put("ENLARGE", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 ActionCallback callback = Plugins.getInstance().getActionCallback();
                 ((MageActionCallback)callback).enlargeCard();
+            }
+        });
+
+        KeyStroke ksAltD = KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.ALT_MASK);
+        this.getInputMap(c).put(ksAltD, "BIG_IMAGE");
+        this.getActionMap().put("BIG_IMAGE", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                imagePanelState = !imagePanelState;
+                if (!imagePanelState) {
+                    jSplitPane0.resetToPreferredSizes();
+                    jSplitPane0.setDividerLocation(jSplitPane0.getSize().width - jSplitPane0.getInsets().right - jSplitPane0.getDividerSize() - 260);
+                } else {
+                    jSplitPane0.setDividerLocation(1.0);
+                }
             }
         });
 
@@ -996,19 +1020,22 @@ public class GamePanel extends javax.swing.JPanel {
         //helper.setBorder(BorderFactory.createLineBorder(Color.ORANGE));
 
         jSplitPane1.setLeftComponent(jPanel3);
-
-        gameChatPanel.setMinimumSize(new java.awt.Dimension(100, 48));
         jSplitPane1.setRightComponent(jSplitPane2);
+
+        jPanel2.add(bigCard);
+        jPanel2.setOpaque(false);
+        jSplitPane0.setLeftComponent(jSplitPane1);
+        jSplitPane0.setRightComponent(jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1078, Short.MAX_VALUE)
+                .addComponent(jSplitPane0, javax.swing.GroupLayout.DEFAULT_SIZE, 1078, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 798, Short.MAX_VALUE)
+                .addComponent(jSplitPane0, javax.swing.GroupLayout.DEFAULT_SIZE, 798, Short.MAX_VALUE)
         );
     }
 
@@ -1102,7 +1129,9 @@ public class GamePanel extends javax.swing.JPanel {
     private mage.client.chat.ChatPanel gameChatPanel;
     private mage.client.game.FeedbackPanel feedbackPanel;
     private mage.client.chat.ChatPanel userChatPanel;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JSplitPane jSplitPane0;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JLabel lblActivePlayer;
     private javax.swing.JLabel lblPhase;
@@ -1138,6 +1167,8 @@ public class GamePanel extends javax.swing.JPanel {
     private JButton endOfTurn;
     private JButton prevStep;
     private JLabel endButtonTip;
+
+    private boolean imagePanelState;
 
 }
 
