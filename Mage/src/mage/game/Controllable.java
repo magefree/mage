@@ -26,22 +26,13 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.game.stack;
-
-import mage.MageObject;
-import mage.abilities.Ability;
-import mage.game.Controllable;
-import mage.game.Game;
+package mage.game;
 
 import java.util.UUID;
 
-public interface StackObject extends MageObject, Controllable {
-
-//    public Card getCard();
-    public boolean resolve(Game game);
-    public UUID getSourceId();
-    public void counter(UUID sourceId, Game game);
-    public Ability getStackAbility();
-    @Override
-    public StackObject copy();
+/**
+ * @author magenoxx_at_gmail.com
+ */
+public interface Controllable {
+    UUID getControllerId();
 }

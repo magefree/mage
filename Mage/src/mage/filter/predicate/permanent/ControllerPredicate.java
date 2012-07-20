@@ -27,13 +27,15 @@
  */
 package mage.filter.predicate.permanent;
 
-import java.util.UUID;
 import mage.Constants;
 import mage.Constants.TargetController;
 import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
+import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -49,22 +51,22 @@ public class ControllerPredicate implements ObjectPlayerPredicate<ObjectPlayer<P
 
     @Override
     public boolean apply(ObjectPlayer<Permanent> input, Game game) {
-        Permanent permanent = input.getObject();
+        Controllable object = input.getObject();
         UUID playerId = input.getPlayerId();
 
         switch (controller) {
             case YOU:
-                if (permanent.getControllerId().equals(playerId)) {
+                if (object.getControllerId().equals(playerId)) {
                     return true;
                 }
                 break;
             case OPPONENT:
-                if (game.getOpponents(playerId).contains(permanent.getControllerId())) {
+                if (game.getOpponents(playerId).contains(object.getControllerId())) {
                     return true;
                 }
                 break;
             case NOT_YOU:
-                if (!permanent.getControllerId().equals(playerId)) {
+                if (!object.getControllerId().equals(playerId)) {
                     return true;
                 }
                 break;

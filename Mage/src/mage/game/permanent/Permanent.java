@@ -33,12 +33,13 @@ import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.counters.Counter;
 import mage.counters.Counters;
+import mage.game.Controllable;
 import mage.game.Game;
 
 import java.util.List;
 import java.util.UUID;
 
-public interface Permanent extends Card {
+public interface Permanent extends Card, Controllable {
 
     public boolean isTapped();
     public boolean untap(Game game);
@@ -72,7 +73,6 @@ public interface Permanent extends Card {
     public boolean addAttachment(UUID permanentId, Game game);
     public boolean removeAttachment(UUID permanentId, Game game);
 
-    public UUID getControllerId();
     public boolean changeControllerId(UUID controllerId, Game game);
     public boolean canBeTargetedBy(MageObject source, UUID controllerId, Game game);
     public boolean hasProtectionFrom(MageObject source, Game game);
