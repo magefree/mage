@@ -27,9 +27,12 @@
  */
 package mage.sets.magic2013;
 
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.abilities.effects.common.continious.ExchangeControlTargetEffect;
 import mage.cards.CardImpl;
+import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -38,6 +41,8 @@ import java.util.UUID;
  */
 public class Switcheroo extends CardImpl<Switcheroo> {
 
+    private static final String rule = "Exchange control of two target creatures";
+
     public Switcheroo(UUID ownerId) {
         super(ownerId, 71, "Switcheroo", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{U}");
         this.expansionSetCode = "M13";
@@ -45,7 +50,8 @@ public class Switcheroo extends CardImpl<Switcheroo> {
         this.color.setBlue(true);
 
         // Exchange control of two target creatures.
-        // TODO: implement
+        this.getSpellAbility().addEffect(new ExchangeControlTargetEffect(Constants.Duration.EndOfGame, rule));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(2));
     }
 
     public Switcheroo(final Switcheroo card) {
