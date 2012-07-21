@@ -16,6 +16,8 @@ Urza's Destiny|urzasdestiny|
 Invasion|invasion|
 Planeshift|planeshift|
 Apocalypse|apocalypse|
+Odyssey|odyssey|
+Torment|torment|
 Judgment|judgment|
 Onslaught|onslaught|
 Legions|legions|
