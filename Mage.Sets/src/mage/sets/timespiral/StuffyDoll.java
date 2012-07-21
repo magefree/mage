@@ -27,7 +27,6 @@
  */
 package mage.sets.timespiral;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
@@ -46,6 +45,8 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -102,6 +103,7 @@ class StuffyDollChoosePlayerEffect extends OneShotEffect<StuffyDollChoosePlayerE
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (player != null && permanent != null) {
             TargetPlayer target = new TargetPlayer();
+            target.setRequired(true);
             if (player.choose(this.outcome, target, source.getId(), game)) {
                 Player chosenPlayer = game.getPlayer(target.getFirstTarget());
                 if (chosenPlayer != null) {
