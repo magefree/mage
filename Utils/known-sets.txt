@@ -10,6 +10,8 @@ Planechase|planechase|
 Duel Decks: Elspeth vs. Tezzeret|elspethvstezzeret|
 Weatherlight|weatherlight|
 Tempest|tempest|
+Stronghold|stronghold|
+Exodus|exodus|
 Urza's Saga|urzassaga|
 Urza's Legacy|urzaslegacy|
 Urza's Destiny|urzasdestiny|

@@ -83,6 +83,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
         this.addSet(EighthEdition.getInstance());
         this.addSet(ElspethvsTezzeret.getInstance());
         this.addSet(Eventide.getInstance());
+        this.addSet(Exodus.getInstance());
         this.addSet(FifthDawn.getInstance());
         this.addSet(FifthEdition.getInstance());
         this.addSet(FutureSight.getInstance());
@@ -118,6 +119,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
         this.addSet(Scourge.getInstance());
         this.addSet(ShardsOfAlara.getInstance());
         this.addSet(Shadowmoor.getInstance());
+        this.addSet(Stronghold.getInstance());
         this.addSet(Tenth.getInstance());
         this.addSet(Tempest.getInstance());
         this.addSet(TimeSpiral.getInstance());

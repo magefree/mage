@@ -14,6 +14,7 @@ public class Tempest extends ExpansionSet {
 
     private Tempest() {
         super("Tempest", "TMP", "", "mage.sets.tempest", new GregorianCalendar(1997, 9, 1).getTime(), Constants.SetType.EXPANSION);
+        this.blockName = "Tempest";
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
