@@ -60,7 +60,7 @@ public class EntersBattlefieldTappedAbility extends StaticAbility<EntersBattlefi
         if (ruleText != null) {
             return ruleText;
         }
-        return "{this} enters the battlefield tapped";
+        return "{this} enters the battlefield tapped.";
     }
 
     @Override
