@@ -27,21 +27,22 @@
  */
 package mage.sets.magic2013;
 
-import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.SacrificeEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ExaltedAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -102,11 +103,10 @@ class NefaroxOverlordOfGrixisTriggeredAbility extends TriggeredAbilityImpl<Nefar
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DECLARED_ATTACKERS && game.getActivePlayerId().equals(this.controllerId) ) {
-            UUID Nefarox = this.getSourceId();
-            UUID attacker = game.getCombat().getAttackers().get(0);
-            if (Nefarox != null && attacker != null) {
-                if (game.getCombat().attacksAlone() && Nefarox == attacker) {
-                    UUID defender = game.getCombat().getDefendingPlayer(Nefarox);
+            UUID nefarox = this.getSourceId();
+            if (nefarox != null) {
+                if (game.getCombat().attacksAlone() && nefarox == game.getCombat().getAttackers().get(0)) {
+                    UUID defender = game.getCombat().getDefendingPlayer(nefarox);
                     this.getEffects().get(0).setTargetPointer(new FixedTarget(defender));
                     return true;
                 }
