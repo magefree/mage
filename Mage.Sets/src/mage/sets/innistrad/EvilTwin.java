@@ -43,6 +43,8 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -52,6 +54,12 @@ import mage.target.common.TargetCreaturePermanent;
  * @author BetaSteward
  */
 public class EvilTwin extends CardImpl<EvilTwin> {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with the same name as this creature");
+
+    static {
+        filter.add(new EvilTwinPredicate());
+    }
 
     public EvilTwin(UUID ownerId) {
         super(ownerId, 212, "Evil Twin", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");
@@ -67,7 +75,7 @@ public class EvilTwin extends CardImpl<EvilTwin> {
         Ability ability1 = new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(new CopyPermanentEffect(), "You may have {this} enter the battlefield as a copy of any creature on the battlefield except it gains {U}{B}, {T}: Destroy target creature with the same name as this creature"));
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{U}{B}"));
         ability2.addCost(new TapSourceCost());
-        ability2.addTarget(new TargetCreaturePermanent(new EvilTwinFilter()));
+        ability2.addTarget(new TargetCreaturePermanent(filter));
         ability1.addEffect(new GainAbilitySourceEffect(ability2));
         this.addAbility(ability1);
     }
@@ -82,24 +90,18 @@ public class EvilTwin extends CardImpl<EvilTwin> {
     }
 }
 
-class EvilTwinFilter extends FilterCreaturePermanent {
+class EvilTwinPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
 
-    public EvilTwinFilter() {
-        super("creature with the same name as this creature");
+    @Override
+    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
+        Permanent permanent = input.getObject();
+        Permanent twin = game.getPermanent(input.getSourceId());
+
+        return permanent != null && twin != null && permanent.getName().equals(twin.getName());
     }
 
     @Override
-    public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
-        if (!super.match(permanent, game))
-            return notFilter;
-
-        Permanent twin = game.getPermanent(sourceId);
-        if (twin != null) {
-            if (!permanent.getName().equals(twin.getName()))
-                return false;
-        }
-
-        return !notFilter;
+    public String toString() {
+        return "SameNameAsSource";
     }
-
 }

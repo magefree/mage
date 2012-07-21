@@ -242,8 +242,8 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
     public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
         updateGameStatePriority("chooseTarget", game);
         while (!abort) {
-            Set<UUID> possibleTargets = target.possibleTargets(source==null?null:source.getId(), playerId, game);
-            boolean required = possibleTargets.size() == 0 ? false : target.isRequired();
+            Set<UUID> possibleTargets = target.possibleTargets(source==null?null:source.getSourceId(), playerId, game);
+            boolean required = possibleTargets.isEmpty() ? false : target.isRequired();
             game.fireSelectTargetEvent(playerId, target.getMessage(), possibleTargets, required, getOptions(target));
             waitForResponse();
             if (response.getUUID() != null) {
