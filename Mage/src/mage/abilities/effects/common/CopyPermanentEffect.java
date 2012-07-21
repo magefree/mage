@@ -76,9 +76,6 @@ public class CopyPermanentEffect extends OneShotEffect<CopyPermanentEffect> {
                     game.copyPermanent(copyFromPermanent, sourcePermanent, source, new ApplyToPermanent() {
                         @Override
                         public Boolean apply(Game game, Permanent permanent) {
-                            if (!permanent.getCardType().contains(Constants.CardType.ARTIFACT)) {
-                                permanent.getCardType().add(Constants.CardType.ARTIFACT);
-                            }
                             return true;
                         }
                     });
