@@ -98,9 +98,11 @@ public class Sets extends HashMap<String, ExpansionSet> {
         this.addSet(Magic2012.getInstance());
         this.addSet(Magic2013.getInstance());
         this.addSet(MagicPlayerRewards.getInstance());
+        this.addSet(MercadianMasques.getInstance());
         this.addSet(Mirrodin.getInstance());
         this.addSet(MirrodinBesieged.getInstance());
         this.addSet(Morningtide.getInstance());
+        this.addSet(Nemesis.getInstance());
         this.addSet(NewPhyrexia.getInstance());
         this.addSet(NinthEdition.getInstance());
         this.addSet(Odyssey.getInstance());
@@ -108,6 +110,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
         this.addSet(PlanarChaos.getInstance());
         this.addSet(Planechase.getInstance());
         this.addSet(Planeshift.getInstance());
+        this.addSet(Prophecy.getInstance());
         this.addSet(RavnicaCityOfGuilds.getInstance());
         this.addSet(RiseOfTheEldrazi.getInstance());
         this.addSet(SaviorsOfKamigawa.getInstance());

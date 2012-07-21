@@ -13,6 +13,9 @@ Tempest|tempest|
 Urza's Saga|urzassaga|
 Urza's Legacy|urzaslegacy|
 Urza's Destiny|urzasdestiny|
+Mercadian Masques|mercadianmasques|
+Nemesis|nemesis|
+Prophecy|prophecy|
 Invasion|invasion|
 Planeshift|planeshift|
 Apocalypse|apocalypse|
