@@ -8,6 +8,7 @@ Magic 2012|magic2012|
 Magic 2013|magic2013|
 Planechase|planechase|
 Duel Decks: Elspeth vs. Tezzeret|elspethvstezzeret|
+Weatherlight|weatherlight|
 Tempest|tempest|
 Urza's Saga|urzassaga|
 Urza's Legacy|urzaslegacy|
@@ -17,6 +18,7 @@ Planeshift|planeshift|
 Apocalypse|apocalypse|
 Judgment|judgment|
 Onslaught|onslaught|
+Legions|legions|
 Mirrodin|mirrodin|
 Darksteel|darksteel|
 Fifth Dawn|fifthdawn|
@@ -46,4 +48,3 @@ New Phyrexia|newphyrexia|
 Innistrad|innistrad|
 Dark Ascension|darkascension|
 Avacyn Restored|avacynrestored|
-Weatherlight|weatherlight|
