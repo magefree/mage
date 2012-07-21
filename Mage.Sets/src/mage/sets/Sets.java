@@ -100,6 +100,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
         this.addSet(Magic2013.getInstance());
         this.addSet(MagicPlayerRewards.getInstance());
         this.addSet(MercadianMasques.getInstance());
+        this.addSet(Mirage.getInstance());
         this.addSet(Mirrodin.getInstance());
         this.addSet(MirrodinBesieged.getInstance());
         this.addSet(Morningtide.getInstance());
@@ -128,6 +129,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
         this.addSet(UrzasSaga.getInstance());
         this.addSet(UrzasLegacy.getInstance());
         this.addSet(UrzasDestiny.getInstance());
+        this.addSet(Visions.getInstance());
         this.addSet(Weatherlight.getInstance());
         this.addSet(Worldwake.getInstance());
         this.addSet(Zendikar.getInstance());
