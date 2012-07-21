@@ -42,12 +42,12 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TriggeredAbilities extends HashMap<UUID, TriggeredAbility> {
+public class TriggeredAbilities extends HashMap<String, TriggeredAbility> {
 
     public TriggeredAbilities() {}
 
     public TriggeredAbilities(final TriggeredAbilities abilities) {
-        for (Map.Entry<UUID, TriggeredAbility> entry: abilities.entrySet()) {
+        for (Map.Entry<String, TriggeredAbility> entry: abilities.entrySet()) {
             this.put(entry.getKey(), entry.getValue().copy());
         }
     }
@@ -96,8 +96,16 @@ public class TriggeredAbilities extends HashMap<UUID, TriggeredAbility> {
         return object;
     }
 
-    public void add(TriggeredAbility ability) {
-        this.put(ability.getId(), ability);
+    public void add(TriggeredAbility ability, MageObject attachedTo) {
+        this.put(getKey(ability, attachedTo), ability);
+    }
+    
+    private String getKey(TriggeredAbility ability, MageObject target) {
+        String key = ability.getId() + "_";
+        if (target != null) {
+            key += target.getId();
+        }
+        return key;
     }
 
     public TriggeredAbilities copy() {

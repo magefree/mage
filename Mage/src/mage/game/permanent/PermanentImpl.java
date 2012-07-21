@@ -177,7 +177,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
             Ability copy = ability.copy();
             copy.setControllerId(controllerId);
             copy.setSourceId(objectId);
-            game.getState().addAbility(copy);
+            game.getState().addAbility(copy, this);
             abilities.add(copy);
         }
     }

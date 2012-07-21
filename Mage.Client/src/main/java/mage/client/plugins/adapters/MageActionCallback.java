@@ -251,7 +251,7 @@ public class MageActionCallback implements ActionCallback {
             }
             displayCard(card.getOriginal(), data);
         } else {
-            hideCard();
+            //hideCard();
         }
     }
 

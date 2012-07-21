@@ -29,6 +29,7 @@
 package mage.game;
 
 import mage.Constants.Zone;
+import mage.MageObject;
 import mage.abilities.*;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
@@ -435,11 +436,11 @@ public class GameState implements Serializable, Copyable<GameState> {
             watchers.add(watcher);
         }
         for (Ability ability: card.getAbilities()) {
-            addAbility(ability);
+            addAbility(ability, card);
         }
     }
 
-    public void addAbility(Ability ability) {
+    public void addAbility(Ability ability, MageObject attachedTo) {
         if (ability instanceof StaticAbility) {
             if (ability instanceof KickerAbility) {
                 return;
@@ -453,14 +454,14 @@ public class GameState implements Serializable, Copyable<GameState> {
             }
         }
         else if (ability instanceof TriggeredAbility) {
-            this.triggers.add((TriggeredAbility)ability);
+            this.triggers.add((TriggeredAbility)ability, attachedTo);
         }
     }
 
     public void addEmblem(Emblem emblem) {
         getCommand().add(emblem);
         for (Ability ability: emblem.getAbilities()) {
-            addAbility(ability);
+            addAbility(ability, emblem);
         }
     }
 
