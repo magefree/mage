@@ -27,7 +27,6 @@
  */
 package mage.abilities.effects.common;
 
-import mage.Constants;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -38,7 +37,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
-import mage.util.functions.ApplyToPermanent;
+import mage.util.functions.EmptyApplyToPermanent;
 
 /**
  *
@@ -73,12 +72,7 @@ public class CopyPermanentEffect extends OneShotEffect<CopyPermanentEffect> {
                 player.choose(Outcome.Copy, target, source.getSourceId(), game);
                 Permanent copyFromPermanent = game.getPermanent(target.getFirstTarget());
                 if (copyFromPermanent != null) {
-                    game.copyPermanent(copyFromPermanent, sourcePermanent, source, new ApplyToPermanent() {
-                        @Override
-                        public Boolean apply(Game game, Permanent permanent) {
-                            return true;
-                        }
-                    });
+                    game.copyPermanent(copyFromPermanent, sourcePermanent, source, new EmptyApplyToPermanent());
 
                     return true;
                 }
