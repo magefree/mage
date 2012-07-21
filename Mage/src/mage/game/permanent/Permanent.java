@@ -44,9 +44,14 @@ public interface Permanent extends Card, Controllable {
     public boolean isTapped();
     public boolean untap(Game game);
     public boolean tap(Game game);
-    // use tap(game)
-    // setTapped doesn't trigger TAPPED event and should be used
-    // only if you want permanent to enter battlefield tapped
+    /**
+     * use tap(game)
+     * <p>setTapped doesn't trigger TAPPED event and should be used
+     * only if you want permanent to enter battlefield tapped</p>
+     *
+     * @param tapped
+     * @deprecated
+     */
     @Deprecated
     public void setTapped(boolean tapped);
     public boolean canTap();
@@ -80,7 +85,16 @@ public interface Permanent extends Card, Controllable {
     public int getDamage();
     public int damage(int damage, UUID sourceId, Game game, boolean preventable, boolean combat);
 
-    // used in combat only to deal damage at the same time
+    /**
+     * used in combat only to deal damage at the same time
+     *
+     * @param damage
+     * @param sourceId
+     * @param game
+     * @param preventable
+     * @param combat
+     * @return
+     */
     public int markDamage(int damage, UUID sourceId, Game game, boolean preventable, boolean combat);
     public int applyDamage(Game game);
 
