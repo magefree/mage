@@ -19,6 +19,7 @@ Apocalypse|apocalypse|
 Judgment|judgment|
 Onslaught|onslaught|
 Legions|legions|
+Scourge|scourge|
 Mirrodin|mirrodin|
 Darksteel|darksteel|
 Fifth Dawn|fifthdawn|

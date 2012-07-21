@@ -111,6 +111,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
         this.addSet(RiseOfTheEldrazi.getInstance());
         this.addSet(SaviorsOfKamigawa.getInstance());
         this.addSet(ScarsOfMirrodin.getInstance());
+        this.addSet(Scourge.getInstance());
         this.addSet(ShardsOfAlara.getInstance());
         this.addSet(Shadowmoor.getInstance());
         this.addSet(Tenth.getInstance());
