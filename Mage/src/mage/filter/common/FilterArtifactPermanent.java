@@ -31,19 +31,12 @@ package mage.filter.common;
 import mage.Constants.CardType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
  * @author ayratn
  */
 public class FilterArtifactPermanent extends FilterPermanent {
-
-    protected boolean useAttacking;
-    protected boolean attacking;
-    protected boolean useBlocking;
-    protected boolean blocking;
 
     public FilterArtifactPermanent() {
         this("artifact");
@@ -56,40 +49,6 @@ public class FilterArtifactPermanent extends FilterPermanent {
 
     public FilterArtifactPermanent(final FilterArtifactPermanent filter) {
         super(filter);
-        this.useAttacking = filter.useAttacking;
-        this.attacking = filter.attacking;
-        this.useBlocking = filter.useBlocking;
-        this.blocking = filter.blocking;
-    }
-
-    @Override
-    public boolean match(Permanent permanent, Game game) {
-        if (!super.match(permanent, game))
-            return notFilter;
-
-        if (useAttacking && permanent.isAttacking() != attacking)
-            return notFilter;
-
-        if (useBlocking && (permanent.getBlocking() > 0) != blocking)
-            return notFilter;
-
-        return !notFilter;
-    }
-
-    public void setUseAttacking ( boolean useAttacking ) {
-        this.useAttacking = useAttacking;
-    }
-
-    public void setAttacking ( boolean attacking ) {
-        this.attacking = attacking;
-    }
-
-    public void setUseBlocking ( boolean useBlocking ) {
-        this.useBlocking = useBlocking;
-    }
-
-    public void setBlocking ( boolean blocking ) {
-        this.blocking = blocking;
     }
 
     @Override
