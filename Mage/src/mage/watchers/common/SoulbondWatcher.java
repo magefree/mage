@@ -33,7 +33,9 @@ import mage.Constants.WatcherScope;
 import mage.abilities.keyword.SoulbondAbility;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.filter.common.FilterNotPairedControlledCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.Predicate;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -50,10 +52,11 @@ import mage.watchers.WatcherImpl;
  */
 public class SoulbondWatcher extends WatcherImpl<SoulbondWatcher> {
 
-    private static final FilterNotPairedControlledCreaturePermanent filter = new FilterNotPairedControlledCreaturePermanent("another not paired creature you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another not paired creature you control");
 
     static {
         filter.add(new AnotherPredicate());
+        filter.add(Predicates.not(new PairedPredicate()));
     }
 
     public SoulbondWatcher() {
@@ -123,5 +126,18 @@ public class SoulbondWatcher extends WatcherImpl<SoulbondWatcher> {
     @Override
     public SoulbondWatcher copy() {
         return new SoulbondWatcher(this);
+    }
+}
+
+class PairedPredicate implements Predicate<Permanent> {
+
+    @Override
+    public boolean apply(Permanent input, Game game) {
+        return input.getPairedCard() != null;
+    }
+
+    @Override
+    public String toString() {
+        return "Paired";
     }
 }
