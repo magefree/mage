@@ -883,13 +883,14 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                     if (source != null && (source.getAbilities().containsKey(InfectAbility.getInstance().getId()))) {
                         addCounters(CounterType.POISON.createInstance(actualDamage), game);
                     } else {
-                        // fixed: damage dealt should not be equal to life lost
-                        // actualDamage = this.loseLife(actualDamage, game);
-                        this.loseLife(actualDamage, game);
+                        GameEvent damageToLifeLossEvent = new GameEvent(EventType.DAMAGE_CAUSES_LIFE_LOSS, playerId, sourceId, playerId, actualDamage, combatDamage);
+                        if (!game.replaceEvent(damageToLifeLossEvent)) {
+                            this.loseLife(damageToLifeLossEvent.getAmount(), game);
+                        }
                     }
                     if (source != null && source.getAbilities().containsKey(LifelinkAbility.getInstance().getId())) {
                         Player player = game.getPlayer(source.getControllerId());
-                        player.gainLife(damage, game);
+                        player.gainLife(actualDamage, game);
                     }
                     game.fireEvent(new DamagedPlayerEvent(playerId, sourceId, playerId, actualDamage, combatDamage));
                     return actualDamage;
