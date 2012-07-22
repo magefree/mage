@@ -58,4 +58,51 @@ public class DamageSetToXLifeInsteadTest extends CardTestPlayerBase {
         assertLife(playerB, 0);
     }
 
+    /**
+     * Tests Worhsip:
+     *   If you control a creature, damage that would reduce your life total to less than 1 reduces it to 1 instead
+     */
+    @Test
+    public void testWorshipWithCreature() {
+        addCard(Constants.Zone.HAND, playerA, "Volcanic Hammer");
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 2);
+
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Worship");
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Elite Vanguard");
+
+        setLife(playerB, 2);
+
+        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Volcanic Hammer", playerB);
+
+        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerB, 1);
+    }
+
+    /**
+     * Tests Worhsip when there is no creature:
+     *   If you control a creature, damage that would reduce your life total to less than 1 reduces it to 1 instead
+     */
+    @Test
+    public void testWorshipWithoutCreature() {
+        addCard(Constants.Zone.HAND, playerA, "Volcanic Hammer", 2);
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Llanowar Elves");
+
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Worship");
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Elite Vanguard");
+
+        setLife(playerB, 2);
+
+        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Volcanic Hammer", "Elite Vanguard");
+        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Volcanic Hammer", playerB);
+
+        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerB, -1);
+    }
+
 }
+
