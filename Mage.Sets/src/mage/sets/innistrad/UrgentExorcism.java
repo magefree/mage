@@ -32,8 +32,9 @@ import mage.Constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -44,6 +45,14 @@ import java.util.UUID;
  */
 public class UrgentExorcism extends CardImpl<UrgentExorcism> {
 
+    private static final FilterPermanent filter = new FilterPermanent("Spirit or enchantment");
+
+    static {
+        filter.add(Predicates.or(
+                new SubtypePredicate("Spirit"),
+                new CardTypePredicate(CardType.ENCHANTMENT)));
+    }
+
     public UrgentExorcism(UUID ownerId) {
         super(ownerId, 40, "Urgent Exorcism", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "ISD";
@@ -52,7 +61,7 @@ public class UrgentExorcism extends CardImpl<UrgentExorcism> {
 
         // Destroy target Spirit or enchantment.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(new FilterSpiritOrEnchantment()));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
     public UrgentExorcism(final UrgentExorcism card) {
@@ -62,32 +71,5 @@ public class UrgentExorcism extends CardImpl<UrgentExorcism> {
     @Override
     public UrgentExorcism copy() {
         return new UrgentExorcism(this);
-    }
-}
-
-class FilterSpiritOrEnchantment extends FilterPermanent {
-
-    public FilterSpiritOrEnchantment() {
-        super("Spirit or enchantment");
-    }
-
-    public FilterSpiritOrEnchantment(FilterSpiritOrEnchantment filter) {
-        super(filter);
-    }
-
-    @Override
-    public boolean match(Permanent permanent, Game game) {
-        if (!super.match(permanent, game))
-            return notFilter;
-
-        if (!permanent.getCardType().contains(CardType.ENCHANTMENT) && !permanent.hasSubtype("Spirit"))
-            return notFilter;
-
-        return !notFilter;
-    }
-
-    @Override
-    public FilterSpiritOrEnchantment copy() {
-        return new FilterSpiritOrEnchantment(this);
     }
 }
