@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.CreatureDiesTriggeredAbility;
+import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 
@@ -52,7 +52,7 @@ public class Deathgreeter extends CardImpl<Deathgreeter> {
         this.toughness = new MageInt(1);
 
         // Whenever another creature dies, you may gain 1 life.
-        this.addAbility(new CreatureDiesTriggeredAbility(new GainLifeEffect(1), true, true));
+        this.addAbility(new DiesCreatureTriggeredAbility(new GainLifeEffect(1), true, true));
     }
 
     public Deathgreeter(final Deathgreeter card) {

@@ -30,10 +30,14 @@ package mage.sets.avacynrestored;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.DiesAnotherCreatureTriggeredAbility;
+import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.permanent.TokenPredicate;
 
 import java.util.UUID;
 
@@ -41,6 +45,13 @@ import java.util.UUID;
  * @author noxx
  */
 public class HarvesterOfSouls extends CardImpl<HarvesterOfSouls> {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another nontoken creature");
+
+    static {
+        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(new AnotherPredicate());
+    }
 
     public HarvesterOfSouls(UUID ownerId) {
         super(ownerId, 107, "Harvester of Souls", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
@@ -54,7 +65,7 @@ public class HarvesterOfSouls extends CardImpl<HarvesterOfSouls> {
         this.addAbility(DeathtouchAbility.getInstance());
 
         // Whenever another nontoken creature dies, you may draw a card.
-        this.addAbility(new DiesAnotherCreatureTriggeredAbility(new DrawCardControllerEffect(1), true, true));
+        this.addAbility(new DiesCreatureTriggeredAbility(new DrawCardControllerEffect(1), true, filter));
     }
 
     public HarvesterOfSouls(final HarvesterOfSouls card) {

@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.CreatureDiesTriggeredAbility;
+import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
@@ -54,7 +54,7 @@ public class AlgaeGharial extends CardImpl<AlgaeGharial> {
 
         this.addAbility(ShroudAbility.getInstance());
         // Whenever another creature dies, you may put a +1/+1 counter on Algae Gharial.
-        this.addAbility(new CreatureDiesTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true, true));
+        this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true, true));
     }
 
     public AlgaeGharial(final AlgaeGharial card) {

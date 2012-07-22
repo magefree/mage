@@ -34,11 +34,12 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesThisOrAnotherControlledCreatureTriggeredAbility;
+import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
@@ -52,6 +53,8 @@ import mage.target.common.TargetControlledPermanent;
  * @author jeffwadsworth
  */
 public class ButcherOfMalakir extends CardImpl<ButcherOfMalakir> {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control");
 
     public ButcherOfMalakir(UUID ownerId) {
         super(ownerId, 53, "Butcher of Malakir", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
@@ -67,7 +70,7 @@ public class ButcherOfMalakir extends CardImpl<ButcherOfMalakir> {
         this.addAbility(FlyingAbility.getInstance());
         
         // Whenever Butcher of Malakir or another creature you control dies, each opponent sacrifices a creature.
-        this.addAbility(new DiesThisOrAnotherControlledCreatureTriggeredAbility(new ButcherOfMalakirEffect(), false));
+        this.addAbility(new DiesThisOrAnotherCreatureTriggeredAbility(new ButcherOfMalakirEffect(), false, filter));
     }
 
     public ButcherOfMalakir(final ButcherOfMalakir card) {
@@ -79,7 +82,6 @@ public class ButcherOfMalakir extends CardImpl<ButcherOfMalakir> {
         return new ButcherOfMalakir(this);
     }
 }
-
 class ButcherOfMalakirEffect extends OneShotEffect<ButcherOfMalakirEffect> {
 
     public ButcherOfMalakirEffect() {

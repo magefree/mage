@@ -33,7 +33,7 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.AttacksEachTurnStaticAbility;
-import mage.abilities.common.CreatureDiesTriggeredAbility;
+import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.SkipUntapSourceEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
@@ -58,7 +58,7 @@ public class GalvanicJuggernaut extends CardImpl<GalvanicJuggernaut> {
         // Galvanic Juggernaut doesn't untap during your untap step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipUntapSourceEffect()));
         // Whenever another creature dies, untap Galvanic Juggernaut.
-        this.addAbility(new CreatureDiesTriggeredAbility(new UntapSourceEffect(), false, true));
+        this.addAbility(new DiesCreatureTriggeredAbility(new UntapSourceEffect(), false, true));
     }
 
     public GalvanicJuggernaut(final GalvanicJuggernaut card) {

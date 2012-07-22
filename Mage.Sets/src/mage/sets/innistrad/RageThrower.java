@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.CreatureDiesTriggeredAbility;
+import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.TargetPlayer;
@@ -53,7 +53,7 @@ public class RageThrower extends CardImpl<RageThrower> {
         this.toughness = new MageInt(2);
 
         // Whenever another creature dies, Rage Thrower deals 2 damage to target player.
-        CreatureDiesTriggeredAbility ability = new CreatureDiesTriggeredAbility(new DamageTargetEffect(2), false, true);
+        DiesCreatureTriggeredAbility ability = new DiesCreatureTriggeredAbility(new DamageTargetEffect(2), false, true);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

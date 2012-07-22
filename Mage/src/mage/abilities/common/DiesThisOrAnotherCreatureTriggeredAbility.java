@@ -27,7 +27,7 @@
  */
 package mage.abilities.common;
 
-import mage.Constants;
+import mage.Constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.filter.common.FilterCreaturePermanent;
@@ -35,8 +35,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-
-import java.util.UUID;
 
 /**
  * @author noxx
@@ -50,7 +48,7 @@ public class DiesThisOrAnotherCreatureTriggeredAbility extends TriggeredAbilityI
     }
 
     public DiesThisOrAnotherCreatureTriggeredAbility(Effect effect, boolean optional, FilterCreaturePermanent filter) {
-        super(Constants.Zone.BATTLEFIELD, effect, optional);
+        super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
     }
 
@@ -69,20 +67,19 @@ public class DiesThisOrAnotherCreatureTriggeredAbility extends TriggeredAbilityI
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
 
-            UUID sourceId = getSourceId();
             if (game.getPermanent(sourceId) == null) {
-                if (game.getLastKnownInformation(sourceId, Constants.Zone.BATTLEFIELD) == null) {
+                if (game.getLastKnownInformation(sourceId, Zone.BATTLEFIELD) == null) {
                     return false;
                 }
             }
 
-            if (zEvent.getFromZone() == Constants.Zone.BATTLEFIELD && zEvent.getToZone() == Constants.Zone.GRAVEYARD) {
-                Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Constants.Zone.BATTLEFIELD);
+            if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
+                Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
                 if (permanent != null) {
                     if (permanent.getId().equals(this.getSourceId())) {
                         return true;
                     } else {
-                        if (filter.match(permanent, game)) {
+                        if (filter.match(permanent, sourceId, controllerId, game)) {
                             return true;
                         }
                     }
@@ -94,6 +91,6 @@ public class DiesThisOrAnotherCreatureTriggeredAbility extends TriggeredAbilityI
 
     @Override
     public String getRule() {
-        return "Whenever {this} or another creature dies, " + super.getRule();
+        return "Whenever {this} or another " + filter.getMessage() + " dies, " + super.getRule();
     }
 }

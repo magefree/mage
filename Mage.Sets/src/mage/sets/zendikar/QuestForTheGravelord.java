@@ -33,7 +33,7 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.common.CreatureDiesTriggeredAbility;
+import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -56,7 +56,7 @@ public class QuestForTheGravelord extends CardImpl<QuestForTheGravelord> {
         this.color.setBlack(true);
 
         // Whenever a creature dies, you may put a quest counter on Quest for the Gravelord.
-        this.addAbility(new CreatureDiesTriggeredAbility(new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true));
+        this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true));
         // Remove three quest counters from Quest for the Gravelord and sacrifice it: Put a 5/5 black Zombie Giant creature token onto the battlefield.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new CreateTokenEffect(new ZombieToken()),

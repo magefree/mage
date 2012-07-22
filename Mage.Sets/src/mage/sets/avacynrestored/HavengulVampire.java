@@ -32,7 +32,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.common.DiesAnotherCreatureTriggeredAbility;
+import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
@@ -55,7 +55,7 @@ public class HavengulVampire extends CardImpl<HavengulVampire> {
         // Whenever Havengul Vampire deals combat damage to a player, put a +1/+1 counter on it.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
         // Whenever another creature dies, put a +1/+1 counter on Havengul Vampire.
-        this.addAbility(new DiesAnotherCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
+        this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, true));
     }
 
     public HavengulVampire(final HavengulVampire card) {

@@ -30,14 +30,17 @@ package mage.sets.darkascension;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.TargetController;
 import mage.MageInt;
-import mage.abilities.common.DiesAnotherCreatureYouControlTriggeredAbility;
+import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.permanent.token.SpiritWhiteToken;
 
 /**
@@ -45,10 +48,12 @@ import mage.game.permanent.token.SpiritWhiteToken;
  * @author intimidatingant
  */
 public class RequiemAngel extends CardImpl<RequiemAngel> {
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Spirit creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another non-Spirit creature you control");
 
     static {
         filter.add(Predicates.not(new SubtypePredicate("Spirit")));
+        filter.add(new AnotherPredicate());
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public RequiemAngel(UUID ownerId) {
@@ -63,7 +68,7 @@ public class RequiemAngel extends CardImpl<RequiemAngel> {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever another non-Spirit creature you control dies, put a 1/1 white Spirit creature token with flying onto the battlefield.
-        this.addAbility(new DiesAnotherCreatureYouControlTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken(), 1), false, filter));
+        this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken(), 1), false, filter));
     }
 
     public RequiemAngel(final RequiemAngel card) {

@@ -30,17 +30,28 @@ package mage.sets.innistrad;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.TargetController;
 import mage.MageInt;
-import mage.abilities.common.DiesAnotherCreatureYouControlTriggeredAbility;
+import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
  * @author nantuko
  */
 public class UnrulyMob extends CardImpl<UnrulyMob> {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature you control");
+
+    static {
+        filter.add(new AnotherPredicate());
+        filter.add(new ControllerPredicate(TargetController.YOU));
+    }
 
     public UnrulyMob(UUID ownerId) {
         super(ownerId, 39, "Unruly Mob", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
@@ -52,7 +63,7 @@ public class UnrulyMob extends CardImpl<UnrulyMob> {
         this.toughness = new MageInt(1);
 
         // Whenever another creature you control dies, put a +1/+1 counter on Unruly Mob.
-        this.addAbility(new DiesAnotherCreatureYouControlTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
+        this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, filter));
     }
 
     public UnrulyMob(final UnrulyMob card) {

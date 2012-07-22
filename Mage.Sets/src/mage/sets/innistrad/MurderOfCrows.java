@@ -33,7 +33,7 @@ import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.CreatureDiesTriggeredAbility;
+import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -57,7 +57,7 @@ public class MurderOfCrows extends CardImpl<MurderOfCrows> {
 
         this.addAbility(FlyingAbility.getInstance());
         // Whenever another creature dies, you may draw a card. If you do, discard a card.
-        this.addAbility(new CreatureDiesTriggeredAbility(new MurderOfCrowsEffect(), false, true));
+        this.addAbility(new DiesCreatureTriggeredAbility(new MurderOfCrowsEffect(), false, true));
     }
 
     public MurderOfCrows(final MurderOfCrows card) {

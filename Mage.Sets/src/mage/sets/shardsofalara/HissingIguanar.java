@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.CreatureDiesTriggeredAbility;
+import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.TargetPlayer;
@@ -52,7 +52,7 @@ public class HissingIguanar extends CardImpl<HissingIguanar> {
         this.toughness = new MageInt(1);
 
         // Whenever another creature dies, you may have Hissing Iguanar deal 1 damage to target player.
-        CreatureDiesTriggeredAbility ability = new CreatureDiesTriggeredAbility(new DamageTargetEffect(1), true, true);
+        DiesCreatureTriggeredAbility ability = new DiesCreatureTriggeredAbility(new DamageTargetEffect(1), true, true);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
