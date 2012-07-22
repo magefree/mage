@@ -72,7 +72,7 @@ public class FilterPermanentOrPlayerWithCounter extends FilterPermanentOrPlayer 
         } else if (o instanceof Permanent) {
             return permanentFilter.match((Permanent) o, sourceId, playerId, game);
         }
-        return notFilter;
+        return false;
     }
 
     @Override

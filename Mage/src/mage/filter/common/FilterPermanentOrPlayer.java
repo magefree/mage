@@ -69,7 +69,7 @@ public class FilterPermanentOrPlayer extends FilterImpl<Object> implements Filte
         } else if (o instanceof Permanent) {
             return permanentFilter.match((Permanent) o, game);
         }
-        return notFilter;
+        return false;
     }
 
     @Override
@@ -79,7 +79,7 @@ public class FilterPermanentOrPlayer extends FilterImpl<Object> implements Filte
         } else if (o instanceof Permanent) {
             return permanentFilter.match((Permanent) o, sourceId, playerId, game);
         }
-        return notFilter;
+        return false;
     }
 
     public FilterPermanent getPermanentFilter() {

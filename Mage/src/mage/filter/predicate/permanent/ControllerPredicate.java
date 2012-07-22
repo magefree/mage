@@ -27,7 +27,6 @@
  */
 package mage.filter.predicate.permanent;
 
-import mage.Constants;
 import mage.Constants.TargetController;
 import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
@@ -42,7 +41,7 @@ import java.util.UUID;
  */
 public class ControllerPredicate implements ObjectPlayerPredicate<ObjectPlayer<Controllable>> {
 
-    private Constants.TargetController controller;
+    private TargetController controller;
 
     public ControllerPredicate(TargetController controller) {
         this.controller = controller;

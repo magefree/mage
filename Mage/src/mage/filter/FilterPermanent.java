@@ -59,8 +59,9 @@ public class FilterPermanent extends FilterObject<Permanent> {
     }
 
     public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
-        if (!this.match(permanent, game))
+        if (!this.match(permanent, game)) {
             return false;
+        }
 
         return Predicates.and(extraPredicates).apply(new ObjectSourcePlayer(permanent, sourceId, playerId), game);
     }

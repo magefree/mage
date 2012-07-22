@@ -70,18 +70,18 @@ public class FilterCreatureOrPlayer extends FilterImpl<Object> implements Filter
         else if (o instanceof Permanent) {
             return creatureFilter.match((Permanent)o, game);
         }
-        return notFilter;
+        return false;
     }
 
     @Override
-    public boolean match(Object o, UUID sourceId, UUID controllerId, Game game) {
+    public boolean match(Object o, UUID sourceId, UUID playerId, Game game) {
         if (o instanceof Player) {
-            return playerFilter.match((Player)o, sourceId, controllerId, game);
+            return playerFilter.match((Player)o, sourceId, playerId, game);
         }
         else if (o instanceof Permanent) {
-            return creatureFilter.match((Permanent)o, sourceId, controllerId, game);
+            return creatureFilter.match((Permanent)o, sourceId, playerId, game);
         }
-        return notFilter;
+        return false;
     }
 
     public FilterCreaturePermanent getCreatureFilter() {

@@ -71,7 +71,7 @@ public class FilterSpellOrPermanent extends FilterImpl<Object> implements Filter
         } else if (o instanceof Permanent) {
             return permanentFilter.match((Permanent) o, game);
         }
-        return notFilter;
+        return false;
     }
 
     @Override
@@ -81,7 +81,7 @@ public class FilterSpellOrPermanent extends FilterImpl<Object> implements Filter
         } else if (o instanceof Permanent) {
             return permanentFilter.match((Permanent) o, sourceId, playerId, game);
         }
-        return notFilter;
+        return false;
     }
 
     public FilterPermanent getPermanentFilter() {
