@@ -42,7 +42,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterAttackingOrBlockingCreature;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -50,15 +50,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author North
  */
 public class FreewindEquenaut extends CardImpl<FreewindEquenaut> {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking or blocking creature");
-
-    static {
-        filter.setAttacking(true);
-        filter.setUseAttacking(true);
-        filter.setBlocking(true);
-        filter.setUseBlocking(true);
-    }
 
     public FreewindEquenaut(UUID ownerId) {
         super(ownerId, 9, "Freewind Equenaut", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
@@ -74,7 +65,7 @@ public class FreewindEquenaut extends CardImpl<FreewindEquenaut> {
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new DamageTargetEffect(2),
                 new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(new FilterAttackingOrBlockingCreature()));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinousEffect(
                 new GainAbilitySourceEffect(ability, Duration.WhileOnBattlefield),

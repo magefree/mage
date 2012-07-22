@@ -33,7 +33,6 @@ import mage.Constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterAttackingOrBlockingCreature;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -41,15 +40,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author North
  */
 public class DivineVerdict extends CardImpl<DivineVerdict> {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking or blocking creature");
-
-    static {
-        filter.setAttacking(true);
-        filter.setUseAttacking(true);
-        filter.setBlocking(true);
-        filter.setUseBlocking(true);
-    }
 
     public DivineVerdict(UUID ownerId) {
         super(ownerId, 8, "Divine Verdict", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{W}");

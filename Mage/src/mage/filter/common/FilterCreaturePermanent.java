@@ -40,10 +40,6 @@ import mage.game.permanent.Permanent;
  */
 public class FilterCreaturePermanent extends FilterPermanent {
 
-    protected boolean useAttacking;
-    protected boolean attacking;
-    protected boolean useBlocking;
-    protected boolean blocking;
     protected boolean useDamageDealt;
     protected boolean damageDealt;
 
@@ -58,10 +54,6 @@ public class FilterCreaturePermanent extends FilterPermanent {
 
     public FilterCreaturePermanent(final FilterCreaturePermanent filter) {
         super(filter);
-        this.useAttacking = filter.useAttacking;
-        this.attacking = filter.attacking;
-        this.useBlocking = filter.useBlocking;
-        this.blocking = filter.blocking;
         this.useDamageDealt = filter.useDamageDealt;
         this.damageDealt = filter.damageDealt;
     }
@@ -71,25 +63,6 @@ public class FilterCreaturePermanent extends FilterPermanent {
         if (!super.match(permanent, game))
             return notFilter;
 
-        if (useAttacking) {
-            if (permanent.isAttacking() != attacking) { // failed checking
-                // for "target attacking OR blocking" filters
-                // we have to make sure it is not blocking before returning false
-                if (useBlocking) {
-                    if ((permanent.getBlocking() > 0) != blocking) {
-                        return notFilter;
-                    }
-                } else {
-                    // filter doesn't use 'blocking', so as checking for attacking failed return false
-                    return notFilter;
-                }
-            }
-            return !notFilter;
-        }
-
-        if (useBlocking && (permanent.getBlocking() > 0) != blocking)
-            return notFilter;
-
         if (useDamageDealt) {
             // use this instead of getDamage() because damage is reset in case of regeneration
             if (permanent.getDealtDamageByThisTurn().isEmpty()) {
@@ -97,22 +70,6 @@ public class FilterCreaturePermanent extends FilterPermanent {
             }
         }
         return !notFilter;
-    }
-
-    public void setUseAttacking ( boolean useAttacking ) {
-        this.useAttacking = useAttacking;
-    }
-
-    public void setAttacking ( boolean attacking ) {
-        this.attacking = attacking;
-    }
-
-    public void setUseBlocking ( boolean useBlocking ) {
-        this.useBlocking = useBlocking;
-    }
-
-    public void setBlocking ( boolean blocking ) {
-        this.blocking = blocking;
     }
 
     /**

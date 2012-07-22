@@ -39,7 +39,7 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterAttackingOrBlockingCreature;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -47,13 +47,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author Loki
  */
 public class SoldierReplica extends CardImpl<SoldierReplica> {
-
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking or blocking creature");
-
-    static {
-        filter.setBlocking(true);
-        filter.setAttacking(true);
-    }
 
     public SoldierReplica(UUID ownerId) {
         super(ownerId, 244, "Soldier Replica", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
@@ -63,7 +56,7 @@ public class SoldierReplica extends CardImpl<SoldierReplica> {
         this.toughness = new MageInt(3);
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(3), new ManaCostsImpl("{1}{W}"));
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(new FilterAttackingOrBlockingCreature()));
         this.addAbility(ability);
     }
 

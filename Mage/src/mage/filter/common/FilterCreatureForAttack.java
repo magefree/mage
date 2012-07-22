@@ -31,6 +31,8 @@ package mage.filter.common;
 import mage.abilities.keyword.DefenderAbility;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.filter.predicate.permanent.AttackingPredicate;
+import mage.filter.predicate.permanent.BlockingPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -47,10 +49,8 @@ public class FilterCreatureForAttack extends FilterCreaturePermanent {
 
     public FilterCreatureForAttack(String name) {
         super(name);
-        this.attacking = false;
-        this.useAttacking = true;
-        this.blocking = false;
-        this.useBlocking = true;
+        this.add(Predicates.not(new AttackingPredicate()));
+        this.add(Predicates.not(new BlockingPredicate()));
         this.add(Predicates.not(new TappedPredicate()));
         this.add(Predicates.not(new AbilityPredicate(DefenderAbility.class)));
     }

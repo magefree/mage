@@ -33,20 +33,13 @@ import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.abilities.effects.common.PreventAllDamageEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterAttackingCreature;
 
 /**
  * 
  * @author Rafbill
  */
 public class HarmlessAssault extends CardImpl<HarmlessAssault> {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking creatures");
-
-    static {
-        filter.setAttacking(true);
-        filter.setUseAttacking(true);
-    }
 
     public HarmlessAssault(UUID ownerId) {
         super(ownerId, 24, "Harmless Assault", Rarity.COMMON,
@@ -58,7 +51,7 @@ public class HarmlessAssault extends CardImpl<HarmlessAssault> {
         // Prevent all combat damage that would be dealt this turn by attacking
         // creatures.
         this.getSpellAbility().addEffect(
-                new PreventAllDamageEffect(filter, Duration.EndOfTurn, true));
+                new PreventAllDamageEffect(new FilterAttackingCreature(), Duration.EndOfTurn, true));
     }
 
     public HarmlessAssault(final HarmlessAssault card) {

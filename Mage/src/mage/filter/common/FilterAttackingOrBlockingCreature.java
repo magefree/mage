@@ -28,6 +28,10 @@
 
 package mage.filter.common;
 
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.AttackingPredicate;
+import mage.filter.predicate.permanent.BlockingPredicate;
+
 /**
  *
  * @author nantuko
@@ -40,10 +44,9 @@ public class FilterAttackingOrBlockingCreature extends FilterCreaturePermanent {
 
     public FilterAttackingOrBlockingCreature(String name) {
         super(name);
-        this.attacking = true;
-        this.useAttacking = true;
-        this.blocking = true;
-        this.useBlocking = true;
+        this.add(Predicates.or(
+                new AttackingPredicate(),
+                new BlockingPredicate()));
     }
 
     public FilterAttackingOrBlockingCreature(final FilterAttackingOrBlockingCreature filter) {

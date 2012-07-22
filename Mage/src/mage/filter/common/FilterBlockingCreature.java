@@ -28,6 +28,8 @@
 
 package mage.filter.common;
 
+import mage.filter.predicate.permanent.BlockedPredicate;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
@@ -40,8 +42,7 @@ public class FilterBlockingCreature extends FilterCreaturePermanent {
 
     public FilterBlockingCreature(String name) {
         super(name);
-        this.blocking = true;
-        this.useBlocking = true;
+        this.add(new BlockedPredicate());
     }
 
     public FilterBlockingCreature(final FilterBlockingCreature filter) {

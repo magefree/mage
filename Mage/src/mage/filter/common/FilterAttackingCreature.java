@@ -28,6 +28,8 @@
 
 package mage.filter.common;
 
+import mage.filter.predicate.permanent.AttackingPredicate;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
@@ -40,8 +42,7 @@ public class FilterAttackingCreature extends FilterCreaturePermanent {
 
     public FilterAttackingCreature(String name) {
         super(name);
-        this.attacking = true;
-        this.useAttacking = true;
+        this.add(new AttackingPredicate());
     }
 
     public FilterAttackingCreature(final FilterAttackingCreature filter) {

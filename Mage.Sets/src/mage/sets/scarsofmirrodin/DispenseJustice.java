@@ -37,7 +37,7 @@ import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
 import mage.target.TargetPlayer;
 
@@ -73,13 +73,7 @@ class DispenseJusticeEffect extends OneShotEffect<DispenseJusticeEffect> {
     private static final String effectText = "Target player sacrifices an attacking creature.\r\n\r\n"
             + "Metalcraft - That player sacrifices two attacking creatures instead if you control three or more artifacts";
 
-    private static final FilterCreaturePermanent filter;
-
-    static {
-        filter = new FilterCreaturePermanent();
-        filter.setUseAttacking(true);
-        filter.setAttacking(true);
-    }
+    private static final FilterAttackingCreature filter = new FilterAttackingCreature();
 
     DispenseJusticeEffect ( ) {
         super(Outcome.Sacrifice);

@@ -25,47 +25,25 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.filter.predicate.permanent;
 
-import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonType;
-import mage.filter.common.FilterAttackingOrBlockingCreature;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.predicate.Predicate;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
  * @author North
  */
-public class PuncturingLight extends CardImpl<PuncturingLight> {
+public class BlockingPredicate implements Predicate<Permanent> {
 
-    private static final FilterCreaturePermanent filter = new FilterAttackingOrBlockingCreature("attacking or blocking creature with power 3 or less");
-
-    static {
-        filter.add(new PowerPredicate(ComparisonType.LessThan, 4));
-    }
-
-    public PuncturingLight(UUID ownerId) {
-        super(ownerId, 41, "Puncturing Light", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "ROE";
-
-        this.color.setWhite(true);
-
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
-    }
-
-    public PuncturingLight(final PuncturingLight card) {
-        super(card);
+    @Override
+    public boolean apply(Permanent input, Game game) {
+        return input.getBlocking() > 0;
     }
 
     @Override
-    public PuncturingLight copy() {
-        return new PuncturingLight(this);
+    public String toString() {
+        return "Blocking";
     }
 }

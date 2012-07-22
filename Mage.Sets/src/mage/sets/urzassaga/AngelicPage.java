@@ -39,7 +39,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterAttackingOrBlockingCreature;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -47,15 +47,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author Backfir3
  */
 public class AngelicPage extends CardImpl<AngelicPage> {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking or blocking creature");
-
-    static {
-        filter.setAttacking(true);
-        filter.setUseAttacking(true);
-        filter.setBlocking(true);
-        filter.setUseBlocking(true);
-    }
 
     public AngelicPage(UUID ownerId) {
         super(ownerId, 4, "Angelic Page", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
@@ -70,7 +61,7 @@ public class AngelicPage extends CardImpl<AngelicPage> {
 
         //{T}: Target attacking or blocking creature gets +1/+1 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Duration.EndOfTurn), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(new FilterAttackingOrBlockingCreature()));
         this.addAbility(ability);
     }
 

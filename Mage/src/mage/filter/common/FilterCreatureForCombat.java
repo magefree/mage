@@ -30,6 +30,7 @@ package mage.filter.common;
 
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -46,10 +47,9 @@ public class FilterCreatureForCombat extends FilterCreaturePermanent {
 
     public FilterCreatureForCombat(String name) {
         super(name);
-        this.attacking = false;
-        this.useAttacking = true;
-        this.add(new PhasedInPredicate());
+        this.add(Predicates.not(new AttackingPredicate()));
         this.add(Predicates.not(new TappedPredicate()));
+        this.add(new PhasedInPredicate());
     }
 
     public FilterCreatureForCombat(final FilterCreatureForCombat filter) {
@@ -68,17 +68,17 @@ public class FilterCreatureForCombat extends FilterCreaturePermanent {
     public FilterCreatureForCombat copy() {
         return new FilterCreatureForCombat(this);
     }
+}
 
-    private static final class PhasedInPredicate implements Predicate<Permanent>{
+class PhasedInPredicate implements Predicate<Permanent> {
 
-        @Override
-        public boolean apply(Permanent input, Game game) {
-            return input.isPhasedIn();
-        }
+    @Override
+    public boolean apply(Permanent input, Game game) {
+        return input.isPhasedIn();
+    }
 
-        @Override
-        public String toString() {
-            return "PhasedIn";
-        }
+    @Override
+    public String toString() {
+        return "PhasedIn";
     }
 }
