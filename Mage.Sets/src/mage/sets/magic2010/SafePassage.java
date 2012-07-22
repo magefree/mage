@@ -36,6 +36,7 @@ import mage.Constants.TargetController;
 import mage.abilities.effects.common.PreventAllDamageToEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreatureOrPlayer;
+import mage.filter.predicate.other.PlayerPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
@@ -48,7 +49,7 @@ public class SafePassage  extends CardImpl<SafePassage> {
 
     static {
         filter.getCreatureFilter().add(new ControllerPredicate(TargetController.YOU));
-        filter.getPlayerFilter().setPlayerTarget(TargetController.YOU);
+        filter.getPlayerFilter().add(new PlayerPredicate(TargetController.YOU));
     }
 
     public SafePassage(UUID ownerId) {

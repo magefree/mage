@@ -25,18 +25,20 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.target.common;
 
+import java.util.UUID;
+import mage.Constants.TargetController;
 import mage.abilities.Ability;
+import mage.filter.FilterPlayer;
+import mage.filter.predicate.other.PlayerPredicate;
 import mage.game.Game;
 import mage.target.TargetPlayer;
-
-import java.util.UUID;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @author North
  */
 public class TargetOpponent extends TargetPlayer<TargetOpponent> {
 
@@ -45,8 +47,8 @@ public class TargetOpponent extends TargetPlayer<TargetOpponent> {
     }
 
     public TargetOpponent(boolean required) {
-        super();
-        this.targetName = "opponent";
+        super(1, 1, false, new FilterPlayer("opponent"));
+        this.filter.add(new PlayerPredicate(TargetController.OPPONENT));
         setRequired(required);
     }
 
@@ -56,15 +58,11 @@ public class TargetOpponent extends TargetPlayer<TargetOpponent> {
 
     @Override
     public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-        filter.getPlayerId().clear();
-        filter.getPlayerId().addAll(game.getOpponents(sourceControllerId));
         return super.canChoose(sourceId, sourceControllerId, game);
     }
 
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
-        filter.getPlayerId().clear();
-        filter.getPlayerId().addAll(game.getOpponents(source.getControllerId()));
         return super.canTarget(id, source, game);
     }
 
@@ -72,5 +70,4 @@ public class TargetOpponent extends TargetPlayer<TargetOpponent> {
     public TargetOpponent copy() {
         return new TargetOpponent(this);
     }
-
 }

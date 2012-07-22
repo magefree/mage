@@ -31,7 +31,6 @@ package mage.filter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.Constants.TargetController;
 import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
 import mage.filter.predicate.ObjectSourcePlayer;
@@ -47,9 +46,6 @@ import mage.players.Player;
 public class FilterPlayer extends FilterImpl<Player> {
 
     protected List<ObjectPlayerPredicate<ObjectPlayer<Player>>> extraPredicates = new ArrayList<ObjectPlayerPredicate<ObjectPlayer<Player>>>();
-    protected List<UUID> playerId = new ArrayList<UUID>();
-    protected boolean notPlayer;
-    protected TargetController playerTarget = TargetController.ANY;
 
     public FilterPlayer() {
         this("player");
@@ -62,58 +58,18 @@ public class FilterPlayer extends FilterImpl<Player> {
     public FilterPlayer(final FilterPlayer filter) {
         super(filter);
         this.extraPredicates = new ArrayList<ObjectPlayerPredicate<ObjectPlayer<Player>>>(filter.extraPredicates);
-        this.playerId.addAll(filter.playerId);
-        this.notPlayer = filter.notPlayer;
-        this.playerTarget = filter.playerTarget;
     }
 
     public void add(ObjectPlayerPredicate predicate) {
         extraPredicates.add(predicate);
     }
 
-    @Override
-    public boolean match(Player player, Game game) {
-
-        if (playerId.size() > 0 && playerId.contains(player.getId()) == notPlayer)
-            return notFilter;
-
-        return !notFilter;
-    }
-
-    public boolean match(Player player, UUID sourceId, UUID controllerId, Game game) {
-        if (!this.match(player, game))
-            return notFilter;
-
-        if (playerTarget != TargetController.ANY && controllerId != null) {
-            switch(playerTarget) {
-                case YOU:
-                    if (!player.getId().equals(controllerId))
-                        return notFilter;
-                    break;
-                case OPPONENT:
-                    if (!game.getOpponents(controllerId).contains(player.getId()))
-                        return notFilter;
-                    break;
-                case NOT_YOU:
-                    if (player.getId().equals(controllerId))
-                        return notFilter;
-                    break;
-            }
+    public boolean match(Player player, UUID sourceId, UUID playerId, Game game) {
+        if (!this.match(player, game)) {
+            return false;
         }
 
-        return Predicates.and(extraPredicates).apply(new ObjectSourcePlayer(player, sourceId, controllerId), game);
-    }
-
-    public List<UUID> getPlayerId() {
-        return playerId;
-    }
-
-    public void setNotPlayer(boolean notPlayer) {
-        this.notPlayer = notPlayer;
-    }
-
-    public void setPlayerTarget(TargetController playerTarget) {
-        this.playerTarget = playerTarget;
+        return Predicates.and(extraPredicates).apply(new ObjectSourcePlayer(player, sourceId, playerId), game);
     }
 
     @Override
