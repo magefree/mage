@@ -29,6 +29,7 @@
 package mage.filter.common;
 
 import mage.abilities.keyword.DefenderAbility;
+import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
@@ -40,6 +41,7 @@ import mage.game.permanent.Permanent;
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @author North
  */
 public class FilterCreatureForAttack extends FilterCreaturePermanent {
 
@@ -53,6 +55,7 @@ public class FilterCreatureForAttack extends FilterCreaturePermanent {
         this.add(Predicates.not(new BlockingPredicate()));
         this.add(Predicates.not(new TappedPredicate()));
         this.add(Predicates.not(new AbilityPredicate(DefenderAbility.class)));
+        this.add(new CanTapPredicate());
     }
 
     public FilterCreatureForAttack(final FilterCreatureForAttack filter) {
@@ -60,15 +63,20 @@ public class FilterCreatureForAttack extends FilterCreaturePermanent {
     }
 
     @Override
-    public boolean match(Permanent permanent, Game game) {
-        if (!super.match(permanent, game))
-            return notFilter;
+    public FilterCreatureForAttack copy() {
+        return new FilterCreatureForAttack(this);
+    }
+}
 
-        return permanent.canTap();
+class CanTapPredicate implements Predicate<Permanent> {
+
+    @Override
+    public boolean apply(Permanent input, Game game) {
+        return input.canTap();
     }
 
     @Override
-    public FilterCreatureForAttack copy() {
-        return new FilterCreatureForAttack(this);
+    public String toString() {
+        return "CanTap";
     }
 }

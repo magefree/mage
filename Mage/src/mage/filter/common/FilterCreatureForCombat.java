@@ -38,6 +38,7 @@ import mage.game.permanent.Permanent;
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @author North
  */
 public class FilterCreatureForCombat extends FilterCreaturePermanent {
 
@@ -50,18 +51,11 @@ public class FilterCreatureForCombat extends FilterCreaturePermanent {
         this.add(Predicates.not(new AttackingPredicate()));
         this.add(Predicates.not(new TappedPredicate()));
         this.add(new PhasedInPredicate());
+        this.add(new CanBlockPredicate());
     }
 
     public FilterCreatureForCombat(final FilterCreatureForCombat filter) {
         super(filter);
-    }
-
-    @Override
-    public boolean match(Permanent permanent, Game game) {
-        if (!super.match(permanent, game))
-            return notFilter;
-
-        return permanent.getMaxBlocks() == 0 || permanent.getBlocking() < permanent.getMaxBlocks();
     }
 
     @Override
@@ -80,5 +74,18 @@ class PhasedInPredicate implements Predicate<Permanent> {
     @Override
     public String toString() {
         return "PhasedIn";
+    }
+}
+
+class CanBlockPredicate implements Predicate<Permanent> {
+
+    @Override
+    public boolean apply(Permanent input, Game game) {
+        return input.getMaxBlocks() == 0 || input.getBlocking() < input.getMaxBlocks();
+    }
+
+    @Override
+    public String toString() {
+        return "CanBlock";
     }
 }
