@@ -28,7 +28,7 @@
 
 package mage.filter.common;
 
-import mage.filter.predicate.permanent.BlockedPredicate;
+import mage.filter.predicate.permanent.BlockingPredicate;
 
 /**
  *
@@ -42,7 +42,7 @@ public class FilterBlockingCreature extends FilterCreaturePermanent {
 
     public FilterBlockingCreature(String name) {
         super(name);
-        this.add(new BlockedPredicate());
+        this.add(new BlockingPredicate());
     }
 
     public FilterBlockingCreature(final FilterBlockingCreature filter) {
