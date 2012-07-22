@@ -38,6 +38,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.WasDealtDamageThisTurnPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -47,15 +48,16 @@ import mage.target.common.TargetCreaturePermanent;
 public class WitchsMist extends CardImpl<WitchsMist> {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that was dealt damage this turn");
+
     static {
-        filter.setUseDamageDealt(true);
-        filter.setDamageDealt(true);
+        filter.add(new WasDealtDamageThisTurnPredicate());
     }
 
     public WitchsMist(UUID ownerId) {
         super(ownerId, 92, "Witch's Mist", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
         this.expansionSetCode = "FUT";
         this.color.setBlack(true);
+
         // {2}{B}, {T}: Destroy target creature that was dealt damage this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(),new ManaCostsImpl("{2}{B}"));
         ability.addTarget(new TargetCreaturePermanent(filter));

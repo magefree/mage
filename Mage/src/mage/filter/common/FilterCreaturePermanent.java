@@ -31,17 +31,12 @@ package mage.filter.common;
 import mage.Constants.CardType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class FilterCreaturePermanent extends FilterPermanent {
-
-    protected boolean useDamageDealt;
-    protected boolean damageDealt;
 
     public FilterCreaturePermanent() {
         this("creature");
@@ -54,41 +49,6 @@ public class FilterCreaturePermanent extends FilterPermanent {
 
     public FilterCreaturePermanent(final FilterCreaturePermanent filter) {
         super(filter);
-        this.useDamageDealt = filter.useDamageDealt;
-        this.damageDealt = filter.damageDealt;
-    }
-
-    @Override
-    public boolean match(Permanent permanent, Game game) {
-        if (!super.match(permanent, game))
-            return notFilter;
-
-        if (useDamageDealt) {
-            // use this instead of getDamage() because damage is reset in case of regeneration
-            if (permanent.getDealtDamageByThisTurn().isEmpty()) {
-                return notFilter;
-            }
-        }
-        return !notFilter;
-    }
-
-    /**
-     * Select creatures dependant if they already got damage during the current turn. Works also if the creature was
-     * meanwhile regenerated during the turn.
-     *
-     * @param useDamageDealt
-     */
-    public void setUseDamageDealt(boolean useDamageDealt) {
-        this.useDamageDealt = useDamageDealt;
-    }
-
-    /**
-     * Select creatures that got damage dealt to this turn.
-     *
-     * @param damageDealt
-     */
-    public void setDamageDealt(boolean damageDealt) {
-        this.damageDealt = damageDealt;
     }
 
     @Override

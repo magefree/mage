@@ -36,6 +36,7 @@ import mage.Constants.Rarity;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.WasDealtDamageThisTurnPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -45,14 +46,15 @@ import mage.target.common.TargetCreaturePermanent;
 public class CrushingPain extends CardImpl<CrushingPain> {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that was dealt damage this turn");
+
     static {
-        filter.setUseDamageDealt(true);
-        filter.setDamageDealt(true);
+        filter.add(new WasDealtDamageThisTurnPredicate());
     }
+
     public CrushingPain (UUID ownerId) {
         super(ownerId, 162, "Crushing Pain", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "CHK";
-    this.color.setRed(true);
+        this.color.setRed(true);
 
         // Crushing Pain deals 6 damage to target creature that was dealt damage this turn.
         this.getSpellAbility().addEffect(new DamageTargetEffect(6));

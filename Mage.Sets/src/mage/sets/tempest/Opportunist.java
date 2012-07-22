@@ -40,6 +40,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.WasDealtDamageThisTurnPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -50,8 +51,7 @@ public class Opportunist extends CardImpl<Opportunist> {
     private static final  FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that was dealt damage this turn");
 
     static {
-        filter.setUseDamageDealt(true);
-        filter.setDamageDealt(true);
+        filter.add(new WasDealtDamageThisTurnPredicate());
     }
 
     public Opportunist(UUID ownerId) {
