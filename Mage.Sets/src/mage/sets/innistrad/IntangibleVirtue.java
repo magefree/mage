@@ -36,7 +36,8 @@ import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterToken;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.TokenPredicate;
 
 /**
  *
@@ -44,7 +45,11 @@ import mage.filter.common.FilterToken;
  */
 public class IntangibleVirtue extends CardImpl<IntangibleVirtue> {
 
-    private final static FilterToken filter = new FilterToken();
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Creature tokens");
+
+    static {
+        filter.add(new TokenPredicate());
+    }
 
     public IntangibleVirtue(UUID ownerId) {
         super(ownerId, 19, "Intangible Virtue", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");

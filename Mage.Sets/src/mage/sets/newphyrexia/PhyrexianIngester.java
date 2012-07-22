@@ -43,8 +43,9 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterNonTokenPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -55,10 +56,10 @@ import mage.target.TargetPermanent;
  */
 public class PhyrexianIngester extends CardImpl<PhyrexianIngester> {
 
-    private static final FilterNonTokenPermanent filter = new FilterNonTokenPermanent("nontoken creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature");
 
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(Predicates.not(new TokenPredicate()));
     }
 
     public PhyrexianIngester(UUID ownerId) {

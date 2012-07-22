@@ -25,53 +25,26 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.filter.predicate.permanent;
 
-import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.common.OpponentSacrificesNonTokenPermanentTriggeredAbility;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
-import mage.abilities.keyword.AnnihilatorAbility;
-import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.TokenPredicate;
-
+import mage.filter.predicate.Predicate;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentToken;
 
 /**
  *
- * @author jeffwadsworth
+ * @author North
  */
-public class ItThatBetrays extends CardImpl<ItThatBetrays> {
+public class TokenPredicate implements Predicate<Permanent> {
 
-    private static final FilterPermanent filter = new FilterPermanent("nontoken permanent");
-
-    static {
-        filter.add(Predicates.not(new TokenPredicate()));
-    }
-
-    public ItThatBetrays(UUID ownerId) {
-        super(ownerId, 7, "It That Betrays", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{12}");
-        this.expansionSetCode = "ROE";
-        this.subtype.add("Eldrazi");
-
-        this.power = new MageInt(11);
-        this.toughness = new MageInt(11);
-
-        this.addAbility(new AnnihilatorAbility(2));
-
-        // Whenever an opponent sacrifices a nontoken permanent, put that card onto the battlefield under your control.
-        this.addAbility(new OpponentSacrificesNonTokenPermanentTriggeredAbility(new ReturnToBattlefieldUnderYourControlTargetEffect()));
-    }
-
-    public ItThatBetrays(final ItThatBetrays card) {
-        super(card);
+    @Override
+    public boolean apply(Permanent input, Game game) {
+        return input instanceof PermanentToken;
     }
 
     @Override
-    public ItThatBetrays copy() {
-        return new ItThatBetrays(this);
+    public String toString() {
+        return "Token";
     }
 }

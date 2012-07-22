@@ -36,9 +36,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterNonTokenPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.WolfToken;
@@ -74,15 +74,14 @@ public class FeedThePack extends CardImpl<FeedThePack> {
 
 class FeedThePackEffect extends OneShotEffect<FeedThePackEffect> {
 
-    private static final FilterNonTokenPermanent filter = new FilterNonTokenPermanent("nontoken creature");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("nontoken creature");
 
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
+        filter.add(Predicates.not(new TokenPredicate()));
     }
 
     public FeedThePackEffect() {
-        super(Constants.Outcome.Sacrifice);
+        super(Constants.Outcome.PutCreatureInPlay);
         this.staticText = "sacrifice a nontoken creature. If you do, put X 2/2 green Wolf creature tokens onto the battlefield, where X is the sacrificed creature's toughness";
     }
 
