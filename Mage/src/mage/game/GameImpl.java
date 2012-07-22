@@ -28,15 +28,7 @@
 
 package mage.game;
 
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.*;
-import mage.Constants.CardType;
-import mage.Constants.MultiplayerAttackOption;
-import mage.Constants.Outcome;
-import mage.Constants.PhaseStep;
-import mage.Constants.RangeOfInfluence;
-import mage.Constants.Zone;
+import mage.Constants.*;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
@@ -59,7 +51,7 @@ import mage.choices.Choice;
 import mage.counters.CounterType;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;
-import mage.filter.common.*;
+import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -87,6 +79,10 @@ import mage.target.TargetPlayer;
 import mage.util.functions.ApplyToPermanent;
 import mage.watchers.common.*;
 import org.apache.log4j.Logger;
+
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.*;
 
 public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializable {
 
@@ -1586,7 +1582,8 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
     @Override
     public void informPlayer(Player player, String message) {
-        //TODO: implement personal messages
+        if (simulation) return;
+        playerQueryEventSource.informPlayer(player.getId(), message);
     }
 
     @Override

@@ -36,9 +36,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 import java.util.UUID;
 
 /**
- *
  * @author magenoxx_at_gmail.com
-
  */
 public class VolcanicHammer extends CardImpl<VolcanicHammer> {
 

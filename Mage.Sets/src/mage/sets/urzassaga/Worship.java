@@ -43,9 +43,7 @@ import mage.players.Player;
 import java.util.UUID;
 
 /**
- *
  * @author magenoxx_at_gmail.com
-
  */
 public class Worship extends CardImpl<Worship> {
 
@@ -98,7 +96,7 @@ class WorshipReplacementEffect extends ReplacementEffectImpl<WorshipReplacementE
                         && (controller.getLife() - event.getAmount()) < 1
                         && event.getPlayerId().equals(controller.getId())
                         && game.getBattlefield().count(new FilterControlledCreaturePermanent(), event.getPlayerId(), game) > 0
-                       ) {
+                        ) {
                     event.setAmount(controller.getLife() - 1);
                 }
             }

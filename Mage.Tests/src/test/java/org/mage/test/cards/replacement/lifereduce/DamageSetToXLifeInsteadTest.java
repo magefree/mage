@@ -8,7 +8,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  * Elderscale Wurm:
  *   As long as you have 7 or more life, damage that would reduce your life total to less than 7 reduces it to 7 instead..
  *
- * @author noxx
+ * @author magenoxx_at_gmail.com
  */
 public class DamageSetToXLifeInsteadTest extends CardTestPlayerBase {
 

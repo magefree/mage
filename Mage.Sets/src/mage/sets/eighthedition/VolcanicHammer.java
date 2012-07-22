@@ -30,9 +30,7 @@ package mage.sets.eighthedition;
 import java.util.UUID;
 
 /**
- *
  * @author magenoxx_at_gmail.com
-
  */
 public class VolcanicHammer extends mage.sets.ninthedition.VolcanicHammer {
 
