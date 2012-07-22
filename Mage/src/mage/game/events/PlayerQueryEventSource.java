@@ -28,13 +28,14 @@
 
 package mage.game.events;
 
-import java.io.Serializable;
-import java.util.*;
-
-import mage.abilities.*;
+import mage.abilities.ActivatedAbility;
+import mage.abilities.TriggeredAbility;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.game.permanent.Permanent;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
  *
@@ -115,6 +116,10 @@ public class PlayerQueryEventSource implements EventSource<PlayerQueryEvent>, Se
 
     public void construct(UUID playerId, String message, int time) {
         dispatcher.fireEvent(PlayerQueryEvent.construct(playerId, message, time));
+    }
+
+    public void informPlayer(UUID playerId, String message) {
+        dispatcher.fireEvent(PlayerQueryEvent.informPersonal(playerId, message));
     }
 
 }

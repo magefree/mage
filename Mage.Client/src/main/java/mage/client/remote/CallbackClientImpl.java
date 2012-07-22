@@ -220,6 +220,14 @@ public class CallbackClientImpl implements CallbackClient {
                             logger.warn("message out of sequence - ignoring");
                         }
                     }
+                    else if (callback.getMethod().equals("gameInformPersonal")) {
+                        GameClientMessage message = (GameClientMessage) callback.getData();
+                        GamePanel panel = frame.getGame(callback.getObjectId());
+                        if (panel != null) {
+                            JOptionPane.showMessageDialog(panel, message.getMessage(), "Game message",
+                                    JOptionPane.INFORMATION_MESSAGE);
+                        }
+                    }
                     else if (callback.getMethod().equals("sideboard")) {
                         TableClientMessage message = (TableClientMessage) callback.getData();
                         DeckView deckView = message.getDeck();

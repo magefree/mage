@@ -28,8 +28,6 @@
 
 package mage.game.events;
 
-import java.io.Serializable;
-import java.util.UUID;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
 import mage.game.Game;
@@ -37,6 +35,9 @@ import mage.game.draft.Draft;
 import mage.game.events.TableEvent.EventType;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentPairing;
+
+import java.io.Serializable;
+import java.util.UUID;
 
 /**
  *
@@ -57,6 +58,10 @@ public class TableEventSource implements EventSource<TableEvent>, Serializable {
 
     public void fireTableEvent(EventType eventType, String message, Game game) {
         dispatcher.fireEvent(new TableEvent(eventType, message, game));
+    }
+
+    public void fireTableEvent(EventType eventType, UUID playerId, String message, Game game) {
+        dispatcher.fireEvent(new TableEvent(eventType, playerId, message, game));
     }
 
     public void fireTableEvent(EventType eventType, String message, Exception ex, Game game) {

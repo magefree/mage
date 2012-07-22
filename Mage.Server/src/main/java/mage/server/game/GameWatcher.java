@@ -28,8 +28,6 @@
 
 package mage.server.game;
 
-import java.rmi.RemoteException;
-import java.util.UUID;
 import mage.game.Game;
 import mage.interfaces.callback.ClientCallback;
 import mage.server.User;
@@ -37,6 +35,9 @@ import mage.server.UserManager;
 import mage.view.GameClientMessage;
 import mage.view.GameView;
 import org.apache.log4j.Logger;
+
+import java.rmi.RemoteException;
+import java.util.UUID;
 
 /**
  *
@@ -80,6 +81,15 @@ public class GameWatcher {
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
                 user.fireCallback(new ClientCallback("gameInform", game.getId(), new GameClientMessage(getGameView(), message)));
+            }
+        }
+    }
+
+    public void informPersonal(final String message) {
+        if (!killed) {
+            User user = UserManager.getInstance().getUser(userId);
+            if (user != null) {
+                user.fireCallback(new ClientCallback("gameInformPersonal", game.getId(), new GameClientMessage(getGameView(), message)));
             }
         }
     }

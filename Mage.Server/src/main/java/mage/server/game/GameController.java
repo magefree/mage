@@ -168,6 +168,9 @@ public class GameController implements GameCallback {
                             case LOOK:
                                 lookAtCards(event.getPlayerId(), event.getMessage(), event.getCards());
                                 break;
+                            case PERSONAL_MESSAGE:
+                                informPersonal(event.getPlayerId(), event.getMessage());
+                                break;
                         }
                     } catch (MageException ex) {
                         logger.fatal("Player event listener error ", ex);
@@ -517,6 +520,14 @@ public class GameController implements GameCallback {
         for (final GameWatcher watcher: watchers.values()) {
             watcher.inform(message);
         }
+    }
+
+    private synchronized void informPersonal(UUID playerId, final String message) throws MageException {
+        perform(playerId, new Command() {
+            public void execute(UUID playerId) {
+                gameSessions.get(playerId).informPersonal(message);
+            }
+        });
     }
 
     private void error(String message, Exception ex) {

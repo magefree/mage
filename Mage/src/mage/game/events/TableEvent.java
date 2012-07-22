@@ -28,15 +28,16 @@
 
 package mage.game.events;
 
-import java.io.Serializable;
-import java.util.EventObject;
-import java.util.UUID;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
 import mage.game.Game;
 import mage.game.draft.Draft;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentPairing;
+
+import java.io.Serializable;
+import java.util.EventObject;
+import java.util.UUID;
 
 /**
  *
@@ -80,6 +81,11 @@ public class TableEvent extends EventObject implements ExternalEvent, Serializab
     public TableEvent(EventType eventType, String message, Exception ex, Game game) {
         this(eventType, message, game);
         this.ex = ex;
+    }
+
+    public TableEvent(EventType eventType, UUID playerId, String message, Game game) {
+        this(eventType, message, game);
+        this.playerId = playerId;
     }
 
     public TableEvent(EventType eventType, UUID playerId, Deck deck, int timeout) {

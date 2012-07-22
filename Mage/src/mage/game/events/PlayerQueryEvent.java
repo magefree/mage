@@ -28,14 +28,15 @@
 
 package mage.game.events;
 
-import java.io.Serializable;
-import java.util.*;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.TriggeredAbility;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.game.permanent.Permanent;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
  *
@@ -44,7 +45,7 @@ import mage.game.permanent.Permanent;
 public class PlayerQueryEvent extends EventObject implements ExternalEvent, Serializable {
 
     public enum QueryType {
-        ASK, CHOOSE, CHOOSE_ABILITY, CHOOSE_MODE, PICK_TARGET, PICK_ABILITY, SELECT, PLAY_MANA, PLAY_X_MANA, AMOUNT, LOOK, PICK_CARD, CONSTRUCT, CHOOSE_PILE
+        ASK, CHOOSE, CHOOSE_ABILITY, CHOOSE_MODE, PICK_TARGET, PICK_ABILITY, SELECT, PLAY_MANA, PLAY_X_MANA, AMOUNT, LOOK, PICK_CARD, CONSTRUCT, CHOOSE_PILE, PERSONAL_MESSAGE
     }
 
     private String message;
@@ -127,6 +128,13 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
         this.pile2 = pile2;
     }
 
+    private PlayerQueryEvent(UUID playerId, String message) {
+        super(playerId);
+        this.queryType = QueryType.PERSONAL_MESSAGE;
+        this.message = message;
+        this.playerId = playerId;
+    }
+
     public static PlayerQueryEvent askEvent(UUID playerId, String message) {
         return new PlayerQueryEvent(playerId, message, null, null, null, null, QueryType.ASK, 0, 0, false);
     }
@@ -195,6 +203,9 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
         return new PlayerQueryEvent(playerId, message, QueryType.CONSTRUCT, time);
     }
 
+    public static PlayerQueryEvent informPersonal(UUID playerId, String message) {
+        return new PlayerQueryEvent(playerId, message);
+    }
 
     public String getMessage() {
         return message;
