@@ -31,17 +31,26 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.cards.CardImpl;
-import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
+import mage.cards.CardImpl;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
-import mage.filter.common.FilterAuraCard;
 
 /**
  *
  * @author jeffwadsworth
  */
 public class TotemGuideHartebeest extends CardImpl<TotemGuideHartebeest> {
+
+    private static final FilterCard filter = new FilterCard("Aura card");
+
+    static {
+        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        filter.add(new SubtypePredicate("Aura"));
+    }
 
     public TotemGuideHartebeest(UUID ownerId) {
         super(ownerId, 50, "Totem-Guide Hartebeest", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");
@@ -53,7 +62,7 @@ public class TotemGuideHartebeest extends CardImpl<TotemGuideHartebeest> {
         this.toughness = new MageInt(5);
 
         // When Totem-Guide Hartebeest enters the battlefield, you may search your library for an Aura card, reveal it, put it into your hand, then shuffle your library.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(new FilterAuraCard()), true, false), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, false), true));
     }
 
     public TotemGuideHartebeest(final TotemGuideHartebeest card) {

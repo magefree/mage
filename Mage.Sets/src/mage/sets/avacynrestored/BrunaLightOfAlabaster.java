@@ -39,9 +39,9 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterAura;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -86,13 +86,14 @@ public class BrunaLightOfAlabaster extends CardImpl<BrunaLightOfAlabaster> {
 
 class BrunaLightOfAlabasterEffect extends OneShotEffect<BrunaLightOfAlabasterEffect> {
 
-    private static final FilterAura filterAura = new FilterAura();
-
+    private static final FilterPermanent filterAura = new FilterPermanent("Aura");
     private static final FilterCard filterAuraCard = new FilterCard("Aura card");
 
     static {
-        filterAuraCard.add(new SubtypePredicate("Aura"));
+        filterAura.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        filterAura.add(new SubtypePredicate("Aura"));
         filterAuraCard.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        filterAuraCard.add(new SubtypePredicate("Aura"));
     }
 
     public BrunaLightOfAlabasterEffect() {

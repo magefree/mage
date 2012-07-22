@@ -28,7 +28,15 @@
 
 package mage.game;
 
-import mage.Constants.*;
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.*;
+import mage.Constants.CardType;
+import mage.Constants.MultiplayerAttackOption;
+import mage.Constants.Outcome;
+import mage.Constants.PhaseStep;
+import mage.Constants.RangeOfInfluence;
+import mage.Constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
@@ -50,9 +58,12 @@ import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.counters.CounterType;
 import mage.filter.Filter;
+import mage.filter.FilterPermanent;
 import mage.filter.common.*;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.combat.Combat;
 import mage.game.command.CommandObject;
 import mage.game.command.Emblem;
@@ -77,18 +88,28 @@ import mage.util.functions.ApplyToPermanent;
 import mage.watchers.common.*;
 import org.apache.log4j.Logger;
 
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.*;
-
 public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializable {
 
     private final static transient Logger logger = Logger.getLogger(GameImpl.class);
 
-    private static FilterAura filterAura = new FilterAura();
-    private static FilterLegendaryPermanent filterLegendary = new FilterLegendaryPermanent();
-    private static FilterEquipment filterEquipment = new FilterEquipment();
-    private static FilterFortification filterFortification = new FilterFortification();
+    private static final FilterPermanent filterAura = new FilterPermanent();
+    private static final FilterPermanent filterEquipment = new FilterPermanent();
+    private static final FilterPermanent filterFortification = new FilterPermanent();
+    private static final FilterPermanent filterLegendary = new FilterPermanent();
+
+    static {
+        filterAura.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        filterAura.add(new SubtypePredicate("Aura"));
+
+        filterEquipment.add(new CardTypePredicate(CardType.ARTIFACT));
+        filterEquipment.add(new SubtypePredicate("Equipment"));
+
+        filterFortification.add(new CardTypePredicate(CardType.ARTIFACT));
+        filterFortification.add(new SubtypePredicate("Fortification"));
+
+        filterLegendary.add(new SupertypePredicate("Legendary"));
+    }
+
     private static Random rnd = new Random();
 
     private transient Stack<Integer> savedStates = new Stack<Integer>();
@@ -1074,7 +1095,8 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         //20091005 - 704.5k, 801.12
         if (legendary.size() > 1) {  //don't bother checking if less than 2 legends in play
             for (Permanent legend: legendary) {
-                FilterLegendaryPermanent filterLegendName = new FilterLegendaryPermanent();
+                FilterPermanent filterLegendName = new FilterPermanent();
+                filterLegendName.add(new SupertypePredicate("Legendary"));
                 filterLegendName.add(new NamePredicate(legend.getName()));
                 if (getBattlefield().contains(filterLegendName, legend.getControllerId(), this, 2)) {
                     for (Permanent dupLegend: getBattlefield().getActivePermanents(filterLegendName, legend.getControllerId(), this)) {

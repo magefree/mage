@@ -40,7 +40,9 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.GainControlTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterEquipment;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -53,9 +55,11 @@ import mage.target.TargetPermanent;
  */
 public class OgreGeargrabber extends CardImpl<OgreGeargrabber> {
 
-    private static final FilterEquipment filter = new FilterEquipment("Equipment an opponent controls");
+    private static final FilterPermanent filter = new FilterPermanent("Equipment an opponent controls");
 
     static {
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(new SubtypePredicate("Equipment"));
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
