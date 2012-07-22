@@ -32,6 +32,7 @@ import mage.Constants.Outcome;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.keyword.CantAttackAloneAbility;
 import mage.abilities.keyword.VigilanceAbility;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureForCombat;
 import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.game.Game;
@@ -195,12 +196,18 @@ public class Combat implements Serializable, Copyable<Combat> {
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_BLOCKERS, attackerId, attackerId))) {
             Player player = game.getPlayer(attackerId);
             //20101001 - 509.1c
-            checkBlockRequirements(player, game);
+            checkBlockRequirementsBefore(player, game);
             for (UUID defenderId : getPlayerDefenders(game)) {
-                game.getPlayer(defenderId).selectBlockers(game, defenderId);
-                if (game.isPaused() || game.isGameOver())
-                    return;
-                checkBlockRestrictions(game.getPlayer(defenderId), game);
+                boolean choose = true;
+                Player defender = game.getPlayer(defenderId);
+                while (choose) {
+                    game.getPlayer(defenderId).selectBlockers(game, defenderId);
+                    if (game.isPaused() || game.isGameOver()) {
+                        return;
+                    }
+                    checkBlockRestrictions(game.getPlayer(defenderId), game);
+                    choose = !checkBlockRequirementsAfter(defender, defender, game);
+                }
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, defenderId, defenderId));
             }
         }
@@ -229,9 +236,8 @@ public class Combat implements Serializable, Copyable<Combat> {
         }
     }
 
-    public void checkBlockRequirements(Player player, Game game) {
+    public void checkBlockRequirementsBefore(Player player, Game game) {
         //20101001 - 509.1c
-        //TODO: handle case where more than one attacker must be blocked
         for (Permanent creature : game.getBattlefield().getActivePermanents(filterBlockers, player.getId(), game)) {
             if (game.getOpponents(attackerId).contains(creature.getControllerId())) {
                 for (RequirementEffect effect : game.getContinuousEffects().getApplicableRequirementEffects(creature, game)) {
@@ -245,6 +251,43 @@ public class Combat implements Serializable, Copyable<Combat> {
                 }
             }
         }
+    }
+
+    public boolean checkBlockRequirementsAfter(Player player, Player controller, Game game) {
+        //20101001 - 509.1c
+        for (Permanent creature : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), player.getId(), game)) {
+            if (creature.getBlocking() == 0 && game.getOpponents(attackerId).contains(creature.getControllerId())) {
+                for (RequirementEffect effect : game.getContinuousEffects().getApplicableRequirementEffects(creature, game)) {
+                    if (effect.mustBlockAny(game)) {
+                        // check that it can block an attacker
+                        boolean mayBlock = false;
+                        for (UUID attackingCreatureId : getAttackers()) {
+                            if (creature.canBlock(attackingCreatureId, game)) {
+                                mayBlock = true;
+                                break;
+                            }
+                        }
+                        if (mayBlock) {
+                            if (controller.isHuman()) {
+                                game.informPlayer(controller, "Creature should block this turn: " + creature.getName());
+                            } else {
+                                Player defender = game.getPlayer(creature.getControllerId());
+                                if (defender != null) {
+                                    for (UUID attackingCreatureId : getAttackers()) {
+                                        if (creature.canBlock(attackingCreatureId, game)) {
+                                            defender.declareBlocker(creature.getId(), attackingCreatureId, game);
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        return true;
     }
 
     public void setDefenders(Game game) {

@@ -26,53 +26,44 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.effects;
+package mage.abilities.keyword;
 
-import mage.Constants.Duration;
-import mage.Constants.EffectType;
-import mage.Constants.Outcome;
-import mage.abilities.Ability;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.Constants.Zone;
+import mage.abilities.MageSingleton;
+import mage.abilities.StaticAbility;
 
-import java.util.UUID;
+import java.io.ObjectStreamException;
 
 /**
+ * This is marker ability that is used only for rule display.
+ * You should use {@see AttacksIfAbleTargetEffect} for real effect.
  *
- * @author BetaSteward_at_googlemail.com
+ * @author magenoxx_at_googlemail.com
  */
-public abstract class RequirementEffect<T extends RequirementEffect<T>> extends ContinuousEffectImpl<T> {
+public class AttacksThisTurnMarkerAbility extends StaticAbility<AttacksThisTurnMarkerAbility> implements MageSingleton {
 
-    public RequirementEffect(Duration duration) {
-        super(duration, Outcome.Detriment);
-        this.effectType = EffectType.REQUIREMENT;
+    private static final AttacksThisTurnMarkerAbility fINSTANCE =  new AttacksThisTurnMarkerAbility();
+
+    private Object readResolve() throws ObjectStreamException {
+        return fINSTANCE;
     }
 
-    public RequirementEffect(final RequirementEffect effect) {
-        super(effect);
+    public static AttacksThisTurnMarkerAbility getInstance() {
+        return fINSTANCE;
+    }
+
+    private AttacksThisTurnMarkerAbility() {
+        super(Zone.BATTLEFIELD, null);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        throw new UnsupportedOperationException("Not supported.");
+    public String getRule() {
+        return "{this} attacks this turn if able";
     }
 
-    public abstract boolean applies(Permanent permanent, Ability source, Game game);
-
-    public abstract boolean mustAttack(Game game);
-
-    public abstract boolean mustBlock(Game game);
-
-    public boolean mustBlockAny(Game game) {
-        return false;
-    }
-
-    public UUID mustAttackDefender(Ability source, Game game) {
-        return null;
-    }
-
-    public UUID mustBlockAttacker(Ability source, Game game) {
-        return null;
+    @Override
+    public AttacksThisTurnMarkerAbility copy() {
+        return fINSTANCE;
     }
 
 }

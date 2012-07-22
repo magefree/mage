@@ -109,7 +109,6 @@ public class DamageTargetEffect extends OneShotEffect<DamageTargetEffect> {
         }
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
-            game.informPlayer(player, "You were dealt 3 damage");
             player.damage(amount.calculate(game, source), source.getSourceId(), game, false, preventable);
             return true;
         }

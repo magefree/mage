@@ -48,6 +48,8 @@ import java.util.UUID;
 public class GainAbilityTargetEffect extends ContinuousEffectImpl<GainAbilityTargetEffect> {
 
     protected Ability ability;
+    protected String rule;
+    protected boolean hasRule;
 
     public GainAbilityTargetEffect(Ability ability, Duration duration) {
         super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, 
@@ -55,9 +57,19 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl<GainAbilityTar
         this.ability = ability;
     }
 
+    public GainAbilityTargetEffect(Ability ability, Duration duration, String rule) {
+        super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA,
+                ability.getEffects().size() > 0 ? ability.getEffects().get(0).getOutcome() : Outcome.AddAbility);
+        this.ability = ability;
+        this.rule = rule;
+        this.hasRule = true;
+    }
+
     public GainAbilityTargetEffect(final GainAbilityTargetEffect effect) {
         super(effect);
         this.ability = effect.ability.copy();
+        this.rule = effect.rule;
+        this.hasRule = effect.hasRule;
     }
 
     @Override
@@ -86,6 +98,9 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl<GainAbilityTar
 
     @Override
     public String getText(Mode mode) {
+        if (hasRule) {
+            return rule;
+        }
         StringBuilder sb = new StringBuilder();
         Target target = mode.getTargets().get(0);
         if(target.getNumberOfTargets() > 1){

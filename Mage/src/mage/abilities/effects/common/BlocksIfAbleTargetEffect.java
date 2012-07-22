@@ -26,53 +26,64 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.effects;
+package mage.abilities.effects.common;
 
 import mage.Constants.Duration;
-import mage.Constants.EffectType;
-import mage.Constants.Outcome;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
+import mage.abilities.effects.RequirementEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.UUID;
-
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author magenoxx_at_googlemail.com
  */
-public abstract class RequirementEffect<T extends RequirementEffect<T>> extends ContinuousEffectImpl<T> {
+public class BlocksIfAbleTargetEffect extends RequirementEffect<BlocksIfAbleTargetEffect> {
 
-    public RequirementEffect(Duration duration) {
-        super(duration, Outcome.Detriment);
-        this.effectType = EffectType.REQUIREMENT;
+    public BlocksIfAbleTargetEffect(Duration duration) {
+        super(duration);
     }
 
-    public RequirementEffect(final RequirementEffect effect) {
+    public BlocksIfAbleTargetEffect(final BlocksIfAbleTargetEffect effect) {
         super(effect);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        throw new UnsupportedOperationException("Not supported.");
+    public BlocksIfAbleTargetEffect copy() {
+        return new BlocksIfAbleTargetEffect(this);
     }
 
-    public abstract boolean applies(Permanent permanent, Ability source, Game game);
-
-    public abstract boolean mustAttack(Game game);
-
-    public abstract boolean mustBlock(Game game);
-
-    public boolean mustBlockAny(Game game) {
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        Permanent creature = game.getPermanent(source.getFirstTarget());
+        if (creature != null && creature.getId().equals(permanent.getId())) {
+            return true;
+        }
         return false;
     }
 
-    public UUID mustAttackDefender(Ability source, Game game) {
-        return null;
+    @Override
+    public boolean mustAttack(Game game) {
+        return false;
     }
 
-    public UUID mustBlockAttacker(Ability source, Game game) {
-        return null;
+    @Override
+    public boolean mustBlock(Game game) {
+        return false;
+    }
+
+    @Override
+    public boolean mustBlockAny(Game game) {
+        return true;
+    }
+
+    @Override
+    public String getText(Mode mode) {
+        if (this.duration == Duration.EndOfTurn)
+            return "Target " + mode.getTargets().get(0).getTargetName() + " blocks this turn if able";
+        else
+            return "Target " + mode.getTargets().get(0).getTargetName() + " blocks each turn if able";
     }
 
 }
