@@ -25,8 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.filter.common;
+package mage.filter.predicate.permanent;
 
+import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
@@ -35,37 +36,20 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class FilterBlockedCreature extends FilterCreaturePermanent {
-
-    public FilterBlockedCreature() {
-        this("blocked creature");
-    }
-
-    public FilterBlockedCreature(String name) {
-        super(name);
-    }
-
-    public FilterBlockedCreature(final FilterBlockedCreature filter) {
-        super(filter);
-    }
+public class BlockedPredicate implements Predicate<Permanent> {
 
     @Override
-    public FilterBlockedCreature copy() {
-        return new FilterBlockedCreature(this);
-    }
-
-    @Override
-    public boolean match(Permanent permanent, Game game) {
-        if (!super.match(permanent, game)) {
-            return notFilter;
-        }
-
+    public boolean apply(Permanent input, Game game) {
         for (CombatGroup combatGroup : game.getCombat().getGroups()) {
-            if (!combatGroup.getBlockers().isEmpty() && combatGroup.getAttackers().contains(permanent.getId())) {
-                return !notFilter;
+            if (!combatGroup.getBlockers().isEmpty() && combatGroup.getAttackers().contains(input.getId())) {
+                return true;
             }
         }
+        return false;
+    }
 
-        return notFilter;
+    @Override
+    public String toString() {
+        return "Blocked";
     }
 }

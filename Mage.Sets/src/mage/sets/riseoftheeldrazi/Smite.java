@@ -32,8 +32,8 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterBlockedCreature;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.BlockedPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -42,7 +42,11 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Smite extends CardImpl<Smite> {
 
-    private static final FilterCreaturePermanent filter = new FilterBlockedCreature();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("blocked creature");
+
+    static {
+        filter.add(new BlockedPredicate());
+    }
 
     public Smite(UUID ownerId) {
         super(ownerId, 43, "Smite", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
