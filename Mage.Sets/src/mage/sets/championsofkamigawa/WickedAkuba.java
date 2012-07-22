@@ -33,23 +33,30 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
+import mage.filter.FilterPlayer;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.game.stack.StackAbility;
+import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.watchers.common.PlayerDamagedBySourceWatcher;
 
 /**
  *
- * @author LevelX
+ * @author North
  */
 public class WickedAkuba extends CardImpl<WickedAkuba> {
+
+    private static final FilterPlayer filter = new FilterPlayer("player dealt damage by Wicked Akuba this turn");
+
+    static {
+        filter.add(new WickedAkubaPredicate());
+    }
 
     public WickedAkuba(UUID ownerId) {
         super(ownerId, 150, "Wicked Akuba", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}{B}");
@@ -62,7 +69,7 @@ public class WickedAkuba extends CardImpl<WickedAkuba> {
 
         // {B}: Target player dealt damage by Wicked Akuba this turn loses 1 life.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), new ColoredManaCost(Constants.ColoredManaSymbol.B));
-        ability.addTarget(new WickedAkubaTarget());
+        ability.addTarget(new TargetPlayer(1, 1, false, filter));
         this.addAbility(ability);
     }
 
@@ -73,63 +80,23 @@ public class WickedAkuba extends CardImpl<WickedAkuba> {
     @Override
     public WickedAkuba copy() {
         return new WickedAkuba(this);
-    }    
-
+    }
 }
 
-class WickedAkubaTarget extends TargetPlayer<WickedAkubaTarget> {
+class WickedAkubaPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Player>> {
 
-    public WickedAkubaTarget() {
-        super();
-        this.targetName = "player dealt damage by Wicked Akuba this turn";
-    }
+    @Override
+    public boolean apply(ObjectSourcePlayer<Player> input, Game game) {
+        PlayerDamagedBySourceWatcher watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get("PlayerDamagedBySource", input.getObject().getId());
+        if (watcher != null && watcher.damageSources.contains(input.getSourceId())) {
+            return true;
+        }
 
-    public WickedAkubaTarget(final WickedAkubaTarget target) {
-        super(target);
+        return false;
     }
 
     @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-        filter.getPlayerId().clear();
-                UUID source = null;
-                MageObject targetSource = game.getObject(sourceId);
-                if (targetSource instanceof StackAbility) {
-                    StackAbility stackAbility = (StackAbility) targetSource;
-                    source = stackAbility.getSourceId();
-                }
-                if (targetSource instanceof Permanent) {
-                    Permanent permanent = (Permanent) targetSource;
-                    source = permanent.getId();
-                }
-                if (source != null) {
-                        for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()){
-                                PlayerDamagedBySourceWatcher watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get("PlayerDamagedBySource", playerId);
-                                if (watcher != null && watcher.damageSources.contains(source))
-                                            filter.getPlayerId().add(playerId);
-                        }
-                }
-                if (filter.getPlayerId().isEmpty()) // neccessary because empty playerId filter allows all players
-                    return false;
-        return super.canChoose(sourceId, sourceControllerId, game);
+    public String toString() {
+        return "(Player dealt damage by {source} this turn)";
     }
-
-    @Override
-    public boolean canTarget(UUID id, Ability source, Game game) {
-        filter.getPlayerId().clear();
-                for (UUID playerId: game.getPlayer(source.getControllerId()).getInRange()){
-                    PlayerDamagedBySourceWatcher watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get("PlayerDamagedBySource", playerId);
-
-                    if (watcher != null && watcher.damageSources.contains(source.getSourceId()))
-                                            filter.getPlayerId().add(playerId);
-                }
-                if (filter.getPlayerId().isEmpty()) // neccessary because empty playerId filter allows all players
-                    return false;
-        return super.canTarget(id, source, game);
-    }
-
-    @Override
-    public WickedAkubaTarget copy() {
-        return new WickedAkubaTarget(this);
-    }
-
 }

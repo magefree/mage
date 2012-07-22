@@ -44,7 +44,7 @@ import java.util.UUID;
  */
 public class TargetPlayer<T extends TargetPlayer<T>> extends TargetImpl<TargetPlayer<T>> {
 
-    protected FilterPlayer filter = new FilterPlayer();
+    protected FilterPlayer filter;
 
     public TargetPlayer(boolean required) {
         this();
@@ -60,9 +60,14 @@ public class TargetPlayer<T extends TargetPlayer<T>> extends TargetImpl<TargetPl
     }
 
     public TargetPlayer(int minNumTargets, int maxNumTargets, boolean notTarget) {
+        this(minNumTargets, maxNumTargets, notTarget, new FilterPlayer());
+    }
+
+    public TargetPlayer(int minNumTargets, int maxNumTargets, boolean notTarget, FilterPlayer filter) {
         this.minNumberOfTargets = minNumTargets;
         this.maxNumberOfTargets = maxNumTargets;
-        this.targetName = "player";
+        this.filter = filter;
+        this.targetName = filter.getMessage();
         this.notTarget = notTarget;
     }
 
@@ -91,7 +96,7 @@ public class TargetPlayer<T extends TargetPlayer<T>> extends TargetImpl<TargetPl
         MageObject targetSource = game.getObject(sourceId);
         for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
             Player player = game.getPlayer(playerId);
-            if (player != null && !player.hasLeft() && filter.match(player, game)) {
+            if (player != null && !player.hasLeft() && filter.match(player, sourceId, sourceControllerId, game)) {
                 if (player.canBeTargetedBy(targetSource, game)) {
                     count++;
                     if (count >= this.minNumberOfTargets)
@@ -130,7 +135,7 @@ public class TargetPlayer<T extends TargetPlayer<T>> extends TargetImpl<TargetPl
         MageObject targetSource = game.getObject(sourceId);
         for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
             Player player = game.getPlayer(playerId);
-            if (player != null && !player.hasLeft() && filter.match(player, game)) {
+            if (player != null && !player.hasLeft() && filter.match(player, sourceId, sourceControllerId, game)) {
                 if (player.canBeTargetedBy(targetSource, game))
                     possibleTargets.add(playerId);
             }
@@ -173,10 +178,12 @@ public class TargetPlayer<T extends TargetPlayer<T>> extends TargetImpl<TargetPl
     public boolean canTarget(UUID id, Ability source, Game game) {
         Player player = game.getPlayer(id);
         if (player != null) {
-            if (source != null)
-                return player.canBeTargetedBy(game.getObject(source.getSourceId()), game) && filter.match(player, game);
-            else 
+            if (source != null) {
+                return player.canBeTargetedBy(game.getObject(source.getSourceId()), game)
+                        && filter.match(player, source.getSourceId(), source.getControllerId(), game);
+            } else {
                 return filter.match(player, game);
+            }
         }
         return false;
     }
