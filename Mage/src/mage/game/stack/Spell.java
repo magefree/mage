@@ -101,7 +101,9 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
                             return result;
                         }
                     }
-                    card.moveToZone(Zone.GRAVEYARD, ability.getId(), game, false);
+                    if (!card.isCopy()) {
+                        card.moveToZone(Zone.GRAVEYARD, ability.getId(), game, false);
+                    }
                 }
 
                 return result;

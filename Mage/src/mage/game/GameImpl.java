@@ -868,6 +868,19 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     }
 
     @Override
+    public Card copyCard(Card cardToCopy, Ability source, UUID newController) {
+        Card copiedCard = cardToCopy.copy();
+        copiedCard.assignNewId();
+        copiedCard.setControllerId(newController);
+        copiedCard.setCopy(true);
+        Set<Card> cards = new HashSet<Card>();
+        cards.add(copiedCard);
+        loadCards(cards, source.getControllerId());
+
+        return copiedCard;
+    }
+
+    @Override
     public void addTriggeredAbility(TriggeredAbility ability) {
         if (ability instanceof TriggeredManaAbility) {
             // 20110715 - 605.4

@@ -177,6 +177,8 @@ public interface Game extends MageItem, Serializable {
      * @param applier
      */
     public void copyPermanent(Permanent copyFromPermanent, Permanent copyToPermanent, Ability source, ApplyToPermanent applier);
+    
+    public Card copyCard(Card cardToCopy, Ability source, UUID newController);
 
     public void addTriggeredAbility(TriggeredAbility ability);
     public void addDelayedTriggeredAbility(DelayedTriggeredAbility delayedAbility);
