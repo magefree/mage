@@ -56,6 +56,11 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl<GainAbilityAllEff
         this(ability, duration, filter, false);
     }
 
+    public GainAbilityAllEffect(Ability ability, Duration duration, FilterPermanent filter, String text) {
+        this(ability, duration, filter, false);
+        this.staticText = text;
+    }
+
     public GainAbilityAllEffect(Ability ability, Duration duration, FilterPermanent filter, boolean excludeSource) {
         super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.ability = ability;
@@ -75,7 +80,7 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl<GainAbilityAllEff
     public void init(Ability source, Game game) {
         super.init(source, game);
         if (this.affectedObjectsSet) {
-            for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
+            for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                 if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
                     objects.add(perm.getId());
                 }
@@ -90,7 +95,7 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl<GainAbilityAllEff
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
+        for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
             if (!this.affectedObjectsSet || objects.contains(perm.getId())) {
                 if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
                     perm.addAbility(ability, game);
@@ -102,16 +107,17 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl<GainAbilityAllEff
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        if (excludeSource)
+        if (excludeSource) {
             sb.append("Other ");
-                sb.append(filter.getMessage());
-                if (duration.equals(Duration.WhileOnBattlefield))
-                    sb.append(" have ");
-                else
-                    sb.append(" gain ");
+        }
+        sb.append(filter.getMessage());
+        if (duration.equals(Duration.WhileOnBattlefield)) {
+            sb.append(" have ");
+        } else {
+            sb.append(" gain ");
+        }
         sb.append(ability.getRule());
         sb.append(" ").append(duration.toString());
         staticText = sb.toString();
     }
-
 }
