@@ -27,13 +27,7 @@
  */
 package mage.sets.newphyrexia;
 
-import java.util.UUID;
-import mage.Constants.AsThoughEffectType;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.Constants.*;
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -45,6 +39,8 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  *
@@ -104,6 +100,7 @@ class PraetorsGraspEffect extends OneShotEffect<PraetorsGraspEffect> {
                 Card card = opponent.getLibrary().remove(targetId, game);
                 if (card != null) {
                     card.setFaceDown(true);
+                    card.setControllerId(player.getId());
                     card.moveToExile(getId(), "Praetor's Grasp", source.getSourceId(), game);
                     game.addEffect(new PraetorsGraspPlayEffect(card.getId()), source);
                 }
