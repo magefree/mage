@@ -1,58 +1,53 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 package mage.filter;
 
-import mage.Constants.TargetController;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 import mage.cards.Card;
+import mage.filter.predicate.ObjectPlayer;
+import mage.filter.predicate.ObjectPlayerPredicate;
+import mage.filter.predicate.Predicates;
 import mage.game.Game;
-
-import java.util.*;
+import mage.game.permanent.Permanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @author North
  */
 public class FilterCard extends FilterObject<Card> {
 
     private static final long serialVersionUID = 1L;
-
-    protected List<UUID> ownerId = new ArrayList<UUID>();
-    protected boolean notOwner;
-    protected List<String> expansionSetCode = new ArrayList<String>();
-    protected boolean notExpansionSetCode;
-    protected TargetController owner = TargetController.ANY;
-
-    /**
-     * Text that appears on card.
-     * At the moment only card name and rules are checked.
-     */
-    protected String text = "";
+    protected List<ObjectPlayerPredicate<ObjectPlayer<Permanent>>> extraPredicates = new ArrayList<ObjectPlayerPredicate<ObjectPlayer<Permanent>>>();
 
     public FilterCard() {
         super("card");
@@ -64,121 +59,24 @@ public class FilterCard extends FilterObject<Card> {
 
     public FilterCard(FilterCard filter) {
         super(filter);
-        this.ownerId.addAll(filter.ownerId);
-        this.notOwner = filter.notOwner;
-        this.expansionSetCode.addAll(filter.expansionSetCode);
-        this.notExpansionSetCode = filter.notExpansionSetCode;
-        this.owner = filter.owner;
-    }
-
-    @Override
-    public boolean match(Card card, Game game) {
-        if (!super.match(card, game))
-            return notFilter;
-
-        if (ownerId.size() > 0 && ownerId.contains(card.getOwnerId()) == notOwner)
-            return notFilter;
-
-        if (expansionSetCode.size() > 0 && expansionSetCode.contains(card.getExpansionSetCode()) == notExpansionSetCode)
-            return notFilter;
-
-        if (text.length() > 0) {
-            // first check in card name
-            boolean filterOut = !card.getName().toLowerCase().contains(text.toLowerCase());
-            // if couldn't find
-            if (filterOut) {
-                //separate by spaces
-                String[] tokens = text.toLowerCase().split(" ");
-                int count = 0;
-                int found = 0;
-                for (String token : tokens) {
-                    if (!token.isEmpty()) {
-                        count++;
-                        // then try to find in rules
-                        for (String rule : card.getRules()) {
-                            if (rule.toLowerCase().contains(token)) {
-                                found++;
-                                break;
-                            }
-                        }
-
-                        if (filterOut) {
-                            for (String subType : card.getSubtype()) {
-                                if (subType.equalsIgnoreCase(token)) {
-                                    found++;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                if (found < count)
-                    return notFilter;
-            }
-
-        }
-
-        return !notFilter;
+        this.extraPredicates = new ArrayList<ObjectPlayerPredicate<ObjectPlayer<Permanent>>>(filter.extraPredicates);
     }
 
     public boolean match(Card card, UUID playerId, Game game) {
-        if (!this.match(card, game))
-            return notFilter;
-
-        if (owner != TargetController.ANY && playerId != null) {
-            switch(owner) {
-                case YOU:
-                    if (!card.getOwnerId().equals(playerId))
-                        return notFilter;
-                    break;
-                case OPPONENT:
-                    if (!game.getOpponents(playerId).contains(card.getOwnerId()))
-                        return notFilter;
-                    break;
-                case NOT_YOU:
-                    if (card.getOwnerId().equals(playerId))
-                        return notFilter;
-                    break;
-            }
+        if (!this.match(card, game)) {
+            return false;
         }
 
-        return !notFilter;
+        return Predicates.and(extraPredicates).apply(new ObjectPlayer(card, playerId), game);
     }
 
-    public List<UUID> getOwnerId() {
-        return ownerId;
-    }
-
-    public void setNotOwner(boolean notOwner) {
-        this.notOwner = notOwner;
-    }
-
-    public List<String> getExpansionSetCode() {
-        return expansionSetCode;
-    }
-
-    public void setNotExpansionSetCode(boolean notExpansionSetCode) {
-        this.notExpansionSetCode = notExpansionSetCode;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public void setTargetOwner(TargetController owner) {
-        this.owner = owner;
-    }
-
-    public boolean matchOwner(UUID testOwnerId) {
-        if (ownerId.size() > 0 && ownerId.contains(testOwnerId) == notOwner)
-            return false;
-        return true;
+    public void add(ObjectPlayerPredicate predicate) {
+        extraPredicates.add(predicate);
     }
 
     public Set<Card> filter(Set<Card> cards, Game game) {
         Set<Card> filtered = new HashSet<Card>();
-        for (Card card: cards) {
+        for (Card card : cards) {
             if (match(card, game)) {
                 filtered.add(card);
             }

@@ -52,6 +52,8 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
+import mage.filter.predicate.other.CardTextPredicate;
+import mage.filter.predicate.other.ExpansionSetPredicate;
 import mage.sets.Sets;
 import mage.view.CardsView;
 
@@ -212,12 +214,16 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         filter.add(Predicates.or(predicates));
 
         String name = jTextFieldSearch.getText().trim();
-        filter.setText(name);
+        filter.add(new CardTextPredicate(name));
 
         if (this.cbExpansionSet.getSelectedItem() instanceof ExpansionSet) {
-            filter.getExpansionSetCode().add(((ExpansionSet) this.cbExpansionSet.getSelectedItem()).getCode());
+            filter.add(new ExpansionSetPredicate(((ExpansionSet) this.cbExpansionSet.getSelectedItem()).getCode()));
         } else if (this.cbExpansionSet.getSelectedItem().equals("-- Standard")) {
-            filter.getExpansionSetCode().addAll(ConstructedFormats.getSetsByFormat("Standard"));
+            ArrayList<Predicate<Card>> expansionPredicates = new ArrayList<Predicate<Card>>();
+            for (String setCode : ConstructedFormats.getSetsByFormat("Standard")) {
+                expansionPredicates.add(new ExpansionSetPredicate(setCode));
+            }
+            filter.add(Predicates.or(expansionPredicates));
         }
     }
 
@@ -228,14 +234,16 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             setCursor(new Cursor(Cursor.WAIT_CURSOR));
             if (limited) {
                 for (Card card: cards) {
-                    if (filter.match(card, null))
+                    if (filter.match(card, null)) {
                         filteredCards.add(card);
+                    }
                 }
             }
             else {
                 for (Card card: CardsStorage.getAllCards()) {
-                    if (filter.match(card, null))
+                    if (filter.match(card, null)) {
                         filteredCards.add(card);
+                    }
                 }
             }
             this.currentView.loadCards(new CardsView(filteredCards), (SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected(), bigCard, null);

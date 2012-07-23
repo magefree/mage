@@ -25,52 +25,31 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.filter.predicate.other;
 
-import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.TargetController;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.abilities.keyword.FlashbackAbility;
-import mage.cards.CardImpl;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.other.OwnerPredicate;
-import mage.target.common.TargetCardInExile;
+import mage.cards.Card;
+import mage.filter.predicate.Predicate;
+import mage.game.Game;
 
 /**
  *
- * @author BetaSteward
+ * @author North
  */
-public class RunicRepetition extends CardImpl<RunicRepetition> {
+public class ExpansionSetPredicate implements Predicate<Card> {
 
-    private static final FilterCard filter = new FilterCard("exiled card with flashback you own");
+    private final String setCode;
 
-    static {
-        filter.add(new OwnerPredicate(TargetController.YOU));
-        filter.add(new AbilityPredicate(FlashbackAbility.class));
-    }
-
-    public RunicRepetition(UUID ownerId) {
-        super(ownerId, 72, "Runic Repetition", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
-        this.expansionSetCode = "ISD";
-
-        this.color.setBlue(true);
-
-        // Return target exiled card with flashback you own to your hand.
-        TargetCardInExile target = new TargetCardInExile(filter, null);
-        this.getSpellAbility().addTarget(target);
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-    }
-
-    public RunicRepetition(final RunicRepetition card) {
-        super(card);
+    public ExpansionSetPredicate(String setCode) {
+        this.setCode = setCode;
     }
 
     @Override
-    public RunicRepetition copy() {
-        return new RunicRepetition(this);
+    public boolean apply(Card input, Game game) {
+        return input.getExpansionSetCode().equals(setCode);
     }
 
+    @Override
+    public String toString() {
+        return "ExpansionSet(" + setCode + ')';
+    }
 }

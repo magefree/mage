@@ -43,7 +43,6 @@ public abstract class FilterImpl<E> implements Filter<E> {
 
     protected List<Predicate<Object>> predicates = new ArrayList<Predicate<Object>>();
     protected String message;
-    protected boolean notFilter = false;
 
     @Override
     public abstract FilterImpl<E> copy();
@@ -54,7 +53,6 @@ public abstract class FilterImpl<E> implements Filter<E> {
 
     public FilterImpl(FilterImpl filter) {
         this.message = filter.message;
-        this.notFilter = filter.notFilter;
         this.predicates = new ArrayList<Predicate<Object>>(filter.predicates);
     }
 
@@ -77,9 +75,4 @@ public abstract class FilterImpl<E> implements Filter<E> {
     public void setMessage(String message) {
         this.message = message;
     }
-
-    public void setNotFilter(boolean notFilter) {
-        this.notFilter = notFilter;
-    }
-
 }

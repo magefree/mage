@@ -51,6 +51,7 @@ import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.other.OwnerPredicate;
 import mage.target.common.TargetCardInHand;
 import mage.watchers.common.CastFromHandWatcher;
 
@@ -62,7 +63,7 @@ public class MyojinOfLifesWeb extends CardImpl<MyojinOfLifesWeb> {
     private static final FilterCard filter = new FilterCard("any number of creature cards from your hand");
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.setTargetOwner(TargetController.YOU);
+        filter.add(new OwnerPredicate(TargetController.YOU));
     }
 
     public MyojinOfLifesWeb(UUID ownerId) {
@@ -80,7 +81,8 @@ public class MyojinOfLifesWeb extends CardImpl<MyojinOfLifesWeb> {
         // Myojin of Life's Web enters the battlefield with a divinity counter on it if you cast it from your hand.
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.DIVINITY.createInstance()), new CastFromHandCondition(), ""), "{this} enters the battlefield with a divinity counter on it if you cast it from your hand"));
         // Myojin of Life's Web is indestructible as long as it has a divinity counter on it.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Constants.Duration.WhileOnBattlefield),
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD,
+                new ConditionalContinousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Constants.Duration.WhileOnBattlefield),
                 new HasCounterCondition(CounterType.DIVINITY), "{this} is indestructible as long as it has a divinity counter on it")));
         // Remove a divinity counter from Myojin of Life's Web: Put any number of creature cards from your hand onto the battlefield.
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new PutOntoBattlefieldTargetEffect(false), new RemoveCountersSourceCost(CounterType.DIVINITY.createInstance()));

@@ -100,27 +100,29 @@ public class TargetCard<T extends TargetCard<T>> extends TargetObject<TargetCard
     @Override
     public boolean canChoose(UUID sourceControllerId, Game game) {
         for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
-            if (filter.matchOwner(playerId)) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    switch (zone) {
-                        case HAND:
-                            if (player.getHand().count(filter, player.getId(), game) >= this.minNumberOfTargets)
-                                return true;
-                            break;
-                        case GRAVEYARD:
-                            if (player.getGraveyard().count(filter, player.getId(), game) >= this.minNumberOfTargets)
-                                return true;
-                            break;
-                        case LIBRARY:
-                            if (player.getLibrary().count(filter, game) >= this.minNumberOfTargets)
-                                return true;
-                            break;
-                        case EXILED:
-                            if (game.getExile().getPermanentExile().count(filter, player.getId(), game) >= this.minNumberOfTargets)
-                                return true;
-                            break;
-                    }
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                switch (zone) {
+                    case HAND:
+                        if (player.getHand().count(filter, player.getId(), game) >= this.minNumberOfTargets) {
+                            return true;
+                        }
+                        break;
+                    case GRAVEYARD:
+                        if (player.getGraveyard().count(filter, player.getId(), game) >= this.minNumberOfTargets) {
+                            return true;
+                        }
+                        break;
+                    case LIBRARY:
+                        if (player.getLibrary().count(filter, game) >= this.minNumberOfTargets) {
+                            return true;
+                        }
+                        break;
+                    case EXILED:
+                        if (game.getExile().getPermanentExile().count(filter, player.getId(), game) >= this.minNumberOfTargets) {
+                            return true;
+                        }
+                        break;
                 }
             }
         }
@@ -143,34 +145,34 @@ public class TargetCard<T extends TargetCard<T>> extends TargetObject<TargetCard
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
         Set<UUID> possibleTargets = new HashSet<UUID>();
-        for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
-            if (filter.matchOwner(playerId)) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    switch (zone) {
-                        case HAND:
-                            for (Card card: player.getHand().getCards(filter, game)) {
+        for (UUID playerId : game.getPlayer(sourceControllerId).getInRange()) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                switch (zone) {
+                    case HAND:
+                        for (Card card : player.getHand().getCards(filter, game)) {
+                            possibleTargets.add(card.getId());
+                        }
+                        break;
+                    case GRAVEYARD:
+                        for (Card card : player.getGraveyard().getCards(filter, game)) {
+                            possibleTargets.add(card.getId());
+                        }
+                        break;
+                    case LIBRARY:
+                        for (Card card : player.getLibrary().getUniqueCards(game)) {
+                            if (filter.match(card, game)) {
                                 possibleTargets.add(card.getId());
                             }
-                            break;
-                        case GRAVEYARD:
-                            for (Card card: player.getGraveyard().getCards(filter, game)) {
+                        }
+                        break;
+                    case EXILED:
+                        for (Card card : game.getExile().getPermanentExile().getUniqueCards(game)) {
+                            if (filter.match(card, player.getId(), game)) {
                                 possibleTargets.add(card.getId());
                             }
-                            break;
-                        case LIBRARY:
-                            for (Card card: player.getLibrary().getUniqueCards(game)) {
-                                if (filter.match(card, game))
-                                    possibleTargets.add(card.getId());
-                            }
-                            break;
-                        case EXILED:
-                            for (Card card: game.getExile().getPermanentExile().getUniqueCards(game)) {
-                                if (filter.match(card, player.getId(), game))
-                                    possibleTargets.add(card.getId());
-                            }
-                            break;
-                    }
+                        }
+                        break;
                 }
             }
         }
@@ -179,8 +181,9 @@ public class TargetCard<T extends TargetCard<T>> extends TargetObject<TargetCard
 
     public boolean canTarget(UUID id, Cards cards, Game game) {
         Card card = cards.get(id, game);
-        if (card != null)
+        if (card != null) {
             return filter.match(card, game);
+        }
         return false;
     }
 
