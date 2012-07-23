@@ -93,7 +93,7 @@ class RoaringPrimadoxEffect extends OneShotEffect<RoaringPrimadoxEffect> {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
-            if (player.choose(this.outcome, target, source.getId(), game)) {
+            if (player.choose(this.outcome, target, source.getSourceId(), game)) {
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
                     return permanent.moveToZone(Zone.HAND, source.getId(), game, false);

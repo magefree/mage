@@ -242,7 +242,7 @@ class ChandraAblazeEffect5 extends OneShotEffect<ChandraAblazeEffect5> {
             TargetCardInGraveyard target = new TargetCardInGraveyard(filter);
             while (!cards.isEmpty() && player.chooseUse(outcome, message, game)) {
                 target.clearChosen();
-                if (player.choose(outcome, target, source.getId(), game)) {
+                if (player.choose(outcome, target, source.getSourceId(), game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
                         player.cast(card.getSpellAbility(), game, true);

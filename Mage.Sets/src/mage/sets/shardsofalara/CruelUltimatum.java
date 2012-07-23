@@ -99,7 +99,7 @@ class CruelUltimatumEffect extends OneShotEffect<CruelUltimatumEffect> {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard"));
-        if (player != null && player.choose(Outcome.ReturnToHand, target, source.getId(), game)) {
+        if (player != null && player.choose(Outcome.ReturnToHand, target, source.getSourceId(), game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 return card.moveToZone(Zone.HAND, source.getId(), game, true);
