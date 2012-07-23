@@ -28,8 +28,8 @@
 package mage.sets.magic2013;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -57,9 +57,7 @@ public class Spelltwine extends CardImpl<Spelltwine> {
         filter.add(Predicates.or(
                 new CardTypePredicate(CardType.INSTANT),
                 new CardTypePredicate(CardType.SORCERY)));
-    }
 
-    static {
         filter2.add(Predicates.or(
                 new CardTypePredicate(CardType.INSTANT),
                 new CardTypePredicate(CardType.SORCERY)));
@@ -92,8 +90,8 @@ public class Spelltwine extends CardImpl<Spelltwine> {
 class SpelltwineEffect extends OneShotEffect<SpelltwineEffect> {
 
     public SpelltwineEffect() {
-        super(Constants.Outcome.PlayForFree);
-        staticText = "Exile target instant or sorcery card from your graveyard and target instant or sorcery card from an opponent's graveyard. Copy those cards. Cast the copies if able without paying their mana costs. Exile {this}";
+        super(Outcome.PlayForFree);
+        staticText = "Exile target instant or sorcery card from your graveyard and target instant or sorcery card from an opponent's graveyard. Copy those cards. Cast the copies if able without paying their mana costs";
     }
 
     public SpelltwineEffect(final SpelltwineEffect effect) {
@@ -107,27 +105,25 @@ class SpelltwineEffect extends OneShotEffect<SpelltwineEffect> {
         Card cardTwo = game.getCard(source.getTargets().get(1).getFirstTarget());
         if (you != null) {
             if (cardOne != null) {
-                if (you.chooseUse(Constants.Outcome.PlayForFree, "Cast the copy of " + cardOne.getName() + " first?", game)) {
-                    cardOne.moveToExile(null, null, source.getId(), game);
-                    Card copyOne = game.copyCard(cardOne, source, you.getId());
-                    you.cast(copyOne.getSpellAbility(), game, true);
-                    if (cardTwo != null) {
-                        cardTwo.moveToExile(null, null, source.getId(), game);
-                        Card copyTwo = game.copyCard(cardTwo, source, you.getId());
-                        you.cast(copyTwo.getSpellAbility(), game, true);
-                    }
-                } else {
-                    if (cardTwo != null) {
-                        cardTwo.moveToExile(null, null, source.getId(), game);
-                        Card copyTwo = game.copyCard(cardTwo, source, you.getId());
-                        you.cast(copyTwo.getSpellAbility(), game, true);
-                    }
-                    if (cardOne != null) {
-                        cardOne.moveToExile(null, null, source.getId(), game);
-                        Card copyOne = game.copyCard(cardOne, source, you.getId());
-                        you.cast(copyOne.getSpellAbility(), game, true);
-                    }
-                } 
+                cardOne.moveToExile(null, null, source.getId(), game);
+            }
+            if (cardTwo != null) {
+                cardTwo.moveToExile(null, null, source.getId(), game);
+            }
+
+            boolean castCardOne = true;
+            if (cardOne != null && you.chooseUse(Outcome.Neutral, "Cast the copy of " + cardOne.getName() + " first?", game)) {
+                Card copyOne = game.copyCard(cardOne, source, you.getId());
+                you.cast(copyOne.getSpellAbility(), game, true);
+                castCardOne = false;
+            }
+            if (cardTwo != null) {
+                Card copyTwo = game.copyCard(cardTwo, source, you.getId());
+                you.cast(copyTwo.getSpellAbility(), game, true);
+            }
+            if (cardOne != null && castCardOne) {
+                Card copyOne = game.copyCard(cardOne, source, you.getId());
+                you.cast(copyOne.getSpellAbility(), game, true);
             }
             return true;
         }
