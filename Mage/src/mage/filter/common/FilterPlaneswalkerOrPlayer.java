@@ -64,7 +64,7 @@ public class FilterPlaneswalkerOrPlayer extends FilterImpl<Object> {
             playerPredicates.add(new PlayerIdPredicate(defenderId));
         }
         playerFilter = new FilterPlayer();
-        planeswalkerFilter.add(Predicates.or(playerPredicates));
+        playerFilter.add(Predicates.or(playerPredicates));
     }
 
     public FilterPlaneswalkerOrPlayer(final FilterPlaneswalkerOrPlayer filter) {
