@@ -27,11 +27,11 @@
  */
 package mage.sets.magic2013;
 
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.Constants.TargetController;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.common.AddContinuousEffectToGame;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
@@ -51,10 +51,10 @@ import java.util.UUID;
  */
 public class PredatoryRampage extends CardImpl<PredatoryRampage> {
 
-    private static FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.add(new ControllerPredicate(Constants.TargetController.OPPONENT));
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
     public PredatoryRampage(UUID ownerId) {
@@ -63,10 +63,11 @@ public class PredatoryRampage extends CardImpl<PredatoryRampage> {
 
         this.color.setGreen(true);
 
-        // Creatures you control get +3/+3 until end of turn. Each creature your opponents control blocks this turn if able.
-        this.getSpellAbility().addEffect(new BoostControlledEffect(3, 3, Constants.Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainAbilityAllEffect(BlocksThisTurnMarkerAbility.getInstance(), Constants.Duration.EndOfTurn, filter));
-        this.getSpellAbility().addEffect(new AddContinuousEffectToGame(new PredatoryRampageEffect(Constants.Duration.EndOfTurn)));
+        // Creatures you control get +3/+3 until end of turn.
+        this.getSpellAbility().addEffect(new BoostControlledEffect(3, 3, Duration.EndOfTurn));
+        // Each creature your opponents control blocks this turn if able.
+        this.getSpellAbility().addEffect(new AddContinuousEffectToGame(new PredatoryRampageEffect(Duration.EndOfTurn)));
+        this.getSpellAbility().addEffect(new GainAbilityAllEffect(BlocksThisTurnMarkerAbility.getInstance(), Duration.EndOfTurn, filter, ""));
     }
 
     public PredatoryRampage(final PredatoryRampage card) {
@@ -81,8 +82,9 @@ public class PredatoryRampage extends CardImpl<PredatoryRampage> {
 
 class PredatoryRampageEffect extends RequirementEffect<PredatoryRampageEffect> {
 
-    public PredatoryRampageEffect(Constants.Duration duration) {
+    public PredatoryRampageEffect(Duration duration) {
         super(duration);
+        this.staticText = "Each creature your opponents control blocks this turn if able";
     }
 
     public PredatoryRampageEffect(final PredatoryRampageEffect effect) {
@@ -117,10 +119,4 @@ class PredatoryRampageEffect extends RequirementEffect<PredatoryRampageEffect> {
     public boolean mustBlockAny(Game game) {
         return true;
     }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Each creature your opponents control blocks this turn if able.";
-    }
-
 }

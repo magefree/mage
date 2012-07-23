@@ -53,15 +53,15 @@ public class BoostControlledEffect extends ContinuousEffectImpl<BoostControlledE
     protected boolean lockedIn = false;
 
     public BoostControlledEffect(int power, int toughness, Duration duration) {
-        this(power, toughness, duration, new FilterCreaturePermanent(), false);
+        this(power, toughness, duration, new FilterCreaturePermanent("Creatures"), false);
     }
 
     public BoostControlledEffect(DynamicValue power, DynamicValue toughness, Duration duration) {
-        this(power, toughness, duration, new FilterCreaturePermanent(), false);
+        this(power, toughness, duration, new FilterCreaturePermanent("Creatures"), false);
     }
 
     public BoostControlledEffect(int power, int toughness, Duration duration, boolean excludeSource) {
-        this(power, toughness, duration, new FilterCreaturePermanent(), excludeSource);
+        this(power, toughness, duration, new FilterCreaturePermanent("creatures"), excludeSource);
     }
 
     public BoostControlledEffect(int power, int toughness, Duration duration, FilterCreaturePermanent filter) {
@@ -134,8 +134,9 @@ public class BoostControlledEffect extends ContinuousEffectImpl<BoostControlledE
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        if (excludeSource)
+        if (excludeSource) {
             sb.append("Other ");
+        }
         sb.append(filter.getMessage());
         sb.append(" you control get ");
 

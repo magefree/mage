@@ -44,6 +44,7 @@ public class AddContinuousEffectToGame extends OneShotEffect<AddContinuousEffect
     public AddContinuousEffectToGame(ContinuousEffect effect) {
         super(Outcome.Benefit);
         this.effect = effect;
+        this.staticText = effect.getText(null);
     }
 
     public AddContinuousEffectToGame(final AddContinuousEffectToGame effect) {
