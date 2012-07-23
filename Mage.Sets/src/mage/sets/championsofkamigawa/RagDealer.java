@@ -36,7 +36,6 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -45,36 +44,28 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
 import mage.game.Game;
-import mage.players.Player;
-import mage.target.Target;
 import mage.target.TargetCard;
-import mage.target.TargetPlayer;
-import mage.target.common.TargetCardInGraveyard;
 
 /**
  *
- * @author LevelX
+ * @author LevelX, North
  */
 public class RagDealer extends CardImpl<RagDealer> {
-
-    protected static final FilterCard filter = new FilterCard("up to three target cards from a single graveyard");
 
     public RagDealer (UUID ownerId) {
         super(ownerId, 138, "Rag Dealer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Human");
         this.subtype.add("Rogue");
-    this.color.setBlack(true);
+        this.color.setBlack(true);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
+
         // {2}{B}, {T}: Exile up to three target cards from a single graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RagDealerExileEffect(), new ManaCostsImpl("{2}{B}"));
         ability.addCost(new TapSourceCost());
-        TargetPlayer target = new TargetPlayer();
-        target.setTargetName("player from which graveyard you want to exile the cards");
-        ability.addTarget(target);
-        ability.addTarget(new TargetCardInGraveyard(0,3,filter));
+        ability.addTarget(new RagDealerTargetCardsInGraveyard(0, 3, new FilterCard()));
         this.addAbility(ability);
     }
 
@@ -102,13 +93,16 @@ class RagDealerTargetCardsInGraveyard extends TargetCard<RagDealerTargetCardsInG
 
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
-        Player player = game.getPlayer(source.getTargets().getFirstTarget());
-        if (player != null) {
-            filter.getOwnerId().clear();
-            filter.getOwnerId().add(player.getId());
-            return super.canTarget(id, source, game);
+        UUID firstTarget = this.getFirstTarget();
+        if (firstTarget != null) {
+            Card card = game.getCard(firstTarget);
+            Card targetCard = game.getCard(id);
+            if (card == null || targetCard == null
+                    || !card.getOwnerId().equals(targetCard.getOwnerId())) {
+                return false;
+            }
         }
-        return false;
+        return super.canTarget(id, source, game);
     }
 
 
@@ -122,6 +116,7 @@ class RagDealerExileEffect extends OneShotEffect<RagDealerExileEffect> {
 
     public RagDealerExileEffect() {
             super(Outcome.Exile);
+            this.staticText = "Exile up to three target cards from a single graveyard";
     }
 
     public RagDealerExileEffect(final RagDealerExileEffect effect) {
@@ -135,21 +130,12 @@ class RagDealerExileEffect extends OneShotEffect<RagDealerExileEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Target targetCards = source.getTargets().get(1);
-        if (targetCards != null) {
-            for (UUID targetID : targetCards.getTargets()) {
-                Card card = game.getCard(targetID);
-                if (card  != null) {
-                       card.moveToExile(null, "", source.getId(), game);
-                }
+        for (UUID targetID : source.getTargets().get(0).getTargets()) {
+            Card card = game.getCard(targetID);
+            if (card != null) {
+                card.moveToExile(null, "", source.getId(), game);
             }
-            return true;
         }
-        return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Exile " + mode.getTargets().get(1).getTargetName();
+        return true;
     }
 }
