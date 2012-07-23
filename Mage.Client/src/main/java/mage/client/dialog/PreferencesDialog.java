@@ -69,6 +69,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_CARD_IMAGES_USE_DEFAULT = "cardImagesUseDefault";
     public static final String KEY_CARD_IMAGES_PATH = "cardImagesPath";
     public static final String KEY_CARD_IMAGES_CHECK = "cardImagesCheck";
+    public static final String KEY_BIG_CARD_TOGGLED = "bigCardToggled";
 
     public static final String KEY_PROXY_ADDRESS = "proxyAddress";
     public static final String KEY_PROXY_PORT = "proxyPort";
@@ -967,7 +968,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             prefs.flush();
         } catch (BackingStoreException ex) {
             ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error: couldn't save phase stops. Please try again.");
+            JOptionPane.showMessageDialog(null, "Error: couldn't save preferences. Please try once again.");
         }
 
         dialog.setVisible(false);
@@ -1244,6 +1245,18 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     private static void updateCache(String key, String value) {
         cache.put(key, value);
+    }
+
+    public static void saveValue(String key, String value) {
+        Preferences prefs = MageFrame.getPreferences();
+        prefs.put(key, value);
+        try {
+            prefs.flush();
+        } catch (BackingStoreException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error: couldn't save preferences. Please try once again.");
+        }
+        updateCache(key, value);
     }
 
     private void addAvatars() {

@@ -57,6 +57,8 @@ import org.apache.log4j.Logger;
 import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.LineBorder;
+import javax.swing.plaf.basic.BasicSplitPaneDivider;
+import javax.swing.plaf.basic.BasicSplitPaneUI;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.Serializable;
@@ -87,6 +89,7 @@ public class GamePanel extends javax.swing.JPanel {
     private JLayeredPane jLayeredPane;
     private String chosenHandKey = "You";
     private boolean smallMode = false;
+    private boolean initialized = false;
 
     private HelperPanel helper;
 
@@ -123,6 +126,17 @@ public class GamePanel extends javax.swing.JPanel {
                     j.setSize(width, height);
                     jSplitPane0.setSize(width, height);
                     sizeToScreen();
+
+                    if (!initialized) {
+                        String state = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_BIG_CARD_TOGGLED, null);
+                        if (state != null) {
+                            if (state.equals("down")) {
+                                jSplitPane0.setDividerLocation(1.0);
+                            }
+                        }
+                    }
+
+                    initialized = true;
                 }
             });
 
@@ -788,6 +802,24 @@ public class GamePanel extends javax.swing.JPanel {
                 } else {
                     jSplitPane0.setDividerLocation(1.0);
                 }
+            }
+        });
+
+        final BasicSplitPaneUI ui = (BasicSplitPaneUI) jSplitPane0.getUI();
+        final BasicSplitPaneDivider divider = ui.getDivider();
+        final JButton upArrowButton = (JButton) divider.getComponent(0);
+        upArrowButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                PreferencesDialog.saveValue(PreferencesDialog.KEY_BIG_CARD_TOGGLED, "up");
+            }
+        });
+
+        final JButton downArrowButton = (JButton) divider.getComponent(1);
+        downArrowButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                PreferencesDialog.saveValue(PreferencesDialog.KEY_BIG_CARD_TOGGLED, "down");
             }
         });
 
