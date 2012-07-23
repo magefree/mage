@@ -29,7 +29,7 @@ public class UntapLandsEffect extends OneShotEffect<UntapLandsEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        TargetLandPermanent target = new TargetLandPermanent(1, amount, new FilterLandPermanent(), true);
+        TargetLandPermanent target = new TargetLandPermanent(0, amount, new FilterLandPermanent(), true);
         if (target.canChoose(source.getControllerId(), game)) {
             if (target.choose(Constants.Outcome.Untap, source.getControllerId(), source.getSourceId(), game)) {
                 for (Object targetId : target.getTargets()) {
