@@ -71,7 +71,7 @@ public class TargetCardInExile extends TargetCard<TargetCardInExile> {
                 exile = game.getExile().getPermanentExile();
             }
             if (exile != null && exile.contains(id)) {
-                return filter.match(card, game);
+                return filter.match(card, source.getControllerId(), game);
             }
         }
         return false;

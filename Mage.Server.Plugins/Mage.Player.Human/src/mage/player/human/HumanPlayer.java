@@ -217,10 +217,22 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
                             return true;
                         }
                     }
-                } else if (target.canTarget(response.getUUID(), game)) {
-                    target.add(response.getUUID(), game);
-                    if(target.doneChosing()){
-                        return true;
+                } else {
+                    MageObject object = game.getObject(sourceId);
+                    if (object instanceof Ability) {
+                        if (target.canTarget(response.getUUID(), (Ability) object, game)) {
+                            target.add(response.getUUID(), game);
+                            if (target.doneChosing()) {
+                                return true;
+                            }
+                        }
+                    } else {
+                        if (target.canTarget(response.getUUID(), game)) {
+                            target.add(response.getUUID(), game);
+                            if (target.doneChosing()) {
+                                return true;
+                            }
+                        }
                     }
                 }
             } else {
