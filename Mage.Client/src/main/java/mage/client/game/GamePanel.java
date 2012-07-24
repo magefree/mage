@@ -77,7 +77,8 @@ import java.util.concurrent.ExecutionException;
 public class GamePanel extends javax.swing.JPanel {
 
     private final static Logger logger = Logger.getLogger(GamePanel.class);
-    static final String YOUR_HAND = "Your hand";
+    private static final String YOUR_HAND = "Your hand";
+    private static final int X_PHASE_WIDTH = 55;
 
     private Map<UUID, PlayAreaPanel> players = new HashMap<UUID, PlayAreaPanel>();
     private Map<UUID, ExileZoneDialog> exiles = new HashMap<UUID, ExileZoneDialog>();
@@ -223,7 +224,7 @@ public class GamePanel extends javax.swing.JPanel {
         }
 
         int height = pnlBattlefield.getHeight();
-        phasesContainer.setPreferredSize(new Dimension(75, height));
+        phasesContainer.setPreferredSize(new Dimension(X_PHASE_WIDTH, height));
 
         DialogManager.getManager().setScreenWidth(rect.width);
         DialogManager.getManager().setScreenHeight(rect.height);
@@ -490,9 +491,8 @@ public class GamePanel extends javax.swing.JPanel {
             logger.warn("step is null");
             return;
         }
-        if (prevStep != null && prevBGColor != null) {
-            prevStep.setBackground(prevBGColor);
-            prevStep.setForeground(DEFAULT_FOREGROUND_COLOR);
+        if (currentStep != null) {
+            currentStep.setLocation(prevPoint);
         }
         switch (step) {
             case UNTAP: updateButton("Untap"); break;
@@ -509,23 +509,12 @@ public class GamePanel extends javax.swing.JPanel {
         }
     }
 
-    private void updateButton(JButton button) {
-        /*if (prevBGColor == null) prevBGColor = button.getBackground();
-        button.setBackground(new Color(0,0,0,100));
-        button.setForeground(Color.white);
-        prevStep = button;
-        */
-    }
-
     private void updateButton(String name) {
         if (hoverButtons.containsKey(name)) {
-            hoverButtons.get(name).setAlignmentX(0.0f);
+            currentStep = hoverButtons.get(name);
+            prevPoint = currentStep.getLocation();
+            currentStep.setLocation(prevPoint.x - 15, prevPoint.y);
         }
-        /*if (prevBGColor == null) prevBGColor = button.getBackground();
-        button.setBackground(new Color(0,0,0,100));
-        button.setForeground(Color.white);
-        */
-        //prevStep = button;
     }
 
     private void showRevealed(GameView game) {
@@ -969,10 +958,9 @@ public class GamePanel extends javax.swing.JPanel {
         pnlBattlefield.setLayout(new java.awt.GridBagLayout());
 
         jPhases = new JPanel();
-        jPhases.setBackground(new Color(0, 0, 0, 100));
-        //jPhases.setLayout(new GridLayout(0, 1));
-        jPhases.setLayout(new BoxLayout(jPhases, BoxLayout.PAGE_AXIS));
-        jPanel3.setPreferredSize(new Dimension(75, 100));
+        jPhases.setBackground(new Color(0, 0, 0, 0));
+        jPhases.setLayout(null);
+        jPhases.setPreferredSize(new Dimension(X_PHASE_WIDTH, 450));
 
         String[] phases = {"Untap", "Upkeep", "Draw", "Main1",
                 "Combat_Start", "Combat_Attack", "Combat_Block", "Combat_Damage", "Combat_End",
@@ -981,69 +969,14 @@ public class GamePanel extends javax.swing.JPanel {
             createPhaseButton(name);
         }
 
-        for (HoverButton hoverButton : hoverButtons.values()) {
-            //hoverButton.setAlignmentX(RIGHT_ALIGNMENT);
+        int i = 0;
+        for (String name : hoverButtons.keySet()) {
+            HoverButton hoverButton = hoverButtons.get(name);
+            hoverButton.setAlignmentX(LEFT_ALIGNMENT);
+            hoverButton.setBounds(X_PHASE_WIDTH - 36, i*36, 36, 36);
             jPhases.add(hoverButton);
+            i++;
         }
-
-        /*upkeep = new JButton("Up");
-        upkeep.setToolTipText("Upkeep");
-        upkeep.setAlignmentX(RIGHT_ALIGNMENT);
-        draw = new JButton("D");
-        draw.setToolTipText("Draw");
-        draw.setAlignmentX(RIGHT_ALIGNMENT);
-        main1 = new JButton("M1");
-        main1.setToolTipText("Main#1");
-        main1.setAlignmentX(RIGHT_ALIGNMENT);
-        attack = new JButton("A");
-        attack.setToolTipText("Attack");
-        attack.setAlignmentX(RIGHT_ALIGNMENT);
-        block = new JButton("B");
-        block.setToolTipText("Block");
-        block.setAlignmentX(RIGHT_ALIGNMENT);
-        combatButton = new JButton("C");
-        combatButton.setToolTipText("Combat damage");
-        combatButton.setAlignmentX(RIGHT_ALIGNMENT);
-        main2 = new JButton("M2");
-        main2.setToolTipText("Main#2");
-        main2.setAlignmentX(RIGHT_ALIGNMENT);
-        endOfTurn = new JButton("End");
-        endOfTurn.setToolTipText("End The Turn");
-        endOfTurn.setAlignmentX(RIGHT_ALIGNMENT);
-        endOfTurn.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                if (feedbackPanel != null && FeedbackMode.SELECT.equals(feedbackPanel.getMode())) {
-                    logger.info("user pressed End Of Turn");
-                    endButtonTip.setVisible(false);
-                    session.sendPlayerInteger(gameId, 0);
-                }
-            }
-        });*/
-
-        //endButtonTip = new JLabel("<-- Press this button to end the turn");
-        //endButtonTip.setForeground(Color.white);
-
-        /*jPhases.add(untap);
-        untap.setAlignmentX(.0f);
-        jPhases.add(upkeep);
-        upkeep.setAlignmentX(.0f);
-        jPhases.add(draw);
-        draw.setAlignmentX(.0f);
-        jPhases.add(main1);
-        main1.setAlignmentX(0.3f);
-        jPhases.add(attack);
-        attack.setAlignmentX(.0f);
-        jPhases.add(block);
-        block.setAlignmentX(.0f);
-        jPhases.add(combatButton);
-        combatButton.setAlignmentX(.0f);
-        jPhases.add(main2);
-        main2.setAlignmentX(0.5f);
-        jPhases.add(endOfTurn);
-        endOfTurn.setAlignmentX(.0f);
-        //jPhases.add(endButtonTip);
-        */
 
         pnlReplay.setOpaque(false);
         helper = new HelperPanel();
@@ -1260,22 +1193,12 @@ public class GamePanel extends javax.swing.JPanel {
     private HandPanel handContainer;
 
     private javax.swing.JSplitPane jSplitPane2;
-    private Color prevBGColor;
-    private final static Color DEFAULT_FOREGROUND_COLOR = Color.BLACK;
     private JPanel jPhases;
     private JPanel phasesContainer;
 
-    private JButton untap;
-    private JButton upkeep;
-    private JButton draw;
-    private JButton main1;
-    private JButton attack;
-    private JButton block;
-    private JButton combatButton;
-    private JButton main2;
-    private JButton endOfTurn;
-    private JButton prevStep;
-    private JLabel endButtonTip;
+
+    private HoverButton currentStep;
+    private Point prevPoint;
 
     private boolean imagePanelState;
 
