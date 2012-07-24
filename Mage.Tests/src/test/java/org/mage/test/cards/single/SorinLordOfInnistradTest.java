@@ -35,8 +35,8 @@ public class SorinLordOfInnistradTest extends CardTestPlayerBase {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Sejiri Merfolk");
 
         addCounters(1, Constants.PhaseStep.UPKEEP, playerA, "Sorin, Lord of Innistrad", CounterType.LOYALTY, 1);
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "-2: You get an emblem with \"[creature you control get +1/+0. ]\". ");
-        activateAbility(3, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "-2: You get an emblem with \"[creature you control get +1/+0. ]\". ");
+        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "-2: You get an emblem with ");
+        activateAbility(3, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "-2: You get an emblem with ");
         setStopAt(3, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
 
