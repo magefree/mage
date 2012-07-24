@@ -28,8 +28,6 @@
 
 package mage.sets.mirrodinbesieged;
 
-import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -45,6 +43,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -82,7 +82,7 @@ public class Cryptoplasm extends CardImpl<Cryptoplasm> {
 class CryptoplasmTransformEffect extends ContinuousEffectImpl<CryptoplasmTransformEffect> {
 
     CryptoplasmTransformEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Layer.CopyEffects_1, Constants.SubLayer.NA, Constants.Outcome.BecomeCreature);
+        super(Constants.Duration.WhileOnBattlefield, Constants.Layer.CopyEffects_1, Constants.SubLayer.NA, Constants.Outcome.Copy);
         staticText = "you may have {this} become a copy of another target creature. If you do, {this} gains this ability";
     }
 

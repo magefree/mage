@@ -27,13 +27,7 @@
  */
 package mage.sets.innistrad;
 
-import java.util.UUID;
-
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.Constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -47,6 +41,8 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.watchers.common.DamagedByWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -84,7 +80,7 @@ public class AbattoirGhoul extends CardImpl<AbattoirGhoul> {
 class AbattoirGhoulEffect extends ReplacementEffectImpl<AbattoirGhoulEffect> {
 
     public AbattoirGhoulEffect() {
-        super(Duration.EndOfTurn, Outcome.GainLife);
+        super(Duration.WhileOnBattlefield, Outcome.GainLife);
         staticText = "Whenever a creature dealt damage by Abattoir Ghoul this turn dies, you gain life equal to that creature's toughness";
     }
 

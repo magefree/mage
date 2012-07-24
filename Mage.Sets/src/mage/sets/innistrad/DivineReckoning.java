@@ -101,6 +101,7 @@ class DivineReckoningEffect extends OneShotEffect<DivineReckoningEffect> {
             Player player = game.getPlayer(playerId);
 
             Target target = new TargetControlledPermanent(1, 1, filter, false);
+            target.setRequired(true);
             if (target.canChoose(player.getId(), game)) {
                 while (!target.isChosen() && target.canChoose(player.getId(), game)) {
                     player.choose(Constants.Outcome.Benefit, target, source.getSourceId(), game);
