@@ -33,7 +33,7 @@ public class ThemePluginImpl implements ThemePlugin {
     }
 
     public String toString() {
-        return "[Theme plugin, version 0.4]";
+        return "[Theme plugin, version 0.5]";
     }
 
     public void applyInGame(Map<String, JComponent> ui) {
