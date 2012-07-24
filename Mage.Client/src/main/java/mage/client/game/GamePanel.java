@@ -35,14 +35,15 @@
 package mage.client.game;
 
 import mage.Constants;
-import mage.client.components.layout.RelativeLayout;
 import mage.cards.action.ActionCallback;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.chat.ChatPanel;
 import mage.client.combat.CombatManager;
+import mage.client.components.HoverButton;
 import mage.client.components.MageComponents;
 import mage.client.components.ext.dlg.DialogManager;
+import mage.client.components.layout.RelativeLayout;
 import mage.client.dialog.*;
 import mage.client.game.FeedbackPanel.FeedbackMode;
 import mage.client.plugins.adapters.MageActionCallback;
@@ -54,6 +55,7 @@ import mage.client.util.PhaseManager;
 import mage.remote.Session;
 import mage.view.*;
 import org.apache.log4j.Logger;
+import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
 import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
@@ -93,6 +95,8 @@ public class GamePanel extends javax.swing.JPanel {
     private boolean initialized = false;
 
     private HelperPanel helper;
+    
+    private Map<String, HoverButton> hoverButtons;
 
     /** Creates new form GamePanel */
     public GamePanel() {
@@ -219,7 +223,7 @@ public class GamePanel extends javax.swing.JPanel {
         }
 
         int height = pnlBattlefield.getHeight();
-        phasesContainer.setPreferredSize(new Dimension(45, height));
+        phasesContainer.setPreferredSize(new Dimension(75, height));
 
         DialogManager.getManager().setScreenWidth(rect.width);
         DialogManager.getManager().setScreenHeight(rect.height);
@@ -491,25 +495,37 @@ public class GamePanel extends javax.swing.JPanel {
             prevStep.setForeground(DEFAULT_FOREGROUND_COLOR);
         }
         switch (step) {
-            case UNTAP: updateButton(untap); break;
-            case UPKEEP: updateButton(upkeep); break;
-            case DRAW: updateButton(draw); break;
-            case PRECOMBAT_MAIN: updateButton(main1); break;
-            case BEGIN_COMBAT:
-            case DECLARE_ATTACKERS: updateButton(attack); break;
-            case DECLARE_BLOCKERS: updateButton(block); break;
+            case UNTAP: updateButton("Untap"); break;
+            case UPKEEP: updateButton("Upkeep"); break;
+            case DRAW: updateButton("Draw"); break;
+            case PRECOMBAT_MAIN: updateButton("Main1"); break;
+            case BEGIN_COMBAT: updateButton("Combat_Start"); break;
+            case DECLARE_ATTACKERS: updateButton("Combat_Attack"); break;
+            case DECLARE_BLOCKERS: updateButton("Combat_Block"); break;
             case FIRST_COMBAT_DAMAGE:
-            case COMBAT_DAMAGE: updateButton(combatButton); break;
-            case POSTCOMBAT_MAIN: updateButton(main2); break;
-            case END_TURN: updateButton(endOfTurn); break;
+            case COMBAT_DAMAGE: updateButton("Combat_Damage"); break;
+            case POSTCOMBAT_MAIN: updateButton("Main2"); break;
+            case END_TURN: updateButton("Cleanup"); break;
         }
     }
 
     private void updateButton(JButton button) {
-        if (prevBGColor == null) prevBGColor = button.getBackground();
+        /*if (prevBGColor == null) prevBGColor = button.getBackground();
         button.setBackground(new Color(0,0,0,100));
         button.setForeground(Color.white);
         prevStep = button;
+        */
+    }
+
+    private void updateButton(String name) {
+        if (hoverButtons.containsKey(name)) {
+            hoverButtons.get(name).setAlignmentX(0.0f);
+        }
+        /*if (prevBGColor == null) prevBGColor = button.getBackground();
+        button.setBackground(new Color(0,0,0,100));
+        button.setForeground(Color.white);
+        */
+        //prevStep = button;
     }
 
     private void showRevealed(GameView game) {
@@ -956,12 +972,21 @@ public class GamePanel extends javax.swing.JPanel {
         jPhases.setBackground(new Color(0, 0, 0, 100));
         //jPhases.setLayout(new GridLayout(0, 1));
         jPhases.setLayout(new BoxLayout(jPhases, BoxLayout.PAGE_AXIS));
-        jPanel3.setPreferredSize(new Dimension(45, 100));
+        jPanel3.setPreferredSize(new Dimension(75, 100));
 
-        untap = new JButton("Un");
-        untap.setToolTipText("Untap");
-        untap.setAlignmentX(RIGHT_ALIGNMENT);
-        upkeep = new JButton("Up");
+        String[] phases = {"Untap", "Upkeep", "Draw", "Main1",
+                "Combat_Start", "Combat_Attack", "Combat_Block", "Combat_Damage", "Combat_End",
+                "Main2", "Cleanup", "Next_Turn"};
+        for (String name : phases) {
+            createPhaseButton(name);
+        }
+
+        for (HoverButton hoverButton : hoverButtons.values()) {
+            //hoverButton.setAlignmentX(RIGHT_ALIGNMENT);
+            jPhases.add(hoverButton);
+        }
+
+        /*upkeep = new JButton("Up");
         upkeep.setToolTipText("Upkeep");
         upkeep.setAlignmentX(RIGHT_ALIGNMENT);
         draw = new JButton("D");
@@ -994,21 +1019,31 @@ public class GamePanel extends javax.swing.JPanel {
                     session.sendPlayerInteger(gameId, 0);
                 }
             }
-        });
+        });*/
 
         //endButtonTip = new JLabel("<-- Press this button to end the turn");
         //endButtonTip.setForeground(Color.white);
 
-        jPhases.add(untap);
+        /*jPhases.add(untap);
+        untap.setAlignmentX(.0f);
         jPhases.add(upkeep);
+        upkeep.setAlignmentX(.0f);
         jPhases.add(draw);
+        draw.setAlignmentX(.0f);
         jPhases.add(main1);
+        main1.setAlignmentX(0.3f);
         jPhases.add(attack);
+        attack.setAlignmentX(.0f);
         jPhases.add(block);
+        block.setAlignmentX(.0f);
         jPhases.add(combatButton);
+        combatButton.setAlignmentX(.0f);
         jPhases.add(main2);
+        main2.setAlignmentX(0.5f);
         jPhases.add(endOfTurn);
+        endOfTurn.setAlignmentX(.0f);
         //jPhases.add(endButtonTip);
+        */
 
         pnlReplay.setOpaque(false);
         helper = new HelperPanel();
@@ -1177,6 +1212,17 @@ public class GamePanel extends javax.swing.JPanel {
         abilityPicker.setVisible(false);
     }
 
+    private void createPhaseButton(String name) {
+        if (hoverButtons == null) {
+            hoverButtons = new LinkedHashMap<String, HoverButton>();
+        }
+        Rectangle rect = new Rectangle(36, 36);
+        HoverButton button = new HoverButton("", ImageManagerImpl.getInstance().getPhaseImage(name), rect);
+        button.setToolTipText(name.replaceAll("_", " "));
+        button.setPreferredSize(new Dimension(36, 36));
+        hoverButtons.put(name, button);
+    }
+
     private mage.client.components.ability.AbilityPicker abilityPicker;
     private mage.client.cards.BigCard bigCard;
     private javax.swing.JButton btnConcede;
@@ -1266,5 +1312,4 @@ class ReplayTask extends SwingWorker<Void, Collection<MatchView>> {
             logger.fatal("Update Matches Task error", ex);
         } catch (CancellationException ex) {}
     }
-
 }

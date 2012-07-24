@@ -10,6 +10,8 @@ import java.awt.image.BufferedImage;
 import java.awt.image.CropImageFilter;
 import java.awt.image.FilteredImageSource;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ImageManagerImpl implements ImageManager {
 
@@ -17,6 +19,26 @@ public class ImageManagerImpl implements ImageManager {
 
     public static ImageManagerImpl getInstance() {
         return fInstance;
+    }
+    
+    public ImageManagerImpl() {
+        init();
+    }
+
+    public void init() {
+        String[] phases = {"Untap", "Upkeep", "Draw", "Main1",
+                "Combat_Start", "Combat_Attack", "Combat_Block", "Combat_Damage", "Combat_End",
+                "Main2", "Cleanup", "Next_Turn"};
+        phasesImages = new HashMap<String, Image>();
+        for (String name : phases) {
+            Image image = getImageFromResource("/phases/phase_" + name.toLowerCase() + ".png", new Rectangle(36, 36));
+            phasesImages.put(name, image);
+        }
+    }
+
+    @Override
+    public Image getPhaseImage(String phase) {
+        return phasesImages.get(phase);
     }
 
     @Override
@@ -158,6 +180,21 @@ public class ImageManagerImpl implements ImageManager {
         return resized;
     }
 
+    protected static Image getImageFromResource(String path, Rectangle rec) {
+        Image resized = null;
+
+        URL imageURL = ImageManager.class.getResource(path);
+
+        try {
+            BufferedImage image = ImageIO.read(imageURL);
+            resized = image.getScaledInstance(rec.width, rec.height, java.awt.Image.SCALE_SMOOTH);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return resized;
+    }
+
     protected static BufferedImage getBufferedImageFromResource(String path) {
         URL imageURL = ImageManager.class.getResource(path);
         BufferedImage image = null;
@@ -187,4 +224,6 @@ public class ImageManagerImpl implements ImageManager {
     private static BufferedImage imageDlgActivePrevButton;
     private static BufferedImage imageDlgNextButton;
     private static BufferedImage imageDlgActiveNextButton;
+
+    private static Map<String, Image> phasesImages;
 }

@@ -42,6 +42,12 @@ public class HoverButton extends JPanel implements MouseListener {
     final static Font textSetFontBold = new Font("Arial", Font.BOLD, 14);
     private boolean useMiniFont = false;
 
+    public HoverButton(String text, Image image, Rectangle size) {
+        this(text, image, image, null, image, size);
+        if (image == null)
+            throw new IllegalArgumentException("Image can't be null");
+    }
+
     public HoverButton(String text, Image image, Image hover, Image disabled, Rectangle size) {
         this(text, image, hover, null, disabled, size);
     }

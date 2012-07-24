@@ -19,4 +19,6 @@ public interface ImageManager {
     public Image getDlgActivePrevButtonImage();
     public Image getDlgNextButtonImage();
     public Image getDlgActiveNextButtonImage();
+
+    public Image getPhaseImage(String phase);
 }
