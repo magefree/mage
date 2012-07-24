@@ -35,6 +35,7 @@
 package mage.client.game;
 
 import mage.Constants;
+import mage.client.components.layout.RelativeLayout;
 import mage.cards.action.ActionCallback;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
@@ -217,12 +218,12 @@ public class GamePanel extends javax.swing.JPanel {
             }
         }
 
+        int height = pnlBattlefield.getHeight();
+        phasesContainer.setPreferredSize(new Dimension(45, height));
+
         DialogManager.getManager().setScreenWidth(rect.width);
         DialogManager.getManager().setScreenHeight(rect.height);
         DialogManager.getManager().setBounds(0, 0, rect.width, rect.height);
-
-        //helper.setPreferredSize(new Dimension(rect.width, 90));
-        //helper.setMaximumSize(new Dimension(rect.width, 90));
     }
 
     public synchronized void showGame(UUID gameId, UUID playerId) {
@@ -952,27 +953,38 @@ public class GamePanel extends javax.swing.JPanel {
         pnlBattlefield.setLayout(new java.awt.GridBagLayout());
 
         jPhases = new JPanel();
-        jPhases.setBackground(new Color(0,0,0,100));
-        jPhases.setLayout(new GridBagLayout());
+        jPhases.setBackground(new Color(0, 0, 0, 100));
+        //jPhases.setLayout(new GridLayout(0, 1));
+        jPhases.setLayout(new BoxLayout(jPhases, BoxLayout.PAGE_AXIS));
+        jPanel3.setPreferredSize(new Dimension(45, 100));
 
         untap = new JButton("Un");
         untap.setToolTipText("Untap");
+        untap.setAlignmentX(RIGHT_ALIGNMENT);
         upkeep = new JButton("Up");
         upkeep.setToolTipText("Upkeep");
+        upkeep.setAlignmentX(RIGHT_ALIGNMENT);
         draw = new JButton("D");
         draw.setToolTipText("Draw");
+        draw.setAlignmentX(RIGHT_ALIGNMENT);
         main1 = new JButton("M1");
         main1.setToolTipText("Main#1");
+        main1.setAlignmentX(RIGHT_ALIGNMENT);
         attack = new JButton("A");
         attack.setToolTipText("Attack");
+        attack.setAlignmentX(RIGHT_ALIGNMENT);
         block = new JButton("B");
         block.setToolTipText("Block");
+        block.setAlignmentX(RIGHT_ALIGNMENT);
         combatButton = new JButton("C");
         combatButton.setToolTipText("Combat damage");
+        combatButton.setAlignmentX(RIGHT_ALIGNMENT);
         main2 = new JButton("M2");
         main2.setToolTipText("Main#2");
+        main2.setAlignmentX(RIGHT_ALIGNMENT);
         endOfTurn = new JButton("End");
         endOfTurn.setToolTipText("End The Turn");
+        endOfTurn.setAlignmentX(RIGHT_ALIGNMENT);
         endOfTurn.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -1008,6 +1020,18 @@ public class GamePanel extends javax.swing.JPanel {
         jSplitPane2.setLeftComponent(userChatPanel);
         jSplitPane2.setBottomComponent(gameChatPanel);
 
+        phasesContainer = new JPanel();
+        phasesContainer.setLayout(new RelativeLayout(RelativeLayout.Y_AXIS));
+        phasesContainer.setBackground(new Color(0, 0, 0, 0));
+        Float ratio = new Float(1);
+        JPanel empty1 = new JPanel();
+        empty1.setBackground(new Color(0, 0, 0, 0));
+        phasesContainer.add(empty1, ratio);
+        phasesContainer.add(jPhases);
+        JPanel empty2 = new JPanel();
+        empty2.setBackground(new Color(0, 0, 0, 0));
+        phasesContainer.add(empty2, ratio);
+
         javax.swing.GroupLayout gl_jPanel3 = new javax.swing.GroupLayout(jPanel3);
         gl_jPanel3.setHorizontalGroup(
             gl_jPanel3.createParallelGroup(Alignment.LEADING)
@@ -1027,22 +1051,26 @@ public class GamePanel extends javax.swing.JPanel {
                                     //.addComponent(jPhases, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(gl_jPanel3.createSequentialGroup()
                                     .addComponent(pnlBattlefield, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                    .addComponent(phasesContainer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                             )))
         );
         gl_jPanel3.setVerticalGroup(
                 gl_jPanel3.createParallelGroup(Alignment.TRAILING)
                         .addGroup(gl_jPanel3.createSequentialGroup()
-                                .addComponent(pnlBattlefield, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                .addGroup(gl_jPanel3.createParallelGroup(Alignment.LEADING)
+                                        .addComponent(pnlBattlefield, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                        .addComponent(phasesContainer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                )
                                 //.addPreferredGap(ComponentPlacement.RELATED)
                                 .addGroup(gl_jPanel3.createParallelGroup(Alignment.LEADING)
-                                    .addGroup(gl_jPanel3.createSequentialGroup()
-                                            .addGap(85)
-                                            .addComponent(stack, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                    )
-                                    .addGroup(gl_jPanel3.createSequentialGroup()
-                                            .addComponent(helper, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(handContainer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                    )
+                                        .addGroup(gl_jPanel3.createSequentialGroup()
+                                                .addGap(85)
+                                                .addComponent(stack, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                        )
+                                        .addGroup(gl_jPanel3.createSequentialGroup()
+                                                .addComponent(helper, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(handContainer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                        )
                                 )
                                 //.addComponent(jPhases, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         )
@@ -1189,6 +1217,7 @@ public class GamePanel extends javax.swing.JPanel {
     private Color prevBGColor;
     private final static Color DEFAULT_FOREGROUND_COLOR = Color.BLACK;
     private JPanel jPhases;
+    private JPanel phasesContainer;
 
     private JButton untap;
     private JButton upkeep;
