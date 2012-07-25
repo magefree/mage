@@ -134,29 +134,32 @@ public class RateCard {
     private synchronized static void readRatings() {
         if (ratings == null) {
             ratings = new HashMap<String, Integer>();
-            String filename = "/ratings.txt";
-            try {
-                InputStream is = RateCard.class.getResourceAsStream(filename);
-                Scanner scanner = new Scanner(is);
-                while (scanner.hasNextLine()) {
-                    String line = scanner.nextLine();
-                    String[] s = line.split(":");
-                    if (s.length == 2) {
-                        Integer rating = Integer.parseInt(s[0].trim());
-                        String name = s[1].trim();
-                        if (rating > max) {
-                            max = rating;
-                        }
-                        if (rating < min) {
-                            min = rating;
-                        }
-                        ratings.put(name, rating);
+            readFromFile("/m13.csv");
+        }
+    }
+    
+    private static void readFromFile(String path) {
+        try {
+            InputStream is = RateCard.class.getResourceAsStream(path);
+            Scanner scanner = new Scanner(is);
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] s = line.split(":");
+                if (s.length == 2) {
+                    Integer rating = Integer.parseInt(s[1].trim());
+                    String name = s[0].trim();
+                    if (rating > max) {
+                        max = rating;
                     }
+                    if (rating < min) {
+                        min = rating;
+                    }
+                    ratings.put(name, rating);
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-                ratings.clear(); // no rating available on exception
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+            ratings.clear(); // no rating available on exception
         }
     }
 
