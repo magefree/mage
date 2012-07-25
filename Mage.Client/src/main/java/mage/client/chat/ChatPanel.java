@@ -34,10 +34,6 @@
 
 package mage.client.chat;
 
-import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.util.*;
-import java.util.List;
 import mage.client.MageFrame;
 import mage.client.components.ColorPane;
 import mage.remote.Session;
@@ -46,6 +42,10 @@ import mage.view.ChatMessage.MessageColor;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.AbstractTableModel;
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.util.*;
+import java.util.List;
 
 /**
  *
@@ -125,6 +125,17 @@ public class ChatPanel extends javax.swing.JPanel {
     public ChatPanel(boolean addPlayersTab) {
         tableModel = new TableModel();
         initComponents();
+        jTable1.setBackground(new Color(0, 0, 0, 0));
+        jTable1.setForeground(Color.white);
+        setBackground(new Color(0, 0, 0, 100));
+        if (jScrollPane1 != null) {
+            jScrollPane1.setBackground(new Color(0, 0, 0, 100));
+            jScrollPane1.getViewport().setBackground(new Color(0, 0, 0, 100));
+        }
+        if (jScrollPane2 != null) {
+            jScrollPane2.setBackground(new Color(0, 0, 0, 100));
+            jScrollPane2.getViewport().setBackground(new Color(0, 0, 0, 100));
+        }
         if (!addPlayersTab) simplifyComponents();
     }
 
