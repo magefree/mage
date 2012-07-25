@@ -60,6 +60,10 @@
                 <updatePolicy>daily</updatePolicy>
             </snapshots>
         </repository>
+        <repository>
+            <id>local-project-repo</id>
+            <url>file:repository</url>
+        </repository>
     </repositories>
 
     <properties>

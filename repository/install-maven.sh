@@ -1,1 +1,0 @@
-mvn install:install-file -DgroupId=com.googlecode.jspf -DartifactId=jspf-core -Dversion=0.9.1 -Dpackaging=jar -Dfile=./com/googlecode/jspf/jspf-core/0.9.1/jspf-core-0.9.1.jar
