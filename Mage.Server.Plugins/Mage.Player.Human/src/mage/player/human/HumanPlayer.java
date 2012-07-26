@@ -36,6 +36,7 @@ import mage.abilities.*;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.*;
 import mage.abilities.effects.ReplacementEffect;
+import mage.abilities.effects.RequirementEffect;
 import mage.abilities.mana.ManaAbility;
 import mage.cards.Card;
 import mage.cards.Cards;
@@ -527,12 +528,20 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
                         selectDefender(game.getCombat().getDefenders(), attacker.getId(), game);
                     }
                     else if (filterAttack.match(attacker, null, playerId, game) && game.getStack().isEmpty()) {
-//                        if (game.getState().getTriggered().isEmpty() && game.getState().getDelayed().isEmpty())
-                            game.getCombat().removeAttacker(attacker.getId(), game);
+                        removeAttackerIfPossible(game, attacker);
                     }
                 }
              }
         }
+    }
+
+    private void removeAttackerIfPossible(Game game, Permanent attacker) {
+        for (RequirementEffect effect : game.getContinuousEffects().getApplicableRequirementEffects(attacker, game)) {
+            if (effect.mustAttack(game)) {
+                return; // we can't cancel attacking
+            }
+        }
+        game.getCombat().removeAttacker(attacker.getId(), game);
     }
 
     protected boolean selectDefender(Set<UUID> defenders, UUID attackerId, Game game) {
