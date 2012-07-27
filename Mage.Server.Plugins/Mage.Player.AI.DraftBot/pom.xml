@@ -10,7 +10,7 @@
         <version>0.9.0</version>
     </parent>
 
-    <artifactId>mage-player-ai-draft-bot</artifactId>
+    <artifactId>mage-player-ai-draftbot</artifactId>
     <packaging>jar</packaging>
     <name>Mage Player AI.DraftBot</name>
 
