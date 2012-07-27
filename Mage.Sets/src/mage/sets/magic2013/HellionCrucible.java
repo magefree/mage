@@ -27,7 +27,6 @@
  */
 package mage.sets.magic2013;
 
-import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -46,6 +45,8 @@ import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.game.permanent.token.Token;
 
+import java.util.UUID;
+
 /**
  *
  * @author jeffwadsworth
@@ -60,10 +61,12 @@ public class HellionCrucible extends CardImpl<HellionCrucible> {
         this.addAbility(new ColorlessManaAbility());
         
         // {1}{R}, {tap}: Put a pressure counter on Hellion Crucible.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.PRESSURE.createInstance()), new ManaCostsImpl("{1}{R}")));
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.PRESSURE.createInstance()), new ManaCostsImpl("{1}{R}"));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
         
         // {1}{R}, {tap}, Remove two pressure counters from Hellion Crucible and sacrifice it: Put a 4/4 red Hellion creature token with haste onto the battlefield.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CreateTokenEffect(new HellionToken(), 1), new ManaCostsImpl("{1}{R}"));
+        ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CreateTokenEffect(new HellionToken(), 1), new ManaCostsImpl("{1}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.PRESSURE.createInstance(2)));
         ability.addCost(new SacrificeSourceCost());
