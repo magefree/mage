@@ -107,6 +107,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         this.bigCard = bigCard;
         session = MageFrame.getSession();
         cheat.setVisible(session.isTestMode());
+        cheat.setFocusable(false);
     }
 
     public void update(PlayerView player) {
