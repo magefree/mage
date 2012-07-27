@@ -34,12 +34,12 @@ import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.CounterPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.predicate.permanent.CounterPredicate;
 
 /**
  *

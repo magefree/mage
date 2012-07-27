@@ -25,9 +25,8 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.filter.predicate.mageobject;
+package mage.filter.predicate.permanent;
 
-import mage.MageObject;
 import mage.counters.CounterType;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
@@ -37,7 +36,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeff
  */
-public class CounterPredicate implements Predicate<MageObject> {
+public class CounterPredicate implements Predicate<Permanent> {
 
     private final CounterType counter;
 
@@ -46,16 +45,12 @@ public class CounterPredicate implements Predicate<MageObject> {
     }
 
     @Override
-    public boolean apply(MageObject input, Game game) {
-        Permanent permanent = game.getPermanent(input.getId());
-        if (permanent != null) {
-            return permanent.getCounters().containsKey(counter);
-        }
-        return false;
+    public boolean apply(Permanent input, Game game) {
+        return input.getCounters().containsKey(counter);
     }
 
     @Override
     public String toString() {
-        return "Counter Type(" + counter.getName() + ')';
+        return "CounterType(" + counter.getName() + ')';
     }
 }
