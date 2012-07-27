@@ -12,6 +12,10 @@ public class AttacksEquippedTriggeredAbility extends TriggeredAbilityImpl<Attack
         super(Constants.Zone.BATTLEFIELD, effect);
     }
 
+    public AttacksEquippedTriggeredAbility(Effect effect, boolean optional) {
+        super(Constants.Zone.BATTLEFIELD, effect, optional);
+    }
+
     public AttacksEquippedTriggeredAbility(final AttacksEquippedTriggeredAbility abiltity) {
         super(abiltity);
     }

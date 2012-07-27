@@ -344,10 +344,10 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
      */
     private void multiAttackerDamage(boolean first, Game game) {
         Permanent blocker = game.getPermanent(blockers.get(0));
-        Player player = game.getPlayer(blocker.getControllerId());
         if (blocker == null) {
             return;
         }
+        Player player = game.getPlayer(blocker.getControllerId());
         int damage = blocker.getPower().getValue();
 
         if (canDamage(blocker, first)) {
