@@ -27,12 +27,7 @@
  */
 package mage.sets.magic2013;
 
-import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.Constants.*;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -41,6 +36,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -93,7 +90,7 @@ class OmniscienceEffect extends CostModificationEffectImpl<OmniscienceEffect> {
             if (sourceCard != null && sourceCard.getOwnerId().equals(source.getControllerId())
                     && !sourceCard.getCardType().contains(CardType.LAND)) {
                 Player player = game.getPlayer(source.getControllerId());
-                String message = "Cast " + sourceCard.getName() + " whitout paying its mana costs?";
+                String message = "Cast " + sourceCard.getName() + " without paying its mana costs?";
                 if (player != null && player.chooseUse(outcome, message, game)) {
                     return true;
                 }
