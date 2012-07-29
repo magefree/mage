@@ -1,4 +1,5 @@
 Fifth Edition|fifthedition|
+Seventh Edition|seventhedition|
 Eighth Edition|eighthedition|
 Ninth Edition|ninthedition|
 Tenth Edition|tenth|
