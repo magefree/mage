@@ -114,7 +114,7 @@ class HuntedGhoulEffect extends RestrictionEffect<HuntedGhoulEffect> {
 
     @Override
     public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        if (attacker.getSubtype().contains("Human")) {
+        if (attacker != null && attacker.getSubtype().contains("Human")) {
             return false;
         }
         return true;

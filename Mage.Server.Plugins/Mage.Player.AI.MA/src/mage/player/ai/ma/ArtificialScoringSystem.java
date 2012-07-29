@@ -91,7 +91,15 @@ public class ArtificialScoringSystem {
                     }
                 }
             }
-            score += equipments*50 + enchantments*100;
+            score += equipments*50 /*+ enchantments*100*/;
+
+            if (!permanent.canAttack(game)) {
+                score -= 100;
+            }
+
+            if (!permanent.canBlockAny(game)) {
+                score -= 30;
+            }
         }
         return score;
     }

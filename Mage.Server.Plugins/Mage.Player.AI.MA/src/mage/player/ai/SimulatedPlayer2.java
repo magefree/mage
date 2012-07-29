@@ -35,6 +35,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.VariableManaCost;
+import mage.abilities.effects.Effect;
 import mage.cards.Card;
 import mage.choices.Choice;
 import mage.game.Game;
@@ -118,6 +119,7 @@ public class SimulatedPlayer2 extends ComputerPlayer<SimulatedPlayer2> {
         for (Ability ability: playables) {
             List<Ability> options = game.getPlayer(playerId).getPlayableOptions(ability, game);
             options = filterOptions(game, options, ability, suggested);
+            options = optimizeOptions(game, options, ability);
             if (options.isEmpty()) {
                 if (ability.getManaCosts().getVariableCosts().size() > 0) {
                     simulateVariableCosts(ability, game);
@@ -218,6 +220,39 @@ public class SimulatedPlayer2 extends ComputerPlayer<SimulatedPlayer2> {
             }
         }
         // no option was found
+        return options;
+    }
+
+    protected List<Ability> optimizeOptions(Game game, List<Ability> options, Ability ability) {
+        if (options.isEmpty()) {
+            return options;
+        }
+
+        // determine if all effects are bad
+        Iterator<Ability> iterator = options.iterator();
+        boolean bad = false;
+        for (Effect effect : ability.getEffects()) {
+            if (effect.getOutcome().isGood()) {
+                bad = false;
+                break;
+            } else {
+                bad = true;
+            }
+        }
+
+        if (bad) {
+            // remove its own creatures for bad effects
+            while (iterator.hasNext()) {
+                Ability ability1 = iterator.next();
+                if (ability1.getTargets().size() == 1) {
+                    Permanent permanent = game.getPermanent(ability1.getFirstTarget());
+                    if (permanent != null && permanent.getControllerId().equals(playerId)) {
+                        iterator.remove();
+                    }
+                }
+            }
+        }
+
         return options;
     }
 

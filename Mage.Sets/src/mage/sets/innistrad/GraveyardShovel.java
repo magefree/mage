@@ -27,7 +27,6 @@
  */
 package mage.sets.innistrad;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
@@ -43,6 +42,8 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -93,6 +94,7 @@ class GraveyardShovelEffect extends OneShotEffect<GraveyardShovelEffect> {
         Player controller = game.getPlayer(source.getControllerId());
         if (targetPlayer != null && controller != null) {
             TargetCardInYourGraveyard target = new TargetCardInYourGraveyard();
+            target.setRequired(true);
             if (targetPlayer.chooseTarget(Outcome.Exile, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {

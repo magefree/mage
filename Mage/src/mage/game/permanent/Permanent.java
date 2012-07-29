@@ -137,6 +137,7 @@ public interface Permanent extends Card, Controllable {
     public void setMinBlockedBy(int minBlockedBy);
     public boolean canAttack(Game game);
     public boolean canBlock(UUID attackerId, Game game);
+    public boolean canBlockAny(Game game);
     public boolean removeFromCombat(Game game);
     public boolean isDeathtouched();
 

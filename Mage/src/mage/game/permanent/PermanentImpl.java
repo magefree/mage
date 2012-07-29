@@ -802,6 +802,20 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
     }
 
     @Override
+    public boolean canBlockAny(Game game) {
+        if (tapped)
+            return false;
+
+        //20101001 - 509.1b
+        for (RestrictionEffect effect : game.getContinuousEffects().getApplicableRestrictionEffects(this, game)) {
+            if (!effect.canBlock(null, this, game.getContinuousEffects().getAbility(effect.getId()), game))
+                return false;
+        }
+
+        return true;
+    }
+
+    @Override
     public void setAttacking(boolean attacking) {
         this.attacking = attacking;
     }

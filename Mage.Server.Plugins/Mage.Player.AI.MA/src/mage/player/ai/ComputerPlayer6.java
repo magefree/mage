@@ -607,6 +607,32 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
         for (TreeOptimizer optimizer : optimizers) {
             optimizer.optimize(game, allActions);
         }
+        Collections.sort(allActions, new Comparator<Ability>() {
+            @Override
+            public int compare(Ability ability, Ability ability1) {
+                String rule = ability.toString();
+                String rule1 = ability1.toString();
+                if (rule.equals("Pass")) {
+                    return 1;
+                }
+                if (rule1.equals("Pass")) {
+                    return -1;
+                }
+                if (rule.startsWith("Play")) {
+                    return -1;
+                }
+                if (rule1.startsWith("Play")) {
+                    return 1;
+                }
+                if (rule.startsWith("Cast")) {
+                    return -1;
+                }
+                if (rule1.startsWith("Cast")) {
+                    return 1;
+                }
+                return ability.getRule().compareTo(ability1.getRule());
+            }
+        });
     }
 
     protected boolean allPassed(Game game) {
