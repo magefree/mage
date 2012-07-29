@@ -96,7 +96,8 @@ public final class Constants {
         COMMON ("Common", "common", "C", 1),
         UNCOMMON ("Uncommon", "uncommon", "U", 2),
         RARE ("Rare", "rare", "R", 3),
-        MYTHIC ("Mythic", "mythic", "M", 3);
+        MYTHIC ("Mythic", "mythic", "M", 3),
+        SPECIAL ("Special", "special", "SP", 3);
 
         private String text;
         private String symbolCode;
@@ -343,7 +344,7 @@ public final class Constants {
         Benefit(true),
         Detriment(false),
         Neutral(true),
-        Removal(true);
+        Removal(false);
 
         private boolean good;
         private boolean canTargetAll;
