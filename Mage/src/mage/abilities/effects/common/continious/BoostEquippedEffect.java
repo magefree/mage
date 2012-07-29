@@ -38,15 +38,16 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class BoostEquippedEffect extends ContinuousEffectImpl<BoostEquippedEffect> {
 
     private DynamicValue power;
     private DynamicValue toughness;
+    private boolean fixedTarget = false;
 
     public BoostEquippedEffect(int power, int toughness) {
         this(power, toughness, Duration.WhileOnBattlefield);
@@ -64,6 +65,9 @@ public class BoostEquippedEffect extends ContinuousEffectImpl<BoostEquippedEffec
         super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         this.power = powerDynamicValue;
         this.toughness = toughnessDynamicValue;
+        if (duration == Duration.EndOfTurn) {
+            fixedTarget = true;
+        }
         setText();
     }
 
@@ -71,6 +75,7 @@ public class BoostEquippedEffect extends ContinuousEffectImpl<BoostEquippedEffec
         super(effect);
         this.power = effect.power.clone();
         this.toughness = effect.toughness.clone();
+        this.fixedTarget = effect.fixedTarget;
     }
 
     @Override
@@ -79,15 +84,33 @@ public class BoostEquippedEffect extends ContinuousEffectImpl<BoostEquippedEffec
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent equipment = game.getPermanent(source.getSourceId());
-        if (equipment != null && equipment.getAttachedTo() != null) {
-            Permanent creature = game.getPermanent(equipment.getAttachedTo());
-            if (creature != null) {
-                creature.addPower(power.calculate(game, source));
-                creature.addToughness(toughness.calculate(game, source));
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        if (fixedTarget) {
+            Permanent equipment = game.getPermanent(source.getSourceId());
+            if (equipment != null && equipment.getAttachedTo() != null) {
+                this.setTargetPointer(new FixedTarget(equipment.getAttachedTo()));
             }
         }
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent creature = null;
+        if (fixedTarget) {
+            creature = game.getPermanent(targetPointer.getFirst(game, source));
+        } else {
+            Permanent equipment = game.getPermanent(source.getSourceId());
+            if (equipment != null && equipment.getAttachedTo() != null) {
+                creature = game.getPermanent(equipment.getAttachedTo());
+            }
+        }
+
+        if (creature != null) {
+            creature.addPower(power.calculate(game, source));
+            creature.addToughness(toughness.calculate(game, source));
+        }
+
         return true;
     }
 
@@ -95,12 +118,12 @@ public class BoostEquippedEffect extends ContinuousEffectImpl<BoostEquippedEffec
         StringBuilder sb = new StringBuilder();
         sb.append("Equipped creature gets ");
         String p = power.toString();
-        if(!p.startsWith("-"))
+        if (!p.startsWith("-"))
             sb.append("+");
         sb.append(p).append("/");
         String t = toughness.toString();
-        if(!t.startsWith("-")){
-            if(p.startsWith("-"))
+        if (!t.startsWith("-")) {
+            if (p.startsWith("-"))
                 sb.append("-");
             else
                 sb.append("+");
@@ -115,5 +138,4 @@ public class BoostEquippedEffect extends ContinuousEffectImpl<BoostEquippedEffec
         sb.append(message);
         staticText = sb.toString();
     }
-
 }

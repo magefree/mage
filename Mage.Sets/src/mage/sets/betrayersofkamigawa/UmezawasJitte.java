@@ -37,6 +37,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.EquipAbility;
@@ -69,8 +70,7 @@ public class UmezawasJitte extends CardImpl<UmezawasJitte> {
         this.addAbility(new UmezawasJitteAbility());
 
         // Remove a charge counter from Umezawa's Jitte: Choose one Equipped creature gets +2/+2 until end of turn; or target creature gets -1/-1 until end of turn; or you gain 2 life.
-
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new UmezawasJitteEffect(), new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2, Constants.Duration.EndOfTurn), new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
         Mode mode = new Mode();
         mode.getEffects().add(new BoostTargetEffect(-1, -1, Constants.Duration.EndOfTurn));
         mode.getTargets().add(new TargetCreaturePermanent());
@@ -123,36 +123,5 @@ class UmezawasJitteAbility extends TriggeredAbilityImpl<UmezawasJitteAbility> {
     @Override
     public String getRule() {
         return "Whenever equipped creature deals combat damage, put two charge counters on {this}.";
-    }
-}
-
-class UmezawasJitteEffect extends OneShotEffect<UmezawasJitteEffect> {
-
-    UmezawasJitteEffect() {
-        super(Constants.Outcome.BoostCreature);
-        staticText = "Equipped creature gets +2/+2 until end of turn";
-    }
-
-    UmezawasJitteEffect(final UmezawasJitteEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent equipment = game.getPermanent(source.getSourceId());
-        if (equipment != null) {
-            Permanent equipped = game.getPermanent(equipment.getAttachedTo());
-            if (equipped != null) {
-                Effect effect = new BoostSourceEffect(2, 2, Constants.Duration.EndOfTurn);
-                equipped.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect), game);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public UmezawasJitteEffect copy() {
-        return new UmezawasJitteEffect(this);
     }
 }
