@@ -86,6 +86,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
         this.addSet(Exodus.getInstance());
         this.addSet(FifthDawn.getInstance());
         this.addSet(FifthEdition.getInstance());
+        this.addSet(FourthEdition.getInstance());
         this.addSet(FutureSight.getInstance());
         this.addSet(Guildpact.getInstance());
         this.addSet(Guru.getInstance());
