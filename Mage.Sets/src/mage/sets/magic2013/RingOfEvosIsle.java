@@ -32,33 +32,37 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.ObjectColor;
+import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.EquippedMatchesFilterCondition;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddPlusOneCountersAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
  * @author jeffwadsworth
  */
 public class RingOfEvosIsle extends CardImpl<RingOfEvosIsle> {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-    
+
     static {
         filter.add(new ColorPredicate(ObjectColor.BLUE));
     }
-    
-    
 
     public RingOfEvosIsle(UUID ownerId) {
         super(ownerId, 211, "Ring of Evos Isle", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
@@ -66,13 +70,13 @@ public class RingOfEvosIsle extends CardImpl<RingOfEvosIsle> {
         this.subtype.add("Equipment");
 
         // {2}: Equipped creature gains hexproof until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HexproofAbility.getInstance(), Constants.AttachmentType.EQUIPMENT, Constants.Duration.EndOfTurn), new GenericManaCost(2)));
-        
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new RingOfEvosIsleEffect(), new GenericManaCost(2)));
+
         // At the beginning of your upkeep, put a +1/+1 counter on equipped creature if it's blue.
         TriggeredAbility triggeredAbility = new BeginningOfUpkeepTriggeredAbility(Constants.Zone.BATTLEFIELD, new AddPlusOneCountersAttachedEffect(1), Constants.TargetController.YOU, false);
-        ConditionalTriggeredAbility ability = new ConditionalTriggeredAbility(triggeredAbility, new EquippedMatchesFilterCondition(filter), "At the beginning of your upkeep, put a +1/+1 counter on equipped creature if it's blue");
-        this.addAbility(ability);
-        
+        ConditionalTriggeredAbility ability2 = new ConditionalTriggeredAbility(triggeredAbility, new EquippedMatchesFilterCondition(filter), "At the beginning of your upkeep, put a +1/+1 counter on equipped creature if it's blue");
+        this.addAbility(ability2);
+
         // Equip {1}
         this.addAbility(new EquipAbility(Constants.Outcome.BoostCreature, new GenericManaCost(1)));
     }
@@ -84,5 +88,36 @@ public class RingOfEvosIsle extends CardImpl<RingOfEvosIsle> {
     @Override
     public RingOfEvosIsle copy() {
         return new RingOfEvosIsle(this);
+    }
+}
+
+class RingOfEvosIsleEffect extends OneShotEffect<RingOfEvosIsleEffect> {
+
+    RingOfEvosIsleEffect() {
+        super(Constants.Outcome.BoostCreature);
+        staticText = "Equipped creature gains hexproof until end of turn";
+    }
+
+    RingOfEvosIsleEffect(final RingOfEvosIsleEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent equipment = game.getPermanent(source.getSourceId());
+        if (equipment != null) {
+            Permanent equipped = game.getPermanent(equipment.getAttachedTo());
+            if (equipped != null) {
+                Effect effect = new GainAbilitySourceEffect(HexproofAbility.getInstance(), Constants.Duration.EndOfTurn);
+                equipped.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect), game);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public RingOfEvosIsleEffect copy() {
+        return new RingOfEvosIsleEffect(this);
     }
 }
