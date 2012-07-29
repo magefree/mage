@@ -58,6 +58,7 @@ import javax.swing.table.AbstractTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyVetoException;
+import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -508,6 +509,12 @@ public class TablesPanel extends javax.swing.JPanel {
         private void btnQuickStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuickStartActionPerformed
             TableView table;
             try {
+                File f = new File("test.dck");
+                if (!f.exists()) {
+                    JOptionPane.showMessageDialog(null, "Couldn't find test.dck file for quick game start", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
                 MatchOptions options = new MatchOptions("1", "Two Player Duel");
                 options.getPlayerTypes().add("Human");
                 options.getPlayerTypes().add("Computer - mad");
@@ -516,6 +523,7 @@ public class TablesPanel extends javax.swing.JPanel {
                 options.setRange(RangeOfInfluence.ALL);
                 options.setWinsNeeded(1);
                 table = session.createTable(roomId,    options);
+
                 session.joinTable(roomId, table.getTableId(), "Human", "Human", 1, DeckImporterUtil.importDeck("test.dck"));
                 session.joinTable(roomId, table.getTableId(), "Computer", "Computer - mad", 5, DeckImporterUtil.importDeck("test.dck"));
                 session.startGame(roomId, table.getTableId());
