@@ -39,9 +39,7 @@ import mage.game.turn.*;
 import mage.players.Player;
 import org.apache.log4j.Logger;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  *
@@ -129,6 +127,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
                 return false;
             case END_TURN:
             case CLEANUP:
+                actionCache.clear();
                 pass();
                 return false;
         }
@@ -148,11 +147,11 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
                 root = root.children.get(0);
                 int bestScore = root.getScore();
                 //if (bestScore > currentScore || allowBadMoves) {
-                    actions = new LinkedList<Ability>(root.abilities);
-                    combat = root.combat;
-                //} else {
-                    //System.out.println("[" + game.getPlayer(playerId).getName() + "][pre] Action: not better score");
-                //}
+                actions = new LinkedList<Ability>(root.abilities);
+                combat = root.combat;
+                for (Ability ability : actions) {
+                    actionCache.add(ability.getRule() + "_" + ability.getSourceId());
+                }
             } else {
                 System.out.println("[" + game.getPlayer(playerId).getName() + "][pre] Action: skip");
             }

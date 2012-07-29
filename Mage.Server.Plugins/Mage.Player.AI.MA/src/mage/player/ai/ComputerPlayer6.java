@@ -89,6 +89,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 
     private static final String FILE_WITH_INSTRUCTIONS = "config/ai.please.cast.this.txt";
     private List<String> suggested = new ArrayList<String>();
+    protected Set<String> actionCache;
 
     private static final List<TreeOptimizer> optimizers = new ArrayList<TreeOptimizer>();
 
@@ -103,6 +104,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
         maxThink = skill * 300;
         maxNodes = Config2.maxNodes;
         getSuggestedActions();
+        this.actionCache = new HashSet<String>();
     }
 
     public ComputerPlayer6(final ComputerPlayer6 player) {
@@ -114,6 +116,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
         this.actions.addAll(player.actions);
         this.targets.addAll(player.targets);
         this.choices.addAll(player.choices);
+        this.actionCache = player.actionCache;
     }
 
     @Override
@@ -512,6 +515,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                     sim.getPlayerList().getNext();
                 }
                 SimulationNode2 newNode = new SimulationNode2(node, sim, action, depth, currentPlayer.getId());
+                int testVal = GameStateEvaluator2.evaluate(currentPlayer.getId(), sim);
                 logger.debug("simulating -- node #:" + SimulationNode2.getCount() + " actions:" + action);
                 sim.checkStateAndTriggered();
                 int val = addActions(newNode, depth-1, alpha, beta);
@@ -1243,15 +1247,25 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
     private boolean checkForRepeatedAction(Game sim, SimulationNode2 node, Ability action, UUID playerId) {
         if (action instanceof PassAbility)
             return false;
-        int val = GameStateEvaluator2.evaluate(playerId, sim);
+        int newVal = GameStateEvaluator2.evaluate(playerId, sim);
         SimulationNode2 test = node.getParent();
-        while (test != null && !test.getPlayerId().equals(playerId)) {
-            test = test.getParent();
-        }
-        if (test != null && test.getAbilities() != null && test.getAbilities().size() == 1) {
-            if (action.toString().equals(test.getAbilities().get(0).toString()) && GameStateEvaluator2.evaluate(playerId, test.getGame()) == val) {
-                return true;
+        while (test != null) {
+            if (test.getPlayerId().equals(playerId)) {
+                if (test.getAbilities() != null && test.getAbilities().size() == 1) {
+                    if (action.toString().equals(test.getAbilities().get(0).toString())) {
+                        if (test.getParent() != null) {
+                            Game prevGame = node.getGame();
+                            if (prevGame != null) {
+                                int oldVal = GameStateEvaluator2.evaluate(playerId, prevGame);
+                                if (oldVal >= newVal) {
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
             }
+            test = test.getParent();
         }
         return false;
     }
