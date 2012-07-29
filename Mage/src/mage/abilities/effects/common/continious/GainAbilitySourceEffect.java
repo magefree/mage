@@ -56,7 +56,7 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl<GainAbilitySou
     public GainAbilitySourceEffect(Ability ability, Duration duration) {
         super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.ability = ability;
-        staticText = "{this} gains \"" + ability.getRule() + "\"" + duration.toString();
+        staticText = "{this} gains \"" + ability.getRule() + "\" " + duration.toString();
     }
 
     public GainAbilitySourceEffect(final GainAbilitySourceEffect effect) {

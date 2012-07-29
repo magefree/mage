@@ -34,8 +34,6 @@ import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.DomainValue;
-import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.filter.common.FilterCreaturePermanent;
@@ -118,22 +116,25 @@ public class BoostAllEffect extends ContinuousEffectImpl<BoostAllEffect> {
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        if (excludeSource)
+        if (excludeSource) {
             sb.append("Other ");
-        sb.append(filter.getMessage()).append(" gets ");
+        }
+        sb.append(filter.getMessage()).append(" get ");
         String p = power.toString();
-        if(!p.startsWith("-"))
+        if (!p.startsWith("-")) {
             sb.append("+");
+        }
         sb.append(p).append("/");
         String t = toughness.toString();
-        if(!t.startsWith("-")){
-            if(p.startsWith("-"))
+        if (!t.startsWith("-")) {
+            if (p.startsWith("-")) {
                 sb.append("-");
-            else
+            } else {
                 sb.append("+");
+            }
         }
         sb.append(t);
-        sb.append((duration==Duration.EndOfTurn?" until end of turn":""));
+        sb.append((duration == Duration.EndOfTurn ? " until end of turn" : ""));
         sb.append(power.getMessage());
         staticText = sb.toString();
     }
