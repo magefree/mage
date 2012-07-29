@@ -39,6 +39,7 @@ public class GathererSets implements Iterable<DownloadJob> {
         symbolsReplacements.put("VIS", "VI");
         symbolsReplacements.put("MIR", "MI");
         symbolsReplacements.put("7ED", "7E");
+        symbolsReplacements.put("6ED", "6E");
     }
 
     public GathererSets(String path) {

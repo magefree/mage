@@ -35,16 +35,16 @@ import mage.cards.ExpansionSet;
  *
  * @author North
  */
-public class SeventhEdition extends ExpansionSet {
+public class SixthEdition extends ExpansionSet {
 
-    private static final SeventhEdition fINSTANCE = new SeventhEdition();
+    private static final SixthEdition fINSTANCE = new SixthEdition();
 
-    public static SeventhEdition getInstance() {
+    public static SixthEdition getInstance() {
         return fINSTANCE;
     }
 
-    private SeventhEdition() {
-        super("Seventh Edition", "7ED", "", "mage.sets.seventhedition", new GregorianCalendar(2001, 3, 11).getTime(), Constants.SetType.CORE);
+    private SixthEdition() {
+        super("Sixth Edition", "6ED", "", "mage.sets.sixthedition", new GregorianCalendar(1999, 3, 28).getTime(), Constants.SetType.CORE);
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
