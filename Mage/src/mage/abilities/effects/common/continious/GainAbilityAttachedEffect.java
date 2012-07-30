@@ -37,21 +37,25 @@ import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class GainAbilityAttachedEffect extends ContinuousEffectImpl<GainAbilityAttachedEffect> {
 
     protected Ability ability;
     protected AttachmentType attachmentType;
-    
+    protected boolean fixedTarget = false;
+
     public GainAbilityAttachedEffect(Ability ability, AttachmentType attachmentType, Duration duration) {
-        super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+        super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.ability = ability;
         this.attachmentType = attachmentType;
         this.duration = duration;
+        if (duration == Duration.EndOfTurn) {
+            fixedTarget = true;
+        }
         setText();
     }
 
@@ -66,6 +70,7 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl<GainAbilityA
         super(effect);
         this.ability = effect.ability.copy();
         this.attachmentType = effect.attachmentType;
+        this.fixedTarget = effect.fixedTarget;
     }
 
     @Override
@@ -74,13 +79,29 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl<GainAbilityA
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent equipment = game.getPermanent(source.getSourceId());
-        if (equipment != null && equipment.getAttachedTo() != null) {
-            Permanent creature = game.getPermanent(equipment.getAttachedTo());
-            if (creature != null) {
-                creature.addAbility(ability, game);
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        if (fixedTarget) {
+            Permanent equipment = game.getPermanent(source.getSourceId());
+            if (equipment != null && equipment.getAttachedTo() != null) {
+                this.setTargetPointer(new FixedTarget(equipment.getAttachedTo()));
             }
+        }
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent creature = null;
+        if (fixedTarget) {
+            creature = game.getPermanent(targetPointer.getFirst(game, source));
+        } else {
+            Permanent equipment = game.getPermanent(source.getSourceId());
+            if (equipment != null && equipment.getAttachedTo() != null) {
+                creature = game.getPermanent(equipment.getAttachedTo());
+            }
+        }
+        if (creature != null) {
+            creature.addAbility(ability, game);
         }
         return true;
     }
@@ -88,17 +109,17 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl<GainAbilityA
     private void setText() {
         StringBuilder sb = new StringBuilder();
         if (attachmentType == AttachmentType.AURA) {
-            sb.append("Enchanted"); 
+            sb.append("Enchanted");
         } else if (attachmentType == AttachmentType.EQUIPMENT) {
             sb.append("Equipped");
         }
         sb.append(" creature ");
         if (duration == Duration.WhileOnBattlefield) {
-            sb.append("has ");    
+            sb.append("has ");
         } else {
-            sb.append("gains ");    
+            sb.append("gains ");
         }
-        sb.append(ability.getRule());    
+        sb.append(ability.getRule());
         staticText = sb.toString();
     }
 
