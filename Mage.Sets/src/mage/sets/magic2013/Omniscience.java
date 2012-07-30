@@ -35,6 +35,8 @@ import mage.abilities.effects.CostModificationEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
+import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 
 import java.util.UUID;
@@ -87,12 +89,18 @@ class OmniscienceEffect extends CostModificationEffectImpl<OmniscienceEffect> {
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if (abilityToModify instanceof SpellAbility) {
             Card sourceCard = game.getCard(abilityToModify.getSourceId());
-            if (sourceCard != null && sourceCard.getOwnerId().equals(source.getControllerId())
-                    && !sourceCard.getCardType().contains(CardType.LAND)) {
-                Player player = game.getPlayer(source.getControllerId());
-                String message = "Cast " + sourceCard.getName() + " without paying its mana costs?";
-                if (player != null && player.chooseUse(outcome, message, game)) {
-                    return true;
+            StackObject stackObject = game.getStack().getStackObject(abilityToModify.getSourceId());
+            if (stackObject != null && stackObject instanceof Spell) {
+                Zone zone = ((Spell)stackObject).getFromZone();
+                if (zone != null && zone.equals(Zone.HAND)) {
+                    if (sourceCard != null && sourceCard.getOwnerId().equals(source.getControllerId())
+                            && !sourceCard.getCardType().contains(CardType.LAND)) {
+                        Player player = game.getPlayer(source.getControllerId());
+                        String message = "Cast " + sourceCard.getName() + " without paying its mana costs?";
+                        if (player != null && player.chooseUse(outcome, message, game)) {
+                            return true;
+                        }
+                    }
                 }
             }
         }
