@@ -30,13 +30,13 @@ package mage.sets.fifthedition;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.Constants.Zone;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.MillTargetEffect;
 import mage.target.TargetPlayer;
 
 /**
@@ -50,7 +50,7 @@ public class Millstone extends CardImpl<Millstone> {
         this.expansionSetCode = "5ED";
 
         // {2}, {tap}: Target player puts the top two cards of his or her library into his or her graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MillTargetEffect(2), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(2), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

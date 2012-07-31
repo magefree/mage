@@ -35,7 +35,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.MillTargetEffect;
+import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -68,7 +68,7 @@ public class DrownerOfSecrets extends CardImpl<DrownerOfSecrets> {
         this.toughness = new MageInt(3);
 
         // Tap an untapped Merfolk you control: Target player puts the top card of his or her library into his or her graveyard.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new MillTargetEffect(1), new TapTargetCost(new TargetControlledPermanent(filter)));
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(1), new TapTargetCost(new TargetControlledPermanent(filter)));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
