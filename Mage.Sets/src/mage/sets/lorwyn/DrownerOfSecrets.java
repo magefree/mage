@@ -25,43 +25,60 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.sets.lorwyn;
 
 import java.util.UUID;
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.cards.CardImpl;
+import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.Constants.Zone;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.MillTargetEffect;
+import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.TargetPlayer;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
  * @author jeffwadsworth
  */
-public class Millstone extends CardImpl<Millstone> {
+public class DrownerOfSecrets extends CardImpl<DrownerOfSecrets> {
 
-    public Millstone(UUID ownerId) {
-        super(ownerId, 390, "Millstone", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "5ED";
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Merfolk you control");
 
-        // {2}, {tap}: Target player puts the top two cards of his or her library into his or her graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MillTargetEffect(2), new GenericManaCost(2));
-        ability.addCost(new TapSourceCost());
+    static {
+        filter.add(new SubtypePredicate("Merfolk"));
+        filter.add(Predicates.not(new TappedPredicate()));
+    }
+
+    public DrownerOfSecrets(UUID ownerId) {
+        super(ownerId, 58, "Drowner of Secrets", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
+        this.expansionSetCode = "LRW";
+        this.subtype.add("Merfolk");
+        this.subtype.add("Wizard");
+
+        this.color.setBlue(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(3);
+
+        // Tap an untapped Merfolk you control: Target player puts the top card of his or her library into his or her graveyard.
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new MillTargetEffect(1), new TapTargetCost(new TargetControlledPermanent(filter)));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 
-    public Millstone(final Millstone card) {
+    public DrownerOfSecrets(final DrownerOfSecrets card) {
         super(card);
     }
 
     @Override
-    public Millstone copy() {
-        return new Millstone(this);
+    public DrownerOfSecrets copy() {
+        return new DrownerOfSecrets(this);
     }
 }
