@@ -44,9 +44,7 @@ class VanishingEffect extends OneShotEffect<VanishingEffect> {
         if (p != null) {
             int amount = p.getCounters().getCount(CounterType.TIME);
             if (amount > 0) {
-                p.getCounters().removeCounter(CounterType.TIME, 1);
-            } else {
-                p.sacrifice(source.getSourceId(), game);
+                p.removeCounters(CounterType.TIME.createInstance(), game);
             }
             return true;
         }

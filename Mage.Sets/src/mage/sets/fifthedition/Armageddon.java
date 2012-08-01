@@ -25,49 +25,37 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.sets.fifthedition;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.ShroudAbility;
-import mage.abilities.keyword.VanishingAbility;
-import mage.abilities.keyword.VanishingTriggeredAbility;
+import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
-import mage.counters.CounterType;
+import mage.filter.common.FilterLandPermanent;
 
 /**
  *
  * @author Loki
  */
-public class Calciderm extends CardImpl<Calciderm> {
+public class Armageddon extends CardImpl<Armageddon> {
 
-    public Calciderm(UUID ownerId) {
-        super(ownerId, 23, "Calciderm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-        this.expansionSetCode = "PLC";
-        this.subtype.add("Beast");
+    public Armageddon(UUID ownerId) {
+        super(ownerId, 283, "Armageddon", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{W}");
+        this.expansionSetCode = "5ED";
 
         this.color.setWhite(true);
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
 
-        // Shroud
-        this.addAbility(ShroudAbility.getInstance());
-        // Vanishing 4
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(4))));
-        this.addAbility(new VanishingAbility());
-        this.addAbility(new VanishingTriggeredAbility());
+        // Destroy all lands.
+        this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterLandPermanent("lands")));
     }
 
-    public Calciderm(final Calciderm card) {
+    public Armageddon(final Armageddon card) {
         super(card);
     }
 
     @Override
-    public Calciderm copy() {
-        return new Calciderm(this);
+    public Armageddon copy() {
+        return new Armageddon(this);
     }
 }

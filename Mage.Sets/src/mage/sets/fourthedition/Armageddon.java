@@ -25,49 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planarchaos;
+package mage.sets.fourthedition;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.ShroudAbility;
-import mage.abilities.keyword.VanishingAbility;
-import mage.abilities.keyword.VanishingTriggeredAbility;
-import mage.cards.CardImpl;
-import mage.counters.CounterType;
 
 /**
  *
  * @author Loki
  */
-public class Calciderm extends CardImpl<Calciderm> {
+public class Armageddon extends mage.sets.fifthedition.Armageddon {
 
-    public Calciderm(UUID ownerId) {
-        super(ownerId, 23, "Calciderm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-        this.expansionSetCode = "PLC";
-        this.subtype.add("Beast");
-
-        this.color.setWhite(true);
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
-
-        // Shroud
-        this.addAbility(ShroudAbility.getInstance());
-        // Vanishing 4
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(4))));
-        this.addAbility(new VanishingAbility());
-        this.addAbility(new VanishingTriggeredAbility());
+    public Armageddon(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 255;
+        this.expansionSetCode = "4ED";
     }
 
-    public Calciderm(final Calciderm card) {
+    public Armageddon(final Armageddon card) {
         super(card);
     }
 
     @Override
-    public Calciderm copy() {
-        return new Calciderm(this);
+    public Armageddon copy() {
+        return new Armageddon(this);
     }
 }
