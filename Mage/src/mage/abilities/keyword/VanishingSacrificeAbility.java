@@ -8,12 +8,12 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
-public class VanishingTriggeredAbility extends TriggeredAbilityImpl<VanishingTriggeredAbility> {
-    public VanishingTriggeredAbility() {
+public class VanishingSacrificeAbility extends TriggeredAbilityImpl<VanishingSacrificeAbility> {
+    public VanishingSacrificeAbility() {
         super(Constants.Zone.BATTLEFIELD, new SacrificeSourceEffect());
     }
 
-    public VanishingTriggeredAbility(final VanishingTriggeredAbility ability) {
+    public VanishingSacrificeAbility(final VanishingSacrificeAbility ability) {
         super(ability);
     }
 
@@ -29,8 +29,8 @@ public class VanishingTriggeredAbility extends TriggeredAbilityImpl<VanishingTri
     }
 
     @Override
-    public VanishingTriggeredAbility copy() {
-        return new VanishingTriggeredAbility(this);
+    public VanishingSacrificeAbility copy() {
+        return new VanishingSacrificeAbility(this);
     }
 
     @Override

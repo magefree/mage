@@ -34,8 +34,8 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.ShroudAbility;
-import mage.abilities.keyword.VanishingAbility;
-import mage.abilities.keyword.VanishingTriggeredAbility;
+import mage.abilities.keyword.VanishingSacrificeAbility;
+import mage.abilities.keyword.VanishingUpkeepAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 
@@ -58,8 +58,8 @@ public class Calciderm extends CardImpl<Calciderm> {
         this.addAbility(ShroudAbility.getInstance());
         // Vanishing 4
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(4))));
-        this.addAbility(new VanishingAbility());
-        this.addAbility(new VanishingTriggeredAbility());
+        this.addAbility(new VanishingUpkeepAbility());
+        this.addAbility(new VanishingSacrificeAbility());
     }
 
     public Calciderm(final Calciderm card) {

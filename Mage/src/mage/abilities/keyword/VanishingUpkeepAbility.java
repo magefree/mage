@@ -8,18 +8,18 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-public class VanishingAbility extends BeginningOfUpkeepTriggeredAbility {
-    public VanishingAbility() {
+public class VanishingUpkeepAbility extends BeginningOfUpkeepTriggeredAbility {
+    public VanishingUpkeepAbility() {
         super(new VanishingEffect(), Constants.TargetController.YOU, false);
     }
 
-    public VanishingAbility(final VanishingAbility ability) {
+    public VanishingUpkeepAbility(final VanishingUpkeepAbility ability) {
         super(ability);
     }
 
     @Override
     public BeginningOfUpkeepTriggeredAbility copy() {
-        return new VanishingAbility(this);
+        return new VanishingUpkeepAbility(this);
     }
 
     @Override
