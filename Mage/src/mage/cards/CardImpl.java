@@ -170,7 +170,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
             e.printStackTrace();
         }
         ArrayList<String> rules = new ArrayList<String>();
-        rules.add("Exception occured in rulge generation");
+        rules.add("Exception occured in rules generation");
         return rules;
     }
 
