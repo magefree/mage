@@ -31,6 +31,7 @@ package mage.game.turn;
 import mage.Constants.PhaseStep;
 import mage.Constants.TurnPhase;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.players.Player;
 
 import java.io.Serializable;
@@ -118,6 +119,7 @@ public class Turn implements Serializable {
             if (game.isPaused() || game.isGameOver())
                 return;
             currentPhase = phase;
+            game.fireEvent(new GameEvent(GameEvent.EventType.PHASE_CHANGED, activePlayerId, null, activePlayerId));
             if (!game.getState().getTurnMods().skipPhase(activePlayerId, currentPhase.getType())) {
                 if (phase.play(game, activePlayerId)) {
                     //20091005 - 500.4/703.4n
@@ -168,8 +170,10 @@ public class Turn implements Serializable {
                     playExtraPhases(game, phase.getType());
                 }
             }
-            if (!currentPhase.equals(phase)) // phase was changed from the card
+            if (!currentPhase.equals(phase)) { // phase was changed from the card
+                game.fireEvent(new GameEvent(GameEvent.EventType.PHASE_CHANGED, activePlayerId, null, activePlayerId));
                 break;
+            }
         }
     }
 
@@ -208,6 +212,7 @@ public class Turn implements Serializable {
                 phase = new EndPhase();
         }
         currentPhase = phase;
+        game.fireEvent(new GameEvent(GameEvent.EventType.PHASE_CHANGED, activePlayerId, null, activePlayerId));
         phase.play(game, activePlayerId);
     }
 
@@ -238,6 +243,7 @@ public class Turn implements Serializable {
         Phase phase = new EndPhase();
         phase.setStep(new CleanupStep());
         currentPhase = phase;
+        game.fireEvent(new GameEvent(GameEvent.EventType.PHASE_CHANGED, activePlayerId, null, activePlayerId));
         //phase.play(game, activePlayerId);
     }
 
