@@ -101,7 +101,7 @@ public class SimulatedPlayer2 extends ComputerPlayer<SimulatedPlayer2> {
         }
 
         for (Ability a : allActions) {
-            System.out.println("ability=="+a);
+            //System.out.println("ability=="+a);
             if (a.getTargets().size() > 0) {
                 Player player = game.getPlayer(a.getFirstTarget());
                 if (player != null) {

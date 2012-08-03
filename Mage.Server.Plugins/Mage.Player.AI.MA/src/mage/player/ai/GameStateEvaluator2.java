@@ -62,7 +62,7 @@ public class GameStateEvaluator2 {
         int permanentScore = 0;
         try {
             for (Permanent permanent: game.getBattlefield().getAllActivePermanents(playerId)) {
-                permanentScore += 10 * evaluatePermanent(permanent, game);
+                permanentScore += evaluatePermanent(permanent, game);
             }
             for (Permanent permanent: game.getBattlefield().getAllActivePermanents(opponent.getId())) {
                 permanentScore -= evaluatePermanent(permanent, game);

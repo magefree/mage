@@ -55,6 +55,7 @@ import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 import mage.game.turn.*;
 import mage.player.ai.ma.optimizers.TreeOptimizer;
+import mage.player.ai.ma.optimizers.impl.DiscardCardOptimizer;
 import mage.player.ai.ma.optimizers.impl.EquipOptimizer;
 import mage.player.ai.ma.optimizers.impl.LevelUpOptimizer;
 import mage.player.ai.util.CombatInfo;
@@ -96,6 +97,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
     static {
         optimizers.add(new LevelUpOptimizer());
         optimizers.add(new EquipOptimizer());
+        optimizers.add(new DiscardCardOptimizer());
     }
 
     public ComputerPlayer6(String name, RangeOfInfluence range, int skill) {
