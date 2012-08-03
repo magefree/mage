@@ -149,6 +149,9 @@ public class Emblem implements CommandObject {
     public void adjustCosts(Ability ability, Game game) {}
 
     @Override
+    public void adjustTargets(Ability ability, Game game) {}
+
+    @Override
     public UUID getId() {
         return this.id;
     }

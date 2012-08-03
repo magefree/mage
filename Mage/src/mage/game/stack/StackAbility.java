@@ -296,6 +296,9 @@ public class StackAbility implements StackObject, Ability {
     public void adjustCosts(Ability ability, Game game) {}
 
     @Override
+    public void adjustTargets(Ability ability, Game game) {}
+
+    @Override
     public Costs<Cost> getOptionalCosts() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
