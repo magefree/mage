@@ -38,7 +38,7 @@ public class Rhox extends mage.sets.tenth.Rhox {
     public Rhox(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 112;
-        this.expansionSetCode = "NEM";
+        this.expansionSetCode = "NMS";
     }
 
     public Rhox(final Rhox card) {
