@@ -597,11 +597,13 @@ public class GamePanel extends javax.swing.JPanel {
 
     public void playMana(String message, GameView gameView) {
         updateGame(gameView);
+        DialogManager.getManager().fadeOut();
         this.feedbackPanel.getFeedback(FeedbackMode.CANCEL, message, gameView.getSpecial(), null);
     }
 
     public void playXMana(String message, GameView gameView) {
         updateGame(gameView);
+        DialogManager.getManager().fadeOut();
         this.feedbackPanel.getFeedback(FeedbackMode.CONFIRM, message, gameView.getSpecial(), null);
     }
 
@@ -610,6 +612,7 @@ public class GamePanel extends javax.swing.JPanel {
     }
 
     public void pickAbility(AbilityPickerView choices) {
+        DialogManager.getManager().fadeOut();
         this.abilityPicker.show(choices, MageFrame.getDesktop().getMousePosition());
     }
 
