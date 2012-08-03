@@ -42,6 +42,7 @@ import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 
 /**
+ *
  * @author nantuko
  */
 public class FlashbackAbility extends ActivatedAbilityImpl<FlashbackAbility> {
@@ -52,16 +53,6 @@ public class FlashbackAbility extends ActivatedAbilityImpl<FlashbackAbility> {
         this.usesStack = false;
         this.addEffect(new CreateDelayedTriggeredAbilityEffect(new FlashbackTriggeredAbility()));
     }
-
-//    @Override
-//    public boolean activate(Game game, boolean noMana) {
-//        Card card = game.getCard(sourceId);
-//        if (card != null) {
-//            getEffects().get(0).setTargetPointer(new FixedTarget(card.getId()));
-//            return super.activate(game, noMana);
-//        }
-//        return false;
-//    }
 
     public FlashbackAbility(final FlashbackAbility ability) {
         super(ability);
@@ -75,11 +66,13 @@ public class FlashbackAbility extends ActivatedAbilityImpl<FlashbackAbility> {
     @Override
     public String getRule() {
         StringBuilder sbRule = new StringBuilder("Flashback ");
+        boolean first = true;
         if (manaCosts.size() > 0) {
             sbRule.append(manaCosts.getText());
+            first = false;
         }
         if (costs.size() > 0) {
-            if (sbRule.length() > 0) {
+            if (first) {
                 sbRule.append(",");
             }
             sbRule.append(costs.getText());

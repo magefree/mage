@@ -162,6 +162,10 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
             logger.debug("activate failed - choice");
             return false;
         }
+        Card card = game.getCard(sourceId);
+        if (card != null) {
+            card.adjustTargets(this, game);
+        }
         //20100716 - 601.2b
         if (getTargets().size() > 0 && getTargets().chooseTargets(getEffects().get(0).getOutcome(), this.controllerId, this, game) == false) {
             logger.debug("activate failed - target");
@@ -182,7 +186,6 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
             }
         }
         //20100716 - 601.2e
-        Card card = game.getCard(sourceId);
         if (card != null) {
             card.adjustCosts(this, game);
             for (Ability ability : card.getAbilities()) {

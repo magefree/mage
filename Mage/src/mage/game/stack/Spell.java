@@ -380,6 +380,9 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
     public void adjustCosts(Ability ability, Game game) {}
 
     @Override
+    public void adjustTargets(Ability ability, Game game) {}
+
+    @Override
     public boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag) {
         throw new UnsupportedOperationException("Unsupported operation");
     }
@@ -474,4 +477,3 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
     @Override
     public void build() {}
 }
-

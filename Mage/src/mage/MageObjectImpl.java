@@ -147,6 +147,9 @@ public abstract class MageObjectImpl<T extends MageObjectImpl<T>> implements Mag
     public void adjustCosts(Ability ability, Game game) {}
 
     @Override
+    public void adjustTargets(Ability ability, Game game) {}
+
+    @Override
     public boolean hasSubtype(String value) {
         if (value == null) {
             return false;
