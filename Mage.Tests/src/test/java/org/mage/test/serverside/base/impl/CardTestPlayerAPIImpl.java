@@ -358,6 +358,39 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
+     *
+     * @param player
+     * @param cardName
+     * @param ability
+     * @param flag true if creature should contain ability, false otherwise
+     * @throws AssertionError
+     */
+    public void assertAbility(Player player, String cardName, Ability ability, boolean flag) throws AssertionError {
+        int count = 0;
+        Permanent found = null;
+        for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents(player.getId())) {
+            if (permanent.getName().equals(cardName)) {
+                found = permanent;
+                count++;
+            }
+        }
+
+        Assert.assertNotNull("There is no such permanent under player's control, player=" + player.getName() +
+                ", cardName=" + cardName, found);
+
+        Assert.assertTrue("There is more than one such permanent under player's control, player=" + player.getName() +
+                ", cardName=" + cardName, count == 1);
+
+        if (flag) {
+            Assert.assertTrue("No such ability=" + ability.toString() + ", player=" + player.getName() +
+                    ", cardName" + cardName, found.getAbilities().contains(ability));
+        } else {
+            Assert.assertFalse("Card shouldn't have such ability=" + ability.toString() + ", player=" + player.getName() +
+                    ", cardName" + cardName, found.getAbilities().contains(ability));
+        }
+    }
+
+    /**
      * Assert permanent count under player's control.
      *
      * @param player {@link Player} which permanents should be counted.
