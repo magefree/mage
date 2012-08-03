@@ -48,7 +48,6 @@ import mage.client.dialog.*;
 import mage.client.game.FeedbackPanel.FeedbackMode;
 import mage.client.plugins.adapters.MageActionCallback;
 import mage.client.plugins.impl.Plugins;
-import mage.client.util.AudioManager;
 import mage.client.util.Config;
 import mage.client.util.GameManager;
 import mage.client.util.PhaseManager;
@@ -408,7 +407,7 @@ public class GamePanel extends javax.swing.JPanel {
             this.txtPhase.setText("");
         }
         if (game.getPhase() != null && game.getPhase().toString().equals("End") && game.getStep().toString().equals("End Turn")) {
-            AudioManager.playEndTurn();
+            //AudioManager.playEndTurn();
         }
 
         if (game.getStep() != null)
