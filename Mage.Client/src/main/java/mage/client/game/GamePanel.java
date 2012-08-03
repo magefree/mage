@@ -48,7 +48,6 @@ import mage.client.dialog.*;
 import mage.client.game.FeedbackPanel.FeedbackMode;
 import mage.client.plugins.adapters.MageActionCallback;
 import mage.client.plugins.impl.Plugins;
-import mage.client.util.AudioManager;
 import mage.client.util.Config;
 import mage.client.util.GameManager;
 import mage.client.util.PhaseManager;
@@ -408,7 +407,7 @@ public class GamePanel extends javax.swing.JPanel {
             this.txtPhase.setText("");
         }
         if (game.getPhase() != null && game.getPhase().toString().equals("End") && game.getStep().toString().equals("End Turn")) {
-            AudioManager.playEndTurn();
+            //AudioManager.playEndTurn();
         }
 
         if (game.getStep() != null)
@@ -598,11 +597,13 @@ public class GamePanel extends javax.swing.JPanel {
 
     public void playMana(String message, GameView gameView) {
         updateGame(gameView);
+        DialogManager.getManager().fadeOut();
         this.feedbackPanel.getFeedback(FeedbackMode.CANCEL, message, gameView.getSpecial(), null);
     }
 
     public void playXMana(String message, GameView gameView) {
         updateGame(gameView);
+        DialogManager.getManager().fadeOut();
         this.feedbackPanel.getFeedback(FeedbackMode.CONFIRM, message, gameView.getSpecial(), null);
     }
 
@@ -611,6 +612,7 @@ public class GamePanel extends javax.swing.JPanel {
     }
 
     public void pickAbility(AbilityPickerView choices) {
+        DialogManager.getManager().fadeOut();
         this.abilityPicker.show(choices, MageFrame.getDesktop().getMousePosition());
     }
 

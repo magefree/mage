@@ -8,6 +8,7 @@ import mage.abilities.StaticAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -105,13 +106,18 @@ class MadnessPlayEffect extends AsThoughEffectImpl<MadnessPlayEffect> {
             if (card != null && card.getOwnerId().equals(source.getControllerId()) && game.getState().getZone(source.getSourceId()) == Constants.Zone.EXILED) {
                 Object object = game.getState().getValue("madness_" + card.getId());
                 if (object != null && object.equals(true)) {
+                    Object alfreadyConfirmed = game.getState().getValue("madness_ok_" + card.getId());
+                    if (alfreadyConfirmed != null) {
+                        return true;
+                    }
                     Player player = game.getPlayer(card.getOwnerId());
                     String message = "Cast " + card.getName() + " by its madness cost?";
                     if (player != null && player.chooseUse(Constants.Outcome.Benefit, message, game)) {
-                        if (cost.pay(card.getSpellAbility(), game, sourceId, player.getId(), false)) {
-                            card.getSpellAbility().getManaCostsToPay().clear();
-                            return true;
-                        }
+                        Cost costToPay = cost.copy();
+                        card.getSpellAbility().getManaCostsToPay().clear();
+                        card.getSpellAbility().getManaCostsToPay().add((ManaCost)costToPay);
+                        game.getState().setValue("madness_ok_" + card.getId(), true);
+                        return true;
                     }
                 }
             }
@@ -229,11 +235,12 @@ class MadnessCleanUpWatcher extends WatcherImpl<MadnessCleanUpWatcher> {
             for (Card card : game.getExile().getAllCards(game)) {
                 Object object = game.getState().getValue("madness_" + card.getId());
                 if (object != null && object.equals(true)) {
-                    game.informPlayers("Madness cost wasn't paied. " + card.getName() + " was put to its owner's graveyard.");
+                    game.informPlayers("Madness cost wasn't payed. " + card.getName() + " was put to its owner's graveyard.");
                     // reset
                     game.getState().setValue("madness_" + card.getId(), null);
+                    game.getState().setValue("madness_ok_" + card.getId(), null);
+                    card.moveToZone(Constants.Zone.GRAVEYARD, sourceId, game, true);
                 }
-                card.moveToZone(Constants.Zone.GRAVEYARD, sourceId, game, true);
             }
         }
     }

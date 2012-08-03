@@ -211,6 +211,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
                 return false;
             }
         }
+
         //20100716 - 601.2g
         if (!costs.pay(this, game, sourceId, controllerId, noMana)) {
             logger.debug("activate failed - non mana costs");

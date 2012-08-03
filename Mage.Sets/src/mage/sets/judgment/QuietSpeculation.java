@@ -35,6 +35,8 @@ import mage.abilities.effects.SearchEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
@@ -103,11 +105,16 @@ class SearchLibraryPutInGraveEffect extends SearchEffect<SearchLibraryPutInGrave
         }
         if (player.searchLibrary(target, game)) {
             if (target.getTargets().size() > 0) {
+                Cards cards = new CardsImpl();
                 for (UUID cardId: (List<UUID>)target.getTargets()) {
                     Card card = player.getLibrary().remove(cardId, game);
                     if (card != null){
                         card.moveToZone(Constants.Zone.GRAVEYARD, source.getId(), game, false);
+                        cards.add(card);
                     }
+                }
+                if (cards.size() > 0) {
+                    player.revealCards("Quiet Speculation", cards, game);
                 }
             }
             player.shuffleLibrary(game);

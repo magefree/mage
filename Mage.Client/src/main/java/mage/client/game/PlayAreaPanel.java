@@ -97,9 +97,9 @@ public class PlayAreaPanel extends javax.swing.JPanel {
     public final void init(PlayerView player, BigCard bigCard, UUID gameId) {
         this.playerPanel.init(gameId, player.getPlayerId(), bigCard);
         this.battlefieldPanel.init(gameId, bigCard);
+        this.gameId = gameId;
         if (MageFrame.getSession().isTestMode()) {
             this.playerId = player.getPlayerId();
-            this.gameId = gameId;
             this.btnCheat.setVisible(true);
         }
         else {

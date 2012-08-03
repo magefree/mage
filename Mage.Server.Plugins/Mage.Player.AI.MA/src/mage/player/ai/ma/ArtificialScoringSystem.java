@@ -119,9 +119,9 @@ public class ArtificialScoringSystem {
         if (permanent.getCardType().contains(Constants.CardType.CREATURE)) {
             return -100;
         } else if (permanent.getCardType().contains(Constants.CardType.LAND)) {
-            return -10;
+            return -1;
         } else {
-            return -50;
+            return -2;
         }
     }
 
