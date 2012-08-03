@@ -33,8 +33,6 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -50,7 +48,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.BeastToken;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.WurmToken;
 import mage.players.Player;
 
 /**
@@ -103,8 +101,9 @@ class GarrukPrimalHunterEffect extends OneShotEffect<GarrukPrimalHunterEffect> {
         if (player != null) {
             int amount = 0;
             for (Permanent p : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), source.getControllerId(), game)) {
-                if (p.getPower().getValue() > amount)
+                if (p.getPower().getValue() > amount) {
                     amount = p.getPower().getValue();
+                }
             }
             player.drawCards(amount, game);
             return true;
@@ -115,19 +114,6 @@ class GarrukPrimalHunterEffect extends OneShotEffect<GarrukPrimalHunterEffect> {
     @Override
     public GarrukPrimalHunterEffect copy() {
         return new GarrukPrimalHunterEffect(this);
-    }
-
-}
-
-class WurmToken extends Token {
-
-    public WurmToken() {
-        super("Wurm", "a 6/6 green Wurm creature token");
-        cardType.add(CardType.CREATURE);
-        color = ObjectColor.GREEN;
-        subtype.add("Wurm");
-        power = new MageInt(6);
-        toughness = new MageInt(6);
     }
 
 }
