@@ -49,7 +49,7 @@ public abstract class IntComparePredicate<T extends MageObject> implements Predi
 
     @Override
     public final boolean apply(T input, Game game) {
-        int inputValue = input.getPower().getValue();
+        int inputValue = getInputValue(input);
         switch (type) {
             case Equal:
                 if (inputValue != value) {
