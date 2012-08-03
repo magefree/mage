@@ -235,12 +235,12 @@ class MadnessCleanUpWatcher extends WatcherImpl<MadnessCleanUpWatcher> {
             for (Card card : game.getExile().getAllCards(game)) {
                 Object object = game.getState().getValue("madness_" + card.getId());
                 if (object != null && object.equals(true)) {
-                    game.informPlayers("Madness cost wasn't paied. " + card.getName() + " was put to its owner's graveyard.");
+                    game.informPlayers("Madness cost wasn't payed. " + card.getName() + " was put to its owner's graveyard.");
                     // reset
                     game.getState().setValue("madness_" + card.getId(), null);
                     game.getState().setValue("madness_ok_" + card.getId(), null);
+                    card.moveToZone(Constants.Zone.GRAVEYARD, sourceId, game, true);
                 }
-                card.moveToZone(Constants.Zone.GRAVEYARD, sourceId, game, true);
             }
         }
     }
