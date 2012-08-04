@@ -27,23 +27,27 @@
  */
 package mage.sets.magic2013;
 
-import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
+import java.util.UUID;
+
 /**
  *
  * @author North
  */
 public class Mutilate extends CardImpl<Mutilate> {
+
+    private static final String ruleText = "All creatures get -1/-1 until end of turn for each Swamp you control";
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Swamp you control");
 
@@ -60,7 +64,9 @@ public class Mutilate extends CardImpl<Mutilate> {
 
         // All creatures get -1/-1 until end of turn for each Swamp you control.
         PermanentsOnBattlefieldCount count = new PermanentsOnBattlefieldCount(filter, -1);
-        this.getSpellAbility().addEffect(new BoostAllEffect(count, count, Duration.EndOfTurn));
+        ContinuousEffect effect = new BoostAllEffect(count, count, Duration.EndOfTurn);
+        effect.overrideRuleText(ruleText);
+        this.getSpellAbility().addEffect(effect);
     }
 
     public Mutilate(final Mutilate card) {
