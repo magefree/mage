@@ -50,7 +50,7 @@ public class CantBlockAbility extends SimpleStaticAbility implements MageSinglet
 class CantBlockEffect extends RestrictionEffect<CantBlockEffect> implements MageSingleton {
 
     public CantBlockEffect() {
-        super(Duration.WhileOnBattlefield);
+        super(Duration.EndOfGame);
     }
 
     public CantBlockEffect(final CantBlockEffect effect) {
