@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
 public class DevoutLightcaster extends CardImpl<DevoutLightcaster> {
 
     private static final FilterCard filterProtection = new FilterCard("Black");
-    private static final FilterPermanent filterTarget = new FilterPermanent("Black");
+    private static final FilterPermanent filterTarget = new FilterPermanent("black permanent");
 
     static {
         filterProtection.add(new ColorPredicate(ObjectColor.BLACK));
