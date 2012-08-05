@@ -69,7 +69,7 @@ Mirrodin Besieged|MBS|
 MTGO Vanguard|VGO|
 New Phyrexia|NPH|
 Ninth Edition|9ED|
-Nemesis|NEM|
+Nemesis|NMS|
 Odyssey|ODY|
 Onslaught|ONS|
 Portal Second Age|PO2|
