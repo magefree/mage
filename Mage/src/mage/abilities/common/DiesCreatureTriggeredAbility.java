@@ -9,6 +9,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  * @author North
@@ -54,7 +55,11 @@ public class DiesCreatureTriggeredAbility extends TriggeredAbilityImpl<DiesCreat
 
             if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
                 Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
+                System.out.println("The permanent in the trigger is " + permanent.getName());
                 if (permanent != null && filter.match(permanent, sourceId, controllerId, game)) {
+                    for (Effect effect : this.getEffects()) {
+                        effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                    }
                     return true;
                 }
             }
