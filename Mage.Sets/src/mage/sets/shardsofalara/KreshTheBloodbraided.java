@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
 public class KreshTheBloodbraided extends CardImpl<KreshTheBloodbraided> {
 
     public KreshTheBloodbraided(UUID ownerId) {
-        super(ownerId, 178, "Kresh the Bloodbraided", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}");
+        super(ownerId, 178, "Kresh the Bloodbraided", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{B}{R}{G}");
         this.expansionSetCode = "ALA";
         this.supertype.add("Legendary");
         this.subtype.add("Human");
@@ -57,8 +57,8 @@ public class KreshTheBloodbraided extends CardImpl<KreshTheBloodbraided> {
         this.color.setRed(true);
         this.color.setGreen(true);
         this.color.setBlack(true);
-        this.power = new MageInt(7);
-        this.toughness = new MageInt(7);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
         // Whenever another creature dies, you may put X +1/+1 counters on Kresh the Bloodbraided, where X is that creature's power.
         this.addAbility(new DiesCreatureTriggeredAbility(new KreshTheBloodbraidedEffect(), true, true));
