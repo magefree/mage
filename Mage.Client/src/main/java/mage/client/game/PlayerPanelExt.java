@@ -42,7 +42,6 @@ import mage.client.cards.BigCard;
 import mage.client.components.HoverButton;
 import mage.client.components.MageRoundPane;
 import mage.client.components.ext.dlg.DialogManager;
-import mage.client.dialog.ShowCardsDialog;
 import mage.client.plugins.adapters.MageActionCallback;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.CardsViewUtil;
@@ -82,7 +81,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private Session session;
     private PlayerView player;
 
-    private ShowCardsDialog graveyard;
+    //private ShowCardsDialog graveyard;
     private BigCard bigCard;
 
     private static final int AVATAR_COUNT = 77;
@@ -512,11 +511,11 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     }
 
     private void btnGraveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraveActionPerformed
-        if (graveyard == null) {
+        /*if (graveyard == null) {
             graveyard = new ShowCardsDialog();
-        }
+        }*/
         //graveyard.loadCards(player.getName() + " graveyard", player.getGraveyard(), bigCard, Config.dimensions, gameId, false);
-        DialogManager.getManager().showChoiceDialog(CardsViewUtil.convertSimple(player.getGraveyard()), bigCard, gameId);
+        DialogManager.getManager(gameId).showChoiceDialog(CardsViewUtil.convertSimple(player.getGraveyard()), bigCard, gameId);
     }
 
     private void btnCheatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheatActionPerformed

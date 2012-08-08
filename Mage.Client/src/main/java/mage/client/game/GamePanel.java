@@ -225,9 +225,9 @@ public class GamePanel extends javax.swing.JPanel {
         int height = pnlBattlefield.getHeight();
         phasesContainer.setPreferredSize(new Dimension(X_PHASE_WIDTH, height));
 
-        DialogManager.getManager().setScreenWidth(rect.width);
-        DialogManager.getManager().setScreenHeight(rect.height);
-        DialogManager.getManager().setBounds(0, 0, rect.width, rect.height);
+        DialogManager.getManager(gameId).setScreenWidth(rect.width);
+        DialogManager.getManager(gameId).setScreenHeight(rect.height);
+        DialogManager.getManager(gameId).setBounds(0, 0, rect.width, rect.height);
     }
 
     public synchronized void showGame(UUID gameId, UUID playerId) {
@@ -597,13 +597,13 @@ public class GamePanel extends javax.swing.JPanel {
 
     public void playMana(String message, GameView gameView) {
         updateGame(gameView);
-        DialogManager.getManager().fadeOut();
+        DialogManager.getManager(gameId).fadeOut();
         this.feedbackPanel.getFeedback(FeedbackMode.CANCEL, message, gameView.getSpecial(), null);
     }
 
     public void playXMana(String message, GameView gameView) {
         updateGame(gameView);
-        DialogManager.getManager().fadeOut();
+        DialogManager.getManager(gameId).fadeOut();
         this.feedbackPanel.getFeedback(FeedbackMode.CONFIRM, message, gameView.getSpecial(), null);
     }
 
@@ -612,7 +612,7 @@ public class GamePanel extends javax.swing.JPanel {
     }
 
     public void pickAbility(AbilityPickerView choices) {
-        DialogManager.getManager().fadeOut();
+        DialogManager.getManager(gameId).fadeOut();
         this.abilityPicker.show(choices, MageFrame.getDesktop().getMousePosition());
     }
 
@@ -1143,7 +1143,7 @@ public class GamePanel extends javax.swing.JPanel {
     public void installComponents() {
         jLayeredPane.setOpaque(false);
         jLayeredPane.add(abilityPicker);
-        jLayeredPane.add(DialogManager.getManager(), JLayeredPane.MODAL_LAYER, 0);
+        jLayeredPane.add(DialogManager.getManager(gameId), JLayeredPane.MODAL_LAYER, 0);
         abilityPicker.setVisible(false);
     }
 

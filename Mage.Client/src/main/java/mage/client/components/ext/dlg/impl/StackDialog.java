@@ -33,6 +33,8 @@ public class StackDialog extends IDialogPanel {
 
     private JLayeredPane jLayeredPane;
     private FeedbackPanel feedbackPanel;
+    
+    private UUID gameId;
 
     private class CustomLabel extends JLabel {
 
@@ -57,6 +59,7 @@ public class StackDialog extends IDialogPanel {
     public StackDialog(DlgParams params) {
         super(params);
         this.feedbackPanel = params.feedbackPanel;
+        this.gameId = params.gameId;
         initialize();
         displayStack(params.getCards(), params.gameId, params.bigCard);
     }
@@ -145,7 +148,7 @@ public class StackDialog extends IDialogPanel {
             jButtonAccept.setObserver(new Command() {
                 @Override
                 public void execute() {
-                    DialogManager.getManager().fadeOut((DialogContainer)getParent());
+                    DialogManager.getManager(gameId).fadeOut((DialogContainer)getParent());
                     //GameManager.getInputControl().getInput().selectButtonOK();
                     StackDialog.this.feedbackPanel.doClick();
                 }
@@ -168,7 +171,7 @@ public class StackDialog extends IDialogPanel {
             jButtonResponse.setObserver(new Command() {
                 @Override
                 public void execute() {
-                    DialogManager.getManager().fadeOut((DialogContainer)getParent());
+                    DialogManager.getManager(gameId).fadeOut((DialogContainer)getParent());
                 }
                 private static final long serialVersionUID = 1L;
             });

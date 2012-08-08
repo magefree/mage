@@ -190,10 +190,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         initComponents();
         setSize(1024, 768);
         SettingsManager.getInstance().setScreenWidthAndHeight(1024, 768);
-        DialogManager.getManager().setScreenWidth(1024);
-        DialogManager.getManager().setScreenHeight(768);
-        DialogManager.getManager().setBounds(0, 0, 1024, 768);
-        DialogManager.getManager().setVisible(false);
+        DialogManager.updateParams(768, 1024, false);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         session = new SessionImpl(this);

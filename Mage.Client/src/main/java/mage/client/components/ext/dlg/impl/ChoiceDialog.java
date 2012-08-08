@@ -37,6 +37,7 @@ public class ChoiceDialog extends IDialogPanel {
     private JButton jButtonSort = null;
 
     private CardsView cards;
+    private UUID gameId;
 
     private int page = 1;
     private int maxPages;
@@ -57,6 +58,7 @@ public class ChoiceDialog extends IDialogPanel {
     public ChoiceDialog(DlgParams params) {
         super(params);
         this.params = params;
+        this.gameId = params.gameId;
 
         cards = params.getCards();
         isOptional = params.isOptional();
@@ -171,7 +173,7 @@ public class ChoiceDialog extends IDialogPanel {
 
             jButtonOK.setObserver(new Command() {
                 public void execute() {
-                    DialogManager.getManager().fadeOut((DialogContainer) getParent());
+                    DialogManager.getManager(gameId).fadeOut((DialogContainer) getParent());
                 }
             });
         }
@@ -328,7 +330,7 @@ public class ChoiceDialog extends IDialogPanel {
                 private static final long serialVersionUID = -567322540616089486L;
 
                 public void execute() {
-                    DialogManager.getManager().fadeOut((DialogContainer) getParent());
+                    DialogManager.getManager(gameId).fadeOut((DialogContainer) getParent());
                     /*
                     try {
                         ConnectionManager.sendAddChosenCard(null);
