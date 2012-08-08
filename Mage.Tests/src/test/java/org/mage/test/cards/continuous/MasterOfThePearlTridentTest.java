@@ -16,12 +16,20 @@ public class MasterOfThePearlTridentTest extends CardTestPlayerBase {
         addCard(Constants.Zone.HAND, playerA, "Master of the Pearl Trident");
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Merfolk of the Pearl Trident");
 
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Llanowar Elves");
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Island");
+
         castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Master of the Pearl Trident");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        attack(3, playerA, "Merfolk of the Pearl Trident");
+        block(3, playerB, "Llanowar Elves", "Merfolk of the Pearl Trident");
+
+        setStopAt(3, Constants.PhaseStep.END_TURN);
         execute();
 
+
         assertPermanentCount(playerA, "Master of the Pearl Trident", 1);
+        assertLife(playerB, 18);
         assertPowerToughness(playerA, "Merfolk of the Pearl Trident", 2, 2);
         assertAbility(playerA, "Merfolk of the Pearl Trident", new IslandwalkAbility(), true);
     }
@@ -34,6 +42,7 @@ public class MasterOfThePearlTridentTest extends CardTestPlayerBase {
 
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Swamp", 3);
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Llanowar Elves");
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Island");
         addCard(Constants.Zone.HAND, playerB, "Murder");
 
         castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Master of the Pearl Trident");
