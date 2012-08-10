@@ -36,14 +36,19 @@ import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetOpponentEffect;
+import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.filter.FilterCard;
+import mage.game.Game;
+import mage.players.Player;
+import mage.target.TargetCard;
 import mage.target.TargetPlayer;
 
 /**
  *
  * @author jeffwadsworth
-
+ *
  */
 public class ThrullSurgeon extends CardImpl<ThrullSurgeon> {
 
@@ -57,7 +62,7 @@ public class ThrullSurgeon extends CardImpl<ThrullSurgeon> {
         this.toughness = new MageInt(1);
 
         // {1}{B}, Sacrifice Thrull Surgeon: Look at target player's hand and choose a card from it. That player discards that card. Activate this ability only any time you could cast a sorcery.
-        Ability ability = new ActivateAsSorceryActivatedAbility(Constants.Zone.BATTLEFIELD, new DiscardCardYouChooseTargetOpponentEffect(), new ManaCostsImpl("{1}{B}"));
+        Ability ability = new ActivateAsSorceryActivatedAbility(Constants.Zone.BATTLEFIELD, new ThrullSurgeonEffect(), new ManaCostsImpl("{1}{B}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
@@ -70,5 +75,42 @@ public class ThrullSurgeon extends CardImpl<ThrullSurgeon> {
     @Override
     public ThrullSurgeon copy() {
         return new ThrullSurgeon(this);
+    }
+}
+
+class ThrullSurgeonEffect extends OneShotEffect<ThrullSurgeonEffect> {
+
+    public ThrullSurgeonEffect() {
+        super(Constants.Outcome.Discard);
+        staticText = "Target player reveals his or her hand. You choose a card from it. That player discards that card";
+    }
+
+    public ThrullSurgeonEffect(final ThrullSurgeonEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getFirstTarget());
+        if (player != null) {
+            player.revealCards("Discard", player.getHand(), game);
+            Player you = game.getPlayer(source.getControllerId());
+            if (you != null) {
+                TargetCard target = new TargetCard(Constants.Zone.PICK, new FilterCard());
+                target.setRequired(true);
+                if (you.choose(Constants.Outcome.Benefit, player.getHand(), target, game)) {
+                    Card card = player.getHand().get(target.getFirstTarget(), game);
+                    if (card != null) {
+                        return player.discard(card, source, game);
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public ThrullSurgeonEffect copy() {
+        return new ThrullSurgeonEffect(this);
     }
 }
