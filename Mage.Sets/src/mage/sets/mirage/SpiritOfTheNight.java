@@ -27,23 +27,22 @@
  */
 package mage.sets.mirage;
 
-import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.SourceMatchesFilterCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.*;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
+import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -84,7 +83,7 @@ public class SpiritOfTheNight extends CardImpl<SpiritOfTheNight> {
         this.addAbility(new ProtectionAbility(filter));
         
         // Spirit of the Night has first strike as long as it's attacking.
-        ConditionalContinousEffect effect = new ConditionalContinousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), new SpiritOfTheNightCondition(), rule);
+        ConditionalContinousEffect effect = new ConditionalContinousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), new SourceMatchesFilterCondition(new FilterAttackingCreature()), rule);
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect));
     }
 
@@ -95,17 +94,5 @@ public class SpiritOfTheNight extends CardImpl<SpiritOfTheNight> {
     @Override
     public SpiritOfTheNight copy() {
         return new SpiritOfTheNight(this);
-    }
-}
-
-class SpiritOfTheNightCondition implements Condition {
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent spiritOfTheNight = game.getPermanent(source.getSourceId());
-        if (spiritOfTheNight.isAttacking()) {
-            return true;
-        }
-        return false;
     }
 }
