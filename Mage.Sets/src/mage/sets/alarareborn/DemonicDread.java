@@ -25,28 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.sets.alarareborn;
 
 import java.util.UUID;
+import mage.Constants;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.abilities.effects.common.CantBlockTargetEffect;
+import mage.abilities.keyword.CascadeAbility;
+import mage.cards.CardImpl;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author North
+ * @author jeffwadsworth
+ *
  */
-public class SealOfDoom extends mage.sets.dissension.SealOfDoom {
+public class DemonicDread extends CardImpl<DemonicDread> {
 
-    public SealOfDoom(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 70;
-        this.expansionSetCode = "NMS";
+    public DemonicDread(UUID ownerId) {
+        super(ownerId, 38, "Demonic Dread", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{R}");
+        this.expansionSetCode = "ARB";
+
+        this.color.setRed(true);
+        this.color.setBlack(true);
+
+        // Cascade
+        this.addAbility(new CascadeAbility());
+
+        // Target creature can't block this turn.
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addEffect(new CantBlockTargetEffect(Constants.Duration.EndOfTurn));
+
     }
 
-    public SealOfDoom(final SealOfDoom card) {
+    public DemonicDread(final DemonicDread card) {
         super(card);
     }
 
     @Override
-    public SealOfDoom copy() {
-        return new SealOfDoom(this);
+    public DemonicDread copy() {
+        return new DemonicDread(this);
     }
 }

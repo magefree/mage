@@ -10,6 +10,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -18,15 +20,23 @@ import java.util.UUID;
 public class DialogManager extends JComponent implements MouseListener,
         MouseMotionListener {
 
-    private static DialogManager dialogManager = null;
+    private static Map<UUID, DialogManager> dialogManagers = new HashMap<UUID, DialogManager>();
     //private static final Logger log = Logger.getLogger(DialogManager.class);
 
-    public static DialogManager getManager() {
-        if (dialogManager == null) {
-            dialogManager = new DialogManager();
-            dialogManager.setVisible(true);
+    public static DialogManager getManager(UUID gameId) {
+        if (!dialogManagers.containsKey(gameId)) {
+            synchronized (dialogManagers) {
+                if (!dialogManagers.containsKey(gameId)) {
+                    DialogManager dialogManager = new DialogManager();
+                    dialogManager.setScreenWidth(768);
+                    dialogManager.setScreenHeight(1024);
+                    dialogManager.setBounds(0, 0, 768, 1024);
+                    dialogManager.setVisible(false);
+                    dialogManagers.put(gameId, dialogManager);
+                }
+            }
         }
-        return dialogManager;
+        return dialogManagers.get(gameId);
     }
 
     public enum MTGDialogs {
@@ -57,6 +67,16 @@ public class DialogManager extends JComponent implements MouseListener,
 
     public void setScreenWidth(int screen_width) {
         this.screen_width = screen_width;
+    }
+
+    public static void updateParams(int width, int height, boolean isVisible) {
+        synchronized (dialogManagers) {
+            for (DialogManager dialogManager : dialogManagers.values()) {
+                dialogManager.setScreenWidth(width);
+                dialogManager.setScreenHeight(height);
+                dialogManager.setBounds(0, 0, width, height);
+            }
+        }
     }
 
     public void setScreenHeight(int screen_height) {

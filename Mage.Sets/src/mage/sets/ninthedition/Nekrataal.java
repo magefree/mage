@@ -25,56 +25,64 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2013;
-
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.common.continious.BoostAllEffect;
-import mage.cards.CardImpl;
-import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
+package mage.sets.ninthedition;
 
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.ObjectColor;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.keyword.FirstStrikeAbility;
+import mage.cards.CardImpl;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author North
+ * @author jeffwadsworth
+ *
  */
-public class Mutilate extends CardImpl<Mutilate> {
+public class Nekrataal extends CardImpl<Nekrataal> {
 
-    private static final String ruleText = "All creatures get -1/-1 until end of turn for each Swamp you control";
-
-    private static final FilterLandPermanent filter = new FilterLandPermanent("Swamp you control");
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("nonartifact, nonblack creature");
 
     static {
-        filter.add(new SubtypePredicate("Swamp"));
-        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
+        filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
+        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
     }
 
-    public Mutilate(UUID ownerId) {
-        super(ownerId, 102, "Mutilate", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
-        this.expansionSetCode = "M13";
+    public Nekrataal(UUID ownerId) {
+        super(ownerId, 149, "Nekrataal", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
+        this.expansionSetCode = "9ED";
+        this.subtype.add("Human");
+        this.subtype.add("Assassin");
 
         this.color.setBlack(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-        // All creatures get -1/-1 until end of turn for each Swamp you control.
-        PermanentsOnBattlefieldCount count = new PermanentsOnBattlefieldCount(filter, -1);
-        ContinuousEffect effect = new BoostAllEffect(count, count, Duration.EndOfTurn);
-        effect.overrideRuleText(ruleText);
-        this.getSpellAbility().addEffect(effect);
+        // First strike
+        this.addAbility(FirstStrikeAbility.getInstance());
+
+        // When Nekrataal enters the battlefield, destroy target nonartifact, nonblack creature. That creature can't be regenerated.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(true));
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
+
     }
 
-    public Mutilate(final Mutilate card) {
+    public Nekrataal(final Nekrataal card) {
         super(card);
     }
 
     @Override
-    public Mutilate copy() {
-        return new Mutilate(this);
+    public Nekrataal copy() {
+        return new Nekrataal(this);
     }
 }

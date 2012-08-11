@@ -42,6 +42,7 @@ import mage.players.Player;
 import mage.players.PlayerList;
 import mage.target.common.TargetDefender;
 import mage.util.Copyable;
+import mage.util.trace.TraceUtil;
 
 import java.io.Serializable;
 import java.util.*;
@@ -210,6 +211,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                 }
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, defenderId, defenderId));
             }
+            TraceUtil.traceCombatIfNeeded(game, this);
         }
     }
 

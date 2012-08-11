@@ -25,28 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.sets.shadowmoor;
 
 import java.util.UUID;
+import mage.Constants;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
+import mage.abilities.keyword.DoubleStrikeAbility;
+import mage.cards.CardImpl;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
- * @author North
- */
-public class SealOfDoom extends mage.sets.dissension.SealOfDoom {
+ * @author jeffwadsworth
 
-    public SealOfDoom(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 70;
-        this.expansionSetCode = "NMS";
+ */
+public class RageReflection extends CardImpl<RageReflection> {
+
+    public RageReflection(UUID ownerId) {
+        super(ownerId, 104, "Rage Reflection", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}{R}");
+        this.expansionSetCode = "SHM";
+
+        this.color.setRed(true);
+
+        // Creatures you control have double strike.
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Constants.Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false)));
     }
 
-    public SealOfDoom(final SealOfDoom card) {
+    public RageReflection(final RageReflection card) {
         super(card);
     }
 
     @Override
-    public SealOfDoom copy() {
-        return new SealOfDoom(this);
+    public RageReflection copy() {
+        return new RageReflection(this);
     }
 }

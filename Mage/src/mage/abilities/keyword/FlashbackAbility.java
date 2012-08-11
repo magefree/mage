@@ -40,6 +40,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
+import mage.target.Target;
 
 /**
  *
@@ -106,6 +107,9 @@ class FlashbackEffect extends OneShotEffect<FlashbackEffect> {
                 card.getSpellAbility().clear();
                 int amount = source.getManaCostsToPay().getX();
                 card.getSpellAbility().getManaCostsToPay().setX(amount);
+                for (Target target : card.getSpellAbility().getTargets()) {
+                    target.setRequired(true);
+                }
                 return controller.cast(card.getSpellAbility(), game, true);
             }
         }

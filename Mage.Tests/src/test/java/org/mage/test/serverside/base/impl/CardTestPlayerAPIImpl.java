@@ -362,7 +362,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param player
      * @param cardName
      * @param ability
-     * @param flag true if creature should contain ability, false otherwise
+     * @param flag true if creature should contain ability, false if it should NOT contain it instead
      * @throws AssertionError
      */
     public void assertAbility(Player player, String cardName, Ability ability, boolean flag) throws AssertionError {

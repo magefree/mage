@@ -105,11 +105,14 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Elite Vanguard");
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Arbor Elf");
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Assault Griffin");
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Sky Ruin Drake");
 
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Angelic Wall");
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Air Elemental");
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Llanowar Elves");
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Sentinel Spider");
 
+        // attacker vs. blocker:
         // non flying vs. flying
         attack(2, playerB, "Elite Vanguard");
         block(2, playerA, "Angelic Wall", "Elite Vanguard");
@@ -119,6 +122,9 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
         // flying vs. flying
         attack(2, playerB, "Assault Griffin");
         block(2, playerA, "Air Elemental", "Assault Griffin");
+        // flying vs. reach
+        attack(2, playerB, "Sky Ruin Drake");
+        block(2, playerA, "Sentinel Spider", "Sky Ruin Drake");
 
         setStopAt(2, Constants.PhaseStep.END_TURN);
         execute();
@@ -145,6 +151,7 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 2);
         addCard(Constants.Zone.HAND, playerA, "Naturalize");
 
+        // attacker vs. blocker:
         // non flying vs. flying
         attack(2, playerB, "Elite Vanguard");
         block(2, playerA, "Angelic Wall", "Elite Vanguard");
@@ -167,7 +174,7 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
     }
 
     /**
-     * Tests "Creatures with flying can't block creatures you control"
+     * Tests "Creatures with power less than Champion of Lambholt's power can't block creatures you control."
      */
     @Test
     public void testChampionOfLambholt() {

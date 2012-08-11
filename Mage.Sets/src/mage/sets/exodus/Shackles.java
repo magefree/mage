@@ -25,28 +25,29 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.sets.exodus;
 
 import java.util.UUID;
 
 /**
  *
- * @author North
- */
-public class SealOfDoom extends mage.sets.dissension.SealOfDoom {
+ * @author jeffwadsworth
 
-    public SealOfDoom(UUID ownerId) {
+ */
+public class Shackles extends mage.sets.invasion.Shackles {
+
+    public Shackles(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 70;
-        this.expansionSetCode = "NMS";
+        this.cardNumber = 18;
+        this.expansionSetCode = "EXO";
     }
 
-    public SealOfDoom(final SealOfDoom card) {
+    public Shackles(final Shackles card) {
         super(card);
     }
 
     @Override
-    public SealOfDoom copy() {
-        return new SealOfDoom(this);
+    public Shackles copy() {
+        return new Shackles(this);
     }
 }

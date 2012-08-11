@@ -25,28 +25,55 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.sets.conflux;
 
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.DiesCreatureTriggeredAbility;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.keyword.UnearthAbility;
+import mage.cards.CardImpl;
+import mage.target.TargetPlayer;
 
 /**
  *
- * @author North
- */
-public class SealOfDoom extends mage.sets.dissension.SealOfDoom {
+ * @author jeffwadsworth
 
-    public SealOfDoom(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 70;
-        this.expansionSetCode = "NMS";
+ */
+public class ExtractorDemon extends CardImpl<ExtractorDemon> {
+
+    public ExtractorDemon(UUID ownerId) {
+        super(ownerId, 44, "Extractor Demon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
+        this.expansionSetCode = "CON";
+        this.subtype.add("Demon");
+
+        this.color.setBlack(true);
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(5);
+
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        
+        // Whenever another creature leaves the battlefield, you may have target player put the top two cards of his or her library into his or her graveyard.
+        Ability ability = new DiesCreatureTriggeredAbility(new PutLibraryIntoGraveTargetEffect(2), true, true, false);
+        ability.addTarget(new TargetPlayer());
+        this.addAbility(ability);
+        
+        // Unearth {2}{B}
+        this.addAbility(new UnearthAbility(new ManaCostsImpl("{2}{B}")));
     }
 
-    public SealOfDoom(final SealOfDoom card) {
+    public ExtractorDemon(final ExtractorDemon card) {
         super(card);
     }
 
     @Override
-    public SealOfDoom copy() {
-        return new SealOfDoom(this);
+    public ExtractorDemon copy() {
+        return new ExtractorDemon(this);
     }
 }

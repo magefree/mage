@@ -25,28 +25,29 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.sets.visions;
 
 import java.util.UUID;
 
 /**
  *
- * @author North
- */
-public class SealOfDoom extends mage.sets.dissension.SealOfDoom {
+ * @author jeffwadsworth
 
-    public SealOfDoom(UUID ownerId) {
+ */
+public class Nekrataal extends mage.sets.ninthedition.Nekrataal {
+
+    public Nekrataal(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 70;
-        this.expansionSetCode = "NMS";
+        this.cardNumber = 16;
+        this.expansionSetCode = "VIS";
     }
 
-    public SealOfDoom(final SealOfDoom card) {
+    public Nekrataal(final Nekrataal card) {
         super(card);
     }
 
     @Override
-    public SealOfDoom copy() {
-        return new SealOfDoom(this);
+    public Nekrataal copy() {
+        return new Nekrataal(this);
     }
 }

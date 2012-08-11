@@ -25,56 +25,58 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2013;
-
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.common.continious.BoostAllEffect;
-import mage.cards.CardImpl;
-import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
+package mage.sets.invasion;
 
 import java.util.UUID;
+import mage.Constants;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.ReturnToHandSourceEffect;
+import mage.abilities.effects.common.SkipEnchantedUntapEffect;
+import mage.abilities.keyword.EnchantAbility;
+import mage.cards.CardImpl;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author North
+ * @author jeffwadsworth
+ *
  */
-public class Mutilate extends CardImpl<Mutilate> {
+public class Shackles extends CardImpl<Shackles> {
 
-    private static final String ruleText = "All creatures get -1/-1 until end of turn for each Swamp you control";
+    public Shackles(UUID ownerId) {
+        super(ownerId, 37, "Shackles", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
+        this.expansionSetCode = "INV";
+        this.subtype.add("Aura");
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("Swamp you control");
+        this.color.setWhite(true);
 
-    static {
-        filter.add(new SubtypePredicate("Swamp"));
-        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Detriment));
+
+        // Enchanted creature doesn't untap during its controller's untap step.
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new SkipEnchantedUntapEffect()));
+
+        // {W}: Return Shackles to its owner's hand.
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ReturnToHandSourceEffect(), new ManaCostsImpl("{W}")));
     }
 
-    public Mutilate(UUID ownerId) {
-        super(ownerId, 102, "Mutilate", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
-        this.expansionSetCode = "M13";
-
-        this.color.setBlack(true);
-
-        // All creatures get -1/-1 until end of turn for each Swamp you control.
-        PermanentsOnBattlefieldCount count = new PermanentsOnBattlefieldCount(filter, -1);
-        ContinuousEffect effect = new BoostAllEffect(count, count, Duration.EndOfTurn);
-        effect.overrideRuleText(ruleText);
-        this.getSpellAbility().addEffect(effect);
-    }
-
-    public Mutilate(final Mutilate card) {
+    public Shackles(final Shackles card) {
         super(card);
     }
 
     @Override
-    public Mutilate copy() {
-        return new Mutilate(this);
+    public Shackles copy() {
+        return new Shackles(this);
     }
 }

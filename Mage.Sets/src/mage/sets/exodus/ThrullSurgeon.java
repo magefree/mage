@@ -25,28 +25,31 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.nemesis;
+package mage.sets.exodus;
 
 import java.util.UUID;
+import mage.Constants.Rarity;
 
 /**
  *
- * @author North
- */
-public class SealOfDoom extends mage.sets.dissension.SealOfDoom {
+ * @author jeffwadsworth
 
-    public SealOfDoom(UUID ownerId) {
+ */
+public class ThrullSurgeon extends mage.sets.tenth.ThrullSurgeon {
+
+    public ThrullSurgeon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 70;
-        this.expansionSetCode = "NMS";
+        this.cardNumber = 76;
+        this.expansionSetCode = "EXO";
+        this.rarity = Rarity.COMMON;
     }
 
-    public SealOfDoom(final SealOfDoom card) {
+    public ThrullSurgeon(final ThrullSurgeon card) {
         super(card);
     }
 
     @Override
-    public SealOfDoom copy() {
-        return new SealOfDoom(this);
+    public ThrullSurgeon copy() {
+        return new ThrullSurgeon(this);
     }
 }

@@ -9,6 +9,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  * @author North
@@ -16,6 +17,7 @@ import mage.game.permanent.Permanent;
 public class DiesCreatureTriggeredAbility extends TriggeredAbilityImpl<DiesCreatureTriggeredAbility> {
 
     protected FilterCreaturePermanent filter;
+    private boolean setTargetPointer;
 
     public DiesCreatureTriggeredAbility(Effect effect, boolean optional) {
         this(effect, optional, new FilterCreaturePermanent("a creature"));
@@ -24,6 +26,12 @@ public class DiesCreatureTriggeredAbility extends TriggeredAbilityImpl<DiesCreat
     public DiesCreatureTriggeredAbility(Effect effect, boolean optional, boolean another) {
         this(effect, optional, new FilterCreaturePermanent("another creature"));
         filter.add(new AnotherPredicate());
+    }
+    
+    public DiesCreatureTriggeredAbility(Effect effect, boolean optional, boolean another, boolean setTargetPointer) {
+        this(effect, optional, new FilterCreaturePermanent("another creature"));
+        filter.add(new AnotherPredicate());
+        this.setTargetPointer = setTargetPointer;
     }
 
     public DiesCreatureTriggeredAbility(Effect effect, boolean optional, FilterCreaturePermanent filter) {
@@ -55,6 +63,11 @@ public class DiesCreatureTriggeredAbility extends TriggeredAbilityImpl<DiesCreat
             if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
                 Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
                 if (permanent != null && filter.match(permanent, sourceId, controllerId, game)) {
+                    if (setTargetPointer) {
+                        for (Effect effect : this.getEffects()) {
+                            effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                        }
+                    }
                     return true;
                 }
             }
