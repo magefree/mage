@@ -82,7 +82,7 @@ class ThrullSurgeonEffect extends OneShotEffect<ThrullSurgeonEffect> {
 
     public ThrullSurgeonEffect() {
         super(Constants.Outcome.Discard);
-        staticText = "Target player reveals his or her hand. You choose a card from it. That player discards that card";
+        staticText = "Look at target player's hand and choose a card from it. That player discards that card.";
     }
 
     public ThrullSurgeonEffect(final ThrullSurgeonEffect effect) {
@@ -91,20 +91,20 @@ class ThrullSurgeonEffect extends OneShotEffect<ThrullSurgeonEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getFirstTarget());
-        if (player != null) {
-            player.revealCards("Discard", player.getHand(), game);
-            Player you = game.getPlayer(source.getControllerId());
-            if (you != null) {
-                TargetCard target = new TargetCard(Constants.Zone.PICK, new FilterCard());
-                target.setRequired(true);
-                if (you.choose(Constants.Outcome.Benefit, player.getHand(), target, game)) {
-                    Card card = player.getHand().get(target.getFirstTarget(), game);
-                    if (card != null) {
-                        return player.discard(card, source, game);
-                    }
+        Player targetPlayer = game.getPlayer(source.getFirstTarget());
+        Player you = game.getPlayer(source.getControllerId());
+        if (targetPlayer != null && you != null) {
+            you.lookAtCards("Discard", targetPlayer.getHand(), game);
+            TargetCard target = new TargetCard(Constants.Zone.PICK, new FilterCard());
+            target.setRequired(true);
+            target.setNotTarget(true);
+            if (you.choose(Constants.Outcome.Benefit, targetPlayer.getHand(), target, game)) {
+                Card card = targetPlayer.getHand().get(target.getFirstTarget(), game);
+                if (card != null) {
+                    return targetPlayer.discard(card, source, game);
                 }
             }
+
         }
         return false;
     }
