@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
@@ -41,13 +40,21 @@ import mage.game.permanent.Permanent;
  */
 public class ReturnToHandSourceEffect extends OneShotEffect<ReturnToHandSourceEffect> {
 
+    boolean fromBattlefieldOnly = false;
+
     public ReturnToHandSourceEffect() {
         super(Outcome.ReturnToHand);
         staticText = "Return {this} to it's owner's hand";
     }
 
+    public ReturnToHandSourceEffect(boolean fromBattlefieldOnly) {
+        super(Outcome.ReturnToHand);
+        this.fromBattlefieldOnly = fromBattlefieldOnly;
+    }
+
     public ReturnToHandSourceEffect(final ReturnToHandSourceEffect effect) {
         super(effect);
+        this.fromBattlefieldOnly = effect.fromBattlefieldOnly;
     }
 
     @Override
@@ -67,10 +74,12 @@ public class ReturnToHandSourceEffect extends OneShotEffect<ReturnToHandSourceEf
                     }
                     break;
                 case GRAVEYARD:
-                    return card.moveToZone(Zone.HAND, source.getId(), game, true);
+                    if (!fromBattlefieldOnly) {
+                        return card.moveToZone(Zone.HAND, source.getId(), game, true);
+                    }
+
             }
         }
         return false;
     }
-
 }
