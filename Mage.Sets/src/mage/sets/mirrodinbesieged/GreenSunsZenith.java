@@ -97,7 +97,7 @@ class GreenSunsZenithSearchEffect extends OneShotEffect<GreenSunsZenithSearchEff
             if (target.getTargets().size() > 0) {
                 Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
                 if (card != null)
-                    card.putOntoBattlefield(game, Constants.Zone.HAND, source.getId(), source.getControllerId());
+                    card.putOntoBattlefield(game, Constants.Zone.LIBRARY, source.getId(), source.getControllerId());
             }
             player.shuffleLibrary(game);
             return true;
