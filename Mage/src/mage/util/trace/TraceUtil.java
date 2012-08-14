@@ -37,10 +37,10 @@ public class TraceUtil {
                     if (hasFlying(attacker)) {
                         for (UUID blockerId : group.getBlockers()) {
                             Permanent blocker = game.getPermanent(blockerId);
-                            //if (blocker != null && !hasFlying(blocker) && !hasReach(blocker)) {
+                            if (blocker != null && !hasFlying(blocker) && !hasReach(blocker)) {
                                 log.warn("Found non-flying non-reach creature blocking creature with flying");
                                 traceCombat(game, attacker, blocker);
-                            //}
+                            }
                         }
                     }
                     if (hasUnblockable(attacker)) {
