@@ -70,12 +70,12 @@ foreach my $set (keys(%cards)) {
         }
         my $first = 1;
         foreach my $card (@{$cards{$set}}) {
-            if ($first == 0) {
-                print REPORT "; ";
-            } else {
-                $first = 0;
-            }
             if ($cardsBySet{$knownSets{$set}}{$card}) {
+				if ($first == 0) {
+					print REPORT "; ";
+				} else {
+					$first = 0;
+				}
                 print REPORT $cardsBySet{$knownSets{$set}}{$card}[0];
             } else {
                 #$card =~ s/([A-Z]{1}[a-z]+)/ $1/g;
