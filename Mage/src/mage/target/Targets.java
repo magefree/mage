@@ -28,12 +28,13 @@
 
 package mage.target;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.game.Game;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -103,12 +104,12 @@ public class Targets extends ArrayList<Target> {
         // The spell or ability is countered if all its targets, for every instance of the word "target," are now illegal
         int illegalCount = 0;
         for (Target target: this) {
-            if (target.isLegal(source, game)) {
+            if (!target.isLegal(source, game)) {
                 illegalCount++;
             }
         }
-        // check all are illegal
-        return this.size() == illegalCount;
+        // it is legal when either there is no target or not all targets are illegal
+        return this.size() == 0 || this.size() != illegalCount;
     }
 
     /**

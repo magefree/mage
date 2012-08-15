@@ -33,6 +33,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.common.EmptyEffect;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.CountersCount;
@@ -77,30 +78,6 @@ public class EverflowingChalice extends CardImpl<EverflowingChalice> {
     @Override
     public EverflowingChalice copy() {
         return new EverflowingChalice(this);
-    }
-
-}
-
-class EmptyEffect extends OneShotEffect<EmptyEffect> {
-
-    public EmptyEffect(String rule) {
-        super(Constants.Outcome.DrawCard);
-        staticText = rule;
-    }
-
-    public EmptyEffect(final EmptyEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public EmptyEffect copy() {
-        return new EmptyEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        // empty effect
-        return true;
     }
 
 }

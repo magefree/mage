@@ -27,13 +27,14 @@
  */
 package mage.sets.darkascension;
 
-import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.common.EmptyEffect;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.TwoOrMoreSpellsWereCastLastTurnCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
@@ -41,12 +42,16 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 
+import java.util.UUID;
+
 /**
  *
  * @author BetaSteward
  */
 public class RavagerOfTheFells extends CardImpl<RavagerOfTheFells> {
 
+    private static final String rule = "Whenever this creature transforms into Ravager of the Fells, it deals 2 damage to target opponent and 2 damage to up to one target creature that player controls";
+    
     public RavagerOfTheFells(UUID ownerId) {
         super(ownerId, 140, "Ravager of the Fells", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "");
         this.expansionSetCode = "DKA";
@@ -62,6 +67,7 @@ public class RavagerOfTheFells extends CardImpl<RavagerOfTheFells> {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever this creature transforms into Ravager of the Fells, it deals 2 damage to target opponent and 2 damage to up to one target creature that player controls.
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new EmptyEffect(rule)));
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Ravager of the Fells.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), Constants.TargetController.ANY, false);

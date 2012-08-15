@@ -107,7 +107,7 @@ public class HuntmasterOfTheFells extends CardImpl<HuntmasterOfTheFells> {
 class HuntmasterOfTheFellsAbility extends TriggeredAbilityImpl<HuntmasterOfTheFellsAbility> {
 
     public HuntmasterOfTheFellsAbility() {
-        super(Constants.Zone.BATTLEFIELD, new CreateTokenEffect(new WolfToken(Token.Type.SECOND)), true);
+        super(Constants.Zone.BATTLEFIELD, new CreateTokenEffect(new WolfToken(Token.Type.SECOND)), false);
         this.addEffect(new GainLifeEffect(2));
     }
 
@@ -146,7 +146,7 @@ class HuntmasterOfTheFellsAbility extends TriggeredAbilityImpl<HuntmasterOfTheFe
 class RavagerOfTheFellsAbility extends TriggeredAbilityImpl<RavagerOfTheFellsAbility> {
 
     public RavagerOfTheFellsAbility() {
-        super(Constants.Zone.BATTLEFIELD, new RavagerOfTheFellsEffect(), true);
+        super(Constants.Zone.BATTLEFIELD, new RavagerOfTheFellsEffect(), false);
         Target target1 = new TargetOpponent();
         target1.setRequired(true);
         this.addTarget(target1);
@@ -183,7 +183,7 @@ class RavagerOfTheFellsEffect extends OneShotEffect<RavagerOfTheFellsEffect> {
 
     public RavagerOfTheFellsEffect() {
         super(Constants.Outcome.Damage);
-        staticText = "{this} deals 2 damage to target opponent and 2 damage to up to one target creature that player controls";
+        //staticText = "{this} deals 2 damage to target opponent and 2 damage to up to one target creature that player controls";
     }
 
     public RavagerOfTheFellsEffect(final RavagerOfTheFellsEffect effect) {
@@ -235,6 +235,16 @@ class RavagerOfTheFellsTarget extends TargetPermanent<RavagerOfTheFellsTarget> {
         Set<UUID> availablePossibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
         Set<UUID> possibleTargets = new HashSet<UUID>();
         MageObject object = game.getObject(sourceId);
+
+        for (StackObject item: game.getState().getStack()) {
+            if (item.getId().equals(sourceId)) {
+                object = item;
+            }
+            if (item.getSourceId().equals(sourceId)) {
+                object = item;
+            }
+        }
+
         if (object instanceof StackObject) {
             UUID playerId = ((StackObject)object).getStackAbility().getFirstTarget();
             for (UUID targetId : availablePossibleTargets) {
