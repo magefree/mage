@@ -76,7 +76,7 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
             if (ability instanceof SpellAbility && ability.getAlternativeCosts().size() > 0) {
                 StringBuilder sbRule = new StringBuilder();
                 for (AlternativeCost cost: ability.getAlternativeCosts()) {
-                    sbRule.append(cost.getName()).append("\n");
+                    sbRule.append(cost.getName()).append(".\n");
                 }
                 rules.add(sbRule.toString());
             }
