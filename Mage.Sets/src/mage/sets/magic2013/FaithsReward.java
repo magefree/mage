@@ -27,9 +27,6 @@
  */
 package mage.sets.magic2013;
 
-import java.util.ArrayList;
-import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -41,6 +38,9 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.watchers.WatcherImpl;
+
+import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  *
@@ -70,8 +70,10 @@ public class FaithsReward extends CardImpl<FaithsReward> {
 }
 
 class FaithsRewardEffect extends OneShotEffect<FaithsRewardEffect> {
+
     FaithsRewardEffect() {
         super(Constants.Outcome.PutCardInPlay);
+        staticText = "Return to the battlefield all permanent cards in your graveyard that were put there from the battlefield this turn";
     }
 
     FaithsRewardEffect(final FaithsRewardEffect effect) {
