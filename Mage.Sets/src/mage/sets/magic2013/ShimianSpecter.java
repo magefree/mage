@@ -99,52 +99,51 @@ class ShimianSpecterEffect extends OneShotEffect<ShimianSpecterEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Player damagedPlayer = game.getPlayer(targetPointer.getFirst(game, source));
-        if (damagedPlayer != null) {
+        Player you = game.getPlayer(source.getControllerId());
+        if (damagedPlayer != null && you != null) {
             damagedPlayer.revealCards("Shimian Specter", damagedPlayer.getHand(), game);
-            Player you = game.getPlayer(source.getControllerId());
-            if (you != null) {
-                TargetCard target = new TargetCard(Constants.Zone.PICK, filter);
-                target.setRequired(true);
-                target.setNotTarget(true);
-                if (you.choose(Constants.Outcome.Benefit, damagedPlayer.getHand(), target, game)) {
-                    Card chosenCard = damagedPlayer.getHand().get(target.getFirstTarget(), game);
-                    if (chosenCard != null) {
-                        if (damagedPlayer != null) {
-                            
-                            //cards in Library
-                            Cards cardsInLibrary = new CardsImpl(Constants.Zone.LIBRARY);
-                            cardsInLibrary.addAll(damagedPlayer.getLibrary().getCards(game));
 
-                            // cards in Graveyard
-                            Cards cardsInGraveyard = new CardsImpl(Constants.Zone.GRAVEYARD);
-                            cardsInGraveyard.addAll(damagedPlayer.getGraveyard());
-                                
-                            // cards in Hand
-                            Cards cardsInHand = new CardsImpl(Constants.Zone.HAND);
-                            cardsInHand.addAll(damagedPlayer.getHand());
-                            
-                            // exile same named cards from zones
-                            for (Card checkCard : cardsInLibrary.getCards(game)) {
-                                if (checkCard.getName().equals(chosenCard.getName())) {
-                                    checkCard.moveToExile(id, "Library", id, game);
-                                }
-                            }
-                            for (Card checkCard : cardsInGraveyard.getCards(game)) {
-                                if (checkCard.getName().equals(chosenCard.getName())) {
-                                    checkCard.moveToExile(id, "Graveyard", id, game);
-                                }
-                            }
-                            for (Card checkCard : cardsInHand.getCards(game)) {
-                                if (checkCard.getName().equals(chosenCard.getName())) {
-                                    checkCard.moveToExile(id, "Hand", id, game);
-                                }
-                            }
-                            
-                            damagedPlayer.shuffleLibrary(game);
-                            
-                            return true;
+            TargetCard target = new TargetCard(Constants.Zone.PICK, filter);
+            target.setRequired(true);
+            target.setNotTarget(true);
+            if (you.choose(Constants.Outcome.Benefit, damagedPlayer.getHand(), target, game)) {
+                Card chosenCard = damagedPlayer.getHand().get(target.getFirstTarget(), game);
+                if (chosenCard != null && damagedPlayer != null) {
+
+                    //cards in Library
+                    Cards cardsInLibrary = new CardsImpl(Constants.Zone.LIBRARY);
+                    cardsInLibrary.addAll(damagedPlayer.getLibrary().getCards(game));
+                    you.lookAtCards(damagedPlayer.getName() + ": cards in library", cardsInLibrary, game);
+
+                    // cards in Graveyard
+                    Cards cardsInGraveyard = new CardsImpl(Constants.Zone.GRAVEYARD);
+                    cardsInGraveyard.addAll(damagedPlayer.getGraveyard());
+
+                    // cards in Hand
+                    Cards cardsInHand = new CardsImpl(Constants.Zone.HAND);
+                    cardsInHand.addAll(damagedPlayer.getHand());
+                    you.lookAtCards(damagedPlayer.getName() + ": cards in hand", cardsInHand, game);
+
+                    // exile same named cards from zones
+                    for (Card checkCard : cardsInLibrary.getCards(game)) {
+                        if (checkCard.getName().equals(chosenCard.getName())) {
+                            checkCard.moveToExile(id, "Library", id, game);
                         }
                     }
+                    for (Card checkCard : cardsInGraveyard.getCards(game)) {
+                        if (checkCard.getName().equals(chosenCard.getName())) {
+                            checkCard.moveToExile(id, "Graveyard", id, game);
+                        }
+                    }
+                    for (Card checkCard : cardsInHand.getCards(game)) {
+                        if (checkCard.getName().equals(chosenCard.getName())) {
+                            checkCard.moveToExile(id, "Hand", id, game);
+                        }
+                    }
+
+                    damagedPlayer.shuffleLibrary(game);
+
+                    return true;
                 }
             }
         }
