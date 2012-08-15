@@ -406,6 +406,7 @@ public class GamePanel extends javax.swing.JPanel {
         } else {
             this.txtPhase.setText("");
         }
+        updatePhases(game.getStep());
         if (game.getPhase() != null && game.getPhase().toString().equals("End") && game.getStep().toString().equals("End Turn")) {
             //AudioManager.playEndTurn();
         }
@@ -451,7 +452,6 @@ public class GamePanel extends javax.swing.JPanel {
             //combat.hideDialog();
             CombatManager.getInstance().hideCombat(gameId);
         }
-        updatePhases(game.getStep());
         this.revalidate();
         this.repaint();
     }
@@ -503,6 +503,7 @@ public class GamePanel extends javax.swing.JPanel {
             case DECLARE_BLOCKERS: updateButton("Combat_Block"); break;
             case FIRST_COMBAT_DAMAGE:
             case COMBAT_DAMAGE: updateButton("Combat_Damage"); break;
+            case END_COMBAT: updateButton("Combat_End"); break;
             case POSTCOMBAT_MAIN: updateButton("Main2"); break;
             case END_TURN: updateButton("Cleanup"); break;
         }
