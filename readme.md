@@ -1,6 +1,6 @@
 # MAGE - Magic, Another Game Engine
 
-MAGE allows you to play magic against one or more online players or computer opponents. It includes full rules enforcement for more than **3500** unique cards. Starting with Magic 2011, all sets have all the cards implemented.
+MAGE allows you to play magic against one or more online players or computer opponents. It includes full rules enforcement for more than **4300** unique cards. Starting with Magic 2011, all sets have all the cards implemented.
 
 There is at least one public server where you can play MAGE against other players. Apart from this, you can also host your own server to play against the AI and/or your friends.
 
