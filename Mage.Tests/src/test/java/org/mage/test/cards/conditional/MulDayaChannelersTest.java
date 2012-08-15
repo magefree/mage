@@ -1,13 +1,8 @@
 package org.mage.test.cards.conditional;
 
-import junit.framework.Assert;
 import mage.Constants;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.LifelinkAbility;
 import mage.filter.Filter;
-import mage.game.permanent.Permanent;
 import org.junit.Test;
-import org.mage.test.serverside.base.CardTestBase;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**

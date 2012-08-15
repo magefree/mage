@@ -2,7 +2,6 @@ package org.mage.test.serverside.cards.abilities;
 
 import mage.Constants;
 import org.junit.Test;
-import org.mage.test.serverside.base.CardTestBase;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
