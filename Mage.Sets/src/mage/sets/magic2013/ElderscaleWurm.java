@@ -83,6 +83,7 @@ class ElderscaleWurmSetLifeEffect extends OneShotEffect<ElderscaleWurmSetLifeEff
 
     public ElderscaleWurmSetLifeEffect() {
         super(Constants.Outcome.Benefit);
+        this.staticText = "if your life total is less than 7, your life total becomes 7";
     }
 
     public ElderscaleWurmSetLifeEffect(final ElderscaleWurmSetLifeEffect effect) {
