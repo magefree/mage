@@ -28,6 +28,26 @@ public class UndyingTest extends CardTestPlayerBase {
     }
 
     /**
+     * Tests boost weren't be applied second time when creature back to battlefield
+     */
+    @Test
+    public void testWithMassBoost() {
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Strangleroot Geist");
+
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Swamp", 3);
+        addCard(Constants.Zone.HAND, playerB, "Cower in Fear");
+
+        castSpell(2, Constants.PhaseStep.PRECOMBAT_MAIN, playerB, "Cower in Fear");
+
+        setStopAt(2, Constants.PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Strangleroot Geist", 1);
+        // dies then returned with +1/+1 counter (and boost doesn't work anymore)
+        assertPowerToughness(playerA, "Strangleroot Geist", 3, 2);
+    }
+
+    /**
      * Tests "Target creature gains undying until end of turn"
      */
     @Test

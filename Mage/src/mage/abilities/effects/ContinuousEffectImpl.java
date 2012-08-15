@@ -185,4 +185,8 @@ public abstract class ContinuousEffectImpl<T extends ContinuousEffectImpl<T>> ex
         return false;
     }
 
+    @Override
+    public List<UUID> getAffectedObjects() {
+        return this.objects;
+    }
 }

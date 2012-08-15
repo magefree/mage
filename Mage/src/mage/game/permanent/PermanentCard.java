@@ -29,6 +29,7 @@
 package mage.game.permanent;
 
 import mage.Constants.Zone;
+import mage.abilities.effects.ContinuousEffect;
 import mage.cards.Card;
 import mage.cards.LevelerCard;
 import mage.game.Game;
@@ -172,6 +173,13 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
         if (controller != null && controller.removeFromBattlefield(this, game)) {
             ZoneChangeEvent event = new ZoneChangeEvent(this, sourceId, controllerId, fromZone, toZone);
             if (!game.replaceEvent(event)) {
+                if (event.getFromZone().equals(Zone.BATTLEFIELD)) {
+                    for (ContinuousEffect effect : game.getContinuousEffects().getLayeredEffects(game)) {
+                        if (effect.getAffectedObjects().contains(getId())) {
+                            effect.getAffectedObjects().remove(getId());
+                        }
+                    }
+                }
                 Player owner = game.getPlayer(ownerId);
                 game.rememberLKI(objectId, Zone.BATTLEFIELD, this);
                 if (owner != null) {

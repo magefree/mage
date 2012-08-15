@@ -35,6 +35,8 @@ import mage.abilities.Ability;
 import mage.game.Game;
 
 import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -55,4 +57,5 @@ public interface ContinuousEffect<T extends ContinuousEffect<T>> extends Effect<
     public Layer getLayer();
     public SubLayer getSublayer();
     public void overrideRuleText(String text);
+    public List<UUID> getAffectedObjects();
 }
