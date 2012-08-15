@@ -1,13 +1,13 @@
 package org.mage.test.serverside.base;
 
 import mage.Constants;
+import mage.Constants.PhaseStep;
 import mage.cards.Card;
 import mage.game.Game;
 import mage.game.match.MatchType;
 import mage.game.permanent.PermanentCard;
 import mage.game.tournament.TournamentType;
 import mage.players.Player;
-import mage.server.game.DeckValidatorFactory;
 import mage.server.game.GameFactory;
 import mage.server.game.PlayerFactory;
 import mage.server.tournament.TournamentFactory;
@@ -20,6 +20,8 @@ import mage.util.Copier;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.junit.BeforeClass;
+import org.mage.test.player.RandomPlayer;
+import org.mage.test.player.TestPlayer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,8 +29,6 @@ import java.io.FilenameFilter;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import mage.Constants.PhaseStep;
-import org.mage.test.player.RandomPlayer;
 
 /**
  * Base class for all tests.
@@ -56,8 +56,8 @@ public abstract class MageTestBase {
     protected Map<Constants.Zone, String> commandsA = new HashMap<Constants.Zone, String>();
     protected Map<Constants.Zone, String> commandsB = new HashMap<Constants.Zone, String>();
 
-    protected Player playerA;
-    protected Player playerB;
+    protected TestPlayer playerA;
+    protected TestPlayer playerB;
 
     /**
      * Game instance initialized in load method.

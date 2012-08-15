@@ -5,9 +5,13 @@ import mage.Constants.CardType;
 import mage.Constants.PhaseStep;
 import mage.abilities.Ability;
 import mage.cards.Card;
+import mage.cards.decks.Deck;
+import mage.cards.decks.importer.DeckImporterUtil;
 import mage.counters.CounterType;
 import mage.filter.Filter;
 import mage.game.ExileZone;
+import mage.game.Game;
+import mage.game.GameException;
 import mage.game.command.CommandObject;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
@@ -70,18 +74,33 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         addCard(Constants.Zone.LIBRARY, playerB, "Plains", 10);
     }
 
+    protected TestPlayer createPlayer(Game game, TestPlayer player, String name) throws GameException {
+        player = createNewPlayer(name);
+        player.setTestMode(true);
+        logger.debug("Loading deck...");
+        Deck deck = Deck.load(DeckImporterUtil.importDeck("RB Aggro.dck"));
+        logger.debug("Done!");
+        if (deck.getCards().size() < 40) {
+            throw new IllegalArgumentException("Couldn't load deck, deck size=" + deck.getCards().size());
+        }
+        game.addPlayer(player, deck);
+        game.loadCards(deck.getCards(), player.getId());
+
+        return player;
+    }
+
+    protected TestPlayer createNewPlayer(String playerName) {
+        return createPlayer(playerName);
+    }
+
     /**
      * Removes all cards from player's library from the game.
      * Usually this should be used once before initialization to form the library in certain order.
      *
      * @param player {@link Player} to remove all library cards from.
      */
-    public void removeAllCardsFromLibrary(Player player) {
-        if (player.equals(playerA)) {
-            commandsA.put(Constants.Zone.LIBRARY, "clear");
-        } else if (player.equals(playerB)) {
-            commandsB.put(Constants.Zone.LIBRARY, "clear");
-        }
+    public void removeAllCardsFromLibrary(TestPlayer player) {
+        getCommands(player).put(Constants.Zone.LIBRARY, "clear");
     }
 
     /**
@@ -90,12 +109,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      *
      * @param player {@link Player} to remove all cards from hand.
      */
-    public void removeAllCardsFromHand(Player player) {
-        if (player.equals(playerA)) {
-            commandsA.put(Constants.Zone.HAND, "clear");
-        } else if (player.equals(playerB)) {
-            commandsB.put(Constants.Zone.HAND, "clear");
-        }
+    public void removeAllCardsFromHand(TestPlayer player) {
+        getCommands(player).put(Constants.Zone.HAND, "clear");
     }
 
     /**
@@ -105,7 +120,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param player   {@link Player} to add cards for. Use either playerA or playerB.
      * @param cardName Card name in string format.
      */
-    public void addCard(Constants.Zone gameZone, Player player, String cardName) {
+    public void addCard(Constants.Zone gameZone, TestPlayer player, String cardName) {
         addCard(gameZone, player, cardName, 1, false);
     }
 
@@ -117,7 +132,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param cardName Card name in string format.
      * @param count    Amount of cards to be added.
      */
-    public void addCard(Constants.Zone gameZone, Player player, String cardName, int count) {
+    public void addCard(Constants.Zone gameZone, TestPlayer player, String cardName, int count) {
         addCard(gameZone, player, cardName, count, false);
     }
 
@@ -131,8 +146,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param tapped   In case gameZone is Battlefield, determines whether permanent should be tapped.
      *                 In case gameZone is other than Battlefield, {@link IllegalArgumentException} is thrown
      */
-    public void addCard(Constants.Zone gameZone, Player player, String cardName, int count, boolean tapped) {
-
+    public void addCard(Constants.Zone gameZone, TestPlayer player, String cardName, int count, boolean tapped) {
 
         if (gameZone.equals(Constants.Zone.BATTLEFIELD)) {
             for (int i = 0; i < count; i++) {
@@ -142,11 +156,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                 }
                 PermanentCard p = new PermanentCard(card, null);
                 p.setTapped(tapped);
-                if (player.equals(playerA)) {
-                    battlefieldCardsA.add(p);
-                } else if (player.equals(playerB)) {
-                    battlefieldCardsB.add(p);
-                }
+                getBattlefieldCards(player).add(p);
             }
         } else {
             if (tapped) {
@@ -170,24 +180,15 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param player
      * @return
      */
-    private List<Card> getCardList(Constants.Zone gameZone, Player player) {
-        if (player.equals(playerA)) {
-            if (gameZone.equals(Constants.Zone.HAND)) {
-                return handCardsA;
-            } else if (gameZone.equals(Constants.Zone.GRAVEYARD)) {
-                return graveyardCardsA;
-            } else if (gameZone.equals(Constants.Zone.LIBRARY)) {
-                return libraryCardsA;
-            }
-        } else if (player.equals(playerB)) {
-            if (gameZone.equals(Constants.Zone.HAND)) {
-                return handCardsB;
-            } else if (gameZone.equals(Constants.Zone.GRAVEYARD)) {
-                return graveyardCardsB;
-            } else if (gameZone.equals(Constants.Zone.LIBRARY)) {
-                return libraryCardsB;
-            }
+    private List<Card> getCardList(Constants.Zone gameZone, TestPlayer player) {
+        if (gameZone.equals(Constants.Zone.HAND)) {
+            return getHandCards(player);
+        } else if (gameZone.equals(Constants.Zone.GRAVEYARD)) {
+            return getGraveCards(player);
+        } else if (gameZone.equals(Constants.Zone.LIBRARY)) {
+            return getLibraryCards(player);
         }
+
         throw new AssertionError("Zone is not supported by test framework: " + gameZone);
     }
 
@@ -197,12 +198,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param player {@link Player} to set life count for.
      * @param life   Life count to set.
      */
-    public void setLife(Player player, int life) {
-        if (player.equals(playerA)) {
-            commandsA.put(Constants.Zone.OUTSIDE, "life:" + String.valueOf(life));
-        } else if (player.equals(playerB)) {
-            commandsB.put(Constants.Zone.OUTSIDE, "life:" + String.valueOf(life));
-        }
+    public void setLife(TestPlayer player, int life) {
+        getCommands(player).put(Constants.Zone.OUTSIDE, "life:" + String.valueOf(life));
     }
 
     /**

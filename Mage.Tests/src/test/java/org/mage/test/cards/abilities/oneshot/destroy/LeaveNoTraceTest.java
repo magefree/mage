@@ -2,12 +2,12 @@ package org.mage.test.cards.abilities.oneshot.destroy;
 
 import mage.Constants;
 import org.junit.Test;
-import org.mage.test.serverside.base.CardTestBase;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  * @author Loki
  */
-public class LeaveNoTraceTest extends CardTestBase {
+public class LeaveNoTraceTest extends CardTestPlayerBase {
 
     @Test
     public void testDestroy() {
@@ -19,8 +19,7 @@ public class LeaveNoTraceTest extends CardTestBase {
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Awakening Zone"); // Green
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Back from the Brink"); // Blue
 
-        castSpell(playerA, "Leave No Trace");
-        addFixedTarget(playerA, "Leave No Trace", "Asceticism");
+        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Leave No Trace", "Asceticism");
 
         setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();

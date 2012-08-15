@@ -41,20 +41,17 @@ public abstract class MageTestPlayerBase {
 
     protected Pattern pattern = Pattern.compile("([a-zA-Z]*):([\\w]*):([a-zA-Z ,\\-.!'\\d]*):([\\d]*)(:\\{tapped\\})?");
 
-    protected List<Card> handCardsA = new ArrayList<Card>();
-    protected List<Card> handCardsB = new ArrayList<Card>();
-    protected List<PermanentCard> battlefieldCardsA = new ArrayList<PermanentCard>();
-    protected List<PermanentCard> battlefieldCardsB = new ArrayList<PermanentCard>();
-    protected List<Card> graveyardCardsA = new ArrayList<Card>();
-    protected List<Card> graveyardCardsB = new ArrayList<Card>();
-    protected List<Card> libraryCardsA = new ArrayList<Card>();
-    protected List<Card> libraryCardsB = new ArrayList<Card>();
+    protected Map<TestPlayer, List<Card>> handCards = new HashMap<TestPlayer, List<Card>>();
+    protected Map<TestPlayer, List<PermanentCard>> battlefieldCards = new HashMap<TestPlayer, List<PermanentCard>>();
+    protected Map<TestPlayer, List<Card>> graveyardCards = new HashMap<TestPlayer, List<Card>>();
+    protected Map<TestPlayer, List<Card>> libraryCards = new HashMap<TestPlayer, List<Card>>();
 
-    protected Map<Constants.Zone, String> commandsA = new HashMap<Constants.Zone, String>();
-    protected Map<Constants.Zone, String> commandsB = new HashMap<Constants.Zone, String>();
+    protected Map<TestPlayer, Map<Constants.Zone, String>> commands = new HashMap<TestPlayer, Map<Constants.Zone, String>>();
 
     protected TestPlayer playerA;
     protected TestPlayer playerB;
+    protected TestPlayer playerC;
+    protected TestPlayer playerD;
 
     /**
      * Game instance initialized in load method.
@@ -105,15 +102,6 @@ public abstract class MageTestPlayerBase {
         for (GamePlugin plugin : config.getGameTypes()) {
             GameFactory.getInstance().addGameType(plugin.getName(), loadGameType(plugin), loadPlugin(plugin));
         }
-//        for (GamePlugin plugin : config.getTournamentTypes()) {
-//            TournamentFactory.getInstance().addTournamentType(plugin.getName(), loadTournamentType(plugin), loadPlugin(plugin));
-//        }
-//        for (Plugin plugin : config.getPlayerTypes()) {
-//            PlayerFactory.getInstance().addPlayerType(plugin.getName(), loadPlugin(plugin));
-//        }
-//        for (Plugin plugin : config.getDeckTypes()) {
-//            DeckValidatorFactory.getInstance().addDeckType(plugin.getName(), loadPlugin(plugin));
-//        }
         Copier.setLoader(classLoader);
     }
 
@@ -208,30 +196,26 @@ public abstract class MageTestPlayerBase {
             String zone = m.group(1);
             String nickname = m.group(2);
 
-            if (nickname.equals("ComputerA") || nickname.equals("ComputerB")) {
+            if (nickname.startsWith("Computer")) {
                 List<Card> cards = null;
                 List<PermanentCard> perms = null;
                 Constants.Zone gameZone;
                 if ("hand".equalsIgnoreCase(zone)) {
                     gameZone = Constants.Zone.HAND;
-                    cards = nickname.equals("ComputerA") ? handCardsA : handCardsB;
+                    cards = getHandCards(getPlayer(nickname));
                 } else if ("battlefield".equalsIgnoreCase(zone)) {
                     gameZone = Constants.Zone.BATTLEFIELD;
-                    perms = nickname.equals("ComputerA") ? battlefieldCardsA : battlefieldCardsB;
+                    perms = getBattlefieldCards(getPlayer(nickname));
                 } else if ("graveyard".equalsIgnoreCase(zone)) {
                     gameZone = Constants.Zone.GRAVEYARD;
-                    cards = nickname.equals("ComputerA") ? graveyardCardsA : graveyardCardsB;
+                    cards = getGraveCards(getPlayer(nickname));
                 } else if ("library".equalsIgnoreCase(zone)) {
                     gameZone = Constants.Zone.LIBRARY;
-                    cards = nickname.equals("ComputerA") ? libraryCardsA : libraryCardsB;
+                    cards = getLibraryCards(getPlayer(nickname));
                 } else if ("player".equalsIgnoreCase(zone)) {
                     String command = m.group(3);
                     if ("life".equals(command)) {
-                        if (nickname.equals("ComputerA")) {
-                            commandsA.put(Constants.Zone.OUTSIDE, "life:" + m.group(4));
-                        } else {
-                            commandsB.put(Constants.Zone.OUTSIDE, "life:" + m.group(4));
-                        }
+                        getCommands(getPlayer(nickname)).put(Constants.Zone.OUTSIDE, "life:" + m.group(4));
                     }
                     return;
                 } else {
@@ -243,11 +227,7 @@ public abstract class MageTestPlayerBase {
                 boolean tapped = m.group(5) != null && m.group(5).equals(":{tapped}");
 
                 if (cardName.equals("clear")) {
-                    if (nickname.equals("ComputerA")) {
-                        commandsA.put(gameZone, "clear");
-                    } else {
-                        commandsB.put(gameZone, "clear");
-                    }
+                    getCommands(getPlayer(nickname)).put(gameZone, "clear");
                 } else {
                     for (int i = 0; i < amount; i++) {
                         Card card = Sets.findCard(cardName, true);
@@ -272,6 +252,65 @@ public abstract class MageTestPlayerBase {
             logger.warn("Init string wasn't parsed: " + line);
         }
     }
+    
+    private TestPlayer getPlayer(String name) {
+        if (name.equals("ComputerA")) {
+            return playerA;
+        } else if (name.equals("ComputerB")) {
+            return playerB;
+        } else if (name.equals("ComputerC")) {
+            return playerC;
+        } else if (name.equals("ComputerD")) {
+            return playerD;
+        }
+        throw new IllegalArgumentException("Couldn't find player for name=" + name);
+    }
+
+    protected List<Card> getHandCards(TestPlayer player) {
+        if (handCards.containsKey(player)) {
+            return handCards.get(player);
+        }
+        List<Card> hand = new ArrayList<Card>();
+        handCards.put(player, hand);
+        return hand;
+    }
+    
+    protected List<Card> getGraveCards(TestPlayer player) {
+        if (graveyardCards.containsKey(player)) {
+            return graveyardCards.get(player);
+        }
+        List<Card> grave = new ArrayList<Card>();
+        graveyardCards.put(player, grave);
+        return grave;
+    }
+
+    protected List<Card> getLibraryCards(TestPlayer player) {
+        if (libraryCards.containsKey(player)) {
+            return libraryCards.get(player);
+        }
+        List<Card> library = new ArrayList<Card>();
+        libraryCards.put(player, library);
+        return library;
+    }
+
+    protected List<PermanentCard> getBattlefieldCards(TestPlayer player) {
+        if (battlefieldCards.containsKey(player)) {
+            return battlefieldCards.get(player);
+        }
+        List<PermanentCard> battlefield = new ArrayList<PermanentCard>();
+        battlefieldCards.put(player, battlefield);
+        return battlefield;
+    }
+
+    protected Map<Constants.Zone, String> getCommands(TestPlayer player) {
+        if (commands.containsKey(player)) {
+            return commands.get(player);
+        }
+        Map<Constants.Zone, String> command = new HashMap<Constants.Zone, String>();
+        commands.put(player, command);
+        return command;
+    }
+
 
     private void includeFrom(String line) throws FileNotFoundException {
         String[] params = line.split(" ");
@@ -294,6 +333,6 @@ public abstract class MageTestPlayerBase {
     }
 
     protected TestPlayer createPlayer(String name) {
-        return new TestPlayer(name, Constants.RangeOfInfluence.ALL);
+        return new TestPlayer(name, Constants.RangeOfInfluence.ONE);
     }
 }

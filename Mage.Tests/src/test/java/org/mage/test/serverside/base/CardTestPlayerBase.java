@@ -79,16 +79,15 @@ public abstract class CardTestPlayerBase extends CardTestPlayerAPIImpl {
 
         stopOnTurn = 2;
         stopAtStep = PhaseStep.UNTAP;
-        handCardsA.clear();
-        handCardsB.clear();
-        battlefieldCardsA.clear();
-        battlefieldCardsB.clear();
-        graveyardCardsA.clear();
-        graveyardCardsB.clear();
-        libraryCardsA.clear();
-        libraryCardsB.clear();
-        commandsA.clear();
-        commandsB.clear();
+
+        for (Player player : currentGame.getPlayers().values()) {
+            TestPlayer testPlayer = (TestPlayer)player;
+            getCommands(testPlayer).clear();
+            getLibraryCards(testPlayer).clear();
+            getHandCards(testPlayer).clear();
+            getBattlefieldCards(testPlayer).clear();
+            getGraveCards(testPlayer).clear();
+        }
 
         gameOptions = new GameOptions();
     }
@@ -147,10 +146,12 @@ public abstract class CardTestPlayerBase extends CardTestPlayerAPIImpl {
             throw new IllegalStateException("Game is not initialized. Use load method to load a test case and initialize a game.");
         }
 
-        currentGame.cheat(playerA.getId(), commandsA);
-        currentGame.cheat(playerA.getId(), libraryCardsA, handCardsA, battlefieldCardsA, graveyardCardsA);
-        currentGame.cheat(playerB.getId(), commandsB);
-        currentGame.cheat(playerB.getId(), libraryCardsB, handCardsB, battlefieldCardsB, graveyardCardsB);
+        for (Player player : currentGame.getPlayers().values()) {
+            TestPlayer testPlayer = (TestPlayer)player;
+            currentGame.cheat(player.getId(), getCommands(testPlayer));
+            currentGame.cheat(player.getId(), getLibraryCards(testPlayer), getHandCards(testPlayer),
+                    getBattlefieldCards(testPlayer), getGraveCards(testPlayer));
+        }
 
         boolean testMode = true;
         long t1 = System.nanoTime();

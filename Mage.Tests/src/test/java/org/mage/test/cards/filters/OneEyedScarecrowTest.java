@@ -2,16 +2,14 @@ package org.mage.test.cards.filters;
 
 import junit.framework.Assert;
 import mage.Constants;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.LifelinkAbility;
 import mage.game.permanent.Permanent;
 import org.junit.Test;
-import org.mage.test.serverside.base.CardTestBase;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  * @author ayrat
  */
-public class OneEyedScarecrowTest extends CardTestBase {
+public class OneEyedScarecrowTest extends CardTestPlayerBase {
 
     @Test
     public void testBoost() {

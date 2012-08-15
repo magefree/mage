@@ -2,7 +2,7 @@ package org.mage.test.serverside.performance;
 
 import mage.game.Game;
 import org.junit.Ignore;
-import org.mage.test.serverside.base.CardTestBase;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  * Test for copying game state.
@@ -10,7 +10,7 @@ import org.mage.test.serverside.base.CardTestBase;
  * @ayratn
  */
 @Ignore
-public class CopyGameStatePerformanceTest extends CardTestBase {
+public class CopyGameStatePerformanceTest extends CardTestPlayerBase {
 
     public void run() throws Exception {
         init();

@@ -3,9 +3,9 @@ package org.mage.test.cards.abilities.oneshot.destroy;
 import mage.Constants;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.mage.test.serverside.base.CardTestBase;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
-public class HideousEndTest extends CardTestBase {
+public class HideousEndTest extends CardTestPlayerBase {
 
     @Test
     public void testWithValidTarget() {
@@ -15,11 +15,11 @@ public class HideousEndTest extends CardTestBase {
         addCard(Constants.Zone.HAND, playerA, "Hideous End");
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Copper Myr");
 
-        castSpell(playerA, "Hideous End");
-        addFixedTarget(playerA, "Hideous End", "Copper Myr");
+        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Hideous End", "Copper Myr");
 
         setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
+
         assertPermanentCount(playerB, "Copper Myr", 0);
         assertLife(playerB, 18);
     }
@@ -32,11 +32,11 @@ public class HideousEndTest extends CardTestBase {
         addCard(Constants.Zone.HAND, playerA, "Hideous End");
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Zombie Goliath");
 
-        castSpell(playerA, "Hideous End");
-        addFixedTarget(playerA, "Hideous End", "Zombie Goliath");
+        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Hideous End", "Zombie Goliath");
 
         setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
+
         assertPermanentCount(playerB, "Zombie Goliath", 1);
         assertLife(playerB, 20);
     }
@@ -53,11 +53,11 @@ public class HideousEndTest extends CardTestBase {
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Copper Myr");
         addCard(Constants.Zone.HAND, playerB, "Apostle's Blessing");
 
-        castSpell(playerA, "Hideous End");
-        addFixedTarget(playerA, "Hideous End", "Copper Myr");
+        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Hideous End", "Copper Myr");
 
         setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
+
         assertPermanentCount(playerB, "Copper Myr", 1);
         assertLife(playerB, 20);
     }

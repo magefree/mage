@@ -2,12 +2,12 @@ package org.mage.test.cards.abilities.oneshot.damage;
 
 import mage.Constants;
 import org.junit.Test;
-import org.mage.test.serverside.base.CardTestBase;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  * @author Loki
  */
-public class PsionicBlastTest extends CardTestBase {
+public class PsionicBlastTest extends CardTestPlayerBase {
 
     @Test
     public void testDamageInPlayer() {
@@ -16,7 +16,7 @@ public class PsionicBlastTest extends CardTestBase {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Island");
         addCard(Constants.Zone.HAND, playerA, "Psionic Blast");
 
-        castSpell(playerA, "Psionic Blast");
+        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA ,"Psionic Blast");
         setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
 

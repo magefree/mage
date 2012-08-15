@@ -1,6 +1,7 @@
 package org.mage.test.serverside.base.impl;
 
 import mage.Constants;
+import mage.Constants.PhaseStep;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.filter.Filter;
@@ -9,12 +10,12 @@ import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.sets.Sets;
 import org.junit.Assert;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestAPI;
 import org.mage.test.serverside.base.MageTestBase;
 
 import java.util.List;
 import java.util.UUID;
-import mage.Constants.PhaseStep;
 
 /**
  * API for test initialization and asserting the test results.
@@ -86,7 +87,7 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
      * @param player   {@link Player} to add cards for. Use either playerA or playerB.
      * @param cardName Card name in string format.
      */
-    public void addCard(Constants.Zone gameZone, Player player, String cardName) {
+    public void addCard(Constants.Zone gameZone, TestPlayer player, String cardName) {
         addCard(gameZone, player, cardName, 1, false);
     }
 
@@ -98,7 +99,7 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
      * @param cardName Card name in string format.
      * @param count    Amount of cards to be added.
      */
-    public void addCard(Constants.Zone gameZone, Player player, String cardName, int count) {
+    public void addCard(Constants.Zone gameZone, TestPlayer player, String cardName, int count) {
         addCard(gameZone, player, cardName, count, false);
     }
 
@@ -112,7 +113,7 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
      * @param tapped   In case gameZone is Battlefield, determines whether permanent should be tapped.
      *                 In case gameZone is other than Battlefield, {@link IllegalArgumentException} is thrown
      */
-    public void addCard(Constants.Zone gameZone, Player player, String cardName, int count, boolean tapped) {
+    public void addCard(Constants.Zone gameZone, TestPlayer player, String cardName, int count, boolean tapped) {
 
 
         if (gameZone.equals(Constants.Zone.BATTLEFIELD)) {
@@ -175,7 +176,7 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
      * @param player {@link Player} to set life count for.
      * @param life   Life count to set.
      */
-    public void setLife(Player player, int life) {
+    public void setLife(TestPlayer player, int life) {
         if (player.equals(playerA)) {
             commandsA.put(Constants.Zone.OUTSIDE, "life:" + String.valueOf(life));
         } else if (player.equals(playerB)) {
