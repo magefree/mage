@@ -436,6 +436,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
                 }
                 this.controllerId = controllerId;
                 this.abilities.setControllerId(controllerId);
+                game.getContinuousEffects().setController(this.objectId, controllerId);
                 return true;
             }
         }

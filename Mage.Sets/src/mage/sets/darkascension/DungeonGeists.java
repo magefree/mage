@@ -122,7 +122,7 @@ class DungeonGeistsEffect extends ReplacementEffectImpl<DungeonGeistsEffect> {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.LOST_CONTROL) {
-            if (event.getPlayerId().equals(source.getControllerId()) && event.getTargetId().equals(source.getSourceId())) {
+            if (event.getTargetId().equals(source.getSourceId())) {
                 this.used = true;
                 return false;
             }

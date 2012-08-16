@@ -149,4 +149,32 @@ public class ExchangeControlTest extends CardTestPlayerBase {
         // this one is still on opponent's side
         assertPermanentCount(playerB, "Elite Vanguard", 1);
     }
+
+    /**
+     * Tests switching controls will affect restriction effect
+     */
+    @Test
+    public void testRestrictionEffect() {
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 5);
+        addCard(Constants.Zone.HAND, playerA, "Switcheroo");
+
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "War Falcon");
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Elite Vanguard");
+
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Llanowar Elves");
+
+        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Switcheroo", "War Falcon^Llanowar Elves");
+
+        attack(2, playerB, "War Falcon");
+
+        setStopAt(2, Constants.PhaseStep.END_TURN);
+        execute();
+
+        // check creatures changes their controllers
+        assertPermanentCount(playerA, "Llanowar Elves", 1);
+        assertPermanentCount(playerB, "War Falcon", 1);
+
+        // War Falcon can't attack
+        assertLife(playerA, 20);
+    }
 }

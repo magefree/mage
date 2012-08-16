@@ -58,6 +58,8 @@ public class ContinuousEffects implements Serializable {
     private ContinuousEffectsList<AsThoughEffect> asThoughEffects = new ContinuousEffectsList<AsThoughEffect>();
     private ContinuousEffectsList<CostModificationEffect> costModificationEffects = new ContinuousEffectsList<CostModificationEffect>();
 
+    private List<ContinuousEffectsList<?>> allEffectsLists = new ArrayList<ContinuousEffectsList<?>>();
+    
     private final ApplyCountersEffect applyCounters;
     private final PlaneswalkerRedirectionEffect planeswalkerRedirectionEffect;
     private final AuraReplacementEffect auraReplacementEffect;
@@ -68,6 +70,7 @@ public class ContinuousEffects implements Serializable {
         applyCounters = new ApplyCountersEffect();
         planeswalkerRedirectionEffect = new PlaneswalkerRedirectionEffect();
         auraReplacementEffect = new AuraReplacementEffect();
+        collectAllEffects();
     }
 
     public ContinuousEffects(final ContinuousEffects effect) {
@@ -81,6 +84,17 @@ public class ContinuousEffects implements Serializable {
         restrictionEffects = effect.restrictionEffects.copy();
         asThoughEffects = effect.asThoughEffects.copy();
         costModificationEffects = effect.costModificationEffects.copy();
+        collectAllEffects();
+    }
+
+    private void collectAllEffects() {
+        allEffectsLists.add(layeredEffects);
+        allEffectsLists.add(replacementEffects);
+        allEffectsLists.add(preventionEffects);
+        allEffectsLists.add(requirementEffects);
+        allEffectsLists.add(restrictionEffects);
+        allEffectsLists.add(asThoughEffects);
+        allEffectsLists.add(costModificationEffects);
     }
 
     public ContinuousEffects copy() {
@@ -427,14 +441,25 @@ public class ContinuousEffects implements Serializable {
         }
     }
 
+    public void setController(UUID cardId, UUID controllerId) {
+        for (ContinuousEffectsList effectsList : allEffectsLists) {
+            setControllerForEffect(effectsList, cardId, controllerId);
+        }
+    }
+
+    private void setControllerForEffect(ContinuousEffectsList<?> effects, UUID cardId, UUID controllerId) {
+        for (Effect effect : effects) {
+            Ability ability = effects.getAbility(effect.getId());
+            if (ability.getSourceId().equals(cardId)) {
+                ability.setControllerId(controllerId);
+            }
+        }
+    }
+
     public void clear() {
-        layeredEffects.clear();
-        replacementEffects.clear();
-        preventionEffects.clear();
-        requirementEffects.clear();
-        restrictionEffects.clear();
-        asThoughEffects.clear();
-        costModificationEffects.clear();
+        for (ContinuousEffectsList effectsList : allEffectsLists) {
+            effectsList.clear();
+        }
     }
 
 }
