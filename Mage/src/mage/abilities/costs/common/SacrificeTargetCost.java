@@ -51,6 +51,10 @@ public class SacrificeTargetCost extends CostImpl<SacrificeTargetCost> {
         this.addTarget(target);
         this.text = "Sacrifice " + target.getTargetName();
     }
+    
+    public SacrificeTargetCost(TargetControlledPermanent target, boolean noText) {
+        this.addTarget(target);
+    }
 
     public SacrificeTargetCost(SacrificeTargetCost cost) {
         super(cost);
