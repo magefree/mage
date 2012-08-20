@@ -45,6 +45,7 @@ public class WolfToken extends Token {
         subtype.add("Wolf");
         power = new MageInt(2);
         toughness = new MageInt(2);
+        setTokenType(Type.SECOND.code);
     }
 
     public WolfToken(Token.Type type) {

@@ -27,7 +27,6 @@ public class MasterOfThePearlTridentTest extends CardTestPlayerBase {
         setStopAt(3, Constants.PhaseStep.END_TURN);
         execute();
 
-
         assertPermanentCount(playerA, "Master of the Pearl Trident", 1);
         assertLife(playerB, 18);
         assertPowerToughness(playerA, "Merfolk of the Pearl Trident", 2, 2);
