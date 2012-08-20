@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common;
 
 import mage.Mana;
@@ -66,23 +65,24 @@ public class AddManaOfAnyColorEffect extends ManaEffect<AddManaOfAnyColorEffect>
         ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
         Player player = game.getPlayer(source.getControllerId());
 
+        Mana mana = null;
         if (choice.getColor().isBlack()) {
-            player.getManaPool().addMana(Mana.BlackMana(amount), game, source);
-            return true;
+            mana = Mana.BlackMana(amount);
         } else if (choice.getColor().isBlue()) {
-            player.getManaPool().addMana(Mana.BlueMana(amount), game, source);
-            return true;
+            mana = Mana.BlueMana(amount);
         } else if (choice.getColor().isRed()) {
-            player.getManaPool().addMana(Mana.RedMana(amount), game, source);
-            return true;
+            mana = Mana.RedMana(amount);
         } else if (choice.getColor().isGreen()) {
-            player.getManaPool().addMana(Mana.GreenMana(amount), game, source);
-            return true;
+            mana = Mana.GreenMana(amount);
         } else if (choice.getColor().isWhite()) {
-            player.getManaPool().addMana(Mana.WhiteMana(amount), game, source);
+            mana = Mana.WhiteMana(amount);
+        }
+
+        if (player != null && mana != null) {
+            player.getManaPool().addMana(mana, game, source);
             return true;
         }
+
         return false;
     }
-
 }

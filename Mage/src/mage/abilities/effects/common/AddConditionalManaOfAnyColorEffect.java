@@ -27,7 +27,6 @@
  */
 package mage.abilities.effects.common;
 
-import mage.ConditionalMana;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
@@ -41,7 +40,6 @@ import mage.players.Player;
 public class AddConditionalManaOfAnyColorEffect extends ManaEffect<AddConditionalManaOfAnyColorEffect> {
 
     private int amount;
-    private ConditionalMana conditionalMana;
     private ConditionalManaBuilder manaBuilder;
 
     public AddConditionalManaOfAnyColorEffect(int amount, ConditionalManaBuilder manaBuilder) {
@@ -65,34 +63,33 @@ public class AddConditionalManaOfAnyColorEffect extends ManaEffect<AddConditiona
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
+            return false;
+        }
 
-        if (player != null) {
-            for (int i = 0; i < amount; i++) {
-                addMana(game, player, source, (ChoiceColor) source.getChoices().get(i));
+        boolean result = false;
+        for (int i = 0; i < amount; i++) {
+            ChoiceColor choice = (ChoiceColor) source.getChoices().get(i);
+
+            Mana mana = null;
+            if (choice.getColor().isBlack()) {
+                mana = manaBuilder.setMana(Mana.BlackMana(1)).build();
+            } else if (choice.getColor().isBlue()) {
+                mana = manaBuilder.setMana(Mana.BlueMana(1)).build();
+            } else if (choice.getColor().isRed()) {
+                mana = manaBuilder.setMana(Mana.RedMana(1)).build();
+            } else if (choice.getColor().isGreen()) {
+                mana = manaBuilder.setMana(Mana.GreenMana(1)).build();
+            } else if (choice.getColor().isWhite()) {
+                mana = manaBuilder.setMana(Mana.WhiteMana(1)).build();
+            }
+
+            if (mana != null) {
+                player.getManaPool().addMana(mana, game, source);
+                result = true;
             }
         }
 
-        return false;
+        return result;
     }
-
-    private boolean addMana(Game game, Player player, Ability source, ChoiceColor choice) {
-        if (choice.getColor().isBlack()) {
-            player.getManaPool().addMana(manaBuilder.setMana(Mana.BlackMana(1)).build(), game, source);
-            return true;
-        } else if (choice.getColor().isBlue()) {
-            player.getManaPool().addMana(manaBuilder.setMana(Mana.BlueMana(1)).build(), game, source);
-            return true;
-        } else if (choice.getColor().isRed()) {
-            player.getManaPool().addMana(manaBuilder.setMana(Mana.RedMana(1)).build(), game, source);
-            return true;
-        } else if (choice.getColor().isGreen()) {
-            player.getManaPool().addMana(manaBuilder.setMana(Mana.GreenMana(1)).build(), game, source);
-            return true;
-        } else if (choice.getColor().isWhite()) {
-            player.getManaPool().addMana(manaBuilder.setMana(Mana.WhiteMana(1)).build(), game, source);
-            return true;
-        }
-        return false;
-    }
-
 }

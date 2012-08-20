@@ -59,24 +59,6 @@ public class AltarOfTheLost extends CardImpl<AltarOfTheLost> {
 
         // {tap}: Add two mana in any combination of colors to your mana pool. Spend this mana only to cast spells with flashback from a graveyard.
         this.addAbility(new ConditionalAnyColorManaAbility(2, new AltarOfTheLostManaBuilder()));
-
-        /*
-        this.addAbility(new AltarOfTheLostManaAbility(Mana.BlackMana(2)));
-        this.addAbility(new AltarOfTheLostManaAbility(Mana.BlueMana(2)));
-        this.addAbility(new AltarOfTheLostManaAbility(Mana.RedMana(2)));
-        this.addAbility(new AltarOfTheLostManaAbility(Mana.GreenMana(2)));
-        this.addAbility(new AltarOfTheLostManaAbility(Mana.WhiteMana(2)));
-        this.addAbility(new AltarOfTheLostManaAbility(new Mana(1, 1, 0, 0, 0, 0, 0)));
-        this.addAbility(new AltarOfTheLostManaAbility(new Mana(1, 0, 1, 0, 0, 0, 0)));
-        this.addAbility(new AltarOfTheLostManaAbility(new Mana(1, 0, 0, 1, 0, 0, 0)));
-        this.addAbility(new AltarOfTheLostManaAbility(new Mana(1, 0, 0, 0, 1, 0, 0)));
-        this.addAbility(new AltarOfTheLostManaAbility(new Mana(0, 1, 1, 0, 0, 0, 0)));
-        this.addAbility(new AltarOfTheLostManaAbility(new Mana(0, 1, 0, 1, 0, 0, 0)));
-        this.addAbility(new AltarOfTheLostManaAbility(new Mana(0, 1, 0, 0, 1, 0, 0)));
-        this.addAbility(new AltarOfTheLostManaAbility(new Mana(0, 0, 1, 1, 0, 0, 0)));
-        this.addAbility(new AltarOfTheLostManaAbility(new Mana(0, 0, 1, 0, 1, 0, 0)));
-        this.addAbility(new AltarOfTheLostManaAbility(new Mana(0, 0, 0, 1, 1, 0, 0)));
-        */
     }
 
     public AltarOfTheLost(final AltarOfTheLost card) {
@@ -116,8 +98,9 @@ class AltarOfTheLostManaCondition implements Condition {
         MageObject object = game.getObject(source.getSourceId());
         if (object != null && game.getState().getZone(object.getId()) == Zone.GRAVEYARD) {
             for (Ability ability: object.getAbilities()) {
-                if (ability instanceof FlashbackAbility)
+                if (ability instanceof FlashbackAbility) {
                     return true;
+                }
             }
         }
         return false;
