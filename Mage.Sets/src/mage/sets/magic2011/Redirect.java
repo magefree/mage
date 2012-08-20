@@ -28,12 +28,13 @@
 
 package mage.sets.magic2011;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.effects.common.ChooseNewTargetsTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *
@@ -42,7 +43,7 @@ import mage.target.TargetSpell;
 public class Redirect extends CardImpl<Redirect> {
 
     public Redirect(UUID ownerId) {
-        super(ownerId, 71, "Redirect", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}{U}");
+        super(ownerId, 71, "Redirect", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{U}{U}");
         this.expansionSetCode = "M11";
         this.color.setBlue(true);
         this.getSpellAbility().addTarget(new TargetSpell());

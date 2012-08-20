@@ -41,7 +41,7 @@ import java.util.UUID;
 public class Index extends CardImpl<Index> {
 
     public Index(UUID ownerId) {
-        super(ownerId, 25, "Index", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}");
+        super(ownerId, 25, "Index", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}");
         this.expansionSetCode = "APC";
         this.color.setBlue(true);
 
