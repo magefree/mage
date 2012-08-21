@@ -86,9 +86,9 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
     }
     @Override
     protected void cardLooked(Card card, Game game, Ability source) {
-
-            if (numberToPick.calculate(game, source) > 0 && filter.match(card, game))
-                    ++foundCardsToPick;
+        if (numberToPick.calculate(game, source) > 0 && filter.match(card, game)) {
+            ++foundCardsToPick;
+        }
     }
 
     @Override
@@ -125,7 +125,7 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
 
     @Override
     public String getText(Mode mode) {
-        StringBuilder sb = new StringBuilder();  
+        StringBuilder sb = new StringBuilder();
         if (numberToPick.calculate(null, null) > 0) {
             if (revealPickedCards) {
                 sb.append(". You may reveal a ");
@@ -136,11 +136,12 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
             sb.append(targetPickedCards.toString().toLowerCase());
             if (targetZoneLookedCards == Zone.LIBRARY) {
                 sb.append(". Put the rest ");
-                if (putOnTop)
+                if (putOnTop) {
                     sb.append("back ");
-                else
+                } else {
                     sb.append("on the bottom of your library ");
-                sb.append("in any order"); 
+                }
+                sb.append("in any order");
             } else if (targetZoneLookedCards == Zone.GRAVEYARD) {
                 sb.append(" and the other into your graveyard");
             }
