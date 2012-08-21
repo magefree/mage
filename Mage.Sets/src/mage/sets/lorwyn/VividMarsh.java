@@ -37,7 +37,7 @@ import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.AnyColorManaAbility;
-import mage.abilities.mana.BlueManaAbility;
+import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 
@@ -45,19 +45,20 @@ import java.util.UUID;
 
 /**
  *
- * @author anonymous
+ * @author Loki
  */
 public class VividMarsh extends CardImpl<VividMarsh> {
 
     public VividMarsh(UUID ownerId) {
         super(ownerId, 278, "Vivid Marsh", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "LRW";
+
         // Vivid Marsh enters the battlefield tapped with two charge counters on it.
         EntersBattlefieldEffect effect = new EntersBattlefieldEffect(new TapSourceEffect(true), "tapped with two charge counters on it");
         effect.addEffect(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(2)));
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect));
         // {tap}: Add {B} to your mana pool.
-        this.addAbility(new BlueManaAbility());
+        this.addAbility(new BlackManaAbility());
         // {tap}, Remove a charge counter from Vivid Marsh: Add one mana of any color to your mana pool.
         Ability ability = new AnyColorManaAbility();
         ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(1)));
