@@ -1,6 +1,7 @@
 Annihilator|number|
 Bloodthirst|number|
 Bushido|number|
+Dredge|number|
 Soulshift|number|
 Basic landcycling|cost|
 Cycling|cost|
