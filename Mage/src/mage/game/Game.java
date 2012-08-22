@@ -123,6 +123,7 @@ public interface Game extends MageItem, Serializable {
     public Player getLosingPlayer();
     public void setStateCheckRequired();
     public boolean getStateCheckRequired();
+    public void resetForSourceId(UUID sourceId);
 
     //client event methods
     public void addTableEventListener(Listener<TableEvent> listener);

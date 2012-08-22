@@ -1441,6 +1441,21 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     }
 
     @Override
+    public void resetForSourceId(UUID sourceId) {
+        // make sure that all effects don't touch this card once it returns back to battlefield
+        // e.g. this prevents effects affect creature with undying return from graveyard
+        for (ContinuousEffect effect : getContinuousEffects().getLayeredEffects(this)) {
+            if (effect.getAffectedObjects().contains(sourceId)) {
+                effect.getAffectedObjects().remove(sourceId);
+            }
+            if (effect.getAffectedObjects().contains(sourceId)) {
+                effect.getAffectedObjects().remove(sourceId);
+            }
+        }
+        getContinuousEffects().removeGainedEffectsForSource(sourceId);
+    }
+
+    @Override
     public void cheat(UUID ownerId, Map<Zone, String> commands) {
         if (commands != null) {
             Player player = getPlayer(ownerId);

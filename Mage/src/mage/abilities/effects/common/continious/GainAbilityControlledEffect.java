@@ -106,7 +106,7 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl<GainAbilit
             if (!this.affectedObjectsSet || objects.contains(perm.getId())) {
                 if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
                     for (Ability abilityToAdd : ability) {
-                        perm.addAbility(abilityToAdd, game);
+                        perm.addAbility(abilityToAdd, source.getSourceId(), game);
                     }
                 }
             }

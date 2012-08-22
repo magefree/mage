@@ -365,6 +365,10 @@ public class GameState implements Serializable, Copyable<GameState> {
         effects.addEffect(effect, source);
     }
 
+    public void addEffect(ContinuousEffect effect, UUID sourceId, Ability source) {
+        effects.addEffect(effect, sourceId, source);
+    }
+
 //    public void addMessage(String message) {
 //        this.messages.add(message);
 //    }
@@ -440,6 +444,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
     }
 
+    @Deprecated
     public void addAbility(Ability ability, MageObject attachedTo) {
         if (ability instanceof StaticAbility) {
             if (ability instanceof KickerAbility) {
@@ -454,6 +459,25 @@ public class GameState implements Serializable, Copyable<GameState> {
             }
         }
         else if (ability instanceof TriggeredAbility) {
+            this.triggers.add((TriggeredAbility)ability, attachedTo);
+        }
+    }
+
+    public void addAbility(Ability ability, UUID sourceId, MageObject attachedTo) {
+        if (ability instanceof StaticAbility) {
+            if (ability instanceof KickerAbility) {
+                return;
+            }
+            for (Mode mode: ability.getModes().values()) {
+                for (Effect effect: mode.getEffects()) {
+                    if (effect instanceof ContinuousEffect) {
+                        addEffect((ContinuousEffect)effect, sourceId, ability);
+                    }
+                }
+            }
+        }
+        else if (ability instanceof TriggeredAbility) {
+            // TODO: add sources for triggers - the same way as in addEffect: sources
             this.triggers.add((TriggeredAbility)ability, attachedTo);
         }
     }

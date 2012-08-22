@@ -65,7 +65,7 @@ public class LoseAllAbilitiesTargetEffect extends ContinuousEffectImpl {
         for (UUID permanentId : targetPointer.getTargets(game, source)) {
             Permanent permanent = game.getPermanent(permanentId);
             if (permanent != null) {
-                permanent.getAbilities().clear();
+                permanent.removeAllAbilities(source.getSourceId(), game);
                 affectedTargets++;
             }
         }

@@ -44,6 +44,7 @@ import mage.cards.Card;
 import mage.choices.Choice;
 import mage.choices.Choices;
 import mage.game.Game;
+import mage.game.permanent.PermanentCard;
 import mage.target.Target;
 import mage.target.Targets;
 import org.apache.log4j.Logger;
@@ -475,6 +476,19 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
             MageObject lkiTest = game.getShortLivingLKI(getSourceId(), zone);
             if (lkiTest != null) {
                 return true;
+            }
+        }
+
+        MageObject object = game.getObject(getSourceId());
+        if (object != null && !object.getAbilities().contains(this)) {
+            boolean found = false;
+            // unfortunately we need to handle double faced cards separately and only this way
+            if (object instanceof PermanentCard && ((PermanentCard)object).canTransform()) {
+                PermanentCard permanent = (PermanentCard)object;
+                found = permanent.getSecondCardFace().getAbilities().contains(this) || permanent.getCard().getAbilities().contains(this);
+            }
+            if (!found) {
+                return false;
             }
         }
 

@@ -114,7 +114,11 @@ public interface Permanent extends Card, Controllable {
     @Deprecated
     @Override
     public void addAbility(Ability ability);
+    @Deprecated
     public void addAbility(Ability ability, Game game);
+    public void addAbility(Ability ability, UUID sourceId, Game game);
+    
+    public void removeAllAbilities(UUID sourceId, Game game);
 
     public void setLoyaltyUsed(boolean used);
     public boolean isLoyaltyUsed();

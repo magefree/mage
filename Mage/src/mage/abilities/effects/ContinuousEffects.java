@@ -65,6 +65,8 @@ public class ContinuousEffects implements Serializable {
     private final AuraReplacementEffect auraReplacementEffect;
 
     private List<ContinuousEffect> previous = new ArrayList<ContinuousEffect>();
+    
+    private Map<Effect, UUID> sources = new HashMap<Effect, UUID>();
 
     public ContinuousEffects() {
         applyCounters = new ApplyCountersEffect();
@@ -84,6 +86,9 @@ public class ContinuousEffects implements Serializable {
         restrictionEffects = effect.restrictionEffects.copy();
         asThoughEffects = effect.asThoughEffects.copy();
         costModificationEffects = effect.costModificationEffects.copy();
+        for (Map.Entry<Effect, UUID> entry : effect.sources.entrySet()) {
+            sources.put(entry.getKey(), entry.getValue());
+        }
         collectAllEffects();
     }
 
@@ -384,9 +389,12 @@ public class ContinuousEffects implements Serializable {
         }
         layer = filterLayeredEffects(layerEffects, Layer.AbilityAddingRemovingEffects_6);
         for (ContinuousEffect effect: layer) {
-            effect.apply(Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, layeredEffects.getAbility(effect.getId()), game);
+            layerEffects = getLayeredEffects(game);
+            if (layerEffects.contains(effect)) {
+                effect.apply(Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, layeredEffects.getAbility(effect.getId()), game);
+            }
         }
-        layerEffects = getLayeredEffects(game);
+
         layer = filterLayeredEffects(layerEffects, Layer.PTChangingEffects_7);
         for (ContinuousEffect effect: layer) {
             effect.apply(Layer.PTChangingEffects_7, SubLayer.SetPT_7b, layeredEffects.getAbility(effect.getId()), game);
@@ -406,6 +414,11 @@ public class ContinuousEffects implements Serializable {
         for (ContinuousEffect effect: layer) {
             effect.apply(Layer.RulesEffects, SubLayer.NA, layeredEffects.getAbility(effect.getId()), game);
         }
+    }
+
+    public void addEffect(ContinuousEffect effect, UUID sourceId, Ability source) {
+        addEffect(effect, source);
+        sources.put(effect, sourceId);
     }
 
     public void addEffect(ContinuousEffect effect, Ability source) {
@@ -460,6 +473,42 @@ public class ContinuousEffects implements Serializable {
         for (ContinuousEffectsList effectsList : allEffectsLists) {
             effectsList.clear();
         }
+        sources.clear();
+    }
+
+    /**
+     * Removes all granted effects
+     */
+    public void removeGainedEffects() {
+        for (Map.Entry<Effect, UUID> source : sources.entrySet()) {
+            for (ContinuousEffectsList effectsList : allEffectsLists) {
+                Ability ability = effectsList.getAbility(source.getKey().getId());
+                if (ability != null && !ability.getSourceId().equals(source.getValue())) {
+                    effectsList.removeEffect((ContinuousEffect) source.getKey());
+                }
+            }
+        }
+    }
+
+    /**
+     * Removes effects granted by sourceId
+     *
+     * @param sourceId
+     */
+    public List<Effect> removeGainedEffectsForSource(UUID sourceId) {
+        List<Effect> effects = new ArrayList<Effect>();
+        for (Map.Entry<Effect, UUID> source : sources.entrySet()) {
+            if (sourceId.equals(source.getValue())) {
+                for (ContinuousEffectsList effectsList : allEffectsLists) {
+                    Ability ability = effectsList.getAbility(source.getKey().getId());
+                    if (ability != null && !ability.getSourceId().equals(source.getValue())) {
+                        effectsList.removeEffect((ContinuousEffect) source.getKey());
+                        effects.add(source.getKey());
+                    }
+                }
+            }
+        }
+        return effects;
     }
 
 }

@@ -399,7 +399,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
             PermanentCard permanent = new PermanentCard(this, controllerId);
             game.addPermanent(permanent);
             game.setZone(objectId, Zone.BATTLEFIELD);
-            game.applyEffects();
+            //game.applyEffects(); // magenoxx: this causes bugs
             permanent.entersBattlefield(sourceId, game);
             game.applyEffects();
             game.fireEvent(new ZoneChangeEvent(permanent, controllerId, fromZone, Zone.BATTLEFIELD));

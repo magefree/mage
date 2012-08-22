@@ -108,6 +108,18 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
         return abilityMap.get(effectId);
     }
 
+    public void removeEffect(T effect) {
+        for (Iterator<T> i = this.iterator(); i.hasNext();) {
+            T entry = i.next();
+            if (entry.equals(effect)) {
+                i.remove();
+                if (abilityMap.containsKey(effect.getId())) {
+                    abilityMap.remove(effect.getId());
+                }
+            }
+        }
+    }
+
     @Override
     public void clear() {
         super.clear();

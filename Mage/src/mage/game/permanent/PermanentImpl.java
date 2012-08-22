@@ -183,6 +183,22 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
     }
 
     @Override
+    public void addAbility(Ability ability, UUID sourceId, Game game) {
+        if (!abilities.containsKey(ability.getId())) {
+            Ability copy = ability.copy();
+            copy.setControllerId(controllerId);
+            copy.setSourceId(objectId);
+            game.getState().addAbility(copy, sourceId, this);
+            abilities.add(copy);
+        }
+    }
+    
+    @Override
+    public void removeAllAbilities(UUID sourceId, Game game) {
+        getAbilities().clear();
+    }
+
+    @Override
     public Counters getCounters() {
         return counters;
     }
