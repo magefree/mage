@@ -55,7 +55,7 @@ public class StitchedDrake extends CardImpl<StitchedDrake> {
 
         this.addAbility(FlyingAbility.getInstance());
 
-        // As an addition cost to cast Stitched Drake, exile a creature card from your graveyard.
+        // As an additional cost to cast Stitched Drake, exile a creature card from your graveyard.
         this.getSpellAbility().addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard"))));
     }
 

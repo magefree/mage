@@ -85,7 +85,12 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
                 if (ability.getCosts().size() > 0) {
                     StringBuilder sbRule = new StringBuilder();
                     for (Cost cost: ability.getCosts()) {
-                        sbRule.append(cost.getText()).append(".\n");
+                        if (cost.getText() != null && !cost.getText().isEmpty()) {
+                            if (!cost.getText().startsWith("As an additional cost")) {
+                                sbRule.append("As an additional cost to cast {this}, ");
+                            }
+                            sbRule.append(cost.getText()).append(".\n");
+                        }
                     }
                     rules.add(sbRule.toString());
                 }

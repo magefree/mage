@@ -89,7 +89,7 @@ class SilvergillAdeptCost extends CostImpl<SilvergillAdeptCost> {
     }
 
     public SilvergillAdeptCost() {
-        this.text = "As an additional cost to cast Silvergill Adept, reveal a Merfolk card from your hand or pay {3}";
+        this.text = "reveal a Merfolk card from your hand or pay {3}";
     }
 
     public SilvergillAdeptCost(SilvergillAdeptCost cost) {
