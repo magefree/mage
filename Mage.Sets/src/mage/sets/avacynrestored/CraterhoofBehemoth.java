@@ -27,7 +27,7 @@
  */
 package mage.sets.avacynrestored;
 
-import java.util.UUID;
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
@@ -41,6 +41,9 @@ import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -49,6 +52,10 @@ import mage.filter.common.FilterCreaturePermanent;
 public class CraterhoofBehemoth extends CardImpl<CraterhoofBehemoth> {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+
+    static {
+        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
+    }
 
     public CraterhoofBehemoth(UUID ownerId) {
         super(ownerId, 172, "Craterhoof Behemoth", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{5}{G}{G}{G}");
@@ -60,6 +67,7 @@ public class CraterhoofBehemoth extends CardImpl<CraterhoofBehemoth> {
         this.toughness = new MageInt(5);
 
         this.addAbility(HasteAbility.getInstance());
+
         // When Craterhoof Behemoth enters the battlefield, creatures you control gain trample and get +X/+X until end of turn, where X is the number of creatures you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, filter));
         PermanentsOnBattlefieldCount x = new PermanentsOnBattlefieldCount(filter);
