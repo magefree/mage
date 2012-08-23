@@ -117,7 +117,8 @@ class SilvergillAdeptCost extends CostImpl<SilvergillAdeptCost> {
                 }
             }
         } else {
-            if (player.playMana(mana, game)) {
+            mana.clearPaid();
+            if (mana.pay(ability, game, player.getId(), player.getId(), false)) {
                 paid = true;
             }
         }
