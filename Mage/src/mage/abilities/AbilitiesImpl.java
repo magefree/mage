@@ -31,6 +31,7 @@ package mage.abilities;
 import mage.Constants.Zone;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.costs.AlternativeCost;
+import mage.abilities.costs.Cost;
 import mage.abilities.keyword.KickerAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.mana.ManaAbility;
@@ -73,12 +74,21 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
         for (T ability:this) {
             if (!(ability instanceof SpellAbility || ability instanceof PlayLandAbility))
                 rules.add(ability.getRule());
-            if (ability instanceof SpellAbility && ability.getAlternativeCosts().size() > 0) {
-                StringBuilder sbRule = new StringBuilder();
-                for (AlternativeCost cost: ability.getAlternativeCosts()) {
-                    sbRule.append(cost.getName()).append(".\n");
+            if (ability instanceof SpellAbility) {
+                if (ability.getAlternativeCosts().size() > 0) {
+                    StringBuilder sbRule = new StringBuilder();
+                    for (AlternativeCost cost: ability.getAlternativeCosts()) {
+                        sbRule.append(cost.getName()).append(".\n");
+                    }
+                    rules.add(sbRule.toString());
                 }
-                rules.add(sbRule.toString());
+                if (ability.getCosts().size() > 0) {
+                    StringBuilder sbRule = new StringBuilder();
+                    for (Cost cost: ability.getCosts()) {
+                        sbRule.append(cost.getText()).append(".\n");
+                    }
+                    rules.add(sbRule.toString());
+                }
             }
         }
 
