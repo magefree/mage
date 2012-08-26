@@ -41,9 +41,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPlayer;
 
 /**
@@ -84,7 +84,7 @@ class DawnglareInvokerEffect extends OneShotEffect<DawnglareInvokerEffect> {
 
     public DawnglareInvokerEffect() {
         super(Outcome.Tap);
-        staticText = "Tap all creatures target player controls.";
+        staticText = "Tap all creatures target player controls";
     }
 
     public DawnglareInvokerEffect(final DawnglareInvokerEffect effect) {
@@ -93,20 +93,22 @@ class DawnglareInvokerEffect extends OneShotEffect<DawnglareInvokerEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getFirstTarget());
-        if (player != null) {
-            List<Permanent> allCreatures = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game);
-            for (Permanent creature : allCreatures) {
-                creature.tap(game);
-            }
-            return true;
+        if (source.getFirstTarget() == null) {
+            return false;
         }
-        return false;
+
+        FilterCreaturePermanent filter = new FilterCreaturePermanent();
+        filter.add(new ControllerIdPredicate(source.getFirstTarget()));
+
+        List<Permanent> creatures = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
+        for (Permanent creature : creatures) {
+            creature.tap(game);
+        }
+        return true;
     }
 
     @Override
     public DawnglareInvokerEffect copy() {
         return new DawnglareInvokerEffect(this);
     }
-
 }
