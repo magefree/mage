@@ -57,7 +57,18 @@ public class Config2 {
         Properties p = new Properties();
         try {
             File file = new File(Config2.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath());
-            p.load(new FileInputStream(new File(file.getParent() + File.separator + "AIMinimax.properties")));
+            File propertiesFile = new File(file.getParent() + File.separator + "AIMinimax.properties");
+            if (propertiesFile.exists()) {
+                p.load(new FileInputStream(propertiesFile));
+            } else {
+//                p.setProperty("maxDepth", "10");
+                p.setProperty("maxNodes", "5000");
+                p.setProperty("evaluatorLifeFactor", "2");
+                p.setProperty("evaluatorPermanentFactor", "1");
+                p.setProperty("evaluatorCreatureFactor", "1");
+                p.setProperty("evaluatorHandFactor", "1");
+//                p.setProperty("maxThinkSeconds", "30");
+            }
         } catch (IOException ex) {
             logger.log(Level.SEVERE, null, ex);
         } catch (URISyntaxException ex) {
