@@ -11,7 +11,6 @@ import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.MagePlugins;
 import mage.client.plugins.adapters.MageActionCallback;
 import mage.client.util.Config;
-import mage.constants.Constants;
 import mage.interfaces.PluginException;
 import mage.interfaces.plugin.CardPlugin;
 import mage.interfaces.plugin.CounterPlugin;
@@ -32,6 +31,8 @@ import java.util.*;
 
 public class Plugins implements MagePlugins {
 
+    public static final String PLUGINS_DIRECTORY = "plugins/";
+
     private final static MagePlugins fINSTANCE =  new Plugins();
     private final static Logger logger = Logger.getLogger(Plugins.class);
     private static PluginManager pm;
@@ -50,7 +51,7 @@ public class Plugins implements MagePlugins {
     public void loadPlugins() {
         logger.info("Loading plugins...");
         pm = PluginManagerFactory.createPluginManager();
-        pm.addPluginsFrom(new File(Constants.PLUGINS_DIRECTORY).toURI());
+        pm.addPluginsFrom(new File(PLUGINS_DIRECTORY).toURI());
         this.cardPlugin = new CardPluginImpl();
         this.counterPlugin = pm.getPlugin(CounterPlugin.class);
         this.themePlugin = pm.getPlugin(ThemePlugin.class);
@@ -59,18 +60,24 @@ public class Plugins implements MagePlugins {
 
     @Override
     public void shutdown() {
-        if (pm != null) pm.shutdown();
+        if (pm != null) {
+            pm.shutdown();
+        }
     }
 
     @Override
     public void updateGamePanel(Map<String, JComponent> ui) {
-        if (MageFrame.isLite() || MageFrame.isGray() || themePlugin == null) return;
+        if (MageFrame.isLite() || MageFrame.isGray() || themePlugin == null) {
+            return;
+        }
         themePlugin.applyInGame(ui);
     }
 
     @Override
     public JComponent updateTablePanel(Map<String, JComponent> ui) {
-        if (MageFrame.isLite() || MageFrame.isGray() || themePlugin == null) return null;
+        if (MageFrame.isLite() || MageFrame.isGray() || themePlugin == null) {
+            return null;
+        }
         return themePlugin.updateTable(ui);
     }
 
@@ -106,7 +113,9 @@ public class Plugins implements MagePlugins {
     @Override
     public int sortPermanents(Map<String, JComponent> ui, Collection<MagePermanent> permanents) {
         sortingOptions.put("nonLandPermanentsInOnePile", PreferencesDialog.getCachedValue("nonLandPermanentsInOnePile", "false"));
-        if (this.cardPlugin != null) return this.cardPlugin.sortPermanents(ui, permanents, sortingOptions);
+        if (this.cardPlugin != null) {
+            return this.cardPlugin.sortPermanents(ui, permanents, sortingOptions);
+        }
         return -1;
     }
 
@@ -121,14 +130,18 @@ public class Plugins implements MagePlugins {
     public void downloadImage(Set<mage.cards.Card> allCards) {
         String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
         String path = useDefault.equals("true") ? null : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
-        if (this.cardPlugin != null) this.cardPlugin.downloadImages(allCards, path);
+        if (this.cardPlugin != null) {
+            this.cardPlugin.downloadImages(allCards, path);
+        }
     }
 
     @Override
     public void downloadSymbols() {
         String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
         String path = useDefault.equals("true") ? null : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
-        if (this.cardPlugin != null) this.cardPlugin.downloadSymbols(path);
+        if (this.cardPlugin != null) {
+            this.cardPlugin.downloadSymbols(path);
+        }
     }
 
     @Override
@@ -208,6 +221,7 @@ public class Plugins implements MagePlugins {
         return null;
     }
 
+    @Override
     public ActionCallback getActionCallback() {
         return mageActionCallback;
     }

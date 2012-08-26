@@ -68,8 +68,6 @@ public final class Constants {
 
     public static final double SCALE_FACTOR = 0.5;
 
-    public static final String PLUGINS_DIRECTORY = "plugins/";
-
     public enum SessionState {
         DISCONNECTED, CONNECTED, CONNECTING, DISCONNECTING, SERVER_UNAVAILABLE, SERVER_STARTING;
     }
