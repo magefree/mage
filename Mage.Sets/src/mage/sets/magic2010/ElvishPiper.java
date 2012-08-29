@@ -27,23 +27,19 @@
  */
 package mage.sets.magic2010;
 
-import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
+import mage.abilities.common.PutCreatureOnBattlefieldEffect;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreatureCard;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetCardInHand;
+
+import java.util.UUID;
 
 /**
  *
@@ -77,33 +73,5 @@ public class ElvishPiper extends CardImpl<ElvishPiper> {
     @Override
     public ElvishPiper copy() {
         return new ElvishPiper(this);
-    }
-}
-
-class PutCreatureOnBattlefieldEffect extends OneShotEffect<PutCreatureOnBattlefieldEffect> {
-
-    public PutCreatureOnBattlefieldEffect() {
-        super(Outcome.PutCreatureInPlay);
-        this.staticText = "You may put a creature card from your hand into play";
-    }
-
-    public PutCreatureOnBattlefieldEffect(final PutCreatureOnBattlefieldEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public PutCreatureOnBattlefieldEffect copy() {
-        return new PutCreatureOnBattlefieldEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(source.getFirstTarget());
-        Player player = game.getPlayer(card.getOwnerId());
-        if (card != null && player != null) {
-            card.putOntoBattlefield(game, Zone.HAND, source.getId(), source.getControllerId());
-            return true;
-        }
-        return false;
     }
 }

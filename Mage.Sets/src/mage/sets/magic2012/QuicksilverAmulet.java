@@ -27,22 +27,16 @@
  */
 package mage.sets.magic2012;
 
-import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
-import mage.abilities.Ability;
+import mage.abilities.common.PutCreatureOnBattlefieldEffect;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreatureCard;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.common.TargetCardInHand;
+
+import java.util.UUID;
 
 /**
  *
@@ -72,39 +66,4 @@ public class QuicksilverAmulet extends CardImpl<QuicksilverAmulet> {
     }
 }
 
-class PutCreatureOnBattlefieldEffect extends OneShotEffect<PutCreatureOnBattlefieldEffect> {
 
-    private static final String choiceText = "Put a creature card from your hand onto the battlefield?";
-
-    public PutCreatureOnBattlefieldEffect() {
-        super(Outcome.PutCreatureInPlay);
-        this.staticText = "You may put a creature card from your hand onto the battlefield";
-    }
-
-    public PutCreatureOnBattlefieldEffect(final PutCreatureOnBattlefieldEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public PutCreatureOnBattlefieldEffect copy() {
-        return new PutCreatureOnBattlefieldEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null || !player.chooseUse(Outcome.PutCreatureInPlay, choiceText, game)) {
-            return false;
-        }
-
-        TargetCardInHand target = new TargetCardInHand(new FilterCreatureCard());
-        if (player.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
-            Card card = game.getCard(target.getFirstTarget());
-            if (card != null) {
-                card.putOntoBattlefield(game, Zone.HAND, source.getId(), source.getControllerId());
-                return true;
-            }
-        }
-        return false;
-    }
-}
