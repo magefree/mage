@@ -28,11 +28,12 @@
 
 package mage.game.turn;
 
+import mage.Constants.PhaseStep;
+import mage.Constants.TurnPhase;
+
 import java.util.ArrayList;
 import java.util.ListIterator;
 import java.util.UUID;
-import mage.Constants.PhaseStep;
-import mage.Constants.TurnPhase;
 
 /**
  *
@@ -117,13 +118,13 @@ public class TurnMods extends ArrayList<TurnMod> {
         return false;
     }
 
-    public TurnPhase extraPhase(UUID playerId, TurnPhase afterPhase) {
+    public TurnMod extraPhase(UUID playerId, TurnPhase afterPhase) {
         ListIterator<TurnMod> it = this.listIterator(this.size());
         while (it.hasPrevious()) {
             TurnMod turnMod = it.previous();
             if (turnMod.getExtraPhase() != null && turnMod.getPlayerId().equals(playerId) && turnMod.getExtraPhase() != null && (turnMod.getAfterPhase() == null || turnMod.getAfterPhase() == afterPhase)) {
                 it.remove();
-                return turnMod.getExtraPhase();
+                return turnMod;
             }
         }
         return null;

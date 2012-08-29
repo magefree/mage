@@ -28,10 +28,11 @@
 
 package mage.game.turn;
 
-import java.io.Serializable;
-import java.util.UUID;
 import mage.Constants.PhaseStep;
 import mage.Constants.TurnPhase;
+
+import java.io.Serializable;
+import java.util.UUID;
 
 /**
  * stores extra turns, phases or steps
@@ -40,6 +41,7 @@ import mage.Constants.TurnPhase;
  */
 public class TurnMod implements Serializable {
 
+    private UUID id;
     private UUID playerId;
     private UUID newControllerId;
     private boolean extraTurn;
@@ -52,6 +54,7 @@ public class TurnMod implements Serializable {
     private PhaseStep afterStep;
 
     public TurnMod(UUID playerId, boolean skip) {
+        this.id = UUID.randomUUID();
         this.playerId = playerId;
         if (skip)
             this.skipTurn = true;
@@ -60,22 +63,9 @@ public class TurnMod implements Serializable {
     }
 
     public TurnMod(UUID playerId, UUID newControllerId) {
+        this.id = UUID.randomUUID();
         this.playerId = playerId;
         this.newControllerId = newControllerId;
-    }
-
-    public TurnMod(final TurnMod mod) {
-        this.playerId = mod.playerId;
-        this.newControllerId = mod.newControllerId;
-        this.extraTurn = mod.extraTurn;
-        this.skipTurn = mod.skipTurn;
-        this.extraPhase = mod.extraPhase;
-        this.skipPhase = mod.skipPhase;
-        if (mod.extraStep != null)
-            this.extraStep = mod.extraStep.copy();
-        this.skipStep = mod.skipStep;
-        this.afterPhase = mod.afterPhase;
-        this.afterStep = mod.afterStep;
     }
 
     /**
@@ -85,6 +75,7 @@ public class TurnMod implements Serializable {
      * @param afterPhase - set to null if extraPhase is after the next phase
      */
     public TurnMod(UUID playerId, TurnPhase phase, TurnPhase afterPhase, boolean skip) {
+        this.id = UUID.randomUUID();
         this.playerId = playerId;
         if (skip)
             this.skipPhase = phase;
@@ -100,15 +91,32 @@ public class TurnMod implements Serializable {
      * @param afterStep - set to null if extraStep is after the next step
      */
     public TurnMod(UUID playerId, Step step, PhaseStep afterStep) {
+        this.id = UUID.randomUUID();
         this.playerId = playerId;
         this.extraStep = step;
         this.afterStep = afterStep;
     }
 
     public TurnMod(UUID playerId, PhaseStep step) {
+        this.id = UUID.randomUUID();
         this.playerId = playerId;
         this.skipStep = step;
-    }    
+    }
+
+    public TurnMod(final TurnMod mod) {
+        this.id = mod.id;
+        this.playerId = mod.playerId;
+        this.newControllerId = mod.newControllerId;
+        this.extraTurn = mod.extraTurn;
+        this.skipTurn = mod.skipTurn;
+        this.extraPhase = mod.extraPhase;
+        this.skipPhase = mod.skipPhase;
+        if (mod.extraStep != null)
+            this.extraStep = mod.extraStep.copy();
+        this.skipStep = mod.skipStep;
+        this.afterPhase = mod.afterPhase;
+        this.afterStep = mod.afterStep;
+    }
 
     public UUID getPlayerId() {
         return playerId;
@@ -152,5 +160,9 @@ public class TurnMod implements Serializable {
 
     public TurnMod copy() {
         return new TurnMod(this);
+    }
+
+    public UUID getId() {
+        return id;
     }
 }

@@ -128,11 +128,12 @@ public class Turn implements Serializable {
                     //game.saveState();
 
                     //20091005 - 500.8
-                    playExtraPhases(game, phase.getType());
+                    while (playExtraPhases(game, phase.getType()));
                 }
             }
-            if (!currentPhase.equals(phase)) // phase was changed from the card
-                break;
+            // magenoxx: this causes bugs when we need to add several phases connected with each other (WorldAtWarTest)
+            //if (!currentPhase.equals(phase)) // phase was changed from the card
+              //  break;
         }
 
     }
@@ -190,10 +191,13 @@ public class Turn implements Serializable {
         }
     }
 
-    private void playExtraPhases(Game game, TurnPhase afterPhase) {
-        TurnPhase extraPhase = game.getState().getTurnMods().extraPhase(activePlayerId, afterPhase);
+    private boolean playExtraPhases(Game game, TurnPhase afterPhase) {
+        TurnMod extraPhaseTurnMod = game.getState().getTurnMods().extraPhase(activePlayerId, afterPhase);
+        if (extraPhaseTurnMod == null)
+            return false;
+        TurnPhase extraPhase = extraPhaseTurnMod.getExtraPhase();
         if (extraPhase == null)
-            return;
+            return false;
         Phase phase;
         switch(extraPhase) {
             case BEGINNING:
@@ -212,8 +216,10 @@ public class Turn implements Serializable {
                 phase = new EndPhase();
         }
         currentPhase = phase;
-        game.fireEvent(new GameEvent(GameEvent.EventType.PHASE_CHANGED, activePlayerId, null, activePlayerId));
+        game.fireEvent(new GameEvent(GameEvent.EventType.PHASE_CHANGED, activePlayerId, extraPhaseTurnMod.getId(), activePlayerId));
         phase.play(game, activePlayerId);
+
+        return true;
     }
 
     /*protected void playExtraTurns(Game game) {
