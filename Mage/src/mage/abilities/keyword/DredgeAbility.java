@@ -92,9 +92,13 @@ class DredgeEffect extends ReplacementEffectImpl<DredgeEffect> {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        Card sourceCard = game.getCard(source.getSourceId());
+        if (sourceCard == null) {
+            return false;
+        }
         StringBuilder sb = new StringBuilder();
         sb.append("Put exactly ").append(amount).append(" cards from the top of your library into your graveyard?");
-        sb.append(" If you do, return this card from your graveyard to your hand. Otherwise, draw a card.");
+        sb.append(" If you do, return ").append(sourceCard.getName()).append(" from your graveyard to your hand. Otherwise, draw a card.");
 
         Player player = game.getPlayer(source.getControllerId());
         if (player != null && player.getLibrary().size() >= amount && player.chooseUse(outcome, sb.toString(), game)) {
