@@ -33,8 +33,6 @@ public class WorldAtWarTest extends CardTestPlayerBase {
         setStopAt(1, Constants.PhaseStep.END_TURN);
         execute();
         
-        System.out.println("player: " + playerA.getId());
-
         assertLife(playerB, 14);
         Permanent eliteVanguard = getPermanent("Elite Vanguard", playerA);
         Assert.assertTrue(eliteVanguard.isTapped());

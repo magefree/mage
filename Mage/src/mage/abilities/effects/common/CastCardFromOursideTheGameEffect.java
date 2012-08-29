@@ -32,6 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -78,14 +79,19 @@ public class CastCardFromOursideTheGameEffect extends OneShotEffect<CastCardFrom
                 return false;
             }
 
-            Set<Card> filteredCards = cards.getCards(filterCard, game);
-            if (filteredCards.isEmpty()) {
+            Set<Card> filtered = cards.getCards(filterCard, game);
+            if (filtered.isEmpty()) {
                 game.informPlayer(player, "You have no " + filterCard.getMessage() + " outside the game.");
                 return false;
             }
+            
+            Cards filteredCards = new CardsImpl();
+            for (Card card : filtered) {
+                filteredCards.add(card.getId());
+            }
 
             TargetCard target = new TargetCard(Constants.Zone.PICK, filterCard);
-            if (player.choose(Constants.Outcome.Benefit, cards, target, game)) {
+            if (player.choose(Constants.Outcome.Benefit, filteredCards, target, game)) {
                 Card card = player.getSideboard().get(target.getFirstTarget(), game);
                 if (card != null) {
                     player.cast(card.getSpellAbility(), game, true);

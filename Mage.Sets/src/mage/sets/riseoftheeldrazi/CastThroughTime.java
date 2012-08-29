@@ -125,8 +125,9 @@ class GainReboundEffect extends ContinuousEffectImpl<GainReboundEffect> {
         return false;
     }
 
-    private class AttachedReboundAbility extends ReboundAbility {}
 }
+
+class AttachedReboundAbility extends ReboundAbility {}
 
 class LeavesBattlefieldWatcher extends WatcherImpl<LeavesBattlefieldWatcher> {
 
@@ -148,7 +149,7 @@ class LeavesBattlefieldWatcher extends WatcherImpl<LeavesBattlefieldWatcher> {
                     for (Card card : player.getHand().getCards(CastThroughTime.filter, game)) {
                         Iterator<Ability> it = card.getAbilities().iterator();
                         while (it.hasNext()) {
-                            if (it.next() instanceof ReboundAbility) {
+                            if (it.next() instanceof AttachedReboundAbility) {
                                 it.remove();
                             }
                         }
