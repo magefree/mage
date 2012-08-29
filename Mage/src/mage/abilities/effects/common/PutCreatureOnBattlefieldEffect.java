@@ -1,4 +1,4 @@
-package mage.abilities.common;
+package mage.abilities.effects.common;
 
 import mage.Constants;
 import mage.abilities.Ability;
