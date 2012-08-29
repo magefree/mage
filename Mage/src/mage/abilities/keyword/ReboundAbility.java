@@ -37,6 +37,7 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.condition.common.MyTurnCondition;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
@@ -105,7 +106,16 @@ public class ReboundAbility extends TriggeredAbilityImpl<ReboundAbility> {
         if (event.getType() == EventType.SPELL_CAST && this.installReboundEffect) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null && spell.getSourceId().equals(this.getSourceId())) {
-                spell.getSpellAbility().addEffect(new ReboundEffect());
+                Effect reboundEffect = new ReboundEffect();
+                boolean found = false;
+                for (Effect effect : spell.getSpellAbility().getEffects())
+                if (effect instanceof ReboundEffect) {
+                    found = true;
+                    break;
+                }
+                if (!found) {
+                    spell.getSpellAbility().addEffect(reboundEffect);
+                }
                 this.installReboundEffect = false;
             }
         }

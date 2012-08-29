@@ -87,6 +87,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     protected boolean wins;
     protected boolean loses;
     protected Library library;
+    protected Cards sideboard;
     protected Cards hand;
     protected Cards graveyard;
     protected Abilities<Ability> abilities;
@@ -134,6 +135,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         counters = new Counters();
         manaPool = new ManaPool();
         library = new Library(playerId);
+        sideboard = new CardsImpl(Zone.OUTSIDE);
     }
 
     protected PlayerImpl(UUID id) {
@@ -149,6 +151,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.wins = player.wins;
         this.loses = player.loses;
         this.library = player.library.copy();
+        this.sideboard = player.sideboard.copy();
         this.hand = player.hand.copy();
         this.graveyard = player.graveyard.copy();
         this.abilities = player.abilities.copy();
@@ -176,6 +179,10 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     public void useDeck(Deck deck, Game game) {
         library.clear();
         library.addAll(deck.getCards(), game);
+        sideboard.clear();
+        for (Card card : deck.getSideboard()) {
+            sideboard.add(card);
+        }
     }
 
     @Override
@@ -794,6 +801,11 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     @Override
     public Library getLibrary() {
         return library;
+    }
+
+    @Override
+    public Cards getSideboard() {
+        return sideboard;
     }
 
     @Override

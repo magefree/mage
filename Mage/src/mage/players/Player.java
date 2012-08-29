@@ -71,6 +71,7 @@ public interface Player extends MageItem, Copyable<Player> {
     public String getName();
     public RangeOfInfluence getRange();
     public Library getLibrary();
+    public Cards getSideboard();
     public Cards getGraveyard();
     public Abilities<Ability> getAbilities();
     public void addAbility(Ability ability);
