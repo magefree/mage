@@ -118,7 +118,9 @@ public class CardUtil {
      *
      * @param target
      */
-    public static CopyFunction copyTo(Card target) {
+    @Deprecated
+    //public static CopyFunction copyTo(Card target) {
+    private static CopyFunction copyTo(Card target) {
         return new CopyFunction(target);
     }
 

@@ -27,27 +27,21 @@
  */
 package mage.sets.riseoftheeldrazi;
 
-import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Layer;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.SubLayer;
-import mage.Constants.Zone;
+import mage.Constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
-import mage.util.CardUtil;
+import mage.util.functions.EmptyApplyToPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -128,14 +122,15 @@ class RenegadeDoppelgangerEffect extends ContinuousEffectImpl<RenegadeDoppelgang
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(targetPointer.getFirst(game, source));
+        Permanent creature = game.getPermanent(targetPointer.getFirst(game, source));
         Permanent permanent = game.getPermanent(source.getSourceId());
 
-        if (card == null || permanent == null) {
+        if (creature == null || permanent == null) {
             return false;
         }
 
-        CardUtil.copyTo(permanent).from(card, game);
+        //CardUtil.copyTo(permanent).from(card, game);
+        game.copyPermanent(creature, permanent, source, new EmptyApplyToPermanent());
 
         return true;
     }
