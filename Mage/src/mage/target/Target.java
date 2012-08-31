@@ -28,15 +28,16 @@
 
 package mage.target;
 
-import java.io.Serializable;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.filter.Filter;
 import mage.game.Game;
+
+import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -69,6 +70,7 @@ public interface Target extends Serializable {
     public boolean choose(Outcome outcome, UUID playerId, UUID sourceId, Game game);
     public void add(UUID id, Game game);
     public void remove(UUID targetId);
+    public void updateTarget(UUID targetId, Game game);
 
     public String getMessage();
     public String getTargetName();

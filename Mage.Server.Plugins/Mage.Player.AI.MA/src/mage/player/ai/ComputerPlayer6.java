@@ -221,6 +221,11 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                 Ability ability = actions.poll();
                 System.out.println("[" + game.getPlayer(playerId).getName() + "] Action: " + ability.toString());
                 if (ability.getTargets().size() > 0) {
+                    for (Target target : ability.getTargets()) {
+                        for (UUID id : target.getTargets()) {
+                            target.updateTarget(id, game);
+                        }
+                    }
                     Player player = game.getPlayer(ability.getFirstTarget());
                     if (player != null) {
                         System.out.println("targets = " + player.getName());

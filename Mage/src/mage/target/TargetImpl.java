@@ -202,6 +202,11 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
             }
         }
     }
+    
+    @Override
+    public void updateTarget(UUID id, Game game) {
+        rememberZoneChangeCounter(id, game);
+    }
 
     private void rememberZoneChangeCounter(UUID id, Game game) {
         Card card = game.getCard(id);
