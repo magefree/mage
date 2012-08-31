@@ -974,6 +974,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     @Override
     public void restore(Player player) {
         this.library = player.getLibrary().copy();
+        this.sideboard = player.getSideboard().copy();
         this.hand = player.getHand().copy();
         this.graveyard = player.getGraveyard().copy();
         this.abilities = player.getAbilities().copy();
