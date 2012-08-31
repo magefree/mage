@@ -103,7 +103,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
     public ComputerPlayer6(String name, RangeOfInfluence range, int skill) {
         super(name, range);
         maxDepth = skill * 2;
-        maxThink = skill * 300;
+        maxThink = skill * 3;
         maxNodes = Config2.maxNodes;
         getSuggestedActions();
         this.actionCache = new HashSet<String>();
@@ -423,6 +423,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
         });
         pool.execute(task);
         try {
+            System.out.println("maxThink:" + maxThink);
             return task.get(maxThink, TimeUnit.SECONDS);
         } catch (TimeoutException e) {
             logger.info("simulating - timed out");
