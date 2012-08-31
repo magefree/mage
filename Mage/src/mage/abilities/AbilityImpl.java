@@ -369,8 +369,11 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
     }
 
     protected String formatRule(String rule, String source) {
-        String replace = rule.replace("{this}", source);
-        replace = replace.replace("{source}", source);
+        String replace = rule;
+        if (source != null && !source.isEmpty()) {
+            replace = rule.replace("{this}", source);
+            replace = replace.replace("{source}", source);
+        }
         return replace;
     }
 

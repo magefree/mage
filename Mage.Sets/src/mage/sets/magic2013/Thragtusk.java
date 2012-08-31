@@ -27,7 +27,6 @@
  */
 package mage.sets.magic2013;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
@@ -37,6 +36,8 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.game.permanent.token.BeastToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,6 +56,7 @@ public class Thragtusk extends CardImpl<Thragtusk> {
 
         // When Thragtusk enters the battlefield, you gain 5 life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(5)));
+
         // When Thragtusk leaves the battlefield, put a 3/3 green Beast creature token onto the battlefield.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new CreateTokenEffect(new BeastToken()), false));
     }
