@@ -121,6 +121,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
                 return false;
             }
             //20091005 - 608.2b
+            game.informPlayers(getName() + " has been fizzled.");
             counter(null, game);
             return false;
         } else {
