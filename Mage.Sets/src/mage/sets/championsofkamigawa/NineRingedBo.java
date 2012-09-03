@@ -35,7 +35,6 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -56,7 +55,7 @@ import mage.watchers.common.DamagedByWatcher;
  */
 public class NineRingedBo extends CardImpl<NineRingedBo> {
 
-     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("spirit");
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("spirit");
 
     static {
         filter.add(new SubtypePredicate("Spirit"));
@@ -69,12 +68,10 @@ public class NineRingedBo extends CardImpl<NineRingedBo> {
         // {T}: Nine-Ringed Bo deals 1 damage to target Spirit creature. If that creature would die this turn, exile it instead.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
-        // If that creature would die this turn, exile it instead.
+        ability.addEffect(new NineRingedBoEffect());
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NineRingedBoEffect()));
 
         this.addWatcher(new DamagedByWatcher());
-
     }
 
     public NineRingedBo(final NineRingedBo card) {
@@ -87,7 +84,7 @@ public class NineRingedBo extends CardImpl<NineRingedBo> {
     }
 }
 
-    class NineRingedBoEffect extends ReplacementEffectImpl<NineRingedBoEffect> {
+class NineRingedBoEffect extends ReplacementEffectImpl<NineRingedBoEffect> {
 
     public NineRingedBoEffect() {
         super(Duration.EndOfTurn, Outcome.Exile);
@@ -110,7 +107,7 @@ public class NineRingedBo extends CardImpl<NineRingedBo> {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent permanent = ((ZoneChangeEvent)event).getTarget();
+        Permanent permanent = ((ZoneChangeEvent) event).getTarget();
         if (permanent != null) {
             return permanent.moveToExile(null, "", source.getId(), game);
         }
@@ -119,15 +116,12 @@ public class NineRingedBo extends CardImpl<NineRingedBo> {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
-                        DamagedByWatcher watcher = 
-                                (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", source.getSourceId());
-                        if (watcher != null)
-                                return watcher.damagedCreatures.contains(event.getTargetId());
-                        }
+        if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).isDiesEvent()) {
+            DamagedByWatcher watcher = (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", source.getSourceId());
+            if (watcher != null) {
+                return watcher.damagedCreatures.contains(event.getTargetId());
+            }
+        }
         return false;
     }
-
 }
-
-
