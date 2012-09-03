@@ -29,12 +29,14 @@ package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -57,8 +59,11 @@ public class VirulentWound extends CardImpl<VirulentWound> {
 
         this.color.setBlack(true);
 
-        this.getSpellAbility().addEffect(new VirulentWoundEffect());
+        // Put a -1/-1 counter on target creature.
+        this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.M1M1.createInstance(), Outcome.UnboostCreature));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        // When that creature dies this turn, its controller gets a poison counter.
+        this.getSpellAbility().addEffect(new VirulentWoundEffect());
     }
 
     public VirulentWound(final VirulentWound card) {
@@ -89,17 +94,11 @@ class VirulentWoundEffect extends OneShotEffect<VirulentWoundEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent != null) {
-            permanent.addCounters(CounterType.M1M1.createInstance(), game);
-
-            DelayedTriggeredAbility delayedAbility = new VirulentWoundDelayedTriggeredAbility(permanent.getId());
-            delayedAbility.setSourceId(source.getSourceId());
-            delayedAbility.setControllerId(source.getControllerId());
-            game.addDelayedTriggeredAbility(delayedAbility);
-            return true;
-        }
-        return false;
+        DelayedTriggeredAbility delayedAbility = new VirulentWoundDelayedTriggeredAbility(source.getFirstTarget());
+        delayedAbility.setSourceId(source.getSourceId());
+        delayedAbility.setControllerId(source.getControllerId());
+        game.addDelayedTriggeredAbility(delayedAbility);
+        return true;
     }
 }
 
@@ -108,7 +107,7 @@ class VirulentWoundDelayedTriggeredAbility extends DelayedTriggeredAbility<Virul
     private UUID target;
 
     public VirulentWoundDelayedTriggeredAbility(UUID target) {
-        super(new VirulentWoundDelayedEffect(target));
+        super(new VirulentWoundDelayedEffect(target), Duration.EndOfTurn);
         this.target = target;
     }
 
