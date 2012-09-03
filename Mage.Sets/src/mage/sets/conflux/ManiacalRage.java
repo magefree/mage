@@ -33,11 +33,10 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.common.CantBlockAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.CantBlockAttachedEffect;
 import mage.abilities.effects.common.continious.BoostEnchantedEffect;
-import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.target.TargetPermanent;
@@ -64,7 +63,7 @@ public class ManiacalRage extends CardImpl<ManiacalRage> {
         this.addAbility(ability);
         // Enchanted creature gets +2/+2 and can't block.
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 2, Constants.Duration.WhileOnBattlefield)));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(CantBlockAbility.getInstance(), Constants.AttachmentType.AURA, Constants.Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new CantBlockAttachedEffect(Constants.AttachmentType.AURA)));
     }
 
     public ManiacalRage(final ManiacalRage card) {
