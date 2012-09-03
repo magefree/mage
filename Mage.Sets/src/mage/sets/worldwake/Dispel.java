@@ -42,7 +42,7 @@ import mage.target.TargetSpell;
  */
 public class Dispel extends CardImpl<Dispel> {
 
-    private static FilterSpell filter = new FilterSpell("instant spell");
+    private static final FilterSpell filter = new FilterSpell("instant spell");
 
     static {
             filter.add(new CardTypePredicate(CardType.INSTANT));

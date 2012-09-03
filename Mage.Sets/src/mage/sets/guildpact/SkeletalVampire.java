@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
- * @author anonymous
+ * @author Loki
  */
 public class SkeletalVampire extends CardImpl<SkeletalVampire> {
 
@@ -87,7 +87,7 @@ public class SkeletalVampire extends CardImpl<SkeletalVampire> {
 
 class BatToken extends Token {
     BatToken() {
-        super("Bat", "1/1 black Bat creature tokens with flying");
+        super("Bat", "1/1 black Bat creature token with flying");
         cardType.add(CardType.CREATURE);
         color = ObjectColor.BLACK;
         subtype.add("Bat");

@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -88,11 +89,14 @@ class WingPunctureEffect extends OneShotEffect<WingPunctureEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourceDamage = (Permanent) game.getPermanent(source.getFirstTarget());
-        Permanent target = (Permanent) game.getPermanent(source.getTargets().get(1).getFirstTarget());
+        Permanent sourcePermanent = game.getPermanent(source.getFirstTarget());
+        if (sourcePermanent == null) {
+            game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
+        }
 
-        if (sourceDamage != null && target != null) {
-            target.damage(sourceDamage.getPower().getValue(), sourceDamage.getId(), game, true, false);
+        Permanent targetPermanent = (Permanent) game.getPermanent(source.getTargets().get(1).getFirstTarget());
+        if (sourcePermanent != null && targetPermanent != null) {
+            targetPermanent.damage(sourcePermanent.getPower().getValue(), sourcePermanent.getId(), game, true, false);
             return true;
         }
         return false;

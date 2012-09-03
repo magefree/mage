@@ -101,9 +101,9 @@ class ReinforcedBulwarkEffect extends PreventionEffectImpl<ReinforcedBulwarkEffe
             if (damage > 0) {
                 event.setAmount(damage - 1);
                 this.used = true;
+                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE,
+                        source.getControllerId(), source.getId(), source.getControllerId(), 1));
             }
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE,
-                    source.getControllerId(), source.getId(), source.getControllerId(), damage));
         }
         return false;
     }

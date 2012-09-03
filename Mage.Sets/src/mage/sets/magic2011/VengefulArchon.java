@@ -112,19 +112,19 @@ class VengefulArchonEffect extends PreventionEffectImpl<VengefulArchonEffect> {
         if (!game.replaceEvent(preventEvent)) {
             Player player = game.getPlayer(source.getFirstTarget());
             if (player != null) {
+                int damage = event.getAmount();
                 if (event.getAmount() >= this.amount) {
-                    int damage = event.getAmount();
-                    event.setAmount(event.getAmount() - amount);
-                    player.damage(amount, source.getSourceId(), game, false, true);
+                    event.setAmount(damage - this.amount);
+                    damage = this.amount;
                     this.used = true;
-                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getControllerId(), source.getId(), source.getControllerId(), damage));
                 } else {
-                    int damage = event.getAmount();
                     event.setAmount(0);
-                    amount -= damage;
-                    player.damage(damage, source.getSourceId(), game, false, true);
-                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getControllerId(), source.getId(), source.getControllerId(), damage));
+                    this.amount -= damage;
                 }
+
+                player.damage(damage, source.getSourceId(), game, false, true);
+                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE,
+                        source.getControllerId(), source.getId(), source.getControllerId(), damage));
             }
         }
         return false;
