@@ -68,6 +68,8 @@ public class ControllerPredicate implements ObjectPlayerPredicate<ObjectPlayer<C
                     return true;
                 }
                 break;
+            case ANY:
+                return true;
         }
 
         return false;
