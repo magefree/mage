@@ -60,7 +60,7 @@ public class BlightsteelColossus extends CardImpl<BlightsteelColossus> {
         this.toughness = new MageInt(11);
         this.addAbility(TrampleAbility.getInstance());
         this.addAbility(InfectAbility.getInstance());
-        this.addAbility(IndestructibleAbility.getInstance());
+        this.addAbility(new IndestructibleAbility());
         this.addAbility(new PutIntoGraveFromAnywhereTriggeredAbility(new BlightsteelColossusEffect(), false));
     }
 

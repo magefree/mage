@@ -47,7 +47,7 @@ public class DarksteelMyr extends CardImpl<DarksteelMyr> {
         this.subtype.add("Myr");
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
-        this.addAbility(IndestructibleAbility.getInstance());
+        this.addAbility(new IndestructibleAbility());
     }
 
     public DarksteelMyr (final DarksteelMyr card) {

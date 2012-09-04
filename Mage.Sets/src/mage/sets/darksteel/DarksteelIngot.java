@@ -44,7 +44,7 @@ public class DarksteelIngot extends CardImpl<DarksteelIngot> {
     public DarksteelIngot(UUID ownerId) {
         super(ownerId, 112, "Darksteel Ingot", Constants.Rarity.COMMON, new Constants.CardType[]{Constants.CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "DST";
-        this.addAbility(IndestructibleAbility.getInstance());
+        this.addAbility(new IndestructibleAbility());
         this.addAbility(new AnyColorManaAbility());
     }
 

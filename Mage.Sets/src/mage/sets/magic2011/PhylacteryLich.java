@@ -65,7 +65,7 @@ public class PhylacteryLich extends CardImpl<PhylacteryLich> {
         this.toughness = new MageInt(5);
 
         this.addAbility(new AsEntersBattlefieldAbility(new PhylacteryLichEffect(), "put a phylactery counter on an artifact you control"));
-        this.addAbility(IndestructibleAbility.getInstance());
+        this.addAbility(new IndestructibleAbility());
         this.addAbility(new PhylacteryLichAbility());
     }
 

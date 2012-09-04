@@ -62,7 +62,7 @@ public class Indestructibility extends CardImpl<Indestructibility> {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // Enchanted permanent is indestructible.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(IndestructibleAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new IndestructibleAbility(), AttachmentType.AURA)));
     }
 
     public Indestructibility(final Indestructibility card) {

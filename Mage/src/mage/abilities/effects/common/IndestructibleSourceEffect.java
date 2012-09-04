@@ -25,45 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.abilities.effects.common;
 
-package mage.sets.championsofkamigawa;
-
-import java.util.UUID;
-
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.keyword.BushidoAbility;
-import mage.abilities.keyword.IndestructibleAbility;
-import mage.abilities.keyword.VigilanceAbility;
-import mage.cards.CardImpl;
+import mage.Constants.Duration;
+import mage.Constants.Outcome;
+import mage.abilities.Ability;
+import mage.abilities.effects.ReplacementEffectImpl;
+import mage.game.Game;
+import mage.game.events.GameEvent;
 
 /**
- * @author Loki
+ *
+ * @author North
  */
-public class KondaLordOfEiganjo extends CardImpl<KondaLordOfEiganjo> {
+public class IndestructibleSourceEffect extends ReplacementEffectImpl<IndestructibleSourceEffect> {
 
-    public KondaLordOfEiganjo(UUID ownerId) {
-        super(ownerId, 30, "Konda, Lord of Eiganjo", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
-        this.expansionSetCode = "CHK";
-        this.supertype.add("Legendary");
-        this.subtype.add("Human");
-        this.subtype.add("Samurai");
-        this.color.setWhite(true);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-        this.addAbility(VigilanceAbility.getInstance());
-        this.addAbility(new BushidoAbility(5));
-        this.addAbility(new IndestructibleAbility());
+    public IndestructibleSourceEffect(Duration duration) {
+        super(duration, Outcome.Benefit);
+        this.staticText = "{this} is indestructible";
     }
 
-    public KondaLordOfEiganjo(final KondaLordOfEiganjo card) {
-        super(card);
+    public IndestructibleSourceEffect(ReplacementEffectImpl effect) {
+        super(effect);
     }
 
     @Override
-    public KondaLordOfEiganjo copy() {
-        return new KondaLordOfEiganjo(this);
+    public IndestructibleSourceEffect copy() {
+        return new IndestructibleSourceEffect(this);
     }
 
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        return true;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        return event.getType().equals(GameEvent.EventType.DESTROY_PERMANENT)
+                && event.getTargetId().equals(source.getSourceId());
+    }
 }

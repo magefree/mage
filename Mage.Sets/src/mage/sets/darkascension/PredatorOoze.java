@@ -54,7 +54,7 @@ public class PredatorOoze extends CardImpl<PredatorOoze> {
         this.toughness = new MageInt(1);
 
         // Predator Ooze is indestructible.
-        this.addAbility(IndestructibleAbility.getInstance());
+        this.addAbility(new IndestructibleAbility());
 
         // Whenever Predator Ooze attacks, put a +1/+1 counter on it.
        this.addAbility(new AttacksTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));

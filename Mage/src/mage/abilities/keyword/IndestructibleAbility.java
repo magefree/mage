@@ -25,43 +25,29 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.keyword;
 
+import mage.Constants.Duration;
 import mage.Constants.Zone;
-import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
-
-import java.io.ObjectStreamException;
+import mage.abilities.effects.common.IndestructibleSourceEffect;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class IndestructibleAbility extends StaticAbility<IndestructibleAbility> implements MageSingleton {
+public class IndestructibleAbility extends StaticAbility<IndestructibleAbility> {
 
-    private static final IndestructibleAbility fINSTANCE =  new IndestructibleAbility();
-
-    private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+    public IndestructibleAbility() {
+        super(Zone.BATTLEFIELD, new IndestructibleSourceEffect(Duration.WhileOnBattlefield));
     }
 
-    public static IndestructibleAbility getInstance() {
-        return fINSTANCE;
-    }
-
-    private IndestructibleAbility() {
-        super(Zone.BATTLEFIELD, null);
-    }
-
-    @Override
-    public String getRule() {
-        return "Indestructible";
+    private IndestructibleAbility(IndestructibleAbility ability) {
+        super(ability);
     }
 
     @Override
     public IndestructibleAbility copy() {
-        return fINSTANCE;
+        return new IndestructibleAbility(this);
     }
-
 }

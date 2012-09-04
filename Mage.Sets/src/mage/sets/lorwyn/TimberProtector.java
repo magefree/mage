@@ -69,7 +69,7 @@ public class TimberProtector extends CardImpl<TimberProtector> {
         // Other Treefolk creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Constants.Duration.WhileOnBattlefield, filterTreefolk, true)));
         // Other Treefolk and Forests you control are indestructible.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(IndestructibleAbility.getInstance(), Constants.Duration.WhileOnBattlefield, filterBoth, true)));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(new IndestructibleAbility(), Constants.Duration.WhileOnBattlefield, filterBoth, true)));
     }
 
     public TimberProtector(final TimberProtector card) {

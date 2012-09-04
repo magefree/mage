@@ -51,7 +51,7 @@ public class DarksteelBrute extends CardImpl<DarksteelBrute> {
     public DarksteelBrute (UUID ownerId) {
         super(ownerId, 108, "Darksteel Brute", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "DST";
-        this.addAbility(IndestructibleAbility.getInstance());
+        this.addAbility(new IndestructibleAbility());
         this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new DarksteelBruteToken(), "", Duration.EndOfTurn), new GenericManaCost(3)));
     }
 

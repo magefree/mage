@@ -119,7 +119,7 @@ class ElspethKnightErrantEffect extends ContinuousEffectImpl<ElspethKnightErrant
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
-            perm.addAbility(IndestructibleAbility.getInstance(), game);
+            perm.addAbility(new IndestructibleAbility(), game);
         }
         return true;
     }

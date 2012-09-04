@@ -57,7 +57,7 @@ public class DeathlessAngel extends CardImpl<DeathlessAngel> {
         this.power = new MageInt(5);
         this.toughness = new MageInt(7);
         this.addAbility(FlyingAbility.getInstance());
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Constants.Duration.EndOfTurn), new ManaCostsImpl("{W}{W}"));
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainAbilityTargetEffect(new IndestructibleAbility(), Constants.Duration.EndOfTurn), new ManaCostsImpl("{W}{W}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

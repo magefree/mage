@@ -51,7 +51,7 @@ public class DarksteelSentinel extends CardImpl<DarksteelSentinel> {
         this.toughness = new MageInt(3);
         this.addAbility(FlashAbility.getInstance());
         this.addAbility(VigilanceAbility.getInstance());
-        this.addAbility(IndestructibleAbility.getInstance());
+        this.addAbility(new IndestructibleAbility());
     }
 
     public DarksteelSentinel (final DarksteelSentinel card) {

@@ -69,7 +69,7 @@ public class AngelicOverseer extends CardImpl<AngelicOverseer> {
         // As long as you control a Human, Angelic Overseer has hexproof and is indestructible.
         ConditionalContinousEffect effect1 = new ConditionalContinousEffect(new GainAbilitySourceEffect(HexproofAbility.getInstance()), new ControlsPermanentCondition(filter), rule1);
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect1));
-        ConditionalContinousEffect effect2 = new ConditionalContinousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance()), new ControlsPermanentCondition(filter), rule2);
+        ConditionalContinousEffect effect2 = new ConditionalContinousEffect(new GainAbilitySourceEffect(new IndestructibleAbility()), new ControlsPermanentCondition(filter), rule2);
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect2));
 
     }

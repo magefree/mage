@@ -59,7 +59,7 @@ public class CreepyDoll extends CardImpl<CreepyDoll> {
         this.toughness = new MageInt(1);
 
         // Creepy Doll is indestructible.
-        this.addAbility(IndestructibleAbility.getInstance());
+        this.addAbility(new IndestructibleAbility());
 
         // Whenever Creepy Doll deals combat damage to a creature, flip a coin. If you win the flip, destroy that creature.
         this.addAbility(new CreepyDollTriggeredAbility());

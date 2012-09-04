@@ -60,7 +60,7 @@ public class AvacynAngelOfHope extends CardImpl<AvacynAngelOfHope> {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Avacyn, Angel of Hope and other permanents you control are indestructible.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Constants.Duration.WhileInGraveyard, new FilterControlledPermanent())));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAllEffect(new IndestructibleAbility(), Constants.Duration.WhileInGraveyard, new FilterControlledPermanent())));
     }
 
     public AvacynAngelOfHope(final AvacynAngelOfHope card) {

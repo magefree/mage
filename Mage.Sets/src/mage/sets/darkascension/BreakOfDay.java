@@ -56,7 +56,7 @@ public class BreakOfDay extends CardImpl<BreakOfDay> {
         // Creatures you control get +1/+1 until end of turn.
         this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Constants.Duration.EndOfTurn));
         // Fateful hour - If you have 5 or less life, those creatures also are indestructible this turn.
-        this.getSpellAbility().addEffect(new ConditionalContinousEffect(new GainAbilityControlledEffect(IndestructibleAbility.getInstance(), Constants.Duration.EndOfTurn, new FilterCreaturePermanent()),
+        this.getSpellAbility().addEffect(new ConditionalContinousEffect(new GainAbilityControlledEffect(new IndestructibleAbility(), Constants.Duration.EndOfTurn, new FilterCreaturePermanent()),
                 FatefulHourCondition.getInstance(), "If you have 5 or less life, those creatures also are indestructible this turn."));
     }
 

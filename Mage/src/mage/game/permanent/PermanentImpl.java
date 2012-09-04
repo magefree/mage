@@ -727,11 +727,9 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
         //20091005 - 701.6
         //TODO: handle noRegen
         if (!game.replaceEvent(GameEvent.getEvent(EventType.DESTROY_PERMANENT, objectId, sourceId, controllerId, noRegen ? 1 : 0))) {
-            if (!this.getAbilities().containsKey(IndestructibleAbility.getInstance().getId())) {
-                if (moveToZone(Zone.GRAVEYARD, sourceId, game, false)) {
-                    game.fireEvent(GameEvent.getEvent(EventType.DESTROYED_PERMANENT, objectId, sourceId, controllerId));
-                    return true;
-                }
+            if (moveToZone(Zone.GRAVEYARD, sourceId, game, false)) {
+                game.fireEvent(GameEvent.getEvent(EventType.DESTROYED_PERMANENT, objectId, sourceId, controllerId));
+                return true;
             }
         }
         return false;

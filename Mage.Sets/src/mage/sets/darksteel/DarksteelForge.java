@@ -54,7 +54,7 @@ public class DarksteelForge extends CardImpl<DarksteelForge> {
     public DarksteelForge(UUID ownerId) {
         super(ownerId, 110, "Darksteel Forge", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{9}");
         this.expansionSetCode = "DST";
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(IndestructibleAbility.getInstance(), Constants.Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(new IndestructibleAbility(), Constants.Duration.WhileOnBattlefield, filter, false)));
 
     }
 

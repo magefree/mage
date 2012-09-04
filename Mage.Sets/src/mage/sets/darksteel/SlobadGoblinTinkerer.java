@@ -68,7 +68,7 @@ public class SlobadGoblinTinkerer extends CardImpl<SlobadGoblinTinkerer> {
         this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Constants.Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledPermanent(filterControlled)));
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainAbilityTargetEffect(new IndestructibleAbility(), Constants.Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledPermanent(filterControlled)));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

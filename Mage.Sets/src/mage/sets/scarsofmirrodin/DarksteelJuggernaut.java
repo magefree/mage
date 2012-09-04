@@ -63,7 +63,7 @@ public class DarksteelJuggernaut extends CardImpl<DarksteelJuggernaut> {
 
         SetPowerToughnessSourceEffect effect = new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Constants.Duration.EndOfGame);
         this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, effect));
-        this.addAbility(IndestructibleAbility.getInstance());
+        this.addAbility(new IndestructibleAbility());
         this.addAbility(new AttacksEachTurnStaticAbility());
     }
 

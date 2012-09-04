@@ -49,7 +49,7 @@ public class DarksteelGargoyle extends CardImpl<DarksteelGargoyle> {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(IndestructibleAbility.getInstance());
+        this.addAbility(new IndestructibleAbility());
     }
 
     public DarksteelGargoyle(final DarksteelGargoyle card) {

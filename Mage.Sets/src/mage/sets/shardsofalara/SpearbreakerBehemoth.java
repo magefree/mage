@@ -64,9 +64,9 @@ public class SpearbreakerBehemoth extends CardImpl<SpearbreakerBehemoth> {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
-        this.addAbility(IndestructibleAbility.getInstance());
+        this.addAbility(new IndestructibleAbility());
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn),
+                new GainAbilityTargetEffect(new IndestructibleAbility(), Duration.EndOfTurn),
                 new ManaCostsImpl("{1}"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);

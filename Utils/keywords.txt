@@ -12,6 +12,7 @@ Battle cry|new|
 Cascade|new|
 Exalted|new|
 Forestwalk|new|
+Indestructible|new|
 Islandwalk|new|
 Living weapon|new|
 Mountainwalk|new|
@@ -30,7 +31,6 @@ Flash|instance|
 Flying|instance|
 Haste|instance|
 Hexproof|instance|
-Indestructible|instance|
 Infect|instance|
 Intimidate|instance|
 Lifelink|instance|

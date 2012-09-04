@@ -82,7 +82,7 @@ public class MyojinOfLifesWeb extends CardImpl<MyojinOfLifesWeb> {
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.DIVINITY.createInstance()), new CastFromHandCondition(), ""), "{this} enters the battlefield with a divinity counter on it if you cast it from your hand"));
         // Myojin of Life's Web is indestructible as long as it has a divinity counter on it.
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD,
-                new ConditionalContinousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Constants.Duration.WhileOnBattlefield),
+                new ConditionalContinousEffect(new GainAbilitySourceEffect(new IndestructibleAbility(), Constants.Duration.WhileOnBattlefield),
                 new HasCounterCondition(CounterType.DIVINITY), "{this} is indestructible as long as it has a divinity counter on it")));
         // Remove a divinity counter from Myojin of Life's Web: Put any number of creature cards from your hand onto the battlefield.
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new PutOntoBattlefieldTargetEffect(false), new RemoveCountersSourceCost(CounterType.DIVINITY.createInstance()));

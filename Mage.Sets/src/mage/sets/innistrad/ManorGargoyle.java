@@ -71,7 +71,7 @@ public class ManorGargoyle extends CardImpl<ManorGargoyle> {
 
         this.addAbility(DefenderAbility.getInstance());
         // Manor Gargoyle is indestructible as long as it has defender.
-        ConditionalContinousEffect effect = new ConditionalContinousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance()), HasDefenderCondition.getInstance(), rule);
+        ConditionalContinousEffect effect = new ConditionalContinousEffect(new GainAbilitySourceEffect(new IndestructibleAbility()), HasDefenderCondition.getInstance(), rule);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
         // {1}: Until end of turn, Manor Gargoyle loses defender and gains flying.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GargoyleSentinelEffect(), new ManaCostsImpl("{1}")));

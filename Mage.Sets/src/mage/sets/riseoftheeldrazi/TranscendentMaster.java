@@ -58,8 +58,9 @@ public class TranscendentMaster extends LevelerCard<TranscendentMaster> {
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{1}")));
 
         Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>(LifelinkAbility.getInstance());
-        Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>(LifelinkAbility.getInstance(),
-                IndestructibleAbility.getInstance());
+        Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>(
+                LifelinkAbility.getInstance(),
+                new IndestructibleAbility());
 
         LevelerCardBuilder.construct(this,
                 new LevelerCardBuilder.LevelAbility(6, 11, abilities1, 6, 6),

@@ -1,13 +1,10 @@
 package mage.player.ai.ma;
 
 import mage.abilities.Ability;
-import mage.abilities.StaticAbility;
 import mage.abilities.keyword.*;
-import mage.cards.basiclands.Plains;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.zip.Inflater;
 
 /**
  * @author nantuko
@@ -25,7 +22,7 @@ public class MagicAbility {
         put(FlyingAbility.getInstance().getRule(), 50);
         put(new ForestwalkAbility().getRule(), 10);
         put(HasteAbility.getInstance().getRule(), 0);
-        put(IndestructibleAbility.getInstance().getRule(), 150);
+        put(new IndestructibleAbility().getRule(), 150);
         put(InfectAbility.getInstance().getRule(), 60);
         put(IntimidateAbility.getInstance().getRule(), 50);
         put(new IslandwalkAbility().getRule(), 10);

@@ -73,7 +73,7 @@ public class MyojinOfNightsReach extends CardImpl<MyojinOfNightsReach> {
         // Myojin of Night's Reach enters the battlefield with a divinity counter on it if you cast it from your hand.
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.DIVINITY.createInstance()), new CastFromHandCondition(), ""), "{this} enters the battlefield with a divinity counter on it if you cast it from your hand"));
         // Myojin of Night's Reach is indestructible as long as it has a divinity counter on it.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Constants.Duration.WhileOnBattlefield),
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(new GainAbilitySourceEffect(new IndestructibleAbility(), Constants.Duration.WhileOnBattlefield),
                 new HasCounterCondition(CounterType.DIVINITY), "{this} is indestructible as long as it has a divinity counter on it")));
         // Remove a divinity counter from Myojin of Night's Reach: Each opponent discards his or her hand.
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new MyojinOfNightsReachEffect(), new RemoveCountersSourceCost(CounterType.DIVINITY.createInstance()));

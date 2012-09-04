@@ -67,7 +67,7 @@ public class UlamogTheInfiniteGyre extends CardImpl<UlamogTheInfiniteGyre> {
 
         this.addAbility(new UlamogTheInfiniteGyreDestroyOnCastAbility());
         this.addAbility(new AnnihilatorAbility(4));
-        this.addAbility(IndestructibleAbility.getInstance());
+        this.addAbility(new IndestructibleAbility());
         this.addAbility(new ZoneChangeTriggeredAbility(Zone.GRAVEYARD, new UlamogTheInfiniteGyreEnterGraveyardEffect(), effectText, false));
     }
 

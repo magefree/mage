@@ -44,7 +44,7 @@ public class DarksteelCitadel extends CardImpl<DarksteelCitadel> {
     public DarksteelCitadel (UUID ownerId) {
         super(ownerId, 164, "Darksteel Citadel", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.LAND}, null);
         this.expansionSetCode = "DST";
-        this.addAbility(IndestructibleAbility.getInstance());
+        this.addAbility(new IndestructibleAbility());
         this.addAbility(new ColorlessManaAbility());
     }
 

@@ -72,7 +72,7 @@ public class MyojinOfInfiniteRage extends CardImpl<MyojinOfInfiniteRage> {
         // Myojin of Infinite Rage enters the battlefield with a divinity counter on it if you cast it from your hand.
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.DIVINITY.createInstance()), new CastFromHandCondition(), ""), "{this} enters the battlefield with a divinity counter on it if you cast it from your hand"));
         // Myojin of Infinite Rage is indestructible as long as it has a divinity counter on it.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Constants.Duration.WhileOnBattlefield),
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(new GainAbilitySourceEffect(new IndestructibleAbility(), Constants.Duration.WhileOnBattlefield),
                 new HasCounterCondition(CounterType.DIVINITY), "{this} is indestructible as long as it has a divinity counter on it")));
         // Remove a divinity counter from Myojin of Infinite Rage: Destroy all lands.
         this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DestroyAllEffect(filter), new RemoveCountersSourceCost(CounterType.DIVINITY.createInstance())));

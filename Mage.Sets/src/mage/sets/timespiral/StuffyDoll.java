@@ -64,7 +64,7 @@ public class StuffyDoll extends CardImpl<StuffyDoll> {
         // As Stuffy Doll enters the battlefield, choose a player.
         this.addAbility(new AsEntersBattlefieldAbility(new StuffyDollChoosePlayerEffect()));
         // Stuffy Doll is indestructible.
-        this.addAbility(IndestructibleAbility.getInstance());
+        this.addAbility(new IndestructibleAbility());
         // Whenever Stuffy Doll is dealt damage, it deals that much damage to the chosen player.
         this.addAbility(new StuffyDollTriggeredAbility());
         // {tap}: Stuffy Doll deals 1 damage to itself.

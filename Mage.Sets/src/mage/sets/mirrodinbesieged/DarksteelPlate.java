@@ -51,8 +51,8 @@ public class DarksteelPlate extends CardImpl<DarksteelPlate> {
         this.expansionSetCode = "MBS";
         this.subtype.add("Equipment");
         this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(2)));
-        this.addAbility(IndestructibleAbility.getInstance());
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(IndestructibleAbility.getInstance(), Constants.AttachmentType.EQUIPMENT)));
+        this.addAbility(new IndestructibleAbility());
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new IndestructibleAbility(), Constants.AttachmentType.EQUIPMENT)));
     }
 
     public DarksteelPlate (final DarksteelPlate card) {

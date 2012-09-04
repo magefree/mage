@@ -47,7 +47,7 @@ public class WithstandDeath extends CardImpl<WithstandDeath> {
         super(ownerId, 134, "Withstand Death", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "SOM";
         this.color.setGreen(true);
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(new IndestructibleAbility(), Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
