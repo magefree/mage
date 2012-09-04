@@ -40,6 +40,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.choices.Choice;
 import mage.choices.Choices;
+import mage.game.Controllable;
 import mage.game.Game;
 import mage.target.Target;
 import mage.target.Targets;
@@ -52,7 +53,7 @@ import java.util.UUID;
  * Practically everything in the game is started from an Ability.  This
  * interface describes what an Ability is composed of at the highest level.
  */
-public interface Ability extends Serializable {
+public interface Ability extends Controllable, Serializable {
 
     /**
      * Gets the globally unique id of the ability contained within the game.
@@ -92,6 +93,7 @@ public interface Ability extends Serializable {
      * 
      * @return The {@link java.util.UUID} of the controlling player.
      */
+    @Override
     public UUID getControllerId();
 
     /**
