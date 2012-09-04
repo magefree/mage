@@ -64,7 +64,7 @@ public class MoldgrafMonstrosity extends CardImpl<MoldgrafMonstrosity> {
         this.addAbility(TrampleAbility.getInstance());
         // When Moldgraf Monstrosity dies, exile it, then return two creature cards at random from your graveyard to the battlefield.
         DiesTriggeredAbility ability = new DiesTriggeredAbility(new ExileSourceEffect());
-        ability.addEffect(null);
+        ability.addEffect(new MoldgrafMonstrosityEffect());
         this.addAbility(ability);
     }
 
