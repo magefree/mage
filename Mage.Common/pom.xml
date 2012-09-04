@@ -23,7 +23,7 @@
         <dependency>
             <groupId>com.googlecode.jspf</groupId>
             <artifactId>jspf-core</artifactId>
-            <version>${jspf-version}</version>
+            <version>0.9.1</version>
         </dependency>
         <dependency>
             <groupId>org.jboss.remoting</groupId>
@@ -81,8 +81,4 @@
 
         <finalName>mage-common</finalName>
     </build>
-
-    <properties>
-        <jspf-version>0.9.2</jspf-version>
-    </properties>
 </project>
