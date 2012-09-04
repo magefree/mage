@@ -28,21 +28,15 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.CostModificationEffectImpl;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.util.CardUtil;
+import mage.filter.common.FilterCreatureCard;
 
 /**
  *
@@ -57,10 +51,10 @@ public class HeartlessSummoning extends CardImpl<HeartlessSummoning> {
         this.color.setBlack(true);
 
         // Creature spells you cast cost {2} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HeartlessSummoningCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionEffect(new FilterCreatureCard("Creature spells"), 2)));
 
         // Creatures you control get -1/-1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(-1, -1, Constants.Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(-1, -1, Duration.WhileOnBattlefield)));
     }
 
     public HeartlessSummoning(final HeartlessSummoning card) {
@@ -71,40 +65,4 @@ public class HeartlessSummoning extends CardImpl<HeartlessSummoning> {
     public HeartlessSummoning copy() {
         return new HeartlessSummoning(this);
     }
-}
-
-class HeartlessSummoningCostReductionEffect extends CostModificationEffectImpl<HeartlessSummoningCostReductionEffect> {
-
-    HeartlessSummoningCostReductionEffect ( ) {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "Creature spells you cast cost {2} less to cast";
-    }
-
-    HeartlessSummoningCostReductionEffect(HeartlessSummoningCostReductionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        SpellAbility spellAbility = (SpellAbility) abilityToModify;
-        CardUtil.adjustCost(spellAbility, 2);
-        return true;
-    }
-
-    @Override
-    public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if ( abilityToModify instanceof SpellAbility ) {
-            Card sourceCard = game.getCard(((SpellAbility)abilityToModify).getSourceId());
-            if ( sourceCard != null && sourceCard.getCardType().contains(CardType.CREATURE) && sourceCard.getOwnerId().equals(source.getControllerId()) ) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public HeartlessSummoningCostReductionEffect copy() {
-        return new HeartlessSummoningCostReductionEffect(this);
-    }
-
 }

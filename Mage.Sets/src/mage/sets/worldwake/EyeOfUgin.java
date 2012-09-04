@@ -30,23 +30,20 @@ package mage.sets.worldwake;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.CostModificationEffectImpl;
+import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
-import mage.game.Game;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -55,11 +52,13 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class EyeOfUgin extends CardImpl<EyeOfUgin> {
 
-    private static final FilterCreatureCard filter;
+    private static final FilterCreatureCard filter = new FilterCreatureCard();
+    private static final FilterCard filterSpells = new FilterCard("Colorless Eldrazi spells");
 
     static {
-        filter = new FilterCreatureCard();
         filter.add(new ColorlessPredicate());
+        filterSpells.add(new ColorlessPredicate());
+        filterSpells.add(new SubtypePredicate("Eldrazi"));
     }
 
     public EyeOfUgin (UUID ownerId) {
@@ -69,7 +68,7 @@ public class EyeOfUgin extends CardImpl<EyeOfUgin> {
         this.subtype.add("Land");
 
         // Colorless Eldrazi spells you cast cost {2} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EyeOfUginCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionEffect(filterSpells, 2)));
         // {7}, {tap}: Search your library for a colorless creature card, reveal it, and put it into your hand. Then shuffle your library.
         Ability searchAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true),
@@ -86,48 +85,4 @@ public class EyeOfUgin extends CardImpl<EyeOfUgin> {
     public EyeOfUgin copy() {
         return new EyeOfUgin(this);
     }
-}
-
-class EyeOfUginCostReductionEffect extends CostModificationEffectImpl<EyeOfUginCostReductionEffect> {
-
-    private static final String effectText = "Colorless Eldrazi spells you cast cost {2} less to cast";
-
-    EyeOfUginCostReductionEffect ( ) {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = effectText;
-    }
-
-    EyeOfUginCostReductionEffect(EyeOfUginCostReductionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        SpellAbility spellAbility = (SpellAbility)abilityToModify;
-        int previousCost = spellAbility.getManaCostsToPay().convertedManaCost();
-        int adjustedCost = 0;
-        if ( (previousCost - 2) > 0 ) {
-            adjustedCost = previousCost - 2;
-        }
-        spellAbility.getManaCostsToPay().load("{" + adjustedCost + "}");
-
-        return true;
-    }
-
-    @Override
-    public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if ( abilityToModify instanceof SpellAbility ) {
-            Card sourceCard = game.getCard(((SpellAbility)abilityToModify).getSourceId());
-            if ( sourceCard != null && sourceCard.hasSubtype("Eldrazi") && sourceCard.getOwnerId().equals(source.getControllerId()) ) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public EyeOfUginCostReductionEffect copy() {
-        return new EyeOfUginCostReductionEffect(this);
-    }
-
 }

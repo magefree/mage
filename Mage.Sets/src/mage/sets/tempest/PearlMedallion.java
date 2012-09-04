@@ -27,29 +27,34 @@
  */
 package mage.sets.tempest;
 
-import mage.Constants;
+import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.cost.ColorCostReductionEffect;
+import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
 import mage.cards.CardImpl;
-
-import java.util.UUID;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  * @author noxx
  */
 public class PearlMedallion extends CardImpl<PearlMedallion> {
 
-    private static final String ruleText = "White spells you cast cost {1} less to cast";
+    private static final FilterCard filter = new FilterCard("White spells");
+
+    static {
+        filter.add(new ColorPredicate(ObjectColor.WHITE));
+    }
 
     public PearlMedallion(UUID ownerId) {
         super(ownerId, 290, "Pearl Medallion", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "TMP";
 
         // White spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ColorCostReductionEffect(ObjectColor.WHITE, 1, ruleText)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionEffect(filter, 1)));
     }
 
     public PearlMedallion(final PearlMedallion card) {

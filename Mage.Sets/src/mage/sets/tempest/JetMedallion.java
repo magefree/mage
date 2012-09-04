@@ -27,29 +27,34 @@
  */
 package mage.sets.tempest;
 
-import mage.Constants;
+import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.cost.ColorCostReductionEffect;
+import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
 import mage.cards.CardImpl;
-
-import java.util.UUID;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  * @author noxx
  */
 public class JetMedallion extends CardImpl<JetMedallion> {
 
-    private static final String ruleText = "Black spells you cast cost {1} less to cast";
+    private static final FilterCard filter = new FilterCard("Black spells");
+
+    static {
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
+    }
 
     public JetMedallion(UUID ownerId) {
         super(ownerId, 282, "Jet Medallion", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "TMP";
 
         // Black spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ColorCostReductionEffect(ObjectColor.BLACK, 1, ruleText)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionEffect(filter, 1)));
     }
 
     public JetMedallion(final JetMedallion card) {

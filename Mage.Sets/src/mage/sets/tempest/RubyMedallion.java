@@ -27,29 +27,34 @@
  */
 package mage.sets.tempest;
 
-import mage.Constants;
+import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.cost.ColorCostReductionEffect;
+import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
 import mage.cards.CardImpl;
-
-import java.util.UUID;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  * @author noxx
  */
 public class RubyMedallion extends CardImpl<RubyMedallion> {
 
-    private static final String ruleText = "Red spells you cast cost {1} less to cast";
+    private static final FilterCard filter = new FilterCard("Red spells");
+
+    static {
+        filter.add(new ColorPredicate(ObjectColor.RED));
+    }
 
     public RubyMedallion(UUID ownerId) {
         super(ownerId, 295, "Ruby Medallion", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "TMP";
 
         // Red spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ColorCostReductionEffect(ObjectColor.RED, 1, ruleText)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionEffect(filter, 1)));
     }
 
     public RubyMedallion(final RubyMedallion card) {

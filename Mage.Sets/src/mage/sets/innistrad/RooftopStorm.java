@@ -70,34 +70,6 @@ public class RooftopStorm extends CardImpl<RooftopStorm> {
     }
 }
 
-//class RooftopStormAlternativeCost extends AlternativeCostImpl<RooftopStormAlternativeCost> {
-//
-//    public RooftopStormAlternativeCost() {
-//        super("You may pay {0} rather than pay the mana cost");
-//        this.add(new GenericManaCost(0));
-//    }
-//
-//    public RooftopStormAlternativeCost(final RooftopStormAlternativeCost cost) {
-//        super(cost);
-//    }
-//
-//    @Override
-//    public RooftopStormAlternativeCost copy() {
-//        return new RooftopStormAlternativeCost(this);
-//    }
-//
-//    @Override
-//    public boolean isAvailable(Game game, Ability source) {
-//        return true;
-//    }
-//
-//    @Override
-//    public String getText() {
-//        return "You may pay {0} rather than pay the mana cost";
-//    }
-//
-//}
-
 class RooftopStormCostReductionEffect extends CostModificationEffectImpl<RooftopStormCostReductionEffect> {
 
     private static final String effectText = "You may pay {0} rather than pay the mana cost for Zombie creature spells you cast";

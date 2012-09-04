@@ -30,22 +30,17 @@ package mage.sets.scourge;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.CostModificationEffectImpl;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
+import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
 import mage.abilities.keyword.HasteAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.Game;
-import mage.util.CardUtil;
 
 /**
  *
@@ -53,9 +48,11 @@ import mage.util.CardUtil;
  */
 public class GoblinWarchief extends CardImpl<GoblinWarchief> {
 
+    private static final FilterCard filterSpells = new FilterCard("Goblin spells");
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblin creatures");
 
     static {
+        filter.add(new SubtypePredicate("Goblin"));
         filter.add(new SubtypePredicate("Goblin"));
     }
 
@@ -69,7 +66,7 @@ public class GoblinWarchief extends CardImpl<GoblinWarchief> {
         this.toughness = new MageInt(2);
 
         // Goblin spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GoblinWarchiefEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionEffect(filterSpells, 1)));
         // Goblin creatures you control have haste.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter, true)));
     }
@@ -81,40 +78,5 @@ public class GoblinWarchief extends CardImpl<GoblinWarchief> {
     @Override
     public GoblinWarchief copy() {
         return new GoblinWarchief(this);
-    }
-}
-
-class GoblinWarchiefEffect extends CostModificationEffectImpl<GoblinWarchiefEffect> {
-
-    GoblinWarchiefEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "Goblin spells you cast cost {1} less to cast";
-    }
-
-    GoblinWarchiefEffect(GoblinWarchiefEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        SpellAbility spellAbility = (SpellAbility) abilityToModify;
-        CardUtil.adjustCost(spellAbility, 1);
-        return true;
-    }
-
-    @Override
-    public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility) {
-            Card sourceCard = game.getCard(((SpellAbility) abilityToModify).getSourceId());
-            if (sourceCard != null && sourceCard.getSubtype().contains("Goblin") && sourceCard.getOwnerId().equals(source.getControllerId())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public GoblinWarchiefEffect copy() {
-        return new GoblinWarchiefEffect(this);
     }
 }
