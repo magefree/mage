@@ -36,7 +36,7 @@ import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.IndestructibleAllEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
  *
@@ -55,7 +55,7 @@ public class BreakOfDay extends CardImpl<BreakOfDay> {
         this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn));
         // Fateful hour - If you have 5 or less life, those creatures also are indestructible this turn.
         this.getSpellAbility().addEffect(new ConditionalContinousEffect(
-                new IndestructibleAllEffect(new FilterCreaturePermanent("creatures you control"), Duration.EndOfTurn),
+                new IndestructibleAllEffect(new FilterControlledCreaturePermanent("creatures you control"), Duration.EndOfTurn),
                 FatefulHourCondition.getInstance(),
                 "If you have 5 or less life, those creatures also are indestructible this turn."));
     }
