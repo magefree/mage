@@ -28,14 +28,16 @@
 
 package mage.abilities.effects.common;
 
-import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -74,6 +76,28 @@ public class GainLifeTargetEffect extends OneShotEffect<GainLifeTargetEffect> {
             }
         }
         return true;
+    }
+
+    @Override
+    public String getText(Mode mode) {
+        StringBuilder sb = new StringBuilder();
+        String message = life.getMessage();
+
+        if (mode.getTargets().size() > 0) {
+            sb.append("Target ").append(mode.getTargets().get(0).getTargetName());
+        } else {
+            sb.append("that player");
+        }
+        sb.append(" gains ");
+        if (message.isEmpty() || !message.equals("1")) {
+            sb.append(life.toString()).append(" ");
+        }
+        sb.append("life");
+        if (message.length() > 0) {
+            sb.append(message.equals("1") ? " equal to the number of " : " for each ");
+            sb.append(message);
+        }
+        return sb.toString();
     }
 
     private void setText() {
