@@ -44,7 +44,7 @@ import java.util.UUID;
 public class SluicewayScorpion extends CardImpl<SluicewayScorpion> {
 
     public SluicewayScorpion(UUID ownerId) {
-        super(ownerId, 1198, "Sluiceway Scorpion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{G}");
+        super(ownerId, 198, "Sluiceway Scorpion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{G}");
         this.expansionSetCode = "RTR";
         this.subtype.add("Scorpion");
 

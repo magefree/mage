@@ -44,7 +44,7 @@ import java.util.UUID;
 public class DregMangler extends CardImpl<DregMangler> {
 
     public DregMangler(UUID ownerId) {
-        super(ownerId, 1158, "Dreg Mangler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{G}");
+        super(ownerId, 158, "Dreg Mangler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{G}");
         this.expansionSetCode = "RTR";
         this.subtype.add("Plant");
         this.subtype.add("Zombie");
