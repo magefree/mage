@@ -30,15 +30,14 @@ package mage.sets.magic2012;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.effects.common.IndestructibleTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -57,10 +56,13 @@ public class AegisAngel extends CardImpl<AegisAngel> {
         this.color.setWhite(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
+
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
+        // When Aegis Angel enters the battlefield, another target permanent is indestructible for as long as you control Aegis Angel.
         FilterPermanent filter = new FilterPermanent("another target permanent");
         filter.add(new AnotherPredicate());
-        Ability ability = new EntersBattlefieldTriggeredAbility(new GainAbilityTargetEffect(new IndestructibleAbility(), Constants.Duration.WhileOnBattlefield), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new IndestructibleTargetEffect(Duration.WhileOnBattlefield), false);
         Target target = new TargetPermanent(filter);
         target.setRequired(true);
         ability.addTarget(target);

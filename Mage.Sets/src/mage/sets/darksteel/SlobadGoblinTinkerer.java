@@ -30,15 +30,15 @@ package mage.sets.darksteel;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
-import mage.abilities.keyword.IndestructibleAbility;
+import mage.abilities.effects.common.IndestructibleTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -68,7 +68,11 @@ public class SlobadGoblinTinkerer extends CardImpl<SlobadGoblinTinkerer> {
         this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainAbilityTargetEffect(new IndestructibleAbility(), Constants.Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledPermanent(filterControlled)));
+
+        // Sacrifice an artifact: Target artifact is indestructible this turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new IndestructibleTargetEffect(Duration.EndOfTurn),
+                new SacrificeTargetCost(new TargetControlledPermanent(filterControlled)));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

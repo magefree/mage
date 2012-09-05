@@ -35,7 +35,7 @@ import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.effects.common.IndestructibleTargetEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonType;
@@ -64,9 +64,11 @@ public class SpearbreakerBehemoth extends CardImpl<SpearbreakerBehemoth> {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
+        // Spearbreaker Behemoth is indestructible.
         this.addAbility(new IndestructibleAbility());
+        // {1}: Target creature with power 5 or greater is indestructible this turn.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new GainAbilityTargetEffect(new IndestructibleAbility(), Duration.EndOfTurn),
+                new IndestructibleTargetEffect(Duration.EndOfTurn),
                 new ManaCostsImpl("{1}"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);

@@ -32,8 +32,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
-import mage.abilities.keyword.IndestructibleAbility;
+import mage.abilities.effects.common.IndestructibleTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -47,7 +46,9 @@ public class WithstandDeath extends CardImpl<WithstandDeath> {
         super(ownerId, 134, "Withstand Death", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "SOM";
         this.color.setGreen(true);
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(new IndestructibleAbility(), Duration.EndOfTurn));
+
+        // Target creature is indestructible this turn.
+        this.getSpellAbility().addEffect(new IndestructibleTargetEffect(Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
